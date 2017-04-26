@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 711);
+/******/ 	return __webpack_require__(__webpack_require__.s = 714);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -99,7 +99,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.45.0',
+  VERSION: '2.46.0',
 
   /**
    * @api private
@@ -121,7 +121,7 @@ AWS.util.update(AWS, {
    * @api private
    */
   XML: {
-    Builder: __webpack_require__(511),
+    Builder: __webpack_require__(514),
     Parser: null // conditionally set based on environment
   },
 
@@ -153,23 +153,23 @@ AWS.util.update(AWS, {
 });
 
 __webpack_require__(3);
-__webpack_require__(468);
+__webpack_require__(470);
 
 __webpack_require__(79);
 __webpack_require__(80);
+__webpack_require__(473);
+__webpack_require__(474);
 __webpack_require__(471);
 __webpack_require__(472);
-__webpack_require__(469);
-__webpack_require__(470);
 
 __webpack_require__(83);
 __webpack_require__(92);
-__webpack_require__(476);
-__webpack_require__(483);
-__webpack_require__(485);
-__webpack_require__(484);
-__webpack_require__(505);
 __webpack_require__(478);
+__webpack_require__(486);
+__webpack_require__(488);
+__webpack_require__(487);
+__webpack_require__(508);
+__webpack_require__(480);
 
 /**
  * @readonly
@@ -196,10 +196,11 @@ AWS.events = new AWS.SequentialExecutor();
 /* WEBPACK VAR INJECTION */(function(process) {var util = __webpack_require__(6);
 
 // browser specific modules
-util.crypto.lib = __webpack_require__(534);
+util.crypto.lib = __webpack_require__(537);
 util.Buffer = __webpack_require__(4).Buffer;
-util.url = __webpack_require__(665);
+util.url = __webpack_require__(668);
 util.querystring = __webpack_require__(137);
+util.environment = 'react-native';
 
 var AWS = __webpack_require__(0);
 
@@ -207,10 +208,10 @@ var AWS = __webpack_require__(0);
 __webpack_require__(2);
 
 // Load the DOMParser XML parser
-AWS.XML.Parser = __webpack_require__(512);
+AWS.XML.Parser = __webpack_require__(515);
 
 // Load the XHR HttpClient
-__webpack_require__(477);
+__webpack_require__(479);
 
 if (typeof process === 'undefined') {
   process = {};
@@ -246,7 +247,7 @@ module.exports = AWS.apiLoader;
 
 var AWS = __webpack_require__(0);
 var Api = __webpack_require__(84);
-var regionConfig = __webpack_require__(481);
+var regionConfig = __webpack_require__(484);
 var inherit = AWS.util.inherit;
 var clientCount = 0;
 
@@ -534,8 +535,13 @@ AWS.Service = inherit({
   getSignerClass: function getSignerClass(request) {
     var version;
     // get operation authtype if present
-    var operation = request ? request.service.api.operations[request.operation] : null;
-    var authtype = operation ? operation.authtype : '';
+    var operation = null;
+    var authtype = '';
+    if (request) {
+      var operations = request.service.api.operations || {};
+      operation = operations[request.operation] || null;
+      authtype = operation ? operation.authtype : '';
+    }
     if (this.config.signatureVersion) {
       version = this.config.signatureVersion;
     } else if (authtype === 'v4' || authtype === 'v4-unsigned-body') {
@@ -831,8 +837,8 @@ module.exports = AWS.Service;
 
 
 
-var base64 = __webpack_require__(521)
-var ieee754 = __webpack_require__(567)
+var base64 = __webpack_require__(524)
+var ieee754 = __webpack_require__(570)
 var isArray = __webpack_require__(112)
 
 exports.Buffer = Buffer
@@ -2664,6 +2670,7 @@ var AWS;
  * @api private
  */
 var util = {
+  environment: 'nodejs',
   engine: function engine() {
     if (util.isBrowser() && typeof navigator !== 'undefined') {
       return navigator.userAgent;
@@ -2677,7 +2684,7 @@ var util = {
   },
 
   userAgent: function userAgent() {
-    var name = util.isBrowser() ? 'js' : 'nodejs';
+    var name = util.environment;
     var agent = 'aws-sdk-' + name + '/' + __webpack_require__(0).VERSION;
     if (name === 'nodejs') agent += ' ' + util.engine();
     return agent;
@@ -3526,7 +3533,7 @@ var util = {
    */
   uuid: {
     v4: function uuidV4() {
-      return __webpack_require__(695).v4();
+      return __webpack_require__(698).v4();
     }
   },
 
@@ -7010,23 +7017,23 @@ module.exports = util;
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(560).version;
-elliptic.utils = __webpack_require__(559);
+elliptic.version = __webpack_require__(563).version;
+elliptic.utils = __webpack_require__(562);
 elliptic.rand = __webpack_require__(99);
 elliptic.curve = __webpack_require__(39);
-elliptic.curves = __webpack_require__(551);
+elliptic.curves = __webpack_require__(554);
 
 // Protocols
-elliptic.ec = __webpack_require__(552);
-elliptic.eddsa = __webpack_require__(555);
+elliptic.ec = __webpack_require__(555);
+elliptic.eddsa = __webpack_require__(558);
 
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseAssign = __webpack_require__(583),
-    baseCreate = __webpack_require__(584);
+var baseAssign = __webpack_require__(586),
+    baseCreate = __webpack_require__(587);
 
 /**
  * Creates an object that inherits from the `prototype` object. If a
@@ -7373,11 +7380,11 @@ module.exports = g;
 
 var hash = exports;
 
-hash.utils = __webpack_require__(565);
-hash.common = __webpack_require__(561);
-hash.sha = __webpack_require__(564);
-hash.ripemd = __webpack_require__(563);
-hash.hmac = __webpack_require__(562);
+hash.utils = __webpack_require__(568);
+hash.common = __webpack_require__(564);
+hash.sha = __webpack_require__(567);
+hash.ripemd = __webpack_require__(566);
+hash.hmac = __webpack_require__(565);
 
 // Proxy hash functions to the main object
 hash.sha1 = hash.sha.sha1;
@@ -7392,8 +7399,8 @@ hash.ripemd160 = hash.ripemd.ripemd160;
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsNative = __webpack_require__(594),
-    getValue = __webpack_require__(617);
+var baseIsNative = __webpack_require__(597),
+    getValue = __webpack_require__(620);
 
 /**
  * Gets the native function at `key` of `object`.
@@ -7460,10 +7467,10 @@ var inherits = __webpack_require__(5);
 
 inherits(Stream, EE);
 Stream.Readable = __webpack_require__(51);
-Stream.Writable = __webpack_require__(683);
-Stream.Duplex = __webpack_require__(678);
-Stream.Transform = __webpack_require__(682);
-Stream.PassThrough = __webpack_require__(681);
+Stream.Writable = __webpack_require__(686);
+Stream.Duplex = __webpack_require__(681);
+Stream.Transform = __webpack_require__(685);
+Stream.PassThrough = __webpack_require__(684);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -7666,8 +7673,8 @@ CipherBase.prototype._toString = function (value, enc, fin) {
 /* WEBPACK VAR INJECTION */(function(Buffer) {
 var inherits = __webpack_require__(5)
 var md5 = __webpack_require__(110)
-var rmd160 = __webpack_require__(684)
-var sha = __webpack_require__(687)
+var rmd160 = __webpack_require__(687)
+var sha = __webpack_require__(690)
 
 var Base = __webpack_require__(19)
 
@@ -7888,7 +7895,7 @@ module.exports = Hash
 
   isFunction = __webpack_require__(49);
 
-  isEmpty = __webpack_require__(659);
+  isEmpty = __webpack_require__(662);
 
   XMLElement = null;
 
@@ -7915,8 +7922,8 @@ module.exports = Hash
         XMLComment = __webpack_require__(147);
         XMLDeclaration = __webpack_require__(148);
         XMLDocType = __webpack_require__(149);
-        XMLRaw = __webpack_require__(708);
-        XMLText = __webpack_require__(710);
+        XMLRaw = __webpack_require__(711);
+        XMLText = __webpack_require__(713);
       }
     }
 
@@ -8223,10 +8230,10 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['sts'] = {};
 AWS.STS = Service.defineService('sts', ['2011-06-15']);
-__webpack_require__(502);
+__webpack_require__(505);
 Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
   get: function get() {
-    var model = __webpack_require__(356);
+    var model = __webpack_require__(358);
     return model;
   },
   enumerable: true,
@@ -8754,11 +8761,11 @@ var asn1 = exports;
 
 asn1.bignum = __webpack_require__(7);
 
-asn1.define = __webpack_require__(513).define;
+asn1.define = __webpack_require__(516).define;
 asn1.base = __webpack_require__(28);
 asn1.constants = __webpack_require__(96);
-asn1.decoders = __webpack_require__(517);
-asn1.encoders = __webpack_require__(519);
+asn1.decoders = __webpack_require__(520);
+asn1.encoders = __webpack_require__(522);
 
 
 /***/ }),
@@ -8767,10 +8774,10 @@ asn1.encoders = __webpack_require__(519);
 
 var base = exports;
 
-base.Reporter = __webpack_require__(515).Reporter;
+base.Reporter = __webpack_require__(518).Reporter;
 base.DecoderBuffer = __webpack_require__(95).DecoderBuffer;
 base.EncoderBuffer = __webpack_require__(95).EncoderBuffer;
-base.Node = __webpack_require__(514);
+base.Node = __webpack_require__(517);
 
 
 /***/ }),
@@ -8909,8 +8916,8 @@ function objectToString(o) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(43),
-    getRawTag = __webpack_require__(615),
-    objectToString = __webpack_require__(640);
+    getRawTag = __webpack_require__(618),
+    objectToString = __webpack_require__(643);
 
 /** `Object#toString` result references. */
 var nullTag = '[object Null]',
@@ -9016,7 +9023,7 @@ module.exports = isObjectLike;
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayLikeKeys = __webpack_require__(579),
+var arrayLikeKeys = __webpack_require__(582),
     baseKeys = __webpack_require__(118),
     isArrayLike = __webpack_require__(32);
 
@@ -9507,10 +9514,10 @@ exports.encrypt = function (self, chunk) {
 
 var curve = exports;
 
-curve.base = __webpack_require__(547);
-curve.short = __webpack_require__(550);
-curve.mont = __webpack_require__(549);
-curve.edwards = __webpack_require__(548);
+curve.base = __webpack_require__(550);
+curve.short = __webpack_require__(553);
+curve.mont = __webpack_require__(552);
+curve.edwards = __webpack_require__(551);
 
 
 /***/ }),
@@ -9900,11 +9907,11 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var listCacheClear = __webpack_require__(626),
-    listCacheDelete = __webpack_require__(627),
-    listCacheGet = __webpack_require__(628),
-    listCacheHas = __webpack_require__(629),
-    listCacheSet = __webpack_require__(630);
+var listCacheClear = __webpack_require__(629),
+    listCacheDelete = __webpack_require__(630),
+    listCacheGet = __webpack_require__(631),
+    listCacheHas = __webpack_require__(632),
+    listCacheSet = __webpack_require__(633);
 
 /**
  * Creates an list cache object.
@@ -9977,7 +9984,7 @@ module.exports = assocIndexOf;
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isKeyable = __webpack_require__(624);
+var isKeyable = __webpack_require__(627);
 
 /**
  * Gets the data for `map`.
@@ -10126,9 +10133,9 @@ module.exports = isFunction;
 /* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(668)
-var aesid = __webpack_require__(667)
-var fixProc = __webpack_require__(670)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(671)
+var aesid = __webpack_require__(670)
+var fixProc = __webpack_require__(673)
 var ciphers = __webpack_require__(58)
 var compat = __webpack_require__(133)
 module.exports = parseKeys
@@ -10256,7 +10263,7 @@ if (process.env.READABLE_STREAM === 'disable' && Stream) {
   exports.Writable = __webpack_require__(77);
   exports.Duplex = __webpack_require__(21);
   exports.Transform = __webpack_require__(139);
-  exports.PassThrough = __webpack_require__(679);
+  exports.PassThrough = __webpack_require__(682);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
@@ -10732,10 +10739,10 @@ module.exports = {
 /* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ciphers = __webpack_require__(523)
+var ciphers = __webpack_require__(526)
 exports.createCipher = exports.Cipher = ciphers.createCipher
 exports.createCipheriv = exports.Cipheriv = ciphers.createCipheriv
-var deciphers = __webpack_require__(522)
+var deciphers = __webpack_require__(525)
 exports.createDecipher = exports.Decipher = deciphers.createDecipher
 exports.createDecipheriv = exports.Decipheriv = deciphers.createDecipheriv
 var modes = __webpack_require__(37)
@@ -11032,11 +11039,11 @@ module.exports = { hash: hash };
 "use strict";
 
 
-exports.utils = __webpack_require__(543);
-exports.Cipher = __webpack_require__(540);
-exports.DES = __webpack_require__(541);
-exports.CBC = __webpack_require__(539);
-exports.EDE = __webpack_require__(542);
+exports.utils = __webpack_require__(546);
+exports.Cipher = __webpack_require__(543);
+exports.DES = __webpack_require__(544);
+exports.CBC = __webpack_require__(542);
+exports.EDE = __webpack_require__(545);
 
 
 /***/ }),
@@ -12729,11 +12736,11 @@ module.exports = Map;
 /* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var mapCacheClear = __webpack_require__(631),
-    mapCacheDelete = __webpack_require__(632),
-    mapCacheGet = __webpack_require__(633),
-    mapCacheHas = __webpack_require__(634),
-    mapCacheSet = __webpack_require__(635);
+var mapCacheClear = __webpack_require__(634),
+    mapCacheDelete = __webpack_require__(635),
+    mapCacheGet = __webpack_require__(636),
+    mapCacheHas = __webpack_require__(637),
+    mapCacheSet = __webpack_require__(638);
 
 /**
  * Creates a map cache object to store key-value pairs.
@@ -12881,7 +12888,7 @@ module.exports = identity;
 /* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsArguments = __webpack_require__(591),
+var baseIsArguments = __webpack_require__(594),
     isObjectLike = __webpack_require__(33);
 
 /** Used for built-in method references. */
@@ -12924,7 +12931,7 @@ module.exports = isArguments;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(13),
-    stubFalse = __webpack_require__(663);
+    stubFalse = __webpack_require__(666);
 
 /** Detect free variable `exports`. */
 var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
@@ -13044,9 +13051,9 @@ module.exports = isSymbol;
 /* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsTypedArray = __webpack_require__(595),
-    baseUnary = __webpack_require__(605),
-    nodeUtil = __webpack_require__(639);
+var baseIsTypedArray = __webpack_require__(598),
+    baseUnary = __webpack_require__(608),
+    nodeUtil = __webpack_require__(642);
 
 /* Node.js helper references. */
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
@@ -13158,7 +13165,7 @@ util.inherits = __webpack_require__(5);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(692)
+  deprecate: __webpack_require__(695)
 };
 /*</replacement>*/
 
@@ -13686,7 +13693,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['cognitoidentity'] = {};
 AWS.CognitoIdentity = Service.defineService('cognitoidentity', ['2014-06-30']);
-__webpack_require__(490);
+__webpack_require__(493);
 Object.defineProperty(apiLoader.services['cognitoidentity'], '2014-06-30', {
   get: function get() {
     var model = __webpack_require__(198);
@@ -14677,7 +14684,7 @@ module.exports = ResourceWaiter;
 
 var AWS = __webpack_require__(0);
 var util = __webpack_require__(6);
-var QueryParamSerializer = __webpack_require__(480);
+var QueryParamSerializer = __webpack_require__(482);
 var Shape = __webpack_require__(25);
 
 function buildRequest(req) {
@@ -15520,7 +15527,7 @@ constants._reverse = function reverse(map) {
   return res;
 };
 
-constants.der = __webpack_require__(516);
+constants.der = __webpack_require__(519);
 
 
 /***/ }),
@@ -16232,7 +16239,7 @@ if (typeof self === 'object') {
 /* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(36)
 var Transform = __webpack_require__(19)
 var inherits = __webpack_require__(5)
-var GHASH = __webpack_require__(524)
+var GHASH = __webpack_require__(527)
 var xor = __webpack_require__(29)
 inherits(StreamCipher, Transform)
 module.exports = StreamCipher
@@ -16705,7 +16712,7 @@ module.exports = {
  * See http://pajhome.org.uk/crypt/md5 for more info.
  */
 
-var helpers = __webpack_require__(533);
+var helpers = __webpack_require__(536);
 
 /*
  * Calculate the MD5 of an array of little-endian words, and a bit length
@@ -16979,11 +16986,11 @@ module.exports = Array.isArray || function (arr) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(42),
-    stackClear = __webpack_require__(648),
-    stackDelete = __webpack_require__(649),
-    stackGet = __webpack_require__(650),
-    stackHas = __webpack_require__(651),
-    stackSet = __webpack_require__(652);
+    stackClear = __webpack_require__(651),
+    stackDelete = __webpack_require__(652),
+    stackGet = __webpack_require__(653),
+    stackHas = __webpack_require__(654),
+    stackSet = __webpack_require__(655);
 
 /**
  * Creates a stack cache object to store key-value pairs.
@@ -17106,7 +17113,7 @@ module.exports = baseGet;
 /* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsEqualDeep = __webpack_require__(592),
+var baseIsEqualDeep = __webpack_require__(595),
     isObjectLike = __webpack_require__(33);
 
 /**
@@ -17141,7 +17148,7 @@ module.exports = baseIsEqual;
 /***/ (function(module, exports, __webpack_require__) {
 
 var isPrototype = __webpack_require__(69),
-    nativeKeys = __webpack_require__(638);
+    nativeKeys = __webpack_require__(641);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -17178,8 +17185,8 @@ module.exports = baseKeys;
 
 var isArray = __webpack_require__(11),
     isKey = __webpack_require__(68),
-    stringToPath = __webpack_require__(653),
-    toString = __webpack_require__(664);
+    stringToPath = __webpack_require__(656),
+    toString = __webpack_require__(667);
 
 /**
  * Casts `value` to a path array if it's not one.
@@ -17266,9 +17273,9 @@ module.exports = defineProperty;
 /* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var SetCache = __webpack_require__(573),
-    arraySome = __webpack_require__(582),
-    cacheHas = __webpack_require__(606);
+var SetCache = __webpack_require__(576),
+    arraySome = __webpack_require__(585),
+    cacheHas = __webpack_require__(609);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -17366,11 +17373,11 @@ module.exports = freeGlobal;
 /* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var DataView = __webpack_require__(569),
+var DataView = __webpack_require__(572),
     Map = __webpack_require__(65),
-    Promise = __webpack_require__(571),
-    Set = __webpack_require__(572),
-    WeakMap = __webpack_require__(575),
+    Promise = __webpack_require__(574),
+    Set = __webpack_require__(575),
+    WeakMap = __webpack_require__(578),
     baseGetTag = __webpack_require__(31),
     toSource = __webpack_require__(128);
 
@@ -17736,7 +17743,7 @@ exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = _
 exports.createHash = exports.Hash = __webpack_require__(20)
 exports.createHmac = exports.Hmac = __webpack_require__(61)
 
-var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(Object.keys(__webpack_require__(528)))
+var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(Object.keys(__webpack_require__(531)))
 exports.getHashes = function () {
   return hashes
 }
@@ -17745,7 +17752,7 @@ var p = __webpack_require__(133)
 exports.pbkdf2 = p.pbkdf2
 exports.pbkdf2Sync = p.pbkdf2Sync
 
-var aes = __webpack_require__(525)
+var aes = __webpack_require__(528)
 ;[
   'Cipher',
   'createCipher',
@@ -17761,7 +17768,7 @@ var aes = __webpack_require__(525)
   exports[key] = aes[key]
 })
 
-var dh = __webpack_require__(544)
+var dh = __webpack_require__(547)
 ;[
   'DiffieHellmanGroup',
   'createDiffieHellmanGroup',
@@ -17772,7 +17779,7 @@ var dh = __webpack_require__(544)
   exports[key] = dh[key]
 })
 
-var sign = __webpack_require__(529)
+var sign = __webpack_require__(532)
 ;[
   'createSign',
   'Sign',
@@ -17782,9 +17789,9 @@ var sign = __webpack_require__(529)
   exports[key] = sign[key]
 })
 
-exports.createECDH = __webpack_require__(532)
+exports.createECDH = __webpack_require__(535)
 
-var publicEncrypt = __webpack_require__(672)
+var publicEncrypt = __webpack_require__(675)
 
 ;[
   'publicEncrypt',
@@ -17863,7 +17870,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(686);
+__webpack_require__(689);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
@@ -17873,7 +17880,7 @@ exports.clearImmediate = clearImmediate;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, Buffer) {var createHmac = __webpack_require__(61)
-var checkParameters = __webpack_require__(671)
+var checkParameters = __webpack_require__(674)
 
 exports.pbkdf2 = function (password, salt, iterations, keylen, digest, callback) {
   if (typeof digest === 'function') {
@@ -18001,8 +18008,8 @@ module.exports = function xor(a, b) {
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(676);
-exports.encode = exports.stringify = __webpack_require__(677);
+exports.decode = exports.parse = __webpack_require__(679);
+exports.encode = exports.stringify = __webpack_require__(680);
 
 
 /***/ }),
@@ -18060,7 +18067,7 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(680);
+var BufferList = __webpack_require__(683);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -20078,7 +20085,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __webpack_require__(694);
+exports.isBuffer = __webpack_require__(697);
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -20122,7 +20129,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = __webpack_require__(693);
+exports.inherits = __webpack_require__(696);
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -20384,13 +20391,13 @@ module.exports = rng;
 
   XMLComment = __webpack_require__(147);
 
-  XMLDTDAttList = __webpack_require__(704);
+  XMLDTDAttList = __webpack_require__(707);
 
-  XMLDTDEntity = __webpack_require__(706);
+  XMLDTDEntity = __webpack_require__(709);
 
-  XMLDTDElement = __webpack_require__(705);
+  XMLDTDElement = __webpack_require__(708);
 
-  XMLDTDNotation = __webpack_require__(707);
+  XMLDTDNotation = __webpack_require__(710);
 
   XMLProcessingInstruction = __webpack_require__(151);
 
@@ -20578,11 +20585,11 @@ module.exports = rng;
 
   isFunction = __webpack_require__(49);
 
-  every = __webpack_require__(656);
+  every = __webpack_require__(659);
 
   XMLNode = __webpack_require__(23);
 
-  XMLAttribute = __webpack_require__(702);
+  XMLAttribute = __webpack_require__(705);
 
   XMLProcessingInstruction = __webpack_require__(151);
 
@@ -20845,9 +20852,9 @@ module.exports = rng;
 (function() {
   var XMLBuilder, assign;
 
-  assign = __webpack_require__(654);
+  assign = __webpack_require__(657);
 
-  XMLBuilder = __webpack_require__(703);
+  XMLBuilder = __webpack_require__(706);
 
   module.exports.create = function(name, xmldec, doctype, options) {
     options = assign({}, xmldec, doctype, options);
@@ -20865,7 +20872,7 @@ __webpack_require__(1);
 
 var AWS = __webpack_require__(0);
 
-__webpack_require__(371);
+__webpack_require__(373);
 module.exports = AWS;
 
 /***/ }),
@@ -117885,6 +117892,2256 @@ module.exports = {
 module.exports = {
 	"version": "2.0",
 	"metadata": {
+		"apiVersion": "2014-09-01",
+		"endpointPrefix": "rds",
+		"protocol": "query",
+		"serviceAbbreviation": "Amazon RDS",
+		"serviceFullName": "Amazon Relational Database Service",
+		"signatureVersion": "v4",
+		"uid": "rds-2014-09-01",
+		"xmlNamespace": "http://rds.amazonaws.com/doc/2014-09-01/"
+	},
+	"operations": {
+		"AddSourceIdentifierToSubscription": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"SubscriptionName",
+					"SourceIdentifier"
+				],
+				"members": {
+					"SubscriptionName": {},
+					"SourceIdentifier": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "AddSourceIdentifierToSubscriptionResult",
+				"type": "structure",
+				"members": {
+					"EventSubscription": {
+						"shape": "S4"
+					}
+				}
+			}
+		},
+		"AddTagsToResource": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"ResourceName",
+					"Tags"
+				],
+				"members": {
+					"ResourceName": {},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			}
+		},
+		"AuthorizeDBSecurityGroupIngress": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBSecurityGroupName"
+				],
+				"members": {
+					"DBSecurityGroupName": {},
+					"CIDRIP": {},
+					"EC2SecurityGroupName": {},
+					"EC2SecurityGroupId": {},
+					"EC2SecurityGroupOwnerId": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "AuthorizeDBSecurityGroupIngressResult",
+				"type": "structure",
+				"members": {
+					"DBSecurityGroup": {
+						"shape": "Sd"
+					}
+				}
+			}
+		},
+		"CopyDBParameterGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"SourceDBParameterGroupIdentifier",
+					"TargetDBParameterGroupIdentifier",
+					"TargetDBParameterGroupDescription"
+				],
+				"members": {
+					"SourceDBParameterGroupIdentifier": {},
+					"TargetDBParameterGroupIdentifier": {},
+					"TargetDBParameterGroupDescription": {},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "CopyDBParameterGroupResult",
+				"type": "structure",
+				"members": {
+					"DBParameterGroup": {
+						"shape": "Sk"
+					}
+				}
+			}
+		},
+		"CopyDBSnapshot": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"SourceDBSnapshotIdentifier",
+					"TargetDBSnapshotIdentifier"
+				],
+				"members": {
+					"SourceDBSnapshotIdentifier": {},
+					"TargetDBSnapshotIdentifier": {},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "CopyDBSnapshotResult",
+				"type": "structure",
+				"members": {
+					"DBSnapshot": {
+						"shape": "Sn"
+					}
+				}
+			}
+		},
+		"CopyOptionGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"SourceOptionGroupIdentifier",
+					"TargetOptionGroupIdentifier",
+					"TargetOptionGroupDescription"
+				],
+				"members": {
+					"SourceOptionGroupIdentifier": {},
+					"TargetOptionGroupIdentifier": {},
+					"TargetOptionGroupDescription": {},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "CopyOptionGroupResult",
+				"type": "structure",
+				"members": {
+					"OptionGroup": {
+						"shape": "St"
+					}
+				}
+			}
+		},
+		"CreateDBInstance": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBInstanceIdentifier",
+					"AllocatedStorage",
+					"DBInstanceClass",
+					"Engine",
+					"MasterUsername",
+					"MasterUserPassword"
+				],
+				"members": {
+					"DBName": {},
+					"DBInstanceIdentifier": {},
+					"AllocatedStorage": {
+						"type": "integer"
+					},
+					"DBInstanceClass": {},
+					"Engine": {},
+					"MasterUsername": {},
+					"MasterUserPassword": {},
+					"DBSecurityGroups": {
+						"shape": "S13"
+					},
+					"VpcSecurityGroupIds": {
+						"shape": "S14"
+					},
+					"AvailabilityZone": {},
+					"DBSubnetGroupName": {},
+					"PreferredMaintenanceWindow": {},
+					"DBParameterGroupName": {},
+					"BackupRetentionPeriod": {
+						"type": "integer"
+					},
+					"PreferredBackupWindow": {},
+					"Port": {
+						"type": "integer"
+					},
+					"MultiAZ": {
+						"type": "boolean"
+					},
+					"EngineVersion": {},
+					"AutoMinorVersionUpgrade": {
+						"type": "boolean"
+					},
+					"LicenseModel": {},
+					"Iops": {
+						"type": "integer"
+					},
+					"OptionGroupName": {},
+					"CharacterSetName": {},
+					"PubliclyAccessible": {
+						"type": "boolean"
+					},
+					"Tags": {
+						"shape": "S9"
+					},
+					"StorageType": {},
+					"TdeCredentialArn": {},
+					"TdeCredentialPassword": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "CreateDBInstanceResult",
+				"type": "structure",
+				"members": {
+					"DBInstance": {
+						"shape": "S17"
+					}
+				}
+			}
+		},
+		"CreateDBInstanceReadReplica": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBInstanceIdentifier",
+					"SourceDBInstanceIdentifier"
+				],
+				"members": {
+					"DBInstanceIdentifier": {},
+					"SourceDBInstanceIdentifier": {},
+					"DBInstanceClass": {},
+					"AvailabilityZone": {},
+					"Port": {
+						"type": "integer"
+					},
+					"AutoMinorVersionUpgrade": {
+						"type": "boolean"
+					},
+					"Iops": {
+						"type": "integer"
+					},
+					"OptionGroupName": {},
+					"PubliclyAccessible": {
+						"type": "boolean"
+					},
+					"Tags": {
+						"shape": "S9"
+					},
+					"DBSubnetGroupName": {},
+					"StorageType": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "CreateDBInstanceReadReplicaResult",
+				"type": "structure",
+				"members": {
+					"DBInstance": {
+						"shape": "S17"
+					}
+				}
+			}
+		},
+		"CreateDBParameterGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBParameterGroupName",
+					"DBParameterGroupFamily",
+					"Description"
+				],
+				"members": {
+					"DBParameterGroupName": {},
+					"DBParameterGroupFamily": {},
+					"Description": {},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "CreateDBParameterGroupResult",
+				"type": "structure",
+				"members": {
+					"DBParameterGroup": {
+						"shape": "Sk"
+					}
+				}
+			}
+		},
+		"CreateDBSecurityGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBSecurityGroupName",
+					"DBSecurityGroupDescription"
+				],
+				"members": {
+					"DBSecurityGroupName": {},
+					"DBSecurityGroupDescription": {},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "CreateDBSecurityGroupResult",
+				"type": "structure",
+				"members": {
+					"DBSecurityGroup": {
+						"shape": "Sd"
+					}
+				}
+			}
+		},
+		"CreateDBSnapshot": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBSnapshotIdentifier",
+					"DBInstanceIdentifier"
+				],
+				"members": {
+					"DBSnapshotIdentifier": {},
+					"DBInstanceIdentifier": {},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "CreateDBSnapshotResult",
+				"type": "structure",
+				"members": {
+					"DBSnapshot": {
+						"shape": "Sn"
+					}
+				}
+			}
+		},
+		"CreateDBSubnetGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBSubnetGroupName",
+					"DBSubnetGroupDescription",
+					"SubnetIds"
+				],
+				"members": {
+					"DBSubnetGroupName": {},
+					"DBSubnetGroupDescription": {},
+					"SubnetIds": {
+						"shape": "S1u"
+					},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "CreateDBSubnetGroupResult",
+				"type": "structure",
+				"members": {
+					"DBSubnetGroup": {
+						"shape": "S1b"
+					}
+				}
+			}
+		},
+		"CreateEventSubscription": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"SubscriptionName",
+					"SnsTopicArn"
+				],
+				"members": {
+					"SubscriptionName": {},
+					"SnsTopicArn": {},
+					"SourceType": {},
+					"EventCategories": {
+						"shape": "S6"
+					},
+					"SourceIds": {
+						"shape": "S5"
+					},
+					"Enabled": {
+						"type": "boolean"
+					},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "CreateEventSubscriptionResult",
+				"type": "structure",
+				"members": {
+					"EventSubscription": {
+						"shape": "S4"
+					}
+				}
+			}
+		},
+		"CreateOptionGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"OptionGroupName",
+					"EngineName",
+					"MajorEngineVersion",
+					"OptionGroupDescription"
+				],
+				"members": {
+					"OptionGroupName": {},
+					"EngineName": {},
+					"MajorEngineVersion": {},
+					"OptionGroupDescription": {},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "CreateOptionGroupResult",
+				"type": "structure",
+				"members": {
+					"OptionGroup": {
+						"shape": "St"
+					}
+				}
+			}
+		},
+		"DeleteDBInstance": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBInstanceIdentifier"
+				],
+				"members": {
+					"DBInstanceIdentifier": {},
+					"SkipFinalSnapshot": {
+						"type": "boolean"
+					},
+					"FinalDBSnapshotIdentifier": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DeleteDBInstanceResult",
+				"type": "structure",
+				"members": {
+					"DBInstance": {
+						"shape": "S17"
+					}
+				}
+			}
+		},
+		"DeleteDBParameterGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBParameterGroupName"
+				],
+				"members": {
+					"DBParameterGroupName": {}
+				}
+			}
+		},
+		"DeleteDBSecurityGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBSecurityGroupName"
+				],
+				"members": {
+					"DBSecurityGroupName": {}
+				}
+			}
+		},
+		"DeleteDBSnapshot": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBSnapshotIdentifier"
+				],
+				"members": {
+					"DBSnapshotIdentifier": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DeleteDBSnapshotResult",
+				"type": "structure",
+				"members": {
+					"DBSnapshot": {
+						"shape": "Sn"
+					}
+				}
+			}
+		},
+		"DeleteDBSubnetGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBSubnetGroupName"
+				],
+				"members": {
+					"DBSubnetGroupName": {}
+				}
+			}
+		},
+		"DeleteEventSubscription": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"SubscriptionName"
+				],
+				"members": {
+					"SubscriptionName": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DeleteEventSubscriptionResult",
+				"type": "structure",
+				"members": {
+					"EventSubscription": {
+						"shape": "S4"
+					}
+				}
+			}
+		},
+		"DeleteOptionGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"OptionGroupName"
+				],
+				"members": {
+					"OptionGroupName": {}
+				}
+			}
+		},
+		"DescribeDBEngineVersions": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"Engine": {},
+					"EngineVersion": {},
+					"DBParameterGroupFamily": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {},
+					"DefaultOnly": {
+						"type": "boolean"
+					},
+					"ListSupportedCharacterSets": {
+						"type": "boolean"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeDBEngineVersionsResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"DBEngineVersions": {
+						"type": "list",
+						"member": {
+							"locationName": "DBEngineVersion",
+							"type": "structure",
+							"members": {
+								"Engine": {},
+								"EngineVersion": {},
+								"DBParameterGroupFamily": {},
+								"DBEngineDescription": {},
+								"DBEngineVersionDescription": {},
+								"DefaultCharacterSet": {
+									"shape": "S2h"
+								},
+								"SupportedCharacterSets": {
+									"type": "list",
+									"member": {
+										"shape": "S2h",
+										"locationName": "CharacterSet"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"DescribeDBInstances": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"DBInstanceIdentifier": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeDBInstancesResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"DBInstances": {
+						"type": "list",
+						"member": {
+							"shape": "S17",
+							"locationName": "DBInstance"
+						}
+					}
+				}
+			}
+		},
+		"DescribeDBLogFiles": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBInstanceIdentifier"
+				],
+				"members": {
+					"DBInstanceIdentifier": {},
+					"FilenameContains": {},
+					"FileLastWritten": {
+						"type": "long"
+					},
+					"FileSize": {
+						"type": "long"
+					},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeDBLogFilesResult",
+				"type": "structure",
+				"members": {
+					"DescribeDBLogFiles": {
+						"type": "list",
+						"member": {
+							"locationName": "DescribeDBLogFilesDetails",
+							"type": "structure",
+							"members": {
+								"LogFileName": {},
+								"LastWritten": {
+									"type": "long"
+								},
+								"Size": {
+									"type": "long"
+								}
+							}
+						}
+					},
+					"Marker": {}
+				}
+			}
+		},
+		"DescribeDBParameterGroups": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"DBParameterGroupName": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeDBParameterGroupsResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"DBParameterGroups": {
+						"type": "list",
+						"member": {
+							"shape": "Sk",
+							"locationName": "DBParameterGroup"
+						}
+					}
+				}
+			}
+		},
+		"DescribeDBParameters": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBParameterGroupName"
+				],
+				"members": {
+					"DBParameterGroupName": {},
+					"Source": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeDBParametersResult",
+				"type": "structure",
+				"members": {
+					"Parameters": {
+						"shape": "S2w"
+					},
+					"Marker": {}
+				}
+			}
+		},
+		"DescribeDBSecurityGroups": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"DBSecurityGroupName": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeDBSecurityGroupsResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"DBSecurityGroups": {
+						"type": "list",
+						"member": {
+							"shape": "Sd",
+							"locationName": "DBSecurityGroup"
+						}
+					}
+				}
+			}
+		},
+		"DescribeDBSnapshots": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"DBInstanceIdentifier": {},
+					"DBSnapshotIdentifier": {},
+					"SnapshotType": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeDBSnapshotsResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"DBSnapshots": {
+						"type": "list",
+						"member": {
+							"shape": "Sn",
+							"locationName": "DBSnapshot"
+						}
+					}
+				}
+			}
+		},
+		"DescribeDBSubnetGroups": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"DBSubnetGroupName": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeDBSubnetGroupsResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"DBSubnetGroups": {
+						"type": "list",
+						"member": {
+							"shape": "S1b",
+							"locationName": "DBSubnetGroup"
+						}
+					}
+				}
+			}
+		},
+		"DescribeEngineDefaultParameters": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBParameterGroupFamily"
+				],
+				"members": {
+					"DBParameterGroupFamily": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeEngineDefaultParametersResult",
+				"type": "structure",
+				"members": {
+					"EngineDefaults": {
+						"type": "structure",
+						"members": {
+							"DBParameterGroupFamily": {},
+							"Marker": {},
+							"Parameters": {
+								"shape": "S2w"
+							}
+						},
+						"wrapper": true
+					}
+				}
+			}
+		},
+		"DescribeEventCategories": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"SourceType": {},
+					"Filters": {
+						"shape": "S2b"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeEventCategoriesResult",
+				"type": "structure",
+				"members": {
+					"EventCategoriesMapList": {
+						"type": "list",
+						"member": {
+							"locationName": "EventCategoriesMap",
+							"type": "structure",
+							"members": {
+								"SourceType": {},
+								"EventCategories": {
+									"shape": "S6"
+								}
+							},
+							"wrapper": true
+						}
+					}
+				}
+			}
+		},
+		"DescribeEventSubscriptions": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"SubscriptionName": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeEventSubscriptionsResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"EventSubscriptionsList": {
+						"type": "list",
+						"member": {
+							"shape": "S4",
+							"locationName": "EventSubscription"
+						}
+					}
+				}
+			}
+		},
+		"DescribeEvents": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"SourceIdentifier": {},
+					"SourceType": {},
+					"StartTime": {
+						"type": "timestamp"
+					},
+					"EndTime": {
+						"type": "timestamp"
+					},
+					"Duration": {
+						"type": "integer"
+					},
+					"EventCategories": {
+						"shape": "S6"
+					},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeEventsResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"Events": {
+						"type": "list",
+						"member": {
+							"locationName": "Event",
+							"type": "structure",
+							"members": {
+								"SourceIdentifier": {},
+								"SourceType": {},
+								"Message": {},
+								"EventCategories": {
+									"shape": "S6"
+								},
+								"Date": {
+									"type": "timestamp"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"DescribeOptionGroupOptions": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"EngineName"
+				],
+				"members": {
+					"EngineName": {},
+					"MajorEngineVersion": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeOptionGroupOptionsResult",
+				"type": "structure",
+				"members": {
+					"OptionGroupOptions": {
+						"type": "list",
+						"member": {
+							"locationName": "OptionGroupOption",
+							"type": "structure",
+							"members": {
+								"Name": {},
+								"Description": {},
+								"EngineName": {},
+								"MajorEngineVersion": {},
+								"MinimumRequiredMinorEngineVersion": {},
+								"PortRequired": {
+									"type": "boolean"
+								},
+								"DefaultPort": {
+									"type": "integer"
+								},
+								"OptionsDependedOn": {
+									"type": "list",
+									"member": {
+										"locationName": "OptionName"
+									}
+								},
+								"Persistent": {
+									"type": "boolean"
+								},
+								"Permanent": {
+									"type": "boolean"
+								},
+								"OptionGroupOptionSettings": {
+									"type": "list",
+									"member": {
+										"locationName": "OptionGroupOptionSetting",
+										"type": "structure",
+										"members": {
+											"SettingName": {},
+											"SettingDescription": {},
+											"DefaultValue": {},
+											"ApplyType": {},
+											"AllowedValues": {},
+											"IsModifiable": {
+												"type": "boolean"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"Marker": {}
+				}
+			}
+		},
+		"DescribeOptionGroups": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"OptionGroupName": {},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"Marker": {},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"EngineName": {},
+					"MajorEngineVersion": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeOptionGroupsResult",
+				"type": "structure",
+				"members": {
+					"OptionGroupsList": {
+						"type": "list",
+						"member": {
+							"shape": "St",
+							"locationName": "OptionGroup"
+						}
+					},
+					"Marker": {}
+				}
+			}
+		},
+		"DescribeOrderableDBInstanceOptions": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"Engine"
+				],
+				"members": {
+					"Engine": {},
+					"EngineVersion": {},
+					"DBInstanceClass": {},
+					"LicenseModel": {},
+					"Vpc": {
+						"type": "boolean"
+					},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeOrderableDBInstanceOptionsResult",
+				"type": "structure",
+				"members": {
+					"OrderableDBInstanceOptions": {
+						"type": "list",
+						"member": {
+							"locationName": "OrderableDBInstanceOption",
+							"type": "structure",
+							"members": {
+								"Engine": {},
+								"EngineVersion": {},
+								"DBInstanceClass": {},
+								"LicenseModel": {},
+								"AvailabilityZones": {
+									"type": "list",
+									"member": {
+										"shape": "S1e",
+										"locationName": "AvailabilityZone"
+									}
+								},
+								"MultiAZCapable": {
+									"type": "boolean"
+								},
+								"ReadReplicaCapable": {
+									"type": "boolean"
+								},
+								"Vpc": {
+									"type": "boolean"
+								},
+								"StorageType": {},
+								"SupportsIops": {
+									"type": "boolean"
+								}
+							},
+							"wrapper": true
+						}
+					},
+					"Marker": {}
+				}
+			}
+		},
+		"DescribeReservedDBInstances": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"ReservedDBInstanceId": {},
+					"ReservedDBInstancesOfferingId": {},
+					"DBInstanceClass": {},
+					"Duration": {},
+					"ProductDescription": {},
+					"OfferingType": {},
+					"MultiAZ": {
+						"type": "boolean"
+					},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeReservedDBInstancesResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"ReservedDBInstances": {
+						"type": "list",
+						"member": {
+							"shape": "S45",
+							"locationName": "ReservedDBInstance"
+						}
+					}
+				}
+			}
+		},
+		"DescribeReservedDBInstancesOfferings": {
+			"input": {
+				"type": "structure",
+				"members": {
+					"ReservedDBInstancesOfferingId": {},
+					"DBInstanceClass": {},
+					"Duration": {},
+					"ProductDescription": {},
+					"OfferingType": {},
+					"MultiAZ": {
+						"type": "boolean"
+					},
+					"Filters": {
+						"shape": "S2b"
+					},
+					"MaxRecords": {
+						"type": "integer"
+					},
+					"Marker": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "DescribeReservedDBInstancesOfferingsResult",
+				"type": "structure",
+				"members": {
+					"Marker": {},
+					"ReservedDBInstancesOfferings": {
+						"type": "list",
+						"member": {
+							"locationName": "ReservedDBInstancesOffering",
+							"type": "structure",
+							"members": {
+								"ReservedDBInstancesOfferingId": {},
+								"DBInstanceClass": {},
+								"Duration": {
+									"type": "integer"
+								},
+								"FixedPrice": {
+									"type": "double"
+								},
+								"UsagePrice": {
+									"type": "double"
+								},
+								"CurrencyCode": {},
+								"ProductDescription": {},
+								"OfferingType": {},
+								"MultiAZ": {
+									"type": "boolean"
+								},
+								"RecurringCharges": {
+									"shape": "S47"
+								}
+							},
+							"wrapper": true
+						}
+					}
+				}
+			}
+		},
+		"DownloadDBLogFilePortion": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBInstanceIdentifier",
+					"LogFileName"
+				],
+				"members": {
+					"DBInstanceIdentifier": {},
+					"LogFileName": {},
+					"Marker": {},
+					"NumberOfLines": {
+						"type": "integer"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "DownloadDBLogFilePortionResult",
+				"type": "structure",
+				"members": {
+					"LogFileData": {},
+					"Marker": {},
+					"AdditionalDataPending": {
+						"type": "boolean"
+					}
+				}
+			}
+		},
+		"ListTagsForResource": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"ResourceName"
+				],
+				"members": {
+					"ResourceName": {},
+					"Filters": {
+						"shape": "S2b"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "ListTagsForResourceResult",
+				"type": "structure",
+				"members": {
+					"TagList": {
+						"shape": "S9"
+					}
+				}
+			}
+		},
+		"ModifyDBInstance": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBInstanceIdentifier"
+				],
+				"members": {
+					"DBInstanceIdentifier": {},
+					"AllocatedStorage": {
+						"type": "integer"
+					},
+					"DBInstanceClass": {},
+					"DBSecurityGroups": {
+						"shape": "S13"
+					},
+					"VpcSecurityGroupIds": {
+						"shape": "S14"
+					},
+					"ApplyImmediately": {
+						"type": "boolean"
+					},
+					"MasterUserPassword": {},
+					"DBParameterGroupName": {},
+					"BackupRetentionPeriod": {
+						"type": "integer"
+					},
+					"PreferredBackupWindow": {},
+					"PreferredMaintenanceWindow": {},
+					"MultiAZ": {
+						"type": "boolean"
+					},
+					"EngineVersion": {},
+					"AllowMajorVersionUpgrade": {
+						"type": "boolean"
+					},
+					"AutoMinorVersionUpgrade": {
+						"type": "boolean"
+					},
+					"Iops": {
+						"type": "integer"
+					},
+					"OptionGroupName": {},
+					"NewDBInstanceIdentifier": {},
+					"StorageType": {},
+					"TdeCredentialArn": {},
+					"TdeCredentialPassword": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "ModifyDBInstanceResult",
+				"type": "structure",
+				"members": {
+					"DBInstance": {
+						"shape": "S17"
+					}
+				}
+			}
+		},
+		"ModifyDBParameterGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBParameterGroupName",
+					"Parameters"
+				],
+				"members": {
+					"DBParameterGroupName": {},
+					"Parameters": {
+						"shape": "S2w"
+					}
+				}
+			},
+			"output": {
+				"shape": "S4k",
+				"resultWrapper": "ModifyDBParameterGroupResult"
+			}
+		},
+		"ModifyDBSubnetGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBSubnetGroupName",
+					"SubnetIds"
+				],
+				"members": {
+					"DBSubnetGroupName": {},
+					"DBSubnetGroupDescription": {},
+					"SubnetIds": {
+						"shape": "S1u"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "ModifyDBSubnetGroupResult",
+				"type": "structure",
+				"members": {
+					"DBSubnetGroup": {
+						"shape": "S1b"
+					}
+				}
+			}
+		},
+		"ModifyEventSubscription": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"SubscriptionName"
+				],
+				"members": {
+					"SubscriptionName": {},
+					"SnsTopicArn": {},
+					"SourceType": {},
+					"EventCategories": {
+						"shape": "S6"
+					},
+					"Enabled": {
+						"type": "boolean"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "ModifyEventSubscriptionResult",
+				"type": "structure",
+				"members": {
+					"EventSubscription": {
+						"shape": "S4"
+					}
+				}
+			}
+		},
+		"ModifyOptionGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"OptionGroupName"
+				],
+				"members": {
+					"OptionGroupName": {},
+					"OptionsToInclude": {
+						"type": "list",
+						"member": {
+							"locationName": "OptionConfiguration",
+							"type": "structure",
+							"required": [
+								"OptionName"
+							],
+							"members": {
+								"OptionName": {},
+								"Port": {
+									"type": "integer"
+								},
+								"DBSecurityGroupMemberships": {
+									"shape": "S13"
+								},
+								"VpcSecurityGroupMemberships": {
+									"shape": "S14"
+								},
+								"OptionSettings": {
+									"type": "list",
+									"member": {
+										"shape": "Sx",
+										"locationName": "OptionSetting"
+									}
+								}
+							}
+						}
+					},
+					"OptionsToRemove": {
+						"type": "list",
+						"member": {}
+					},
+					"ApplyImmediately": {
+						"type": "boolean"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "ModifyOptionGroupResult",
+				"type": "structure",
+				"members": {
+					"OptionGroup": {
+						"shape": "St"
+					}
+				}
+			}
+		},
+		"PromoteReadReplica": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBInstanceIdentifier"
+				],
+				"members": {
+					"DBInstanceIdentifier": {},
+					"BackupRetentionPeriod": {
+						"type": "integer"
+					},
+					"PreferredBackupWindow": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "PromoteReadReplicaResult",
+				"type": "structure",
+				"members": {
+					"DBInstance": {
+						"shape": "S17"
+					}
+				}
+			}
+		},
+		"PurchaseReservedDBInstancesOffering": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"ReservedDBInstancesOfferingId"
+				],
+				"members": {
+					"ReservedDBInstancesOfferingId": {},
+					"ReservedDBInstanceId": {},
+					"DBInstanceCount": {
+						"type": "integer"
+					},
+					"Tags": {
+						"shape": "S9"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "PurchaseReservedDBInstancesOfferingResult",
+				"type": "structure",
+				"members": {
+					"ReservedDBInstance": {
+						"shape": "S45"
+					}
+				}
+			}
+		},
+		"RebootDBInstance": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBInstanceIdentifier"
+				],
+				"members": {
+					"DBInstanceIdentifier": {},
+					"ForceFailover": {
+						"type": "boolean"
+					}
+				}
+			},
+			"output": {
+				"resultWrapper": "RebootDBInstanceResult",
+				"type": "structure",
+				"members": {
+					"DBInstance": {
+						"shape": "S17"
+					}
+				}
+			}
+		},
+		"RemoveSourceIdentifierFromSubscription": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"SubscriptionName",
+					"SourceIdentifier"
+				],
+				"members": {
+					"SubscriptionName": {},
+					"SourceIdentifier": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "RemoveSourceIdentifierFromSubscriptionResult",
+				"type": "structure",
+				"members": {
+					"EventSubscription": {
+						"shape": "S4"
+					}
+				}
+			}
+		},
+		"RemoveTagsFromResource": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"ResourceName",
+					"TagKeys"
+				],
+				"members": {
+					"ResourceName": {},
+					"TagKeys": {
+						"type": "list",
+						"member": {}
+					}
+				}
+			}
+		},
+		"ResetDBParameterGroup": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBParameterGroupName"
+				],
+				"members": {
+					"DBParameterGroupName": {},
+					"ResetAllParameters": {
+						"type": "boolean"
+					},
+					"Parameters": {
+						"shape": "S2w"
+					}
+				}
+			},
+			"output": {
+				"shape": "S4k",
+				"resultWrapper": "ResetDBParameterGroupResult"
+			}
+		},
+		"RestoreDBInstanceFromDBSnapshot": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBInstanceIdentifier",
+					"DBSnapshotIdentifier"
+				],
+				"members": {
+					"DBInstanceIdentifier": {},
+					"DBSnapshotIdentifier": {},
+					"DBInstanceClass": {},
+					"Port": {
+						"type": "integer"
+					},
+					"AvailabilityZone": {},
+					"DBSubnetGroupName": {},
+					"MultiAZ": {
+						"type": "boolean"
+					},
+					"PubliclyAccessible": {
+						"type": "boolean"
+					},
+					"AutoMinorVersionUpgrade": {
+						"type": "boolean"
+					},
+					"LicenseModel": {},
+					"DBName": {},
+					"Engine": {},
+					"Iops": {
+						"type": "integer"
+					},
+					"OptionGroupName": {},
+					"Tags": {
+						"shape": "S9"
+					},
+					"StorageType": {},
+					"TdeCredentialArn": {},
+					"TdeCredentialPassword": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "RestoreDBInstanceFromDBSnapshotResult",
+				"type": "structure",
+				"members": {
+					"DBInstance": {
+						"shape": "S17"
+					}
+				}
+			}
+		},
+		"RestoreDBInstanceToPointInTime": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"SourceDBInstanceIdentifier",
+					"TargetDBInstanceIdentifier"
+				],
+				"members": {
+					"SourceDBInstanceIdentifier": {},
+					"TargetDBInstanceIdentifier": {},
+					"RestoreTime": {
+						"type": "timestamp"
+					},
+					"UseLatestRestorableTime": {
+						"type": "boolean"
+					},
+					"DBInstanceClass": {},
+					"Port": {
+						"type": "integer"
+					},
+					"AvailabilityZone": {},
+					"DBSubnetGroupName": {},
+					"MultiAZ": {
+						"type": "boolean"
+					},
+					"PubliclyAccessible": {
+						"type": "boolean"
+					},
+					"AutoMinorVersionUpgrade": {
+						"type": "boolean"
+					},
+					"LicenseModel": {},
+					"DBName": {},
+					"Engine": {},
+					"Iops": {
+						"type": "integer"
+					},
+					"OptionGroupName": {},
+					"Tags": {
+						"shape": "S9"
+					},
+					"StorageType": {},
+					"TdeCredentialArn": {},
+					"TdeCredentialPassword": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "RestoreDBInstanceToPointInTimeResult",
+				"type": "structure",
+				"members": {
+					"DBInstance": {
+						"shape": "S17"
+					}
+				}
+			}
+		},
+		"RevokeDBSecurityGroupIngress": {
+			"input": {
+				"type": "structure",
+				"required": [
+					"DBSecurityGroupName"
+				],
+				"members": {
+					"DBSecurityGroupName": {},
+					"CIDRIP": {},
+					"EC2SecurityGroupName": {},
+					"EC2SecurityGroupId": {},
+					"EC2SecurityGroupOwnerId": {}
+				}
+			},
+			"output": {
+				"resultWrapper": "RevokeDBSecurityGroupIngressResult",
+				"type": "structure",
+				"members": {
+					"DBSecurityGroup": {
+						"shape": "Sd"
+					}
+				}
+			}
+		}
+	},
+	"shapes": {
+		"S4": {
+			"type": "structure",
+			"members": {
+				"CustomerAwsId": {},
+				"CustSubscriptionId": {},
+				"SnsTopicArn": {},
+				"Status": {},
+				"SubscriptionCreationTime": {},
+				"SourceType": {},
+				"SourceIdsList": {
+					"shape": "S5"
+				},
+				"EventCategoriesList": {
+					"shape": "S6"
+				},
+				"Enabled": {
+					"type": "boolean"
+				}
+			},
+			"wrapper": true
+		},
+		"S5": {
+			"type": "list",
+			"member": {
+				"locationName": "SourceId"
+			}
+		},
+		"S6": {
+			"type": "list",
+			"member": {
+				"locationName": "EventCategory"
+			}
+		},
+		"S9": {
+			"type": "list",
+			"member": {
+				"locationName": "Tag",
+				"type": "structure",
+				"members": {
+					"Key": {},
+					"Value": {}
+				}
+			}
+		},
+		"Sd": {
+			"type": "structure",
+			"members": {
+				"OwnerId": {},
+				"DBSecurityGroupName": {},
+				"DBSecurityGroupDescription": {},
+				"VpcId": {},
+				"EC2SecurityGroups": {
+					"type": "list",
+					"member": {
+						"locationName": "EC2SecurityGroup",
+						"type": "structure",
+						"members": {
+							"Status": {},
+							"EC2SecurityGroupName": {},
+							"EC2SecurityGroupId": {},
+							"EC2SecurityGroupOwnerId": {}
+						}
+					}
+				},
+				"IPRanges": {
+					"type": "list",
+					"member": {
+						"locationName": "IPRange",
+						"type": "structure",
+						"members": {
+							"Status": {},
+							"CIDRIP": {}
+						}
+					}
+				}
+			},
+			"wrapper": true
+		},
+		"Sk": {
+			"type": "structure",
+			"members": {
+				"DBParameterGroupName": {},
+				"DBParameterGroupFamily": {},
+				"Description": {}
+			},
+			"wrapper": true
+		},
+		"Sn": {
+			"type": "structure",
+			"members": {
+				"DBSnapshotIdentifier": {},
+				"DBInstanceIdentifier": {},
+				"SnapshotCreateTime": {
+					"type": "timestamp"
+				},
+				"Engine": {},
+				"AllocatedStorage": {
+					"type": "integer"
+				},
+				"Status": {},
+				"Port": {
+					"type": "integer"
+				},
+				"AvailabilityZone": {},
+				"VpcId": {},
+				"InstanceCreateTime": {
+					"type": "timestamp"
+				},
+				"MasterUsername": {},
+				"EngineVersion": {},
+				"LicenseModel": {},
+				"SnapshotType": {},
+				"Iops": {
+					"type": "integer"
+				},
+				"OptionGroupName": {},
+				"PercentProgress": {
+					"type": "integer"
+				},
+				"SourceRegion": {},
+				"StorageType": {},
+				"TdeCredentialArn": {}
+			},
+			"wrapper": true
+		},
+		"St": {
+			"type": "structure",
+			"members": {
+				"OptionGroupName": {},
+				"OptionGroupDescription": {},
+				"EngineName": {},
+				"MajorEngineVersion": {},
+				"Options": {
+					"type": "list",
+					"member": {
+						"locationName": "Option",
+						"type": "structure",
+						"members": {
+							"OptionName": {},
+							"OptionDescription": {},
+							"Persistent": {
+								"type": "boolean"
+							},
+							"Permanent": {
+								"type": "boolean"
+							},
+							"Port": {
+								"type": "integer"
+							},
+							"OptionSettings": {
+								"type": "list",
+								"member": {
+									"shape": "Sx",
+									"locationName": "OptionSetting"
+								}
+							},
+							"DBSecurityGroupMemberships": {
+								"shape": "Sy"
+							},
+							"VpcSecurityGroupMemberships": {
+								"shape": "S10"
+							}
+						}
+					}
+				},
+				"AllowsVpcAndNonVpcInstanceMemberships": {
+					"type": "boolean"
+				},
+				"VpcId": {}
+			},
+			"wrapper": true
+		},
+		"Sx": {
+			"type": "structure",
+			"members": {
+				"Name": {},
+				"Value": {},
+				"DefaultValue": {},
+				"Description": {},
+				"ApplyType": {},
+				"DataType": {},
+				"AllowedValues": {},
+				"IsModifiable": {
+					"type": "boolean"
+				},
+				"IsCollection": {
+					"type": "boolean"
+				}
+			}
+		},
+		"Sy": {
+			"type": "list",
+			"member": {
+				"locationName": "DBSecurityGroup",
+				"type": "structure",
+				"members": {
+					"DBSecurityGroupName": {},
+					"Status": {}
+				}
+			}
+		},
+		"S10": {
+			"type": "list",
+			"member": {
+				"locationName": "VpcSecurityGroupMembership",
+				"type": "structure",
+				"members": {
+					"VpcSecurityGroupId": {},
+					"Status": {}
+				}
+			}
+		},
+		"S13": {
+			"type": "list",
+			"member": {
+				"locationName": "DBSecurityGroupName"
+			}
+		},
+		"S14": {
+			"type": "list",
+			"member": {
+				"locationName": "VpcSecurityGroupId"
+			}
+		},
+		"S17": {
+			"type": "structure",
+			"members": {
+				"DBInstanceIdentifier": {},
+				"DBInstanceClass": {},
+				"Engine": {},
+				"DBInstanceStatus": {},
+				"MasterUsername": {},
+				"DBName": {},
+				"Endpoint": {
+					"type": "structure",
+					"members": {
+						"Address": {},
+						"Port": {
+							"type": "integer"
+						}
+					}
+				},
+				"AllocatedStorage": {
+					"type": "integer"
+				},
+				"InstanceCreateTime": {
+					"type": "timestamp"
+				},
+				"PreferredBackupWindow": {},
+				"BackupRetentionPeriod": {
+					"type": "integer"
+				},
+				"DBSecurityGroups": {
+					"shape": "Sy"
+				},
+				"VpcSecurityGroups": {
+					"shape": "S10"
+				},
+				"DBParameterGroups": {
+					"type": "list",
+					"member": {
+						"locationName": "DBParameterGroup",
+						"type": "structure",
+						"members": {
+							"DBParameterGroupName": {},
+							"ParameterApplyStatus": {}
+						}
+					}
+				},
+				"AvailabilityZone": {},
+				"DBSubnetGroup": {
+					"shape": "S1b"
+				},
+				"PreferredMaintenanceWindow": {},
+				"PendingModifiedValues": {
+					"type": "structure",
+					"members": {
+						"DBInstanceClass": {},
+						"AllocatedStorage": {
+							"type": "integer"
+						},
+						"MasterUserPassword": {},
+						"Port": {
+							"type": "integer"
+						},
+						"BackupRetentionPeriod": {
+							"type": "integer"
+						},
+						"MultiAZ": {
+							"type": "boolean"
+						},
+						"EngineVersion": {},
+						"Iops": {
+							"type": "integer"
+						},
+						"DBInstanceIdentifier": {},
+						"StorageType": {}
+					}
+				},
+				"LatestRestorableTime": {
+					"type": "timestamp"
+				},
+				"MultiAZ": {
+					"type": "boolean"
+				},
+				"EngineVersion": {},
+				"AutoMinorVersionUpgrade": {
+					"type": "boolean"
+				},
+				"ReadReplicaSourceDBInstanceIdentifier": {},
+				"ReadReplicaDBInstanceIdentifiers": {
+					"type": "list",
+					"member": {
+						"locationName": "ReadReplicaDBInstanceIdentifier"
+					}
+				},
+				"LicenseModel": {},
+				"Iops": {
+					"type": "integer"
+				},
+				"OptionGroupMemberships": {
+					"type": "list",
+					"member": {
+						"locationName": "OptionGroupMembership",
+						"type": "structure",
+						"members": {
+							"OptionGroupName": {},
+							"Status": {}
+						}
+					}
+				},
+				"CharacterSetName": {},
+				"SecondaryAvailabilityZone": {},
+				"PubliclyAccessible": {
+					"type": "boolean"
+				},
+				"StatusInfos": {
+					"type": "list",
+					"member": {
+						"locationName": "DBInstanceStatusInfo",
+						"type": "structure",
+						"members": {
+							"StatusType": {},
+							"Normal": {
+								"type": "boolean"
+							},
+							"Status": {},
+							"Message": {}
+						}
+					}
+				},
+				"StorageType": {},
+				"TdeCredentialArn": {}
+			},
+			"wrapper": true
+		},
+		"S1b": {
+			"type": "structure",
+			"members": {
+				"DBSubnetGroupName": {},
+				"DBSubnetGroupDescription": {},
+				"VpcId": {},
+				"SubnetGroupStatus": {},
+				"Subnets": {
+					"type": "list",
+					"member": {
+						"locationName": "Subnet",
+						"type": "structure",
+						"members": {
+							"SubnetIdentifier": {},
+							"SubnetAvailabilityZone": {
+								"shape": "S1e"
+							},
+							"SubnetStatus": {}
+						}
+					}
+				}
+			},
+			"wrapper": true
+		},
+		"S1e": {
+			"type": "structure",
+			"members": {
+				"Name": {}
+			},
+			"wrapper": true
+		},
+		"S1u": {
+			"type": "list",
+			"member": {
+				"locationName": "SubnetIdentifier"
+			}
+		},
+		"S2b": {
+			"type": "list",
+			"member": {
+				"locationName": "Filter",
+				"type": "structure",
+				"required": [
+					"Name",
+					"Values"
+				],
+				"members": {
+					"Name": {},
+					"Values": {
+						"type": "list",
+						"member": {
+							"locationName": "Value"
+						}
+					}
+				}
+			}
+		},
+		"S2h": {
+			"type": "structure",
+			"members": {
+				"CharacterSetName": {},
+				"CharacterSetDescription": {}
+			}
+		},
+		"S2w": {
+			"type": "list",
+			"member": {
+				"locationName": "Parameter",
+				"type": "structure",
+				"members": {
+					"ParameterName": {},
+					"ParameterValue": {},
+					"Description": {},
+					"Source": {},
+					"ApplyType": {},
+					"DataType": {},
+					"AllowedValues": {},
+					"IsModifiable": {
+						"type": "boolean"
+					},
+					"MinimumEngineVersion": {},
+					"ApplyMethod": {}
+				}
+			}
+		},
+		"S45": {
+			"type": "structure",
+			"members": {
+				"ReservedDBInstanceId": {},
+				"ReservedDBInstancesOfferingId": {},
+				"DBInstanceClass": {},
+				"StartTime": {
+					"type": "timestamp"
+				},
+				"Duration": {
+					"type": "integer"
+				},
+				"FixedPrice": {
+					"type": "double"
+				},
+				"UsagePrice": {
+					"type": "double"
+				},
+				"CurrencyCode": {},
+				"DBInstanceCount": {
+					"type": "integer"
+				},
+				"ProductDescription": {},
+				"OfferingType": {},
+				"MultiAZ": {
+					"type": "boolean"
+				},
+				"State": {},
+				"RecurringCharges": {
+					"shape": "S47"
+				}
+			},
+			"wrapper": true
+		},
+		"S47": {
+			"type": "list",
+			"member": {
+				"locationName": "RecurringCharge",
+				"type": "structure",
+				"members": {
+					"RecurringChargeAmount": {
+						"type": "double"
+					},
+					"RecurringChargeFrequency": {}
+				},
+				"wrapper": true
+			}
+		},
+		"S4k": {
+			"type": "structure",
+			"members": {
+				"DBParameterGroupName": {}
+			}
+		}
+	}
+};
+
+/***/ }),
+/* 317 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"pagination": {}
+};
+
+/***/ }),
+/* 318 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"version": "2.0",
+	"metadata": {
 		"apiVersion": "2014-10-31",
 		"endpointPrefix": "rds",
 		"protocol": "query",
@@ -118177,6 +120434,9 @@ module.exports = {
 					},
 					"KmsKeyId": {},
 					"PreSignedUrl": {},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
+					},
 					"SourceRegion": {}
 				}
 			},
@@ -118316,7 +120576,10 @@ module.exports = {
 					"PromotionTier": {
 						"type": "integer"
 					},
-					"Timezone": {}
+					"Timezone": {},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
+					}
 				}
 			},
 			"output": {
@@ -118368,6 +120631,9 @@ module.exports = {
 					"MonitoringRoleArn": {},
 					"KmsKeyId": {},
 					"PreSignedUrl": {},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
+					},
 					"SourceRegion": {}
 				}
 			},
@@ -119619,6 +121885,9 @@ module.exports = {
 								},
 								"SupportsEnhancedMonitoring": {
 									"type": "boolean"
+								},
+								"SupportsIAMDatabaseAuthentication": {
+									"type": "boolean"
 								}
 							},
 							"wrapper": true
@@ -119881,7 +122150,10 @@ module.exports = {
 					"MasterUserPassword": {},
 					"OptionGroupName": {},
 					"PreferredBackupWindow": {},
-					"PreferredMaintenanceWindow": {}
+					"PreferredMaintenanceWindow": {},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
+					}
 				}
 			},
 			"output": {
@@ -120007,6 +122279,9 @@ module.exports = {
 					"DomainIAMRoleName": {},
 					"PromotionTier": {
 						"type": "integer"
+					},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
 					}
 				}
 			},
@@ -120430,6 +122705,9 @@ module.exports = {
 						"type": "boolean"
 					},
 					"KmsKeyId": {},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
+					},
 					"SourceEngine": {},
 					"SourceEngineVersion": {},
 					"S3BucketName": {},
@@ -120475,7 +122753,10 @@ module.exports = {
 					"Tags": {
 						"shape": "Sa"
 					},
-					"KmsKeyId": {}
+					"KmsKeyId": {},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
+					}
 				}
 			},
 			"output": {
@@ -120515,7 +122796,10 @@ module.exports = {
 					"Tags": {
 						"shape": "Sa"
 					},
-					"KmsKeyId": {}
+					"KmsKeyId": {},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
+					}
 				}
 			},
 			"output": {
@@ -120570,7 +122854,10 @@ module.exports = {
 					"CopyTagsToSnapshot": {
 						"type": "boolean"
 					},
-					"DomainIAMRoleName": {}
+					"DomainIAMRoleName": {},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
+					}
 				}
 			},
 			"output": {
@@ -120631,7 +122918,10 @@ module.exports = {
 					"TdeCredentialArn": {},
 					"TdeCredentialPassword": {},
 					"Domain": {},
-					"DomainIAMRoleName": {}
+					"DomainIAMRoleName": {},
+					"EnableIAMDatabaseAuthentication": {
+						"type": "boolean"
+					}
 				}
 			},
 			"output": {
@@ -120822,7 +123112,10 @@ module.exports = {
 					"type": "boolean"
 				},
 				"KmsKeyId": {},
-				"DBClusterSnapshotArn": {}
+				"DBClusterSnapshotArn": {},
+				"IAMDatabaseAuthenticationEnabled": {
+					"type": "boolean"
+				}
 			},
 			"wrapper": true
 		},
@@ -120883,7 +123176,10 @@ module.exports = {
 				},
 				"KmsKeyId": {},
 				"DBSnapshotArn": {},
-				"Timezone": {}
+				"Timezone": {},
+				"IAMDatabaseAuthenticationEnabled": {
+					"type": "boolean"
+				}
 			},
 			"wrapper": true
 		},
@@ -121077,6 +123373,9 @@ module.exports = {
 						}
 					}
 				},
+				"IAMDatabaseAuthenticationEnabled": {
+					"type": "boolean"
+				},
 				"ClusterCreateTime": {
 					"type": "timestamp"
 				}
@@ -121263,7 +123562,10 @@ module.exports = {
 					"type": "integer"
 				},
 				"DBInstanceArn": {},
-				"Timezone": {}
+				"Timezone": {},
+				"IAMDatabaseAuthenticationEnabled": {
+					"type": "boolean"
+				}
 			},
 			"wrapper": true
 		},
@@ -121476,7 +123778,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 317 */
+/* 319 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -121591,7 +123893,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 318 */
+/* 320 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -121686,7 +123988,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 319 */
+/* 321 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -124039,7 +126341,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 320 */
+/* 322 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -124138,7 +126440,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 321 */
+/* 323 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -124240,7 +126542,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 322 */
+/* 324 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -124860,7 +127162,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 323 */
+/* 325 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -124881,7 +127183,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 324 */
+/* 326 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -125074,7 +127376,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 325 */
+/* 327 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -125082,7 +127384,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 326 */
+/* 328 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -127367,7 +129669,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 327 */
+/* 329 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -127405,7 +129707,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 328 */
+/* 330 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -127428,7 +129730,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 329 */
+/* 331 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -128181,7 +130483,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 330 */
+/* 332 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -128202,7 +130504,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 331 */
+/* 333 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -128403,7 +130705,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 332 */
+/* 334 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -128411,7 +130713,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 333 */
+/* 335 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -132922,7 +135224,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 334 */
+/* 336 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -132993,7 +135295,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 335 */
+/* 337 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -133071,7 +135373,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 336 */
+/* 338 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -133412,7 +135714,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 337 */
+/* 339 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -133432,7 +135734,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 338 */
+/* 340 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -134830,7 +137132,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 339 */
+/* 341 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -135136,7 +137438,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 340 */
+/* 342 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -135479,7 +137781,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 341 */
+/* 343 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -135512,7 +137814,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 342 */
+/* 344 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -136085,7 +138387,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 343 */
+/* 345 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -136106,7 +138408,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 344 */
+/* 346 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -136734,7 +139036,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 345 */
+/* 347 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -136768,7 +139070,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 346 */
+/* 348 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -137371,7 +139673,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 347 */
+/* 349 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -137383,7 +139685,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 348 */
+/* 350 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -140566,7 +142868,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 349 */
+/* 351 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -140611,7 +142913,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 350 */
+/* 352 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -141254,7 +143556,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 351 */
+/* 353 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -141287,7 +143589,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 352 */
+/* 354 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -142992,7 +145294,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 353 */
+/* 355 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -143049,7 +145351,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 354 */
+/* 356 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -143300,7 +145602,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 355 */
+/* 357 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -143308,7 +145610,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 356 */
+/* 358 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -143563,7 +145865,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 357 */
+/* 359 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -144138,7 +146440,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 358 */
+/* 360 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -144168,7 +146470,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 359 */
+/* 361 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -146391,7 +148693,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 360 */
+/* 362 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -146442,7 +148744,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 361 */
+/* 363 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -147730,7 +150032,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 362 */
+/* 364 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -147738,7 +150040,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 363 */
+/* 365 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -149100,7 +151402,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 364 */
+/* 366 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -149108,7 +151410,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 365 */
+/* 367 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -150231,7 +152533,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 366 */
+/* 368 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -150261,7 +152563,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 367 */
+/* 369 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -150805,7 +153107,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 368 */
+/* 370 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -150830,7 +153132,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 369 */
+/* 371 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -151343,7 +153645,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 370 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151367,115 +153669,115 @@ module.exports = AWS.ACM;
 
 
 /***/ }),
-/* 371 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
 var AWS = __webpack_require__(0);
 
 module.exports = {
-  ACM: __webpack_require__(370),
-  APIGateway: __webpack_require__(372),
-  ApplicationAutoScaling: __webpack_require__(373),
-  AppStream: __webpack_require__(374),
-  AutoScaling: __webpack_require__(375),
-  Batch: __webpack_require__(376),
-  Budgets: __webpack_require__(377),
-  CloudDirectory: __webpack_require__(378),
-  CloudFormation: __webpack_require__(379),
-  CloudFront: __webpack_require__(380),
-  CloudHSM: __webpack_require__(381),
-  CloudSearch: __webpack_require__(382),
-  CloudSearchDomain: __webpack_require__(383),
-  CloudTrail: __webpack_require__(384),
-  CloudWatch: __webpack_require__(385),
-  CloudWatchEvents: __webpack_require__(386),
-  CloudWatchLogs: __webpack_require__(387),
-  CodeBuild: __webpack_require__(388),
-  CodeCommit: __webpack_require__(389),
-  CodeDeploy: __webpack_require__(390),
-  CodePipeline: __webpack_require__(391),
+  ACM: __webpack_require__(372),
+  APIGateway: __webpack_require__(374),
+  ApplicationAutoScaling: __webpack_require__(375),
+  AppStream: __webpack_require__(376),
+  AutoScaling: __webpack_require__(377),
+  Batch: __webpack_require__(378),
+  Budgets: __webpack_require__(379),
+  CloudDirectory: __webpack_require__(380),
+  CloudFormation: __webpack_require__(381),
+  CloudFront: __webpack_require__(382),
+  CloudHSM: __webpack_require__(383),
+  CloudSearch: __webpack_require__(384),
+  CloudSearchDomain: __webpack_require__(385),
+  CloudTrail: __webpack_require__(386),
+  CloudWatch: __webpack_require__(387),
+  CloudWatchEvents: __webpack_require__(388),
+  CloudWatchLogs: __webpack_require__(389),
+  CodeBuild: __webpack_require__(390),
+  CodeCommit: __webpack_require__(391),
+  CodeDeploy: __webpack_require__(392),
+  CodePipeline: __webpack_require__(393),
   CognitoIdentity: __webpack_require__(78),
-  CognitoIdentityServiceProvider: __webpack_require__(393),
-  CognitoSync: __webpack_require__(394),
-  ConfigService: __webpack_require__(395),
-  CUR: __webpack_require__(396),
-  DataPipeline: __webpack_require__(397),
-  DeviceFarm: __webpack_require__(398),
-  DirectConnect: __webpack_require__(399),
-  DirectoryService: __webpack_require__(400),
-  Discovery: __webpack_require__(401),
-  DMS: __webpack_require__(402),
-  DynamoDB: __webpack_require__(403),
-  DynamoDBStreams: __webpack_require__(404),
-  EC2: __webpack_require__(405),
-  ECR: __webpack_require__(406),
-  ECS: __webpack_require__(407),
-  EFS: __webpack_require__(408),
-  ElastiCache: __webpack_require__(409),
-  ElasticBeanstalk: __webpack_require__(410),
-  ELB: __webpack_require__(412),
-  ELBv2: __webpack_require__(413),
-  EMR: __webpack_require__(414),
-  ES: __webpack_require__(415),
-  ElasticTranscoder: __webpack_require__(411),
-  Firehose: __webpack_require__(416),
-  GameLift: __webpack_require__(417),
-  Glacier: __webpack_require__(418),
-  Health: __webpack_require__(419),
-  IAM: __webpack_require__(420),
-  ImportExport: __webpack_require__(421),
-  Inspector: __webpack_require__(422),
-  Iot: __webpack_require__(423),
-  IotData: __webpack_require__(424),
-  Kinesis: __webpack_require__(425),
-  KinesisAnalytics: __webpack_require__(426),
-  KMS: __webpack_require__(427),
-  Lambda: __webpack_require__(428),
-  LexRuntime: __webpack_require__(430),
-  Lightsail: __webpack_require__(431),
-  MachineLearning: __webpack_require__(432),
-  MarketplaceCommerceAnalytics: __webpack_require__(433),
-  MarketplaceMetering: __webpack_require__(434),
-  MTurk: __webpack_require__(436),
-  MobileAnalytics: __webpack_require__(435),
-  OpsWorks: __webpack_require__(437),
-  OpsWorksCM: __webpack_require__(438),
-  Organizations: __webpack_require__(439),
-  Pinpoint: __webpack_require__(440),
-  Polly: __webpack_require__(441),
-  RDS: __webpack_require__(442),
-  Redshift: __webpack_require__(443),
-  Rekognition: __webpack_require__(444),
-  ResourceGroupsTaggingAPI: __webpack_require__(445),
-  Route53: __webpack_require__(446),
-  Route53Domains: __webpack_require__(447),
-  S3: __webpack_require__(448),
-  ServiceCatalog: __webpack_require__(449),
-  SES: __webpack_require__(450),
-  Shield: __webpack_require__(451),
-  SimpleDB: __webpack_require__(452),
-  SMS: __webpack_require__(453),
-  Snowball: __webpack_require__(454),
-  SNS: __webpack_require__(455),
-  SQS: __webpack_require__(456),
-  SSM: __webpack_require__(457),
-  StorageGateway: __webpack_require__(459),
-  StepFunctions: __webpack_require__(458),
+  CognitoIdentityServiceProvider: __webpack_require__(395),
+  CognitoSync: __webpack_require__(396),
+  ConfigService: __webpack_require__(397),
+  CUR: __webpack_require__(398),
+  DataPipeline: __webpack_require__(399),
+  DeviceFarm: __webpack_require__(400),
+  DirectConnect: __webpack_require__(401),
+  DirectoryService: __webpack_require__(402),
+  Discovery: __webpack_require__(403),
+  DMS: __webpack_require__(404),
+  DynamoDB: __webpack_require__(405),
+  DynamoDBStreams: __webpack_require__(406),
+  EC2: __webpack_require__(407),
+  ECR: __webpack_require__(408),
+  ECS: __webpack_require__(409),
+  EFS: __webpack_require__(410),
+  ElastiCache: __webpack_require__(411),
+  ElasticBeanstalk: __webpack_require__(412),
+  ELB: __webpack_require__(414),
+  ELBv2: __webpack_require__(415),
+  EMR: __webpack_require__(416),
+  ES: __webpack_require__(417),
+  ElasticTranscoder: __webpack_require__(413),
+  Firehose: __webpack_require__(418),
+  GameLift: __webpack_require__(419),
+  Glacier: __webpack_require__(420),
+  Health: __webpack_require__(421),
+  IAM: __webpack_require__(422),
+  ImportExport: __webpack_require__(423),
+  Inspector: __webpack_require__(424),
+  Iot: __webpack_require__(425),
+  IotData: __webpack_require__(426),
+  Kinesis: __webpack_require__(427),
+  KinesisAnalytics: __webpack_require__(428),
+  KMS: __webpack_require__(429),
+  Lambda: __webpack_require__(430),
+  LexRuntime: __webpack_require__(432),
+  Lightsail: __webpack_require__(433),
+  MachineLearning: __webpack_require__(434),
+  MarketplaceCommerceAnalytics: __webpack_require__(435),
+  MarketplaceMetering: __webpack_require__(436),
+  MTurk: __webpack_require__(438),
+  MobileAnalytics: __webpack_require__(437),
+  OpsWorks: __webpack_require__(439),
+  OpsWorksCM: __webpack_require__(440),
+  Organizations: __webpack_require__(441),
+  Pinpoint: __webpack_require__(442),
+  Polly: __webpack_require__(443),
+  RDS: __webpack_require__(444),
+  Redshift: __webpack_require__(445),
+  Rekognition: __webpack_require__(446),
+  ResourceGroupsTaggingAPI: __webpack_require__(447),
+  Route53: __webpack_require__(448),
+  Route53Domains: __webpack_require__(449),
+  S3: __webpack_require__(450),
+  ServiceCatalog: __webpack_require__(451),
+  SES: __webpack_require__(452),
+  Shield: __webpack_require__(453),
+  SimpleDB: __webpack_require__(454),
+  SMS: __webpack_require__(455),
+  Snowball: __webpack_require__(456),
+  SNS: __webpack_require__(457),
+  SQS: __webpack_require__(458),
+  SSM: __webpack_require__(459),
+  StorageGateway: __webpack_require__(461),
+  StepFunctions: __webpack_require__(460),
   STS: __webpack_require__(24),
-  Support: __webpack_require__(460),
-  SWF: __webpack_require__(461),
-  XRay: __webpack_require__(466),
-  WAF: __webpack_require__(462),
-  WAFRegional: __webpack_require__(463),
-  WorkDocs: __webpack_require__(464),
-  WorkSpaces: __webpack_require__(465),
-  CodeStar: __webpack_require__(392),
-  LexModelBuildingService: __webpack_require__(429)
+  Support: __webpack_require__(462),
+  SWF: __webpack_require__(463),
+  XRay: __webpack_require__(468),
+  WAF: __webpack_require__(464),
+  WAFRegional: __webpack_require__(465),
+  WorkDocs: __webpack_require__(466),
+  WorkSpaces: __webpack_require__(467),
+  CodeStar: __webpack_require__(394),
+  LexModelBuildingService: __webpack_require__(431)
 };
 
 /***/ }),
-/* 372 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151485,7 +153787,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['apigateway'] = {};
 AWS.APIGateway = Service.defineService('apigateway', ['2015-07-09']);
-__webpack_require__(487);
+__webpack_require__(490);
 Object.defineProperty(apiLoader.services['apigateway'], '2015-07-09', {
   get: function get() {
     var model = __webpack_require__(156);
@@ -151500,7 +153802,7 @@ module.exports = AWS.APIGateway;
 
 
 /***/ }),
-/* 373 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151524,7 +153826,7 @@ module.exports = AWS.ApplicationAutoScaling;
 
 
 /***/ }),
-/* 374 */
+/* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151549,7 +153851,7 @@ module.exports = AWS.AppStream;
 
 
 /***/ }),
-/* 375 */
+/* 377 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151573,7 +153875,7 @@ module.exports = AWS.AutoScaling;
 
 
 /***/ }),
-/* 376 */
+/* 378 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151597,7 +153899,7 @@ module.exports = AWS.Batch;
 
 
 /***/ }),
-/* 377 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151621,7 +153923,7 @@ module.exports = AWS.Budgets;
 
 
 /***/ }),
-/* 378 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151645,7 +153947,7 @@ module.exports = AWS.CloudDirectory;
 
 
 /***/ }),
-/* 379 */
+/* 381 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151670,7 +153972,7 @@ module.exports = AWS.CloudFormation;
 
 
 /***/ }),
-/* 380 */
+/* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151680,7 +153982,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['cloudfront'] = {};
 AWS.CloudFront = Service.defineService('cloudfront', ['2013-05-12*', '2013-11-11*', '2014-05-31*', '2014-10-21*', '2014-11-06*', '2015-04-17*', '2015-07-27*', '2015-09-17*', '2016-01-13*', '2016-01-28*', '2016-08-01*', '2016-08-20*', '2016-09-07*', '2016-09-29*', '2016-11-25', '2016-11-25*', '2017-03-25']);
-__webpack_require__(488);
+__webpack_require__(491);
 Object.defineProperty(apiLoader.services['cloudfront'], '2016-11-25', {
   get: function get() {
     var model = __webpack_require__(174);
@@ -151706,7 +154008,7 @@ module.exports = AWS.CloudFront;
 
 
 /***/ }),
-/* 381 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151729,7 +154031,7 @@ module.exports = AWS.CloudHSM;
 
 
 /***/ }),
-/* 382 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151762,7 +154064,7 @@ module.exports = AWS.CloudSearch;
 
 
 /***/ }),
-/* 383 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151772,7 +154074,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['cloudsearchdomain'] = {};
 AWS.CloudSearchDomain = Service.defineService('cloudsearchdomain', ['2013-01-01']);
-__webpack_require__(489);
+__webpack_require__(492);
 Object.defineProperty(apiLoader.services['cloudsearchdomain'], '2013-01-01', {
   get: function get() {
     var model = __webpack_require__(185);
@@ -151786,7 +154088,7 @@ module.exports = AWS.CloudSearchDomain;
 
 
 /***/ }),
-/* 384 */
+/* 386 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151810,7 +154112,7 @@ module.exports = AWS.CloudTrail;
 
 
 /***/ }),
-/* 385 */
+/* 387 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151835,7 +154137,7 @@ module.exports = AWS.CloudWatch;
 
 
 /***/ }),
-/* 386 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151859,7 +154161,7 @@ module.exports = AWS.CloudWatchEvents;
 
 
 /***/ }),
-/* 387 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151883,7 +154185,7 @@ module.exports = AWS.CloudWatchLogs;
 
 
 /***/ }),
-/* 388 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151907,7 +154209,7 @@ module.exports = AWS.CodeBuild;
 
 
 /***/ }),
-/* 389 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151931,7 +154233,7 @@ module.exports = AWS.CodeCommit;
 
 
 /***/ }),
-/* 390 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151956,7 +154258,7 @@ module.exports = AWS.CodeDeploy;
 
 
 /***/ }),
-/* 391 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -151979,7 +154281,7 @@ module.exports = AWS.CodePipeline;
 
 
 /***/ }),
-/* 392 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152003,7 +154305,7 @@ module.exports = AWS.CodeStar;
 
 
 /***/ }),
-/* 393 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152026,7 +154328,7 @@ module.exports = AWS.CognitoIdentityServiceProvider;
 
 
 /***/ }),
-/* 394 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152049,7 +154351,7 @@ module.exports = AWS.CognitoSync;
 
 
 /***/ }),
-/* 395 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152073,7 +154375,7 @@ module.exports = AWS.ConfigService;
 
 
 /***/ }),
-/* 396 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152097,7 +154399,7 @@ module.exports = AWS.CUR;
 
 
 /***/ }),
-/* 397 */
+/* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152121,7 +154423,7 @@ module.exports = AWS.DataPipeline;
 
 
 /***/ }),
-/* 398 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152145,7 +154447,7 @@ module.exports = AWS.DeviceFarm;
 
 
 /***/ }),
-/* 399 */
+/* 401 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152169,7 +154471,7 @@ module.exports = AWS.DirectConnect;
 
 
 /***/ }),
-/* 400 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152192,7 +154494,7 @@ module.exports = AWS.DirectoryService;
 
 
 /***/ }),
-/* 401 */
+/* 403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152216,7 +154518,7 @@ module.exports = AWS.Discovery;
 
 
 /***/ }),
-/* 402 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152239,7 +154541,7 @@ module.exports = AWS.DMS;
 
 
 /***/ }),
-/* 403 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152249,7 +154551,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['dynamodb'] = {};
 AWS.DynamoDB = Service.defineService('dynamodb', ['2011-12-05', '2012-08-10']);
-__webpack_require__(491);
+__webpack_require__(494);
 Object.defineProperty(apiLoader.services['dynamodb'], '2011-12-05', {
   get: function get() {
     var model = __webpack_require__(216);
@@ -152275,7 +154577,7 @@ module.exports = AWS.DynamoDB;
 
 
 /***/ }),
-/* 404 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152287,8 +154589,8 @@ apiLoader.services['dynamodbstreams'] = {};
 AWS.DynamoDBStreams = Service.defineService('dynamodbstreams', ['2012-08-10']);
 Object.defineProperty(apiLoader.services['dynamodbstreams'], '2012-08-10', {
   get: function get() {
-    var model = __webpack_require__(354);
-    model.paginators = __webpack_require__(355).pagination;
+    var model = __webpack_require__(356);
+    model.paginators = __webpack_require__(357).pagination;
     return model;
   },
   enumerable: true,
@@ -152299,7 +154601,7 @@ module.exports = AWS.DynamoDBStreams;
 
 
 /***/ }),
-/* 405 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152309,7 +154611,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['ec2'] = {};
 AWS.EC2 = Service.defineService('ec2', ['2013-06-15*', '2013-10-15*', '2014-02-01*', '2014-05-01*', '2014-06-15*', '2014-09-01*', '2014-10-01*', '2015-03-01*', '2015-04-15*', '2015-10-01*', '2016-04-01*', '2016-09-15*', '2016-11-15']);
-__webpack_require__(492);
+__webpack_require__(495);
 Object.defineProperty(apiLoader.services['ec2'], '2016-11-15', {
   get: function get() {
     var model = __webpack_require__(222);
@@ -152325,7 +154627,7 @@ module.exports = AWS.EC2;
 
 
 /***/ }),
-/* 406 */
+/* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152349,7 +154651,7 @@ module.exports = AWS.ECR;
 
 
 /***/ }),
-/* 407 */
+/* 409 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152374,7 +154676,7 @@ module.exports = AWS.ECS;
 
 
 /***/ }),
-/* 408 */
+/* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152397,7 +154699,7 @@ module.exports = AWS.EFS;
 
 
 /***/ }),
-/* 409 */
+/* 411 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152422,7 +154724,7 @@ module.exports = AWS.ElastiCache;
 
 
 /***/ }),
-/* 410 */
+/* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152446,7 +154748,7 @@ module.exports = AWS.ElasticBeanstalk;
 
 
 /***/ }),
-/* 411 */
+/* 413 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152471,7 +154773,7 @@ module.exports = AWS.ElasticTranscoder;
 
 
 /***/ }),
-/* 412 */
+/* 414 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152496,7 +154798,7 @@ module.exports = AWS.ELB;
 
 
 /***/ }),
-/* 413 */
+/* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152521,7 +154823,7 @@ module.exports = AWS.ELBv2;
 
 
 /***/ }),
-/* 414 */
+/* 416 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152546,7 +154848,7 @@ module.exports = AWS.EMR;
 
 
 /***/ }),
-/* 415 */
+/* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152570,7 +154872,7 @@ module.exports = AWS.ES;
 
 
 /***/ }),
-/* 416 */
+/* 418 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152593,7 +154895,7 @@ module.exports = AWS.Firehose;
 
 
 /***/ }),
-/* 417 */
+/* 419 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152617,7 +154919,7 @@ module.exports = AWS.GameLift;
 
 
 /***/ }),
-/* 418 */
+/* 420 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152627,7 +154929,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['glacier'] = {};
 AWS.Glacier = Service.defineService('glacier', ['2012-06-01']);
-__webpack_require__(493);
+__webpack_require__(496);
 Object.defineProperty(apiLoader.services['glacier'], '2012-06-01', {
   get: function get() {
     var model = __webpack_require__(258);
@@ -152643,7 +154945,7 @@ module.exports = AWS.Glacier;
 
 
 /***/ }),
-/* 419 */
+/* 421 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152667,7 +154969,7 @@ module.exports = AWS.Health;
 
 
 /***/ }),
-/* 420 */
+/* 422 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152692,7 +154994,7 @@ module.exports = AWS.IAM;
 
 
 /***/ }),
-/* 421 */
+/* 423 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152716,7 +155018,7 @@ module.exports = AWS.ImportExport;
 
 
 /***/ }),
-/* 422 */
+/* 424 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152739,7 +155041,7 @@ module.exports = AWS.Inspector;
 
 
 /***/ }),
-/* 423 */
+/* 425 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152762,7 +155064,7 @@ module.exports = AWS.Iot;
 
 
 /***/ }),
-/* 424 */
+/* 426 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152772,7 +155074,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['iotdata'] = {};
 AWS.IotData = Service.defineService('iotdata', ['2015-05-28']);
-__webpack_require__(494);
+__webpack_require__(497);
 Object.defineProperty(apiLoader.services['iotdata'], '2015-05-28', {
   get: function get() {
     var model = __webpack_require__(270);
@@ -152786,7 +155088,7 @@ module.exports = AWS.IotData;
 
 
 /***/ }),
-/* 425 */
+/* 427 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152811,7 +155113,7 @@ module.exports = AWS.Kinesis;
 
 
 /***/ }),
-/* 426 */
+/* 428 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152834,7 +155136,7 @@ module.exports = AWS.KinesisAnalytics;
 
 
 /***/ }),
-/* 427 */
+/* 429 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152858,7 +155160,7 @@ module.exports = AWS.KMS;
 
 
 /***/ }),
-/* 428 */
+/* 430 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152868,7 +155170,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['lambda'] = {};
 AWS.Lambda = Service.defineService('lambda', ['2014-11-11', '2015-03-31']);
-__webpack_require__(495);
+__webpack_require__(498);
 Object.defineProperty(apiLoader.services['lambda'], '2014-11-11', {
   get: function get() {
     var model = __webpack_require__(277);
@@ -152892,7 +155194,7 @@ module.exports = AWS.Lambda;
 
 
 /***/ }),
-/* 429 */
+/* 431 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152916,7 +155218,7 @@ module.exports = AWS.LexModelBuildingService;
 
 
 /***/ }),
-/* 430 */
+/* 432 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152928,8 +155230,8 @@ apiLoader.services['lexruntime'] = {};
 AWS.LexRuntime = Service.defineService('lexruntime', ['2016-11-28']);
 Object.defineProperty(apiLoader.services['lexruntime'], '2016-11-28', {
   get: function get() {
-    var model = __webpack_require__(331);
-    model.paginators = __webpack_require__(332).pagination;
+    var model = __webpack_require__(333);
+    model.paginators = __webpack_require__(334).pagination;
     return model;
   },
   enumerable: true,
@@ -152940,7 +155242,7 @@ module.exports = AWS.LexRuntime;
 
 
 /***/ }),
-/* 431 */
+/* 433 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152963,7 +155265,7 @@ module.exports = AWS.Lightsail;
 
 
 /***/ }),
-/* 432 */
+/* 434 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -152973,7 +155275,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['machinelearning'] = {};
 AWS.MachineLearning = Service.defineService('machinelearning', ['2014-12-12']);
-__webpack_require__(496);
+__webpack_require__(499);
 Object.defineProperty(apiLoader.services['machinelearning'], '2014-12-12', {
   get: function get() {
     var model = __webpack_require__(286);
@@ -152989,7 +155291,7 @@ module.exports = AWS.MachineLearning;
 
 
 /***/ }),
-/* 433 */
+/* 435 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153013,7 +155315,7 @@ module.exports = AWS.MarketplaceCommerceAnalytics;
 
 
 /***/ }),
-/* 434 */
+/* 436 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153036,7 +155338,7 @@ module.exports = AWS.MarketplaceMetering;
 
 
 /***/ }),
-/* 435 */
+/* 437 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153059,7 +155361,7 @@ module.exports = AWS.MobileAnalytics;
 
 
 /***/ }),
-/* 436 */
+/* 438 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153083,7 +155385,7 @@ module.exports = AWS.MTurk;
 
 
 /***/ }),
-/* 437 */
+/* 439 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153108,7 +155410,7 @@ module.exports = AWS.OpsWorks;
 
 
 /***/ }),
-/* 438 */
+/* 440 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153132,7 +155434,7 @@ module.exports = AWS.OpsWorksCM;
 
 
 /***/ }),
-/* 439 */
+/* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153156,7 +155458,7 @@ module.exports = AWS.Organizations;
 
 
 /***/ }),
-/* 440 */
+/* 442 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153179,7 +155481,7 @@ module.exports = AWS.Pinpoint;
 
 
 /***/ }),
-/* 441 */
+/* 443 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153189,7 +155491,7 @@ var apiLoader = __webpack_require__(2);
 
 apiLoader.services['polly'] = {};
 AWS.Polly = Service.defineService('polly', ['2016-06-10']);
-__webpack_require__(497);
+__webpack_require__(500);
 Object.defineProperty(apiLoader.services['polly'], '2016-06-10', {
   get: function get() {
     var model = __webpack_require__(307);
@@ -153204,7 +155506,7 @@ module.exports = AWS.Polly;
 
 
 /***/ }),
-/* 442 */
+/* 444 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153213,8 +155515,8 @@ var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
 apiLoader.services['rds'] = {};
-AWS.RDS = Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-09-09', '2014-09-01*', '2014-10-31']);
-__webpack_require__(498);
+AWS.RDS = Service.defineService('rds', ['2013-01-10', '2013-02-12', '2013-09-09', '2014-09-01', '2014-09-01*', '2014-10-31']);
+__webpack_require__(501);
 Object.defineProperty(apiLoader.services['rds'], '2013-01-10', {
   get: function get() {
     var model = __webpack_require__(309);
@@ -153243,11 +155545,20 @@ Object.defineProperty(apiLoader.services['rds'], '2013-09-09', {
   enumerable: true,
   configurable: true
 });
-Object.defineProperty(apiLoader.services['rds'], '2014-10-31', {
+Object.defineProperty(apiLoader.services['rds'], '2014-09-01', {
   get: function get() {
     var model = __webpack_require__(316);
     model.paginators = __webpack_require__(317).pagination;
-    model.waiters = __webpack_require__(318).waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+Object.defineProperty(apiLoader.services['rds'], '2014-10-31', {
+  get: function get() {
+    var model = __webpack_require__(318);
+    model.paginators = __webpack_require__(319).pagination;
+    model.waiters = __webpack_require__(320).waiters;
     return model;
   },
   enumerable: true,
@@ -153255,55 +155566,6 @@ Object.defineProperty(apiLoader.services['rds'], '2014-10-31', {
 });
 
 module.exports = AWS.RDS;
-
-
-/***/ }),
-/* 443 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-var AWS = __webpack_require__(0);
-var Service = __webpack_require__(3);
-var apiLoader = __webpack_require__(2);
-
-apiLoader.services['redshift'] = {};
-AWS.Redshift = Service.defineService('redshift', ['2012-12-01']);
-Object.defineProperty(apiLoader.services['redshift'], '2012-12-01', {
-  get: function get() {
-    var model = __webpack_require__(319);
-    model.paginators = __webpack_require__(320).pagination;
-    model.waiters = __webpack_require__(321).waiters;
-    return model;
-  },
-  enumerable: true,
-  configurable: true
-});
-
-module.exports = AWS.Redshift;
-
-
-/***/ }),
-/* 444 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-var AWS = __webpack_require__(0);
-var Service = __webpack_require__(3);
-var apiLoader = __webpack_require__(2);
-
-apiLoader.services['rekognition'] = {};
-AWS.Rekognition = Service.defineService('rekognition', ['2016-06-27']);
-Object.defineProperty(apiLoader.services['rekognition'], '2016-06-27', {
-  get: function get() {
-    var model = __webpack_require__(322);
-    model.paginators = __webpack_require__(323).pagination;
-    return model;
-  },
-  enumerable: true,
-  configurable: true
-});
-
-module.exports = AWS.Rekognition;
 
 
 /***/ }),
@@ -153315,19 +155577,20 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['resourcegroupstaggingapi'] = {};
-AWS.ResourceGroupsTaggingAPI = Service.defineService('resourcegroupstaggingapi', ['2017-01-26']);
-Object.defineProperty(apiLoader.services['resourcegroupstaggingapi'], '2017-01-26', {
+apiLoader.services['redshift'] = {};
+AWS.Redshift = Service.defineService('redshift', ['2012-12-01']);
+Object.defineProperty(apiLoader.services['redshift'], '2012-12-01', {
   get: function get() {
-    var model = __webpack_require__(324);
-    model.paginators = __webpack_require__(325).pagination;
+    var model = __webpack_require__(321);
+    model.paginators = __webpack_require__(322).pagination;
+    model.waiters = __webpack_require__(323).waiters;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.ResourceGroupsTaggingAPI;
+module.exports = AWS.Redshift;
 
 
 /***/ }),
@@ -153339,21 +155602,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['route53'] = {};
-AWS.Route53 = Service.defineService('route53', ['2013-04-01']);
-__webpack_require__(499);
-Object.defineProperty(apiLoader.services['route53'], '2013-04-01', {
+apiLoader.services['rekognition'] = {};
+AWS.Rekognition = Service.defineService('rekognition', ['2016-06-27']);
+Object.defineProperty(apiLoader.services['rekognition'], '2016-06-27', {
   get: function get() {
-    var model = __webpack_require__(326);
-    model.paginators = __webpack_require__(327).pagination;
-    model.waiters = __webpack_require__(328).waiters;
+    var model = __webpack_require__(324);
+    model.paginators = __webpack_require__(325).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.Route53;
+module.exports = AWS.Rekognition;
 
 
 /***/ }),
@@ -153365,19 +155626,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['route53domains'] = {};
-AWS.Route53Domains = Service.defineService('route53domains', ['2014-05-15']);
-Object.defineProperty(apiLoader.services['route53domains'], '2014-05-15', {
+apiLoader.services['resourcegroupstaggingapi'] = {};
+AWS.ResourceGroupsTaggingAPI = Service.defineService('resourcegroupstaggingapi', ['2017-01-26']);
+Object.defineProperty(apiLoader.services['resourcegroupstaggingapi'], '2017-01-26', {
   get: function get() {
-    var model = __webpack_require__(329);
-    model.paginators = __webpack_require__(330).pagination;
+    var model = __webpack_require__(326);
+    model.paginators = __webpack_require__(327).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.Route53Domains;
+module.exports = AWS.ResourceGroupsTaggingAPI;
 
 
 /***/ }),
@@ -153389,21 +155650,21 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['s3'] = {};
-AWS.S3 = Service.defineService('s3', ['2006-03-01']);
-__webpack_require__(500);
-Object.defineProperty(apiLoader.services['s3'], '2006-03-01', {
+apiLoader.services['route53'] = {};
+AWS.Route53 = Service.defineService('route53', ['2013-04-01']);
+__webpack_require__(502);
+Object.defineProperty(apiLoader.services['route53'], '2013-04-01', {
   get: function get() {
-    var model = __webpack_require__(333);
-    model.paginators = __webpack_require__(334).pagination;
-    model.waiters = __webpack_require__(335).waiters;
+    var model = __webpack_require__(328);
+    model.paginators = __webpack_require__(329).pagination;
+    model.waiters = __webpack_require__(330).waiters;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.S3;
+module.exports = AWS.Route53;
 
 
 /***/ }),
@@ -153415,11 +155676,61 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
+apiLoader.services['route53domains'] = {};
+AWS.Route53Domains = Service.defineService('route53domains', ['2014-05-15']);
+Object.defineProperty(apiLoader.services['route53domains'], '2014-05-15', {
+  get: function get() {
+    var model = __webpack_require__(331);
+    model.paginators = __webpack_require__(332).pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+
+module.exports = AWS.Route53Domains;
+
+
+/***/ }),
+/* 450 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(1);
+var AWS = __webpack_require__(0);
+var Service = __webpack_require__(3);
+var apiLoader = __webpack_require__(2);
+
+apiLoader.services['s3'] = {};
+AWS.S3 = Service.defineService('s3', ['2006-03-01']);
+__webpack_require__(503);
+Object.defineProperty(apiLoader.services['s3'], '2006-03-01', {
+  get: function get() {
+    var model = __webpack_require__(335);
+    model.paginators = __webpack_require__(336).pagination;
+    model.waiters = __webpack_require__(337).waiters;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+
+module.exports = AWS.S3;
+
+
+/***/ }),
+/* 451 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(1);
+var AWS = __webpack_require__(0);
+var Service = __webpack_require__(3);
+var apiLoader = __webpack_require__(2);
+
 apiLoader.services['servicecatalog'] = {};
 AWS.ServiceCatalog = Service.defineService('servicecatalog', ['2015-12-10']);
 Object.defineProperty(apiLoader.services['servicecatalog'], '2015-12-10', {
   get: function get() {
-    var model = __webpack_require__(338);
+    var model = __webpack_require__(340);
     return model;
   },
   enumerable: true,
@@ -153430,7 +155741,7 @@ module.exports = AWS.ServiceCatalog;
 
 
 /***/ }),
-/* 450 */
+/* 452 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153455,7 +155766,7 @@ module.exports = AWS.SES;
 
 
 /***/ }),
-/* 451 */
+/* 453 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
@@ -153467,7 +155778,7 @@ apiLoader.services['shield'] = {};
 AWS.Shield = Service.defineService('shield', ['2016-06-02']);
 Object.defineProperty(apiLoader.services['shield'], '2016-06-02', {
   get: function get() {
-    var model = __webpack_require__(339);
+    var model = __webpack_require__(341);
     return model;
   },
   enumerable: true,
@@ -153475,54 +155786,6 @@ Object.defineProperty(apiLoader.services['shield'], '2016-06-02', {
 });
 
 module.exports = AWS.Shield;
-
-
-/***/ }),
-/* 452 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-var AWS = __webpack_require__(0);
-var Service = __webpack_require__(3);
-var apiLoader = __webpack_require__(2);
-
-apiLoader.services['simpledb'] = {};
-AWS.SimpleDB = Service.defineService('simpledb', ['2009-04-15']);
-Object.defineProperty(apiLoader.services['simpledb'], '2009-04-15', {
-  get: function get() {
-    var model = __webpack_require__(336);
-    model.paginators = __webpack_require__(337).pagination;
-    return model;
-  },
-  enumerable: true,
-  configurable: true
-});
-
-module.exports = AWS.SimpleDB;
-
-
-/***/ }),
-/* 453 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-var AWS = __webpack_require__(0);
-var Service = __webpack_require__(3);
-var apiLoader = __webpack_require__(2);
-
-apiLoader.services['sms'] = {};
-AWS.SMS = Service.defineService('sms', ['2016-10-24']);
-Object.defineProperty(apiLoader.services['sms'], '2016-10-24', {
-  get: function get() {
-    var model = __webpack_require__(340);
-    model.paginators = __webpack_require__(341).pagination;
-    return model;
-  },
-  enumerable: true,
-  configurable: true
-});
-
-module.exports = AWS.SMS;
 
 
 /***/ }),
@@ -153534,19 +155797,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['snowball'] = {};
-AWS.Snowball = Service.defineService('snowball', ['2016-06-30']);
-Object.defineProperty(apiLoader.services['snowball'], '2016-06-30', {
+apiLoader.services['simpledb'] = {};
+AWS.SimpleDB = Service.defineService('simpledb', ['2009-04-15']);
+Object.defineProperty(apiLoader.services['simpledb'], '2009-04-15', {
   get: function get() {
-    var model = __webpack_require__(342);
-    model.paginators = __webpack_require__(343).pagination;
+    var model = __webpack_require__(338);
+    model.paginators = __webpack_require__(339).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.Snowball;
+module.exports = AWS.SimpleDB;
 
 
 /***/ }),
@@ -153558,19 +155821,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['sns'] = {};
-AWS.SNS = Service.defineService('sns', ['2010-03-31']);
-Object.defineProperty(apiLoader.services['sns'], '2010-03-31', {
+apiLoader.services['sms'] = {};
+AWS.SMS = Service.defineService('sms', ['2016-10-24']);
+Object.defineProperty(apiLoader.services['sms'], '2016-10-24', {
   get: function get() {
-    var model = __webpack_require__(344);
-    model.paginators = __webpack_require__(345).pagination;
+    var model = __webpack_require__(342);
+    model.paginators = __webpack_require__(343).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.SNS;
+module.exports = AWS.SMS;
 
 
 /***/ }),
@@ -153582,20 +155845,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['sqs'] = {};
-AWS.SQS = Service.defineService('sqs', ['2012-11-05']);
-__webpack_require__(501);
-Object.defineProperty(apiLoader.services['sqs'], '2012-11-05', {
+apiLoader.services['snowball'] = {};
+AWS.Snowball = Service.defineService('snowball', ['2016-06-30']);
+Object.defineProperty(apiLoader.services['snowball'], '2016-06-30', {
   get: function get() {
-    var model = __webpack_require__(346);
-    model.paginators = __webpack_require__(347).pagination;
+    var model = __webpack_require__(344);
+    model.paginators = __webpack_require__(345).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.SQS;
+module.exports = AWS.Snowball;
 
 
 /***/ }),
@@ -153607,19 +155869,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['ssm'] = {};
-AWS.SSM = Service.defineService('ssm', ['2014-11-06']);
-Object.defineProperty(apiLoader.services['ssm'], '2014-11-06', {
+apiLoader.services['sns'] = {};
+AWS.SNS = Service.defineService('sns', ['2010-03-31']);
+Object.defineProperty(apiLoader.services['sns'], '2010-03-31', {
   get: function get() {
-    var model = __webpack_require__(348);
-    model.paginators = __webpack_require__(349).pagination;
+    var model = __webpack_require__(346);
+    model.paginators = __webpack_require__(347).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.SSM;
+module.exports = AWS.SNS;
 
 
 /***/ }),
@@ -153631,19 +155893,20 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['stepfunctions'] = {};
-AWS.StepFunctions = Service.defineService('stepfunctions', ['2016-11-23']);
-Object.defineProperty(apiLoader.services['stepfunctions'], '2016-11-23', {
+apiLoader.services['sqs'] = {};
+AWS.SQS = Service.defineService('sqs', ['2012-11-05']);
+__webpack_require__(504);
+Object.defineProperty(apiLoader.services['sqs'], '2012-11-05', {
   get: function get() {
-    var model = __webpack_require__(350);
-    model.paginators = __webpack_require__(351).pagination;
+    var model = __webpack_require__(348);
+    model.paginators = __webpack_require__(349).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.StepFunctions;
+module.exports = AWS.SQS;
 
 
 /***/ }),
@@ -153655,19 +155918,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['storagegateway'] = {};
-AWS.StorageGateway = Service.defineService('storagegateway', ['2013-06-30']);
-Object.defineProperty(apiLoader.services['storagegateway'], '2013-06-30', {
+apiLoader.services['ssm'] = {};
+AWS.SSM = Service.defineService('ssm', ['2014-11-06']);
+Object.defineProperty(apiLoader.services['ssm'], '2014-11-06', {
   get: function get() {
-    var model = __webpack_require__(352);
-    model.paginators = __webpack_require__(353).pagination;
+    var model = __webpack_require__(350);
+    model.paginators = __webpack_require__(351).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.StorageGateway;
+module.exports = AWS.SSM;
 
 
 /***/ }),
@@ -153679,19 +155942,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['support'] = {};
-AWS.Support = Service.defineService('support', ['2013-04-15']);
-Object.defineProperty(apiLoader.services['support'], '2013-04-15', {
+apiLoader.services['stepfunctions'] = {};
+AWS.StepFunctions = Service.defineService('stepfunctions', ['2016-11-23']);
+Object.defineProperty(apiLoader.services['stepfunctions'], '2016-11-23', {
   get: function get() {
-    var model = __webpack_require__(357);
-    model.paginators = __webpack_require__(358).pagination;
+    var model = __webpack_require__(352);
+    model.paginators = __webpack_require__(353).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.Support;
+module.exports = AWS.StepFunctions;
 
 
 /***/ }),
@@ -153703,20 +155966,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['swf'] = {};
-AWS.SWF = Service.defineService('swf', ['2012-01-25']);
-__webpack_require__(503);
-Object.defineProperty(apiLoader.services['swf'], '2012-01-25', {
+apiLoader.services['storagegateway'] = {};
+AWS.StorageGateway = Service.defineService('storagegateway', ['2013-06-30']);
+Object.defineProperty(apiLoader.services['storagegateway'], '2013-06-30', {
   get: function get() {
-    var model = __webpack_require__(359);
-    model.paginators = __webpack_require__(360).pagination;
+    var model = __webpack_require__(354);
+    model.paginators = __webpack_require__(355).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.SWF;
+module.exports = AWS.StorageGateway;
 
 
 /***/ }),
@@ -153728,19 +155990,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['waf'] = {};
-AWS.WAF = Service.defineService('waf', ['2015-08-24']);
-Object.defineProperty(apiLoader.services['waf'], '2015-08-24', {
+apiLoader.services['support'] = {};
+AWS.Support = Service.defineService('support', ['2013-04-15']);
+Object.defineProperty(apiLoader.services['support'], '2013-04-15', {
   get: function get() {
-    var model = __webpack_require__(361);
-    model.paginators = __webpack_require__(362).pagination;
+    var model = __webpack_require__(359);
+    model.paginators = __webpack_require__(360).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.WAF;
+module.exports = AWS.Support;
 
 
 /***/ }),
@@ -153752,19 +156014,20 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['wafregional'] = {};
-AWS.WAFRegional = Service.defineService('wafregional', ['2016-11-28']);
-Object.defineProperty(apiLoader.services['wafregional'], '2016-11-28', {
+apiLoader.services['swf'] = {};
+AWS.SWF = Service.defineService('swf', ['2012-01-25']);
+__webpack_require__(506);
+Object.defineProperty(apiLoader.services['swf'], '2012-01-25', {
   get: function get() {
-    var model = __webpack_require__(363);
-    model.paginators = __webpack_require__(364).pagination;
+    var model = __webpack_require__(361);
+    model.paginators = __webpack_require__(362).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.WAFRegional;
+module.exports = AWS.SWF;
 
 
 /***/ }),
@@ -153776,19 +156039,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['workdocs'] = {};
-AWS.WorkDocs = Service.defineService('workdocs', ['2016-05-01']);
-Object.defineProperty(apiLoader.services['workdocs'], '2016-05-01', {
+apiLoader.services['waf'] = {};
+AWS.WAF = Service.defineService('waf', ['2015-08-24']);
+Object.defineProperty(apiLoader.services['waf'], '2015-08-24', {
   get: function get() {
-    var model = __webpack_require__(365);
-    model.paginators = __webpack_require__(366).pagination;
+    var model = __webpack_require__(363);
+    model.paginators = __webpack_require__(364).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.WorkDocs;
+module.exports = AWS.WAF;
 
 
 /***/ }),
@@ -153800,19 +156063,19 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
-apiLoader.services['workspaces'] = {};
-AWS.WorkSpaces = Service.defineService('workspaces', ['2015-04-08']);
-Object.defineProperty(apiLoader.services['workspaces'], '2015-04-08', {
+apiLoader.services['wafregional'] = {};
+AWS.WAFRegional = Service.defineService('wafregional', ['2016-11-28']);
+Object.defineProperty(apiLoader.services['wafregional'], '2016-11-28', {
   get: function get() {
-    var model = __webpack_require__(367);
-    model.paginators = __webpack_require__(368).pagination;
+    var model = __webpack_require__(365);
+    model.paginators = __webpack_require__(366).pagination;
     return model;
   },
   enumerable: true,
   configurable: true
 });
 
-module.exports = AWS.WorkSpaces;
+module.exports = AWS.WAFRegional;
 
 
 /***/ }),
@@ -153824,11 +156087,59 @@ var AWS = __webpack_require__(0);
 var Service = __webpack_require__(3);
 var apiLoader = __webpack_require__(2);
 
+apiLoader.services['workdocs'] = {};
+AWS.WorkDocs = Service.defineService('workdocs', ['2016-05-01']);
+Object.defineProperty(apiLoader.services['workdocs'], '2016-05-01', {
+  get: function get() {
+    var model = __webpack_require__(367);
+    model.paginators = __webpack_require__(368).pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+
+module.exports = AWS.WorkDocs;
+
+
+/***/ }),
+/* 467 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(1);
+var AWS = __webpack_require__(0);
+var Service = __webpack_require__(3);
+var apiLoader = __webpack_require__(2);
+
+apiLoader.services['workspaces'] = {};
+AWS.WorkSpaces = Service.defineService('workspaces', ['2015-04-08']);
+Object.defineProperty(apiLoader.services['workspaces'], '2015-04-08', {
+  get: function get() {
+    var model = __webpack_require__(369);
+    model.paginators = __webpack_require__(370).pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+
+module.exports = AWS.WorkSpaces;
+
+
+/***/ }),
+/* 468 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(1);
+var AWS = __webpack_require__(0);
+var Service = __webpack_require__(3);
+var apiLoader = __webpack_require__(2);
+
 apiLoader.services['xray'] = {};
 AWS.XRay = Service.defineService('xray', ['2016-04-12']);
 Object.defineProperty(apiLoader.services['xray'], '2016-04-12', {
   get: function get() {
-    var model = __webpack_require__(369);
+    var model = __webpack_require__(371);
     return model;
   },
   enumerable: true,
@@ -153839,7 +156150,7 @@ module.exports = AWS.XRay;
 
 
 /***/ }),
-/* 467 */
+/* 469 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0),
@@ -154051,7 +156362,7 @@ module.exports = AWS.CloudFront.Signer;
 
 
 /***/ }),
-/* 468 */
+/* 470 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -154156,7 +156467,7 @@ var PromisesDependency;
  *     Currently supported options are:
  *
  *     * **base** [Integer] &mdash; The base number of milliseconds to use in the
- *       exponential backoff for operation retries. Defaults to 100 ms for all services accept
+ *       exponential backoff for operation retries. Defaults to 100 ms for all services except
  *       DynamoDB, where it defaults to 50ms.
  *     * **customBackoff ** [function] &mdash; A custom function that accepts a retry count
  *       and returns the amount of time to delay in milliseconds. The `base` option will be
@@ -154273,7 +156584,7 @@ AWS.Config = AWS.util.inherit({
    *
    *   * **base** [Integer] &mdash; The base number of milliseconds to use in the
    *     exponential backoff for operation retries. Defaults to 100 ms for all
-   *     services accept DynamoDB, where it defaults to 50ms.
+   *     services except DynamoDB, where it defaults to 50ms.
    *   * **customBackoff ** [function] &mdash; A custom function that accepts a retry count
    *     and returns the amount of time to delay in milliseconds. The `base` option will be
    *     ignored if this option is supplied.
@@ -154590,7 +156901,7 @@ AWS.config = new AWS.Config();
 
 
 /***/ }),
-/* 469 */
+/* 471 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -154973,7 +157284,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 
 /***/ }),
-/* 470 */
+/* 472 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -155068,7 +157379,7 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
 
 
 /***/ }),
-/* 471 */
+/* 473 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -155194,7 +157505,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
 
 
 /***/ }),
-/* 472 */
+/* 474 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -155310,7 +157621,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 
 /***/ }),
-/* 473 */
+/* 475 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -155499,11 +157810,11 @@ module.exports = AWS.DynamoDB.Converter;
 
 
 /***/ }),
-/* 474 */
+/* 476 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
-var Translator = __webpack_require__(475);
+var Translator = __webpack_require__(477);
 var DynamoDBSet = __webpack_require__(81);
 
 /**
@@ -156028,11 +158339,11 @@ module.exports = AWS.DynamoDB.DocumentClient;
 
 
 /***/ }),
-/* 475 */
+/* 477 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var util = __webpack_require__(0).util;
-var convert = __webpack_require__(473);
+var convert = __webpack_require__(475);
 
 var Translator = function(options) {
   options = options || {};
@@ -156114,7 +158425,7 @@ module.exports = Translator;
 
 
 /***/ }),
-/* 476 */
+/* 478 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -156202,6 +158513,9 @@ AWS.EventListeners = {
     });
 
     add('BUILD_IDEMPOTENCY_TOKENS', 'validate', function BUILD_IDEMPOTENCY_TOKENS(req) {
+      if (!req.service.api.operations) {
+        return;
+      }
       var operation = req.service.api.operations[req.operation];
       if (!operation) {
         return;
@@ -156222,6 +158536,9 @@ AWS.EventListeners = {
     });
 
     add('VALIDATE_PARAMETERS', 'validate', function VALIDATE_PARAMETERS(req) {
+      if (!req.service.api.operations) {
+        return;
+      }
       var rules = req.service.api.operations[req.operation].input;
       var validation = req.service.config.paramValidation;
       new AWS.ParamValidator(validation).validate(rules, req.params);
@@ -156229,6 +158546,9 @@ AWS.EventListeners = {
 
     addAsync('COMPUTE_SHA256', 'afterBuild', function COMPUTE_SHA256(req, done) {
       req.haltHandlersOnError();
+      if (!req.service.api.operations) {
+        return;
+      }
       var operation = req.service.api.operations[req.operation];
       var authtype = operation ? operation.authtype : '';
       if (!req.service.api.signatureVersion && !authtype) return done(); // none
@@ -156281,7 +158601,8 @@ AWS.EventListeners = {
 
     addAsync('SIGN', 'sign', function SIGN(req, done) {
       var service = req.service;
-      var operation = req.service.api.operations[req.operation];
+      var operations = req.service.api.operations || {};
+      var operation = operations[req.operation];
       var authtype = operation ? operation.authtype : '';
       if (!service.api.signatureVersion && !authtype) return done(); // none
 
@@ -156625,7 +158946,7 @@ AWS.EventListeners = {
 
 
 /***/ }),
-/* 477 */
+/* 479 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -156767,7 +159088,7 @@ AWS.HttpClient.streamsApiVersion = 1;
 
 
 /***/ }),
-/* 478 */
+/* 480 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -157031,7 +159352,7 @@ AWS.ParamValidator = AWS.util.inherit({
 
 
 /***/ }),
-/* 479 */
+/* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -157152,7 +159473,7 @@ AWS.Polly.Presigner = AWS.util.inherit({
 
 
 /***/ }),
-/* 480 */
+/* 482 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var util = __webpack_require__(6);
@@ -157239,11 +159560,233 @@ module.exports = QueryParamSerializer;
 
 
 /***/ }),
-/* 481 */
+/* 483 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var AWS = __webpack_require__(0);
+
+/**
+ * @api private
+ */
+var service = null;
+
+/**
+ * @api private
+ */
+var api = {
+    signatureVersion: 'v4',
+    signingName: 'rds-db'
+};
+
+/**
+ * @api private
+ */
+var requiredAuthTokenOptions = {
+    region: 'string',
+    hostname: 'string',
+    port: 'number',
+    username: 'string'
+};
+
+/**
+ * A signer object can be used to generate an auth token to a database.
+ */
+AWS.RDS.Signer = AWS.util.inherit({
+    /**
+     * Creates a signer object can be used to generate an auth token.
+     *
+     * @option options credentials [AWS.Credentials] the AWS credentials
+     *   to sign requests with. Uses the default credential provider chain
+     *   if not specified.
+     * @option options hostname [String] the hostname of the database to connect to.
+     * @option options port [Number] the port number the database is listening on.
+     * @option options region [String] the region the database is located in.
+     * @option options username [String] the username to login as.
+     * @example Passing in options to constructor
+     *   var signer = new AWS.RDS.Signer({
+     *     credentials: new AWS.SharedIniFileCredentials({profile: 'default'}),
+     *     region: 'us-east-1',
+     *     hostname: 'db.us-east-1.rds.amazonaws.com',
+     *     port: 8000,
+     *     username: 'name'
+     *   });
+     */
+    constructor: function Signer(options) {
+        this.options = options || {};
+    },
+
+    /**
+     * @api private
+     * Strips the protocol from a url.
+     */
+    convertUrlToAuthToken: function convertUrlToAuthToken(url) {
+        // we are always using https as the protocol
+        var protocol = 'https://';
+        if (url.indexOf(protocol) === 0) {
+            return url.substring(protocol.length);
+        }
+    },
+
+    /**
+     * @overload getAuthToken(options = {}, [callback])
+     *   Generate an auth token to a database.
+     *   @note You must ensure that you have static or previously resolved
+     *     credentials if you call this method synchronously (with no callback),
+     *     otherwise it may not properly sign the request. If you cannot guarantee
+     *     this (you are using an asynchronous credential provider, i.e., EC2
+     *     IAM roles), you should always call this method with an asynchronous
+     *     callback.
+     *
+     *   @param options [map] The fields to use when generating an auth token.
+     *     Any options specified here will be merged on top of any options passed
+     *     to AWS.RDS.Signer:
+     *
+     *     * **credentials** (AWS.Credentials) &mdash; the AWS credentials
+     *         to sign requests with. Uses the default credential provider chain
+     *         if not specified.
+     *     * **hostname** (String) &mdash; the hostname of the database to connect to.
+     *     * **port** (Number) &mdash; the port number the database is listening on.
+     *     * **region** (String) &mdash; the region the database is located in.
+     *     * **username** (String) &mdash; the username to login as.
+     *   @return [String] if called synchronously (with no callback), returns the
+     *     auth token.
+     *   @return [null] nothing is returned if a callback is provided.
+     *   @callback callback function (err, token)
+     *     If a callback is supplied, it is called when an auth token has been generated.
+     *     @param err [Error] the error object returned from the signer.
+     *     @param token [String] the auth token.
+     *
+     *   @example Generating an auth token synchronously
+     *     var signer = new AWS.RDS.Signer({
+     *       // configure options
+     *       region: 'us-east-1',
+     *       username: 'default',
+     *       hostname: 'db.us-east-1.amazonaws.com',
+     *       port: 8000
+     *     });
+     *     var token = signer.getAuthToken({
+     *       // these options are merged with those defined when creating the signer, overriding in the case of a duplicate option
+     *       // credentials are not specified here or when creating the signer, so default credential provider will be used
+     *       username: 'test' // overriding username
+     *     });
+     *   @example Generating an auth token asynchronously
+     *     var signer = new AWS.RDS.Signer({
+     *       // configure options
+     *       region: 'us-east-1',
+     *       username: 'default',
+     *       hostname: 'db.us-east-1.amazonaws.com',
+     *       port: 8000
+     *     });
+     *     signer.getAuthToken({
+     *       // these options are merged with those defined when creating the signer, overriding in the case of a duplicate option
+     *       // credentials are not specified here or when creating the signer, so default credential provider will be used
+     *       username: 'test' // overriding username
+     *     }, function(err, token) {
+     *       if (err) {
+     *         // handle error
+     *       } else {
+     *         // use token
+     *       }
+     *     });
+     *
+     */
+    getAuthToken: function getAuthToken(options, callback) {
+        if (typeof options === 'function' && callback === undefined) {
+            callback = options;
+            options = {};
+        }
+        var self = this;
+        var hasCallback = typeof callback === 'function';
+        // merge options with existing options
+        options = AWS.util.merge(this.options, options);
+        // validate options
+        var optionsValidation = this.validateAuthTokenOptions(options);
+        if (optionsValidation !== true) {
+            if (hasCallback) {
+                return callback(optionsValidation, null);
+            }
+            throw optionsValidation;
+        }
+
+        // 15 minutes
+        var expires = 900;
+        // create service to generate a request from
+        var serviceOptions = {
+            region: options.region,
+            endpoint: new AWS.Endpoint(options.hostname + ':' + options.port),
+            paramValidation: false,
+            signatureVersion: 'v4'
+        };
+        if (options.credentials) {
+            serviceOptions.credentials = options.credentials;
+        }
+        service = new AWS.Service(serviceOptions);
+        // ensure the SDK is using sigv4 signing (config is not enough)
+        service.api = api;
+
+        var request = service.makeRequest();
+        // add listeners to request to properly build auth token
+        this.modifyRequestForAuthToken(request, options);
+
+        if (hasCallback) {
+            request.presign(expires, function(err, url) {
+                if (url) {
+                    url = self.convertUrlToAuthToken(url);
+                }
+                callback(err, url);
+            });
+        } else {
+            var url = request.presign(expires);
+            return this.convertUrlToAuthToken(url);
+        }
+    },
+
+    /**
+     * @api private
+     * Modifies a request to allow the presigner to generate an auth token.
+     */
+    modifyRequestForAuthToken: function modifyRequestForAuthToken(request, options) {
+        request.on('build', request.buildAsGet);
+        var httpRequest = request.httpRequest;
+        httpRequest.body = AWS.util.queryParamsToString({
+            Action: 'connect',
+            DBUser: options.username
+        });
+    },
+
+    /**
+     * @api private
+     * Validates that the options passed in contain all the keys with values of the correct type that
+     *   are needed to generate an auth token.
+     */
+    validateAuthTokenOptions: function validateAuthTokenOptions(options) {
+        // iterate over all keys in options
+        var message = '';
+        options = options || {};
+        for (var key in requiredAuthTokenOptions) {
+            if (!Object.prototype.hasOwnProperty.call(requiredAuthTokenOptions, key)) {
+                continue;
+            }
+            if (typeof options[key] !== requiredAuthTokenOptions[key]) {
+                message += 'option \'' + key + '\' should have been type \'' + requiredAuthTokenOptions[key] + '\', was \'' + typeof options[key] + '\'.\n';
+            }
+        }
+        if (message.length) {
+            return AWS.util.error(new Error(), {
+                code: 'InvalidParameter',
+                message: message
+            });
+        }
+        return true;
+    }
+});
+
+/***/ }),
+/* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var util = __webpack_require__(6);
-var regionConfig = __webpack_require__(482);
+var regionConfig = __webpack_require__(485);
 
 function generateRegionPrefix(region) {
   if (!region) return null;
@@ -157314,7 +159857,7 @@ module.exports = configureEndpoint;
 
 
 /***/ }),
-/* 482 */
+/* 485 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -157381,11 +159924,11 @@ module.exports = {
 };
 
 /***/ }),
-/* 483 */
+/* 486 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(0);
-var AcceptorStateMachine = __webpack_require__(510);
+var AcceptorStateMachine = __webpack_require__(513);
 var inherit = AWS.util.inherit;
 var domain = AWS.util.domain;
 var jmespath = __webpack_require__(64);
@@ -158183,7 +160726,7 @@ AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
-/* 484 */
+/* 487 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -158378,7 +160921,7 @@ AWS.ResourceWaiter = inherit({
 
 
 /***/ }),
-/* 485 */
+/* 488 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -158585,7 +161128,7 @@ AWS.Response = inherit({
 
 
 /***/ }),
-/* 486 */
+/* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -159289,7 +161832,7 @@ module.exports = AWS.S3.ManagedUpload;
 
 
 /***/ }),
-/* 487 */
+/* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -159322,13 +161865,13 @@ AWS.util.update(AWS.APIGateway.prototype, {
 
 
 /***/ }),
-/* 488 */
+/* 491 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
 
 // pull in CloudFront signer
-__webpack_require__(467);
+__webpack_require__(469);
 
 AWS.util.update(AWS.CloudFront.prototype, {
 
@@ -159340,7 +161883,7 @@ AWS.util.update(AWS.CloudFront.prototype, {
 
 
 /***/ }),
-/* 489 */
+/* 492 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -159466,7 +162009,7 @@ AWS.util.update(AWS.CloudSearchDomain.prototype, {
 
 
 /***/ }),
-/* 490 */
+/* 493 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -159487,11 +162030,11 @@ AWS.util.update(AWS.CognitoIdentity.prototype, {
 
 
 /***/ }),
-/* 491 */
+/* 494 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
-__webpack_require__(474);
+__webpack_require__(476);
 
 AWS.util.update(AWS.DynamoDB.prototype, {
   /**
@@ -159551,7 +162094,7 @@ AWS.util.update(AWS.DynamoDB.prototype, {
 
 
 /***/ }),
-/* 492 */
+/* 495 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -159619,7 +162162,7 @@ AWS.util.update(AWS.EC2.prototype, {
 
 
 /***/ }),
-/* 493 */
+/* 496 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -159739,7 +162282,7 @@ AWS.util.update(AWS.Glacier.prototype, {
 
 
 /***/ }),
-/* 494 */
+/* 497 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -159845,7 +162388,7 @@ AWS.util.update(AWS.IotData.prototype, {
 
 
 /***/ }),
-/* 495 */
+/* 498 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -159864,7 +162407,7 @@ AWS.util.update(AWS.Lambda.prototype, {
 
 
 /***/ }),
-/* 496 */
+/* 499 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -159894,17 +162437,17 @@ AWS.util.update(AWS.MachineLearning.prototype, {
 
 
 /***/ }),
-/* 497 */
+/* 500 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(479);
+__webpack_require__(481);
 
 /***/ }),
-/* 498 */
+/* 501 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
-
+__webpack_require__(483);
  /**
   * @api private
   */
@@ -159966,7 +162509,7 @@ var AWS = __webpack_require__(0);
  });
 
 /***/ }),
-/* 499 */
+/* 502 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -160004,14 +162547,14 @@ AWS.util.update(AWS.Route53.prototype, {
 
 
 /***/ }),
-/* 500 */
+/* 503 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
 var v4Credentials = __webpack_require__(94);
 
 // Pull in managed upload extension
-__webpack_require__(486);
+__webpack_require__(489);
 
 /**
  * @api private
@@ -161035,7 +163578,7 @@ AWS.util.update(AWS.S3.prototype, {
 
 
 /***/ }),
-/* 501 */
+/* 504 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -161172,7 +163715,7 @@ AWS.util.update(AWS.SQS.prototype, {
 
 
 /***/ }),
-/* 502 */
+/* 505 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -161225,7 +163768,7 @@ AWS.util.update(AWS.STS.prototype, {
 
 
 /***/ }),
-/* 503 */
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -161241,7 +163784,7 @@ AWS.SimpleWorkflow = AWS.SWF;
 
 
 /***/ }),
-/* 504 */
+/* 507 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -161362,7 +163905,7 @@ module.exports = AWS.Signers.Presign;
 
 
 /***/ }),
-/* 505 */
+/* 508 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -161397,16 +163940,16 @@ AWS.Signers.RequestSigner.getVersion = function getVersion(version) {
   throw new Error('Unknown signing version ' + version);
 };
 
-__webpack_require__(507);
+__webpack_require__(510);
 __webpack_require__(93);
-__webpack_require__(508);
+__webpack_require__(511);
+__webpack_require__(512);
 __webpack_require__(509);
-__webpack_require__(506);
-__webpack_require__(504);
+__webpack_require__(507);
 
 
 /***/ }),
-/* 506 */
+/* 509 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -161584,7 +164127,7 @@ module.exports = AWS.Signers.S3;
 
 
 /***/ }),
-/* 507 */
+/* 510 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -161635,7 +164178,7 @@ module.exports = AWS.Signers.V2;
 
 
 /***/ }),
-/* 508 */
+/* 511 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -161663,7 +164206,7 @@ module.exports = AWS.Signers.V3Https;
 
 
 /***/ }),
-/* 509 */
+/* 512 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(0);
@@ -161874,7 +164417,7 @@ module.exports = AWS.Signers.V4;
 
 
 /***/ }),
-/* 510 */
+/* 513 */
 /***/ (function(module, exports) {
 
 function AcceptorStateMachine(states, state) {
@@ -161922,7 +164465,7 @@ module.exports = AcceptorStateMachine;
 
 
 /***/ }),
-/* 511 */
+/* 514 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var util = __webpack_require__(6);
@@ -162014,13 +164557,13 @@ module.exports = XmlBuilder;
 
 
 /***/ }),
-/* 512 */
+/* 515 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var util = __webpack_require__(6);
 var Shape = __webpack_require__(25);
 
-var xml2js = __webpack_require__(701);
+var xml2js = __webpack_require__(704);
 
 /**
  * @api private
@@ -162179,7 +164722,7 @@ module.exports = NodeXmlParser;
 
 
 /***/ }),
-/* 513 */
+/* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var asn1 = __webpack_require__(27);
@@ -162202,7 +164745,7 @@ function Entity(name, body) {
 Entity.prototype._createNamed = function createNamed(base) {
   var named;
   try {
-    named = __webpack_require__(698).runInThisContext(
+    named = __webpack_require__(701).runInThisContext(
       '(function ' + this.name + '(entity) {\n' +
       '  this._initNamed(entity);\n' +
       '})'
@@ -162246,7 +164789,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
 
 
 /***/ }),
-/* 514 */
+/* 517 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Reporter = __webpack_require__(28).Reporter;
@@ -162886,7 +165429,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
 
 
 /***/ }),
-/* 515 */
+/* 518 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(5);
@@ -163013,7 +165556,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 
 
 /***/ }),
-/* 516 */
+/* 519 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var constants = __webpack_require__(96);
@@ -163061,17 +165604,17 @@ exports.tagByName = constants._reverse(exports.tag);
 
 
 /***/ }),
-/* 517 */
+/* 520 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var decoders = exports;
 
 decoders.der = __webpack_require__(97);
-decoders.pem = __webpack_require__(518);
+decoders.pem = __webpack_require__(521);
 
 
 /***/ }),
-/* 518 */
+/* 521 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(5);
@@ -163126,17 +165669,17 @@ PEMDecoder.prototype.decode = function decode(data, options) {
 
 
 /***/ }),
-/* 519 */
+/* 522 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var encoders = exports;
 
 encoders.der = __webpack_require__(98);
-encoders.pem = __webpack_require__(520);
+encoders.pem = __webpack_require__(523);
 
 
 /***/ }),
-/* 520 */
+/* 523 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(5);
@@ -163163,7 +165706,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 
 /***/ }),
-/* 521 */
+/* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -163284,7 +165827,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 522 */
+/* 525 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(36)
@@ -163428,7 +165971,7 @@ exports.createDecipheriv = createDecipheriv
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 523 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(36)
@@ -163557,7 +166100,7 @@ exports.createCipher = createCipher
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 524 */
+/* 527 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var zeros = new Buffer(16)
@@ -163662,13 +166205,13 @@ function xor (a, b) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 525 */
+/* 528 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ebtk = __webpack_require__(41)
 var aes = __webpack_require__(58)
-var DES = __webpack_require__(526)
-var desModes = __webpack_require__(527)
+var DES = __webpack_require__(529)
+var desModes = __webpack_require__(530)
 var aesModes = __webpack_require__(37)
 function createCipher (suite, password) {
   var keyLen, ivLen
@@ -163741,7 +166284,7 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 526 */
+/* 529 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var CipherBase = __webpack_require__(19)
@@ -163791,7 +166334,7 @@ DES.prototype._final = function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 527 */
+/* 530 */
 /***/ (function(module, exports) {
 
 exports['des-ecb'] = {
@@ -163821,21 +166364,21 @@ exports['des-ede'] = {
 
 
 /***/ }),
-/* 528 */
+/* 531 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(108)
 
 
 /***/ }),
-/* 529 */
+/* 532 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(20)
 var stream = __webpack_require__(18)
 var inherits = __webpack_require__(5)
-var sign = __webpack_require__(530)
-var verify = __webpack_require__(531)
+var sign = __webpack_require__(533)
+var verify = __webpack_require__(534)
 
 var algorithms = __webpack_require__(108)
 Object.keys(algorithms).forEach(function (key) {
@@ -163926,7 +166469,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 530 */
+/* 533 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
@@ -164078,7 +166621,7 @@ module.exports.makeKey = makeKey
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 531 */
+/* 534 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
@@ -164168,7 +166711,7 @@ module.exports = verify
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 532 */
+/* 535 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(8);
@@ -164297,7 +166840,7 @@ function formatReturnValue(bn, enc, len) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 533 */
+/* 536 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -164338,14 +166881,14 @@ exports.hash = hash;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 534 */
+/* 537 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(4).Buffer
-var sha = __webpack_require__(537)
-var sha256 = __webpack_require__(538)
-var rng = __webpack_require__(536)
-var md5 = __webpack_require__(535)
+var sha = __webpack_require__(540)
+var sha256 = __webpack_require__(541)
+var rng = __webpack_require__(539)
+var md5 = __webpack_require__(538)
 
 var algorithms = {
   sha1: sha,
@@ -164441,7 +166984,7 @@ each(['createCredentials'
 
 
 /***/ }),
-/* 535 */
+/* 538 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -164610,7 +167153,7 @@ module.exports = function md5(buf) {
 
 
 /***/ }),
-/* 536 */
+/* 539 */
 /***/ (function(module, exports) {
 
 // Original code adapted from Robert Kieffer.
@@ -164647,7 +167190,7 @@ module.exports = function md5(buf) {
 
 
 /***/ }),
-/* 537 */
+/* 540 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -164754,7 +167297,7 @@ module.exports = function sha1(buf) {
 
 
 /***/ }),
-/* 538 */
+/* 541 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -164839,7 +167382,7 @@ module.exports = function sha256(buf) {
 
 
 /***/ }),
-/* 539 */
+/* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -164911,7 +167454,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
 
 
 /***/ }),
-/* 540 */
+/* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -165059,7 +167602,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 
 
 /***/ }),
-/* 541 */
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -165209,7 +167752,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 
 
 /***/ }),
-/* 542 */
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -165271,7 +167814,7 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 
 /***/ }),
-/* 543 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -165534,13 +168077,13 @@ exports.padSplit = function padSplit(num, size, group) {
 
 
 /***/ }),
-/* 544 */
+/* 547 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(111)
-var primes = __webpack_require__(546)
+var primes = __webpack_require__(549)
 
-var DH = __webpack_require__(545)
+var DH = __webpack_require__(548)
 
 function getDiffieHellman (mod) {
   var prime = new Buffer(primes[mod].prime, 'hex')
@@ -165583,7 +168126,7 @@ exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 545 */
+/* 548 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(7);
@@ -165754,7 +168297,7 @@ function formatReturnValue(bn, enc) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 546 */
+/* 549 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -165793,7 +168336,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 547 */
+/* 550 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -166175,7 +168718,7 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 548 */
+/* 551 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -166615,7 +169158,7 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 549 */
+/* 552 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -166802,7 +169345,7 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 550 */
+/* 553 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -167747,7 +170290,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 551 */
+/* 554 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -167920,7 +170463,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(558);
+  pre = __webpack_require__(561);
 } catch (e) {
   pre = undefined;
 }
@@ -167959,20 +170502,20 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 552 */
+/* 555 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var BN = __webpack_require__(7);
-var HmacDRBG = __webpack_require__(566);
+var HmacDRBG = __webpack_require__(569);
 var elliptic = __webpack_require__(8);
 var utils = elliptic.utils;
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(553);
-var Signature = __webpack_require__(554);
+var KeyPair = __webpack_require__(556);
+var Signature = __webpack_require__(557);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -168206,7 +170749,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 
 /***/ }),
-/* 553 */
+/* 556 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -168332,7 +170875,7 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 554 */
+/* 557 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -168474,7 +171017,7 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 555 */
+/* 558 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -168485,8 +171028,8 @@ var elliptic = __webpack_require__(8);
 var utils = elliptic.utils;
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
-var KeyPair = __webpack_require__(556);
-var Signature = __webpack_require__(557);
+var KeyPair = __webpack_require__(559);
+var Signature = __webpack_require__(560);
 
 function EDDSA(curve) {
   assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -168599,7 +171142,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 
 
 /***/ }),
-/* 556 */
+/* 559 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -168702,7 +171245,7 @@ module.exports = KeyPair;
 
 
 /***/ }),
-/* 557 */
+/* 560 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -168775,7 +171318,7 @@ module.exports = Signature;
 
 
 /***/ }),
-/* 558 */
+/* 561 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -169561,7 +172104,7 @@ module.exports = {
 
 
 /***/ }),
-/* 559 */
+/* 562 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -169688,7 +172231,7 @@ utils.intFromLE = intFromLE;
 
 
 /***/ }),
-/* 560 */
+/* 563 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -169815,7 +172358,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 561 */
+/* 564 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = __webpack_require__(15);
@@ -169912,7 +172455,7 @@ BlockHash.prototype._pad = function pad() {
 
 
 /***/ }),
-/* 562 */
+/* 565 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hmac = exports;
@@ -169966,7 +172509,7 @@ Hmac.prototype.digest = function digest(enc) {
 
 
 /***/ }),
-/* 563 */
+/* 566 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = __webpack_require__(15);
@@ -170116,7 +172659,7 @@ var sh = [
 
 
 /***/ }),
-/* 564 */
+/* 567 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = __webpack_require__(15);
@@ -170686,7 +173229,7 @@ function g1_512_lo(xh, xl) {
 
 
 /***/ }),
-/* 565 */
+/* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var utils = exports;
@@ -170949,7 +173492,7 @@ exports.shr64_lo = shr64_lo;
 
 
 /***/ }),
-/* 566 */
+/* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -171069,7 +173612,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 
 
 /***/ }),
-/* 567 */
+/* 570 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -171159,7 +173702,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 568 */
+/* 571 */
 /***/ (function(module, exports) {
 
 
@@ -171174,7 +173717,7 @@ module.exports = function(arr, obj){
 };
 
 /***/ }),
-/* 569 */
+/* 572 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(16),
@@ -171187,14 +173730,14 @@ module.exports = DataView;
 
 
 /***/ }),
-/* 570 */
+/* 573 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var hashClear = __webpack_require__(619),
-    hashDelete = __webpack_require__(620),
-    hashGet = __webpack_require__(621),
-    hashHas = __webpack_require__(622),
-    hashSet = __webpack_require__(623);
+var hashClear = __webpack_require__(622),
+    hashDelete = __webpack_require__(623),
+    hashGet = __webpack_require__(624),
+    hashHas = __webpack_require__(625),
+    hashSet = __webpack_require__(626);
 
 /**
  * Creates a hash object.
@@ -171225,7 +173768,7 @@ module.exports = Hash;
 
 
 /***/ }),
-/* 571 */
+/* 574 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(16),
@@ -171238,7 +173781,7 @@ module.exports = Promise;
 
 
 /***/ }),
-/* 572 */
+/* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(16),
@@ -171251,12 +173794,12 @@ module.exports = Set;
 
 
 /***/ }),
-/* 573 */
+/* 576 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var MapCache = __webpack_require__(66),
-    setCacheAdd = __webpack_require__(643),
-    setCacheHas = __webpack_require__(644);
+    setCacheAdd = __webpack_require__(646),
+    setCacheHas = __webpack_require__(647);
 
 /**
  *
@@ -171284,7 +173827,7 @@ module.exports = SetCache;
 
 
 /***/ }),
-/* 574 */
+/* 577 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(13);
@@ -171296,7 +173839,7 @@ module.exports = Uint8Array;
 
 
 /***/ }),
-/* 575 */
+/* 578 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(16),
@@ -171309,7 +173852,7 @@ module.exports = WeakMap;
 
 
 /***/ }),
-/* 576 */
+/* 579 */
 /***/ (function(module, exports) {
 
 /**
@@ -171336,7 +173879,7 @@ module.exports = apply;
 
 
 /***/ }),
-/* 577 */
+/* 580 */
 /***/ (function(module, exports) {
 
 /**
@@ -171365,7 +173908,7 @@ module.exports = arrayEvery;
 
 
 /***/ }),
-/* 578 */
+/* 581 */
 /***/ (function(module, exports) {
 
 /**
@@ -171396,10 +173939,10 @@ module.exports = arrayFilter;
 
 
 /***/ }),
-/* 579 */
+/* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseTimes = __webpack_require__(603),
+var baseTimes = __webpack_require__(606),
     isArguments = __webpack_require__(71),
     isArray = __webpack_require__(11),
     isBuffer = __webpack_require__(72),
@@ -171451,7 +173994,7 @@ module.exports = arrayLikeKeys;
 
 
 /***/ }),
-/* 580 */
+/* 583 */
 /***/ (function(module, exports) {
 
 /**
@@ -171478,7 +174021,7 @@ module.exports = arrayMap;
 
 
 /***/ }),
-/* 581 */
+/* 584 */
 /***/ (function(module, exports) {
 
 /**
@@ -171504,7 +174047,7 @@ module.exports = arrayPush;
 
 
 /***/ }),
-/* 582 */
+/* 585 */
 /***/ (function(module, exports) {
 
 /**
@@ -171533,7 +174076,7 @@ module.exports = arraySome;
 
 
 /***/ }),
-/* 583 */
+/* 586 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var copyObject = __webpack_require__(120),
@@ -171556,7 +174099,7 @@ module.exports = baseAssign;
 
 
 /***/ }),
-/* 584 */
+/* 587 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(12);
@@ -171592,11 +174135,11 @@ module.exports = baseCreate;
 
 
 /***/ }),
-/* 585 */
+/* 588 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseForOwn = __webpack_require__(588),
-    createBaseEach = __webpack_require__(609);
+var baseForOwn = __webpack_require__(591),
+    createBaseEach = __webpack_require__(612);
 
 /**
  * The base implementation of `_.forEach` without support for iteratee shorthands.
@@ -171612,10 +174155,10 @@ module.exports = baseEach;
 
 
 /***/ }),
-/* 586 */
+/* 589 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseEach = __webpack_require__(585);
+var baseEach = __webpack_require__(588);
 
 /**
  * The base implementation of `_.every` without support for iteratee shorthands.
@@ -171639,10 +174182,10 @@ module.exports = baseEvery;
 
 
 /***/ }),
-/* 587 */
+/* 590 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var createBaseFor = __webpack_require__(610);
+var createBaseFor = __webpack_require__(613);
 
 /**
  * The base implementation of `baseForOwn` which iterates over `object`
@@ -171661,10 +174204,10 @@ module.exports = baseFor;
 
 
 /***/ }),
-/* 588 */
+/* 591 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseFor = __webpack_require__(587),
+var baseFor = __webpack_require__(590),
     keys = __webpack_require__(34);
 
 /**
@@ -171683,10 +174226,10 @@ module.exports = baseForOwn;
 
 
 /***/ }),
-/* 589 */
+/* 592 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayPush = __webpack_require__(581),
+var arrayPush = __webpack_require__(584),
     isArray = __webpack_require__(11);
 
 /**
@@ -171709,7 +174252,7 @@ module.exports = baseGetAllKeys;
 
 
 /***/ }),
-/* 590 */
+/* 593 */
 /***/ (function(module, exports) {
 
 /**
@@ -171728,7 +174271,7 @@ module.exports = baseHasIn;
 
 
 /***/ }),
-/* 591 */
+/* 594 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(31),
@@ -171752,13 +174295,13 @@ module.exports = baseIsArguments;
 
 
 /***/ }),
-/* 592 */
+/* 595 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(113),
     equalArrays = __webpack_require__(122),
-    equalByTag = __webpack_require__(611),
-    equalObjects = __webpack_require__(612),
+    equalByTag = __webpack_require__(614),
+    equalObjects = __webpack_require__(615),
     getTag = __webpack_require__(124),
     isArray = __webpack_require__(11),
     isBuffer = __webpack_require__(72),
@@ -171841,7 +174384,7 @@ module.exports = baseIsEqualDeep;
 
 
 /***/ }),
-/* 593 */
+/* 596 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Stack = __webpack_require__(113),
@@ -171909,11 +174452,11 @@ module.exports = baseIsMatch;
 
 
 /***/ }),
-/* 594 */
+/* 597 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isFunction = __webpack_require__(49),
-    isMasked = __webpack_require__(625),
+    isMasked = __webpack_require__(628),
     isObject = __webpack_require__(12),
     toSource = __webpack_require__(128);
 
@@ -171962,7 +174505,7 @@ module.exports = baseIsNative;
 
 
 /***/ }),
-/* 595 */
+/* 598 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(31),
@@ -172028,14 +174571,14 @@ module.exports = baseIsTypedArray;
 
 
 /***/ }),
-/* 596 */
+/* 599 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseMatches = __webpack_require__(597),
-    baseMatchesProperty = __webpack_require__(598),
+var baseMatches = __webpack_require__(600),
+    baseMatchesProperty = __webpack_require__(601),
     identity = __webpack_require__(70),
     isArray = __webpack_require__(11),
-    property = __webpack_require__(661);
+    property = __webpack_require__(664);
 
 /**
  * The base implementation of `_.iteratee`.
@@ -172065,11 +174608,11 @@ module.exports = baseIteratee;
 
 
 /***/ }),
-/* 597 */
+/* 600 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsMatch = __webpack_require__(593),
-    getMatchData = __webpack_require__(614),
+var baseIsMatch = __webpack_require__(596),
+    getMatchData = __webpack_require__(617),
     matchesStrictComparable = __webpack_require__(127);
 
 /**
@@ -172093,12 +174636,12 @@ module.exports = baseMatches;
 
 
 /***/ }),
-/* 598 */
+/* 601 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsEqual = __webpack_require__(117),
-    get = __webpack_require__(657),
-    hasIn = __webpack_require__(658),
+    get = __webpack_require__(660),
+    hasIn = __webpack_require__(661),
     isKey = __webpack_require__(68),
     isStrictComparable = __webpack_require__(126),
     matchesStrictComparable = __webpack_require__(127),
@@ -172132,7 +174675,7 @@ module.exports = baseMatchesProperty;
 
 
 /***/ }),
-/* 599 */
+/* 602 */
 /***/ (function(module, exports) {
 
 /**
@@ -172152,7 +174695,7 @@ module.exports = baseProperty;
 
 
 /***/ }),
-/* 600 */
+/* 603 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGet = __webpack_require__(116);
@@ -172174,12 +174717,12 @@ module.exports = basePropertyDeep;
 
 
 /***/ }),
-/* 601 */
+/* 604 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var identity = __webpack_require__(70),
-    overRest = __webpack_require__(642),
-    setToString = __webpack_require__(646);
+    overRest = __webpack_require__(645),
+    setToString = __webpack_require__(649);
 
 /**
  * The base implementation of `_.rest` which doesn't validate or coerce arguments.
@@ -172197,10 +174740,10 @@ module.exports = baseRest;
 
 
 /***/ }),
-/* 602 */
+/* 605 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var constant = __webpack_require__(655),
+var constant = __webpack_require__(658),
     defineProperty = __webpack_require__(121),
     identity = __webpack_require__(70);
 
@@ -172225,7 +174768,7 @@ module.exports = baseSetToString;
 
 
 /***/ }),
-/* 603 */
+/* 606 */
 /***/ (function(module, exports) {
 
 /**
@@ -172251,11 +174794,11 @@ module.exports = baseTimes;
 
 
 /***/ }),
-/* 604 */
+/* 607 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(43),
-    arrayMap = __webpack_require__(580),
+    arrayMap = __webpack_require__(583),
     isArray = __webpack_require__(11),
     isSymbol = __webpack_require__(74);
 
@@ -172294,7 +174837,7 @@ module.exports = baseToString;
 
 
 /***/ }),
-/* 605 */
+/* 608 */
 /***/ (function(module, exports) {
 
 /**
@@ -172314,7 +174857,7 @@ module.exports = baseUnary;
 
 
 /***/ }),
-/* 606 */
+/* 609 */
 /***/ (function(module, exports) {
 
 /**
@@ -172333,7 +174876,7 @@ module.exports = cacheHas;
 
 
 /***/ }),
-/* 607 */
+/* 610 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(13);
@@ -172345,10 +174888,10 @@ module.exports = coreJsData;
 
 
 /***/ }),
-/* 608 */
+/* 611 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseRest = __webpack_require__(601),
+var baseRest = __webpack_require__(604),
     isIterateeCall = __webpack_require__(125);
 
 /**
@@ -172388,7 +174931,7 @@ module.exports = createAssigner;
 
 
 /***/ }),
-/* 609 */
+/* 612 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isArrayLike = __webpack_require__(32);
@@ -172426,7 +174969,7 @@ module.exports = createBaseEach;
 
 
 /***/ }),
-/* 610 */
+/* 613 */
 /***/ (function(module, exports) {
 
 /**
@@ -172457,15 +175000,15 @@ module.exports = createBaseFor;
 
 
 /***/ }),
-/* 611 */
+/* 614 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(43),
-    Uint8Array = __webpack_require__(574),
+    Uint8Array = __webpack_require__(577),
     eq = __webpack_require__(48),
     equalArrays = __webpack_require__(122),
-    mapToArray = __webpack_require__(636),
-    setToArray = __webpack_require__(645);
+    mapToArray = __webpack_require__(639),
+    setToArray = __webpack_require__(648);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -172575,10 +175118,10 @@ module.exports = equalByTag;
 
 
 /***/ }),
-/* 612 */
+/* 615 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getAllKeys = __webpack_require__(613);
+var getAllKeys = __webpack_require__(616);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -172670,11 +175213,11 @@ module.exports = equalObjects;
 
 
 /***/ }),
-/* 613 */
+/* 616 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseGetAllKeys = __webpack_require__(589),
-    getSymbols = __webpack_require__(616),
+var baseGetAllKeys = __webpack_require__(592),
+    getSymbols = __webpack_require__(619),
     keys = __webpack_require__(34);
 
 /**
@@ -172692,7 +175235,7 @@ module.exports = getAllKeys;
 
 
 /***/ }),
-/* 614 */
+/* 617 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isStrictComparable = __webpack_require__(126),
@@ -172722,7 +175265,7 @@ module.exports = getMatchData;
 
 
 /***/ }),
-/* 615 */
+/* 618 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(43);
@@ -172774,11 +175317,11 @@ module.exports = getRawTag;
 
 
 /***/ }),
-/* 616 */
+/* 619 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayFilter = __webpack_require__(578),
-    stubArray = __webpack_require__(662);
+var arrayFilter = __webpack_require__(581),
+    stubArray = __webpack_require__(665);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -172810,7 +175353,7 @@ module.exports = getSymbols;
 
 
 /***/ }),
-/* 617 */
+/* 620 */
 /***/ (function(module, exports) {
 
 /**
@@ -172829,7 +175372,7 @@ module.exports = getValue;
 
 
 /***/ }),
-/* 618 */
+/* 621 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var castPath = __webpack_require__(119),
@@ -172874,7 +175417,7 @@ module.exports = hasPath;
 
 
 /***/ }),
-/* 619 */
+/* 622 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(46);
@@ -172895,7 +175438,7 @@ module.exports = hashClear;
 
 
 /***/ }),
-/* 620 */
+/* 623 */
 /***/ (function(module, exports) {
 
 /**
@@ -172918,7 +175461,7 @@ module.exports = hashDelete;
 
 
 /***/ }),
-/* 621 */
+/* 624 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(46);
@@ -172954,7 +175497,7 @@ module.exports = hashGet;
 
 
 /***/ }),
-/* 622 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(46);
@@ -172983,7 +175526,7 @@ module.exports = hashHas;
 
 
 /***/ }),
-/* 623 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(46);
@@ -173012,7 +175555,7 @@ module.exports = hashSet;
 
 
 /***/ }),
-/* 624 */
+/* 627 */
 /***/ (function(module, exports) {
 
 /**
@@ -173033,10 +175576,10 @@ module.exports = isKeyable;
 
 
 /***/ }),
-/* 625 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var coreJsData = __webpack_require__(607);
+var coreJsData = __webpack_require__(610);
 
 /** Used to detect methods masquerading as native. */
 var maskSrcKey = (function() {
@@ -173059,7 +175602,7 @@ module.exports = isMasked;
 
 
 /***/ }),
-/* 626 */
+/* 629 */
 /***/ (function(module, exports) {
 
 /**
@@ -173078,7 +175621,7 @@ module.exports = listCacheClear;
 
 
 /***/ }),
-/* 627 */
+/* 630 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(44);
@@ -173119,7 +175662,7 @@ module.exports = listCacheDelete;
 
 
 /***/ }),
-/* 628 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(44);
@@ -173144,7 +175687,7 @@ module.exports = listCacheGet;
 
 
 /***/ }),
-/* 629 */
+/* 632 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(44);
@@ -173166,7 +175709,7 @@ module.exports = listCacheHas;
 
 
 /***/ }),
-/* 630 */
+/* 633 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(44);
@@ -173198,10 +175741,10 @@ module.exports = listCacheSet;
 
 
 /***/ }),
-/* 631 */
+/* 634 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Hash = __webpack_require__(570),
+var Hash = __webpack_require__(573),
     ListCache = __webpack_require__(42),
     Map = __webpack_require__(65);
 
@@ -173225,7 +175768,7 @@ module.exports = mapCacheClear;
 
 
 /***/ }),
-/* 632 */
+/* 635 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(45);
@@ -173249,7 +175792,7 @@ module.exports = mapCacheDelete;
 
 
 /***/ }),
-/* 633 */
+/* 636 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(45);
@@ -173271,7 +175814,7 @@ module.exports = mapCacheGet;
 
 
 /***/ }),
-/* 634 */
+/* 637 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(45);
@@ -173293,7 +175836,7 @@ module.exports = mapCacheHas;
 
 
 /***/ }),
-/* 635 */
+/* 638 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(45);
@@ -173321,7 +175864,7 @@ module.exports = mapCacheSet;
 
 
 /***/ }),
-/* 636 */
+/* 639 */
 /***/ (function(module, exports) {
 
 /**
@@ -173345,10 +175888,10 @@ module.exports = mapToArray;
 
 
 /***/ }),
-/* 637 */
+/* 640 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var memoize = __webpack_require__(660);
+var memoize = __webpack_require__(663);
 
 /** Used as the maximum memoize cache size. */
 var MAX_MEMOIZE_SIZE = 500;
@@ -173377,10 +175920,10 @@ module.exports = memoizeCapped;
 
 
 /***/ }),
-/* 638 */
+/* 641 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var overArg = __webpack_require__(641);
+var overArg = __webpack_require__(644);
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeKeys = overArg(Object.keys, Object);
@@ -173389,7 +175932,7 @@ module.exports = nativeKeys;
 
 
 /***/ }),
-/* 639 */
+/* 642 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(123);
@@ -173418,7 +175961,7 @@ module.exports = nodeUtil;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(53)(module)))
 
 /***/ }),
-/* 640 */
+/* 643 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -173446,7 +175989,7 @@ module.exports = objectToString;
 
 
 /***/ }),
-/* 641 */
+/* 644 */
 /***/ (function(module, exports) {
 
 /**
@@ -173467,10 +176010,10 @@ module.exports = overArg;
 
 
 /***/ }),
-/* 642 */
+/* 645 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var apply = __webpack_require__(576);
+var apply = __webpack_require__(579);
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
@@ -173509,7 +176052,7 @@ module.exports = overRest;
 
 
 /***/ }),
-/* 643 */
+/* 646 */
 /***/ (function(module, exports) {
 
 /** Used to stand-in for `undefined` hash values. */
@@ -173534,7 +176077,7 @@ module.exports = setCacheAdd;
 
 
 /***/ }),
-/* 644 */
+/* 647 */
 /***/ (function(module, exports) {
 
 /**
@@ -173554,7 +176097,7 @@ module.exports = setCacheHas;
 
 
 /***/ }),
-/* 645 */
+/* 648 */
 /***/ (function(module, exports) {
 
 /**
@@ -173578,11 +176121,11 @@ module.exports = setToArray;
 
 
 /***/ }),
-/* 646 */
+/* 649 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseSetToString = __webpack_require__(602),
-    shortOut = __webpack_require__(647);
+var baseSetToString = __webpack_require__(605),
+    shortOut = __webpack_require__(650);
 
 /**
  * Sets the `toString` method of `func` to return `string`.
@@ -173598,7 +176141,7 @@ module.exports = setToString;
 
 
 /***/ }),
-/* 647 */
+/* 650 */
 /***/ (function(module, exports) {
 
 /** Used to detect hot functions by number of calls within a span of milliseconds. */
@@ -173641,7 +176184,7 @@ module.exports = shortOut;
 
 
 /***/ }),
-/* 648 */
+/* 651 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(42);
@@ -173662,7 +176205,7 @@ module.exports = stackClear;
 
 
 /***/ }),
-/* 649 */
+/* 652 */
 /***/ (function(module, exports) {
 
 /**
@@ -173686,7 +176229,7 @@ module.exports = stackDelete;
 
 
 /***/ }),
-/* 650 */
+/* 653 */
 /***/ (function(module, exports) {
 
 /**
@@ -173706,7 +176249,7 @@ module.exports = stackGet;
 
 
 /***/ }),
-/* 651 */
+/* 654 */
 /***/ (function(module, exports) {
 
 /**
@@ -173726,7 +176269,7 @@ module.exports = stackHas;
 
 
 /***/ }),
-/* 652 */
+/* 655 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(42),
@@ -173766,10 +176309,10 @@ module.exports = stackSet;
 
 
 /***/ }),
-/* 653 */
+/* 656 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var memoizeCapped = __webpack_require__(637);
+var memoizeCapped = __webpack_require__(640);
 
 /** Used to match property names within property paths. */
 var reLeadingDot = /^\./,
@@ -173800,12 +176343,12 @@ module.exports = stringToPath;
 
 
 /***/ }),
-/* 654 */
+/* 657 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assignValue = __webpack_require__(114),
     copyObject = __webpack_require__(120),
-    createAssigner = __webpack_require__(608),
+    createAssigner = __webpack_require__(611),
     isArrayLike = __webpack_require__(32),
     isPrototype = __webpack_require__(69),
     keys = __webpack_require__(34);
@@ -173864,7 +176407,7 @@ module.exports = assign;
 
 
 /***/ }),
-/* 655 */
+/* 658 */
 /***/ (function(module, exports) {
 
 /**
@@ -173896,12 +176439,12 @@ module.exports = constant;
 
 
 /***/ }),
-/* 656 */
+/* 659 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayEvery = __webpack_require__(577),
-    baseEvery = __webpack_require__(586),
-    baseIteratee = __webpack_require__(596),
+var arrayEvery = __webpack_require__(580),
+    baseEvery = __webpack_require__(589),
+    baseIteratee = __webpack_require__(599),
     isArray = __webpack_require__(11),
     isIterateeCall = __webpack_require__(125);
 
@@ -173958,7 +176501,7 @@ module.exports = every;
 
 
 /***/ }),
-/* 657 */
+/* 660 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGet = __webpack_require__(116);
@@ -173997,11 +176540,11 @@ module.exports = get;
 
 
 /***/ }),
-/* 658 */
+/* 661 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseHasIn = __webpack_require__(590),
-    hasPath = __webpack_require__(618);
+var baseHasIn = __webpack_require__(593),
+    hasPath = __webpack_require__(621);
 
 /**
  * Checks if `path` is a direct or inherited property of `object`.
@@ -174037,7 +176580,7 @@ module.exports = hasIn;
 
 
 /***/ }),
-/* 659 */
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseKeys = __webpack_require__(118),
@@ -174120,7 +176663,7 @@ module.exports = isEmpty;
 
 
 /***/ }),
-/* 660 */
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var MapCache = __webpack_require__(66);
@@ -174199,11 +176742,11 @@ module.exports = memoize;
 
 
 /***/ }),
-/* 661 */
+/* 664 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseProperty = __webpack_require__(599),
-    basePropertyDeep = __webpack_require__(600),
+var baseProperty = __webpack_require__(602),
+    basePropertyDeep = __webpack_require__(603),
     isKey = __webpack_require__(68),
     toKey = __webpack_require__(47);
 
@@ -174237,7 +176780,7 @@ module.exports = property;
 
 
 /***/ }),
-/* 662 */
+/* 665 */
 /***/ (function(module, exports) {
 
 /**
@@ -174266,7 +176809,7 @@ module.exports = stubArray;
 
 
 /***/ }),
-/* 663 */
+/* 666 */
 /***/ (function(module, exports) {
 
 /**
@@ -174290,10 +176833,10 @@ module.exports = stubFalse;
 
 
 /***/ }),
-/* 664 */
+/* 667 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseToString = __webpack_require__(604);
+var baseToString = __webpack_require__(607);
 
 /**
  * Converts `value` to a string. An empty string is returned for `null`
@@ -174324,7 +176867,7 @@ module.exports = toString;
 
 
 /***/ }),
-/* 665 */
+/* 668 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -174351,8 +176894,8 @@ module.exports = toString;
 
 
 
-var punycode = __webpack_require__(675);
-var util = __webpack_require__(666);
+var punycode = __webpack_require__(678);
+var util = __webpack_require__(669);
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -175063,7 +177606,7 @@ Url.prototype.parseHost = function() {
 
 
 /***/ }),
-/* 666 */
+/* 669 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -175086,7 +177629,7 @@ module.exports = {
 
 
 /***/ }),
-/* 667 */
+/* 670 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -175105,7 +177648,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 668 */
+/* 671 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -175115,7 +177658,7 @@ module.exports = {
 
 var asn1 = __webpack_require__(27)
 
-exports.certificate = __webpack_require__(669)
+exports.certificate = __webpack_require__(672)
 
 var RSAPrivateKey = asn1.define('RSAPrivateKey', function () {
   this.seq().obj(
@@ -175234,7 +177777,7 @@ exports.signature = asn1.define('signature', function () {
 
 
 /***/ }),
-/* 669 */
+/* 672 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -175329,7 +177872,7 @@ module.exports = X509Certificate
 
 
 /***/ }),
-/* 670 */
+/* 673 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// adapted from https://github.com/apatil/pemstrip
@@ -175366,7 +177909,7 @@ module.exports = function (okey, password) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 671 */
+/* 674 */
 /***/ (function(module, exports) {
 
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -175390,11 +177933,11 @@ module.exports = function (iterations, keylen) {
 
 
 /***/ }),
-/* 672 */
+/* 675 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.publicEncrypt = __webpack_require__(674);
-exports.privateDecrypt = __webpack_require__(673);
+exports.publicEncrypt = __webpack_require__(677);
+exports.privateDecrypt = __webpack_require__(676);
 
 exports.privateEncrypt = function privateEncrypt(key, buf) {
   return exports.publicEncrypt(key, buf, true);
@@ -175405,7 +177948,7 @@ exports.publicDecrypt = function publicDecrypt(key, buf) {
 };
 
 /***/ }),
-/* 673 */
+/* 676 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(50);
@@ -175519,7 +178062,7 @@ function compare(a, b){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 674 */
+/* 677 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(50);
@@ -175620,7 +178163,7 @@ function nonZero(len, crypto) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 675 */
+/* 678 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -176156,7 +178699,7 @@ function nonZero(len, crypto) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(53)(module), __webpack_require__(14)))
 
 /***/ }),
-/* 676 */
+/* 679 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -176247,7 +178790,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 677 */
+/* 680 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -176339,14 +178882,14 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 678 */
+/* 681 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(51).Duplex
 
 
 /***/ }),
-/* 679 */
+/* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -176378,7 +178921,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 680 */
+/* 683 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -176448,21 +178991,21 @@ BufferList.prototype.concat = function (n) {
 };
 
 /***/ }),
-/* 681 */
+/* 684 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(51).PassThrough
 
 
 /***/ }),
-/* 682 */
+/* 685 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(51).Transform
 
 
 /***/ }),
-/* 683 */
+/* 686 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {var Stream = __webpack_require__(18)
@@ -176477,7 +179020,7 @@ module.exports = Writable
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
-/* 684 */
+/* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -176694,7 +179237,7 @@ module.exports = ripemd160
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 685 */
+/* 688 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {;(function (sax) { // wrapper for non-node envs
@@ -178277,7 +180820,7 @@ module.exports = ripemd160
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 686 */
+/* 689 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -178470,7 +181013,7 @@ module.exports = ripemd160
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14), __webpack_require__(10)))
 
 /***/ }),
-/* 687 */
+/* 690 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var exports = module.exports = function SHA (algorithm) {
@@ -178482,16 +181025,16 @@ var exports = module.exports = function SHA (algorithm) {
   return new Algorithm()
 }
 
-exports.sha = __webpack_require__(688)
-exports.sha1 = __webpack_require__(689)
-exports.sha224 = __webpack_require__(690)
+exports.sha = __webpack_require__(691)
+exports.sha1 = __webpack_require__(692)
+exports.sha224 = __webpack_require__(693)
 exports.sha256 = __webpack_require__(141)
-exports.sha384 = __webpack_require__(691)
+exports.sha384 = __webpack_require__(694)
 exports.sha512 = __webpack_require__(142)
 
 
 /***/ }),
-/* 688 */
+/* 691 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -178591,7 +181134,7 @@ module.exports = Sha
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 689 */
+/* 692 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -178696,7 +181239,7 @@ module.exports = Sha1
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 690 */
+/* 693 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/**
@@ -178755,7 +181298,7 @@ module.exports = Sha224
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 691 */
+/* 694 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var inherits = __webpack_require__(5)
@@ -178818,7 +181361,7 @@ module.exports = Sha384
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 692 */
+/* 695 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -178892,7 +181435,7 @@ function config (name) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
-/* 693 */
+/* 696 */
 /***/ (function(module, exports) {
 
 if (typeof Object.create === 'function') {
@@ -178921,7 +181464,7 @@ if (typeof Object.create === 'function') {
 
 
 /***/ }),
-/* 694 */
+/* 697 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = function isBuffer(arg) {
@@ -178931,11 +181474,11 @@ if (typeof Object.create === 'function') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).Buffer))
 
 /***/ }),
-/* 695 */
+/* 698 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var v1 = __webpack_require__(696);
-var v4 = __webpack_require__(697);
+var v1 = __webpack_require__(699);
+var v4 = __webpack_require__(700);
 
 var uuid = v4;
 uuid.v1 = v1;
@@ -178945,7 +181488,7 @@ module.exports = uuid;
 
 
 /***/ }),
-/* 696 */
+/* 699 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Unique ID creation requires a high quality random # generator.  We feature
@@ -179054,7 +181597,7 @@ module.exports = v1;
 
 
 /***/ }),
-/* 697 */
+/* 700 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var rng = __webpack_require__(145);
@@ -179089,10 +181632,10 @@ module.exports = v4;
 
 
 /***/ }),
-/* 698 */
+/* 701 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var indexOf = __webpack_require__(568);
+var indexOf = __webpack_require__(571);
 
 var Object_keys = function (obj) {
     if (Object.keys) return Object.keys(obj)
@@ -179233,7 +181776,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 699 */
+/* 702 */
 /***/ (function(module, exports) {
 
 // Generated by CoffeeScript 1.10.0
@@ -179251,7 +181794,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 700 */
+/* 703 */
 /***/ (function(module, exports) {
 
 // Generated by CoffeeScript 1.10.0
@@ -179291,7 +181834,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 701 */
+/* 704 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.10.0
@@ -179302,15 +181845,15 @@ exports.createContext = Script.createContext = function (context) {
     hasProp = {}.hasOwnProperty,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  sax = __webpack_require__(685);
+  sax = __webpack_require__(688);
 
   events = __webpack_require__(40);
 
   builder = __webpack_require__(152);
 
-  bom = __webpack_require__(699);
+  bom = __webpack_require__(702);
 
-  processors = __webpack_require__(700);
+  processors = __webpack_require__(703);
 
   setImmediate = __webpack_require__(132).setImmediate;
 
@@ -179840,7 +182383,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 702 */
+/* 705 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.9.1
@@ -179878,14 +182421,14 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 703 */
+/* 706 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.9.1
 (function() {
   var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
 
-  XMLStringifier = __webpack_require__(709);
+  XMLStringifier = __webpack_require__(712);
 
   XMLDeclaration = __webpack_require__(148);
 
@@ -179953,7 +182496,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 704 */
+/* 707 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.9.1
@@ -180027,7 +182570,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 705 */
+/* 708 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.9.1
@@ -180079,7 +182622,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 706 */
+/* 709 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.9.1
@@ -180169,7 +182712,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 707 */
+/* 710 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.9.1
@@ -180231,7 +182774,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 708 */
+/* 711 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.9.1
@@ -180286,7 +182829,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 709 */
+/* 712 */
 /***/ (function(module, exports) {
 
 // Generated by CoffeeScript 1.9.1
@@ -180462,7 +183005,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 710 */
+/* 713 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Generated by CoffeeScript 1.9.1
@@ -180517,7 +183060,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 711 */
+/* 714 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(153);

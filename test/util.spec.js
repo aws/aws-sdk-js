@@ -1284,19 +1284,32 @@
   });
 
   describe('AWS.util.userAgent', function() {
+    var environment;
+    beforeEach(function() {
+      environment = AWS.util.environment;
+    });
+
+    afterEach(function() {
+      AWS.util.environment = environment;
+    });
+
     it('should include an identifier for the browser SDK', function() {
-      helpers.spyOn(AWS.util, 'isBrowser').andReturn(true);
+      AWS.util.environment = 'js';
       return expect(AWS.util.userAgent()).to.match(/^aws-sdk-js/);
     });
     it('should include an identifier for the node SDK', function() {
-      helpers.spyOn(AWS.util, 'isBrowser').andReturn(false);
+      AWS.util.environment = 'nodejs';
       return expect(AWS.util.userAgent()).to.match(/^aws-sdk-nodejs/);
+    });
+    it('should include an identifier for the react-native SDK', function() {
+      AWS.util.environment = 'react-native';
+      return expect(AWS.util.userAgent()).to.match(/^aws-sdk-react-native/);
     });
     it('should include the current SDK version number', function() {
       return expect(AWS.util.userAgent()).to.have.string(AWS.VERSION);
     });
     return it('should include the engine when not running in a browser', function() {
-      helpers.spyOn(AWS.util, 'isBrowser').andReturn(false);
+      AWS.util.environment = 'nodejs';
       helpers.spyOn(AWS.util, 'engine').andReturn('ENGINE');
       return expect(AWS.util.userAgent()).to.match(/ENGINE$/);
     });

@@ -36,8 +36,8 @@ namespace :reactnative do
     write_configuration
     mkdir_p "test/browser/build"
     cp "dist/aws-sdk-react-native.js", "test/browser/build/aws-sdk-all.js"
-    files = Dir.glob("test/**/*.spec.js").join(" ")
-    files += " test/helpers.js"
+    files = "test/helpers.js ";
+    files += Dir.glob("test/**/*.spec.js").join(" ")
     sh({"SERVICES" => "all"}, $BROWSERIFY +
        " -i domain #{files} > #{$BROWSERIFY_TEST}")
     rm_f "test/configuration.js"
