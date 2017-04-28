@@ -99,7 +99,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.47.0',
+  VERSION: '2.48.0',
 
   /**
    * @api private
@@ -32222,6 +32222,16 @@ module.exports = {
 			"output_token": "NextToken",
 			"result_key": "Stacks"
 		},
+		"ListExports": {
+			"input_token": "NextToken",
+			"output_token": "NextToken",
+			"result_key": "Exports"
+		},
+		"ListImports": {
+			"input_token": "NextToken",
+			"output_token": "NextToken",
+			"result_key": "Imports"
+		},
 		"ListStackResources": {
 			"input_token": "NextToken",
 			"output_token": "NextToken",
@@ -32386,6 +32396,31 @@ module.exports = {
 					"matcher": "pathAny",
 					"state": "failure",
 					"argument": "Stacks[].StackStatus"
+				},
+				{
+					"expected": "ValidationError",
+					"matcher": "error",
+					"state": "failure"
+				}
+			]
+		},
+		"ChangeSetCreateComplete": {
+			"delay": 30,
+			"operation": "DescribeChangeSet",
+			"maxAttempts": 120,
+			"description": "Wait until change set status is CREATE_COMPLETE.",
+			"acceptors": [
+				{
+					"argument": "Status",
+					"expected": "CREATE_COMPLETE",
+					"matcher": "path",
+					"state": "success"
+				},
+				{
+					"argument": "Status",
+					"expected": "FAILED",
+					"matcher": "path",
+					"state": "failure"
 				},
 				{
 					"expected": "ValidationError",

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.47.0-->
+<!--LATEST=2.48.0-->
 <!--ENTRYINSERT-->
+
+## 2.48.0
+* feature: CloudFormation: Adding back the removed waiters and paginators.
 
 ## 2.47.0
 * feature: CloudFormation: API update for CloudFormation: New optional parameter ClientRequestToken which can be used as an idempotency token to safely retry certain operations as well as tagging StackEvents.
