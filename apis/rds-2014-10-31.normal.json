@@ -4035,6 +4035,10 @@
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) for the DB cluster snapshot.</p>"
         },
+        "SourceDBClusterSnapshotArn": {
+          "shape": "String",
+          "documentation": "<p>If the DB cluster snapshot was copied from a source DB cluster snapshot, the Amazon Resource Name (ARN) for the source DB cluster snapshot; otherwise, a null value.</p>"
+        },
         "IAMDatabaseAuthenticationEnabled": {
           "shape": "Boolean",
           "documentation": "<p>True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled; otherwise false.</p>"

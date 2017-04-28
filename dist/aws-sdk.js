@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.46.0
+// AWS SDK for JavaScript v2.47.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -6244,7 +6244,8 @@ module.exports={
           "StackName"
         ],
         "members": {
-          "StackName": {}
+          "StackName": {},
+          "ClientRequestToken": {}
         }
       }
     },
@@ -6260,7 +6261,8 @@ module.exports={
           "ResourcesToSkip": {
             "type": "list",
             "member": {}
-          }
+          },
+          "ClientRequestToken": {}
         }
       },
       "output": {
@@ -6284,20 +6286,20 @@ module.exports={
             "type": "boolean"
           },
           "Parameters": {
-            "shape": "Sd"
+            "shape": "Se"
           },
           "Capabilities": {
-            "shape": "Si"
+            "shape": "Sj"
           },
           "ResourceTypes": {
-            "shape": "Sk"
+            "shape": "Sl"
           },
           "RoleARN": {},
           "NotificationARNs": {
-            "shape": "Sm"
+            "shape": "Sn"
           },
           "Tags": {
-            "shape": "So"
+            "shape": "Sp"
           },
           "ChangeSetName": {},
           "ClientToken": {},
@@ -6325,7 +6327,7 @@ module.exports={
           "TemplateBody": {},
           "TemplateURL": {},
           "Parameters": {
-            "shape": "Sd"
+            "shape": "Se"
           },
           "DisableRollback": {
             "type": "boolean"
@@ -6334,21 +6336,22 @@ module.exports={
             "type": "integer"
           },
           "NotificationARNs": {
-            "shape": "Sm"
+            "shape": "Sn"
           },
           "Capabilities": {
-            "shape": "Si"
+            "shape": "Sj"
           },
           "ResourceTypes": {
-            "shape": "Sk"
+            "shape": "Sl"
           },
           "RoleARN": {},
           "OnFailure": {},
           "StackPolicyBody": {},
           "StackPolicyURL": {},
           "Tags": {
-            "shape": "So"
-          }
+            "shape": "Sp"
+          },
+          "ClientRequestToken": {}
         }
       },
       "output": {
@@ -6388,7 +6391,8 @@ module.exports={
             "type": "list",
             "member": {}
           },
-          "RoleARN": {}
+          "RoleARN": {},
+          "ClientRequestToken": {}
         }
       }
     },
@@ -6441,7 +6445,7 @@ module.exports={
           "StackName": {},
           "Description": {},
           "Parameters": {
-            "shape": "Sd"
+            "shape": "Se"
           },
           "CreationTime": {
             "type": "timestamp"
@@ -6450,13 +6454,13 @@ module.exports={
           "Status": {},
           "StatusReason": {},
           "NotificationARNs": {
-            "shape": "Sm"
+            "shape": "Sn"
           },
           "Capabilities": {
-            "shape": "Si"
+            "shape": "Sj"
           },
           "Tags": {
-            "shape": "So"
+            "shape": "Sp"
           },
           "Changes": {
             "type": "list",
@@ -6538,7 +6542,8 @@ module.exports={
                 },
                 "ResourceStatus": {},
                 "ResourceStatusReason": {},
-                "ResourceProperties": {}
+                "ResourceProperties": {},
+                "ClientRequestToken": {}
               }
             }
           },
@@ -6656,7 +6661,7 @@ module.exports={
                 "ChangeSetId": {},
                 "Description": {},
                 "Parameters": {
-                  "shape": "Sd"
+                  "shape": "Se"
                 },
                 "CreationTime": {
                   "type": "timestamp"
@@ -6670,13 +6675,13 @@ module.exports={
                   "type": "boolean"
                 },
                 "NotificationARNs": {
-                  "shape": "Sm"
+                  "shape": "Sn"
                 },
                 "TimeoutInMinutes": {
                   "type": "integer"
                 },
                 "Capabilities": {
-                  "shape": "Si"
+                  "shape": "Sj"
                 },
                 "Outputs": {
                   "type": "list",
@@ -6691,7 +6696,7 @@ module.exports={
                 },
                 "RoleARN": {},
                 "Tags": {
-                  "shape": "So"
+                  "shape": "Sp"
                 }
               }
             }
@@ -6707,7 +6712,7 @@ module.exports={
           "TemplateBody": {},
           "TemplateURL": {},
           "Parameters": {
-            "shape": "Sd"
+            "shape": "Se"
           }
         }
       },
@@ -6727,7 +6732,8 @@ module.exports={
         ],
         "members": {
           "ChangeSetName": {},
-          "StackName": {}
+          "StackName": {},
+          "ClientRequestToken": {}
         }
       },
       "output": {
@@ -6814,16 +6820,16 @@ module.exports={
           },
           "Description": {},
           "Capabilities": {
-            "shape": "Si"
+            "shape": "Sj"
           },
           "CapabilitiesReason": {},
           "ResourceTypes": {
-            "shape": "Sk"
+            "shape": "Sl"
           },
           "Version": {},
           "Metadata": {},
           "DeclaredTransforms": {
-            "shape": "S3k"
+            "shape": "S3l"
           }
         }
       }
@@ -7048,23 +7054,24 @@ module.exports={
           "StackPolicyDuringUpdateBody": {},
           "StackPolicyDuringUpdateURL": {},
           "Parameters": {
-            "shape": "Sd"
+            "shape": "Se"
           },
           "Capabilities": {
-            "shape": "Si"
+            "shape": "Sj"
           },
           "ResourceTypes": {
-            "shape": "Sk"
+            "shape": "Sl"
           },
           "RoleARN": {},
           "StackPolicyBody": {},
           "StackPolicyURL": {},
           "NotificationARNs": {
-            "shape": "Sm"
+            "shape": "Sn"
           },
           "Tags": {
-            "shape": "So"
-          }
+            "shape": "Sp"
+          },
+          "ClientRequestToken": {}
         }
       },
       "output": {
@@ -7103,18 +7110,18 @@ module.exports={
           },
           "Description": {},
           "Capabilities": {
-            "shape": "Si"
+            "shape": "Sj"
           },
           "CapabilitiesReason": {},
           "DeclaredTransforms": {
-            "shape": "S3k"
+            "shape": "S3l"
           }
         }
       }
     }
   },
   "shapes": {
-    "Sd": {
+    "Se": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -7127,19 +7134,19 @@ module.exports={
         }
       }
     },
-    "Si": {
+    "Sj": {
       "type": "list",
       "member": {}
     },
-    "Sk": {
+    "Sl": {
       "type": "list",
       "member": {}
     },
-    "Sm": {
+    "Sn": {
       "type": "list",
       "member": {}
     },
-    "So": {
+    "Sp": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -7149,7 +7156,7 @@ module.exports={
         }
       }
     },
-    "S3k": {
+    "S3l": {
       "type": "list",
       "member": {}
     }
@@ -7170,16 +7177,6 @@ module.exports={
       "input_token": "NextToken",
       "output_token": "NextToken",
       "result_key": "Stacks"
-    },
-    "ListExports": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "result_key": "Exports"
-    },
-    "ListImports": {
-      "input_token": "NextToken",
-      "output_token": "NextToken",
-      "result_key": "Imports"
     },
     "ListStackResources": {
       "input_token": "NextToken",
@@ -7341,31 +7338,6 @@ module.exports={
           "matcher": "pathAny",
           "state": "failure",
           "argument": "Stacks[].StackStatus"
-        },
-        {
-          "expected": "ValidationError",
-          "matcher": "error",
-          "state": "failure"
-        }
-      ]
-    },
-    "ChangeSetCreateComplete": {
-      "delay": 30,
-      "operation": "DescribeChangeSet",
-      "maxAttempts": 120,
-      "description": "Wait until change set status is CREATE_COMPLETE.",
-      "acceptors": [
-        {
-          "argument": "Status",
-          "expected": "CREATE_COMPLETE",
-          "matcher": "path",
-          "state": "success"
-        },
-        {
-          "argument": "Status",
-          "expected": "FAILED",
-          "matcher": "path",
-          "state": "failure"
         },
         {
           "expected": "ValidationError",
@@ -76815,6 +76787,7 @@ module.exports={
         },
         "KmsKeyId": {},
         "DBClusterSnapshotArn": {},
+        "SourceDBClusterSnapshotArn": {},
         "IAMDatabaseAuthenticationEnabled": {
           "type": "boolean"
         }
@@ -91354,7 +91327,6 @@ module.exports={
     }
   }
 }
-
 },{}],141:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -100680,6 +100652,7 @@ util.crypto.lib = require('crypto-browserify');
 util.Buffer = require('buffer/').Buffer;
 util.url = require('url/');
 util.querystring = require('querystring/');
+util.environment = 'js';
 
 var AWS = require('./core');
 
@@ -101059,7 +101032,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.46.0',
+  VERSION: '2.47.0',
 
 
   Signers: {},
@@ -102825,7 +102798,11 @@ AWS.XHRClient = AWS.util.inherit({
     }
 
     try {
-      xhr.send(httpRequest.body);
+      if (httpRequest.body) {
+        xhr.send(httpRequest.body);
+      } else {
+        xhr.send();
+      }
     } catch (err) {
       if (httpRequest.body && typeof httpRequest.body.buffer === 'object') {
         xhr.send(httpRequest.body.buffer); // send ArrayBuffer directly
@@ -104475,13 +104452,16 @@ AWS.RDS.Signer = AWS.util.inherit({
         }
 
         var expires = 900;
-        service = new AWS.Service({
+        var serviceOptions = {
             region: options.region,
-            credentials: options.credentials,
             endpoint: new AWS.Endpoint(options.hostname + ':' + options.port),
             paramValidation: false,
             signatureVersion: 'v4'
-        });
+        };
+        if (options.credentials) {
+            serviceOptions.credentials = options.credentials;
+        }
+        service = new AWS.Service(serviceOptions);
         service.api = api;
 
         var request = service.makeRequest();
@@ -108338,6 +108318,7 @@ var AWS;
 
 
 var util = {
+  environment: 'nodejs',
   engine: function engine() {
     if (util.isBrowser() && typeof navigator !== 'undefined') {
       return navigator.userAgent;
@@ -108351,7 +108332,7 @@ var util = {
   },
 
   userAgent: function userAgent() {
-    var name = util.isBrowser() ? 'js' : 'nodejs';
+    var name = util.environment;
     var agent = 'aws-sdk-' + name + '/' + require('./core').VERSION;
     if (name === 'nodejs') agent += ' ' + util.engine();
     return agent;

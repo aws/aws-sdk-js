@@ -99,7 +99,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.46.0',
+  VERSION: '2.47.0',
 
   /**
    * @api private
@@ -7251,6 +7251,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -31280,7 +31284,8 @@ module.exports = {
 					"StackName"
 				],
 				"members": {
-					"StackName": {}
+					"StackName": {},
+					"ClientRequestToken": {}
 				}
 			}
 		},
@@ -31296,7 +31301,8 @@ module.exports = {
 					"ResourcesToSkip": {
 						"type": "list",
 						"member": {}
-					}
+					},
+					"ClientRequestToken": {}
 				}
 			},
 			"output": {
@@ -31320,20 +31326,20 @@ module.exports = {
 						"type": "boolean"
 					},
 					"Parameters": {
-						"shape": "Sd"
+						"shape": "Se"
 					},
 					"Capabilities": {
-						"shape": "Si"
+						"shape": "Sj"
 					},
 					"ResourceTypes": {
-						"shape": "Sk"
+						"shape": "Sl"
 					},
 					"RoleARN": {},
 					"NotificationARNs": {
-						"shape": "Sm"
+						"shape": "Sn"
 					},
 					"Tags": {
-						"shape": "So"
+						"shape": "Sp"
 					},
 					"ChangeSetName": {},
 					"ClientToken": {},
@@ -31361,7 +31367,7 @@ module.exports = {
 					"TemplateBody": {},
 					"TemplateURL": {},
 					"Parameters": {
-						"shape": "Sd"
+						"shape": "Se"
 					},
 					"DisableRollback": {
 						"type": "boolean"
@@ -31370,21 +31376,22 @@ module.exports = {
 						"type": "integer"
 					},
 					"NotificationARNs": {
-						"shape": "Sm"
+						"shape": "Sn"
 					},
 					"Capabilities": {
-						"shape": "Si"
+						"shape": "Sj"
 					},
 					"ResourceTypes": {
-						"shape": "Sk"
+						"shape": "Sl"
 					},
 					"RoleARN": {},
 					"OnFailure": {},
 					"StackPolicyBody": {},
 					"StackPolicyURL": {},
 					"Tags": {
-						"shape": "So"
-					}
+						"shape": "Sp"
+					},
+					"ClientRequestToken": {}
 				}
 			},
 			"output": {
@@ -31424,7 +31431,8 @@ module.exports = {
 						"type": "list",
 						"member": {}
 					},
-					"RoleARN": {}
+					"RoleARN": {},
+					"ClientRequestToken": {}
 				}
 			}
 		},
@@ -31477,7 +31485,7 @@ module.exports = {
 					"StackName": {},
 					"Description": {},
 					"Parameters": {
-						"shape": "Sd"
+						"shape": "Se"
 					},
 					"CreationTime": {
 						"type": "timestamp"
@@ -31486,13 +31494,13 @@ module.exports = {
 					"Status": {},
 					"StatusReason": {},
 					"NotificationARNs": {
-						"shape": "Sm"
+						"shape": "Sn"
 					},
 					"Capabilities": {
-						"shape": "Si"
+						"shape": "Sj"
 					},
 					"Tags": {
-						"shape": "So"
+						"shape": "Sp"
 					},
 					"Changes": {
 						"type": "list",
@@ -31574,7 +31582,8 @@ module.exports = {
 								},
 								"ResourceStatus": {},
 								"ResourceStatusReason": {},
-								"ResourceProperties": {}
+								"ResourceProperties": {},
+								"ClientRequestToken": {}
 							}
 						}
 					},
@@ -31692,7 +31701,7 @@ module.exports = {
 								"ChangeSetId": {},
 								"Description": {},
 								"Parameters": {
-									"shape": "Sd"
+									"shape": "Se"
 								},
 								"CreationTime": {
 									"type": "timestamp"
@@ -31706,13 +31715,13 @@ module.exports = {
 									"type": "boolean"
 								},
 								"NotificationARNs": {
-									"shape": "Sm"
+									"shape": "Sn"
 								},
 								"TimeoutInMinutes": {
 									"type": "integer"
 								},
 								"Capabilities": {
-									"shape": "Si"
+									"shape": "Sj"
 								},
 								"Outputs": {
 									"type": "list",
@@ -31727,7 +31736,7 @@ module.exports = {
 								},
 								"RoleARN": {},
 								"Tags": {
-									"shape": "So"
+									"shape": "Sp"
 								}
 							}
 						}
@@ -31743,7 +31752,7 @@ module.exports = {
 					"TemplateBody": {},
 					"TemplateURL": {},
 					"Parameters": {
-						"shape": "Sd"
+						"shape": "Se"
 					}
 				}
 			},
@@ -31763,7 +31772,8 @@ module.exports = {
 				],
 				"members": {
 					"ChangeSetName": {},
-					"StackName": {}
+					"StackName": {},
+					"ClientRequestToken": {}
 				}
 			},
 			"output": {
@@ -31850,16 +31860,16 @@ module.exports = {
 					},
 					"Description": {},
 					"Capabilities": {
-						"shape": "Si"
+						"shape": "Sj"
 					},
 					"CapabilitiesReason": {},
 					"ResourceTypes": {
-						"shape": "Sk"
+						"shape": "Sl"
 					},
 					"Version": {},
 					"Metadata": {},
 					"DeclaredTransforms": {
-						"shape": "S3k"
+						"shape": "S3l"
 					}
 				}
 			}
@@ -32084,23 +32094,24 @@ module.exports = {
 					"StackPolicyDuringUpdateBody": {},
 					"StackPolicyDuringUpdateURL": {},
 					"Parameters": {
-						"shape": "Sd"
+						"shape": "Se"
 					},
 					"Capabilities": {
-						"shape": "Si"
+						"shape": "Sj"
 					},
 					"ResourceTypes": {
-						"shape": "Sk"
+						"shape": "Sl"
 					},
 					"RoleARN": {},
 					"StackPolicyBody": {},
 					"StackPolicyURL": {},
 					"NotificationARNs": {
-						"shape": "Sm"
+						"shape": "Sn"
 					},
 					"Tags": {
-						"shape": "So"
-					}
+						"shape": "Sp"
+					},
+					"ClientRequestToken": {}
 				}
 			},
 			"output": {
@@ -32139,18 +32150,18 @@ module.exports = {
 					},
 					"Description": {},
 					"Capabilities": {
-						"shape": "Si"
+						"shape": "Sj"
 					},
 					"CapabilitiesReason": {},
 					"DeclaredTransforms": {
-						"shape": "S3k"
+						"shape": "S3l"
 					}
 				}
 			}
 		}
 	},
 	"shapes": {
-		"Sd": {
+		"Se": {
 			"type": "list",
 			"member": {
 				"type": "structure",
@@ -32163,19 +32174,19 @@ module.exports = {
 				}
 			}
 		},
-		"Si": {
+		"Sj": {
 			"type": "list",
 			"member": {}
 		},
-		"Sk": {
+		"Sl": {
 			"type": "list",
 			"member": {}
 		},
-		"Sm": {
+		"Sn": {
 			"type": "list",
 			"member": {}
 		},
-		"So": {
+		"Sp": {
 			"type": "list",
 			"member": {
 				"type": "structure",
@@ -32185,7 +32196,7 @@ module.exports = {
 				}
 			}
 		},
-		"S3k": {
+		"S3l": {
 			"type": "list",
 			"member": {}
 		}
@@ -32210,16 +32221,6 @@ module.exports = {
 			"input_token": "NextToken",
 			"output_token": "NextToken",
 			"result_key": "Stacks"
-		},
-		"ListExports": {
-			"input_token": "NextToken",
-			"output_token": "NextToken",
-			"result_key": "Exports"
-		},
-		"ListImports": {
-			"input_token": "NextToken",
-			"output_token": "NextToken",
-			"result_key": "Imports"
 		},
 		"ListStackResources": {
 			"input_token": "NextToken",
@@ -32385,31 +32386,6 @@ module.exports = {
 					"matcher": "pathAny",
 					"state": "failure",
 					"argument": "Stacks[].StackStatus"
-				},
-				{
-					"expected": "ValidationError",
-					"matcher": "error",
-					"state": "failure"
-				}
-			]
-		},
-		"ChangeSetCreateComplete": {
-			"delay": 30,
-			"operation": "DescribeChangeSet",
-			"maxAttempts": 120,
-			"description": "Wait until change set status is CREATE_COMPLETE.",
-			"acceptors": [
-				{
-					"argument": "Status",
-					"expected": "CREATE_COMPLETE",
-					"matcher": "path",
-					"state": "success"
-				},
-				{
-					"argument": "Status",
-					"expected": "FAILED",
-					"matcher": "path",
-					"state": "failure"
 				},
 				{
 					"expected": "ValidationError",
@@ -123113,6 +123089,7 @@ module.exports = {
 				},
 				"KmsKeyId": {},
 				"DBClusterSnapshotArn": {},
+				"SourceDBClusterSnapshotArn": {},
 				"IAMDatabaseAuthenticationEnabled": {
 					"type": "boolean"
 				}
@@ -137893,7 +137870,7 @@ module.exports = {
 				"members": {
 					"JobType": {},
 					"Resources": {
-						"shape": "Se"
+						"shape": "Sf"
 					},
 					"Description": {},
 					"AddressId": {},
@@ -137902,8 +137879,9 @@ module.exports = {
 					"SnowballType": {},
 					"ShippingOption": {},
 					"Notification": {
-						"shape": "Sr"
-					}
+						"shape": "Ss"
+					},
+					"ForwardingAddressId": {}
 				}
 			},
 			"output": {
@@ -137919,7 +137897,7 @@ module.exports = {
 				"members": {
 					"JobType": {},
 					"Resources": {
-						"shape": "Se"
+						"shape": "Sf"
 					},
 					"Description": {},
 					"AddressId": {},
@@ -137928,10 +137906,11 @@ module.exports = {
 					"SnowballCapacityPreference": {},
 					"ShippingOption": {},
 					"Notification": {
-						"shape": "Sr"
+						"shape": "Ss"
 					},
 					"ClusterId": {},
-					"SnowballType": {}
+					"SnowballType": {},
+					"ForwardingAddressId": {}
 				}
 			},
 			"output": {
@@ -138010,13 +137989,14 @@ module.exports = {
 								"type": "timestamp"
 							},
 							"Resources": {
-								"shape": "Se"
+								"shape": "Sf"
 							},
 							"AddressId": {},
 							"ShippingOption": {},
 							"Notification": {
-								"shape": "Sr"
-							}
+								"shape": "Ss"
+							},
+							"ForwardingAddressId": {}
 						}
 					}
 				}
@@ -138184,13 +138164,14 @@ module.exports = {
 					"RoleARN": {},
 					"Description": {},
 					"Resources": {
-						"shape": "Se"
+						"shape": "Sf"
 					},
 					"AddressId": {},
 					"ShippingOption": {},
 					"Notification": {
-						"shape": "Sr"
-					}
+						"shape": "Ss"
+					},
+					"ForwardingAddressId": {}
 				}
 			},
 			"output": {
@@ -138208,15 +138189,16 @@ module.exports = {
 					"JobId": {},
 					"RoleARN": {},
 					"Notification": {
-						"shape": "Sr"
+						"shape": "Ss"
 					},
 					"Resources": {
-						"shape": "Se"
+						"shape": "Sf"
 					},
 					"AddressId": {},
 					"ShippingOption": {},
 					"Description": {},
-					"SnowballCapacityPreference": {}
+					"SnowballCapacityPreference": {},
+					"ForwardingAddressId": {}
 				}
 			},
 			"output": {
@@ -138241,10 +138223,13 @@ module.exports = {
 				"Landmark": {},
 				"Country": {},
 				"PostalCode": {},
-				"PhoneNumber": {}
+				"PhoneNumber": {},
+				"IsRestricted": {
+					"type": "boolean"
+				}
 			}
 		},
-		"Se": {
+		"Sf": {
 			"type": "structure",
 			"members": {
 				"S3Resources": {
@@ -138283,7 +138268,7 @@ module.exports = {
 				}
 			}
 		},
-		"Sr": {
+		"Ss": {
 			"type": "structure",
 			"members": {
 				"SnsTopicARN": {},
@@ -138307,7 +138292,7 @@ module.exports = {
 					"type": "timestamp"
 				},
 				"Resources": {
-					"shape": "Se"
+					"shape": "Sf"
 				},
 				"Description": {},
 				"KmsKeyARN": {},
@@ -138327,7 +138312,7 @@ module.exports = {
 				},
 				"SnowballCapacityPreference": {},
 				"Notification": {
-					"shape": "Sr"
+					"shape": "Ss"
 				},
 				"DataTransferProgress": {
 					"type": "structure",
@@ -138354,7 +138339,8 @@ module.exports = {
 						"JobFailureLogURI": {}
 					}
 				},
-				"ClusterId": {}
+				"ClusterId": {},
+				"ForwardingAddressId": {}
 			}
 		},
 		"S1f": {
@@ -138392,17 +138378,17 @@ module.exports = {
 
 module.exports = {
 	"pagination": {
-		"ListJobs": {
-			"limit_key": "MaxResults",
-			"output_token": "NextToken",
-			"input_token": "NextToken",
-			"result_key": "JobListEntries"
-		},
 		"DescribeAddresses": {
+			"input_token": "NextToken",
 			"limit_key": "MaxResults",
 			"output_token": "NextToken",
-			"input_token": "NextToken",
 			"result_key": "Addresses"
+		},
+		"ListJobs": {
+			"input_token": "NextToken",
+			"limit_key": "MaxResults",
+			"output_token": "NextToken",
+			"result_key": "JobListEntries"
 		}
 	}
 };
@@ -172246,7 +172232,7 @@ module.exports = {
 				"spec": ">=6.0.0 <7.0.0",
 				"type": "range"
 			},
-			"/Users/radekc/workplace/aws-sdk-js/node_modules/browserify-sign"
+			"/sdk/aws-sdk-js/node_modules/browserify-sign"
 		]
 	],
 	"_from": "elliptic@>=6.0.0 <7.0.0",
@@ -172281,7 +172267,7 @@ module.exports = {
 	"_shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
 	"_shrinkwrap": null,
 	"_spec": "elliptic@^6.0.0",
-	"_where": "/Users/radekc/workplace/aws-sdk-js/node_modules/browserify-sign",
+	"_where": "/sdk/aws-sdk-js/node_modules/browserify-sign",
 	"author": {
 		"name": "Fedor Indutny",
 		"email": "fedor@indutny.com"

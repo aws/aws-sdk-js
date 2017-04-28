@@ -54,7 +54,7 @@
         {"shape":"InvalidAddressException"},
         {"shape":"UnsupportedAddressException"}
       ],
-      "documentation":"<p>Creates an address for a Snowball to be shipped to. </p> <p>Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.</p>"
+      "documentation":"<p>Creates an address for a Snowball to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.</p>"
     },
     "CreateCluster":{
       "name":"CreateCluster",
@@ -85,7 +85,7 @@
         {"shape":"InvalidInputCombinationException"},
         {"shape":"ClusterLimitExceededException"}
       ],
-      "documentation":"<p>Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the <code>clusterId</code> value; the other job attributes are inherited from the cluster. .</p>"
+      "documentation":"<p>Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the <code>clusterId</code> value; the other job attributes are inherited from the cluster. </p>"
     },
     "DescribeAddress":{
       "name":"DescribeAddress",
@@ -109,7 +109,8 @@
       "input":{"shape":"DescribeAddressesRequest"},
       "output":{"shape":"DescribeAddressesResult"},
       "errors":[
-        {"shape":"InvalidResourceException"}
+        {"shape":"InvalidResourceException"},
+        {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Returns a specified number of <code>ADDRESS</code> objects. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.</p>"
     },
@@ -137,7 +138,7 @@
       "errors":[
         {"shape":"InvalidResourceException"}
       ],
-      "documentation":"<p>Returns information about a specific job including shipping information, job status, and other important metadata. .</p>"
+      "documentation":"<p>Returns information about a specific job including shipping information, job status, and other important metadata. </p>"
     },
     "GetJobManifest":{
       "name":"GetJobManifest",
@@ -186,7 +187,8 @@
       "input":{"shape":"ListClusterJobsRequest"},
       "output":{"shape":"ListClusterJobsResult"},
       "errors":[
-        {"shape":"InvalidResourceException"}
+        {"shape":"InvalidResourceException"},
+        {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Returns an array of <code>JobListEntry</code> objects of the specified length. Each <code>JobListEntry</code> object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.</p>"
     },
@@ -198,6 +200,9 @@
       },
       "input":{"shape":"ListClustersRequest"},
       "output":{"shape":"ListClustersResult"},
+      "errors":[
+        {"shape":"InvalidNextTokenException"}
+      ],
       "documentation":"<p>Returns an array of <code>ClusterListEntry</code> objects of the specified length. Each <code>ClusterListEntry</code> object contains a cluster's state, a cluster's ID, and other important status information.</p>"
     },
     "ListJobs":{
@@ -208,6 +213,9 @@
       },
       "input":{"shape":"ListJobsRequest"},
       "output":{"shape":"ListJobsResult"},
+      "errors":[
+        {"shape":"InvalidNextTokenException"}
+      ],
       "documentation":"<p>Returns an array of <code>JobListEntry</code> objects of the specified length. Each <code>JobListEntry</code> object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.</p>"
     },
     "UpdateCluster":{
@@ -282,11 +290,11 @@
         },
         "PrefectureOrDistrict":{
           "shape":"String",
-          "documentation":"<p>The prefecture or district that the appliance will be shipped to.</p>"
+          "documentation":"<p>This field is no longer used and the value is ignored.</p>"
         },
         "Landmark":{
           "shape":"String",
-          "documentation":"<p>The landmark identifying the address that the appliance will be shipped to.</p>"
+          "documentation":"<p>This field is no longer used and the value is ignored.</p>"
         },
         "Country":{
           "shape":"String",
@@ -299,6 +307,10 @@
         "PhoneNumber":{
           "shape":"String",
           "documentation":"<p>The phone number associated with an address that a Snowball is to be delivered to.</p>"
+        },
+        "IsRestricted":{
+          "shape":"Boolean",
+          "documentation":"<p>If the address you are creating is a primary address, then set this option to true. This field is not supported in most regions.</p>"
         }
       },
       "documentation":"<p>The address that you want the Snowball or Snowballs associated with a specific job to be shipped to. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. Although no individual elements of the <code>Address</code> are required, if the address is invalid or unsupported, then an exception is thrown.</p>"
@@ -434,6 +446,10 @@
         "Notification":{
           "shape":"Notification",
           "documentation":"<p>The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.</p>"
+        },
+        "ForwardingAddressId":{
+          "shape":"AddressId",
+          "documentation":"<p>The ID of the address that you want a cluster shipped to, after it will be shipped to its primary address. This field is not supported in most regions.</p>"
         }
       },
       "documentation":"<p>Contains metadata about a specific cluster.</p>"
@@ -512,6 +528,10 @@
         "Notification":{
           "shape":"Notification",
           "documentation":"<p>The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.</p>"
+        },
+        "ForwardingAddressId":{
+          "shape":"AddressId",
+          "documentation":"<p>The forwarding address ID for a cluster. This field is not supported in most regions.</p>"
         }
       }
     },
@@ -570,6 +590,10 @@
         "SnowballType":{
           "shape":"SnowballType",
           "documentation":"<p>The type of AWS Snowball appliance to use for this job. Currently, the only supported appliance type for cluster jobs is <code>EDGE</code>.</p>"
+        },
+        "ForwardingAddressId":{
+          "shape":"AddressId",
+          "documentation":"<p>The forwarding address ID for a job. This field is not supported in most regions.</p>"
         }
       }
     },
@@ -786,6 +810,14 @@
       "documentation":"<p>The action can't be performed because the job's current state doesn't allow that action to be performed.</p>",
       "exception":true
     },
+    "InvalidNextTokenException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The <code>NextToken</code> string was altered unexpectedly, and the operation has stopped. Run the operation without changing the <code>NextToken</code> string, and try again.</p>",
+      "exception":true
+    },
     "InvalidResourceException":{
       "type":"structure",
       "members":{
@@ -889,11 +921,11 @@
         },
         "KmsKeyARN":{
           "shape":"KmsKeyARN",
-          "documentation":"<p>The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key associated with this job. This ARN was created using the <code>CreateKey</code> API action in AWS KMS.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key associated with this job. This ARN was created using the <a href=\"http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS KMS.</p>"
         },
         "RoleARN":{
           "shape":"RoleARN",
-          "documentation":"<p>The role ARN associated with this job. This ARN was created using the <code>CreateRole</code> API action in AWS Identity and Access Management (IAM).</p>"
+          "documentation":"<p>The role ARN associated with this job. This ARN was created using the <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in AWS Identity and Access Management (IAM).</p>"
         },
         "AddressId":{
           "shape":"AddressId",
@@ -922,6 +954,10 @@
         "ClusterId":{
           "shape":"String",
           "documentation":"<p>The 39-character ID for the cluster, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+        },
+        "ForwardingAddressId":{
+          "shape":"AddressId",
+          "documentation":"<p>The ID of the address that you want a job shipped to, after it will be shipped to its primary address. This field is not supported in most regions.</p>"
         }
       },
       "documentation":"<p>Contains information about a specific job including shipping information, job status, and other important metadata. This information is returned as a part of the response syntax of the <code>DescribeJob</code> action.</p>"
@@ -998,7 +1034,7 @@
     "KmsKeyARN":{
       "type":"string",
       "max":255,
-      "pattern":"arn:(aws|aws-us-gov):kms:.*:[0-9]{12}:key/.*"
+      "pattern":"arn:aws.*:kms:.*:[0-9]{12}:key/.*"
     },
     "LambdaResource":{
       "type":"structure",
@@ -1132,7 +1168,7 @@
     "RoleARN":{
       "type":"string",
       "max":255,
-      "pattern":"arn:(aws|aws-us-gov):iam::[0-9]{12}:role/.*"
+      "pattern":"arn:aws.*:iam::[0-9]{12}:role/.*"
     },
     "S3Resource":{
       "type":"structure",
@@ -1157,7 +1193,7 @@
       "members":{
         "Status":{
           "shape":"String",
-          "documentation":"<p>Status information for a shipment. Valid statuses include <code>NEW</code>, <code>IN_TRANSIT</code>, and <code>DELIVERED</code>.</p>"
+          "documentation":"<p>Status information for a shipment.</p>"
         },
         "TrackingNumber":{
           "shape":"String",
@@ -1212,11 +1248,10 @@
     "SnsTopicARN":{
       "type":"string",
       "max":255,
-      "pattern":"arn:(aws|aws-us-gov):sns:.*:[0-9]{12}:.*"
+      "pattern":"arn:aws.*:sns:.*:[0-9]{12}:.*"
     },
     "String":{
       "type":"string",
-      "max":255,
       "min":1
     },
     "Timestamp":{"type":"timestamp"},
@@ -1259,6 +1294,10 @@
         "Notification":{
           "shape":"Notification",
           "documentation":"<p>The new or updated <a>Notification</a> object.</p>"
+        },
+        "ForwardingAddressId":{
+          "shape":"AddressId",
+          "documentation":"<p>The updated ID for the forwarding address for a cluster. This field is not supported in most regions.</p>"
         }
       }
     },
@@ -1277,7 +1316,7 @@
         },
         "RoleARN":{
           "shape":"RoleARN",
-          "documentation":"<p>The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> AWS Identity and Access Management (IAM) API action.</p>"
+          "documentation":"<p>The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <a href=\"http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>AWS Identity and Access Management (IAM) API action.</p>"
         },
         "Notification":{
           "shape":"Notification",
@@ -1302,6 +1341,10 @@
         "SnowballCapacityPreference":{
           "shape":"SnowballCapacity",
           "documentation":"<p>The updated <code>SnowballCapacityPreference</code> of this job's <a>JobMetadata</a> object. The 50 TB Snowballs are only available in the US regions.</p>"
+        },
+        "ForwardingAddressId":{
+          "shape":"AddressId",
+          "documentation":"<p>The updated ID for the forwarding address for a job. This field is not supported in most regions.</p>"
         }
       }
     },

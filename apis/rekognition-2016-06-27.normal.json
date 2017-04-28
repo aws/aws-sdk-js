@@ -140,7 +140,8 @@
         {"shape":"AccessDeniedException"},
         {"shape":"InternalServerError"},
         {"shape":"ThrottlingException"},
-        {"shape":"ProvisionedThroughputExceededException"}
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"InvalidImageFormatException"}
       ],
       "documentation":"<p>Detects explicit or suggestive adult content in a specified .jpeg or .png image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate. For information about moderation labels, see <a>howitworks-moderateimage</a>.</p>"
     },

@@ -28,11 +28,11 @@ declare class Snowball extends Service {
    */
   cancelJob(callback?: (err: AWSError, data: Snowball.Types.CancelJobResult) => void): Request<Snowball.Types.CancelJobResult, AWSError>;
   /**
-   * Creates an address for a Snowball to be shipped to.  Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
+   * Creates an address for a Snowball to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
    */
   createAddress(params: Snowball.Types.CreateAddressRequest, callback?: (err: AWSError, data: Snowball.Types.CreateAddressResult) => void): Request<Snowball.Types.CreateAddressResult, AWSError>;
   /**
-   * Creates an address for a Snowball to be shipped to.  Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
+   * Creates an address for a Snowball to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
    */
   createAddress(callback?: (err: AWSError, data: Snowball.Types.CreateAddressResult) => void): Request<Snowball.Types.CreateAddressResult, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class Snowball extends Service {
    */
   createCluster(callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. .
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. 
    */
   createJob(params: Snowball.Types.CreateJobRequest, callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. .
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. 
    */
   createJob(callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class Snowball extends Service {
    */
   describeCluster(callback?: (err: AWSError, data: Snowball.Types.DescribeClusterResult) => void): Request<Snowball.Types.DescribeClusterResult, AWSError>;
   /**
-   * Returns information about a specific job including shipping information, job status, and other important metadata. .
+   * Returns information about a specific job including shipping information, job status, and other important metadata. 
    */
   describeJob(params: Snowball.Types.DescribeJobRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeJobResult) => void): Request<Snowball.Types.DescribeJobResult, AWSError>;
   /**
-   * Returns information about a specific job including shipping information, job status, and other important metadata. .
+   * Returns information about a specific job including shipping information, job status, and other important metadata. 
    */
   describeJob(callback?: (err: AWSError, data: Snowball.Types.DescribeJobResult) => void): Request<Snowball.Types.DescribeJobResult, AWSError>;
   /**
@@ -183,11 +183,11 @@ declare namespace Snowball {
      */
     StateOrProvince?: String;
     /**
-     * The prefecture or district that the appliance will be shipped to.
+     * This field is no longer used and the value is ignored.
      */
     PrefectureOrDistrict?: String;
     /**
-     * The landmark identifying the address that the appliance will be shipped to.
+     * This field is no longer used and the value is ignored.
      */
     Landmark?: String;
     /**
@@ -202,6 +202,10 @@ declare namespace Snowball {
      * The phone number associated with an address that a Snowball is to be delivered to.
      */
     PhoneNumber?: String;
+    /**
+     * If the address you are creating is a primary address, then set this option to true. This field is not supported in most regions.
+     */
+    IsRestricted?: Boolean;
   }
   export type AddressId = string;
   export type AddressList = Address[];
@@ -291,6 +295,10 @@ declare namespace Snowball {
      * The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
      */
     Notification?: Notification;
+    /**
+     * The ID of the address that you want a cluster shipped to, after it will be shipped to its primary address. This field is not supported in most regions.
+     */
+    ForwardingAddressId?: AddressId;
   }
   export type ClusterState = "AwaitingQuorum"|"Pending"|"InUse"|"Complete"|"Cancelled"|string;
   export interface CreateAddressRequest {
@@ -342,6 +350,10 @@ declare namespace Snowball {
      * The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
      */
     Notification?: Notification;
+    /**
+     * The forwarding address ID for a cluster. This field is not supported in most regions.
+     */
+    ForwardingAddressId?: AddressId;
   }
   export interface CreateClusterResult {
     /**
@@ -394,6 +406,10 @@ declare namespace Snowball {
      * The type of AWS Snowball appliance to use for this job. Currently, the only supported appliance type for cluster jobs is EDGE.
      */
     SnowballType?: SnowballType;
+    /**
+     * The forwarding address ID for a job. This field is not supported in most regions.
+     */
+    ForwardingAddressId?: AddressId;
   }
   export interface CreateJobResult {
     /**
@@ -634,6 +650,10 @@ declare namespace Snowball {
      * The 39-character ID for the cluster, for example CID123e4567-e89b-12d3-a456-426655440000.
      */
     ClusterId?: String;
+    /**
+     * The ID of the address that you want a job shipped to, after it will be shipped to its primary address. This field is not supported in most regions.
+     */
+    ForwardingAddressId?: AddressId;
   }
   export type JobMetadataList = JobMetadata[];
   export interface JobResource {
@@ -766,7 +786,7 @@ declare namespace Snowball {
   export type S3ResourceList = S3Resource[];
   export interface Shipment {
     /**
-     * Status information for a shipment. Valid statuses include NEW, IN_TRANSIT, and DELIVERED.
+     * Status information for a shipment.
      */
     Status?: String;
     /**
@@ -823,6 +843,10 @@ declare namespace Snowball {
      * The new or updated Notification object.
      */
     Notification?: Notification;
+    /**
+     * The updated ID for the forwarding address for a cluster. This field is not supported in most regions.
+     */
+    ForwardingAddressId?: AddressId;
   }
   export interface UpdateClusterResult {
   }
@@ -832,7 +856,7 @@ declare namespace Snowball {
      */
     JobId: JobId;
     /**
-     * The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the CreateRole AWS Identity and Access Management (IAM) API action.
+     * The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the CreateRoleAWS Identity and Access Management (IAM) API action.
      */
     RoleARN?: RoleARN;
     /**
@@ -859,6 +883,10 @@ declare namespace Snowball {
      * The updated SnowballCapacityPreference of this job's JobMetadata object. The 50 TB Snowballs are only available in the US regions.
      */
     SnowballCapacityPreference?: SnowballCapacity;
+    /**
+     * The updated ID for the forwarding address for a job. This field is not supported in most regions.
+     */
+    ForwardingAddressId?: AddressId;
   }
   export interface UpdateJobResult {
   }

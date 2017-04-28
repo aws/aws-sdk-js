@@ -1788,6 +1788,10 @@ declare namespace RDS {
      */
     DBClusterSnapshotArn?: String;
     /**
+     * If the DB cluster snapshot was copied from a source DB cluster snapshot, the Amazon Resource Name (ARN) for the source DB cluster snapshot; otherwise, a null value.
+     */
+    SourceDBClusterSnapshotArn?: String;
+    /**
      * True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled; otherwise false.
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;

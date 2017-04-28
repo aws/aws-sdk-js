@@ -28,11 +28,11 @@ declare class CloudFormation extends Service {
    */
   continueUpdateRollback(callback?: (err: AWSError, data: CloudFormation.Types.ContinueUpdateRollbackOutput) => void): Request<CloudFormation.Types.ContinueUpdateRollbackOutput, AWSError>;
   /**
-   * Creates a list of changes for a stack. AWS CloudFormation generates the change set by comparing the template's information with the information that you submit. A change set can help you understand which resources AWS CloudFormation will change, and how it will change them, before you update your stack. Change sets allow you to check before making a change to avoid deleting or replacing critical resources. AWS CloudFormation doesn't make any changes to the stack when you create a change set. To make the specified changes, you must execute the change set by using the ExecuteChangeSet action. After the call successfully completes, AWS CloudFormation starts creating the change set. To check the status of the change set, use the DescribeChangeSet action.
+   * Creates a list of changes that will be applied to a stack so that you can review the changes before executing them. You can create a change set for a stack that doesn't exist or an existing stack. If you create a change set for a stack that doesn't exist, the change set shows all of the resources that AWS CloudFormation will create. If you create a change set for an existing stack, AWS CloudFormation compares the stack's information with the information that you submit in the change set and lists the differences. Use change sets to understand which resources AWS CloudFormation will create or change, and how it will change resources in an existing stack, before you create or update a stack. To create a change set for a stack that doesn't exist, for the ChangeSetType parameter, specify CREATE. To create a change set for an existing stack, specify UPDATE for the ChangeSetType parameter. After the CreateChangeSet call successfully completes, AWS CloudFormation starts creating the change set. To check the status of the change set or to review it, use the DescribeChangeSet action. When you are satisfied with the changes the change set will make, execute the change set by using the ExecuteChangeSet action. AWS CloudFormation doesn't make changes until you execute the change set.
    */
   createChangeSet(params: CloudFormation.Types.CreateChangeSetInput, callback?: (err: AWSError, data: CloudFormation.Types.CreateChangeSetOutput) => void): Request<CloudFormation.Types.CreateChangeSetOutput, AWSError>;
   /**
-   * Creates a list of changes for a stack. AWS CloudFormation generates the change set by comparing the template's information with the information that you submit. A change set can help you understand which resources AWS CloudFormation will change, and how it will change them, before you update your stack. Change sets allow you to check before making a change to avoid deleting or replacing critical resources. AWS CloudFormation doesn't make any changes to the stack when you create a change set. To make the specified changes, you must execute the change set by using the ExecuteChangeSet action. After the call successfully completes, AWS CloudFormation starts creating the change set. To check the status of the change set, use the DescribeChangeSet action.
+   * Creates a list of changes that will be applied to a stack so that you can review the changes before executing them. You can create a change set for a stack that doesn't exist or an existing stack. If you create a change set for a stack that doesn't exist, the change set shows all of the resources that AWS CloudFormation will create. If you create a change set for an existing stack, AWS CloudFormation compares the stack's information with the information that you submit in the change set and lists the differences. Use change sets to understand which resources AWS CloudFormation will create or change, and how it will change resources in an existing stack, before you create or update a stack. To create a change set for a stack that doesn't exist, for the ChangeSetType parameter, specify CREATE. To create a change set for an existing stack, specify UPDATE for the ChangeSetType parameter. After the CreateChangeSet call successfully completes, AWS CloudFormation starts creating the change set. To check the status of the change set or to review it, use the DescribeChangeSet action. When you are satisfied with the changes the change set will make, execute the change set by using the ExecuteChangeSet action. AWS CloudFormation doesn't make changes until you execute the change set.
    */
   createChangeSet(callback?: (err: AWSError, data: CloudFormation.Types.CreateChangeSetOutput) => void): Request<CloudFormation.Types.CreateChangeSetOutput, AWSError>;
   /**
@@ -251,14 +251,6 @@ declare class CloudFormation extends Service {
    * Waits for the stackUpdateComplete state by periodically calling the underlying CloudFormation.describeStacksoperation every 30 seconds (at most 120 times). Wait until stack status is UPDATE_COMPLETE.
    */
   waitFor(state: "stackUpdateComplete", callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
-  /**
-   * Waits for the changeSetCreateComplete state by periodically calling the underlying CloudFormation.describeChangeSetoperation every 30 seconds (at most 120 times). Wait until change set status is CREATE_COMPLETE.
-   */
-  waitFor(state: "changeSetCreateComplete", params: CloudFormation.Types.DescribeChangeSetInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetOutput) => void): Request<CloudFormation.Types.DescribeChangeSetOutput, AWSError>;
-  /**
-   * Waits for the changeSetCreateComplete state by periodically calling the underlying CloudFormation.describeChangeSetoperation every 30 seconds (at most 120 times). Wait until change set status is CREATE_COMPLETE.
-   */
-  waitFor(state: "changeSetCreateComplete", callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetOutput) => void): Request<CloudFormation.Types.DescribeChangeSetOutput, AWSError>;
 }
 declare namespace CloudFormation {
   export interface AccountLimit {
@@ -279,6 +271,10 @@ declare namespace CloudFormation {
      * The name or the unique stack ID that is associated with the stack.
      */
     StackName: StackName;
+    /**
+     * A unique identifier for this CancelUpdateStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to cancel an update on a stack with the same name. You might retry CancelUpdateStack requests to ensure that AWS CloudFormation successfully received them.
+     */
+    ClientRequestToken?: ClientRequestToken;
   }
   export type Capabilities = Capability[];
   export type CapabilitiesReason = string;
@@ -343,6 +339,7 @@ declare namespace CloudFormation {
   export type ChangeSource = "ResourceReference"|"ParameterReference"|"ResourceAttribute"|"DirectModification"|"Automatic"|string;
   export type ChangeType = "Resource"|string;
   export type Changes = Change[];
+  export type ClientRequestToken = string;
   export type ClientToken = string;
   export interface ContinueUpdateRollbackInput {
     /**
@@ -354,9 +351,13 @@ declare namespace CloudFormation {
      */
     RoleARN?: RoleARN;
     /**
-     * A list of the logical IDs of the resources that AWS CloudFormation skips during the continue update rollback operation. You can specify only resources that are in the UPDATE_FAILED state because a rollback failed. You can't specify resources that are in the UPDATE_FAILED state for other reasons, for example, because an update was canceled. To check why a resource update failed, use the DescribeStackResources action, and view the resource status reason.   Specify this property to skip rolling back resources that AWS CloudFormation can't successfully roll back. We recommend that you  troubleshoot resources before skipping them. AWS CloudFormation sets the status of the specified resources to UPDATE_COMPLETE and continues to roll back the stack. After the rollback is complete, the state of the skipped resources will be inconsistent with the state of the resources in the stack template. Before performing another stack update, you must update the stack or resources to be consistent with each other. If you don't, subsequent stack updates might fail, and the stack will become unrecoverable.   Specify the minimum number of resources required to successfully roll back your stack. For example, a failed resource update might cause dependent resources to fail. In this case, it might not be necessary to skip the dependent resources.  To specify resources in a nested stack, use the following format: NestedStackName.ResourceLogicalID. You can specify a nested stack resource (the logical ID of an AWS::CloudFormation::Stack resource) only if it's in one of the following states: DELETE_IN_PROGRESS, DELETE_COMPLETE, or DELETE_FAILED. 
+     * A list of the logical IDs of the resources that AWS CloudFormation skips during the continue update rollback operation. You can specify only resources that are in the UPDATE_FAILED state because a rollback failed. You can't specify resources that are in the UPDATE_FAILED state for other reasons, for example, because an update was canceled. To check why a resource update failed, use the DescribeStackResources action, and view the resource status reason.   Specify this property to skip rolling back resources that AWS CloudFormation can't successfully roll back. We recommend that you  troubleshoot resources before skipping them. AWS CloudFormation sets the status of the specified resources to UPDATE_COMPLETE and continues to roll back the stack. After the rollback is complete, the state of the skipped resources will be inconsistent with the state of the resources in the stack template. Before performing another stack update, you must update the stack or resources to be consistent with each other. If you don't, subsequent stack updates might fail, and the stack will become unrecoverable.   Specify the minimum number of resources required to successfully roll back your stack. For example, a failed resource update might cause dependent resources to fail. In this case, it might not be necessary to skip the dependent resources.  To specify resources in a nested stack, use the following format: NestedStackName.ResourceLogicalID. If the ResourceLogicalID is a stack resource (Type: AWS::CloudFormation::Stack), it must be in one of the following states: DELETE_IN_PROGRESS, DELETE_COMPLETE, or DELETE_FAILED. 
      */
     ResourcesToSkip?: ResourcesToSkip;
+    /**
+     * A unique identifier for this ContinueUpdateRollback request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to continue the rollback to a stack with the same name. You might retry ContinueUpdateRollback requests to ensure that AWS CloudFormation successfully received them.
+     */
+    ClientRequestToken?: ClientRequestToken;
   }
   export interface ContinueUpdateRollbackOutput {
   }
@@ -485,6 +486,10 @@ declare namespace CloudFormation {
      * Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to the resources created in the stack. A maximum number of 10 tags can be specified.
      */
     Tags?: Tags;
+    /**
+     * A unique identifier for this CreateStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to create a stack with the same name. You might retry CreateStack requests to ensure that AWS CloudFormation successfully received them.
+     */
+    ClientRequestToken?: ClientRequestToken;
   }
   export interface CreateStackOutput {
     /**
@@ -518,6 +523,10 @@ declare namespace CloudFormation {
      * The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that AWS CloudFormation assumes to delete the stack. AWS CloudFormation uses the role's credentials to make calls on your behalf. If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.
      */
     RoleARN?: RoleARN;
+    /**
+     * A unique identifier for this DeleteStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to delete a stack with the same name. You might retry DeleteStack requests to ensure that AWS CloudFormation successfully received them.
+     */
+    ClientRequestToken?: ClientRequestToken;
   }
   export type DeletionTime = Date;
   export interface DescribeAccountLimitsInput {
@@ -721,6 +730,10 @@ declare namespace CloudFormation {
      * If you specified the name of a change set, specify the stack name or ID (ARN) that is associated with the change set you want to execute.
      */
     StackName?: StackNameOrId;
+    /**
+     * A unique identifier for this ExecuteChangeSet request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to execute a change set to update a stack with the same name. You might retry ExecuteChangeSet requests to ensure that AWS CloudFormation successfully received them.
+     */
+    ClientRequestToken?: ClientRequestToken;
   }
   export interface ExecuteChangeSetOutput {
   }
@@ -1220,6 +1233,10 @@ declare namespace CloudFormation {
      * BLOB of the properties used to create the resource.
      */
     ResourceProperties?: ResourceProperties;
+    /**
+     * The token passed to the operation that generated this event. For example, if you execute a CreateStack operation with the token token1, then all the StackEvents generated by that operation will have ClientRequestToken set as token1.
+     */
+    ClientRequestToken?: ClientRequestToken;
   }
   export type StackEvents = StackEvent[];
   export type StackId = string;
@@ -1423,15 +1440,15 @@ declare namespace CloudFormation {
      */
     StackName: StackName;
     /**
-     * Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. (For more information, go to Template Anatomy in the AWS CloudFormation User Guide.) Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.
+     * Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. (For more information, go to Template Anatomy in the AWS CloudFormation User Guide.) Conditional: You must specify only one of the following parameters: TemplateBody, TemplateURL, or set the UsePreviousTemplate to true.
      */
     TemplateBody?: TemplateBody;
     /**
-     * Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.
+     * Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify only one of the following parameters: TemplateBody, TemplateURL, or set the UsePreviousTemplate to true.
      */
     TemplateURL?: TemplateURL;
     /**
-     * Reuse the existing template that is associated with the stack that you are updating.
+     * Reuse the existing template that is associated with the stack that you are updating. Conditional: You must specify only one of the following parameters: TemplateBody, TemplateURL, or set the UsePreviousTemplate to true.
      */
     UsePreviousTemplate?: UsePreviousTemplate;
     /**
@@ -1474,6 +1491,10 @@ declare namespace CloudFormation {
      * Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to supported resources in the stack. You can specify a maximum number of 10 tags. If you don't specify this parameter, AWS CloudFormation doesn't modify the stack's tags. If you specify an empty value, AWS CloudFormation removes all associated tags.
      */
     Tags?: Tags;
+    /**
+     * A unique identifier for this UpdateStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to update a stack with the same name. You might retry UpdateStack requests to ensure that AWS CloudFormation successfully received them.
+     */
+    ClientRequestToken?: ClientRequestToken;
   }
   export interface UpdateStackOutput {
     /**
