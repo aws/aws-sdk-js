@@ -173,6 +173,16 @@
       data = [data];
     }
     httpResp = new EventEmitter();
+    httpResp.pipe = function(destination) {
+      process.nextTick(function() {
+        AWS.util.arrayEach(data.slice(), function(str) {
+          destination.write(str);
+        });
+
+        destination.end();
+      });
+      return destination;
+    };
     httpResp.statusCode = status;
     httpResp.headers = headers;
     cb(httpResp);
@@ -207,8 +217,7 @@
   };
 
   mockHttpResponse = function(status, headers, data) {
-    var stream;
-    stream = new EventEmitter();
+    var stream = new EventEmitter();
     stream.setMaxListeners(0);
     _spyOn(AWS.HttpClient, 'getInstance');
     AWS.HttpClient.getInstance.andReturn({
@@ -221,6 +230,7 @@
         return stream;
       }
     });
+
     return stream;
   };
 
