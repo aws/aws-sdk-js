@@ -41,7 +41,7 @@ describe('AWS.ResourceWaiter', function() {
       });
       expect(err).to.equal(null);
       expect(data.Table.TableStatus).to.equal('ACTIVE');
-      return expect(resp.retryCount).to.equal(2);
+      expect(resp.retryCount).to.equal(2);
     });
 
     it('throws an error if terminal state is not configured', function() {
@@ -52,7 +52,7 @@ describe('AWS.ResourceWaiter', function() {
         e = error;
         err = e;
       }
-      return expect(err.message).to.equal('State invalidState not found.');
+      expect(err.message).to.equal('State invalidState not found.');
     });
 
     it('gives up after a maximum number of retries', function() {
@@ -92,7 +92,7 @@ describe('AWS.ResourceWaiter', function() {
       expect(data).to.equal(null);
       expect(err.code).to.equal('ResourceNotReady');
       expect(resp.retryCount).to.equal(25);
-      return expect(resp.error.retryDelay).to.equal(20000);
+      expect(resp.error.retryDelay).to.equal(20000);
     });
 
     it('accepts error state as a terminal state', function() {
@@ -135,7 +135,7 @@ describe('AWS.ResourceWaiter', function() {
       expect(helpers.operationsForRequests(reqs)).to.eql(['s3.headBucket', 's3.headBucket', 's3.headBucket']);
       expect(err).to.equal(null);
       expect(resp.httpResponse.statusCode).to.equal(404);
-      return expect(resp.retryCount).to.equal(2);
+      expect(resp.retryCount).to.equal(2);
     });
 
     it('fails fast if failure value is found', function() {
@@ -241,7 +241,7 @@ describe('AWS.ResourceWaiter', function() {
       });
       expect(data).to.equal(null);
       expect(err.code).to.equal('ResourceNotReady');
-      return expect(resp.retryCount).to.equal(3);
+      expect(resp.retryCount).to.equal(3);
     });
 
     it('retries or fails depending on whether error is thrown when no acceptors match', function() {
@@ -271,7 +271,7 @@ describe('AWS.ResourceWaiter', function() {
       });
       expect(data).to.equal(null);
       expect(err.code).to.equal('ResourceNotReady');
-      return expect(resp.retryCount).to.equal(1);
+      expect(resp.retryCount).to.equal(1);
     });
 
     it('fully supports jmespath expressions', function() {
@@ -359,6 +359,26 @@ describe('AWS.ResourceWaiter', function() {
         }
       ]);
       var waiter = new AWS.ResourceWaiter(ecs, 'servicesStable');
+      waiter.config.acceptors = [
+        {
+          expected: 1,
+          matcher: "pathAny",
+          state: "failure",
+          argument: "length(baz)"
+        },
+        {
+          expected: 1,
+          matcher: "pathAll",
+          state: "retry",
+          argument: "length(baz)"
+        },
+        {
+          expected: true,
+          matcher: "path",
+          state: "success",
+          argument: "length(services[?!(length(deployments) == `1` && runningCount == desiredCount)]) == `0`"
+        }
+      ];
       waiter.wait(function (err, data) {
         expect(err).to.equal(null);
         expect(data).not.to.equal(null);
@@ -403,7 +423,7 @@ describe('AWS.ResourceWaiter', function() {
       });
       expect(err).to.equal(null);
       expect(data).to.eql({});
-      return expect(resp.retryCount).to.equal(2);
+      expect(resp.retryCount).to.equal(2);
     });
 
     it('supports error matcher', function() {
@@ -439,7 +459,7 @@ describe('AWS.ResourceWaiter', function() {
       });
       expect(err).to.equal(null);
       expect(data).to.eql({});
-      return expect(resp.retryCount).to.equal(2);
+      expect(resp.retryCount).to.equal(2);
     });
 
     it('supports path matcher', function() {
@@ -471,7 +491,7 @@ describe('AWS.ResourceWaiter', function() {
       });
       expect(err).to.equal(null);
       expect(data).to.not.eql(null);
-      return expect(resp.retryCount).to.equal(1);
+      expect(resp.retryCount).to.equal(1);
     });
 
     it('supports pathAny matcher', function() {
@@ -511,7 +531,7 @@ describe('AWS.ResourceWaiter', function() {
       });
       expect(err).to.equal(null);
       expect(data).to.not.eql(null);
-      return expect(resp.retryCount).to.equal(1);
+      expect(resp.retryCount).to.equal(1);
     });
 
     it('supports pathAll matcher', function() {
@@ -561,7 +581,7 @@ describe('AWS.ResourceWaiter', function() {
       });
       expect(err).to.equal(null);
       expect(data).to.not.eql(null);
-      return expect(resp.retryCount).to.equal(2);
+      expect(resp.retryCount).to.equal(2);
     });
 
     it('supports acceptors of mixed matcher types', function() {
@@ -605,7 +625,7 @@ describe('AWS.ResourceWaiter', function() {
       });
       expect(err).to.equal(null);
       expect(data).to.not.eql(null);
-      return expect(resp.retryCount).to.equal(2);
+      expect(resp.retryCount).to.equal(2);
     });
 
     it('supports custom delay and maxAttempts', function() {
@@ -655,7 +675,7 @@ describe('AWS.ResourceWaiter', function() {
       expect(resp.error.retryDelay).to.equal(delay * 1000);
       waiter = new AWS.ResourceWaiter(db, 'tableExists');
       expect(waiter.config.maxAttempts).to.equal(25);
-      return expect(waiter.config.delay).to.equal(20);
+      expect(waiter.config.delay).to.equal(20);
     });
   });
 });
