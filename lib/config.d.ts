@@ -271,4 +271,9 @@ export abstract class ConfigurationOptions {
      * Whether to use the Accelerate endpoint with the S3 service.
      */
     useAccelerateEndpoint?: boolean
+    /**
+     * Whether to validate the CRC32 checksum of HTTP response bodies returned
+     * by DynamoDB.
+     */
+    dynamoDbCrc32?: boolean;
 }
