@@ -98,6 +98,7 @@ export abstract class ConfigurationServicePlaceholders {
   workspaces?: AWS.WorkSpaces.Types.ClientConfiguration;
   codestar?: AWS.CodeStar.Types.ClientConfiguration;
   lexmodelbuildingservice?: AWS.LexModelBuildingService.Types.ClientConfiguration;
+  marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -198,4 +199,5 @@ export interface ConfigurationServiceApiVersions {
   workspaces?: AWS.WorkSpaces.Types.apiVersion;
   codestar?: AWS.CodeStar.Types.apiVersion;
   lexmodelbuildingservice?: AWS.LexModelBuildingService.Types.apiVersion;
+  marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.apiVersion;
 }

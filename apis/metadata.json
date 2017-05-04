@@ -424,5 +424,9 @@
   "lexmodelbuildingservice": {
     "prefix": "lex-models",
     "name": "LexModelBuildingService"
+  },
+  "marketplaceentitlementservice": {
+    "prefix": "entitlement.marketplace",
+    "name": "MarketplaceEntitlementService"
   }
 }

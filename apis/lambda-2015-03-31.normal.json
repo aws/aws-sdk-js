@@ -909,7 +909,7 @@
       "members":{
         "Variables":{
           "shape":"EnvironmentVariables",
-          "documentation":"<p>The key-value pairs that represent your environment's configuration settings. The value you specify cannot contain a \",\".</p>"
+          "documentation":"<p>The key-value pairs that represent your environment's configuration settings.</p>"
         }
       },
       "documentation":"<p>The parent object that contains your environment's configuration settings.</p>"
@@ -946,7 +946,6 @@
     },
     "EnvironmentVariableValue":{
       "type":"string",
-      "pattern":"[^,]*",
       "sensitive":true
     },
     "EnvironmentVariables":{
@@ -2072,6 +2071,10 @@
         "Publish":{
           "shape":"Boolean",
           "documentation":"<p>This boolean parameter can be used to request AWS Lambda to update the Lambda function and publish a version as an atomic operation.</p>"
+        },
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the <code>CodeSha256</code> hash value the provided code will also be computed and returned in the response.</p>"
         }
       },
       "documentation":"<p/>"

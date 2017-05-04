@@ -471,7 +471,7 @@ declare namespace Lambda {
   export type Enabled = boolean;
   export interface Environment {
     /**
-     * The key-value pairs that represent your environment's configuration settings. The value you specify cannot contain a ",".
+     * The key-value pairs that represent your environment's configuration settings.
      */
     Variables?: EnvironmentVariables;
   }
@@ -1025,6 +1025,10 @@ declare namespace Lambda {
      * This boolean parameter can be used to request AWS Lambda to update the Lambda function and publish a version as an atomic operation.
      */
     Publish?: Boolean;
+    /**
+     * This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the CodeSha256 hash value the provided code will also be computed and returned in the response.
+     */
+    DryRun?: Boolean;
   }
   export interface UpdateFunctionConfigurationRequest {
     /**

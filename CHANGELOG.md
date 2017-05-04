@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.48.0-->
+<!--LATEST=2.49.0-->
 <!--ENTRYINSERT-->
+
+## 2.49.0
+* feature: ECS: Exposes container instance registration time in ECS:DescribeContainerInstances.
+* feature: Lambda: Support for UpdateFunctionCode DryRun option
+* feature: MarketplaceEntitlementService: AWS Marketplace Entitlement Service enables AWS Marketplace sellers to determine the capacity purchased by their customers.
 
 ## 2.48.0
 * feature: CloudFormation: Adding back the removed waiters and paginators.
