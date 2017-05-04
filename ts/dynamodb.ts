@@ -1,6 +1,11 @@
 import DynamoDB = require('../clients/dynamodb');
 
-const client: DynamoDB.DocumentClient = new DynamoDB.DocumentClient();
+const client: DynamoDB.DocumentClient = new DynamoDB.DocumentClient({
+    region: 'us-west-2',
+    apiVersion: '2012-08-10',
+    signatureVersion: 'v4',
+    dynamoDbCrc32: false,
+});
 
 const params: DynamoDB.DocumentClient.GetItemInput = {
     TableName: 'MyTable',
@@ -27,7 +32,7 @@ const options: DynamoDB.Converter.ConverterOptions = {
 const av: DynamoDB.AttributeValue = DynamoDB.Converter.input('string', options);
 const jsType: any = DynamoDB.Converter.output('string');
 client.get(params, (err, data) => {
-    
+
 });
 
 const dynamodb = new DynamoDB(<DynamoDB.ClientConfiguration>{
