@@ -202,6 +202,24 @@
         }).send();
         return done();
       });
+      it('sets responseType to arraybuffer', function(done) {
+        var key, opts, req, svc;
+        key = uniqueName('test');
+        opts = AWS.util.merge(config, config.s3);
+        svc = new AWS.S3(opts);
+        req = svc.putObject({
+          Key: key,
+          Body: 'body'
+        }, function(err, data) {
+          expect(req.httpRequest.stream.responseType).to.equal('arraybuffer');
+          // cleanup
+          svc.deleteObject({
+            Key: key
+          }, function(err, data) {
+            done();
+          });
+        });
+      });
       return it('lower cases HTTP headers', function() {
         var client, headers, rawHeaders;
         rawHeaders = "x-amzn-Foo: foo\nx-amzn-Bar: bar";
