@@ -3,7 +3,7 @@
   var AWS, EventEmitter, helpers, httpModule;
 
   helpers = require('./helpers');
-
+  var ShakyStream = require('./mocks/shaky-stream');
   AWS = helpers.AWS;
 
   EventEmitter = require('events').EventEmitter;
@@ -76,6 +76,56 @@
             return expect(numCalls).to.equal(1);
           });
         });
+        describe('timeout', function() {
+          it('is obeyed even after response headers are recieved', function(done) {
+            // a mock server with 'ShakyStream' allows us to simulate a period of socket inactivity
+            var server = httpModule.createServer(function(req, res) {
+              res.setHeader('Content-Type', 'application/json');
+              var ss = new ShakyStream({
+                pauseFor: 1000 // simulate 1 second pause while receiving data
+              });
+              ss.pipe(res);
+            }).listen(3334);
+            var ddb = new AWS.DynamoDB({
+              httpOptions: {
+                timeout: 100
+              },
+              endpoint: 'http://127.0.0.1:3334'
+            });
+            ddb.scan({
+              TableName: 'fake'
+            }, function(err, data) {
+              server.close();
+              expect(err.name).to.equal('TimeoutError');
+              done();
+            });
+          });
+
+          it('does not trigger unnecessarily', function(done) {
+            // a mock server with 'ShakyStream' allows us to simulate a period of socket inactivity
+            var server = httpModule.createServer(function(req, res) {
+              res.setHeader('Content-Type', 'application/json');
+              var ss = new ShakyStream({
+                pauseFor: 100 // simulate 100 ms pause while receiving data
+              });
+              ss.pipe(res);
+            }).listen(3334);
+            var ddb = new AWS.DynamoDB({
+              httpOptions: {
+                timeout: 1000
+              },
+              endpoint: 'http://127.0.0.1:3334'
+            });
+            ddb.scan({
+              TableName: 'fake'
+            }, function(err, data) {
+              server.close();
+              expect(err).to.eql(null);
+              done();
+            });
+          });
+        });
+
         return describe('connectTimeout', function() {
           var clearTimeoutSpy, mockClientRequest, oldClearTimeout, oldRequest, oldSetTimeout, requestSpy, setTimeoutSpy, timeoutId;
           timeoutId = 'TIMEOUT_ID';
