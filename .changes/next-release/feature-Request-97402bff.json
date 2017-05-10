@@ -1,5 +1,5 @@
 {
-  "type": "feature",
+  "type": "bugfix",
   "category": "Request",
   "description": "Updates node.js request handling to obey socket read timeouts after response headers have been received. Previously timeouts were being ignored once headers were received, sometimes causing connections to hang."
 }
