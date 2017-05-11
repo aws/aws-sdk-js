@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.49.0
+// AWS SDK for JavaScript v2.50.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -42244,12 +42244,12 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "elasticloadbalancing-2012-06-01",
     "apiVersion": "2012-06-01",
     "endpointPrefix": "elasticloadbalancing",
     "protocol": "query",
     "serviceFullName": "Elastic Load Balancing",
     "signatureVersion": "v4",
+    "uid": "elasticloadbalancing-2012-06-01",
     "xmlNamespace": "http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/"
   },
   "operations": {
@@ -42554,6 +42554,34 @@ module.exports={
         }
       }
     },
+    "DescribeAccountLimits": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {},
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "DescribeAccountLimitsResult",
+        "type": "structure",
+        "members": {
+          "Limits": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Name": {},
+                "Max": {}
+              }
+            }
+          },
+          "NextMarker": {}
+        }
+      }
+    },
     "DescribeInstanceHealth": {
       "input": {
         "type": "structure",
@@ -42601,7 +42629,7 @@ module.exports={
         "type": "structure",
         "members": {
           "LoadBalancerAttributes": {
-            "shape": "S22"
+            "shape": "S2a"
           }
         }
       }
@@ -42612,7 +42640,7 @@ module.exports={
         "members": {
           "LoadBalancerName": {},
           "PolicyNames": {
-            "shape": "S2k"
+            "shape": "S2s"
           }
         }
       },
@@ -42718,7 +42746,7 @@ module.exports={
                         "shape": "Sy"
                       },
                       "PolicyNames": {
-                        "shape": "S2k"
+                        "shape": "S2s"
                       }
                     }
                   }
@@ -42749,7 +42777,7 @@ module.exports={
                       }
                     },
                     "OtherPolicies": {
-                      "shape": "S2k"
+                      "shape": "S2s"
                     }
                   }
                 },
@@ -42762,7 +42790,7 @@ module.exports={
                         "type": "integer"
                       },
                       "PolicyNames": {
-                        "shape": "S2k"
+                        "shape": "S2s"
                       }
                     }
                   }
@@ -42915,7 +42943,7 @@ module.exports={
         "members": {
           "LoadBalancerName": {},
           "LoadBalancerAttributes": {
-            "shape": "S22"
+            "shape": "S2a"
           }
         }
       },
@@ -42925,7 +42953,7 @@ module.exports={
         "members": {
           "LoadBalancerName": {},
           "LoadBalancerAttributes": {
-            "shape": "S22"
+            "shape": "S2a"
           }
         }
       }
@@ -43018,7 +43046,7 @@ module.exports={
             "type": "integer"
           },
           "PolicyNames": {
-            "shape": "S2k"
+            "shape": "S2s"
           }
         }
       },
@@ -43042,7 +43070,7 @@ module.exports={
             "type": "integer"
           },
           "PolicyNames": {
-            "shape": "S2k"
+            "shape": "S2s"
           }
         }
       },
@@ -43142,7 +43170,7 @@ module.exports={
         }
       }
     },
-    "S22": {
+    "S2a": {
       "type": "structure",
       "members": {
         "CrossZoneLoadBalancing": {
@@ -43209,7 +43237,7 @@ module.exports={
         }
       }
     },
-    "S2k": {
+    "S2s": {
       "type": "list",
       "member": {}
     }
@@ -43234,7 +43262,6 @@ module.exports={
     }
   }
 }
-
 },{}],60:[function(require,module,exports){
 module.exports={
     "version":2,
@@ -43550,6 +43577,34 @@ module.exports={
         "members": {}
       }
     },
+    "DescribeAccountLimits": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "Marker": {},
+          "PageSize": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "DescribeAccountLimitsResult",
+        "type": "structure",
+        "members": {
+          "Limits": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Name": {},
+                "Max": {}
+              }
+            }
+          },
+          "NextMarker": {}
+        }
+      }
+    },
     "DescribeListeners": {
       "input": {
         "type": "structure",
@@ -43591,7 +43646,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Attributes": {
-            "shape": "S2l"
+            "shape": "S2r"
           }
         }
       }
@@ -43738,7 +43793,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Attributes": {
-            "shape": "S3c"
+            "shape": "S3i"
           }
         }
       }
@@ -43854,7 +43909,7 @@ module.exports={
         "members": {
           "LoadBalancerArn": {},
           "Attributes": {
-            "shape": "S2l"
+            "shape": "S2r"
           }
         }
       },
@@ -43863,7 +43918,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Attributes": {
-            "shape": "S2l"
+            "shape": "S2r"
           }
         }
       }
@@ -43942,7 +43997,7 @@ module.exports={
         "members": {
           "TargetGroupArn": {},
           "Attributes": {
-            "shape": "S3c"
+            "shape": "S3i"
           }
         }
       },
@@ -43951,7 +44006,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Attributes": {
-            "shape": "S3c"
+            "shape": "S3i"
           }
         }
       }
@@ -44310,7 +44365,7 @@ module.exports={
         }
       }
     },
-    "S2l": {
+    "S2r": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -44320,7 +44375,7 @@ module.exports={
         }
       }
     },
-    "S3c": {
+    "S3i": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -101076,7 +101131,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.49.0',
+  VERSION: '2.50.0',
 
 
   Signers: {},
@@ -102357,6 +102412,7 @@ AWS.EventListeners = {
 
       function callback(httpResp) {
         resp.httpResponse.stream = httpResp;
+        var stream = resp.request.httpRequest.stream;
 
         httpResp.on('headers', function onHeaders(statusCode, headers, statusMessage) {
           resp.request.emit(
@@ -102381,8 +102437,10 @@ AWS.EventListeners = {
         });
 
         httpResp.on('end', function onEnd() {
-          resp.request.emit('httpDone');
-          done();
+          if (!stream || !stream.didCallback) {
+            resp.request.emit('httpDone');
+            done();
+          }
         });
       }
 
@@ -102790,7 +102848,6 @@ AWS.XHRClient = AWS.util.inherit({
       } catch (e) { return; }
 
       if (this.readyState >= this.HEADERS_RECEIVED && !headersEmitted) {
-        try { xhr.responseType = 'arraybuffer'; } catch (e) {}
         emitter.statusCode = xhr.status;
         emitter.headers = self.parseHeaders(xhr.getAllResponseHeaders());
         emitter.emit(
@@ -102840,6 +102897,7 @@ AWS.XHRClient = AWS.util.inherit({
     if (httpOptions.xhrWithCredentials) {
       xhr.withCredentials = true;
     }
+    try { xhr.responseType = 'arraybuffer'; } catch (e) {}
 
     try {
       if (httpRequest.body) {
@@ -104880,7 +104938,7 @@ AWS.Request = inherit({
 
     if (AWS.HttpClient.streamsApiVersion === 2) {
       stream = new streams.PassThrough();
-      req.send();
+      process.nextTick(function() { req.send(); });
     } else {
       stream = new streams.Stream();
       stream.readable = true;
@@ -104893,6 +104951,10 @@ AWS.Request = inherit({
         }
       });
     }
+
+    this.on('error', function(err) {
+      stream.emit('error', err);
+    });
 
     this.on('httpHeaders', function streamHeaders(statusCode, headers, resp) {
       if (statusCode < 300) {
@@ -104923,9 +104985,9 @@ AWS.Request = inherit({
           } else if (AWS.HttpClient.streamsApiVersion === 2) {
             stream.end();
           } else {
-            stream.emit('end')
+            stream.emit('end');
           }
-        }
+        };
 
         var httpStream = resp.httpResponse.createUnbufferedStream();
 
@@ -104940,6 +105002,11 @@ AWS.Request = inherit({
             };
 
             lengthAccumulator.on('end', checkContentLengthAndEmit);
+            stream.on('error', function(err) {
+              shouldCheckContentLength = false;
+              lengthAccumulator.emit('end');
+              lengthAccumulator.end();
+            });
             httpStream.pipe(lengthAccumulator).pipe(stream, { end: false });
           } else {
             httpStream.pipe(stream);
@@ -104965,10 +105032,6 @@ AWS.Request = inherit({
           stream.emit('error', err);
         });
       }
-    });
-
-    this.on('error', function(err) {
-      stream.emit('error', err);
     });
 
     return stream;

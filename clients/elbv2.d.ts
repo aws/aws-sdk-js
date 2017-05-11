@@ -92,6 +92,14 @@ declare class ELBv2 extends Service {
    */
   deregisterTargets(callback?: (err: AWSError, data: ELBv2.Types.DeregisterTargetsOutput) => void): Request<ELBv2.Types.DeregisterTargetsOutput, AWSError>;
   /**
+   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancer Guide.
+   */
+  describeAccountLimits(params: ELBv2.Types.DescribeAccountLimitsInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeAccountLimitsOutput) => void): Request<ELBv2.Types.DescribeAccountLimitsOutput, AWSError>;
+  /**
+   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancer Guide.
+   */
+  describeAccountLimits(callback?: (err: AWSError, data: ELBv2.Types.DescribeAccountLimitsOutput) => void): Request<ELBv2.Types.DescribeAccountLimitsOutput, AWSError>;
+  /**
    * Describes the specified listeners or the listeners for the specified Application Load Balancer. You must specify either a load balancer or one or more listeners.
    */
   describeListeners(params: ELBv2.Types.DescribeListenersInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeListenersOutput) => void): Request<ELBv2.Types.DescribeListenersOutput, AWSError>;
@@ -525,6 +533,26 @@ declare namespace ELBv2 {
   }
   export interface DeregisterTargetsOutput {
   }
+  export interface DescribeAccountLimitsInput {
+    /**
+     * The marker for the next set of results. (You received this marker from a previous call.)
+     */
+    Marker?: Marker;
+    /**
+     * The maximum number of results to return with this call.
+     */
+    PageSize?: PageSize;
+  }
+  export interface DescribeAccountLimitsOutput {
+    /**
+     * Information about the limits.
+     */
+    Limits?: Limits;
+    /**
+     * The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+     */
+    NextMarker?: Marker;
+  }
   export interface DescribeListenersInput {
     /**
      * The Amazon Resource Name (ARN) of the load balancer.
@@ -713,6 +741,17 @@ declare namespace ELBv2 {
   export type HttpCode = string;
   export type IpAddressType = "ipv4"|"dualstack"|string;
   export type IsDefault = boolean;
+  export interface Limit {
+    /**
+     * The name of the limit. The possible values are:   application-load-balancers   listeners-per-application-load-balancer   rules-per-application-load-balancer   target-groups   targets-per-application-load-balancer  
+     */
+    Name?: Name;
+    /**
+     * The maximum value of the limit.
+     */
+    Max?: Max;
+  }
+  export type Limits = Limit[];
   export type ListOfString = StringValue[];
   export interface Listener {
     /**
@@ -835,6 +874,7 @@ declare namespace ELBv2 {
      */
     HttpCode: HttpCode;
   }
+  export type Max = string;
   export interface ModifyListenerInput {
     /**
      * The Amazon Resource Name (ARN) of the listener.
@@ -963,6 +1003,7 @@ declare namespace ELBv2 {
      */
     TargetGroups?: TargetGroups;
   }
+  export type Name = string;
   export type PageSize = number;
   export type Path = string;
   export type Port = number;

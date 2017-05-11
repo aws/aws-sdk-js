@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ReactNative",
-  "description": "Fixes issue where binary responses were empty in iOS (e.g. s3.getObject)"
-}

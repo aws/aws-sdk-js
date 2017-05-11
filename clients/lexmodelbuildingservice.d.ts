@@ -36,11 +36,11 @@ declare class LexModelBuildingService extends Service {
    */
   createSlotTypeVersion(callback?: (err: AWSError, data: LexModelBuildingService.Types.CreateSlotTypeVersionResponse) => void): Request<LexModelBuildingService.Types.CreateSlotTypeVersionResponse, AWSError>;
   /**
-   * Deletes a bot. If you specify a bot version in the request, the API deletes only the specified bot version. If you don't specify a version, the API deletes all versions of the bot, including the $LATEST version.  If a bot has an alias, you can't delete it. Instead, the DeleteBot operation returns a ResourceInUseException exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the DeleteBot operation is successful. This operation requires permissions for the lex:DeleteBot action.
+   * Deletes all versions of the bot, including the $LATEST version. To delete a specific version of the bot, use the operation. If a bot has an alias, you can't delete it. Instead, the DeleteBot operation returns a ResourceInUseException exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the DeleteBot operation is successful. This operation requires permissions for the lex:DeleteBot action.
    */
   deleteBot(params: LexModelBuildingService.Types.DeleteBotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a bot. If you specify a bot version in the request, the API deletes only the specified bot version. If you don't specify a version, the API deletes all versions of the bot, including the $LATEST version.  If a bot has an alias, you can't delete it. Instead, the DeleteBot operation returns a ResourceInUseException exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the DeleteBot operation is successful. This operation requires permissions for the lex:DeleteBot action.
+   * Deletes all versions of the bot, including the $LATEST version. To delete a specific version of the bot, use the operation. If a bot has an alias, you can't delete it. Instead, the DeleteBot operation returns a ResourceInUseException exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the DeleteBot operation is successful. This operation requires permissions for the lex:DeleteBot action.
    */
   deleteBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -60,27 +60,51 @@ declare class LexModelBuildingService extends Service {
    */
   deleteBotChannelAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an intent. If you specify a version in the request, the API deletes only the specified version of the intent. If you don't specify a version in the request, the API deletes all of the versions of the intent, including the $LATEST version.   You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see how-it-works), you must remove those references first.    If you get the ResourceInUseException exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to DeleteIntent is successful.    This operation requires permission for the lex:DeleteIntent action. 
+   * Deletes a specific version of a bot. To delete all versions of a bot, use the operation.  This operation requires permissions for the lex:DeleteBotVersion action.
+   */
+  deleteBotVersion(params: LexModelBuildingService.Types.DeleteBotVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a specific version of a bot. To delete all versions of a bot, use the operation.  This operation requires permissions for the lex:DeleteBotVersion action.
+   */
+  deleteBotVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes all versions of the intent, including the $LATEST version. To delete a specific version of the intent, use the operation.  You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see how-it-works), you must remove those references first.    If you get the ResourceInUseException exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to DeleteIntent is successful.    This operation requires permission for the lex:DeleteIntent action. 
    */
   deleteIntent(params: LexModelBuildingService.Types.DeleteIntentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an intent. If you specify a version in the request, the API deletes only the specified version of the intent. If you don't specify a version in the request, the API deletes all of the versions of the intent, including the $LATEST version.   You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see how-it-works), you must remove those references first.    If you get the ResourceInUseException exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to DeleteIntent is successful.    This operation requires permission for the lex:DeleteIntent action. 
+   * Deletes all versions of the intent, including the $LATEST version. To delete a specific version of the intent, use the operation.  You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see how-it-works), you must remove those references first.    If you get the ResourceInUseException exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to DeleteIntent is successful.    This operation requires permission for the lex:DeleteIntent action. 
    */
   deleteIntent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a slot type. If you specify a version in the request, the API deletes the specific version. If you don't specify a version in the request, the API deletes all versions of the slot type, including the $LATEST version.   You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first.    If you get the SlotTypeInUse exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the DeleteSlotType call is successful.   This operation requires permission for the lex:DeleteSlotType action.
+   * Deletes a specific version of an intent. To delete all versions of a intent, use the operation.  This operation requires permissions for the lex:DeleteIntentVersion action.
+   */
+  deleteIntentVersion(params: LexModelBuildingService.Types.DeleteIntentVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a specific version of an intent. To delete all versions of a intent, use the operation.  This operation requires permissions for the lex:DeleteIntentVersion action.
+   */
+  deleteIntentVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes all versions of the slot type, including the $LATEST version. To delete a specific version of the slot type, use the operation.  You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first.    If you get the ResourceInUseException exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the DeleteSlotType call is successful.   This operation requires permission for the lex:DeleteSlotType action.
    */
   deleteSlotType(params: LexModelBuildingService.Types.DeleteSlotTypeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a slot type. If you specify a version in the request, the API deletes the specific version. If you don't specify a version in the request, the API deletes all versions of the slot type, including the $LATEST version.   You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first.    If you get the SlotTypeInUse exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the DeleteSlotType call is successful.   This operation requires permission for the lex:DeleteSlotType action.
+   * Deletes all versions of the slot type, including the $LATEST version. To delete a specific version of the slot type, use the operation.  You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first.    If you get the ResourceInUseException exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the DeleteSlotType call is successful.   This operation requires permission for the lex:DeleteSlotType action.
    */
   deleteSlotType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes stored utterances. When you create or update a bot using the operation, configure your bot to store user utterances by setting privacySetting to STORE_UTTERANCES. Use DeleteUtterances to remove the stored utterances for a specific user . This operation requires permissions for the lex:DeleteUtterances action.
+   * Deletes a specific version of a slot type. To delete all versions of a slot type, use the operation.  This operation requires permissions for the lex:DeleteSlotTypeVersion action.
+   */
+  deleteSlotTypeVersion(params: LexModelBuildingService.Types.DeleteSlotTypeVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a specific version of a slot type. To delete all versions of a slot type, use the operation.  This operation requires permissions for the lex:DeleteSlotTypeVersion action.
+   */
+  deleteSlotTypeVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot unless the childDirected field in the bot is set to true. Utterances are stored for 15 days for use with the operation, and then stored indefinately for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
    */
   deleteUtterances(params: LexModelBuildingService.Types.DeleteUtterancesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes stored utterances. When you create or update a bot using the operation, configure your bot to store user utterances by setting privacySetting to STORE_UTTERANCES. Use DeleteUtterances to remove the stored utterances for a specific user . This operation requires permissions for the lex:DeleteUtterances action.
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot unless the childDirected field in the bot is set to true. Utterances are stored for 15 days for use with the operation, and then stored indefinately for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
    */
   deleteUtterances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -92,43 +116,43 @@ declare class LexModelBuildingService extends Service {
    */
   getBot(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotResponse) => void): Request<LexModelBuildingService.Types.GetBotResponse, AWSError>;
   /**
-   * Returns information about an Amazon Lex bot alias. For more information about aliases, see versioning-aliases.
+   * Returns information about an Amazon Lex bot alias. For more information about aliases, see versioning-aliases. This operation requires permissions for the lex:GetBotAlias action.
    */
   getBotAlias(params: LexModelBuildingService.Types.GetBotAliasRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotAliasResponse) => void): Request<LexModelBuildingService.Types.GetBotAliasResponse, AWSError>;
   /**
-   * Returns information about an Amazon Lex bot alias. For more information about aliases, see versioning-aliases.
+   * Returns information about an Amazon Lex bot alias. For more information about aliases, see versioning-aliases. This operation requires permissions for the lex:GetBotAlias action.
    */
   getBotAlias(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotAliasResponse) => void): Request<LexModelBuildingService.Types.GetBotAliasResponse, AWSError>;
   /**
-   * Returns a list of aliases for a specified Amazon Lex bot.
+   * Returns a list of aliases for a specified Amazon Lex bot. This operation requires permissions for the lex:GetBotAliases action.
    */
   getBotAliases(params: LexModelBuildingService.Types.GetBotAliasesRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotAliasesResponse) => void): Request<LexModelBuildingService.Types.GetBotAliasesResponse, AWSError>;
   /**
-   * Returns a list of aliases for a specified Amazon Lex bot.
+   * Returns a list of aliases for a specified Amazon Lex bot. This operation requires permissions for the lex:GetBotAliases action.
    */
   getBotAliases(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotAliasesResponse) => void): Request<LexModelBuildingService.Types.GetBotAliasesResponse, AWSError>;
   /**
-   * Returns information about the association between an Amazon Lex bot and a messaging platform.
+   * Returns information about the association between an Amazon Lex bot and a messaging platform. This operation requires permissions for the lex:GetBotChannelAssociation action.
    */
   getBotChannelAssociation(params: LexModelBuildingService.Types.GetBotChannelAssociationRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotChannelAssociationResponse) => void): Request<LexModelBuildingService.Types.GetBotChannelAssociationResponse, AWSError>;
   /**
-   * Returns information about the association between an Amazon Lex bot and a messaging platform.
+   * Returns information about the association between an Amazon Lex bot and a messaging platform. This operation requires permissions for the lex:GetBotChannelAssociation action.
    */
   getBotChannelAssociation(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotChannelAssociationResponse) => void): Request<LexModelBuildingService.Types.GetBotChannelAssociationResponse, AWSError>;
   /**
-   *  Returns a list of all of the channels associated with the specified bot. 
+   *  Returns a list of all of the channels associated with the specified bot.  The GetBotChannelAssociations operation requires permissions for the lex:GetBotChannelAssociations action.
    */
   getBotChannelAssociations(params: LexModelBuildingService.Types.GetBotChannelAssociationsRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotChannelAssociationsResponse) => void): Request<LexModelBuildingService.Types.GetBotChannelAssociationsResponse, AWSError>;
   /**
-   *  Returns a list of all of the channels associated with the specified bot. 
+   *  Returns a list of all of the channels associated with the specified bot.  The GetBotChannelAssociations operation requires permissions for the lex:GetBotChannelAssociations action.
    */
   getBotChannelAssociations(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotChannelAssociationsResponse) => void): Request<LexModelBuildingService.Types.GetBotChannelAssociationsResponse, AWSError>;
   /**
-   * Gets information about all of the versions of a bot. The GetBotVersions operation returns a BotMetadata object for each version of a bot. For example, if a bot has three numbered versions, the GetBotVersions operation returns four BotMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetBotVersions operation always returns at least one version, the $LATEST version.
+   * Gets information about all of the versions of a bot. The GetBotVersions operation returns a BotMetadata object for each version of a bot. For example, if a bot has three numbered versions, the GetBotVersions operation returns four BotMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetBotVersions operation always returns at least one version, the $LATEST version. This operation requires permissions for the lex:GetBotVersions action.
    */
   getBotVersions(params: LexModelBuildingService.Types.GetBotVersionsRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotVersionsResponse) => void): Request<LexModelBuildingService.Types.GetBotVersionsResponse, AWSError>;
   /**
-   * Gets information about all of the versions of a bot. The GetBotVersions operation returns a BotMetadata object for each version of a bot. For example, if a bot has three numbered versions, the GetBotVersions operation returns four BotMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetBotVersions operation always returns at least one version, the $LATEST version.
+   * Gets information about all of the versions of a bot. The GetBotVersions operation returns a BotMetadata object for each version of a bot. For example, if a bot has three numbered versions, the GetBotVersions operation returns four BotMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetBotVersions operation always returns at least one version, the $LATEST version. This operation requires permissions for the lex:GetBotVersions action.
    */
   getBotVersions(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotVersionsResponse) => void): Request<LexModelBuildingService.Types.GetBotVersionsResponse, AWSError>;
   /**
@@ -172,11 +196,11 @@ declare class LexModelBuildingService extends Service {
    */
   getIntent(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetIntentResponse) => void): Request<LexModelBuildingService.Types.GetIntentResponse, AWSError>;
   /**
-   * Gets information about all of the versions of an intent. The GetIntentVersions operation returns an IntentMetadata object for each version of an intent. For example, if an intent has three numbered versions, the GetIntentVersions operation returns four IntentMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetIntentVersions operation always returns at least one version, the $LATEST version.
+   * Gets information about all of the versions of an intent. The GetIntentVersions operation returns an IntentMetadata object for each version of an intent. For example, if an intent has three numbered versions, the GetIntentVersions operation returns four IntentMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetIntentVersions operation always returns at least one version, the $LATEST version. This operation requires permissions for the lex:GetIntentVersions action.
    */
   getIntentVersions(params: LexModelBuildingService.Types.GetIntentVersionsRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetIntentVersionsResponse) => void): Request<LexModelBuildingService.Types.GetIntentVersionsResponse, AWSError>;
   /**
-   * Gets information about all of the versions of an intent. The GetIntentVersions operation returns an IntentMetadata object for each version of an intent. For example, if an intent has three numbered versions, the GetIntentVersions operation returns four IntentMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetIntentVersions operation always returns at least one version, the $LATEST version.
+   * Gets information about all of the versions of an intent. The GetIntentVersions operation returns an IntentMetadata object for each version of an intent. For example, if an intent has three numbered versions, the GetIntentVersions operation returns four IntentMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetIntentVersions operation always returns at least one version, the $LATEST version. This operation requires permissions for the lex:GetIntentVersions action.
    */
   getIntentVersions(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetIntentVersionsResponse) => void): Request<LexModelBuildingService.Types.GetIntentVersionsResponse, AWSError>;
   /**
@@ -196,11 +220,11 @@ declare class LexModelBuildingService extends Service {
    */
   getSlotType(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypeResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypeResponse, AWSError>;
   /**
-   * Gets information about all versions of a slot type. The GetSlotTypeVersions operation returns a SlotTypeMetadata object for each version of a slot type. For example, if a slot type has three numbered versions, the GetSlotTypeVersions operation returns four SlotTypeMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetSlotTypeVersions operation always returns at least one version, the $LATEST version.
+   * Gets information about all versions of a slot type. The GetSlotTypeVersions operation returns a SlotTypeMetadata object for each version of a slot type. For example, if a slot type has three numbered versions, the GetSlotTypeVersions operation returns four SlotTypeMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetSlotTypeVersions operation always returns at least one version, the $LATEST version. This operation requires permissions for the lex:GetSlotTypeVersions action.
    */
   getSlotTypeVersions(params: LexModelBuildingService.Types.GetSlotTypeVersionsRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypeVersionsResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypeVersionsResponse, AWSError>;
   /**
-   * Gets information about all versions of a slot type. The GetSlotTypeVersions operation returns a SlotTypeMetadata object for each version of a slot type. For example, if a slot type has three numbered versions, the GetSlotTypeVersions operation returns four SlotTypeMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetSlotTypeVersions operation always returns at least one version, the $LATEST version.
+   * Gets information about all versions of a slot type. The GetSlotTypeVersions operation returns a SlotTypeMetadata object for each version of a slot type. For example, if a slot type has three numbered versions, the GetSlotTypeVersions operation returns four SlotTypeMetadata objects in the response, one for each numbered version and one for the $LATEST version.  The GetSlotTypeVersions operation always returns at least one version, the $LATEST version. This operation requires permissions for the lex:GetSlotTypeVersions action.
    */
   getSlotTypeVersions(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypeVersionsResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypeVersionsResponse, AWSError>;
   /**
@@ -212,19 +236,19 @@ declare class LexModelBuildingService extends Service {
    */
   getSlotTypes(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypesResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypesResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version. If the bot's childDirected field is set to true, utterances for the bot are not stored and cannot be retrieved with the GetUtterancesView operation. For more information, see . This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(params: LexModelBuildingService.Types.GetUtterancesViewRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version. If the bot's childDirected field is set to true, utterances for the bot are not stored and cannot be retrieved with the GetUtterancesView operation. For more information, see . This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
-   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update an intent you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
+   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
    */
   putBot(params: LexModelBuildingService.Types.PutBotRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.PutBotResponse) => void): Request<LexModelBuildingService.Types.PutBotResponse, AWSError>;
   /**
-   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update an intent you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
+   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
    */
   putBot(callback?: (err: AWSError, data: LexModelBuildingService.Types.PutBotResponse) => void): Request<LexModelBuildingService.Types.PutBotResponse, AWSError>;
   /**
@@ -236,11 +260,11 @@ declare class LexModelBuildingService extends Service {
    */
   putBotAlias(callback?: (err: AWSError, data: LexModelBuildingService.Types.PutBotAliasResponse) => void): Request<LexModelBuildingService.Types.PutBotAliasResponse, AWSError>;
   /**
-   * Creates an intent or replaces an existing intent. To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an OrderPizza intent.  To create an intent or replace an existing intent, you must provide the following:   Intent name. For example, OrderPizza.   Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."   Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.   How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application.    You can specify other optional information in the request, such as:   A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."   A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"   If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the $LATEST version of the slot type with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception. For more information, see how-it-works. This operation requires permissions for the lex:PutIntent action. For more information, see auth-and-access-control.
+   * Creates an intent or replaces an existing intent. To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an OrderPizza intent.  To create an intent or replace an existing intent, you must provide the following:   Intent name. For example, OrderPizza.   Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."   Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.   How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application.    You can specify other optional information in the request, such as:   A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."   A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"   If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the $LATEST version of the slot type with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception. For more information, see how-it-works. This operation requires permissions for the lex:PutIntent action.
    */
   putIntent(params: LexModelBuildingService.Types.PutIntentRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.PutIntentResponse) => void): Request<LexModelBuildingService.Types.PutIntentResponse, AWSError>;
   /**
-   * Creates an intent or replaces an existing intent. To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an OrderPizza intent.  To create an intent or replace an existing intent, you must provide the following:   Intent name. For example, OrderPizza.   Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."   Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.   How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application.    You can specify other optional information in the request, such as:   A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."   A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"   If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the $LATEST version of the slot type with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception. For more information, see how-it-works. This operation requires permissions for the lex:PutIntent action. For more information, see auth-and-access-control.
+   * Creates an intent or replaces an existing intent. To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an OrderPizza intent.  To create an intent or replace an existing intent, you must provide the following:   Intent name. For example, OrderPizza.   Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."   Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.   How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application.    You can specify other optional information in the request, such as:   A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."   A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"   If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the $LATEST version of the slot type with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception. For more information, see how-it-works. This operation requires permissions for the lex:PutIntent action.
    */
   putIntent(callback?: (err: AWSError, data: LexModelBuildingService.Types.PutIntentResponse) => void): Request<LexModelBuildingService.Types.PutIntentResponse, AWSError>;
   /**
@@ -450,7 +474,7 @@ declare namespace LexModelBuildingService {
      */
     voiceId?: String;
     /**
-     * Checksum identifying the version of the boat that was created.
+     * Checksum identifying the version of the bot that was created.
      */
     checksum?: String;
     /**
@@ -608,30 +632,48 @@ declare namespace LexModelBuildingService {
      * The name of the bot. The name is case sensitive. 
      */
     name: BotName;
+  }
+  export interface DeleteBotVersionRequest {
     /**
-     * The version of the bot.
+     * The name of the bot.
      */
-    version?: Version;
+    name: BotName;
+    /**
+     * The version of the bot to delete. You cannot delete the $LATEST version of the bot. To delete the $LATEST version, use the operation.
+     */
+    version: NumericalVersion;
   }
   export interface DeleteIntentRequest {
     /**
      * The name of the intent. The name is case sensitive. 
      */
     name: IntentName;
+  }
+  export interface DeleteIntentVersionRequest {
     /**
-     * The version of the intent.
+     * The name of the intent.
      */
-    version?: Version;
+    name: IntentName;
+    /**
+     * The version of the intent to delete. You cannot delete the $LATEST version of the intent. To delete the $LATEST version, use the operation.
+     */
+    version: NumericalVersion;
   }
   export interface DeleteSlotTypeRequest {
     /**
      * The name of the slot type. The name is case sensitive. 
      */
     name: SlotTypeName;
+  }
+  export interface DeleteSlotTypeVersionRequest {
     /**
-     * The version of the slot type.
+     * The name of the slot type.
      */
-    version?: Version;
+    name: SlotTypeName;
+    /**
+     * The version of the slot type to delete. You cannot delete the $LATEST version of the slot type. To delete the $LATEST version, use the operation.
+     */
+    version: NumericalVersion;
   }
   export interface DeleteUtterancesRequest {
     /**
@@ -1300,6 +1342,7 @@ declare namespace LexModelBuildingService {
   export type MessageVersion = string;
   export type Name = string;
   export type NextToken = string;
+  export type NumericalVersion = string;
   export type Priority = number;
   export type ProcessBehavior = "SAVE"|"BUILD"|string;
   export interface Prompt {
@@ -1676,7 +1719,7 @@ declare namespace LexModelBuildingService {
      */
     valueElicitationPrompt?: Prompt;
     /**
-     *  Specifies the order in which to elicit slot values from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Amazon Lex first elicits a value for the slot with priority 1. If multiple slots share the same priority, the order in which Amazon Lex elicits values is arbitrary.
+     *  Directs Lex the order in which to elicit this slot value from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for the slot with priority 1. If multiple slots share the same priority, the order in which Lex elicits values is arbitrary.
      */
     priority?: Priority;
     /**

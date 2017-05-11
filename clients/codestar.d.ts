@@ -20,11 +20,11 @@ declare class CodeStar extends Service {
    */
   associateTeamMember(callback?: (err: AWSError, data: CodeStar.Types.AssociateTeamMemberResult) => void): Request<CodeStar.Types.AssociateTeamMemberResult, AWSError>;
   /**
-   * Creates a project in AWS CodeStar with minimal structure and no resources.
+   * Reserved for future use. To create a project, use the AWS CodeStar console.
    */
   createProject(params: CodeStar.Types.CreateProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.CreateProjectResult) => void): Request<CodeStar.Types.CreateProjectResult, AWSError>;
   /**
-   * Creates a project in AWS CodeStar with minimal structure and no resources.
+   * Reserved for future use. To create a project, use the AWS CodeStar console.
    */
   createProject(callback?: (err: AWSError, data: CodeStar.Types.CreateProjectResult) => void): Request<CodeStar.Types.CreateProjectResult, AWSError>;
   /**
@@ -164,37 +164,37 @@ declare namespace CodeStar {
   export type ClientRequestToken = string;
   export interface CreateProjectRequest {
     /**
-     * The friendly name for the project. This friendly name serves as the basis for the names for resources associated with the project, such as a repository name in AWS CodeCommit. The name is limited to 100 characters and cannot contain certain restricted symbols. For more information, see Limits in the AWS CodeStar User Guide.
+     * Reserved for future use.
      */
     name: ProjectName;
     /**
-     * The ID for the AWS CodeStar project. Project IDs must be unique within an AWS account. Project IDs cannot exceed 15 characters and cannot contain capital letters and other restricted symbols. For more information, see Limits in the AWS CodeStar User Guide.
+     * Reserved for future use.
      */
     id: ProjectId;
     /**
-     * Optional. The description for the project.
+     * Reserved for future use.
      */
     description?: ProjectDescription;
     /**
-     * A user- or system-generated token that identifies the entity that requested project creation. This token can be used to repeat the request. It can also be used to identify which user or system made the request in DescribeProject and ListProjects.
+     * Reserved for future use.
      */
     clientRequestToken?: ClientRequestToken;
   }
   export interface CreateProjectResult {
     /**
-     * The ID for the project.
+     * Reserved for future use.
      */
     id: ProjectId;
     /**
-     * The Amazon Resource Name (ARN) for the project.
+     * Reserved for future use.
      */
     arn: ProjectArn;
     /**
-     * The user- or system-generated token from the initial request that can be used to repeat the request. It can also be used to identify which user or system made the request in DescribeProject and ListProjects.
+     * Reserved for future use.
      */
     clientRequestToken?: ClientRequestToken;
     /**
-     * The ID for the AWS CodeStar project template used to create the project.
+     * Reserved for future use.
      */
     projectTemplateId?: ProjectTemplateId;
   }

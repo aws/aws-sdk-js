@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.49.0-->
+<!--LATEST=2.50.0-->
 <!--ENTRYINSERT-->
+
+## 2.50.0
+* bugfix: ReactNative: Fixes issue where binary responses were empty in iOS (e.g. s3.getObject)
+* feature: ELB: Add a new API to allow customers to describe their account limits, such as load balancer limit, target group limit etc.
+* feature: ELBv2: Add a new API to allow customers to describe their account limits, such as load balancer limit, target group limit etc.
+* feature: LexModelBuildingService: Releasing new DeleteBotVersion, DeleteIntentVersion and DeleteSlotTypeVersion APIs.
+* feature: Organizations: AWS Organizations APIs that return an Account object now include the email address associated with the account’s root user.
+* bugfix: Request: Updates node.js request handling to obey socket read timeouts after response headers have been received. Previously timeouts were being ignored once headers were received, sometimes causing connections to hang.
 
 ## 2.49.0
 * feature: ECS: Exposes container instance registration time in ECS:DescribeContainerInstances.

@@ -204,6 +204,19 @@
       ],
       "documentation":"<p>Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer.</p>"
     },
+    "DescribeAccountLimits":{
+      "name":"DescribeAccountLimits",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeAccountLimitsInput"},
+      "output":{
+        "shape":"DescribeAccountLimitsOutput",
+        "resultWrapper":"DescribeAccountLimitsResult"
+      },
+      "documentation":"<p>Describes the current Elastic Load Balancing resource limits for your AWS account.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html\">Limits for Your Application Load Balancer</a> in the <i>Application Load Balancer Guide</i>.</p>"
+    },
     "DescribeListeners":{
       "name":"DescribeListeners",
       "http":{
@@ -957,6 +970,32 @@
       "members":{
       }
     },
+    "DescribeAccountLimitsInput":{
+      "type":"structure",
+      "members":{
+        "Marker":{
+          "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results. (You received this marker from a previous call.)</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of results to return with this call.</p>"
+        }
+      }
+    },
+    "DescribeAccountLimitsOutput":{
+      "type":"structure",
+      "members":{
+        "Limits":{
+          "shape":"Limits",
+          "documentation":"<p>Information about the limits.</p>"
+        },
+        "NextMarker":{
+          "shape":"Marker",
+          "documentation":"<p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>"
+        }
+      }
+    },
     "DescribeListenersInput":{
       "type":"structure",
       "members":{
@@ -1352,6 +1391,24 @@
       ]
     },
     "IsDefault":{"type":"boolean"},
+    "Limit":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the limit. The possible values are:</p> <ul> <li> <p>application-load-balancers</p> </li> <li> <p>listeners-per-application-load-balancer</p> </li> <li> <p>rules-per-application-load-balancer</p> </li> <li> <p>target-groups</p> </li> <li> <p>targets-per-application-load-balancer</p> </li> </ul>"
+        },
+        "Max":{
+          "shape":"Max",
+          "documentation":"<p>The maximum value of the limit.</p>"
+        }
+      },
+      "documentation":"<p>Information about an Elastic Load Balancing resource limit for your AWS account.</p>"
+    },
+    "Limits":{
+      "type":"list",
+      "member":{"shape":"Limit"}
+    },
     "ListOfString":{
       "type":"list",
       "member":{"shape":"StringValue"}
@@ -1564,6 +1621,7 @@
       },
       "documentation":"<p>Information to use when checking for a successful response from a target.</p>"
     },
+    "Max":{"type":"string"},
     "ModifyListenerInput":{
       "type":"structure",
       "required":["ListenerArn"],
@@ -1733,6 +1791,7 @@
         }
       }
     },
+    "Name":{"type":"string"},
     "OperationNotPermittedException":{
       "type":"structure",
       "members":{

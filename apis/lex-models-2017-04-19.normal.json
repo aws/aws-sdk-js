@@ -84,7 +84,7 @@
         {"shape":"BadRequestException"},
         {"shape":"ResourceInUseException"}
       ],
-      "documentation":"<p>Deletes a bot. If you specify a bot version in the request, the API deletes only the specified bot version. If you don't specify a version, the API deletes all versions of the bot, including the <code>$LATEST</code> version. </p> <p>If a bot has an alias, you can't delete it. Instead, the <code>DeleteBot</code> operation returns a <code>ResourceInUseException</code> exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the <code>DeleteBot</code> operation is successful.</p> <p>This operation requires permissions for the <code>lex:DeleteBot</code> action.</p>"
+      "documentation":"<p>Deletes all versions of the bot, including the <code>$LATEST</code> version. To delete a specific version of the bot, use the operation.</p> <p>If a bot has an alias, you can't delete it. Instead, the <code>DeleteBot</code> operation returns a <code>ResourceInUseException</code> exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the <code>DeleteBot</code> operation is successful.</p> <p>This operation requires permissions for the <code>lex:DeleteBot</code> action.</p>"
     },
     "DeleteBotAlias":{
       "name":"DeleteBotAlias",
@@ -121,6 +121,24 @@
       ],
       "documentation":"<p>Deletes the association between an Amazon Lex bot and a messaging platform.</p> <p>This operation requires permission for the <code>lex:DeleteBotChannelAssociation</code> action.</p>"
     },
+    "DeleteBotVersion":{
+      "name":"DeleteBotVersion",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/bots/{name}/versions/{version}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteBotVersionRequest"},
+      "errors":[
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ResourceInUseException"}
+      ],
+      "documentation":"<p>Deletes a specific version of a bot. To delete all versions of a bot, use the operation. </p> <p>This operation requires permissions for the <code>lex:DeleteBotVersion</code> action.</p>"
+    },
     "DeleteIntent":{
       "name":"DeleteIntent",
       "http":{
@@ -137,7 +155,25 @@
         {"shape":"BadRequestException"},
         {"shape":"ResourceInUseException"}
       ],
-      "documentation":"<p>Deletes an intent. If you specify a version in the request, the API deletes only the specified version of the intent. If you don't specify a version in the request, the API deletes all of the versions of the intent, including the <code>$LATEST</code> version. </p> <p> You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see <a>how-it-works</a>), you must remove those references first. </p> <note> <p> If you get the <code>ResourceInUseException</code> exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to <code>DeleteIntent</code> is successful. </p> </note> <p> This operation requires permission for the <code>lex:DeleteIntent</code> action. </p>"
+      "documentation":"<p>Deletes all versions of the intent, including the <code>$LATEST</code> version. To delete a specific version of the intent, use the operation.</p> <p> You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see <a>how-it-works</a>), you must remove those references first. </p> <note> <p> If you get the <code>ResourceInUseException</code> exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to <code>DeleteIntent</code> is successful. </p> </note> <p> This operation requires permission for the <code>lex:DeleteIntent</code> action. </p>"
+    },
+    "DeleteIntentVersion":{
+      "name":"DeleteIntentVersion",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/intents/{name}/versions/{version}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteIntentVersionRequest"},
+      "errors":[
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ResourceInUseException"}
+      ],
+      "documentation":"<p>Deletes a specific version of an intent. To delete all versions of a intent, use the operation. </p> <p>This operation requires permissions for the <code>lex:DeleteIntentVersion</code> action.</p>"
     },
     "DeleteSlotType":{
       "name":"DeleteSlotType",
@@ -155,7 +191,25 @@
         {"shape":"BadRequestException"},
         {"shape":"ResourceInUseException"}
       ],
-      "documentation":"<p>Deletes a slot type. If you specify a version in the request, the API deletes the specific version. If you don't specify a version in the request, the API deletes all versions of the slot type, including the <code>$LATEST</code> version. </p> <p> You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first. </p> <note> <p> If you get the <code>SlotTypeInUse</code> exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the <code>DeleteSlotType</code> call is successful. </p> </note> <p>This operation requires permission for the <code>lex:DeleteSlotType</code> action.</p>"
+      "documentation":"<p>Deletes all versions of the slot type, including the <code>$LATEST</code> version. To delete a specific version of the slot type, use the operation.</p> <p> You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first. </p> <note> <p> If you get the <code>ResourceInUseException</code> exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the <code>DeleteSlotType</code> call is successful. </p> </note> <p>This operation requires permission for the <code>lex:DeleteSlotType</code> action.</p>"
+    },
+    "DeleteSlotTypeVersion":{
+      "name":"DeleteSlotTypeVersion",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/slottypes/{name}/version/{version}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteSlotTypeVersionRequest"},
+      "errors":[
+        {"shape":"NotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ResourceInUseException"}
+      ],
+      "documentation":"<p>Deletes a specific version of a slot type. To delete all versions of a slot type, use the operation. </p> <p>This operation requires permissions for the <code>lex:DeleteSlotTypeVersion</code> action.</p>"
     },
     "DeleteUtterances":{
       "name":"DeleteUtterances",
@@ -171,7 +225,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Deletes stored utterances.</p> <p>When you create or update a bot using the operation, configure your bot to store user utterances by setting <code>privacySetting</code> to <code>STORE_UTTERANCES</code>. Use <code>DeleteUtterances</code> to remove the stored utterances for a specific user .</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>"
+      "documentation":"<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot unless the <code>childDirected</code> field in the bot is set to <code>true</code>. Utterances are stored for 15 days for use with the operation, and then stored indefinately for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>"
     },
     "GetBot":{
       "name":"GetBot",
@@ -205,7 +259,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Returns information about an Amazon Lex bot alias. For more information about aliases, see <a>versioning-aliases</a>.</p>"
+      "documentation":"<p>Returns information about an Amazon Lex bot alias. For more information about aliases, see <a>versioning-aliases</a>.</p> <p>This operation requires permissions for the <code>lex:GetBotAlias</code> action.</p>"
     },
     "GetBotAliases":{
       "name":"GetBotAliases",
@@ -221,7 +275,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Returns a list of aliases for a specified Amazon Lex bot.</p>"
+      "documentation":"<p>Returns a list of aliases for a specified Amazon Lex bot.</p> <p>This operation requires permissions for the <code>lex:GetBotAliases</code> action.</p>"
     },
     "GetBotChannelAssociation":{
       "name":"GetBotChannelAssociation",
@@ -238,7 +292,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Returns information about the association between an Amazon Lex bot and a messaging platform.</p>"
+      "documentation":"<p>Returns information about the association between an Amazon Lex bot and a messaging platform.</p> <p>This operation requires permissions for the <code>lex:GetBotChannelAssociation</code> action.</p>"
     },
     "GetBotChannelAssociations":{
       "name":"GetBotChannelAssociations",
@@ -254,7 +308,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p> Returns a list of all of the channels associated with the specified bot. </p>"
+      "documentation":"<p> Returns a list of all of the channels associated with the specified bot. </p> <p>The <code>GetBotChannelAssociations</code> operation requires permissions for the <code>lex:GetBotChannelAssociations</code> action.</p>"
     },
     "GetBotVersions":{
       "name":"GetBotVersions",
@@ -271,7 +325,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Gets information about all of the versions of a bot.</p> <p>The <code>GetBotVersions</code> operation returns a <code>BotMetadata</code> object for each version of a bot. For example, if a bot has three numbered versions, the <code>GetBotVersions</code> operation returns four <code>BotMetadata</code> objects in the response, one for each numbered version and one for the <code>$LATEST</code> version. </p> <p>The <code>GetBotVersions</code> operation always returns at least one version, the <code>$LATEST</code> version.</p>"
+      "documentation":"<p>Gets information about all of the versions of a bot.</p> <p>The <code>GetBotVersions</code> operation returns a <code>BotMetadata</code> object for each version of a bot. For example, if a bot has three numbered versions, the <code>GetBotVersions</code> operation returns four <code>BotMetadata</code> objects in the response, one for each numbered version and one for the <code>$LATEST</code> version. </p> <p>The <code>GetBotVersions</code> operation always returns at least one version, the <code>$LATEST</code> version.</p> <p>This operation requires permissions for the <code>lex:GetBotVersions</code> action.</p>"
     },
     "GetBots":{
       "name":"GetBots",
@@ -371,7 +425,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Gets information about all of the versions of an intent.</p> <p>The <code>GetIntentVersions</code> operation returns an <code>IntentMetadata</code> object for each version of an intent. For example, if an intent has three numbered versions, the <code>GetIntentVersions</code> operation returns four <code>IntentMetadata</code> objects in the response, one for each numbered version and one for the <code>$LATEST</code> version. </p> <p>The <code>GetIntentVersions</code> operation always returns at least one version, the <code>$LATEST</code> version.</p>"
+      "documentation":"<p>Gets information about all of the versions of an intent.</p> <p>The <code>GetIntentVersions</code> operation returns an <code>IntentMetadata</code> object for each version of an intent. For example, if an intent has three numbered versions, the <code>GetIntentVersions</code> operation returns four <code>IntentMetadata</code> objects in the response, one for each numbered version and one for the <code>$LATEST</code> version. </p> <p>The <code>GetIntentVersions</code> operation always returns at least one version, the <code>$LATEST</code> version.</p> <p>This operation requires permissions for the <code>lex:GetIntentVersions</code> action.</p>"
     },
     "GetIntents":{
       "name":"GetIntents",
@@ -422,7 +476,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Gets information about all versions of a slot type.</p> <p>The <code>GetSlotTypeVersions</code> operation returns a <code>SlotTypeMetadata</code> object for each version of a slot type. For example, if a slot type has three numbered versions, the <code>GetSlotTypeVersions</code> operation returns four <code>SlotTypeMetadata</code> objects in the response, one for each numbered version and one for the <code>$LATEST</code> version. </p> <p>The <code>GetSlotTypeVersions</code> operation always returns at least one version, the <code>$LATEST</code> version.</p>"
+      "documentation":"<p>Gets information about all versions of a slot type.</p> <p>The <code>GetSlotTypeVersions</code> operation returns a <code>SlotTypeMetadata</code> object for each version of a slot type. For example, if a slot type has three numbered versions, the <code>GetSlotTypeVersions</code> operation returns four <code>SlotTypeMetadata</code> objects in the response, one for each numbered version and one for the <code>$LATEST</code> version. </p> <p>The <code>GetSlotTypeVersions</code> operation always returns at least one version, the <code>$LATEST</code> version.</p> <p>This operation requires permissions for the <code>lex:GetSlotTypeVersions</code> action.</p>"
     },
     "GetSlotTypes":{
       "name":"GetSlotTypes",
@@ -455,7 +509,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance \"I want flowers\" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <p>You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.</p>"
+      "documentation":"<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance \"I want flowers\" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <p>Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.</p> <p>If the bot's <code>childDirected</code> field is set to <code>true</code>, utterances for the bot are not stored and cannot be retrieved with the <code>GetUtterancesView</code> operation. For more information, see .</p> <p>This operation requires permissions for the <code>lex:GetUtterancesView</code> action.</p>"
     },
     "PutBot":{
       "name":"PutBot",
@@ -473,7 +527,7 @@
         {"shape":"BadRequestException"},
         {"shape":"PreconditionFailedException"}
       ],
-      "documentation":"<p>Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update an intent you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the <code/> response <code>FAILED</code>. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p> <p>If you specify the name of an existing bot, the fields in the request replace the existing values in the <code>$LATEST</code> version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the <code>idleTTLInSeconds</code> and <code>privacySettings</code> fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see <a>auth-and-access-control</a>.</p>"
+      "documentation":"<p>Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the <code/> response <code>FAILED</code>. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p> <p>If you specify the name of an existing bot, the fields in the request replace the existing values in the <code>$LATEST</code> version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the <code>idleTTLInSeconds</code> and <code>privacySettings</code> fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see <a>auth-and-access-control</a>.</p>"
     },
     "PutBotAlias":{
       "name":"PutBotAlias",
@@ -509,7 +563,7 @@
         {"shape":"BadRequestException"},
         {"shape":"PreconditionFailedException"}
       ],
-      "documentation":"<p>Creates an intent or replaces an existing intent.</p> <p>To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an <code>OrderPizza</code> intent. </p> <p>To create an intent or replace an existing intent, you must provide the following:</p> <ul> <li> <p>Intent name. For example, <code>OrderPizza</code>.</p> </li> <li> <p>Sample utterances. For example, \"Can I order a pizza, please.\" and \"I want to order a pizza.\"</p> </li> <li> <p>Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.</p> </li> <li> <p>How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application. </p> </li> </ul> <p>You can specify other optional information in the request, such as:</p> <ul> <li> <p>A confirmation prompt to ask the user to confirm an intent. For example, \"Shall I order your pizza?\"</p> </li> <li> <p>A conclusion statement to send to the user after the intent has been fulfilled. For example, \"I placed your pizza order.\"</p> </li> <li> <p>A follow-up prompt that asks the user for additional activity. For example, asking \"Do you want to order a drink with your pizza?\"</p> </li> </ul> <p>If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the <code>$LATEST</code> version of the slot type with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception.</p> <p>For more information, see <a>how-it-works</a>.</p> <p>This operation requires permissions for the <code>lex:PutIntent</code> action. For more information, see <a>auth-and-access-control</a>.</p>"
+      "documentation":"<p>Creates an intent or replaces an existing intent.</p> <p>To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an <code>OrderPizza</code> intent. </p> <p>To create an intent or replace an existing intent, you must provide the following:</p> <ul> <li> <p>Intent name. For example, <code>OrderPizza</code>.</p> </li> <li> <p>Sample utterances. For example, \"Can I order a pizza, please.\" and \"I want to order a pizza.\"</p> </li> <li> <p>Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.</p> </li> <li> <p>How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application. </p> </li> </ul> <p>You can specify other optional information in the request, such as:</p> <ul> <li> <p>A confirmation prompt to ask the user to confirm an intent. For example, \"Shall I order your pizza?\"</p> </li> <li> <p>A conclusion statement to send to the user after the intent has been fulfilled. For example, \"I placed your pizza order.\"</p> </li> <li> <p>A follow-up prompt that asks the user for additional activity. For example, asking \"Do you want to order a drink with your pizza?\"</p> </li> </ul> <p>If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the <code>$LATEST</code> version of the slot type with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception.</p> <p>For more information, see <a>how-it-works</a>.</p> <p>This operation requires permissions for the <code>lex:PutIntent</code> action.</p>"
     },
     "PutSlotType":{
       "name":"PutSlotType",
@@ -853,7 +907,7 @@
         },
         "checksum":{
           "shape":"String",
-          "documentation":"<p>Checksum identifying the version of the boat that was created.</p>"
+          "documentation":"<p>Checksum identifying the version of the bot that was created.</p>"
         },
         "version":{
           "shape":"Version",
@@ -1063,10 +1117,27 @@
           "documentation":"<p>The name of the bot. The name is case sensitive. </p>",
           "location":"uri",
           "locationName":"name"
+        }
+      }
+    },
+    "DeleteBotVersionRequest":{
+      "type":"structure",
+      "required":[
+        "name",
+        "version"
+      ],
+      "members":{
+        "name":{
+          "shape":"BotName",
+          "documentation":"<p>The name of the bot.</p>",
+          "location":"uri",
+          "locationName":"name"
         },
         "version":{
-          "shape":"Version",
-          "documentation":"<p>The version of the bot.</p>"
+          "shape":"NumericalVersion",
+          "documentation":"<p>The version of the bot to delete. You cannot delete the <code>$LATEST</code> version of the bot. To delete the <code>$LATEST</code> version, use the operation.</p>",
+          "location":"uri",
+          "locationName":"version"
         }
       }
     },
@@ -1079,10 +1150,27 @@
           "documentation":"<p>The name of the intent. The name is case sensitive. </p>",
           "location":"uri",
           "locationName":"name"
+        }
+      }
+    },
+    "DeleteIntentVersionRequest":{
+      "type":"structure",
+      "required":[
+        "name",
+        "version"
+      ],
+      "members":{
+        "name":{
+          "shape":"IntentName",
+          "documentation":"<p>The name of the intent.</p>",
+          "location":"uri",
+          "locationName":"name"
         },
         "version":{
-          "shape":"Version",
-          "documentation":"<p>The version of the intent.</p>"
+          "shape":"NumericalVersion",
+          "documentation":"<p>The version of the intent to delete. You cannot delete the <code>$LATEST</code> version of the intent. To delete the <code>$LATEST</code> version, use the operation.</p>",
+          "location":"uri",
+          "locationName":"version"
         }
       }
     },
@@ -1095,10 +1183,27 @@
           "documentation":"<p>The name of the slot type. The name is case sensitive. </p>",
           "location":"uri",
           "locationName":"name"
+        }
+      }
+    },
+    "DeleteSlotTypeVersionRequest":{
+      "type":"structure",
+      "required":[
+        "name",
+        "version"
+      ],
+      "members":{
+        "name":{
+          "shape":"SlotTypeName",
+          "documentation":"<p>The name of the slot type.</p>",
+          "location":"uri",
+          "locationName":"name"
         },
         "version":{
-          "shape":"Version",
-          "documentation":"<p>The version of the slot type.</p>"
+          "shape":"NumericalVersion",
+          "documentation":"<p>The version of the slot type to delete. You cannot delete the <code>$LATEST</code> version of the slot type. To delete the <code>$LATEST</code> version, use the operation.</p>",
+          "location":"uri",
+          "locationName":"version"
         }
       }
     },
@@ -2157,6 +2262,12 @@
       "error":{"httpStatusCode":404},
       "exception":true
     },
+    "NumericalVersion":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[0-9]+"
+    },
     "PreconditionFailedException":{
       "type":"structure",
       "members":{
@@ -2647,7 +2758,7 @@
         },
         "priority":{
           "shape":"Priority",
-          "documentation":"<p> Specifies the order in which to elicit slot values from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Amazon Lex first elicits a value for the slot with priority 1.</p> <p>If multiple slots share the same priority, the order in which Amazon Lex elicits values is arbitrary.</p>"
+          "documentation":"<p> Directs Lex the order in which to elicit this slot value from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for the slot with priority 1.</p> <p>If multiple slots share the same priority, the order in which Lex elicits values is arbitrary.</p>"
         },
         "sampleUtterances":{
           "shape":"SlotUtteranceList",
