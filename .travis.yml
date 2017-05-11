@@ -17,6 +17,7 @@ script:
   - npm run coverage
   - npm run buildertest
   - npm run browsertest
+  - npm run react-native-test
   - node ./node_modules/.bin/codecov
 
 sudo: false

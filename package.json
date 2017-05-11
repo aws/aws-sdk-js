@@ -25,6 +25,7 @@
     "istanbul": "*",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
+    "json-loader": "^0.5.4",
     "karma": "^1.4.1",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.2",
@@ -33,7 +34,7 @@
     "semver": "*",
     "typescript": "2.0.8",
     "uglify-js": "2.x",
-    "webpack": "^2.4.1"
+    "webpack": "^1.15.0"
   },
   "dependencies": {
     "buffer": "5.0.6",
