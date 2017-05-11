@@ -699,7 +699,7 @@ describe('AWS.Request', function() {
             'content-length': '12'
           });
           resp.write('FOOBARBAZQUX');
-          return resp.end();
+          resp.end();
         };
         request = service.makeRequest('mockMethod');
         s = request.createReadStream();
@@ -708,9 +708,9 @@ describe('AWS.Request', function() {
           expect(error).to.be["null"];
         });
         s.on('data', function(c) {
-          return data += c.toString();
+          data += c.toString();
         });
-        return s.on('end', function() {
+        s.on('end', function() {
           expect(error).to.be["null"];
           expect(data).to.equal('FOOBARBAZQUX');
           done();
@@ -744,7 +744,7 @@ describe('AWS.Request', function() {
         });
       });
 
-      it('only accepts data up to the specified content-length', function(done) {
+      it('errors if data received exceeds content-length', function(done) {
         var request, s;
         AWS.HttpClient.streamsApiVersion = 1;
         app = function(req, resp) {
@@ -758,14 +758,13 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.be["null"];
+          expect(error).to.not.be["null"];
         });
         s.on('data', function(c) {
           return data += c.toString();
         });
         return s.on('end', function() {
-          expect(error).to.be["null"];
-          expect(data).to.equal('FOOBARBAZQU');
+          expect(error).to.not.be["null"];
           done();
         });
       });
@@ -875,7 +874,7 @@ describe('AWS.Request', function() {
         });
       });
 
-      it('only accepts data up to the specified content-length', function(done) {
+      it('errors if data received exceeds the content-length (streams2)', function(done) {
         var request, s;
         if (AWS.HttpClient.streamsApiVersion < 2) {
           done();
@@ -891,11 +890,10 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.be["null"];
+          expect(error).to.not.be["null"];
         });
         s.on('end', function() {
-          expect(error).to.be["null"];
-          expect(data).to.equal('FOOBARBAZQU');
+          expect(error).to.not.be["null"];
           done();
         });
         return s.on('readable', function() {
