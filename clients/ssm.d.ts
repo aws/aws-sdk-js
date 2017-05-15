@@ -12,11 +12,11 @@ declare class SSM extends Service {
   constructor(options?: SSM.Types.ClientConfiguration)
   config: Config & SSM.Types.ClientConfiguration;
   /**
-   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances. Tags enable you to categorize your managed instances in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters.  For more information about tags, see Tagging Your Amazon EC2 Resources in the Amazon EC2 User Guide.
+   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances, Maintenance Windows, or Parameter Store parameters. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters.  For more information about tags, see Tagging Your Amazon EC2 Resources in the Amazon EC2 User Guide.
    */
   addTagsToResource(params: SSM.Types.AddTagsToResourceRequest, callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances. Tags enable you to categorize your managed instances in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters.  For more information about tags, see Tagging Your Amazon EC2 Resources in the Amazon EC2 User Guide.
+   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances, Maintenance Windows, or Parameter Store parameters. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters.  For more information about tags, see Tagging Your Amazon EC2 Resources in the Amazon EC2 User Guide.
    */
   addTagsToResource(callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class SSM extends Service {
    */
   deletePatchBaseline(callback?: (err: AWSError, data: SSM.Types.DeletePatchBaselineResult) => void): Request<SSM.Types.DeletePatchBaselineResult, AWSError>;
   /**
-   * Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don’t plan to use Run Command on the server, we suggest uninstalling the SSM Agent first.
+   * Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling the SSM Agent first.
    */
   deregisterManagedInstance(params: SSM.Types.DeregisterManagedInstanceRequest, callback?: (err: AWSError, data: SSM.Types.DeregisterManagedInstanceResult) => void): Request<SSM.Types.DeregisterManagedInstanceResult, AWSError>;
   /**
-   * Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don’t plan to use Run Command on the server, we suggest uninstalling the SSM Agent first.
+   * Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling the SSM Agent first.
    */
   deregisterManagedInstance(callback?: (err: AWSError, data: SSM.Types.DeregisterManagedInstanceResult) => void): Request<SSM.Types.DeregisterManagedInstanceResult, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class SSM extends Service {
    */
   describeDocument(callback?: (err: AWSError, data: SSM.Types.DescribeDocumentResult) => void): Request<SSM.Types.DescribeDocumentResult, AWSError>;
   /**
-   * Describes the permissions for a Systems Manager document. If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user’s AWS account ID) or publicly (All). 
+   * Describes the permissions for a Systems Manager document. If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's AWS account ID) or publicly (All). 
    */
   describeDocumentPermission(params: SSM.Types.DescribeDocumentPermissionRequest, callback?: (err: AWSError, data: SSM.Types.DescribeDocumentPermissionResponse) => void): Request<SSM.Types.DescribeDocumentPermissionResponse, AWSError>;
   /**
-   * Describes the permissions for a Systems Manager document. If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user’s AWS account ID) or publicly (All). 
+   * Describes the permissions for a Systems Manager document. If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's AWS account ID) or publicly (All). 
    */
   describeDocumentPermission(callback?: (err: AWSError, data: SSM.Types.DescribeDocumentPermissionResponse) => void): Request<SSM.Types.DescribeDocumentPermissionResponse, AWSError>;
   /**
@@ -1017,7 +1017,7 @@ declare namespace SSM {
      */
     Status?: CommandStatus;
     /**
-     * A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Run Command Status. StatusDetails can be one of the following values:   Pending – The command has not been sent to any instances.   In Progress – The command has been sent to at least one instance but has not reached a final state on all instances.   Success – The command successfully executed on all invocations. This is a terminal state.   Delivery Timed Out – The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.   Execution Timed Out – The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.   Failed – The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.   Incomplete – The command was attempted on all instances and one or more invocations does not have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.   Canceled – The command was terminated before it was completed. This is a terminal state.   Rate Exceeded – The number of instances targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before executing it on any instance. This is a terminal state.  
+     * A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Run Command Status. StatusDetails can be one of the following values:   Pending: The command has not been sent to any instances.   In Progress: The command has been sent to at least one instance but has not reached a final state on all instances.   Success: The command successfully executed on all invocations. This is a terminal state.   Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.   Execution Timed Out: The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.   Failed: The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.   Incomplete: The command was attempted on all instances and one or more invocations does not have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Rate Exceeded: The number of instances targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before executing it on any instance. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -1105,7 +1105,7 @@ declare namespace SSM {
      */
     Status?: CommandInvocationStatus;
     /**
-     * A detailed status of the command execution for each invocation (each instance targeted by the command). StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Run Command Status. StatusDetails can be one of the following values:   Pending – The command has not been sent to the instance.   In Progress – The command has been sent to the instance but has not reached a terminal state.   Success – The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out – The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command’s MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out – Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed – The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled – The command was terminated before it was completed. This is a terminal state.   Undeliverable – The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command’s MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated – The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the command execution for each invocation (each instance targeted by the command). StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Run Command Status. StatusDetails can be one of the following values:   Pending: The command has not been sent to the instance.   In Progress: The command has been sent to the instance but has not reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -1113,11 +1113,11 @@ declare namespace SSM {
      */
     TraceOutput?: InvocationTraceOutput;
     /**
-     * The URL to the plugin’s StdOut file in Amazon S3, if the Amazon S3 bucket was defined for the parent command. For an invocation, StandardOutputUrl is populated if there is just one plugin defined for the command, and the Amazon S3 bucket was defined for the command.
+     * The URL to the plugin's StdOut file in Amazon S3, if the Amazon S3 bucket was defined for the parent command. For an invocation, StandardOutputUrl is populated if there is just one plugin defined for the command, and the Amazon S3 bucket was defined for the command.
      */
     StandardOutputUrl?: Url;
     /**
-     * The URL to the plugin’s StdErr file in Amazon S3, if the Amazon S3 bucket was defined for the parent command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for the command, and the Amazon S3 bucket was defined for the command.
+     * The URL to the plugin's StdErr file in Amazon S3, if the Amazon S3 bucket was defined for the parent command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for the command, and the Amazon S3 bucket was defined for the command.
      */
     StandardErrorUrl?: Url;
     CommandPlugins?: CommandPluginList;
@@ -1144,7 +1144,7 @@ declare namespace SSM {
      */
     Status?: CommandPluginStatus;
     /**
-     * A detailed status of the plugin execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Run Command Status. StatusDetails can be one of the following values:   Pending – The command has not been sent to the instance.   In Progress – The command has been sent to the instance but has not reached a terminal state.   Success – The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out – The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command’s MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out – Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed – The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled – The command was terminated before it was completed. This is a terminal state.   Undeliverable – The command can't be delivered to the instance. The instance might not exist, or it might not be responding. Undeliverable invocations don't count against the parent command’s MaxErrors limit, and they don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated – The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the plugin execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Run Command Status. StatusDetails can be one of the following values:   Pending: The command has not been sent to the instance.   In Progress: The command has been sent to the instance but has not reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the instance, but the execution was not complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command was not successful on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the instance. The instance might not exist, or it might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit, and they don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -1176,11 +1176,11 @@ declare namespace SSM {
      */
     OutputS3Region?: S3Region;
     /**
-     * The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript   test_folder is the name of the Amazon S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;  i-1234567876543 is the instance ID;  awsrunShellScript is the name of the plugin.
+     * The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript  test_folder is the name of the Amazon S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix; i-1234567876543 is the instance ID; awsrunShellScript is the name of the plugin.
      */
     OutputS3BucketName?: S3BucketName;
     /**
-     * The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript   test_folder is the name of the Amazon S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;  i-1234567876543 is the instance ID;  awsrunShellScript is the name of the plugin.
+     * The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:  test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript  test_folder is the name of the Amazon S3 bucket;  ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix; i-1234567876543 is the instance ID; awsrunShellScript is the name of the plugin.
      */
     OutputS3KeyPrefix?: S3KeyPrefix;
   }
@@ -1194,7 +1194,7 @@ declare namespace SSM {
   export type ComputerName = string;
   export interface CreateActivationRequest {
     /**
-     * A user-defined description of the resource that you want to register with Amazon EC2. 
+     * A userdefined description of the resource that you want to register with Amazon EC2. 
      */
     Description?: ActivationDescription;
     /**
@@ -1233,11 +1233,11 @@ declare namespace SSM {
   export type CreateAssociationBatchRequestEntries = CreateAssociationBatchRequestEntry[];
   export interface CreateAssociationBatchRequestEntry {
     /**
-     *  The name of the configuration document. 
+     * The name of the configuration document. 
      */
     Name: DocumentName;
     /**
-     *  The ID of the instance. 
+     * The ID of the instance. 
      */
     InstanceId?: InstanceId;
     /**
@@ -1289,15 +1289,15 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * The targets (either instances or tags) for the association. Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+     * The targets (either instances or tags) for the association.
      */
     Targets?: Targets;
     /**
-     * A cron expression when the association will be applied to the target(s). Supported expressions are every half, 1, 2, 4, 8 or 12 hour(s); every specified day and time of the week. For example: cron(0 0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0 0/4 1/1 * ? *) to run every four hours; and cron(0 0 10 ? * SUN *) to run every Sunday at 10 a.m.
+     * A cron expression when the association will be applied to the target(s).
      */
     ScheduleExpression?: ScheduleExpression;
     /**
-     * An Amazon S3 bucket where you want to store the output details of the request. For example:  "{ \"S3Location\": { \"OutputS3Region\": \"&lt;region&gt;\", \"OutputS3BucketName\": \"bucket name\", \"OutputS3KeyPrefix\": \"folder name\" } }" 
+     * An Amazon S3 bucket where you want to store the output details of the request.
      */
     OutputLocation?: InstanceAssociationOutputLocation;
   }
@@ -1385,7 +1385,7 @@ declare namespace SSM {
      */
     Description?: BaselineDescription;
     /**
-     * Caller-provided idempotency token.
+     * User-provided idempotency token.
      */
     ClientToken?: ClientToken;
   }
@@ -1773,7 +1773,7 @@ declare namespace SSM {
      */
     PatchGroup: PatchGroup;
     /**
-     * Each entry in the array is a structure containing: Key (string 1 ≤ length ≤ 200)  Values (array containing a single string)  Type (string “Equal”, “NotEqual”, “LessThan”, “GreaterThan”)
+     * Each entry in the array is a structure containing: Key (string between 1 and 200 characters)  Values (array containing a single string)  Type (string "Equal", "NotEqual", "LessThan", "GreaterThan")
      */
     Filters?: InstancePatchStateFilterList;
     /**
@@ -1825,7 +1825,7 @@ declare namespace SSM {
      */
     InstanceId: InstanceId;
     /**
-     * Each entry in the array is a structure containing: Key (string, 1 ≤ length ≤ 128) Values (array of strings 1 ≤ length ≤ 256)
+     * Each entry in the array is a structure containing: Key (string, between 1 and 128 characters) Values (array of strings, each string between 1 and 256 characters)
      */
     Filters?: PatchOrchestratorFilterList;
     /**
@@ -1839,7 +1839,7 @@ declare namespace SSM {
   }
   export interface DescribeInstancePatchesResult {
     /**
-     * Each entry in the array is a structure containing: Title (string) KBId (string) Classification (string) Severity (string) State (string – “INSTALLED”, “INSTALLED_OTHER”, “MISSING”, “NOT_APPLICABLE”, “FAILED”) InstalledTime (DateTime) InstalledBy (string)
+     * Each entry in the array is a structure containing: Title (string) KBId (string) Classification (string) Severity (string) State (string: "INSTALLED", "INSTALLED OTHER", "MISSING", "NOT APPLICABLE", "FAILED") InstalledTime (DateTime) InstalledBy (string)
      */
     Patches?: PatchComplianceDataList;
     /**
@@ -1913,7 +1913,7 @@ declare namespace SSM {
      */
     WindowId: MaintenanceWindowId;
     /**
-     * Each entry in the array is a structure containing: Key (string, 1 ≤ length ≤ 128) Values (array of strings 1 ≤ length ≤ 256) The supported Keys are ExecutedBefore and ExecutedAfter with the value being a date/time string such as 2016-11-04T05:00:00Z.
+     * Each entry in the array is a structure containing: Key (string, between 1 and 128 characters) Values (array of strings, each string is between 1 and 256 characters) The supported Keys are ExecutedBefore and ExecutedAfter with the value being a date/time string such as 2016-11-04T05:00:00Z.
      */
     Filters?: MaintenanceWindowFilterList;
     /**
@@ -2041,7 +2041,7 @@ declare namespace SSM {
   }
   export interface DescribePatchBaselinesRequest {
     /**
-     * Each element in the array is a structure containing:  Key: (string, “NAME_PREFIX” or “OWNER”) Value: (array of strings, exactly 1 entry, 1 ≤ length ≤ 255)
+     * Each element in the array is a structure containing:  Key: (string, "NAME_PREFIX" or "OWNER") Value: (array of strings, exactly 1 entry, between 1 and 255 characters)
      */
     Filters?: PatchOrchestratorFilterList;
     /**
@@ -2079,7 +2079,7 @@ declare namespace SSM {
      */
     InstancesWithInstalledPatches?: Integer;
     /**
-     * The number of instances with patches installed that aren’t defined in the patch baseline.
+     * The number of instances with patches installed that aren't defined in the patch baseline.
      */
     InstancesWithInstalledOtherPatches?: Integer;
     /**
@@ -2091,7 +2091,7 @@ declare namespace SSM {
      */
     InstancesWithFailedPatches?: Integer;
     /**
-     * The number of instances with patches that aren’t applicable.
+     * The number of instances with patches that aren't applicable.
      */
     InstancesWithNotApplicablePatches?: Integer;
   }
@@ -2107,7 +2107,7 @@ declare namespace SSM {
   }
   export interface DescribePatchGroupsResult {
     /**
-     * Each entry in the array contains: PatchGroup: string (1 ≤ length ≤ 256, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$) PatchBaselineIdentity: A PatchBaselineIdentity element. 
+     * Each entry in the array contains: PatchGroup: string (between 1 and 256 characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$) PatchBaselineIdentity: A PatchBaselineIdentity element. 
      */
     Mappings?: PatchGroupPatchBaselineMappingList;
     /**
@@ -2150,7 +2150,7 @@ declare namespace SSM {
      */
     Owner?: DocumentOwner;
     /**
-     *  The date when the document was created.
+     * The date when the document was created.
      */
     CreatedDate?: DateTime;
     /**
@@ -2162,7 +2162,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     *  A description of the document. 
+     * A description of the document. 
      */
     Description?: DescriptionInDocument;
     /**
@@ -2240,7 +2240,7 @@ declare namespace SSM {
      */
     Name?: DocumentParameterName;
     /**
-     * The type of parameter. The type can be either “String” or “StringList”.
+     * The type of parameter. The type can be either String or StringList.
      */
     Type?: DocumentParameterType;
     /**
@@ -2312,6 +2312,20 @@ declare namespace SSM {
     Fault?: Fault;
   }
   export type FailedCreateAssociationList = FailedCreateAssociation[];
+  export interface FailureDetails {
+    /**
+     * The stage of the Automation execution when the failure occurred. The stages include the following: InputValidation, PreVerification, Invocation, PostVerification.
+     */
+    FailureStage?: String;
+    /**
+     * The type of Automation failure. Failure types include the following: Action, Permission, Throttling, Verification, Internal.
+     */
+    FailureType?: String;
+    /**
+     * Detailed information about the Automation step failure.
+     */
+    Details?: AutomationParameterMap;
+  }
   export type Fault = "Client"|"Server"|"Unknown"|string;
   export interface GetAutomationExecutionRequest {
     /**
@@ -2381,7 +2395,7 @@ declare namespace SSM {
      */
     Status?: CommandInvocationStatus;
     /**
-     * A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Run Command Status. StatusDetails can be one of the following values:   Pending – The command has not been sent to the instance.   In Progress – The command has been sent to the instance but has not reached a terminal state.   Delayed – The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, the instance was stopped, etc. The system will try to deliver the command again.   Success – The command or plugin was executed successfully. This is a terminal state.   Delivery Timed Out – The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command’s MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out – The command started to execute on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed – The command wasn't executed successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled – The command was terminated before it was completed. This is a terminal state.   Undeliverable – The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command’s MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated – The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Run Command Status. StatusDetails can be one of the following values:   Pending: The command has not been sent to the instance.   In Progress: The command has been sent to the instance but has not reached a terminal state.   Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, the instance was stopped, etc. The system will try to deliver the command again.   Success: The command or plugin was executed successfully. This is a terminal state.   Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: The command started to execute on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't executed successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Canceled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -2578,7 +2592,7 @@ declare namespace SSM {
      */
     Type?: MaintenanceWindowTaskType;
     /**
-     * The parameters passed to the task when it was executed. The map has the following format: Key: string, 1 ≤ length ≤ 255 Value: an array of strings where each string 1 ≤ length ≤ 255
+     * The parameters passed to the task when it was executed. The map has the following format: Key: string, between 1 and 255 characters Value: an array of strings, each string is between 1 and 255 characters
      */
     TaskParameters?: MaintenanceWindowTaskParametersList;
     /**
@@ -2948,7 +2962,7 @@ declare namespace SSM {
   export type InstanceInformationList = InstanceInformation[];
   export interface InstanceInformationStringFilter {
     /**
-     * The filter key name to describe your instances. For example: "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|”AssociationStatus”|”Tag Key”
+     * The filter key name to describe your instances. For example: "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"
      */
     Key: InstanceInformationStringFilterKey;
     /**
@@ -2988,7 +3002,7 @@ declare namespace SSM {
      */
     InstalledOtherCount?: PatchInstalledOtherCount;
     /**
-     * The number of patches from the patch baseline that are applicable for the instance but aren’t currently installed.
+     * The number of patches from the patch baseline that are applicable for the instance but aren't currently installed.
      */
     MissingCount?: PatchMissingCount;
     /**
@@ -2996,7 +3010,7 @@ declare namespace SSM {
      */
     FailedCount?: PatchFailedCount;
     /**
-     * The number of patches from the patch baseline that aren’t applicable for the instance and hence aren’t installed on the instance.
+     * The number of patches from the patch baseline that aren't applicable for the instance and hence aren't installed on the instance.
      */
     NotApplicableCount?: PatchNotApplicableCount;
     /**
@@ -3811,7 +3825,7 @@ declare namespace SSM {
      */
     MsrcNumber?: PatchMsrcNumber;
     /**
-     * The language of the patch if it’s language-specific.
+     * The language of the patch if it's language-specific.
      */
     Language?: PatchLanguage;
   }
@@ -4142,7 +4156,7 @@ declare namespace SSM {
   export type ResponseCode = number;
   export interface ResultAttribute {
     /**
-     * Name of the inventory item type. Valid value: “AWS:InstanceInformation”. Default Value: “AWS:InstanceInformation”.
+     * Name of the inventory item type. Valid value: AWS:InstanceInformation. Default Value: AWS:InstanceInformation.
      */
     TypeName: InventoryItemTypeName;
   }
@@ -4173,7 +4187,7 @@ declare namespace SSM {
   export type ScheduleExpression = string;
   export interface SendCommandRequest {
     /**
-     * Required. The instance IDs where the command should execute. You can specify a maximum of 50 IDs.
+     * The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags.
      */
     InstanceIds?: InstanceIdList;
     /**
@@ -4217,11 +4231,11 @@ declare namespace SSM {
      */
     OutputS3KeyPrefix?: S3KeyPrefix;
     /**
-     * (Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as “10” or a percentage such as “10%”. The default value is 50. For more information about how to use MaxConcurrency, see Executing a Command Using Systems Manager Run Command.
+     * (Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Executing a Command Using Systems Manager Run Command.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like “10” or a percentage like “10%”. The default value is 50. For more information about how to use MaxErrors, see Executing a Command Using Systems Manager Run Command.
+     * The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see Executing a Command Using Systems Manager Run Command.
      */
     MaxErrors?: MaxErrors;
     /**
@@ -4309,6 +4323,10 @@ declare namespace SSM {
      * If a step failed, this message explains why the execution failed.
      */
     FailureMessage?: String;
+    /**
+     * Information about the Automation failure.
+     */
+    FailureDetails?: FailureDetails;
   }
   export type StepExecutionList = StepExecution[];
   export interface StopAutomationExecutionRequest {
@@ -4365,13 +4383,21 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The cron expression used to schedule the association that you want to update. Supported expressions are every half, 1, 2, 4, 8 or 12 hour(s); every specified day and time of the week. For example: cron(0 0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0 0/4 1/1 * ? *) to run every four hours; and cron(0 0 10 ? * SUN *) to run every Sunday at 10 a.m.
+     * The cron expression used to schedule the association that you want to update.
      */
     ScheduleExpression?: ScheduleExpression;
     /**
-     * An Amazon S3 bucket where you want to store the results of this request.  "{ \"S3Location\": { \"OutputS3Region\": \"&lt;region&gt;\", \"OutputS3BucketName\": \"bucket name\", \"OutputS3KeyPrefix\": \"folder name\" } }" 
+     * An Amazon S3 bucket where you want to store the results of this request.
      */
     OutputLocation?: InstanceAssociationOutputLocation;
+    /**
+     * The name of the association document.
+     */
+    Name?: DocumentName;
+    /**
+     * The targets of the association.
+     */
+    Targets?: Targets;
   }
   export interface UpdateAssociationResult {
     /**

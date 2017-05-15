@@ -1237,7 +1237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.50.0',
+	  VERSION: '2.51.0',
 
 	  /**
 	   * @api private
@@ -156419,7 +156419,17 @@ return /******/ (function(modules) { // webpackBootstrap
 												"shape": "S4h"
 											},
 											"Response": {},
-											"FailureMessage": {}
+											"FailureMessage": {},
+											"FailureDetails": {
+												"type": "structure",
+												"members": {
+													"FailureStage": {},
+													"FailureType": {},
+													"Details": {
+														"shape": "S4h"
+													}
+												}
+											}
 										}
 									}
 								},
@@ -156530,7 +156540,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "Sa5"
+							"shape": "Sa6"
 						},
 						"ResultAttributes": {
 							"type": "list",
@@ -156577,7 +156587,7 @@ return /******/ (function(modules) { // webpackBootstrap
 												"CaptureTime": {},
 												"ContentHash": {},
 												"Content": {
-													"shape": "Sao"
+													"shape": "Sap"
 												}
 											}
 										}
@@ -156794,7 +156804,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"Names": {
-							"shape": "Sbg"
+							"shape": "Sbh"
 						},
 						"WithDecryption": {
 							"type": "boolean"
@@ -156816,7 +156826,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"InvalidParameters": {
-							"shape": "Sbg"
+							"shape": "Sbh"
 						}
 					}
 				}
@@ -156946,7 +156956,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"NextToken": {},
 						"Filters": {
-							"shape": "Sbz"
+							"shape": "Sc0"
 						},
 						"Details": {
 							"type": "boolean"
@@ -157002,7 +157012,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									},
 									"ServiceRole": {},
 									"NotificationConfig": {
-										"shape": "Scc"
+										"shape": "Scd"
 									}
 								}
 							}
@@ -157022,7 +157032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"NextToken": {},
 						"Filters": {
-							"shape": "Sbz"
+							"shape": "Sc0"
 						}
 					}
 				},
@@ -157032,7 +157042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Commands": {
 							"type": "list",
 							"member": {
-								"shape": "Sck"
+								"shape": "Scl"
 							}
 						},
 						"NextToken": {}
@@ -157136,7 +157146,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"InstanceId": {},
 						"TypeName": {},
 						"Filters": {
-							"shape": "Sa5"
+							"shape": "Sa6"
 						},
 						"NextToken": {},
 						"MaxResults": {
@@ -157152,7 +157162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"SchemaVersion": {},
 						"CaptureTime": {},
 						"Entries": {
-							"shape": "Sao"
+							"shape": "Sap"
 						},
 						"NextToken": {}
 					}
@@ -157227,7 +157237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"CaptureTime": {},
 									"ContentHash": {},
 									"Content": {
-										"shape": "Sao"
+										"shape": "Sap"
 									}
 								}
 							}
@@ -157424,7 +157434,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"MaxErrors": {},
 						"ServiceRoleArn": {},
 						"NotificationConfig": {
-							"shape": "Scc"
+							"shape": "Scd"
 						}
 					}
 				},
@@ -157432,7 +157442,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Command": {
-							"shape": "Sck"
+							"shape": "Scl"
 						}
 					}
 				}
@@ -157488,6 +157498,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ScheduleExpression": {},
 						"OutputLocation": {
 							"shape": "S10"
+						},
+						"Name": {},
+						"Targets": {
+							"shape": "Su"
 						}
 					}
 				},
@@ -158078,7 +158092,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sa5": {
+			"Sa6": {
 				"type": "list",
 				"member": {
 					"locationName": "InventoryFilter",
@@ -158099,7 +158113,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sao": {
+			"Sap": {
 				"type": "list",
 				"member": {
 					"type": "map",
@@ -158107,11 +158121,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					"value": {}
 				}
 			},
-			"Sbg": {
+			"Sbh": {
 				"type": "list",
 				"member": {}
 			},
-			"Sbz": {
+			"Sc0": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -158125,7 +158139,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Scc": {
+			"Scd": {
 				"type": "structure",
 				"members": {
 					"NotificationArn": {},
@@ -158136,7 +158150,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"NotificationType": {}
 				}
 			},
-			"Sck": {
+			"Scl": {
 				"type": "structure",
 				"members": {
 					"CommandId": {},
@@ -158175,7 +158189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					},
 					"ServiceRole": {},
 					"NotificationConfig": {
-						"shape": "Scc"
+						"shape": "Scd"
 					}
 				}
 			}

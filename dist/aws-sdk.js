@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.50.0
+// AWS SDK for JavaScript v2.51.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -92843,7 +92843,17 @@ module.exports={
                       "shape": "S4h"
                     },
                     "Response": {},
-                    "FailureMessage": {}
+                    "FailureMessage": {},
+                    "FailureDetails": {
+                      "type": "structure",
+                      "members": {
+                        "FailureStage": {},
+                        "FailureType": {},
+                        "Details": {
+                          "shape": "S4h"
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -92954,7 +92964,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Filters": {
-            "shape": "Sa5"
+            "shape": "Sa6"
           },
           "ResultAttributes": {
             "type": "list",
@@ -93001,7 +93011,7 @@ module.exports={
                       "CaptureTime": {},
                       "ContentHash": {},
                       "Content": {
-                        "shape": "Sao"
+                        "shape": "Sap"
                       }
                     }
                   }
@@ -93218,7 +93228,7 @@ module.exports={
         ],
         "members": {
           "Names": {
-            "shape": "Sbg"
+            "shape": "Sbh"
           },
           "WithDecryption": {
             "type": "boolean"
@@ -93240,7 +93250,7 @@ module.exports={
             }
           },
           "InvalidParameters": {
-            "shape": "Sbg"
+            "shape": "Sbh"
           }
         }
       }
@@ -93370,7 +93380,7 @@ module.exports={
           },
           "NextToken": {},
           "Filters": {
-            "shape": "Sbz"
+            "shape": "Sc0"
           },
           "Details": {
             "type": "boolean"
@@ -93426,7 +93436,7 @@ module.exports={
                 },
                 "ServiceRole": {},
                 "NotificationConfig": {
-                  "shape": "Scc"
+                  "shape": "Scd"
                 }
               }
             }
@@ -93446,7 +93456,7 @@ module.exports={
           },
           "NextToken": {},
           "Filters": {
-            "shape": "Sbz"
+            "shape": "Sc0"
           }
         }
       },
@@ -93456,7 +93466,7 @@ module.exports={
           "Commands": {
             "type": "list",
             "member": {
-              "shape": "Sck"
+              "shape": "Scl"
             }
           },
           "NextToken": {}
@@ -93560,7 +93570,7 @@ module.exports={
           "InstanceId": {},
           "TypeName": {},
           "Filters": {
-            "shape": "Sa5"
+            "shape": "Sa6"
           },
           "NextToken": {},
           "MaxResults": {
@@ -93576,7 +93586,7 @@ module.exports={
           "SchemaVersion": {},
           "CaptureTime": {},
           "Entries": {
-            "shape": "Sao"
+            "shape": "Sap"
           },
           "NextToken": {}
         }
@@ -93651,7 +93661,7 @@ module.exports={
                 "CaptureTime": {},
                 "ContentHash": {},
                 "Content": {
-                  "shape": "Sao"
+                  "shape": "Sap"
                 }
               }
             }
@@ -93848,7 +93858,7 @@ module.exports={
           "MaxErrors": {},
           "ServiceRoleArn": {},
           "NotificationConfig": {
-            "shape": "Scc"
+            "shape": "Scd"
           }
         }
       },
@@ -93856,7 +93866,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Command": {
-            "shape": "Sck"
+            "shape": "Scl"
           }
         }
       }
@@ -93912,6 +93922,10 @@ module.exports={
           "ScheduleExpression": {},
           "OutputLocation": {
             "shape": "S10"
+          },
+          "Name": {},
+          "Targets": {
+            "shape": "Su"
           }
         }
       },
@@ -94502,7 +94516,7 @@ module.exports={
         }
       }
     },
-    "Sa5": {
+    "Sa6": {
       "type": "list",
       "member": {
         "locationName": "InventoryFilter",
@@ -94523,7 +94537,7 @@ module.exports={
         }
       }
     },
-    "Sao": {
+    "Sap": {
       "type": "list",
       "member": {
         "type": "map",
@@ -94531,11 +94545,11 @@ module.exports={
         "value": {}
       }
     },
-    "Sbg": {
+    "Sbh": {
       "type": "list",
       "member": {}
     },
-    "Sbz": {
+    "Sc0": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -94549,7 +94563,7 @@ module.exports={
         }
       }
     },
-    "Scc": {
+    "Scd": {
       "type": "structure",
       "members": {
         "NotificationArn": {},
@@ -94560,7 +94574,7 @@ module.exports={
         "NotificationType": {}
       }
     },
-    "Sck": {
+    "Scl": {
       "type": "structure",
       "members": {
         "CommandId": {},
@@ -94599,7 +94613,7 @@ module.exports={
         },
         "ServiceRole": {},
         "NotificationConfig": {
-          "shape": "Scc"
+          "shape": "Scd"
         }
       }
     }
@@ -101131,7 +101145,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.50.0',
+  VERSION: '2.51.0',
 
 
   Signers: {},

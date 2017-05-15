@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.50.0-->
+<!--LATEST=2.51.0-->
 <!--ENTRYINSERT-->
+
+## 2.51.0
+* feature: SSM: UpdateAssociation API now supports updating document name and targets of an association. GetAutomationExecution API can return FailureDetails as an optional field to the StepExecution Object, which contains failure type, failure stage as well as other failure related information for a failed step.
 
 ## 2.50.0
 * bugfix: ReactNative: Fixes issue where binary responses were empty in iOS (e.g. s3.getObject)
