@@ -221,6 +221,24 @@
       ],
       "documentation":"<p>Describes the rules packages that are specified by the ARNs of the rules packages.</p>"
     },
+    "GetAssessmentReport":{
+      "name":"GetAssessmentReport",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetAssessmentReportRequest"},
+      "output":{"shape":"GetAssessmentReportResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"NoSuchEntityException"},
+        {"shape":"AssessmentRunInProgressException"},
+        {"shape":"UnsupportedFeatureException"}
+      ],
+      "documentation":"<p>Produces an assessment report that includes detailed and comprehensive results of a specified assessment run. </p>"
+    },
     "GetTelemetryMetadata":{
       "name":"GetTelemetryMetadata",
       "http":{
@@ -741,7 +759,8 @@
         "stateChangedAt",
         "dataCollected",
         "stateChanges",
-        "notifications"
+        "notifications",
+        "findingCounts"
       ],
       "members":{
         "arn":{
@@ -799,6 +818,10 @@
         "notifications":{
           "shape":"AssessmentRunNotificationList",
           "documentation":"<p>A list of notifications for the event subscriptions. A notification about a particular generated finding is added to this list only once.</p>"
+        },
+        "findingCounts":{
+          "shape":"AssessmentRunFindingCounts",
+          "documentation":"<p>Provides a total count of generated findings per severity.</p>"
         }
       },
       "documentation":"<p>A snapshot of an Amazon Inspector assessment run that contains the findings of the assessment run .</p> <p>Used as the response element in the <a>DescribeAssessmentRuns</a> action.</p>"
@@ -889,6 +912,11 @@
       },
       "documentation":"<p>Used as the request parameter in the <a>ListAssessmentRuns</a> action.</p>"
     },
+    "AssessmentRunFindingCounts":{
+      "type":"map",
+      "key":{"shape":"Severity"},
+      "value":{"shape":"FindingCount"}
+    },
     "AssessmentRunInProgressArnList":{
       "type":"list",
       "member":{"shape":"Arn"},
@@ -951,7 +979,10 @@
           "shape":"InspectorEvent",
           "documentation":"<p>The event for which a notification is sent.</p>"
         },
-        "message":{"shape":"Message"},
+        "message":{
+          "shape":"Message",
+          "documentation":"<p>The message included in the notification.</p>"
+        },
         "error":{
           "shape":"Bool",
           "documentation":"<p>The Boolean value that specifies whether the notification represents an error.</p>"
@@ -991,8 +1022,10 @@
         "COLLECTING_DATA",
         "STOP_DATA_COLLECTION_PENDING",
         "DATA_COLLECTED",
+        "START_EVALUATING_RULES_PENDING",
         "EVALUATING_RULES",
         "FAILED",
+        "ERROR",
         "COMPLETED",
         "COMPLETED_WITH_ERRORS"
       ]
@@ -1655,7 +1688,10 @@
           "shape":"ServiceName",
           "documentation":"<p>The data element is set to \"Inspector\".</p>"
         },
-        "serviceAttributes":{"shape":"InspectorServiceAttributes"},
+        "serviceAttributes":{
+          "shape":"InspectorServiceAttributes",
+          "documentation":"<p>This data type is used in the <a>Finding</a> data type.</p>"
+        },
         "assetType":{
           "shape":"AssetType",
           "documentation":"<p>The type of the host from which the finding is generated.</p>"
@@ -1715,6 +1751,7 @@
       },
       "documentation":"<p>Contains information about an Amazon Inspector finding. This data type is used as the response element in the <a>DescribeFindings</a> action.</p>"
     },
+    "FindingCount":{"type":"integer"},
     "FindingFilter":{
       "type":"structure",
       "members":{
@@ -1761,8 +1798,44 @@
     "FindingList":{
       "type":"list",
       "member":{"shape":"Finding"},
-      "max":10,
+      "max":100,
       "min":0
+    },
+    "GetAssessmentReportRequest":{
+      "type":"structure",
+      "required":[
+        "assessmentRunArn",
+        "reportFileFormat",
+        "reportType"
+      ],
+      "members":{
+        "assessmentRunArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN that specifies the assessment run for which you want to generate a report.</p>"
+        },
+        "reportFileFormat":{
+          "shape":"ReportFileFormat",
+          "documentation":"<p>Specifies the file format (html or pdf) of the assessment report that you want to generate.</p>"
+        },
+        "reportType":{
+          "shape":"ReportType",
+          "documentation":"<p>Specifies the type of the assessment report that you want to generate. There are two types of assessment reports: a finding report and a full report. For more information, see <a href=\"http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html\">Assessment Reports</a>. </p>"
+        }
+      }
+    },
+    "GetAssessmentReportResponse":{
+      "type":"structure",
+      "required":["status"],
+      "members":{
+        "status":{
+          "shape":"ReportStatus",
+          "documentation":"<p>Specifies the status of the request to generate an assessment report. </p>"
+        },
+        "url":{
+          "shape":"Url",
+          "documentation":"<p>Specifies the URL where you can find the generated assessment report. This parameter is only returned if the report is successfully generated.</p>"
+        }
+      }
     },
     "GetTelemetryMetadataRequest":{
       "type":"structure",
@@ -2412,6 +2485,28 @@
         }
       }
     },
+    "ReportFileFormat":{
+      "type":"string",
+      "enum":[
+        "HTML",
+        "PDF"
+      ]
+    },
+    "ReportStatus":{
+      "type":"string",
+      "enum":[
+        "WORK_IN_PROGRESS",
+        "FAILED",
+        "COMPLETED"
+      ]
+    },
+    "ReportType":{
+      "type":"string",
+      "enum":[
+        "FINDING",
+        "FULL"
+      ]
+    },
     "ResourceGroup":{
       "type":"structure",
       "required":[
@@ -2736,6 +2831,19 @@
         }
       }
     },
+    "UnsupportedFeatureException":{
+      "type":"structure",
+      "required":[
+        "message",
+        "canRetry"
+      ],
+      "members":{
+        "message":{"shape":"ErrorMessage"},
+        "canRetry":{"shape":"Bool"}
+      },
+      "documentation":"<p>Used by the <a>GetAssessmentReport</a> API. The request was rejected because you tried to generate a report for an assessment run that existed before reporting was supported in Amazon Inspector. You can only generate reports for assessment runs that took place or will take place after generating reports in Amazon Inspector became available.</p>",
+      "exception":true
+    },
     "UpdateAssessmentTargetRequest":{
       "type":"structure",
       "required":[
@@ -2757,6 +2865,10 @@
           "documentation":"<p>The ARN of the resource group that is used to specify the new resource group to associate with the assessment target.</p>"
         }
       }
+    },
+    "Url":{
+      "type":"string",
+      "max":2048
     },
     "UserAttributeKeyList":{
       "type":"list",

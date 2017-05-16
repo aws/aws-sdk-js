@@ -120,6 +120,14 @@ declare class Inspector extends Service {
    */
   describeRulesPackages(callback?: (err: AWSError, data: Inspector.Types.DescribeRulesPackagesResponse) => void): Request<Inspector.Types.DescribeRulesPackagesResponse, AWSError>;
   /**
+   * Produces an assessment report that includes detailed and comprehensive results of a specified assessment run. 
+   */
+  getAssessmentReport(params: Inspector.Types.GetAssessmentReportRequest, callback?: (err: AWSError, data: Inspector.Types.GetAssessmentReportResponse) => void): Request<Inspector.Types.GetAssessmentReportResponse, AWSError>;
+  /**
+   * Produces an assessment report that includes detailed and comprehensive results of a specified assessment run. 
+   */
+  getAssessmentReport(callback?: (err: AWSError, data: Inspector.Types.GetAssessmentReportResponse) => void): Request<Inspector.Types.GetAssessmentReportResponse, AWSError>;
+  /**
    * Information about the data that is collected for the specified assessment run.
    */
   getTelemetryMetadata(params: Inspector.Types.GetTelemetryMetadataRequest, callback?: (err: AWSError, data: Inspector.Types.GetTelemetryMetadataResponse) => void): Request<Inspector.Types.GetTelemetryMetadataResponse, AWSError>;
@@ -381,6 +389,10 @@ declare namespace Inspector {
      * A list of notifications for the event subscriptions. A notification about a particular generated finding is added to this list only once.
      */
     notifications: AssessmentRunNotificationList;
+    /**
+     * Provides a total count of generated findings per severity.
+     */
+    findingCounts: AssessmentRunFindingCounts;
   }
   export interface AssessmentRunAgent {
     /**
@@ -444,6 +456,7 @@ declare namespace Inspector {
      */
     stateChangeTimeRange?: TimestampRange;
   }
+  export type AssessmentRunFindingCounts = {[key: string]: FindingCount};
   export type AssessmentRunInProgressArnList = Arn[];
   export type AssessmentRunList = AssessmentRun[];
   export type AssessmentRunName = string;
@@ -456,6 +469,9 @@ declare namespace Inspector {
      * The event for which a notification is sent.
      */
     event: InspectorEvent;
+    /**
+     * The message included in the notification.
+     */
     message?: Message;
     /**
      * The Boolean value that specifies whether the notification represents an error.
@@ -472,7 +488,7 @@ declare namespace Inspector {
   }
   export type AssessmentRunNotificationList = AssessmentRunNotification[];
   export type AssessmentRunNotificationSnsStatusCode = "SUCCESS"|"TOPIC_DOES_NOT_EXIST"|"ACCESS_DENIED"|"INTERNAL_ERROR"|string;
-  export type AssessmentRunState = "CREATED"|"START_DATA_COLLECTION_PENDING"|"START_DATA_COLLECTION_IN_PROGRESS"|"COLLECTING_DATA"|"STOP_DATA_COLLECTION_PENDING"|"DATA_COLLECTED"|"EVALUATING_RULES"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|string;
+  export type AssessmentRunState = "CREATED"|"START_DATA_COLLECTION_PENDING"|"START_DATA_COLLECTION_IN_PROGRESS"|"COLLECTING_DATA"|"STOP_DATA_COLLECTION_PENDING"|"DATA_COLLECTED"|"START_EVALUATING_RULES_PENDING"|"EVALUATING_RULES"|"FAILED"|"ERROR"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|string;
   export interface AssessmentRunStateChange {
     /**
      * The last time the assessment run state changed.
@@ -843,6 +859,9 @@ declare namespace Inspector {
      * The data element is set to "Inspector".
      */
     service?: ServiceName;
+    /**
+     * This data type is used in the Finding data type.
+     */
     serviceAttributes?: InspectorServiceAttributes;
     /**
      * The type of the host from which the finding is generated.
@@ -901,6 +920,7 @@ declare namespace Inspector {
      */
     updatedAt: Timestamp;
   }
+  export type FindingCount = number;
   export interface FindingFilter {
     /**
      * For a record to match a filter, one of the values that is specified for this data type property must be the exact match of the value of the agentId property of the Finding data type.
@@ -937,6 +957,30 @@ declare namespace Inspector {
   }
   export type FindingId = string;
   export type FindingList = Finding[];
+  export interface GetAssessmentReportRequest {
+    /**
+     * The ARN that specifies the assessment run for which you want to generate a report.
+     */
+    assessmentRunArn: Arn;
+    /**
+     * Specifies the file format (html or pdf) of the assessment report that you want to generate.
+     */
+    reportFileFormat: ReportFileFormat;
+    /**
+     * Specifies the type of the assessment report that you want to generate. There are two types of assessment reports: a finding report and a full report. For more information, see Assessment Reports. 
+     */
+    reportType: ReportType;
+  }
+  export interface GetAssessmentReportResponse {
+    /**
+     * Specifies the status of the request to generate an assessment report. 
+     */
+    status: ReportStatus;
+    /**
+     * Specifies the URL where you can find the generated assessment report. This parameter is only returned if the report is successfully generated.
+     */
+    url?: Url;
+  }
   export interface GetTelemetryMetadataRequest {
     /**
      * The ARN that specifies the assessment run that has the telemetry data that you want to obtain.
@@ -1224,6 +1268,9 @@ declare namespace Inspector {
      */
     failedItems: FailedItems;
   }
+  export type ReportFileFormat = "HTML"|"PDF"|string;
+  export type ReportStatus = "WORK_IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
+  export type ReportType = "FINDING"|"FULL"|string;
   export interface ResourceGroup {
     /**
      * The ARN of the resource group.
@@ -1408,6 +1455,7 @@ declare namespace Inspector {
      */
     resourceGroupArn: Arn;
   }
+  export type Url = string;
   export type UserAttributeKeyList = AttributeKey[];
   export type UserAttributeList = Attribute[];
   export type Version = string;
