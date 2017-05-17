@@ -204,11 +204,11 @@ declare class CloudWatchLogs extends Service {
    */
   putRetentionPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group.
+   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call will fail because you cannot associate a second filter with a log group.
    */
   putSubscriptionFilter(params: CloudWatchLogs.Types.PutSubscriptionFilterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group.
+   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call will fail because you cannot associate a second filter with a log group.
    */
   putSubscriptionFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -430,7 +430,7 @@ declare namespace CloudWatchLogs {
      */
     logStreamNamePrefix?: LogStreamName;
     /**
-     * If the value is LogStreamName, the results are ordered by log stream name. If the value is LastEventTime, the results are ordered by the event time. The default value is LogStreamName. If you order the results by event time, you cannot specify the logStreamNamePrefix parameter.
+     * If the value is LogStreamName, the results are ordered by log stream name. If the value is LastEventTime, the results are ordered by the event time. The default value is LogStreamName. If you order the results by event time, you cannot specify the logStreamNamePrefix parameter. lastEventTimestamp represents the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. lastEventTimeStamp updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.
      */
     orderBy?: OrderBy;
     /**
@@ -533,7 +533,7 @@ declare namespace CloudWatchLogs {
      */
     arn?: Arn;
     /**
-     * The creation time of the destination.
+     * The creation time of the destination, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
   }
@@ -587,11 +587,11 @@ declare namespace CloudWatchLogs {
   }
   export interface ExportTaskExecutionInfo {
     /**
-     * The creation time of the export task.
+     * The creation time of the export task, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
     /**
-     * The completion time of the export task.
+     * The completion time of the export task, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     completionTime?: Timestamp;
   }
@@ -676,7 +676,7 @@ declare namespace CloudWatchLogs {
      */
     message?: EventMessage;
     /**
-     * The time the event was ingested.
+     * The time the event was ingested, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     ingestionTime?: Timestamp;
     /**
@@ -761,7 +761,7 @@ declare namespace CloudWatchLogs {
      */
     logGroupName?: LogGroupName;
     /**
-     * The creation time of the log group.
+     * The creation time of the log group, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
     retentionInDays?: Days;
@@ -786,7 +786,7 @@ declare namespace CloudWatchLogs {
      */
     logStreamName?: LogStreamName;
     /**
-     * The creation time of the stream.
+     * The creation time of the stream, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
     /**
@@ -794,11 +794,11 @@ declare namespace CloudWatchLogs {
      */
     firstEventTimestamp?: Timestamp;
     /**
-     * The time of the last event, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     *  the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. lastEventTime updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.
      */
     lastEventTimestamp?: Timestamp;
     /**
-     * The ingestion time.
+     * The ingestion time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     lastIngestionTime?: Timestamp;
     /**
@@ -828,7 +828,7 @@ declare namespace CloudWatchLogs {
      */
     metricTransformations?: MetricTransformations;
     /**
-     * The creation time of the metric filter.
+     * The creation time of the metric filter, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
     /**
@@ -886,7 +886,7 @@ declare namespace CloudWatchLogs {
      */
     message?: EventMessage;
     /**
-     * The time the event was ingested.
+     * The time the event was ingested, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     ingestionTime?: Timestamp;
   }
@@ -980,7 +980,7 @@ declare namespace CloudWatchLogs {
      */
     logGroupName: LogGroupName;
     /**
-     * A name for the subscription filter.
+     * A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call will fail because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use DescribeSubscriptionFilters.
      */
     filterName: FilterName;
     /**
@@ -1052,7 +1052,7 @@ declare namespace CloudWatchLogs {
      */
     distribution?: Distribution;
     /**
-     * The creation time of the subscription filter.
+     * The creation time of the subscription filter, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
   }

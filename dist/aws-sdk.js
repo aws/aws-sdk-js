@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.52.0
+// AWS SDK for JavaScript v2.53.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -6175,55 +6175,54 @@ module.exports={
   "pagination": {
     "DescribeAutoScalingGroups": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxRecords",
+      "output_token": "NextToken",
       "result_key": "AutoScalingGroups"
     },
     "DescribeAutoScalingInstances": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxRecords",
+      "output_token": "NextToken",
       "result_key": "AutoScalingInstances"
     },
     "DescribeLaunchConfigurations": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxRecords",
+      "output_token": "NextToken",
       "result_key": "LaunchConfigurations"
     },
     "DescribeNotificationConfigurations": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxRecords",
+      "output_token": "NextToken",
       "result_key": "NotificationConfigurations"
     },
     "DescribePolicies": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxRecords",
+      "output_token": "NextToken",
       "result_key": "ScalingPolicies"
     },
     "DescribeScalingActivities": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxRecords",
+      "output_token": "NextToken",
       "result_key": "Activities"
     },
     "DescribeScheduledActions": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxRecords",
+      "output_token": "NextToken",
       "result_key": "ScheduledUpdateGroupActions"
     },
     "DescribeTags": {
       "input_token": "NextToken",
-      "output_token": "NextToken",
       "limit_key": "MaxRecords",
+      "output_token": "NextToken",
       "result_key": "Tags"
     }
   }
 }
-
 },{}],9:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -58770,38 +58769,38 @@ module.exports={
   "pagination": {
     "DescribeDestinations": {
       "input_token": "nextToken",
-      "output_token": "nextToken",
       "limit_key": "limit",
+      "output_token": "nextToken",
       "result_key": "destinations"
     },
     "DescribeLogGroups": {
       "input_token": "nextToken",
-      "output_token": "nextToken",
       "limit_key": "limit",
+      "output_token": "nextToken",
       "result_key": "logGroups"
     },
     "DescribeLogStreams": {
       "input_token": "nextToken",
-      "output_token": "nextToken",
       "limit_key": "limit",
+      "output_token": "nextToken",
       "result_key": "logStreams"
     },
     "DescribeMetricFilters": {
       "input_token": "nextToken",
-      "output_token": "nextToken",
       "limit_key": "limit",
+      "output_token": "nextToken",
       "result_key": "metricFilters"
     },
     "DescribeSubscriptionFilters": {
       "input_token": "nextToken",
-      "output_token": "nextToken",
       "limit_key": "limit",
+      "output_token": "nextToken",
       "result_key": "subscriptionFilters"
     },
     "FilterLogEvents": {
       "input_token": "nextToken",
-      "output_token": "nextToken",
       "limit_key": "limit",
+      "output_token": "nextToken",
       "result_key": [
         "events",
         "searchedLogStreams"
@@ -58809,13 +58808,12 @@ module.exports={
     },
     "GetLogEvents": {
       "input_token": "nextToken",
-      "output_token": "nextForwardToken",
       "limit_key": "limit",
+      "output_token": "nextForwardToken",
       "result_key": "events"
     }
   }
 }
-
 },{}],93:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -101205,7 +101203,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.52.0',
+  VERSION: '2.53.0',
 
 
   Signers: {},

@@ -1237,7 +1237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.52.0',
+	  VERSION: '2.53.0',
 
 	  /**
 	   * @api private
@@ -39681,50 +39681,50 @@ return /******/ (function(modules) { // webpackBootstrap
 		"pagination": {
 			"DescribeAutoScalingGroups": {
 				"input_token": "NextToken",
-				"output_token": "NextToken",
 				"limit_key": "MaxRecords",
+				"output_token": "NextToken",
 				"result_key": "AutoScalingGroups"
 			},
 			"DescribeAutoScalingInstances": {
 				"input_token": "NextToken",
-				"output_token": "NextToken",
 				"limit_key": "MaxRecords",
+				"output_token": "NextToken",
 				"result_key": "AutoScalingInstances"
 			},
 			"DescribeLaunchConfigurations": {
 				"input_token": "NextToken",
-				"output_token": "NextToken",
 				"limit_key": "MaxRecords",
+				"output_token": "NextToken",
 				"result_key": "LaunchConfigurations"
 			},
 			"DescribeNotificationConfigurations": {
 				"input_token": "NextToken",
-				"output_token": "NextToken",
 				"limit_key": "MaxRecords",
+				"output_token": "NextToken",
 				"result_key": "NotificationConfigurations"
 			},
 			"DescribePolicies": {
 				"input_token": "NextToken",
-				"output_token": "NextToken",
 				"limit_key": "MaxRecords",
+				"output_token": "NextToken",
 				"result_key": "ScalingPolicies"
 			},
 			"DescribeScalingActivities": {
 				"input_token": "NextToken",
-				"output_token": "NextToken",
 				"limit_key": "MaxRecords",
+				"output_token": "NextToken",
 				"result_key": "Activities"
 			},
 			"DescribeScheduledActions": {
 				"input_token": "NextToken",
-				"output_token": "NextToken",
 				"limit_key": "MaxRecords",
+				"output_token": "NextToken",
 				"result_key": "ScheduledUpdateGroupActions"
 			},
 			"DescribeTags": {
 				"input_token": "NextToken",
-				"output_token": "NextToken",
 				"limit_key": "MaxRecords",
+				"output_token": "NextToken",
 				"result_key": "Tags"
 			}
 		}
@@ -54187,38 +54187,38 @@ return /******/ (function(modules) { // webpackBootstrap
 		"pagination": {
 			"DescribeDestinations": {
 				"input_token": "nextToken",
-				"output_token": "nextToken",
 				"limit_key": "limit",
+				"output_token": "nextToken",
 				"result_key": "destinations"
 			},
 			"DescribeLogGroups": {
 				"input_token": "nextToken",
-				"output_token": "nextToken",
 				"limit_key": "limit",
+				"output_token": "nextToken",
 				"result_key": "logGroups"
 			},
 			"DescribeLogStreams": {
 				"input_token": "nextToken",
-				"output_token": "nextToken",
 				"limit_key": "limit",
+				"output_token": "nextToken",
 				"result_key": "logStreams"
 			},
 			"DescribeMetricFilters": {
 				"input_token": "nextToken",
-				"output_token": "nextToken",
 				"limit_key": "limit",
+				"output_token": "nextToken",
 				"result_key": "metricFilters"
 			},
 			"DescribeSubscriptionFilters": {
 				"input_token": "nextToken",
-				"output_token": "nextToken",
 				"limit_key": "limit",
+				"output_token": "nextToken",
 				"result_key": "subscriptionFilters"
 			},
 			"FilterLogEvents": {
 				"input_token": "nextToken",
-				"output_token": "nextToken",
 				"limit_key": "limit",
+				"output_token": "nextToken",
 				"result_key": [
 					"events",
 					"searchedLogStreams"
@@ -54226,8 +54226,8 @@ return /******/ (function(modules) { // webpackBootstrap
 			},
 			"GetLogEvents": {
 				"input_token": "nextToken",
-				"output_token": "nextForwardToken",
 				"limit_key": "limit",
+				"output_token": "nextForwardToken",
 				"result_key": "events"
 			}
 		}
