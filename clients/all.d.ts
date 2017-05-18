@@ -97,3 +97,4 @@ export import WorkSpaces = require('./workspaces');
 export import CodeStar = require('./codestar');
 export import LexModelBuildingService = require('./lexmodelbuildingservice');
 export import MarketplaceEntitlementService = require('./marketplaceentitlementservice');
+export import Athena = require('./athena');

@@ -428,5 +428,8 @@
   "marketplaceentitlementservice": {
     "prefix": "entitlement.marketplace",
     "name": "MarketplaceEntitlementService"
+  },
+  "athena": {
+    "name": "Athena"
   }
 }

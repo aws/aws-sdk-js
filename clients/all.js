@@ -100,5 +100,6 @@ module.exports = {
   WorkSpaces: require('./workspaces'),
   CodeStar: require('./codestar'),
   LexModelBuildingService: require('./lexmodelbuildingservice'),
-  MarketplaceEntitlementService: require('./marketplaceentitlementservice')
+  MarketplaceEntitlementService: require('./marketplaceentitlementservice'),
+  Athena: require('./athena')
 };

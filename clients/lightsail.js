@@ -8,6 +8,7 @@ AWS.Lightsail = Service.defineService('lightsail', ['2016-11-28']);
 Object.defineProperty(apiLoader.services['lightsail'], '2016-11-28', {
   get: function get() {
     var model = require('../apis/lightsail-2016-11-28.min.json');
+    model.paginators = require('../apis/lightsail-2016-11-28.paginators.json').pagination;
     return model;
   },
   enumerable: true,

@@ -284,11 +284,11 @@ declare class Lightsail extends Service {
    */
   getOperationsForResource(callback?: (err: AWSError, data: Lightsail.Types.GetOperationsForResourceResult) => void): Request<Lightsail.Types.GetOperationsForResourceResult, AWSError>;
   /**
-   * Returns a list of all valid regions for Amazon Lightsail.
+   * Returns a list of all valid regions for Amazon Lightsail. Use the include availability zones parameter to also return the availability zones in a region.
    */
   getRegions(params: Lightsail.Types.GetRegionsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetRegionsResult) => void): Request<Lightsail.Types.GetRegionsResult, AWSError>;
   /**
-   * Returns a list of all valid regions for Amazon Lightsail.
+   * Returns a list of all valid regions for Amazon Lightsail. Use the include availability zones parameter to also return the availability zones in a region.
    */
   getRegions(callback?: (err: AWSError, data: Lightsail.Types.GetRegionsResult) => void): Request<Lightsail.Types.GetRegionsResult, AWSError>;
   /**
@@ -339,6 +339,14 @@ declare class Lightsail extends Service {
    * Tries to peer the Lightsail VPC with the user's default VPC.
    */
   peerVpc(callback?: (err: AWSError, data: Lightsail.Types.PeerVpcResult) => void): Request<Lightsail.Types.PeerVpcResult, AWSError>;
+  /**
+   * Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.
+   */
+  putInstancePublicPorts(params: Lightsail.Types.PutInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.PutInstancePublicPortsResult) => void): Request<Lightsail.Types.PutInstancePublicPortsResult, AWSError>;
+  /**
+   * Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.
+   */
+  putInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.PutInstancePublicPortsResult) => void): Request<Lightsail.Types.PutInstancePublicPortsResult, AWSError>;
   /**
    * Restarts a specific instance. When your Amazon Lightsail instance is finished rebooting, Lightsail assigns a new public IP address. To use the same IP address after restarting, create a static IP address and attach it to the instance.
    */
@@ -420,7 +428,7 @@ declare namespace Lightsail {
   }
   export interface AvailabilityZone {
     /**
-     * The name of the Availability Zone.
+     * The name of the Availability Zone. The format is us-east-1a (case-sensitive).
      */
     zoneName?: NonEmptyString;
     /**
@@ -587,7 +595,7 @@ declare namespace Lightsail {
      */
     instanceNames: StringList;
     /**
-     * The Availability Zone where you want to create your instances. Use the following formatting: us-east-1a (case sensitive).
+     * The Availability Zone where you want to create your instances. Use the following formatting: us-east-1a (case sensitive). You can get a list of availability zones by using the get regions operation. Be sure to add the include availability zones parameter to your request.
      */
     availabilityZone: string;
     /**
@@ -619,7 +627,7 @@ declare namespace Lightsail {
      */
     instanceNames: StringList;
     /**
-     * The Availability Zone in which to create your instance. Use the following format: us-east-1a (case sensitive).
+     * The Availability Zone in which to create your instance. Use the following format: us-east-1a (case sensitive). You can get a list of availability zones by using the get regions operation. Be sure to add the include availability zones parameter to your request.
      */
     availabilityZone: string;
     /**
@@ -1028,7 +1036,7 @@ declare namespace Lightsail {
     /**
      * Information about the port states resulting from your request.
      */
-    portStates?: PortStateList;
+    portStates?: InstancePortStateList;
   }
   export interface GetInstanceRequest {
     /**
@@ -1375,7 +1383,7 @@ declare namespace Lightsail {
      */
     toPort?: Port;
     /**
-     * The protocol. 
+     * The protocol being used. Can be one of the following.    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.  
      */
     protocol?: NetworkProtocol;
     /**
@@ -1396,6 +1404,25 @@ declare namespace Lightsail {
     accessDirection?: AccessDirection;
   }
   export type InstancePortInfoList = InstancePortInfo[];
+  export interface InstancePortState {
+    /**
+     * The first port in the range.
+     */
+    fromPort?: Port;
+    /**
+     * The last port in the range.
+     */
+    toPort?: Port;
+    /**
+     * The protocol being used. Can be one of the following.    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.  
+     */
+    protocol?: NetworkProtocol;
+    /**
+     * Specifies whether the instance port is open or closed.
+     */
+    state?: PortState;
+  }
+  export type InstancePortStateList = InstancePortState[];
   export interface InstanceSnapshot {
     /**
      * The name of the snapshot.
@@ -1615,7 +1642,7 @@ declare namespace Lightsail {
   }
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|string;
-  export type OperationType = "DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|string;
+  export type OperationType = "DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|string;
   export interface PeerVpcRequest {
   }
   export interface PeerVpcResult {
@@ -1640,8 +1667,24 @@ declare namespace Lightsail {
      */
     protocol?: NetworkProtocol;
   }
+  export type PortInfoList = PortInfo[];
   export type PortState = "open"|"closed"|string;
-  export type PortStateList = PortState[];
+  export interface PutInstancePublicPortsRequest {
+    /**
+     * Specifies information about the public port(s).
+     */
+    portInfos: PortInfoList;
+    /**
+     * The Lightsail instance name of the public port(s) you are setting.
+     */
+    instanceName: ResourceName;
+  }
+  export interface PutInstancePublicPortsResult {
+    /**
+     * Describes metadata about the operation you just executed.
+     */
+    operation?: Operation;
+  }
   export interface RebootInstanceRequest {
     /**
      * The name of the instance to reboot.
@@ -1672,7 +1715,7 @@ declare namespace Lightsail {
      */
     name?: RegionName;
     /**
-     * The Availability Zones.
+     * The Availability Zones. Follows the format us-east-1a (case-sensitive).
      */
     availabilityZones?: AvailabilityZoneList;
   }
@@ -1692,7 +1735,7 @@ declare namespace Lightsail {
   }
   export interface ResourceLocation {
     /**
-     * The Availability Zone.
+     * The Availability Zone. Follows the format us-east-1a (case-sensitive).
      */
     availabilityZone?: string;
     /**

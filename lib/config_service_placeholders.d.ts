@@ -99,6 +99,7 @@ export abstract class ConfigurationServicePlaceholders {
   codestar?: AWS.CodeStar.Types.ClientConfiguration;
   lexmodelbuildingservice?: AWS.LexModelBuildingService.Types.ClientConfiguration;
   marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.ClientConfiguration;
+  athena?: AWS.Athena.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -200,4 +201,5 @@ export interface ConfigurationServiceApiVersions {
   codestar?: AWS.CodeStar.Types.apiVersion;
   lexmodelbuildingservice?: AWS.LexModelBuildingService.Types.apiVersion;
   marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.apiVersion;
+  athena?: AWS.Athena.Types.apiVersion;
 }
