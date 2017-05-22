@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "ReactNative",
+  "description": "Requests will always have a Content-Type header if they also have a body. Works around an issue caused by React Native's Android XMLHttpRequest implementation that requires the Content-Type header to be present if there is a request body."
+}

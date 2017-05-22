@@ -74,7 +74,7 @@ namespace :browser do
     mkdir_p "test/browser/build"
     cp "dist/aws-sdk-all.js", "test/browser/build/aws-sdk-all.js"
     files = "test/helpers.js ";
-    files += Dir.glob("test/**/*.spec.js").join(" ")
+    files += Dir.glob("test/**/*.spec.js").delete_if{|name| name.start_with?("test/react-native/")}.join(" ")
     sh({"SERVICES" => "all"}, $BROWSERIFY +
        " -i domain #{files} > #{$BROWSERIFY_TEST}")
     rm_f "test/configuration.js"
