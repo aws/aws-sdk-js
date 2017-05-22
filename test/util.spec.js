@@ -1302,8 +1302,8 @@
       return expect(AWS.util.userAgent()).to.match(/^aws-sdk-nodejs/);
     });
     it('should include an identifier for the react-native SDK', function() {
-      AWS.util.environment = 'react-native';
-      return expect(AWS.util.userAgent()).to.match(/^aws-sdk-react-native/);
+      AWS.util.environment = 'js-react-native';
+      return expect(AWS.util.userAgent()).to.match(/^aws-sdk-js-react-native/);
     });
     it('should include the current SDK version number', function() {
       return expect(AWS.util.userAgent()).to.have.string(AWS.VERSION);
