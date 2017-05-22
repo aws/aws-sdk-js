@@ -3363,7 +3363,7 @@
         },
         "Metadata": {
           "shape": "Metadata",
-          "documentation": "A map of metadata to store with the object in S3.",
+          "documentation": "A map of metadata stored with the object in S3.",
           "location": "headers",
           "locationName": "x-amz-meta-"
         },
@@ -3813,7 +3813,7 @@
         },
         "Metadata": {
           "shape": "Metadata",
-          "documentation": "A map of metadata to store with the object in S3.",
+          "documentation": "A map of metadata stored with the object in S3.",
           "location": "headers",
           "locationName": "x-amz-meta-"
         },
