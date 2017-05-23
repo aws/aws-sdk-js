@@ -28,6 +28,14 @@ declare class DMS extends Service {
    */
   createEndpoint(callback?: (err: AWSError, data: DMS.Types.CreateEndpointResponse) => void): Request<DMS.Types.CreateEndpointResponse, AWSError>;
   /**
+   *  Creates an AWS DMS event notification subscription.  You can specify the type of source (SourceType) you want to be notified of, provide a list of AWS DMS source IDs (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. If you specify both the SourceType and SourceIds, such as SourceType = replication-instance and SourceIdentifier = my-replinstance, you will be notified of all the replication instance events for the specified source. If you specify a SourceType but don't specify a SourceIdentifier, you receive notice of the events for that source type for all your AWS DMS sources. If you don't specify either SourceType nor SourceIdentifier, you will be notified of events generated from all AWS DMS sources belonging to your customer account. For more information about AWS DMS events, see  Working with Events and Notifications  in the AWS Database MIgration Service User Guide.
+   */
+  createEventSubscription(params: DMS.Types.CreateEventSubscriptionMessage, callback?: (err: AWSError, data: DMS.Types.CreateEventSubscriptionResponse) => void): Request<DMS.Types.CreateEventSubscriptionResponse, AWSError>;
+  /**
+   *  Creates an AWS DMS event notification subscription.  You can specify the type of source (SourceType) you want to be notified of, provide a list of AWS DMS source IDs (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. If you specify both the SourceType and SourceIds, such as SourceType = replication-instance and SourceIdentifier = my-replinstance, you will be notified of all the replication instance events for the specified source. If you specify a SourceType but don't specify a SourceIdentifier, you receive notice of the events for that source type for all your AWS DMS sources. If you don't specify either SourceType nor SourceIdentifier, you will be notified of events generated from all AWS DMS sources belonging to your customer account. For more information about AWS DMS events, see  Working with Events and Notifications  in the AWS Database MIgration Service User Guide.
+   */
+  createEventSubscription(callback?: (err: AWSError, data: DMS.Types.CreateEventSubscriptionResponse) => void): Request<DMS.Types.CreateEventSubscriptionResponse, AWSError>;
+  /**
    * Creates the replication instance using the specified parameters.
    */
   createReplicationInstance(params: DMS.Types.CreateReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationInstanceResponse) => void): Request<DMS.Types.CreateReplicationInstanceResponse, AWSError>;
@@ -67,6 +75,14 @@ declare class DMS extends Service {
    * Deletes the specified endpoint.  All tasks associated with the endpoint must be deleted before you can delete the endpoint.  
    */
   deleteEndpoint(callback?: (err: AWSError, data: DMS.Types.DeleteEndpointResponse) => void): Request<DMS.Types.DeleteEndpointResponse, AWSError>;
+  /**
+   *  Deletes an AWS DMS event subscription. 
+   */
+  deleteEventSubscription(params: DMS.Types.DeleteEventSubscriptionMessage, callback?: (err: AWSError, data: DMS.Types.DeleteEventSubscriptionResponse) => void): Request<DMS.Types.DeleteEventSubscriptionResponse, AWSError>;
+  /**
+   *  Deletes an AWS DMS event subscription. 
+   */
+  deleteEventSubscription(callback?: (err: AWSError, data: DMS.Types.DeleteEventSubscriptionResponse) => void): Request<DMS.Types.DeleteEventSubscriptionResponse, AWSError>;
   /**
    * Deletes the specified replication instance.  You must delete any migration tasks that are associated with the replication instance before you can delete it.  
    */
@@ -131,6 +147,30 @@ declare class DMS extends Service {
    * Returns information about the endpoints for your account in the current region.
    */
   describeEndpoints(callback?: (err: AWSError, data: DMS.Types.DescribeEndpointsResponse) => void): Request<DMS.Types.DescribeEndpointsResponse, AWSError>;
+  /**
+   * Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in  Working with Events and Notifications  in the AWS Database Migration Service User Guide. 
+   */
+  describeEventCategories(params: DMS.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEventCategoriesResponse) => void): Request<DMS.Types.DescribeEventCategoriesResponse, AWSError>;
+  /**
+   * Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in  Working with Events and Notifications  in the AWS Database Migration Service User Guide. 
+   */
+  describeEventCategories(callback?: (err: AWSError, data: DMS.Types.DescribeEventCategoriesResponse) => void): Request<DMS.Types.DescribeEventCategoriesResponse, AWSError>;
+  /**
+   * Lists all the event subscriptions for a customer account. The description of a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status.  If you specify SubscriptionName, this action lists the description for that subscription.
+   */
+  describeEventSubscriptions(params: DMS.Types.DescribeEventSubscriptionsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEventSubscriptionsResponse) => void): Request<DMS.Types.DescribeEventSubscriptionsResponse, AWSError>;
+  /**
+   * Lists all the event subscriptions for a customer account. The description of a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status.  If you specify SubscriptionName, this action lists the description for that subscription.
+   */
+  describeEventSubscriptions(callback?: (err: AWSError, data: DMS.Types.DescribeEventSubscriptionsResponse) => void): Request<DMS.Types.DescribeEventSubscriptionsResponse, AWSError>;
+  /**
+   *  Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see  Working with Events and Notifications . 
+   */
+  describeEvents(params: DMS.Types.DescribeEventsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEventsResponse) => void): Request<DMS.Types.DescribeEventsResponse, AWSError>;
+  /**
+   *  Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see  Working with Events and Notifications . 
+   */
+  describeEvents(callback?: (err: AWSError, data: DMS.Types.DescribeEventsResponse) => void): Request<DMS.Types.DescribeEventsResponse, AWSError>;
   /**
    * Returns information about the replication instance types that can be created in the specified region.
    */
@@ -212,6 +252,14 @@ declare class DMS extends Service {
    */
   modifyEndpoint(callback?: (err: AWSError, data: DMS.Types.ModifyEndpointResponse) => void): Request<DMS.Types.ModifyEndpointResponse, AWSError>;
   /**
+   * Modifies an existing AWS DMS event notification subscription. 
+   */
+  modifyEventSubscription(params: DMS.Types.ModifyEventSubscriptionMessage, callback?: (err: AWSError, data: DMS.Types.ModifyEventSubscriptionResponse) => void): Request<DMS.Types.ModifyEventSubscriptionResponse, AWSError>;
+  /**
+   * Modifies an existing AWS DMS event notification subscription. 
+   */
+  modifyEventSubscription(callback?: (err: AWSError, data: DMS.Types.ModifyEventSubscriptionResponse) => void): Request<DMS.Types.ModifyEventSubscriptionResponse, AWSError>;
+  /**
    * Modifies the replication instance to apply new settings. You can change one or more parameters by specifying these parameters and the new values in the request. Some settings are applied during the maintenance window. 
    */
   modifyReplicationInstance(params: DMS.Types.ModifyReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationInstanceResponse) => void): Request<DMS.Types.ModifyReplicationInstanceResponse, AWSError>;
@@ -228,11 +276,11 @@ declare class DMS extends Service {
    */
   modifyReplicationSubnetGroup(callback?: (err: AWSError, data: DMS.Types.ModifyReplicationSubnetGroupResponse) => void): Request<DMS.Types.ModifyReplicationSubnetGroupResponse, AWSError>;
   /**
-   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it. 
+   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it.  For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
    */
   modifyReplicationTask(params: DMS.Types.ModifyReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
   /**
-   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it. 
+   * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it.  For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
    */
   modifyReplicationTask(callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
   /**
@@ -244,6 +292,14 @@ declare class DMS extends Service {
    */
   refreshSchemas(callback?: (err: AWSError, data: DMS.Types.RefreshSchemasResponse) => void): Request<DMS.Types.RefreshSchemasResponse, AWSError>;
   /**
+   * Reloads the target database table with the source data. 
+   */
+  reloadTables(params: DMS.Types.ReloadTablesMessage, callback?: (err: AWSError, data: DMS.Types.ReloadTablesResponse) => void): Request<DMS.Types.ReloadTablesResponse, AWSError>;
+  /**
+   * Reloads the target database table with the source data. 
+   */
+  reloadTables(callback?: (err: AWSError, data: DMS.Types.ReloadTablesResponse) => void): Request<DMS.Types.ReloadTablesResponse, AWSError>;
+  /**
    * Removes metadata tags from a DMS resource.
    */
   removeTagsFromResource(params: DMS.Types.RemoveTagsFromResourceMessage, callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
@@ -252,11 +308,11 @@ declare class DMS extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
   /**
-   * Starts the replication task.
+   * Starts the replication task. For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
    */
   startReplicationTask(params: DMS.Types.StartReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
   /**
-   * Starts the replication task.
+   * Starts the replication task. For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
    */
   startReplicationTask(callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
   /**
@@ -304,6 +360,8 @@ declare namespace DMS {
   }
   export interface AddTagsToResourceResponse {
   }
+  export type AuthMechanismValue = "default"|"mongodb_cr"|"scram_sha_1"|string;
+  export type AuthTypeValue = "no"|"password"|string;
   export interface AvailabilityZone {
     /**
      * The name of the availability zone.
@@ -356,6 +414,7 @@ declare namespace DMS {
   }
   export type CertificateList = Certificate[];
   export type CertificateWallet = Buffer|Uint8Array|Blob|string;
+  export type CompressionTypeValue = "none"|"gzip"|string;
   export interface Connection {
     /**
      * The Amazon Resource Name (ARN) of the replication instance.
@@ -393,7 +452,7 @@ declare namespace DMS {
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
+     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
      */
     EngineName: String;
     /**
@@ -436,12 +495,60 @@ declare namespace DMS {
      * The SSL mode to use for the SSL connection. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
      */
     SslMode?: DmsSslModeValue;
+    /**
+     * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the Using Object Mapping to Migrate Data to DynamoDB section at  Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service. 
+     */
+    DynamoDbSettings?: DynamoDbSettings;
+    /**
+     * Settings in JSON format for the target S3 endpoint. For more information about the available settings, see the Extra Connection Attributes section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
+     */
+    S3Settings?: S3Settings;
+    /**
+     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
+     */
+    MongoDbSettings?: MongoDbSettings;
   }
   export interface CreateEndpointResponse {
     /**
      * The endpoint that was created.
      */
     Endpoint?: Endpoint;
+  }
+  export interface CreateEventSubscriptionMessage {
+    /**
+     * The name of the DMS event notification subscription.  Constraints: The name must be less than 255 characters. 
+     */
+    SubscriptionName: String;
+    /**
+     *  The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it. 
+     */
+    SnsTopicArn: String;
+    /**
+     *  The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to replication-instance. If this value is not specified, all events are returned.  Valid values: replication-instance | migration-task
+     */
+    SourceType?: String;
+    /**
+     *  A list of event categories for a source type that you want to subscribe to. You can see a list of the categories for a given source type by calling the DescribeEventCategories action or in the topic  Working with Events and Notifications in the AWS Database Migration Service User Guide. 
+     */
+    EventCategories?: EventCategoriesList;
+    /**
+     *  The list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens. 
+     */
+    SourceIds?: SourceIdsList;
+    /**
+     *  A Boolean value; set to true to activate the subscription, or set to false to create the subscription but not activate it. 
+     */
+    Enabled?: BooleanOptional;
+    /**
+     * A tag to be attached to the event subscription.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateEventSubscriptionResponse {
+    /**
+     * The event subscription that was created.
+     */
+    EventSubscription?: EventSubscription;
   }
   export interface CreateReplicationInstanceMessage {
     /**
@@ -529,7 +636,7 @@ declare namespace DMS {
   }
   export interface CreateReplicationTaskMessage {
     /**
-     * The replication task identifier. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
+     * The replication task identifier. Constraints:   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
      */
     ReplicationTaskIdentifier: String;
     /**
@@ -549,7 +656,7 @@ declare namespace DMS {
      */
     MigrationType: MigrationTypeValue;
     /**
-     * The path of the JSON file that contains the table mappings. Preceed the path with "file://". For example, --table-mappings file://mappingfile.json
+     * When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with "file://". When working with the DMS API, provide the JSON as the parameter value. For example, --table-mappings file://mappingfile.json
      */
     TableMappings: String;
     /**
@@ -594,6 +701,18 @@ declare namespace DMS {
      * The endpoint that was deleted.
      */
     Endpoint?: Endpoint;
+  }
+  export interface DeleteEventSubscriptionMessage {
+    /**
+     * The name of the DMS event notification subscription to be deleted.
+     */
+    SubscriptionName: String;
+  }
+  export interface DeleteEventSubscriptionResponse {
+    /**
+     * The event subscription that was deleted.
+     */
+    EventSubscription?: EventSubscription;
   }
   export interface DeleteReplicationInstanceMessage {
     /**
@@ -730,6 +849,98 @@ declare namespace DMS {
      * Endpoint description.
      */
     Endpoints?: EndpointList;
+  }
+  export interface DescribeEventCategoriesMessage {
+    /**
+     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | migration-task
+     */
+    SourceType?: String;
+    /**
+     * Filters applied to the action.
+     */
+    Filters?: FilterList;
+  }
+  export interface DescribeEventCategoriesResponse {
+    /**
+     * A list of event categories.
+     */
+    EventCategoryGroupList?: EventCategoryGroupList;
+  }
+  export interface DescribeEventSubscriptionsMessage {
+    /**
+     * The name of the AWS DMS event subscription to be described.
+     */
+    SubscriptionName?: String;
+    /**
+     * Filters applied to the action.
+     */
+    Filters?: FilterList;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeEventSubscriptionsResponse {
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * A list of event subscriptions.
+     */
+    EventSubscriptionsList?: EventSubscriptionsList;
+  }
+  export interface DescribeEventsMessage {
+    /**
+     *  The identifier of the event source. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens. It cannot end with a hyphen or contain two consecutive hyphens. 
+     */
+    SourceIdentifier?: String;
+    /**
+     * The type of AWS DMS resource that generates events. Valid values: replication-instance | migration-task
+     */
+    SourceType?: SourceType;
+    /**
+     * The start time for the events to be listed.
+     */
+    StartTime?: TStamp;
+    /**
+     * The end time for the events to be listed.
+     */
+    EndTime?: TStamp;
+    /**
+     * The duration of the events to be listed.
+     */
+    Duration?: IntegerOptional;
+    /**
+     * A list of event categories for a source type that you want to subscribe to.
+     */
+    EventCategories?: EventCategoriesList;
+    /**
+     * Filters applied to the action.
+     */
+    Filters?: FilterList;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeEventsResponse {
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * The events described.
+     */
+    Events?: EventList;
   }
   export interface DescribeOrderableReplicationInstancesMessage {
     /**
@@ -888,6 +1099,12 @@ declare namespace DMS {
     Marker?: String;
   }
   export type DmsSslModeValue = "none"|"require"|"verify-ca"|"verify-full"|string;
+  export interface DynamoDbSettings {
+    /**
+     *  The Amazon Resource Name (ARN) used by the service access IAM role. 
+     */
+    ServiceAccessRoleArn: String;
+  }
   export interface Endpoint {
     /**
      * The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
@@ -898,7 +1115,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The database engine name. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
+     * The database engine name. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
      */
     EngineName?: String;
     /**
@@ -941,8 +1158,98 @@ declare namespace DMS {
      * The SSL mode used to connect to the endpoint. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
      */
     SslMode?: DmsSslModeValue;
+    /**
+     *  Value returned by a call to CreateEndpoint that can be used for cross-account validation. Use it on a subsequent call to CreateEndpoint to create the endpoint with a cross-account. 
+     */
+    ExternalId?: String;
+    /**
+     * The settings for the target DynamoDB database. For more information, see the DynamoDBSettings structure.
+     */
+    DynamoDbSettings?: DynamoDbSettings;
+    /**
+     * The settings for the S3 target endpoint. For more information, see the S3Settings structure.
+     */
+    S3Settings?: S3Settings;
+    /**
+     * The settings for the MongoDB source endpoint. For more information, see the MongoDbSettings structure.
+     */
+    MongoDbSettings?: MongoDbSettings;
   }
   export type EndpointList = Endpoint[];
+  export interface Event {
+    /**
+     *  The identifier of the event source. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens.  Constraints:replication instance, endpoint, migration task
+     */
+    SourceIdentifier?: String;
+    /**
+     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | endpoint | migration-task
+     */
+    SourceType?: SourceType;
+    /**
+     * The event message.
+     */
+    Message?: String;
+    /**
+     * The event categories available for the specified source type.
+     */
+    EventCategories?: EventCategoriesList;
+    /**
+     * The date of the event.
+     */
+    Date?: TStamp;
+  }
+  export type EventCategoriesList = String[];
+  export interface EventCategoryGroup {
+    /**
+     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | replication-server | security-group | migration-task
+     */
+    SourceType?: String;
+    /**
+     *  A list of event categories for a SourceType that you want to subscribe to. 
+     */
+    EventCategories?: EventCategoriesList;
+  }
+  export type EventCategoryGroupList = EventCategoryGroup[];
+  export type EventList = Event[];
+  export interface EventSubscription {
+    /**
+     * The AWS customer account associated with the AWS DMS event notification subscription.
+     */
+    CustomerAwsId?: String;
+    /**
+     * The AWS DMS event notification subscription Id.
+     */
+    CustSubscriptionId?: String;
+    /**
+     * The topic ARN of the AWS DMS event notification subscription.
+     */
+    SnsTopicArn?: String;
+    /**
+     * The status of the AWS DMS event notification subscription. Constraints: Can be one of the following: creating | modifying | deleting | active | no-permission | topic-not-exist The status "no-permission" indicates that AWS DMS no longer has permission to post to the SNS topic. The status "topic-not-exist" indicates that the topic was deleted after the subscription was created.
+     */
+    Status?: String;
+    /**
+     * The time the RDS event notification subscription was created.
+     */
+    SubscriptionCreationTime?: String;
+    /**
+     *  The type of AWS DMS resource that generates events.  Valid values: replication-instance | replication-server | security-group | migration-task
+     */
+    SourceType?: String;
+    /**
+     * A list of source Ids for the event subscription.
+     */
+    SourceIdsList?: SourceIdsList;
+    /**
+     * A lists of event categories.
+     */
+    EventCategoriesList?: EventCategoriesList;
+    /**
+     * Boolean value that indicates if the event subscription is enabled.
+     */
+    Enabled?: Boolean;
+  }
+  export type EventSubscriptionsList = EventSubscription[];
   export type ExceptionMessage = string;
   export interface Filter {
     /**
@@ -1007,7 +1314,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
+     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, DYNAMODB, MONGODB, SYBASE, and SQLSERVER.
      */
     EngineName?: String;
     /**
@@ -1042,12 +1349,52 @@ declare namespace DMS {
      * The SSL mode to be used. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
      */
     SslMode?: DmsSslModeValue;
+    /**
+     * Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the Using Object Mapping to Migrate Data to DynamoDB section at  Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service. 
+     */
+    DynamoDbSettings?: DynamoDbSettings;
+    /**
+     * Settings in JSON format for the target S3 endpoint. For more information about the available settings, see the Extra Connection Attributes section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
+     */
+    S3Settings?: S3Settings;
+    /**
+     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service section at  Using Amazon S3 as a Target for AWS Database Migration Service. 
+     */
+    MongoDbSettings?: MongoDbSettings;
   }
   export interface ModifyEndpointResponse {
     /**
      * The modified endpoint.
      */
     Endpoint?: Endpoint;
+  }
+  export interface ModifyEventSubscriptionMessage {
+    /**
+     * The name of the AWS DMS event notification subscription to be modified.
+     */
+    SubscriptionName: String;
+    /**
+     *  The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
+     */
+    SnsTopicArn?: String;
+    /**
+     *  The type of AWS DMS resource that generates the events you want to subscribe to.  Valid values: replication-instance | migration-task
+     */
+    SourceType?: String;
+    /**
+     *  A list of event categories for a source type that you want to subscribe to. Use the DescribeEventCategories action to see a list of event categories. 
+     */
+    EventCategories?: EventCategoriesList;
+    /**
+     *  A Boolean value; set to true to activate the subscription. 
+     */
+    Enabled?: BooleanOptional;
+  }
+  export interface ModifyEventSubscriptionResponse {
+    /**
+     * The modified event subscription.
+     */
+    EventSubscription?: EventSubscription;
   }
   export interface ModifyReplicationInstanceMessage {
     /**
@@ -1127,7 +1474,7 @@ declare namespace DMS {
      */
     ReplicationTaskArn: String;
     /**
-     * The replication task identifier. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
+     * The replication task identifier. Constraints:   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
      */
     ReplicationTaskIdentifier?: String;
     /**
@@ -1135,7 +1482,7 @@ declare namespace DMS {
      */
     MigrationType?: MigrationTypeValue;
     /**
-     * The path of the JSON file that contains the table mappings. Preceed the path with "file://". For example, --table-mappings file://mappingfile.json
+     * When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with "file://". When working with the DMS API, provide the JSON as the parameter value. For example, --table-mappings file://mappingfile.json
      */
     TableMappings?: String;
     /**
@@ -1153,6 +1500,53 @@ declare namespace DMS {
      */
     ReplicationTask?: ReplicationTask;
   }
+  export interface MongoDbSettings {
+    /**
+     * The user name you use to access the MongoDB source endpoint. 
+     */
+    Username?: String;
+    /**
+     *  The password for the user account you use to access the MongoDB source endpoint. 
+     */
+    Password?: SecretString;
+    /**
+     *  The name of the server on the MongoDB source endpoint. 
+     */
+    ServerName?: String;
+    /**
+     *  The port value for the MongoDB source endpoint. 
+     */
+    Port?: IntegerOptional;
+    /**
+     *  The database name on the MongoDB source endpoint. 
+     */
+    DatabaseName?: String;
+    /**
+     *  The authentication type you use to access the MongoDB source endpoint. Valid values: NO, PASSWORD  When NO is selected, user name and password parameters are not used and can be empty. 
+     */
+    AuthType?: AuthTypeValue;
+    /**
+     *  The authentication mechanism you use to access the MongoDB source endpoint. Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1  DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x, use SCRAM_SHA_1. This attribute is not used when authType=No.
+     */
+    AuthMechanism?: AuthMechanismValue;
+    /**
+     *  Specifies either document or table mode.  Valid values: NONE, ONE Default value is NONE. Specify NONE to use document mode. Specify ONE to use table mode.
+     */
+    NestingLevel?: NestingLevelValue;
+    /**
+     *  Specifies the document ID. Use this attribute when NestingLevel is set to NONE.  Default value is false. 
+     */
+    ExtractDocId?: String;
+    /**
+     *  Indicates the number of documents to preview to determine the document organization. Use this attribute when NestingLevel is set to ONE.  Must be a positive value greater than 0. Default value is 1000.
+     */
+    DocsToInvestigate?: String;
+    /**
+     *  The MongoDB database name. This attribute is not used when authType=NO.  The default is admin.
+     */
+    AuthSource?: String;
+  }
+  export type NestingLevelValue = "none"|"one"|string;
   export interface OrderableReplicationInstance {
     /**
      * The version of the replication engine.
@@ -1223,6 +1617,22 @@ declare namespace DMS {
     LastFailureMessage?: String;
   }
   export type RefreshSchemasStatusTypeValue = "successful"|"failed"|"refreshing"|string;
+  export interface ReloadTablesMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the replication instance. 
+     */
+    ReplicationTaskArn: String;
+    /**
+     * The name and schema of the table to be reloaded. 
+     */
+    TablesToReload: TableListToReload;
+  }
+  export interface ReloadTablesResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the replication task. 
+     */
+    ReplicationTaskArn?: String;
+  }
   export interface RemoveTagsFromResourceMessage {
     /**
      * &gt;The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to be removed from.
@@ -1368,7 +1778,7 @@ declare namespace DMS {
   export type ReplicationSubnetGroups = ReplicationSubnetGroup[];
   export interface ReplicationTask {
     /**
-     * The replication task identifier. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
+     * The replication task identifier. Constraints:   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
      */
     ReplicationTaskIdentifier?: String;
     /**
@@ -1451,8 +1861,40 @@ declare namespace DMS {
      */
     TablesErrored?: Integer;
   }
+  export interface S3Settings {
+    /**
+     *  The Amazon Resource Name (ARN) used by the service access IAM role. 
+     */
+    ServiceAccessRoleArn?: String;
+    /**
+     *  
+     */
+    ExternalTableDefinition?: String;
+    /**
+     *  The delimiter used to separate rows in the source files. The default is a carriage return (\n). 
+     */
+    CsvRowDelimiter?: String;
+    /**
+     *  The delimiter used to separate columns in the source files. The default is a comma. 
+     */
+    CsvDelimiter?: String;
+    /**
+     *  An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path &lt;bucketFolder&gt;/&lt;schema_name&gt;/&lt;table_name&gt;/. If this parameter is not specified, then the path used is &lt;schema_name&gt;/&lt;table_name&gt;/. 
+     */
+    BucketFolder?: String;
+    /**
+     *  The name of the S3 bucket. 
+     */
+    BucketName?: String;
+    /**
+     *  An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. 
+     */
+    CompressionType?: CompressionTypeValue;
+  }
   export type SchemaList = String[];
   export type SecretString = string;
+  export type SourceIdsList = String[];
+  export type SourceType = "replication-instance"|string;
   export interface StartReplicationTaskMessage {
     /**
      * The Amazon Resource Number (ARN) of the replication task to be started.
@@ -1505,7 +1947,7 @@ declare namespace DMS {
   export type SubnetList = Subnet[];
   export interface SupportedEndpointType {
     /**
-     * The database engine name. Valid values include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
+     * The database engine name. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
      */
     EngineName?: String;
     /**
@@ -1519,6 +1961,7 @@ declare namespace DMS {
   }
   export type SupportedEndpointTypeList = SupportedEndpointType[];
   export type TStamp = Date;
+  export type TableListToReload = TableToReload[];
   export interface TableStatistics {
     /**
      * The schema name.
@@ -1558,6 +2001,16 @@ declare namespace DMS {
     TableState?: String;
   }
   export type TableStatisticsList = TableStatistics[];
+  export interface TableToReload {
+    /**
+     * The schema name of the table to be reloaded.
+     */
+    SchemaName?: String;
+    /**
+     * The table name of the table to be reloaded.
+     */
+    TableName?: String;
+  }
   export interface Tag {
     /**
      * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
