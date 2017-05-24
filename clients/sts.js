@@ -9,6 +9,7 @@ require('../lib/services/sts');
 Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
   get: function get() {
     var model = require('../apis/sts-2011-06-15.min.json');
+    model.paginators = require('../apis/sts-2011-06-15.paginators.json').pagination;
     return model;
   },
   enumerable: true,

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.56.0-->
+<!--LATEST=2.57.0-->
 <!--ENTRYINSERT-->
+
+## 2.57.0
+* feature: IAM: The unique ID and access key lengths were extended from 32 to 128
+* feature: STS: The unique ID and access key lengths were extended from 32 to 128.
+* feature: StorageGateway: Two Storage Gateway data types, Tape and TapeArchive, each have a new response element, TapeUsedInBytes. This element helps you manage your virtual tapes. By using TapeUsedInBytes, you can see the amount of data written to each virtual tape.
 
 ## 2.56.0
 * feature: DMS: This release adds support for using Amazon S3 and Amazon DynamoDB as targets for database migration, and using MongoDB as a source for database migration. For more information, see the AWS Database Migration Service documentation.

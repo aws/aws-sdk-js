@@ -6438,7 +6438,7 @@
     },
     "accessKeyIdType":{
       "type":"string",
-      "max":32,
+      "max":128,
       "min":16,
       "pattern":"[\\w]+"
     },
@@ -6576,7 +6576,7 @@
     },
     "idType":{
       "type":"string",
-      "max":32,
+      "max":128,
       "min":16,
       "pattern":"[\\w]+"
     },
