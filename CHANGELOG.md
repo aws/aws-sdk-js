@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.57.0-->
+<!--LATEST=2.58.0-->
 <!--ENTRYINSERT-->
+
+## 2.58.0
+* feature: AppStream: Support added for persistent user storage, backed by S3.
+* feature: Rekognition: Updated the CompareFaces API response to include orientation information, unmatched faces, landmarks, pose, and quality of the compared faces.
 
 ## 2.57.0
 * feature: IAM: The unique ID and access key lengths were extended from 32 to 128

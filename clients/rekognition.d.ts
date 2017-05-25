@@ -12,19 +12,19 @@ declare class Rekognition extends Service {
   constructor(options?: Rekognition.Types.ClientConfiguration)
   config: Config & Rekognition.Types.ClientConfiguration;
   /**
-   * Compares a face in the source input image with each face detected in the target input image.    If the source image contains multiple faces, the service detects the largest face and uses it to compare with each face detected in the target image.   In response, the operation returns an array of face matches ordered by similarity score with the highest similarity scores first. For each face match, the response provides a bounding box of the face and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.   By default, only faces with the similarity score of greater than or equal to 80% are returned in the response. You can change this value.  In addition to the face matches, the response returns information about the face in the source image, including the bounding box of the face and confidence value.   This is a stateless API operation. That is, the operation does not persist any data.  For an example, see get-started-exercise-compare-faces  This operation requires permissions to perform the rekognition:CompareFaces action.
+   * Compares a face in the source input image with each face detected in the target input image.    If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image.   In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.   By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the SimilarityThreshold parameter.   CompareFaces also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value. If the image doesn't contain Exif metadata, CompareFaces returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.   This is a stateless API operation. That is, data returned by this operation doesn't persist.  For an example, see get-started-exercise-compare-faces. This operation requires permissions to perform the rekognition:CompareFaces action.
    */
   compareFaces(params: Rekognition.Types.CompareFacesRequest, callback?: (err: AWSError, data: Rekognition.Types.CompareFacesResponse) => void): Request<Rekognition.Types.CompareFacesResponse, AWSError>;
   /**
-   * Compares a face in the source input image with each face detected in the target input image.    If the source image contains multiple faces, the service detects the largest face and uses it to compare with each face detected in the target image.   In response, the operation returns an array of face matches ordered by similarity score with the highest similarity scores first. For each face match, the response provides a bounding box of the face and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.   By default, only faces with the similarity score of greater than or equal to 80% are returned in the response. You can change this value.  In addition to the face matches, the response returns information about the face in the source image, including the bounding box of the face and confidence value.   This is a stateless API operation. That is, the operation does not persist any data.  For an example, see get-started-exercise-compare-faces  This operation requires permissions to perform the rekognition:CompareFaces action.
+   * Compares a face in the source input image with each face detected in the target input image.    If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image.   In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.   By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the SimilarityThreshold parameter.   CompareFaces also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value. If the image doesn't contain Exif metadata, CompareFaces returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.   This is a stateless API operation. That is, data returned by this operation doesn't persist.  For an example, see get-started-exercise-compare-faces. This operation requires permissions to perform the rekognition:CompareFaces action.
    */
   compareFaces(callback?: (err: AWSError, data: Rekognition.Types.CompareFacesResponse) => void): Request<Rekognition.Types.CompareFacesResponse, AWSError>;
   /**
-   * Creates a collection in an AWS Region. You can add faces to the collection using the operation.  For example, you might create collections, one for each of your application users. A user can then index faces using the IndexFaces operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container.  For an example, see example1.  This operation requires permissions to perform the rekognition:CreateCollection action.
+   * Creates a collection in an AWS Region. You can add faces to the collection using the operation.  For example, you might create collections, one for each of your application users. A user can then index faces using the IndexFaces operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container.   Collection names are case-sensitive.  For an example, see example1.  This operation requires permissions to perform the rekognition:CreateCollection action.
    */
   createCollection(params: Rekognition.Types.CreateCollectionRequest, callback?: (err: AWSError, data: Rekognition.Types.CreateCollectionResponse) => void): Request<Rekognition.Types.CreateCollectionResponse, AWSError>;
   /**
-   * Creates a collection in an AWS Region. You can add faces to the collection using the operation.  For example, you might create collections, one for each of your application users. A user can then index faces using the IndexFaces operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container.  For an example, see example1.  This operation requires permissions to perform the rekognition:CreateCollection action.
+   * Creates a collection in an AWS Region. You can add faces to the collection using the operation.  For example, you might create collections, one for each of your application users. A user can then index faces using the IndexFaces operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container.   Collection names are case-sensitive.  For an example, see example1.  This operation requires permissions to perform the rekognition:CreateCollection action.
    */
   createCollection(callback?: (err: AWSError, data: Rekognition.Types.CreateCollectionResponse) => void): Request<Rekognition.Types.CreateCollectionResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class Rekognition extends Service {
    */
   detectLabels(callback?: (err: AWSError, data: Rekognition.Types.DetectLabelsResponse) => void): Request<Rekognition.Types.DetectLabelsResponse, AWSError>;
   /**
-   * Detects explicit or suggestive adult content in a specified .jpeg or .png image. Use DetectModerationLabels to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content. To filter images, use the labels returned by DetectModerationLabels to determine which types of content are appropriate. For information about moderation labels, see howitworks-moderateimage.
+   * Detects explicit or suggestive adult content in a specified JPEG or PNG format image. Use DetectModerationLabels to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content. To filter images, use the labels returned by DetectModerationLabels to determine which types of content are appropriate. For information about moderation labels, see howitworks-moderateimage.
    */
   detectModerationLabels(params: Rekognition.Types.DetectModerationLabelsRequest, callback?: (err: AWSError, data: Rekognition.Types.DetectModerationLabelsResponse) => void): Request<Rekognition.Types.DetectModerationLabelsResponse, AWSError>;
   /**
-   * Detects explicit or suggestive adult content in a specified .jpeg or .png image. Use DetectModerationLabels to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content. To filter images, use the labels returned by DetectModerationLabels to determine which types of content are appropriate. For information about moderation labels, see howitworks-moderateimage.
+   * Detects explicit or suggestive adult content in a specified JPEG or PNG format image. Use DetectModerationLabels to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content. To filter images, use the labels returned by DetectModerationLabels to determine which types of content are appropriate. For information about moderation labels, see howitworks-moderateimage.
    */
   detectModerationLabels(callback?: (err: AWSError, data: Rekognition.Types.DetectModerationLabelsResponse) => void): Request<Rekognition.Types.DetectModerationLabelsResponse, AWSError>;
   /**
@@ -165,34 +165,59 @@ declare namespace Rekognition {
   export type CompareFacesMatchList = CompareFacesMatch[];
   export interface CompareFacesRequest {
     /**
-     * Source image either as bytes or an S3 object
+     * The source image, either as bytes or as an S3 object.
      */
     SourceImage: Image;
     /**
-     * Target image either as bytes or an S3 object
+     * The target image, either as bytes or as an S3 object.
      */
     TargetImage: Image;
     /**
-     * The minimum level of confidence in the match you want included in the result.
+     * The minimum level of confidence in the face matches that a match must meet to be included in the FaceMatches array.
      */
     SimilarityThreshold?: Percent;
   }
   export interface CompareFacesResponse {
     /**
-     * The face from the source image that was used for comparison.
+     * The face in the source image that was used for comparison.
      */
     SourceImageFace?: ComparedSourceImageFace;
     /**
-     * Provides an array of CompareFacesMatch objects. Each object provides the bounding box, confidence that the bounding box contains a face, and the similarity between the face in the bounding box and the face in the source image.
+     * An array of faces in the target image that match the source image face. Each CompareFacesMatch object provides the bounding box, the confidence level that the bounding box contains a face, and the similarity score for the face in the bounding box and the face in the source image.
      */
     FaceMatches?: CompareFacesMatchList;
+    /**
+     * An array of faces in the target image that did not match the source image face.
+     */
+    UnmatchedFaces?: CompareFacesUnmatchList;
+    /**
+     *  The orientation of the source image (counterclockwise direction). If your application displays the source image, you can use this value to correct image orientation. The bounding box coordinates returned in SourceImageFace represent the location of the face before the image orientation is corrected.   If the source image is in .jpeg format, it might contain exchangeable image (Exif) metadata that includes the image's orientation. If the Exif metadata for the source image populates the orientation field, the value of OrientationCorrection is nil and the SourceImageFace bounding box coordinates represent the location of the face after Exif metadata is used to correct the orientation. Images in .png format don't contain Exif metadata. 
+     */
+    SourceImageOrientationCorrection?: OrientationCorrection;
+    /**
+     *  The orientation of the target image (in counterclockwise direction). If your application displays the target image, you can use this value to correct the orientation of the image. The bounding box coordinates returned in FaceMatches and UnmatchedFaces represent face locations before the image orientation is corrected.   If the target image is in .jpg format, it might contain Exif metadata that includes the orientation of the image. If the Exif metadata for the target image populates the orientation field, the value of OrientationCorrection is nil and the bounding box coordinates in FaceMatches and UnmatchedFaces represent the location of the face after Exif metadata is used to correct the orientation. Images in .png format don't contain Exif metadata. 
+     */
+    TargetImageOrientationCorrection?: OrientationCorrection;
   }
+  export type CompareFacesUnmatchList = ComparedFace[];
   export interface ComparedFace {
     BoundingBox?: BoundingBox;
     /**
      * Level of confidence that what the bounding box contains is a face.
      */
     Confidence?: Percent;
+    /**
+     * An array of facial landmarks.
+     */
+    Landmarks?: Landmarks;
+    /**
+     * Indicates the pose of the face as determined by its pitch, roll, and yaw.
+     */
+    Pose?: Pose;
+    /**
+     * Identifies face image brightness and sharpness. 
+     */
+    Quality?: ImageQuality;
   }
   export interface ComparedSourceImageFace {
     BoundingBox?: BoundingBox;
@@ -252,7 +277,7 @@ declare namespace Rekognition {
      */
     Image: Image;
     /**
-     * A list of facial attributes you want to be returned. This can be the default list of attributes or all attributes. If you don't specify a value for Attributes or if you specify ["DEFAULT"], the API returns the following subset of facial attributes: BoundingBox, Confidence, Pose, Quality and Landmarks. If you provide ["ALL"], all facial attributes are returned but the operation will take longer to complete. If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). 
+     * An array of facial attributes you want to be returned. This can be the default list of attributes or all attributes. If you don't specify a value for Attributes or if you specify ["DEFAULT"], the API returns the following subset of facial attributes: BoundingBox, Confidence, Pose, Quality and Landmarks. If you provide ["ALL"], all facial attributes are returned but the operation will take longer to complete. If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). 
      */
     Attributes?: Attributes;
   }
@@ -262,7 +287,7 @@ declare namespace Rekognition {
      */
     FaceDetails?: FaceDetailList;
     /**
-     * The algorithm detects the image orientation. If it detects that the image was rotated, it returns the degrees of rotation. If your application is displaying the image, you can use this value to adjust the orientation.  For example, if the service detects that the input image was rotated by 90 degrees, it corrects orientation, performs face detection, and then returns the faces. That is, the bounding box coordinates in the response are based on the corrected orientation.   If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil. 
+     *  The orientation of the input image (counter-clockwise direction). If your application displays the image, you can use this value to correct image orientation. The bounding box coordinates returned in FaceDetails represent face locations before the image orientation is corrected.   If the source image is in .jpeg format, it might contain exchangeable image (Exif) metadata that includes the image's orientation. If so, and the Exif metadata for the source image populates the orientation field, the value of OrientationCorrection is nil and the FaceDetails bounding box coordinates represent face locations after Exif metadata is used to correct the image orientation. Images in .png format don't contain Exif metadata. 
      */
     OrientationCorrection?: OrientationCorrection;
   }
@@ -286,7 +311,7 @@ declare namespace Rekognition {
      */
     Labels?: Labels;
     /**
-     *  Amazon Rekognition returns the orientation of the input image that was detected (clockwise direction). If your application displays the image, you can use this value to correct the orientation. If Amazon Rekognition detects that the input image was rotated (for example, by 90 degrees), it first corrects the orientation before detecting the labels.   If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil. 
+     *  The orientation of the input image (counter-clockwise direction). If your application displays the image, you can use this value to correct the orientation. If Amazon Rekognition detects that the input image was rotated (for example, by 90 degrees), it first corrects the orientation before detecting the labels.   If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil. 
      */
     OrientationCorrection?: OrientationCorrection;
   }
@@ -299,7 +324,7 @@ declare namespace Rekognition {
   }
   export interface DetectModerationLabelsResponse {
     /**
-     * A list of labels for explicit or suggestive adult content found in the image. The list includes the top-level label and each child label detected in the image. This is useful for filtering specific categories of content. 
+     * An array of labels for explicit or suggestive adult content found in the image. The list includes the top-level label and each child label detected in the image. This is useful for filtering specific categories of content. 
      */
     ModerationLabels?: ModerationLabels;
   }
@@ -401,11 +426,11 @@ declare namespace Rekognition {
      */
     Emotions?: Emotions;
     /**
-     * Indicates the location of the landmark on the face.
+     * Indicates the location of landmarks on the face.
      */
     Landmarks?: Landmarks;
     /**
-     * Indicates the pose of the face as determined by pitch, roll, and the yaw.
+     * Indicates the pose of the face as determined by its pitch, roll, and yaw.
      */
     Pose?: Pose;
     /**
@@ -479,7 +504,7 @@ declare namespace Rekognition {
      */
     ExternalImageId?: ExternalImageId;
     /**
-     * A list of facial attributes that you want to be returned. This can be the default list of attributes or all attributes. If you don't specify a value for Attributes or if you specify ["DEFAULT"], the API returns the following subset of facial attributes: BoundingBox, Confidence, Pose, Quality and Landmarks. If you provide ["ALL"], all facial attributes are returned but the operation will take longer to complete. If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). 
+     * An array of facial attributes that you want to be returned. This can be the default list of attributes or all attributes. If you don't specify a value for Attributes or if you specify ["DEFAULT"], the API returns the following subset of facial attributes: BoundingBox, Confidence, Pose, Quality and Landmarks. If you provide ["ALL"], all facial attributes are returned but the operation will take longer to complete. If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator to determine which attributes to return (in this case, all attributes). 
      */
     DetectionAttributes?: Attributes;
   }
@@ -489,7 +514,7 @@ declare namespace Rekognition {
      */
     FaceRecords?: FaceRecordList;
     /**
-     * The algorithm detects the image orientation. If it detects that the image was rotated, it returns the degree of rotation. You can use this value to correct the orientation and also appropriately analyze the bounding box coordinates that are returned.   If the source image Exif metadata populates the orientation field, Amazon Rekognition does not perform orientation correction and the value of OrientationCorrection will be nil. 
+     * The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct image orientation. The bounding box coordinates returned in FaceRecords represent face locations before the image orientation is corrected.   If the source image is in jpeg format, it might contain exchangeable image (Exif) metadata. If so, and the Exif metadata populates the orientation field, the value of OrientationCorrection is nil and the bounding box coordinates in FaceRecords represent face locations after Exif metadata is used to correct the image orientation. Images in .png format don't contain Exif metadata. 
      */
     OrientationCorrection?: OrientationCorrection;
   }

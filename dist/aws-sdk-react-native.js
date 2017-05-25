@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.57.0',
+	  VERSION: '2.58.0',
 
 	  /**
 	   * @api private
@@ -37503,14 +37503,17 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"Name": {},
 						"Description": {},
-						"DisplayName": {}
+						"DisplayName": {},
+						"StorageConnectors": {
+							"shape": "Sn"
+						}
 					}
 				},
 				"output": {
 					"type": "structure",
 					"members": {
 						"Stack": {
-							"shape": "So"
+							"shape": "Ss"
 						}
 					}
 				}
@@ -37579,7 +37582,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Names": {
-							"shape": "Sy"
+							"shape": "S15"
 						},
 						"NextToken": {}
 					}
@@ -37602,7 +37605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Names": {
-							"shape": "Sy"
+							"shape": "S15"
 						}
 					}
 				},
@@ -37657,6 +37660,9 @@ return /******/ (function(modules) { // webpackBootstrap
 										}
 									},
 									"CreatedTime": {
+										"type": "timestamp"
+									},
+									"PublicBaseImageReleasedDate": {
 										"type": "timestamp"
 									}
 								}
@@ -37716,7 +37722,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Names": {
-							"shape": "Sy"
+							"shape": "S15"
 						},
 						"NextToken": {}
 					}
@@ -37727,7 +37733,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Stacks": {
 							"type": "list",
 							"member": {
-								"shape": "So"
+								"shape": "Ss"
 							}
 						},
 						"NextToken": {}
@@ -37781,7 +37787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Names": {
-							"shape": "Sy"
+							"shape": "S15"
 						},
 						"NextToken": {}
 					}
@@ -37802,7 +37808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Names": {
-							"shape": "Sy"
+							"shape": "S15"
 						},
 						"NextToken": {}
 					}
@@ -37888,14 +37894,20 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"DisplayName": {},
 						"Description": {},
-						"Name": {}
+						"Name": {},
+						"StorageConnectors": {
+							"shape": "Sn"
+						},
+						"DeleteStorageConnectors": {
+							"type": "boolean"
+						}
 					}
 				},
 				"output": {
 					"type": "structure",
 					"members": {
 						"Stack": {
-							"shape": "So"
+							"shape": "Ss"
 						}
 					}
 				}
@@ -37915,9 +37927,6 @@ return /******/ (function(modules) { // webpackBootstrap
 			},
 			"S8": {
 				"type": "structure",
-				"required": [
-					"SubnetIds"
-				],
 				"members": {
 					"SubnetIds": {
 						"type": "list",
@@ -37990,7 +37999,20 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"So": {
+			"Sn": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"required": [
+						"ConnectorType"
+					],
+					"members": {
+						"ConnectorType": {},
+						"ResourceIdentifier": {}
+					}
+				}
+			},
+			"Ss": {
 				"type": "structure",
 				"required": [
 					"Name"
@@ -38002,10 +38024,23 @@ return /******/ (function(modules) { // webpackBootstrap
 					"DisplayName": {},
 					"CreatedTime": {
 						"type": "timestamp"
+					},
+					"StorageConnectors": {
+						"shape": "Sn"
+					},
+					"StackErrors": {
+						"type": "list",
+						"member": {
+							"type": "structure",
+							"members": {
+								"ErrorCode": {},
+								"ErrorMessage": {}
+							}
+						}
 					}
 				}
 			},
-			"Sy": {
+			"S15": {
 				"type": "list",
 				"member": {}
 			}
@@ -138945,19 +138980,19 @@ return /******/ (function(modules) { // webpackBootstrap
 										"type": "float"
 									},
 									"Face": {
-										"type": "structure",
-										"members": {
-											"BoundingBox": {
-												"shape": "Sb"
-											},
-											"Confidence": {
-												"type": "float"
-											}
-										}
+										"shape": "Sf"
 									}
 								}
 							}
-						}
+						},
+						"UnmatchedFaces": {
+							"type": "list",
+							"member": {
+								"shape": "Sf"
+							}
+						},
+						"SourceImageOrientationCorrection": {},
+						"TargetImageOrientationCorrection": {}
 					}
 				}
 			},
@@ -139010,7 +139045,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"CollectionId": {},
 						"FaceIds": {
-							"shape": "So"
+							"shape": "Sw"
 						}
 					}
 				},
@@ -139018,7 +139053,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"DeletedFaces": {
-							"shape": "So"
+							"shape": "Sw"
 						}
 					}
 				}
@@ -139034,7 +139069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"shape": "S2"
 						},
 						"Attributes": {
-							"shape": "Ss"
+							"shape": "S10"
 						}
 					}
 				},
@@ -139044,7 +139079,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"FaceDetails": {
 							"type": "list",
 							"member": {
-								"shape": "Sw"
+								"shape": "S14"
 							}
 						},
 						"OrientationCorrection": {}
@@ -139136,7 +139171,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"ExternalImageId": {},
 						"DetectionAttributes": {
-							"shape": "Ss"
+							"shape": "S10"
 						}
 					}
 				},
@@ -139149,10 +139184,10 @@ return /******/ (function(modules) { // webpackBootstrap
 								"type": "structure",
 								"members": {
 									"Face": {
-										"shape": "S1v"
+										"shape": "S1w"
 									},
 									"FaceDetail": {
-										"shape": "Sw"
+										"shape": "S14"
 									}
 								}
 							}
@@ -139202,7 +139237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Faces": {
 							"type": "list",
 							"member": {
-								"shape": "S1v"
+								"shape": "S1w"
 							}
 						},
 						"NextToken": {}
@@ -139232,7 +139267,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"SearchedFaceId": {},
 						"FaceMatches": {
-							"shape": "S28"
+							"shape": "S29"
 						}
 					}
 				}
@@ -139267,7 +139302,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "float"
 						},
 						"FaceMatches": {
-							"shape": "S28"
+							"shape": "S29"
 						}
 					}
 				}
@@ -139307,15 +139342,75 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"So": {
-				"type": "list",
-				"member": {}
+			"Sf": {
+				"type": "structure",
+				"members": {
+					"BoundingBox": {
+						"shape": "Sb"
+					},
+					"Confidence": {
+						"type": "float"
+					},
+					"Landmarks": {
+						"shape": "Sg"
+					},
+					"Pose": {
+						"shape": "Sj"
+					},
+					"Quality": {
+						"shape": "Sl"
+					}
+				}
 			},
-			"Ss": {
+			"Sg": {
 				"type": "list",
-				"member": {}
+				"member": {
+					"type": "structure",
+					"members": {
+						"Type": {},
+						"X": {
+							"type": "float"
+						},
+						"Y": {
+							"type": "float"
+						}
+					}
+				}
+			},
+			"Sj": {
+				"type": "structure",
+				"members": {
+					"Roll": {
+						"type": "float"
+					},
+					"Yaw": {
+						"type": "float"
+					},
+					"Pitch": {
+						"type": "float"
+					}
+				}
+			},
+			"Sl": {
+				"type": "structure",
+				"members": {
+					"Brightness": {
+						"type": "float"
+					},
+					"Sharpness": {
+						"type": "float"
+					}
+				}
 			},
 			"Sw": {
+				"type": "list",
+				"member": {}
+			},
+			"S10": {
+				"type": "list",
+				"member": {}
+			},
+			"S14": {
 				"type": "structure",
 				"members": {
 					"BoundingBox": {
@@ -139431,51 +139526,20 @@ return /******/ (function(modules) { // webpackBootstrap
 						}
 					},
 					"Landmarks": {
-						"type": "list",
-						"member": {
-							"type": "structure",
-							"members": {
-								"Type": {},
-								"X": {
-									"type": "float"
-								},
-								"Y": {
-									"type": "float"
-								}
-							}
-						}
+						"shape": "Sg"
 					},
 					"Pose": {
-						"type": "structure",
-						"members": {
-							"Roll": {
-								"type": "float"
-							},
-							"Yaw": {
-								"type": "float"
-							},
-							"Pitch": {
-								"type": "float"
-							}
-						}
+						"shape": "Sj"
 					},
 					"Quality": {
-						"type": "structure",
-						"members": {
-							"Brightness": {
-								"type": "float"
-							},
-							"Sharpness": {
-								"type": "float"
-							}
-						}
+						"shape": "Sl"
 					},
 					"Confidence": {
 						"type": "float"
 					}
 				}
 			},
-			"S1v": {
+			"S1w": {
 				"type": "structure",
 				"members": {
 					"FaceId": {},
@@ -139489,7 +139553,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S28": {
+			"S29": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -139498,7 +139562,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "float"
 						},
 						"Face": {
-							"shape": "S1v"
+							"shape": "S1w"
 						}
 					}
 				}

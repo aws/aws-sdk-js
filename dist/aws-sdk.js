@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.57.0
+// AWS SDK for JavaScript v2.58.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -80303,19 +80303,19 @@ module.exports={
                   "type": "float"
                 },
                 "Face": {
-                  "type": "structure",
-                  "members": {
-                    "BoundingBox": {
-                      "shape": "Sb"
-                    },
-                    "Confidence": {
-                      "type": "float"
-                    }
-                  }
+                  "shape": "Sf"
                 }
               }
             }
-          }
+          },
+          "UnmatchedFaces": {
+            "type": "list",
+            "member": {
+              "shape": "Sf"
+            }
+          },
+          "SourceImageOrientationCorrection": {},
+          "TargetImageOrientationCorrection": {}
         }
       }
     },
@@ -80368,7 +80368,7 @@ module.exports={
         "members": {
           "CollectionId": {},
           "FaceIds": {
-            "shape": "So"
+            "shape": "Sw"
           }
         }
       },
@@ -80376,7 +80376,7 @@ module.exports={
         "type": "structure",
         "members": {
           "DeletedFaces": {
-            "shape": "So"
+            "shape": "Sw"
           }
         }
       }
@@ -80392,7 +80392,7 @@ module.exports={
             "shape": "S2"
           },
           "Attributes": {
-            "shape": "Ss"
+            "shape": "S10"
           }
         }
       },
@@ -80402,7 +80402,7 @@ module.exports={
           "FaceDetails": {
             "type": "list",
             "member": {
-              "shape": "Sw"
+              "shape": "S14"
             }
           },
           "OrientationCorrection": {}
@@ -80494,7 +80494,7 @@ module.exports={
           },
           "ExternalImageId": {},
           "DetectionAttributes": {
-            "shape": "Ss"
+            "shape": "S10"
           }
         }
       },
@@ -80507,10 +80507,10 @@ module.exports={
               "type": "structure",
               "members": {
                 "Face": {
-                  "shape": "S1v"
+                  "shape": "S1w"
                 },
                 "FaceDetail": {
-                  "shape": "Sw"
+                  "shape": "S14"
                 }
               }
             }
@@ -80560,7 +80560,7 @@ module.exports={
           "Faces": {
             "type": "list",
             "member": {
-              "shape": "S1v"
+              "shape": "S1w"
             }
           },
           "NextToken": {}
@@ -80590,7 +80590,7 @@ module.exports={
         "members": {
           "SearchedFaceId": {},
           "FaceMatches": {
-            "shape": "S28"
+            "shape": "S29"
           }
         }
       }
@@ -80625,7 +80625,7 @@ module.exports={
             "type": "float"
           },
           "FaceMatches": {
-            "shape": "S28"
+            "shape": "S29"
           }
         }
       }
@@ -80665,15 +80665,75 @@ module.exports={
         }
       }
     },
-    "So": {
-      "type": "list",
-      "member": {}
+    "Sf": {
+      "type": "structure",
+      "members": {
+        "BoundingBox": {
+          "shape": "Sb"
+        },
+        "Confidence": {
+          "type": "float"
+        },
+        "Landmarks": {
+          "shape": "Sg"
+        },
+        "Pose": {
+          "shape": "Sj"
+        },
+        "Quality": {
+          "shape": "Sl"
+        }
+      }
     },
-    "Ss": {
+    "Sg": {
       "type": "list",
-      "member": {}
+      "member": {
+        "type": "structure",
+        "members": {
+          "Type": {},
+          "X": {
+            "type": "float"
+          },
+          "Y": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    "Sj": {
+      "type": "structure",
+      "members": {
+        "Roll": {
+          "type": "float"
+        },
+        "Yaw": {
+          "type": "float"
+        },
+        "Pitch": {
+          "type": "float"
+        }
+      }
+    },
+    "Sl": {
+      "type": "structure",
+      "members": {
+        "Brightness": {
+          "type": "float"
+        },
+        "Sharpness": {
+          "type": "float"
+        }
+      }
     },
     "Sw": {
+      "type": "list",
+      "member": {}
+    },
+    "S10": {
+      "type": "list",
+      "member": {}
+    },
+    "S14": {
       "type": "structure",
       "members": {
         "BoundingBox": {
@@ -80789,51 +80849,20 @@ module.exports={
           }
         },
         "Landmarks": {
-          "type": "list",
-          "member": {
-            "type": "structure",
-            "members": {
-              "Type": {},
-              "X": {
-                "type": "float"
-              },
-              "Y": {
-                "type": "float"
-              }
-            }
-          }
+          "shape": "Sg"
         },
         "Pose": {
-          "type": "structure",
-          "members": {
-            "Roll": {
-              "type": "float"
-            },
-            "Yaw": {
-              "type": "float"
-            },
-            "Pitch": {
-              "type": "float"
-            }
-          }
+          "shape": "Sj"
         },
         "Quality": {
-          "type": "structure",
-          "members": {
-            "Brightness": {
-              "type": "float"
-            },
-            "Sharpness": {
-              "type": "float"
-            }
-          }
+          "shape": "Sl"
         },
         "Confidence": {
           "type": "float"
         }
       }
     },
-    "S1v": {
+    "S1w": {
       "type": "structure",
       "members": {
         "FaceId": {},
@@ -80847,7 +80876,7 @@ module.exports={
         }
       }
     },
-    "S28": {
+    "S29": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -80856,7 +80885,7 @@ module.exports={
             "type": "float"
           },
           "Face": {
-            "shape": "S1v"
+            "shape": "S1w"
           }
         }
       }
@@ -101215,7 +101244,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.57.0',
+  VERSION: '2.58.0',
 
 
   Signers: {},

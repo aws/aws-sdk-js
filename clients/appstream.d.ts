@@ -76,11 +76,11 @@ declare class AppStream extends Service {
    */
   describeImages(callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
-   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the nextToken parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.
+   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the nextToken parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.
    */
   describeSessions(params: AppStream.Types.DescribeSessionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
-   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the nextToken parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.
+   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the nextToken parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.
    */
   describeSessions(callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
@@ -199,7 +199,7 @@ declare namespace AppStream {
      */
     Enabled?: Boolean;
     /**
-     * Additional attributes that describes the application.
+     * Additional attributes that describe the application.
      */
     Metadata?: Metadata;
   }
@@ -266,11 +266,11 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum time up to which a streaming session can run.
+     * The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to his/her previous session. 
+     * The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600. 
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -282,7 +282,7 @@ declare namespace AppStream {
      */
     DisplayName?: DisplayName;
     /**
-     * Enable/Disable default Internet access from fleet.
+     * Enables or disables default Internet access for the fleet.
      */
     EnableDefaultInternetAccess?: BooleanObject;
   }
@@ -305,6 +305,10 @@ declare namespace AppStream {
      * The name displayed to end users on the AppStream 2.0 portal.
      */
     DisplayName?: DisplayName;
+    /**
+     * The storage connectors to be enabled for the stack.
+     */
+    StorageConnectors?: StorageConnectorList;
   }
   export interface CreateStackResult {
     /**
@@ -330,7 +334,7 @@ declare namespace AppStream {
      */
     ApplicationId?: String;
     /**
-     * The validity duration of the URL in seconds. After this duration, the URL returned by this operation becomes invalid.
+     * The duration up to which the URL returned by this action is valid. The input can be any numeric value in seconds between 1 and 604800 seconds.
      */
     Validity?: Long;
     /**
@@ -418,7 +422,7 @@ declare namespace AppStream {
      */
     Limit?: Integer;
     /**
-     * The authentication method of the user. It can be API for a user authenticated using a streaming url or SAML for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.
+     * The authentication method of the user. It can be API for a user authenticated using a streaming URL, or SAML for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.
      */
     AuthenticationType?: AuthenticationType;
   }
@@ -505,11 +509,11 @@ declare namespace AppStream {
      */
     ComputeCapacityStatus: ComputeCapacityStatus;
     /**
-     * The maximum time during which a streaming session can run.
+     * The maximum time for which a streaming session can run. The value can be any numeric value in seconds between 600 and 57600.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended. When a user reconnects after a disconnection, the user is connected to the same session and instance within this time interval.
+     * The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -529,7 +533,7 @@ declare namespace AppStream {
      */
     FleetErrors?: FleetErrors;
     /**
-     * Default Internet access from the fleet. True (Enabled), False (Disabled).
+     * Whether default Internet access is enabled for the fleet. 
      */
     EnableDefaultInternetAccess?: BooleanObject;
   }
@@ -573,7 +577,7 @@ declare namespace AppStream {
      */
     Visibility?: VisibilityType;
     /**
-     * Indicates whether an image builder can be launched from this image.
+     * Whether an image builder can be launched from this image.
      */
     ImageBuilderSupported?: Boolean;
     /**
@@ -596,6 +600,10 @@ declare namespace AppStream {
      * The timestamp when the image was created.
      */
     CreatedTime?: Timestamp;
+    /**
+     * The AWS release date of the public base image. For private images, this date is the release date of the base image from which the image was created.
+     */
+    PublicBaseImageReleasedDate?: Timestamp;
   }
   export type ImageList = Image[];
   export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"DELETING"|string;
@@ -655,6 +663,7 @@ declare namespace AppStream {
   export type Metadata = {[key: string]: String};
   export type Name = string;
   export type PlatformType = "WINDOWS"|string;
+  export type ResourceIdentifier = string;
   export interface Session {
     /**
      * The unique ID for a streaming session.
@@ -677,7 +686,7 @@ declare namespace AppStream {
      */
     State: SessionState;
     /**
-     * The authentication method of the user for whom the session was created. It can be API for a user authenticated using a streaming url or SAML for a SAML federated user.
+     * The authentication method of the user for whom the session was created. It can be API for a user authenticated using a streaming URL or SAML for a SAML federated user.
      */
     AuthenticationType?: AuthenticationType;
   }
@@ -704,7 +713,27 @@ declare namespace AppStream {
      * The timestamp when the stack was created.
      */
     CreatedTime?: Timestamp;
+    /**
+     * The storage connectors to be enabled for the stack.
+     */
+    StorageConnectors?: StorageConnectorList;
+    /**
+     * The list of errors associated with the stack.
+     */
+    StackErrors?: StackErrors;
   }
+  export interface StackError {
+    /**
+     * The error code of a stack error.
+     */
+    ErrorCode?: StackErrorCode;
+    /**
+     * The error message of a stack error.
+     */
+    ErrorMessage?: String;
+  }
+  export type StackErrorCode = "STORAGE_CONNECTOR_ERROR"|"INTERNAL_SERVICE_ERROR"|string;
+  export type StackErrors = StackError[];
   export type StackList = Stack[];
   export interface StartFleetRequest {
     /**
@@ -722,6 +751,18 @@ declare namespace AppStream {
   }
   export interface StopFleetResult {
   }
+  export interface StorageConnector {
+    /**
+     * The type of storage connector. The possible values include: HOMEFOLDERS.
+     */
+    ConnectorType: StorageConnectorType;
+    /**
+     * The ARN associated with the storage connector.
+     */
+    ResourceIdentifier?: ResourceIdentifier;
+  }
+  export type StorageConnectorList = StorageConnector[];
+  export type StorageConnectorType = "HOMEFOLDERS"|string;
   export type String = string;
   export type StringList = String[];
   export type SubnetIdList = String[];
@@ -748,11 +789,11 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum time during which a streaming session can run.
+     * The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended. When the user reconnects after a disconnection, the user is connected to the same instance within this time interval.
+     * The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -768,7 +809,7 @@ declare namespace AppStream {
      */
     DisplayName?: DisplayName;
     /**
-     * Enable/Disable default Internet access from fleet.
+     * Enables or disables default Internet access for the fleet.
      */
     EnableDefaultInternetAccess?: BooleanObject;
   }
@@ -791,6 +832,14 @@ declare namespace AppStream {
      * The name of the stack to update.
      */
     Name: String;
+    /**
+     * The storage connectors to be enabled for the stack.
+     */
+    StorageConnectors?: StorageConnectorList;
+    /**
+     * Remove all the storage connectors currently enabled for the stack.
+     */
+    DeleteStorageConnectors?: Boolean;
   }
   export interface UpdateStackResult {
     /**
@@ -804,7 +853,7 @@ declare namespace AppStream {
     /**
      * The list of subnets to which a network interface is established from the fleet instance.
      */
-    SubnetIds: SubnetIdList;
+    SubnetIds?: SubnetIdList;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

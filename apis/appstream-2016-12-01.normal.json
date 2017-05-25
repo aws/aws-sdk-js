@@ -23,7 +23,8 @@
       "errors":[
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"ConcurrentModificationException"}
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"IncompatibleImageException"}
       ],
       "documentation":"<p>Associate a fleet to a stack.</p>"
     },
@@ -56,7 +57,10 @@
       "errors":[
         {"shape":"LimitExceededException"},
         {"shape":"ResourceAlreadyExistsException"},
-        {"shape":"ConcurrentModificationException"}
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"InvalidRoleException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterCombinationException"}
       ],
       "documentation":"<p>Create a new stack.</p>"
     },
@@ -143,7 +147,7 @@
       "errors":[
         {"shape":"InvalidParameterCombinationException"}
       ],
-      "documentation":"<p>Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.</p>"
+      "documentation":"<p>Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.</p>"
     },
     "DescribeStacks":{
       "name":"DescribeStacks",
@@ -248,7 +252,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceNotAvailableException"},
         {"shape":"InvalidParameterCombinationException"},
-        {"shape":"ConcurrentModificationException"}
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"IncompatibleImageException"}
       ],
       "documentation":"<p>Updates an existing fleet. All the attributes except the fleet name can be updated in the <b>STOPPED</b> state. When a fleet is in the <b>RUNNING</b> state, only <code>DisplayName</code> and <code>ComputeCapacity</code> can be updated. A fleet cannot be updated in a status of <b>STARTING</b> or <b>STOPPING</b>.</p>"
     },
@@ -262,7 +267,12 @@
       "output":{"shape":"UpdateStackResult"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"ResourceInUseException"}
+        {"shape":"ResourceInUseException"},
+        {"shape":"InvalidRoleException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterCombinationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"IncompatibleImageException"}
       ],
       "documentation":"<p>Updates the specified fields in the stack with the specified name.</p>"
     }
@@ -297,7 +307,7 @@
         },
         "Metadata":{
           "shape":"Metadata",
-          "documentation":"<p>Additional attributes that describes the application.</p>"
+          "documentation":"<p>Additional attributes that describe the application.</p>"
         }
       },
       "documentation":"<p>An entry for a single application in the application catalog.</p>"
@@ -380,7 +390,7 @@
       "members":{
         "Message":{"shape":"ErrorMessage"}
       },
-      "documentation":"<p>An API error occurred, please try again.</p>",
+      "documentation":"<p>An API error occurred. Wait a few minutes and try again.</p>",
       "exception":true
     },
     "CreateFleetRequest":{
@@ -414,11 +424,11 @@
         },
         "MaxUserDurationInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The maximum time up to which a streaming session can run.</p>"
+          "documentation":"<p>The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.</p>"
         },
         "DisconnectTimeoutInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to his/her previous session. </p>"
+          "documentation":"<p>The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600. </p>"
         },
         "Description":{
           "shape":"Description",
@@ -430,7 +440,7 @@
         },
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
-          "documentation":"<p>Enable/Disable default Internet access from fleet.</p>"
+          "documentation":"<p>Enables or disables default Internet access for the fleet.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for the new fleet to create.</p>"
@@ -459,6 +469,10 @@
         "DisplayName":{
           "shape":"DisplayName",
           "documentation":"<p>The name displayed to end users on the AppStream 2.0 portal.</p>"
+        },
+        "StorageConnectors":{
+          "shape":"StorageConnectorList",
+          "documentation":"<p>The storage connectors to be enabled for the stack.</p>"
         }
       }
     },
@@ -497,7 +511,7 @@
         },
         "Validity":{
           "shape":"Long",
-          "documentation":"<p>The validity duration of the URL in seconds. After this duration, the URL returned by this operation becomes invalid.</p>"
+          "documentation":"<p>The duration up to which the URL returned by this action is valid. The input can be any numeric value in seconds between 1 and 604800 seconds.</p>"
         },
         "SessionContext":{
           "shape":"String",
@@ -621,7 +635,7 @@
         },
         "AuthenticationType":{
           "shape":"AuthenticationType",
-          "documentation":"<p>The authentication method of the user. It can be <code>API</code> for a user authenticated using a streaming url or <code>SAML</code> for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming url.</p>"
+          "documentation":"<p>The authentication method of the user. It can be <code>API</code> for a user authenticated using a streaming URL, or <code>SAML</code> for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.</p>"
         }
       }
     },
@@ -754,11 +768,11 @@
         },
         "MaxUserDurationInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The maximum time during which a streaming session can run.</p>"
+          "documentation":"<p>The maximum time for which a streaming session can run. The value can be any numeric value in seconds between 600 and 57600.</p>"
         },
         "DisconnectTimeoutInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The time after disconnection when a session is considered to have ended. When a user reconnects after a disconnection, the user is connected to the same session and instance within this time interval.</p>"
+          "documentation":"<p>The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.</p>"
         },
         "State":{
           "shape":"FleetState",
@@ -778,7 +792,7 @@
         },
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
-          "documentation":"<p>Default Internet access from the fleet. True (Enabled), False (Disabled).</p>"
+          "documentation":"<p>Whether default Internet access is enabled for the fleet. </p>"
         }
       },
       "documentation":"<p>Contains the parameters for a fleet.</p>"
@@ -861,7 +875,7 @@
         },
         "ImageBuilderSupported":{
           "shape":"Boolean",
-          "documentation":"<p>Indicates whether an image builder can be launched from this image.</p>"
+          "documentation":"<p>Whether an image builder can be launched from this image.</p>"
         },
         "Platform":{
           "shape":"PlatformType",
@@ -882,6 +896,10 @@
         "CreatedTime":{
           "shape":"Timestamp",
           "documentation":"<p>The timestamp when the image was created.</p>"
+        },
+        "PublicBaseImageReleasedDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The AWS release date of the public base image. For private images, this date is the release date of the base image from which the image was created.</p>"
         }
       },
       "documentation":"<p>New streaming instances are booted from images. The image stores the application catalog and is connected to fleets.</p>"
@@ -919,6 +937,14 @@
         "INTERNAL_ERROR",
         "IMAGE_BUILDER_NOT_AVAILABLE"
       ]
+    },
+    "IncompatibleImageException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>The image does not support storage connectors.</p>",
+      "exception":true
     },
     "Integer":{"type":"integer"},
     "InvalidParameterCombinationException":{
@@ -1031,6 +1057,11 @@
       "documentation":"<p>The specified resource already exists.</p>",
       "exception":true
     },
+    "ResourceIdentifier":{
+      "type":"string",
+      "documentation":"<p>The ARN of the resource.</p>",
+      "min":1
+    },
     "ResourceInUseException":{
       "type":"structure",
       "members":{
@@ -1087,7 +1118,7 @@
         },
         "AuthenticationType":{
           "shape":"AuthenticationType",
-          "documentation":"<p>The authentication method of the user for whom the session was created. It can be <code>API</code> for a user authenticated using a streaming url or <code>SAML</code> for a SAML federated user.</p>"
+          "documentation":"<p>The authentication method of the user for whom the session was created. It can be <code>API</code> for a user authenticated using a streaming URL or <code>SAML</code> for a SAML federated user.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for a streaming session.</p>"
@@ -1129,9 +1160,43 @@
         "CreatedTime":{
           "shape":"Timestamp",
           "documentation":"<p>The timestamp when the stack was created.</p>"
+        },
+        "StorageConnectors":{
+          "shape":"StorageConnectorList",
+          "documentation":"<p>The storage connectors to be enabled for the stack.</p>"
+        },
+        "StackErrors":{
+          "shape":"StackErrors",
+          "documentation":"<p>The list of errors associated with the stack.</p>"
         }
       },
       "documentation":"<p>Details about a stack.</p>"
+    },
+    "StackError":{
+      "type":"structure",
+      "members":{
+        "ErrorCode":{
+          "shape":"StackErrorCode",
+          "documentation":"<p>The error code of a stack error.</p>"
+        },
+        "ErrorMessage":{
+          "shape":"String",
+          "documentation":"<p>The error message of a stack error.</p>"
+        }
+      },
+      "documentation":"<p>Contains the parameters for a stack error.</p>"
+    },
+    "StackErrorCode":{
+      "type":"string",
+      "enum":[
+        "STORAGE_CONNECTOR_ERROR",
+        "INTERNAL_SERVICE_ERROR"
+      ]
+    },
+    "StackErrors":{
+      "type":"list",
+      "member":{"shape":"StackError"},
+      "documentation":"<p>A list of stack errors.</p>"
     },
     "StackList":{
       "type":"list",
@@ -1168,6 +1233,31 @@
       "members":{
       }
     },
+    "StorageConnector":{
+      "type":"structure",
+      "required":["ConnectorType"],
+      "members":{
+        "ConnectorType":{
+          "shape":"StorageConnectorType",
+          "documentation":"<p>The type of storage connector. The possible values include: HOMEFOLDERS.</p>"
+        },
+        "ResourceIdentifier":{
+          "shape":"ResourceIdentifier",
+          "documentation":"<p>The ARN associated with the storage connector.</p>"
+        }
+      },
+      "documentation":"<p>Contains the parameters for a storage connector.</p>"
+    },
+    "StorageConnectorList":{
+      "type":"list",
+      "member":{"shape":"StorageConnector"},
+      "documentation":"<p>A list of storage connectors.</p>"
+    },
+    "StorageConnectorType":{
+      "type":"string",
+      "documentation":"<p>The type of storage connector. The possible values include: HOMEFOLDERS.</p>",
+      "enum":["HOMEFOLDERS"]
+    },
     "String":{
       "type":"string",
       "min":1
@@ -1179,8 +1269,7 @@
     "SubnetIdList":{
       "type":"list",
       "member":{"shape":"String"},
-      "documentation":"<p>A list of subnet IDs.</p>",
-      "min":1
+      "documentation":"<p>A list of subnet IDs.</p>"
     },
     "Timestamp":{"type":"timestamp"},
     "UpdateFleetRequest":{
@@ -1209,11 +1298,11 @@
         },
         "MaxUserDurationInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The maximum time during which a streaming session can run.</p>"
+          "documentation":"<p>The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.</p>"
         },
         "DisconnectTimeoutInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The time after disconnection when a session is considered to have ended. When the user reconnects after a disconnection, the user is connected to the same instance within this time interval.</p>"
+          "documentation":"<p>The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.</p>"
         },
         "DeleteVpcConfig":{
           "shape":"Boolean",
@@ -1229,7 +1318,7 @@
         },
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
-          "documentation":"<p>Enable/Disable default Internet access from fleet.</p>"
+          "documentation":"<p>Enables or disables default Internet access for the fleet.</p>"
         }
       }
     },
@@ -1257,6 +1346,14 @@
         "Name":{
           "shape":"String",
           "documentation":"<p>The name of the stack to update.</p>"
+        },
+        "StorageConnectors":{
+          "shape":"StorageConnectorList",
+          "documentation":"<p>The storage connectors to be enabled for the stack.</p>"
+        },
+        "DeleteStorageConnectors":{
+          "shape":"Boolean",
+          "documentation":"<p>Remove all the storage connectors currently enabled for the stack.</p>"
         }
       }
     },
@@ -1283,7 +1380,6 @@
     },
     "VpcConfig":{
       "type":"structure",
-      "required":["SubnetIds"],
       "members":{
         "SubnetIds":{
           "shape":"SubnetIdList",
