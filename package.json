@@ -15,7 +15,7 @@
   "devDependencies": {
     "@types/node": "^6.0.46",
     "browserify": "13.1.0",
-    "chai": "*",
+    "chai": "^3.0",
     "codecov": "^1.0.1",
     "coffee-script": "1.6.3",
     "coffeeify": "*",
