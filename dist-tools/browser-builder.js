@@ -2,7 +2,7 @@
 
 var path = require('path');
 
-var AWS = require('../');
+var AWS = require('../index');
 
 var license = [
   '// AWS SDK for JavaScript v' + AWS.VERSION,

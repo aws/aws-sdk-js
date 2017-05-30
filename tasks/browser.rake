@@ -35,7 +35,7 @@ namespace :browser do
   task :setup_dist_tools do
     unless File.directory?("dist-tools/node_modules")
       Dir.chdir('dist-tools') do
-        sh "npm install --production"
+        sh "npm install"
       end
     end
   end
