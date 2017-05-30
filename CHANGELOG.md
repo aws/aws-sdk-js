@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.58.0-->
+<!--LATEST=2.59.0-->
 <!--ENTRYINSERT-->
+
+## 2.59.0
+* bugfix: S3: Update ManagedUploader body verification to allow empty strings
+* feature: CloudDirectory: Cloud Directory has launched support for Typed Links, enabling customers to create object-to-object relationships that are not hierarchical in nature. Typed Links enable customers to quickly query for data along these relationships. Customers can also enforce referential integrity using Typed Links, ensuring data in use is not inadvertently deleted.
 
 ## 2.58.0
 * feature: AppStream: Support added for persistent user storage, backed by S3.

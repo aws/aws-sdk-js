@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3",
-  "description": "Update ManagedUploader body verification to allow empty strings"
-}

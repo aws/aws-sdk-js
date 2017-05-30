@@ -51,7 +51,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidAttachmentException"}
       ],
-      "documentation":"<p>Copies input published schema into <a>Directory</a> with same name and version as that of published schema .</p>"
+      "documentation":"<p>Copies the input published schema into the <a>Directory</a> with the same name and version as that of the published schema .</p>"
     },
     "AttachObject":{
       "name":"AttachObject",
@@ -124,6 +124,29 @@
         {"shape":"NotIndexException"}
       ],
       "documentation":"<p>Attaches the specified object to the specified index.</p>"
+    },
+    "AttachTypedLink":{
+      "name":"AttachTypedLink",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/attach",
+        "responseCode":200
+      },
+      "input":{"shape":"AttachTypedLinkRequest"},
+      "output":{"shape":"AttachTypedLinkResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidAttachmentException"},
+        {"shape":"ValidationException"},
+        {"shape":"FacetValidationException"}
+      ],
+      "documentation":"<p>Attaches a typed link to a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
     },
     "BatchRead":{
       "name":"BatchRead",
@@ -206,7 +229,8 @@
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"FacetAlreadyExistsException"},
-        {"shape":"InvalidRuleException"}
+        {"shape":"InvalidRuleException"},
+        {"shape":"FacetValidationException"}
       ],
       "documentation":"<p>Creates a new <a>Facet</a> in a schema. Facet creation is allowed only in development or applied schemas.</p>"
     },
@@ -257,7 +281,7 @@
         {"shape":"LinkNameAlreadyInUseException"},
         {"shape":"UnsupportedIndexTypeException"}
       ],
-      "documentation":"<p>Creates an object in a <a>Directory</a>. Additionally attaches the object to a parent, if a parent reference and LinkName is specified. An object is simply a collection of <a>Facet</a> attributes. You can also use this API call to create a policy object, if the facet from which you create the object is a policy facet. </p>"
+      "documentation":"<p>Creates an object in a <a>Directory</a>. Additionally attaches the object to a parent, if a parent reference and <code>LinkName</code> is specified. An object is simply a collection of <a>Facet</a> attributes. You can also use this API call to create a policy object, if the facet from which you create the object is a policy facet. </p>"
     },
     "CreateSchema":{
       "name":"CreateSchema",
@@ -280,6 +304,29 @@
       ],
       "documentation":"<p>Creates a new schema in a development state. A schema can exist in three phases:</p> <ul> <li> <p> <i>Development:</i> This is a mutable phase of the schema. All new schemas are in the development phase. Once the schema is finalized, it can be published.</p> </li> <li> <p> <i>Published:</i> Published schemas are immutable and have a version associated with them.</p> </li> <li> <p> <i>Applied:</i> Applied schemas are mutable in a way that allows you to add new schema facets. You can also add new, nonrequired attributes to existing schema facets. You can apply only published schemas to directories. </p> </li> </ul>"
     },
+    "CreateTypedLinkFacet":{
+      "name":"CreateTypedLinkFacet",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/facet/create",
+        "responseCode":200
+      },
+      "input":{"shape":"CreateTypedLinkFacetRequest"},
+      "output":{"shape":"CreateTypedLinkFacetResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"FacetAlreadyExistsException"},
+        {"shape":"InvalidRuleException"},
+        {"shape":"FacetValidationException"}
+      ],
+      "documentation":"<p>Creates a <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+    },
     "DeleteDirectory":{
       "name":"DeleteDirectory",
       "http":{
@@ -297,7 +344,8 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryDeletedException"},
-        {"shape":"RetryableConflictException"}
+        {"shape":"RetryableConflictException"},
+        {"shape":"InvalidArnException"}
       ],
       "documentation":"<p>Deletes a directory. Only disabled directories can be deleted. A deleted directory cannot be undone. Exercise extreme caution when deleting directories.</p>"
     },
@@ -321,7 +369,7 @@
         {"shape":"FacetNotFoundException"},
         {"shape":"FacetInUseException"}
       ],
-      "documentation":"<p>Deletes a given <a>Facet</a>. All attributes and <a>Rule</a>s associated with the facet will be deleted. Only development schema facets are allowed deletion.</p>"
+      "documentation":"<p>Deletes a given <a>Facet</a>. All attributes and <a>Rule</a>s that are associated with the facet will be deleted. Only development schema facets are allowed deletion.</p>"
     },
     "DeleteObject":{
       "name":"DeleteObject",
@@ -365,6 +413,27 @@
         {"shape":"StillContainsLinksException"}
       ],
       "documentation":"<p>Deletes a given schema. Schemas in a development and published state can only be deleted. </p>"
+    },
+    "DeleteTypedLinkFacet":{
+      "name":"DeleteTypedLinkFacet",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/facet/delete",
+        "responseCode":200
+      },
+      "input":{"shape":"DeleteTypedLinkFacetRequest"},
+      "output":{"shape":"DeleteTypedLinkFacetResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"FacetNotFoundException"}
+      ],
+      "documentation":"<p>Deletes a <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
     },
     "DetachFromIndex":{
       "name":"DetachFromIndex",
@@ -433,6 +502,26 @@
       ],
       "documentation":"<p>Detaches a policy from an object.</p>"
     },
+    "DetachTypedLink":{
+      "name":"DetachTypedLink",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/detach",
+        "responseCode":200
+      },
+      "input":{"shape":"DetachTypedLinkRequest"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"FacetValidationException"}
+      ],
+      "documentation":"<p>Detaches a typed link from a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+    },
     "DisableDirectory":{
       "name":"DisableDirectory",
       "http":{
@@ -449,7 +538,8 @@
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"RetryableConflictException"}
+        {"shape":"RetryableConflictException"},
+        {"shape":"InvalidArnException"}
       ],
       "documentation":"<p>Disables the specified directory. Disabled directories cannot be read or written to. Only enabled directories can be disabled. Disabled directories may be reenabled.</p>"
     },
@@ -469,7 +559,8 @@
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"RetryableConflictException"}
+        {"shape":"RetryableConflictException"},
+        {"shape":"InvalidArnException"}
       ],
       "documentation":"<p>Enables the specified directory. Only disabled directories can be enabled. Once enabled, the directory can then be read and written to.</p>"
     },
@@ -511,7 +602,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"FacetNotFoundException"}
       ],
-      "documentation":"<p>Gets details of the <a>Facet</a>, such as Facet Name, Attributes, <a>Rule</a>s, or ObjectType. You can call this on all kinds of schema facets -- published, development, or applied.</p>"
+      "documentation":"<p>Gets details of the <a>Facet</a>, such as facet name, attributes, <a>Rule</a>s, or <code>ObjectType</code>. You can call this on all kinds of schema facets -- published, development, or applied.</p>"
     },
     "GetObjectInformation":{
       "name":"GetObjectInformation",
@@ -554,6 +645,28 @@
         {"shape":"ValidationException"}
       ],
       "documentation":"<p>Retrieves a JSON representation of the schema. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat\">JSON Schema Format</a> for more information.</p>"
+    },
+    "GetTypedLinkFacetInformation":{
+      "name":"GetTypedLinkFacetInformation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/facet/get",
+        "responseCode":200
+      },
+      "input":{"shape":"GetTypedLinkFacetInformationRequest"},
+      "output":{"shape":"GetTypedLinkFacetInformationResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"FacetNotFoundException"}
+      ],
+      "documentation":"<p>Returns the identity attribute order for a specific <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
     },
     "ListAppliedSchemaArns":{
       "name":"ListAppliedSchemaArns",
@@ -616,7 +729,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p>Retrieves the ARNs of schemas in the development state.</p>"
+      "documentation":"<p>Retrieves each Amazon Resource Name (ARN) of schemas in the development state.</p>"
     },
     "ListDirectories":{
       "name":"ListDirectories",
@@ -681,6 +794,28 @@
       ],
       "documentation":"<p>Retrieves the names of facets that exist in a schema.</p>"
     },
+    "ListIncomingTypedLinks":{
+      "name":"ListIncomingTypedLinks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/incoming",
+        "responseCode":200
+      },
+      "input":{"shape":"ListIncomingTypedLinksRequest"},
+      "output":{"shape":"ListIncomingTypedLinksResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"FacetValidationException"}
+      ],
+      "documentation":"<p>Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+    },
     "ListIndex":{
       "name":"ListIndex",
       "http":{
@@ -725,7 +860,7 @@
         {"shape":"InvalidNextTokenException"},
         {"shape":"FacetValidationException"}
       ],
-      "documentation":"<p>Lists all attributes associated with an object. </p>"
+      "documentation":"<p>Lists all attributes that are associated with an object. </p>"
     },
     "ListObjectChildren":{
       "name":"ListObjectChildren",
@@ -749,7 +884,7 @@
         {"shape":"InvalidNextTokenException"},
         {"shape":"NotNodeException"}
       ],
-      "documentation":"<p>Returns a paginated list of child objects associated with a given object.</p>"
+      "documentation":"<p>Returns a paginated list of child objects that are associated with a given object.</p>"
     },
     "ListObjectParentPaths":{
       "name":"ListObjectParentPaths",
@@ -771,7 +906,7 @@
         {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure\">Directory Structure</a>.</p> <p>Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined <code>MaxResults</code>, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to directory root are ignored from the target object.</p>"
+      "documentation":"<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure\">Directory Structure</a>.</p> <p>Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined <code>MaxResults</code>, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.</p>"
     },
     "ListObjectParents":{
       "name":"ListObjectParents",
@@ -795,7 +930,7 @@
         {"shape":"InvalidNextTokenException"},
         {"shape":"CannotListParentOfRootException"}
       ],
-      "documentation":"<p>Lists parent objects associated with a given object in pagination fashion.</p>"
+      "documentation":"<p>Lists parent objects that are associated with a given object in pagination fashion.</p>"
     },
     "ListObjectPolicies":{
       "name":"ListObjectPolicies",
@@ -818,6 +953,28 @@
         {"shape":"InvalidNextTokenException"}
       ],
       "documentation":"<p>Returns policies attached to an object in pagination fashion.</p>"
+    },
+    "ListOutgoingTypedLinks":{
+      "name":"ListOutgoingTypedLinks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/outgoing",
+        "responseCode":200
+      },
+      "input":{"shape":"ListOutgoingTypedLinksRequest"},
+      "output":{"shape":"ListOutgoingTypedLinksResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"FacetValidationException"}
+      ],
+      "documentation":"<p>Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
     },
     "ListPolicyAttachments":{
       "name":"ListPolicyAttachments",
@@ -862,7 +1019,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p>Retrieves published schema ARNs.</p>"
+      "documentation":"<p>Retrieves each published schema Amazon Resource Name (ARN).</p>"
     },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
@@ -885,6 +1042,49 @@
       ],
       "documentation":"<p>Returns tags for a resource. Tagging is currently supported only for directories with a limit of 50 tags per directory. All 50 tags are returned for a given directory with this API call.</p>"
     },
+    "ListTypedLinkFacetAttributes":{
+      "name":"ListTypedLinkFacetAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/facet/attributes",
+        "responseCode":200
+      },
+      "input":{"shape":"ListTypedLinkFacetAttributesRequest"},
+      "output":{"shape":"ListTypedLinkFacetAttributesResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"FacetNotFoundException"},
+        {"shape":"InvalidNextTokenException"}
+      ],
+      "documentation":"<p>Returns a paginated list of all attribute definitions for a particular <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+    },
+    "ListTypedLinkFacetNames":{
+      "name":"ListTypedLinkFacetNames",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/facet/list",
+        "responseCode":200
+      },
+      "input":{"shape":"ListTypedLinkFacetNamesRequest"},
+      "output":{"shape":"ListTypedLinkFacetNamesResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidNextTokenException"}
+      ],
+      "documentation":"<p>Returns a paginated list of <code>TypedLink</code> facet names for a particular schema. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+    },
     "LookupPolicy":{
       "name":"LookupPolicy",
       "http":{
@@ -906,7 +1106,7 @@
         {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don't lead to the root from the target object are ignored.</p>"
+      "documentation":"<p>Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don't lead to the root from the target object are ignored. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies\">Policies</a>.</p>"
     },
     "PublishSchema":{
       "name":"PublishSchema",
@@ -927,7 +1127,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"SchemaAlreadyPublishedException"}
       ],
-      "documentation":"<p>Publishes a development schema with a version. If description and attributes are specified, PublishSchema overrides the development schema description and attributes. If not, the development schema description and attributes are used.</p>"
+      "documentation":"<p>Publishes a development schema with a version. If description and attributes are specified, <code>PublishSchema</code> overrides the development schema description and attributes. If not, the development schema description and attributes are used.</p>"
     },
     "PutSchemaFromJson":{
       "name":"PutSchemaFromJson",
@@ -991,7 +1191,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidTaggingRequestException"}
       ],
-      "documentation":"<p>API for adding tags to a resource.</p>"
+      "documentation":"<p>An API operation for adding tags to a resource.</p>"
     },
     "UntagResource":{
       "name":"UntagResource",
@@ -1012,7 +1212,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidTaggingRequestException"}
       ],
-      "documentation":"<p>API for removing tags from a resource.</p>"
+      "documentation":"<p>An API operation for removing tags from a resource.</p>"
     },
     "UpdateFacet":{
       "name":"UpdateFacet",
@@ -1078,6 +1278,30 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Updates the schema name with a new name. Only development schema names can be updated.</p>"
+    },
+    "UpdateTypedLinkFacet":{
+      "name":"UpdateTypedLinkFacet",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/facet",
+        "responseCode":200
+      },
+      "input":{"shape":"UpdateTypedLinkFacetRequest"},
+      "output":{"shape":"UpdateTypedLinkFacetResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"FacetValidationException"},
+        {"shape":"InvalidFacetUpdateException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"FacetNotFoundException"},
+        {"shape":"InvalidRuleException"}
+      ],
+      "documentation":"<p>Updates a <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
     }
   },
   "shapes":{
@@ -1100,7 +1324,7 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
@@ -1110,7 +1334,7 @@
         },
         "ObjectAttributeList":{
           "shape":"AttributeKeyAndValueList",
-          "documentation":"<p>Attributes on the facet you are adding to the object.</p>"
+          "documentation":"<p>Attributes on the facet that you are adding to the object.</p>"
         },
         "ObjectReference":{
           "shape":"ObjectReference",
@@ -1132,11 +1356,11 @@
       "members":{
         "PublishedSchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>Published schema ARN that needs to be copied. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>Published schema Amazon Resource Name (ARN) that needs to be copied. For more information, see <a>arns</a>.</p>"
         },
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> into which the schema is copied. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> into which the schema is copied. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         }
@@ -1147,11 +1371,11 @@
       "members":{
         "AppliedSchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>Applied schema ARN associated with the copied schema in the <a>Directory</a>. You can use this ARN to describe the schema information applied on this directory. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>The applied schema ARN that is associated with the copied schema in the <a>Directory</a>. You can use this ARN to describe the schema information applied on this directory. For more information, see <a>arns</a>.</p>"
         },
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>The ARN that is associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>"
         }
       }
     },
@@ -1171,21 +1395,21 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where both objects reside. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where both objects reside. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "ParentReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Parent object reference.</p>"
+          "documentation":"<p>The parent object reference.</p>"
         },
         "ChildReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Child object reference to be attached to the object.</p>"
+          "documentation":"<p>The child object reference to be attached to the object.</p>"
         },
         "LinkName":{
           "shape":"LinkName",
-          "documentation":"<p>Link name with which the child object is attached to the parent.</p>"
+          "documentation":"<p>The link name with which the child object is attached to the parent.</p>"
         }
       }
     },
@@ -1194,7 +1418,7 @@
       "members":{
         "AttachedObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>Attached <code>ObjectIdentifier</code>, which is the child <code>ObjectIdentifier</code>.</p>"
+          "documentation":"<p>The attached <code>ObjectIdentifier</code>, which is the child <code>ObjectIdentifier</code>.</p>"
         }
       }
     },
@@ -1207,17 +1431,17 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where both objects reside. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where both objects reside. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "PolicyReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference associated with the policy object.</p>"
+          "documentation":"<p>The reference that is associated with the policy object.</p>"
         },
         "ObjectReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference that identifies the object to which the policy will be attached.</p>"
+          "documentation":"<p>The reference that identifies the object to which the policy will be attached.</p>"
         }
       }
     },
@@ -1236,7 +1460,7 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>The ARN of the directory where the object and index exist.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the directory where the object and index exist.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
@@ -1259,6 +1483,49 @@
         }
       }
     },
+    "AttachTypedLinkRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryArn",
+        "SourceObjectReference",
+        "TargetObjectReference",
+        "TypedLinkFacet",
+        "Attributes"
+      ],
+      "members":{
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the directory where you want to attach the typed link.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "SourceObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Identifies the source object that the typed link will attach to.</p>"
+        },
+        "TargetObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Identifies the target object that the typed link will attach to.</p>"
+        },
+        "TypedLinkFacet":{
+          "shape":"TypedLinkSchemaAndFacetName",
+          "documentation":"<p>Identifies the typed link facet that is associated with the typed link.</p>"
+        },
+        "Attributes":{
+          "shape":"AttributeNameAndValueList",
+          "documentation":"<p>An ordered set of attributes that are associated with the typed link.</p>"
+        }
+      }
+    },
+    "AttachTypedLinkResponse":{
+      "type":"structure",
+      "members":{
+        "TypedLinkSpecifier":{
+          "shape":"TypedLinkSpecifier",
+          "documentation":"<p>Returns a typed link specifier as output.</p>"
+        }
+      }
+    },
     "AttributeKey":{
       "type":"structure",
       "required":[
@@ -1269,11 +1536,11 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>The ARN of the schema that contains the facet and attribute.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the schema that contains the facet and attribute.</p>"
         },
         "FacetName":{
           "shape":"FacetName",
-          "documentation":"<p>The name of the facet the attribute exists within.</p>"
+          "documentation":"<p>The name of the facet that the attribute exists within.</p>"
         },
         "Name":{
           "shape":"AttributeName",
@@ -1314,6 +1581,32 @@
       "min":1,
       "pattern":"^[a-zA-Z0-9._-]*$"
     },
+    "AttributeNameAndValue":{
+      "type":"structure",
+      "required":[
+        "AttributeName",
+        "Value"
+      ],
+      "members":{
+        "AttributeName":{
+          "shape":"AttributeName",
+          "documentation":"<p>The attribute name of the typed link.</p>"
+        },
+        "Value":{
+          "shape":"TypedAttributeValue",
+          "documentation":"<p>The value for the typed link.</p>"
+        }
+      },
+      "documentation":"<p>Identifies the attribute name and value for a typed link.</p>"
+    },
+    "AttributeNameAndValueList":{
+      "type":"list",
+      "member":{"shape":"AttributeNameAndValue"}
+    },
+    "AttributeNameList":{
+      "type":"list",
+      "member":{"shape":"AttributeName"}
+    },
     "BatchAddFacetToObject":{
       "type":"structure",
       "required":[
@@ -1353,18 +1646,18 @@
       "members":{
         "ParentReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Parent object reference.</p>"
+          "documentation":"<p>The parent object reference.</p>"
         },
         "ChildReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Child object reference to be attached to the object.</p>"
+          "documentation":"<p>The child object reference that is to be attached to the object.</p>"
         },
         "LinkName":{
           "shape":"LinkName",
           "documentation":"<p>The name of the link.</p>"
         }
       },
-      "documentation":"<p>Represents the output of an AttachObject operation.</p>"
+      "documentation":"<p>Represents the output of an <code>AttachObject</code> operation.</p>"
     },
     "BatchAttachObjectResponse":{
       "type":"structure",
@@ -1374,7 +1667,7 @@
           "documentation":"<p>The <code>ObjectIdentifier</code> of the object that has been attached.</p>"
         }
       },
-      "documentation":"<p>Represents the output batch AttachObject response operation.</p>"
+      "documentation":"<p>Represents the output batch <code>AttachObject</code> response operation.</p>"
     },
     "BatchCreateObject":{
       "type":"structure",
@@ -1388,11 +1681,11 @@
       "members":{
         "SchemaFacet":{
           "shape":"SchemaFacetList",
-          "documentation":"<p>List of FacetArns that will be associated with the object. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>A list of <code>FacetArns</code> that will be associated with the object. For more information, see <a>arns</a>.</p>"
         },
         "ObjectAttributeList":{
           "shape":"AttributeKeyAndValueList",
-          "documentation":"<p>Attribute map, which contains an attribute ARN as the key and attribute value as the map value.</p>"
+          "documentation":"<p>An attribute map, which contains an attribute ARN as the key and attribute value as the map value.</p>"
         },
         "ParentReference":{
           "shape":"ObjectReference",
@@ -1407,14 +1700,14 @@
           "documentation":"<p>The batch reference name. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches\">Batches</a> for more information.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a CreateObject operation.</p>"
+      "documentation":"<p>Represents the output of a <code>CreateObject</code> operation.</p>"
     },
     "BatchCreateObjectResponse":{
       "type":"structure",
       "members":{
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>ID associated with the object.</p>"
+          "documentation":"<p>The ID that is associated with the object.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>CreateObject</code> response operation.</p>"
@@ -1425,7 +1718,7 @@
       "members":{
         "ObjectReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference that identifies the object.</p>"
+          "documentation":"<p>The reference that identifies the object.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>DeleteObject</code> operation.</p>"
@@ -1483,11 +1776,11 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+          "documentation":"<p>The maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         },
         "FacetFilter":{
           "shape":"SchemaFacet",
-          "documentation":"<p>Used to filter the list of object attributes associated with a certain facet.</p>"
+          "documentation":"<p>Used to filter the list of object attributes that are associated with a certain facet.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>ListObjectAttributes</code> operation.</p>"
@@ -1497,7 +1790,7 @@
       "members":{
         "Attributes":{
           "shape":"AttributeKeyAndValueList",
-          "documentation":"<p>Attributes map associated with the object. <code>AttributeArn</code> is the key; attribute value is the value.</p>"
+          "documentation":"<p>The attributes map that is associated with the object. <code>AttributeArn</code> is the key; attribute value is the value.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -1530,7 +1823,7 @@
       "members":{
         "Children":{
           "shape":"LinkNameToObjectIdentifierMap",
-          "documentation":"<p>Children structure, which is a map with key as the <code>LinkName</code> and <code>ObjectIdentifier</code> as the value.</p>"
+          "documentation":"<p>The children structure, which is a map with the key as the <code>LinkName</code> and <code>ObjectIdentifier</code> as the value.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -1545,14 +1838,14 @@
       "members":{
         "Type":{
           "shape":"BatchReadExceptionType",
-          "documentation":"<p>Type of exception, such as <code>InvalidArnException</code>.</p>"
+          "documentation":"<p>A type of exception, such as <code>InvalidArnException</code>.</p>"
         },
         "Message":{
           "shape":"ExceptionMessage",
-          "documentation":"<p>Exception message associated with the failure.</p>"
+          "documentation":"<p>An exception message that is associated with the failure.</p>"
         }
       },
-      "documentation":"<p>Batch Read Exception structure, which contains exception type and message.</p>"
+      "documentation":"<p>The batch read exception structure, which contains the exception type and message.</p>"
     },
     "BatchReadExceptionType":{
       "type":"string",
@@ -1570,7 +1863,7 @@
       "members":{
         "ListObjectAttributes":{
           "shape":"BatchListObjectAttributes",
-          "documentation":"<p>Lists all attributes associated with an object.</p>"
+          "documentation":"<p>Lists all attributes that are associated with an object.</p>"
         },
         "ListObjectChildren":{
           "shape":"BatchListObjectChildren",
@@ -1610,13 +1903,13 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "Operations":{
           "shape":"BatchReadOperationList",
-          "documentation":"<p>List of operations that are part of the batch.</p>"
+          "documentation":"<p>A list of operations that are part of the batch.</p>"
         },
         "ConsistencyLevel":{
           "shape":"ConsistencyLevel",
@@ -1631,7 +1924,7 @@
       "members":{
         "Responses":{
           "shape":"BatchReadOperationResponseList",
-          "documentation":"<p>List of all the responses for each batch read.</p>"
+          "documentation":"<p>A list of all the responses for each batch read.</p>"
         }
       }
     },
@@ -1640,11 +1933,11 @@
       "members":{
         "ListObjectAttributes":{
           "shape":"BatchListObjectAttributesResponse",
-          "documentation":"<p>Lists all attributes associated with an object.</p>"
+          "documentation":"<p>Lists all attributes that are associated with an object.</p>"
         },
         "ListObjectChildren":{
           "shape":"BatchListObjectChildrenResponse",
-          "documentation":"<p>Returns a paginated list of child objects associated with a given object.</p>"
+          "documentation":"<p>Returns a paginated list of child objects that are associated with a given object.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchRead</code> success response operation.</p>"
@@ -1666,13 +1959,13 @@
           "documentation":"<p>A reference to the object whose facet will be removed.</p>"
         }
       },
-      "documentation":"<p>Batch operation to remove a facet from an object.</p>"
+      "documentation":"<p>A batch operation to remove a facet from an object.</p>"
     },
     "BatchRemoveFacetFromObjectResponse":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Empty result representing success.</p>"
+      "documentation":"<p>An empty result that represents success.</p>"
     },
     "BatchUpdateObjectAttributes":{
       "type":"structure",
@@ -1697,7 +1990,7 @@
       "members":{
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>ID associated with the object.</p>"
+          "documentation":"<p>ID that is associated with the object.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchUpdate</code> response operation.</p>"
@@ -1743,7 +2036,7 @@
         },
         "UpdateObjectAttributes":{
           "shape":"BatchUpdateObjectAttributes",
-          "documentation":"<p>Update a given object's attributes.</p>"
+          "documentation":"<p>Updates a given object's attributes.</p>"
         },
         "DeleteObject":{
           "shape":"BatchDeleteObject",
@@ -1751,11 +2044,11 @@
         },
         "AddFacetToObject":{
           "shape":"BatchAddFacetToObject",
-          "documentation":"<p>Batch operation adding a facet to an object.</p>"
+          "documentation":"<p>A batch operation that adds a facet to an object.</p>"
         },
         "RemoveFacetFromObject":{
           "shape":"BatchRemoveFacetFromObject",
-          "documentation":"<p>Batch operation removing a facet from an object.</p>"
+          "documentation":"<p>A batch operation that removes a facet from an object.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchWrite</code> operation. </p>"
@@ -1789,11 +2082,11 @@
         },
         "AddFacetToObject":{
           "shape":"BatchAddFacetToObjectResponse",
-          "documentation":"<p>Result of an add facet to object batch operation.</p>"
+          "documentation":"<p>The result of an add facet to object batch operation.</p>"
         },
         "RemoveFacetFromObject":{
           "shape":"BatchRemoveFacetFromObjectResponse",
-          "documentation":"<p>Result of a batch remove facet from object operation.</p>"
+          "documentation":"<p>The result of a batch remove facet from object operation.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchWrite</code> response operation.</p>"
@@ -1811,13 +2104,13 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "Operations":{
           "shape":"BatchWriteOperationList",
-          "documentation":"<p>List of operations that are part of the batch.</p>"
+          "documentation":"<p>A list of operations that are part of the batch.</p>"
         }
       }
     },
@@ -1826,7 +2119,7 @@
       "members":{
         "Responses":{
           "shape":"BatchWriteOperationResponseList",
-          "documentation":"<p>List of all the responses for each batch write.</p>"
+          "documentation":"<p>A list of all the responses for each batch write.</p>"
         }
       }
     },
@@ -1858,11 +2151,11 @@
       "members":{
         "Name":{
           "shape":"DirectoryName",
-          "documentation":"<p>Name of the <a>Directory</a>. Should be unique per account, per region.</p>"
+          "documentation":"<p>The name of the <a>Directory</a>. Should be unique per account, per region.</p>"
         },
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN of the published schema that will be copied into the data <a>Directory</a>. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the published schema that will be copied into the data <a>Directory</a>. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         }
@@ -1879,11 +2172,11 @@
       "members":{
         "DirectoryArn":{
           "shape":"DirectoryArn",
-          "documentation":"<p>ARN associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>The ARN that is associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>"
         },
         "Name":{
           "shape":"DirectoryName",
-          "documentation":"<p>Name of the <a>Directory</a>.</p>"
+          "documentation":"<p>The name of the <a>Directory</a>.</p>"
         },
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
@@ -1891,7 +2184,7 @@
         },
         "AppliedSchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN of the published schema in the <a>Directory</a>. Once a published schema is copied into the directory, it has its own ARN which is referred to applied schema ARN. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>The ARN of the published schema in the <a>Directory</a>. Once a published schema is copied into the directory, it has its own ARN, which is referred to applied schema ARN. For more information, see <a>arns</a>.</p>"
         }
       }
     },
@@ -1905,21 +2198,21 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>Schema ARN in which the new <a>Facet</a> will be created. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The schema ARN in which the new <a>Facet</a> will be created. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "Name":{
           "shape":"FacetName",
-          "documentation":"<p>Name of the <a>Facet</a>, which is unique for a given schema.</p>"
+          "documentation":"<p>The name of the <a>Facet</a>, which is unique for a given schema.</p>"
         },
         "Attributes":{
           "shape":"FacetAttributeList",
-          "documentation":"<p>Attributes associated with the <a>Facet</a>.e</p>"
+          "documentation":"<p>The attributes that are associated with the <a>Facet</a>.</p>"
         },
         "ObjectType":{
           "shape":"ObjectType",
-          "documentation":"<p>Specifies whether a given object created from this facet is of type Node, Leaf Node, Policy or Index.</p> <ul> <li> <p>Node: Can have multiple children but one parent.</p> </li> </ul> <ul> <li> <p>Leaf Node: Cannot have children but can have multiple parents.</p> </li> </ul> <ul> <li> <p>Policy: Allows you to store a policy document and policy type. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies\">Policies</a>.</p> </li> </ul> <ul> <li> <p>Index: Can be created with the Index API.</p> </li> </ul>"
+          "documentation":"<p>Specifies whether a given object created from this facet is of type node, leaf node, policy or index.</p> <ul> <li> <p>Node: Can have multiple children but one parent.</p> </li> </ul> <ul> <li> <p>Leaf node: Cannot have children but can have multiple parents.</p> </li> </ul> <ul> <li> <p>Policy: Allows you to store a policy document and policy type. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies\">Policies</a>.</p> </li> </ul> <ul> <li> <p>Index: Can be created with the Index API.</p> </li> </ul>"
         }
       }
     },
@@ -1944,11 +2237,11 @@
         },
         "OrderedIndexedAttributeList":{
           "shape":"AttributeKeyList",
-          "documentation":"<p>Specifies the Attributes that should be indexed on. Currently only a single attribute is supported.</p>"
+          "documentation":"<p>Specifies the attributes that should be indexed on. Currently only a single attribute is supported.</p>"
         },
         "IsUnique":{
           "shape":"Bool",
-          "documentation":"<p>Indicates whether objects with the same indexed attribute value can be added to the index.</p>"
+          "documentation":"<p>Indicates whether the attribute that is being indexed has unique values or not.</p>"
         },
         "ParentReference":{
           "shape":"ObjectReference",
@@ -1978,17 +2271,17 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> in which the object will be created. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> in which the object will be created. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "SchemaFacets":{
           "shape":"SchemaFacetList",
-          "documentation":"<p>List of facet ARNs to be associated with the object. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>A list of schema facets to be associated with the object that contains <code>SchemaArn</code> and facet name. For more information, see <a>arns</a>.</p>"
         },
         "ObjectAttributeList":{
           "shape":"AttributeKeyAndValueList",
-          "documentation":"<p>Attribute map whose attribute ARN contains the key and attribute value as the map value.</p>"
+          "documentation":"<p>The attribute map whose attribute ARN contains the key and attribute value as the map value.</p>"
         },
         "ParentReference":{
           "shape":"ObjectReference",
@@ -2005,7 +2298,7 @@
       "members":{
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>Identifier associated with the object.</p>"
+          "documentation":"<p>The identifier that is associated with the object.</p>"
         }
       }
     },
@@ -2015,7 +2308,7 @@
       "members":{
         "Name":{
           "shape":"SchemaName",
-          "documentation":"<p>Name associated with the schema. This is unique to each account and in each region.</p>"
+          "documentation":"<p>The name that is associated with the schema. This is unique to each account and in each region.</p>"
         }
       }
     },
@@ -2024,8 +2317,32 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the schema. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.</p>"
         }
+      }
+    },
+    "CreateTypedLinkFacetRequest":{
+      "type":"structure",
+      "required":[
+        "SchemaArn",
+        "Facet"
+      ],
+      "members":{
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "Facet":{
+          "shape":"TypedLinkFacet",
+          "documentation":"<p> <a>Facet</a> structure that is associated with the typed link facet.</p>"
+        }
+      }
+    },
+    "CreateTypedLinkFacetResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "Date":{"type":"timestamp"},
@@ -2061,7 +2378,7 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Facet</a>. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Facet</a>. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
@@ -2085,13 +2402,13 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "ObjectReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference that identifies the object.</p>"
+          "documentation":"<p>A reference that identifies the object.</p>"
         }
       }
     },
@@ -2106,7 +2423,7 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN of the development schema. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the development schema. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         }
@@ -2117,8 +2434,32 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>Input ARN that is returned as part of the response. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>The input ARN that is returned as part of the response. For more information, see <a>arns</a>.</p>"
         }
+      }
+    },
+    "DeleteTypedLinkFacetRequest":{
+      "type":"structure",
+      "required":[
+        "SchemaArn",
+        "Name"
+      ],
+      "members":{
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "Name":{
+          "shape":"TypedLinkName",
+          "documentation":"<p>The unique name of the typed link facet.</p>"
+        }
+      }
+    },
+    "DeleteTypedLinkFacetResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "DetachFromIndexRequest":{
@@ -2131,7 +2472,7 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>The ARN of the directory the index and object exist in.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the directory the index and object exist in.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
@@ -2164,17 +2505,17 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where objects reside. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where objects reside. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "ParentReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Parent reference from which the object with the specified link name is detached.</p>"
+          "documentation":"<p>The parent reference from which the object with the specified link name is detached.</p>"
         },
         "LinkName":{
           "shape":"LinkName",
-          "documentation":"<p>Link name associated with the object that needs to be detached.</p>"
+          "documentation":"<p>The link name associated with the object that needs to be detached.</p>"
         }
       }
     },
@@ -2197,7 +2538,7 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where both objects reside. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where both objects reside. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
@@ -2216,6 +2557,25 @@
       "members":{
       }
     },
+    "DetachTypedLinkRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryArn",
+        "TypedLinkSpecifier"
+      ],
+      "members":{
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the directory where you want to detach the typed link.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "TypedLinkSpecifier":{
+          "shape":"TypedLinkSpecifier",
+          "documentation":"<p>Used to accept a typed link specifier as input.</p>"
+        }
+      }
+    },
     "Directory":{
       "type":"structure",
       "members":{
@@ -2225,7 +2585,7 @@
         },
         "DirectoryArn":{
           "shape":"DirectoryArn",
-          "documentation":"<p>ARN associated with the directory. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the directory. For more information, see <a>arns</a>.</p>"
         },
         "State":{
           "shape":"DirectoryState",
@@ -2253,7 +2613,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>A directory that has been deleted has been attempted to be accessed. Note: The requested resource will eventually cease to exist.</p>",
+      "documentation":"<p>A directory that has been deleted and to which access has been attempted. Note: The requested resource will eventually cease to exist.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -2347,7 +2707,7 @@
         },
         "ObjectType":{
           "shape":"ObjectType",
-          "documentation":"<p>Object type associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.</p>"
+          "documentation":"<p>The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.</p>"
         }
       },
       "documentation":"<p>A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <a>Rule</a>s, and <code>ObjectTypes</code>.</p>"
@@ -2375,14 +2735,14 @@
         },
         "AttributeReference":{
           "shape":"FacetAttributeReference",
-          "documentation":"<p>Attribute reference associated with the attribute. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences\">Attribute References</a> for more information.</p>"
+          "documentation":"<p>An attribute reference that is associated with the attribute. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences\">Attribute References</a> for more information.</p>"
         },
         "RequiredBehavior":{
           "shape":"RequiredAttributeBehavior",
           "documentation":"<p>The required behavior of the <code>FacetAttribute</code>.</p>"
         }
       },
-      "documentation":"<p>Attribute associated with the <a>Facet</a>.</p>"
+      "documentation":"<p>An attribute that is associated with the <a>Facet</a>.</p>"
     },
     "FacetAttributeDefinition":{
       "type":"structure",
@@ -2420,14 +2780,14 @@
       "members":{
         "TargetFacetName":{
           "shape":"FacetName",
-          "documentation":"<p>Target facet name associated with the facet reference. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences\">Attribute References</a> for more information.</p>"
+          "documentation":"<p>The target facet name that is associated with the facet reference. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences\">Attribute References</a> for more information.</p>"
         },
         "TargetAttributeName":{
           "shape":"AttributeName",
-          "documentation":"<p>Target attribute name associated with the facet reference. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences\">Attribute References</a> for more information.</p>"
+          "documentation":"<p>The target attribute name that is associated with the facet reference. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences\">Attribute References</a> for more information.</p>"
         }
       },
-      "documentation":"<p>Facet attribute reference that specifies the attribute definition which contains attribute facet name and attribute name.</p>"
+      "documentation":"<p>The facet attribute reference that specifies the attribute definition that contains the attribute facet name and attribute name.</p>"
     },
     "FacetAttributeType":{
       "type":"string",
@@ -2462,7 +2822,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Occurs when deleting a facet that contains an attribute which is a target to an attribute reference in a different facet.</p>",
+      "documentation":"<p>Occurs when deleting a facet that contains an attribute that is a target to an attribute reference in a different facet.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -2490,7 +2850,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>The <a>Facet</a> you provided was not well formed or could not be validated with the schema.</p>",
+      "documentation":"<p>The <a>Facet</a> that you provided was not well formed or could not be validated with the schema.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -2525,7 +2885,7 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Facet</a>. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Facet</a>. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
@@ -2540,7 +2900,7 @@
       "members":{
         "Facet":{
           "shape":"Facet",
-          "documentation":"<p> <a>Facet</a> structure associated with the facet.</p>"
+          "documentation":"<p>The <a>Facet</a> structure that is associated with the facet.</p>"
         }
       }
     },
@@ -2607,6 +2967,34 @@
         }
       }
     },
+    "GetTypedLinkFacetInformationRequest":{
+      "type":"structure",
+      "required":[
+        "SchemaArn",
+        "Name"
+      ],
+      "members":{
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "Name":{
+          "shape":"TypedLinkName",
+          "documentation":"<p>The unique name of the typed link facet.</p>"
+        }
+      }
+    },
+    "GetTypedLinkFacetInformationResponse":{
+      "type":"structure",
+      "members":{
+        "IdentityAttributeOrder":{
+          "shape":"AttributeNameList",
+          "documentation":"<p>A range filter that you provide for multiple attributes. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.</p>"
+        }
+      }
+    },
     "IndexAttachment":{
       "type":"structure",
       "members":{
@@ -2657,7 +3045,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates that an attempt to attach an object with the same link name or to apply a schema with same name has occurred. Rename the link or the schema and then try again.</p>",
+      "documentation":"<p>Indicates that an attempt to attach an object with the same link name or to apply a schema with the same name has occurred. Rename the link or the schema and then try again.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -2711,13 +3099,15 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates limits are exceeded. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html\">Limits</a> for more information.</p>",
+      "documentation":"<p>Indicates that limits are exceeded. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html\">Limits</a> for more information.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
     "LinkName":{
       "type":"string",
-      "max":64
+      "max":64,
+      "min":1,
+      "pattern":"[^\\/\\[\\]\\(\\):\\{\\}#@!?\\s\\\\;]+"
     },
     "LinkNameAlreadyInUseException":{
       "type":"structure",
@@ -2859,7 +3249,7 @@
       "members":{
         "Directories":{
           "shape":"DirectoryList",
-          "documentation":"<p>Lists all directories associated with your account in pagination fashion.</p>"
+          "documentation":"<p>Lists all directories that are associated with your account in pagination fashion.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -2913,7 +3303,7 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>The ARN to retrieve facet names from.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) to retrieve facet names from.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
@@ -2923,7 +3313,7 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>The maximum number of results to retrieve</p>"
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
         }
       }
     },
@@ -2933,6 +3323,58 @@
         "FacetNames":{
           "shape":"FacetNameList",
           "documentation":"<p>The names of facets that exist within the schema.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      }
+    },
+    "ListIncomingTypedLinksRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryArn",
+        "ObjectReference"
+      ],
+      "members":{
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the directory where you want to list the typed links.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Reference that identifies the object whose attributes will be listed.</p>"
+        },
+        "FilterAttributeRanges":{
+          "shape":"TypedLinkAttributeRangeList",
+          "documentation":"<p>Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.</p>"
+        },
+        "FilterTypedLink":{
+          "shape":"TypedLinkSchemaAndFacetName",
+          "documentation":"<p>Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        },
+        "ConsistencyLevel":{
+          "shape":"ConsistencyLevel",
+          "documentation":"<p>The consistency level to execute the request at.</p>"
+        }
+      }
+    },
+    "ListIncomingTypedLinksResponse":{
+      "type":"structure",
+      "members":{
+        "LinkSpecifiers":{
+          "shape":"TypedLinkSpecifierList",
+          "documentation":"<p>Returns a typed link specifier as output.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -2999,13 +3441,13 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "ObjectReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference that identifies the object whose attributes will be listed.</p>"
+          "documentation":"<p>The reference that identifies the object whose attributes will be listed.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3013,7 +3455,7 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+          "documentation":"<p>The maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         },
         "ConsistencyLevel":{
           "shape":"ConsistencyLevel",
@@ -3023,7 +3465,7 @@
         },
         "FacetFilter":{
           "shape":"SchemaFacet",
-          "documentation":"<p>Used to filter the list of object attributes associated with a certain facet.</p>"
+          "documentation":"<p>Used to filter the list of object attributes that are associated with a certain facet.</p>"
         }
       }
     },
@@ -3032,7 +3474,7 @@
       "members":{
         "Attributes":{
           "shape":"AttributeKeyAndValueList",
-          "documentation":"<p>Attributes map associated with the object. AttributeArn is the key, and attribute value is the value.</p>"
+          "documentation":"<p>Attributes map that is associated with the object. <code>AttributeArn</code> is the key, and attribute value is the value.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3049,13 +3491,13 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "ObjectReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference that identifies the object for which child objects are being listed.</p>"
+          "documentation":"<p>The reference that identifies the object for which child objects are being listed.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3063,7 +3505,7 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+          "documentation":"<p>The maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         },
         "ConsistencyLevel":{
           "shape":"ConsistencyLevel",
@@ -3078,7 +3520,7 @@
       "members":{
         "Children":{
           "shape":"LinkNameToObjectIdentifierMap",
-          "documentation":"<p>Children structure, which is a map with key as the LinkName and <code>ObjectIdentifier</code> as the value.</p>"
+          "documentation":"<p>Children structure, which is a map with key as the <code>LinkName</code> and <code>ObjectIdentifier</code> as the value.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3101,7 +3543,7 @@
         },
         "ObjectReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference that identifies the object whose parent paths are listed.</p>"
+          "documentation":"<p>The reference that identifies the object whose parent paths are listed.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3109,7 +3551,7 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+          "documentation":"<p>The maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         }
       }
     },
@@ -3118,7 +3560,7 @@
       "members":{
         "PathToObjectIdentifiersList":{
           "shape":"PathToObjectIdentifiersList",
-          "documentation":"<p>Returns the path to the <code>ObjectIdentifiers</code> associated with the directory.</p>"
+          "documentation":"<p>Returns the path to the <code>ObjectIdentifiers</code> that are associated with the directory.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3135,13 +3577,13 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "ObjectReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference that identifies the object for which parent objects are being listed.</p>"
+          "documentation":"<p>The reference that identifies the object for which parent objects are being listed.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3149,7 +3591,7 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+          "documentation":"<p>The maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         },
         "ConsistencyLevel":{
           "shape":"ConsistencyLevel",
@@ -3164,7 +3606,7 @@
       "members":{
         "Parents":{
           "shape":"ObjectIdentifierToLinkNameMap",
-          "documentation":"<p>Parent structure, which is a map with key as the <code>ObjectIdentifier</code> and LinkName as the value.</p>"
+          "documentation":"<p>The parent structure, which is a map with key as the <code>ObjectIdentifier</code> and LinkName as the value.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3181,7 +3623,7 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where objects reside. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where objects reside. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
@@ -3195,7 +3637,7 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+          "documentation":"<p>The maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         },
         "ConsistencyLevel":{
           "shape":"ConsistencyLevel",
@@ -3210,7 +3652,59 @@
       "members":{
         "AttachedPolicyIds":{
           "shape":"ObjectIdentifierList",
-          "documentation":"<p>List of policy <code>ObjectIdentifiers</code>, that are attached to the object.</p>"
+          "documentation":"<p>A list of policy <code>ObjectIdentifiers</code>, that are attached to the object.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      }
+    },
+    "ListOutgoingTypedLinksRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryArn",
+        "ObjectReference"
+      ],
+      "members":{
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the directory where you want to list the typed links.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>A reference that identifies the object whose attributes will be listed.</p>"
+        },
+        "FilterAttributeRanges":{
+          "shape":"TypedLinkAttributeRangeList",
+          "documentation":"<p>Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.</p>"
+        },
+        "FilterTypedLink":{
+          "shape":"TypedLinkSchemaAndFacetName",
+          "documentation":"<p>Filters are interpreted in the order of the attributes defined on the typed link facet, not the order they are supplied to any API calls.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        },
+        "ConsistencyLevel":{
+          "shape":"ConsistencyLevel",
+          "documentation":"<p>The consistency level to execute the request at.</p>"
+        }
+      }
+    },
+    "ListOutgoingTypedLinksResponse":{
+      "type":"structure",
+      "members":{
+        "TypedLinkSpecifiers":{
+          "shape":"TypedLinkSpecifierList",
+          "documentation":"<p>Returns a typed link specifier as output.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3227,13 +3721,13 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where objects reside. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where objects reside. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "PolicyReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference that identifies the policy object.</p>"
+          "documentation":"<p>The reference that identifies the policy object.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3241,7 +3735,7 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+          "documentation":"<p>The maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         },
         "ConsistencyLevel":{
           "shape":"ConsistencyLevel",
@@ -3256,7 +3750,7 @@
       "members":{
         "ObjectIdentifiers":{
           "shape":"ObjectIdentifierList",
-          "documentation":"<p>List of <code>ObjectIdentifiers</code> to which the policy is attached.</p>"
+          "documentation":"<p>A list of <code>ObjectIdentifiers</code> to which the policy is attached.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3296,7 +3790,7 @@
       "members":{
         "ResourceArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN of the resource. Tagging is only supported for directories.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3304,7 +3798,7 @@
         },
         "MaxResults":{
           "shape":"TagsNumberResults",
-          "documentation":"<p>The MaxResults parameter sets the maximum number of results returned in a single page. This is for future use and is not supported currently.</p>"
+          "documentation":"<p>The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. This is for future use and is not supported currently.</p>"
         }
       }
     },
@@ -3313,11 +3807,84 @@
       "members":{
         "Tags":{
           "shape":"TagList",
-          "documentation":"<p>List of tag key value pairs associated with the response.</p>"
+          "documentation":"<p>A list of tag key value pairs that are associated with the response.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
           "documentation":"<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+        }
+      }
+    },
+    "ListTypedLinkFacetAttributesRequest":{
+      "type":"structure",
+      "required":[
+        "SchemaArn",
+        "Name"
+      ],
+      "members":{
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "Name":{
+          "shape":"TypedLinkName",
+          "documentation":"<p>The unique name of the typed link facet.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        }
+      }
+    },
+    "ListTypedLinkFacetAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "Attributes":{
+          "shape":"TypedLinkAttributeDefinitionList",
+          "documentation":"<p>An ordered set of attributes associate with the typed link.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      }
+    },
+    "ListTypedLinkFacetNamesRequest":{
+      "type":"structure",
+      "required":["SchemaArn"],
+      "members":{
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        }
+      }
+    },
+    "ListTypedLinkFacetNamesResponse":{
+      "type":"structure",
+      "members":{
+        "FacetNames":{
+          "shape":"TypedLinkNameList",
+          "documentation":"<p>The names of typed link facets that exist within the schema.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
         }
       }
     },
@@ -3330,7 +3897,7 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a>. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
@@ -3344,7 +3911,7 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
+          "documentation":"<p>The maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         }
       }
     },
@@ -3353,7 +3920,7 @@
       "members":{
         "PolicyToPathList":{
           "shape":"PolicyToPathList",
-          "documentation":"<p>Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>.</p>"
+          "documentation":"<p>Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies\">Policies</a>.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -3367,7 +3934,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates the requested operation can only operate on index objects.</p>",
+      "documentation":"<p>Indicates that the requested operation can only operate on index objects.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3376,7 +3943,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Occurs when any invalid operations are performed on an object which is not a node, such as calling <code>ListObjectChildren</code> for a leaf node object.</p>",
+      "documentation":"<p>Occurs when any invalid operations are performed on an object that is not a node, such as calling <code>ListObjectChildren</code> for a leaf node object.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3385,7 +3952,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates the requested operation can only operate on policy objects.</p>",
+      "documentation":"<p>Indicates that the requested operation can only operate on policy objects.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3399,7 +3966,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates the object is not attached to the index.</p>",
+      "documentation":"<p>Indicates that the object is not attached to the index.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3408,7 +3975,7 @@
       "members":{
         "ObjectAttributeActionType":{
           "shape":"UpdateActionType",
-          "documentation":"<p>Type can be either Update or Delete.</p>"
+          "documentation":"<p>A type that can be either <code>Update</code> or <code>Delete</code>.</p>"
         },
         "ObjectAttributeUpdateValue":{
           "shape":"TypedAttributeValue",
@@ -3422,7 +3989,7 @@
       "members":{
         "AttributeKey":{
           "shape":"AttributeKey",
-          "documentation":"<p>The key of the attribute the attribute range covers.</p>"
+          "documentation":"<p>The key of the attribute that the attribute range covers.</p>"
         },
         "Range":{
           "shape":"TypedAttributeValueRange",
@@ -3468,7 +4035,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates the requested operation cannot be completed because the object has not been detached from the tree.</p>",
+      "documentation":"<p>Indicates that the requested operation cannot be completed because the object has not been detached from the tree.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3477,10 +4044,10 @@
       "members":{
         "Selector":{
           "shape":"SelectorObjectReference",
-          "documentation":"<p>Allows you to specify an object. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - Identifies the object by <code>ObjectIdentifier</code> </p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>"
+          "documentation":"<p>A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects\">Accessing Objects</a>. You can identify an object in one of the following ways:</p> <ul> <li> <p> <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier</p> </li> <li> <p> <i>/some/path</i> - Identifies the object based on path</p> </li> <li> <p> <i>#SomeBatchReference</i> - Identifies the object in a batch call</p> </li> </ul>"
         }
       },
-      "documentation":"<p>Reference that identifies an object.</p>"
+      "documentation":"<p>The reference that identifies an object.</p>"
     },
     "ObjectType":{
       "type":"string",
@@ -3497,14 +4064,14 @@
       "members":{
         "Path":{
           "shape":"PathString",
-          "documentation":"<p>The path used to identify the object starting from directory root.</p>"
+          "documentation":"<p>The path that is used to identify the object starting from directory root.</p>"
         },
         "ObjectIdentifiers":{
           "shape":"ObjectIdentifierList",
           "documentation":"<p>Lists <code>ObjectIdentifiers</code> starting from directory root to the object in the request.</p>"
         }
       },
-      "documentation":"<p>Returns the path to the <code>ObjectIdentifiers</code> associated with the directory.</p>"
+      "documentation":"<p>Returns the path to the <code>ObjectIdentifiers</code> that is associated with the directory.</p>"
     },
     "PathToObjectIdentifiersList":{
       "type":"list",
@@ -3519,14 +4086,14 @@
         },
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The <code>ObjectIdentifier</code> associated with <code>PolicyAttachment</code>.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> that is associated with <code>PolicyAttachment</code>.</p>"
         },
         "PolicyType":{
           "shape":"PolicyType",
           "documentation":"<p>The type of policy that can be associated with <code>PolicyAttachment</code>.</p>"
         }
       },
-      "documentation":"<p>Contains the <code>PolicyType</code>, <code>PolicyId</code>, and the <code>ObjectIdentifier</code> to which it is attached.</p>"
+      "documentation":"<p>Contains the <code>PolicyType</code>, <code>PolicyId</code>, and the <code>ObjectIdentifier</code> to which it is attached. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies\">Policies</a>.</p>"
     },
     "PolicyAttachmentList":{
       "type":"list",
@@ -3544,7 +4111,7 @@
           "documentation":"<p>List of policy objects.</p>"
         }
       },
-      "documentation":"<p>Used when a regular object exists in a <a>Directory</a> and you want to find all of the policies associated with that object and the parent to that object.</p>"
+      "documentation":"<p>Used when a regular object exists in a <a>Directory</a> and you want to find all of the policies that are associated with that object and the parent to that object.</p>"
     },
     "PolicyToPathList":{
       "type":"list",
@@ -3560,17 +4127,17 @@
       "members":{
         "DevelopmentSchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the development schema. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the development schema. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "Version":{
           "shape":"Version",
-          "documentation":"<p>Version under which the schema will be published.</p>"
+          "documentation":"<p>The version under which the schema will be published.</p>"
         },
         "Name":{
           "shape":"SchemaName",
-          "documentation":"<p>New name under which the schema will be published. If this is not provided, the development schema is considered.</p>"
+          "documentation":"<p>The new name under which the schema will be published. If this is not provided, the development schema is considered.</p>"
         }
       }
     },
@@ -3579,7 +4146,7 @@
       "members":{
         "PublishedSchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the published schema. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>The ARN that is associated with the published schema. For more information, see <a>arns</a>.</p>"
         }
       }
     },
@@ -3684,10 +4251,10 @@
         },
         "Parameters":{
           "shape":"RuleParameterMap",
-          "documentation":"<p>Min and max parameters associated with the rule.</p>"
+          "documentation":"<p>The minimum and maximum parameters that are associated with the rule.</p>"
         }
       },
-      "documentation":"<p>Contains an ARN and parameters associated with the rule.</p>"
+      "documentation":"<p>Contains an Amazon Resource Name (ARN) and parameters that are associated with the rule.</p>"
     },
     "RuleKey":{
       "type":"string",
@@ -3730,7 +4297,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates a schema is already published.</p>",
+      "documentation":"<p>Indicates that a schema is already published.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3775,14 +4342,14 @@
       "members":{
         "Key":{
           "shape":"TagKey",
-          "documentation":"<p>Key associated with the tag.</p>"
+          "documentation":"<p>The key that is associated with the tag.</p>"
         },
         "Value":{
           "shape":"TagValue",
-          "documentation":"<p>Value associated with the tag.</p>"
+          "documentation":"<p>The value that is associated with the tag.</p>"
         }
       },
-      "documentation":"<p>Tag structure which contains tag key and value.</p>"
+      "documentation":"<p>The tag structure that contains a tag key and value.</p>"
     },
     "TagKey":{"type":"string"},
     "TagKeyList":{
@@ -3802,11 +4369,11 @@
       "members":{
         "ResourceArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN of the resource. Tagging is only supported for directories.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.</p>"
         },
         "Tags":{
           "shape":"TagList",
-          "documentation":"<p>List of tag key value pairs.</p>"
+          "documentation":"<p>A list of tag key-value pairs.</p>"
         }
       }
     },
@@ -3855,7 +4422,7 @@
       "members":{
         "StartMode":{
           "shape":"RangeMode",
-          "documentation":"<p>Inclusive or exclusive range start.</p>"
+          "documentation":"<p>The inclusive or exclusive range start.</p>"
         },
         "StartValue":{
           "shape":"TypedAttributeValue",
@@ -3863,7 +4430,7 @@
         },
         "EndMode":{
           "shape":"RangeMode",
-          "documentation":"<p>Inclusive or exclusive range end.</p>"
+          "documentation":"<p>The inclusive or exclusive range end.</p>"
         },
         "EndValue":{
           "shape":"TypedAttributeValue",
@@ -3872,12 +4439,173 @@
       },
       "documentation":"<p>A range of attribute values.</p>"
     },
+    "TypedLinkAttributeDefinition":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Type",
+        "RequiredBehavior"
+      ],
+      "members":{
+        "Name":{
+          "shape":"AttributeName",
+          "documentation":"<p>The unique name of the typed link attribute.</p>"
+        },
+        "Type":{
+          "shape":"FacetAttributeType",
+          "documentation":"<p>The type of the attribute.</p>"
+        },
+        "DefaultValue":{
+          "shape":"TypedAttributeValue",
+          "documentation":"<p>The default value of the attribute (if configured).</p>"
+        },
+        "IsImmutable":{
+          "shape":"Bool",
+          "documentation":"<p>Whether the attribute is mutable or not.</p>"
+        },
+        "Rules":{
+          "shape":"RuleMap",
+          "documentation":"<p>Validation rules that are attached to the attribute definition.</p>"
+        },
+        "RequiredBehavior":{
+          "shape":"RequiredAttributeBehavior",
+          "documentation":"<p>The required behavior of the <code>TypedLinkAttributeDefinition</code>.</p>"
+        }
+      },
+      "documentation":"<p>A typed link attribute definition.</p>"
+    },
+    "TypedLinkAttributeDefinitionList":{
+      "type":"list",
+      "member":{"shape":"TypedLinkAttributeDefinition"}
+    },
+    "TypedLinkAttributeRange":{
+      "type":"structure",
+      "required":["Range"],
+      "members":{
+        "AttributeName":{
+          "shape":"AttributeName",
+          "documentation":"<p>The unique name of the typed link attribute.</p>"
+        },
+        "Range":{
+          "shape":"TypedAttributeValueRange",
+          "documentation":"<p>The range of attribute values that are being selected.</p>"
+        }
+      },
+      "documentation":"<p>Identifies the range of attributes that are used by a specified filter.</p>"
+    },
+    "TypedLinkAttributeRangeList":{
+      "type":"list",
+      "member":{"shape":"TypedLinkAttributeRange"}
+    },
+    "TypedLinkFacet":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Attributes",
+        "IdentityAttributeOrder"
+      ],
+      "members":{
+        "Name":{
+          "shape":"TypedLinkName",
+          "documentation":"<p>The unique name of the typed link facet.</p>"
+        },
+        "Attributes":{
+          "shape":"TypedLinkAttributeDefinitionList",
+          "documentation":"<p>An ordered set of attributes that are associate with the typed link. You can use typed link attributes when you need to represent the relationship between two objects or allow for quick filtering of incoming or outgoing typed links.</p>"
+        },
+        "IdentityAttributeOrder":{
+          "shape":"AttributeNameList",
+          "documentation":"<p>A range filter that you provide for multiple attributes. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.</p>"
+        }
+      },
+      "documentation":"<p>Defines the typed links structure and its attributes. To create a typed link facet, use the <a>CreateTypedLinkFacet</a> API.</p>"
+    },
+    "TypedLinkFacetAttributeUpdate":{
+      "type":"structure",
+      "required":[
+        "Attribute",
+        "Action"
+      ],
+      "members":{
+        "Attribute":{
+          "shape":"TypedLinkAttributeDefinition",
+          "documentation":"<p>The attribute to update.</p>"
+        },
+        "Action":{
+          "shape":"UpdateActionType",
+          "documentation":"<p>The action to perform when updating the attribute.</p>"
+        }
+      },
+      "documentation":"<p>A typed link facet attribute update.</p>"
+    },
+    "TypedLinkFacetAttributeUpdateList":{
+      "type":"list",
+      "member":{"shape":"TypedLinkFacetAttributeUpdate"}
+    },
+    "TypedLinkName":{
+      "type":"string",
+      "pattern":"^[a-zA-Z0-9._-]*$"
+    },
+    "TypedLinkNameList":{
+      "type":"list",
+      "member":{"shape":"TypedLinkName"}
+    },
+    "TypedLinkSchemaAndFacetName":{
+      "type":"structure",
+      "required":[
+        "SchemaArn",
+        "TypedLinkName"
+      ],
+      "members":{
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.</p>"
+        },
+        "TypedLinkName":{
+          "shape":"TypedLinkName",
+          "documentation":"<p>The unique name of the typed link facet.</p>"
+        }
+      },
+      "documentation":"<p>Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.</p>"
+    },
+    "TypedLinkSpecifier":{
+      "type":"structure",
+      "required":[
+        "TypedLinkFacet",
+        "SourceObjectReference",
+        "TargetObjectReference",
+        "IdentityAttributeValues"
+      ],
+      "members":{
+        "TypedLinkFacet":{
+          "shape":"TypedLinkSchemaAndFacetName",
+          "documentation":"<p>Identifies the typed link facet that is associated with the typed link.</p>"
+        },
+        "SourceObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Identifies the source object that the typed link will attach to.</p>"
+        },
+        "TargetObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Identifies the target object that the typed link will attach to.</p>"
+        },
+        "IdentityAttributeValues":{
+          "shape":"AttributeNameAndValueList",
+          "documentation":"<p>Identifies the attribute value to update.</p>"
+        }
+      },
+      "documentation":"<p>Contains all the information that is used to uniquely identify a typed link. The parameters discussed in this topic are used to uniquely specify the typed link being operated on. The <a>AttachTypedLink</a> API returns a typed link specifier while the <a>DetachTypedLink</a> API accepts one as input. Similarly, the <a>ListIncomingTypedLinks</a> and <a>ListOutgoingTypedLinks</a> API operations provide typed link specifiers as output. You can also construct a typed link specifier from scratch.</p>"
+    },
+    "TypedLinkSpecifierList":{
+      "type":"list",
+      "member":{"shape":"TypedLinkSpecifier"}
+    },
     "UnsupportedIndexTypeException":{
       "type":"structure",
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates the requested index type is not supported.</p>",
+      "documentation":"<p>Indicates that the requested index type is not supported.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3890,11 +4618,11 @@
       "members":{
         "ResourceArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN of the resource. Tagging is only supported for directories.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.</p>"
         },
         "TagKeys":{
           "shape":"TagKeyList",
-          "documentation":"<p>Keys of the tag that needs to be removed from the resource.</p>"
+          "documentation":"<p>Keys of the tag that need to be removed from the resource.</p>"
         }
       }
     },
@@ -3919,21 +4647,21 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Facet</a>. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Facet</a>. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "Name":{
           "shape":"FacetName",
-          "documentation":"<p> </p>"
+          "documentation":"<p>The name of the facet.</p>"
         },
         "AttributeUpdates":{
           "shape":"FacetAttributeUpdateList",
-          "documentation":"<p>List of attributes that need to be updated in a given schema <a>Facet</a>. Each attribute is followed by AttributeAction, which specifies the type of update operation to perform. </p>"
+          "documentation":"<p>List of attributes that need to be updated in a given schema <a>Facet</a>. Each attribute is followed by <code>AttributeAction</code>, which specifies the type of update operation to perform. </p>"
         },
         "ObjectType":{
           "shape":"ObjectType",
-          "documentation":"<p>Object type associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.</p>"
+          "documentation":"<p>The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.</p>"
         }
       }
     },
@@ -3952,17 +4680,17 @@
       "members":{
         "DirectoryArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where the object resides. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "ObjectReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>Reference that identifies the object.</p>"
+          "documentation":"<p>The reference that identifies the object.</p>"
         },
         "AttributeUpdates":{
           "shape":"ObjectAttributeUpdateList",
-          "documentation":"<p>Attributes update structure.</p>"
+          "documentation":"<p>The attributes update structure.</p>"
         }
       }
     },
@@ -3971,7 +4699,7 @@
       "members":{
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p> <code>ObjectIdentifier</code> of the updated object.</p>"
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the updated object.</p>"
         }
       }
     },
@@ -3984,13 +4712,13 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN of the development schema. For more information, see <a>arns</a>.</p>",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the development schema. For more information, see <a>arns</a>.</p>",
           "location":"header",
           "locationName":"x-amz-data-partition"
         },
         "Name":{
           "shape":"SchemaName",
-          "documentation":"<p>Name of the schema.</p>"
+          "documentation":"<p>The name of the schema.</p>"
         }
       }
     },
@@ -3999,8 +4727,42 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>ARN associated with the updated schema. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>The ARN that is associated with the updated schema. For more information, see <a>arns</a>.</p>"
         }
+      }
+    },
+    "UpdateTypedLinkFacetRequest":{
+      "type":"structure",
+      "required":[
+        "SchemaArn",
+        "Name",
+        "AttributeUpdates",
+        "IdentityAttributeOrder"
+      ],
+      "members":{
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the schema. For more information, see <a>arns</a>.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "Name":{
+          "shape":"TypedLinkName",
+          "documentation":"<p>The unique name of the typed link facet.</p>"
+        },
+        "AttributeUpdates":{
+          "shape":"TypedLinkFacetAttributeUpdateList",
+          "documentation":"<p>Attributes update structure.</p>"
+        },
+        "IdentityAttributeOrder":{
+          "shape":"AttributeNameList",
+          "documentation":"<p>A range filter that you provide for multiple attributes. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.</p>"
+        }
+      }
+    },
+    "UpdateTypedLinkFacetResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "ValidationException":{
@@ -4008,7 +4770,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>Indicates your request is malformed in some manner. See the exception message.</p>",
+      "documentation":"<p>Indicates that your request is malformed in some manner. See the exception message.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -4019,5 +4781,5 @@
       "pattern":"^[a-zA-Z0-9._-]*$"
     }
   },
-  "documentation":"<fullname>Amazon Cloud Directory</fullname> <p>Amazon Cloud Directory is a component of the AWS Directory Service that simplifies the development and management of cloud-scale web, mobile and IoT applications. This guide describes the Cloud Directory operations that you can call programatically and includes detailed information on data types and errors. For information about AWS Directory Services features, see <a href=\"https://aws.amazon.com/directoryservice/\">AWS Directory Service</a> and the <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html\">AWS Directory Service Administration Guide</a>.</p>"
+  "documentation":"<fullname>Amazon Cloud Directory</fullname> <p>Amazon Cloud Directory is a component of the AWS Directory Service that simplifies the development and management of cloud-scale web, mobile, and IoT applications. This guide describes the Cloud Directory operations that you can call programmatically and includes detailed information on data types and errors. For information about AWS Directory Services features, see <a href=\"https://aws.amazon.com/directoryservice/\">AWS Directory Service</a> and the <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html\">AWS Directory Service Administration Guide</a>.</p>"
 }

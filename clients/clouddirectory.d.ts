@@ -20,11 +20,11 @@ declare class CloudDirectory extends Service {
    */
   addFacetToObject(callback?: (err: AWSError, data: CloudDirectory.Types.AddFacetToObjectResponse) => void): Request<CloudDirectory.Types.AddFacetToObjectResponse, AWSError>;
   /**
-   * Copies input published schema into Directory with same name and version as that of published schema .
+   * Copies the input published schema into the Directory with the same name and version as that of the published schema .
    */
   applySchema(params: CloudDirectory.Types.ApplySchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ApplySchemaResponse) => void): Request<CloudDirectory.Types.ApplySchemaResponse, AWSError>;
   /**
-   * Copies input published schema into Directory with same name and version as that of published schema .
+   * Copies the input published schema into the Directory with the same name and version as that of the published schema .
    */
   applySchema(callback?: (err: AWSError, data: CloudDirectory.Types.ApplySchemaResponse) => void): Request<CloudDirectory.Types.ApplySchemaResponse, AWSError>;
   /**
@@ -51,6 +51,14 @@ declare class CloudDirectory extends Service {
    * Attaches the specified object to the specified index.
    */
   attachToIndex(callback?: (err: AWSError, data: CloudDirectory.Types.AttachToIndexResponse) => void): Request<CloudDirectory.Types.AttachToIndexResponse, AWSError>;
+  /**
+   * Attaches a typed link to a specified source and target object. For more information, see Typed link.
+   */
+  attachTypedLink(params: CloudDirectory.Types.AttachTypedLinkRequest, callback?: (err: AWSError, data: CloudDirectory.Types.AttachTypedLinkResponse) => void): Request<CloudDirectory.Types.AttachTypedLinkResponse, AWSError>;
+  /**
+   * Attaches a typed link to a specified source and target object. For more information, see Typed link.
+   */
+  attachTypedLink(callback?: (err: AWSError, data: CloudDirectory.Types.AttachTypedLinkResponse) => void): Request<CloudDirectory.Types.AttachTypedLinkResponse, AWSError>;
   /**
    * Performs all the read operations in a batch. 
    */
@@ -108,6 +116,14 @@ declare class CloudDirectory extends Service {
    */
   createSchema(callback?: (err: AWSError, data: CloudDirectory.Types.CreateSchemaResponse) => void): Request<CloudDirectory.Types.CreateSchemaResponse, AWSError>;
   /**
+   * Creates a TypedLinkFacet. For more information, see Typed link.
+   */
+  createTypedLinkFacet(params: CloudDirectory.Types.CreateTypedLinkFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.CreateTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.CreateTypedLinkFacetResponse, AWSError>;
+  /**
+   * Creates a TypedLinkFacet. For more information, see Typed link.
+   */
+  createTypedLinkFacet(callback?: (err: AWSError, data: CloudDirectory.Types.CreateTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.CreateTypedLinkFacetResponse, AWSError>;
+  /**
    * Deletes a directory. Only disabled directories can be deleted. A deleted directory cannot be undone. Exercise extreme caution when deleting directories.
    */
   deleteDirectory(params: CloudDirectory.Types.DeleteDirectoryRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteDirectoryResponse) => void): Request<CloudDirectory.Types.DeleteDirectoryResponse, AWSError>;
@@ -116,11 +132,11 @@ declare class CloudDirectory extends Service {
    */
   deleteDirectory(callback?: (err: AWSError, data: CloudDirectory.Types.DeleteDirectoryResponse) => void): Request<CloudDirectory.Types.DeleteDirectoryResponse, AWSError>;
   /**
-   * Deletes a given Facet. All attributes and Rules associated with the facet will be deleted. Only development schema facets are allowed deletion.
+   * Deletes a given Facet. All attributes and Rules that are associated with the facet will be deleted. Only development schema facets are allowed deletion.
    */
   deleteFacet(params: CloudDirectory.Types.DeleteFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteFacetResponse) => void): Request<CloudDirectory.Types.DeleteFacetResponse, AWSError>;
   /**
-   * Deletes a given Facet. All attributes and Rules associated with the facet will be deleted. Only development schema facets are allowed deletion.
+   * Deletes a given Facet. All attributes and Rules that are associated with the facet will be deleted. Only development schema facets are allowed deletion.
    */
   deleteFacet(callback?: (err: AWSError, data: CloudDirectory.Types.DeleteFacetResponse) => void): Request<CloudDirectory.Types.DeleteFacetResponse, AWSError>;
   /**
@@ -139,6 +155,14 @@ declare class CloudDirectory extends Service {
    * Deletes a given schema. Schemas in a development and published state can only be deleted. 
    */
   deleteSchema(callback?: (err: AWSError, data: CloudDirectory.Types.DeleteSchemaResponse) => void): Request<CloudDirectory.Types.DeleteSchemaResponse, AWSError>;
+  /**
+   * Deletes a TypedLinkFacet. For more information, see Typed link.
+   */
+  deleteTypedLinkFacet(params: CloudDirectory.Types.DeleteTypedLinkFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.DeleteTypedLinkFacetResponse, AWSError>;
+  /**
+   * Deletes a TypedLinkFacet. For more information, see Typed link.
+   */
+  deleteTypedLinkFacet(callback?: (err: AWSError, data: CloudDirectory.Types.DeleteTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.DeleteTypedLinkFacetResponse, AWSError>;
   /**
    * Detaches the specified object from the specified index.
    */
@@ -164,6 +188,14 @@ declare class CloudDirectory extends Service {
    */
   detachPolicy(callback?: (err: AWSError, data: CloudDirectory.Types.DetachPolicyResponse) => void): Request<CloudDirectory.Types.DetachPolicyResponse, AWSError>;
   /**
+   * Detaches a typed link from a specified source and target object. For more information, see Typed link.
+   */
+  detachTypedLink(params: CloudDirectory.Types.DetachTypedLinkRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Detaches a typed link from a specified source and target object. For more information, see Typed link.
+   */
+  detachTypedLink(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Disables the specified directory. Disabled directories cannot be read or written to. Only enabled directories can be disabled. Disabled directories may be reenabled.
    */
   disableDirectory(params: CloudDirectory.Types.DisableDirectoryRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DisableDirectoryResponse) => void): Request<CloudDirectory.Types.DisableDirectoryResponse, AWSError>;
@@ -188,11 +220,11 @@ declare class CloudDirectory extends Service {
    */
   getDirectory(callback?: (err: AWSError, data: CloudDirectory.Types.GetDirectoryResponse) => void): Request<CloudDirectory.Types.GetDirectoryResponse, AWSError>;
   /**
-   * Gets details of the Facet, such as Facet Name, Attributes, Rules, or ObjectType. You can call this on all kinds of schema facets -- published, development, or applied.
+   * Gets details of the Facet, such as facet name, attributes, Rules, or ObjectType. You can call this on all kinds of schema facets -- published, development, or applied.
    */
   getFacet(params: CloudDirectory.Types.GetFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetFacetResponse) => void): Request<CloudDirectory.Types.GetFacetResponse, AWSError>;
   /**
-   * Gets details of the Facet, such as Facet Name, Attributes, Rules, or ObjectType. You can call this on all kinds of schema facets -- published, development, or applied.
+   * Gets details of the Facet, such as facet name, attributes, Rules, or ObjectType. You can call this on all kinds of schema facets -- published, development, or applied.
    */
   getFacet(callback?: (err: AWSError, data: CloudDirectory.Types.GetFacetResponse) => void): Request<CloudDirectory.Types.GetFacetResponse, AWSError>;
   /**
@@ -212,6 +244,14 @@ declare class CloudDirectory extends Service {
    */
   getSchemaAsJson(callback?: (err: AWSError, data: CloudDirectory.Types.GetSchemaAsJsonResponse) => void): Request<CloudDirectory.Types.GetSchemaAsJsonResponse, AWSError>;
   /**
+   * Returns the identity attribute order for a specific TypedLinkFacet. For more information, see Typed link.
+   */
+  getTypedLinkFacetInformation(params: CloudDirectory.Types.GetTypedLinkFacetInformationRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetTypedLinkFacetInformationResponse) => void): Request<CloudDirectory.Types.GetTypedLinkFacetInformationResponse, AWSError>;
+  /**
+   * Returns the identity attribute order for a specific TypedLinkFacet. For more information, see Typed link.
+   */
+  getTypedLinkFacetInformation(callback?: (err: AWSError, data: CloudDirectory.Types.GetTypedLinkFacetInformationResponse) => void): Request<CloudDirectory.Types.GetTypedLinkFacetInformationResponse, AWSError>;
+  /**
    * Lists schemas applied to a directory.
    */
   listAppliedSchemaArns(params: CloudDirectory.Types.ListAppliedSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListAppliedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListAppliedSchemaArnsResponse, AWSError>;
@@ -228,11 +268,11 @@ declare class CloudDirectory extends Service {
    */
   listAttachedIndices(callback?: (err: AWSError, data: CloudDirectory.Types.ListAttachedIndicesResponse) => void): Request<CloudDirectory.Types.ListAttachedIndicesResponse, AWSError>;
   /**
-   * Retrieves the ARNs of schemas in the development state.
+   * Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
    */
   listDevelopmentSchemaArns(params: CloudDirectory.Types.ListDevelopmentSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListDevelopmentSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListDevelopmentSchemaArnsResponse, AWSError>;
   /**
-   * Retrieves the ARNs of schemas in the development state.
+   * Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
    */
   listDevelopmentSchemaArns(callback?: (err: AWSError, data: CloudDirectory.Types.ListDevelopmentSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListDevelopmentSchemaArnsResponse, AWSError>;
   /**
@@ -260,6 +300,14 @@ declare class CloudDirectory extends Service {
    */
   listFacetNames(callback?: (err: AWSError, data: CloudDirectory.Types.ListFacetNamesResponse) => void): Request<CloudDirectory.Types.ListFacetNamesResponse, AWSError>;
   /**
+   * Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
+   */
+  listIncomingTypedLinks(params: CloudDirectory.Types.ListIncomingTypedLinksRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListIncomingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListIncomingTypedLinksResponse, AWSError>;
+  /**
+   * Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
+   */
+  listIncomingTypedLinks(callback?: (err: AWSError, data: CloudDirectory.Types.ListIncomingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListIncomingTypedLinksResponse, AWSError>;
+  /**
    * Lists objects attached to the specified index.
    */
   listIndex(params: CloudDirectory.Types.ListIndexRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
@@ -268,35 +316,35 @@ declare class CloudDirectory extends Service {
    */
   listIndex(callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
   /**
-   * Lists all attributes associated with an object. 
+   * Lists all attributes that are associated with an object. 
    */
   listObjectAttributes(params: CloudDirectory.Types.ListObjectAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectAttributesResponse) => void): Request<CloudDirectory.Types.ListObjectAttributesResponse, AWSError>;
   /**
-   * Lists all attributes associated with an object. 
+   * Lists all attributes that are associated with an object. 
    */
   listObjectAttributes(callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectAttributesResponse) => void): Request<CloudDirectory.Types.ListObjectAttributesResponse, AWSError>;
   /**
-   * Returns a paginated list of child objects associated with a given object.
+   * Returns a paginated list of child objects that are associated with a given object.
    */
   listObjectChildren(params: CloudDirectory.Types.ListObjectChildrenRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectChildrenResponse) => void): Request<CloudDirectory.Types.ListObjectChildrenResponse, AWSError>;
   /**
-   * Returns a paginated list of child objects associated with a given object.
+   * Returns a paginated list of child objects that are associated with a given object.
    */
   listObjectChildren(callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectChildrenResponse) => void): Request<CloudDirectory.Types.ListObjectChildrenResponse, AWSError>;
   /**
-   * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure. Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined MaxResults, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to directory root are ignored from the target object.
+   * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure. Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined MaxResults, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.
    */
   listObjectParentPaths(params: CloudDirectory.Types.ListObjectParentPathsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentPathsResponse) => void): Request<CloudDirectory.Types.ListObjectParentPathsResponse, AWSError>;
   /**
-   * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure. Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined MaxResults, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to directory root are ignored from the target object.
+   * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure. Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined MaxResults, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.
    */
   listObjectParentPaths(callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentPathsResponse) => void): Request<CloudDirectory.Types.ListObjectParentPathsResponse, AWSError>;
   /**
-   * Lists parent objects associated with a given object in pagination fashion.
+   * Lists parent objects that are associated with a given object in pagination fashion.
    */
   listObjectParents(params: CloudDirectory.Types.ListObjectParentsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentsResponse) => void): Request<CloudDirectory.Types.ListObjectParentsResponse, AWSError>;
   /**
-   * Lists parent objects associated with a given object in pagination fashion.
+   * Lists parent objects that are associated with a given object in pagination fashion.
    */
   listObjectParents(callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentsResponse) => void): Request<CloudDirectory.Types.ListObjectParentsResponse, AWSError>;
   /**
@@ -308,6 +356,14 @@ declare class CloudDirectory extends Service {
    */
   listObjectPolicies(callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectPoliciesResponse) => void): Request<CloudDirectory.Types.ListObjectPoliciesResponse, AWSError>;
   /**
+   * Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
+   */
+  listOutgoingTypedLinks(params: CloudDirectory.Types.ListOutgoingTypedLinksRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListOutgoingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListOutgoingTypedLinksResponse, AWSError>;
+  /**
+   * Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
+   */
+  listOutgoingTypedLinks(callback?: (err: AWSError, data: CloudDirectory.Types.ListOutgoingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListOutgoingTypedLinksResponse, AWSError>;
+  /**
    * Returns all of the ObjectIdentifiers to which a given policy is attached.
    */
   listPolicyAttachments(params: CloudDirectory.Types.ListPolicyAttachmentsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListPolicyAttachmentsResponse) => void): Request<CloudDirectory.Types.ListPolicyAttachmentsResponse, AWSError>;
@@ -316,11 +372,11 @@ declare class CloudDirectory extends Service {
    */
   listPolicyAttachments(callback?: (err: AWSError, data: CloudDirectory.Types.ListPolicyAttachmentsResponse) => void): Request<CloudDirectory.Types.ListPolicyAttachmentsResponse, AWSError>;
   /**
-   * Retrieves published schema ARNs.
+   * Retrieves each published schema Amazon Resource Name (ARN).
    */
   listPublishedSchemaArns(params: CloudDirectory.Types.ListPublishedSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListPublishedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListPublishedSchemaArnsResponse, AWSError>;
   /**
-   * Retrieves published schema ARNs.
+   * Retrieves each published schema Amazon Resource Name (ARN).
    */
   listPublishedSchemaArns(callback?: (err: AWSError, data: CloudDirectory.Types.ListPublishedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListPublishedSchemaArnsResponse, AWSError>;
   /**
@@ -332,11 +388,27 @@ declare class CloudDirectory extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CloudDirectory.Types.ListTagsForResourceResponse) => void): Request<CloudDirectory.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored.
+   * Returns a paginated list of all attribute definitions for a particular TypedLinkFacet. For more information, see Typed link.
+   */
+  listTypedLinkFacetAttributes(params: CloudDirectory.Types.ListTypedLinkFacetAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListTypedLinkFacetAttributesResponse) => void): Request<CloudDirectory.Types.ListTypedLinkFacetAttributesResponse, AWSError>;
+  /**
+   * Returns a paginated list of all attribute definitions for a particular TypedLinkFacet. For more information, see Typed link.
+   */
+  listTypedLinkFacetAttributes(callback?: (err: AWSError, data: CloudDirectory.Types.ListTypedLinkFacetAttributesResponse) => void): Request<CloudDirectory.Types.ListTypedLinkFacetAttributesResponse, AWSError>;
+  /**
+   * Returns a paginated list of TypedLink facet names for a particular schema. For more information, see Typed link.
+   */
+  listTypedLinkFacetNames(params: CloudDirectory.Types.ListTypedLinkFacetNamesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListTypedLinkFacetNamesResponse) => void): Request<CloudDirectory.Types.ListTypedLinkFacetNamesResponse, AWSError>;
+  /**
+   * Returns a paginated list of TypedLink facet names for a particular schema. For more information, see Typed link.
+   */
+  listTypedLinkFacetNames(callback?: (err: AWSError, data: CloudDirectory.Types.ListTypedLinkFacetNamesResponse) => void): Request<CloudDirectory.Types.ListTypedLinkFacetNamesResponse, AWSError>;
+  /**
+   * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored. For more information, see Policies.
    */
   lookupPolicy(params: CloudDirectory.Types.LookupPolicyRequest, callback?: (err: AWSError, data: CloudDirectory.Types.LookupPolicyResponse) => void): Request<CloudDirectory.Types.LookupPolicyResponse, AWSError>;
   /**
-   * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored.
+   * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored. For more information, see Policies.
    */
   lookupPolicy(callback?: (err: AWSError, data: CloudDirectory.Types.LookupPolicyResponse) => void): Request<CloudDirectory.Types.LookupPolicyResponse, AWSError>;
   /**
@@ -364,19 +436,19 @@ declare class CloudDirectory extends Service {
    */
   removeFacetFromObject(callback?: (err: AWSError, data: CloudDirectory.Types.RemoveFacetFromObjectResponse) => void): Request<CloudDirectory.Types.RemoveFacetFromObjectResponse, AWSError>;
   /**
-   * API for adding tags to a resource.
+   * An API operation for adding tags to a resource.
    */
   tagResource(params: CloudDirectory.Types.TagResourceRequest, callback?: (err: AWSError, data: CloudDirectory.Types.TagResourceResponse) => void): Request<CloudDirectory.Types.TagResourceResponse, AWSError>;
   /**
-   * API for adding tags to a resource.
+   * An API operation for adding tags to a resource.
    */
   tagResource(callback?: (err: AWSError, data: CloudDirectory.Types.TagResourceResponse) => void): Request<CloudDirectory.Types.TagResourceResponse, AWSError>;
   /**
-   * API for removing tags from a resource.
+   * An API operation for removing tags from a resource.
    */
   untagResource(params: CloudDirectory.Types.UntagResourceRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UntagResourceResponse) => void): Request<CloudDirectory.Types.UntagResourceResponse, AWSError>;
   /**
-   * API for removing tags from a resource.
+   * An API operation for removing tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: CloudDirectory.Types.UntagResourceResponse) => void): Request<CloudDirectory.Types.UntagResourceResponse, AWSError>;
   /**
@@ -403,11 +475,19 @@ declare class CloudDirectory extends Service {
    * Updates the schema name with a new name. Only development schema names can be updated.
    */
   updateSchema(callback?: (err: AWSError, data: CloudDirectory.Types.UpdateSchemaResponse) => void): Request<CloudDirectory.Types.UpdateSchemaResponse, AWSError>;
+  /**
+   * Updates a TypedLinkFacet. For more information, see Typed link.
+   */
+  updateTypedLinkFacet(params: CloudDirectory.Types.UpdateTypedLinkFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.UpdateTypedLinkFacetResponse, AWSError>;
+  /**
+   * Updates a TypedLinkFacet. For more information, see Typed link.
+   */
+  updateTypedLinkFacet(callback?: (err: AWSError, data: CloudDirectory.Types.UpdateTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.UpdateTypedLinkFacetResponse, AWSError>;
 }
 declare namespace CloudDirectory {
   export interface AddFacetToObjectRequest {
     /**
-     * ARN associated with the Directory where the object resides. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where the object resides. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
@@ -415,7 +495,7 @@ declare namespace CloudDirectory {
      */
     SchemaFacet: SchemaFacet;
     /**
-     * Attributes on the facet you are adding to the object.
+     * Attributes on the facet that you are adding to the object.
      */
     ObjectAttributeList?: AttributeKeyAndValueList;
     /**
@@ -427,21 +507,21 @@ declare namespace CloudDirectory {
   }
   export interface ApplySchemaRequest {
     /**
-     * Published schema ARN that needs to be copied. For more information, see arns.
+     * Published schema Amazon Resource Name (ARN) that needs to be copied. For more information, see arns.
      */
     PublishedSchemaArn: Arn;
     /**
-     * ARN associated with the Directory into which the schema is copied. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory into which the schema is copied. For more information, see arns.
      */
     DirectoryArn: Arn;
   }
   export interface ApplySchemaResponse {
     /**
-     * Applied schema ARN associated with the copied schema in the Directory. You can use this ARN to describe the schema information applied on this directory. For more information, see arns.
+     * The applied schema ARN that is associated with the copied schema in the Directory. You can use this ARN to describe the schema information applied on this directory. For more information, see arns.
      */
     AppliedSchemaArn?: Arn;
     /**
-     * ARN associated with the Directory. For more information, see arns.
+     * The ARN that is associated with the Directory. For more information, see arns.
      */
     DirectoryArn?: Arn;
   }
@@ -449,39 +529,39 @@ declare namespace CloudDirectory {
   export type Arns = Arn[];
   export interface AttachObjectRequest {
     /**
-     * ARN associated with the Directory where both objects reside. For more information, see arns.
+     * Amazon Resource Name (ARN) that is associated with the Directory where both objects reside. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * Parent object reference.
+     * The parent object reference.
      */
     ParentReference: ObjectReference;
     /**
-     * Child object reference to be attached to the object.
+     * The child object reference to be attached to the object.
      */
     ChildReference: ObjectReference;
     /**
-     * Link name with which the child object is attached to the parent.
+     * The link name with which the child object is attached to the parent.
      */
     LinkName: LinkName;
   }
   export interface AttachObjectResponse {
     /**
-     * Attached ObjectIdentifier, which is the child ObjectIdentifier.
+     * The attached ObjectIdentifier, which is the child ObjectIdentifier.
      */
     AttachedObjectIdentifier?: ObjectIdentifier;
   }
   export interface AttachPolicyRequest {
     /**
-     * ARN associated with the Directory where both objects reside. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where both objects reside. For more information, see arns.
      */
     DirectoryArn?: Arn;
     /**
-     * Reference associated with the policy object.
+     * The reference that is associated with the policy object.
      */
     PolicyReference: ObjectReference;
     /**
-     * Reference that identifies the object to which the policy will be attached.
+     * The reference that identifies the object to which the policy will be attached.
      */
     ObjectReference: ObjectReference;
   }
@@ -489,7 +569,7 @@ declare namespace CloudDirectory {
   }
   export interface AttachToIndexRequest {
     /**
-     * The ARN of the directory where the object and index exist.
+     * The Amazon Resource Name (ARN) of the directory where the object and index exist.
      */
     DirectoryArn: Arn;
     /**
@@ -507,13 +587,41 @@ declare namespace CloudDirectory {
      */
     AttachedObjectIdentifier?: ObjectIdentifier;
   }
+  export interface AttachTypedLinkRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the directory where you want to attach the typed link.
+     */
+    DirectoryArn: Arn;
+    /**
+     * Identifies the source object that the typed link will attach to.
+     */
+    SourceObjectReference: ObjectReference;
+    /**
+     * Identifies the target object that the typed link will attach to.
+     */
+    TargetObjectReference: ObjectReference;
+    /**
+     * Identifies the typed link facet that is associated with the typed link.
+     */
+    TypedLinkFacet: TypedLinkSchemaAndFacetName;
+    /**
+     * An ordered set of attributes that are associated with the typed link.
+     */
+    Attributes: AttributeNameAndValueList;
+  }
+  export interface AttachTypedLinkResponse {
+    /**
+     * Returns a typed link specifier as output.
+     */
+    TypedLinkSpecifier?: TypedLinkSpecifier;
+  }
   export interface AttributeKey {
     /**
-     * The ARN of the schema that contains the facet and attribute.
+     * The Amazon Resource Name (ARN) of the schema that contains the facet and attribute.
      */
     SchemaArn: Arn;
     /**
-     * The name of the facet the attribute exists within.
+     * The name of the facet that the attribute exists within.
      */
     FacetName: FacetName;
     /**
@@ -534,6 +642,18 @@ declare namespace CloudDirectory {
   export type AttributeKeyAndValueList = AttributeKeyAndValue[];
   export type AttributeKeyList = AttributeKey[];
   export type AttributeName = string;
+  export interface AttributeNameAndValue {
+    /**
+     * The attribute name of the typed link.
+     */
+    AttributeName: AttributeName;
+    /**
+     * The value for the typed link.
+     */
+    Value: TypedAttributeValue;
+  }
+  export type AttributeNameAndValueList = AttributeNameAndValue[];
+  export type AttributeNameList = AttributeName[];
   export interface BatchAddFacetToObject {
     /**
      * Represents the facet being added to the object.
@@ -552,11 +672,11 @@ declare namespace CloudDirectory {
   }
   export interface BatchAttachObject {
     /**
-     * Parent object reference.
+     * The parent object reference.
      */
     ParentReference: ObjectReference;
     /**
-     * Child object reference to be attached to the object.
+     * The child object reference that is to be attached to the object.
      */
     ChildReference: ObjectReference;
     /**
@@ -572,11 +692,11 @@ declare namespace CloudDirectory {
   }
   export interface BatchCreateObject {
     /**
-     * List of FacetArns that will be associated with the object. For more information, see arns.
+     * A list of FacetArns that will be associated with the object. For more information, see arns.
      */
     SchemaFacet: SchemaFacetList;
     /**
-     * Attribute map, which contains an attribute ARN as the key and attribute value as the map value.
+     * An attribute map, which contains an attribute ARN as the key and attribute value as the map value.
      */
     ObjectAttributeList: AttributeKeyAndValueList;
     /**
@@ -594,13 +714,13 @@ declare namespace CloudDirectory {
   }
   export interface BatchCreateObjectResponse {
     /**
-     * ID associated with the object.
+     * The ID that is associated with the object.
      */
     ObjectIdentifier?: ObjectIdentifier;
   }
   export interface BatchDeleteObject {
     /**
-     * Reference that identifies the object.
+     * The reference that identifies the object.
      */
     ObjectReference: ObjectReference;
   }
@@ -636,17 +756,17 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
     /**
-     * Maximum number of items to be retrieved in a single call. This is an approximate number.
+     * The maximum number of items to be retrieved in a single call. This is an approximate number.
      */
     MaxResults?: NumberResults;
     /**
-     * Used to filter the list of object attributes associated with a certain facet.
+     * Used to filter the list of object attributes that are associated with a certain facet.
      */
     FacetFilter?: SchemaFacet;
   }
   export interface BatchListObjectAttributesResponse {
     /**
-     * Attributes map associated with the object. AttributeArn is the key; attribute value is the value.
+     * The attributes map that is associated with the object. AttributeArn is the key; attribute value is the value.
      */
     Attributes?: AttributeKeyAndValueList;
     /**
@@ -670,7 +790,7 @@ declare namespace CloudDirectory {
   }
   export interface BatchListObjectChildrenResponse {
     /**
-     * Children structure, which is a map with key as the LinkName and ObjectIdentifier as the value.
+     * The children structure, which is a map with the key as the LinkName and ObjectIdentifier as the value.
      */
     Children?: LinkNameToObjectIdentifierMap;
     /**
@@ -681,18 +801,18 @@ declare namespace CloudDirectory {
   export type BatchOperationIndex = number;
   export interface BatchReadException {
     /**
-     * Type of exception, such as InvalidArnException.
+     * A type of exception, such as InvalidArnException.
      */
     Type?: BatchReadExceptionType;
     /**
-     * Exception message associated with the failure.
+     * An exception message that is associated with the failure.
      */
     Message?: ExceptionMessage;
   }
   export type BatchReadExceptionType = "ValidationException"|"InvalidArnException"|"ResourceNotFoundException"|"InvalidNextTokenException"|"AccessDeniedException"|"NotNodeException"|string;
   export interface BatchReadOperation {
     /**
-     * Lists all attributes associated with an object.
+     * Lists all attributes that are associated with an object.
      */
     ListObjectAttributes?: BatchListObjectAttributes;
     /**
@@ -714,11 +834,11 @@ declare namespace CloudDirectory {
   export type BatchReadOperationResponseList = BatchReadOperationResponse[];
   export interface BatchReadRequest {
     /**
-     * ARN associated with the Directory. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * List of operations that are part of the batch.
+     * A list of operations that are part of the batch.
      */
     Operations: BatchReadOperationList;
     /**
@@ -728,17 +848,17 @@ declare namespace CloudDirectory {
   }
   export interface BatchReadResponse {
     /**
-     * List of all the responses for each batch read.
+     * A list of all the responses for each batch read.
      */
     Responses?: BatchReadOperationResponseList;
   }
   export interface BatchReadSuccessfulResponse {
     /**
-     * Lists all attributes associated with an object.
+     * Lists all attributes that are associated with an object.
      */
     ListObjectAttributes?: BatchListObjectAttributesResponse;
     /**
-     * Returns a paginated list of child objects associated with a given object.
+     * Returns a paginated list of child objects that are associated with a given object.
      */
     ListObjectChildren?: BatchListObjectChildrenResponse;
   }
@@ -767,7 +887,7 @@ declare namespace CloudDirectory {
   }
   export interface BatchUpdateObjectAttributesResponse {
     /**
-     * ID associated with the object.
+     * ID that is associated with the object.
      */
     ObjectIdentifier?: ObjectIdentifier;
   }
@@ -786,7 +906,7 @@ declare namespace CloudDirectory {
      */
     DetachObject?: BatchDetachObject;
     /**
-     * Update a given object's attributes.
+     * Updates a given object's attributes.
      */
     UpdateObjectAttributes?: BatchUpdateObjectAttributes;
     /**
@@ -794,11 +914,11 @@ declare namespace CloudDirectory {
      */
     DeleteObject?: BatchDeleteObject;
     /**
-     * Batch operation adding a facet to an object.
+     * A batch operation that adds a facet to an object.
      */
     AddFacetToObject?: BatchAddFacetToObject;
     /**
-     * Batch operation removing a facet from an object.
+     * A batch operation that removes a facet from an object.
      */
     RemoveFacetFromObject?: BatchRemoveFacetFromObject;
   }
@@ -825,28 +945,28 @@ declare namespace CloudDirectory {
      */
     DeleteObject?: BatchDeleteObjectResponse;
     /**
-     * Result of an add facet to object batch operation.
+     * The result of an add facet to object batch operation.
      */
     AddFacetToObject?: BatchAddFacetToObjectResponse;
     /**
-     * Result of a batch remove facet from object operation.
+     * The result of a batch remove facet from object operation.
      */
     RemoveFacetFromObject?: BatchRemoveFacetFromObjectResponse;
   }
   export type BatchWriteOperationResponseList = BatchWriteOperationResponse[];
   export interface BatchWriteRequest {
     /**
-     * ARN associated with the Directory. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * List of operations that are part of the batch.
+     * A list of operations that are part of the batch.
      */
     Operations: BatchWriteOperationList;
   }
   export interface BatchWriteResponse {
     /**
-     * List of all the responses for each batch write.
+     * A list of all the responses for each batch write.
      */
     Responses?: BatchWriteOperationResponseList;
   }
@@ -856,21 +976,21 @@ declare namespace CloudDirectory {
   export type ConsistencyLevel = "SERIALIZABLE"|"EVENTUAL"|string;
   export interface CreateDirectoryRequest {
     /**
-     * Name of the Directory. Should be unique per account, per region.
+     * The name of the Directory. Should be unique per account, per region.
      */
     Name: DirectoryName;
     /**
-     * ARN of the published schema that will be copied into the data Directory. For more information, see arns.
+     * The Amazon Resource Name (ARN) of the published schema that will be copied into the data Directory. For more information, see arns.
      */
     SchemaArn: Arn;
   }
   export interface CreateDirectoryResponse {
     /**
-     * ARN associated with the Directory. For more information, see arns.
+     * The ARN that is associated with the Directory. For more information, see arns.
      */
     DirectoryArn: DirectoryArn;
     /**
-     * Name of the Directory.
+     * The name of the Directory.
      */
     Name: DirectoryName;
     /**
@@ -878,25 +998,25 @@ declare namespace CloudDirectory {
      */
     ObjectIdentifier: ObjectIdentifier;
     /**
-     * ARN of the published schema in the Directory. Once a published schema is copied into the directory, it has its own ARN which is referred to applied schema ARN. For more information, see arns.
+     * The ARN of the published schema in the Directory. Once a published schema is copied into the directory, it has its own ARN, which is referred to applied schema ARN. For more information, see arns.
      */
     AppliedSchemaArn: Arn;
   }
   export interface CreateFacetRequest {
     /**
-     * Schema ARN in which the new Facet will be created. For more information, see arns.
+     * The schema ARN in which the new Facet will be created. For more information, see arns.
      */
     SchemaArn: Arn;
     /**
-     * Name of the Facet, which is unique for a given schema.
+     * The name of the Facet, which is unique for a given schema.
      */
     Name: FacetName;
     /**
-     * Attributes associated with the Facet.e
+     * The attributes that are associated with the Facet.
      */
     Attributes?: FacetAttributeList;
     /**
-     * Specifies whether a given object created from this facet is of type Node, Leaf Node, Policy or Index.   Node: Can have multiple children but one parent.     Leaf Node: Cannot have children but can have multiple parents.     Policy: Allows you to store a policy document and policy type. For more information, see Policies.     Index: Can be created with the Index API.  
+     * Specifies whether a given object created from this facet is of type node, leaf node, policy or index.   Node: Can have multiple children but one parent.     Leaf node: Cannot have children but can have multiple parents.     Policy: Allows you to store a policy document and policy type. For more information, see Policies.     Index: Can be created with the Index API.  
      */
     ObjectType: ObjectType;
   }
@@ -908,11 +1028,11 @@ declare namespace CloudDirectory {
      */
     DirectoryArn: Arn;
     /**
-     * Specifies the Attributes that should be indexed on. Currently only a single attribute is supported.
+     * Specifies the attributes that should be indexed on. Currently only a single attribute is supported.
      */
     OrderedIndexedAttributeList: AttributeKeyList;
     /**
-     * Indicates whether objects with the same indexed attribute value can be added to the index.
+     * Indicates whether the attribute that is being indexed has unique values or not.
      */
     IsUnique: Bool;
     /**
@@ -932,15 +1052,15 @@ declare namespace CloudDirectory {
   }
   export interface CreateObjectRequest {
     /**
-     * ARN associated with the Directory in which the object will be created. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory in which the object will be created. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * List of facet ARNs to be associated with the object. For more information, see arns.
+     * A list of schema facets to be associated with the object that contains SchemaArn and facet name. For more information, see arns.
      */
     SchemaFacets: SchemaFacetList;
     /**
-     * Attribute map whose attribute ARN contains the key and attribute value as the map value.
+     * The attribute map whose attribute ARN contains the key and attribute value as the map value.
      */
     ObjectAttributeList?: AttributeKeyAndValueList;
     /**
@@ -954,21 +1074,33 @@ declare namespace CloudDirectory {
   }
   export interface CreateObjectResponse {
     /**
-     * Identifier associated with the object.
+     * The identifier that is associated with the object.
      */
     ObjectIdentifier?: ObjectIdentifier;
   }
   export interface CreateSchemaRequest {
     /**
-     * Name associated with the schema. This is unique to each account and in each region.
+     * The name that is associated with the schema. This is unique to each account and in each region.
      */
     Name: SchemaName;
   }
   export interface CreateSchemaResponse {
     /**
-     * ARN associated with the schema. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the schema. For more information, see arns.
      */
     SchemaArn?: Arn;
+  }
+  export interface CreateTypedLinkFacetRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the schema. For more information, see arns.
+     */
+    SchemaArn: Arn;
+    /**
+     *  Facet structure that is associated with the typed link facet.
+     */
+    Facet: TypedLinkFacet;
+  }
+  export interface CreateTypedLinkFacetResponse {
   }
   export type _Date = Date;
   export type DatetimeAttributeValue = Date;
@@ -986,7 +1118,7 @@ declare namespace CloudDirectory {
   }
   export interface DeleteFacetRequest {
     /**
-     * ARN associated with the Facet. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Facet. For more information, see arns.
      */
     SchemaArn: Arn;
     /**
@@ -998,11 +1130,11 @@ declare namespace CloudDirectory {
   }
   export interface DeleteObjectRequest {
     /**
-     * ARN associated with the Directory where the object resides. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where the object resides. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * Reference that identifies the object.
+     * A reference that identifies the object.
      */
     ObjectReference: ObjectReference;
   }
@@ -1010,19 +1142,31 @@ declare namespace CloudDirectory {
   }
   export interface DeleteSchemaRequest {
     /**
-     * ARN of the development schema. For more information, see arns.
+     * The Amazon Resource Name (ARN) of the development schema. For more information, see arns.
      */
     SchemaArn: Arn;
   }
   export interface DeleteSchemaResponse {
     /**
-     * Input ARN that is returned as part of the response. For more information, see arns.
+     * The input ARN that is returned as part of the response. For more information, see arns.
      */
     SchemaArn?: Arn;
   }
+  export interface DeleteTypedLinkFacetRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the schema. For more information, see arns.
+     */
+    SchemaArn: Arn;
+    /**
+     * The unique name of the typed link facet.
+     */
+    Name: TypedLinkName;
+  }
+  export interface DeleteTypedLinkFacetResponse {
+  }
   export interface DetachFromIndexRequest {
     /**
-     * The ARN of the directory the index and object exist in.
+     * The Amazon Resource Name (ARN) of the directory the index and object exist in.
      */
     DirectoryArn: Arn;
     /**
@@ -1042,15 +1186,15 @@ declare namespace CloudDirectory {
   }
   export interface DetachObjectRequest {
     /**
-     * ARN associated with the Directory where objects reside. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where objects reside. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * Parent reference from which the object with the specified link name is detached.
+     * The parent reference from which the object with the specified link name is detached.
      */
     ParentReference: ObjectReference;
     /**
-     * Link name associated with the object that needs to be detached.
+     * The link name associated with the object that needs to be detached.
      */
     LinkName: LinkName;
   }
@@ -1062,7 +1206,7 @@ declare namespace CloudDirectory {
   }
   export interface DetachPolicyRequest {
     /**
-     * ARN associated with the Directory where both objects reside. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where both objects reside. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
@@ -1076,13 +1220,23 @@ declare namespace CloudDirectory {
   }
   export interface DetachPolicyResponse {
   }
+  export interface DetachTypedLinkRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the directory where you want to detach the typed link.
+     */
+    DirectoryArn: Arn;
+    /**
+     * Used to accept a typed link specifier as input.
+     */
+    TypedLinkSpecifier: TypedLinkSpecifier;
+  }
   export interface Directory {
     /**
      * The name of the directory.
      */
     Name?: DirectoryName;
     /**
-     * ARN associated with the directory. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the directory. For more information, see arns.
      */
     DirectoryArn?: DirectoryArn;
     /**
@@ -1129,7 +1283,7 @@ declare namespace CloudDirectory {
      */
     Name?: FacetName;
     /**
-     * Object type associated with the facet. See CreateFacetRequest$ObjectType for more details.
+     * The object type that is associated with the facet. See CreateFacetRequest$ObjectType for more details.
      */
     ObjectType?: ObjectType;
   }
@@ -1143,7 +1297,7 @@ declare namespace CloudDirectory {
      */
     AttributeDefinition?: FacetAttributeDefinition;
     /**
-     * Attribute reference associated with the attribute. See Attribute References for more information.
+     * An attribute reference that is associated with the attribute. See Attribute References for more information.
      */
     AttributeReference?: FacetAttributeReference;
     /**
@@ -1172,11 +1326,11 @@ declare namespace CloudDirectory {
   export type FacetAttributeList = FacetAttribute[];
   export interface FacetAttributeReference {
     /**
-     * Target facet name associated with the facet reference. See Attribute References for more information.
+     * The target facet name that is associated with the facet reference. See Attribute References for more information.
      */
     TargetFacetName: FacetName;
     /**
-     * Target attribute name associated with the facet reference. See Attribute References for more information.
+     * The target attribute name that is associated with the facet reference. See Attribute References for more information.
      */
     TargetAttributeName: AttributeName;
   }
@@ -1208,7 +1362,7 @@ declare namespace CloudDirectory {
   }
   export interface GetFacetRequest {
     /**
-     * ARN associated with the Facet. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Facet. For more information, see arns.
      */
     SchemaArn: Arn;
     /**
@@ -1218,7 +1372,7 @@ declare namespace CloudDirectory {
   }
   export interface GetFacetResponse {
     /**
-     *  Facet structure associated with the facet.
+     * The Facet structure that is associated with the facet.
      */
     Facet?: Facet;
   }
@@ -1261,6 +1415,22 @@ declare namespace CloudDirectory {
      * The JSON representation of the schema document.
      */
     Document?: SchemaJsonDocument;
+  }
+  export interface GetTypedLinkFacetInformationRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the schema. For more information, see arns.
+     */
+    SchemaArn: Arn;
+    /**
+     * The unique name of the typed link facet.
+     */
+    Name: TypedLinkName;
+  }
+  export interface GetTypedLinkFacetInformationResponse {
+    /**
+     * A range filter that you provide for multiple attributes. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.
+     */
+    IdentityAttributeOrder?: AttributeNameList;
   }
   export interface IndexAttachment {
     /**
@@ -1367,7 +1537,7 @@ declare namespace CloudDirectory {
   }
   export interface ListDirectoriesResponse {
     /**
-     * Lists all directories associated with your account in pagination fashion.
+     * Lists all directories that are associated with your account in pagination fashion.
      */
     Directories: DirectoryList;
     /**
@@ -1405,7 +1575,7 @@ declare namespace CloudDirectory {
   }
   export interface ListFacetNamesRequest {
     /**
-     * The ARN to retrieve facet names from.
+     * The Amazon Resource Name (ARN) to retrieve facet names from.
      */
     SchemaArn: Arn;
     /**
@@ -1413,7 +1583,7 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to retrieve
+     * The maximum number of results to retrieve.
      */
     MaxResults?: NumberResults;
   }
@@ -1422,6 +1592,46 @@ declare namespace CloudDirectory {
      * The names of facets that exist within the schema.
      */
     FacetNames?: FacetNameList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListIncomingTypedLinksRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the directory where you want to list the typed links.
+     */
+    DirectoryArn: Arn;
+    /**
+     * Reference that identifies the object whose attributes will be listed.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.
+     */
+    FilterAttributeRanges?: TypedLinkAttributeRangeList;
+    /**
+     * Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.
+     */
+    FilterTypedLink?: TypedLinkSchemaAndFacetName;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+    /**
+     * The consistency level to execute the request at.
+     */
+    ConsistencyLevel?: ConsistencyLevel;
+  }
+  export interface ListIncomingTypedLinksResponse {
+    /**
+     * Returns a typed link specifier as output.
+     */
+    LinkSpecifiers?: TypedLinkSpecifierList;
     /**
      * The pagination token.
      */
@@ -1465,11 +1675,11 @@ declare namespace CloudDirectory {
   }
   export interface ListObjectAttributesRequest {
     /**
-     * ARN associated with the Directory where the object resides. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where the object resides. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * Reference that identifies the object whose attributes will be listed.
+     * The reference that identifies the object whose attributes will be listed.
      */
     ObjectReference: ObjectReference;
     /**
@@ -1477,7 +1687,7 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
     /**
-     * Maximum number of items to be retrieved in a single call. This is an approximate number.
+     * The maximum number of items to be retrieved in a single call. This is an approximate number.
      */
     MaxResults?: NumberResults;
     /**
@@ -1485,13 +1695,13 @@ declare namespace CloudDirectory {
      */
     ConsistencyLevel?: ConsistencyLevel;
     /**
-     * Used to filter the list of object attributes associated with a certain facet.
+     * Used to filter the list of object attributes that are associated with a certain facet.
      */
     FacetFilter?: SchemaFacet;
   }
   export interface ListObjectAttributesResponse {
     /**
-     * Attributes map associated with the object. AttributeArn is the key, and attribute value is the value.
+     * Attributes map that is associated with the object. AttributeArn is the key, and attribute value is the value.
      */
     Attributes?: AttributeKeyAndValueList;
     /**
@@ -1501,11 +1711,11 @@ declare namespace CloudDirectory {
   }
   export interface ListObjectChildrenRequest {
     /**
-     * ARN associated with the Directory where the object resides. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where the object resides. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * Reference that identifies the object for which child objects are being listed.
+     * The reference that identifies the object for which child objects are being listed.
      */
     ObjectReference: ObjectReference;
     /**
@@ -1513,7 +1723,7 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
     /**
-     * Maximum number of items to be retrieved in a single call. This is an approximate number.
+     * The maximum number of items to be retrieved in a single call. This is an approximate number.
      */
     MaxResults?: NumberResults;
     /**
@@ -1537,7 +1747,7 @@ declare namespace CloudDirectory {
      */
     DirectoryArn: Arn;
     /**
-     * Reference that identifies the object whose parent paths are listed.
+     * The reference that identifies the object whose parent paths are listed.
      */
     ObjectReference: ObjectReference;
     /**
@@ -1545,13 +1755,13 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
     /**
-     * Maximum number of items to be retrieved in a single call. This is an approximate number.
+     * The maximum number of items to be retrieved in a single call. This is an approximate number.
      */
     MaxResults?: NumberResults;
   }
   export interface ListObjectParentPathsResponse {
     /**
-     * Returns the path to the ObjectIdentifiers associated with the directory.
+     * Returns the path to the ObjectIdentifiers that are associated with the directory.
      */
     PathToObjectIdentifiersList?: PathToObjectIdentifiersList;
     /**
@@ -1561,11 +1771,11 @@ declare namespace CloudDirectory {
   }
   export interface ListObjectParentsRequest {
     /**
-     * ARN associated with the Directory where the object resides. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where the object resides. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * Reference that identifies the object for which parent objects are being listed.
+     * The reference that identifies the object for which parent objects are being listed.
      */
     ObjectReference: ObjectReference;
     /**
@@ -1573,7 +1783,7 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
     /**
-     * Maximum number of items to be retrieved in a single call. This is an approximate number.
+     * The maximum number of items to be retrieved in a single call. This is an approximate number.
      */
     MaxResults?: NumberResults;
     /**
@@ -1583,7 +1793,7 @@ declare namespace CloudDirectory {
   }
   export interface ListObjectParentsResponse {
     /**
-     * Parent structure, which is a map with key as the ObjectIdentifier and LinkName as the value.
+     * The parent structure, which is a map with key as the ObjectIdentifier and LinkName as the value.
      */
     Parents?: ObjectIdentifierToLinkNameMap;
     /**
@@ -1593,7 +1803,7 @@ declare namespace CloudDirectory {
   }
   export interface ListObjectPoliciesRequest {
     /**
-     * ARN associated with the Directory where objects reside. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where objects reside. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
@@ -1605,7 +1815,7 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
     /**
-     * Maximum number of items to be retrieved in a single call. This is an approximate number.
+     * The maximum number of items to be retrieved in a single call. This is an approximate number.
      */
     MaxResults?: NumberResults;
     /**
@@ -1615,7 +1825,7 @@ declare namespace CloudDirectory {
   }
   export interface ListObjectPoliciesResponse {
     /**
-     * List of policy ObjectIdentifiers, that are attached to the object.
+     * A list of policy ObjectIdentifiers, that are attached to the object.
      */
     AttachedPolicyIds?: ObjectIdentifierList;
     /**
@@ -1623,13 +1833,53 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
   }
-  export interface ListPolicyAttachmentsRequest {
+  export interface ListOutgoingTypedLinksRequest {
     /**
-     * ARN associated with the Directory where objects reside. For more information, see arns.
+     * The Amazon Resource Name (ARN) of the directory where you want to list the typed links.
      */
     DirectoryArn: Arn;
     /**
-     * Reference that identifies the policy object.
+     * A reference that identifies the object whose attributes will be listed.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.
+     */
+    FilterAttributeRanges?: TypedLinkAttributeRangeList;
+    /**
+     * Filters are interpreted in the order of the attributes defined on the typed link facet, not the order they are supplied to any API calls.
+     */
+    FilterTypedLink?: TypedLinkSchemaAndFacetName;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+    /**
+     * The consistency level to execute the request at.
+     */
+    ConsistencyLevel?: ConsistencyLevel;
+  }
+  export interface ListOutgoingTypedLinksResponse {
+    /**
+     * Returns a typed link specifier as output.
+     */
+    TypedLinkSpecifiers?: TypedLinkSpecifierList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListPolicyAttachmentsRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the Directory where objects reside. For more information, see arns.
+     */
+    DirectoryArn: Arn;
+    /**
+     * The reference that identifies the policy object.
      */
     PolicyReference: ObjectReference;
     /**
@@ -1637,7 +1887,7 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
     /**
-     * Maximum number of items to be retrieved in a single call. This is an approximate number.
+     * The maximum number of items to be retrieved in a single call. This is an approximate number.
      */
     MaxResults?: NumberResults;
     /**
@@ -1647,7 +1897,7 @@ declare namespace CloudDirectory {
   }
   export interface ListPolicyAttachmentsResponse {
     /**
-     * List of ObjectIdentifiers to which the policy is attached.
+     * A list of ObjectIdentifiers to which the policy is attached.
      */
     ObjectIdentifiers?: ObjectIdentifierList;
     /**
@@ -1677,7 +1927,7 @@ declare namespace CloudDirectory {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * ARN of the resource. Tagging is only supported for directories.
+     * The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.
      */
     ResourceArn: Arn;
     /**
@@ -1691,7 +1941,7 @@ declare namespace CloudDirectory {
   }
   export interface ListTagsForResourceResponse {
     /**
-     * List of tag key value pairs associated with the response.
+     * A list of tag key value pairs that are associated with the response.
      */
     Tags?: TagList;
     /**
@@ -1699,9 +1949,61 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
   }
+  export interface ListTypedLinkFacetAttributesRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the schema. For more information, see arns.
+     */
+    SchemaArn: Arn;
+    /**
+     * The unique name of the typed link facet.
+     */
+    Name: TypedLinkName;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface ListTypedLinkFacetAttributesResponse {
+    /**
+     * An ordered set of attributes associate with the typed link.
+     */
+    Attributes?: TypedLinkAttributeDefinitionList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTypedLinkFacetNamesRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the schema. For more information, see arns.
+     */
+    SchemaArn: Arn;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface ListTypedLinkFacetNamesResponse {
+    /**
+     * The names of typed link facets that exist within the schema.
+     */
+    FacetNames?: TypedLinkNameList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
   export interface LookupPolicyRequest {
     /**
-     * ARN associated with the Directory. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
@@ -1713,13 +2015,13 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
     /**
-     * Maximum number of items to be retrieved in a single call. This is an approximate number.
+     * The maximum number of items to be retrieved in a single call. This is an approximate number.
      */
     MaxResults?: NumberResults;
   }
   export interface LookupPolicyResponse {
     /**
-     * Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier, and PolicyType.
+     * Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier, and PolicyType. For more information, see Policies.
      */
     PolicyToPathList?: PolicyToPathList;
     /**
@@ -1732,7 +2034,7 @@ declare namespace CloudDirectory {
   export type NumberResults = number;
   export interface ObjectAttributeAction {
     /**
-     * Type can be either Update or Delete.
+     * A type that can be either Update or Delete.
      */
     ObjectAttributeActionType?: UpdateActionType;
     /**
@@ -1742,7 +2044,7 @@ declare namespace CloudDirectory {
   }
   export interface ObjectAttributeRange {
     /**
-     * The key of the attribute the attribute range covers.
+     * The key of the attribute that the attribute range covers.
      */
     AttributeKey?: AttributeKey;
     /**
@@ -1767,7 +2069,7 @@ declare namespace CloudDirectory {
   export type ObjectIdentifierToLinkNameMap = {[key: string]: LinkName};
   export interface ObjectReference {
     /**
-     * Allows you to specify an object. You can identify an object in one of the following ways:    $ObjectIdentifier - Identifies the object by ObjectIdentifier     /some/path - Identifies the object based on path    #SomeBatchReference - Identifies the object in a batch call  
+     * A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see Accessing Objects. You can identify an object in one of the following ways:    $ObjectIdentifier - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier    /some/path - Identifies the object based on path    #SomeBatchReference - Identifies the object in a batch call  
      */
     Selector?: SelectorObjectReference;
   }
@@ -1775,7 +2077,7 @@ declare namespace CloudDirectory {
   export type PathString = string;
   export interface PathToObjectIdentifiers {
     /**
-     * The path used to identify the object starting from directory root.
+     * The path that is used to identify the object starting from directory root.
      */
     Path?: PathString;
     /**
@@ -1790,7 +2092,7 @@ declare namespace CloudDirectory {
      */
     PolicyId?: ObjectIdentifier;
     /**
-     * The ObjectIdentifier associated with PolicyAttachment.
+     * The ObjectIdentifier that is associated with PolicyAttachment.
      */
     ObjectIdentifier?: ObjectIdentifier;
     /**
@@ -1813,21 +2115,21 @@ declare namespace CloudDirectory {
   export type PolicyType = string;
   export interface PublishSchemaRequest {
     /**
-     * ARN associated with the development schema. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the development schema. For more information, see arns.
      */
     DevelopmentSchemaArn: Arn;
     /**
-     * Version under which the schema will be published.
+     * The version under which the schema will be published.
      */
     Version: Version;
     /**
-     * New name under which the schema will be published. If this is not provided, the development schema is considered.
+     * The new name under which the schema will be published. If this is not provided, the development schema is considered.
      */
     Name?: SchemaName;
   }
   export interface PublishSchemaResponse {
     /**
-     * ARN associated with the published schema. For more information, see arns.
+     * The ARN that is associated with the published schema. For more information, see arns.
      */
     PublishedSchemaArn?: Arn;
   }
@@ -1871,7 +2173,7 @@ declare namespace CloudDirectory {
      */
     Type?: RuleType;
     /**
-     * Min and max parameters associated with the rule.
+     * The minimum and maximum parameters that are associated with the rule.
      */
     Parameters?: RuleParameterMap;
   }
@@ -1898,11 +2200,11 @@ declare namespace CloudDirectory {
   export type StringAttributeValue = string;
   export interface Tag {
     /**
-     * Key associated with the tag.
+     * The key that is associated with the tag.
      */
     Key?: TagKey;
     /**
-     * Value associated with the tag.
+     * The value that is associated with the tag.
      */
     Value?: TagValue;
   }
@@ -1911,11 +2213,11 @@ declare namespace CloudDirectory {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     * ARN of the resource. Tagging is only supported for directories.
+     * The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.
      */
     ResourceArn: Arn;
     /**
-     * List of tag key value pairs.
+     * A list of tag key-value pairs.
      */
     Tags: TagList;
   }
@@ -1947,7 +2249,7 @@ declare namespace CloudDirectory {
   }
   export interface TypedAttributeValueRange {
     /**
-     * Inclusive or exclusive range start.
+     * The inclusive or exclusive range start.
      */
     StartMode: RangeMode;
     /**
@@ -1955,7 +2257,7 @@ declare namespace CloudDirectory {
      */
     StartValue?: TypedAttributeValue;
     /**
-     * Inclusive or exclusive range end.
+     * The inclusive or exclusive range end.
      */
     EndMode: RangeMode;
     /**
@@ -1963,13 +2265,107 @@ declare namespace CloudDirectory {
      */
     EndValue?: TypedAttributeValue;
   }
+  export interface TypedLinkAttributeDefinition {
+    /**
+     * The unique name of the typed link attribute.
+     */
+    Name: AttributeName;
+    /**
+     * The type of the attribute.
+     */
+    Type: FacetAttributeType;
+    /**
+     * The default value of the attribute (if configured).
+     */
+    DefaultValue?: TypedAttributeValue;
+    /**
+     * Whether the attribute is mutable or not.
+     */
+    IsImmutable?: Bool;
+    /**
+     * Validation rules that are attached to the attribute definition.
+     */
+    Rules?: RuleMap;
+    /**
+     * The required behavior of the TypedLinkAttributeDefinition.
+     */
+    RequiredBehavior: RequiredAttributeBehavior;
+  }
+  export type TypedLinkAttributeDefinitionList = TypedLinkAttributeDefinition[];
+  export interface TypedLinkAttributeRange {
+    /**
+     * The unique name of the typed link attribute.
+     */
+    AttributeName?: AttributeName;
+    /**
+     * The range of attribute values that are being selected.
+     */
+    Range: TypedAttributeValueRange;
+  }
+  export type TypedLinkAttributeRangeList = TypedLinkAttributeRange[];
+  export interface TypedLinkFacet {
+    /**
+     * The unique name of the typed link facet.
+     */
+    Name: TypedLinkName;
+    /**
+     * An ordered set of attributes that are associate with the typed link. You can use typed link attributes when you need to represent the relationship between two objects or allow for quick filtering of incoming or outgoing typed links.
+     */
+    Attributes: TypedLinkAttributeDefinitionList;
+    /**
+     * A range filter that you provide for multiple attributes. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.
+     */
+    IdentityAttributeOrder: AttributeNameList;
+  }
+  export interface TypedLinkFacetAttributeUpdate {
+    /**
+     * The attribute to update.
+     */
+    Attribute: TypedLinkAttributeDefinition;
+    /**
+     * The action to perform when updating the attribute.
+     */
+    Action: UpdateActionType;
+  }
+  export type TypedLinkFacetAttributeUpdateList = TypedLinkFacetAttributeUpdate[];
+  export type TypedLinkName = string;
+  export type TypedLinkNameList = TypedLinkName[];
+  export interface TypedLinkSchemaAndFacetName {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the schema. For more information, see arns.
+     */
+    SchemaArn: Arn;
+    /**
+     * The unique name of the typed link facet.
+     */
+    TypedLinkName: TypedLinkName;
+  }
+  export interface TypedLinkSpecifier {
+    /**
+     * Identifies the typed link facet that is associated with the typed link.
+     */
+    TypedLinkFacet: TypedLinkSchemaAndFacetName;
+    /**
+     * Identifies the source object that the typed link will attach to.
+     */
+    SourceObjectReference: ObjectReference;
+    /**
+     * Identifies the target object that the typed link will attach to.
+     */
+    TargetObjectReference: ObjectReference;
+    /**
+     * Identifies the attribute value to update.
+     */
+    IdentityAttributeValues: AttributeNameAndValueList;
+  }
+  export type TypedLinkSpecifierList = TypedLinkSpecifier[];
   export interface UntagResourceRequest {
     /**
-     * ARN of the resource. Tagging is only supported for directories.
+     * The Amazon Resource Name (ARN) of the resource. Tagging is only supported for directories.
      */
     ResourceArn: Arn;
     /**
-     * Keys of the tag that needs to be removed from the resource.
+     * Keys of the tag that need to be removed from the resource.
      */
     TagKeys: TagKeyList;
   }
@@ -1978,11 +2374,11 @@ declare namespace CloudDirectory {
   export type UpdateActionType = "CREATE_OR_UPDATE"|"DELETE"|string;
   export interface UpdateFacetRequest {
     /**
-     * ARN associated with the Facet. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Facet. For more information, see arns.
      */
     SchemaArn: Arn;
     /**
-     *  
+     * The name of the facet.
      */
     Name: FacetName;
     /**
@@ -1990,7 +2386,7 @@ declare namespace CloudDirectory {
      */
     AttributeUpdates?: FacetAttributeUpdateList;
     /**
-     * Object type associated with the facet. See CreateFacetRequest$ObjectType for more details.
+     * The object type that is associated with the facet. See CreateFacetRequest$ObjectType for more details.
      */
     ObjectType?: ObjectType;
   }
@@ -1998,39 +2394,59 @@ declare namespace CloudDirectory {
   }
   export interface UpdateObjectAttributesRequest {
     /**
-     * ARN associated with the Directory where the object resides. For more information, see arns.
+     * The Amazon Resource Name (ARN) that is associated with the Directory where the object resides. For more information, see arns.
      */
     DirectoryArn: Arn;
     /**
-     * Reference that identifies the object.
+     * The reference that identifies the object.
      */
     ObjectReference: ObjectReference;
     /**
-     * Attributes update structure.
+     * The attributes update structure.
      */
     AttributeUpdates: ObjectAttributeUpdateList;
   }
   export interface UpdateObjectAttributesResponse {
     /**
-     *  ObjectIdentifier of the updated object.
+     * The ObjectIdentifier of the updated object.
      */
     ObjectIdentifier?: ObjectIdentifier;
   }
   export interface UpdateSchemaRequest {
     /**
-     * ARN of the development schema. For more information, see arns.
+     * The Amazon Resource Name (ARN) of the development schema. For more information, see arns.
      */
     SchemaArn: Arn;
     /**
-     * Name of the schema.
+     * The name of the schema.
      */
     Name: SchemaName;
   }
   export interface UpdateSchemaResponse {
     /**
-     * ARN associated with the updated schema. For more information, see arns.
+     * The ARN that is associated with the updated schema. For more information, see arns.
      */
     SchemaArn?: Arn;
+  }
+  export interface UpdateTypedLinkFacetRequest {
+    /**
+     * The Amazon Resource Name (ARN) that is associated with the schema. For more information, see arns.
+     */
+    SchemaArn: Arn;
+    /**
+     * The unique name of the typed link facet.
+     */
+    Name: TypedLinkName;
+    /**
+     * Attributes update structure.
+     */
+    AttributeUpdates: TypedLinkFacetAttributeUpdateList;
+    /**
+     * A range filter that you provide for multiple attributes. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.
+     */
+    IdentityAttributeOrder: AttributeNameList;
+  }
+  export interface UpdateTypedLinkFacetResponse {
   }
   export type Version = string;
   /**

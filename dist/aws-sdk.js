@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.58.0
+// AWS SDK for JavaScript v2.59.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -88723,15 +88723,15 @@ module.exports={
       "result_key": "Buckets"
     },
     "ListMultipartUploads": {
+      "input_token": [
+        "KeyMarker",
+        "UploadIdMarker"
+      ],
       "limit_key": "MaxUploads",
       "more_results": "IsTruncated",
       "output_token": [
         "NextKeyMarker",
         "NextUploadIdMarker"
-      ],
-      "input_token": [
-        "KeyMarker",
-        "UploadIdMarker"
       ],
       "result_key": [
         "Uploads",
@@ -88739,15 +88739,15 @@ module.exports={
       ]
     },
     "ListObjectVersions": {
-      "more_results": "IsTruncated",
-      "limit_key": "MaxKeys",
-      "output_token": [
-        "NextKeyMarker",
-        "NextVersionIdMarker"
-      ],
       "input_token": [
         "KeyMarker",
         "VersionIdMarker"
+      ],
+      "limit_key": "MaxKeys",
+      "more_results": "IsTruncated",
+      "output_token": [
+        "NextKeyMarker",
+        "NextVersionIdMarker"
       ],
       "result_key": [
         "Versions",
@@ -88756,34 +88756,33 @@ module.exports={
       ]
     },
     "ListObjects": {
-      "more_results": "IsTruncated",
-      "limit_key": "MaxKeys",
-      "output_token": "NextMarker || Contents[-1].Key",
       "input_token": "Marker",
+      "limit_key": "MaxKeys",
+      "more_results": "IsTruncated",
+      "output_token": "NextMarker || Contents[-1].Key",
       "result_key": [
         "Contents",
         "CommonPrefixes"
       ]
     },
     "ListObjectsV2": {
+      "input_token": "ContinuationToken",
       "limit_key": "MaxKeys",
       "output_token": "NextContinuationToken",
-      "input_token": "ContinuationToken",
       "result_key": [
         "Contents",
         "CommonPrefixes"
       ]
     },
     "ListParts": {
-      "more_results": "IsTruncated",
-      "limit_key": "MaxParts",
-      "output_token": "NextPartNumberMarker",
       "input_token": "PartNumberMarker",
+      "limit_key": "MaxParts",
+      "more_results": "IsTruncated",
+      "output_token": "NextPartNumberMarker",
       "result_key": "Parts"
     }
   }
 }
-
 },{}],136:[function(require,module,exports){
 module.exports={
   "version": 2,
@@ -101244,7 +101243,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.58.0',
+  VERSION: '2.59.0',
 
 
   Signers: {},
@@ -105633,9 +105632,10 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
   validateBody: function validateBody() {
     var self = this;
     self.body = self.service.config.params.Body;
-    if (!self.body) throw new Error('params.Body is required');
     if (typeof self.body === 'string') {
       self.body = new AWS.util.Buffer(self.body);
+    } else if (!self.body) {
+      throw new Error('params.Body is required');
     }
     self.sliceFn = AWS.util.arraySliceFn(self.body);
   },

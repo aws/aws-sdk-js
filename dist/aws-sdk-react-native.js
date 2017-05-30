@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.58.0',
+	  VERSION: '2.59.0',
 
 	  /**
 	   * @api private
@@ -10083,7 +10083,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   Called when the {credentials} have been properly set on the configuration
 	   *   object.
 	   *
-	   *   @param err [Error] if this is set, credentials were not successfuly
+	   *   @param err [Error] if this is set, credentials were not successfully
 	   *     loaded and this error provides information why.
 	   * @see credentials
 	   * @see Credentials
@@ -16127,6 +16127,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * request.send();
 	 * ```
 	 *
+	 * Since registered callbacks may or may not be idempotent, requests should only
+	 * be sent once. To perform the same operation multiple times, you will need to
+	 * create multiple request objects, each with its own registered callbacks.
+	 *
 	 * ## Removing Default Listeners for Events
 	 *
 	 * Request objects are built with default listeners for the various events,
@@ -16408,7 +16412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  /**
 	   * @!method  promise()
-	   *   Returns a 'thenable' promise.
+	   *   Sends the request and returns a 'thenable' promise.
 	   *
 	   *   Two callbacks can be provided to the `then` method on the returned promise.
 	   *   The first callback will be called if the promise is fulfilled, and the second
@@ -16583,8 +16587,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  /**
-	   * Converts the request object into a readable stream that
-	   * can be read from or piped into a writable stream.
+	   * Sends the request and converts the request object into a readable stream
+	   * that can be read from or piped into a writable stream.
 	   *
 	   * @note The data read from a readable stream contains only
 	   *   the raw HTTP body contents.
@@ -41390,6 +41394,49 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"AttachTypedLink": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/attach",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"DirectoryArn",
+						"SourceObjectReference",
+						"TargetObjectReference",
+						"TypedLinkFacet",
+						"Attributes"
+					],
+					"members": {
+						"DirectoryArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"SourceObjectReference": {
+							"shape": "Sf"
+						},
+						"TargetObjectReference": {
+							"shape": "Sf"
+						},
+						"TypedLinkFacet": {
+							"shape": "St"
+						},
+						"Attributes": {
+							"shape": "Sv"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"TypedLinkSpecifier": {
+							"shape": "Sy"
+						}
+					}
+				}
+			},
 			"BatchRead": {
 				"http": {
 					"requestUri": "/amazonclouddirectory/2017-01-11/batchread",
@@ -41477,7 +41524,7 @@ return /******/ (function(modules) { // webpackBootstrap
 												"type": "structure",
 												"members": {
 													"Children": {
-														"shape": "S16"
+														"shape": "S1d"
 													},
 													"NextToken": {}
 												}
@@ -41530,7 +41577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										],
 										"members": {
 											"SchemaFacet": {
-												"shape": "S1e"
+												"shape": "S1l"
 											},
 											"ObjectAttributeList": {
 												"shape": "S5"
@@ -41585,7 +41632,7 @@ return /******/ (function(modules) { // webpackBootstrap
 												"shape": "Sf"
 											},
 											"AttributeUpdates": {
-												"shape": "S1j"
+												"shape": "S1q"
 											}
 										}
 									},
@@ -41745,7 +41792,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"Name": {},
 						"Attributes": {
-							"shape": "S25"
+							"shape": "S2c"
 						},
 						"ObjectType": {}
 					}
@@ -41813,7 +41860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "x-amz-data-partition"
 						},
 						"SchemaFacets": {
-							"shape": "S1e"
+							"shape": "S1l"
 						},
 						"ObjectAttributeList": {
 							"shape": "S5"
@@ -41851,6 +41898,47 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"SchemaArn": {}
 					}
+				}
+			},
+			"CreateTypedLinkFacet": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/facet/create",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"SchemaArn",
+						"Facet"
+					],
+					"members": {
+						"SchemaArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"Facet": {
+							"type": "structure",
+							"required": [
+								"Name",
+								"Attributes",
+								"IdentityAttributeOrder"
+							],
+							"members": {
+								"Name": {},
+								"Attributes": {
+									"shape": "S32"
+								},
+								"IdentityAttributeOrder": {
+									"shape": "S34"
+								}
+							}
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
 				}
 			},
 			"DeleteDirectory": {
@@ -41958,6 +42046,31 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"DeleteTypedLinkFacet": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/facet/delete",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"SchemaArn",
+						"Name"
+					],
+					"members": {
+						"SchemaArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"Name": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
 			"DetachFromIndex": {
 				"http": {
 					"method": "PUT",
@@ -42053,6 +42166,29 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {}
 				}
 			},
+			"DetachTypedLink": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/detach",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"DirectoryArn",
+						"TypedLinkSpecifier"
+					],
+					"members": {
+						"DirectoryArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"TypedLinkSpecifier": {
+							"shape": "Sy"
+						}
+					}
+				}
+			},
 			"DisableDirectory": {
 				"http": {
 					"method": "PUT",
@@ -42133,7 +42269,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"Directory": {
-							"shape": "S3d"
+							"shape": "S3t"
 						}
 					}
 				}
@@ -42199,7 +42335,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SchemaFacets": {
-							"shape": "S1e"
+							"shape": "S1l"
 						},
 						"ObjectIdentifier": {}
 					}
@@ -42230,6 +42366,34 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"GetTypedLinkFacetInformation": {
+				"http": {
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/facet/get",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"SchemaArn",
+						"Name"
+					],
+					"members": {
+						"SchemaArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"Name": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"IdentityAttributeOrder": {
+							"shape": "S34"
+						}
+					}
+				}
+			},
 			"ListAppliedSchemaArns": {
 				"http": {
 					"requestUri": "/amazonclouddirectory/2017-01-11/schema/applied",
@@ -42252,7 +42416,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SchemaArns": {
-							"shape": "S3q"
+							"shape": "S48"
 						},
 						"NextToken": {}
 					}
@@ -42291,7 +42455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"IndexAttachments": {
-							"shape": "S3t"
+							"shape": "S4b"
 						},
 						"NextToken": {}
 					}
@@ -42315,7 +42479,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SchemaArns": {
-							"shape": "S3q"
+							"shape": "S48"
 						},
 						"NextToken": {}
 					}
@@ -42345,7 +42509,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Directories": {
 							"type": "list",
 							"member": {
-								"shape": "S3d"
+								"shape": "S3t"
 							}
 						},
 						"NextToken": {}
@@ -42379,7 +42543,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Attributes": {
-							"shape": "S25"
+							"shape": "S2c"
 						},
 						"NextToken": {}
 					}
@@ -42417,6 +42581,48 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"ListIncomingTypedLinks": {
+				"http": {
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/incoming",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"DirectoryArn",
+						"ObjectReference"
+					],
+					"members": {
+						"DirectoryArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"ObjectReference": {
+							"shape": "Sf"
+						},
+						"FilterAttributeRanges": {
+							"shape": "S4o"
+						},
+						"FilterTypedLink": {
+							"shape": "St"
+						},
+						"NextToken": {},
+						"MaxResults": {
+							"type": "integer"
+						},
+						"ConsistencyLevel": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"LinkSpecifiers": {
+							"shape": "S4t"
+						},
+						"NextToken": {}
+					}
+				}
+			},
 			"ListIndex": {
 				"http": {
 					"requestUri": "/amazonclouddirectory/2017-01-11/index/targets",
@@ -42442,21 +42648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"shape": "S7"
 									},
 									"Range": {
-										"type": "structure",
-										"required": [
-											"StartMode",
-											"EndMode"
-										],
-										"members": {
-											"StartMode": {},
-											"StartValue": {
-												"shape": "S9"
-											},
-											"EndMode": {},
-											"EndValue": {
-												"shape": "S9"
-											}
-										}
+										"shape": "S4q"
 									}
 								}
 							}
@@ -42478,7 +42670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"IndexAttachments": {
-							"shape": "S3t"
+							"shape": "S4b"
 						},
 						"NextToken": {}
 					}
@@ -42559,7 +42751,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Children": {
-							"shape": "S16"
+							"shape": "S1d"
 						},
 						"NextToken": {}
 					}
@@ -42600,7 +42792,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"members": {
 									"Path": {},
 									"ObjectIdentifiers": {
-										"shape": "S4k"
+										"shape": "S57"
 									}
 								}
 							}
@@ -42683,7 +42875,49 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"AttachedPolicyIds": {
-							"shape": "S4k"
+							"shape": "S57"
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListOutgoingTypedLinks": {
+				"http": {
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/outgoing",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"DirectoryArn",
+						"ObjectReference"
+					],
+					"members": {
+						"DirectoryArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"ObjectReference": {
+							"shape": "Sf"
+						},
+						"FilterAttributeRanges": {
+							"shape": "S4o"
+						},
+						"FilterTypedLink": {
+							"shape": "St"
+						},
+						"NextToken": {},
+						"MaxResults": {
+							"type": "integer"
+						},
+						"ConsistencyLevel": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"TypedLinkSpecifiers": {
+							"shape": "S4t"
 						},
 						"NextToken": {}
 					}
@@ -42722,7 +42956,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ObjectIdentifiers": {
-							"shape": "S4k"
+							"shape": "S57"
 						},
 						"NextToken": {}
 					}
@@ -42746,7 +42980,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SchemaArns": {
-							"shape": "S3q"
+							"shape": "S48"
 						},
 						"NextToken": {}
 					}
@@ -42774,7 +43008,72 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Tags": {
-							"shape": "S4x"
+							"shape": "S5m"
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListTypedLinkFacetAttributes": {
+				"http": {
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/facet/attributes",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"SchemaArn",
+						"Name"
+					],
+					"members": {
+						"SchemaArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"Name": {},
+						"NextToken": {},
+						"MaxResults": {
+							"type": "integer"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Attributes": {
+							"shape": "S32"
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListTypedLinkFacetNames": {
+				"http": {
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/facet/list",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"SchemaArn"
+					],
+					"members": {
+						"SchemaArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"NextToken": {},
+						"MaxResults": {
+							"type": "integer"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"FacetNames": {
+							"type": "list",
+							"member": {}
 						},
 						"NextToken": {}
 					}
@@ -42933,7 +43232,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"ResourceArn": {},
 						"Tags": {
-							"shape": "S4x"
+							"shape": "S5m"
 						}
 					}
 				},
@@ -42991,7 +43290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"type": "structure",
 								"members": {
 									"Attribute": {
-										"shape": "S26"
+										"shape": "S2d"
 									},
 									"Action": {}
 								}
@@ -43027,7 +43326,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"shape": "Sf"
 						},
 						"AttributeUpdates": {
-							"shape": "S1j"
+							"shape": "S1q"
 						}
 					}
 				},
@@ -43063,6 +43362,52 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"SchemaArn": {}
 					}
+				}
+			},
+			"UpdateTypedLinkFacet": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/amazonclouddirectory/2017-01-11/typedlink/facet",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"SchemaArn",
+						"Name",
+						"AttributeUpdates",
+						"IdentityAttributeOrder"
+					],
+					"members": {
+						"SchemaArn": {
+							"location": "header",
+							"locationName": "x-amz-data-partition"
+						},
+						"Name": {},
+						"AttributeUpdates": {
+							"type": "list",
+							"member": {
+								"type": "structure",
+								"required": [
+									"Attribute",
+									"Action"
+								],
+								"members": {
+									"Attribute": {
+										"shape": "S33"
+									},
+									"Action": {}
+								}
+							}
+						},
+						"IdentityAttributeOrder": {
+							"shape": "S34"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
 				}
 			}
 		},
@@ -43127,18 +43472,68 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Selector": {}
 				}
 			},
-			"S16": {
+			"St": {
+				"type": "structure",
+				"required": [
+					"SchemaArn",
+					"TypedLinkName"
+				],
+				"members": {
+					"SchemaArn": {},
+					"TypedLinkName": {}
+				}
+			},
+			"Sv": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"required": [
+						"AttributeName",
+						"Value"
+					],
+					"members": {
+						"AttributeName": {},
+						"Value": {
+							"shape": "S9"
+						}
+					}
+				}
+			},
+			"Sy": {
+				"type": "structure",
+				"required": [
+					"TypedLinkFacet",
+					"SourceObjectReference",
+					"TargetObjectReference",
+					"IdentityAttributeValues"
+				],
+				"members": {
+					"TypedLinkFacet": {
+						"shape": "St"
+					},
+					"SourceObjectReference": {
+						"shape": "Sf"
+					},
+					"TargetObjectReference": {
+						"shape": "Sf"
+					},
+					"IdentityAttributeValues": {
+						"shape": "Sv"
+					}
+				}
+			},
+			"S1d": {
 				"type": "map",
 				"key": {},
 				"value": {}
 			},
-			"S1e": {
+			"S1l": {
 				"type": "list",
 				"member": {
 					"shape": "S3"
 				}
 			},
-			"S1j": {
+			"S1q": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -43158,13 +43553,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S25": {
+			"S2c": {
 				"type": "list",
 				"member": {
-					"shape": "S26"
+					"shape": "S2d"
 				}
 			},
-			"S26": {
+			"S2d": {
 				"type": "structure",
 				"required": [
 					"Name"
@@ -43185,19 +43580,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"type": "boolean"
 							},
 							"Rules": {
-								"type": "map",
-								"key": {},
-								"value": {
-									"type": "structure",
-									"members": {
-										"Type": {},
-										"Parameters": {
-											"type": "map",
-											"key": {},
-											"value": {}
-										}
-									}
-								}
+								"shape": "S2h"
 							}
 						}
 					},
@@ -43215,7 +43598,54 @@ return /******/ (function(modules) { // webpackBootstrap
 					"RequiredBehavior": {}
 				}
 			},
-			"S3d": {
+			"S2h": {
+				"type": "map",
+				"key": {},
+				"value": {
+					"type": "structure",
+					"members": {
+						"Type": {},
+						"Parameters": {
+							"type": "map",
+							"key": {},
+							"value": {}
+						}
+					}
+				}
+			},
+			"S32": {
+				"type": "list",
+				"member": {
+					"shape": "S33"
+				}
+			},
+			"S33": {
+				"type": "structure",
+				"required": [
+					"Name",
+					"Type",
+					"RequiredBehavior"
+				],
+				"members": {
+					"Name": {},
+					"Type": {},
+					"DefaultValue": {
+						"shape": "S9"
+					},
+					"IsImmutable": {
+						"type": "boolean"
+					},
+					"Rules": {
+						"shape": "S2h"
+					},
+					"RequiredBehavior": {}
+				}
+			},
+			"S34": {
+				"type": "list",
+				"member": {}
+			},
+			"S3t": {
 				"type": "structure",
 				"members": {
 					"Name": {},
@@ -43226,11 +43656,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S3q": {
+			"S48": {
 				"type": "list",
 				"member": {}
 			},
-			"S3t": {
+			"S4b": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -43242,11 +43672,49 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S4k": {
+			"S4o": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"required": [
+						"Range"
+					],
+					"members": {
+						"AttributeName": {},
+						"Range": {
+							"shape": "S4q"
+						}
+					}
+				}
+			},
+			"S4q": {
+				"type": "structure",
+				"required": [
+					"StartMode",
+					"EndMode"
+				],
+				"members": {
+					"StartMode": {},
+					"StartValue": {
+						"shape": "S9"
+					},
+					"EndMode": {},
+					"EndValue": {
+						"shape": "S9"
+					}
+				}
+			},
+			"S4t": {
+				"type": "list",
+				"member": {
+					"shape": "Sy"
+				}
+			},
+			"S57": {
 				"type": "list",
 				"member": {}
 			},
-			"S4x": {
+			"S5m": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -43336,6 +43804,16 @@ return /******/ (function(modules) { // webpackBootstrap
 				"limit_key": "MaxResults"
 			},
 			"ListTagsForResource": {
+				"input_token": "NextToken",
+				"output_token": "NextToken",
+				"limit_key": "MaxResults"
+			},
+			"ListTypedLinkFacetAttributes": {
+				"input_token": "NextToken",
+				"output_token": "NextToken",
+				"limit_key": "MaxResults"
+			},
+			"ListTypedLinkFacetNames": {
 				"input_token": "NextToken",
 				"output_token": "NextToken",
 				"limit_key": "MaxResults"
@@ -144361,9 +144839,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  validateBody: function validateBody() {
 	    var self = this;
 	    self.body = self.service.config.params.Body;
-	    if (!self.body) throw new Error('params.Body is required');
 	    if (typeof self.body === 'string') {
 	      self.body = new AWS.util.Buffer(self.body);
+	    } else if (!self.body) {
+	      throw new Error('params.Body is required');
 	    }
 	    self.sliceFn = AWS.util.arraySliceFn(self.body);
 	  },
@@ -149323,15 +149802,15 @@ return /******/ (function(modules) { // webpackBootstrap
 				"result_key": "Buckets"
 			},
 			"ListMultipartUploads": {
+				"input_token": [
+					"KeyMarker",
+					"UploadIdMarker"
+				],
 				"limit_key": "MaxUploads",
 				"more_results": "IsTruncated",
 				"output_token": [
 					"NextKeyMarker",
 					"NextUploadIdMarker"
-				],
-				"input_token": [
-					"KeyMarker",
-					"UploadIdMarker"
 				],
 				"result_key": [
 					"Uploads",
@@ -149339,15 +149818,15 @@ return /******/ (function(modules) { // webpackBootstrap
 				]
 			},
 			"ListObjectVersions": {
-				"more_results": "IsTruncated",
-				"limit_key": "MaxKeys",
-				"output_token": [
-					"NextKeyMarker",
-					"NextVersionIdMarker"
-				],
 				"input_token": [
 					"KeyMarker",
 					"VersionIdMarker"
+				],
+				"limit_key": "MaxKeys",
+				"more_results": "IsTruncated",
+				"output_token": [
+					"NextKeyMarker",
+					"NextVersionIdMarker"
 				],
 				"result_key": [
 					"Versions",
@@ -149356,29 +149835,29 @@ return /******/ (function(modules) { // webpackBootstrap
 				]
 			},
 			"ListObjects": {
-				"more_results": "IsTruncated",
-				"limit_key": "MaxKeys",
-				"output_token": "NextMarker || Contents[-1].Key",
 				"input_token": "Marker",
+				"limit_key": "MaxKeys",
+				"more_results": "IsTruncated",
+				"output_token": "NextMarker || Contents[-1].Key",
 				"result_key": [
 					"Contents",
 					"CommonPrefixes"
 				]
 			},
 			"ListObjectsV2": {
+				"input_token": "ContinuationToken",
 				"limit_key": "MaxKeys",
 				"output_token": "NextContinuationToken",
-				"input_token": "ContinuationToken",
 				"result_key": [
 					"Contents",
 					"CommonPrefixes"
 				]
 			},
 			"ListParts": {
-				"more_results": "IsTruncated",
-				"limit_key": "MaxParts",
-				"output_token": "NextPartNumberMarker",
 				"input_token": "PartNumberMarker",
+				"limit_key": "MaxParts",
+				"more_results": "IsTruncated",
+				"output_token": "NextPartNumberMarker",
 				"result_key": "Parts"
 			}
 		}
