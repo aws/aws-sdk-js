@@ -330,6 +330,27 @@
           return done();
         });
       });
+
+      it('supports empty string bodies', function(done) {
+          var reqs = helpers.mockResponses([
+              {
+                  data: {
+                      ETag: 'ETAG'
+                  }
+              }
+          ]);
+          upload = new AWS.S3.ManagedUpload({
+              params: {
+                  Body: ''
+              }
+          });
+          return upload.send(function() {
+              expect(helpers.operationsForRequests(reqs)).to.eql(['s3.putObject']);
+              expect(err).not.to.exist;
+              return done();
+          });
+      });
+
       it('errors if partSize is smaller than minPartSize', function() {
         return expect(function() {
           return new AWS.S3.ManagedUpload({
