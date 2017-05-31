@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.59.0
+// AWS SDK for JavaScript v2.60.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -76790,6 +76790,47 @@ module.exports={
           }
         }
       }
+    },
+    "StartDBInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DBInstanceIdentifier"
+        ],
+        "members": {
+          "DBInstanceIdentifier": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "StartDBInstanceResult",
+        "type": "structure",
+        "members": {
+          "DBInstance": {
+            "shape": "S1y"
+          }
+        }
+      }
+    },
+    "StopDBInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DBInstanceIdentifier"
+        ],
+        "members": {
+          "DBInstanceIdentifier": {},
+          "DBSnapshotIdentifier": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "StopDBInstanceResult",
+        "type": "structure",
+        "members": {
+          "DBInstance": {
+            "shape": "S1y"
+          }
+        }
+      }
     }
   },
   "shapes": {
@@ -101243,7 +101284,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.59.0',
+  VERSION: '2.60.0',
 
 
   Signers: {},
@@ -103501,9 +103542,6 @@ Shape.create = function create(shape, options, memberName) {
         return !name.match(/documentation/);
       });
     }
-    if (filteredKeys === ['shape']) { // no inline customizations
-      return refShape;
-    }
 
     var InlineShape = function() {
       refShape.constructor.call(this, shape, options, memberName);
@@ -103642,7 +103680,7 @@ function TimestampShape(shape) {
     property(this, 'timestampFormat', 'rfc822');
   } else if (shape.timestampFormat) {
     property(this, 'timestampFormat', shape.timestampFormat);
-  } else if (this.api) {
+  } else if (!this.timestampFormat && this.api) {
     if (this.api.timestampFormat) {
       property(this, 'timestampFormat', this.api.timestampFormat);
     } else {

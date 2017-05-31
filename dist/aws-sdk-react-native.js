@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.59.0',
+	  VERSION: '2.60.0',
 
 	  /**
 	   * @api private
@@ -1847,9 +1847,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return !name.match(/documentation/);
 	      });
 	    }
-	    if (filteredKeys === ['shape']) { // no inline customizations
-	      return refShape;
-	    }
 
 	    // create an inline shape with extra members
 	    var InlineShape = function() {
@@ -1991,7 +1988,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    property(this, 'timestampFormat', 'rfc822');
 	  } else if (shape.timestampFormat) {
 	    property(this, 'timestampFormat', shape.timestampFormat);
-	  } else if (this.api) {
+	  } else if (!this.timestampFormat && this.api) {
 	    if (this.api.timestampFormat) {
 	      property(this, 'timestampFormat', this.api.timestampFormat);
 	    } else {
@@ -135762,6 +135759,47 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"DBSecurityGroup": {
 							"shape": "Sk"
+						}
+					}
+				}
+			},
+			"StartDBInstance": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"DBInstanceIdentifier"
+					],
+					"members": {
+						"DBInstanceIdentifier": {}
+					}
+				},
+				"output": {
+					"resultWrapper": "StartDBInstanceResult",
+					"type": "structure",
+					"members": {
+						"DBInstance": {
+							"shape": "S1y"
+						}
+					}
+				}
+			},
+			"StopDBInstance": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"DBInstanceIdentifier"
+					],
+					"members": {
+						"DBInstanceIdentifier": {},
+						"DBSnapshotIdentifier": {}
+					}
+				},
+				"output": {
+					"resultWrapper": "StopDBInstanceResult",
+					"type": "structure",
+					"members": {
+						"DBInstance": {
+							"shape": "S1y"
 						}
 					}
 				}

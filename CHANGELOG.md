@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.59.0-->
+<!--LATEST=2.60.0-->
 <!--ENTRYINSERT-->
+
+## 2.60.0
+* bugfix: Core: Fixes issue where some TimeStamp shapes had an incorrect timestampFormat. Specifically affects S3.putBucketLifecycleConfiguration when using Date fields.
+* feature: RDS: Amazon RDS customers can now easily and quickly stop and start their DB instances.
 
 ## 2.59.0
 * bugfix: S3: Update ManagedUploader body verification to allow empty strings
