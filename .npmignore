@@ -6,6 +6,7 @@
 .npmignore
 .tesselinclude
 apis/*.normal.json
+appveyor.yml
 bower.json
 configuration
 configuration.sample
