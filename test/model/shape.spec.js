@@ -31,6 +31,211 @@
       });
     });
     return describe('TimestampShape', function() {
+      describe('timestampFormat', function() {
+        it('can be inherited', function() {
+          var api = new AWS.Model.Api({
+              metadata: {
+                timestampFormat: 'rfc822'
+              },
+              shapes: {
+                S1: {
+                  type: 'timestamp',
+                  timestampFormat: 'iso8601'
+                }
+              }
+            });
+            var shape = AWS.Model.Shape.create({
+              members: {
+                Date: {
+                  shape: 'S1'
+                }
+              }
+            }, {
+              api: api
+            });
+            expect(shape.members.Date.timestampFormat).to.eql('iso8601');
+        });
+        it('prefers rfc822 if header', function() {
+          var api = new AWS.Model.Api({
+              metadata: {
+                timestampFormat: 'iso8601'
+              },
+              shapes: {
+                S1: {
+                  type: 'timestamp'
+                }
+              }
+            });
+            var shape = AWS.Model.Shape.create({
+              members: {
+                Date: {
+                  shape: 'S1',
+                  location: 'header'
+                }
+              }
+            }, {
+              api: api
+            });
+            expect(shape.members.Date.timestampFormat).to.eql('rfc822');
+        });
+        it('prefers own timestampFormat if not header', function() {
+          var api = new AWS.Model.Api({
+            metadata: {
+              timestampFormat: 'unixTimestamp'
+            },
+            shapes: {
+              S1: {
+                type: 'timestamp',
+                timestampFormat: 'rfc822'
+              }
+            }
+          });
+          var shape = AWS.Model.Shape.create({
+            members: {
+              Date: {
+                shape: 'S1',
+                timestampFormat: 'iso8601'
+              }
+            }
+          }, {
+            api: api
+          });
+          expect(shape.members.Date.timestampFormat).to.eql('iso8601');
+        });
+        it('will use api metadata timestampFormat if not found elsewhere', function() {
+          var api = new AWS.Model.Api({
+            metadata: {
+              timestampFormat: 'unixTimestamp'
+            },
+            shapes: {
+              S1: {
+                type: 'timestamp'
+              }
+            }
+          });
+          var shape = AWS.Model.Shape.create({
+            members: {
+              Date: {
+                shape: 'S1',
+              }
+            }
+          }, {
+            api: api
+          });
+          expect(shape.members.Date.timestampFormat).to.eql('unixTimestamp');
+        });
+        it('will default to unixTimestamp when if not specified and protocol is json', function() {
+          var api = new AWS.Model.Api({
+            metadata: {
+              protocol: 'json'
+            },
+            shapes: {
+              S1: {
+                type: 'timestamp'
+              }
+            }
+          });
+          var shape = AWS.Model.Shape.create({
+            members: {
+              Date: {
+                shape: 'S1',
+              }
+            }
+          }, {
+            api: api
+          });
+          expect(shape.members.Date.timestampFormat).to.eql('unixTimestamp');
+        });
+        it('will default to unixTimestamp when if not specified and protocol is rest-json', function() {
+          var api = new AWS.Model.Api({
+            metadata: {
+              protocol: 'rest-json'
+            },
+            shapes: {
+              S1: {
+                type: 'timestamp'
+              }
+            }
+          });
+          var shape = AWS.Model.Shape.create({
+            members: {
+              Date: {
+                shape: 'S1',
+              }
+            }
+          }, {
+            api: api
+          });
+          expect(shape.members.Date.timestampFormat).to.eql('unixTimestamp');
+        });
+        it('will default to iso8601 when if not specified and protocol is rest-xml', function() {
+          var api = new AWS.Model.Api({
+            metadata: {
+              protocol: 'rest-xml'
+            },
+            shapes: {
+              S1: {
+                type: 'timestamp'
+              }
+            }
+          });
+          var shape = AWS.Model.Shape.create({
+            members: {
+              Date: {
+                shape: 'S1',
+              }
+            }
+          }, {
+            api: api
+          });
+          expect(shape.members.Date.timestampFormat).to.eql('iso8601');
+        });
+        it('will default to iso8601 when if not specified and protocol is query', function() {
+          var api = new AWS.Model.Api({
+            metadata: {
+              protocol: 'query'
+            },
+            shapes: {
+              S1: {
+                type: 'timestamp'
+              }
+            }
+          });
+          var shape = AWS.Model.Shape.create({
+            members: {
+              Date: {
+                shape: 'S1',
+              }
+            }
+          }, {
+            api: api
+          });
+          expect(shape.members.Date.timestampFormat).to.eql('iso8601');
+        });
+        it('will default to iso8601 when if not specified and protocol is ec2', function() {
+          var api = new AWS.Model.Api({
+            metadata: {
+              protocol: 'ec2'
+            },
+            shapes: {
+              S1: {
+                type: 'timestamp'
+              }
+            }
+          });
+          var shape = AWS.Model.Shape.create({
+            members: {
+              Date: {
+                shape: 'S1',
+              }
+            }
+          }, {
+            api: api
+          });
+          expect(shape.members.Date.timestampFormat).to.eql('iso8601');
+        });
+      });
+      
       describe('toType()', function() {
         it('converts unix timestamps', function() {
           var api, date, shape;
