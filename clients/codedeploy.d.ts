@@ -244,6 +244,14 @@ declare class CodeDeploy extends Service {
    */
   listDeployments(callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentsOutput) => void): Request<CodeDeploy.Types.ListDeploymentsOutput, AWSError>;
   /**
+   * Lists the names of stored connections to GitHub accounts.
+   */
+  listGitHubAccountTokenNames(params: CodeDeploy.Types.ListGitHubAccountTokenNamesInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListGitHubAccountTokenNamesOutput) => void): Request<CodeDeploy.Types.ListGitHubAccountTokenNamesOutput, AWSError>;
+  /**
+   * Lists the names of stored connections to GitHub accounts.
+   */
+  listGitHubAccountTokenNames(callback?: (err: AWSError, data: CodeDeploy.Types.ListGitHubAccountTokenNamesOutput) => void): Request<CodeDeploy.Types.ListGitHubAccountTokenNamesOutput, AWSError>;
+  /**
    * Gets a list of names for one or more on-premises instances. Unless otherwise specified, both registered and deregistered on-premises instance names will be listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.
    */
   listOnPremisesInstances(params: CodeDeploy.Types.ListOnPremisesInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.ListOnPremisesInstancesOutput, AWSError>;
@@ -368,6 +376,10 @@ declare namespace CodeDeploy {
      * True if the user has authenticated with GitHub for the specified application; otherwise, false.
      */
     linkedToGitHub?: Boolean;
+    /**
+     * The name for a connection to a GitHub account.
+     */
+    gitHubAccountName?: GitHubAccountTokenName;
   }
   export type ApplicationName = string;
   export type ApplicationRevisionSortBy = "registerTime"|"firstUsedTime"|"lastUsedTime"|string;
@@ -780,6 +792,14 @@ declare namespace CodeDeploy {
      * Information about the load balancer to use in a deployment.
      */
     loadBalancerInfo?: LoadBalancerInfo;
+    /**
+     * Information about the most recent successful deployment to the deployment group.
+     */
+    lastSuccessfulDeployment?: LastDeploymentInfo;
+    /**
+     * Information about the most recent attempted deployment to the deployment group.
+     */
+    lastAttemptedDeployment?: LastDeploymentInfo;
   }
   export type DeploymentGroupInfoList = DeploymentGroupInfo[];
   export type DeploymentGroupName = string;
@@ -1130,6 +1150,8 @@ declare namespace CodeDeploy {
      */
     instanceInfo?: InstanceInfo;
   }
+  export type GitHubAccountTokenName = string;
+  export type GitHubAccountTokenNameList = GitHubAccountTokenName[];
   export interface GitHubLocation {
     /**
      * The GitHub account and repository pair that stores a reference to the commit that represents the bundled artifacts for the application revision.  Specified as account/repository.
@@ -1219,6 +1241,24 @@ declare namespace CodeDeploy {
   export type InstanceTypeList = InstanceType[];
   export type InstancesList = InstanceId[];
   export type Key = string;
+  export interface LastDeploymentInfo {
+    /**
+     * The deployment ID.
+     */
+    deploymentId?: DeploymentId;
+    /**
+     * The status of the most recent deployment.
+     */
+    status?: DeploymentStatus;
+    /**
+     * A timestamp indicating when the most recent deployment to the deployment group completed.
+     */
+    endTime?: Timestamp;
+    /**
+     * A timestamp indicating when the most recent deployment to the deployment group started.
+     */
+    createTime?: Timestamp;
+  }
   export type LifecycleErrorCode = "Success"|"ScriptMissing"|"ScriptNotExecutable"|"ScriptTimedOut"|"ScriptFailed"|"UnknownError"|string;
   export interface LifecycleEvent {
     /**
@@ -1399,6 +1439,22 @@ declare namespace CodeDeploy {
     deployments?: DeploymentsList;
     /**
      * If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployments call to return the next set of deployments in the list.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListGitHubAccountTokenNamesInput {
+    /**
+     * An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListGitHubAccountTokenNamesOutput {
+    /**
+     * A list of names of connections to GitHub accounts.
+     */
+    tokenNameList?: GitHubAccountTokenNameList;
+    /**
+     * If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent ListGitHubAccountTokenNames call to return the next set of names in the list. 
      */
     nextToken?: NextToken;
   }

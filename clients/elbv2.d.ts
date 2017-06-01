@@ -630,12 +630,24 @@ declare namespace ELBv2 {
      * The Amazon Resource Names (ARN) of the rules.
      */
     RuleArns?: RuleArns;
+    /**
+     * The marker for the next set of results. (You received this marker from a previous call.)
+     */
+    Marker?: Marker;
+    /**
+     * The maximum number of results to return with this call.
+     */
+    PageSize?: PageSize;
   }
   export interface DescribeRulesOutput {
     /**
      * Information about the rules.
      */
     Rules?: Rules;
+    /**
+     * The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+     */
+    NextMarker?: Marker;
   }
   export interface DescribeSSLPoliciesInput {
     /**

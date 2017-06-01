@@ -903,7 +903,7 @@
         },
         "voiceId":{
           "shape":"String",
-          "documentation":"<p>The Amazon Parrot voice ID that Amazon Lex uses for voice interactions with the user.</p>"
+          "documentation":"<p>The Amazon Polly voice ID that Amazon Lex uses for voice interactions with the user.</p>"
         },
         "checksum":{
           "shape":"String",
@@ -1481,7 +1481,7 @@
         },
         "nameContains":{
           "shape":"BotChannelName",
-          "documentation":"<p>Substring to match in channel association names. An association will be returned if any part of its name matches the substring. For example, \"xyz\" matches both \"xyzabc\" and \"abcxyz.\"</p>",
+          "documentation":"<p>Substring to match in channel association names. An association will be returned if any part of its name matches the substring. For example, \"xyz\" matches both \"xyzabc\" and \"abcxyz.\" To return all bot channel associations, use a hyphen (\"-\") as the <code>nameContains</code> parameter.</p>",
           "location":"querystring",
           "locationName":"nameContains"
         }
@@ -1566,7 +1566,7 @@
         },
         "voiceId":{
           "shape":"String",
-          "documentation":"<p>The Amazon Parrot voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .</p>"
+          "documentation":"<p>The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .</p>"
         },
         "checksum":{
           "shape":"String",
@@ -2419,7 +2419,7 @@
         },
         "voiceId":{
           "shape":"String",
-          "documentation":"<p>The Amazon Parrot voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see <a href=\"http://docs.aws.amazon.com/polly/latest/dg/API_Voice.html\">Voice</a> in the <i>Amazon Polly Developer Guide</i>.</p>"
+          "documentation":"<p>The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see <a href=\"http://docs.aws.amazon.com/polly/latest/dg/API_Voice.html\">Voice</a> in the <i>Amazon Polly Developer Guide</i>.</p>"
         },
         "checksum":{
           "shape":"String",
@@ -2484,7 +2484,7 @@
         },
         "voiceId":{
           "shape":"String",
-          "documentation":"<p>The Amazon Parrot voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .</p>"
+          "documentation":"<p>The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .</p>"
         },
         "checksum":{
           "shape":"String",

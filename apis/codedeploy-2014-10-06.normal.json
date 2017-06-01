@@ -521,6 +521,20 @@
       ],
       "documentation":"<p>Lists the deployments in a deployment group for an application registered with the applicable IAM user or AWS account.</p>"
     },
+    "ListGitHubAccountTokenNames":{
+      "name":"ListGitHubAccountTokenNames",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListGitHubAccountTokenNamesInput"},
+      "output":{"shape":"ListGitHubAccountTokenNamesOutput"},
+      "errors":[
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"ResourceValidationException"}
+      ],
+      "documentation":"<p>Lists the names of stored connections to GitHub accounts.</p>"
+    },
     "ListOnPremisesInstances":{
       "name":"ListOnPremisesInstances",
       "http":{
@@ -767,6 +781,10 @@
         "linkedToGitHub":{
           "shape":"Boolean",
           "documentation":"<p>True if the user has authenticated with GitHub for the specified application; otherwise, false.</p>"
+        },
+        "gitHubAccountName":{
+          "shape":"GitHubAccountTokenName",
+          "documentation":"<p>The name for a connection to a GitHub account.</p>"
         }
       },
       "documentation":"<p>Information about an application.</p>"
@@ -872,7 +890,7 @@
           "documentation":"<p>Information to get about the application revisions, including type and location.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get application revisions operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetApplicationRevisions operation.</p>"
     },
     "BatchGetApplicationRevisionsOutput":{
       "type":"structure",
@@ -890,7 +908,7 @@
           "documentation":"<p>Additional information about the revisions, including the type and location.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get application revisions operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetApplicationRevisions operation.</p>"
     },
     "BatchGetApplicationsInput":{
       "type":"structure",
@@ -900,7 +918,7 @@
           "documentation":"<p>A list of application names separated by spaces.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get applications operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetApplications operation.</p>"
     },
     "BatchGetApplicationsOutput":{
       "type":"structure",
@@ -910,7 +928,7 @@
           "documentation":"<p>Information about the applications.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get applications operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetApplications operation.</p>"
     },
     "BatchGetDeploymentGroupsInput":{
       "type":"structure",
@@ -928,7 +946,7 @@
           "documentation":"<p>The deployment groups' names.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get deployment groups operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetDeploymentGroups operation.</p>"
     },
     "BatchGetDeploymentGroupsOutput":{
       "type":"structure",
@@ -942,7 +960,7 @@
           "documentation":"<p>Information about errors that may have occurred during the API call.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get deployment groups operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetDeploymentGroups operation.</p>"
     },
     "BatchGetDeploymentInstancesInput":{
       "type":"structure",
@@ -960,7 +978,7 @@
           "documentation":"<p>The unique IDs of instances in the deployment group.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get deployment instances operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetDeploymentInstances operation.</p>"
     },
     "BatchGetDeploymentInstancesOutput":{
       "type":"structure",
@@ -974,7 +992,7 @@
           "documentation":"<p>Information about errors that may have occurred during the API call.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get deployment instance operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetDeploymentInstances operation.</p>"
     },
     "BatchGetDeploymentsInput":{
       "type":"structure",
@@ -984,7 +1002,7 @@
           "documentation":"<p>A list of deployment IDs, separated by spaces.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get deployments operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetDeployments operation.</p>"
     },
     "BatchGetDeploymentsOutput":{
       "type":"structure",
@@ -994,7 +1012,7 @@
           "documentation":"<p>Information about the deployments.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get deployments operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetDeployments operation.</p>"
     },
     "BatchGetOnPremisesInstancesInput":{
       "type":"structure",
@@ -1004,7 +1022,7 @@
           "documentation":"<p>The names of the on-premises instances about which to get information.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a batch get on-premises instances operation.</p>"
+      "documentation":"<p>Represents the input of a BatchGetOnPremisesInstances operation.</p>"
     },
     "BatchGetOnPremisesInstancesOutput":{
       "type":"structure",
@@ -1014,7 +1032,7 @@
           "documentation":"<p>Information about the on-premises instances.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a batch get on-premises instances operation.</p>"
+      "documentation":"<p>Represents the output of a BatchGetOnPremisesInstances operation.</p>"
     },
     "BatchLimitExceededException":{
       "type":"structure",
@@ -1090,7 +1108,7 @@
           "documentation":"<p>The name of the application. This name must be unique with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a create application operation.</p>"
+      "documentation":"<p>Represents the input of a CreateApplication operation.</p>"
     },
     "CreateApplicationOutput":{
       "type":"structure",
@@ -1100,7 +1118,7 @@
           "documentation":"<p>A unique application ID.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a create application operation.</p>"
+      "documentation":"<p>Represents the output of a CreateApplication operation.</p>"
     },
     "CreateDeploymentConfigInput":{
       "type":"structure",
@@ -1115,7 +1133,7 @@
           "documentation":"<p>The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.</p> <p>The type parameter takes either of the following values:</p> <ul> <li> <p>HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.</p> </li> </ul> <p>The value parameter takes an integer.</p> <p>For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a create deployment configuration operation.</p>"
+      "documentation":"<p>Represents the input of a CreateDeploymentConfig operation.</p>"
     },
     "CreateDeploymentConfigOutput":{
       "type":"structure",
@@ -1125,7 +1143,7 @@
           "documentation":"<p>A unique deployment configuration ID.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a create deployment configuration operation.</p>"
+      "documentation":"<p>Represents the output of a CreateDeploymentConfig operation.</p>"
     },
     "CreateDeploymentGroupInput":{
       "type":"structure",
@@ -1188,7 +1206,7 @@
           "documentation":"<p>Information about the load balancer used in a deployment.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a create deployment group operation.</p>"
+      "documentation":"<p>Represents the input of a CreateDeploymentGroup operation.</p>"
     },
     "CreateDeploymentGroupOutput":{
       "type":"structure",
@@ -1198,7 +1216,7 @@
           "documentation":"<p>A unique deployment group ID.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a create deployment group operation.</p>"
+      "documentation":"<p>Represents the output of a CreateDeploymentGroup operation.</p>"
     },
     "CreateDeploymentInput":{
       "type":"structure",
@@ -1245,7 +1263,7 @@
           "documentation":"<p>Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren't part of the previous successful deployment.</p> <p>The fileExistsBehavior parameter takes any of the following values:</p> <ul> <li> <p>DISALLOW: The deployment fails. This is also the default behavior if no option is specified.</p> </li> <li> <p>OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.</p> </li> <li> <p>RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.</p> </li> </ul>"
         }
       },
-      "documentation":"<p>Represents the input of a create deployment operation.</p>"
+      "documentation":"<p>Represents the input of a CreateDeployment operation.</p>"
     },
     "CreateDeploymentOutput":{
       "type":"structure",
@@ -1255,7 +1273,7 @@
           "documentation":"<p>A unique deployment ID.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a create deployment operation.</p>"
+      "documentation":"<p>Represents the output of a CreateDeployment operation.</p>"
     },
     "DeleteApplicationInput":{
       "type":"structure",
@@ -1266,7 +1284,7 @@
           "documentation":"<p>The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a delete application operation.</p>"
+      "documentation":"<p>Represents the input of a DeleteApplication operation.</p>"
     },
     "DeleteDeploymentConfigInput":{
       "type":"structure",
@@ -1277,7 +1295,7 @@
           "documentation":"<p>The name of a deployment configuration associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a delete deployment configuration operation.</p>"
+      "documentation":"<p>Represents the input of a DeleteDeploymentConfig operation.</p>"
     },
     "DeleteDeploymentGroupInput":{
       "type":"structure",
@@ -1295,7 +1313,7 @@
           "documentation":"<p>The name of an existing deployment group for the specified application.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a delete deployment group operation.</p>"
+      "documentation":"<p>Represents the input of a DeleteDeploymentGroup operation.</p>"
     },
     "DeleteDeploymentGroupOutput":{
       "type":"structure",
@@ -1305,7 +1323,7 @@
           "documentation":"<p>If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a delete deployment group operation.</p>"
+      "documentation":"<p>Represents the output of a DeleteDeploymentGroup operation.</p>"
     },
     "DeploymentAlreadyCompletedException":{
       "type":"structure",
@@ -1473,6 +1491,14 @@
         "loadBalancerInfo":{
           "shape":"LoadBalancerInfo",
           "documentation":"<p>Information about the load balancer to use in a deployment.</p>"
+        },
+        "lastSuccessfulDeployment":{
+          "shape":"LastDeploymentInfo",
+          "documentation":"<p>Information about the most recent successful deployment to the deployment group.</p>"
+        },
+        "lastAttemptedDeployment":{
+          "shape":"LastDeploymentInfo",
+          "documentation":"<p>Information about the most recent attempted deployment to the deployment group.</p>"
         }
       },
       "documentation":"<p>Information about a deployment group.</p>"
@@ -1751,7 +1777,7 @@
           "documentation":"<p>The name of the on-premises instance to deregister.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a deregister on-premises instance operation.</p>"
+      "documentation":"<p>Represents the input of a DeregisterOnPremisesInstance operation.</p>"
     },
     "Description":{"type":"string"},
     "DescriptionTooLongException":{
@@ -1911,7 +1937,7 @@
           "documentation":"<p>The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get application operation.</p>"
+      "documentation":"<p>Represents the input of a GetApplication operation.</p>"
     },
     "GetApplicationOutput":{
       "type":"structure",
@@ -1921,7 +1947,7 @@
           "documentation":"<p>Information about the application.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get application operation.</p>"
+      "documentation":"<p>Represents the output of a GetApplication operation.</p>"
     },
     "GetApplicationRevisionInput":{
       "type":"structure",
@@ -1939,7 +1965,7 @@
           "documentation":"<p>Information about the application revision to get, including type and location.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get application revision operation.</p>"
+      "documentation":"<p>Represents the input of a GetApplicationRevision operation.</p>"
     },
     "GetApplicationRevisionOutput":{
       "type":"structure",
@@ -1957,7 +1983,7 @@
           "documentation":"<p>General information about the revision.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get application revision operation.</p>"
+      "documentation":"<p>Represents the output of a GetApplicationRevision operation.</p>"
     },
     "GetDeploymentConfigInput":{
       "type":"structure",
@@ -1968,7 +1994,7 @@
           "documentation":"<p>The name of a deployment configuration associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get deployment configuration operation.</p>"
+      "documentation":"<p>Represents the input of a GetDeploymentConfig operation.</p>"
     },
     "GetDeploymentConfigOutput":{
       "type":"structure",
@@ -1978,7 +2004,7 @@
           "documentation":"<p>Information about the deployment configuration.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get deployment configuration operation.</p>"
+      "documentation":"<p>Represents the output of a GetDeploymentConfig operation.</p>"
     },
     "GetDeploymentGroupInput":{
       "type":"structure",
@@ -1996,7 +2022,7 @@
           "documentation":"<p>The name of an existing deployment group for the specified application.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get deployment group operation.</p>"
+      "documentation":"<p>Represents the input of a GetDeploymentGroup operation.</p>"
     },
     "GetDeploymentGroupOutput":{
       "type":"structure",
@@ -2006,7 +2032,7 @@
           "documentation":"<p>Information about the deployment group.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get deployment group operation.</p>"
+      "documentation":"<p>Represents the output of a GetDeploymentGroup operation.</p>"
     },
     "GetDeploymentInput":{
       "type":"structure",
@@ -2017,7 +2043,7 @@
           "documentation":"<p>A deployment ID associated with the applicable IAM user or AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get deployment operation.</p>"
+      "documentation":"<p>Represents the input of a GetDeployment operation.</p>"
     },
     "GetDeploymentInstanceInput":{
       "type":"structure",
@@ -2035,7 +2061,7 @@
           "documentation":"<p>The unique ID of an instance in the deployment group.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get deployment instance operation.</p>"
+      "documentation":"<p>Represents the input of a GetDeploymentInstance operation.</p>"
     },
     "GetDeploymentInstanceOutput":{
       "type":"structure",
@@ -2045,7 +2071,7 @@
           "documentation":"<p>Information about the instance.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get deployment instance operation.</p>"
+      "documentation":"<p>Represents the output of a GetDeploymentInstance operation.</p>"
     },
     "GetDeploymentOutput":{
       "type":"structure",
@@ -2055,7 +2081,7 @@
           "documentation":"<p>Information about the deployment.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get deployment operation.</p>"
+      "documentation":"<p>Represents the output of a GetDeployment operation.</p>"
     },
     "GetOnPremisesInstanceInput":{
       "type":"structure",
@@ -2066,7 +2092,7 @@
           "documentation":"<p>The name of the on-premises instance about which to get information.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a get on-premises instance operation.</p>"
+      "documentation":"<p>Represents the input of a GetOnPremisesInstance operation.</p>"
     },
     "GetOnPremisesInstanceOutput":{
       "type":"structure",
@@ -2076,7 +2102,19 @@
           "documentation":"<p>Information about the on-premises instance.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a get on-premises instance operation.</p>"
+      "documentation":"<p>Represents the output of a GetOnPremisesInstance operation.</p>"
+    },
+    "GitHubAccountTokenDoesNotExistException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>No GitHub account connection exists with the named specified in the call.</p>",
+      "exception":true
+    },
+    "GitHubAccountTokenName":{"type":"string"},
+    "GitHubAccountTokenNameList":{
+      "type":"list",
+      "member":{"shape":"GitHubAccountTokenName"}
     },
     "GitHubLocation":{
       "type":"structure",
@@ -2545,6 +2583,28 @@
       "exception":true
     },
     "Key":{"type":"string"},
+    "LastDeploymentInfo":{
+      "type":"structure",
+      "members":{
+        "deploymentId":{
+          "shape":"DeploymentId",
+          "documentation":"<p>The deployment ID.</p>"
+        },
+        "status":{
+          "shape":"DeploymentStatus",
+          "documentation":"<p>The status of the most recent deployment.</p>"
+        },
+        "endTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp indicating when the most recent deployment to the deployment group completed.</p>"
+        },
+        "createTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp indicating when the most recent deployment to the deployment group started.</p>"
+        }
+      },
+      "documentation":"<p>Information about the most recent attempted or successful deployment to a deployment group.</p>"
+    },
     "LifecycleErrorCode":{
       "type":"string",
       "enum":[
@@ -2639,7 +2699,7 @@
           "documentation":"<p>An identifier returned from the previous list application revisions call. It can be used to return the next set of applications in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list application revisions operation.</p>"
+      "documentation":"<p>Represents the input of a ListApplicationRevisions operation.</p>"
     },
     "ListApplicationRevisionsOutput":{
       "type":"structure",
@@ -2653,7 +2713,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier will also be returned. It can be used in a subsequent list application revisions call to return the next set of application revisions in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list application revisions operation.</p>"
+      "documentation":"<p>Represents the output of a ListApplicationRevisions operation.</p>"
     },
     "ListApplicationsInput":{
       "type":"structure",
@@ -2663,7 +2723,7 @@
           "documentation":"<p>An identifier returned from the previous list applications call. It can be used to return the next set of applications in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list applications operation.</p>"
+      "documentation":"<p>Represents the input of a ListApplications operation.</p>"
     },
     "ListApplicationsOutput":{
       "type":"structure",
@@ -2677,7 +2737,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list applications call to return the next set of applications, will also be returned. in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list applications operation.</p>"
+      "documentation":"<p>Represents the output of a ListApplications operation.</p>"
     },
     "ListDeploymentConfigsInput":{
       "type":"structure",
@@ -2687,7 +2747,7 @@
           "documentation":"<p>An identifier returned from the previous list deployment configurations call. It can be used to return the next set of deployment configurations in the list. </p>"
         }
       },
-      "documentation":"<p>Represents the input of a list deployment configurations operation.</p>"
+      "documentation":"<p>Represents the input of a ListDeploymentConfigs operation.</p>"
     },
     "ListDeploymentConfigsOutput":{
       "type":"structure",
@@ -2701,7 +2761,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment configurations call to return the next set of deployment configurations in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list deployment configurations operation.</p>"
+      "documentation":"<p>Represents the output of a ListDeploymentConfigs operation.</p>"
     },
     "ListDeploymentGroupsInput":{
       "type":"structure",
@@ -2716,7 +2776,7 @@
           "documentation":"<p>An identifier returned from the previous list deployment groups call. It can be used to return the next set of deployment groups in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list deployment groups operation.</p>"
+      "documentation":"<p>Represents the input of a ListDeploymentGroups operation.</p>"
     },
     "ListDeploymentGroupsOutput":{
       "type":"structure",
@@ -2734,7 +2794,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment groups call to return the next set of deployment groups in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list deployment groups operation.</p>"
+      "documentation":"<p>Represents the output of a ListDeploymentGroups operation.</p>"
     },
     "ListDeploymentInstancesInput":{
       "type":"structure",
@@ -2757,7 +2817,7 @@
           "documentation":"<p>The set of instances in a blue/green deployment, either those in the original environment (\"BLUE\") or those in the replacement environment (\"GREEN\"), for which you want to view instance information.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list deployment instances operation.</p>"
+      "documentation":"<p>Represents the input of a ListDeploymentInstances operation.</p>"
     },
     "ListDeploymentInstancesOutput":{
       "type":"structure",
@@ -2771,7 +2831,7 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployment instances call to return the next set of deployment instances in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list deployment instances operation.</p>"
+      "documentation":"<p>Represents the output of a ListDeploymentInstances operation.</p>"
     },
     "ListDeploymentsInput":{
       "type":"structure",
@@ -2797,7 +2857,7 @@
           "documentation":"<p>An identifier returned from the previous list deployments call. It can be used to return the next set of deployments in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list deployments operation.</p>"
+      "documentation":"<p>Represents the input of a ListDeployments operation.</p>"
     },
     "ListDeploymentsOutput":{
       "type":"structure",
@@ -2811,7 +2871,31 @@
           "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list deployments call to return the next set of deployments in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a list deployments operation.</p>"
+      "documentation":"<p>Represents the output of a ListDeployments operation.</p>"
+    },
+    "ListGitHubAccountTokenNamesInput":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list. </p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a ListGitHubAccountTokenNames operation.</p>"
+    },
+    "ListGitHubAccountTokenNamesOutput":{
+      "type":"structure",
+      "members":{
+        "tokenNameList":{
+          "shape":"GitHubAccountTokenNameList",
+          "documentation":"<p>A list of names of connections to GitHub accounts.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent ListGitHubAccountTokenNames call to return the next set of names in the list. </p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a ListGitHubAccountTokenNames operation.</p>"
     },
     "ListOnPremisesInstancesInput":{
       "type":"structure",
@@ -2829,7 +2913,7 @@
           "documentation":"<p>An identifier returned from the previous list on-premises instances call. It can be used to return the next set of on-premises instances in the list.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a list on-premises instances operation.</p>"
+      "documentation":"<p>Represents the input of a ListOnPremisesInstances operation.</p>"
     },
     "ListOnPremisesInstancesOutput":{
       "type":"structure",
@@ -2916,7 +3000,7 @@
           "documentation":"<p>Information about the application revision to register, including type and location.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a register application revision operation.</p>"
+      "documentation":"<p>Represents the input of a RegisterApplicationRevision operation.</p>"
     },
     "RegisterOnPremisesInstanceInput":{
       "type":"structure",
@@ -2960,9 +3044,16 @@
           "documentation":"<p>The names of the on-premises instances from which to remove tags.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a remove tags from on-premises instances operation.</p>"
+      "documentation":"<p>Represents the input of a RemoveTagsFromOnPremisesInstances operation.</p>"
     },
     "Repository":{"type":"string"},
+    "ResourceValidationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The specified resource could not be validated.</p>",
+      "exception":true
+    },
     "RevisionDoesNotExistException":{
       "type":"structure",
       "members":{
@@ -3108,7 +3199,7 @@
           "documentation":"<p>Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.</p>"
         }
       },
-      "documentation":"<p>Represents the input of a stop deployment operation.</p>"
+      "documentation":"<p>Represents the input of a StopDeployment operation.</p>"
     },
     "StopDeploymentOutput":{
       "type":"structure",
@@ -3122,7 +3213,7 @@
           "documentation":"<p>An accompanying status message.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a stop deployment operation.</p>"
+      "documentation":"<p>Represents the output of a StopDeployment operation.</p>"
     },
     "StopStatus":{
       "type":"string",
@@ -3291,7 +3382,7 @@
           "documentation":"<p>The new name to give the application.</p>"
         }
       },
-      "documentation":"<p>Represents the input of an update application operation.</p>"
+      "documentation":"<p>Represents the input of an UpdateApplication operation.</p>"
     },
     "UpdateDeploymentGroupInput":{
       "type":"structure",
@@ -3357,7 +3448,7 @@
           "documentation":"<p>Information about the load balancer used in a deployment.</p>"
         }
       },
-      "documentation":"<p>Represents the input of an update deployment group operation.</p>"
+      "documentation":"<p>Represents the input of an UpdateDeploymentGroup operation.</p>"
     },
     "UpdateDeploymentGroupOutput":{
       "type":"structure",
@@ -3367,7 +3458,7 @@
           "documentation":"<p>If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the AWS account. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the AWS account.</p>"
         }
       },
-      "documentation":"<p>Represents the output of an update deployment group operation.</p>"
+      "documentation":"<p>Represents the output of an UpdateDeploymentGroup operation.</p>"
     },
     "Value":{"type":"string"},
     "VersionId":{"type":"string"}

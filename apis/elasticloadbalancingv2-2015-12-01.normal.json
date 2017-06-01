@@ -428,7 +428,9 @@
         {"shape":"TargetGroupAssociationLimitException"},
         {"shape":"RuleNotFoundException"},
         {"shape":"OperationNotPermittedException"},
-        {"shape":"TooManyRegistrationsForTargetIdException"}
+        {"shape":"TooManyRegistrationsForTargetIdException"},
+        {"shape":"TooManyTargetsException"},
+        {"shape":"TargetGroupNotFoundException"}
       ],
       "documentation":"<p>Modifies the specified rule.</p> <p>Any existing properties that you do not modify retain their current values.</p> <p>To modify the default action, use <a>ModifyListener</a>.</p>"
     },
@@ -1093,6 +1095,14 @@
         "RuleArns":{
           "shape":"RuleArns",
           "documentation":"<p>The Amazon Resource Names (ARN) of the rules.</p>"
+        },
+        "Marker":{
+          "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results. (You received this marker from a previous call.)</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of results to return with this call.</p>"
         }
       }
     },
@@ -1102,6 +1112,10 @@
         "Rules":{
           "shape":"Rules",
           "documentation":"<p>Information about the rules.</p>"
+        },
+        "NextMarker":{
+          "shape":"Marker",
+          "documentation":"<p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>"
         }
       }
     },

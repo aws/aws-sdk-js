@@ -8,6 +8,7 @@ AWS.CognitoIdentityServiceProvider = Service.defineService('cognitoidentityservi
 Object.defineProperty(apiLoader.services['cognitoidentityserviceprovider'], '2016-04-18', {
   get: function get() {
     var model = require('../apis/cognito-idp-2016-04-18.min.json');
+    model.paginators = require('../apis/cognito-idp-2016-04-18.paginators.json').pagination;
     return model;
   },
   enumerable: true,

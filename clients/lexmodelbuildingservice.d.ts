@@ -470,7 +470,7 @@ declare namespace LexModelBuildingService {
      */
     idleSessionTTLInSeconds?: SessionTTL;
     /**
-     * The Amazon Parrot voice ID that Amazon Lex uses for voice interactions with the user.
+     * The Amazon Polly voice ID that Amazon Lex uses for voice interactions with the user.
      */
     voiceId?: String;
     /**
@@ -844,7 +844,7 @@ declare namespace LexModelBuildingService {
      */
     maxResults?: MaxResults;
     /**
-     * Substring to match in channel association names. An association will be returned if any part of its name matches the substring. For example, "xyz" matches both "xyzabc" and "abcxyz."
+     * Substring to match in channel association names. An association will be returned if any part of its name matches the substring. For example, "xyz" matches both "xyzabc" and "abcxyz." To return all bot channel associations, use a hyphen ("-") as the nameContains parameter.
      */
     nameContains?: BotChannelName;
   }
@@ -910,7 +910,7 @@ declare namespace LexModelBuildingService {
      */
     idleSessionTTLInSeconds?: SessionTTL;
     /**
-     * The Amazon Parrot voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .
+     * The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .
      */
     voiceId?: String;
     /**
@@ -1438,7 +1438,7 @@ declare namespace LexModelBuildingService {
      */
     idleSessionTTLInSeconds?: SessionTTL;
     /**
-     * The Amazon Parrot voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see Voice in the Amazon Polly Developer Guide.
+     * The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see Voice in the Amazon Polly Developer Guide.
      */
     voiceId?: String;
     /**
@@ -1500,7 +1500,7 @@ declare namespace LexModelBuildingService {
      */
     idleSessionTTLInSeconds?: SessionTTL;
     /**
-     * The Amazon Parrot voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .
+     * The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .
      */
     voiceId?: String;
     /**
