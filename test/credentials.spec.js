@@ -223,7 +223,7 @@
         it('should prefer $HOME to os.homedir', function() {
           process.env.HOME = '/home/user';
           helpers.spyOn(os, 'homedir').andReturn(process.env.HOME + '/foo/bar');
- 
+
            new AWS.SharedIniFileCredentials();
           expect(os.homedir.calls.length).to.equal(0);
           expect(AWS.util.readFileSync.calls.length).to.equal(1);
@@ -649,26 +649,109 @@
           return expect(creds.httpOptions.timeout).to.equal(5000);
         });
       });
-      describe('getECSRelativeUri', function() {
+
+      describe('isConfiguredForEcsCredentials', function () {
+        it('returns false when process is not available', function() {
+          var process_copy = process;
+          process = void 0;
+          expect(creds.isConfiguredForEcsCredentials()).to.equal(false);
+          process = process_copy;
+        });
+
+        it(
+          'returns false when relative URI environment variable not set',
+          function() {
+            expect(creds.isConfiguredForEcsCredentials()).to.equal(false);
+          }
+        );
+
+        it(
+          'returns true when the relative URI environment variable is set',
+          function() {
+            process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
+            expect(creds.isConfiguredForEcsCredentials()).to.equal(true);
+          }
+        );
+
+        it(
+          'returns true when the full URI environment variable is set',
+          function() {
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+            expect(creds.isConfiguredForEcsCredentials()).to.equal(true);
+          }
+        );
+
+        it(
+          'returns true from the object prototype when the relative URI environment variable is set',
+          function() {
+            process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
+            expect(AWS.ECSCredentials.prototype.isConfiguredForEcsCredentials())
+              .to.equal(true);
+          }
+        );
+
+        it(
+          'returns true from the object prototype when the full URI environment variable is set',
+          function() {
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+            expect(AWS.ECSCredentials.prototype.isConfiguredForEcsCredentials())
+              .to.equal(true);
+          }
+        );
+      });
+
+      describe('getECSFullUri', function() {
         it('returns undefined when process is not available', function() {
           var process, process_copy;
           process_copy = process;
           process = void 0;
-          expect(creds.getECSRelativeUri()).to.equal(void 0);
-          return process = process_copy;
+          expect(creds.getECSFullUri()).to.equal(void 0);
+          process = process_copy;
         });
-        it('returns undefined when relative URI environment variable not set', function() {
-          return expect(creds.getECSRelativeUri()).to.equal(void 0);
-        });
-        it('returns relative URI when environment variable is set', function() {
-          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-          return expect(creds.getECSRelativeUri()).to.equal('/path');
-        });
-        return it('returns relative URI from prototype when environment variable is set', function() {
-          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-          return expect(AWS.ECSCredentials.prototype.getECSRelativeUri()).to.equal('/path');
-        });
+
+        it(
+          'returns undefined when neither the relative URI environment variable nor the full URI environment variable is set',
+          function() {
+            expect(creds.getECSFullUri()).to.equal(void 0);
+          }
+        );
+
+        it(
+          'returns a full URI when the relative URI environment variable is set',
+          function() {
+            process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
+            expect(creds.getECSFullUri()).to.equal('http://169.254.170.2/path');
+          }
+        );
+
+        it(
+          'returns a full URI when the full URI environment variable is set',
+          function() {
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+            expect(creds.getECSFullUri())
+                .to.equal('http://localhost/get-credentials');
+          }
+        );
+
+        it(
+          'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
+          function () {
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'wss://localhost/get-credentials';
+            expect(creds.getECSFullUri.bind(creds))
+                .to.throw(/Unsupported protocol/);
+          }
+        );
+
+        it(
+          'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
+          function () {
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'https://s3-us-west-2.amazonaws.com/bucket/credentials';
+            expect(creds.getECSFullUri.bind(creds))
+              .to.throw(/Unsupported hostname/);
+          }
+        );
       });
+
       describe('credsFormatIsValid', function() {
         it('returns false when data is missing required property', function() {
           var incompleteData;
@@ -677,12 +760,13 @@
             SecretAccessKey: 'SECRET',
             Token: 'TOKEN'
           };
-          return expect(creds.credsFormatIsValid(incompleteData)).to.be["false"];
+          expect(creds.credsFormatIsValid(incompleteData)).to.be["false"];
         });
-        return it('returns true when data has all required properties', function() {
-          return expect(creds.credsFormatIsValid(responseData)).to.be["true"];
+        it('returns true when data has all required properties', function() {
+          expect(creds.credsFormatIsValid(responseData)).to.be["true"];
         });
       });
+
       describe('needsRefresh', function() {
         return it('can be expired based on expire time from URI endpoint', function() {
           var spy;
@@ -690,25 +774,45 @@
           spy = mockEndpoint(new Date(0));
           creds.refresh(function() {});
           expect(spy.calls.length).to.equal(1);
-          return expect(creds.needsRefresh()).to.equal(true);
+          expect(creds.needsRefresh()).to.equal(true);
         });
       });
-      return describe('refresh', function() {
+
+      describe('refresh', function() {
         it('loads credentials from specified relative URI', function() {
-          var callbackErr, spy;
-          callbackErr = null;
+          var callbackErr = null;
           process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-          spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000));
+          var spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000));
           creds.refresh(function(err) {
-            return callbackErr = err;
+            callbackErr = err;
           });
           expect(spy.calls.length).to.equal(1);
+          expect(spy.calls[0].arguments[0])
+            .to.equal('http://169.254.170.2/path');
           expect(callbackErr).to.be["null"];
           expect(creds.accessKeyId).to.equal('KEY');
           expect(creds.secretAccessKey).to.equal('SECRET');
           expect(creds.sessionToken).to.equal('TOKEN');
-          return expect(creds.needsRefresh()).to.equal(false);
+          expect(creds.needsRefresh()).to.equal(false);
         });
+
+        it('loads credentials from specified full URI', function() {
+          var callbackErr = null;
+          process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+          var spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000));
+          creds.refresh(function(err) {
+            callbackErr = err;
+          });
+          expect(spy.calls.length).to.equal(1);
+          expect(spy.calls[0].arguments[0])
+            .to.equal('http://localhost/get-credentials');
+          expect(callbackErr).to.be["null"];
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.needsRefresh()).to.equal(false);
+        });
+
         it('passes an error to the callback when environment variable not set', function() {
           var callbackErr, spy;
           callbackErr = null;
@@ -717,8 +821,9 @@
             return callbackErr = err;
           });
           expect(spy.calls.length).to.equal(0);
-          return expect(callbackErr).to.not.be["null"];
+          expect(callbackErr).to.not.be["null"];
         });
+
         it('retries up to specified maxRetries for timeout errors', function(done) {
           var httpClient, options, spy;
           process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
@@ -732,14 +837,30 @@
               code: 'TimeoutError'
             });
           });
-          return creds.refresh(function(err) {
+          creds.refresh(function(err) {
             expect(err).to.not.be["null"];
             expect(err.code).to.equal('TimeoutError');
             expect(spy.calls.length).to.equal(4);
-            return done();
+            done();
           });
         });
-        return it('makes only one request when multiple calls are made before first one finishes', function(done) {
+
+        it('passes the environmental auth token to the request', function(done) {
+          process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+          process.env['AWS_CONTAINER_AUTHORIZATION_TOKEN'] = 'Basic abcd';
+          creds = new AWS.ECSCredentials();
+          var httpClient = AWS.HttpClient.getInstance();
+          helpers.spyOn(httpClient, 'handleRequest').andCallFake(function(httpReq, httpOp, cb, errCb) {
+            expect(httpReq.headers.Authorization).to.equal('Basic abcd');
+            helpers.mockHttpSuccessfulResponse(200, {}, JSON.stringify(responseData), cb);
+          });
+          creds.refresh(function(err) {
+            expect(err).to.be["null"];
+            done();
+          });
+        });
+
+        it('makes only one request when multiple calls are made before first one finishes', function(done) {
           var callRefresh, concurrency, countdown, j, providers, ref, results, spy, x;
           concurrency = countdown = 10;
           process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
