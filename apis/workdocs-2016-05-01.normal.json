@@ -26,7 +26,7 @@
         {"shape":"FailedDependencyException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Aborts the upload of the specified document version that was previously initiated by <a>InitiateDocumentVersionUpload</a>. The client should make this call only when it no longer intends or fails to upload the document version.</p>"
+      "documentation":"<p>Aborts the upload of the specified document version that was previously initiated by <a>InitiateDocumentVersionUpload</a>. The client should make this call only when it no longer intends to upload the document version, or fails to do so.</p>"
     },
     "ActivateUser":{
       "name":"ActivateUser",
@@ -63,6 +63,46 @@
       ],
       "documentation":"<p>Creates a set of permissions for the specified folder or document. The resource permissions are overwritten if the principals already have different permissions.</p>"
     },
+    "CreateComment":{
+      "name":"CreateComment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/api/v1/documents/{DocumentId}/versions/{VersionId}/comment",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateCommentRequest"},
+      "output":{"shape":"CreateCommentResponse"},
+      "errors":[
+        {"shape":"EntityNotExistsException"},
+        {"shape":"ProhibitedStateException"},
+        {"shape":"UnauthorizedOperationException"},
+        {"shape":"UnauthorizedResourceAccessException"},
+        {"shape":"FailedDependencyException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"DocumentLockedForCommentsException"}
+      ],
+      "documentation":"<p>Adds a new comment to the specified document version.</p>"
+    },
+    "CreateCustomMetadata":{
+      "name":"CreateCustomMetadata",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/api/v1/resources/{ResourceId}/customMetadata",
+        "responseCode":200
+      },
+      "input":{"shape":"CreateCustomMetadataRequest"},
+      "output":{"shape":"CreateCustomMetadataResponse"},
+      "errors":[
+        {"shape":"EntityNotExistsException"},
+        {"shape":"UnauthorizedOperationException"},
+        {"shape":"UnauthorizedResourceAccessException"},
+        {"shape":"ProhibitedStateException"},
+        {"shape":"CustomMetadataLimitExceededException"},
+        {"shape":"FailedDependencyException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Adds one or more custom properties to the specified resource (a folder, document, or version).</p>"
+    },
     "CreateFolder":{
       "name":"CreateFolder",
       "http":{
@@ -83,6 +123,25 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Creates a folder with the specified name and parent folder.</p>"
+    },
+    "CreateLabels":{
+      "name":"CreateLabels",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/api/v1/resources/{ResourceId}/labels",
+        "responseCode":200
+      },
+      "input":{"shape":"CreateLabelsRequest"},
+      "output":{"shape":"CreateLabelsResponse"},
+      "errors":[
+        {"shape":"EntityNotExistsException"},
+        {"shape":"UnauthorizedOperationException"},
+        {"shape":"UnauthorizedResourceAccessException"},
+        {"shape":"FailedDependencyException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"TooManyLabelsException"}
+      ],
+      "documentation":"<p>Adds the specified list of labels to the given resource (a document or folder)</p>"
     },
     "CreateNotificationSubscription":{
       "name":"CreateNotificationSubscription",
@@ -134,6 +193,44 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Deactivates the specified user, which revokes the user's access to Amazon WorkDocs.</p>"
+    },
+    "DeleteComment":{
+      "name":"DeleteComment",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/api/v1/documents/{DocumentId}/versions/{VersionId}/comment/{CommentId}",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteCommentRequest"},
+      "errors":[
+        {"shape":"EntityNotExistsException"},
+        {"shape":"ProhibitedStateException"},
+        {"shape":"UnauthorizedOperationException"},
+        {"shape":"UnauthorizedResourceAccessException"},
+        {"shape":"FailedDependencyException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"DocumentLockedForCommentsException"}
+      ],
+      "documentation":"<p>Deletes the specified comment from the document version.</p>"
+    },
+    "DeleteCustomMetadata":{
+      "name":"DeleteCustomMetadata",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/api/v1/resources/{ResourceId}/customMetadata",
+        "responseCode":200
+      },
+      "input":{"shape":"DeleteCustomMetadataRequest"},
+      "output":{"shape":"DeleteCustomMetadataResponse"},
+      "errors":[
+        {"shape":"EntityNotExistsException"},
+        {"shape":"UnauthorizedOperationException"},
+        {"shape":"UnauthorizedResourceAccessException"},
+        {"shape":"ProhibitedStateException"},
+        {"shape":"FailedDependencyException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Deletes custom metadata from the specified resource.</p>"
     },
     "DeleteDocument":{
       "name":"DeleteDocument",
@@ -190,6 +287,24 @@
       ],
       "documentation":"<p>Deletes the contents of the specified folder.</p>"
     },
+    "DeleteLabels":{
+      "name":"DeleteLabels",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/api/v1/resources/{ResourceId}/labels",
+        "responseCode":200
+      },
+      "input":{"shape":"DeleteLabelsRequest"},
+      "output":{"shape":"DeleteLabelsResponse"},
+      "errors":[
+        {"shape":"EntityNotExistsException"},
+        {"shape":"UnauthorizedOperationException"},
+        {"shape":"UnauthorizedResourceAccessException"},
+        {"shape":"FailedDependencyException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Deletes the specified list of labels from a resource.</p>"
+    },
     "DeleteNotificationSubscription":{
       "name":"DeleteNotificationSubscription",
       "http":{
@@ -222,6 +337,25 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Deletes the specified user from a Simple AD or Microsoft AD directory.</p>"
+    },
+    "DescribeComments":{
+      "name":"DescribeComments",
+      "http":{
+        "method":"GET",
+        "requestUri":"/api/v1/documents/{DocumentId}/versions/{VersionId}/comments",
+        "responseCode":200
+      },
+      "input":{"shape":"DescribeCommentsRequest"},
+      "output":{"shape":"DescribeCommentsResponse"},
+      "errors":[
+        {"shape":"EntityNotExistsException"},
+        {"shape":"ProhibitedStateException"},
+        {"shape":"UnauthorizedOperationException"},
+        {"shape":"UnauthorizedResourceAccessException"},
+        {"shape":"FailedDependencyException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>List all the comments for the specified document version.</p>"
     },
     "DescribeDocumentVersions":{
       "name":"DescribeDocumentVersions",
@@ -260,7 +394,7 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"ProhibitedStateException"}
       ],
-      "documentation":"<p>Describes the contents of the specified folder, including its documents and sub-folders.</p> <p>By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.</p>"
+      "documentation":"<p>Describes the contents of the specified folder, including its documents and subfolders.</p> <p>By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.</p>"
     },
     "DescribeNotificationSubscriptions":{
       "name":"DescribeNotificationSubscriptions",
@@ -330,7 +464,7 @@
         {"shape":"FailedDependencyException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Retrieves the specified document object.</p>"
+      "documentation":"<p>Retrieves details of a document.</p>"
     },
     "GetDocumentPath":{
       "name":"GetDocumentPath",
@@ -425,7 +559,9 @@
         {"shape":"UnauthorizedOperationException"},
         {"shape":"UnauthorizedResourceAccessException"},
         {"shape":"FailedDependencyException"},
-        {"shape":"ServiceUnavailableException"}
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"DraftUploadOutOfSyncException"},
+        {"shape":"ResourceAlreadyCheckedOutException"}
       ],
       "documentation":"<p>Creates a new document object and version object.</p> <p>The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call <a>UpdateDocumentVersion</a>.</p> <p>To cancel the document upload, call <a>AbortDocumentVersionUpload</a>.</p>"
     },
@@ -480,7 +616,7 @@
         {"shape":"FailedDependencyException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Updates the specified attributes of the specified document. The user must have access to both the document and its parent folder, if applicable.</p>"
+      "documentation":"<p>Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.</p>"
     },
     "UpdateDocumentVersion":{
       "name":"UpdateDocumentVersion",
@@ -552,6 +688,12 @@
         "VersionId"
       ],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "DocumentId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the document.</p>",
@@ -575,6 +717,12 @@
           "documentation":"<p>The ID of the user.</p>",
           "location":"uri",
           "locationName":"UserId"
+        },
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
         }
       }
     },
@@ -594,6 +742,12 @@
         "Principals"
       ],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "ResourceId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the resource.</p>",
@@ -615,6 +769,87 @@
         }
       }
     },
+    "AuthenticationHeaderType":{
+      "type":"string",
+      "max":8199,
+      "min":1,
+      "sensitive":true
+    },
+    "BooleanType":{"type":"boolean"},
+    "Comment":{
+      "type":"structure",
+      "required":["CommentId"],
+      "members":{
+        "CommentId":{
+          "shape":"CommentIdType",
+          "documentation":"<p>The ID of the comment.</p>"
+        },
+        "ParentId":{
+          "shape":"CommentIdType",
+          "documentation":"<p>The ID of the parent comment.</p>"
+        },
+        "ThreadId":{
+          "shape":"CommentIdType",
+          "documentation":"<p>The ID of the root comment in the thread.</p>"
+        },
+        "Text":{
+          "shape":"CommentTextType",
+          "documentation":"<p>The text of the comment.</p>"
+        },
+        "Contributor":{
+          "shape":"User",
+          "documentation":"<p>The details of the user who made the comment.</p>"
+        },
+        "CreatedTimestamp":{
+          "shape":"TimestampType",
+          "documentation":"<p>The time that the comment was created.</p>"
+        },
+        "Status":{
+          "shape":"CommentStatusType",
+          "documentation":"<p>The status of the comment.</p>"
+        },
+        "Visibility":{
+          "shape":"CommentVisibilityType",
+          "documentation":"<p>The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.</p>"
+        },
+        "RecipientId":{
+          "shape":"IdType",
+          "documentation":"<p>If the comment is a reply to another user's comment, this field contains the user ID of the user being replied to.</p>"
+        }
+      },
+      "documentation":"<p>Describes a comment.</p>"
+    },
+    "CommentIdType":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\w+-.@]+"
+    },
+    "CommentList":{
+      "type":"list",
+      "member":{"shape":"Comment"}
+    },
+    "CommentStatusType":{
+      "type":"string",
+      "enum":[
+        "DRAFT",
+        "PUBLISHED",
+        "DELETED"
+      ]
+    },
+    "CommentTextType":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "sensitive":true
+    },
+    "CommentVisibilityType":{
+      "type":"string",
+      "enum":[
+        "PUBLIC",
+        "PRIVATE"
+      ]
+    },
     "ConcurrentModificationException":{
       "type":"structure",
       "members":{
@@ -624,10 +859,109 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "CreateCommentRequest":{
+      "type":"structure",
+      "required":[
+        "DocumentId",
+        "VersionId",
+        "Text"
+      ],
+      "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
+        "DocumentId":{
+          "shape":"ResourceIdType",
+          "documentation":"<p>The ID of the document.</p>",
+          "location":"uri",
+          "locationName":"DocumentId"
+        },
+        "VersionId":{
+          "shape":"DocumentVersionIdType",
+          "documentation":"<p>The ID of the document version.</p>",
+          "location":"uri",
+          "locationName":"VersionId"
+        },
+        "ParentId":{
+          "shape":"CommentIdType",
+          "documentation":"<p>The ID of the parent comment.</p>"
+        },
+        "ThreadId":{
+          "shape":"CommentIdType",
+          "documentation":"<p>The ID of the root comment in the thread.</p>"
+        },
+        "Text":{
+          "shape":"CommentTextType",
+          "documentation":"<p>The text of the comment.</p>"
+        },
+        "Visibility":{
+          "shape":"CommentVisibilityType",
+          "documentation":"<p>The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.</p>"
+        },
+        "NotifyCollaborators":{
+          "shape":"BooleanType",
+          "documentation":"<p>Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.</p>"
+        }
+      }
+    },
+    "CreateCommentResponse":{
+      "type":"structure",
+      "members":{
+        "Comment":{
+          "shape":"Comment",
+          "documentation":"<p>The comment that has been created.</p>"
+        }
+      }
+    },
+    "CreateCustomMetadataRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceId",
+        "CustomMetadata"
+      ],
+      "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
+        "ResourceId":{
+          "shape":"ResourceIdType",
+          "documentation":"<p>The ID of the resource.</p>",
+          "location":"uri",
+          "locationName":"ResourceId"
+        },
+        "VersionId":{
+          "shape":"DocumentVersionIdType",
+          "documentation":"<p>The ID of the version, if the custom metadata is being added to a document version.</p>",
+          "location":"querystring",
+          "locationName":"versionid"
+        },
+        "CustomMetadata":{
+          "shape":"CustomMetadataMap",
+          "documentation":"<p>Custom metadata in the form of name-value pairs.</p>"
+        }
+      }
+    },
+    "CreateCustomMetadataResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "CreateFolderRequest":{
       "type":"structure",
       "required":["ParentFolderId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "Name":{
           "shape":"ResourceNameType",
           "documentation":"<p>The name of the new folder.</p>"
@@ -645,6 +979,36 @@
           "shape":"FolderMetadata",
           "documentation":"<p>The metadata of the folder.</p>"
         }
+      }
+    },
+    "CreateLabelsRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceId",
+        "Labels"
+      ],
+      "members":{
+        "ResourceId":{
+          "shape":"ResourceIdType",
+          "documentation":"<p>The ID of the resource.</p>",
+          "location":"uri",
+          "locationName":"ResourceId"
+        },
+        "Labels":{
+          "shape":"Labels",
+          "documentation":"<p>List of labels to add to the resource.</p>"
+        },
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        }
+      }
+    },
+    "CreateLabelsResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "CreateNotificationSubscriptionRequest":{
@@ -702,6 +1066,10 @@
           "shape":"UsernameType",
           "documentation":"<p>The login name of the user.</p>"
         },
+        "EmailAddress":{
+          "shape":"EmailAddressType",
+          "documentation":"<p>The email address of the user.</p>"
+        },
         "GivenName":{
           "shape":"UserAttributeValueType",
           "documentation":"<p>The given name of the user.</p>"
@@ -721,6 +1089,12 @@
         "StorageRule":{
           "shape":"StorageRuleType",
           "documentation":"<p>The amount of storage for the user.</p>"
+        },
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
         }
       }
     },
@@ -733,6 +1107,39 @@
         }
       }
     },
+    "CustomMetadataKeyList":{
+      "type":"list",
+      "member":{"shape":"CustomMetadataKeyType"},
+      "max":8
+    },
+    "CustomMetadataKeyType":{
+      "type":"string",
+      "max":56,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-][a-zA-Z0-9 _-]*"
+    },
+    "CustomMetadataLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessageType"}
+      },
+      "documentation":"<p>The limit has been reached on the number of custom properties for the specified resource.</p>",
+      "error":{"httpStatusCode":429},
+      "exception":true
+    },
+    "CustomMetadataMap":{
+      "type":"map",
+      "key":{"shape":"CustomMetadataKeyType"},
+      "value":{"shape":"CustomMetadataValueType"},
+      "max":8,
+      "min":1
+    },
+    "CustomMetadataValueType":{
+      "type":"string",
+      "max":56,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-][a-zA-Z0-9 _-]*"
+    },
     "DeactivateUserRequest":{
       "type":"structure",
       "required":["UserId"],
@@ -742,6 +1149,12 @@
           "documentation":"<p>The ID of the user.</p>",
           "location":"uri",
           "locationName":"UserId"
+        },
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
         }
       }
     },
@@ -753,10 +1166,91 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "DeleteCommentRequest":{
+      "type":"structure",
+      "required":[
+        "DocumentId",
+        "VersionId",
+        "CommentId"
+      ],
+      "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
+        "DocumentId":{
+          "shape":"ResourceIdType",
+          "documentation":"<p>The ID of the document.</p>",
+          "location":"uri",
+          "locationName":"DocumentId"
+        },
+        "VersionId":{
+          "shape":"DocumentVersionIdType",
+          "documentation":"<p>The ID of the document version.</p>",
+          "location":"uri",
+          "locationName":"VersionId"
+        },
+        "CommentId":{
+          "shape":"CommentIdType",
+          "documentation":"<p>The ID of the comment.</p>",
+          "location":"uri",
+          "locationName":"CommentId"
+        }
+      }
+    },
+    "DeleteCustomMetadataRequest":{
+      "type":"structure",
+      "required":["ResourceId"],
+      "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
+        "ResourceId":{
+          "shape":"ResourceIdType",
+          "documentation":"<p>The ID of the resource, either a document or folder.</p>",
+          "location":"uri",
+          "locationName":"ResourceId"
+        },
+        "VersionId":{
+          "shape":"DocumentVersionIdType",
+          "documentation":"<p>The ID of the version, if the custom metadata is being deleted from a document version.</p>",
+          "location":"querystring",
+          "locationName":"versionId"
+        },
+        "Keys":{
+          "shape":"CustomMetadataKeyList",
+          "documentation":"<p>List of properties to remove.</p>",
+          "location":"querystring",
+          "locationName":"keys"
+        },
+        "DeleteAll":{
+          "shape":"BooleanType",
+          "documentation":"<p>Flag to indicate removal of all custom metadata properties from the specified resource.</p>",
+          "location":"querystring",
+          "locationName":"deleteAll"
+        }
+      }
+    },
+    "DeleteCustomMetadataResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteDocumentRequest":{
       "type":"structure",
       "required":["DocumentId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "DocumentId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the document.</p>",
@@ -769,6 +1263,12 @@
       "type":"structure",
       "required":["FolderId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "FolderId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the folder.</p>",
@@ -781,12 +1281,53 @@
       "type":"structure",
       "required":["FolderId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "FolderId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the folder.</p>",
           "location":"uri",
           "locationName":"FolderId"
         }
+      }
+    },
+    "DeleteLabelsRequest":{
+      "type":"structure",
+      "required":["ResourceId"],
+      "members":{
+        "ResourceId":{
+          "shape":"ResourceIdType",
+          "documentation":"<p>The ID of the resource.</p>",
+          "location":"uri",
+          "locationName":"ResourceId"
+        },
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
+        "Labels":{
+          "shape":"Labels",
+          "documentation":"<p>List of labels to delete from the resource.</p>",
+          "location":"querystring",
+          "locationName":"labels"
+        },
+        "DeleteAll":{
+          "shape":"BooleanType",
+          "documentation":"<p>Flag to request removal of all labels from the specified resource.</p>",
+          "location":"querystring",
+          "locationName":"deleteAll"
+        }
+      }
+    },
+    "DeleteLabelsResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "DeleteNotificationSubscriptionRequest":{
@@ -814,6 +1355,12 @@
       "type":"structure",
       "required":["UserId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "UserId":{
           "shape":"IdType",
           "documentation":"<p>The ID of the user.</p>",
@@ -822,10 +1369,68 @@
         }
       }
     },
+    "DescribeCommentsRequest":{
+      "type":"structure",
+      "required":[
+        "DocumentId",
+        "VersionId"
+      ],
+      "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
+        "DocumentId":{
+          "shape":"ResourceIdType",
+          "documentation":"<p>The ID of the document.</p>",
+          "location":"uri",
+          "locationName":"DocumentId"
+        },
+        "VersionId":{
+          "shape":"DocumentVersionIdType",
+          "documentation":"<p>The ID of the document version.</p>",
+          "location":"uri",
+          "locationName":"VersionId"
+        },
+        "Limit":{
+          "shape":"LimitType",
+          "documentation":"<p>The maximum number of items to return.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        },
+        "Marker":{
+          "shape":"MarkerType",
+          "documentation":"<p>The marker for the next set of results. This marker was received from a previous call.</p>",
+          "location":"querystring",
+          "locationName":"marker"
+        }
+      }
+    },
+    "DescribeCommentsResponse":{
+      "type":"structure",
+      "members":{
+        "Comments":{
+          "shape":"CommentList",
+          "documentation":"<p>The list of comments for the specified document version.</p>"
+        },
+        "Marker":{
+          "shape":"MarkerType",
+          "documentation":"<p>The marker for the next set of results. This marker was received from a previous call.</p>"
+        }
+      }
+    },
     "DescribeDocumentVersionsRequest":{
       "type":"structure",
       "required":["DocumentId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "DocumentId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the document.</p>",
@@ -875,6 +1480,12 @@
       "type":"structure",
       "required":["FolderId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "FolderId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the folder.</p>",
@@ -901,7 +1512,7 @@
         },
         "Marker":{
           "shape":"PageMarkerType",
-          "documentation":"<p>The marker for the next set of results. (You received this marker from a previous call.)</p>",
+          "documentation":"<p>The marker for the next set of results. This marker was received from a previous call.</p>",
           "location":"querystring",
           "locationName":"marker"
         },
@@ -924,7 +1535,7 @@
       "members":{
         "Folders":{
           "shape":"FolderMetadataList",
-          "documentation":"<p>The sub-folders in the specified folder.</p>"
+          "documentation":"<p>The subfolders in the specified folder.</p>"
         },
         "Documents":{
           "shape":"DocumentMetadataList",
@@ -977,6 +1588,12 @@
       "type":"structure",
       "required":["ResourceId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "ResourceId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the resource.</p>",
@@ -1013,6 +1630,12 @@
     "DescribeUsersRequest":{
       "type":"structure",
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "OrganizationId":{
           "shape":"IdType",
           "documentation":"<p>The ID of the organization.</p>",
@@ -1091,6 +1714,15 @@
       "max":128,
       "min":1
     },
+    "DocumentLockedForCommentsException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessageType"}
+      },
+      "documentation":"<p>This exception is thrown when the document is locked for comments and user tries to create or delete a comment on that document.</p>",
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
     "DocumentMetadata":{
       "type":"structure",
       "members":{
@@ -1121,6 +1753,10 @@
         "ResourceState":{
           "shape":"ResourceStateType",
           "documentation":"<p>The resource state.</p>"
+        },
+        "Labels":{
+          "shape":"Labels",
+          "documentation":"<p>List of labels on the document.</p>"
         }
       },
       "documentation":"<p>Describes the document.</p>"
@@ -1233,6 +1869,15 @@
       "type":"string",
       "enum":["ACTIVE"]
     },
+    "DraftUploadOutOfSyncException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessageType"}
+      },
+      "documentation":"<p>This exception is thrown when a valid checkout ID is not presented on document version upload calls for a document that has been checked out from Web client.</p>",
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
     "EmailAddressType":{
       "type":"string",
       "max":256,
@@ -1320,7 +1965,13 @@
         "Signature":{
           "shape":"HashType",
           "documentation":"<p>The unique identifier created from the subfolders and documents of the folder.</p>"
-        }
+        },
+        "Labels":{
+          "shape":"Labels",
+          "documentation":"<p>List of labels on the folder.</p>"
+        },
+        "Size":{"shape":"SizeType"},
+        "LatestVersionSize":{"shape":"SizeType"}
       },
       "documentation":"<p>Describes a folder.</p>"
     },
@@ -1332,6 +1983,12 @@
       "type":"structure",
       "required":["DocumentId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "DocumentId":{
           "shape":"IdType",
           "documentation":"<p>The ID of the document.</p>",
@@ -1346,7 +2003,7 @@
         },
         "Fields":{
           "shape":"FieldNamesType",
-          "documentation":"<p>A comma-separated list of values. Specify \"NAME\" to include the names of the parent folders.</p>",
+          "documentation":"<p>A comma-separated list of values. Specify <code>NAME</code> to include the names of the parent folders.</p>",
           "location":"querystring",
           "locationName":"fields"
         },
@@ -1371,11 +2028,23 @@
       "type":"structure",
       "required":["DocumentId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "DocumentId":{
           "shape":"ResourceIdType",
-          "documentation":"<p>The ID of the document object.</p>",
+          "documentation":"<p>The ID of the document.</p>",
           "location":"uri",
           "locationName":"DocumentId"
+        },
+        "IncludeCustomMetadata":{
+          "shape":"BooleanType",
+          "documentation":"<p>Set this to <code>TRUE</code> to include custom metadata in the response.</p>",
+          "location":"querystring",
+          "locationName":"includeCustomMetadata"
         }
       }
     },
@@ -1384,7 +2053,11 @@
       "members":{
         "Metadata":{
           "shape":"DocumentMetadata",
-          "documentation":"<p>The document object.</p>"
+          "documentation":"<p>The metadata details of the document.</p>"
+        },
+        "CustomMetadata":{
+          "shape":"CustomMetadataMap",
+          "documentation":"<p>The custom metadata on the document.</p>"
         }
       }
     },
@@ -1395,6 +2068,12 @@
         "VersionId"
       ],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "DocumentId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the document.</p>",
@@ -1412,6 +2091,12 @@
           "documentation":"<p>A comma-separated list of values. Specify \"SOURCE\" to include a URL for the source document.</p>",
           "location":"querystring",
           "locationName":"fields"
+        },
+        "IncludeCustomMetadata":{
+          "shape":"BooleanType",
+          "documentation":"<p>Set this to TRUE to include custom metadata in the response.</p>",
+          "location":"querystring",
+          "locationName":"includeCustomMetadata"
         }
       }
     },
@@ -1421,6 +2106,10 @@
         "Metadata":{
           "shape":"DocumentVersionMetadata",
           "documentation":"<p>The version metadata.</p>"
+        },
+        "CustomMetadata":{
+          "shape":"CustomMetadataMap",
+          "documentation":"<p>The custom metadata on the document version.</p>"
         }
       }
     },
@@ -1428,6 +2117,12 @@
       "type":"structure",
       "required":["FolderId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "FolderId":{
           "shape":"IdType",
           "documentation":"<p>The ID of the folder.</p>",
@@ -1467,11 +2162,23 @@
       "type":"structure",
       "required":["FolderId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "FolderId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the folder.</p>",
           "location":"uri",
           "locationName":"FolderId"
+        },
+        "IncludeCustomMetadata":{
+          "shape":"BooleanType",
+          "documentation":"<p>Set to TRUE to include custom metadata in the response.</p>",
+          "location":"querystring",
+          "locationName":"includeCustomMetadata"
         }
       }
     },
@@ -1481,6 +2188,10 @@
         "Metadata":{
           "shape":"FolderMetadata",
           "documentation":"<p>The metadata of the folder.</p>"
+        },
+        "CustomMetadata":{
+          "shape":"CustomMetadataMap",
+          "documentation":"<p>The custom metadata on the folder.</p>"
         }
       }
     },
@@ -1520,6 +2231,12 @@
       "type":"structure",
       "required":["ParentFolderId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "Id":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the document.</p>"
@@ -1581,12 +2298,23 @@
       "error":{"httpStatusCode":405},
       "exception":true
     },
+    "Label":{
+      "type":"string",
+      "max":20,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-][a-zA-Z0-9 _-]*"
+    },
+    "Labels":{
+      "type":"list",
+      "member":{"shape":"Label"},
+      "max":20
+    },
     "LimitExceededException":{
       "type":"structure",
       "members":{
         "Message":{"shape":"ErrorMessageType"}
       },
-      "documentation":"<p>You've exceeded the maximum of 100,000 folders under the parent folder.</p>",
+      "documentation":"<p>The maximum of 100,000 folders under the parent folder has been exceeded.</p>",
       "error":{"httpStatusCode":409},
       "exception":true
     },
@@ -1610,6 +2338,12 @@
         "pt_BR",
         "default"
       ]
+    },
+    "MarkerType":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"[\\u0000-\\u00FF]+"
     },
     "MessageType":{
       "type":"string",
@@ -1707,6 +2441,12 @@
       "type":"structure",
       "required":["ResourceId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "ResourceId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the resource.</p>",
@@ -1722,6 +2462,12 @@
         "PrincipalId"
       ],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "ResourceId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the resource.</p>",
@@ -1741,6 +2487,14 @@
           "locationName":"type"
         }
       }
+    },
+    "ResourceAlreadyCheckedOutException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessageType"}
+      },
+      "error":{"httpStatusCode":409},
+      "exception":true
     },
     "ResourceIdType":{
       "type":"string",
@@ -1982,6 +2736,15 @@
       "min":1
     },
     "TimestampType":{"type":"timestamp"},
+    "TooManyLabelsException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessageType"}
+      },
+      "documentation":"<p>The limit has been reached on the number of labels for the specified resource.</p>",
+      "error":{"httpStatusCode":429},
+      "exception":true
+    },
     "TooManySubscriptionsException":{
       "type":"structure",
       "members":{
@@ -2012,6 +2775,12 @@
       "type":"structure",
       "required":["DocumentId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "DocumentId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the document.</p>",
@@ -2039,6 +2808,12 @@
         "VersionId"
       ],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "DocumentId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the document.</p>",
@@ -2061,6 +2836,12 @@
       "type":"structure",
       "required":["FolderId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "FolderId":{
           "shape":"ResourceIdType",
           "documentation":"<p>The ID of the folder.</p>",
@@ -2085,6 +2866,12 @@
       "type":"structure",
       "required":["UserId"],
       "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
         "UserId":{
           "shape":"IdType",
           "documentation":"<p>The ID of the user.</p>",
@@ -2273,7 +3060,7 @@
       "type":"string",
       "max":256,
       "min":1,
-      "pattern":"[\\w\\-.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]+)?"
+      "pattern":"[\\w\\-+.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]+)?"
     }
   },
   "documentation":"<p>The WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premise or off-premise file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as anti-virus or data loss prevention. The APIs, in conjunction with Amazon CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs, so the application can take the necessary actions and replace the target file. The application can also choose to email the user if the target file violates the policy.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic and/or record the actions in an Amazon WorkDocs site, in conjunction with Amazon CloudTrails, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs APIs are Amazon authenticated, certificate-signed APIs. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>"

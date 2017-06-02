@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.61.0
+// AWS SDK for JavaScript v2.62.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -98773,6 +98773,11 @@ module.exports={
           "VersionId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "DocumentId": {
             "location": "uri",
             "locationName": "DocumentId"
@@ -98798,6 +98803,11 @@ module.exports={
           "UserId": {
             "location": "uri",
             "locationName": "UserId"
+          },
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
           }
         }
       },
@@ -98805,7 +98815,7 @@ module.exports={
         "type": "structure",
         "members": {
           "User": {
-            "shape": "S7"
+            "shape": "S8"
           }
         }
       }
@@ -98822,6 +98832,11 @@ module.exports={
           "Principals"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "ResourceId": {
             "location": "uri",
             "locationName": "ResourceId"
@@ -98866,6 +98881,88 @@ module.exports={
         }
       }
     },
+    "CreateComment": {
+      "http": {
+        "requestUri": "/api/v1/documents/{DocumentId}/versions/{VersionId}/comment",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "DocumentId",
+          "VersionId",
+          "Text"
+        ],
+        "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
+          "DocumentId": {
+            "location": "uri",
+            "locationName": "DocumentId"
+          },
+          "VersionId": {
+            "location": "uri",
+            "locationName": "VersionId"
+          },
+          "ParentId": {},
+          "ThreadId": {},
+          "Text": {
+            "shape": "Sy"
+          },
+          "Visibility": {},
+          "NotifyCollaborators": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Comment": {
+            "shape": "S12"
+          }
+        }
+      }
+    },
+    "CreateCustomMetadata": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/api/v1/resources/{ResourceId}/customMetadata",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceId",
+          "CustomMetadata"
+        ],
+        "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
+          "ResourceId": {
+            "location": "uri",
+            "locationName": "ResourceId"
+          },
+          "VersionId": {
+            "location": "querystring",
+            "locationName": "versionid"
+          },
+          "CustomMetadata": {
+            "shape": "S15"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "CreateFolder": {
       "http": {
         "requestUri": "/api/v1/folders",
@@ -98877,6 +98974,11 @@ module.exports={
           "ParentFolderId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "Name": {},
           "ParentFolderId": {}
         }
@@ -98885,9 +98987,41 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "Sy"
+            "shape": "S1c"
           }
         }
+      }
+    },
+    "CreateLabels": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/api/v1/resources/{ResourceId}/labels",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceId",
+          "Labels"
+        ],
+        "members": {
+          "ResourceId": {
+            "location": "uri",
+            "locationName": "ResourceId"
+          },
+          "Labels": {
+            "shape": "S1f"
+          },
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
       }
     },
     "CreateNotificationSubscription": {
@@ -98917,7 +99051,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Subscription": {
-            "shape": "S16"
+            "shape": "S1o"
           }
         }
       }
@@ -98938,6 +99072,7 @@ module.exports={
         "members": {
           "OrganizationId": {},
           "Username": {},
+          "EmailAddress": {},
           "GivenName": {},
           "Surname": {},
           "Password": {
@@ -98946,7 +99081,12 @@ module.exports={
           },
           "TimeZoneId": {},
           "StorageRule": {
-            "shape": "Si"
+            "shape": "Sj"
+          },
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
           }
         }
       },
@@ -98954,7 +99094,7 @@ module.exports={
         "type": "structure",
         "members": {
           "User": {
-            "shape": "S7"
+            "shape": "S8"
           }
         }
       }
@@ -98974,8 +99114,90 @@ module.exports={
           "UserId": {
             "location": "uri",
             "locationName": "UserId"
+          },
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
           }
         }
+      }
+    },
+    "DeleteComment": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/api/v1/documents/{DocumentId}/versions/{VersionId}/comment/{CommentId}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "DocumentId",
+          "VersionId",
+          "CommentId"
+        ],
+        "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
+          "DocumentId": {
+            "location": "uri",
+            "locationName": "DocumentId"
+          },
+          "VersionId": {
+            "location": "uri",
+            "locationName": "VersionId"
+          },
+          "CommentId": {
+            "location": "uri",
+            "locationName": "CommentId"
+          }
+        }
+      }
+    },
+    "DeleteCustomMetadata": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/api/v1/resources/{ResourceId}/customMetadata",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceId"
+        ],
+        "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
+          "ResourceId": {
+            "location": "uri",
+            "locationName": "ResourceId"
+          },
+          "VersionId": {
+            "location": "querystring",
+            "locationName": "versionId"
+          },
+          "Keys": {
+            "location": "querystring",
+            "locationName": "keys",
+            "type": "list",
+            "member": {}
+          },
+          "DeleteAll": {
+            "location": "querystring",
+            "locationName": "deleteAll",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
       }
     },
     "DeleteDocument": {
@@ -98990,6 +99212,11 @@ module.exports={
           "DocumentId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "DocumentId": {
             "location": "uri",
             "locationName": "DocumentId"
@@ -99009,6 +99236,11 @@ module.exports={
           "FolderId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "FolderId": {
             "location": "uri",
             "locationName": "FolderId"
@@ -99028,11 +99260,54 @@ module.exports={
           "FolderId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "FolderId": {
             "location": "uri",
             "locationName": "FolderId"
           }
         }
+      }
+    },
+    "DeleteLabels": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/api/v1/resources/{ResourceId}/labels",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceId"
+        ],
+        "members": {
+          "ResourceId": {
+            "location": "uri",
+            "locationName": "ResourceId"
+          },
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
+          "Labels": {
+            "shape": "S1f",
+            "location": "querystring",
+            "locationName": "labels"
+          },
+          "DeleteAll": {
+            "location": "querystring",
+            "locationName": "deleteAll",
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
       }
     },
     "DeleteNotificationSubscription": {
@@ -99071,10 +99346,65 @@ module.exports={
           "UserId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "UserId": {
             "location": "uri",
             "locationName": "UserId"
           }
+        }
+      }
+    },
+    "DescribeComments": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/api/v1/documents/{DocumentId}/versions/{VersionId}/comments",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "DocumentId",
+          "VersionId"
+        ],
+        "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
+          "DocumentId": {
+            "location": "uri",
+            "locationName": "DocumentId"
+          },
+          "VersionId": {
+            "location": "uri",
+            "locationName": "VersionId"
+          },
+          "Limit": {
+            "location": "querystring",
+            "locationName": "limit",
+            "type": "integer"
+          },
+          "Marker": {
+            "location": "querystring",
+            "locationName": "marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Comments": {
+            "type": "list",
+            "member": {
+              "shape": "S12"
+            }
+          },
+          "Marker": {}
         }
       }
     },
@@ -99090,6 +99420,11 @@ module.exports={
           "DocumentId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "DocumentId": {
             "location": "uri",
             "locationName": "DocumentId"
@@ -99119,7 +99454,7 @@ module.exports={
           "DocumentVersions": {
             "type": "list",
             "member": {
-              "shape": "S1m"
+              "shape": "S2e"
             }
           },
           "Marker": {}
@@ -99138,6 +99473,11 @@ module.exports={
           "FolderId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "FolderId": {
             "location": "uri",
             "locationName": "FolderId"
@@ -99175,13 +99515,13 @@ module.exports={
           "Folders": {
             "type": "list",
             "member": {
-              "shape": "Sy"
+              "shape": "S1c"
             }
           },
           "Documents": {
             "type": "list",
             "member": {
-              "shape": "S21"
+              "shape": "S2t"
             }
           },
           "Marker": {}
@@ -99221,7 +99561,7 @@ module.exports={
           "Subscriptions": {
             "type": "list",
             "member": {
-              "shape": "S16"
+              "shape": "S1o"
             }
           },
           "Marker": {}
@@ -99240,6 +99580,11 @@ module.exports={
           "ResourceId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "ResourceId": {
             "location": "uri",
             "locationName": "ResourceId"
@@ -99291,6 +99636,11 @@ module.exports={
       "input": {
         "type": "structure",
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "OrganizationId": {
             "location": "querystring",
             "locationName": "organizationId"
@@ -99338,7 +99688,7 @@ module.exports={
           "Users": {
             "type": "list",
             "member": {
-              "shape": "S7"
+              "shape": "S8"
             }
           },
           "TotalNumberOfUsers": {
@@ -99360,9 +99710,19 @@ module.exports={
           "DocumentId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "DocumentId": {
             "location": "uri",
             "locationName": "DocumentId"
+          },
+          "IncludeCustomMetadata": {
+            "location": "querystring",
+            "locationName": "includeCustomMetadata",
+            "type": "boolean"
           }
         }
       },
@@ -99370,7 +99730,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "S21"
+            "shape": "S2t"
+          },
+          "CustomMetadata": {
+            "shape": "S15"
           }
         }
       }
@@ -99387,6 +99750,11 @@ module.exports={
           "DocumentId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "DocumentId": {
             "location": "uri",
             "locationName": "DocumentId"
@@ -99410,7 +99778,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Path": {
-            "shape": "S2n"
+            "shape": "S3f"
           }
         }
       }
@@ -99428,6 +99796,11 @@ module.exports={
           "VersionId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "DocumentId": {
             "location": "uri",
             "locationName": "DocumentId"
@@ -99439,6 +99812,11 @@ module.exports={
           "Fields": {
             "location": "querystring",
             "locationName": "fields"
+          },
+          "IncludeCustomMetadata": {
+            "location": "querystring",
+            "locationName": "includeCustomMetadata",
+            "type": "boolean"
           }
         }
       },
@@ -99446,7 +99824,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "S1m"
+            "shape": "S2e"
+          },
+          "CustomMetadata": {
+            "shape": "S15"
           }
         }
       }
@@ -99463,9 +99844,19 @@ module.exports={
           "FolderId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "FolderId": {
             "location": "uri",
             "locationName": "FolderId"
+          },
+          "IncludeCustomMetadata": {
+            "location": "querystring",
+            "locationName": "includeCustomMetadata",
+            "type": "boolean"
           }
         }
       },
@@ -99473,7 +99864,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "Sy"
+            "shape": "S1c"
+          },
+          "CustomMetadata": {
+            "shape": "S15"
           }
         }
       }
@@ -99490,6 +99884,11 @@ module.exports={
           "FolderId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "FolderId": {
             "location": "uri",
             "locationName": "FolderId"
@@ -99513,7 +99912,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Path": {
-            "shape": "S2n"
+            "shape": "S3f"
           }
         }
       }
@@ -99529,6 +99928,11 @@ module.exports={
           "ParentFolderId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "Id": {},
           "Name": {},
           "ContentCreatedTimestamp": {
@@ -99548,13 +99952,13 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "S21"
+            "shape": "S2t"
           },
           "UploadMetadata": {
             "type": "structure",
             "members": {
               "UploadUrl": {
-                "shape": "S1r"
+                "shape": "S2j"
               },
               "SignedHeaders": {
                 "type": "map",
@@ -99578,6 +99982,11 @@ module.exports={
           "ResourceId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "ResourceId": {
             "location": "uri",
             "locationName": "ResourceId"
@@ -99598,6 +100007,11 @@ module.exports={
           "PrincipalId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "ResourceId": {
             "location": "uri",
             "locationName": "ResourceId"
@@ -99625,6 +100039,11 @@ module.exports={
           "DocumentId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "DocumentId": {
             "location": "uri",
             "locationName": "DocumentId"
@@ -99648,6 +100067,11 @@ module.exports={
           "VersionId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "DocumentId": {
             "location": "uri",
             "locationName": "DocumentId"
@@ -99672,6 +100096,11 @@ module.exports={
           "FolderId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "FolderId": {
             "location": "uri",
             "locationName": "FolderId"
@@ -99694,6 +100123,11 @@ module.exports={
           "UserId"
         ],
         "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
           "UserId": {
             "location": "uri",
             "locationName": "UserId"
@@ -99702,7 +100136,7 @@ module.exports={
           "Surname": {},
           "Type": {},
           "StorageRule": {
-            "shape": "Si"
+            "shape": "Sj"
           },
           "TimeZoneId": {},
           "Locale": {}
@@ -99712,14 +100146,18 @@ module.exports={
         "type": "structure",
         "members": {
           "User": {
-            "shape": "S7"
+            "shape": "S8"
           }
         }
       }
     }
   },
   "shapes": {
-    "S7": {
+    "S2": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S8": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -99747,13 +100185,13 @@ module.exports={
               "type": "long"
             },
             "StorageRule": {
-              "shape": "Si"
+              "shape": "Sj"
             }
           }
         }
       }
     },
-    "Si": {
+    "Sj": {
       "type": "structure",
       "members": {
         "StorageAllocatedInBytes": {
@@ -99763,6 +100201,38 @@ module.exports={
       }
     },
     "Sy": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S12": {
+      "type": "structure",
+      "required": [
+        "CommentId"
+      ],
+      "members": {
+        "CommentId": {},
+        "ParentId": {},
+        "ThreadId": {},
+        "Text": {
+          "shape": "Sy"
+        },
+        "Contributor": {
+          "shape": "S8"
+        },
+        "CreatedTimestamp": {
+          "type": "timestamp"
+        },
+        "Status": {},
+        "Visibility": {},
+        "RecipientId": {}
+      }
+    },
+    "S15": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S1c": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -99776,10 +100246,23 @@ module.exports={
           "type": "timestamp"
         },
         "ResourceState": {},
-        "Signature": {}
+        "Signature": {},
+        "Labels": {
+          "shape": "S1f"
+        },
+        "Size": {
+          "type": "long"
+        },
+        "LatestVersionSize": {
+          "type": "long"
+        }
       }
     },
-    "S16": {
+    "S1f": {
+      "type": "list",
+      "member": {}
+    },
+    "S1o": {
       "type": "structure",
       "members": {
         "SubscriptionId": {},
@@ -99787,7 +100270,7 @@ module.exports={
         "Protocol": {}
       }
     },
-    "S1m": {
+    "S2e": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -99815,23 +100298,23 @@ module.exports={
           "type": "map",
           "key": {},
           "value": {
-            "shape": "S1r"
+            "shape": "S2j"
           }
         },
         "Source": {
           "type": "map",
           "key": {},
           "value": {
-            "shape": "S1r"
+            "shape": "S2j"
           }
         }
       }
     },
-    "S1r": {
+    "S2j": {
       "type": "string",
       "sensitive": true
     },
-    "S21": {
+    "S2t": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -99844,12 +100327,15 @@ module.exports={
           "type": "timestamp"
         },
         "LatestVersionMetadata": {
-          "shape": "S1m"
+          "shape": "S2e"
         },
-        "ResourceState": {}
+        "ResourceState": {},
+        "Labels": {
+          "shape": "S1f"
+        }
       }
     },
-    "S2n": {
+    "S3f": {
       "type": "structure",
       "members": {
         "Components": {
@@ -101695,7 +102181,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.61.0',
+  VERSION: '2.62.0',
 
 
   Signers: {},

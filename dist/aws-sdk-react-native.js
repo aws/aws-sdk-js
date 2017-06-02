@@ -65,7 +65,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var AWS = __webpack_require__(5);
 
-	__webpack_require__(300);
+	__webpack_require__(299);
 	module.exports = AWS;
 
 /***/ }),
@@ -75,10 +75,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */(function(process) {var util = __webpack_require__(4);
 
 	// react-native specific modules
-	util.crypto.lib = __webpack_require__(281);
-	util.Buffer = __webpack_require__(252).Buffer;
-	util.url = __webpack_require__(287);
-	util.querystring = __webpack_require__(289);
+	util.crypto.lib = __webpack_require__(280);
+	util.Buffer = __webpack_require__(253).Buffer;
+	util.url = __webpack_require__(286);
+	util.querystring = __webpack_require__(288);
 	util.environment = 'js-react-native';
 
 	var AWS = __webpack_require__(5);
@@ -87,13 +87,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(187);
 
 	// Load the DOMParser XML parser
-	AWS.XML.Parser = __webpack_require__(292);
+	AWS.XML.Parser = __webpack_require__(291);
 
 	// Load the XHR HttpClient
-	__webpack_require__(298);
+	__webpack_require__(297);
 
 	// add custom request event handlers
-	var addContentType = __webpack_require__(299).addContentType;
+	var addContentType = __webpack_require__(298).addContentType;
 	AWS.EventListeners.Core.addNamedListeners(function(add) {
 	  add('ADD_CONTENT_TYPE', 'afterBuild', addContentType);
 	});
@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.61.0',
+	  VERSION: '2.62.0',
 
 	  /**
 	   * @api private
@@ -20513,7 +20513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	var v1 = __webpack_require__(225);
-	var v4 = __webpack_require__(280);
+	var v4 = __webpack_require__(279);
 
 	var uuid = v4;
 	uuid.v1 = v1;
@@ -20530,7 +20530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// detect to determine the best RNG source, normalizing to a function that
 	// returns 128-bits of randomness, since that's what's usually required
 	var rng = __webpack_require__(226);
-	var bytesToUuid = __webpack_require__(279);
+	var bytesToUuid = __webpack_require__(278);
 
 	// **`v1()` - Generate time-based UUID**
 	//
@@ -22003,10 +22003,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var ciphers = __webpack_require__(242)(crypto);
 	  exports.createCipher = ciphers.createCipher;
 	  exports.createCipheriv = ciphers.createCipheriv;
-	  var deciphers = __webpack_require__(278)(crypto);
+	  var deciphers = __webpack_require__(277)(crypto);
 	  exports.createDecipher = deciphers.createDecipher;
 	  exports.createDecipheriv = deciphers.createDecipheriv;
-	  var modes = __webpack_require__(269);
+	  var modes = __webpack_require__(268);
 	  function listCiphers () {
 	    return Object.keys(modes);
 	  }
@@ -22022,9 +22022,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(243);
 	var Transform = __webpack_require__(244);
 	var inherits = __webpack_require__(247);
-	var modes = __webpack_require__(269);
-	var ebtk = __webpack_require__(270);
-	var StreamCipher = __webpack_require__(271);
+	var modes = __webpack_require__(268);
+	var ebtk = __webpack_require__(269);
+	var StreamCipher = __webpack_require__(270);
 	inherits(Cipher, Transform);
 	function Cipher(mode, key, iv) {
 	  if (!(this instanceof Cipher)) {
@@ -22085,11 +22085,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return out;
 	};
 	var modelist = {
-	  ECB: __webpack_require__(272),
-	  CBC: __webpack_require__(273),
-	  CFB: __webpack_require__(275),
-	  OFB: __webpack_require__(276),
-	  CTR: __webpack_require__(277)
+	  ECB: __webpack_require__(271),
+	  CBC: __webpack_require__(272),
+	  CFB: __webpack_require__(274),
+	  OFB: __webpack_require__(275),
+	  CTR: __webpack_require__(276)
 	};
 	module.exports = function (crypto) {
 	  function createCipheriv(suite, password, iv) {
@@ -22402,10 +22402,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	inherits(Stream, EE);
 	Stream.Readable = __webpack_require__(248);
-	Stream.Writable = __webpack_require__(265);
-	Stream.Duplex = __webpack_require__(266);
-	Stream.Transform = __webpack_require__(267);
-	Stream.PassThrough = __webpack_require__(268);
+	Stream.Writable = __webpack_require__(264);
+	Stream.Duplex = __webpack_require__(265);
+	Stream.Transform = __webpack_require__(266);
+	Stream.PassThrough = __webpack_require__(267);
 
 	// Backwards-compat with node 0.4.x
 	Stream.Stream = Stream;
@@ -22860,8 +22860,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  exports.Readable = exports;
 	  exports.Writable = __webpack_require__(257);
 	  exports.Duplex = __webpack_require__(256);
-	  exports.Transform = __webpack_require__(263);
-	  exports.PassThrough = __webpack_require__(264);
+	  exports.Transform = __webpack_require__(262);
+	  exports.PassThrough = __webpack_require__(263);
 	}
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
@@ -22900,9 +22900,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Stream = __webpack_require__(251);
 	/*</replacement>*/
 
-	var Buffer = __webpack_require__(252).Buffer;
 	/*<replacement>*/
-	var bufferShim = __webpack_require__(253);
+	var Buffer = __webpack_require__(252).Buffer;
 	/*</replacement>*/
 
 	/*<replacement>*/
@@ -23035,7 +23034,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (!state.objectMode && typeof chunk === 'string') {
 	    encoding = encoding || state.defaultEncoding;
 	    if (encoding !== state.encoding) {
-	      chunk = bufferShim.from(chunk, encoding);
+	      chunk = Buffer.from(chunk, encoding);
 	      encoding = '';
 	    }
 	  }
@@ -23355,7 +23354,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var doEnd = (!pipeOpts || pipeOpts.end !== false) && dest !== process.stdout && dest !== process.stderr;
 
-	  var endFn = doEnd ? onend : cleanup;
+	  var endFn = doEnd ? onend : unpipe;
 	  if (state.endEmitted) processNextTick(endFn);else src.once('end', endFn);
 
 	  dest.on('unpipe', onunpipe);
@@ -23388,7 +23387,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    dest.removeListener('error', onerror);
 	    dest.removeListener('unpipe', onunpipe);
 	    src.removeListener('end', onend);
-	    src.removeListener('end', cleanup);
+	    src.removeListener('end', unpipe);
 	    src.removeListener('data', ondata);
 
 	    cleanedUp = true;
@@ -23745,7 +23744,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// This function is designed to be inlinable, so please take care when making
 	// changes to the function body.
 	function copyFromBuffer(n, list) {
-	  var ret = bufferShim.allocUnsafe(n);
+	  var ret = Buffer.allocUnsafe(n);
 	  var p = list.head;
 	  var c = 1;
 	  p.data.copy(ret);
@@ -23866,6 +23865,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(253)
+
+
+/***/ }),
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/*!
@@ -25578,121 +25584,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203).Buffer))
 
 /***/ }),
-/* 253 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	var buffer = __webpack_require__(252);
-	var Buffer = buffer.Buffer;
-	var SlowBuffer = buffer.SlowBuffer;
-	var MAX_LEN = buffer.kMaxLength || 2147483647;
-	exports.alloc = function alloc(size, fill, encoding) {
-	  if (typeof Buffer.alloc === 'function') {
-	    return Buffer.alloc(size, fill, encoding);
-	  }
-	  if (typeof encoding === 'number') {
-	    throw new TypeError('encoding must not be number');
-	  }
-	  if (typeof size !== 'number') {
-	    throw new TypeError('size must be a number');
-	  }
-	  if (size > MAX_LEN) {
-	    throw new RangeError('size is too large');
-	  }
-	  var enc = encoding;
-	  var _fill = fill;
-	  if (_fill === undefined) {
-	    enc = undefined;
-	    _fill = 0;
-	  }
-	  var buf = new Buffer(size);
-	  if (typeof _fill === 'string') {
-	    var fillBuf = new Buffer(_fill, enc);
-	    var flen = fillBuf.length;
-	    var i = -1;
-	    while (++i < size) {
-	      buf[i] = fillBuf[i % flen];
-	    }
-	  } else {
-	    buf.fill(_fill);
-	  }
-	  return buf;
-	}
-	exports.allocUnsafe = function allocUnsafe(size) {
-	  if (typeof Buffer.allocUnsafe === 'function') {
-	    return Buffer.allocUnsafe(size);
-	  }
-	  if (typeof size !== 'number') {
-	    throw new TypeError('size must be a number');
-	  }
-	  if (size > MAX_LEN) {
-	    throw new RangeError('size is too large');
-	  }
-	  return new Buffer(size);
-	}
-	exports.from = function from(value, encodingOrOffset, length) {
-	  if (typeof Buffer.from === 'function' && (!global.Uint8Array || Uint8Array.from !== Buffer.from)) {
-	    return Buffer.from(value, encodingOrOffset, length);
-	  }
-	  if (typeof value === 'number') {
-	    throw new TypeError('"value" argument must not be a number');
-	  }
-	  if (typeof value === 'string') {
-	    return new Buffer(value, encodingOrOffset);
-	  }
-	  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
-	    var offset = encodingOrOffset;
-	    if (arguments.length === 1) {
-	      return new Buffer(value);
-	    }
-	    if (typeof offset === 'undefined') {
-	      offset = 0;
-	    }
-	    var len = length;
-	    if (typeof len === 'undefined') {
-	      len = value.byteLength - offset;
-	    }
-	    if (offset >= value.byteLength) {
-	      throw new RangeError('\'offset\' is out of bounds');
-	    }
-	    if (len > value.byteLength - offset) {
-	      throw new RangeError('\'length\' is out of bounds');
-	    }
-	    return new Buffer(value.slice(offset, offset + len));
-	  }
-	  if (Buffer.isBuffer(value)) {
-	    var out = new Buffer(value.length);
-	    value.copy(out, 0, 0, value.length);
-	    return out;
-	  }
-	  if (value) {
-	    if (Array.isArray(value) || (typeof ArrayBuffer !== 'undefined' && value.buffer instanceof ArrayBuffer) || 'length' in value) {
-	      return new Buffer(value);
-	    }
-	    if (value.type === 'Buffer' && Array.isArray(value.data)) {
-	      return new Buffer(value.data);
-	    }
-	  }
-
-	  throw new TypeError('First argument must be a string, Buffer, ' + 'ArrayBuffer, Array, or array-like object.');
-	}
-	exports.allocUnsafeSlow = function allocUnsafeSlow(size) {
-	  if (typeof Buffer.allocUnsafeSlow === 'function') {
-	    return Buffer.allocUnsafeSlow(size);
-	  }
-	  if (typeof size !== 'number') {
-	    throw new TypeError('size must be a number');
-	  }
-	  if (size >= MAX_LEN) {
-	    throw new RangeError('size is too large');
-	  }
-	  return new SlowBuffer(size);
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ }),
 /* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25812,9 +25703,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Buffer = __webpack_require__(252).Buffer;
 	/*<replacement>*/
-	var bufferShim = __webpack_require__(253);
+
+	var Buffer = __webpack_require__(252).Buffer;
 	/*</replacement>*/
 
 	module.exports = BufferList;
@@ -25862,9 +25753,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	BufferList.prototype.concat = function (n) {
-	  if (this.length === 0) return bufferShim.alloc(0);
+	  if (this.length === 0) return Buffer.alloc(0);
 	  if (this.length === 1) return this.head.data;
-	  var ret = bufferShim.allocUnsafe(n >>> 0);
+	  var ret = Buffer.allocUnsafe(n >>> 0);
 	  var p = this.head;
 	  var i = 0;
 	  while (p) {
@@ -25996,9 +25887,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Stream = __webpack_require__(251);
 	/*</replacement>*/
 
-	var Buffer = __webpack_require__(252).Buffer;
 	/*<replacement>*/
-	var bufferShim = __webpack_require__(253);
+	var Buffer = __webpack_require__(252).Buffer;
 	/*</replacement>*/
 
 	util.inherits(Writable, Stream);
@@ -26254,7 +26144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function decodeChunk(state, chunk, encoding) {
 	  if (!state.objectMode && state.decodeStrings !== false && typeof chunk === 'string') {
-	    chunk = bufferShim.from(chunk, encoding);
+	    chunk = Buffer.from(chunk, encoding);
 	  }
 	  return chunk;
 	}
@@ -26837,7 +26727,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Buffer = __webpack_require__(262).Buffer;
+	var Buffer = __webpack_require__(252).Buffer;
 
 	var isEncoding = Buffer.isEncoding || function (encoding) {
 	  encoding = '' + encoding;
@@ -27112,13 +27002,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(252)
-
-
-/***/ }),
-/* 263 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	// a transform stream is a readable/writable stream where you do
 	// something with the data.  Sometimes it's called a "filter",
 	// but that's not a great name for it, since that implies a thing where
@@ -27303,7 +27186,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 264 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// a passthrough stream.
@@ -27314,7 +27197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = PassThrough;
 
-	var Transform = __webpack_require__(263);
+	var Transform = __webpack_require__(262);
 
 	/*<replacement>*/
 	var util = __webpack_require__(254);
@@ -27334,7 +27217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 265 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var Stream = __webpack_require__(245)
@@ -27349,28 +27232,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 266 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(248).Duplex
 
 
 /***/ }),
-/* 267 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(248).Transform
 
 
 /***/ }),
-/* 268 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(248).PassThrough
 
 
 /***/ }),
-/* 269 */
+/* 268 */
 /***/ (function(module, exports) {
 
 	exports['aes-128-ecb'] = {
@@ -27483,7 +27366,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 270 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {
@@ -27546,7 +27429,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203).Buffer))
 
 /***/ }),
-/* 271 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(243);
@@ -27578,7 +27461,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203).Buffer))
 
 /***/ }),
-/* 272 */
+/* 271 */
 /***/ (function(module, exports) {
 
 	exports.encrypt = function (self, block) {
@@ -27589,10 +27472,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 273 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var xor = __webpack_require__(274);
+	var xor = __webpack_require__(273);
 	exports.encrypt = function (self, block) {
 	  var data = xor(block, self._prev);
 	  self._prev = self._cipher.encryptBlock(data);
@@ -27606,7 +27489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 274 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {module.exports = xor;
@@ -27622,10 +27505,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203).Buffer))
 
 /***/ }),
-/* 275 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(274);
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(273);
 	exports.encrypt = function (self, data, decrypt) {
 	  var out = new Buffer('');
 	  var len;
@@ -27655,10 +27538,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203).Buffer))
 
 /***/ }),
-/* 276 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(274);
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(273);
 	function getBlock(self) {
 	  self._prev = self._cipher.encryptBlock(self._prev);
 	  return self._prev;
@@ -27674,10 +27557,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203).Buffer))
 
 /***/ }),
-/* 277 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(274);
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(273);
 	function getBlock(self) {
 	  var out = self._cipher.encryptBlock(self._prev);
 	  incr32(self._prev);
@@ -27708,15 +27591,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203).Buffer))
 
 /***/ }),
-/* 278 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(243);
 	var Transform = __webpack_require__(244);
 	var inherits = __webpack_require__(247);
-	var modes = __webpack_require__(269);
-	var StreamCipher = __webpack_require__(271);
-	var ebtk = __webpack_require__(270);
+	var modes = __webpack_require__(268);
+	var StreamCipher = __webpack_require__(270);
+	var ebtk = __webpack_require__(269);
 
 	inherits(Decipher, Transform);
 	function Decipher(mode, key, iv) {
@@ -27784,11 +27667,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	var modelist = {
-	  ECB: __webpack_require__(272),
-	  CBC: __webpack_require__(273),
-	  CFB: __webpack_require__(275),
-	  OFB: __webpack_require__(276),
-	  CTR: __webpack_require__(277)
+	  ECB: __webpack_require__(271),
+	  CBC: __webpack_require__(272),
+	  CFB: __webpack_require__(274),
+	  OFB: __webpack_require__(275),
+	  CTR: __webpack_require__(276)
 	};
 
 	module.exports = function (crypto) {
@@ -27832,7 +27715,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203).Buffer))
 
 /***/ }),
-/* 279 */
+/* 278 */
 /***/ (function(module, exports) {
 
 	/**
@@ -27861,11 +27744,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 280 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var rng = __webpack_require__(226);
-	var bytesToUuid = __webpack_require__(279);
+	var bytesToUuid = __webpack_require__(278);
 
 	function v4(options, buf, offset) {
 	  var i = buf && offset || 0;
@@ -27896,14 +27779,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 281 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Buffer = __webpack_require__(252).Buffer
-	var sha = __webpack_require__(282)
-	var sha256 = __webpack_require__(284)
-	var rng = __webpack_require__(285)
-	var md5 = __webpack_require__(286)
+	var Buffer = __webpack_require__(253).Buffer
+	var sha = __webpack_require__(281)
+	var sha256 = __webpack_require__(283)
+	var rng = __webpack_require__(284)
+	var md5 = __webpack_require__(285)
 
 	var algorithms = {
 	  sha1: sha,
@@ -27999,7 +27882,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 282 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -28011,7 +27894,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * See http://pajhome.org.uk/crypt/md5 for details.
 	 */
 
-	var helpers = __webpack_require__(283);
+	var helpers = __webpack_require__(282);
 
 	/*
 	 * Calculate the SHA-1 of an array of big-endian words, and a bit length
@@ -28106,10 +27989,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 283 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Buffer = __webpack_require__(252).Buffer;
+	var Buffer = __webpack_require__(253).Buffer;
 	var intSize = 4;
 	var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
 	var chrsz = 8;
@@ -28147,7 +28030,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 284 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	
@@ -28159,7 +28042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 */
 
-	var helpers = __webpack_require__(283);
+	var helpers = __webpack_require__(282);
 
 	var safe_add = function(x, y) {
 	  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
@@ -28232,7 +28115,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 285 */
+/* 284 */
 /***/ (function(module, exports) {
 
 	// Original code adapted from Robert Kieffer.
@@ -28269,7 +28152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 286 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -28281,7 +28164,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * See http://pajhome.org.uk/crypt/md5 for more info.
 	 */
 
-	var helpers = __webpack_require__(283);
+	var helpers = __webpack_require__(282);
 
 	/*
 	 * Perform a simple self-test to see if the VM is working
@@ -28438,7 +28321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 287 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -28462,7 +28345,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	var punycode = __webpack_require__(288);
+	var punycode = __webpack_require__(287);
 
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -28534,7 +28417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(289);
+	    querystring = __webpack_require__(288);
 
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && isObject(url) && url instanceof Url) return url;
@@ -29151,7 +29034,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 288 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -29686,17 +29569,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(60)(module), (function() { return this; }())))
 
 /***/ }),
-/* 289 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.decode = exports.parse = __webpack_require__(290);
-	exports.encode = exports.stringify = __webpack_require__(291);
+	exports.decode = exports.parse = __webpack_require__(289);
+	exports.encode = exports.stringify = __webpack_require__(290);
 
 
 /***/ }),
-/* 290 */
+/* 289 */
 /***/ (function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -29782,7 +29665,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 291 */
+/* 290 */
 /***/ (function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -29852,13 +29735,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 292 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(4);
 	var Shape = __webpack_require__(11);
 
-	var xml2js = __webpack_require__(293);
+	var xml2js = __webpack_require__(292);
 
 	/**
 	 * @api private
@@ -30017,7 +29900,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 293 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -30028,15 +29911,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    hasProp = {}.hasOwnProperty,
 	    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-	  sax = __webpack_require__(294);
+	  sax = __webpack_require__(293);
 
 	  events = __webpack_require__(246);
 
 	  builder = __webpack_require__(17);
 
-	  bom = __webpack_require__(296);
+	  bom = __webpack_require__(295);
 
-	  processors = __webpack_require__(297);
+	  processors = __webpack_require__(296);
 
 	  setImmediate = __webpack_require__(258).setImmediate;
 
@@ -30566,7 +30449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 294 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {;(function (sax) { // wrapper for non-node envs
@@ -30801,7 +30684,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      typeof Buffer.isBuffer === 'function' &&
 	      Buffer.isBuffer(data)) {
 	      if (!this._decoder) {
-	        var SD = __webpack_require__(295).StringDecoder
+	        var SD = __webpack_require__(294).StringDecoder
 	        this._decoder = new SD('utf8')
 	      }
 	      data = this._decoder.write(data)
@@ -32149,7 +32032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203).Buffer))
 
 /***/ }),
-/* 295 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -32173,7 +32056,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	var Buffer = __webpack_require__(252).Buffer;
+	var Buffer = __webpack_require__(253).Buffer;
 
 	var isBufferEncoding = Buffer.isEncoding
 	  || function(encoding) {
@@ -32376,7 +32259,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 296 */
+/* 295 */
 /***/ (function(module, exports) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -32394,7 +32277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 297 */
+/* 296 */
 /***/ (function(module, exports) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -32434,7 +32317,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 298 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
@@ -32576,7 +32459,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 299 */
+/* 298 */
 /***/ (function(module, exports) {
 
 	function addContentType(req) {
@@ -32596,69 +32479,69 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 300 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
 	var AWS = __webpack_require__(5);
 
 	module.exports = {
-	  ACM: __webpack_require__(301),
-	  APIGateway: __webpack_require__(304),
-	  ApplicationAutoScaling: __webpack_require__(308),
-	  AppStream: __webpack_require__(311),
-	  AutoScaling: __webpack_require__(315),
-	  Batch: __webpack_require__(318),
-	  Budgets: __webpack_require__(321),
-	  CloudDirectory: __webpack_require__(324),
-	  CloudFormation: __webpack_require__(327),
-	  CloudFront: __webpack_require__(331),
-	  CloudHSM: __webpack_require__(340),
-	  CloudSearch: __webpack_require__(342),
-	  CloudSearchDomain: __webpack_require__(347),
-	  CloudTrail: __webpack_require__(350),
-	  CloudWatch: __webpack_require__(353),
-	  CloudWatchEvents: __webpack_require__(357),
-	  CloudWatchLogs: __webpack_require__(360),
-	  CodeBuild: __webpack_require__(363),
-	  CodeCommit: __webpack_require__(366),
-	  CodeDeploy: __webpack_require__(369),
-	  CodePipeline: __webpack_require__(373),
+	  ACM: __webpack_require__(300),
+	  APIGateway: __webpack_require__(303),
+	  ApplicationAutoScaling: __webpack_require__(307),
+	  AppStream: __webpack_require__(310),
+	  AutoScaling: __webpack_require__(314),
+	  Batch: __webpack_require__(317),
+	  Budgets: __webpack_require__(320),
+	  CloudDirectory: __webpack_require__(323),
+	  CloudFormation: __webpack_require__(326),
+	  CloudFront: __webpack_require__(330),
+	  CloudHSM: __webpack_require__(339),
+	  CloudSearch: __webpack_require__(341),
+	  CloudSearchDomain: __webpack_require__(346),
+	  CloudTrail: __webpack_require__(349),
+	  CloudWatch: __webpack_require__(352),
+	  CloudWatchEvents: __webpack_require__(356),
+	  CloudWatchLogs: __webpack_require__(359),
+	  CodeBuild: __webpack_require__(362),
+	  CodeCommit: __webpack_require__(365),
+	  CodeDeploy: __webpack_require__(368),
+	  CodePipeline: __webpack_require__(372),
 	  CognitoIdentity: __webpack_require__(193),
-	  CognitoIdentityServiceProvider: __webpack_require__(375),
-	  CognitoSync: __webpack_require__(378),
-	  ConfigService: __webpack_require__(380),
-	  CUR: __webpack_require__(383),
-	  DataPipeline: __webpack_require__(386),
-	  DeviceFarm: __webpack_require__(389),
-	  DirectConnect: __webpack_require__(392),
-	  DirectoryService: __webpack_require__(395),
-	  Discovery: __webpack_require__(397),
-	  DMS: __webpack_require__(400),
-	  DynamoDB: __webpack_require__(403),
-	  DynamoDBStreams: __webpack_require__(416),
-	  EC2: __webpack_require__(419),
-	  ECR: __webpack_require__(424),
-	  ECS: __webpack_require__(427),
-	  EFS: __webpack_require__(431),
-	  ElastiCache: __webpack_require__(433),
-	  ElasticBeanstalk: __webpack_require__(437),
-	  ELB: __webpack_require__(440),
-	  ELBv2: __webpack_require__(444),
-	  EMR: __webpack_require__(448),
-	  ES: __webpack_require__(452),
-	  ElasticTranscoder: __webpack_require__(455),
-	  Firehose: __webpack_require__(459),
-	  GameLift: __webpack_require__(461),
-	  Glacier: __webpack_require__(464),
-	  Health: __webpack_require__(469),
-	  IAM: __webpack_require__(472),
-	  ImportExport: __webpack_require__(476),
-	  Inspector: __webpack_require__(479),
-	  Iot: __webpack_require__(482),
-	  IotData: __webpack_require__(484),
-	  Kinesis: __webpack_require__(487),
-	  KinesisAnalytics: __webpack_require__(491),
+	  CognitoIdentityServiceProvider: __webpack_require__(374),
+	  CognitoSync: __webpack_require__(377),
+	  ConfigService: __webpack_require__(379),
+	  CUR: __webpack_require__(382),
+	  DataPipeline: __webpack_require__(385),
+	  DeviceFarm: __webpack_require__(388),
+	  DirectConnect: __webpack_require__(391),
+	  DirectoryService: __webpack_require__(394),
+	  Discovery: __webpack_require__(396),
+	  DMS: __webpack_require__(399),
+	  DynamoDB: __webpack_require__(402),
+	  DynamoDBStreams: __webpack_require__(415),
+	  EC2: __webpack_require__(418),
+	  ECR: __webpack_require__(423),
+	  ECS: __webpack_require__(426),
+	  EFS: __webpack_require__(430),
+	  ElastiCache: __webpack_require__(432),
+	  ElasticBeanstalk: __webpack_require__(436),
+	  ELB: __webpack_require__(439),
+	  ELBv2: __webpack_require__(443),
+	  EMR: __webpack_require__(447),
+	  ES: __webpack_require__(451),
+	  ElasticTranscoder: __webpack_require__(454),
+	  Firehose: __webpack_require__(458),
+	  GameLift: __webpack_require__(460),
+	  Glacier: __webpack_require__(463),
+	  Health: __webpack_require__(468),
+	  IAM: __webpack_require__(471),
+	  ImportExport: __webpack_require__(475),
+	  Inspector: __webpack_require__(478),
+	  Iot: __webpack_require__(481),
+	  IotData: __webpack_require__(483),
+	  Kinesis: __webpack_require__(486),
+	  KinesisAnalytics: __webpack_require__(490),
 	  KMS: __webpack_require__(493),
 	  Lambda: __webpack_require__(496),
 	  LexRuntime: __webpack_require__(502),
@@ -32706,7 +32589,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 301 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -32718,8 +32601,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ACM = Service.defineService('acm', ['2015-12-08']);
 	Object.defineProperty(apiLoader.services['acm'], '2015-12-08', {
 	  get: function get() {
-	    var model = __webpack_require__(302);
-	    model.paginators = __webpack_require__(303).pagination;
+	    var model = __webpack_require__(301);
+	    model.paginators = __webpack_require__(302).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -32730,7 +32613,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 302 */
+/* 301 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -33048,7 +32931,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 303 */
+/* 302 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -33063,7 +32946,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 304 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -33073,11 +32956,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	apiLoader.services['apigateway'] = {};
 	AWS.APIGateway = Service.defineService('apigateway', ['2015-07-09']);
-	__webpack_require__(305);
+	__webpack_require__(304);
 	Object.defineProperty(apiLoader.services['apigateway'], '2015-07-09', {
 	  get: function get() {
-	    var model = __webpack_require__(306);
-	    model.paginators = __webpack_require__(307).pagination;
+	    var model = __webpack_require__(305);
+	    model.paginators = __webpack_require__(306).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -33088,7 +32971,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 305 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
@@ -33121,7 +33004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 306 */
+/* 305 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -36933,7 +36816,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 307 */
+/* 306 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -37008,7 +36891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 308 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -37020,8 +36903,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ApplicationAutoScaling = Service.defineService('applicationautoscaling', ['2016-02-06']);
 	Object.defineProperty(apiLoader.services['applicationautoscaling'], '2016-02-06', {
 	  get: function get() {
-	    var model = __webpack_require__(309);
-	    model.paginators = __webpack_require__(310).pagination;
+	    var model = __webpack_require__(308);
+	    model.paginators = __webpack_require__(309).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -37032,7 +36915,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 309 */
+/* 308 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -37368,7 +37251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 310 */
+/* 309 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -37395,7 +37278,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 311 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -37407,9 +37290,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.AppStream = Service.defineService('appstream', ['2016-12-01']);
 	Object.defineProperty(apiLoader.services['appstream'], '2016-12-01', {
 	  get: function get() {
-	    var model = __webpack_require__(312);
-	    model.paginators = __webpack_require__(313).pagination;
-	    model.waiters = __webpack_require__(314).waiters;
+	    var model = __webpack_require__(311);
+	    model.paginators = __webpack_require__(312).pagination;
+	    model.waiters = __webpack_require__(313).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -37420,7 +37303,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 312 */
+/* 311 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -38049,7 +37932,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 313 */
+/* 312 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -38057,7 +37940,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 314 */
+/* 313 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -38117,7 +38000,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 315 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -38129,8 +38012,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.AutoScaling = Service.defineService('autoscaling', ['2011-01-01']);
 	Object.defineProperty(apiLoader.services['autoscaling'], '2011-01-01', {
 	  get: function get() {
-	    var model = __webpack_require__(316);
-	    model.paginators = __webpack_require__(317).pagination;
+	    var model = __webpack_require__(315);
+	    model.paginators = __webpack_require__(316).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -38141,7 +38024,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 316 */
+/* 315 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -39755,7 +39638,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 317 */
+/* 316 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -39812,7 +39695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 318 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -39824,8 +39707,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.Batch = Service.defineService('batch', ['2016-08-10']);
 	Object.defineProperty(apiLoader.services['batch'], '2016-08-10', {
 	  get: function get() {
-	    var model = __webpack_require__(319);
-	    model.paginators = __webpack_require__(320).pagination;
+	    var model = __webpack_require__(318);
+	    model.paginators = __webpack_require__(319).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -39836,7 +39719,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 319 */
+/* 318 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -40681,7 +40564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 320 */
+/* 319 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -40689,7 +40572,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 321 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -40701,8 +40584,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.Budgets = Service.defineService('budgets', ['2016-10-20']);
 	Object.defineProperty(apiLoader.services['budgets'], '2016-10-20', {
 	  get: function get() {
-	    var model = __webpack_require__(322);
-	    model.paginators = __webpack_require__(323).pagination;
+	    var model = __webpack_require__(321);
+	    model.paginators = __webpack_require__(322).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -40713,7 +40596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 322 */
+/* 321 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -41184,7 +41067,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 323 */
+/* 322 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -41192,7 +41075,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 324 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -41204,8 +41087,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CloudDirectory = Service.defineService('clouddirectory', ['2016-05-10']);
 	Object.defineProperty(apiLoader.services['clouddirectory'], '2016-05-10', {
 	  get: function get() {
-	    var model = __webpack_require__(325);
-	    model.paginators = __webpack_require__(326).pagination;
+	    var model = __webpack_require__(324);
+	    model.paginators = __webpack_require__(325).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -41216,7 +41099,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 325 */
+/* 324 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -43725,7 +43608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 326 */
+/* 325 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -43824,7 +43707,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 327 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -43836,9 +43719,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CloudFormation = Service.defineService('cloudformation', ['2010-05-15']);
 	Object.defineProperty(apiLoader.services['cloudformation'], '2010-05-15', {
 	  get: function get() {
-	    var model = __webpack_require__(328);
-	    model.paginators = __webpack_require__(329).pagination;
-	    model.waiters = __webpack_require__(330).waiters;
+	    var model = __webpack_require__(327);
+	    model.paginators = __webpack_require__(328).pagination;
+	    model.waiters = __webpack_require__(329).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -43849,7 +43732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 328 */
+/* 327 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -44791,7 +44674,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 329 */
+/* 328 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -44833,7 +44716,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 330 */
+/* 329 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -45020,7 +44903,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 331 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -45030,12 +44913,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	apiLoader.services['cloudfront'] = {};
 	AWS.CloudFront = Service.defineService('cloudfront', ['2013-05-12*', '2013-11-11*', '2014-05-31*', '2014-10-21*', '2014-11-06*', '2015-04-17*', '2015-07-27*', '2015-09-17*', '2016-01-13*', '2016-01-28*', '2016-08-01*', '2016-08-20*', '2016-09-07*', '2016-09-29*', '2016-11-25', '2016-11-25*', '2017-03-25']);
-	__webpack_require__(332);
+	__webpack_require__(331);
 	Object.defineProperty(apiLoader.services['cloudfront'], '2016-11-25', {
 	  get: function get() {
-	    var model = __webpack_require__(334);
-	    model.paginators = __webpack_require__(335).pagination;
-	    model.waiters = __webpack_require__(336).waiters;
+	    var model = __webpack_require__(333);
+	    model.paginators = __webpack_require__(334).pagination;
+	    model.waiters = __webpack_require__(335).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -45043,9 +44926,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	Object.defineProperty(apiLoader.services['cloudfront'], '2017-03-25', {
 	  get: function get() {
-	    var model = __webpack_require__(337);
-	    model.paginators = __webpack_require__(338).pagination;
-	    model.waiters = __webpack_require__(339).waiters;
+	    var model = __webpack_require__(336);
+	    model.paginators = __webpack_require__(337).pagination;
+	    model.waiters = __webpack_require__(338).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -45056,13 +44939,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 332 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
 
 	// pull in CloudFront signer
-	__webpack_require__(333);
+	__webpack_require__(332);
 
 	AWS.util.update(AWS.CloudFront.prototype, {
 
@@ -45074,7 +44957,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 333 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5),
@@ -45286,7 +45169,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 334 */
+/* 333 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -47203,7 +47086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 335 */
+/* 334 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -47240,7 +47123,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 336 */
+/* 335 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -47292,7 +47175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 337 */
+/* 336 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -49215,7 +49098,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 338 */
+/* 337 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -49252,7 +49135,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 339 */
+/* 338 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -49304,7 +49187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 340 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -49316,7 +49199,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CloudHSM = Service.defineService('cloudhsm', ['2014-05-30']);
 	Object.defineProperty(apiLoader.services['cloudhsm'], '2014-05-30', {
 	  get: function get() {
-	    var model = __webpack_require__(341);
+	    var model = __webpack_require__(340);
 	    return model;
 	  },
 	  enumerable: true,
@@ -49327,7 +49210,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 341 */
+/* 340 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -49852,7 +49735,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 342 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -49864,8 +49747,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CloudSearch = Service.defineService('cloudsearch', ['2011-02-01', '2013-01-01']);
 	Object.defineProperty(apiLoader.services['cloudsearch'], '2011-02-01', {
 	  get: function get() {
-	    var model = __webpack_require__(343);
-	    model.paginators = __webpack_require__(344).pagination;
+	    var model = __webpack_require__(342);
+	    model.paginators = __webpack_require__(343).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -49873,8 +49756,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	Object.defineProperty(apiLoader.services['cloudsearch'], '2013-01-01', {
 	  get: function get() {
-	    var model = __webpack_require__(345);
-	    model.paginators = __webpack_require__(346).pagination;
+	    var model = __webpack_require__(344);
+	    model.paginators = __webpack_require__(345).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -49885,7 +49768,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 343 */
+/* 342 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -50727,7 +50610,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 344 */
+/* 343 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -50745,7 +50628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 345 */
+/* 344 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -51837,7 +51720,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 346 */
+/* 345 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -51861,7 +51744,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 347 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -51871,10 +51754,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	apiLoader.services['cloudsearchdomain'] = {};
 	AWS.CloudSearchDomain = Service.defineService('cloudsearchdomain', ['2013-01-01']);
-	__webpack_require__(348);
+	__webpack_require__(347);
 	Object.defineProperty(apiLoader.services['cloudsearchdomain'], '2013-01-01', {
 	  get: function get() {
-	    var model = __webpack_require__(349);
+	    var model = __webpack_require__(348);
 	    return model;
 	  },
 	  enumerable: true,
@@ -51885,7 +51768,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 348 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
@@ -52011,7 +51894,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 349 */
+/* 348 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -52314,7 +52197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 350 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -52326,8 +52209,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CloudTrail = Service.defineService('cloudtrail', ['2013-11-01']);
 	Object.defineProperty(apiLoader.services['cloudtrail'], '2013-11-01', {
 	  get: function get() {
-	    var model = __webpack_require__(351);
-	    model.paginators = __webpack_require__(352).pagination;
+	    var model = __webpack_require__(350);
+	    model.paginators = __webpack_require__(351).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -52338,7 +52221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 351 */
+/* 350 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -52873,7 +52756,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 352 */
+/* 351 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -52891,7 +52774,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 353 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -52903,9 +52786,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CloudWatch = Service.defineService('cloudwatch', ['2010-08-01']);
 	Object.defineProperty(apiLoader.services['cloudwatch'], '2010-08-01', {
 	  get: function get() {
-	    var model = __webpack_require__(354);
-	    model.paginators = __webpack_require__(355).pagination;
-	    model.waiters = __webpack_require__(356).waiters;
+	    var model = __webpack_require__(353);
+	    model.paginators = __webpack_require__(354).pagination;
+	    model.waiters = __webpack_require__(355).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -52916,7 +52799,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 354 */
+/* 353 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -53443,7 +53326,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 355 */
+/* 354 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -53472,7 +53355,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 356 */
+/* 355 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -53495,7 +53378,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 357 */
+/* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -53507,8 +53390,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CloudWatchEvents = Service.defineService('cloudwatchevents', ['2014-02-03*', '2015-10-07']);
 	Object.defineProperty(apiLoader.services['cloudwatchevents'], '2015-10-07', {
 	  get: function get() {
-	    var model = __webpack_require__(358);
-	    model.paginators = __webpack_require__(359).pagination;
+	    var model = __webpack_require__(357);
+	    model.paginators = __webpack_require__(358).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -53519,7 +53402,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 358 */
+/* 357 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -53915,7 +53798,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 359 */
+/* 358 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -53923,7 +53806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 360 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -53935,8 +53818,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CloudWatchLogs = Service.defineService('cloudwatchlogs', ['2014-03-28']);
 	Object.defineProperty(apiLoader.services['cloudwatchlogs'], '2014-03-28', {
 	  get: function get() {
-	    var model = __webpack_require__(361);
-	    model.paginators = __webpack_require__(362).pagination;
+	    var model = __webpack_require__(360);
+	    model.paginators = __webpack_require__(361).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -53947,7 +53830,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 361 */
+/* 360 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -54735,7 +54618,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 362 */
+/* 361 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -54789,7 +54672,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 363 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -54801,8 +54684,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CodeBuild = Service.defineService('codebuild', ['2016-10-06']);
 	Object.defineProperty(apiLoader.services['codebuild'], '2016-10-06', {
 	  get: function get() {
-	    var model = __webpack_require__(364);
-	    model.paginators = __webpack_require__(365).pagination;
+	    var model = __webpack_require__(363);
+	    model.paginators = __webpack_require__(364).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -54813,7 +54696,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 364 */
+/* 363 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -55317,7 +55200,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 365 */
+/* 364 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -55325,7 +55208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 366 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -55337,8 +55220,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CodeCommit = Service.defineService('codecommit', ['2015-04-13']);
 	Object.defineProperty(apiLoader.services['codecommit'], '2015-04-13', {
 	  get: function get() {
-	    var model = __webpack_require__(367);
-	    model.paginators = __webpack_require__(368).pagination;
+	    var model = __webpack_require__(366);
+	    model.paginators = __webpack_require__(367).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -55349,7 +55232,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 367 */
+/* 366 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -55819,7 +55702,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 368 */
+/* 367 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -55843,7 +55726,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 369 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -55855,9 +55738,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CodeDeploy = Service.defineService('codedeploy', ['2014-10-06']);
 	Object.defineProperty(apiLoader.services['codedeploy'], '2014-10-06', {
 	  get: function get() {
-	    var model = __webpack_require__(370);
-	    model.paginators = __webpack_require__(371).pagination;
-	    model.waiters = __webpack_require__(372).waiters;
+	    var model = __webpack_require__(369);
+	    model.paginators = __webpack_require__(370).pagination;
+	    model.waiters = __webpack_require__(371).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -55868,7 +55751,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 370 */
+/* 369 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -57169,7 +57052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 371 */
+/* 370 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -57208,7 +57091,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 372 */
+/* 371 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -57243,7 +57126,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 373 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -57255,7 +57138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CodePipeline = Service.defineService('codepipeline', ['2015-07-09']);
 	Object.defineProperty(apiLoader.services['codepipeline'], '2015-07-09', {
 	  get: function get() {
-	    var model = __webpack_require__(374);
+	    var model = __webpack_require__(373);
 	    return model;
 	  },
 	  enumerable: true,
@@ -57266,7 +57149,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 374 */
+/* 373 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -58372,7 +58255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 375 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -58384,8 +58267,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CognitoIdentityServiceProvider = Service.defineService('cognitoidentityserviceprovider', ['2016-04-18']);
 	Object.defineProperty(apiLoader.services['cognitoidentityserviceprovider'], '2016-04-18', {
 	  get: function get() {
-	    var model = __webpack_require__(376);
-	    model.paginators = __webpack_require__(377).pagination;
+	    var model = __webpack_require__(375);
+	    model.paginators = __webpack_require__(376).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -58396,7 +58279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 376 */
+/* 375 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -60881,7 +60764,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 377 */
+/* 376 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -60889,7 +60772,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 378 */
+/* 377 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -60901,7 +60784,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CognitoSync = Service.defineService('cognitosync', ['2014-06-30']);
 	Object.defineProperty(apiLoader.services['cognitosync'], '2014-06-30', {
 	  get: function get() {
-	    var model = __webpack_require__(379);
+	    var model = __webpack_require__(378);
 	    return model;
 	  },
 	  enumerable: true,
@@ -60912,7 +60795,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 379 */
+/* 378 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -61664,7 +61547,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 380 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -61676,8 +61559,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ConfigService = Service.defineService('configservice', ['2014-11-12']);
 	Object.defineProperty(apiLoader.services['configservice'], '2014-11-12', {
 	  get: function get() {
-	    var model = __webpack_require__(381);
-	    model.paginators = __webpack_require__(382).pagination;
+	    var model = __webpack_require__(380);
+	    model.paginators = __webpack_require__(381).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -61688,7 +61571,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 381 */
+/* 380 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -62563,7 +62446,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 382 */
+/* 381 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -62578,7 +62461,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 383 */
+/* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -62590,8 +62473,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.CUR = Service.defineService('cur', ['2017-01-06']);
 	Object.defineProperty(apiLoader.services['cur'], '2017-01-06', {
 	  get: function get() {
-	    var model = __webpack_require__(384);
-	    model.paginators = __webpack_require__(385).pagination;
+	    var model = __webpack_require__(383);
+	    model.paginators = __webpack_require__(384).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -62602,7 +62485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 384 */
+/* 383 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -62709,7 +62592,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 385 */
+/* 384 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -62723,7 +62606,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 386 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -62735,8 +62618,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.DataPipeline = Service.defineService('datapipeline', ['2012-10-29']);
 	Object.defineProperty(apiLoader.services['datapipeline'], '2012-10-29', {
 	  get: function get() {
-	    var model = __webpack_require__(387);
-	    model.paginators = __webpack_require__(388).pagination;
+	    var model = __webpack_require__(386);
+	    model.paginators = __webpack_require__(387).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -62747,7 +62630,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 387 */
+/* 386 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -63419,7 +63302,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 388 */
+/* 387 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -63450,7 +63333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 389 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -63462,8 +63345,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.DeviceFarm = Service.defineService('devicefarm', ['2015-06-23']);
 	Object.defineProperty(apiLoader.services['devicefarm'], '2015-06-23', {
 	  get: function get() {
-	    var model = __webpack_require__(390);
-	    model.paginators = __webpack_require__(391).pagination;
+	    var model = __webpack_require__(389);
+	    model.paginators = __webpack_require__(390).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -63474,7 +63357,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 390 */
+/* 389 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -65151,7 +65034,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 391 */
+/* 390 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -65233,7 +65116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 392 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -65245,8 +65128,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.DirectConnect = Service.defineService('directconnect', ['2012-10-25']);
 	Object.defineProperty(apiLoader.services['directconnect'], '2012-10-25', {
 	  get: function get() {
-	    var model = __webpack_require__(393);
-	    model.paginators = __webpack_require__(394).pagination;
+	    var model = __webpack_require__(392);
+	    model.paginators = __webpack_require__(393).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -65257,7 +65140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 393 */
+/* 392 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -66203,7 +66086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 394 */
+/* 393 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -66230,7 +66113,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 395 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -66242,7 +66125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.DirectoryService = Service.defineService('directoryservice', ['2015-04-16']);
 	Object.defineProperty(apiLoader.services['directoryservice'], '2015-04-16', {
 	  get: function get() {
-	    var model = __webpack_require__(396);
+	    var model = __webpack_require__(395);
 	    return model;
 	  },
 	  enumerable: true,
@@ -66253,7 +66136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 396 */
+/* 395 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -67374,7 +67257,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 397 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -67386,8 +67269,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.Discovery = Service.defineService('discovery', ['2015-11-01']);
 	Object.defineProperty(apiLoader.services['discovery'], '2015-11-01', {
 	  get: function get() {
-	    var model = __webpack_require__(398);
-	    model.paginators = __webpack_require__(399).pagination;
+	    var model = __webpack_require__(397);
+	    model.paginators = __webpack_require__(398).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -67398,7 +67281,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 398 */
+/* 397 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -68070,7 +67953,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 399 */
+/* 398 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -68078,7 +67961,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 400 */
+/* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -68090,8 +67973,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.DMS = Service.defineService('dms', ['2016-01-01']);
 	Object.defineProperty(apiLoader.services['dms'], '2016-01-01', {
 	  get: function get() {
-	    var model = __webpack_require__(401);
-	    model.paginators = __webpack_require__(402).pagination;
+	    var model = __webpack_require__(400);
+	    model.paginators = __webpack_require__(401).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -68102,7 +67985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 401 */
+/* 400 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -69586,7 +69469,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 402 */
+/* 401 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -69655,7 +69538,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 403 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -69665,12 +69548,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	apiLoader.services['dynamodb'] = {};
 	AWS.DynamoDB = Service.defineService('dynamodb', ['2011-12-05', '2012-08-10']);
-	__webpack_require__(404);
+	__webpack_require__(403);
 	Object.defineProperty(apiLoader.services['dynamodb'], '2011-12-05', {
 	  get: function get() {
-	    var model = __webpack_require__(410);
-	    model.paginators = __webpack_require__(411).pagination;
-	    model.waiters = __webpack_require__(412).waiters;
+	    var model = __webpack_require__(409);
+	    model.paginators = __webpack_require__(410).pagination;
+	    model.waiters = __webpack_require__(411).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -69678,9 +69561,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	Object.defineProperty(apiLoader.services['dynamodb'], '2012-08-10', {
 	  get: function get() {
-	    var model = __webpack_require__(413);
-	    model.paginators = __webpack_require__(414).pagination;
-	    model.waiters = __webpack_require__(415).waiters;
+	    var model = __webpack_require__(412);
+	    model.paginators = __webpack_require__(413).pagination;
+	    model.waiters = __webpack_require__(414).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -69691,11 +69574,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 404 */
+/* 403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
-	__webpack_require__(405);
+	__webpack_require__(404);
 
 	AWS.util.update(AWS.DynamoDB.prototype, {
 	  /**
@@ -69755,12 +69638,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 405 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
-	var Translator = __webpack_require__(406);
-	var DynamoDBSet = __webpack_require__(409);
+	var Translator = __webpack_require__(405);
+	var DynamoDBSet = __webpack_require__(408);
 
 	/**
 	 * The document client simplifies working with items in Amazon DynamoDB
@@ -70284,11 +70167,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 406 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(5).util;
-	var convert = __webpack_require__(407);
+	var convert = __webpack_require__(406);
 
 	var Translator = function(options) {
 	  options = options || {};
@@ -70370,13 +70253,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 407 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
 	var util = AWS.util;
-	var typeOf = __webpack_require__(408).typeOf;
-	var DynamoDBSet = __webpack_require__(409);
+	var typeOf = __webpack_require__(407).typeOf;
+	var DynamoDBSet = __webpack_require__(408);
 
 	/**
 	 * Convert a JavaScript value to its equivalent DynamoDB AttributeValue type
@@ -70559,7 +70442,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 408 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(5).util;
@@ -70609,11 +70492,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 409 */
+/* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(5).util;
-	var typeOf = __webpack_require__(408).typeOf;
+	var typeOf = __webpack_require__(407).typeOf;
 
 	/**
 	 * @api private
@@ -70671,7 +70554,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 410 */
+/* 409 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -71340,7 +71223,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 411 */
+/* 410 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -71371,7 +71254,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 412 */
+/* 411 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -71411,7 +71294,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 413 */
+/* 412 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -72592,7 +72475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 414 */
+/* 413 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -72623,7 +72506,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 415 */
+/* 414 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -72663,7 +72546,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 416 */
+/* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -72675,8 +72558,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.DynamoDBStreams = Service.defineService('dynamodbstreams', ['2012-08-10']);
 	Object.defineProperty(apiLoader.services['dynamodbstreams'], '2012-08-10', {
 	  get: function get() {
-	    var model = __webpack_require__(417);
-	    model.paginators = __webpack_require__(418).pagination;
+	    var model = __webpack_require__(416);
+	    model.paginators = __webpack_require__(417).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -72687,7 +72570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 417 */
+/* 416 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -72938,7 +72821,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 418 */
+/* 417 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -72946,7 +72829,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 419 */
+/* 418 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -72956,12 +72839,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	apiLoader.services['ec2'] = {};
 	AWS.EC2 = Service.defineService('ec2', ['2013-06-15*', '2013-10-15*', '2014-02-01*', '2014-05-01*', '2014-06-15*', '2014-09-01*', '2014-10-01*', '2015-03-01*', '2015-04-15*', '2015-10-01*', '2016-04-01*', '2016-09-15*', '2016-11-15']);
-	__webpack_require__(420);
+	__webpack_require__(419);
 	Object.defineProperty(apiLoader.services['ec2'], '2016-11-15', {
 	  get: function get() {
-	    var model = __webpack_require__(421);
-	    model.paginators = __webpack_require__(422).pagination;
-	    model.waiters = __webpack_require__(423).waiters;
+	    var model = __webpack_require__(420);
+	    model.paginators = __webpack_require__(421).pagination;
+	    model.waiters = __webpack_require__(422).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -72972,7 +72855,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 420 */
+/* 419 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
@@ -73040,7 +72923,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 421 */
+/* 420 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -84737,7 +84620,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 422 */
+/* 421 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -84886,7 +84769,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 423 */
+/* 422 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -85502,7 +85385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 424 */
+/* 423 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -85514,8 +85397,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ECR = Service.defineService('ecr', ['2015-09-21']);
 	Object.defineProperty(apiLoader.services['ecr'], '2015-09-21', {
 	  get: function get() {
-	    var model = __webpack_require__(425);
-	    model.paginators = __webpack_require__(426).pagination;
+	    var model = __webpack_require__(424);
+	    model.paginators = __webpack_require__(425).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -85526,7 +85409,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 425 */
+/* 424 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -86083,7 +85966,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 426 */
+/* 425 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -86110,7 +85993,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 427 */
+/* 426 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -86122,9 +86005,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ECS = Service.defineService('ecs', ['2014-11-13']);
 	Object.defineProperty(apiLoader.services['ecs'], '2014-11-13', {
 	  get: function get() {
-	    var model = __webpack_require__(428);
-	    model.paginators = __webpack_require__(429).pagination;
-	    model.waiters = __webpack_require__(430).waiters;
+	    var model = __webpack_require__(427);
+	    model.paginators = __webpack_require__(428).pagination;
+	    model.waiters = __webpack_require__(429).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -86135,7 +86018,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 428 */
+/* 427 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -87447,7 +87330,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 429 */
+/* 428 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -87492,7 +87375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 430 */
+/* 429 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -87590,7 +87473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 431 */
+/* 430 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -87602,7 +87485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.EFS = Service.defineService('efs', ['2015-02-01']);
 	Object.defineProperty(apiLoader.services['efs'], '2015-02-01', {
 	  get: function get() {
-	    var model = __webpack_require__(432);
+	    var model = __webpack_require__(431);
 	    return model;
 	  },
 	  enumerable: true,
@@ -87613,7 +87496,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 432 */
+/* 431 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -88014,7 +87897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 433 */
+/* 432 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -88026,9 +87909,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ElastiCache = Service.defineService('elasticache', ['2012-11-15*', '2014-03-24*', '2014-07-15*', '2014-09-30*', '2015-02-02']);
 	Object.defineProperty(apiLoader.services['elasticache'], '2015-02-02', {
 	  get: function get() {
-	    var model = __webpack_require__(434);
-	    model.paginators = __webpack_require__(435).pagination;
-	    model.waiters = __webpack_require__(436).waiters;
+	    var model = __webpack_require__(433);
+	    model.paginators = __webpack_require__(434).pagination;
+	    model.waiters = __webpack_require__(435).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -88039,7 +87922,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 434 */
+/* 433 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -89644,7 +89527,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 435 */
+/* 434 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -89725,7 +89608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 436 */
+/* 435 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -89873,7 +89756,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 437 */
+/* 436 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -89885,8 +89768,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ElasticBeanstalk = Service.defineService('elasticbeanstalk', ['2010-12-01']);
 	Object.defineProperty(apiLoader.services['elasticbeanstalk'], '2010-12-01', {
 	  get: function get() {
-	    var model = __webpack_require__(438);
-	    model.paginators = __webpack_require__(439).pagination;
+	    var model = __webpack_require__(437);
+	    model.paginators = __webpack_require__(438).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -89897,7 +89780,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 438 */
+/* 437 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -91481,7 +91364,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 439 */
+/* 438 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -91511,7 +91394,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 440 */
+/* 439 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -91523,9 +91406,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ELB = Service.defineService('elb', ['2012-06-01']);
 	Object.defineProperty(apiLoader.services['elb'], '2012-06-01', {
 	  get: function get() {
-	    var model = __webpack_require__(441);
-	    model.paginators = __webpack_require__(442).pagination;
-	    model.waiters = __webpack_require__(443).waiters;
+	    var model = __webpack_require__(440);
+	    model.paginators = __webpack_require__(441).pagination;
+	    model.waiters = __webpack_require__(442).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -91536,7 +91419,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 441 */
+/* 440 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -92543,7 +92426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 442 */
+/* 441 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -92566,7 +92449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 443 */
+/* 442 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -92620,7 +92503,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 444 */
+/* 443 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -92632,9 +92515,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ELBv2 = Service.defineService('elbv2', ['2015-12-01']);
 	Object.defineProperty(apiLoader.services['elbv2'], '2015-12-01', {
 	  get: function get() {
-	    var model = __webpack_require__(445);
-	    model.paginators = __webpack_require__(446).pagination;
-	    model.waiters = __webpack_require__(447).waiters;
+	    var model = __webpack_require__(444);
+	    model.paginators = __webpack_require__(445).pagination;
+	    model.waiters = __webpack_require__(446).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -92645,7 +92528,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 445 */
+/* 444 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -93728,7 +93611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 446 */
+/* 445 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -93752,7 +93635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 447 */
+/* 446 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -93821,7 +93704,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 448 */
+/* 447 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -93833,9 +93716,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.EMR = Service.defineService('emr', ['2009-03-31']);
 	Object.defineProperty(apiLoader.services['emr'], '2009-03-31', {
 	  get: function get() {
-	    var model = __webpack_require__(449);
-	    model.paginators = __webpack_require__(450).pagination;
-	    model.waiters = __webpack_require__(451).waiters;
+	    var model = __webpack_require__(448);
+	    model.paginators = __webpack_require__(449).pagination;
+	    model.waiters = __webpack_require__(450).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -93846,7 +93729,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 449 */
+/* 448 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -95560,7 +95443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 450 */
+/* 449 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -95602,7 +95485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 451 */
+/* 450 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -95693,7 +95576,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 452 */
+/* 451 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -95705,8 +95588,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ES = Service.defineService('es', ['2015-01-01']);
 	Object.defineProperty(apiLoader.services['es'], '2015-01-01', {
 	  get: function get() {
-	    var model = __webpack_require__(453);
-	    model.paginators = __webpack_require__(454).pagination;
+	    var model = __webpack_require__(452);
+	    model.paginators = __webpack_require__(453).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -95717,7 +95600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 453 */
+/* 452 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -96391,7 +96274,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 454 */
+/* 453 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -96410,7 +96293,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 455 */
+/* 454 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -96422,9 +96305,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ElasticTranscoder = Service.defineService('elastictranscoder', ['2012-09-25']);
 	Object.defineProperty(apiLoader.services['elastictranscoder'], '2012-09-25', {
 	  get: function get() {
-	    var model = __webpack_require__(456);
-	    model.paginators = __webpack_require__(457).pagination;
-	    model.waiters = __webpack_require__(458).waiters;
+	    var model = __webpack_require__(455);
+	    model.paginators = __webpack_require__(456).pagination;
+	    model.waiters = __webpack_require__(457).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -96435,7 +96318,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 456 */
+/* 455 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -97499,7 +97382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 457 */
+/* 456 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -97528,7 +97411,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 458 */
+/* 457 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -97563,7 +97446,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 459 */
+/* 458 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -97575,7 +97458,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.Firehose = Service.defineService('firehose', ['2015-08-04']);
 	Object.defineProperty(apiLoader.services['firehose'], '2015-08-04', {
 	  get: function get() {
-	    var model = __webpack_require__(460);
+	    var model = __webpack_require__(459);
 	    return model;
 	  },
 	  enumerable: true,
@@ -97586,7 +97469,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 460 */
+/* 459 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -98294,7 +98177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 461 */
+/* 460 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -98306,8 +98189,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.GameLift = Service.defineService('gamelift', ['2015-10-01']);
 	Object.defineProperty(apiLoader.services['gamelift'], '2015-10-01', {
 	  get: function get() {
-	    var model = __webpack_require__(462);
-	    model.paginators = __webpack_require__(463).pagination;
+	    var model = __webpack_require__(461);
+	    model.paginators = __webpack_require__(462).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -98318,7 +98201,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 462 */
+/* 461 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -99894,7 +99777,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 463 */
+/* 462 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -99902,7 +99785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 464 */
+/* 463 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -99912,12 +99795,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	apiLoader.services['glacier'] = {};
 	AWS.Glacier = Service.defineService('glacier', ['2012-06-01']);
-	__webpack_require__(465);
+	__webpack_require__(464);
 	Object.defineProperty(apiLoader.services['glacier'], '2012-06-01', {
 	  get: function get() {
-	    var model = __webpack_require__(466);
-	    model.paginators = __webpack_require__(467).pagination;
-	    model.waiters = __webpack_require__(468).waiters;
+	    var model = __webpack_require__(465);
+	    model.paginators = __webpack_require__(466).pagination;
+	    model.waiters = __webpack_require__(467).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -99928,7 +99811,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 465 */
+/* 464 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
@@ -100048,7 +99931,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 466 */
+/* 465 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -101331,7 +101214,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 467 */
+/* 466 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -101364,7 +101247,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 468 */
+/* 467 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -101408,7 +101291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 469 */
+/* 468 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -101420,8 +101303,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.Health = Service.defineService('health', ['2016-08-04']);
 	Object.defineProperty(apiLoader.services['health'], '2016-08-04', {
 	  get: function get() {
-	    var model = __webpack_require__(470);
-	    model.paginators = __webpack_require__(471).pagination;
+	    var model = __webpack_require__(469);
+	    model.paginators = __webpack_require__(470).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -101432,7 +101315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 470 */
+/* 469 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -101827,7 +101710,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 471 */
+/* 470 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -101863,7 +101746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 472 */
+/* 471 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -101875,9 +101758,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.IAM = Service.defineService('iam', ['2010-05-08']);
 	Object.defineProperty(apiLoader.services['iam'], '2010-05-08', {
 	  get: function get() {
-	    var model = __webpack_require__(473);
-	    model.paginators = __webpack_require__(474).pagination;
-	    model.waiters = __webpack_require__(475).waiters;
+	    var model = __webpack_require__(472);
+	    model.paginators = __webpack_require__(473).pagination;
+	    model.waiters = __webpack_require__(474).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -101888,7 +101771,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 473 */
+/* 472 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -105018,7 +104901,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 474 */
+/* 473 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -105221,7 +105104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 475 */
+/* 474 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -105265,7 +105148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 476 */
+/* 475 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -105277,8 +105160,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.ImportExport = Service.defineService('importexport', ['2010-06-01']);
 	Object.defineProperty(apiLoader.services['importexport'], '2010-06-01', {
 	  get: function get() {
-	    var model = __webpack_require__(477);
-	    model.paginators = __webpack_require__(478).pagination;
+	    var model = __webpack_require__(476);
+	    model.paginators = __webpack_require__(477).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -105289,7 +105172,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 477 */
+/* 476 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -105537,7 +105420,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 478 */
+/* 477 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -105553,7 +105436,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 479 */
+/* 478 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -105565,8 +105448,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.Inspector = Service.defineService('inspector', ['2015-08-18*', '2016-02-16']);
 	Object.defineProperty(apiLoader.services['inspector'], '2016-02-16', {
 	  get: function get() {
-	    var model = __webpack_require__(480);
-	    model.paginators = __webpack_require__(481).pagination;
+	    var model = __webpack_require__(479);
+	    model.paginators = __webpack_require__(480).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -105577,7 +105460,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 480 */
+/* 479 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -106864,7 +106747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 481 */
+/* 480 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -106872,7 +106755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 482 */
+/* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -106884,7 +106767,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.Iot = Service.defineService('iot', ['2015-05-28']);
 	Object.defineProperty(apiLoader.services['iot'], '2015-05-28', {
 	  get: function get() {
-	    var model = __webpack_require__(483);
+	    var model = __webpack_require__(482);
 	    return model;
 	  },
 	  enumerable: true,
@@ -106895,7 +106778,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 483 */
+/* 482 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -108850,7 +108733,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 484 */
+/* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -108860,10 +108743,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	apiLoader.services['iotdata'] = {};
 	AWS.IotData = Service.defineService('iotdata', ['2015-05-28']);
-	__webpack_require__(485);
+	__webpack_require__(484);
 	Object.defineProperty(apiLoader.services['iotdata'], '2015-05-28', {
 	  get: function get() {
-	    var model = __webpack_require__(486);
+	    var model = __webpack_require__(485);
 	    return model;
 	  },
 	  enumerable: true,
@@ -108874,7 +108757,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 485 */
+/* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(5);
@@ -108980,7 +108863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 486 */
+/* 485 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -109114,7 +108997,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 487 */
+/* 486 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -109126,9 +109009,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.Kinesis = Service.defineService('kinesis', ['2013-12-02']);
 	Object.defineProperty(apiLoader.services['kinesis'], '2013-12-02', {
 	  get: function get() {
-	    var model = __webpack_require__(488);
-	    model.paginators = __webpack_require__(489).pagination;
-	    model.waiters = __webpack_require__(490).waiters;
+	    var model = __webpack_require__(487);
+	    model.paginators = __webpack_require__(488).pagination;
+	    model.waiters = __webpack_require__(489).waiters;
 	    return model;
 	  },
 	  enumerable: true,
@@ -109139,7 +109022,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 488 */
+/* 487 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -109702,7 +109585,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 489 */
+/* 488 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -109725,7 +109608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 490 */
+/* 489 */
 /***/ (function(module, exports) {
 
 	module.exports = {
@@ -109760,7 +109643,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ }),
-/* 491 */
+/* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
@@ -109772,7 +109655,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	AWS.KinesisAnalytics = Service.defineService('kinesisanalytics', ['2015-08-14']);
 	Object.defineProperty(apiLoader.services['kinesisanalytics'], '2015-08-14', {
 	  get: function get() {
-	    var model = __webpack_require__(492);
+	    var model = __webpack_require__(491);
+	    model.paginators = __webpack_require__(492).pagination;
 	    return model;
 	  },
 	  enumerable: true,
@@ -109783,13 +109667,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 492 */
+/* 491 */
 /***/ (function(module, exports) {
 
 	module.exports = {
 		"version": "2.0",
 		"metadata": {
-			"uid": "kinesisanalytics-2015-08-14",
 			"apiVersion": "2015-08-14",
 			"endpointPrefix": "kinesisanalytics",
 			"jsonVersion": "1.1",
@@ -109798,9 +109681,33 @@ return /******/ (function(modules) { // webpackBootstrap
 			"serviceFullName": "Amazon Kinesis Analytics",
 			"signatureVersion": "v4",
 			"targetPrefix": "KinesisAnalytics_20150814",
-			"timestampFormat": "unixTimestamp"
+			"timestampFormat": "unixTimestamp",
+			"uid": "kinesisanalytics-2015-08-14"
 		},
 		"operations": {
+			"AddApplicationCloudWatchLoggingOption": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"ApplicationName",
+						"CurrentApplicationVersionId",
+						"CloudWatchLoggingOption"
+					],
+					"members": {
+						"ApplicationName": {},
+						"CurrentApplicationVersionId": {
+							"type": "long"
+						},
+						"CloudWatchLoggingOption": {
+							"shape": "S4"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
 			"AddApplicationInput": {
 				"input": {
 					"type": "structure",
@@ -109815,7 +109722,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "long"
 						},
 						"Input": {
-							"shape": "S4"
+							"shape": "S9"
 						}
 					}
 				},
@@ -109838,7 +109745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "long"
 						},
 						"Output": {
-							"shape": "St"
+							"shape": "Sx"
 						}
 					}
 				},
@@ -109882,7 +109789,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									}
 								},
 								"ReferenceSchema": {
-									"shape": "Sc"
+									"shape": "Sg"
 								}
 							}
 						}
@@ -109905,13 +109812,19 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Inputs": {
 							"type": "list",
 							"member": {
-								"shape": "S4"
+								"shape": "S9"
 							}
 						},
 						"Outputs": {
 							"type": "list",
 							"member": {
-								"shape": "St"
+								"shape": "Sx"
+							}
+						},
+						"CloudWatchLoggingOptions": {
+							"type": "list",
+							"member": {
+								"shape": "S4"
 							}
 						},
 						"ApplicationCode": {}
@@ -109924,7 +109837,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"ApplicationSummary": {
-							"shape": "S1b"
+							"shape": "S1g"
 						}
 					}
 				}
@@ -109941,6 +109854,27 @@ return /******/ (function(modules) { // webpackBootstrap
 						"CreateTimestamp": {
 							"type": "timestamp"
 						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"DeleteApplicationCloudWatchLoggingOption": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"ApplicationName",
+						"CurrentApplicationVersionId",
+						"CloudWatchLoggingOptionId"
+					],
+					"members": {
+						"ApplicationName": {},
+						"CurrentApplicationVersionId": {
+							"type": "long"
+						},
+						"CloudWatchLoggingOptionId": {}
 					}
 				},
 				"output": {
@@ -110051,13 +109985,13 @@ return /******/ (function(modules) { // webpackBootstrap
 												}
 											},
 											"InputSchema": {
-												"shape": "Sc"
+												"shape": "Sg"
 											},
 											"InputParallelism": {
-												"shape": "Sa"
+												"shape": "Se"
 											},
 											"InputStartingPositionConfiguration": {
-												"shape": "S1t"
+												"shape": "S20"
 											}
 										}
 									}
@@ -110084,7 +110018,7 @@ return /******/ (function(modules) { // webpackBootstrap
 												}
 											},
 											"DestinationSchema": {
-												"shape": "Sw"
+												"shape": "S10"
 											}
 										}
 									}
@@ -110115,8 +110049,23 @@ return /******/ (function(modules) { // webpackBootstrap
 												}
 											},
 											"ReferenceSchema": {
-												"shape": "Sc"
+												"shape": "Sg"
 											}
+										}
+									}
+								},
+								"CloudWatchLoggingOptionDescriptions": {
+									"type": "list",
+									"member": {
+										"type": "structure",
+										"required": [
+											"LogStreamARN",
+											"RoleARN"
+										],
+										"members": {
+											"CloudWatchLoggingOptionId": {},
+											"LogStreamARN": {},
+											"RoleARN": {}
 										}
 									}
 								},
@@ -110141,7 +110090,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ResourceARN": {},
 						"RoleARN": {},
 						"InputStartingPositionConfiguration": {
-							"shape": "S1t"
+							"shape": "S20"
 						}
 					}
 				},
@@ -110149,7 +110098,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"InputSchema": {
-							"shape": "Sc"
+							"shape": "Sg"
 						},
 						"ParsedInputRecords": {
 							"type": "list",
@@ -110185,7 +110134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ApplicationSummaries": {
 							"type": "list",
 							"member": {
-								"shape": "S1b"
+								"shape": "S1g"
 							}
 						},
 						"HasMoreApplications": {
@@ -110214,7 +110163,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"members": {
 									"Id": {},
 									"InputStartingPositionConfiguration": {
-										"shape": "S1t"
+										"shape": "S20"
 									}
 								}
 							}
@@ -110285,11 +110234,11 @@ return /******/ (function(modules) { // webpackBootstrap
 												"type": "structure",
 												"members": {
 													"RecordFormatUpdate": {
-														"shape": "Sd"
+														"shape": "Sh"
 													},
 													"RecordEncodingUpdate": {},
 													"RecordColumnUpdates": {
-														"shape": "Sm"
+														"shape": "Sq"
 													}
 												}
 											},
@@ -110330,7 +110279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 												}
 											},
 											"DestinationSchemaUpdate": {
-												"shape": "Sw"
+												"shape": "S10"
 											}
 										}
 									}
@@ -110354,8 +110303,22 @@ return /******/ (function(modules) { // webpackBootstrap
 												}
 											},
 											"ReferenceSchemaUpdate": {
-												"shape": "Sc"
+												"shape": "Sg"
 											}
+										}
+									}
+								},
+								"CloudWatchLoggingOptionUpdates": {
+									"type": "list",
+									"member": {
+										"type": "structure",
+										"required": [
+											"CloudWatchLoggingOptionId"
+										],
+										"members": {
+											"CloudWatchLoggingOptionId": {},
+											"LogStreamARNUpdate": {},
+											"RoleARNUpdate": {}
 										}
 									}
 								}
@@ -110371,6 +110334,17 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"shapes": {
 			"S4": {
+				"type": "structure",
+				"required": [
+					"LogStreamARN",
+					"RoleARN"
+				],
+				"members": {
+					"LogStreamARN": {},
+					"RoleARN": {}
+				}
+			},
+			"S9": {
 				"type": "structure",
 				"required": [
 					"NamePrefix",
@@ -110401,14 +110375,14 @@ return /******/ (function(modules) { // webpackBootstrap
 						}
 					},
 					"InputParallelism": {
-						"shape": "Sa"
+						"shape": "Se"
 					},
 					"InputSchema": {
-						"shape": "Sc"
+						"shape": "Sg"
 					}
 				}
 			},
-			"Sa": {
+			"Se": {
 				"type": "structure",
 				"members": {
 					"Count": {
@@ -110416,7 +110390,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sc": {
+			"Sg": {
 				"type": "structure",
 				"required": [
 					"RecordFormat",
@@ -110424,15 +110398,15 @@ return /******/ (function(modules) { // webpackBootstrap
 				],
 				"members": {
 					"RecordFormat": {
-						"shape": "Sd"
+						"shape": "Sh"
 					},
 					"RecordEncoding": {},
 					"RecordColumns": {
-						"shape": "Sm"
+						"shape": "Sq"
 					}
 				}
 			},
-			"Sd": {
+			"Sh": {
 				"type": "structure",
 				"required": [
 					"RecordFormatType"
@@ -110466,7 +110440,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sm": {
+			"Sq": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -110481,7 +110455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"St": {
+			"Sx": {
 				"type": "structure",
 				"required": [
 					"Name",
@@ -110512,17 +110486,17 @@ return /******/ (function(modules) { // webpackBootstrap
 						}
 					},
 					"DestinationSchema": {
-						"shape": "Sw"
+						"shape": "S10"
 					}
 				}
 			},
-			"Sw": {
+			"S10": {
 				"type": "structure",
 				"members": {
 					"RecordFormatType": {}
 				}
 			},
-			"S1b": {
+			"S1g": {
 				"type": "structure",
 				"required": [
 					"ApplicationName",
@@ -110535,13 +110509,21 @@ return /******/ (function(modules) { // webpackBootstrap
 					"ApplicationStatus": {}
 				}
 			},
-			"S1t": {
+			"S20": {
 				"type": "structure",
 				"members": {
 					"InputStartingPosition": {}
 				}
 			}
 		}
+	};
+
+/***/ }),
+/* 492 */
+/***/ (function(module, exports) {
+
+	module.exports = {
+		"pagination": {}
 	};
 
 /***/ }),
@@ -168541,6 +168523,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"VersionId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"DocumentId": {
 							"location": "uri",
 							"locationName": "DocumentId"
@@ -168566,6 +168553,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"UserId": {
 							"location": "uri",
 							"locationName": "UserId"
+						},
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
 						}
 					}
 				},
@@ -168573,7 +168565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"User": {
-							"shape": "S7"
+							"shape": "S8"
 						}
 					}
 				}
@@ -168590,6 +168582,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Principals"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"ResourceId": {
 							"location": "uri",
 							"locationName": "ResourceId"
@@ -168634,6 +168631,88 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"CreateComment": {
+				"http": {
+					"requestUri": "/api/v1/documents/{DocumentId}/versions/{VersionId}/comment",
+					"responseCode": 201
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"DocumentId",
+						"VersionId",
+						"Text"
+					],
+					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
+						"DocumentId": {
+							"location": "uri",
+							"locationName": "DocumentId"
+						},
+						"VersionId": {
+							"location": "uri",
+							"locationName": "VersionId"
+						},
+						"ParentId": {},
+						"ThreadId": {},
+						"Text": {
+							"shape": "Sy"
+						},
+						"Visibility": {},
+						"NotifyCollaborators": {
+							"type": "boolean"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Comment": {
+							"shape": "S12"
+						}
+					}
+				}
+			},
+			"CreateCustomMetadata": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/api/v1/resources/{ResourceId}/customMetadata",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"ResourceId",
+						"CustomMetadata"
+					],
+					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
+						"ResourceId": {
+							"location": "uri",
+							"locationName": "ResourceId"
+						},
+						"VersionId": {
+							"location": "querystring",
+							"locationName": "versionid"
+						},
+						"CustomMetadata": {
+							"shape": "S15"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
 			"CreateFolder": {
 				"http": {
 					"requestUri": "/api/v1/folders",
@@ -168645,6 +168724,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ParentFolderId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"Name": {},
 						"ParentFolderId": {}
 					}
@@ -168653,9 +168737,41 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Metadata": {
-							"shape": "Sy"
+							"shape": "S1c"
 						}
 					}
+				}
+			},
+			"CreateLabels": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/api/v1/resources/{ResourceId}/labels",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"ResourceId",
+						"Labels"
+					],
+					"members": {
+						"ResourceId": {
+							"location": "uri",
+							"locationName": "ResourceId"
+						},
+						"Labels": {
+							"shape": "S1f"
+						},
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
 				}
 			},
 			"CreateNotificationSubscription": {
@@ -168685,7 +168801,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Subscription": {
-							"shape": "S16"
+							"shape": "S1o"
 						}
 					}
 				}
@@ -168706,6 +168822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"OrganizationId": {},
 						"Username": {},
+						"EmailAddress": {},
 						"GivenName": {},
 						"Surname": {},
 						"Password": {
@@ -168714,7 +168831,12 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"TimeZoneId": {},
 						"StorageRule": {
-							"shape": "Si"
+							"shape": "Sj"
+						},
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
 						}
 					}
 				},
@@ -168722,7 +168844,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"User": {
-							"shape": "S7"
+							"shape": "S8"
 						}
 					}
 				}
@@ -168742,8 +168864,90 @@ return /******/ (function(modules) { // webpackBootstrap
 						"UserId": {
 							"location": "uri",
 							"locationName": "UserId"
+						},
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
 						}
 					}
+				}
+			},
+			"DeleteComment": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/api/v1/documents/{DocumentId}/versions/{VersionId}/comment/{CommentId}",
+					"responseCode": 204
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"DocumentId",
+						"VersionId",
+						"CommentId"
+					],
+					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
+						"DocumentId": {
+							"location": "uri",
+							"locationName": "DocumentId"
+						},
+						"VersionId": {
+							"location": "uri",
+							"locationName": "VersionId"
+						},
+						"CommentId": {
+							"location": "uri",
+							"locationName": "CommentId"
+						}
+					}
+				}
+			},
+			"DeleteCustomMetadata": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/api/v1/resources/{ResourceId}/customMetadata",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"ResourceId"
+					],
+					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
+						"ResourceId": {
+							"location": "uri",
+							"locationName": "ResourceId"
+						},
+						"VersionId": {
+							"location": "querystring",
+							"locationName": "versionId"
+						},
+						"Keys": {
+							"location": "querystring",
+							"locationName": "keys",
+							"type": "list",
+							"member": {}
+						},
+						"DeleteAll": {
+							"location": "querystring",
+							"locationName": "deleteAll",
+							"type": "boolean"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
 				}
 			},
 			"DeleteDocument": {
@@ -168758,6 +168962,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"DocumentId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"DocumentId": {
 							"location": "uri",
 							"locationName": "DocumentId"
@@ -168777,6 +168986,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"FolderId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"FolderId": {
 							"location": "uri",
 							"locationName": "FolderId"
@@ -168796,11 +169010,54 @@ return /******/ (function(modules) { // webpackBootstrap
 						"FolderId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"FolderId": {
 							"location": "uri",
 							"locationName": "FolderId"
 						}
 					}
+				}
+			},
+			"DeleteLabels": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/api/v1/resources/{ResourceId}/labels",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"ResourceId"
+					],
+					"members": {
+						"ResourceId": {
+							"location": "uri",
+							"locationName": "ResourceId"
+						},
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
+						"Labels": {
+							"shape": "S1f",
+							"location": "querystring",
+							"locationName": "labels"
+						},
+						"DeleteAll": {
+							"location": "querystring",
+							"locationName": "deleteAll",
+							"type": "boolean"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
 				}
 			},
 			"DeleteNotificationSubscription": {
@@ -168839,10 +169096,65 @@ return /******/ (function(modules) { // webpackBootstrap
 						"UserId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"UserId": {
 							"location": "uri",
 							"locationName": "UserId"
 						}
+					}
+				}
+			},
+			"DescribeComments": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/api/v1/documents/{DocumentId}/versions/{VersionId}/comments",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"DocumentId",
+						"VersionId"
+					],
+					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
+						"DocumentId": {
+							"location": "uri",
+							"locationName": "DocumentId"
+						},
+						"VersionId": {
+							"location": "uri",
+							"locationName": "VersionId"
+						},
+						"Limit": {
+							"location": "querystring",
+							"locationName": "limit",
+							"type": "integer"
+						},
+						"Marker": {
+							"location": "querystring",
+							"locationName": "marker"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Comments": {
+							"type": "list",
+							"member": {
+								"shape": "S12"
+							}
+						},
+						"Marker": {}
 					}
 				}
 			},
@@ -168858,6 +169170,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"DocumentId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"DocumentId": {
 							"location": "uri",
 							"locationName": "DocumentId"
@@ -168887,7 +169204,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"DocumentVersions": {
 							"type": "list",
 							"member": {
-								"shape": "S1m"
+								"shape": "S2e"
 							}
 						},
 						"Marker": {}
@@ -168906,6 +169223,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"FolderId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"FolderId": {
 							"location": "uri",
 							"locationName": "FolderId"
@@ -168943,13 +169265,13 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Folders": {
 							"type": "list",
 							"member": {
-								"shape": "Sy"
+								"shape": "S1c"
 							}
 						},
 						"Documents": {
 							"type": "list",
 							"member": {
-								"shape": "S21"
+								"shape": "S2t"
 							}
 						},
 						"Marker": {}
@@ -168989,7 +169311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Subscriptions": {
 							"type": "list",
 							"member": {
-								"shape": "S16"
+								"shape": "S1o"
 							}
 						},
 						"Marker": {}
@@ -169008,6 +169330,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ResourceId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"ResourceId": {
 							"location": "uri",
 							"locationName": "ResourceId"
@@ -169059,6 +169386,11 @@ return /******/ (function(modules) { // webpackBootstrap
 				"input": {
 					"type": "structure",
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"OrganizationId": {
 							"location": "querystring",
 							"locationName": "organizationId"
@@ -169106,7 +169438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Users": {
 							"type": "list",
 							"member": {
-								"shape": "S7"
+								"shape": "S8"
 							}
 						},
 						"TotalNumberOfUsers": {
@@ -169128,9 +169460,19 @@ return /******/ (function(modules) { // webpackBootstrap
 						"DocumentId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"DocumentId": {
 							"location": "uri",
 							"locationName": "DocumentId"
+						},
+						"IncludeCustomMetadata": {
+							"location": "querystring",
+							"locationName": "includeCustomMetadata",
+							"type": "boolean"
 						}
 					}
 				},
@@ -169138,7 +169480,10 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Metadata": {
-							"shape": "S21"
+							"shape": "S2t"
+						},
+						"CustomMetadata": {
+							"shape": "S15"
 						}
 					}
 				}
@@ -169155,6 +169500,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"DocumentId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"DocumentId": {
 							"location": "uri",
 							"locationName": "DocumentId"
@@ -169178,7 +169528,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Path": {
-							"shape": "S2n"
+							"shape": "S3f"
 						}
 					}
 				}
@@ -169196,6 +169546,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"VersionId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"DocumentId": {
 							"location": "uri",
 							"locationName": "DocumentId"
@@ -169207,6 +169562,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Fields": {
 							"location": "querystring",
 							"locationName": "fields"
+						},
+						"IncludeCustomMetadata": {
+							"location": "querystring",
+							"locationName": "includeCustomMetadata",
+							"type": "boolean"
 						}
 					}
 				},
@@ -169214,7 +169574,10 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Metadata": {
-							"shape": "S1m"
+							"shape": "S2e"
+						},
+						"CustomMetadata": {
+							"shape": "S15"
 						}
 					}
 				}
@@ -169231,9 +169594,19 @@ return /******/ (function(modules) { // webpackBootstrap
 						"FolderId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"FolderId": {
 							"location": "uri",
 							"locationName": "FolderId"
+						},
+						"IncludeCustomMetadata": {
+							"location": "querystring",
+							"locationName": "includeCustomMetadata",
+							"type": "boolean"
 						}
 					}
 				},
@@ -169241,7 +169614,10 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Metadata": {
-							"shape": "Sy"
+							"shape": "S1c"
+						},
+						"CustomMetadata": {
+							"shape": "S15"
 						}
 					}
 				}
@@ -169258,6 +169634,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"FolderId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"FolderId": {
 							"location": "uri",
 							"locationName": "FolderId"
@@ -169281,7 +169662,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Path": {
-							"shape": "S2n"
+							"shape": "S3f"
 						}
 					}
 				}
@@ -169297,6 +169678,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ParentFolderId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"Id": {},
 						"Name": {},
 						"ContentCreatedTimestamp": {
@@ -169316,13 +169702,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Metadata": {
-							"shape": "S21"
+							"shape": "S2t"
 						},
 						"UploadMetadata": {
 							"type": "structure",
 							"members": {
 								"UploadUrl": {
-									"shape": "S1r"
+									"shape": "S2j"
 								},
 								"SignedHeaders": {
 									"type": "map",
@@ -169346,6 +169732,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ResourceId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"ResourceId": {
 							"location": "uri",
 							"locationName": "ResourceId"
@@ -169366,6 +169757,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"PrincipalId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"ResourceId": {
 							"location": "uri",
 							"locationName": "ResourceId"
@@ -169393,6 +169789,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"DocumentId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"DocumentId": {
 							"location": "uri",
 							"locationName": "DocumentId"
@@ -169416,6 +169817,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"VersionId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"DocumentId": {
 							"location": "uri",
 							"locationName": "DocumentId"
@@ -169440,6 +169846,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"FolderId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"FolderId": {
 							"location": "uri",
 							"locationName": "FolderId"
@@ -169462,6 +169873,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"UserId"
 					],
 					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
 						"UserId": {
 							"location": "uri",
 							"locationName": "UserId"
@@ -169470,7 +169886,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Surname": {},
 						"Type": {},
 						"StorageRule": {
-							"shape": "Si"
+							"shape": "Sj"
 						},
 						"TimeZoneId": {},
 						"Locale": {}
@@ -169480,14 +169896,18 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"User": {
-							"shape": "S7"
+							"shape": "S8"
 						}
 					}
 				}
 			}
 		},
 		"shapes": {
-			"S7": {
+			"S2": {
+				"type": "string",
+				"sensitive": true
+			},
+			"S8": {
 				"type": "structure",
 				"members": {
 					"Id": {},
@@ -169515,13 +169935,13 @@ return /******/ (function(modules) { // webpackBootstrap
 								"type": "long"
 							},
 							"StorageRule": {
-								"shape": "Si"
+								"shape": "Sj"
 							}
 						}
 					}
 				}
 			},
-			"Si": {
+			"Sj": {
 				"type": "structure",
 				"members": {
 					"StorageAllocatedInBytes": {
@@ -169531,6 +169951,38 @@ return /******/ (function(modules) { // webpackBootstrap
 				}
 			},
 			"Sy": {
+				"type": "string",
+				"sensitive": true
+			},
+			"S12": {
+				"type": "structure",
+				"required": [
+					"CommentId"
+				],
+				"members": {
+					"CommentId": {},
+					"ParentId": {},
+					"ThreadId": {},
+					"Text": {
+						"shape": "Sy"
+					},
+					"Contributor": {
+						"shape": "S8"
+					},
+					"CreatedTimestamp": {
+						"type": "timestamp"
+					},
+					"Status": {},
+					"Visibility": {},
+					"RecipientId": {}
+				}
+			},
+			"S15": {
+				"type": "map",
+				"key": {},
+				"value": {}
+			},
+			"S1c": {
 				"type": "structure",
 				"members": {
 					"Id": {},
@@ -169544,10 +169996,23 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "timestamp"
 					},
 					"ResourceState": {},
-					"Signature": {}
+					"Signature": {},
+					"Labels": {
+						"shape": "S1f"
+					},
+					"Size": {
+						"type": "long"
+					},
+					"LatestVersionSize": {
+						"type": "long"
+					}
 				}
 			},
-			"S16": {
+			"S1f": {
+				"type": "list",
+				"member": {}
+			},
+			"S1o": {
 				"type": "structure",
 				"members": {
 					"SubscriptionId": {},
@@ -169555,7 +170020,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Protocol": {}
 				}
 			},
-			"S1m": {
+			"S2e": {
 				"type": "structure",
 				"members": {
 					"Id": {},
@@ -169583,23 +170048,23 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "map",
 						"key": {},
 						"value": {
-							"shape": "S1r"
+							"shape": "S2j"
 						}
 					},
 					"Source": {
 						"type": "map",
 						"key": {},
 						"value": {
-							"shape": "S1r"
+							"shape": "S2j"
 						}
 					}
 				}
 			},
-			"S1r": {
+			"S2j": {
 				"type": "string",
 				"sensitive": true
 			},
-			"S21": {
+			"S2t": {
 				"type": "structure",
 				"members": {
 					"Id": {},
@@ -169612,12 +170077,15 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "timestamp"
 					},
 					"LatestVersionMetadata": {
-						"shape": "S1m"
+						"shape": "S2e"
 					},
-					"ResourceState": {}
+					"ResourceState": {},
+					"Labels": {
+						"shape": "S1f"
+					}
 				}
 			},
-			"S2n": {
+			"S3f": {
 				"type": "structure",
 				"members": {
 					"Components": {
