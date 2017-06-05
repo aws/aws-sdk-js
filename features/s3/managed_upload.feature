@@ -53,3 +53,22 @@ Feature: S3 Managed Upload
     When I get the object "checksummed_data"
     Then the HTTP response should have a content length of 20971520
     And the MD5 checksum of the response data should equal the generated checksum
+
+  @leave_parts_on_error
+  Scenario: Resuming an upload
+    When I use S3 managed upload to upload some 20MB buffer to the key "broken_buffer"
+    And I abort the upload
+    Then I receive a "RequestAbortedError" error
+    When I resume the upload
+    Then the object "broken_buffer" should exist
+    And the ContentLength should equal 20971520
+
+  @leave_parts_on_error
+  Scenario: Resuming a partial upload
+    When I use S3 managed upload to partially upload some 20MB buffer to the key "partial_buffer"
+    Then I receive a "RequestAbortedError" error
+    When I resume the upload
+    Then the object "partial_buffer" should exist
+    And the ContentLength should equal 20971520
+    And uploadPart should have been called 5 times
+    
