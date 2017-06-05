@@ -1,15 +1,14 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"iot-2015-05-28",
     "apiVersion":"2015-05-28",
     "endpointPrefix":"iot",
+    "protocol":"rest-json",
     "serviceFullName":"AWS IoT",
     "signatureVersion":"v4",
     "signingName":"execute-api",
-    "protocol":"rest-json"
+    "uid":"iot-2015-05-28"
   },
-  "documentation":"<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each thing (Thing Registry), configure logging, and create and manage policies and credentials to authenticate things.</p> <p>For more information about how AWS IoT works, see the <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer Guide</a>.</p>",
   "operations":{
     "AcceptCertificateTransfer":{
       "name":"AcceptCertificateTransfer",
@@ -17,55 +16,15 @@
         "method":"PATCH",
         "requestUri":"/accept-certificate-transfer/{certificateId}"
       },
-      "input":{
-        "shape":"AcceptCertificateTransferRequest",
-        "documentation":"<p>The input for the AcceptCertificateTransfer operation.</p>"
-      },
+      "input":{"shape":"AcceptCertificateTransferRequest"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"TransferAlreadyCompletedException",
-          "error":{"httpStatusCode":410},
-          "exception":true,
-          "documentation":"<p>You can't revert the certificate transfer because the transfer is already complete.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TransferAlreadyCompletedException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Accepts a pending certificate transfer. The default state of the certificate is INACTIVE.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p>"
     },
@@ -75,55 +34,15 @@
         "method":"PUT",
         "requestUri":"/principal-policies/{policyName}"
       },
-      "input":{
-        "shape":"AttachPrincipalPolicyRequest",
-        "documentation":"<p>The input for the AttachPrincipalPolicy operation.</p>"
-      },
+      "input":{"shape":"AttachPrincipalPolicyRequest"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "error":{"httpStatusCode":410},
-          "exception":true,
-          "documentation":"<p>The number of attached entities exceeds the limit.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Attaches the specified policy to the specified principal (certificate or other credential).</p>"
     },
@@ -133,53 +52,15 @@
         "method":"PUT",
         "requestUri":"/things/{thingName}/principals"
       },
-      "input":{
-        "shape":"AttachThingPrincipalRequest",
-        "documentation":"<p>The input for the AttachThingPrincipal operation.</p>"
-      },
-      "output":{
-        "shape":"AttachThingPrincipalResponse",
-        "documentation":"<p>The output from the AttachThingPrincipal operation.</p>"
-      },
+      "input":{"shape":"AttachThingPrincipalRequest"},
+      "output":{"shape":"AttachThingPrincipalResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Attaches the specified principal to the specified thing.</p>"
     },
@@ -189,57 +70,17 @@
         "method":"PATCH",
         "requestUri":"/cancel-certificate-transfer/{certificateId}"
       },
-      "input":{
-        "shape":"CancelCertificateTransferRequest",
-        "documentation":"<p>The input for the CancelCertificateTransfer operation.</p>"
-      },
+      "input":{"shape":"CancelCertificateTransferRequest"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"TransferAlreadyCompletedException",
-          "error":{"httpStatusCode":410},
-          "exception":true,
-          "documentation":"<p>You can't revert the certificate transfer because the transfer is already complete.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TransferAlreadyCompletedException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Cancels a pending transfer for the specified certificate.</p> <p><b>Note</b> Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use <a>RejectCertificateTransfer</a> instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled.</p> <p>After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.</p>"
+      "documentation":"<p>Cancels a pending transfer for the specified certificate.</p> <p> <b>Note</b> Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use <a>RejectCertificateTransfer</a> instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled.</p> <p>After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.</p>"
     },
     "CreateCertificateFromCsr":{
       "name":"CreateCertificateFromCsr",
@@ -247,49 +88,16 @@
         "method":"POST",
         "requestUri":"/certificates"
       },
-      "input":{
-        "shape":"CreateCertificateFromCsrRequest",
-        "documentation":"<p>The input for the CreateCertificateFromCsr operation.</p>"
-      },
-      "output":{
-        "shape":"CreateCertificateFromCsrResponse",
-        "documentation":"<p>The output from the CreateCertificateFromCsr operation.</p>"
-      },
+      "input":{"shape":"CreateCertificateFromCsrRequest"},
+      "output":{"shape":"CreateCertificateFromCsrResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p><b>Note</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. </p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p> This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. </p> <p> The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: </p> <p> $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} </p> <p> On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} </p> <p> On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: </p> <p> &gt; forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path\"</p>"
+      "documentation":"<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p> <b>Note:</b> The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. </p> <p> <b>Note:</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs.</p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR.</p> <p>The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process:</p> <p>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}</p> <p>On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path\"</p>"
     },
     "CreateKeysAndCertificate":{
       "name":"CreateKeysAndCertificate",
@@ -297,49 +105,16 @@
         "method":"POST",
         "requestUri":"/keys-and-certificate"
       },
-      "input":{
-        "shape":"CreateKeysAndCertificateRequest",
-        "documentation":"<p>The input for the CreateKeysAndCertificate operation.</p>"
-      },
-      "output":{
-        "shape":"CreateKeysAndCertificateResponse",
-        "documentation":"<p>The output of the CreateKeysAndCertificate operation.</p>"
-      },
+      "input":{"shape":"CreateKeysAndCertificateRequest"},
+      "output":{"shape":"CreateKeysAndCertificateResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p><b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>"
+      "documentation":"<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p> <b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>"
     },
     "CreatePolicy":{
       "name":"CreatePolicy",
@@ -347,59 +122,16 @@
         "method":"POST",
         "requestUri":"/policies/{policyName}"
       },
-      "input":{
-        "shape":"CreatePolicyRequest",
-        "documentation":"<p>The input for the CreatePolicy operation.</p>"
-      },
-      "output":{
-        "shape":"CreatePolicyResponse",
-        "documentation":"<p>The output from the CreatePolicy operation.</p>"
-      },
+      "input":{"shape":"CreatePolicyRequest"},
+      "output":{"shape":"CreatePolicyResponse"},
       "errors":[
-        {
-          "shape":"ResourceAlreadyExistsException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>The resource already exists.</p>"
-        },
-        {
-          "shape":"MalformedPolicyException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The policy documentation is not valid.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"MalformedPolicyException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Creates an AWS IoT policy.</p> <p>The created policy is the default version for the policy. This operation creates a policy version with a version identifier of <b>1</b> and sets <b>1</b> as the policy's default version.</p>"
     },
@@ -409,65 +141,17 @@
         "method":"POST",
         "requestUri":"/policies/{policyName}/version"
       },
-      "input":{
-        "shape":"CreatePolicyVersionRequest",
-        "documentation":"<p>The input for the CreatePolicyVersion operation.</p>"
-      },
-      "output":{
-        "shape":"CreatePolicyVersionResponse",
-        "documentation":"<p>The output of the CreatePolicyVersion operation.</p>"
-      },
+      "input":{"shape":"CreatePolicyVersionRequest"},
+      "output":{"shape":"CreatePolicyVersionResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"MalformedPolicyException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The policy documentation is not valid.</p>"
-        },
-        {
-          "shape":"VersionsLimitExceededException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>The number of policy versions exceeds the limit.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"MalformedPolicyException"},
+        {"shape":"VersionsLimitExceededException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use <a>DeletePolicyVersion</a> to delete an existing version before you create a new one.</p> <p>Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).</p>"
     },
@@ -477,59 +161,16 @@
         "method":"POST",
         "requestUri":"/things/{thingName}"
       },
-      "input":{
-        "shape":"CreateThingRequest",
-        "documentation":"<p>The input for the CreateThing operation.</p>"
-      },
-      "output":{
-        "shape":"CreateThingResponse",
-        "documentation":"<p>The output of the CreateThing operation.</p>"
-      },
+      "input":{"shape":"CreateThingRequest"},
+      "output":{"shape":"CreateThingResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"ResourceAlreadyExistsException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>The resource already exists.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Creates a thing record in the thing registry.</p>"
     },
@@ -539,53 +180,15 @@
         "method":"POST",
         "requestUri":"/thing-types/{thingTypeName}"
       },
-      "input":{
-        "shape":"CreateThingTypeRequest",
-        "documentation":"<p>The input for the CreateThingType operation.</p>"
-      },
-      "output":{
-        "shape":"CreateThingTypeResponse",
-        "documentation":"<p>The output of the CreateThingType operation.</p>"
-      },
+      "input":{"shape":"CreateThingTypeRequest"},
+      "output":{"shape":"CreateThingTypeResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"ResourceAlreadyExistsException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>The resource already exists.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceAlreadyExistsException"}
       ],
       "documentation":"<p>Creates a new thing type.</p>"
     },
@@ -595,43 +198,13 @@
         "method":"POST",
         "requestUri":"/rules/{ruleName}"
       },
-      "input":{
-        "shape":"CreateTopicRuleRequest",
-        "documentation":"<p>The input for the CreateTopicRule operation.</p>"
-      },
+      "input":{"shape":"CreateTopicRuleRequest"},
       "errors":[
-        {
-          "shape":"SqlParseException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The Rule-SQL expression can't be parsed correctly.</p>"
-        },
-        {
-          "shape":"InternalException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ResourceAlreadyExistsException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>The resource already exists.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        }
+        {"shape":"SqlParseException"},
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.</p>"
     },
@@ -641,59 +214,16 @@
         "method":"DELETE",
         "requestUri":"/cacertificate/{caCertificateId}"
       },
-      "input":{
-        "shape":"DeleteCACertificateRequest",
-        "documentation":"<p>Input for the DeleteCACertificate operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteCACertificateResponse",
-        "documentation":"<p>The output for the DeleteCACertificate operation.</p>"
-      },
+      "input":{"shape":"DeleteCACertificateRequest"},
+      "output":{"shape":"DeleteCACertificateResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"CertificateStateException",
-          "error":{"httpStatusCode":406},
-          "exception":true,
-          "documentation":"<p>The certificate operation is not allowed.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"CertificateStateException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Deletes a registered CA certificate.</p>"
     },
@@ -703,61 +233,16 @@
         "method":"DELETE",
         "requestUri":"/certificates/{certificateId}"
       },
-      "input":{
-        "shape":"DeleteCertificateRequest",
-        "documentation":"<p>The input for the DeleteCertificate operation.</p>"
-      },
+      "input":{"shape":"DeleteCertificateRequest"},
       "errors":[
-        {
-          "shape":"CertificateStateException",
-          "error":{"httpStatusCode":406},
-          "exception":true,
-          "documentation":"<p>The certificate operation is not allowed.</p>"
-        },
-        {
-          "shape":"DeleteConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>You can't delete the resource because it is attached to one or more resources.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        }
+        {"shape":"CertificateStateException"},
+        {"shape":"DeleteConflictException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Deletes the specified certificate.</p> <p>A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the <a>DetachPrincipalPolicy</a> API to detach all policies. Next, use the <a>UpdateCertificate</a> API to set the certificate to the INACTIVE status.</p>"
     },
@@ -767,55 +252,15 @@
         "method":"DELETE",
         "requestUri":"/policies/{policyName}"
       },
-      "input":{
-        "shape":"DeletePolicyRequest",
-        "documentation":"<p>The input for the DeletePolicy operation.</p>"
-      },
+      "input":{"shape":"DeletePolicyRequest"},
       "errors":[
-        {
-          "shape":"DeleteConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>You can't delete the resource because it is attached to one or more resources.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"DeleteConflictException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Deletes the specified policy.</p> <p>A policy cannot be deleted if it has non-default versions or it is attached to any certificate.</p> <p>To delete a policy, use the DeletePolicyVersion API to delete all non-default versions of the policy; use the DetachPrincipalPolicy API to detach the policy from any certificate; and then use the DeletePolicy API to delete the policy.</p> <p>When a policy is deleted using DeletePolicy, its default version is deleted with it.</p>"
     },
@@ -825,55 +270,15 @@
         "method":"DELETE",
         "requestUri":"/policies/{policyName}/version/{policyVersionId}"
       },
-      "input":{
-        "shape":"DeletePolicyVersionRequest",
-        "documentation":"<p>The input for the DeletePolicyVersion operation.</p>"
-      },
+      "input":{"shape":"DeletePolicyVersionRequest"},
       "errors":[
-        {
-          "shape":"DeleteConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>You can't delete the resource because it is attached to one or more resources.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"DeleteConflictException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this API. To delete the default version of a policy, use <a>DeletePolicy</a>. To find out which version of a policy is marked as the default version, use ListPolicyVersions.</p>"
     },
@@ -883,47 +288,14 @@
         "method":"DELETE",
         "requestUri":"/registrationcode"
       },
-      "input":{
-        "shape":"DeleteRegistrationCodeRequest",
-        "documentation":"<p>The input for the DeleteRegistrationCode operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteRegistrationCodeResponse",
-        "documentation":"<p>The output for the DeleteRegistrationCode operation. </p>"
-      },
+      "input":{"shape":"DeleteRegistrationCodeRequest"},
+      "output":{"shape":"DeleteRegistrationCodeResponse"},
       "errors":[
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ThrottlingException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Deletes a CA certificate registration code.</p>"
     },
@@ -933,59 +305,16 @@
         "method":"DELETE",
         "requestUri":"/things/{thingName}"
       },
-      "input":{
-        "shape":"DeleteThingRequest",
-        "documentation":"<p>The input for the DeleteThing operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteThingResponse",
-        "documentation":"<p>The output of the DeleteThing operation.</p>"
-      },
+      "input":{"shape":"DeleteThingRequest"},
+      "output":{"shape":"DeleteThingResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"VersionConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter. </p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"VersionConflictException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Deletes the specified thing.</p>"
     },
@@ -995,53 +324,15 @@
         "method":"DELETE",
         "requestUri":"/thing-types/{thingTypeName}"
       },
-      "input":{
-        "shape":"DeleteThingTypeRequest",
-        "documentation":"<p>The input for the DeleteThingType operation.</p>"
-      },
-      "output":{
-        "shape":"DeleteThingTypeResponse",
-        "documentation":"<p>The output for the DeleteThingType operation.</p>"
-      },
+      "input":{"shape":"DeleteThingTypeRequest"},
+      "output":{"shape":"DeleteThingTypeResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Deletes the specified thing type . You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling <a>DeprecateThingType</a>, then remove any associated things by calling <a>UpdateThing</a> to change the thing type on any associated thing, and finally use <a>DeleteThingType</a> to delete the thing type.</p>"
     },
@@ -1051,37 +342,12 @@
         "method":"DELETE",
         "requestUri":"/rules/{ruleName}"
       },
-      "input":{
-        "shape":"DeleteTopicRuleRequest",
-        "documentation":"<p>The input for the DeleteTopicRule operation.</p>"
-      },
+      "input":{"shape":"DeleteTopicRuleRequest"},
       "errors":[
-        {
-          "shape":"InternalException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        }
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"UnauthorizedException"}
       ],
       "documentation":"<p>Deletes the specified rule.</p>"
     },
@@ -1091,53 +357,15 @@
         "method":"POST",
         "requestUri":"/thing-types/{thingTypeName}/deprecate"
       },
-      "input":{
-        "shape":"DeprecateThingTypeRequest",
-        "documentation":"<p>The input for the DeprecateThingType operation.</p>"
-      },
-      "output":{
-        "shape":"DeprecateThingTypeResponse",
-        "documentation":"<p>The output for the DeprecateThingType operation.</p>"
-      },
+      "input":{"shape":"DeprecateThingTypeRequest"},
+      "output":{"shape":"DeprecateThingTypeResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Deprecates a thing type. You can not associate new things with deprecated thing type.</p>"
     },
@@ -1147,53 +375,15 @@
         "method":"GET",
         "requestUri":"/cacertificate/{caCertificateId}"
       },
-      "input":{
-        "shape":"DescribeCACertificateRequest",
-        "documentation":"<p>The input for the DescribeCACertificate operation.</p>"
-      },
-      "output":{
-        "shape":"DescribeCACertificateResponse",
-        "documentation":"<p>The output from the DescribeCACertificate operation.</p>"
-      },
+      "input":{"shape":"DescribeCACertificateRequest"},
+      "output":{"shape":"DescribeCACertificateResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Describes a registered CA certificate.</p>"
     },
@@ -1203,53 +393,15 @@
         "method":"GET",
         "requestUri":"/certificates/{certificateId}"
       },
-      "input":{
-        "shape":"DescribeCertificateRequest",
-        "documentation":"<p>The input for the DescribeCertificate operation.</p>"
-      },
-      "output":{
-        "shape":"DescribeCertificateResponse",
-        "documentation":"<p>The output of the DescribeCertificate operation.</p>"
-      },
+      "input":{"shape":"DescribeCertificateRequest"},
+      "output":{"shape":"DescribeCertificateResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Gets information about the specified certificate.</p>"
     },
@@ -1259,34 +411,12 @@
         "method":"GET",
         "requestUri":"/endpoint"
       },
-      "input":{
-        "shape":"DescribeEndpointRequest",
-        "documentation":"<p>The input for the DescribeEndpoint operation.</p>"
-      },
-      "output":{
-        "shape":"DescribeEndpointResponse",
-        "documentation":"<p>The output from the DescribeEndpoint operation.</p>"
-      },
+      "input":{"shape":"DescribeEndpointRequest"},
+      "output":{"shape":"DescribeEndpointResponse"},
       "errors":[
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        }
+        {"shape":"InternalFailureException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ThrottlingException"}
       ],
       "documentation":"<p>Returns a unique endpoint specific to the AWS account making the call.</p>"
     },
@@ -1296,53 +426,15 @@
         "method":"GET",
         "requestUri":"/things/{thingName}"
       },
-      "input":{
-        "shape":"DescribeThingRequest",
-        "documentation":"<p>The input for the DescribeThing operation.</p>"
-      },
-      "output":{
-        "shape":"DescribeThingResponse",
-        "documentation":"<p>The output from the DescribeThing operation.</p>"
-      },
+      "input":{"shape":"DescribeThingRequest"},
+      "output":{"shape":"DescribeThingResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Gets information about the specified thing.</p>"
     },
@@ -1352,53 +444,15 @@
         "method":"GET",
         "requestUri":"/thing-types/{thingTypeName}"
       },
-      "input":{
-        "shape":"DescribeThingTypeRequest",
-        "documentation":"<p>The input for the DescribeThingType operation.</p>"
-      },
-      "output":{
-        "shape":"DescribeThingTypeResponse",
-        "documentation":"<p>The output for the DescribeThingType operation.</p>"
-      },
+      "input":{"shape":"DescribeThingTypeRequest"},
+      "output":{"shape":"DescribeThingTypeResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Gets information about the specified thing type.</p>"
     },
@@ -1408,49 +462,14 @@
         "method":"DELETE",
         "requestUri":"/principal-policies/{policyName}"
       },
-      "input":{
-        "shape":"DetachPrincipalPolicyRequest",
-        "documentation":"<p>The input for the DetachPrincipalPolicy operation.</p>"
-      },
+      "input":{"shape":"DetachPrincipalPolicyRequest"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Removes the specified policy from the specified certificate.</p>"
     },
@@ -1460,53 +479,15 @@
         "method":"DELETE",
         "requestUri":"/things/{thingName}/principals"
       },
-      "input":{
-        "shape":"DetachThingPrincipalRequest",
-        "documentation":"<p>The input for the DetachThingPrincipal operation.</p>"
-      },
-      "output":{
-        "shape":"DetachThingPrincipalResponse",
-        "documentation":"<p>The output from the DetachThingPrincipal operation.</p>"
-      },
+      "input":{"shape":"DetachThingPrincipalRequest"},
+      "output":{"shape":"DetachThingPrincipalResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Detaches the specified principal from the specified thing.</p>"
     },
@@ -1516,37 +497,12 @@
         "method":"POST",
         "requestUri":"/rules/{ruleName}/disable"
       },
-      "input":{
-        "shape":"DisableTopicRuleRequest",
-        "documentation":"<p>The input for the DisableTopicRuleRequest operation.</p>"
-      },
+      "input":{"shape":"DisableTopicRuleRequest"},
       "errors":[
-        {
-          "shape":"InternalException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        }
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"UnauthorizedException"}
       ],
       "documentation":"<p>Disables the specified rule.</p>"
     },
@@ -1556,37 +512,12 @@
         "method":"POST",
         "requestUri":"/rules/{ruleName}/enable"
       },
-      "input":{
-        "shape":"EnableTopicRuleRequest",
-        "documentation":"<p>The input for the EnableTopicRuleRequest operation.</p>"
-      },
+      "input":{"shape":"EnableTopicRuleRequest"},
       "errors":[
-        {
-          "shape":"InternalException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        }
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"UnauthorizedException"}
       ],
       "documentation":"<p>Enables the specified rule.</p>"
     },
@@ -1596,35 +527,12 @@
         "method":"GET",
         "requestUri":"/loggingOptions"
       },
-      "input":{
-        "shape":"GetLoggingOptionsRequest",
-        "documentation":"<p>The input for the GetLoggingOptions operation.</p>"
-      },
-      "output":{
-        "shape":"GetLoggingOptionsResponse",
-        "documentation":"<p>The output from the GetLoggingOptions operation.</p>"
-      },
+      "input":{"shape":"GetLoggingOptionsRequest"},
+      "output":{"shape":"GetLoggingOptionsResponse"},
       "errors":[
-        {
-          "shape":"InternalException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        }
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Gets the logging options.</p>"
     },
@@ -1634,53 +542,15 @@
         "method":"GET",
         "requestUri":"/policies/{policyName}"
       },
-      "input":{
-        "shape":"GetPolicyRequest",
-        "documentation":"<p>The input for the GetPolicy operation.</p>"
-      },
-      "output":{
-        "shape":"GetPolicyResponse",
-        "documentation":"<p>The output from the GetPolicy operation.</p>"
-      },
+      "input":{"shape":"GetPolicyRequest"},
+      "output":{"shape":"GetPolicyResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Gets information about the specified policy with the policy document of the default version.</p>"
     },
@@ -1690,53 +560,15 @@
         "method":"GET",
         "requestUri":"/policies/{policyName}/version/{policyVersionId}"
       },
-      "input":{
-        "shape":"GetPolicyVersionRequest",
-        "documentation":"<p>The input for the GetPolicyVersion operation.</p>"
-      },
-      "output":{
-        "shape":"GetPolicyVersionResponse",
-        "documentation":"<p>The output from the GetPolicyVersion operation.</p>"
-      },
+      "input":{"shape":"GetPolicyVersionRequest"},
+      "output":{"shape":"GetPolicyVersionResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Gets information about the specified policy version.</p>"
     },
@@ -1746,47 +578,14 @@
         "method":"GET",
         "requestUri":"/registrationcode"
       },
-      "input":{
-        "shape":"GetRegistrationCodeRequest",
-        "documentation":"<p>The input to the GetRegistrationCode operation.</p>"
-      },
-      "output":{
-        "shape":"GetRegistrationCodeResponse",
-        "documentation":"<p>The output from the GetRegistrationCode operation.</p>"
-      },
+      "input":{"shape":"GetRegistrationCodeRequest"},
+      "output":{"shape":"GetRegistrationCodeResponse"},
       "errors":[
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        }
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidRequestException"}
       ],
       "documentation":"<p>Gets a registration code used to register a CA certificate with AWS IoT.</p>"
     },
@@ -1796,41 +595,13 @@
         "method":"GET",
         "requestUri":"/rules/{ruleName}"
       },
-      "input":{
-        "shape":"GetTopicRuleRequest",
-        "documentation":"<p>The input for the GetTopicRule operation.</p>"
-      },
-      "output":{
-        "shape":"GetTopicRuleResponse",
-        "documentation":"<p>The output from the GetTopicRule operation.</p>"
-      },
+      "input":{"shape":"GetTopicRuleRequest"},
+      "output":{"shape":"GetTopicRuleResponse"},
       "errors":[
-        {
-          "shape":"InternalException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        }
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"UnauthorizedException"}
       ],
       "documentation":"<p>Gets information about the specified rule.</p>"
     },
@@ -1840,47 +611,14 @@
         "method":"GET",
         "requestUri":"/cacertificates"
       },
-      "input":{
-        "shape":"ListCACertificatesRequest",
-        "documentation":"<p>Input for the ListCACertificates operation.</p>"
-      },
-      "output":{
-        "shape":"ListCACertificatesResponse",
-        "documentation":"<p>The output from the ListCACertificates operation.</p>"
-      },
+      "input":{"shape":"ListCACertificatesRequest"},
+      "output":{"shape":"ListCACertificatesResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists the CA certificates registered for your AWS account.</p> <p>The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.</p>"
     },
@@ -1890,47 +628,14 @@
         "method":"GET",
         "requestUri":"/certificates"
       },
-      "input":{
-        "shape":"ListCertificatesRequest",
-        "documentation":"<p>The input for the ListCertificates operation.</p>"
-      },
-      "output":{
-        "shape":"ListCertificatesResponse",
-        "documentation":"<p>The output of the ListCertificates operation.</p>"
-      },
+      "input":{"shape":"ListCertificatesRequest"},
+      "output":{"shape":"ListCertificatesResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists the certificates registered in your AWS account.</p> <p>The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.</p>"
     },
@@ -1940,47 +645,14 @@
         "method":"GET",
         "requestUri":"/certificates-by-ca/{caCertificateId}"
       },
-      "input":{
-        "shape":"ListCertificatesByCARequest",
-        "documentation":"<p>The input to the ListCertificatesByCA operation.</p>"
-      },
-      "output":{
-        "shape":"ListCertificatesByCAResponse",
-        "documentation":"<p>The output of the ListCertificatesByCA operation.</p>"
-      },
+      "input":{"shape":"ListCertificatesByCARequest"},
+      "output":{"shape":"ListCertificatesByCAResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>List the device certificates signed by the specified CA certificate.</p>"
     },
@@ -1990,47 +662,14 @@
         "method":"GET",
         "requestUri":"/certificates-out-going"
       },
-      "input":{
-        "shape":"ListOutgoingCertificatesRequest",
-        "documentation":"<p>The input to the ListOutgoingCertificates operation.</p>"
-      },
-      "output":{
-        "shape":"ListOutgoingCertificatesResponse",
-        "documentation":"<p>The output from the ListOutgoingCertificates operation.</p>"
-      },
+      "input":{"shape":"ListOutgoingCertificatesRequest"},
+      "output":{"shape":"ListOutgoingCertificatesResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists certificates that are being transfered but not yet accepted.</p>"
     },
@@ -2040,47 +679,14 @@
         "method":"GET",
         "requestUri":"/policies"
       },
-      "input":{
-        "shape":"ListPoliciesRequest",
-        "documentation":"<p>The input for the ListPolicies operation.</p>"
-      },
-      "output":{
-        "shape":"ListPoliciesResponse",
-        "documentation":"<p>The output from the ListPolicies operation.</p>"
-      },
+      "input":{"shape":"ListPoliciesRequest"},
+      "output":{"shape":"ListPoliciesResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists your policies.</p>"
     },
@@ -2090,53 +696,15 @@
         "method":"GET",
         "requestUri":"/policy-principals"
       },
-      "input":{
-        "shape":"ListPolicyPrincipalsRequest",
-        "documentation":"<p>The input for the ListPolicyPrincipals operation.</p>"
-      },
-      "output":{
-        "shape":"ListPolicyPrincipalsResponse",
-        "documentation":"<p>The output from the ListPolicyPrincipals operation.</p>"
-      },
+      "input":{"shape":"ListPolicyPrincipalsRequest"},
+      "output":{"shape":"ListPolicyPrincipalsResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists the principals associated with the specified policy.</p>"
     },
@@ -2146,53 +714,15 @@
         "method":"GET",
         "requestUri":"/policies/{policyName}/version"
       },
-      "input":{
-        "shape":"ListPolicyVersionsRequest",
-        "documentation":"<p>The input for the ListPolicyVersions operation.</p>"
-      },
-      "output":{
-        "shape":"ListPolicyVersionsResponse",
-        "documentation":"<p>The output from the ListPolicyVersions operation.</p>"
-      },
+      "input":{"shape":"ListPolicyVersionsRequest"},
+      "output":{"shape":"ListPolicyVersionsResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists the versions of the specified policy and identifies the default version.</p>"
     },
@@ -2202,53 +732,15 @@
         "method":"GET",
         "requestUri":"/principal-policies"
       },
-      "input":{
-        "shape":"ListPrincipalPoliciesRequest",
-        "documentation":"<p>The input for the ListPrincipalPolicies operation.</p>"
-      },
-      "output":{
-        "shape":"ListPrincipalPoliciesResponse",
-        "documentation":"<p>The output from the ListPrincipalPolicies operation.</p>"
-      },
+      "input":{"shape":"ListPrincipalPoliciesRequest"},
+      "output":{"shape":"ListPrincipalPoliciesResponse"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p>"
     },
@@ -2258,53 +750,15 @@
         "method":"GET",
         "requestUri":"/principals/things"
       },
-      "input":{
-        "shape":"ListPrincipalThingsRequest",
-        "documentation":"<p>The input for the ListPrincipalThings operation.</p>"
-      },
-      "output":{
-        "shape":"ListPrincipalThingsResponse",
-        "documentation":"<p>The output from the ListPrincipalThings operation.</p>"
-      },
+      "input":{"shape":"ListPrincipalThingsRequest"},
+      "output":{"shape":"ListPrincipalThingsResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Lists the things associated with the specified principal.</p>"
     },
@@ -2314,53 +768,15 @@
         "method":"GET",
         "requestUri":"/things/{thingName}/principals"
       },
-      "input":{
-        "shape":"ListThingPrincipalsRequest",
-        "documentation":"<p>The input for the ListThingPrincipal operation.</p>"
-      },
-      "output":{
-        "shape":"ListThingPrincipalsResponse",
-        "documentation":"<p>The output from the ListThingPrincipals operation.</p>"
-      },
+      "input":{"shape":"ListThingPrincipalsRequest"},
+      "output":{"shape":"ListThingPrincipalsResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Lists the principals associated with the specified thing.</p>"
     },
@@ -2370,47 +786,14 @@
         "method":"GET",
         "requestUri":"/thing-types"
       },
-      "input":{
-        "shape":"ListThingTypesRequest",
-        "documentation":"<p>The input for the ListThingTypes operation.</p>"
-      },
-      "output":{
-        "shape":"ListThingTypesResponse",
-        "documentation":"<p>The output for the ListThingTypes operation.</p>"
-      },
+      "input":{"shape":"ListThingTypesRequest"},
+      "output":{"shape":"ListThingTypesResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists the existing thing types.</p>"
     },
@@ -2420,47 +803,14 @@
         "method":"GET",
         "requestUri":"/things"
       },
-      "input":{
-        "shape":"ListThingsRequest",
-        "documentation":"<p>The input for the ListThings operation.</p>"
-      },
-      "output":{
-        "shape":"ListThingsResponse",
-        "documentation":"<p>The output from the ListThings operation.</p>"
-      },
+      "input":{"shape":"ListThingsRequest"},
+      "output":{"shape":"ListThingsResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. </p>"
     },
@@ -2470,35 +820,12 @@
         "method":"GET",
         "requestUri":"/rules"
       },
-      "input":{
-        "shape":"ListTopicRulesRequest",
-        "documentation":"<p>The input for the ListTopicRules operation.</p>"
-      },
-      "output":{
-        "shape":"ListTopicRulesResponse",
-        "documentation":"<p>The output from the ListTopicRules operation.</p>"
-      },
+      "input":{"shape":"ListTopicRulesRequest"},
+      "output":{"shape":"ListTopicRulesResponse"},
       "errors":[
-        {
-          "shape":"InternalException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        }
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Lists the rules for the specific topic.</p>"
     },
@@ -2508,73 +835,20 @@
         "method":"POST",
         "requestUri":"/cacertificate"
       },
-      "input":{
-        "shape":"RegisterCACertificateRequest",
-        "documentation":"<p>The input to the RegisterCACertificate operation.</p>"
-      },
-      "output":{
-        "shape":"RegisterCACertificateResponse",
-        "documentation":"<p>The output from the RegisterCACertificateResponse operation.</p>"
-      },
+      "input":{"shape":"RegisterCACertificateRequest"},
+      "output":{"shape":"RegisterCACertificateResponse"},
       "errors":[
-        {
-          "shape":"ResourceAlreadyExistsException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>The resource already exists.</p>"
-        },
-        {
-          "shape":"RegistrationCodeValidationException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The registration code is invalid.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"CertificateValidationException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The certificate is invalid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"LimitExceededException",
-          "error":{"httpStatusCode":410},
-          "exception":true,
-          "documentation":"<p>The number of attached entities exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"RegistrationCodeValidationException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"CertificateValidationException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field and public key. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.</p>"
+      "documentation":"<p>Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.</p>"
     },
     "RegisterCertificate":{
       "name":"RegisterCertificate",
@@ -2582,71 +856,18 @@
         "method":"POST",
         "requestUri":"/certificate/register"
       },
-      "input":{
-        "shape":"RegisterCertificateRequest",
-        "documentation":"<p>The input to the RegisterCertificate operation.</p>"
-      },
-      "output":{
-        "shape":"RegisterCertificateResponse",
-        "documentation":"<p>The output from the RegisterCertificate operation.</p>"
-      },
+      "input":{"shape":"RegisterCertificateRequest"},
+      "output":{"shape":"RegisterCertificateResponse"},
       "errors":[
-        {
-          "shape":"ResourceAlreadyExistsException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>The resource already exists.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"CertificateValidationException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The certificate is invalid.</p>"
-        },
-        {
-          "shape":"CertificateStateException",
-          "error":{"httpStatusCode":406},
-          "exception":true,
-          "documentation":"<p>The certificate operation is not allowed.</p>"
-        },
-        {
-          "shape":"CertificateConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>Unable to verify the CA certificate used to sign the device certificate you are attempting to register. This is happens when you have registered more than one CA certificate that has the same subject field and public key.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"CertificateValidationException"},
+        {"shape":"CertificateStateException"},
+        {"shape":"CertificateConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Registers a device certificate with AWS IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.</p>"
     },
@@ -2656,55 +877,15 @@
         "method":"PATCH",
         "requestUri":"/reject-certificate-transfer/{certificateId}"
       },
-      "input":{
-        "shape":"RejectCertificateTransferRequest",
-        "documentation":"<p>The input for the RejectCertificateTransfer operation.</p>"
-      },
+      "input":{"shape":"RejectCertificateTransferRequest"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"TransferAlreadyCompletedException",
-          "error":{"httpStatusCode":410},
-          "exception":true,
-          "documentation":"<p>You can't revert the certificate transfer because the transfer is already complete.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TransferAlreadyCompletedException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from <b>PENDING_TRANSFER</b> to <b>INACTIVE</b>.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p> <p>This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.</p>"
     },
@@ -2714,43 +895,13 @@
         "method":"PATCH",
         "requestUri":"/rules/{ruleName}"
       },
-      "input":{
-        "shape":"ReplaceTopicRuleRequest",
-        "documentation":"<p>The input for the ReplaceTopicRule operation.</p>"
-      },
+      "input":{"shape":"ReplaceTopicRuleRequest"},
       "errors":[
-        {
-          "shape":"SqlParseException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The Rule-SQL expression can't be parsed correctly.</p>"
-        },
-        {
-          "shape":"InternalException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        }
+        {"shape":"SqlParseException"},
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"UnauthorizedException"}
       ],
       "documentation":"<p>Replaces the specified rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.</p>"
     },
@@ -2760,49 +911,14 @@
         "method":"PATCH",
         "requestUri":"/policies/{policyName}/version/{policyVersionId}"
       },
-      "input":{
-        "shape":"SetDefaultPolicyVersionRequest",
-        "documentation":"<p>The input for the SetDefaultPolicyVersion operation.</p>"
-      },
+      "input":{"shape":"SetDefaultPolicyVersionRequest"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Sets the specified version of the specified policy as the policy's default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicy API.</p>"
     },
@@ -2812,31 +928,11 @@
         "method":"POST",
         "requestUri":"/loggingOptions"
       },
-      "input":{
-        "shape":"SetLoggingOptionsRequest",
-        "documentation":"<p>The input for the SetLoggingOptions operation.</p>"
-      },
+      "input":{"shape":"SetLoggingOptionsRequest"},
       "errors":[
-        {
-          "shape":"InternalException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        }
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Sets the logging options.</p>"
     },
@@ -2846,65 +942,17 @@
         "method":"PATCH",
         "requestUri":"/transfer-certificate/{certificateId}"
       },
-      "input":{
-        "shape":"TransferCertificateRequest",
-        "documentation":"<p>The input for the TransferCertificate operation.</p>"
-      },
-      "output":{
-        "shape":"TransferCertificateResponse",
-        "documentation":"<p>The output from the TransferCertificate operation.</p>"
-      },
+      "input":{"shape":"TransferCertificateRequest"},
+      "output":{"shape":"TransferCertificateResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"CertificateStateException",
-          "error":{"httpStatusCode":406},
-          "exception":true,
-          "documentation":"<p>The certificate operation is not allowed.</p>"
-        },
-        {
-          "shape":"TransferConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>You can't transfer the certificate because authorization policies are still attached.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"CertificateStateException"},
+        {"shape":"TransferConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Transfers the specified certificate to the specified AWS account.</p> <p>You can cancel the transfer until it is acknowledged by the recipient.</p> <p>No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target.</p> <p>The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it.</p> <p>The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.</p>"
     },
@@ -2914,49 +962,14 @@
         "method":"PUT",
         "requestUri":"/cacertificate/{caCertificateId}"
       },
-      "input":{
-        "shape":"UpdateCACertificateRequest",
-        "documentation":"<p>The input to the UpdateCACertificate operation.</p>"
-      },
+      "input":{"shape":"UpdateCACertificateRequest"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Updates a registered CA certificate.</p>"
     },
@@ -2966,55 +979,15 @@
         "method":"PUT",
         "requestUri":"/certificates/{certificateId}"
       },
-      "input":{
-        "shape":"UpdateCertificateRequest",
-        "documentation":"<p>The input for the UpdateCertificate operation.</p>"
-      },
+      "input":{"shape":"UpdateCertificateRequest"},
       "errors":[
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        },
-        {
-          "shape":"CertificateStateException",
-          "error":{"httpStatusCode":406},
-          "exception":true,
-          "documentation":"<p>The certificate operation is not allowed.</p>"
-        },
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        }
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"CertificateStateException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>"
     },
@@ -3024,59 +997,16 @@
         "method":"PATCH",
         "requestUri":"/things/{thingName}"
       },
-      "input":{
-        "shape":"UpdateThingRequest",
-        "documentation":"<p>The input for the UpdateThing operation.</p>"
-      },
-      "output":{
-        "shape":"UpdateThingResponse",
-        "documentation":"<p>The output from the UpdateThing operation.</p>"
-      },
+      "input":{"shape":"UpdateThingRequest"},
+      "output":{"shape":"UpdateThingResponse"},
       "errors":[
-        {
-          "shape":"InvalidRequestException",
-          "error":{"httpStatusCode":400},
-          "exception":true,
-          "documentation":"<p>The request is not valid.</p>"
-        },
-        {
-          "shape":"VersionConflictException",
-          "error":{"httpStatusCode":409},
-          "exception":true,
-          "documentation":"<p>An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter. </p>"
-        },
-        {
-          "shape":"ThrottlingException",
-          "error":{"httpStatusCode":429},
-          "exception":true,
-          "documentation":"<p>The rate exceeds the limit.</p>"
-        },
-        {
-          "shape":"UnauthorizedException",
-          "error":{"httpStatusCode":401},
-          "exception":true,
-          "documentation":"<p>You are not authorized to perform this operation.</p>"
-        },
-        {
-          "shape":"ServiceUnavailableException",
-          "error":{"httpStatusCode":503},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>The service is temporarily unavailable.</p>"
-        },
-        {
-          "shape":"InternalFailureException",
-          "error":{"httpStatusCode":500},
-          "exception":true,
-          "fault":true,
-          "documentation":"<p>An unexpected error has occurred.</p>"
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{"httpStatusCode":404},
-          "exception":true,
-          "documentation":"<p>The specified resource does not exist.</p>"
-        }
+        {"shape":"InvalidRequestException"},
+        {"shape":"VersionConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Updates the data for a thing.</p>"
     }
@@ -3088,15 +1018,15 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The ID of the certificate.</p>",
           "location":"uri",
-          "locationName":"certificateId",
-          "documentation":"<p>The ID of the certificate.</p>"
+          "locationName":"certificateId"
         },
         "setAsActive":{
           "shape":"SetAsActive",
+          "documentation":"<p>Specifies whether the certificate is active.</p>",
           "location":"querystring",
-          "locationName":"setAsActive",
-          "documentation":"<p>Specifies whether the certificate is active.</p>"
+          "locationName":"setAsActive"
         }
       },
       "documentation":"<p>The input for the AcceptCertificateTransfer operation.</p>"
@@ -3151,6 +1081,10 @@
         "elasticsearch":{
           "shape":"ElasticsearchAction",
           "documentation":"<p>Write data to an Amazon Elasticsearch Service domain.</p>"
+        },
+        "salesforce":{
+          "shape":"SalesforceAction",
+          "documentation":"<p>Send a message to a Salesforce IoT Cloud Input Stream.</p>"
         }
       },
       "documentation":"<p>Describes the actions associated with a rule.</p>"
@@ -3158,8 +1092,8 @@
     "ActionList":{
       "type":"list",
       "member":{"shape":"Action"},
-      "min":0,
-      "max":10
+      "max":10,
+      "min":0
     },
     "AlarmName":{"type":"string"},
     "AllowAutoRegistration":{"type":"boolean"},
@@ -3173,15 +1107,15 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The policy name.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The policy name.</p>"
+          "locationName":"policyName"
         },
         "principal":{
           "shape":"Principal",
+          "documentation":"<p>The principal, which can be a certificate ARN (as returned from the CreateCertificate operation) or an Amazon Cognito ID.</p>",
           "location":"header",
-          "locationName":"x-amzn-iot-principal",
-          "documentation":"<p>The principal, which can be a certificate ARN (as returned from the CreateCertificate operation) or an Amazon Cognito ID.</p>"
+          "locationName":"x-amzn-iot-principal"
         }
       },
       "documentation":"<p>The input for the AttachPrincipalPolicy operation.</p>"
@@ -3195,15 +1129,15 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing.</p>"
+          "locationName":"thingName"
         },
         "principal":{
           "shape":"Principal",
+          "documentation":"<p>The principal, such as a certificate or other credential.</p>",
           "location":"header",
-          "locationName":"x-amzn-principal",
-          "documentation":"<p>The principal, such as a certificate or other credential.</p>"
+          "locationName":"x-amzn-principal"
         }
       },
       "documentation":"<p>The input for the AttachThingPrincipal operation.</p>"
@@ -3224,7 +1158,7 @@
       "members":{
         "attributes":{
           "shape":"Attributes",
-          "documentation":"<p>A JSON string containing up to three key-value pair in JSON format. For example:</p> <p><code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}})</code></p>"
+          "documentation":"<p>A JSON string containing up to three key-value pair in JSON format. For example:</p> <p> <code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</code> </p>"
         },
         "merge":{
           "shape":"Flag",
@@ -3235,9 +1169,9 @@
     },
     "AttributeValue":{
       "type":"string",
+      "documentation":"An attribute value for an Thing. An empty or null value in Update means that existing value for that attribute should be deleted. Empty and null values in create are ignored.",
       "max":800,
-      "pattern":"[a-zA-Z0-9_.,@/:#-]*",
-      "documentation":"An attribute value for an Thing. An empty or null value in Update means that existing value for that attribute should be deleted. Empty and null values in create are ignored."
+      "pattern":"[a-zA-Z0-9_.,@/:#-]*"
     },
     "Attributes":{
       "type":"map",
@@ -3272,7 +1206,7 @@
         },
         "status":{
           "shape":"CACertificateStatus",
-          "documentation":"<p>The status of the CA certificate. </p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
+          "documentation":"<p>The status of the CA certificate.</p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
         },
         "creationDate":{
           "shape":"DateType",
@@ -3332,9 +1266,9 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The ID of the certificate.</p>",
           "location":"uri",
-          "locationName":"certificateId",
-          "documentation":"<p>The ID of the certificate.</p>"
+          "locationName":"certificateId"
         }
       },
       "documentation":"<p>The input for the CancelCertificateTransfer operation.</p>"
@@ -3383,9 +1317,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>Unable to verify the CA certificate used to sign the device certificate you are attempting to register. This is happens when you have registered more than one CA certificate that has the same subject field and public key.</p>",
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"<p>Unable to verify the CA certificate used to sign the device certificate you are attempting to register. This is happens when you have registered more than one CA certificate that has the same subject field and public key.</p>"
+      "exception":true
     },
     "CertificateDescription":{
       "type":"structure",
@@ -3435,14 +1369,14 @@
     },
     "CertificateId":{
       "type":"string",
-      "min":64,
       "max":64,
+      "min":64,
       "pattern":"(0x)?[a-fA-F0-9]+"
     },
     "CertificatePem":{
       "type":"string",
-      "min":1,
-      "max":65536
+      "max":65536,
+      "min":1
     },
     "CertificateSigningRequest":{
       "type":"string",
@@ -3456,9 +1390,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The certificate operation is not allowed.</p>",
       "error":{"httpStatusCode":406},
-      "exception":true,
-      "documentation":"<p>The certificate operation is not allowed.</p>"
+      "exception":true
     },
     "CertificateStatus":{
       "type":"string",
@@ -3479,9 +1413,9 @@
           "documentation":"<p>Additional information about the exception.</p>"
         }
       },
+      "documentation":"<p>The certificate is invalid.</p>",
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>The certificate is invalid.</p>"
+      "exception":true
     },
     "Certificates":{
       "type":"list",
@@ -3563,9 +1497,9 @@
         },
         "setAsActive":{
           "shape":"SetAsActive",
+          "documentation":"<p>Specifies whether the certificate is active.</p>",
           "location":"querystring",
-          "locationName":"setAsActive",
-          "documentation":"<p>Specifies whether the certificate is active.</p>"
+          "locationName":"setAsActive"
         }
       },
       "documentation":"<p>The input for the CreateCertificateFromCsr operation.</p>"
@@ -3593,9 +1527,9 @@
       "members":{
         "setAsActive":{
           "shape":"SetAsActive",
+          "documentation":"<p>Specifies whether the certificate is active.</p>",
           "location":"querystring",
-          "locationName":"setAsActive",
-          "documentation":"<p>Specifies whether the certificate is active.</p>"
+          "locationName":"setAsActive"
         }
       },
       "documentation":"<p>The input for the CreateKeysAndCertificate operation.</p>"
@@ -3631,9 +1565,9 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The policy name.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The policy name.</p>"
+          "locationName":"policyName"
         },
         "policyDocument":{
           "shape":"PolicyDocument",
@@ -3673,9 +1607,9 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The policy name.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The policy name.</p>"
+          "locationName":"policyName"
         },
         "policyDocument":{
           "shape":"PolicyDocument",
@@ -3683,9 +1617,9 @@
         },
         "setAsDefault":{
           "shape":"SetAsDefault",
+          "documentation":"<p>Specifies whether the policy version is set as the default. When this parameter is true, the new policy version becomes the operative version (that is, the version that is in effect for the certificates to which the policy is attached).</p>",
           "location":"querystring",
-          "locationName":"setAsDefault",
-          "documentation":"<p>Specifies whether the policy version is set as the default. When this parameter is true, the new policy version becomes the operative version (that is, the version that is in effect for the certificates to which the policy is attached).</p>"
+          "locationName":"setAsDefault"
         }
       },
       "documentation":"<p>The input for the CreatePolicyVersion operation.</p>"
@@ -3718,9 +1652,9 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing to create.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing to create.</p>"
+          "locationName":"thingName"
         },
         "thingTypeName":{
           "shape":"ThingTypeName",
@@ -3728,7 +1662,7 @@
         },
         "attributePayload":{
           "shape":"AttributePayload",
-          "documentation":"<p>The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:</p> <p><code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}})</code></p>"
+          "documentation":"<p>The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:</p> <p> <code>{\\\"attributes\\\":{\\\"string1\\\":\\\"string2\\\"}}</code> </p>"
         }
       },
       "documentation":"<p>The input for the CreateThing operation.</p>"
@@ -3753,9 +1687,9 @@
       "members":{
         "thingTypeName":{
           "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type.</p>",
           "location":"uri",
-          "locationName":"thingTypeName",
-          "documentation":"<p>The name of the thing type.</p>"
+          "locationName":"thingTypeName"
         },
         "thingTypeProperties":{
           "shape":"ThingTypeProperties",
@@ -3787,9 +1721,9 @@
       "members":{
         "ruleName":{
           "shape":"RuleName",
+          "documentation":"<p>The name of the rule.</p>",
           "location":"uri",
-          "locationName":"ruleName",
-          "documentation":"<p>The name of the rule.</p>"
+          "locationName":"ruleName"
         },
         "topicRulePayload":{
           "shape":"TopicRulePayload",
@@ -3808,9 +1742,9 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The ID of the certificate to delete.</p>",
           "location":"uri",
-          "locationName":"caCertificateId",
-          "documentation":"<p>The ID of the certificate to delete.</p>"
+          "locationName":"caCertificateId"
         }
       },
       "documentation":"<p>Input for the DeleteCACertificate operation.</p>"
@@ -3827,9 +1761,9 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The ID of the certificate.</p>",
           "location":"uri",
-          "locationName":"certificateId",
-          "documentation":"<p>The ID of the certificate.</p>"
+          "locationName":"certificateId"
         }
       },
       "documentation":"<p>The input for the DeleteCertificate operation.</p>"
@@ -3842,9 +1776,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>You can't delete the resource because it is attached to one or more resources.</p>",
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"<p>You can't delete the resource because it is attached to one or more resources.</p>"
+      "exception":true
     },
     "DeletePolicyRequest":{
       "type":"structure",
@@ -3852,9 +1786,9 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The name of the policy to delete.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The name of the policy to delete.</p>"
+          "locationName":"policyName"
         }
       },
       "documentation":"<p>The input for the DeletePolicy operation.</p>"
@@ -3868,15 +1802,15 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The name of the policy.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The name of the policy.</p>"
+          "locationName":"policyName"
         },
         "policyVersionId":{
           "shape":"PolicyVersionId",
+          "documentation":"<p>The policy version ID.</p>",
           "location":"uri",
-          "locationName":"policyVersionId",
-          "documentation":"<p>The policy version ID.</p>"
+          "locationName":"policyVersionId"
         }
       },
       "documentation":"<p>The input for the DeletePolicyVersion operation.</p>"
@@ -3891,7 +1825,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The output for the DeleteRegistrationCode operation. </p>"
+      "documentation":"<p>The output for the DeleteRegistrationCode operation.</p>"
     },
     "DeleteThingRequest":{
       "type":"structure",
@@ -3899,15 +1833,15 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing to delete.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing to delete.</p>"
+          "locationName":"thingName"
         },
         "expectedVersion":{
           "shape":"OptionalVersion",
+          "documentation":"<p>The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the <code>DeleteThing</code> request is rejected with a <code>VersionConflictException</code>.</p>",
           "location":"querystring",
-          "locationName":"expectedVersion",
-          "documentation":"<p>The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the <code>DeleteThing</code> request is rejected with a <code>VersionConflictException</code>.</p>"
+          "locationName":"expectedVersion"
         }
       },
       "documentation":"<p>The input for the DeleteThing operation.</p>"
@@ -3924,9 +1858,9 @@
       "members":{
         "thingTypeName":{
           "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type.</p>",
           "location":"uri",
-          "locationName":"thingTypeName",
-          "documentation":"<p>The name of the thing type.</p>"
+          "locationName":"thingTypeName"
         }
       },
       "documentation":"<p>The input for the DeleteThingType operation.</p>"
@@ -3939,16 +1873,16 @@
     },
     "DeleteTopicRuleRequest":{
       "type":"structure",
+      "required":["ruleName"],
       "members":{
         "ruleName":{
           "shape":"RuleName",
+          "documentation":"<p>The name of the rule.</p>",
           "location":"uri",
-          "locationName":"ruleName",
-          "documentation":"<p>The name of the rule.</p>"
+          "locationName":"ruleName"
         }
       },
-      "documentation":"<p>The input for the DeleteTopicRule operation.</p>",
-      "required":["ruleName"]
+      "documentation":"<p>The input for the DeleteTopicRule operation.</p>"
     },
     "DeliveryStreamName":{"type":"string"},
     "DeprecateThingTypeRequest":{
@@ -3957,9 +1891,9 @@
       "members":{
         "thingTypeName":{
           "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type to deprecate.</p>",
           "location":"uri",
-          "locationName":"thingTypeName",
-          "documentation":"<p>The name of the thing type to deprecate.</p>"
+          "locationName":"thingTypeName"
         },
         "undoDeprecate":{
           "shape":"UndoDeprecate",
@@ -3981,9 +1915,9 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The CA certificate identifier.</p>",
           "location":"uri",
-          "locationName":"caCertificateId",
-          "documentation":"<p>The CA certificate identifier.</p>"
+          "locationName":"caCertificateId"
         }
       },
       "documentation":"<p>The input for the DescribeCACertificate operation.</p>"
@@ -4004,9 +1938,9 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The ID of the certificate.</p>",
           "location":"uri",
-          "locationName":"certificateId",
-          "documentation":"<p>The ID of the certificate.</p>"
+          "locationName":"certificateId"
         }
       },
       "documentation":"<p>The input for the DescribeCertificate operation.</p>"
@@ -4043,9 +1977,9 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing.</p>"
+          "locationName":"thingName"
         }
       },
       "documentation":"<p>The input for the DescribeThing operation.</p>"
@@ -4082,9 +2016,9 @@
       "members":{
         "thingTypeName":{
           "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type.</p>",
           "location":"uri",
-          "locationName":"thingTypeName",
-          "documentation":"<p>The name of the thing type.</p>"
+          "locationName":"thingTypeName"
         }
       },
       "documentation":"<p>The input for the DescribeThingType operation.</p>"
@@ -4100,7 +2034,10 @@
           "shape":"ThingTypeProperties",
           "documentation":"<p>The ThingTypeProperties contains information about the thing type including description, and a list of searchable thing attribute names.</p>"
         },
-        "thingTypeMetadata":{"shape":"ThingTypeMetadata"}
+        "thingTypeMetadata":{
+          "shape":"ThingTypeMetadata",
+          "documentation":"<p>The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when it was deprecated.</p>"
+        }
       },
       "documentation":"<p>The output for the DescribeThingType operation.</p>"
     },
@@ -4114,15 +2051,15 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The name of the policy to detach.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The name of the policy to detach.</p>"
+          "locationName":"policyName"
         },
         "principal":{
           "shape":"Principal",
+          "documentation":"<p>The principal.</p> <p>If the principal is a certificate, specify the certificate ARN. If the principal is an Amazon Cognito identity, specify the identity ID.</p>",
           "location":"header",
-          "locationName":"x-amzn-iot-principal",
-          "documentation":"<p>The principal.</p> <p>If the principal is a certificate, specify the certificate ARN. If the principal is an Amazon Cognito identity, specify the identity ID.</p>"
+          "locationName":"x-amzn-iot-principal"
         }
       },
       "documentation":"<p>The input for the DetachPrincipalPolicy operation.</p>"
@@ -4136,15 +2073,15 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing.</p>"
+          "locationName":"thingName"
         },
         "principal":{
           "shape":"Principal",
+          "documentation":"<p>If the principal is a certificate, this value must be ARN of the certificate. If the principal is an Amazon Cognito identity, this value must be the ID of the Amazon Cognito identity.</p>",
           "location":"header",
-          "locationName":"x-amzn-principal",
-          "documentation":"<p>If the principal is a certificate, this value must be ARN of the certificate. If the principal is an Amazon Cognito identity, this value must be the ID of the Amazon Cognito identity.</p>"
+          "locationName":"x-amzn-principal"
         }
       },
       "documentation":"<p>The input for the DetachThingPrincipal operation.</p>"
@@ -4161,9 +2098,9 @@
       "members":{
         "ruleName":{
           "shape":"RuleName",
+          "documentation":"<p>The name of the rule to disable.</p>",
           "location":"uri",
-          "locationName":"ruleName",
-          "documentation":"<p>The name of the rule to disable.</p>"
+          "locationName":"ruleName"
         }
       },
       "documentation":"<p>The input for the DisableTopicRuleRequest operation.</p>"
@@ -4218,7 +2155,7 @@
           "documentation":"<p>The action payload. This name can be customized.</p>"
         }
       },
-      "documentation":"<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p><code>\"hashKeyValue\": \"${topic(3)}\"</code></p> <p>The following field uses the timestamp:</p> <p><code>\"rangeKeyValue\": \"${timestamp()}\"</code></p>"
+      "documentation":"<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p> <code>\"hashKeyValue\": \"${topic(3)}\"</code> </p> <p>The following field uses the timestamp:</p> <p> <code>\"rangeKeyValue\": \"${timestamp()}\"</code> </p>"
     },
     "DynamoDBv2Action":{
       "type":"structure",
@@ -4229,7 +2166,7 @@
         },
         "putItem":{
           "shape":"PutItemInput",
-          "documentation":"<p>Specifies the DynamoDB table to which the message data will be written. For example:</p> <p><code>{ \"dynamoDBv2\": { \"roleArn\": \"aws:iam:12341251:my-role\" \"putItem\": { \"tableName\": \"my-table\" } } }</code></p> <p>Each attribute in the message payload will be written to a separate column in the DynamoDB database.</p>"
+          "documentation":"<p>Specifies the DynamoDB table to which the message data will be written. For example:</p> <p> <code>{ \"dynamoDBv2\": { \"roleArn\": \"aws:iam:12341251:my-role\" \"putItem\": { \"tableName\": \"my-table\" } } }</code> </p> <p>Each attribute in the message payload will be written to a separate column in the DynamoDB database.</p>"
         }
       },
       "documentation":"<p>Describes an action to write to a DynamoDB table.</p> <p>This DynamoDB action writes each attribute in the message payload into it's own column in the DynamoDB table.</p>"
@@ -4288,9 +2225,9 @@
       "members":{
         "ruleName":{
           "shape":"RuleName",
+          "documentation":"<p>The name of the topic rule to enable.</p>",
           "location":"uri",
-          "locationName":"ruleName",
-          "documentation":"<p>The name of the topic rule to enable.</p>"
+          "locationName":"ruleName"
         }
       },
       "documentation":"<p>The input for the EnableTopicRuleRequest operation.</p>"
@@ -4350,9 +2287,9 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The name of the policy.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The name of the policy.</p>"
+          "locationName":"policyName"
         }
       },
       "documentation":"<p>The input for the GetPolicy operation.</p>"
@@ -4388,15 +2325,15 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The name of the policy.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The name of the policy.</p>"
+          "locationName":"policyName"
         },
         "policyVersionId":{
           "shape":"PolicyVersionId",
+          "documentation":"<p>The policy version ID.</p>",
           "location":"uri",
-          "locationName":"policyVersionId",
-          "documentation":"<p>The policy version ID.</p>"
+          "locationName":"policyVersionId"
         }
       },
       "documentation":"<p>The input for the GetPolicyVersion operation.</p>"
@@ -4449,9 +2386,9 @@
       "members":{
         "ruleName":{
           "shape":"RuleName",
+          "documentation":"<p>The name of the rule.</p>",
           "location":"uri",
-          "locationName":"ruleName",
-          "documentation":"<p>The name of the rule.</p>"
+          "locationName":"ruleName"
         }
       },
       "documentation":"<p>The input for the GetTopicRule operation.</p>"
@@ -4480,10 +2417,10 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>An unexpected error has occurred.</p>",
       "error":{"httpStatusCode":500},
       "exception":true,
-      "fault":true,
-      "documentation":"<p>An unexpected error has occurred.</p>"
+      "fault":true
     },
     "InternalFailureException":{
       "type":"structure",
@@ -4493,10 +2430,10 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>An unexpected error has occurred.</p>",
       "error":{"httpStatusCode":500},
       "exception":true,
-      "fault":true,
-      "documentation":"<p>An unexpected error has occurred.</p>"
+      "fault":true
     },
     "InvalidRequestException":{
       "type":"structure",
@@ -4506,9 +2443,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The request is not valid.</p>",
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>The request is not valid.</p>"
+      "exception":true
     },
     "IsDefaultVersion":{"type":"boolean"},
     "IsDisabled":{"type":"boolean"},
@@ -4568,30 +2505,30 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The number of attached entities exceeds the limit.</p>",
       "error":{"httpStatusCode":410},
-      "exception":true,
-      "documentation":"<p>The number of attached entities exceeds the limit.</p>"
+      "exception":true
     },
     "ListCACertificatesRequest":{
       "type":"structure",
       "members":{
         "pageSize":{
           "shape":"PageSize",
+          "documentation":"<p>The result page size.</p>",
           "location":"querystring",
-          "locationName":"pageSize",
-          "documentation":"<p>The result page size.</p>"
+          "locationName":"pageSize"
         },
         "marker":{
           "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results.</p>",
           "location":"querystring",
-          "locationName":"marker",
-          "documentation":"<p>The marker for the next set of results.</p>"
+          "locationName":"marker"
         },
         "ascendingOrder":{
           "shape":"AscendingOrder",
+          "documentation":"<p>Determines the order of the results.</p>",
           "location":"querystring",
-          "locationName":"isAscendingOrder",
-          "documentation":"<p>Determines the order of the results.</p>"
+          "locationName":"isAscendingOrder"
         }
       },
       "documentation":"<p>Input for the ListCACertificates operation.</p>"
@@ -4616,27 +2553,27 @@
       "members":{
         "caCertificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The ID of the CA certificate. This operation will list all registered device certificate that were signed by this CA certificate.</p>",
           "location":"uri",
-          "locationName":"caCertificateId",
-          "documentation":"<p>The ID of the CA certificate. This operation will list all registered device certificate that were signed by this CA certificate. </p>"
+          "locationName":"caCertificateId"
         },
         "pageSize":{
           "shape":"PageSize",
+          "documentation":"<p>The result page size.</p>",
           "location":"querystring",
-          "locationName":"pageSize",
-          "documentation":"<p>The result page size.</p>"
+          "locationName":"pageSize"
         },
         "marker":{
           "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results.</p>",
           "location":"querystring",
-          "locationName":"marker",
-          "documentation":"<p>The marker for the next set of results.</p>"
+          "locationName":"marker"
         },
         "ascendingOrder":{
           "shape":"AscendingOrder",
+          "documentation":"<p>Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.</p>",
           "location":"querystring",
-          "locationName":"isAscendingOrder",
-          "documentation":"<p>Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.</p>"
+          "locationName":"isAscendingOrder"
         }
       },
       "documentation":"<p>The input to the ListCertificatesByCA operation.</p>"
@@ -4660,21 +2597,21 @@
       "members":{
         "pageSize":{
           "shape":"PageSize",
+          "documentation":"<p>The result page size.</p>",
           "location":"querystring",
-          "locationName":"pageSize",
-          "documentation":"<p>The result page size.</p>"
+          "locationName":"pageSize"
         },
         "marker":{
           "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results.</p>",
           "location":"querystring",
-          "locationName":"marker",
-          "documentation":"<p>The marker for the next set of results.</p>"
+          "locationName":"marker"
         },
         "ascendingOrder":{
           "shape":"AscendingOrder",
+          "documentation":"<p>Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.</p>",
           "location":"querystring",
-          "locationName":"isAscendingOrder",
-          "documentation":"<p>Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.</p>"
+          "locationName":"isAscendingOrder"
         }
       },
       "documentation":"<p>The input for the ListCertificates operation.</p>"
@@ -4698,21 +2635,21 @@
       "members":{
         "pageSize":{
           "shape":"PageSize",
+          "documentation":"<p>The result page size.</p>",
           "location":"querystring",
-          "locationName":"pageSize",
-          "documentation":"<p>The result page size.</p>"
+          "locationName":"pageSize"
         },
         "marker":{
           "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results.</p>",
           "location":"querystring",
-          "locationName":"marker",
-          "documentation":"<p>The marker for the next set of results.</p>"
+          "locationName":"marker"
         },
         "ascendingOrder":{
           "shape":"AscendingOrder",
+          "documentation":"<p>Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.</p>",
           "location":"querystring",
-          "locationName":"isAscendingOrder",
-          "documentation":"<p>Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.</p>"
+          "locationName":"isAscendingOrder"
         }
       },
       "documentation":"<p>The input to the ListOutgoingCertificates operation.</p>"
@@ -4736,21 +2673,21 @@
       "members":{
         "marker":{
           "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results.</p>",
           "location":"querystring",
-          "locationName":"marker",
-          "documentation":"<p>The marker for the next set of results.</p>"
+          "locationName":"marker"
         },
         "pageSize":{
           "shape":"PageSize",
+          "documentation":"<p>The result page size.</p>",
           "location":"querystring",
-          "locationName":"pageSize",
-          "documentation":"<p>The result page size.</p>"
+          "locationName":"pageSize"
         },
         "ascendingOrder":{
           "shape":"AscendingOrder",
+          "documentation":"<p>Specifies the order for results. If true, the results are returned in ascending creation order.</p>",
           "location":"querystring",
-          "locationName":"isAscendingOrder",
-          "documentation":"<p>Specifies the order for results. If true, the results are returned in ascending creation order.</p>"
+          "locationName":"isAscendingOrder"
         }
       },
       "documentation":"<p>The input for the ListPolicies operation.</p>"
@@ -4775,27 +2712,27 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The policy name.</p>",
           "location":"header",
-          "locationName":"x-amzn-iot-policy",
-          "documentation":"<p>The policy name.</p>"
+          "locationName":"x-amzn-iot-policy"
         },
         "marker":{
           "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results.</p>",
           "location":"querystring",
-          "locationName":"marker",
-          "documentation":"<p>The marker for the next set of results.</p>"
+          "locationName":"marker"
         },
         "pageSize":{
           "shape":"PageSize",
+          "documentation":"<p>The result page size.</p>",
           "location":"querystring",
-          "locationName":"pageSize",
-          "documentation":"<p>The result page size.</p>"
+          "locationName":"pageSize"
         },
         "ascendingOrder":{
           "shape":"AscendingOrder",
+          "documentation":"<p>Specifies the order for results. If true, the results are returned in ascending creation order.</p>",
           "location":"querystring",
-          "locationName":"isAscendingOrder",
-          "documentation":"<p>Specifies the order for results. If true, the results are returned in ascending creation order.</p>"
+          "locationName":"isAscendingOrder"
         }
       },
       "documentation":"<p>The input for the ListPolicyPrincipals operation.</p>"
@@ -4820,9 +2757,9 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The policy name.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The policy name.</p>"
+          "locationName":"policyName"
         }
       },
       "documentation":"<p>The input for the ListPolicyVersions operation.</p>"
@@ -4843,27 +2780,27 @@
       "members":{
         "principal":{
           "shape":"Principal",
+          "documentation":"<p>The principal.</p>",
           "location":"header",
-          "locationName":"x-amzn-iot-principal",
-          "documentation":"<p>The principal.</p>"
+          "locationName":"x-amzn-iot-principal"
         },
         "marker":{
           "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results.</p>",
           "location":"querystring",
-          "locationName":"marker",
-          "documentation":"<p>The marker for the next set of results.</p>"
+          "locationName":"marker"
         },
         "pageSize":{
           "shape":"PageSize",
+          "documentation":"<p>The result page size.</p>",
           "location":"querystring",
-          "locationName":"pageSize",
-          "documentation":"<p>The result page size.</p>"
+          "locationName":"pageSize"
         },
         "ascendingOrder":{
           "shape":"AscendingOrder",
+          "documentation":"<p>Specifies the order for results. If true, results are returned in ascending creation order.</p>",
           "location":"querystring",
-          "locationName":"isAscendingOrder",
-          "documentation":"<p>Specifies the order for results. If true, results are returned in ascending creation order.</p>"
+          "locationName":"isAscendingOrder"
         }
       },
       "documentation":"<p>The input for the ListPrincipalPolicies operation.</p>"
@@ -4888,21 +2825,21 @@
       "members":{
         "nextToken":{
           "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>",
           "location":"querystring",
-          "locationName":"nextToken",
-          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+          "locationName":"nextToken"
         },
         "maxResults":{
-          "shape":"MaxResults",
+          "shape":"RegistryMaxResults",
+          "documentation":"<p>The maximum number of results to return in this operation.</p>",
           "location":"querystring",
-          "locationName":"maxResults",
-          "documentation":"<p>The maximum number of results to return in this operation.</p>"
+          "locationName":"maxResults"
         },
         "principal":{
           "shape":"Principal",
+          "documentation":"<p>The principal.</p>",
           "location":"header",
-          "locationName":"x-amzn-principal",
-          "documentation":"<p>The principal.</p>"
+          "locationName":"x-amzn-principal"
         }
       },
       "documentation":"<p>The input for the ListPrincipalThings operation.</p>"
@@ -4927,9 +2864,9 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing.</p>"
+          "locationName":"thingName"
         }
       },
       "documentation":"<p>The input for the ListThingPrincipal operation.</p>"
@@ -4949,21 +2886,21 @@
       "members":{
         "nextToken":{
           "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>",
           "location":"querystring",
-          "locationName":"nextToken",
-          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+          "locationName":"nextToken"
         },
         "maxResults":{
-          "shape":"MaxResults",
+          "shape":"RegistryMaxResults",
+          "documentation":"<p>The maximum number of results to return in this operation.</p>",
           "location":"querystring",
-          "locationName":"maxResults",
-          "documentation":"<p>The maximum number of results to return in this operation.</p>"
+          "locationName":"maxResults"
         },
         "thingTypeName":{
           "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type.</p>",
           "location":"querystring",
-          "locationName":"thingTypeName",
-          "documentation":"<p>The name of the thing type.</p>"
+          "locationName":"thingTypeName"
         }
       },
       "documentation":"<p>The input for the ListThingTypes operation.</p>"
@@ -4987,33 +2924,33 @@
       "members":{
         "nextToken":{
           "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>",
           "location":"querystring",
-          "locationName":"nextToken",
-          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+          "locationName":"nextToken"
         },
         "maxResults":{
-          "shape":"MaxResults",
+          "shape":"RegistryMaxResults",
+          "documentation":"<p>The maximum number of results to return in this operation.</p>",
           "location":"querystring",
-          "locationName":"maxResults",
-          "documentation":"<p>The maximum number of results to return in this operation.</p>"
+          "locationName":"maxResults"
         },
         "attributeName":{
           "shape":"AttributeName",
+          "documentation":"<p>The attribute name used to search for things.</p>",
           "location":"querystring",
-          "locationName":"attributeName",
-          "documentation":"<p>The attribute name used to search for things.</p>"
+          "locationName":"attributeName"
         },
         "attributeValue":{
           "shape":"AttributeValue",
+          "documentation":"<p>The attribute value used to search for things.</p>",
           "location":"querystring",
-          "locationName":"attributeValue",
-          "documentation":"<p>The attribute value used to search for things.</p>"
+          "locationName":"attributeValue"
         },
         "thingTypeName":{
           "shape":"ThingTypeName",
+          "documentation":"<p>The name of the thing type used to search for things.</p>",
           "location":"querystring",
-          "locationName":"thingTypeName",
-          "documentation":"<p>The name of the thing type used to search for things.</p>"
+          "locationName":"thingTypeName"
         }
       },
       "documentation":"<p>The input for the ListThings operation.</p>"
@@ -5037,27 +2974,27 @@
       "members":{
         "topic":{
           "shape":"Topic",
+          "documentation":"<p>The topic.</p>",
           "location":"querystring",
-          "locationName":"topic",
-          "documentation":"<p>The topic.</p>"
+          "locationName":"topic"
         },
         "maxResults":{
           "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to return.</p>",
           "location":"querystring",
-          "locationName":"maxResults",
-          "documentation":"<p>The maximum number of results to return.</p>"
+          "locationName":"maxResults"
         },
         "nextToken":{
           "shape":"NextToken",
+          "documentation":"<p>A token used to retrieve the next value.</p>",
           "location":"querystring",
-          "locationName":"nextToken",
-          "documentation":"<p>A token used to retrieve the next value.</p>"
+          "locationName":"nextToken"
         },
         "ruleDisabled":{
           "shape":"IsDisabled",
+          "documentation":"<p>Specifies whether the rule is disabled.</p>",
           "location":"querystring",
-          "locationName":"ruleDisabled",
-          "documentation":"<p>Specifies whether the rule is disabled.</p>"
+          "locationName":"ruleDisabled"
         }
       },
       "documentation":"<p>The input for the ListTopicRules operation.</p>"
@@ -5109,15 +3046,15 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The policy documentation is not valid.</p>",
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>The policy documentation is not valid.</p>"
+      "exception":true
     },
     "Marker":{"type":"string"},
     "MaxResults":{
       "type":"integer",
-      "min":1,
-      "max":10000
+      "max":10000,
+      "min":1
     },
     "Message":{
       "type":"string",
@@ -5173,8 +3110,8 @@
     },
     "PageSize":{
       "type":"integer",
-      "min":1,
-      "max":250
+      "max":250,
+      "min":1
     },
     "PartitionKey":{"type":"string"},
     "PayloadField":{"type":"string"},
@@ -5200,8 +3137,8 @@
     "PolicyDocument":{"type":"string"},
     "PolicyName":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "pattern":"[\\w+=,.@-]+"
     },
     "PolicyVersion":{
@@ -5276,15 +3213,15 @@
         },
         "setAsActive":{
           "shape":"SetAsActive",
+          "documentation":"<p>A boolean value that specifies if the CA certificate is set to active.</p>",
           "location":"querystring",
-          "locationName":"setAsActive",
-          "documentation":"<p>A boolean value that specifies if the CA certificate is set to active.</p>"
+          "locationName":"setAsActive"
         },
         "allowAutoRegistration":{
           "shape":"AllowAutoRegistration",
+          "documentation":"<p>Allows this CA certificate to be used for auto registration of device certificates.</p>",
           "location":"querystring",
-          "locationName":"allowAutoRegistration",
-          "documentation":"<p>Allows this CA certificate to be used for auto registration of device certificates.</p>"
+          "locationName":"allowAutoRegistration"
         }
       },
       "documentation":"<p>The input to the RegisterCACertificate operation.</p>"
@@ -5317,12 +3254,15 @@
         },
         "setAsActive":{
           "shape":"SetAsActiveFlag",
+          "documentation":"<p>A boolean value that specifies if the CA certificate is set to active.</p>",
           "deprecated":true,
           "location":"querystring",
-          "locationName":"setAsActive",
-          "documentation":"<p>A boolean value that specifies if the CA certificate is set to active.</p>"
+          "locationName":"setAsActive"
         },
-        "status":{"shape":"CertificateStatus"}
+        "status":{
+          "shape":"CertificateStatus",
+          "documentation":"<p>The status of the register certificate request.</p>"
+        }
       },
       "documentation":"<p>The input to the RegisterCertificate operation.</p>"
     },
@@ -5342,8 +3282,8 @@
     },
     "RegistrationCode":{
       "type":"string",
-      "min":64,
       "max":64,
+      "min":64,
       "pattern":"(0x)?[a-fA-F0-9]+"
     },
     "RegistrationCodeValidationException":{
@@ -5354,9 +3294,14 @@
           "documentation":"<p>Additional information about the exception.</p>"
         }
       },
+      "documentation":"<p>The registration code is invalid.</p>",
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>The registration code is invalid.</p>"
+      "exception":true
+    },
+    "RegistryMaxResults":{
+      "type":"integer",
+      "max":250,
+      "min":1
     },
     "RejectCertificateTransferRequest":{
       "type":"structure",
@@ -5364,9 +3309,9 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The ID of the certificate.</p>",
           "location":"uri",
-          "locationName":"certificateId",
-          "documentation":"<p>The ID of the certificate.</p>"
+          "locationName":"certificateId"
         },
         "rejectReason":{
           "shape":"Message",
@@ -5385,9 +3330,9 @@
       "members":{
         "ruleName":{
           "shape":"RuleName",
+          "documentation":"<p>The name of the rule.</p>",
           "location":"uri",
-          "locationName":"ruleName",
-          "documentation":"<p>The name of the rule.</p>"
+          "locationName":"ruleName"
         },
         "topicRulePayload":{
           "shape":"TopicRulePayload",
@@ -5431,9 +3376,9 @@
           "documentation":"<p>The ARN of the resource that caused the exception.</p>"
         }
       },
+      "documentation":"<p>The resource already exists.</p>",
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"<p>The resource already exists.</p>"
+      "exception":true
     },
     "ResourceNotFoundException":{
       "type":"structure",
@@ -5443,15 +3388,15 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The specified resource does not exist.</p>",
       "error":{"httpStatusCode":404},
-      "exception":true,
-      "documentation":"<p>The specified resource does not exist.</p>"
+      "exception":true
     },
     "RuleArn":{"type":"string"},
     "RuleName":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "pattern":"^[a-zA-Z0-9_]+$"
     },
     "S3Action":{
@@ -5482,6 +3427,28 @@
       "documentation":"<p>Describes an action to write data to an Amazon S3 bucket.</p>"
     },
     "SQL":{"type":"string"},
+    "SalesforceAction":{
+      "type":"structure",
+      "members":{
+        "token":{
+          "shape":"SalesforceToken",
+          "documentation":"<p>The token used to authenticate access to the Salesforce IoT Cloud Input Stream. The token is available from the Salesforce IoT Cloud platform after creation of the Input Stream.</p>"
+        },
+        "url":{
+          "shape":"SalesforceEndpoint",
+          "documentation":"<p>The URL exposed by the Salesforce IoT Cloud Input Stream. The URL is available from the Salesforce IoT Cloud platform after creation of the Input Stream.</p>"
+        }
+      },
+      "documentation":"<p>Describes an action to write a message to a Salesforce IoT Cloud Input Stream.</p>"
+    },
+    "SalesforceEndpoint":{
+      "type":"string",
+      "pattern":"https://ingestion-[a-zA-Z0-9]+.[a-zA-Z0-9]+.((sfdc-matrix.net)|(sfdcnow.com))/streams/\\w+/\\w+/\\w+"
+    },
+    "SalesforceToken":{
+      "type":"string",
+      "min":40
+    },
     "SearchableAttributes":{
       "type":"list",
       "member":{"shape":"AttributeName"}
@@ -5494,10 +3461,10 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The service is temporarily unavailable.</p>",
       "error":{"httpStatusCode":503},
       "exception":true,
-      "fault":true,
-      "documentation":"<p>The service is temporarily unavailable.</p>"
+      "fault":true
     },
     "SetAsActive":{"type":"boolean"},
     "SetAsActiveFlag":{"type":"boolean"},
@@ -5511,15 +3478,15 @@
       "members":{
         "policyName":{
           "shape":"PolicyName",
+          "documentation":"<p>The policy name.</p>",
           "location":"uri",
-          "locationName":"policyName",
-          "documentation":"<p>The policy name.</p>"
+          "locationName":"policyName"
         },
         "policyVersionId":{
           "shape":"PolicyVersionId",
+          "documentation":"<p>The policy version ID.</p>",
           "location":"uri",
-          "locationName":"policyVersionId",
-          "documentation":"<p>The policy version ID.</p>"
+          "locationName":"policyVersionId"
         }
       },
       "documentation":"<p>The input for the SetDefaultPolicyVersion operation.</p>"
@@ -5553,7 +3520,7 @@
         },
         "messageFormat":{
           "shape":"MessageFormat",
-          "documentation":"<p>The message format of the message to publish. Optional. Accepted values are \"JSON\" and \"RAW\". The default value of the attribute is \"RAW\". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href=\"http://docs.aws.amazon.com/sns/latest/dg/json-formats.html\"></a> refer to their official documentation.</p>"
+          "documentation":"<p>The message format of the message to publish. Optional. Accepted values are \"JSON\" and \"RAW\". The default value of the attribute is \"RAW\". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href=\"http://docs.aws.amazon.com/sns/latest/dg/json-formats.html\">http://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.</p>"
         }
       },
       "documentation":"<p>Describes an action to publish to an Amazon SNS topic.</p>"
@@ -5566,9 +3533,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The Rule-SQL expression can't be parsed correctly.</p>",
       "error":{"httpStatusCode":400},
-      "exception":true,
-      "documentation":"<p>The Rule-SQL expression can't be parsed correctly.</p>"
+      "exception":true
     },
     "SqsAction":{
       "type":"structure",
@@ -5625,8 +3592,8 @@
     },
     "ThingName":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "pattern":"[a-zA-Z0-9:_-]+"
     },
     "ThingNameList":{
@@ -5645,7 +3612,10 @@
           "shape":"ThingTypeProperties",
           "documentation":"<p>The ThingTypeProperties for the thing type.</p>"
         },
-        "thingTypeMetadata":{"shape":"ThingTypeMetadata"}
+        "thingTypeMetadata":{
+          "shape":"ThingTypeMetadata",
+          "documentation":"<p>The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when it was deprecated.</p>"
+        }
       },
       "documentation":"<p>The definition of the thing type, including thing type name and description.</p>"
     },
@@ -5678,8 +3648,8 @@
     },
     "ThingTypeName":{
       "type":"string",
-      "min":1,
       "max":128,
+      "min":1,
       "pattern":"[a-zA-Z0-9:_-]+"
     },
     "ThingTypeProperties":{
@@ -5704,9 +3674,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The rate exceeds the limit.</p>",
       "error":{"httpStatusCode":429},
-      "exception":true,
-      "documentation":"<p>The rate exceeds the limit.</p>"
+      "exception":true
     },
     "Topic":{"type":"string"},
     "TopicPattern":{"type":"string"},
@@ -5812,9 +3782,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>You can't revert the certificate transfer because the transfer is already complete.</p>",
       "error":{"httpStatusCode":410},
-      "exception":true,
-      "documentation":"<p>You can't revert the certificate transfer because the transfer is already complete.</p>"
+      "exception":true
     },
     "TransferCertificateRequest":{
       "type":"structure",
@@ -5825,15 +3795,15 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The ID of the certificate.</p>",
           "location":"uri",
-          "locationName":"certificateId",
-          "documentation":"<p>The ID of the certificate.</p>"
+          "locationName":"certificateId"
         },
         "targetAwsAccount":{
           "shape":"AwsAccountId",
+          "documentation":"<p>The AWS account.</p>",
           "location":"querystring",
-          "locationName":"targetAwsAccount",
-          "documentation":"<p>The AWS account.</p>"
+          "locationName":"targetAwsAccount"
         },
         "transferMessage":{
           "shape":"Message",
@@ -5860,9 +3830,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>You can't transfer the certificate because authorization policies are still attached.</p>",
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"<p>You can't transfer the certificate because authorization policies are still attached.</p>"
+      "exception":true
     },
     "TransferData":{
       "type":"structure",
@@ -5898,9 +3868,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>You are not authorized to perform this operation.</p>",
       "error":{"httpStatusCode":401},
-      "exception":true,
-      "documentation":"<p>You are not authorized to perform this operation.</p>"
+      "exception":true
     },
     "UndoDeprecate":{"type":"boolean"},
     "UpdateCACertificateRequest":{
@@ -5909,21 +3879,21 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The CA certificate identifier.</p>",
           "location":"uri",
-          "locationName":"caCertificateId",
-          "documentation":"<p>The CA certificate identifier.</p>"
+          "locationName":"caCertificateId"
         },
         "newStatus":{
           "shape":"CACertificateStatus",
+          "documentation":"<p>The updated status of the CA certificate.</p> <p> <b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>",
           "location":"querystring",
-          "locationName":"newStatus",
-          "documentation":"<p>The updated status of the CA certificate.</p> <p><b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
+          "locationName":"newStatus"
         },
         "newAutoRegistrationStatus":{
           "shape":"AutoRegistrationStatus",
+          "documentation":"<p>The new value for the auto registration status. Valid values are: \"ENABLE\" or \"DISABLE\".</p>",
           "location":"querystring",
-          "locationName":"newAutoRegistrationStatus",
-          "documentation":"<p>The new value for the auto registration status. Valid values are: \"ENABLE\" or \"DISABLE\".</p>"
+          "locationName":"newAutoRegistrationStatus"
         }
       },
       "documentation":"<p>The input to the UpdateCACertificate operation.</p>"
@@ -5937,15 +3907,15 @@
       "members":{
         "certificateId":{
           "shape":"CertificateId",
+          "documentation":"<p>The ID of the certificate.</p>",
           "location":"uri",
-          "locationName":"certificateId",
-          "documentation":"<p>The ID of the certificate.</p>"
+          "locationName":"certificateId"
         },
         "newStatus":{
           "shape":"CertificateStatus",
+          "documentation":"<p>The new status.</p> <p> <b>Note:</b> Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.</p> <p> <b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>",
           "location":"querystring",
-          "locationName":"newStatus",
-          "documentation":"<p>The new status.</p> <p><b>Note:</b> Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.</p> <p><b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
+          "locationName":"newStatus"
         }
       },
       "documentation":"<p>The input for the UpdateCertificate operation.</p>"
@@ -5956,9 +3926,9 @@
       "members":{
         "thingName":{
           "shape":"ThingName",
+          "documentation":"<p>The name of the thing to update.</p>",
           "location":"uri",
-          "locationName":"thingName",
-          "documentation":"<p>The name of the thing to update.</p>"
+          "locationName":"thingName"
         },
         "thingTypeName":{
           "shape":"ThingTypeName",
@@ -5966,7 +3936,7 @@
         },
         "attributePayload":{
           "shape":"AttributePayload",
-          "documentation":"<p>A list of thing attributes, a JSON string containing name-value pairs. For example:</p> <p><code>{\\\"attributes\\\":{\\\"name1\\\":\\\"value2\\\"}})</code></p> <p>This data is used to add new attributes or update existing attributes.</p>"
+          "documentation":"<p>A list of thing attributes, a JSON string containing name-value pairs. For example:</p> <p> <code>{\\\"attributes\\\":{\\\"name1\\\":\\\"value2\\\"}}</code> </p> <p>This data is used to add new attributes or update existing attributes.</p>"
         },
         "expectedVersion":{
           "shape":"OptionalVersion",
@@ -5995,9 +3965,9 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter.</p>",
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"<p>An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter. </p>"
+      "exception":true
     },
     "VersionsLimitExceededException":{
       "type":"structure",
@@ -6007,14 +3977,13 @@
           "documentation":"<p>The message for the exception.</p>"
         }
       },
+      "documentation":"<p>The number of policy versions exceeds the limit.</p>",
       "error":{"httpStatusCode":409},
-      "exception":true,
-      "documentation":"<p>The number of policy versions exceeds the limit.</p>"
+      "exception":true
     },
     "errorMessage":{"type":"string"},
     "resourceArn":{"type":"string"},
     "resourceId":{"type":"string"}
   },
-  "examples":{
-  }
+  "documentation":"<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each thing (Thing Registry), configure logging, and create and manage policies and credentials to authenticate things.</p> <p>For more information about how AWS IoT works, see the <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer Guide</a>.</p>"
 }

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.62.0-->
+<!--LATEST=2.63.0-->
 <!--ENTRYINSERT-->
+
+## 2.63.0
+* feature: AppStream: AppStream 2.0 Custom Security Groups allows you to easily control what network resources your streaming instances and images have access to. You can assign up to 5 security groups per Fleet to control the inbound and outbound network access to your streaming instances to specific IP ranges, network protocols, or ports.
+* feature: AutoScaling: Autoscaling resource model update.
+* feature: Iot:  Added Salesforce action to IoT Rules Engine.
 
 ## 2.62.0
 * feature: KinesisAnalytics: Kinesis Analytics publishes error messages CloudWatch logs in case of application misconfigurations

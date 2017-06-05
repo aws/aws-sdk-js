@@ -217,7 +217,7 @@ declare namespace AppStream {
   }
   export interface AssociateFleetResult {
   }
-  export type AuthenticationType = "API"|"SAML"|string;
+  export type AuthenticationType = "API"|"SAML"|"USERPOOL"|string;
   export type Boolean = boolean;
   export type BooleanObject = boolean;
   export interface ComputeCapacity {
@@ -537,6 +537,8 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
   }
+  export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|string;
+  export type FleetAttributes = FleetAttribute[];
   export interface FleetError {
     /**
      * The error code for the fleet error.
@@ -664,6 +666,7 @@ declare namespace AppStream {
   export type Name = string;
   export type PlatformType = "WINDOWS"|string;
   export type ResourceIdentifier = string;
+  export type SecurityGroupIdList = String[];
   export interface Session {
     /**
      * The unique ID for a streaming session.
@@ -812,6 +815,10 @@ declare namespace AppStream {
      * Enables or disables default Internet access for the fleet.
      */
     EnableDefaultInternetAccess?: BooleanObject;
+    /**
+     * Fleet attributes to be deleted.
+     */
+    AttributesToDelete?: FleetAttributes;
   }
   export interface UpdateFleetResult {
     /**
@@ -854,6 +861,10 @@ declare namespace AppStream {
      * The list of subnets to which a network interface is established from the fleet instance.
      */
     SubnetIds?: SubnetIdList;
+    /**
+     * Security groups associated with the fleet.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

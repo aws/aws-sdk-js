@@ -269,7 +269,6 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidRoleException"},
-        {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterCombinationException"},
         {"shape":"LimitExceededException"},
         {"shape":"IncompatibleImageException"}
@@ -346,7 +345,8 @@
       "type":"string",
       "enum":[
         "API",
-        "SAML"
+        "SAML",
+        "USERPOOL"
       ]
     },
     "Boolean":{"type":"boolean"},
@@ -797,6 +797,19 @@
       },
       "documentation":"<p>Contains the parameters for a fleet.</p>"
     },
+    "FleetAttribute":{
+      "type":"string",
+      "documentation":"<p>Fleet attribute.</p>",
+      "enum":[
+        "VPC_CONFIGURATION",
+        "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
+      ]
+    },
+    "FleetAttributes":{
+      "type":"list",
+      "member":{"shape":"FleetAttribute"},
+      "documentation":"<p>A list of fleet attributes.</p>"
+    },
     "FleetError":{
       "type":"structure",
       "members":{
@@ -1086,6 +1099,12 @@
       "documentation":"<p>The specified resource was not found.</p>",
       "exception":true
     },
+    "SecurityGroupIdList":{
+      "type":"list",
+      "member":{"shape":"String"},
+      "documentation":"<p>A list of security groups.</p>",
+      "max":5
+    },
     "Session":{
       "type":"structure",
       "required":[
@@ -1306,7 +1325,8 @@
         },
         "DeleteVpcConfig":{
           "shape":"Boolean",
-          "documentation":"<p>Delete the VPC association for the specified fleet.</p>"
+          "documentation":"<p>Delete the VPC association for the specified fleet.</p>",
+          "deprecated":true
         },
         "Description":{
           "shape":"Description",
@@ -1319,6 +1339,10 @@
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
           "documentation":"<p>Enables or disables default Internet access for the fleet.</p>"
+        },
+        "AttributesToDelete":{
+          "shape":"FleetAttributes",
+          "documentation":"<p>Fleet attributes to be deleted.</p>"
         }
       }
     },
@@ -1384,6 +1408,10 @@
         "SubnetIds":{
           "shape":"SubnetIdList",
           "documentation":"<p>The list of subnets to which a network interface is established from the fleet instance.</p>"
+        },
+        "SecurityGroupIds":{
+          "shape":"SecurityGroupIdList",
+          "documentation":"<p>Security groups associated with the fleet.</p>"
         }
       },
       "documentation":"<p>VPC configuration information.</p>"
