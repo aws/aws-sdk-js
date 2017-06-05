@@ -35,6 +35,49 @@ http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/building-sdk-fo
 
 The AWS SDK is also compatible with [browserify](http://browserify.org).
 
+### Using Webpack
+
+The AWS SDK can also be used with [webpack](https://webpack.github.io/) by including some additional configuration to your `webpack.config.js` file.
+Special thanks to @basarat for providing [configuration](https://github.com/aws/aws-sdk-js/issues/603#issuecomment-235506094).
+```javascript
+/* 
+  webpack.config.js 
+  Depends on exports-loader: npm install --save-dev exports-loader
+*/
+
+var path = require('path');
+
+module.exports = {
+  // entry points for your app
+  entry: [
+    path.join(process.cwd(), 'app', 'index')
+  ],
+  // specify your build output
+  output: {
+    path: path.join('build'),
+    filename: 'bundle.js'
+  },
+  resolve: {
+    // redirect require('aws-sdk') to the pre-built browser version of the AWS SDK
+    alias: {
+      'aws-sdk': path.join('aws-sdk', 'dist', 'aws-sdk')
+    }
+  },
+  module: {
+    // let webpack know not to parse the AWS SDK
+    noParse: [
+      /aws-sdk.js/
+    ],
+    loaders: [
+      // make the AWS SDK available when requiring it
+      {
+        test: /aws-sdk.js/,
+        loader: 'exports?AWS'
+      }
+    ]
+  }
+}
+```
 ### In Node.js
 
 The preferred way to install the AWS SDK for Node.js is to use the
