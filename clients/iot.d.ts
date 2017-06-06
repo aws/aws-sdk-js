@@ -1847,11 +1847,11 @@ declare namespace Iot {
     /**
      * The token used to authenticate access to the Salesforce IoT Cloud Input Stream. The token is available from the Salesforce IoT Cloud platform after creation of the Input Stream.
      */
-    token?: SalesforceToken;
+    token: SalesforceToken;
     /**
      * The URL exposed by the Salesforce IoT Cloud Input Stream. The URL is available from the Salesforce IoT Cloud platform after creation of the Input Stream.
      */
-    url?: SalesforceEndpoint;
+    url: SalesforceEndpoint;
   }
   export type SalesforceEndpoint = string;
   export type SalesforceToken = string;

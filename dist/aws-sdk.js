@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.63.0
+// AWS SDK for JavaScript v2.64.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -55183,6 +55183,10 @@ module.exports={
           },
           "salesforce": {
             "type": "structure",
+            "required": [
+              "token",
+              "url"
+            ],
             "members": {
               "token": {},
               "url": {}
@@ -102190,7 +102194,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.63.0',
+  VERSION: '2.64.0',
 
 
   Signers: {},
@@ -105926,7 +105930,7 @@ AWS.Request = inherit({
       });
     });
 
-    if (this.httpRequest.stream) { // abort HTTP stream
+    if (this.httpRequest.stream && !this.httpRequest.stream.didCallback) { // abort HTTP stream
       this.httpRequest.stream.abort();
       if (this.httpRequest._abortCallback) {
          this.httpRequest._abortCallback();
@@ -106855,8 +106859,17 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
       self.body.resume();
     }
 
+    if (self.multipartReq) {
+      self.multipartReq.removeAllListeners('success');
+      self.multipartReq.removeAllListeners('error');
+      self.multipartReq.removeAllListeners('complete');
+      delete self.multipartReq;
+    }
+
     if (self.service.config.params.UploadId && !self.leavePartsOnError) {
       self.service.abortMultipartUpload().send();
+    } else if (self.leavePartsOnError) {
+      self.isDoneChunking = false;
     }
 
     AWS.util.each(self.parts, function(partNumber, part) {

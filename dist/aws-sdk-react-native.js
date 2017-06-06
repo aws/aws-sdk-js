@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.63.0',
+	  VERSION: '2.64.0',
 
 	  /**
 	   * @api private
@@ -16473,7 +16473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    });
 
-	    if (this.httpRequest.stream) { // abort HTTP stream
+	    if (this.httpRequest.stream && !this.httpRequest.stream.didCallback) { // abort HTTP stream
 	      this.httpRequest.stream.abort();
 	      if (this.httpRequest._abortCallback) {
 	         this.httpRequest._abortCallback();
@@ -23867,66 +23867,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* eslint-disable node/no-deprecated-api */
-	var buffer = __webpack_require__(253)
-	var Buffer = buffer.Buffer
-
-	if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow) {
-	  module.exports = buffer
-	} else {
-	  // Copy properties from require('buffer')
-	  Object.keys(buffer).forEach(function (prop) {
-	    exports[prop] = buffer[prop]
-	  })
-	  exports.Buffer = SafeBuffer
-	}
-
-	function SafeBuffer (arg, encodingOrOffset, length) {
-	  return Buffer(arg, encodingOrOffset, length)
-	}
-
-	// Copy static methods from Buffer
-	Object.keys(Buffer).forEach(function (prop) {
-	  SafeBuffer[prop] = Buffer[prop]
-	})
-
-	SafeBuffer.from = function (arg, encodingOrOffset, length) {
-	  if (typeof arg === 'number') {
-	    throw new TypeError('Argument must not be a number')
-	  }
-	  return Buffer(arg, encodingOrOffset, length)
-	}
-
-	SafeBuffer.alloc = function (size, fill, encoding) {
-	  if (typeof size !== 'number') {
-	    throw new TypeError('Argument must be a number')
-	  }
-	  var buf = Buffer(size)
-	  if (fill !== undefined) {
-	    if (typeof encoding === 'string') {
-	      buf.fill(fill, encoding)
-	    } else {
-	      buf.fill(fill)
-	    }
-	  } else {
-	    buf.fill(0)
-	  }
-	  return buf
-	}
-
-	SafeBuffer.allocUnsafe = function (size) {
-	  if (typeof size !== 'number') {
-	    throw new TypeError('Argument must be a number')
-	  }
-	  return Buffer(size)
-	}
-
-	SafeBuffer.allocUnsafeSlow = function (size) {
-	  if (typeof size !== 'number') {
-	    throw new TypeError('Argument must be a number')
-	  }
-	  return buffer.SlowBuffer(size)
-	}
+	module.exports = __webpack_require__(253)
 
 
 /***/ }),
@@ -108754,6 +108695,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"salesforce": {
 							"type": "structure",
+							"required": [
+								"token",
+								"url"
+							],
 							"members": {
 								"token": {},
 								"url": {}
@@ -145692,8 +145637,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      self.body.resume();
 	    }
 
+	    // cleanup multipartReq listeners
+	    if (self.multipartReq) {
+	      self.multipartReq.removeAllListeners('success');
+	      self.multipartReq.removeAllListeners('error');
+	      self.multipartReq.removeAllListeners('complete');
+	      delete self.multipartReq;
+	    }
+
 	    if (self.service.config.params.UploadId && !self.leavePartsOnError) {
 	      self.service.abortMultipartUpload().send();
+	    } else if (self.leavePartsOnError) {
+	      self.isDoneChunking = false;
 	    }
 
 	    AWS.util.each(self.parts, function(partNumber, part) {
