@@ -469,6 +469,48 @@
           return done();
         });
       });
+      it('cleans up createMultipartUpload request if leavePartsOnError is set', function(done) {
+        var spy;
+        var upload = new AWS.S3.ManagedUpload({
+          queueSize: 4,
+          leavePartsOnError: true,
+          params: {
+            Body: new AWS.util.Buffer(1024 * 1024 * 20)
+          }
+        });
+
+        upload.send(function(err, data) {
+          // should get an abort error
+          expect(err.code).to.eql('RequestAbortedError');
+          expect(this.multipartReq).to.eql(null);
+          // make sure removeAllListeners was called for terminal states
+          var removedListeners = spy.calls.map(function(arg) {
+            return arg.arguments[0];
+          }).sort();
+          expect(removedListeners).to.eql(['complete', 'error', 'success']);
+          done();
+        });
+        expect(!!upload.multipartReq).to.eql(true);
+        spy = helpers.spyOn(upload.multipartReq, 'removeAllListeners').andCallThrough();
+        upload.abort();
+      });
+      it('resets isDoneChunking if leavePartsOnError is set', function(done) {
+        var upload = new AWS.S3.ManagedUpload({
+          queueSize: 4,
+          partSize: 1024 * 1024 * 5,
+          leavePartsOnError: true,
+          params: {
+            Body: new AWS.util.Buffer(1024 * 1024 * 20)
+          }
+        });
+        upload.send(function(err, data) {
+          expect(err.code).to.eql('RequestAbortedError');
+          expect(upload.isDoneChunking).to.equal(false);
+          done();
+        });
+        expect(upload.isDoneChunking).to.equal(true);
+        upload.abort();
+      });
       it('resumes multipart buffer upload if leavePartsOnError is set', function(done) {
         var reqs;
         reqs = helpers.mockResponses([
