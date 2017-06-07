@@ -36,7 +36,7 @@ export class ConfigBase extends ConfigurationOptions{
     /**
      * Gets the promise dependency the SDK will use wherever Promises are returned.
      */
-    getPromisesDependency(): typeof Promise | void;
+    getPromisesDependency(): Promise<any> | void;
     /**
      * Sets the promise dependency the SDK will use wherever Promises are returned.
      * @param {function} dep - a reference to a Promise constructor
