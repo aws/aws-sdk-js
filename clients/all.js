@@ -101,5 +101,6 @@ module.exports = {
   CodeStar: require('./codestar'),
   LexModelBuildingService: require('./lexmodelbuildingservice'),
   MarketplaceEntitlementService: require('./marketplaceentitlementservice'),
-  Athena: require('./athena')
+  Athena: require('./athena'),
+  Greengrass: require('./greengrass')
 };

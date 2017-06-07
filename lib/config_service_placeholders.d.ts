@@ -100,6 +100,7 @@ export abstract class ConfigurationServicePlaceholders {
   lexmodelbuildingservice?: AWS.LexModelBuildingService.Types.ClientConfiguration;
   marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.ClientConfiguration;
   athena?: AWS.Athena.Types.ClientConfiguration;
+  greengrass?: AWS.Greengrass.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -202,4 +203,5 @@ export interface ConfigurationServiceApiVersions {
   lexmodelbuildingservice?: AWS.LexModelBuildingService.Types.apiVersion;
   marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.apiVersion;
   athena?: AWS.Athena.Types.apiVersion;
+  greengrass?: AWS.Greengrass.Types.apiVersion;
 }

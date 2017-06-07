@@ -98,3 +98,4 @@ export import CodeStar = require('./codestar');
 export import LexModelBuildingService = require('./lexmodelbuildingservice');
 export import MarketplaceEntitlementService = require('./marketplaceentitlementservice');
 export import Athena = require('./athena');
+export import Greengrass = require('./greengrass');

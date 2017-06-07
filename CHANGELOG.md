@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.64.0-->
+<!--LATEST=2.65.0-->
 <!--ENTRYINSERT-->
+
+## 2.65.0
+* feature: CodeBuild: Add support to APIs for privileged containers. This change would allow performing privileged operations like starting the Docker daemon inside builds possible in custom docker images.
+* feature: Greengrass: AWS Greengrass is software that lets you run local compute, messaging, and device state synchronization for connected devices in a secure way. With AWS Greengrass, connected devices can run AWS Lambda functions, keep device data in sync, and communicate with other devices securely even when not connected to the Internet. Using AWS Lambda, Greengrass ensures your IoT devices can respond quickly to local events, operate with intermittent connections, and minimize the cost of transmitting IoT data to the cloud.
 
 ## 2.64.0
 * bugfix: S3: Calling send multiple times on an S3 ManagedUpload with leavePartsOnError set to true should no longer result in truncated files being uploaded to S3. Calling send multiple times is not supported with streams.

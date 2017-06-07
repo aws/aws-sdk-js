@@ -431,5 +431,8 @@
   },
   "athena": {
     "name": "Athena"
+  },
+  "greengrass": {
+    "name": "Greengrass"
   }
 }

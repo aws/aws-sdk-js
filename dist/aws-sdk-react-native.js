@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.64.0',
+	  VERSION: '2.65.0',
 
 	  /**
 	   * @api private
@@ -20505,6 +20505,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"athena": {
 			"name": "Athena"
+		},
+		"greengrass": {
+			"name": "Greengrass"
 		}
 	};
 
@@ -32585,7 +32588,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  CodeStar: __webpack_require__(634),
 	  LexModelBuildingService: __webpack_require__(637),
 	  MarketplaceEntitlementService: __webpack_require__(640),
-	  Athena: __webpack_require__(643)
+	  Athena: __webpack_require__(643),
+	  Greengrass: __webpack_require__(646)
 	};
 
 /***/ }),
@@ -54756,7 +54760,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"names": {
-							"shape": "Su"
+							"shape": "Sv"
 						}
 					}
 				},
@@ -54766,11 +54770,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"projects": {
 							"type": "list",
 							"member": {
-								"shape": "Sx"
+								"shape": "Sy"
 							}
 						},
 						"projectsNotFound": {
-							"shape": "Su"
+							"shape": "Sv"
 						}
 					}
 				}
@@ -54791,7 +54795,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"shape": "Sg"
 						},
 						"artifacts": {
-							"shape": "S10"
+							"shape": "S11"
 						},
 						"environment": {
 							"shape": "Sl"
@@ -54802,7 +54806,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"encryptionKey": {},
 						"tags": {
-							"shape": "S15"
+							"shape": "S16"
 						}
 					}
 				},
@@ -54810,7 +54814,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"project": {
-							"shape": "Sx"
+							"shape": "Sy"
 						}
 					}
 				}
@@ -54923,7 +54927,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"nextToken": {},
 						"projects": {
-							"shape": "Su"
+							"shape": "Sv"
 						}
 					}
 				}
@@ -54938,7 +54942,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"projectName": {},
 						"sourceVersion": {},
 						"artifactsOverride": {
-							"shape": "S10"
+							"shape": "S11"
 						},
 						"environmentVariablesOverride": {
 							"shape": "So"
@@ -54990,7 +54994,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"shape": "Sg"
 						},
 						"artifacts": {
-							"shape": "S10"
+							"shape": "S11"
 						},
 						"environment": {
 							"shape": "Sl"
@@ -55001,7 +55005,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"encryptionKey": {},
 						"tags": {
-							"shape": "S15"
+							"shape": "S16"
 						}
 					}
 				},
@@ -55009,7 +55013,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"project": {
-							"shape": "Sx"
+							"shape": "Sy"
 						}
 					}
 				}
@@ -55129,6 +55133,9 @@ return /******/ (function(modules) { // webpackBootstrap
 					"computeType": {},
 					"environmentVariables": {
 						"shape": "So"
+					},
+					"privilegedMode": {
+						"type": "boolean"
 					}
 				}
 			},
@@ -55146,11 +55153,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Su": {
+			"Sv": {
 				"type": "list",
 				"member": {}
 			},
-			"Sx": {
+			"Sy": {
 				"type": "structure",
 				"members": {
 					"name": {},
@@ -55160,7 +55167,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"shape": "Sg"
 					},
 					"artifacts": {
-						"shape": "S10"
+						"shape": "S11"
 					},
 					"environment": {
 						"shape": "Sl"
@@ -55171,7 +55178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					},
 					"encryptionKey": {},
 					"tags": {
-						"shape": "S15"
+						"shape": "S16"
 					},
 					"created": {
 						"type": "timestamp"
@@ -55181,7 +55188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S10": {
+			"S11": {
 				"type": "structure",
 				"required": [
 					"type"
@@ -55195,7 +55202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"packaging": {}
 				}
 			},
-			"S15": {
+			"S16": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -173516,6 +173523,2160 @@ return /******/ (function(modules) { // webpackBootstrap
 				"input_token": "NextToken",
 				"output_token": "NextToken",
 				"limit_key": "MaxResults"
+			}
+		}
+	};
+
+/***/ }),
+/* 646 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	__webpack_require__(2);
+	var AWS = __webpack_require__(5);
+	var Service = __webpack_require__(179);
+	var apiLoader = __webpack_require__(187);
+
+	apiLoader.services['greengrass'] = {};
+	AWS.Greengrass = Service.defineService('greengrass', ['2017-06-07']);
+	Object.defineProperty(apiLoader.services['greengrass'], '2017-06-07', {
+	  get: function get() {
+	    var model = __webpack_require__(647);
+	    return model;
+	  },
+	  enumerable: true,
+	  configurable: true
+	});
+
+	module.exports = AWS.Greengrass;
+
+
+/***/ }),
+/* 647 */
+/***/ (function(module, exports) {
+
+	module.exports = {
+		"metadata": {
+			"apiVersion": "2017-06-07",
+			"endpointPrefix": "greengrass",
+			"signingName": "greengrass",
+			"serviceFullName": "AWS Greengrass",
+			"protocol": "rest-json",
+			"jsonVersion": "1.1",
+			"uid": "greengrass-2017-06-07",
+			"signatureVersion": "v4"
+		},
+		"operations": {
+			"AssociateRoleToGroup": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/groups/{GroupId}/role",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						},
+						"RoleArn": {}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"AssociatedAt": {}
+					}
+				}
+			},
+			"AssociateServiceRoleToAccount": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/servicerole",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"RoleArn": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"AssociatedAt": {}
+					}
+				}
+			},
+			"CreateCoreDefinition": {
+				"http": {
+					"requestUri": "/greengrass/definition/cores",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"InitialVersion": {
+							"shape": "S7"
+						},
+						"Name": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"CreateCoreDefinitionVersion": {
+				"http": {
+					"requestUri": "/greengrass/definition/cores/{CoreDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"CoreDefinitionId": {
+							"location": "uri",
+							"locationName": "CoreDefinitionId"
+						},
+						"Cores": {
+							"shape": "S8"
+						}
+					},
+					"required": [
+						"CoreDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"CreateDeployment": {
+				"http": {
+					"requestUri": "/greengrass/groups/{GroupId}/deployments",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"DeploymentId": {},
+						"DeploymentType": {},
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						},
+						"GroupVersionId": {}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"DeploymentArn": {},
+						"DeploymentId": {}
+					}
+				}
+			},
+			"CreateDeviceDefinition": {
+				"http": {
+					"requestUri": "/greengrass/definition/devices",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"InitialVersion": {
+							"shape": "Si"
+						},
+						"Name": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"CreateDeviceDefinitionVersion": {
+				"http": {
+					"requestUri": "/greengrass/definition/devices/{DeviceDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"DeviceDefinitionId": {
+							"location": "uri",
+							"locationName": "DeviceDefinitionId"
+						},
+						"Devices": {
+							"shape": "Sj"
+						}
+					},
+					"required": [
+						"DeviceDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"CreateFunctionDefinition": {
+				"http": {
+					"requestUri": "/greengrass/definition/functions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"InitialVersion": {
+							"shape": "Sp"
+						},
+						"Name": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"CreateFunctionDefinitionVersion": {
+				"http": {
+					"requestUri": "/greengrass/definition/functions/{FunctionDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"FunctionDefinitionId": {
+							"location": "uri",
+							"locationName": "FunctionDefinitionId"
+						},
+						"Functions": {
+							"shape": "Sq"
+						}
+					},
+					"required": [
+						"FunctionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"CreateGroup": {
+				"http": {
+					"requestUri": "/greengrass/groups",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"InitialVersion": {
+							"shape": "S10"
+						},
+						"Name": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"CreateGroupCertificateAuthority": {
+				"http": {
+					"requestUri": "/greengrass/groups/{GroupId}/certificateauthorities",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"GroupCertificateAuthorityArn": {}
+					}
+				}
+			},
+			"CreateGroupVersion": {
+				"http": {
+					"requestUri": "/greengrass/groups/{GroupId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"CoreDefinitionVersionArn": {},
+						"DeviceDefinitionVersionArn": {},
+						"FunctionDefinitionVersionArn": {},
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						},
+						"LoggerDefinitionVersionArn": {},
+						"SubscriptionDefinitionVersionArn": {}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"CreateLoggerDefinition": {
+				"http": {
+					"requestUri": "/greengrass/definition/loggers",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"InitialVersion": {
+							"shape": "S17"
+						},
+						"Name": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"CreateLoggerDefinitionVersion": {
+				"http": {
+					"requestUri": "/greengrass/definition/loggers/{LoggerDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"LoggerDefinitionId": {
+							"location": "uri",
+							"locationName": "LoggerDefinitionId"
+						},
+						"Loggers": {
+							"shape": "S18"
+						}
+					},
+					"required": [
+						"LoggerDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"CreateSubscriptionDefinition": {
+				"http": {
+					"requestUri": "/greengrass/definition/subscriptions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"InitialVersion": {
+							"shape": "S1h"
+						},
+						"Name": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"CreateSubscriptionDefinitionVersion": {
+				"http": {
+					"requestUri": "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AmznClientToken": {
+							"location": "header",
+							"locationName": "X-Amzn-Client-Token"
+						},
+						"SubscriptionDefinitionId": {
+							"location": "uri",
+							"locationName": "SubscriptionDefinitionId"
+						},
+						"Subscriptions": {
+							"shape": "S1i"
+						}
+					},
+					"required": [
+						"SubscriptionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"DeleteCoreDefinition": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/greengrass/definition/cores/{CoreDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"CoreDefinitionId": {
+							"location": "uri",
+							"locationName": "CoreDefinitionId"
+						}
+					},
+					"required": [
+						"CoreDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"DeleteDeviceDefinition": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/greengrass/definition/devices/{DeviceDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"DeviceDefinitionId": {
+							"location": "uri",
+							"locationName": "DeviceDefinitionId"
+						}
+					},
+					"required": [
+						"DeviceDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"DeleteFunctionDefinition": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/greengrass/definition/functions/{FunctionDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"FunctionDefinitionId": {
+							"location": "uri",
+							"locationName": "FunctionDefinitionId"
+						}
+					},
+					"required": [
+						"FunctionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"DeleteGroup": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/greengrass/groups/{GroupId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"DeleteLoggerDefinition": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/greengrass/definition/loggers/{LoggerDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"LoggerDefinitionId": {
+							"location": "uri",
+							"locationName": "LoggerDefinitionId"
+						}
+					},
+					"required": [
+						"LoggerDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"DeleteSubscriptionDefinition": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"SubscriptionDefinitionId": {
+							"location": "uri",
+							"locationName": "SubscriptionDefinitionId"
+						}
+					},
+					"required": [
+						"SubscriptionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"DisassociateRoleFromGroup": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/greengrass/groups/{GroupId}/role",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"DisassociatedAt": {}
+					}
+				}
+			},
+			"DisassociateServiceRoleFromAccount": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/greengrass/servicerole",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"DisassociatedAt": {}
+					}
+				}
+			},
+			"GetAssociatedRole": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups/{GroupId}/role",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"AssociatedAt": {},
+						"RoleArn": {}
+					}
+				}
+			},
+			"GetConnectivityInfo": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/things/{ThingName}/connectivityInfo",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ThingName": {
+							"location": "uri",
+							"locationName": "ThingName"
+						}
+					},
+					"required": [
+						"ThingName"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"ConnectivityInfo": {
+							"shape": "S27"
+						},
+						"Message": {
+							"locationName": "message"
+						}
+					}
+				}
+			},
+			"GetCoreDefinition": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/cores/{CoreDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"CoreDefinitionId": {
+							"location": "uri",
+							"locationName": "CoreDefinitionId"
+						}
+					},
+					"required": [
+						"CoreDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"GetCoreDefinitionVersion": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/cores/{CoreDefinitionId}/versions/{CoreDefinitionVersionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"CoreDefinitionId": {
+							"location": "uri",
+							"locationName": "CoreDefinitionId"
+						},
+						"CoreDefinitionVersionId": {
+							"location": "uri",
+							"locationName": "CoreDefinitionVersionId"
+						}
+					},
+					"required": [
+						"CoreDefinitionId",
+						"CoreDefinitionVersionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Definition": {
+							"shape": "S7"
+						},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"GetDeploymentStatus": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups/{GroupId}/deployments/{DeploymentId}/status",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"DeploymentId": {
+							"location": "uri",
+							"locationName": "DeploymentId"
+						},
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"GroupId",
+						"DeploymentId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"DeploymentStatus": {},
+						"ErrorMessage": {},
+						"UpdatedAt": {}
+					}
+				}
+			},
+			"GetDeviceDefinition": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/devices/{DeviceDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"DeviceDefinitionId": {
+							"location": "uri",
+							"locationName": "DeviceDefinitionId"
+						}
+					},
+					"required": [
+						"DeviceDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"GetDeviceDefinitionVersion": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/devices/{DeviceDefinitionId}/versions/{DeviceDefinitionVersionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"DeviceDefinitionId": {
+							"location": "uri",
+							"locationName": "DeviceDefinitionId"
+						},
+						"DeviceDefinitionVersionId": {
+							"location": "uri",
+							"locationName": "DeviceDefinitionVersionId"
+						}
+					},
+					"required": [
+						"DeviceDefinitionVersionId",
+						"DeviceDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Definition": {
+							"shape": "Si"
+						},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"GetFunctionDefinition": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/functions/{FunctionDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"FunctionDefinitionId": {
+							"location": "uri",
+							"locationName": "FunctionDefinitionId"
+						}
+					},
+					"required": [
+						"FunctionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"GetFunctionDefinitionVersion": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/functions/{FunctionDefinitionId}/versions/{FunctionDefinitionVersionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"FunctionDefinitionId": {
+							"location": "uri",
+							"locationName": "FunctionDefinitionId"
+						},
+						"FunctionDefinitionVersionId": {
+							"location": "uri",
+							"locationName": "FunctionDefinitionVersionId"
+						}
+					},
+					"required": [
+						"FunctionDefinitionId",
+						"FunctionDefinitionVersionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Definition": {
+							"shape": "Sp"
+						},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"GetGroup": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups/{GroupId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"GetGroupCertificateAuthority": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups/{GroupId}/certificateauthorities/{CertificateAuthorityId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"CertificateAuthorityId": {
+							"location": "uri",
+							"locationName": "CertificateAuthorityId"
+						},
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"CertificateAuthorityId",
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"GroupCertificateAuthorityArn": {},
+						"GroupCertificateAuthorityId": {},
+						"PemEncodedCertificate": {}
+					}
+				}
+			},
+			"GetGroupCertificateConfiguration": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"CertificateAuthorityExpiryInMilliseconds": {},
+						"CertificateExpiryInMilliseconds": {},
+						"GroupId": {}
+					}
+				}
+			},
+			"GetGroupVersion": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups/{GroupId}/versions/{GroupVersionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						},
+						"GroupVersionId": {
+							"location": "uri",
+							"locationName": "GroupVersionId"
+						}
+					},
+					"required": [
+						"GroupVersionId",
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Definition": {
+							"shape": "S10"
+						},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"GetLoggerDefinition": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/loggers/{LoggerDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"LoggerDefinitionId": {
+							"location": "uri",
+							"locationName": "LoggerDefinitionId"
+						}
+					},
+					"required": [
+						"LoggerDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"GetLoggerDefinitionVersion": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/loggers/{LoggerDefinitionId}/versions/{LoggerDefinitionVersionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"LoggerDefinitionId": {
+							"location": "uri",
+							"locationName": "LoggerDefinitionId"
+						},
+						"LoggerDefinitionVersionId": {
+							"location": "uri",
+							"locationName": "LoggerDefinitionVersionId"
+						}
+					},
+					"required": [
+						"LoggerDefinitionVersionId",
+						"LoggerDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Definition": {
+							"shape": "S17"
+						},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"GetServiceRoleForAccount": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/servicerole",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"AssociatedAt": {},
+						"RoleArn": {}
+					}
+				}
+			},
+			"GetSubscriptionDefinition": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"SubscriptionDefinitionId": {
+							"location": "uri",
+							"locationName": "SubscriptionDefinitionId"
+						}
+					},
+					"required": [
+						"SubscriptionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
+			},
+			"GetSubscriptionDefinitionVersion": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions/{SubscriptionDefinitionVersionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"SubscriptionDefinitionId": {
+							"location": "uri",
+							"locationName": "SubscriptionDefinitionId"
+						},
+						"SubscriptionDefinitionVersionId": {
+							"location": "uri",
+							"locationName": "SubscriptionDefinitionVersionId"
+						}
+					},
+					"required": [
+						"SubscriptionDefinitionId",
+						"SubscriptionDefinitionVersionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Definition": {
+							"shape": "S1h"
+						},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"ListCoreDefinitionVersions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/cores/{CoreDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"CoreDefinitionId": {
+							"location": "uri",
+							"locationName": "CoreDefinitionId"
+						},
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					},
+					"required": [
+						"CoreDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"NextToken": {},
+						"Versions": {
+							"shape": "S37"
+						}
+					}
+				}
+			},
+			"ListCoreDefinitions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/cores",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Definitions": {
+							"shape": "S3b"
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListDeployments": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups/{GroupId}/deployments",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						},
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Deployments": {
+							"type": "list",
+							"member": {
+								"type": "structure",
+								"members": {
+									"CreatedAt": {},
+									"DeploymentArn": {},
+									"DeploymentId": {},
+									"GroupArn": {}
+								}
+							}
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListDeviceDefinitionVersions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/devices/{DeviceDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"DeviceDefinitionId": {
+							"location": "uri",
+							"locationName": "DeviceDefinitionId"
+						},
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					},
+					"required": [
+						"DeviceDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"NextToken": {},
+						"Versions": {
+							"shape": "S37"
+						}
+					}
+				}
+			},
+			"ListDeviceDefinitions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/devices",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Definitions": {
+							"shape": "S3b"
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListFunctionDefinitionVersions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/functions/{FunctionDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"FunctionDefinitionId": {
+							"location": "uri",
+							"locationName": "FunctionDefinitionId"
+						},
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					},
+					"required": [
+						"FunctionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"NextToken": {},
+						"Versions": {
+							"shape": "S37"
+						}
+					}
+				}
+			},
+			"ListFunctionDefinitions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/functions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Definitions": {
+							"shape": "S3b"
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListGroupCertificateAuthorities": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups/{GroupId}/certificateauthorities",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"GroupCertificateAuthorities": {
+							"type": "list",
+							"member": {
+								"type": "structure",
+								"members": {
+									"GroupCertificateAuthorityArn": {},
+									"GroupCertificateAuthorityId": {}
+								}
+							}
+						}
+					}
+				}
+			},
+			"ListGroupVersions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups/{GroupId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						},
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"NextToken": {},
+						"Versions": {
+							"shape": "S37"
+						}
+					}
+				}
+			},
+			"ListGroups": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/groups",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Groups": {
+							"type": "list",
+							"member": {
+								"type": "structure",
+								"members": {
+									"Arn": {},
+									"CreationTimestamp": {},
+									"Id": {},
+									"LastUpdatedTimestamp": {},
+									"LatestVersion": {},
+									"LatestVersionArn": {},
+									"Name": {}
+								}
+							}
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListLoggerDefinitionVersions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/loggers/{LoggerDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"LoggerDefinitionId": {
+							"location": "uri",
+							"locationName": "LoggerDefinitionId"
+						},
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					},
+					"required": [
+						"LoggerDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"NextToken": {},
+						"Versions": {
+							"shape": "S37"
+						}
+					}
+				}
+			},
+			"ListLoggerDefinitions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/loggers",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Definitions": {
+							"shape": "S3b"
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListSubscriptionDefinitionVersions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						},
+						"SubscriptionDefinitionId": {
+							"location": "uri",
+							"locationName": "SubscriptionDefinitionId"
+						}
+					},
+					"required": [
+						"SubscriptionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"NextToken": {},
+						"Versions": {
+							"shape": "S37"
+						}
+					}
+				}
+			},
+			"ListSubscriptionDefinitions": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/greengrass/definition/subscriptions",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"MaxResults": {
+							"location": "querystring",
+							"locationName": "MaxResults"
+						},
+						"NextToken": {
+							"location": "querystring",
+							"locationName": "NextToken"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Definitions": {
+							"shape": "S3b"
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"UpdateConnectivityInfo": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/things/{ThingName}/connectivityInfo",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ConnectivityInfo": {
+							"shape": "S27"
+						},
+						"ThingName": {
+							"location": "uri",
+							"locationName": "ThingName"
+						}
+					},
+					"required": [
+						"ThingName"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Message": {
+							"locationName": "message"
+						},
+						"Version": {}
+					}
+				}
+			},
+			"UpdateCoreDefinition": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/definition/cores/{CoreDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"CoreDefinitionId": {
+							"location": "uri",
+							"locationName": "CoreDefinitionId"
+						},
+						"Name": {}
+					},
+					"required": [
+						"CoreDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"UpdateDeviceDefinition": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/definition/devices/{DeviceDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"DeviceDefinitionId": {
+							"location": "uri",
+							"locationName": "DeviceDefinitionId"
+						},
+						"Name": {}
+					},
+					"required": [
+						"DeviceDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"UpdateFunctionDefinition": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/definition/functions/{FunctionDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"FunctionDefinitionId": {
+							"location": "uri",
+							"locationName": "FunctionDefinitionId"
+						},
+						"Name": {}
+					},
+					"required": [
+						"FunctionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"UpdateGroup": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/groups/{GroupId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						},
+						"Name": {}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"UpdateGroupCertificateConfiguration": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"CertificateExpiryInMilliseconds": {},
+						"GroupId": {
+							"location": "uri",
+							"locationName": "GroupId"
+						}
+					},
+					"required": [
+						"GroupId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"CertificateAuthorityExpiryInMilliseconds": {},
+						"CertificateExpiryInMilliseconds": {},
+						"GroupId": {}
+					}
+				}
+			},
+			"UpdateLoggerDefinition": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/definition/loggers/{LoggerDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"LoggerDefinitionId": {
+							"location": "uri",
+							"locationName": "LoggerDefinitionId"
+						},
+						"Name": {}
+					},
+					"required": [
+						"LoggerDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
+			"UpdateSubscriptionDefinition": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"Name": {},
+						"SubscriptionDefinitionId": {
+							"location": "uri",
+							"locationName": "SubscriptionDefinitionId"
+						}
+					},
+					"required": [
+						"SubscriptionDefinitionId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			}
+		},
+		"shapes": {
+			"S7": {
+				"type": "structure",
+				"members": {
+					"Cores": {
+						"shape": "S8"
+					}
+				}
+			},
+			"S8": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"members": {
+						"CertificateArn": {},
+						"Id": {},
+						"SyncShadow": {
+							"type": "boolean"
+						},
+						"ThingArn": {}
+					}
+				}
+			},
+			"Si": {
+				"type": "structure",
+				"members": {
+					"Devices": {
+						"shape": "Sj"
+					}
+				}
+			},
+			"Sj": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"members": {
+						"CertificateArn": {},
+						"Id": {},
+						"SyncShadow": {
+							"type": "boolean"
+						},
+						"ThingArn": {}
+					}
+				}
+			},
+			"Sp": {
+				"type": "structure",
+				"members": {
+					"Functions": {
+						"shape": "Sq"
+					}
+				}
+			},
+			"Sq": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"members": {
+						"FunctionArn": {},
+						"FunctionConfiguration": {
+							"type": "structure",
+							"members": {
+								"Environment": {
+									"type": "structure",
+									"members": {
+										"Variables": {
+											"type": "map",
+											"key": {},
+											"value": {}
+										}
+									}
+								},
+								"ExecArgs": {},
+								"Executable": {},
+								"MemorySize": {
+									"type": "integer"
+								},
+								"Pinned": {
+									"type": "boolean"
+								},
+								"Timeout": {
+									"type": "integer"
+								}
+							}
+						},
+						"Id": {}
+					}
+				}
+			},
+			"S10": {
+				"type": "structure",
+				"members": {
+					"CoreDefinitionVersionArn": {},
+					"DeviceDefinitionVersionArn": {},
+					"FunctionDefinitionVersionArn": {},
+					"LoggerDefinitionVersionArn": {},
+					"SubscriptionDefinitionVersionArn": {}
+				}
+			},
+			"S17": {
+				"type": "structure",
+				"members": {
+					"Loggers": {
+						"shape": "S18"
+					}
+				}
+			},
+			"S18": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"members": {
+						"Component": {},
+						"Id": {},
+						"Level": {},
+						"Space": {
+							"type": "integer"
+						},
+						"Type": {}
+					}
+				}
+			},
+			"S1h": {
+				"type": "structure",
+				"members": {
+					"Subscriptions": {
+						"shape": "S1i"
+					}
+				}
+			},
+			"S1i": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"members": {
+						"Id": {},
+						"Source": {},
+						"Subject": {},
+						"Target": {}
+					}
+				}
+			},
+			"S27": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"members": {
+						"HostAddress": {},
+						"Id": {},
+						"Metadata": {},
+						"PortNumber": {
+							"type": "integer"
+						}
+					}
+				}
+			},
+			"S37": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"Version": {}
+					}
+				}
+			},
+			"S3b": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"members": {
+						"Arn": {},
+						"CreationTimestamp": {},
+						"Id": {},
+						"LastUpdatedTimestamp": {},
+						"LatestVersion": {},
+						"LatestVersionArn": {},
+						"Name": {}
+					}
+				}
 			}
 		}
 	};
