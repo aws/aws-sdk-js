@@ -182,7 +182,8 @@
   },
   "efs": {
     "prefix": "elasticfilesystem",
-    "name": "EFS"
+    "name": "EFS",
+    "cors": true
   },
   "elasticache": {
     "name": "ElastiCache",
