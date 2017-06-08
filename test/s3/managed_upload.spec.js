@@ -73,7 +73,7 @@
       });
       expect(upload.service.getSignatureVersion()).to.eql('v4');
     });
-    t('uses sigv4 if customer supplies a configured S3 client', function() {
+    it('uses sigv4 if customer supplies a configured S3 client', function() {
       var upload = new AWS.S3.ManagedUpload({
         params: {
           Body: 'body'
