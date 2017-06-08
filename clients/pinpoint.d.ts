@@ -44,6 +44,14 @@ declare class Pinpoint extends Service {
    */
   deleteApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsChannelResponse, AWSError>;
   /**
+   * Delete an APNS sandbox channel
+   */
+  deleteApnsSandboxChannel(params: Pinpoint.Types.DeleteApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
+  /**
+   * Delete an APNS sandbox channel
+   */
+  deleteApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
+  /**
    * Deletes a campaign.
    */
   deleteCampaign(params: Pinpoint.Types.DeleteCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteCampaignResponse) => void): Request<Pinpoint.Types.DeleteCampaignResponse, AWSError>;
@@ -51,6 +59,14 @@ declare class Pinpoint extends Service {
    * Deletes a campaign.
    */
   deleteCampaign(callback?: (err: AWSError, data: Pinpoint.Types.DeleteCampaignResponse) => void): Request<Pinpoint.Types.DeleteCampaignResponse, AWSError>;
+  /**
+   * Delete an email channel
+   */
+  deleteEmailChannel(params: Pinpoint.Types.DeleteEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
+  /**
+   * Delete an email channel
+   */
+  deleteEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
   /**
    * Deletes the event stream for an app.
    */
@@ -76,6 +92,14 @@ declare class Pinpoint extends Service {
    */
   deleteSegment(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSegmentResponse) => void): Request<Pinpoint.Types.DeleteSegmentResponse, AWSError>;
   /**
+   * Delete an SMS channel
+   */
+  deleteSmsChannel(params: Pinpoint.Types.DeleteSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
+  /**
+   * Delete an SMS channel
+   */
+  deleteSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
+  /**
    * Returns information about the APNs channel for an app.
    */
   getApnsChannel(params: Pinpoint.Types.GetApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsChannelResponse) => void): Request<Pinpoint.Types.GetApnsChannelResponse, AWSError>;
@@ -83,6 +107,14 @@ declare class Pinpoint extends Service {
    * Returns information about the APNs channel for an app.
    */
   getApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsChannelResponse) => void): Request<Pinpoint.Types.GetApnsChannelResponse, AWSError>;
+  /**
+   * Get an APNS sandbox channel
+   */
+  getApnsSandboxChannel(params: Pinpoint.Types.GetApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
+  /**
+   * Get an APNS sandbox channel
+   */
+  getApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
   /**
    * Used to request the settings for an app.
    */
@@ -131,6 +163,14 @@ declare class Pinpoint extends Service {
    * Returns information about your campaigns.
    */
   getCampaigns(callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignsResponse) => void): Request<Pinpoint.Types.GetCampaignsResponse, AWSError>;
+  /**
+   * Get an email channel
+   */
+  getEmailChannel(params: Pinpoint.Types.GetEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
+  /**
+   * Get an email channel
+   */
+  getEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
   /**
    * Returns information about an endpoint.
    */
@@ -212,6 +252,14 @@ declare class Pinpoint extends Service {
    */
   getSegments(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentsResponse) => void): Request<Pinpoint.Types.GetSegmentsResponse, AWSError>;
   /**
+   * Get an SMS channel
+   */
+  getSmsChannel(params: Pinpoint.Types.GetSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
+  /**
+   * Get an SMS channel
+   */
+  getSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
+  /**
    * Use to create or update the event stream for an app.
    */
   putEventStream(params: Pinpoint.Types.PutEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
@@ -220,6 +268,14 @@ declare class Pinpoint extends Service {
    */
   putEventStream(callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
   /**
+   * Send a batch of messages
+   */
+  sendMessages(params: Pinpoint.Types.SendMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
+  /**
+   * Send a batch of messages
+   */
+  sendMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
+  /**
    * Use to update the APNs channel for an app.
    */
   updateApnsChannel(params: Pinpoint.Types.UpdateApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
@@ -227,6 +283,14 @@ declare class Pinpoint extends Service {
    * Use to update the APNs channel for an app.
    */
   updateApnsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
+  /**
+   * Update an APNS sandbox channel
+   */
+  updateApnsSandboxChannel(params: Pinpoint.Types.UpdateApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
+  /**
+   * Update an APNS sandbox channel
+   */
+  updateApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
   /**
    * Used to update the settings for an app.
    */
@@ -243,6 +307,14 @@ declare class Pinpoint extends Service {
    * Use to update a campaign.
    */
   updateCampaign(callback?: (err: AWSError, data: Pinpoint.Types.UpdateCampaignResponse) => void): Request<Pinpoint.Types.UpdateCampaignResponse, AWSError>;
+  /**
+   * Update an email channel
+   */
+  updateEmailChannel(params: Pinpoint.Types.UpdateEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
+  /**
+   * Update an email channel
+   */
+  updateEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
   /**
    * Use to update an endpoint.
    */
@@ -275,6 +347,14 @@ declare class Pinpoint extends Service {
    * Use to update a segment.
    */
   updateSegment(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
+  /**
+   * Update an SMS channel
+   */
+  updateSmsChannel(params: Pinpoint.Types.UpdateSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
+  /**
+   * Update an SMS channel
+   */
+  updateSmsChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
 }
 declare namespace Pinpoint {
   export interface APNSChannelRequest {
@@ -282,6 +362,10 @@ declare namespace Pinpoint {
      * The distribution certificate from Apple.
      */
     Certificate?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
     /**
      * The certificate private key.
      */
@@ -297,7 +381,117 @@ declare namespace Pinpoint {
      */
     CreationDate?: __string;
     /**
-     * The unique channel ID.
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * Channel ID. Not used, only for backwards compatibility.
+     */
+    Id?: __string;
+    /**
+     * Is this channel archived
+     */
+    IsArchived?: __boolean;
+    /**
+     * Who last updated this entry
+     */
+    LastModifiedBy?: __string;
+    /**
+     * Last date this was updated
+     */
+    LastModifiedDate?: __string;
+    /**
+     * The platform type. Will be APNS.
+     */
+    Platform?: __string;
+    /**
+     * Version of channel
+     */
+    Version?: __integer;
+  }
+  export interface APNSMessage {
+    /**
+     * The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL
+     */
+    Action?: Action;
+    /**
+     * Include this key when you want the system to modify the badge of your app icon. If this key is not included in the dictionary, the badge is not changed. To remove the badge, set the value of this key to 0.
+     */
+    Badge?: __integer;
+    /**
+     * The message body of the notification, the email body or the text message.
+     */
+    Body?: __string;
+    /**
+     * Provide this key with a string value that represents the notification's type. This value corresponds to the value in the identifier property of one of your app's registered categories.
+     */
+    Category?: __string;
+    /**
+     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     */
+    Data?: MapOf__string;
+    /**
+     * The URL that points to a video used in the push notification.
+     */
+    MediaUrl?: __string;
+    /**
+     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     */
+    RawContent?: __string;
+    /**
+     * Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+     */
+    SilentPush?: __boolean;
+    /**
+     * Include this key when you want the system to play a sound. The value of this key is the name of a sound file in your app's main bundle or in the Library/Sounds folder of your app's data container. If the sound file cannot be found, or if you specify defaultfor the value, the system plays the default alert sound.
+     */
+    Sound?: __string;
+    /**
+     * Default message substitutions. Can be overridden by individual address substitutions.
+     */
+    Substitutions?: MapOfListOf__string;
+    /**
+     * Provide this key with a string value that represents the app-specific identifier for grouping notifications. If you provide a Notification Content app extension, you can use this value to group your notifications together.
+     */
+    ThreadId?: __string;
+    /**
+     * The message title that displays above the message on the user's device.
+     */
+    Title?: __string;
+    /**
+     * The URL to open in the user's mobile browser. Used if the value for Action is URL.
+     */
+    Url?: __string;
+  }
+  export interface APNSSandboxChannelRequest {
+    /**
+     * The distribution certificate from Apple.
+     */
+    Certificate?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * The certificate private key.
+     */
+    PrivateKey?: __string;
+  }
+  export interface APNSSandboxChannelResponse {
+    /**
+     * Application id
+     */
+    ApplicationId?: __string;
+    /**
+     * When was this segment created
+     */
+    CreationDate?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * Channel ID. Not used, only for backwards compatibility.
      */
     Id?: __string;
     /**
@@ -386,6 +580,32 @@ Valid values: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, COMPLETED
      */
     TreatmentId?: __string;
   }
+  export interface AddressConfiguration {
+    /**
+     * Body override. If specified will override default body.
+     */
+    BodyOverride?: __string;
+    /**
+     * Type of channel of this address
+     */
+    ChannelType?: ChannelType;
+    /**
+     * A map of custom attributes to attributes to be attached to the message for this address. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+     */
+    Context?: MapOf__string;
+    /**
+     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     */
+    RawContent?: __string;
+    /**
+     * A map of substitution values for the message to be merged with the DefaultMessage's substitutions. Substitutions on this map take precedence over the all other substitutions.
+     */
+    Substitutions?: MapOfListOf__string;
+    /**
+     * Title override. If specified will override default title if applicable.
+     */
+    TitleOverride?: __string;
+  }
   export interface ApplicationSettingsResource {
     /**
      * The unique ID for the application.
@@ -407,8 +627,8 @@ Valid values: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, COMPLETED
   export interface AttributeDimension {
     /**
      * The type of dimension:
-INCLUSIVE – Endpoints that match the criteria are included in the segment.
-EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
+INCLUSIVE - Endpoints that match the criteria are included in the segment.
+EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     AttributeType?: AttributeType;
     /**
@@ -417,6 +637,20 @@ EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
     Values?: ListOf__string;
   }
   export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|string;
+  export interface CampaignEmailMessage {
+    /**
+     * The email text body.
+     */
+    Body?: __string;
+    /**
+     * The email html body.
+     */
+    HtmlBody?: __string;
+    /**
+     * The email title (Or subject).
+     */
+    Title?: __string;
+  }
   export interface CampaignLimits {
     /**
      * The maximum number of messages that the campaign can send daily.
@@ -507,6 +741,20 @@ An A/B test campaign will have a status of COMPLETED only when all treatments ha
      */
     Version?: __integer;
   }
+  export interface CampaignSmsMessage {
+    /**
+     * The SMS text body.
+     */
+    Body?: __string;
+    /**
+     * Is this is a transactional SMS message, otherwise a promotional message.
+     */
+    MessageType?: MessageType;
+    /**
+     * Sender ID of sent message.
+     */
+    SenderId?: __string;
+  }
   export interface CampaignState {
     /**
      * The status of the campaign, or the status of a treatment that belongs to an A/B test campaign.
@@ -526,7 +774,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     NextToken?: __string;
   }
-  export type ChannelType = "APNS"|"GCM"|string;
+  export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"ADM"|"SMS"|"EMAIL"|string;
   export interface CreateCampaignRequest {
     ApplicationId: __string;
     WriteCampaignRequest: WriteCampaignRequest;
@@ -548,11 +796,57 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   export interface CreateSegmentResponse {
     SegmentResponse: SegmentResponse;
   }
+  export interface DefaultMessage {
+    /**
+     * The message body of the notification, the email body or the text message.
+     */
+    Body?: __string;
+    /**
+     * Default message substitutions. Can be overridden by individual address substitutions.
+     */
+    Substitutions?: MapOfListOf__string;
+  }
+  export interface DefaultPushNotificationMessage {
+    /**
+     * The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL
+     */
+    Action?: Action;
+    /**
+     * The message body of the notification, the email body or the text message.
+     */
+    Body?: __string;
+    /**
+     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     */
+    Data?: MapOf__string;
+    /**
+     * Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+     */
+    SilentPush?: __boolean;
+    /**
+     * Default message substitutions. Can be overridden by individual address substitutions.
+     */
+    Substitutions?: MapOfListOf__string;
+    /**
+     * The message title that displays above the message on the user's device.
+     */
+    Title?: __string;
+    /**
+     * The URL to open in the user's mobile browser. Used if the value for Action is URL.
+     */
+    Url?: __string;
+  }
   export interface DeleteApnsChannelRequest {
     ApplicationId: __string;
   }
   export interface DeleteApnsChannelResponse {
     APNSChannelResponse: APNSChannelResponse;
+  }
+  export interface DeleteApnsSandboxChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface DeleteApnsSandboxChannelResponse {
+    APNSSandboxChannelResponse: APNSSandboxChannelResponse;
   }
   export interface DeleteCampaignRequest {
     ApplicationId: __string;
@@ -560,6 +854,12 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteCampaignResponse {
     CampaignResponse: CampaignResponse;
+  }
+  export interface DeleteEmailChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface DeleteEmailChannelResponse {
+    EmailChannelResponse: EmailChannelResponse;
   }
   export interface DeleteEventStreamRequest {
     /**
@@ -583,8 +883,105 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   export interface DeleteSegmentResponse {
     SegmentResponse: SegmentResponse;
   }
+  export interface DeleteSmsChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface DeleteSmsChannelResponse {
+    SMSChannelResponse: SMSChannelResponse;
+  }
+  export type DeliveryStatus = "SUCCESSFUL"|"THROTTLED"|"TEMPORARY_FAILURE"|"PERMANENT_FAILURE"|string;
   export type DimensionType = "INCLUSIVE"|"EXCLUSIVE"|string;
+  export interface DirectMessageConfiguration {
+    /**
+     * The message to APNS channels. Overrides the default push notification message.
+     */
+    APNSMessage?: APNSMessage;
+    /**
+     * The default message for all channels.
+     */
+    DefaultMessage?: DefaultMessage;
+    /**
+     * The default push notification message for all push channels.
+     */
+    DefaultPushNotificationMessage?: DefaultPushNotificationMessage;
+    /**
+     * The message to GCM channels. Overrides the default push notification message.
+     */
+    GCMMessage?: GCMMessage;
+    /**
+     * The message to SMS channels. Overrides the default message.
+     */
+    SMSMessage?: SMSMessage;
+  }
   export type Duration = "HR_24"|"DAY_7"|"DAY_14"|"DAY_30"|string;
+  export interface EmailChannelRequest {
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * The email address used to send emails from.
+     */
+    FromAddress?: __string;
+    /**
+     * The ARN of an identity verified with SES.
+     */
+    Identity?: __string;
+    /**
+     * The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
+     */
+    RoleArn?: __string;
+  }
+  export interface EmailChannelResponse {
+    /**
+     * Application id
+     */
+    ApplicationId?: __string;
+    /**
+     * The date that the settings were last updated in ISO 8601 format.
+     */
+    CreationDate?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * The email address used to send emails from.
+     */
+    FromAddress?: __string;
+    /**
+     * Channel ID. Not used, only for backwards compatibility.
+     */
+    Id?: __string;
+    /**
+     * The ARN of an identity verified with SES.
+     */
+    Identity?: __string;
+    /**
+     * Is this channel archived
+     */
+    IsArchived?: __boolean;
+    /**
+     * Who last updated this entry
+     */
+    LastModifiedBy?: __string;
+    /**
+     * Last date this was updated
+     */
+    LastModifiedDate?: __string;
+    /**
+     * Platform type. Will be "EMAIL"
+     */
+    Platform?: __string;
+    /**
+     * The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
+     */
+    RoleArn?: __string;
+    /**
+     * Version of channel
+     */
+    Version?: __integer;
+  }
   export interface EndpointBatchItem {
     /**
      * The address or token of the endpoint as provided by your push provider (e.g. DeviceToken or RegistrationId).
@@ -874,6 +1271,10 @@ NONE – User receives no messages.
      * Platform credential API key from Google.
      */
     ApiKey?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
   }
   export interface GCMChannelResponse {
     /**
@@ -889,7 +1290,11 @@ NONE – User receives no messages.
      */
     Credential?: __string;
     /**
-     * The unique channel ID.
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * Channel ID. Not used, only for backwards compatibility.
      */
     Id?: __string;
     /**
@@ -913,11 +1318,79 @@ NONE – User receives no messages.
      */
     Version?: __integer;
   }
+  export interface GCMMessage {
+    /**
+     * The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL
+     */
+    Action?: Action;
+    /**
+     * The message body of the notification, the email body or the text message.
+     */
+    Body?: __string;
+    /**
+     * This parameter identifies a group of messages (e.g., with collapse_key: "Updates Available") that can be collapsed, so that only the last message gets sent when delivery can be resumed. This is intended to avoid sending too many of the same messages when the device comes back online or becomes active.
+     */
+    CollapseKey?: __string;
+    /**
+     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     */
+    Data?: MapOf__string;
+    /**
+     * The icon image name of the asset saved in your application.
+     */
+    IconReference?: __string;
+    /**
+     * The URL that points to an image used as the large icon to the notification content view.
+     */
+    ImageIconUrl?: __string;
+    /**
+     * The URL that points to an image used in the push notification.
+     */
+    ImageUrl?: __string;
+    /**
+     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     */
+    RawContent?: __string;
+    /**
+     * This parameter specifies the package name of the application where the registration tokens must match in order to receive the message.
+     */
+    RestrictedPackageName?: __string;
+    /**
+     * Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+     */
+    SilentPush?: __boolean;
+    /**
+     * The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view
+     */
+    SmallImageIconUrl?: __string;
+    /**
+     * Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/
+     */
+    Sound?: __string;
+    /**
+     * Default message substitutions. Can be overridden by individual address substitutions.
+     */
+    Substitutions?: MapOfListOf__string;
+    /**
+     * The message title that displays above the message on the user's device.
+     */
+    Title?: __string;
+    /**
+     * The URL to open in the user's mobile browser. Used if the value for Action is URL.
+     */
+    Url?: __string;
+  }
   export interface GetApnsChannelRequest {
     ApplicationId: __string;
   }
   export interface GetApnsChannelResponse {
     APNSChannelResponse: APNSChannelResponse;
+  }
+  export interface GetApnsSandboxChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface GetApnsSandboxChannelResponse {
+    APNSSandboxChannelResponse: APNSSandboxChannelResponse;
   }
   export interface GetApplicationSettingsRequest {
     ApplicationId: __string;
@@ -965,6 +1438,12 @@ NONE – User receives no messages.
   }
   export interface GetCampaignsResponse {
     CampaignsResponse: CampaignsResponse;
+  }
+  export interface GetEmailChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface GetEmailChannelResponse {
+    EmailChannelResponse: EmailChannelResponse;
   }
   export interface GetEndpointRequest {
     ApplicationId: __string;
@@ -1043,6 +1522,12 @@ NONE – User receives no messages.
   }
   export interface GetSegmentsResponse {
     SegmentsResponse: SegmentsResponse;
+  }
+  export interface GetSmsChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface GetSmsChannelResponse {
+    SMSChannelResponse: SMSChannelResponse;
   }
   export interface ImportJobRequest {
     /**
@@ -1196,17 +1681,21 @@ The job status is FAILED if one or more pieces failed to import.
   export type ListOfTreatmentResource = TreatmentResource[];
   export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
   export type ListOf__string = __string[];
+  export type MapOfAddressConfiguration = {[key: string]: AddressConfiguration};
   export type MapOfAttributeDimension = {[key: string]: AttributeDimension};
   export type MapOfListOf__string = {[key: string]: ListOf__string};
+  export type MapOfMessageResult = {[key: string]: MessageResult};
   export type MapOf__double = {[key: string]: __double};
+  export type MapOf__integer = {[key: string]: __integer};
+  export type MapOf__string = {[key: string]: __string};
   export interface Message {
     /**
      * The action that occurs if the user taps a push notification delivered by the campaign:
-OPEN_APP – Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action.
+OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action.
 
-DEEP_LINK – Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app.
+DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app.
 
-URL – The default mobile browser on the user's device launches and opens a web page at the URL you specify.
+URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify.
      */
     Action?: Action;
     /**
@@ -1217,6 +1706,10 @@ URL – The default mobile browser on the user's device launches and opens a web
      * The URL that points to the icon image for the push notification icon, for example, the app icon.
      */
     ImageIconUrl?: __string;
+    /**
+     * The URL that points to the small icon image for the push notification icon, for example, the app icon.
+     */
+    ImageSmallIconUrl?: __string;
     /**
      * The URL that points to an image used in the push notification.
      */
@@ -1264,10 +1757,65 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     DefaultMessage?: Message;
     /**
+     * The email message configuration.
+     */
+    EmailMessage?: CampaignEmailMessage;
+    /**
      * The message that the campaign delivers to GCM channels. Overrides the default message.
      */
     GCMMessage?: Message;
+    /**
+     * The SMS message configuration.
+     */
+    SMSMessage?: CampaignSmsMessage;
   }
+  export interface MessageRequest {
+    /**
+     * A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value.
+     */
+    Addresses?: MapOfAddressConfiguration;
+    /**
+     * A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+     */
+    Context?: MapOf__string;
+    /**
+     * Message configuration.
+     */
+    MessageConfiguration?: DirectMessageConfiguration;
+  }
+  export interface MessageResponse {
+    /**
+     * Application id of the message.
+     */
+    ApplicationId?: __string;
+    /**
+     * Original request Id for which this message was delivered.
+     */
+    RequestId?: __string;
+    /**
+     * A map containing a multi part response for each address, with the address as the key(Email address, phone number or push token) and the result as the value.
+     */
+    Result?: MapOfMessageResult;
+  }
+  export interface MessageResult {
+    /**
+     * Delivery status of message.
+     */
+    DeliveryStatus?: DeliveryStatus;
+    /**
+     * Downstream service status code.
+     */
+    StatusCode?: __integer;
+    /**
+     * Status message for message delivery.
+     */
+    StatusMessage?: __string;
+    /**
+     * If token was updated as part of delivery. (This is GCM Specific)
+     */
+    UpdatedToken?: __string;
+  }
+  export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL"|string;
   export interface PutEventStreamRequest {
     /**
      * ApplicationId
@@ -1299,12 +1847,86 @@ Valid values: HR_24, DAY_7, DAY_14, DAY_30
     Duration?: Duration;
     /**
      * The recency dimension type:
-ACTIVE – Users who have used your app within the specified duration are included in the segment.
-INACTIVE – Users who have not used your app within the specified duration are included in the segment.
+ACTIVE - Users who have used your app within the specified duration are included in the segment.
+INACTIVE - Users who have not used your app within the specified duration are included in the segment.
      */
     RecencyType?: RecencyType;
   }
   export type RecencyType = "ACTIVE"|"INACTIVE"|string;
+  export interface SMSChannelRequest {
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * Sender identifier of your messages.
+     */
+    SenderId?: __string;
+  }
+  export interface SMSChannelResponse {
+    /**
+     * Application id
+     */
+    ApplicationId?: __string;
+    /**
+     * The date that the settings were last updated in ISO 8601 format.
+     */
+    CreationDate?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * Channel ID. Not used, only for backwards compatibility.
+     */
+    Id?: __string;
+    /**
+     * Is this channel archived
+     */
+    IsArchived?: __boolean;
+    /**
+     * Who last updated this entry
+     */
+    LastModifiedBy?: __string;
+    /**
+     * Last date this was updated
+     */
+    LastModifiedDate?: __string;
+    /**
+     * Platform type. Will be "SMS"
+     */
+    Platform?: __string;
+    /**
+     * Sender identifier of your messages.
+     */
+    SenderId?: __string;
+    /**
+     * The short code registered with the phone provider.
+     */
+    ShortCode?: __string;
+    /**
+     * Version of channel
+     */
+    Version?: __integer;
+  }
+  export interface SMSMessage {
+    /**
+     * The message body of the notification, the email body or the text message.
+     */
+    Body?: __string;
+    /**
+     * Is this a transaction priority message or lower priority.
+     */
+    MessageType?: MessageType;
+    /**
+     * Sender ID of sent message.
+     */
+    SenderId?: __string;
+    /**
+     * Default message substitutions. Can be overridden by individual address substitutions.
+     */
+    Substitutions?: MapOfListOf__string;
+  }
   export interface Schedule {
     /**
      * The scheduled time that the campaign ends in ISO 8601 format.
@@ -1378,6 +2000,10 @@ UTC-11
      */
     AppVersion?: SetDimension;
     /**
+     * The channel criteria for the segment.
+     */
+    Channel?: SetDimension;
+    /**
      * The device type criteria for the segment.
      */
     DeviceType?: SetDimension;
@@ -1417,6 +2043,10 @@ UTC-11
     UserAttributes?: MapOfAttributeDimension;
   }
   export interface SegmentImportResource {
+    /**
+     * Channel type counts
+     */
+    ChannelCounts?: MapOf__integer;
     /**
      * A unique, custom ID assigned to the IAM role that restricts who can assume the role.
      */
@@ -1476,8 +2106,8 @@ Valid values: CSV, JSON
     Name?: __string;
     /**
      * The segment type:
-DIMENSIONAL – A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
-IMPORT – A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
+DIMENSIONAL - A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
+IMPORT - A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
      */
     SegmentType?: SegmentType;
     /**
@@ -1496,11 +2126,18 @@ IMPORT – A static segment built from an imported set of endpoint definitions. 
      */
     NextToken?: __string;
   }
+  export interface SendMessagesRequest {
+    ApplicationId: __string;
+    MessageRequest: MessageRequest;
+  }
+  export interface SendMessagesResponse {
+    MessageResponse: MessageResponse;
+  }
   export interface SetDimension {
     /**
      * The type of dimension:
-INCLUSIVE – Endpoints that match the criteria are included in the segment.
-EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
+INCLUSIVE - Endpoints that match the criteria are included in the segment.
+EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     DimensionType?: DimensionType;
     /**
@@ -1545,6 +2182,13 @@ EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
   export interface UpdateApnsChannelResponse {
     APNSChannelResponse: APNSChannelResponse;
   }
+  export interface UpdateApnsSandboxChannelRequest {
+    APNSSandboxChannelRequest: APNSSandboxChannelRequest;
+    ApplicationId: __string;
+  }
+  export interface UpdateApnsSandboxChannelResponse {
+    APNSSandboxChannelResponse: APNSSandboxChannelResponse;
+  }
   export interface UpdateApplicationSettingsRequest {
     ApplicationId: __string;
     WriteApplicationSettingsRequest: WriteApplicationSettingsRequest;
@@ -1559,6 +2203,13 @@ EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateCampaignResponse {
     CampaignResponse: CampaignResponse;
+  }
+  export interface UpdateEmailChannelRequest {
+    ApplicationId: __string;
+    EmailChannelRequest: EmailChannelRequest;
+  }
+  export interface UpdateEmailChannelResponse {
+    EmailChannelResponse: EmailChannelResponse;
   }
   export interface UpdateEndpointRequest {
     ApplicationId: __string;
@@ -1589,6 +2240,13 @@ EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateSegmentResponse {
     SegmentResponse: SegmentResponse;
+  }
+  export interface UpdateSmsChannelRequest {
+    ApplicationId: __string;
+    SMSChannelRequest: SMSChannelRequest;
+  }
+  export interface UpdateSmsChannelResponse {
+    SMSChannelResponse: SMSChannelResponse;
   }
   export interface WriteApplicationSettingsRequest {
     /**

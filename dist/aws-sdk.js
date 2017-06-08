@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.65.0
+// AWS SDK for JavaScript v2.66.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -53819,6 +53819,10 @@ module.exports={
           "certificateId": {
             "location": "uri",
             "locationName": "certificateId"
+          },
+          "certificatePem": {
+            "location": "header",
+            "locationName": "x-amzn-iot-certificate-pem"
           }
         }
       },
@@ -80946,6 +80950,26 @@ module.exports={
         }
       }
     },
+    "GetCelebrityInfo": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Urls": {
+            "shape": "S1u"
+          },
+          "Name": {}
+        }
+      }
+    },
     "IndexFaces": {
       "input": {
         "type": "structure",
@@ -80973,7 +80997,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "Face": {
-                  "shape": "S1w"
+                  "shape": "S21"
                 },
                 "FaceDetail": {
                   "shape": "S14"
@@ -81026,10 +81050,54 @@ module.exports={
           "Faces": {
             "type": "list",
             "member": {
-              "shape": "S1w"
+              "shape": "S21"
             }
           },
           "NextToken": {}
+        }
+      }
+    },
+    "RecognizeCelebrities": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Image"
+        ],
+        "members": {
+          "Image": {
+            "shape": "S2"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "CelebrityFaces": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Urls": {
+                  "shape": "S1u"
+                },
+                "Name": {},
+                "Id": {},
+                "Face": {
+                  "shape": "Sf"
+                },
+                "MatchConfidence": {
+                  "type": "float"
+                }
+              }
+            }
+          },
+          "UnrecognizedFaces": {
+            "type": "list",
+            "member": {
+              "shape": "Sf"
+            }
+          },
+          "OrientationCorrection": {}
         }
       }
     },
@@ -81056,7 +81124,7 @@ module.exports={
         "members": {
           "SearchedFaceId": {},
           "FaceMatches": {
-            "shape": "S29"
+            "shape": "S2j"
           }
         }
       }
@@ -81091,7 +81159,7 @@ module.exports={
             "type": "float"
           },
           "FaceMatches": {
-            "shape": "S29"
+            "shape": "S2j"
           }
         }
       }
@@ -81328,7 +81396,11 @@ module.exports={
         }
       }
     },
-    "S1w": {
+    "S1u": {
+      "type": "list",
+      "member": {}
+    },
+    "S21": {
       "type": "structure",
       "members": {
         "FaceId": {},
@@ -81342,7 +81414,7 @@ module.exports={
         }
       }
     },
-    "S29": {
+    "S2j": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -81351,7 +81423,7 @@ module.exports={
             "type": "float"
           },
           "Face": {
-            "shape": "S1w"
+            "shape": "S21"
           }
         }
       }
@@ -102197,7 +102269,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.65.0',
+  VERSION: '2.66.0',
 
 
   Signers: {},

@@ -180,11 +180,11 @@ declare class Iot extends Service {
    */
   describeCACertificate(callback?: (err: AWSError, data: Iot.Types.DescribeCACertificateResponse) => void): Request<Iot.Types.DescribeCACertificateResponse, AWSError>;
   /**
-   * Gets information about the specified certificate.
+   * Gets information about the specified certificate. You may specify the certificate using either its ID or PEM.
    */
   describeCertificate(params: Iot.Types.DescribeCertificateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
   /**
-   * Gets information about the specified certificate.
+   * Gets information about the specified certificate. You may specify the certificate using either its ID or PEM.
    */
   describeCertificate(callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
   /**
@@ -1002,6 +1002,10 @@ declare namespace Iot {
      * The ID of the certificate.
      */
     certificateId: CertificateId;
+    /**
+     * The PEM of the certificate.
+     */
+    certificatePem?: CertificatePem;
   }
   export interface DescribeCertificateResponse {
     /**

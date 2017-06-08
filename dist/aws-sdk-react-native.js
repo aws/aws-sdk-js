@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.65.0',
+	  VERSION: '2.66.0',
 
 	  /**
 	   * @api private
@@ -107338,6 +107338,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"certificateId": {
 							"location": "uri",
 							"locationName": "certificateId"
+						},
+						"certificatePem": {
+							"location": "header",
+							"locationName": "x-amzn-iot-certificate-pem"
 						}
 					}
 				},
@@ -121987,7 +121991,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CampaignResponse": {
-							"shape": "Sg"
+							"shape": "Sj"
 						}
 					},
 					"required": [
@@ -122036,7 +122040,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ImportJobResponse": {
-							"shape": "Sp"
+							"shape": "Ss"
 						}
 					},
 					"required": [
@@ -122058,7 +122062,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "application-id"
 						},
 						"WriteSegmentRequest": {
-							"shape": "Su"
+							"shape": "Sx"
 						}
 					},
 					"required": [
@@ -122071,7 +122075,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SegmentResponse": {
-							"shape": "S18"
+							"shape": "S1b"
 						}
 					},
 					"required": [
@@ -122102,13 +122106,44 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"APNSChannelResponse": {
-							"shape": "S1d"
+							"shape": "S1h"
 						}
 					},
 					"required": [
 						"APNSChannelResponse"
 					],
 					"payload": "APNSChannelResponse"
+				}
+			},
+			"DeleteApnsSandboxChannel": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/v1/apps/{application-id}/channels/apns_sandbox",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						}
+					},
+					"required": [
+						"ApplicationId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"APNSSandboxChannelResponse": {
+							"shape": "S1k"
+						}
+					},
+					"required": [
+						"APNSSandboxChannelResponse"
+					],
+					"payload": "APNSSandboxChannelResponse"
 				}
 			},
 			"DeleteCampaign": {
@@ -122138,13 +122173,44 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CampaignResponse": {
-							"shape": "Sg"
+							"shape": "Sj"
 						}
 					},
 					"required": [
 						"CampaignResponse"
 					],
 					"payload": "CampaignResponse"
+				}
+			},
+			"DeleteEmailChannel": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/v1/apps/{application-id}/channels/email",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						}
+					},
+					"required": [
+						"ApplicationId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"EmailChannelResponse": {
+							"shape": "S1p"
+						}
+					},
+					"required": [
+						"EmailChannelResponse"
+					],
+					"payload": "EmailChannelResponse"
 				}
 			},
 			"DeleteEventStream": {
@@ -122169,7 +122235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"EventStream": {
-							"shape": "S1i"
+							"shape": "S1s"
 						}
 					},
 					"required": [
@@ -122200,7 +122266,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"GCMChannelResponse": {
-							"shape": "S1l"
+							"shape": "S1v"
 						}
 					},
 					"required": [
@@ -122236,13 +122302,44 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SegmentResponse": {
-							"shape": "S18"
+							"shape": "S1b"
 						}
 					},
 					"required": [
 						"SegmentResponse"
 					],
 					"payload": "SegmentResponse"
+				}
+			},
+			"DeleteSmsChannel": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/v1/apps/{application-id}/channels/sms",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						}
+					},
+					"required": [
+						"ApplicationId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"SMSChannelResponse": {
+							"shape": "S20"
+						}
+					},
+					"required": [
+						"SMSChannelResponse"
+					],
+					"payload": "SMSChannelResponse"
 				}
 			},
 			"GetApnsChannel": {
@@ -122267,13 +122364,44 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"APNSChannelResponse": {
-							"shape": "S1d"
+							"shape": "S1h"
 						}
 					},
 					"required": [
 						"APNSChannelResponse"
 					],
 					"payload": "APNSChannelResponse"
+				}
+			},
+			"GetApnsSandboxChannel": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/v1/apps/{application-id}/channels/apns_sandbox",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						}
+					},
+					"required": [
+						"ApplicationId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"APNSSandboxChannelResponse": {
+							"shape": "S1k"
+						}
+					},
+					"required": [
+						"APNSSandboxChannelResponse"
+					],
+					"payload": "APNSSandboxChannelResponse"
 				}
 			},
 			"GetApplicationSettings": {
@@ -122298,7 +122426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ApplicationSettingsResource": {
-							"shape": "S1s"
+							"shape": "S27"
 						}
 					},
 					"required": [
@@ -122334,7 +122462,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CampaignResponse": {
-							"shape": "Sg"
+							"shape": "Sj"
 						}
 					},
 					"required": [
@@ -122450,7 +122578,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CampaignResponse": {
-							"shape": "Sg"
+							"shape": "Sj"
 						}
 					},
 					"required": [
@@ -122494,7 +122622,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CampaignsResponse": {
-							"shape": "S24"
+							"shape": "S2j"
 						}
 					},
 					"required": [
@@ -122533,13 +122661,44 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CampaignsResponse": {
-							"shape": "S24"
+							"shape": "S2j"
 						}
 					},
 					"required": [
 						"CampaignsResponse"
 					],
 					"payload": "CampaignsResponse"
+				}
+			},
+			"GetEmailChannel": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/v1/apps/{application-id}/channels/email",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						}
+					},
+					"required": [
+						"ApplicationId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"EmailChannelResponse": {
+							"shape": "S1p"
+						}
+					},
+					"required": [
+						"EmailChannelResponse"
+					],
+					"payload": "EmailChannelResponse"
 				}
 			},
 			"GetEndpoint": {
@@ -122574,27 +122733,27 @@ return /******/ (function(modules) { // webpackBootstrap
 								"Address": {},
 								"ApplicationId": {},
 								"Attributes": {
-									"shape": "S2b"
+									"shape": "S2s"
 								},
 								"ChannelType": {},
 								"CohortId": {},
 								"CreationDate": {},
 								"Demographic": {
-									"shape": "S2d"
+									"shape": "S2u"
 								},
 								"EffectiveDate": {},
 								"EndpointStatus": {},
 								"Id": {},
 								"Location": {
-									"shape": "S2e"
+									"shape": "S2v"
 								},
 								"Metrics": {
-									"shape": "S2g"
+									"shape": "S2x"
 								},
 								"OptOut": {},
 								"RequestId": {},
 								"User": {
-									"shape": "S2h"
+									"shape": "S2y"
 								},
 								"ShardId": {}
 							}
@@ -122628,7 +122787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"EventStream": {
-							"shape": "S1i"
+							"shape": "S1s"
 						}
 					},
 					"required": [
@@ -122659,7 +122818,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"GCMChannelResponse": {
-							"shape": "S1l"
+							"shape": "S1v"
 						}
 					},
 					"required": [
@@ -122695,7 +122854,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ImportJobResponse": {
-							"shape": "Sp"
+							"shape": "Ss"
 						}
 					},
 					"required": [
@@ -122734,7 +122893,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ImportJobsResponse": {
-							"shape": "S2q"
+							"shape": "S37"
 						}
 					},
 					"required": [
@@ -122770,7 +122929,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SegmentResponse": {
-							"shape": "S18"
+							"shape": "S1b"
 						}
 					},
 					"required": [
@@ -122814,7 +122973,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ImportJobsResponse": {
-							"shape": "S2q"
+							"shape": "S37"
 						}
 					},
 					"required": [
@@ -122855,7 +123014,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SegmentResponse": {
-							"shape": "S18"
+							"shape": "S1b"
 						}
 					},
 					"required": [
@@ -122899,7 +123058,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SegmentsResponse": {
-							"shape": "S30"
+							"shape": "S3h"
 						}
 					},
 					"required": [
@@ -122938,13 +123097,44 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SegmentsResponse": {
-							"shape": "S30"
+							"shape": "S3h"
 						}
 					},
 					"required": [
 						"SegmentsResponse"
 					],
 					"payload": "SegmentsResponse"
+				}
+			},
+			"GetSmsChannel": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/v1/apps/{application-id}/channels/sms",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						}
+					},
+					"required": [
+						"ApplicationId"
+					]
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"SMSChannelResponse": {
+							"shape": "S20"
+						}
+					},
+					"required": [
+						"SMSChannelResponse"
+					],
+					"payload": "SMSChannelResponse"
 				}
 			},
 			"PutEventStream": {
@@ -122978,13 +123168,186 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"EventStream": {
-							"shape": "S1i"
+							"shape": "S1s"
 						}
 					},
 					"required": [
 						"EventStream"
 					],
 					"payload": "EventStream"
+				}
+			},
+			"SendMessages": {
+				"http": {
+					"requestUri": "/v1/apps/{application-id}/messages",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						},
+						"MessageRequest": {
+							"type": "structure",
+							"members": {
+								"Addresses": {
+									"type": "map",
+									"key": {},
+									"value": {
+										"type": "structure",
+										"members": {
+											"BodyOverride": {},
+											"ChannelType": {},
+											"Context": {
+												"shape": "S3u"
+											},
+											"RawContent": {},
+											"Substitutions": {
+												"shape": "S2s"
+											},
+											"TitleOverride": {}
+										}
+									}
+								},
+								"Context": {
+									"shape": "S3u"
+								},
+								"MessageConfiguration": {
+									"type": "structure",
+									"members": {
+										"APNSMessage": {
+											"type": "structure",
+											"members": {
+												"Action": {},
+												"Badge": {
+													"type": "integer"
+												},
+												"Body": {},
+												"Category": {},
+												"Data": {
+													"shape": "S3u"
+												},
+												"MediaUrl": {},
+												"RawContent": {},
+												"SilentPush": {
+													"type": "boolean"
+												},
+												"Sound": {},
+												"Substitutions": {
+													"shape": "S2s"
+												},
+												"ThreadId": {},
+												"Title": {},
+												"Url": {}
+											}
+										},
+										"DefaultMessage": {
+											"type": "structure",
+											"members": {
+												"Body": {},
+												"Substitutions": {
+													"shape": "S2s"
+												}
+											}
+										},
+										"DefaultPushNotificationMessage": {
+											"type": "structure",
+											"members": {
+												"Action": {},
+												"Body": {},
+												"Data": {
+													"shape": "S3u"
+												},
+												"SilentPush": {
+													"type": "boolean"
+												},
+												"Substitutions": {
+													"shape": "S2s"
+												},
+												"Title": {},
+												"Url": {}
+											}
+										},
+										"GCMMessage": {
+											"type": "structure",
+											"members": {
+												"Action": {},
+												"Body": {},
+												"CollapseKey": {},
+												"Data": {
+													"shape": "S3u"
+												},
+												"IconReference": {},
+												"ImageIconUrl": {},
+												"ImageUrl": {},
+												"RawContent": {},
+												"RestrictedPackageName": {},
+												"SilentPush": {
+													"type": "boolean"
+												},
+												"SmallImageIconUrl": {},
+												"Sound": {},
+												"Substitutions": {
+													"shape": "S2s"
+												},
+												"Title": {},
+												"Url": {}
+											}
+										},
+										"SMSMessage": {
+											"type": "structure",
+											"members": {
+												"Body": {},
+												"MessageType": {},
+												"SenderId": {},
+												"Substitutions": {
+													"shape": "S2s"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"required": [
+						"ApplicationId",
+						"MessageRequest"
+					],
+					"payload": "MessageRequest"
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"MessageResponse": {
+							"type": "structure",
+							"members": {
+								"ApplicationId": {},
+								"RequestId": {},
+								"Result": {
+									"type": "map",
+									"key": {},
+									"value": {
+										"type": "structure",
+										"members": {
+											"DeliveryStatus": {},
+											"StatusCode": {
+												"type": "integer"
+											},
+											"StatusMessage": {},
+											"UpdatedToken": {}
+										}
+									}
+								}
+							}
+						}
+					},
+					"required": [
+						"MessageResponse"
+					],
+					"payload": "MessageResponse"
 				}
 			},
 			"UpdateApnsChannel": {
@@ -123000,6 +123363,9 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "structure",
 							"members": {
 								"Certificate": {},
+								"Enabled": {
+									"type": "boolean"
+								},
 								"PrivateKey": {}
 							}
 						},
@@ -123018,13 +123384,56 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"APNSChannelResponse": {
-							"shape": "S1d"
+							"shape": "S1h"
 						}
 					},
 					"required": [
 						"APNSChannelResponse"
 					],
 					"payload": "APNSChannelResponse"
+				}
+			},
+			"UpdateApnsSandboxChannel": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/v1/apps/{application-id}/channels/apns_sandbox",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"APNSSandboxChannelRequest": {
+							"type": "structure",
+							"members": {
+								"Certificate": {},
+								"Enabled": {
+									"type": "boolean"
+								},
+								"PrivateKey": {}
+							}
+						},
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						}
+					},
+					"required": [
+						"ApplicationId",
+						"APNSSandboxChannelRequest"
+					],
+					"payload": "APNSSandboxChannelRequest"
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"APNSSandboxChannelResponse": {
+							"shape": "S1k"
+						}
+					},
+					"required": [
+						"APNSSandboxChannelResponse"
+					],
+					"payload": "APNSSandboxChannelResponse"
 				}
 			},
 			"UpdateApplicationSettings": {
@@ -123044,10 +123453,10 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "structure",
 							"members": {
 								"Limits": {
-									"shape": "Se"
+									"shape": "Sh"
 								},
 								"QuietTime": {
-									"shape": "Sc"
+									"shape": "Sf"
 								}
 							}
 						}
@@ -123062,7 +123471,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ApplicationSettingsResource": {
-							"shape": "S1s"
+							"shape": "S27"
 						}
 					},
 					"required": [
@@ -123103,13 +123512,57 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CampaignResponse": {
-							"shape": "Sg"
+							"shape": "Sj"
 						}
 					},
 					"required": [
 						"CampaignResponse"
 					],
 					"payload": "CampaignResponse"
+				}
+			},
+			"UpdateEmailChannel": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/v1/apps/{application-id}/channels/email",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						},
+						"EmailChannelRequest": {
+							"type": "structure",
+							"members": {
+								"Enabled": {
+									"type": "boolean"
+								},
+								"FromAddress": {},
+								"Identity": {},
+								"RoleArn": {}
+							}
+						}
+					},
+					"required": [
+						"ApplicationId",
+						"EmailChannelRequest"
+					],
+					"payload": "EmailChannelRequest"
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"EmailChannelResponse": {
+							"shape": "S1p"
+						}
+					},
+					"required": [
+						"EmailChannelResponse"
+					],
+					"payload": "EmailChannelResponse"
 				}
 			},
 			"UpdateEndpoint": {
@@ -123134,24 +123587,24 @@ return /******/ (function(modules) { // webpackBootstrap
 							"members": {
 								"Address": {},
 								"Attributes": {
-									"shape": "S2b"
+									"shape": "S2s"
 								},
 								"ChannelType": {},
 								"Demographic": {
-									"shape": "S2d"
+									"shape": "S2u"
 								},
 								"EffectiveDate": {},
 								"EndpointStatus": {},
 								"Location": {
-									"shape": "S2e"
+									"shape": "S2v"
 								},
 								"Metrics": {
-									"shape": "S2g"
+									"shape": "S2x"
 								},
 								"OptOut": {},
 								"RequestId": {},
 								"User": {
-									"shape": "S2h"
+									"shape": "S2y"
 								}
 							}
 						}
@@ -123167,7 +123620,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"MessageBody": {
-							"shape": "S3i"
+							"shape": "S4n"
 						}
 					},
 					"required": [
@@ -123199,25 +123652,25 @@ return /******/ (function(modules) { // webpackBootstrap
 										"members": {
 											"Address": {},
 											"Attributes": {
-												"shape": "S2b"
+												"shape": "S2s"
 											},
 											"ChannelType": {},
 											"Demographic": {
-												"shape": "S2d"
+												"shape": "S2u"
 											},
 											"EffectiveDate": {},
 											"EndpointStatus": {},
 											"Id": {},
 											"Location": {
-												"shape": "S2e"
+												"shape": "S2v"
 											},
 											"Metrics": {
-												"shape": "S2g"
+												"shape": "S2x"
 											},
 											"OptOut": {},
 											"RequestId": {},
 											"User": {
-												"shape": "S2h"
+												"shape": "S2y"
 											}
 										}
 									}
@@ -123235,7 +123688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"MessageBody": {
-							"shape": "S3i"
+							"shape": "S4n"
 						}
 					},
 					"required": [
@@ -123260,7 +123713,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"GCMChannelRequest": {
 							"type": "structure",
 							"members": {
-								"ApiKey": {}
+								"ApiKey": {},
+								"Enabled": {
+									"type": "boolean"
+								}
 							}
 						}
 					},
@@ -123274,7 +123730,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"GCMChannelResponse": {
-							"shape": "S1l"
+							"shape": "S1v"
 						}
 					},
 					"required": [
@@ -123301,7 +123757,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "segment-id"
 						},
 						"WriteSegmentRequest": {
-							"shape": "Su"
+							"shape": "Sx"
 						}
 					},
 					"required": [
@@ -123315,13 +123771,55 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SegmentResponse": {
-							"shape": "S18"
+							"shape": "S1b"
 						}
 					},
 					"required": [
 						"SegmentResponse"
 					],
 					"payload": "SegmentResponse"
+				}
+			},
+			"UpdateSmsChannel": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/v1/apps/{application-id}/channels/sms",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"ApplicationId": {
+							"location": "uri",
+							"locationName": "application-id"
+						},
+						"SMSChannelRequest": {
+							"type": "structure",
+							"members": {
+								"Enabled": {
+									"type": "boolean"
+								},
+								"SenderId": {}
+							}
+						}
+					},
+					"required": [
+						"ApplicationId",
+						"SMSChannelRequest"
+					],
+					"payload": "SMSChannelRequest"
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"SMSChannelResponse": {
+							"shape": "S20"
+						}
+					},
+					"required": [
+						"SMSChannelResponse"
+					],
+					"payload": "SMSChannelResponse"
 				}
 			}
 		},
@@ -123338,7 +123836,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"shape": "S6"
 								},
 								"Schedule": {
-									"shape": "Sa"
+									"shape": "Sd"
 								},
 								"SizePercent": {
 									"type": "integer"
@@ -123356,14 +123854,14 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "boolean"
 					},
 					"Limits": {
-						"shape": "Se"
+						"shape": "Sh"
 					},
 					"MessageConfiguration": {
 						"shape": "S6"
 					},
 					"Name": {},
 					"Schedule": {
-						"shape": "Sa"
+						"shape": "Sd"
 					},
 					"SegmentId": {},
 					"SegmentVersion": {
@@ -123382,8 +123880,24 @@ return /******/ (function(modules) { // webpackBootstrap
 					"DefaultMessage": {
 						"shape": "S7"
 					},
+					"EmailMessage": {
+						"type": "structure",
+						"members": {
+							"Body": {},
+							"HtmlBody": {},
+							"Title": {}
+						}
+					},
 					"GCMMessage": {
 						"shape": "S7"
+					},
+					"SMSMessage": {
+						"type": "structure",
+						"members": {
+							"Body": {},
+							"MessageType": {},
+							"SenderId": {}
+						}
 					}
 				}
 			},
@@ -123393,6 +123907,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Action": {},
 					"Body": {},
 					"ImageIconUrl": {},
+					"ImageSmallIconUrl": {},
 					"ImageUrl": {},
 					"JsonBody": {},
 					"MediaUrl": {},
@@ -123403,7 +123918,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Url": {}
 				}
 			},
-			"Sa": {
+			"Sd": {
 				"type": "structure",
 				"members": {
 					"EndTime": {},
@@ -123412,20 +123927,20 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "boolean"
 					},
 					"QuietTime": {
-						"shape": "Sc"
+						"shape": "Sf"
 					},
 					"StartTime": {},
 					"Timezone": {}
 				}
 			},
-			"Sc": {
+			"Sf": {
 				"type": "structure",
 				"members": {
 					"End": {},
 					"Start": {}
 				}
 			},
-			"Se": {
+			"Sh": {
 				"type": "structure",
 				"members": {
 					"Daily": {
@@ -123436,7 +123951,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sg": {
+			"Sj": {
 				"type": "structure",
 				"members": {
 					"AdditionalTreatments": {
@@ -123449,13 +123964,13 @@ return /******/ (function(modules) { // webpackBootstrap
 									"shape": "S6"
 								},
 								"Schedule": {
-									"shape": "Sa"
+									"shape": "Sd"
 								},
 								"SizePercent": {
 									"type": "integer"
 								},
 								"State": {
-									"shape": "Sj"
+									"shape": "Sm"
 								},
 								"TreatmentDescription": {},
 								"TreatmentName": {}
@@ -123465,7 +123980,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"ApplicationId": {},
 					"CreationDate": {},
 					"DefaultState": {
-						"shape": "Sj"
+						"shape": "Sm"
 					},
 					"Description": {},
 					"HoldoutPercent": {
@@ -123477,21 +123992,21 @@ return /******/ (function(modules) { // webpackBootstrap
 					},
 					"LastModifiedDate": {},
 					"Limits": {
-						"shape": "Se"
+						"shape": "Sh"
 					},
 					"MessageConfiguration": {
 						"shape": "S6"
 					},
 					"Name": {},
 					"Schedule": {
-						"shape": "Sa"
+						"shape": "Sd"
 					},
 					"SegmentId": {},
 					"SegmentVersion": {
 						"type": "integer"
 					},
 					"State": {
-						"shape": "Sj"
+						"shape": "Sm"
 					},
 					"TreatmentDescription": {},
 					"TreatmentName": {},
@@ -123500,13 +124015,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sj": {
+			"Sm": {
 				"type": "structure",
 				"members": {
 					"CampaignStatus": {}
 				}
 			},
-			"Sp": {
+			"Ss": {
 				"type": "structure",
 				"members": {
 					"ApplicationId": {},
@@ -123536,7 +124051,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "integer"
 					},
 					"Failures": {
-						"shape": "Sr"
+						"shape": "Su"
 					},
 					"Id": {},
 					"JobStatus": {},
@@ -123552,24 +124067,24 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Type": {}
 				}
 			},
-			"Sr": {
+			"Su": {
 				"type": "list",
 				"member": {}
 			},
-			"Su": {
+			"Sx": {
 				"type": "structure",
 				"members": {
 					"Dimensions": {
-						"shape": "Sv"
+						"shape": "Sy"
 					},
 					"Name": {}
 				}
 			},
-			"Sv": {
+			"Sy": {
 				"type": "structure",
 				"members": {
 					"Attributes": {
-						"shape": "Sw"
+						"shape": "Sz"
 					},
 					"Behavior": {
 						"type": "structure",
@@ -123587,19 +124102,22 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "structure",
 						"members": {
 							"AppVersion": {
-								"shape": "S14"
+								"shape": "S17"
+							},
+							"Channel": {
+								"shape": "S17"
 							},
 							"DeviceType": {
-								"shape": "S14"
+								"shape": "S17"
 							},
 							"Make": {
-								"shape": "S14"
+								"shape": "S17"
 							},
 							"Model": {
-								"shape": "S14"
+								"shape": "S17"
 							},
 							"Platform": {
-								"shape": "S14"
+								"shape": "S17"
 							}
 						}
 					},
@@ -123607,16 +124125,16 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "structure",
 						"members": {
 							"Country": {
-								"shape": "S14"
+								"shape": "S17"
 							}
 						}
 					},
 					"UserAttributes": {
-						"shape": "Sw"
+						"shape": "Sz"
 					}
 				}
 			},
-			"Sw": {
+			"Sz": {
 				"type": "map",
 				"key": {},
 				"value": {
@@ -123624,32 +124142,39 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"AttributeType": {},
 						"Values": {
-							"shape": "Sr"
+							"shape": "Su"
 						}
 					}
 				}
 			},
-			"S14": {
+			"S17": {
 				"type": "structure",
 				"members": {
 					"DimensionType": {},
 					"Values": {
-						"shape": "Sr"
+						"shape": "Su"
 					}
 				}
 			},
-			"S18": {
+			"S1b": {
 				"type": "structure",
 				"members": {
 					"ApplicationId": {},
 					"CreationDate": {},
 					"Dimensions": {
-						"shape": "Sv"
+						"shape": "Sy"
 					},
 					"Id": {},
 					"ImportDefinition": {
 						"type": "structure",
 						"members": {
+							"ChannelCounts": {
+								"type": "map",
+								"key": {},
+								"value": {
+									"type": "integer"
+								}
+							},
 							"ExternalId": {},
 							"Format": {},
 							"RoleArn": {},
@@ -123667,11 +124192,14 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S1d": {
+			"S1h": {
 				"type": "structure",
 				"members": {
 					"ApplicationId": {},
 					"CreationDate": {},
+					"Enabled": {
+						"type": "boolean"
+					},
 					"Id": {},
 					"IsArchived": {
 						"type": "boolean"
@@ -123684,7 +124212,50 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S1i": {
+			"S1k": {
+				"type": "structure",
+				"members": {
+					"ApplicationId": {},
+					"CreationDate": {},
+					"Enabled": {
+						"type": "boolean"
+					},
+					"Id": {},
+					"IsArchived": {
+						"type": "boolean"
+					},
+					"LastModifiedBy": {},
+					"LastModifiedDate": {},
+					"Platform": {},
+					"Version": {
+						"type": "integer"
+					}
+				}
+			},
+			"S1p": {
+				"type": "structure",
+				"members": {
+					"ApplicationId": {},
+					"CreationDate": {},
+					"Enabled": {
+						"type": "boolean"
+					},
+					"FromAddress": {},
+					"Id": {},
+					"Identity": {},
+					"IsArchived": {
+						"type": "boolean"
+					},
+					"LastModifiedBy": {},
+					"LastModifiedDate": {},
+					"Platform": {},
+					"RoleArn": {},
+					"Version": {
+						"type": "integer"
+					}
+				}
+			},
+			"S1s": {
 				"type": "structure",
 				"members": {
 					"ApplicationId": {},
@@ -123695,12 +124266,15 @@ return /******/ (function(modules) { // webpackBootstrap
 					"RoleArn": {}
 				}
 			},
-			"S1l": {
+			"S1v": {
 				"type": "structure",
 				"members": {
 					"ApplicationId": {},
 					"CreationDate": {},
 					"Credential": {},
+					"Enabled": {
+						"type": "boolean"
+					},
 					"Id": {},
 					"IsArchived": {
 						"type": "boolean"
@@ -123713,39 +124287,61 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S1s": {
+			"S20": {
+				"type": "structure",
+				"members": {
+					"ApplicationId": {},
+					"CreationDate": {},
+					"Enabled": {
+						"type": "boolean"
+					},
+					"Id": {},
+					"IsArchived": {
+						"type": "boolean"
+					},
+					"LastModifiedBy": {},
+					"LastModifiedDate": {},
+					"Platform": {},
+					"SenderId": {},
+					"ShortCode": {},
+					"Version": {
+						"type": "integer"
+					}
+				}
+			},
+			"S27": {
 				"type": "structure",
 				"members": {
 					"ApplicationId": {},
 					"LastModifiedDate": {},
 					"Limits": {
-						"shape": "Se"
+						"shape": "Sh"
 					},
 					"QuietTime": {
-						"shape": "Sc"
+						"shape": "Sf"
 					}
 				}
 			},
-			"S24": {
+			"S2j": {
 				"type": "structure",
 				"members": {
 					"Item": {
 						"type": "list",
 						"member": {
-							"shape": "Sg"
+							"shape": "Sj"
 						}
 					},
 					"NextToken": {}
 				}
 			},
-			"S2b": {
+			"S2s": {
 				"type": "map",
 				"key": {},
 				"value": {
-					"shape": "Sr"
+					"shape": "Su"
 				}
 			},
-			"S2d": {
+			"S2u": {
 				"type": "structure",
 				"members": {
 					"AppVersion": {},
@@ -123758,7 +124354,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Timezone": {}
 				}
 			},
-			"S2e": {
+			"S2v": {
 				"type": "structure",
 				"members": {
 					"City": {},
@@ -123773,47 +124369,52 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Region": {}
 				}
 			},
-			"S2g": {
+			"S2x": {
 				"type": "map",
 				"key": {},
 				"value": {
 					"type": "double"
 				}
 			},
-			"S2h": {
+			"S2y": {
 				"type": "structure",
 				"members": {
 					"UserAttributes": {
-						"shape": "S2b"
+						"shape": "S2s"
 					},
 					"UserId": {}
 				}
 			},
-			"S2q": {
+			"S37": {
 				"type": "structure",
 				"members": {
 					"Item": {
 						"type": "list",
 						"member": {
-							"shape": "Sp"
+							"shape": "Ss"
 						}
 					},
 					"NextToken": {}
 				}
 			},
-			"S30": {
+			"S3h": {
 				"type": "structure",
 				"members": {
 					"Item": {
 						"type": "list",
 						"member": {
-							"shape": "S18"
+							"shape": "S1b"
 						}
 					},
 					"NextToken": {}
 				}
 			},
-			"S3i": {
+			"S3u": {
+				"type": "map",
+				"key": {},
+				"value": {}
+			},
+			"S4n": {
 				"type": "structure",
 				"members": {
 					"Message": {},
@@ -140107,6 +140708,26 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"GetCelebrityInfo": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"Id"
+					],
+					"members": {
+						"Id": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Urls": {
+							"shape": "S1u"
+						},
+						"Name": {}
+					}
+				}
+			},
 			"IndexFaces": {
 				"input": {
 					"type": "structure",
@@ -140134,7 +140755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"type": "structure",
 								"members": {
 									"Face": {
-										"shape": "S1w"
+										"shape": "S21"
 									},
 									"FaceDetail": {
 										"shape": "S14"
@@ -140187,10 +140808,54 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Faces": {
 							"type": "list",
 							"member": {
-								"shape": "S1w"
+								"shape": "S21"
 							}
 						},
 						"NextToken": {}
+					}
+				}
+			},
+			"RecognizeCelebrities": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"Image"
+					],
+					"members": {
+						"Image": {
+							"shape": "S2"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"CelebrityFaces": {
+							"type": "list",
+							"member": {
+								"type": "structure",
+								"members": {
+									"Urls": {
+										"shape": "S1u"
+									},
+									"Name": {},
+									"Id": {},
+									"Face": {
+										"shape": "Sf"
+									},
+									"MatchConfidence": {
+										"type": "float"
+									}
+								}
+							}
+						},
+						"UnrecognizedFaces": {
+							"type": "list",
+							"member": {
+								"shape": "Sf"
+							}
+						},
+						"OrientationCorrection": {}
 					}
 				}
 			},
@@ -140217,7 +140882,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"SearchedFaceId": {},
 						"FaceMatches": {
-							"shape": "S29"
+							"shape": "S2j"
 						}
 					}
 				}
@@ -140252,7 +140917,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "float"
 						},
 						"FaceMatches": {
-							"shape": "S29"
+							"shape": "S2j"
 						}
 					}
 				}
@@ -140489,7 +141154,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S1w": {
+			"S1u": {
+				"type": "list",
+				"member": {}
+			},
+			"S21": {
 				"type": "structure",
 				"members": {
 					"FaceId": {},
@@ -140503,7 +141172,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S29": {
+			"S2j": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -140512,7 +141181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "float"
 						},
 						"Face": {
-							"shape": "S1w"
+							"shape": "S21"
 						}
 					}
 				}
