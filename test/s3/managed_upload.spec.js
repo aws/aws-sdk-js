@@ -65,6 +65,32 @@
         }
       });
     };
+    it('defaults to using sigv4', function() {
+      var upload = new AWS.S3.ManagedUpload({
+        params: {
+          Body: 'body'
+        }
+      });
+      expect(upload.service.getSignatureVersion()).to.eql('v4');
+    });
+    t('uses sigv4 if customer supplies a configured S3 client', function() {
+      var upload = new AWS.S3.ManagedUpload({
+        params: {
+          Body: 'body'
+        },
+        service: new AWS.S3({signatureVersion: 'v4'})
+      });
+      expect(upload.service.getSignatureVersion()).to.eql('v4');
+    });
+    it('uses sigv2 if customer supplies a configured S3 client', function() {
+      var upload = new AWS.S3.ManagedUpload({
+        params: {
+          Body: 'body'
+        },
+        service: new AWS.S3({signatureVersion: 'v2'})
+      });
+      expect(upload.service.getSignatureVersion()).to.eql('s3');
+    });
     return describe('send', function() {
       it('default callback throws', function() {
         helpers.mockResponses([
