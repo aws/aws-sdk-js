@@ -128,6 +128,178 @@
         return expect(s3.bucketRegionCache).to.eql({});
       });
     });
+    describe('validateBucketName', function() {
+      describe('will not throw an error when', function() {
+        it('using sigv4 and the "Bucket" parameter does not contain forward slashes', function(done) {
+          helpers.mockResponses([
+            {
+              data: {
+                ETag: 'ETAG'
+              }
+            }
+          ]);
+          var s3 = new AWS.S3({signatureVersion: 'v4'});
+          s3.putObject({Bucket: 'foo', Key: 'bar/baz', Body: 'test'}, function(err, data) {
+            expect(null).to.eql(null);
+            expect(data).to.eql({ETag: 'ETAG'});
+            done();
+          });
+        });
+        it('using sigv2 and the "Bucket" parameter does not contain forward slashes', function(done) {
+          helpers.mockResponses([
+            {
+              data: {
+                ETag: 'ETAG'
+              }
+            }
+          ]);
+          var s3 = new AWS.S3({signatureVersion: 'v2'});
+          s3.putObject({Bucket: 'foo', Key: 'bar/baz', Body: 'test'}, function(err, data) {
+            expect(null).to.eql(null);
+            expect(data).to.eql({ETag: 'ETAG'});
+            done();
+          });
+        });
+        it('using sigv2 and the "Bucket" parameter contains forward slashes', function(done) {
+          helpers.mockResponses([
+            {
+              data: {
+                ETag: 'ETAG'
+              }
+            }
+          ]);
+          var s3 = new AWS.S3({signatureVersion: 'v2'});
+          s3.putObject({Bucket: 'foo/bar', Key: 'baz', Body: 'test'}, function(err, data) {
+            expect(null).to.eql(null);
+            expect(data).to.eql({ETag: 'ETAG'});
+            done();
+          });
+        });
+        it('using sigv4 and the "Bucket" parameter does not exist', function(done) {
+          helpers.mockResponses([
+            {
+              data: {
+                Buckets: []
+              }
+            }
+          ]);
+          var s3 = new AWS.S3({signatureVersion: 'v4'});
+          s3.listBuckets(function(err, data) {
+            expect(null).to.eql(null);
+            expect(data).to.eql({Buckets: []});
+            done();
+          });
+        });
+        it('using sigv2 and the "Bucket" parameter does not exist', function(done) {
+          helpers.mockResponses([
+            {
+              data: {
+                Buckets: []
+              }
+            }
+          ]);
+          var s3 = new AWS.S3({signatureVersion: 'v2'});
+          s3.listBuckets(function(err, data) {
+            expect(null).to.eql(null);
+            expect(data).to.eql({Buckets: []});
+            done();
+          });
+        });
+      });
+      describe('will throw an error when', function() {
+        it('using sigv4 and the "Bucket" parameter contains forward slashes', function(done) {
+          var s3 = new AWS.S3({signatureVersion: 'v4'});
+          s3.putObject({Bucket: 'foo/bar', Key: 'baz', Body: 'test'}, function(err, data) {
+            expect(err.code).to.eql('InvalidBucket');
+            done();
+          });
+        });
+      });
+    });
+    describe('getSignatureVersion', function() {
+      describe('when using presigned requests', function() {
+        var req;
+        req = null;
+        beforeEach(function(done) {
+          req = request('mock');
+          helpers.spyOn(req, 'isPresigned').andReturn(true);
+          done();
+        });
+        describe('will return "s3" when', function() {
+          it('user does not specify a signatureVersion for a region that supports v2', function(done) {
+            s3 = new AWS.S3({
+              region: 'us-east-1'
+            });
+            expect(s3.getSignatureVersion(req)).to.equal('s3');
+            done();
+          });
+          it('user specifies a signatureVersion of s3', function(done) {
+            s3 = new AWS.S3({
+              signatureVersion: 's3'
+            });
+            expect(s3.getSignatureVersion(req)).to.equal('s3');
+            done();
+          });
+          it('user specifies a signatureVersion of v2', function(done) {
+            s3 = new AWS.S3({
+              signatureVersion: 'v2'
+            });
+            expect(s3.getSignatureVersion(req)).to.equal('s3');
+            done();
+          });
+        });
+        describe('will return "v4" when', function() {
+          it('user does not specify a signatureVersion for a region that supports only v4', function(done) {
+            s3 = new AWS.S3({
+              region: 'eu-central-1'
+            });
+            expect(s3.getSignatureVersion(req)).to.equal('v4');
+            done();
+          });
+          it('user specifies a signatureVersion of v4', function(done) {
+            s3 = new AWS.S3({
+              signatureVersion: 'v4'
+            });
+            expect(s3.getSignatureVersion(req)).to.equal('v4');
+            done();
+          });
+        });
+      });
+      describe('when not using presigned requests', function() {
+        describe('will return "s3" when', function() {
+          it('user specifies a signatureVersion of s3', function(done) {
+            s3 = new AWS.S3({
+              signatureVersion: 's3'
+            });
+            expect(s3.getSignatureVersion()).to.equal('s3');
+            done();
+          });
+          it('user specifies a signatureVersion of v2', function(done) {
+            s3 = new AWS.S3({
+              signatureVersion: 'v2'
+            });
+            expect(s3.getSignatureVersion()).to.equal('s3');
+            done();
+          });
+        });
+        describe('will return "v4" when', function() {
+          it('user does not specify a signatureVersion', function(done) {
+            s3 = new AWS.S3({
+              region: 'eu-central-1'
+            });
+            expect(s3.getSignatureVersion()).to.equal('v4');
+            done();
+          });
+          it('user specifies a signatureVersion of v4', function(done) {
+            s3 = new AWS.S3({
+              signatureVersion: 'v4'
+            });
+            expect(s3.getSignatureVersion()).to.equal('v4');
+            done();
+          });
+        });
+      });
+    });
     describe('getSignerClass', function() {
       var getVersion;
       getVersion = function(signer) {
@@ -203,16 +375,9 @@
             expect(getVersion(s3.getSignerClass())).to.equal('s3');
             return done();
           });
-          return it('user does not specify a signatureVersion and region supports v2', function(done) {
-            s3 = new AWS.S3({
-              region: 'us-east-1'
-            });
-            expect(getVersion(s3.getSignerClass())).to.equal('s3');
-            return done();
-          });
         });
         return describe('will return a v4 signer when', function() {
-          it('user does not specify a signatureVersion and region only supports v4', function(done) {
+          it('user does not specify a signatureVersion', function(done) {
             s3 = new AWS.S3({
               region: 'eu-central-1'
             });
