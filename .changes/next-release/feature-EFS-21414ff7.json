@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "EFS",
-  "description": "CORS support added. Now a default service in the browser build of the JavaScript SDK."
-}

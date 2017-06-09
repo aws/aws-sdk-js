@@ -24,6 +24,7 @@ export import DynamoDBStreams = require('./dynamodbstreams');
 export import EC2 = require('./ec2');
 export import ECR = require('./ecr');
 export import ECS = require('./ecs');
+export import EFS = require('./efs');
 export import ElastiCache = require('./elasticache');
 export import ElasticBeanstalk = require('./elasticbeanstalk');
 export import ELB = require('./elb');

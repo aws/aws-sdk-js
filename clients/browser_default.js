@@ -28,6 +28,7 @@ module.exports = {
   EC2: require('./ec2'),
   ECR: require('./ecr'),
   ECS: require('./ecs'),
+  EFS: require('./efs'),
   ElastiCache: require('./elasticache'),
   ElasticBeanstalk: require('./elasticbeanstalk'),
   ELB: require('./elb'),

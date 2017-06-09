@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.66.0',
+	  VERSION: '2.67.0',
 
 	  /**
 	   * @api private
@@ -20256,7 +20256,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"efs": {
 			"prefix": "elasticfilesystem",
-			"name": "EFS"
+			"name": "EFS",
+			"cors": true
 		},
 		"elasticache": {
 			"name": "ElastiCache",
@@ -118570,6 +118571,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"AgentVersion": {},
 									"AmiId": {},
 									"Architecture": {},
+									"Arn": {},
 									"AutoScalingType": {},
 									"AvailabilityZone": {},
 									"BlockDeviceMappings": {
@@ -118648,6 +118650,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"member": {
 								"type": "structure",
 								"members": {
+									"Arn": {},
 									"StackId": {},
 									"LayerId": {},
 									"Type": {},
@@ -119248,6 +119251,30 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"ListTags": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"ResourceArn"
+					],
+					"members": {
+						"ResourceArn": {},
+						"MaxResults": {
+							"type": "integer"
+						},
+						"NextToken": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Tags": {
+							"shape": "S4v"
+						},
+						"NextToken": {}
+					}
+				}
+			},
 			"RebootInstance": {
 				"input": {
 					"type": "structure",
@@ -119459,6 +119486,21 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"TagResource": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"ResourceArn",
+						"Tags"
+					],
+					"members": {
+						"ResourceArn": {},
+						"Tags": {
+							"shape": "S4v"
+						}
+					}
+				}
+			},
 			"UnassignInstance": {
 				"input": {
 					"type": "structure",
@@ -119478,6 +119520,22 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"VolumeId": {}
+					}
+				}
+			},
+			"UntagResource": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"ResourceArn",
+						"TagKeys"
+					],
+					"members": {
+						"ResourceArn": {},
+						"TagKeys": {
+							"type": "list",
+							"member": {}
+						}
 					}
 				}
 			},
@@ -119977,6 +120035,11 @@ return /******/ (function(modules) { // webpackBootstrap
 				}
 			},
 			"S47": {
+				"type": "map",
+				"key": {},
+				"value": {}
+			},
+			"S4v": {
 				"type": "map",
 				"key": {},
 				"value": {}

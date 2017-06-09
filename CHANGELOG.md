@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.66.0-->
+<!--LATEST=2.67.0-->
 <!--ENTRYINSERT-->
+
+## 2.67.0
+* feature: EFS: CORS support added. Now a default service in the browser build of the JavaScript SDK.
+* feature: OpsWorks: Tagging Support for AWS OpsWorks Stacks
 
 ## 2.66.0
 * feature: Iot: In addition to using certificate ID, AWS IoT customers can now obtain the description of a certificate with the certificate PEM.
