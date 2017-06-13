@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.67.0',
+	  VERSION: '2.68.0',
 
 	  /**
 	   * @api private
@@ -134256,6 +134256,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"PreSignedUrl": {},
+						"OptionGroupName": {},
 						"SourceRegion": {}
 					}
 				},
@@ -136681,6 +136682,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"DBClusterIdentifier": {},
+						"RestoreType": {},
 						"SourceDBClusterIdentifier": {},
 						"RestoreToTime": {
 							"type": "timestamp"
@@ -137321,6 +137323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"IAMDatabaseAuthenticationEnabled": {
 						"type": "boolean"
 					},
+					"CloneGroupId": {},
 					"ClusterCreateTime": {
 						"type": "timestamp"
 					}
@@ -144782,7 +144785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @api private
 	   */
-	  getSignerClass: function getSignerClass(request) {
+	  getSignatureVersion: function getSignatureVersion(request) {
 	    var defaultApiVersion = this.api.signatureVersion;
 	    var userDefinedVersion = this._originalConfig ? this._originalConfig.signatureVersion : null;
 	    var regionDefinedVersion = this.config.signatureVersion;
@@ -144792,16 +144795,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	        a) always return user defined version
 	      2) No user defined version specified:
 	        a) default to lowest version the region supports
+	        b) If using presigned urls, default to lowest version the region supports
 	    */
 	    if (userDefinedVersion) {
 	      userDefinedVersion = userDefinedVersion === 'v2' ? 's3' : userDefinedVersion;
-	      return AWS.Signers.RequestSigner.getVersion(userDefinedVersion);
+	      return userDefinedVersion;
 	    }
-	    if (regionDefinedVersion) {
+	    if (isPresigned !== true) {
+	      defaultApiVersion = 'v4';
+	    } else if (regionDefinedVersion) {
 	      defaultApiVersion = regionDefinedVersion;
 	    }
+	    return defaultApiVersion;
+	  },
 
-	    return AWS.Signers.RequestSigner.getVersion(defaultApiVersion);
+	  /**
+	   * @api private
+	   */
+	  getSignerClass: function getSignerClass(request) {
+	    var signatureVersion = this.getSignatureVersion(request);
+	    return AWS.Signers.RequestSigner.getVersion(signatureVersion);
 	  },
 
 	  /**
@@ -144848,6 +144861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    request.addListener('validate', this.validateScheme);
 	    request.addListener('validate', this.validateBucketEndpoint);
 	    request.addListener('validate', this.correctBucketRegionFromCache);
+	    request.addListener('validate', this.validateBucketName);
 	    request.addListener('build', this.addContentType);
 	    request.addListener('build', this.populateURI);
 	    request.addListener('build', this.computeContentMd5);
@@ -144892,6 +144906,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var msg = 'Cannot send requests to root API with `s3BucketEndpoint` set.';
 	      throw AWS.util.error(new Error(),
 	        { code: 'ConfigError', message: msg });
+	    }
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  validateBucketName: function validateBucketName(req) {
+	    var service = req.service;
+	    var signatureVersion = service.getSignatureVersion(req);
+	    // Only validate buckets when using sigv4
+	    if (signatureVersion !== 'v4') {
+	      return;
+	    }
+	    var bucket = req.params && req.params.Bucket;
+	    if (bucket && bucket.indexOf('/') >= 0) {
+	      var msg = 'Bucket names cannot contain forward slashes. Bucket: ' + bucket;
+	      throw AWS.util.error(new Error(),
+	        { code: 'InvalidBucket', message: msg });
 	    }
 	  },
 

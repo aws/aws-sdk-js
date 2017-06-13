@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "S3",
-  "description": "Switches S3 to use signatureVersion \"v4\" by default. To continue using signatureVersion \"v2\", set the signatureVersion: \"v2\" option in the S3 service client configuration. Presigned URLs will continue using \"v2\" by default."
-}

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.67.0-->
+<!--LATEST=2.68.0-->
 <!--ENTRYINSERT-->
+
+## 2.68.0
+* feature: RDS: API Update for RDS: this update enables copy-on-write, a new Aurora MySQL Compatible Edition feature that allows users to restore their database, and support copy of TDE enabled snapshot cross region.
+* feature: S3: Switches S3 to use signatureVersion "v4" by default. To continue using signatureVersion "v2", set the signatureVersion: "v2" option in the S3 service client configuration. Presigned URLs will continue using "v2" by default.
 
 ## 2.67.0
 * feature: EFS: CORS support added. Now a default service in the browser build of the JavaScript SDK.

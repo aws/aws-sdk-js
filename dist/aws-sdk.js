@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.67.0
+// AWS SDK for JavaScript v2.68.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -75075,6 +75075,7 @@ module.exports={
             "type": "boolean"
           },
           "PreSignedUrl": {},
+          "OptionGroupName": {},
           "SourceRegion": {}
         }
       },
@@ -77500,6 +77501,7 @@ module.exports={
         ],
         "members": {
           "DBClusterIdentifier": {},
+          "RestoreType": {},
           "SourceDBClusterIdentifier": {},
           "RestoreToTime": {
             "type": "timestamp"
@@ -78140,6 +78142,7 @@ module.exports={
         "IAMDatabaseAuthenticationEnabled": {
           "type": "boolean"
         },
+        "CloneGroupId": {},
         "ClusterCreateTime": {
           "type": "timestamp"
         }
@@ -102749,7 +102752,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.67.0',
+  VERSION: '2.68.0',
 
 
   Signers: {},
@@ -108451,7 +108454,7 @@ var operationsWith200StatusCodeError = {
 
 AWS.util.update(AWS.S3.prototype, {
 
-  getSignerClass: function getSignerClass(request) {
+  getSignatureVersion: function getSignatureVersion(request) {
     var defaultApiVersion = this.api.signatureVersion;
     var userDefinedVersion = this._originalConfig ? this._originalConfig.signatureVersion : null;
     var regionDefinedVersion = this.config.signatureVersion;
@@ -108459,13 +108462,20 @@ AWS.util.update(AWS.S3.prototype, {
 
     if (userDefinedVersion) {
       userDefinedVersion = userDefinedVersion === 'v2' ? 's3' : userDefinedVersion;
-      return AWS.Signers.RequestSigner.getVersion(userDefinedVersion);
+      return userDefinedVersion;
     }
-    if (regionDefinedVersion) {
+    if (isPresigned !== true) {
+      defaultApiVersion = 'v4';
+    } else if (regionDefinedVersion) {
       defaultApiVersion = regionDefinedVersion;
     }
+    return defaultApiVersion;
+  },
 
-    return AWS.Signers.RequestSigner.getVersion(defaultApiVersion);
+
+  getSignerClass: function getSignerClass(request) {
+    var signatureVersion = this.getSignatureVersion(request);
+    return AWS.Signers.RequestSigner.getVersion(signatureVersion);
   },
 
 
@@ -108505,6 +108515,7 @@ AWS.util.update(AWS.S3.prototype, {
     request.addListener('validate', this.validateScheme);
     request.addListener('validate', this.validateBucketEndpoint);
     request.addListener('validate', this.correctBucketRegionFromCache);
+    request.addListener('validate', this.validateBucketName);
     request.addListener('build', this.addContentType);
     request.addListener('build', this.populateURI);
     request.addListener('build', this.computeContentMd5);
@@ -108545,6 +108556,21 @@ AWS.util.update(AWS.S3.prototype, {
       var msg = 'Cannot send requests to root API with `s3BucketEndpoint` set.';
       throw AWS.util.error(new Error(),
         { code: 'ConfigError', message: msg });
+    }
+  },
+
+
+  validateBucketName: function validateBucketName(req) {
+    var service = req.service;
+    var signatureVersion = service.getSignatureVersion(req);
+    if (signatureVersion !== 'v4') {
+      return;
+    }
+    var bucket = req.params && req.params.Bucket;
+    if (bucket && bucket.indexOf('/') >= 0) {
+      var msg = 'Bucket names cannot contain forward slashes. Bucket: ' + bucket;
+      throw AWS.util.error(new Error(),
+        { code: 'InvalidBucket', message: msg });
     }
   },
 
