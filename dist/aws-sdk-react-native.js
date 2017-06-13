@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.68.0',
+	  VERSION: '2.69.0',
 
 	  /**
 	   * @api private

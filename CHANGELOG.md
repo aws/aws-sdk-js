@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.68.0-->
+<!--LATEST=2.69.0-->
 <!--ENTRYINSERT-->
+
+## 2.69.0
+* feature: ConfigService: With this release AWS Config supports the Amazon CloudWatch alarm resource type.
 
 ## 2.68.0
 * feature: RDS: API Update for RDS: this update enables copy-on-write, a new Aurora MySQL Compatible Edition feature that allows users to restore their database, and support copy of TDE enabled snapshot cross region.
