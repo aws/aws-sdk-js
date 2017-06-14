@@ -1,3 +1,5 @@
+dist: trusty
+
 language: node_js
 node_js:
 #  - "0.8"
@@ -21,9 +23,13 @@ matrix:
   - node_js: "node"
     env: TEST_SCRIPT=buildertest
   - node_js: "node"
-    env: TEST_SCRIPT=browsertest
+    addons:
+      chrome: stable
+    env: TEST_SCRIPT=browsertest CHROME_BIN='google-chrome-stable'
   - node_js: "node"
-    env: TEST_SCRIPT=react-native-test
+    addons:
+      chrome: stable
+    env: TEST_SCRIPT=react-native-test CHROME_BIN='google-chrome-stable'
   - node_js: "node"
     env: TEST_SCRIPT=tstest
 

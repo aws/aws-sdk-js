@@ -12,7 +12,7 @@ module.exports = function(config) {
     port: 19876,
     colors: false,
     logLevel: config.LOG_ERROR,
-    browsers: ['PhantomJS'],
+    browsers: ['ChromeHeadless'],
     singleRun: true,
     browserDisconnectTolerance: 3,
     browserNoActivityTimeout: 30000,
