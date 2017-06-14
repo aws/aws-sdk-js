@@ -300,6 +300,54 @@ describe('AWS.DynamoDB.Converter', function() {
     });
   });
 
+  describe('.marshall', function() {
+    it('should convert objects to the DynamoDB item format', function() {
+      var marshalled = AWS.DynamoDB.Converter.marshall({
+        string: 'foo',
+        list: ['fizz', 'buzz', 'pop'],
+        map: {
+          nestedMap: {
+            key: 'value',
+          }
+        },
+        number: 123,
+        nullValue: null,
+        boolValue: true,
+        stringSet: new DynamoDBSet(['foo', 'bar', 'baz'])
+      });
+
+      expect(marshalled).to.deep.equal({
+        string: {S: 'foo'},
+        list: {L: [{S: 'fizz'}, {S: 'buzz'}, {S: 'pop'}]},
+        map: {
+          M: {
+            nestedMap: {
+              M: {
+                key: {S: 'value'}
+              }
+            }
+          }
+        },
+        number: {N: '123'},
+        nullValue: {NULL: true},
+        boolValue: {BOOL: true},
+        stringSet: {SS: ['foo', 'bar', 'baz']}
+      });
+    });
+
+    it('should respect the `convertEmptyValues` option', function() {
+      var marshalled = AWS.DynamoDB.Converter.marshall(
+        {string: '', buffer: new AWS.util.Buffer(0)},
+        {convertEmptyValues: true}
+      );
+
+      expect(marshalled).to.deep.equal({
+        string: {NULL: true},
+        buffer: {NULL: true}
+      });
+    });
+  });
+
   describe('.output', function() {
     describe('strings', function() {
       it('should convert StringAttributeValues to strings', function() {
@@ -403,6 +451,40 @@ describe('AWS.DynamoDB.Converter', function() {
             .to.deep.equal(b64Strings);
         }
       );
+    });
+  });
+
+  describe('.unmarshall', function() {
+    it('should convert DynamoDB items to plain vanilla JS objects', function() {
+      var unmarshalled = AWS.DynamoDB.Converter.unmarshall({
+        string: {S: 'foo'},
+        list: {L: [{S: 'fizz'}, {S: 'buzz'}, {S: 'pop'}]},
+        map: {
+          M: {
+            nestedMap: {
+              M: {
+                key: {S: 'value'}
+              }
+            }
+          }
+        },
+        number: {N: '123'},
+        nullValue: {NULL: true},
+        boolValue: {BOOL: true}
+      });
+
+      expect(unmarshalled).to.deep.equal({
+        string: 'foo',
+        list: ['fizz', 'buzz', 'pop'],
+        map: {
+          nestedMap: {
+            key: 'value',
+          }
+        },
+        number: 123,
+        nullValue: null,
+        boolValue: true
+      });
     });
   });
 });

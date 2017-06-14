@@ -30,7 +30,44 @@ const options: DynamoDB.Converter.ConverterOptions = {
 };
 
 const av: DynamoDB.AttributeValue = DynamoDB.Converter.input('string', options);
+const record: DynamoDB.AttributeMap = DynamoDB.Converter.marshall(
+    {
+        string: 'foo',
+        list: ['fizz', 'buzz', 'pop'],
+        map: {
+            nestedMap: {
+                key: 'value',
+            },
+        },
+        number: 123,
+        nullValue: null,
+        boolValue: true,
+        stringSet: client.createSet(['foo', 'bar', 'baz']),
+        buffer: Uint8Array.from([0xde, 0xad, 0xbe, 0xef]),
+    },
+    options
+);
+
 const jsType: any = DynamoDB.Converter.output('string');
+const jsObject: {[key: string]: any} = DynamoDB.Converter.unmarshall({
+    string: {S: 'foo'},
+    list: {L: [{S: 'fizz'}, {S: 'buzz'}, {S: 'pop'}]},
+    map: {
+        M: {
+            nestedMap: {
+                M: {
+                    key: {S: 'value'},
+                },
+            },
+        },
+    },
+    number: {N: '123'},
+    nullValue: {NULL: true},
+    boolValue: {BOOL: true},
+    stringSet: {SS: ['foo', 'bar', 'baz']},
+    buffer: {B: 'base64+encoded+text'},
+});
+
 client.get(params, (err, data) => {
 
 });
