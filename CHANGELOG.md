@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.69.0-->
+<!--LATEST=2.70.0-->
 <!--ENTRYINSERT-->
+
+## 2.70.0
+* feature: ApplicationAutoScaling: Application Auto Scaling now supports automatic scaling of read and write throughput capacity for DynamoDB tables and global secondary indexes.
 
 ## 2.69.0
 * feature: ConfigService: With this release AWS Config supports the Amazon CloudWatch alarm resource type.

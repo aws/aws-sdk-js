@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.69.0',
+	  VERSION: '2.70.0',
 
 	  /**
 	   * @api private
@@ -37133,19 +37133,11 @@ return /******/ (function(modules) { // webpackBootstrap
 									"StepScalingPolicyConfiguration": {
 										"shape": "St"
 									},
+									"TargetTrackingScalingPolicyConfiguration": {
+										"shape": "S12"
+									},
 									"Alarms": {
-										"type": "list",
-										"member": {
-											"type": "structure",
-											"required": [
-												"AlarmName",
-												"AlarmARN"
-											],
-											"members": {
-												"AlarmName": {},
-												"AlarmARN": {}
-											}
-										}
+										"shape": "S1f"
 									},
 									"CreationTime": {
 										"type": "timestamp"
@@ -37174,6 +37166,9 @@ return /******/ (function(modules) { // webpackBootstrap
 						"PolicyType": {},
 						"StepScalingPolicyConfiguration": {
 							"shape": "St"
+						},
+						"TargetTrackingScalingPolicyConfiguration": {
+							"shape": "S12"
 						}
 					}
 				},
@@ -37183,7 +37178,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"PolicyARN"
 					],
 					"members": {
-						"PolicyARN": {}
+						"PolicyARN": {},
+						"Alarms": {
+							"shape": "S1f"
+						}
 					}
 				}
 			},
@@ -37250,6 +37248,75 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "integer"
 					},
 					"MetricAggregationType": {}
+				}
+			},
+			"S12": {
+				"type": "structure",
+				"required": [
+					"TargetValue"
+				],
+				"members": {
+					"TargetValue": {
+						"type": "double"
+					},
+					"PredefinedMetricSpecification": {
+						"type": "structure",
+						"required": [
+							"PredefinedMetricType"
+						],
+						"members": {
+							"PredefinedMetricType": {},
+							"ResourceLabel": {}
+						}
+					},
+					"CustomizedMetricSpecification": {
+						"type": "structure",
+						"required": [
+							"MetricName",
+							"Namespace",
+							"Statistic"
+						],
+						"members": {
+							"MetricName": {},
+							"Namespace": {},
+							"Dimensions": {
+								"type": "list",
+								"member": {
+									"type": "structure",
+									"required": [
+										"Name",
+										"Value"
+									],
+									"members": {
+										"Name": {},
+										"Value": {}
+									}
+								}
+							},
+							"Statistic": {},
+							"Unit": {}
+						}
+					},
+					"ScaleOutCooldown": {
+						"type": "integer"
+					},
+					"ScaleInCooldown": {
+						"type": "integer"
+					}
+				}
+			},
+			"S1f": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"required": [
+						"AlarmName",
+						"AlarmARN"
+					],
+					"members": {
+						"AlarmName": {},
+						"AlarmARN": {}
+					}
 				}
 			}
 		}
