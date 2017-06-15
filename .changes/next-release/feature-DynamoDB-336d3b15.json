@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "DynamoDB",
-  "description": "Adds two new functions to the AWS.DynamoDB.Converter namespace: one to convert full DynamoDB items (such as what you might receive for events in a DynamoDB stream) into plain vanilla JavaScript objects and one to convert JavaScript objects back into DynamoDB items"
-}

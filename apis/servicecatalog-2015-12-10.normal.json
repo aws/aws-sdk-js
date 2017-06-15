@@ -1,14 +1,14 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"servicecatalog-2015-12-10",
     "apiVersion":"2015-12-10",
     "endpointPrefix":"servicecatalog",
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"AWS Service Catalog",
     "signatureVersion":"v4",
-    "targetPrefix":"AWS242ServiceCatalogService"
+    "targetPrefix":"AWS242ServiceCatalogService",
+    "uid":"servicecatalog-2015-12-10"
   },
   "operations":{
     "AcceptPortfolioShare":{
@@ -70,7 +70,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"DuplicateResourceException"}
       ],
-      "documentation":"<p>Creates a new constraint.</p>"
+      "documentation":"<p>Creates a new constraint. For more information, see <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html\">Using Constraints</a>.</p>"
     },
     "CreatePortfolio":{
       "name":"CreatePortfolio",
@@ -128,7 +128,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Create a new provisioning artifact for the specified product. This operation will not work with a product that has been shared with you.</p>"
+      "documentation":"<p>Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.</p> <p>See the bottom of this topic for an example JSON request.</p>"
     },
     "DeleteConstraint":{
       "name":"DeleteConstraint",
@@ -157,7 +157,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"ResourceInUseException"}
       ],
-      "documentation":"<p>Deletes the specified portfolio. This operation will not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.</p>"
+      "documentation":"<p>Deletes the specified portfolio. This operation does not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.</p>"
     },
     "DeletePortfolioShare":{
       "name":"DeletePortfolioShare",
@@ -185,7 +185,7 @@
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Deletes the specified product. This operation will not work with a product that has been shared with you or is associated with a portfolio. </p>"
+      "documentation":"<p>Deletes the specified product. This operation does not work with a product that has been shared with you or is associated with a portfolio. </p>"
     },
     "DeleteProvisioningArtifact":{
       "name":"DeleteProvisioningArtifact",
@@ -200,7 +200,7 @@
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Deletes the specified provisioning artifact. This operation will not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).</p>"
+      "documentation":"<p>Deletes the specified provisioning artifact. This operation does not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).</p>"
     },
     "DescribeConstraint":{
       "name":"DescribeConstraint",
@@ -268,6 +268,19 @@
         {"shape":"InvalidParametersException"}
       ],
       "documentation":"<p>Retrieves information about a specified product.</p> <p>This operation is functionally identical to <a>DescribeProduct</a> except that it takes as input <code>ProductViewId</code> instead of <code>ProductId</code>.</p>"
+    },
+    "DescribeProvisionedProduct":{
+      "name":"DescribeProvisionedProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeProvisionedProductInput"},
+      "output":{"shape":"DescribeProvisionedProductOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Retrieve detailed information about the provisioned product.</p>"
     },
     "DescribeProvisioningArtifact":{
       "name":"DescribeProvisioningArtifact",
@@ -472,7 +485,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"DuplicateResourceException"}
       ],
-      "documentation":"<p>Requests a <i>Provision</i> of a specified product. A <i>ProvisionedProduct</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
+      "documentation":"<p>Requests a <i>provision</i> of a specified product. A <i>provisioned product</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
     },
     "RejectPortfolioShare":{
       "name":"RejectPortfolioShare",
@@ -567,7 +580,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Updates the specified portfolio's details. This operation will not work with a product that has been shared with you.</p>"
+      "documentation":"<p>Updates the specified portfolio's details. This operation does not work with a product that has been shared with you.</p>"
     },
     "UpdateProduct":{
       "name":"UpdateProduct",
@@ -609,7 +622,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Updates an existing provisioning artifact's information. This operation will not work on a provisioning artifact associated with a product that has been shared with you.</p>"
+      "documentation":"<p>Updates an existing provisioning artifact's information. This operation does not work on a provisioning artifact associated with a product that has been shared with you.</p>"
     }
   },
   "shapes":{
@@ -815,11 +828,11 @@
         },
         "Parameters":{
           "shape":"ConstraintParameters",
-          "documentation":"<p>The constraint parameters.</p>"
+          "documentation":"<p>The constraint parameters. Expected values vary depending on which <b>Type</b> is specified. For examples, see the bottom of this topic.</p> <p>For Type <code>LAUNCH</code>, the <code>RoleArn</code> property is required. </p> <p>For Type <code>NOTIFICATION</code>, the <code>NotificationArns</code> property is required.</p> <p>For Type <code>TEMPLATE</code>, the <code>Rules</code> property is required.</p>"
         },
         "Type":{
           "shape":"ConstraintType",
-          "documentation":"<p>The type of the constraint.</p>"
+          "documentation":"<p>The type of the constraint. Case-sensitive valid values are: <code>LAUNCH</code>, <code>NOTIFICATION</code>, or <code>TEMPLATE</code>. </p>"
         },
         "Description":{
           "shape":"ConstraintDescription",
@@ -1037,7 +1050,7 @@
         },
         "Info":{
           "shape":"ProvisioningArtifactInfo",
-          "documentation":"<p>Additional information about the provisioning artifact create request.</p>"
+          "documentation":"<p>Additional information about the creation request for the provisioning artifact.</p>"
         },
         "Status":{
           "shape":"Status",
@@ -1148,7 +1161,7 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the provisioning artifact for the delete request.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact for the delete request. This is sometimes referred to as the product version.</p>"
         }
       }
     },
@@ -1236,6 +1249,10 @@
           "shape":"ProductViewDetail",
           "documentation":"<p>Detailed product view information.</p>"
         },
+        "ProvisioningArtifactSummaries":{
+          "shape":"ProvisioningArtifactSummaries",
+          "documentation":"<p>A list of provisioning artifact summaries for the product.</p>"
+        },
         "Tags":{
           "shape":"Tags",
           "documentation":"<p>Tags associated with the product.</p>"
@@ -1296,6 +1313,29 @@
         }
       }
     },
+    "DescribeProvisionedProductInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The provisioned product identifier.</p>"
+        }
+      }
+    },
+    "DescribeProvisionedProductOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisionedProductDetail":{
+          "shape":"ProvisionedProductDetail",
+          "documentation":"<p>Detailed provisioned product information.</p>"
+        }
+      }
+    },
     "DescribeProvisioningArtifactInput":{
       "type":"structure",
       "required":[
@@ -1309,11 +1349,15 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the provisioning artifact.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact. This is sometimes referred to as the product version.</p>"
         },
         "ProductId":{
           "shape":"Id",
           "documentation":"<p>The product identifier.</p>"
+        },
+        "Verbose":{
+          "shape":"Verbose",
+          "documentation":"<p>Selects verbose results. If set to true, the CloudFormation template is returned.</p>"
         }
       }
     },
@@ -1351,7 +1395,7 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The provisioning artifact identifier for this product.</p>"
+          "documentation":"<p>The provisioning artifact identifier for this product. This is sometimes referred to as the product version.</p>"
         },
         "PathId":{
           "shape":"Id",
@@ -1884,7 +1928,7 @@
     "ParameterType":{"type":"string"},
     "ParameterValue":{
       "type":"string",
-      "max":1000
+      "max":4096
     },
     "PortfolioDescription":{
       "type":"string",
@@ -1963,7 +2007,10 @@
     },
     "ProductType":{
       "type":"string",
-      "enum":["CLOUD_FORMATION_TEMPLATE"]
+      "enum":[
+        "CLOUD_FORMATION_TEMPLATE",
+        "MARKETPLACE"
+      ]
     },
     "ProductViewAggregationType":{"type":"string"},
     "ProductViewAggregationValue":{
@@ -1998,7 +2045,7 @@
         },
         "Status":{
           "shape":"Status",
-          "documentation":"<p>Current status of the product.</p>"
+          "documentation":"<p>Current status of the product.</p> <p> <code>AVAILABLE</code> - Product is available for use.</p> <p> <code>CREATING</code> - Creation of product started, not ready for use.</p> <p> <code>FAILED</code> - Action on product failed.</p>"
         },
         "ProductARN":{
           "shape":"ResourceARN",
@@ -2021,7 +2068,8 @@
       "enum":[
         "FullTextSearch",
         "Owner",
-        "ProductType"
+        "ProductType",
+        "SourceProductId"
       ]
     },
     "ProductViewFilterValue":{"type":"string"},
@@ -2074,7 +2122,7 @@
         },
         "Type":{
           "shape":"ProductType",
-          "documentation":"<p>The product type. Contact the product administrator for the significance of this value.</p>"
+          "documentation":"<p>The product type. Contact the product administrator for the significance of this value. If this value is <code>MARKETPLACE</code>, the product was created by AWS Marketplace.</p>"
         },
         "Distributor":{
           "shape":"ProductViewDistributor",
@@ -2123,7 +2171,7 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The provisioning artifact identifier for this product.</p>"
+          "documentation":"<p>The provisioning artifact identifier for this product. This is sometimes referred to as the product version.</p>"
         },
         "PathId":{
           "shape":"Id",
@@ -2181,8 +2229,8 @@
           "documentation":"<p>The identifier of the ProvisionedProduct object.</p>"
         },
         "Status":{
-          "shape":"RecordStatus",
-          "documentation":"<p>The current status of the ProvisionedProduct.</p>"
+          "shape":"ProvisionedProductStatus",
+          "documentation":"<p>The current status of the ProvisionedProduct.</p> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent action request succeeded and completed.</p> <p> <code>UNDER_CHANGE</code> - Transitive state, operations performed may or may not have valid results. Wait for an <code>AVAILABLE</code> status before performing operations.</p> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version. </p> <p> <code>ERROR</code> - Something unexpected happened such that the provisioned product exists but the stack is not running. For example, CloudFormation received an invalid parameter value and could not launch the stack.</p>"
         },
         "StatusMessage":{
           "shape":"ProvisionedProductStatusMessage",
@@ -2208,12 +2256,26 @@
       "member":{"shape":"ProvisionedProductDetail"}
     },
     "ProvisionedProductId":{"type":"string"},
-    "ProvisionedProductName":{"type":"string"},
+    "ProvisionedProductName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9][a-zA-Z0-9._-]*"
+    },
     "ProvisionedProductNameOrArn":{
       "type":"string",
       "max":1224,
       "min":1,
-      "pattern":"[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}|arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+      "pattern":"[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+    },
+    "ProvisionedProductStatus":{
+      "type":"string",
+      "enum":[
+        "AVAILABLE",
+        "UNDER_CHANGE",
+        "TAINTED",
+        "ERROR"
+      ]
     },
     "ProvisionedProductStatusMessage":{"type":"string"},
     "ProvisionedProductType":{"type":"string"},
@@ -2222,7 +2284,7 @@
       "members":{
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier for the artifact.</p>"
+          "documentation":"<p>The identifier for the artifact. This is sometimes referred to as the product version.</p>"
         },
         "Name":{
           "shape":"ProvisioningArtifactName",
@@ -2246,7 +2308,7 @@
       "members":{
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the provisioning artifact.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact. This is sometimes referred to as the product version.</p>"
         },
         "Name":{
           "shape":"ProvisioningArtifactName",
@@ -2258,7 +2320,7 @@
         },
         "Type":{
           "shape":"ProvisioningArtifactType",
-          "documentation":"<p>The type of the provisioning artifact.</p>"
+          "documentation":"<p>The type of the provisioning artifact. The following provisioning artifact types are used by AWS Marketplace products:</p> <p> <code>MARKETPLACE_AMI</code> - AMI products.</p> <p> <code>MARKETPLACE_CAR</code> - CAR (Cluster and AWS Resources) products.</p>"
         },
         "CreatedTime":{
           "shape":"CreationTime",
@@ -2275,7 +2337,7 @@
       "type":"map",
       "key":{"shape":"ProvisioningArtifactInfoKey"},
       "value":{"shape":"ProvisioningArtifactInfoValue"},
-      "max":1,
+      "max":100,
       "min":1
     },
     "ProvisioningArtifactInfoKey":{"type":"string"},
@@ -2329,18 +2391,52 @@
         },
         "Info":{
           "shape":"ProvisioningArtifactInfo",
-          "documentation":"<p>Additional information about the provisioning artifact properties.</p>"
+          "documentation":"<p>Additional information about the provisioning artifact properties. When using this element in a request, you must specify <code>LoadTemplateFromURL</code>. For more information, see <a>CreateProvisioningArtifact</a>.</p>"
         },
         "Type":{
           "shape":"ProvisioningArtifactType",
-          "documentation":"<p>The type of the provisioning artifact properties.</p>"
+          "documentation":"<p>The type of the provisioning artifact properties. The following provisioning artifact property types are used by AWS Marketplace products:</p> <p> <code>MARKETPLACE_AMI</code> - AMI products.</p> <p> <code>MARKETPLACE_CAR</code> - CAR (Cluster and AWS Resources) products.</p>"
         }
       },
-      "documentation":"<p>Provisioning artifact properties.</p>"
+      "documentation":"<p>Provisioning artifact properties. For example request JSON, see <a>CreateProvisioningArtifact</a>.</p>"
+    },
+    "ProvisioningArtifactSummaries":{
+      "type":"list",
+      "member":{"shape":"ProvisioningArtifactSummary"}
+    },
+    "ProvisioningArtifactSummary":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The provisioning artifact identifier.</p>"
+        },
+        "Name":{
+          "shape":"ProvisioningArtifactName",
+          "documentation":"<p>The provisioning artifact name.</p>"
+        },
+        "Description":{
+          "shape":"ProvisioningArtifactDescription",
+          "documentation":"<p>The provisioning artifact description.</p>"
+        },
+        "CreatedTime":{
+          "shape":"ProvisioningArtifactCreatedTime",
+          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+        },
+        "ProvisioningArtifactMetadata":{
+          "shape":"ProvisioningArtifactInfo",
+          "documentation":"<p>The provisioning artifact metadata. This data is used with products created by AWS Marketplace.</p>"
+        }
+      },
+      "documentation":"<p>Summary information about a provisioning artifact.</p>"
     },
     "ProvisioningArtifactType":{
       "type":"string",
-      "enum":["CLOUD_FORMATION_TEMPLATE"]
+      "enum":[
+        "CLOUD_FORMATION_TEMPLATE",
+        "MARKETPLACE_AMI",
+        "MARKETPLACE_CAR"
+      ]
     },
     "ProvisioningArtifacts":{
       "type":"list",
@@ -2358,7 +2454,7 @@
           "documentation":"<p>The value to use for provisioning. Any constraints on this value can be found in <code>ProvisioningArtifactParameter</code> for <code>Key</code>.</p>"
         }
       },
-      "documentation":"<p>The arameter key/value pairs used to provision a product.</p>"
+      "documentation":"<p>The parameter key-value pairs used to provision a product.</p>"
     },
     "ProvisioningParameters":{
       "type":"list",
@@ -2377,7 +2473,7 @@
         },
         "Status":{
           "shape":"RecordStatus",
-          "documentation":"<p>The status of the ProvisionedProduct object.</p>"
+          "documentation":"<p>The status of the ProvisionedProduct object.</p> <p> <code>CREATED</code> - Request created but the operation has not yet started.</p> <p> <code>IN_PROGRESS</code> - The requested operation is in-progress.</p> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a roll-back.</p> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> <p> <code>FAILED</code> - The requested operation has completed but has failed. Investigate using the error messages returned.</p>"
         },
         "CreatedTime":{
           "shape":"CreatedTime",
@@ -2405,7 +2501,7 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The provisioning artifact identifier for this product.</p>"
+          "documentation":"<p>The provisioning artifact identifier for this product. This is sometimes referred to as the product version.</p>"
         },
         "PathId":{
           "shape":"Id",
@@ -2469,9 +2565,11 @@
     "RecordStatus":{
       "type":"string",
       "enum":[
+        "CREATED",
         "IN_PROGRESS",
+        "IN_PROGRESS_IN_ERROR",
         "SUCCEEDED",
-        "ERROR"
+        "FAILED"
       ]
     },
     "RecordTag":{
@@ -2707,7 +2805,7 @@
         },
         "Value":{
           "shape":"TagValue",
-          "documentation":"<p>The esired value for this key.</p>"
+          "documentation":"<p>The desired value for this key.</p>"
         }
       },
       "documentation":"<p>Key/value pairs to associate with this provisioning. These tags are entirely discretionary and are propagated to the resources created in the provisioning.</p>"
@@ -2739,11 +2837,11 @@
       "members":{
         "ProvisionedProductName":{
           "shape":"ProvisionedProductNameOrArn",
-          "documentation":"<p>The name of the ProvisionedProduct object to terminate. You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+          "documentation":"<p>The name of the ProvisionedProduct object to terminate. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
         },
         "ProvisionedProductId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the ProvisionedProduct object to terminate. You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+          "documentation":"<p>The identifier of the ProvisionedProduct object to terminate. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
         },
         "TerminateToken":{
           "shape":"IdempotencyToken",
@@ -2924,11 +3022,11 @@
         },
         "ProvisionedProductName":{
           "shape":"ProvisionedProductNameOrArn",
-          "documentation":"<p>The updated name of the ProvisionedProduct object . You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+          "documentation":"<p>The updated name of the ProvisionedProduct object. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
         },
         "ProvisionedProductId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the ProvisionedProduct object to update. You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+          "documentation":"<p>The identifier of the ProvisionedProduct object to update. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
         },
         "ProductId":{
           "shape":"Id",
@@ -2936,7 +3034,7 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The provisioning artifact identifier for this product.</p>"
+          "documentation":"<p>The provisioning artifact identifier for this product. This is sometimes referred to as the product version.</p>"
         },
         "PathId":{
           "shape":"Id",
@@ -2979,7 +3077,7 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the provisioning artifact for the update request.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact for the update request. This is sometimes referred to as the product version.</p>"
         },
         "Name":{
           "shape":"ProvisioningArtifactName",
@@ -3024,7 +3122,7 @@
           "documentation":"<p>If true, uses the currently set value for <code>Key</code>, ignoring <code>UpdateProvisioningParameter.Value</code>.</p>"
         }
       },
-      "documentation":"<p>The parameter key/value pair used to update a ProvisionedProduct object. If <code>UsePreviousValue</code> is set to true, <code>Value</code> is ignored and the value for <code>Key</code> is kept as previously set (current value).</p>"
+      "documentation":"<p>The parameter key-value pair used to update a ProvisionedProduct object. If <code>UsePreviousValue</code> is set to true, <code>Value</code> is ignored and the value for <code>Key</code> is kept as previously set (current value).</p>"
     },
     "UpdateProvisioningParameters":{
       "type":"list",
@@ -3049,7 +3147,8 @@
       "type":"list",
       "member":{"shape":"UsageInstruction"}
     },
-    "UsePreviousValue":{"type":"boolean"}
+    "UsePreviousValue":{"type":"boolean"},
+    "Verbose":{"type":"boolean"}
   },
-  "documentation":"<fullname>AWS Service Catalog</fullname> <p> <b>Overview</b> </p> <p> <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> allows organizations to create and manage catalogs of IT services that are approved for use on AWS. This documentation provides reference material for the AWS Service Catalog end user API. To get the most out of this documentation, you need to be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/userguide/what-is_concepts.html\">AWS Service Catalog Concepts</a>.</p> <p> <i>Additional Resources</i> </p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">AWS Service Catalog Administrator Guide</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/userguide/introduction.html\">AWS Service Catalog User Guide</a> </p> </li> </ul>"
+  "documentation":"<fullname>AWS Service Catalog</fullname> <p> <b>Overview</b> </p> <p> <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> allows organizations to create and manage catalogs of IT services that are approved for use on AWS. This documentation provides reference material for the AWS Service Catalog end user API. To get the most out of this documentation, be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">AWS Service Catalog Concepts</a>.</p> <p> <i>Additional Resources</i> </p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">AWS Service Catalog Administrator Guide</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/userguide/introduction.html\">AWS Service Catalog User Guide</a> </p> </li> </ul>"
 }

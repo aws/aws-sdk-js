@@ -403,7 +403,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Gets information about the specified certificate. You may specify the certificate using either its ID or PEM.</p>"
+      "documentation":"<p>Gets information about the specified certificate.</p>"
     },
     "DescribeEndpoint":{
       "name":"DescribeEndpoint",
@@ -1375,7 +1375,6 @@
     },
     "CertificatePem":{
       "type":"string",
-      "documentation":"<p>The PEM of a certificate.</p>",
       "max":65536,
       "min":1
     },
@@ -1942,12 +1941,6 @@
           "documentation":"<p>The ID of the certificate.</p>",
           "location":"uri",
           "locationName":"certificateId"
-        },
-        "certificatePem":{
-          "shape":"CertificatePem",
-          "documentation":"<p>The PEM of the certificate.</p>",
-          "location":"header",
-          "locationName":"x-amzn-iot-certificate-pem"
         }
       },
       "documentation":"<p>The input for the DescribeCertificate operation.</p>"

@@ -36,11 +36,11 @@ declare class ServiceCatalog extends Service {
    */
   associateProductWithPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateProductWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociateProductWithPortfolioOutput, AWSError>;
   /**
-   * Creates a new constraint.
+   * Creates a new constraint. For more information, see Using Constraints.
    */
   createConstraint(params: ServiceCatalog.Types.CreateConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateConstraintOutput) => void): Request<ServiceCatalog.Types.CreateConstraintOutput, AWSError>;
   /**
-   * Creates a new constraint.
+   * Creates a new constraint. For more information, see Using Constraints.
    */
   createConstraint(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateConstraintOutput) => void): Request<ServiceCatalog.Types.CreateConstraintOutput, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class ServiceCatalog extends Service {
    */
   createProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
   /**
-   * Create a new provisioning artifact for the specified product. This operation will not work with a product that has been shared with you.
+   * Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you. See the bottom of this topic for an example JSON request.
    */
   createProvisioningArtifact(params: ServiceCatalog.Types.CreateProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
   /**
-   * Create a new provisioning artifact for the specified product. This operation will not work with a product that has been shared with you.
+   * Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you. See the bottom of this topic for an example JSON request.
    */
   createProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class ServiceCatalog extends Service {
    */
   deleteConstraint(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteConstraintOutput) => void): Request<ServiceCatalog.Types.DeleteConstraintOutput, AWSError>;
   /**
-   * Deletes the specified portfolio. This operation will not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.
+   * Deletes the specified portfolio. This operation does not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.
    */
   deletePortfolio(params: ServiceCatalog.Types.DeletePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioOutput, AWSError>;
   /**
-   * Deletes the specified portfolio. This operation will not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.
+   * Deletes the specified portfolio. This operation does not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.
    */
   deletePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioOutput, AWSError>;
   /**
@@ -100,19 +100,19 @@ declare class ServiceCatalog extends Service {
    */
   deletePortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioShareOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioShareOutput, AWSError>;
   /**
-   * Deletes the specified product. This operation will not work with a product that has been shared with you or is associated with a portfolio. 
+   * Deletes the specified product. This operation does not work with a product that has been shared with you or is associated with a portfolio. 
    */
   deleteProduct(params: ServiceCatalog.Types.DeleteProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProductOutput) => void): Request<ServiceCatalog.Types.DeleteProductOutput, AWSError>;
   /**
-   * Deletes the specified product. This operation will not work with a product that has been shared with you or is associated with a portfolio. 
+   * Deletes the specified product. This operation does not work with a product that has been shared with you or is associated with a portfolio. 
    */
   deleteProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProductOutput) => void): Request<ServiceCatalog.Types.DeleteProductOutput, AWSError>;
   /**
-   * Deletes the specified provisioning artifact. This operation will not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).
+   * Deletes the specified provisioning artifact. This operation does not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).
    */
   deleteProvisioningArtifact(params: ServiceCatalog.Types.DeleteProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DeleteProvisioningArtifactOutput, AWSError>;
   /**
-   * Deletes the specified provisioning artifact. This operation will not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).
+   * Deletes the specified provisioning artifact. This operation does not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).
    */
   deleteProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DeleteProvisioningArtifactOutput, AWSError>;
   /**
@@ -155,6 +155,14 @@ declare class ServiceCatalog extends Service {
    * Retrieves information about a specified product. This operation is functionally identical to DescribeProduct except that it takes as input ProductViewId instead of ProductId.
    */
   describeProductView(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductViewOutput) => void): Request<ServiceCatalog.Types.DescribeProductViewOutput, AWSError>;
+  /**
+   * Retrieve detailed information about the provisioned product.
+   */
+  describeProvisionedProduct(params: ServiceCatalog.Types.DescribeProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisionedProductOutput) => void): Request<ServiceCatalog.Types.DescribeProvisionedProductOutput, AWSError>;
+  /**
+   * Retrieve detailed information about the provisioned product.
+   */
+  describeProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisionedProductOutput) => void): Request<ServiceCatalog.Types.DescribeProvisionedProductOutput, AWSError>;
   /**
    * Retrieves detailed information about the specified provisioning artifact.
    */
@@ -268,11 +276,11 @@ declare class ServiceCatalog extends Service {
    */
   listRecordHistory(callback?: (err: AWSError, data: ServiceCatalog.Types.ListRecordHistoryOutput) => void): Request<ServiceCatalog.Types.ListRecordHistoryOutput, AWSError>;
   /**
-   * Requests a Provision of a specified product. A ProvisionedProduct is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it.  You can check the status of this request using the DescribeRecord operation.
+   * Requests a provision of a specified product. A provisioned product is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it.  You can check the status of this request using the DescribeRecord operation.
    */
   provisionProduct(params: ServiceCatalog.Types.ProvisionProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
   /**
-   * Requests a Provision of a specified product. A ProvisionedProduct is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it.  You can check the status of this request using the DescribeRecord operation.
+   * Requests a provision of a specified product. A provisioned product is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it.  You can check the status of this request using the DescribeRecord operation.
    */
   provisionProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
   /**
@@ -324,11 +332,11 @@ declare class ServiceCatalog extends Service {
    */
   updateConstraint(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateConstraintOutput) => void): Request<ServiceCatalog.Types.UpdateConstraintOutput, AWSError>;
   /**
-   * Updates the specified portfolio's details. This operation will not work with a product that has been shared with you.
+   * Updates the specified portfolio's details. This operation does not work with a product that has been shared with you.
    */
   updatePortfolio(params: ServiceCatalog.Types.UpdatePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioOutput, AWSError>;
   /**
-   * Updates the specified portfolio's details. This operation will not work with a product that has been shared with you.
+   * Updates the specified portfolio's details. This operation does not work with a product that has been shared with you.
    */
   updatePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioOutput, AWSError>;
   /**
@@ -348,11 +356,11 @@ declare class ServiceCatalog extends Service {
    */
   updateProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.UpdateProvisionedProductOutput, AWSError>;
   /**
-   * Updates an existing provisioning artifact's information. This operation will not work on a provisioning artifact associated with a product that has been shared with you.
+   * Updates an existing provisioning artifact's information. This operation does not work on a provisioning artifact associated with a product that has been shared with you.
    */
   updateProvisioningArtifact(params: ServiceCatalog.Types.UpdateProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
   /**
-   * Updates an existing provisioning artifact's information. This operation will not work on a provisioning artifact associated with a product that has been shared with you.
+   * Updates an existing provisioning artifact's information. This operation does not work on a provisioning artifact associated with a product that has been shared with you.
    */
   updateProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
 }
@@ -476,11 +484,11 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The constraint parameters.
+     * The constraint parameters. Expected values vary depending on which Type is specified. For examples, see the bottom of this topic. For Type LAUNCH, the RoleArn property is required.  For Type NOTIFICATION, the NotificationArns property is required. For Type TEMPLATE, the Rules property is required.
      */
     Parameters: ConstraintParameters;
     /**
-     * The type of the constraint.
+     * The type of the constraint. Case-sensitive valid values are: LAUNCH, NOTIFICATION, or TEMPLATE. 
      */
     Type: ConstraintType;
     /**
@@ -646,7 +654,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
     /**
-     * Additional information about the provisioning artifact create request.
+     * Additional information about the creation request for the provisioning artifact.
      */
     Info?: ProvisioningArtifactInfo;
     /**
@@ -719,7 +727,7 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The identifier of the provisioning artifact for the delete request.
+     * The identifier of the provisioning artifact for the delete request. This is sometimes referred to as the product version.
      */
     ProvisioningArtifactId: Id;
   }
@@ -785,6 +793,10 @@ declare namespace ServiceCatalog {
      */
     ProductViewDetail?: ProductViewDetail;
     /**
+     * A list of provisioning artifact summaries for the product.
+     */
+    ProvisioningArtifactSummaries?: ProvisioningArtifactSummaries;
+    /**
      * Tags associated with the product.
      */
     Tags?: Tags;
@@ -829,19 +841,39 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifacts?: ProvisioningArtifacts;
   }
+  export interface DescribeProvisionedProductInput {
+    /**
+     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The provisioned product identifier.
+     */
+    Id: Id;
+  }
+  export interface DescribeProvisionedProductOutput {
+    /**
+     * Detailed provisioned product information.
+     */
+    ProvisionedProductDetail?: ProvisionedProductDetail;
+  }
   export interface DescribeProvisioningArtifactInput {
     /**
      * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The identifier of the provisioning artifact.
+     * The identifier of the provisioning artifact. This is sometimes referred to as the product version.
      */
     ProvisioningArtifactId: Id;
     /**
      * The product identifier.
      */
     ProductId: Id;
+    /**
+     * Selects verbose results. If set to true, the CloudFormation template is returned.
+     */
+    Verbose?: Verbose;
   }
   export interface DescribeProvisioningArtifactOutput {
     /**
@@ -867,7 +899,7 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The provisioning artifact identifier for this product.
+     * The provisioning artifact identifier for this product. This is sometimes referred to as the product version.
      */
     ProvisioningArtifactId: Id;
     /**
@@ -1288,7 +1320,7 @@ declare namespace ServiceCatalog {
   export type PrincipalType = "IAM"|string;
   export type Principals = Principal[];
   export type ProductSource = "ACCOUNT"|string;
-  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|string;
+  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE"|string;
   export type ProductViewAggregationType = string;
   export interface ProductViewAggregationValue {
     /**
@@ -1308,7 +1340,7 @@ declare namespace ServiceCatalog {
      */
     ProductViewSummary?: ProductViewSummary;
     /**
-     * Current status of the product.
+     * Current status of the product.  AVAILABLE - Product is available for use.  CREATING - Creation of product started, not ready for use.  FAILED - Action on product failed.
      */
     Status?: Status;
     /**
@@ -1322,7 +1354,7 @@ declare namespace ServiceCatalog {
   }
   export type ProductViewDetails = ProductViewDetail[];
   export type ProductViewDistributor = string;
-  export type ProductViewFilterBy = "FullTextSearch"|"Owner"|"ProductType"|string;
+  export type ProductViewFilterBy = "FullTextSearch"|"Owner"|"ProductType"|"SourceProductId"|string;
   export type ProductViewFilterValue = string;
   export type ProductViewFilterValues = ProductViewFilterValue[];
   export type ProductViewFilters = {[key: string]: ProductViewFilterValues};
@@ -1353,7 +1385,7 @@ declare namespace ServiceCatalog {
      */
     ShortDescription?: ProductViewShortDescription;
     /**
-     * The product type. Contact the product administrator for the significance of this value.
+     * The product type. Contact the product administrator for the significance of this value. If this value is MARKETPLACE, the product was created by AWS Marketplace.
      */
     Type?: ProductType;
     /**
@@ -1388,7 +1420,7 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The provisioning artifact identifier for this product.
+     * The provisioning artifact identifier for this product. This is sometimes referred to as the product version.
      */
     ProvisioningArtifactId: Id;
     /**
@@ -1440,9 +1472,9 @@ declare namespace ServiceCatalog {
      */
     Id?: ProvisionedProductId;
     /**
-     * The current status of the ProvisionedProduct.
+     * The current status of the ProvisionedProduct.  AVAILABLE - Stable state, ready to perform any operation. The most recent action request succeeded and completed.  UNDER_CHANGE - Transitive state, operations performed may or may not have valid results. Wait for an AVAILABLE status before performing operations.  TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.   ERROR - Something unexpected happened such that the provisioned product exists but the stack is not running. For example, CloudFormation received an invalid parameter value and could not launch the stack.
      */
-    Status?: RecordStatus;
+    Status?: ProvisionedProductStatus;
     /**
      * The current status message of the ProvisionedProduct.
      */
@@ -1464,11 +1496,12 @@ declare namespace ServiceCatalog {
   export type ProvisionedProductId = string;
   export type ProvisionedProductName = string;
   export type ProvisionedProductNameOrArn = string;
+  export type ProvisionedProductStatus = "AVAILABLE"|"UNDER_CHANGE"|"TAINTED"|"ERROR"|string;
   export type ProvisionedProductStatusMessage = string;
   export type ProvisionedProductType = string;
   export interface ProvisioningArtifact {
     /**
-     * The identifier for the artifact.
+     * The identifier for the artifact. This is sometimes referred to as the product version.
      */
     Id?: Id;
     /**
@@ -1488,7 +1521,7 @@ declare namespace ServiceCatalog {
   export type ProvisioningArtifactDescription = string;
   export interface ProvisioningArtifactDetail {
     /**
-     * The identifier of the provisioning artifact.
+     * The identifier of the provisioning artifact. This is sometimes referred to as the product version.
      */
     Id?: Id;
     /**
@@ -1500,7 +1533,7 @@ declare namespace ServiceCatalog {
      */
     Description?: ProvisioningArtifactName;
     /**
-     * The type of the provisioning artifact.
+     * The type of the provisioning artifact. The following provisioning artifact types are used by AWS Marketplace products:  MARKETPLACE_AMI - AMI products.  MARKETPLACE_CAR - CAR (Cluster and AWS Resources) products.
      */
     Type?: ProvisioningArtifactType;
     /**
@@ -1550,15 +1583,38 @@ declare namespace ServiceCatalog {
      */
     Description?: ProvisioningArtifactDescription;
     /**
-     * Additional information about the provisioning artifact properties.
+     * Additional information about the provisioning artifact properties. When using this element in a request, you must specify LoadTemplateFromURL. For more information, see CreateProvisioningArtifact.
      */
     Info: ProvisioningArtifactInfo;
     /**
-     * The type of the provisioning artifact properties.
+     * The type of the provisioning artifact properties. The following provisioning artifact property types are used by AWS Marketplace products:  MARKETPLACE_AMI - AMI products.  MARKETPLACE_CAR - CAR (Cluster and AWS Resources) products.
      */
     Type?: ProvisioningArtifactType;
   }
-  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|string;
+  export type ProvisioningArtifactSummaries = ProvisioningArtifactSummary[];
+  export interface ProvisioningArtifactSummary {
+    /**
+     * The provisioning artifact identifier.
+     */
+    Id?: Id;
+    /**
+     * The provisioning artifact name.
+     */
+    Name?: ProvisioningArtifactName;
+    /**
+     * The provisioning artifact description.
+     */
+    Description?: ProvisioningArtifactDescription;
+    /**
+     * The UTC timestamp of the creation time.
+     */
+    CreatedTime?: ProvisioningArtifactCreatedTime;
+    /**
+     * The provisioning artifact metadata. This data is used with products created by AWS Marketplace.
+     */
+    ProvisioningArtifactMetadata?: ProvisioningArtifactInfo;
+  }
+  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|string;
   export type ProvisioningArtifacts = ProvisioningArtifact[];
   export interface ProvisioningParameter {
     /**
@@ -1581,7 +1637,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductName?: ProvisionedProductName;
     /**
-     * The status of the ProvisionedProduct object.
+     * The status of the ProvisionedProduct object.  CREATED - Request created but the operation has not yet started.  IN_PROGRESS - The requested operation is in-progress.  IN_PROGRESS_IN_ERROR - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a roll-back.  SUCCEEDED - The requested operation has successfully completed.  FAILED - The requested operation has completed but has failed. Investigate using the error messages returned.
      */
     Status?: RecordStatus;
     /**
@@ -1609,7 +1665,7 @@ declare namespace ServiceCatalog {
      */
     ProductId?: Id;
     /**
-     * The provisioning artifact identifier for this product.
+     * The provisioning artifact identifier for this product. This is sometimes referred to as the product version.
      */
     ProvisioningArtifactId?: Id;
     /**
@@ -1652,7 +1708,7 @@ declare namespace ServiceCatalog {
     Description?: Description;
   }
   export type RecordOutputs = RecordOutput[];
-  export type RecordStatus = "IN_PROGRESS"|"SUCCEEDED"|"ERROR"|string;
+  export type RecordStatus = "CREATED"|"IN_PROGRESS"|"IN_PROGRESS_IN_ERROR"|"SUCCEEDED"|"FAILED"|string;
   export interface RecordTag {
     /**
      * The key for this tag.
@@ -1805,7 +1861,7 @@ declare namespace ServiceCatalog {
      */
     Key: TagKey;
     /**
-     * The esired value for this key.
+     * The desired value for this key.
      */
     Value: TagValue;
   }
@@ -1815,11 +1871,11 @@ declare namespace ServiceCatalog {
   export type Tags = Tag[];
   export interface TerminateProvisionedProductInput {
     /**
-     * The name of the ProvisionedProduct object to terminate. You must specify either ProvisionedProductName or ProvisionedProductId, but not both.
+     * The name of the ProvisionedProduct object to terminate. Specify either ProvisionedProductName or ProvisionedProductId, but not both.
      */
     ProvisionedProductName?: ProvisionedProductNameOrArn;
     /**
-     * The identifier of the ProvisionedProduct object to terminate. You must specify either ProvisionedProductName or ProvisionedProductId, but not both.
+     * The identifier of the ProvisionedProduct object to terminate. Specify either ProvisionedProductName or ProvisionedProductId, but not both.
      */
     ProvisionedProductId?: Id;
     /**
@@ -1971,11 +2027,11 @@ declare namespace ServiceCatalog {
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The updated name of the ProvisionedProduct object . You must specify either ProvisionedProductName or ProvisionedProductId, but not both.
+     * The updated name of the ProvisionedProduct object. Specify either ProvisionedProductName or ProvisionedProductId, but not both.
      */
     ProvisionedProductName?: ProvisionedProductNameOrArn;
     /**
-     * The identifier of the ProvisionedProduct object to update. You must specify either ProvisionedProductName or ProvisionedProductId, but not both.
+     * The identifier of the ProvisionedProduct object to update. Specify either ProvisionedProductName or ProvisionedProductId, but not both.
      */
     ProvisionedProductId?: Id;
     /**
@@ -1983,7 +2039,7 @@ declare namespace ServiceCatalog {
      */
     ProductId?: Id;
     /**
-     * The provisioning artifact identifier for this product.
+     * The provisioning artifact identifier for this product. This is sometimes referred to as the product version.
      */
     ProvisioningArtifactId?: Id;
     /**
@@ -2015,7 +2071,7 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The identifier of the provisioning artifact for the update request.
+     * The identifier of the provisioning artifact for the update request. This is sometimes referred to as the product version.
      */
     ProvisioningArtifactId: Id;
     /**
@@ -2069,6 +2125,7 @@ declare namespace ServiceCatalog {
   }
   export type UsageInstructions = UsageInstruction[];
   export type UsePreviousValue = boolean;
+  export type Verbose = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
