@@ -1081,6 +1081,17 @@
       });
     });
     describe('upload', function() {
+      it('sets it\'s signatureVersion to match the calling service client', function() {
+        var s3 = new AWS.S3({
+          region: 'us-east-1'
+        });
+        var uploader = s3.upload({
+          Bucket: 'bucket',
+          Key: 'key',
+          Body: 'body'
+        });
+        expect(s3.getSignatureVersion()).to.equal(uploader.service.getSignatureVersion());
+      });
       it('accepts parameters in upload() call', function() {
         var done;
         helpers.mockResponses([
