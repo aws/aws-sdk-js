@@ -9,7 +9,7 @@
   ignoreRequire = require;
 
   if (typeof window === 'undefined') {
-    AWS = ignoreRequire('../lib/aws');
+    //AWS = ignoreRequire('../lib/aws');
     topLevelScope = global;
   } else {
     AWS = window.AWS;

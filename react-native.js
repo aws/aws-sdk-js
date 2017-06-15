@@ -1,6 +1,4 @@
-require('./lib/react-native-loader');
-
-var AWS = require('./lib/core');
+var AWS = require('./lib/react-native-loader');
 
 require('./clients/all');
 module.exports = AWS;

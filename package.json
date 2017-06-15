@@ -14,7 +14,7 @@
   ],
   "devDependencies": {
     "@types/node": "^6.0.46",
-    "browserify": "13.1.0",
+    "browserify": "14.4.0",
     "chai": "^3.0",
     "codecov": "^1.0.1",
     "coffee-script": "1.6.3",
@@ -57,7 +57,7 @@
   "browserify": {
     "transform": "./dist-tools/transform.js"
   },
-  "react-native": {
+  "react-native-apiloader": {
     "lib/aws.js": "../react-native.js",
     "lib/browser.js": "../react-native.js",
     "fs": "./lib/empty.js",
@@ -66,6 +66,28 @@
     "./lib/browser_loader.js": "./lib/react-native-loader.js",
     "index.js": "./react-native.js",
     "./support/isBuffer.js": "./support/isBufferBrowser.js"
+  },
+  "react-native-base": {
+    "lib/aws.js": "../react-native.js",
+    "lib/browser.js": "../react-native.js",
+    "fs": "./lib/empty.js",
+    "uuid/lib/rng": "uuid/lib/rng-browser.js",
+    "./lib/node_loader.js": "./lib/react-native-loader.js",
+    "./lib/browser_loader.js": "./lib/react-native-loader.js",
+    "index.js": "./react-native.js",
+    "./support/isBuffer.js": "./support/isBufferBrowser.js"
+  },
+  "react-native-test": {
+    "fs": "./lib/empty.js",
+    "./lib/node_loader.js": "./dist/aws-sdk-base-react-native",
+    "./lib/browser_loader.js": "./dist/aws-sdk-base-react-native",
+    "./lib/react-native-loader.js": "./dist/aws-sdk-base-react-native"
+  },
+  "react-native": {
+    "fs": "./lib/empty.js",
+    "./lib/node_loader.js": "./lib/react-native-loader.js",
+    "./lib/browser_loader.js": "./lib/react-native-loader.js",
+    "./lib/core.js": "./dist/aws-sdk-core-react-native.js"
   },
   "directories": {
     "lib": "lib"
