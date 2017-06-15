@@ -32,6 +32,14 @@ describe('DynamoDb document client typeOf (internal)', function() {
         expect(typeOf(new Buffer('foo'))).to.equal('Binary');
     });
 
+    it('should return "Binary" for TypedArray objects', function() {
+        expect(typeOf(new Uint8Array(0))).to.equal('Binary');
+    });
+
+    it('should return "Binary" for ArrayBuffer objects', function() {
+        expect(typeOf(new ArrayBuffer(0))).to.equal('Binary');
+    });
+
     it('should return "Boolean" for booleans', function() {
         expect(typeOf(true)).to.equal('Boolean');
     });
