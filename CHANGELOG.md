@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.71.0-->
+<!--LATEST=2.72.0-->
 <!--ENTRYINSERT-->
+
+## 2.72.0
+* feature: XRay: Add a response time histogram to the services in response of GetServiceGraph API.
 
 ## 2.71.0
 * feature: DynamoDB: Adds two new functions to the AWS.DynamoDB.Converter namespace: one to convert full DynamoDB items (such as what you might receive for events in a DynamoDB stream) into plain vanilla JavaScript objects and one to convert JavaScript objects back into DynamoDB items
