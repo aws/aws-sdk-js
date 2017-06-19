@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.72.0-->
+<!--LATEST=2.73.0-->
 <!--ENTRYINSERT-->
+
+## 2.73.0
+* feature: Organizations: Improvements to Exception Modeling
 
 ## 2.72.0
 * feature: XRay: Add a response time histogram to the services in response of GetServiceGraph API.

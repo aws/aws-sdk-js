@@ -33,7 +33,7 @@
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Sends a response to the originator of a handshake agreeing to the action proposed by the handshake request. </p> <p>This operation can be called only by the following principals when they also have the relevant IAM permissions:</p> <ul> <li> <p> <b>Invitation to join</b> or <b>Approve all features request</b> handshakes: only a principal from the member account. </p> </li> <li> <p> <b>Enable all features final confirmation</b> handshake: only a principal from the master account.</p> <p>For more information about invitations, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html\">Inviting an AWS Account to Join Your Organization</a> in the <i>AWS Organizations User Guide</i>. For more information about requests to enable all features in the organization, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">Enabling All Features in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p> </li> </ul>"
+      "documentation":"<p>Sends a response to the originator of a handshake agreeing to the action proposed by the handshake request. </p> <p>This operation can be called only by the following principals when they also have the relevant IAM permissions:</p> <ul> <li> <p> <b>Invitation to join</b> or <b>Approve all features request</b> handshakes: only a principal from the member account. </p> </li> <li> <p> <b>Enable all features final confirmation</b> handshake: only a principal from the master account.</p> <p>For more information about invitations, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html\">Inviting an AWS Account to Join Your Organization</a> in the <i>AWS Organizations User Guide</i>. For more information about requests to enable all features in the organization, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">Enabling All Features in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p> </li> </ul> <p>After you accept a handshake, it continues to appear in the results of relevant APIs for only 30 days. After that it is deleted.</p>"
     },
     "AttachPolicy":{
       "name":"AttachPolicy",
@@ -67,6 +67,7 @@
       "output":{"shape":"CancelHandshakeResponse"},
       "errors":[
         {"shape":"AccessDeniedException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"HandshakeNotFoundException"},
         {"shape":"InvalidHandshakeTransitionException"},
         {"shape":"HandshakeAlreadyInStateException"},
@@ -74,7 +75,7 @@
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Cancels a handshake. Canceling a handshake sets the handshake state to <code>CANCELED</code>. </p> <p>This operation can be called only from the account that originated the handshake. The recipient of the handshake can't cancel it, but can use <a>DeclineHandshake</a> instead. After a handshake is canceled, the recipient can no longer respond to that handshake. </p>"
+      "documentation":"<p>Cancels a handshake. Canceling a handshake sets the handshake state to <code>CANCELED</code>. </p> <p>This operation can be called only from the account that originated the handshake. The recipient of the handshake can't cancel it, but can use <a>DeclineHandshake</a> instead. After a handshake is canceled, the recipient can no longer respond to that handshake.</p> <p>After you cancel a handshake, it continues to appear in the results of relevant APIs for only 30 days. After that it is deleted.</p>"
     },
     "CreateAccount":{
       "name":"CreateAccount",
@@ -87,6 +88,7 @@
       "errors":[
         {"shape":"AccessDeniedException"},
         {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ConstraintViolationException"},
         {"shape":"InvalidInputException"},
         {"shape":"FinalizingOrganizationException"},
@@ -125,6 +127,7 @@
       "errors":[
         {"shape":"AccessDeniedException"},
         {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ConstraintViolationException"},
         {"shape":"DuplicateOrganizationalUnitException"},
         {"shape":"InvalidInputException"},
@@ -166,6 +169,7 @@
       "output":{"shape":"DeclineHandshakeResponse"},
       "errors":[
         {"shape":"AccessDeniedException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"HandshakeNotFoundException"},
         {"shape":"InvalidHandshakeTransitionException"},
         {"shape":"HandshakeAlreadyInStateException"},
@@ -173,7 +177,7 @@
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Declines a handshake request. This sets the handshake state to <code>DECLINED</code> and effectively deactivates the request.</p> <p>This operation can be called only from the account that received the handshake. The originator of the handshake can use <a>CancelHandshake</a> instead. The originator can't reactivate a declined request, but can re-initiate the process with a new handshake request.</p>"
+      "documentation":"<p>Declines a handshake request. This sets the handshake state to <code>DECLINED</code> and effectively deactivates the request.</p> <p>This operation can be called only from the account that received the handshake. The originator of the handshake can use <a>CancelHandshake</a> instead. The originator can't reactivate a declined request, but can re-initiate the process with a new handshake request.</p> <p>After you decline a handshake, it continues to appear in the results of relevant APIs for only 30 days. After that it is deleted.</p>"
     },
     "DeleteOrganization":{
       "name":"DeleteOrganization",
@@ -276,12 +280,13 @@
       "output":{"shape":"DescribeHandshakeResponse"},
       "errors":[
         {"shape":"AccessDeniedException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"HandshakeNotFoundException"},
         {"shape":"InvalidInputException"},
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Retrieves information about a previously requested handshake. The handshake ID comes from the response to the original <a>InviteAccountToOrganization</a> operation that generated the handshake.</p> <p>This operation can be called from any account in the organization.</p>"
+      "documentation":"<p>Retrieves information about a previously requested handshake. The handshake ID comes from the response to the original <a>InviteAccountToOrganization</a> operation that generated the handshake.</p> <p>You can access handshakes that are ACCEPTED, DECLINED, or CANCELED for only 30 days after they change to that state. They are then deleted and no longer accessible.</p> <p>This operation can be called from any account in the organization.</p>"
     },
     "DescribeOrganization":{
       "name":"DescribeOrganization",
@@ -293,6 +298,7 @@
       "errors":[
         {"shape":"AccessDeniedException"},
         {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
@@ -387,6 +393,7 @@
       "errors":[
         {"shape":"AccessDeniedException"},
         {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"HandshakeConstraintViolationException"},
         {"shape":"InvalidInputException"},
         {"shape":"ServiceException"},
@@ -427,6 +434,7 @@
       "errors":[
         {"shape":"AccessDeniedException"},
         {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"HandshakeConstraintViolationException"},
         {"shape":"DuplicateHandshakeException"},
         {"shape":"InvalidInputException"},
@@ -434,7 +442,7 @@
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Sends an invitation to another account to join your organization as a member account. Organizations sends email on your behalf to the email address that is associated with the other account's owner. The invitation is implemented as a <a>Handshake</a> whose details are in the response.</p> <p>This operation can be called only from the organization's master account.</p>"
+      "documentation":"<p>Sends an invitation to another account to join your organization as a member account. Organizations sends email on your behalf to the email address that is associated with the other account's owner. The invitation is implemented as a <a>Handshake</a> whose details are in the response.</p> <important> <p>You can invite AWS accounts only from the same reseller as the master account. For example, if your organization's master account was created by Amazon Internet Services Pvt. Ltd (AISPL), an AWS reseller in India, then you can only invite other AISPL accounts to your organization. You can't combine accounts from AISPL and AWS. For more information, see <a href=\"http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html\">Consolidated Billing in India</a>.</p> </important> <p>This operation can be called only from the organization's master account.</p>"
     },
     "LeaveOrganization":{
       "name":"LeaveOrganization",
@@ -453,7 +461,7 @@
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Removes a member account from its parent organization. This version of the operation is performed by the account that wants to leave. To remove a member account as a user in the master account, use <a>RemoveAccountFromOrganization</a> instead.</p> <p>This operation can be called only from a member account in the organization.</p> <important> <p>The master account in an organization with all features enabled can set service control policies (SCPs) that can restrict what administrators of member accounts can do, including preventing them from successfully calling <code>LeaveOrganization</code> and leaving the organization. </p> </important>"
+      "documentation":"<p>Removes a member account from its parent organization. This version of the operation is performed by the account that wants to leave. To remove a member account as a user in the master account, use <a>RemoveAccountFromOrganization</a> instead.</p> <p>This operation can be called only from a member account in the organization.</p> <important> <ul> <li> <p>The master account in an organization with all features enabled can set service control policies (SCPs) that can restrict what administrators of member accounts can do, including preventing them from successfully calling <code>LeaveOrganization</code> and leaving the organization. </p> </li> <li> <p>If you created the account using the AWS Organizations console, the Organizations API, or the Organizations CLI commands, then you cannot remove the account.</p> </li> <li> <p>You can leave an organization only after you enable IAM user access to billing in your account. For more information, see <a href=\"http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate\">Activating Access to the Billing and Cost Management Console</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> </li> </ul> </important>"
     },
     "ListAccounts":{
       "name":"ListAccounts",
@@ -535,11 +543,12 @@
       "output":{"shape":"ListHandshakesForAccountResponse"},
       "errors":[
         {"shape":"AccessDeniedException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"InvalidInputException"},
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Lists the current handshakes that are associated with the account of the requesting user.</p> <p>This operation can be called from any account in the organization.</p>"
+      "documentation":"<p>Lists the current handshakes that are associated with the account of the requesting user.</p> <p>Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the results of this API for only 30 days after changing to that state. After that they are deleted and no longer accessible.</p> <p>This operation can be called from any account in the organization.</p>"
     },
     "ListHandshakesForOrganization":{
       "name":"ListHandshakesForOrganization",
@@ -552,11 +561,12 @@
       "errors":[
         {"shape":"AccessDeniedException"},
         {"shape":"AWSOrganizationsNotInUseException"},
+        {"shape":"ConcurrentModificationException"},
         {"shape":"InvalidInputException"},
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Lists the handshakes that are associated with the organization that the requesting user is part of. The <code>ListHandshakesForOrganization</code> operation returns a list of handshake structures. Each structure contains details and status about a handshake.</p> <p>This operation can be called only from the organization's master account.</p>"
+      "documentation":"<p>Lists the handshakes that are associated with the organization that the requesting user is part of. The <code>ListHandshakesForOrganization</code> operation returns a list of handshake structures. Each structure contains details and status about a handshake.</p> <p>Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the results of this API for only 30 days after changing to that state. After that they are deleted and no longer accessible.</p> <p>This operation can be called only from the organization's master account.</p>"
     },
     "ListOrganizationalUnitsForParent":{
       "name":"ListOrganizationalUnitsForParent",
@@ -703,7 +713,7 @@
         {"shape":"ServiceException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Removes the specified account from the organization.</p> <p>The removed account becomes a stand-alone account that is not a member of any organization. It is no longer subject to any policies and is responsible for its own bill payments. The organization's master account is no longer charged for any expenses accrued by the member account after it is removed from the organization.</p> <p>This operation can be called only from the organization's master account. Member accounts can remove themselves with <a>LeaveOrganization</a> instead.</p> <important> <p>You can remove only existing accounts that were invited to join the organization. You cannot remove accounts that were created by AWS Organizations.</p> </important>"
+      "documentation":"<p>Removes the specified account from the organization.</p> <p>The removed account becomes a stand-alone account that is not a member of any organization. It is no longer subject to any policies and is responsible for its own bill payments. The organization's master account is no longer charged for any expenses accrued by the member account after it is removed from the organization.</p> <p>This operation can be called only from the organization's master account. Member accounts can remove themselves with <a>LeaveOrganization</a> instead.</p> <important> <ul> <li> <p>You can remove only accounts that were created outside your organization and invited to join. If you created the account using the AWS Organizations console, the Organizations API, or the Organizations CLI commands, then you cannot remove the account.</p> </li> <li> <p>You can remove a member account only after you enable IAM user access to billing in the member account. For more information, see <a href=\"http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate\">Activating Access to the Billing and Cost Management Console</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> </li> </ul> </important>"
     },
     "UpdateOrganizationalUnit":{
       "name":"UpdateOrganizationalUnit",
@@ -962,7 +972,7 @@
         "Message":{"shape":"ExceptionMessage"},
         "Reason":{"shape":"ConstraintViolationExceptionReason"}
       },
-      "documentation":"<p>Performing this operation violates a minimum or maximum value limit. For example, attempting to removing the last SCP from an OU or root, inviting or creating too many accounts to the organization, or attaching too many policies to an account, OU, or root. This exception includes a reason that contains additional information about the violated limit:</p> <p/> <ul> <li> <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number of accounts in an organization. <b>Note</b>: deleted and closed accounts still count toward your limit.</p> </li> <li> <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes you can send in one day.</p> </li> <li> <p>OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of organizational units you can have in an organization.</p> </li> <li> <p>OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an organizational unit tree that is too many levels deep.</p> </li> <li> <p>POLICY_NUMBER_LIMIT_EXCEEDED. You attempted to exceed the number of policies that you can have in an organization.</p> </li> <li> <p>MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number of policies of a certain type that can be attached to an entity at one time.</p> </li> <li> <p>MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy from an entity that would cause the entity to have fewer than the minimum number of policies of a certain type required.</p> </li> <li> <p>ACCOUNT_CANNOT_LEAVE_ORGANIZATION: You attempted to remove an account from an organization that was created from within organizations.</p> </li> <li> <p>MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with this account, you first must associate a payment instrument, such as a credit card, with the account.</p> </li> <li> <p>MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with this member account, you first must associate a payment instrument, such as a credit card, with the account.</p> </li> <li> <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of accounts that you can create in one day.</p> </li> <li> <p>MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in this organization, you first must migrate the organization's master account to the marketplace that corresponds to the master account's address. For example, accounts with India addresses must be associated with the AISPL marketplace. All accounts in an organization must be associated with the same marketplace.</p> </li> </ul>",
+      "documentation":"<p>Performing this operation violates a minimum or maximum value limit. For example, attempting to removing the last SCP from an OU or root, inviting or creating too many accounts to the organization, or attaching too many policies to an account, OU, or root. This exception includes a reason that contains additional information about the violated limit:</p> <p/> <ul> <li> <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number of accounts in an organization. If you need more accounts, contact AWS Support to request an increase in your limit. </p> <p>Or, The number of invitations that you tried to send would cause you to exceed the limit of accounts in your organization. Send fewer invitations, or contact AWS Support to request an increase in the number of accounts.</p> <p> <b>Note</b>: deleted and closed accounts still count toward your limit.</p> </li> <li> <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes you can send in one day.</p> </li> <li> <p>OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of organizational units you can have in an organization.</p> </li> <li> <p>OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an organizational unit tree that is too many levels deep.</p> </li> <li> <p>POLICY_NUMBER_LIMIT_EXCEEDED. You attempted to exceed the number of policies that you can have in an organization.</p> </li> <li> <p>MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number of policies of a certain type that can be attached to an entity at one time.</p> </li> <li> <p>MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy from an entity that would cause the entity to have fewer than the minimum number of policies of a certain type required.</p> </li> <li> <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA: You attempted to remove an account from the organization that does not yet have enough information to exist as a stand-alone account. This account requires you to first agree to the End-User License Agreement (EULA).</p> </li> <li> <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to remove an account from the organization that does not yet have enough information to exist as a stand-alone account. This account requires you to first complete phone verification.</p> </li> <li> <p>MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with this account, you first must associate a payment instrument, such as a credit card, with the account.</p> </li> <li> <p>MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with this member account, you first must associate a payment instrument, such as a credit card, with the account.</p> </li> <li> <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of accounts that you can create in one day.</p> </li> <li> <p>MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in this organization, you first must migrate the organization's master account to the marketplace that corresponds to the master account's address. For example, accounts with India addresses must be associated with the AISPL marketplace. All accounts in an organization must be associated with the same marketplace.</p> </li> </ul>",
       "exception":true
     },
     "ConstraintViolationExceptionReason":{
@@ -976,6 +986,8 @@
         "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED",
         "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED",
         "ACCOUNT_CANNOT_LEAVE_ORGANIZATION",
+        "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA",
+        "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION",
         "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED",
         "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED",
         "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED",
@@ -1499,7 +1511,7 @@
           "documentation":"<p>Additional information that is needed to process the handshake.</p>"
         }
       },
-      "documentation":"<p>Contains information that must be exchanged to securely establish a relationship between two accounts (an <i>originator</i> and a <i>recipient</i>). For example, when a master account (the originator) invites another account (the recipient) to join its organization, the two accounts exchange information as a series of handshake requests and responses. </p>"
+      "documentation":"<p>Contains information that must be exchanged to securely establish a relationship between two accounts (an <i>originator</i> and a <i>recipient</i>). For example, when a master account (the originator) invites another account (the recipient) to join its organization, the two accounts exchange information as a series of handshake requests and responses.</p> <p> <b>Note:</b> Handshakes that are CANCELED, ACCEPTED, or DECLINED show up in lists for only 30 days after entering that state After that they are deleted.</p>"
     },
     "HandshakeAlreadyInStateException":{
       "type":"structure",
@@ -1673,7 +1685,7 @@
         "Message":{"shape":"ExceptionMessage"},
         "Reason":{"shape":"InvalidInputExceptionReason"}
       },
-      "documentation":"<p>The requested operation failed because you provided invalid values for one or more of the request parameters. This exception includes a reason that contains additional information about the violated limit:</p> <ul> <li> <p>INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity (account, organization, or email) as a party.</p> </li> <li> <p>INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid ARN for the organization.</p> </li> <li> <p>INVALID_SYNTAX_POLICY_ID: You specified an invalid policy ID. </p> </li> <li> <p>INVALID_ENUM: You specified a value that is not valid for that parameter.</p> </li> <li> <p>INVALID_LIST_MEMBER: You provided a list to a parameter that contains at least one invalid value.</p> </li> <li> <p>MAX_LENGTH_EXCEEDED: You provided a string parameter that is longer than allowed.</p> </li> <li> <p>MAX_VALUE_EXCEEDED: You provided a numeric parameter that has a larger value than allowed.</p> </li> <li> <p>MIN_LENGTH_EXCEEDED: You provided a string parameter that is shorter than allowed.</p> </li> <li> <p>MIN_VALUE_EXCEEDED: You provided a numeric parameter that has a smaller value than allowed.</p> </li> <li> <p>IMMUTABLE_POLICY: You specified a policy that is managed by AWS and cannot be modified.</p> </li> <li> <p>INVALID_PATTERN: You provided a value that doesn't match the required pattern.</p> </li> <li> <p>INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn't match the required pattern.</p> </li> <li> <p>INPUT_REQUIRED: You must include a value for all required parameters.</p> </li> <li> <p>INVALID_PAGINATION_TOKEN: Get the value for the NextToken parameter from the response to a previous call of the operation.</p> </li> <li> <p>MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter parameter for the operation.</p> </li> <li> <p>MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between entities in the same root.</p> </li> </ul>",
+      "documentation":"<p>The requested operation failed because you provided invalid values for one or more of the request parameters. This exception includes a reason that contains additional information about the violated limit:</p> <ul> <li> <p>INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity (account, organization, or email) as a party.</p> </li> <li> <p>INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid ARN for the organization.</p> </li> <li> <p>INVALID_SYNTAX_POLICY_ID: You specified an invalid policy ID. </p> </li> <li> <p>INVALID_ENUM: You specified a value that is not valid for that parameter.</p> </li> <li> <p>INVALID_FULL_NAME_TARGET: You specified a full name that contains invalid characters.</p> </li> <li> <p>INVALID_LIST_MEMBER: You provided a list to a parameter that contains at least one invalid value.</p> </li> <li> <p>MAX_LENGTH_EXCEEDED: You provided a string parameter that is longer than allowed.</p> </li> <li> <p>MAX_VALUE_EXCEEDED: You provided a numeric parameter that has a larger value than allowed.</p> </li> <li> <p>MIN_LENGTH_EXCEEDED: You provided a string parameter that is shorter than allowed.</p> </li> <li> <p>MIN_VALUE_EXCEEDED: You provided a numeric parameter that has a smaller value than allowed.</p> </li> <li> <p>IMMUTABLE_POLICY: You specified a policy that is managed by AWS and cannot be modified.</p> </li> <li> <p>INVALID_PATTERN: You provided a value that doesn't match the required pattern.</p> </li> <li> <p>INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn't match the required pattern.</p> </li> <li> <p>INPUT_REQUIRED: You must include a value for all required parameters.</p> </li> <li> <p>INVALID_PAGINATION_TOKEN: Get the value for the NextToken parameter from the response to a previous call of the operation.</p> </li> <li> <p>MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter parameter for the operation.</p> </li> <li> <p>MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between entities in the same root.</p> </li> </ul>",
       "exception":true
     },
     "InvalidInputExceptionReason":{
@@ -1694,7 +1706,8 @@
         "INPUT_REQUIRED",
         "INVALID_NEXT_TOKEN",
         "MAX_LIMIT_EXCEEDED_FILTER",
-        "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
+        "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS",
+        "INVALID_FULL_NAME_TARGET"
       ]
     },
     "InviteAccountToOrganizationRequest":{
