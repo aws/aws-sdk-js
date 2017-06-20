@@ -205,11 +205,62 @@
             done();
           });
         });
+        it('using sigv2 and the "Bucket" parameter contains forward slashes and "Key" exists', function(done) {
+          helpers.mockResponses([
+            {
+              data: {
+                ETag: 'ETAG'
+              }
+            }
+          ]);
+          var s3 = new AWS.S3({signatureVersion: 'v2'});
+          s3.putObject({Bucket: 'foo/bar', Key: 'baz', Body: 'test'}, function(err, data) {
+            expect(null).to.eql(null);
+            expect(data).to.eql({ETag: 'ETAG'});
+            done();
+          });
+        });
+      });
+      describe('when encountering a "Bucket" and "Key" using sigv4', function() {
+        it('will move characters after forward slash in "Bucket" to front of "Key"', function(done) {
+          helpers.mockResponses([
+            {
+              data: {
+                ETag: 'ETAG'
+              }
+            }
+          ]);
+          var s3 = new AWS.S3({signatureVersion: 'v4'});
+          s3.putObject({Bucket: 'foo/bar/dinosaur', Key: 'baz', Body: 'test'}, function(err, data) {
+            expect(this.request.params.Bucket).to.eql('foo');
+            expect(this.request.params.Key).to.eql('bar/dinosaur/baz');
+            expect(null).to.eql(null);
+            expect(data).to.eql({ETag: 'ETAG'});
+            done();
+          });
+        });
+        it('will prepend trailing slashes in "Bucket" to the "Key"', function(done) {
+          helpers.mockResponses([
+            {
+              data: {
+                ETag: 'ETAG'
+              }
+            }
+          ]);
+          var s3 = new AWS.S3({signatureVersion: 'v4'});
+          s3.putObject({Bucket: 'foo/', Key: '', Body: 'test'}, function(err, data) {
+            expect(this.request.params.Bucket).to.eql('foo');
+            expect(this.request.params.Key).to.eql('/');
+            expect(null).to.eql(null);
+            expect(data).to.eql({ETag: 'ETAG'});
+            done();
+          });
+        });
       });
       describe('will throw an error when', function() {
-        it('using sigv4 and the "Bucket" parameter contains forward slashes', function(done) {
+        it('using sigv4 and the "Bucket" parameter contains forward slashes and "Key" is not defined', function(done) {
           var s3 = new AWS.S3({signatureVersion: 'v4'});
-          s3.putObject({Bucket: 'foo/bar', Key: 'baz', Body: 'test'}, function(err, data) {
+          s3.createBucket({Bucket: 'foo/bar'}, function(err, data) {
             expect(err.code).to.eql('InvalidBucket');
             done();
           });
@@ -1081,6 +1132,17 @@
       });
     });
     describe('upload', function() {
+      it('sets it\'s signatureVersion to match the calling service client', function() {
+        var s3 = new AWS.S3({
+          region: 'us-east-1'
+        });
+        var uploader = s3.upload({
+          Bucket: 'bucket',
+          Key: 'key',
+          Body: 'body'
+        });
+        expect(s3.getSignatureVersion()).to.equal(uploader.service.getSignatureVersion());
+      });
       it('accepts parameters in upload() call', function() {
         var done;
         helpers.mockResponses([
