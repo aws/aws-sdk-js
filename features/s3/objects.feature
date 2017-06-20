@@ -215,3 +215,63 @@ Feature: Working with Objects in S3
   Scenario: Error handling
     Given I put "data" to the invalid key ""
     Then the status code should be 400
+
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with trailing slash
+    Given I use signatureVersion "v4"
+    When I put "" to the key "" with bucket suffix "/"
+    Then the object "/" should exist
+  
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with dobule trailing slashes
+    Given I use signatureVersion "v4"
+    When I put "" to the key "" with bucket suffix "//"
+    Then the object "//" should exist
+
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with slashes without trailing slash
+    Given I use signatureVersion "v4"
+    When I put "" to the key "" with bucket suffix "/a/b"
+    Then the object "a/b/" should exist
+
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with slashes with Key
+    Given I use signatureVersion "v4"
+    When I put "" to the key "foo" with bucket suffix "/a/b"
+    Then the object "a/b/foo" should exist
+
+  @bucket-slashes
+  Scenario: Sigv4 Bucket with trailing slashes with Key
+    Given I use signatureVersion "v4"
+    When I put "" to the key "foo" with bucket suffix "/a/b/"
+    Then the object "a/b//foo" should exist
+
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with trailing slash
+    Given I use signatureVersion "v2"
+    When I put "" to the key "" with bucket suffix "/"
+    Then the object "/" should exist
+  
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with double trailing slashes
+    Given I use signatureVersion "v2"
+    When I put "" to the key "" with bucket suffix "//"
+    Then the object "//" should exist
+
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with slashes without trailing slash
+    Given I use signatureVersion "v2"
+    When I put "" to the key "" with bucket suffix "/a/b"
+    Then the object "a/b/" should exist
+
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with slashes with Key
+    Given I use signatureVersion "v2"
+    When I put "" to the key "foo" with bucket suffix "/a/b"
+    Then the object "a/b/foo" should exist
+
+  @bucket-slashes
+  Scenario: Sigv2 Bucket with trailing slashes with Key
+    Given I use signatureVersion "v2"
+    When I put "" to the key "foo" with bucket suffix "/a/b/"
+    Then the object "a/b//foo" should exist

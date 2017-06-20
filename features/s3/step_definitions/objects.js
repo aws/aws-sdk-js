@@ -311,4 +311,22 @@ module.exports = function () {
       }
     });
   });
+
+  this.Given(/^I use signatureVersion "([^"]*)"$/, function(signatureVersion, next) {
+    this.s3Slashes = new this.AWS.S3({signatureVersion: signatureVersion});
+    next();
+  });
+
+  this.When(/^I put "([^"]*)" to the key "([^"]*)" with bucket suffix "([^"]*)"$/, function(data, key, suffix, next) {
+    var world = this;
+    var params = {
+      Bucket: this.sharedBucket + suffix,
+      Key: key,
+      Body: data
+    };
+    this.s3Slashes.putObject(params, function(err, data) {
+      world.assert.equal(!!err, false);
+      next();
+    });
+  });
 };
