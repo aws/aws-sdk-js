@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.73.0
+// AWS SDK for JavaScript v2.74.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -100134,6 +100134,113 @@ module.exports={
         }
       }
     },
+    "DescribeActivities": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/api/v1/activities",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
+          "StartTime": {
+            "location": "querystring",
+            "locationName": "startTime",
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "location": "querystring",
+            "locationName": "endTime",
+            "type": "timestamp"
+          },
+          "OrganizationId": {
+            "location": "querystring",
+            "locationName": "organizationId"
+          },
+          "UserId": {
+            "location": "querystring",
+            "locationName": "userId"
+          },
+          "Limit": {
+            "location": "querystring",
+            "locationName": "limit",
+            "type": "integer"
+          },
+          "Marker": {
+            "location": "querystring",
+            "locationName": "marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "UserActivities": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Type": {},
+                "TimeStamp": {
+                  "type": "timestamp"
+                },
+                "OrganizationId": {},
+                "Initiator": {
+                  "shape": "S2b"
+                },
+                "Participants": {
+                  "type": "structure",
+                  "members": {
+                    "Users": {
+                      "type": "list",
+                      "member": {
+                        "shape": "S2b"
+                      }
+                    },
+                    "Groups": {
+                      "type": "list",
+                      "member": {
+                        "type": "structure",
+                        "members": {
+                          "Id": {},
+                          "Name": {}
+                        }
+                      }
+                    }
+                  }
+                },
+                "ResourceMetadata": {
+                  "shape": "S2h"
+                },
+                "OriginalParent": {
+                  "shape": "S2h"
+                },
+                "CommentMetadata": {
+                  "type": "structure",
+                  "members": {
+                    "CommentId": {},
+                    "Contributor": {
+                      "shape": "S8"
+                    },
+                    "CreatedTimestamp": {
+                      "type": "timestamp"
+                    },
+                    "CommentStatus": {},
+                    "RecipientId": {}
+                  }
+                }
+              }
+            }
+          },
+          "Marker": {}
+        }
+      }
+    },
     "DescribeComments": {
       "http": {
         "method": "GET",
@@ -100230,7 +100337,7 @@ module.exports={
           "DocumentVersions": {
             "type": "list",
             "member": {
-              "shape": "S2e"
+              "shape": "S2s"
             }
           },
           "Marker": {}
@@ -100289,15 +100396,12 @@ module.exports={
         "type": "structure",
         "members": {
           "Folders": {
-            "type": "list",
-            "member": {
-              "shape": "S1c"
-            }
+            "shape": "S35"
           },
           "Documents": {
             "type": "list",
             "member": {
-              "shape": "S2t"
+              "shape": "S37"
             }
           },
           "Marker": {}
@@ -100403,6 +100507,44 @@ module.exports={
         }
       }
     },
+    "DescribeRootFolders": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/api/v1/me/root",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AuthenticationToken"
+        ],
+        "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          },
+          "Limit": {
+            "location": "querystring",
+            "locationName": "limit",
+            "type": "integer"
+          },
+          "Marker": {
+            "location": "querystring",
+            "locationName": "marker"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Folders": {
+            "shape": "S35"
+          },
+          "Marker": {}
+        }
+      }
+    },
     "DescribeUsers": {
       "http": {
         "method": "GET",
@@ -100474,6 +100616,34 @@ module.exports={
         }
       }
     },
+    "GetCurrentUser": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/api/v1/me",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "AuthenticationToken"
+        ],
+        "members": {
+          "AuthenticationToken": {
+            "shape": "S2",
+            "location": "header",
+            "locationName": "Authentication"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "User": {
+            "shape": "S8"
+          }
+        }
+      }
+    },
     "GetDocument": {
       "http": {
         "method": "GET",
@@ -100506,7 +100676,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "S2t"
+            "shape": "S37"
           },
           "CustomMetadata": {
             "shape": "S15"
@@ -100554,7 +100724,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Path": {
-            "shape": "S3f"
+            "shape": "S3x"
           }
         }
       }
@@ -100600,7 +100770,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "S2e"
+            "shape": "S2s"
           },
           "CustomMetadata": {
             "shape": "S15"
@@ -100688,7 +100858,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Path": {
-            "shape": "S3f"
+            "shape": "S3x"
           }
         }
       }
@@ -100728,13 +100898,13 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "S2t"
+            "shape": "S37"
           },
           "UploadMetadata": {
             "type": "structure",
             "members": {
               "UploadUrl": {
-                "shape": "S2j"
+                "shape": "S2x"
               },
               "SignedHeaders": {
                 "type": "map",
@@ -101046,7 +101216,31 @@ module.exports={
         "Protocol": {}
       }
     },
-    "S2e": {
+    "S2b": {
+      "type": "structure",
+      "members": {
+        "Id": {},
+        "Username": {},
+        "GivenName": {},
+        "Surname": {},
+        "EmailAddress": {}
+      }
+    },
+    "S2h": {
+      "type": "structure",
+      "members": {
+        "Type": {},
+        "Name": {},
+        "OriginalName": {},
+        "Id": {},
+        "VersionId": {},
+        "Owner": {
+          "shape": "S2b"
+        },
+        "ParentId": {}
+      }
+    },
+    "S2s": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -101074,23 +101268,29 @@ module.exports={
           "type": "map",
           "key": {},
           "value": {
-            "shape": "S2j"
+            "shape": "S2x"
           }
         },
         "Source": {
           "type": "map",
           "key": {},
           "value": {
-            "shape": "S2j"
+            "shape": "S2x"
           }
         }
       }
     },
-    "S2j": {
+    "S2x": {
       "type": "string",
       "sensitive": true
     },
-    "S2t": {
+    "S35": {
+      "type": "list",
+      "member": {
+        "shape": "S1c"
+      }
+    },
+    "S37": {
       "type": "structure",
       "members": {
         "Id": {},
@@ -101103,7 +101303,7 @@ module.exports={
           "type": "timestamp"
         },
         "LatestVersionMetadata": {
-          "shape": "S2e"
+          "shape": "S2s"
         },
         "ResourceState": {},
         "Labels": {
@@ -101111,7 +101311,7 @@ module.exports={
         }
       }
     },
-    "S3f": {
+    "S3x": {
       "type": "structure",
       "members": {
         "Components": {
@@ -102979,7 +103179,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.73.0',
+  VERSION: '2.74.0',
 
 
   Signers: {},

@@ -156,6 +156,14 @@ declare class WorkDocs extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Describes the user activities in a specified time period.
+   */
+  describeActivities(params: WorkDocs.Types.DescribeActivitiesRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeActivitiesResponse) => void): Request<WorkDocs.Types.DescribeActivitiesResponse, AWSError>;
+  /**
+   * Describes the user activities in a specified time period.
+   */
+  describeActivities(callback?: (err: AWSError, data: WorkDocs.Types.DescribeActivitiesResponse) => void): Request<WorkDocs.Types.DescribeActivitiesResponse, AWSError>;
+  /**
    * List all the comments for the specified document version.
    */
   describeComments(params: WorkDocs.Types.DescribeCommentsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeCommentsResponse) => void): Request<WorkDocs.Types.DescribeCommentsResponse, AWSError>;
@@ -196,6 +204,14 @@ declare class WorkDocs extends Service {
    */
   describeResourcePermissions(callback?: (err: AWSError, data: WorkDocs.Types.DescribeResourcePermissionsResponse) => void): Request<WorkDocs.Types.DescribeResourcePermissionsResponse, AWSError>;
   /**
+   * Describes the current user's special folders; the RootFolder and the RecyleBin. RootFolder is the root of user's files and folders and RecyleBin is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.
+   */
+  describeRootFolders(params: WorkDocs.Types.DescribeRootFoldersRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeRootFoldersResponse) => void): Request<WorkDocs.Types.DescribeRootFoldersResponse, AWSError>;
+  /**
+   * Describes the current user's special folders; the RootFolder and the RecyleBin. RootFolder is the root of user's files and folders and RecyleBin is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.
+   */
+  describeRootFolders(callback?: (err: AWSError, data: WorkDocs.Types.DescribeRootFoldersResponse) => void): Request<WorkDocs.Types.DescribeRootFoldersResponse, AWSError>;
+  /**
    * Describes the specified users. You can describe all users or filter the results (for example, by status or organization). By default, Amazon WorkDocs returns the first 24 active or pending users. If there are more results, the response includes a marker that you can use to request the next set of results.
    */
   describeUsers(params: WorkDocs.Types.DescribeUsersRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeUsersResponse) => void): Request<WorkDocs.Types.DescribeUsersResponse, AWSError>;
@@ -203,6 +219,14 @@ declare class WorkDocs extends Service {
    * Describes the specified users. You can describe all users or filter the results (for example, by status or organization). By default, Amazon WorkDocs returns the first 24 active or pending users. If there are more results, the response includes a marker that you can use to request the next set of results.
    */
   describeUsers(callback?: (err: AWSError, data: WorkDocs.Types.DescribeUsersResponse) => void): Request<WorkDocs.Types.DescribeUsersResponse, AWSError>;
+  /**
+   * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.
+   */
+  getCurrentUser(params: WorkDocs.Types.GetCurrentUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetCurrentUserResponse) => void): Request<WorkDocs.Types.GetCurrentUserResponse, AWSError>;
+  /**
+   * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.
+   */
+  getCurrentUser(callback?: (err: AWSError, data: WorkDocs.Types.GetCurrentUserResponse) => void): Request<WorkDocs.Types.GetCurrentUserResponse, AWSError>;
   /**
    * Retrieves details of a document.
    */
@@ -331,6 +355,41 @@ declare namespace WorkDocs {
      */
     User?: User;
   }
+  export interface Activity {
+    /**
+     * The activity type.
+     */
+    Type?: ActivityType;
+    /**
+     * The timestamp when the action was performed.
+     */
+    TimeStamp?: TimestampType;
+    /**
+     * The ID of the organization.
+     */
+    OrganizationId?: IdType;
+    /**
+     * The user who performed the action.
+     */
+    Initiator?: UserMetadata;
+    /**
+     * The list of users or groups impacted by this action. This is an optional field and is filled for the following sharing activities: DOCUMENT_SHARED, DOCUMENT_SHARED, DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.
+     */
+    Participants?: Participants;
+    /**
+     * The metadata of the resource involved in the user action.
+     */
+    ResourceMetadata?: ResourceMetadata;
+    /**
+     * The original parent of the resource. This is an optional field and is filled for move activities.
+     */
+    OriginalParent?: ResourceMetadata;
+    /**
+     * Metadata of the commenting activity. This is an optional field and is filled for commenting activities.
+     */
+    CommentMetadata?: CommentMetadata;
+  }
+  export type ActivityType = "DOCUMENT_CHECKED_IN"|"DOCUMENT_CHECKED_OUT"|"DOCUMENT_RENAMED"|"DOCUMENT_VERSION_UPLOADED"|"DOCUMENT_VERSION_DELETED"|"DOCUMENT_RECYCLED"|"DOCUMENT_RESTORED"|"DOCUMENT_REVERTED"|"DOCUMENT_SHARED"|"DOCUMENT_UNSHARED"|"DOCUMENT_SHARE_PERMISSION_CHANGED"|"DOCUMENT_SHAREABLE_LINK_CREATED"|"DOCUMENT_SHAREABLE_LINK_REMOVED"|"DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"|"DOCUMENT_MOVED"|"DOCUMENT_COMMENT_ADDED"|"DOCUMENT_COMMENT_DELETED"|"DOCUMENT_ANNOTATION_ADDED"|"DOCUMENT_ANNOTATION_DELETED"|"FOLDER_CREATED"|"FOLDER_DELETED"|"FOLDER_RENAMED"|"FOLDER_RECYCLED"|"FOLDER_RESTORED"|"FOLDER_SHARED"|"FOLDER_UNSHARED"|"FOLDER_SHARE_PERMISSION_CHANGED"|"FOLDER_SHAREABLE_LINK_CREATED"|"FOLDER_SHAREABLE_LINK_REMOVED"|"FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"|"FOLDER_MOVED"|string;
   export interface AddResourcePermissionsRequest {
     /**
      * Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.
@@ -393,6 +452,22 @@ declare namespace WorkDocs {
   }
   export type CommentIdType = string;
   export type CommentList = Comment[];
+  export interface CommentMetadata {
+    /**
+     * The ID of the comment.
+     */
+    CommentId?: CommentIdType;
+    /**
+     * The user who made the comment.
+     */
+    Contributor?: User;
+    CreatedTimestamp?: TimestampType;
+    CommentStatus?: CommentStatusType;
+    /**
+     * The ID of the user being replied to.
+     */
+    RecipientId?: IdType;
+  }
   export type CommentStatusType = "DRAFT"|"PUBLISHED"|"DELETED"|string;
   export type CommentTextType = string;
   export type CommentVisibilityType = "PUBLIC"|"PRIVATE"|string;
@@ -686,6 +761,46 @@ declare namespace WorkDocs {
      */
     UserId: IdType;
   }
+  export interface DescribeActivitiesRequest {
+    /**
+     * Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.
+     */
+    AuthenticationToken?: AuthenticationHeaderType;
+    /**
+     * The timestamp that determines the starting time of the activities; the response includes the activities performed after the specified timestamp.
+     */
+    StartTime?: TimestampType;
+    /**
+     * The timestamp that determines the end time of the activities; the response includes the activities performed before the specified timestamp.
+     */
+    EndTime?: TimestampType;
+    /**
+     * The ID of the organization. This is a mandatory parameter when using administrative API (SigV4) requests.
+     */
+    OrganizationId?: IdType;
+    /**
+     * The ID of the user who performed the action. The response includes activities pertaining to this user. This is an optional parameter and is only applicable for administrative API (SigV4) requests.
+     */
+    UserId?: IdType;
+    /**
+     * The maximum number of items to return.
+     */
+    Limit?: LimitType;
+    /**
+     * The marker for the next set of results. (You received this marker from a previous call.)
+     */
+    Marker?: MarkerType;
+  }
+  export interface DescribeActivitiesResponse {
+    /**
+     * The list of activities for the specified user and time period.
+     */
+    UserActivities?: UserActivities;
+    /**
+     * The marker for the next set of results.
+     */
+    Marker?: MarkerType;
+  }
   export interface DescribeCommentsRequest {
     /**
      * Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.
@@ -851,6 +966,30 @@ declare namespace WorkDocs {
     Principals?: PrincipalList;
     /**
      * The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+     */
+    Marker?: PageMarkerType;
+  }
+  export interface DescribeRootFoldersRequest {
+    /**
+     * Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.
+     */
+    AuthenticationToken: AuthenticationHeaderType;
+    /**
+     * The maximum number of items to return.
+     */
+    Limit?: LimitType;
+    /**
+     * The marker for the next set of results. (You received this marker from a previous call.)
+     */
+    Marker?: PageMarkerType;
+  }
+  export interface DescribeRootFoldersResponse {
+    /**
+     * The user's special folders.
+     */
+    Folders?: FolderMetadataList;
+    /**
+     * The marker for the next set of results.
      */
     Marker?: PageMarkerType;
   }
@@ -1050,10 +1189,28 @@ declare namespace WorkDocs {
      * List of labels on the folder.
      */
     Labels?: Labels;
+    /**
+     * The size of the folder metadata.
+     */
     Size?: SizeType;
+    /**
+     * The size of the latest version of the folder metadata.
+     */
     LatestVersionSize?: SizeType;
   }
   export type FolderMetadataList = FolderMetadata[];
+  export interface GetCurrentUserRequest {
+    /**
+     * Amazon WorkDocs authentication token.
+     */
+    AuthenticationToken: AuthenticationHeaderType;
+  }
+  export interface GetCurrentUserResponse {
+    /**
+     * Metadata of the user.
+     */
+    User?: User;
+  }
   export interface GetDocumentPathRequest {
     /**
      * Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.
@@ -1190,6 +1347,18 @@ declare namespace WorkDocs {
      */
     CustomMetadata?: CustomMetadataMap;
   }
+  export interface GroupMetadata {
+    /**
+     * The ID of the user group.
+     */
+    Id?: IdType;
+    /**
+     * The name of the group.
+     */
+    Name?: GroupNameType;
+  }
+  export type GroupMetadataList = GroupMetadata[];
+  export type GroupNameType = string;
   export type HashType = string;
   export type HeaderNameType = string;
   export type HeaderValueType = string;
@@ -1247,6 +1416,16 @@ declare namespace WorkDocs {
   export type OrderType = "ASCENDING"|"DESCENDING"|string;
   export type OrganizationUserList = User[];
   export type PageMarkerType = string;
+  export interface Participants {
+    /**
+     * The list of users.
+     */
+    Users?: UserMetadataList;
+    /**
+     * The list of user groups.
+     */
+    Groups?: GroupMetadataList;
+  }
   export type PasswordType = string;
   export interface PermissionInfo {
     /**
@@ -1305,6 +1484,36 @@ declare namespace WorkDocs {
     PrincipalType?: PrincipalType;
   }
   export type ResourceIdType = string;
+  export interface ResourceMetadata {
+    /**
+     * The type of resource.
+     */
+    Type?: ResourceType;
+    /**
+     * The name of the resource.
+     */
+    Name?: ResourceNameType;
+    /**
+     * The original name of the resource prior to a rename operation.
+     */
+    OriginalName?: ResourceNameType;
+    /**
+     * The ID of the resource.
+     */
+    Id?: ResourceIdType;
+    /**
+     * The version ID of the resource. This is an optional field and is filled for action on document version.
+     */
+    VersionId?: DocumentVersionIdType;
+    /**
+     * The owner of the resource.
+     */
+    Owner?: UserMetadata;
+    /**
+     * The parent ID of the resource before a rename operation.
+     */
+    ParentId?: ResourceIdType;
+  }
   export type ResourceNameType = string;
   export interface ResourcePath {
     /**
@@ -1325,6 +1534,7 @@ declare namespace WorkDocs {
   export type ResourcePathComponentList = ResourcePathComponent[];
   export type ResourceSortType = "DATE"|"NAME"|string;
   export type ResourceStateType = "ACTIVE"|"RESTORING"|"RECYCLING"|"RECYCLED"|string;
+  export type ResourceType = "FOLDER"|"DOCUMENT"|string;
   export type RolePermissionType = "DIRECT"|"INHERITED"|string;
   export type RoleType = "VIEWER"|"CONTRIBUTOR"|"OWNER"|"COOWNER"|string;
   export type SearchQueryType = string;
@@ -1575,9 +1785,33 @@ declare namespace WorkDocs {
      */
     Storage?: UserStorageMetadata;
   }
+  export type UserActivities = Activity[];
   export type UserAttributeValueType = string;
   export type UserFilterType = "ALL"|"ACTIVE_PENDING"|string;
   export type UserIdsType = string;
+  export interface UserMetadata {
+    /**
+     * The ID of the user.
+     */
+    Id?: IdType;
+    /**
+     * The username of the user.
+     */
+    Username?: UsernameType;
+    /**
+     * The given name of the user before a rename operation.
+     */
+    GivenName?: UserAttributeValueType;
+    /**
+     * The surname of the user.
+     */
+    Surname?: UserAttributeValueType;
+    /**
+     * The email address of the user.
+     */
+    EmailAddress?: EmailAddressType;
+  }
+  export type UserMetadataList = UserMetadata[];
   export type UserSortType = "USER_NAME"|"FULL_NAME"|"STORAGE_LIMIT"|"USER_STATUS"|"STORAGE_USED"|string;
   export type UserStatusType = "ACTIVE"|"INACTIVE"|"PENDING"|string;
   export interface UserStorageMetadata {

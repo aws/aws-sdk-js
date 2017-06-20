@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.73.0',
+	  VERSION: '2.74.0',
 
 	  /**
 	   * @api private
@@ -170669,6 +170669,113 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"DescribeActivities": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/api/v1/activities",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
+						"StartTime": {
+							"location": "querystring",
+							"locationName": "startTime",
+							"type": "timestamp"
+						},
+						"EndTime": {
+							"location": "querystring",
+							"locationName": "endTime",
+							"type": "timestamp"
+						},
+						"OrganizationId": {
+							"location": "querystring",
+							"locationName": "organizationId"
+						},
+						"UserId": {
+							"location": "querystring",
+							"locationName": "userId"
+						},
+						"Limit": {
+							"location": "querystring",
+							"locationName": "limit",
+							"type": "integer"
+						},
+						"Marker": {
+							"location": "querystring",
+							"locationName": "marker"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"UserActivities": {
+							"type": "list",
+							"member": {
+								"type": "structure",
+								"members": {
+									"Type": {},
+									"TimeStamp": {
+										"type": "timestamp"
+									},
+									"OrganizationId": {},
+									"Initiator": {
+										"shape": "S2b"
+									},
+									"Participants": {
+										"type": "structure",
+										"members": {
+											"Users": {
+												"type": "list",
+												"member": {
+													"shape": "S2b"
+												}
+											},
+											"Groups": {
+												"type": "list",
+												"member": {
+													"type": "structure",
+													"members": {
+														"Id": {},
+														"Name": {}
+													}
+												}
+											}
+										}
+									},
+									"ResourceMetadata": {
+										"shape": "S2h"
+									},
+									"OriginalParent": {
+										"shape": "S2h"
+									},
+									"CommentMetadata": {
+										"type": "structure",
+										"members": {
+											"CommentId": {},
+											"Contributor": {
+												"shape": "S8"
+											},
+											"CreatedTimestamp": {
+												"type": "timestamp"
+											},
+											"CommentStatus": {},
+											"RecipientId": {}
+										}
+									}
+								}
+							}
+						},
+						"Marker": {}
+					}
+				}
+			},
 			"DescribeComments": {
 				"http": {
 					"method": "GET",
@@ -170765,7 +170872,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"DocumentVersions": {
 							"type": "list",
 							"member": {
-								"shape": "S2e"
+								"shape": "S2s"
 							}
 						},
 						"Marker": {}
@@ -170824,15 +170931,12 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Folders": {
-							"type": "list",
-							"member": {
-								"shape": "S1c"
-							}
+							"shape": "S35"
 						},
 						"Documents": {
 							"type": "list",
 							"member": {
-								"shape": "S2t"
+								"shape": "S37"
 							}
 						},
 						"Marker": {}
@@ -170938,6 +171042,44 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"DescribeRootFolders": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/api/v1/me/root",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"AuthenticationToken"
+					],
+					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						},
+						"Limit": {
+							"location": "querystring",
+							"locationName": "limit",
+							"type": "integer"
+						},
+						"Marker": {
+							"location": "querystring",
+							"locationName": "marker"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Folders": {
+							"shape": "S35"
+						},
+						"Marker": {}
+					}
+				}
+			},
 			"DescribeUsers": {
 				"http": {
 					"method": "GET",
@@ -171009,6 +171151,34 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"GetCurrentUser": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/api/v1/me",
+					"responseCode": 200
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"AuthenticationToken"
+					],
+					"members": {
+						"AuthenticationToken": {
+							"shape": "S2",
+							"location": "header",
+							"locationName": "Authentication"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"User": {
+							"shape": "S8"
+						}
+					}
+				}
+			},
 			"GetDocument": {
 				"http": {
 					"method": "GET",
@@ -171041,7 +171211,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Metadata": {
-							"shape": "S2t"
+							"shape": "S37"
 						},
 						"CustomMetadata": {
 							"shape": "S15"
@@ -171089,7 +171259,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Path": {
-							"shape": "S3f"
+							"shape": "S3x"
 						}
 					}
 				}
@@ -171135,7 +171305,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Metadata": {
-							"shape": "S2e"
+							"shape": "S2s"
 						},
 						"CustomMetadata": {
 							"shape": "S15"
@@ -171223,7 +171393,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Path": {
-							"shape": "S3f"
+							"shape": "S3x"
 						}
 					}
 				}
@@ -171263,13 +171433,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Metadata": {
-							"shape": "S2t"
+							"shape": "S37"
 						},
 						"UploadMetadata": {
 							"type": "structure",
 							"members": {
 								"UploadUrl": {
-									"shape": "S2j"
+									"shape": "S2x"
 								},
 								"SignedHeaders": {
 									"type": "map",
@@ -171581,7 +171751,31 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Protocol": {}
 				}
 			},
-			"S2e": {
+			"S2b": {
+				"type": "structure",
+				"members": {
+					"Id": {},
+					"Username": {},
+					"GivenName": {},
+					"Surname": {},
+					"EmailAddress": {}
+				}
+			},
+			"S2h": {
+				"type": "structure",
+				"members": {
+					"Type": {},
+					"Name": {},
+					"OriginalName": {},
+					"Id": {},
+					"VersionId": {},
+					"Owner": {
+						"shape": "S2b"
+					},
+					"ParentId": {}
+				}
+			},
+			"S2s": {
 				"type": "structure",
 				"members": {
 					"Id": {},
@@ -171609,23 +171803,29 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "map",
 						"key": {},
 						"value": {
-							"shape": "S2j"
+							"shape": "S2x"
 						}
 					},
 					"Source": {
 						"type": "map",
 						"key": {},
 						"value": {
-							"shape": "S2j"
+							"shape": "S2x"
 						}
 					}
 				}
 			},
-			"S2j": {
+			"S2x": {
 				"type": "string",
 				"sensitive": true
 			},
-			"S2t": {
+			"S35": {
+				"type": "list",
+				"member": {
+					"shape": "S1c"
+				}
+			},
+			"S37": {
 				"type": "structure",
 				"members": {
 					"Id": {},
@@ -171638,7 +171838,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "timestamp"
 					},
 					"LatestVersionMetadata": {
-						"shape": "S2e"
+						"shape": "S2s"
 					},
 					"ResourceState": {},
 					"Labels": {
@@ -171646,7 +171846,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S3f": {
+			"S3x": {
 				"type": "structure",
 				"members": {
 					"Components": {

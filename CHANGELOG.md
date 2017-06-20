@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.73.0-->
+<!--LATEST=2.74.0-->
 <!--ENTRYINSERT-->
+
+## 2.74.0
+* feature: WorkDocs: This release provides a new API to retrieve the activities performed by WorkDocs users.
 
 ## 2.73.0
 * feature: Organizations: Improvements to Exception Modeling
