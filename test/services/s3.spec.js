@@ -205,7 +205,7 @@
             done();
           });
         });
-        it('using sigv4 and the "Bucket" parameter contains forward slashes and "Key" exists', function(done) {
+        it('using sigv2 and the "Bucket" parameter contains forward slashes and "Key" exists', function(done) {
           helpers.mockResponses([
             {
               data: {
