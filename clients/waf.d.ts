@@ -28,6 +28,14 @@ declare class WAF extends Service {
    */
   createIPSet(callback?: (err: AWSError, data: WAF.Types.CreateIPSetResponse) => void): Request<WAF.Types.CreateIPSetResponse, AWSError>;
   /**
+   * Creates a RateBasedRule. The RateBasedRule contains a RateLimit, which specifies the maximum number of requests that AWS WAF allows from a specified IP address in a five-minute period. The RateBasedRule also contains the IPSet objects, ByteMatchSet objects, and other predicates that identify the requests that you want to count or block if these requests exceed the RateLimit. If you add more than one predicate to a RateBasedRule, a request not only must exceed the RateLimit, but it also must match all the specifications to be counted or blocked. For example, suppose you add the following to a RateBasedRule:   An IPSet that matches the IP address 192.0.2.44/32    A ByteMatchSet that matches BadBot in the User-Agent header   Further, you specify a RateLimit of 15,000. You then add the RateBasedRule to a WebACL and specify that you want to block requests that meet the conditions in the rule. For a request to be blocked, it must come from the IP address 192.0.2.44 and the User-Agent header in the request must contain the value BadBot. Further, requests that match these two conditions must be received at a rate of more than 15,000 requests every five minutes. If both conditions are met and the rate is exceeded, AWS WAF blocks the requests. If the rate drops below 15,000 for a five-minute period, AWS WAF no longer blocks the requests. As a second example, suppose you want to limit requests to a particular page on your site. To do this, you could add the following to a RateBasedRule:   A ByteMatchSet with FieldToMatch of URI    A PositionalConstraint of STARTS_WITH    A TargetString of login    Further, you specify a RateLimit of 15,000. By adding this RateBasedRule to a WebACL, you could limit requests to your login page without affecting the rest of your site. To create and configure a RateBasedRule, perform the following steps:   Create and update the predicates that you want to include in the rule. For more information, see CreateByteMatchSet, CreateIPSet, and CreateSqlInjectionMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateRule request.   Submit a CreateRateBasedRule request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRule request.   Submit an UpdateRateBasedRule request to specify the predicates that you want to include in the rule.   Create and update a WebACL that contains the RateBasedRule. For more information, see CreateWebACL.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createRateBasedRule(params: WAF.Types.CreateRateBasedRuleRequest, callback?: (err: AWSError, data: WAF.Types.CreateRateBasedRuleResponse) => void): Request<WAF.Types.CreateRateBasedRuleResponse, AWSError>;
+  /**
+   * Creates a RateBasedRule. The RateBasedRule contains a RateLimit, which specifies the maximum number of requests that AWS WAF allows from a specified IP address in a five-minute period. The RateBasedRule also contains the IPSet objects, ByteMatchSet objects, and other predicates that identify the requests that you want to count or block if these requests exceed the RateLimit. If you add more than one predicate to a RateBasedRule, a request not only must exceed the RateLimit, but it also must match all the specifications to be counted or blocked. For example, suppose you add the following to a RateBasedRule:   An IPSet that matches the IP address 192.0.2.44/32    A ByteMatchSet that matches BadBot in the User-Agent header   Further, you specify a RateLimit of 15,000. You then add the RateBasedRule to a WebACL and specify that you want to block requests that meet the conditions in the rule. For a request to be blocked, it must come from the IP address 192.0.2.44 and the User-Agent header in the request must contain the value BadBot. Further, requests that match these two conditions must be received at a rate of more than 15,000 requests every five minutes. If both conditions are met and the rate is exceeded, AWS WAF blocks the requests. If the rate drops below 15,000 for a five-minute period, AWS WAF no longer blocks the requests. As a second example, suppose you want to limit requests to a particular page on your site. To do this, you could add the following to a RateBasedRule:   A ByteMatchSet with FieldToMatch of URI    A PositionalConstraint of STARTS_WITH    A TargetString of login    Further, you specify a RateLimit of 15,000. By adding this RateBasedRule to a WebACL, you could limit requests to your login page without affecting the rest of your site. To create and configure a RateBasedRule, perform the following steps:   Create and update the predicates that you want to include in the rule. For more information, see CreateByteMatchSet, CreateIPSet, and CreateSqlInjectionMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateRule request.   Submit a CreateRateBasedRule request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRule request.   Submit an UpdateRateBasedRule request to specify the predicates that you want to include in the rule.   Create and update a WebACL that contains the RateBasedRule. For more information, see CreateWebACL.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createRateBasedRule(callback?: (err: AWSError, data: WAF.Types.CreateRateBasedRuleResponse) => void): Request<WAF.Types.CreateRateBasedRuleResponse, AWSError>;
+  /**
    * Creates a Rule, which contains the IPSet objects, ByteMatchSet objects, and other predicates that identify the requests that you want to block. If you add more than one predicate to a Rule, a request must match all of the specifications to be allowed or blocked. For example, suppose you add the following to a Rule:   An IPSet that matches the IP address 192.0.2.44/32    A ByteMatchSet that matches BadBot in the User-Agent header   You then add the Rule to a WebACL and specify that you want to blocks requests that satisfy the Rule. For a request to be blocked, it must come from the IP address 192.0.2.44 and the User-Agent header in the request must contain the value BadBot. To create and configure a Rule, perform the following steps:   Create and update the predicates that you want to include in the Rule. For more information, see CreateByteMatchSet, CreateIPSet, and CreateSqlInjectionMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateRule request.   Submit a CreateRule request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRule request.   Submit an UpdateRule request to specify the predicates that you want to include in the Rule.   Create and update a WebACL that contains the Rule. For more information, see CreateWebACL.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   createRule(params: WAF.Types.CreateRuleRequest, callback?: (err: AWSError, data: WAF.Types.CreateRuleResponse) => void): Request<WAF.Types.CreateRuleResponse, AWSError>;
@@ -83,6 +91,14 @@ declare class WAF extends Service {
    * Permanently deletes an IPSet. You can't delete an IPSet if it's still used in any Rules or if it still includes any IP addresses. If you just want to remove an IPSet from a Rule, use UpdateRule. To permanently delete an IPSet from AWS WAF, perform the following steps:   Update the IPSet to remove IP address ranges, if any. For more information, see UpdateIPSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteIPSet request.   Submit a DeleteIPSet request.  
    */
   deleteIPSet(callback?: (err: AWSError, data: WAF.Types.DeleteIPSetResponse) => void): Request<WAF.Types.DeleteIPSetResponse, AWSError>;
+  /**
+   * Permanently deletes a RateBasedRule. You can't delete a rule if it's still used in any WebACL objects or if it still includes any predicates, such as ByteMatchSet objects. If you just want to remove a rule from a WebACL, use UpdateWebACL. To permanently delete a RateBasedRule from AWS WAF, perform the following steps:   Update the RateBasedRule to remove predicates, if any. For more information, see UpdateRateBasedRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRateBasedRule request.   Submit a DeleteRateBasedRule request.  
+   */
+  deleteRateBasedRule(params: WAF.Types.DeleteRateBasedRuleRequest, callback?: (err: AWSError, data: WAF.Types.DeleteRateBasedRuleResponse) => void): Request<WAF.Types.DeleteRateBasedRuleResponse, AWSError>;
+  /**
+   * Permanently deletes a RateBasedRule. You can't delete a rule if it's still used in any WebACL objects or if it still includes any predicates, such as ByteMatchSet objects. If you just want to remove a rule from a WebACL, use UpdateWebACL. To permanently delete a RateBasedRule from AWS WAF, perform the following steps:   Update the RateBasedRule to remove predicates, if any. For more information, see UpdateRateBasedRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRateBasedRule request.   Submit a DeleteRateBasedRule request.  
+   */
+  deleteRateBasedRule(callback?: (err: AWSError, data: WAF.Types.DeleteRateBasedRuleResponse) => void): Request<WAF.Types.DeleteRateBasedRuleResponse, AWSError>;
   /**
    * Permanently deletes a Rule. You can't delete a Rule if it's still used in any WebACL objects or if it still includes any predicates, such as ByteMatchSet objects. If you just want to remove a Rule from a WebACL, use UpdateWebACL. To permanently delete a Rule from AWS WAF, perform the following steps:   Update the Rule to remove predicates, if any. For more information, see UpdateRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRule request.   Submit a DeleteRule request.  
    */
@@ -156,6 +172,22 @@ declare class WAF extends Service {
    */
   getIPSet(callback?: (err: AWSError, data: WAF.Types.GetIPSetResponse) => void): Request<WAF.Types.GetIPSetResponse, AWSError>;
   /**
+   * Returns the RateBasedRule that is specified by the RuleId that you included in the GetRateBasedRule request.
+   */
+  getRateBasedRule(params: WAF.Types.GetRateBasedRuleRequest, callback?: (err: AWSError, data: WAF.Types.GetRateBasedRuleResponse) => void): Request<WAF.Types.GetRateBasedRuleResponse, AWSError>;
+  /**
+   * Returns the RateBasedRule that is specified by the RuleId that you included in the GetRateBasedRule request.
+   */
+  getRateBasedRule(callback?: (err: AWSError, data: WAF.Types.GetRateBasedRuleResponse) => void): Request<WAF.Types.GetRateBasedRuleResponse, AWSError>;
+  /**
+   * Returns an array of IP addresses currently being blocked by the RateBasedRule that is specified by the RuleId. The maximum number of managed keys that will be blocked is 10,000. If more than 10,000 addresses exceed the rate limit, the 10,000 addresses with the highest rates will be blocked.
+   */
+  getRateBasedRuleManagedKeys(params: WAF.Types.GetRateBasedRuleManagedKeysRequest, callback?: (err: AWSError, data: WAF.Types.GetRateBasedRuleManagedKeysResponse) => void): Request<WAF.Types.GetRateBasedRuleManagedKeysResponse, AWSError>;
+  /**
+   * Returns an array of IP addresses currently being blocked by the RateBasedRule that is specified by the RuleId. The maximum number of managed keys that will be blocked is 10,000. If more than 10,000 addresses exceed the rate limit, the 10,000 addresses with the highest rates will be blocked.
+   */
+  getRateBasedRuleManagedKeys(callback?: (err: AWSError, data: WAF.Types.GetRateBasedRuleManagedKeysResponse) => void): Request<WAF.Types.GetRateBasedRuleManagedKeysResponse, AWSError>;
+  /**
    * Returns the Rule that is specified by the RuleId that you included in the GetRule request.
    */
   getRule(params: WAF.Types.GetRuleRequest, callback?: (err: AWSError, data: WAF.Types.GetRuleResponse) => void): Request<WAF.Types.GetRuleResponse, AWSError>;
@@ -222,6 +254,14 @@ declare class WAF extends Service {
   /**
    * Returns an array of RuleSummary objects.
    */
+  listRateBasedRules(params: WAF.Types.ListRateBasedRulesRequest, callback?: (err: AWSError, data: WAF.Types.ListRateBasedRulesResponse) => void): Request<WAF.Types.ListRateBasedRulesResponse, AWSError>;
+  /**
+   * Returns an array of RuleSummary objects.
+   */
+  listRateBasedRules(callback?: (err: AWSError, data: WAF.Types.ListRateBasedRulesResponse) => void): Request<WAF.Types.ListRateBasedRulesResponse, AWSError>;
+  /**
+   * Returns an array of RuleSummary objects.
+   */
   listRules(params: WAF.Types.ListRulesRequest, callback?: (err: AWSError, data: WAF.Types.ListRulesResponse) => void): Request<WAF.Types.ListRulesResponse, AWSError>;
   /**
    * Returns an array of RuleSummary objects.
@@ -276,6 +316,14 @@ declare class WAF extends Service {
    */
   updateIPSet(callback?: (err: AWSError, data: WAF.Types.UpdateIPSetResponse) => void): Request<WAF.Types.UpdateIPSetResponse, AWSError>;
   /**
+   * Inserts or deletes Predicate objects in a rule and updates the RateLimit in the rule.  Each Predicate object identifies a predicate, such as a ByteMatchSet or an IPSet, that specifies the web requests that you want to block or count. The RateLimit specifies the number of requests every five minutes that triggers the rule. If you add more than one predicate to a RateBasedRule, a request must match all the predicates and exceed the RateLimit to be counted or blocked. For example, suppose you add the following to a RateBasedRule:   An IPSet that matches the IP address 192.0.2.44/32    A ByteMatchSet that matches BadBot in the User-Agent header   Further, you specify a RateLimit of 15,000. You then add the RateBasedRule to a WebACL and specify that you want to block requests that satisfy the rule. For a request to be blocked, it must come from the IP address 192.0.2.44 and the User-Agent header in the request must contain the value BadBot. Further, requests that match these two conditions much be received at a rate of more than 15,000 every five minutes. If the rate drops below this limit, AWS WAF no longer blocks the requests. As a second example, suppose you want to limit requests to a particular page on your site. To do this, you could add the following to a RateBasedRule:   A ByteMatchSet with FieldToMatch of URI    A PositionalConstraint of STARTS_WITH    A TargetString of login    Further, you specify a RateLimit of 15,000. By adding this RateBasedRule to a WebACL, you could limit requests to your login page without affecting the rest of your site.
+   */
+  updateRateBasedRule(params: WAF.Types.UpdateRateBasedRuleRequest, callback?: (err: AWSError, data: WAF.Types.UpdateRateBasedRuleResponse) => void): Request<WAF.Types.UpdateRateBasedRuleResponse, AWSError>;
+  /**
+   * Inserts or deletes Predicate objects in a rule and updates the RateLimit in the rule.  Each Predicate object identifies a predicate, such as a ByteMatchSet or an IPSet, that specifies the web requests that you want to block or count. The RateLimit specifies the number of requests every five minutes that triggers the rule. If you add more than one predicate to a RateBasedRule, a request must match all the predicates and exceed the RateLimit to be counted or blocked. For example, suppose you add the following to a RateBasedRule:   An IPSet that matches the IP address 192.0.2.44/32    A ByteMatchSet that matches BadBot in the User-Agent header   Further, you specify a RateLimit of 15,000. You then add the RateBasedRule to a WebACL and specify that you want to block requests that satisfy the rule. For a request to be blocked, it must come from the IP address 192.0.2.44 and the User-Agent header in the request must contain the value BadBot. Further, requests that match these two conditions much be received at a rate of more than 15,000 every five minutes. If the rate drops below this limit, AWS WAF no longer blocks the requests. As a second example, suppose you want to limit requests to a particular page on your site. To do this, you could add the following to a RateBasedRule:   A ByteMatchSet with FieldToMatch of URI    A PositionalConstraint of STARTS_WITH    A TargetString of login    Further, you specify a RateLimit of 15,000. By adding this RateBasedRule to a WebACL, you could limit requests to your login page without affecting the rest of your site.
+   */
+  updateRateBasedRule(callback?: (err: AWSError, data: WAF.Types.UpdateRateBasedRuleResponse) => void): Request<WAF.Types.UpdateRateBasedRuleResponse, AWSError>;
+  /**
    * Inserts or deletes Predicate objects in a Rule. Each Predicate object identifies a predicate, such as a ByteMatchSet or an IPSet, that specifies the web requests that you want to allow, block, or count. If you add more than one predicate to a Rule, a request must match all of the specifications to be allowed, blocked, or counted. For example, suppose you add the following to a Rule:    A ByteMatchSet that matches the value BadBot in the User-Agent header   An IPSet that matches the IP address 192.0.2.44    You then add the Rule to a WebACL and specify that you want to block requests that satisfy the Rule. For a request to be blocked, the User-Agent header in the request must contain the value BadBot and the request must originate from the IP address 192.0.2.44. To create and configure a Rule, perform the following steps:   Create and update the predicates that you want to include in the Rule.   Create the Rule. See CreateRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRule request.   Submit an UpdateRule request to add predicates to the Rule.   Create and update a WebACL that contains the Rule. See CreateWebACL.   If you want to replace one ByteMatchSet or IPSet with another, you delete the existing one and add the new one. For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateRule(params: WAF.Types.UpdateRuleRequest, callback?: (err: AWSError, data: WAF.Types.UpdateRuleResponse) => void): Request<WAF.Types.UpdateRuleResponse, AWSError>;
@@ -300,11 +348,11 @@ declare class WAF extends Service {
    */
   updateSqlInjectionMatchSet(callback?: (err: AWSError, data: WAF.Types.UpdateSqlInjectionMatchSetResponse) => void): Request<WAF.Types.UpdateSqlInjectionMatchSetResponse, AWSError>;
   /**
-   * Inserts or deletes ActivatedRule objects in a WebACL. Each Rule identifies web requests that you want to allow, block, or count. When you update a WebACL, you specify the following values:   A default action for the WebACL, either ALLOW or BLOCK. AWS WAF performs the default action if a request doesn't match the criteria in any of the Rules in a WebACL.   The Rules that you want to add and/or delete. If you want to replace one Rule with another, you delete the existing Rule and add the new one.   For each Rule, whether you want AWS WAF to allow requests, block requests, or count requests that match the conditions in the Rule.   The order in which you want AWS WAF to evaluate the Rules in a WebACL. If you add more than one Rule to a WebACL, AWS WAF evaluates each request against the Rules in order based on the value of Priority. (The Rule that has the lowest value for Priority is evaluated first.) When a web request matches all of the predicates (such as ByteMatchSets and IPSets) in a Rule, AWS WAF immediately takes the corresponding action, allow or block, and doesn't evaluate the request against the remaining Rules in the WebACL, if any.    To create and configure a WebACL, perform the following steps:   Create and update the predicates that you want to include in Rules. For more information, see CreateByteMatchSet, UpdateByteMatchSet, CreateIPSet, UpdateIPSet, CreateSqlInjectionMatchSet, and UpdateSqlInjectionMatchSet.   Create and update the Rules that you want to include in the WebACL. For more information, see CreateRule and UpdateRule.   Create a WebACL. See CreateWebACL.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateWebACL request.   Submit an UpdateWebACL request to specify the Rules that you want to include in the WebACL, to specify the default action, and to associate the WebACL with a CloudFront distribution.    For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   * Inserts or deletes ActivatedRule objects in a WebACL. Each Rule identifies web requests that you want to allow, block, or count. When you update a WebACL, you specify the following values:   A default action for the WebACL, either ALLOW or BLOCK. AWS WAF performs the default action if a request doesn't match the criteria in any of the Rules in a WebACL.   The Rules that you want to add and/or delete. If you want to replace one Rule with another, you delete the existing Rule and add the new one.   For each Rule, whether you want AWS WAF to allow requests, block requests, or count requests that match the conditions in the Rule.   The order in which you want AWS WAF to evaluate the Rules in a WebACL. If you add more than one Rule to a WebACL, AWS WAF evaluates each request against the Rules in order based on the value of Priority. (The Rule that has the lowest value for Priority is evaluated first.) When a web request matches all of the predicates (such as ByteMatchSets and IPSets) in a Rule, AWS WAF immediately takes the corresponding action, allow or block, and doesn't evaluate the request against the remaining Rules in the WebACL, if any.    To create and configure a WebACL, perform the following steps:   Create and update the predicates that you want to include in Rules. For more information, see CreateByteMatchSet, UpdateByteMatchSet, CreateIPSet, UpdateIPSet, CreateSqlInjectionMatchSet, and UpdateSqlInjectionMatchSet.   Create and update the Rules that you want to include in the WebACL. For more information, see CreateRule and UpdateRule.   Create a WebACL. See CreateWebACL.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateWebACL request.   Submit an UpdateWebACL request to specify the Rules that you want to include in the WebACL, to specify the default action, and to associate the WebACL with a CloudFront distribution.    Be aware that if you try to add a RATE_BASED rule to a web ACL without setting the rule type when first creating the rule, the UpdateWebACL request will fail because the request tries to add a REGULAR rule (the default rule type) with the specified ID, which does not exist.  For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateWebACL(params: WAF.Types.UpdateWebACLRequest, callback?: (err: AWSError, data: WAF.Types.UpdateWebACLResponse) => void): Request<WAF.Types.UpdateWebACLResponse, AWSError>;
   /**
-   * Inserts or deletes ActivatedRule objects in a WebACL. Each Rule identifies web requests that you want to allow, block, or count. When you update a WebACL, you specify the following values:   A default action for the WebACL, either ALLOW or BLOCK. AWS WAF performs the default action if a request doesn't match the criteria in any of the Rules in a WebACL.   The Rules that you want to add and/or delete. If you want to replace one Rule with another, you delete the existing Rule and add the new one.   For each Rule, whether you want AWS WAF to allow requests, block requests, or count requests that match the conditions in the Rule.   The order in which you want AWS WAF to evaluate the Rules in a WebACL. If you add more than one Rule to a WebACL, AWS WAF evaluates each request against the Rules in order based on the value of Priority. (The Rule that has the lowest value for Priority is evaluated first.) When a web request matches all of the predicates (such as ByteMatchSets and IPSets) in a Rule, AWS WAF immediately takes the corresponding action, allow or block, and doesn't evaluate the request against the remaining Rules in the WebACL, if any.    To create and configure a WebACL, perform the following steps:   Create and update the predicates that you want to include in Rules. For more information, see CreateByteMatchSet, UpdateByteMatchSet, CreateIPSet, UpdateIPSet, CreateSqlInjectionMatchSet, and UpdateSqlInjectionMatchSet.   Create and update the Rules that you want to include in the WebACL. For more information, see CreateRule and UpdateRule.   Create a WebACL. See CreateWebACL.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateWebACL request.   Submit an UpdateWebACL request to specify the Rules that you want to include in the WebACL, to specify the default action, and to associate the WebACL with a CloudFront distribution.    For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   * Inserts or deletes ActivatedRule objects in a WebACL. Each Rule identifies web requests that you want to allow, block, or count. When you update a WebACL, you specify the following values:   A default action for the WebACL, either ALLOW or BLOCK. AWS WAF performs the default action if a request doesn't match the criteria in any of the Rules in a WebACL.   The Rules that you want to add and/or delete. If you want to replace one Rule with another, you delete the existing Rule and add the new one.   For each Rule, whether you want AWS WAF to allow requests, block requests, or count requests that match the conditions in the Rule.   The order in which you want AWS WAF to evaluate the Rules in a WebACL. If you add more than one Rule to a WebACL, AWS WAF evaluates each request against the Rules in order based on the value of Priority. (The Rule that has the lowest value for Priority is evaluated first.) When a web request matches all of the predicates (such as ByteMatchSets and IPSets) in a Rule, AWS WAF immediately takes the corresponding action, allow or block, and doesn't evaluate the request against the remaining Rules in the WebACL, if any.    To create and configure a WebACL, perform the following steps:   Create and update the predicates that you want to include in Rules. For more information, see CreateByteMatchSet, UpdateByteMatchSet, CreateIPSet, UpdateIPSet, CreateSqlInjectionMatchSet, and UpdateSqlInjectionMatchSet.   Create and update the Rules that you want to include in the WebACL. For more information, see CreateRule and UpdateRule.   Create a WebACL. See CreateWebACL.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateWebACL request.   Submit an UpdateWebACL request to specify the Rules that you want to include in the WebACL, to specify the default action, and to associate the WebACL with a CloudFront distribution.    Be aware that if you try to add a RATE_BASED rule to a web ACL without setting the rule type when first creating the rule, the UpdateWebACL request will fail because the request tries to add a REGULAR rule (the default rule type) with the specified ID, which does not exist.  For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateWebACL(callback?: (err: AWSError, data: WAF.Types.UpdateWebACLResponse) => void): Request<WAF.Types.UpdateWebACLResponse, AWSError>;
   /**
@@ -331,6 +379,10 @@ declare namespace WAF {
      * Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. Valid values for Action include the following:    ALLOW: CloudFront responds with the requested object.    BLOCK: CloudFront responds with an HTTP 403 (Forbidden) status code.    COUNT: AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL.   
      */
     Action: WafAction;
+    /**
+     * The rule type, either REGULAR, as defined by Rule, or RATE_BASED, as defined by RateBasedRule. The default is REGULAR. Although this field is optional, be aware that if you try to add a RATE_BASED rule to a web ACL without setting the type, the UpdateWebACL request will fail because the request tries to add a REGULAR rule with the specified ID, which does not exist. 
+     */
+    Type?: WafRuleType;
   }
   export type ActivatedRules = ActivatedRule[];
   export interface ByteMatchSet {
@@ -431,6 +483,38 @@ declare namespace WAF {
     IPSet?: IPSet;
     /**
      * The ChangeToken that you used to submit the CreateIPSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
+  export interface CreateRateBasedRuleRequest {
+    /**
+     * A friendly name or description of the RateBasedRule. You can't change the name of a RateBasedRule after you create it.
+     */
+    Name: ResourceName;
+    /**
+     * A friendly name or description for the metrics for this RateBasedRule. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the RateBasedRule.
+     */
+    MetricName: MetricName;
+    /**
+     * The field that AWS WAF uses to determine if requests are likely arriving from a single source and thus subject to rate monitoring. The only valid value for RateKey is IP. IP indicates that requests that arrive from the same IP address are subject to the RateLimit that is specified in the RateBasedRule.
+     */
+    RateKey: RateKey;
+    /**
+     * The maximum number of requests, which have an identical value in the field that is specified by RateKey, allowed in a five-minute period. If the number of requests exceeds the RateLimit and the other predicates specified in the rule are also met, AWS WAF triggers the action that is specified for this rule.
+     */
+    RateLimit: RateLimit;
+    /**
+     * The ChangeToken that you used to submit the CreateRateBasedRule request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface CreateRateBasedRuleResponse {
+    /**
+     * The RateBasedRule that is returned in the CreateRateBasedRule response.
+     */
+    Rule?: RateBasedRule;
+    /**
+     * The ChangeToken that you used to submit the CreateRateBasedRule request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
      */
     ChangeToken?: ChangeToken;
   }
@@ -578,6 +662,22 @@ declare namespace WAF {
      */
     ChangeToken?: ChangeToken;
   }
+  export interface DeleteRateBasedRuleRequest {
+    /**
+     * The RuleId of the RateBasedRule that you want to delete. RuleId is returned by CreateRateBasedRule and by ListRateBasedRules.
+     */
+    RuleId: ResourceId;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface DeleteRateBasedRuleResponse {
+    /**
+     * The ChangeToken that you used to submit the DeleteRateBasedRule request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
   export interface DeleteRuleRequest {
     /**
      * The RuleId of the Rule that you want to delete. RuleId is returned by CreateRule and by ListRules.
@@ -711,6 +811,38 @@ declare namespace WAF {
      * Information about the IPSet that you specified in the GetIPSet request. For more information, see the following topics:    IPSet: Contains IPSetDescriptors, IPSetId, and Name     IPSetDescriptors: Contains an array of IPSetDescriptor objects. Each IPSetDescriptor object contains Type and Value   
      */
     IPSet?: IPSet;
+  }
+  export interface GetRateBasedRuleManagedKeysRequest {
+    /**
+     * The RuleId of the RateBasedRule for which you want to get a list of ManagedKeys. RuleId is returned by CreateRateBasedRule and by ListRateBasedRules.
+     */
+    RuleId: ResourceId;
+    /**
+     * A null value and not currently used. Do not include this in your request.
+     */
+    NextMarker?: NextMarker;
+  }
+  export interface GetRateBasedRuleManagedKeysResponse {
+    /**
+     * An array of IP addresses that currently are blocked by the specified RateBasedRule. 
+     */
+    ManagedKeys?: ManagedKeys;
+    /**
+     * A null value and not currently used.
+     */
+    NextMarker?: NextMarker;
+  }
+  export interface GetRateBasedRuleRequest {
+    /**
+     * The RuleId of the RateBasedRule that you want to get. RuleId is returned by CreateRateBasedRule and by ListRateBasedRules.
+     */
+    RuleId: ResourceId;
+  }
+  export interface GetRateBasedRuleResponse {
+    /**
+     * Information about the RateBasedRule that you specified in the GetRateBasedRule request.
+     */
+    Rule?: RateBasedRule;
   }
   export interface GetRuleRequest {
     /**
@@ -856,7 +988,7 @@ declare namespace WAF {
      */
     Name?: ResourceName;
     /**
-     * The IP address type (IPV4 or IPV6) and the IP address range (in CIDR notation) that web requests originate from. If the WebACL is associated with a CloudFront distribution, this is the value of one of the following fields in CloudFront access logs:    c-ip, if the viewer did not use an HTTP proxy or a load balancer to send the request    x-forwarded-for, if the viewer did use an HTTP proxy or a load balancer to send the request  
+     * The IP address type (IPV4 or IPV6) and the IP address range (in CIDR notation) that web requests originate from. If the WebACL is associated with a CloudFront distribution and the viewer did not use an HTTP proxy or a load balancer to send the request, this is the value of the c-ip field in the CloudFront access logs.
      */
     IPSetDescriptors: IPSetDescriptors;
   }
@@ -935,6 +1067,26 @@ declare namespace WAF {
      * An array of IPSetSummary objects.
      */
     IPSets?: IPSetSummaries;
+  }
+  export interface ListRateBasedRulesRequest {
+    /**
+     * If you specify a value for Limit and you have more Rules than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of Rules. For the second and subsequent ListRateBasedRules requests, specify the value of NextMarker from the previous response to get information about another batch of Rules.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * Specifies the number of Rules that you want AWS WAF to return for this request. If you have more Rules than the number that you specify for Limit, the response includes a NextMarker value that you can use to get another batch of Rules.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListRateBasedRulesResponse {
+    /**
+     * If you have more Rules than the number that you specified for Limit in the request, the response includes a NextMarker value. To list more Rules, submit another ListRateBasedRules request, and specify the NextMarker value from the response in the NextMarker value in the next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * An array of RuleSummary objects.
+     */
+    Rules?: RuleSummaries;
   }
   export interface ListRulesRequest {
     /**
@@ -1036,13 +1188,15 @@ declare namespace WAF {
      */
     XssMatchSets?: XssMatchSetSummaries;
   }
+  export type ManagedKey = string;
+  export type ManagedKeys = ManagedKey[];
   export type MatchFieldData = string;
   export type MatchFieldType = "URI"|"QUERY_STRING"|"HEADER"|"METHOD"|"BODY"|string;
   export type MetricName = string;
   export type Negated = boolean;
   export type NextMarker = string;
   export type PaginationLimit = number;
-  export type ParameterExceptionField = "CHANGE_ACTION"|"WAF_ACTION"|"PREDICATE_TYPE"|"IPSET_TYPE"|"BYTE_MATCH_FIELD_TYPE"|"SQL_INJECTION_MATCH_FIELD_TYPE"|"BYTE_MATCH_TEXT_TRANSFORMATION"|"BYTE_MATCH_POSITIONAL_CONSTRAINT"|"SIZE_CONSTRAINT_COMPARISON_OPERATOR"|string;
+  export type ParameterExceptionField = "CHANGE_ACTION"|"WAF_ACTION"|"PREDICATE_TYPE"|"IPSET_TYPE"|"BYTE_MATCH_FIELD_TYPE"|"SQL_INJECTION_MATCH_FIELD_TYPE"|"BYTE_MATCH_TEXT_TRANSFORMATION"|"BYTE_MATCH_POSITIONAL_CONSTRAINT"|"SIZE_CONSTRAINT_COMPARISON_OPERATOR"|"RATE_KEY"|"RULE_TYPE"|"NEXT_MARKER"|string;
   export type ParameterExceptionParameter = string;
   export type ParameterExceptionReason = "INVALID_OPTION"|"ILLEGAL_COMBINATION"|string;
   export type PopulationSize = number;
@@ -1063,6 +1217,34 @@ declare namespace WAF {
   }
   export type PredicateType = "IPMatch"|"ByteMatch"|"SqlInjectionMatch"|"SizeConstraint"|"XssMatch"|string;
   export type Predicates = Predicate[];
+  export interface RateBasedRule {
+    /**
+     * A unique identifier for a RateBasedRule. You use RuleId to get more information about a RateBasedRule (see GetRateBasedRule), update a RateBasedRule (see UpdateRateBasedRule), insert a RateBasedRule into a WebACL or delete one from a WebACL (see UpdateWebACL), or delete a RateBasedRule from AWS WAF (see DeleteRateBasedRule).
+     */
+    RuleId: ResourceId;
+    /**
+     * A friendly name or description for a RateBasedRule. You can't change the name of a RateBasedRule after you create it.
+     */
+    Name?: ResourceName;
+    /**
+     * A friendly name or description for the metrics for a RateBasedRule. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the RateBasedRule.
+     */
+    MetricName?: MetricName;
+    /**
+     * The Predicates object contains one Predicate element for each ByteMatchSet, IPSet, or SqlInjectionMatchSet object that you want to include in a RateBasedRule.
+     */
+    MatchPredicates: Predicates;
+    /**
+     * The field that AWS WAF uses to determine if requests are likely arriving from single source and thus subject to rate monitoring. The only valid value for RateKey is IP. IP indicates that requests arriving from the same IP address are subject to the RateLimit that is specified in the RateBasedRule.
+     */
+    RateKey: RateKey;
+    /**
+     * The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. If the number of requests exceeds the RateLimit and the other predicates specified in the rule are also met, AWS WAF triggers the action that is specified for this rule.
+     */
+    RateLimit: RateLimit;
+  }
+  export type RateKey = "IP"|string;
+  export type RateLimit = number;
   export type ResourceId = string;
   export type ResourceName = string;
   export interface Rule {
@@ -1282,6 +1464,30 @@ declare namespace WAF {
      */
     ChangeToken?: ChangeToken;
   }
+  export interface UpdateRateBasedRuleRequest {
+    /**
+     * The RuleId of the RateBasedRule that you want to update. RuleId is returned by CreateRateBasedRule and by ListRateBasedRules.
+     */
+    RuleId: ResourceId;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+    /**
+     * An array of RuleUpdate objects that you want to insert into or delete from a RateBasedRule. 
+     */
+    Updates: RuleUpdates;
+    /**
+     * The maximum number of requests, which have an identical value in the field specified by the RateKey, allowed in a five-minute period. If the number of requests exceeds the RateLimit and the other predicates specified in the rule are also met, AWS WAF triggers the action that is specified for this rule.
+     */
+    RateLimit: RateLimit;
+  }
+  export interface UpdateRateBasedRuleResponse {
+    /**
+     * The ChangeToken that you used to submit the UpdateRateBasedRule request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
   export interface UpdateRuleRequest {
     /**
      * The RuleId of the Rule that you want to update. RuleId is returned by CreateRule and by ListRules.
@@ -1352,7 +1558,7 @@ declare namespace WAF {
      */
     ChangeToken: ChangeToken;
     /**
-     * An array of updates to make to the WebACL. An array of WebACLUpdate objects that you want to insert into or delete from a WebACL. For more information, see the applicable data types:    WebACLUpdate: Contains Action and ActivatedRule     ActivatedRule: Contains Action, Priority, and RuleId     WafAction: Contains Type   
+     * An array of updates to make to the WebACL. An array of WebACLUpdate objects that you want to insert into or delete from a WebACL. For more information, see the applicable data types:    WebACLUpdate: Contains Action and ActivatedRule     ActivatedRule: Contains Action, Priority, RuleId, and Type     WafAction: Contains Type   
      */
     Updates?: WebACLUpdates;
     /**
@@ -1393,6 +1599,7 @@ declare namespace WAF {
     Type: WafActionType;
   }
   export type WafActionType = "BLOCK"|"ALLOW"|"COUNT"|string;
+  export type WafRuleType = "REGULAR"|"RATE_BASED"|string;
   export interface WebACL {
     /**
      * A unique identifier for a WebACL. You use WebACLId to get information about a WebACL (see GetWebACL), update a WebACL (see UpdateWebACL), and delete a WebACL from AWS WAF (see DeleteWebACL).  WebACLId is returned by CreateWebACL and by ListWebACLs.

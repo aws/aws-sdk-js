@@ -99,3 +99,4 @@ export import LexModelBuildingService = require('./lexmodelbuildingservice');
 export import MarketplaceEntitlementService = require('./marketplaceentitlementservice');
 export import Athena = require('./athena');
 export import Greengrass = require('./greengrass');
+export import DAX = require('./dax');

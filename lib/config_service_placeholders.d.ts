@@ -101,6 +101,7 @@ export abstract class ConfigurationServicePlaceholders {
   marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.ClientConfiguration;
   athena?: AWS.Athena.Types.ClientConfiguration;
   greengrass?: AWS.Greengrass.Types.ClientConfiguration;
+  dax?: AWS.DAX.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -204,4 +205,5 @@ export interface ConfigurationServiceApiVersions {
   marketplaceentitlementservice?: AWS.MarketplaceEntitlementService.Types.apiVersion;
   athena?: AWS.Athena.Types.apiVersion;
   greengrass?: AWS.Greengrass.Types.apiVersion;
+  dax?: AWS.DAX.Types.apiVersion;
 }

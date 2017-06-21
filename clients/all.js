@@ -102,5 +102,6 @@ module.exports = {
   LexModelBuildingService: require('./lexmodelbuildingservice'),
   MarketplaceEntitlementService: require('./marketplaceentitlementservice'),
   Athena: require('./athena'),
-  Greengrass: require('./greengrass')
+  Greengrass: require('./greengrass'),
+  DAX: require('./dax')
 };

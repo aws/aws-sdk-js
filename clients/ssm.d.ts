@@ -116,6 +116,14 @@ declare class SSM extends Service {
    */
   deleteParameter(callback?: (err: AWSError, data: SSM.Types.DeleteParameterResult) => void): Request<SSM.Types.DeleteParameterResult, AWSError>;
   /**
+   * Delete a list of parameters.
+   */
+  deleteParameters(params: SSM.Types.DeleteParametersRequest, callback?: (err: AWSError, data: SSM.Types.DeleteParametersResult) => void): Request<SSM.Types.DeleteParametersResult, AWSError>;
+  /**
+   * Delete a list of parameters.
+   */
+  deleteParameters(callback?: (err: AWSError, data: SSM.Types.DeleteParametersResult) => void): Request<SSM.Types.DeleteParametersResult, AWSError>;
+  /**
    * Deletes a patch baseline.
    */
   deletePatchBaseline(params: SSM.Types.DeletePatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.DeletePatchBaselineResult) => void): Request<SSM.Types.DeletePatchBaselineResult, AWSError>;
@@ -420,6 +428,14 @@ declare class SSM extends Service {
    */
   getMaintenanceWindowExecutionTask(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowExecutionTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowExecutionTaskResult, AWSError>;
   /**
+   * Get information about a parameter by using the parameter name. 
+   */
+  getParameter(params: SSM.Types.GetParameterRequest, callback?: (err: AWSError, data: SSM.Types.GetParameterResult) => void): Request<SSM.Types.GetParameterResult, AWSError>;
+  /**
+   * Get information about a parameter by using the parameter name. 
+   */
+  getParameter(callback?: (err: AWSError, data: SSM.Types.GetParameterResult) => void): Request<SSM.Types.GetParameterResult, AWSError>;
+  /**
    * Query a list of all parameters used by the AWS account.
    */
   getParameterHistory(params: SSM.Types.GetParameterHistoryRequest, callback?: (err: AWSError, data: SSM.Types.GetParameterHistoryResult) => void): Request<SSM.Types.GetParameterHistoryResult, AWSError>;
@@ -435,6 +451,14 @@ declare class SSM extends Service {
    * Get details of a parameter.
    */
   getParameters(callback?: (err: AWSError, data: SSM.Types.GetParametersResult) => void): Request<SSM.Types.GetParametersResult, AWSError>;
+  /**
+   * Retrieve parameters in a specific hierarchy. For more information, see Using Parameter Hierarchies. 
+   */
+  getParametersByPath(params: SSM.Types.GetParametersByPathRequest, callback?: (err: AWSError, data: SSM.Types.GetParametersByPathResult) => void): Request<SSM.Types.GetParametersByPathResult, AWSError>;
+  /**
+   * Retrieve parameters in a specific hierarchy. For more information, see Using Parameter Hierarchies. 
+   */
+  getParametersByPath(callback?: (err: AWSError, data: SSM.Types.GetParametersByPathResult) => void): Request<SSM.Types.GetParametersByPathResult, AWSError>;
   /**
    * Retrieves information about a patch baseline.
    */
@@ -524,11 +548,11 @@ declare class SSM extends Service {
    */
   putInventory(callback?: (err: AWSError, data: SSM.Types.PutInventoryResult) => void): Request<SSM.Types.PutInventoryResult, AWSError>;
   /**
-   * Add one or more paramaters to the system.
+   * Add one or more parameters to the system.
    */
   putParameter(params: SSM.Types.PutParameterRequest, callback?: (err: AWSError, data: SSM.Types.PutParameterResult) => void): Request<SSM.Types.PutParameterResult, AWSError>;
   /**
-   * Add one or more paramaters to the system.
+   * Add one or more parameters to the system.
    */
   putParameter(callback?: (err: AWSError, data: SSM.Types.PutParameterResult) => void): Request<SSM.Types.PutParameterResult, AWSError>;
   /**
@@ -572,11 +596,11 @@ declare class SSM extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: SSM.Types.RemoveTagsFromResourceResult) => void): Request<SSM.Types.RemoveTagsFromResourceResult, AWSError>;
   /**
-   * Executes commands on one or more remote instances.
+   * Executes commands on one or more managed instances.
    */
   sendCommand(params: SSM.Types.SendCommandRequest, callback?: (err: AWSError, data: SSM.Types.SendCommandResult) => void): Request<SSM.Types.SendCommandResult, AWSError>;
   /**
-   * Executes commands on one or more remote instances.
+   * Executes commands on one or more managed instances.
    */
   sendCommand(callback?: (err: AWSError, data: SSM.Types.SendCommandResult) => void): Request<SSM.Types.SendCommandResult, AWSError>;
   /**
@@ -714,6 +738,7 @@ declare namespace SSM {
   export interface AddTagsToResourceResult {
   }
   export type AgentErrorCode = string;
+  export type AllowedPattern = string;
   export type ApproveAfterDays = number;
   export interface Association {
     /**
@@ -1021,7 +1046,7 @@ declare namespace SSM {
      */
     StatusDetails?: StatusDetails;
     /**
-     * The region where the Amazon Simple Storage Service (Amazon S3) output bucket is located. The default value is the region where Run Command is being called.
+     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.
      */
     OutputS3Region?: S3Region;
     /**
@@ -1063,11 +1088,11 @@ declare namespace SSM {
   }
   export interface CommandFilter {
     /**
-     * The name of the filter. For example, requested date and time.
+     * The name of the filter.
      */
     key: CommandFilterKey;
     /**
-     * The filter value. For example: June 30, 2015.
+     * The filter value. 
      */
     value: CommandFilterValue;
   }
@@ -1172,7 +1197,7 @@ declare namespace SSM {
      */
     StandardErrorUrl?: Url;
     /**
-     * The name of the region where the output is stored in Amazon S3.
+     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.
      */
     OutputS3Region?: S3Region;
     /**
@@ -1451,6 +1476,22 @@ declare namespace SSM {
   }
   export interface DeleteParameterResult {
   }
+  export interface DeleteParametersRequest {
+    /**
+     * The names of the parameters to delete.
+     */
+    Names: ParameterNameList;
+  }
+  export interface DeleteParametersResult {
+    /**
+     * The names of the deleted parameters.
+     */
+    DeletedParameters?: ParameterNameList;
+    /**
+     * The names of parameters that weren't deleted because the parameters are not valid.
+     */
+    InvalidParameters?: ParameterNameList;
+  }
   export interface DeletePatchBaselineRequest {
     /**
      * The ID of the patch baseline to delete.
@@ -1563,7 +1604,7 @@ declare namespace SSM {
      */
     ActivationList?: ActivationList;
     /**
-     *  The token for the next set of items to return. Use this token to get the next set of results. 
+     * The token for the next set of items to return. Use this token to get the next set of results. 
      */
     NextToken?: NextToken;
   }
@@ -2021,6 +2062,10 @@ declare namespace SSM {
      */
     Filters?: ParametersFilterList;
     /**
+     * Filters to limit the request results.
+     */
+    ParameterFilters?: ParameterStringFilterList;
+    /**
      * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
      */
     MaxResults?: MaxResults;
@@ -2379,7 +2424,7 @@ declare namespace SSM {
      */
     ResponseCode?: ResponseCode;
     /**
-     * The date and time the plugin started executing. Date and time are written in ISO 8601 format. For example, August 28, 2016 is represented as 2016-08-28. If the plugin has not started to execute, the string is empty.
+     * The date and time the plugin started executing. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the InvokedBefore filter.  aws ssm list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z  If the plugin has not started to execute, the string is empty.
      */
     ExecutionStartDateTime?: StringDateTime;
     /**
@@ -2387,7 +2432,7 @@ declare namespace SSM {
      */
     ExecutionElapsedTime?: StringDateTime;
     /**
-     * The date and time the plugin was finished executing. Date and time are written in ISO 8601 format. For example, August 28, 2016 is represented as 2016-08-28. If the plugin has not started to execute, the string is empty.
+     * The date and time the plugin was finished executing. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the InvokedAfter filter.  aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z  If the plugin has not started to execute, the string is empty.
      */
     ExecutionEndDateTime?: StringDateTime;
     /**
@@ -2693,6 +2738,59 @@ declare namespace SSM {
     Parameters?: ParameterHistoryList;
     /**
      * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetParameterRequest {
+    /**
+     * The name of the parameter you want to query.
+     */
+    Name: PSParameterName;
+    /**
+     * Return decrypted values for secure string parameters. This flag is ignored for String and StringList parameter types.
+     */
+    WithDecryption?: Boolean;
+  }
+  export interface GetParameterResult {
+    /**
+     * Information about a parameter.
+     */
+    Parameter?: Parameter;
+  }
+  export type GetParametersByPathMaxResults = number;
+  export interface GetParametersByPathRequest {
+    /**
+     * The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. Examples: /Environment/Test/DBString003 /Finance/Prod/IAD/OS/WinServ2016/license15
+     */
+    Path: PSParameterName;
+    /**
+     * Retrieve all parameters within a hierarchy.
+     */
+    Recursive?: Boolean;
+    /**
+     * Filters to limit the request results.
+     */
+    ParameterFilters?: ParameterStringFilterList;
+    /**
+     * Retrieve all parameters in a hierarchy with their value decrypted.
+     */
+    WithDecryption?: Boolean;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: GetParametersByPathMaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetParametersByPathResult {
+    /**
+     * A list of parameters found in the specified hierarchy.
+     */
+    Parameters?: ParameterList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -3724,6 +3822,10 @@ declare namespace SSM {
      * The parameter value.
      */
     Value?: PSParameterValue;
+    /**
+     * Parameter names can include the following letters and symbols. a-zA-Z0-9_.-
+     */
+    AllowedPattern?: AllowedPattern;
   }
   export type ParameterHistoryList = ParameterHistory[];
   export type ParameterKeyId = string;
@@ -3753,10 +3855,33 @@ declare namespace SSM {
      * Description of the parameter actions.
      */
     Description?: ParameterDescription;
+    /**
+     * A parameter name can include only the following letters and symbols. a-zA-Z0-9_.-
+     */
+    AllowedPattern?: AllowedPattern;
   }
   export type ParameterMetadataList = ParameterMetadata[];
   export type ParameterName = string;
   export type ParameterNameList = PSParameterName[];
+  export interface ParameterStringFilter {
+    /**
+     * The name of the filter.
+     */
+    Key: ParameterStringFilterKey;
+    /**
+     * Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.
+     */
+    Option?: ParameterStringQueryOption;
+    /**
+     * The value you want to search for.
+     */
+    Values?: ParameterStringFilterValueList;
+  }
+  export type ParameterStringFilterKey = string;
+  export type ParameterStringFilterList = ParameterStringFilter[];
+  export type ParameterStringFilterValue = string;
+  export type ParameterStringFilterValueList = ParameterStringFilterValue[];
+  export type ParameterStringQueryOption = string;
   export type ParameterType = "String"|"StringList"|"SecureString"|string;
   export type ParameterValue = string;
   export type ParameterValueList = ParameterValue[];
@@ -3765,7 +3890,7 @@ declare namespace SSM {
     /**
      * The name of the filter.
      */
-    Key?: ParametersFilterKey;
+    Key: ParametersFilterKey;
     /**
      * The filter values.
      */
@@ -4010,13 +4135,17 @@ declare namespace SSM {
      */
     Type: ParameterType;
     /**
-     * The parameter key ID that you want to add to the system.
+     * The KMS Key ID that you want to use to encrypt a parameter when you choose the SecureString data type. If you don't specify a key ID, the system uses the default key associated with your AWS account.
      */
     KeyId?: ParameterKeyId;
     /**
      * Overwrite an existing parameter. If not specified, will default to "false".
      */
     Overwrite?: Boolean;
+    /**
+     * A regular expression used to validate the parameter value. For example, for String types with values restricted to numbers, you can specify the following: AllowedPattern=^\d+$ 
+     */
+    AllowedPattern?: AllowedPattern;
   }
   export interface PutParameterResult {
   }
@@ -4165,7 +4294,7 @@ declare namespace SSM {
   export type S3KeyPrefix = string;
   export interface S3OutputLocation {
     /**
-     * The Amazon S3 region where the association information is stored.
+     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.
      */
     OutputS3Region?: S3Region;
     /**
@@ -4187,11 +4316,11 @@ declare namespace SSM {
   export type ScheduleExpression = string;
   export interface SendCommandRequest {
     /**
-     * The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags.
+     * The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags. For more information about how to use Targets, see Sending Commands to a Fleet.
      */
     InstanceIds?: InstanceIdList;
     /**
-     * (Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call. For more information about how to use Targets, see Executing a Command Using Systems Manager Run Command.
+     * (Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call. For more information about how to use Targets, see Sending Commands to a Fleet.
      */
     Targets?: Targets;
     /**
@@ -4219,7 +4348,7 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * (Optional) The region where the Amazon Simple Storage Service (Amazon S3) output bucket is located. The default value is the region where Run Command is being called.
+     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.
      */
     OutputS3Region?: S3Region;
     /**
@@ -4231,11 +4360,11 @@ declare namespace SSM {
      */
     OutputS3KeyPrefix?: S3KeyPrefix;
     /**
-     * (Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Executing a Command Using Systems Manager Run Command.
+     * (Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see Using Concurrency Controls.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see Executing a Command Using Systems Manager Run Command.
+     * The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see Using Error Controls.
      */
     MaxErrors?: MaxErrors;
     /**

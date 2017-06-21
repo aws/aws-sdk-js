@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "S3",
-  "description": "Allows forward slashes in Bucket names when using SigV4 to create or retrieve objects. This is to maintain compatibility with behavior when using SigV2. In new code, Buckets should not contain forward slashes. Instead, directories should be part of an object's key."
-}

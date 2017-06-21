@@ -226,6 +226,19 @@
       ],
       "documentation":"<p>Delete a parameter from the system.</p>"
     },
+    "DeleteParameters":{
+      "name":"DeleteParameters",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteParametersRequest"},
+      "output":{"shape":"DeleteParametersResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Delete a list of parameters.</p>"
+    },
     "DeletePatchBaseline":{
       "name":"DeletePatchBaseline",
       "http":{
@@ -583,6 +596,8 @@
       "output":{"shape":"DescribeParametersResult"},
       "errors":[
         {"shape":"InternalServerError"},
+        {"shape":"InvalidFilterKey"},
+        {"shape":"InvalidFilterOption"},
         {"shape":"InvalidFilterValue"},
         {"shape":"InvalidNextToken"}
       ],
@@ -774,6 +789,21 @@
       ],
       "documentation":"<p>Retrieves the details about a specific task executed as part of a Maintenance Window execution.</p>"
     },
+    "GetParameter":{
+      "name":"GetParameter",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetParameterRequest"},
+      "output":{"shape":"GetParameterResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidKeyId"},
+        {"shape":"ParameterNotFound"}
+      ],
+      "documentation":"<p>Get information about a parameter by using the parameter name. </p>"
+    },
     "GetParameterHistory":{
       "name":"GetParameterHistory",
       "http":{
@@ -785,7 +815,8 @@
       "errors":[
         {"shape":"InternalServerError"},
         {"shape":"ParameterNotFound"},
-        {"shape":"InvalidNextToken"}
+        {"shape":"InvalidNextToken"},
+        {"shape":"InvalidKeyId"}
       ],
       "documentation":"<p>Query a list of all parameters used by the AWS account.</p>"
     },
@@ -798,9 +829,28 @@
       "input":{"shape":"GetParametersRequest"},
       "output":{"shape":"GetParametersResult"},
       "errors":[
+        {"shape":"InvalidKeyId"},
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Get details of a parameter.</p>"
+    },
+    "GetParametersByPath":{
+      "name":"GetParametersByPath",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetParametersByPathRequest"},
+      "output":{"shape":"GetParametersByPathResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidFilterKey"},
+        {"shape":"InvalidFilterOption"},
+        {"shape":"InvalidFilterValue"},
+        {"shape":"InvalidKeyId"},
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>Retrieve parameters in a specific hierarchy. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html\">Using Parameter Hierarchies</a>. </p>"
     },
     "GetPatchBaseline":{
       "name":"GetPatchBaseline",
@@ -992,9 +1042,13 @@
         {"shape":"ParameterLimitExceeded"},
         {"shape":"TooManyUpdates"},
         {"shape":"ParameterAlreadyExists"},
+        {"shape":"HierarchyLevelLimitExceededException"},
+        {"shape":"HierarchyTypeMismatchException"},
+        {"shape":"InvalidAllowedPatternException"},
+        {"shape":"ParameterPatternMismatchException"},
         {"shape":"UnsupportedParameterType"}
       ],
-      "documentation":"<p>Add one or more paramaters to the system.</p>"
+      "documentation":"<p>Add one or more parameters to the system.</p>"
     },
     "RegisterDefaultPatchBaseline":{
       "name":"RegisterDefaultPatchBaseline",
@@ -1095,7 +1149,7 @@
         {"shape":"InvalidRole"},
         {"shape":"InvalidNotificationConfig"}
       ],
-      "documentation":"<p>Executes commands on one or more remote instances.</p>"
+      "documentation":"<p>Executes commands on one or more managed instances.</p>"
     },
     "StartAutomationExecution":{
       "name":"StartAutomationExecution",
@@ -1350,6 +1404,11 @@
     "AgentErrorCode":{
       "type":"string",
       "max":10
+    },
+    "AllowedPattern":{
+      "type":"string",
+      "max":1024,
+      "min":0
     },
     "AlreadyExistsException":{
       "type":"structure",
@@ -1921,7 +1980,7 @@
         },
         "OutputS3Region":{
           "shape":"S3Region",
-          "documentation":"<p>The region where the Amazon Simple Storage Service (Amazon S3) output bucket is located. The default value is the region where Run Command is being called.</p>"
+          "documentation":"<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.</p>"
         },
         "OutputS3BucketName":{
           "shape":"S3BucketName",
@@ -1971,11 +2030,11 @@
       "members":{
         "key":{
           "shape":"CommandFilterKey",
-          "documentation":"<p>The name of the filter. For example, requested date and time.</p>"
+          "documentation":"<p>The name of the filter.</p>"
         },
         "value":{
           "shape":"CommandFilterValue",
-          "documentation":"<p>The filter value. For example: June 30, 2015.</p>"
+          "documentation":"<p>The filter value. </p>"
         }
       },
       "documentation":"<p>Describes a command filter.</p>"
@@ -2129,7 +2188,7 @@
         },
         "OutputS3Region":{
           "shape":"S3Region",
-          "documentation":"<p>The name of the region where the output is stored in Amazon S3.</p>"
+          "documentation":"<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.</p>"
         },
         "OutputS3BucketName":{
           "shape":"S3BucketName",
@@ -2559,6 +2618,29 @@
       "members":{
       }
     },
+    "DeleteParametersRequest":{
+      "type":"structure",
+      "required":["Names"],
+      "members":{
+        "Names":{
+          "shape":"ParameterNameList",
+          "documentation":"<p>The names of the parameters to delete.</p>"
+        }
+      }
+    },
+    "DeleteParametersResult":{
+      "type":"structure",
+      "members":{
+        "DeletedParameters":{
+          "shape":"ParameterNameList",
+          "documentation":"<p>The names of the deleted parameters.</p>"
+        },
+        "InvalidParameters":{
+          "shape":"ParameterNameList",
+          "documentation":"<p>The names of parameters that weren't deleted because the parameters are not valid.</p>"
+        }
+      }
+    },
     "DeletePatchBaselineRequest":{
       "type":"structure",
       "required":["BaselineId"],
@@ -2736,7 +2818,7 @@
         },
         "NextToken":{
           "shape":"NextToken",
-          "documentation":"<p> The token for the next set of items to return. Use this token to get the next set of results. </p>"
+          "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results. </p>"
         }
       }
     },
@@ -3336,6 +3418,10 @@
         "Filters":{
           "shape":"ParametersFilterList",
           "documentation":"<p>One or more filters. Use a filter to return a more specific list of results.</p>"
+        },
+        "ParameterFilters":{
+          "shape":"ParameterStringFilterList",
+          "documentation":"<p>Filters to limit the request results.</p>"
         },
         "MaxResults":{
           "shape":"MaxResults",
@@ -3939,7 +4025,7 @@
         },
         "ExecutionStartDateTime":{
           "shape":"StringDateTime",
-          "documentation":"<p>The date and time the plugin started executing. Date and time are written in ISO 8601 format. For example, August 28, 2016 is represented as 2016-08-28. If the plugin has not started to execute, the string is empty.</p>"
+          "documentation":"<p>The date and time the plugin started executing. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedBefore</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to execute, the string is empty.</p>"
         },
         "ExecutionElapsedTime":{
           "shape":"StringDateTime",
@@ -3947,7 +4033,7 @@
         },
         "ExecutionEndDateTime":{
           "shape":"StringDateTime",
-          "documentation":"<p>The date and time the plugin was finished executing. Date and time are written in ISO 8601 format. For example, August 28, 2016 is represented as 2016-08-28. If the plugin has not started to execute, the string is empty.</p>"
+          "documentation":"<p>The date and time the plugin was finished executing. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedAfter</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to execute, the string is empty.</p>"
         },
         "Status":{
           "shape":"CommandInvocationStatus",
@@ -4330,6 +4416,81 @@
         }
       }
     },
+    "GetParameterRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"PSParameterName",
+          "documentation":"<p>The name of the parameter you want to query.</p>"
+        },
+        "WithDecryption":{
+          "shape":"Boolean",
+          "documentation":"<p>Return decrypted values for secure string parameters. This flag is ignored for String and StringList parameter types.</p>",
+          "box":true
+        }
+      }
+    },
+    "GetParameterResult":{
+      "type":"structure",
+      "members":{
+        "Parameter":{
+          "shape":"Parameter",
+          "documentation":"<p>Information about a parameter.</p>"
+        }
+      }
+    },
+    "GetParametersByPathMaxResults":{
+      "type":"integer",
+      "max":10,
+      "min":1
+    },
+    "GetParametersByPathRequest":{
+      "type":"structure",
+      "required":["Path"],
+      "members":{
+        "Path":{
+          "shape":"PSParameterName",
+          "documentation":"<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. Examples: /Environment/Test/DBString003</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p>"
+        },
+        "Recursive":{
+          "shape":"Boolean",
+          "documentation":"<p>Retrieve all parameters within a hierarchy.</p>",
+          "box":true
+        },
+        "ParameterFilters":{
+          "shape":"ParameterStringFilterList",
+          "documentation":"<p>Filters to limit the request results.</p>"
+        },
+        "WithDecryption":{
+          "shape":"Boolean",
+          "documentation":"<p>Retrieve all parameters in a hierarchy with their value decrypted.</p>",
+          "box":true
+        },
+        "MaxResults":{
+          "shape":"GetParametersByPathMaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to start the list. Use this token to get the next set of results. </p>"
+        }
+      }
+    },
+    "GetParametersByPathResult":{
+      "type":"structure",
+      "members":{
+        "Parameters":{
+          "shape":"ParameterList",
+          "documentation":"<p>A list of parameters found in the specified hierarchy.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        }
+      }
+    },
     "GetParametersRequest":{
       "type":"structure",
       "required":["Names"],
@@ -4435,6 +4596,28 @@
           "documentation":"<p>A description of the patch baseline.</p>"
         }
       }
+    },
+    "HierarchyLevelLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"String",
+          "documentation":"<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html\">Develop a Parameter Hierarchy</a>. </p>"
+        }
+      },
+      "documentation":"<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html\">Develop a Parameter Hierarchy</a>. </p>",
+      "exception":true
+    },
+    "HierarchyTypeMismatchException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"String",
+          "documentation":"<p>Parameter Store does not support changing a parameter type in a hierarchy. For example, you can't change a parameter from a String type to a SecureString type. You must create a new, unique parameter.</p>"
+        }
+      },
+      "documentation":"<p>Parameter Store does not support changing a parameter type in a hierarchy. For example, you can't change a parameter from a String type to a SecureString type. You must create a new, unique parameter.</p>",
+      "exception":true
     },
     "IPAddress":{
       "type":"string",
@@ -4909,6 +5092,17 @@
       "documentation":"<p>The activation ID is not valid. Verify the you entered the correct ActivationId or ActivationCode and try again.</p>",
       "exception":true
     },
+    "InvalidAllowedPatternException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"String",
+          "documentation":"<p>The request does not meet the regular expression requirement.</p>"
+        }
+      },
+      "documentation":"<p>The request does not meet the regular expression requirement.</p>",
+      "exception":true
+    },
     "InvalidAutomationExecutionParametersException":{
       "type":"structure",
       "members":{
@@ -4982,6 +5176,17 @@
       "members":{
       },
       "documentation":"<p>The specified key is not valid.</p>",
+      "exception":true
+    },
+    "InvalidFilterOption":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"String",
+          "documentation":"<p>The specified filter option is not valid. Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.</p>"
+        }
+      },
+      "documentation":"<p>The specified filter option is not valid. Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.</p>",
       "exception":true
     },
     "InvalidFilterValue":{
@@ -6256,14 +6461,12 @@
     "PSParameterName":{
       "type":"string",
       "max":1024,
-      "min":1,
-      "pattern":"^(?!^([aA][wW][sS]|[sS][sS][mM]))(?=^[a-zA-Z0-9_.-]*$).*$"
+      "min":1
     },
     "PSParameterValue":{
       "type":"string",
       "max":4096,
-      "min":1,
-      "pattern":"^(?:(?!(\\{\\{.*\\}\\})).)*$"
+      "min":1
     },
     "Parameter":{
       "type":"structure",
@@ -6326,6 +6529,10 @@
         "Value":{
           "shape":"PSParameterValue",
           "documentation":"<p>The parameter value.</p>"
+        },
+        "AllowedPattern":{
+          "shape":"AllowedPattern",
+          "documentation":"<p>Parameter names can include the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>"
         }
       },
       "documentation":"<p>Information about parameter usage.</p>"
@@ -6378,6 +6585,10 @@
         "Description":{
           "shape":"ParameterDescription",
           "documentation":"<p>Description of the parameter actions.</p>"
+        },
+        "AllowedPattern":{
+          "shape":"AllowedPattern",
+          "documentation":"<p>A parameter name can include only the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>"
         }
       },
       "documentation":"<p>Metada includes information like the ARN of the last user and the date/time the parameter was last used.</p>"
@@ -6401,6 +6612,62 @@
       "documentation":"<p>The parameter could not be found. Verify the name and try again.</p>",
       "exception":true
     },
+    "ParameterPatternMismatchException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"String",
+          "documentation":"<p>The parameter name is not valid.</p>"
+        }
+      },
+      "documentation":"<p>The parameter name is not valid.</p>",
+      "exception":true
+    },
+    "ParameterStringFilter":{
+      "type":"structure",
+      "required":["Key"],
+      "members":{
+        "Key":{
+          "shape":"ParameterStringFilterKey",
+          "documentation":"<p>The name of the filter.</p>"
+        },
+        "Option":{
+          "shape":"ParameterStringQueryOption",
+          "documentation":"<p>Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.</p>"
+        },
+        "Values":{
+          "shape":"ParameterStringFilterValueList",
+          "documentation":"<p>The value you want to search for.</p>"
+        }
+      },
+      "documentation":"<p>One or more filters. Use a filter to return a more specific list of results.</p>"
+    },
+    "ParameterStringFilterKey":{
+      "type":"string",
+      "max":132,
+      "min":1,
+      "pattern":"tag:.+|Name|Type|KeyId|Path"
+    },
+    "ParameterStringFilterList":{
+      "type":"list",
+      "member":{"shape":"ParameterStringFilter"}
+    },
+    "ParameterStringFilterValue":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "ParameterStringFilterValueList":{
+      "type":"list",
+      "member":{"shape":"ParameterStringFilterValue"},
+      "max":50,
+      "min":1
+    },
+    "ParameterStringQueryOption":{
+      "type":"string",
+      "max":10,
+      "min":1
+    },
     "ParameterType":{
       "type":"string",
       "enum":[
@@ -6421,7 +6688,10 @@
     },
     "ParametersFilter":{
       "type":"structure",
-      "required":["Values"],
+      "required":[
+        "Key",
+        "Values"
+      ],
       "members":{
         "Key":{
           "shape":"ParametersFilterKey",
@@ -6448,7 +6718,7 @@
     },
     "ParametersFilterValue":{
       "type":"string",
-      "max":100,
+      "max":1024,
       "min":1
     },
     "ParametersFilterValueList":{
@@ -6890,12 +7160,16 @@
         },
         "KeyId":{
           "shape":"ParameterKeyId",
-          "documentation":"<p>The parameter key ID that you want to add to the system.</p>"
+          "documentation":"<p>The KMS Key ID that you want to use to encrypt a parameter when you choose the SecureString data type. If you don't specify a key ID, the system uses the default key associated with your AWS account.</p>"
         },
         "Overwrite":{
           "shape":"Boolean",
           "documentation":"<p>Overwrite an existing parameter. If not specified, will default to \"false\".</p>",
           "box":true
+        },
+        "AllowedPattern":{
+          "shape":"AllowedPattern",
+          "documentation":"<p>A regular expression used to validate the parameter value. For example, for String types with values restricted to numbers, you can specify the following: AllowedPattern=^\\d+$ </p>"
         }
       }
     },
@@ -7167,7 +7441,7 @@
       "members":{
         "OutputS3Region":{
           "shape":"S3Region",
-          "documentation":"<p>The Amazon S3 region where the association information is stored.</p>"
+          "documentation":"<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.</p>"
         },
         "OutputS3BucketName":{
           "shape":"S3BucketName",
@@ -7206,11 +7480,11 @@
       "members":{
         "InstanceIds":{
           "shape":"InstanceIdList",
-          "documentation":"<p>The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags.</p>"
+          "documentation":"<p>The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags. For more information about how to use Targets, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Sending Commands to a Fleet</a>.</p>"
         },
         "Targets":{
           "shape":"Targets",
-          "documentation":"<p>(Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call. For more information about how to use Targets, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html\">Executing a Command Using Systems Manager Run Command</a>.</p>"
+          "documentation":"<p>(Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call. For more information about how to use Targets, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Sending Commands to a Fleet</a>.</p>"
         },
         "DocumentName":{
           "shape":"DocumentARN",
@@ -7239,7 +7513,7 @@
         },
         "OutputS3Region":{
           "shape":"S3Region",
-          "documentation":"<p>(Optional) The region where the Amazon Simple Storage Service (Amazon S3) output bucket is located. The default value is the region where Run Command is being called.</p>"
+          "documentation":"<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.</p>"
         },
         "OutputS3BucketName":{
           "shape":"S3BucketName",
@@ -7251,11 +7525,11 @@
         },
         "MaxConcurrency":{
           "shape":"MaxConcurrency",
-          "documentation":"<p>(Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html\">Executing a Command Using Systems Manager Run Command</a>.</p>"
+          "documentation":"<p>(Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-velocity.html\">Using Concurrency Controls</a>.</p>"
         },
         "MaxErrors":{
           "shape":"MaxErrors",
-          "documentation":"<p>The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html\">Executing a Command Using Systems Manager Run Command</a>.</p>"
+          "documentation":"<p>The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html\">Using Error Controls</a>.</p>"
         },
         "ServiceRoleArn":{
           "shape":"ServiceRole",
@@ -7461,14 +7735,14 @@
       "members":{
         "Key":{
           "shape":"TargetKey",
-          "documentation":"<p>User-defined criteria for sending commands that target instances that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or InstanceIds. For more information about how to send commands that target instances using Key,Value parameters, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html\">Executing a Command Using Systems Manager Run Command</a>.</p>"
+          "documentation":"<p>User-defined criteria for sending commands that target instances that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or InstanceIds. For more information about how to send commands that target instances using Key,Value parameters, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Executing a Command Using Systems Manager Run Command</a>.</p>"
         },
         "Values":{
           "shape":"TargetValues",
-          "documentation":"<p>User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to execute a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html\">Executing a Command Using Systems Manager Run Command</a>.</p>"
+          "documentation":"<p>User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to execute a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Executing a Command Using Systems Manager Run Command</a>.</p>"
         }
       },
-      "documentation":"<p>An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don't provide one or more instance IDs in the call.</p>"
+      "documentation":"<p>An array of search criteria that targets instances using a Key,Value combination that you specify. <code>Targets</code> is required if you don't provide one or more instance IDs in the call.</p> <p/>"
     },
     "TargetCount":{"type":"integer"},
     "TargetKey":{
@@ -7846,5 +8120,5 @@
       "pattern":"^[0-9]{1,6}(\\.[0-9]{1,6}){2,3}$"
     }
   },
-  "documentation":"<fullname>Amazon EC2 Systems Manager</fullname> <p>Amazon EC2 Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon EC2 Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-prereqs.html\">Systems Manager Prerequisites</a>.</p>"
+  "documentation":"<fullname>Amazon EC2 Systems Manager</fullname> <p>Amazon EC2 Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon EC2 Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Systems Manager Prerequisites</a>.</p>"
 }
