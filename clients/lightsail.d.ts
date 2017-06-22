@@ -631,7 +631,7 @@ declare namespace Lightsail {
      */
     availabilityZone: string;
     /**
-     * The name for your custom image.
+     * (Deprecated) The name for your custom image.  In releases prior to June 12, 2017, this parameter was ignored by the API. It is now deprecated. 
      */
     customImageName?: ResourceName;
     /**
@@ -1162,9 +1162,13 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
     /**
-     * Returns the number of pages of results that remain.
+     * (Deprecated) Returns the number of pages of results that remain.  In releases prior to June 12, 2017, this parameter returned null by the API. It is now deprecated, and the API returns the nextPageToken parameter instead. 
      */
     nextPageCount?: string;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextPageToken?: string;
   }
   export interface GetOperationsRequest {
     /**
@@ -1720,7 +1724,7 @@ declare namespace Lightsail {
     availabilityZones?: AvailabilityZoneList;
   }
   export type RegionList = Region[];
-  export type RegionName = "us-east-1"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-central-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|string;
+  export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-central-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|string;
   export interface ReleaseStaticIpRequest {
     /**
      * The name of the static IP to delete.

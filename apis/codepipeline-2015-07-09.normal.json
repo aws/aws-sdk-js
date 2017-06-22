@@ -216,6 +216,21 @@
       ],
       "documentation":"<p>Gets a summary of all AWS CodePipeline action types associated with your account.</p>"
     },
+    "ListPipelineExecutions":{
+      "name":"ListPipelineExecutions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListPipelineExecutionsInput"},
+      "output":{"shape":"ListPipelineExecutionsOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"PipelineNotFoundException"},
+        {"shape":"InvalidNextTokenException"}
+      ],
+      "documentation":"<p>Gets a summary of the most recent executions for a pipeline.</p>"
+    },
     "ListPipelines":{
       "name":"ListPipelines",
       "http":{
@@ -575,7 +590,7 @@
     },
     "ActionConfigurationQueryableValue":{
       "type":"string",
-      "max":20,
+      "max":50,
       "min":1,
       "pattern":"[a-zA-Z0-9_-]+"
     },
@@ -745,8 +760,14 @@
           "shape":"ActionName",
           "documentation":"<p>The name of the action.</p>"
         },
-        "currentRevision":{"shape":"ActionRevision"},
-        "latestExecution":{"shape":"ActionExecution"},
+        "currentRevision":{
+          "shape":"ActionRevision",
+          "documentation":"<p>Represents information about the version (or revision) of an action.</p>"
+        },
+        "latestExecution":{
+          "shape":"ActionExecution",
+          "documentation":"<p>Represents information about the run of an action.</p>"
+        },
         "entityUrl":{
           "shape":"Url",
           "documentation":"<p>A URL link for more information about the state of the action, such as a deployment group details page.</p>"
@@ -770,7 +791,10 @@
         "outputArtifactDetails"
       ],
       "members":{
-        "id":{"shape":"ActionTypeId"},
+        "id":{
+          "shape":"ActionTypeId",
+          "documentation":"<p>Represents information about an action type.</p>"
+        },
         "settings":{
           "shape":"ActionTypeSettings",
           "documentation":"<p>The settings for the action type.</p>"
@@ -1003,14 +1027,14 @@
         },
         "location":{
           "shape":"ArtifactStoreLocation",
-          "documentation":"<p>The location for storing the artifacts for a pipeline, such as an S3 bucket or folder.</p>"
+          "documentation":"<p>The Amazon S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder within the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any Amazon S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.</p>"
         },
         "encryptionKey":{
           "shape":"EncryptionKey",
           "documentation":"<p>The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.</p>"
         }
       },
-      "documentation":"<p>The Amazon S3 location where artifacts are stored for the pipeline. If this Amazon S3 bucket is created manually, it must meet the requirements for AWS CodePipeline. For more information, see the <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#CPS3Bucket\">Concepts</a>.</p>"
+      "documentation":"<p>The Amazon S3 bucket where artifacts are stored for the pipeline.</p>"
     },
     "ArtifactStoreLocation":{
       "type":"string",
@@ -1079,13 +1103,22 @@
           "shape":"Version",
           "documentation":"<p>The version identifier of the custom action.</p>"
         },
-        "settings":{"shape":"ActionTypeSettings"},
+        "settings":{
+          "shape":"ActionTypeSettings",
+          "documentation":"<p>Returns information about the settings for an action type.</p>"
+        },
         "configurationProperties":{
           "shape":"ActionConfigurationPropertyList",
           "documentation":"<p>The configuration properties for the custom action.</p> <note> <p>You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of {Config:name}, as long as the configuration property is both required and not secret. For more information, see <a href=\"http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html\">Create a Custom Action for a Pipeline</a>.</p> </note>"
         },
-        "inputArtifactDetails":{"shape":"ArtifactDetails"},
-        "outputArtifactDetails":{"shape":"ArtifactDetails"}
+        "inputArtifactDetails":{
+          "shape":"ArtifactDetails",
+          "documentation":"<p>The details of the input artifact for the action, such as its commit ID.</p>"
+        },
+        "outputArtifactDetails":{
+          "shape":"ArtifactDetails",
+          "documentation":"<p>The details of the output artifact of the action, such as its commit ID.</p>"
+        }
       },
       "documentation":"<p>Represents the input of a create custom action operation.</p>"
     },
@@ -1093,7 +1126,10 @@
       "type":"structure",
       "required":["actionType"],
       "members":{
-        "actionType":{"shape":"ActionType"}
+        "actionType":{
+          "shape":"ActionType",
+          "documentation":"<p>Returns information about the details of an action type.</p>"
+        }
       },
       "documentation":"<p>Represents the output of a create custom action operation.</p>"
     },
@@ -1101,14 +1137,20 @@
       "type":"structure",
       "required":["pipeline"],
       "members":{
-        "pipeline":{"shape":"PipelineDeclaration"}
+        "pipeline":{
+          "shape":"PipelineDeclaration",
+          "documentation":"<p>Represents the structure of actions and stages to be performed in the pipeline. </p>"
+        }
       },
       "documentation":"<p>Represents the input of a create pipeline action.</p>"
     },
     "CreatePipelineOutput":{
       "type":"structure",
       "members":{
-        "pipeline":{"shape":"PipelineDeclaration"}
+        "pipeline":{
+          "shape":"PipelineDeclaration",
+          "documentation":"<p>Represents the structure of actions and stages to be performed in the pipeline. </p>"
+        }
       },
       "documentation":"<p>Represents the output of a create pipeline action.</p>"
     },
@@ -1400,7 +1442,10 @@
     "GetPipelineOutput":{
       "type":"structure",
       "members":{
-        "pipeline":{"shape":"PipelineDeclaration"}
+        "pipeline":{
+          "shape":"PipelineDeclaration",
+          "documentation":"<p>Represents the structure of actions and stages to be performed in the pipeline. </p>"
+        }
       },
       "documentation":"<p>Represents the output of a get pipeline action.</p>"
     },
@@ -1579,9 +1624,18 @@
     "JobData":{
       "type":"structure",
       "members":{
-        "actionTypeId":{"shape":"ActionTypeId"},
-        "actionConfiguration":{"shape":"ActionConfiguration"},
-        "pipelineContext":{"shape":"PipelineContext"},
+        "actionTypeId":{
+          "shape":"ActionTypeId",
+          "documentation":"<p>Represents information about an action type.</p>"
+        },
+        "actionConfiguration":{
+          "shape":"ActionConfiguration",
+          "documentation":"<p>Represents information about an action configuration.</p>"
+        },
+        "pipelineContext":{
+          "shape":"PipelineContext",
+          "documentation":"<p>Represents information about a pipeline to a job worker.</p>"
+        },
         "inputArtifacts":{
           "shape":"ArtifactList",
           "documentation":"<p>The artifact supplied to the job.</p>"
@@ -1590,12 +1644,18 @@
           "shape":"ArtifactList",
           "documentation":"<p>The output of the job.</p>"
         },
-        "artifactCredentials":{"shape":"AWSSessionCredentials"},
+        "artifactCredentials":{
+          "shape":"AWSSessionCredentials",
+          "documentation":"<p>Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline.</p>"
+        },
         "continuationToken":{
           "shape":"ContinuationToken",
           "documentation":"<p>A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.</p>"
         },
-        "encryptionKey":{"shape":"EncryptionKey"}
+        "encryptionKey":{
+          "shape":"EncryptionKey",
+          "documentation":"<p>Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. </p>"
+        }
       },
       "documentation":"<p>Represents additional information about a job required for a job worker to complete the job.</p>"
     },
@@ -1606,7 +1666,10 @@
           "shape":"JobId",
           "documentation":"<p>The unique system-generated ID of the job.</p>"
         },
-        "data":{"shape":"JobData"},
+        "data":{
+          "shape":"JobData",
+          "documentation":"<p>Represents additional information about a job required for a job worker to complete the job. </p>"
+        },
         "accountId":{
           "shape":"AccountId",
           "documentation":"<p>The AWS account ID associated with the job.</p>"
@@ -1680,6 +1743,39 @@
       },
       "documentation":"<p>Represents the output of a list action types action.</p>"
     },
+    "ListPipelineExecutionsInput":{
+      "type":"structure",
+      "required":["pipelineName"],
+      "members":{
+        "pipelineName":{
+          "shape":"PipelineName",
+          "documentation":"<p>The name of the pipeline for which you want to get execution summary information.</p>"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. The available pipeline execution history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token that was returned from the previous list pipeline executions call, which can be used to return the next set of pipeline executions in the list.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a list pipeline executions action.</p>"
+    },
+    "ListPipelineExecutionsOutput":{
+      "type":"structure",
+      "members":{
+        "pipelineExecutionSummaries":{
+          "shape":"PipelineExecutionSummaryList",
+          "documentation":"<p>A list of executions in the history of a pipeline.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token that can be used in the next list pipeline executions call to return the next set of pipeline executions. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a list pipeline executions action. </p>"
+    },
     "ListPipelinesInput":{
       "type":"structure",
       "members":{
@@ -1706,6 +1802,11 @@
     },
     "MaxBatchSize":{
       "type":"integer",
+      "min":1
+    },
+    "MaxResults":{
+      "type":"integer",
+      "max":100,
       "min":1
     },
     "MaximumArtifactCount":{
@@ -1759,7 +1860,10 @@
           "shape":"StageContext",
           "documentation":"<p>The stage of the pipeline.</p>"
         },
-        "action":{"shape":"ActionContext"}
+        "action":{
+          "shape":"ActionContext",
+          "documentation":"<p/>"
+        }
       },
       "documentation":"<p>Represents information about a pipeline to a job worker.</p>"
     },
@@ -1780,7 +1884,10 @@
           "shape":"RoleArn",
           "documentation":"<p>The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn.</p>"
         },
-        "artifactStore":{"shape":"ArtifactStore"},
+        "artifactStore":{
+          "shape":"ArtifactStore",
+          "documentation":"<p>Represents the context of an action within the stage of a pipeline to a job worker. </p>"
+        },
         "stages":{
           "shape":"PipelineStageDeclarationList",
           "documentation":"<p>The stage in which to perform the action.</p>"
@@ -1809,7 +1916,7 @@
         },
         "status":{
           "shape":"PipelineExecutionStatus",
-          "documentation":"<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline did not complete successfully.</p> </li> </ul>"
+          "documentation":"<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline execution did not complete successfully.</p> </li> </ul>"
         },
         "artifactRevisions":{
           "shape":"ArtifactRevisionList",
@@ -1837,6 +1944,32 @@
         "Superseded",
         "Failed"
       ]
+    },
+    "PipelineExecutionSummary":{
+      "type":"structure",
+      "members":{
+        "pipelineExecutionId":{
+          "shape":"PipelineExecutionId",
+          "documentation":"<p>The ID of the pipeline execution.</p>"
+        },
+        "status":{
+          "shape":"PipelineExecutionStatus",
+          "documentation":"<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline execution did not complete successfully.</p> </li> </ul>"
+        },
+        "startTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date and time when the pipeline execution began, in timestamp format.</p>"
+        },
+        "lastUpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date and time of the last change to the pipeline execution, in timestamp format.</p>"
+        }
+      },
+      "documentation":"<p>Summary information about a pipeline execution.</p>"
+    },
+    "PipelineExecutionSummaryList":{
+      "type":"list",
+      "member":{"shape":"PipelineExecutionSummary"}
     },
     "PipelineList":{
       "type":"list",
@@ -1903,7 +2036,10 @@
       "type":"structure",
       "required":["actionTypeId"],
       "members":{
-        "actionTypeId":{"shape":"ActionTypeId"},
+        "actionTypeId":{
+          "shape":"ActionTypeId",
+          "documentation":"<p>Represents information about an action type.</p>"
+        },
         "maxBatchSize":{
           "shape":"MaxBatchSize",
           "documentation":"<p>The maximum number of jobs to return in a poll for jobs call.</p>"
@@ -1929,7 +2065,10 @@
       "type":"structure",
       "required":["actionTypeId"],
       "members":{
-        "actionTypeId":{"shape":"ActionTypeId"},
+        "actionTypeId":{
+          "shape":"ActionTypeId",
+          "documentation":"<p>Represents information about an action type.</p>"
+        },
         "maxBatchSize":{
           "shape":"MaxBatchSize",
           "documentation":"<p>The maximum number of jobs to return in a poll for jobs call.</p>"
@@ -1968,7 +2107,10 @@
           "shape":"ActionName",
           "documentation":"<p>The name of the action that will process the revision.</p>"
         },
-        "actionRevision":{"shape":"ActionRevision"}
+        "actionRevision":{
+          "shape":"ActionRevision",
+          "documentation":"<p>Represents information about the version (or revision) of an action.</p>"
+        }
       },
       "documentation":"<p>Represents the input of a put action revision action.</p>"
     },
@@ -2086,7 +2228,10 @@
           "shape":"ClientToken",
           "documentation":"<p>The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.</p>"
         },
-        "failureDetails":{"shape":"FailureDetails"}
+        "failureDetails":{
+          "shape":"FailureDetails",
+          "documentation":"<p>Represents information about failure details.</p>"
+        }
       },
       "documentation":"<p>Represents the input of a third party job failure result action.</p>"
     },
@@ -2105,12 +2250,18 @@
           "shape":"ClientToken",
           "documentation":"<p>The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.</p>"
         },
-        "currentRevision":{"shape":"CurrentRevision"},
+        "currentRevision":{
+          "shape":"CurrentRevision",
+          "documentation":"<p>Represents information about a current revision.</p>"
+        },
         "continuationToken":{
           "shape":"ContinuationToken",
           "documentation":"<p>A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the partner action. When the action is complete, no continuation token should be supplied.</p>"
         },
-        "executionDetails":{"shape":"ExecutionDetails"}
+        "executionDetails":{
+          "shape":"ExecutionDetails",
+          "documentation":"<p>The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline. </p>"
+        }
       },
       "documentation":"<p>Represents the input of a put third party job success result action.</p>"
     },
@@ -2362,9 +2513,18 @@
     "ThirdPartyJobData":{
       "type":"structure",
       "members":{
-        "actionTypeId":{"shape":"ActionTypeId"},
-        "actionConfiguration":{"shape":"ActionConfiguration"},
-        "pipelineContext":{"shape":"PipelineContext"},
+        "actionTypeId":{
+          "shape":"ActionTypeId",
+          "documentation":"<p>Represents information about an action type.</p>"
+        },
+        "actionConfiguration":{
+          "shape":"ActionConfiguration",
+          "documentation":"<p>Represents information about an action configuration.</p>"
+        },
+        "pipelineContext":{
+          "shape":"PipelineContext",
+          "documentation":"<p>Represents information about a pipeline to a job worker.</p>"
+        },
         "inputArtifacts":{
           "shape":"ArtifactList",
           "documentation":"<p>The name of the artifact that will be worked upon by the action, if any. This name might be system-generated, such as \"MyApp\", or might be defined by the user when the action is created. The input artifact name must match the name of an output artifact generated by an action in an earlier action or stage of the pipeline.</p>"
@@ -2373,7 +2533,10 @@
           "shape":"ArtifactList",
           "documentation":"<p>The name of the artifact that will be the result of the action, if any. This name might be system-generated, such as \"MyBuiltApp\", or might be defined by the user when the action is created.</p>"
         },
-        "artifactCredentials":{"shape":"AWSSessionCredentials"},
+        "artifactCredentials":{
+          "shape":"AWSSessionCredentials",
+          "documentation":"<p>Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline. </p>"
+        },
         "continuationToken":{
           "shape":"ContinuationToken",
           "documentation":"<p>A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.</p>"

@@ -108,6 +108,7 @@
       "input":{"shape":"CreateReplicationTaskMessage"},
       "output":{"shape":"CreateReplicationTaskResponse"},
       "errors":[
+        {"shape":"AccessDeniedFault"},
         {"shape":"InvalidResourceStateFault"},
         {"shape":"ResourceAlreadyExistsFault"},
         {"shape":"ResourceNotFoundFault"},
@@ -1923,6 +1924,10 @@
         "CertificateWallet":{
           "shape":"CertificateWallet",
           "documentation":"<p>The location of the imported Oracle Wallet certificate for use with SSL.</p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>The tags associated with the certificate.</p>"
         }
       }
     },
@@ -3044,6 +3049,14 @@
         "FullLoadRows":{
           "shape":"Long",
           "documentation":"<p>The number of rows added during the Full Load operation.</p>"
+        },
+        "FullLoadCondtnlChkFailedRows":{
+          "shape":"Long",
+          "documentation":"<p>The number of rows that failed conditional checks during the Full Load operation (valid only for DynamoDB as a target migrations).</p>"
+        },
+        "FullLoadErrorRows":{
+          "shape":"Long",
+          "documentation":"<p>The number of rows that failed to load during the Full Load operation (valid only for DynamoDB as a target migrations).</p>"
         },
         "LastUpdateTime":{
           "shape":"TStamp",

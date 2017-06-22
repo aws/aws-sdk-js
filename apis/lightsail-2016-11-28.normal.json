@@ -1289,7 +1289,8 @@
         },
         "customImageName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name for your custom image.</p>"
+          "documentation":"<p>(Deprecated) The name for your custom image.</p> <note> <p>In releases prior to June 12, 2017, this parameter was ignored by the API. It is now deprecated.</p> </note>",
+          "deprecated":true
         },
         "blueprintId":{
           "shape":"NonEmptyString",
@@ -2026,7 +2027,12 @@
         },
         "nextPageCount":{
           "shape":"string",
-          "documentation":"<p>Returns the number of pages of results that remain.</p>"
+          "documentation":"<p>(Deprecated) Returns the number of pages of results that remain.</p> <note> <p>In releases prior to June 12, 2017, this parameter returned <code>null</code> by the API. It is now deprecated, and the API returns the <code>nextPageToken</code> parameter instead.</p> </note>",
+          "deprecated":true
+        },
+        "nextPageToken":{
+          "shape":"string",
+          "documentation":"<p>An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.</p>"
         }
       }
     },
@@ -2911,6 +2917,7 @@
       "type":"string",
       "enum":[
         "us-east-1",
+        "us-east-2",
         "us-west-1",
         "us-west-2",
         "eu-west-1",

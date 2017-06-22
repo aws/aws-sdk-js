@@ -1276,6 +1276,10 @@ declare namespace DMS {
      * The location of the imported Oracle Wallet certificate for use with SSL.
      */
     CertificateWallet?: CertificateWallet;
+    /**
+     * The tags associated with the certificate.
+     */
+    Tags?: TagList;
   }
   export interface ImportCertificateResponse {
     /**
@@ -1991,6 +1995,14 @@ declare namespace DMS {
      * The number of rows added during the Full Load operation.
      */
     FullLoadRows?: Long;
+    /**
+     * The number of rows that failed conditional checks during the Full Load operation (valid only for DynamoDB as a target migrations).
+     */
+    FullLoadCondtnlChkFailedRows?: Long;
+    /**
+     * The number of rows that failed to load during the Full Load operation (valid only for DynamoDB as a target migrations).
+     */
+    FullLoadErrorRows?: Long;
     /**
      * The last time the table was updated.
      */

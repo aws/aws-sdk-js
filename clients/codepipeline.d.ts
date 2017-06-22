@@ -124,6 +124,14 @@ declare class CodePipeline extends Service {
    */
   listActionTypes(callback?: (err: AWSError, data: CodePipeline.Types.ListActionTypesOutput) => void): Request<CodePipeline.Types.ListActionTypesOutput, AWSError>;
   /**
+   * Gets a summary of the most recent executions for a pipeline.
+   */
+  listPipelineExecutions(params: CodePipeline.Types.ListPipelineExecutionsInput, callback?: (err: AWSError, data: CodePipeline.Types.ListPipelineExecutionsOutput) => void): Request<CodePipeline.Types.ListPipelineExecutionsOutput, AWSError>;
+  /**
+   * Gets a summary of the most recent executions for a pipeline.
+   */
+  listPipelineExecutions(callback?: (err: AWSError, data: CodePipeline.Types.ListPipelineExecutionsOutput) => void): Request<CodePipeline.Types.ListPipelineExecutionsOutput, AWSError>;
+  /**
    * Gets a summary of all of the pipelines associated with your account.
    */
   listPipelines(params: CodePipeline.Types.ListPipelinesInput, callback?: (err: AWSError, data: CodePipeline.Types.ListPipelinesOutput) => void): Request<CodePipeline.Types.ListPipelinesOutput, AWSError>;
@@ -415,7 +423,13 @@ declare namespace CodePipeline {
      * The name of the action.
      */
     actionName?: ActionName;
+    /**
+     * Represents information about the version (or revision) of an action.
+     */
     currentRevision?: ActionRevision;
+    /**
+     * Represents information about the run of an action.
+     */
     latestExecution?: ActionExecution;
     /**
      * A URL link for more information about the state of the action, such as a deployment group details page.
@@ -428,6 +442,9 @@ declare namespace CodePipeline {
   }
   export type ActionStateList = ActionState[];
   export interface ActionType {
+    /**
+     * Represents information about an action type.
+     */
     id: ActionTypeId;
     /**
      * The settings for the action type.
@@ -566,7 +583,7 @@ declare namespace CodePipeline {
      */
     type: ArtifactStoreType;
     /**
-     * The location for storing the artifacts for a pipeline, such as an S3 bucket or folder.
+     * The Amazon S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder within the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any Amazon S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
      */
     location: ArtifactStoreLocation;
     /**
@@ -606,21 +623,39 @@ declare namespace CodePipeline {
      * The version identifier of the custom action.
      */
     version: Version;
+    /**
+     * Returns information about the settings for an action type.
+     */
     settings?: ActionTypeSettings;
     /**
      * The configuration properties for the custom action.  You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of {Config:name}, as long as the configuration property is both required and not secret. For more information, see Create a Custom Action for a Pipeline. 
      */
     configurationProperties?: ActionConfigurationPropertyList;
+    /**
+     * The details of the input artifact for the action, such as its commit ID.
+     */
     inputArtifactDetails: ArtifactDetails;
+    /**
+     * The details of the output artifact of the action, such as its commit ID.
+     */
     outputArtifactDetails: ArtifactDetails;
   }
   export interface CreateCustomActionTypeOutput {
+    /**
+     * Returns information about the details of an action type.
+     */
     actionType: ActionType;
   }
   export interface CreatePipelineInput {
+    /**
+     * Represents the structure of actions and stages to be performed in the pipeline. 
+     */
     pipeline: PipelineDeclaration;
   }
   export interface CreatePipelineOutput {
+    /**
+     * Represents the structure of actions and stages to be performed in the pipeline. 
+     */
     pipeline?: PipelineDeclaration;
   }
   export interface CurrentRevision {
@@ -788,6 +823,9 @@ declare namespace CodePipeline {
     version?: PipelineVersion;
   }
   export interface GetPipelineOutput {
+    /**
+     * Represents the structure of actions and stages to be performed in the pipeline. 
+     */
     pipeline?: PipelineDeclaration;
   }
   export interface GetPipelineStateInput {
@@ -860,8 +898,17 @@ declare namespace CodePipeline {
     accountId?: AccountId;
   }
   export interface JobData {
+    /**
+     * Represents information about an action type.
+     */
     actionTypeId?: ActionTypeId;
+    /**
+     * Represents information about an action configuration.
+     */
     actionConfiguration?: ActionConfiguration;
+    /**
+     * Represents information about a pipeline to a job worker.
+     */
     pipelineContext?: PipelineContext;
     /**
      * The artifact supplied to the job.
@@ -871,11 +918,17 @@ declare namespace CodePipeline {
      * The output of the job.
      */
     outputArtifacts?: ArtifactList;
+    /**
+     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline.
+     */
     artifactCredentials?: AWSSessionCredentials;
     /**
      * A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.
      */
     continuationToken?: ContinuationToken;
+    /**
+     * Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. 
+     */
     encryptionKey?: EncryptionKey;
   }
   export interface JobDetails {
@@ -883,6 +936,9 @@ declare namespace CodePipeline {
      * The unique system-generated ID of the job.
      */
     id?: JobId;
+    /**
+     * Represents additional information about a job required for a job worker to complete the job. 
+     */
     data?: JobData;
     /**
      * The AWS account ID associated with the job.
@@ -915,6 +971,30 @@ declare namespace CodePipeline {
      */
     nextToken?: NextToken;
   }
+  export interface ListPipelineExecutionsInput {
+    /**
+     * The name of the pipeline for which you want to get execution summary information.
+     */
+    pipelineName: PipelineName;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. The available pipeline execution history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token that was returned from the previous list pipeline executions call, which can be used to return the next set of pipeline executions in the list.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListPipelineExecutionsOutput {
+    /**
+     * A list of executions in the history of a pipeline.
+     */
+    pipelineExecutionSummaries?: PipelineExecutionSummaryList;
+    /**
+     * A token that can be used in the next list pipeline executions call to return the next set of pipeline executions. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListPipelinesInput {
     /**
      * An identifier that was returned from the previous list pipelines call, which can be used to return the next set of pipelines in the list.
@@ -932,6 +1012,7 @@ declare namespace CodePipeline {
     nextToken?: NextToken;
   }
   export type MaxBatchSize = number;
+  export type MaxResults = number;
   export type MaximumArtifactCount = number;
   export type Message = string;
   export type MinimumArtifactCount = number;
@@ -954,6 +1035,9 @@ declare namespace CodePipeline {
      * The stage of the pipeline.
      */
     stage?: StageContext;
+    /**
+     * 
+     */
     action?: ActionContext;
   }
   export interface PipelineDeclaration {
@@ -965,6 +1049,9 @@ declare namespace CodePipeline {
      * The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn.
      */
     roleArn: RoleArn;
+    /**
+     * Represents the context of an action within the stage of a pipeline to a job worker. 
+     */
     artifactStore: ArtifactStore;
     /**
      * The stage in which to perform the action.
@@ -989,7 +1076,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
     /**
-     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Succeeded: The pipeline execution completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead.    Failed: The pipeline did not complete successfully.  
+     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Succeeded: The pipeline execution completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead.    Failed: The pipeline execution did not complete successfully.  
      */
     status?: PipelineExecutionStatus;
     /**
@@ -999,6 +1086,25 @@ declare namespace CodePipeline {
   }
   export type PipelineExecutionId = string;
   export type PipelineExecutionStatus = "InProgress"|"Succeeded"|"Superseded"|"Failed"|string;
+  export interface PipelineExecutionSummary {
+    /**
+     * The ID of the pipeline execution.
+     */
+    pipelineExecutionId?: PipelineExecutionId;
+    /**
+     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Succeeded: The pipeline execution completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead.    Failed: The pipeline execution did not complete successfully.  
+     */
+    status?: PipelineExecutionStatus;
+    /**
+     * The date and time when the pipeline execution began, in timestamp format.
+     */
+    startTime?: Timestamp;
+    /**
+     * The date and time of the last change to the pipeline execution, in timestamp format.
+     */
+    lastUpdateTime?: Timestamp;
+  }
+  export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
   export type PipelineList = PipelineSummary[];
   export type PipelineName = string;
   export type PipelineStageDeclarationList = StageDeclaration[];
@@ -1022,6 +1128,9 @@ declare namespace CodePipeline {
   }
   export type PipelineVersion = number;
   export interface PollForJobsInput {
+    /**
+     * Represents information about an action type.
+     */
     actionTypeId: ActionTypeId;
     /**
      * The maximum number of jobs to return in a poll for jobs call.
@@ -1039,6 +1148,9 @@ declare namespace CodePipeline {
     jobs?: JobList;
   }
   export interface PollForThirdPartyJobsInput {
+    /**
+     * Represents information about an action type.
+     */
     actionTypeId: ActionTypeId;
     /**
      * The maximum number of jobs to return in a poll for jobs call.
@@ -1064,6 +1176,9 @@ declare namespace CodePipeline {
      * The name of the action that will process the revision.
      */
     actionName: ActionName;
+    /**
+     * Represents information about the version (or revision) of an action.
+     */
     actionRevision: ActionRevision;
   }
   export interface PutActionRevisionOutput {
@@ -1141,6 +1256,9 @@ declare namespace CodePipeline {
      * The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
      */
     clientToken: ClientToken;
+    /**
+     * Represents information about failure details.
+     */
     failureDetails: FailureDetails;
   }
   export interface PutThirdPartyJobSuccessResultInput {
@@ -1152,11 +1270,17 @@ declare namespace CodePipeline {
      * The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
      */
     clientToken: ClientToken;
+    /**
+     * Represents information about a current revision.
+     */
     currentRevision?: CurrentRevision;
     /**
      * A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the partner action. When the action is complete, no continuation token should be supplied.
      */
     continuationToken?: ContinuationToken;
+    /**
+     * The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline. 
+     */
     executionDetails?: ExecutionDetails;
   }
   export type QueryParamMap = {[key: string]: ActionConfigurationQueryableValue};
@@ -1280,8 +1404,17 @@ declare namespace CodePipeline {
     jobId?: JobId;
   }
   export interface ThirdPartyJobData {
+    /**
+     * Represents information about an action type.
+     */
     actionTypeId?: ActionTypeId;
+    /**
+     * Represents information about an action configuration.
+     */
     actionConfiguration?: ActionConfiguration;
+    /**
+     * Represents information about a pipeline to a job worker.
+     */
     pipelineContext?: PipelineContext;
     /**
      * The name of the artifact that will be worked upon by the action, if any. This name might be system-generated, such as "MyApp", or might be defined by the user when the action is created. The input artifact name must match the name of an output artifact generated by an action in an earlier action or stage of the pipeline.
@@ -1291,6 +1424,9 @@ declare namespace CodePipeline {
      * The name of the artifact that will be the result of the action, if any. This name might be system-generated, such as "MyBuiltApp", or might be defined by the user when the action is created.
      */
     outputArtifacts?: ArtifactList;
+    /**
+     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline. 
+     */
     artifactCredentials?: AWSSessionCredentials;
     /**
      * A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.
