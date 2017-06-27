@@ -36,6 +36,14 @@ declare class ServiceCatalog extends Service {
    */
   associateProductWithPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateProductWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociateProductWithPortfolioOutput, AWSError>;
   /**
+   * Associate a TagOption identifier with a resource identifier.
+   */
+  associateTagOptionWithResource(params: ServiceCatalog.Types.AssociateTagOptionWithResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateTagOptionWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateTagOptionWithResourceOutput, AWSError>;
+  /**
+   * Associate a TagOption identifier with a resource identifier.
+   */
+  associateTagOptionWithResource(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateTagOptionWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateTagOptionWithResourceOutput, AWSError>;
+  /**
    * Creates a new constraint. For more information, see Using Constraints.
    */
   createConstraint(params: ServiceCatalog.Types.CreateConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateConstraintOutput) => void): Request<ServiceCatalog.Types.CreateConstraintOutput, AWSError>;
@@ -75,6 +83,14 @@ declare class ServiceCatalog extends Service {
    * Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you. See the bottom of this topic for an example JSON request.
    */
   createProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
+  /**
+   * Create a new TagOption.
+   */
+  createTagOption(params: ServiceCatalog.Types.CreateTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateTagOptionOutput) => void): Request<ServiceCatalog.Types.CreateTagOptionOutput, AWSError>;
+  /**
+   * Create a new TagOption.
+   */
+  createTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateTagOptionOutput) => void): Request<ServiceCatalog.Types.CreateTagOptionOutput, AWSError>;
   /**
    * Deletes the specified constraint.
    */
@@ -172,11 +188,11 @@ declare class ServiceCatalog extends Service {
    */
   describeProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningArtifactOutput, AWSError>;
   /**
-   * Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of ProvisioningArtifactParameters parameters available to call the ProvisionProduct operation for the specified product.
+   * Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of ProvisioningArtifactParameters parameters available to call the ProvisionProduct operation for the specified product. If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to the ProvisionProduct operation, do not include conflicted TagOption keys as tags. Calls to ProvisionProduct with empty TagOption values cause the error "Parameter validation failed: Missing required parameter in Tags[N]:Value ". Calls to ProvisionProduct with conflicted TagOption keys automatically tag the provisioned product with the conflicted keys with the value "sc-tagoption-conflict-portfolioId-productId".
    */
   describeProvisioningParameters(params: ServiceCatalog.Types.DescribeProvisioningParametersInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningParametersOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningParametersOutput, AWSError>;
   /**
-   * Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of ProvisioningArtifactParameters parameters available to call the ProvisionProduct operation for the specified product.
+   * Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of ProvisioningArtifactParameters parameters available to call the ProvisionProduct operation for the specified product. If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to the ProvisionProduct operation, do not include conflicted TagOption keys as tags. Calls to ProvisionProduct with empty TagOption values cause the error "Parameter validation failed: Missing required parameter in Tags[N]:Value ". Calls to ProvisionProduct with conflicted TagOption keys automatically tag the provisioned product with the conflicted keys with the value "sc-tagoption-conflict-portfolioId-productId".
    */
   describeProvisioningParameters(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningParametersOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningParametersOutput, AWSError>;
   /**
@@ -187,6 +203,14 @@ declare class ServiceCatalog extends Service {
    * Retrieves a paginated list of the full details of a specific request. Use this operation after calling a request operation (ProvisionProduct, TerminateProvisionedProduct, or UpdateProvisionedProduct). 
    */
   describeRecord(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeRecordOutput) => void): Request<ServiceCatalog.Types.DescribeRecordOutput, AWSError>;
+  /**
+   * Describes a TagOption.
+   */
+  describeTagOption(params: ServiceCatalog.Types.DescribeTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeTagOptionOutput) => void): Request<ServiceCatalog.Types.DescribeTagOptionOutput, AWSError>;
+  /**
+   * Describes a TagOption.
+   */
+  describeTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeTagOptionOutput) => void): Request<ServiceCatalog.Types.DescribeTagOptionOutput, AWSError>;
   /**
    * Disassociates a previously associated principal ARN from a specified portfolio.
    */
@@ -203,6 +227,14 @@ declare class ServiceCatalog extends Service {
    * Disassociates the specified product from the specified portfolio. 
    */
   disassociateProductFromPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateProductFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociateProductFromPortfolioOutput, AWSError>;
+  /**
+   * Disassociates a TagOption from a resource.
+   */
+  disassociateTagOptionFromResource(params: ServiceCatalog.Types.DisassociateTagOptionFromResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
+  /**
+   * Disassociates a TagOption from a resource.
+   */
+  disassociateTagOptionFromResource(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
   /**
    * Lists details of all portfolios for which sharing was accepted by this account.
    */
@@ -276,11 +308,27 @@ declare class ServiceCatalog extends Service {
    */
   listRecordHistory(callback?: (err: AWSError, data: ServiceCatalog.Types.ListRecordHistoryOutput) => void): Request<ServiceCatalog.Types.ListRecordHistoryOutput, AWSError>;
   /**
-   * Requests a provision of a specified product. A provisioned product is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it.  You can check the status of this request using the DescribeRecord operation.
+   * Lists resources associated with a TagOption.
+   */
+  listResourcesForTagOption(params: ServiceCatalog.Types.ListResourcesForTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListResourcesForTagOptionOutput) => void): Request<ServiceCatalog.Types.ListResourcesForTagOptionOutput, AWSError>;
+  /**
+   * Lists resources associated with a TagOption.
+   */
+  listResourcesForTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.ListResourcesForTagOptionOutput) => void): Request<ServiceCatalog.Types.ListResourcesForTagOptionOutput, AWSError>;
+  /**
+   * Lists detailed TagOptions information.
+   */
+  listTagOptions(params: ServiceCatalog.Types.ListTagOptionsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListTagOptionsOutput) => void): Request<ServiceCatalog.Types.ListTagOptionsOutput, AWSError>;
+  /**
+   * Lists detailed TagOptions information.
+   */
+  listTagOptions(callback?: (err: AWSError, data: ServiceCatalog.Types.ListTagOptionsOutput) => void): Request<ServiceCatalog.Types.ListTagOptionsOutput, AWSError>;
+  /**
+   * Requests a provision of a specified product. A provisioned product is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it.  You can check the status of this request using the DescribeRecord operation. The error "Parameter validation failed: Missing required parameter in Tags[N]:Value" indicates that your request contains a tag which has a tag key but no corresponding tag value (value is empty or null). Your call may have included values returned from a DescribeProvisioningParameters call that resulted in a TagOption key with an empty list. This happens when TagOption keys are in conflict. For more information, see DescribeProvisioningParameters.
    */
   provisionProduct(params: ServiceCatalog.Types.ProvisionProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
   /**
-   * Requests a provision of a specified product. A provisioned product is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it.  You can check the status of this request using the DescribeRecord operation.
+   * Requests a provision of a specified product. A provisioned product is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it.  You can check the status of this request using the DescribeRecord operation. The error "Parameter validation failed: Missing required parameter in Tags[N]:Value" indicates that your request contains a tag which has a tag key but no corresponding tag value (value is empty or null). Your call may have included values returned from a DescribeProvisioningParameters call that resulted in a TagOption key with an empty list. This happens when TagOption keys are in conflict. For more information, see DescribeProvisioningParameters.
    */
   provisionProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
   /**
@@ -363,6 +411,14 @@ declare class ServiceCatalog extends Service {
    * Updates an existing provisioning artifact's information. This operation does not work on a provisioning artifact associated with a product that has been shared with you.
    */
   updateProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
+  /**
+   * Updates an existing TagOption.
+   */
+  updateTagOption(params: ServiceCatalog.Types.UpdateTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateTagOptionOutput) => void): Request<ServiceCatalog.Types.UpdateTagOptionOutput, AWSError>;
+  /**
+   * Updates an existing TagOption.
+   */
+  updateTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateTagOptionOutput) => void): Request<ServiceCatalog.Types.UpdateTagOptionOutput, AWSError>;
 }
 declare namespace ServiceCatalog {
   export type AcceptLanguage = string;
@@ -435,6 +491,18 @@ declare namespace ServiceCatalog {
     SourcePortfolioId?: Id;
   }
   export interface AssociateProductWithPortfolioOutput {
+  }
+  export interface AssociateTagOptionWithResourceInput {
+    /**
+     * The resource identifier.
+     */
+    ResourceId: ResourceId;
+    /**
+     * The TagOption identifier.
+     */
+    TagOptionId: TagOptionId;
+  }
+  export interface AssociateTagOptionWithResourceOutput {
   }
   export type AttributeValue = string;
   export type ConstraintDescription = string;
@@ -662,6 +730,22 @@ declare namespace ServiceCatalog {
      */
     Status?: Status;
   }
+  export interface CreateTagOptionInput {
+    /**
+     * The TagOption key.
+     */
+    Key: TagOptionKey;
+    /**
+     * The TagOption value.
+     */
+    Value: TagOptionValue;
+  }
+  export interface CreateTagOptionOutput {
+    /**
+     * The resulting detailed TagOption information.
+     */
+    TagOptionDetail?: TagOptionDetail;
+  }
   export type CreatedTime = Date;
   export type CreationTime = Date;
   export type DefaultValue = string;
@@ -776,6 +860,10 @@ declare namespace ServiceCatalog {
      * Tags associated with the portfolio.
      */
     Tags?: Tags;
+    /**
+     * TagOptions associated with the portfolio.
+     */
+    TagOptions?: TagOptionDetails;
   }
   export interface DescribeProductAsAdminInput {
     /**
@@ -800,6 +888,10 @@ declare namespace ServiceCatalog {
      * Tags associated with the product.
      */
     Tags?: Tags;
+    /**
+     * List of TagOptions associated with the product.
+     */
+    TagOptions?: TagOptionDetails;
   }
   export interface DescribeProductInput {
     /**
@@ -871,7 +963,7 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * Selects verbose results. If set to true, the CloudFormation template is returned.
+     * Enable a verbose level of details for the provisioning artifact.
      */
     Verbose?: Verbose;
   }
@@ -920,6 +1012,10 @@ declare namespace ServiceCatalog {
      * Any additional metadata specifically related to the provisioning of the product. For example, see the Version field of the CloudFormation template.
      */
     UsageInstructions?: UsageInstructions;
+    /**
+     * List of TagOptions associated with the provisioned provisioning parameters.
+     */
+    TagOptions?: TagOptionSummaries;
   }
   export interface DescribeRecordInput {
     /**
@@ -953,6 +1049,18 @@ declare namespace ServiceCatalog {
      */
     NextPageToken?: PageToken;
   }
+  export interface DescribeTagOptionInput {
+    /**
+     * The identifier of the TagOption.
+     */
+    Id: TagOptionId;
+  }
+  export interface DescribeTagOptionOutput {
+    /**
+     * The resulting detailed TagOption information.
+     */
+    TagOptionDetail?: TagOptionDetail;
+  }
   export type Description = string;
   export interface DisassociatePrincipalFromPortfolioInput {
     /**
@@ -985,6 +1093,18 @@ declare namespace ServiceCatalog {
     PortfolioId: Id;
   }
   export interface DisassociateProductFromPortfolioOutput {
+  }
+  export interface DisassociateTagOptionFromResourceInput {
+    /**
+     * Identifier of the resource from which to disassociate the TagOption.
+     */
+    ResourceId: ResourceId;
+    /**
+     * Identifier of the TagOption to disassociate from the resource.
+     */
+    TagOptionId: TagOptionId;
+  }
+  export interface DisassociateTagOptionFromResourceOutput {
   }
   export type ErrorCode = string;
   export type ErrorDescription = string;
@@ -1076,7 +1196,7 @@ declare namespace ServiceCatalog {
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The product identifier.. Identifies the product for which to retrieve LaunchPathSummaries information.
+     * The product identifier. Identifies the product for which to retrieve LaunchPathSummaries information.
      */
     ProductId: Id;
     /**
@@ -1259,6 +1379,72 @@ declare namespace ServiceCatalog {
      * The filter value for Key.
      */
     Value?: SearchFilterValue;
+  }
+  export interface ListResourcesForTagOptionInput {
+    /**
+     * Identifier of the TagOption.
+     */
+    TagOptionId: TagOptionId;
+    /**
+     * Resource type.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * The maximum number of items to return in the results. If more results exist than fit in the specified PageSize, the value of NextPageToken in the response is non-null.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
+  }
+  export interface ListResourcesForTagOptionOutput {
+    /**
+     * The resulting detailed resource information.
+     */
+    ResourceDetails?: ResourceDetails;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
+  }
+  export interface ListTagOptionsFilters {
+    /**
+     * The ListTagOptionsFilters key.
+     */
+    Key?: TagOptionKey;
+    /**
+     * The ListTagOptionsFilters value.
+     */
+    Value?: TagOptionValue;
+    /**
+     * The ListTagOptionsFilters active state.
+     */
+    Active?: TagOptionActive;
+  }
+  export interface ListTagOptionsInput {
+    /**
+     * The list of filters with which to limit search results. If no search filters are specified, the output is all TagOptions. 
+     */
+    Filters?: ListTagOptionsFilters;
+    /**
+     * The maximum number of items to return in the results. If more results exist than fit in the specified PageSize, the value of NextPageToken in the response is non-null.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
+  }
+  export interface ListTagOptionsOutput {
+    /**
+     * The resulting detailed TagOption information.
+     */
+    TagOptionDetails?: TagOptionDetails;
+    /**
+     * The page token of the first page retrieved. If null, this retrieves the first page of size PageSize.
+     */
+    PageToken?: PageToken;
   }
   export type NoEcho = boolean;
   export type NotificationArn = string;
@@ -1594,15 +1780,15 @@ declare namespace ServiceCatalog {
   export type ProvisioningArtifactSummaries = ProvisioningArtifactSummary[];
   export interface ProvisioningArtifactSummary {
     /**
-     * The provisioning artifact identifier.
+     * The identifier of the provisioning artifact.
      */
     Id?: Id;
     /**
-     * The provisioning artifact name.
+     * The name of the provisioning artifact.
      */
     Name?: ProvisioningArtifactName;
     /**
-     * The provisioning artifact description.
+     * The description of the provisioning artifact.
      */
     Description?: ProvisioningArtifactDescription;
     /**
@@ -1637,7 +1823,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductName?: ProvisionedProductName;
     /**
-     * The status of the ProvisionedProduct object.  CREATED - Request created but the operation has not yet started.  IN_PROGRESS - The requested operation is in-progress.  IN_PROGRESS_IN_ERROR - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a roll-back.  SUCCEEDED - The requested operation has successfully completed.  FAILED - The requested operation has completed but has failed. Investigate using the error messages returned.
+     * The status of the ProvisionedProduct object.  CREATED - Request created but the operation has not yet started.  IN_PROGRESS - The requested operation is in-progress.  IN_PROGRESS_IN_ERROR - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.  SUCCEEDED - The requested operation has successfully completed.  FAILED - The requested operation has completed but has failed. Investigate using the error messages returned.
      */
     Status?: RecordStatus;
     /**
@@ -1736,6 +1922,36 @@ declare namespace ServiceCatalog {
   export interface RejectPortfolioShareOutput {
   }
   export type ResourceARN = string;
+  export interface ResourceDetail {
+    /**
+     * Identifier of the resource.
+     */
+    Id?: ResourceDetailId;
+    /**
+     * ARN of the resource.
+     */
+    ARN?: ResourceDetailARN;
+    /**
+     * Name of the resource.
+     */
+    Name?: ResourceDetailName;
+    /**
+     * Description of the resource.
+     */
+    Description?: ResourceDetailDescription;
+    /**
+     * Creation time of the resource.
+     */
+    CreatedTime?: ResourceDetailCreatedTime;
+  }
+  export type ResourceDetailARN = string;
+  export type ResourceDetailCreatedTime = Date;
+  export type ResourceDetailDescription = string;
+  export type ResourceDetailId = string;
+  export type ResourceDetailName = string;
+  export type ResourceDetails = ResourceDetail[];
+  export type ResourceId = string;
+  export type ResourceType = string;
   export interface ScanProvisionedProductsInput {
     /**
      * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
@@ -1867,6 +2083,41 @@ declare namespace ServiceCatalog {
   }
   export type TagKey = string;
   export type TagKeys = TagKey[];
+  export type TagOptionActive = boolean;
+  export interface TagOptionDetail {
+    /**
+     * The TagOptionDetail key.
+     */
+    Key?: TagOptionKey;
+    /**
+     * The TagOptionDetail value.
+     */
+    Value?: TagOptionValue;
+    /**
+     * The TagOptionDetail active state.
+     */
+    Active?: TagOptionActive;
+    /**
+     * The TagOptionDetail identifier.
+     */
+    Id?: TagOptionId;
+  }
+  export type TagOptionDetails = TagOptionDetail[];
+  export type TagOptionId = string;
+  export type TagOptionKey = string;
+  export type TagOptionSummaries = TagOptionSummary[];
+  export interface TagOptionSummary {
+    /**
+     * The TagOptionSummary key.
+     */
+    Key?: TagOptionKey;
+    /**
+     * The TagOptionSummary value.
+     */
+    Values?: TagOptionValues;
+  }
+  export type TagOptionValue = string;
+  export type TagOptionValues = TagOptionValue[];
   export type TagValue = string;
   export type Tags = Tag[];
   export interface TerminateProvisionedProductInput {
@@ -2112,6 +2363,26 @@ declare namespace ServiceCatalog {
     UsePreviousValue?: UsePreviousValue;
   }
   export type UpdateProvisioningParameters = UpdateProvisioningParameter[];
+  export interface UpdateTagOptionInput {
+    /**
+     * The identifier of the constraint to update.
+     */
+    Id: TagOptionId;
+    /**
+     * The updated value.
+     */
+    Value?: TagOptionValue;
+    /**
+     * The updated active state.
+     */
+    Active?: TagOptionActive;
+  }
+  export interface UpdateTagOptionOutput {
+    /**
+     * The resulting detailed TagOption information.
+     */
+    TagOptionDetail?: TagOptionDetail;
+  }
   export type UpdatedTime = Date;
   export interface UsageInstruction {
     /**

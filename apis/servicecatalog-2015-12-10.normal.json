@@ -56,6 +56,24 @@
       ],
       "documentation":"<p>Associates a product with a portfolio.</p>"
     },
+    "AssociateTagOptionWithResource":{
+      "name":"AssociateTagOptionWithResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateTagOptionWithResourceInput"},
+      "output":{"shape":"AssociateTagOptionWithResourceOutput"},
+      "errors":[
+        {"shape":"TagOptionNotMigratedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"InvalidStateException"}
+      ],
+      "documentation":"<p>Associate a TagOption identifier with a resource identifier.</p>"
+    },
     "CreateConstraint":{
       "name":"CreateConstraint",
       "http":{
@@ -82,7 +100,8 @@
       "output":{"shape":"CreatePortfolioOutput"},
       "errors":[
         {"shape":"InvalidParametersException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"TagOptionNotMigratedException"}
       ],
       "documentation":"<p>Creates a new portfolio.</p>"
     },
@@ -111,7 +130,8 @@
       "output":{"shape":"CreateProductOutput"},
       "errors":[
         {"shape":"InvalidParametersException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"TagOptionNotMigratedException"}
       ],
       "documentation":"<p>Creates a new product.</p>"
     },
@@ -129,6 +149,21 @@
         {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.</p> <p>See the bottom of this topic for an example JSON request.</p>"
+    },
+    "CreateTagOption":{
+      "name":"CreateTagOption",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTagOptionInput"},
+      "output":{"shape":"CreateTagOptionOutput"},
+      "errors":[
+        {"shape":"TagOptionNotMigratedException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Create a new TagOption.</p>"
     },
     "DeleteConstraint":{
       "name":"DeleteConstraint",
@@ -155,7 +190,8 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"},
-        {"shape":"ResourceInUseException"}
+        {"shape":"ResourceInUseException"},
+        {"shape":"TagOptionNotMigratedException"}
       ],
       "documentation":"<p>Deletes the specified portfolio. This operation does not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.</p>"
     },
@@ -183,7 +219,8 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceInUseException"},
-        {"shape":"InvalidParametersException"}
+        {"shape":"InvalidParametersException"},
+        {"shape":"TagOptionNotMigratedException"}
       ],
       "documentation":"<p>Deletes the specified product. This operation does not work with a product that has been shared with you or is associated with a portfolio. </p>"
     },
@@ -307,7 +344,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of <code>ProvisioningArtifactParameters</code> parameters available to call the <a>ProvisionProduct</a> operation for the specified product.</p>"
+      "documentation":"<p>Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of <code>ProvisioningArtifactParameters</code> parameters available to call the <a>ProvisionProduct</a> operation for the specified product.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to the <code>ProvisionProduct</code> operation, do not include conflicted TagOption keys as tags. Calls to <code>ProvisionProduct</code> with empty TagOption values cause the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i> \". Calls to <code>ProvisionProduct</code> with conflicted TagOption keys automatically tag the provisioned product with the conflicted keys with the value \"<code>sc-tagoption-conflict-portfolioId-productId</code>\".</p>"
     },
     "DescribeRecord":{
       "name":"DescribeRecord",
@@ -321,6 +358,20 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Retrieves a paginated list of the full details of a specific request. Use this operation after calling a request operation (<a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p>"
+    },
+    "DescribeTagOption":{
+      "name":"DescribeTagOption",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTagOptionInput"},
+      "output":{"shape":"DescribeTagOptionOutput"},
+      "errors":[
+        {"shape":"TagOptionNotMigratedException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Describes a TagOption.</p>"
     },
     "DisassociatePrincipalFromPortfolio":{
       "name":"DisassociatePrincipalFromPortfolio",
@@ -346,9 +397,24 @@
       "output":{"shape":"DisassociateProductFromPortfolioOutput"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
         {"shape":"InvalidParametersException"}
       ],
       "documentation":"<p>Disassociates the specified product from the specified portfolio. </p>"
+    },
+    "DisassociateTagOptionFromResource":{
+      "name":"DisassociateTagOptionFromResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateTagOptionFromResourceInput"},
+      "output":{"shape":"DisassociateTagOptionFromResourceOutput"},
+      "errors":[
+        {"shape":"TagOptionNotMigratedException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Disassociates a TagOption from a resource.</p>"
     },
     "ListAcceptedPortfolioShares":{
       "name":"ListAcceptedPortfolioShares",
@@ -472,6 +538,35 @@
       ],
       "documentation":"<p>Returns a paginated list of all performed requests, in the form of RecordDetails objects that are filtered as specified.</p>"
     },
+    "ListResourcesForTagOption":{
+      "name":"ListResourcesForTagOption",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListResourcesForTagOptionInput"},
+      "output":{"shape":"ListResourcesForTagOptionOutput"},
+      "errors":[
+        {"shape":"TagOptionNotMigratedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Lists resources associated with a TagOption.</p>"
+    },
+    "ListTagOptions":{
+      "name":"ListTagOptions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagOptionsInput"},
+      "output":{"shape":"ListTagOptionsOutput"},
+      "errors":[
+        {"shape":"TagOptionNotMigratedException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Lists detailed TagOptions information.</p>"
+    },
     "ProvisionProduct":{
       "name":"ProvisionProduct",
       "http":{
@@ -485,7 +580,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"DuplicateResourceException"}
       ],
-      "documentation":"<p>Requests a <i>provision</i> of a specified product. A <i>provisioned product</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
+      "documentation":"<p>Requests a <i>provision</i> of a specified product. A <i>provisioned product</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation. The error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\" indicates that your request contains a tag which has a tag key but no corresponding tag value (value is empty or null). Your call may have included values returned from a <code>DescribeProvisioningParameters</code> call that resulted in a TagOption key with an empty list. This happens when TagOption keys are in conflict. For more information, see <a>DescribeProvisioningParameters</a>.</p>"
     },
     "RejectPortfolioShare":{
       "name":"RejectPortfolioShare",
@@ -578,7 +673,8 @@
       "errors":[
         {"shape":"InvalidParametersException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"TagOptionNotMigratedException"}
       ],
       "documentation":"<p>Updates the specified portfolio's details. This operation does not work with a product that has been shared with you.</p>"
     },
@@ -592,7 +688,8 @@
       "output":{"shape":"UpdateProductOutput"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"InvalidParametersException"}
+        {"shape":"InvalidParametersException"},
+        {"shape":"TagOptionNotMigratedException"}
       ],
       "documentation":"<p>Updates an existing product.</p>"
     },
@@ -623,6 +720,22 @@
         {"shape":"InvalidParametersException"}
       ],
       "documentation":"<p>Updates an existing provisioning artifact's information. This operation does not work on a provisioning artifact associated with a product that has been shared with you.</p>"
+    },
+    "UpdateTagOption":{
+      "name":"UpdateTagOption",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateTagOptionInput"},
+      "output":{"shape":"UpdateTagOptionOutput"},
+      "errors":[
+        {"shape":"TagOptionNotMigratedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"DuplicateResourceException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Updates an existing TagOption.</p>"
     }
   },
   "shapes":{
@@ -745,6 +858,28 @@
       }
     },
     "AssociateProductWithPortfolioOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "AssociateTagOptionWithResourceInput":{
+      "type":"structure",
+      "required":[
+        "ResourceId",
+        "TagOptionId"
+      ],
+      "members":{
+        "ResourceId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The resource identifier.</p>"
+        },
+        "TagOptionId":{
+          "shape":"TagOptionId",
+          "documentation":"<p>The TagOption identifier.</p>"
+        }
+      }
+    },
+    "AssociateTagOptionWithResourceOutput":{
       "type":"structure",
       "members":{
       }
@@ -1058,6 +1193,32 @@
         }
       }
     },
+    "CreateTagOptionInput":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{
+          "shape":"TagOptionKey",
+          "documentation":"<p>The TagOption key.</p>"
+        },
+        "Value":{
+          "shape":"TagOptionValue",
+          "documentation":"<p>The TagOption value.</p>"
+        }
+      }
+    },
+    "CreateTagOptionOutput":{
+      "type":"structure",
+      "members":{
+        "TagOptionDetail":{
+          "shape":"TagOptionDetail",
+          "documentation":"<p>The resulting detailed TagOption information.</p>"
+        }
+      }
+    },
     "CreatedTime":{"type":"timestamp"},
     "CreationTime":{"type":"timestamp"},
     "DefaultValue":{"type":"string"},
@@ -1225,6 +1386,10 @@
         "Tags":{
           "shape":"Tags",
           "documentation":"<p>Tags associated with the portfolio.</p>"
+        },
+        "TagOptions":{
+          "shape":"TagOptionDetails",
+          "documentation":"<p>TagOptions associated with the portfolio.</p>"
         }
       }
     },
@@ -1256,6 +1421,10 @@
         "Tags":{
           "shape":"Tags",
           "documentation":"<p>Tags associated with the product.</p>"
+        },
+        "TagOptions":{
+          "shape":"TagOptionDetails",
+          "documentation":"<p>List of TagOptions associated with the product.</p>"
         }
       }
     },
@@ -1357,7 +1526,7 @@
         },
         "Verbose":{
           "shape":"Verbose",
-          "documentation":"<p>Selects verbose results. If set to true, the CloudFormation template is returned.</p>"
+          "documentation":"<p>Enable a verbose level of details for the provisioning artifact.</p>"
         }
       }
     },
@@ -1417,6 +1586,10 @@
         "UsageInstructions":{
           "shape":"UsageInstructions",
           "documentation":"<p>Any additional metadata specifically related to the provisioning of the product. For example, see the <code>Version</code> field of the CloudFormation template.</p>"
+        },
+        "TagOptions":{
+          "shape":"TagOptionSummaries",
+          "documentation":"<p>List of TagOptions associated with the provisioned provisioning parameters.</p>"
         }
       }
     },
@@ -1456,6 +1629,25 @@
         "NextPageToken":{
           "shape":"PageToken",
           "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "DescribeTagOptionInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "Id":{
+          "shape":"TagOptionId",
+          "documentation":"<p>The identifier of the TagOption.</p>"
+        }
+      }
+    },
+    "DescribeTagOptionOutput":{
+      "type":"structure",
+      "members":{
+        "TagOptionDetail":{
+          "shape":"TagOptionDetail",
+          "documentation":"<p>The resulting detailed TagOption information.</p>"
         }
       }
     },
@@ -1512,6 +1704,28 @@
       "members":{
       }
     },
+    "DisassociateTagOptionFromResourceInput":{
+      "type":"structure",
+      "required":[
+        "ResourceId",
+        "TagOptionId"
+      ],
+      "members":{
+        "ResourceId":{
+          "shape":"ResourceId",
+          "documentation":"<p>Identifier of the resource from which to disassociate the TagOption.</p>"
+        },
+        "TagOptionId":{
+          "shape":"TagOptionId",
+          "documentation":"<p>Identifier of the TagOption to disassociate from the resource.</p>"
+        }
+      }
+    },
+    "DisassociateTagOptionFromResourceOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DuplicateResourceException":{
       "type":"structure",
       "members":{
@@ -1541,6 +1755,13 @@
       "members":{
       },
       "documentation":"<p>One or more parameters provided to the operation are invalid.</p>",
+      "exception":true
+    },
+    "InvalidStateException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An attempt was made to modify a resource that is in an invalid state. Inspect the resource you are using for this operation to ensure that all resource states are valid before retrying the operation.</p>",
       "exception":true
     },
     "LastRequestId":{"type":"string"},
@@ -1656,7 +1877,7 @@
         },
         "ProductId":{
           "shape":"Id",
-          "documentation":"<p>The product identifier.. Identifies the product for which to retrieve <code>LaunchPathSummaries</code> information.</p>"
+          "documentation":"<p>The product identifier. Identifies the product for which to retrieve <code>LaunchPathSummaries</code> information.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
@@ -1886,6 +2107,89 @@
         }
       },
       "documentation":"<p>The search filter to limit results when listing request history records.</p>"
+    },
+    "ListResourcesForTagOptionInput":{
+      "type":"structure",
+      "required":["TagOptionId"],
+      "members":{
+        "TagOptionId":{
+          "shape":"TagOptionId",
+          "documentation":"<p>Identifier of the TagOption.</p>"
+        },
+        "ResourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>Resource type.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
+    },
+    "ListResourcesForTagOptionOutput":{
+      "type":"structure",
+      "members":{
+        "ResourceDetails":{
+          "shape":"ResourceDetails",
+          "documentation":"<p>The resulting detailed resource information.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
+    },
+    "ListTagOptionsFilters":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"TagOptionKey",
+          "documentation":"<p>The ListTagOptionsFilters key.</p>"
+        },
+        "Value":{
+          "shape":"TagOptionValue",
+          "documentation":"<p>The ListTagOptionsFilters value.</p>"
+        },
+        "Active":{
+          "shape":"TagOptionActive",
+          "documentation":"<p>The ListTagOptionsFilters active state.</p>"
+        }
+      },
+      "documentation":"<p>The ListTagOptions filters.</p>"
+    },
+    "ListTagOptionsInput":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"ListTagOptionsFilters",
+          "documentation":"<p>The list of filters with which to limit search results. If no search filters are specified, the output is all TagOptions. </p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
+    },
+    "ListTagOptionsOutput":{
+      "type":"structure",
+      "members":{
+        "TagOptionDetails":{
+          "shape":"TagOptionDetails",
+          "documentation":"<p>The resulting detailed TagOption information.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+        }
+      }
     },
     "NoEcho":{"type":"boolean"},
     "NotificationArn":{
@@ -2409,15 +2713,15 @@
       "members":{
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The provisioning artifact identifier.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         },
         "Name":{
           "shape":"ProvisioningArtifactName",
-          "documentation":"<p>The provisioning artifact name.</p>"
+          "documentation":"<p>The name of the provisioning artifact.</p>"
         },
         "Description":{
           "shape":"ProvisioningArtifactDescription",
-          "documentation":"<p>The provisioning artifact description.</p>"
+          "documentation":"<p>The description of the provisioning artifact.</p>"
         },
         "CreatedTime":{
           "shape":"ProvisioningArtifactCreatedTime",
@@ -2428,7 +2732,7 @@
           "documentation":"<p>The provisioning artifact metadata. This data is used with products created by AWS Marketplace.</p>"
         }
       },
-      "documentation":"<p>Summary information about a provisioning artifact.</p>"
+      "documentation":"<p>Stores summary information about a provisioning artifact.</p>"
     },
     "ProvisioningArtifactType":{
       "type":"string",
@@ -2473,7 +2777,7 @@
         },
         "Status":{
           "shape":"RecordStatus",
-          "documentation":"<p>The status of the ProvisionedProduct object.</p> <p> <code>CREATED</code> - Request created but the operation has not yet started.</p> <p> <code>IN_PROGRESS</code> - The requested operation is in-progress.</p> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a roll-back.</p> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> <p> <code>FAILED</code> - The requested operation has completed but has failed. Investigate using the error messages returned.</p>"
+          "documentation":"<p>The status of the ProvisionedProduct object.</p> <p> <code>CREATED</code> - Request created but the operation has not yet started.</p> <p> <code>IN_PROGRESS</code> - The requested operation is in-progress.</p> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> <p> <code>FAILED</code> - The requested operation has completed but has failed. Investigate using the error messages returned.</p>"
         },
         "CreatedTime":{
           "shape":"CreatedTime",
@@ -2628,6 +2932,42 @@
       "max":150,
       "min":1
     },
+    "ResourceDetail":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"ResourceDetailId",
+          "documentation":"<p>Identifier of the resource.</p>"
+        },
+        "ARN":{
+          "shape":"ResourceDetailARN",
+          "documentation":"<p>ARN of the resource.</p>"
+        },
+        "Name":{
+          "shape":"ResourceDetailName",
+          "documentation":"<p>Name of the resource.</p>"
+        },
+        "Description":{
+          "shape":"ResourceDetailDescription",
+          "documentation":"<p>Description of the resource.</p>"
+        },
+        "CreatedTime":{
+          "shape":"ResourceDetailCreatedTime",
+          "documentation":"<p>Creation time of the resource.</p>"
+        }
+      },
+      "documentation":"<p>Detailed resource information.</p>"
+    },
+    "ResourceDetailARN":{"type":"string"},
+    "ResourceDetailCreatedTime":{"type":"timestamp"},
+    "ResourceDetailDescription":{"type":"string"},
+    "ResourceDetailId":{"type":"string"},
+    "ResourceDetailName":{"type":"string"},
+    "ResourceDetails":{
+      "type":"list",
+      "member":{"shape":"ResourceDetail"}
+    },
+    "ResourceId":{"type":"string"},
     "ResourceInUseException":{
       "type":"structure",
       "members":{
@@ -2642,6 +2982,7 @@
       "documentation":"<p>The specified resource was not found.</p>",
       "exception":true
     },
+    "ResourceType":{"type":"string"},
     "ScanProvisionedProductsInput":{
       "type":"structure",
       "members":{
@@ -2808,7 +3149,7 @@
           "documentation":"<p>The desired value for this key.</p>"
         }
       },
-      "documentation":"<p>Key/value pairs to associate with this provisioning. These tags are entirely discretionary and are propagated to the resources created in the provisioning.</p>"
+      "documentation":"<p>Key-value pairs to associate with this provisioning. These tags are entirely discretionary and are propagated to the resources created in the provisioning.</p>"
     },
     "TagKey":{
       "type":"string",
@@ -2819,6 +3160,79 @@
     "TagKeys":{
       "type":"list",
       "member":{"shape":"TagKey"}
+    },
+    "TagOptionActive":{"type":"boolean"},
+    "TagOptionDetail":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"TagOptionKey",
+          "documentation":"<p>The TagOptionDetail key.</p>"
+        },
+        "Value":{
+          "shape":"TagOptionValue",
+          "documentation":"<p>The TagOptionDetail value.</p>"
+        },
+        "Active":{
+          "shape":"TagOptionActive",
+          "documentation":"<p>The TagOptionDetail active state.</p>"
+        },
+        "Id":{
+          "shape":"TagOptionId",
+          "documentation":"<p>The TagOptionDetail identifier.</p>"
+        }
+      },
+      "documentation":"<p>The TagOption details.</p>"
+    },
+    "TagOptionDetails":{
+      "type":"list",
+      "member":{"shape":"TagOptionDetail"}
+    },
+    "TagOptionId":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "TagOptionKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TagOptionNotMigratedException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>An operation requiring TagOptions failed because the TagOptions migration process has not been performed for this account. Please use the AWS console to perform the migration process before retrying the operation.</p>",
+      "exception":true
+    },
+    "TagOptionSummaries":{
+      "type":"list",
+      "member":{"shape":"TagOptionSummary"}
+    },
+    "TagOptionSummary":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"TagOptionKey",
+          "documentation":"<p>The TagOptionSummary key.</p>"
+        },
+        "Values":{
+          "shape":"TagOptionValues",
+          "documentation":"<p>The TagOptionSummary value.</p>"
+        }
+      },
+      "documentation":"<p>The TagOption summary key-value pair.</p>"
+    },
+    "TagOptionValue":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TagOptionValues":{
+      "type":"list",
+      "member":{"shape":"TagOptionValue"}
     },
     "TagValue":{
       "type":"string",
@@ -3127,6 +3541,33 @@
     "UpdateProvisioningParameters":{
       "type":"list",
       "member":{"shape":"UpdateProvisioningParameter"}
+    },
+    "UpdateTagOptionInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "Id":{
+          "shape":"TagOptionId",
+          "documentation":"<p>The identifier of the constraint to update.</p>"
+        },
+        "Value":{
+          "shape":"TagOptionValue",
+          "documentation":"<p>The updated value.</p>"
+        },
+        "Active":{
+          "shape":"TagOptionActive",
+          "documentation":"<p>The updated active state.</p>"
+        }
+      }
+    },
+    "UpdateTagOptionOutput":{
+      "type":"structure",
+      "members":{
+        "TagOptionDetail":{
+          "shape":"TagOptionDetail",
+          "documentation":"<p>The resulting detailed TagOption information.</p>"
+        }
+      }
     },
     "UpdatedTime":{"type":"timestamp"},
     "UsageInstruction":{
