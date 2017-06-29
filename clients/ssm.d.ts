@@ -76,6 +76,14 @@ declare class SSM extends Service {
    */
   createPatchBaseline(callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
   /**
+   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync operation. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Creating a Resource Data Sync.
+   */
+  createResourceDataSync(params: SSM.Types.CreateResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
+  /**
+   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync operation. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Creating a Resource Data Sync.
+   */
+  createResourceDataSync(callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
+  /**
    * Deletes an activation. You are not required to delete an activation. If you delete an activation, you can no longer use it to register additional managed instances. Deleting an activation does not de-register managed instances. You must manually de-register managed instances.
    */
   deleteActivation(params: SSM.Types.DeleteActivationRequest, callback?: (err: AWSError, data: SSM.Types.DeleteActivationResult) => void): Request<SSM.Types.DeleteActivationResult, AWSError>;
@@ -131,6 +139,14 @@ declare class SSM extends Service {
    * Deletes a patch baseline.
    */
   deletePatchBaseline(callback?: (err: AWSError, data: SSM.Types.DeletePatchBaselineResult) => void): Request<SSM.Types.DeletePatchBaselineResult, AWSError>;
+  /**
+   * Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to inventory data on managed instances are no longer synced with the target Amazon S3 bucket. Deleting a sync configuration does not delete data in the target Amazon S3 bucket.
+   */
+  deleteResourceDataSync(params: SSM.Types.DeleteResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
+  /**
+   * Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to inventory data on managed instances are no longer synced with the target Amazon S3 bucket. Deleting a sync configuration does not delete data in the target Amazon S3 bucket.
+   */
+  deleteResourceDataSync(callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
   /**
    * Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling the SSM Agent first.
    */
@@ -452,11 +468,11 @@ declare class SSM extends Service {
    */
   getParameters(callback?: (err: AWSError, data: SSM.Types.GetParametersResult) => void): Request<SSM.Types.GetParametersResult, AWSError>;
   /**
-   * Retrieve parameters in a specific hierarchy. For more information, see Using Parameter Hierarchies. 
+   * Retrieve parameters in a specific hierarchy. For more information, see Working with Systems Manager Parameters. 
    */
   getParametersByPath(params: SSM.Types.GetParametersByPathRequest, callback?: (err: AWSError, data: SSM.Types.GetParametersByPathResult) => void): Request<SSM.Types.GetParametersByPathResult, AWSError>;
   /**
-   * Retrieve parameters in a specific hierarchy. For more information, see Using Parameter Hierarchies. 
+   * Retrieve parameters in a specific hierarchy. For more information, see Working with Systems Manager Parameters. 
    */
   getParametersByPath(callback?: (err: AWSError, data: SSM.Types.GetParametersByPathResult) => void): Request<SSM.Types.GetParametersByPathResult, AWSError>;
   /**
@@ -523,6 +539,14 @@ declare class SSM extends Service {
    * A list of inventory items returned by the request.
    */
   listInventoryEntries(callback?: (err: AWSError, data: SSM.Types.ListInventoryEntriesResult) => void): Request<SSM.Types.ListInventoryEntriesResult, AWSError>;
+  /**
+   * Lists your resource data sync configurations. Includes information about the last time a sync attempted to start, the last sync status, and the last time a sync successfully completed. The number of sync configurations might be too large to return using a single call to ListResourceDataSync. You can limit the number of sync configurations returned by using the MaxResults parameter. To determine whether there are more sync configurations to list, check the value of NextToken in the output. If there are more sync configurations to list, you can request them by specifying the NextToken returned in the call to the parameter of a subsequent call. 
+   */
+  listResourceDataSync(params: SSM.Types.ListResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.ListResourceDataSyncResult) => void): Request<SSM.Types.ListResourceDataSyncResult, AWSError>;
+  /**
+   * Lists your resource data sync configurations. Includes information about the last time a sync attempted to start, the last sync status, and the last time a sync successfully completed. The number of sync configurations might be too large to return using a single call to ListResourceDataSync. You can limit the number of sync configurations returned by using the MaxResults parameter. To determine whether there are more sync configurations to list, check the value of NextToken in the output. If there are more sync configurations to list, you can request them by specifying the NextToken returned in the call to the parameter of a subsequent call. 
+   */
+  listResourceDataSync(callback?: (err: AWSError, data: SSM.Types.ListResourceDataSyncResult) => void): Request<SSM.Types.ListResourceDataSyncResult, AWSError>;
   /**
    * Returns a list of the tags assigned to the specified resource.
    */
@@ -1420,6 +1444,18 @@ declare namespace SSM {
      */
     BaselineId?: BaselineId;
   }
+  export interface CreateResourceDataSyncRequest {
+    /**
+     * A name for the configuration.
+     */
+    SyncName: ResourceDataSyncName;
+    /**
+     * Amazon S3 configuration details for the sync.
+     */
+    S3Destination: ResourceDataSyncS3Destination;
+  }
+  export interface CreateResourceDataSyncResult {
+  }
   export type CreatedDate = Date;
   export type DateTime = Date;
   export type DefaultBaseline = boolean;
@@ -1503,6 +1539,14 @@ declare namespace SSM {
      * The ID of the deleted patch baseline.
      */
     BaselineId?: BaselineId;
+  }
+  export interface DeleteResourceDataSyncRequest {
+    /**
+     * The name of the configuration to delete.
+     */
+    SyncName: ResourceDataSyncName;
+  }
+  export interface DeleteResourceDataSyncResult {
   }
   export interface DeregisterManagedInstanceRequest {
     /**
@@ -3262,6 +3306,9 @@ declare namespace SSM {
   export type InventoryResultItemMap = {[key: string]: InventoryResultItem};
   export type InvocationTraceOutput = string;
   export type KeyList = TagKey[];
+  export type LastResourceDataSyncStatus = "Successful"|"Failed"|"InProgress"|string;
+  export type LastResourceDataSyncTime = Date;
+  export type LastSuccessfulResourceDataSyncTime = Date;
   export interface ListAssociationsRequest {
     /**
      * One or more filters. Use a filter to return a more specific list of results.
@@ -3447,6 +3494,26 @@ declare namespace SSM {
     Entries?: InventoryItemEntryList;
     /**
      * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListResourceDataSyncRequest {
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListResourceDataSyncResult {
+    /**
+     * A list of your current Resource Data Sync configurations and their statuses.
+     */
+    ResourceDataSyncItems?: ResourceDataSyncItemList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -4279,6 +4346,57 @@ declare namespace SSM {
   }
   export interface RemoveTagsFromResourceResult {
   }
+  export type ResourceDataSyncCreatedTime = Date;
+  export interface ResourceDataSyncItem {
+    /**
+     * The name of the Resource Data Sync.
+     */
+    SyncName?: ResourceDataSyncName;
+    /**
+     * Configuration information for the target Amazon S3 bucket.
+     */
+    S3Destination?: ResourceDataSyncS3Destination;
+    /**
+     * The last time the configuration attempted to sync (UTC).
+     */
+    LastSyncTime?: LastResourceDataSyncTime;
+    /**
+     * The last time the sync operations returned a status of SUCCESSFUL (UTC).
+     */
+    LastSuccessfulSyncTime?: LastSuccessfulResourceDataSyncTime;
+    /**
+     * The status reported by the last sync.
+     */
+    LastStatus?: LastResourceDataSyncStatus;
+    /**
+     * The date and time the configuration was created (UTC).
+     */
+    SyncCreatedTime?: ResourceDataSyncCreatedTime;
+  }
+  export type ResourceDataSyncItemList = ResourceDataSyncItem[];
+  export type ResourceDataSyncName = string;
+  export type ResourceDataSyncS3BucketName = string;
+  export interface ResourceDataSyncS3Destination {
+    /**
+     * The name of the Amazon S3 bucket where the aggregated data is stored.
+     */
+    BucketName: ResourceDataSyncS3BucketName;
+    /**
+     * An Amazon S3 prefix for the bucket.
+     */
+    Prefix?: ResourceDataSyncS3Prefix;
+    /**
+     * A supported sync format. The following format is currently supported: JsonSerDe
+     */
+    SyncFormat: ResourceDataSyncS3Format;
+    /**
+     * The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.
+     */
+    Region: ResourceDataSyncS3Region;
+  }
+  export type ResourceDataSyncS3Format = "JsonSerDe"|string;
+  export type ResourceDataSyncS3Prefix = string;
+  export type ResourceDataSyncS3Region = string;
   export type ResourceId = string;
   export type ResourceType = "ManagedInstance"|"Document"|"EC2Instance"|string;
   export type ResourceTypeForTagging = "ManagedInstance"|"MaintenanceWindow"|"Parameter"|string;

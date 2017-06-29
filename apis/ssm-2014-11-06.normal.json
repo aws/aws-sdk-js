@@ -151,6 +151,22 @@
       ],
       "documentation":"<p>Creates a patch baseline.</p>"
     },
+    "CreateResourceDataSync":{
+      "name":"CreateResourceDataSync",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateResourceDataSyncRequest"},
+      "output":{"shape":"CreateResourceDataSyncResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceDataSyncCountExceededException"},
+        {"shape":"ResourceDataSyncAlreadyExistsException"},
+        {"shape":"ResourceDataSyncInvalidConfigurationException"}
+      ],
+      "documentation":"<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a href=\"API_ListResourceDataSync.html\">ListResourceDataSync</a> operation.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync-create.html\">Creating a Resource Data Sync</a>.</p>"
+    },
     "DeleteActivation":{
       "name":"DeleteActivation",
       "http":{
@@ -252,6 +268,20 @@
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Deletes a patch baseline.</p>"
+    },
+    "DeleteResourceDataSync":{
+      "name":"DeleteResourceDataSync",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteResourceDataSyncRequest"},
+      "output":{"shape":"DeleteResourceDataSyncResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceDataSyncNotFoundException"}
+      ],
+      "documentation":"<p>Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to inventory data on managed instances are no longer synced with the target Amazon S3 bucket. Deleting a sync configuration does not delete data in the target Amazon S3 bucket.</p>"
     },
     "DeregisterManagedInstance":{
       "name":"DeregisterManagedInstance",
@@ -850,7 +880,7 @@
         {"shape":"InvalidKeyId"},
         {"shape":"InvalidNextToken"}
       ],
-      "documentation":"<p>Retrieve parameters in a specific hierarchy. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html\">Using Parameter Hierarchies</a>. </p>"
+      "documentation":"<p>Retrieve parameters in a specific hierarchy. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html\">Working with Systems Manager Parameters</a>. </p>"
     },
     "GetPatchBaseline":{
       "name":"GetPatchBaseline",
@@ -974,6 +1004,20 @@
         {"shape":"InvalidNextToken"}
       ],
       "documentation":"<p>A list of inventory items returned by the request.</p>"
+    },
+    "ListResourceDataSync":{
+      "name":"ListResourceDataSync",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListResourceDataSyncRequest"},
+      "output":{"shape":"ListResourceDataSyncResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>Lists your resource data sync configurations. Includes information about the last time a sync attempted to start, the last sync status, and the last time a sync successfully completed.</p> <p>The number of sync configurations might be too large to return using a single call to <code>ListResourceDataSync</code>. You can limit the number of sync configurations returned by using the <code>MaxResults</code> parameter. To determine whether there are more sync configurations to list, check the value of <code>NextToken</code> in the output. If there are more sync configurations to list, you can request them by specifying the <code>NextToken</code> returned in the call to the parameter of a subsequent call. </p>"
     },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
@@ -2515,6 +2559,28 @@
         }
       }
     },
+    "CreateResourceDataSyncRequest":{
+      "type":"structure",
+      "required":[
+        "SyncName",
+        "S3Destination"
+      ],
+      "members":{
+        "SyncName":{
+          "shape":"ResourceDataSyncName",
+          "documentation":"<p>A name for the configuration.</p>"
+        },
+        "S3Destination":{
+          "shape":"ResourceDataSyncS3Destination",
+          "documentation":"<p>Amazon S3 configuration details for the sync.</p>"
+        }
+      }
+    },
+    "CreateResourceDataSyncResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "CreatedDate":{"type":"timestamp"},
     "CustomSchemaCountLimitExceededException":{
       "type":"structure",
@@ -2658,6 +2724,21 @@
           "shape":"BaselineId",
           "documentation":"<p>The ID of the deleted patch baseline.</p>"
         }
+      }
+    },
+    "DeleteResourceDataSyncRequest":{
+      "type":"structure",
+      "required":["SyncName"],
+      "members":{
+        "SyncName":{
+          "shape":"ResourceDataSyncName",
+          "documentation":"<p>The name of the configuration to delete.</p>"
+        }
+      }
+    },
+    "DeleteResourceDataSyncResult":{
+      "type":"structure",
+      "members":{
       }
     },
     "DeregisterManagedInstanceRequest":{
@@ -4602,10 +4683,10 @@
       "members":{
         "message":{
           "shape":"String",
-          "documentation":"<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html\">Develop a Parameter Hierarchy</a>. </p>"
+          "documentation":"<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html\">Working with Systems Manager Parameters</a>. </p>"
         }
       },
-      "documentation":"<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html\">Develop a Parameter Hierarchy</a>. </p>",
+      "documentation":"<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html\">Working with Systems Manager Parameters</a>. </p>",
       "exception":true
     },
     "HierarchyTypeMismatchException":{
@@ -5630,6 +5711,16 @@
       "type":"list",
       "member":{"shape":"TagKey"}
     },
+    "LastResourceDataSyncStatus":{
+      "type":"string",
+      "enum":[
+        "Successful",
+        "Failed",
+        "InProgress"
+      ]
+    },
+    "LastResourceDataSyncTime":{"type":"timestamp"},
+    "LastSuccessfulResourceDataSyncTime":{"type":"timestamp"},
     "ListAssociationsRequest":{
       "type":"structure",
       "members":{
@@ -5862,6 +5953,33 @@
         "NextToken":{
           "shape":"NextToken",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
+    "ListResourceDataSyncRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to start the list. Use this token to get the next set of results. </p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        }
+      }
+    },
+    "ListResourceDataSyncResult":{
+      "type":"structure",
+      "members":{
+        "ResourceDataSyncItems":{
+          "shape":"ResourceDataSyncItemList",
+          "documentation":"<p>A list of your current Resource Data Sync configurations and their statuses.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
         }
       }
     },
@@ -7372,6 +7490,124 @@
       "type":"structure",
       "members":{
       }
+    },
+    "ResourceDataSyncAlreadyExistsException":{
+      "type":"structure",
+      "members":{
+        "SyncName":{"shape":"ResourceDataSyncName"}
+      },
+      "documentation":"<p>A sync configuration with the same name already exists.</p>",
+      "exception":true
+    },
+    "ResourceDataSyncCountExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>You have exceeded the allowed maximum sync configurations.</p>",
+      "exception":true
+    },
+    "ResourceDataSyncCreatedTime":{"type":"timestamp"},
+    "ResourceDataSyncInvalidConfigurationException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The specified sync configuration is invalid.</p>",
+      "exception":true
+    },
+    "ResourceDataSyncItem":{
+      "type":"structure",
+      "members":{
+        "SyncName":{
+          "shape":"ResourceDataSyncName",
+          "documentation":"<p>The name of the Resource Data Sync.</p>"
+        },
+        "S3Destination":{
+          "shape":"ResourceDataSyncS3Destination",
+          "documentation":"<p>Configuration information for the target Amazon S3 bucket.</p>"
+        },
+        "LastSyncTime":{
+          "shape":"LastResourceDataSyncTime",
+          "documentation":"<p>The last time the configuration attempted to sync (UTC).</p>"
+        },
+        "LastSuccessfulSyncTime":{
+          "shape":"LastSuccessfulResourceDataSyncTime",
+          "documentation":"<p>The last time the sync operations returned a status of <code>SUCCESSFUL</code> (UTC).</p>"
+        },
+        "LastStatus":{
+          "shape":"LastResourceDataSyncStatus",
+          "documentation":"<p>The status reported by the last sync.</p>"
+        },
+        "SyncCreatedTime":{
+          "shape":"ResourceDataSyncCreatedTime",
+          "documentation":"<p>The date and time the configuration was created (UTC).</p>"
+        }
+      },
+      "documentation":"<p>Information about a Resource Data Sync configuration, including its current status and last successful sync.</p>"
+    },
+    "ResourceDataSyncItemList":{
+      "type":"list",
+      "member":{"shape":"ResourceDataSyncItem"}
+    },
+    "ResourceDataSyncName":{
+      "type":"string",
+      "max":64,
+      "min":1
+    },
+    "ResourceDataSyncNotFoundException":{
+      "type":"structure",
+      "members":{
+        "SyncName":{"shape":"ResourceDataSyncName"}
+      },
+      "documentation":"<p>The specified sync name was not found.</p>",
+      "exception":true
+    },
+    "ResourceDataSyncS3BucketName":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
+    "ResourceDataSyncS3Destination":{
+      "type":"structure",
+      "required":[
+        "BucketName",
+        "SyncFormat",
+        "Region"
+      ],
+      "members":{
+        "BucketName":{
+          "shape":"ResourceDataSyncS3BucketName",
+          "documentation":"<p>The name of the Amazon S3 bucket where the aggregated data is stored.</p>"
+        },
+        "Prefix":{
+          "shape":"ResourceDataSyncS3Prefix",
+          "documentation":"<p>An Amazon S3 prefix for the bucket.</p>"
+        },
+        "SyncFormat":{
+          "shape":"ResourceDataSyncS3Format",
+          "documentation":"<p>A supported sync format. The following format is currently supported: JsonSerDe</p>"
+        },
+        "Region":{
+          "shape":"ResourceDataSyncS3Region",
+          "documentation":"<p>The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.</p>"
+        }
+      },
+      "documentation":"<p>Information about the target Amazon S3 bucket for the Resource Data Sync.</p>"
+    },
+    "ResourceDataSyncS3Format":{
+      "type":"string",
+      "enum":["JsonSerDe"]
+    },
+    "ResourceDataSyncS3Prefix":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "ResourceDataSyncS3Region":{
+      "type":"string",
+      "max":64,
+      "min":1
     },
     "ResourceId":{"type":"string"},
     "ResourceInUseException":{

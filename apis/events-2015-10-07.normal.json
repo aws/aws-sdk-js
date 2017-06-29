@@ -24,6 +24,20 @@
       ],
       "documentation":"<p>Deletes the specified rule.</p> <p>You must remove all targets from a rule using <a>RemoveTargets</a> before you can delete the rule.</p> <p>When you delete a rule, incoming events might continue to match to the deleted rule. Please allow a short period of time for changes to take effect.</p>"
     },
+    "DescribeEventBus":{
+      "name":"DescribeEventBus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeEventBusRequest"},
+      "output":{"shape":"DescribeEventBusResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalException"}
+      ],
+      "documentation":"<p>Displays the external AWS accounts that are permitted to write events to your account using your account's event bus, and the associated policy. To enable your account to receive events from other accounts, use <a>PutPermission</a>.</p>"
+    },
     "DescribeRule":{
       "name":"DescribeRule",
       "http":{
@@ -119,6 +133,20 @@
       ],
       "documentation":"<p>Sends custom events to Amazon CloudWatch Events so that they can be matched to rules.</p>"
     },
+    "PutPermission":{
+      "name":"PutPermission",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutPermissionRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"PolicyLengthExceededException"},
+        {"shape":"InternalException"}
+      ],
+      "documentation":"<p>Running <code>PutPermission</code> permits the specified AWS account to put events to your account's default <i>event bus</i>. CloudWatch Events rules in your account are triggered by these events arriving to your default event bus. </p> <p>For another account to send events to your account, that external account must have a CloudWatch Events rule with your account's default event bus as a target.</p> <p>To enable multiple AWS accounts to put events to your default event bus, run <code>PutPermission</code> once for each of these accounts.</p>"
+    },
     "PutRule":{
       "name":"PutRule",
       "http":{
@@ -149,7 +177,20 @@
         {"shape":"LimitExceededException"},
         {"shape":"InternalException"}
       ],
-      "documentation":"<p>Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule.</p> <p>Targets are the resources that are invoked when a rule is triggered. Example targets include EC2 instances, AWS Lambda functions, Amazon Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines, and built-in targets. Note that creating rules with built-in targets is supported only in the AWS Management Console.</p> <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the target is an Amazon Kinesis stream, you can optionally specify which shard the event goes to by using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2 instances with one rule, you can use the <code>RunCommandParameters</code> field.</p> <p>To be able to make API calls against the resources that you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For EC2 instances, Amazon Kinesis streams, and AWS Step Functions state machines, CloudWatch Events relies on IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTarget</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/auth-and-access-control-cwe.html\">Authentication and Access Control</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> <p> <b>Input</b>, <b>InputPath</b> and <b>InputTransformer</b> are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:</p> <ul> <li> <p>If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON form (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).</p> </li> <li> <p>If <b>Input</b> is specified in the form of valid JSON, then the matched event is overridden with this constant.</p> </li> <li> <p>If <b>InputPath</b> is specified in the form of JSONPath (for example, <code>$.detail</code>), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).</p> </li> <li> <p>If <b>InputTransformer</b> is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.</p> </li> </ul> <p>When you specify <code>Input</code>, <code>InputPath</code>, or <code>InputTransformer</code>, you must use JSON dot notation, not bracket notation.</p> <p>When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
+      "documentation":"<p>Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule.</p> <p>Targets are the resources that are invoked when a rule is triggered.</p> <p>You can configure the following as targets for CloudWatch Events:</p> <ul> <li> <p>EC2 instances</p> </li> <li> <p>AWS Lambda functions</p> </li> <li> <p>Streams in Amazon Kinesis Streams</p> </li> <li> <p>Delivery streams in Amazon Kinesis Firehose</p> </li> <li> <p>Amazon ECS tasks</p> </li> <li> <p>AWS Step Functions state machines</p> </li> <li> <p>Amazon SNS topics</p> </li> <li> <p>Amazon SQS queues</p> </li> </ul> <p>Note that creating rules with built-in targets is supported only in the AWS Management Console.</p> <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the target is an Amazon Kinesis stream, you can optionally specify which shard the event goes to by using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2 instances with one rule, you can use the <code>RunCommandParameters</code> field.</p> <p>To be able to make API calls against the resources that you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For EC2 instances, Amazon Kinesis streams, and AWS Step Functions state machines, CloudWatch Events relies on IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/auth-and-access-control-cwe.html\">Authentication and Access Control</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> <p>If another AWS account is in the same region and has granted you permission (using <code>PutPermission</code>), you can set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the <code>Arn</code> when you run <code>PutTargets</code>. For more information about enabling cross-account events, see <a>PutPermission</a>.</p> <p> <b>Input</b>, <b>InputPath</b> and <b>InputTransformer</b> are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:</p> <ul> <li> <p>If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON form (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).</p> </li> <li> <p>If <b>Input</b> is specified in the form of valid JSON, then the matched event is overridden with this constant.</p> </li> <li> <p>If <b>InputPath</b> is specified in the form of JSONPath (for example, <code>$.detail</code>), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).</p> </li> <li> <p>If <b>InputTransformer</b> is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.</p> </li> </ul> <p>When you specify <code>Input</code>, <code>InputPath</code>, or <code>InputTransformer</code>, you must use JSON dot notation, not bracket notation.</p> <p>When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
+    },
+    "RemovePermission":{
+      "name":"RemovePermission",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemovePermissionRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalException"}
+      ],
+      "documentation":"<p>Revokes the permission of another AWS account to be able to put events to your default event bus. Specify the account to revoke by the <code>StatementId</code> value that you associated with the account when you granted it permission with <code>PutPermission</code>. You can find the <code>StatementId</code> by using <a>DescribeEventBus</a>.</p>"
     },
     "RemoveTargets":{
       "name":"RemoveTargets",
@@ -182,6 +223,12 @@
     }
   },
   "shapes":{
+    "Action":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"events:[a-zA-Z]+"
+    },
     "Arn":{
       "type":"string",
       "max":1600,
@@ -202,6 +249,28 @@
         "Name":{
           "shape":"RuleName",
           "documentation":"<p>The name of the rule.</p>"
+        }
+      }
+    },
+    "DescribeEventBusRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeEventBusResponse":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>The name of the event bus. Currently, this is always <code>default</code>.</p>"
+        },
+        "Arn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the account permitted to write events to the current account.</p>"
+        },
+        "Policy":{
+          "shape":"String",
+          "documentation":"<p>The policy that enables the external account to send events to your account.</p>"
         }
       }
     },
@@ -457,6 +526,19 @@
       "max":2048,
       "min":1
     },
+    "PolicyLengthExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The event bus policy is too long. For more information, see the limits.</p>",
+      "exception":true
+    },
+    "Principal":{
+      "type":"string",
+      "max":12,
+      "min":1,
+      "pattern":"(\\d{12}|\\*)"
+    },
     "PutEventsRequest":{
       "type":"structure",
       "required":["Entries"],
@@ -534,6 +616,28 @@
       "type":"list",
       "member":{"shape":"PutEventsResultEntry"}
     },
+    "PutPermissionRequest":{
+      "type":"structure",
+      "required":[
+        "Action",
+        "Principal",
+        "StatementId"
+      ],
+      "members":{
+        "Action":{
+          "shape":"Action",
+          "documentation":"<p>The action that you are enabling the other account to perform. Currently, this must be <code>events:PutEvents</code>.</p>"
+        },
+        "Principal":{
+          "shape":"Principal",
+          "documentation":"<p>The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify \"*\" to permit any account to put events to your default event bus.</p> <p>If you specify \"*\", avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an <code>account</code> field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.</p>"
+        },
+        "StatementId":{
+          "shape":"StatementId",
+          "documentation":"<p>An identifier string for the external account that you are granting permissions to. If you later want to revoke the permission for this external account, specify this <code>StatementId</code> when you run <a>RemovePermission</a>.</p>"
+        }
+      }
+    },
     "PutRuleRequest":{
       "type":"structure",
       "required":["Name"],
@@ -544,7 +648,7 @@
         },
         "ScheduleExpression":{
           "shape":"ScheduleExpression",
-          "documentation":"<p>The scheduling expression. For example, \"cron(0 20 * * ? *)\", \"rate(5 minutes)\".</p>"
+          "documentation":"<p>The scheduling expression. For example, \"cron(0 20 * * ? *)\" or \"rate(5 minutes)\".</p>"
         },
         "EventPattern":{
           "shape":"EventPattern",
@@ -625,6 +729,16 @@
       "type":"list",
       "member":{"shape":"PutTargetsResultEntry"}
     },
+    "RemovePermissionRequest":{
+      "type":"structure",
+      "required":["StatementId"],
+      "members":{
+        "StatementId":{
+          "shape":"StatementId",
+          "documentation":"<p>The statement ID corresponding to the account that is no longer allowed to put events to the default event bus.</p>"
+        }
+      }
+    },
     "RemoveTargetsRequest":{
       "type":"structure",
       "required":[
@@ -681,7 +795,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The rule does not exist.</p>",
+      "documentation":"<p>An entity that you specified does not exist.</p>",
       "exception":true
     },
     "RoleArn":{
@@ -808,6 +922,12 @@
     "ScheduleExpression":{
       "type":"string",
       "max":256
+    },
+    "StatementId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9-_]+"
     },
     "String":{"type":"string"},
     "Target":{

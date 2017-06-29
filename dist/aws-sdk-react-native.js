@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.78.0',
+	  VERSION: '2.79.0',
 
 	  /**
 	   * @api private
@@ -12926,6 +12926,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Core: {} /* doc hack */
 	};
 
+	/**
+	 * @api private
+	 */
+	function getOperationAuthtype(req) {
+	  if (!req.service.api.operations) {
+	    return '';
+	  }
+	  var operation = req.service.api.operations[req.operation];
+	  return operation ? operation.authtype : '';
+	}
+
 	AWS.EventListeners = {
 	  Core: new SequentialExecutor().addNamedListeners(function(add, addAsync) {
 	    addAsync('VALIDATE_CREDENTIALS', 'validate',
@@ -13008,7 +13019,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 
 	    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
-	      if (req.httpRequest.headers['Content-Length'] === undefined) {
+	      var authtype = getOperationAuthtype(req);
+	      if (req.httpRequest.headers['Content-Length'] === undefined
+	          && authtype.indexOf('unsigned-body') === -1) {
 	        var length = AWS.util.string.byteLength(req.httpRequest.body);
 	        req.httpRequest.headers['Content-Length'] = length;
 	      }
@@ -22877,7 +22890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
 	//
 	// Permission is hereby granted, free of charge, to any person obtaining a
 	// copy of this software and associated documentation files (the
@@ -22933,11 +22946,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	// properly optimized away early in Ignition+TurboFan.
 	/*<replacement>*/
 	var Buffer = __webpack_require__(252).Buffer;
+	var OurUint8Array = global.Uint8Array || function () {};
 	function _uint8ArrayToBuffer(chunk) {
 	  return Buffer.from(chunk);
 	}
 	function _isUint8Array(obj) {
-	  return Object.prototype.toString.call(obj) === '[object Uint8Array]' || Buffer.isBuffer(obj);
+	  return Buffer.isBuffer(obj) || obj instanceof OurUint8Array;
 	}
 	/*</replacement>*/
 
@@ -23132,7 +23146,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (er) {
 	      stream.emit('error', er);
 	    } else if (state.objectMode || chunk && chunk.length > 0) {
-	      if (typeof chunk !== 'string' && Object.getPrototypeOf(chunk) !== Buffer.prototype && !state.objectMode) {
+	      if (typeof chunk !== 'string' && !state.objectMode && Object.getPrototypeOf(chunk) !== Buffer.prototype) {
 	        chunk = _uint8ArrayToBuffer(chunk);
 	      }
 
@@ -23883,7 +23897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	  return -1;
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
 
 /***/ }),
 /* 250 */
@@ -24413,7 +24427,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process, setImmediate) {// Copyright Joyent, Inc. and other Node contributors.
+	/* WEBPACK VAR INJECTION */(function(process, setImmediate, global) {// Copyright Joyent, Inc. and other Node contributors.
 	//
 	// Permission is hereby granted, free of charge, to any person obtaining a
 	// copy of this software and associated documentation files (the
@@ -24495,11 +24509,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/*<replacement>*/
 	var Buffer = __webpack_require__(252).Buffer;
+	var OurUint8Array = global.Uint8Array || function () {};
 	function _uint8ArrayToBuffer(chunk) {
 	  return Buffer.from(chunk);
 	}
 	function _isUint8Array(obj) {
-	  return Object.prototype.toString.call(obj) === '[object Uint8Array]' || Buffer.isBuffer(obj);
+	  return Buffer.isBuffer(obj) || obj instanceof OurUint8Array;
 	}
 	/*</replacement>*/
 
@@ -25076,8 +25091,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.end();
 	  cb(err);
 	};
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(258).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(258).setImmediate, (function() { return this; }())))
 
 /***/ }),
 /* 258 */
@@ -52244,6 +52258,20 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"DescribeEventBus": {
+				"input": {
+					"type": "structure",
+					"members": {}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Name": {},
+						"Arn": {},
+						"Policy": {}
+					}
+				}
+			},
 			"DescribeRule": {
 				"input": {
 					"type": "structure",
@@ -52365,7 +52393,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Targets": {
-							"shape": "Sp"
+							"shape": "Ss"
 						},
 						"NextToken": {}
 					}
@@ -52418,6 +52446,21 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"PutPermission": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"Action",
+						"Principal",
+						"StatementId"
+					],
+					"members": {
+						"Action": {},
+						"Principal": {},
+						"StatementId": {}
+					}
+				}
+			},
 			"PutRule": {
 				"input": {
 					"type": "structure",
@@ -52450,7 +52493,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"Rule": {},
 						"Targets": {
-							"shape": "Sp"
+							"shape": "Ss"
 						}
 					}
 				},
@@ -52471,6 +52514,17 @@ return /******/ (function(modules) { // webpackBootstrap
 								}
 							}
 						}
+					}
+				}
+			},
+			"RemovePermission": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"StatementId"
+					],
+					"members": {
+						"StatementId": {}
 					}
 				}
 			},
@@ -52532,7 +52586,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 		},
 		"shapes": {
-			"Sp": {
+			"Ss": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -97725,7 +97779,8 @@ return /******/ (function(modules) { // webpackBootstrap
 									"Message": {},
 									"EventTime": {
 										"type": "timestamp"
-									}
+									},
+									"PreSignedLogUrl": {}
 								}
 							}
 						},
@@ -156920,6 +156975,25 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"CreateResourceDataSync": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"SyncName",
+						"S3Destination"
+					],
+					"members": {
+						"SyncName": {},
+						"S3Destination": {
+							"shape": "S33"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
+				}
+			},
 			"DeleteActivation": {
 				"input": {
 					"type": "structure",
@@ -157004,7 +157078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"Names": {
-							"shape": "S3d"
+							"shape": "S3l"
 						}
 					}
 				},
@@ -157012,10 +157086,10 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"DeletedParameters": {
-							"shape": "S3d"
+							"shape": "S3l"
 						},
 						"InvalidParameters": {
-							"shape": "S3d"
+							"shape": "S3l"
 						}
 					}
 				}
@@ -157035,6 +157109,21 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"BaselineId": {}
 					}
+				}
+			},
+			"DeleteResourceDataSync": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"SyncName"
+					],
+					"members": {
+						"SyncName": {}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {}
 				}
 			},
 			"DeregisterManagedInstance": {
@@ -157235,7 +157324,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"ExecutedBy": {},
 									"LogFile": {},
 									"Outputs": {
-										"shape": "S4k"
+										"shape": "S4u"
 									}
 								}
 							}
@@ -157249,7 +157338,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S4p"
+							"shape": "S4z"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -157263,7 +157352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Patches": {
 							"type": "list",
 							"member": {
-								"shape": "S4x"
+								"shape": "S57"
 							}
 						},
 						"NextToken": {}
@@ -157306,7 +157395,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"AccountIds": {
-							"shape": "S5e"
+							"shape": "S5o"
 						}
 					}
 				}
@@ -157366,7 +157455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"type": "structure",
 								"members": {
 									"Patch": {
-										"shape": "S4x"
+										"shape": "S57"
 									},
 									"PatchStatus": {
 										"type": "structure",
@@ -157451,7 +157540,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"members": {
 									"key": {},
 									"valueSet": {
-										"shape": "S64"
+										"shape": "S6e"
 									}
 								}
 							}
@@ -157468,7 +157557,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"members": {
 									"Key": {},
 									"Values": {
-										"shape": "S64"
+										"shape": "S6e"
 									}
 								}
 							}
@@ -157558,7 +157647,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"InstancePatchStates": {
 							"type": "list",
 							"member": {
-								"shape": "S6o"
+								"shape": "S6y"
 							}
 						},
 						"NextToken": {}
@@ -157604,7 +157693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"InstancePatchStates": {
 							"type": "list",
 							"member": {
-								"shape": "S6o"
+								"shape": "S6y"
 							}
 						},
 						"NextToken": {}
@@ -157620,7 +157709,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"InstanceId": {},
 						"Filters": {
-							"shape": "S4p"
+							"shape": "S4z"
 						},
 						"NextToken": {},
 						"MaxResults": {
@@ -157670,7 +157759,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"WindowExecutionId": {},
 						"TaskId": {},
 						"Filters": {
-							"shape": "S7i"
+							"shape": "S7s"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -157703,7 +157792,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"type": "timestamp"
 									},
 									"OwnerInformation": {
-										"shape": "S6q"
+										"shape": "S70"
 									},
 									"WindowTargetId": {}
 								}
@@ -157722,7 +157811,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"WindowExecutionId": {},
 						"Filters": {
-							"shape": "S7i"
+							"shape": "S7s"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -157766,7 +157855,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"WindowId": {},
 						"Filters": {
-							"shape": "S7i"
+							"shape": "S7s"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -157808,7 +157897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"WindowId": {},
 						"Filters": {
-							"shape": "S7i"
+							"shape": "S7s"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -157831,7 +157920,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"shape": "Su"
 									},
 									"OwnerInformation": {
-										"shape": "S6q"
+										"shape": "S70"
 									}
 								}
 							}
@@ -157849,7 +157938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"WindowId": {},
 						"Filters": {
-							"shape": "S7i"
+							"shape": "S7s"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -157873,13 +157962,13 @@ return /******/ (function(modules) { // webpackBootstrap
 										"shape": "Su"
 									},
 									"TaskParameters": {
-										"shape": "S8g"
+										"shape": "S8q"
 									},
 									"Priority": {
 										"type": "integer"
 									},
 									"LoggingInfo": {
-										"shape": "S8m"
+										"shape": "S8w"
 									},
 									"ServiceRoleArn": {},
 									"MaxConcurrency": {},
@@ -157896,7 +157985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S7i"
+							"shape": "S7s"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -157952,7 +158041,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"ParameterFilters": {
-							"shape": "S91"
+							"shape": "S9b"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -157989,7 +158078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S4p"
+							"shape": "S4z"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -158003,7 +158092,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"BaselineIdentities": {
 							"type": "list",
 							"member": {
-								"shape": "S9h"
+								"shape": "S9r"
 							}
 						},
 						"NextToken": {}
@@ -158064,7 +158153,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"members": {
 									"PatchGroup": {},
 									"BaselineIdentity": {
-										"shape": "S9h"
+										"shape": "S9r"
 									}
 								}
 							}
@@ -158120,7 +158209,7 @@ return /******/ (function(modules) { // webpackBootstrap
 												"value": {}
 											},
 											"Outputs": {
-												"shape": "S4k"
+												"shape": "S4u"
 											},
 											"Response": {},
 											"FailureMessage": {},
@@ -158130,7 +158219,7 @@ return /******/ (function(modules) { // webpackBootstrap
 													"FailureStage": {},
 													"FailureType": {},
 													"Details": {
-														"shape": "S4k"
+														"shape": "S4u"
 													}
 												}
 											}
@@ -158138,10 +158227,10 @@ return /******/ (function(modules) { // webpackBootstrap
 									}
 								},
 								"Parameters": {
-									"shape": "S4k"
+									"shape": "S4u"
 								},
 								"Outputs": {
-									"shape": "S4k"
+									"shape": "S4u"
 								},
 								"FailureMessage": {}
 							}
@@ -158244,7 +158333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "Sag"
+							"shape": "Saq"
 						},
 						"ResultAttributes": {
 							"type": "list",
@@ -158291,7 +158380,7 @@ return /******/ (function(modules) { // webpackBootstrap
 												"CaptureTime": {},
 												"ContentHash": {},
 												"Content": {
-													"shape": "Saz"
+													"shape": "Sb9"
 												}
 											}
 										}
@@ -158439,7 +158528,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"TaskParameters": {
 							"type": "list",
 							"member": {
-								"shape": "S8g"
+								"shape": "S8q"
 							},
 							"sensitive": true
 						},
@@ -158476,7 +158565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Parameter": {
-							"shape": "Sbn"
+							"shape": "Sbx"
 						}
 					}
 				}
@@ -158531,7 +158620,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"Names": {
-							"shape": "S3d"
+							"shape": "S3l"
 						},
 						"WithDecryption": {
 							"type": "boolean"
@@ -158542,10 +158631,10 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Parameters": {
-							"shape": "Sbv"
+							"shape": "Sc5"
 						},
 						"InvalidParameters": {
-							"shape": "S3d"
+							"shape": "S3l"
 						}
 					}
 				}
@@ -158562,7 +158651,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"ParameterFilters": {
-							"shape": "S91"
+							"shape": "S9b"
 						},
 						"WithDecryption": {
 							"type": "boolean"
@@ -158577,7 +158666,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Parameters": {
-							"shape": "Sbv"
+							"shape": "Sc5"
 						},
 						"NextToken": {}
 					}
@@ -158708,7 +158797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"NextToken": {},
 						"Filters": {
-							"shape": "Sce"
+							"shape": "Sco"
 						},
 						"Details": {
 							"type": "boolean"
@@ -158764,7 +158853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									},
 									"ServiceRole": {},
 									"NotificationConfig": {
-										"shape": "Scr"
+										"shape": "Sd1"
 									}
 								}
 							}
@@ -158784,7 +158873,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"NextToken": {},
 						"Filters": {
-							"shape": "Sce"
+							"shape": "Sco"
 						}
 					}
 				},
@@ -158794,7 +158883,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Commands": {
 							"type": "list",
 							"member": {
-								"shape": "Scz"
+								"shape": "Sd9"
 							}
 						},
 						"NextToken": {}
@@ -158898,7 +158987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"InstanceId": {},
 						"TypeName": {},
 						"Filters": {
-							"shape": "Sag"
+							"shape": "Saq"
 						},
 						"NextToken": {},
 						"MaxResults": {
@@ -158914,7 +159003,46 @@ return /******/ (function(modules) { // webpackBootstrap
 						"SchemaVersion": {},
 						"CaptureTime": {},
 						"Entries": {
-							"shape": "Saz"
+							"shape": "Sb9"
+						},
+						"NextToken": {}
+					}
+				}
+			},
+			"ListResourceDataSync": {
+				"input": {
+					"type": "structure",
+					"members": {
+						"NextToken": {},
+						"MaxResults": {
+							"type": "integer"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"ResourceDataSyncItems": {
+							"type": "list",
+							"member": {
+								"type": "structure",
+								"members": {
+									"SyncName": {},
+									"S3Destination": {
+										"shape": "S33"
+									},
+									"LastSyncTime": {
+										"type": "timestamp"
+									},
+									"LastSuccessfulSyncTime": {
+										"type": "timestamp"
+									},
+									"LastStatus": {},
+									"SyncCreatedTime": {
+										"type": "timestamp"
+									}
+								}
+							}
 						},
 						"NextToken": {}
 					}
@@ -158952,10 +159080,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Name": {},
 						"PermissionType": {},
 						"AccountIdsToAdd": {
-							"shape": "S5e"
+							"shape": "S5o"
 						},
 						"AccountIdsToRemove": {
-							"shape": "S5e"
+							"shape": "S5o"
 						}
 					}
 				},
@@ -158989,7 +159117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"CaptureTime": {},
 									"ContentHash": {},
 									"Content": {
-										"shape": "Saz"
+										"shape": "Sb9"
 									}
 								}
 							}
@@ -159078,7 +159206,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"shape": "Su"
 						},
 						"OwnerInformation": {
-							"shape": "S6q"
+							"shape": "S70"
 						},
 						"ClientToken": {
 							"idempotencyToken": true
@@ -159113,7 +159241,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ServiceRoleArn": {},
 						"TaskType": {},
 						"TaskParameters": {
-							"shape": "S8g"
+							"shape": "S8q"
 						},
 						"Priority": {
 							"type": "integer"
@@ -159121,7 +159249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"MaxConcurrency": {},
 						"MaxErrors": {},
 						"LoggingInfo": {
-							"shape": "S8m"
+							"shape": "S8w"
 						},
 						"ClientToken": {
 							"idempotencyToken": true
@@ -159187,7 +159315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"MaxErrors": {},
 						"ServiceRoleArn": {},
 						"NotificationConfig": {
-							"shape": "Scr"
+							"shape": "Sd1"
 						}
 					}
 				},
@@ -159195,7 +159323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Command": {
-							"shape": "Scz"
+							"shape": "Sd9"
 						}
 					}
 				}
@@ -159210,7 +159338,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"DocumentName": {},
 						"DocumentVersion": {},
 						"Parameters": {
-							"shape": "S4k"
+							"shape": "S4u"
 						}
 					}
 				},
@@ -159691,11 +159819,25 @@ return /******/ (function(modules) { // webpackBootstrap
 				"type": "list",
 				"member": {}
 			},
-			"S3d": {
+			"S33": {
+				"type": "structure",
+				"required": [
+					"BucketName",
+					"SyncFormat",
+					"Region"
+				],
+				"members": {
+					"BucketName": {},
+					"Prefix": {},
+					"SyncFormat": {},
+					"Region": {}
+				}
+			},
+			"S3l": {
 				"type": "list",
 				"member": {}
 			},
-			"S4k": {
+			"S4u": {
 				"type": "map",
 				"key": {},
 				"value": {
@@ -159703,7 +159845,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"member": {}
 				}
 			},
-			"S4p": {
+			"S4z": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -159716,7 +159858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S4x": {
+			"S57": {
 				"type": "structure",
 				"members": {
 					"Id": {},
@@ -159736,19 +159878,19 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Language": {}
 				}
 			},
-			"S5e": {
+			"S5o": {
 				"type": "list",
 				"member": {
 					"locationName": "AccountId"
 				}
 			},
-			"S64": {
+			"S6e": {
 				"type": "list",
 				"member": {
 					"locationName": "InstanceInformationFilterValue"
 				}
 			},
-			"S6o": {
+			"S6y": {
 				"type": "structure",
 				"required": [
 					"InstanceId",
@@ -159764,7 +159906,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"BaselineId": {},
 					"SnapshotId": {},
 					"OwnerInformation": {
-						"shape": "S6q"
+						"shape": "S70"
 					},
 					"InstalledCount": {
 						"type": "integer"
@@ -159790,11 +159932,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Operation": {}
 				}
 			},
-			"S6q": {
+			"S70": {
 				"type": "string",
 				"sensitive": true
 			},
-			"S7i": {
+			"S7s": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -159807,7 +159949,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S8g": {
+			"S8q": {
 				"type": "map",
 				"key": {},
 				"value": {
@@ -159826,7 +159968,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				},
 				"sensitive": true
 			},
-			"S8m": {
+			"S8w": {
 				"type": "structure",
 				"required": [
 					"S3BucketName",
@@ -159838,7 +159980,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"S3Region": {}
 				}
 			},
-			"S91": {
+			"S9b": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -159855,7 +159997,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S9h": {
+			"S9r": {
 				"type": "structure",
 				"members": {
 					"BaselineId": {},
@@ -159866,7 +160008,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sag": {
+			"Saq": {
 				"type": "list",
 				"member": {
 					"locationName": "InventoryFilter",
@@ -159887,7 +160029,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Saz": {
+			"Sb9": {
 				"type": "list",
 				"member": {
 					"type": "map",
@@ -159895,7 +160037,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"value": {}
 				}
 			},
-			"Sbn": {
+			"Sbx": {
 				"type": "structure",
 				"members": {
 					"Name": {},
@@ -159903,13 +160045,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Value": {}
 				}
 			},
-			"Sbv": {
+			"Sc5": {
 				"type": "list",
 				"member": {
-					"shape": "Sbn"
+					"shape": "Sbx"
 				}
 			},
-			"Sce": {
+			"Sco": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -159923,7 +160065,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Scr": {
+			"Sd1": {
 				"type": "structure",
 				"members": {
 					"NotificationArn": {},
@@ -159934,7 +160076,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"NotificationType": {}
 				}
 			},
-			"Scz": {
+			"Sd9": {
 				"type": "structure",
 				"members": {
 					"CommandId": {},
@@ -159973,7 +160115,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					},
 					"ServiceRole": {},
 					"NotificationConfig": {
-						"shape": "Scr"
+						"shape": "Sd1"
 					}
 				}
 			}

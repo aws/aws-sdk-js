@@ -20,6 +20,14 @@ declare class CloudWatchEvents extends Service {
    */
   deleteRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Displays the external AWS accounts that are permitted to write events to your account using your account's event bus, and the associated policy. To enable your account to receive events from other accounts, use PutPermission.
+   */
+  describeEventBus(params: CloudWatchEvents.Types.DescribeEventBusRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribeEventBusResponse) => void): Request<CloudWatchEvents.Types.DescribeEventBusResponse, AWSError>;
+  /**
+   * Displays the external AWS accounts that are permitted to write events to your account using your account's event bus, and the associated policy. To enable your account to receive events from other accounts, use PutPermission.
+   */
+  describeEventBus(callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribeEventBusResponse) => void): Request<CloudWatchEvents.Types.DescribeEventBusResponse, AWSError>;
+  /**
    * Describes the specified rule.
    */
   describeRule(params: CloudWatchEvents.Types.DescribeRuleRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribeRuleResponse) => void): Request<CloudWatchEvents.Types.DescribeRuleResponse, AWSError>;
@@ -76,6 +84,14 @@ declare class CloudWatchEvents extends Service {
    */
   putEvents(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutEventsResponse) => void): Request<CloudWatchEvents.Types.PutEventsResponse, AWSError>;
   /**
+   * Running PutPermission permits the specified AWS account to put events to your account's default event bus. CloudWatch Events rules in your account are triggered by these events arriving to your default event bus.  For another account to send events to your account, that external account must have a CloudWatch Events rule with your account's default event bus as a target. To enable multiple AWS accounts to put events to your default event bus, run PutPermission once for each of these accounts.
+   */
+  putPermission(params: CloudWatchEvents.Types.PutPermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Running PutPermission permits the specified AWS account to put events to your account's default event bus. CloudWatch Events rules in your account are triggered by these events arriving to your default event bus.  For another account to send events to your account, that external account must have a CloudWatch Events rule with your account's default event bus as a target. To enable multiple AWS accounts to put events to your default event bus, run PutPermission once for each of these accounts.
+   */
+  putPermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Please allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
    */
   putRule(params: CloudWatchEvents.Types.PutRuleRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.PutRuleResponse) => void): Request<CloudWatchEvents.Types.PutRuleResponse, AWSError>;
@@ -84,13 +100,21 @@ declare class CloudWatchEvents extends Service {
    */
   putRule(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutRuleResponse) => void): Request<CloudWatchEvents.Types.PutRuleResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. Example targets include EC2 instances, AWS Lambda functions, Amazon Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines, and built-in targets. Note that creating rules with built-in targets is supported only in the AWS Management Console. For some target types, PutTargets provides target-specific parameters. If the target is an Amazon Kinesis stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For EC2 instances, Amazon Kinesis streams, and AWS Step Functions state machines, CloudWatch Events relies on IAM roles that you specify in the RoleARN argument in PutTarget. For more information, see Authentication and Access Control in the Amazon CloudWatch Events User Guide.  Input, InputPath and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON form (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify Input, InputPath, or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. You can configure the following as targets for CloudWatch Events:   EC2 instances   AWS Lambda functions   Streams in Amazon Kinesis Streams   Delivery streams in Amazon Kinesis Firehose   Amazon ECS tasks   AWS Step Functions state machines   Amazon SNS topics   Amazon SQS queues   Note that creating rules with built-in targets is supported only in the AWS Management Console. For some target types, PutTargets provides target-specific parameters. If the target is an Amazon Kinesis stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For EC2 instances, Amazon Kinesis streams, and AWS Step Functions state machines, CloudWatch Events relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon CloudWatch Events User Guide. If another AWS account is in the same region and has granted you permission (using PutPermission), you can set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn when you run PutTargets. For more information about enabling cross-account events, see PutPermission.  Input, InputPath and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON form (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify Input, InputPath, or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(params: CloudWatchEvents.Types.PutTargetsRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.PutTargetsResponse) => void): Request<CloudWatchEvents.Types.PutTargetsResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. Example targets include EC2 instances, AWS Lambda functions, Amazon Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines, and built-in targets. Note that creating rules with built-in targets is supported only in the AWS Management Console. For some target types, PutTargets provides target-specific parameters. If the target is an Amazon Kinesis stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For EC2 instances, Amazon Kinesis streams, and AWS Step Functions state machines, CloudWatch Events relies on IAM roles that you specify in the RoleARN argument in PutTarget. For more information, see Authentication and Access Control in the Amazon CloudWatch Events User Guide.  Input, InputPath and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON form (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify Input, InputPath, or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. You can configure the following as targets for CloudWatch Events:   EC2 instances   AWS Lambda functions   Streams in Amazon Kinesis Streams   Delivery streams in Amazon Kinesis Firehose   Amazon ECS tasks   AWS Step Functions state machines   Amazon SNS topics   Amazon SQS queues   Note that creating rules with built-in targets is supported only in the AWS Management Console. For some target types, PutTargets provides target-specific parameters. If the target is an Amazon Kinesis stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon CloudWatch Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, CloudWatch Events relies on resource-based policies. For EC2 instances, Amazon Kinesis streams, and AWS Step Functions state machines, CloudWatch Events relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon CloudWatch Events User Guide. If another AWS account is in the same region and has granted you permission (using PutPermission), you can set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn when you run PutTargets. For more information about enabling cross-account events, see PutPermission.  Input, InputPath and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON form (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify Input, InputPath, or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Please allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutTargetsResponse) => void): Request<CloudWatchEvents.Types.PutTargetsResponse, AWSError>;
+  /**
+   * Revokes the permission of another AWS account to be able to put events to your default event bus. Specify the account to revoke by the StatementId value that you associated with the account when you granted it permission with PutPermission. You can find the StatementId by using DescribeEventBus.
+   */
+  removePermission(params: CloudWatchEvents.Types.RemovePermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Revokes the permission of another AWS account to be able to put events to your default event bus. Specify the account to revoke by the StatementId value that you associated with the account when you granted it permission with PutPermission. You can find the StatementId by using DescribeEventBus.
+   */
+  removePermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked. When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Please allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
@@ -109,6 +133,7 @@ declare class CloudWatchEvents extends Service {
   testEventPattern(callback?: (err: AWSError, data: CloudWatchEvents.Types.TestEventPatternResponse) => void): Request<CloudWatchEvents.Types.TestEventPatternResponse, AWSError>;
 }
 declare namespace CloudWatchEvents {
+  export type Action = string;
   export type Arn = string;
   export type Boolean = boolean;
   export interface DeleteRuleRequest {
@@ -116,6 +141,22 @@ declare namespace CloudWatchEvents {
      * The name of the rule.
      */
     Name: RuleName;
+  }
+  export interface DescribeEventBusRequest {
+  }
+  export interface DescribeEventBusResponse {
+    /**
+     * The name of the event bus. Currently, this is always default.
+     */
+    Name?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the account permitted to write events to the current account.
+     */
+    Arn?: String;
+    /**
+     * The policy that enables the external account to send events to your account.
+     */
+    Policy?: String;
   }
   export interface DescribeRuleRequest {
     /**
@@ -275,6 +316,7 @@ declare namespace CloudWatchEvents {
     NextToken?: NextToken;
   }
   export type NextToken = string;
+  export type Principal = string;
   export interface PutEventsRequest {
     /**
      * The entry that defines an event in your system. You can specify several parameters for the entry such as the source and type of the event, resources associated with the event, and so on.
@@ -329,13 +371,27 @@ declare namespace CloudWatchEvents {
     ErrorMessage?: ErrorMessage;
   }
   export type PutEventsResultEntryList = PutEventsResultEntry[];
+  export interface PutPermissionRequest {
+    /**
+     * The action that you are enabling the other account to perform. Currently, this must be events:PutEvents.
+     */
+    Action: Action;
+    /**
+     * The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify "*" to permit any account to put events to your default event bus. If you specify "*", avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an account field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.
+     */
+    Principal: Principal;
+    /**
+     * An identifier string for the external account that you are granting permissions to. If you later want to revoke the permission for this external account, specify this StatementId when you run RemovePermission.
+     */
+    StatementId: StatementId;
+  }
   export interface PutRuleRequest {
     /**
      * The name of the rule that you are creating or updating.
      */
     Name: RuleName;
     /**
-     * The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".
+     * The scheduling expression. For example, "cron(0 20 * * ? *)" or "rate(5 minutes)".
      */
     ScheduleExpression?: ScheduleExpression;
     /**
@@ -396,6 +452,12 @@ declare namespace CloudWatchEvents {
     ErrorMessage?: ErrorMessage;
   }
   export type PutTargetsResultEntryList = PutTargetsResultEntry[];
+  export interface RemovePermissionRequest {
+    /**
+     * The statement ID corresponding to the account that is no longer allowed to put events to the default event bus.
+     */
+    StatementId: StatementId;
+  }
   export interface RemoveTargetsRequest {
     /**
      * The name of the rule.
@@ -489,6 +551,7 @@ declare namespace CloudWatchEvents {
   export type RunCommandTargetValues = RunCommandTargetValue[];
   export type RunCommandTargets = RunCommandTarget[];
   export type ScheduleExpression = string;
+  export type StatementId = string;
   export type String = string;
   export interface Target {
     /**
