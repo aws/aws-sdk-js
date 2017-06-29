@@ -170,6 +170,7 @@
         contentLength = function(body) {
           return sendRequest(body).httpRequest.headers['Content-Length'];
         };
+
         it('ignores Content-Length for operations with an unsigned authtype', function(done) {
           var service = new AWS.Lambda();
           service.api.operations.updateFunctionCode.authtype = 'v4-unsigned-body';
@@ -183,18 +184,23 @@
             done();
           });
         });
+
         it('builds Content-Length in the request headers for string content', function() {
           return expect(contentLength('FOOBAR')).to.equal(6);
         });
+
         it('builds Content-Length for string "0"', function() {
           return expect(contentLength('0')).to.equal(1);
         });
+
         it('builds Content-Length for utf-8 string body', function() {
           return expect(contentLength('tï№')).to.equal(6);
         });
+
         it('builds Content-Length for buffer body', function() {
           return expect(contentLength(new AWS.util.Buffer('tï№'))).to.equal(6);
         });
+
         if (AWS.util.isNode()) {
           return it('builds Content-Length for file body', function(done) {
             var file;
