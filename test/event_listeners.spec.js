@@ -170,6 +170,19 @@
         contentLength = function(body) {
           return sendRequest(body).httpRequest.headers['Content-Length'];
         };
+        it('ignores Content-Length for operations with an unsigned authtype', function(done) {
+          var service = new AWS.Lambda();
+          service.api.operations.updateFunctionCode.authtype = 'v4-unsigned-body';
+          req = service.makeRequest('updateFunctionCode', {
+            FunctionName: 'fake',
+            ZipFile: new Buffer('fake')
+          });
+          req.runTo('sign', function(err) {
+            expect(typeof req.httpRequest.headers['Content-Length']).to.equal('undefined');
+            delete service.api.operations.updateFunctionCode.authtype;
+            done();
+          });
+        });
         it('builds Content-Length in the request headers for string content', function() {
           return expect(contentLength('FOOBAR')).to.equal(6);
         });

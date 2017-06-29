@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "LexRuntime",
+  "description": "Adds support for non-file streams as an input to postContent."
+}
