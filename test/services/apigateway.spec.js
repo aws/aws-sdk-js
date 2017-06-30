@@ -22,8 +22,8 @@
       build = function(operation, params) {
         return request(operation, params).build().httpRequest;
       };
-      return describe('sets Accept: application/json', function() {
-        return it('always sets accept header', function() {
+      describe('sets Accept: application/json', function() {
+        it('always sets accept header', function() {
           var req;
           req = build('getApiKey', {
             apiKey: 'apiKey'
@@ -34,8 +34,20 @@
           req = build('updateApiKey', {
             apiKey: 'apiKey'
           });
-          return expect(req.headers['Accept']).to.equal('application/json');
+          expect(req.headers['Accept']).to.equal('application/json');
         });
+
+        it('will not override user-specified accepts', function() {
+          var req;
+          req = build('getExport', {
+            restApiId: 'id',
+            stageName: 'name',
+            exportType: 'swagger',
+            accepts: 'application/yaml'
+          });
+          expect(req.headers['Accept']).to.equal('application/yaml');
+        });
+
       });
     });
     return describe('response parsing', function() {
