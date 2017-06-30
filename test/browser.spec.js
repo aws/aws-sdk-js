@@ -136,7 +136,7 @@
         req.on('httpHeaders', function() {
           return this.abort();
         });
-        return req.send(function(err) {
+        req.send(function(err) {
           expect(err.name).to.equal('RequestAbortedError');
           return done();
         });
@@ -1125,8 +1125,31 @@
           });
         });
       });
+
+      it('won\'t attempt to update bucket region if request is aborted', function(done) {
+        var req;
+        var s3Config = AWS.util.merge(config, config.s3);
+        s3Config.params = AWS.util.copy(s3Config.params);
+        s3Config.region = 'us-west-2';
+        s3Config.params.Bucket += '-us-west-2';
+        var s3 = new AWS.S3(s3Config);
+        req = s3.putObject({
+          Key: 'key',
+          Body: 'body'
+        });
+        req.on('httpHeaders', function() {
+          return this.abort();
+        });
+        var spy = helpers.spyOn(s3, 'updateReqBucketRegion').andCallThrough();
+        req.send(function(err) {
+          expect(err.name).to.equal('RequestAbortedError');
+          expect(spy.calls.length).to.equal(0);
+          return done();
+        });
+      });
+
       describe('upload()', function() {
-        return it('supports blobs using upload()', function(done) {
+        it('supports blobs using upload()', function(done) {
           var key, size, u;
           key = uniqueName('test');
           size = 100;
@@ -1134,7 +1157,7 @@
             Key: key,
             Body: new Blob([new Uint8Array(size)])
           });
-          return u.send(function(err, data) {
+          u.send(function(err, data) {
             expect(err).not.to.exist;
             expect(typeof data.ETag).to.equal('string');
             expect(typeof data.Location).to.equal('string');
