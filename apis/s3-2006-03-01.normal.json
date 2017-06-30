@@ -2242,6 +2242,12 @@
           "shape": "RequestPayer",
           "location": "header",
           "locationName": "x-amz-request-payer"
+        },
+        "Tagging": {
+          "shape": "TaggingHeader",
+          "documentation": "The tag-set for the object. The tag-set must be encoded as URL Query parameters",
+          "location": "header",
+          "locationName": "x-amz-tagging"
         }
       }
     },

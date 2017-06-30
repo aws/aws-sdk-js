@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.79.0-->
+<!--LATEST=2.80.0-->
 <!--ENTRYINSERT-->
+
+## 2.80.0
+* feature: S3: API Update for S3: Adding Object Tagging Header to MultipartUpload Initialization
 
 ## 2.79.0
 * bugfix: LexRuntime: Adds support for non-file streams as an input to postContent.

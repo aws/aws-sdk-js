@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.79.0',
+	  VERSION: '2.80.0',
 
 	  /**
 	   * @api private
@@ -146156,6 +146156,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"RequestPayer": {
 							"location": "header",
 							"locationName": "x-amz-request-payer"
+						},
+						"Tagging": {
+							"location": "header",
+							"locationName": "x-amz-tagging"
 						}
 					}
 				},

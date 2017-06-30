@@ -1206,6 +1206,10 @@ declare namespace S3 {
      */
     SSEKMSKeyId?: SSEKMSKeyId;
     RequestPayer?: RequestPayer;
+    /**
+     * The tag-set for the object. The tag-set must be encoded as URL Query parameters
+     */
+    Tagging?: TaggingHeader;
   }
   export type CreationDate = Date;
   export type _Date = Date;
