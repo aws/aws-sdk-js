@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "apigateway",
+  "description": "ApiGateway.getExports will no longer override user-supplied 'accepts' with 'application/json'"
+}
