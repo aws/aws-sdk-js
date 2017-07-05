@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Core",
-  "description": "The SDK will now throw an InvalidHeader error when a header's value is not stringifiable. See #1598."
-}

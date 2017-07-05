@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.80.0
+// AWS SDK for JavaScript v2.81.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -61758,6 +61758,22 @@ module.exports={
         }
       }
     },
+    "DeleteDashboards": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "DashboardNames": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "DeleteDashboardsResult",
+        "type": "structure",
+        "members": {}
+      }
+    },
     "DescribeAlarmHistory": {
       "input": {
         "type": "structure",
@@ -61820,7 +61836,7 @@ module.exports={
         "type": "structure",
         "members": {
           "MetricAlarms": {
-            "shape": "Sj"
+            "shape": "Sn"
           },
           "NextToken": {}
         }
@@ -61839,7 +61855,7 @@ module.exports={
           "Statistic": {},
           "ExtendedStatistic": {},
           "Dimensions": {
-            "shape": "Sw"
+            "shape": "S10"
           },
           "Period": {
             "type": "integer"
@@ -61852,7 +61868,7 @@ module.exports={
         "type": "structure",
         "members": {
           "MetricAlarms": {
-            "shape": "Sj"
+            "shape": "Sn"
           }
         }
       }
@@ -61883,6 +61899,23 @@ module.exports={
         }
       }
     },
+    "GetDashboard": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "DashboardName": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "GetDashboardResult",
+        "type": "structure",
+        "members": {
+          "DashboardArn": {},
+          "DashboardBody": {},
+          "DashboardName": {}
+        }
+      }
+    },
     "GetMetricStatistics": {
       "input": {
         "type": "structure",
@@ -61897,7 +61930,7 @@ module.exports={
           "Namespace": {},
           "MetricName": {},
           "Dimensions": {
-            "shape": "Sw"
+            "shape": "S10"
           },
           "StartTime": {
             "type": "timestamp"
@@ -61971,6 +62004,38 @@ module.exports={
         }
       }
     },
+    "ListDashboards": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "DashboardNamePrefix": {},
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "ListDashboardsResult",
+        "type": "structure",
+        "members": {
+          "DashboardEntries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "DashboardName": {},
+                "DashboardArn": {},
+                "LastModified": {
+                  "type": "timestamp"
+                },
+                "Size": {
+                  "type": "long"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
     "ListMetrics": {
       "input": {
         "type": "structure",
@@ -62005,7 +62070,7 @@ module.exports={
                 "Namespace": {},
                 "MetricName": {},
                 "Dimensions": {
-                  "shape": "Sw"
+                  "shape": "S10"
                 }
               },
               "xmlOrder": [
@@ -62021,6 +62086,31 @@ module.exports={
           "Metrics",
           "NextToken"
         ]
+      }
+    },
+    "PutDashboard": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "DashboardName": {},
+          "DashboardBody": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "PutDashboardResult",
+        "type": "structure",
+        "members": {
+          "DashboardValidationMessages": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "DataPath": {},
+                "Message": {}
+              }
+            }
+          }
+        }
       }
     },
     "PutMetricAlarm": {
@@ -62042,20 +62132,20 @@ module.exports={
             "type": "boolean"
           },
           "OKActions": {
-            "shape": "So"
+            "shape": "Ss"
           },
           "AlarmActions": {
-            "shape": "So"
+            "shape": "Ss"
           },
           "InsufficientDataActions": {
-            "shape": "So"
+            "shape": "Ss"
           },
           "MetricName": {},
           "Namespace": {},
           "Statistic": {},
           "ExtendedStatistic": {},
           "Dimensions": {
-            "shape": "Sw"
+            "shape": "S10"
           },
           "Period": {
             "type": "integer"
@@ -62092,7 +62182,7 @@ module.exports={
               "members": {
                 "MetricName": {},
                 "Dimensions": {
-                  "shape": "Sw"
+                  "shape": "S10"
                 },
                 "Timestamp": {
                   "type": "timestamp"
@@ -62123,7 +62213,10 @@ module.exports={
                     }
                   }
                 },
-                "Unit": {}
+                "Unit": {},
+                "StorageResolution": {
+                  "type": "integer"
+                }
               }
             }
           }
@@ -62152,7 +62245,7 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "Sj": {
+    "Sn": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -62167,13 +62260,13 @@ module.exports={
             "type": "boolean"
           },
           "OKActions": {
-            "shape": "So"
+            "shape": "Ss"
           },
           "AlarmActions": {
-            "shape": "So"
+            "shape": "Ss"
           },
           "InsufficientDataActions": {
-            "shape": "So"
+            "shape": "Ss"
           },
           "StateValue": {},
           "StateReason": {},
@@ -62186,7 +62279,7 @@ module.exports={
           "Statistic": {},
           "ExtendedStatistic": {},
           "Dimensions": {
-            "shape": "Sw"
+            "shape": "S10"
           },
           "Period": {
             "type": "integer"
@@ -62230,11 +62323,11 @@ module.exports={
         ]
       }
     },
-    "So": {
+    "Ss": {
       "type": "list",
       "member": {}
     },
-    "Sw": {
+    "S10": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -103868,7 +103961,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.80.0',
+  VERSION: '2.81.0',
 
 
   Signers: {},
@@ -109257,7 +109350,9 @@ AWS.util.update(AWS.APIGateway.prototype, {
 
   setAcceptHeader: function setAcceptHeader(req) {
     var httpRequest = req.httpRequest;
-    httpRequest.headers['Accept'] = 'application/json';
+    if (!httpRequest.headers.Accept) {
+      httpRequest.headers['Accept'] = 'application/json';
+    }
   },
 
 
@@ -111050,8 +111145,14 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
     AWS.util.arrayEach.call(this, headers, function (item) {
       var key = item[0].toLowerCase();
       if (this.isSignableHeader(key)) {
+        var value = item[1];
+        if (typeof value === 'undefined' || value === null || typeof value.toString !== 'function') {
+          throw AWS.util.error(new Error('Header ' + key + ' contains invalid value'), {
+            code: 'InvalidHeader'
+          });
+        }
         parts.push(key + ':' +
-          this.canonicalHeaderValues(item[1].toString()));
+          this.canonicalHeaderValues(value.toString()));
       }
     });
     return parts.join('\n');

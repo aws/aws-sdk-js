@@ -1243,7 +1243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.80.0',
+	  VERSION: '2.81.0',
 
 	  /**
 	   * @api private
@@ -19341,8 +19341,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    AWS.util.arrayEach.call(this, headers, function (item) {
 	      var key = item[0].toLowerCase();
 	      if (this.isSignableHeader(key)) {
+	        var value = item[1];
+	        if (typeof value === 'undefined' || value === null || typeof value.toString !== 'function') {
+	          throw AWS.util.error(new Error('Header ' + key + ' contains invalid value'), {
+	            code: 'InvalidHeader'
+	          });
+	        }
 	        parts.push(key + ':' +
-	          this.canonicalHeaderValues(item[1].toString()));
+	          this.canonicalHeaderValues(value.toString()));
 	      }
 	    });
 	    return parts.join('\n');
@@ -31737,7 +31743,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	  setAcceptHeader: function setAcceptHeader(req) {
 	    var httpRequest = req.httpRequest;
-	    httpRequest.headers['Accept'] = 'application/json';
+	    if (!httpRequest.headers.Accept) {
+	      httpRequest.headers['Accept'] = 'application/json';
+	    }
 	  },
 
 	  /**
@@ -51657,6 +51665,22 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"DeleteDashboards": {
+				"input": {
+					"type": "structure",
+					"members": {
+						"DashboardNames": {
+							"type": "list",
+							"member": {}
+						}
+					}
+				},
+				"output": {
+					"resultWrapper": "DeleteDashboardsResult",
+					"type": "structure",
+					"members": {}
+				}
+			},
 			"DescribeAlarmHistory": {
 				"input": {
 					"type": "structure",
@@ -51719,7 +51743,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"MetricAlarms": {
-							"shape": "Sj"
+							"shape": "Sn"
 						},
 						"NextToken": {}
 					}
@@ -51738,7 +51762,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Statistic": {},
 						"ExtendedStatistic": {},
 						"Dimensions": {
-							"shape": "Sw"
+							"shape": "S10"
 						},
 						"Period": {
 							"type": "integer"
@@ -51751,7 +51775,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"MetricAlarms": {
-							"shape": "Sj"
+							"shape": "Sn"
 						}
 					}
 				}
@@ -51782,6 +51806,23 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"GetDashboard": {
+				"input": {
+					"type": "structure",
+					"members": {
+						"DashboardName": {}
+					}
+				},
+				"output": {
+					"resultWrapper": "GetDashboardResult",
+					"type": "structure",
+					"members": {
+						"DashboardArn": {},
+						"DashboardBody": {},
+						"DashboardName": {}
+					}
+				}
+			},
 			"GetMetricStatistics": {
 				"input": {
 					"type": "structure",
@@ -51796,7 +51837,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Namespace": {},
 						"MetricName": {},
 						"Dimensions": {
-							"shape": "Sw"
+							"shape": "S10"
 						},
 						"StartTime": {
 							"type": "timestamp"
@@ -51870,6 +51911,38 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"ListDashboards": {
+				"input": {
+					"type": "structure",
+					"members": {
+						"DashboardNamePrefix": {},
+						"NextToken": {}
+					}
+				},
+				"output": {
+					"resultWrapper": "ListDashboardsResult",
+					"type": "structure",
+					"members": {
+						"DashboardEntries": {
+							"type": "list",
+							"member": {
+								"type": "structure",
+								"members": {
+									"DashboardName": {},
+									"DashboardArn": {},
+									"LastModified": {
+										"type": "timestamp"
+									},
+									"Size": {
+										"type": "long"
+									}
+								}
+							}
+						},
+						"NextToken": {}
+					}
+				}
+			},
 			"ListMetrics": {
 				"input": {
 					"type": "structure",
@@ -51904,7 +51977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"Namespace": {},
 									"MetricName": {},
 									"Dimensions": {
-										"shape": "Sw"
+										"shape": "S10"
 									}
 								},
 								"xmlOrder": [
@@ -51920,6 +51993,31 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Metrics",
 						"NextToken"
 					]
+				}
+			},
+			"PutDashboard": {
+				"input": {
+					"type": "structure",
+					"members": {
+						"DashboardName": {},
+						"DashboardBody": {}
+					}
+				},
+				"output": {
+					"resultWrapper": "PutDashboardResult",
+					"type": "structure",
+					"members": {
+						"DashboardValidationMessages": {
+							"type": "list",
+							"member": {
+								"type": "structure",
+								"members": {
+									"DataPath": {},
+									"Message": {}
+								}
+							}
+						}
+					}
 				}
 			},
 			"PutMetricAlarm": {
@@ -51941,20 +52039,20 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"OKActions": {
-							"shape": "So"
+							"shape": "Ss"
 						},
 						"AlarmActions": {
-							"shape": "So"
+							"shape": "Ss"
 						},
 						"InsufficientDataActions": {
-							"shape": "So"
+							"shape": "Ss"
 						},
 						"MetricName": {},
 						"Namespace": {},
 						"Statistic": {},
 						"ExtendedStatistic": {},
 						"Dimensions": {
-							"shape": "Sw"
+							"shape": "S10"
 						},
 						"Period": {
 							"type": "integer"
@@ -51991,7 +52089,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"members": {
 									"MetricName": {},
 									"Dimensions": {
-										"shape": "Sw"
+										"shape": "S10"
 									},
 									"Timestamp": {
 										"type": "timestamp"
@@ -52022,7 +52120,10 @@ return /******/ (function(modules) { // webpackBootstrap
 											}
 										}
 									},
-									"Unit": {}
+									"Unit": {},
+									"StorageResolution": {
+										"type": "integer"
+									}
 								}
 							}
 						}
@@ -52051,7 +52152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				"type": "list",
 				"member": {}
 			},
-			"Sj": {
+			"Sn": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -52066,13 +52167,13 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"OKActions": {
-							"shape": "So"
+							"shape": "Ss"
 						},
 						"AlarmActions": {
-							"shape": "So"
+							"shape": "Ss"
 						},
 						"InsufficientDataActions": {
-							"shape": "So"
+							"shape": "Ss"
 						},
 						"StateValue": {},
 						"StateReason": {},
@@ -52085,7 +52186,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Statistic": {},
 						"ExtendedStatistic": {},
 						"Dimensions": {
-							"shape": "Sw"
+							"shape": "S10"
 						},
 						"Period": {
 							"type": "integer"
@@ -52129,11 +52230,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					]
 				}
 			},
-			"So": {
+			"Ss": {
 				"type": "list",
 				"member": {}
 			},
-			"Sw": {
+			"S10": {
 				"type": "list",
 				"member": {
 					"type": "structure",

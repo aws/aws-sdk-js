@@ -2551,7 +2551,8 @@
         "messages":{
           "shape":"ErrorMessages",
           "documentation":"<p>Descriptive message for the error response.</p>"
-        }
+        },
+        "message":{"shape":"ErrorMessage"}
       },
       "documentation":"<p>This exception contains a list of messages that might contain one or more error messages. Each error message indicates one error in the change batch.</p>",
       "exception":true
