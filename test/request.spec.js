@@ -1147,6 +1147,25 @@ describe('AWS.Request', function() {
 
         // s.resume();
       });
+
+      it('successfully handles connection timeout', function (done) {
+        var request, s;
+        app = function (req, resp) {
+          resp.writeHead(200, {
+            'content-length': 512 * 1024
+          });
+          resp.write(new Buffer(512 * 1024));
+          resp.end();
+        };
+        service.config.httpOptions.timeout = 5;
+        request = service.makeRequest('mockMethod');
+        s = request.createReadStream();
+        s.on('error', function (e) {
+          setImmediate(function () {
+            done();
+          });
+        });
+      });
     });
   }
 
