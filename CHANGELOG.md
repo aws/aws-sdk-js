@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.81.0-->
+<!--LATEST=2.82.0-->
 <!--ENTRYINSERT-->
+
+## 2.82.0
+* feature: DirectoryService: You can now improve the resilience and performance of your Microsoft AD directory by deploying additional domain controllers. Added UpdateNumberofDomainControllers API that allows you to update the number of domain controllers you want for your directory, and DescribeDomainControllers API that allows you to describe the detailed information of each domain controller of your directory. Also added the 'DesiredNumberOfDomainControllers' field to the DescribeDirectories API output for Microsoft AD.
+* feature: KMS: This release of AWS Key Management Service introduces the ability to determine whether a key is AWS managed or customer managed.
+* feature: Kinesis: You can now encrypt your data at rest within an Amazon Kinesis Stream using server-side encryption. Server-side encryption via AWS KMS makes it easy for customers to meet strict data management requirements by encrypting their data at rest within the Amazon Kinesis Streams, a fully managed real-time data processing service.
+* feature: SSM: Amazon EC2 Systems Manager now expands Patching support to Amazon Linux, Red Hat and Ubuntu in addition to the already supported Windows Server.
 
 ## 2.81.0
 * bugfix: Core: The SDK will now throw an InvalidHeader error when a header's value is not stringifiable. See #1598.

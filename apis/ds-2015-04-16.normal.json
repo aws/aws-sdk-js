@@ -320,6 +320,24 @@
       ],
       "documentation":"<p>Obtains information about the directories that belong to this account.</p> <p>You can retrieve information about specific directories by passing the directory identifiers in the <i>DirectoryIds</i> parameter. Otherwise, all directories that belong to the current account are returned.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> request and response parameters. If more results are available, the <i>DescribeDirectoriesResult.NextToken</i> member contains a token that you pass in the next call to <a>DescribeDirectories</a> to retrieve the next set of items.</p> <p>You can also specify a maximum number of return results with the <i>Limit</i> parameter.</p>"
     },
+    "DescribeDomainControllers":{
+      "name":"DescribeDomainControllers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeDomainControllersRequest"},
+      "output":{"shape":"DescribeDomainControllersResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"},
+        {"shape":"UnsupportedOperationException"}
+      ],
+      "documentation":"<p>Provides information about any domain controllers in your directory.</p>"
+    },
     "DescribeEventTopics":{
       "name":"DescribeEventTopics",
       "http":{
@@ -617,6 +635,25 @@
         {"shape":"ServiceException"}
       ],
       "documentation":"<p>Updates a conditional forwarder that has been set up for your AWS directory.</p>"
+    },
+    "UpdateNumberOfDomainControllers":{
+      "name":"UpdateNumberOfDomainControllers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateNumberOfDomainControllersRequest"},
+      "output":{"shape":"UpdateNumberOfDomainControllersResult"},
+      "errors":[
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"DomainControllerLimitExceededException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ],
+      "documentation":"<p>Adds or removes domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request.</p>"
     },
     "UpdateRadius":{
       "name":"UpdateRadius",
@@ -1072,7 +1109,10 @@
           "shape":"Description",
           "documentation":"<p>A textual description for the directory. This label will appear on the AWS console <code>Directory Details</code> page after the directory is created.</p>"
         },
-        "VpcSettings":{"shape":"DirectoryVpcSettings"}
+        "VpcSettings":{
+          "shape":"DirectoryVpcSettings",
+          "documentation":"<p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>"
+        }
       },
       "documentation":"<p>Creates a Microsoft AD in the AWS cloud.</p>"
     },
@@ -1332,6 +1372,41 @@
       },
       "documentation":"<p>Contains the results of the <a>DescribeDirectories</a> operation.</p>"
     },
+    "DescribeDomainControllersRequest":{
+      "type":"structure",
+      "required":["DirectoryId"],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>Identifier of the directory for which to retrieve the domain controller information.</p>"
+        },
+        "DomainControllerIds":{
+          "shape":"DomainControllerIds",
+          "documentation":"<p>A list of identifiers for the domain controllers whose information will be provided.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <i>DescribeDomainControllers.NextToken</i> value from a previous call to <a>DescribeDomainControllers</a>. Pass null if this is the first call. </p>"
+        },
+        "Limit":{
+          "shape":"Limit",
+          "documentation":"<p>The maximum number of items to return.</p>"
+        }
+      }
+    },
+    "DescribeDomainControllersResult":{
+      "type":"structure",
+      "members":{
+        "DomainControllers":{
+          "shape":"DomainControllers",
+          "documentation":"<p>List of the <a>DomainController</a> objects that were retrieved.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the next set of items.</p>"
+        }
+      }
+    },
     "DescribeEventTopicsRequest":{
       "type":"structure",
       "members":{
@@ -1433,6 +1508,10 @@
       "max":128,
       "min":0,
       "pattern":"^([a-zA-Z0-9_])[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$"
+    },
+    "DesiredNumberOfDomainControllers":{
+      "type":"integer",
+      "min":2
     },
     "DirectoryConnectSettings":{
       "type":"structure",
@@ -1566,6 +1645,10 @@
         "SsoEnabled":{
           "shape":"SsoEnabled",
           "documentation":"<p>Indicates if single-sign on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.</p>"
+        },
+        "DesiredNumberOfDomainControllers":{
+          "shape":"DesiredNumberOfDomainControllers",
+          "documentation":"<p>The desired number of domain controllers in the directory if the directory is Microsoft AD.</p>"
         }
       },
       "documentation":"<p>Contains information about an AWS Directory Service directory.</p>"
@@ -1768,6 +1851,86 @@
     "DnsIpAddrs":{
       "type":"list",
       "member":{"shape":"IpAddr"}
+    },
+    "DomainController":{
+      "type":"structure",
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>Identifier of the directory where the domain controller resides.</p>"
+        },
+        "DomainControllerId":{
+          "shape":"DomainControllerId",
+          "documentation":"<p>Identifies a specific domain controller in the directory.</p>"
+        },
+        "DnsIpAddr":{
+          "shape":"IpAddr",
+          "documentation":"<p>The IP address of the domain controller.</p>"
+        },
+        "VpcId":{
+          "shape":"VpcId",
+          "documentation":"<p>The identifier of the VPC that contains the domain controller.</p>"
+        },
+        "SubnetId":{
+          "shape":"SubnetId",
+          "documentation":"<p>Identifier of the subnet in the VPC that contains the domain controller.</p>"
+        },
+        "AvailabilityZone":{
+          "shape":"AvailabilityZone",
+          "documentation":"<p>The Availability Zone where the domain controller is located.</p>"
+        },
+        "Status":{
+          "shape":"DomainControllerStatus",
+          "documentation":"<p>The status of the domain controller.</p>"
+        },
+        "StatusReason":{
+          "shape":"DomainControllerStatusReason",
+          "documentation":"<p>A description of the domain controller state.</p>"
+        },
+        "LaunchTime":{
+          "shape":"LaunchTime",
+          "documentation":"<p>Specifies when the domain controller was created.</p>"
+        },
+        "StatusLastUpdatedDateTime":{
+          "shape":"LastUpdatedDateTime",
+          "documentation":"<p>The date and time that the status was last updated.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about the domain controllers for a specified directory.</p>"
+    },
+    "DomainControllerId":{
+      "type":"string",
+      "pattern":"^dc-[0-9a-f]{10}$"
+    },
+    "DomainControllerIds":{
+      "type":"list",
+      "member":{"shape":"DomainControllerId"}
+    },
+    "DomainControllerLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ExceptionMessage"},
+        "RequestId":{"shape":"RequestId"}
+      },
+      "documentation":"<p>The maximum allowed number of domain controllers per directory was exceeded. The default limit per directory is 20 domain controllers.</p>",
+      "exception":true
+    },
+    "DomainControllerStatus":{
+      "type":"string",
+      "enum":[
+        "Creating",
+        "Active",
+        "Impaired",
+        "Restoring",
+        "Deleting",
+        "Deleted",
+        "Failed"
+      ]
+    },
+    "DomainControllerStatusReason":{"type":"string"},
+    "DomainControllers":{
+      "type":"list",
+      "member":{"shape":"DomainController"}
     },
     "EnableRadiusRequest":{
       "type":"structure",
@@ -2740,6 +2903,28 @@
       "members":{
       },
       "documentation":"<p>The result of an UpdateConditionalForwarder request.</p>"
+    },
+    "UpdateNumberOfDomainControllersRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "DesiredNumber"
+      ],
+      "members":{
+        "DirectoryId":{
+          "shape":"DirectoryId",
+          "documentation":"<p>Identifier of the directory to which the domain controllers will be added or removed.</p>"
+        },
+        "DesiredNumber":{
+          "shape":"DesiredNumberOfDomainControllers",
+          "documentation":"<p>The number of domain controllers desired in the directory.</p>"
+        }
+      }
+    },
+    "UpdateNumberOfDomainControllersResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "UpdateRadiusRequest":{
       "type":"structure",

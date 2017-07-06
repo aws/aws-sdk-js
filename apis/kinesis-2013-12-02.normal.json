@@ -139,7 +139,13 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidArgumentException"},
         {"shape":"ProvisionedThroughputExceededException"},
-        {"shape":"ExpiredIteratorException"}
+        {"shape":"ExpiredIteratorException"},
+        {"shape":"KMSDisabledException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"KMSAccessDeniedException"},
+        {"shape":"KMSNotFoundException"},
+        {"shape":"KMSOptInRequired"},
+        {"shape":"KMSThrottlingException"}
       ],
       "documentation":"<p>Gets data records from an Amazon Kinesis stream's shard.</p> <p>Specify a shard iterator using the <code>ShardIterator</code> parameter. The shard iterator specifies the position in the shard from which you want to start reading data records sequentially. If there are no records available in the portion of the shard that the iterator points to, <a>GetRecords</a> returns an empty list. Note that it might take multiple calls to get to a portion of the shard that contains records.</p> <p>You can scale by provisioning multiple shards per stream while considering service limits (for more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>). Your application should have one thread per shard, each reading continuously from its stream. To read from a stream continually, call <a>GetRecords</a> in a loop. Use <a>GetShardIterator</a> to get the shard iterator to specify in the first <a>GetRecords</a> call. <a>GetRecords</a> returns a new shard iterator in <code>NextShardIterator</code>. Specify the shard iterator returned in <code>NextShardIterator</code> in subsequent calls to <a>GetRecords</a>. Note that if the shard has been closed, the shard iterator can't return more data and <a>GetRecords</a> returns <code>null</code> in <code>NextShardIterator</code>. You can terminate the loop when the shard is closed, or when the shard iterator reaches the record with the sequence number or other attribute that marks it as the last record to process.</p> <p>Each data record can be up to 1 MB in size, and each shard can read up to 2 MB per second. You can ensure that your calls don't exceed the maximum supported size or throughput by using the <code>Limit</code> parameter to specify the maximum number of records that <a>GetRecords</a> can return. Consider your average record size when determining this limit.</p> <p>The size of the data returned by <a>GetRecords</a> varies depending on the utilization of the shard. The maximum size of data that <a>GetRecords</a> can return is 10 MB. If a call returns this amount of data, subsequent calls made within the next 5 seconds throw <code>ProvisionedThroughputExceededException</code>. If there is insufficient provisioned throughput on the shard, subsequent calls made within the next 1 second throw <code>ProvisionedThroughputExceededException</code>. Note that <a>GetRecords</a> won't return any data when it throws an exception. For this reason, we recommend that you wait one second between calls to <a>GetRecords</a>; however, it's possible that the application will get exceptions for longer than 1 second.</p> <p>To detect whether the application is falling behind in processing, you can use the <code>MillisBehindLatest</code> response attribute. You can also monitor the stream using CloudWatch metrics and other mechanisms (see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html\">Monitoring</a> in the <i>Amazon Kinesis Streams Developer Guide</i>).</p> <p>Each Amazon Kinesis record includes a value, <code>ApproximateArrivalTimestamp</code>, that is set when a stream successfully receives and stores a record. This is commonly referred to as a server-side timestamp, whereas a client-side timestamp is set when a data producer creates or sends the record to a stream (a data producer is any data source putting data records into a stream, for example with <a>PutRecords</a>). The timestamp has millisecond precision. There are no guarantees about the timestamp accuracy, or that the timestamp is always increasing. For example, records in a shard or across a stream might have timestamps that are out of order.</p>"
     },
@@ -226,9 +232,15 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidArgumentException"},
-        {"shape":"ProvisionedThroughputExceededException"}
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"KMSDisabledException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"KMSAccessDeniedException"},
+        {"shape":"KMSNotFoundException"},
+        {"shape":"KMSOptInRequired"},
+        {"shape":"KMSThrottlingException"}
       ],
-      "documentation":"<p>Writes a single data record into an Amazon Kinesis stream. Call <code>PutRecord</code> to send data into the stream for real-time ingestion and subsequent processing, one record at a time. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; a partition key; and the data blob itself.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis to distribute data across shards. Amazon Kinesis segregates the data records that belong to a stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to.</p> <p>Partition keys are Unicode strings, with a maximum length limit of 256 characters for each key. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards using the hash key ranges of the shards. You can override hashing the partition key to determine the shard by explicitly specifying a hash value using the <code>ExplicitHashKey</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p> <code>PutRecord</code> returns the shard ID of where the data record was placed and the sequence number that was assigned to the data record.</p> <p>Sequence numbers increase over time and are specific to a shard within a stream, not across all shards within a stream. To guarantee strictly increasing ordering, write serially to a shard and use the <code>SequenceNumberForOrdering</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>If a <code>PutRecord</code> request cannot be processed because of insufficient provisioned throughput on the shard involved in the request, <code>PutRecord</code> throws <code>ProvisionedThroughputExceededException</code>. </p> <p>Data records are accessible for only 24 hours from the time that they are added to a stream.</p>"
+      "documentation":"<p>Writes a single data record into an Amazon Kinesis stream. Call <code>PutRecord</code> to send data into the stream for real-time ingestion and subsequent processing, one record at a time. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; a partition key; and the data blob itself.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis to distribute data across shards. Amazon Kinesis segregates the data records that belong to a stream into multiple shards, using the partition key associated with each data record to determine which shard a given data record belongs to.</p> <p>Partition keys are Unicode strings, with a maximum length limit of 256 characters for each key. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards using the hash key ranges of the shards. You can override hashing the partition key to determine the shard by explicitly specifying a hash value using the <code>ExplicitHashKey</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p> <code>PutRecord</code> returns the shard ID of where the data record was placed and the sequence number that was assigned to the data record.</p> <p>Sequence numbers increase over time and are specific to a shard within a stream, not across all shards within a stream. To guarantee strictly increasing ordering, write serially to a shard and use the <code>SequenceNumberForOrdering</code> parameter. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>If a <code>PutRecord</code> request cannot be processed because of insufficient provisioned throughput on the shard involved in the request, <code>PutRecord</code> throws <code>ProvisionedThroughputExceededException</code>. </p> <p>By default, data records are accessible for 24 hours from the time that they are added to a stream. You can use <a>IncreaseStreamRetentionPeriod</a> or <a>DecreaseStreamRetentionPeriod</a> to modify this retention period.</p>"
     },
     "PutRecords":{
       "name":"PutRecords",
@@ -241,9 +253,15 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidArgumentException"},
-        {"shape":"ProvisionedThroughputExceededException"}
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"KMSDisabledException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"KMSAccessDeniedException"},
+        {"shape":"KMSNotFoundException"},
+        {"shape":"KMSOptInRequired"},
+        {"shape":"KMSThrottlingException"}
       ],
-      "documentation":"<p>Writes multiple data records into an Amazon Kinesis stream in a single call (also referred to as a <code>PutRecords</code> request). Use this operation to send data into the stream for data ingestion and processing. </p> <p>Each <code>PutRecords</code> request can support up to 500 records. Each record in the request can be as large as 1 MB, up to a limit of 5 MB for the entire request, including partition keys. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; and an array of request <code>Records</code>, with each record in the array requiring a partition key and data blob. The record size limit applies to the total size of the partition key and data blob.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis as input to a hash function that maps the partition key and associated data to a specific shard. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>Each record in the <code>Records</code> array may include an optional parameter, <code>ExplicitHashKey</code>, which overrides the partition key to shard mapping. This parameter allows a data producer to determine explicitly the shard where the record is stored. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>The <code>PutRecords</code> response includes an array of response <code>Records</code>. Each record in the response array directly correlates with a record in the request array using natural ordering, from the top to the bottom of the request and response. The response <code>Records</code> array always includes the same number of records as the request array.</p> <p>The response <code>Records</code> array includes both successfully and unsuccessfully processed records. Amazon Kinesis attempts to process all records in each <code>PutRecords</code> request. A single record failure does not stop the processing of subsequent records.</p> <p>A successfully-processed record includes <code>ShardId</code> and <code>SequenceNumber</code> values. The <code>ShardId</code> parameter identifies the shard in the stream where the record is stored. The <code>SequenceNumber</code> parameter is an identifier assigned to the put record, unique to all records in the stream.</p> <p>An unsuccessfully-processed record includes <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error and can be one of the following values: <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed information about the <code>ProvisionedThroughputExceededException</code> exception including the account ID, stream name, and shard ID of the record that was throttled. For more information about partially successful responses, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>By default, data records are accessible for only 24 hours from the time that they are added to an Amazon Kinesis stream. This retention period can be modified using the <a>DecreaseStreamRetentionPeriod</a> and <a>IncreaseStreamRetentionPeriod</a> operations.</p>"
+      "documentation":"<p>Writes multiple data records into an Amazon Kinesis stream in a single call (also referred to as a <code>PutRecords</code> request). Use this operation to send data into the stream for data ingestion and processing. </p> <p>Each <code>PutRecords</code> request can support up to 500 records. Each record in the request can be as large as 1 MB, up to a limit of 5 MB for the entire request, including partition keys. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.</p> <p>You must specify the name of the stream that captures, stores, and transports the data; and an array of request <code>Records</code>, with each record in the array requiring a partition key and data blob. The record size limit applies to the total size of the partition key and data blob.</p> <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p> <p>The partition key is used by Amazon Kinesis as input to a hash function that maps the partition key and associated data to a specific shard. An MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream\">Adding Data to a Stream</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>Each record in the <code>Records</code> array may include an optional parameter, <code>ExplicitHashKey</code>, which overrides the partition key to shard mapping. This parameter allows a data producer to determine explicitly the shard where the record is stored. For more information, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>The <code>PutRecords</code> response includes an array of response <code>Records</code>. Each record in the response array directly correlates with a record in the request array using natural ordering, from the top to the bottom of the request and response. The response <code>Records</code> array always includes the same number of records as the request array.</p> <p>The response <code>Records</code> array includes both successfully and unsuccessfully processed records. Amazon Kinesis attempts to process all records in each <code>PutRecords</code> request. A single record failure does not stop the processing of subsequent records.</p> <p>A successfully-processed record includes <code>ShardId</code> and <code>SequenceNumber</code> values. The <code>ShardId</code> parameter identifies the shard in the stream where the record is stored. The <code>SequenceNumber</code> parameter is an identifier assigned to the put record, unique to all records in the stream.</p> <p>An unsuccessfully-processed record includes <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error and can be one of the following values: <code>ProvisionedThroughputExceededException</code> or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed information about the <code>ProvisionedThroughputExceededException</code> exception including the account ID, stream name, and shard ID of the record that was throttled. For more information about partially successful responses, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords\">Adding Multiple Records with PutRecords</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>By default, data records are accessible for 24 hours from the time that they are added to a stream. You can use <a>IncreaseStreamRetentionPeriod</a> or <a>DecreaseStreamRetentionPeriod</a> to modify this retention period.</p>"
     },
     "RemoveTagsFromStream":{
       "name":"RemoveTagsFromStream",
@@ -275,6 +293,42 @@
       ],
       "documentation":"<p>Splits a shard into two new shards in the Amazon Kinesis stream to increase the stream's capacity to ingest and transport data. <code>SplitShard</code> is called when there is a need to increase the overall capacity of a stream because of an expected increase in the volume of data records being ingested. </p> <p>You can also use <code>SplitShard</code> when a shard appears to be approaching its maximum utilization; for example, the producers sending data into the specific shard are suddenly sending more than previously anticipated. You can also call <code>SplitShard</code> to increase stream capacity, so that more Amazon Kinesis applications can simultaneously read data from the stream for real-time processing. </p> <p>You must specify the shard to be split and the new hash key, which is the position in the shard where the shard gets split in two. In many cases, the new hash key might simply be the average of the beginning and ending hash key, but it can be any hash key value in the range being mapped into the shard. For more information about splitting shards, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html\">Split a Shard</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p> <p>You can use <a>DescribeStream</a> to determine the shard ID and hash key values for the <code>ShardToSplit</code> and <code>NewStartingHashKey</code> parameters that are specified in the <code>SplitShard</code> request.</p> <p> <code>SplitShard</code> is an asynchronous operation. Upon receiving a <code>SplitShard</code> request, Amazon Kinesis immediately returns a response and sets the stream status to <code>UPDATING</code>. After the operation is completed, Amazon Kinesis sets the stream status to <code>ACTIVE</code>. Read and write operations continue to work while the stream is in the <code>UPDATING</code> state. </p> <p>You can use <code>DescribeStream</code> to check the status of the stream, which is returned in <code>StreamStatus</code>. If the stream is in the <code>ACTIVE</code> state, you can call <code>SplitShard</code>. If a stream is in <code>CREATING</code> or <code>UPDATING</code> or <code>DELETING</code> states, <code>DescribeStream</code> returns a <code>ResourceInUseException</code>.</p> <p>If the specified stream does not exist, <code>DescribeStream</code> returns a <code>ResourceNotFoundException</code>. If you try to create more shards than are authorized for your account, you receive a <code>LimitExceededException</code>. </p> <p>For the default shard limit for an AWS account, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>. If you need to increase this limit, <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact AWS Support</a>.</p> <p>If you try to operate on too many streams simultaneously using <a>CreateStream</a>, <a>DeleteStream</a>, <a>MergeShards</a>, and/or <a>SplitShard</a>, you receive a <code>LimitExceededException</code>. </p> <p> <code>SplitShard</code> has limit of 5 transactions per second per account.</p>"
     },
+    "StartStreamEncryption":{
+      "name":"StartStreamEncryption",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartStreamEncryptionInput"},
+      "errors":[
+        {"shape":"InvalidArgumentException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"KMSDisabledException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"KMSAccessDeniedException"},
+        {"shape":"KMSNotFoundException"},
+        {"shape":"KMSOptInRequired"},
+        {"shape":"KMSThrottlingException"}
+      ],
+      "documentation":"<p>Enables or updates server-side encryption using an AWS KMS key for a specified stream. </p> <p>Starting encryption is an asynchronous operation. Upon receiving the request, Amazon Kinesis returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Amazon Kinesis sets the status of the stream back to <code>ACTIVE</code>. Updating or applying encryption normally takes a few seconds to complete but it can take minutes. You can continue to read and write data to your stream while its status is <code>UPDATING</code>. Once the status of the stream is <code>ACTIVE</code>, records written to the stream will begin to be encrypted. </p> <p>API Limits: You can successfully apply a new AWS KMS key for server-side encryption 25 times in a rolling 24 hour period.</p> <p>Note: It can take up to 5 seconds after the stream is in an <code>ACTIVE</code> status before all records written to the stream are encrypted. After you’ve enabled encryption, you can verify encryption was applied by inspecting the API response from <code>PutRecord</code> or <code>PutRecords</code>.</p>"
+    },
+    "StopStreamEncryption":{
+      "name":"StopStreamEncryption",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopStreamEncryptionInput"},
+      "errors":[
+        {"shape":"InvalidArgumentException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Disables server-side encryption for a specified stream. </p> <p>Stopping encryption is an asynchronous operation. Upon receiving the request, Amazon Kinesis returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Amazon Kinesis sets the status of the stream back to <code>ACTIVE</code>. Stopping encryption normally takes a few seconds to complete but it can take minutes. You can continue to read and write data to your stream while its status is <code>UPDATING</code>. Once the status of the stream is <code>ACTIVE</code> records written to the stream will no longer be encrypted by the Amazon Kinesis Streams service. </p> <p>API Limits: You can successfully disable server-side encryption 25 times in a rolling 24 hour period. </p> <p>Note: It can take up to 5 seconds after the stream is in an <code>ACTIVE</code> status before all records written to the stream are no longer subject to encryption. After you’ve disabled encryption, you can verify encryption was not applied by inspecting the API response from <code>PutRecord</code> or <code>PutRecords</code>.</p>"
+    },
     "UpdateShardCount":{
       "name":"UpdateShardCount",
       "http":{
@@ -289,7 +343,7 @@
         {"shape":"ResourceInUseException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Updates the shard count of the specified stream to the specified number of shards.</p> <p>Updating the shard count is an asynchronous operation. Upon receiving the request, Amazon Kinesis returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Amazon Kinesis sets the status of the stream back to <code>ACTIVE</code>. Depending on the size of the stream, the scaling action could take a few minutes to complete. You can continue to read and write data to your stream while its status is <code>UPDATING</code>.</p> <p>To update the shard count, Amazon Kinesis performs splits and merges and individual shards. This can cause short-lived shards to be created, in addition to the final shards. We recommend that you double or halve the shard count, as this results in the fewest number of splits or merges.</p> <p>This operation has a rate limit of twice per rolling 24 hour period. You cannot scale above double your current shard count, scale below half your current shard count, or exceed the shard limits for your account.</p> <p>For the default limits for an AWS account, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>. If you need to increase a limit, <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact AWS Support</a>.</p>"
+      "documentation":"<p>Updates the shard count of the specified stream to the specified number of shards.</p> <p>Updating the shard count is an asynchronous operation. Upon receiving the request, Amazon Kinesis returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Amazon Kinesis sets the status of the stream back to <code>ACTIVE</code>. Depending on the size of the stream, the scaling action could take a few minutes to complete. You can continue to read and write data to your stream while its status is <code>UPDATING</code>.</p> <p>To update the shard count, Amazon Kinesis performs splits or merges on individual shards. This can cause short-lived shards to be created, in addition to the final shards. We recommend that you double or halve the shard count, as this results in the fewest number of splits or merges.</p> <p>This operation has the following limits, which are per region per account unless otherwise noted:</p> <ul> <li> <p>scale more than twice per rolling 24 hour period</p> </li> <li> <p>scale up above double your current shard count</p> </li> <li> <p>scale down below half your current shard count</p> </li> <li> <p>scale up above 200 shards in a stream</p> </li> <li> <p>scale a stream with more than 200 shards down unless the result is less than 200 shards</p> </li> <li> <p>scale up above the shard limits for your account</p> </li> <li> <p/> </li> </ul> <p>For the default limits for an AWS account, see <a href=\"http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Streams Developer Guide</i>. If you need to increase a limit, <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact AWS Support</a>.</p>"
     }
   },
   "shapes":{
@@ -456,6 +510,13 @@
         }
       },
       "documentation":"<p>Represents the input for <a>EnableEnhancedMonitoring</a>.</p>"
+    },
+    "EncryptionType":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "KMS"
+      ]
     },
     "EnhancedMetrics":{
       "type":"structure",
@@ -632,6 +693,77 @@
       },
       "documentation":"<p>A specified parameter exceeds its restrictions, is not supported, or can't be used. For more information, see the returned message.</p>",
       "exception":true
+    },
+    "KMSAccessDeniedException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>A message that provides information about the error.</p>"
+        }
+      },
+      "documentation":"<p>The ciphertext references a key that doesn't exist or that you don't have access to.</p>",
+      "exception":true
+    },
+    "KMSDisabledException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>A message that provides information about the error.</p>"
+        }
+      },
+      "documentation":"<p>The request was rejected because the specified CMK isn't enabled.</p>",
+      "exception":true
+    },
+    "KMSInvalidStateException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>A message that provides information about the error.</p>"
+        }
+      },
+      "documentation":"<p>The request was rejected because the state of the specified resource isn't valid for this request. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">How Key State Affects Use of a Customer Master Key</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>",
+      "exception":true
+    },
+    "KMSNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>A message that provides information about the error.</p>"
+        }
+      },
+      "documentation":"<p>The request was rejected because the specified entity or resource couldn't be found.</p>",
+      "exception":true
+    },
+    "KMSOptInRequired":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>A message that provides information about the error.</p>"
+        }
+      },
+      "documentation":"<p>The AWS access key ID needs a subscription for the service.</p>",
+      "exception":true
+    },
+    "KMSThrottlingException":{
+      "type":"structure",
+      "members":{
+        "message":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>A message that provides information about the error.</p>"
+        }
+      },
+      "documentation":"<p>The request was denied due to request throttling. For more information about throttling, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second\">Limits</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>",
+      "exception":true
+    },
+    "KeyId":{
+      "type":"string",
+      "max":2048,
+      "min":1
     },
     "LimitExceededException":{
       "type":"structure",
@@ -835,6 +967,10 @@
         "SequenceNumber":{
           "shape":"SequenceNumber",
           "documentation":"<p>The sequence number identifier that was assigned to the put data record. The sequence number for the record is unique across all records in the stream. A sequence number is the identifier associated with every record put into the stream.</p>"
+        },
+        "EncryptionType":{
+          "shape":"EncryptionType",
+          "documentation":"<p>The encryption type to use on the record. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records in the stream.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed KMS key.</p> </li> </ul>"
         }
       },
       "documentation":"<p>Represents the output for <code>PutRecord</code>.</p>"
@@ -868,6 +1004,10 @@
         "Records":{
           "shape":"PutRecordsResultEntryList",
           "documentation":"<p>An array of successfully and unsuccessfully processed record results, correlated with the request by natural ordering. A record that is successfully added to a stream includes <code>SequenceNumber</code> and <code>ShardId</code> in the result. A record that fails to be added to a stream includes <code>ErrorCode</code> and <code>ErrorMessage</code> in the result.</p>"
+        },
+        "EncryptionType":{
+          "shape":"EncryptionType",
+          "documentation":"<p>The encryption type used on the records. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records using a customer-managed KMS key.</p> </li> </ul>"
         }
       },
       "documentation":"<p> <code>PutRecords</code> results.</p>"
@@ -938,7 +1078,7 @@
       "members":{
         "SequenceNumber":{
           "shape":"SequenceNumber",
-          "documentation":"<p>The unique identifier of the record in the stream.</p>"
+          "documentation":"<p>The unique identifier of the record within its shard.</p>"
         },
         "ApproximateArrivalTimestamp":{
           "shape":"Timestamp",
@@ -951,6 +1091,10 @@
         "PartitionKey":{
           "shape":"PartitionKey",
           "documentation":"<p>Identifies which shard in the stream the data record is assigned to.</p>"
+        },
+        "EncryptionType":{
+          "shape":"EncryptionType",
+          "documentation":"<p>The encryption type used on the record. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records in the stream.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed KMS key.</p> </li> </ul>"
         }
       },
       "documentation":"<p>The unit of data of the Amazon Kinesis stream, which is composed of a sequence number, a partition key, and a data blob.</p>"
@@ -1106,6 +1250,50 @@
       },
       "documentation":"<p>Represents the input for <code>SplitShard</code>.</p>"
     },
+    "StartStreamEncryptionInput":{
+      "type":"structure",
+      "required":[
+        "StreamName",
+        "EncryptionType",
+        "KeyId"
+      ],
+      "members":{
+        "StreamName":{
+          "shape":"StreamName",
+          "documentation":"<p>The name of the stream for which to start encrypting records.</p>"
+        },
+        "EncryptionType":{
+          "shape":"EncryptionType",
+          "documentation":"<p>The encryption type to use. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Not valid for this operation. An <code>InvalidOperationException</code> will be thrown.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed KMS key.</p> </li> </ul>"
+        },
+        "KeyId":{
+          "shape":"KeyId",
+          "documentation":"<p>The GUID for the customer-managed KMS key to use for encryption. You can also use a Kinesis-owned master key by specifying the alias <code>aws/kinesis</code>.</p>"
+        }
+      }
+    },
+    "StopStreamEncryptionInput":{
+      "type":"structure",
+      "required":[
+        "StreamName",
+        "EncryptionType",
+        "KeyId"
+      ],
+      "members":{
+        "StreamName":{
+          "shape":"StreamName",
+          "documentation":"<p>The name of the stream on which to stop encrypting records.</p>"
+        },
+        "EncryptionType":{
+          "shape":"EncryptionType",
+          "documentation":"<p>The encryption type. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Not valid for this operation. An <code>InvalidOperationException</code> will be thrown.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed KMS key.</p> </li> </ul>"
+        },
+        "KeyId":{
+          "shape":"KeyId",
+          "documentation":"<p>The GUID for the customer-managed key that was used for encryption.</p>"
+        }
+      }
+    },
     "StreamARN":{"type":"string"},
     "StreamDescription":{
       "type":"structure",
@@ -1151,6 +1339,14 @@
         "EnhancedMonitoring":{
           "shape":"EnhancedMonitoringList",
           "documentation":"<p>Represents the current enhanced monitoring settings of the stream.</p>"
+        },
+        "EncryptionType":{
+          "shape":"EncryptionType",
+          "documentation":"<p>The server-side encryption type used on the stream. This parameter can be one of the following values:</p> <ul> <li> <p> <code>NONE</code>: Do not encrypt the records in the stream.</p> </li> <li> <p> <code>KMS</code>: Use server-side encryption on the records in the stream using a customer-managed KMS key.</p> </li> </ul>"
+        },
+        "KeyId":{
+          "shape":"KeyId",
+          "documentation":"<p>The GUID for the customer-managed KMS key used for encryption on the stream.</p>"
         }
       },
       "documentation":"<p>Represents the output for <a>DescribeStream</a>.</p>"

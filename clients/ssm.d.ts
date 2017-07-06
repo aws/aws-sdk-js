@@ -76,11 +76,11 @@ declare class SSM extends Service {
    */
   createPatchBaseline(callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
   /**
-   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync operation. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Creating a Resource Data Sync.
+   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync operation. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Configuring Resource Data Sync for Inventory.
    */
   createResourceDataSync(params: SSM.Types.CreateResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
-   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync operation. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Creating a Resource Data Sync.
+   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync operation. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Configuring Resource Data Sync for Inventory.
    */
   createResourceDataSync(callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class SSM extends Service {
    */
   describeEffectiveInstanceAssociations(callback?: (err: AWSError, data: SSM.Types.DescribeEffectiveInstanceAssociationsResult) => void): Request<SSM.Types.DescribeEffectiveInstanceAssociationsResult, AWSError>;
   /**
-   * Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline.
+   * Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline. Note that this API applies only to Windows patch baselines.
    */
   describeEffectivePatchesForPatchBaseline(params: SSM.Types.DescribeEffectivePatchesForPatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.DescribeEffectivePatchesForPatchBaselineResult) => void): Request<SSM.Types.DescribeEffectivePatchesForPatchBaselineResult, AWSError>;
   /**
-   * Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline.
+   * Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline. Note that this API applies only to Windows patch baselines.
    */
   describeEffectivePatchesForPatchBaseline(callback?: (err: AWSError, data: SSM.Types.DescribeEffectivePatchesForPatchBaselineResult) => void): Request<SSM.Types.DescribeEffectivePatchesForPatchBaselineResult, AWSError>;
   /**
@@ -380,19 +380,19 @@ declare class SSM extends Service {
    */
   getCommandInvocation(callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
-   * Retrieves the default patch baseline.
+   * Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.
    */
   getDefaultPatchBaseline(params: SSM.Types.GetDefaultPatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.GetDefaultPatchBaselineResult) => void): Request<SSM.Types.GetDefaultPatchBaselineResult, AWSError>;
   /**
-   * Retrieves the default patch baseline.
+   * Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.
    */
   getDefaultPatchBaseline(callback?: (err: AWSError, data: SSM.Types.GetDefaultPatchBaselineResult) => void): Request<SSM.Types.GetDefaultPatchBaselineResult, AWSError>;
   /**
-   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-ApplyPatchBaseline Systems Manager document. 
+   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document. 
    */
   getDeployablePatchSnapshotForInstance(params: SSM.Types.GetDeployablePatchSnapshotForInstanceRequest, callback?: (err: AWSError, data: SSM.Types.GetDeployablePatchSnapshotForInstanceResult) => void): Request<SSM.Types.GetDeployablePatchSnapshotForInstanceResult, AWSError>;
   /**
-   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-ApplyPatchBaseline Systems Manager document. 
+   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document. 
    */
   getDeployablePatchSnapshotForInstance(callback?: (err: AWSError, data: SSM.Types.GetDeployablePatchSnapshotForInstanceResult) => void): Request<SSM.Types.GetDeployablePatchSnapshotForInstanceResult, AWSError>;
   /**
@@ -1410,6 +1410,10 @@ declare namespace SSM {
   }
   export interface CreatePatchBaselineRequest {
     /**
+     * Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS.
+     */
+    OperatingSystem?: OperatingSystem;
+    /**
      * The name of the patch baseline.
      */
     Name: BaselineName;
@@ -1425,6 +1429,10 @@ declare namespace SSM {
      * A list of explicitly approved patches for the baseline.
      */
     ApprovedPatches?: PatchIdList;
+    /**
+     * Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. Valid compliance severity levels include the following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value is UNSPECIFIED.
+     */
+    ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
      * A list of explicitly rejected patches for the baseline.
      */
@@ -2190,6 +2198,10 @@ declare namespace SSM {
      */
     MaxResults?: PatchBaselineMaxResults;
     /**
+     * One or more filters. Use a filter to return a more specific list of results.
+     */
+    Filters?: PatchOrchestratorFilterList;
+    /**
      * The token for the next set of items to return. (You received this token from a previous call.)
      */
     NextToken?: NextToken;
@@ -2505,12 +2517,20 @@ declare namespace SSM {
     StandardErrorUrl?: Url;
   }
   export interface GetDefaultPatchBaselineRequest {
+    /**
+     * Returns the default patch baseline for the specified operating system.
+     */
+    OperatingSystem?: OperatingSystem;
   }
   export interface GetDefaultPatchBaselineResult {
     /**
      * The ID of the default patch baseline.
      */
     BaselineId?: BaselineId;
+    /**
+     * The operating system for the returned patch baseline. 
+     */
+    OperatingSystem?: OperatingSystem;
   }
   export interface GetDeployablePatchSnapshotForInstanceRequest {
     /**
@@ -2535,6 +2555,10 @@ declare namespace SSM {
      * A pre-signed Amazon S3 URL that can be used to download the patch snapshot.
      */
     SnapshotDownloadUrl?: SnapshotDownloadUrl;
+    /**
+     * Returns the specific operating system (for example Windows Server 2012 or Amazon Linux 2015.09) on the instance for the specified patch snapshot.
+     */
+    Product?: Product;
   }
   export interface GetDocumentRequest {
     /**
@@ -2863,6 +2887,10 @@ declare namespace SSM {
      * The name of the patch group whose patch baseline should be retrieved.
      */
     PatchGroup: PatchGroup;
+    /**
+     * Returns he operating system rule specified for patch groups using the patch baseline.
+     */
+    OperatingSystem?: OperatingSystem;
   }
   export interface GetPatchBaselineForPatchGroupResult {
     /**
@@ -2873,6 +2901,10 @@ declare namespace SSM {
      * The name of the patch group.
      */
     PatchGroup?: PatchGroup;
+    /**
+     * The operating system rule specified for patch groups using the patch baseline.
+     */
+    OperatingSystem?: OperatingSystem;
   }
   export interface GetPatchBaselineRequest {
     /**
@@ -2890,6 +2922,10 @@ declare namespace SSM {
      */
     Name?: BaselineName;
     /**
+     * Returns the operating system specified for the patch baseline.
+     */
+    OperatingSystem?: OperatingSystem;
+    /**
      * A set of global filters used to exclude patches from the baseline.
      */
     GlobalFilters?: PatchFilterGroup;
@@ -2901,6 +2937,10 @@ declare namespace SSM {
      * A list of explicitly approved patches for the baseline.
      */
     ApprovedPatches?: PatchIdList;
+    /**
+     * Returns the specified compliance severity level for approved patches in the patch baseline.
+     */
+    ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
      * A list of explicitly rejected patches for the baseline.
      */
@@ -3158,11 +3198,11 @@ declare namespace SSM {
     /**
      * The time the most recent patching operation was started on the instance.
      */
-    OperationStartTime: PatchOperationStartTime;
+    OperationStartTime: DateTime;
     /**
      * The time the most recent patching operation completed on the instance.
      */
-    OperationEndTime: PatchOperationEndTime;
+    OperationEndTime: DateTime;
     /**
      * The type of patching operation that was performed: SCAN (assess patch compliance state) or INSTALL (install missing patches).
      */
@@ -3842,6 +3882,7 @@ declare namespace SSM {
   export type NotificationEvent = "All"|"InProgress"|"Success"|"TimedOut"|"Cancelled"|"Failed"|string;
   export type NotificationEventList = NotificationEvent[];
   export type NotificationType = "Command"|"Invocation"|string;
+  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|string;
   export type OwnerInformation = string;
   export type PSParameterName = string;
   export type PSParameterValue = string;
@@ -4031,11 +4072,15 @@ declare namespace SSM {
      */
     BaselineName?: BaselineName;
     /**
+     * Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS. 
+     */
+    OperatingSystem?: OperatingSystem;
+    /**
      * The description of the patch baseline.
      */
     BaselineDescription?: BaselineDescription;
     /**
-     * Whether this is the default baseline.
+     * Whether this is the default baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.
      */
     DefaultBaseline?: DefaultBaseline;
   }
@@ -4048,7 +4093,7 @@ declare namespace SSM {
      */
     Title: PatchTitle;
     /**
-     * The Microsoft Knowledge Base ID of the patch.
+     * The operating system-specific ID of the patch.
      */
     KBId: PatchKbNumber;
     /**
@@ -4064,12 +4109,13 @@ declare namespace SSM {
      */
     State: PatchComplianceDataState;
     /**
-     * The date/time the patch was installed on the instance.
+     * The date/time the patch was installed on the instance. Note that not all operating systems provide this level of information.
      */
-    InstalledTime: PatchInstalledTime;
+    InstalledTime: DateTime;
   }
   export type PatchComplianceDataList = PatchComplianceData[];
   export type PatchComplianceDataState = "INSTALLED"|"INSTALLED_OTHER"|"MISSING"|"NOT_APPLICABLE"|"FAILED"|string;
+  export type PatchComplianceLevel = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"INFORMATIONAL"|"UNSPECIFIED"|string;
   export type PatchComplianceMaxResults = number;
   export type PatchContentUrl = string;
   export type PatchDeploymentStatus = "APPROVED"|"PENDING_APPROVAL"|"EXPLICIT_APPROVED"|"EXPLICIT_REJECTED"|string;
@@ -4091,7 +4137,7 @@ declare namespace SSM {
      */
     PatchFilters: PatchFilterList;
   }
-  export type PatchFilterKey = "PRODUCT"|"CLASSIFICATION"|"MSRC_SEVERITY"|"PATCH_ID"|string;
+  export type PatchFilterKey = "PRODUCT"|"CLASSIFICATION"|"MSRC_SEVERITY"|"PATCH_ID"|"SECTION"|"PRIORITY"|"SEVERITY"|string;
   export type PatchFilterList = PatchFilter[];
   export type PatchFilterValue = string;
   export type PatchFilterValueList = PatchFilterValue[];
@@ -4112,7 +4158,6 @@ declare namespace SSM {
   export type PatchIdList = PatchId[];
   export type PatchInstalledCount = number;
   export type PatchInstalledOtherCount = number;
-  export type PatchInstalledTime = Date;
   export type PatchKbNumber = string;
   export type PatchLanguage = string;
   export type PatchList = Patch[];
@@ -4120,8 +4165,6 @@ declare namespace SSM {
   export type PatchMsrcNumber = string;
   export type PatchMsrcSeverity = string;
   export type PatchNotApplicableCount = number;
-  export type PatchOperationEndTime = Date;
-  export type PatchOperationStartTime = Date;
   export type PatchOperationType = "Scan"|"Install"|string;
   export interface PatchOrchestratorFilter {
     /**
@@ -4145,6 +4188,10 @@ declare namespace SSM {
      */
     PatchFilterGroup: PatchFilterGroup;
     /**
+     * A compliance severity level for all approved patches in a patch baseline. Valid compliance severity levels include the following: Unspecified, Critical, High, Medium, Low, and Informational.
+     */
+    ComplianceLevel?: PatchComplianceLevel;
+    /**
      * The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline.
      */
     ApproveAfterDays: ApproveAfterDays;
@@ -4163,6 +4210,10 @@ declare namespace SSM {
      */
     DeploymentStatus?: PatchDeploymentStatus;
     /**
+     * The compliance severity level for a patch.
+     */
+    ComplianceLevel?: PatchComplianceLevel;
+    /**
      * The date the patch was approved (or will be approved if the status is PENDING_APPROVAL).
      */
     ApprovalDate?: DateTime;
@@ -4172,6 +4223,7 @@ declare namespace SSM {
   export type PingStatus = "Online"|"ConnectionLost"|"Inactive"|string;
   export type PlatformType = "Windows"|"Linux"|string;
   export type PlatformTypeList = PlatformType[];
+  export type Product = string;
   export interface PutInventoryRequest {
     /**
      * One or more instance IDs where you want to add or update inventory items.
@@ -4802,6 +4854,10 @@ declare namespace SSM {
      */
     ApprovedPatches?: PatchIdList;
     /**
+     * Assigns a new compliance severity level to an existing patch baseline.
+     */
+    ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
+    /**
      * A list of explicitly rejected patches for the baseline.
      */
     RejectedPatches?: PatchIdList;
@@ -4820,6 +4876,10 @@ declare namespace SSM {
      */
     Name?: BaselineName;
     /**
+     * The operating system rule used by the updated patch baseline.
+     */
+    OperatingSystem?: OperatingSystem;
+    /**
      * A set of global filters used to exclude patches from the baseline.
      */
     GlobalFilters?: PatchFilterGroup;
@@ -4831,6 +4891,10 @@ declare namespace SSM {
      * A list of explicitly approved patches for the baseline.
      */
     ApprovedPatches?: PatchIdList;
+    /**
+     * The compliance severity level assigned to the patch baseline after the update completed.
+     */
+    ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
      * A list of explicitly rejected patches for the baseline.
      */

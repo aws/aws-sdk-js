@@ -8,6 +8,7 @@ AWS.DirectoryService = Service.defineService('directoryservice', ['2015-04-16'])
 Object.defineProperty(apiLoader.services['directoryservice'], '2015-04-16', {
   get: function get() {
     var model = require('../apis/ds-2015-04-16.min.json');
+    model.paginators = require('../apis/ds-2015-04-16.paginators.json').pagination;
     return model;
   },
   enumerable: true,

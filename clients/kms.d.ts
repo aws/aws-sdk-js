@@ -751,6 +751,7 @@ declare namespace KMS {
      */
     KeyArn?: ArnType;
   }
+  export type KeyManagerType = "AWS"|"CUSTOMER"|string;
   export interface KeyMetadata {
     /**
      * The twelve-digit account ID of the AWS account that owns the CMK.
@@ -800,6 +801,10 @@ declare namespace KMS {
      * Specifies whether the CMK's key material expires. This value is present only when Origin is EXTERNAL, otherwise this value is omitted.
      */
     ExpirationModel?: ExpirationModelType;
+    /**
+     * The CMK's manager. CMKs are either customer-managed or AWS-managed. For more information about the difference, see Customer Master Keys in the AWS Key Management Service Developer Guide.
+     */
+    KeyManager?: KeyManagerType;
   }
   export type KeyState = "Enabled"|"Disabled"|"PendingDeletion"|"PendingImport"|string;
   export type KeyUsageType = "ENCRYPT_DECRYPT"|string;

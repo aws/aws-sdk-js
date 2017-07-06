@@ -156,6 +156,14 @@ declare class DirectoryService extends Service {
    */
   describeDirectories(callback?: (err: AWSError, data: DirectoryService.Types.DescribeDirectoriesResult) => void): Request<DirectoryService.Types.DescribeDirectoriesResult, AWSError>;
   /**
+   * Provides information about any domain controllers in your directory.
+   */
+  describeDomainControllers(params: DirectoryService.Types.DescribeDomainControllersRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeDomainControllersResult) => void): Request<DirectoryService.Types.DescribeDomainControllersResult, AWSError>;
+  /**
+   * Provides information about any domain controllers in your directory.
+   */
+  describeDomainControllers(callback?: (err: AWSError, data: DirectoryService.Types.DescribeDomainControllersResult) => void): Request<DirectoryService.Types.DescribeDomainControllersResult, AWSError>;
+  /**
    * Obtains information about which SNS topics receive status messages from the specified directory. If no input parameters are provided, such as DirectoryId or TopicName, this request describes all of the associations in the account.
    */
   describeEventTopics(params: DirectoryService.Types.DescribeEventTopicsRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeEventTopicsResult) => void): Request<DirectoryService.Types.DescribeEventTopicsResult, AWSError>;
@@ -299,6 +307,14 @@ declare class DirectoryService extends Service {
    * Updates a conditional forwarder that has been set up for your AWS directory.
    */
   updateConditionalForwarder(callback?: (err: AWSError, data: DirectoryService.Types.UpdateConditionalForwarderResult) => void): Request<DirectoryService.Types.UpdateConditionalForwarderResult, AWSError>;
+  /**
+   * Adds or removes domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request.
+   */
+  updateNumberOfDomainControllers(params: DirectoryService.Types.UpdateNumberOfDomainControllersRequest, callback?: (err: AWSError, data: DirectoryService.Types.UpdateNumberOfDomainControllersResult) => void): Request<DirectoryService.Types.UpdateNumberOfDomainControllersResult, AWSError>;
+  /**
+   * Adds or removes domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request.
+   */
+  updateNumberOfDomainControllers(callback?: (err: AWSError, data: DirectoryService.Types.UpdateNumberOfDomainControllersResult) => void): Request<DirectoryService.Types.UpdateNumberOfDomainControllersResult, AWSError>;
   /**
    * Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector directory.
    */
@@ -556,6 +572,9 @@ declare namespace DirectoryService {
      * A textual description for the directory. This label will appear on the AWS console Directory Details page after the directory is created.
      */
     Description?: Description;
+    /**
+     * Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
+     */
     VpcSettings: DirectoryVpcSettings;
   }
   export interface CreateMicrosoftADResult {
@@ -719,6 +738,34 @@ declare namespace DirectoryService {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeDomainControllersRequest {
+    /**
+     * Identifier of the directory for which to retrieve the domain controller information.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * A list of identifiers for the domain controllers whose information will be provided.
+     */
+    DomainControllerIds?: DomainControllerIds;
+    /**
+     * The DescribeDomainControllers.NextToken value from a previous call to DescribeDomainControllers. Pass null if this is the first call. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return.
+     */
+    Limit?: Limit;
+  }
+  export interface DescribeDomainControllersResult {
+    /**
+     * List of the DomainController objects that were retrieved.
+     */
+    DomainControllers?: DomainControllers;
+    /**
+     * If not null, more results are available. Pass this value for the NextToken parameter in a subsequent call to DescribeDomainControllers retrieve the next set of items.
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeEventTopicsRequest {
     /**
      * The Directory ID for which to get the list of associated SNS topics. If this member is null, associations for all Directory IDs are returned.
@@ -792,6 +839,7 @@ declare namespace DirectoryService {
     NextToken?: NextToken;
   }
   export type Description = string;
+  export type DesiredNumberOfDomainControllers = number;
   export interface DirectoryConnectSettings {
     /**
      * The identifier of the VPC in which the AD Connector is created.
@@ -909,6 +957,10 @@ declare namespace DirectoryService {
      * Indicates if single-sign on is enabled for the directory. For more information, see EnableSso and DisableSso.
      */
     SsoEnabled?: SsoEnabled;
+    /**
+     * The desired number of domain controllers in the directory if the directory is Microsoft AD.
+     */
+    DesiredNumberOfDomainControllers?: DesiredNumberOfDomainControllers;
   }
   export type DirectoryDescriptions = DirectoryDescription[];
   export type DirectoryId = string;
@@ -1009,6 +1061,53 @@ declare namespace DirectoryService {
   export interface DisableSsoResult {
   }
   export type DnsIpAddrs = IpAddr[];
+  export interface DomainController {
+    /**
+     * Identifier of the directory where the domain controller resides.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * Identifies a specific domain controller in the directory.
+     */
+    DomainControllerId?: DomainControllerId;
+    /**
+     * The IP address of the domain controller.
+     */
+    DnsIpAddr?: IpAddr;
+    /**
+     * The identifier of the VPC that contains the domain controller.
+     */
+    VpcId?: VpcId;
+    /**
+     * Identifier of the subnet in the VPC that contains the domain controller.
+     */
+    SubnetId?: SubnetId;
+    /**
+     * The Availability Zone where the domain controller is located.
+     */
+    AvailabilityZone?: AvailabilityZone;
+    /**
+     * The status of the domain controller.
+     */
+    Status?: DomainControllerStatus;
+    /**
+     * A description of the domain controller state.
+     */
+    StatusReason?: DomainControllerStatusReason;
+    /**
+     * Specifies when the domain controller was created.
+     */
+    LaunchTime?: LaunchTime;
+    /**
+     * The date and time that the status was last updated.
+     */
+    StatusLastUpdatedDateTime?: LastUpdatedDateTime;
+  }
+  export type DomainControllerId = string;
+  export type DomainControllerIds = DomainControllerId[];
+  export type DomainControllerStatus = "Creating"|"Active"|"Impaired"|"Restoring"|"Deleting"|"Deleted"|"Failed"|string;
+  export type DomainControllerStatusReason = string;
+  export type DomainControllers = DomainController[];
   export interface EnableRadiusRequest {
     /**
      * The identifier of the directory for which to enable MFA.
@@ -1492,6 +1591,18 @@ declare namespace DirectoryService {
     DnsIpAddrs: DnsIpAddrs;
   }
   export interface UpdateConditionalForwarderResult {
+  }
+  export interface UpdateNumberOfDomainControllersRequest {
+    /**
+     * Identifier of the directory to which the domain controllers will be added or removed.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The number of domain controllers desired in the directory.
+     */
+    DesiredNumber: DesiredNumberOfDomainControllers;
+  }
+  export interface UpdateNumberOfDomainControllersResult {
   }
   export interface UpdateRadiusRequest {
     /**
