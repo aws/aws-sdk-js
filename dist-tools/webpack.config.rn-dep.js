@@ -2,16 +2,14 @@
 var path = require('path');
 module.exports = {
     // Specify the entry point for our app.
-    entry: {
-        'aws-sdk-core-react-native': path.join(__dirname, '..', 'lib', 'core.js'),
-        'aws-sdk-util-react-native': path.join(__dirname, '..', 'lib', 'util.js'),
-    },
+    entry: [
+        'xml2js'
+    ],
     // Specify the output file containing our bundled code
     output: {
         path: path.join(__dirname, '..', 'dist'),
-        filename: '[name].js',
-        libraryTarget: 'umd',
-        //library: 'AWS'
+        filename: 'xml2js.js',
+        libraryTarget: 'commonjs2',
     },
     resolve: {},
     module: {

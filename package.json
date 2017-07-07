@@ -39,6 +39,7 @@
   "dependencies": {
     "buffer": "4.9.1",
     "crypto-browserify": "1.0.9",
+    "events": "^1.1.1",
     "jmespath": "0.15.0",
     "querystring": "0.2.0",
     "sax": "1.2.1",
@@ -57,37 +58,12 @@
   "browserify": {
     "transform": "./dist-tools/transform.js"
   },
-  "react-native-apiloader": {
-    "lib/aws.js": "../react-native.js",
-    "lib/browser.js": "../react-native.js",
-    "fs": "./lib/empty.js",
-    "uuid/lib/rng": "uuid/lib/rng-browser.js",
-    "./lib/node_loader.js": "./lib/react-native-loader.js",
-    "./lib/browser_loader.js": "./lib/react-native-loader.js",
-    "index.js": "./react-native.js",
-    "./support/isBuffer.js": "./support/isBufferBrowser.js"
-  },
-  "react-native-base": {
-    "lib/aws.js": "../react-native.js",
-    "lib/browser.js": "../react-native.js",
-    "fs": "./lib/empty.js",
-    "uuid/lib/rng": "uuid/lib/rng-browser.js",
-    "./lib/node_loader.js": "./lib/react-native-loader.js",
-    "./lib/browser_loader.js": "./lib/react-native-loader.js",
-    "index.js": "./react-native.js",
-    "./support/isBuffer.js": "./support/isBufferBrowser.js"
-  },
-  "react-native-test": {
-    "fs": "./lib/empty.js",
-    "./lib/node_loader.js": "./dist/aws-sdk-base-react-native",
-    "./lib/browser_loader.js": "./dist/aws-sdk-base-react-native",
-    "./lib/react-native-loader.js": "./dist/aws-sdk-base-react-native"
-  },
   "react-native": {
     "fs": "./lib/empty.js",
     "./lib/node_loader.js": "./lib/react-native-loader.js",
     "./lib/browser_loader.js": "./lib/react-native-loader.js",
-    "./lib/core.js": "./dist/aws-sdk-core-react-native.js"
+    "./lib/core.js": "./dist/aws-sdk-core-react-native.js",
+    "xml2js": "./dist/xml2js.js"
   },
   "directories": {
     "lib": "lib"
@@ -155,7 +131,10 @@
     "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`",
     "tstest": "tsc -p ./ts",
     "add-change": "node ./scripts/changelog/add-change.js",
-    "build-react-native": "webpack --config dist-tools/webpack.config.rn.js",
+    "build-react-native-deps": "webpack --config dist-tools/webpack.config.rn-dep.js",
+    "build-react-native-core": "webpack --config dist-tools/webpack.config.rn-core.js",
+    "build-react-native-dist": "webpack --config dist-tools/webpack.config.rn.js",
+    "build-react-native": "npm -s run-script build-react-native-deps && npm -s run-script build-react-native-core && npm -s run-script build-react-native-dist",
     "react-native-test": "npm -s run-script build-react-native && rake reactnative:test && karma start"
   }
 }
