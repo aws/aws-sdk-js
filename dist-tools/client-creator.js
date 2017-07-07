@@ -159,14 +159,12 @@ ClientCreator.prototype.generateAllServicesSource = function generateAllServices
   var self = this;
   var code = '';
   code += 'require(\'../lib/node_loader\');\n';
-  //code += 'var AWS = require(\'../lib/core\');\n\n';
   code += 'module.exports = {\n';
 
   services.forEach(function(service, idx) {
     var className = metadata[service].name;
     var tab = '  ';
     var isLast = idx === services.length - 1;
-    //code += self.generateDefinePropertySource('AWS', service, className);
     code += self.tabs(1) + className + ': require(\'./' + service + '\')' + (isLast ? '' : ',') + '\n';
   });
   code += '};';
