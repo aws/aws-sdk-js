@@ -86,8 +86,8 @@ ClientCreator.prototype.generateClientFileSource = function generateClientFileSo
   var code = '';
   code += 'require(\'../lib/node_loader\');\n';
   code += 'var AWS = require(\'../lib/core\');\n';
-  code += 'var Service = require(\'../lib/service\');\n';
-  code += 'var apiLoader = require(\'../lib/api_loader\');\n\n';
+  code += 'var Service = AWS.Service;\n';
+  code += 'var apiLoader = AWS.apiLoader;\n\n';
   code += 'apiLoader.services[\'' + serviceName +'\'] = {};\n';
   code += 'AWS.' + className + ' = Service.defineService(\'' + serviceName + '\', [\'' + [].concat(obsoleteVersions, versionNumbers).sort().join('\', \'') + '\']);\n';
   // pull in service customizations
@@ -159,14 +159,12 @@ ClientCreator.prototype.generateAllServicesSource = function generateAllServices
   var self = this;
   var code = '';
   code += 'require(\'../lib/node_loader\');\n';
-  code += 'var AWS = require(\'../lib/core\');\n\n';
   code += 'module.exports = {\n';
 
   services.forEach(function(service, idx) {
     var className = metadata[service].name;
     var tab = '  ';
     var isLast = idx === services.length - 1;
-    //code += self.generateDefinePropertySource('AWS', service, className);
     code += self.tabs(1) + className + ': require(\'./' + service + '\')' + (isLast ? '' : ',') + '\n';
   });
   code += '};';
