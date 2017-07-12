@@ -108,7 +108,8 @@
       "errors":[
         {"shape":"LimitExceededFault"},
         {"shape":"AlreadyExistsFault"},
-        {"shape":"ResourceContentionFault"}
+        {"shape":"ResourceContentionFault"},
+        {"shape":"ResourceInUseFault"}
       ],
       "documentation":"<p>Creates or updates tags for the specified Auto Scaling group.</p> <p>When you specify a tag with a key that already exists, the operation overwrites the previous tag definition, and you do not get an error message.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html\">Tagging Auto Scaling Groups and Instances</a> in the <i>Auto Scaling User Guide</i>.</p>"
     },
@@ -199,7 +200,8 @@
       },
       "input":{"shape":"DeleteTagsType"},
       "errors":[
-        {"shape":"ResourceContentionFault"}
+        {"shape":"ResourceContentionFault"},
+        {"shape":"ResourceInUseFault"}
       ],
       "documentation":"<p>Deletes the specified tags.</p>"
     },
@@ -506,7 +508,7 @@
       "errors":[
         {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independent of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached.</p> <p>If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html\">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>"
+      "documentation":"<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independently from the rest of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached.</p> <p>If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html\">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>"
     },
     "DetachLoadBalancerTargetGroups":{
       "name":"DetachLoadBalancerTargetGroups",
@@ -578,7 +580,7 @@
       "errors":[
         {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Moves the specified instances into the standby state.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html\">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>"
+      "documentation":"<p>Moves the specified instances into <code>Standby</code> mode.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html\">Auto Scaling Lifecycle</a> in the <i>Auto Scaling User Guide</i>.</p>"
     },
     "ExecutePolicy":{
       "name":"ExecutePolicy",
@@ -607,7 +609,7 @@
       "errors":[
         {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Moves the specified instances out of the standby state.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html\">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>"
+      "documentation":"<p>Moves the specified instances out of <code>Standby</code> mode.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html\">Auto Scaling Lifecycle</a> in the <i>Auto Scaling User Guide</i>.</p>"
     },
     "PutLifecycleHook":{
       "name":"PutLifecycleHook",
@@ -782,7 +784,7 @@
         {"shape":"ScalingActivityInProgressFault"},
         {"shape":"ResourceContentionFault"}
       ],
-      "documentation":"<p>Updates the configuration for the specified Auto Scaling group.</p> <p>The new settings take effect on any scaling activities after this call returns. Scaling activities that are currently in progress aren't affected.</p> <p>To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to <code>false</code>, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using <a>DisableMetricsCollection</a>.</p> <p>Note the following:</p> <ul> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MinSize</code>.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MaxSize</code>.</p> </li> <li> <p>All other optional parameters are left unchanged if not specified.</p> </li> </ul>"
+      "documentation":"<p>Updates the configuration for the specified Auto Scaling group.</p> <p>To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to <code>False</code>, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using <a>DisableMetricsCollection</a>.</p> <p>The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Scaling activities that are currently in progress aren't affected.</p> <p>Note the following:</p> <ul> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MinSize</code>.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MaxSize</code>.</p> </li> <li> <p>All other optional parameters are left unchanged if not specified.</p> </li> </ul>"
     }
   },
   "shapes":{
@@ -802,7 +804,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeScalingActivities.</p>"
     },
     "Activity":{
       "type":"structure",
@@ -868,7 +871,8 @@
           "shape":"Activity",
           "documentation":"<p>A scaling activity.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of TerminateInstancesInAutoScalingGroup.</p>"
     },
     "AdjustmentType":{
       "type":"structure",
@@ -937,7 +941,8 @@
           "shape":"ResourceName",
           "documentation":"<p>The name of the group.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for AttachInstances.</p>"
     },
     "AttachLoadBalancerTargetGroupsResultType":{
       "type":"structure",
@@ -959,12 +964,14 @@
           "shape":"TargetGroupARNs",
           "documentation":"<p>The Amazon Resource Names (ARN) of the target groups.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for AttachLoadBalancerTargetGroups.</p>"
     },
     "AttachLoadBalancersResultType":{
       "type":"structure",
       "members":{
-      }
+      },
+      "documentation":"<p>Contains the output of AttachLoadBalancers.</p>"
     },
     "AttachLoadBalancersType":{
       "type":"structure",
@@ -981,7 +988,8 @@
           "shape":"LoadBalancerNames",
           "documentation":"<p>One or more load balancer names.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for AttachLoadBalancers.</p>"
     },
     "AutoScalingGroup":{
       "type":"structure",
@@ -1109,7 +1117,8 @@
           "shape":"MaxRecords",
           "documentation":"<p>The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeAutoScalingGroups.</p>"
     },
     "AutoScalingGroups":{
       "type":"list",
@@ -1127,7 +1136,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output for DescribeAutoScalingGroups.</p>"
     },
     "AutoScalingInstanceDetails":{
       "type":"structure",
@@ -1187,7 +1197,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeAutoScalingInstances.</p>"
     },
     "AutoScalingNotificationTypes":{
       "type":"list",
@@ -1249,7 +1260,8 @@
     "CompleteLifecycleActionAnswer":{
       "type":"structure",
       "members":{
-      }
+      },
+      "documentation":"<p>Contains the output of CompleteLifecycleAction.</p>"
     },
     "CompleteLifecycleActionType":{
       "type":"structure",
@@ -1279,7 +1291,8 @@
           "shape":"XmlStringMaxLen19",
           "documentation":"<p>The ID of the instance.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for CompleteLifecycleAction.</p>"
     },
     "Cooldown":{"type":"integer"},
     "CreateAutoScalingGroupType":{
@@ -1312,7 +1325,7 @@
         },
         "DesiredCapacity":{
           "shape":"AutoScalingGroupDesiredCapacity",
-          "documentation":"<p>The number of EC2 instances that should be running in the group. This number must be greater than or equal to the minimum size of the group and less than or equal to the maximum size of the group. If you do not specify a desired capacity, the default is the minimum size of the group.</p>"
+          "documentation":"<p>The number of EC2 instances that should be running in the group. This number must be greater than or equal to the minimum size of the group and less than or equal to the maximum size of the group.</p>"
         },
         "DefaultCooldown":{
           "shape":"Cooldown",
@@ -1358,7 +1371,8 @@
           "shape":"Tags",
           "documentation":"<p>One or more tags.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html\">Tagging Auto Scaling Groups and Instances</a> in the <i>Auto Scaling User Guide</i>.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for CreateAutoScalingGroup.</p>"
     },
     "CreateLaunchConfigurationType":{
       "type":"structure",
@@ -1370,7 +1384,7 @@
         },
         "ImageId":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances.</p> <p>If you do not specify <code>InstanceId</code>, you must specify <code>ImageId</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation":"<p>The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         },
         "KeyName":{
           "shape":"XmlStringMaxLen255",
@@ -1394,11 +1408,11 @@
         },
         "InstanceId":{
           "shape":"XmlStringMaxLen19",
-          "documentation":"<p>The ID of the instance to use to create the launch configuration. The new launch configuration derives attributes from the instance, with the exception of the block device mapping.</p> <p>If you do not specify <code>InstanceId</code>, you must specify both <code>ImageId</code> and <code>InstanceType</code>.</p> <p>To create a launch configuration with a block device mapping or override any other instance attributes, specify them as part of the same request.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html\">Create a Launch Configuration Using an EC2 Instance</a> in the <i>Auto Scaling User Guide</i>.</p>"
+          "documentation":"<p>The ID of the instance to use to create the launch configuration.</p> <p>The new launch configuration derives attributes from the instance, with the exception of the block device mapping.</p> <p>To create a launch configuration with a block device mapping or override any other instance attributes, specify them as part of the same request.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html\">Create a Launch Configuration Using an EC2 Instance</a> in the <i>Auto Scaling User Guide</i>.</p>"
         },
         "InstanceType":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>The instance type of the EC2 instance.</p> <p>If you do not specify <code>InstanceId</code>, you must specify <code>InstanceType</code>.</p> <p>For information about available instance types, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> </p>"
+          "documentation":"<p>The instance type of the EC2 instance. For information about available instance types, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\"> Available Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> </p>"
         },
         "KernelId":{
           "shape":"XmlStringMaxLen255",
@@ -1414,7 +1428,7 @@
         },
         "InstanceMonitoring":{
           "shape":"InstanceMonitoring",
-          "documentation":"<p>Enables detailed monitoring (<code>true</code>) or basic monitoring (<code>false</code>) for the Auto Scaling instances. The default is <code>true</code>.</p>"
+          "documentation":"<p>Enables detailed monitoring (<code>true</code>) or basic monitoring (<code>false</code>) for the Auto Scaling instances.</p>"
         },
         "SpotPrice":{
           "shape":"SpotPrice",
@@ -1436,7 +1450,8 @@
           "shape":"XmlStringMaxLen64",
           "documentation":"<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware and can only be launched into a VPC.</p> <p>You must set the value of this parameter to <code>dedicated</code> if want to launch Dedicated Instances into a shared tenancy VPC (VPC with instance placement tenancy attribute set to <code>default</code>).</p> <p>If you specify this parameter, be sure to specify at least one subnet when you create your group.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html\">Launching Auto Scaling Instances in a VPC</a> in the <i>Auto Scaling User Guide</i>.</p> <p>Valid values: <code>default</code> | <code>dedicated</code> </p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for CreateLaunchConfiguration.</p>"
     },
     "CreateOrUpdateTagsType":{
       "type":"structure",
@@ -1446,7 +1461,39 @@
           "shape":"Tags",
           "documentation":"<p>One or more tags.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for CreateOrUpdateTags.</p>"
+    },
+    "CustomizedMetricSpecification":{
+      "type":"structure",
+      "required":[
+        "MetricName",
+        "Namespace",
+        "Statistic"
+      ],
+      "members":{
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>The name of the metric.</p>"
+        },
+        "Namespace":{
+          "shape":"MetricNamespace",
+          "documentation":"<p>The namespace of the metric.</p>"
+        },
+        "Dimensions":{
+          "shape":"MetricDimensions",
+          "documentation":"<p>The dimensions of the metric.</p>"
+        },
+        "Statistic":{
+          "shape":"MetricStatistic",
+          "documentation":"<p>The statistic of the metric.</p>"
+        },
+        "Unit":{
+          "shape":"MetricUnit",
+          "documentation":"<p>The unit of the metric.</p>"
+        }
+      },
+      "documentation":"<p>Configures a customized metric for a target tracking policy.</p>"
     },
     "DeleteAutoScalingGroupType":{
       "type":"structure",
@@ -1460,12 +1507,14 @@
           "shape":"ForceDelete",
           "documentation":"<p>Specifies that the group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DeleteAutoScalingGroup.</p>"
     },
     "DeleteLifecycleHookAnswer":{
       "type":"structure",
       "members":{
-      }
+      },
+      "documentation":"<p>Contains the output of DeleteLifecycleHook.</p>"
     },
     "DeleteLifecycleHookType":{
       "type":"structure",
@@ -1482,7 +1531,8 @@
           "shape":"ResourceName",
           "documentation":"<p>The name of the Auto Scaling group for the lifecycle hook.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DeleteLifecycleHook.</p>"
     },
     "DeleteNotificationConfigurationType":{
       "type":"structure",
@@ -1499,7 +1549,8 @@
           "shape":"ResourceName",
           "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DeleteNotificationConfiguration.</p>"
     },
     "DeletePolicyType":{
       "type":"structure",
@@ -1513,7 +1564,8 @@
           "shape":"ResourceName",
           "documentation":"<p>The name or Amazon Resource Name (ARN) of the policy.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DeletePolicy.</p>"
     },
     "DeleteScheduledActionType":{
       "type":"structure",
@@ -1530,7 +1582,8 @@
           "shape":"ResourceName",
           "documentation":"<p>The name of the action to delete.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DeleteScheduledAction.</p>"
     },
     "DeleteTagsType":{
       "type":"structure",
@@ -1540,7 +1593,8 @@
           "shape":"Tags",
           "documentation":"<p>One or more tags.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DeleteTags.</p>"
     },
     "DescribeAccountLimitsAnswer":{
       "type":"structure",
@@ -1561,7 +1615,8 @@
           "shape":"NumberOfLaunchConfigurations",
           "documentation":"<p>The current number of launch configurations for your AWS account.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeAccountLimits.</p>"
     },
     "DescribeAdjustmentTypesAnswer":{
       "type":"structure",
@@ -1570,7 +1625,8 @@
           "shape":"AdjustmentTypes",
           "documentation":"<p>The policy adjustment types.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeAdjustmentTypes.</p>"
     },
     "DescribeAutoScalingInstancesType":{
       "type":"structure",
@@ -1587,7 +1643,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeAutoScalingInstances.</p>"
     },
     "DescribeAutoScalingNotificationTypesAnswer":{
       "type":"structure",
@@ -1596,7 +1653,8 @@
           "shape":"AutoScalingNotificationTypes",
           "documentation":"<p>The notification types.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeAutoScalingNotificationTypes.</p>"
     },
     "DescribeLifecycleHookTypesAnswer":{
       "type":"structure",
@@ -1605,7 +1663,8 @@
           "shape":"AutoScalingNotificationTypes",
           "documentation":"<p>The lifecycle hook types.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeLifecycleHookTypes.</p>"
     },
     "DescribeLifecycleHooksAnswer":{
       "type":"structure",
@@ -1614,7 +1673,8 @@
           "shape":"LifecycleHooks",
           "documentation":"<p>The lifecycle hooks for the specified group.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeLifecycleHooks.</p>"
     },
     "DescribeLifecycleHooksType":{
       "type":"structure",
@@ -1628,7 +1688,8 @@
           "shape":"LifecycleHookNames",
           "documentation":"<p>The names of one or more lifecycle hooks. If you omit this parameter, all lifecycle hooks are described.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeLifecycleHooks.</p>"
     },
     "DescribeLoadBalancerTargetGroupsRequest":{
       "type":"structure",
@@ -1646,7 +1707,8 @@
           "shape":"MaxRecords",
           "documentation":"<p>The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeLoadBalancerTargetGroups.</p>"
     },
     "DescribeLoadBalancerTargetGroupsResponse":{
       "type":"structure",
@@ -1659,7 +1721,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeLoadBalancerTargetGroups.</p>"
     },
     "DescribeLoadBalancersRequest":{
       "type":"structure",
@@ -1677,7 +1740,8 @@
           "shape":"MaxRecords",
           "documentation":"<p>The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeLoadBalancers.</p>"
     },
     "DescribeLoadBalancersResponse":{
       "type":"structure",
@@ -1690,7 +1754,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeLoadBalancers.</p>"
     },
     "DescribeMetricCollectionTypesAnswer":{
       "type":"structure",
@@ -1703,7 +1768,8 @@
           "shape":"MetricGranularityTypes",
           "documentation":"<p>The granularities for the metrics.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeMetricsCollectionTypes.</p>"
     },
     "DescribeNotificationConfigurationsAnswer":{
       "type":"structure",
@@ -1717,7 +1783,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output from DescribeNotificationConfigurations.</p>"
     },
     "DescribeNotificationConfigurationsType":{
       "type":"structure",
@@ -1734,7 +1801,8 @@
           "shape":"MaxRecords",
           "documentation":"<p>The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeNotificationConfigurations.</p>"
     },
     "DescribePoliciesType":{
       "type":"structure",
@@ -1759,7 +1827,8 @@
           "shape":"MaxRecords",
           "documentation":"<p>The maximum number of items to be returned with each call. The default value is 50 and the maximum value is 100.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribePolicies.</p>"
     },
     "DescribeScalingActivitiesType":{
       "type":"structure",
@@ -1780,7 +1849,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeScalingActivities.</p>"
     },
     "DescribeScheduledActionsType":{
       "type":"structure",
@@ -1809,7 +1879,8 @@
           "shape":"MaxRecords",
           "documentation":"<p>The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeScheduledActions.</p>"
     },
     "DescribeTagsType":{
       "type":"structure",
@@ -1826,7 +1897,8 @@
           "shape":"MaxRecords",
           "documentation":"<p>The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeTags.</p>"
     },
     "DescribeTerminationPolicyTypesAnswer":{
       "type":"structure",
@@ -1835,7 +1907,8 @@
           "shape":"TerminationPolicies",
           "documentation":"<p>The termination policies supported by Auto Scaling (<code>OldestInstance</code>, <code>OldestLaunchConfiguration</code>, <code>NewestInstance</code>, <code>ClosestToNextInstanceHour</code>, and <code>Default</code>).</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeTerminationPolicyTypes.</p>"
     },
     "DetachInstancesAnswer":{
       "type":"structure",
@@ -1844,7 +1917,8 @@
           "shape":"Activities",
           "documentation":"<p>The activities related to detaching the instances from the Auto Scaling group.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DetachInstances.</p>"
     },
     "DetachInstancesQuery":{
       "type":"structure",
@@ -1865,7 +1939,8 @@
           "shape":"ShouldDecrementDesiredCapacity",
           "documentation":"<p>If <code>True</code>, the Auto Scaling group decrements the desired capacity value by the number of instances detached.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DetachInstances.</p>"
     },
     "DetachLoadBalancerTargetGroupsResultType":{
       "type":"structure",
@@ -1892,7 +1967,8 @@
     "DetachLoadBalancersResultType":{
       "type":"structure",
       "members":{
-      }
+      },
+      "documentation":"<p>Contains the output for DetachLoadBalancers.</p>"
     },
     "DetachLoadBalancersType":{
       "type":"structure",
@@ -1909,7 +1985,8 @@
           "shape":"LoadBalancerNames",
           "documentation":"<p>One or more load balancer names.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DetachLoadBalancers.</p>"
     },
     "DisableMetricsCollectionQuery":{
       "type":"structure",
@@ -1923,8 +2000,10 @@
           "shape":"Metrics",
           "documentation":"<p>One or more of the following metrics. If you omit this parameter, all metrics are disabled.</p> <ul> <li> <p> <code>GroupMinSize</code> </p> </li> <li> <p> <code>GroupMaxSize</code> </p> </li> <li> <p> <code>GroupDesiredCapacity</code> </p> </li> <li> <p> <code>GroupInServiceInstances</code> </p> </li> <li> <p> <code>GroupPendingInstances</code> </p> </li> <li> <p> <code>GroupStandbyInstances</code> </p> </li> <li> <p> <code>GroupTerminatingInstances</code> </p> </li> <li> <p> <code>GroupTotalInstances</code> </p> </li> </ul>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DisableMetricsCollection.</p>"
     },
+    "DisableScaleIn":{"type":"boolean"},
     "Ebs":{
       "type":"structure",
       "members":{
@@ -1975,7 +2054,8 @@
           "shape":"XmlStringMaxLen255",
           "documentation":"<p>The granularity to associate with the metrics to collect. The only valid value is <code>1Minute</code>.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for EnableMetricsCollection.</p>"
     },
     "EnabledMetric":{
       "type":"structure",
@@ -2002,7 +2082,8 @@
           "shape":"Activities",
           "documentation":"<p>The activities related to moving instances into <code>Standby</code> mode.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of EnterStandby.</p>"
     },
     "EnterStandbyQuery":{
       "type":"structure",
@@ -2023,7 +2104,8 @@
           "shape":"ShouldDecrementDesiredCapacity",
           "documentation":"<p>Specifies whether the instances moved to <code>Standby</code> mode count as part of the Auto Scaling group's desired capacity. If set, the desired capacity for the Auto Scaling group decrements by the number of instances moved to <code>Standby</code> mode.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for EnteStandby.</p>"
     },
     "EstimatedInstanceWarmup":{"type":"integer"},
     "ExecutePolicyType":{
@@ -2050,7 +2132,8 @@
           "shape":"MetricScale",
           "documentation":"<p>The breach threshold for the alarm.</p> <p>This parameter is required if the policy type is <code>StepScaling</code> and not supported otherwise.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for ExecutePolicy.</p>"
     },
     "ExitStandbyAnswer":{
       "type":"structure",
@@ -2059,7 +2142,8 @@
           "shape":"Activities",
           "documentation":"<p>The activities related to moving instances out of <code>Standby</code> mode.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for ExitStandby.</p>"
     },
     "ExitStandbyQuery":{
       "type":"structure",
@@ -2073,7 +2157,8 @@
           "shape":"ResourceName",
           "documentation":"<p>The name of the Auto Scaling group.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for ExitStandby.</p>"
     },
     "Filter":{
       "type":"structure",
@@ -2145,10 +2230,10 @@
       "members":{
         "Enabled":{
           "shape":"MonitoringEnabled",
-          "documentation":"<p>If <code>true</code>, detailed monitoring is enabled. Otherwise, basic monitoring is enabled.</p>"
+          "documentation":"<p>If <code>True</code>, instance monitoring is enabled.</p>"
         }
       },
-      "documentation":"<p>Describes whether detailed monitoring is enabled for the Auto Scaling instances.</p>"
+      "documentation":"<p>Describes whether instance monitoring is enabled.</p>"
     },
     "InstanceProtected":{"type":"boolean"},
     "Instances":{
@@ -2267,7 +2352,8 @@
           "shape":"ResourceName",
           "documentation":"<p>The name of the launch configuration.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DeleteLaunchConfiguration.</p>"
     },
     "LaunchConfigurationNames":{
       "type":"list",
@@ -2288,7 +2374,8 @@
           "shape":"MaxRecords",
           "documentation":"<p>The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeLaunchConfigurations.</p>"
     },
     "LaunchConfigurations":{
       "type":"list",
@@ -2306,7 +2393,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeLaunchConfigurations.</p>"
     },
     "LifecycleActionResult":{"type":"string"},
     "LifecycleActionToken":{
@@ -2358,7 +2446,8 @@
     },
     "LifecycleHookNames":{
       "type":"list",
-      "member":{"shape":"AsciiStringMaxLen255"}
+      "member":{"shape":"AsciiStringMaxLen255"},
+      "max":50
     },
     "LifecycleHooks":{
       "type":"list",
@@ -2456,6 +2545,30 @@
       "type":"list",
       "member":{"shape":"MetricCollectionType"}
     },
+    "MetricDimension":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Value"
+      ],
+      "members":{
+        "Name":{
+          "shape":"MetricDimensionName",
+          "documentation":"<p>The name of the dimension.</p>"
+        },
+        "Value":{
+          "shape":"MetricDimensionValue",
+          "documentation":"<p>The value of the dimension.</p>"
+        }
+      },
+      "documentation":"<p>Describes the dimension of a metric.</p>"
+    },
+    "MetricDimensionName":{"type":"string"},
+    "MetricDimensionValue":{"type":"string"},
+    "MetricDimensions":{
+      "type":"list",
+      "member":{"shape":"MetricDimension"}
+    },
     "MetricGranularityType":{
       "type":"structure",
       "members":{
@@ -2470,7 +2583,29 @@
       "type":"list",
       "member":{"shape":"MetricGranularityType"}
     },
+    "MetricName":{"type":"string"},
+    "MetricNamespace":{"type":"string"},
     "MetricScale":{"type":"double"},
+    "MetricStatistic":{
+      "type":"string",
+      "enum":[
+        "Average",
+        "Minimum",
+        "Maximum",
+        "SampleCount",
+        "Sum"
+      ]
+    },
+    "MetricType":{
+      "type":"string",
+      "enum":[
+        "ASGAverageCPUUtilization",
+        "ASGAverageNetworkIn",
+        "ASGAverageNetworkOut",
+        "ALBRequestCountPerTarget"
+      ]
+    },
+    "MetricUnit":{"type":"string"},
     "Metrics":{
       "type":"list",
       "member":{"shape":"XmlStringMaxLen255"}
@@ -2523,7 +2658,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribePolicies.</p>"
     },
     "PolicyARNType":{
       "type":"structure",
@@ -2531,8 +2667,13 @@
         "PolicyARN":{
           "shape":"ResourceName",
           "documentation":"<p>The Amazon Resource Name (ARN) of the policy.</p>"
+        },
+        "Alarms":{
+          "shape":"Alarms",
+          "documentation":"<p>The CloudWatch alarms created for the target tracking policy. This parameter will be empty if the policy type is anything other than <code>TargetTrackingScaling</code>.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of PutScalingPolicy.</p>"
     },
     "PolicyIncrement":{"type":"integer"},
     "PolicyNames":{
@@ -2542,6 +2683,21 @@
     "PolicyTypes":{
       "type":"list",
       "member":{"shape":"XmlStringMaxLen64"}
+    },
+    "PredefinedMetricSpecification":{
+      "type":"structure",
+      "required":["PredefinedMetricType"],
+      "members":{
+        "PredefinedMetricType":{
+          "shape":"MetricType",
+          "documentation":"<p>The metric type.</p>"
+        },
+        "ResourceLabel":{
+          "shape":"XmlStringMaxLen1023",
+          "documentation":"<p>Identifies the resource associated with the metric type. For predefined metric types <code>ASGAverageCPUUtilization</code>, <code>ASGAverageNetworkIn</code> and <code>ASGAverageNetworkOut</code>, the parameter must not be specified as the resource associated with the metric type is the Auto Scaling group. For predefined metric type <code>ALBRequestCountPerTarget</code>, the parameter must be specified in the format <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i>/targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code>, where <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> is the final portion of the load balancer ARN, and <code>targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code> is the final portion of the target group ARN. The target group must be attached to the Auto Scaling group.</p>"
+        }
+      },
+      "documentation":"<p>Configures a predefined metric for a target tracking policy. The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> - average CPU utilization of the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkIn</code> - average number of bytes received on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkOut</code> - average number of bytes sent out on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> - number of requests completed per target in an Application Load Balancer target group</p> </li> </ul>"
     },
     "ProcessNames":{
       "type":"list",
@@ -2569,7 +2725,8 @@
           "shape":"Processes",
           "documentation":"<p>The names of the process types.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeScalingProcessTypes.</p>"
     },
     "Progress":{"type":"integer"},
     "PropagateAtLaunch":{"type":"boolean"},
@@ -2577,7 +2734,8 @@
     "PutLifecycleHookAnswer":{
       "type":"structure",
       "members":{
-      }
+      },
+      "documentation":"<p>Contains the output of PutLifecycleHook.</p>"
     },
     "PutLifecycleHookType":{
       "type":"structure",
@@ -2618,7 +2776,8 @@
           "shape":"LifecycleActionResult",
           "documentation":"<p>Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. This parameter can be either <code>CONTINUE</code> or <code>ABANDON</code>. The default value is <code>ABANDON</code>.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for PutLifecycleHook.</p>"
     },
     "PutNotificationConfigurationType":{
       "type":"structure",
@@ -2640,14 +2799,14 @@
           "shape":"AutoScalingNotificationTypes",
           "documentation":"<p>The type of event that will cause the notification to be sent. For details about notification types supported by Auto Scaling, see <a>DescribeAutoScalingNotificationTypes</a>.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for PutNotificationConfiguration.</p>"
     },
     "PutScalingPolicyType":{
       "type":"structure",
       "required":[
         "AutoScalingGroupName",
-        "PolicyName",
-        "AdjustmentType"
+        "PolicyName"
       ],
       "members":{
         "AutoScalingGroupName":{
@@ -2660,11 +2819,11 @@
         },
         "PolicyType":{
           "shape":"XmlStringMaxLen64",
-          "documentation":"<p>The policy type. Valid values are <code>SimpleScaling</code> and <code>StepScaling</code>. If the policy type is null, the value is treated as <code>SimpleScaling</code>.</p>"
+          "documentation":"<p>The policy type. The valid values are <code>SimpleScaling</code>, <code>StepScaling</code>, and <code>TargetTrackingScaling</code>. If the policy type is null, the value is treated as <code>SimpleScaling</code>.</p>"
         },
         "AdjustmentType":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>The adjustment type. Valid values are <code>ChangeInCapacity</code>, <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scale-based-on-demand.html\">Dynamic Scaling</a> in the <i>Auto Scaling User Guide</i>.</p>"
+          "documentation":"<p>The adjustment type. The valid values are <code>ChangeInCapacity</code>, <code>ExactCapacity</code>, and <code>PercentChangeInCapacity</code>.</p> <p>This parameter is supported if the policy type is <code>SimpleScaling</code> or <code>StepScaling</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scale-based-on-demand.html\">Dynamic Scaling</a> in the <i>Auto Scaling User Guide</i>.</p>"
         },
         "MinAdjustmentStep":{
           "shape":"MinAdjustmentStep",
@@ -2672,7 +2831,7 @@
         },
         "MinAdjustmentMagnitude":{
           "shape":"MinAdjustmentMagnitude",
-          "documentation":"<p>The minimum number of instances to scale. If the value of <code>AdjustmentType</code> is <code>PercentChangeInCapacity</code>, the scaling policy changes the <code>DesiredCapacity</code> of the Auto Scaling group by at least this many instances. Otherwise, the error is <code>ValidationError</code>.</p>"
+          "documentation":"<p>The minimum number of instances to scale. If the value of <code>AdjustmentType</code> is <code>PercentChangeInCapacity</code>, the scaling policy changes the <code>DesiredCapacity</code> of the Auto Scaling group by at least this many instances. Otherwise, the error is <code>ValidationError</code>.</p> <p>This parameter is supported if the policy type is <code>SimpleScaling</code> or <code>StepScaling</code>.</p>"
         },
         "ScalingAdjustment":{
           "shape":"PolicyIncrement",
@@ -2680,11 +2839,11 @@
         },
         "Cooldown":{
           "shape":"Cooldown",
-          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start. If this parameter is not specified, the default cooldown period for the group applies.</p> <p>This parameter is not supported unless the policy type is <code>SimpleScaling</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html\">Auto Scaling Cooldowns</a> in the <i>Auto Scaling User Guide</i>.</p>"
+          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start. If this parameter is not specified, the default cooldown period for the group applies.</p> <p>This parameter is supported if the policy type is <code>SimpleScaling</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html\">Auto Scaling Cooldowns</a> in the <i>Auto Scaling User Guide</i>.</p>"
         },
         "MetricAggregationType":{
           "shape":"XmlStringMaxLen32",
-          "documentation":"<p>The aggregation type for the CloudWatch metrics. Valid values are <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code>. If the aggregation type is null, the value is treated as <code>Average</code>.</p> <p>This parameter is not supported if the policy type is <code>SimpleScaling</code>.</p>"
+          "documentation":"<p>The aggregation type for the CloudWatch metrics. The valid values are <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code>. If the aggregation type is null, the value is treated as <code>Average</code>.</p> <p>This parameter is supported if the policy type is <code>StepScaling</code>.</p>"
         },
         "StepAdjustments":{
           "shape":"StepAdjustments",
@@ -2692,9 +2851,14 @@
         },
         "EstimatedInstanceWarmup":{
           "shape":"EstimatedInstanceWarmup",
-          "documentation":"<p>The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. The default is to use the value specified for the default cooldown period for the group.</p> <p>This parameter is not supported if the policy type is <code>SimpleScaling</code>.</p>"
+          "documentation":"<p>The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. The default is to use the value specified for the default cooldown period for the group.</p> <p>This parameter is supported if the policy type is <code>StepScaling</code> or <code>TargetTrackingScaling</code>.</p>"
+        },
+        "TargetTrackingConfiguration":{
+          "shape":"TargetTrackingConfiguration",
+          "documentation":"<p>The configuration of a target tracking policy.</p> <p>This parameter is required if the policy type is <code>TargetTrackingScaling</code> and not supported otherwise.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for PutScalingPolicy.</p>"
     },
     "PutScheduledUpdateGroupActionType":{
       "type":"structure",
@@ -2739,12 +2903,14 @@
           "shape":"AutoScalingGroupDesiredCapacity",
           "documentation":"<p>The number of EC2 instances that should be running in the group.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for PutScheduledUpdateGroupAction.</p>"
     },
     "RecordLifecycleActionHeartbeatAnswer":{
       "type":"structure",
       "members":{
-      }
+      },
+      "documentation":"<p>Contains the output of RecordLifecycleActionHeartBeat.</p>"
     },
     "RecordLifecycleActionHeartbeatType":{
       "type":"structure",
@@ -2769,7 +2935,8 @@
           "shape":"XmlStringMaxLen19",
           "documentation":"<p>The ID of the instance.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for RecordLifecycleActionHeartbeat.</p>"
     },
     "ResourceContentionFault":{
       "type":"structure",
@@ -2883,7 +3050,7 @@
         },
         "Cooldown":{
           "shape":"Cooldown",
-          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes before any further dynamic scaling activities can start.</p>"
+          "documentation":"<p>The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start.</p>"
         },
         "StepAdjustments":{
           "shape":"StepAdjustments",
@@ -2900,6 +3067,10 @@
         "Alarms":{
           "shape":"Alarms",
           "documentation":"<p>The CloudWatch alarms related to the policy.</p>"
+        },
+        "TargetTrackingConfiguration":{
+          "shape":"TargetTrackingConfiguration",
+          "documentation":"<p>A target tracking policy.</p>"
         }
       },
       "documentation":"<p>Describes a scaling policy.</p>"
@@ -2916,7 +3087,8 @@
           "shape":"ProcessNames",
           "documentation":"<p>One or more of the following processes. If you omit this parameter, all processes are specified.</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> </ul>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for SuspendProcesses and ResumeProcesses.</p>"
     },
     "ScheduledActionNames":{
       "type":"list",
@@ -2933,7 +3105,8 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeScheduledActions.</p>"
     },
     "ScheduledUpdateGroupAction":{
       "type":"structure",
@@ -3008,7 +3181,8 @@
           "shape":"HonorCooldown",
           "documentation":"<p>By default, <code>SetDesiredCapacity</code> overrides any cooldown period associated with the Auto Scaling group. Specify <code>True</code> to make Auto Scaling to wait for the cool-down period associated with the Auto Scaling group to complete before initiating a scaling activity to set your Auto Scaling group to its new capacity.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for SetDesiredCapacity.</p>"
     },
     "SetInstanceHealthQuery":{
       "type":"structure",
@@ -3029,12 +3203,14 @@
           "shape":"ShouldRespectGracePeriod",
           "documentation":"<p>If the Auto Scaling group of the specified instance has a <code>HealthCheckGracePeriod</code> specified for the group, by default, this call will respect the grace period. Set this to <code>False</code>, if you do not want the call to respect the grace period associated with the group.</p> <p>For more information, see the description of the health check grace period for <a>CreateAutoScalingGroup</a>.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for SetInstanceHealth.</p>"
     },
     "SetInstanceProtectionAnswer":{
       "type":"structure",
       "members":{
-      }
+      },
+      "documentation":"<p>Contains the output of SetInstanceProtection.</p>"
     },
     "SetInstanceProtectionQuery":{
       "type":"structure",
@@ -3056,7 +3232,8 @@
           "shape":"ProtectedFromScaleIn",
           "documentation":"<p>Indicates whether the instance is protected from termination by Auto Scaling when scaling in.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for SetInstanceProtection.</p>"
     },
     "ShouldDecrementDesiredCapacity":{"type":"boolean"},
     "ShouldRespectGracePeriod":{"type":"boolean"},
@@ -3190,11 +3367,35 @@
           "shape":"XmlString",
           "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of DescribeTags.</p>"
     },
     "TargetGroupARNs":{
       "type":"list",
       "member":{"shape":"XmlStringMaxLen511"}
+    },
+    "TargetTrackingConfiguration":{
+      "type":"structure",
+      "required":["TargetValue"],
+      "members":{
+        "PredefinedMetricSpecification":{
+          "shape":"PredefinedMetricSpecification",
+          "documentation":"<p>A predefined metric. You can specify either a predefined metric or a customized metric.</p>"
+        },
+        "CustomizedMetricSpecification":{
+          "shape":"CustomizedMetricSpecification",
+          "documentation":"<p>A customized metric.</p>"
+        },
+        "TargetValue":{
+          "shape":"MetricScale",
+          "documentation":"<p>The target value for the metric.</p>"
+        },
+        "DisableScaleIn":{
+          "shape":"DisableScaleIn",
+          "documentation":"<p>If the parameter is true, then scale-in will be disabled for the target tracking policy, i.e. the target tracking policy will not scale in the Auto Scaling group. The default value is false.</p>"
+        }
+      },
+      "documentation":"<p>Represents a target tracking policy configuration.</p>"
     },
     "TerminateInstanceInAutoScalingGroupType":{
       "type":"structure",
@@ -3211,7 +3412,8 @@
           "shape":"ShouldDecrementDesiredCapacity",
           "documentation":"<p>If <code>true</code>, terminating the instance also decrements the size of the Auto Scaling group.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for TerminateInstanceInAutoScalingGroup.</p>"
     },
     "TerminationPolicies":{
       "type":"list",
@@ -3274,7 +3476,8 @@
           "shape":"InstanceProtected",
           "documentation":"<p>Indicates whether newly launched instances are protected from termination by Auto Scaling when scaling in.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for UpdateAutoScalingGroup.</p>"
     },
     "Values":{
       "type":"list",

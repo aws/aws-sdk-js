@@ -240,11 +240,11 @@ declare class AutoScaling extends Service {
    */
   describeTerminationPolicyTypes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeTerminationPolicyTypesAnswer) => void): Request<AutoScaling.Types.DescribeTerminationPolicyTypesAnswer, AWSError>;
   /**
-   * Removes one or more instances from the specified Auto Scaling group. After the instances are detached, you can manage them independent of the Auto Scaling group. If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached. If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups. For more information, see Detach EC2 Instances from Your Auto Scaling Group in the Auto Scaling User Guide.
+   * Removes one or more instances from the specified Auto Scaling group. After the instances are detached, you can manage them independently from the rest of the Auto Scaling group. If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached. If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups. For more information, see Detach EC2 Instances from Your Auto Scaling Group in the Auto Scaling User Guide.
    */
   detachInstances(params: AutoScaling.Types.DetachInstancesQuery, callback?: (err: AWSError, data: AutoScaling.Types.DetachInstancesAnswer) => void): Request<AutoScaling.Types.DetachInstancesAnswer, AWSError>;
   /**
-   * Removes one or more instances from the specified Auto Scaling group. After the instances are detached, you can manage them independent of the Auto Scaling group. If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached. If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups. For more information, see Detach EC2 Instances from Your Auto Scaling Group in the Auto Scaling User Guide.
+   * Removes one or more instances from the specified Auto Scaling group. After the instances are detached, you can manage them independently from the rest of the Auto Scaling group. If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached. If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups. For more information, see Detach EC2 Instances from Your Auto Scaling Group in the Auto Scaling User Guide.
    */
   detachInstances(callback?: (err: AWSError, data: AutoScaling.Types.DetachInstancesAnswer) => void): Request<AutoScaling.Types.DetachInstancesAnswer, AWSError>;
   /**
@@ -280,11 +280,11 @@ declare class AutoScaling extends Service {
    */
   enableMetricsCollection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Moves the specified instances into the standby state. For more information, see Temporarily Removing Instances from Your Auto Scaling Group in the Auto Scaling User Guide.
+   * Moves the specified instances into Standby mode. For more information, see Auto Scaling Lifecycle in the Auto Scaling User Guide.
    */
   enterStandby(params: AutoScaling.Types.EnterStandbyQuery, callback?: (err: AWSError, data: AutoScaling.Types.EnterStandbyAnswer) => void): Request<AutoScaling.Types.EnterStandbyAnswer, AWSError>;
   /**
-   * Moves the specified instances into the standby state. For more information, see Temporarily Removing Instances from Your Auto Scaling Group in the Auto Scaling User Guide.
+   * Moves the specified instances into Standby mode. For more information, see Auto Scaling Lifecycle in the Auto Scaling User Guide.
    */
   enterStandby(callback?: (err: AWSError, data: AutoScaling.Types.EnterStandbyAnswer) => void): Request<AutoScaling.Types.EnterStandbyAnswer, AWSError>;
   /**
@@ -296,11 +296,11 @@ declare class AutoScaling extends Service {
    */
   executePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Moves the specified instances out of the standby state. For more information, see Temporarily Removing Instances from Your Auto Scaling Group in the Auto Scaling User Guide.
+   * Moves the specified instances out of Standby mode. For more information, see Auto Scaling Lifecycle in the Auto Scaling User Guide.
    */
   exitStandby(params: AutoScaling.Types.ExitStandbyQuery, callback?: (err: AWSError, data: AutoScaling.Types.ExitStandbyAnswer) => void): Request<AutoScaling.Types.ExitStandbyAnswer, AWSError>;
   /**
-   * Moves the specified instances out of the standby state. For more information, see Temporarily Removing Instances from Your Auto Scaling Group in the Auto Scaling User Guide.
+   * Moves the specified instances out of Standby mode. For more information, see Auto Scaling Lifecycle in the Auto Scaling User Guide.
    */
   exitStandby(callback?: (err: AWSError, data: AutoScaling.Types.ExitStandbyAnswer) => void): Request<AutoScaling.Types.ExitStandbyAnswer, AWSError>;
   /**
@@ -392,11 +392,11 @@ declare class AutoScaling extends Service {
    */
   terminateInstanceInAutoScalingGroup(callback?: (err: AWSError, data: AutoScaling.Types.ActivityType) => void): Request<AutoScaling.Types.ActivityType, AWSError>;
   /**
-   * Updates the configuration for the specified Auto Scaling group. The new settings take effect on any scaling activities after this call returns. Scaling activities that are currently in progress aren't affected. To update an Auto Scaling group with a launch configuration with InstanceMonitoring set to false, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using DisableMetricsCollection. Note the following:   If you specify a new value for MinSize without specifying a value for DesiredCapacity, and the new MinSize is larger than the current size of the group, we implicitly call SetDesiredCapacity to set the size of the group to the new value of MinSize.   If you specify a new value for MaxSize without specifying a value for DesiredCapacity, and the new MaxSize is smaller than the current size of the group, we implicitly call SetDesiredCapacity to set the size of the group to the new value of MaxSize.   All other optional parameters are left unchanged if not specified.  
+   * Updates the configuration for the specified Auto Scaling group. To update an Auto Scaling group with a launch configuration with InstanceMonitoring set to False, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using DisableMetricsCollection. The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Scaling activities that are currently in progress aren't affected. Note the following:   If you specify a new value for MinSize without specifying a value for DesiredCapacity, and the new MinSize is larger than the current size of the group, we implicitly call SetDesiredCapacity to set the size of the group to the new value of MinSize.   If you specify a new value for MaxSize without specifying a value for DesiredCapacity, and the new MaxSize is smaller than the current size of the group, we implicitly call SetDesiredCapacity to set the size of the group to the new value of MaxSize.   All other optional parameters are left unchanged if not specified.  
    */
   updateAutoScalingGroup(params: AutoScaling.Types.UpdateAutoScalingGroupType, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the configuration for the specified Auto Scaling group. The new settings take effect on any scaling activities after this call returns. Scaling activities that are currently in progress aren't affected. To update an Auto Scaling group with a launch configuration with InstanceMonitoring set to false, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using DisableMetricsCollection. Note the following:   If you specify a new value for MinSize without specifying a value for DesiredCapacity, and the new MinSize is larger than the current size of the group, we implicitly call SetDesiredCapacity to set the size of the group to the new value of MinSize.   If you specify a new value for MaxSize without specifying a value for DesiredCapacity, and the new MaxSize is smaller than the current size of the group, we implicitly call SetDesiredCapacity to set the size of the group to the new value of MaxSize.   All other optional parameters are left unchanged if not specified.  
+   * Updates the configuration for the specified Auto Scaling group. To update an Auto Scaling group with a launch configuration with InstanceMonitoring set to False, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using DisableMetricsCollection. The new settings are registered upon the completion of this call. Any launch configuration settings take effect on any triggers after this call returns. Scaling activities that are currently in progress aren't affected. Note the following:   If you specify a new value for MinSize without specifying a value for DesiredCapacity, and the new MinSize is larger than the current size of the group, we implicitly call SetDesiredCapacity to set the size of the group to the new value of MinSize.   If you specify a new value for MaxSize without specifying a value for DesiredCapacity, and the new MaxSize is smaller than the current size of the group, we implicitly call SetDesiredCapacity to set the size of the group to the new value of MaxSize.   All other optional parameters are left unchanged if not specified.  
    */
   updateAutoScalingGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -749,7 +749,7 @@ declare namespace AutoScaling {
      */
     MaxSize: AutoScalingGroupMaxSize;
     /**
-     * The number of EC2 instances that should be running in the group. This number must be greater than or equal to the minimum size of the group and less than or equal to the maximum size of the group. If you do not specify a desired capacity, the default is the minimum size of the group.
+     * The number of EC2 instances that should be running in the group. This number must be greater than or equal to the minimum size of the group and less than or equal to the maximum size of the group.
      */
     DesiredCapacity?: AutoScalingGroupDesiredCapacity;
     /**
@@ -803,7 +803,7 @@ declare namespace AutoScaling {
      */
     LaunchConfigurationName: XmlStringMaxLen255;
     /**
-     * The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. If you do not specify InstanceId, you must specify ImageId. For more information, see Finding an AMI in the Amazon Elastic Compute Cloud User Guide.
+     * The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances. For more information, see Finding an AMI in the Amazon Elastic Compute Cloud User Guide.
      */
     ImageId?: XmlStringMaxLen255;
     /**
@@ -827,11 +827,11 @@ declare namespace AutoScaling {
      */
     UserData?: XmlStringUserData;
     /**
-     * The ID of the instance to use to create the launch configuration. The new launch configuration derives attributes from the instance, with the exception of the block device mapping. If you do not specify InstanceId, you must specify both ImageId and InstanceType. To create a launch configuration with a block device mapping or override any other instance attributes, specify them as part of the same request. For more information, see Create a Launch Configuration Using an EC2 Instance in the Auto Scaling User Guide.
+     * The ID of the instance to use to create the launch configuration. The new launch configuration derives attributes from the instance, with the exception of the block device mapping. To create a launch configuration with a block device mapping or override any other instance attributes, specify them as part of the same request. For more information, see Create a Launch Configuration Using an EC2 Instance in the Auto Scaling User Guide.
      */
     InstanceId?: XmlStringMaxLen19;
     /**
-     * The instance type of the EC2 instance. If you do not specify InstanceId, you must specify InstanceType. For information about available instance types, see Available Instance Types in the Amazon Elastic Compute Cloud User Guide. 
+     * The instance type of the EC2 instance. For information about available instance types, see  Available Instance Types in the Amazon Elastic Compute Cloud User Guide. 
      */
     InstanceType?: XmlStringMaxLen255;
     /**
@@ -847,7 +847,7 @@ declare namespace AutoScaling {
      */
     BlockDeviceMappings?: BlockDeviceMappings;
     /**
-     * Enables detailed monitoring (true) or basic monitoring (false) for the Auto Scaling instances. The default is true.
+     * Enables detailed monitoring (true) or basic monitoring (false) for the Auto Scaling instances.
      */
     InstanceMonitoring?: InstanceMonitoring;
     /**
@@ -876,6 +876,28 @@ declare namespace AutoScaling {
      * One or more tags.
      */
     Tags: Tags;
+  }
+  export interface CustomizedMetricSpecification {
+    /**
+     * The name of the metric.
+     */
+    MetricName: MetricName;
+    /**
+     * The namespace of the metric.
+     */
+    Namespace: MetricNamespace;
+    /**
+     * The dimensions of the metric.
+     */
+    Dimensions?: MetricDimensions;
+    /**
+     * The statistic of the metric.
+     */
+    Statistic: MetricStatistic;
+    /**
+     * The unit of the metric.
+     */
+    Unit?: MetricUnit;
   }
   export interface DeleteAutoScalingGroupType {
     /**
@@ -1223,6 +1245,7 @@ declare namespace AutoScaling {
      */
     Metrics?: Metrics;
   }
+  export type DisableScaleIn = boolean;
   export interface Ebs {
     /**
      * The ID of the snapshot.
@@ -1379,7 +1402,7 @@ declare namespace AutoScaling {
   export type InstanceIds = XmlStringMaxLen19[];
   export interface InstanceMonitoring {
     /**
-     * If true, detailed monitoring is enabled. Otherwise, basic monitoring is enabled.
+     * If True, instance monitoring is enabled.
      */
     Enabled?: MonitoringEnabled;
   }
@@ -1572,6 +1595,19 @@ declare namespace AutoScaling {
     Metric?: XmlStringMaxLen255;
   }
   export type MetricCollectionTypes = MetricCollectionType[];
+  export interface MetricDimension {
+    /**
+     * The name of the dimension.
+     */
+    Name: MetricDimensionName;
+    /**
+     * The value of the dimension.
+     */
+    Value: MetricDimensionValue;
+  }
+  export type MetricDimensionName = string;
+  export type MetricDimensionValue = string;
+  export type MetricDimensions = MetricDimension[];
   export interface MetricGranularityType {
     /**
      * The granularity. The only valid value is 1Minute.
@@ -1579,7 +1615,12 @@ declare namespace AutoScaling {
     Granularity?: XmlStringMaxLen255;
   }
   export type MetricGranularityTypes = MetricGranularityType[];
+  export type MetricName = string;
+  export type MetricNamespace = string;
   export type MetricScale = number;
+  export type MetricStatistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum"|string;
+  export type MetricType = "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"ALBRequestCountPerTarget"|string;
+  export type MetricUnit = string;
   export type Metrics = XmlStringMaxLen255[];
   export type MinAdjustmentMagnitude = number;
   export type MinAdjustmentStep = number;
@@ -1618,10 +1659,24 @@ declare namespace AutoScaling {
      * The Amazon Resource Name (ARN) of the policy.
      */
     PolicyARN?: ResourceName;
+    /**
+     * The CloudWatch alarms created for the target tracking policy. This parameter will be empty if the policy type is anything other than TargetTrackingScaling.
+     */
+    Alarms?: Alarms;
   }
   export type PolicyIncrement = number;
   export type PolicyNames = ResourceName[];
   export type PolicyTypes = XmlStringMaxLen64[];
+  export interface PredefinedMetricSpecification {
+    /**
+     * The metric type.
+     */
+    PredefinedMetricType: MetricType;
+    /**
+     * Identifies the resource associated with the metric type. For predefined metric types ASGAverageCPUUtilization, ASGAverageNetworkIn and ASGAverageNetworkOut, the parameter must not be specified as the resource associated with the metric type is the Auto Scaling group. For predefined metric type ALBRequestCountPerTarget, the parameter must be specified in the format app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id , where app/load-balancer-name/load-balancer-id  is the final portion of the load balancer ARN, and targetgroup/target-group-name/target-group-id  is the final portion of the target group ARN. The target group must be attached to the Auto Scaling group.
+     */
+    ResourceLabel?: XmlStringMaxLen1023;
+  }
   export type ProcessNames = XmlStringMaxLen255[];
   export interface ProcessType {
     /**
@@ -1699,19 +1754,19 @@ declare namespace AutoScaling {
      */
     PolicyName: XmlStringMaxLen255;
     /**
-     * The policy type. Valid values are SimpleScaling and StepScaling. If the policy type is null, the value is treated as SimpleScaling.
+     * The policy type. The valid values are SimpleScaling, StepScaling, and TargetTrackingScaling. If the policy type is null, the value is treated as SimpleScaling.
      */
     PolicyType?: XmlStringMaxLen64;
     /**
-     * The adjustment type. Valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity. For more information, see Dynamic Scaling in the Auto Scaling User Guide.
+     * The adjustment type. The valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity. This parameter is supported if the policy type is SimpleScaling or StepScaling. For more information, see Dynamic Scaling in the Auto Scaling User Guide.
      */
-    AdjustmentType: XmlStringMaxLen255;
+    AdjustmentType?: XmlStringMaxLen255;
     /**
      * Available for backward compatibility. Use MinAdjustmentMagnitude instead.
      */
     MinAdjustmentStep?: MinAdjustmentStep;
     /**
-     * The minimum number of instances to scale. If the value of AdjustmentType is PercentChangeInCapacity, the scaling policy changes the DesiredCapacity of the Auto Scaling group by at least this many instances. Otherwise, the error is ValidationError.
+     * The minimum number of instances to scale. If the value of AdjustmentType is PercentChangeInCapacity, the scaling policy changes the DesiredCapacity of the Auto Scaling group by at least this many instances. Otherwise, the error is ValidationError. This parameter is supported if the policy type is SimpleScaling or StepScaling.
      */
     MinAdjustmentMagnitude?: MinAdjustmentMagnitude;
     /**
@@ -1719,11 +1774,11 @@ declare namespace AutoScaling {
      */
     ScalingAdjustment?: PolicyIncrement;
     /**
-     * The amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start. If this parameter is not specified, the default cooldown period for the group applies. This parameter is not supported unless the policy type is SimpleScaling. For more information, see Auto Scaling Cooldowns in the Auto Scaling User Guide.
+     * The amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start. If this parameter is not specified, the default cooldown period for the group applies. This parameter is supported if the policy type is SimpleScaling. For more information, see Auto Scaling Cooldowns in the Auto Scaling User Guide.
      */
     Cooldown?: Cooldown;
     /**
-     * The aggregation type for the CloudWatch metrics. Valid values are Minimum, Maximum, and Average. If the aggregation type is null, the value is treated as Average. This parameter is not supported if the policy type is SimpleScaling.
+     * The aggregation type for the CloudWatch metrics. The valid values are Minimum, Maximum, and Average. If the aggregation type is null, the value is treated as Average. This parameter is supported if the policy type is StepScaling.
      */
     MetricAggregationType?: XmlStringMaxLen32;
     /**
@@ -1731,9 +1786,13 @@ declare namespace AutoScaling {
      */
     StepAdjustments?: StepAdjustments;
     /**
-     * The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. The default is to use the value specified for the default cooldown period for the group. This parameter is not supported if the policy type is SimpleScaling.
+     * The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. The default is to use the value specified for the default cooldown period for the group. This parameter is supported if the policy type is StepScaling or TargetTrackingScaling.
      */
     EstimatedInstanceWarmup?: EstimatedInstanceWarmup;
+    /**
+     * The configuration of a target tracking policy. This parameter is required if the policy type is TargetTrackingScaling and not supported otherwise.
+     */
+    TargetTrackingConfiguration?: TargetTrackingConfiguration;
   }
   export interface PutScheduledUpdateGroupActionType {
     /**
@@ -1830,7 +1889,7 @@ declare namespace AutoScaling {
      */
     ScalingAdjustment?: PolicyIncrement;
     /**
-     * The amount of time, in seconds, after a scaling activity completes before any further dynamic scaling activities can start.
+     * The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start.
      */
     Cooldown?: Cooldown;
     /**
@@ -1849,6 +1908,10 @@ declare namespace AutoScaling {
      * The CloudWatch alarms related to the policy.
      */
     Alarms?: Alarms;
+    /**
+     * A target tracking policy.
+     */
+    TargetTrackingConfiguration?: TargetTrackingConfiguration;
   }
   export interface ScalingProcessQuery {
     /**
@@ -2047,6 +2110,24 @@ declare namespace AutoScaling {
     NextToken?: XmlString;
   }
   export type TargetGroupARNs = XmlStringMaxLen511[];
+  export interface TargetTrackingConfiguration {
+    /**
+     * A predefined metric. You can specify either a predefined metric or a customized metric.
+     */
+    PredefinedMetricSpecification?: PredefinedMetricSpecification;
+    /**
+     * A customized metric.
+     */
+    CustomizedMetricSpecification?: CustomizedMetricSpecification;
+    /**
+     * The target value for the metric.
+     */
+    TargetValue: MetricScale;
+    /**
+     * If the parameter is true, then scale-in will be disabled for the target tracking policy, i.e. the target tracking policy will not scale in the Auto Scaling group. The default value is false.
+     */
+    DisableScaleIn?: DisableScaleIn;
+  }
   export interface TerminateInstanceInAutoScalingGroupType {
     /**
      * The ID of the instance.
