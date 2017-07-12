@@ -1148,6 +1148,31 @@
         });
       });
 
+      it('won\'t attempt to update bucket region if request times out', function(done) {
+        var req;
+        var s3Config = AWS.util.merge(config, config.s3);
+        s3Config.params = AWS.util.copy(s3Config.params);
+        s3Config.httpOptions = {
+          timeout: 1
+        };
+        s3Config.region = 'us-west-2';
+        s3Config.params.Bucket += '-us-west-2';
+        var s3 = new AWS.S3(s3Config);
+        req = s3.putObject({
+          Key: 'key',
+          Body: 'body'
+        });
+        req.on('httpHeaders', function() {
+          throw AWS.util.error(new Error('TimeoutError'), {code: 'TimeoutError'});
+        });
+        var spy = helpers.spyOn(s3, 'updateReqBucketRegion').andCallThrough();
+        req.send(function(err) {
+          expect(err.name).to.equal('TimeoutError');
+          expect(spy.calls.length).to.equal(0);
+          return done();
+        });
+      });
+
       describe('upload()', function() {
         it('supports blobs using upload()', function(done) {
           var key, size, u;
