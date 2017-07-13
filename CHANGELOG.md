@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.83.0-->
+<!--LATEST=2.84.0-->
 <!--ENTRYINSERT-->
+
+## 2.84.0
+* bugfix: S3: Updates S3 client to no longer attempt to determine a bucket's region when a request is aborted.
+* feature: APIGateway: Adds support for management of gateway responses.
+* feature: EC2: X-ENI (or Cross-Account ENI) is a new feature that allows the attachment or association of Elastic Network Interfaces (ENI) between VPCs in different AWS accounts located in the same availability zone. With this new capability, service providers and partners can deliver managed solutions in a variety of new architectural patterns where the provider and consumer of the service are in different AWS accounts.
 
 ## 2.83.0
 * feature: AutoScaling: Auto Scaling now supports a new type of scaling policy called target tracking scaling policies that you can use to set up dynamic scaling for your application.

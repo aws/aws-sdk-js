@@ -80,7 +80,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.83.0',
+	  VERSION: '2.84.0',
 
 	  /**
 	   * @api private
@@ -10051,6 +10051,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @api private
 	   */
 	  retryableError: function retryableError(error) {
+	    if (this.timeoutError(error)) return true;
 	    if (this.networkingError(error)) return true;
 	    if (this.expiredCredentialsError(error)) return true;
 	    if (this.throttledError(error)) return true;
@@ -10063,6 +10064,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  networkingError: function networkingError(error) {
 	    return error.code === 'NetworkingError';
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  timeoutError: function timeoutError(error) {
+	    return error.code === 'TimeoutError';
 	  },
 
 	  /**
@@ -12111,12 +12119,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      function error(err) {
-	        resp.error = AWS.util.error(err, {
-	          code: 'NetworkingError',
-	          region: resp.request.httpRequest.region,
-	          hostname: resp.request.httpRequest.endpoint.hostname,
-	          retryable: true
-	        });
+	        if (err.code !== 'RequestAbortedError') {
+	          var errCode = err.code === 'TimeoutError' ? err.code : 'NetworkingError';
+	          err = AWS.util.error(err, {
+	            code: errCode,
+	            region: resp.request.httpRequest.region,
+	            hostname: resp.request.httpRequest.endpoint.hostname,
+	            retryable: true
+	          });
+	        }
+	        resp.error = err;
 	        resp.request.emit('httpError', [resp.error, resp], function() {
 	          done();
 	        });

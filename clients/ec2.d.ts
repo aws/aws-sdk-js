@@ -356,6 +356,14 @@ declare class EC2 extends Service {
    */
   createNetworkInterface(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfaceResult) => void): Request<EC2.Types.CreateNetworkInterfaceResult, AWSError>;
   /**
+   * Grants an AWS authorized partner account permission to attach the specified network interface to an instance in their account. You can grant permission to a single AWS account only, and only one account at a time.
+   */
+  createNetworkInterfacePermission(params: EC2.Types.CreateNetworkInterfacePermissionRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfacePermissionResult) => void): Request<EC2.Types.CreateNetworkInterfacePermissionResult, AWSError>;
+  /**
+   * Grants an AWS authorized partner account permission to attach the specified network interface to an instance in their account. You can grant permission to a single AWS account only, and only one account at a time.
+   */
+  createNetworkInterfacePermission(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfacePermissionResult) => void): Request<EC2.Types.CreateNetworkInterfacePermissionResult, AWSError>;
+  /**
    * Creates a placement group that you launch cluster instances into. You must give the group a name that's unique within the scope of your account. For more information about placement groups and cluster instances, see Cluster Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   createPlacementGroup(params: EC2.Types.CreatePlacementGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -563,6 +571,14 @@ declare class EC2 extends Service {
    * Deletes the specified network interface. You must detach the network interface before you can delete it.
    */
   deleteNetworkInterface(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a permission for a network interface. By default, you cannot delete the permission if the account for which you're removing the permission has attached the network interface to an instance. However, you can force delete the permission, regardless of any attachment.
+   */
+  deleteNetworkInterfacePermission(params: EC2.Types.DeleteNetworkInterfacePermissionRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInterfacePermissionResult) => void): Request<EC2.Types.DeleteNetworkInterfacePermissionResult, AWSError>;
+  /**
+   * Deletes a permission for a network interface. By default, you cannot delete the permission if the account for which you're removing the permission has attached the network interface to an instance. However, you can force delete the permission, regardless of any attachment.
+   */
+  deleteNetworkInterfacePermission(callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInterfacePermissionResult) => void): Request<EC2.Types.DeleteNetworkInterfacePermissionResult, AWSError>;
   /**
    * Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information about placement groups and cluster instances, see Cluster Instances in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -876,11 +892,11 @@ declare class EC2 extends Service {
    */
   describeInstanceAttribute(callback?: (err: AWSError, data: EC2.Types.InstanceAttribute) => void): Request<EC2.Types.InstanceAttribute, AWSError>;
   /**
-   * Describes the status of one or more instances. By default, only running instances are described, unless specified otherwise. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status Checks for Your Instances and Troubleshooting Instances with Failed Status Checks in the Amazon Elastic Compute Cloud User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled Events for Your Instances in the Amazon Elastic Compute Cloud User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide.  
+   * Describes the status of one or more instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status Checks for Your Instances and Troubleshooting Instances with Failed Status Checks in the Amazon Elastic Compute Cloud User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled Events for Your Instances in the Amazon Elastic Compute Cloud User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide.  
    */
   describeInstanceStatus(params: EC2.Types.DescribeInstanceStatusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
   /**
-   * Describes the status of one or more instances. By default, only running instances are described, unless specified otherwise. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status Checks for Your Instances and Troubleshooting Instances with Failed Status Checks in the Amazon Elastic Compute Cloud User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled Events for Your Instances in the Amazon Elastic Compute Cloud User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide.  
+   * Describes the status of one or more instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status Checks for Your Instances and Troubleshooting Instances with Failed Status Checks in the Amazon Elastic Compute Cloud User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled Events for Your Instances in the Amazon Elastic Compute Cloud User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide.  
    */
   describeInstanceStatus(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
   /**
@@ -939,6 +955,14 @@ declare class EC2 extends Service {
    * Describes a network interface attribute. You can specify only one attribute at a time.
    */
   describeNetworkInterfaceAttribute(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInterfaceAttributeResult) => void): Request<EC2.Types.DescribeNetworkInterfaceAttributeResult, AWSError>;
+  /**
+   * Describes the permissions for your network interfaces. 
+   */
+  describeNetworkInterfacePermissions(params: EC2.Types.DescribeNetworkInterfacePermissionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInterfacePermissionsResult) => void): Request<EC2.Types.DescribeNetworkInterfacePermissionsResult, AWSError>;
+  /**
+   * Describes the permissions for your network interfaces. 
+   */
+  describeNetworkInterfacePermissions(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInterfacePermissionsResult) => void): Request<EC2.Types.DescribeNetworkInterfacePermissionsResult, AWSError>;
   /**
    * Describes one or more of your network interfaces.
    */
@@ -3406,6 +3430,34 @@ declare namespace EC2 {
      */
     NetworkAcl?: NetworkAcl;
   }
+  export interface CreateNetworkInterfacePermissionRequest {
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId: String;
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId?: String;
+    /**
+     * The AWS service. Currently not supported.
+     */
+    AwsService?: String;
+    /**
+     * The type of permission to grant.
+     */
+    Permission: InterfacePermissionType;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateNetworkInterfacePermissionResult {
+    /**
+     * Information about the permission for the network interface.
+     */
+    InterfacePermission?: NetworkInterfacePermission;
+  }
   export interface CreateNetworkInterfaceRequest {
     /**
      * A description for the network interface.
@@ -3991,6 +4043,26 @@ declare namespace EC2 {
      * The ID of the network ACL.
      */
     NetworkAclId: String;
+  }
+  export interface DeleteNetworkInterfacePermissionRequest {
+    /**
+     * The ID of the network interface permission.
+     */
+    NetworkInterfacePermissionId: String;
+    /**
+     * Specify true to remove the permission even if the network interface is attached to an instance.
+     */
+    Force?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteNetworkInterfacePermissionResult {
+    /**
+     * Returns true if the request succeeds, otherwise returns an error.
+     */
+    Return?: Boolean;
   }
   export interface DeleteNetworkInterfaceRequest {
     /**
@@ -4951,6 +5023,34 @@ declare namespace EC2 {
      */
     SourceDestCheck?: AttributeBooleanValue;
   }
+  export interface DescribeNetworkInterfacePermissionsRequest {
+    /**
+     * One or more network interface permission IDs.
+     */
+    NetworkInterfacePermissionIds?: NetworkInterfacePermissionIdList;
+    /**
+     * One or more filters.    network-interface-permission.network-interface-permission-id - The ID of the permission.    network-interface-permission.network-interface-id - The ID of the network interface.    network-interface-permission.aws-account-id - The AWS account ID.    network-interface-permission.aws-service - The AWS service.    network-interface-permission.permission - The type of permission (INSTANCE-ATTACH | EIP-ASSOCIATE).  
+     */
+    Filters?: FilterList;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. If this parameter is not specified, up to 50 results are returned by default.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeNetworkInterfacePermissionsResult {
+    /**
+     * The network interface permissions.
+     */
+    NetworkInterfacePermissions?: NetworkInterfacePermissionList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
   export interface DescribeNetworkInterfacesRequest {
     /**
      * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach.time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.nat-gateway-id - The ID of the NAT gateway to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The AWS account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    requester-managed - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).    source-desk-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC for the network interface.  
@@ -5357,7 +5457,7 @@ declare namespace EC2 {
   }
   export interface DescribeSnapshotsRequest {
     /**
-     * One or more filters.    description - A description of the snapshot.    owner-alias - Value from an Amazon-maintained list (amazon | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM consolew.    owner-id - The ID of the AWS account that owns the snapshot.    progress - The progress of the snapshot, as a percentage (for example, 80%).    snapshot-id - The snapshot ID.    start-time - The time stamp when the snapshot was initiated.    status - The status of the snapshot (pending | completed | error).    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    volume-id - The ID of the volume the snapshot is for.    volume-size - The size of the volume, in GiB.  
+     * One or more filters.    description - A description of the snapshot.    owner-alias - Value from an Amazon-maintained list (amazon | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The ID of the AWS account that owns the snapshot.    progress - The progress of the snapshot, as a percentage (for example, 80%).    snapshot-id - The snapshot ID.    start-time - The time stamp when the snapshot was initiated.    status - The status of the snapshot (pending | completed | error).    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    volume-id - The ID of the volume the snapshot is for.    volume-size - The size of the volume, in GiB.  
      */
     Filters?: FilterList;
     /**
@@ -8123,6 +8223,7 @@ declare namespace EC2 {
   export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"x1.16xlarge"|"x1.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.16xlarge"|string;
   export type InstanceTypeList = InstanceType[];
   export type Integer = number;
+  export type InterfacePermissionType = "INSTANCE-ATTACH"|"EIP-ASSOCIATE"|string;
   export interface InternetGateway {
     /**
      * Any VPCs attached to the Internet gateway.
@@ -8415,7 +8516,7 @@ declare namespace EC2 {
      */
     BlockDeviceMappings?: InstanceBlockDeviceMappingSpecificationList;
     /**
-     * If the value is true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use this paramater for Spot Instances.
+     * If the value is true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use this parameter for Spot Instances.
      */
     DisableApiTermination?: AttributeBooleanValue;
     /**
@@ -9063,6 +9164,45 @@ declare namespace EC2 {
   }
   export type NetworkInterfaceIpv6AddressesList = NetworkInterfaceIpv6Address[];
   export type NetworkInterfaceList = NetworkInterface[];
+  export interface NetworkInterfacePermission {
+    /**
+     * The ID of the network interface permission.
+     */
+    NetworkInterfacePermissionId?: String;
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId?: String;
+    /**
+     * The AWS service.
+     */
+    AwsService?: String;
+    /**
+     * The type of permission.
+     */
+    Permission?: InterfacePermissionType;
+    /**
+     * Information about the state of the permission.
+     */
+    PermissionState?: NetworkInterfacePermissionState;
+  }
+  export type NetworkInterfacePermissionIdList = String[];
+  export type NetworkInterfacePermissionList = NetworkInterfacePermission[];
+  export interface NetworkInterfacePermissionState {
+    /**
+     * The state of the permission.
+     */
+    State?: NetworkInterfacePermissionStateCode;
+    /**
+     * A status message, if applicable.
+     */
+    StatusMessage?: String;
+  }
+  export type NetworkInterfacePermissionStateCode = "pending"|"granted"|"revoking"|"revoked"|string;
   export interface NetworkInterfacePrivateIpAddress {
     /**
      * The association information for an Elastic IP address (IPv4) associated with the network interface.

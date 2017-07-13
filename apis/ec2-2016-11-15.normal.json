@@ -433,6 +433,16 @@
       "output":{"shape":"CreateNetworkInterfaceResult"},
       "documentation":"<p>Creates a network interface in the specified subnet.</p> <p>For more information about network interfaces, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html\">Elastic Network Interfaces</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
+    "CreateNetworkInterfacePermission":{
+      "name":"CreateNetworkInterfacePermission",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateNetworkInterfacePermissionRequest"},
+      "output":{"shape":"CreateNetworkInterfacePermissionResult"},
+      "documentation":"<p>Grants an AWS authorized partner account permission to attach the specified network interface to an instance in their account.</p> <p>You can grant permission to a single AWS account only, and only one account at a time.</p>"
+    },
     "CreatePlacementGroup":{
       "name":"CreatePlacementGroup",
       "http":{
@@ -682,6 +692,16 @@
       },
       "input":{"shape":"DeleteNetworkInterfaceRequest"},
       "documentation":"<p>Deletes the specified network interface. You must detach the network interface before you can delete it.</p>"
+    },
+    "DeleteNetworkInterfacePermission":{
+      "name":"DeleteNetworkInterfacePermission",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteNetworkInterfacePermissionRequest"},
+      "output":{"shape":"DeleteNetworkInterfacePermissionResult"},
+      "documentation":"<p>Deletes a permission for a network interface. By default, you cannot delete the permission if the account for which you're removing the permission has attached the network interface to an instance. However, you can force delete the permission, regardless of any attachment.</p>"
     },
     "DeletePlacementGroup":{
       "name":"DeletePlacementGroup",
@@ -1067,7 +1087,7 @@
       },
       "input":{"shape":"DescribeInstanceStatusRequest"},
       "output":{"shape":"DescribeInstanceStatusResult"},
-      "documentation":"<p>Describes the status of one or more instances. By default, only running instances are described, unless specified otherwise.</p> <p>Instance status includes the following components:</p> <ul> <li> <p> <b>Status checks</b> - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html\">Status Checks for Your Instances</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html\">Troubleshooting Instances with Failed Status Checks</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Scheduled events</b> - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html\">Scheduled Events for Your Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Instance state</b> - You can manage your instances from the moment you launch them through their termination. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> </ul>"
+      "documentation":"<p>Describes the status of one or more instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances.</p> <p>Instance status includes the following components:</p> <ul> <li> <p> <b>Status checks</b> - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html\">Status Checks for Your Instances</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html\">Troubleshooting Instances with Failed Status Checks</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Scheduled events</b> - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html\">Scheduled Events for Your Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Instance state</b> - You can manage your instances from the moment you launch them through their termination. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> </ul>"
     },
     "DescribeInstances":{
       "name":"DescribeInstances",
@@ -1138,6 +1158,16 @@
       "input":{"shape":"DescribeNetworkInterfaceAttributeRequest"},
       "output":{"shape":"DescribeNetworkInterfaceAttributeResult"},
       "documentation":"<p>Describes a network interface attribute. You can specify only one attribute at a time.</p>"
+    },
+    "DescribeNetworkInterfacePermissions":{
+      "name":"DescribeNetworkInterfacePermissions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeNetworkInterfacePermissionsRequest"},
+      "output":{"shape":"DescribeNetworkInterfacePermissionsResult"},
+      "documentation":"<p>Describes the permissions for your network interfaces. </p>"
     },
     "DescribeNetworkInterfaces":{
       "name":"DescribeNetworkInterfaces",
@@ -4497,6 +4527,45 @@
       },
       "documentation":"<p>Contains the output of CreateNetworkAcl.</p>"
     },
+    "CreateNetworkInterfacePermissionRequest":{
+      "type":"structure",
+      "required":[
+        "NetworkInterfaceId",
+        "Permission"
+      ],
+      "members":{
+        "NetworkInterfaceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the network interface.</p>"
+        },
+        "AwsAccountId":{
+          "shape":"String",
+          "documentation":"<p>The AWS account ID.</p>"
+        },
+        "AwsService":{
+          "shape":"String",
+          "documentation":"<p>The AWS service. Currently not supported.</p>"
+        },
+        "Permission":{
+          "shape":"InterfacePermissionType",
+          "documentation":"<p>The type of permission to grant.</p>"
+        },
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CreateNetworkInterfacePermissionResult":{
+      "type":"structure",
+      "members":{
+        "InterfacePermission":{
+          "shape":"NetworkInterfacePermission",
+          "documentation":"<p>Information about the permission for the network interface.</p>",
+          "locationName":"interfacePermission"
+        }
+      }
+    },
     "CreateNetworkInterfaceRequest":{
       "type":"structure",
       "required":["SubnetId"],
@@ -5427,6 +5496,34 @@
         }
       },
       "documentation":"<p>Contains the parameters for DeleteNetworkAcl.</p>"
+    },
+    "DeleteNetworkInterfacePermissionRequest":{
+      "type":"structure",
+      "required":["NetworkInterfacePermissionId"],
+      "members":{
+        "NetworkInterfacePermissionId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the network interface permission.</p>"
+        },
+        "Force":{
+          "shape":"Boolean",
+          "documentation":"<p>Specify <code>true</code> to remove the permission even if the network interface is attached to an instance.</p>"
+        },
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeleteNetworkInterfacePermissionResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Returns <code>true</code> if the request succeeds, otherwise returns an error.</p>",
+          "locationName":"return"
+        }
+      }
     },
     "DeleteNetworkInterfaceRequest":{
       "type":"structure",
@@ -6878,6 +6975,44 @@
       },
       "documentation":"<p>Contains the output of DescribeNetworkInterfaceAttribute.</p>"
     },
+    "DescribeNetworkInterfacePermissionsRequest":{
+      "type":"structure",
+      "members":{
+        "NetworkInterfacePermissionIds":{
+          "shape":"NetworkInterfacePermissionIdList",
+          "documentation":"<p>One or more network interface permission IDs.</p>",
+          "locationName":"NetworkInterfacePermissionId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>network-interface-permission.network-interface-permission-id</code> - The ID of the permission.</p> </li> <li> <p> <code>network-interface-permission.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>network-interface-permission.aws-account-id</code> - The AWS account ID.</p> </li> <li> <p> <code>network-interface-permission.aws-service</code> - The AWS service.</p> </li> <li> <p> <code>network-interface-permission.permission</code> - The type of permission (<code>INSTANCE-ATTACH</code> | <code>EIP-ASSOCIATE</code>).</p> </li> </ul>",
+          "locationName":"Filter"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to request the next page of results.</p>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. If this parameter is not specified, up to 50 results are returned by default.</p>"
+        }
+      }
+    },
+    "DescribeNetworkInterfacePermissionsResult":{
+      "type":"structure",
+      "members":{
+        "NetworkInterfacePermissions":{
+          "shape":"NetworkInterfacePermissionList",
+          "documentation":"<p>The network interface permissions.</p>",
+          "locationName":"networkInterfacePermissions"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use to retrieve the next page of results.</p>",
+          "locationName":"nextToken"
+        }
+      }
+    },
     "DescribeNetworkInterfacesRequest":{
       "type":"structure",
       "members":{
@@ -7466,7 +7601,7 @@
       "members":{
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>description</code> - A description of the snapshot.</p> </li> <li> <p> <code>owner-alias</code> - Value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM consolew.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the snapshot.</p> </li> <li> <p> <code>progress</code> - The progress of the snapshot, as a percentage (for example, 80%).</p> </li> <li> <p> <code>snapshot-id</code> - The snapshot ID.</p> </li> <li> <p> <code>start-time</code> - The time stamp when the snapshot was initiated.</p> </li> <li> <p> <code>status</code> - The status of the snapshot (<code>pending</code> | <code>completed</code> | <code>error</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify <code>tag:Purpose</code> for the filter name and <code>X</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>volume-id</code> - The ID of the volume the snapshot is for.</p> </li> <li> <p> <code>volume-size</code> - The size of the volume, in GiB.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>description</code> - A description of the snapshot.</p> </li> <li> <p> <code>owner-alias</code> - Value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the snapshot.</p> </li> <li> <p> <code>progress</code> - The progress of the snapshot, as a percentage (for example, 80%).</p> </li> <li> <p> <code>snapshot-id</code> - The snapshot ID.</p> </li> <li> <p> <code>start-time</code> - The time stamp when the snapshot was initiated.</p> </li> <li> <p> <code>status</code> - The status of the snapshot (<code>pending</code> | <code>completed</code> | <code>error</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify <code>tag:Purpose</code> for the filter name and <code>X</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>volume-id</code> - The ID of the volume the snapshot is for.</p> </li> <li> <p> <code>volume-size</code> - The size of the volume, in GiB.</p> </li> </ul>",
           "locationName":"Filter"
         },
         "MaxResults":{
@@ -11978,6 +12113,13 @@
       "member":{"shape":"InstanceType"}
     },
     "Integer":{"type":"integer"},
+    "InterfacePermissionType":{
+      "type":"string",
+      "enum":[
+        "INSTANCE-ATTACH",
+        "EIP-ASSOCIATE"
+      ]
+    },
     "InternetGateway":{
       "type":"structure",
       "members":{
@@ -12497,7 +12639,7 @@
         },
         "DisableApiTermination":{
           "shape":"AttributeBooleanValue",
-          "documentation":"<p>If the value is <code>true</code>, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use this paramater for Spot Instances.</p>",
+          "documentation":"<p>If the value is <code>true</code>, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use this parameter for Spot Instances.</p>",
           "locationName":"disableApiTermination"
         },
         "DryRun":{
@@ -13494,6 +13636,78 @@
         "shape":"NetworkInterface",
         "locationName":"item"
       }
+    },
+    "NetworkInterfacePermission":{
+      "type":"structure",
+      "members":{
+        "NetworkInterfacePermissionId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the network interface permission.</p>",
+          "locationName":"networkInterfacePermissionId"
+        },
+        "NetworkInterfaceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the network interface.</p>",
+          "locationName":"networkInterfaceId"
+        },
+        "AwsAccountId":{
+          "shape":"String",
+          "documentation":"<p>The AWS account ID.</p>",
+          "locationName":"awsAccountId"
+        },
+        "AwsService":{
+          "shape":"String",
+          "documentation":"<p>The AWS service.</p>",
+          "locationName":"awsService"
+        },
+        "Permission":{
+          "shape":"InterfacePermissionType",
+          "documentation":"<p>The type of permission.</p>",
+          "locationName":"permission"
+        },
+        "PermissionState":{
+          "shape":"NetworkInterfacePermissionState",
+          "documentation":"<p>Information about the state of the permission.</p>",
+          "locationName":"permissionState"
+        }
+      },
+      "documentation":"<p>Describes a permission for a network interface.</p>"
+    },
+    "NetworkInterfacePermissionIdList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "NetworkInterfacePermissionList":{
+      "type":"list",
+      "member":{
+        "shape":"NetworkInterfacePermission",
+        "locationName":"item"
+      }
+    },
+    "NetworkInterfacePermissionState":{
+      "type":"structure",
+      "members":{
+        "State":{
+          "shape":"NetworkInterfacePermissionStateCode",
+          "documentation":"<p>The state of the permission.</p>",
+          "locationName":"state"
+        },
+        "StatusMessage":{
+          "shape":"String",
+          "documentation":"<p>A status message, if applicable.</p>",
+          "locationName":"statusMessage"
+        }
+      },
+      "documentation":"<p>Describes the state of a network interface permission.</p>"
+    },
+    "NetworkInterfacePermissionStateCode":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "granted",
+        "revoking",
+        "revoked"
+      ]
     },
     "NetworkInterfacePrivateIpAddress":{
       "type":"structure",

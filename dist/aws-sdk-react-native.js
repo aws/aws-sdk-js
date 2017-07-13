@@ -381,7 +381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @constant
 		   */
-		  VERSION: '2.83.0',
+		  VERSION: '2.84.0',
 
 		  /**
 		   * @api private
@@ -10352,6 +10352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		   * @api private
 		   */
 		  retryableError: function retryableError(error) {
+		    if (this.timeoutError(error)) return true;
 		    if (this.networkingError(error)) return true;
 		    if (this.expiredCredentialsError(error)) return true;
 		    if (this.throttledError(error)) return true;
@@ -10364,6 +10365,13 @@ return /******/ (function(modules) { // webpackBootstrap
 		   */
 		  networkingError: function networkingError(error) {
 		    return error.code === 'NetworkingError';
+		  },
+
+		  /**
+		   * @api private
+		   */
+		  timeoutError: function timeoutError(error) {
+		    return error.code === 'TimeoutError';
 		  },
 
 		  /**
@@ -12412,12 +12420,16 @@ return /******/ (function(modules) { // webpackBootstrap
 		      }
 
 		      function error(err) {
-		        resp.error = AWS.util.error(err, {
-		          code: 'NetworkingError',
-		          region: resp.request.httpRequest.region,
-		          hostname: resp.request.httpRequest.endpoint.hostname,
-		          retryable: true
-		        });
+		        if (err.code !== 'RequestAbortedError') {
+		          var errCode = err.code === 'TimeoutError' ? err.code : 'NetworkingError';
+		          err = AWS.util.error(err, {
+		            code: errCode,
+		            region: resp.request.httpRequest.region,
+		            hostname: resp.request.httpRequest.endpoint.hostname,
+		            retryable: true
+		          });
+		        }
+		        resp.error = err;
 		        resp.request.emit('httpError', [resp.error, resp], function() {
 		          done();
 		        });
@@ -40206,6 +40218,30 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"DeleteGatewayResponse": {
+				"http": {
+					"method": "DELETE",
+					"requestUri": "/restapis/{restapi_id}/gatewayresponses/{response_type}",
+					"responseCode": 202
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"restApiId",
+						"responseType"
+					],
+					"members": {
+						"restApiId": {
+							"location": "uri",
+							"locationName": "restapi_id"
+						},
+						"responseType": {
+							"location": "uri",
+							"locationName": "response_type"
+						}
+					}
+				}
+			},
 			"DeleteIntegration": {
 				"http": {
 					"method": "DELETE",
@@ -40550,7 +40586,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				},
 				"output": {
-					"shape": "S2k"
+					"shape": "S2m"
 				}
 			},
 			"GetAccount": {
@@ -40563,7 +40599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {}
 				},
 				"output": {
-					"shape": "S2m"
+					"shape": "S2o"
 				}
 			},
 			"GetApiKey": {
@@ -40791,7 +40827,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				},
 				"output": {
-					"shape": "S2k"
+					"shape": "S2m"
 				}
 			},
 			"GetClientCertificates": {
@@ -40821,7 +40857,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "item",
 							"type": "list",
 							"member": {
-								"shape": "S2k"
+								"shape": "S2m"
 							}
 						}
 					}
@@ -41148,6 +41184,72 @@ return /******/ (function(modules) { // webpackBootstrap
 						}
 					},
 					"payload": "body"
+				}
+			},
+			"GetGatewayResponse": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/restapis/{restapi_id}/gatewayresponses/{response_type}"
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"restApiId",
+						"responseType"
+					],
+					"members": {
+						"restApiId": {
+							"location": "uri",
+							"locationName": "restapi_id"
+						},
+						"responseType": {
+							"location": "uri",
+							"locationName": "response_type"
+						}
+					}
+				},
+				"output": {
+					"shape": "S3p"
+				}
+			},
+			"GetGatewayResponses": {
+				"http": {
+					"method": "GET",
+					"requestUri": "/restapis/{restapi_id}/gatewayresponses"
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"restApiId"
+					],
+					"members": {
+						"restApiId": {
+							"location": "uri",
+							"locationName": "restapi_id"
+						},
+						"position": {
+							"location": "querystring",
+							"locationName": "position"
+						},
+						"limit": {
+							"location": "querystring",
+							"locationName": "limit",
+							"type": "integer"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"position": {},
+						"items": {
+							"locationName": "item",
+							"type": "list",
+							"member": {
+								"shape": "S3p"
+							}
+						}
+					}
 				}
 			},
 			"GetIntegration": {
@@ -41648,7 +41750,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				},
 				"output": {
-					"shape": "S4b"
+					"shape": "S4i"
 				}
 			},
 			"GetSdkTypes": {
@@ -41678,7 +41780,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "item",
 							"type": "list",
 							"member": {
-								"shape": "S4b"
+								"shape": "S4i"
 							}
 						}
 					}
@@ -41784,7 +41886,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				},
 				"output": {
-					"shape": "S4m"
+					"shape": "S4t"
 				}
 			},
 			"GetUsagePlan": {
@@ -42026,6 +42128,40 @@ return /******/ (function(modules) { // webpackBootstrap
 				},
 				"output": {
 					"shape": "S1g"
+				}
+			},
+			"PutGatewayResponse": {
+				"http": {
+					"method": "PUT",
+					"requestUri": "/restapis/{restapi_id}/gatewayresponses/{response_type}",
+					"responseCode": 201
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"restApiId",
+						"responseType"
+					],
+					"members": {
+						"restApiId": {
+							"location": "uri",
+							"locationName": "restapi_id"
+						},
+						"responseType": {
+							"location": "uri",
+							"locationName": "response_type"
+						},
+						"statusCode": {},
+						"responseParameters": {
+							"shape": "Sk"
+						},
+						"responseTemplates": {
+							"shape": "Sk"
+						}
+					}
+				},
+				"output": {
+					"shape": "S3p"
 				}
 			},
 			"PutIntegration": {
@@ -42272,7 +42408,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "authorizer_id"
 						},
 						"headers": {
-							"shape": "S5c"
+							"shape": "S5k"
 						},
 						"pathWithQueryString": {},
 						"body": {},
@@ -42336,7 +42472,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"pathWithQueryString": {},
 						"body": {},
 						"headers": {
-							"shape": "S5c"
+							"shape": "S5k"
 						},
 						"clientCertificateId": {},
 						"stageVariables": {
@@ -42352,7 +42488,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"body": {},
 						"headers": {
-							"shape": "S5c"
+							"shape": "S5k"
 						},
 						"log": {},
 						"latency": {
@@ -42370,12 +42506,12 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
 				"output": {
-					"shape": "S2m"
+					"shape": "S2o"
 				}
 			},
 			"UpdateApiKey": {
@@ -42394,7 +42530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "api_Key"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42423,7 +42559,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "authorizer_id"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42452,7 +42588,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "base_path"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42476,12 +42612,12 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "clientcertificate_id"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
 				"output": {
-					"shape": "S2k"
+					"shape": "S2m"
 				}
 			},
 			"UpdateDeployment": {
@@ -42505,7 +42641,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "deployment_id"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42534,7 +42670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "part_id"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42563,7 +42699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "doc_version"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42587,12 +42723,41 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "domain_name"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
 				"output": {
 					"shape": "Sx"
+				}
+			},
+			"UpdateGatewayResponse": {
+				"http": {
+					"method": "PATCH",
+					"requestUri": "/restapis/{restapi_id}/gatewayresponses/{response_type}"
+				},
+				"input": {
+					"type": "structure",
+					"required": [
+						"restApiId",
+						"responseType"
+					],
+					"members": {
+						"restApiId": {
+							"location": "uri",
+							"locationName": "restapi_id"
+						},
+						"responseType": {
+							"location": "uri",
+							"locationName": "response_type"
+						},
+						"patchOperations": {
+							"shape": "S5q"
+						}
+					}
+				},
+				"output": {
+					"shape": "S3p"
 				}
 			},
 			"UpdateIntegration": {
@@ -42621,7 +42786,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "http_method"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42660,7 +42825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "status_code"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42694,7 +42859,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "http_method"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42734,7 +42899,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "status_code"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42763,7 +42928,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "model_name"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42792,7 +42957,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "requestvalidator_id"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42821,7 +42986,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "resource_id"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42845,7 +43010,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "restapi_id"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42874,7 +43039,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "stage_name"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -42903,12 +43068,12 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "keyId"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
 				"output": {
-					"shape": "S4m"
+					"shape": "S4t"
 				}
 			},
 			"UpdateUsagePlan": {
@@ -42927,7 +43092,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "usageplanId"
 						},
 						"patchOperations": {
-							"shape": "S5i"
+							"shape": "S5q"
 						}
 					}
 				},
@@ -43337,7 +43502,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"name": {}
 				}
 			},
-			"S2k": {
+			"S2m": {
 				"type": "structure",
 				"members": {
 					"clientCertificateId": {},
@@ -43351,7 +43516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S2m": {
+			"S2o": {
 				"type": "structure",
 				"members": {
 					"cloudwatchRoleArn": {},
@@ -43364,7 +43529,23 @@ return /******/ (function(modules) { // webpackBootstrap
 					"apiKeyVersion": {}
 				}
 			},
-			"S4b": {
+			"S3p": {
+				"type": "structure",
+				"members": {
+					"responseType": {},
+					"statusCode": {},
+					"responseParameters": {
+						"shape": "Sk"
+					},
+					"responseTemplates": {
+						"shape": "Sk"
+					},
+					"defaultResponse": {
+						"type": "boolean"
+					}
+				}
+			},
+			"S4i": {
 				"type": "structure",
 				"members": {
 					"id": {},
@@ -43387,7 +43568,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S4m": {
+			"S4t": {
 				"type": "structure",
 				"members": {
 					"usagePlanId": {},
@@ -43410,12 +43591,12 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S5c": {
+			"S5k": {
 				"type": "map",
 				"key": {},
 				"value": {}
 			},
-			"S5i": {
+			"S5q": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -81393,6 +81574,33 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"CreateNetworkInterfacePermission": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"NetworkInterfaceId",
+						"Permission"
+					],
+					"members": {
+						"NetworkInterfaceId": {},
+						"AwsAccountId": {},
+						"AwsService": {},
+						"Permission": {},
+						"DryRun": {
+							"type": "boolean"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"InterfacePermission": {
+							"shape": "S61",
+							"locationName": "interfacePermission"
+						}
+					}
+				}
+			},
 			"CreatePlacementGroup": {
 				"input": {
 					"type": "structure",
@@ -81537,7 +81745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"RouteTable": {
-							"shape": "S68",
+							"shape": "S6e",
 							"locationName": "routeTable"
 						}
 					}
@@ -81587,7 +81795,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				},
 				"output": {
-					"shape": "S6k"
+					"shape": "S6q"
 				}
 			},
 			"CreateSpotDatafeedSubscription": {
@@ -81613,7 +81821,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SpotDatafeedSubscription": {
-							"shape": "S6o",
+							"shape": "S6u",
 							"locationName": "spotDatafeedSubscription"
 						}
 					}
@@ -81641,7 +81849,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Subnet": {
-							"shape": "S6t",
+							"shape": "S6z",
 							"locationName": "subnet"
 						}
 					}
@@ -81660,7 +81868,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Resources": {
-							"shape": "S6x",
+							"shape": "S73",
 							"locationName": "ResourceId"
 						},
 						"Tags": {
@@ -81696,13 +81904,13 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"TagSpecifications": {
-							"shape": "S6z",
+							"shape": "S75",
 							"locationName": "TagSpecification"
 						}
 					}
 				},
 				"output": {
-					"shape": "S72"
+					"shape": "S78"
 				}
 			},
 			"CreateVpc": {
@@ -81730,7 +81938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Vpc": {
-							"shape": "S78",
+							"shape": "S7e",
 							"locationName": "vpc"
 						}
 					}
@@ -81764,7 +81972,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "clientToken"
 						},
 						"VpcEndpoint": {
-							"shape": "S7d",
+							"shape": "S7j",
 							"locationName": "vpcEndpoint"
 						}
 					}
@@ -81831,7 +82039,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"VpnConnection": {
-							"shape": "S7k",
+							"shape": "S7q",
 							"locationName": "vpnConnection"
 						}
 					}
@@ -81869,7 +82077,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"VpnGateway": {
-							"shape": "S7w",
+							"shape": "S82",
 							"locationName": "vpnGateway"
 						}
 					}
@@ -82063,6 +82271,32 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
+			"DeleteNetworkInterfacePermission": {
+				"input": {
+					"type": "structure",
+					"required": [
+						"NetworkInterfacePermissionId"
+					],
+					"members": {
+						"NetworkInterfacePermissionId": {},
+						"Force": {
+							"type": "boolean"
+						},
+						"DryRun": {
+							"type": "boolean"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"Return": {
+							"locationName": "return",
+							"type": "boolean"
+						}
+					}
+				}
+			},
 			"DeletePlacementGroup": {
 				"input": {
 					"type": "structure",
@@ -82186,7 +82420,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Resources": {
-							"shape": "S6x",
+							"shape": "S73",
 							"locationName": "resourceId"
 						},
 						"Tags": {
@@ -82390,7 +82624,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"PublicIps": {
@@ -82458,7 +82692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"ZoneNames": {
@@ -82524,7 +82758,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -82552,7 +82786,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -82560,7 +82794,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"InstanceIds": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "InstanceId"
 						},
 						"MaxResults": {
@@ -82629,7 +82863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "conversionTasks",
 							"type": "list",
 							"member": {
-								"shape": "S9u",
+								"shape": "Sa2",
 								"locationName": "item"
 							}
 						}
@@ -82648,7 +82882,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -82683,7 +82917,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -82775,7 +83009,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filter": {
-							"shape": "S92"
+							"shape": "S9a"
 						},
 						"FlowLogIds": {
 							"shape": "S2z",
@@ -82849,11 +83083,11 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"Owners": {
-							"shape": "Sap",
+							"shape": "Sax",
 							"locationName": "Owner"
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"NextToken": {},
@@ -82924,7 +83158,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "ownerAlias"
 									},
 									"ProductCodes": {
-										"shape": "Say",
+										"shape": "Sb6",
 										"locationName": "productCodes"
 									},
 									"Tags": {
@@ -82945,7 +83179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filter": {
-							"shape": "S92"
+							"shape": "S9a"
 						},
 						"MaxDuration": {
 							"type": "integer"
@@ -83005,7 +83239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filter": {
-							"shape": "S92"
+							"shape": "S9a"
 						},
 						"HostReservationIdSet": {
 							"type": "list",
@@ -83044,7 +83278,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"type": "timestamp"
 									},
 									"HostIdSet": {
-										"shape": "Sbb",
+										"shape": "Sbj",
 										"locationName": "hostIdSet"
 									},
 									"HostReservationId": {
@@ -83086,11 +83320,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filter": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "filter"
 						},
 						"HostIds": {
-							"shape": "Sbe",
+							"shape": "Sbm",
 							"locationName": "hostId"
 						},
 						"MaxResults": {
@@ -83219,7 +83453,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"MaxResults": {
@@ -83256,7 +83490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Statuses": {
-							"shape": "Sbv",
+							"shape": "Sc3",
 							"locationName": "statusSet"
 						}
 					}
@@ -83281,7 +83515,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Statuses": {
-							"shape": "Sbv",
+							"shape": "Sc3",
 							"locationName": "statusSet"
 						}
 					}
@@ -83307,18 +83541,18 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"BlockDeviceMappings": {
-							"shape": "Sc2",
+							"shape": "Sca",
 							"locationName": "blockDeviceMapping"
 						},
 						"ImageId": {
 							"locationName": "imageId"
 						},
 						"LaunchPermissions": {
-							"shape": "Sc3",
+							"shape": "Scb",
 							"locationName": "launchPermission"
 						},
 						"ProductCodes": {
-							"shape": "Say",
+							"shape": "Sb6",
 							"locationName": "productCodes"
 						},
 						"Description": {
@@ -83352,7 +83586,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"ImageIds": {
@@ -83363,7 +83597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"Owners": {
-							"shape": "Sap",
+							"shape": "Sax",
 							"locationName": "Owner"
 						},
 						"DryRun": {
@@ -83411,7 +83645,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "platform"
 									},
 									"ProductCodes": {
-										"shape": "Say",
+										"shape": "Sb6",
 										"locationName": "productCodes"
 									},
 									"RamdiskId": {
@@ -83421,7 +83655,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "imageState"
 									},
 									"BlockDeviceMappings": {
-										"shape": "Sc2",
+										"shape": "Sca",
 										"locationName": "blockDeviceMapping"
 									},
 									"Description": {
@@ -83450,7 +83684,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "sriovNetSupport"
 									},
 									"StateReason": {
-										"shape": "Sch",
+										"shape": "Scp",
 										"locationName": "stateReason"
 									},
 									"Tags": {
@@ -83474,10 +83708,10 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Filters": {
-							"shape": "S92"
+							"shape": "S9a"
 						},
 						"ImportTaskIds": {
-							"shape": "Sck",
+							"shape": "Scs",
 							"locationName": "ImportTaskId"
 						},
 						"MaxResults": {
@@ -83521,7 +83755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "progress"
 									},
 									"SnapshotDetails": {
-										"shape": "Sco",
+										"shape": "Scw",
 										"locationName": "snapshotDetailSet"
 									},
 									"Status": {
@@ -83547,10 +83781,10 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Filters": {
-							"shape": "S92"
+							"shape": "S9a"
 						},
 						"ImportTaskIds": {
-							"shape": "Sck",
+							"shape": "Scs",
 							"locationName": "ImportTaskId"
 						},
 						"MaxResults": {
@@ -83576,7 +83810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "importTaskId"
 									},
 									"SnapshotTaskDetail": {
-										"shape": "Scv",
+										"shape": "Sd3",
 										"locationName": "snapshotTaskDetail"
 									}
 								}
@@ -83616,19 +83850,19 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "groupSet"
 						},
 						"BlockDeviceMappings": {
-							"shape": "Scz",
+							"shape": "Sd7",
 							"locationName": "blockDeviceMapping"
 						},
 						"DisableApiTermination": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "disableApiTermination"
 						},
 						"EnaSupport": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "enaSupport"
 						},
 						"EbsOptimized": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "ebsOptimized"
 						},
 						"InstanceId": {
@@ -83647,7 +83881,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "kernel"
 						},
 						"ProductCodes": {
-							"shape": "Say",
+							"shape": "Sb6",
 							"locationName": "productCodes"
 						},
 						"RamdiskId": {
@@ -83659,7 +83893,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "rootDeviceName"
 						},
 						"SourceDestCheck": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "sourceDestCheck"
 						},
 						"SriovNetSupport": {
@@ -83678,11 +83912,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"InstanceIds": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "InstanceId"
 						},
 						"MaxResults": {
@@ -83740,15 +83974,15 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "instanceId"
 									},
 									"InstanceState": {
-										"shape": "Sda",
+										"shape": "Sdi",
 										"locationName": "instanceState"
 									},
 									"InstanceStatus": {
-										"shape": "Sdc",
+										"shape": "Sdk",
 										"locationName": "instanceStatus"
 									},
 									"SystemStatus": {
-										"shape": "Sdc",
+										"shape": "Sdk",
 										"locationName": "systemStatus"
 									}
 								}
@@ -83765,11 +83999,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"InstanceIds": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "InstanceId"
 						},
 						"DryRun": {
@@ -83792,7 +84026,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "reservationSet",
 							"type": "list",
 							"member": {
-								"shape": "Sdl",
+								"shape": "Sdt",
 								"locationName": "item"
 							}
 						},
@@ -83807,7 +84041,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -83839,7 +84073,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"KeyNames": {
@@ -83882,7 +84116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "filter"
 						},
 						"DryRun": {
@@ -83932,7 +84166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filter": {
-							"shape": "S92"
+							"shape": "S9a"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -83966,7 +84200,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -84031,8 +84265,44 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "networkInterfaceId"
 						},
 						"SourceDestCheck": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "sourceDestCheck"
+						}
+					}
+				}
+			},
+			"DescribeNetworkInterfacePermissions": {
+				"input": {
+					"type": "structure",
+					"members": {
+						"NetworkInterfacePermissionIds": {
+							"locationName": "NetworkInterfacePermissionId",
+							"type": "list",
+							"member": {}
+						},
+						"Filters": {
+							"shape": "S9a",
+							"locationName": "Filter"
+						},
+						"NextToken": {},
+						"MaxResults": {
+							"type": "integer"
+						}
+					}
+				},
+				"output": {
+					"type": "structure",
+					"members": {
+						"NetworkInterfacePermissions": {
+							"locationName": "networkInterfacePermissions",
+							"type": "list",
+							"member": {
+								"shape": "S61",
+								"locationName": "item"
+							}
+						},
+						"NextToken": {
+							"locationName": "nextToken"
 						}
 					}
 				}
@@ -84042,7 +84312,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "filter"
 						},
 						"DryRun": {
@@ -84077,7 +84347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -84124,7 +84394,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"MaxResults": {
@@ -84171,7 +84441,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"RegionNames": {
@@ -84214,12 +84484,12 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"OfferingClass": {},
 						"ReservedInstancesIds": {
-							"shape": "Sf6",
+							"shape": "Sfi",
 							"locationName": "ReservedInstancesId"
 						},
 						"DryRun": {
@@ -84293,7 +84563,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "offeringType"
 									},
 									"RecurringCharges": {
-										"shape": "Sfe",
+										"shape": "Sfq",
 										"locationName": "recurringCharges"
 									},
 									"Scope": {
@@ -84314,7 +84584,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"ReservedInstancesId": {
@@ -84340,7 +84610,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"ReservedInstancesModificationIds": {
@@ -84390,7 +84660,7 @@ return /******/ (function(modules) { // webpackBootstrap
 													"locationName": "reservedInstancesId"
 												},
 												"TargetConfiguration": {
-													"shape": "Sfr",
+													"shape": "Sg3",
 													"locationName": "targetConfiguration"
 												}
 											}
@@ -84434,7 +84704,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"AvailabilityZone": {},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"IncludeMarketplace": {
@@ -84545,7 +84815,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										}
 									},
 									"RecurringCharges": {
-										"shape": "Sfe",
+										"shape": "Sfq",
 										"locationName": "recurringCharges"
 									},
 									"Scope": {
@@ -84565,7 +84835,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -84585,7 +84855,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "routeTableSet",
 							"type": "list",
 							"member": {
-								"shape": "S68",
+								"shape": "S6e",
 								"locationName": "item"
 							}
 						}
@@ -84604,7 +84874,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"FirstSlotStartTimeRange": {
@@ -84703,7 +84973,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "purchaseToken"
 									},
 									"Recurrence": {
-										"shape": "Sgb",
+										"shape": "Sgn",
 										"locationName": "recurrence"
 									},
 									"SlotDurationInHours": {
@@ -84728,7 +84998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"MaxResults": {
@@ -84765,7 +85035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "scheduledInstanceSet",
 							"type": "list",
 							"member": {
-								"shape": "Sgi",
+								"shape": "Sgu",
 								"locationName": "item"
 							}
 						}
@@ -84824,7 +85094,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"GroupIds": {
@@ -84832,7 +85102,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "GroupId"
 						},
 						"GroupNames": {
-							"shape": "Sgp",
+							"shape": "Sh1",
 							"locationName": "GroupName"
 						},
 						"DryRun": {
@@ -84904,11 +85174,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CreateVolumePermissions": {
-							"shape": "Sgw",
+							"shape": "Sh8",
 							"locationName": "createVolumePermission"
 						},
 						"ProductCodes": {
-							"shape": "Say",
+							"shape": "Sb6",
 							"locationName": "productCodes"
 						},
 						"SnapshotId": {
@@ -84922,7 +85192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"MaxResults": {
@@ -84930,7 +85200,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"NextToken": {},
 						"OwnerIds": {
-							"shape": "Sap",
+							"shape": "Sax",
 							"locationName": "Owner"
 						},
 						"RestorableByUserIds": {
@@ -84958,7 +85228,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "snapshotSet",
 							"type": "list",
 							"member": {
-								"shape": "S6k",
+								"shape": "S6q",
 								"locationName": "item"
 							}
 						},
@@ -84982,7 +85252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SpotDatafeedSubscription": {
-							"shape": "S6o",
+							"shape": "S6u",
 							"locationName": "spotDatafeedSubscription"
 						}
 					}
@@ -85194,7 +85464,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"type": "timestamp"
 									},
 									"SpotFleetRequestConfig": {
-										"shape": "Shl",
+										"shape": "Shx",
 										"locationName": "spotFleetRequestConfig"
 									},
 									"SpotFleetRequestId": {
@@ -85214,7 +85484,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -85231,7 +85501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SpotInstanceRequests": {
-							"shape": "Shx",
+							"shape": "Si9",
 							"locationName": "spotInstanceRequestSet"
 						}
 					}
@@ -85242,7 +85512,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"AvailabilityZone": {
@@ -85357,11 +85627,11 @@ return /******/ (function(modules) { // webpackBootstrap
 										"locationName": "groupName"
 									},
 									"StaleIpPermissions": {
-										"shape": "Sie",
+										"shape": "Siq",
 										"locationName": "staleIpPermissions"
 									},
 									"StaleIpPermissionsEgress": {
-										"shape": "Sie",
+										"shape": "Siq",
 										"locationName": "staleIpPermissionsEgress"
 									},
 									"VpcId": {
@@ -85378,7 +85648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"SubnetIds": {
@@ -85401,7 +85671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "subnetSet",
 							"type": "list",
 							"member": {
-								"shape": "S6t",
+								"shape": "S6z",
 								"locationName": "item"
 							}
 						}
@@ -85417,7 +85687,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"MaxResults": {
@@ -85479,11 +85749,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"AutoEnableIO": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "autoEnableIO"
 						},
 						"ProductCodes": {
-							"shape": "Say",
+							"shape": "Sb6",
 							"locationName": "productCodes"
 						},
 						"VolumeId": {
@@ -85497,7 +85767,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"MaxResults": {
@@ -85505,7 +85775,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"NextToken": {},
 						"VolumeIds": {
-							"shape": "Siv",
+							"shape": "Sj7",
 							"locationName": "VolumeId"
 						},
 						"DryRun": {
@@ -85618,11 +85888,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"VolumeIds": {
-							"shape": "Siv",
+							"shape": "Sj7",
 							"locationName": "VolumeId"
 						},
 						"DryRun": {
@@ -85645,7 +85915,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "volumeSet",
 							"type": "list",
 							"member": {
-								"shape": "S72",
+								"shape": "S78",
 								"locationName": "item"
 							}
 						},
@@ -85663,11 +85933,11 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"VolumeIds": {
-							"shape": "Siv",
+							"shape": "Sj7",
 							"locationName": "VolumeId"
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"NextToken": {},
@@ -85683,7 +85953,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "volumeModificationSet",
 							"type": "list",
 							"member": {
-								"shape": "Sje",
+								"shape": "Sjq",
 								"locationName": "item"
 							}
 						},
@@ -85716,11 +85986,11 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "vpcId"
 						},
 						"EnableDnsHostnames": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "enableDnsHostnames"
 						},
 						"EnableDnsSupport": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "enableDnsSupport"
 						}
 					}
@@ -85731,7 +86001,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -85739,7 +86009,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"VpcIds": {
-							"shape": "Sjk",
+							"shape": "Sjw",
 							"locationName": "VpcId"
 						}
 					}
@@ -85783,7 +86053,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "nextToken"
 						},
 						"VpcIds": {
-							"shape": "Sjk"
+							"shape": "Sjw"
 						}
 					}
 				},
@@ -85847,7 +86117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"MaxResults": {
@@ -85870,7 +86140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "vpcEndpointSet",
 							"type": "list",
 							"member": {
-								"shape": "S7d",
+								"shape": "S7j",
 								"locationName": "item"
 							}
 						}
@@ -85882,7 +86152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"DryRun": {
@@ -85914,7 +86184,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"VpcIds": {
@@ -85937,7 +86207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "vpcSet",
 							"type": "list",
 							"member": {
-								"shape": "S78",
+								"shape": "S7e",
 								"locationName": "item"
 							}
 						}
@@ -85949,7 +86219,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"VpnConnectionIds": {
@@ -85972,7 +86242,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "vpnConnectionSet",
 							"type": "list",
 							"member": {
-								"shape": "S7k",
+								"shape": "S7q",
 								"locationName": "item"
 							}
 						}
@@ -85984,7 +86254,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Filters": {
-							"shape": "S92",
+							"shape": "S9a",
 							"locationName": "Filter"
 						},
 						"VpnGatewayIds": {
@@ -86007,7 +86277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "vpnGatewaySet",
 							"type": "list",
 							"member": {
-								"shape": "S7w",
+								"shape": "S82",
 								"locationName": "item"
 							}
 						}
@@ -86422,7 +86692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"HostIdSet": {
-							"shape": "Sl6"
+							"shape": "Sli"
 						},
 						"OfferingId": {}
 					}
@@ -86434,7 +86704,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "currencyCode"
 						},
 						"Purchase": {
-							"shape": "Sl8",
+							"shape": "Slk",
 							"locationName": "purchase"
 						},
 						"TotalHourlyPrice": {
@@ -86514,7 +86784,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "paymentDue"
 						},
 						"ReservedInstanceValueRollup": {
-							"shape": "Sle",
+							"shape": "Slq",
 							"locationName": "reservedInstanceValueRollup"
 						},
 						"ReservedInstanceValueSet": {
@@ -86525,7 +86795,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"type": "structure",
 								"members": {
 									"ReservationValue": {
-										"shape": "Sle",
+										"shape": "Slq",
 										"locationName": "reservationValue"
 									},
 									"ReservedInstanceId": {
@@ -86535,7 +86805,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"TargetConfigurationValueRollup": {
-							"shape": "Sle",
+							"shape": "Slq",
 							"locationName": "targetConfigurationValueRollup"
 						},
 						"TargetConfigurationValueSet": {
@@ -86546,7 +86816,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"type": "structure",
 								"members": {
 									"ReservationValue": {
-										"shape": "Sle",
+										"shape": "Slq",
 										"locationName": "reservationValue"
 									},
 									"TargetConfiguration": {
@@ -86577,7 +86847,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"Architecture": {},
 						"ClientData": {
-							"shape": "Sll"
+							"shape": "Slx"
 						},
 						"ClientToken": {},
 						"Description": {},
@@ -86594,7 +86864,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"SnapshotId": {},
 									"Url": {},
 									"UserBucket": {
-										"shape": "Slo"
+										"shape": "Sm0"
 									}
 								}
 							}
@@ -86636,7 +86906,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "progress"
 						},
 						"SnapshotDetails": {
-							"shape": "Sco",
+							"shape": "Scw",
 							"locationName": "snapshotDetailSet"
 						},
 						"Status": {
@@ -86666,10 +86936,10 @@ return /******/ (function(modules) { // webpackBootstrap
 								"members": {
 									"Description": {},
 									"Image": {
-										"shape": "Slt"
+										"shape": "Sm5"
 									},
 									"Volume": {
-										"shape": "Slu"
+										"shape": "Sm6"
 									}
 								}
 							}
@@ -86693,7 +86963,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "GroupId"
 								},
 								"GroupNames": {
-									"shape": "Slw",
+									"shape": "Sm8",
 									"locationName": "GroupName"
 								},
 								"InstanceInitiatedShutdownBehavior": {
@@ -86707,7 +86977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"type": "boolean"
 								},
 								"Placement": {
-									"shape": "Sdr",
+									"shape": "Sdz",
 									"locationName": "placement"
 								},
 								"PrivateIpAddress": {
@@ -86736,7 +87006,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ConversionTask": {
-							"shape": "S9u",
+							"shape": "Sa2",
 							"locationName": "conversionTask"
 						}
 					}
@@ -86780,7 +87050,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ClientData": {
-							"shape": "Sll"
+							"shape": "Slx"
 						},
 						"ClientToken": {},
 						"Description": {},
@@ -86791,7 +87061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								"Format": {},
 								"Url": {},
 								"UserBucket": {
-									"shape": "Slo"
+									"shape": "Sm0"
 								}
 							}
 						},
@@ -86811,7 +87081,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "importTaskId"
 						},
 						"SnapshotTaskDetail": {
-							"shape": "Scv",
+							"shape": "Sd3",
 							"locationName": "snapshotTaskDetail"
 						}
 					}
@@ -86837,11 +87107,11 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"Image": {
-							"shape": "Slt",
+							"shape": "Sm5",
 							"locationName": "image"
 						},
 						"Volume": {
-							"shape": "Slu",
+							"shape": "Sm6",
 							"locationName": "volume"
 						}
 					}
@@ -86850,7 +87120,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"ConversionTask": {
-							"shape": "S9u",
+							"shape": "Sa2",
 							"locationName": "conversionTask"
 						}
 					}
@@ -86868,7 +87138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "autoPlacement"
 						},
 						"HostIds": {
-							"shape": "Sbe",
+							"shape": "Sbm",
 							"locationName": "hostId"
 						}
 					}
@@ -86881,7 +87151,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "successful"
 						},
 						"Unsuccessful": {
-							"shape": "Sm9",
+							"shape": "Sml",
 							"locationName": "unsuccessful"
 						}
 					}
@@ -86940,10 +87210,10 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "structure",
 							"members": {
 								"Add": {
-									"shape": "Sc3"
+									"shape": "Scb"
 								},
 								"Remove": {
-									"shape": "Sc3"
+									"shape": "Scb"
 								}
 							}
 						},
@@ -86963,7 +87233,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"UserIds": {
-							"shape": "Smh",
+							"shape": "Smt",
 							"locationName": "UserId"
 						},
 						"Value": {},
@@ -86982,7 +87252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"SourceDestCheck": {
-							"shape": "Sd2"
+							"shape": "Sda"
 						},
 						"Attribute": {
 							"locationName": "attribute"
@@ -87020,7 +87290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							}
 						},
 						"DisableApiTermination": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "disableApiTermination"
 						},
 						"DryRun": {
@@ -87028,11 +87298,11 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"EbsOptimized": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "ebsOptimized"
 						},
 						"EnaSupport": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "enaSupport"
 						},
 						"Groups": {
@@ -87145,7 +87415,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "networkInterfaceId"
 						},
 						"SourceDestCheck": {
-							"shape": "Sd2",
+							"shape": "Sda",
 							"locationName": "sourceDestCheck"
 						}
 					}
@@ -87160,7 +87430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"ReservedInstancesIds": {
-							"shape": "Sf6",
+							"shape": "Sfi",
 							"locationName": "ReservedInstancesId"
 						},
 						"ClientToken": {
@@ -87170,7 +87440,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "ReservedInstancesConfigurationSetItemType",
 							"type": "list",
 							"member": {
-								"shape": "Sfr",
+								"shape": "Sg3",
 								"locationName": "item"
 							}
 						}
@@ -87197,21 +87467,21 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "structure",
 							"members": {
 								"Add": {
-									"shape": "Sgw"
+									"shape": "Sh8"
 								},
 								"Remove": {
-									"shape": "Sgw"
+									"shape": "Sh8"
 								}
 							}
 						},
 						"GroupNames": {
-							"shape": "Sgp",
+							"shape": "Sh1",
 							"locationName": "UserGroup"
 						},
 						"OperationType": {},
 						"SnapshotId": {},
 						"UserIds": {
-							"shape": "Smh",
+							"shape": "Smt",
 							"locationName": "UserId"
 						},
 						"DryRun": {
@@ -87258,10 +87528,10 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"AssignIpv6AddressOnCreation": {
-							"shape": "Sd2"
+							"shape": "Sda"
 						},
 						"MapPublicIpOnLaunch": {
-							"shape": "Sd2"
+							"shape": "Sda"
 						},
 						"SubnetId": {
 							"locationName": "subnetId"
@@ -87293,7 +87563,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"VolumeModification": {
-							"shape": "Sje",
+							"shape": "Sjq",
 							"locationName": "volumeModification"
 						}
 					}
@@ -87307,7 +87577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"AutoEnableIO": {
-							"shape": "Sd2"
+							"shape": "Sda"
 						},
 						"VolumeId": {},
 						"DryRun": {
@@ -87325,10 +87595,10 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"EnableDnsHostnames": {
-							"shape": "Sd2"
+							"shape": "Sda"
 						},
 						"EnableDnsSupport": {
-							"shape": "Sd2"
+							"shape": "Sda"
 						},
 						"VpcId": {
 							"locationName": "vpcId"
@@ -87379,13 +87649,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"AccepterPeeringConnectionOptions": {
-							"shape": "Sn8"
+							"shape": "Snk"
 						},
 						"DryRun": {
 							"type": "boolean"
 						},
 						"RequesterPeeringConnectionOptions": {
-							"shape": "Sn8"
+							"shape": "Snk"
 						},
 						"VpcPeeringConnectionId": {}
 					}
@@ -87394,11 +87664,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"AccepterPeeringConnectionOptions": {
-							"shape": "Sna",
+							"shape": "Snm",
 							"locationName": "accepterPeeringConnectionOptions"
 						},
 						"RequesterPeeringConnectionOptions": {
-							"shape": "Sna",
+							"shape": "Snm",
 							"locationName": "requesterPeeringConnectionOptions"
 						}
 					}
@@ -87412,7 +87682,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"InstanceIds": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "InstanceId"
 						},
 						"DryRun": {
@@ -87425,7 +87695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"InstanceMonitorings": {
-							"shape": "Snd",
+							"shape": "Snp",
 							"locationName": "instancesSet"
 						}
 					}
@@ -87470,7 +87740,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ClientToken": {},
 						"CurrencyCode": {},
 						"HostIdSet": {
-							"shape": "Sl6"
+							"shape": "Sli"
 						},
 						"LimitPrice": {},
 						"OfferingId": {}
@@ -87486,7 +87756,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "currencyCode"
 						},
 						"Purchase": {
-							"shape": "Sl8",
+							"shape": "Slk",
 							"locationName": "purchase"
 						},
 						"TotalHourlyPrice": {
@@ -87578,7 +87848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "scheduledInstanceSet",
 							"type": "list",
 							"member": {
-								"shape": "Sgi",
+								"shape": "Sgu",
 								"locationName": "item"
 							}
 						}
@@ -87593,7 +87863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"InstanceIds": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "InstanceId"
 						},
 						"DryRun": {
@@ -87712,7 +87982,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"HostIds": {
-							"shape": "Sbe",
+							"shape": "Sbm",
 							"locationName": "hostId"
 						}
 					}
@@ -87725,7 +87995,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "successful"
 						},
 						"Unsuccessful": {
-							"shape": "Sm9",
+							"shape": "Sml",
 							"locationName": "unsuccessful"
 						}
 					}
@@ -87924,7 +88194,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "timestamp"
 						},
 						"Instances": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "instanceId"
 						},
 						"ReasonCodes": {
@@ -87956,7 +88226,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"SpotFleetRequestConfig": {
-							"shape": "Shl",
+							"shape": "Shx",
 							"locationName": "spotFleetRequestConfig"
 						}
 					}
@@ -88016,7 +88286,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "addressingType"
 								},
 								"BlockDeviceMappings": {
-									"shape": "Sc2",
+									"shape": "Sca",
 									"locationName": "blockDeviceMapping"
 								},
 								"EbsOptimized": {
@@ -88040,15 +88310,15 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "keyName"
 								},
 								"Monitoring": {
-									"shape": "Si0",
+									"shape": "Sic",
 									"locationName": "monitoring"
 								},
 								"NetworkInterfaces": {
-									"shape": "Shr",
+									"shape": "Si3",
 									"locationName": "NetworkInterface"
 								},
 								"Placement": {
-									"shape": "Sht",
+									"shape": "Si5",
 									"locationName": "placement"
 								},
 								"RamdiskId": {
@@ -88082,7 +88352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"SpotInstanceRequests": {
-							"shape": "Shx",
+							"shape": "Si9",
 							"locationName": "spotInstanceRequestSet"
 						}
 					}
@@ -88289,10 +88559,10 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "integer"
 						},
 						"Monitoring": {
-							"shape": "Si0"
+							"shape": "Sic"
 						},
 						"Placement": {
-							"shape": "Sdr"
+							"shape": "Sdz"
 						},
 						"RamdiskId": {},
 						"SecurityGroupIds": {
@@ -88300,7 +88570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "SecurityGroupId"
 						},
 						"SecurityGroups": {
-							"shape": "Slw",
+							"shape": "Sm8",
 							"locationName": "SecurityGroup"
 						},
 						"SubnetId": {},
@@ -88331,20 +88601,20 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "instanceInitiatedShutdownBehavior"
 						},
 						"NetworkInterfaces": {
-							"shape": "Shr",
+							"shape": "Si3",
 							"locationName": "networkInterface"
 						},
 						"PrivateIpAddress": {
 							"locationName": "privateIpAddress"
 						},
 						"TagSpecifications": {
-							"shape": "S6z",
+							"shape": "S75",
 							"locationName": "TagSpecification"
 						}
 					}
 				},
 				"output": {
-					"shape": "Sdl"
+					"shape": "Sdt"
 				}
 			},
 			"RunScheduledInstances": {
@@ -88442,7 +88712,7 @@ return /******/ (function(modules) { // webpackBootstrap
 												"type": "integer"
 											},
 											"Groups": {
-												"shape": "Sp1",
+												"shape": "Spd",
 												"locationName": "Group"
 											},
 											"Ipv6AddressCount": {
@@ -88491,7 +88761,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								},
 								"RamdiskId": {},
 								"SecurityGroupIds": {
-									"shape": "Sp1",
+									"shape": "Spd",
 									"locationName": "SecurityGroupId"
 								},
 								"SubnetId": {},
@@ -88522,7 +88792,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"InstanceIds": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "InstanceId"
 						},
 						"AdditionalInfo": {
@@ -88538,7 +88808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"StartingInstances": {
-							"shape": "Spc",
+							"shape": "Spo",
 							"locationName": "instancesSet"
 						}
 					}
@@ -88552,7 +88822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"InstanceIds": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "InstanceId"
 						},
 						"DryRun": {
@@ -88569,7 +88839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"StoppingInstances": {
-							"shape": "Spc",
+							"shape": "Spo",
 							"locationName": "instancesSet"
 						}
 					}
@@ -88583,7 +88853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"InstanceIds": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "InstanceId"
 						},
 						"DryRun": {
@@ -88596,7 +88866,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"TerminatingInstances": {
-							"shape": "Spc",
+							"shape": "Spo",
 							"locationName": "instancesSet"
 						}
 					}
@@ -88658,7 +88928,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					],
 					"members": {
 						"InstanceIds": {
-							"shape": "S9m",
+							"shape": "S9u",
 							"locationName": "InstanceId"
 						},
 						"DryRun": {
@@ -88671,7 +88941,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"InstanceMonitorings": {
-							"shape": "Snd",
+							"shape": "Snp",
 							"locationName": "instancesSet"
 						}
 					}
@@ -89818,7 +90088,39 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S68": {
+			"S61": {
+				"type": "structure",
+				"members": {
+					"NetworkInterfacePermissionId": {
+						"locationName": "networkInterfacePermissionId"
+					},
+					"NetworkInterfaceId": {
+						"locationName": "networkInterfaceId"
+					},
+					"AwsAccountId": {
+						"locationName": "awsAccountId"
+					},
+					"AwsService": {
+						"locationName": "awsService"
+					},
+					"Permission": {
+						"locationName": "permission"
+					},
+					"PermissionState": {
+						"locationName": "permissionState",
+						"type": "structure",
+						"members": {
+							"State": {
+								"locationName": "state"
+							},
+							"StatusMessage": {
+								"locationName": "statusMessage"
+							}
+						}
+					}
+				}
+			},
+			"S6e": {
 				"type": "structure",
 				"members": {
 					"Associations": {
@@ -89915,7 +90217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S6k": {
+			"S6q": {
 				"type": "structure",
 				"members": {
 					"DataEncryptionKeyId": {
@@ -89966,14 +90268,14 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S6o": {
+			"S6u": {
 				"type": "structure",
 				"members": {
 					"Bucket": {
 						"locationName": "bucket"
 					},
 					"Fault": {
-						"shape": "S6p",
+						"shape": "S6v",
 						"locationName": "fault"
 					},
 					"OwnerId": {
@@ -89987,7 +90289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S6p": {
+			"S6v": {
 				"type": "structure",
 				"members": {
 					"Code": {
@@ -89998,7 +90300,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S6t": {
+			"S6z": {
 				"type": "structure",
 				"members": {
 					"AvailabilityZone": {
@@ -90046,11 +90348,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S6x": {
+			"S73": {
 				"type": "list",
 				"member": {}
 			},
-			"S6z": {
+			"S75": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -90066,7 +90368,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S72": {
+			"S78": {
 				"type": "structure",
 				"members": {
 					"Attachments": {
@@ -90117,7 +90419,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S78": {
+			"S7e": {
 				"type": "structure",
 				"members": {
 					"CidrBlock": {
@@ -90153,7 +90455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S7d": {
+			"S7j": {
 				"type": "structure",
 				"members": {
 					"CreationTimestamp": {
@@ -90181,7 +90483,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S7k": {
+			"S7q": {
 				"type": "structure",
 				"members": {
 					"CustomerGatewayConfiguration": {
@@ -90264,7 +90566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S7w": {
+			"S82": {
 				"type": "structure",
 				"members": {
 					"AvailabilityZone": {
@@ -90293,7 +90595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S92": {
+			"S9a": {
 				"type": "list",
 				"member": {
 					"locationName": "Filter",
@@ -90307,13 +90609,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S9m": {
+			"S9u": {
 				"type": "list",
 				"member": {
 					"locationName": "InstanceId"
 				}
 			},
-			"S9u": {
+			"Sa2": {
 				"type": "structure",
 				"required": [
 					"ConversionTaskId",
@@ -90367,7 +90669,7 @@ return /******/ (function(modules) { // webpackBootstrap
 											"locationName": "description"
 										},
 										"Image": {
-											"shape": "S9z",
+											"shape": "Sa7",
 											"locationName": "image"
 										},
 										"Status": {
@@ -90377,7 +90679,7 @@ return /******/ (function(modules) { // webpackBootstrap
 											"locationName": "statusMessage"
 										},
 										"Volume": {
-											"shape": "Sa0",
+											"shape": "Sa8",
 											"locationName": "volume"
 										}
 									}
@@ -90406,11 +90708,11 @@ return /******/ (function(modules) { // webpackBootstrap
 								"locationName": "description"
 							},
 							"Image": {
-								"shape": "S9z",
+								"shape": "Sa7",
 								"locationName": "image"
 							},
 							"Volume": {
-								"shape": "Sa0",
+								"shape": "Sa8",
 								"locationName": "volume"
 							}
 						}
@@ -90427,7 +90729,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S9z": {
+			"Sa7": {
 				"type": "structure",
 				"required": [
 					"Format",
@@ -90450,7 +90752,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sa0": {
+			"Sa8": {
 				"type": "structure",
 				"required": [
 					"Id"
@@ -90465,13 +90767,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sap": {
+			"Sax": {
 				"type": "list",
 				"member": {
 					"locationName": "Owner"
 				}
 			},
-			"Say": {
+			"Sb6": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -90486,19 +90788,19 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sbb": {
+			"Sbj": {
 				"type": "list",
 				"member": {
 					"locationName": "item"
 				}
 			},
-			"Sbe": {
+			"Sbm": {
 				"type": "list",
 				"member": {
 					"locationName": "item"
 				}
 			},
-			"Sbv": {
+			"Sc3": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -90518,14 +90820,14 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sc2": {
+			"Sca": {
 				"type": "list",
 				"member": {
 					"shape": "S4f",
 					"locationName": "item"
 				}
 			},
-			"Sc3": {
+			"Scb": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -90540,7 +90842,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sch": {
+			"Scp": {
 				"type": "structure",
 				"members": {
 					"Code": {
@@ -90551,13 +90853,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sck": {
+			"Scs": {
 				"type": "list",
 				"member": {
 					"locationName": "ImportTaskId"
 				}
 			},
-			"Sco": {
+			"Scw": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -90592,13 +90894,13 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "url"
 						},
 						"UserBucket": {
-							"shape": "Scq",
+							"shape": "Scy",
 							"locationName": "userBucket"
 						}
 					}
 				}
 			},
-			"Scq": {
+			"Scy": {
 				"type": "structure",
 				"members": {
 					"S3Bucket": {
@@ -90609,7 +90911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Scv": {
+			"Sd3": {
 				"type": "structure",
 				"members": {
 					"Description": {
@@ -90638,12 +90940,12 @@ return /******/ (function(modules) { // webpackBootstrap
 						"locationName": "url"
 					},
 					"UserBucket": {
-						"shape": "Scq",
+						"shape": "Scy",
 						"locationName": "userBucket"
 					}
 				}
 			},
-			"Scz": {
+			"Sd7": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -90675,7 +90977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sd2": {
+			"Sda": {
 				"type": "structure",
 				"members": {
 					"Value": {
@@ -90684,7 +90986,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sda": {
+			"Sdi": {
 				"type": "structure",
 				"members": {
 					"Code": {
@@ -90696,7 +90998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sdc": {
+			"Sdk": {
 				"type": "structure",
 				"members": {
 					"Details": {
@@ -90724,7 +91026,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sdl": {
+			"Sdt": {
 				"type": "structure",
 				"members": {
 					"Groups": {
@@ -90762,11 +91064,11 @@ return /******/ (function(modules) { // webpackBootstrap
 									"type": "timestamp"
 								},
 								"Monitoring": {
-									"shape": "Sdp",
+									"shape": "Sdx",
 									"locationName": "monitoring"
 								},
 								"Placement": {
-									"shape": "Sdr",
+									"shape": "Sdz",
 									"locationName": "placement"
 								},
 								"Platform": {
@@ -90779,7 +91081,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "privateIpAddress"
 								},
 								"ProductCodes": {
-									"shape": "Say",
+									"shape": "Sb6",
 									"locationName": "productCodes"
 								},
 								"PublicDnsName": {
@@ -90792,7 +91094,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "ramdiskId"
 								},
 								"State": {
-									"shape": "Sda",
+									"shape": "Sdi",
 									"locationName": "instanceState"
 								},
 								"StateTransitionReason": {
@@ -90808,7 +91110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "architecture"
 								},
 								"BlockDeviceMappings": {
-									"shape": "Scz",
+									"shape": "Sd7",
 									"locationName": "blockDeviceMapping"
 								},
 								"ClientToken": {
@@ -90840,7 +91142,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"type": "structure",
 										"members": {
 											"Association": {
-												"shape": "Sdv",
+												"shape": "Se3",
 												"locationName": "association"
 											},
 											"Attachment": {
@@ -90901,7 +91203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 													"type": "structure",
 													"members": {
 														"Association": {
-															"shape": "Sdv",
+															"shape": "Se3",
 															"locationName": "association"
 														},
 														"Primary": {
@@ -90954,7 +91256,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "sriovNetSupport"
 								},
 								"StateReason": {
-									"shape": "Sch",
+									"shape": "Scp",
 									"locationName": "stateReason"
 								},
 								"Tags": {
@@ -90978,7 +91280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sdp": {
+			"Sdx": {
 				"type": "structure",
 				"members": {
 					"State": {
@@ -90986,7 +91288,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sdr": {
+			"Sdz": {
 				"type": "structure",
 				"members": {
 					"AvailabilityZone": {
@@ -91009,7 +91311,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sdv": {
+			"Se3": {
 				"type": "structure",
 				"members": {
 					"IpOwnerId": {
@@ -91023,13 +91325,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sf6": {
+			"Sfi": {
 				"type": "list",
 				"member": {
 					"locationName": "ReservedInstancesId"
 				}
 			},
-			"Sfe": {
+			"Sfq": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -91045,7 +91347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sfr": {
+			"Sg3": {
 				"type": "structure",
 				"members": {
 					"AvailabilityZone": {
@@ -91066,7 +91368,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sgb": {
+			"Sgn": {
 				"type": "structure",
 				"members": {
 					"Frequency": {
@@ -91093,7 +91395,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sgi": {
+			"Sgu": {
 				"type": "structure",
 				"members": {
 					"AvailabilityZone": {
@@ -91128,7 +91430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "timestamp"
 					},
 					"Recurrence": {
-						"shape": "Sgb",
+						"shape": "Sgn",
 						"locationName": "recurrence"
 					},
 					"ScheduledInstanceId": {
@@ -91152,13 +91454,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sgp": {
+			"Sh1": {
 				"type": "list",
 				"member": {
 					"locationName": "GroupName"
 				}
 			},
-			"Sgw": {
+			"Sh8": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -91173,7 +91475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Shl": {
+			"Shx": {
 				"type": "structure",
 				"required": [
 					"IamFleetRole",
@@ -91213,7 +91515,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "addressingType"
 								},
 								"BlockDeviceMappings": {
-									"shape": "Sc2",
+									"shape": "Sca",
 									"locationName": "blockDeviceMapping"
 								},
 								"EbsOptimized": {
@@ -91247,11 +91549,11 @@ return /******/ (function(modules) { // webpackBootstrap
 									}
 								},
 								"NetworkInterfaces": {
-									"shape": "Shr",
+									"shape": "Si3",
 									"locationName": "networkInterfaceSet"
 								},
 								"Placement": {
-									"shape": "Sht",
+									"shape": "Si5",
 									"locationName": "placement"
 								},
 								"RamdiskId": {
@@ -91301,7 +91603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Shr": {
+			"Si3": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -91356,7 +91658,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sht": {
+			"Si5": {
 				"type": "structure",
 				"members": {
 					"AvailabilityZone": {
@@ -91370,7 +91672,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Shx": {
+			"Si9": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -91391,7 +91693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "timestamp"
 						},
 						"Fault": {
-							"shape": "S6p",
+							"shape": "S6v",
 							"locationName": "fault"
 						},
 						"InstanceId": {
@@ -91415,7 +91717,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "addressingType"
 								},
 								"BlockDeviceMappings": {
-									"shape": "Sc2",
+									"shape": "Sca",
 									"locationName": "blockDeviceMapping"
 								},
 								"EbsOptimized": {
@@ -91439,11 +91741,11 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "keyName"
 								},
 								"NetworkInterfaces": {
-									"shape": "Shr",
+									"shape": "Si3",
 									"locationName": "networkInterfaceSet"
 								},
 								"Placement": {
-									"shape": "Sht",
+									"shape": "Si5",
 									"locationName": "placement"
 								},
 								"RamdiskId": {
@@ -91453,7 +91755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 									"locationName": "subnetId"
 								},
 								"Monitoring": {
-									"shape": "Si0",
+									"shape": "Sic",
 									"locationName": "monitoring"
 								}
 							}
@@ -91507,7 +91809,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Si0": {
+			"Sic": {
 				"type": "structure",
 				"required": [
 					"Enabled"
@@ -91519,7 +91821,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sie": {
+			"Siq": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -91561,13 +91863,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Siv": {
+			"Sj7": {
 				"type": "list",
 				"member": {
 					"locationName": "VolumeId"
 				}
 			},
-			"Sje": {
+			"Sjq": {
 				"type": "structure",
 				"members": {
 					"VolumeId": {
@@ -91615,19 +91917,19 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sjk": {
+			"Sjw": {
 				"type": "list",
 				"member": {
 					"locationName": "VpcId"
 				}
 			},
-			"Sl6": {
+			"Sli": {
 				"type": "list",
 				"member": {
 					"locationName": "item"
 				}
 			},
-			"Sl8": {
+			"Slk": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -91640,7 +91942,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "integer"
 						},
 						"HostIdSet": {
-							"shape": "Sbb",
+							"shape": "Sbj",
 							"locationName": "hostIdSet"
 						},
 						"HostReservationId": {
@@ -91661,7 +91963,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sle": {
+			"Slq": {
 				"type": "structure",
 				"members": {
 					"HourlyPrice": {
@@ -91675,7 +91977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sll": {
+			"Slx": {
 				"type": "structure",
 				"members": {
 					"Comment": {},
@@ -91690,14 +91992,14 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Slo": {
+			"Sm0": {
 				"type": "structure",
 				"members": {
 					"S3Bucket": {},
 					"S3Key": {}
 				}
 			},
-			"Slt": {
+			"Sm5": {
 				"type": "structure",
 				"required": [
 					"Bytes",
@@ -91717,7 +92019,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Slu": {
+			"Sm6": {
 				"type": "structure",
 				"required": [
 					"Size"
@@ -91729,26 +92031,26 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Slw": {
+			"Sm8": {
 				"type": "list",
 				"member": {
 					"locationName": "SecurityGroup"
 				}
 			},
-			"Sm9": {
+			"Sml": {
 				"type": "list",
 				"member": {
 					"shape": "S48",
 					"locationName": "item"
 				}
 			},
-			"Smh": {
+			"Smt": {
 				"type": "list",
 				"member": {
 					"locationName": "UserId"
 				}
 			},
-			"Sn8": {
+			"Snk": {
 				"type": "structure",
 				"members": {
 					"AllowDnsResolutionFromRemoteVpc": {
@@ -91762,7 +92064,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sna": {
+			"Snm": {
 				"type": "structure",
 				"members": {
 					"AllowDnsResolutionFromRemoteVpc": {
@@ -91779,7 +92081,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Snd": {
+			"Snp": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
@@ -91789,33 +92091,33 @@ return /******/ (function(modules) { // webpackBootstrap
 							"locationName": "instanceId"
 						},
 						"Monitoring": {
-							"shape": "Sdp",
+							"shape": "Sdx",
 							"locationName": "monitoring"
 						}
 					}
 				}
 			},
-			"Sp1": {
+			"Spd": {
 				"type": "list",
 				"member": {
 					"locationName": "SecurityGroupId"
 				}
 			},
-			"Spc": {
+			"Spo": {
 				"type": "list",
 				"member": {
 					"locationName": "item",
 					"type": "structure",
 					"members": {
 						"CurrentState": {
-							"shape": "Sda",
+							"shape": "Sdi",
 							"locationName": "currentState"
 						},
 						"InstanceId": {
 							"locationName": "instanceId"
 						},
 						"PreviousState": {
-							"shape": "Sda",
+							"shape": "Sdi",
 							"locationName": "previousState"
 						}
 					}

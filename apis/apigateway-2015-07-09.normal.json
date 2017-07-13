@@ -392,6 +392,23 @@
       ],
       "documentation":"<p>Deletes the <a>DomainName</a> resource.</p>"
     },
+    "DeleteGatewayResponse":{
+      "name":"DeleteGatewayResponse",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/restapis/{restapi_id}/gatewayresponses/{response_type}",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteGatewayResponseRequest"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ConflictException"}
+      ],
+      "documentation":"<p>Clears any customization of a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a> and resets it with the default settings.</p>"
+    },
     "DeleteIntegration":{
       "name":"DeleteIntegration",
       "http":{
@@ -892,9 +909,41 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Exports a deployed version of a <a>RestApi</a> in a specified format.</p>"
+    },
+    "GetGatewayResponse":{
+      "name":"GetGatewayResponse",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/gatewayresponses/{response_type}"
+      },
+      "input":{"shape":"GetGatewayResponseRequest"},
+      "output":{"shape":"GatewayResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a>.</p>"
+    },
+    "GetGatewayResponses":{
+      "name":"GetGatewayResponses",
+      "http":{
+        "method":"GET",
+        "requestUri":"/restapis/{restapi_id}/gatewayresponses"
+      },
+      "input":{"shape":"GetGatewayResponsesRequest"},
+      "output":{"shape":"GatewayResponses"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Gets the <a>GatewayResponses</a> collection on the given <a>RestApi</a>. If an API developer has not added any definitions for gateway responses, the result will be the Amazon API Gateway-generated default <a>GatewayResponses</a> collection for the supported response types.</p>"
     },
     "GetIntegration":{
       "name":"GetIntegration",
@@ -1108,6 +1157,7 @@
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
         {"shape":"BadRequestException"},
+        {"shape":"ConflictException"},
         {"shape":"TooManyRequestsException"}
       ],
       "documentation":"<p>Generates a client SDK for a <a>RestApi</a> and <a>Stage</a>.</p>"
@@ -1304,6 +1354,24 @@
       ],
       "documentation":"<p>A feature of the Amazon API Gateway control service for creating a new API from an external API definition file.</p>"
     },
+    "PutGatewayResponse":{
+      "name":"PutGatewayResponse",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/restapis/{restapi_id}/gatewayresponses/{response_type}",
+        "responseCode":201
+      },
+      "input":{"shape":"PutGatewayResponseRequest"},
+      "output":{"shape":"GatewayResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Creates a customization of a <a>GatewayResponse</a> of a specified response type and status code on the given <a>RestApi</a>.</p>"
+    },
     "PutIntegration":{
       "name":"PutIntegration",
       "http":{
@@ -1320,7 +1388,7 @@
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Represents a put integration.</p>"
+      "documentation":"<p>Sets up a method's integration.</p>"
     },
     "PutIntegrationResponse":{
       "name":"PutIntegrationResponse",
@@ -1578,6 +1646,22 @@
       ],
       "documentation":"<p>Changes information about the <a>DomainName</a> resource.</p>"
     },
+    "UpdateGatewayResponse":{
+      "name":"UpdateGatewayResponse",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/restapis/{restapi_id}/gatewayresponses/{response_type}"
+      },
+      "input":{"shape":"UpdateGatewayResponseRequest"},
+      "output":{"shape":"GatewayResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Updates a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a>.</p>"
+    },
     "UpdateIntegration":{
       "name":"UpdateIntegration",
       "http":{
@@ -1746,7 +1830,7 @@
         {"shape":"BadRequestException"},
         {"shape":"NotFoundException"}
       ],
-      "documentation":"<p>Grants a temporary extension to the reamining quota of a usage plan associated with a specified API key.</p>"
+      "documentation":"<p>Grants a temporary extension to the remaining quota of a usage plan associated with a specified API key.</p>"
     },
     "UpdateUsagePlan":{
       "name":"UpdateUsagePlan",
@@ -1855,7 +1939,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfApiKey",
-          "documentation":"<p>The current page of any <a>ApiKey</a> resources in the collection of <a>ApiKey</a> resources.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -1939,7 +2023,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfAuthorizer",
-          "documentation":"<p>Gets the current list of <a>Authorizer</a> resources in the collection.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -1962,11 +2046,11 @@
         },
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The name of the API.</p>"
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>"
         },
         "stage":{
           "shape":"String",
-          "documentation":"<p>The name of the API's stage.</p>"
+          "documentation":"<p>The name of the associated stage.</p>"
         }
       },
       "documentation":"<p>Represents the base path that callers of the API must provide as part of the URL after the domain name.</p> <div class=\"remarks\">A custom domain name plus a <code>BasePathMapping</code> specification identifies a deployed <a>RestApi</a> in a given stage of the owner <a>Account</a>.</div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html\">Use Custom Domain Names</a> </div>"
@@ -1977,7 +2061,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfBasePathMapping",
-          "documentation":"<p>The current page of any <a>BasePathMapping</a> resources in the collection of base path mapping resources.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -2042,7 +2126,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfClientCertificate",
-          "documentation":"<p>The current page of any <a>ClientCertificate</a> resources in the collection of <a>ClientCertificate</a> resources.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -2108,7 +2192,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier under which the <a>Authorizer</a> will be created.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2170,7 +2254,7 @@
         },
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The name of the API that you want to apply this mapping to.</p>"
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>"
         },
         "stage":{
           "shape":"String",
@@ -2185,7 +2269,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> resource identifier for the <a>Deployment</a> resource to create.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2226,7 +2310,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of an API of the to-be-created documentation part.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2250,7 +2334,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] Specifies the API identifier of the to-be-created documentation version.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2339,7 +2423,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of the <a>RestApi</a> for which the <a>RequestValidator</a> is created.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2368,7 +2452,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> for the resource. </p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2422,7 +2506,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Stage</a> resource to create.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2531,7 +2615,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Authorizer</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2588,7 +2672,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Deployment</a> resource to delete.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2610,7 +2694,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] Specifies the identifier of an API of the to-be-deleted documentation part.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2632,7 +2716,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of an API of a to-be-deleted documentation snapshot.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2658,6 +2742,28 @@
       },
       "documentation":"<p>A request to delete the <a>DomainName</a> resource.</p>"
     },
+    "DeleteGatewayResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "responseType"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "responseType":{
+          "shape":"GatewayResponseType",
+          "documentation":"<p><p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPES</li></ul> </p></p>",
+          "location":"uri",
+          "locationName":"response_type"
+        }
+      },
+      "documentation":"<p>Clears any customization of a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a> and resets it with the default settings.</p>"
+    },
     "DeleteIntegrationRequest":{
       "type":"structure",
       "required":[
@@ -2668,7 +2774,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Specifies a delete integration request's API identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2698,7 +2804,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Specifies a delete integration response request's API identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2733,7 +2839,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Method</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2763,7 +2869,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>MethodResponse</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2797,7 +2903,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> under which the model will be deleted.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2819,7 +2925,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of the <a>RestApi</a> from which the given <a>RequestValidator</a> is deleted.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2841,7 +2947,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Resource</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2860,7 +2966,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The ID of the <a>RestApi</a> you want to delete.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         }
@@ -2876,7 +2982,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Stage</a> resource to delete.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -2922,7 +3028,7 @@
           "locationName":"usageplanId"
         }
       },
-      "documentation":"<p>The DELETE request to delete a uasge plan of a given plan Id.</p>"
+      "documentation":"<p>The DELETE request to delete a usage plan of a given plan Id.</p>"
     },
     "Deployment":{
       "type":"structure",
@@ -2952,7 +3058,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfDeployment",
-          "documentation":"<p>The current page of any <a>Deployment</a> resources in the collection of deployment resources.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -3044,7 +3150,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfDocumentationPart",
-          "documentation":"<p>The current page of <a>DocumentationPart</a> resources in the <a>DocumentationParts</a> collection.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -3074,7 +3180,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfDocumentationVersion",
-          "documentation":"<p>The current page of <a>DocumentationVersion</a> items from the <a>DocumentationVersions</a> collection of an API.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -3112,7 +3218,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfDomainName",
-          "documentation":"<p>The current page of any <a>DomainName</a> resources in the collection of <a>DomainName</a> resources.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -3151,7 +3257,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The API identifier of the stage to flush.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3173,7 +3279,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The API identifier of the stage to flush its cache.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3185,6 +3291,69 @@
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to flush a stage's cache.</p>"
+    },
+    "GatewayResponse":{
+      "type":"structure",
+      "members":{
+        "responseType":{
+          "shape":"GatewayResponseType",
+          "documentation":"<p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPES</li></ul> </p>"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"<p>The HTTP status code for this <a>GatewayResponse</a>.</p>"
+        },
+        "responseParameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Response parameters (paths, query strings and headers) of the <a>GatewayResponse</a> as a string-to-string map of key-value pairs.</p>"
+        },
+        "responseTemplates":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Response templates of the <a>GatewayResponse</a> as a string-to-string map of key-value pairs.</p>"
+        },
+        "defaultResponse":{
+          "shape":"Boolean",
+          "documentation":"<p>A Boolean flag to indicate whether this <a>GatewayResponse</a> is the default gateway response (<code>true</code>) or not (<code>false</code>). A default gateway response is one generated by Amazon API Gateway without any customization by an API developer. </p>"
+        }
+      },
+      "documentation":"<p>A gateway response of a given response type and status code, with optional response parameters and mapping templates.</p> <div class=\"remarks\"> For more information about valid gateway response types, see <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html\">Gateway Response Types Supported by Amazon API Gateway</a> <div class=\"example\"> <h4>Example: Get a Gateway Response of a given response type</h4> <h5>Request</h5> <p>This example shows how to get a gateway response of the <code>MISSING_AUTHNETICATION_TOKEN</code> type.</p> <pre><code>GET /restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN HTTP/1.1 Host: beta-apigateway.us-east-1.amazonaws.com Content-Type: application/json X-Amz-Date: 20170503T202516Z Authorization: AWS4-HMAC-SHA256 Credential={access-key-id}/20170503/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=1b52460e3159c1a26cff29093855d50ea141c1c5b937528fecaf60f51129697a Cache-Control: no-cache Postman-Token: 3b2a1ce9-c848-2e26-2e2f-9c2caefbed45 </code></pre> <p>The response type is specified as a URL path.</p> <h5>Response</h5> <p>The successful operation returns the <code>200 OK</code> status code and a payload similar to the following:</p> <pre><code>{ \"_links\": { \"curies\": { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-gatewayresponse-{rel}.html\", \"name\": \"gatewayresponse\", \"templated\": true }, \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN\" }, \"gatewayresponse:delete\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN\" } }, \"defaultResponse\": false, \"responseParameters\": { \"gatewayresponse.header.x-request-path\": \"method.request.path.petId\", \"gatewayresponse.header.Access-Control-Allow-Origin\": \"&apos;a.b.c&apos;\", \"gatewayresponse.header.x-request-query\": \"method.request.querystring.q\", \"gatewayresponse.header.x-request-header\": \"method.request.header.Accept\" }, \"responseTemplates\": { \"application/json\": \"{\\n \\\"message\\\": $context.error.messageString,\\n \\\"type\\\": \\\"$context.error.responseType\\\",\\n \\\"stage\\\": \\\"$context.stage\\\",\\n \\\"resourcePath\\\": \\\"$context.resourcePath\\\",\\n \\\"stageVariables.a\\\": \\\"$stageVariables.a\\\",\\n \\\"statusCode\\\": \\\"&apos;404&apos;\\\"\\n}\" }, \"responseType\": \"MISSING_AUTHENTICATION_TOKEN\", \"statusCode\": \"404\" }</code></pre> <p></p> </div> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html\">Customize Gateway Responses</a> </div>"
+    },
+    "GatewayResponseType":{
+      "type":"string",
+      "enum":[
+        "DEFAULT_4XX",
+        "DEFAULT_5XX",
+        "RESOURCE_NOT_FOUND",
+        "UNAUTHORIZED",
+        "INVALID_API_KEY",
+        "ACCESS_DENIED",
+        "AUTHORIZER_FAILURE",
+        "AUTHORIZER_CONFIGURATION_ERROR",
+        "INVALID_SIGNATURE",
+        "EXPIRED_TOKEN",
+        "MISSING_AUTHENTICATION_TOKEN",
+        "INTEGRATION_FAILURE",
+        "INTEGRATION_TIMEOUT",
+        "API_CONFIGURATION_ERROR",
+        "UNSUPPORTED_MEDIA_TYPE",
+        "BAD_REQUEST_PARAMETERS",
+        "BAD_REQUEST_BODY",
+        "REQUEST_TOO_LARGE",
+        "THROTTLED",
+        "QUOTA_EXCEEDED"
+      ]
+    },
+    "GatewayResponses":{
+      "type":"structure",
+      "members":{
+        "position":{"shape":"String"},
+        "items":{
+          "shape":"ListOfGatewayResponse",
+          "documentation":"<p>Returns the entire collection, because of no pagination support.</p>",
+          "locationName":"item"
+        }
+      },
+      "documentation":"<p>The collection of the <a>GatewayResponse</a> instances of a <a>RestApi</a> as a <code>responseType</code>-to-<a>GatewayResponse</a> object map of key-value pairs. As such, pagination is not supported for querying this collection.</p> <div class=\"remarks\"> For more information about valid gateway response types, see <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html\">Gateway Response Types Supported by Amazon API Gateway</a> <div class=\"example\"> <h4>Example: Get the collection of gateway responses of an API</h4> <h5>Request</h5> <p>This example request shows how to retrieve the <a>GatewayResponses</a> collection from an API.</p> <pre><code>GET /restapis/o81lxisefl/gatewayresponses HTTP/1.1 Host: beta-apigateway.us-east-1.amazonaws.com Content-Type: application/json X-Amz-Date: 20170503T220604Z Authorization: AWS4-HMAC-SHA256 Credential={access-key-id}/20170503/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=59b42fe54a76a5de8adf2c67baa6d39206f8e9ad49a1d77ccc6a5da3103a398a Cache-Control: no-cache Postman-Token: 5637af27-dc29-fc5c-9dfe-0645d52cb515 </code></pre> <p></p> <h5>Response</h5> <p>The successful operation returns the <code>200 OK</code> status code and a payload similar to the following:</p> <pre><code>{ \"_links\": { \"curies\": { \"href\": \"http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-gatewayresponse-{rel}.html\", \"name\": \"gatewayresponse\", \"templated\": true }, \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses\" }, \"first\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses\" }, \"gatewayresponse:by-type\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"item\": [ { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INTEGRATION_FAILURE\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/RESOURCE_NOT_FOUND\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/REQUEST_TOO_LARGE\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/THROTTLED\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/UNSUPPORTED_MEDIA_TYPE\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_CONFIGURATION_ERROR\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/DEFAULT_5XX\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/DEFAULT_4XX\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_PARAMETERS\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_BODY\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/EXPIRED_TOKEN\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/ACCESS_DENIED\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INVALID_API_KEY\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/UNAUTHORIZED\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/API_CONFIGURATION_ERROR\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/QUOTA_EXCEEDED\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INTEGRATION_TIMEOUT\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INVALID_SIGNATURE\" }, { \"href\": \"/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_FAILURE\" } ] }, \"_embedded\": { \"item\": [ { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INTEGRATION_FAILURE\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INTEGRATION_FAILURE\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"INTEGRATION_FAILURE\", \"statusCode\": \"504\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/RESOURCE_NOT_FOUND\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/RESOURCE_NOT_FOUND\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"RESOURCE_NOT_FOUND\", \"statusCode\": \"404\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/REQUEST_TOO_LARGE\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/REQUEST_TOO_LARGE\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"REQUEST_TOO_LARGE\", \"statusCode\": \"413\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/THROTTLED\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/THROTTLED\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"THROTTLED\", \"statusCode\": \"429\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/UNSUPPORTED_MEDIA_TYPE\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/UNSUPPORTED_MEDIA_TYPE\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"UNSUPPORTED_MEDIA_TYPE\", \"statusCode\": \"415\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_CONFIGURATION_ERROR\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_CONFIGURATION_ERROR\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"AUTHORIZER_CONFIGURATION_ERROR\", \"statusCode\": \"500\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/DEFAULT_5XX\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/DEFAULT_5XX\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"DEFAULT_5XX\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/DEFAULT_4XX\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/DEFAULT_4XX\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"DEFAULT_4XX\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_PARAMETERS\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_PARAMETERS\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"BAD_REQUEST_PARAMETERS\", \"statusCode\": \"400\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_BODY\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/BAD_REQUEST_BODY\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"BAD_REQUEST_BODY\", \"statusCode\": \"400\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/EXPIRED_TOKEN\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/EXPIRED_TOKEN\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"EXPIRED_TOKEN\", \"statusCode\": \"403\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/ACCESS_DENIED\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/ACCESS_DENIED\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"ACCESS_DENIED\", \"statusCode\": \"403\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INVALID_API_KEY\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INVALID_API_KEY\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"INVALID_API_KEY\", \"statusCode\": \"403\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/UNAUTHORIZED\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/UNAUTHORIZED\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"UNAUTHORIZED\", \"statusCode\": \"401\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/API_CONFIGURATION_ERROR\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/API_CONFIGURATION_ERROR\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"API_CONFIGURATION_ERROR\", \"statusCode\": \"500\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/QUOTA_EXCEEDED\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/QUOTA_EXCEEDED\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"QUOTA_EXCEEDED\", \"statusCode\": \"429\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INTEGRATION_TIMEOUT\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INTEGRATION_TIMEOUT\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"INTEGRATION_TIMEOUT\", \"statusCode\": \"504\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"MISSING_AUTHENTICATION_TOKEN\", \"statusCode\": \"403\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INVALID_SIGNATURE\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/INVALID_SIGNATURE\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"INVALID_SIGNATURE\", \"statusCode\": \"403\" }, { \"_links\": { \"self\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_FAILURE\" }, \"gatewayresponse:put\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/{response_type}\", \"templated\": true }, \"gatewayresponse:update\": { \"href\": \"/restapis/o81lxisefl/gatewayresponses/AUTHORIZER_FAILURE\" } }, \"defaultResponse\": true, \"responseParameters\": {}, \"responseTemplates\": { \"application/json\": \"{\\\"message\\\":$context.error.messageString}\" }, \"responseType\": \"AUTHORIZER_FAILURE\", \"statusCode\": \"500\" } ] } }</code></pre> <p></p> </div> </div> <div class=\"seeAlso\"> <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html\">Customize Gateway Responses</a> </div>"
     },
     "GenerateClientCertificateRequest":{
       "type":"structure",
@@ -3232,7 +3401,7 @@
         },
         "limit":{
           "shape":"NullableInteger",
-          "documentation":"<p>The maximum number of <a>ApiKeys</a> to get information about.</p>",
+          "documentation":"<p>The maximum number of returned results per page.</p>",
           "location":"querystring",
           "locationName":"limit"
         },
@@ -3266,7 +3435,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Authorizer</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3285,7 +3454,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Authorizers</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3391,7 +3560,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Deployment</a> resource to get information about.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3416,7 +3585,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the collection of <a>Deployment</a> resources to get information about.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3444,13 +3613,13 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of an API of the to-be-retrieved documentation part.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
         "documentationPartId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of the to-be-retrieved documentation part.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"part_id"
         }
@@ -3463,7 +3632,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of the API of the to-be-retrieved documentation parts.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3509,7 +3678,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of the API of the to-be-retrieved documentation snapshot.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3528,7 +3697,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of an API of the to-be-retrieved documentation versions.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3588,7 +3757,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> to be exported.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3618,6 +3787,53 @@
       },
       "documentation":"<p>Request a new export of a <a>RestApi</a> for a particular <a>Stage</a>.</p>"
     },
+    "GetGatewayResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "responseType"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "responseType":{
+          "shape":"GatewayResponseType",
+          "documentation":"<p><p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPES</li></ul> </p></p>",
+          "location":"uri",
+          "locationName":"response_type"
+        }
+      },
+      "documentation":"<p>Gets a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a>.</p>"
+    },
+    "GetGatewayResponsesRequest":{
+      "type":"structure",
+      "required":["restApiId"],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "position":{
+          "shape":"String",
+          "documentation":"<p>The current pagination position in the paged result set. The <a>GatewayResponse</a> collection does not support pagination and the position does not apply here.</p>",
+          "location":"querystring",
+          "locationName":"position"
+        },
+        "limit":{
+          "shape":"NullableInteger",
+          "documentation":"<p>The maximum number of returned results per page. The <a>GatewayResponses</a> collection does not support pagination and the limit does not apply here.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      },
+      "documentation":"<p>Gets the <a>GatewayResponses</a> collection on the given <a>RestApi</a>. If an API developer has not added any definitions for gateway responses, the result will be the Amazon API Gateway-generated default <a>GatewayResponses</a> collection for the supported response types.</p>"
+    },
     "GetIntegrationRequest":{
       "type":"structure",
       "required":[
@@ -3628,7 +3844,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Specifies a get integration request's API identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3658,7 +3874,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Specifies a get integration response request's API identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3693,7 +3909,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Method</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3723,7 +3939,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>MethodResponse</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3785,7 +4001,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The ID of the <a>RestApi</a> under which the model exists.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3804,7 +4020,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3832,7 +4048,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of the <a>RestApi</a> to which the specified <a>RequestValidator</a> belongs.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3851,7 +4067,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of a <a>RestApi</a> to which the <a>RequestValidators</a> collection belongs.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3879,7 +4095,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3904,7 +4120,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the Resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -3970,7 +4186,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> that the SDK will use.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -4034,7 +4250,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Stage</a> resource to get information about.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -4053,7 +4269,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The stages' API identifiers.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -4239,7 +4455,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of an API of the to-be-imported documentation parts.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -4275,12 +4491,12 @@
         },
         "parameters":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>Custom header parameters as part of the request.</p>",
+          "documentation":"<p>Custom header parameters as part of the request. For example, to exclude <a>DocumentationParts</a> from an imported API, set <code>ignore=documentation</code> as a <code>parameters</code> value, as in the AWS CLI command of <code>aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json</code>.</p>",
           "location":"querystring"
         },
         "body":{
           "shape":"Blob",
-          "documentation":"<p>The POST request body containing external API definitions. Currently, only Swagger definition JSON files are supported.</p>"
+          "documentation":"<p>The POST request body containing external API definitions. Currently, only Swagger definition JSON files are supported. The maximum size of the API definition file is 2MB.</p>"
         }
       },
       "documentation":"<p>A POST request to import an API to Amazon API Gateway using an input of an API definition file.</p>",
@@ -4426,6 +4642,10 @@
     "ListOfDomainName":{
       "type":"list",
       "member":{"shape":"DomainName"}
+    },
+    "ListOfGatewayResponse":{
+      "type":"list",
+      "member":{"shape":"GatewayResponse"}
     },
     "ListOfLong":{
       "type":"list",
@@ -4691,7 +4911,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfModel",
-          "documentation":"<p>Gets the current <a>Model</a> resource in the collection.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -4746,6 +4966,40 @@
       "value":{"shape":"MapOfMethodSnapshot"}
     },
     "ProviderARN":{"type":"string"},
+    "PutGatewayResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "responseType"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "responseType":{
+          "shape":"GatewayResponseType",
+          "documentation":"<p><p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPES</li></ul> </p></p>",
+          "location":"uri",
+          "locationName":"response_type"
+        },
+        "statusCode":{
+          "shape":"StatusCode",
+          "documentation":"The HTTP status code of the <a>GatewayResponse</a>."
+        },
+        "responseParameters":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p><p>Response parameters (paths, query strings and headers) of the <a>GatewayResponse</a> as a string-to-string map of key-value pairs.</p></p>"
+        },
+        "responseTemplates":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p><p>Response templates of the <a>GatewayResponse</a> as a string-to-string map of key-value pairs.</p></p>"
+        }
+      },
+      "documentation":"<p>Creates a customization of a <a>GatewayResponse</a> of a specified response type and status code on the given <a>RestApi</a>.</p>"
+    },
     "PutIntegrationRequest":{
       "type":"structure",
       "required":[
@@ -4757,7 +5011,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Specifies a put integration request's API identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -4784,7 +5038,7 @@
         },
         "uri":{
           "shape":"String",
-          "documentation":"<p>Specifies a put integration input's Uniform Resource Identifier (URI). When the integration type is HTTP or AWS, this field is required. For integration with Lambda as an AWS service proxy, this value is of the 'arn:aws:apigateway:&lt;region&gt;:lambda:path/2015-03-31/functions/&lt;functionArn&gt;/invocations' format.</p>"
+          "documentation":"<p>Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href=\"https://en.wikipedia.org/wiki/Uniform_Resource_Identifier\" target=\"_blank\">RFC-3986 specification</a>. For AWS integrations, the URI should be of the form <code>arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}</code>. <code>Region</code>, <code>subdomain</code> and <code>service</code> are used to determine the right endpoint. For AWS services that use the <code>Action=</code> query string parameter, <code>service_api</code> should be a valid action for the desired service. For RESTful AWS service APIs, <code>path</code> is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>.</p>"
         },
         "credentials":{
           "shape":"String",
@@ -4815,7 +5069,7 @@
           "documentation":"<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a request payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a request payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehaviors</code> is configured to support payload pass-through.</p>"
         }
       },
-      "documentation":"<p>Represents a put integration request.</p>"
+      "documentation":"<p>Sets up a method's integration.</p>"
     },
     "PutIntegrationResponseRequest":{
       "type":"structure",
@@ -4828,7 +5082,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Specifies a put integration response request's API identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -4880,7 +5134,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the new <a>Method</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -4938,7 +5192,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Method</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -4987,7 +5241,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> to be updated. </p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5005,12 +5259,12 @@
         },
         "parameters":{
           "shape":"MapOfStringToString",
-          "documentation":"<p>Custom headers supplied as part of the request. </p>",
+          "documentation":"<p>Custom header parameters as part of the request. For example, to exclude <a>DocumentationParts</a> from an imported API, set <code>ignore=documentation</code> as a <code>parameters</code> value, as in the AWS CLI command of <code>aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json</code>.</p>",
           "location":"querystring"
         },
         "body":{
           "shape":"Blob",
-          "documentation":"<p>The PUT request body containing external API definitions. Currently, only Swagger definition JSON files are supported.</p>"
+          "documentation":"<p>The PUT request body containing external API definitions. Currently, only Swagger definition JSON files are supported. The maximum size of the API definition file is 2MB.</p>"
         }
       },
       "documentation":"<p>A PUT request to update an existing API, with external API definitions specified as the request body.</p>",
@@ -5070,7 +5324,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfRequestValidator",
-          "documentation":"<p>The current page of <a>RequestValidator</a> resources in the <a>RequestValidators</a> collection.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -5108,7 +5362,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfResource",
-          "documentation":"<p>Gets the current <a>Resource</a> resource in the collection.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -5154,7 +5408,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfRestApi",
-          "documentation":"<p>An array of links to the current page of <a>RestApi</a> resources.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -5237,7 +5491,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfSdkType",
-          "documentation":"<p>The set of <a>SdkType</a> items that comprise this view of the <a>SdkTypes</a> collection.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -5316,11 +5570,11 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.</p>"
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>"
         },
         "stageName":{
           "shape":"String",
-          "documentation":"<p>The stage name in the <a>RestApi</a> that the stage key references.</p>"
+          "documentation":"<p>The stage name associated with the stage key.</p>"
         }
       },
       "documentation":"<p>A reference to a unique stage identified in the format <code>{restApiId}/{stage}</code>.</p>"
@@ -5330,7 +5584,7 @@
       "members":{
         "item":{
           "shape":"ListOfStage",
-          "documentation":"<p>An individual <a>Stage</a> resource.</p>"
+          "documentation":"<p>The current page of elements from this collection.</p>"
         }
       },
       "documentation":"<p>A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.</p> <div class=\"seeAlso\"><a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html\">Deploying API in Stages</a></div>"
@@ -5360,7 +5614,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Specifies a test invoke authorizer request's <a>RestApi</a> identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5434,7 +5688,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Specifies a test invoke method request's API identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5579,7 +5833,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Authorizer</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5648,7 +5902,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The replacement identifier of the <a>RestApi</a> resource for the <a>Deployment</a> resource to change information about.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5674,7 +5928,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of an API of the to-be-updated documentation part.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5700,7 +5954,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of an API of the to-be-updated documentation version.</p>",
+          "documentation":"<p>[Required] The string identifier of the associated <a>RestApi</a>..</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5734,6 +5988,32 @@
       },
       "documentation":"<p>A request to change information about the <a>DomainName</a> resource.</p>"
     },
+    "UpdateGatewayResponseRequest":{
+      "type":"structure",
+      "required":[
+        "restApiId",
+        "responseType"
+      ],
+      "members":{
+        "restApiId":{
+          "shape":"String",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
+          "location":"uri",
+          "locationName":"restapi_id"
+        },
+        "responseType":{
+          "shape":"GatewayResponseType",
+          "documentation":"<p><p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPES</li></ul> </p></p>",
+          "location":"uri",
+          "locationName":"response_type"
+        },
+        "patchOperations":{
+          "shape":"ListOfPatchOperation",
+          "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
+        }
+      },
+      "documentation":"<p>Updates a <a>GatewayResponse</a> of a specified response type on the given <a>RestApi</a>.</p>"
+    },
     "UpdateIntegrationRequest":{
       "type":"structure",
       "required":[
@@ -5744,7 +6024,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Represents an update integration request's API identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5778,7 +6058,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>Specifies an update integration response request's API identifier.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5817,7 +6097,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Method</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5851,7 +6131,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>MethodResponse</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5889,7 +6169,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier under which the model exists.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5915,7 +6195,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>[Required] The identifier of the <a>RestApi</a> for which the given <a>RequestValidator</a> is updated.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5941,7 +6221,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The <a>RestApi</a> identifier for the <a>Resource</a> resource.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5964,7 +6244,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The ID of the <a>RestApi</a> you want to update.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -5984,7 +6264,7 @@
       "members":{
         "restApiId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>RestApi</a> resource for the <a>Stage</a> resource to change information about.</p>",
+          "documentation":"<p>The string identifier of the associated <a>RestApi</a>.</p>",
           "location":"uri",
           "locationName":"restapi_id"
         },
@@ -6042,7 +6322,7 @@
           "documentation":"<p>A list of update operations to be applied to the specified resource and in the order specified in this list.</p>"
         }
       },
-      "documentation":"<p>The PATCH request to grant a temporary extension to the reamining quota of a usage plan associated with a specified API key.</p>"
+      "documentation":"<p>The PATCH request to grant a temporary extension to the remaining quota of a usage plan associated with a specified API key.</p>"
     },
     "Usage":{
       "type":"structure",
@@ -6130,7 +6410,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfUsagePlanKey",
-          "documentation":"<p>Gets the current item of the usage plan keys collection.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },
@@ -6142,7 +6422,7 @@
         "position":{"shape":"String"},
         "items":{
           "shape":"ListOfUsagePlan",
-          "documentation":"<p>Gets the current item when enumerating the collection of <a>UsagePlan</a>.</p>",
+          "documentation":"<p>The current page of elements from this collection.</p>",
           "locationName":"item"
         }
       },

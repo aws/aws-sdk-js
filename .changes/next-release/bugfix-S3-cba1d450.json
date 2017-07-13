@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3",
-  "description": "Updates S3 client to no longer attempt to determine a bucket's region when a request is aborted."
-}
