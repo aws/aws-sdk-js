@@ -289,7 +289,7 @@
         {"shape":"ServerInternalErrorException"},
         {"shape":"OperationNotPermittedException"}
       ],
-      "documentation":"<p>Export the configuration data about discovered configuration items and relationships to an S3 bucket in a specified format.</p>"
+      "documentation":"<p> Begins the export of discovered data to an S3 bucket.</p> <p> If you specify <code>agentId</code> in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using <code>startTime</code> and <code>endTime</code>. Export of detailed agent data is limited to five concurrently running exports. </p> <p> If you do not include an <code>agentId</code> filter, summary data is exported that includes both AWS Agentless Discovery Connector data and summary data from AWS Discovery Agents. Export of summary data is limited to two exports per day. </p>"
     },
     "StopDataCollectionByAgentIds":{
       "name":"StopDataCollectionByAgentIds",
@@ -794,6 +794,10 @@
           "shape":"ExportIds",
           "documentation":"<p>One or more unique identifiers used to query the status of an export request.</p>"
         },
+        "filters":{
+          "shape":"ExportFilters",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>AgentId</code> - ID of the agent whose collected data will be exported</p> </li> </ul>"
+        },
         "maxResults":{
           "shape":"Integer",
           "documentation":"<p>The maximum number of volume results returned by <code>DescribeExportTasks</code> in paginated output. When this parameter is used, <code>DescribeExportTasks</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element.</p>"
@@ -889,6 +893,33 @@
       "type":"list",
       "member":{"shape":"ExportDataFormat"}
     },
+    "ExportFilter":{
+      "type":"structure",
+      "required":[
+        "name",
+        "values",
+        "condition"
+      ],
+      "members":{
+        "name":{
+          "shape":"FilterName",
+          "documentation":"<p>A single <code>ExportFilter</code> name. Supported filters: <code>agentId</code>.</p>"
+        },
+        "values":{
+          "shape":"FilterValues",
+          "documentation":"<p>A single <code>agentId</code> for a Discovery Agent. An <code>agentId</code> can be found using the <a href=\"http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html\">DescribeAgents</a> action. Typically an ADS <code>agentId</code> is in the form <code>o-0123456789abcdef0</code>.</p>"
+        },
+        "condition":{
+          "shape":"Condition",
+          "documentation":"<p>Supported condition: <code>EQUALS</code> </p>"
+        }
+      },
+      "documentation":"<p>Used to select which agent's data is to be exported. A single agent ID may be selected for export using the <a href=\"http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html\">StartExportTask</a> action.</p>"
+    },
+    "ExportFilters":{
+      "type":"list",
+      "member":{"shape":"ExportFilter"}
+    },
     "ExportIds":{
       "type":"list",
       "member":{"shape":"ConfigurationsExportId"}
@@ -904,26 +935,38 @@
       "members":{
         "exportId":{
           "shape":"ConfigurationsExportId",
-          "documentation":"<p>A unique identifier that you can use to query the export.</p>"
+          "documentation":"<p>A unique identifier used to query an export.</p>"
         },
         "exportStatus":{
           "shape":"ExportStatus",
-          "documentation":"<p>The status of the configuration data export. The status can succeed, fail, or be in-progress.</p>"
+          "documentation":"<p>The status of the data export job.</p>"
         },
         "statusMessage":{
           "shape":"ExportStatusMessage",
-          "documentation":"<p>Helpful status messages for API callers. For example: Too many exports in the last 6 hours. Export in progress. Export was successful.</p>"
+          "documentation":"<p>A status message provided for API callers.</p>"
         },
         "configurationsDownloadUrl":{
           "shape":"ConfigurationsDownloadUrl",
-          "documentation":"<p>A URL for an Amazon S3 bucket where you can review the configuration data. The URL is displayed only if the export succeeded.</p>"
+          "documentation":"<p>A URL for an Amazon S3 bucket where you can review the exported data. The URL is displayed only if the export succeeded.</p>"
         },
         "exportRequestTime":{
           "shape":"ExportRequestTime",
-          "documentation":"<p>The time that the configuration data export was initiated.</p>"
+          "documentation":"<p>The time that the data export was initiated.</p>"
+        },
+        "isTruncated":{
+          "shape":"Boolean",
+          "documentation":"<p>If true, the export of agent information exceeded the size limit for a single export and the exported data is incomplete for the requested time range. To address this, select a smaller time range for the export by using <code>startDate</code> and <code>endDate</code>.</p>"
+        },
+        "requestedStartTime":{
+          "shape":"TimeStamp",
+          "documentation":"<p>The value of <code>startTime</code> parameter in the <code>StartExportTask</code> request. If no <code>startTime</code> was requested, this result does not appear in <code>ExportInfo</code>.</p>"
+        },
+        "requestedEndTime":{
+          "shape":"TimeStamp",
+          "documentation":"<p>The <code>endTime</code> used in the <code>StartExportTask</code> request. If no <code>endTime</code> was requested, this result does not appear in <code>ExportInfo</code>.</p>"
         }
       },
-      "documentation":"<p>Information regarding the export status of the discovered data. The value is an array of objects.</p>"
+      "documentation":"<p>Information regarding the export status of discovered data. The value is an array of objects.</p>"
     },
     "ExportRequestTime":{"type":"timestamp"},
     "ExportStatus":{
@@ -1216,6 +1259,18 @@
         "exportDataFormat":{
           "shape":"ExportDataFormats",
           "documentation":"<p>The file format for the returned export data. Default value is <code>CSV</code>.</p>"
+        },
+        "filters":{
+          "shape":"ExportFilters",
+          "documentation":"<p>If a filter is present, it selects the single <code>agentId</code> of the Application Discovery Agent for which data is exported. The <code>agentId</code> can be found in the results of the <code>DescribeAgents</code> API or CLI. If no filter is present, <code>startTime</code> and <code>endTime</code> are ignored and exported data includes both Agentless Discovery Connector data and summary data from Application Discovery agents. </p>"
+        },
+        "startTime":{
+          "shape":"TimeStamp",
+          "documentation":"<p>The start timestamp for exported data from the single Application Discovery Agent selected in the filters. If no value is specified, data is exported starting from the first data collected by the agent.</p>"
+        },
+        "endTime":{
+          "shape":"TimeStamp",
+          "documentation":"<p>The end timestamp for exported data from the single Application Discovery Agent selected in the filters. If no value is specified, exported data includes the most recent data collected by the agent.</p>"
         }
       }
     },
@@ -1224,7 +1279,7 @@
       "members":{
         "exportId":{
           "shape":"ConfigurationsExportId",
-          "documentation":"<p> A unique identifier used to query the status of an export request.</p>"
+          "documentation":"<p>A unique identifier used to query the status of an export request.</p>"
         }
       }
     },

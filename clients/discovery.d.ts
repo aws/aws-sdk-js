@@ -136,11 +136,11 @@ declare class Discovery extends Service {
    */
   startDataCollectionByAgentIds(callback?: (err: AWSError, data: Discovery.Types.StartDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StartDataCollectionByAgentIdsResponse, AWSError>;
   /**
-   * Export the configuration data about discovered configuration items and relationships to an S3 bucket in a specified format.
+   *  Begins the export of discovered data to an S3 bucket.  If you specify agentId in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports.   If you do not include an agentId filter, summary data is exported that includes both AWS Agentless Discovery Connector data and summary data from AWS Discovery Agents. Export of summary data is limited to two exports per day. 
    */
   startExportTask(params: Discovery.Types.StartExportTaskRequest, callback?: (err: AWSError, data: Discovery.Types.StartExportTaskResponse) => void): Request<Discovery.Types.StartExportTaskResponse, AWSError>;
   /**
-   * Export the configuration data about discovered configuration items and relationships to an S3 bucket in a specified format.
+   *  Begins the export of discovered data to an S3 bucket.  If you specify agentId in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports.   If you do not include an agentId filter, summary data is exported that includes both AWS Agentless Discovery Connector data and summary data from AWS Discovery Agents. Export of summary data is limited to two exports per day. 
    */
   startExportTask(callback?: (err: AWSError, data: Discovery.Types.StartExportTaskResponse) => void): Request<Discovery.Types.StartExportTaskResponse, AWSError>;
   /**
@@ -460,6 +460,10 @@ declare namespace Discovery {
      */
     exportIds?: ExportIds;
     /**
+     * One or more filters.    AgentId - ID of the agent whose collected data will be exported  
+     */
+    filters?: ExportFilters;
+    /**
      * The maximum number of volume results returned by DescribeExportTasks in paginated output. When this parameter is used, DescribeExportTasks only returns maxResults results in a single page along with a nextToken response element.
      */
     maxResults?: Integer;
@@ -522,28 +526,55 @@ declare namespace Discovery {
   }
   export type ExportDataFormat = "CSV"|"GRAPHML"|string;
   export type ExportDataFormats = ExportDataFormat[];
+  export interface ExportFilter {
+    /**
+     * A single ExportFilter name. Supported filters: agentId.
+     */
+    name: FilterName;
+    /**
+     * A single agentId for a Discovery Agent. An agentId can be found using the DescribeAgents action. Typically an ADS agentId is in the form o-0123456789abcdef0.
+     */
+    values: FilterValues;
+    /**
+     * Supported condition: EQUALS 
+     */
+    condition: Condition;
+  }
+  export type ExportFilters = ExportFilter[];
   export type ExportIds = ConfigurationsExportId[];
   export interface ExportInfo {
     /**
-     * A unique identifier that you can use to query the export.
+     * A unique identifier used to query an export.
      */
     exportId: ConfigurationsExportId;
     /**
-     * The status of the configuration data export. The status can succeed, fail, or be in-progress.
+     * The status of the data export job.
      */
     exportStatus: ExportStatus;
     /**
-     * Helpful status messages for API callers. For example: Too many exports in the last 6 hours. Export in progress. Export was successful.
+     * A status message provided for API callers.
      */
     statusMessage: ExportStatusMessage;
     /**
-     * A URL for an Amazon S3 bucket where you can review the configuration data. The URL is displayed only if the export succeeded.
+     * A URL for an Amazon S3 bucket where you can review the exported data. The URL is displayed only if the export succeeded.
      */
     configurationsDownloadUrl?: ConfigurationsDownloadUrl;
     /**
-     * The time that the configuration data export was initiated.
+     * The time that the data export was initiated.
      */
     exportRequestTime: ExportRequestTime;
+    /**
+     * If true, the export of agent information exceeded the size limit for a single export and the exported data is incomplete for the requested time range. To address this, select a smaller time range for the export by using startDate and endDate.
+     */
+    isTruncated?: Boolean;
+    /**
+     * The value of startTime parameter in the StartExportTask request. If no startTime was requested, this result does not appear in ExportInfo.
+     */
+    requestedStartTime?: TimeStamp;
+    /**
+     * The endTime used in the StartExportTask request. If no endTime was requested, this result does not appear in ExportInfo.
+     */
+    requestedEndTime?: TimeStamp;
   }
   export type ExportRequestTime = Date;
   export type ExportStatus = "FAILED"|"SUCCEEDED"|"IN_PROGRESS"|string;
@@ -718,10 +749,22 @@ declare namespace Discovery {
      * The file format for the returned export data. Default value is CSV.
      */
     exportDataFormat?: ExportDataFormats;
+    /**
+     * If a filter is present, it selects the single agentId of the Application Discovery Agent for which data is exported. The agentId can be found in the results of the DescribeAgents API or CLI. If no filter is present, startTime and endTime are ignored and exported data includes both Agentless Discovery Connector data and summary data from Application Discovery agents. 
+     */
+    filters?: ExportFilters;
+    /**
+     * The start timestamp for exported data from the single Application Discovery Agent selected in the filters. If no value is specified, data is exported starting from the first data collected by the agent.
+     */
+    startTime?: TimeStamp;
+    /**
+     * The end timestamp for exported data from the single Application Discovery Agent selected in the filters. If no value is specified, exported data includes the most recent data collected by the agent.
+     */
+    endTime?: TimeStamp;
   }
   export interface StartExportTaskResponse {
     /**
-     *  A unique identifier used to query the status of an export request.
+     * A unique identifier used to query the status of an export request.
      */
     exportId?: ConfigurationsExportId;
   }

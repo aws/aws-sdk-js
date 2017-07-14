@@ -381,7 +381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @constant
 		   */
-		  VERSION: '2.84.0',
+		  VERSION: '2.85.0',
 
 		  /**
 		   * @api private
@@ -74701,6 +74701,9 @@ return /******/ (function(modules) { // webpackBootstrap
 						"exportIds": {
 							"shape": "S15"
 						},
+						"filters": {
+							"shape": "S1h"
+						},
 						"maxResults": {
 							"type": "integer"
 						},
@@ -75003,7 +75006,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"agentsConfigurationStatus": {
-							"shape": "S2c"
+							"shape": "S2e"
 						}
 					}
 				}
@@ -75015,6 +75018,15 @@ return /******/ (function(modules) { // webpackBootstrap
 						"exportDataFormat": {
 							"type": "list",
 							"member": {}
+						},
+						"filters": {
+							"shape": "S1h"
+						},
+						"startTime": {
+							"type": "timestamp"
+						},
+						"endTime": {
+							"type": "timestamp"
 						}
 					}
 				},
@@ -75041,7 +75053,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"agentsConfigurationStatus": {
-							"shape": "S2c"
+							"shape": "S2e"
 						}
 					}
 				}
@@ -75133,11 +75145,38 @@ return /******/ (function(modules) { // webpackBootstrap
 						"configurationsDownloadUrl": {},
 						"exportRequestTime": {
 							"type": "timestamp"
+						},
+						"isTruncated": {
+							"type": "boolean"
+						},
+						"requestedStartTime": {
+							"type": "timestamp"
+						},
+						"requestedEndTime": {
+							"type": "timestamp"
 						}
 					}
 				}
 			},
-			"S2c": {
+			"S1h": {
+				"type": "list",
+				"member": {
+					"type": "structure",
+					"required": [
+						"name",
+						"values",
+						"condition"
+					],
+					"members": {
+						"name": {},
+						"values": {
+							"shape": "Sp"
+						},
+						"condition": {}
+					}
+				}
+			},
+			"S2e": {
 				"type": "list",
 				"member": {
 					"type": "structure",

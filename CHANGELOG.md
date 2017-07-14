@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.84.0-->
+<!--LATEST=2.85.0-->
 <!--ENTRYINSERT-->
+
+## 2.85.0
+* feature: Discovery: Adding feature to the Export API for Discovery Service to allow filters for the export task to allow export based on per agent id.
+* feature: EC2: New EC2 GPU Graphics instance
 
 ## 2.84.0
 * bugfix: S3: Updates S3 client to no longer attempt to determine a bucket's region when a request is aborted.
