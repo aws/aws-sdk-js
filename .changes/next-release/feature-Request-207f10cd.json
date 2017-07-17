@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Request",
+  "description": "The SDK will throw an error if the same AWS.Request object is used more than once. Previously, sending a request by supplying a callback and calling createReadStream would result in corrupted data in the stream due to multiple http requests being sent."
+}

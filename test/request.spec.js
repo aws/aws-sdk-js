@@ -85,6 +85,49 @@ describe('AWS.Request', function() {
     });
   });
 
+  describe('reusability', function() {
+    it('throws an error if a request is resued', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      var req = service.makeRequest('mockMethod');
+      var err;
+      var errCount = 0;
+
+      try {
+        req.send(function(e, d) {});
+        req.send(function(e) {
+          // this should never be reached
+          expect(true).to.equal(false);
+        });
+      } catch (e) {
+        err = e;
+        errCount++;
+      }
+
+      expect(errCount).to.equal(1);
+      expect(err.code).to.equal('RequestAlreadyTriggeredError');
+      done();
+    });
+    if (AWS.util.isNode()) {
+      it('throws an error if a request is used with callbacks and streams', function(done) {
+        helpers.mockHttpResponse(200, {}, '');
+        var req = service.makeRequest('mockMethod');
+        var err;
+        var errCount = 0;
+
+        var stream = req.createReadStream();
+        stream.on('error', function(e) {
+          err = e;
+          errCount++;
+        }).on('finish', function() {
+          expect(errCount).to.equal(1);
+          expect(err.code).to.equal('RequestAlreadyTriggeredError');
+          done();
+        });
+        req.send(function(e, d) {});
+      });
+    }
+  });
+
   describe('isPageable', function() {
     beforeEach(function() {
       return service = new AWS.Service({
