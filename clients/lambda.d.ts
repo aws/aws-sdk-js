@@ -148,11 +148,11 @@ declare class Lambda extends Service {
    */
   listEventSourceMappings(callback?: (err: AWSError, data: Lambda.Types.ListEventSourceMappingsResponse) => void): Request<Lambda.Types.ListEventSourceMappingsResponse, AWSError>;
   /**
-   * Returns a list of your Lambda functions. For each function, the response includes the function configuration information. You must use GetFunction to retrieve the code for your function. This operation requires permission for the lambda:ListFunctions action. If you are using versioning feature, the response returns list of $LATEST versions of your functions. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases. 
+   * Returns a list of your Lambda functions. For each function, the response includes the function configuration information. You must use GetFunction to retrieve the code for your function. This operation requires permission for the lambda:ListFunctions action. If you are using the versioning feature, you can list all of your functions or only $LATEST versions. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases. 
    */
   listFunctions(params: Lambda.Types.ListFunctionsRequest, callback?: (err: AWSError, data: Lambda.Types.ListFunctionsResponse) => void): Request<Lambda.Types.ListFunctionsResponse, AWSError>;
   /**
-   * Returns a list of your Lambda functions. For each function, the response includes the function configuration information. You must use GetFunction to retrieve the code for your function. This operation requires permission for the lambda:ListFunctions action. If you are using versioning feature, the response returns list of $LATEST versions of your functions. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases. 
+   * Returns a list of your Lambda functions. For each function, the response includes the function configuration information. You must use GetFunction to retrieve the code for your function. This operation requires permission for the lambda:ListFunctions action. If you are using the versioning feature, you can list all of your functions or only $LATEST versions. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases. 
    */
   listFunctions(callback?: (err: AWSError, data: Lambda.Types.ListFunctionsResponse) => void): Request<Lambda.Types.ListFunctionsResponse, AWSError>;
   /**
@@ -565,11 +565,11 @@ declare namespace Lambda {
     /**
      * The name of the function. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
-    FunctionName?: FunctionName;
+    FunctionName?: NamespacedFunctionName;
     /**
      * The Amazon Resource Name (ARN) assigned to the function.
      */
-    FunctionArn?: FunctionArn;
+    FunctionArn?: NameSpacedFunctionArn;
     /**
      * The runtime environment for the Lambda function.
      */
@@ -630,9 +630,14 @@ declare namespace Lambda {
      * The parent object that contains your function's tracing settings.
      */
     TracingConfig?: TracingConfigResponse;
+    /**
+     * Returns the ARN (Amazon Resource Name) of the master function.
+     */
+    MasterArn?: FunctionArn;
   }
   export type FunctionList = FunctionConfiguration[];
   export type FunctionName = string;
+  export type FunctionVersion = "ALL"|string;
   export interface GetAccountSettingsRequest {
   }
   export interface GetAccountSettingsResponse {
@@ -659,7 +664,7 @@ declare namespace Lambda {
     /**
      * The name of the Lambda function for which you want to retrieve the configuration information.  You can specify a function name (for example, Thumbnail) or you can specify Amazon Resource Name (ARN) of the function (for example, arn:aws:lambda:us-west-2:account-id:function:ThumbNail). AWS Lambda also allows you to specify a partial ARN (for example, account-id:Thumbnail). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. 
      */
-    FunctionName: FunctionName;
+    FunctionName: NamespacedFunctionName;
     /**
      * Using this optional parameter you can specify a function version or an alias name. If you specify function version, the API uses qualified function ARN and returns information about the specific function version. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points. If you don't specify this parameter, the API uses unqualified function ARN, and returns information about the $LATEST function version.
      */
@@ -669,7 +674,7 @@ declare namespace Lambda {
     /**
      * The Lambda function name.  You can specify a function name (for example, Thumbnail) or you can specify Amazon Resource Name (ARN) of the function (for example, arn:aws:lambda:us-west-2:account-id:function:ThumbNail). AWS Lambda also allows you to specify a partial ARN (for example, account-id:Thumbnail). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. 
      */
-    FunctionName: FunctionName;
+    FunctionName: NamespacedFunctionName;
     /**
      * Using this optional parameter to specify a function version or an alias name. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the $LATEST version of the Lambda function.
      */
@@ -687,7 +692,7 @@ declare namespace Lambda {
     /**
      * Function name whose resource policy you want to retrieve.  You can specify the function name (for example, Thumbnail) or you can specify Amazon Resource Name (ARN) of the function (for example, arn:aws:lambda:us-west-2:account-id:function:ThumbNail). If you are using versioning, you can also provide a qualified function ARN (ARN that is qualified with function version or alias name as suffix). AWS Lambda also allows you to specify only the function name with the account ID qualifier (for example, account-id:Thumbnail). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. 
      */
-    FunctionName: FunctionName;
+    FunctionName: NamespacedFunctionName;
     /**
      * You can specify this optional query parameter to specify a function version or an alias name in which case this API will return all permissions associated with the specific qualified ARN. If you don't provide this parameter, the API will return permissions that apply to the unqualified function ARN.
      */
@@ -706,7 +711,7 @@ declare namespace Lambda {
     /**
      * The Lambda function name.  You can specify a function name (for example, Thumbnail) or you can specify Amazon Resource Name (ARN) of the function (for example, arn:aws:lambda:us-west-2:account-id:function:ThumbNail). AWS Lambda also allows you to specify a partial ARN (for example, account-id:Thumbnail). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. 
      */
-    FunctionName: FunctionName;
+    FunctionName: NamespacedFunctionName;
     /**
      * By default, the Invoke API assumes RequestResponse invocation type. You can optionally request asynchronous execution by specifying Event as the InvocationType. You can also use this parameter to request AWS Lambda to not execute the function but do some verification, such as if the caller is authorized to invoke the function and if the inputs are valid. You request this by specifying DryRun as the InvocationType. This is useful in a cross-account scenario when you want to verify access to a function without running it. 
      */
@@ -751,7 +756,7 @@ declare namespace Lambda {
     /**
      * The Lambda function name. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
-    FunctionName: FunctionName;
+    FunctionName: NamespacedFunctionName;
     /**
      * JSON that you want to provide to your Lambda function as input.
      */
@@ -822,6 +827,14 @@ declare namespace Lambda {
   }
   export interface ListFunctionsRequest {
     /**
+     * Optional string. If not specified, will return only regular function versions (i.e., non-replicated versions). Valid values are: The region from which the functions are replicated. For example, if you specify us-east-1, only functions replicated from that region will be returned.  ALL _ Will return all functions from any region. If specified, you also must specify a valid FunctionVersion parameter.
+     */
+    MasterRegion?: MasterRegion;
+    /**
+     * Optional string. If not specified, only the unqualified functions ARNs (Amazon Resource Names) will be returned. Valid value:  ALL _ Will return all versions, including $LATEST which will have fully qualified ARNs (Amazon Resource Names).
+     */
+    FunctionVersion?: FunctionVersion;
+    /**
      * Optional string. An opaque pagination token returned from a previous ListFunctions operation. If present, indicates where to continue the listing. 
      */
     Marker?: String;
@@ -856,7 +869,7 @@ declare namespace Lambda {
     /**
      * Function name whose versions to list. You can specify a function name (for example, Thumbnail) or you can specify Amazon Resource Name (ARN) of the function (for example, arn:aws:lambda:us-west-2:account-id:function:ThumbNail). AWS Lambda also allows you to specify a partial ARN (for example, account-id:Thumbnail). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. 
      */
-    FunctionName: FunctionName;
+    FunctionName: NamespacedFunctionName;
     /**
      *  Optional string. An opaque pagination token returned from a previous ListVersionsByFunction operation. If present, indicates where to continue the listing. 
      */
@@ -878,8 +891,12 @@ declare namespace Lambda {
   }
   export type LogType = "None"|"Tail"|string;
   export type Long = number;
+  export type MasterRegion = string;
   export type MaxListItems = number;
   export type MemorySize = number;
+  export type NameSpacedFunctionArn = string;
+  export type NamespacedFunctionName = string;
+  export type NamespacedStatementId = string;
   export type Principal = string;
   export interface PublishVersionRequest {
     /**
@@ -904,7 +921,7 @@ declare namespace Lambda {
     /**
      * Statement ID of the permission to remove.
      */
-    StatementId: StatementId;
+    StatementId: NamespacedStatementId;
     /**
      * You can specify this optional parameter to remove permission associated with a specific function version or function alias. If you don't specify this parameter, the API removes permission associated with the unqualified function ARN.
      */
@@ -1061,7 +1078,7 @@ declare namespace Lambda {
      */
     Environment?: Environment;
     /**
-     * The runtime environment for the Lambda function. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parameter value error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
+     * The runtime environment for the Lambda function. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
      */
     Runtime?: Runtime;
     /**

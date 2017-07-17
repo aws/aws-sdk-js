@@ -381,7 +381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @constant
 		   */
-		  VERSION: '2.85.0',
+		  VERSION: '2.86.0',
 
 		  /**
 		   * @api private
@@ -66145,28 +66145,31 @@ return /******/ (function(modules) { // webpackBootstrap
 						"AliasAttributes": {
 							"shape": "S3l"
 						},
+						"UsernameAttributes": {
+							"shape": "S3n"
+						},
 						"SmsVerificationMessage": {},
 						"EmailVerificationMessage": {},
 						"EmailVerificationSubject": {},
 						"SmsAuthenticationMessage": {},
 						"MfaConfiguration": {},
 						"DeviceConfiguration": {
-							"shape": "S3r"
+							"shape": "S3t"
 						},
 						"EmailConfiguration": {
-							"shape": "S3s"
-						},
-						"SmsConfiguration": {
 							"shape": "S3u"
 						},
-						"UserPoolTags": {
-							"shape": "S3v"
-						},
-						"AdminCreateUserConfig": {
+						"SmsConfiguration": {
 							"shape": "S3w"
 						},
+						"UserPoolTags": {
+							"shape": "S3x"
+						},
+						"AdminCreateUserConfig": {
+							"shape": "S3y"
+						},
 						"Schema": {
-							"shape": "S3z"
+							"shape": "S41"
 						}
 					}
 				},
@@ -66174,7 +66177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"UserPool": {
-							"shape": "S41"
+							"shape": "S43"
 						}
 					}
 				}
@@ -66196,29 +66199,29 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "integer"
 						},
 						"ReadAttributes": {
-							"shape": "S47"
-						},
-						"WriteAttributes": {
-							"shape": "S47"
-						},
-						"ExplicitAuthFlows": {
 							"shape": "S49"
 						},
-						"SupportedIdentityProviders": {
+						"WriteAttributes": {
+							"shape": "S49"
+						},
+						"ExplicitAuthFlows": {
 							"shape": "S4b"
 						},
+						"SupportedIdentityProviders": {
+							"shape": "S4d"
+						},
 						"CallbackURLs": {
-							"shape": "S4c"
+							"shape": "S4e"
 						},
 						"LogoutURLs": {
-							"shape": "S4e"
+							"shape": "S4g"
 						},
 						"DefaultRedirectURI": {},
 						"AllowedOAuthFlows": {
-							"shape": "S4f"
+							"shape": "S4h"
 						},
 						"AllowedOAuthScopes": {
-							"shape": "S4h"
+							"shape": "S4j"
 						},
 						"AllowedOAuthFlowsUserPoolClient": {
 							"type": "boolean"
@@ -66229,7 +66232,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"UserPoolClient": {
-							"shape": "S4k"
+							"shape": "S4m"
 						}
 					}
 				}
@@ -66415,7 +66418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"UserPool": {
-							"shape": "S41"
+							"shape": "S43"
 						}
 					}
 				}
@@ -66438,7 +66441,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"UserPoolClient": {
-							"shape": "S4k"
+							"shape": "S4m"
 						}
 					}
 				}
@@ -66508,7 +66511,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CodeDeliveryDetails": {
-							"shape": "S5g"
+							"shape": "S5i"
 						}
 					}
 				},
@@ -66655,7 +66658,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CodeDeliveryDetails": {
-							"shape": "S5g"
+							"shape": "S5i"
 						}
 					}
 				},
@@ -66927,7 +66930,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Users": {
-							"shape": "S6p"
+							"shape": "S6r"
 						},
 						"PaginationToken": {}
 					}
@@ -66953,7 +66956,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Users": {
-							"shape": "S6p"
+							"shape": "S6r"
 						},
 						"NextToken": {}
 					}
@@ -66982,7 +66985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"CodeDeliveryDetails": {
-							"shape": "S5g"
+							"shape": "S5i"
 						}
 					}
 				},
@@ -67082,7 +67085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "boolean"
 						},
 						"CodeDeliveryDetails": {
-							"shape": "S5g"
+							"shape": "S5i"
 						},
 						"UserSub": {}
 					}
@@ -67232,7 +67235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"CodeDeliveryDetailsList": {
 							"type": "list",
 							"member": {
-								"shape": "S5g"
+								"shape": "S5i"
 							}
 						}
 					}
@@ -67262,19 +67265,19 @@ return /******/ (function(modules) { // webpackBootstrap
 						"SmsAuthenticationMessage": {},
 						"MfaConfiguration": {},
 						"DeviceConfiguration": {
-							"shape": "S3r"
+							"shape": "S3t"
 						},
 						"EmailConfiguration": {
-							"shape": "S3s"
-						},
-						"SmsConfiguration": {
 							"shape": "S3u"
 						},
+						"SmsConfiguration": {
+							"shape": "S3w"
+						},
 						"UserPoolTags": {
-							"shape": "S3v"
+							"shape": "S3x"
 						},
 						"AdminCreateUserConfig": {
-							"shape": "S3w"
+							"shape": "S3y"
 						}
 					}
 				},
@@ -67300,29 +67303,29 @@ return /******/ (function(modules) { // webpackBootstrap
 							"type": "integer"
 						},
 						"ReadAttributes": {
-							"shape": "S47"
-						},
-						"WriteAttributes": {
-							"shape": "S47"
-						},
-						"ExplicitAuthFlows": {
 							"shape": "S49"
 						},
-						"SupportedIdentityProviders": {
+						"WriteAttributes": {
+							"shape": "S49"
+						},
+						"ExplicitAuthFlows": {
 							"shape": "S4b"
 						},
+						"SupportedIdentityProviders": {
+							"shape": "S4d"
+						},
 						"CallbackURLs": {
-							"shape": "S4c"
+							"shape": "S4e"
 						},
 						"LogoutURLs": {
-							"shape": "S4e"
+							"shape": "S4g"
 						},
 						"DefaultRedirectURI": {},
 						"AllowedOAuthFlows": {
-							"shape": "S4f"
+							"shape": "S4h"
 						},
 						"AllowedOAuthScopes": {
-							"shape": "S4h"
+							"shape": "S4j"
 						},
 						"AllowedOAuthFlowsUserPoolClient": {
 							"type": "boolean"
@@ -67333,7 +67336,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"UserPoolClient": {
-							"shape": "S4k"
+							"shape": "S4m"
 						}
 					}
 				}
@@ -67672,7 +67675,11 @@ return /******/ (function(modules) { // webpackBootstrap
 				"type": "list",
 				"member": {}
 			},
-			"S3r": {
+			"S3n": {
+				"type": "list",
+				"member": {}
+			},
+			"S3t": {
 				"type": "structure",
 				"members": {
 					"ChallengeRequiredOnNewDevice": {
@@ -67683,14 +67690,14 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S3s": {
+			"S3u": {
 				"type": "structure",
 				"members": {
 					"SourceArn": {},
 					"ReplyToEmailAddress": {}
 				}
 			},
-			"S3u": {
+			"S3w": {
 				"type": "structure",
 				"required": [
 					"SnsCallerArn"
@@ -67700,12 +67707,12 @@ return /******/ (function(modules) { // webpackBootstrap
 					"ExternalId": {}
 				}
 			},
-			"S3v": {
+			"S3x": {
 				"type": "map",
 				"key": {},
 				"value": {}
 			},
-			"S3w": {
+			"S3y": {
 				"type": "structure",
 				"members": {
 					"AllowAdminCreateUserOnly": {
@@ -67724,13 +67731,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S3z": {
+			"S41": {
 				"type": "list",
 				"member": {
 					"shape": "S4"
 				}
 			},
-			"S41": {
+			"S43": {
 				"type": "structure",
 				"members": {
 					"Id": {},
@@ -67749,7 +67756,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "timestamp"
 					},
 					"SchemaAttributes": {
-						"shape": "S3z"
+						"shape": "S41"
 					},
 					"AutoVerifiedAttributes": {
 						"shape": "S3j"
@@ -67757,36 +67764,35 @@ return /******/ (function(modules) { // webpackBootstrap
 					"AliasAttributes": {
 						"shape": "S3l"
 					},
+					"UsernameAttributes": {
+						"shape": "S3n"
+					},
 					"SmsVerificationMessage": {},
 					"EmailVerificationMessage": {},
 					"EmailVerificationSubject": {},
 					"SmsAuthenticationMessage": {},
 					"MfaConfiguration": {},
 					"DeviceConfiguration": {
-						"shape": "S3r"
+						"shape": "S3t"
 					},
 					"EstimatedNumberOfUsers": {
 						"type": "integer"
 					},
 					"EmailConfiguration": {
-						"shape": "S3s"
-					},
-					"SmsConfiguration": {
 						"shape": "S3u"
 					},
+					"SmsConfiguration": {
+						"shape": "S3w"
+					},
 					"UserPoolTags": {
-						"shape": "S3v"
+						"shape": "S3x"
 					},
 					"SmsConfigurationFailure": {},
 					"EmailConfigurationFailure": {},
 					"AdminCreateUserConfig": {
-						"shape": "S3w"
+						"shape": "S3y"
 					}
 				}
-			},
-			"S47": {
-				"type": "list",
-				"member": {}
 			},
 			"S49": {
 				"type": "list",
@@ -67796,7 +67802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				"type": "list",
 				"member": {}
 			},
-			"S4c": {
+			"S4d": {
 				"type": "list",
 				"member": {}
 			},
@@ -67804,7 +67810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				"type": "list",
 				"member": {}
 			},
-			"S4f": {
+			"S4g": {
 				"type": "list",
 				"member": {}
 			},
@@ -67812,7 +67818,11 @@ return /******/ (function(modules) { // webpackBootstrap
 				"type": "list",
 				"member": {}
 			},
-			"S4k": {
+			"S4j": {
+				"type": "list",
+				"member": {}
+			},
+			"S4m": {
 				"type": "structure",
 				"members": {
 					"UserPoolId": {},
@@ -67834,36 +67844,36 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "integer"
 					},
 					"ReadAttributes": {
-						"shape": "S47"
-					},
-					"WriteAttributes": {
-						"shape": "S47"
-					},
-					"ExplicitAuthFlows": {
 						"shape": "S49"
 					},
-					"SupportedIdentityProviders": {
+					"WriteAttributes": {
+						"shape": "S49"
+					},
+					"ExplicitAuthFlows": {
 						"shape": "S4b"
 					},
+					"SupportedIdentityProviders": {
+						"shape": "S4d"
+					},
 					"CallbackURLs": {
-						"shape": "S4c"
+						"shape": "S4e"
 					},
 					"LogoutURLs": {
-						"shape": "S4e"
+						"shape": "S4g"
 					},
 					"DefaultRedirectURI": {},
 					"AllowedOAuthFlows": {
-						"shape": "S4f"
+						"shape": "S4h"
 					},
 					"AllowedOAuthScopes": {
-						"shape": "S4h"
+						"shape": "S4j"
 					},
 					"AllowedOAuthFlowsUserPoolClient": {
 						"type": "boolean"
 					}
 				}
 			},
-			"S5g": {
+			"S5i": {
 				"type": "structure",
 				"members": {
 					"Destination": {},
@@ -67871,7 +67881,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"AttributeName": {}
 				}
 			},
-			"S6p": {
+			"S6r": {
 				"type": "list",
 				"member": {
 					"shape": "Ss"
@@ -120162,6 +120172,14 @@ return /******/ (function(modules) { // webpackBootstrap
 				"input": {
 					"type": "structure",
 					"members": {
+						"MasterRegion": {
+							"location": "querystring",
+							"locationName": "MasterRegion"
+						},
+						"FunctionVersion": {
+							"location": "querystring",
+							"locationName": "FunctionVersion"
+						},
 						"Marker": {
 							"location": "querystring",
 							"locationName": "Marker"
@@ -120178,7 +120196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"NextMarker": {},
 						"Functions": {
-							"shape": "S2n"
+							"shape": "S2r"
 						}
 					}
 				}
@@ -120241,7 +120259,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"members": {
 						"NextMarker": {},
 						"Versions": {
-							"shape": "S2n"
+							"shape": "S2r"
 						}
 					}
 				}
@@ -120630,10 +120648,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"members": {
 							"Mode": {}
 						}
-					}
+					},
+					"MasterArn": {}
 				}
 			},
-			"S2n": {
+			"S2r": {
 				"type": "list",
 				"member": {
 					"shape": "S1h"
