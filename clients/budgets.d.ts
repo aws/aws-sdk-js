@@ -129,7 +129,7 @@ declare namespace Budgets {
     BudgetType: BudgetType;
   }
   export type BudgetName = string;
-  export type BudgetType = "USAGE"|"COST"|string;
+  export type BudgetType = "USAGE"|"COST"|"RI_UTILIZATION"|string;
   export type Budgets = Budget[];
   export interface CalculatedSpend {
     ActualSpend: Spend;
@@ -244,7 +244,7 @@ declare namespace Budgets {
   export type NumericValue = string;
   export interface Spend {
     Amount: NumericValue;
-    Unit: GenericString;
+    Unit: UnitValue;
   }
   export interface Subscriber {
     SubscriptionType: SubscriptionType;
@@ -256,7 +256,8 @@ declare namespace Budgets {
     Start: GenericTimestamp;
     End: GenericTimestamp;
   }
-  export type TimeUnit = "MONTHLY"|"QUARTERLY"|"ANNUALLY"|string;
+  export type TimeUnit = "DAILY"|"MONTHLY"|"QUARTERLY"|"ANNUALLY"|string;
+  export type UnitValue = string;
   export interface UpdateBudgetRequest {
     AccountId: AccountId;
     NewBudget: Budget;

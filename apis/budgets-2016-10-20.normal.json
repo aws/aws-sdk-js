@@ -250,16 +250,17 @@
     },
     "BudgetName":{
       "type":"string",
-      "documentation":"A string represents the budget name. No \":\" character is allowed.",
+      "documentation":"A string represents the budget name. No \":\" and \"\\\" character is allowed.",
       "max":100,
-      "pattern":"[^:]+"
+      "pattern":"[^:\\\\]+"
     },
     "BudgetType":{
       "type":"string",
-      "documentation":"The type of a budget. Can be COST or USAGE.",
+      "documentation":"The type of a budget. It should be COST, USAGE, or RI_UTILIZATION.",
       "enum":[
         "USAGE",
-        "COST"
+        "COST",
+        "RI_UTILIZATION"
       ]
     },
     "Budgets":{
@@ -654,7 +655,7 @@
       ],
       "members":{
         "Amount":{"shape":"NumericValue"},
-        "Unit":{"shape":"GenericString"}
+        "Unit":{"shape":"UnitValue"}
       },
       "documentation":"A structure represent either a cost spend or usage spend. Contains an amount and a unit."
     },
@@ -699,12 +700,18 @@
     },
     "TimeUnit":{
       "type":"string",
-      "documentation":"The time unit of the budget. e.g. weekly, monthly, etc.",
+      "documentation":"The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.",
       "enum":[
+        "DAILY",
         "MONTHLY",
         "QUARTERLY",
         "ANNUALLY"
       ]
+    },
+    "UnitValue":{
+      "type":"string",
+      "documentation":"A string to represent budget spend unit. It should be not null and not empty.",
+      "min":1
     },
     "UpdateBudgetRequest":{
       "type":"structure",

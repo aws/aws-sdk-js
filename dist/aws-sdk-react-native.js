@@ -381,7 +381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @constant
 		   */
-		  VERSION: '2.86.0',
+		  VERSION: '2.87.0',
 
 		  /**
 		   * @api private
@@ -47570,10 +47570,10 @@ return /******/ (function(modules) { // webpackBootstrap
 								],
 								"members": {
 									"Notification": {
-										"shape": "Sj"
+										"shape": "Sk"
 									},
 									"Subscribers": {
-										"shape": "Sn"
+										"shape": "So"
 									}
 								}
 							}
@@ -47598,10 +47598,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"AccountId": {},
 						"BudgetName": {},
 						"Notification": {
-							"shape": "Sj"
+							"shape": "Sk"
 						},
 						"Subscribers": {
-							"shape": "Sn"
+							"shape": "So"
 						}
 					}
 				},
@@ -47623,10 +47623,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"AccountId": {},
 						"BudgetName": {},
 						"Notification": {
-							"shape": "Sj"
+							"shape": "Sk"
 						},
 						"Subscriber": {
-							"shape": "So"
+							"shape": "Sp"
 						}
 					}
 				},
@@ -47664,7 +47664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"AccountId": {},
 						"BudgetName": {},
 						"Notification": {
-							"shape": "Sj"
+							"shape": "Sk"
 						}
 					}
 				},
@@ -47686,10 +47686,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"AccountId": {},
 						"BudgetName": {},
 						"Notification": {
-							"shape": "Sj"
+							"shape": "Sk"
 						},
 						"Subscriber": {
-							"shape": "So"
+							"shape": "Sp"
 						}
 					}
 				},
@@ -47768,7 +47768,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"Notifications": {
 							"type": "list",
 							"member": {
-								"shape": "Sj"
+								"shape": "Sk"
 							}
 						},
 						"NextToken": {}
@@ -47787,7 +47787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"AccountId": {},
 						"BudgetName": {},
 						"Notification": {
-							"shape": "Sj"
+							"shape": "Sk"
 						},
 						"MaxResults": {
 							"type": "integer"
@@ -47799,7 +47799,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"type": "structure",
 					"members": {
 						"Subscribers": {
-							"shape": "Sn"
+							"shape": "So"
 						},
 						"NextToken": {}
 					}
@@ -47837,10 +47837,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"AccountId": {},
 						"BudgetName": {},
 						"OldNotification": {
-							"shape": "Sj"
+							"shape": "Sk"
 						},
 						"NewNotification": {
-							"shape": "Sj"
+							"shape": "Sk"
 						}
 					}
 				},
@@ -47863,13 +47863,13 @@ return /******/ (function(modules) { // webpackBootstrap
 						"AccountId": {},
 						"BudgetName": {},
 						"Notification": {
-							"shape": "Sj"
+							"shape": "Sk"
 						},
 						"OldSubscriber": {
-							"shape": "So"
+							"shape": "Sp"
 						},
 						"NewSubscriber": {
-							"shape": "So"
+							"shape": "Sp"
 						}
 					}
 				},
@@ -47966,7 +47966,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					"Unit": {}
 				}
 			},
-			"Sj": {
+			"Sk": {
 				"type": "structure",
 				"required": [
 					"NotificationType",
@@ -47981,13 +47981,13 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"Sn": {
+			"So": {
 				"type": "list",
 				"member": {
-					"shape": "So"
+					"shape": "Sp"
 				}
 			},
-			"So": {
+			"Sp": {
 				"type": "structure",
 				"required": [
 					"SubscriptionType",

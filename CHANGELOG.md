@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.86.0-->
+<!--LATEST=2.87.0-->
 <!--ENTRYINSERT-->
+
+## 2.87.0
+* feature: Budgets: Update budget Management API's to list/create/update RI_UTILIZATION type budget. Update budget Management API's to support DAILY timeUnit for RI_UTILIZATION type budget.
 
 ## 2.86.0
 * feature: CognitoIdentityServiceProvider: Allows developers to configure user pools for email/phone based signup and sign-in.
