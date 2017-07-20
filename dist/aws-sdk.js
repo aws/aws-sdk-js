@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.87.0
+// AWS SDK for JavaScript v2.88.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -46124,7 +46124,12 @@ module.exports={
               },
               "SecurityConfiguration": {},
               "AutoScalingRole": {},
-              "ScaleDownBehavior": {}
+              "ScaleDownBehavior": {},
+              "CustomAmiId": {},
+              "EbsRootVolumeSize": {
+                "type": "integer"
+              },
+              "RepoUpgradeOnBoot": {}
             }
           }
         }
@@ -46254,7 +46259,7 @@ module.exports={
                     "Ec2KeyName": {},
                     "Ec2SubnetId": {},
                     "Placement": {
-                      "shape": "S2t"
+                      "shape": "S2u"
                     },
                     "KeepJobFlowAliveWhenNoSteps": {
                       "type": "boolean"
@@ -46306,13 +46311,13 @@ module.exports={
                     "type": "structure",
                     "members": {
                       "BootstrapActionConfig": {
-                        "shape": "S30"
+                        "shape": "S31"
                       }
                     }
                   }
                 },
                 "SupportedProducts": {
-                  "shape": "S32"
+                  "shape": "S33"
                 },
                 "VisibleToAllUsers": {
                   "type": "boolean"
@@ -46370,11 +46375,11 @@ module.exports={
               "Id": {},
               "Name": {},
               "Config": {
-                "shape": "S38"
+                "shape": "S39"
               },
               "ActionOnFailure": {},
               "Status": {
-                "shape": "S39"
+                "shape": "S3a"
               }
             }
           }
@@ -46530,7 +46535,7 @@ module.exports={
                         "shape": "Sh"
                       },
                       "EbsBlockDevices": {
-                        "shape": "S40"
+                        "shape": "S41"
                       },
                       "EbsOptimized": {
                         "type": "boolean"
@@ -46610,16 +46615,16 @@ module.exports={
                   "shape": "Sh"
                 },
                 "EbsBlockDevices": {
-                  "shape": "S40"
+                  "shape": "S41"
                 },
                 "EbsOptimized": {
                   "type": "boolean"
                 },
                 "ShrinkPolicy": {
-                  "shape": "S4c"
+                  "shape": "S4d"
                 },
                 "AutoScalingPolicy": {
-                  "shape": "S4g"
+                  "shape": "S4h"
                 }
               }
             }
@@ -46767,11 +46772,11 @@ module.exports={
                 "Id": {},
                 "Name": {},
                 "Config": {
-                  "shape": "S38"
+                  "shape": "S39"
                 },
                 "ActionOnFailure": {},
                 "Status": {
-                  "shape": "S39"
+                  "shape": "S3a"
                 }
               }
             }
@@ -46829,7 +46834,7 @@ module.exports={
                   "member": {}
                 },
                 "ShrinkPolicy": {
-                  "shape": "S4c"
+                  "shape": "S4d"
                 }
               }
             }
@@ -46859,7 +46864,7 @@ module.exports={
           "ClusterId": {},
           "InstanceGroupId": {},
           "AutoScalingPolicy": {
-            "shape": "S4g"
+            "shape": "S4h"
           }
         }
       }
@@ -46932,7 +46937,7 @@ module.exports={
               },
               "Ec2KeyName": {},
               "Placement": {
-                "shape": "S2t"
+                "shape": "S2u"
               },
               "KeepJobFlowAliveWhenNoSteps": {
                 "type": "boolean"
@@ -46949,10 +46954,10 @@ module.exports={
               "EmrManagedSlaveSecurityGroup": {},
               "ServiceAccessSecurityGroup": {},
               "AdditionalMasterSecurityGroups": {
-                "shape": "S5m"
+                "shape": "S5n"
               },
               "AdditionalSlaveSecurityGroups": {
-                "shape": "S5m"
+                "shape": "S5n"
               }
             }
           },
@@ -46962,11 +46967,11 @@ module.exports={
           "BootstrapActions": {
             "type": "list",
             "member": {
-              "shape": "S30"
+              "shape": "S31"
             }
           },
           "SupportedProducts": {
-            "shape": "S32"
+            "shape": "S33"
           },
           "NewSupportedProducts": {
             "type": "list",
@@ -46996,7 +47001,12 @@ module.exports={
           },
           "SecurityConfiguration": {},
           "AutoScalingRole": {},
-          "ScaleDownBehavior": {}
+          "ScaleDownBehavior": {},
+          "CustomAmiId": {},
+          "EbsRootVolumeSize": {
+            "type": "integer"
+          },
+          "RepoUpgradeOnBoot": {}
         }
       },
       "output": {
@@ -47435,7 +47445,7 @@ module.exports={
         }
       }
     },
-    "S2t": {
+    "S2u": {
       "type": "structure",
       "members": {
         "AvailabilityZone": {},
@@ -47444,7 +47454,7 @@ module.exports={
         }
       }
     },
-    "S30": {
+    "S31": {
       "type": "structure",
       "required": [
         "Name",
@@ -47466,11 +47476,11 @@ module.exports={
         }
       }
     },
-    "S32": {
+    "S33": {
       "type": "list",
       "member": {}
     },
-    "S38": {
+    "S39": {
       "type": "structure",
       "members": {
         "Jar": {},
@@ -47483,7 +47493,7 @@ module.exports={
         }
       }
     },
-    "S39": {
+    "S3a": {
       "type": "structure",
       "members": {
         "State": {},
@@ -47518,7 +47528,7 @@ module.exports={
         }
       }
     },
-    "S40": {
+    "S41": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -47530,7 +47540,7 @@ module.exports={
         }
       }
     },
-    "S4c": {
+    "S4d": {
       "type": "structure",
       "members": {
         "DecommissionTimeout": {
@@ -47540,10 +47550,10 @@ module.exports={
           "type": "structure",
           "members": {
             "InstancesToTerminate": {
-              "shape": "S4e"
+              "shape": "S4f"
             },
             "InstancesToProtect": {
-              "shape": "S4e"
+              "shape": "S4f"
             },
             "InstanceTerminationTimeout": {
               "type": "integer"
@@ -47552,11 +47562,11 @@ module.exports={
         }
       }
     },
-    "S4e": {
+    "S4f": {
       "type": "list",
       "member": {}
     },
-    "S4g": {
+    "S4h": {
       "type": "structure",
       "members": {
         "Status": {
@@ -47580,7 +47590,7 @@ module.exports={
         }
       }
     },
-    "S5m": {
+    "S5n": {
       "type": "list",
       "member": {}
     }
@@ -104389,7 +104399,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.87.0',
+  VERSION: '2.88.0',
 
 
   Signers: {},

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.87.0-->
+<!--LATEST=2.88.0-->
 <!--ENTRYINSERT-->
+
+## 2.88.0
+* feature: EMR: Amazon EMR now includes the ability to use a custom Amazon Linux AMI and adjustable root volume size when launching a cluster.
 
 ## 2.87.0
 * feature: Budgets: Update budget Management API's to list/create/update RI_UTILIZATION type budget. Update budget Management API's to support DAILY timeUnit for RI_UTILIZATION type budget.

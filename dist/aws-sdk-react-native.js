@@ -381,7 +381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @constant
 		   */
-		  VERSION: '2.87.0',
+		  VERSION: '2.88.0',
 
 		  /**
 		   * @api private
@@ -101549,7 +101549,12 @@ return /******/ (function(modules) { // webpackBootstrap
 								},
 								"SecurityConfiguration": {},
 								"AutoScalingRole": {},
-								"ScaleDownBehavior": {}
+								"ScaleDownBehavior": {},
+								"CustomAmiId": {},
+								"EbsRootVolumeSize": {
+									"type": "integer"
+								},
+								"RepoUpgradeOnBoot": {}
 							}
 						}
 					}
@@ -101679,7 +101684,7 @@ return /******/ (function(modules) { // webpackBootstrap
 											"Ec2KeyName": {},
 											"Ec2SubnetId": {},
 											"Placement": {
-												"shape": "S2t"
+												"shape": "S2u"
 											},
 											"KeepJobFlowAliveWhenNoSteps": {
 												"type": "boolean"
@@ -101731,13 +101736,13 @@ return /******/ (function(modules) { // webpackBootstrap
 											"type": "structure",
 											"members": {
 												"BootstrapActionConfig": {
-													"shape": "S30"
+													"shape": "S31"
 												}
 											}
 										}
 									},
 									"SupportedProducts": {
-										"shape": "S32"
+										"shape": "S33"
 									},
 									"VisibleToAllUsers": {
 										"type": "boolean"
@@ -101795,11 +101800,11 @@ return /******/ (function(modules) { // webpackBootstrap
 								"Id": {},
 								"Name": {},
 								"Config": {
-									"shape": "S38"
+									"shape": "S39"
 								},
 								"ActionOnFailure": {},
 								"Status": {
-									"shape": "S39"
+									"shape": "S3a"
 								}
 							}
 						}
@@ -101955,7 +101960,7 @@ return /******/ (function(modules) { // webpackBootstrap
 													"shape": "Sh"
 												},
 												"EbsBlockDevices": {
-													"shape": "S40"
+													"shape": "S41"
 												},
 												"EbsOptimized": {
 													"type": "boolean"
@@ -102035,16 +102040,16 @@ return /******/ (function(modules) { // webpackBootstrap
 										"shape": "Sh"
 									},
 									"EbsBlockDevices": {
-										"shape": "S40"
+										"shape": "S41"
 									},
 									"EbsOptimized": {
 										"type": "boolean"
 									},
 									"ShrinkPolicy": {
-										"shape": "S4c"
+										"shape": "S4d"
 									},
 									"AutoScalingPolicy": {
-										"shape": "S4g"
+										"shape": "S4h"
 									}
 								}
 							}
@@ -102192,11 +102197,11 @@ return /******/ (function(modules) { // webpackBootstrap
 									"Id": {},
 									"Name": {},
 									"Config": {
-										"shape": "S38"
+										"shape": "S39"
 									},
 									"ActionOnFailure": {},
 									"Status": {
-										"shape": "S39"
+										"shape": "S3a"
 									}
 								}
 							}
@@ -102254,7 +102259,7 @@ return /******/ (function(modules) { // webpackBootstrap
 										"member": {}
 									},
 									"ShrinkPolicy": {
-										"shape": "S4c"
+										"shape": "S4d"
 									}
 								}
 							}
@@ -102284,7 +102289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						"ClusterId": {},
 						"InstanceGroupId": {},
 						"AutoScalingPolicy": {
-							"shape": "S4g"
+							"shape": "S4h"
 						}
 					}
 				}
@@ -102357,7 +102362,7 @@ return /******/ (function(modules) { // webpackBootstrap
 								},
 								"Ec2KeyName": {},
 								"Placement": {
-									"shape": "S2t"
+									"shape": "S2u"
 								},
 								"KeepJobFlowAliveWhenNoSteps": {
 									"type": "boolean"
@@ -102374,10 +102379,10 @@ return /******/ (function(modules) { // webpackBootstrap
 								"EmrManagedSlaveSecurityGroup": {},
 								"ServiceAccessSecurityGroup": {},
 								"AdditionalMasterSecurityGroups": {
-									"shape": "S5m"
+									"shape": "S5n"
 								},
 								"AdditionalSlaveSecurityGroups": {
-									"shape": "S5m"
+									"shape": "S5n"
 								}
 							}
 						},
@@ -102387,11 +102392,11 @@ return /******/ (function(modules) { // webpackBootstrap
 						"BootstrapActions": {
 							"type": "list",
 							"member": {
-								"shape": "S30"
+								"shape": "S31"
 							}
 						},
 						"SupportedProducts": {
-							"shape": "S32"
+							"shape": "S33"
 						},
 						"NewSupportedProducts": {
 							"type": "list",
@@ -102421,7 +102426,12 @@ return /******/ (function(modules) { // webpackBootstrap
 						},
 						"SecurityConfiguration": {},
 						"AutoScalingRole": {},
-						"ScaleDownBehavior": {}
+						"ScaleDownBehavior": {},
+						"CustomAmiId": {},
+						"EbsRootVolumeSize": {
+							"type": "integer"
+						},
+						"RepoUpgradeOnBoot": {}
 					}
 				},
 				"output": {
@@ -102860,7 +102870,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S2t": {
+			"S2u": {
 				"type": "structure",
 				"members": {
 					"AvailabilityZone": {},
@@ -102869,7 +102879,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S30": {
+			"S31": {
 				"type": "structure",
 				"required": [
 					"Name",
@@ -102891,11 +102901,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S32": {
+			"S33": {
 				"type": "list",
 				"member": {}
 			},
-			"S38": {
+			"S39": {
 				"type": "structure",
 				"members": {
 					"Jar": {},
@@ -102908,7 +102918,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S39": {
+			"S3a": {
 				"type": "structure",
 				"members": {
 					"State": {},
@@ -102943,7 +102953,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S40": {
+			"S41": {
 				"type": "list",
 				"member": {
 					"type": "structure",
@@ -102955,7 +102965,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S4c": {
+			"S4d": {
 				"type": "structure",
 				"members": {
 					"DecommissionTimeout": {
@@ -102965,10 +102975,10 @@ return /******/ (function(modules) { // webpackBootstrap
 						"type": "structure",
 						"members": {
 							"InstancesToTerminate": {
-								"shape": "S4e"
+								"shape": "S4f"
 							},
 							"InstancesToProtect": {
-								"shape": "S4e"
+								"shape": "S4f"
 							},
 							"InstanceTerminationTimeout": {
 								"type": "integer"
@@ -102977,11 +102987,11 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S4e": {
+			"S4f": {
 				"type": "list",
 				"member": {}
 			},
-			"S4g": {
+			"S4h": {
 				"type": "structure",
 				"members": {
 					"Status": {
@@ -103005,7 +103015,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					}
 				}
 			},
-			"S5m": {
+			"S5n": {
 				"type": "list",
 				"member": {}
 			}
