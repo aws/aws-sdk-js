@@ -4554,7 +4554,8 @@
           "shape":"Boolean",
           "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for CreateNetworkInterfacePermission.</p>"
     },
     "CreateNetworkInterfacePermissionResult":{
       "type":"structure",
@@ -4564,7 +4565,8 @@
           "documentation":"<p>Information about the permission for the network interface.</p>",
           "locationName":"interfacePermission"
         }
-      }
+      },
+      "documentation":"<p>Contains the output of CreateNetworkInterfacePermission.</p>"
     },
     "CreateNetworkInterfaceRequest":{
       "type":"structure",
@@ -5513,7 +5515,8 @@
           "shape":"Boolean",
           "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DeleteNetworkInterfacePermission.</p>"
     },
     "DeleteNetworkInterfacePermissionResult":{
       "type":"structure",
@@ -5523,7 +5526,8 @@
           "documentation":"<p>Returns <code>true</code> if the request succeeds, otherwise returns an error.</p>",
           "locationName":"return"
         }
-      }
+      },
+      "documentation":"<p>Contains the output for DeleteNetworkInterfacePermission.</p>"
     },
     "DeleteNetworkInterfaceRequest":{
       "type":"structure",
@@ -6996,7 +7000,8 @@
           "shape":"Integer",
           "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. If this parameter is not specified, up to 50 results are returned by default.</p>"
         }
-      }
+      },
+      "documentation":"<p>Contains the parameters for DescribeNetworkInterfacePermissions.</p>"
     },
     "DescribeNetworkInterfacePermissionsResult":{
       "type":"structure",
@@ -7011,7 +7016,8 @@
           "documentation":"<p>The token to use to retrieve the next page of results.</p>",
           "locationName":"nextToken"
         }
-      }
+      },
+      "documentation":"<p>Contains the output for DescribeNetworkInterfacePermissions.</p>"
     },
     "DescribeNetworkInterfacesRequest":{
       "type":"structure",
@@ -17407,6 +17413,11 @@
           "shape":"Double",
           "documentation":"<p>The number of units provided by the specified instance type. These are the same units that you chose to set the target capacity in terms (instances or a performance characteristic such as vCPUs, memory, or I/O).</p> <p>If the target capacity divided by this value is not a whole number, we round the number of instances to the next whole number. If this value is not specified, the default is 1.</p>",
           "locationName":"weightedCapacity"
+        },
+        "TagSpecifications":{
+          "shape":"SpotFleetTagSpecificationList",
+          "documentation":"<p>The tags to apply during creation.</p>",
+          "locationName":"tagSpecificationSet"
         }
       },
       "documentation":"<p>Describes the launch specification for one or more Spot instances.</p>"
@@ -17540,6 +17551,29 @@
       "type":"list",
       "member":{
         "shape":"SpotFleetRequestConfig",
+        "locationName":"item"
+      }
+    },
+    "SpotFleetTagSpecification":{
+      "type":"structure",
+      "members":{
+        "ResourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The type of resource. Currently, the only resource type that is supported is <code>instance</code>.</p>",
+          "locationName":"resourceType"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>The tags.</p>",
+          "locationName":"tag"
+        }
+      },
+      "documentation":"<p>The tags for a Spot fleet resource.</p>"
+    },
+    "SpotFleetTagSpecificationList":{
+      "type":"list",
+      "member":{
+        "shape":"SpotFleetTagSpecification",
         "locationName":"item"
       }
     },

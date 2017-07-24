@@ -24,9 +24,24 @@
         {"shape":"LimitExceededException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ConcurrentModificationException"},
-        {"shape":"IncompatibleImageException"}
+        {"shape":"IncompatibleImageException"},
+        {"shape":"OperationNotPermittedException"}
       ],
       "documentation":"<p>Associate a fleet to a stack.</p>"
+    },
+    "CreateDirectoryConfig":{
+      "name":"CreateDirectoryConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDirectoryConfigRequest"},
+      "output":{"shape":"CreateDirectoryConfigResult"},
+      "errors":[
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Creates a directory configuration with the given parameters.</p>"
     },
     "CreateFleet":{
       "name":"CreateFleet",
@@ -42,7 +57,9 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"},
         {"shape":"InvalidRoleException"},
-        {"shape":"ConcurrentModificationException"}
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"InvalidParameterCombinationException"},
+        {"shape":"IncompatibleImageException"}
       ],
       "documentation":"<p>Creates a new fleet.</p>"
     },
@@ -80,6 +97,20 @@
       ],
       "documentation":"<p>Creates a URL to start an AppStream 2.0 streaming session for a user. By default, the URL is valid only for 1 minute from the time that it is generated.</p>"
     },
+    "DeleteDirectoryConfig":{
+      "name":"DeleteDirectoryConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteDirectoryConfigRequest"},
+      "output":{"shape":"DeleteDirectoryConfigResult"},
+      "errors":[
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Deletes the directory configuration with the given parameters.</p>"
+    },
     "DeleteFleet":{
       "name":"DeleteFleet",
       "http":{
@@ -109,6 +140,19 @@
         {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Deletes the stack. After this operation completes, the environment can no longer be activated, and any reservations made for the stack are released.</p>"
+    },
+    "DescribeDirectoryConfigs":{
+      "name":"DescribeDirectoryConfigs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeDirectoryConfigsRequest"},
+      "output":{"shape":"DescribeDirectoryConfigsResult"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Returns a list describing the specified directory configurations.</p>"
     },
     "DescribeFleets":{
       "name":"DescribeFleets",
@@ -147,7 +191,7 @@
       "errors":[
         {"shape":"InvalidParameterCombinationException"}
       ],
-      "documentation":"<p>Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.</p>"
+      "documentation":"<p>Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. To retrieve the next set of items, pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.</p>"
     },
     "DescribeStacks":{
       "name":"DescribeStacks",
@@ -160,7 +204,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. Pass the <code>nextToken</code> value in a subsequent call to this operation to retrieve the next set of items.</p>"
+      "documentation":"<p>If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. To retrieve the next set of items, pass the <code>nextToken</code> value in a subsequent call to this operation.</p>"
     },
     "DisassociateFleet":{
       "name":"DisassociateFleet",
@@ -237,6 +281,21 @@
       ],
       "documentation":"<p>Stops a fleet.</p>"
     },
+    "UpdateDirectoryConfig":{
+      "name":"UpdateDirectoryConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateDirectoryConfigRequest"},
+      "output":{"shape":"UpdateDirectoryConfigResult"},
+      "errors":[
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"}
+      ],
+      "documentation":"<p>Updates the directory configuration with the given parameters.</p>"
+    },
     "UpdateFleet":{
       "name":"UpdateFleet",
       "http":{
@@ -253,7 +312,8 @@
         {"shape":"ResourceNotAvailableException"},
         {"shape":"InvalidParameterCombinationException"},
         {"shape":"ConcurrentModificationException"},
-        {"shape":"IncompatibleImageException"}
+        {"shape":"IncompatibleImageException"},
+        {"shape":"OperationNotPermittedException"}
       ],
       "documentation":"<p>Updates an existing fleet. All the attributes except the fleet name can be updated in the <b>STOPPED</b> state. When a fleet is in the <b>RUNNING</b> state, only <code>DisplayName</code> and <code>ComputeCapacity</code> can be updated. A fleet cannot be updated in a status of <b>STARTING</b> or <b>STOPPING</b>.</p>"
     },
@@ -277,6 +337,17 @@
     }
   },
   "shapes":{
+    "AccountName":{
+      "type":"string",
+      "min":1,
+      "sensitive":true
+    },
+    "AccountPassword":{
+      "type":"string",
+      "max":127,
+      "min":1,
+      "sensitive":true
+    },
     "Application":{
       "type":"structure",
       "members":{
@@ -302,7 +373,7 @@
         },
         "Enabled":{
           "shape":"Boolean",
-          "documentation":"<p>An application can be disabled after image creation if there is a problem.</p>"
+          "documentation":"<p>If there is a problem, an application can be disabled after image creation.</p>"
         },
         "Metadata":{
           "shape":"Metadata",
@@ -393,6 +464,37 @@
       "documentation":"<p>An API error occurred. Wait a few minutes and try again.</p>",
       "exception":true
     },
+    "CreateDirectoryConfigRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryName",
+        "OrganizationalUnitDistinguishedNames",
+        "ServiceAccountCredentials"
+      ],
+      "members":{
+        "DirectoryName":{
+          "shape":"DirectoryName",
+          "documentation":"<p>The fully qualified name of the directory, such as corp.example.com</p>"
+        },
+        "OrganizationalUnitDistinguishedNames":{
+          "shape":"OrganizationalUnitDistinguishedNamesList",
+          "documentation":"<p>The list of the distinguished names of organizational units to place computer accounts in.</p>"
+        },
+        "ServiceAccountCredentials":{
+          "shape":"ServiceAccountCredentials",
+          "documentation":"<p>The <i>AccountName</i> and <i>AccountPassword</i> values for the service account, which are used by the streaming instance to connect to the directory.</p>"
+        }
+      }
+    },
+    "CreateDirectoryConfigResult":{
+      "type":"structure",
+      "members":{
+        "DirectoryConfig":{
+          "shape":"DirectoryConfig",
+          "documentation":"<p>Directory configuration details.</p>"
+        }
+      }
+    },
     "CreateFleetRequest":{
       "type":"structure",
       "required":[
@@ -412,7 +514,7 @@
         },
         "InstanceType":{
           "shape":"String",
-          "documentation":"<p>The instance type of compute resources for the fleet. Fleet instances are launched from this instance type.</p>"
+          "documentation":"<p>The instance type of compute resources for the fleet. Fleet instances are launched from this instance type. Available instance types are:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> </ul>"
         },
         "ComputeCapacity":{
           "shape":"ComputeCapacity",
@@ -440,7 +542,11 @@
         },
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
-          "documentation":"<p>Enables or disables default Internet access for the fleet.</p>"
+          "documentation":"<p>Enables or disables default internet access for the fleet.</p>"
+        },
+        "DomainJoinInfo":{
+          "shape":"DomainJoinInfo",
+          "documentation":"<p>The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for the new fleet to create.</p>"
@@ -502,7 +608,7 @@
           "documentation":"<p>The fleet for which the URL is generated.</p>"
         },
         "UserId":{
-          "shape":"UserId",
+          "shape":"StreamingUrlUserId",
           "documentation":"<p>A unique user ID for whom the URL is generated.</p>"
         },
         "ApplicationId":{
@@ -528,8 +634,23 @@
         },
         "Expires":{
           "shape":"Timestamp",
-          "documentation":"<p>Elapsed seconds after the Unix epoch, at which time this URL expires.</p>"
+          "documentation":"<p>Elapsed seconds after the Unix epoch, when this URL expires.</p>"
         }
+      }
+    },
+    "DeleteDirectoryConfigRequest":{
+      "type":"structure",
+      "required":["DirectoryName"],
+      "members":{
+        "DirectoryName":{
+          "shape":"DirectoryName",
+          "documentation":"<p>The name of the directory configuration to be deleted.</p>"
+        }
+      }
+    },
+    "DeleteDirectoryConfigResult":{
+      "type":"structure",
+      "members":{
       }
     },
     "DeleteFleetRequest":{
@@ -560,6 +681,36 @@
     "DeleteStackResult":{
       "type":"structure",
       "members":{
+      }
+    },
+    "DescribeDirectoryConfigsRequest":{
+      "type":"structure",
+      "members":{
+        "DirectoryNames":{
+          "shape":"DirectoryNameList",
+          "documentation":"<p>A specific list of directory names.</p>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The size of each page of results.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The DescribeDirectoryConfigsResult.NextToken from a previous call to DescribeDirectoryConfigs. If this is the first call, pass null.</p>"
+        }
+      }
+    },
+    "DescribeDirectoryConfigsResult":{
+      "type":"structure",
+      "members":{
+        "DirectoryConfigs":{
+          "shape":"DirectoryConfigList",
+          "documentation":"<p>The list of directory configurations.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>If not null, more results are available. To retrieve the next set of items, pass this value for the NextToken parameter in a subsequent call to DescribeDirectoryConfigs.</p>"
+        }
       }
     },
     "DescribeFleetsRequest":{
@@ -682,6 +833,38 @@
       "type":"string",
       "max":256
     },
+    "DirectoryConfig":{
+      "type":"structure",
+      "required":["DirectoryName"],
+      "members":{
+        "DirectoryName":{
+          "shape":"DirectoryName",
+          "documentation":"<p>The fully qualified name of the directory, such as corp.example.com</p>"
+        },
+        "OrganizationalUnitDistinguishedNames":{
+          "shape":"OrganizationalUnitDistinguishedNamesList",
+          "documentation":"<p>The list of the distinguished names of organizational units in which to place computer accounts.</p>"
+        },
+        "ServiceAccountCredentials":{
+          "shape":"ServiceAccountCredentials",
+          "documentation":"<p>The <i>AccountName</i> and <i>AccountPassword</i> of the service account, to be used by the streaming instance to connect to the directory.</p>"
+        },
+        "CreatedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time stamp when the directory configuration was created within AppStream 2.0.</p>"
+        }
+      },
+      "documentation":"<p>Full directory configuration details, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
+    },
+    "DirectoryConfigList":{
+      "type":"list",
+      "member":{"shape":"DirectoryConfig"}
+    },
+    "DirectoryName":{"type":"string"},
+    "DirectoryNameList":{
+      "type":"list",
+      "member":{"shape":"DirectoryName"}
+    },
     "DisassociateFleetRequest":{
       "type":"structure",
       "required":[
@@ -707,6 +890,20 @@
     "DisplayName":{
       "type":"string",
       "max":100
+    },
+    "DomainJoinInfo":{
+      "type":"structure",
+      "members":{
+        "DirectoryName":{
+          "shape":"DirectoryName",
+          "documentation":"<p>The fully qualified name of the directory, such as corp.example.com</p>"
+        },
+        "OrganizationalUnitDistinguishedName":{
+          "shape":"OrganizationalUnitDistinguishedName",
+          "documentation":"<p>The distinguished name of the organizational unit to place the computer account in.</p>"
+        }
+      },
+      "documentation":"<p>The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
     },
     "ErrorMessage":{
       "type":"string",
@@ -792,7 +989,11 @@
         },
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
-          "documentation":"<p>Whether default Internet access is enabled for the fleet. </p>"
+          "documentation":"<p>Whether default internet access is enabled for the fleet. </p>"
+        },
+        "DomainJoinInfo":{
+          "shape":"DomainJoinInfo",
+          "documentation":"<p>The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for a fleet.</p>"
@@ -802,7 +1003,8 @@
       "documentation":"<p>Fleet attribute.</p>",
       "enum":[
         "VPC_CONFIGURATION",
-        "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
+        "VPC_CONFIGURATION_SECURITY_GROUP_IDS",
+        "DOMAIN_JOIN_INFO"
       ]
     },
     "FleetAttributes":{
@@ -837,7 +1039,21 @@
         "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION",
         "SUBNET_NOT_FOUND",
         "IMAGE_NOT_FOUND",
-        "INVALID_SUBNET_CONFIGURATION"
+        "INVALID_SUBNET_CONFIGURATION",
+        "SECURITY_GROUPS_NOT_FOUND",
+        "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION",
+        "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND",
+        "DOMAIN_JOIN_ERROR_ACCESS_DENIED",
+        "DOMAIN_JOIN_ERROR_LOGON_FAILURE",
+        "DOMAIN_JOIN_ERROR_INVALID_PARAMETER",
+        "DOMAIN_JOIN_ERROR_MORE_DATA",
+        "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN",
+        "DOMAIN_JOIN_ERROR_NOT_SUPPORTED",
+        "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME",
+        "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED",
+        "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED",
+        "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED",
+        "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
       ]
     },
     "FleetErrors":{
@@ -880,7 +1096,7 @@
         },
         "State":{
           "shape":"ImageState",
-          "documentation":"<p>The image starts in the <b>PENDING</b> state, and then moves to <b>AVAILABLE</b> if image creation succeeds and <b>FAILED</b> if image creation has failed.</p>"
+          "documentation":"<p>The image starts in the <b>PENDING</b> state. If image creation succeeds, it moves to <b>AVAILABLE</b>. If image creation fails, it moves to <b>FAILED</b>.</p>"
         },
         "Visibility":{
           "shape":"VisibilityType",
@@ -908,7 +1124,7 @@
         },
         "CreatedTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The timestamp when the image was created.</p>"
+          "documentation":"<p>The time stamp when the image was created.</p>"
         },
         "PublicBaseImageReleasedDate":{
           "shape":"Timestamp",
@@ -1058,6 +1274,14 @@
       "documentation":"<p>The attempted operation is not permitted.</p>",
       "exception":true
     },
+    "OrganizationalUnitDistinguishedName":{
+      "type":"string",
+      "max":2000
+    },
+    "OrganizationalUnitDistinguishedNamesList":{
+      "type":"list",
+      "member":{"shape":"OrganizationalUnitDistinguishedName"}
+    },
     "PlatformType":{
       "type":"string",
       "enum":["WINDOWS"]
@@ -1104,6 +1328,24 @@
       "member":{"shape":"String"},
       "documentation":"<p>A list of security groups.</p>",
       "max":5
+    },
+    "ServiceAccountCredentials":{
+      "type":"structure",
+      "required":[
+        "AccountName",
+        "AccountPassword"
+      ],
+      "members":{
+        "AccountName":{
+          "shape":"AccountName",
+          "documentation":"<p>The user name of an account in the directory that is used by AppStream 2.0 streaming instances to connect to the directory. This account must have the following privileges: create computer objects, join computers to the domain, change/reset the password on descendant computer objects for the organizational units specified.</p>"
+        },
+        "AccountPassword":{
+          "shape":"AccountPassword",
+          "documentation":"<p>The password for the user account for directory actions.</p>"
+        }
+      },
+      "documentation":"<p>The <i>AccountName</i> and <i>AccountPassword</i> of the service account, to be used by the streaming instance to connect to the directory.</p>"
     },
     "Session":{
       "type":"structure",
@@ -1178,7 +1420,7 @@
         },
         "CreatedTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The timestamp when the stack was created.</p>"
+          "documentation":"<p>The time stamp when the stack was created.</p>"
         },
         "StorageConnectors":{
           "shape":"StorageConnectorList",
@@ -1277,6 +1519,12 @@
       "documentation":"<p>The type of storage connector. The possible values include: HOMEFOLDERS.</p>",
       "enum":["HOMEFOLDERS"]
     },
+    "StreamingUrlUserId":{
+      "type":"string",
+      "max":32,
+      "min":2,
+      "pattern":"[\\w+=,.@-]*"
+    },
     "String":{
       "type":"string",
       "min":1
@@ -1291,6 +1539,33 @@
       "documentation":"<p>A list of subnet IDs.</p>"
     },
     "Timestamp":{"type":"timestamp"},
+    "UpdateDirectoryConfigRequest":{
+      "type":"structure",
+      "required":["DirectoryName"],
+      "members":{
+        "DirectoryName":{
+          "shape":"DirectoryName",
+          "documentation":"<p>The name of the existing directory configuration to be updated.</p>"
+        },
+        "OrganizationalUnitDistinguishedNames":{
+          "shape":"OrganizationalUnitDistinguishedNamesList",
+          "documentation":"<p>The list of the distinguished names of organizational units to place computer accounts in.</p>"
+        },
+        "ServiceAccountCredentials":{
+          "shape":"ServiceAccountCredentials",
+          "documentation":"<p>The <i>AccountName</i> and <i>AccountPassword</i> values for the service account, which are used by the streaming instance to connect to the directory</p>"
+        }
+      }
+    },
+    "UpdateDirectoryConfigResult":{
+      "type":"structure",
+      "members":{
+        "DirectoryConfig":{
+          "shape":"DirectoryConfig",
+          "documentation":"<p>The updated directory configuration details.</p>"
+        }
+      }
+    },
     "UpdateFleetRequest":{
       "type":"structure",
       "required":["Name"],
@@ -1305,7 +1580,7 @@
         },
         "InstanceType":{
           "shape":"String",
-          "documentation":"<p>The instance type of compute resources for the fleet. Fleet instances are launched from this instance type.</p>"
+          "documentation":"<p>The instance type of compute resources for the fleet. Fleet instances are launched from this instance type. Available instance types are:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> </ul>"
         },
         "ComputeCapacity":{
           "shape":"ComputeCapacity",
@@ -1338,7 +1613,11 @@
         },
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
-          "documentation":"<p>Enables or disables default Internet access for the fleet.</p>"
+          "documentation":"<p>Enables or disables default internet access for the fleet.</p>"
+        },
+        "DomainJoinInfo":{
+          "shape":"DomainJoinInfo",
+          "documentation":"<p>The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
         },
         "AttributesToDelete":{
           "shape":"FleetAttributes",

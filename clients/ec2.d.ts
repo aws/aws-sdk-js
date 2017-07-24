@@ -11484,6 +11484,10 @@ declare namespace EC2 {
      * The number of units provided by the specified instance type. These are the same units that you chose to set the target capacity in terms (instances or a performance characteristic such as vCPUs, memory, or I/O). If the target capacity divided by this value is not a whole number, we round the number of instances to the next whole number. If this value is not specified, the default is 1.
      */
     WeightedCapacity?: Double;
+    /**
+     * The tags to apply during creation.
+     */
+    TagSpecifications?: SpotFleetTagSpecificationList;
   }
   export interface SpotFleetMonitoring {
     /**
@@ -11568,6 +11572,17 @@ declare namespace EC2 {
     ReplaceUnhealthyInstances?: Boolean;
   }
   export type SpotFleetRequestConfigSet = SpotFleetRequestConfig[];
+  export interface SpotFleetTagSpecification {
+    /**
+     * The type of resource. Currently, the only resource type that is supported is instance.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export type SpotFleetTagSpecificationList = SpotFleetTagSpecification[];
   export interface SpotInstanceRequest {
     /**
      * If you specified a duration and your Spot instance request was fulfilled, this is the fixed hourly price in effect for the Spot instance while it runs.
