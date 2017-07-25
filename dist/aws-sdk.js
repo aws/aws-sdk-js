@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.89.0
+// AWS SDK for JavaScript v2.90.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -6660,6 +6660,71 @@ module.exports={
         }
       }
     },
+    "CreateStackInstances": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName",
+          "Accounts",
+          "Regions"
+        ],
+        "members": {
+          "StackSetName": {},
+          "Accounts": {
+            "shape": "S19"
+          },
+          "Regions": {
+            "shape": "S1b"
+          },
+          "OperationPreferences": {
+            "shape": "S1d"
+          },
+          "OperationId": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "CreateStackInstancesResult",
+        "type": "structure",
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "CreateStackSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName"
+        ],
+        "members": {
+          "StackSetName": {},
+          "Description": {},
+          "TemplateBody": {},
+          "TemplateURL": {},
+          "Parameters": {
+            "shape": "Se"
+          },
+          "Capabilities": {
+            "shape": "Sj"
+          },
+          "Tags": {
+            "shape": "Sp"
+          },
+          "ClientRequestToken": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "CreateStackSetResult",
+        "type": "structure",
+        "members": {
+          "StackSetId": {}
+        }
+      }
+    },
     "DeleteChangeSet": {
       "input": {
         "type": "structure",
@@ -6692,6 +6757,58 @@ module.exports={
           "RoleARN": {},
           "ClientRequestToken": {}
         }
+      }
+    },
+    "DeleteStackInstances": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName",
+          "Accounts",
+          "Regions",
+          "RetainStacks"
+        ],
+        "members": {
+          "StackSetName": {},
+          "Accounts": {
+            "shape": "S19"
+          },
+          "Regions": {
+            "shape": "S1b"
+          },
+          "OperationPreferences": {
+            "shape": "S1d"
+          },
+          "RetainStacks": {
+            "type": "boolean"
+          },
+          "OperationId": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "DeleteStackInstancesResult",
+        "type": "structure",
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "DeleteStackSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName"
+        ],
+        "members": {
+          "StackSetName": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "DeleteStackSetResult",
+        "type": "structure",
+        "members": {}
       }
     },
     "DescribeAccountLimits": {
@@ -6849,6 +6966,38 @@ module.exports={
         }
       }
     },
+    "DescribeStackInstance": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName",
+          "StackInstanceAccount",
+          "StackInstanceRegion"
+        ],
+        "members": {
+          "StackSetName": {},
+          "StackInstanceAccount": {},
+          "StackInstanceRegion": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "DescribeStackInstanceResult",
+        "type": "structure",
+        "members": {
+          "StackInstance": {
+            "type": "structure",
+            "members": {
+              "StackSetId": {},
+              "Region": {},
+              "Account": {},
+              "StackId": {},
+              "Status": {},
+              "StatusReason": {}
+            }
+          }
+        }
+      }
+    },
     "DescribeStackResource": {
       "input": {
         "type": "structure",
@@ -6932,6 +7081,82 @@ module.exports={
         }
       }
     },
+    "DescribeStackSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName"
+        ],
+        "members": {
+          "StackSetName": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "DescribeStackSetResult",
+        "type": "structure",
+        "members": {
+          "StackSet": {
+            "type": "structure",
+            "members": {
+              "StackSetName": {},
+              "StackSetId": {},
+              "Description": {},
+              "Status": {},
+              "TemplateBody": {},
+              "Parameters": {
+                "shape": "Se"
+              },
+              "Capabilities": {
+                "shape": "Sj"
+              },
+              "Tags": {
+                "shape": "Sp"
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeStackSetOperation": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName",
+          "OperationId"
+        ],
+        "members": {
+          "StackSetName": {},
+          "OperationId": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "DescribeStackSetOperationResult",
+        "type": "structure",
+        "members": {
+          "StackSetOperation": {
+            "type": "structure",
+            "members": {
+              "OperationId": {},
+              "StackSetId": {},
+              "Action": {},
+              "Status": {},
+              "OperationPreferences": {
+                "shape": "S1d"
+              },
+              "RetainStacks": {
+                "type": "boolean"
+              },
+              "CreationTimestamp": {
+                "type": "timestamp"
+              },
+              "EndTimestamp": {
+                "type": "timestamp"
+              }
+            }
+          }
+        }
+      }
+    },
     "DescribeStacks": {
       "input": {
         "type": "structure",
@@ -6988,7 +7213,8 @@ module.exports={
                     "members": {
                       "OutputKey": {},
                       "OutputValue": {},
-                      "Description": {}
+                      "Description": {},
+                      "ExportName": {}
                     }
                   }
                 },
@@ -7085,7 +7311,8 @@ module.exports={
         "members": {
           "TemplateBody": {},
           "TemplateURL": {},
-          "StackName": {}
+          "StackName": {},
+          "StackSetName": {}
         }
       },
       "output": {
@@ -7127,7 +7354,7 @@ module.exports={
           "Version": {},
           "Metadata": {},
           "DeclaredTransforms": {
-            "shape": "S3l"
+            "shape": "S4m"
           }
         }
       }
@@ -7219,6 +7446,44 @@ module.exports={
         }
       }
     },
+    "ListStackInstances": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName"
+        ],
+        "members": {
+          "StackSetName": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          },
+          "StackInstanceAccount": {},
+          "StackInstanceRegion": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "ListStackInstancesResult",
+        "type": "structure",
+        "members": {
+          "Summaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "StackSetId": {},
+                "Region": {},
+                "Account": {},
+                "StackId": {},
+                "Status": {},
+                "StatusReason": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
     "ListStackResources": {
       "input": {
         "type": "structure",
@@ -7253,6 +7518,119 @@ module.exports={
                 },
                 "ResourceStatus": {},
                 "ResourceStatusReason": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListStackSetOperationResults": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName",
+          "OperationId"
+        ],
+        "members": {
+          "StackSetName": {},
+          "OperationId": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "ListStackSetOperationResultsResult",
+        "type": "structure",
+        "members": {
+          "Summaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Account": {},
+                "Region": {},
+                "Status": {},
+                "StatusReason": {},
+                "AccountGateResult": {
+                  "type": "structure",
+                  "members": {
+                    "Status": {},
+                    "StatusReason": {}
+                  }
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListStackSetOperations": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName"
+        ],
+        "members": {
+          "StackSetName": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "ListStackSetOperationsResult",
+        "type": "structure",
+        "members": {
+          "Summaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "OperationId": {},
+                "Action": {},
+                "Status": {},
+                "CreationTimestamp": {
+                  "type": "timestamp"
+                },
+                "EndTimestamp": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListStackSets": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          },
+          "Status": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "ListStackSetsResult",
+        "type": "structure",
+        "members": {
+          "Summaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "StackSetName": {},
+                "StackSetId": {},
+                "Description": {},
+                "Status": {}
               }
             }
           },
@@ -7336,6 +7714,24 @@ module.exports={
         }
       }
     },
+    "StopStackSetOperation": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName",
+          "OperationId"
+        ],
+        "members": {
+          "StackSetName": {},
+          "OperationId": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "StopStackSetOperationResult",
+        "type": "structure",
+        "members": {}
+      }
+    },
     "UpdateStack": {
       "input": {
         "type": "structure",
@@ -7380,6 +7776,45 @@ module.exports={
         }
       }
     },
+    "UpdateStackSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "StackSetName"
+        ],
+        "members": {
+          "StackSetName": {},
+          "Description": {},
+          "TemplateBody": {},
+          "TemplateURL": {},
+          "UsePreviousTemplate": {
+            "type": "boolean"
+          },
+          "Parameters": {
+            "shape": "Se"
+          },
+          "Capabilities": {
+            "shape": "Sj"
+          },
+          "Tags": {
+            "shape": "Sp"
+          },
+          "OperationPreferences": {
+            "shape": "S1d"
+          },
+          "OperationId": {
+            "idempotencyToken": true
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "UpdateStackSetResult",
+        "type": "structure",
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
     "ValidateTemplate": {
       "input": {
         "type": "structure",
@@ -7412,7 +7847,7 @@ module.exports={
           },
           "CapabilitiesReason": {},
           "DeclaredTransforms": {
-            "shape": "S3l"
+            "shape": "S4m"
           }
         }
       }
@@ -7448,13 +7883,45 @@ module.exports={
       "type": "list",
       "member": {
         "type": "structure",
+        "required": [
+          "Key",
+          "Value"
+        ],
         "members": {
           "Key": {},
           "Value": {}
         }
       }
     },
-    "S3l": {
+    "S19": {
+      "type": "list",
+      "member": {}
+    },
+    "S1b": {
+      "type": "list",
+      "member": {}
+    },
+    "S1d": {
+      "type": "structure",
+      "members": {
+        "RegionOrder": {
+          "shape": "S1b"
+        },
+        "FailureToleranceCount": {
+          "type": "integer"
+        },
+        "FailureTolerancePercentage": {
+          "type": "integer"
+        },
+        "MaxConcurrentCount": {
+          "type": "integer"
+        },
+        "MaxConcurrentPercentage": {
+          "type": "integer"
+        }
+      }
+    },
+    "S4m": {
       "type": "list",
       "member": {}
     }
@@ -104416,7 +104883,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.89.0',
+  VERSION: '2.90.0',
 
 
   Signers: {},

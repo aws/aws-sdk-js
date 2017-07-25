@@ -690,6 +690,86 @@ declare namespace CloudDirectory {
      */
     attachedObjectIdentifier?: ObjectIdentifier;
   }
+  export interface BatchAttachPolicy {
+    /**
+     * The reference that is associated with the policy object.
+     */
+    PolicyReference: ObjectReference;
+    /**
+     * The reference that identifies the object to which the policy will be attached.
+     */
+    ObjectReference: ObjectReference;
+  }
+  export interface BatchAttachPolicyResponse {
+  }
+  export interface BatchAttachToIndex {
+    /**
+     * A reference to the index that you are attaching the object to.
+     */
+    IndexReference: ObjectReference;
+    /**
+     * A reference to the object that you are attaching to the index.
+     */
+    TargetReference: ObjectReference;
+  }
+  export interface BatchAttachToIndexResponse {
+    /**
+     * The ObjectIdentifier of the object that was attached to the index.
+     */
+    AttachedObjectIdentifier?: ObjectIdentifier;
+  }
+  export interface BatchAttachTypedLink {
+    /**
+     * Identifies the source object that the typed link will attach to.
+     */
+    SourceObjectReference: ObjectReference;
+    /**
+     * Identifies the target object that the typed link will attach to.
+     */
+    TargetObjectReference: ObjectReference;
+    /**
+     * Identifies the typed link facet that is associated with the typed link.
+     */
+    TypedLinkFacet: TypedLinkSchemaAndFacetName;
+    /**
+     * A set of attributes that are associated with the typed link.
+     */
+    Attributes: AttributeNameAndValueList;
+  }
+  export interface BatchAttachTypedLinkResponse {
+    /**
+     * Returns a typed link specifier as output.
+     */
+    TypedLinkSpecifier?: TypedLinkSpecifier;
+  }
+  export interface BatchCreateIndex {
+    /**
+     * Specifies the attributes that should be indexed on. Currently only a single attribute is supported.
+     */
+    OrderedIndexedAttributeList: AttributeKeyList;
+    /**
+     * Indicates whether the attribute that is being indexed has unique values or not.
+     */
+    IsUnique: Bool;
+    /**
+     * A reference to the parent object that contains the index object.
+     */
+    ParentReference?: ObjectReference;
+    /**
+     * The name of the link between the parent object and the index object.
+     */
+    LinkName?: LinkName;
+    /**
+     * The batch reference name. See Batches for more information.
+     */
+    BatchReferenceName?: BatchReferenceName;
+  }
+  export interface BatchCreateIndexResponse {
+    /**
+     * The ObjectIdentifier of the index created by this operation.
+     */
+    ObjectIdentifier?: ObjectIdentifier;
+  }
   export interface BatchCreateObject {
     /**
      * A list of FacetArns that will be associated with the object. For more information, see arns.
@@ -726,6 +806,22 @@ declare namespace CloudDirectory {
   }
   export interface BatchDeleteObjectResponse {
   }
+  export interface BatchDetachFromIndex {
+    /**
+     * A reference to the index object.
+     */
+    IndexReference: ObjectReference;
+    /**
+     * A reference to the object being detached from the index.
+     */
+    TargetReference: ObjectReference;
+  }
+  export interface BatchDetachFromIndexResponse {
+    /**
+     * The ObjectIdentifier of the object that was detached from the index.
+     */
+    DetachedObjectIdentifier?: ObjectIdentifier;
+  }
   export interface BatchDetachObject {
     /**
      * Parent reference from which the object with the specified link name is detached.
@@ -745,6 +841,114 @@ declare namespace CloudDirectory {
      * The ObjectIdentifier of the detached object.
      */
     detachedObjectIdentifier?: ObjectIdentifier;
+  }
+  export interface BatchDetachTypedLink {
+    /**
+     * Used to accept a typed link specifier as input.
+     */
+    TypedLinkSpecifier: TypedLinkSpecifier;
+  }
+  export interface BatchDetachTypedLinkResponse {
+  }
+  export interface BatchGetObjectInformation {
+    /**
+     * A reference to the object.
+     */
+    ObjectReference: ObjectReference;
+  }
+  export interface BatchGetObjectInformationResponse {
+    /**
+     * The facets attached to the specified object.
+     */
+    SchemaFacets?: SchemaFacetList;
+    /**
+     * The ObjectIdentifier of the specified object.
+     */
+    ObjectIdentifier?: ObjectIdentifier;
+  }
+  export interface BatchListAttachedIndices {
+    /**
+     * A reference to the object that has indices attached.
+     */
+    TargetReference: ObjectReference;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface BatchListAttachedIndicesResponse {
+    /**
+     * The indices attached to the specified object.
+     */
+    IndexAttachments?: IndexAttachmentList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface BatchListIncomingTypedLinks {
+    /**
+     * The reference that identifies the object whose attributes will be listed.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.
+     */
+    FilterAttributeRanges?: TypedLinkAttributeRangeList;
+    /**
+     * Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.
+     */
+    FilterTypedLink?: TypedLinkSchemaAndFacetName;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface BatchListIncomingTypedLinksResponse {
+    /**
+     * Returns one or more typed link specifiers as output.
+     */
+    LinkSpecifiers?: TypedLinkSpecifierList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface BatchListIndex {
+    /**
+     * Specifies the ranges of indexed values that you want to query.
+     */
+    RangesOnIndexedValues?: ObjectAttributeRangeList;
+    /**
+     * The reference to the index to list.
+     */
+    IndexReference: ObjectReference;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface BatchListIndexResponse {
+    /**
+     * The objects and indexed values attached to the index.
+     */
+    IndexAttachments?: IndexAttachmentList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
   }
   export interface BatchListObjectAttributes {
     /**
@@ -798,6 +1002,134 @@ declare namespace CloudDirectory {
      */
     NextToken?: NextToken;
   }
+  export interface BatchListObjectParentPaths {
+    /**
+     * The reference that identifies the object whose attributes will be listed.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface BatchListObjectParentPathsResponse {
+    /**
+     * Returns the path to the ObjectIdentifiers that are associated with the directory.
+     */
+    PathToObjectIdentifiersList?: PathToObjectIdentifiersList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface BatchListObjectPolicies {
+    /**
+     * The reference that identifies the object whose attributes will be listed.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface BatchListObjectPoliciesResponse {
+    /**
+     * A list of policy ObjectIdentifiers, that are attached to the object.
+     */
+    AttachedPolicyIds?: ObjectIdentifierList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface BatchListOutgoingTypedLinks {
+    /**
+     * The reference that identifies the object whose attributes will be listed.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.
+     */
+    FilterAttributeRanges?: TypedLinkAttributeRangeList;
+    /**
+     * Filters are interpreted in the order of the attributes defined on the typed link facet, not the order they are supplied to any API calls.
+     */
+    FilterTypedLink?: TypedLinkSchemaAndFacetName;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface BatchListOutgoingTypedLinksResponse {
+    /**
+     * Returns a typed link specifier as output.
+     */
+    TypedLinkSpecifiers?: TypedLinkSpecifierList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface BatchListPolicyAttachments {
+    /**
+     * The reference that identifies the policy object.
+     */
+    PolicyReference: ObjectReference;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface BatchListPolicyAttachmentsResponse {
+    /**
+     * A list of ObjectIdentifiers to which the policy is attached.
+     */
+    ObjectIdentifiers?: ObjectIdentifierList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface BatchLookupPolicy {
+    /**
+     * Reference that identifies the object whose policies will be looked up.
+     */
+    ObjectReference: ObjectReference;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve.
+     */
+    MaxResults?: NumberResults;
+  }
+  export interface BatchLookupPolicyResponse {
+    /**
+     * Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier, and PolicyType. For more information, see Policies.
+     */
+    PolicyToPathList?: PolicyToPathList;
+    /**
+     * The pagination token.
+     */
+    NextToken?: NextToken;
+  }
   export type BatchOperationIndex = number;
   export interface BatchReadException {
     /**
@@ -809,7 +1141,7 @@ declare namespace CloudDirectory {
      */
     Message?: ExceptionMessage;
   }
-  export type BatchReadExceptionType = "ValidationException"|"InvalidArnException"|"ResourceNotFoundException"|"InvalidNextTokenException"|"AccessDeniedException"|"NotNodeException"|string;
+  export type BatchReadExceptionType = "ValidationException"|"InvalidArnException"|"ResourceNotFoundException"|"InvalidNextTokenException"|"AccessDeniedException"|"NotNodeException"|"FacetValidationException"|"CannotListParentOfRootException"|"NotIndexException"|"NotPolicyException"|"DirectoryNotEnabledException"|"LimitExceededException"|"InternalServiceException"|string;
   export interface BatchReadOperation {
     /**
      * Lists all attributes that are associated with an object.
@@ -819,6 +1151,42 @@ declare namespace CloudDirectory {
      * Returns a paginated list of child objects that are associated with a given object.
      */
     ListObjectChildren?: BatchListObjectChildren;
+    /**
+     * Lists indices attached to an object.
+     */
+    ListAttachedIndices?: BatchListAttachedIndices;
+    /**
+     * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure.
+     */
+    ListObjectParentPaths?: BatchListObjectParentPaths;
+    /**
+     * Retrieves metadata about an object.
+     */
+    GetObjectInformation?: BatchGetObjectInformation;
+    /**
+     * Returns policies attached to an object in pagination fashion.
+     */
+    ListObjectPolicies?: BatchListObjectPolicies;
+    /**
+     * Returns all of the ObjectIdentifiers to which a given policy is attached.
+     */
+    ListPolicyAttachments?: BatchListPolicyAttachments;
+    /**
+     * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored. For more information, see Policies.
+     */
+    LookupPolicy?: BatchLookupPolicy;
+    /**
+     * Lists objects attached to the specified index.
+     */
+    ListIndex?: BatchListIndex;
+    /**
+     * Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
+     */
+    ListOutgoingTypedLinks?: BatchListOutgoingTypedLinks;
+    /**
+     * Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
+     */
+    ListIncomingTypedLinks?: BatchListIncomingTypedLinks;
   }
   export type BatchReadOperationList = BatchReadOperation[];
   export interface BatchReadOperationResponse {
@@ -861,6 +1229,42 @@ declare namespace CloudDirectory {
      * Returns a paginated list of child objects that are associated with a given object.
      */
     ListObjectChildren?: BatchListObjectChildrenResponse;
+    /**
+     * Retrieves metadata about an object.
+     */
+    GetObjectInformation?: BatchGetObjectInformationResponse;
+    /**
+     * Lists indices attached to an object.
+     */
+    ListAttachedIndices?: BatchListAttachedIndicesResponse;
+    /**
+     * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure.
+     */
+    ListObjectParentPaths?: BatchListObjectParentPathsResponse;
+    /**
+     * Returns policies attached to an object in pagination fashion.
+     */
+    ListObjectPolicies?: BatchListObjectPoliciesResponse;
+    /**
+     * Returns all of the ObjectIdentifiers to which a given policy is attached.
+     */
+    ListPolicyAttachments?: BatchListPolicyAttachmentsResponse;
+    /**
+     * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored. For more information, see Policies.
+     */
+    LookupPolicy?: BatchLookupPolicyResponse;
+    /**
+     * Lists objects attached to the specified index.
+     */
+    ListIndex?: BatchListIndexResponse;
+    /**
+     * Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
+     */
+    ListOutgoingTypedLinks?: BatchListOutgoingTypedLinksResponse;
+    /**
+     * Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed link.
+     */
+    ListIncomingTypedLinks?: BatchListIncomingTypedLinksResponse;
   }
   export type BatchReferenceName = string;
   export interface BatchRemoveFacetFromObject {
@@ -891,7 +1295,7 @@ declare namespace CloudDirectory {
      */
     ObjectIdentifier?: ObjectIdentifier;
   }
-  export type BatchWriteExceptionType = "InternalServiceException"|"ValidationException"|"InvalidArnException"|"LinkNameAlreadyInUseException"|"StillContainsLinksException"|"FacetValidationException"|"ObjectNotDetachedException"|"ResourceNotFoundException"|"AccessDeniedException"|string;
+  export type BatchWriteExceptionType = "InternalServiceException"|"ValidationException"|"InvalidArnException"|"LinkNameAlreadyInUseException"|"StillContainsLinksException"|"FacetValidationException"|"ObjectNotDetachedException"|"ResourceNotFoundException"|"AccessDeniedException"|"InvalidAttachmentException"|"NotIndexException"|"IndexedAttributeMissingException"|"ObjectAlreadyDetachedException"|"NotPolicyException"|"DirectoryNotEnabledException"|"LimitExceededException"|"UnsupportedIndexTypeException"|string;
   export interface BatchWriteOperation {
     /**
      * Creates an object.
@@ -921,6 +1325,30 @@ declare namespace CloudDirectory {
      * A batch operation that removes a facet from an object.
      */
     RemoveFacetFromObject?: BatchRemoveFacetFromObject;
+    /**
+     * Attaches a policy object to a regular object. An object can have a limited number of attached policies.
+     */
+    AttachPolicy?: BatchAttachPolicy;
+    /**
+     * Creates an index object. See Indexing for more information.
+     */
+    CreateIndex?: BatchCreateIndex;
+    /**
+     * Attaches the specified object to the specified index.
+     */
+    AttachToIndex?: BatchAttachToIndex;
+    /**
+     * Detaches the specified object from the specified index.
+     */
+    DetachFromIndex?: BatchDetachFromIndex;
+    /**
+     * Attaches a typed link to a specified source and target object. For more information, see Typed link.
+     */
+    AttachTypedLink?: BatchAttachTypedLink;
+    /**
+     * Detaches a typed link from a specified source and target object. For more information, see Typed link.
+     */
+    DetachTypedLink?: BatchDetachTypedLink;
   }
   export type BatchWriteOperationList = BatchWriteOperation[];
   export interface BatchWriteOperationResponse {
@@ -952,6 +1380,30 @@ declare namespace CloudDirectory {
      * The result of a batch remove facet from object operation.
      */
     RemoveFacetFromObject?: BatchRemoveFacetFromObjectResponse;
+    /**
+     * Attaches a policy object to a regular object. An object can have a limited number of attached policies.
+     */
+    AttachPolicy?: BatchAttachPolicyResponse;
+    /**
+     * Creates an index object. See Indexing for more information.
+     */
+    CreateIndex?: BatchCreateIndexResponse;
+    /**
+     * Attaches the specified object to the specified index.
+     */
+    AttachToIndex?: BatchAttachToIndexResponse;
+    /**
+     * Detaches the specified object from the specified index.
+     */
+    DetachFromIndex?: BatchDetachFromIndexResponse;
+    /**
+     * Attaches a typed link to a specified source and target object. For more information, see Typed link.
+     */
+    AttachTypedLink?: BatchAttachTypedLinkResponse;
+    /**
+     * Detaches a typed link from a specified source and target object. For more information, see Typed link.
+     */
+    DetachTypedLink?: BatchDetachTypedLinkResponse;
   }
   export type BatchWriteOperationResponseList = BatchWriteOperationResponse[];
   export interface BatchWriteRequest {
@@ -1475,7 +1927,7 @@ declare namespace CloudDirectory {
      */
     DirectoryArn: Arn;
     /**
-     * A reference to the object to that has indices attached.
+     * A reference to the object that has indices attached.
      */
     TargetReference: ObjectReference;
     /**
@@ -2313,7 +2765,7 @@ declare namespace CloudDirectory {
      */
     Attributes: TypedLinkAttributeDefinitionList;
     /**
-     * The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See ListOutgoingTypedLinks and ListIncomingTypeLinks for details.
+     * The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See ListOutgoingTypedLinks and ListIncomingTypedLinks for details.
      */
     IdentityAttributeOrder: AttributeNameList;
   }

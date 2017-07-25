@@ -141,6 +141,7 @@
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
+        {"shape":"DirectoryNotEnabledException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidAttachmentException"},
         {"shape":"ValidationException"},
@@ -517,6 +518,7 @@
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
+        {"shape":"DirectoryNotEnabledException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"FacetValidationException"}
       ],
@@ -810,6 +812,7 @@
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
+        {"shape":"DirectoryNotEnabledException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"FacetValidationException"}
@@ -970,6 +973,7 @@
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
+        {"shape":"DirectoryNotEnabledException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"FacetValidationException"}
@@ -1657,7 +1661,7 @@
           "documentation":"<p>The name of the link.</p>"
         }
       },
-      "documentation":"<p>Represents the output of an <code>AttachObject</code> operation.</p>"
+      "documentation":"<p>Represents the output of an <a>AttachObject</a> operation.</p>"
     },
     "BatchAttachObjectResponse":{
       "type":"structure",
@@ -1667,7 +1671,137 @@
           "documentation":"<p>The <code>ObjectIdentifier</code> of the object that has been attached.</p>"
         }
       },
-      "documentation":"<p>Represents the output batch <code>AttachObject</code> response operation.</p>"
+      "documentation":"<p>Represents the output batch <a>AttachObject</a> response operation.</p>"
+    },
+    "BatchAttachPolicy":{
+      "type":"structure",
+      "required":[
+        "PolicyReference",
+        "ObjectReference"
+      ],
+      "members":{
+        "PolicyReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>The reference that is associated with the policy object.</p>"
+        },
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>The reference that identifies the object to which the policy will be attached.</p>"
+        }
+      },
+      "documentation":"<p>Attaches a policy object to a regular object inside a <a>BatchRead</a> operation. For more information, see <a>AttachPolicy</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchAttachPolicyResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Represents the output of an <a>AttachPolicy</a> response operation.</p>"
+    },
+    "BatchAttachToIndex":{
+      "type":"structure",
+      "required":[
+        "IndexReference",
+        "TargetReference"
+      ],
+      "members":{
+        "IndexReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>A reference to the index that you are attaching the object to.</p>"
+        },
+        "TargetReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>A reference to the object that you are attaching to the index.</p>"
+        }
+      },
+      "documentation":"<p>Attaches the specified object to the specified index inside a <a>BatchRead</a> operation. For more information, see <a>AttachToIndex</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchAttachToIndexResponse":{
+      "type":"structure",
+      "members":{
+        "AttachedObjectIdentifier":{
+          "shape":"ObjectIdentifier",
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the object that was attached to the index.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>AttachToIndex</a> response operation.</p>"
+    },
+    "BatchAttachTypedLink":{
+      "type":"structure",
+      "required":[
+        "SourceObjectReference",
+        "TargetObjectReference",
+        "TypedLinkFacet",
+        "Attributes"
+      ],
+      "members":{
+        "SourceObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Identifies the source object that the typed link will attach to.</p>"
+        },
+        "TargetObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Identifies the target object that the typed link will attach to.</p>"
+        },
+        "TypedLinkFacet":{
+          "shape":"TypedLinkSchemaAndFacetName",
+          "documentation":"<p>Identifies the typed link facet that is associated with the typed link.</p>"
+        },
+        "Attributes":{
+          "shape":"AttributeNameAndValueList",
+          "documentation":"<p>A set of attributes that are associated with the typed link.</p>"
+        }
+      },
+      "documentation":"<p>Attaches a typed link to a specified source and target object inside a <a>BatchRead</a> operation. For more information, see <a>AttachTypedLink</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchAttachTypedLinkResponse":{
+      "type":"structure",
+      "members":{
+        "TypedLinkSpecifier":{
+          "shape":"TypedLinkSpecifier",
+          "documentation":"<p>Returns a typed link specifier as output.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>AttachTypedLink</a> response operation.</p>"
+    },
+    "BatchCreateIndex":{
+      "type":"structure",
+      "required":[
+        "OrderedIndexedAttributeList",
+        "IsUnique"
+      ],
+      "members":{
+        "OrderedIndexedAttributeList":{
+          "shape":"AttributeKeyList",
+          "documentation":"<p>Specifies the attributes that should be indexed on. Currently only a single attribute is supported.</p>"
+        },
+        "IsUnique":{
+          "shape":"Bool",
+          "documentation":"<p>Indicates whether the attribute that is being indexed has unique values or not.</p>"
+        },
+        "ParentReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>A reference to the parent object that contains the index object.</p>"
+        },
+        "LinkName":{
+          "shape":"LinkName",
+          "documentation":"<p>The name of the link between the parent object and the index object.</p>"
+        },
+        "BatchReferenceName":{
+          "shape":"BatchReferenceName",
+          "documentation":"<p>The batch reference name. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches\">Batches</a> for more information.</p>"
+        }
+      },
+      "documentation":"<p>Creates an index object inside of a <a>BatchRead</a> operation. For more information, see <a>CreateIndex</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchCreateIndexResponse":{
+      "type":"structure",
+      "members":{
+        "ObjectIdentifier":{
+          "shape":"ObjectIdentifier",
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the index created by this operation.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>CreateIndex</a> response operation.</p>"
     },
     "BatchCreateObject":{
       "type":"structure",
@@ -1700,7 +1834,7 @@
           "documentation":"<p>The batch reference name. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches\">Batches</a> for more information.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a <code>CreateObject</code> operation.</p>"
+      "documentation":"<p>Represents the output of a <a>CreateObject</a> operation.</p>"
     },
     "BatchCreateObjectResponse":{
       "type":"structure",
@@ -1710,7 +1844,7 @@
           "documentation":"<p>The ID that is associated with the object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a <code>CreateObject</code> response operation.</p>"
+      "documentation":"<p>Represents the output of a <a>CreateObject</a> response operation.</p>"
     },
     "BatchDeleteObject":{
       "type":"structure",
@@ -1721,13 +1855,41 @@
           "documentation":"<p>The reference that identifies the object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a <code>DeleteObject</code> operation.</p>"
+      "documentation":"<p>Represents the output of a <a>DeleteObject</a> operation.</p>"
     },
     "BatchDeleteObjectResponse":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Represents the output of a <code>DeleteObject</code> response operation.</p>"
+      "documentation":"<p>Represents the output of a <a>DeleteObject</a> response operation.</p>"
+    },
+    "BatchDetachFromIndex":{
+      "type":"structure",
+      "required":[
+        "IndexReference",
+        "TargetReference"
+      ],
+      "members":{
+        "IndexReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>A reference to the index object.</p>"
+        },
+        "TargetReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>A reference to the object being detached from the index.</p>"
+        }
+      },
+      "documentation":"<p>Detaches the specified object from the specified index inside a <a>BatchRead</a> operation. For more information, see <a>DetachFromIndex</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchDetachFromIndexResponse":{
+      "type":"structure",
+      "members":{
+        "DetachedObjectIdentifier":{
+          "shape":"ObjectIdentifier",
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the object that was detached from the index.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>DetachFromIndex</a> response operation.</p>"
     },
     "BatchDetachObject":{
       "type":"structure",
@@ -1750,7 +1912,7 @@
           "documentation":"<p>The batch reference name. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches\">Batches</a> for more information.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a <code>DetachObject</code> operation.</p>"
+      "documentation":"<p>Represents the output of a <a>DetachObject</a> operation.</p>"
     },
     "BatchDetachObjectResponse":{
       "type":"structure",
@@ -1760,7 +1922,160 @@
           "documentation":"<p>The <code>ObjectIdentifier</code> of the detached object.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a <code>DetachObject</code> response operation.</p>"
+      "documentation":"<p>Represents the output of a <a>DetachObject</a> response operation.</p>"
+    },
+    "BatchDetachTypedLink":{
+      "type":"structure",
+      "required":["TypedLinkSpecifier"],
+      "members":{
+        "TypedLinkSpecifier":{
+          "shape":"TypedLinkSpecifier",
+          "documentation":"<p>Used to accept a typed link specifier as input.</p>"
+        }
+      },
+      "documentation":"<p>Detaches a typed link from a specified source and target object inside a <a>BatchRead</a> operation. For more information, see <a>DetachTypedLink</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchDetachTypedLinkResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Represents the output of a <a>DetachTypedLink</a> response operation.</p>"
+    },
+    "BatchGetObjectInformation":{
+      "type":"structure",
+      "required":["ObjectReference"],
+      "members":{
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>A reference to the object.</p>"
+        }
+      },
+      "documentation":"<p>Retrieves metadata about an object inside a <a>BatchRead</a> operation. For more information, see <a>GetObjectInformation</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchGetObjectInformationResponse":{
+      "type":"structure",
+      "members":{
+        "SchemaFacets":{
+          "shape":"SchemaFacetList",
+          "documentation":"<p>The facets attached to the specified object.</p>"
+        },
+        "ObjectIdentifier":{
+          "shape":"ObjectIdentifier",
+          "documentation":"<p>The <code>ObjectIdentifier</code> of the specified object.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>GetObjectInformation</a> response operation.</p>"
+    },
+    "BatchListAttachedIndices":{
+      "type":"structure",
+      "required":["TargetReference"],
+      "members":{
+        "TargetReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>A reference to the object that has indices attached.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>Lists indices attached to an object inside a <a>BatchRead</a> operation. For more information, see <a>ListAttachedIndices</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchListAttachedIndicesResponse":{
+      "type":"structure",
+      "members":{
+        "IndexAttachments":{
+          "shape":"IndexAttachmentList",
+          "documentation":"<p>The indices attached to the specified object.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>ListAttachedIndices</a> response operation.</p>"
+    },
+    "BatchListIncomingTypedLinks":{
+      "type":"structure",
+      "required":["ObjectReference"],
+      "members":{
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>The reference that identifies the object whose attributes will be listed.</p>"
+        },
+        "FilterAttributeRanges":{
+          "shape":"TypedLinkAttributeRangeList",
+          "documentation":"<p>Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.</p>"
+        },
+        "FilterTypedLink":{
+          "shape":"TypedLinkSchemaAndFacetName",
+          "documentation":"<p>Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object inside a <a>BatchRead</a> operation. For more information, see <a>ListIncomingTypedLinks</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchListIncomingTypedLinksResponse":{
+      "type":"structure",
+      "members":{
+        "LinkSpecifiers":{
+          "shape":"TypedLinkSpecifierList",
+          "documentation":"<p>Returns one or more typed link specifiers as output.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>ListIncomingTypedLinks</a> response operation.</p>"
+    },
+    "BatchListIndex":{
+      "type":"structure",
+      "required":["IndexReference"],
+      "members":{
+        "RangesOnIndexedValues":{
+          "shape":"ObjectAttributeRangeList",
+          "documentation":"<p>Specifies the ranges of indexed values that you want to query.</p>"
+        },
+        "IndexReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>The reference to the index to list.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Lists objects attached to the specified index inside a <a>BatchRead</a> operation. For more information, see <a>ListIndex</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchListIndexResponse":{
+      "type":"structure",
+      "members":{
+        "IndexAttachments":{
+          "shape":"IndexAttachmentList",
+          "documentation":"<p>The objects and indexed values attached to the index.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>ListIndex</a> response operation.</p>"
     },
     "BatchListObjectAttributes":{
       "type":"structure",
@@ -1783,7 +2098,7 @@
           "documentation":"<p>Used to filter the list of object attributes that are associated with a certain facet.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a <code>ListObjectAttributes</code> operation.</p>"
+      "documentation":"<p>Represents the output of a <a>ListObjectAttributes</a> operation.</p>"
     },
     "BatchListObjectAttributesResponse":{
       "type":"structure",
@@ -1797,7 +2112,7 @@
           "documentation":"<p>The pagination token.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a <code>ListObjectAttributes</code> response operation.</p>"
+      "documentation":"<p>Represents the output of a <a>ListObjectAttributes</a> response operation.</p>"
     },
     "BatchListObjectChildren":{
       "type":"structure",
@@ -1816,7 +2131,7 @@
           "documentation":"<p>Maximum number of items to be retrieved in a single call. This is an approximate number.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a <code>ListObjectChildren</code> operation.</p>"
+      "documentation":"<p>Represents the output of a <a>ListObjectChildren</a> operation.</p>"
     },
     "BatchListObjectChildrenResponse":{
       "type":"structure",
@@ -1830,7 +2145,180 @@
           "documentation":"<p>The pagination token.</p>"
         }
       },
-      "documentation":"<p>Represents the output of a <code>ListObjectChildren</code> response operation.</p>"
+      "documentation":"<p>Represents the output of a <a>ListObjectChildren</a> response operation.</p>"
+    },
+    "BatchListObjectParentPaths":{
+      "type":"structure",
+      "required":["ObjectReference"],
+      "members":{
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>The reference that identifies the object whose attributes will be listed.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectParentPaths</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchListObjectParentPathsResponse":{
+      "type":"structure",
+      "members":{
+        "PathToObjectIdentifiersList":{
+          "shape":"PathToObjectIdentifiersList",
+          "documentation":"<p>Returns the path to the <code>ObjectIdentifiers</code> that are associated with the directory.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>ListObjectParentPaths</a> response operation.</p>"
+    },
+    "BatchListObjectPolicies":{
+      "type":"structure",
+      "required":["ObjectReference"],
+      "members":{
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>The reference that identifies the object whose attributes will be listed.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>Returns policies attached to an object in pagination fashion inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectPolicies</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchListObjectPoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "AttachedPolicyIds":{
+          "shape":"ObjectIdentifierList",
+          "documentation":"<p>A list of policy <code>ObjectIdentifiers</code>, that are attached to the object.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>ListObjectPolicies</a> response operation.</p>"
+    },
+    "BatchListOutgoingTypedLinks":{
+      "type":"structure",
+      "required":["ObjectReference"],
+      "members":{
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>The reference that identifies the object whose attributes will be listed.</p>"
+        },
+        "FilterAttributeRanges":{
+          "shape":"TypedLinkAttributeRangeList",
+          "documentation":"<p>Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.</p>"
+        },
+        "FilterTypedLink":{
+          "shape":"TypedLinkSchemaAndFacetName",
+          "documentation":"<p>Filters are interpreted in the order of the attributes defined on the typed link facet, not the order they are supplied to any API calls.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object inside a <a>BatchRead</a> operation. For more information, see <a>ListOutgoingTypedLinks</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchListOutgoingTypedLinksResponse":{
+      "type":"structure",
+      "members":{
+        "TypedLinkSpecifiers":{
+          "shape":"TypedLinkSpecifierList",
+          "documentation":"<p>Returns a typed link specifier as output.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>ListOutgoingTypedLinks</a> response operation.</p>"
+    },
+    "BatchListPolicyAttachments":{
+      "type":"structure",
+      "required":["PolicyReference"],
+      "members":{
+        "PolicyReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>The reference that identifies the policy object.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached inside a <a>BatchRead</a> operation. For more information, see <a>ListPolicyAttachments</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchListPolicyAttachmentsResponse":{
+      "type":"structure",
+      "members":{
+        "ObjectIdentifiers":{
+          "shape":"ObjectIdentifierList",
+          "documentation":"<p>A list of <code>ObjectIdentifiers</code> to which the policy is attached.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>ListPolicyAttachments</a> response operation.</p>"
+    },
+    "BatchLookupPolicy":{
+      "type":"structure",
+      "required":["ObjectReference"],
+      "members":{
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Reference that identifies the object whose policies will be looked up.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        },
+        "MaxResults":{
+          "shape":"NumberResults",
+          "documentation":"<p>The maximum number of results to retrieve.</p>"
+        }
+      },
+      "documentation":"<p>Lists all policies from the root of the Directory to the object specified inside a <a>BatchRead</a> operation. For more information, see <a>LookupPolicy</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchLookupPolicyResponse":{
+      "type":"structure",
+      "members":{
+        "PolicyToPathList":{
+          "shape":"PolicyToPathList",
+          "documentation":"<p>Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies\">Policies</a>.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The pagination token.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>LookupPolicy</a> response operation.</p>"
     },
     "BatchOperationIndex":{"type":"integer"},
     "BatchReadException":{
@@ -1855,7 +2343,14 @@
         "ResourceNotFoundException",
         "InvalidNextTokenException",
         "AccessDeniedException",
-        "NotNodeException"
+        "NotNodeException",
+        "FacetValidationException",
+        "CannotListParentOfRootException",
+        "NotIndexException",
+        "NotPolicyException",
+        "DirectoryNotEnabledException",
+        "LimitExceededException",
+        "InternalServiceException"
       ]
     },
     "BatchReadOperation":{
@@ -1868,6 +2363,42 @@
         "ListObjectChildren":{
           "shape":"BatchListObjectChildren",
           "documentation":"<p>Returns a paginated list of child objects that are associated with a given object.</p>"
+        },
+        "ListAttachedIndices":{
+          "shape":"BatchListAttachedIndices",
+          "documentation":"<p>Lists indices attached to an object.</p>"
+        },
+        "ListObjectParentPaths":{
+          "shape":"BatchListObjectParentPaths",
+          "documentation":"<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure\">Directory Structure</a>.</p>"
+        },
+        "GetObjectInformation":{
+          "shape":"BatchGetObjectInformation",
+          "documentation":"<p>Retrieves metadata about an object.</p>"
+        },
+        "ListObjectPolicies":{
+          "shape":"BatchListObjectPolicies",
+          "documentation":"<p>Returns policies attached to an object in pagination fashion.</p>"
+        },
+        "ListPolicyAttachments":{
+          "shape":"BatchListPolicyAttachments",
+          "documentation":"<p>Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.</p>"
+        },
+        "LookupPolicy":{
+          "shape":"BatchLookupPolicy",
+          "documentation":"<p>Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don't lead to the root from the target object are ignored. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies\">Policies</a>.</p>"
+        },
+        "ListIndex":{
+          "shape":"BatchListIndex",
+          "documentation":"<p>Lists objects attached to the specified index.</p>"
+        },
+        "ListOutgoingTypedLinks":{
+          "shape":"BatchListOutgoingTypedLinks",
+          "documentation":"<p>Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+        },
+        "ListIncomingTypedLinks":{
+          "shape":"BatchListIncomingTypedLinks",
+          "documentation":"<p>Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchRead</code> operation.</p>"
@@ -1938,6 +2469,42 @@
         "ListObjectChildren":{
           "shape":"BatchListObjectChildrenResponse",
           "documentation":"<p>Returns a paginated list of child objects that are associated with a given object.</p>"
+        },
+        "GetObjectInformation":{
+          "shape":"BatchGetObjectInformationResponse",
+          "documentation":"<p>Retrieves metadata about an object.</p>"
+        },
+        "ListAttachedIndices":{
+          "shape":"BatchListAttachedIndicesResponse",
+          "documentation":"<p>Lists indices attached to an object.</p>"
+        },
+        "ListObjectParentPaths":{
+          "shape":"BatchListObjectParentPathsResponse",
+          "documentation":"<p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure\">Directory Structure</a>.</p>"
+        },
+        "ListObjectPolicies":{
+          "shape":"BatchListObjectPoliciesResponse",
+          "documentation":"<p>Returns policies attached to an object in pagination fashion.</p>"
+        },
+        "ListPolicyAttachments":{
+          "shape":"BatchListPolicyAttachmentsResponse",
+          "documentation":"<p>Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.</p>"
+        },
+        "LookupPolicy":{
+          "shape":"BatchLookupPolicyResponse",
+          "documentation":"<p>Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don't lead to the root from the target object are ignored. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies\">Policies</a>.</p>"
+        },
+        "ListIndex":{
+          "shape":"BatchListIndexResponse",
+          "documentation":"<p>Lists objects attached to the specified index.</p>"
+        },
+        "ListOutgoingTypedLinks":{
+          "shape":"BatchListOutgoingTypedLinksResponse",
+          "documentation":"<p>Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+        },
+        "ListIncomingTypedLinks":{
+          "shape":"BatchListIncomingTypedLinksResponse",
+          "documentation":"<p>Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchRead</code> success response operation.</p>"
@@ -2016,7 +2583,15 @@
         "FacetValidationException",
         "ObjectNotDetachedException",
         "ResourceNotFoundException",
-        "AccessDeniedException"
+        "AccessDeniedException",
+        "InvalidAttachmentException",
+        "NotIndexException",
+        "IndexedAttributeMissingException",
+        "ObjectAlreadyDetachedException",
+        "NotPolicyException",
+        "DirectoryNotEnabledException",
+        "LimitExceededException",
+        "UnsupportedIndexTypeException"
       ]
     },
     "BatchWriteOperation":{
@@ -2049,6 +2624,30 @@
         "RemoveFacetFromObject":{
           "shape":"BatchRemoveFacetFromObject",
           "documentation":"<p>A batch operation that removes a facet from an object.</p>"
+        },
+        "AttachPolicy":{
+          "shape":"BatchAttachPolicy",
+          "documentation":"<p>Attaches a policy object to a regular object. An object can have a limited number of attached policies.</p>"
+        },
+        "CreateIndex":{
+          "shape":"BatchCreateIndex",
+          "documentation":"<p>Creates an index object. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html\">Indexing</a> for more information.</p>"
+        },
+        "AttachToIndex":{
+          "shape":"BatchAttachToIndex",
+          "documentation":"<p>Attaches the specified object to the specified index.</p>"
+        },
+        "DetachFromIndex":{
+          "shape":"BatchDetachFromIndex",
+          "documentation":"<p>Detaches the specified object from the specified index.</p>"
+        },
+        "AttachTypedLink":{
+          "shape":"BatchAttachTypedLink",
+          "documentation":"<p>Attaches a typed link to a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+        },
+        "DetachTypedLink":{
+          "shape":"BatchDetachTypedLink",
+          "documentation":"<p>Detaches a typed link from a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchWrite</code> operation. </p>"
@@ -2087,6 +2686,30 @@
         "RemoveFacetFromObject":{
           "shape":"BatchRemoveFacetFromObjectResponse",
           "documentation":"<p>The result of a batch remove facet from object operation.</p>"
+        },
+        "AttachPolicy":{
+          "shape":"BatchAttachPolicyResponse",
+          "documentation":"<p>Attaches a policy object to a regular object. An object can have a limited number of attached policies.</p>"
+        },
+        "CreateIndex":{
+          "shape":"BatchCreateIndexResponse",
+          "documentation":"<p>Creates an index object. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html\">Indexing</a> for more information.</p>"
+        },
+        "AttachToIndex":{
+          "shape":"BatchAttachToIndexResponse",
+          "documentation":"<p>Attaches the specified object to the specified index.</p>"
+        },
+        "DetachFromIndex":{
+          "shape":"BatchDetachFromIndexResponse",
+          "documentation":"<p>Detaches the specified object from the specified index.</p>"
+        },
+        "AttachTypedLink":{
+          "shape":"BatchAttachTypedLinkResponse",
+          "documentation":"<p>Attaches a typed link to a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+        },
+        "DetachTypedLink":{
+          "shape":"BatchDetachTypedLinkResponse",
+          "documentation":"<p>Detaches a typed link from a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchWrite</code> response operation.</p>"
@@ -3169,7 +3792,7 @@
         },
         "TargetReference":{
           "shape":"ObjectReference",
-          "documentation":"<p>A reference to the object to that has indices attached.</p>"
+          "documentation":"<p>A reference to the object that has indices attached.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -4515,7 +5138,7 @@
         },
         "IdentityAttributeOrder":{
           "shape":"AttributeNameList",
-          "documentation":"<p>The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See <a>ListOutgoingTypedLinks</a> and <a>ListIncomingTypeLinks</a> for details.</p>"
+          "documentation":"<p>The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See <a>ListOutgoingTypedLinks</a> and <a>ListIncomingTypedLinks</a> for details.</p>"
         }
       },
       "documentation":"<p>Defines the typed links structure and its attributes. To create a typed link facet, use the <a>CreateTypedLinkFacet</a> API.</p>"

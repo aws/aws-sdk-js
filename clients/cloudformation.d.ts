@@ -44,6 +44,22 @@ declare class CloudFormation extends Service {
    */
   createStack(callback?: (err: AWSError, data: CloudFormation.Types.CreateStackOutput) => void): Request<CloudFormation.Types.CreateStackOutput, AWSError>;
   /**
+   * Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. Accounts and Regions are required parameters—you must specify at least one account and one region. 
+   */
+  createStackInstances(params: CloudFormation.Types.CreateStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.CreateStackInstancesOutput) => void): Request<CloudFormation.Types.CreateStackInstancesOutput, AWSError>;
+  /**
+   * Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. Accounts and Regions are required parameters—you must specify at least one account and one region. 
+   */
+  createStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.CreateStackInstancesOutput) => void): Request<CloudFormation.Types.CreateStackInstancesOutput, AWSError>;
+  /**
+   * Creates a stack set.
+   */
+  createStackSet(params: CloudFormation.Types.CreateStackSetInput, callback?: (err: AWSError, data: CloudFormation.Types.CreateStackSetOutput) => void): Request<CloudFormation.Types.CreateStackSetOutput, AWSError>;
+  /**
+   * Creates a stack set.
+   */
+  createStackSet(callback?: (err: AWSError, data: CloudFormation.Types.CreateStackSetOutput) => void): Request<CloudFormation.Types.CreateStackSetOutput, AWSError>;
+  /**
    * Deletes the specified change set. Deleting change sets ensures that no one executes the wrong change set. If the call successfully completes, AWS CloudFormation successfully deleted the change set.
    */
   deleteChangeSet(params: CloudFormation.Types.DeleteChangeSetInput, callback?: (err: AWSError, data: CloudFormation.Types.DeleteChangeSetOutput) => void): Request<CloudFormation.Types.DeleteChangeSetOutput, AWSError>;
@@ -59,6 +75,22 @@ declare class CloudFormation extends Service {
    * Deletes a specified stack. Once the call completes successfully, stack deletion starts. Deleted stacks do not show up in the DescribeStacks API if the deletion has been completed successfully.
    */
   deleteStack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes stack instances for the specified accounts, in the specified regions. 
+   */
+  deleteStackInstances(params: CloudFormation.Types.DeleteStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackInstancesOutput) => void): Request<CloudFormation.Types.DeleteStackInstancesOutput, AWSError>;
+  /**
+   * Deletes stack instances for the specified accounts, in the specified regions. 
+   */
+  deleteStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackInstancesOutput) => void): Request<CloudFormation.Types.DeleteStackInstancesOutput, AWSError>;
+  /**
+   * Deletes a stack set. Before you can delete a stack set, all of its member stack instances must be deleted. For more information about how to do this, see DeleteStackInstances. 
+   */
+  deleteStackSet(params: CloudFormation.Types.DeleteStackSetInput, callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackSetOutput) => void): Request<CloudFormation.Types.DeleteStackSetOutput, AWSError>;
+  /**
+   * Deletes a stack set. Before you can delete a stack set, all of its member stack instances must be deleted. For more information about how to do this, see DeleteStackInstances. 
+   */
+  deleteStackSet(callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackSetOutput) => void): Request<CloudFormation.Types.DeleteStackSetOutput, AWSError>;
   /**
    * Retrieves your account's AWS CloudFormation limits, such as the maximum number of stacks that you can create in your account.
    */
@@ -84,6 +116,14 @@ declare class CloudFormation extends Service {
    */
   describeStackEvents(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackEventsOutput) => void): Request<CloudFormation.Types.DescribeStackEventsOutput, AWSError>;
   /**
+   * Returns the stack instance that's associated with the specified stack set, AWS account, and region. For a list of stack instances that are associated with a specific stack set, use ListStackInstances.
+   */
+  describeStackInstance(params: CloudFormation.Types.DescribeStackInstanceInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackInstanceOutput) => void): Request<CloudFormation.Types.DescribeStackInstanceOutput, AWSError>;
+  /**
+   * Returns the stack instance that's associated with the specified stack set, AWS account, and region. For a list of stack instances that are associated with a specific stack set, use ListStackInstances.
+   */
+  describeStackInstance(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackInstanceOutput) => void): Request<CloudFormation.Types.DescribeStackInstanceOutput, AWSError>;
+  /**
    * Returns a description of the specified resource in the specified stack. For deleted stacks, DescribeStackResource returns resource information for up to 90 days after the stack has been deleted.
    */
   describeStackResource(params: CloudFormation.Types.DescribeStackResourceInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackResourceOutput) => void): Request<CloudFormation.Types.DescribeStackResourceOutput, AWSError>;
@@ -99,6 +139,22 @@ declare class CloudFormation extends Service {
    * Returns AWS resource descriptions for running and deleted stacks. If StackName is specified, all the associated resources that are part of the stack are returned. If PhysicalResourceId is specified, the associated resources of the stack that the resource belongs to are returned.  Only the first 100 resources will be returned. If your stack has more resources than this, you should use ListStackResources instead.  For deleted stacks, DescribeStackResources returns resource information for up to 90 days after the stack has been deleted. You must specify either StackName or PhysicalResourceId, but not both. In addition, you can specify LogicalResourceId to filter the returned result. For more information about resources, the LogicalResourceId and PhysicalResourceId, go to the AWS CloudFormation User Guide.  A ValidationError is returned if you specify both StackName and PhysicalResourceId in the same request. 
    */
   describeStackResources(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackResourcesOutput) => void): Request<CloudFormation.Types.DescribeStackResourcesOutput, AWSError>;
+  /**
+   * Returns the description of the specified stack set. 
+   */
+  describeStackSet(params: CloudFormation.Types.DescribeStackSetInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackSetOutput) => void): Request<CloudFormation.Types.DescribeStackSetOutput, AWSError>;
+  /**
+   * Returns the description of the specified stack set. 
+   */
+  describeStackSet(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackSetOutput) => void): Request<CloudFormation.Types.DescribeStackSetOutput, AWSError>;
+  /**
+   * Returns the description of the specified stack set operation. 
+   */
+  describeStackSetOperation(params: CloudFormation.Types.DescribeStackSetOperationInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackSetOperationOutput) => void): Request<CloudFormation.Types.DescribeStackSetOperationOutput, AWSError>;
+  /**
+   * Returns the description of the specified stack set operation. 
+   */
+  describeStackSetOperation(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackSetOperationOutput) => void): Request<CloudFormation.Types.DescribeStackSetOperationOutput, AWSError>;
   /**
    * Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.  If the stack does not exist, an AmazonCloudFormationException is returned. 
    */
@@ -172,6 +228,14 @@ declare class CloudFormation extends Service {
    */
   listImports(callback?: (err: AWSError, data: CloudFormation.Types.ListImportsOutput) => void): Request<CloudFormation.Types.ListImportsOutput, AWSError>;
   /**
+   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or region.
+   */
+  listStackInstances(params: CloudFormation.Types.ListStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackInstancesOutput) => void): Request<CloudFormation.Types.ListStackInstancesOutput, AWSError>;
+  /**
+   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or region.
+   */
+  listStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.ListStackInstancesOutput) => void): Request<CloudFormation.Types.ListStackInstancesOutput, AWSError>;
+  /**
    * Returns descriptions of all resources of the specified stack. For deleted stacks, ListStackResources returns resource information for up to 90 days after the stack has been deleted.
    */
   listStackResources(params: CloudFormation.Types.ListStackResourcesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackResourcesOutput) => void): Request<CloudFormation.Types.ListStackResourcesOutput, AWSError>;
@@ -179,6 +243,30 @@ declare class CloudFormation extends Service {
    * Returns descriptions of all resources of the specified stack. For deleted stacks, ListStackResources returns resource information for up to 90 days after the stack has been deleted.
    */
   listStackResources(callback?: (err: AWSError, data: CloudFormation.Types.ListStackResourcesOutput) => void): Request<CloudFormation.Types.ListStackResourcesOutput, AWSError>;
+  /**
+   * Returns summary information about the results of a stack set operation. 
+   */
+  listStackSetOperationResults(params: CloudFormation.Types.ListStackSetOperationResultsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackSetOperationResultsOutput) => void): Request<CloudFormation.Types.ListStackSetOperationResultsOutput, AWSError>;
+  /**
+   * Returns summary information about the results of a stack set operation. 
+   */
+  listStackSetOperationResults(callback?: (err: AWSError, data: CloudFormation.Types.ListStackSetOperationResultsOutput) => void): Request<CloudFormation.Types.ListStackSetOperationResultsOutput, AWSError>;
+  /**
+   * Returns summary information about operations performed on a stack set. 
+   */
+  listStackSetOperations(params: CloudFormation.Types.ListStackSetOperationsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackSetOperationsOutput) => void): Request<CloudFormation.Types.ListStackSetOperationsOutput, AWSError>;
+  /**
+   * Returns summary information about operations performed on a stack set. 
+   */
+  listStackSetOperations(callback?: (err: AWSError, data: CloudFormation.Types.ListStackSetOperationsOutput) => void): Request<CloudFormation.Types.ListStackSetOperationsOutput, AWSError>;
+  /**
+   * Returns summary information about stack sets that are associated with the user.
+   */
+  listStackSets(params: CloudFormation.Types.ListStackSetsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackSetsOutput) => void): Request<CloudFormation.Types.ListStackSetsOutput, AWSError>;
+  /**
+   * Returns summary information about stack sets that are associated with the user.
+   */
+  listStackSets(callback?: (err: AWSError, data: CloudFormation.Types.ListStackSetsOutput) => void): Request<CloudFormation.Types.ListStackSetsOutput, AWSError>;
   /**
    * Returns the summary information for stacks whose status matches the specified StackStatusFilter. Summary information for stacks that have been deleted is kept for 90 days after the stack is deleted. If no StackStatusFilter is specified, summary information for all stacks is returned (including existing stacks and stacks that have been deleted).
    */
@@ -204,6 +292,14 @@ declare class CloudFormation extends Service {
    */
   signalResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Stops an in-progress operation on a stack set and its associated stack instances. 
+   */
+  stopStackSetOperation(params: CloudFormation.Types.StopStackSetOperationInput, callback?: (err: AWSError, data: CloudFormation.Types.StopStackSetOperationOutput) => void): Request<CloudFormation.Types.StopStackSetOperationOutput, AWSError>;
+  /**
+   * Stops an in-progress operation on a stack set and its associated stack instances. 
+   */
+  stopStackSetOperation(callback?: (err: AWSError, data: CloudFormation.Types.StopStackSetOperationOutput) => void): Request<CloudFormation.Types.StopStackSetOperationOutput, AWSError>;
+  /**
    * Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the DescribeStacks action. To get a copy of the template for an existing stack, you can use the GetTemplate action. For more information about creating an update template, updating a stack, and monitoring the progress of the update, see Updating a Stack.
    */
   updateStack(params: CloudFormation.Types.UpdateStackInput, callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackOutput) => void): Request<CloudFormation.Types.UpdateStackOutput, AWSError>;
@@ -211,6 +307,14 @@ declare class CloudFormation extends Service {
    * Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the DescribeStacks action. To get a copy of the template for an existing stack, you can use the GetTemplate action. For more information about creating an update template, updating a stack, and monitoring the progress of the update, see Updating a Stack.
    */
   updateStack(callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackOutput) => void): Request<CloudFormation.Types.UpdateStackOutput, AWSError>;
+  /**
+   * Updates the stack set and all associated stack instances. Even if the stack set operation created by updating the stack set fails (completely or partially, below or above a specified failure tolerance), the stack set is updated with your changes. Subsequent CreateStackInstances calls on the specified stack set use the updated stack set.
+   */
+  updateStackSet(params: CloudFormation.Types.UpdateStackSetInput, callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackSetOutput) => void): Request<CloudFormation.Types.UpdateStackSetOutput, AWSError>;
+  /**
+   * Updates the stack set and all associated stack instances. Even if the stack set operation created by updating the stack set fails (completely or partially, below or above a specified failure tolerance), the stack set is updated with your changes. Subsequent CreateStackInstances calls on the specified stack set use the updated stack set.
+   */
+  updateStackSet(callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackSetOutput) => void): Request<CloudFormation.Types.UpdateStackSetOutput, AWSError>;
   /**
    * Validates a specified template. AWS CloudFormation first checks if the template is valid JSON. If it isn't, AWS CloudFormation checks if the template is valid YAML. If both these checks fail, AWS CloudFormation returns a template validation error.
    */
@@ -261,6 +365,19 @@ declare class CloudFormation extends Service {
   waitFor(state: "changeSetCreateComplete", callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetOutput) => void): Request<CloudFormation.Types.DescribeChangeSetOutput, AWSError>;
 }
 declare namespace CloudFormation {
+  export type Account = string;
+  export interface AccountGateResult {
+    /**
+     * The status of the account gate function.    SUCCEEDED: The account gate function has determined that the account passes any requirements for stack set operations to occur. AWS CloudFormation proceeds with stack operations in the account.     FAILED: The account gate function has determined that the account does not meet the requirements for stack set operations to occur. AWS CloudFormation cancels the stack set operations in that account, and the stack set operation status is set to FAILED.    SKIPPED: An account gate function has not been specified for the account, or the AWSCloudFormationStackSetExecutionRole of the stack set adminstration account lacks permissions to invoke the function. AWS CloudFormation proceeds with stack set operations in the account.   
+     */
+    Status?: AccountGateStatus;
+    /**
+     * The reason for the account gate status assigned to this account.
+     */
+    StatusReason?: AccountGateStatusReason;
+  }
+  export type AccountGateStatus = "SUCCEEDED"|"FAILED"|"SKIPPED"|string;
+  export type AccountGateStatusReason = string;
   export interface AccountLimit {
     /**
      * The name of the account limit. Currently, the only account limit is StackLimit.
@@ -272,6 +389,7 @@ declare namespace CloudFormation {
     Value?: LimitValue;
   }
   export type AccountLimitList = AccountLimit[];
+  export type AccountList = Account[];
   export type AllowedValue = string;
   export type AllowedValues = AllowedValue[];
   export interface CancelUpdateStackInput {
@@ -359,7 +477,7 @@ declare namespace CloudFormation {
      */
     RoleARN?: RoleARN;
     /**
-     * A list of the logical IDs of the resources that AWS CloudFormation skips during the continue update rollback operation. You can specify only resources that are in the UPDATE_FAILED state because a rollback failed. You can't specify resources that are in the UPDATE_FAILED state for other reasons, for example, because an update was canceled. To check why a resource update failed, use the DescribeStackResources action, and view the resource status reason.   Specify this property to skip rolling back resources that AWS CloudFormation can't successfully roll back. We recommend that you  troubleshoot resources before skipping them. AWS CloudFormation sets the status of the specified resources to UPDATE_COMPLETE and continues to roll back the stack. After the rollback is complete, the state of the skipped resources will be inconsistent with the state of the resources in the stack template. Before performing another stack update, you must update the stack or resources to be consistent with each other. If you don't, subsequent stack updates might fail, and the stack will become unrecoverable.   Specify the minimum number of resources required to successfully roll back your stack. For example, a failed resource update might cause dependent resources to fail. In this case, it might not be necessary to skip the dependent resources.  To specify resources in a nested stack, use the following format: NestedStackName.ResourceLogicalID. If the ResourceLogicalID is a stack resource (Type: AWS::CloudFormation::Stack), it must be in one of the following states: DELETE_IN_PROGRESS, DELETE_COMPLETE, or DELETE_FAILED. 
+     * A list of the logical IDs of the resources that AWS CloudFormation skips during the continue update rollback operation. You can specify only resources that are in the UPDATE_FAILED state because a rollback failed. You can't specify resources that are in the UPDATE_FAILED state for other reasons, for example, because an update was cancelled. To check why a resource update failed, use the DescribeStackResources action, and view the resource status reason.   Specify this property to skip rolling back resources that AWS CloudFormation can't successfully roll back. We recommend that you  troubleshoot resources before skipping them. AWS CloudFormation sets the status of the specified resources to UPDATE_COMPLETE and continues to roll back the stack. After the rollback is complete, the state of the skipped resources will be inconsistent with the state of the resources in the stack template. Before performing another stack update, you must update the stack or resources to be consistent with each other. If you don't, subsequent stack updates might fail, and the stack will become unrecoverable.   Specify the minimum number of resources required to successfully roll back your stack. For example, a failed resource update might cause dependent resources to fail. In this case, it might not be necessary to skip the dependent resources.  To skip resources that are part of nested stacks, use the following format: NestedStackName.ResourceLogicalID. If you want to specify the logical ID of a stack resource (Type: AWS::CloudFormation::Stack) in the ResourcesToSkip list, then its corresponding embedded stack must be in one of the following states: DELETE_IN_PROGRESS, DELETE_COMPLETE, or DELETE_FAILED.   Don't confuse a child stack's name with its corresponding logical ID defined in the parent stack. For an example of a continue update rollback operation with nested stacks, see Using ResourcesToSkip to recover a nested stacks hierarchy.  
      */
     ResourcesToSkip?: ResourcesToSkip;
     /**
@@ -407,7 +525,7 @@ declare namespace CloudFormation {
      */
     NotificationARNs?: NotificationARNs;
     /**
-     * Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to resources in the stack. You can specify a maximum of 10 tags.
+     * Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to resources in the stack. You can specify a maximum of 50 tags.
      */
     Tags?: Tags;
     /**
@@ -491,19 +609,87 @@ declare namespace CloudFormation {
      */
     StackPolicyURL?: StackPolicyURL;
     /**
-     * Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to the resources created in the stack. A maximum number of 10 tags can be specified.
+     * Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to the resources created in the stack. A maximum number of 50 tags can be specified.
      */
     Tags?: Tags;
     /**
-     * A unique identifier for this CreateStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to create a stack with the same name. You might retry CreateStack requests to ensure that AWS CloudFormation successfully received them.
+     * A unique identifier for this CreateStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to create a stack with the same name. You might retry CreateStack requests to ensure that AWS CloudFormation successfully received them. All events triggered by a given stack operation are assigned the same client request token, which you can use to track operations. For example, if you execute a CreateStack operation with the token token1, then all the StackEvents generated by that operation will have ClientRequestToken set as token1. In the console, stack operations display the client request token on the Events tab. Stack operations that are initiated from the console use the token format Console-StackOperation-ID, which helps you easily identify the stack operation . For example, if you create a stack using the console, each stack event would be assigned the same token in the following format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002. 
      */
     ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateStackInstancesInput {
+    /**
+     * The name or unique ID of the stack set that you want to create stack instances from.
+     */
+    StackSetName: StackSetName;
+    /**
+     * The names of one or more AWS accounts that you want to create stack instances in the specified region(s) for.
+     */
+    Accounts: AccountList;
+    /**
+     * The names of one or more regions where you want to create stack instances using the specified AWS account(s). 
+     */
+    Regions: RegionList;
+    /**
+     * Preferences for how AWS CloudFormation performs this stack set operation.
+     */
+    OperationPreferences?: StackSetOperationPreferences;
+    /**
+     * The unique identifier for this stack set operation.  The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You might retry stack set operation requests to ensure that AWS CloudFormation successfully received them. If you don't specify an operation ID, the SDK generates one automatically.  Repeating this stack set operation with a new operation ID retries all stack instances whose status is OUTDATED. 
+     */
+    OperationId?: ClientRequestToken;
+  }
+  export interface CreateStackInstancesOutput {
+    /**
+     * The unique identifier for this stack set operation.
+     */
+    OperationId?: ClientRequestToken;
   }
   export interface CreateStackOutput {
     /**
      * Unique identifier of the stack.
      */
     StackId?: StackId;
+  }
+  export interface CreateStackSetInput {
+    /**
+     * The name to associate with the stack set. The name must be unique in the region where you create your stack set.  A stack name can contain only alphanumeric characters (case-sensitive) and hyphens. It must start with an alphabetic character and can't be longer than 128 characters. 
+     */
+    StackSetName: StackSetName;
+    /**
+     * A description of the stack set. You can use the description to identify the stack set's purpose or other important information.
+     */
+    Description?: Description;
+    /**
+     * The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information, see Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.
+     */
+    TemplateBody?: TemplateBody;
+    /**
+     * The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that's located in an Amazon S3 bucket. For more information, see Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.
+     */
+    TemplateURL?: TemplateURL;
+    /**
+     * The input parameters for the stack set template. 
+     */
+    Parameters?: Parameters;
+    /**
+     * A list of values that you must specify before AWS CloudFormation can create certain stack sets. Some stack set templates might include resources that can affect permissions in your AWS account—for example, by creating new AWS Identity and Access Management (IAM) users. For those stack sets, you must explicitly acknowledge their capabilities by specifying this parameter. The only valid values are CAPABILITY_IAM and CAPABILITY_NAMED_IAM. The following resources require you to specify this parameter:    AWS::IAM::AccessKey   AWS::IAM::Group   AWS::IAM::InstanceProfile   AWS::IAM::Policy   AWS::IAM::Role   AWS::IAM::User   AWS::IAM::UserToGroupAddition   If your stack template contains these resources, we recommend that you review all permissions that are associated with them and edit their permissions if necessary. If you have IAM resources, you can specify either capability. If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM. If you don't specify this parameter, this action returns an InsufficientCapabilities error. For more information, see Acknowledging IAM Resources in AWS CloudFormation Templates. 
+     */
+    Capabilities?: Capabilities;
+    /**
+     * The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified. If you specify tags as part of a CreateStackSet action, AWS CloudFormation checks to see if you have the required IAM permission to tag resources. If you don't, the entire CreateStackSet action fails with an access denied error, and the stack set is not created.
+     */
+    Tags?: Tags;
+    /**
+     * A unique identifier for this CreateStackSet request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to create another stack set with the same name. You might retry CreateStackSet requests to ensure that AWS CloudFormation successfully received them. If you don't specify an operation ID, the SDK generates one automatically. 
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateStackSetOutput {
+    /**
+     * The ID of the stack set that you're creating.
+     */
+    StackSetId?: StackSetId;
   }
   export type CreationTime = Date;
   export interface DeleteChangeSetInput {
@@ -532,9 +718,49 @@ declare namespace CloudFormation {
      */
     RoleARN?: RoleARN;
     /**
-     * A unique identifier for this DeleteStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to delete a stack with the same name. You might retry DeleteStack requests to ensure that AWS CloudFormation successfully received them.
+     * A unique identifier for this DeleteStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to delete a stack with the same name. You might retry DeleteStack requests to ensure that AWS CloudFormation successfully received them. All events triggered by a given stack operation are assigned the same client request token, which you can use to track operations. For example, if you execute a CreateStack operation with the token token1, then all the StackEvents generated by that operation will have ClientRequestToken set as token1. In the console, stack operations display the client request token on the Events tab. Stack operations that are initiated from the console use the token format Console-StackOperation-ID, which helps you easily identify the stack operation . For example, if you create a stack using the console, each stack event would be assigned the same token in the following format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002. 
      */
     ClientRequestToken?: ClientRequestToken;
+  }
+  export interface DeleteStackInstancesInput {
+    /**
+     * The name or unique ID of the stack set that you want to delete stack instances for.
+     */
+    StackSetName: StackSetName;
+    /**
+     * The names of the AWS accounts that you want to delete stack instances for.
+     */
+    Accounts: AccountList;
+    /**
+     * The regions where you want to delete stack set instances. 
+     */
+    Regions: RegionList;
+    /**
+     * Preferences for how AWS CloudFormation performs this stack set operation.
+     */
+    OperationPreferences?: StackSetOperationPreferences;
+    /**
+     * Removes the stack instances from the specified stack set, but doesn't delete the stacks. You can't reassociate a retained stack or add an existing, saved stack to a new stack set.
+     */
+    RetainStacks: RetainStacks;
+    /**
+     * The unique identifier for this stack set operation.  If you don't specify an operation ID, the SDK generates one automatically.  The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You can retry stack set operation requests to ensure that AWS CloudFormation successfully received them. Repeating this stack set operation with a new operation ID retries all stack instances whose status is OUTDATED. 
+     */
+    OperationId?: ClientRequestToken;
+  }
+  export interface DeleteStackInstancesOutput {
+    /**
+     * The unique identifier for this stack set operation.
+     */
+    OperationId?: ClientRequestToken;
+  }
+  export interface DeleteStackSetInput {
+    /**
+     * The name or unique ID of the stack set that you're deleting. You can obtain this value by running ListStackSets.
+     */
+    StackSetName: StackSetName;
+  }
+  export interface DeleteStackSetOutput {
   }
   export type DeletionTime = Date;
   export interface DescribeAccountLimitsInput {
@@ -649,6 +875,26 @@ declare namespace CloudFormation {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeStackInstanceInput {
+    /**
+     * The name or the unique stack ID of the stack set that you want to get stack instance information for.
+     */
+    StackSetName: StackSetName;
+    /**
+     * The ID of an AWS account that's associated with this stack instance.
+     */
+    StackInstanceAccount: Account;
+    /**
+     * The name of a region that's associated with this stack instance.
+     */
+    StackInstanceRegion: Region;
+  }
+  export interface DescribeStackInstanceOutput {
+    /**
+     * The stack instance that matches the specified request parameters.
+     */
+    StackInstance?: StackInstance;
+  }
   export interface DescribeStackResourceInput {
     /**
      * The name or the unique stack ID that is associated with the stack, which are not always interchangeable:   Running stacks: You can specify either the stack's name or its unique stack ID.   Deleted stacks: You must specify the unique stack ID.   Default: There is no default value.
@@ -684,6 +930,34 @@ declare namespace CloudFormation {
      * A list of StackResource structures.
      */
     StackResources?: StackResources;
+  }
+  export interface DescribeStackSetInput {
+    /**
+     * The name or unique ID of the stack set whose description you want.
+     */
+    StackSetName: StackSetName;
+  }
+  export interface DescribeStackSetOperationInput {
+    /**
+     * The name or the unique stack ID of the stack set for the stack operation.
+     */
+    StackSetName: StackSetName;
+    /**
+     * The unique ID of the stack set operation. 
+     */
+    OperationId: ClientRequestToken;
+  }
+  export interface DescribeStackSetOperationOutput {
+    /**
+     * The specified stack set operation.
+     */
+    StackSetOperation?: StackSetOperation;
+  }
+  export interface DescribeStackSetOutput {
+    /**
+     * The specified stack set.
+     */
+    StackSet?: StackSet;
   }
   export interface DescribeStacksInput {
     /**
@@ -763,6 +1037,8 @@ declare namespace CloudFormation {
   export type ExportName = string;
   export type ExportValue = string;
   export type Exports = Export[];
+  export type FailureToleranceCount = number;
+  export type FailureTolerancePercentage = number;
   export interface GetStackPolicyInput {
     /**
      * The name or unique stack ID that is associated with the stack whose policy you want to get.
@@ -812,6 +1088,10 @@ declare namespace CloudFormation {
      * The name or the stack ID that is associated with the stack, which are not always interchangeable. For running stacks, you can specify either the stack's name or its unique stack ID. For deleted stack, you must specify the unique stack ID. Conditional: You must specify only one of the following parameters: StackName, TemplateBody, or TemplateURL.
      */
     StackName?: StackNameOrId;
+    /**
+     * The name or unique ID of the stack set from which the stack was created.
+     */
+    StackSetName?: StackSetNameOrId;
   }
   export interface GetTemplateSummaryOutput {
     /**
@@ -907,6 +1187,38 @@ declare namespace CloudFormation {
      */
     NextToken?: NextToken;
   }
+  export interface ListStackInstancesInput {
+    /**
+     * The name or unique ID of the stack set that you want to list stack instances for.
+     */
+    StackSetName: StackSetName;
+    /**
+     * If the previous request didn't return all of the remaining results, the response's NextToken parameter value is set to a token. To retrieve the next set of results, call ListStackInstances again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The name of the AWS account that you want to list stack instances for.
+     */
+    StackInstanceAccount?: Account;
+    /**
+     * The name of the region where you want to list stack instances. 
+     */
+    StackInstanceRegion?: Region;
+  }
+  export interface ListStackInstancesOutput {
+    /**
+     * A list of StackInstanceSummary structures that contain information about the specified stack instances.
+     */
+    Summaries?: StackInstanceSummaries;
+    /**
+     * If the request doesn't return all of the remaining results, NextToken is set to a token. To retrieve the next set of results, call ListStackInstances again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListStackResourcesInput {
     /**
      * The name or the unique stack ID that is associated with the stack, which are not always interchangeable:   Running stacks: You can specify either the stack's name or its unique stack ID.   Deleted stacks: You must specify the unique stack ID.   Default: There is no default value.
@@ -924,6 +1236,82 @@ declare namespace CloudFormation {
     StackResourceSummaries?: StackResourceSummaries;
     /**
      * If the output exceeds 1 MB, a string that identifies the next page of stack resources. If no additional page exists, this value is null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListStackSetOperationResultsInput {
+    /**
+     * The name or unique ID of the stack set that you want to get operation results for.
+     */
+    StackSetName: StackSetName;
+    /**
+     * The ID of the stack set operation.
+     */
+    OperationId: ClientRequestToken;
+    /**
+     * If the previous request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call ListStackSetOperationResults again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListStackSetOperationResultsOutput {
+    /**
+     * A list of StackSetOperationResultSummary structures that contain information about the specified operation results, for accounts and regions that are included in the operation.
+     */
+    Summaries?: StackSetOperationResultSummaries;
+    /**
+     * If the request doesn't return all results, NextToken is set to a token. To retrieve the next set of results, call ListOperationResults again and assign that token to the request object's NextToken parameter. If there are no remaining results, NextToken is set to null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListStackSetOperationsInput {
+    /**
+     * The name or unique ID of the stack set that you want to get operation summaries for.
+     */
+    StackSetName: StackSetName;
+    /**
+     * If the previous paginated request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call ListStackSetOperations again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListStackSetOperationsOutput {
+    /**
+     * A list of StackSetOperationSummary structures that contain summary information about operations for the specified stack set.
+     */
+    Summaries?: StackSetOperationSummaries;
+    /**
+     * If the request doesn't return all results, NextToken is set to a token. To retrieve the next set of results, call ListOperationResults again and assign that token to the request object's NextToken parameter. If there are no remaining results, NextToken is set to null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListStackSetsInput {
+    /**
+     * If the previous paginated request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call ListStackSets again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The status of the stack sets that you want to get summary information about.
+     */
+    Status?: StackSetStatus;
+  }
+  export interface ListStackSetsOutput {
+    /**
+     * A list of StackSetSummary structures that contain information about the user's stack sets.
+     */
+    Summaries?: StackSetSummaries;
+    /**
+     * If the request doesn't return all of the remaining results, NextToken is set to a token. To retrieve the next set of results, call ListStackInstances again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
      */
     NextToken?: NextToken;
   }
@@ -948,6 +1336,9 @@ declare namespace CloudFormation {
     NextToken?: NextToken;
   }
   export type LogicalResourceId = string;
+  export type MaxConcurrentCount = number;
+  export type MaxConcurrentPercentage = number;
+  export type MaxResults = number;
   export type Metadata = string;
   export type NextToken = string;
   export type NoEcho = boolean;
@@ -967,6 +1358,10 @@ declare namespace CloudFormation {
      * User defined description associated with the output.
      */
     Description?: Description;
+    /**
+     * The name of the export associated with the output.
+     */
+    ExportName?: ExportName;
   }
   export type OutputKey = string;
   export type OutputValue = string;
@@ -1024,6 +1419,9 @@ declare namespace CloudFormation {
   export type Parameters = Parameter[];
   export type PhysicalResourceId = string;
   export type PropertyName = string;
+  export type Reason = string;
+  export type Region = string;
+  export type RegionList = Region[];
   export type Replacement = "True"|"False"|"Conditional"|string;
   export type RequiresRecreation = "Never"|"Conditionally"|"Always"|string;
   export type ResourceAttribute = "Properties"|"Metadata"|"CreationPolicy"|"UpdatePolicy"|"DeletionPolicy"|"Tags"|string;
@@ -1100,6 +1498,8 @@ declare namespace CloudFormation {
   export type ResourceTypes = ResourceType[];
   export type ResourcesToSkip = ResourceToSkip[];
   export type RetainResources = LogicalResourceId[];
+  export type RetainStacks = boolean;
+  export type RetainStacksNullable = boolean;
   export type RoleARN = string;
   export type Scope = ResourceAttribute[];
   export interface SetStackPolicyInput {
@@ -1242,12 +1642,66 @@ declare namespace CloudFormation {
      */
     ResourceProperties?: ResourceProperties;
     /**
-     * The token passed to the operation that generated this event. For example, if you execute a CreateStack operation with the token token1, then all the StackEvents generated by that operation will have ClientRequestToken set as token1.
+     * The token passed to the operation that generated this event. All events triggered by a given stack operation are assigned the same client request token, which you can use to track operations. For example, if you execute a CreateStack operation with the token token1, then all the StackEvents generated by that operation will have ClientRequestToken set as token1. In the console, stack operations display the client request token on the Events tab. Stack operations that are initiated from the console use the token format Console-StackOperation-ID, which helps you easily identify the stack operation . For example, if you create a stack using the console, each stack event would be assigned the same token in the following format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002. 
      */
     ClientRequestToken?: ClientRequestToken;
   }
   export type StackEvents = StackEvent[];
   export type StackId = string;
+  export interface StackInstance {
+    /**
+     * The name or unique ID of the stack set that the stack instance is associated with.
+     */
+    StackSetId?: StackSetId;
+    /**
+     * The name of the AWS region that the stack instance is associated with.
+     */
+    Region?: Region;
+    /**
+     * The name of the AWS account that the stack instance is associated with.
+     */
+    Account?: Account;
+    /**
+     * The ID of the stack instance.
+     */
+    StackId?: StackId;
+    /**
+     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet and DeleteStackInstances operations. You might need to clean up the stack manually.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.    The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.       CURRENT: The stack is currently up to date with the stack set.  
+     */
+    Status?: StackInstanceStatus;
+    /**
+     * The explanation for the specific status code that is assigned to this stack instance.
+     */
+    StatusReason?: Reason;
+  }
+  export type StackInstanceStatus = "CURRENT"|"OUTDATED"|"INOPERABLE"|string;
+  export type StackInstanceSummaries = StackInstanceSummary[];
+  export interface StackInstanceSummary {
+    /**
+     * The name or unique ID of the stack set that the stack instance is associated with.
+     */
+    StackSetId?: StackSetId;
+    /**
+     * The name of the AWS region that the stack instance is associated with.
+     */
+    Region?: Region;
+    /**
+     * The name of the AWS account that the stack instance is associated with.
+     */
+    Account?: Account;
+    /**
+     * The ID of the stack instance.
+     */
+    StackId?: StackId;
+    /**
+     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet and DeleteStackInstances operations. You might need to clean up the stack manually.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.    The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.       CURRENT: The stack is currently up to date with the stack set.  
+     */
+    Status?: StackInstanceStatus;
+    /**
+     * The explanation for the specific status code assigned to this stack instance.
+     */
+    StatusReason?: Reason;
+  }
   export type StackName = string;
   export type StackNameOrId = string;
   export type StackPolicyBody = string;
@@ -1362,6 +1816,168 @@ declare namespace CloudFormation {
     ResourceStatusReason?: ResourceStatusReason;
   }
   export type StackResources = StackResource[];
+  export interface StackSet {
+    /**
+     * The name that's associated with the stack set.
+     */
+    StackSetName?: StackSetName;
+    /**
+     * The ID of the stack set.
+     */
+    StackSetId?: StackSetId;
+    /**
+     * A description of the stack set that you specify when the stack set is created or updated.
+     */
+    Description?: Description;
+    /**
+     * The status of the stack set.
+     */
+    Status?: StackSetStatus;
+    /**
+     * The structure that contains the body of the template that was used to create or update the stack set.
+     */
+    TemplateBody?: TemplateBody;
+    /**
+     * A list of input parameters for a stack set.
+     */
+    Parameters?: Parameters;
+    /**
+     * The capabilities that are allowed in the stack set. Some stack set templates might include resources that can affect permissions in your AWS account—for example, by creating new AWS Identity and Access Management (IAM) users. For more information, see Acknowledging IAM Resources in AWS CloudFormation Templates. 
+     */
+    Capabilities?: Capabilities;
+    /**
+     * A list of tags that specify information about the stack set. A maximum number of 50 tags can be specified.
+     */
+    Tags?: Tags;
+  }
+  export type StackSetId = string;
+  export type StackSetName = string;
+  export type StackSetNameOrId = string;
+  export interface StackSetOperation {
+    /**
+     * The unique ID of a stack set operation.
+     */
+    OperationId?: ClientRequestToken;
+    /**
+     * The ID of the stack set.
+     */
+    StackSetId?: StackSetId;
+    /**
+     * The type of stack set operation: CREATE, UPDATE, or DELETE. Create and delete operations affect only the specified stack set instances that are associated with the specified stack set. Update operations affect both the stack set itself, as well as all associated stack set instances.
+     */
+    Action?: StackSetOperationAction;
+    /**
+     * The status of the operation.     FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining regions.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
+     */
+    Status?: StackSetOperationStatus;
+    /**
+     * The preferences for how AWS CloudFormation performs this stack set operation.
+     */
+    OperationPreferences?: StackSetOperationPreferences;
+    /**
+     * For stack set operations of action type DELETE, specifies whether to remove the stack instances from the specified stack set, but doesn't delete the stacks. You can't reassociate a retained stack, or add an existing, saved stack to a new stack set.
+     */
+    RetainStacks?: RetainStacksNullable;
+    /**
+     * The time at which the operation was initiated. Note that the creation times for the stack set operation might differ from the creation time of the individual stacks themselves. This is because AWS CloudFormation needs to perform preparatory work for the operation, such as dispatching the work to the requested regions, before actually creating the first stacks.
+     */
+    CreationTimestamp?: Timestamp;
+    /**
+     * The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or region.
+     */
+    EndTimestamp?: Timestamp;
+  }
+  export type StackSetOperationAction = "CREATE"|"UPDATE"|"DELETE"|string;
+  export interface StackSetOperationPreferences {
+    /**
+     * The order of the regions in where you want to perform the stack operation.
+     */
+    RegionOrder?: RegionList;
+    /**
+     * The number of accounts, per region, for which this operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn't attempt the operation in any subsequent regions. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage (but not both).
+     */
+    FailureToleranceCount?: FailureToleranceCount;
+    /**
+     * The percentage of accounts, per region, for which this stack operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn't attempt the operation in any subsequent regions. When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage, but not both.
+     */
+    FailureTolerancePercentage?: FailureTolerancePercentage;
+    /**
+     * The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of FailureToleranceCount—MaxConcurrentCount is at most one more than the FailureToleranceCount . Conditional: You must specify either MaxConcurrentCount or MaxConcurrentPercentage, but not both.
+     */
+    MaxConcurrentCount?: MaxConcurrentCount;
+    /**
+     * The maximum percentage of accounts in which to perform this operation at one time. When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead. Conditional: You must specify either MaxConcurrentCount or MaxConcurrentPercentage, but not both.
+     */
+    MaxConcurrentPercentage?: MaxConcurrentPercentage;
+  }
+  export type StackSetOperationResultStatus = "PENDING"|"RUNNING"|"SUCCEEDED"|"FAILED"|"CANCELLED"|string;
+  export type StackSetOperationResultSummaries = StackSetOperationResultSummary[];
+  export interface StackSetOperationResultSummary {
+    /**
+     * The name of the AWS account for this operation result.
+     */
+    Account?: Account;
+    /**
+     * The name of the AWS region for this operation result.
+     */
+    Region?: Region;
+    /**
+     * The result status of the stack set operation for the given account in the given region.    CANCELLED: The operation in the specified account and region has been cancelled. This is either because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has been exceeded.    FAILED: The operation in the specified account and region failed.  If the stack set operation fails in enough accounts within a region, the failure tolerance for the stack set operation as a whole might be exceeded.     RUNNING: The operation in the specified account and region is currently in progress.    PENDING: The operation in the specified account and region has yet to start.     SUCCEEDED: The operation in the specified account and region completed successfully.  
+     */
+    Status?: StackSetOperationResultStatus;
+    /**
+     * The reason for the assigned result status.
+     */
+    StatusReason?: Reason;
+    /**
+     * The results of the account gate function AWS CloudFormation invokes, if present, before proceeding with stack set operations in an account
+     */
+    AccountGateResult?: AccountGateResult;
+  }
+  export type StackSetOperationStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"STOPPING"|"STOPPED"|string;
+  export type StackSetOperationSummaries = StackSetOperationSummary[];
+  export interface StackSetOperationSummary {
+    /**
+     * The unique ID of the stack set operation.
+     */
+    OperationId?: ClientRequestToken;
+    /**
+     * The type of operation: CREATE, UPDATE, or DELETE. Create and delete operations affect only the specified stack instances that are associated with the specified stack set. Update operations affect both the stack set itself as well as all associated stack set instances.
+     */
+    Action?: StackSetOperationAction;
+    /**
+     * The overall status of the operation.    FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining regions.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
+     */
+    Status?: StackSetOperationStatus;
+    /**
+     * The time at which the operation was initiated. Note that the creation times for the stack set operation might differ from the creation time of the individual stacks themselves. This is because AWS CloudFormation needs to perform preparatory work for the operation, such as dispatching the work to the requested regions, before actually creating the first stacks.
+     */
+    CreationTimestamp?: Timestamp;
+    /**
+     * The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or region.
+     */
+    EndTimestamp?: Timestamp;
+  }
+  export type StackSetStatus = "ACTIVE"|"DELETED"|string;
+  export type StackSetSummaries = StackSetSummary[];
+  export interface StackSetSummary {
+    /**
+     * The name of the stack set.
+     */
+    StackSetName?: StackSetName;
+    /**
+     * The ID of the stack set.
+     */
+    StackSetId?: StackSetId;
+    /**
+     * A description of the stack set that you specify when the stack set is created or updated.
+     */
+    Description?: Description;
+    /**
+     * The status of the stack set.
+     */
+    Status?: StackSetStatus;
+  }
   export type StackStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"CREATE_COMPLETE"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_FAILED"|"ROLLBACK_COMPLETE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETE_COMPLETE"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_ROLLBACK_IN_PROGRESS"|"UPDATE_ROLLBACK_FAILED"|"UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"|"UPDATE_ROLLBACK_COMPLETE"|"REVIEW_IN_PROGRESS"|string;
   export type StackStatusFilter = StackStatus[];
   export type StackStatusReason = string;
@@ -1402,15 +2018,27 @@ declare namespace CloudFormation {
   }
   export type Stacks = Stack[];
   export type StageList = TemplateStage[];
+  export interface StopStackSetOperationInput {
+    /**
+     * The name or unique ID of the stack set that you want to stop the operation for.
+     */
+    StackSetName: StackSetName;
+    /**
+     * The ID of the stack operation. 
+     */
+    OperationId: ClientRequestToken;
+  }
+  export interface StopStackSetOperationOutput {
+  }
   export interface Tag {
     /**
      *  Required. A string used to identify this tag. You can specify a maximum of 128 characters for a tag key. Tags owned by Amazon Web Services (AWS) have the reserved prefix: aws:.
      */
-    Key?: TagKey;
+    Key: TagKey;
     /**
      *  Required. A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.
      */
-    Value?: TagValue;
+    Value: TagValue;
   }
   export type TagKey = string;
   export type TagValue = string;
@@ -1496,11 +2124,11 @@ declare namespace CloudFormation {
      */
     NotificationARNs?: NotificationARNs;
     /**
-     * Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to supported resources in the stack. You can specify a maximum number of 10 tags. If you don't specify this parameter, AWS CloudFormation doesn't modify the stack's tags. If you specify an empty value, AWS CloudFormation removes all associated tags.
+     * Key-value pairs to associate with this stack. AWS CloudFormation also propagates these tags to supported resources in the stack. You can specify a maximum number of 50 tags. If you don't specify this parameter, AWS CloudFormation doesn't modify the stack's tags. If you specify an empty value, AWS CloudFormation removes all associated tags.
      */
     Tags?: Tags;
     /**
-     * A unique identifier for this UpdateStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to update a stack with the same name. You might retry UpdateStack requests to ensure that AWS CloudFormation successfully received them.
+     * A unique identifier for this UpdateStack request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to update a stack with the same name. You might retry UpdateStack requests to ensure that AWS CloudFormation successfully received them. All events triggered by a given stack operation are assigned the same client request token, which you can use to track operations. For example, if you execute a CreateStack operation with the token token1, then all the StackEvents generated by that operation will have ClientRequestToken set as token1. In the console, stack operations display the client request token on the Events tab. Stack operations that are initiated from the console use the token format Console-StackOperation-ID, which helps you easily identify the stack operation . For example, if you create a stack using the console, each stack event would be assigned the same token in the following format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002. 
      */
     ClientRequestToken?: ClientRequestToken;
   }
@@ -1509,6 +2137,54 @@ declare namespace CloudFormation {
      * Unique identifier of the stack.
      */
     StackId?: StackId;
+  }
+  export interface UpdateStackSetInput {
+    /**
+     * The name or unique ID of the stack set that you want to update.
+     */
+    StackSetName: StackSetName;
+    /**
+     * A brief description of updates that you are making.
+     */
+    Description?: Description;
+    /**
+     * The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information, see Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify only one of the following parameters: TemplateBody or TemplateURL—or set UsePreviousTemplate to true.
+     */
+    TemplateBody?: TemplateBody;
+    /**
+     * The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, see Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify only one of the following parameters: TemplateBody or TemplateURL—or set UsePreviousTemplate to true. 
+     */
+    TemplateURL?: TemplateURL;
+    /**
+     * Use the existing template that's associated with the stack set that you're updating. Conditional: You must specify only one of the following parameters: TemplateBody or TemplateURL—or set UsePreviousTemplate to true. 
+     */
+    UsePreviousTemplate?: UsePreviousTemplate;
+    /**
+     * A list of input parameters for the stack set template. 
+     */
+    Parameters?: Parameters;
+    /**
+     * A list of values that you must specify before AWS CloudFormation can create certain stack sets. Some stack set templates might include resources that can affect permissions in your AWS account—for example, by creating new AWS Identity and Access Management (IAM) users. For those stack sets, you must explicitly acknowledge their capabilities by specifying this parameter. The only valid values are CAPABILITY_IAM and CAPABILITY_NAMED_IAM. The following resources require you to specify this parameter:    AWS::IAM::AccessKey   AWS::IAM::Group   AWS::IAM::InstanceProfile   AWS::IAM::Policy   AWS::IAM::Role   AWS::IAM::User   AWS::IAM::UserToGroupAddition   If your stack template contains these resources, we recommend that you review all permissions that are associated with them and edit their permissions if necessary. If you have IAM resources, you can specify either capability. If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM. If you don't specify this parameter, this action returns an InsufficientCapabilities error. For more information, see Acknowledging IAM Resources in AWS CloudFormation Templates. 
+     */
+    Capabilities?: Capabilities;
+    /**
+     * The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. You can specify a maximum number of 50 tags. If you specify tags for this parameter, those tags replace any list of tags that are currently associated with this stack set. This means:   If you don't specify this parameter, AWS CloudFormation doesn't modify the stack's tags.    If you specify any tags using this parameter, you must specify all the tags that you want associated with this stack set, even tags you've specifed before (for example, when creating the stack set or during a previous update of the stack set.). Any tags that you don't include in the updated list of tags are removed from the stack set, and therefore from the stacks and resources as well.    If you specify an empty value, AWS CloudFormation removes all currently associated tags.   If you specify new tags as part of an UpdateStackSet action, AWS CloudFormation checks to see if you have the required IAM permission to tag resources. If you omit tags that are currently associated with the stack set from the list of tags you specify, AWS CloudFormation assumes that you want to remove those tags from the stack set, and checks to see if you have permission to untag resources. If you don't have the necessary permission(s), the entire UpdateStackSet action fails with an access denied error, and the stack set is not updated.
+     */
+    Tags?: Tags;
+    /**
+     * Preferences for how AWS CloudFormation performs this stack set operation.
+     */
+    OperationPreferences?: StackSetOperationPreferences;
+    /**
+     * The unique ID for this stack set operation.  The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You might retry stack set operation requests to ensure that AWS CloudFormation successfully received them. If you don't specify an operation ID, AWS CloudFormation generates one automatically. Repeating this stack set operation with a new operation ID retries all stack instances whose status is OUTDATED. 
+     */
+    OperationId?: ClientRequestToken;
+  }
+  export interface UpdateStackSetOutput {
+    /**
+     * The unique ID for this stack set operation.
+     */
+    OperationId?: ClientRequestToken;
   }
   export type Url = string;
   export type UsePreviousTemplate = boolean;
