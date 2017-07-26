@@ -163,7 +163,7 @@ export namespace DocumentClient {
   export type BatchGetResponseMap = {[key: string]: ItemList};
   export interface BatchWriteItemInput {
     /**
-     * A map of one or more table names and, for each table, a list of operations to be performed (DeleteRequest or PutRequest). Each element in the map consists of the following:    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the ! item. Each entry in this map consists of an attribute name and an attribute value. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values will be rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.    
+     * A map of one or more table names and, for each table, a list of operations to be performed (DeleteRequest or PutRequest). Each element in the map consists of the following:    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values will be rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.    
      */
     RequestItems: BatchWriteItemRequestMap;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -306,7 +306,7 @@ export namespace DocumentClient {
      */
     Key: Key;
     /**
-     * This is a legacy parameter. Use ConditionExpresssion instead. For more information, see Expected in the Amazon DynamoDB Developer Guide.
+     * This is a legacy parameter. Use ConditionExpression instead. For more information, see Expected in the Amazon DynamoDB Developer Guide.
      */
     Expected?: ExpectedAttributeMap;
     /**
@@ -752,7 +752,7 @@ export namespace DocumentClient {
      */
     Item: PutItemInputAttributeMap;
     /**
-     * This is a legacy parameter. Use ConditionExpresssion instead. For more information, see Expected in the Amazon DynamoDB Developer Guide.
+     * This is a legacy parameter. Use ConditionExpression instead. For more information, see Expected in the Amazon DynamoDB Developer Guide.
      */
     Expected?: ExpectedAttributeMap;
     /**
@@ -1144,7 +1144,7 @@ export namespace DocumentClient {
      */
     AttributeUpdates?: AttributeUpdates;
     /**
-     * This is a legacy parameter. Use ConditionExpresssion instead. For more information, see Expected in the Amazon DynamoDB Developer Guide.
+     * This is a legacy parameter. Use ConditionExpression instead. For more information, see Expected in the Amazon DynamoDB Developer Guide.
      */
     Expected?: ExpectedAttributeMap;
     /**
@@ -1152,7 +1152,7 @@ export namespace DocumentClient {
      */
     ConditionalOperator?: ConditionalOperator;
     /**
-     * Use ReturnValues if you want to get the item attributes as they appeared either before or after they were updated. For UpdateItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - Returns all of the attributes of the item, as they appeared before the UpdateItem operation.    UPDATED_OLD - Returns only the updated attributes, as they appeared before the UpdateItem operation.    ALL_NEW - Returns all of the attributes of the item, as they appear after the UpdateItem operation.    UPDATED_NEW - Returns only the updated attributes, as they appear after the UpdateItem operation.   There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No Read Capacity Units are consumed. Values returned are strongly consistent
+     * Use ReturnValues if you want to get the item attributes as they appear before or after they are updated. For UpdateItem, the valid values are:    NONE - If ReturnValues is not specified, or if its value is NONE, then nothing is returned. (This setting is the default for ReturnValues.)    ALL_OLD - Returns all of the attributes of the item, as they appeared before the UpdateItem operation.    UPDATED_OLD - Returns only the updated attributes, as they appeared before the UpdateItem operation.    ALL_NEW - Returns all of the attributes of the item, as they appear after the UpdateItem operation.    UPDATED_NEW - Returns only the updated attributes, as they appear after the UpdateItem operation.   There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed. The values returned are strongly consistent.
      */
     ReturnValues?: ReturnValue;
     ReturnConsumedCapacity?: ReturnConsumedCapacity;
@@ -1179,7 +1179,7 @@ export namespace DocumentClient {
   }
   export interface UpdateItemOutput {
     /**
-     * A map of attribute values as they appeared before the UpdateItem operation. This map only appears if ReturnValues was specified as something other than NONE in the request. Each element represents one attribute.
+     * A map of attribute values as they appear before or after the UpdateItem operation, as determined by the ReturnValues parameter. The Attributes map is only present if ReturnValues was specified as something other than NONE in the request. Each element represents one attribute.
      */
     Attributes?: AttributeMap;
     /**

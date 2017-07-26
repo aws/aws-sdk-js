@@ -780,6 +780,14 @@ declare class EC2 extends Service {
    */
   describeEgressOnlyInternetGateways(callback?: (err: AWSError, data: EC2.Types.DescribeEgressOnlyInternetGatewaysResult) => void): Request<EC2.Types.DescribeEgressOnlyInternetGatewaysResult, AWSError>;
   /**
+   * Describes the Elastic GPUs associated with your instances. For more information about Elastic GPUs, see Amazon EC2 Elastic GPUs.
+   */
+  describeElasticGpus(params: EC2.Types.DescribeElasticGpusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeElasticGpusResult) => void): Request<EC2.Types.DescribeElasticGpusResult, AWSError>;
+  /**
+   * Describes the Elastic GPUs associated with your instances. For more information about Elastic GPUs, see Amazon EC2 Elastic GPUs.
+   */
+  describeElasticGpus(callback?: (err: AWSError, data: EC2.Types.DescribeElasticGpusResult) => void): Request<EC2.Types.DescribeElasticGpusResult, AWSError>;
+  /**
    * Describes one or more of your export tasks.
    */
   describeExportTasks(params: EC2.Types.DescribeExportTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
@@ -4455,6 +4463,42 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeElasticGpusRequest {
+    /**
+     * One or more Elastic GPU IDs.
+     */
+    ElasticGpuIds?: ElasticGpuIdSet;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters.    availability-zone - The Availability Zone in which the Elastic GPU resides.    elastic-gpu-health - The status of the Elastic GPU (OK | IMPAIRED).    elastic-gpu-state - The state of the Elastic GPU (ATTACHED).    elastic-gpu-type - The type of Elastic GPU; for example, eg1.medium.    instance-id - The ID of the instance to which the Elastic GPU is associated.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeElasticGpusResult {
+    /**
+     * Information about the Elastic GPUs.
+     */
+    ElasticGpuSet?: ElasticGpuSet;
+    /**
+     * The total number of items to return. If the total number of items available is more than the value specified in max-items then a Next-Token will be provided in the output that you can use to resume pagination.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeExportTasksRequest {
     /**
      * One or more export task IDs.
@@ -6437,6 +6481,68 @@ declare namespace EC2 {
   export type EgressOnlyInternetGatewayId = string;
   export type EgressOnlyInternetGatewayIdList = EgressOnlyInternetGatewayId[];
   export type EgressOnlyInternetGatewayList = EgressOnlyInternetGateway[];
+  export interface ElasticGpuAssociation {
+    /**
+     * The ID of the Elastic GPU.
+     */
+    ElasticGpuId?: String;
+    /**
+     * The ID of the association.
+     */
+    ElasticGpuAssociationId?: String;
+    /**
+     * The state of the association between the instance and the Elastic GPU.
+     */
+    ElasticGpuAssociationState?: String;
+    /**
+     * The time the Elastic GPU was associated with the instance.
+     */
+    ElasticGpuAssociationTime?: String;
+  }
+  export type ElasticGpuAssociationList = ElasticGpuAssociation[];
+  export interface ElasticGpuHealth {
+    /**
+     * The health status.
+     */
+    Status?: ElasticGpuStatus;
+  }
+  export type ElasticGpuIdSet = String[];
+  export type ElasticGpuSet = ElasticGpus[];
+  export interface ElasticGpuSpecification {
+    /**
+     * The type of Elastic GPU.
+     */
+    Type: String;
+  }
+  export type ElasticGpuSpecifications = ElasticGpuSpecification[];
+  export type ElasticGpuState = "ATTACHED"|string;
+  export type ElasticGpuStatus = "OK"|"IMPAIRED"|string;
+  export interface ElasticGpus {
+    /**
+     * The ID of the Elastic GPU.
+     */
+    ElasticGpuId?: String;
+    /**
+     * The Availability Zone in the which the Elastic GPU resides.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The type of Elastic GPU.
+     */
+    ElasticGpuType?: String;
+    /**
+     * The status of the Elastic GPU.
+     */
+    ElasticGpuHealth?: ElasticGpuHealth;
+    /**
+     * The state of the Elastic GPU.
+     */
+    ElasticGpuState?: ElasticGpuState;
+    /**
+     * The ID of the instance to which the Elastic GPU is attached.
+     */
+    InstanceId?: String;
+  }
   export interface EnableVgwRoutePropagationRequest {
     /**
      * The ID of the virtual private gateway.
@@ -7762,6 +7868,10 @@ declare namespace EC2 {
      * Indicates whether this is a Spot instance or a Scheduled Instance.
      */
     InstanceLifecycle?: InstanceLifecycleType;
+    /**
+     * The Elastic GPU associated with the instance.
+     */
+    ElasticGpuAssociations?: ElasticGpuAssociationList;
     /**
      * [EC2-VPC] One or more network interfaces for the instance.
      */
@@ -10743,6 +10853,10 @@ declare namespace EC2 {
      * [EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet. Only one private IP address can be designated as primary. You can't specify this option if you've specified the option to designate a private IP address as the primary IP address in a network interface specification. You cannot specify this option if you're launching more than one instance in the request.
      */
     PrivateIpAddress?: String;
+    /**
+     * An Elastic GPU to associate with the instance.
+     */
+    ElasticGpuSpecification?: ElasticGpuSpecifications;
     /**
      * The tags to apply to the resources during launch. You can tag instances and volumes. The specified tags are applied to all instances or volumes that are created during launch.
      */

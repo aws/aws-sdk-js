@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.90.0-->
+<!--LATEST=2.91.0-->
 <!--ENTRYINSERT-->
+
+## 2.91.0
+* feature: CloudWatch: This release adds high resolution features to CloudWatch, with support for Custom Metrics down to 1 second and Alarms down to 10 seconds.
+* feature: EC2: Amazon EC2 Elastic GPUs allow you to easily attach low-cost graphics acceleration to current generation EC2 instances. With Amazon EC2 Elastic GPUs, you can configure the right amount of graphics acceleration to your particular workload without being constrained by fixed hardware configurations and limited GPU selection.
 
 ## 2.90.0
 * feature: CloudDirectory: Cloud Directory adds support for additional batch operations.
