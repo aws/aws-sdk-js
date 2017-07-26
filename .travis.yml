@@ -9,16 +9,22 @@ node_js:
   - "6"
   - "7"
   - "8"
-
-before_install:
-  - "if [[ `node -v` == v0.8.* ]]; then npm install -g npm || exit 0; fi"
-
-script:
-  - npm run lint
-  - npm run coverage
-  - npm run buildertest
-  - npm run browsertest
-  - npm run react-native-test
-  - node ./node_modules/.bin/codecov
+env:
+  - TEST_SCRIPT=coverage
 
 sudo: false
+
+matrix:
+  include:
+  - node_js: "node"
+    env: TEST_SCRIPT=lint
+  - node_js: "node"
+    env: TEST_SCRIPT=buildertest
+  - node_js: "node"
+    env: TEST_SCRIPT=browsertest
+  - node_js: "node"
+    env: TEST_SCRIPT=react-native-test
+
+script:
+  - npm run $TEST_SCRIPT
+  - "if [[ $TEST_SCRIPT == 'coverage' ]]; then node ./node_modules/.bin/codecov || exit 0; fi"
