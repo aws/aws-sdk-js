@@ -12,11 +12,11 @@ declare class KinesisAnalytics extends Service {
   constructor(options?: KinesisAnalytics.Types.ClientConfiguration)
   config: Config & KinesisAnalytics.Types.ClientConfiguration;
   /**
-   * Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Monitoring Configuration Errors.
+   * Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Working with Amazon CloudWatch Logs.
    */
   addApplicationCloudWatchLoggingOption(params: KinesisAnalytics.Types.AddApplicationCloudWatchLoggingOptionRequest, callback?: (err: AWSError, data: KinesisAnalytics.Types.AddApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalytics.Types.AddApplicationCloudWatchLoggingOptionResponse, AWSError>;
   /**
-   * Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Monitoring Configuration Errors.
+   * Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Working with Amazon CloudWatch Logs.
    */
   addApplicationCloudWatchLoggingOption(callback?: (err: AWSError, data: KinesisAnalytics.Types.AddApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalytics.Types.AddApplicationCloudWatchLoggingOptionResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class KinesisAnalytics extends Service {
    */
   deleteApplication(callback?: (err: AWSError, data: KinesisAnalytics.Types.DeleteApplicationResponse) => void): Request<KinesisAnalytics.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Monitoring Configuration Errors.
+   * Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Working with Amazon CloudWatch Logs.
    */
   deleteApplicationCloudWatchLoggingOption(params: KinesisAnalytics.Types.DeleteApplicationCloudWatchLoggingOptionRequest, callback?: (err: AWSError, data: KinesisAnalytics.Types.DeleteApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalytics.Types.DeleteApplicationCloudWatchLoggingOptionResponse, AWSError>;
   /**
-   * Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Monitoring Configuration Errors.
+   * Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Working with Amazon CloudWatch Logs.
    */
   deleteApplicationCloudWatchLoggingOption(callback?: (err: AWSError, data: KinesisAnalytics.Types.DeleteApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalytics.Types.DeleteApplicationCloudWatchLoggingOptionResponse, AWSError>;
   /**
@@ -135,15 +135,15 @@ declare class KinesisAnalytics extends Service {
 declare namespace KinesisAnalytics {
   export interface AddApplicationCloudWatchLoggingOptionRequest {
     /**
-     * The Amazon Kinesis Analytics application name.
+     * The Kinesis Analytics application name.
      */
     ApplicationName: ApplicationName;
     /**
-     * The version ID of the Amazon Kinesis Analytics application.
+     * The version ID of the Kinesis Analytics application.
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
-     * Provide the CloudWatch log stream ARN and the IAM role ARN. Note: To write application messages to CloudWatch, the IAM role used must have the PutLogEvents policy action enabled. 
+     * Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role ARN. Note: To write application messages to CloudWatch, the IAM role that is used must have the PutLogEvents policy action enabled.
      */
     CloudWatchLoggingOption: CloudWatchLoggingOption;
   }
@@ -237,7 +237,7 @@ declare namespace KinesisAnalytics {
      */
     ReferenceDataSourceDescriptions?: ReferenceDataSourceDescriptions;
     /**
-     * Describes the CloudWatch log streams configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Monitoring Configuration Errors. 
+     * Describes the CloudWatch log streams that are configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Working with Amazon CloudWatch Logs. 
      */
     CloudWatchLoggingOptionDescriptions?: CloudWatchLoggingOptionDescriptions;
     /**
@@ -307,7 +307,7 @@ declare namespace KinesisAnalytics {
      */
     LogStreamARN: LogStreamARN;
     /**
-     * IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role used must have the PutLogEvents policy action enabled.
+     * IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role that is used must have the PutLogEvents policy action enabled.
      */
     RoleARN: RoleARN;
   }
@@ -360,7 +360,7 @@ declare namespace KinesisAnalytics {
      */
     Outputs?: Outputs;
     /**
-     * Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see Monitoring Configuration Errors.
+     * Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see Working with Amazon CloudWatch Logs.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
     /**
@@ -376,11 +376,11 @@ declare namespace KinesisAnalytics {
   }
   export interface DeleteApplicationCloudWatchLoggingOptionRequest {
     /**
-     * The Amazon Kinesis Analytics application name.
+     * The Kinesis Analytics application name.
      */
     ApplicationName: ApplicationName;
     /**
-     * The version ID of the Amazon Kinesis Analytics application.
+     * The version ID of the Kinesis Analytics application.
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
@@ -492,11 +492,11 @@ declare namespace KinesisAnalytics {
      */
     NamePrefix: InAppStreamName;
     /**
-     * If the streaming source is an Amazon Kinesis stream, identifies the stream's Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.
+     * If the streaming source is an Amazon Kinesis stream, identifies the stream's Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf. Note: Either KinesisStreamsInput or KinesisFirehoseInput is required.
      */
     KinesisStreamsInput?: KinesisStreamsInput;
     /**
-     * If the streaming source is an Amazon Kinesis Firehose delivery stream, identifies the Firehose delivery stream's ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.
+     * If the streaming source is an Amazon Kinesis Firehose delivery stream, identifies the Firehose delivery stream's ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf. Note: Either KinesisStreamsInput or KinesisFirehoseInput is required.
      */
     KinesisFirehoseInput?: KinesisFirehoseInput;
     /**
@@ -615,7 +615,7 @@ declare namespace KinesisAnalytics {
   export type Inputs = Input[];
   export interface JSONMappingParameters {
     /**
-     * Path to the top-level parent that contains the records. For example, consider the following JSON record: In the RecordRowPath, "$" refers to the root and path "$.vehicle.Model" refers to the specific "Model" key in the JSON.
+     * Path to the top-level parent that contains the records.
      */
     RecordRowPath: RecordRowPath;
   }

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.91.0-->
+<!--LATEST=2.92.0-->
 <!--ENTRYINSERT-->
+
+## 2.92.0
+* feature: EC2: The CreateDefaultVPC API enables you to create a new default VPC . You no longer need to contact AWS support, if your default VPC has been deleted.
+* feature: KinesisAnalytics: Added additional exception types and clarified documentation.
 
 ## 2.91.0
 * feature: CloudWatch: This release adds high resolution features to CloudWatch, with support for Custom Metrics down to 1 second and Alarms down to 10 seconds.

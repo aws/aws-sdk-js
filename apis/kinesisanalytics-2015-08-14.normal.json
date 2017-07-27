@@ -27,7 +27,7 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html\">Monitoring Configuration Errors</a>.</p>"
+      "documentation":"<p>Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
     },
     "AddApplicationInput":{
       "name":"AddApplicationInput",
@@ -41,7 +41,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidArgumentException"},
-        {"shape":"ConcurrentModificationException"}
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"CodeValidationException"}
       ],
       "documentation":"<p> Adds a streaming source to your Amazon Kinesis application. For conceptual information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p> <p>You can add a streaming source either when you create an application or you can use this operation to add a streaming source after you create an application. For more information, see <a>CreateApplication</a>.</p> <p>Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationInput</code> action.</p>"
     },
@@ -122,7 +123,7 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html\">Monitoring Configuration Errors</a>.</p>"
+      "documentation":"<p>Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
     },
     "DeleteApplicationOutput":{
       "name":"DeleteApplicationOutput",
@@ -180,7 +181,8 @@
       "errors":[
         {"shape":"InvalidArgumentException"},
         {"shape":"UnableToDetectSchemaException"},
-        {"shape":"ResourceProvisionedThroughputExceededException"}
+        {"shape":"ResourceProvisionedThroughputExceededException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Infers a schema by evaluating sample records on the specified streaming source (Amazon Kinesis stream or Amazon Kinesis Firehose delivery stream). In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.</p> <p> You can use the inferred schema when configuring a streaming source for your application. For conceptual information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. Note that when you create an application using the Amazon Kinesis Analytics console, the console uses this operation to infer a schema and show it in the console user interface. </p> <p> This operation requires permissions to perform the <code>kinesisanalytics:DiscoverInputSchema</code> action. </p>"
     },
@@ -253,15 +255,15 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p>The Amazon Kinesis Analytics application name.</p>"
+          "documentation":"<p>The Kinesis Analytics application name.</p>"
         },
         "CurrentApplicationVersionId":{
           "shape":"ApplicationVersionId",
-          "documentation":"<p>The version ID of the Amazon Kinesis Analytics application.</p>"
+          "documentation":"<p>The version ID of the Kinesis Analytics application.</p>"
         },
         "CloudWatchLoggingOption":{
           "shape":"CloudWatchLoggingOption",
-          "documentation":"<p>Provide the CloudWatch log stream ARN and the IAM role ARN. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled. </p>"
+          "documentation":"<p>Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role ARN. Note: To write application messages to CloudWatch, the IAM role that is used must have the <code>PutLogEvents</code> policy action enabled.</p>"
         }
       }
     },
@@ -414,7 +416,7 @@
         },
         "CloudWatchLoggingOptionDescriptions":{
           "shape":"CloudWatchLoggingOptionDescriptions",
-          "documentation":"<p>Describes the CloudWatch log streams configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html\">Monitoring Configuration Errors</a>. </p>"
+          "documentation":"<p>Describes the CloudWatch log streams that are configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>. </p>"
         },
         "ApplicationCode":{
           "shape":"ApplicationCode",
@@ -540,10 +542,10 @@
         },
         "RoleARN":{
           "shape":"RoleARN",
-          "documentation":"<p>IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled.</p>"
+          "documentation":"<p>IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role that is used must have the <code>PutLogEvents</code> policy action enabled.</p>"
         }
       },
-      "documentation":"<p>Provides a description of CloudWatch logging options, including the log stream ARN and the role ARN.</p>"
+      "documentation":"<p>Provides a description of CloudWatch logging options, including the log stream Amazon Resource Name (ARN) and the role ARN.</p>"
     },
     "CloudWatchLoggingOptionDescription":{
       "type":"structure",
@@ -642,7 +644,7 @@
         },
         "CloudWatchLoggingOptions":{
           "shape":"CloudWatchLoggingOptions",
-          "documentation":"<p>Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html\">Monitoring Configuration Errors</a>.</p>"
+          "documentation":"<p>Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
         },
         "ApplicationCode":{
           "shape":"ApplicationCode",
@@ -672,11 +674,11 @@
       "members":{
         "ApplicationName":{
           "shape":"ApplicationName",
-          "documentation":"<p>The Amazon Kinesis Analytics application name.</p>"
+          "documentation":"<p>The Kinesis Analytics application name.</p>"
         },
         "CurrentApplicationVersionId":{
           "shape":"ApplicationVersionId",
-          "documentation":"<p>The version ID of the Amazon Kinesis Analytics application.</p>"
+          "documentation":"<p>The version ID of the Kinesis Analytics application.</p>"
         },
         "CloudWatchLoggingOptionId":{
           "shape":"Id",
@@ -879,11 +881,11 @@
         },
         "KinesisStreamsInput":{
           "shape":"KinesisStreamsInput",
-          "documentation":"<p>If the streaming source is an Amazon Kinesis stream, identifies the stream's Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p>"
+          "documentation":"<p>If the streaming source is an Amazon Kinesis stream, identifies the stream's Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p> <p>Note: Either <code>KinesisStreamsInput</code> or <code>KinesisFirehoseInput</code> is required.</p>"
         },
         "KinesisFirehoseInput":{
           "shape":"KinesisFirehoseInput",
-          "documentation":"<p>If the streaming source is an Amazon Kinesis Firehose delivery stream, identifies the Firehose delivery stream's ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p>"
+          "documentation":"<p>If the streaming source is an Amazon Kinesis Firehose delivery stream, identifies the Firehose delivery stream's ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p> <p>Note: Either <code>KinesisStreamsInput</code> or <code>KinesisFirehoseInput</code> is required.</p>"
         },
         "InputParallelism":{
           "shape":"InputParallelism",
@@ -969,7 +971,7 @@
     },
     "InputParallelismCount":{
       "type":"integer",
-      "max":10,
+      "max":64,
       "min":1
     },
     "InputParallelismUpdate":{
@@ -1085,7 +1087,7 @@
       "members":{
         "RecordRowPath":{
           "shape":"RecordRowPath",
-          "documentation":"<p>Path to the top-level parent that contains the records.</p> <p>For example, consider the following JSON record:</p> <p>In the <code>RecordRowPath</code>, <code>\"$\"</code> refers to the root and path <code>\"$.vehicle.Model\"</code> refers to the specific <code>\"Model\"</code> key in the JSON.</p>"
+          "documentation":"<p>Path to the top-level parent that contains the records.</p>"
         }
       },
       "documentation":"<p>Provides additional mapping information when JSON is the record format on the streaming source.</p>"
@@ -1470,7 +1472,7 @@
     "RecordColumnMapping":{"type":"string"},
     "RecordColumnName":{
       "type":"string",
-      "pattern":"[a-zA-Z][a-zA-Z0-9_]+"
+      "pattern":"[a-zA-Z_][a-zA-Z0-9_]*"
     },
     "RecordColumnSqlType":{"type":"string"},
     "RecordColumns":{
@@ -1680,6 +1682,14 @@
         }
       },
       "documentation":"<p>Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.</p>"
+    },
+    "ServiceUnavailableException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>The service is unavailable, back off and retry the operation. </p>",
+      "exception":true
     },
     "SourceSchema":{
       "type":"structure",

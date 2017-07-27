@@ -260,6 +260,14 @@ declare class EC2 extends Service {
    */
   createCustomerGateway(callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
+   * Creates a default VPC with a size /16 IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see Default VPC and Default Subnets in the Amazon Virtual Private Cloud User Guide. You cannot specify the components of the default VPC yourself. You can create a default VPC if you deleted your previous default VPC. You cannot have more than one default VPC per region.  If your account supports EC2-Classic, you cannot use this action to create a default VPC in a region that supports EC2-Classic. If you want a default VPC in a region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the Default VPCs FAQ.
+   */
+  createDefaultVpc(params: EC2.Types.CreateDefaultVpcRequest, callback?: (err: AWSError, data: EC2.Types.CreateDefaultVpcResult) => void): Request<EC2.Types.CreateDefaultVpcResult, AWSError>;
+  /**
+   * Creates a default VPC with a size /16 IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see Default VPC and Default Subnets in the Amazon Virtual Private Cloud User Guide. You cannot specify the components of the default VPC yourself. You can create a default VPC if you deleted your previous default VPC. You cannot have more than one default VPC per region.  If your account supports EC2-Classic, you cannot use this action to create a default VPC in a region that supports EC2-Classic. If you want a default VPC in a region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the Default VPCs FAQ.
+   */
+  createDefaultVpc(callback?: (err: AWSError, data: EC2.Types.CreateDefaultVpcResult) => void): Request<EC2.Types.CreateDefaultVpcResult, AWSError>;
+  /**
    * Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see RFC 2132.    domain-name-servers - The IP addresses of up to four domain name servers, or AmazonProvidedDNS. The default DHCP option set specifies AmazonProvidedDNS. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas. If you want your instance to receive a custom DNS hostname as specified in domain-name, you must set domain-name-servers to a custom DNS server.    domain-name - If you're using AmazonProvidedDNS in us-east-1, specify ec2.internal. If you're using AmazonProvidedDNS in another region, specify region.compute.internal (for example, ap-northeast-1.compute.internal). Otherwise, specify a domain name (for example, MyCompany.com). This value is used to complete unqualified DNS hostnames. Important: Some Linux operating systems accept multiple domain names separated by spaces. However, Windows and other Linux operating systems treat the value as a single domain, which results in unexpected behavior. If your DHCP options set is associated with a VPC that has instances with multiple operating systems, specify only one domain name.    ntp-servers - The IP addresses of up to four Network Time Protocol (NTP) servers.    netbios-name-servers - The IP addresses of up to four NetBIOS name servers.    netbios-node-type - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see RFC 2132.   Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an Internet gateway, make sure to set the domain-name-servers option either to AmazonProvidedDNS or to a domain name server of your choice. For more information about DHCP options, see DHCP Options Sets in the Amazon Virtual Private Cloud User Guide.
    */
   createDhcpOptions(params: EC2.Types.CreateDhcpOptionsRequest, callback?: (err: AWSError, data: EC2.Types.CreateDhcpOptionsResult) => void): Request<EC2.Types.CreateDhcpOptionsResult, AWSError>;
@@ -3161,6 +3169,18 @@ declare namespace EC2 {
      * Information about the customer gateway.
      */
     CustomerGateway?: CustomerGateway;
+  }
+  export interface CreateDefaultVpcRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateDefaultVpcResult {
+    /**
+     * Information about the VPC.
+     */
+    Vpc?: Vpc;
   }
   export interface CreateDhcpOptionsRequest {
     /**

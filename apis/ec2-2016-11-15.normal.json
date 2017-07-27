@@ -314,6 +314,16 @@
       "output":{"shape":"CreateCustomerGatewayResult"},
       "documentation":"<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> region, and 9059, which is reserved in the <code>eu-west-1</code> region.</p> </note> <p>For more information about VPN customer gateways, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">Adding a Hardware Virtual Private Gateway to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <important> <p>You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources.</p> </important>"
     },
+    "CreateDefaultVpc":{
+      "name":"CreateDefaultVpc",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDefaultVpcRequest"},
+      "output":{"shape":"CreateDefaultVpcResult"},
+      "documentation":"<p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html\">Default VPC and Default Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>You can create a default VPC if you deleted your previous default VPC. You cannot have more than one default VPC per region. </p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a region that supports EC2-Classic. If you want a default VPC in a region that supports EC2-Classic, see \"I really want a default VPC for my existing EC2 account. Is that possible?\" in the <a href=\"http://aws.amazon.com/vpc/faqs/#Default_VPCs\">Default VPCs FAQ</a>.</p>"
+    },
     "CreateDhcpOptions":{
       "name":"CreateDhcpOptions",
       "http":{
@@ -4115,6 +4125,27 @@
         }
       },
       "documentation":"<p>Contains the output of CreateCustomerGateway.</p>"
+    },
+    "CreateDefaultVpcRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      },
+      "documentation":"<p>Contains the parameters for CreateDefaultVpc.</p>"
+    },
+    "CreateDefaultVpcResult":{
+      "type":"structure",
+      "members":{
+        "Vpc":{
+          "shape":"Vpc",
+          "documentation":"<p>Information about the VPC.</p>",
+          "locationName":"vpc"
+        }
+      },
+      "documentation":"<p>Contains the output of CreateDefaultVpc.</p>"
     },
     "CreateDhcpOptionsRequest":{
       "type":"structure",
