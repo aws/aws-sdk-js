@@ -63,6 +63,13 @@ export namespace DocumentClient {
          * empty strings, buffers, and sets to NULL shapes
          */
         convertEmptyValues?: boolean;
+
+        /**
+         * Whether to return numbers as a NumberValue object instead of
+         * converting them to native JavaScript numbers. This allows for the
+         * safe round-trip transport of numbers of arbitrary size.
+         */
+        wrapNumbers?: boolean;
     }
 
     export interface DocumentClientOptions extends ConverterOptions {

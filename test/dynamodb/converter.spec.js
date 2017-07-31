@@ -356,37 +356,46 @@ describe('AWS.DynamoDB.Converter', function() {
     });
 
     describe('binary values', function() {
-      it('should convert binary values to BinaryAttributeValues', function() {
+      it('should convert BinaryAttributeValues to binary values', function() {
         var b64String = 'deadbeef';
         expect(AWS.util.base64.encode(output({B: AWS.util.base64.decode(b64String)}))).to.equal(b64String);
       });
     });
 
     describe('numbers', function() {
-      it('should convert numbers to NumberAttributeValues', function() {
+      it('should convert NumberAttributeValues to numbers', function() {
         expect(output({N: '42'})).to.equal(42);
       });
+
+      it(
+        'should convert NumberAttributeValues to NumberValues when wrapNumbers is true',
+        function() {
+          var unsafeInteger = '9007199254740991000';
+          var converted = output({N: unsafeInteger}, {wrapNumbers: true});
+          expect(converted.toString()).to.equal(unsafeInteger);
+        }
+      );
     });
 
     describe('null', function() {
-      it('should convert nulls to NullAttributeValues', function() {
+      it('should convert NullAttributeValues to null', function() {
         expect(output({NULL: true})).to.equal(null);
       });
     });
 
     describe('boolean', function() {
-      it('should convert booleans to BooleanAttributeValues', function() {
+      it('should convert BooleanAttributeValues to booleans', function() {
         expect(output({BOOL: true})).to.equal(true);
         expect(output({BOOL: false})).to.equal(false);
       });
     });
 
     describe('lists', function() {
-      it('should convert lists to ListAttributeValues', function() {
+      it('should convert ListAttributeValues to lists', function() {
         expect(output({L: []})).to.deep.equal([]);
       });
 
-      it('should convert list members to AttributeValues', function() {
+      it('should convert member AttributeValues to list members', function() {
         expect(output({L: [
           {S: 'a'},
           {N: '1'},
@@ -398,11 +407,11 @@ describe('AWS.DynamoDB.Converter', function() {
     });
 
     describe('maps', function() {
-      it('should convert maps to MapAttributeValues', function() {
+      it('should convert MapAttributeValues to objects', function() {
         expect(output({M: {}})).to.deep.equal({});
       });
 
-      it('should convert map members to AttributeValues', function() {
+      it('should convert member AttributeValues to map members', function() {
         expect(output({
           M: {
             a: {S: 'a'},
@@ -417,7 +426,7 @@ describe('AWS.DynamoDB.Converter', function() {
 
     describe('string sets', function() {
       it(
-        'should convert sets with strings into StringSetAttributeValues',
+        'should convert StringSetAttributeValues into sets with strings',
         function() {
           var converted = output({SS: ['a', 'b', 'c']});
           expect(converted).to.have.keys('values', 'type');
@@ -429,7 +438,7 @@ describe('AWS.DynamoDB.Converter', function() {
 
     describe('number sets', function() {
       it(
-        'should convert sets with numbers into NumberSetAttributeValues',
+        'should convert NumberSetAttributeValues into sets with numbers',
         function() {
           var converted = output({NS: ['1', '2', '3']});
           expect(converted).to.have.keys('values', 'type');
@@ -437,11 +446,28 @@ describe('AWS.DynamoDB.Converter', function() {
           expect(converted.values).to.deep.equal([1, 2, 3]);
         }
       );
+
+        it(
+          'should convert NumberSetAttributeValues into sets with NumberValues when wrapNumbers is true',
+          function() {
+            var unsafeInteger = '9007199254740991000';
+            var converted = output(
+              {NS: [unsafeInteger, unsafeInteger, unsafeInteger]},
+              {wrapNumbers: true}
+            );
+
+            expect(converted).to.have.keys('values', 'type');
+            expect(converted.type).to.equal('Number');
+            for (var i = 0; i < converted.values.length; i++) {
+              expect(converted.values[i].toString()).to.equal(unsafeInteger);
+            }
+          }
+        );
     });
 
     describe('binary sets', function() {
       it(
-        'should convert sets with strings into StringSetAttributeValues',
+        'should convert BinarySetAttributeValues into sets with binary strings',
         function() {
           var b64Strings = ['dead', 'beef', 'face'];
           var converted = output({BS: b64Strings.map(AWS.util.base64.decode)});
@@ -486,5 +512,31 @@ describe('AWS.DynamoDB.Converter', function() {
         boolValue: true
       });
     });
+
+    it('should respect the `wrapNumbers` options', function() {
+        var unmarshalled = AWS.DynamoDB.Converter.unmarshall(
+          {
+            string: {S: 'foo'},
+            list: {L: [{S: 'fizz'}, {S: 'buzz'}, {S: 'pop'}]},
+            map: {
+              M: {
+                nestedMap: {
+                  M: {
+                    key: {S: 'value'},
+                    numberKey: {N: '9007199254740991000'}
+                  }
+                }
+              }
+            },
+            number: {N: '123'},
+            nullValue: {NULL: true},
+            boolValue: {BOOL: true}
+          },
+          {wrapNumbers: true}
+        );
+
+        expect(unmarshalled.map.nestedMap.numberKey.toString())
+            .to.equal('9007199254740991000');
+    })
   });
 });
