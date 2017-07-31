@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "DynamoDB",
-  "description": "Add a `wrapNumbers` option to the Document Client to direct the client not to convert number attributes to JavaScript numbers."
-}

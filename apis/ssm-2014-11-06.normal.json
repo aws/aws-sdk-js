@@ -253,7 +253,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Delete a list of parameters.</p>"
+      "documentation":"<p>Delete a list of parameters. This API is used to delete parameters by using the Amazon EC2 console.</p>"
     },
     "DeletePatchBaseline":{
       "name":"DeletePatchBaseline",
@@ -632,7 +632,7 @@
         {"shape":"InvalidFilterValue"},
         {"shape":"InvalidNextToken"}
       ],
-      "documentation":"<p>Get information about a parameter.</p>"
+      "documentation":"<p>Get information about a parameter.</p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p>"
     },
     "DescribePatchBaselines":{
       "name":"DescribePatchBaselines",
@@ -882,7 +882,7 @@
         {"shape":"InvalidKeyId"},
         {"shape":"InvalidNextToken"}
       ],
-      "documentation":"<p>Retrieve parameters in a specific hierarchy. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html\">Working with Systems Manager Parameters</a>. </p>"
+      "documentation":"<p>Retrieve parameters in a specific hierarchy. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html\">Working with Systems Manager Parameters</a>. </p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p>"
     },
     "GetPatchBaseline":{
       "name":"GetPatchBaseline",
@@ -1174,6 +1174,21 @@
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Removes all tags from the specified resource.</p>"
+    },
+    "SendAutomationSignal":{
+      "name":"SendAutomationSignal",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SendAutomationSignalRequest"},
+      "output":{"shape":"SendAutomationSignalResult"},
+      "errors":[
+        {"shape":"AutomationExecutionNotFoundException"},
+        {"shape":"InvalidAutomationSignalException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Sends a signal to an Automation execution to change the current behavior or status of the execution. </p>"
     },
     "SendCommand":{
       "name":"SendCommand",
@@ -1907,6 +1922,7 @@
       "enum":[
         "Pending",
         "InProgress",
+        "Waiting",
         "Success",
         "TimedOut",
         "Cancelled",
@@ -5234,6 +5250,14 @@
       "documentation":"<p>The supplied parameters for invoking the specified Automation document are incorrect. For example, they may not match the set of parameters permitted for the specified Automation document.</p>",
       "exception":true
     },
+    "InvalidAutomationSignalException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The signal is not valid for the current Automation execution.</p>",
+      "exception":true
+    },
     "InvalidCommandId":{
       "type":"structure",
       "members":{
@@ -7786,6 +7810,32 @@
       "max":256,
       "min":1
     },
+    "SendAutomationSignalRequest":{
+      "type":"structure",
+      "required":[
+        "AutomationExecutionId",
+        "SignalType"
+      ],
+      "members":{
+        "AutomationExecutionId":{
+          "shape":"AutomationExecutionId",
+          "documentation":"<p>The unique identifier for an existing Automation execution that you want to send the signal to.</p>"
+        },
+        "SignalType":{
+          "shape":"SignalType",
+          "documentation":"<p>The type of signal. Valid signal types include the following: Approve and Reject </p>"
+        },
+        "Payload":{
+          "shape":"AutomationParameterMap",
+          "documentation":"<p>The data sent with the signal. The data schema depends on the type of signal used in the request. </p>"
+        }
+      }
+    },
+    "SendAutomationSignalResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "SendCommandRequest":{
       "type":"structure",
       "required":["DocumentName"],
@@ -7863,6 +7913,13 @@
       }
     },
     "ServiceRole":{"type":"string"},
+    "SignalType":{
+      "type":"string",
+      "enum":[
+        "Approve",
+        "Reject"
+      ]
+    },
     "SnapshotDownloadUrl":{"type":"string"},
     "SnapshotId":{
       "type":"string",

@@ -264,7 +264,7 @@
         },
         "userArn":{
           "shape":"UserArn",
-          "documentation":"<p>The Amazon Resource Name (ARN) for the IAM user you want to add to the DevHub project.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) for the IAM user you want to add to the AWS CodeStar project.</p>"
         },
         "projectRole":{
           "shape":"Role",
@@ -575,7 +575,8 @@
       "type":"string",
       "max":128,
       "min":3,
-      "pattern":"^[\\w-.+]+@[\\w-.+]+$"
+      "pattern":"^[\\w-.+]+@[\\w-.+]+$",
+      "sensitive":true
     },
     "InvalidNextTokenException":{
       "type":"structure",
@@ -727,7 +728,7 @@
     },
     "PaginationToken":{
       "type":"string",
-      "max":256,
+      "max":512,
       "min":1,
       "pattern":"^[\\w/+=]+$"
     },
@@ -1003,7 +1004,7 @@
       "type":"string",
       "max":95,
       "min":32,
-      "pattern":"arn:aws:iam::\\d{12}:user\\/[\\w-]+"
+      "pattern":"^arn:aws:iam::\\d{12}:user(?:(\\u002F)|(\\u002F[\\u0021-\\u007E]+\\u002F))[\\w+=,.@-]+$"
     },
     "UserProfileAlreadyExistsException":{
       "type":"structure",

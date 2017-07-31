@@ -143,7 +143,7 @@ declare namespace CodeStar {
      */
     clientRequestToken?: ClientRequestToken;
     /**
-     * The Amazon Resource Name (ARN) for the IAM user you want to add to the DevHub project.
+     * The Amazon Resource Name (ARN) for the IAM user you want to add to the AWS CodeStar project.
      */
     userArn: UserArn;
     /**

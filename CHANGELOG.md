@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.92.0-->
+<!--LATEST=2.93.0-->
 <!--ENTRYINSERT-->
+
+## 2.93.0
+* feature: DynamoDB: Add a `wrapNumbers` option to the Document Client to direct the client not to convert number attributes to JavaScript numbers.
+* feature: Inspector: Inspector's StopAssessmentRun API has been updated with a new input option - stopAction. This request parameter can be set to either START_EVALUATION or SKIP_EVALUATION. START_EVALUATION (the default value, and the previous behavior) stops the AWS agent data collection and begins the results evaluation for findings generation based on the data collected so far. SKIP_EVALUATION cancels the assessment run immediately, after which no findings are generated.
+* feature: SSM: Adds a SendAutomationSignal API to SSM Service. This API is used to send a signal to an automation execution to change the current behavior or status of the execution.
 
 ## 2.92.0
 * feature: EC2: The CreateDefaultVPC API enables you to create a new default VPC . You no longer need to contact AWS support, if your default VPC has been deleted.
