@@ -10,6 +10,10 @@ export class CredentialProviderChain extends Credentials {
      */
     resolve(callback:(err: AWSError, credentials: Credentials) => void): CredentialProviderChain;
     /**
+     * Return a Promise on resolve() function
+     */
+    resolvePromise(resolve?:(credentials: Credentials) => void, reject?:(err: AWSError) => void): Promise<any>;
+    /**
      * Returns a list of credentials objects or functions that return credentials objects. If the provider is a function, the function will be executed lazily when the provider needs to be checked for valid credentials. By default, this object will be set to the defaultProviders.
      */
     providers: Credentials[]|provider[];
