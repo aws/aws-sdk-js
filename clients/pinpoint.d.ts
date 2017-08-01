@@ -12,6 +12,14 @@ declare class Pinpoint extends Service {
   constructor(options?: Pinpoint.Types.ClientConfiguration)
   config: Config & Pinpoint.Types.ClientConfiguration;
   /**
+   * Used to create an app.
+   */
+  createApp(params: Pinpoint.Types.CreateAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateAppResponse) => void): Request<Pinpoint.Types.CreateAppResponse, AWSError>;
+  /**
+   * Used to create an app.
+   */
+  createApp(callback?: (err: AWSError, data: Pinpoint.Types.CreateAppResponse) => void): Request<Pinpoint.Types.CreateAppResponse, AWSError>;
+  /**
    * Creates or updates a campaign.
    */
   createCampaign(params: Pinpoint.Types.CreateCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateCampaignResponse) => void): Request<Pinpoint.Types.CreateCampaignResponse, AWSError>;
@@ -51,6 +59,14 @@ declare class Pinpoint extends Service {
    * Delete an APNS sandbox channel
    */
   deleteApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
+  /**
+   * Deletes an app.
+   */
+  deleteApp(params: Pinpoint.Types.DeleteAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAppResponse) => void): Request<Pinpoint.Types.DeleteAppResponse, AWSError>;
+  /**
+   * Deletes an app.
+   */
+  deleteApp(callback?: (err: AWSError, data: Pinpoint.Types.DeleteAppResponse) => void): Request<Pinpoint.Types.DeleteAppResponse, AWSError>;
   /**
    * Deletes a campaign.
    */
@@ -116,6 +132,14 @@ declare class Pinpoint extends Service {
    */
   getApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
   /**
+   * Returns information about an app.
+   */
+  getApp(params: Pinpoint.Types.GetAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAppResponse) => void): Request<Pinpoint.Types.GetAppResponse, AWSError>;
+  /**
+   * Returns information about an app.
+   */
+  getApp(callback?: (err: AWSError, data: Pinpoint.Types.GetAppResponse) => void): Request<Pinpoint.Types.GetAppResponse, AWSError>;
+  /**
    * Used to request the settings for an app.
    */
   getApplicationSettings(params: Pinpoint.Types.GetApplicationSettingsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationSettingsResponse) => void): Request<Pinpoint.Types.GetApplicationSettingsResponse, AWSError>;
@@ -123,6 +147,14 @@ declare class Pinpoint extends Service {
    * Used to request the settings for an app.
    */
   getApplicationSettings(callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationSettingsResponse) => void): Request<Pinpoint.Types.GetApplicationSettingsResponse, AWSError>;
+  /**
+   * Returns information about your apps.
+   */
+  getApps(params: Pinpoint.Types.GetAppsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAppsResponse) => void): Request<Pinpoint.Types.GetAppsResponse, AWSError>;
+  /**
+   * Returns information about your apps.
+   */
+  getApps(callback?: (err: AWSError, data: Pinpoint.Types.GetAppsResponse) => void): Request<Pinpoint.Types.GetAppsResponse, AWSError>;
   /**
    * Returns information about a campaign.
    */
@@ -385,7 +417,7 @@ declare namespace Pinpoint {
      */
     Enabled?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * Channel ID. Not used. Present only for backwards compatibility.
      */
     Id?: __string;
     /**
@@ -507,7 +539,7 @@ declare namespace Pinpoint {
      */
     LastModifiedDate?: __string;
     /**
-     * The platform type. Will be APNS.
+     * The platform type. Will be APNS_SANDBOX.
      */
     Platform?: __string;
     /**
@@ -586,7 +618,9 @@ Valid values: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, COMPLETED
      */
     BodyOverride?: __string;
     /**
-     * Type of channel of this address
+     * The channel type.
+
+Valid values: GCM | APNS | SMS | EMAIL
      */
     ChannelType?: ChannelType;
     /**
@@ -606,6 +640,16 @@ Valid values: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, COMPLETED
      */
     TitleOverride?: __string;
   }
+  export interface ApplicationResponse {
+    /**
+     * The unique application ID.
+     */
+    Id?: __string;
+    /**
+     * The display name of the application.
+     */
+    Name?: __string;
+  }
   export interface ApplicationSettingsResource {
     /**
      * The unique ID for the application.
@@ -623,6 +667,16 @@ Valid values: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, COMPLETED
      * The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own.
      */
     QuietTime?: QuietTime;
+  }
+  export interface ApplicationsResponse {
+    /**
+     * List of applications returned in this page.
+     */
+    Item?: ListOfApplicationResponse;
+    /**
+     * The string that you use in a subsequent request to get the next page of results in a paginated response.
+     */
+    NextToken?: __string;
   }
   export interface AttributeDimension {
     /**
@@ -642,6 +696,10 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      * The email text body.
      */
     Body?: __string;
+    /**
+     * The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel.
+     */
+    FromAddress?: __string;
     /**
      * The email html body.
      */
@@ -775,6 +833,18 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
     NextToken?: __string;
   }
   export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"ADM"|"SMS"|"EMAIL"|string;
+  export interface CreateAppRequest {
+    CreateApplicationRequest: CreateApplicationRequest;
+  }
+  export interface CreateAppResponse {
+    ApplicationResponse: ApplicationResponse;
+  }
+  export interface CreateApplicationRequest {
+    /**
+     * The display name of the application. Used in the Amazon Pinpoint console.
+     */
+    Name?: __string;
+  }
   export interface CreateCampaignRequest {
     ApplicationId: __string;
     WriteCampaignRequest: WriteCampaignRequest;
@@ -847,6 +917,12 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteApnsSandboxChannelResponse {
     APNSSandboxChannelResponse: APNSSandboxChannelResponse;
+  }
+  export interface DeleteAppRequest {
+    ApplicationId: __string;
+  }
+  export interface DeleteAppResponse {
+    ApplicationResponse: ApplicationResponse;
   }
   export interface DeleteCampaignRequest {
     ApplicationId: __string;
@@ -934,7 +1010,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface EmailChannelResponse {
     /**
-     * Application id
+     * The unique ID of the application to which the email channel belongs.
      */
     ApplicationId?: __string;
     /**
@@ -994,7 +1070,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
     /**
      * The channel type.
 
-Valid values: APNS, GCM
+Valid values: GCM | APNS | SMS | EMAIL
      */
     ChannelType?: ChannelType;
     /**
@@ -1024,8 +1100,9 @@ Valid values: APNS, GCM
     /**
      * Indicates whether a user has opted out of receiving messages with one of the following values:
 
-ALL – User receives all messages.
-NONE – User receives no messages.
+ALL - User has opted out of all messages.
+
+NONE - Users has not opted out and receives all messages.
      */
     OptOut?: __string;
     /**
@@ -1116,7 +1193,7 @@ NONE – User receives no messages.
     /**
      * The channel type.
 
-Valid values: APNS, GCM
+Valid values: GCM | APNS | SMS | EMAIL
      */
     ChannelType?: ChannelType;
     /**
@@ -1142,8 +1219,9 @@ Valid values: APNS, GCM
     /**
      * Indicates whether a user has opted out of receiving messages with one of the following values:
 
-ALL – User receives all messages.
-NONE – User receives no messages.
+ALL - User has opted out of all messages.
+
+NONE - Users has not opted out and receives all messages.
      */
     OptOut?: __string;
     /**
@@ -1171,7 +1249,7 @@ NONE – User receives no messages.
     /**
      * The channel type.
 
-Valid values: APNS, GCM
+Valid values: GCM | APNS | SMS | EMAIL
      */
     ChannelType?: ChannelType;
     /**
@@ -1209,8 +1287,9 @@ Valid values: APNS, GCM
     /**
      * Indicates whether a user has opted out of receiving messages with one of the following values:
 
-ALL – User receives all messages.
-NONE – User receives no messages.
+ALL - User has opted out of all messages.
+
+NONE - Users has not opted out and receives all messages.
      */
     OptOut?: __string;
     /**
@@ -1294,7 +1373,7 @@ NONE – User receives no messages.
      */
     Enabled?: __boolean;
     /**
-     * Channel ID. Not used, only for backwards compatibility.
+     * Channel ID. Not used. Present only for backwards compatibility.
      */
     Id?: __string;
     /**
@@ -1392,16 +1471,35 @@ NONE – User receives no messages.
   export interface GetApnsSandboxChannelResponse {
     APNSSandboxChannelResponse: APNSSandboxChannelResponse;
   }
+  export interface GetAppRequest {
+    ApplicationId: __string;
+  }
+  export interface GetAppResponse {
+    ApplicationResponse: ApplicationResponse;
+  }
   export interface GetApplicationSettingsRequest {
     ApplicationId: __string;
   }
   export interface GetApplicationSettingsResponse {
     ApplicationSettingsResource: ApplicationSettingsResource;
   }
+  export interface GetAppsRequest {
+    PageSize?: __string;
+    Token?: __string;
+  }
+  export interface GetAppsResponse {
+    ApplicationsResponse: ApplicationsResponse;
+  }
   export interface GetCampaignActivitiesRequest {
     ApplicationId: __string;
     CampaignId: __string;
+    /**
+     * The number of entries you want on each page in the response.
+     */
     PageSize?: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
     Token?: __string;
   }
   export interface GetCampaignActivitiesResponse {
@@ -1425,7 +1523,13 @@ NONE – User receives no messages.
   export interface GetCampaignVersionsRequest {
     ApplicationId: __string;
     CampaignId: __string;
+    /**
+     * The number of entries you want on each page in the response.
+     */
     PageSize?: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
     Token?: __string;
   }
   export interface GetCampaignVersionsResponse {
@@ -1433,7 +1537,13 @@ NONE – User receives no messages.
   }
   export interface GetCampaignsRequest {
     ApplicationId: __string;
+    /**
+     * The number of entries you want on each page in the response.
+     */
     PageSize?: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
     Token?: __string;
   }
   export interface GetCampaignsResponse {
@@ -1476,7 +1586,13 @@ NONE – User receives no messages.
   }
   export interface GetImportJobsRequest {
     ApplicationId: __string;
+    /**
+     * The number of entries you want on each page in the response.
+     */
     PageSize?: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
     Token?: __string;
   }
   export interface GetImportJobsResponse {
@@ -1484,8 +1600,14 @@ NONE – User receives no messages.
   }
   export interface GetSegmentImportJobsRequest {
     ApplicationId: __string;
+    /**
+     * The number of entries you want on each page in the response.
+     */
     PageSize?: __string;
     SegmentId: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
     Token?: __string;
   }
   export interface GetSegmentImportJobsResponse {
@@ -1508,8 +1630,14 @@ NONE – User receives no messages.
   }
   export interface GetSegmentVersionsRequest {
     ApplicationId: __string;
+    /**
+     * The number of entries you want on each page in the response.
+     */
     PageSize?: __string;
     SegmentId: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
     Token?: __string;
   }
   export interface GetSegmentVersionsResponse {
@@ -1517,7 +1645,13 @@ NONE – User receives no messages.
   }
   export interface GetSegmentsRequest {
     ApplicationId: __string;
+    /**
+     * The number of entries you want on each page in the response.
+     */
     PageSize?: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
     Token?: __string;
   }
   export interface GetSegmentsResponse {
@@ -1674,6 +1808,7 @@ The job status is FAILED if one or more pieces failed to import.
   }
   export type JobStatus = "CREATED"|"INITIALIZING"|"PROCESSING"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|string;
   export type ListOfActivityResponse = ActivityResponse[];
+  export type ListOfApplicationResponse = ApplicationResponse[];
   export type ListOfCampaignResponse = CampaignResponse[];
   export type ListOfEndpointBatchItem = EndpointBatchItem[];
   export type ListOfImportJobResponse = ImportJobResponse[];
@@ -1722,6 +1857,10 @@ URL - The default mobile browser on the user's device launches and opens a web p
      * The URL that points to the media resource, for example a .mp4 or .gif file.
      */
     MediaUrl?: __string;
+    /**
+     * The Raw JSON formatted string to be used as the payload. This value overrides the message.
+     */
+    RawContent?: __string;
     /**
      * Indicates if the message should display on the users device.
 
@@ -1865,7 +2004,7 @@ INACTIVE - Users who have not used your app within the specified duration are in
   }
   export interface SMSChannelResponse {
     /**
-     * Application id
+     * The unique ID of the application to which the SMS channel belongs.
      */
     ApplicationId?: __string;
     /**

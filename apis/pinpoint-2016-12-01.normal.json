@@ -9,6 +9,34 @@
     "jsonVersion" : "1.1"
   },
   "operations" : {
+    "CreateApp" : {
+      "name" : "CreateApp",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/v1/apps",
+        "responseCode" : 201
+      },
+      "input" : {
+        "shape" : "CreateAppRequest"
+      },
+      "output" : {
+        "shape" : "CreateAppResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Used to create an app."
+    },
     "CreateCampaign" : {
       "name" : "CreateCampaign",
       "http" : {
@@ -148,6 +176,34 @@
         "shape" : "TooManyRequestsException"
       } ],
       "documentation" : "Delete an APNS sandbox channel"
+    },
+    "DeleteApp" : {
+      "name" : "DeleteApp",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/v1/apps/{application-id}",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "DeleteAppRequest"
+      },
+      "output" : {
+        "shape" : "DeleteAppResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Deletes an app."
     },
     "DeleteCampaign" : {
       "name" : "DeleteCampaign",
@@ -373,6 +429,34 @@
       } ],
       "documentation" : "Get an APNS sandbox channel"
     },
+    "GetApp" : {
+      "name" : "GetApp",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetAppRequest"
+      },
+      "output" : {
+        "shape" : "GetAppResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Returns information about an app."
+    },
     "GetApplicationSettings" : {
       "name" : "GetApplicationSettings",
       "http" : {
@@ -400,6 +484,34 @@
         "shape" : "TooManyRequestsException"
       } ],
       "documentation" : "Used to request the settings for an app."
+    },
+    "GetApps" : {
+      "name" : "GetApps",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetAppsRequest"
+      },
+      "output" : {
+        "shape" : "GetAppsResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Returns information about your apps."
     },
     "GetCampaign" : {
       "name" : "GetCampaign",
@@ -1250,7 +1362,7 @@
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Channel ID. Not used, only for backwards compatibility."
+          "documentation" : "Channel ID. Not used. Present only for backwards compatibility."
         },
         "IsArchived" : {
           "shape" : "__boolean",
@@ -1384,7 +1496,7 @@
         },
         "Platform" : {
           "shape" : "__string",
-          "documentation" : "The platform type. Will be APNS."
+          "documentation" : "The platform type. Will be APNS_SANDBOX."
         },
         "Version" : {
           "shape" : "__integer",
@@ -1474,7 +1586,7 @@
         },
         "ChannelType" : {
           "shape" : "ChannelType",
-          "documentation" : "Type of channel of this address"
+          "documentation" : "The channel type.\n\nValid values: GCM | APNS | SMS | EMAIL"
         },
         "Context" : {
           "shape" : "MapOf__string",
@@ -1494,6 +1606,20 @@
         }
       },
       "documentation" : "Address configuration."
+    },
+    "ApplicationResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "The unique application ID."
+        },
+        "Name" : {
+          "shape" : "__string",
+          "documentation" : "The display name of the application."
+        }
+      },
+      "documentation" : "Application Response."
     },
     "ApplicationSettingsResource" : {
       "type" : "structure",
@@ -1516,6 +1642,20 @@
         }
       },
       "documentation" : "Application settings."
+    },
+    "ApplicationsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Item" : {
+          "shape" : "ListOfApplicationResponse",
+          "documentation" : "List of applications returned in this page."
+        },
+        "NextToken" : {
+          "shape" : "__string",
+          "documentation" : "The string that you use in a subsequent request to get the next page of results in a paginated response."
+        }
+      },
+      "documentation" : "Get Applications Result."
     },
     "AttributeDimension" : {
       "type" : "structure",
@@ -1559,6 +1699,10 @@
         "Body" : {
           "shape" : "__string",
           "documentation" : "The email text body."
+        },
+        "FromAddress" : {
+          "shape" : "__string",
+          "documentation" : "The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel."
         },
         "HtmlBody" : {
           "shape" : "__string",
@@ -1716,6 +1860,36 @@
     "ChannelType" : {
       "type" : "string",
       "enum" : [ "GCM", "APNS", "APNS_SANDBOX", "ADM", "SMS", "EMAIL" ]
+    },
+    "CreateAppRequest" : {
+      "type" : "structure",
+      "members" : {
+        "CreateApplicationRequest" : {
+          "shape" : "CreateApplicationRequest"
+        }
+      },
+      "required" : [ "CreateApplicationRequest" ],
+      "payload" : "CreateApplicationRequest"
+    },
+    "CreateAppResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationResponse" : {
+          "shape" : "ApplicationResponse"
+        }
+      },
+      "required" : [ "ApplicationResponse" ],
+      "payload" : "ApplicationResponse"
+    },
+    "CreateApplicationRequest" : {
+      "type" : "structure",
+      "members" : {
+        "Name" : {
+          "shape" : "__string",
+          "documentation" : "The display name of the application. Used in the Amazon Pinpoint console."
+        }
+      },
+      "documentation" : "Application Request."
     },
     "CreateCampaignRequest" : {
       "type" : "structure",
@@ -1881,6 +2055,27 @@
       },
       "required" : [ "APNSSandboxChannelResponse" ],
       "payload" : "APNSSandboxChannelResponse"
+    },
+    "DeleteAppRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "DeleteAppResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationResponse" : {
+          "shape" : "ApplicationResponse"
+        }
+      },
+      "required" : [ "ApplicationResponse" ],
+      "payload" : "ApplicationResponse"
     },
     "DeleteCampaignRequest" : {
       "type" : "structure",
@@ -2086,7 +2281,7 @@
       "members" : {
         "ApplicationId" : {
           "shape" : "__string",
-          "documentation" : "Application id"
+          "documentation" : "The unique ID of the application to which the email channel belongs."
         },
         "CreationDate" : {
           "shape" : "__string",
@@ -2148,7 +2343,7 @@
         },
         "ChannelType" : {
           "shape" : "ChannelType",
-          "documentation" : "The channel type.\n\nValid values: APNS, GCM"
+          "documentation" : "The channel type.\n\nValid values: GCM | APNS | SMS | EMAIL"
         },
         "Demographic" : {
           "shape" : "EndpointDemographic",
@@ -2176,7 +2371,7 @@
         },
         "OptOut" : {
           "shape" : "__string",
-          "documentation" : "Indicates whether a user has opted out of receiving messages with one of the following values:\n\nALL – User receives all messages.\nNONE – User receives no messages."
+          "documentation" : "Indicates whether a user has opted out of receiving messages with one of the following values:\n\nALL - User has opted out of all messages.\n\nNONE - Users has not opted out and receives all messages."
         },
         "RequestId" : {
           "shape" : "__string",
@@ -2280,7 +2475,7 @@
         },
         "ChannelType" : {
           "shape" : "ChannelType",
-          "documentation" : "The channel type.\n\nValid values: APNS, GCM"
+          "documentation" : "The channel type.\n\nValid values: GCM | APNS | SMS | EMAIL"
         },
         "Demographic" : {
           "shape" : "EndpointDemographic",
@@ -2304,7 +2499,7 @@
         },
         "OptOut" : {
           "shape" : "__string",
-          "documentation" : "Indicates whether a user has opted out of receiving messages with one of the following values:\n\nALL – User receives all messages.\nNONE – User receives no messages."
+          "documentation" : "Indicates whether a user has opted out of receiving messages with one of the following values:\n\nALL - User has opted out of all messages.\n\nNONE - Users has not opted out and receives all messages."
         },
         "RequestId" : {
           "shape" : "__string",
@@ -2334,7 +2529,7 @@
         },
         "ChannelType" : {
           "shape" : "ChannelType",
-          "documentation" : "The channel type.\n\nValid values: APNS, GCM"
+          "documentation" : "The channel type.\n\nValid values: GCM | APNS | SMS | EMAIL"
         },
         "CohortId" : {
           "shape" : "__string",
@@ -2370,7 +2565,7 @@
         },
         "OptOut" : {
           "shape" : "__string",
-          "documentation" : "Indicates whether a user has opted out of receiving messages with one of the following values:\n\nALL – User receives all messages.\nNONE – User receives no messages."
+          "documentation" : "Indicates whether a user has opted out of receiving messages with one of the following values:\n\nALL - User has opted out of all messages.\n\nNONE - Users has not opted out and receives all messages."
         },
         "RequestId" : {
           "shape" : "__string",
@@ -2492,7 +2687,7 @@
         },
         "Id" : {
           "shape" : "__string",
-          "documentation" : "Channel ID. Not used, only for backwards compatibility."
+          "documentation" : "Channel ID. Not used. Present only for backwards compatibility."
         },
         "IsArchived" : {
           "shape" : "__boolean",
@@ -2625,6 +2820,27 @@
       "required" : [ "APNSSandboxChannelResponse" ],
       "payload" : "APNSSandboxChannelResponse"
     },
+    "GetAppRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "GetAppResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationResponse" : {
+          "shape" : "ApplicationResponse"
+        }
+      },
+      "required" : [ "ApplicationResponse" ],
+      "payload" : "ApplicationResponse"
+    },
     "GetApplicationSettingsRequest" : {
       "type" : "structure",
       "members" : {
@@ -2646,6 +2862,31 @@
       "required" : [ "ApplicationSettingsResource" ],
       "payload" : "ApplicationSettingsResource"
     },
+    "GetAppsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "PageSize" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "page-size"
+        },
+        "Token" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "token"
+        }
+      }
+    },
+    "GetAppsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationsResponse" : {
+          "shape" : "ApplicationsResponse"
+        }
+      },
+      "required" : [ "ApplicationsResponse" ],
+      "payload" : "ApplicationsResponse"
+    },
     "GetCampaignActivitiesRequest" : {
       "type" : "structure",
       "members" : {
@@ -2662,12 +2903,14 @@
         "PageSize" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "page-size"
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
         },
         "Token" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "token"
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
         }
       },
       "required" : [ "ApplicationId", "CampaignId" ]
@@ -2755,12 +2998,14 @@
         "PageSize" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "page-size"
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
         },
         "Token" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "token"
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
         }
       },
       "required" : [ "ApplicationId", "CampaignId" ]
@@ -2786,12 +3031,14 @@
         "PageSize" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "page-size"
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
         },
         "Token" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "token"
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -2935,12 +3182,14 @@
         "PageSize" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "page-size"
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
         },
         "Token" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "token"
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -2966,7 +3215,8 @@
         "PageSize" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "page-size"
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
         },
         "SegmentId" : {
           "shape" : "__string",
@@ -2976,7 +3226,8 @@
         "Token" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "token"
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
         }
       },
       "required" : [ "SegmentId", "ApplicationId" ]
@@ -3059,7 +3310,8 @@
         "PageSize" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "page-size"
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
         },
         "SegmentId" : {
           "shape" : "__string",
@@ -3069,7 +3321,8 @@
         "Token" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "token"
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
         }
       },
       "required" : [ "SegmentId", "ApplicationId" ]
@@ -3095,12 +3348,14 @@
         "PageSize" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "page-size"
+          "locationName" : "page-size",
+          "documentation" : "The number of entries you want on each page in the response."
         },
         "Token" : {
           "shape" : "__string",
           "location" : "querystring",
-          "locationName" : "token"
+          "locationName" : "token",
+          "documentation" : "The NextToken string returned on a previous page that you use to get the next page of results in a paginated response."
         }
       },
       "required" : [ "ApplicationId" ]
@@ -3309,6 +3564,12 @@
         "shape" : "ActivityResponse"
       }
     },
+    "ListOfApplicationResponse" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ApplicationResponse"
+      }
+    },
     "ListOfCampaignResponse" : {
       "type" : "list",
       "member" : {
@@ -3444,6 +3705,10 @@
         "MediaUrl" : {
           "shape" : "__string",
           "documentation" : "The URL that points to the media resource, for example a .mp4 or .gif file."
+        },
+        "RawContent" : {
+          "shape" : "__string",
+          "documentation" : "The Raw JSON formatted string to be used as the payload. This value overrides the message."
         },
         "SilentPush" : {
           "shape" : "__boolean",
@@ -3623,8 +3888,7 @@
         }
       },
       "required" : [ "EventStream" ],
-      "payload" : "EventStream",
-      "documentation": "PutEventStream Response"
+      "payload" : "EventStream"
     },
     "QuietTime" : {
       "type" : "structure",
@@ -3677,7 +3941,7 @@
       "members" : {
         "ApplicationId" : {
           "shape" : "__string",
-          "documentation" : "Application id"
+          "documentation" : "The unique ID of the application to which the SMS channel belongs."
         },
         "CreationDate" : {
           "shape" : "__string",

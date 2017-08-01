@@ -586,11 +586,11 @@ declare namespace CodeDeploy {
      */
     deploymentConfigName?: DeploymentConfigName;
     /**
-     * The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags.
+     * The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags. Cannot be used in the same call as ec2TagSet.
      */
     ec2TagFilters?: EC2TagFilterList;
     /**
-     * The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags.
+     * The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags. Cannot be used in the same call as OnPremisesTagSet.
      */
     onPremisesInstanceTagFilters?: TagFilterList;
     /**
@@ -625,6 +625,14 @@ declare namespace CodeDeploy {
      * Information about the load balancer used in a deployment.
      */
     loadBalancerInfo?: LoadBalancerInfo;
+    /**
+     * Information about groups of tags applied to EC2 instances. The deployment group will include only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
+     */
+    ec2TagSet?: EC2TagSet;
+    /**
+     * Information about groups of tags applied to on-premises instances. The deployment group will include only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
+     */
+    onPremisesTagSet?: OnPremisesTagSet;
   }
   export interface CreateDeploymentGroupOutput {
     /**
@@ -749,11 +757,11 @@ declare namespace CodeDeploy {
      */
     deploymentConfigName?: DeploymentConfigName;
     /**
-     * The Amazon EC2 tags on which to filter.
+     * The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags.
      */
     ec2TagFilters?: EC2TagFilterList;
     /**
-     * The on-premises instance tags on which to filter.
+     * The on-premises instance tags on which to filter. The deployment group includes on-premises instances with any of the specified tags.
      */
     onPremisesInstanceTagFilters?: TagFilterList;
     /**
@@ -800,6 +808,14 @@ declare namespace CodeDeploy {
      * Information about the most recent attempted deployment to the deployment group.
      */
     lastAttemptedDeployment?: LastDeploymentInfo;
+    /**
+     * Information about groups of tags applied to an EC2 instance. The deployment group includes only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
+     */
+    ec2TagSet?: EC2TagSet;
+    /**
+     * Information about groups of tags applied to an on-premises instance. The deployment group includes only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
+     */
+    onPremisesTagSet?: OnPremisesTagSet;
   }
   export type DeploymentGroupInfoList = DeploymentGroupInfo[];
   export type DeploymentGroupName = string;
@@ -1002,6 +1018,13 @@ declare namespace CodeDeploy {
   }
   export type EC2TagFilterList = EC2TagFilter[];
   export type EC2TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE"|string;
+  export interface EC2TagSet {
+    /**
+     * A list containing other lists of EC2 instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.
+     */
+    ec2TagSetList?: EC2TagSetList;
+  }
+  export type EC2TagSetList = EC2TagFilterList[];
   export interface ELBInfo {
     /**
      * For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
@@ -1505,6 +1528,13 @@ declare namespace CodeDeploy {
   export type MinimumHealthyHostsValue = number;
   export type NextToken = string;
   export type NullableBoolean = boolean;
+  export interface OnPremisesTagSet {
+    /**
+     * A list containing other lists of on-premises instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.
+     */
+    onPremisesTagSetList?: OnPremisesTagSetList;
+  }
+  export type OnPremisesTagSetList = TagFilterList[];
   export interface RegisterApplicationRevisionInput {
     /**
      * The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
@@ -1669,13 +1699,17 @@ declare namespace CodeDeploy {
   export type TagList = Tag[];
   export interface TargetInstances {
     /**
-     * The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment.
+     * The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment. Cannot be used in the same call as ec2TagSet.
      */
     tagFilters?: EC2TagFilterList;
     /**
      * The names of one or more Auto Scaling groups to identify a replacement environment for a blue/green deployment.
      */
     autoScalingGroups?: AutoScalingGroupNameList;
+    /**
+     * Information about the groups of EC2 instance tags that an instance must be identified by in order for it to be included in the replacement environment for a blue/green deployment. Cannot be used in the same call as tagFilters.
+     */
+    ec2TagSet?: EC2TagSet;
   }
   export interface TimeRange {
     /**
@@ -1774,6 +1808,14 @@ declare namespace CodeDeploy {
      * Information about the load balancer used in a deployment.
      */
     loadBalancerInfo?: LoadBalancerInfo;
+    /**
+     * Information about groups of tags applied to on-premises instances. The deployment group will include only EC2 instances identified by all the tag groups.
+     */
+    ec2TagSet?: EC2TagSet;
+    /**
+     * Information about an on-premises instance tag set. The deployment group will include only on-premises instances identified by all the tag groups.
+     */
+    onPremisesTagSet?: OnPremisesTagSet;
   }
   export interface UpdateDeploymentGroupOutput {
     /**

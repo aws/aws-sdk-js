@@ -240,7 +240,10 @@
         {"shape":"InvalidAutoRollbackConfigException"},
         {"shape":"InvalidLoadBalancerInfoException"},
         {"shape":"InvalidDeploymentStyleException"},
-        {"shape":"InvalidBlueGreenDeploymentConfigurationException"}
+        {"shape":"InvalidBlueGreenDeploymentConfigurationException"},
+        {"shape":"InvalidEC2TagCombinationException"},
+        {"shape":"InvalidOnPremisesTagCombinationException"},
+        {"shape":"TagSetListLimitExceededException"}
       ],
       "documentation":"<p>Creates a deployment group to which application revisions will be deployed.</p>"
     },
@@ -683,7 +686,10 @@
         {"shape":"InvalidAutoRollbackConfigException"},
         {"shape":"InvalidLoadBalancerInfoException"},
         {"shape":"InvalidDeploymentStyleException"},
-        {"shape":"InvalidBlueGreenDeploymentConfigurationException"}
+        {"shape":"InvalidBlueGreenDeploymentConfigurationException"},
+        {"shape":"InvalidEC2TagCombinationException"},
+        {"shape":"InvalidOnPremisesTagCombinationException"},
+        {"shape":"TagSetListLimitExceededException"}
       ],
       "documentation":"<p>Changes information about a deployment group.</p>"
     }
@@ -1167,11 +1173,11 @@
         },
         "ec2TagFilters":{
           "shape":"EC2TagFilterList",
-          "documentation":"<p>The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags.</p>"
+          "documentation":"<p>The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags. Cannot be used in the same call as ec2TagSet.</p>"
         },
         "onPremisesInstanceTagFilters":{
           "shape":"TagFilterList",
-          "documentation":"<p>The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags.</p>"
+          "documentation":"<p>The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags. Cannot be used in the same call as OnPremisesTagSet.</p>"
         },
         "autoScalingGroups":{
           "shape":"AutoScalingGroupNameList",
@@ -1204,6 +1210,14 @@
         "loadBalancerInfo":{
           "shape":"LoadBalancerInfo",
           "documentation":"<p>Information about the load balancer used in a deployment.</p>"
+        },
+        "ec2TagSet":{
+          "shape":"EC2TagSet",
+          "documentation":"<p>Information about groups of tags applied to EC2 instances. The deployment group will include only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.</p>"
+        },
+        "onPremisesTagSet":{
+          "shape":"OnPremisesTagSet",
+          "documentation":"<p>Information about groups of tags applied to on-premises instances. The deployment group will include only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.</p>"
         }
       },
       "documentation":"<p>Represents the input of a CreateDeploymentGroup operation.</p>"
@@ -1450,11 +1464,11 @@
         },
         "ec2TagFilters":{
           "shape":"EC2TagFilterList",
-          "documentation":"<p>The Amazon EC2 tags on which to filter.</p>"
+          "documentation":"<p>The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags.</p>"
         },
         "onPremisesInstanceTagFilters":{
           "shape":"TagFilterList",
-          "documentation":"<p>The on-premises instance tags on which to filter.</p>"
+          "documentation":"<p>The on-premises instance tags on which to filter. The deployment group includes on-premises instances with any of the specified tags.</p>"
         },
         "autoScalingGroups":{
           "shape":"AutoScalingGroupList",
@@ -1499,6 +1513,14 @@
         "lastAttemptedDeployment":{
           "shape":"LastDeploymentInfo",
           "documentation":"<p>Information about the most recent attempted deployment to the deployment group.</p>"
+        },
+        "ec2TagSet":{
+          "shape":"EC2TagSet",
+          "documentation":"<p>Information about groups of tags applied to an EC2 instance. The deployment group includes only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.</p>"
+        },
+        "onPremisesTagSet":{
+          "shape":"OnPremisesTagSet",
+          "documentation":"<p>Information about groups of tags applied to an on-premises instance. The deployment group includes only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.</p>"
         }
       },
       "documentation":"<p>Information about a deployment group.</p>"
@@ -1839,6 +1861,20 @@
         "VALUE_ONLY",
         "KEY_AND_VALUE"
       ]
+    },
+    "EC2TagSet":{
+      "type":"structure",
+      "members":{
+        "ec2TagSetList":{
+          "shape":"EC2TagSetList",
+          "documentation":"<p>A list containing other lists of EC2 instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.</p>"
+        }
+      },
+      "documentation":"<p>Information about groups of EC2 instance tags.</p>"
+    },
+    "EC2TagSetList":{
+      "type":"list",
+      "member":{"shape":"EC2TagFilterList"}
     },
     "ELBInfo":{
       "type":"structure",
@@ -2428,6 +2464,13 @@
       "documentation":"<p>An invalid deployment style was specified. Valid deployment types include \"IN_PLACE\" and \"BLUE_GREEN\". Valid deployment options include \"WITH_TRAFFIC_CONTROL\" and \"WITHOUT_TRAFFIC_CONTROL\".</p>",
       "exception":true
     },
+    "InvalidEC2TagCombinationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but only one of these data types can be used in a single call.</p>",
+      "exception":true
+    },
     "InvalidEC2TagException":{
       "type":"structure",
       "members":{
@@ -2503,6 +2546,13 @@
       "members":{
       },
       "documentation":"<p>The next token was specified in an invalid format.</p>",
+      "exception":true
+    },
+    "InvalidOnPremisesTagCombinationException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet, but only one of these data types can be used in a single call.</p>",
       "exception":true
     },
     "InvalidOperationException":{
@@ -2980,6 +3030,20 @@
     },
     "NextToken":{"type":"string"},
     "NullableBoolean":{"type":"boolean"},
+    "OnPremisesTagSet":{
+      "type":"structure",
+      "members":{
+        "onPremisesTagSetList":{
+          "shape":"OnPremisesTagSetList",
+          "documentation":"<p>A list containing other lists of on-premises instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.</p>"
+        }
+      },
+      "documentation":"<p>Information about groups of on-premises instance tags.</p>"
+    },
+    "OnPremisesTagSetList":{
+      "type":"list",
+      "member":{"shape":"TagFilterList"}
+    },
     "RegisterApplicationRevisionInput":{
       "type":"structure",
       "required":[
@@ -3284,16 +3348,27 @@
       "documentation":"<p>A tag was not specified.</p>",
       "exception":true
     },
+    "TagSetListLimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The number of tag groups included in the tag set list exceeded the maximum allowed limit of 3.</p>",
+      "exception":true
+    },
     "TargetInstances":{
       "type":"structure",
       "members":{
         "tagFilters":{
           "shape":"EC2TagFilterList",
-          "documentation":"<p>The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment.</p>"
+          "documentation":"<p>The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment. Cannot be used in the same call as ec2TagSet.</p>"
         },
         "autoScalingGroups":{
           "shape":"AutoScalingGroupNameList",
           "documentation":"<p>The names of one or more Auto Scaling groups to identify a replacement environment for a blue/green deployment.</p>"
+        },
+        "ec2TagSet":{
+          "shape":"EC2TagSet",
+          "documentation":"<p>Information about the groups of EC2 instance tags that an instance must be identified by in order for it to be included in the replacement environment for a blue/green deployment. Cannot be used in the same call as tagFilters.</p>"
         }
       },
       "documentation":"<p>Information about the instances to be used in the replacement environment in a blue/green deployment.</p>"
@@ -3446,6 +3521,14 @@
         "loadBalancerInfo":{
           "shape":"LoadBalancerInfo",
           "documentation":"<p>Information about the load balancer used in a deployment.</p>"
+        },
+        "ec2TagSet":{
+          "shape":"EC2TagSet",
+          "documentation":"<p>Information about groups of tags applied to on-premises instances. The deployment group will include only EC2 instances identified by all the tag groups.</p>"
+        },
+        "onPremisesTagSet":{
+          "shape":"OnPremisesTagSet",
+          "documentation":"<p>Information about an on-premises instance tag set. The deployment group will include only on-premises instances identified by all the tag groups.</p>"
         }
       },
       "documentation":"<p>Represents the input of an UpdateDeploymentGroup operation.</p>"
