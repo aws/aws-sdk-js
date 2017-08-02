@@ -1,5 +1,6 @@
 export {Config} from './config';
 export {Credentials} from './credentials';
+export {AssumeRoleCredentials} from './credentials/assume_role_credentials';
 export {CognitoIdentityCredentials} from './credentials/cognito_identity_credentials';
 export {CredentialProviderChain} from './credentials/credential_provider_chain';
 export {EC2MetadataCredentials} from './credentials/ec2_metadata_credentials';

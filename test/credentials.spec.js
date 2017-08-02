@@ -526,6 +526,95 @@
         });
       });
     });
+    describe('AWS.AssumeRoleCredentials', function() {
+      var creds, mockSTS;
+      creds = null;
+      beforeEach(function() {
+        return creds = new AWS.AssumeRoleCredentials({
+          roleArn: 'arn:aws:iam::123456789012:role/some-role',
+          roleSessionName: 'my-session'
+        });
+      });
+      mockSTS = function(expireTime) {
+        return helpers.spyOn(creds.STS, 'assumeRole').andCallFake(function(options, cb) {
+          return cb(null, {
+            ResponseMetadata: { RequestId: 'eb44d75a-6d91-4971-9a00-c0005d625e48' },
+            Credentials: {
+              AccessKeyId: 'KEY',
+              SecretAccessKey: 'SECRET',
+              SessionToken: 'TOKEN',
+              Expiration: expireTime.toISOString()
+            },
+            AssumedRoleUser: {
+              AssumedRoleId: 'ROLE_ID',
+              Arn: options.roleArn
+            }
+          })
+        });
+      };
+      describe('constructor', function() {
+        it('allows passing of AWS.STS options', function() {
+          var opts;
+          opts = {
+            maxRetries: 5
+          }
+          creds = new AWS.AssumeRoleCredentials(opts);
+          return expect(creds.STS.config.maxRetries).to.equal(5);
+        });
+        it('allows passing of AWS.STS instance', function() {
+          var opts, STS;
+          STS = new AWS.STS({ maxRetries: 7 });
+          opts = {
+            STS: STS
+          }
+          creds = new AWS.AssumeRoleCredentials(opts);
+          return expect(creds.STS.config.maxRetries).to.equal(7);
+        });
+        it('does not modify options object', function() {
+          var opts;
+          opts = {};
+          creds = new AWS.AssumeRoleCredentials(opts);
+          return expect(opts).to.eql({});
+        });
+        return it('allows setting role arn and role session token', function() {
+          expect(creds.roleArn).to.equal('arn:aws:iam::123456789012:role/some-role');
+          return expect(creds.roleSessionName).to.equal('my-session');
+        });
+      });
+      describe('needsRefresh', function() {
+        return it('can be expired based on expire time from STS', function() {
+          mockSTS(new Date(0));
+          creds.refresh(function() {});
+          return expect(creds.needsRefresh()).to.equal(true);
+        });
+      });
+      return describe('refresh', function() {
+        it('loads credentials from STS', function() {
+          mockSTS(new Date(AWS.util.date.getDate().getTime() + 100000));
+          creds.refresh(function() {});
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          return expect(creds.needsRefresh()).to.equal(false);
+        });
+        return it('does try to load creds second time if STS failed', function() {
+          var spy;
+          spy = helpers.spyOn(creds.STS, 'assumeRole').andCallFake(function(options, cb) {
+            return cb(new Error('INVALID SERVICE'));
+          });
+          creds.refresh(function(err) {
+            return expect(err.message).to.equal('INVALID SERVICE');
+          });
+          return creds.refresh(function() {
+            return creds.refresh(function() {
+              return creds.refresh(function() {
+                return expect(spy.calls.length).to.equal(4);
+              });
+            });
+          });
+        });
+      });
+    });
     describe('AWS.EC2MetadataCredentials', function() {
       var creds, mockMetadataService;
       creds = null;
