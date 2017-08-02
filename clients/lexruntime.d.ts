@@ -4,6 +4,7 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+import {Readable} from 'stream';
 interface Blob {}
 declare class LexRuntime extends Service {
   /**
@@ -30,7 +31,7 @@ declare class LexRuntime extends Service {
 }
 declare namespace LexRuntime {
   export type Accept = string;
-  export type BlobStream = Buffer|Uint8Array|Blob|string;
+  export type BlobStream = Buffer|Uint8Array|Blob|string|Readable;
   export type BotAlias = string;
   export type BotName = string;
   export interface Button {
