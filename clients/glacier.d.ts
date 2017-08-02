@@ -4,6 +4,7 @@ import {AWSError} from '../lib/error';
 import {GlacierCustomizations} from '../lib/services/glacier';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+import {Readable} from 'stream';
 interface Blob {}
 declare class Glacier extends GlacierCustomizations {
   /**
@@ -1113,7 +1114,7 @@ declare namespace Glacier {
   }
   export type Size = number;
   export type StatusCode = "InProgress"|"Succeeded"|"Failed"|string;
-  export type Stream = Buffer|Uint8Array|Blob|string;
+  export type Stream = Buffer|Uint8Array|Blob|string|Readable;
   export type TagKey = string;
   export type TagKeyList = string[];
   export type TagMap = {[key: string]: TagValue};

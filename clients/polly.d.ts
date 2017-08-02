@@ -5,6 +5,7 @@ import {PollyCustomizations} from '../lib/services/polly';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {Presigner as presigner} from '../lib/polly/presigner';
+import {Readable} from 'stream';
 interface Blob {}
 declare class Polly extends PollyCustomizations {
   /**
@@ -66,7 +67,7 @@ declare namespace Polly {
 }
 declare namespace Polly {
   export type Alphabet = string;
-  export type AudioStream = Buffer|Uint8Array|Blob|string;
+  export type AudioStream = Buffer|Uint8Array|Blob|string|Readable;
   export type ContentType = string;
   export interface DeleteLexiconInput {
     /**
