@@ -16,6 +16,7 @@ function TSGenerator(options) {
     this.metadata = null;
     this.typings = {};
     this.fillApiModelFileNames(this._apiRootDir);
+    this.extraDependency = {};
 }
 
 /**
@@ -244,6 +245,24 @@ TSGenerator.prototype.generateSafeShapeName = function generateSafeShapeName(nam
     return name;
 };
 
+TSGenerator.prototype.importExtraDependency = function importExtraDependency() {
+    var code = '';
+    for (var importStatement in this.extraDependency) {
+        if (this.extraDependency[importStatement]) {
+            code += importStatement;
+        }
+    }
+    return code;
+}
+
+TSGenerator.prototype.extraDependencyFromShape = function extraDependencyFromShape(modelShape) {
+    var extraDependencyList = [];
+    if(JSON.stringify(modelShape).indexOf("\"streaming\":true") >= 0) {
+        extraDependencyList.push('import {Readable} from \'stream\';\n');
+    }
+    return extraDependencyList;
+}
+
 /**
  * Generates a type or interface based on the shape.
  */
@@ -265,6 +284,7 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
     tabCount = tabCount || 0;
     var tabs = this.tabs;
     var type = shape.type;
+    var importStream = 'import {Readable} from \'stream\';\n';
     if (type === 'structure') {
         code += tabs(tabCount) + 'export interface ' + shapeKey + ' {\n';
         var members = shape.members;
@@ -300,8 +320,10 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = Date;\n';
     } else if (type === 'boolean') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = boolean;\n';
-    } else if (type === 'blob' || type === 'binary') {
-        code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string;\n';
+    } else if (type === 'blob' || type === 'binary') {     
+        code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string'+
+        (this.extraDependency[importStream] ? '|Readable' : '')
+        +';\n';
     }
     return code;
 };
@@ -520,6 +542,14 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     // iterate over each shape
     var shapeKeys = Object.keys(modelShapes);
     code += 'declare namespace ' + className + ' {\n';
+    // preprocess shapes to fetch out needed dependency. e.g. "streaming": true
+    shapeKeys.forEach(function (shapeKey) {
+        var modelShape = modelShapes[shapeKey];
+        var extraDependencyStatements = self.extraDependencyFromShape(modelShape);
+        for (var extraDependencyStatement of extraDependencyStatements) {
+            self.extraDependency[extraDependencyStatement] = true;
+        }
+    });
     shapeKeys.forEach(function (shapeKey) {
         var modelShape = modelShapes[shapeKey];
         // ignore exceptions
@@ -528,6 +558,13 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
         }
         code += self.generateTypingsFromShape(shapeKey, modelShape, 1, customClassNames);
     });
+    //add extra dependencies like 'streaming'
+    if (Object.keys(self.extraDependency).length !== 0) {
+        var insertPos = code.indexOf('interface Blob {}');
+        code = code.slice(0, insertPos) + this.importExtraDependency() + code.slice(insertPos);
+    }
+
+    this.extraDependency = {};
 
     code += this.generateDocString('A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify \'latest\' to use the latest possible version.', 1);
     code += this.tabs(1) + 'export type apiVersion = "' + this.getServiceApiVersions(serviceIdentifier).join('"|"') + '"|"latest"|string;\n';
