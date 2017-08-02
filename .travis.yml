@@ -24,6 +24,8 @@ matrix:
     env: TEST_SCRIPT=browsertest
   - node_js: "node"
     env: TEST_SCRIPT=react-native-test
+  - node_js: "node"
+    env: TEST_SCRIPT=tstest
 
 script:
   - npm run $TEST_SCRIPT
