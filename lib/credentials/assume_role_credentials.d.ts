@@ -1,4 +1,4 @@
-import * as AWS from '../clients/all';
+import * as AWS from '../../clients/all';
 import {Credentials} from '../credentials';
 export class AssumeRoleCredentials extends Credentials {
 		/**
