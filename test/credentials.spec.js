@@ -559,7 +559,16 @@
             maxRetries: 5
           }
           creds = new AWS.AssumeRoleCredentials(opts);
-          return expect(creds.STS.config.maxRetries).to.equal(opts.maxRetries);
+          return expect(creds.STS.config.maxRetries).to.equal(5);
+        });
+        it('allows passing of AWS.STS instance', function() {
+          var opts, STS;
+          STS = new AWS.STS({ maxRetries: 7 });
+          opts = {
+            STS: STS
+          }
+          creds = new AWS.AssumeRoleCredentials(opts);
+          return expect(creds.STS.config.maxRetries).to.equal(7);
         });
         it('does not modify options object', function() {
           var opts;
