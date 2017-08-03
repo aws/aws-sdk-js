@@ -1048,7 +1048,7 @@ declare namespace S3 {
   export type CopySourceIfUnmodifiedSince = Date;
   export type CopySourceRange = string;
   export type CopySourceSSECustomerAlgorithm = string;
-  export type CopySourceSSECustomerKey = Buffer|Uint8Array|Blob|string|Readable;
+  export type CopySourceSSECustomerKey = Buffer|Uint8Array|Blob|string;
   export type CopySourceSSECustomerKeyMD5 = string;
   export type CopySourceVersionId = string;
   export interface CreateBucketConfiguration {
@@ -3215,7 +3215,7 @@ declare namespace S3 {
     FilterRules?: FilterRuleList;
   }
   export type SSECustomerAlgorithm = string;
-  export type SSECustomerKey = Buffer|Uint8Array|Blob|string|Readable;
+  export type SSECustomerKey = Buffer|Uint8Array|Blob|string;
   export type SSECustomerKeyMD5 = string;
   export type SSEKMSKeyId = string;
   export type ServerSideEncryption = "AES256"|"aws:kms"|string;

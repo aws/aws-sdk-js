@@ -329,7 +329,7 @@ declare namespace Lambda {
   export type AliasList = AliasConfiguration[];
   export type Arn = string;
   export type BatchSize = number;
-  export type _Blob = Buffer|Uint8Array|Blob|string|Readable;
+  export type _Blob = Buffer|Uint8Array|Blob|string;
   export type BlobStream = Buffer|Uint8Array|Blob|string|Readable;
   export type Boolean = boolean;
   export interface CreateAliasRequest {
