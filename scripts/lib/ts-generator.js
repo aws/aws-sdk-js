@@ -297,7 +297,6 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
     tabCount = tabCount || 0;
     var tabs = this.tabs;
     var type = shape.type;
-    var importStream = 'import {Readable} from \'stream\';\n';
     if (type === 'structure') {
         code += tabs(tabCount) + 'export interface ' + shapeKey + ' {\n';
         var members = shape.members;
@@ -335,8 +334,8 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = boolean;\n';
     } else if (type === 'blob' || type === 'binary') {     
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string'
-        + self.addReadableType(shapeKey)
-        +';\n';
+            + self.addReadableType(shapeKey)
+            +';\n';
     }
     return code;
 };
