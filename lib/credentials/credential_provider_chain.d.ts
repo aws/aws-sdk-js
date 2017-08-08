@@ -12,7 +12,7 @@ export class CredentialProviderChain extends Credentials {
     /**
      * Return a Promise on resolve() function
      */
-    resolvePromise(): Promise<AWS.Credentials>;
+    resolvePromise(): Promise<Credentials>;
     /**
      * Returns a list of credentials objects or functions that return credentials objects. If the provider is a function, the function will be executed lazily when the provider needs to be checked for valid credentials. By default, this object will be set to the defaultProviders.
      */
