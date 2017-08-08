@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.94.0
+// AWS SDK for JavaScript v2.95.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -42418,12 +42418,12 @@ module.exports={
           "ApplicationName": {},
           "Description": {},
           "ResourceLifecycleConfig": {
-            "shape": "S15"
+            "shape": "S17"
           }
         }
       },
       "output": {
-        "shape": "S1b",
+        "shape": "S1d",
         "resultWrapper": "CreateApplicationResult"
       }
     },
@@ -42439,10 +42439,10 @@ module.exports={
           "VersionLabel": {},
           "Description": {},
           "SourceBuildInformation": {
-            "shape": "S1g"
+            "shape": "S1i"
           },
           "SourceBundle": {
-            "shape": "S1k"
+            "shape": "S1m"
           },
           "BuildConfiguration": {
             "type": "structure",
@@ -42469,7 +42469,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1s",
+        "shape": "S1u",
         "resultWrapper": "CreateApplicationVersionResult"
       }
     },
@@ -42495,12 +42495,12 @@ module.exports={
           "EnvironmentId": {},
           "Description": {},
           "OptionSettings": {
-            "shape": "S1x"
+            "shape": "S1z"
           }
         }
       },
       "output": {
-        "shape": "S23",
+        "shape": "S25",
         "resultWrapper": "CreateConfigurationTemplateResult"
       }
     },
@@ -42534,10 +42534,10 @@ module.exports={
           "SolutionStackName": {},
           "PlatformArn": {},
           "OptionSettings": {
-            "shape": "S1x"
+            "shape": "S1z"
           },
           "OptionsToRemove": {
-            "shape": "S2a"
+            "shape": "S2c"
           }
         }
       },
@@ -42558,11 +42558,11 @@ module.exports={
           "PlatformName": {},
           "PlatformVersion": {},
           "PlatformDefinitionBundle": {
-            "shape": "S1k"
+            "shape": "S1m"
           },
           "EnvironmentName": {},
           "OptionSettings": {
-            "shape": "S1x"
+            "shape": "S1z"
           }
         }
       },
@@ -42571,7 +42571,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlatformSummary": {
-            "shape": "S2g"
+            "shape": "S2i"
           },
           "Builder": {
             "type": "structure",
@@ -42659,7 +42659,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlatformSummary": {
-            "shape": "S2g"
+            "shape": "S2i"
           }
         }
       }
@@ -42670,7 +42670,7 @@ module.exports={
         "members": {
           "ApplicationName": {},
           "VersionLabels": {
-            "shape": "S1d"
+            "shape": "S1f"
           },
           "MaxRecords": {
             "type": "integer"
@@ -42685,7 +42685,7 @@ module.exports={
           "ApplicationVersions": {
             "type": "list",
             "member": {
-              "shape": "S1t"
+              "shape": "S1v"
             }
           },
           "NextToken": {}
@@ -42709,7 +42709,7 @@ module.exports={
           "Applications": {
             "type": "list",
             "member": {
-              "shape": "S1c"
+              "shape": "S1e"
             }
           }
         }
@@ -42725,7 +42725,7 @@ module.exports={
           "SolutionStackName": {},
           "PlatformArn": {},
           "Options": {
-            "shape": "S2a"
+            "shape": "S2c"
           }
         }
       },
@@ -42793,7 +42793,7 @@ module.exports={
           "ConfigurationSettings": {
             "type": "list",
             "member": {
-              "shape": "S23"
+              "shape": "S25"
             }
           }
         }
@@ -42820,10 +42820,10 @@ module.exports={
           "Status": {},
           "Color": {},
           "Causes": {
-            "shape": "S3x"
+            "shape": "S3y"
           },
           "ApplicationMetrics": {
-            "shape": "S3z"
+            "shape": "S40"
           },
           "InstancesHealth": {
             "type": "structure",
@@ -43026,7 +43026,11 @@ module.exports={
           },
           "IncludedDeletedBackTo": {
             "type": "timestamp"
-          }
+          },
+          "MaxRecords": {
+            "type": "integer"
+          },
+          "NextToken": {}
         }
       },
       "output": {
@@ -43111,13 +43115,13 @@ module.exports={
                 "HealthStatus": {},
                 "Color": {},
                 "Causes": {
-                  "shape": "S3x"
+                  "shape": "S3y"
                 },
                 "LaunchedAt": {
                   "type": "timestamp"
                 },
                 "ApplicationMetrics": {
-                  "shape": "S3z"
+                  "shape": "S40"
                 },
                 "System": {
                   "type": "structure",
@@ -43243,10 +43247,10 @@ module.exports={
                 }
               },
               "SupportedTierList": {
-                "shape": "S2m"
+                "shape": "S2o"
               },
               "SupportedAddonList": {
-                "shape": "S2o"
+                "shape": "S2q"
               }
             }
           }
@@ -43309,7 +43313,7 @@ module.exports={
           "PlatformSummaryList": {
             "type": "list",
             "member": {
-              "shape": "S2g"
+              "shape": "S2i"
             }
           },
           "NextToken": {}
@@ -43422,7 +43426,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1b",
+        "shape": "S1d",
         "resultWrapper": "UpdateApplicationResult"
       }
     },
@@ -43436,7 +43440,7 @@ module.exports={
         "members": {
           "ApplicationName": {},
           "ResourceLifecycleConfig": {
-            "shape": "S15"
+            "shape": "S17"
           }
         }
       },
@@ -43446,7 +43450,7 @@ module.exports={
         "members": {
           "ApplicationName": {},
           "ResourceLifecycleConfig": {
-            "shape": "S15"
+            "shape": "S17"
           }
         }
       }
@@ -43465,7 +43469,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1s",
+        "shape": "S1u",
         "resultWrapper": "UpdateApplicationVersionResult"
       }
     },
@@ -43481,15 +43485,15 @@ module.exports={
           "TemplateName": {},
           "Description": {},
           "OptionSettings": {
-            "shape": "S1x"
+            "shape": "S1z"
           },
           "OptionsToRemove": {
-            "shape": "S2a"
+            "shape": "S2c"
           }
         }
       },
       "output": {
-        "shape": "S23",
+        "shape": "S25",
         "resultWrapper": "UpdateConfigurationTemplateResult"
       }
     },
@@ -43510,10 +43514,10 @@ module.exports={
           "SolutionStackName": {},
           "PlatformArn": {},
           "OptionSettings": {
-            "shape": "S1x"
+            "shape": "S1z"
           },
           "OptionsToRemove": {
-            "shape": "S2a"
+            "shape": "S2c"
           }
         }
       },
@@ -43534,7 +43538,7 @@ module.exports={
           "TemplateName": {},
           "EnvironmentName": {},
           "OptionSettings": {
-            "shape": "S1x"
+            "shape": "S1z"
           }
         }
       },
@@ -43567,7 +43571,8 @@ module.exports={
           "member": {
             "shape": "Sk"
           }
-        }
+        },
+        "NextToken": {}
       }
     },
     "Sk": {
@@ -43631,7 +43636,8 @@ module.exports={
               "EnvironmentName": {}
             }
           }
-        }
+        },
+        "EnvironmentArn": {}
       }
     },
     "S11": {
@@ -43642,7 +43648,7 @@ module.exports={
         "Version": {}
       }
     },
-    "S15": {
+    "S17": {
       "type": "structure",
       "members": {
         "ServiceRole": {},
@@ -43687,15 +43693,15 @@ module.exports={
         }
       }
     },
-    "S1b": {
+    "S1d": {
       "type": "structure",
       "members": {
         "Application": {
-          "shape": "S1c"
+          "shape": "S1e"
         }
       }
     },
-    "S1c": {
+    "S1e": {
       "type": "structure",
       "members": {
         "ApplicationName": {},
@@ -43707,22 +43713,22 @@ module.exports={
           "type": "timestamp"
         },
         "Versions": {
-          "shape": "S1d"
+          "shape": "S1f"
         },
         "ConfigurationTemplates": {
           "type": "list",
           "member": {}
         },
         "ResourceLifecycleConfig": {
-          "shape": "S15"
+          "shape": "S17"
         }
       }
     },
-    "S1d": {
+    "S1f": {
       "type": "list",
       "member": {}
     },
-    "S1g": {
+    "S1i": {
       "type": "structure",
       "required": [
         "SourceType",
@@ -43735,33 +43741,33 @@ module.exports={
         "SourceLocation": {}
       }
     },
-    "S1k": {
+    "S1m": {
       "type": "structure",
       "members": {
         "S3Bucket": {},
         "S3Key": {}
       }
     },
-    "S1s": {
+    "S1u": {
       "type": "structure",
       "members": {
         "ApplicationVersion": {
-          "shape": "S1t"
+          "shape": "S1v"
         }
       }
     },
-    "S1t": {
+    "S1v": {
       "type": "structure",
       "members": {
         "ApplicationName": {},
         "Description": {},
         "VersionLabel": {},
         "SourceBuildInformation": {
-          "shape": "S1g"
+          "shape": "S1i"
         },
         "BuildArn": {},
         "SourceBundle": {
-          "shape": "S1k"
+          "shape": "S1m"
         },
         "DateCreated": {
           "type": "timestamp"
@@ -43772,7 +43778,7 @@ module.exports={
         "Status": {}
       }
     },
-    "S1x": {
+    "S1z": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -43784,7 +43790,7 @@ module.exports={
         }
       }
     },
-    "S23": {
+    "S25": {
       "type": "structure",
       "members": {
         "SolutionStackName": {},
@@ -43801,11 +43807,11 @@ module.exports={
           "type": "timestamp"
         },
         "OptionSettings": {
-          "shape": "S1x"
+          "shape": "S1z"
         }
       }
     },
-    "S2a": {
+    "S2c": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -43816,7 +43822,7 @@ module.exports={
         }
       }
     },
-    "S2g": {
+    "S2i": {
       "type": "structure",
       "members": {
         "PlatformArn": {},
@@ -43826,26 +43832,26 @@ module.exports={
         "OperatingSystemName": {},
         "OperatingSystemVersion": {},
         "SupportedTierList": {
-          "shape": "S2m"
+          "shape": "S2o"
         },
         "SupportedAddonList": {
-          "shape": "S2o"
+          "shape": "S2q"
         }
       }
-    },
-    "S2m": {
-      "type": "list",
-      "member": {}
     },
     "S2o": {
       "type": "list",
       "member": {}
     },
-    "S3x": {
+    "S2q": {
       "type": "list",
       "member": {}
     },
-    "S3z": {
+    "S3y": {
+      "type": "list",
+      "member": {}
+    },
+    "S40": {
       "type": "structure",
       "members": {
         "Duration": {
@@ -105202,7 +105208,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.94.0',
+  VERSION: '2.95.0',
 
 
   Signers: {},

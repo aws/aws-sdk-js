@@ -840,7 +840,7 @@
         },
         "NextToken":{
           "shape":"Token",
-          "documentation":"<p>For a paginated request, the token that you can pass in a subsequent request to get the next page.</p>"
+          "documentation":"<p>In a paginated request, the token that you can pass in a subsequent request to get the next response page.</p>"
         }
       },
       "documentation":"<p>Result message wrapping a list of application version descriptions.</p>"
@@ -1196,7 +1196,7 @@
         },
         "PlatformArn":{
           "shape":"PlatformArn",
-          "documentation":"<p>The ARN of the custom platform.</p>"
+          "documentation":"<p>The ARN of the platform.</p>"
         },
         "Options":{
           "shape":"ConfigurationOptionDescriptionsList",
@@ -1214,7 +1214,7 @@
         },
         "PlatformArn":{
           "shape":"PlatformArn",
-          "documentation":"<p>The ARN of the custom platform.</p>"
+          "documentation":"<p>The ARN of the platform.</p>"
         },
         "ApplicationName":{
           "shape":"ApplicationName",
@@ -1397,7 +1397,7 @@
         },
         "EnvironmentName":{
           "shape":"EnvironmentName",
-          "documentation":"<p>A unique name for the deployment environment. Used in the application URL.</p> <p>Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.</p>"
+          "documentation":"<p>A unique name for the deployment environment. Used in the application URL.</p> <p>Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique within a region in your account. If the specified name already exists in the region, AWS Elastic Beanstalk returns an <code>InvalidParameterValue</code> error. </p> <p>Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.</p>"
         },
         "GroupName":{
           "shape":"GroupName",
@@ -1433,7 +1433,7 @@
         },
         "PlatformArn":{
           "shape":"PlatformArn",
-          "documentation":"<p>The ARN of the custom platform.</p>"
+          "documentation":"<p>The ARN of the platform.</p>"
         },
         "OptionSettings":{
           "shape":"ConfigurationOptionSettingsList",
@@ -1638,7 +1638,7 @@
         },
         "DeploymentTime":{
           "shape":"DeploymentTimestamp",
-          "documentation":"<p>For in-progress deployments, the time that the deloyment started.</p> <p>For completed deployments, the time that the deployment ended.</p>"
+          "documentation":"<p>For in-progress deployments, the time that the deployment started.</p> <p>For completed deployments, the time that the deployment ended.</p>"
         }
       },
       "documentation":"<p>Information about an application version deployment.</p>"
@@ -1657,11 +1657,11 @@
         },
         "MaxRecords":{
           "shape":"MaxRecords",
-          "documentation":"<p>Specify a maximum number of application versions to paginate in the request.</p>"
+          "documentation":"<p>For a paginated request. Specify a maximum number of application versions to include in each response.</p> <p>If no <code>MaxRecords</code> is specified, all available application versions are retrieved in a single response.</p>"
         },
         "NextToken":{
           "shape":"Token",
-          "documentation":"<p>Specify a next token to retrieve the next page in a paginated request.</p>"
+          "documentation":"<p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>"
         }
       },
       "documentation":"<p>Request to describe application versions.</p>"
@@ -1885,6 +1885,14 @@
         "IncludedDeletedBackTo":{
           "shape":"IncludeDeletedBackTo",
           "documentation":"<p> If specified when <code>IncludeDeleted</code> is set to <code>true</code>, then environments deleted after this date are displayed. </p>"
+        },
+        "MaxRecords":{
+          "shape":"MaxRecords",
+          "documentation":"<p>For a paginated request. Specify a maximum number of environments to include in each response.</p> <p>If no <code>MaxRecords</code> is specified, all available environments are retrieved in a single response.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.</p> <p>If no <code>NextToken</code> is specified, the first page is retrieved.</p>"
         }
       },
       "documentation":"<p>Request to describe one or more environments.</p>"
@@ -2018,6 +2026,7 @@
       "exception":true
     },
     "EndpointURL":{"type":"string"},
+    "EnvironmentArn":{"type":"string"},
     "EnvironmentDescription":{
       "type":"structure",
       "members":{
@@ -2043,7 +2052,7 @@
         },
         "PlatformArn":{
           "shape":"PlatformArn",
-          "documentation":"<p>The ARN of the custom platform.</p>"
+          "documentation":"<p>The ARN of the platform.</p>"
         },
         "TemplateName":{
           "shape":"ConfigurationTemplateName",
@@ -2096,6 +2105,10 @@
         "EnvironmentLinks":{
           "shape":"EnvironmentLinks",
           "documentation":"<p>A list of links to other environments in the same group.</p>"
+        },
+        "EnvironmentArn":{
+          "shape":"EnvironmentArn",
+          "documentation":"<p>The environment's Amazon Resource Name (ARN), which can be used in other API reuqests that require an ARN.</p>"
         }
       },
       "documentation":"<p>Describes the properties of an environment.</p>"
@@ -2110,6 +2123,10 @@
         "Environments":{
           "shape":"EnvironmentDescriptionsList",
           "documentation":"<p> Returns an <a>EnvironmentDescription</a> list. </p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>In a paginated request, the token that you can pass in a subsequent request to get the next response page.</p>"
         }
       },
       "documentation":"<p>Result message containing a list of environment descriptions.</p>"
@@ -2330,7 +2347,7 @@
         },
         "PlatformArn":{
           "shape":"PlatformArn",
-          "documentation":"<p>The ARN of the custom platform.</p>"
+          "documentation":"<p>The ARN of the platform.</p>"
         },
         "RequestId":{
           "shape":"RequestId",

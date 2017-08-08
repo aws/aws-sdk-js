@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "typings",
-  "description": "add readablestream type to clients that support streaming"
-}

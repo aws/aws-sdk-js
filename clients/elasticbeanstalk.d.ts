@@ -482,7 +482,7 @@ declare namespace ElasticBeanstalk {
      */
     ApplicationVersions?: ApplicationVersionDescriptionList;
     /**
-     * For a paginated request, the token that you can pass in a subsequent request to get the next page.
+     * In a paginated request, the token that you can pass in a subsequent request to get the next response page.
      */
     NextToken?: Token;
   }
@@ -714,7 +714,7 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the custom platform.
+     * The ARN of the platform.
      */
     PlatformArn?: PlatformArn;
     /**
@@ -728,7 +728,7 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the custom platform.
+     * The ARN of the platform.
      */
     PlatformArn?: PlatformArn;
     /**
@@ -867,7 +867,7 @@ declare namespace ElasticBeanstalk {
      */
     ApplicationName: ApplicationName;
     /**
-     * A unique name for the deployment environment. Used in the application URL. Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique in your account. If the specified name already exists, AWS Elastic Beanstalk returns an InvalidParameterValue error.  Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.
+     * A unique name for the deployment environment. Used in the application URL. Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique within a region in your account. If the specified name already exists in the region, AWS Elastic Beanstalk returns an InvalidParameterValue error.  Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.
      */
     EnvironmentName?: EnvironmentName;
     /**
@@ -903,7 +903,7 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the custom platform.
+     * The ARN of the platform.
      */
     PlatformArn?: PlatformArn;
     /**
@@ -1038,7 +1038,7 @@ declare namespace ElasticBeanstalk {
      */
     Status?: String;
     /**
-     * For in-progress deployments, the time that the deloyment started. For completed deployments, the time that the deployment ended.
+     * For in-progress deployments, the time that the deployment started. For completed deployments, the time that the deployment ended.
      */
     DeploymentTime?: DeploymentTimestamp;
   }
@@ -1053,11 +1053,11 @@ declare namespace ElasticBeanstalk {
      */
     VersionLabels?: VersionLabelsList;
     /**
-     * Specify a maximum number of application versions to paginate in the request.
+     * For a paginated request. Specify a maximum number of application versions to include in each response. If no MaxRecords is specified, all available application versions are retrieved in a single response.
      */
     MaxRecords?: MaxRecords;
     /**
-     * Specify a next token to retrieve the next page in a paginated request.
+     * For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request. If no NextToken is specified, the first page is retrieved.
      */
     NextToken?: Token;
   }
@@ -1238,6 +1238,14 @@ declare namespace ElasticBeanstalk {
      *  If specified when IncludeDeleted is set to true, then environments deleted after this date are displayed. 
      */
     IncludedDeletedBackTo?: IncludeDeletedBackTo;
+    /**
+     * For a paginated request. Specify a maximum number of environments to include in each response. If no MaxRecords is specified, all available environments are retrieved in a single response.
+     */
+    MaxRecords?: MaxRecords;
+    /**
+     * For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request. If no NextToken is specified, the first page is retrieved.
+     */
+    NextToken?: Token;
   }
   export interface DescribeEventsMessage {
     /**
@@ -1336,6 +1344,7 @@ declare namespace ElasticBeanstalk {
   export type Description = string;
   export type Ec2InstanceId = string;
   export type EndpointURL = string;
+  export type EnvironmentArn = string;
   export interface EnvironmentDescription {
     /**
      * The name of this environment.
@@ -1358,7 +1367,7 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the custom platform.
+     * The ARN of the platform.
      */
     PlatformArn?: PlatformArn;
     /**
@@ -1413,6 +1422,10 @@ declare namespace ElasticBeanstalk {
      * A list of links to other environments in the same group.
      */
     EnvironmentLinks?: EnvironmentLinks;
+    /**
+     * The environment's Amazon Resource Name (ARN), which can be used in other API reuqests that require an ARN.
+     */
+    EnvironmentArn?: EnvironmentArn;
   }
   export type EnvironmentDescriptionsList = EnvironmentDescription[];
   export interface EnvironmentDescriptionsMessage {
@@ -1420,6 +1433,10 @@ declare namespace ElasticBeanstalk {
      *  Returns an EnvironmentDescription list. 
      */
     Environments?: EnvironmentDescriptionsList;
+    /**
+     * In a paginated request, the token that you can pass in a subsequent request to get the next response page.
+     */
+    NextToken?: Token;
   }
   export type EnvironmentHealth = "Green"|"Yellow"|"Red"|"Grey"|string;
   export type EnvironmentHealthAttribute = "Status"|"Color"|"Causes"|"ApplicationMetrics"|"InstancesHealth"|"All"|"HealthStatus"|"RefreshedAt"|string;
@@ -1544,7 +1561,7 @@ declare namespace ElasticBeanstalk {
      */
     EnvironmentName?: EnvironmentName;
     /**
-     * The ARN of the custom platform.
+     * The ARN of the platform.
      */
     PlatformArn?: PlatformArn;
     /**

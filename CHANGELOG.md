@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.94.0-->
+<!--LATEST=2.95.0-->
 <!--ENTRYINSERT-->
+
+## 2.95.0
+* bugfix: credentials: add typescript definition for resolvePromise()
+* bugfix: typings: add readablestream type to clients that support streaming
+* feature: ElasticBeanstalk: Add support for paginating the result of DescribeEnvironments     Include the ARN of described environments in DescribeEnvironments output
 
 ## 2.94.0
 * feature: CodeDeploy: AWS CodeDeploy now supports the use of multiple tag groups in a single deployment group (an intersection of tags) to identify the instances for a deployment. When you create or update a deployment group, use the new ec2TagSet and onPremisesTagSet structures to specify up to three groups of tags. Only instances that are identified by at least one tag in each of the tag groups are included in the deployment group.
