@@ -16,6 +16,7 @@ function TSGenerator(options) {
     this.metadata = null;
     this.typings = {};
     this.fillApiModelFileNames(this._apiRootDir);
+    this.streamTypes = {};
 }
 
 /**
@@ -244,6 +245,37 @@ TSGenerator.prototype.generateSafeShapeName = function generateSafeShapeName(nam
     return name;
 };
 
+TSGenerator.prototype.extractTypesDependOnStream = function extractTypesDependOnStream(shapeKey, modelShape) {
+    var streamTypeList = [];
+    if (typeof modelShape !== "object" || Object.keys(modelShape).length === 0) {
+        return [];
+    }
+    if (modelShape.streaming) {
+        streamTypeList.push(shapeKey);
+        return streamTypeList;
+    }
+    for (var subModelKey in modelShape) {
+        var subModel = modelShape[subModelKey];
+        var subStreamTypeList = this.extractTypesDependOnStream(subModelKey, subModel);
+        if (Object.keys(subStreamTypeList).length !== 0) {
+            for (var streamType of subStreamTypeList) {
+                streamTypeList.push(streamType);
+            }
+        }
+    }
+    return streamTypeList;
+}
+
+TSGenerator.prototype.addReadableType = function addReadableType(shapeKey) {
+    var code = '';
+    if (this.streamTypes[shapeKey]) {
+        code += '|Readable';
+    } else if (shapeKey[0] === '_' && this.streamTypes[shapeKey.slice(1)]) {
+        code += '|Readable';
+    }
+    return code;
+}
+
 /**
  * Generates a type or interface based on the shape.
  */
@@ -300,8 +332,10 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = Date;\n';
     } else if (type === 'boolean') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = boolean;\n';
-    } else if (type === 'blob' || type === 'binary') {
-        code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string;\n';
+    } else if (type === 'blob' || type === 'binary') {     
+        code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string'
+            + self.addReadableType(shapeKey)
+            +';\n';
     }
     return code;
 };
@@ -520,6 +554,14 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     // iterate over each shape
     var shapeKeys = Object.keys(modelShapes);
     code += 'declare namespace ' + className + ' {\n';
+    // preprocess shapes to fetch out needed dependency. e.g. "streaming": true
+    shapeKeys.forEach(function (shapeKey) {
+        var modelShape = modelShapes[shapeKey];
+        var streamTypeList = self.extractTypesDependOnStream(shapeKey, modelShape);
+        for (var streamType of streamTypeList) {
+            self.streamTypes[streamType] = true;
+        }
+    });
     shapeKeys.forEach(function (shapeKey) {
         var modelShape = modelShapes[shapeKey];
         // ignore exceptions
@@ -528,6 +570,13 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
         }
         code += self.generateTypingsFromShape(shapeKey, modelShape, 1, customClassNames);
     });
+    //add extra dependencies like 'streaming'
+    if (Object.keys(self.streamTypes).length !== 0) {
+        var insertPos = code.indexOf('interface Blob {}');
+        code = code.slice(0, insertPos) + 'import {Readable} from \'stream\';\n' + code.slice(insertPos);
+    }
+
+    this.streamTypes = {};
 
     code += this.generateDocString('A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify \'latest\' to use the latest possible version.', 1);
     code += this.tabs(1) + 'export type apiVersion = "' + this.getServiceApiVersions(serviceIdentifier).join('"|"') + '"|"latest"|string;\n';

@@ -4,6 +4,7 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+import {Readable} from 'stream';
 interface Blob {}
 declare class Lambda extends Service {
   /**
@@ -329,7 +330,7 @@ declare namespace Lambda {
   export type Arn = string;
   export type BatchSize = number;
   export type _Blob = Buffer|Uint8Array|Blob|string;
-  export type BlobStream = Buffer|Uint8Array|Blob|string;
+  export type BlobStream = Buffer|Uint8Array|Blob|string|Readable;
   export type Boolean = boolean;
   export interface CreateAliasRequest {
     /**

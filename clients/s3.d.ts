@@ -7,6 +7,7 @@ import {ConfigBase as Config} from '../lib/config';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
 import {ManagedUpload as managed_upload} from '../lib/s3/managed_upload';
 import {PresignedPost as presigned_post} from '../lib/s3/presigned_post';
+import {Readable} from 'stream';
 interface Blob {}
 declare class S3 extends S3Customizations {
   /**
@@ -743,7 +744,7 @@ declare namespace S3 {
     Prefix?: Prefix;
   }
   export type AnalyticsS3ExportFileFormat = "CSV"|string;
-  export type Body = Buffer|Uint8Array|Blob|string;
+  export type Body = Buffer|Uint8Array|Blob|string|Readable;
   export interface Bucket {
     /**
      * The name of the bucket.
