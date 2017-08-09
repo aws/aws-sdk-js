@@ -5,22 +5,22 @@ const creds = new Credentials({
     secretAccessKey: 'bar',
 });
 
-creds.get((err) => {
+creds.get(err => {
 
 });
 
 creds.getPromise().then(
     () => {},
-    (err) => {},
+    err => {},
 );
 
 if (creds.needsRefresh()) {
-    creds.refresh((err) => {
+    creds.refresh(err => {
 
     });
 
     creds.refreshPromise().then(
         () => {},
-        (err) => {}
+        err => {}
     );
 }
