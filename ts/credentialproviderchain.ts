@@ -1,7 +1,11 @@
 import {CredentialProviderChain} from '../lib/credentials/credential_provider_chain';
+import {Credentials} from "../lib/credentials";
 
 const providerChain = new CredentialProviderChain([]);
 
-const resolvedPromise: Promise<AWS.Credentials> = providerChain.resolvePromise();
+providerChain.resolvePromise().then(
+    (creds: Credentials) => {},
+    err => {}
+);
 
 providerChain.resolve(() => {});
