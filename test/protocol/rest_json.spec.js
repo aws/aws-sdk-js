@@ -79,16 +79,18 @@
         svc.buildRequest(request);
         return request;
       };
+
       describe('method', function() {
-        return it('populates method from the operation', function() {
+        it('populates method from the operation', function() {
           defop({
             http: {
               method: 'GET'
             }
           });
-          return expect(build().httpRequest.method).to.equal('GET');
+          expect(build().httpRequest.method).to.equal('GET');
         });
       });
+
       describe('uri', function() {
         it('populates uri from the operation', function() {
           defop({
@@ -96,8 +98,9 @@
               requestUri: '/path'
             }
           });
-          return expect(build().httpRequest.path).to.equal('/path');
+          expect(build().httpRequest.path).to.equal('/path');
         });
+
         it('replaces param placeholders', function() {
           request.params = {
             Id: 'abc'
@@ -115,8 +118,9 @@
               }
             }
           });
-          return expect(build().httpRequest.path).to.equal('/Owner/abc');
+          expect(build().httpRequest.path).to.equal('/Owner/abc');
         });
+
         it('can replace multiple path placeholders', function() {
           request.params = {
             Id: 'abc',
@@ -140,9 +144,10 @@
               }
             }
           });
-          return expect(build().httpRequest.path).to.equal('/abc/123');
+          expect(build().httpRequest.path).to.equal('/abc/123');
         });
-        return it('performs querystring param replacements', function() {
+
+        it('performs querystring param replacements', function() {
           request.params = {
             Id: 'abc'
           };
@@ -160,9 +165,10 @@
               }
             }
           });
-          return expect(build().httpRequest.path).to.equal('/path?id-param=abc');
+          expect(build().httpRequest.path).to.equal('/path?id-param=abc');
         });
       });
+
       describe('headers', function() {
         it('populates the headers with present params', function() {
           request.params = {
@@ -178,8 +184,9 @@
               }
             }
           });
-          return expect(build().httpRequest.headers['x-amz-acl']).to.equal('public-read');
+          expect(build().httpRequest.headers['x-amz-acl']).to.equal('public-read');
         });
+
         it('uses default rule name if .n property is not present', function() {
           request.params = {
             ACL: 'public-read'
@@ -193,9 +200,10 @@
               }
             }
           });
-          return expect(build().httpRequest.headers['ACL']).to.equal('public-read');
+          expect(build().httpRequest.headers['ACL']).to.equal('public-read');
         });
-        return it('works with map types', function() {
+
+        it('works with map types', function() {
           request.params = {
             Metadata: {
               foo: 'bar',
@@ -215,12 +223,25 @@
           });
           build();
           expect(request.httpRequest.headers['x-amz-meta-foo']).to.equal('bar');
-          return expect(request.httpRequest.headers['x-amz-meta-abc']).to.equal('xyz');
+          expect(request.httpRequest.headers['x-amz-meta-abc']).to.equal('xyz');
+        });
+
+        it('should add a Content-Type header', function() {
+          request.params = {};
+          defop({
+            http: {
+              method: 'POST'
+            }
+          });
+          build();
+          expect(request.httpRequest.headers['Content-Type'])
+            .to.equal('application/json');
         });
       });
-      return describe('body', function() {
+
+      describe('body', function() {
         ['GET', 'HEAD', 'DELETE'].forEach(function(method) {
-          return it('does not populate a body on a ' + method + ' request', function() {
+          it('does not populate a body on a ' + method + ' request', function() {
             request.params = {
               Data: 'abc'
             };
@@ -237,9 +258,10 @@
                 }
               }
             });
-            return expect(build().httpRequest.body).to.equal('');
+            expect(build().httpRequest.body).to.equal('');
           });
         });
+
         it('builds root element if rules contains root', function() {
           request.params = {
             Config: {
@@ -265,9 +287,10 @@
               }
             }
           });
-          return expect(build().httpRequest.body.toString()).to.equal('{"Name":"foo","Type":"bar"}');
+          expect(build().httpRequest.body.toString()).to.equal('{"Name":"foo","Type":"bar"}');
         });
-        return it('builds payload element as non JSON data if rules contains payload', function() {
+
+        it('builds payload element as non JSON data if rules contains payload', function() {
           request.params = {
             Body: 'foobar'
           };
@@ -281,10 +304,11 @@
               }
             }
           });
-          return expect(build().httpRequest.body).to.equal('foobar');
+          expect(build().httpRequest.body).to.equal('foobar');
         });
       });
     });
+
     describe('extractError', function() {
       var extractError;
       extractError = function(body) {
