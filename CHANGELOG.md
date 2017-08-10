@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.95.0-->
+<!--LATEST=2.96.0-->
 <!--ENTRYINSERT-->
+
+## 2.96.0
+* feature: CloudDirectory: Enable BatchDetachPolicy
+* feature: CodeBuild: Supporting Bitbucket as source type in AWS CodeBuild.
 
 ## 2.95.0
 * bugfix: credentials: add typescript definition for resolvePromise()

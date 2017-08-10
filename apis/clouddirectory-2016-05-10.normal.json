@@ -1924,6 +1924,30 @@
       },
       "documentation":"<p>Represents the output of a <a>DetachObject</a> response operation.</p>"
     },
+    "BatchDetachPolicy":{
+      "type":"structure",
+      "required":[
+        "PolicyReference",
+        "ObjectReference"
+      ],
+      "members":{
+        "PolicyReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Reference that identifies the policy object.</p>"
+        },
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Reference that identifies the object whose policy object will be detached.</p>"
+        }
+      },
+      "documentation":"<p>Detaches the specified policy from the specified directory inside a <a>BatchRead</a> operation. For more information, see <a>DetachPolicy</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchDetachPolicyResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Represents the output of a <a>DetachPolicy</a> response operation.</p>"
+    },
     "BatchDetachTypedLink":{
       "type":"structure",
       "required":["TypedLinkSpecifier"],
@@ -2629,6 +2653,10 @@
           "shape":"BatchAttachPolicy",
           "documentation":"<p>Attaches a policy object to a regular object. An object can have a limited number of attached policies.</p>"
         },
+        "DetachPolicy":{
+          "shape":"BatchDetachPolicy",
+          "documentation":"<p>Detaches a policy from a <a>Directory</a>.</p>"
+        },
         "CreateIndex":{
           "shape":"BatchCreateIndex",
           "documentation":"<p>Creates an index object. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html\">Indexing</a> for more information.</p>"
@@ -2690,6 +2718,10 @@
         "AttachPolicy":{
           "shape":"BatchAttachPolicyResponse",
           "documentation":"<p>Attaches a policy object to a regular object. An object can have a limited number of attached policies.</p>"
+        },
+        "DetachPolicy":{
+          "shape":"BatchDetachPolicyResponse",
+          "documentation":"<p>Detaches a policy from a <a>Directory</a>.</p>"
         },
         "CreateIndex":{
           "shape":"BatchCreateIndexResponse",

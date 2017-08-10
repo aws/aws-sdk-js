@@ -842,6 +842,18 @@ declare namespace CloudDirectory {
      */
     detachedObjectIdentifier?: ObjectIdentifier;
   }
+  export interface BatchDetachPolicy {
+    /**
+     * Reference that identifies the policy object.
+     */
+    PolicyReference: ObjectReference;
+    /**
+     * Reference that identifies the object whose policy object will be detached.
+     */
+    ObjectReference: ObjectReference;
+  }
+  export interface BatchDetachPolicyResponse {
+  }
   export interface BatchDetachTypedLink {
     /**
      * Used to accept a typed link specifier as input.
@@ -1330,6 +1342,10 @@ declare namespace CloudDirectory {
      */
     AttachPolicy?: BatchAttachPolicy;
     /**
+     * Detaches a policy from a Directory.
+     */
+    DetachPolicy?: BatchDetachPolicy;
+    /**
      * Creates an index object. See Indexing for more information.
      */
     CreateIndex?: BatchCreateIndex;
@@ -1384,6 +1400,10 @@ declare namespace CloudDirectory {
      * Attaches a policy object to a regular object. An object can have a limited number of attached policies.
      */
     AttachPolicy?: BatchAttachPolicyResponse;
+    /**
+     * Detaches a policy from a Directory.
+     */
+    DetachPolicy?: BatchDetachPolicyResponse;
     /**
      * Creates an index object. See Indexing for more information.
      */

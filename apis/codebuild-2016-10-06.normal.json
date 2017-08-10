@@ -565,6 +565,7 @@
         "GOLANG",
         "DOCKER",
         "ANDROID",
+        "DOTNET",
         "BASE"
       ]
     },
@@ -931,7 +932,8 @@
         "CODECOMMIT",
         "CODEPIPELINE",
         "GITHUB",
-        "S3"
+        "S3",
+        "BITBUCKET"
       ]
     },
     "StartBuildInput":{

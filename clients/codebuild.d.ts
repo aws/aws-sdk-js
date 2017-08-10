@@ -346,7 +346,7 @@ declare namespace CodeBuild {
   }
   export type EnvironmentVariables = EnvironmentVariable[];
   export type KeyInput = string;
-  export type LanguageType = "JAVA"|"PYTHON"|"NODE_JS"|"RUBY"|"GOLANG"|"DOCKER"|"ANDROID"|"BASE"|string;
+  export type LanguageType = "JAVA"|"PYTHON"|"NODE_JS"|"RUBY"|"GOLANG"|"DOCKER"|"ANDROID"|"DOTNET"|"BASE"|string;
   export interface ListBuildsForProjectInput {
     /**
      * The name of the build project.
@@ -583,7 +583,7 @@ declare namespace CodeBuild {
     resource?: String;
   }
   export type SourceAuthType = "OAUTH"|string;
-  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|string;
+  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|string;
   export interface StartBuildInput {
     /**
      * The name of the build project to start running a build.
