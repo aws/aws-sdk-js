@@ -114,6 +114,7 @@
     mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobileanalytics));
     machinelearning = new AWS.MachineLearning(AWS.util.merge(config, config.machinelearning));
     opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks));
+    var pinpoint = new AWS.Pinpoint(AWS.util.merge(config, config.pinpoint));
     rds = new AWS.RDS(AWS.util.merge(config, config.rds));
     redshift = new AWS.Redshift(AWS.util.merge(config, config.redshift));
     route53 = new AWS.Route53(AWS.util.merge(config, config.route53));
@@ -142,6 +143,7 @@
         });
       });
     });
+
     describe('XHR', function() {
       it('does not emit http events if networking issue occurs', function(done) {
         var date, err, httpData, httpDone, httpError, httpHeaders, req, svc;
@@ -972,6 +974,17 @@
         });
       });
     });
+
+    describe('AWS.Pinpoint', function() {
+      it('makes a request', function(done) {
+        pinpoint.getApps({PageSize: '10'}, function(err, data) {
+          noError(err);
+          expect(Array.isArray(data.ApplicationsResponse.Item)).to.equal(true);
+          done();
+        });
+      });
+    });
+
     describe('AWS.RDS', function() {
       it('makes a request', function(done) {
         return rds.describeCertificates(function(err, data) {
