@@ -2528,40 +2528,16 @@ describe('AWS.S3', function() {
     });
 
     it('defers the execution of a callback, even when the underlying credentials are synchronous', function(done) {
-      var called = false;
+      var invocationDeferred = false;
       s3.getSignedUrl('getObject', {Bucket: 'bucket', Key: 'key'}, function(err, data) {
-        called = true;
+        expect(invocationDeferred).to.equal(true);
         expect(data).to.equal(
           'https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=4mlYnRmz%2BBFEPrgYz5tXcl9Wc4w%3D&x-amz-security-token=session'
         );
         done();
       });
 
-      expect(called).to.be.false;
-    });
-
-    describe('execution deferral with setImmediate', function() {
-      var setImmediateFunc = setImmediate;
-      beforeEach(function() {
-        setImmediate = void 0;
-      });
-
-      afterEach(function() {
-        setImmediate = setImmediateFunc;
-      });
-
-      it('should defer execution in the absence of setImmediate', function(done) {
-        var called = false;
-        s3.getSignedUrl('getObject', {Bucket: 'bucket', Key: 'key'}, function(err, data) {
-          called = true;
-          expect(data).to.equal(
-            'https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=4mlYnRmz%2BBFEPrgYz5tXcl9Wc4w%3D&x-amz-security-token=session'
-          );
-          done();
-        });
-
-        expect(called).to.be.false;
-      });
+      invocationDeferred = true;
     });
   });
 
