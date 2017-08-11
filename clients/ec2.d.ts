@@ -28,11 +28,11 @@ declare class EC2 extends Service {
    */
   acceptVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.AcceptVpcPeeringConnectionResult) => void): Request<EC2.Types.AcceptVpcPeeringConnectionResult, AWSError>;
   /**
-   * Acquires an Elastic IP address. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Allocates an Elastic IP address. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. If you release an Elastic IP address for use in a VPC, you might be able to recover it. To recover an Elastic IP address that you released, specify it in the Address parameter. Note that you cannot recover an Elastic IP address that you released after it is allocated to another AWS account. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
    */
   allocateAddress(params: EC2.Types.AllocateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
-   * Acquires an Elastic IP address. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Allocates an Elastic IP address. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per region and 5 Elastic IP addresses for EC2-VPC per region. If you release an Elastic IP address for use in a VPC, you might be able to recover it. To recover an Elastic IP address that you released, specify it in the Address parameter. Note that you cannot recover an Elastic IP address that you released after it is allocated to another AWS account. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
    */
   allocateAddress(callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
@@ -708,11 +708,11 @@ declare class EC2 extends Service {
    */
   deleteVpnGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. This command does not delete the AMI.
+   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
   deregisterImage(params: EC2.Types.DeregisterImageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. This command does not delete the AMI.
+   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances; however, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
   deregisterImage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1684,11 +1684,11 @@ declare class EC2 extends Service {
    */
   rejectVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.RejectVpcPeeringConnectionResult) => void): Request<EC2.Types.RejectVpcPeeringConnectionResult, AWSError>;
   /**
-   * Releases the specified Elastic IP address. After releasing an Elastic IP address, it is released to the IP address pool and might be unavailable to you. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another AWS account. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you try to release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse).
+   * Releases the specified Elastic IP address. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another AWS account. [EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see AllocateAddress.
    */
   releaseAddress(params: EC2.Types.ReleaseAddressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Releases the specified Elastic IP address. After releasing an Elastic IP address, it is released to the IP address pool and might be unavailable to you. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another AWS account. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you try to release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse).
+   * Releases the specified Elastic IP address. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another AWS account. [EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see AllocateAddress.
    */
   releaseAddress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1812,11 +1812,11 @@ declare class EC2 extends Service {
    */
   revokeSecurityGroupEgress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes one or more ingress rules from a security group. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be removed. Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes one or more ingress rules from a security group. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be removed.  [EC2-Classic security groups only] If the values you specify do not match the existing rule's values, no error is returned. Use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupIngress(params: EC2.Types.RevokeSecurityGroupIngressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes one or more ingress rules from a security group. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be removed. Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes one or more ingress rules from a security group. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be removed.  [EC2-Classic security groups only] If the values you specify do not match the existing rule's values, no error is returned. Use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2250,6 +2250,10 @@ declare namespace EC2 {
      * Set to vpc to allocate the address for use with instances in a VPC. Default: The address is for use with instances in EC2-Classic.
      */
     Domain?: DomainType;
+    /**
+     * [EC2-VPC] The Elastic IP address to recover.
+     */
+    Address?: String;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */

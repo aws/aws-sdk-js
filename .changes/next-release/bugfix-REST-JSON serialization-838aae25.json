@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "REST-JSON serialization",
-  "description": "Automatically add a content-type header of application/json to requests with a JSON body"
-}

@@ -564,7 +564,7 @@ declare namespace CodeDeploy {
     /**
      * The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value. The type parameter takes either of the following values:   HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.   FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.   The value parameter takes an integer. For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.
      */
-    minimumHealthyHosts?: MinimumHealthyHosts;
+    minimumHealthyHosts: MinimumHealthyHosts;
   }
   export interface CreateDeploymentConfigOutput {
     /**
@@ -1027,7 +1027,7 @@ declare namespace CodeDeploy {
   export type EC2TagSetList = EC2TagFilterList[];
   export interface ELBInfo {
     /**
-     * For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+     * For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
      */
     name?: ELBName;
   }
@@ -1508,9 +1508,13 @@ declare namespace CodeDeploy {
   export type ListStateFilterAction = "include"|"exclude"|"ignore"|string;
   export interface LoadBalancerInfo {
     /**
-     * An array containing information about the load balancer in Elastic Load Balancing to use in a deployment.
+     * An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.
      */
     elbInfoList?: ELBInfoList;
+    /**
+     * An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.
+     */
+    targetGroupInfoList?: TargetGroupInfoList;
   }
   export type LogTail = string;
   export type Message = string;
@@ -1697,6 +1701,14 @@ declare namespace CodeDeploy {
   export type TagFilterList = TagFilter[];
   export type TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE"|string;
   export type TagList = Tag[];
+  export interface TargetGroupInfo {
+    /**
+     * For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. 
+     */
+    name?: TargetGroupName;
+  }
+  export type TargetGroupInfoList = TargetGroupInfo[];
+  export type TargetGroupName = string;
   export interface TargetInstances {
     /**
      * The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment. Cannot be used in the same call as ec2TagSet.

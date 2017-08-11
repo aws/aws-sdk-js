@@ -1128,7 +1128,10 @@
     },
     "CreateDeploymentConfigInput":{
       "type":"structure",
-      "required":["deploymentConfigName"],
+      "required":[
+        "deploymentConfigName",
+        "minimumHealthyHosts"
+      ],
       "members":{
         "deploymentConfigName":{
           "shape":"DeploymentConfigName",
@@ -1881,10 +1884,10 @@
       "members":{
         "name":{
           "shape":"ELBName",
-          "documentation":"<p>For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.</p>"
+          "documentation":"<p>For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.</p>"
         }
       },
-      "documentation":"<p>Information about a load balancer in Elastic Load Balancing to use in a deployment.</p>"
+      "documentation":"<p>Information about a load balancer in Elastic Load Balancing to use in a deployment. Instances are registered directly with a load balancer, and traffic is routed to the load balancer.</p>"
     },
     "ELBInfoList":{
       "type":"list",
@@ -2992,10 +2995,14 @@
       "members":{
         "elbInfoList":{
           "shape":"ELBInfoList",
-          "documentation":"<p>An array containing information about the load balancer in Elastic Load Balancing to use in a deployment.</p>"
+          "documentation":"<p>An array containing information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.</p>"
+        },
+        "targetGroupInfoList":{
+          "shape":"TargetGroupInfoList",
+          "documentation":"<p>An array containing information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p>"
         }
       },
-      "documentation":"<p>Information about the load balancer used in a deployment.</p>"
+      "documentation":"<p>Information about the Elastic Load Balancing load balancer or target group used in a deployment.</p>"
     },
     "LogTail":{"type":"string"},
     "Message":{"type":"string"},
@@ -3355,6 +3362,21 @@
       "documentation":"<p>The number of tag groups included in the tag set list exceeded the maximum allowed limit of 3.</p>",
       "exception":true
     },
+    "TargetGroupInfo":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"TargetGroupName",
+          "documentation":"<p>For blue/green deployments, the name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes. </p>"
+        }
+      },
+      "documentation":"<p>Information about a target group in Elastic Load Balancing to use in a deployment. Instances are registered as targets in a target group, and traffic is routed to the target group.</p>"
+    },
+    "TargetGroupInfoList":{
+      "type":"list",
+      "member":{"shape":"TargetGroupInfo"}
+    },
+    "TargetGroupName":{"type":"string"},
     "TargetInstances":{
       "type":"structure",
       "members":{

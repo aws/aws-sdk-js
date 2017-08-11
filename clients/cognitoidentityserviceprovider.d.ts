@@ -60,6 +60,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminDeleteUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse, AWSError>;
   /**
+   * Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked DestinationUser) signs in, they must create a new user account. See AdminLinkProviderForUser. This action is enabled only for admin access and requires developer credentials. The ProviderName must match the value specified when creating an IdP for the pool.  To disable a native username + password user, the ProviderName value must be Cognito and the ProviderAttributeName must be Cognito_Subject, with the ProviderAttributeValue being the name that is used in the user pool for the user. The ProviderAttributeName must always be Cognito_Subject for social identity providers. The ProviderAttributeValue must always be the exact subject that was used when the user was originally linked as a source user. For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the ProviderAttributeName and ProviderAttributeValue must be the same values that were used for the SourceUser when the identities were originally linked in the AdminLinkProviderForUser call. (If the linking was done with ProviderAttributeName set to Cognito_Subject, the same applies here). However, if the user has already signed in, the ProviderAttributeName must be Cognito_Subject and ProviderAttributeValue must be the subject of the SAML assertion.
+   */
+  adminDisableProviderForUser(params: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse, AWSError>;
+  /**
+   * Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked DestinationUser) signs in, they must create a new user account. See AdminLinkProviderForUser. This action is enabled only for admin access and requires developer credentials. The ProviderName must match the value specified when creating an IdP for the pool.  To disable a native username + password user, the ProviderName value must be Cognito and the ProviderAttributeName must be Cognito_Subject, with the ProviderAttributeValue being the name that is used in the user pool for the user. The ProviderAttributeName must always be Cognito_Subject for social identity providers. The ProviderAttributeValue must always be the exact subject that was used when the user was originally linked as a source user. For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the ProviderAttributeName and ProviderAttributeValue must be the same values that were used for the SourceUser when the identities were originally linked in the AdminLinkProviderForUser call. (If the linking was done with ProviderAttributeName set to Cognito_Subject, the same applies here). However, if the user has already signed in, the ProviderAttributeName must be Cognito_Subject and ProviderAttributeValue must be the subject of the SAML assertion.
+   */
+  adminDisableProviderForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse, AWSError>;
+  /**
    * Disables the specified user as an administrator. Works on any user. Requires developer credentials.
    */
   adminDisableUser(params: CognitoIdentityServiceProvider.Types.AdminDisableUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableUserResponse, AWSError>;
@@ -107,6 +115,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Initiates the authentication flow, as an administrator. Requires developer credentials.
    */
   adminInitiateAuth(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse, AWSError>;
+  /**
+   * Links an existing user account in a user pool (DestinationUser) to an identity from an external identity provider (SourceUser) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account.   For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account.   Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.  See also AdminDisableProviderForUser. This action is enabled only for admin access and requires developer credentials.
+   */
+  adminLinkProviderForUser(params: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse, AWSError>;
+  /**
+   * Links an existing user account in a user pool (DestinationUser) to an identity from an external identity provider (SourceUser) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account.   For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account.   Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.  See also AdminDisableProviderForUser. This action is enabled only for admin access and requires developer credentials.
+   */
+  adminLinkProviderForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse, AWSError>;
   /**
    * Lists devices, as an administrator. Requires developer credentials.
    */
@@ -228,6 +244,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   createIdentityProvider(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateIdentityProviderResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateIdentityProviderResponse, AWSError>;
   /**
+   * Creates a new OAuth2.0 resource server and defines custom scopes in it.
+   */
+  createResourceServer(params: CognitoIdentityServiceProvider.Types.CreateResourceServerRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateResourceServerResponse, AWSError>;
+  /**
+   * Creates a new OAuth2.0 resource server and defines custom scopes in it.
+   */
+  createResourceServer(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateResourceServerResponse, AWSError>;
+  /**
    * Creates the user import job.
    */
   createUserImportJob(params: CognitoIdentityServiceProvider.Types.CreateUserImportJobRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserImportJobResponse, AWSError>;
@@ -276,11 +300,19 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   deleteIdentityProvider(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Allows a user to delete one's self.
+   * Deletes a resource server.
+   */
+  deleteResourceServer(params: CognitoIdentityServiceProvider.Types.DeleteResourceServerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a resource server.
+   */
+  deleteResourceServer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Allows a user to delete himself or herself.
    */
   deleteUser(params: CognitoIdentityServiceProvider.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Allows a user to delete one's self.
+   * Allows a user to delete himself or herself.
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -323,6 +355,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Gets information about a specific identity provider.
    */
   describeIdentityProvider(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeIdentityProviderResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeIdentityProviderResponse, AWSError>;
+  /**
+   * Describes a resource server.
+   */
+  describeResourceServer(params: CognitoIdentityServiceProvider.Types.DescribeResourceServerRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse, AWSError>;
+  /**
+   * Describes a resource server.
+   */
+  describeResourceServer(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse, AWSError>;
   /**
    * Describes the user import job.
    */
@@ -404,6 +444,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   getIdentityProviderByIdentifier(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse, AWSError>;
   /**
+   * Gets the UI Customization information for a particular app client's app UI, if there is something set. If nothing is set for the particular client, but there is an existing pool level customization (app clientId will be ALL), then that is returned. If nothing is present, then an empty shape is returned.
+   */
+  getUICustomization(params: CognitoIdentityServiceProvider.Types.GetUICustomizationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUICustomizationResponse, AWSError>;
+  /**
+   * Gets the UI Customization information for a particular app client's app UI, if there is something set. If nothing is set for the particular client, but there is an existing pool level customization (app clientId will be ALL), then that is returned. If nothing is present, then an empty shape is returned.
+   */
+  getUICustomization(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUICustomizationResponse, AWSError>;
+  /**
    * Gets the user attributes and metadata for a user.
    */
   getUser(params: CognitoIdentityServiceProvider.Types.GetUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserResponse, AWSError>;
@@ -459,6 +507,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Lists information about all identity providers for a user pool.
    */
   listIdentityProviders(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListIdentityProvidersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListIdentityProvidersResponse, AWSError>;
+  /**
+   * Lists the resource servers for a user pool.
+   */
+  listResourceServers(params: CognitoIdentityServiceProvider.Types.ListResourceServersRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListResourceServersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListResourceServersResponse, AWSError>;
+  /**
+   * Lists the resource servers for a user pool.
+   */
+  listResourceServers(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListResourceServersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListResourceServersResponse, AWSError>;
   /**
    * Lists the user import jobs.
    */
@@ -516,6 +572,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   respondToAuthChallenge(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse, AWSError>;
   /**
+   * Sets the UI customization information for a user pool's built-in app UI. You can specify app UI customization settings for a single client (with a specific clientId) or for all clients (by setting the clientId to ALL). If you specify ALL, the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the ALL configuration.   To use this API, your user pool must have a domain associated with it. Otherwise, there is no place to host the app's pages, and the service will throw an error. 
+   */
+  setUICustomization(params: CognitoIdentityServiceProvider.Types.SetUICustomizationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUICustomizationResponse, AWSError>;
+  /**
+   * Sets the UI customization information for a user pool's built-in app UI. You can specify app UI customization settings for a single client (with a specific clientId) or for all clients (by setting the clientId to ALL). If you specify ALL, the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the ALL configuration.   To use this API, your user pool must have a domain associated with it. Otherwise, there is no place to host the app's pages, and the service will throw an error. 
+   */
+  setUICustomization(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUICustomizationResponse, AWSError>;
+  /**
    * Sets the user settings like multi-factor authentication (MFA). If MFA is to be removed for a particular attribute pass the attribute with code delivery as null. If null list is passed, all MFA options are removed.
    */
   setUserSettings(params: CognitoIdentityServiceProvider.Types.SetUserSettingsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserSettingsResponse, AWSError>;
@@ -571,6 +635,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Updates identity provider information for a user pool.
    */
   updateIdentityProvider(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateIdentityProviderResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateIdentityProviderResponse, AWSError>;
+  /**
+   * Updates the name and scopes of resource server. All other fields are read-only.
+   */
+  updateResourceServer(params: CognitoIdentityServiceProvider.Types.UpdateResourceServerRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse, AWSError>;
+  /**
+   * Updates the name and scopes of resource server. All other fields are read-only.
+   */
+  updateResourceServer(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse, AWSError>;
   /**
    * Allows a user to update a specific attribute (one at a time).
    */
@@ -694,7 +766,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface AdminCreateUserResponse {
     /**
-     * The user returned in the request to create a new user.
+     * The newly created user.
      */
     User?: UserType;
   }
@@ -724,6 +796,18 @@ declare namespace CognitoIdentityServiceProvider {
      * The user name of the user you wish to delete.
      */
     Username: UsernameType;
+  }
+  export interface AdminDisableProviderForUserRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: StringType;
+    /**
+     * The user to be disabled.
+     */
+    User: ProviderUserIdentifierType;
+  }
+  export interface AdminDisableProviderForUserResponse {
   }
   export interface AdminDisableUserRequest {
     /**
@@ -862,6 +946,22 @@ declare namespace CognitoIdentityServiceProvider {
      * The result of the authentication response. This is only returned if the caller does not need to pass another challenge. If the caller does need to pass another challenge before it gets tokens, ChallengeName, ChallengeParameters, and Session are returned.
      */
     AuthenticationResult?: AuthenticationResultType;
+  }
+  export interface AdminLinkProviderForUserRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: StringType;
+    /**
+     * The existing user in the user pool to be linked to the external identity provider user account. Can be a native (Username + Password) Cognito User Pools user or a federated user (for example, a SAML or Facebook user). If the user doesn't exist, an exception is thrown. This is the user that is returned when the new user (with the linked identity provider attribute) signs in. The ProviderAttributeValue for the DestinationUser must match the username for the user in the user pool. The ProviderAttributeName will always be ignored.
+     */
+    DestinationUser: ProviderUserIdentifierType;
+    /**
+     * An external identity provider account for a user who does not currently exist yet in the user pool. This user must be a federated user (for example, a SAML or Facebook user), not another native user. If the SourceUser is a federated social identity provider user (Facebook, Google, or Login with Amazon), you must set the ProviderAttributeName to Cognito_Subject. For social identity providers, the ProviderName will be Facebook, Google, or LoginWithAmazon, and Cognito will automatically parse the Facebook, Google, and Login with Amazon tokens for id, sub, and user_id, respectively. The ProviderAttributeValue for the user must be the same value as the id, sub, or user_id value found in the social identity provider token.  For SAML, the ProviderAttributeName can be any value that matches a claim in the SAML assertion. If you wish to link SAML users based on the subject of the SAML assertion, you should map the subject to a claim through the SAML identity provider and submit that claim name as the ProviderAttributeName. If you set ProviderAttributeName to Cognito_Subject, Cognito will automatically parse the default unique identifier found in the subject from the SAML token.
+     */
+    SourceUser: ProviderUserIdentifierType;
+  }
+  export interface AdminLinkProviderForUserResponse {
   }
   export interface AdminListDevicesRequest {
     /**
@@ -1054,6 +1154,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type ArnType = string;
   export type AttributeDataType = "String"|"Number"|"DateTime"|"Boolean"|string;
   export type AttributeListType = AttributeType[];
+  export type AttributeMappingKeyType = string;
   export type AttributeMappingType = {[key: string]: StringType};
   export type AttributeNameListType = AttributeNameType[];
   export type AttributeNameType = string;
@@ -1097,6 +1198,8 @@ declare namespace CognitoIdentityServiceProvider {
     NewDeviceMetadata?: NewDeviceMetadataType;
   }
   export type BooleanType = boolean;
+  export type CSSType = string;
+  export type CSSVersionType = string;
   export type CallbackURLsListType = RedirectUrlType[];
   export type ChallengeNameType = "SMS_MFA"|"PASSWORD_VERIFIER"|"CUSTOM_CHALLENGE"|"DEVICE_SRP_AUTH"|"DEVICE_PASSWORD_VERIFIER"|"ADMIN_NO_SRP_AUTH"|"NEW_PASSWORD_REQUIRED"|string;
   export type ChallengeParametersType = {[key: string]: StringType};
@@ -1165,7 +1268,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface ConfirmForgotPasswordRequest {
     /**
-     * The ID of the client associated with the user pool.
+     * The app client ID of the app associated with the user pool.
      */
     ClientId: ClientIdType;
     /**
@@ -1189,7 +1292,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface ConfirmSignUpRequest {
     /**
-     * The ID of the client associated with the user pool.
+     * The ID of the app client associated with the user pool.
      */
     ClientId: ClientIdType;
     /**
@@ -1248,7 +1351,7 @@ declare namespace CognitoIdentityServiceProvider {
     /**
      * The identity provider name.
      */
-    ProviderName: ProviderNameType;
+    ProviderName: ProviderNameTypeV1;
     /**
      * The identity provider type.
      */
@@ -1271,6 +1374,30 @@ declare namespace CognitoIdentityServiceProvider {
      * The newly created identity provider object.
      */
     IdentityProvider: IdentityProviderType;
+  }
+  export interface CreateResourceServerRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * A unique resource server identifier for the resource server. This could be an HTTPS endpoint where the resource server is located. For example, https://my-weather-api.example.com.
+     */
+    Identifier: ResourceServerIdentifierType;
+    /**
+     * A friendly name for the resource server.
+     */
+    Name: ResourceServerNameType;
+    /**
+     * A list of scopes. Each scope is map, where the keys are name and description.
+     */
+    Scopes?: ResourceServerScopeListType;
+  }
+  export interface CreateResourceServerResponse {
+    /**
+     * The newly created resource server.
+     */
+    ResourceServer: ResourceServerType;
   }
   export interface CreateUserImportJobRequest {
     /**
@@ -1406,6 +1533,10 @@ declare namespace CognitoIdentityServiceProvider {
      */
     EmailVerificationSubject?: EmailVerificationSubjectType;
     /**
+     * The template for the verification message that the user sees when the app requests permission to access the user's information.
+     */
+    VerificationMessageTemplate?: VerificationMessageTemplateType;
+    /**
      * A string representing the SMS authentication message.
      */
     SmsAuthenticationMessage?: SmsVerificationMessageType;
@@ -1447,6 +1578,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type CustomAttributeNameType = string;
   export type CustomAttributesListType = SchemaAttributeType[];
   export type DateType = Date;
+  export type DefaultEmailOptionType = "CONFIRM_WITH_LINK"|"CONFIRM_WITH_CODE"|string;
   export interface DeleteGroupRequest {
     /**
      * The name of the group.
@@ -1467,6 +1599,16 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ProviderName: ProviderNameType;
   }
+  export interface DeleteResourceServerRequest {
+    /**
+     * The user pool ID for the user pool that hosts the resource server.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The identifier for the resource server.
+     */
+    Identifier: ResourceServerIdentifierType;
+  }
   export interface DeleteUserAttributesRequest {
     /**
      * An array of strings representing the user attribute names you wish to delete. For custom attributes, you must prepend the custom: prefix to the attribute name.
@@ -1485,7 +1627,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The ID of the client associated with the user pool.
+     * The app client ID of the app associated with the user pool.
      */
     ClientId: ClientIdType;
   }
@@ -1531,6 +1673,22 @@ declare namespace CognitoIdentityServiceProvider {
      */
     IdentityProvider: IdentityProviderType;
   }
+  export interface DescribeResourceServerRequest {
+    /**
+     * The user pool ID for the user pool that hosts the resource server.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The identifier for the resource server
+     */
+    Identifier: ResourceServerIdentifierType;
+  }
+  export interface DescribeResourceServerResponse {
+    /**
+     * The resource server.
+     */
+    ResourceServer: ResourceServerType;
+  }
   export interface DescribeUserImportJobRequest {
     /**
      * The user pool ID for the user pool that the users are being imported into.
@@ -1553,7 +1711,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * The ID of the client associated with the user pool.
+     * The app client ID of the app associated with the user pool.
      */
     ClientId: ClientIdType;
   }
@@ -1664,7 +1822,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Status?: DomainStatusType;
   }
-  export type DomainStatusType = "CREATING"|"DELETING"|"UPDATING"|"ACTIVE"|string;
+  export type DomainStatusType = "CREATING"|"DELETING"|"UPDATING"|"ACTIVE"|"FAILED"|string;
   export type DomainType = string;
   export type DomainVersionType = string;
   export type EmailAddressType = string;
@@ -1678,7 +1836,9 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ReplyToEmailAddress?: EmailAddressType;
   }
+  export type EmailVerificationMessageByLinkType = string;
   export type EmailVerificationMessageType = string;
+  export type EmailVerificationSubjectByLinkType = string;
   export type EmailVerificationSubjectType = string;
   export type ExplicitAuthFlowsListType = ExplicitAuthFlowsType[];
   export type ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"|"CUSTOM_AUTH_FLOW_ONLY"|string;
@@ -1777,6 +1937,22 @@ declare namespace CognitoIdentityServiceProvider {
      * The identity provider object.
      */
     IdentityProvider: IdentityProviderType;
+  }
+  export interface GetUICustomizationRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The client ID for the client app.
+     */
+    ClientId?: ClientIdType;
+  }
+  export interface GetUICustomizationResponse {
+    /**
+     * The UI customization information.
+     */
+    UICustomization: UICustomizationType;
   }
   export interface GetUserAttributeVerificationCodeRequest {
     /**
@@ -1888,9 +2064,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CreationDate?: DateType;
   }
-  export type IdentityProviderTypeType = "SAML"|string;
+  export type IdentityProviderTypeType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|string;
   export type IdpIdentifierType = string;
   export type IdpIdentifiersListType = IdpIdentifierType[];
+  export type ImageFileType = Buffer|Uint8Array|Blob|string;
+  export type ImageUrlType = string;
   export interface InitiateAuthRequest {
     /**
      * The authentication flow for this call to execute. The API action will depend on this value. For example:     REFRESH_TOKEN_AUTH will take in a valid refresh token and return new tokens.    USER_SRP_AUTH will take in USERNAME and SRP_A and return the SRP variables to be used for next challenge execution.   Valid values include:    USER_SRP_AUTH: Authentication flow for the Secure Remote Password (SRP) protocol.    REFRESH_TOKEN_AUTH/REFRESH_TOKEN: Authentication flow for refreshing the access token and ID token by supplying a valid refresh token.    CUSTOM_AUTH: Custom authentication flow.    ADMIN_NO_SRP_AUTH is not a valid value.
@@ -2036,6 +2214,31 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type ListOfStringTypes = StringType[];
   export type ListProvidersLimitType = number;
+  export type ListResourceServersLimitType = number;
+  export interface ListResourceServersRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The maximum number of resource servers to return.
+     */
+    MaxResults?: ListResourceServersLimitType;
+    /**
+     * A pagination token.
+     */
+    NextToken?: PaginationKeyType;
+  }
+  export interface ListResourceServersResponse {
+    /**
+     * The resource servers.
+     */
+    ResourceServers: ResourceServersListType;
+    /**
+     * A pagination token.
+     */
+    NextToken?: PaginationKeyType;
+  }
   export interface ListUserImportJobsRequest {
     /**
      * The user pool ID for the user pool that the users are being imported into.
@@ -2264,6 +2467,21 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type ProviderDetailsType = {[key: string]: StringType};
   export type ProviderNameType = string;
+  export type ProviderNameTypeV1 = string;
+  export interface ProviderUserIdentifierType {
+    /**
+     * The name of the provider, for example, Facebook, Google, or Login with Amazon.
+     */
+    ProviderName?: ProviderNameType;
+    /**
+     * The name of the provider attribute to link to, for example, NameID.
+     */
+    ProviderAttributeName?: StringType;
+    /**
+     * The value of the provider attribute to link to, for example, xxxxx_account.
+     */
+    ProviderAttributeValue?: StringType;
+  }
   export type ProvidersListType = ProviderDescription[];
   export type QueryLimit = number;
   export type QueryLimitType = number;
@@ -2289,6 +2507,40 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CodeDeliveryDetails?: CodeDeliveryDetailsType;
   }
+  export type ResourceServerIdentifierType = string;
+  export type ResourceServerNameType = string;
+  export type ResourceServerScopeDescriptionType = string;
+  export type ResourceServerScopeListType = ResourceServerScopeType[];
+  export type ResourceServerScopeNameType = string;
+  export interface ResourceServerScopeType {
+    /**
+     * The name of the scope.
+     */
+    ScopeName: ResourceServerScopeNameType;
+    /**
+     * A description of the scope.
+     */
+    ScopeDescription: ResourceServerScopeDescriptionType;
+  }
+  export interface ResourceServerType {
+    /**
+     * The user pool ID for the user pool that hosts the resource server.
+     */
+    UserPoolId?: UserPoolIdType;
+    /**
+     * The identifier for the resource server.
+     */
+    Identifier?: ResourceServerIdentifierType;
+    /**
+     * The name of the resource server.
+     */
+    Name?: ResourceServerNameType;
+    /**
+     * A list of scopes that are defined for the resource server.
+     */
+    Scopes?: ResourceServerScopeListType;
+  }
+  export type ResourceServersListType = ResourceServerType[];
   export interface RespondToAuthChallengeRequest {
     /**
      * The app client ID.
@@ -2363,6 +2615,30 @@ declare namespace CognitoIdentityServiceProvider {
   export type SearchedAttributeNamesListType = AttributeNameType[];
   export type SecretHashType = string;
   export type SessionType = string;
+  export interface SetUICustomizationRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The client ID for the client app.
+     */
+    ClientId?: ClientIdType;
+    /**
+     * The CSS values in the UI customization.
+     */
+    CSS?: CSSType;
+    /**
+     * The uploaded logo image for the UI customization.
+     */
+    ImageFile?: ImageFileType;
+  }
+  export interface SetUICustomizationResponse {
+    /**
+     * The UI customization information.
+     */
+    UICustomization: UICustomizationType;
+  }
   export interface SetUserSettingsRequest {
     /**
      * The access token for the set user settings request.
@@ -2472,6 +2748,36 @@ declare namespace CognitoIdentityServiceProvider {
   export type StringType = string;
   export type SupportedIdentityProvidersListType = ProviderNameType[];
   export type TokenModelType = string;
+  export interface UICustomizationType {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId?: UserPoolIdType;
+    /**
+     * The client ID for the client app.
+     */
+    ClientId?: ClientIdType;
+    /**
+     * The logo image for the UI customization.
+     */
+    ImageUrl?: ImageUrlType;
+    /**
+     * The CSS values in the UI customization.
+     */
+    CSS?: CSSType;
+    /**
+     * The CSS version number.
+     */
+    CSSVersion?: CSSVersionType;
+    /**
+     * The last-modified date for the UI customization.
+     */
+    LastModifiedDate?: DateType;
+    /**
+     * The creation date for the UI customization.
+     */
+    CreationDate?: DateType;
+  }
   export interface UpdateDeviceStatusRequest {
     /**
      * The access token.
@@ -2544,6 +2850,30 @@ declare namespace CognitoIdentityServiceProvider {
      */
     IdentityProvider: IdentityProviderType;
   }
+  export interface UpdateResourceServerRequest {
+    /**
+     * The user pool ID for the user pool.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The identifier for the resource server.
+     */
+    Identifier: ResourceServerIdentifierType;
+    /**
+     * The name of the resource server.
+     */
+    Name: ResourceServerNameType;
+    /**
+     * The scope values to be set for the resource server.
+     */
+    Scopes?: ResourceServerScopeListType;
+  }
+  export interface UpdateResourceServerResponse {
+    /**
+     * The resource server.
+     */
+    ResourceServer: ResourceServerType;
+  }
   export interface UpdateUserAttributesRequest {
     /**
      * An array of name-value pairs representing user attributes. For custom attributes, you must prepend the custom: prefix to the attribute name.
@@ -2598,7 +2928,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CallbackURLs?: CallbackURLsListType;
     /**
-     * A list ofallowed logout URLs for the identity providers.
+     * A list of allowed logout URLs for the identity providers.
      */
     LogoutURLs?: LogoutURLsListType;
     /**
@@ -2653,6 +2983,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The subject of the email verification message.
      */
     EmailVerificationSubject?: EmailVerificationSubjectType;
+    /**
+     * The template for verification messages.
+     */
+    VerificationMessageTemplate?: VerificationMessageTemplateType;
     /**
      * The contents of the SMS authentication message.
      */
@@ -2808,7 +3142,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CallbackURLs?: CallbackURLsListType;
     /**
-     * A list ofallowed logout URLs for the identity providers.
+     * A list of allowed logout URLs for the identity providers.
      */
     LogoutURLs?: LogoutURLsListType;
     /**
@@ -2923,6 +3257,10 @@ declare namespace CognitoIdentityServiceProvider {
      */
     EmailVerificationSubject?: EmailVerificationSubjectType;
     /**
+     * The template for verification messages.
+     */
+    VerificationMessageTemplate?: VerificationMessageTemplateType;
+    /**
      * The contents of the SMS authentication message.
      */
     SmsAuthenticationMessage?: SmsVerificationMessageType;
@@ -2998,6 +3336,32 @@ declare namespace CognitoIdentityServiceProvider {
   export type UsernameAttributesListType = UsernameAttributeType[];
   export type UsernameType = string;
   export type UsersListType = UserType[];
+  export interface VerificationMessageTemplateType {
+    /**
+     * The SMS message template.
+     */
+    SmsMessage?: SmsVerificationMessageType;
+    /**
+     * The email message template.
+     */
+    EmailMessage?: EmailVerificationMessageType;
+    /**
+     * The subject line for the email message template.
+     */
+    EmailSubject?: EmailVerificationSubjectType;
+    /**
+     * The email message template for sending a confirmation link to the user.
+     */
+    EmailMessageByLink?: EmailVerificationMessageByLinkType;
+    /**
+     * The subject line for the email message template for sending a confirmation link to the user.
+     */
+    EmailSubjectByLink?: EmailVerificationSubjectByLinkType;
+    /**
+     * The default email option.
+     */
+    DefaultEmailOption?: DefaultEmailOptionType;
+  }
   export type VerifiedAttributeType = "phone_number"|"email"|string;
   export type VerifiedAttributesListType = VerifiedAttributeType[];
   export interface VerifyUserAttributeRequest {

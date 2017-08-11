@@ -381,7 +381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @constant
 		   */
-		  VERSION: '2.96.0',
+		  VERSION: '2.97.0',
 
 		  /**
 		   * @api private
@@ -392,18 +392,18 @@ return /******/ (function(modules) { // webpackBootstrap
 		   * @api private
 		   */
 		  Protocol: {
-		    Json: __webpack_require__(11),
-		    Query: __webpack_require__(14),
-		    Rest: __webpack_require__(18),
-		    RestJson: __webpack_require__(19),
-		    RestXml: __webpack_require__(20)
+		    Json: __webpack_require__(14),
+		    Query: __webpack_require__(17),
+		    Rest: __webpack_require__(21),
+		    RestJson: __webpack_require__(22),
+		    RestXml: __webpack_require__(23)
 		  },
 
 		  /**
 		   * @api private
 		   */
 		  XML: {
-		    Builder: __webpack_require__(21),
+		    Builder: __webpack_require__(24),
 		    Parser: null // conditionally set based on environment
 		  },
 
@@ -411,38 +411,38 @@ return /******/ (function(modules) { // webpackBootstrap
 		   * @api private
 		   */
 		  JSON: {
-		    Builder: __webpack_require__(12),
-		    Parser: __webpack_require__(13)
+		    Builder: __webpack_require__(15),
+		    Parser: __webpack_require__(16)
 		  },
 
 		  /**
 		   * @api private
 		   */
 		  Model: {
-		    Api: __webpack_require__(180),
-		    Operation: __webpack_require__(181),
-		    Shape: __webpack_require__(16),
-		    Paginator: __webpack_require__(182),
-		    ResourceWaiter: __webpack_require__(183)
+		    Api: __webpack_require__(183),
+		    Operation: __webpack_require__(184),
+		    Shape: __webpack_require__(19),
+		    Paginator: __webpack_require__(185),
+		    ResourceWaiter: __webpack_require__(186)
 		  },
 
 		  /**
 		   * @api private
 		   */
-		  apiLoader: __webpack_require__(184)
+		  apiLoader: __webpack_require__(187)
 		});
 
-		__webpack_require__(185);
 		__webpack_require__(188);
-
 		__webpack_require__(191);
-		__webpack_require__(192);
-		__webpack_require__(193);
-		__webpack_require__(197);
+
+		__webpack_require__(194);
+		__webpack_require__(195);
+		__webpack_require__(196);
 		__webpack_require__(200);
-		__webpack_require__(201);
-		__webpack_require__(202);
-		__webpack_require__(210);
+		__webpack_require__(203);
+		__webpack_require__(204);
+		__webpack_require__(205);
+		__webpack_require__(213);
 
 		/**
 		 * @readonly
@@ -466,7 +466,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* 2 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		/* WEBPACK VAR INJECTION */(function(process) {/* eslint guard-for-in:0 */
+		/* WEBPACK VAR INJECTION */(function(process, setImmediate) {/* eslint guard-for-in:0 */
 		var AWS;
 
 		/**
@@ -562,7 +562,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		  readFileSync: function readFileSync(path) {
 		    if (util.isBrowser()) return null;
-		    return __webpack_require__(4).readFileSync(path, 'utf-8');
+		    return __webpack_require__(7).readFileSync(path, 'utf-8');
 		  },
 
 		  base64: {
@@ -642,7 +642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		      } else if (typeof string.size === 'number') {
 		        return string.size;
 		      } else if (typeof string.path === 'string') {
-		        return __webpack_require__(4).lstatSync(string.path).size;
+		        return __webpack_require__(7).lstatSync(string.path).size;
 		      } else {
 		        throw util.error(new Error('Cannot determine length of ' + string),
 		          { object: string });
@@ -1170,7 +1170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  computeSha256: function computeSha256(body, done) {
 		    if (util.isNode()) {
 		      var Stream = util.stream.Stream;
-		      var fs = __webpack_require__(4);
+		      var fs = __webpack_require__(7);
 		      if (body instanceof Stream) {
 		        if (typeof body.path === 'string') { // assume file object
 		          var settings = {};
@@ -1278,7 +1278,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		   */
 		  isDualstackAvailable: function isDualstackAvailable(service) {
 		    if (!service) return false;
-		    var metadata = __webpack_require__(5);
+		    var metadata = __webpack_require__(8);
 		    if (typeof service !== 'string') service = service.serviceIdentifier;
 		    if (typeof service !== 'string' || !metadata.hasOwnProperty(service)) return false;
 		    return !!metadata[service].dualstackAvailable;
@@ -1339,7 +1339,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		      }, errCallback);
 		    };
 
-		    process.nextTick(sendRequest);
+		    AWS.util.defer(sendRequest);
 		  },
 
 		  /**
@@ -1347,7 +1347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		   */
 		  uuid: {
 		    v4: function uuidV4() {
-		      return __webpack_require__(6).v4();
+		      return __webpack_require__(9).v4();
 		    }
 		  },
 
@@ -1360,6 +1360,19 @@ return /******/ (function(modules) { // webpackBootstrap
 		    var rules = req.service.api.operations[operation].output || {};
 		    if (rules.payload && resp.data[rules.payload]) {
 		      resp.data[rules.payload] = resp.data[rules.payload].toString();
+		    }
+		  },
+
+		  /**
+		   * @api private
+		   */
+		  defer: function defer(callback) {
+		    if (typeof process === 'object' && typeof process.nextTick === 'function') {
+		      process.nextTick(callback);
+		    } else if (typeof setImmediate === 'function') {
+		      setImmediate(callback);
+		    } else {
+		      setTimeout(callback, 0);
 		    }
 		  },
 
@@ -1386,7 +1399,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		module.exports = util;
 
-		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4).setImmediate))
 
 	/***/ }),
 	/* 3 */
@@ -1580,22 +1593,295 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/***/ }),
 	/* 4 */
+	/***/ (function(module, exports, __webpack_require__) {
+
+		var apply = Function.prototype.apply;
+
+		// DOM APIs, for completeness
+
+		exports.setTimeout = function() {
+		  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+		};
+		exports.setInterval = function() {
+		  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+		};
+		exports.clearTimeout =
+		exports.clearInterval = function(timeout) {
+		  if (timeout) {
+		    timeout.close();
+		  }
+		};
+
+		function Timeout(id, clearFn) {
+		  this._id = id;
+		  this._clearFn = clearFn;
+		}
+		Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+		Timeout.prototype.close = function() {
+		  this._clearFn.call(window, this._id);
+		};
+
+		// Does not start the time, just sets up the members needed.
+		exports.enroll = function(item, msecs) {
+		  clearTimeout(item._idleTimeoutId);
+		  item._idleTimeout = msecs;
+		};
+
+		exports.unenroll = function(item) {
+		  clearTimeout(item._idleTimeoutId);
+		  item._idleTimeout = -1;
+		};
+
+		exports._unrefActive = exports.active = function(item) {
+		  clearTimeout(item._idleTimeoutId);
+
+		  var msecs = item._idleTimeout;
+		  if (msecs >= 0) {
+		    item._idleTimeoutId = setTimeout(function onTimeout() {
+		      if (item._onTimeout)
+		        item._onTimeout();
+		    }, msecs);
+		  }
+		};
+
+		// setimmediate attaches itself to the global object
+		__webpack_require__(5);
+		var global = __webpack_require__(6);
+		exports.setImmediate = global.setImmediate;
+		exports.clearImmediate = global.clearImmediate;
+
+
+	/***/ }),
+	/* 5 */
+	/***/ (function(module, exports, __webpack_require__) {
+
+		/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+		    "use strict";
+
+		    if (global.setImmediate) {
+		        return;
+		    }
+
+		    var nextHandle = 1; // Spec says greater than zero
+		    var tasksByHandle = {};
+		    var currentlyRunningATask = false;
+		    var doc = global.document;
+		    var registerImmediate;
+
+		    function setImmediate(callback) {
+		      // Callback can either be a function or a string
+		      if (typeof callback !== "function") {
+		        callback = new Function("" + callback);
+		      }
+		      // Copy function arguments
+		      var args = new Array(arguments.length - 1);
+		      for (var i = 0; i < args.length; i++) {
+		          args[i] = arguments[i + 1];
+		      }
+		      // Store and register the task
+		      var task = { callback: callback, args: args };
+		      tasksByHandle[nextHandle] = task;
+		      registerImmediate(nextHandle);
+		      return nextHandle++;
+		    }
+
+		    function clearImmediate(handle) {
+		        delete tasksByHandle[handle];
+		    }
+
+		    function run(task) {
+		        var callback = task.callback;
+		        var args = task.args;
+		        switch (args.length) {
+		        case 0:
+		            callback();
+		            break;
+		        case 1:
+		            callback(args[0]);
+		            break;
+		        case 2:
+		            callback(args[0], args[1]);
+		            break;
+		        case 3:
+		            callback(args[0], args[1], args[2]);
+		            break;
+		        default:
+		            callback.apply(undefined, args);
+		            break;
+		        }
+		    }
+
+		    function runIfPresent(handle) {
+		        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+		        // So if we're currently running a task, we'll need to delay this invocation.
+		        if (currentlyRunningATask) {
+		            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+		            // "too much recursion" error.
+		            setTimeout(runIfPresent, 0, handle);
+		        } else {
+		            var task = tasksByHandle[handle];
+		            if (task) {
+		                currentlyRunningATask = true;
+		                try {
+		                    run(task);
+		                } finally {
+		                    clearImmediate(handle);
+		                    currentlyRunningATask = false;
+		                }
+		            }
+		        }
+		    }
+
+		    function installNextTickImplementation() {
+		        registerImmediate = function(handle) {
+		            process.nextTick(function () { runIfPresent(handle); });
+		        };
+		    }
+
+		    function canUsePostMessage() {
+		        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+		        // where `global.postMessage` means something completely different and can't be used for this purpose.
+		        if (global.postMessage && !global.importScripts) {
+		            var postMessageIsAsynchronous = true;
+		            var oldOnMessage = global.onmessage;
+		            global.onmessage = function() {
+		                postMessageIsAsynchronous = false;
+		            };
+		            global.postMessage("", "*");
+		            global.onmessage = oldOnMessage;
+		            return postMessageIsAsynchronous;
+		        }
+		    }
+
+		    function installPostMessageImplementation() {
+		        // Installs an event handler on `global` for the `message` event: see
+		        // * https://developer.mozilla.org/en/DOM/window.postMessage
+		        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+		        var messagePrefix = "setImmediate$" + Math.random() + "$";
+		        var onGlobalMessage = function(event) {
+		            if (event.source === global &&
+		                typeof event.data === "string" &&
+		                event.data.indexOf(messagePrefix) === 0) {
+		                runIfPresent(+event.data.slice(messagePrefix.length));
+		            }
+		        };
+
+		        if (global.addEventListener) {
+		            global.addEventListener("message", onGlobalMessage, false);
+		        } else {
+		            global.attachEvent("onmessage", onGlobalMessage);
+		        }
+
+		        registerImmediate = function(handle) {
+		            global.postMessage(messagePrefix + handle, "*");
+		        };
+		    }
+
+		    function installMessageChannelImplementation() {
+		        var channel = new MessageChannel();
+		        channel.port1.onmessage = function(event) {
+		            var handle = event.data;
+		            runIfPresent(handle);
+		        };
+
+		        registerImmediate = function(handle) {
+		            channel.port2.postMessage(handle);
+		        };
+		    }
+
+		    function installReadyStateChangeImplementation() {
+		        var html = doc.documentElement;
+		        registerImmediate = function(handle) {
+		            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+		            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+		            var script = doc.createElement("script");
+		            script.onreadystatechange = function () {
+		                runIfPresent(handle);
+		                script.onreadystatechange = null;
+		                html.removeChild(script);
+		                script = null;
+		            };
+		            html.appendChild(script);
+		        };
+		    }
+
+		    function installSetTimeoutImplementation() {
+		        registerImmediate = function(handle) {
+		            setTimeout(runIfPresent, 0, handle);
+		        };
+		    }
+
+		    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+		    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+		    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+		    // Don't get fooled by e.g. browserify environments.
+		    if ({}.toString.call(global.process) === "[object process]") {
+		        // For Node.js before 0.9
+		        installNextTickImplementation();
+
+		    } else if (canUsePostMessage()) {
+		        // For non-IE10 modern browsers
+		        installPostMessageImplementation();
+
+		    } else if (global.MessageChannel) {
+		        // For web workers, where supported
+		        installMessageChannelImplementation();
+
+		    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+		        // For IE 6–8
+		        installReadyStateChangeImplementation();
+
+		    } else {
+		        // For older browsers
+		        installSetTimeoutImplementation();
+		    }
+
+		    attachTo.setImmediate = setImmediate;
+		    attachTo.clearImmediate = clearImmediate;
+		}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+
+		/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
+
+	/***/ }),
+	/* 6 */
+	/***/ (function(module, exports) {
+
+		/* WEBPACK VAR INJECTION */(function(global) {var win;
+
+		if (typeof window !== "undefined") {
+		    win = window;
+		} else if (typeof global !== "undefined") {
+		    win = global;
+		} else if (typeof self !== "undefined"){
+		    win = self;
+		} else {
+		    win = {};
+		}
+
+		module.exports = win;
+
+		/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+	/***/ }),
+	/* 7 */
 	/***/ (function(module, exports) {
 
 		/* (ignored) */
 
 	/***/ }),
-	/* 5 */
+	/* 8 */
 	/***/ (function(module, exports) {
 
 		module.exports = {"acm":{"name":"ACM","cors":true},"apigateway":{"name":"APIGateway","cors":true},"applicationautoscaling":{"prefix":"application-autoscaling","name":"ApplicationAutoScaling","cors":true},"appstream":{"name":"AppStream"},"autoscaling":{"name":"AutoScaling","cors":true},"batch":{"name":"Batch"},"budgets":{"name":"Budgets"},"clouddirectory":{"name":"CloudDirectory"},"cloudformation":{"name":"CloudFormation","cors":true},"cloudfront":{"name":"CloudFront","versions":["2013-05-12*","2013-11-11*","2014-05-31*","2014-10-21*","2014-11-06*","2015-04-17*","2015-07-27*","2015-09-17*","2016-01-13*","2016-01-28*","2016-08-01*","2016-08-20*","2016-09-07*","2016-09-29*","2016-11-25*"],"cors":true},"cloudhsm":{"name":"CloudHSM","cors":true},"cloudsearch":{"name":"CloudSearch"},"cloudsearchdomain":{"name":"CloudSearchDomain"},"cloudtrail":{"name":"CloudTrail","cors":true},"cloudwatch":{"prefix":"monitoring","name":"CloudWatch","cors":true},"cloudwatchevents":{"prefix":"events","name":"CloudWatchEvents","versions":["2014-02-03*"],"cors":true},"cloudwatchlogs":{"prefix":"logs","name":"CloudWatchLogs","cors":true},"codebuild":{"name":"CodeBuild"},"codecommit":{"name":"CodeCommit","cors":true},"codedeploy":{"name":"CodeDeploy","cors":true},"codepipeline":{"name":"CodePipeline","cors":true},"cognitoidentity":{"prefix":"cognito-identity","name":"CognitoIdentity","cors":true},"cognitoidentityserviceprovider":{"prefix":"cognito-idp","name":"CognitoIdentityServiceProvider","cors":true},"cognitosync":{"prefix":"cognito-sync","name":"CognitoSync","cors":true},"configservice":{"prefix":"config","name":"ConfigService","cors":true},"cur":{"name":"CUR","cors":true},"datapipeline":{"name":"DataPipeline"},"devicefarm":{"name":"DeviceFarm","cors":true},"directconnect":{"name":"DirectConnect","cors":true},"directoryservice":{"prefix":"ds","name":"DirectoryService"},"discovery":{"name":"Discovery"},"dms":{"name":"DMS"},"dynamodb":{"name":"DynamoDB","cors":true},"dynamodbstreams":{"prefix":"streams.dynamodb","name":"DynamoDBStreams","cors":true},"ec2":{"name":"EC2","versions":["2013-06-15*","2013-10-15*","2014-02-01*","2014-05-01*","2014-06-15*","2014-09-01*","2014-10-01*","2015-03-01*","2015-04-15*","2015-10-01*","2016-04-01*","2016-09-15*"],"cors":true},"ecr":{"name":"ECR","cors":true},"ecs":{"name":"ECS","cors":true},"efs":{"prefix":"elasticfilesystem","name":"EFS","cors":true},"elasticache":{"name":"ElastiCache","versions":["2012-11-15*","2014-03-24*","2014-07-15*","2014-09-30*"],"cors":true},"elasticbeanstalk":{"name":"ElasticBeanstalk","cors":true},"elb":{"prefix":"elasticloadbalancing","name":"ELB","cors":true},"elbv2":{"prefix":"elasticloadbalancingv2","name":"ELBv2","cors":true},"emr":{"prefix":"elasticmapreduce","name":"EMR","cors":true},"es":{"name":"ES"},"elastictranscoder":{"name":"ElasticTranscoder","cors":true},"firehose":{"name":"Firehose","cors":true},"gamelift":{"name":"GameLift","cors":true},"glacier":{"name":"Glacier"},"health":{"name":"Health"},"iam":{"name":"IAM"},"importexport":{"name":"ImportExport"},"inspector":{"name":"Inspector","versions":["2015-08-18*"],"cors":true},"iot":{"name":"Iot","cors":true},"iotdata":{"prefix":"iot-data","name":"IotData","cors":true},"kinesis":{"name":"Kinesis","cors":true},"kinesisanalytics":{"name":"KinesisAnalytics"},"kms":{"name":"KMS","cors":true},"lambda":{"name":"Lambda","cors":true},"lexruntime":{"prefix":"runtime.lex","name":"LexRuntime","cors":true},"lightsail":{"name":"Lightsail"},"machinelearning":{"name":"MachineLearning","cors":true},"marketplacecommerceanalytics":{"name":"MarketplaceCommerceAnalytics","cors":true},"marketplacemetering":{"prefix":"meteringmarketplace","name":"MarketplaceMetering"},"mturk":{"prefix":"mturk-requester","name":"MTurk","cors":true},"mobileanalytics":{"name":"MobileAnalytics","cors":true},"opsworks":{"name":"OpsWorks","cors":true},"opsworkscm":{"name":"OpsWorksCM"},"organizations":{"name":"Organizations"},"pinpoint":{"name":"Pinpoint"},"polly":{"name":"Polly","cors":true},"rds":{"name":"RDS","versions":["2014-09-01*"],"cors":true},"redshift":{"name":"Redshift","cors":true},"rekognition":{"name":"Rekognition","cors":true},"resourcegroupstaggingapi":{"name":"ResourceGroupsTaggingAPI"},"route53":{"name":"Route53","cors":true},"route53domains":{"name":"Route53Domains","cors":true},"s3":{"name":"S3","dualstackAvailable":true,"cors":true},"servicecatalog":{"name":"ServiceCatalog","cors":true},"ses":{"prefix":"email","name":"SES","cors":true},"shield":{"name":"Shield"},"simpledb":{"prefix":"sdb","name":"SimpleDB"},"sms":{"name":"SMS"},"snowball":{"name":"Snowball"},"sns":{"name":"SNS","cors":true},"sqs":{"name":"SQS","cors":true},"ssm":{"name":"SSM","cors":true},"storagegateway":{"name":"StorageGateway","cors":true},"stepfunctions":{"prefix":"states","name":"StepFunctions"},"sts":{"name":"STS","cors":true},"support":{"name":"Support"},"swf":{"name":"SWF"},"xray":{"name":"XRay"},"waf":{"name":"WAF","cors":true},"wafregional":{"prefix":"waf-regional","name":"WAFRegional"},"workdocs":{"name":"WorkDocs","cors":true},"workspaces":{"name":"WorkSpaces"},"codestar":{"name":"CodeStar"},"lexmodelbuildingservice":{"prefix":"lex-models","name":"LexModelBuildingService"},"marketplaceentitlementservice":{"prefix":"entitlement.marketplace","name":"MarketplaceEntitlementService"},"athena":{"name":"Athena"},"greengrass":{"name":"Greengrass"},"dax":{"name":"DAX"}}
 
 	/***/ }),
-	/* 6 */
+	/* 9 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var v1 = __webpack_require__(7);
-		var v4 = __webpack_require__(10);
+		var v1 = __webpack_require__(10);
+		var v4 = __webpack_require__(13);
 
 		var uuid = v4;
 		uuid.v1 = v1;
@@ -1605,14 +1891,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 7 */
+	/* 10 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Unique ID creation requires a high quality random # generator.  We feature
 		// detect to determine the best RNG source, normalizing to a function that
 		// returns 128-bits of randomness, since that's what's usually required
-		var rng = __webpack_require__(8);
-		var bytesToUuid = __webpack_require__(9);
+		var rng = __webpack_require__(11);
+		var bytesToUuid = __webpack_require__(12);
 
 		// **`v1()` - Generate time-based UUID**
 		//
@@ -1714,7 +2000,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 8 */
+	/* 11 */
 	/***/ (function(module, exports) {
 
 		/* WEBPACK VAR INJECTION */(function(global) {// Unique ID creation requires a high quality random # generator.  In the
@@ -1754,7 +2040,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 	/***/ }),
-	/* 9 */
+	/* 12 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -1783,11 +2069,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 10 */
+	/* 13 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var rng = __webpack_require__(8);
-		var bytesToUuid = __webpack_require__(9);
+		var rng = __webpack_require__(11);
+		var bytesToUuid = __webpack_require__(12);
 
 		function v4(options, buf, offset) {
 		  var i = buf && offset || 0;
@@ -1818,12 +2104,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 11 */
+	/* 14 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
-		var JsonBuilder = __webpack_require__(12);
-		var JsonParser = __webpack_require__(13);
+		var JsonBuilder = __webpack_require__(15);
+		var JsonParser = __webpack_require__(16);
 
 		function buildRequest(req) {
 		  var httpRequest = req.httpRequest;
@@ -1891,7 +2177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 12 */
+	/* 15 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
@@ -1953,7 +2239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 13 */
+	/* 16 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
@@ -2023,13 +2309,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 14 */
+	/* 17 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
 		var util = __webpack_require__(2);
-		var QueryParamSerializer = __webpack_require__(15);
-		var Shape = __webpack_require__(16);
+		var QueryParamSerializer = __webpack_require__(18);
+		var Shape = __webpack_require__(19);
 
 		function buildRequest(req) {
 		  var operation = req.service.api.operations[req.operation];
@@ -2133,7 +2419,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 15 */
+	/* 18 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
@@ -2220,10 +2506,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 16 */
+	/* 19 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Collection = __webpack_require__(17);
+		var Collection = __webpack_require__(20);
 
 		var util = __webpack_require__(2);
 
@@ -2578,7 +2864,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 17 */
+	/* 20 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var memoizedProperty = __webpack_require__(2).memoizedProperty;
@@ -2604,7 +2890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 18 */
+	/* 21 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
@@ -2753,14 +3039,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 19 */
+	/* 22 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
-		var Rest = __webpack_require__(18);
-		var Json = __webpack_require__(11);
-		var JsonBuilder = __webpack_require__(12);
-		var JsonParser = __webpack_require__(13);
+		var Rest = __webpack_require__(21);
+		var Json = __webpack_require__(14);
+		var JsonBuilder = __webpack_require__(15);
+		var JsonParser = __webpack_require__(16);
 
 		function populateBody(req) {
 		  var builder = new JsonBuilder();
@@ -2774,11 +3060,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		    if (payloadShape.type === 'structure') {
 		      req.httpRequest.body = builder.build(params, payloadShape);
+		      applyContentTypeHeader(req);
 		    } else { // non-JSON payload
 		      req.httpRequest.body = params;
 		    }
 		  } else {
 		    req.httpRequest.body = builder.build(req.params, input);
+		    applyContentTypeHeader(req);
+		  }
+		}
+
+		function applyContentTypeHeader(req) {
+		  if (!req.httpRequest.headers['Content-Type']) {
+		    req.httpRequest.headers['Content-Type'] = 'application/json';
 		  }
 		}
 
@@ -2826,12 +3120,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 20 */
+	/* 23 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
 		var util = __webpack_require__(2);
-		var Rest = __webpack_require__(18);
+		var Rest = __webpack_require__(21);
 
 		function populateBody(req) {
 		  var input = req.service.api.operations[req.operation].input;
@@ -2928,11 +3222,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 21 */
+	/* 24 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
-		var builder = __webpack_require__(22);
+		var builder = __webpack_require__(25);
 
 		function XmlBuilder() { }
 
@@ -3020,16 +3314,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 22 */
+	/* 25 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
 		(function() {
 		  var XMLBuilder, assign;
 
-		  assign = __webpack_require__(23);
+		  assign = __webpack_require__(26);
 
-		  XMLBuilder = __webpack_require__(74);
+		  XMLBuilder = __webpack_require__(77);
 
 		  module.exports.create = function(name, xmldec, doctype, options) {
 		    options = assign({}, xmldec, doctype, options);
@@ -3040,15 +3334,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 23 */
+	/* 26 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var assignValue = __webpack_require__(24),
-		    copyObject = __webpack_require__(42),
-		    createAssigner = __webpack_require__(43),
-		    isArrayLike = __webpack_require__(53),
-		    isPrototype = __webpack_require__(56),
-		    keys = __webpack_require__(57);
+		var assignValue = __webpack_require__(27),
+		    copyObject = __webpack_require__(45),
+		    createAssigner = __webpack_require__(46),
+		    isArrayLike = __webpack_require__(56),
+		    isPrototype = __webpack_require__(59),
+		    keys = __webpack_require__(60);
 
 		/** Used for built-in method references. */
 		var objectProto = Object.prototype;
@@ -3104,11 +3398,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 24 */
+	/* 27 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseAssignValue = __webpack_require__(25),
-		    eq = __webpack_require__(41);
+		var baseAssignValue = __webpack_require__(28),
+		    eq = __webpack_require__(44);
 
 		/** Used for built-in method references. */
 		var objectProto = Object.prototype;
@@ -3138,10 +3432,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 25 */
+	/* 28 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var defineProperty = __webpack_require__(26);
+		var defineProperty = __webpack_require__(29);
 
 		/**
 		 * The base implementation of `assignValue` and `assignMergeValue` without
@@ -3169,10 +3463,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 26 */
+	/* 29 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getNative = __webpack_require__(27);
+		var getNative = __webpack_require__(30);
 
 		var defineProperty = (function() {
 		  try {
@@ -3186,11 +3480,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 27 */
+	/* 30 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseIsNative = __webpack_require__(28),
-		    getValue = __webpack_require__(40);
+		var baseIsNative = __webpack_require__(31),
+		    getValue = __webpack_require__(43);
 
 		/**
 		 * Gets the native function at `key` of `object`.
@@ -3209,13 +3503,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 28 */
+	/* 31 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isFunction = __webpack_require__(29),
-		    isMasked = __webpack_require__(37),
-		    isObject = __webpack_require__(36),
-		    toSource = __webpack_require__(39);
+		var isFunction = __webpack_require__(32),
+		    isMasked = __webpack_require__(40),
+		    isObject = __webpack_require__(39),
+		    toSource = __webpack_require__(42);
 
 		/**
 		 * Used to match `RegExp`
@@ -3262,11 +3556,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 29 */
+	/* 32 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseGetTag = __webpack_require__(30),
-		    isObject = __webpack_require__(36);
+		var baseGetTag = __webpack_require__(33),
+		    isObject = __webpack_require__(39);
 
 		/** `Object#toString` result references. */
 		var asyncTag = '[object AsyncFunction]',
@@ -3305,12 +3599,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 30 */
+	/* 33 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Symbol = __webpack_require__(31),
-		    getRawTag = __webpack_require__(34),
-		    objectToString = __webpack_require__(35);
+		var Symbol = __webpack_require__(34),
+		    getRawTag = __webpack_require__(37),
+		    objectToString = __webpack_require__(38);
 
 		/** `Object#toString` result references. */
 		var nullTag = '[object Null]',
@@ -3339,10 +3633,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 31 */
+	/* 34 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var root = __webpack_require__(32);
+		var root = __webpack_require__(35);
 
 		/** Built-in value references. */
 		var Symbol = root.Symbol;
@@ -3351,10 +3645,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 32 */
+	/* 35 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var freeGlobal = __webpack_require__(33);
+		var freeGlobal = __webpack_require__(36);
 
 		/** Detect free variable `self`. */
 		var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -3366,7 +3660,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 33 */
+	/* 36 */
 	/***/ (function(module, exports) {
 
 		/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -3377,10 +3671,10 @@ return /******/ (function(modules) { // webpackBootstrap
 		/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 	/***/ }),
-	/* 34 */
+	/* 37 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Symbol = __webpack_require__(31);
+		var Symbol = __webpack_require__(34);
 
 		/** Used for built-in method references. */
 		var objectProto = Object.prototype;
@@ -3429,7 +3723,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 35 */
+	/* 38 */
 	/***/ (function(module, exports) {
 
 		/** Used for built-in method references. */
@@ -3457,7 +3751,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 36 */
+	/* 39 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -3494,10 +3788,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 37 */
+	/* 40 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var coreJsData = __webpack_require__(38);
+		var coreJsData = __webpack_require__(41);
 
 		/** Used to detect methods masquerading as native. */
 		var maskSrcKey = (function() {
@@ -3520,10 +3814,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 38 */
+	/* 41 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var root = __webpack_require__(32);
+		var root = __webpack_require__(35);
 
 		/** Used to detect overreaching core-js shims. */
 		var coreJsData = root['__core-js_shared__'];
@@ -3532,7 +3826,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 39 */
+	/* 42 */
 	/***/ (function(module, exports) {
 
 		/** Used for built-in method references. */
@@ -3564,7 +3858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 40 */
+	/* 43 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -3583,7 +3877,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 41 */
+	/* 44 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -3626,11 +3920,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 42 */
+	/* 45 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var assignValue = __webpack_require__(24),
-		    baseAssignValue = __webpack_require__(25);
+		var assignValue = __webpack_require__(27),
+		    baseAssignValue = __webpack_require__(28);
 
 		/**
 		 * Copies properties of `source` to `object`.
@@ -3672,11 +3966,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 43 */
+	/* 46 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseRest = __webpack_require__(44),
-		    isIterateeCall = __webpack_require__(52);
+		var baseRest = __webpack_require__(47),
+		    isIterateeCall = __webpack_require__(55);
 
 		/**
 		 * Creates a function like `_.assign`.
@@ -3715,12 +4009,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 44 */
+	/* 47 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var identity = __webpack_require__(45),
-		    overRest = __webpack_require__(46),
-		    setToString = __webpack_require__(48);
+		var identity = __webpack_require__(48),
+		    overRest = __webpack_require__(49),
+		    setToString = __webpack_require__(51);
 
 		/**
 		 * The base implementation of `_.rest` which doesn't validate or coerce arguments.
@@ -3738,7 +4032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 45 */
+	/* 48 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -3765,10 +4059,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 46 */
+	/* 49 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var apply = __webpack_require__(47);
+		var apply = __webpack_require__(50);
 
 		/* Built-in method references for those with the same name as other `lodash` methods. */
 		var nativeMax = Math.max;
@@ -3807,7 +4101,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 47 */
+	/* 50 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -3834,11 +4128,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 48 */
+	/* 51 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseSetToString = __webpack_require__(49),
-		    shortOut = __webpack_require__(51);
+		var baseSetToString = __webpack_require__(52),
+		    shortOut = __webpack_require__(54);
 
 		/**
 		 * Sets the `toString` method of `func` to return `string`.
@@ -3854,12 +4148,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 49 */
+	/* 52 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var constant = __webpack_require__(50),
-		    defineProperty = __webpack_require__(26),
-		    identity = __webpack_require__(45);
+		var constant = __webpack_require__(53),
+		    defineProperty = __webpack_require__(29),
+		    identity = __webpack_require__(48);
 
 		/**
 		 * The base implementation of `setToString` without support for hot loop shorting.
@@ -3882,7 +4176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 50 */
+	/* 53 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -3914,7 +4208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 51 */
+	/* 54 */
 	/***/ (function(module, exports) {
 
 		/** Used to detect hot functions by number of calls within a span of milliseconds. */
@@ -3957,13 +4251,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 52 */
+	/* 55 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var eq = __webpack_require__(41),
-		    isArrayLike = __webpack_require__(53),
-		    isIndex = __webpack_require__(55),
-		    isObject = __webpack_require__(36);
+		var eq = __webpack_require__(44),
+		    isArrayLike = __webpack_require__(56),
+		    isIndex = __webpack_require__(58),
+		    isObject = __webpack_require__(39);
 
 		/**
 		 * Checks if the given arguments are from an iteratee call.
@@ -3993,11 +4287,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 53 */
+	/* 56 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isFunction = __webpack_require__(29),
-		    isLength = __webpack_require__(54);
+		var isFunction = __webpack_require__(32),
+		    isLength = __webpack_require__(57);
 
 		/**
 		 * Checks if `value` is array-like. A value is considered array-like if it's
@@ -4032,7 +4326,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 54 */
+	/* 57 */
 	/***/ (function(module, exports) {
 
 		/** Used as references for various `Number` constants. */
@@ -4073,7 +4367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 55 */
+	/* 58 */
 	/***/ (function(module, exports) {
 
 		/** Used as references for various `Number` constants. */
@@ -4101,7 +4395,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 56 */
+	/* 59 */
 	/***/ (function(module, exports) {
 
 		/** Used for built-in method references. */
@@ -4125,12 +4419,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 57 */
+	/* 60 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var arrayLikeKeys = __webpack_require__(58),
-		    baseKeys = __webpack_require__(71),
-		    isArrayLike = __webpack_require__(53);
+		var arrayLikeKeys = __webpack_require__(61),
+		    baseKeys = __webpack_require__(74),
+		    isArrayLike = __webpack_require__(56);
 
 		/**
 		 * Creates an array of the own enumerable property names of `object`.
@@ -4168,15 +4462,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 58 */
+	/* 61 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseTimes = __webpack_require__(59),
-		    isArguments = __webpack_require__(60),
-		    isArray = __webpack_require__(63),
-		    isBuffer = __webpack_require__(64),
-		    isIndex = __webpack_require__(55),
-		    isTypedArray = __webpack_require__(67);
+		var baseTimes = __webpack_require__(62),
+		    isArguments = __webpack_require__(63),
+		    isArray = __webpack_require__(66),
+		    isBuffer = __webpack_require__(67),
+		    isIndex = __webpack_require__(58),
+		    isTypedArray = __webpack_require__(70);
 
 		/** Used for built-in method references. */
 		var objectProto = Object.prototype;
@@ -4223,7 +4517,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 59 */
+	/* 62 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -4249,11 +4543,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 60 */
+	/* 63 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseIsArguments = __webpack_require__(61),
-		    isObjectLike = __webpack_require__(62);
+		var baseIsArguments = __webpack_require__(64),
+		    isObjectLike = __webpack_require__(65);
 
 		/** Used for built-in method references. */
 		var objectProto = Object.prototype;
@@ -4291,11 +4585,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 61 */
+	/* 64 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseGetTag = __webpack_require__(30),
-		    isObjectLike = __webpack_require__(62);
+		var baseGetTag = __webpack_require__(33),
+		    isObjectLike = __webpack_require__(65);
 
 		/** `Object#toString` result references. */
 		var argsTag = '[object Arguments]';
@@ -4315,7 +4609,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 62 */
+	/* 65 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -4350,7 +4644,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 63 */
+	/* 66 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -4382,11 +4676,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 64 */
+	/* 67 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(32),
-		    stubFalse = __webpack_require__(66);
+		/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(35),
+		    stubFalse = __webpack_require__(69);
 
 		/** Detect free variable `exports`. */
 		var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
@@ -4424,10 +4718,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		module.exports = isBuffer;
 
-		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(65)(module)))
+		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(68)(module)))
 
 	/***/ }),
-	/* 65 */
+	/* 68 */
 	/***/ (function(module, exports) {
 
 		module.exports = function(module) {
@@ -4443,7 +4737,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 66 */
+	/* 69 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -4467,12 +4761,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 67 */
+	/* 70 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseIsTypedArray = __webpack_require__(68),
-		    baseUnary = __webpack_require__(69),
-		    nodeUtil = __webpack_require__(70);
+		var baseIsTypedArray = __webpack_require__(71),
+		    baseUnary = __webpack_require__(72),
+		    nodeUtil = __webpack_require__(73);
 
 		/* Node.js helper references. */
 		var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
@@ -4500,12 +4794,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 68 */
+	/* 71 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseGetTag = __webpack_require__(30),
-		    isLength = __webpack_require__(54),
-		    isObjectLike = __webpack_require__(62);
+		var baseGetTag = __webpack_require__(33),
+		    isLength = __webpack_require__(57),
+		    isObjectLike = __webpack_require__(65);
 
 		/** `Object#toString` result references. */
 		var argsTag = '[object Arguments]',
@@ -4566,7 +4860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 69 */
+	/* 72 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -4586,10 +4880,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 70 */
+	/* 73 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(33);
+		/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(36);
 
 		/** Detect free variable `exports`. */
 		var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
@@ -4612,14 +4906,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		module.exports = nodeUtil;
 
-		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(65)(module)))
+		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(68)(module)))
 
 	/***/ }),
-	/* 71 */
+	/* 74 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isPrototype = __webpack_require__(56),
-		    nativeKeys = __webpack_require__(72);
+		var isPrototype = __webpack_require__(59),
+		    nativeKeys = __webpack_require__(75);
 
 		/** Used for built-in method references. */
 		var objectProto = Object.prototype;
@@ -4651,10 +4945,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 72 */
+	/* 75 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var overArg = __webpack_require__(73);
+		var overArg = __webpack_require__(76);
 
 		/* Built-in method references for those with the same name as other `lodash` methods. */
 		var nativeKeys = overArg(Object.keys, Object);
@@ -4663,7 +4957,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 73 */
+	/* 76 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -4684,20 +4978,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 74 */
+	/* 77 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
 		(function() {
 		  var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
 
-		  XMLStringifier = __webpack_require__(75);
+		  XMLStringifier = __webpack_require__(78);
 
-		  XMLDeclaration = __webpack_require__(76);
+		  XMLDeclaration = __webpack_require__(79);
 
-		  XMLDocType = __webpack_require__(173);
+		  XMLDocType = __webpack_require__(176);
 
-		  XMLElement = __webpack_require__(88);
+		  XMLElement = __webpack_require__(91);
 
 		  module.exports = XMLBuilder = (function() {
 		    function XMLBuilder(name, options) {
@@ -4759,7 +5053,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 75 */
+	/* 78 */
 	/***/ (function(module, exports) {
 
 		// Generated by CoffeeScript 1.9.1
@@ -4935,7 +5229,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 76 */
+	/* 79 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
@@ -4944,11 +5238,11 @@ return /******/ (function(modules) { // webpackBootstrap
 		    extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
 		    hasProp = {}.hasOwnProperty;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
-		  isObject = __webpack_require__(36);
+		  isObject = __webpack_require__(39);
 
-		  XMLNode = __webpack_require__(80);
+		  XMLNode = __webpack_require__(83);
 
 		  module.exports = XMLDeclaration = (function(superClass) {
 		    extend(XMLDeclaration, superClass);
@@ -5006,11 +5300,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 77 */
+	/* 80 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseAssign = __webpack_require__(78),
-		    baseCreate = __webpack_require__(79);
+		var baseAssign = __webpack_require__(81),
+		    baseCreate = __webpack_require__(82);
 
 		/**
 		 * Creates an object that inherits from the `prototype` object. If a
@@ -5055,11 +5349,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 78 */
+	/* 81 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var copyObject = __webpack_require__(42),
-		    keys = __webpack_require__(57);
+		var copyObject = __webpack_require__(45),
+		    keys = __webpack_require__(60);
 
 		/**
 		 * The base implementation of `_.assign` without support for multiple sources
@@ -5078,10 +5372,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 79 */
+	/* 82 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isObject = __webpack_require__(36);
+		var isObject = __webpack_require__(39);
 
 		/** Built-in value references. */
 		var objectCreate = Object.create;
@@ -5114,7 +5408,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 80 */
+	/* 83 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
@@ -5122,11 +5416,11 @@ return /******/ (function(modules) { // webpackBootstrap
 		  var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isEmpty, isFunction, isObject,
 		    hasProp = {}.hasOwnProperty;
 
-		  isObject = __webpack_require__(36);
+		  isObject = __webpack_require__(39);
 
-		  isFunction = __webpack_require__(29);
+		  isFunction = __webpack_require__(32);
 
-		  isEmpty = __webpack_require__(81);
+		  isEmpty = __webpack_require__(84);
 
 		  XMLElement = null;
 
@@ -5148,13 +5442,13 @@ return /******/ (function(modules) { // webpackBootstrap
 		      this.options = this.parent.options;
 		      this.stringify = this.parent.stringify;
 		      if (XMLElement === null) {
-		        XMLElement = __webpack_require__(88);
-		        XMLCData = __webpack_require__(171);
-		        XMLComment = __webpack_require__(172);
-		        XMLDeclaration = __webpack_require__(76);
-		        XMLDocType = __webpack_require__(173);
-		        XMLRaw = __webpack_require__(178);
-		        XMLText = __webpack_require__(179);
+		        XMLElement = __webpack_require__(91);
+		        XMLCData = __webpack_require__(174);
+		        XMLComment = __webpack_require__(175);
+		        XMLDeclaration = __webpack_require__(79);
+		        XMLDocType = __webpack_require__(176);
+		        XMLRaw = __webpack_require__(181);
+		        XMLText = __webpack_require__(182);
 		      }
 		    }
 
@@ -5451,17 +5745,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 81 */
+	/* 84 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseKeys = __webpack_require__(71),
-		    getTag = __webpack_require__(82),
-		    isArguments = __webpack_require__(60),
-		    isArray = __webpack_require__(63),
-		    isArrayLike = __webpack_require__(53),
-		    isBuffer = __webpack_require__(64),
-		    isPrototype = __webpack_require__(56),
-		    isTypedArray = __webpack_require__(67);
+		var baseKeys = __webpack_require__(74),
+		    getTag = __webpack_require__(85),
+		    isArguments = __webpack_require__(63),
+		    isArray = __webpack_require__(66),
+		    isArrayLike = __webpack_require__(56),
+		    isBuffer = __webpack_require__(67),
+		    isPrototype = __webpack_require__(59),
+		    isTypedArray = __webpack_require__(70);
 
 		/** `Object#toString` result references. */
 		var mapTag = '[object Map]',
@@ -5534,16 +5828,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 82 */
+	/* 85 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var DataView = __webpack_require__(83),
-		    Map = __webpack_require__(84),
-		    Promise = __webpack_require__(85),
-		    Set = __webpack_require__(86),
-		    WeakMap = __webpack_require__(87),
-		    baseGetTag = __webpack_require__(30),
-		    toSource = __webpack_require__(39);
+		var DataView = __webpack_require__(86),
+		    Map = __webpack_require__(87),
+		    Promise = __webpack_require__(88),
+		    Set = __webpack_require__(89),
+		    WeakMap = __webpack_require__(90),
+		    baseGetTag = __webpack_require__(33),
+		    toSource = __webpack_require__(42);
 
 		/** `Object#toString` result references. */
 		var mapTag = '[object Map]',
@@ -5598,11 +5892,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 83 */
+	/* 86 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getNative = __webpack_require__(27),
-		    root = __webpack_require__(32);
+		var getNative = __webpack_require__(30),
+		    root = __webpack_require__(35);
 
 		/* Built-in method references that are verified to be native. */
 		var DataView = getNative(root, 'DataView');
@@ -5611,11 +5905,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 84 */
+	/* 87 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getNative = __webpack_require__(27),
-		    root = __webpack_require__(32);
+		var getNative = __webpack_require__(30),
+		    root = __webpack_require__(35);
 
 		/* Built-in method references that are verified to be native. */
 		var Map = getNative(root, 'Map');
@@ -5624,11 +5918,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 85 */
+	/* 88 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getNative = __webpack_require__(27),
-		    root = __webpack_require__(32);
+		var getNative = __webpack_require__(30),
+		    root = __webpack_require__(35);
 
 		/* Built-in method references that are verified to be native. */
 		var Promise = getNative(root, 'Promise');
@@ -5637,11 +5931,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 86 */
+	/* 89 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getNative = __webpack_require__(27),
-		    root = __webpack_require__(32);
+		var getNative = __webpack_require__(30),
+		    root = __webpack_require__(35);
 
 		/* Built-in method references that are verified to be native. */
 		var Set = getNative(root, 'Set');
@@ -5650,11 +5944,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 87 */
+	/* 90 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getNative = __webpack_require__(27),
-		    root = __webpack_require__(32);
+		var getNative = __webpack_require__(30),
+		    root = __webpack_require__(35);
 
 		/* Built-in method references that are verified to be native. */
 		var WeakMap = getNative(root, 'WeakMap');
@@ -5663,7 +5957,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 88 */
+	/* 91 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
@@ -5672,19 +5966,19 @@ return /******/ (function(modules) { // webpackBootstrap
 		    extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
 		    hasProp = {}.hasOwnProperty;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
-		  isObject = __webpack_require__(36);
+		  isObject = __webpack_require__(39);
 
-		  isFunction = __webpack_require__(29);
+		  isFunction = __webpack_require__(32);
 
-		  every = __webpack_require__(89);
+		  every = __webpack_require__(92);
 
-		  XMLNode = __webpack_require__(80);
+		  XMLNode = __webpack_require__(83);
 
-		  XMLAttribute = __webpack_require__(169);
+		  XMLAttribute = __webpack_require__(172);
 
-		  XMLProcessingInstruction = __webpack_require__(170);
+		  XMLProcessingInstruction = __webpack_require__(173);
 
 		  module.exports = XMLElement = (function(superClass) {
 		    extend(XMLElement, superClass);
@@ -5881,14 +6175,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 89 */
+	/* 92 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var arrayEvery = __webpack_require__(90),
-		    baseEvery = __webpack_require__(91),
-		    baseIteratee = __webpack_require__(97),
-		    isArray = __webpack_require__(63),
-		    isIterateeCall = __webpack_require__(52);
+		var arrayEvery = __webpack_require__(93),
+		    baseEvery = __webpack_require__(94),
+		    baseIteratee = __webpack_require__(100),
+		    isArray = __webpack_require__(66),
+		    isIterateeCall = __webpack_require__(55);
 
 		/**
 		 * Checks if `predicate` returns truthy for **all** elements of `collection`.
@@ -5943,7 +6237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 90 */
+	/* 93 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -5972,10 +6266,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 91 */
+	/* 94 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseEach = __webpack_require__(92);
+		var baseEach = __webpack_require__(95);
 
 		/**
 		 * The base implementation of `_.every` without support for iteratee shorthands.
@@ -5999,11 +6293,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 92 */
+	/* 95 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseForOwn = __webpack_require__(93),
-		    createBaseEach = __webpack_require__(96);
+		var baseForOwn = __webpack_require__(96),
+		    createBaseEach = __webpack_require__(99);
 
 		/**
 		 * The base implementation of `_.forEach` without support for iteratee shorthands.
@@ -6019,11 +6313,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 93 */
+	/* 96 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseFor = __webpack_require__(94),
-		    keys = __webpack_require__(57);
+		var baseFor = __webpack_require__(97),
+		    keys = __webpack_require__(60);
 
 		/**
 		 * The base implementation of `_.forOwn` without support for iteratee shorthands.
@@ -6041,10 +6335,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 94 */
+	/* 97 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var createBaseFor = __webpack_require__(95);
+		var createBaseFor = __webpack_require__(98);
 
 		/**
 		 * The base implementation of `baseForOwn` which iterates over `object`
@@ -6063,7 +6357,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 95 */
+	/* 98 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -6094,10 +6388,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 96 */
+	/* 99 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isArrayLike = __webpack_require__(53);
+		var isArrayLike = __webpack_require__(56);
 
 		/**
 		 * Creates a `baseEach` or `baseEachRight` function.
@@ -6132,14 +6426,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 97 */
+	/* 100 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseMatches = __webpack_require__(98),
-		    baseMatchesProperty = __webpack_require__(150),
-		    identity = __webpack_require__(45),
-		    isArray = __webpack_require__(63),
-		    property = __webpack_require__(166);
+		var baseMatches = __webpack_require__(101),
+		    baseMatchesProperty = __webpack_require__(153),
+		    identity = __webpack_require__(48),
+		    isArray = __webpack_require__(66),
+		    property = __webpack_require__(169);
 
 		/**
 		 * The base implementation of `_.iteratee`.
@@ -6169,12 +6463,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 98 */
+	/* 101 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseIsMatch = __webpack_require__(99),
-		    getMatchData = __webpack_require__(147),
-		    matchesStrictComparable = __webpack_require__(149);
+		var baseIsMatch = __webpack_require__(102),
+		    getMatchData = __webpack_require__(150),
+		    matchesStrictComparable = __webpack_require__(152);
 
 		/**
 		 * The base implementation of `_.matches` which doesn't clone `source`.
@@ -6197,11 +6491,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 99 */
+	/* 102 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Stack = __webpack_require__(100),
-		    baseIsEqual = __webpack_require__(128);
+		var Stack = __webpack_require__(103),
+		    baseIsEqual = __webpack_require__(131);
 
 		/** Used to compose bitmasks for value comparisons. */
 		var COMPARE_PARTIAL_FLAG = 1,
@@ -6265,15 +6559,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 100 */
+	/* 103 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var ListCache = __webpack_require__(101),
-		    stackClear = __webpack_require__(108),
-		    stackDelete = __webpack_require__(109),
-		    stackGet = __webpack_require__(110),
-		    stackHas = __webpack_require__(111),
-		    stackSet = __webpack_require__(112);
+		var ListCache = __webpack_require__(104),
+		    stackClear = __webpack_require__(111),
+		    stackDelete = __webpack_require__(112),
+		    stackGet = __webpack_require__(113),
+		    stackHas = __webpack_require__(114),
+		    stackSet = __webpack_require__(115);
 
 		/**
 		 * Creates a stack cache object to store key-value pairs.
@@ -6298,14 +6592,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 101 */
+	/* 104 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var listCacheClear = __webpack_require__(102),
-		    listCacheDelete = __webpack_require__(103),
-		    listCacheGet = __webpack_require__(105),
-		    listCacheHas = __webpack_require__(106),
-		    listCacheSet = __webpack_require__(107);
+		var listCacheClear = __webpack_require__(105),
+		    listCacheDelete = __webpack_require__(106),
+		    listCacheGet = __webpack_require__(108),
+		    listCacheHas = __webpack_require__(109),
+		    listCacheSet = __webpack_require__(110);
 
 		/**
 		 * Creates an list cache object.
@@ -6336,7 +6630,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 102 */
+	/* 105 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -6355,10 +6649,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 103 */
+	/* 106 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var assocIndexOf = __webpack_require__(104);
+		var assocIndexOf = __webpack_require__(107);
 
 		/** Used for built-in method references. */
 		var arrayProto = Array.prototype;
@@ -6396,10 +6690,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 104 */
+	/* 107 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var eq = __webpack_require__(41);
+		var eq = __webpack_require__(44);
 
 		/**
 		 * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -6423,10 +6717,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 105 */
+	/* 108 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var assocIndexOf = __webpack_require__(104);
+		var assocIndexOf = __webpack_require__(107);
 
 		/**
 		 * Gets the list cache value for `key`.
@@ -6448,10 +6742,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 106 */
+	/* 109 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var assocIndexOf = __webpack_require__(104);
+		var assocIndexOf = __webpack_require__(107);
 
 		/**
 		 * Checks if a list cache value for `key` exists.
@@ -6470,10 +6764,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 107 */
+	/* 110 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var assocIndexOf = __webpack_require__(104);
+		var assocIndexOf = __webpack_require__(107);
 
 		/**
 		 * Sets the list cache `key` to `value`.
@@ -6502,10 +6796,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 108 */
+	/* 111 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var ListCache = __webpack_require__(101);
+		var ListCache = __webpack_require__(104);
 
 		/**
 		 * Removes all key-value entries from the stack.
@@ -6523,7 +6817,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 109 */
+	/* 112 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -6547,7 +6841,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 110 */
+	/* 113 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -6567,7 +6861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 111 */
+	/* 114 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -6587,12 +6881,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 112 */
+	/* 115 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var ListCache = __webpack_require__(101),
-		    Map = __webpack_require__(84),
-		    MapCache = __webpack_require__(113);
+		var ListCache = __webpack_require__(104),
+		    Map = __webpack_require__(87),
+		    MapCache = __webpack_require__(116);
 
 		/** Used as the size to enable large array optimizations. */
 		var LARGE_ARRAY_SIZE = 200;
@@ -6627,14 +6921,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 113 */
+	/* 116 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var mapCacheClear = __webpack_require__(114),
-		    mapCacheDelete = __webpack_require__(122),
-		    mapCacheGet = __webpack_require__(125),
-		    mapCacheHas = __webpack_require__(126),
-		    mapCacheSet = __webpack_require__(127);
+		var mapCacheClear = __webpack_require__(117),
+		    mapCacheDelete = __webpack_require__(125),
+		    mapCacheGet = __webpack_require__(128),
+		    mapCacheHas = __webpack_require__(129),
+		    mapCacheSet = __webpack_require__(130);
 
 		/**
 		 * Creates a map cache object to store key-value pairs.
@@ -6665,12 +6959,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 114 */
+	/* 117 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Hash = __webpack_require__(115),
-		    ListCache = __webpack_require__(101),
-		    Map = __webpack_require__(84);
+		var Hash = __webpack_require__(118),
+		    ListCache = __webpack_require__(104),
+		    Map = __webpack_require__(87);
 
 		/**
 		 * Removes all key-value entries from the map.
@@ -6692,14 +6986,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 115 */
+	/* 118 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var hashClear = __webpack_require__(116),
-		    hashDelete = __webpack_require__(118),
-		    hashGet = __webpack_require__(119),
-		    hashHas = __webpack_require__(120),
-		    hashSet = __webpack_require__(121);
+		var hashClear = __webpack_require__(119),
+		    hashDelete = __webpack_require__(121),
+		    hashGet = __webpack_require__(122),
+		    hashHas = __webpack_require__(123),
+		    hashSet = __webpack_require__(124);
 
 		/**
 		 * Creates a hash object.
@@ -6730,10 +7024,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 116 */
+	/* 119 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var nativeCreate = __webpack_require__(117);
+		var nativeCreate = __webpack_require__(120);
 
 		/**
 		 * Removes all key-value entries from the hash.
@@ -6751,10 +7045,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 117 */
+	/* 120 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getNative = __webpack_require__(27);
+		var getNative = __webpack_require__(30);
 
 		/* Built-in method references that are verified to be native. */
 		var nativeCreate = getNative(Object, 'create');
@@ -6763,7 +7057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 118 */
+	/* 121 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -6786,10 +7080,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 119 */
+	/* 122 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var nativeCreate = __webpack_require__(117);
+		var nativeCreate = __webpack_require__(120);
 
 		/** Used to stand-in for `undefined` hash values. */
 		var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -6822,10 +7116,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 120 */
+	/* 123 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var nativeCreate = __webpack_require__(117);
+		var nativeCreate = __webpack_require__(120);
 
 		/** Used for built-in method references. */
 		var objectProto = Object.prototype;
@@ -6851,10 +7145,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 121 */
+	/* 124 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var nativeCreate = __webpack_require__(117);
+		var nativeCreate = __webpack_require__(120);
 
 		/** Used to stand-in for `undefined` hash values. */
 		var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -6880,10 +7174,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 122 */
+	/* 125 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getMapData = __webpack_require__(123);
+		var getMapData = __webpack_require__(126);
 
 		/**
 		 * Removes `key` and its value from the map.
@@ -6904,10 +7198,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 123 */
+	/* 126 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isKeyable = __webpack_require__(124);
+		var isKeyable = __webpack_require__(127);
 
 		/**
 		 * Gets the data for `map`.
@@ -6928,7 +7222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 124 */
+	/* 127 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -6949,10 +7243,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 125 */
+	/* 128 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getMapData = __webpack_require__(123);
+		var getMapData = __webpack_require__(126);
 
 		/**
 		 * Gets the map value for `key`.
@@ -6971,10 +7265,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 126 */
+	/* 129 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getMapData = __webpack_require__(123);
+		var getMapData = __webpack_require__(126);
 
 		/**
 		 * Checks if a map value for `key` exists.
@@ -6993,10 +7287,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 127 */
+	/* 130 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getMapData = __webpack_require__(123);
+		var getMapData = __webpack_require__(126);
 
 		/**
 		 * Sets the map `key` to `value`.
@@ -7021,11 +7315,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 128 */
+	/* 131 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseIsEqualDeep = __webpack_require__(129),
-		    isObjectLike = __webpack_require__(62);
+		var baseIsEqualDeep = __webpack_require__(132),
+		    isObjectLike = __webpack_require__(65);
 
 		/**
 		 * The base implementation of `_.isEqual` which supports partial comparisons
@@ -7055,17 +7349,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 129 */
+	/* 132 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Stack = __webpack_require__(100),
-		    equalArrays = __webpack_require__(130),
-		    equalByTag = __webpack_require__(136),
-		    equalObjects = __webpack_require__(140),
-		    getTag = __webpack_require__(82),
-		    isArray = __webpack_require__(63),
-		    isBuffer = __webpack_require__(64),
-		    isTypedArray = __webpack_require__(67);
+		var Stack = __webpack_require__(103),
+		    equalArrays = __webpack_require__(133),
+		    equalByTag = __webpack_require__(139),
+		    equalObjects = __webpack_require__(143),
+		    getTag = __webpack_require__(85),
+		    isArray = __webpack_require__(66),
+		    isBuffer = __webpack_require__(67),
+		    isTypedArray = __webpack_require__(70);
 
 		/** Used to compose bitmasks for value comparisons. */
 		var COMPARE_PARTIAL_FLAG = 1;
@@ -7144,12 +7438,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 130 */
+	/* 133 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var SetCache = __webpack_require__(131),
-		    arraySome = __webpack_require__(134),
-		    cacheHas = __webpack_require__(135);
+		var SetCache = __webpack_require__(134),
+		    arraySome = __webpack_require__(137),
+		    cacheHas = __webpack_require__(138);
 
 		/** Used to compose bitmasks for value comparisons. */
 		var COMPARE_PARTIAL_FLAG = 1,
@@ -7233,12 +7527,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 131 */
+	/* 134 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var MapCache = __webpack_require__(113),
-		    setCacheAdd = __webpack_require__(132),
-		    setCacheHas = __webpack_require__(133);
+		var MapCache = __webpack_require__(116),
+		    setCacheAdd = __webpack_require__(135),
+		    setCacheHas = __webpack_require__(136);
 
 		/**
 		 *
@@ -7266,7 +7560,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 132 */
+	/* 135 */
 	/***/ (function(module, exports) {
 
 		/** Used to stand-in for `undefined` hash values. */
@@ -7291,7 +7585,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 133 */
+	/* 136 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -7311,7 +7605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 134 */
+	/* 137 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -7340,7 +7634,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 135 */
+	/* 138 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -7359,15 +7653,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 136 */
+	/* 139 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Symbol = __webpack_require__(31),
-		    Uint8Array = __webpack_require__(137),
-		    eq = __webpack_require__(41),
-		    equalArrays = __webpack_require__(130),
-		    mapToArray = __webpack_require__(138),
-		    setToArray = __webpack_require__(139);
+		var Symbol = __webpack_require__(34),
+		    Uint8Array = __webpack_require__(140),
+		    eq = __webpack_require__(44),
+		    equalArrays = __webpack_require__(133),
+		    mapToArray = __webpack_require__(141),
+		    setToArray = __webpack_require__(142);
 
 		/** Used to compose bitmasks for value comparisons. */
 		var COMPARE_PARTIAL_FLAG = 1,
@@ -7477,10 +7771,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 137 */
+	/* 140 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var root = __webpack_require__(32);
+		var root = __webpack_require__(35);
 
 		/** Built-in value references. */
 		var Uint8Array = root.Uint8Array;
@@ -7489,7 +7783,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 138 */
+	/* 141 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -7513,7 +7807,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 139 */
+	/* 142 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -7537,10 +7831,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 140 */
+	/* 143 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var getAllKeys = __webpack_require__(141);
+		var getAllKeys = __webpack_require__(144);
 
 		/** Used to compose bitmasks for value comparisons. */
 		var COMPARE_PARTIAL_FLAG = 1;
@@ -7632,12 +7926,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 141 */
+	/* 144 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseGetAllKeys = __webpack_require__(142),
-		    getSymbols = __webpack_require__(144),
-		    keys = __webpack_require__(57);
+		var baseGetAllKeys = __webpack_require__(145),
+		    getSymbols = __webpack_require__(147),
+		    keys = __webpack_require__(60);
 
 		/**
 		 * Creates an array of own enumerable property names and symbols of `object`.
@@ -7654,11 +7948,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 142 */
+	/* 145 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var arrayPush = __webpack_require__(143),
-		    isArray = __webpack_require__(63);
+		var arrayPush = __webpack_require__(146),
+		    isArray = __webpack_require__(66);
 
 		/**
 		 * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
@@ -7680,7 +7974,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 143 */
+	/* 146 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -7706,11 +8000,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 144 */
+	/* 147 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var arrayFilter = __webpack_require__(145),
-		    stubArray = __webpack_require__(146);
+		var arrayFilter = __webpack_require__(148),
+		    stubArray = __webpack_require__(149);
 
 		/** Used for built-in method references. */
 		var objectProto = Object.prototype;
@@ -7742,7 +8036,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 145 */
+	/* 148 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -7773,7 +8067,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 146 */
+	/* 149 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -7802,11 +8096,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 147 */
+	/* 150 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isStrictComparable = __webpack_require__(148),
-		    keys = __webpack_require__(57);
+		var isStrictComparable = __webpack_require__(151),
+		    keys = __webpack_require__(60);
 
 		/**
 		 * Gets the property names, values, and compare flags of `object`.
@@ -7832,10 +8126,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 148 */
+	/* 151 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isObject = __webpack_require__(36);
+		var isObject = __webpack_require__(39);
 
 		/**
 		 * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -7853,7 +8147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 149 */
+	/* 152 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -7879,16 +8173,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 150 */
+	/* 153 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseIsEqual = __webpack_require__(128),
-		    get = __webpack_require__(151),
-		    hasIn = __webpack_require__(163),
-		    isKey = __webpack_require__(154),
-		    isStrictComparable = __webpack_require__(148),
-		    matchesStrictComparable = __webpack_require__(149),
-		    toKey = __webpack_require__(162);
+		var baseIsEqual = __webpack_require__(131),
+		    get = __webpack_require__(154),
+		    hasIn = __webpack_require__(166),
+		    isKey = __webpack_require__(157),
+		    isStrictComparable = __webpack_require__(151),
+		    matchesStrictComparable = __webpack_require__(152),
+		    toKey = __webpack_require__(165);
 
 		/** Used to compose bitmasks for value comparisons. */
 		var COMPARE_PARTIAL_FLAG = 1,
@@ -7918,10 +8212,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 151 */
+	/* 154 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseGet = __webpack_require__(152);
+		var baseGet = __webpack_require__(155);
 
 		/**
 		 * Gets the value at `path` of `object`. If the resolved value is
@@ -7957,11 +8251,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 152 */
+	/* 155 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var castPath = __webpack_require__(153),
-		    toKey = __webpack_require__(162);
+		var castPath = __webpack_require__(156),
+		    toKey = __webpack_require__(165);
 
 		/**
 		 * The base implementation of `_.get` without support for default values.
@@ -7987,13 +8281,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 153 */
+	/* 156 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isArray = __webpack_require__(63),
-		    isKey = __webpack_require__(154),
-		    stringToPath = __webpack_require__(156),
-		    toString = __webpack_require__(159);
+		var isArray = __webpack_require__(66),
+		    isKey = __webpack_require__(157),
+		    stringToPath = __webpack_require__(159),
+		    toString = __webpack_require__(162);
 
 		/**
 		 * Casts `value` to a path array if it's not one.
@@ -8014,11 +8308,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 154 */
+	/* 157 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isArray = __webpack_require__(63),
-		    isSymbol = __webpack_require__(155);
+		var isArray = __webpack_require__(66),
+		    isSymbol = __webpack_require__(158);
 
 		/** Used to match property names within property paths. */
 		var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
@@ -8049,11 +8343,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 155 */
+	/* 158 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseGetTag = __webpack_require__(30),
-		    isObjectLike = __webpack_require__(62);
+		var baseGetTag = __webpack_require__(33),
+		    isObjectLike = __webpack_require__(65);
 
 		/** `Object#toString` result references. */
 		var symbolTag = '[object Symbol]';
@@ -8084,10 +8378,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 156 */
+	/* 159 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var memoizeCapped = __webpack_require__(157);
+		var memoizeCapped = __webpack_require__(160);
 
 		/** Used to match property names within property paths. */
 		var reLeadingDot = /^\./,
@@ -8118,10 +8412,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 157 */
+	/* 160 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var memoize = __webpack_require__(158);
+		var memoize = __webpack_require__(161);
 
 		/** Used as the maximum memoize cache size. */
 		var MAX_MEMOIZE_SIZE = 500;
@@ -8150,10 +8444,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 158 */
+	/* 161 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var MapCache = __webpack_require__(113);
+		var MapCache = __webpack_require__(116);
 
 		/** Error message constants. */
 		var FUNC_ERROR_TEXT = 'Expected a function';
@@ -8229,10 +8523,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 159 */
+	/* 162 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseToString = __webpack_require__(160);
+		var baseToString = __webpack_require__(163);
 
 		/**
 		 * Converts `value` to a string. An empty string is returned for `null`
@@ -8263,13 +8557,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 160 */
+	/* 163 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Symbol = __webpack_require__(31),
-		    arrayMap = __webpack_require__(161),
-		    isArray = __webpack_require__(63),
-		    isSymbol = __webpack_require__(155);
+		var Symbol = __webpack_require__(34),
+		    arrayMap = __webpack_require__(164),
+		    isArray = __webpack_require__(66),
+		    isSymbol = __webpack_require__(158);
 
 		/** Used as references for various `Number` constants. */
 		var INFINITY = 1 / 0;
@@ -8306,7 +8600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 161 */
+	/* 164 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -8333,10 +8627,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 162 */
+	/* 165 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var isSymbol = __webpack_require__(155);
+		var isSymbol = __webpack_require__(158);
 
 		/** Used as references for various `Number` constants. */
 		var INFINITY = 1 / 0;
@@ -8360,11 +8654,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 163 */
+	/* 166 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseHasIn = __webpack_require__(164),
-		    hasPath = __webpack_require__(165);
+		var baseHasIn = __webpack_require__(167),
+		    hasPath = __webpack_require__(168);
 
 		/**
 		 * Checks if `path` is a direct or inherited property of `object`.
@@ -8400,7 +8694,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 164 */
+	/* 167 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -8419,15 +8713,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 165 */
+	/* 168 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var castPath = __webpack_require__(153),
-		    isArguments = __webpack_require__(60),
-		    isArray = __webpack_require__(63),
-		    isIndex = __webpack_require__(55),
-		    isLength = __webpack_require__(54),
-		    toKey = __webpack_require__(162);
+		var castPath = __webpack_require__(156),
+		    isArguments = __webpack_require__(63),
+		    isArray = __webpack_require__(66),
+		    isIndex = __webpack_require__(58),
+		    isLength = __webpack_require__(57),
+		    toKey = __webpack_require__(165);
 
 		/**
 		 * Checks if `path` exists on `object`.
@@ -8464,13 +8758,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 166 */
+	/* 169 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseProperty = __webpack_require__(167),
-		    basePropertyDeep = __webpack_require__(168),
-		    isKey = __webpack_require__(154),
-		    toKey = __webpack_require__(162);
+		var baseProperty = __webpack_require__(170),
+		    basePropertyDeep = __webpack_require__(171),
+		    isKey = __webpack_require__(157),
+		    toKey = __webpack_require__(165);
 
 		/**
 		 * Creates a function that returns the value at `path` of a given object.
@@ -8502,7 +8796,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 167 */
+	/* 170 */
 	/***/ (function(module, exports) {
 
 		/**
@@ -8522,10 +8816,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 168 */
+	/* 171 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var baseGet = __webpack_require__(152);
+		var baseGet = __webpack_require__(155);
 
 		/**
 		 * A specialized version of `baseProperty` which supports deep paths.
@@ -8544,14 +8838,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 169 */
+	/* 172 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
 		(function() {
 		  var XMLAttribute, create;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
 		  module.exports = XMLAttribute = (function() {
 		    function XMLAttribute(parent, name, value) {
@@ -8582,14 +8876,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 170 */
+	/* 173 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
 		(function() {
 		  var XMLProcessingInstruction, create;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
 		  module.exports = XMLProcessingInstruction = (function() {
 		    function XMLProcessingInstruction(parent, target, value) {
@@ -8639,7 +8933,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 171 */
+	/* 174 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
@@ -8648,9 +8942,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		    extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
 		    hasProp = {}.hasOwnProperty;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
-		  XMLNode = __webpack_require__(80);
+		  XMLNode = __webpack_require__(83);
 
 		  module.exports = XMLCData = (function(superClass) {
 		    extend(XMLCData, superClass);
@@ -8694,7 +8988,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 172 */
+	/* 175 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
@@ -8703,9 +8997,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		    extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
 		    hasProp = {}.hasOwnProperty;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
-		  XMLNode = __webpack_require__(80);
+		  XMLNode = __webpack_require__(83);
 
 		  module.exports = XMLComment = (function(superClass) {
 		    extend(XMLComment, superClass);
@@ -8749,30 +9043,30 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 173 */
+	/* 176 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
 		(function() {
 		  var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
-		  isObject = __webpack_require__(36);
+		  isObject = __webpack_require__(39);
 
-		  XMLCData = __webpack_require__(171);
+		  XMLCData = __webpack_require__(174);
 
-		  XMLComment = __webpack_require__(172);
+		  XMLComment = __webpack_require__(175);
 
-		  XMLDTDAttList = __webpack_require__(174);
+		  XMLDTDAttList = __webpack_require__(177);
 
-		  XMLDTDEntity = __webpack_require__(175);
+		  XMLDTDEntity = __webpack_require__(178);
 
-		  XMLDTDElement = __webpack_require__(176);
+		  XMLDTDElement = __webpack_require__(179);
 
-		  XMLDTDNotation = __webpack_require__(177);
+		  XMLDTDNotation = __webpack_require__(180);
 
-		  XMLProcessingInstruction = __webpack_require__(170);
+		  XMLProcessingInstruction = __webpack_require__(173);
 
 		  module.exports = XMLDocType = (function() {
 		    function XMLDocType(parent, pubID, sysID) {
@@ -8943,14 +9237,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 174 */
+	/* 177 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
 		(function() {
 		  var XMLDTDAttList, create;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
 		  module.exports = XMLDTDAttList = (function() {
 		    function XMLDTDAttList(parent, elementName, attributeName, attributeType, defaultValueType, defaultValue) {
@@ -9017,16 +9311,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 175 */
+	/* 178 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
 		(function() {
 		  var XMLDTDEntity, create, isObject;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
-		  isObject = __webpack_require__(36);
+		  isObject = __webpack_require__(39);
 
 		  module.exports = XMLDTDEntity = (function() {
 		    function XMLDTDEntity(parent, pe, name, value) {
@@ -9107,14 +9401,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 176 */
+	/* 179 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
 		(function() {
 		  var XMLDTDElement, create;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
 		  module.exports = XMLDTDElement = (function() {
 		    function XMLDTDElement(parent, name, value) {
@@ -9159,14 +9453,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 177 */
+	/* 180 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
 		(function() {
 		  var XMLDTDNotation, create;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
 		  module.exports = XMLDTDNotation = (function() {
 		    function XMLDTDNotation(parent, name, value) {
@@ -9221,7 +9515,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 178 */
+	/* 181 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
@@ -9230,9 +9524,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		    extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
 		    hasProp = {}.hasOwnProperty;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
-		  XMLNode = __webpack_require__(80);
+		  XMLNode = __webpack_require__(83);
 
 		  module.exports = XMLRaw = (function(superClass) {
 		    extend(XMLRaw, superClass);
@@ -9276,7 +9570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 179 */
+	/* 182 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		// Generated by CoffeeScript 1.9.1
@@ -9285,9 +9579,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		    extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
 		    hasProp = {}.hasOwnProperty;
 
-		  create = __webpack_require__(77);
+		  create = __webpack_require__(80);
 
-		  XMLNode = __webpack_require__(80);
+		  XMLNode = __webpack_require__(83);
 
 		  module.exports = XMLText = (function(superClass) {
 		    extend(XMLText, superClass);
@@ -9331,14 +9625,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 180 */
+	/* 183 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Collection = __webpack_require__(17);
-		var Operation = __webpack_require__(181);
-		var Shape = __webpack_require__(16);
-		var Paginator = __webpack_require__(182);
-		var ResourceWaiter = __webpack_require__(183);
+		var Collection = __webpack_require__(20);
+		var Operation = __webpack_require__(184);
+		var Shape = __webpack_require__(19);
+		var Paginator = __webpack_require__(185);
+		var ResourceWaiter = __webpack_require__(186);
 
 		var util = __webpack_require__(2);
 		var property = util.property;
@@ -9400,10 +9694,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 181 */
+	/* 184 */
 	/***/ (function(module, exports, __webpack_require__) {
 
-		var Shape = __webpack_require__(16);
+		var Shape = __webpack_require__(19);
 
 		var util = __webpack_require__(2);
 		var property = util.property;
@@ -9480,7 +9774,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 182 */
+	/* 185 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var property = __webpack_require__(2).property;
@@ -9497,7 +9791,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 183 */
+	/* 186 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
@@ -9533,7 +9827,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 184 */
+	/* 187 */
 	/***/ (function(module, exports) {
 
 		function apiLoader(svc, version) {
@@ -9552,12 +9846,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 185 */
+	/* 188 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
-		var Api = __webpack_require__(180);
-		var regionConfig = __webpack_require__(186);
+		var Api = __webpack_require__(183);
+		var regionConfig = __webpack_require__(189);
 		var inherit = AWS.util.inherit;
 		var clientCount = 0;
 
@@ -10141,11 +10435,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 186 */
+	/* 189 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var util = __webpack_require__(2);
-		var regionConfig = __webpack_require__(187);
+		var regionConfig = __webpack_require__(190);
 
 		function generateRegionPrefix(region) {
 		  if (!region) return null;
@@ -10216,18 +10510,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 187 */
+	/* 190 */
 	/***/ (function(module, exports) {
 
 		module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/iam":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":{"endpoint":"https://{service}.amazonaws.com","signatureVersion":"v3https","globalEndpoint":true},"*/waf":"globalSSL","us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3dash","us-west-1/s3":"s3dash","us-west-2/s3":"s3dash","eu-west-1/s3":"s3dash","ap-southeast-1/s3":"s3dash","ap-southeast-2/s3":"s3dash","ap-northeast-1/s3":"s3dash","sa-east-1/s3":"s3dash","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com"},"s3dash":{"endpoint":"{service}-{region}.amazonaws.com","signatureVersion":"s3"}}}
 
 	/***/ }),
-	/* 188 */
+	/* 191 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
-		__webpack_require__(189);
-		__webpack_require__(190);
+		__webpack_require__(192);
+		__webpack_require__(193);
 		var PromisesDependency;
 
 		/**
@@ -10763,7 +11057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 189 */
+	/* 192 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -10983,7 +11277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 190 */
+	/* 193 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -11162,7 +11456,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 191 */
+	/* 194 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -11394,7 +11688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 192 */
+	/* 195 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -11631,11 +11925,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 193 */
+	/* 196 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
-		var SequentialExecutor = __webpack_require__(192);
+		var SequentialExecutor = __webpack_require__(195);
 		/**
 		 * The namespace used to register global event listeners for request building
 		 * and sending.
@@ -12112,7 +12406,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		        var delta = (time - req.startTime.getTime()) / 1000;
 		        var ansi = logger.isTTY ? true : false;
 		        var status = resp.httpResponse.statusCode;
-		        var params = __webpack_require__(194).inspect(req.params, true, null);
+		        var params = __webpack_require__(197).inspect(req.params, true, null);
 
 		        var message = '';
 		        if (ansi) message += '\x1B[33m';
@@ -12135,35 +12429,35 @@ return /******/ (function(modules) { // webpackBootstrap
 		  }),
 
 		  Json: new SequentialExecutor().addNamedListeners(function(add) {
-		    var svc = __webpack_require__(11);
+		    var svc = __webpack_require__(14);
 		    add('BUILD', 'build', svc.buildRequest);
 		    add('EXTRACT_DATA', 'extractData', svc.extractData);
 		    add('EXTRACT_ERROR', 'extractError', svc.extractError);
 		  }),
 
 		  Rest: new SequentialExecutor().addNamedListeners(function(add) {
-		    var svc = __webpack_require__(18);
+		    var svc = __webpack_require__(21);
 		    add('BUILD', 'build', svc.buildRequest);
 		    add('EXTRACT_DATA', 'extractData', svc.extractData);
 		    add('EXTRACT_ERROR', 'extractError', svc.extractError);
 		  }),
 
 		  RestJson: new SequentialExecutor().addNamedListeners(function(add) {
-		    var svc = __webpack_require__(19);
+		    var svc = __webpack_require__(22);
 		    add('BUILD', 'build', svc.buildRequest);
 		    add('EXTRACT_DATA', 'extractData', svc.extractData);
 		    add('EXTRACT_ERROR', 'extractError', svc.extractError);
 		  }),
 
 		  RestXml: new SequentialExecutor().addNamedListeners(function(add) {
-		    var svc = __webpack_require__(20);
+		    var svc = __webpack_require__(23);
 		    add('BUILD', 'build', svc.buildRequest);
 		    add('EXTRACT_DATA', 'extractData', svc.extractData);
 		    add('EXTRACT_ERROR', 'extractError', svc.extractError);
 		  }),
 
 		  Query: new SequentialExecutor().addNamedListeners(function(add) {
-		    var svc = __webpack_require__(14);
+		    var svc = __webpack_require__(17);
 		    add('BUILD', 'build', svc.buildRequest);
 		    add('EXTRACT_DATA', 'extractData', svc.extractData);
 		    add('EXTRACT_ERROR', 'extractError', svc.extractError);
@@ -12172,7 +12466,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 194 */
+	/* 197 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -12700,7 +12994,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		}
 		exports.isPrimitive = isPrimitive;
 
-		exports.isBuffer = __webpack_require__(195);
+		exports.isBuffer = __webpack_require__(198);
 
 		function objectToString(o) {
 		  return Object.prototype.toString.call(o);
@@ -12744,7 +13038,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		 *     prototype.
 		 * @param {function} superCtor Constructor function to inherit prototype from.
 		 */
-		exports.inherits = __webpack_require__(196);
+		exports.inherits = __webpack_require__(199);
 
 		exports._extend = function(origin, add) {
 		  // Don't do anything if add isn't an object
@@ -12765,7 +13059,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
 
 	/***/ }),
-	/* 195 */
+	/* 198 */
 	/***/ (function(module, exports) {
 
 		module.exports = function isBuffer(arg) {
@@ -12776,7 +13070,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		}
 
 	/***/ }),
-	/* 196 */
+	/* 199 */
 	/***/ (function(module, exports) {
 
 		if (typeof Object.create === 'function') {
@@ -12805,14 +13099,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 197 */
+	/* 200 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
-		var AcceptorStateMachine = __webpack_require__(198);
+		var AcceptorStateMachine = __webpack_require__(201);
 		var inherit = AWS.util.inherit;
 		var domain = AWS.util.domain;
-		var jmespath = __webpack_require__(199);
+		var jmespath = __webpack_require__(202);
 
 		/**
 		 * @api private
@@ -13617,7 +13911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 	/***/ }),
-	/* 198 */
+	/* 201 */
 	/***/ (function(module, exports) {
 
 		function AcceptorStateMachine(states, state) {
@@ -13665,7 +13959,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 199 */
+	/* 202 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		(function(exports) {
@@ -15338,12 +15632,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 200 */
+	/* 203 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
 		var inherit = AWS.util.inherit;
-		var jmespath = __webpack_require__(199);
+		var jmespath = __webpack_require__(202);
 
 		/**
 		 * This class encapsulates the response information
@@ -15545,7 +15839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 201 */
+	/* 204 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		/**
@@ -15565,7 +15859,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		var AWS = __webpack_require__(1);
 		var inherit = AWS.util.inherit;
-		var jmespath = __webpack_require__(199);
+		var jmespath = __webpack_require__(202);
 
 		/**
 		 * @api private
@@ -15755,7 +16049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 202 */
+	/* 205 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -15790,16 +16084,16 @@ return /******/ (function(modules) { // webpackBootstrap
 		  throw new Error('Unknown signing version ' + version);
 		};
 
-		__webpack_require__(203);
-		__webpack_require__(204);
-		__webpack_require__(205);
 		__webpack_require__(206);
+		__webpack_require__(207);
 		__webpack_require__(208);
 		__webpack_require__(209);
+		__webpack_require__(211);
+		__webpack_require__(212);
 
 
 	/***/ }),
-	/* 203 */
+	/* 206 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -15850,7 +16144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 204 */
+	/* 207 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -15930,13 +16224,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 205 */
+	/* 208 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
 		var inherit = AWS.util.inherit;
 
-		__webpack_require__(204);
+		__webpack_require__(207);
 
 		/**
 		 * @api private
@@ -15958,11 +16252,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 206 */
+	/* 209 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
-		var v4Credentials = __webpack_require__(207);
+		var v4Credentials = __webpack_require__(210);
 		var inherit = AWS.util.inherit;
 
 		/**
@@ -16175,7 +16469,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 207 */
+	/* 210 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -16278,7 +16572,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 208 */
+	/* 211 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -16456,7 +16750,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 209 */
+	/* 212 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -16577,7 +16871,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	/***/ }),
-	/* 210 */
+	/* 213 */
 	/***/ (function(module, exports, __webpack_require__) {
 
 		var AWS = __webpack_require__(1);
@@ -38861,7 +39155,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 111 */
 /***/ (function(module, exports) {
 
-	module.exports = {"version":"2.0","metadata":{"apiVersion":"2014-10-06","endpointPrefix":"codedeploy","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"CodeDeploy","serviceFullName":"AWS CodeDeploy","signatureVersion":"v4","targetPrefix":"CodeDeploy_20141006","timestampFormat":"unixTimestamp","uid":"codedeploy-2014-10-06"},"operations":{"AddTagsToOnPremisesInstances":{"input":{"type":"structure","required":["tags","instanceNames"],"members":{"tags":{"shape":"S2"},"instanceNames":{"shape":"S6"}}}},"BatchGetApplicationRevisions":{"input":{"type":"structure","required":["applicationName","revisions"],"members":{"applicationName":{},"revisions":{"shape":"Sa"}}},"output":{"type":"structure","members":{"applicationName":{},"errorMessage":{},"revisions":{"type":"list","member":{"type":"structure","members":{"revisionLocation":{"shape":"Sb"},"genericRevisionInfo":{"shape":"Sq"}}}}}}},"BatchGetApplications":{"input":{"type":"structure","members":{"applicationNames":{"shape":"Sw"}}},"output":{"type":"structure","members":{"applicationsInfo":{"type":"list","member":{"shape":"Sz"}}}}},"BatchGetDeploymentGroups":{"input":{"type":"structure","required":["applicationName","deploymentGroupNames"],"members":{"applicationName":{},"deploymentGroupNames":{"shape":"Ss"}}},"output":{"type":"structure","members":{"deploymentGroupsInfo":{"type":"list","member":{"shape":"S16"}},"errorMessage":{}}}},"BatchGetDeploymentInstances":{"input":{"type":"structure","required":["deploymentId","instanceIds"],"members":{"deploymentId":{},"instanceIds":{"shape":"S2k"}}},"output":{"type":"structure","members":{"instancesSummary":{"type":"list","member":{"shape":"S2o"}},"errorMessage":{}}}},"BatchGetDeployments":{"input":{"type":"structure","members":{"deploymentIds":{"shape":"S31"}}},"output":{"type":"structure","members":{"deploymentsInfo":{"type":"list","member":{"shape":"S34"}}}}},"BatchGetOnPremisesInstances":{"input":{"type":"structure","members":{"instanceNames":{"shape":"S6"}}},"output":{"type":"structure","members":{"instanceInfos":{"type":"list","member":{"shape":"S3i"}}}}},"ContinueDeployment":{"input":{"type":"structure","members":{"deploymentId":{}}}},"CreateApplication":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{}}},"output":{"type":"structure","members":{"applicationId":{}}}},"CreateDeployment":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{},"deploymentGroupName":{},"revision":{"shape":"Sb"},"deploymentConfigName":{},"description":{},"ignoreApplicationStopFailures":{"type":"boolean"},"targetInstances":{"shape":"S3b"},"autoRollbackConfiguration":{"shape":"S1u"},"updateOutdatedInstancesOnly":{"type":"boolean"},"fileExistsBehavior":{}}},"output":{"type":"structure","members":{"deploymentId":{}}}},"CreateDeploymentConfig":{"input":{"type":"structure","required":["deploymentConfigName"],"members":{"deploymentConfigName":{},"minimumHealthyHosts":{"shape":"S3s"}}},"output":{"type":"structure","members":{"deploymentConfigId":{}}}},"CreateDeploymentGroup":{"input":{"type":"structure","required":["applicationName","deploymentGroupName","serviceRoleArn"],"members":{"applicationName":{},"deploymentGroupName":{},"deploymentConfigName":{},"ec2TagFilters":{"shape":"S19"},"onPremisesInstanceTagFilters":{"shape":"S1c"},"autoScalingGroups":{"shape":"S3c"},"serviceRoleArn":{},"triggerConfigurations":{"shape":"S1k"},"alarmConfiguration":{"shape":"S1q"},"autoRollbackConfiguration":{"shape":"S1u"},"deploymentStyle":{"shape":"S1x"},"blueGreenDeploymentConfiguration":{"shape":"S20"},"loadBalancerInfo":{"shape":"S28"},"ec2TagSet":{"shape":"S2f"},"onPremisesTagSet":{"shape":"S2h"}}},"output":{"type":"structure","members":{"deploymentGroupId":{}}}},"DeleteApplication":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{}}}},"DeleteDeploymentConfig":{"input":{"type":"structure","required":["deploymentConfigName"],"members":{"deploymentConfigName":{}}}},"DeleteDeploymentGroup":{"input":{"type":"structure","required":["applicationName","deploymentGroupName"],"members":{"applicationName":{},"deploymentGroupName":{}}},"output":{"type":"structure","members":{"hooksNotCleanedUp":{"shape":"S1f"}}}},"DeregisterOnPremisesInstance":{"input":{"type":"structure","required":["instanceName"],"members":{"instanceName":{}}}},"GetApplication":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{}}},"output":{"type":"structure","members":{"application":{"shape":"Sz"}}}},"GetApplicationRevision":{"input":{"type":"structure","required":["applicationName","revision"],"members":{"applicationName":{},"revision":{"shape":"Sb"}}},"output":{"type":"structure","members":{"applicationName":{},"revision":{"shape":"Sb"},"revisionInfo":{"shape":"Sq"}}}},"GetDeployment":{"input":{"type":"structure","required":["deploymentId"],"members":{"deploymentId":{}}},"output":{"type":"structure","members":{"deploymentInfo":{"shape":"S34"}}}},"GetDeploymentConfig":{"input":{"type":"structure","required":["deploymentConfigName"],"members":{"deploymentConfigName":{}}},"output":{"type":"structure","members":{"deploymentConfigInfo":{"type":"structure","members":{"deploymentConfigId":{},"deploymentConfigName":{},"minimumHealthyHosts":{"shape":"S3s"},"createTime":{"type":"timestamp"}}}}}},"GetDeploymentGroup":{"input":{"type":"structure","required":["applicationName","deploymentGroupName"],"members":{"applicationName":{},"deploymentGroupName":{}}},"output":{"type":"structure","members":{"deploymentGroupInfo":{"shape":"S16"}}}},"GetDeploymentInstance":{"input":{"type":"structure","required":["deploymentId","instanceId"],"members":{"deploymentId":{},"instanceId":{}}},"output":{"type":"structure","members":{"instanceSummary":{"shape":"S2o"}}}},"GetOnPremisesInstance":{"input":{"type":"structure","required":["instanceName"],"members":{"instanceName":{}}},"output":{"type":"structure","members":{"instanceInfo":{"shape":"S3i"}}}},"ListApplicationRevisions":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{},"sortBy":{},"sortOrder":{},"s3Bucket":{},"s3KeyPrefix":{},"deployed":{},"nextToken":{}}},"output":{"type":"structure","members":{"revisions":{"shape":"Sa"},"nextToken":{}}}},"ListApplications":{"input":{"type":"structure","members":{"nextToken":{}}},"output":{"type":"structure","members":{"applications":{"shape":"Sw"},"nextToken":{}}}},"ListDeploymentConfigs":{"input":{"type":"structure","members":{"nextToken":{}}},"output":{"type":"structure","members":{"deploymentConfigsList":{"type":"list","member":{}},"nextToken":{}}}},"ListDeploymentGroups":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{},"nextToken":{}}},"output":{"type":"structure","members":{"applicationName":{},"deploymentGroups":{"shape":"Ss"},"nextToken":{}}}},"ListDeploymentInstances":{"input":{"type":"structure","required":["deploymentId"],"members":{"deploymentId":{},"nextToken":{},"instanceStatusFilter":{"type":"list","member":{}},"instanceTypeFilter":{"type":"list","member":{}}}},"output":{"type":"structure","members":{"instancesList":{"shape":"S2k"},"nextToken":{}}}},"ListDeployments":{"input":{"type":"structure","members":{"applicationName":{},"deploymentGroupName":{},"includeOnlyStatuses":{"type":"list","member":{}},"createTimeRange":{"type":"structure","members":{"start":{"type":"timestamp"},"end":{"type":"timestamp"}}},"nextToken":{}}},"output":{"type":"structure","members":{"deployments":{"shape":"S31"},"nextToken":{}}}},"ListGitHubAccountTokenNames":{"input":{"type":"structure","members":{"nextToken":{}}},"output":{"type":"structure","members":{"tokenNameList":{"type":"list","member":{}},"nextToken":{}}}},"ListOnPremisesInstances":{"input":{"type":"structure","members":{"registrationStatus":{},"tagFilters":{"shape":"S1c"},"nextToken":{}}},"output":{"type":"structure","members":{"instanceNames":{"shape":"S6"},"nextToken":{}}}},"RegisterApplicationRevision":{"input":{"type":"structure","required":["applicationName","revision"],"members":{"applicationName":{},"description":{},"revision":{"shape":"Sb"}}}},"RegisterOnPremisesInstance":{"input":{"type":"structure","required":["instanceName"],"members":{"instanceName":{},"iamSessionArn":{},"iamUserArn":{}}}},"RemoveTagsFromOnPremisesInstances":{"input":{"type":"structure","required":["tags","instanceNames"],"members":{"tags":{"shape":"S2"},"instanceNames":{"shape":"S6"}}}},"SkipWaitTimeForInstanceTermination":{"input":{"type":"structure","members":{"deploymentId":{}}}},"StopDeployment":{"input":{"type":"structure","required":["deploymentId"],"members":{"deploymentId":{},"autoRollbackEnabled":{"type":"boolean"}}},"output":{"type":"structure","members":{"status":{},"statusMessage":{}}}},"UpdateApplication":{"input":{"type":"structure","members":{"applicationName":{},"newApplicationName":{}}}},"UpdateDeploymentGroup":{"input":{"type":"structure","required":["applicationName","currentDeploymentGroupName"],"members":{"applicationName":{},"currentDeploymentGroupName":{},"newDeploymentGroupName":{},"deploymentConfigName":{},"ec2TagFilters":{"shape":"S19"},"onPremisesInstanceTagFilters":{"shape":"S1c"},"autoScalingGroups":{"shape":"S3c"},"serviceRoleArn":{},"triggerConfigurations":{"shape":"S1k"},"alarmConfiguration":{"shape":"S1q"},"autoRollbackConfiguration":{"shape":"S1u"},"deploymentStyle":{"shape":"S1x"},"blueGreenDeploymentConfiguration":{"shape":"S20"},"loadBalancerInfo":{"shape":"S28"},"ec2TagSet":{"shape":"S2f"},"onPremisesTagSet":{"shape":"S2h"}}},"output":{"type":"structure","members":{"hooksNotCleanedUp":{"shape":"S1f"}}}}},"shapes":{"S2":{"type":"list","member":{"type":"structure","members":{"Key":{},"Value":{}}}},"S6":{"type":"list","member":{}},"Sa":{"type":"list","member":{"shape":"Sb"}},"Sb":{"type":"structure","members":{"revisionType":{},"s3Location":{"type":"structure","members":{"bucket":{},"key":{},"bundleType":{},"version":{},"eTag":{}}},"gitHubLocation":{"type":"structure","members":{"repository":{},"commitId":{}}}}},"Sq":{"type":"structure","members":{"description":{},"deploymentGroups":{"shape":"Ss"},"firstUsedTime":{"type":"timestamp"},"lastUsedTime":{"type":"timestamp"},"registerTime":{"type":"timestamp"}}},"Ss":{"type":"list","member":{}},"Sw":{"type":"list","member":{}},"Sz":{"type":"structure","members":{"applicationId":{},"applicationName":{},"createTime":{"type":"timestamp"},"linkedToGitHub":{"type":"boolean"},"gitHubAccountName":{}}},"S16":{"type":"structure","members":{"applicationName":{},"deploymentGroupId":{},"deploymentGroupName":{},"deploymentConfigName":{},"ec2TagFilters":{"shape":"S19"},"onPremisesInstanceTagFilters":{"shape":"S1c"},"autoScalingGroups":{"shape":"S1f"},"serviceRoleArn":{},"targetRevision":{"shape":"Sb"},"triggerConfigurations":{"shape":"S1k"},"alarmConfiguration":{"shape":"S1q"},"autoRollbackConfiguration":{"shape":"S1u"},"deploymentStyle":{"shape":"S1x"},"blueGreenDeploymentConfiguration":{"shape":"S20"},"loadBalancerInfo":{"shape":"S28"},"lastSuccessfulDeployment":{"shape":"S2c"},"lastAttemptedDeployment":{"shape":"S2c"},"ec2TagSet":{"shape":"S2f"},"onPremisesTagSet":{"shape":"S2h"}}},"S19":{"type":"list","member":{"type":"structure","members":{"Key":{},"Value":{},"Type":{}}}},"S1c":{"type":"list","member":{"type":"structure","members":{"Key":{},"Value":{},"Type":{}}}},"S1f":{"type":"list","member":{"type":"structure","members":{"name":{},"hook":{}}}},"S1k":{"type":"list","member":{"type":"structure","members":{"triggerName":{},"triggerTargetArn":{},"triggerEvents":{"type":"list","member":{}}}}},"S1q":{"type":"structure","members":{"enabled":{"type":"boolean"},"ignorePollAlarmFailure":{"type":"boolean"},"alarms":{"type":"list","member":{"type":"structure","members":{"name":{}}}}}},"S1u":{"type":"structure","members":{"enabled":{"type":"boolean"},"events":{"type":"list","member":{}}}},"S1x":{"type":"structure","members":{"deploymentType":{},"deploymentOption":{}}},"S20":{"type":"structure","members":{"terminateBlueInstancesOnDeploymentSuccess":{"type":"structure","members":{"action":{},"terminationWaitTimeInMinutes":{"type":"integer"}}},"deploymentReadyOption":{"type":"structure","members":{"actionOnTimeout":{},"waitTimeInMinutes":{"type":"integer"}}},"greenFleetProvisioningOption":{"type":"structure","members":{"action":{}}}}},"S28":{"type":"structure","members":{"elbInfoList":{"type":"list","member":{"type":"structure","members":{"name":{}}}}}},"S2c":{"type":"structure","members":{"deploymentId":{},"status":{},"endTime":{"type":"timestamp"},"createTime":{"type":"timestamp"}}},"S2f":{"type":"structure","members":{"ec2TagSetList":{"type":"list","member":{"shape":"S19"}}}},"S2h":{"type":"structure","members":{"onPremisesTagSetList":{"type":"list","member":{"shape":"S1c"}}}},"S2k":{"type":"list","member":{}},"S2o":{"type":"structure","members":{"deploymentId":{},"instanceId":{},"status":{},"lastUpdatedAt":{"type":"timestamp"},"lifecycleEvents":{"type":"list","member":{"type":"structure","members":{"lifecycleEventName":{},"diagnostics":{"type":"structure","members":{"errorCode":{},"scriptName":{},"message":{},"logTail":{}}},"startTime":{"type":"timestamp"},"endTime":{"type":"timestamp"},"status":{}}}},"instanceType":{}}},"S31":{"type":"list","member":{}},"S34":{"type":"structure","members":{"applicationName":{},"deploymentGroupName":{},"deploymentConfigName":{},"deploymentId":{},"previousRevision":{"shape":"Sb"},"revision":{"shape":"Sb"},"status":{},"errorInformation":{"type":"structure","members":{"code":{},"message":{}}},"createTime":{"type":"timestamp"},"startTime":{"type":"timestamp"},"completeTime":{"type":"timestamp"},"deploymentOverview":{"type":"structure","members":{"Pending":{"type":"long"},"InProgress":{"type":"long"},"Succeeded":{"type":"long"},"Failed":{"type":"long"},"Skipped":{"type":"long"},"Ready":{"type":"long"}}},"description":{},"creator":{},"ignoreApplicationStopFailures":{"type":"boolean"},"autoRollbackConfiguration":{"shape":"S1u"},"updateOutdatedInstancesOnly":{"type":"boolean"},"rollbackInfo":{"type":"structure","members":{"rollbackDeploymentId":{},"rollbackTriggeringDeploymentId":{},"rollbackMessage":{}}},"deploymentStyle":{"shape":"S1x"},"targetInstances":{"shape":"S3b"},"instanceTerminationWaitTimeStarted":{"type":"boolean"},"blueGreenDeploymentConfiguration":{"shape":"S20"},"loadBalancerInfo":{"shape":"S28"},"additionalDeploymentStatusInfo":{},"fileExistsBehavior":{}}},"S3b":{"type":"structure","members":{"tagFilters":{"shape":"S19"},"autoScalingGroups":{"shape":"S3c"},"ec2TagSet":{"shape":"S2f"}}},"S3c":{"type":"list","member":{}},"S3i":{"type":"structure","members":{"instanceName":{},"iamSessionArn":{},"iamUserArn":{},"instanceArn":{},"registerTime":{"type":"timestamp"},"deregisterTime":{"type":"timestamp"},"tags":{"shape":"S2"}}},"S3s":{"type":"structure","members":{"value":{"type":"integer"},"type":{}}}}}
+	module.exports = {"version":"2.0","metadata":{"apiVersion":"2014-10-06","endpointPrefix":"codedeploy","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"CodeDeploy","serviceFullName":"AWS CodeDeploy","signatureVersion":"v4","targetPrefix":"CodeDeploy_20141006","timestampFormat":"unixTimestamp","uid":"codedeploy-2014-10-06"},"operations":{"AddTagsToOnPremisesInstances":{"input":{"type":"structure","required":["tags","instanceNames"],"members":{"tags":{"shape":"S2"},"instanceNames":{"shape":"S6"}}}},"BatchGetApplicationRevisions":{"input":{"type":"structure","required":["applicationName","revisions"],"members":{"applicationName":{},"revisions":{"shape":"Sa"}}},"output":{"type":"structure","members":{"applicationName":{},"errorMessage":{},"revisions":{"type":"list","member":{"type":"structure","members":{"revisionLocation":{"shape":"Sb"},"genericRevisionInfo":{"shape":"Sq"}}}}}}},"BatchGetApplications":{"input":{"type":"structure","members":{"applicationNames":{"shape":"Sw"}}},"output":{"type":"structure","members":{"applicationsInfo":{"type":"list","member":{"shape":"Sz"}}}}},"BatchGetDeploymentGroups":{"input":{"type":"structure","required":["applicationName","deploymentGroupNames"],"members":{"applicationName":{},"deploymentGroupNames":{"shape":"Ss"}}},"output":{"type":"structure","members":{"deploymentGroupsInfo":{"type":"list","member":{"shape":"S16"}},"errorMessage":{}}}},"BatchGetDeploymentInstances":{"input":{"type":"structure","required":["deploymentId","instanceIds"],"members":{"deploymentId":{},"instanceIds":{"shape":"S2n"}}},"output":{"type":"structure","members":{"instancesSummary":{"type":"list","member":{"shape":"S2r"}},"errorMessage":{}}}},"BatchGetDeployments":{"input":{"type":"structure","members":{"deploymentIds":{"shape":"S34"}}},"output":{"type":"structure","members":{"deploymentsInfo":{"type":"list","member":{"shape":"S37"}}}}},"BatchGetOnPremisesInstances":{"input":{"type":"structure","members":{"instanceNames":{"shape":"S6"}}},"output":{"type":"structure","members":{"instanceInfos":{"type":"list","member":{"shape":"S3l"}}}}},"ContinueDeployment":{"input":{"type":"structure","members":{"deploymentId":{}}}},"CreateApplication":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{}}},"output":{"type":"structure","members":{"applicationId":{}}}},"CreateDeployment":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{},"deploymentGroupName":{},"revision":{"shape":"Sb"},"deploymentConfigName":{},"description":{},"ignoreApplicationStopFailures":{"type":"boolean"},"targetInstances":{"shape":"S3e"},"autoRollbackConfiguration":{"shape":"S1u"},"updateOutdatedInstancesOnly":{"type":"boolean"},"fileExistsBehavior":{}}},"output":{"type":"structure","members":{"deploymentId":{}}}},"CreateDeploymentConfig":{"input":{"type":"structure","required":["deploymentConfigName","minimumHealthyHosts"],"members":{"deploymentConfigName":{},"minimumHealthyHosts":{"shape":"S3v"}}},"output":{"type":"structure","members":{"deploymentConfigId":{}}}},"CreateDeploymentGroup":{"input":{"type":"structure","required":["applicationName","deploymentGroupName","serviceRoleArn"],"members":{"applicationName":{},"deploymentGroupName":{},"deploymentConfigName":{},"ec2TagFilters":{"shape":"S19"},"onPremisesInstanceTagFilters":{"shape":"S1c"},"autoScalingGroups":{"shape":"S3f"},"serviceRoleArn":{},"triggerConfigurations":{"shape":"S1k"},"alarmConfiguration":{"shape":"S1q"},"autoRollbackConfiguration":{"shape":"S1u"},"deploymentStyle":{"shape":"S1x"},"blueGreenDeploymentConfiguration":{"shape":"S20"},"loadBalancerInfo":{"shape":"S28"},"ec2TagSet":{"shape":"S2i"},"onPremisesTagSet":{"shape":"S2k"}}},"output":{"type":"structure","members":{"deploymentGroupId":{}}}},"DeleteApplication":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{}}}},"DeleteDeploymentConfig":{"input":{"type":"structure","required":["deploymentConfigName"],"members":{"deploymentConfigName":{}}}},"DeleteDeploymentGroup":{"input":{"type":"structure","required":["applicationName","deploymentGroupName"],"members":{"applicationName":{},"deploymentGroupName":{}}},"output":{"type":"structure","members":{"hooksNotCleanedUp":{"shape":"S1f"}}}},"DeregisterOnPremisesInstance":{"input":{"type":"structure","required":["instanceName"],"members":{"instanceName":{}}}},"GetApplication":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{}}},"output":{"type":"structure","members":{"application":{"shape":"Sz"}}}},"GetApplicationRevision":{"input":{"type":"structure","required":["applicationName","revision"],"members":{"applicationName":{},"revision":{"shape":"Sb"}}},"output":{"type":"structure","members":{"applicationName":{},"revision":{"shape":"Sb"},"revisionInfo":{"shape":"Sq"}}}},"GetDeployment":{"input":{"type":"structure","required":["deploymentId"],"members":{"deploymentId":{}}},"output":{"type":"structure","members":{"deploymentInfo":{"shape":"S37"}}}},"GetDeploymentConfig":{"input":{"type":"structure","required":["deploymentConfigName"],"members":{"deploymentConfigName":{}}},"output":{"type":"structure","members":{"deploymentConfigInfo":{"type":"structure","members":{"deploymentConfigId":{},"deploymentConfigName":{},"minimumHealthyHosts":{"shape":"S3v"},"createTime":{"type":"timestamp"}}}}}},"GetDeploymentGroup":{"input":{"type":"structure","required":["applicationName","deploymentGroupName"],"members":{"applicationName":{},"deploymentGroupName":{}}},"output":{"type":"structure","members":{"deploymentGroupInfo":{"shape":"S16"}}}},"GetDeploymentInstance":{"input":{"type":"structure","required":["deploymentId","instanceId"],"members":{"deploymentId":{},"instanceId":{}}},"output":{"type":"structure","members":{"instanceSummary":{"shape":"S2r"}}}},"GetOnPremisesInstance":{"input":{"type":"structure","required":["instanceName"],"members":{"instanceName":{}}},"output":{"type":"structure","members":{"instanceInfo":{"shape":"S3l"}}}},"ListApplicationRevisions":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{},"sortBy":{},"sortOrder":{},"s3Bucket":{},"s3KeyPrefix":{},"deployed":{},"nextToken":{}}},"output":{"type":"structure","members":{"revisions":{"shape":"Sa"},"nextToken":{}}}},"ListApplications":{"input":{"type":"structure","members":{"nextToken":{}}},"output":{"type":"structure","members":{"applications":{"shape":"Sw"},"nextToken":{}}}},"ListDeploymentConfigs":{"input":{"type":"structure","members":{"nextToken":{}}},"output":{"type":"structure","members":{"deploymentConfigsList":{"type":"list","member":{}},"nextToken":{}}}},"ListDeploymentGroups":{"input":{"type":"structure","required":["applicationName"],"members":{"applicationName":{},"nextToken":{}}},"output":{"type":"structure","members":{"applicationName":{},"deploymentGroups":{"shape":"Ss"},"nextToken":{}}}},"ListDeploymentInstances":{"input":{"type":"structure","required":["deploymentId"],"members":{"deploymentId":{},"nextToken":{},"instanceStatusFilter":{"type":"list","member":{}},"instanceTypeFilter":{"type":"list","member":{}}}},"output":{"type":"structure","members":{"instancesList":{"shape":"S2n"},"nextToken":{}}}},"ListDeployments":{"input":{"type":"structure","members":{"applicationName":{},"deploymentGroupName":{},"includeOnlyStatuses":{"type":"list","member":{}},"createTimeRange":{"type":"structure","members":{"start":{"type":"timestamp"},"end":{"type":"timestamp"}}},"nextToken":{}}},"output":{"type":"structure","members":{"deployments":{"shape":"S34"},"nextToken":{}}}},"ListGitHubAccountTokenNames":{"input":{"type":"structure","members":{"nextToken":{}}},"output":{"type":"structure","members":{"tokenNameList":{"type":"list","member":{}},"nextToken":{}}}},"ListOnPremisesInstances":{"input":{"type":"structure","members":{"registrationStatus":{},"tagFilters":{"shape":"S1c"},"nextToken":{}}},"output":{"type":"structure","members":{"instanceNames":{"shape":"S6"},"nextToken":{}}}},"RegisterApplicationRevision":{"input":{"type":"structure","required":["applicationName","revision"],"members":{"applicationName":{},"description":{},"revision":{"shape":"Sb"}}}},"RegisterOnPremisesInstance":{"input":{"type":"structure","required":["instanceName"],"members":{"instanceName":{},"iamSessionArn":{},"iamUserArn":{}}}},"RemoveTagsFromOnPremisesInstances":{"input":{"type":"structure","required":["tags","instanceNames"],"members":{"tags":{"shape":"S2"},"instanceNames":{"shape":"S6"}}}},"SkipWaitTimeForInstanceTermination":{"input":{"type":"structure","members":{"deploymentId":{}}}},"StopDeployment":{"input":{"type":"structure","required":["deploymentId"],"members":{"deploymentId":{},"autoRollbackEnabled":{"type":"boolean"}}},"output":{"type":"structure","members":{"status":{},"statusMessage":{}}}},"UpdateApplication":{"input":{"type":"structure","members":{"applicationName":{},"newApplicationName":{}}}},"UpdateDeploymentGroup":{"input":{"type":"structure","required":["applicationName","currentDeploymentGroupName"],"members":{"applicationName":{},"currentDeploymentGroupName":{},"newDeploymentGroupName":{},"deploymentConfigName":{},"ec2TagFilters":{"shape":"S19"},"onPremisesInstanceTagFilters":{"shape":"S1c"},"autoScalingGroups":{"shape":"S3f"},"serviceRoleArn":{},"triggerConfigurations":{"shape":"S1k"},"alarmConfiguration":{"shape":"S1q"},"autoRollbackConfiguration":{"shape":"S1u"},"deploymentStyle":{"shape":"S1x"},"blueGreenDeploymentConfiguration":{"shape":"S20"},"loadBalancerInfo":{"shape":"S28"},"ec2TagSet":{"shape":"S2i"},"onPremisesTagSet":{"shape":"S2k"}}},"output":{"type":"structure","members":{"hooksNotCleanedUp":{"shape":"S1f"}}}}},"shapes":{"S2":{"type":"list","member":{"type":"structure","members":{"Key":{},"Value":{}}}},"S6":{"type":"list","member":{}},"Sa":{"type":"list","member":{"shape":"Sb"}},"Sb":{"type":"structure","members":{"revisionType":{},"s3Location":{"type":"structure","members":{"bucket":{},"key":{},"bundleType":{},"version":{},"eTag":{}}},"gitHubLocation":{"type":"structure","members":{"repository":{},"commitId":{}}}}},"Sq":{"type":"structure","members":{"description":{},"deploymentGroups":{"shape":"Ss"},"firstUsedTime":{"type":"timestamp"},"lastUsedTime":{"type":"timestamp"},"registerTime":{"type":"timestamp"}}},"Ss":{"type":"list","member":{}},"Sw":{"type":"list","member":{}},"Sz":{"type":"structure","members":{"applicationId":{},"applicationName":{},"createTime":{"type":"timestamp"},"linkedToGitHub":{"type":"boolean"},"gitHubAccountName":{}}},"S16":{"type":"structure","members":{"applicationName":{},"deploymentGroupId":{},"deploymentGroupName":{},"deploymentConfigName":{},"ec2TagFilters":{"shape":"S19"},"onPremisesInstanceTagFilters":{"shape":"S1c"},"autoScalingGroups":{"shape":"S1f"},"serviceRoleArn":{},"targetRevision":{"shape":"Sb"},"triggerConfigurations":{"shape":"S1k"},"alarmConfiguration":{"shape":"S1q"},"autoRollbackConfiguration":{"shape":"S1u"},"deploymentStyle":{"shape":"S1x"},"blueGreenDeploymentConfiguration":{"shape":"S20"},"loadBalancerInfo":{"shape":"S28"},"lastSuccessfulDeployment":{"shape":"S2f"},"lastAttemptedDeployment":{"shape":"S2f"},"ec2TagSet":{"shape":"S2i"},"onPremisesTagSet":{"shape":"S2k"}}},"S19":{"type":"list","member":{"type":"structure","members":{"Key":{},"Value":{},"Type":{}}}},"S1c":{"type":"list","member":{"type":"structure","members":{"Key":{},"Value":{},"Type":{}}}},"S1f":{"type":"list","member":{"type":"structure","members":{"name":{},"hook":{}}}},"S1k":{"type":"list","member":{"type":"structure","members":{"triggerName":{},"triggerTargetArn":{},"triggerEvents":{"type":"list","member":{}}}}},"S1q":{"type":"structure","members":{"enabled":{"type":"boolean"},"ignorePollAlarmFailure":{"type":"boolean"},"alarms":{"type":"list","member":{"type":"structure","members":{"name":{}}}}}},"S1u":{"type":"structure","members":{"enabled":{"type":"boolean"},"events":{"type":"list","member":{}}}},"S1x":{"type":"structure","members":{"deploymentType":{},"deploymentOption":{}}},"S20":{"type":"structure","members":{"terminateBlueInstancesOnDeploymentSuccess":{"type":"structure","members":{"action":{},"terminationWaitTimeInMinutes":{"type":"integer"}}},"deploymentReadyOption":{"type":"structure","members":{"actionOnTimeout":{},"waitTimeInMinutes":{"type":"integer"}}},"greenFleetProvisioningOption":{"type":"structure","members":{"action":{}}}}},"S28":{"type":"structure","members":{"elbInfoList":{"type":"list","member":{"type":"structure","members":{"name":{}}}},"targetGroupInfoList":{"type":"list","member":{"type":"structure","members":{"name":{}}}}}},"S2f":{"type":"structure","members":{"deploymentId":{},"status":{},"endTime":{"type":"timestamp"},"createTime":{"type":"timestamp"}}},"S2i":{"type":"structure","members":{"ec2TagSetList":{"type":"list","member":{"shape":"S19"}}}},"S2k":{"type":"structure","members":{"onPremisesTagSetList":{"type":"list","member":{"shape":"S1c"}}}},"S2n":{"type":"list","member":{}},"S2r":{"type":"structure","members":{"deploymentId":{},"instanceId":{},"status":{},"lastUpdatedAt":{"type":"timestamp"},"lifecycleEvents":{"type":"list","member":{"type":"structure","members":{"lifecycleEventName":{},"diagnostics":{"type":"structure","members":{"errorCode":{},"scriptName":{},"message":{},"logTail":{}}},"startTime":{"type":"timestamp"},"endTime":{"type":"timestamp"},"status":{}}}},"instanceType":{}}},"S34":{"type":"list","member":{}},"S37":{"type":"structure","members":{"applicationName":{},"deploymentGroupName":{},"deploymentConfigName":{},"deploymentId":{},"previousRevision":{"shape":"Sb"},"revision":{"shape":"Sb"},"status":{},"errorInformation":{"type":"structure","members":{"code":{},"message":{}}},"createTime":{"type":"timestamp"},"startTime":{"type":"timestamp"},"completeTime":{"type":"timestamp"},"deploymentOverview":{"type":"structure","members":{"Pending":{"type":"long"},"InProgress":{"type":"long"},"Succeeded":{"type":"long"},"Failed":{"type":"long"},"Skipped":{"type":"long"},"Ready":{"type":"long"}}},"description":{},"creator":{},"ignoreApplicationStopFailures":{"type":"boolean"},"autoRollbackConfiguration":{"shape":"S1u"},"updateOutdatedInstancesOnly":{"type":"boolean"},"rollbackInfo":{"type":"structure","members":{"rollbackDeploymentId":{},"rollbackTriggeringDeploymentId":{},"rollbackMessage":{}}},"deploymentStyle":{"shape":"S1x"},"targetInstances":{"shape":"S3e"},"instanceTerminationWaitTimeStarted":{"type":"boolean"},"blueGreenDeploymentConfiguration":{"shape":"S20"},"loadBalancerInfo":{"shape":"S28"},"additionalDeploymentStatusInfo":{},"fileExistsBehavior":{}}},"S3e":{"type":"structure","members":{"tagFilters":{"shape":"S19"},"autoScalingGroups":{"shape":"S3f"},"ec2TagSet":{"shape":"S2i"}}},"S3f":{"type":"list","member":{}},"S3l":{"type":"structure","members":{"instanceName":{},"iamSessionArn":{},"iamUserArn":{},"instanceArn":{},"registerTime":{"type":"timestamp"},"deregisterTime":{"type":"timestamp"},"tags":{"shape":"S2"}}},"S3v":{"type":"structure","members":{"value":{"type":"integer"},"type":{}}}}}
 
 /***/ }),
 /* 112 */
@@ -38939,7 +39233,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 118 */
 /***/ (function(module, exports) {
 
-	module.exports = {"version":"2.0","metadata":{"apiVersion":"2016-04-18","endpointPrefix":"cognito-idp","jsonVersion":"1.1","protocol":"json","serviceFullName":"Amazon Cognito Identity Provider","signatureVersion":"v4","targetPrefix":"AWSCognitoIdentityProviderService","uid":"cognito-idp-2016-04-18"},"operations":{"AddCustomAttributes":{"input":{"type":"structure","required":["UserPoolId","CustomAttributes"],"members":{"UserPoolId":{},"CustomAttributes":{"type":"list","member":{"shape":"S4"}}}},"output":{"type":"structure","members":{}}},"AdminAddUserToGroup":{"input":{"type":"structure","required":["UserPoolId","Username","GroupName"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"GroupName":{}}}},"AdminConfirmSignUp":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"AdminCreateUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"UserAttributes":{"shape":"Si"},"ValidationData":{"shape":"Si"},"TemporaryPassword":{"shape":"Sm"},"ForceAliasCreation":{"type":"boolean"},"MessageAction":{},"DesiredDeliveryMediums":{"type":"list","member":{}}}},"output":{"type":"structure","members":{"User":{"shape":"Ss"}}}},"AdminDeleteUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}}},"AdminDeleteUserAttributes":{"input":{"type":"structure","required":["UserPoolId","Username","UserAttributeNames"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"UserAttributeNames":{"shape":"Sz"}}},"output":{"type":"structure","members":{}}},"AdminDisableUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"AdminEnableUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"AdminForgetDevice":{"input":{"type":"structure","required":["UserPoolId","Username","DeviceKey"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"DeviceKey":{}}}},"AdminGetDevice":{"input":{"type":"structure","required":["DeviceKey","UserPoolId","Username"],"members":{"DeviceKey":{},"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","required":["Device"],"members":{"Device":{"shape":"S19"}}}},"AdminGetUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","required":["Username"],"members":{"Username":{"shape":"Sd"},"UserAttributes":{"shape":"Si"},"UserCreateDate":{"type":"timestamp"},"UserLastModifiedDate":{"type":"timestamp"},"Enabled":{"type":"boolean"},"UserStatus":{},"MFAOptions":{"shape":"Sv"}}}},"AdminInitiateAuth":{"input":{"type":"structure","required":["UserPoolId","ClientId","AuthFlow"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1d"},"AuthFlow":{},"AuthParameters":{"shape":"S1f"},"ClientMetadata":{"shape":"S1g"}}},"output":{"type":"structure","members":{"ChallengeName":{},"Session":{},"ChallengeParameters":{"shape":"S1k"},"AuthenticationResult":{"shape":"S1l"}}}},"AdminListDevices":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"Limit":{"type":"integer"},"PaginationToken":{}}},"output":{"type":"structure","members":{"Devices":{"shape":"S1t"},"PaginationToken":{}}}},"AdminListGroupsForUser":{"input":{"type":"structure","required":["Username","UserPoolId"],"members":{"Username":{"shape":"Sd"},"UserPoolId":{},"Limit":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Groups":{"shape":"S1x"},"NextToken":{}}}},"AdminRemoveUserFromGroup":{"input":{"type":"structure","required":["UserPoolId","Username","GroupName"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"GroupName":{}}}},"AdminResetUserPassword":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"AdminRespondToAuthChallenge":{"input":{"type":"structure","required":["UserPoolId","ClientId","ChallengeName"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1d"},"ChallengeName":{},"ChallengeResponses":{"shape":"S26"},"Session":{}}},"output":{"type":"structure","members":{"ChallengeName":{},"Session":{},"ChallengeParameters":{"shape":"S1k"},"AuthenticationResult":{"shape":"S1l"}}}},"AdminSetUserSettings":{"input":{"type":"structure","required":["UserPoolId","Username","MFAOptions"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"MFAOptions":{"shape":"Sv"}}},"output":{"type":"structure","members":{}}},"AdminUpdateDeviceStatus":{"input":{"type":"structure","required":["UserPoolId","Username","DeviceKey"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"DeviceKey":{},"DeviceRememberedStatus":{}}},"output":{"type":"structure","members":{}}},"AdminUpdateUserAttributes":{"input":{"type":"structure","required":["UserPoolId","Username","UserAttributes"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"UserAttributes":{"shape":"Si"}}},"output":{"type":"structure","members":{}}},"AdminUserGlobalSignOut":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"ChangePassword":{"input":{"type":"structure","required":["PreviousPassword","ProposedPassword","AccessToken"],"members":{"PreviousPassword":{"shape":"Sm"},"ProposedPassword":{"shape":"Sm"},"AccessToken":{"shape":"S1m"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"ConfirmDevice":{"input":{"type":"structure","required":["AccessToken","DeviceKey"],"members":{"AccessToken":{"shape":"S1m"},"DeviceKey":{},"DeviceSecretVerifierConfig":{"type":"structure","members":{"PasswordVerifier":{},"Salt":{}}},"DeviceName":{}}},"output":{"type":"structure","members":{"UserConfirmationNecessary":{"type":"boolean"}}}},"ConfirmForgotPassword":{"input":{"type":"structure","required":["ClientId","Username","ConfirmationCode","Password"],"members":{"ClientId":{"shape":"S1d"},"SecretHash":{"shape":"S2o"},"Username":{"shape":"Sd"},"ConfirmationCode":{},"Password":{"shape":"Sm"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"ConfirmSignUp":{"input":{"type":"structure","required":["ClientId","Username","ConfirmationCode"],"members":{"ClientId":{"shape":"S1d"},"SecretHash":{"shape":"S2o"},"Username":{"shape":"Sd"},"ConfirmationCode":{},"ForceAliasCreation":{"type":"boolean"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"CreateGroup":{"input":{"type":"structure","required":["GroupName","UserPoolId"],"members":{"GroupName":{},"UserPoolId":{},"Description":{},"RoleArn":{},"Precedence":{"type":"integer"}}},"output":{"type":"structure","members":{"Group":{"shape":"S1y"}}}},"CreateIdentityProvider":{"input":{"type":"structure","required":["UserPoolId","ProviderName","ProviderType","ProviderDetails"],"members":{"UserPoolId":{},"ProviderName":{},"ProviderType":{},"ProviderDetails":{"shape":"S2y"},"AttributeMapping":{"shape":"S2z"},"IdpIdentifiers":{"shape":"S30"}}},"output":{"type":"structure","required":["IdentityProvider"],"members":{"IdentityProvider":{"shape":"S33"}}}},"CreateUserImportJob":{"input":{"type":"structure","required":["JobName","UserPoolId","CloudWatchLogsRoleArn"],"members":{"JobName":{},"UserPoolId":{},"CloudWatchLogsRoleArn":{}}},"output":{"type":"structure","members":{"UserImportJob":{"shape":"S37"}}}},"CreateUserPool":{"input":{"type":"structure","required":["PoolName"],"members":{"PoolName":{},"Policies":{"shape":"S3f"},"LambdaConfig":{"shape":"S3i"},"AutoVerifiedAttributes":{"shape":"S3j"},"AliasAttributes":{"shape":"S3l"},"UsernameAttributes":{"shape":"S3n"},"SmsVerificationMessage":{},"EmailVerificationMessage":{},"EmailVerificationSubject":{},"SmsAuthenticationMessage":{},"MfaConfiguration":{},"DeviceConfiguration":{"shape":"S3t"},"EmailConfiguration":{"shape":"S3u"},"SmsConfiguration":{"shape":"S3w"},"UserPoolTags":{"shape":"S3x"},"AdminCreateUserConfig":{"shape":"S3y"},"Schema":{"shape":"S41"}}},"output":{"type":"structure","members":{"UserPool":{"shape":"S43"}}}},"CreateUserPoolClient":{"input":{"type":"structure","required":["UserPoolId","ClientName"],"members":{"UserPoolId":{},"ClientName":{},"GenerateSecret":{"type":"boolean"},"RefreshTokenValidity":{"type":"integer"},"ReadAttributes":{"shape":"S49"},"WriteAttributes":{"shape":"S49"},"ExplicitAuthFlows":{"shape":"S4b"},"SupportedIdentityProviders":{"shape":"S4d"},"CallbackURLs":{"shape":"S4e"},"LogoutURLs":{"shape":"S4g"},"DefaultRedirectURI":{},"AllowedOAuthFlows":{"shape":"S4h"},"AllowedOAuthScopes":{"shape":"S4j"},"AllowedOAuthFlowsUserPoolClient":{"type":"boolean"}}},"output":{"type":"structure","members":{"UserPoolClient":{"shape":"S4m"}}}},"CreateUserPoolDomain":{"input":{"type":"structure","required":["Domain","UserPoolId"],"members":{"Domain":{},"UserPoolId":{}}},"output":{"type":"structure","members":{}}},"DeleteGroup":{"input":{"type":"structure","required":["GroupName","UserPoolId"],"members":{"GroupName":{},"UserPoolId":{}}}},"DeleteIdentityProvider":{"input":{"type":"structure","required":["UserPoolId","ProviderName"],"members":{"UserPoolId":{},"ProviderName":{}}}},"DeleteUser":{"input":{"type":"structure","required":["AccessToken"],"members":{"AccessToken":{"shape":"S1m"}}},"authtype":"none"},"DeleteUserAttributes":{"input":{"type":"structure","required":["UserAttributeNames","AccessToken"],"members":{"UserAttributeNames":{"shape":"Sz"},"AccessToken":{"shape":"S1m"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"DeleteUserPool":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{}}}},"DeleteUserPoolClient":{"input":{"type":"structure","required":["UserPoolId","ClientId"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1d"}}}},"DeleteUserPoolDomain":{"input":{"type":"structure","required":["Domain","UserPoolId"],"members":{"Domain":{},"UserPoolId":{}}},"output":{"type":"structure","members":{}}},"DescribeIdentityProvider":{"input":{"type":"structure","required":["UserPoolId","ProviderName"],"members":{"UserPoolId":{},"ProviderName":{}}},"output":{"type":"structure","required":["IdentityProvider"],"members":{"IdentityProvider":{"shape":"S33"}}}},"DescribeUserImportJob":{"input":{"type":"structure","required":["UserPoolId","JobId"],"members":{"UserPoolId":{},"JobId":{}}},"output":{"type":"structure","members":{"UserImportJob":{"shape":"S37"}}}},"DescribeUserPool":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{}}},"output":{"type":"structure","members":{"UserPool":{"shape":"S43"}}}},"DescribeUserPoolClient":{"input":{"type":"structure","required":["UserPoolId","ClientId"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1d"}}},"output":{"type":"structure","members":{"UserPoolClient":{"shape":"S4m"}}}},"DescribeUserPoolDomain":{"input":{"type":"structure","required":["Domain"],"members":{"Domain":{}}},"output":{"type":"structure","members":{"DomainDescription":{"type":"structure","members":{"UserPoolId":{},"AWSAccountId":{},"Domain":{},"S3Bucket":{},"CloudFrontDistribution":{},"Version":{},"Status":{}}}}}},"ForgetDevice":{"input":{"type":"structure","required":["DeviceKey"],"members":{"AccessToken":{"shape":"S1m"},"DeviceKey":{}}}},"ForgotPassword":{"input":{"type":"structure","required":["ClientId","Username"],"members":{"ClientId":{"shape":"S1d"},"SecretHash":{"shape":"S2o"},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{"CodeDeliveryDetails":{"shape":"S5i"}}},"authtype":"none"},"GetCSVHeader":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{}}},"output":{"type":"structure","members":{"UserPoolId":{},"CSVHeader":{"type":"list","member":{}}}}},"GetDevice":{"input":{"type":"structure","required":["DeviceKey"],"members":{"DeviceKey":{},"AccessToken":{"shape":"S1m"}}},"output":{"type":"structure","required":["Device"],"members":{"Device":{"shape":"S19"}}}},"GetGroup":{"input":{"type":"structure","required":["GroupName","UserPoolId"],"members":{"GroupName":{},"UserPoolId":{}}},"output":{"type":"structure","members":{"Group":{"shape":"S1y"}}}},"GetIdentityProviderByIdentifier":{"input":{"type":"structure","required":["UserPoolId","IdpIdentifier"],"members":{"UserPoolId":{},"IdpIdentifier":{}}},"output":{"type":"structure","required":["IdentityProvider"],"members":{"IdentityProvider":{"shape":"S33"}}}},"GetUser":{"input":{"type":"structure","required":["AccessToken"],"members":{"AccessToken":{"shape":"S1m"}}},"output":{"type":"structure","required":["Username","UserAttributes"],"members":{"Username":{"shape":"Sd"},"UserAttributes":{"shape":"Si"},"MFAOptions":{"shape":"Sv"}}},"authtype":"none"},"GetUserAttributeVerificationCode":{"input":{"type":"structure","required":["AccessToken","AttributeName"],"members":{"AccessToken":{"shape":"S1m"},"AttributeName":{}}},"output":{"type":"structure","members":{"CodeDeliveryDetails":{"shape":"S5i"}}},"authtype":"none"},"GlobalSignOut":{"input":{"type":"structure","required":["AccessToken"],"members":{"AccessToken":{"shape":"S1m"}}},"output":{"type":"structure","members":{}}},"InitiateAuth":{"input":{"type":"structure","required":["AuthFlow","ClientId"],"members":{"AuthFlow":{},"AuthParameters":{"shape":"S1f"},"ClientMetadata":{"shape":"S1g"},"ClientId":{"shape":"S1d"}}},"output":{"type":"structure","members":{"ChallengeName":{},"Session":{},"ChallengeParameters":{"shape":"S1k"},"AuthenticationResult":{"shape":"S1l"}}}},"ListDevices":{"input":{"type":"structure","required":["AccessToken"],"members":{"AccessToken":{"shape":"S1m"},"Limit":{"type":"integer"},"PaginationToken":{}}},"output":{"type":"structure","members":{"Devices":{"shape":"S1t"},"PaginationToken":{}}}},"ListGroups":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"Limit":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Groups":{"shape":"S1x"},"NextToken":{}}}},"ListIdentityProviders":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","required":["Providers"],"members":{"Providers":{"type":"list","member":{"type":"structure","members":{"ProviderName":{},"ProviderType":{},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"}}}},"NextToken":{}}}},"ListUserImportJobs":{"input":{"type":"structure","required":["UserPoolId","MaxResults"],"members":{"UserPoolId":{},"MaxResults":{"type":"integer"},"PaginationToken":{}}},"output":{"type":"structure","members":{"UserImportJobs":{"type":"list","member":{"shape":"S37"}},"PaginationToken":{}}}},"ListUserPoolClients":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"UserPoolClients":{"type":"list","member":{"type":"structure","members":{"ClientId":{"shape":"S1d"},"UserPoolId":{},"ClientName":{}}}},"NextToken":{}}}},"ListUserPools":{"input":{"type":"structure","required":["MaxResults"],"members":{"NextToken":{},"MaxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"UserPools":{"type":"list","member":{"type":"structure","members":{"Id":{},"Name":{},"LambdaConfig":{"shape":"S3i"},"Status":{},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"}}}},"NextToken":{}}}},"ListUsers":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"AttributesToGet":{"type":"list","member":{}},"Limit":{"type":"integer"},"PaginationToken":{},"Filter":{}}},"output":{"type":"structure","members":{"Users":{"shape":"S6r"},"PaginationToken":{}}}},"ListUsersInGroup":{"input":{"type":"structure","required":["UserPoolId","GroupName"],"members":{"UserPoolId":{},"GroupName":{},"Limit":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Users":{"shape":"S6r"},"NextToken":{}}}},"ResendConfirmationCode":{"input":{"type":"structure","required":["ClientId","Username"],"members":{"ClientId":{"shape":"S1d"},"SecretHash":{"shape":"S2o"},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{"CodeDeliveryDetails":{"shape":"S5i"}}},"authtype":"none"},"RespondToAuthChallenge":{"input":{"type":"structure","required":["ClientId","ChallengeName"],"members":{"ClientId":{"shape":"S1d"},"ChallengeName":{},"Session":{},"ChallengeResponses":{"shape":"S26"}}},"output":{"type":"structure","members":{"ChallengeName":{},"Session":{},"ChallengeParameters":{"shape":"S1k"},"AuthenticationResult":{"shape":"S1l"}}}},"SetUserSettings":{"input":{"type":"structure","required":["AccessToken","MFAOptions"],"members":{"AccessToken":{"shape":"S1m"},"MFAOptions":{"shape":"Sv"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"SignUp":{"input":{"type":"structure","required":["ClientId","Username","Password"],"members":{"ClientId":{"shape":"S1d"},"SecretHash":{"shape":"S2o"},"Username":{"shape":"Sd"},"Password":{"shape":"Sm"},"UserAttributes":{"shape":"Si"},"ValidationData":{"shape":"Si"}}},"output":{"type":"structure","required":["UserConfirmed","UserSub"],"members":{"UserConfirmed":{"type":"boolean"},"CodeDeliveryDetails":{"shape":"S5i"},"UserSub":{}}},"authtype":"none"},"StartUserImportJob":{"input":{"type":"structure","required":["UserPoolId","JobId"],"members":{"UserPoolId":{},"JobId":{}}},"output":{"type":"structure","members":{"UserImportJob":{"shape":"S37"}}}},"StopUserImportJob":{"input":{"type":"structure","required":["UserPoolId","JobId"],"members":{"UserPoolId":{},"JobId":{}}},"output":{"type":"structure","members":{"UserImportJob":{"shape":"S37"}}}},"UpdateDeviceStatus":{"input":{"type":"structure","required":["AccessToken","DeviceKey"],"members":{"AccessToken":{"shape":"S1m"},"DeviceKey":{},"DeviceRememberedStatus":{}}},"output":{"type":"structure","members":{}}},"UpdateGroup":{"input":{"type":"structure","required":["GroupName","UserPoolId"],"members":{"GroupName":{},"UserPoolId":{},"Description":{},"RoleArn":{},"Precedence":{"type":"integer"}}},"output":{"type":"structure","members":{"Group":{"shape":"S1y"}}}},"UpdateIdentityProvider":{"input":{"type":"structure","required":["UserPoolId","ProviderName"],"members":{"UserPoolId":{},"ProviderName":{},"ProviderDetails":{"shape":"S2y"},"AttributeMapping":{"shape":"S2z"},"IdpIdentifiers":{"shape":"S30"}}},"output":{"type":"structure","required":["IdentityProvider"],"members":{"IdentityProvider":{"shape":"S33"}}}},"UpdateUserAttributes":{"input":{"type":"structure","required":["UserAttributes","AccessToken"],"members":{"UserAttributes":{"shape":"Si"},"AccessToken":{"shape":"S1m"}}},"output":{"type":"structure","members":{"CodeDeliveryDetailsList":{"type":"list","member":{"shape":"S5i"}}}},"authtype":"none"},"UpdateUserPool":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"Policies":{"shape":"S3f"},"LambdaConfig":{"shape":"S3i"},"AutoVerifiedAttributes":{"shape":"S3j"},"SmsVerificationMessage":{},"EmailVerificationMessage":{},"EmailVerificationSubject":{},"SmsAuthenticationMessage":{},"MfaConfiguration":{},"DeviceConfiguration":{"shape":"S3t"},"EmailConfiguration":{"shape":"S3u"},"SmsConfiguration":{"shape":"S3w"},"UserPoolTags":{"shape":"S3x"},"AdminCreateUserConfig":{"shape":"S3y"}}},"output":{"type":"structure","members":{}}},"UpdateUserPoolClient":{"input":{"type":"structure","required":["UserPoolId","ClientId"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1d"},"ClientName":{},"RefreshTokenValidity":{"type":"integer"},"ReadAttributes":{"shape":"S49"},"WriteAttributes":{"shape":"S49"},"ExplicitAuthFlows":{"shape":"S4b"},"SupportedIdentityProviders":{"shape":"S4d"},"CallbackURLs":{"shape":"S4e"},"LogoutURLs":{"shape":"S4g"},"DefaultRedirectURI":{},"AllowedOAuthFlows":{"shape":"S4h"},"AllowedOAuthScopes":{"shape":"S4j"},"AllowedOAuthFlowsUserPoolClient":{"type":"boolean"}}},"output":{"type":"structure","members":{"UserPoolClient":{"shape":"S4m"}}}},"VerifyUserAttribute":{"input":{"type":"structure","required":["AccessToken","AttributeName","Code"],"members":{"AccessToken":{"shape":"S1m"},"AttributeName":{},"Code":{}}},"output":{"type":"structure","members":{}},"authtype":"none"}},"shapes":{"S4":{"type":"structure","members":{"Name":{},"AttributeDataType":{},"DeveloperOnlyAttribute":{"type":"boolean"},"Mutable":{"type":"boolean"},"Required":{"type":"boolean"},"NumberAttributeConstraints":{"type":"structure","members":{"MinValue":{},"MaxValue":{}}},"StringAttributeConstraints":{"type":"structure","members":{"MinLength":{},"MaxLength":{}}}}},"Sd":{"type":"string","sensitive":true},"Si":{"type":"list","member":{"type":"structure","required":["Name"],"members":{"Name":{},"Value":{"type":"string","sensitive":true}}}},"Sm":{"type":"string","sensitive":true},"Ss":{"type":"structure","members":{"Username":{"shape":"Sd"},"Attributes":{"shape":"Si"},"UserCreateDate":{"type":"timestamp"},"UserLastModifiedDate":{"type":"timestamp"},"Enabled":{"type":"boolean"},"UserStatus":{},"MFAOptions":{"shape":"Sv"}}},"Sv":{"type":"list","member":{"type":"structure","members":{"DeliveryMedium":{},"AttributeName":{}}}},"Sz":{"type":"list","member":{}},"S19":{"type":"structure","members":{"DeviceKey":{},"DeviceAttributes":{"shape":"Si"},"DeviceCreateDate":{"type":"timestamp"},"DeviceLastModifiedDate":{"type":"timestamp"},"DeviceLastAuthenticatedDate":{"type":"timestamp"}}},"S1d":{"type":"string","sensitive":true},"S1f":{"type":"map","key":{},"value":{}},"S1g":{"type":"map","key":{},"value":{}},"S1k":{"type":"map","key":{},"value":{}},"S1l":{"type":"structure","members":{"AccessToken":{"shape":"S1m"},"ExpiresIn":{"type":"integer"},"TokenType":{},"RefreshToken":{"shape":"S1m"},"IdToken":{"shape":"S1m"},"NewDeviceMetadata":{"type":"structure","members":{"DeviceKey":{},"DeviceGroupKey":{}}}}},"S1m":{"type":"string","sensitive":true},"S1t":{"type":"list","member":{"shape":"S19"}},"S1x":{"type":"list","member":{"shape":"S1y"}},"S1y":{"type":"structure","members":{"GroupName":{},"UserPoolId":{},"Description":{},"RoleArn":{},"Precedence":{"type":"integer"},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"}}},"S26":{"type":"map","key":{},"value":{}},"S2o":{"type":"string","sensitive":true},"S2y":{"type":"map","key":{},"value":{}},"S2z":{"type":"map","key":{},"value":{}},"S30":{"type":"list","member":{}},"S33":{"type":"structure","members":{"UserPoolId":{},"ProviderName":{},"ProviderType":{},"ProviderDetails":{"shape":"S2y"},"AttributeMapping":{"shape":"S2z"},"IdpIdentifiers":{"shape":"S30"},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"}}},"S37":{"type":"structure","members":{"JobName":{},"JobId":{},"UserPoolId":{},"PreSignedUrl":{},"CreationDate":{"type":"timestamp"},"StartDate":{"type":"timestamp"},"CompletionDate":{"type":"timestamp"},"Status":{},"CloudWatchLogsRoleArn":{},"ImportedUsers":{"type":"long"},"SkippedUsers":{"type":"long"},"FailedUsers":{"type":"long"},"CompletionMessage":{}}},"S3f":{"type":"structure","members":{"PasswordPolicy":{"type":"structure","members":{"MinimumLength":{"type":"integer"},"RequireUppercase":{"type":"boolean"},"RequireLowercase":{"type":"boolean"},"RequireNumbers":{"type":"boolean"},"RequireSymbols":{"type":"boolean"}}}}},"S3i":{"type":"structure","members":{"PreSignUp":{},"CustomMessage":{},"PostConfirmation":{},"PreAuthentication":{},"PostAuthentication":{},"DefineAuthChallenge":{},"CreateAuthChallenge":{},"VerifyAuthChallengeResponse":{}}},"S3j":{"type":"list","member":{}},"S3l":{"type":"list","member":{}},"S3n":{"type":"list","member":{}},"S3t":{"type":"structure","members":{"ChallengeRequiredOnNewDevice":{"type":"boolean"},"DeviceOnlyRememberedOnUserPrompt":{"type":"boolean"}}},"S3u":{"type":"structure","members":{"SourceArn":{},"ReplyToEmailAddress":{}}},"S3w":{"type":"structure","required":["SnsCallerArn"],"members":{"SnsCallerArn":{},"ExternalId":{}}},"S3x":{"type":"map","key":{},"value":{}},"S3y":{"type":"structure","members":{"AllowAdminCreateUserOnly":{"type":"boolean"},"UnusedAccountValidityDays":{"type":"integer"},"InviteMessageTemplate":{"type":"structure","members":{"SMSMessage":{},"EmailMessage":{},"EmailSubject":{}}}}},"S41":{"type":"list","member":{"shape":"S4"}},"S43":{"type":"structure","members":{"Id":{},"Name":{},"Policies":{"shape":"S3f"},"LambdaConfig":{"shape":"S3i"},"Status":{},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"},"SchemaAttributes":{"shape":"S41"},"AutoVerifiedAttributes":{"shape":"S3j"},"AliasAttributes":{"shape":"S3l"},"UsernameAttributes":{"shape":"S3n"},"SmsVerificationMessage":{},"EmailVerificationMessage":{},"EmailVerificationSubject":{},"SmsAuthenticationMessage":{},"MfaConfiguration":{},"DeviceConfiguration":{"shape":"S3t"},"EstimatedNumberOfUsers":{"type":"integer"},"EmailConfiguration":{"shape":"S3u"},"SmsConfiguration":{"shape":"S3w"},"UserPoolTags":{"shape":"S3x"},"SmsConfigurationFailure":{},"EmailConfigurationFailure":{},"AdminCreateUserConfig":{"shape":"S3y"}}},"S49":{"type":"list","member":{}},"S4b":{"type":"list","member":{}},"S4d":{"type":"list","member":{}},"S4e":{"type":"list","member":{}},"S4g":{"type":"list","member":{}},"S4h":{"type":"list","member":{}},"S4j":{"type":"list","member":{}},"S4m":{"type":"structure","members":{"UserPoolId":{},"ClientName":{},"ClientId":{"shape":"S1d"},"ClientSecret":{"type":"string","sensitive":true},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"},"RefreshTokenValidity":{"type":"integer"},"ReadAttributes":{"shape":"S49"},"WriteAttributes":{"shape":"S49"},"ExplicitAuthFlows":{"shape":"S4b"},"SupportedIdentityProviders":{"shape":"S4d"},"CallbackURLs":{"shape":"S4e"},"LogoutURLs":{"shape":"S4g"},"DefaultRedirectURI":{},"AllowedOAuthFlows":{"shape":"S4h"},"AllowedOAuthScopes":{"shape":"S4j"},"AllowedOAuthFlowsUserPoolClient":{"type":"boolean"}}},"S5i":{"type":"structure","members":{"Destination":{},"DeliveryMedium":{},"AttributeName":{}}},"S6r":{"type":"list","member":{"shape":"Ss"}}}}
+	module.exports = {"version":"2.0","metadata":{"apiVersion":"2016-04-18","endpointPrefix":"cognito-idp","jsonVersion":"1.1","protocol":"json","serviceFullName":"Amazon Cognito Identity Provider","signatureVersion":"v4","targetPrefix":"AWSCognitoIdentityProviderService","uid":"cognito-idp-2016-04-18"},"operations":{"AddCustomAttributes":{"input":{"type":"structure","required":["UserPoolId","CustomAttributes"],"members":{"UserPoolId":{},"CustomAttributes":{"type":"list","member":{"shape":"S4"}}}},"output":{"type":"structure","members":{}}},"AdminAddUserToGroup":{"input":{"type":"structure","required":["UserPoolId","Username","GroupName"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"GroupName":{}}}},"AdminConfirmSignUp":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"AdminCreateUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"UserAttributes":{"shape":"Si"},"ValidationData":{"shape":"Si"},"TemporaryPassword":{"shape":"Sm"},"ForceAliasCreation":{"type":"boolean"},"MessageAction":{},"DesiredDeliveryMediums":{"type":"list","member":{}}}},"output":{"type":"structure","members":{"User":{"shape":"Ss"}}}},"AdminDeleteUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}}},"AdminDeleteUserAttributes":{"input":{"type":"structure","required":["UserPoolId","Username","UserAttributeNames"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"UserAttributeNames":{"shape":"Sz"}}},"output":{"type":"structure","members":{}}},"AdminDisableProviderForUser":{"input":{"type":"structure","required":["UserPoolId","User"],"members":{"UserPoolId":{},"User":{"shape":"S12"}}},"output":{"type":"structure","members":{}}},"AdminDisableUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"AdminEnableUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"AdminForgetDevice":{"input":{"type":"structure","required":["UserPoolId","Username","DeviceKey"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"DeviceKey":{}}}},"AdminGetDevice":{"input":{"type":"structure","required":["DeviceKey","UserPoolId","Username"],"members":{"DeviceKey":{},"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","required":["Device"],"members":{"Device":{"shape":"S1d"}}}},"AdminGetUser":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","required":["Username"],"members":{"Username":{"shape":"Sd"},"UserAttributes":{"shape":"Si"},"UserCreateDate":{"type":"timestamp"},"UserLastModifiedDate":{"type":"timestamp"},"Enabled":{"type":"boolean"},"UserStatus":{},"MFAOptions":{"shape":"Sv"}}}},"AdminInitiateAuth":{"input":{"type":"structure","required":["UserPoolId","ClientId","AuthFlow"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1h"},"AuthFlow":{},"AuthParameters":{"shape":"S1j"},"ClientMetadata":{"shape":"S1k"}}},"output":{"type":"structure","members":{"ChallengeName":{},"Session":{},"ChallengeParameters":{"shape":"S1o"},"AuthenticationResult":{"shape":"S1p"}}}},"AdminLinkProviderForUser":{"input":{"type":"structure","required":["UserPoolId","DestinationUser","SourceUser"],"members":{"UserPoolId":{},"DestinationUser":{"shape":"S12"},"SourceUser":{"shape":"S12"}}},"output":{"type":"structure","members":{}}},"AdminListDevices":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"Limit":{"type":"integer"},"PaginationToken":{}}},"output":{"type":"structure","members":{"Devices":{"shape":"S1z"},"PaginationToken":{}}}},"AdminListGroupsForUser":{"input":{"type":"structure","required":["Username","UserPoolId"],"members":{"Username":{"shape":"Sd"},"UserPoolId":{},"Limit":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Groups":{"shape":"S23"},"NextToken":{}}}},"AdminRemoveUserFromGroup":{"input":{"type":"structure","required":["UserPoolId","Username","GroupName"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"GroupName":{}}}},"AdminResetUserPassword":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"AdminRespondToAuthChallenge":{"input":{"type":"structure","required":["UserPoolId","ClientId","ChallengeName"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1h"},"ChallengeName":{},"ChallengeResponses":{"shape":"S2c"},"Session":{}}},"output":{"type":"structure","members":{"ChallengeName":{},"Session":{},"ChallengeParameters":{"shape":"S1o"},"AuthenticationResult":{"shape":"S1p"}}}},"AdminSetUserSettings":{"input":{"type":"structure","required":["UserPoolId","Username","MFAOptions"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"MFAOptions":{"shape":"Sv"}}},"output":{"type":"structure","members":{}}},"AdminUpdateDeviceStatus":{"input":{"type":"structure","required":["UserPoolId","Username","DeviceKey"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"DeviceKey":{},"DeviceRememberedStatus":{}}},"output":{"type":"structure","members":{}}},"AdminUpdateUserAttributes":{"input":{"type":"structure","required":["UserPoolId","Username","UserAttributes"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"},"UserAttributes":{"shape":"Si"}}},"output":{"type":"structure","members":{}}},"AdminUserGlobalSignOut":{"input":{"type":"structure","required":["UserPoolId","Username"],"members":{"UserPoolId":{},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{}}},"ChangePassword":{"input":{"type":"structure","required":["PreviousPassword","ProposedPassword","AccessToken"],"members":{"PreviousPassword":{"shape":"Sm"},"ProposedPassword":{"shape":"Sm"},"AccessToken":{"shape":"S1q"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"ConfirmDevice":{"input":{"type":"structure","required":["AccessToken","DeviceKey"],"members":{"AccessToken":{"shape":"S1q"},"DeviceKey":{},"DeviceSecretVerifierConfig":{"type":"structure","members":{"PasswordVerifier":{},"Salt":{}}},"DeviceName":{}}},"output":{"type":"structure","members":{"UserConfirmationNecessary":{"type":"boolean"}}}},"ConfirmForgotPassword":{"input":{"type":"structure","required":["ClientId","Username","ConfirmationCode","Password"],"members":{"ClientId":{"shape":"S1h"},"SecretHash":{"shape":"S2u"},"Username":{"shape":"Sd"},"ConfirmationCode":{},"Password":{"shape":"Sm"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"ConfirmSignUp":{"input":{"type":"structure","required":["ClientId","Username","ConfirmationCode"],"members":{"ClientId":{"shape":"S1h"},"SecretHash":{"shape":"S2u"},"Username":{"shape":"Sd"},"ConfirmationCode":{},"ForceAliasCreation":{"type":"boolean"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"CreateGroup":{"input":{"type":"structure","required":["GroupName","UserPoolId"],"members":{"GroupName":{},"UserPoolId":{},"Description":{},"RoleArn":{},"Precedence":{"type":"integer"}}},"output":{"type":"structure","members":{"Group":{"shape":"S24"}}}},"CreateIdentityProvider":{"input":{"type":"structure","required":["UserPoolId","ProviderName","ProviderType","ProviderDetails"],"members":{"UserPoolId":{},"ProviderName":{},"ProviderType":{},"ProviderDetails":{"shape":"S34"},"AttributeMapping":{"shape":"S35"},"IdpIdentifiers":{"shape":"S37"}}},"output":{"type":"structure","required":["IdentityProvider"],"members":{"IdentityProvider":{"shape":"S3a"}}}},"CreateResourceServer":{"input":{"type":"structure","required":["UserPoolId","Identifier","Name"],"members":{"UserPoolId":{},"Identifier":{},"Name":{},"Scopes":{"shape":"S3e"}}},"output":{"type":"structure","required":["ResourceServer"],"members":{"ResourceServer":{"shape":"S3j"}}}},"CreateUserImportJob":{"input":{"type":"structure","required":["JobName","UserPoolId","CloudWatchLogsRoleArn"],"members":{"JobName":{},"UserPoolId":{},"CloudWatchLogsRoleArn":{}}},"output":{"type":"structure","members":{"UserImportJob":{"shape":"S3n"}}}},"CreateUserPool":{"input":{"type":"structure","required":["PoolName"],"members":{"PoolName":{},"Policies":{"shape":"S3v"},"LambdaConfig":{"shape":"S3y"},"AutoVerifiedAttributes":{"shape":"S3z"},"AliasAttributes":{"shape":"S41"},"UsernameAttributes":{"shape":"S43"},"SmsVerificationMessage":{},"EmailVerificationMessage":{},"EmailVerificationSubject":{},"VerificationMessageTemplate":{"shape":"S48"},"SmsAuthenticationMessage":{},"MfaConfiguration":{},"DeviceConfiguration":{"shape":"S4d"},"EmailConfiguration":{"shape":"S4e"},"SmsConfiguration":{"shape":"S4g"},"UserPoolTags":{"shape":"S4h"},"AdminCreateUserConfig":{"shape":"S4i"},"Schema":{"shape":"S4l"}}},"output":{"type":"structure","members":{"UserPool":{"shape":"S4n"}}}},"CreateUserPoolClient":{"input":{"type":"structure","required":["UserPoolId","ClientName"],"members":{"UserPoolId":{},"ClientName":{},"GenerateSecret":{"type":"boolean"},"RefreshTokenValidity":{"type":"integer"},"ReadAttributes":{"shape":"S4t"},"WriteAttributes":{"shape":"S4t"},"ExplicitAuthFlows":{"shape":"S4v"},"SupportedIdentityProviders":{"shape":"S4x"},"CallbackURLs":{"shape":"S4y"},"LogoutURLs":{"shape":"S50"},"DefaultRedirectURI":{},"AllowedOAuthFlows":{"shape":"S51"},"AllowedOAuthScopes":{"shape":"S53"},"AllowedOAuthFlowsUserPoolClient":{"type":"boolean"}}},"output":{"type":"structure","members":{"UserPoolClient":{"shape":"S56"}}}},"CreateUserPoolDomain":{"input":{"type":"structure","required":["Domain","UserPoolId"],"members":{"Domain":{},"UserPoolId":{}}},"output":{"type":"structure","members":{}}},"DeleteGroup":{"input":{"type":"structure","required":["GroupName","UserPoolId"],"members":{"GroupName":{},"UserPoolId":{}}}},"DeleteIdentityProvider":{"input":{"type":"structure","required":["UserPoolId","ProviderName"],"members":{"UserPoolId":{},"ProviderName":{}}}},"DeleteResourceServer":{"input":{"type":"structure","required":["UserPoolId","Identifier"],"members":{"UserPoolId":{},"Identifier":{}}}},"DeleteUser":{"input":{"type":"structure","required":["AccessToken"],"members":{"AccessToken":{"shape":"S1q"}}},"authtype":"none"},"DeleteUserAttributes":{"input":{"type":"structure","required":["UserAttributeNames","AccessToken"],"members":{"UserAttributeNames":{"shape":"Sz"},"AccessToken":{"shape":"S1q"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"DeleteUserPool":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{}}}},"DeleteUserPoolClient":{"input":{"type":"structure","required":["UserPoolId","ClientId"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1h"}}}},"DeleteUserPoolDomain":{"input":{"type":"structure","required":["Domain","UserPoolId"],"members":{"Domain":{},"UserPoolId":{}}},"output":{"type":"structure","members":{}}},"DescribeIdentityProvider":{"input":{"type":"structure","required":["UserPoolId","ProviderName"],"members":{"UserPoolId":{},"ProviderName":{}}},"output":{"type":"structure","required":["IdentityProvider"],"members":{"IdentityProvider":{"shape":"S3a"}}}},"DescribeResourceServer":{"input":{"type":"structure","required":["UserPoolId","Identifier"],"members":{"UserPoolId":{},"Identifier":{}}},"output":{"type":"structure","required":["ResourceServer"],"members":{"ResourceServer":{"shape":"S3j"}}}},"DescribeUserImportJob":{"input":{"type":"structure","required":["UserPoolId","JobId"],"members":{"UserPoolId":{},"JobId":{}}},"output":{"type":"structure","members":{"UserImportJob":{"shape":"S3n"}}}},"DescribeUserPool":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{}}},"output":{"type":"structure","members":{"UserPool":{"shape":"S4n"}}}},"DescribeUserPoolClient":{"input":{"type":"structure","required":["UserPoolId","ClientId"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1h"}}},"output":{"type":"structure","members":{"UserPoolClient":{"shape":"S56"}}}},"DescribeUserPoolDomain":{"input":{"type":"structure","required":["Domain"],"members":{"Domain":{}}},"output":{"type":"structure","members":{"DomainDescription":{"type":"structure","members":{"UserPoolId":{},"AWSAccountId":{},"Domain":{},"S3Bucket":{},"CloudFrontDistribution":{},"Version":{},"Status":{}}}}}},"ForgetDevice":{"input":{"type":"structure","required":["DeviceKey"],"members":{"AccessToken":{"shape":"S1q"},"DeviceKey":{}}}},"ForgotPassword":{"input":{"type":"structure","required":["ClientId","Username"],"members":{"ClientId":{"shape":"S1h"},"SecretHash":{"shape":"S2u"},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{"CodeDeliveryDetails":{"shape":"S65"}}},"authtype":"none"},"GetCSVHeader":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{}}},"output":{"type":"structure","members":{"UserPoolId":{},"CSVHeader":{"type":"list","member":{}}}}},"GetDevice":{"input":{"type":"structure","required":["DeviceKey"],"members":{"DeviceKey":{},"AccessToken":{"shape":"S1q"}}},"output":{"type":"structure","required":["Device"],"members":{"Device":{"shape":"S1d"}}}},"GetGroup":{"input":{"type":"structure","required":["GroupName","UserPoolId"],"members":{"GroupName":{},"UserPoolId":{}}},"output":{"type":"structure","members":{"Group":{"shape":"S24"}}}},"GetIdentityProviderByIdentifier":{"input":{"type":"structure","required":["UserPoolId","IdpIdentifier"],"members":{"UserPoolId":{},"IdpIdentifier":{}}},"output":{"type":"structure","required":["IdentityProvider"],"members":{"IdentityProvider":{"shape":"S3a"}}}},"GetUICustomization":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1h"}}},"output":{"type":"structure","required":["UICustomization"],"members":{"UICustomization":{"shape":"S6h"}}}},"GetUser":{"input":{"type":"structure","required":["AccessToken"],"members":{"AccessToken":{"shape":"S1q"}}},"output":{"type":"structure","required":["Username","UserAttributes"],"members":{"Username":{"shape":"Sd"},"UserAttributes":{"shape":"Si"},"MFAOptions":{"shape":"Sv"}}},"authtype":"none"},"GetUserAttributeVerificationCode":{"input":{"type":"structure","required":["AccessToken","AttributeName"],"members":{"AccessToken":{"shape":"S1q"},"AttributeName":{}}},"output":{"type":"structure","members":{"CodeDeliveryDetails":{"shape":"S65"}}},"authtype":"none"},"GlobalSignOut":{"input":{"type":"structure","required":["AccessToken"],"members":{"AccessToken":{"shape":"S1q"}}},"output":{"type":"structure","members":{}}},"InitiateAuth":{"input":{"type":"structure","required":["AuthFlow","ClientId"],"members":{"AuthFlow":{},"AuthParameters":{"shape":"S1j"},"ClientMetadata":{"shape":"S1k"},"ClientId":{"shape":"S1h"}}},"output":{"type":"structure","members":{"ChallengeName":{},"Session":{},"ChallengeParameters":{"shape":"S1o"},"AuthenticationResult":{"shape":"S1p"}}}},"ListDevices":{"input":{"type":"structure","required":["AccessToken"],"members":{"AccessToken":{"shape":"S1q"},"Limit":{"type":"integer"},"PaginationToken":{}}},"output":{"type":"structure","members":{"Devices":{"shape":"S1z"},"PaginationToken":{}}}},"ListGroups":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"Limit":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Groups":{"shape":"S23"},"NextToken":{}}}},"ListIdentityProviders":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","required":["Providers"],"members":{"Providers":{"type":"list","member":{"type":"structure","members":{"ProviderName":{},"ProviderType":{},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"}}}},"NextToken":{}}}},"ListResourceServers":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","required":["ResourceServers"],"members":{"ResourceServers":{"type":"list","member":{"shape":"S3j"}},"NextToken":{}}}},"ListUserImportJobs":{"input":{"type":"structure","required":["UserPoolId","MaxResults"],"members":{"UserPoolId":{},"MaxResults":{"type":"integer"},"PaginationToken":{}}},"output":{"type":"structure","members":{"UserImportJobs":{"type":"list","member":{"shape":"S3n"}},"PaginationToken":{}}}},"ListUserPoolClients":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"UserPoolClients":{"type":"list","member":{"type":"structure","members":{"ClientId":{"shape":"S1h"},"UserPoolId":{},"ClientName":{}}}},"NextToken":{}}}},"ListUserPools":{"input":{"type":"structure","required":["MaxResults"],"members":{"NextToken":{},"MaxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"UserPools":{"type":"list","member":{"type":"structure","members":{"Id":{},"Name":{},"LambdaConfig":{"shape":"S3y"},"Status":{},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"}}}},"NextToken":{}}}},"ListUsers":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"AttributesToGet":{"type":"list","member":{}},"Limit":{"type":"integer"},"PaginationToken":{},"Filter":{}}},"output":{"type":"structure","members":{"Users":{"shape":"S7o"},"PaginationToken":{}}}},"ListUsersInGroup":{"input":{"type":"structure","required":["UserPoolId","GroupName"],"members":{"UserPoolId":{},"GroupName":{},"Limit":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"Users":{"shape":"S7o"},"NextToken":{}}}},"ResendConfirmationCode":{"input":{"type":"structure","required":["ClientId","Username"],"members":{"ClientId":{"shape":"S1h"},"SecretHash":{"shape":"S2u"},"Username":{"shape":"Sd"}}},"output":{"type":"structure","members":{"CodeDeliveryDetails":{"shape":"S65"}}},"authtype":"none"},"RespondToAuthChallenge":{"input":{"type":"structure","required":["ClientId","ChallengeName"],"members":{"ClientId":{"shape":"S1h"},"ChallengeName":{},"Session":{},"ChallengeResponses":{"shape":"S2c"}}},"output":{"type":"structure","members":{"ChallengeName":{},"Session":{},"ChallengeParameters":{"shape":"S1o"},"AuthenticationResult":{"shape":"S1p"}}}},"SetUICustomization":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1h"},"CSS":{},"ImageFile":{"type":"blob"}}},"output":{"type":"structure","required":["UICustomization"],"members":{"UICustomization":{"shape":"S6h"}}}},"SetUserSettings":{"input":{"type":"structure","required":["AccessToken","MFAOptions"],"members":{"AccessToken":{"shape":"S1q"},"MFAOptions":{"shape":"Sv"}}},"output":{"type":"structure","members":{}},"authtype":"none"},"SignUp":{"input":{"type":"structure","required":["ClientId","Username","Password"],"members":{"ClientId":{"shape":"S1h"},"SecretHash":{"shape":"S2u"},"Username":{"shape":"Sd"},"Password":{"shape":"Sm"},"UserAttributes":{"shape":"Si"},"ValidationData":{"shape":"Si"}}},"output":{"type":"structure","required":["UserConfirmed","UserSub"],"members":{"UserConfirmed":{"type":"boolean"},"CodeDeliveryDetails":{"shape":"S65"},"UserSub":{}}},"authtype":"none"},"StartUserImportJob":{"input":{"type":"structure","required":["UserPoolId","JobId"],"members":{"UserPoolId":{},"JobId":{}}},"output":{"type":"structure","members":{"UserImportJob":{"shape":"S3n"}}}},"StopUserImportJob":{"input":{"type":"structure","required":["UserPoolId","JobId"],"members":{"UserPoolId":{},"JobId":{}}},"output":{"type":"structure","members":{"UserImportJob":{"shape":"S3n"}}}},"UpdateDeviceStatus":{"input":{"type":"structure","required":["AccessToken","DeviceKey"],"members":{"AccessToken":{"shape":"S1q"},"DeviceKey":{},"DeviceRememberedStatus":{}}},"output":{"type":"structure","members":{}}},"UpdateGroup":{"input":{"type":"structure","required":["GroupName","UserPoolId"],"members":{"GroupName":{},"UserPoolId":{},"Description":{},"RoleArn":{},"Precedence":{"type":"integer"}}},"output":{"type":"structure","members":{"Group":{"shape":"S24"}}}},"UpdateIdentityProvider":{"input":{"type":"structure","required":["UserPoolId","ProviderName"],"members":{"UserPoolId":{},"ProviderName":{},"ProviderDetails":{"shape":"S34"},"AttributeMapping":{"shape":"S35"},"IdpIdentifiers":{"shape":"S37"}}},"output":{"type":"structure","required":["IdentityProvider"],"members":{"IdentityProvider":{"shape":"S3a"}}}},"UpdateResourceServer":{"input":{"type":"structure","required":["UserPoolId","Identifier","Name"],"members":{"UserPoolId":{},"Identifier":{},"Name":{},"Scopes":{"shape":"S3e"}}},"output":{"type":"structure","required":["ResourceServer"],"members":{"ResourceServer":{"shape":"S3j"}}}},"UpdateUserAttributes":{"input":{"type":"structure","required":["UserAttributes","AccessToken"],"members":{"UserAttributes":{"shape":"Si"},"AccessToken":{"shape":"S1q"}}},"output":{"type":"structure","members":{"CodeDeliveryDetailsList":{"type":"list","member":{"shape":"S65"}}}},"authtype":"none"},"UpdateUserPool":{"input":{"type":"structure","required":["UserPoolId"],"members":{"UserPoolId":{},"Policies":{"shape":"S3v"},"LambdaConfig":{"shape":"S3y"},"AutoVerifiedAttributes":{"shape":"S3z"},"SmsVerificationMessage":{},"EmailVerificationMessage":{},"EmailVerificationSubject":{},"VerificationMessageTemplate":{"shape":"S48"},"SmsAuthenticationMessage":{},"MfaConfiguration":{},"DeviceConfiguration":{"shape":"S4d"},"EmailConfiguration":{"shape":"S4e"},"SmsConfiguration":{"shape":"S4g"},"UserPoolTags":{"shape":"S4h"},"AdminCreateUserConfig":{"shape":"S4i"}}},"output":{"type":"structure","members":{}}},"UpdateUserPoolClient":{"input":{"type":"structure","required":["UserPoolId","ClientId"],"members":{"UserPoolId":{},"ClientId":{"shape":"S1h"},"ClientName":{},"RefreshTokenValidity":{"type":"integer"},"ReadAttributes":{"shape":"S4t"},"WriteAttributes":{"shape":"S4t"},"ExplicitAuthFlows":{"shape":"S4v"},"SupportedIdentityProviders":{"shape":"S4x"},"CallbackURLs":{"shape":"S4y"},"LogoutURLs":{"shape":"S50"},"DefaultRedirectURI":{},"AllowedOAuthFlows":{"shape":"S51"},"AllowedOAuthScopes":{"shape":"S53"},"AllowedOAuthFlowsUserPoolClient":{"type":"boolean"}}},"output":{"type":"structure","members":{"UserPoolClient":{"shape":"S56"}}}},"VerifyUserAttribute":{"input":{"type":"structure","required":["AccessToken","AttributeName","Code"],"members":{"AccessToken":{"shape":"S1q"},"AttributeName":{},"Code":{}}},"output":{"type":"structure","members":{}},"authtype":"none"}},"shapes":{"S4":{"type":"structure","members":{"Name":{},"AttributeDataType":{},"DeveloperOnlyAttribute":{"type":"boolean"},"Mutable":{"type":"boolean"},"Required":{"type":"boolean"},"NumberAttributeConstraints":{"type":"structure","members":{"MinValue":{},"MaxValue":{}}},"StringAttributeConstraints":{"type":"structure","members":{"MinLength":{},"MaxLength":{}}}}},"Sd":{"type":"string","sensitive":true},"Si":{"type":"list","member":{"type":"structure","required":["Name"],"members":{"Name":{},"Value":{"type":"string","sensitive":true}}}},"Sm":{"type":"string","sensitive":true},"Ss":{"type":"structure","members":{"Username":{"shape":"Sd"},"Attributes":{"shape":"Si"},"UserCreateDate":{"type":"timestamp"},"UserLastModifiedDate":{"type":"timestamp"},"Enabled":{"type":"boolean"},"UserStatus":{},"MFAOptions":{"shape":"Sv"}}},"Sv":{"type":"list","member":{"type":"structure","members":{"DeliveryMedium":{},"AttributeName":{}}}},"Sz":{"type":"list","member":{}},"S12":{"type":"structure","members":{"ProviderName":{},"ProviderAttributeName":{},"ProviderAttributeValue":{}}},"S1d":{"type":"structure","members":{"DeviceKey":{},"DeviceAttributes":{"shape":"Si"},"DeviceCreateDate":{"type":"timestamp"},"DeviceLastModifiedDate":{"type":"timestamp"},"DeviceLastAuthenticatedDate":{"type":"timestamp"}}},"S1h":{"type":"string","sensitive":true},"S1j":{"type":"map","key":{},"value":{}},"S1k":{"type":"map","key":{},"value":{}},"S1o":{"type":"map","key":{},"value":{}},"S1p":{"type":"structure","members":{"AccessToken":{"shape":"S1q"},"ExpiresIn":{"type":"integer"},"TokenType":{},"RefreshToken":{"shape":"S1q"},"IdToken":{"shape":"S1q"},"NewDeviceMetadata":{"type":"structure","members":{"DeviceKey":{},"DeviceGroupKey":{}}}}},"S1q":{"type":"string","sensitive":true},"S1z":{"type":"list","member":{"shape":"S1d"}},"S23":{"type":"list","member":{"shape":"S24"}},"S24":{"type":"structure","members":{"GroupName":{},"UserPoolId":{},"Description":{},"RoleArn":{},"Precedence":{"type":"integer"},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"}}},"S2c":{"type":"map","key":{},"value":{}},"S2u":{"type":"string","sensitive":true},"S34":{"type":"map","key":{},"value":{}},"S35":{"type":"map","key":{},"value":{}},"S37":{"type":"list","member":{}},"S3a":{"type":"structure","members":{"UserPoolId":{},"ProviderName":{},"ProviderType":{},"ProviderDetails":{"shape":"S34"},"AttributeMapping":{"shape":"S35"},"IdpIdentifiers":{"shape":"S37"},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"}}},"S3e":{"type":"list","member":{"type":"structure","required":["ScopeName","ScopeDescription"],"members":{"ScopeName":{},"ScopeDescription":{}}}},"S3j":{"type":"structure","members":{"UserPoolId":{},"Identifier":{},"Name":{},"Scopes":{"shape":"S3e"}}},"S3n":{"type":"structure","members":{"JobName":{},"JobId":{},"UserPoolId":{},"PreSignedUrl":{},"CreationDate":{"type":"timestamp"},"StartDate":{"type":"timestamp"},"CompletionDate":{"type":"timestamp"},"Status":{},"CloudWatchLogsRoleArn":{},"ImportedUsers":{"type":"long"},"SkippedUsers":{"type":"long"},"FailedUsers":{"type":"long"},"CompletionMessage":{}}},"S3v":{"type":"structure","members":{"PasswordPolicy":{"type":"structure","members":{"MinimumLength":{"type":"integer"},"RequireUppercase":{"type":"boolean"},"RequireLowercase":{"type":"boolean"},"RequireNumbers":{"type":"boolean"},"RequireSymbols":{"type":"boolean"}}}}},"S3y":{"type":"structure","members":{"PreSignUp":{},"CustomMessage":{},"PostConfirmation":{},"PreAuthentication":{},"PostAuthentication":{},"DefineAuthChallenge":{},"CreateAuthChallenge":{},"VerifyAuthChallengeResponse":{}}},"S3z":{"type":"list","member":{}},"S41":{"type":"list","member":{}},"S43":{"type":"list","member":{}},"S48":{"type":"structure","members":{"SmsMessage":{},"EmailMessage":{},"EmailSubject":{},"EmailMessageByLink":{},"EmailSubjectByLink":{},"DefaultEmailOption":{}}},"S4d":{"type":"structure","members":{"ChallengeRequiredOnNewDevice":{"type":"boolean"},"DeviceOnlyRememberedOnUserPrompt":{"type":"boolean"}}},"S4e":{"type":"structure","members":{"SourceArn":{},"ReplyToEmailAddress":{}}},"S4g":{"type":"structure","required":["SnsCallerArn"],"members":{"SnsCallerArn":{},"ExternalId":{}}},"S4h":{"type":"map","key":{},"value":{}},"S4i":{"type":"structure","members":{"AllowAdminCreateUserOnly":{"type":"boolean"},"UnusedAccountValidityDays":{"type":"integer"},"InviteMessageTemplate":{"type":"structure","members":{"SMSMessage":{},"EmailMessage":{},"EmailSubject":{}}}}},"S4l":{"type":"list","member":{"shape":"S4"}},"S4n":{"type":"structure","members":{"Id":{},"Name":{},"Policies":{"shape":"S3v"},"LambdaConfig":{"shape":"S3y"},"Status":{},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"},"SchemaAttributes":{"shape":"S4l"},"AutoVerifiedAttributes":{"shape":"S3z"},"AliasAttributes":{"shape":"S41"},"UsernameAttributes":{"shape":"S43"},"SmsVerificationMessage":{},"EmailVerificationMessage":{},"EmailVerificationSubject":{},"VerificationMessageTemplate":{"shape":"S48"},"SmsAuthenticationMessage":{},"MfaConfiguration":{},"DeviceConfiguration":{"shape":"S4d"},"EstimatedNumberOfUsers":{"type":"integer"},"EmailConfiguration":{"shape":"S4e"},"SmsConfiguration":{"shape":"S4g"},"UserPoolTags":{"shape":"S4h"},"SmsConfigurationFailure":{},"EmailConfigurationFailure":{},"AdminCreateUserConfig":{"shape":"S4i"}}},"S4t":{"type":"list","member":{}},"S4v":{"type":"list","member":{}},"S4x":{"type":"list","member":{}},"S4y":{"type":"list","member":{}},"S50":{"type":"list","member":{}},"S51":{"type":"list","member":{}},"S53":{"type":"list","member":{}},"S56":{"type":"structure","members":{"UserPoolId":{},"ClientName":{},"ClientId":{"shape":"S1h"},"ClientSecret":{"type":"string","sensitive":true},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"},"RefreshTokenValidity":{"type":"integer"},"ReadAttributes":{"shape":"S4t"},"WriteAttributes":{"shape":"S4t"},"ExplicitAuthFlows":{"shape":"S4v"},"SupportedIdentityProviders":{"shape":"S4x"},"CallbackURLs":{"shape":"S4y"},"LogoutURLs":{"shape":"S50"},"DefaultRedirectURI":{},"AllowedOAuthFlows":{"shape":"S51"},"AllowedOAuthScopes":{"shape":"S53"},"AllowedOAuthFlowsUserPoolClient":{"type":"boolean"}}},"S65":{"type":"structure","members":{"Destination":{},"DeliveryMedium":{},"AttributeName":{}}},"S6h":{"type":"structure","members":{"UserPoolId":{},"ClientId":{"shape":"S1h"},"ImageUrl":{},"CSS":{},"CSSVersion":{},"LastModifiedDate":{"type":"timestamp"},"CreationDate":{"type":"timestamp"}}},"S7o":{"type":"list","member":{"shape":"Ss"}}}}
 
 /***/ }),
 /* 119 */
@@ -40608,7 +40902,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 165 */
 /***/ (function(module, exports) {
 
-	module.exports = {"version":"2.0","metadata":{"apiVersion":"2016-11-15","endpointPrefix":"ec2","protocol":"ec2","serviceAbbreviation":"Amazon EC2","serviceFullName":"Amazon Elastic Compute Cloud","signatureVersion":"v4","uid":"ec2-2016-11-15","xmlNamespace":"http://ec2.amazonaws.com/doc/2016-11-15"},"operations":{"AcceptReservedInstancesExchangeQuote":{"input":{"type":"structure","required":["ReservedInstanceIds"],"members":{"DryRun":{"type":"boolean"},"ReservedInstanceIds":{"shape":"S3","locationName":"ReservedInstanceId"},"TargetConfigurations":{"shape":"S5","locationName":"TargetConfiguration"}}},"output":{"type":"structure","members":{"ExchangeId":{"locationName":"exchangeId"}}}},"AcceptVpcPeeringConnection":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"VpcPeeringConnection":{"shape":"Sb","locationName":"vpcPeeringConnection"}}}},"AllocateAddress":{"input":{"type":"structure","members":{"Domain":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"PublicIp":{"locationName":"publicIp"},"AllocationId":{"locationName":"allocationId"},"Domain":{"locationName":"domain"}}}},"AllocateHosts":{"input":{"type":"structure","required":["AvailabilityZone","InstanceType","Quantity"],"members":{"AutoPlacement":{"locationName":"autoPlacement"},"AvailabilityZone":{"locationName":"availabilityZone"},"ClientToken":{"locationName":"clientToken"},"InstanceType":{"locationName":"instanceType"},"Quantity":{"locationName":"quantity","type":"integer"}}},"output":{"type":"structure","members":{"HostIds":{"shape":"Sr","locationName":"hostIdSet"}}}},"AssignIpv6Addresses":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"Ipv6AddressCount":{"locationName":"ipv6AddressCount","type":"integer"},"Ipv6Addresses":{"shape":"St","locationName":"ipv6Addresses"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}},"output":{"type":"structure","members":{"AssignedIpv6Addresses":{"shape":"St","locationName":"assignedIpv6Addresses"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}}},"AssignPrivateIpAddresses":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"AllowReassignment":{"locationName":"allowReassignment","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIpAddresses":{"shape":"Sw","locationName":"privateIpAddress"},"SecondaryPrivateIpAddressCount":{"locationName":"secondaryPrivateIpAddressCount","type":"integer"}}}},"AssociateAddress":{"input":{"type":"structure","members":{"AllocationId":{},"InstanceId":{},"PublicIp":{},"AllowReassociation":{"locationName":"allowReassociation","type":"boolean"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}},"output":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"}}}},"AssociateDhcpOptions":{"input":{"type":"structure","required":["DhcpOptionsId","VpcId"],"members":{"DhcpOptionsId":{},"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"AssociateIamInstanceProfile":{"input":{"type":"structure","required":["IamInstanceProfile","InstanceId"],"members":{"IamInstanceProfile":{"shape":"S11"},"InstanceId":{}}},"output":{"type":"structure","members":{"IamInstanceProfileAssociation":{"shape":"S13","locationName":"iamInstanceProfileAssociation"}}}},"AssociateRouteTable":{"input":{"type":"structure","required":["RouteTableId","SubnetId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableId":{"locationName":"routeTableId"},"SubnetId":{"locationName":"subnetId"}}},"output":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"}}}},"AssociateSubnetCidrBlock":{"input":{"type":"structure","required":["Ipv6CidrBlock","SubnetId"],"members":{"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"SubnetId":{"locationName":"subnetId"}}},"output":{"type":"structure","members":{"Ipv6CidrBlockAssociation":{"shape":"S1a","locationName":"ipv6CidrBlockAssociation"},"SubnetId":{"locationName":"subnetId"}}}},"AssociateVpcCidrBlock":{"input":{"type":"structure","required":["VpcId"],"members":{"AmazonProvidedIpv6CidrBlock":{"locationName":"amazonProvidedIpv6CidrBlock","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Ipv6CidrBlockAssociation":{"shape":"S1f","locationName":"ipv6CidrBlockAssociation"},"VpcId":{"locationName":"vpcId"}}}},"AttachClassicLinkVpc":{"input":{"type":"structure","required":["Groups","InstanceId","VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Groups":{"shape":"S1j","locationName":"SecurityGroupId"},"InstanceId":{"locationName":"instanceId"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"AttachInternetGateway":{"input":{"type":"structure","required":["InternetGatewayId","VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"InternetGatewayId":{"locationName":"internetGatewayId"},"VpcId":{"locationName":"vpcId"}}}},"AttachNetworkInterface":{"input":{"type":"structure","required":["DeviceIndex","InstanceId","NetworkInterfaceId"],"members":{"DeviceIndex":{"locationName":"deviceIndex","type":"integer"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}},"output":{"type":"structure","members":{"AttachmentId":{"locationName":"attachmentId"}}}},"AttachVolume":{"input":{"type":"structure","required":["Device","InstanceId","VolumeId"],"members":{"Device":{},"InstanceId":{},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"shape":"S1p"}},"AttachVpnGateway":{"input":{"type":"structure","required":["VpcId","VpnGatewayId"],"members":{"VpcId":{},"VpnGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpcAttachment":{"shape":"S1t","locationName":"attachment"}}}},"AuthorizeSecurityGroupEgress":{"input":{"type":"structure","required":["GroupId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupId":{"locationName":"groupId"},"IpPermissions":{"shape":"S1w","locationName":"ipPermissions"},"CidrIp":{"locationName":"cidrIp"},"FromPort":{"locationName":"fromPort","type":"integer"},"IpProtocol":{"locationName":"ipProtocol"},"ToPort":{"locationName":"toPort","type":"integer"},"SourceSecurityGroupName":{"locationName":"sourceSecurityGroupName"},"SourceSecurityGroupOwnerId":{"locationName":"sourceSecurityGroupOwnerId"}}}},"AuthorizeSecurityGroupIngress":{"input":{"type":"structure","members":{"CidrIp":{},"FromPort":{"type":"integer"},"GroupId":{},"GroupName":{},"IpPermissions":{"shape":"S1w"},"IpProtocol":{},"SourceSecurityGroupName":{},"SourceSecurityGroupOwnerId":{},"ToPort":{"type":"integer"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"BundleInstance":{"input":{"type":"structure","required":["InstanceId","Storage"],"members":{"InstanceId":{},"Storage":{"shape":"S28"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"BundleTask":{"shape":"S2c","locationName":"bundleInstanceTask"}}}},"CancelBundleTask":{"input":{"type":"structure","required":["BundleId"],"members":{"BundleId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"BundleTask":{"shape":"S2c","locationName":"bundleInstanceTask"}}}},"CancelConversionTask":{"input":{"type":"structure","required":["ConversionTaskId"],"members":{"ConversionTaskId":{"locationName":"conversionTaskId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"ReasonMessage":{"locationName":"reasonMessage"}}}},"CancelExportTask":{"input":{"type":"structure","required":["ExportTaskId"],"members":{"ExportTaskId":{"locationName":"exportTaskId"}}}},"CancelImportTask":{"input":{"type":"structure","members":{"CancelReason":{},"DryRun":{"type":"boolean"},"ImportTaskId":{}}},"output":{"type":"structure","members":{"ImportTaskId":{"locationName":"importTaskId"},"PreviousState":{"locationName":"previousState"},"State":{"locationName":"state"}}}},"CancelReservedInstancesListing":{"input":{"type":"structure","required":["ReservedInstancesListingId"],"members":{"ReservedInstancesListingId":{"locationName":"reservedInstancesListingId"}}},"output":{"type":"structure","members":{"ReservedInstancesListings":{"shape":"S2n","locationName":"reservedInstancesListingsSet"}}}},"CancelSpotFleetRequests":{"input":{"type":"structure","required":["SpotFleetRequestIds","TerminateInstances"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"SpotFleetRequestIds":{"shape":"S2z","locationName":"spotFleetRequestId"},"TerminateInstances":{"locationName":"terminateInstances","type":"boolean"}}},"output":{"type":"structure","members":{"SuccessfulFleetRequests":{"locationName":"successfulFleetRequestSet","type":"list","member":{"locationName":"item","type":"structure","required":["CurrentSpotFleetRequestState","PreviousSpotFleetRequestState","SpotFleetRequestId"],"members":{"CurrentSpotFleetRequestState":{"locationName":"currentSpotFleetRequestState"},"PreviousSpotFleetRequestState":{"locationName":"previousSpotFleetRequestState"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}}},"UnsuccessfulFleetRequests":{"locationName":"unsuccessfulFleetRequestSet","type":"list","member":{"locationName":"item","type":"structure","required":["Error","SpotFleetRequestId"],"members":{"Error":{"locationName":"error","type":"structure","required":["Code","Message"],"members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}}}}}},"CancelSpotInstanceRequests":{"input":{"type":"structure","required":["SpotInstanceRequestIds"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"SpotInstanceRequestIds":{"shape":"S39","locationName":"SpotInstanceRequestId"}}},"output":{"type":"structure","members":{"CancelledSpotInstanceRequests":{"locationName":"spotInstanceRequestSet","type":"list","member":{"locationName":"item","type":"structure","members":{"SpotInstanceRequestId":{"locationName":"spotInstanceRequestId"},"State":{"locationName":"state"}}}}}}},"ConfirmProductInstance":{"input":{"type":"structure","required":["InstanceId","ProductCode"],"members":{"InstanceId":{},"ProductCode":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"OwnerId":{"locationName":"ownerId"},"Return":{"locationName":"return","type":"boolean"}}}},"CopyImage":{"input":{"type":"structure","required":["Name","SourceImageId","SourceRegion"],"members":{"ClientToken":{},"Description":{},"Encrypted":{"locationName":"encrypted","type":"boolean"},"KmsKeyId":{"locationName":"kmsKeyId"},"Name":{},"SourceImageId":{},"SourceRegion":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"ImageId":{"locationName":"imageId"}}}},"CopySnapshot":{"input":{"type":"structure","required":["SourceRegion","SourceSnapshotId"],"members":{"Description":{},"DestinationRegion":{"locationName":"destinationRegion"},"Encrypted":{"locationName":"encrypted","type":"boolean"},"KmsKeyId":{"locationName":"kmsKeyId"},"PresignedUrl":{"locationName":"presignedUrl"},"SourceRegion":{},"SourceSnapshotId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"SnapshotId":{"locationName":"snapshotId"}}}},"CreateCustomerGateway":{"input":{"type":"structure","required":["BgpAsn","PublicIp","Type"],"members":{"BgpAsn":{"type":"integer"},"PublicIp":{"locationName":"IpAddress"},"Type":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"CustomerGateway":{"shape":"S3n","locationName":"customerGateway"}}}},"CreateDefaultVpc":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"}}},"output":{"type":"structure","members":{"Vpc":{"shape":"S3q","locationName":"vpc"}}}},"CreateDhcpOptions":{"input":{"type":"structure","required":["DhcpConfigurations"],"members":{"DhcpConfigurations":{"locationName":"dhcpConfiguration","type":"list","member":{"locationName":"item","type":"structure","members":{"Key":{"locationName":"key"},"Values":{"shape":"S2z","locationName":"Value"}}}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"DhcpOptions":{"shape":"S3y","locationName":"dhcpOptions"}}}},"CreateEgressOnlyInternetGateway":{"input":{"type":"structure","required":["VpcId"],"members":{"ClientToken":{},"DryRun":{"type":"boolean"},"VpcId":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"EgressOnlyInternetGateway":{"shape":"S45","locationName":"egressOnlyInternetGateway"}}}},"CreateFlowLogs":{"input":{"type":"structure","required":["DeliverLogsPermissionArn","LogGroupName","ResourceIds","ResourceType","TrafficType"],"members":{"ClientToken":{},"DeliverLogsPermissionArn":{},"LogGroupName":{},"ResourceIds":{"shape":"S2z","locationName":"ResourceId"},"ResourceType":{},"TrafficType":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"FlowLogIds":{"shape":"S2z","locationName":"flowLogIdSet"},"Unsuccessful":{"shape":"S4d","locationName":"unsuccessful"}}}},"CreateFpgaImage":{"input":{"type":"structure","required":["InputStorageLocation"],"members":{"DryRun":{"type":"boolean"},"InputStorageLocation":{"shape":"S4h"},"LogsStorageLocation":{"shape":"S4h"},"Description":{},"Name":{},"ClientToken":{}}},"output":{"type":"structure","members":{"FpgaImageId":{"locationName":"fpgaImageId"},"FpgaImageGlobalId":{"locationName":"fpgaImageGlobalId"}}}},"CreateImage":{"input":{"type":"structure","required":["InstanceId","Name"],"members":{"BlockDeviceMappings":{"shape":"S4k","locationName":"blockDeviceMapping"},"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"},"Name":{"locationName":"name"},"NoReboot":{"locationName":"noReboot","type":"boolean"}}},"output":{"type":"structure","members":{"ImageId":{"locationName":"imageId"}}}},"CreateInstanceExportTask":{"input":{"type":"structure","required":["InstanceId"],"members":{"Description":{"locationName":"description"},"ExportToS3Task":{"locationName":"exportToS3","type":"structure","members":{"ContainerFormat":{"locationName":"containerFormat"},"DiskImageFormat":{"locationName":"diskImageFormat"},"S3Bucket":{"locationName":"s3Bucket"},"S3Prefix":{"locationName":"s3Prefix"}}},"InstanceId":{"locationName":"instanceId"},"TargetEnvironment":{"locationName":"targetEnvironment"}}},"output":{"type":"structure","members":{"ExportTask":{"shape":"S4v","locationName":"exportTask"}}}},"CreateInternetGateway":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InternetGateway":{"shape":"S51","locationName":"internetGateway"}}}},"CreateKeyPair":{"input":{"type":"structure","required":["KeyName"],"members":{"KeyName":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"KeyFingerprint":{"locationName":"keyFingerprint"},"KeyMaterial":{"locationName":"keyMaterial"},"KeyName":{"locationName":"keyName"}}}},"CreateNatGateway":{"input":{"type":"structure","required":["AllocationId","SubnetId"],"members":{"AllocationId":{},"ClientToken":{},"SubnetId":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"NatGateway":{"shape":"S56","locationName":"natGateway"}}}},"CreateNetworkAcl":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"NetworkAcl":{"shape":"S5d","locationName":"networkAcl"}}}},"CreateNetworkAclEntry":{"input":{"type":"structure","required":["Egress","NetworkAclId","Protocol","RuleAction","RuleNumber"],"members":{"CidrBlock":{"locationName":"cidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Egress":{"locationName":"egress","type":"boolean"},"IcmpTypeCode":{"shape":"S5i","locationName":"Icmp"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"NetworkAclId":{"locationName":"networkAclId"},"PortRange":{"shape":"S5j","locationName":"portRange"},"Protocol":{"locationName":"protocol"},"RuleAction":{"locationName":"ruleAction"},"RuleNumber":{"locationName":"ruleNumber","type":"integer"}}}},"CreateNetworkInterface":{"input":{"type":"structure","required":["SubnetId"],"members":{"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Groups":{"shape":"S5n","locationName":"SecurityGroupId"},"Ipv6AddressCount":{"locationName":"ipv6AddressCount","type":"integer"},"Ipv6Addresses":{"shape":"S5o","locationName":"ipv6Addresses"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"PrivateIpAddresses":{"shape":"S5q","locationName":"privateIpAddresses"},"SecondaryPrivateIpAddressCount":{"locationName":"secondaryPrivateIpAddressCount","type":"integer"},"SubnetId":{"locationName":"subnetId"}}},"output":{"type":"structure","members":{"NetworkInterface":{"shape":"S5t","locationName":"networkInterface"}}}},"CreateNetworkInterfacePermission":{"input":{"type":"structure","required":["NetworkInterfaceId","Permission"],"members":{"NetworkInterfaceId":{},"AwsAccountId":{},"AwsService":{},"Permission":{},"DryRun":{"type":"boolean"}}},"output":{"type":"structure","members":{"InterfacePermission":{"shape":"S67","locationName":"interfacePermission"}}}},"CreatePlacementGroup":{"input":{"type":"structure","required":["GroupName","Strategy"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupName":{"locationName":"groupName"},"Strategy":{"locationName":"strategy"}}}},"CreateReservedInstancesListing":{"input":{"type":"structure","required":["ClientToken","InstanceCount","PriceSchedules","ReservedInstancesId"],"members":{"ClientToken":{"locationName":"clientToken"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"PriceSchedules":{"locationName":"priceSchedules","type":"list","member":{"locationName":"item","type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"Price":{"locationName":"price","type":"double"},"Term":{"locationName":"term","type":"long"}}}},"ReservedInstancesId":{"locationName":"reservedInstancesId"}}},"output":{"type":"structure","members":{"ReservedInstancesListings":{"shape":"S2n","locationName":"reservedInstancesListingsSet"}}}},"CreateRoute":{"input":{"type":"structure","required":["RouteTableId"],"members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"DestinationIpv6CidrBlock":{"locationName":"destinationIpv6CidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EgressOnlyInternetGatewayId":{"locationName":"egressOnlyInternetGatewayId"},"GatewayId":{"locationName":"gatewayId"},"InstanceId":{"locationName":"instanceId"},"NatGatewayId":{"locationName":"natGatewayId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"RouteTableId":{"locationName":"routeTableId"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"CreateRouteTable":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"RouteTable":{"shape":"S6k","locationName":"routeTable"}}}},"CreateSecurityGroup":{"input":{"type":"structure","required":["Description","GroupName"],"members":{"Description":{"locationName":"GroupDescription"},"GroupName":{},"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"GroupId":{"locationName":"groupId"}}}},"CreateSnapshot":{"input":{"type":"structure","required":["VolumeId"],"members":{"Description":{},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"shape":"S6w"}},"CreateSpotDatafeedSubscription":{"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"locationName":"bucket"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Prefix":{"locationName":"prefix"}}},"output":{"type":"structure","members":{"SpotDatafeedSubscription":{"shape":"S70","locationName":"spotDatafeedSubscription"}}}},"CreateSubnet":{"input":{"type":"structure","required":["CidrBlock","VpcId"],"members":{"AvailabilityZone":{},"CidrBlock":{},"Ipv6CidrBlock":{},"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Subnet":{"shape":"S75","locationName":"subnet"}}}},"CreateTags":{"input":{"type":"structure","required":["Resources","Tags"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Resources":{"shape":"S79","locationName":"ResourceId"},"Tags":{"shape":"Sj","locationName":"Tag"}}}},"CreateVolume":{"input":{"type":"structure","required":["AvailabilityZone"],"members":{"AvailabilityZone":{},"Encrypted":{"locationName":"encrypted","type":"boolean"},"Iops":{"type":"integer"},"KmsKeyId":{},"Size":{"type":"integer"},"SnapshotId":{},"VolumeType":{},"DryRun":{"locationName":"dryRun","type":"boolean"},"TagSpecifications":{"shape":"S7b","locationName":"TagSpecification"}}},"output":{"shape":"S7e"}},"CreateVpc":{"input":{"type":"structure","required":["CidrBlock"],"members":{"CidrBlock":{},"AmazonProvidedIpv6CidrBlock":{"locationName":"amazonProvidedIpv6CidrBlock","type":"boolean"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceTenancy":{"locationName":"instanceTenancy"}}},"output":{"type":"structure","members":{"Vpc":{"shape":"S3q","locationName":"vpc"}}}},"CreateVpcEndpoint":{"input":{"type":"structure","required":["ServiceName","VpcId"],"members":{"ClientToken":{},"DryRun":{"type":"boolean"},"PolicyDocument":{},"RouteTableIds":{"shape":"S2z","locationName":"RouteTableId"},"ServiceName":{},"VpcId":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"VpcEndpoint":{"shape":"S7l","locationName":"vpcEndpoint"}}}},"CreateVpcPeeringConnection":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"PeerOwnerId":{"locationName":"peerOwnerId"},"PeerVpcId":{"locationName":"peerVpcId"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"VpcPeeringConnection":{"shape":"Sb","locationName":"vpcPeeringConnection"}}}},"CreateVpnConnection":{"input":{"type":"structure","required":["CustomerGatewayId","Type","VpnGatewayId"],"members":{"CustomerGatewayId":{},"Type":{},"VpnGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"},"Options":{"locationName":"options","type":"structure","members":{"StaticRoutesOnly":{"locationName":"staticRoutesOnly","type":"boolean"}}}}},"output":{"type":"structure","members":{"VpnConnection":{"shape":"S7s","locationName":"vpnConnection"}}}},"CreateVpnConnectionRoute":{"input":{"type":"structure","required":["DestinationCidrBlock","VpnConnectionId"],"members":{"DestinationCidrBlock":{},"VpnConnectionId":{}}}},"CreateVpnGateway":{"input":{"type":"structure","required":["Type"],"members":{"AvailabilityZone":{},"Type":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpnGateway":{"shape":"S84","locationName":"vpnGateway"}}}},"DeleteCustomerGateway":{"input":{"type":"structure","required":["CustomerGatewayId"],"members":{"CustomerGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteDhcpOptions":{"input":{"type":"structure","required":["DhcpOptionsId"],"members":{"DhcpOptionsId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteEgressOnlyInternetGateway":{"input":{"type":"structure","required":["EgressOnlyInternetGatewayId"],"members":{"DryRun":{"type":"boolean"},"EgressOnlyInternetGatewayId":{}}},"output":{"type":"structure","members":{"ReturnCode":{"locationName":"returnCode","type":"boolean"}}}},"DeleteFlowLogs":{"input":{"type":"structure","required":["FlowLogIds"],"members":{"FlowLogIds":{"shape":"S2z","locationName":"FlowLogId"}}},"output":{"type":"structure","members":{"Unsuccessful":{"shape":"S4d","locationName":"unsuccessful"}}}},"DeleteInternetGateway":{"input":{"type":"structure","required":["InternetGatewayId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"InternetGatewayId":{"locationName":"internetGatewayId"}}}},"DeleteKeyPair":{"input":{"type":"structure","required":["KeyName"],"members":{"KeyName":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteNatGateway":{"input":{"type":"structure","required":["NatGatewayId"],"members":{"NatGatewayId":{}}},"output":{"type":"structure","members":{"NatGatewayId":{"locationName":"natGatewayId"}}}},"DeleteNetworkAcl":{"input":{"type":"structure","required":["NetworkAclId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkAclId":{"locationName":"networkAclId"}}}},"DeleteNetworkAclEntry":{"input":{"type":"structure","required":["Egress","NetworkAclId","RuleNumber"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Egress":{"locationName":"egress","type":"boolean"},"NetworkAclId":{"locationName":"networkAclId"},"RuleNumber":{"locationName":"ruleNumber","type":"integer"}}}},"DeleteNetworkInterface":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}}},"DeleteNetworkInterfacePermission":{"input":{"type":"structure","required":["NetworkInterfacePermissionId"],"members":{"NetworkInterfacePermissionId":{},"Force":{"type":"boolean"},"DryRun":{"type":"boolean"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DeletePlacementGroup":{"input":{"type":"structure","required":["GroupName"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupName":{"locationName":"groupName"}}}},"DeleteRoute":{"input":{"type":"structure","required":["RouteTableId"],"members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"DestinationIpv6CidrBlock":{"locationName":"destinationIpv6CidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableId":{"locationName":"routeTableId"}}}},"DeleteRouteTable":{"input":{"type":"structure","required":["RouteTableId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableId":{"locationName":"routeTableId"}}}},"DeleteSecurityGroup":{"input":{"type":"structure","members":{"GroupId":{},"GroupName":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteSnapshot":{"input":{"type":"structure","required":["SnapshotId"],"members":{"SnapshotId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteSpotDatafeedSubscription":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteSubnet":{"input":{"type":"structure","required":["SubnetId"],"members":{"SubnetId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteTags":{"input":{"type":"structure","required":["Resources"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Resources":{"shape":"S79","locationName":"resourceId"},"Tags":{"shape":"Sj","locationName":"tag"}}}},"DeleteVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteVpc":{"input":{"type":"structure","required":["VpcId"],"members":{"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteVpcEndpoints":{"input":{"type":"structure","required":["VpcEndpointIds"],"members":{"DryRun":{"type":"boolean"},"VpcEndpointIds":{"shape":"S2z","locationName":"VpcEndpointId"}}},"output":{"type":"structure","members":{"Unsuccessful":{"shape":"S4d","locationName":"unsuccessful"}}}},"DeleteVpcPeeringConnection":{"input":{"type":"structure","required":["VpcPeeringConnectionId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DeleteVpnConnection":{"input":{"type":"structure","required":["VpnConnectionId"],"members":{"VpnConnectionId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteVpnConnectionRoute":{"input":{"type":"structure","required":["DestinationCidrBlock","VpnConnectionId"],"members":{"DestinationCidrBlock":{},"VpnConnectionId":{}}}},"DeleteVpnGateway":{"input":{"type":"structure","required":["VpnGatewayId"],"members":{"VpnGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeregisterImage":{"input":{"type":"structure","required":["ImageId"],"members":{"ImageId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DescribeAccountAttributes":{"input":{"type":"structure","members":{"AttributeNames":{"locationName":"attributeName","type":"list","member":{"locationName":"attributeName"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"AccountAttributes":{"locationName":"accountAttributeSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AttributeName":{"locationName":"attributeName"},"AttributeValues":{"locationName":"attributeValueSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AttributeValue":{"locationName":"attributeValue"}}}}}}}}}},"DescribeAddresses":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"PublicIps":{"locationName":"PublicIp","type":"list","member":{"locationName":"PublicIp"}},"AllocationIds":{"locationName":"AllocationId","type":"list","member":{"locationName":"AllocationId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Addresses":{"locationName":"addressesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"PublicIp":{"locationName":"publicIp"},"AllocationId":{"locationName":"allocationId"},"AssociationId":{"locationName":"associationId"},"Domain":{"locationName":"domain"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"NetworkInterfaceOwnerId":{"locationName":"networkInterfaceOwnerId"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}}}}}},"DescribeAvailabilityZones":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"ZoneNames":{"locationName":"ZoneName","type":"list","member":{"locationName":"ZoneName"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"AvailabilityZones":{"locationName":"availabilityZoneInfo","type":"list","member":{"locationName":"item","type":"structure","members":{"State":{"locationName":"zoneState"},"Messages":{"locationName":"messageSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Message":{"locationName":"message"}}}},"RegionName":{"locationName":"regionName"},"ZoneName":{"locationName":"zoneName"}}}}}}},"DescribeBundleTasks":{"input":{"type":"structure","members":{"BundleIds":{"locationName":"BundleId","type":"list","member":{"locationName":"BundleId"}},"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"BundleTasks":{"locationName":"bundleInstanceTasksSet","type":"list","member":{"shape":"S2c","locationName":"item"}}}}},"DescribeClassicLinkInstances":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"Instances":{"locationName":"instancesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Groups":{"shape":"S5w","locationName":"groupSet"},"InstanceId":{"locationName":"instanceId"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeConversionTasks":{"input":{"type":"structure","members":{"ConversionTaskIds":{"locationName":"conversionTaskId","type":"list","member":{"locationName":"item"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"ConversionTasks":{"locationName":"conversionTasks","type":"list","member":{"shape":"Sa4","locationName":"item"}}}}},"DescribeCustomerGateways":{"input":{"type":"structure","members":{"CustomerGatewayIds":{"locationName":"CustomerGatewayId","type":"list","member":{"locationName":"CustomerGatewayId"}},"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"CustomerGateways":{"locationName":"customerGatewaySet","type":"list","member":{"shape":"S3n","locationName":"item"}}}}},"DescribeDhcpOptions":{"input":{"type":"structure","members":{"DhcpOptionsIds":{"locationName":"DhcpOptionsId","type":"list","member":{"locationName":"DhcpOptionsId"}},"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"DhcpOptions":{"locationName":"dhcpOptionsSet","type":"list","member":{"shape":"S3y","locationName":"item"}}}}},"DescribeEgressOnlyInternetGateways":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"EgressOnlyInternetGatewayIds":{"locationName":"EgressOnlyInternetGatewayId","type":"list","member":{"locationName":"item"}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"EgressOnlyInternetGateways":{"locationName":"egressOnlyInternetGatewaySet","type":"list","member":{"shape":"S45","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeElasticGpus":{"input":{"type":"structure","members":{"ElasticGpuIds":{"locationName":"ElasticGpuId","type":"list","member":{"locationName":"item"}},"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"ElasticGpuSet":{"locationName":"elasticGpuSet","type":"list","member":{"type":"structure","members":{"ElasticGpuId":{"locationName":"elasticGpuId"},"AvailabilityZone":{"locationName":"availabilityZone"},"ElasticGpuType":{"locationName":"elasticGpuType"},"ElasticGpuHealth":{"locationName":"elasticGpuHealth","type":"structure","members":{"Status":{"locationName":"status"}}},"ElasticGpuState":{"locationName":"elasticGpuState"},"InstanceId":{"locationName":"instanceId"}}}},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}}},"DescribeExportTasks":{"input":{"type":"structure","members":{"ExportTaskIds":{"locationName":"exportTaskId","type":"list","member":{"locationName":"ExportTaskId"}}}},"output":{"type":"structure","members":{"ExportTasks":{"locationName":"exportTaskSet","type":"list","member":{"shape":"S4v","locationName":"item"}}}}},"DescribeFlowLogs":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c"},"FlowLogIds":{"shape":"S2z","locationName":"FlowLogId"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"FlowLogs":{"locationName":"flowLogSet","type":"list","member":{"locationName":"item","type":"structure","members":{"CreationTime":{"locationName":"creationTime","type":"timestamp"},"DeliverLogsErrorMessage":{"locationName":"deliverLogsErrorMessage"},"DeliverLogsPermissionArn":{"locationName":"deliverLogsPermissionArn"},"DeliverLogsStatus":{"locationName":"deliverLogsStatus"},"FlowLogId":{"locationName":"flowLogId"},"FlowLogStatus":{"locationName":"flowLogStatus"},"LogGroupName":{"locationName":"logGroupName"},"ResourceId":{"locationName":"resourceId"},"TrafficType":{"locationName":"trafficType"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeFpgaImages":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"FpgaImageIds":{"locationName":"FpgaImageId","type":"list","member":{"locationName":"item"}},"Owners":{"shape":"Sb7","locationName":"Owner"},"Filters":{"shape":"S9c","locationName":"Filter"},"NextToken":{},"MaxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"FpgaImages":{"locationName":"fpgaImageSet","type":"list","member":{"locationName":"item","type":"structure","members":{"FpgaImageId":{"locationName":"fpgaImageId"},"FpgaImageGlobalId":{"locationName":"fpgaImageGlobalId"},"Name":{"locationName":"name"},"Description":{"locationName":"description"},"ShellVersion":{"locationName":"shellVersion"},"PciId":{"locationName":"pciId","type":"structure","members":{"DeviceId":{},"VendorId":{},"SubsystemId":{},"SubsystemVendorId":{}}},"State":{"locationName":"state","type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"CreateTime":{"locationName":"createTime","type":"timestamp"},"UpdateTime":{"locationName":"updateTime","type":"timestamp"},"OwnerId":{"locationName":"ownerId"},"OwnerAlias":{"locationName":"ownerAlias"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"Tags":{"shape":"Sj","locationName":"tags"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeHostReservationOfferings":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c"},"MaxDuration":{"type":"integer"},"MaxResults":{"type":"integer"},"MinDuration":{"type":"integer"},"NextToken":{},"OfferingId":{}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"OfferingSet":{"locationName":"offeringSet","type":"list","member":{"type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceFamily":{"locationName":"instanceFamily"},"OfferingId":{"locationName":"offeringId"},"PaymentOption":{"locationName":"paymentOption"},"UpfrontPrice":{"locationName":"upfrontPrice"}}}}}}},"DescribeHostReservations":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c"},"HostReservationIdSet":{"type":"list","member":{"locationName":"item"}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"HostReservationSet":{"locationName":"hostReservationSet","type":"list","member":{"type":"structure","members":{"Count":{"locationName":"count","type":"integer"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"End":{"locationName":"end","type":"timestamp"},"HostIdSet":{"shape":"Sbt","locationName":"hostIdSet"},"HostReservationId":{"locationName":"hostReservationId"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceFamily":{"locationName":"instanceFamily"},"OfferingId":{"locationName":"offeringId"},"PaymentOption":{"locationName":"paymentOption"},"Start":{"locationName":"start","type":"timestamp"},"State":{"locationName":"state"},"UpfrontPrice":{"locationName":"upfrontPrice"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeHosts":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c","locationName":"filter"},"HostIds":{"shape":"Sbw","locationName":"hostId"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"Hosts":{"locationName":"hostSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AutoPlacement":{"locationName":"autoPlacement"},"AvailabilityZone":{"locationName":"availabilityZone"},"AvailableCapacity":{"locationName":"availableCapacity","type":"structure","members":{"AvailableInstanceCapacity":{"locationName":"availableInstanceCapacity","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailableCapacity":{"locationName":"availableCapacity","type":"integer"},"InstanceType":{"locationName":"instanceType"},"TotalCapacity":{"locationName":"totalCapacity","type":"integer"}}}},"AvailableVCpus":{"locationName":"availableVCpus","type":"integer"}}},"ClientToken":{"locationName":"clientToken"},"HostId":{"locationName":"hostId"},"HostProperties":{"locationName":"hostProperties","type":"structure","members":{"Cores":{"locationName":"cores","type":"integer"},"InstanceType":{"locationName":"instanceType"},"Sockets":{"locationName":"sockets","type":"integer"},"TotalVCpus":{"locationName":"totalVCpus","type":"integer"}}},"HostReservationId":{"locationName":"hostReservationId"},"Instances":{"locationName":"instances","type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"InstanceType":{"locationName":"instanceType"}}}},"State":{"locationName":"state"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeIamInstanceProfileAssociations":{"input":{"type":"structure","members":{"AssociationIds":{"locationName":"AssociationId","type":"list","member":{"locationName":"AssociationId"}},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"IamInstanceProfileAssociations":{"locationName":"iamInstanceProfileAssociationSet","type":"list","member":{"shape":"S13","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeIdFormat":{"input":{"type":"structure","members":{"Resource":{}}},"output":{"type":"structure","members":{"Statuses":{"shape":"Scd","locationName":"statusSet"}}}},"DescribeIdentityIdFormat":{"input":{"type":"structure","required":["PrincipalArn"],"members":{"PrincipalArn":{"locationName":"principalArn"},"Resource":{"locationName":"resource"}}},"output":{"type":"structure","members":{"Statuses":{"shape":"Scd","locationName":"statusSet"}}}},"DescribeImageAttribute":{"input":{"type":"structure","required":["Attribute","ImageId"],"members":{"Attribute":{},"ImageId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"ImageId":{"locationName":"imageId"},"LaunchPermissions":{"shape":"Scl","locationName":"launchPermission"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"Description":{"shape":"S42","locationName":"description"},"KernelId":{"shape":"S42","locationName":"kernel"},"RamdiskId":{"shape":"S42","locationName":"ramdisk"},"SriovNetSupport":{"shape":"S42","locationName":"sriovNetSupport"}}}},"DescribeImages":{"input":{"type":"structure","members":{"ExecutableUsers":{"locationName":"ExecutableBy","type":"list","member":{"locationName":"ExecutableBy"}},"Filters":{"shape":"S9c","locationName":"Filter"},"ImageIds":{"locationName":"ImageId","type":"list","member":{"locationName":"ImageId"}},"Owners":{"shape":"Sb7","locationName":"Owner"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Images":{"locationName":"imagesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Architecture":{"locationName":"architecture"},"CreationDate":{"locationName":"creationDate"},"ImageId":{"locationName":"imageId"},"ImageLocation":{"locationName":"imageLocation"},"ImageType":{"locationName":"imageType"},"Public":{"locationName":"isPublic","type":"boolean"},"KernelId":{"locationName":"kernelId"},"OwnerId":{"locationName":"imageOwnerId"},"Platform":{"locationName":"platform"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"RamdiskId":{"locationName":"ramdiskId"},"State":{"locationName":"imageState"},"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"Description":{"locationName":"description"},"EnaSupport":{"locationName":"enaSupport","type":"boolean"},"Hypervisor":{"locationName":"hypervisor"},"ImageOwnerAlias":{"locationName":"imageOwnerAlias"},"Name":{"locationName":"name"},"RootDeviceName":{"locationName":"rootDeviceName"},"RootDeviceType":{"locationName":"rootDeviceType"},"SriovNetSupport":{"locationName":"sriovNetSupport"},"StateReason":{"shape":"Scz","locationName":"stateReason"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VirtualizationType":{"locationName":"virtualizationType"}}}}}}},"DescribeImportImageTasks":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c"},"ImportTaskIds":{"shape":"Sd2","locationName":"ImportTaskId"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"ImportImageTasks":{"locationName":"importImageTaskSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Architecture":{"locationName":"architecture"},"Description":{"locationName":"description"},"Hypervisor":{"locationName":"hypervisor"},"ImageId":{"locationName":"imageId"},"ImportTaskId":{"locationName":"importTaskId"},"LicenseType":{"locationName":"licenseType"},"Platform":{"locationName":"platform"},"Progress":{"locationName":"progress"},"SnapshotDetails":{"shape":"Sd6","locationName":"snapshotDetailSet"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeImportSnapshotTasks":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c"},"ImportTaskIds":{"shape":"Sd2","locationName":"ImportTaskId"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"ImportSnapshotTasks":{"locationName":"importSnapshotTaskSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{"locationName":"description"},"ImportTaskId":{"locationName":"importTaskId"},"SnapshotTaskDetail":{"shape":"Sdd","locationName":"snapshotTaskDetail"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeInstanceAttribute":{"input":{"type":"structure","required":["Attribute","InstanceId"],"members":{"Attribute":{"locationName":"attribute"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"}}},"output":{"type":"structure","members":{"Groups":{"shape":"S5w","locationName":"groupSet"},"BlockDeviceMappings":{"shape":"Sdh","locationName":"blockDeviceMapping"},"DisableApiTermination":{"shape":"Sdk","locationName":"disableApiTermination"},"EnaSupport":{"shape":"Sdk","locationName":"enaSupport"},"EbsOptimized":{"shape":"Sdk","locationName":"ebsOptimized"},"InstanceId":{"locationName":"instanceId"},"InstanceInitiatedShutdownBehavior":{"shape":"S42","locationName":"instanceInitiatedShutdownBehavior"},"InstanceType":{"shape":"S42","locationName":"instanceType"},"KernelId":{"shape":"S42","locationName":"kernel"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"RamdiskId":{"shape":"S42","locationName":"ramdisk"},"RootDeviceName":{"shape":"S42","locationName":"rootDeviceName"},"SourceDestCheck":{"shape":"Sdk","locationName":"sourceDestCheck"},"SriovNetSupport":{"shape":"S42","locationName":"sriovNetSupport"},"UserData":{"shape":"S42","locationName":"userData"}}}},"DescribeInstanceStatus":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"MaxResults":{"type":"integer"},"NextToken":{},"DryRun":{"locationName":"dryRun","type":"boolean"},"IncludeAllInstances":{"locationName":"includeAllInstances","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceStatuses":{"locationName":"instanceStatusSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Events":{"locationName":"eventsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Code":{"locationName":"code"},"Description":{"locationName":"description"},"NotAfter":{"locationName":"notAfter","type":"timestamp"},"NotBefore":{"locationName":"notBefore","type":"timestamp"}}}},"InstanceId":{"locationName":"instanceId"},"InstanceState":{"shape":"Sds","locationName":"instanceState"},"InstanceStatus":{"shape":"Sdu","locationName":"instanceStatus"},"SystemStatus":{"shape":"Sdu","locationName":"systemStatus"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeInstances":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"Reservations":{"locationName":"reservationSet","type":"list","member":{"shape":"Se3","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeInternetGateways":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InternetGatewayIds":{"shape":"S2z","locationName":"internetGatewayId"}}},"output":{"type":"structure","members":{"InternetGateways":{"locationName":"internetGatewaySet","type":"list","member":{"shape":"S51","locationName":"item"}}}}},"DescribeKeyPairs":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"KeyNames":{"locationName":"KeyName","type":"list","member":{"locationName":"KeyName"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"KeyPairs":{"locationName":"keySet","type":"list","member":{"locationName":"item","type":"structure","members":{"KeyFingerprint":{"locationName":"keyFingerprint"},"KeyName":{"locationName":"keyName"}}}}}}},"DescribeMovingAddresses":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"PublicIps":{"shape":"S2z","locationName":"publicIp"}}},"output":{"type":"structure","members":{"MovingAddressStatuses":{"locationName":"movingAddressStatusSet","type":"list","member":{"locationName":"item","type":"structure","members":{"MoveStatus":{"locationName":"moveStatus"},"PublicIp":{"locationName":"publicIp"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeNatGateways":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c"},"MaxResults":{"type":"integer"},"NatGatewayIds":{"shape":"S2z","locationName":"NatGatewayId"},"NextToken":{}}},"output":{"type":"structure","members":{"NatGateways":{"locationName":"natGatewaySet","type":"list","member":{"shape":"S56","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeNetworkAcls":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkAclIds":{"shape":"S2z","locationName":"NetworkAclId"}}},"output":{"type":"structure","members":{"NetworkAcls":{"locationName":"networkAclSet","type":"list","member":{"shape":"S5d","locationName":"item"}}}}},"DescribeNetworkInterfaceAttribute":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"Attribute":{"locationName":"attribute"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}},"output":{"type":"structure","members":{"Attachment":{"shape":"S5v","locationName":"attachment"},"Description":{"shape":"S42","locationName":"description"},"Groups":{"shape":"S5w","locationName":"groupSet"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"SourceDestCheck":{"shape":"Sdk","locationName":"sourceDestCheck"}}}},"DescribeNetworkInterfacePermissions":{"input":{"type":"structure","members":{"NetworkInterfacePermissionIds":{"locationName":"NetworkInterfacePermissionId","type":"list","member":{}},"Filters":{"shape":"S9c","locationName":"Filter"},"NextToken":{},"MaxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"NetworkInterfacePermissions":{"locationName":"networkInterfacePermissions","type":"list","member":{"shape":"S67","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeNetworkInterfaces":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceIds":{"locationName":"NetworkInterfaceId","type":"list","member":{"locationName":"item"}}}},"output":{"type":"structure","members":{"NetworkInterfaces":{"locationName":"networkInterfaceSet","type":"list","member":{"shape":"S5t","locationName":"item"}}}}},"DescribePlacementGroups":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupNames":{"locationName":"groupName","type":"list","member":{}}}},"output":{"type":"structure","members":{"PlacementGroups":{"locationName":"placementGroupSet","type":"list","member":{"locationName":"item","type":"structure","members":{"GroupName":{"locationName":"groupName"},"State":{"locationName":"state"},"Strategy":{"locationName":"strategy"}}}}}}},"DescribePrefixLists":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"PrefixListIds":{"shape":"S2z","locationName":"PrefixListId"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"PrefixLists":{"locationName":"prefixListSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Cidrs":{"shape":"S2z","locationName":"cidrSet"},"PrefixListId":{"locationName":"prefixListId"},"PrefixListName":{"locationName":"prefixListName"}}}}}}},"DescribeRegions":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"RegionNames":{"locationName":"RegionName","type":"list","member":{"locationName":"RegionName"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Regions":{"locationName":"regionInfo","type":"list","member":{"locationName":"item","type":"structure","members":{"Endpoint":{"locationName":"regionEndpoint"},"RegionName":{"locationName":"regionName"}}}}}}},"DescribeReservedInstances":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"OfferingClass":{},"ReservedInstancesIds":{"shape":"Sfu","locationName":"ReservedInstancesId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"OfferingType":{"locationName":"offeringType"}}},"output":{"type":"structure","members":{"ReservedInstances":{"locationName":"reservedInstancesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Duration":{"locationName":"duration","type":"long"},"End":{"locationName":"end","type":"timestamp"},"FixedPrice":{"locationName":"fixedPrice","type":"float"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"InstanceType":{"locationName":"instanceType"},"ProductDescription":{"locationName":"productDescription"},"ReservedInstancesId":{"locationName":"reservedInstancesId"},"Start":{"locationName":"start","type":"timestamp"},"State":{"locationName":"state"},"UsagePrice":{"locationName":"usagePrice","type":"float"},"CurrencyCode":{"locationName":"currencyCode"},"InstanceTenancy":{"locationName":"instanceTenancy"},"OfferingClass":{"locationName":"offeringClass"},"OfferingType":{"locationName":"offeringType"},"RecurringCharges":{"shape":"Sg2","locationName":"recurringCharges"},"Scope":{"locationName":"scope"},"Tags":{"shape":"Sj","locationName":"tagSet"}}}}}}},"DescribeReservedInstancesListings":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"ReservedInstancesId":{"locationName":"reservedInstancesId"},"ReservedInstancesListingId":{"locationName":"reservedInstancesListingId"}}},"output":{"type":"structure","members":{"ReservedInstancesListings":{"shape":"S2n","locationName":"reservedInstancesListingsSet"}}}},"DescribeReservedInstancesModifications":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"ReservedInstancesModificationIds":{"locationName":"ReservedInstancesModificationId","type":"list","member":{"locationName":"ReservedInstancesModificationId"}},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ReservedInstancesModifications":{"locationName":"reservedInstancesModificationsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"CreateDate":{"locationName":"createDate","type":"timestamp"},"EffectiveDate":{"locationName":"effectiveDate","type":"timestamp"},"ModificationResults":{"locationName":"modificationResultSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ReservedInstancesId":{"locationName":"reservedInstancesId"},"TargetConfiguration":{"shape":"Sgf","locationName":"targetConfiguration"}}}},"ReservedInstancesIds":{"locationName":"reservedInstancesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ReservedInstancesId":{"locationName":"reservedInstancesId"}}}},"ReservedInstancesModificationId":{"locationName":"reservedInstancesModificationId"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"UpdateDate":{"locationName":"updateDate","type":"timestamp"}}}}}}},"DescribeReservedInstancesOfferings":{"input":{"type":"structure","members":{"AvailabilityZone":{},"Filters":{"shape":"S9c","locationName":"Filter"},"IncludeMarketplace":{"type":"boolean"},"InstanceType":{},"MaxDuration":{"type":"long"},"MaxInstanceCount":{"type":"integer"},"MinDuration":{"type":"long"},"OfferingClass":{},"ProductDescription":{},"ReservedInstancesOfferingIds":{"locationName":"ReservedInstancesOfferingId","type":"list","member":{}},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceTenancy":{"locationName":"instanceTenancy"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"OfferingType":{"locationName":"offeringType"}}},"output":{"type":"structure","members":{"ReservedInstancesOfferings":{"locationName":"reservedInstancesOfferingsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Duration":{"locationName":"duration","type":"long"},"FixedPrice":{"locationName":"fixedPrice","type":"float"},"InstanceType":{"locationName":"instanceType"},"ProductDescription":{"locationName":"productDescription"},"ReservedInstancesOfferingId":{"locationName":"reservedInstancesOfferingId"},"UsagePrice":{"locationName":"usagePrice","type":"float"},"CurrencyCode":{"locationName":"currencyCode"},"InstanceTenancy":{"locationName":"instanceTenancy"},"Marketplace":{"locationName":"marketplace","type":"boolean"},"OfferingClass":{"locationName":"offeringClass"},"OfferingType":{"locationName":"offeringType"},"PricingDetails":{"locationName":"pricingDetailsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Count":{"locationName":"count","type":"integer"},"Price":{"locationName":"price","type":"double"}}}},"RecurringCharges":{"shape":"Sg2","locationName":"recurringCharges"},"Scope":{"locationName":"scope"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeRouteTables":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableIds":{"shape":"S2z","locationName":"RouteTableId"}}},"output":{"type":"structure","members":{"RouteTables":{"locationName":"routeTableSet","type":"list","member":{"shape":"S6k","locationName":"item"}}}}},"DescribeScheduledInstanceAvailability":{"input":{"type":"structure","required":["FirstSlotStartTimeRange","Recurrence"],"members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"FirstSlotStartTimeRange":{"type":"structure","required":["EarliestTime","LatestTime"],"members":{"EarliestTime":{"type":"timestamp"},"LatestTime":{"type":"timestamp"}}},"MaxResults":{"type":"integer"},"MaxSlotDurationInHours":{"type":"integer"},"MinSlotDurationInHours":{"type":"integer"},"NextToken":{},"Recurrence":{"type":"structure","members":{"Frequency":{},"Interval":{"type":"integer"},"OccurrenceDays":{"locationName":"OccurrenceDay","type":"list","member":{"locationName":"OccurenceDay","type":"integer"}},"OccurrenceRelativeToEnd":{"type":"boolean"},"OccurrenceUnit":{}}}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ScheduledInstanceAvailabilitySet":{"locationName":"scheduledInstanceAvailabilitySet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"AvailableInstanceCount":{"locationName":"availableInstanceCount","type":"integer"},"FirstSlotStartTime":{"locationName":"firstSlotStartTime","type":"timestamp"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceType":{"locationName":"instanceType"},"MaxTermDurationInDays":{"locationName":"maxTermDurationInDays","type":"integer"},"MinTermDurationInDays":{"locationName":"minTermDurationInDays","type":"integer"},"NetworkPlatform":{"locationName":"networkPlatform"},"Platform":{"locationName":"platform"},"PurchaseToken":{"locationName":"purchaseToken"},"Recurrence":{"shape":"Sgz","locationName":"recurrence"},"SlotDurationInHours":{"locationName":"slotDurationInHours","type":"integer"},"TotalScheduledInstanceHours":{"locationName":"totalScheduledInstanceHours","type":"integer"}}}}}}},"DescribeScheduledInstances":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"ScheduledInstanceIds":{"locationName":"ScheduledInstanceId","type":"list","member":{"locationName":"ScheduledInstanceId"}},"SlotStartTimeRange":{"type":"structure","members":{"EarliestTime":{"type":"timestamp"},"LatestTime":{"type":"timestamp"}}}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ScheduledInstanceSet":{"locationName":"scheduledInstanceSet","type":"list","member":{"shape":"Sh6","locationName":"item"}}}}},"DescribeSecurityGroupReferences":{"input":{"type":"structure","required":["GroupId"],"members":{"DryRun":{"type":"boolean"},"GroupId":{"type":"list","member":{"locationName":"item"}}}},"output":{"type":"structure","members":{"SecurityGroupReferenceSet":{"locationName":"securityGroupReferenceSet","type":"list","member":{"locationName":"item","type":"structure","required":["GroupId","ReferencingVpcId"],"members":{"GroupId":{"locationName":"groupId"},"ReferencingVpcId":{"locationName":"referencingVpcId"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}}}}}},"DescribeSecurityGroups":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"GroupIds":{"shape":"S1j","locationName":"GroupId"},"GroupNames":{"shape":"Shd","locationName":"GroupName"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"SecurityGroups":{"locationName":"securityGroupInfo","type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{"locationName":"groupDescription"},"GroupName":{"locationName":"groupName"},"IpPermissions":{"shape":"S1w","locationName":"ipPermissions"},"OwnerId":{"locationName":"ownerId"},"GroupId":{"locationName":"groupId"},"IpPermissionsEgress":{"shape":"S1w","locationName":"ipPermissionsEgress"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}}}}}},"DescribeSnapshotAttribute":{"input":{"type":"structure","required":["Attribute","SnapshotId"],"members":{"Attribute":{},"SnapshotId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"CreateVolumePermissions":{"shape":"Shk","locationName":"createVolumePermission"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"SnapshotId":{"locationName":"snapshotId"}}}},"DescribeSnapshots":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"OwnerIds":{"shape":"Sb7","locationName":"Owner"},"RestorableByUserIds":{"locationName":"RestorableBy","type":"list","member":{}},"SnapshotIds":{"locationName":"SnapshotId","type":"list","member":{"locationName":"SnapshotId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Snapshots":{"locationName":"snapshotSet","type":"list","member":{"shape":"S6w","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeSpotDatafeedSubscription":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"SpotDatafeedSubscription":{"shape":"S70","locationName":"spotDatafeedSubscription"}}}},"DescribeSpotFleetInstances":{"input":{"type":"structure","required":["SpotFleetRequestId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}},"output":{"type":"structure","required":["ActiveInstances","SpotFleetRequestId"],"members":{"ActiveInstances":{"locationName":"activeInstanceSet","type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"InstanceType":{"locationName":"instanceType"},"SpotInstanceRequestId":{"locationName":"spotInstanceRequestId"},"InstanceHealth":{"locationName":"instanceHealth"}}}},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}}},"DescribeSpotFleetRequestHistory":{"input":{"type":"structure","required":["SpotFleetRequestId","StartTime"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"EventType":{"locationName":"eventType"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"},"StartTime":{"locationName":"startTime","type":"timestamp"}}},"output":{"type":"structure","required":["HistoryRecords","LastEvaluatedTime","SpotFleetRequestId","StartTime"],"members":{"HistoryRecords":{"locationName":"historyRecordSet","type":"list","member":{"locationName":"item","type":"structure","required":["EventInformation","EventType","Timestamp"],"members":{"EventInformation":{"locationName":"eventInformation","type":"structure","members":{"EventDescription":{"locationName":"eventDescription"},"EventSubType":{"locationName":"eventSubType"},"InstanceId":{"locationName":"instanceId"}}},"EventType":{"locationName":"eventType"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}}},"LastEvaluatedTime":{"locationName":"lastEvaluatedTime","type":"timestamp"},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"},"StartTime":{"locationName":"startTime","type":"timestamp"}}}},"DescribeSpotFleetRequests":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestIds":{"shape":"S2z","locationName":"spotFleetRequestId"}}},"output":{"type":"structure","required":["SpotFleetRequestConfigs"],"members":{"NextToken":{"locationName":"nextToken"},"SpotFleetRequestConfigs":{"locationName":"spotFleetRequestConfigSet","type":"list","member":{"locationName":"item","type":"structure","required":["CreateTime","SpotFleetRequestConfig","SpotFleetRequestId","SpotFleetRequestState"],"members":{"ActivityStatus":{"locationName":"activityStatus"},"CreateTime":{"locationName":"createTime","type":"timestamp"},"SpotFleetRequestConfig":{"shape":"Si9","locationName":"spotFleetRequestConfig"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"},"SpotFleetRequestState":{"locationName":"spotFleetRequestState"}}}}}}},"DescribeSpotInstanceRequests":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"SpotInstanceRequestIds":{"shape":"S39","locationName":"SpotInstanceRequestId"}}},"output":{"type":"structure","members":{"SpotInstanceRequests":{"shape":"Sin","locationName":"spotInstanceRequestSet"}}}},"DescribeSpotPriceHistory":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"AvailabilityZone":{"locationName":"availabilityZone"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EndTime":{"locationName":"endTime","type":"timestamp"},"InstanceTypes":{"locationName":"InstanceType","type":"list","member":{}},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"ProductDescriptions":{"locationName":"ProductDescription","type":"list","member":{}},"StartTime":{"locationName":"startTime","type":"timestamp"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"SpotPriceHistory":{"locationName":"spotPriceHistorySet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"InstanceType":{"locationName":"instanceType"},"ProductDescription":{"locationName":"productDescription"},"SpotPrice":{"locationName":"spotPrice"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}}}}}},"DescribeStaleSecurityGroups":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"type":"boolean"},"MaxResults":{"type":"integer"},"NextToken":{},"VpcId":{}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"StaleSecurityGroupSet":{"locationName":"staleSecurityGroupSet","type":"list","member":{"locationName":"item","type":"structure","required":["GroupId"],"members":{"Description":{"locationName":"description"},"GroupId":{"locationName":"groupId"},"GroupName":{"locationName":"groupName"},"StaleIpPermissions":{"shape":"Sj4","locationName":"staleIpPermissions"},"StaleIpPermissionsEgress":{"shape":"Sj4","locationName":"staleIpPermissionsEgress"},"VpcId":{"locationName":"vpcId"}}}}}}},"DescribeSubnets":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"SubnetIds":{"locationName":"SubnetId","type":"list","member":{"locationName":"SubnetId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Subnets":{"locationName":"subnetSet","type":"list","member":{"shape":"S75","locationName":"item"}}}}},"DescribeTags":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"Tags":{"locationName":"tagSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Key":{"locationName":"key"},"ResourceId":{"locationName":"resourceId"},"ResourceType":{"locationName":"resourceType"},"Value":{"locationName":"value"}}}}}}},"DescribeVolumeAttribute":{"input":{"type":"structure","required":["VolumeId"],"members":{"Attribute":{},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"AutoEnableIO":{"shape":"Sdk","locationName":"autoEnableIO"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"VolumeId":{"locationName":"volumeId"}}}},"DescribeVolumeStatus":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"VolumeIds":{"shape":"Sjl","locationName":"VolumeId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"VolumeStatuses":{"locationName":"volumeStatusSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Actions":{"locationName":"actionsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Code":{"locationName":"code"},"Description":{"locationName":"description"},"EventId":{"locationName":"eventId"},"EventType":{"locationName":"eventType"}}}},"AvailabilityZone":{"locationName":"availabilityZone"},"Events":{"locationName":"eventsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{"locationName":"description"},"EventId":{"locationName":"eventId"},"EventType":{"locationName":"eventType"},"NotAfter":{"locationName":"notAfter","type":"timestamp"},"NotBefore":{"locationName":"notBefore","type":"timestamp"}}}},"VolumeId":{"locationName":"volumeId"},"VolumeStatus":{"locationName":"volumeStatus","type":"structure","members":{"Details":{"locationName":"details","type":"list","member":{"locationName":"item","type":"structure","members":{"Name":{"locationName":"name"},"Status":{"locationName":"status"}}}},"Status":{"locationName":"status"}}}}}}}}},"DescribeVolumes":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"VolumeIds":{"shape":"Sjl","locationName":"VolumeId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"Volumes":{"locationName":"volumeSet","type":"list","member":{"shape":"S7e","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeVolumesModifications":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"VolumeIds":{"shape":"Sjl","locationName":"VolumeId"},"Filters":{"shape":"S9c","locationName":"Filter"},"NextToken":{},"MaxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"VolumesModifications":{"locationName":"volumeModificationSet","type":"list","member":{"shape":"Sk4","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeVpcAttribute":{"input":{"type":"structure","required":["Attribute","VpcId"],"members":{"Attribute":{},"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpcId":{"locationName":"vpcId"},"EnableDnsHostnames":{"shape":"Sdk","locationName":"enableDnsHostnames"},"EnableDnsSupport":{"shape":"Sdk","locationName":"enableDnsSupport"}}}},"DescribeVpcClassicLink":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcIds":{"shape":"Ska","locationName":"VpcId"}}},"output":{"type":"structure","members":{"Vpcs":{"locationName":"vpcSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ClassicLinkEnabled":{"locationName":"classicLinkEnabled","type":"boolean"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}}}}}},"DescribeVpcClassicLinkDnsSupport":{"input":{"type":"structure","members":{"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"VpcIds":{"shape":"Ska"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"Vpcs":{"locationName":"vpcs","type":"list","member":{"locationName":"item","type":"structure","members":{"ClassicLinkDnsSupported":{"locationName":"classicLinkDnsSupported","type":"boolean"},"VpcId":{"locationName":"vpcId"}}}}}}},"DescribeVpcEndpointServices":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ServiceNames":{"shape":"S2z","locationName":"serviceNameSet"}}}},"DescribeVpcEndpoints":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"VpcEndpointIds":{"shape":"S2z","locationName":"VpcEndpointId"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"VpcEndpoints":{"locationName":"vpcEndpointSet","type":"list","member":{"shape":"S7l","locationName":"item"}}}}},"DescribeVpcPeeringConnections":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcPeeringConnectionIds":{"shape":"S2z","locationName":"VpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"VpcPeeringConnections":{"locationName":"vpcPeeringConnectionSet","type":"list","member":{"shape":"Sb","locationName":"item"}}}}},"DescribeVpcs":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"VpcIds":{"locationName":"VpcId","type":"list","member":{"locationName":"VpcId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Vpcs":{"locationName":"vpcSet","type":"list","member":{"shape":"S3q","locationName":"item"}}}}},"DescribeVpnConnections":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"VpnConnectionIds":{"locationName":"VpnConnectionId","type":"list","member":{"locationName":"VpnConnectionId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpnConnections":{"locationName":"vpnConnectionSet","type":"list","member":{"shape":"S7s","locationName":"item"}}}}},"DescribeVpnGateways":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"VpnGatewayIds":{"locationName":"VpnGatewayId","type":"list","member":{"locationName":"VpnGatewayId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpnGateways":{"locationName":"vpnGatewaySet","type":"list","member":{"shape":"S84","locationName":"item"}}}}},"DetachClassicLinkVpc":{"input":{"type":"structure","required":["InstanceId","VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DetachInternetGateway":{"input":{"type":"structure","required":["InternetGatewayId","VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"InternetGatewayId":{"locationName":"internetGatewayId"},"VpcId":{"locationName":"vpcId"}}}},"DetachNetworkInterface":{"input":{"type":"structure","required":["AttachmentId"],"members":{"AttachmentId":{"locationName":"attachmentId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Force":{"locationName":"force","type":"boolean"}}}},"DetachVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"Device":{},"Force":{"type":"boolean"},"InstanceId":{},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"shape":"S1p"}},"DetachVpnGateway":{"input":{"type":"structure","required":["VpcId","VpnGatewayId"],"members":{"VpcId":{},"VpnGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DisableVgwRoutePropagation":{"input":{"type":"structure","required":["GatewayId","RouteTableId"],"members":{"GatewayId":{},"RouteTableId":{}}}},"DisableVpcClassicLink":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DisableVpcClassicLinkDnsSupport":{"input":{"type":"structure","members":{"VpcId":{}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DisassociateAddress":{"input":{"type":"structure","members":{"AssociationId":{},"PublicIp":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DisassociateIamInstanceProfile":{"input":{"type":"structure","required":["AssociationId"],"members":{"AssociationId":{}}},"output":{"type":"structure","members":{"IamInstanceProfileAssociation":{"shape":"S13","locationName":"iamInstanceProfileAssociation"}}}},"DisassociateRouteTable":{"input":{"type":"structure","required":["AssociationId"],"members":{"AssociationId":{"locationName":"associationId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DisassociateSubnetCidrBlock":{"input":{"type":"structure","required":["AssociationId"],"members":{"AssociationId":{"locationName":"associationId"}}},"output":{"type":"structure","members":{"Ipv6CidrBlockAssociation":{"shape":"S1a","locationName":"ipv6CidrBlockAssociation"},"SubnetId":{"locationName":"subnetId"}}}},"DisassociateVpcCidrBlock":{"input":{"type":"structure","required":["AssociationId"],"members":{"AssociationId":{"locationName":"associationId"}}},"output":{"type":"structure","members":{"Ipv6CidrBlockAssociation":{"shape":"S1f","locationName":"ipv6CidrBlockAssociation"},"VpcId":{"locationName":"vpcId"}}}},"EnableVgwRoutePropagation":{"input":{"type":"structure","required":["GatewayId","RouteTableId"],"members":{"GatewayId":{},"RouteTableId":{}}}},"EnableVolumeIO":{"input":{"type":"structure","required":["VolumeId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VolumeId":{"locationName":"volumeId"}}}},"EnableVpcClassicLink":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"EnableVpcClassicLinkDnsSupport":{"input":{"type":"structure","members":{"VpcId":{}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"GetConsoleOutput":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"Output":{"locationName":"output"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}}},"GetConsoleScreenshot":{"input":{"type":"structure","required":["InstanceId"],"members":{"DryRun":{"type":"boolean"},"InstanceId":{},"WakeUp":{"type":"boolean"}}},"output":{"type":"structure","members":{"ImageData":{"locationName":"imageData"},"InstanceId":{"locationName":"instanceId"}}}},"GetHostReservationPurchasePreview":{"input":{"type":"structure","required":["HostIdSet","OfferingId"],"members":{"HostIdSet":{"shape":"Slw"},"OfferingId":{}}},"output":{"type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"Purchase":{"shape":"Sly","locationName":"purchase"},"TotalHourlyPrice":{"locationName":"totalHourlyPrice"},"TotalUpfrontPrice":{"locationName":"totalUpfrontPrice"}}}},"GetPasswordData":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"PasswordData":{"locationName":"passwordData"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}}},"GetReservedInstancesExchangeQuote":{"input":{"type":"structure","required":["ReservedInstanceIds"],"members":{"DryRun":{"type":"boolean"},"ReservedInstanceIds":{"shape":"S3","locationName":"ReservedInstanceId"},"TargetConfigurations":{"shape":"S5","locationName":"TargetConfiguration"}}},"output":{"type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"IsValidExchange":{"locationName":"isValidExchange","type":"boolean"},"OutputReservedInstancesWillExpireAt":{"locationName":"outputReservedInstancesWillExpireAt","type":"timestamp"},"PaymentDue":{"locationName":"paymentDue"},"ReservedInstanceValueRollup":{"shape":"Sm4","locationName":"reservedInstanceValueRollup"},"ReservedInstanceValueSet":{"locationName":"reservedInstanceValueSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ReservationValue":{"shape":"Sm4","locationName":"reservationValue"},"ReservedInstanceId":{"locationName":"reservedInstanceId"}}}},"TargetConfigurationValueRollup":{"shape":"Sm4","locationName":"targetConfigurationValueRollup"},"TargetConfigurationValueSet":{"locationName":"targetConfigurationValueSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ReservationValue":{"shape":"Sm4","locationName":"reservationValue"},"TargetConfiguration":{"locationName":"targetConfiguration","type":"structure","members":{"InstanceCount":{"locationName":"instanceCount","type":"integer"},"OfferingId":{"locationName":"offeringId"}}}}}},"ValidationFailureReason":{"locationName":"validationFailureReason"}}}},"ImportImage":{"input":{"type":"structure","members":{"Architecture":{},"ClientData":{"shape":"Smb"},"ClientToken":{},"Description":{},"DiskContainers":{"locationName":"DiskContainer","type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{},"DeviceName":{},"Format":{},"SnapshotId":{},"Url":{},"UserBucket":{"shape":"Sme"}}}},"DryRun":{"type":"boolean"},"Hypervisor":{},"LicenseType":{},"Platform":{},"RoleName":{}}},"output":{"type":"structure","members":{"Architecture":{"locationName":"architecture"},"Description":{"locationName":"description"},"Hypervisor":{"locationName":"hypervisor"},"ImageId":{"locationName":"imageId"},"ImportTaskId":{"locationName":"importTaskId"},"LicenseType":{"locationName":"licenseType"},"Platform":{"locationName":"platform"},"Progress":{"locationName":"progress"},"SnapshotDetails":{"shape":"Sd6","locationName":"snapshotDetailSet"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"}}}},"ImportInstance":{"input":{"type":"structure","required":["Platform"],"members":{"Description":{"locationName":"description"},"DiskImages":{"locationName":"diskImage","type":"list","member":{"type":"structure","members":{"Description":{},"Image":{"shape":"Smj"},"Volume":{"shape":"Smk"}}}},"DryRun":{"locationName":"dryRun","type":"boolean"},"LaunchSpecification":{"locationName":"launchSpecification","type":"structure","members":{"AdditionalInfo":{"locationName":"additionalInfo"},"Architecture":{"locationName":"architecture"},"GroupIds":{"shape":"S5n","locationName":"GroupId"},"GroupNames":{"shape":"Smm","locationName":"GroupName"},"InstanceInitiatedShutdownBehavior":{"locationName":"instanceInitiatedShutdownBehavior"},"InstanceType":{"locationName":"instanceType"},"Monitoring":{"locationName":"monitoring","type":"boolean"},"Placement":{"shape":"Se9","locationName":"placement"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"SubnetId":{"locationName":"subnetId"},"UserData":{"locationName":"userData","type":"structure","members":{"Data":{"locationName":"data"}}}}},"Platform":{"locationName":"platform"}}},"output":{"type":"structure","members":{"ConversionTask":{"shape":"Sa4","locationName":"conversionTask"}}}},"ImportKeyPair":{"input":{"type":"structure","required":["KeyName","PublicKeyMaterial"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"KeyName":{"locationName":"keyName"},"PublicKeyMaterial":{"locationName":"publicKeyMaterial","type":"blob"}}},"output":{"type":"structure","members":{"KeyFingerprint":{"locationName":"keyFingerprint"},"KeyName":{"locationName":"keyName"}}}},"ImportSnapshot":{"input":{"type":"structure","members":{"ClientData":{"shape":"Smb"},"ClientToken":{},"Description":{},"DiskContainer":{"type":"structure","members":{"Description":{},"Format":{},"Url":{},"UserBucket":{"shape":"Sme"}}},"DryRun":{"type":"boolean"},"RoleName":{}}},"output":{"type":"structure","members":{"Description":{"locationName":"description"},"ImportTaskId":{"locationName":"importTaskId"},"SnapshotTaskDetail":{"shape":"Sdd","locationName":"snapshotTaskDetail"}}}},"ImportVolume":{"input":{"type":"structure","required":["AvailabilityZone","Image","Volume"],"members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Image":{"shape":"Smj","locationName":"image"},"Volume":{"shape":"Smk","locationName":"volume"}}},"output":{"type":"structure","members":{"ConversionTask":{"shape":"Sa4","locationName":"conversionTask"}}}},"ModifyHosts":{"input":{"type":"structure","required":["AutoPlacement","HostIds"],"members":{"AutoPlacement":{"locationName":"autoPlacement"},"HostIds":{"shape":"Sbw","locationName":"hostId"}}},"output":{"type":"structure","members":{"Successful":{"shape":"Sr","locationName":"successful"},"Unsuccessful":{"shape":"Smz","locationName":"unsuccessful"}}}},"ModifyIdFormat":{"input":{"type":"structure","required":["Resource","UseLongIds"],"members":{"Resource":{},"UseLongIds":{"type":"boolean"}}}},"ModifyIdentityIdFormat":{"input":{"type":"structure","required":["PrincipalArn","Resource","UseLongIds"],"members":{"PrincipalArn":{"locationName":"principalArn"},"Resource":{"locationName":"resource"},"UseLongIds":{"locationName":"useLongIds","type":"boolean"}}}},"ModifyImageAttribute":{"input":{"type":"structure","required":["ImageId"],"members":{"Attribute":{},"Description":{"shape":"S42"},"ImageId":{},"LaunchPermission":{"type":"structure","members":{"Add":{"shape":"Scl"},"Remove":{"shape":"Scl"}}},"OperationType":{},"ProductCodes":{"locationName":"ProductCode","type":"list","member":{"locationName":"ProductCode"}},"UserGroups":{"locationName":"UserGroup","type":"list","member":{"locationName":"UserGroup"}},"UserIds":{"shape":"Sn7","locationName":"UserId"},"Value":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ModifyInstanceAttribute":{"input":{"type":"structure","required":["InstanceId"],"members":{"SourceDestCheck":{"shape":"Sdk"},"Attribute":{"locationName":"attribute"},"BlockDeviceMappings":{"locationName":"blockDeviceMapping","type":"list","member":{"locationName":"item","type":"structure","members":{"DeviceName":{"locationName":"deviceName"},"Ebs":{"locationName":"ebs","type":"structure","members":{"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"VolumeId":{"locationName":"volumeId"}}},"NoDevice":{"locationName":"noDevice"},"VirtualName":{"locationName":"virtualName"}}}},"DisableApiTermination":{"shape":"Sdk","locationName":"disableApiTermination"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EbsOptimized":{"shape":"Sdk","locationName":"ebsOptimized"},"EnaSupport":{"shape":"Sdk","locationName":"enaSupport"},"Groups":{"shape":"S1j","locationName":"GroupId"},"InstanceId":{"locationName":"instanceId"},"InstanceInitiatedShutdownBehavior":{"shape":"S42","locationName":"instanceInitiatedShutdownBehavior"},"InstanceType":{"shape":"S42","locationName":"instanceType"},"Kernel":{"shape":"S42","locationName":"kernel"},"Ramdisk":{"shape":"S42","locationName":"ramdisk"},"SriovNetSupport":{"shape":"S42","locationName":"sriovNetSupport"},"UserData":{"locationName":"userData","type":"structure","members":{"Value":{"locationName":"value","type":"blob"}}},"Value":{"locationName":"value"}}}},"ModifyInstancePlacement":{"input":{"type":"structure","required":["InstanceId"],"members":{"Affinity":{"locationName":"affinity"},"HostId":{"locationName":"hostId"},"InstanceId":{"locationName":"instanceId"},"Tenancy":{"locationName":"tenancy"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"ModifyNetworkInterfaceAttribute":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"Attachment":{"locationName":"attachment","type":"structure","members":{"AttachmentId":{"locationName":"attachmentId"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"}}},"Description":{"shape":"S42","locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Groups":{"shape":"S5n","locationName":"SecurityGroupId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"SourceDestCheck":{"shape":"Sdk","locationName":"sourceDestCheck"}}}},"ModifyReservedInstances":{"input":{"type":"structure","required":["ReservedInstancesIds","TargetConfigurations"],"members":{"ReservedInstancesIds":{"shape":"Sfu","locationName":"ReservedInstancesId"},"ClientToken":{"locationName":"clientToken"},"TargetConfigurations":{"locationName":"ReservedInstancesConfigurationSetItemType","type":"list","member":{"shape":"Sgf","locationName":"item"}}}},"output":{"type":"structure","members":{"ReservedInstancesModificationId":{"locationName":"reservedInstancesModificationId"}}}},"ModifySnapshotAttribute":{"input":{"type":"structure","required":["SnapshotId"],"members":{"Attribute":{},"CreateVolumePermission":{"type":"structure","members":{"Add":{"shape":"Shk"},"Remove":{"shape":"Shk"}}},"GroupNames":{"shape":"Shd","locationName":"UserGroup"},"OperationType":{},"SnapshotId":{},"UserIds":{"shape":"Sn7","locationName":"UserId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ModifySpotFleetRequest":{"input":{"type":"structure","required":["SpotFleetRequestId"],"members":{"ExcessCapacityTerminationPolicy":{"locationName":"excessCapacityTerminationPolicy"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"},"TargetCapacity":{"locationName":"targetCapacity","type":"integer"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"ModifySubnetAttribute":{"input":{"type":"structure","required":["SubnetId"],"members":{"AssignIpv6AddressOnCreation":{"shape":"Sdk"},"MapPublicIpOnLaunch":{"shape":"Sdk"},"SubnetId":{"locationName":"subnetId"}}}},"ModifyVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"DryRun":{"type":"boolean"},"VolumeId":{},"Size":{"type":"integer"},"VolumeType":{},"Iops":{"type":"integer"}}},"output":{"type":"structure","members":{"VolumeModification":{"shape":"Sk4","locationName":"volumeModification"}}}},"ModifyVolumeAttribute":{"input":{"type":"structure","required":["VolumeId"],"members":{"AutoEnableIO":{"shape":"Sdk"},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ModifyVpcAttribute":{"input":{"type":"structure","required":["VpcId"],"members":{"EnableDnsHostnames":{"shape":"Sdk"},"EnableDnsSupport":{"shape":"Sdk"},"VpcId":{"locationName":"vpcId"}}}},"ModifyVpcEndpoint":{"input":{"type":"structure","required":["VpcEndpointId"],"members":{"AddRouteTableIds":{"shape":"S2z","locationName":"AddRouteTableId"},"DryRun":{"type":"boolean"},"PolicyDocument":{},"RemoveRouteTableIds":{"shape":"S2z","locationName":"RemoveRouteTableId"},"ResetPolicy":{"type":"boolean"},"VpcEndpointId":{}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"ModifyVpcPeeringConnectionOptions":{"input":{"type":"structure","required":["VpcPeeringConnectionId"],"members":{"AccepterPeeringConnectionOptions":{"shape":"Sny"},"DryRun":{"type":"boolean"},"RequesterPeeringConnectionOptions":{"shape":"Sny"},"VpcPeeringConnectionId":{}}},"output":{"type":"structure","members":{"AccepterPeeringConnectionOptions":{"shape":"So0","locationName":"accepterPeeringConnectionOptions"},"RequesterPeeringConnectionOptions":{"shape":"So0","locationName":"requesterPeeringConnectionOptions"}}}},"MonitorInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceMonitorings":{"shape":"So3","locationName":"instancesSet"}}}},"MoveAddressToVpc":{"input":{"type":"structure","required":["PublicIp"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"PublicIp":{"locationName":"publicIp"}}},"output":{"type":"structure","members":{"AllocationId":{"locationName":"allocationId"},"Status":{"locationName":"status"}}}},"PurchaseHostReservation":{"input":{"type":"structure","required":["HostIdSet","OfferingId"],"members":{"ClientToken":{},"CurrencyCode":{},"HostIdSet":{"shape":"Slw"},"LimitPrice":{},"OfferingId":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"CurrencyCode":{"locationName":"currencyCode"},"Purchase":{"shape":"Sly","locationName":"purchase"},"TotalHourlyPrice":{"locationName":"totalHourlyPrice"},"TotalUpfrontPrice":{"locationName":"totalUpfrontPrice"}}}},"PurchaseReservedInstancesOffering":{"input":{"type":"structure","required":["InstanceCount","ReservedInstancesOfferingId"],"members":{"InstanceCount":{"type":"integer"},"ReservedInstancesOfferingId":{},"DryRun":{"locationName":"dryRun","type":"boolean"},"LimitPrice":{"locationName":"limitPrice","type":"structure","members":{"Amount":{"locationName":"amount","type":"double"},"CurrencyCode":{"locationName":"currencyCode"}}}}},"output":{"type":"structure","members":{"ReservedInstancesId":{"locationName":"reservedInstancesId"}}}},"PurchaseScheduledInstances":{"input":{"type":"structure","required":["PurchaseRequests"],"members":{"ClientToken":{"idempotencyToken":true},"DryRun":{"type":"boolean"},"PurchaseRequests":{"locationName":"PurchaseRequest","type":"list","member":{"locationName":"PurchaseRequest","type":"structure","required":["InstanceCount","PurchaseToken"],"members":{"InstanceCount":{"type":"integer"},"PurchaseToken":{}}}}}},"output":{"type":"structure","members":{"ScheduledInstanceSet":{"locationName":"scheduledInstanceSet","type":"list","member":{"shape":"Sh6","locationName":"item"}}}}},"RebootInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"RegisterImage":{"input":{"type":"structure","required":["Name"],"members":{"ImageLocation":{},"Architecture":{"locationName":"architecture"},"BlockDeviceMappings":{"shape":"S4k","locationName":"BlockDeviceMapping"},"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EnaSupport":{"locationName":"enaSupport","type":"boolean"},"KernelId":{"locationName":"kernelId"},"Name":{"locationName":"name"},"BillingProducts":{"locationName":"BillingProduct","type":"list","member":{"locationName":"item"}},"RamdiskId":{"locationName":"ramdiskId"},"RootDeviceName":{"locationName":"rootDeviceName"},"SriovNetSupport":{"locationName":"sriovNetSupport"},"VirtualizationType":{"locationName":"virtualizationType"}}},"output":{"type":"structure","members":{"ImageId":{"locationName":"imageId"}}}},"RejectVpcPeeringConnection":{"input":{"type":"structure","required":["VpcPeeringConnectionId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"ReleaseAddress":{"input":{"type":"structure","members":{"AllocationId":{},"PublicIp":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ReleaseHosts":{"input":{"type":"structure","required":["HostIds"],"members":{"HostIds":{"shape":"Sbw","locationName":"hostId"}}},"output":{"type":"structure","members":{"Successful":{"shape":"Sr","locationName":"successful"},"Unsuccessful":{"shape":"Smz","locationName":"unsuccessful"}}}},"ReplaceIamInstanceProfileAssociation":{"input":{"type":"structure","required":["IamInstanceProfile","AssociationId"],"members":{"IamInstanceProfile":{"shape":"S11"},"AssociationId":{}}},"output":{"type":"structure","members":{"IamInstanceProfileAssociation":{"shape":"S13","locationName":"iamInstanceProfileAssociation"}}}},"ReplaceNetworkAclAssociation":{"input":{"type":"structure","required":["AssociationId","NetworkAclId"],"members":{"AssociationId":{"locationName":"associationId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkAclId":{"locationName":"networkAclId"}}},"output":{"type":"structure","members":{"NewAssociationId":{"locationName":"newAssociationId"}}}},"ReplaceNetworkAclEntry":{"input":{"type":"structure","required":["Egress","NetworkAclId","Protocol","RuleAction","RuleNumber"],"members":{"CidrBlock":{"locationName":"cidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Egress":{"locationName":"egress","type":"boolean"},"IcmpTypeCode":{"shape":"S5i","locationName":"Icmp"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"NetworkAclId":{"locationName":"networkAclId"},"PortRange":{"shape":"S5j","locationName":"portRange"},"Protocol":{"locationName":"protocol"},"RuleAction":{"locationName":"ruleAction"},"RuleNumber":{"locationName":"ruleNumber","type":"integer"}}}},"ReplaceRoute":{"input":{"type":"structure","required":["RouteTableId"],"members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"DestinationIpv6CidrBlock":{"locationName":"destinationIpv6CidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EgressOnlyInternetGatewayId":{"locationName":"egressOnlyInternetGatewayId"},"GatewayId":{"locationName":"gatewayId"},"InstanceId":{"locationName":"instanceId"},"NatGatewayId":{"locationName":"natGatewayId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"RouteTableId":{"locationName":"routeTableId"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}}},"ReplaceRouteTableAssociation":{"input":{"type":"structure","required":["AssociationId","RouteTableId"],"members":{"AssociationId":{"locationName":"associationId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableId":{"locationName":"routeTableId"}}},"output":{"type":"structure","members":{"NewAssociationId":{"locationName":"newAssociationId"}}}},"ReportInstanceStatus":{"input":{"type":"structure","required":["Instances","ReasonCodes","Status"],"members":{"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EndTime":{"locationName":"endTime","type":"timestamp"},"Instances":{"shape":"S9w","locationName":"instanceId"},"ReasonCodes":{"locationName":"reasonCode","type":"list","member":{"locationName":"item"}},"StartTime":{"locationName":"startTime","type":"timestamp"},"Status":{"locationName":"status"}}}},"RequestSpotFleet":{"input":{"type":"structure","required":["SpotFleetRequestConfig"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"SpotFleetRequestConfig":{"shape":"Si9","locationName":"spotFleetRequestConfig"}}},"output":{"type":"structure","required":["SpotFleetRequestId"],"members":{"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}}},"RequestSpotInstances":{"input":{"type":"structure","required":["SpotPrice"],"members":{"AvailabilityZoneGroup":{"locationName":"availabilityZoneGroup"},"BlockDurationMinutes":{"locationName":"blockDurationMinutes","type":"integer"},"ClientToken":{"locationName":"clientToken"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"LaunchGroup":{"locationName":"launchGroup"},"LaunchSpecification":{"type":"structure","members":{"SecurityGroupIds":{"shape":"S2z","locationName":"SecurityGroupId"},"SecurityGroups":{"shape":"S2z","locationName":"SecurityGroup"},"AddressingType":{"locationName":"addressingType"},"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"IamInstanceProfile":{"shape":"S11","locationName":"iamInstanceProfile"},"ImageId":{"locationName":"imageId"},"InstanceType":{"locationName":"instanceType"},"KernelId":{"locationName":"kernelId"},"KeyName":{"locationName":"keyName"},"Monitoring":{"shape":"Siq","locationName":"monitoring"},"NetworkInterfaces":{"shape":"Sif","locationName":"NetworkInterface"},"Placement":{"shape":"Sih","locationName":"placement"},"RamdiskId":{"locationName":"ramdiskId"},"SubnetId":{"locationName":"subnetId"},"UserData":{"locationName":"userData"}}},"SpotPrice":{"locationName":"spotPrice"},"Type":{"locationName":"type"},"ValidFrom":{"locationName":"validFrom","type":"timestamp"},"ValidUntil":{"locationName":"validUntil","type":"timestamp"}}},"output":{"type":"structure","members":{"SpotInstanceRequests":{"shape":"Sin","locationName":"spotInstanceRequestSet"}}}},"ResetImageAttribute":{"input":{"type":"structure","required":["Attribute","ImageId"],"members":{"Attribute":{},"ImageId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ResetInstanceAttribute":{"input":{"type":"structure","required":["Attribute","InstanceId"],"members":{"Attribute":{"locationName":"attribute"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"}}}},"ResetNetworkInterfaceAttribute":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"SourceDestCheck":{"locationName":"sourceDestCheck"}}}},"ResetSnapshotAttribute":{"input":{"type":"structure","required":["Attribute","SnapshotId"],"members":{"Attribute":{},"SnapshotId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"RestoreAddressToClassic":{"input":{"type":"structure","required":["PublicIp"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"PublicIp":{"locationName":"publicIp"}}},"output":{"type":"structure","members":{"PublicIp":{"locationName":"publicIp"},"Status":{"locationName":"status"}}}},"RevokeSecurityGroupEgress":{"input":{"type":"structure","required":["GroupId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupId":{"locationName":"groupId"},"IpPermissions":{"shape":"S1w","locationName":"ipPermissions"},"CidrIp":{"locationName":"cidrIp"},"FromPort":{"locationName":"fromPort","type":"integer"},"IpProtocol":{"locationName":"ipProtocol"},"ToPort":{"locationName":"toPort","type":"integer"},"SourceSecurityGroupName":{"locationName":"sourceSecurityGroupName"},"SourceSecurityGroupOwnerId":{"locationName":"sourceSecurityGroupOwnerId"}}}},"RevokeSecurityGroupIngress":{"input":{"type":"structure","members":{"CidrIp":{},"FromPort":{"type":"integer"},"GroupId":{},"GroupName":{},"IpPermissions":{"shape":"S1w"},"IpProtocol":{},"SourceSecurityGroupName":{},"SourceSecurityGroupOwnerId":{},"ToPort":{"type":"integer"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"RunInstances":{"input":{"type":"structure","required":["ImageId","MaxCount","MinCount"],"members":{"BlockDeviceMappings":{"shape":"S4k","locationName":"BlockDeviceMapping"},"ImageId":{},"InstanceType":{},"Ipv6AddressCount":{"type":"integer"},"Ipv6Addresses":{"shape":"S5o","locationName":"Ipv6Address"},"KernelId":{},"KeyName":{},"MaxCount":{"type":"integer"},"MinCount":{"type":"integer"},"Monitoring":{"shape":"Siq"},"Placement":{"shape":"Se9"},"RamdiskId":{},"SecurityGroupIds":{"shape":"S5n","locationName":"SecurityGroupId"},"SecurityGroups":{"shape":"Smm","locationName":"SecurityGroup"},"SubnetId":{},"UserData":{},"AdditionalInfo":{"locationName":"additionalInfo"},"ClientToken":{"locationName":"clientToken"},"DisableApiTermination":{"locationName":"disableApiTermination","type":"boolean"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"IamInstanceProfile":{"shape":"S11","locationName":"iamInstanceProfile"},"InstanceInitiatedShutdownBehavior":{"locationName":"instanceInitiatedShutdownBehavior"},"NetworkInterfaces":{"shape":"Sif","locationName":"networkInterface"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"ElasticGpuSpecification":{"type":"list","member":{"locationName":"item","type":"structure","required":["Type"],"members":{"Type":{}}}},"TagSpecifications":{"shape":"S7b","locationName":"TagSpecification"}}},"output":{"shape":"Se3"}},"RunScheduledInstances":{"input":{"type":"structure","required":["LaunchSpecification","ScheduledInstanceId"],"members":{"ClientToken":{"idempotencyToken":true},"DryRun":{"type":"boolean"},"InstanceCount":{"type":"integer"},"LaunchSpecification":{"type":"structure","required":["ImageId"],"members":{"BlockDeviceMappings":{"locationName":"BlockDeviceMapping","type":"list","member":{"locationName":"BlockDeviceMapping","type":"structure","members":{"DeviceName":{},"Ebs":{"type":"structure","members":{"DeleteOnTermination":{"type":"boolean"},"Encrypted":{"type":"boolean"},"Iops":{"type":"integer"},"SnapshotId":{},"VolumeSize":{"type":"integer"},"VolumeType":{}}},"NoDevice":{},"VirtualName":{}}}},"EbsOptimized":{"type":"boolean"},"IamInstanceProfile":{"type":"structure","members":{"Arn":{},"Name":{}}},"ImageId":{},"InstanceType":{},"KernelId":{},"KeyName":{},"Monitoring":{"type":"structure","members":{"Enabled":{"type":"boolean"}}},"NetworkInterfaces":{"locationName":"NetworkInterface","type":"list","member":{"locationName":"NetworkInterface","type":"structure","members":{"AssociatePublicIpAddress":{"type":"boolean"},"DeleteOnTermination":{"type":"boolean"},"Description":{},"DeviceIndex":{"type":"integer"},"Groups":{"shape":"Spt","locationName":"Group"},"Ipv6AddressCount":{"type":"integer"},"Ipv6Addresses":{"locationName":"Ipv6Address","type":"list","member":{"locationName":"Ipv6Address","type":"structure","members":{"Ipv6Address":{}}}},"NetworkInterfaceId":{},"PrivateIpAddress":{},"PrivateIpAddressConfigs":{"locationName":"PrivateIpAddressConfig","type":"list","member":{"locationName":"PrivateIpAddressConfigSet","type":"structure","members":{"Primary":{"type":"boolean"},"PrivateIpAddress":{}}}},"SecondaryPrivateIpAddressCount":{"type":"integer"},"SubnetId":{}}}},"Placement":{"type":"structure","members":{"AvailabilityZone":{},"GroupName":{}}},"RamdiskId":{},"SecurityGroupIds":{"shape":"Spt","locationName":"SecurityGroupId"},"SubnetId":{},"UserData":{}}},"ScheduledInstanceId":{}}},"output":{"type":"structure","members":{"InstanceIdSet":{"locationName":"instanceIdSet","type":"list","member":{"locationName":"item"}}}}},"StartInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"AdditionalInfo":{"locationName":"additionalInfo"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"StartingInstances":{"shape":"Sq4","locationName":"instancesSet"}}}},"StopInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Force":{"locationName":"force","type":"boolean"}}},"output":{"type":"structure","members":{"StoppingInstances":{"shape":"Sq4","locationName":"instancesSet"}}}},"TerminateInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"TerminatingInstances":{"shape":"Sq4","locationName":"instancesSet"}}}},"UnassignIpv6Addresses":{"input":{"type":"structure","required":["Ipv6Addresses","NetworkInterfaceId"],"members":{"Ipv6Addresses":{"shape":"St","locationName":"ipv6Addresses"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}},"output":{"type":"structure","members":{"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"UnassignedIpv6Addresses":{"shape":"St","locationName":"unassignedIpv6Addresses"}}}},"UnassignPrivateIpAddresses":{"input":{"type":"structure","required":["NetworkInterfaceId","PrivateIpAddresses"],"members":{"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIpAddresses":{"shape":"Sw","locationName":"privateIpAddress"}}}},"UnmonitorInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceMonitorings":{"shape":"So3","locationName":"instancesSet"}}}}},"shapes":{"S3":{"type":"list","member":{"locationName":"ReservedInstanceId"}},"S5":{"type":"list","member":{"locationName":"TargetConfigurationRequest","type":"structure","required":["OfferingId"],"members":{"InstanceCount":{"type":"integer"},"OfferingId":{}}}},"Sb":{"type":"structure","members":{"AccepterVpcInfo":{"shape":"Sc","locationName":"accepterVpcInfo"},"ExpirationTime":{"locationName":"expirationTime","type":"timestamp"},"RequesterVpcInfo":{"shape":"Sc","locationName":"requesterVpcInfo"},"Status":{"locationName":"status","type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"Sc":{"type":"structure","members":{"CidrBlock":{"locationName":"cidrBlock"},"Ipv6CidrBlockSet":{"locationName":"ipv6CidrBlockSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"}}}},"OwnerId":{"locationName":"ownerId"},"PeeringOptions":{"locationName":"peeringOptions","type":"structure","members":{"AllowDnsResolutionFromRemoteVpc":{"locationName":"allowDnsResolutionFromRemoteVpc","type":"boolean"},"AllowEgressFromLocalClassicLinkToRemoteVpc":{"locationName":"allowEgressFromLocalClassicLinkToRemoteVpc","type":"boolean"},"AllowEgressFromLocalVpcToRemoteClassicLink":{"locationName":"allowEgressFromLocalVpcToRemoteClassicLink","type":"boolean"}}},"VpcId":{"locationName":"vpcId"}}},"Sj":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Key":{"locationName":"key"},"Value":{"locationName":"value"}}}},"Sr":{"type":"list","member":{"locationName":"item"}},"St":{"type":"list","member":{"locationName":"item"}},"Sw":{"type":"list","member":{"locationName":"PrivateIpAddress"}},"S11":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Name":{"locationName":"name"}}},"S13":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"},"InstanceId":{"locationName":"instanceId"},"IamInstanceProfile":{"shape":"S14","locationName":"iamInstanceProfile"},"State":{"locationName":"state"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}},"S14":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Id":{"locationName":"id"}}},"S1a":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"Ipv6CidrBlockState":{"locationName":"ipv6CidrBlockState","type":"structure","members":{"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"}}}}},"S1f":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"Ipv6CidrBlockState":{"locationName":"ipv6CidrBlockState","type":"structure","members":{"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"}}}}},"S1j":{"type":"list","member":{"locationName":"groupId"}},"S1p":{"type":"structure","members":{"AttachTime":{"locationName":"attachTime","type":"timestamp"},"Device":{"locationName":"device"},"InstanceId":{"locationName":"instanceId"},"State":{"locationName":"status"},"VolumeId":{"locationName":"volumeId"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"}}},"S1t":{"type":"structure","members":{"State":{"locationName":"state"},"VpcId":{"locationName":"vpcId"}}},"S1w":{"type":"list","member":{"locationName":"item","type":"structure","members":{"FromPort":{"locationName":"fromPort","type":"integer"},"IpProtocol":{"locationName":"ipProtocol"},"IpRanges":{"locationName":"ipRanges","type":"list","member":{"locationName":"item","type":"structure","members":{"CidrIp":{"locationName":"cidrIp"}}}},"Ipv6Ranges":{"locationName":"ipv6Ranges","type":"list","member":{"locationName":"item","type":"structure","members":{"CidrIpv6":{"locationName":"cidrIpv6"}}}},"PrefixListIds":{"locationName":"prefixListIds","type":"list","member":{"locationName":"item","type":"structure","members":{"PrefixListId":{"locationName":"prefixListId"}}}},"ToPort":{"locationName":"toPort","type":"integer"},"UserIdGroupPairs":{"locationName":"groups","type":"list","member":{"shape":"S25","locationName":"item"}}}}},"S25":{"type":"structure","members":{"GroupId":{"locationName":"groupId"},"GroupName":{"locationName":"groupName"},"PeeringStatus":{"locationName":"peeringStatus"},"UserId":{"locationName":"userId"},"VpcId":{"locationName":"vpcId"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"S28":{"type":"structure","members":{"S3":{"type":"structure","members":{"AWSAccessKeyId":{},"Bucket":{"locationName":"bucket"},"Prefix":{"locationName":"prefix"},"UploadPolicy":{"locationName":"uploadPolicy","type":"blob"},"UploadPolicySignature":{"locationName":"uploadPolicySignature"}}}}},"S2c":{"type":"structure","members":{"BundleId":{"locationName":"bundleId"},"BundleTaskError":{"locationName":"error","type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"InstanceId":{"locationName":"instanceId"},"Progress":{"locationName":"progress"},"StartTime":{"locationName":"startTime","type":"timestamp"},"State":{"locationName":"state"},"Storage":{"shape":"S28","locationName":"storage"},"UpdateTime":{"locationName":"updateTime","type":"timestamp"}}},"S2n":{"type":"list","member":{"locationName":"item","type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"CreateDate":{"locationName":"createDate","type":"timestamp"},"InstanceCounts":{"locationName":"instanceCounts","type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceCount":{"locationName":"instanceCount","type":"integer"},"State":{"locationName":"state"}}}},"PriceSchedules":{"locationName":"priceSchedules","type":"list","member":{"locationName":"item","type":"structure","members":{"Active":{"locationName":"active","type":"boolean"},"CurrencyCode":{"locationName":"currencyCode"},"Price":{"locationName":"price","type":"double"},"Term":{"locationName":"term","type":"long"}}}},"ReservedInstancesId":{"locationName":"reservedInstancesId"},"ReservedInstancesListingId":{"locationName":"reservedInstancesListingId"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"Tags":{"shape":"Sj","locationName":"tagSet"},"UpdateDate":{"locationName":"updateDate","type":"timestamp"}}}},"S2z":{"type":"list","member":{"locationName":"item"}},"S39":{"type":"list","member":{"locationName":"SpotInstanceRequestId"}},"S3n":{"type":"structure","members":{"BgpAsn":{"locationName":"bgpAsn"},"CustomerGatewayId":{"locationName":"customerGatewayId"},"IpAddress":{"locationName":"ipAddress"},"State":{"locationName":"state"},"Type":{"locationName":"type"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S3q":{"type":"structure","members":{"CidrBlock":{"locationName":"cidrBlock"},"DhcpOptionsId":{"locationName":"dhcpOptionsId"},"State":{"locationName":"state"},"VpcId":{"locationName":"vpcId"},"InstanceTenancy":{"locationName":"instanceTenancy"},"Ipv6CidrBlockAssociationSet":{"locationName":"ipv6CidrBlockAssociationSet","type":"list","member":{"shape":"S1f","locationName":"item"}},"IsDefault":{"locationName":"isDefault","type":"boolean"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S3y":{"type":"structure","members":{"DhcpConfigurations":{"locationName":"dhcpConfigurationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Key":{"locationName":"key"},"Values":{"locationName":"valueSet","type":"list","member":{"shape":"S42","locationName":"item"}}}}},"DhcpOptionsId":{"locationName":"dhcpOptionsId"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S42":{"type":"structure","members":{"Value":{"locationName":"value"}}},"S45":{"type":"structure","members":{"Attachments":{"shape":"S46","locationName":"attachmentSet"},"EgressOnlyInternetGatewayId":{"locationName":"egressOnlyInternetGatewayId"}}},"S46":{"type":"list","member":{"locationName":"item","type":"structure","members":{"State":{"locationName":"state"},"VpcId":{"locationName":"vpcId"}}}},"S4d":{"type":"list","member":{"shape":"S4e","locationName":"item"}},"S4e":{"type":"structure","required":["Error"],"members":{"Error":{"locationName":"error","type":"structure","required":["Code","Message"],"members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"ResourceId":{"locationName":"resourceId"}}},"S4h":{"type":"structure","members":{"Bucket":{},"Key":{}}},"S4k":{"type":"list","member":{"shape":"S4l","locationName":"BlockDeviceMapping"}},"S4l":{"type":"structure","members":{"DeviceName":{"locationName":"deviceName"},"VirtualName":{"locationName":"virtualName"},"Ebs":{"locationName":"ebs","type":"structure","members":{"Encrypted":{"locationName":"encrypted","type":"boolean"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"Iops":{"locationName":"iops","type":"integer"},"SnapshotId":{"locationName":"snapshotId"},"VolumeSize":{"locationName":"volumeSize","type":"integer"},"VolumeType":{"locationName":"volumeType"}}},"NoDevice":{"locationName":"noDevice"}}},"S4v":{"type":"structure","members":{"Description":{"locationName":"description"},"ExportTaskId":{"locationName":"exportTaskId"},"ExportToS3Task":{"locationName":"exportToS3","type":"structure","members":{"ContainerFormat":{"locationName":"containerFormat"},"DiskImageFormat":{"locationName":"diskImageFormat"},"S3Bucket":{"locationName":"s3Bucket"},"S3Key":{"locationName":"s3Key"}}},"InstanceExportDetails":{"locationName":"instanceExport","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"TargetEnvironment":{"locationName":"targetEnvironment"}}},"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"}}},"S51":{"type":"structure","members":{"Attachments":{"shape":"S46","locationName":"attachmentSet"},"InternetGatewayId":{"locationName":"internetGatewayId"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S56":{"type":"structure","members":{"CreateTime":{"locationName":"createTime","type":"timestamp"},"DeleteTime":{"locationName":"deleteTime","type":"timestamp"},"FailureCode":{"locationName":"failureCode"},"FailureMessage":{"locationName":"failureMessage"},"NatGatewayAddresses":{"locationName":"natGatewayAddressSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AllocationId":{"locationName":"allocationId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIp":{"locationName":"privateIp"},"PublicIp":{"locationName":"publicIp"}}}},"NatGatewayId":{"locationName":"natGatewayId"},"ProvisionedBandwidth":{"locationName":"provisionedBandwidth","type":"structure","members":{"ProvisionTime":{"locationName":"provisionTime","type":"timestamp"},"Provisioned":{"locationName":"provisioned"},"RequestTime":{"locationName":"requestTime","type":"timestamp"},"Requested":{"locationName":"requested"},"Status":{"locationName":"status"}}},"State":{"locationName":"state"},"SubnetId":{"locationName":"subnetId"},"VpcId":{"locationName":"vpcId"}}},"S5d":{"type":"structure","members":{"Associations":{"locationName":"associationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"NetworkAclAssociationId":{"locationName":"networkAclAssociationId"},"NetworkAclId":{"locationName":"networkAclId"},"SubnetId":{"locationName":"subnetId"}}}},"Entries":{"locationName":"entrySet","type":"list","member":{"locationName":"item","type":"structure","members":{"CidrBlock":{"locationName":"cidrBlock"},"Egress":{"locationName":"egress","type":"boolean"},"IcmpTypeCode":{"shape":"S5i","locationName":"icmpTypeCode"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"PortRange":{"shape":"S5j","locationName":"portRange"},"Protocol":{"locationName":"protocol"},"RuleAction":{"locationName":"ruleAction"},"RuleNumber":{"locationName":"ruleNumber","type":"integer"}}}},"IsDefault":{"locationName":"default","type":"boolean"},"NetworkAclId":{"locationName":"networkAclId"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}},"S5i":{"type":"structure","members":{"Code":{"locationName":"code","type":"integer"},"Type":{"locationName":"type","type":"integer"}}},"S5j":{"type":"structure","members":{"From":{"locationName":"from","type":"integer"},"To":{"locationName":"to","type":"integer"}}},"S5n":{"type":"list","member":{"locationName":"SecurityGroupId"}},"S5o":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Ipv6Address":{"locationName":"ipv6Address"}}}},"S5q":{"type":"list","member":{"locationName":"item","type":"structure","required":["PrivateIpAddress"],"members":{"Primary":{"locationName":"primary","type":"boolean"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}}},"S5t":{"type":"structure","members":{"Association":{"shape":"S5u","locationName":"association"},"Attachment":{"shape":"S5v","locationName":"attachment"},"AvailabilityZone":{"locationName":"availabilityZone"},"Description":{"locationName":"description"},"Groups":{"shape":"S5w","locationName":"groupSet"},"InterfaceType":{"locationName":"interfaceType"},"Ipv6Addresses":{"locationName":"ipv6AddressesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Ipv6Address":{"locationName":"ipv6Address"}}}},"MacAddress":{"locationName":"macAddress"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"OwnerId":{"locationName":"ownerId"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"PrivateIpAddresses":{"locationName":"privateIpAddressesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Association":{"shape":"S5u","locationName":"association"},"Primary":{"locationName":"primary","type":"boolean"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}}},"RequesterId":{"locationName":"requesterId"},"RequesterManaged":{"locationName":"requesterManaged","type":"boolean"},"SourceDestCheck":{"locationName":"sourceDestCheck","type":"boolean"},"Status":{"locationName":"status"},"SubnetId":{"locationName":"subnetId"},"TagSet":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}},"S5u":{"type":"structure","members":{"AllocationId":{"locationName":"allocationId"},"AssociationId":{"locationName":"associationId"},"IpOwnerId":{"locationName":"ipOwnerId"},"PublicDnsName":{"locationName":"publicDnsName"},"PublicIp":{"locationName":"publicIp"}}},"S5v":{"type":"structure","members":{"AttachTime":{"locationName":"attachTime","type":"timestamp"},"AttachmentId":{"locationName":"attachmentId"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"DeviceIndex":{"locationName":"deviceIndex","type":"integer"},"InstanceId":{"locationName":"instanceId"},"InstanceOwnerId":{"locationName":"instanceOwnerId"},"Status":{"locationName":"status"}}},"S5w":{"type":"list","member":{"locationName":"item","type":"structure","members":{"GroupName":{"locationName":"groupName"},"GroupId":{"locationName":"groupId"}}}},"S67":{"type":"structure","members":{"NetworkInterfacePermissionId":{"locationName":"networkInterfacePermissionId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"AwsAccountId":{"locationName":"awsAccountId"},"AwsService":{"locationName":"awsService"},"Permission":{"locationName":"permission"},"PermissionState":{"locationName":"permissionState","type":"structure","members":{"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"}}}}},"S6k":{"type":"structure","members":{"Associations":{"locationName":"associationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Main":{"locationName":"main","type":"boolean"},"RouteTableAssociationId":{"locationName":"routeTableAssociationId"},"RouteTableId":{"locationName":"routeTableId"},"SubnetId":{"locationName":"subnetId"}}}},"PropagatingVgws":{"locationName":"propagatingVgwSet","type":"list","member":{"locationName":"item","type":"structure","members":{"GatewayId":{"locationName":"gatewayId"}}}},"RouteTableId":{"locationName":"routeTableId"},"Routes":{"locationName":"routeSet","type":"list","member":{"locationName":"item","type":"structure","members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"DestinationIpv6CidrBlock":{"locationName":"destinationIpv6CidrBlock"},"DestinationPrefixListId":{"locationName":"destinationPrefixListId"},"EgressOnlyInternetGatewayId":{"locationName":"egressOnlyInternetGatewayId"},"GatewayId":{"locationName":"gatewayId"},"InstanceId":{"locationName":"instanceId"},"InstanceOwnerId":{"locationName":"instanceOwnerId"},"NatGatewayId":{"locationName":"natGatewayId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"Origin":{"locationName":"origin"},"State":{"locationName":"state"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}}},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}},"S6w":{"type":"structure","members":{"DataEncryptionKeyId":{"locationName":"dataEncryptionKeyId"},"Description":{"locationName":"description"},"Encrypted":{"locationName":"encrypted","type":"boolean"},"KmsKeyId":{"locationName":"kmsKeyId"},"OwnerId":{"locationName":"ownerId"},"Progress":{"locationName":"progress"},"SnapshotId":{"locationName":"snapshotId"},"StartTime":{"locationName":"startTime","type":"timestamp"},"State":{"locationName":"status"},"StateMessage":{"locationName":"statusMessage"},"VolumeId":{"locationName":"volumeId"},"VolumeSize":{"locationName":"volumeSize","type":"integer"},"OwnerAlias":{"locationName":"ownerAlias"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S70":{"type":"structure","members":{"Bucket":{"locationName":"bucket"},"Fault":{"shape":"S71","locationName":"fault"},"OwnerId":{"locationName":"ownerId"},"Prefix":{"locationName":"prefix"},"State":{"locationName":"state"}}},"S71":{"type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"S75":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"AvailableIpAddressCount":{"locationName":"availableIpAddressCount","type":"integer"},"CidrBlock":{"locationName":"cidrBlock"},"DefaultForAz":{"locationName":"defaultForAz","type":"boolean"},"MapPublicIpOnLaunch":{"locationName":"mapPublicIpOnLaunch","type":"boolean"},"State":{"locationName":"state"},"SubnetId":{"locationName":"subnetId"},"VpcId":{"locationName":"vpcId"},"AssignIpv6AddressOnCreation":{"locationName":"assignIpv6AddressOnCreation","type":"boolean"},"Ipv6CidrBlockAssociationSet":{"locationName":"ipv6CidrBlockAssociationSet","type":"list","member":{"shape":"S1a","locationName":"item"}},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S79":{"type":"list","member":{}},"S7b":{"type":"list","member":{"locationName":"item","type":"structure","members":{"ResourceType":{"locationName":"resourceType"},"Tags":{"shape":"Sj","locationName":"Tag"}}}},"S7e":{"type":"structure","members":{"Attachments":{"locationName":"attachmentSet","type":"list","member":{"shape":"S1p","locationName":"item"}},"AvailabilityZone":{"locationName":"availabilityZone"},"CreateTime":{"locationName":"createTime","type":"timestamp"},"Encrypted":{"locationName":"encrypted","type":"boolean"},"KmsKeyId":{"locationName":"kmsKeyId"},"Size":{"locationName":"size","type":"integer"},"SnapshotId":{"locationName":"snapshotId"},"State":{"locationName":"status"},"VolumeId":{"locationName":"volumeId"},"Iops":{"locationName":"iops","type":"integer"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VolumeType":{"locationName":"volumeType"}}},"S7l":{"type":"structure","members":{"CreationTimestamp":{"locationName":"creationTimestamp","type":"timestamp"},"PolicyDocument":{"locationName":"policyDocument"},"RouteTableIds":{"shape":"S2z","locationName":"routeTableIdSet"},"ServiceName":{"locationName":"serviceName"},"State":{"locationName":"state"},"VpcEndpointId":{"locationName":"vpcEndpointId"},"VpcId":{"locationName":"vpcId"}}},"S7s":{"type":"structure","members":{"CustomerGatewayConfiguration":{"locationName":"customerGatewayConfiguration"},"CustomerGatewayId":{"locationName":"customerGatewayId"},"State":{"locationName":"state"},"Type":{"locationName":"type"},"VpnConnectionId":{"locationName":"vpnConnectionId"},"VpnGatewayId":{"locationName":"vpnGatewayId"},"Options":{"locationName":"options","type":"structure","members":{"StaticRoutesOnly":{"locationName":"staticRoutesOnly","type":"boolean"}}},"Routes":{"locationName":"routes","type":"list","member":{"locationName":"item","type":"structure","members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"Source":{"locationName":"source"},"State":{"locationName":"state"}}}},"Tags":{"shape":"Sj","locationName":"tagSet"},"VgwTelemetry":{"locationName":"vgwTelemetry","type":"list","member":{"locationName":"item","type":"structure","members":{"AcceptedRouteCount":{"locationName":"acceptedRouteCount","type":"integer"},"LastStatusChange":{"locationName":"lastStatusChange","type":"timestamp"},"OutsideIpAddress":{"locationName":"outsideIpAddress"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"}}}}}},"S84":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"State":{"locationName":"state"},"Type":{"locationName":"type"},"VpcAttachments":{"locationName":"attachments","type":"list","member":{"shape":"S1t","locationName":"item"}},"VpnGatewayId":{"locationName":"vpnGatewayId"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S9c":{"type":"list","member":{"locationName":"Filter","type":"structure","members":{"Name":{},"Values":{"shape":"S2z","locationName":"Value"}}}},"S9w":{"type":"list","member":{"locationName":"InstanceId"}},"Sa4":{"type":"structure","required":["ConversionTaskId","State"],"members":{"ConversionTaskId":{"locationName":"conversionTaskId"},"ExpirationTime":{"locationName":"expirationTime"},"ImportInstance":{"locationName":"importInstance","type":"structure","required":["Volumes"],"members":{"Description":{"locationName":"description"},"InstanceId":{"locationName":"instanceId"},"Platform":{"locationName":"platform"},"Volumes":{"locationName":"volumes","type":"list","member":{"locationName":"item","type":"structure","required":["AvailabilityZone","BytesConverted","Image","Status","Volume"],"members":{"AvailabilityZone":{"locationName":"availabilityZone"},"BytesConverted":{"locationName":"bytesConverted","type":"long"},"Description":{"locationName":"description"},"Image":{"shape":"Sa9","locationName":"image"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"Volume":{"shape":"Saa","locationName":"volume"}}}}}},"ImportVolume":{"locationName":"importVolume","type":"structure","required":["AvailabilityZone","BytesConverted","Image","Volume"],"members":{"AvailabilityZone":{"locationName":"availabilityZone"},"BytesConverted":{"locationName":"bytesConverted","type":"long"},"Description":{"locationName":"description"},"Image":{"shape":"Sa9","locationName":"image"},"Volume":{"shape":"Saa","locationName":"volume"}}},"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"Sa9":{"type":"structure","required":["Format","ImportManifestUrl","Size"],"members":{"Checksum":{"locationName":"checksum"},"Format":{"locationName":"format"},"ImportManifestUrl":{"locationName":"importManifestUrl"},"Size":{"locationName":"size","type":"long"}}},"Saa":{"type":"structure","required":["Id"],"members":{"Id":{"locationName":"id"},"Size":{"locationName":"size","type":"long"}}},"Sb7":{"type":"list","member":{"locationName":"Owner"}},"Sbg":{"type":"list","member":{"locationName":"item","type":"structure","members":{"ProductCodeId":{"locationName":"productCode"},"ProductCodeType":{"locationName":"type"}}}},"Sbt":{"type":"list","member":{"locationName":"item"}},"Sbw":{"type":"list","member":{"locationName":"item"}},"Scd":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Deadline":{"locationName":"deadline","type":"timestamp"},"Resource":{"locationName":"resource"},"UseLongIds":{"locationName":"useLongIds","type":"boolean"}}}},"Sck":{"type":"list","member":{"shape":"S4l","locationName":"item"}},"Scl":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Group":{"locationName":"group"},"UserId":{"locationName":"userId"}}}},"Scz":{"type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"Sd2":{"type":"list","member":{"locationName":"ImportTaskId"}},"Sd6":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{"locationName":"description"},"DeviceName":{"locationName":"deviceName"},"DiskImageSize":{"locationName":"diskImageSize","type":"double"},"Format":{"locationName":"format"},"Progress":{"locationName":"progress"},"SnapshotId":{"locationName":"snapshotId"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"Url":{"locationName":"url"},"UserBucket":{"shape":"Sd8","locationName":"userBucket"}}}},"Sd8":{"type":"structure","members":{"S3Bucket":{"locationName":"s3Bucket"},"S3Key":{"locationName":"s3Key"}}},"Sdd":{"type":"structure","members":{"Description":{"locationName":"description"},"DiskImageSize":{"locationName":"diskImageSize","type":"double"},"Format":{"locationName":"format"},"Progress":{"locationName":"progress"},"SnapshotId":{"locationName":"snapshotId"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"Url":{"locationName":"url"},"UserBucket":{"shape":"Sd8","locationName":"userBucket"}}},"Sdh":{"type":"list","member":{"locationName":"item","type":"structure","members":{"DeviceName":{"locationName":"deviceName"},"Ebs":{"locationName":"ebs","type":"structure","members":{"AttachTime":{"locationName":"attachTime","type":"timestamp"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"Status":{"locationName":"status"},"VolumeId":{"locationName":"volumeId"}}}}}},"Sdk":{"type":"structure","members":{"Value":{"locationName":"value","type":"boolean"}}},"Sds":{"type":"structure","members":{"Code":{"locationName":"code","type":"integer"},"Name":{"locationName":"name"}}},"Sdu":{"type":"structure","members":{"Details":{"locationName":"details","type":"list","member":{"locationName":"item","type":"structure","members":{"ImpairedSince":{"locationName":"impairedSince","type":"timestamp"},"Name":{"locationName":"name"},"Status":{"locationName":"status"}}}},"Status":{"locationName":"status"}}},"Se3":{"type":"structure","members":{"Groups":{"shape":"S5w","locationName":"groupSet"},"Instances":{"locationName":"instancesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AmiLaunchIndex":{"locationName":"amiLaunchIndex","type":"integer"},"ImageId":{"locationName":"imageId"},"InstanceId":{"locationName":"instanceId"},"InstanceType":{"locationName":"instanceType"},"KernelId":{"locationName":"kernelId"},"KeyName":{"locationName":"keyName"},"LaunchTime":{"locationName":"launchTime","type":"timestamp"},"Monitoring":{"shape":"Se7","locationName":"monitoring"},"Placement":{"shape":"Se9","locationName":"placement"},"Platform":{"locationName":"platform"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"PublicDnsName":{"locationName":"dnsName"},"PublicIpAddress":{"locationName":"ipAddress"},"RamdiskId":{"locationName":"ramdiskId"},"State":{"shape":"Sds","locationName":"instanceState"},"StateTransitionReason":{"locationName":"reason"},"SubnetId":{"locationName":"subnetId"},"VpcId":{"locationName":"vpcId"},"Architecture":{"locationName":"architecture"},"BlockDeviceMappings":{"shape":"Sdh","locationName":"blockDeviceMapping"},"ClientToken":{"locationName":"clientToken"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"EnaSupport":{"locationName":"enaSupport","type":"boolean"},"Hypervisor":{"locationName":"hypervisor"},"IamInstanceProfile":{"shape":"S14","locationName":"iamInstanceProfile"},"InstanceLifecycle":{"locationName":"instanceLifecycle"},"ElasticGpuAssociations":{"locationName":"elasticGpuAssociationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ElasticGpuId":{"locationName":"elasticGpuId"},"ElasticGpuAssociationId":{"locationName":"elasticGpuAssociationId"},"ElasticGpuAssociationState":{"locationName":"elasticGpuAssociationState"},"ElasticGpuAssociationTime":{"locationName":"elasticGpuAssociationTime"}}}},"NetworkInterfaces":{"locationName":"networkInterfaceSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Association":{"shape":"Sef","locationName":"association"},"Attachment":{"locationName":"attachment","type":"structure","members":{"AttachTime":{"locationName":"attachTime","type":"timestamp"},"AttachmentId":{"locationName":"attachmentId"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"DeviceIndex":{"locationName":"deviceIndex","type":"integer"},"Status":{"locationName":"status"}}},"Description":{"locationName":"description"},"Groups":{"shape":"S5w","locationName":"groupSet"},"Ipv6Addresses":{"shape":"S5o","locationName":"ipv6AddressesSet"},"MacAddress":{"locationName":"macAddress"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"OwnerId":{"locationName":"ownerId"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"PrivateIpAddresses":{"locationName":"privateIpAddressesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Association":{"shape":"Sef","locationName":"association"},"Primary":{"locationName":"primary","type":"boolean"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}}},"SourceDestCheck":{"locationName":"sourceDestCheck","type":"boolean"},"Status":{"locationName":"status"},"SubnetId":{"locationName":"subnetId"},"VpcId":{"locationName":"vpcId"}}}},"RootDeviceName":{"locationName":"rootDeviceName"},"RootDeviceType":{"locationName":"rootDeviceType"},"SecurityGroups":{"shape":"S5w","locationName":"groupSet"},"SourceDestCheck":{"locationName":"sourceDestCheck","type":"boolean"},"SpotInstanceRequestId":{"locationName":"spotInstanceRequestId"},"SriovNetSupport":{"locationName":"sriovNetSupport"},"StateReason":{"shape":"Scz","locationName":"stateReason"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VirtualizationType":{"locationName":"virtualizationType"}}}},"OwnerId":{"locationName":"ownerId"},"RequesterId":{"locationName":"requesterId"},"ReservationId":{"locationName":"reservationId"}}},"Se7":{"type":"structure","members":{"State":{"locationName":"state"}}},"Se9":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Affinity":{"locationName":"affinity"},"GroupName":{"locationName":"groupName"},"HostId":{"locationName":"hostId"},"Tenancy":{"locationName":"tenancy"},"SpreadDomain":{"locationName":"spreadDomain"}}},"Sef":{"type":"structure","members":{"IpOwnerId":{"locationName":"ipOwnerId"},"PublicDnsName":{"locationName":"publicDnsName"},"PublicIp":{"locationName":"publicIp"}}},"Sfu":{"type":"list","member":{"locationName":"ReservedInstancesId"}},"Sg2":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Amount":{"locationName":"amount","type":"double"},"Frequency":{"locationName":"frequency"}}}},"Sgf":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"InstanceType":{"locationName":"instanceType"},"Platform":{"locationName":"platform"},"Scope":{"locationName":"scope"}}},"Sgz":{"type":"structure","members":{"Frequency":{"locationName":"frequency"},"Interval":{"locationName":"interval","type":"integer"},"OccurrenceDaySet":{"locationName":"occurrenceDaySet","type":"list","member":{"locationName":"item","type":"integer"}},"OccurrenceRelativeToEnd":{"locationName":"occurrenceRelativeToEnd","type":"boolean"},"OccurrenceUnit":{"locationName":"occurrenceUnit"}}},"Sh6":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"CreateDate":{"locationName":"createDate","type":"timestamp"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"InstanceType":{"locationName":"instanceType"},"NetworkPlatform":{"locationName":"networkPlatform"},"NextSlotStartTime":{"locationName":"nextSlotStartTime","type":"timestamp"},"Platform":{"locationName":"platform"},"PreviousSlotEndTime":{"locationName":"previousSlotEndTime","type":"timestamp"},"Recurrence":{"shape":"Sgz","locationName":"recurrence"},"ScheduledInstanceId":{"locationName":"scheduledInstanceId"},"SlotDurationInHours":{"locationName":"slotDurationInHours","type":"integer"},"TermEndDate":{"locationName":"termEndDate","type":"timestamp"},"TermStartDate":{"locationName":"termStartDate","type":"timestamp"},"TotalScheduledInstanceHours":{"locationName":"totalScheduledInstanceHours","type":"integer"}}},"Shd":{"type":"list","member":{"locationName":"GroupName"}},"Shk":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Group":{"locationName":"group"},"UserId":{"locationName":"userId"}}}},"Si9":{"type":"structure","required":["IamFleetRole","LaunchSpecifications","SpotPrice","TargetCapacity"],"members":{"AllocationStrategy":{"locationName":"allocationStrategy"},"ClientToken":{"locationName":"clientToken"},"ExcessCapacityTerminationPolicy":{"locationName":"excessCapacityTerminationPolicy"},"FulfilledCapacity":{"locationName":"fulfilledCapacity","type":"double"},"IamFleetRole":{"locationName":"iamFleetRole"},"LaunchSpecifications":{"locationName":"launchSpecifications","type":"list","member":{"locationName":"item","type":"structure","members":{"SecurityGroups":{"shape":"S5w","locationName":"groupSet"},"AddressingType":{"locationName":"addressingType"},"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"IamInstanceProfile":{"shape":"S11","locationName":"iamInstanceProfile"},"ImageId":{"locationName":"imageId"},"InstanceType":{"locationName":"instanceType"},"KernelId":{"locationName":"kernelId"},"KeyName":{"locationName":"keyName"},"Monitoring":{"locationName":"monitoring","type":"structure","members":{"Enabled":{"locationName":"enabled","type":"boolean"}}},"NetworkInterfaces":{"shape":"Sif","locationName":"networkInterfaceSet"},"Placement":{"shape":"Sih","locationName":"placement"},"RamdiskId":{"locationName":"ramdiskId"},"SpotPrice":{"locationName":"spotPrice"},"SubnetId":{"locationName":"subnetId"},"UserData":{"locationName":"userData"},"WeightedCapacity":{"locationName":"weightedCapacity","type":"double"},"TagSpecifications":{"locationName":"tagSpecificationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ResourceType":{"locationName":"resourceType"},"Tags":{"shape":"Sj","locationName":"tag"}}}}}}},"SpotPrice":{"locationName":"spotPrice"},"TargetCapacity":{"locationName":"targetCapacity","type":"integer"},"TerminateInstancesWithExpiration":{"locationName":"terminateInstancesWithExpiration","type":"boolean"},"Type":{"locationName":"type"},"ValidFrom":{"locationName":"validFrom","type":"timestamp"},"ValidUntil":{"locationName":"validUntil","type":"timestamp"},"ReplaceUnhealthyInstances":{"locationName":"replaceUnhealthyInstances","type":"boolean"}}},"Sif":{"type":"list","member":{"locationName":"item","type":"structure","members":{"AssociatePublicIpAddress":{"locationName":"associatePublicIpAddress","type":"boolean"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"Description":{"locationName":"description"},"DeviceIndex":{"locationName":"deviceIndex","type":"integer"},"Groups":{"shape":"S5n","locationName":"SecurityGroupId"},"Ipv6AddressCount":{"locationName":"ipv6AddressCount","type":"integer"},"Ipv6Addresses":{"shape":"S5o","locationName":"ipv6AddressesSet","queryName":"Ipv6Addresses"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"PrivateIpAddresses":{"shape":"S5q","locationName":"privateIpAddressesSet","queryName":"PrivateIpAddresses"},"SecondaryPrivateIpAddressCount":{"locationName":"secondaryPrivateIpAddressCount","type":"integer"},"SubnetId":{"locationName":"subnetId"}}}},"Sih":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"GroupName":{"locationName":"groupName"},"Tenancy":{"locationName":"tenancy"}}},"Sin":{"type":"list","member":{"locationName":"item","type":"structure","members":{"ActualBlockHourlyPrice":{"locationName":"actualBlockHourlyPrice"},"AvailabilityZoneGroup":{"locationName":"availabilityZoneGroup"},"BlockDurationMinutes":{"locationName":"blockDurationMinutes","type":"integer"},"CreateTime":{"locationName":"createTime","type":"timestamp"},"Fault":{"shape":"S71","locationName":"fault"},"InstanceId":{"locationName":"instanceId"},"LaunchGroup":{"locationName":"launchGroup"},"LaunchSpecification":{"locationName":"launchSpecification","type":"structure","members":{"UserData":{"locationName":"userData"},"SecurityGroups":{"shape":"S5w","locationName":"groupSet"},"AddressingType":{"locationName":"addressingType"},"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"IamInstanceProfile":{"shape":"S11","locationName":"iamInstanceProfile"},"ImageId":{"locationName":"imageId"},"InstanceType":{"locationName":"instanceType"},"KernelId":{"locationName":"kernelId"},"KeyName":{"locationName":"keyName"},"NetworkInterfaces":{"shape":"Sif","locationName":"networkInterfaceSet"},"Placement":{"shape":"Sih","locationName":"placement"},"RamdiskId":{"locationName":"ramdiskId"},"SubnetId":{"locationName":"subnetId"},"Monitoring":{"shape":"Siq","locationName":"monitoring"}}},"LaunchedAvailabilityZone":{"locationName":"launchedAvailabilityZone"},"ProductDescription":{"locationName":"productDescription"},"SpotInstanceRequestId":{"locationName":"spotInstanceRequestId"},"SpotPrice":{"locationName":"spotPrice"},"State":{"locationName":"state"},"Status":{"locationName":"status","type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"},"UpdateTime":{"locationName":"updateTime","type":"timestamp"}}},"Tags":{"shape":"Sj","locationName":"tagSet"},"Type":{"locationName":"type"},"ValidFrom":{"locationName":"validFrom","type":"timestamp"},"ValidUntil":{"locationName":"validUntil","type":"timestamp"}}}},"Siq":{"type":"structure","required":["Enabled"],"members":{"Enabled":{"locationName":"enabled","type":"boolean"}}},"Sj4":{"type":"list","member":{"locationName":"item","type":"structure","members":{"FromPort":{"locationName":"fromPort","type":"integer"},"IpProtocol":{"locationName":"ipProtocol"},"IpRanges":{"locationName":"ipRanges","type":"list","member":{"locationName":"item"}},"PrefixListIds":{"locationName":"prefixListIds","type":"list","member":{"locationName":"item"}},"ToPort":{"locationName":"toPort","type":"integer"},"UserIdGroupPairs":{"locationName":"groups","type":"list","member":{"shape":"S25","locationName":"item"}}}}},"Sjl":{"type":"list","member":{"locationName":"VolumeId"}},"Sk4":{"type":"structure","members":{"VolumeId":{"locationName":"volumeId"},"ModificationState":{"locationName":"modificationState"},"StatusMessage":{"locationName":"statusMessage"},"TargetSize":{"locationName":"targetSize","type":"integer"},"TargetIops":{"locationName":"targetIops","type":"integer"},"TargetVolumeType":{"locationName":"targetVolumeType"},"OriginalSize":{"locationName":"originalSize","type":"integer"},"OriginalIops":{"locationName":"originalIops","type":"integer"},"OriginalVolumeType":{"locationName":"originalVolumeType"},"Progress":{"locationName":"progress","type":"long"},"StartTime":{"locationName":"startTime","type":"timestamp"},"EndTime":{"locationName":"endTime","type":"timestamp"}}},"Ska":{"type":"list","member":{"locationName":"VpcId"}},"Slw":{"type":"list","member":{"locationName":"item"}},"Sly":{"type":"list","member":{"type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"HostIdSet":{"shape":"Sbt","locationName":"hostIdSet"},"HostReservationId":{"locationName":"hostReservationId"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceFamily":{"locationName":"instanceFamily"},"PaymentOption":{"locationName":"paymentOption"},"UpfrontPrice":{"locationName":"upfrontPrice"}}}},"Sm4":{"type":"structure","members":{"HourlyPrice":{"locationName":"hourlyPrice"},"RemainingTotalValue":{"locationName":"remainingTotalValue"},"RemainingUpfrontValue":{"locationName":"remainingUpfrontValue"}}},"Smb":{"type":"structure","members":{"Comment":{},"UploadEnd":{"type":"timestamp"},"UploadSize":{"type":"double"},"UploadStart":{"type":"timestamp"}}},"Sme":{"type":"structure","members":{"S3Bucket":{},"S3Key":{}}},"Smj":{"type":"structure","required":["Bytes","Format","ImportManifestUrl"],"members":{"Bytes":{"locationName":"bytes","type":"long"},"Format":{"locationName":"format"},"ImportManifestUrl":{"locationName":"importManifestUrl"}}},"Smk":{"type":"structure","required":["Size"],"members":{"Size":{"locationName":"size","type":"long"}}},"Smm":{"type":"list","member":{"locationName":"SecurityGroup"}},"Smz":{"type":"list","member":{"shape":"S4e","locationName":"item"}},"Sn7":{"type":"list","member":{"locationName":"UserId"}},"Sny":{"type":"structure","members":{"AllowDnsResolutionFromRemoteVpc":{"type":"boolean"},"AllowEgressFromLocalClassicLinkToRemoteVpc":{"type":"boolean"},"AllowEgressFromLocalVpcToRemoteClassicLink":{"type":"boolean"}}},"So0":{"type":"structure","members":{"AllowDnsResolutionFromRemoteVpc":{"locationName":"allowDnsResolutionFromRemoteVpc","type":"boolean"},"AllowEgressFromLocalClassicLinkToRemoteVpc":{"locationName":"allowEgressFromLocalClassicLinkToRemoteVpc","type":"boolean"},"AllowEgressFromLocalVpcToRemoteClassicLink":{"locationName":"allowEgressFromLocalVpcToRemoteClassicLink","type":"boolean"}}},"So3":{"type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"Monitoring":{"shape":"Se7","locationName":"monitoring"}}}},"Spt":{"type":"list","member":{"locationName":"SecurityGroupId"}},"Sq4":{"type":"list","member":{"locationName":"item","type":"structure","members":{"CurrentState":{"shape":"Sds","locationName":"currentState"},"InstanceId":{"locationName":"instanceId"},"PreviousState":{"shape":"Sds","locationName":"previousState"}}}}}}
+	module.exports = {"version":"2.0","metadata":{"apiVersion":"2016-11-15","endpointPrefix":"ec2","protocol":"ec2","serviceAbbreviation":"Amazon EC2","serviceFullName":"Amazon Elastic Compute Cloud","signatureVersion":"v4","uid":"ec2-2016-11-15","xmlNamespace":"http://ec2.amazonaws.com/doc/2016-11-15"},"operations":{"AcceptReservedInstancesExchangeQuote":{"input":{"type":"structure","required":["ReservedInstanceIds"],"members":{"DryRun":{"type":"boolean"},"ReservedInstanceIds":{"shape":"S3","locationName":"ReservedInstanceId"},"TargetConfigurations":{"shape":"S5","locationName":"TargetConfiguration"}}},"output":{"type":"structure","members":{"ExchangeId":{"locationName":"exchangeId"}}}},"AcceptVpcPeeringConnection":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"VpcPeeringConnection":{"shape":"Sb","locationName":"vpcPeeringConnection"}}}},"AllocateAddress":{"input":{"type":"structure","members":{"Domain":{},"Address":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"PublicIp":{"locationName":"publicIp"},"AllocationId":{"locationName":"allocationId"},"Domain":{"locationName":"domain"}}}},"AllocateHosts":{"input":{"type":"structure","required":["AvailabilityZone","InstanceType","Quantity"],"members":{"AutoPlacement":{"locationName":"autoPlacement"},"AvailabilityZone":{"locationName":"availabilityZone"},"ClientToken":{"locationName":"clientToken"},"InstanceType":{"locationName":"instanceType"},"Quantity":{"locationName":"quantity","type":"integer"}}},"output":{"type":"structure","members":{"HostIds":{"shape":"Sr","locationName":"hostIdSet"}}}},"AssignIpv6Addresses":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"Ipv6AddressCount":{"locationName":"ipv6AddressCount","type":"integer"},"Ipv6Addresses":{"shape":"St","locationName":"ipv6Addresses"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}},"output":{"type":"structure","members":{"AssignedIpv6Addresses":{"shape":"St","locationName":"assignedIpv6Addresses"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}}},"AssignPrivateIpAddresses":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"AllowReassignment":{"locationName":"allowReassignment","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIpAddresses":{"shape":"Sw","locationName":"privateIpAddress"},"SecondaryPrivateIpAddressCount":{"locationName":"secondaryPrivateIpAddressCount","type":"integer"}}}},"AssociateAddress":{"input":{"type":"structure","members":{"AllocationId":{},"InstanceId":{},"PublicIp":{},"AllowReassociation":{"locationName":"allowReassociation","type":"boolean"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}},"output":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"}}}},"AssociateDhcpOptions":{"input":{"type":"structure","required":["DhcpOptionsId","VpcId"],"members":{"DhcpOptionsId":{},"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"AssociateIamInstanceProfile":{"input":{"type":"structure","required":["IamInstanceProfile","InstanceId"],"members":{"IamInstanceProfile":{"shape":"S11"},"InstanceId":{}}},"output":{"type":"structure","members":{"IamInstanceProfileAssociation":{"shape":"S13","locationName":"iamInstanceProfileAssociation"}}}},"AssociateRouteTable":{"input":{"type":"structure","required":["RouteTableId","SubnetId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableId":{"locationName":"routeTableId"},"SubnetId":{"locationName":"subnetId"}}},"output":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"}}}},"AssociateSubnetCidrBlock":{"input":{"type":"structure","required":["Ipv6CidrBlock","SubnetId"],"members":{"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"SubnetId":{"locationName":"subnetId"}}},"output":{"type":"structure","members":{"Ipv6CidrBlockAssociation":{"shape":"S1a","locationName":"ipv6CidrBlockAssociation"},"SubnetId":{"locationName":"subnetId"}}}},"AssociateVpcCidrBlock":{"input":{"type":"structure","required":["VpcId"],"members":{"AmazonProvidedIpv6CidrBlock":{"locationName":"amazonProvidedIpv6CidrBlock","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Ipv6CidrBlockAssociation":{"shape":"S1f","locationName":"ipv6CidrBlockAssociation"},"VpcId":{"locationName":"vpcId"}}}},"AttachClassicLinkVpc":{"input":{"type":"structure","required":["Groups","InstanceId","VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Groups":{"shape":"S1j","locationName":"SecurityGroupId"},"InstanceId":{"locationName":"instanceId"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"AttachInternetGateway":{"input":{"type":"structure","required":["InternetGatewayId","VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"InternetGatewayId":{"locationName":"internetGatewayId"},"VpcId":{"locationName":"vpcId"}}}},"AttachNetworkInterface":{"input":{"type":"structure","required":["DeviceIndex","InstanceId","NetworkInterfaceId"],"members":{"DeviceIndex":{"locationName":"deviceIndex","type":"integer"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}},"output":{"type":"structure","members":{"AttachmentId":{"locationName":"attachmentId"}}}},"AttachVolume":{"input":{"type":"structure","required":["Device","InstanceId","VolumeId"],"members":{"Device":{},"InstanceId":{},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"shape":"S1p"}},"AttachVpnGateway":{"input":{"type":"structure","required":["VpcId","VpnGatewayId"],"members":{"VpcId":{},"VpnGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpcAttachment":{"shape":"S1t","locationName":"attachment"}}}},"AuthorizeSecurityGroupEgress":{"input":{"type":"structure","required":["GroupId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupId":{"locationName":"groupId"},"IpPermissions":{"shape":"S1w","locationName":"ipPermissions"},"CidrIp":{"locationName":"cidrIp"},"FromPort":{"locationName":"fromPort","type":"integer"},"IpProtocol":{"locationName":"ipProtocol"},"ToPort":{"locationName":"toPort","type":"integer"},"SourceSecurityGroupName":{"locationName":"sourceSecurityGroupName"},"SourceSecurityGroupOwnerId":{"locationName":"sourceSecurityGroupOwnerId"}}}},"AuthorizeSecurityGroupIngress":{"input":{"type":"structure","members":{"CidrIp":{},"FromPort":{"type":"integer"},"GroupId":{},"GroupName":{},"IpPermissions":{"shape":"S1w"},"IpProtocol":{},"SourceSecurityGroupName":{},"SourceSecurityGroupOwnerId":{},"ToPort":{"type":"integer"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"BundleInstance":{"input":{"type":"structure","required":["InstanceId","Storage"],"members":{"InstanceId":{},"Storage":{"shape":"S28"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"BundleTask":{"shape":"S2c","locationName":"bundleInstanceTask"}}}},"CancelBundleTask":{"input":{"type":"structure","required":["BundleId"],"members":{"BundleId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"BundleTask":{"shape":"S2c","locationName":"bundleInstanceTask"}}}},"CancelConversionTask":{"input":{"type":"structure","required":["ConversionTaskId"],"members":{"ConversionTaskId":{"locationName":"conversionTaskId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"ReasonMessage":{"locationName":"reasonMessage"}}}},"CancelExportTask":{"input":{"type":"structure","required":["ExportTaskId"],"members":{"ExportTaskId":{"locationName":"exportTaskId"}}}},"CancelImportTask":{"input":{"type":"structure","members":{"CancelReason":{},"DryRun":{"type":"boolean"},"ImportTaskId":{}}},"output":{"type":"structure","members":{"ImportTaskId":{"locationName":"importTaskId"},"PreviousState":{"locationName":"previousState"},"State":{"locationName":"state"}}}},"CancelReservedInstancesListing":{"input":{"type":"structure","required":["ReservedInstancesListingId"],"members":{"ReservedInstancesListingId":{"locationName":"reservedInstancesListingId"}}},"output":{"type":"structure","members":{"ReservedInstancesListings":{"shape":"S2n","locationName":"reservedInstancesListingsSet"}}}},"CancelSpotFleetRequests":{"input":{"type":"structure","required":["SpotFleetRequestIds","TerminateInstances"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"SpotFleetRequestIds":{"shape":"S2z","locationName":"spotFleetRequestId"},"TerminateInstances":{"locationName":"terminateInstances","type":"boolean"}}},"output":{"type":"structure","members":{"SuccessfulFleetRequests":{"locationName":"successfulFleetRequestSet","type":"list","member":{"locationName":"item","type":"structure","required":["CurrentSpotFleetRequestState","PreviousSpotFleetRequestState","SpotFleetRequestId"],"members":{"CurrentSpotFleetRequestState":{"locationName":"currentSpotFleetRequestState"},"PreviousSpotFleetRequestState":{"locationName":"previousSpotFleetRequestState"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}}},"UnsuccessfulFleetRequests":{"locationName":"unsuccessfulFleetRequestSet","type":"list","member":{"locationName":"item","type":"structure","required":["Error","SpotFleetRequestId"],"members":{"Error":{"locationName":"error","type":"structure","required":["Code","Message"],"members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}}}}}},"CancelSpotInstanceRequests":{"input":{"type":"structure","required":["SpotInstanceRequestIds"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"SpotInstanceRequestIds":{"shape":"S39","locationName":"SpotInstanceRequestId"}}},"output":{"type":"structure","members":{"CancelledSpotInstanceRequests":{"locationName":"spotInstanceRequestSet","type":"list","member":{"locationName":"item","type":"structure","members":{"SpotInstanceRequestId":{"locationName":"spotInstanceRequestId"},"State":{"locationName":"state"}}}}}}},"ConfirmProductInstance":{"input":{"type":"structure","required":["InstanceId","ProductCode"],"members":{"InstanceId":{},"ProductCode":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"OwnerId":{"locationName":"ownerId"},"Return":{"locationName":"return","type":"boolean"}}}},"CopyImage":{"input":{"type":"structure","required":["Name","SourceImageId","SourceRegion"],"members":{"ClientToken":{},"Description":{},"Encrypted":{"locationName":"encrypted","type":"boolean"},"KmsKeyId":{"locationName":"kmsKeyId"},"Name":{},"SourceImageId":{},"SourceRegion":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"ImageId":{"locationName":"imageId"}}}},"CopySnapshot":{"input":{"type":"structure","required":["SourceRegion","SourceSnapshotId"],"members":{"Description":{},"DestinationRegion":{"locationName":"destinationRegion"},"Encrypted":{"locationName":"encrypted","type":"boolean"},"KmsKeyId":{"locationName":"kmsKeyId"},"PresignedUrl":{"locationName":"presignedUrl"},"SourceRegion":{},"SourceSnapshotId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"SnapshotId":{"locationName":"snapshotId"}}}},"CreateCustomerGateway":{"input":{"type":"structure","required":["BgpAsn","PublicIp","Type"],"members":{"BgpAsn":{"type":"integer"},"PublicIp":{"locationName":"IpAddress"},"Type":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"CustomerGateway":{"shape":"S3n","locationName":"customerGateway"}}}},"CreateDefaultVpc":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"}}},"output":{"type":"structure","members":{"Vpc":{"shape":"S3q","locationName":"vpc"}}}},"CreateDhcpOptions":{"input":{"type":"structure","required":["DhcpConfigurations"],"members":{"DhcpConfigurations":{"locationName":"dhcpConfiguration","type":"list","member":{"locationName":"item","type":"structure","members":{"Key":{"locationName":"key"},"Values":{"shape":"S2z","locationName":"Value"}}}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"DhcpOptions":{"shape":"S3y","locationName":"dhcpOptions"}}}},"CreateEgressOnlyInternetGateway":{"input":{"type":"structure","required":["VpcId"],"members":{"ClientToken":{},"DryRun":{"type":"boolean"},"VpcId":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"EgressOnlyInternetGateway":{"shape":"S45","locationName":"egressOnlyInternetGateway"}}}},"CreateFlowLogs":{"input":{"type":"structure","required":["DeliverLogsPermissionArn","LogGroupName","ResourceIds","ResourceType","TrafficType"],"members":{"ClientToken":{},"DeliverLogsPermissionArn":{},"LogGroupName":{},"ResourceIds":{"shape":"S2z","locationName":"ResourceId"},"ResourceType":{},"TrafficType":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"FlowLogIds":{"shape":"S2z","locationName":"flowLogIdSet"},"Unsuccessful":{"shape":"S4d","locationName":"unsuccessful"}}}},"CreateFpgaImage":{"input":{"type":"structure","required":["InputStorageLocation"],"members":{"DryRun":{"type":"boolean"},"InputStorageLocation":{"shape":"S4h"},"LogsStorageLocation":{"shape":"S4h"},"Description":{},"Name":{},"ClientToken":{}}},"output":{"type":"structure","members":{"FpgaImageId":{"locationName":"fpgaImageId"},"FpgaImageGlobalId":{"locationName":"fpgaImageGlobalId"}}}},"CreateImage":{"input":{"type":"structure","required":["InstanceId","Name"],"members":{"BlockDeviceMappings":{"shape":"S4k","locationName":"blockDeviceMapping"},"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"},"Name":{"locationName":"name"},"NoReboot":{"locationName":"noReboot","type":"boolean"}}},"output":{"type":"structure","members":{"ImageId":{"locationName":"imageId"}}}},"CreateInstanceExportTask":{"input":{"type":"structure","required":["InstanceId"],"members":{"Description":{"locationName":"description"},"ExportToS3Task":{"locationName":"exportToS3","type":"structure","members":{"ContainerFormat":{"locationName":"containerFormat"},"DiskImageFormat":{"locationName":"diskImageFormat"},"S3Bucket":{"locationName":"s3Bucket"},"S3Prefix":{"locationName":"s3Prefix"}}},"InstanceId":{"locationName":"instanceId"},"TargetEnvironment":{"locationName":"targetEnvironment"}}},"output":{"type":"structure","members":{"ExportTask":{"shape":"S4v","locationName":"exportTask"}}}},"CreateInternetGateway":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InternetGateway":{"shape":"S51","locationName":"internetGateway"}}}},"CreateKeyPair":{"input":{"type":"structure","required":["KeyName"],"members":{"KeyName":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"KeyFingerprint":{"locationName":"keyFingerprint"},"KeyMaterial":{"locationName":"keyMaterial"},"KeyName":{"locationName":"keyName"}}}},"CreateNatGateway":{"input":{"type":"structure","required":["AllocationId","SubnetId"],"members":{"AllocationId":{},"ClientToken":{},"SubnetId":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"NatGateway":{"shape":"S56","locationName":"natGateway"}}}},"CreateNetworkAcl":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"NetworkAcl":{"shape":"S5d","locationName":"networkAcl"}}}},"CreateNetworkAclEntry":{"input":{"type":"structure","required":["Egress","NetworkAclId","Protocol","RuleAction","RuleNumber"],"members":{"CidrBlock":{"locationName":"cidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Egress":{"locationName":"egress","type":"boolean"},"IcmpTypeCode":{"shape":"S5i","locationName":"Icmp"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"NetworkAclId":{"locationName":"networkAclId"},"PortRange":{"shape":"S5j","locationName":"portRange"},"Protocol":{"locationName":"protocol"},"RuleAction":{"locationName":"ruleAction"},"RuleNumber":{"locationName":"ruleNumber","type":"integer"}}}},"CreateNetworkInterface":{"input":{"type":"structure","required":["SubnetId"],"members":{"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Groups":{"shape":"S5n","locationName":"SecurityGroupId"},"Ipv6AddressCount":{"locationName":"ipv6AddressCount","type":"integer"},"Ipv6Addresses":{"shape":"S5o","locationName":"ipv6Addresses"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"PrivateIpAddresses":{"shape":"S5q","locationName":"privateIpAddresses"},"SecondaryPrivateIpAddressCount":{"locationName":"secondaryPrivateIpAddressCount","type":"integer"},"SubnetId":{"locationName":"subnetId"}}},"output":{"type":"structure","members":{"NetworkInterface":{"shape":"S5t","locationName":"networkInterface"}}}},"CreateNetworkInterfacePermission":{"input":{"type":"structure","required":["NetworkInterfaceId","Permission"],"members":{"NetworkInterfaceId":{},"AwsAccountId":{},"AwsService":{},"Permission":{},"DryRun":{"type":"boolean"}}},"output":{"type":"structure","members":{"InterfacePermission":{"shape":"S67","locationName":"interfacePermission"}}}},"CreatePlacementGroup":{"input":{"type":"structure","required":["GroupName","Strategy"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupName":{"locationName":"groupName"},"Strategy":{"locationName":"strategy"}}}},"CreateReservedInstancesListing":{"input":{"type":"structure","required":["ClientToken","InstanceCount","PriceSchedules","ReservedInstancesId"],"members":{"ClientToken":{"locationName":"clientToken"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"PriceSchedules":{"locationName":"priceSchedules","type":"list","member":{"locationName":"item","type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"Price":{"locationName":"price","type":"double"},"Term":{"locationName":"term","type":"long"}}}},"ReservedInstancesId":{"locationName":"reservedInstancesId"}}},"output":{"type":"structure","members":{"ReservedInstancesListings":{"shape":"S2n","locationName":"reservedInstancesListingsSet"}}}},"CreateRoute":{"input":{"type":"structure","required":["RouteTableId"],"members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"DestinationIpv6CidrBlock":{"locationName":"destinationIpv6CidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EgressOnlyInternetGatewayId":{"locationName":"egressOnlyInternetGatewayId"},"GatewayId":{"locationName":"gatewayId"},"InstanceId":{"locationName":"instanceId"},"NatGatewayId":{"locationName":"natGatewayId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"RouteTableId":{"locationName":"routeTableId"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"CreateRouteTable":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"RouteTable":{"shape":"S6k","locationName":"routeTable"}}}},"CreateSecurityGroup":{"input":{"type":"structure","required":["Description","GroupName"],"members":{"Description":{"locationName":"GroupDescription"},"GroupName":{},"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"GroupId":{"locationName":"groupId"}}}},"CreateSnapshot":{"input":{"type":"structure","required":["VolumeId"],"members":{"Description":{},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"shape":"S6w"}},"CreateSpotDatafeedSubscription":{"input":{"type":"structure","required":["Bucket"],"members":{"Bucket":{"locationName":"bucket"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Prefix":{"locationName":"prefix"}}},"output":{"type":"structure","members":{"SpotDatafeedSubscription":{"shape":"S70","locationName":"spotDatafeedSubscription"}}}},"CreateSubnet":{"input":{"type":"structure","required":["CidrBlock","VpcId"],"members":{"AvailabilityZone":{},"CidrBlock":{},"Ipv6CidrBlock":{},"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Subnet":{"shape":"S75","locationName":"subnet"}}}},"CreateTags":{"input":{"type":"structure","required":["Resources","Tags"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Resources":{"shape":"S79","locationName":"ResourceId"},"Tags":{"shape":"Sj","locationName":"Tag"}}}},"CreateVolume":{"input":{"type":"structure","required":["AvailabilityZone"],"members":{"AvailabilityZone":{},"Encrypted":{"locationName":"encrypted","type":"boolean"},"Iops":{"type":"integer"},"KmsKeyId":{},"Size":{"type":"integer"},"SnapshotId":{},"VolumeType":{},"DryRun":{"locationName":"dryRun","type":"boolean"},"TagSpecifications":{"shape":"S7b","locationName":"TagSpecification"}}},"output":{"shape":"S7e"}},"CreateVpc":{"input":{"type":"structure","required":["CidrBlock"],"members":{"CidrBlock":{},"AmazonProvidedIpv6CidrBlock":{"locationName":"amazonProvidedIpv6CidrBlock","type":"boolean"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceTenancy":{"locationName":"instanceTenancy"}}},"output":{"type":"structure","members":{"Vpc":{"shape":"S3q","locationName":"vpc"}}}},"CreateVpcEndpoint":{"input":{"type":"structure","required":["ServiceName","VpcId"],"members":{"ClientToken":{},"DryRun":{"type":"boolean"},"PolicyDocument":{},"RouteTableIds":{"shape":"S2z","locationName":"RouteTableId"},"ServiceName":{},"VpcId":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"VpcEndpoint":{"shape":"S7l","locationName":"vpcEndpoint"}}}},"CreateVpcPeeringConnection":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"PeerOwnerId":{"locationName":"peerOwnerId"},"PeerVpcId":{"locationName":"peerVpcId"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"VpcPeeringConnection":{"shape":"Sb","locationName":"vpcPeeringConnection"}}}},"CreateVpnConnection":{"input":{"type":"structure","required":["CustomerGatewayId","Type","VpnGatewayId"],"members":{"CustomerGatewayId":{},"Type":{},"VpnGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"},"Options":{"locationName":"options","type":"structure","members":{"StaticRoutesOnly":{"locationName":"staticRoutesOnly","type":"boolean"}}}}},"output":{"type":"structure","members":{"VpnConnection":{"shape":"S7s","locationName":"vpnConnection"}}}},"CreateVpnConnectionRoute":{"input":{"type":"structure","required":["DestinationCidrBlock","VpnConnectionId"],"members":{"DestinationCidrBlock":{},"VpnConnectionId":{}}}},"CreateVpnGateway":{"input":{"type":"structure","required":["Type"],"members":{"AvailabilityZone":{},"Type":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpnGateway":{"shape":"S84","locationName":"vpnGateway"}}}},"DeleteCustomerGateway":{"input":{"type":"structure","required":["CustomerGatewayId"],"members":{"CustomerGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteDhcpOptions":{"input":{"type":"structure","required":["DhcpOptionsId"],"members":{"DhcpOptionsId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteEgressOnlyInternetGateway":{"input":{"type":"structure","required":["EgressOnlyInternetGatewayId"],"members":{"DryRun":{"type":"boolean"},"EgressOnlyInternetGatewayId":{}}},"output":{"type":"structure","members":{"ReturnCode":{"locationName":"returnCode","type":"boolean"}}}},"DeleteFlowLogs":{"input":{"type":"structure","required":["FlowLogIds"],"members":{"FlowLogIds":{"shape":"S2z","locationName":"FlowLogId"}}},"output":{"type":"structure","members":{"Unsuccessful":{"shape":"S4d","locationName":"unsuccessful"}}}},"DeleteInternetGateway":{"input":{"type":"structure","required":["InternetGatewayId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"InternetGatewayId":{"locationName":"internetGatewayId"}}}},"DeleteKeyPair":{"input":{"type":"structure","required":["KeyName"],"members":{"KeyName":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteNatGateway":{"input":{"type":"structure","required":["NatGatewayId"],"members":{"NatGatewayId":{}}},"output":{"type":"structure","members":{"NatGatewayId":{"locationName":"natGatewayId"}}}},"DeleteNetworkAcl":{"input":{"type":"structure","required":["NetworkAclId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkAclId":{"locationName":"networkAclId"}}}},"DeleteNetworkAclEntry":{"input":{"type":"structure","required":["Egress","NetworkAclId","RuleNumber"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Egress":{"locationName":"egress","type":"boolean"},"NetworkAclId":{"locationName":"networkAclId"},"RuleNumber":{"locationName":"ruleNumber","type":"integer"}}}},"DeleteNetworkInterface":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}}},"DeleteNetworkInterfacePermission":{"input":{"type":"structure","required":["NetworkInterfacePermissionId"],"members":{"NetworkInterfacePermissionId":{},"Force":{"type":"boolean"},"DryRun":{"type":"boolean"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DeletePlacementGroup":{"input":{"type":"structure","required":["GroupName"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupName":{"locationName":"groupName"}}}},"DeleteRoute":{"input":{"type":"structure","required":["RouteTableId"],"members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"DestinationIpv6CidrBlock":{"locationName":"destinationIpv6CidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableId":{"locationName":"routeTableId"}}}},"DeleteRouteTable":{"input":{"type":"structure","required":["RouteTableId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableId":{"locationName":"routeTableId"}}}},"DeleteSecurityGroup":{"input":{"type":"structure","members":{"GroupId":{},"GroupName":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteSnapshot":{"input":{"type":"structure","required":["SnapshotId"],"members":{"SnapshotId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteSpotDatafeedSubscription":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteSubnet":{"input":{"type":"structure","required":["SubnetId"],"members":{"SubnetId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteTags":{"input":{"type":"structure","required":["Resources"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Resources":{"shape":"S79","locationName":"resourceId"},"Tags":{"shape":"Sj","locationName":"tag"}}}},"DeleteVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteVpc":{"input":{"type":"structure","required":["VpcId"],"members":{"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteVpcEndpoints":{"input":{"type":"structure","required":["VpcEndpointIds"],"members":{"DryRun":{"type":"boolean"},"VpcEndpointIds":{"shape":"S2z","locationName":"VpcEndpointId"}}},"output":{"type":"structure","members":{"Unsuccessful":{"shape":"S4d","locationName":"unsuccessful"}}}},"DeleteVpcPeeringConnection":{"input":{"type":"structure","required":["VpcPeeringConnectionId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DeleteVpnConnection":{"input":{"type":"structure","required":["VpnConnectionId"],"members":{"VpnConnectionId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeleteVpnConnectionRoute":{"input":{"type":"structure","required":["DestinationCidrBlock","VpnConnectionId"],"members":{"DestinationCidrBlock":{},"VpnConnectionId":{}}}},"DeleteVpnGateway":{"input":{"type":"structure","required":["VpnGatewayId"],"members":{"VpnGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DeregisterImage":{"input":{"type":"structure","required":["ImageId"],"members":{"ImageId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DescribeAccountAttributes":{"input":{"type":"structure","members":{"AttributeNames":{"locationName":"attributeName","type":"list","member":{"locationName":"attributeName"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"AccountAttributes":{"locationName":"accountAttributeSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AttributeName":{"locationName":"attributeName"},"AttributeValues":{"locationName":"attributeValueSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AttributeValue":{"locationName":"attributeValue"}}}}}}}}}},"DescribeAddresses":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"PublicIps":{"locationName":"PublicIp","type":"list","member":{"locationName":"PublicIp"}},"AllocationIds":{"locationName":"AllocationId","type":"list","member":{"locationName":"AllocationId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Addresses":{"locationName":"addressesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"PublicIp":{"locationName":"publicIp"},"AllocationId":{"locationName":"allocationId"},"AssociationId":{"locationName":"associationId"},"Domain":{"locationName":"domain"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"NetworkInterfaceOwnerId":{"locationName":"networkInterfaceOwnerId"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}}}}}},"DescribeAvailabilityZones":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"ZoneNames":{"locationName":"ZoneName","type":"list","member":{"locationName":"ZoneName"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"AvailabilityZones":{"locationName":"availabilityZoneInfo","type":"list","member":{"locationName":"item","type":"structure","members":{"State":{"locationName":"zoneState"},"Messages":{"locationName":"messageSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Message":{"locationName":"message"}}}},"RegionName":{"locationName":"regionName"},"ZoneName":{"locationName":"zoneName"}}}}}}},"DescribeBundleTasks":{"input":{"type":"structure","members":{"BundleIds":{"locationName":"BundleId","type":"list","member":{"locationName":"BundleId"}},"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"BundleTasks":{"locationName":"bundleInstanceTasksSet","type":"list","member":{"shape":"S2c","locationName":"item"}}}}},"DescribeClassicLinkInstances":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"Instances":{"locationName":"instancesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Groups":{"shape":"S5w","locationName":"groupSet"},"InstanceId":{"locationName":"instanceId"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeConversionTasks":{"input":{"type":"structure","members":{"ConversionTaskIds":{"locationName":"conversionTaskId","type":"list","member":{"locationName":"item"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"ConversionTasks":{"locationName":"conversionTasks","type":"list","member":{"shape":"Sa4","locationName":"item"}}}}},"DescribeCustomerGateways":{"input":{"type":"structure","members":{"CustomerGatewayIds":{"locationName":"CustomerGatewayId","type":"list","member":{"locationName":"CustomerGatewayId"}},"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"CustomerGateways":{"locationName":"customerGatewaySet","type":"list","member":{"shape":"S3n","locationName":"item"}}}}},"DescribeDhcpOptions":{"input":{"type":"structure","members":{"DhcpOptionsIds":{"locationName":"DhcpOptionsId","type":"list","member":{"locationName":"DhcpOptionsId"}},"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"DhcpOptions":{"locationName":"dhcpOptionsSet","type":"list","member":{"shape":"S3y","locationName":"item"}}}}},"DescribeEgressOnlyInternetGateways":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"EgressOnlyInternetGatewayIds":{"locationName":"EgressOnlyInternetGatewayId","type":"list","member":{"locationName":"item"}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"EgressOnlyInternetGateways":{"locationName":"egressOnlyInternetGatewaySet","type":"list","member":{"shape":"S45","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeElasticGpus":{"input":{"type":"structure","members":{"ElasticGpuIds":{"locationName":"ElasticGpuId","type":"list","member":{"locationName":"item"}},"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"ElasticGpuSet":{"locationName":"elasticGpuSet","type":"list","member":{"type":"structure","members":{"ElasticGpuId":{"locationName":"elasticGpuId"},"AvailabilityZone":{"locationName":"availabilityZone"},"ElasticGpuType":{"locationName":"elasticGpuType"},"ElasticGpuHealth":{"locationName":"elasticGpuHealth","type":"structure","members":{"Status":{"locationName":"status"}}},"ElasticGpuState":{"locationName":"elasticGpuState"},"InstanceId":{"locationName":"instanceId"}}}},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}}},"DescribeExportTasks":{"input":{"type":"structure","members":{"ExportTaskIds":{"locationName":"exportTaskId","type":"list","member":{"locationName":"ExportTaskId"}}}},"output":{"type":"structure","members":{"ExportTasks":{"locationName":"exportTaskSet","type":"list","member":{"shape":"S4v","locationName":"item"}}}}},"DescribeFlowLogs":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c"},"FlowLogIds":{"shape":"S2z","locationName":"FlowLogId"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"FlowLogs":{"locationName":"flowLogSet","type":"list","member":{"locationName":"item","type":"structure","members":{"CreationTime":{"locationName":"creationTime","type":"timestamp"},"DeliverLogsErrorMessage":{"locationName":"deliverLogsErrorMessage"},"DeliverLogsPermissionArn":{"locationName":"deliverLogsPermissionArn"},"DeliverLogsStatus":{"locationName":"deliverLogsStatus"},"FlowLogId":{"locationName":"flowLogId"},"FlowLogStatus":{"locationName":"flowLogStatus"},"LogGroupName":{"locationName":"logGroupName"},"ResourceId":{"locationName":"resourceId"},"TrafficType":{"locationName":"trafficType"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeFpgaImages":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"FpgaImageIds":{"locationName":"FpgaImageId","type":"list","member":{"locationName":"item"}},"Owners":{"shape":"Sb7","locationName":"Owner"},"Filters":{"shape":"S9c","locationName":"Filter"},"NextToken":{},"MaxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"FpgaImages":{"locationName":"fpgaImageSet","type":"list","member":{"locationName":"item","type":"structure","members":{"FpgaImageId":{"locationName":"fpgaImageId"},"FpgaImageGlobalId":{"locationName":"fpgaImageGlobalId"},"Name":{"locationName":"name"},"Description":{"locationName":"description"},"ShellVersion":{"locationName":"shellVersion"},"PciId":{"locationName":"pciId","type":"structure","members":{"DeviceId":{},"VendorId":{},"SubsystemId":{},"SubsystemVendorId":{}}},"State":{"locationName":"state","type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"CreateTime":{"locationName":"createTime","type":"timestamp"},"UpdateTime":{"locationName":"updateTime","type":"timestamp"},"OwnerId":{"locationName":"ownerId"},"OwnerAlias":{"locationName":"ownerAlias"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"Tags":{"shape":"Sj","locationName":"tags"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeHostReservationOfferings":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c"},"MaxDuration":{"type":"integer"},"MaxResults":{"type":"integer"},"MinDuration":{"type":"integer"},"NextToken":{},"OfferingId":{}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"OfferingSet":{"locationName":"offeringSet","type":"list","member":{"type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceFamily":{"locationName":"instanceFamily"},"OfferingId":{"locationName":"offeringId"},"PaymentOption":{"locationName":"paymentOption"},"UpfrontPrice":{"locationName":"upfrontPrice"}}}}}}},"DescribeHostReservations":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c"},"HostReservationIdSet":{"type":"list","member":{"locationName":"item"}},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"HostReservationSet":{"locationName":"hostReservationSet","type":"list","member":{"type":"structure","members":{"Count":{"locationName":"count","type":"integer"},"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"End":{"locationName":"end","type":"timestamp"},"HostIdSet":{"shape":"Sbt","locationName":"hostIdSet"},"HostReservationId":{"locationName":"hostReservationId"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceFamily":{"locationName":"instanceFamily"},"OfferingId":{"locationName":"offeringId"},"PaymentOption":{"locationName":"paymentOption"},"Start":{"locationName":"start","type":"timestamp"},"State":{"locationName":"state"},"UpfrontPrice":{"locationName":"upfrontPrice"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeHosts":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c","locationName":"filter"},"HostIds":{"shape":"Sbw","locationName":"hostId"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"Hosts":{"locationName":"hostSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AutoPlacement":{"locationName":"autoPlacement"},"AvailabilityZone":{"locationName":"availabilityZone"},"AvailableCapacity":{"locationName":"availableCapacity","type":"structure","members":{"AvailableInstanceCapacity":{"locationName":"availableInstanceCapacity","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailableCapacity":{"locationName":"availableCapacity","type":"integer"},"InstanceType":{"locationName":"instanceType"},"TotalCapacity":{"locationName":"totalCapacity","type":"integer"}}}},"AvailableVCpus":{"locationName":"availableVCpus","type":"integer"}}},"ClientToken":{"locationName":"clientToken"},"HostId":{"locationName":"hostId"},"HostProperties":{"locationName":"hostProperties","type":"structure","members":{"Cores":{"locationName":"cores","type":"integer"},"InstanceType":{"locationName":"instanceType"},"Sockets":{"locationName":"sockets","type":"integer"},"TotalVCpus":{"locationName":"totalVCpus","type":"integer"}}},"HostReservationId":{"locationName":"hostReservationId"},"Instances":{"locationName":"instances","type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"InstanceType":{"locationName":"instanceType"}}}},"State":{"locationName":"state"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeIamInstanceProfileAssociations":{"input":{"type":"structure","members":{"AssociationIds":{"locationName":"AssociationId","type":"list","member":{"locationName":"AssociationId"}},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"IamInstanceProfileAssociations":{"locationName":"iamInstanceProfileAssociationSet","type":"list","member":{"shape":"S13","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeIdFormat":{"input":{"type":"structure","members":{"Resource":{}}},"output":{"type":"structure","members":{"Statuses":{"shape":"Scd","locationName":"statusSet"}}}},"DescribeIdentityIdFormat":{"input":{"type":"structure","required":["PrincipalArn"],"members":{"PrincipalArn":{"locationName":"principalArn"},"Resource":{"locationName":"resource"}}},"output":{"type":"structure","members":{"Statuses":{"shape":"Scd","locationName":"statusSet"}}}},"DescribeImageAttribute":{"input":{"type":"structure","required":["Attribute","ImageId"],"members":{"Attribute":{},"ImageId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"ImageId":{"locationName":"imageId"},"LaunchPermissions":{"shape":"Scl","locationName":"launchPermission"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"Description":{"shape":"S42","locationName":"description"},"KernelId":{"shape":"S42","locationName":"kernel"},"RamdiskId":{"shape":"S42","locationName":"ramdisk"},"SriovNetSupport":{"shape":"S42","locationName":"sriovNetSupport"}}}},"DescribeImages":{"input":{"type":"structure","members":{"ExecutableUsers":{"locationName":"ExecutableBy","type":"list","member":{"locationName":"ExecutableBy"}},"Filters":{"shape":"S9c","locationName":"Filter"},"ImageIds":{"locationName":"ImageId","type":"list","member":{"locationName":"ImageId"}},"Owners":{"shape":"Sb7","locationName":"Owner"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Images":{"locationName":"imagesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Architecture":{"locationName":"architecture"},"CreationDate":{"locationName":"creationDate"},"ImageId":{"locationName":"imageId"},"ImageLocation":{"locationName":"imageLocation"},"ImageType":{"locationName":"imageType"},"Public":{"locationName":"isPublic","type":"boolean"},"KernelId":{"locationName":"kernelId"},"OwnerId":{"locationName":"imageOwnerId"},"Platform":{"locationName":"platform"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"RamdiskId":{"locationName":"ramdiskId"},"State":{"locationName":"imageState"},"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"Description":{"locationName":"description"},"EnaSupport":{"locationName":"enaSupport","type":"boolean"},"Hypervisor":{"locationName":"hypervisor"},"ImageOwnerAlias":{"locationName":"imageOwnerAlias"},"Name":{"locationName":"name"},"RootDeviceName":{"locationName":"rootDeviceName"},"RootDeviceType":{"locationName":"rootDeviceType"},"SriovNetSupport":{"locationName":"sriovNetSupport"},"StateReason":{"shape":"Scz","locationName":"stateReason"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VirtualizationType":{"locationName":"virtualizationType"}}}}}}},"DescribeImportImageTasks":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c"},"ImportTaskIds":{"shape":"Sd2","locationName":"ImportTaskId"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"ImportImageTasks":{"locationName":"importImageTaskSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Architecture":{"locationName":"architecture"},"Description":{"locationName":"description"},"Hypervisor":{"locationName":"hypervisor"},"ImageId":{"locationName":"imageId"},"ImportTaskId":{"locationName":"importTaskId"},"LicenseType":{"locationName":"licenseType"},"Platform":{"locationName":"platform"},"Progress":{"locationName":"progress"},"SnapshotDetails":{"shape":"Sd6","locationName":"snapshotDetailSet"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeImportSnapshotTasks":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c"},"ImportTaskIds":{"shape":"Sd2","locationName":"ImportTaskId"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"ImportSnapshotTasks":{"locationName":"importSnapshotTaskSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{"locationName":"description"},"ImportTaskId":{"locationName":"importTaskId"},"SnapshotTaskDetail":{"shape":"Sdd","locationName":"snapshotTaskDetail"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeInstanceAttribute":{"input":{"type":"structure","required":["Attribute","InstanceId"],"members":{"Attribute":{"locationName":"attribute"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"}}},"output":{"type":"structure","members":{"Groups":{"shape":"S5w","locationName":"groupSet"},"BlockDeviceMappings":{"shape":"Sdh","locationName":"blockDeviceMapping"},"DisableApiTermination":{"shape":"Sdk","locationName":"disableApiTermination"},"EnaSupport":{"shape":"Sdk","locationName":"enaSupport"},"EbsOptimized":{"shape":"Sdk","locationName":"ebsOptimized"},"InstanceId":{"locationName":"instanceId"},"InstanceInitiatedShutdownBehavior":{"shape":"S42","locationName":"instanceInitiatedShutdownBehavior"},"InstanceType":{"shape":"S42","locationName":"instanceType"},"KernelId":{"shape":"S42","locationName":"kernel"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"RamdiskId":{"shape":"S42","locationName":"ramdisk"},"RootDeviceName":{"shape":"S42","locationName":"rootDeviceName"},"SourceDestCheck":{"shape":"Sdk","locationName":"sourceDestCheck"},"SriovNetSupport":{"shape":"S42","locationName":"sriovNetSupport"},"UserData":{"shape":"S42","locationName":"userData"}}}},"DescribeInstanceStatus":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"MaxResults":{"type":"integer"},"NextToken":{},"DryRun":{"locationName":"dryRun","type":"boolean"},"IncludeAllInstances":{"locationName":"includeAllInstances","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceStatuses":{"locationName":"instanceStatusSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Events":{"locationName":"eventsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Code":{"locationName":"code"},"Description":{"locationName":"description"},"NotAfter":{"locationName":"notAfter","type":"timestamp"},"NotBefore":{"locationName":"notBefore","type":"timestamp"}}}},"InstanceId":{"locationName":"instanceId"},"InstanceState":{"shape":"Sds","locationName":"instanceState"},"InstanceStatus":{"shape":"Sdu","locationName":"instanceStatus"},"SystemStatus":{"shape":"Sdu","locationName":"systemStatus"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeInstances":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"Reservations":{"locationName":"reservationSet","type":"list","member":{"shape":"Se3","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeInternetGateways":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InternetGatewayIds":{"shape":"S2z","locationName":"internetGatewayId"}}},"output":{"type":"structure","members":{"InternetGateways":{"locationName":"internetGatewaySet","type":"list","member":{"shape":"S51","locationName":"item"}}}}},"DescribeKeyPairs":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"KeyNames":{"locationName":"KeyName","type":"list","member":{"locationName":"KeyName"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"KeyPairs":{"locationName":"keySet","type":"list","member":{"locationName":"item","type":"structure","members":{"KeyFingerprint":{"locationName":"keyFingerprint"},"KeyName":{"locationName":"keyName"}}}}}}},"DescribeMovingAddresses":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"PublicIps":{"shape":"S2z","locationName":"publicIp"}}},"output":{"type":"structure","members":{"MovingAddressStatuses":{"locationName":"movingAddressStatusSet","type":"list","member":{"locationName":"item","type":"structure","members":{"MoveStatus":{"locationName":"moveStatus"},"PublicIp":{"locationName":"publicIp"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeNatGateways":{"input":{"type":"structure","members":{"Filter":{"shape":"S9c"},"MaxResults":{"type":"integer"},"NatGatewayIds":{"shape":"S2z","locationName":"NatGatewayId"},"NextToken":{}}},"output":{"type":"structure","members":{"NatGateways":{"locationName":"natGatewaySet","type":"list","member":{"shape":"S56","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeNetworkAcls":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkAclIds":{"shape":"S2z","locationName":"NetworkAclId"}}},"output":{"type":"structure","members":{"NetworkAcls":{"locationName":"networkAclSet","type":"list","member":{"shape":"S5d","locationName":"item"}}}}},"DescribeNetworkInterfaceAttribute":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"Attribute":{"locationName":"attribute"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}},"output":{"type":"structure","members":{"Attachment":{"shape":"S5v","locationName":"attachment"},"Description":{"shape":"S42","locationName":"description"},"Groups":{"shape":"S5w","locationName":"groupSet"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"SourceDestCheck":{"shape":"Sdk","locationName":"sourceDestCheck"}}}},"DescribeNetworkInterfacePermissions":{"input":{"type":"structure","members":{"NetworkInterfacePermissionIds":{"locationName":"NetworkInterfacePermissionId","type":"list","member":{}},"Filters":{"shape":"S9c","locationName":"Filter"},"NextToken":{},"MaxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"NetworkInterfacePermissions":{"locationName":"networkInterfacePermissions","type":"list","member":{"shape":"S67","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeNetworkInterfaces":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceIds":{"locationName":"NetworkInterfaceId","type":"list","member":{"locationName":"item"}}}},"output":{"type":"structure","members":{"NetworkInterfaces":{"locationName":"networkInterfaceSet","type":"list","member":{"shape":"S5t","locationName":"item"}}}}},"DescribePlacementGroups":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupNames":{"locationName":"groupName","type":"list","member":{}}}},"output":{"type":"structure","members":{"PlacementGroups":{"locationName":"placementGroupSet","type":"list","member":{"locationName":"item","type":"structure","members":{"GroupName":{"locationName":"groupName"},"State":{"locationName":"state"},"Strategy":{"locationName":"strategy"}}}}}}},"DescribePrefixLists":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"PrefixListIds":{"shape":"S2z","locationName":"PrefixListId"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"PrefixLists":{"locationName":"prefixListSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Cidrs":{"shape":"S2z","locationName":"cidrSet"},"PrefixListId":{"locationName":"prefixListId"},"PrefixListName":{"locationName":"prefixListName"}}}}}}},"DescribeRegions":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"RegionNames":{"locationName":"RegionName","type":"list","member":{"locationName":"RegionName"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Regions":{"locationName":"regionInfo","type":"list","member":{"locationName":"item","type":"structure","members":{"Endpoint":{"locationName":"regionEndpoint"},"RegionName":{"locationName":"regionName"}}}}}}},"DescribeReservedInstances":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"OfferingClass":{},"ReservedInstancesIds":{"shape":"Sfu","locationName":"ReservedInstancesId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"OfferingType":{"locationName":"offeringType"}}},"output":{"type":"structure","members":{"ReservedInstances":{"locationName":"reservedInstancesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Duration":{"locationName":"duration","type":"long"},"End":{"locationName":"end","type":"timestamp"},"FixedPrice":{"locationName":"fixedPrice","type":"float"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"InstanceType":{"locationName":"instanceType"},"ProductDescription":{"locationName":"productDescription"},"ReservedInstancesId":{"locationName":"reservedInstancesId"},"Start":{"locationName":"start","type":"timestamp"},"State":{"locationName":"state"},"UsagePrice":{"locationName":"usagePrice","type":"float"},"CurrencyCode":{"locationName":"currencyCode"},"InstanceTenancy":{"locationName":"instanceTenancy"},"OfferingClass":{"locationName":"offeringClass"},"OfferingType":{"locationName":"offeringType"},"RecurringCharges":{"shape":"Sg2","locationName":"recurringCharges"},"Scope":{"locationName":"scope"},"Tags":{"shape":"Sj","locationName":"tagSet"}}}}}}},"DescribeReservedInstancesListings":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"ReservedInstancesId":{"locationName":"reservedInstancesId"},"ReservedInstancesListingId":{"locationName":"reservedInstancesListingId"}}},"output":{"type":"structure","members":{"ReservedInstancesListings":{"shape":"S2n","locationName":"reservedInstancesListingsSet"}}}},"DescribeReservedInstancesModifications":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"ReservedInstancesModificationIds":{"locationName":"ReservedInstancesModificationId","type":"list","member":{"locationName":"ReservedInstancesModificationId"}},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ReservedInstancesModifications":{"locationName":"reservedInstancesModificationsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"CreateDate":{"locationName":"createDate","type":"timestamp"},"EffectiveDate":{"locationName":"effectiveDate","type":"timestamp"},"ModificationResults":{"locationName":"modificationResultSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ReservedInstancesId":{"locationName":"reservedInstancesId"},"TargetConfiguration":{"shape":"Sgf","locationName":"targetConfiguration"}}}},"ReservedInstancesIds":{"locationName":"reservedInstancesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ReservedInstancesId":{"locationName":"reservedInstancesId"}}}},"ReservedInstancesModificationId":{"locationName":"reservedInstancesModificationId"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"UpdateDate":{"locationName":"updateDate","type":"timestamp"}}}}}}},"DescribeReservedInstancesOfferings":{"input":{"type":"structure","members":{"AvailabilityZone":{},"Filters":{"shape":"S9c","locationName":"Filter"},"IncludeMarketplace":{"type":"boolean"},"InstanceType":{},"MaxDuration":{"type":"long"},"MaxInstanceCount":{"type":"integer"},"MinDuration":{"type":"long"},"OfferingClass":{},"ProductDescription":{},"ReservedInstancesOfferingIds":{"locationName":"ReservedInstancesOfferingId","type":"list","member":{}},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceTenancy":{"locationName":"instanceTenancy"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"OfferingType":{"locationName":"offeringType"}}},"output":{"type":"structure","members":{"ReservedInstancesOfferings":{"locationName":"reservedInstancesOfferingsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Duration":{"locationName":"duration","type":"long"},"FixedPrice":{"locationName":"fixedPrice","type":"float"},"InstanceType":{"locationName":"instanceType"},"ProductDescription":{"locationName":"productDescription"},"ReservedInstancesOfferingId":{"locationName":"reservedInstancesOfferingId"},"UsagePrice":{"locationName":"usagePrice","type":"float"},"CurrencyCode":{"locationName":"currencyCode"},"InstanceTenancy":{"locationName":"instanceTenancy"},"Marketplace":{"locationName":"marketplace","type":"boolean"},"OfferingClass":{"locationName":"offeringClass"},"OfferingType":{"locationName":"offeringType"},"PricingDetails":{"locationName":"pricingDetailsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Count":{"locationName":"count","type":"integer"},"Price":{"locationName":"price","type":"double"}}}},"RecurringCharges":{"shape":"Sg2","locationName":"recurringCharges"},"Scope":{"locationName":"scope"}}}},"NextToken":{"locationName":"nextToken"}}}},"DescribeRouteTables":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableIds":{"shape":"S2z","locationName":"RouteTableId"}}},"output":{"type":"structure","members":{"RouteTables":{"locationName":"routeTableSet","type":"list","member":{"shape":"S6k","locationName":"item"}}}}},"DescribeScheduledInstanceAvailability":{"input":{"type":"structure","required":["FirstSlotStartTimeRange","Recurrence"],"members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"FirstSlotStartTimeRange":{"type":"structure","required":["EarliestTime","LatestTime"],"members":{"EarliestTime":{"type":"timestamp"},"LatestTime":{"type":"timestamp"}}},"MaxResults":{"type":"integer"},"MaxSlotDurationInHours":{"type":"integer"},"MinSlotDurationInHours":{"type":"integer"},"NextToken":{},"Recurrence":{"type":"structure","members":{"Frequency":{},"Interval":{"type":"integer"},"OccurrenceDays":{"locationName":"OccurrenceDay","type":"list","member":{"locationName":"OccurenceDay","type":"integer"}},"OccurrenceRelativeToEnd":{"type":"boolean"},"OccurrenceUnit":{}}}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ScheduledInstanceAvailabilitySet":{"locationName":"scheduledInstanceAvailabilitySet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"AvailableInstanceCount":{"locationName":"availableInstanceCount","type":"integer"},"FirstSlotStartTime":{"locationName":"firstSlotStartTime","type":"timestamp"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceType":{"locationName":"instanceType"},"MaxTermDurationInDays":{"locationName":"maxTermDurationInDays","type":"integer"},"MinTermDurationInDays":{"locationName":"minTermDurationInDays","type":"integer"},"NetworkPlatform":{"locationName":"networkPlatform"},"Platform":{"locationName":"platform"},"PurchaseToken":{"locationName":"purchaseToken"},"Recurrence":{"shape":"Sgz","locationName":"recurrence"},"SlotDurationInHours":{"locationName":"slotDurationInHours","type":"integer"},"TotalScheduledInstanceHours":{"locationName":"totalScheduledInstanceHours","type":"integer"}}}}}}},"DescribeScheduledInstances":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"ScheduledInstanceIds":{"locationName":"ScheduledInstanceId","type":"list","member":{"locationName":"ScheduledInstanceId"}},"SlotStartTimeRange":{"type":"structure","members":{"EarliestTime":{"type":"timestamp"},"LatestTime":{"type":"timestamp"}}}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ScheduledInstanceSet":{"locationName":"scheduledInstanceSet","type":"list","member":{"shape":"Sh6","locationName":"item"}}}}},"DescribeSecurityGroupReferences":{"input":{"type":"structure","required":["GroupId"],"members":{"DryRun":{"type":"boolean"},"GroupId":{"type":"list","member":{"locationName":"item"}}}},"output":{"type":"structure","members":{"SecurityGroupReferenceSet":{"locationName":"securityGroupReferenceSet","type":"list","member":{"locationName":"item","type":"structure","required":["GroupId","ReferencingVpcId"],"members":{"GroupId":{"locationName":"groupId"},"ReferencingVpcId":{"locationName":"referencingVpcId"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}}}}}},"DescribeSecurityGroups":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"GroupIds":{"shape":"S1j","locationName":"GroupId"},"GroupNames":{"shape":"Shd","locationName":"GroupName"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"SecurityGroups":{"locationName":"securityGroupInfo","type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{"locationName":"groupDescription"},"GroupName":{"locationName":"groupName"},"IpPermissions":{"shape":"S1w","locationName":"ipPermissions"},"OwnerId":{"locationName":"ownerId"},"GroupId":{"locationName":"groupId"},"IpPermissionsEgress":{"shape":"S1w","locationName":"ipPermissionsEgress"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}}}}}},"DescribeSnapshotAttribute":{"input":{"type":"structure","required":["Attribute","SnapshotId"],"members":{"Attribute":{},"SnapshotId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"CreateVolumePermissions":{"shape":"Shk","locationName":"createVolumePermission"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"SnapshotId":{"locationName":"snapshotId"}}}},"DescribeSnapshots":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"OwnerIds":{"shape":"Sb7","locationName":"Owner"},"RestorableByUserIds":{"locationName":"RestorableBy","type":"list","member":{}},"SnapshotIds":{"locationName":"SnapshotId","type":"list","member":{"locationName":"SnapshotId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Snapshots":{"locationName":"snapshotSet","type":"list","member":{"shape":"S6w","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeSpotDatafeedSubscription":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"SpotDatafeedSubscription":{"shape":"S70","locationName":"spotDatafeedSubscription"}}}},"DescribeSpotFleetInstances":{"input":{"type":"structure","required":["SpotFleetRequestId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}},"output":{"type":"structure","required":["ActiveInstances","SpotFleetRequestId"],"members":{"ActiveInstances":{"locationName":"activeInstanceSet","type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"InstanceType":{"locationName":"instanceType"},"SpotInstanceRequestId":{"locationName":"spotInstanceRequestId"},"InstanceHealth":{"locationName":"instanceHealth"}}}},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}}},"DescribeSpotFleetRequestHistory":{"input":{"type":"structure","required":["SpotFleetRequestId","StartTime"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"EventType":{"locationName":"eventType"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"},"StartTime":{"locationName":"startTime","type":"timestamp"}}},"output":{"type":"structure","required":["HistoryRecords","LastEvaluatedTime","SpotFleetRequestId","StartTime"],"members":{"HistoryRecords":{"locationName":"historyRecordSet","type":"list","member":{"locationName":"item","type":"structure","required":["EventInformation","EventType","Timestamp"],"members":{"EventInformation":{"locationName":"eventInformation","type":"structure","members":{"EventDescription":{"locationName":"eventDescription"},"EventSubType":{"locationName":"eventSubType"},"InstanceId":{"locationName":"instanceId"}}},"EventType":{"locationName":"eventType"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}}},"LastEvaluatedTime":{"locationName":"lastEvaluatedTime","type":"timestamp"},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"},"StartTime":{"locationName":"startTime","type":"timestamp"}}}},"DescribeSpotFleetRequests":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"SpotFleetRequestIds":{"shape":"S2z","locationName":"spotFleetRequestId"}}},"output":{"type":"structure","required":["SpotFleetRequestConfigs"],"members":{"NextToken":{"locationName":"nextToken"},"SpotFleetRequestConfigs":{"locationName":"spotFleetRequestConfigSet","type":"list","member":{"locationName":"item","type":"structure","required":["CreateTime","SpotFleetRequestConfig","SpotFleetRequestId","SpotFleetRequestState"],"members":{"ActivityStatus":{"locationName":"activityStatus"},"CreateTime":{"locationName":"createTime","type":"timestamp"},"SpotFleetRequestConfig":{"shape":"Si9","locationName":"spotFleetRequestConfig"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"},"SpotFleetRequestState":{"locationName":"spotFleetRequestState"}}}}}}},"DescribeSpotInstanceRequests":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"SpotInstanceRequestIds":{"shape":"S39","locationName":"SpotInstanceRequestId"}}},"output":{"type":"structure","members":{"SpotInstanceRequests":{"shape":"Sin","locationName":"spotInstanceRequestSet"}}}},"DescribeSpotPriceHistory":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"AvailabilityZone":{"locationName":"availabilityZone"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EndTime":{"locationName":"endTime","type":"timestamp"},"InstanceTypes":{"locationName":"InstanceType","type":"list","member":{}},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"ProductDescriptions":{"locationName":"ProductDescription","type":"list","member":{}},"StartTime":{"locationName":"startTime","type":"timestamp"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"SpotPriceHistory":{"locationName":"spotPriceHistorySet","type":"list","member":{"locationName":"item","type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"InstanceType":{"locationName":"instanceType"},"ProductDescription":{"locationName":"productDescription"},"SpotPrice":{"locationName":"spotPrice"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}}}}}},"DescribeStaleSecurityGroups":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"type":"boolean"},"MaxResults":{"type":"integer"},"NextToken":{},"VpcId":{}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"StaleSecurityGroupSet":{"locationName":"staleSecurityGroupSet","type":"list","member":{"locationName":"item","type":"structure","required":["GroupId"],"members":{"Description":{"locationName":"description"},"GroupId":{"locationName":"groupId"},"GroupName":{"locationName":"groupName"},"StaleIpPermissions":{"shape":"Sj4","locationName":"staleIpPermissions"},"StaleIpPermissionsEgress":{"shape":"Sj4","locationName":"staleIpPermissionsEgress"},"VpcId":{"locationName":"vpcId"}}}}}}},"DescribeSubnets":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"SubnetIds":{"locationName":"SubnetId","type":"list","member":{"locationName":"SubnetId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Subnets":{"locationName":"subnetSet","type":"list","member":{"shape":"S75","locationName":"item"}}}}},"DescribeTags":{"input":{"type":"structure","members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"Tags":{"locationName":"tagSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Key":{"locationName":"key"},"ResourceId":{"locationName":"resourceId"},"ResourceType":{"locationName":"resourceType"},"Value":{"locationName":"value"}}}}}}},"DescribeVolumeAttribute":{"input":{"type":"structure","required":["VolumeId"],"members":{"Attribute":{},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"AutoEnableIO":{"shape":"Sdk","locationName":"autoEnableIO"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"VolumeId":{"locationName":"volumeId"}}}},"DescribeVolumeStatus":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"VolumeIds":{"shape":"Sjl","locationName":"VolumeId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"VolumeStatuses":{"locationName":"volumeStatusSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Actions":{"locationName":"actionsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Code":{"locationName":"code"},"Description":{"locationName":"description"},"EventId":{"locationName":"eventId"},"EventType":{"locationName":"eventType"}}}},"AvailabilityZone":{"locationName":"availabilityZone"},"Events":{"locationName":"eventsSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{"locationName":"description"},"EventId":{"locationName":"eventId"},"EventType":{"locationName":"eventType"},"NotAfter":{"locationName":"notAfter","type":"timestamp"},"NotBefore":{"locationName":"notBefore","type":"timestamp"}}}},"VolumeId":{"locationName":"volumeId"},"VolumeStatus":{"locationName":"volumeStatus","type":"structure","members":{"Details":{"locationName":"details","type":"list","member":{"locationName":"item","type":"structure","members":{"Name":{"locationName":"name"},"Status":{"locationName":"status"}}}},"Status":{"locationName":"status"}}}}}}}}},"DescribeVolumes":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"VolumeIds":{"shape":"Sjl","locationName":"VolumeId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"}}},"output":{"type":"structure","members":{"Volumes":{"locationName":"volumeSet","type":"list","member":{"shape":"S7e","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeVolumesModifications":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"VolumeIds":{"shape":"Sjl","locationName":"VolumeId"},"Filters":{"shape":"S9c","locationName":"Filter"},"NextToken":{},"MaxResults":{"type":"integer"}}},"output":{"type":"structure","members":{"VolumesModifications":{"locationName":"volumeModificationSet","type":"list","member":{"shape":"Sk4","locationName":"item"}},"NextToken":{"locationName":"nextToken"}}}},"DescribeVpcAttribute":{"input":{"type":"structure","required":["Attribute","VpcId"],"members":{"Attribute":{},"VpcId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpcId":{"locationName":"vpcId"},"EnableDnsHostnames":{"shape":"Sdk","locationName":"enableDnsHostnames"},"EnableDnsSupport":{"shape":"Sdk","locationName":"enableDnsSupport"}}}},"DescribeVpcClassicLink":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcIds":{"shape":"Ska","locationName":"VpcId"}}},"output":{"type":"structure","members":{"Vpcs":{"locationName":"vpcSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ClassicLinkEnabled":{"locationName":"classicLinkEnabled","type":"boolean"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}}}}}},"DescribeVpcClassicLinkDnsSupport":{"input":{"type":"structure","members":{"MaxResults":{"locationName":"maxResults","type":"integer"},"NextToken":{"locationName":"nextToken"},"VpcIds":{"shape":"Ska"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"Vpcs":{"locationName":"vpcs","type":"list","member":{"locationName":"item","type":"structure","members":{"ClassicLinkDnsSupported":{"locationName":"classicLinkDnsSupported","type":"boolean"},"VpcId":{"locationName":"vpcId"}}}}}}},"DescribeVpcEndpointServices":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"MaxResults":{"type":"integer"},"NextToken":{}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"ServiceNames":{"shape":"S2z","locationName":"serviceNameSet"}}}},"DescribeVpcEndpoints":{"input":{"type":"structure","members":{"DryRun":{"type":"boolean"},"Filters":{"shape":"S9c","locationName":"Filter"},"MaxResults":{"type":"integer"},"NextToken":{},"VpcEndpointIds":{"shape":"S2z","locationName":"VpcEndpointId"}}},"output":{"type":"structure","members":{"NextToken":{"locationName":"nextToken"},"VpcEndpoints":{"locationName":"vpcEndpointSet","type":"list","member":{"shape":"S7l","locationName":"item"}}}}},"DescribeVpcPeeringConnections":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcPeeringConnectionIds":{"shape":"S2z","locationName":"VpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"VpcPeeringConnections":{"locationName":"vpcPeeringConnectionSet","type":"list","member":{"shape":"Sb","locationName":"item"}}}}},"DescribeVpcs":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"VpcIds":{"locationName":"VpcId","type":"list","member":{"locationName":"VpcId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"Vpcs":{"locationName":"vpcSet","type":"list","member":{"shape":"S3q","locationName":"item"}}}}},"DescribeVpnConnections":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"VpnConnectionIds":{"locationName":"VpnConnectionId","type":"list","member":{"locationName":"VpnConnectionId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpnConnections":{"locationName":"vpnConnectionSet","type":"list","member":{"shape":"S7s","locationName":"item"}}}}},"DescribeVpnGateways":{"input":{"type":"structure","members":{"Filters":{"shape":"S9c","locationName":"Filter"},"VpnGatewayIds":{"locationName":"VpnGatewayId","type":"list","member":{"locationName":"VpnGatewayId"}},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"VpnGateways":{"locationName":"vpnGatewaySet","type":"list","member":{"shape":"S84","locationName":"item"}}}}},"DetachClassicLinkVpc":{"input":{"type":"structure","required":["InstanceId","VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DetachInternetGateway":{"input":{"type":"structure","required":["InternetGatewayId","VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"InternetGatewayId":{"locationName":"internetGatewayId"},"VpcId":{"locationName":"vpcId"}}}},"DetachNetworkInterface":{"input":{"type":"structure","required":["AttachmentId"],"members":{"AttachmentId":{"locationName":"attachmentId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Force":{"locationName":"force","type":"boolean"}}}},"DetachVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"Device":{},"Force":{"type":"boolean"},"InstanceId":{},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"shape":"S1p"}},"DetachVpnGateway":{"input":{"type":"structure","required":["VpcId","VpnGatewayId"],"members":{"VpcId":{},"VpnGatewayId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DisableVgwRoutePropagation":{"input":{"type":"structure","required":["GatewayId","RouteTableId"],"members":{"GatewayId":{},"RouteTableId":{}}}},"DisableVpcClassicLink":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DisableVpcClassicLinkDnsSupport":{"input":{"type":"structure","members":{"VpcId":{}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"DisassociateAddress":{"input":{"type":"structure","members":{"AssociationId":{},"PublicIp":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DisassociateIamInstanceProfile":{"input":{"type":"structure","required":["AssociationId"],"members":{"AssociationId":{}}},"output":{"type":"structure","members":{"IamInstanceProfileAssociation":{"shape":"S13","locationName":"iamInstanceProfileAssociation"}}}},"DisassociateRouteTable":{"input":{"type":"structure","required":["AssociationId"],"members":{"AssociationId":{"locationName":"associationId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"DisassociateSubnetCidrBlock":{"input":{"type":"structure","required":["AssociationId"],"members":{"AssociationId":{"locationName":"associationId"}}},"output":{"type":"structure","members":{"Ipv6CidrBlockAssociation":{"shape":"S1a","locationName":"ipv6CidrBlockAssociation"},"SubnetId":{"locationName":"subnetId"}}}},"DisassociateVpcCidrBlock":{"input":{"type":"structure","required":["AssociationId"],"members":{"AssociationId":{"locationName":"associationId"}}},"output":{"type":"structure","members":{"Ipv6CidrBlockAssociation":{"shape":"S1f","locationName":"ipv6CidrBlockAssociation"},"VpcId":{"locationName":"vpcId"}}}},"EnableVgwRoutePropagation":{"input":{"type":"structure","required":["GatewayId","RouteTableId"],"members":{"GatewayId":{},"RouteTableId":{}}}},"EnableVolumeIO":{"input":{"type":"structure","required":["VolumeId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VolumeId":{"locationName":"volumeId"}}}},"EnableVpcClassicLink":{"input":{"type":"structure","required":["VpcId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcId":{"locationName":"vpcId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"EnableVpcClassicLinkDnsSupport":{"input":{"type":"structure","members":{"VpcId":{}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"GetConsoleOutput":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"Output":{"locationName":"output"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}}},"GetConsoleScreenshot":{"input":{"type":"structure","required":["InstanceId"],"members":{"DryRun":{"type":"boolean"},"InstanceId":{},"WakeUp":{"type":"boolean"}}},"output":{"type":"structure","members":{"ImageData":{"locationName":"imageData"},"InstanceId":{"locationName":"instanceId"}}}},"GetHostReservationPurchasePreview":{"input":{"type":"structure","required":["HostIdSet","OfferingId"],"members":{"HostIdSet":{"shape":"Slw"},"OfferingId":{}}},"output":{"type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"Purchase":{"shape":"Sly","locationName":"purchase"},"TotalHourlyPrice":{"locationName":"totalHourlyPrice"},"TotalUpfrontPrice":{"locationName":"totalUpfrontPrice"}}}},"GetPasswordData":{"input":{"type":"structure","required":["InstanceId"],"members":{"InstanceId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"PasswordData":{"locationName":"passwordData"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}}},"GetReservedInstancesExchangeQuote":{"input":{"type":"structure","required":["ReservedInstanceIds"],"members":{"DryRun":{"type":"boolean"},"ReservedInstanceIds":{"shape":"S3","locationName":"ReservedInstanceId"},"TargetConfigurations":{"shape":"S5","locationName":"TargetConfiguration"}}},"output":{"type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"IsValidExchange":{"locationName":"isValidExchange","type":"boolean"},"OutputReservedInstancesWillExpireAt":{"locationName":"outputReservedInstancesWillExpireAt","type":"timestamp"},"PaymentDue":{"locationName":"paymentDue"},"ReservedInstanceValueRollup":{"shape":"Sm4","locationName":"reservedInstanceValueRollup"},"ReservedInstanceValueSet":{"locationName":"reservedInstanceValueSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ReservationValue":{"shape":"Sm4","locationName":"reservationValue"},"ReservedInstanceId":{"locationName":"reservedInstanceId"}}}},"TargetConfigurationValueRollup":{"shape":"Sm4","locationName":"targetConfigurationValueRollup"},"TargetConfigurationValueSet":{"locationName":"targetConfigurationValueSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ReservationValue":{"shape":"Sm4","locationName":"reservationValue"},"TargetConfiguration":{"locationName":"targetConfiguration","type":"structure","members":{"InstanceCount":{"locationName":"instanceCount","type":"integer"},"OfferingId":{"locationName":"offeringId"}}}}}},"ValidationFailureReason":{"locationName":"validationFailureReason"}}}},"ImportImage":{"input":{"type":"structure","members":{"Architecture":{},"ClientData":{"shape":"Smb"},"ClientToken":{},"Description":{},"DiskContainers":{"locationName":"DiskContainer","type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{},"DeviceName":{},"Format":{},"SnapshotId":{},"Url":{},"UserBucket":{"shape":"Sme"}}}},"DryRun":{"type":"boolean"},"Hypervisor":{},"LicenseType":{},"Platform":{},"RoleName":{}}},"output":{"type":"structure","members":{"Architecture":{"locationName":"architecture"},"Description":{"locationName":"description"},"Hypervisor":{"locationName":"hypervisor"},"ImageId":{"locationName":"imageId"},"ImportTaskId":{"locationName":"importTaskId"},"LicenseType":{"locationName":"licenseType"},"Platform":{"locationName":"platform"},"Progress":{"locationName":"progress"},"SnapshotDetails":{"shape":"Sd6","locationName":"snapshotDetailSet"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"}}}},"ImportInstance":{"input":{"type":"structure","required":["Platform"],"members":{"Description":{"locationName":"description"},"DiskImages":{"locationName":"diskImage","type":"list","member":{"type":"structure","members":{"Description":{},"Image":{"shape":"Smj"},"Volume":{"shape":"Smk"}}}},"DryRun":{"locationName":"dryRun","type":"boolean"},"LaunchSpecification":{"locationName":"launchSpecification","type":"structure","members":{"AdditionalInfo":{"locationName":"additionalInfo"},"Architecture":{"locationName":"architecture"},"GroupIds":{"shape":"S5n","locationName":"GroupId"},"GroupNames":{"shape":"Smm","locationName":"GroupName"},"InstanceInitiatedShutdownBehavior":{"locationName":"instanceInitiatedShutdownBehavior"},"InstanceType":{"locationName":"instanceType"},"Monitoring":{"locationName":"monitoring","type":"boolean"},"Placement":{"shape":"Se9","locationName":"placement"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"SubnetId":{"locationName":"subnetId"},"UserData":{"locationName":"userData","type":"structure","members":{"Data":{"locationName":"data"}}}}},"Platform":{"locationName":"platform"}}},"output":{"type":"structure","members":{"ConversionTask":{"shape":"Sa4","locationName":"conversionTask"}}}},"ImportKeyPair":{"input":{"type":"structure","required":["KeyName","PublicKeyMaterial"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"KeyName":{"locationName":"keyName"},"PublicKeyMaterial":{"locationName":"publicKeyMaterial","type":"blob"}}},"output":{"type":"structure","members":{"KeyFingerprint":{"locationName":"keyFingerprint"},"KeyName":{"locationName":"keyName"}}}},"ImportSnapshot":{"input":{"type":"structure","members":{"ClientData":{"shape":"Smb"},"ClientToken":{},"Description":{},"DiskContainer":{"type":"structure","members":{"Description":{},"Format":{},"Url":{},"UserBucket":{"shape":"Sme"}}},"DryRun":{"type":"boolean"},"RoleName":{}}},"output":{"type":"structure","members":{"Description":{"locationName":"description"},"ImportTaskId":{"locationName":"importTaskId"},"SnapshotTaskDetail":{"shape":"Sdd","locationName":"snapshotTaskDetail"}}}},"ImportVolume":{"input":{"type":"structure","required":["AvailabilityZone","Image","Volume"],"members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Image":{"shape":"Smj","locationName":"image"},"Volume":{"shape":"Smk","locationName":"volume"}}},"output":{"type":"structure","members":{"ConversionTask":{"shape":"Sa4","locationName":"conversionTask"}}}},"ModifyHosts":{"input":{"type":"structure","required":["AutoPlacement","HostIds"],"members":{"AutoPlacement":{"locationName":"autoPlacement"},"HostIds":{"shape":"Sbw","locationName":"hostId"}}},"output":{"type":"structure","members":{"Successful":{"shape":"Sr","locationName":"successful"},"Unsuccessful":{"shape":"Smz","locationName":"unsuccessful"}}}},"ModifyIdFormat":{"input":{"type":"structure","required":["Resource","UseLongIds"],"members":{"Resource":{},"UseLongIds":{"type":"boolean"}}}},"ModifyIdentityIdFormat":{"input":{"type":"structure","required":["PrincipalArn","Resource","UseLongIds"],"members":{"PrincipalArn":{"locationName":"principalArn"},"Resource":{"locationName":"resource"},"UseLongIds":{"locationName":"useLongIds","type":"boolean"}}}},"ModifyImageAttribute":{"input":{"type":"structure","required":["ImageId"],"members":{"Attribute":{},"Description":{"shape":"S42"},"ImageId":{},"LaunchPermission":{"type":"structure","members":{"Add":{"shape":"Scl"},"Remove":{"shape":"Scl"}}},"OperationType":{},"ProductCodes":{"locationName":"ProductCode","type":"list","member":{"locationName":"ProductCode"}},"UserGroups":{"locationName":"UserGroup","type":"list","member":{"locationName":"UserGroup"}},"UserIds":{"shape":"Sn7","locationName":"UserId"},"Value":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ModifyInstanceAttribute":{"input":{"type":"structure","required":["InstanceId"],"members":{"SourceDestCheck":{"shape":"Sdk"},"Attribute":{"locationName":"attribute"},"BlockDeviceMappings":{"locationName":"blockDeviceMapping","type":"list","member":{"locationName":"item","type":"structure","members":{"DeviceName":{"locationName":"deviceName"},"Ebs":{"locationName":"ebs","type":"structure","members":{"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"VolumeId":{"locationName":"volumeId"}}},"NoDevice":{"locationName":"noDevice"},"VirtualName":{"locationName":"virtualName"}}}},"DisableApiTermination":{"shape":"Sdk","locationName":"disableApiTermination"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EbsOptimized":{"shape":"Sdk","locationName":"ebsOptimized"},"EnaSupport":{"shape":"Sdk","locationName":"enaSupport"},"Groups":{"shape":"S1j","locationName":"GroupId"},"InstanceId":{"locationName":"instanceId"},"InstanceInitiatedShutdownBehavior":{"shape":"S42","locationName":"instanceInitiatedShutdownBehavior"},"InstanceType":{"shape":"S42","locationName":"instanceType"},"Kernel":{"shape":"S42","locationName":"kernel"},"Ramdisk":{"shape":"S42","locationName":"ramdisk"},"SriovNetSupport":{"shape":"S42","locationName":"sriovNetSupport"},"UserData":{"locationName":"userData","type":"structure","members":{"Value":{"locationName":"value","type":"blob"}}},"Value":{"locationName":"value"}}}},"ModifyInstancePlacement":{"input":{"type":"structure","required":["InstanceId"],"members":{"Affinity":{"locationName":"affinity"},"HostId":{"locationName":"hostId"},"InstanceId":{"locationName":"instanceId"},"Tenancy":{"locationName":"tenancy"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"ModifyNetworkInterfaceAttribute":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"Attachment":{"locationName":"attachment","type":"structure","members":{"AttachmentId":{"locationName":"attachmentId"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"}}},"Description":{"shape":"S42","locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Groups":{"shape":"S5n","locationName":"SecurityGroupId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"SourceDestCheck":{"shape":"Sdk","locationName":"sourceDestCheck"}}}},"ModifyReservedInstances":{"input":{"type":"structure","required":["ReservedInstancesIds","TargetConfigurations"],"members":{"ReservedInstancesIds":{"shape":"Sfu","locationName":"ReservedInstancesId"},"ClientToken":{"locationName":"clientToken"},"TargetConfigurations":{"locationName":"ReservedInstancesConfigurationSetItemType","type":"list","member":{"shape":"Sgf","locationName":"item"}}}},"output":{"type":"structure","members":{"ReservedInstancesModificationId":{"locationName":"reservedInstancesModificationId"}}}},"ModifySnapshotAttribute":{"input":{"type":"structure","required":["SnapshotId"],"members":{"Attribute":{},"CreateVolumePermission":{"type":"structure","members":{"Add":{"shape":"Shk"},"Remove":{"shape":"Shk"}}},"GroupNames":{"shape":"Shd","locationName":"UserGroup"},"OperationType":{},"SnapshotId":{},"UserIds":{"shape":"Sn7","locationName":"UserId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ModifySpotFleetRequest":{"input":{"type":"structure","required":["SpotFleetRequestId"],"members":{"ExcessCapacityTerminationPolicy":{"locationName":"excessCapacityTerminationPolicy"},"SpotFleetRequestId":{"locationName":"spotFleetRequestId"},"TargetCapacity":{"locationName":"targetCapacity","type":"integer"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"ModifySubnetAttribute":{"input":{"type":"structure","required":["SubnetId"],"members":{"AssignIpv6AddressOnCreation":{"shape":"Sdk"},"MapPublicIpOnLaunch":{"shape":"Sdk"},"SubnetId":{"locationName":"subnetId"}}}},"ModifyVolume":{"input":{"type":"structure","required":["VolumeId"],"members":{"DryRun":{"type":"boolean"},"VolumeId":{},"Size":{"type":"integer"},"VolumeType":{},"Iops":{"type":"integer"}}},"output":{"type":"structure","members":{"VolumeModification":{"shape":"Sk4","locationName":"volumeModification"}}}},"ModifyVolumeAttribute":{"input":{"type":"structure","required":["VolumeId"],"members":{"AutoEnableIO":{"shape":"Sdk"},"VolumeId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ModifyVpcAttribute":{"input":{"type":"structure","required":["VpcId"],"members":{"EnableDnsHostnames":{"shape":"Sdk"},"EnableDnsSupport":{"shape":"Sdk"},"VpcId":{"locationName":"vpcId"}}}},"ModifyVpcEndpoint":{"input":{"type":"structure","required":["VpcEndpointId"],"members":{"AddRouteTableIds":{"shape":"S2z","locationName":"AddRouteTableId"},"DryRun":{"type":"boolean"},"PolicyDocument":{},"RemoveRouteTableIds":{"shape":"S2z","locationName":"RemoveRouteTableId"},"ResetPolicy":{"type":"boolean"},"VpcEndpointId":{}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"ModifyVpcPeeringConnectionOptions":{"input":{"type":"structure","required":["VpcPeeringConnectionId"],"members":{"AccepterPeeringConnectionOptions":{"shape":"Sny"},"DryRun":{"type":"boolean"},"RequesterPeeringConnectionOptions":{"shape":"Sny"},"VpcPeeringConnectionId":{}}},"output":{"type":"structure","members":{"AccepterPeeringConnectionOptions":{"shape":"So0","locationName":"accepterPeeringConnectionOptions"},"RequesterPeeringConnectionOptions":{"shape":"So0","locationName":"requesterPeeringConnectionOptions"}}}},"MonitorInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceMonitorings":{"shape":"So3","locationName":"instancesSet"}}}},"MoveAddressToVpc":{"input":{"type":"structure","required":["PublicIp"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"PublicIp":{"locationName":"publicIp"}}},"output":{"type":"structure","members":{"AllocationId":{"locationName":"allocationId"},"Status":{"locationName":"status"}}}},"PurchaseHostReservation":{"input":{"type":"structure","required":["HostIdSet","OfferingId"],"members":{"ClientToken":{},"CurrencyCode":{},"HostIdSet":{"shape":"Slw"},"LimitPrice":{},"OfferingId":{}}},"output":{"type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"CurrencyCode":{"locationName":"currencyCode"},"Purchase":{"shape":"Sly","locationName":"purchase"},"TotalHourlyPrice":{"locationName":"totalHourlyPrice"},"TotalUpfrontPrice":{"locationName":"totalUpfrontPrice"}}}},"PurchaseReservedInstancesOffering":{"input":{"type":"structure","required":["InstanceCount","ReservedInstancesOfferingId"],"members":{"InstanceCount":{"type":"integer"},"ReservedInstancesOfferingId":{},"DryRun":{"locationName":"dryRun","type":"boolean"},"LimitPrice":{"locationName":"limitPrice","type":"structure","members":{"Amount":{"locationName":"amount","type":"double"},"CurrencyCode":{"locationName":"currencyCode"}}}}},"output":{"type":"structure","members":{"ReservedInstancesId":{"locationName":"reservedInstancesId"}}}},"PurchaseScheduledInstances":{"input":{"type":"structure","required":["PurchaseRequests"],"members":{"ClientToken":{"idempotencyToken":true},"DryRun":{"type":"boolean"},"PurchaseRequests":{"locationName":"PurchaseRequest","type":"list","member":{"locationName":"PurchaseRequest","type":"structure","required":["InstanceCount","PurchaseToken"],"members":{"InstanceCount":{"type":"integer"},"PurchaseToken":{}}}}}},"output":{"type":"structure","members":{"ScheduledInstanceSet":{"locationName":"scheduledInstanceSet","type":"list","member":{"shape":"Sh6","locationName":"item"}}}}},"RebootInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"RegisterImage":{"input":{"type":"structure","required":["Name"],"members":{"ImageLocation":{},"Architecture":{"locationName":"architecture"},"BlockDeviceMappings":{"shape":"S4k","locationName":"BlockDeviceMapping"},"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EnaSupport":{"locationName":"enaSupport","type":"boolean"},"KernelId":{"locationName":"kernelId"},"Name":{"locationName":"name"},"BillingProducts":{"locationName":"BillingProduct","type":"list","member":{"locationName":"item"}},"RamdiskId":{"locationName":"ramdiskId"},"RootDeviceName":{"locationName":"rootDeviceName"},"SriovNetSupport":{"locationName":"sriovNetSupport"},"VirtualizationType":{"locationName":"virtualizationType"}}},"output":{"type":"structure","members":{"ImageId":{"locationName":"imageId"}}}},"RejectVpcPeeringConnection":{"input":{"type":"structure","required":["VpcPeeringConnectionId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"output":{"type":"structure","members":{"Return":{"locationName":"return","type":"boolean"}}}},"ReleaseAddress":{"input":{"type":"structure","members":{"AllocationId":{},"PublicIp":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ReleaseHosts":{"input":{"type":"structure","required":["HostIds"],"members":{"HostIds":{"shape":"Sbw","locationName":"hostId"}}},"output":{"type":"structure","members":{"Successful":{"shape":"Sr","locationName":"successful"},"Unsuccessful":{"shape":"Smz","locationName":"unsuccessful"}}}},"ReplaceIamInstanceProfileAssociation":{"input":{"type":"structure","required":["IamInstanceProfile","AssociationId"],"members":{"IamInstanceProfile":{"shape":"S11"},"AssociationId":{}}},"output":{"type":"structure","members":{"IamInstanceProfileAssociation":{"shape":"S13","locationName":"iamInstanceProfileAssociation"}}}},"ReplaceNetworkAclAssociation":{"input":{"type":"structure","required":["AssociationId","NetworkAclId"],"members":{"AssociationId":{"locationName":"associationId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkAclId":{"locationName":"networkAclId"}}},"output":{"type":"structure","members":{"NewAssociationId":{"locationName":"newAssociationId"}}}},"ReplaceNetworkAclEntry":{"input":{"type":"structure","required":["Egress","NetworkAclId","Protocol","RuleAction","RuleNumber"],"members":{"CidrBlock":{"locationName":"cidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Egress":{"locationName":"egress","type":"boolean"},"IcmpTypeCode":{"shape":"S5i","locationName":"Icmp"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"NetworkAclId":{"locationName":"networkAclId"},"PortRange":{"shape":"S5j","locationName":"portRange"},"Protocol":{"locationName":"protocol"},"RuleAction":{"locationName":"ruleAction"},"RuleNumber":{"locationName":"ruleNumber","type":"integer"}}}},"ReplaceRoute":{"input":{"type":"structure","required":["RouteTableId"],"members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"DestinationIpv6CidrBlock":{"locationName":"destinationIpv6CidrBlock"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EgressOnlyInternetGatewayId":{"locationName":"egressOnlyInternetGatewayId"},"GatewayId":{"locationName":"gatewayId"},"InstanceId":{"locationName":"instanceId"},"NatGatewayId":{"locationName":"natGatewayId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"RouteTableId":{"locationName":"routeTableId"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}}},"ReplaceRouteTableAssociation":{"input":{"type":"structure","required":["AssociationId","RouteTableId"],"members":{"AssociationId":{"locationName":"associationId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"RouteTableId":{"locationName":"routeTableId"}}},"output":{"type":"structure","members":{"NewAssociationId":{"locationName":"newAssociationId"}}}},"ReportInstanceStatus":{"input":{"type":"structure","required":["Instances","ReasonCodes","Status"],"members":{"Description":{"locationName":"description"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EndTime":{"locationName":"endTime","type":"timestamp"},"Instances":{"shape":"S9w","locationName":"instanceId"},"ReasonCodes":{"locationName":"reasonCode","type":"list","member":{"locationName":"item"}},"StartTime":{"locationName":"startTime","type":"timestamp"},"Status":{"locationName":"status"}}}},"RequestSpotFleet":{"input":{"type":"structure","required":["SpotFleetRequestConfig"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"SpotFleetRequestConfig":{"shape":"Si9","locationName":"spotFleetRequestConfig"}}},"output":{"type":"structure","required":["SpotFleetRequestId"],"members":{"SpotFleetRequestId":{"locationName":"spotFleetRequestId"}}}},"RequestSpotInstances":{"input":{"type":"structure","required":["SpotPrice"],"members":{"AvailabilityZoneGroup":{"locationName":"availabilityZoneGroup"},"BlockDurationMinutes":{"locationName":"blockDurationMinutes","type":"integer"},"ClientToken":{"locationName":"clientToken"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"LaunchGroup":{"locationName":"launchGroup"},"LaunchSpecification":{"type":"structure","members":{"SecurityGroupIds":{"shape":"S2z","locationName":"SecurityGroupId"},"SecurityGroups":{"shape":"S2z","locationName":"SecurityGroup"},"AddressingType":{"locationName":"addressingType"},"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"IamInstanceProfile":{"shape":"S11","locationName":"iamInstanceProfile"},"ImageId":{"locationName":"imageId"},"InstanceType":{"locationName":"instanceType"},"KernelId":{"locationName":"kernelId"},"KeyName":{"locationName":"keyName"},"Monitoring":{"shape":"Siq","locationName":"monitoring"},"NetworkInterfaces":{"shape":"Sif","locationName":"NetworkInterface"},"Placement":{"shape":"Sih","locationName":"placement"},"RamdiskId":{"locationName":"ramdiskId"},"SubnetId":{"locationName":"subnetId"},"UserData":{"locationName":"userData"}}},"SpotPrice":{"locationName":"spotPrice"},"Type":{"locationName":"type"},"ValidFrom":{"locationName":"validFrom","type":"timestamp"},"ValidUntil":{"locationName":"validUntil","type":"timestamp"}}},"output":{"type":"structure","members":{"SpotInstanceRequests":{"shape":"Sin","locationName":"spotInstanceRequestSet"}}}},"ResetImageAttribute":{"input":{"type":"structure","required":["Attribute","ImageId"],"members":{"Attribute":{},"ImageId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"ResetInstanceAttribute":{"input":{"type":"structure","required":["Attribute","InstanceId"],"members":{"Attribute":{"locationName":"attribute"},"DryRun":{"locationName":"dryRun","type":"boolean"},"InstanceId":{"locationName":"instanceId"}}}},"ResetNetworkInterfaceAttribute":{"input":{"type":"structure","required":["NetworkInterfaceId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"SourceDestCheck":{"locationName":"sourceDestCheck"}}}},"ResetSnapshotAttribute":{"input":{"type":"structure","required":["Attribute","SnapshotId"],"members":{"Attribute":{},"SnapshotId":{},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"RestoreAddressToClassic":{"input":{"type":"structure","required":["PublicIp"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"PublicIp":{"locationName":"publicIp"}}},"output":{"type":"structure","members":{"PublicIp":{"locationName":"publicIp"},"Status":{"locationName":"status"}}}},"RevokeSecurityGroupEgress":{"input":{"type":"structure","required":["GroupId"],"members":{"DryRun":{"locationName":"dryRun","type":"boolean"},"GroupId":{"locationName":"groupId"},"IpPermissions":{"shape":"S1w","locationName":"ipPermissions"},"CidrIp":{"locationName":"cidrIp"},"FromPort":{"locationName":"fromPort","type":"integer"},"IpProtocol":{"locationName":"ipProtocol"},"ToPort":{"locationName":"toPort","type":"integer"},"SourceSecurityGroupName":{"locationName":"sourceSecurityGroupName"},"SourceSecurityGroupOwnerId":{"locationName":"sourceSecurityGroupOwnerId"}}}},"RevokeSecurityGroupIngress":{"input":{"type":"structure","members":{"CidrIp":{},"FromPort":{"type":"integer"},"GroupId":{},"GroupName":{},"IpPermissions":{"shape":"S1w"},"IpProtocol":{},"SourceSecurityGroupName":{},"SourceSecurityGroupOwnerId":{},"ToPort":{"type":"integer"},"DryRun":{"locationName":"dryRun","type":"boolean"}}}},"RunInstances":{"input":{"type":"structure","required":["ImageId","MaxCount","MinCount"],"members":{"BlockDeviceMappings":{"shape":"S4k","locationName":"BlockDeviceMapping"},"ImageId":{},"InstanceType":{},"Ipv6AddressCount":{"type":"integer"},"Ipv6Addresses":{"shape":"S5o","locationName":"Ipv6Address"},"KernelId":{},"KeyName":{},"MaxCount":{"type":"integer"},"MinCount":{"type":"integer"},"Monitoring":{"shape":"Siq"},"Placement":{"shape":"Se9"},"RamdiskId":{},"SecurityGroupIds":{"shape":"S5n","locationName":"SecurityGroupId"},"SecurityGroups":{"shape":"Smm","locationName":"SecurityGroup"},"SubnetId":{},"UserData":{},"AdditionalInfo":{"locationName":"additionalInfo"},"ClientToken":{"locationName":"clientToken"},"DisableApiTermination":{"locationName":"disableApiTermination","type":"boolean"},"DryRun":{"locationName":"dryRun","type":"boolean"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"IamInstanceProfile":{"shape":"S11","locationName":"iamInstanceProfile"},"InstanceInitiatedShutdownBehavior":{"locationName":"instanceInitiatedShutdownBehavior"},"NetworkInterfaces":{"shape":"Sif","locationName":"networkInterface"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"ElasticGpuSpecification":{"type":"list","member":{"locationName":"item","type":"structure","required":["Type"],"members":{"Type":{}}}},"TagSpecifications":{"shape":"S7b","locationName":"TagSpecification"}}},"output":{"shape":"Se3"}},"RunScheduledInstances":{"input":{"type":"structure","required":["LaunchSpecification","ScheduledInstanceId"],"members":{"ClientToken":{"idempotencyToken":true},"DryRun":{"type":"boolean"},"InstanceCount":{"type":"integer"},"LaunchSpecification":{"type":"structure","required":["ImageId"],"members":{"BlockDeviceMappings":{"locationName":"BlockDeviceMapping","type":"list","member":{"locationName":"BlockDeviceMapping","type":"structure","members":{"DeviceName":{},"Ebs":{"type":"structure","members":{"DeleteOnTermination":{"type":"boolean"},"Encrypted":{"type":"boolean"},"Iops":{"type":"integer"},"SnapshotId":{},"VolumeSize":{"type":"integer"},"VolumeType":{}}},"NoDevice":{},"VirtualName":{}}}},"EbsOptimized":{"type":"boolean"},"IamInstanceProfile":{"type":"structure","members":{"Arn":{},"Name":{}}},"ImageId":{},"InstanceType":{},"KernelId":{},"KeyName":{},"Monitoring":{"type":"structure","members":{"Enabled":{"type":"boolean"}}},"NetworkInterfaces":{"locationName":"NetworkInterface","type":"list","member":{"locationName":"NetworkInterface","type":"structure","members":{"AssociatePublicIpAddress":{"type":"boolean"},"DeleteOnTermination":{"type":"boolean"},"Description":{},"DeviceIndex":{"type":"integer"},"Groups":{"shape":"Spt","locationName":"Group"},"Ipv6AddressCount":{"type":"integer"},"Ipv6Addresses":{"locationName":"Ipv6Address","type":"list","member":{"locationName":"Ipv6Address","type":"structure","members":{"Ipv6Address":{}}}},"NetworkInterfaceId":{},"PrivateIpAddress":{},"PrivateIpAddressConfigs":{"locationName":"PrivateIpAddressConfig","type":"list","member":{"locationName":"PrivateIpAddressConfigSet","type":"structure","members":{"Primary":{"type":"boolean"},"PrivateIpAddress":{}}}},"SecondaryPrivateIpAddressCount":{"type":"integer"},"SubnetId":{}}}},"Placement":{"type":"structure","members":{"AvailabilityZone":{},"GroupName":{}}},"RamdiskId":{},"SecurityGroupIds":{"shape":"Spt","locationName":"SecurityGroupId"},"SubnetId":{},"UserData":{}}},"ScheduledInstanceId":{}}},"output":{"type":"structure","members":{"InstanceIdSet":{"locationName":"instanceIdSet","type":"list","member":{"locationName":"item"}}}}},"StartInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"AdditionalInfo":{"locationName":"additionalInfo"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"StartingInstances":{"shape":"Sq4","locationName":"instancesSet"}}}},"StopInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"},"Force":{"locationName":"force","type":"boolean"}}},"output":{"type":"structure","members":{"StoppingInstances":{"shape":"Sq4","locationName":"instancesSet"}}}},"TerminateInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"TerminatingInstances":{"shape":"Sq4","locationName":"instancesSet"}}}},"UnassignIpv6Addresses":{"input":{"type":"structure","required":["Ipv6Addresses","NetworkInterfaceId"],"members":{"Ipv6Addresses":{"shape":"St","locationName":"ipv6Addresses"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"}}},"output":{"type":"structure","members":{"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"UnassignedIpv6Addresses":{"shape":"St","locationName":"unassignedIpv6Addresses"}}}},"UnassignPrivateIpAddresses":{"input":{"type":"structure","required":["NetworkInterfaceId","PrivateIpAddresses"],"members":{"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIpAddresses":{"shape":"Sw","locationName":"privateIpAddress"}}}},"UnmonitorInstances":{"input":{"type":"structure","required":["InstanceIds"],"members":{"InstanceIds":{"shape":"S9w","locationName":"InstanceId"},"DryRun":{"locationName":"dryRun","type":"boolean"}}},"output":{"type":"structure","members":{"InstanceMonitorings":{"shape":"So3","locationName":"instancesSet"}}}}},"shapes":{"S3":{"type":"list","member":{"locationName":"ReservedInstanceId"}},"S5":{"type":"list","member":{"locationName":"TargetConfigurationRequest","type":"structure","required":["OfferingId"],"members":{"InstanceCount":{"type":"integer"},"OfferingId":{}}}},"Sb":{"type":"structure","members":{"AccepterVpcInfo":{"shape":"Sc","locationName":"accepterVpcInfo"},"ExpirationTime":{"locationName":"expirationTime","type":"timestamp"},"RequesterVpcInfo":{"shape":"Sc","locationName":"requesterVpcInfo"},"Status":{"locationName":"status","type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"Sc":{"type":"structure","members":{"CidrBlock":{"locationName":"cidrBlock"},"Ipv6CidrBlockSet":{"locationName":"ipv6CidrBlockSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"}}}},"OwnerId":{"locationName":"ownerId"},"PeeringOptions":{"locationName":"peeringOptions","type":"structure","members":{"AllowDnsResolutionFromRemoteVpc":{"locationName":"allowDnsResolutionFromRemoteVpc","type":"boolean"},"AllowEgressFromLocalClassicLinkToRemoteVpc":{"locationName":"allowEgressFromLocalClassicLinkToRemoteVpc","type":"boolean"},"AllowEgressFromLocalVpcToRemoteClassicLink":{"locationName":"allowEgressFromLocalVpcToRemoteClassicLink","type":"boolean"}}},"VpcId":{"locationName":"vpcId"}}},"Sj":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Key":{"locationName":"key"},"Value":{"locationName":"value"}}}},"Sr":{"type":"list","member":{"locationName":"item"}},"St":{"type":"list","member":{"locationName":"item"}},"Sw":{"type":"list","member":{"locationName":"PrivateIpAddress"}},"S11":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Name":{"locationName":"name"}}},"S13":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"},"InstanceId":{"locationName":"instanceId"},"IamInstanceProfile":{"shape":"S14","locationName":"iamInstanceProfile"},"State":{"locationName":"state"},"Timestamp":{"locationName":"timestamp","type":"timestamp"}}},"S14":{"type":"structure","members":{"Arn":{"locationName":"arn"},"Id":{"locationName":"id"}}},"S1a":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"Ipv6CidrBlockState":{"locationName":"ipv6CidrBlockState","type":"structure","members":{"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"}}}}},"S1f":{"type":"structure","members":{"AssociationId":{"locationName":"associationId"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"Ipv6CidrBlockState":{"locationName":"ipv6CidrBlockState","type":"structure","members":{"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"}}}}},"S1j":{"type":"list","member":{"locationName":"groupId"}},"S1p":{"type":"structure","members":{"AttachTime":{"locationName":"attachTime","type":"timestamp"},"Device":{"locationName":"device"},"InstanceId":{"locationName":"instanceId"},"State":{"locationName":"status"},"VolumeId":{"locationName":"volumeId"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"}}},"S1t":{"type":"structure","members":{"State":{"locationName":"state"},"VpcId":{"locationName":"vpcId"}}},"S1w":{"type":"list","member":{"locationName":"item","type":"structure","members":{"FromPort":{"locationName":"fromPort","type":"integer"},"IpProtocol":{"locationName":"ipProtocol"},"IpRanges":{"locationName":"ipRanges","type":"list","member":{"locationName":"item","type":"structure","members":{"CidrIp":{"locationName":"cidrIp"}}}},"Ipv6Ranges":{"locationName":"ipv6Ranges","type":"list","member":{"locationName":"item","type":"structure","members":{"CidrIpv6":{"locationName":"cidrIpv6"}}}},"PrefixListIds":{"locationName":"prefixListIds","type":"list","member":{"locationName":"item","type":"structure","members":{"PrefixListId":{"locationName":"prefixListId"}}}},"ToPort":{"locationName":"toPort","type":"integer"},"UserIdGroupPairs":{"locationName":"groups","type":"list","member":{"shape":"S25","locationName":"item"}}}}},"S25":{"type":"structure","members":{"GroupId":{"locationName":"groupId"},"GroupName":{"locationName":"groupName"},"PeeringStatus":{"locationName":"peeringStatus"},"UserId":{"locationName":"userId"},"VpcId":{"locationName":"vpcId"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}},"S28":{"type":"structure","members":{"S3":{"type":"structure","members":{"AWSAccessKeyId":{},"Bucket":{"locationName":"bucket"},"Prefix":{"locationName":"prefix"},"UploadPolicy":{"locationName":"uploadPolicy","type":"blob"},"UploadPolicySignature":{"locationName":"uploadPolicySignature"}}}}},"S2c":{"type":"structure","members":{"BundleId":{"locationName":"bundleId"},"BundleTaskError":{"locationName":"error","type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"InstanceId":{"locationName":"instanceId"},"Progress":{"locationName":"progress"},"StartTime":{"locationName":"startTime","type":"timestamp"},"State":{"locationName":"state"},"Storage":{"shape":"S28","locationName":"storage"},"UpdateTime":{"locationName":"updateTime","type":"timestamp"}}},"S2n":{"type":"list","member":{"locationName":"item","type":"structure","members":{"ClientToken":{"locationName":"clientToken"},"CreateDate":{"locationName":"createDate","type":"timestamp"},"InstanceCounts":{"locationName":"instanceCounts","type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceCount":{"locationName":"instanceCount","type":"integer"},"State":{"locationName":"state"}}}},"PriceSchedules":{"locationName":"priceSchedules","type":"list","member":{"locationName":"item","type":"structure","members":{"Active":{"locationName":"active","type":"boolean"},"CurrencyCode":{"locationName":"currencyCode"},"Price":{"locationName":"price","type":"double"},"Term":{"locationName":"term","type":"long"}}}},"ReservedInstancesId":{"locationName":"reservedInstancesId"},"ReservedInstancesListingId":{"locationName":"reservedInstancesListingId"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"Tags":{"shape":"Sj","locationName":"tagSet"},"UpdateDate":{"locationName":"updateDate","type":"timestamp"}}}},"S2z":{"type":"list","member":{"locationName":"item"}},"S39":{"type":"list","member":{"locationName":"SpotInstanceRequestId"}},"S3n":{"type":"structure","members":{"BgpAsn":{"locationName":"bgpAsn"},"CustomerGatewayId":{"locationName":"customerGatewayId"},"IpAddress":{"locationName":"ipAddress"},"State":{"locationName":"state"},"Type":{"locationName":"type"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S3q":{"type":"structure","members":{"CidrBlock":{"locationName":"cidrBlock"},"DhcpOptionsId":{"locationName":"dhcpOptionsId"},"State":{"locationName":"state"},"VpcId":{"locationName":"vpcId"},"InstanceTenancy":{"locationName":"instanceTenancy"},"Ipv6CidrBlockAssociationSet":{"locationName":"ipv6CidrBlockAssociationSet","type":"list","member":{"shape":"S1f","locationName":"item"}},"IsDefault":{"locationName":"isDefault","type":"boolean"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S3y":{"type":"structure","members":{"DhcpConfigurations":{"locationName":"dhcpConfigurationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Key":{"locationName":"key"},"Values":{"locationName":"valueSet","type":"list","member":{"shape":"S42","locationName":"item"}}}}},"DhcpOptionsId":{"locationName":"dhcpOptionsId"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S42":{"type":"structure","members":{"Value":{"locationName":"value"}}},"S45":{"type":"structure","members":{"Attachments":{"shape":"S46","locationName":"attachmentSet"},"EgressOnlyInternetGatewayId":{"locationName":"egressOnlyInternetGatewayId"}}},"S46":{"type":"list","member":{"locationName":"item","type":"structure","members":{"State":{"locationName":"state"},"VpcId":{"locationName":"vpcId"}}}},"S4d":{"type":"list","member":{"shape":"S4e","locationName":"item"}},"S4e":{"type":"structure","required":["Error"],"members":{"Error":{"locationName":"error","type":"structure","required":["Code","Message"],"members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"ResourceId":{"locationName":"resourceId"}}},"S4h":{"type":"structure","members":{"Bucket":{},"Key":{}}},"S4k":{"type":"list","member":{"shape":"S4l","locationName":"BlockDeviceMapping"}},"S4l":{"type":"structure","members":{"DeviceName":{"locationName":"deviceName"},"VirtualName":{"locationName":"virtualName"},"Ebs":{"locationName":"ebs","type":"structure","members":{"Encrypted":{"locationName":"encrypted","type":"boolean"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"Iops":{"locationName":"iops","type":"integer"},"SnapshotId":{"locationName":"snapshotId"},"VolumeSize":{"locationName":"volumeSize","type":"integer"},"VolumeType":{"locationName":"volumeType"}}},"NoDevice":{"locationName":"noDevice"}}},"S4v":{"type":"structure","members":{"Description":{"locationName":"description"},"ExportTaskId":{"locationName":"exportTaskId"},"ExportToS3Task":{"locationName":"exportToS3","type":"structure","members":{"ContainerFormat":{"locationName":"containerFormat"},"DiskImageFormat":{"locationName":"diskImageFormat"},"S3Bucket":{"locationName":"s3Bucket"},"S3Key":{"locationName":"s3Key"}}},"InstanceExportDetails":{"locationName":"instanceExport","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"TargetEnvironment":{"locationName":"targetEnvironment"}}},"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"}}},"S51":{"type":"structure","members":{"Attachments":{"shape":"S46","locationName":"attachmentSet"},"InternetGatewayId":{"locationName":"internetGatewayId"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S56":{"type":"structure","members":{"CreateTime":{"locationName":"createTime","type":"timestamp"},"DeleteTime":{"locationName":"deleteTime","type":"timestamp"},"FailureCode":{"locationName":"failureCode"},"FailureMessage":{"locationName":"failureMessage"},"NatGatewayAddresses":{"locationName":"natGatewayAddressSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AllocationId":{"locationName":"allocationId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIp":{"locationName":"privateIp"},"PublicIp":{"locationName":"publicIp"}}}},"NatGatewayId":{"locationName":"natGatewayId"},"ProvisionedBandwidth":{"locationName":"provisionedBandwidth","type":"structure","members":{"ProvisionTime":{"locationName":"provisionTime","type":"timestamp"},"Provisioned":{"locationName":"provisioned"},"RequestTime":{"locationName":"requestTime","type":"timestamp"},"Requested":{"locationName":"requested"},"Status":{"locationName":"status"}}},"State":{"locationName":"state"},"SubnetId":{"locationName":"subnetId"},"VpcId":{"locationName":"vpcId"}}},"S5d":{"type":"structure","members":{"Associations":{"locationName":"associationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"NetworkAclAssociationId":{"locationName":"networkAclAssociationId"},"NetworkAclId":{"locationName":"networkAclId"},"SubnetId":{"locationName":"subnetId"}}}},"Entries":{"locationName":"entrySet","type":"list","member":{"locationName":"item","type":"structure","members":{"CidrBlock":{"locationName":"cidrBlock"},"Egress":{"locationName":"egress","type":"boolean"},"IcmpTypeCode":{"shape":"S5i","locationName":"icmpTypeCode"},"Ipv6CidrBlock":{"locationName":"ipv6CidrBlock"},"PortRange":{"shape":"S5j","locationName":"portRange"},"Protocol":{"locationName":"protocol"},"RuleAction":{"locationName":"ruleAction"},"RuleNumber":{"locationName":"ruleNumber","type":"integer"}}}},"IsDefault":{"locationName":"default","type":"boolean"},"NetworkAclId":{"locationName":"networkAclId"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}},"S5i":{"type":"structure","members":{"Code":{"locationName":"code","type":"integer"},"Type":{"locationName":"type","type":"integer"}}},"S5j":{"type":"structure","members":{"From":{"locationName":"from","type":"integer"},"To":{"locationName":"to","type":"integer"}}},"S5n":{"type":"list","member":{"locationName":"SecurityGroupId"}},"S5o":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Ipv6Address":{"locationName":"ipv6Address"}}}},"S5q":{"type":"list","member":{"locationName":"item","type":"structure","required":["PrivateIpAddress"],"members":{"Primary":{"locationName":"primary","type":"boolean"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}}},"S5t":{"type":"structure","members":{"Association":{"shape":"S5u","locationName":"association"},"Attachment":{"shape":"S5v","locationName":"attachment"},"AvailabilityZone":{"locationName":"availabilityZone"},"Description":{"locationName":"description"},"Groups":{"shape":"S5w","locationName":"groupSet"},"InterfaceType":{"locationName":"interfaceType"},"Ipv6Addresses":{"locationName":"ipv6AddressesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Ipv6Address":{"locationName":"ipv6Address"}}}},"MacAddress":{"locationName":"macAddress"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"OwnerId":{"locationName":"ownerId"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"PrivateIpAddresses":{"locationName":"privateIpAddressesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Association":{"shape":"S5u","locationName":"association"},"Primary":{"locationName":"primary","type":"boolean"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}}},"RequesterId":{"locationName":"requesterId"},"RequesterManaged":{"locationName":"requesterManaged","type":"boolean"},"SourceDestCheck":{"locationName":"sourceDestCheck","type":"boolean"},"Status":{"locationName":"status"},"SubnetId":{"locationName":"subnetId"},"TagSet":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}},"S5u":{"type":"structure","members":{"AllocationId":{"locationName":"allocationId"},"AssociationId":{"locationName":"associationId"},"IpOwnerId":{"locationName":"ipOwnerId"},"PublicDnsName":{"locationName":"publicDnsName"},"PublicIp":{"locationName":"publicIp"}}},"S5v":{"type":"structure","members":{"AttachTime":{"locationName":"attachTime","type":"timestamp"},"AttachmentId":{"locationName":"attachmentId"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"DeviceIndex":{"locationName":"deviceIndex","type":"integer"},"InstanceId":{"locationName":"instanceId"},"InstanceOwnerId":{"locationName":"instanceOwnerId"},"Status":{"locationName":"status"}}},"S5w":{"type":"list","member":{"locationName":"item","type":"structure","members":{"GroupName":{"locationName":"groupName"},"GroupId":{"locationName":"groupId"}}}},"S67":{"type":"structure","members":{"NetworkInterfacePermissionId":{"locationName":"networkInterfacePermissionId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"AwsAccountId":{"locationName":"awsAccountId"},"AwsService":{"locationName":"awsService"},"Permission":{"locationName":"permission"},"PermissionState":{"locationName":"permissionState","type":"structure","members":{"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"}}}}},"S6k":{"type":"structure","members":{"Associations":{"locationName":"associationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Main":{"locationName":"main","type":"boolean"},"RouteTableAssociationId":{"locationName":"routeTableAssociationId"},"RouteTableId":{"locationName":"routeTableId"},"SubnetId":{"locationName":"subnetId"}}}},"PropagatingVgws":{"locationName":"propagatingVgwSet","type":"list","member":{"locationName":"item","type":"structure","members":{"GatewayId":{"locationName":"gatewayId"}}}},"RouteTableId":{"locationName":"routeTableId"},"Routes":{"locationName":"routeSet","type":"list","member":{"locationName":"item","type":"structure","members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"DestinationIpv6CidrBlock":{"locationName":"destinationIpv6CidrBlock"},"DestinationPrefixListId":{"locationName":"destinationPrefixListId"},"EgressOnlyInternetGatewayId":{"locationName":"egressOnlyInternetGatewayId"},"GatewayId":{"locationName":"gatewayId"},"InstanceId":{"locationName":"instanceId"},"InstanceOwnerId":{"locationName":"instanceOwnerId"},"NatGatewayId":{"locationName":"natGatewayId"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"Origin":{"locationName":"origin"},"State":{"locationName":"state"},"VpcPeeringConnectionId":{"locationName":"vpcPeeringConnectionId"}}}},"Tags":{"shape":"Sj","locationName":"tagSet"},"VpcId":{"locationName":"vpcId"}}},"S6w":{"type":"structure","members":{"DataEncryptionKeyId":{"locationName":"dataEncryptionKeyId"},"Description":{"locationName":"description"},"Encrypted":{"locationName":"encrypted","type":"boolean"},"KmsKeyId":{"locationName":"kmsKeyId"},"OwnerId":{"locationName":"ownerId"},"Progress":{"locationName":"progress"},"SnapshotId":{"locationName":"snapshotId"},"StartTime":{"locationName":"startTime","type":"timestamp"},"State":{"locationName":"status"},"StateMessage":{"locationName":"statusMessage"},"VolumeId":{"locationName":"volumeId"},"VolumeSize":{"locationName":"volumeSize","type":"integer"},"OwnerAlias":{"locationName":"ownerAlias"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S70":{"type":"structure","members":{"Bucket":{"locationName":"bucket"},"Fault":{"shape":"S71","locationName":"fault"},"OwnerId":{"locationName":"ownerId"},"Prefix":{"locationName":"prefix"},"State":{"locationName":"state"}}},"S71":{"type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"S75":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"AvailableIpAddressCount":{"locationName":"availableIpAddressCount","type":"integer"},"CidrBlock":{"locationName":"cidrBlock"},"DefaultForAz":{"locationName":"defaultForAz","type":"boolean"},"MapPublicIpOnLaunch":{"locationName":"mapPublicIpOnLaunch","type":"boolean"},"State":{"locationName":"state"},"SubnetId":{"locationName":"subnetId"},"VpcId":{"locationName":"vpcId"},"AssignIpv6AddressOnCreation":{"locationName":"assignIpv6AddressOnCreation","type":"boolean"},"Ipv6CidrBlockAssociationSet":{"locationName":"ipv6CidrBlockAssociationSet","type":"list","member":{"shape":"S1a","locationName":"item"}},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S79":{"type":"list","member":{}},"S7b":{"type":"list","member":{"locationName":"item","type":"structure","members":{"ResourceType":{"locationName":"resourceType"},"Tags":{"shape":"Sj","locationName":"Tag"}}}},"S7e":{"type":"structure","members":{"Attachments":{"locationName":"attachmentSet","type":"list","member":{"shape":"S1p","locationName":"item"}},"AvailabilityZone":{"locationName":"availabilityZone"},"CreateTime":{"locationName":"createTime","type":"timestamp"},"Encrypted":{"locationName":"encrypted","type":"boolean"},"KmsKeyId":{"locationName":"kmsKeyId"},"Size":{"locationName":"size","type":"integer"},"SnapshotId":{"locationName":"snapshotId"},"State":{"locationName":"status"},"VolumeId":{"locationName":"volumeId"},"Iops":{"locationName":"iops","type":"integer"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VolumeType":{"locationName":"volumeType"}}},"S7l":{"type":"structure","members":{"CreationTimestamp":{"locationName":"creationTimestamp","type":"timestamp"},"PolicyDocument":{"locationName":"policyDocument"},"RouteTableIds":{"shape":"S2z","locationName":"routeTableIdSet"},"ServiceName":{"locationName":"serviceName"},"State":{"locationName":"state"},"VpcEndpointId":{"locationName":"vpcEndpointId"},"VpcId":{"locationName":"vpcId"}}},"S7s":{"type":"structure","members":{"CustomerGatewayConfiguration":{"locationName":"customerGatewayConfiguration"},"CustomerGatewayId":{"locationName":"customerGatewayId"},"State":{"locationName":"state"},"Type":{"locationName":"type"},"VpnConnectionId":{"locationName":"vpnConnectionId"},"VpnGatewayId":{"locationName":"vpnGatewayId"},"Options":{"locationName":"options","type":"structure","members":{"StaticRoutesOnly":{"locationName":"staticRoutesOnly","type":"boolean"}}},"Routes":{"locationName":"routes","type":"list","member":{"locationName":"item","type":"structure","members":{"DestinationCidrBlock":{"locationName":"destinationCidrBlock"},"Source":{"locationName":"source"},"State":{"locationName":"state"}}}},"Tags":{"shape":"Sj","locationName":"tagSet"},"VgwTelemetry":{"locationName":"vgwTelemetry","type":"list","member":{"locationName":"item","type":"structure","members":{"AcceptedRouteCount":{"locationName":"acceptedRouteCount","type":"integer"},"LastStatusChange":{"locationName":"lastStatusChange","type":"timestamp"},"OutsideIpAddress":{"locationName":"outsideIpAddress"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"}}}}}},"S84":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"State":{"locationName":"state"},"Type":{"locationName":"type"},"VpcAttachments":{"locationName":"attachments","type":"list","member":{"shape":"S1t","locationName":"item"}},"VpnGatewayId":{"locationName":"vpnGatewayId"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"S9c":{"type":"list","member":{"locationName":"Filter","type":"structure","members":{"Name":{},"Values":{"shape":"S2z","locationName":"Value"}}}},"S9w":{"type":"list","member":{"locationName":"InstanceId"}},"Sa4":{"type":"structure","required":["ConversionTaskId","State"],"members":{"ConversionTaskId":{"locationName":"conversionTaskId"},"ExpirationTime":{"locationName":"expirationTime"},"ImportInstance":{"locationName":"importInstance","type":"structure","required":["Volumes"],"members":{"Description":{"locationName":"description"},"InstanceId":{"locationName":"instanceId"},"Platform":{"locationName":"platform"},"Volumes":{"locationName":"volumes","type":"list","member":{"locationName":"item","type":"structure","required":["AvailabilityZone","BytesConverted","Image","Status","Volume"],"members":{"AvailabilityZone":{"locationName":"availabilityZone"},"BytesConverted":{"locationName":"bytesConverted","type":"long"},"Description":{"locationName":"description"},"Image":{"shape":"Sa9","locationName":"image"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"Volume":{"shape":"Saa","locationName":"volume"}}}}}},"ImportVolume":{"locationName":"importVolume","type":"structure","required":["AvailabilityZone","BytesConverted","Image","Volume"],"members":{"AvailabilityZone":{"locationName":"availabilityZone"},"BytesConverted":{"locationName":"bytesConverted","type":"long"},"Description":{"locationName":"description"},"Image":{"shape":"Sa9","locationName":"image"},"Volume":{"shape":"Saa","locationName":"volume"}}},"State":{"locationName":"state"},"StatusMessage":{"locationName":"statusMessage"},"Tags":{"shape":"Sj","locationName":"tagSet"}}},"Sa9":{"type":"structure","required":["Format","ImportManifestUrl","Size"],"members":{"Checksum":{"locationName":"checksum"},"Format":{"locationName":"format"},"ImportManifestUrl":{"locationName":"importManifestUrl"},"Size":{"locationName":"size","type":"long"}}},"Saa":{"type":"structure","required":["Id"],"members":{"Id":{"locationName":"id"},"Size":{"locationName":"size","type":"long"}}},"Sb7":{"type":"list","member":{"locationName":"Owner"}},"Sbg":{"type":"list","member":{"locationName":"item","type":"structure","members":{"ProductCodeId":{"locationName":"productCode"},"ProductCodeType":{"locationName":"type"}}}},"Sbt":{"type":"list","member":{"locationName":"item"}},"Sbw":{"type":"list","member":{"locationName":"item"}},"Scd":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Deadline":{"locationName":"deadline","type":"timestamp"},"Resource":{"locationName":"resource"},"UseLongIds":{"locationName":"useLongIds","type":"boolean"}}}},"Sck":{"type":"list","member":{"shape":"S4l","locationName":"item"}},"Scl":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Group":{"locationName":"group"},"UserId":{"locationName":"userId"}}}},"Scz":{"type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"}}},"Sd2":{"type":"list","member":{"locationName":"ImportTaskId"}},"Sd6":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Description":{"locationName":"description"},"DeviceName":{"locationName":"deviceName"},"DiskImageSize":{"locationName":"diskImageSize","type":"double"},"Format":{"locationName":"format"},"Progress":{"locationName":"progress"},"SnapshotId":{"locationName":"snapshotId"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"Url":{"locationName":"url"},"UserBucket":{"shape":"Sd8","locationName":"userBucket"}}}},"Sd8":{"type":"structure","members":{"S3Bucket":{"locationName":"s3Bucket"},"S3Key":{"locationName":"s3Key"}}},"Sdd":{"type":"structure","members":{"Description":{"locationName":"description"},"DiskImageSize":{"locationName":"diskImageSize","type":"double"},"Format":{"locationName":"format"},"Progress":{"locationName":"progress"},"SnapshotId":{"locationName":"snapshotId"},"Status":{"locationName":"status"},"StatusMessage":{"locationName":"statusMessage"},"Url":{"locationName":"url"},"UserBucket":{"shape":"Sd8","locationName":"userBucket"}}},"Sdh":{"type":"list","member":{"locationName":"item","type":"structure","members":{"DeviceName":{"locationName":"deviceName"},"Ebs":{"locationName":"ebs","type":"structure","members":{"AttachTime":{"locationName":"attachTime","type":"timestamp"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"Status":{"locationName":"status"},"VolumeId":{"locationName":"volumeId"}}}}}},"Sdk":{"type":"structure","members":{"Value":{"locationName":"value","type":"boolean"}}},"Sds":{"type":"structure","members":{"Code":{"locationName":"code","type":"integer"},"Name":{"locationName":"name"}}},"Sdu":{"type":"structure","members":{"Details":{"locationName":"details","type":"list","member":{"locationName":"item","type":"structure","members":{"ImpairedSince":{"locationName":"impairedSince","type":"timestamp"},"Name":{"locationName":"name"},"Status":{"locationName":"status"}}}},"Status":{"locationName":"status"}}},"Se3":{"type":"structure","members":{"Groups":{"shape":"S5w","locationName":"groupSet"},"Instances":{"locationName":"instancesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"AmiLaunchIndex":{"locationName":"amiLaunchIndex","type":"integer"},"ImageId":{"locationName":"imageId"},"InstanceId":{"locationName":"instanceId"},"InstanceType":{"locationName":"instanceType"},"KernelId":{"locationName":"kernelId"},"KeyName":{"locationName":"keyName"},"LaunchTime":{"locationName":"launchTime","type":"timestamp"},"Monitoring":{"shape":"Se7","locationName":"monitoring"},"Placement":{"shape":"Se9","locationName":"placement"},"Platform":{"locationName":"platform"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"ProductCodes":{"shape":"Sbg","locationName":"productCodes"},"PublicDnsName":{"locationName":"dnsName"},"PublicIpAddress":{"locationName":"ipAddress"},"RamdiskId":{"locationName":"ramdiskId"},"State":{"shape":"Sds","locationName":"instanceState"},"StateTransitionReason":{"locationName":"reason"},"SubnetId":{"locationName":"subnetId"},"VpcId":{"locationName":"vpcId"},"Architecture":{"locationName":"architecture"},"BlockDeviceMappings":{"shape":"Sdh","locationName":"blockDeviceMapping"},"ClientToken":{"locationName":"clientToken"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"EnaSupport":{"locationName":"enaSupport","type":"boolean"},"Hypervisor":{"locationName":"hypervisor"},"IamInstanceProfile":{"shape":"S14","locationName":"iamInstanceProfile"},"InstanceLifecycle":{"locationName":"instanceLifecycle"},"ElasticGpuAssociations":{"locationName":"elasticGpuAssociationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ElasticGpuId":{"locationName":"elasticGpuId"},"ElasticGpuAssociationId":{"locationName":"elasticGpuAssociationId"},"ElasticGpuAssociationState":{"locationName":"elasticGpuAssociationState"},"ElasticGpuAssociationTime":{"locationName":"elasticGpuAssociationTime"}}}},"NetworkInterfaces":{"locationName":"networkInterfaceSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Association":{"shape":"Sef","locationName":"association"},"Attachment":{"locationName":"attachment","type":"structure","members":{"AttachTime":{"locationName":"attachTime","type":"timestamp"},"AttachmentId":{"locationName":"attachmentId"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"DeviceIndex":{"locationName":"deviceIndex","type":"integer"},"Status":{"locationName":"status"}}},"Description":{"locationName":"description"},"Groups":{"shape":"S5w","locationName":"groupSet"},"Ipv6Addresses":{"shape":"S5o","locationName":"ipv6AddressesSet"},"MacAddress":{"locationName":"macAddress"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"OwnerId":{"locationName":"ownerId"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"PrivateIpAddresses":{"locationName":"privateIpAddressesSet","type":"list","member":{"locationName":"item","type":"structure","members":{"Association":{"shape":"Sef","locationName":"association"},"Primary":{"locationName":"primary","type":"boolean"},"PrivateDnsName":{"locationName":"privateDnsName"},"PrivateIpAddress":{"locationName":"privateIpAddress"}}}},"SourceDestCheck":{"locationName":"sourceDestCheck","type":"boolean"},"Status":{"locationName":"status"},"SubnetId":{"locationName":"subnetId"},"VpcId":{"locationName":"vpcId"}}}},"RootDeviceName":{"locationName":"rootDeviceName"},"RootDeviceType":{"locationName":"rootDeviceType"},"SecurityGroups":{"shape":"S5w","locationName":"groupSet"},"SourceDestCheck":{"locationName":"sourceDestCheck","type":"boolean"},"SpotInstanceRequestId":{"locationName":"spotInstanceRequestId"},"SriovNetSupport":{"locationName":"sriovNetSupport"},"StateReason":{"shape":"Scz","locationName":"stateReason"},"Tags":{"shape":"Sj","locationName":"tagSet"},"VirtualizationType":{"locationName":"virtualizationType"}}}},"OwnerId":{"locationName":"ownerId"},"RequesterId":{"locationName":"requesterId"},"ReservationId":{"locationName":"reservationId"}}},"Se7":{"type":"structure","members":{"State":{"locationName":"state"}}},"Se9":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"Affinity":{"locationName":"affinity"},"GroupName":{"locationName":"groupName"},"HostId":{"locationName":"hostId"},"Tenancy":{"locationName":"tenancy"},"SpreadDomain":{"locationName":"spreadDomain"}}},"Sef":{"type":"structure","members":{"IpOwnerId":{"locationName":"ipOwnerId"},"PublicDnsName":{"locationName":"publicDnsName"},"PublicIp":{"locationName":"publicIp"}}},"Sfu":{"type":"list","member":{"locationName":"ReservedInstancesId"}},"Sg2":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Amount":{"locationName":"amount","type":"double"},"Frequency":{"locationName":"frequency"}}}},"Sgf":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"InstanceType":{"locationName":"instanceType"},"Platform":{"locationName":"platform"},"Scope":{"locationName":"scope"}}},"Sgz":{"type":"structure","members":{"Frequency":{"locationName":"frequency"},"Interval":{"locationName":"interval","type":"integer"},"OccurrenceDaySet":{"locationName":"occurrenceDaySet","type":"list","member":{"locationName":"item","type":"integer"}},"OccurrenceRelativeToEnd":{"locationName":"occurrenceRelativeToEnd","type":"boolean"},"OccurrenceUnit":{"locationName":"occurrenceUnit"}}},"Sh6":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"CreateDate":{"locationName":"createDate","type":"timestamp"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceCount":{"locationName":"instanceCount","type":"integer"},"InstanceType":{"locationName":"instanceType"},"NetworkPlatform":{"locationName":"networkPlatform"},"NextSlotStartTime":{"locationName":"nextSlotStartTime","type":"timestamp"},"Platform":{"locationName":"platform"},"PreviousSlotEndTime":{"locationName":"previousSlotEndTime","type":"timestamp"},"Recurrence":{"shape":"Sgz","locationName":"recurrence"},"ScheduledInstanceId":{"locationName":"scheduledInstanceId"},"SlotDurationInHours":{"locationName":"slotDurationInHours","type":"integer"},"TermEndDate":{"locationName":"termEndDate","type":"timestamp"},"TermStartDate":{"locationName":"termStartDate","type":"timestamp"},"TotalScheduledInstanceHours":{"locationName":"totalScheduledInstanceHours","type":"integer"}}},"Shd":{"type":"list","member":{"locationName":"GroupName"}},"Shk":{"type":"list","member":{"locationName":"item","type":"structure","members":{"Group":{"locationName":"group"},"UserId":{"locationName":"userId"}}}},"Si9":{"type":"structure","required":["IamFleetRole","LaunchSpecifications","SpotPrice","TargetCapacity"],"members":{"AllocationStrategy":{"locationName":"allocationStrategy"},"ClientToken":{"locationName":"clientToken"},"ExcessCapacityTerminationPolicy":{"locationName":"excessCapacityTerminationPolicy"},"FulfilledCapacity":{"locationName":"fulfilledCapacity","type":"double"},"IamFleetRole":{"locationName":"iamFleetRole"},"LaunchSpecifications":{"locationName":"launchSpecifications","type":"list","member":{"locationName":"item","type":"structure","members":{"SecurityGroups":{"shape":"S5w","locationName":"groupSet"},"AddressingType":{"locationName":"addressingType"},"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"IamInstanceProfile":{"shape":"S11","locationName":"iamInstanceProfile"},"ImageId":{"locationName":"imageId"},"InstanceType":{"locationName":"instanceType"},"KernelId":{"locationName":"kernelId"},"KeyName":{"locationName":"keyName"},"Monitoring":{"locationName":"monitoring","type":"structure","members":{"Enabled":{"locationName":"enabled","type":"boolean"}}},"NetworkInterfaces":{"shape":"Sif","locationName":"networkInterfaceSet"},"Placement":{"shape":"Sih","locationName":"placement"},"RamdiskId":{"locationName":"ramdiskId"},"SpotPrice":{"locationName":"spotPrice"},"SubnetId":{"locationName":"subnetId"},"UserData":{"locationName":"userData"},"WeightedCapacity":{"locationName":"weightedCapacity","type":"double"},"TagSpecifications":{"locationName":"tagSpecificationSet","type":"list","member":{"locationName":"item","type":"structure","members":{"ResourceType":{"locationName":"resourceType"},"Tags":{"shape":"Sj","locationName":"tag"}}}}}}},"SpotPrice":{"locationName":"spotPrice"},"TargetCapacity":{"locationName":"targetCapacity","type":"integer"},"TerminateInstancesWithExpiration":{"locationName":"terminateInstancesWithExpiration","type":"boolean"},"Type":{"locationName":"type"},"ValidFrom":{"locationName":"validFrom","type":"timestamp"},"ValidUntil":{"locationName":"validUntil","type":"timestamp"},"ReplaceUnhealthyInstances":{"locationName":"replaceUnhealthyInstances","type":"boolean"}}},"Sif":{"type":"list","member":{"locationName":"item","type":"structure","members":{"AssociatePublicIpAddress":{"locationName":"associatePublicIpAddress","type":"boolean"},"DeleteOnTermination":{"locationName":"deleteOnTermination","type":"boolean"},"Description":{"locationName":"description"},"DeviceIndex":{"locationName":"deviceIndex","type":"integer"},"Groups":{"shape":"S5n","locationName":"SecurityGroupId"},"Ipv6AddressCount":{"locationName":"ipv6AddressCount","type":"integer"},"Ipv6Addresses":{"shape":"S5o","locationName":"ipv6AddressesSet","queryName":"Ipv6Addresses"},"NetworkInterfaceId":{"locationName":"networkInterfaceId"},"PrivateIpAddress":{"locationName":"privateIpAddress"},"PrivateIpAddresses":{"shape":"S5q","locationName":"privateIpAddressesSet","queryName":"PrivateIpAddresses"},"SecondaryPrivateIpAddressCount":{"locationName":"secondaryPrivateIpAddressCount","type":"integer"},"SubnetId":{"locationName":"subnetId"}}}},"Sih":{"type":"structure","members":{"AvailabilityZone":{"locationName":"availabilityZone"},"GroupName":{"locationName":"groupName"},"Tenancy":{"locationName":"tenancy"}}},"Sin":{"type":"list","member":{"locationName":"item","type":"structure","members":{"ActualBlockHourlyPrice":{"locationName":"actualBlockHourlyPrice"},"AvailabilityZoneGroup":{"locationName":"availabilityZoneGroup"},"BlockDurationMinutes":{"locationName":"blockDurationMinutes","type":"integer"},"CreateTime":{"locationName":"createTime","type":"timestamp"},"Fault":{"shape":"S71","locationName":"fault"},"InstanceId":{"locationName":"instanceId"},"LaunchGroup":{"locationName":"launchGroup"},"LaunchSpecification":{"locationName":"launchSpecification","type":"structure","members":{"UserData":{"locationName":"userData"},"SecurityGroups":{"shape":"S5w","locationName":"groupSet"},"AddressingType":{"locationName":"addressingType"},"BlockDeviceMappings":{"shape":"Sck","locationName":"blockDeviceMapping"},"EbsOptimized":{"locationName":"ebsOptimized","type":"boolean"},"IamInstanceProfile":{"shape":"S11","locationName":"iamInstanceProfile"},"ImageId":{"locationName":"imageId"},"InstanceType":{"locationName":"instanceType"},"KernelId":{"locationName":"kernelId"},"KeyName":{"locationName":"keyName"},"NetworkInterfaces":{"shape":"Sif","locationName":"networkInterfaceSet"},"Placement":{"shape":"Sih","locationName":"placement"},"RamdiskId":{"locationName":"ramdiskId"},"SubnetId":{"locationName":"subnetId"},"Monitoring":{"shape":"Siq","locationName":"monitoring"}}},"LaunchedAvailabilityZone":{"locationName":"launchedAvailabilityZone"},"ProductDescription":{"locationName":"productDescription"},"SpotInstanceRequestId":{"locationName":"spotInstanceRequestId"},"SpotPrice":{"locationName":"spotPrice"},"State":{"locationName":"state"},"Status":{"locationName":"status","type":"structure","members":{"Code":{"locationName":"code"},"Message":{"locationName":"message"},"UpdateTime":{"locationName":"updateTime","type":"timestamp"}}},"Tags":{"shape":"Sj","locationName":"tagSet"},"Type":{"locationName":"type"},"ValidFrom":{"locationName":"validFrom","type":"timestamp"},"ValidUntil":{"locationName":"validUntil","type":"timestamp"}}}},"Siq":{"type":"structure","required":["Enabled"],"members":{"Enabled":{"locationName":"enabled","type":"boolean"}}},"Sj4":{"type":"list","member":{"locationName":"item","type":"structure","members":{"FromPort":{"locationName":"fromPort","type":"integer"},"IpProtocol":{"locationName":"ipProtocol"},"IpRanges":{"locationName":"ipRanges","type":"list","member":{"locationName":"item"}},"PrefixListIds":{"locationName":"prefixListIds","type":"list","member":{"locationName":"item"}},"ToPort":{"locationName":"toPort","type":"integer"},"UserIdGroupPairs":{"locationName":"groups","type":"list","member":{"shape":"S25","locationName":"item"}}}}},"Sjl":{"type":"list","member":{"locationName":"VolumeId"}},"Sk4":{"type":"structure","members":{"VolumeId":{"locationName":"volumeId"},"ModificationState":{"locationName":"modificationState"},"StatusMessage":{"locationName":"statusMessage"},"TargetSize":{"locationName":"targetSize","type":"integer"},"TargetIops":{"locationName":"targetIops","type":"integer"},"TargetVolumeType":{"locationName":"targetVolumeType"},"OriginalSize":{"locationName":"originalSize","type":"integer"},"OriginalIops":{"locationName":"originalIops","type":"integer"},"OriginalVolumeType":{"locationName":"originalVolumeType"},"Progress":{"locationName":"progress","type":"long"},"StartTime":{"locationName":"startTime","type":"timestamp"},"EndTime":{"locationName":"endTime","type":"timestamp"}}},"Ska":{"type":"list","member":{"locationName":"VpcId"}},"Slw":{"type":"list","member":{"locationName":"item"}},"Sly":{"type":"list","member":{"type":"structure","members":{"CurrencyCode":{"locationName":"currencyCode"},"Duration":{"locationName":"duration","type":"integer"},"HostIdSet":{"shape":"Sbt","locationName":"hostIdSet"},"HostReservationId":{"locationName":"hostReservationId"},"HourlyPrice":{"locationName":"hourlyPrice"},"InstanceFamily":{"locationName":"instanceFamily"},"PaymentOption":{"locationName":"paymentOption"},"UpfrontPrice":{"locationName":"upfrontPrice"}}}},"Sm4":{"type":"structure","members":{"HourlyPrice":{"locationName":"hourlyPrice"},"RemainingTotalValue":{"locationName":"remainingTotalValue"},"RemainingUpfrontValue":{"locationName":"remainingUpfrontValue"}}},"Smb":{"type":"structure","members":{"Comment":{},"UploadEnd":{"type":"timestamp"},"UploadSize":{"type":"double"},"UploadStart":{"type":"timestamp"}}},"Sme":{"type":"structure","members":{"S3Bucket":{},"S3Key":{}}},"Smj":{"type":"structure","required":["Bytes","Format","ImportManifestUrl"],"members":{"Bytes":{"locationName":"bytes","type":"long"},"Format":{"locationName":"format"},"ImportManifestUrl":{"locationName":"importManifestUrl"}}},"Smk":{"type":"structure","required":["Size"],"members":{"Size":{"locationName":"size","type":"long"}}},"Smm":{"type":"list","member":{"locationName":"SecurityGroup"}},"Smz":{"type":"list","member":{"shape":"S4e","locationName":"item"}},"Sn7":{"type":"list","member":{"locationName":"UserId"}},"Sny":{"type":"structure","members":{"AllowDnsResolutionFromRemoteVpc":{"type":"boolean"},"AllowEgressFromLocalClassicLinkToRemoteVpc":{"type":"boolean"},"AllowEgressFromLocalVpcToRemoteClassicLink":{"type":"boolean"}}},"So0":{"type":"structure","members":{"AllowDnsResolutionFromRemoteVpc":{"locationName":"allowDnsResolutionFromRemoteVpc","type":"boolean"},"AllowEgressFromLocalClassicLinkToRemoteVpc":{"locationName":"allowEgressFromLocalClassicLinkToRemoteVpc","type":"boolean"},"AllowEgressFromLocalVpcToRemoteClassicLink":{"locationName":"allowEgressFromLocalVpcToRemoteClassicLink","type":"boolean"}}},"So3":{"type":"list","member":{"locationName":"item","type":"structure","members":{"InstanceId":{"locationName":"instanceId"},"Monitoring":{"shape":"Se7","locationName":"monitoring"}}}},"Spt":{"type":"list","member":{"locationName":"SecurityGroupId"}},"Sq4":{"type":"list","member":{"locationName":"item","type":"structure","members":{"CurrentState":{"shape":"Sds","locationName":"currentState"},"InstanceId":{"locationName":"instanceId"},"PreviousState":{"shape":"Sds","locationName":"previousState"}}}}}}
 
 /***/ }),
 /* 166 */
@@ -43805,7 +44099,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var expires = params.Expires || 900;
 	    delete params.Expires; // we can't validate this
 	    var request = this.makeRequest(operation, params);
-	    return request.presign(expires, callback);
+
+	    if (callback) {
+	      AWS.util.defer(function() {
+	        request.presign(expires, callback);
+	      });
+	    } else {
+	      return request.presign(expires, callback);
+	    }
 	  },
 
 

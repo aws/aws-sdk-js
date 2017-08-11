@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.96.0-->
+<!--LATEST=2.97.0-->
 <!--ENTRYINSERT-->
+
+## 2.97.0
+* bugfix: REST-JSON serialization: Automatically add a content-type header of application/json to requests with a JSON body
+* feature: CodeDeploy: Adds support for specifying Application Load Balancers in deployment groups, for both in-place and blue/green deployments.
+* feature: CognitoIdentityServiceProvider: We have added support for features for Amazon Cognito User Pools that enable application developers to easily add and customize a sign-up and sign-in user experience, use OAuth 2.0, and integrate with Facebook, Google, Login with Amazon, and SAML-based identity providers.
+* feature: EC2: Provides customers an opportunity to recover an EIP that was released
 
 ## 2.96.0
 * feature: CloudDirectory: Enable BatchDetachPolicy

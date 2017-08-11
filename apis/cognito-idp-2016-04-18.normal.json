@@ -132,6 +132,25 @@
       ],
       "documentation":"<p>Deletes the user attributes in a user pool as an administrator. Works on any user.</p> <p>Requires developer credentials.</p>"
     },
+    "AdminDisableProviderForUser":{
+      "name":"AdminDisableProviderForUser",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminDisableProviderForUserRequest"},
+      "output":{"shape":"AdminDisableProviderForUserResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"AliasExistsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked <code>DestinationUser</code>) signs in, they must create a new user account. See <a href=\"API_AdminLinkProviderForUser.html\">AdminLinkProviderForUser</a>.</p> <p>This action is enabled only for admin access and requires developer credentials.</p> <p>The <code>ProviderName</code> must match the value specified when creating an IdP for the pool. </p> <p>To disable a native username + password user, the <code>ProviderName</code> value must be <code>Cognito</code> and the <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code>, with the <code>ProviderAttributeValue</code> being the name that is used in the user pool for the user.</p> <p>The <code>ProviderAttributeName</code> must always be <code>Cognito_Subject</code> for social identity providers. The <code>ProviderAttributeValue</code> must always be the exact subject that was used when the user was originally linked as a source user.</p> <p>For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the <code>ProviderAttributeName</code> and <code>ProviderAttributeValue</code> must be the same values that were used for the <code>SourceUser</code> when the identities were originally linked in the <a href=\"API_AdminLinkProviderForUser.html\">AdminLinkProviderForUser</a> call. (If the linking was done with <code>ProviderAttributeName</code> set to <code>Cognito_Subject</code>, the same applies here). However, if the user has already signed in, the <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code> and <code>ProviderAttributeValue</code> must be the subject of the SAML assertion.</p>"
+    },
     "AdminDisableUser":{
       "name":"AdminDisableUser",
       "http":{
@@ -248,6 +267,25 @@
         {"shape":"UserNotConfirmedException"}
       ],
       "documentation":"<p>Initiates the authentication flow, as an administrator.</p> <p>Requires developer credentials.</p>"
+    },
+    "AdminLinkProviderForUser":{
+      "name":"AdminLinkProviderForUser",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AdminLinkProviderForUserRequest"},
+      "output":{"shape":"AdminLinkProviderForUserResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"UserNotFoundException"},
+        {"shape":"AliasExistsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Links an existing user account in a user pool (<code>DestinationUser</code>) to an identity from an external identity provider (<code>SourceUser</code>) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account. </p> <p> For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account. </p> <important> <p>Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.</p> </important> <p>See also <a href=\"API_AdminDisableProviderForUser.html\">AdminDisableProviderForUser</a>.</p> <p>This action is enabled only for admin access and requires developer credentials.</p>"
     },
     "AdminListDevices":{
       "name":"AdminListDevices",
@@ -574,6 +612,24 @@
       ],
       "documentation":"<p>Creates an identity provider for a user pool.</p>"
     },
+    "CreateResourceServer":{
+      "name":"CreateResourceServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateResourceServerRequest"},
+      "output":{"shape":"CreateResourceServerResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Creates a new OAuth2.0 resource server and defines custom scopes in it.</p>"
+    },
     "CreateUserImportJob":{
       "name":"CreateUserImportJob",
       "http":{
@@ -683,6 +739,22 @@
       ],
       "documentation":"<p>Deletes an identity provider for a user pool.</p>"
     },
+    "DeleteResourceServer":{
+      "name":"DeleteResourceServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteResourceServerRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Deletes a resource server.</p>"
+    },
     "DeleteUser":{
       "name":"DeleteUser",
       "http":{
@@ -700,7 +772,7 @@
         {"shape":"UserNotConfirmedException"},
         {"shape":"InternalErrorException"}
       ],
-      "documentation":"<p>Allows a user to delete one's self.</p>",
+      "documentation":"<p>Allows a user to delete himself or herself.</p>",
       "authtype":"none"
     },
     "DeleteUserAttributes":{
@@ -789,6 +861,23 @@
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Gets information about a specific identity provider.</p>"
+    },
+    "DescribeResourceServer":{
+      "name":"DescribeResourceServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeResourceServerRequest"},
+      "output":{"shape":"DescribeResourceServerResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Describes a resource server.</p>"
     },
     "DescribeUserImportJob":{
       "name":"DescribeUserImportJob",
@@ -978,6 +1067,23 @@
       ],
       "documentation":"<p>Gets the specified identity provider.</p>"
     },
+    "GetUICustomization":{
+      "name":"GetUICustomization",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetUICustomizationRequest"},
+      "output":{"shape":"GetUICustomizationResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Gets the UI Customization information for a particular app client's app UI, if there is something set. If nothing is set for the particular client, but there is an existing pool level customization (app <code>clientId</code> will be <code>ALL</code>), then that is returned. If nothing is present, then an empty shape is returned.</p>"
+    },
     "GetUser":{
       "name":"GetUser",
       "http":{
@@ -1126,6 +1232,23 @@
       ],
       "documentation":"<p>Lists information about all identity providers for a user pool.</p>"
     },
+    "ListResourceServers":{
+      "name":"ListResourceServers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListResourceServersRequest"},
+      "output":{"shape":"ListResourceServersResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Lists the resource servers for a user pool.</p>"
+    },
     "ListUserImportJobs":{
       "name":"ListUserImportJobs",
       "http":{
@@ -1268,6 +1391,23 @@
       ],
       "documentation":"<p>Responds to the authentication challenge.</p>"
     },
+    "SetUICustomization":{
+      "name":"SetUICustomization",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SetUICustomizationRequest"},
+      "output":{"shape":"SetUICustomizationResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Sets the UI customization information for a user pool's built-in app UI.</p> <p>You can specify app UI customization settings for a single client (with a specific <code>clientId</code>) or for all clients (by setting the <code>clientId</code> to <code>ALL</code>). If you specify <code>ALL</code>, the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the <code>ALL</code> configuration. </p> <note> <p>To use this API, your user pool must have a domain associated with it. Otherwise, there is no place to host the app's pages, and the service will throw an error.</p> </note>"
+    },
     "SetUserSettings":{
       "name":"SetUserSettings",
       "http":{
@@ -1406,6 +1546,23 @@
         {"shape":"InternalErrorException"}
       ],
       "documentation":"<p>Updates identity provider information for a user pool.</p>"
+    },
+    "UpdateResourceServer":{
+      "name":"UpdateResourceServer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateResourceServerRequest"},
+      "output":{"shape":"UpdateResourceServerResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotAuthorizedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Updates the name and scopes of resource server. All other fields are read-only.</p>"
     },
     "UpdateUserAttributes":{
       "name":"UpdateUserAttributes",
@@ -1642,7 +1799,7 @@
       "members":{
         "User":{
           "shape":"UserType",
-          "documentation":"<p>The user returned in the request to create a new user.</p>"
+          "documentation":"<p>The newly created user.</p>"
         }
       },
       "documentation":"<p>Represents the response from the server to the request to create the user.</p>"
@@ -1698,6 +1855,28 @@
         }
       },
       "documentation":"<p>Represents the request to delete a user as an administrator.</p>"
+    },
+    "AdminDisableProviderForUserRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "User"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"StringType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "User":{
+          "shape":"ProviderUserIdentifierType",
+          "documentation":"<p>The user to be disabled.</p>"
+        }
+      }
+    },
+    "AdminDisableProviderForUserResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "AdminDisableUserRequest":{
       "type":"structure",
@@ -1909,6 +2088,33 @@
         }
       },
       "documentation":"<p>Initiates the authentication response, as an administrator.</p>"
+    },
+    "AdminLinkProviderForUserRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "DestinationUser",
+        "SourceUser"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"StringType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "DestinationUser":{
+          "shape":"ProviderUserIdentifierType",
+          "documentation":"<p>The existing user in the user pool to be linked to the external identity provider user account. Can be a native (Username + Password) Cognito User Pools user or a federated user (for example, a SAML or Facebook user). If the user doesn't exist, an exception is thrown. This is the user that is returned when the new user (with the linked identity provider attribute) signs in.</p> <p>The <code>ProviderAttributeValue</code> for the <code>DestinationUser</code> must match the username for the user in the user pool. The <code>ProviderAttributeName</code> will always be ignored.</p>"
+        },
+        "SourceUser":{
+          "shape":"ProviderUserIdentifierType",
+          "documentation":"<p>An external identity provider account for a user who does not currently exist yet in the user pool. This user must be a federated user (for example, a SAML or Facebook user), not another native user.</p> <p>If the <code>SourceUser</code> is a federated social identity provider user (Facebook, Google, or Login with Amazon), you must set the <code>ProviderAttributeName</code> to <code>Cognito_Subject</code>. For social identity providers, the <code>ProviderName</code> will be <code>Facebook</code>, <code>Google</code>, or <code>LoginWithAmazon</code>, and Cognito will automatically parse the Facebook, Google, and Login with Amazon tokens for <code>id</code>, <code>sub</code>, and <code>user_id</code>, respectively. The <code>ProviderAttributeValue</code> for the user must be the same value as the <code>id</code>, <code>sub</code>, or <code>user_id</code> value found in the social identity provider token.</p> <p/> <p>For SAML, the <code>ProviderAttributeName</code> can be any value that matches a claim in the SAML assertion. If you wish to link SAML users based on the subject of the SAML assertion, you should map the subject to a claim through the SAML identity provider and submit that claim name as the <code>ProviderAttributeName</code>. If you set <code>ProviderAttributeName</code> to <code>Cognito_Subject</code>, Cognito will automatically parse the default unique identifier found in the subject from the SAML token.</p>"
+        }
+      }
+    },
+    "AdminLinkProviderForUserResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "AdminListDevicesRequest":{
       "type":"structure",
@@ -2244,9 +2450,14 @@
       "type":"list",
       "member":{"shape":"AttributeType"}
     },
+    "AttributeMappingKeyType":{
+      "type":"string",
+      "max":32,
+      "min":1
+    },
     "AttributeMappingType":{
       "type":"map",
-      "key":{"shape":"CustomAttributeNameType"},
+      "key":{"shape":"AttributeMappingKeyType"},
       "value":{"shape":"StringType"}
     },
     "AttributeNameListType":{
@@ -2325,6 +2536,8 @@
       "documentation":"<p>The result type of the authentication result.</p>"
     },
     "BooleanType":{"type":"boolean"},
+    "CSSType":{"type":"string"},
+    "CSSVersionType":{"type":"string"},
     "CallbackURLsListType":{
       "type":"list",
       "member":{"shape":"RedirectUrlType"},
@@ -2524,7 +2737,7 @@
       "members":{
         "ClientId":{
           "shape":"ClientIdType",
-          "documentation":"<p>The ID of the client associated with the user pool.</p>"
+          "documentation":"<p>The app client ID of the app associated with the user pool.</p>"
         },
         "SecretHash":{
           "shape":"SecretHashType",
@@ -2561,7 +2774,7 @@
       "members":{
         "ClientId":{
           "shape":"ClientIdType",
-          "documentation":"<p>The ID of the client associated with the user pool.</p>"
+          "documentation":"<p>The ID of the app client associated with the user pool.</p>"
         },
         "SecretHash":{
           "shape":"SecretHashType",
@@ -2646,7 +2859,7 @@
           "documentation":"<p>The user pool ID.</p>"
         },
         "ProviderName":{
-          "shape":"ProviderNameType",
+          "shape":"ProviderNameTypeV1",
           "documentation":"<p>The identity provider name.</p>"
         },
         "ProviderType":{
@@ -2674,6 +2887,42 @@
         "IdentityProvider":{
           "shape":"IdentityProviderType",
           "documentation":"<p>The newly created identity provider object.</p>"
+        }
+      }
+    },
+    "CreateResourceServerRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Identifier",
+        "Name"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "Identifier":{
+          "shape":"ResourceServerIdentifierType",
+          "documentation":"<p>A unique resource server identifier for the resource server. This could be an HTTPS endpoint where the resource server is located. For example, <code>https://my-weather-api.example.com</code>.</p>"
+        },
+        "Name":{
+          "shape":"ResourceServerNameType",
+          "documentation":"<p>A friendly name for the resource server.</p>"
+        },
+        "Scopes":{
+          "shape":"ResourceServerScopeListType",
+          "documentation":"<p>A list of scopes. Each scope is map, where the keys are <code>name</code> and <code>description</code>.</p>"
+        }
+      }
+    },
+    "CreateResourceServerResponse":{
+      "type":"structure",
+      "required":["ResourceServer"],
+      "members":{
+        "ResourceServer":{
+          "shape":"ResourceServerType",
+          "documentation":"<p>The newly created resource server.</p>"
         }
       }
     },
@@ -2848,6 +3097,10 @@
           "shape":"EmailVerificationSubjectType",
           "documentation":"<p>A string representing the email verification subject.</p>"
         },
+        "VerificationMessageTemplate":{
+          "shape":"VerificationMessageTemplateType",
+          "documentation":"<p>The template for the verification message that the user sees when the app requests permission to access the user's information.</p>"
+        },
         "SmsAuthenticationMessage":{
           "shape":"SmsVerificationMessageType",
           "documentation":"<p>A string representing the SMS authentication message.</p>"
@@ -2906,6 +3159,13 @@
       "min":1
     },
     "DateType":{"type":"timestamp"},
+    "DefaultEmailOptionType":{
+      "type":"string",
+      "enum":[
+        "CONFIRM_WITH_LINK",
+        "CONFIRM_WITH_CODE"
+      ]
+    },
     "DeleteGroupRequest":{
       "type":"structure",
       "required":[
@@ -2937,6 +3197,23 @@
         "ProviderName":{
           "shape":"ProviderNameType",
           "documentation":"<p>The identity provider name.</p>"
+        }
+      }
+    },
+    "DeleteResourceServerRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Identifier"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that hosts the resource server.</p>"
+        },
+        "Identifier":{
+          "shape":"ResourceServerIdentifierType",
+          "documentation":"<p>The identifier for the resource server.</p>"
         }
       }
     },
@@ -2977,7 +3254,7 @@
         },
         "ClientId":{
           "shape":"ClientIdType",
-          "documentation":"<p>The ID of the client associated with the user pool.</p>"
+          "documentation":"<p>The app client ID of the app associated with the user pool.</p>"
         }
       },
       "documentation":"<p>Represents the request to delete a user pool client.</p>"
@@ -3064,6 +3341,33 @@
         }
       }
     },
+    "DescribeResourceServerRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Identifier"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that hosts the resource server.</p>"
+        },
+        "Identifier":{
+          "shape":"ResourceServerIdentifierType",
+          "documentation":"<p>The identifier for the resource server</p>"
+        }
+      }
+    },
+    "DescribeResourceServerResponse":{
+      "type":"structure",
+      "required":["ResourceServer"],
+      "members":{
+        "ResourceServer":{
+          "shape":"ResourceServerType",
+          "documentation":"<p>The resource server.</p>"
+        }
+      }
+    },
     "DescribeUserImportJobRequest":{
       "type":"structure",
       "required":[
@@ -3105,7 +3409,7 @@
         },
         "ClientId":{
           "shape":"ClientIdType",
-          "documentation":"<p>The ID of the client associated with the user pool.</p>"
+          "documentation":"<p>The app client ID of the app associated with the user pool.</p>"
         }
       },
       "documentation":"<p>Represents the request to describe a user pool client.</p>"
@@ -3280,13 +3584,15 @@
         "CREATING",
         "DELETING",
         "UPDATING",
-        "ACTIVE"
+        "ACTIVE",
+        "FAILED"
       ]
     },
     "DomainType":{
       "type":"string",
-      "max":1024,
-      "min":1
+      "max":63,
+      "min":1,
+      "pattern":"^[a-z0-9](?:[a-z0-9\\-]{0,61}[a-z0-9])?$"
     },
     "DomainVersionType":{
       "type":"string",
@@ -3319,11 +3625,23 @@
       },
       "documentation":"<p>The email configuration type.</p>"
     },
+    "EmailVerificationMessageByLinkType":{
+      "type":"string",
+      "max":20000,
+      "min":6,
+      "pattern":"[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*\\{##[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*##\\}[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*"
+    },
     "EmailVerificationMessageType":{
       "type":"string",
       "max":20000,
       "min":6,
       "pattern":"[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*\\{####\\}[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s*]*"
+    },
+    "EmailVerificationSubjectByLinkType":{
+      "type":"string",
+      "max":140,
+      "min":1,
+      "pattern":"[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\s]+"
     },
     "EmailVerificationSubjectType":{
       "type":"string",
@@ -3506,6 +3824,30 @@
         }
       }
     },
+    "GetUICustomizationRequest":{
+      "type":"structure",
+      "required":["UserPoolId"],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "ClientId":{
+          "shape":"ClientIdType",
+          "documentation":"<p>The client ID for the client app.</p>"
+        }
+      }
+    },
+    "GetUICustomizationResponse":{
+      "type":"structure",
+      "required":["UICustomization"],
+      "members":{
+        "UICustomization":{
+          "shape":"UICustomizationType",
+          "documentation":"<p>The UI customization information.</p>"
+        }
+      }
+    },
     "GetUserAttributeVerificationCodeRequest":{
       "type":"structure",
       "required":[
@@ -3676,7 +4018,12 @@
     },
     "IdentityProviderTypeType":{
       "type":"string",
-      "enum":["SAML"]
+      "enum":[
+        "SAML",
+        "Facebook",
+        "Google",
+        "LoginWithAmazon"
+      ]
     },
     "IdpIdentifierType":{
       "type":"string",
@@ -3690,6 +4037,8 @@
       "max":50,
       "min":0
     },
+    "ImageFileType":{"type":"blob"},
+    "ImageUrlType":{"type":"string"},
     "InitiateAuthRequest":{
       "type":"structure",
       "required":[
@@ -3989,6 +4338,43 @@
       "type":"integer",
       "max":60,
       "min":1
+    },
+    "ListResourceServersLimitType":{
+      "type":"integer",
+      "max":50,
+      "min":1
+    },
+    "ListResourceServersRequest":{
+      "type":"structure",
+      "required":["UserPoolId"],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "MaxResults":{
+          "shape":"ListResourceServersLimitType",
+          "documentation":"<p>The maximum number of resource servers to return.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationKeyType",
+          "documentation":"<p>A pagination token.</p>"
+        }
+      }
+    },
+    "ListResourceServersResponse":{
+      "type":"structure",
+      "required":["ResourceServers"],
+      "members":{
+        "ResourceServers":{
+          "shape":"ResourceServersListType",
+          "documentation":"<p>The resource servers.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationKeyType",
+          "documentation":"<p>A pagination token.</p>"
+        }
+      }
     },
     "ListUserImportJobsRequest":{
       "type":"structure",
@@ -4399,6 +4785,30 @@
       "min":1,
       "pattern":"[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
     },
+    "ProviderNameTypeV1":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"[^_][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_]+"
+    },
+    "ProviderUserIdentifierType":{
+      "type":"structure",
+      "members":{
+        "ProviderName":{
+          "shape":"ProviderNameType",
+          "documentation":"<p>The name of the provider, for example, Facebook, Google, or Login with Amazon.</p>"
+        },
+        "ProviderAttributeName":{
+          "shape":"StringType",
+          "documentation":"<p>The name of the provider attribute to link to, for example, <code>NameID</code>.</p>"
+        },
+        "ProviderAttributeValue":{
+          "shape":"StringType",
+          "documentation":"<p>The value of the provider attribute to link to, for example, <code>xxxxx_account</code>.</p>"
+        }
+      },
+      "documentation":"<p>A container for information about an identity provider for a user pool.</p>"
+    },
     "ProvidersListType":{
       "type":"list",
       "member":{"shape":"ProviderDescription"},
@@ -4468,6 +4878,78 @@
       },
       "documentation":"<p>This exception is thrown when the Amazon Cognito service cannot find the requested resource.</p>",
       "exception":true
+    },
+    "ResourceServerIdentifierType":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[\\x21\\x23-\\x5B\\x5D-\\x7E]+"
+    },
+    "ResourceServerNameType":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[\\w\\s+=,.@-]+"
+    },
+    "ResourceServerScopeDescriptionType":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "ResourceServerScopeListType":{
+      "type":"list",
+      "member":{"shape":"ResourceServerScopeType"},
+      "max":25
+    },
+    "ResourceServerScopeNameType":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[\\x21\\x23-\\x2E\\x30-\\x5B\\x5D-\\x7E]+"
+    },
+    "ResourceServerScopeType":{
+      "type":"structure",
+      "required":[
+        "ScopeName",
+        "ScopeDescription"
+      ],
+      "members":{
+        "ScopeName":{
+          "shape":"ResourceServerScopeNameType",
+          "documentation":"<p>The name of the scope.</p>"
+        },
+        "ScopeDescription":{
+          "shape":"ResourceServerScopeDescriptionType",
+          "documentation":"<p>A description of the scope.</p>"
+        }
+      },
+      "documentation":"<p>A resource server scope.</p>"
+    },
+    "ResourceServerType":{
+      "type":"structure",
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool that hosts the resource server.</p>"
+        },
+        "Identifier":{
+          "shape":"ResourceServerIdentifierType",
+          "documentation":"<p>The identifier for the resource server.</p>"
+        },
+        "Name":{
+          "shape":"ResourceServerNameType",
+          "documentation":"<p>The name of the resource server.</p>"
+        },
+        "Scopes":{
+          "shape":"ResourceServerScopeListType",
+          "documentation":"<p>A list of scopes that are defined for the resource server.</p>"
+        }
+      },
+      "documentation":"<p>A container for information about a resource server for a user pool.</p>"
+    },
+    "ResourceServersListType":{
+      "type":"list",
+      "member":{"shape":"ResourceServerType"}
     },
     "RespondToAuthChallengeRequest":{
       "type":"structure",
@@ -4576,7 +5058,8 @@
     },
     "ScopeListType":{
       "type":"list",
-      "member":{"shape":"ScopeType"}
+      "member":{"shape":"ScopeType"},
+      "max":25
     },
     "ScopeType":{
       "type":"string",
@@ -4604,6 +5087,38 @@
       "type":"string",
       "max":2048,
       "min":20
+    },
+    "SetUICustomizationRequest":{
+      "type":"structure",
+      "required":["UserPoolId"],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "ClientId":{
+          "shape":"ClientIdType",
+          "documentation":"<p>The client ID for the client app.</p>"
+        },
+        "CSS":{
+          "shape":"CSSType",
+          "documentation":"<p>The CSS values in the UI customization.</p>"
+        },
+        "ImageFile":{
+          "shape":"ImageFileType",
+          "documentation":"<p>The uploaded logo image for the UI customization.</p>"
+        }
+      }
+    },
+    "SetUICustomizationResponse":{
+      "type":"structure",
+      "required":["UICustomization"],
+      "members":{
+        "UICustomization":{
+          "shape":"UICustomizationType",
+          "documentation":"<p>The UI customization information.</p>"
+        }
+      }
     },
     "SetUserSettingsRequest":{
       "type":"structure",
@@ -4816,6 +5331,40 @@
       "documentation":"<p>This exception is thrown when the user has made too many requests for a given operation.</p>",
       "exception":true
     },
+    "UICustomizationType":{
+      "type":"structure",
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "ClientId":{
+          "shape":"ClientIdType",
+          "documentation":"<p>The client ID for the client app.</p>"
+        },
+        "ImageUrl":{
+          "shape":"ImageUrlType",
+          "documentation":"<p>The logo image for the UI customization.</p>"
+        },
+        "CSS":{
+          "shape":"CSSType",
+          "documentation":"<p>The CSS values in the UI customization.</p>"
+        },
+        "CSSVersion":{
+          "shape":"CSSVersionType",
+          "documentation":"<p>The CSS version number.</p>"
+        },
+        "LastModifiedDate":{
+          "shape":"DateType",
+          "documentation":"<p>The last-modified date for the UI customization.</p>"
+        },
+        "CreationDate":{
+          "shape":"DateType",
+          "documentation":"<p>The creation date for the UI customization.</p>"
+        }
+      },
+      "documentation":"<p>A container for the UI customization information for a user pool's built-in app UI.</p>"
+    },
     "UnexpectedLambdaException":{
       "type":"structure",
       "members":{
@@ -4951,6 +5500,42 @@
         }
       }
     },
+    "UpdateResourceServerRequest":{
+      "type":"structure",
+      "required":[
+        "UserPoolId",
+        "Identifier",
+        "Name"
+      ],
+      "members":{
+        "UserPoolId":{
+          "shape":"UserPoolIdType",
+          "documentation":"<p>The user pool ID for the user pool.</p>"
+        },
+        "Identifier":{
+          "shape":"ResourceServerIdentifierType",
+          "documentation":"<p>The identifier for the resource server.</p>"
+        },
+        "Name":{
+          "shape":"ResourceServerNameType",
+          "documentation":"<p>The name of the resource server.</p>"
+        },
+        "Scopes":{
+          "shape":"ResourceServerScopeListType",
+          "documentation":"<p>The scope values to be set for the resource server.</p>"
+        }
+      }
+    },
+    "UpdateResourceServerResponse":{
+      "type":"structure",
+      "required":["ResourceServer"],
+      "members":{
+        "ResourceServer":{
+          "shape":"ResourceServerType",
+          "documentation":"<p>The resource server.</p>"
+        }
+      }
+    },
     "UpdateUserAttributesRequest":{
       "type":"structure",
       "required":[
@@ -5024,7 +5609,7 @@
         },
         "LogoutURLs":{
           "shape":"LogoutURLsListType",
-          "documentation":"<p>A list ofallowed logout URLs for the identity providers.</p>"
+          "documentation":"<p>A list of allowed logout URLs for the identity providers.</p>"
         },
         "DefaultRedirectURI":{
           "shape":"RedirectUrlType",
@@ -5086,6 +5671,10 @@
         "EmailVerificationSubject":{
           "shape":"EmailVerificationSubjectType",
           "documentation":"<p>The subject of the email verification message.</p>"
+        },
+        "VerificationMessageTemplate":{
+          "shape":"VerificationMessageTemplateType",
+          "documentation":"<p>The template for verification messages.</p>"
         },
         "SmsAuthenticationMessage":{
           "shape":"SmsVerificationMessageType",
@@ -5336,7 +5925,7 @@
         },
         "LogoutURLs":{
           "shape":"LogoutURLsListType",
-          "documentation":"<p>A list ofallowed logout URLs for the identity providers.</p>"
+          "documentation":"<p>A list of allowed logout URLs for the identity providers.</p>"
         },
         "DefaultRedirectURI":{
           "shape":"RedirectUrlType",
@@ -5356,7 +5945,7 @@
           "box":true
         }
       },
-      "documentation":"<p>A user pool of the client type.</p>"
+      "documentation":"<p>Contains information about a user pool client.</p>"
     },
     "UserPoolDescriptionType":{
       "type":"structure",
@@ -5494,6 +6083,10 @@
           "shape":"EmailVerificationSubjectType",
           "documentation":"<p>The subject of the email verification message.</p>"
         },
+        "VerificationMessageTemplate":{
+          "shape":"VerificationMessageTemplateType",
+          "documentation":"<p>The template for verification messages.</p>"
+        },
         "SmsAuthenticationMessage":{
           "shape":"SmsVerificationMessageType",
           "documentation":"<p>The contents of the SMS authentication message.</p>"
@@ -5615,6 +6208,36 @@
     "UsersListType":{
       "type":"list",
       "member":{"shape":"UserType"}
+    },
+    "VerificationMessageTemplateType":{
+      "type":"structure",
+      "members":{
+        "SmsMessage":{
+          "shape":"SmsVerificationMessageType",
+          "documentation":"<p>The SMS message template.</p>"
+        },
+        "EmailMessage":{
+          "shape":"EmailVerificationMessageType",
+          "documentation":"<p>The email message template.</p>"
+        },
+        "EmailSubject":{
+          "shape":"EmailVerificationSubjectType",
+          "documentation":"<p>The subject line for the email message template.</p>"
+        },
+        "EmailMessageByLink":{
+          "shape":"EmailVerificationMessageByLinkType",
+          "documentation":"<p>The email message template for sending a confirmation link to the user.</p>"
+        },
+        "EmailSubjectByLink":{
+          "shape":"EmailVerificationSubjectByLinkType",
+          "documentation":"<p>The subject line for the email message template for sending a confirmation link to the user.</p>"
+        },
+        "DefaultEmailOption":{
+          "shape":"DefaultEmailOptionType",
+          "documentation":"<p>The default email option.</p>"
+        }
+      },
+      "documentation":"<p>The template for verification messages.</p>"
     },
     "VerifiedAttributeType":{
       "type":"string",
