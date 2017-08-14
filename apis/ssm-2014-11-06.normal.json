@@ -321,7 +321,8 @@
       "output":{"shape":"DeregisterTargetFromMaintenanceWindowResult"},
       "errors":[
         {"shape":"DoesNotExistException"},
-        {"shape":"InternalServerError"}
+        {"shape":"InternalServerError"},
+        {"shape":"TargetInUseException"}
       ],
       "documentation":"<p>Removes a target from a Maintenance Window.</p>"
     },
@@ -574,7 +575,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>Lists the executions of a Maintenance Window (meaning, information about when the Maintenance Window was scheduled to be active and information about tasks registered and run with the Maintenance Window).</p>"
+      "documentation":"<p>Lists the executions of a Maintenance Window. This includes information about when the Maintenance Window was scheduled to be active, and information about tasks registered and run with the Maintenance Window.</p>"
     },
     "DescribeMaintenanceWindowTargets":{
       "name":"DescribeMaintenanceWindowTargets",
@@ -821,6 +822,34 @@
       ],
       "documentation":"<p>Retrieves the details about a specific task executed as part of a Maintenance Window execution.</p>"
     },
+    "GetMaintenanceWindowExecutionTaskInvocation":{
+      "name":"GetMaintenanceWindowExecutionTaskInvocation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetMaintenanceWindowExecutionTaskInvocationRequest"},
+      "output":{"shape":"GetMaintenanceWindowExecutionTaskInvocationResult"},
+      "errors":[
+        {"shape":"DoesNotExistException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Retrieves a task invocation. A task invocation is a specific task executing on a specific target. Maintenance Windows report status for all invocations. </p>"
+    },
+    "GetMaintenanceWindowTask":{
+      "name":"GetMaintenanceWindowTask",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetMaintenanceWindowTaskRequest"},
+      "output":{"shape":"GetMaintenanceWindowTaskResult"},
+      "errors":[
+        {"shape":"DoesNotExistException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Lists the tasks in a Maintenance Window.</p>"
+    },
     "GetParameter":{
       "name":"GetParameter",
       "http":{
@@ -960,6 +989,38 @@
       ],
       "documentation":"<p>Lists the commands requested by users of the AWS account.</p>"
     },
+    "ListComplianceItems":{
+      "name":"ListComplianceItems",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListComplianceItemsRequest"},
+      "output":{"shape":"ListComplianceItemsResult"},
+      "errors":[
+        {"shape":"InvalidResourceType"},
+        {"shape":"InvalidResourceId"},
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidFilter"},
+        {"shape":"InvalidNextToken"}
+      ],
+      "documentation":"<p>For a specified resource ID, this API returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter. </p>"
+    },
+    "ListComplianceSummaries":{
+      "name":"ListComplianceSummaries",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListComplianceSummariesRequest"},
+      "output":{"shape":"ListComplianceSummariesResult"},
+      "errors":[
+        {"shape":"InvalidFilter"},
+        {"shape":"InvalidNextToken"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Returns a summary count of compliant and non-compliant resources for a compliance type. For example, this call can return State Manager associations, patches, or custom compliance types according to the filter criteria you specify. </p>"
+    },
     "ListDocumentVersions":{
       "name":"ListDocumentVersions",
       "http":{
@@ -1007,6 +1068,21 @@
       ],
       "documentation":"<p>A list of inventory items returned by the request.</p>"
     },
+    "ListResourceComplianceSummaries":{
+      "name":"ListResourceComplianceSummaries",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListResourceComplianceSummariesRequest"},
+      "output":{"shape":"ListResourceComplianceSummariesResult"},
+      "errors":[
+        {"shape":"InvalidFilter"},
+        {"shape":"InvalidNextToken"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Returns a resource-level summary count. The summary includes information about compliant and non-compliant statuses and detailed compliance-item severity counts, according to the filter criteria you specify.</p>"
+    },
     "ListResourceDataSync":{
       "name":"ListResourceDataSync",
       "http":{
@@ -1053,6 +1129,25 @@
       ],
       "documentation":"<p>Shares a Systems Manager document publicly or privately. If you share a document privately, you must specify the AWS user account IDs for those people who can use the document. If you share a document publicly, you must specify <i>All</i> as the account ID.</p>"
     },
+    "PutComplianceItems":{
+      "name":"PutComplianceItems",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutComplianceItemsRequest"},
+      "output":{"shape":"PutComplianceItemsResult"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"InvalidItemContentException"},
+        {"shape":"TotalSizeLimitExceededException"},
+        {"shape":"ItemSizeLimitExceededException"},
+        {"shape":"ComplianceTypeCountLimitExceededException"},
+        {"shape":"InvalidResourceType"},
+        {"shape":"InvalidResourceId"}
+      ],
+      "documentation":"<p>Registers a compliance type and other compliance details on a designated resource. This API lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time you send the request.</p>"
+    },
     "PutInventory":{
       "name":"PutInventory",
       "http":{
@@ -1070,7 +1165,10 @@
         {"shape":"ItemSizeLimitExceededException"},
         {"shape":"ItemContentMismatchException"},
         {"shape":"CustomSchemaCountLimitExceededException"},
-        {"shape":"UnsupportedInventorySchemaVersionException"}
+        {"shape":"UnsupportedInventorySchemaVersionException"},
+        {"shape":"UnsupportedInventoryItemContextException"},
+        {"shape":"InvalidInventoryItemContextException"},
+        {"shape":"SubTypeCountLimitExceededException"}
       ],
       "documentation":"<p>Bulk update custom inventory items on one more instance. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.</p>"
     },
@@ -1156,6 +1254,7 @@
         {"shape":"IdempotentParameterMismatch"},
         {"shape":"DoesNotExistException"},
         {"shape":"ResourceLimitExceededException"},
+        {"shape":"FeatureNotAvailableException"},
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Adds a new task to a Maintenance Window.</p>"
@@ -1332,6 +1431,34 @@
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Updates an existing Maintenance Window. Only specified parameters are modified.</p>"
+    },
+    "UpdateMaintenanceWindowTarget":{
+      "name":"UpdateMaintenanceWindowTarget",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateMaintenanceWindowTargetRequest"},
+      "output":{"shape":"UpdateMaintenanceWindowTargetResult"},
+      "errors":[
+        {"shape":"DoesNotExistException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Modifies the target of an existing Maintenance Window. You can't change the target type, but you can change the following:</p> <p>The target from being an ID target to a Tag target, or a Tag target to an ID target.</p> <p>The IDs of an ID target.</p> <p>The tags of a Tag target.</p> <p>The Owner.</p> <p>The Name.</p> <p>The Description.</p> <p>Also note that if a parameter is null, then the corresponding field is not modified.</p>"
+    },
+    "UpdateMaintenanceWindowTask":{
+      "name":"UpdateMaintenanceWindowTask",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateMaintenanceWindowTaskRequest"},
+      "output":{"shape":"UpdateMaintenanceWindowTaskResult"},
+      "errors":[
+        {"shape":"DoesNotExistException"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following:</p> <p>The Task Arn. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> <p>The service role ARN.</p> <p>The task parameters.</p> <p>The task priority.</p> <p>The task MaxConcurrency and MaxErrors.</p> <p>The log location.</p> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow operation are required for this request. Optional fields that aren't specified are be set to null.</p>"
     },
     "UpdateManagedInstanceRole":{
       "name":"UpdateManagedInstanceRole",
@@ -1737,7 +1864,7 @@
     },
     "AttributeValue":{
       "type":"string",
-      "max":1024,
+      "max":4096,
       "min":0
     },
     "AutomationActionName":{
@@ -2303,6 +2430,278 @@
       "max":100
     },
     "CompletedCount":{"type":"integer"},
+    "ComplianceExecutionId":{
+      "type":"string",
+      "max":100
+    },
+    "ComplianceExecutionSummary":{
+      "type":"structure",
+      "required":["ExecutionTime"],
+      "members":{
+        "ExecutionTime":{
+          "shape":"DateTime",
+          "documentation":"<p>The time the execution ran as a datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.</p>"
+        },
+        "ExecutionId":{
+          "shape":"ComplianceExecutionId",
+          "documentation":"<p>An ID created by the system when <code>PutComplianceItems</code> was called. For example, <code>CommandID</code> is a valid execution ID. You can use this ID in subsequent calls.</p>"
+        },
+        "ExecutionType":{
+          "shape":"ComplianceExecutionType",
+          "documentation":"<p>The type of execution. For example, <code>Command</code> is a valid execution type.</p>"
+        }
+      },
+      "documentation":"<p>A summary of the call execution that includes an execution ID, the type of execution (for example, <code>Command</code>), and the date/time of the execution using a datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.</p>"
+    },
+    "ComplianceExecutionType":{
+      "type":"string",
+      "max":50
+    },
+    "ComplianceFilterValue":{"type":"string"},
+    "ComplianceItem":{
+      "type":"structure",
+      "members":{
+        "ComplianceType":{
+          "shape":"ComplianceTypeName",
+          "documentation":"<p>The compliance type. For example, Association (for a State Manager association), Patch, or Custom:<code>string</code> are all valide compliance types.</p>"
+        },
+        "ResourceType":{
+          "shape":"ComplianceResourceType",
+          "documentation":"<p>The type of resource. <code>ManagedInstance</code> is currently the only supported resource type.</p>"
+        },
+        "ResourceId":{
+          "shape":"ComplianceResourceId",
+          "documentation":"<p>An ID for the resource. For a managed instance, this is the instance ID.</p>"
+        },
+        "Id":{
+          "shape":"ComplianceItemId",
+          "documentation":"<p>An ID for the compliance item. For example, if the compliance item is a Windows patch, the ID could be the number of the KB article. Here's an example: KB4010320.</p>"
+        },
+        "Title":{
+          "shape":"ComplianceItemTitle",
+          "documentation":"<p>A title for the compliance item. For example, if the compliance item is a Windows patch, the title could be the title of the KB article for the patch. Here's an example: Security Update for Active Directory Federation Services.</p>"
+        },
+        "Status":{
+          "shape":"ComplianceStatus",
+          "documentation":"<p>The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.</p>"
+        },
+        "Severity":{
+          "shape":"ComplianceSeverity",
+          "documentation":"<p>The severity of the compliance status. Severity can be one of the following: Critical, HIGH, Medium, Low, Informational, Unspecified.</p>"
+        },
+        "ExecutionSummary":{
+          "shape":"ComplianceExecutionSummary",
+          "documentation":"<p>A summary for the compliance item. The summary includes an execution ID, the execution type (for example, command), and the execution time.</p>"
+        },
+        "Details":{
+          "shape":"ComplianceItemDetails",
+          "documentation":"<p>A \"Key\": \"Value\" tag combination for the compliance item.</p>"
+        }
+      },
+      "documentation":"<p>Information about the compliance as defined by the resource type. For example, for a patch resource type, <code>Items</code> includes information about the PatchSeverity, Classification, etc.</p>"
+    },
+    "ComplianceItemContentHash":{
+      "type":"string",
+      "max":256
+    },
+    "ComplianceItemDetails":{
+      "type":"map",
+      "key":{"shape":"AttributeName"},
+      "value":{"shape":"AttributeValue"}
+    },
+    "ComplianceItemEntry":{
+      "type":"structure",
+      "required":[
+        "Severity",
+        "Status"
+      ],
+      "members":{
+        "Id":{
+          "shape":"ComplianceItemId",
+          "documentation":"<p>The compliance item ID. For example, if the compliance item is a Windows patch, the ID could be the number of the KB article.</p>"
+        },
+        "Title":{
+          "shape":"ComplianceItemTitle",
+          "documentation":"<p>The title of the compliance item. For example, if the compliance item is a Windows patch, the title could be the title of the KB article for the patch. Here's an example: Security Update for Active Directory Federation Services. </p>"
+        },
+        "Severity":{
+          "shape":"ComplianceSeverity",
+          "documentation":"<p>The severity of the compliance status. Severity can be one of the following: Critical, High, Medium, Low, Informational, Unspecified.</p>"
+        },
+        "Status":{
+          "shape":"ComplianceStatus",
+          "documentation":"<p>The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.</p>"
+        },
+        "Details":{
+          "shape":"ComplianceItemDetails",
+          "documentation":"<p>A \"Key\": \"Value\" tag combination for the compliance item.</p>"
+        }
+      },
+      "documentation":"<p>Information about a compliance item.</p>"
+    },
+    "ComplianceItemEntryList":{
+      "type":"list",
+      "member":{"shape":"ComplianceItemEntry"},
+      "max":10000,
+      "min":0
+    },
+    "ComplianceItemId":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "ComplianceItemList":{
+      "type":"list",
+      "member":{
+        "shape":"ComplianceItem",
+        "locationName":"Item"
+      }
+    },
+    "ComplianceItemTitle":{
+      "type":"string",
+      "max":500
+    },
+    "ComplianceQueryOperatorType":{
+      "type":"string",
+      "enum":[
+        "EQUAL",
+        "NOT_EQUAL",
+        "BEGIN_WITH",
+        "LESS_THAN",
+        "GREATER_THAN"
+      ]
+    },
+    "ComplianceResourceId":{
+      "type":"string",
+      "max":100,
+      "min":1
+    },
+    "ComplianceResourceIdList":{
+      "type":"list",
+      "member":{"shape":"ComplianceResourceId"},
+      "min":1
+    },
+    "ComplianceResourceType":{
+      "type":"string",
+      "max":50,
+      "min":1
+    },
+    "ComplianceResourceTypeList":{
+      "type":"list",
+      "member":{"shape":"ComplianceResourceType"},
+      "min":1
+    },
+    "ComplianceSeverity":{
+      "type":"string",
+      "enum":[
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "INFORMATIONAL",
+        "UNSPECIFIED"
+      ]
+    },
+    "ComplianceStatus":{
+      "type":"string",
+      "enum":[
+        "COMPLIANT",
+        "NON_COMPLIANT"
+      ]
+    },
+    "ComplianceStringFilter":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"ComplianceStringFilterKey",
+          "documentation":"<p>The name of the filter.</p>"
+        },
+        "Values":{
+          "shape":"ComplianceStringFilterValueList",
+          "documentation":"<p>The value you want to search for.</p>"
+        },
+        "Type":{
+          "shape":"ComplianceQueryOperatorType",
+          "documentation":"<p>The type of comparison that should be performed for the value: Equal, NotEqual, BeginWith, LessThan, or GreaterThan.</p>"
+        }
+      },
+      "documentation":"<p>One or more filters. Use a filter to return a more specific list of results.</p>"
+    },
+    "ComplianceStringFilterKey":{
+      "type":"string",
+      "max":200,
+      "min":1
+    },
+    "ComplianceStringFilterList":{
+      "type":"list",
+      "member":{
+        "shape":"ComplianceStringFilter",
+        "locationName":"ComplianceFilter"
+      }
+    },
+    "ComplianceStringFilterValueList":{
+      "type":"list",
+      "member":{
+        "shape":"ComplianceFilterValue",
+        "locationName":"FilterValue"
+      },
+      "max":20,
+      "min":1
+    },
+    "ComplianceSummaryCount":{"type":"integer"},
+    "ComplianceSummaryItem":{
+      "type":"structure",
+      "members":{
+        "ComplianceType":{
+          "shape":"ComplianceTypeName",
+          "documentation":"<p>The type of compliance item. For example, the compliance type can be Association, Patch, or Custom:string.</p>"
+        },
+        "CompliantSummary":{
+          "shape":"CompliantSummary",
+          "documentation":"<p>A list of COMPLIANT items for the specified compliance type.</p>"
+        },
+        "NonCompliantSummary":{
+          "shape":"NonCompliantSummary",
+          "documentation":"<p>A list of NON_COMPLIANT items for the specified compliance type.</p>"
+        }
+      },
+      "documentation":"<p>A summary of compliance information by compliance type.</p>"
+    },
+    "ComplianceSummaryItemList":{
+      "type":"list",
+      "member":{
+        "shape":"ComplianceSummaryItem",
+        "locationName":"Item"
+      }
+    },
+    "ComplianceTypeCountLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>You specified too many custom compliance types. You can specify a maximum of 10 different types. </p>",
+      "exception":true
+    },
+    "ComplianceTypeName":{
+      "type":"string",
+      "max":100,
+      "min":1,
+      "pattern":"[A-Za-z0-9_\\-]\\w+|Custom:[a-zA-Z0-9_\\-]\\w+"
+    },
+    "CompliantSummary":{
+      "type":"structure",
+      "members":{
+        "CompliantCount":{
+          "shape":"ComplianceSummaryCount",
+          "documentation":"<p>The total number of resources that are compliant.</p>"
+        },
+        "SeveritySummary":{
+          "shape":"SeveritySummary",
+          "documentation":"<p>A summary of the compliance severity by compliance type.</p>"
+        }
+      },
+      "documentation":"<p>A summary of resources that are compliant. The summary is organized according to the resource count for each compliance type.</p>"
+    },
     "ComputerName":{
       "type":"string",
       "max":255,
@@ -2500,6 +2899,10 @@
         "Name":{
           "shape":"MaintenanceWindowName",
           "documentation":"<p>The name of the Maintenance Window.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>An optional description for the Maintenance Window. We recommend specifying a description to help your organize your Maintenance Windows. </p>"
         },
         "Schedule":{
           "shape":"MaintenanceWindowSchedule",
@@ -2826,6 +3229,11 @@
         "WindowTargetId":{
           "shape":"MaintenanceWindowTargetId",
           "documentation":"<p>The ID of the target definition to remove.</p>"
+        },
+        "Safe":{
+          "shape":"Boolean",
+          "documentation":"<p>The system checks if the target is being referenced by a task. If the target is being referenced, the system returns and error and does not deregister the target from the Maintenance Window.</p>",
+          "box":true
         }
       }
     },
@@ -4067,6 +4475,14 @@
         "Unknown"
       ]
     },
+    "FeatureNotAvailableException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>You attempted to register a LAMBDA or STEP_FUNCTION task in a region where there corresponding service is not available. </p>",
+      "exception":true
+    },
     "GetAutomationExecutionRequest":{
       "type":"structure",
       "required":["AutomationExecutionId"],
@@ -4322,6 +4738,11 @@
           "shape":"GetInventorySchemaMaxResults",
           "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
           "box":true
+        },
+        "SubType":{
+          "shape":"IsSubTypeSchema",
+          "documentation":"<p>Returns the sub-type schema for a specified inventory type.</p>",
+          "box":true
         }
       }
     },
@@ -4374,6 +4795,81 @@
         "EndTime":{
           "shape":"DateTime",
           "documentation":"<p>The time the Maintenance Window finished executing.</p>"
+        }
+      }
+    },
+    "GetMaintenanceWindowExecutionTaskInvocationRequest":{
+      "type":"structure",
+      "required":[
+        "WindowExecutionId",
+        "TaskId",
+        "InvocationId"
+      ],
+      "members":{
+        "WindowExecutionId":{
+          "shape":"MaintenanceWindowExecutionId",
+          "documentation":"<p>The ID of the Maintenance Window execution the task is part of.</p>"
+        },
+        "TaskId":{
+          "shape":"MaintenanceWindowExecutionTaskId",
+          "documentation":"<p>The ID of the specific task in the Maintenance Window task that should be retrieved. </p>"
+        },
+        "InvocationId":{
+          "shape":"MaintenanceWindowExecutionTaskInvocationId",
+          "documentation":"<p>The invocation ID to retrieve.</p>"
+        }
+      }
+    },
+    "GetMaintenanceWindowExecutionTaskInvocationResult":{
+      "type":"structure",
+      "members":{
+        "WindowExecutionId":{
+          "shape":"MaintenanceWindowExecutionId",
+          "documentation":"<p>The Maintenance Window execution ID.</p>"
+        },
+        "TaskExecutionId":{
+          "shape":"MaintenanceWindowExecutionTaskId",
+          "documentation":"<p>The task execution ID.</p>"
+        },
+        "InvocationId":{
+          "shape":"MaintenanceWindowExecutionTaskInvocationId",
+          "documentation":"<p>The invocation ID.</p>"
+        },
+        "ExecutionId":{
+          "shape":"MaintenanceWindowExecutionTaskExecutionId",
+          "documentation":"<p>The execution ID.</p>"
+        },
+        "TaskType":{
+          "shape":"MaintenanceWindowTaskType",
+          "documentation":"<p>Retrieves the task type for a Maintenance Window. Task types include the following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.</p>"
+        },
+        "Parameters":{
+          "shape":"MaintenanceWindowExecutionTaskInvocationParameters",
+          "documentation":"<p>The parameters used at the time the task executed.</p>"
+        },
+        "Status":{
+          "shape":"MaintenanceWindowExecutionStatus",
+          "documentation":"<p>The task status for an invocation.</p>"
+        },
+        "StatusDetails":{
+          "shape":"MaintenanceWindowExecutionStatusDetails",
+          "documentation":"<p>The details explaining the status. Details are only available for certain status values.</p>"
+        },
+        "StartTime":{
+          "shape":"DateTime",
+          "documentation":"<p>The time the task started executing on the target.</p>"
+        },
+        "EndTime":{
+          "shape":"DateTime",
+          "documentation":"<p>The time the task finished executing on the target.</p>"
+        },
+        "OwnerInformation":{
+          "shape":"OwnerInformation",
+          "documentation":"<p>User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window. </p>"
+        },
+        "WindowTargetId":{
+          "shape":"MaintenanceWindowTaskTargetId",
+          "documentation":"<p>The Maintenance Window target ID.</p>"
         }
       }
     },
@@ -4472,6 +4968,10 @@
           "shape":"MaintenanceWindowName",
           "documentation":"<p>The name of the Maintenance Window.</p>"
         },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>The description of the Maintenance Window.</p>"
+        },
         "Schedule":{
           "shape":"MaintenanceWindowSchedule",
           "documentation":"<p>The schedule of the Maintenance Window in the form of a cron or rate expression.</p>"
@@ -4499,6 +4999,84 @@
         "ModifiedDate":{
           "shape":"DateTime",
           "documentation":"<p>The date the Maintenance Window was last modified.</p>"
+        }
+      }
+    },
+    "GetMaintenanceWindowTaskRequest":{
+      "type":"structure",
+      "required":[
+        "WindowId",
+        "WindowTaskId"
+      ],
+      "members":{
+        "WindowId":{
+          "shape":"MaintenanceWindowId",
+          "documentation":"<p>The Maintenance Window ID that includes the task to retrieve.</p>"
+        },
+        "WindowTaskId":{
+          "shape":"MaintenanceWindowTaskId",
+          "documentation":"<p>The Maintenance Window task ID to retrieve.</p>"
+        }
+      }
+    },
+    "GetMaintenanceWindowTaskResult":{
+      "type":"structure",
+      "members":{
+        "WindowId":{
+          "shape":"MaintenanceWindowId",
+          "documentation":"<p>The retrieved Maintenance Window ID.</p>"
+        },
+        "WindowTaskId":{
+          "shape":"MaintenanceWindowTaskId",
+          "documentation":"<p>The retrieved Maintenance Window task ID.</p>"
+        },
+        "Targets":{
+          "shape":"Targets",
+          "documentation":"<p>The targets where the task should execute.</p>"
+        },
+        "TaskArn":{
+          "shape":"MaintenanceWindowTaskArn",
+          "documentation":"<p>TaskArn is the resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document Name/ARN. For LAMBDA tasks, TaskArn is the Function Name/ARN. For STEP_FUNCTION tasks, the TaskArn is the State Machine ARN.</p>"
+        },
+        "ServiceRoleArn":{
+          "shape":"ServiceRole",
+          "documentation":"<p>The IAM service role to assume during task execution.</p>"
+        },
+        "TaskType":{
+          "shape":"MaintenanceWindowTaskType",
+          "documentation":"<p>The type of task to execute.</p>"
+        },
+        "TaskParameters":{
+          "shape":"MaintenanceWindowTaskParameters",
+          "documentation":"<p>The parameters to pass to the task when it executes.</p>"
+        },
+        "TaskInvocationParameters":{
+          "shape":"MaintenanceWindowTaskInvocationParameters",
+          "documentation":"<p>The parameters to pass to the task when it executes.</p>"
+        },
+        "Priority":{
+          "shape":"MaintenanceWindowTaskPriority",
+          "documentation":"<p>The priority of the task when it executes. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.</p>"
+        },
+        "MaxConcurrency":{
+          "shape":"MaxConcurrency",
+          "documentation":"<p>The maximum number of targets allowed to run this task in parallel.</p>"
+        },
+        "MaxErrors":{
+          "shape":"MaxErrors",
+          "documentation":"<p>The maximum number of errors allowed before the task stops being scheduled.</p>"
+        },
+        "LoggingInfo":{
+          "shape":"LoggingInfo",
+          "documentation":"<p>The location in Amazon S3 where the task results will be logged.</p>"
+        },
+        "Name":{
+          "shape":"MaintenanceWindowName",
+          "documentation":"<p>The retrieved task name.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>The retrieved task description.</p>"
         }
       }
     },
@@ -5360,6 +5938,14 @@
       "documentation":"<p>The specified filter value is not valid.</p>",
       "exception":true
     },
+    "InvalidInventoryItemContextException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>You specified invalid keys or values in the <code>Context</code> attribute for <code>InventoryItem</code>. Verify the keys and values, and try again.</p>",
+      "exception":true
+    },
     "InvalidItemContentException":{
       "type":"structure",
       "members":{
@@ -5572,6 +6158,10 @@
         "Content":{
           "shape":"InventoryItemEntryList",
           "documentation":"<p>The inventory data of the inventory type.</p>"
+        },
+        "Context":{
+          "shape":"InventoryItemContentContext",
+          "documentation":"<p>A map of associated properties for a specified inventory type. For example, with this attribute, you can specify the <code>ExecutionId</code>, <code>ExecutionType</code>, <code>ComplianceType</code> properties of the <code>AWS:ComplianceItem</code> type.</p>"
         }
       },
       "documentation":"<p>Information collected from managed instances based on your inventory policy document</p>"
@@ -5607,6 +6197,13 @@
     "InventoryItemCaptureTime":{
       "type":"string",
       "pattern":"^(20)[0-9][0-9]-(0[1-9]|1[012])-([12][0-9]|3[01]|0[1-9])(T)(2[0-3]|[0-1][0-9])(:[0-5][0-9])(:[0-5][0-9])(Z)$"
+    },
+    "InventoryItemContentContext":{
+      "type":"map",
+      "key":{"shape":"AttributeName"},
+      "value":{"shape":"AttributeValue"},
+      "max":50,
+      "min":0
     },
     "InventoryItemContentHash":{
       "type":"string",
@@ -5755,6 +6352,7 @@
       "type":"string",
       "max":2500
     },
+    "IsSubTypeSchema":{"type":"boolean"},
     "ItemContentMismatchException":{
       "type":"structure",
       "members":{
@@ -5900,6 +6498,76 @@
         }
       }
     },
+    "ListComplianceItemsRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"ComplianceStringFilterList",
+          "documentation":"<p>One or more compliance filters. Use a filter to return a more specific list of results.</p>"
+        },
+        "ResourceIds":{
+          "shape":"ComplianceResourceIdList",
+          "documentation":"<p>The ID for the resources from which you want to get compliance information. Currently, you can only specify one resource ID.</p>"
+        },
+        "ResourceTypes":{
+          "shape":"ComplianceResourceTypeList",
+          "documentation":"<p>The type of resource from which you want to get compliance information. Currently, the only supported resource type is <code>ManagedInstance</code>.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to start the list. Use this token to get the next set of results. </p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        }
+      }
+    },
+    "ListComplianceItemsResult":{
+      "type":"structure",
+      "members":{
+        "ComplianceItems":{
+          "shape":"ComplianceItemList",
+          "documentation":"<p>A list of compliance information for the specified resource ID. </p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        }
+      }
+    },
+    "ListComplianceSummariesRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"ComplianceStringFilterList",
+          "documentation":"<p>One or more compliance or inventory filters. Use a filter to return a more specific list of results.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to start the list. Use this token to get the next set of results. </p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. Currently, you can specify null or 50. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        }
+      }
+    },
+    "ListComplianceSummariesResult":{
+      "type":"structure",
+      "members":{
+        "ComplianceSummaryItems":{
+          "shape":"ComplianceSummaryItemList",
+          "documentation":"<p>A list of compliant and non-compliant summary counts based on compliance types. For example, this call returns State Manager associations, patches, or custom compliance types according to the filter criteria you specified.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        }
+      }
+    },
     "ListDocumentVersionsRequest":{
       "type":"structure",
       "required":["Name"],
@@ -6022,6 +6690,37 @@
         }
       }
     },
+    "ListResourceComplianceSummariesRequest":{
+      "type":"structure",
+      "members":{
+        "Filters":{
+          "shape":"ComplianceStringFilterList",
+          "documentation":"<p>One or more filters. Use a filter to return a more specific list of results.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to start the list. Use this token to get the next set of results. </p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        }
+      }
+    },
+    "ListResourceComplianceSummariesResult":{
+      "type":"structure",
+      "members":{
+        "ResourceComplianceSummaryItems":{
+          "shape":"ResourceComplianceSummaryItemList",
+          "documentation":"<p>A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch statuses, or custom items according to the filter criteria you specify. </p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        }
+      }
+    },
     "ListResourceDataSyncRequest":{
       "type":"structure",
       "members":{
@@ -6098,10 +6797,30 @@
       "documentation":"<p>Information about an Amazon S3 bucket to write instance-level logs to.</p>"
     },
     "MaintenanceWindowAllowUnassociatedTargets":{"type":"boolean"},
+    "MaintenanceWindowAutomationParameters":{
+      "type":"structure",
+      "members":{
+        "DocumentVersion":{
+          "shape":"DocumentVersion",
+          "documentation":"<p>The version of an SSM Automation document to use during task execution.</p>"
+        },
+        "Parameters":{
+          "shape":"AutomationParameterMap",
+          "documentation":"<p>Parameters for the AUTOMATION task.</p>"
+        }
+      },
+      "documentation":"<p>Parameters for an AUTOMATION task type.</p>"
+    },
     "MaintenanceWindowCutoff":{
       "type":"integer",
       "max":23,
       "min":0
+    },
+    "MaintenanceWindowDescription":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "sensitive":true
     },
     "MaintenanceWindowDurationHours":{
       "type":"integer",
@@ -6245,6 +6964,10 @@
           "shape":"MaintenanceWindowExecutionTaskExecutionId",
           "documentation":"<p>The ID of the action performed in the service that actually handled the task invocation. If the task type is RUN_COMMAND, this value is the command ID.</p>"
         },
+        "TaskType":{
+          "shape":"MaintenanceWindowTaskType",
+          "documentation":"<p>The task type.</p>"
+        },
         "Parameters":{
           "shape":"MaintenanceWindowExecutionTaskInvocationParameters",
           "documentation":"<p>The parameters that were provided for the invocation when it was executed.</p>"
@@ -6335,6 +7058,10 @@
           "shape":"MaintenanceWindowName",
           "documentation":"<p>The name of the Maintenance Window.</p>"
         },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>A description of the Maintenance Window.</p>"
+        },
         "Enabled":{
           "shape":"MaintenanceWindowEnabled",
           "documentation":"<p>Whether the Maintenance Window is enabled.</p>"
@@ -6354,6 +7081,39 @@
       "type":"list",
       "member":{"shape":"MaintenanceWindowIdentity"}
     },
+    "MaintenanceWindowLambdaClientContext":{
+      "type":"string",
+      "max":8000,
+      "min":1
+    },
+    "MaintenanceWindowLambdaParameters":{
+      "type":"structure",
+      "members":{
+        "ClientContext":{
+          "shape":"MaintenanceWindowLambdaClientContext",
+          "documentation":"<p>Using the ClientContext you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable.</p>"
+        },
+        "Qualifier":{
+          "shape":"MaintenanceWindowLambdaQualifier",
+          "documentation":"<p>You can use this optional parameter to specify a Lambda function version or alias name. If you specify a function version, the API uses the qualified function ARN to invoke a specific Lambda function. If you specify an alias name, the API uses the alias ARN to invoke the Lambda function version to which the alias points.</p>"
+        },
+        "Payload":{
+          "shape":"MaintenanceWindowLambdaPayload",
+          "documentation":"<p>JSON that you want to provide to your Lambda function as input.</p>"
+        }
+      },
+      "documentation":"<p>Parameters for a LAMBDA task type.</p>"
+    },
+    "MaintenanceWindowLambdaPayload":{
+      "type":"blob",
+      "max":4096,
+      "sensitive":true
+    },
+    "MaintenanceWindowLambdaQualifier":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "MaintenanceWindowMaxResults":{
       "type":"integer",
       "max":100,
@@ -6369,10 +7129,77 @@
       "type":"string",
       "enum":["INSTANCE"]
     },
+    "MaintenanceWindowRunCommandParameters":{
+      "type":"structure",
+      "members":{
+        "Comment":{
+          "shape":"Comment",
+          "documentation":"<p>Information about the command(s) to execute.</p>"
+        },
+        "DocumentHash":{
+          "shape":"DocumentHash",
+          "documentation":"<p>The Sha256 or Sha1 hash created by the system when the document was created. Sha1 hashes have been deprecated.</p>"
+        },
+        "DocumentHashType":{
+          "shape":"DocumentHashType",
+          "documentation":"<p>Sha256 or Sha1. Sha1 hashes have been deprecated.</p>"
+        },
+        "NotificationConfig":{
+          "shape":"NotificationConfig",
+          "documentation":"<p>Configurations for sending notifications about command status changes on a per instance basis.</p>"
+        },
+        "OutputS3BucketName":{
+          "shape":"S3BucketName",
+          "documentation":"<p>The name of the Amazon S3 bucket.</p>"
+        },
+        "OutputS3KeyPrefix":{
+          "shape":"S3KeyPrefix",
+          "documentation":"<p>The Amazon S3 bucket subfolder.</p>"
+        },
+        "Parameters":{
+          "shape":"Parameters",
+          "documentation":"<p>Parameters for the RUN_COMMAND task execution.</p>"
+        },
+        "ServiceRoleArn":{
+          "shape":"ServiceRole",
+          "documentation":"<p>The IAM service role that to assume during task execution.</p>"
+        },
+        "TimeoutSeconds":{
+          "shape":"TimeoutSeconds",
+          "documentation":"<p>If this time is reached and the command has not already started executing, it will not execute.</p>",
+          "box":true
+        }
+      },
+      "documentation":"<p>Parameters for a RUN_COMMAND task type.</p>"
+    },
     "MaintenanceWindowSchedule":{
       "type":"string",
       "max":256,
       "min":1
+    },
+    "MaintenanceWindowStepFunctionsInput":{
+      "type":"string",
+      "max":4096,
+      "sensitive":true
+    },
+    "MaintenanceWindowStepFunctionsName":{
+      "type":"string",
+      "max":80,
+      "min":1
+    },
+    "MaintenanceWindowStepFunctionsParameters":{
+      "type":"structure",
+      "members":{
+        "Input":{
+          "shape":"MaintenanceWindowStepFunctionsInput",
+          "documentation":"<p>The inputs for the STEP_FUNCTION task.</p>"
+        },
+        "Name":{
+          "shape":"MaintenanceWindowStepFunctionsName",
+          "documentation":"<p>The name of the STEP_FUNCTION task.</p>"
+        }
+      },
+      "documentation":"<p>Parameters for the STEP_FUNCTION execution.</p>"
     },
     "MaintenanceWindowTarget":{
       "type":"structure",
@@ -6396,6 +7223,14 @@
         "OwnerInformation":{
           "shape":"OwnerInformation",
           "documentation":"<p>User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.</p>"
+        },
+        "Name":{
+          "shape":"MaintenanceWindowName",
+          "documentation":"<p>The target name.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>A description of the target.</p>"
         }
       },
       "documentation":"<p>The target registered with the Maintenance Window.</p>"
@@ -6423,11 +7258,11 @@
         },
         "TaskArn":{
           "shape":"MaintenanceWindowTaskArn",
-          "documentation":"<p>The ARN of the task to execute.</p>"
+          "documentation":"<p>TaskArn is the resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document Name/ARN. For LAMBDA tasks, it's the Function Name/ARN. For STEP_FUNCTION tasks, it's the State Machine ARN.</p>"
         },
         "Type":{
           "shape":"MaintenanceWindowTaskType",
-          "documentation":"<p>The type of task.</p>"
+          "documentation":"<p>The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION, LAMBDA, or STEP_FUNCTION.</p>"
         },
         "Targets":{
           "shape":"Targets",
@@ -6439,7 +7274,7 @@
         },
         "Priority":{
           "shape":"MaintenanceWindowTaskPriority",
-          "documentation":"<p>The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.</p>"
+          "documentation":"<p>The priority of the task in the Maintenance Window. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.</p>"
         },
         "LoggingInfo":{
           "shape":"LoggingInfo",
@@ -6456,6 +7291,14 @@
         "MaxErrors":{
           "shape":"MaxErrors",
           "documentation":"<p>The maximum number of errors allowed before this task stops being scheduled.</p>"
+        },
+        "Name":{
+          "shape":"MaintenanceWindowName",
+          "documentation":"<p>The task name.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>A description of the task.</p>"
         }
       },
       "documentation":"<p>Information about a task defined for a Maintenance Window.</p>"
@@ -6470,6 +7313,28 @@
       "max":36,
       "min":36,
       "pattern":"^[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$"
+    },
+    "MaintenanceWindowTaskInvocationParameters":{
+      "type":"structure",
+      "members":{
+        "RunCommand":{
+          "shape":"MaintenanceWindowRunCommandParameters",
+          "documentation":"<p>Parameters for a RUN_COMMAND task type.</p>"
+        },
+        "Automation":{
+          "shape":"MaintenanceWindowAutomationParameters",
+          "documentation":"<p>Parameters for a AUTOMATION task type.</p>"
+        },
+        "StepFunctions":{
+          "shape":"MaintenanceWindowStepFunctionsParameters",
+          "documentation":"<p>Parameters for a STEP_FUNCTION task type.</p>"
+        },
+        "Lambda":{
+          "shape":"MaintenanceWindowLambdaParameters",
+          "documentation":"<p>Parameters for a LAMBDA task type.</p>"
+        }
+      },
+      "documentation":"<p>Parameters for task execution.</p>"
     },
     "MaintenanceWindowTaskList":{
       "type":"list",
@@ -6523,7 +7388,12 @@
     },
     "MaintenanceWindowTaskType":{
       "type":"string",
-      "enum":["RUN_COMMAND"]
+      "enum":[
+        "RUN_COMMAND",
+        "AUTOMATION",
+        "STEP_FUNCTIONS",
+        "LAMBDA"
+      ]
     },
     "ManagedInstanceId":{
       "type":"string",
@@ -6590,6 +7460,20 @@
       }
     },
     "NextToken":{"type":"string"},
+    "NonCompliantSummary":{
+      "type":"structure",
+      "members":{
+        "NonCompliantCount":{
+          "shape":"ComplianceSummaryCount",
+          "documentation":"<p>The total number of compliance items that are not compliant.</p>"
+        },
+        "SeveritySummary":{
+          "shape":"SeveritySummary",
+          "documentation":"<p>A summary of the non-compliance severity by compliance type</p>"
+        }
+      },
+      "documentation":"<p>A summary of resources that are not compliant. The summary is organized according to resource type.</p>"
+    },
     "NormalStringMap":{
       "type":"map",
       "key":{"shape":"String"},
@@ -7330,6 +8214,47 @@
       }
     },
     "Product":{"type":"string"},
+    "PutComplianceItemsRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceId",
+        "ResourceType",
+        "ComplianceType",
+        "ExecutionSummary",
+        "Items"
+      ],
+      "members":{
+        "ResourceId":{
+          "shape":"ComplianceResourceId",
+          "documentation":"<p>Specify an ID for this resource. For a managed instance, this is the instance ID.</p>"
+        },
+        "ResourceType":{
+          "shape":"ComplianceResourceType",
+          "documentation":"<p>Specify the type of resource. <code>ManagedInstance</code> is currently the only supported resource type.</p>"
+        },
+        "ComplianceType":{
+          "shape":"ComplianceTypeName",
+          "documentation":"<p>Specify the compliance type. For example, specify Association (for a State Manager association), Patch, or Custom:<code>string</code>.</p>"
+        },
+        "ExecutionSummary":{
+          "shape":"ComplianceExecutionSummary",
+          "documentation":"<p>A summary of the call execution that includes an execution ID, the type of execution (for example, <code>Command</code>), and the date/time of the execution using a datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.</p>"
+        },
+        "Items":{
+          "shape":"ComplianceItemEntryList",
+          "documentation":"<p>Information about the compliance as defined by the resource type. For example, for a patch compliance type, <code>Items</code> includes information about the PatchSeverity, Classification, etc.</p>"
+        },
+        "ItemContentHash":{
+          "shape":"ComplianceItemContentHash",
+          "documentation":"<p>MD5 or Sha256 content hash. The content hash is used to determine if existing information should be overwritten or ignored. If the content hashes match, ,the request to put compliance information is ignored.</p>"
+        }
+      }
+    },
+    "PutComplianceItemsResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "PutInventoryRequest":{
       "type":"structure",
       "required":[
@@ -7469,6 +8394,14 @@
           "shape":"OwnerInformation",
           "documentation":"<p>User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.</p>"
         },
+        "Name":{
+          "shape":"MaintenanceWindowName",
+          "documentation":"<p>An optional name for the target.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>An optional description for the target.</p>"
+        },
         "ClientToken":{
           "shape":"ClientToken",
           "documentation":"<p>User-provided idempotency token.</p>",
@@ -7521,6 +8454,10 @@
           "shape":"MaintenanceWindowTaskParameters",
           "documentation":"<p>The parameters that should be passed to the task when it is executed.</p>"
         },
+        "TaskInvocationParameters":{
+          "shape":"MaintenanceWindowTaskInvocationParameters",
+          "documentation":"<p>Parameters the task should use during execution. Populate only the fields that match the task type. All other fields should be empty. </p>"
+        },
         "Priority":{
           "shape":"MaintenanceWindowTaskPriority",
           "documentation":"<p>The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.</p>",
@@ -7537,6 +8474,14 @@
         "LoggingInfo":{
           "shape":"LoggingInfo",
           "documentation":"<p>A structure containing information about an Amazon S3 bucket to write instance-level logs to. </p>"
+        },
+        "Name":{
+          "shape":"MaintenanceWindowName",
+          "documentation":"<p>An optional name for the task.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>An optional description for the task.</p>"
         },
         "ClientToken":{
           "shape":"ClientToken",
@@ -7589,6 +8534,51 @@
     "RemoveTagsFromResourceResult":{
       "type":"structure",
       "members":{
+      }
+    },
+    "ResourceComplianceSummaryItem":{
+      "type":"structure",
+      "members":{
+        "ComplianceType":{
+          "shape":"ComplianceTypeName",
+          "documentation":"<p>The compliance type.</p>"
+        },
+        "ResourceType":{
+          "shape":"ComplianceResourceType",
+          "documentation":"<p>The resource type.</p>"
+        },
+        "ResourceId":{
+          "shape":"ComplianceResourceId",
+          "documentation":"<p>The resource ID.</p>"
+        },
+        "Status":{
+          "shape":"ComplianceStatus",
+          "documentation":"<p>The compliance status for the resource.</p>"
+        },
+        "OverallSeverity":{
+          "shape":"ComplianceSeverity",
+          "documentation":"<p>The highest severity item found for the resource. The resource is compliant for this item.</p>"
+        },
+        "ExecutionSummary":{
+          "shape":"ComplianceExecutionSummary",
+          "documentation":"<p>Information about the execution.</p>"
+        },
+        "CompliantSummary":{
+          "shape":"CompliantSummary",
+          "documentation":"<p>A list of items that are compliant for the resource.</p>"
+        },
+        "NonCompliantSummary":{
+          "shape":"NonCompliantSummary",
+          "documentation":"<p>A list of items that aren't compliant for the resource.</p>"
+        }
+      },
+      "documentation":"<p>Compliance summary information for a specific resource. </p>"
+    },
+    "ResourceComplianceSummaryItemList":{
+      "type":"list",
+      "member":{
+        "shape":"ResourceComplianceSummaryItem",
+        "locationName":"Item"
       }
     },
     "ResourceDataSyncAlreadyExistsException":{
@@ -7913,6 +8903,36 @@
       }
     },
     "ServiceRole":{"type":"string"},
+    "SeveritySummary":{
+      "type":"structure",
+      "members":{
+        "CriticalCount":{
+          "shape":"ComplianceSummaryCount",
+          "documentation":"<p>The total number of resources or compliance items that have a severity level of critical. Critical severity is determined by the organization that published the compliance items.</p>"
+        },
+        "HighCount":{
+          "shape":"ComplianceSummaryCount",
+          "documentation":"<p>The total number of resources or compliance items that have a severity level of high. High severity is determined by the organization that published the compliance items.</p>"
+        },
+        "MediumCount":{
+          "shape":"ComplianceSummaryCount",
+          "documentation":"<p>The total number of resources or compliance items that have a severity level of medium. Medium severity is determined by the organization that published the compliance items.</p>"
+        },
+        "LowCount":{
+          "shape":"ComplianceSummaryCount",
+          "documentation":"<p>The total number of resources or compliance items that have a severity level of low. Low severity is determined by the organization that published the compliance items.</p>"
+        },
+        "InformationalCount":{
+          "shape":"ComplianceSummaryCount",
+          "documentation":"<p>The total number of resources or compliance items that have a severity level of informational. Informational severity is determined by the organization that published the compliance items.</p>"
+        },
+        "UnspecifiedCount":{
+          "shape":"ComplianceSummaryCount",
+          "documentation":"<p>The total number of resources or compliance items that have a severity level of unspecified. Unspecified severity is determined by the organization that published the compliance items.</p>"
+        }
+      },
+      "documentation":"<p>The number of managed instances found for each patch severity level defined in the request filter.</p>"
+    },
     "SignalType":{
       "type":"string",
       "enum":[
@@ -8065,6 +9085,14 @@
       "type":"list",
       "member":{"shape":"String"}
     },
+    "SubTypeCountLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The sub-type count exceeded the limit for the inventory type.</p>",
+      "exception":true
+    },
     "Tag":{
       "type":"structure",
       "required":[
@@ -8114,6 +9142,14 @@
       "documentation":"<p>An array of search criteria that targets instances using a Key,Value combination that you specify. <code>Targets</code> is required if you don't provide one or more instance IDs in the call.</p> <p/>"
     },
     "TargetCount":{"type":"integer"},
+    "TargetInUseException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>You specified the <code>Safe</code> option for the DeregisterTargetFromMaintenanceWindow operation, but the target is still referenced in a task.</p>",
+      "exception":true
+    },
     "TargetKey":{
       "type":"string",
       "max":128,
@@ -8159,6 +9195,15 @@
         "Message":{"shape":"String"}
       },
       "documentation":"<p>The size of inventory data has exceeded the total size limit for the resource.</p>",
+      "exception":true
+    },
+    "UnsupportedInventoryItemContextException":{
+      "type":"structure",
+      "members":{
+        "TypeName":{"shape":"InventoryItemTypeName"},
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The <code>Context</code> attribute you specified for the <code>InventoryItem</code> is not allowed for this inventory type. You can only use the <code>Context</code> attribute with inventory types like <code>AWS:ComplianceItem</code>.</p>",
       "exception":true
     },
     "UnsupportedInventorySchemaVersionException":{
@@ -8335,6 +9380,10 @@
           "shape":"MaintenanceWindowName",
           "documentation":"<p>The name of the Maintenance Window.</p>"
         },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>An optional description for the update request.</p>"
+        },
         "Schedule":{
           "shape":"MaintenanceWindowSchedule",
           "documentation":"<p>The schedule of the Maintenance Window in the form of a cron or rate expression.</p>"
@@ -8358,6 +9407,11 @@
           "shape":"MaintenanceWindowEnabled",
           "documentation":"<p>Whether the Maintenance Window is enabled.</p>",
           "box":true
+        },
+        "Replace":{
+          "shape":"Boolean",
+          "documentation":"<p>If you specify True, then all fields that are required by the CreateMaintenanceWindow API are also required for this API request. Optional fields that are not specified will be set to null. </p>",
+          "box":true
         }
       }
     },
@@ -8371,6 +9425,10 @@
         "Name":{
           "shape":"MaintenanceWindowName",
           "documentation":"<p>The name of the Maintenance Window.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>An optional description of the update.</p>"
         },
         "Schedule":{
           "shape":"MaintenanceWindowSchedule",
@@ -8391,6 +9449,197 @@
         "Enabled":{
           "shape":"MaintenanceWindowEnabled",
           "documentation":"<p>Whether the Maintenance Window is enabled.</p>"
+        }
+      }
+    },
+    "UpdateMaintenanceWindowTargetRequest":{
+      "type":"structure",
+      "required":[
+        "WindowId",
+        "WindowTargetId"
+      ],
+      "members":{
+        "WindowId":{
+          "shape":"MaintenanceWindowId",
+          "documentation":"<p>The Maintenance Window ID for which you want to modify the target.</p>"
+        },
+        "WindowTargetId":{
+          "shape":"MaintenanceWindowTargetId",
+          "documentation":"<p>The target ID that you want to modify.</p>"
+        },
+        "Targets":{
+          "shape":"Targets",
+          "documentation":"<p>The targets that you want to add or replace.</p>"
+        },
+        "OwnerInformation":{
+          "shape":"OwnerInformation",
+          "documentation":"<p>User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.</p>"
+        },
+        "Name":{
+          "shape":"MaintenanceWindowName",
+          "documentation":"<p>A name for the update.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>An optional description for the update.</p>"
+        },
+        "Replace":{
+          "shape":"Boolean",
+          "documentation":"<p>If you specify True, then all fields that are required by the RegisterTargetWithMaintenanceWindow API are also required for this API request. Optional fields that are not specified will be set to null.</p>",
+          "box":true
+        }
+      }
+    },
+    "UpdateMaintenanceWindowTargetResult":{
+      "type":"structure",
+      "members":{
+        "WindowId":{
+          "shape":"MaintenanceWindowId",
+          "documentation":"<p>The Maintenance Window ID specified in the update request.</p>"
+        },
+        "WindowTargetId":{
+          "shape":"MaintenanceWindowTargetId",
+          "documentation":"<p>The target ID specified in the update request.</p>"
+        },
+        "Targets":{
+          "shape":"Targets",
+          "documentation":"<p>The updated targets.</p>"
+        },
+        "OwnerInformation":{
+          "shape":"OwnerInformation",
+          "documentation":"<p>The updated owner.</p>"
+        },
+        "Name":{
+          "shape":"MaintenanceWindowName",
+          "documentation":"<p>The updated name.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>The updated description.</p>"
+        }
+      }
+    },
+    "UpdateMaintenanceWindowTaskRequest":{
+      "type":"structure",
+      "required":[
+        "WindowId",
+        "WindowTaskId"
+      ],
+      "members":{
+        "WindowId":{
+          "shape":"MaintenanceWindowId",
+          "documentation":"<p>The Maintenance Window ID that contains the task that you want to modify.</p>"
+        },
+        "WindowTaskId":{
+          "shape":"MaintenanceWindowTaskId",
+          "documentation":"<p>The task ID that you want to modify.</p>"
+        },
+        "Targets":{
+          "shape":"Targets",
+          "documentation":"<p>The targets (either instances or tags) that you want to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. </p>"
+        },
+        "TaskArn":{
+          "shape":"MaintenanceWindowTaskArn",
+          "documentation":"<p>The task ARN that you want to modify.</p>"
+        },
+        "ServiceRoleArn":{
+          "shape":"ServiceRole",
+          "documentation":"<p>The IAM service role ARN that you want to modify. The system assumes this role during task exectuion. </p>"
+        },
+        "TaskParameters":{
+          "shape":"MaintenanceWindowTaskParameters",
+          "documentation":"<p>The parameters that you want to modify. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>"
+        },
+        "TaskInvocationParameters":{
+          "shape":"MaintenanceWindowTaskInvocationParameters",
+          "documentation":"<p>Parameters the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.</p>"
+        },
+        "Priority":{
+          "shape":"MaintenanceWindowTaskPriority",
+          "documentation":"<p>The new task priority that you want to specify. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.</p>",
+          "box":true
+        },
+        "MaxConcurrency":{
+          "shape":"MaxConcurrency",
+          "documentation":"<p>The new <code>MaxConcurrency</code> value you want to specify. <code>MaxConcurrency</code> is the number of targets that are allowed to run this task in parallel.</p>"
+        },
+        "MaxErrors":{
+          "shape":"MaxErrors",
+          "documentation":"<p>The new <code>MaxErrors</code> value you want to specify. <code>MaxErrors</code> is the maximum number of errors that are allowed before the task stops being scheduled.</p>"
+        },
+        "LoggingInfo":{
+          "shape":"LoggingInfo",
+          "documentation":"<p>The new logging location in Amazon S3 that you want to specify.</p>"
+        },
+        "Name":{
+          "shape":"MaintenanceWindowName",
+          "documentation":"<p>The new task name that you want to specify.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>The new task description that you want to specify.</p>"
+        },
+        "Replace":{
+          "shape":"Boolean",
+          "documentation":"<p>If you specify True, then all fields that are required by the RegisterTaskWithMaintenanceWndow API are also required for this API request. Optional fields that are not specified will be set to null.</p>",
+          "box":true
+        }
+      }
+    },
+    "UpdateMaintenanceWindowTaskResult":{
+      "type":"structure",
+      "members":{
+        "WindowId":{
+          "shape":"MaintenanceWindowId",
+          "documentation":"<p>The Maintenance Window ID that was updated.</p>"
+        },
+        "WindowTaskId":{
+          "shape":"MaintenanceWindowTaskId",
+          "documentation":"<p>The Maintenance Window task ID that was updated.</p>"
+        },
+        "Targets":{
+          "shape":"Targets",
+          "documentation":"<p>The updated target values.</p>"
+        },
+        "TaskArn":{
+          "shape":"MaintenanceWindowTaskArn",
+          "documentation":"<p>The updated task ARN value.</p>"
+        },
+        "ServiceRoleArn":{
+          "shape":"ServiceRole",
+          "documentation":"<p>The updated service role ARN value.</p>"
+        },
+        "TaskParameters":{
+          "shape":"MaintenanceWindowTaskParameters",
+          "documentation":"<p>The updated parameter values.</p>"
+        },
+        "TaskInvocationParameters":{
+          "shape":"MaintenanceWindowTaskInvocationParameters",
+          "documentation":"<p>The updated parameter values.</p>"
+        },
+        "Priority":{
+          "shape":"MaintenanceWindowTaskPriority",
+          "documentation":"<p>The updated priority value.</p>"
+        },
+        "MaxConcurrency":{
+          "shape":"MaxConcurrency",
+          "documentation":"<p>The updated MaxConcurrency value.</p>"
+        },
+        "MaxErrors":{
+          "shape":"MaxErrors",
+          "documentation":"<p>The updated MaxErrors value.</p>"
+        },
+        "LoggingInfo":{
+          "shape":"LoggingInfo",
+          "documentation":"<p>The updated logging information in Amazon S3.</p>"
+        },
+        "Name":{
+          "shape":"MaintenanceWindowName",
+          "documentation":"<p>The updated task name.</p>"
+        },
+        "Description":{
+          "shape":"MaintenanceWindowDescription",
+          "documentation":"<p>The updated task description.</p>"
         }
       }
     },

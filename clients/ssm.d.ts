@@ -300,11 +300,11 @@ declare class SSM extends Service {
    */
   describeMaintenanceWindowExecutionTasks(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowExecutionTasksResult) => void): Request<SSM.Types.DescribeMaintenanceWindowExecutionTasksResult, AWSError>;
   /**
-   * Lists the executions of a Maintenance Window (meaning, information about when the Maintenance Window was scheduled to be active and information about tasks registered and run with the Maintenance Window).
+   * Lists the executions of a Maintenance Window. This includes information about when the Maintenance Window was scheduled to be active, and information about tasks registered and run with the Maintenance Window.
    */
   describeMaintenanceWindowExecutions(params: SSM.Types.DescribeMaintenanceWindowExecutionsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowExecutionsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowExecutionsResult, AWSError>;
   /**
-   * Lists the executions of a Maintenance Window (meaning, information about when the Maintenance Window was scheduled to be active and information about tasks registered and run with the Maintenance Window).
+   * Lists the executions of a Maintenance Window. This includes information about when the Maintenance Window was scheduled to be active, and information about tasks registered and run with the Maintenance Window.
    */
   describeMaintenanceWindowExecutions(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowExecutionsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowExecutionsResult, AWSError>;
   /**
@@ -444,6 +444,22 @@ declare class SSM extends Service {
    */
   getMaintenanceWindowExecutionTask(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowExecutionTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowExecutionTaskResult, AWSError>;
   /**
+   * Retrieves a task invocation. A task invocation is a specific task executing on a specific target. Maintenance Windows report status for all invocations. 
+   */
+  getMaintenanceWindowExecutionTaskInvocation(params: SSM.Types.GetMaintenanceWindowExecutionTaskInvocationRequest, callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult) => void): Request<SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult, AWSError>;
+  /**
+   * Retrieves a task invocation. A task invocation is a specific task executing on a specific target. Maintenance Windows report status for all invocations. 
+   */
+  getMaintenanceWindowExecutionTaskInvocation(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult) => void): Request<SSM.Types.GetMaintenanceWindowExecutionTaskInvocationResult, AWSError>;
+  /**
+   * Lists the tasks in a Maintenance Window.
+   */
+  getMaintenanceWindowTask(params: SSM.Types.GetMaintenanceWindowTaskRequest, callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowTaskResult, AWSError>;
+  /**
+   * Lists the tasks in a Maintenance Window.
+   */
+  getMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowTaskResult, AWSError>;
+  /**
    * Get information about a parameter by using the parameter name. 
    */
   getParameter(params: SSM.Types.GetParameterRequest, callback?: (err: AWSError, data: SSM.Types.GetParameterResult) => void): Request<SSM.Types.GetParameterResult, AWSError>;
@@ -516,6 +532,22 @@ declare class SSM extends Service {
    */
   listCommands(callback?: (err: AWSError, data: SSM.Types.ListCommandsResult) => void): Request<SSM.Types.ListCommandsResult, AWSError>;
   /**
+   * For a specified resource ID, this API returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter. 
+   */
+  listComplianceItems(params: SSM.Types.ListComplianceItemsRequest, callback?: (err: AWSError, data: SSM.Types.ListComplianceItemsResult) => void): Request<SSM.Types.ListComplianceItemsResult, AWSError>;
+  /**
+   * For a specified resource ID, this API returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter. 
+   */
+  listComplianceItems(callback?: (err: AWSError, data: SSM.Types.ListComplianceItemsResult) => void): Request<SSM.Types.ListComplianceItemsResult, AWSError>;
+  /**
+   * Returns a summary count of compliant and non-compliant resources for a compliance type. For example, this call can return State Manager associations, patches, or custom compliance types according to the filter criteria you specify. 
+   */
+  listComplianceSummaries(params: SSM.Types.ListComplianceSummariesRequest, callback?: (err: AWSError, data: SSM.Types.ListComplianceSummariesResult) => void): Request<SSM.Types.ListComplianceSummariesResult, AWSError>;
+  /**
+   * Returns a summary count of compliant and non-compliant resources for a compliance type. For example, this call can return State Manager associations, patches, or custom compliance types according to the filter criteria you specify. 
+   */
+  listComplianceSummaries(callback?: (err: AWSError, data: SSM.Types.ListComplianceSummariesResult) => void): Request<SSM.Types.ListComplianceSummariesResult, AWSError>;
+  /**
    * List all versions for a document.
    */
   listDocumentVersions(params: SSM.Types.ListDocumentVersionsRequest, callback?: (err: AWSError, data: SSM.Types.ListDocumentVersionsResult) => void): Request<SSM.Types.ListDocumentVersionsResult, AWSError>;
@@ -540,6 +572,14 @@ declare class SSM extends Service {
    */
   listInventoryEntries(callback?: (err: AWSError, data: SSM.Types.ListInventoryEntriesResult) => void): Request<SSM.Types.ListInventoryEntriesResult, AWSError>;
   /**
+   * Returns a resource-level summary count. The summary includes information about compliant and non-compliant statuses and detailed compliance-item severity counts, according to the filter criteria you specify.
+   */
+  listResourceComplianceSummaries(params: SSM.Types.ListResourceComplianceSummariesRequest, callback?: (err: AWSError, data: SSM.Types.ListResourceComplianceSummariesResult) => void): Request<SSM.Types.ListResourceComplianceSummariesResult, AWSError>;
+  /**
+   * Returns a resource-level summary count. The summary includes information about compliant and non-compliant statuses and detailed compliance-item severity counts, according to the filter criteria you specify.
+   */
+  listResourceComplianceSummaries(callback?: (err: AWSError, data: SSM.Types.ListResourceComplianceSummariesResult) => void): Request<SSM.Types.ListResourceComplianceSummariesResult, AWSError>;
+  /**
    * Lists your resource data sync configurations. Includes information about the last time a sync attempted to start, the last sync status, and the last time a sync successfully completed. The number of sync configurations might be too large to return using a single call to ListResourceDataSync. You can limit the number of sync configurations returned by using the MaxResults parameter. To determine whether there are more sync configurations to list, check the value of NextToken in the output. If there are more sync configurations to list, you can request them by specifying the NextToken returned in the call to the parameter of a subsequent call. 
    */
   listResourceDataSync(params: SSM.Types.ListResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.ListResourceDataSyncResult) => void): Request<SSM.Types.ListResourceDataSyncResult, AWSError>;
@@ -563,6 +603,14 @@ declare class SSM extends Service {
    * Shares a Systems Manager document publicly or privately. If you share a document privately, you must specify the AWS user account IDs for those people who can use the document. If you share a document publicly, you must specify All as the account ID.
    */
   modifyDocumentPermission(callback?: (err: AWSError, data: SSM.Types.ModifyDocumentPermissionResponse) => void): Request<SSM.Types.ModifyDocumentPermissionResponse, AWSError>;
+  /**
+   * Registers a compliance type and other compliance details on a designated resource. This API lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time you send the request.
+   */
+  putComplianceItems(params: SSM.Types.PutComplianceItemsRequest, callback?: (err: AWSError, data: SSM.Types.PutComplianceItemsResult) => void): Request<SSM.Types.PutComplianceItemsResult, AWSError>;
+  /**
+   * Registers a compliance type and other compliance details on a designated resource. This API lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time you send the request.
+   */
+  putComplianceItems(callback?: (err: AWSError, data: SSM.Types.PutComplianceItemsResult) => void): Request<SSM.Types.PutComplianceItemsResult, AWSError>;
   /**
    * Bulk update custom inventory items on one more instance. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
    */
@@ -691,6 +739,22 @@ declare class SSM extends Service {
    * Updates an existing Maintenance Window. Only specified parameters are modified.
    */
   updateMaintenanceWindow(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowResult) => void): Request<SSM.Types.UpdateMaintenanceWindowResult, AWSError>;
+  /**
+   * Modifies the target of an existing Maintenance Window. You can't change the target type, but you can change the following: The target from being an ID target to a Tag target, or a Tag target to an ID target. The IDs of an ID target. The tags of a Tag target. The Owner. The Name. The Description. Also note that if a parameter is null, then the corresponding field is not modified.
+   */
+  updateMaintenanceWindowTarget(params: SSM.Types.UpdateMaintenanceWindowTargetRequest, callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTargetResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTargetResult, AWSError>;
+  /**
+   * Modifies the target of an existing Maintenance Window. You can't change the target type, but you can change the following: The target from being an ID target to a Tag target, or a Tag target to an ID target. The IDs of an ID target. The tags of a Tag target. The Owner. The Name. The Description. Also note that if a parameter is null, then the corresponding field is not modified.
+   */
+  updateMaintenanceWindowTarget(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTargetResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTargetResult, AWSError>;
+  /**
+   * Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following: The Task Arn. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript. The service role ARN. The task parameters. The task priority. The task MaxConcurrency and MaxErrors. The log location. If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow operation are required for this request. Optional fields that aren't specified are be set to null.
+   */
+  updateMaintenanceWindowTask(params: SSM.Types.UpdateMaintenanceWindowTaskRequest, callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
+  /**
+   * Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following: The Task Arn. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript. The service role ARN. The task parameters. The task priority. The task MaxConcurrency and MaxErrors. The log location. If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow operation are required for this request. Optional fields that aren't specified are be set to null.
+   */
+  updateMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.UpdateMaintenanceWindowTaskResult) => void): Request<SSM.Types.UpdateMaintenanceWindowTaskResult, AWSError>;
   /**
    * Assigns or changes an Amazon Identity and Access Management (IAM) role to the managed instance.
    */
@@ -1248,6 +1312,140 @@ declare namespace SSM {
   export type CommandStatus = "Pending"|"InProgress"|"Success"|"Cancelled"|"Failed"|"TimedOut"|"Cancelling"|string;
   export type Comment = string;
   export type CompletedCount = number;
+  export type ComplianceExecutionId = string;
+  export interface ComplianceExecutionSummary {
+    /**
+     * The time the execution ran as a datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+     */
+    ExecutionTime: DateTime;
+    /**
+     * An ID created by the system when PutComplianceItems was called. For example, CommandID is a valid execution ID. You can use this ID in subsequent calls.
+     */
+    ExecutionId?: ComplianceExecutionId;
+    /**
+     * The type of execution. For example, Command is a valid execution type.
+     */
+    ExecutionType?: ComplianceExecutionType;
+  }
+  export type ComplianceExecutionType = string;
+  export type ComplianceFilterValue = string;
+  export interface ComplianceItem {
+    /**
+     * The compliance type. For example, Association (for a State Manager association), Patch, or Custom:string are all valide compliance types.
+     */
+    ComplianceType?: ComplianceTypeName;
+    /**
+     * The type of resource. ManagedInstance is currently the only supported resource type.
+     */
+    ResourceType?: ComplianceResourceType;
+    /**
+     * An ID for the resource. For a managed instance, this is the instance ID.
+     */
+    ResourceId?: ComplianceResourceId;
+    /**
+     * An ID for the compliance item. For example, if the compliance item is a Windows patch, the ID could be the number of the KB article. Here's an example: KB4010320.
+     */
+    Id?: ComplianceItemId;
+    /**
+     * A title for the compliance item. For example, if the compliance item is a Windows patch, the title could be the title of the KB article for the patch. Here's an example: Security Update for Active Directory Federation Services.
+     */
+    Title?: ComplianceItemTitle;
+    /**
+     * The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
+     */
+    Status?: ComplianceStatus;
+    /**
+     * The severity of the compliance status. Severity can be one of the following: Critical, HIGH, Medium, Low, Informational, Unspecified.
+     */
+    Severity?: ComplianceSeverity;
+    /**
+     * A summary for the compliance item. The summary includes an execution ID, the execution type (for example, command), and the execution time.
+     */
+    ExecutionSummary?: ComplianceExecutionSummary;
+    /**
+     * A "Key": "Value" tag combination for the compliance item.
+     */
+    Details?: ComplianceItemDetails;
+  }
+  export type ComplianceItemContentHash = string;
+  export type ComplianceItemDetails = {[key: string]: AttributeValue};
+  export interface ComplianceItemEntry {
+    /**
+     * The compliance item ID. For example, if the compliance item is a Windows patch, the ID could be the number of the KB article.
+     */
+    Id?: ComplianceItemId;
+    /**
+     * The title of the compliance item. For example, if the compliance item is a Windows patch, the title could be the title of the KB article for the patch. Here's an example: Security Update for Active Directory Federation Services. 
+     */
+    Title?: ComplianceItemTitle;
+    /**
+     * The severity of the compliance status. Severity can be one of the following: Critical, High, Medium, Low, Informational, Unspecified.
+     */
+    Severity: ComplianceSeverity;
+    /**
+     * The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
+     */
+    Status: ComplianceStatus;
+    /**
+     * A "Key": "Value" tag combination for the compliance item.
+     */
+    Details?: ComplianceItemDetails;
+  }
+  export type ComplianceItemEntryList = ComplianceItemEntry[];
+  export type ComplianceItemId = string;
+  export type ComplianceItemList = ComplianceItem[];
+  export type ComplianceItemTitle = string;
+  export type ComplianceQueryOperatorType = "EQUAL"|"NOT_EQUAL"|"BEGIN_WITH"|"LESS_THAN"|"GREATER_THAN"|string;
+  export type ComplianceResourceId = string;
+  export type ComplianceResourceIdList = ComplianceResourceId[];
+  export type ComplianceResourceType = string;
+  export type ComplianceResourceTypeList = ComplianceResourceType[];
+  export type ComplianceSeverity = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"INFORMATIONAL"|"UNSPECIFIED"|string;
+  export type ComplianceStatus = "COMPLIANT"|"NON_COMPLIANT"|string;
+  export interface ComplianceStringFilter {
+    /**
+     * The name of the filter.
+     */
+    Key?: ComplianceStringFilterKey;
+    /**
+     * The value you want to search for.
+     */
+    Values?: ComplianceStringFilterValueList;
+    /**
+     * The type of comparison that should be performed for the value: Equal, NotEqual, BeginWith, LessThan, or GreaterThan.
+     */
+    Type?: ComplianceQueryOperatorType;
+  }
+  export type ComplianceStringFilterKey = string;
+  export type ComplianceStringFilterList = ComplianceStringFilter[];
+  export type ComplianceStringFilterValueList = ComplianceFilterValue[];
+  export type ComplianceSummaryCount = number;
+  export interface ComplianceSummaryItem {
+    /**
+     * The type of compliance item. For example, the compliance type can be Association, Patch, or Custom:string.
+     */
+    ComplianceType?: ComplianceTypeName;
+    /**
+     * A list of COMPLIANT items for the specified compliance type.
+     */
+    CompliantSummary?: CompliantSummary;
+    /**
+     * A list of NON_COMPLIANT items for the specified compliance type.
+     */
+    NonCompliantSummary?: NonCompliantSummary;
+  }
+  export type ComplianceSummaryItemList = ComplianceSummaryItem[];
+  export type ComplianceTypeName = string;
+  export interface CompliantSummary {
+    /**
+     * The total number of resources that are compliant.
+     */
+    CompliantCount?: ComplianceSummaryCount;
+    /**
+     * A summary of the compliance severity by compliance type.
+     */
+    SeveritySummary?: SeveritySummary;
+  }
   export type ComputerName = string;
   export interface CreateActivationRequest {
     /**
@@ -1389,6 +1587,10 @@ declare namespace SSM {
      * The name of the Maintenance Window.
      */
     Name: MaintenanceWindowName;
+    /**
+     * An optional description for the Maintenance Window. We recommend specifying a description to help your organize your Maintenance Windows. 
+     */
+    Description?: MaintenanceWindowDescription;
     /**
      * The schedule of the Maintenance Window in the form of a cron or rate expression.
      */
@@ -1601,6 +1803,10 @@ declare namespace SSM {
      * The ID of the target definition to remove.
      */
     WindowTargetId: MaintenanceWindowTargetId;
+    /**
+     * The system checks if the target is being referenced by a task. If the target is being referenced, the system returns and error and does not deregister the target from the Maintenance Window.
+     */
+    Safe?: Boolean;
   }
   export interface DeregisterTargetFromMaintenanceWindowResult {
     /**
@@ -2638,6 +2844,10 @@ declare namespace SSM {
      * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
      */
     MaxResults?: GetInventorySchemaMaxResults;
+    /**
+     * Returns the sub-type schema for a specified inventory type.
+     */
+    SubType?: IsSubTypeSchema;
   }
   export interface GetInventorySchemaResult {
     /**
@@ -2680,6 +2890,70 @@ declare namespace SSM {
      * The time the Maintenance Window finished executing.
      */
     EndTime?: DateTime;
+  }
+  export interface GetMaintenanceWindowExecutionTaskInvocationRequest {
+    /**
+     * The ID of the Maintenance Window execution the task is part of.
+     */
+    WindowExecutionId: MaintenanceWindowExecutionId;
+    /**
+     * The ID of the specific task in the Maintenance Window task that should be retrieved. 
+     */
+    TaskId: MaintenanceWindowExecutionTaskId;
+    /**
+     * The invocation ID to retrieve.
+     */
+    InvocationId: MaintenanceWindowExecutionTaskInvocationId;
+  }
+  export interface GetMaintenanceWindowExecutionTaskInvocationResult {
+    /**
+     * The Maintenance Window execution ID.
+     */
+    WindowExecutionId?: MaintenanceWindowExecutionId;
+    /**
+     * The task execution ID.
+     */
+    TaskExecutionId?: MaintenanceWindowExecutionTaskId;
+    /**
+     * The invocation ID.
+     */
+    InvocationId?: MaintenanceWindowExecutionTaskInvocationId;
+    /**
+     * The execution ID.
+     */
+    ExecutionId?: MaintenanceWindowExecutionTaskExecutionId;
+    /**
+     * Retrieves the task type for a Maintenance Window. Task types include the following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.
+     */
+    TaskType?: MaintenanceWindowTaskType;
+    /**
+     * The parameters used at the time the task executed.
+     */
+    Parameters?: MaintenanceWindowExecutionTaskInvocationParameters;
+    /**
+     * The task status for an invocation.
+     */
+    Status?: MaintenanceWindowExecutionStatus;
+    /**
+     * The details explaining the status. Details are only available for certain status values.
+     */
+    StatusDetails?: MaintenanceWindowExecutionStatusDetails;
+    /**
+     * The time the task started executing on the target.
+     */
+    StartTime?: DateTime;
+    /**
+     * The time the task finished executing on the target.
+     */
+    EndTime?: DateTime;
+    /**
+     * User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window. 
+     */
+    OwnerInformation?: OwnerInformation;
+    /**
+     * The Maintenance Window target ID.
+     */
+    WindowTargetId?: MaintenanceWindowTaskTargetId;
   }
   export interface GetMaintenanceWindowExecutionTaskRequest {
     /**
@@ -2761,6 +3035,10 @@ declare namespace SSM {
      */
     Name?: MaintenanceWindowName;
     /**
+     * The description of the Maintenance Window.
+     */
+    Description?: MaintenanceWindowDescription;
+    /**
      * The schedule of the Maintenance Window in the form of a cron or rate expression.
      */
     Schedule?: MaintenanceWindowSchedule;
@@ -2788,6 +3066,74 @@ declare namespace SSM {
      * The date the Maintenance Window was last modified.
      */
     ModifiedDate?: DateTime;
+  }
+  export interface GetMaintenanceWindowTaskRequest {
+    /**
+     * The Maintenance Window ID that includes the task to retrieve.
+     */
+    WindowId: MaintenanceWindowId;
+    /**
+     * The Maintenance Window task ID to retrieve.
+     */
+    WindowTaskId: MaintenanceWindowTaskId;
+  }
+  export interface GetMaintenanceWindowTaskResult {
+    /**
+     * The retrieved Maintenance Window ID.
+     */
+    WindowId?: MaintenanceWindowId;
+    /**
+     * The retrieved Maintenance Window task ID.
+     */
+    WindowTaskId?: MaintenanceWindowTaskId;
+    /**
+     * The targets where the task should execute.
+     */
+    Targets?: Targets;
+    /**
+     * TaskArn is the resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document Name/ARN. For LAMBDA tasks, TaskArn is the Function Name/ARN. For STEP_FUNCTION tasks, the TaskArn is the State Machine ARN.
+     */
+    TaskArn?: MaintenanceWindowTaskArn;
+    /**
+     * The IAM service role to assume during task execution.
+     */
+    ServiceRoleArn?: ServiceRole;
+    /**
+     * The type of task to execute.
+     */
+    TaskType?: MaintenanceWindowTaskType;
+    /**
+     * The parameters to pass to the task when it executes.
+     */
+    TaskParameters?: MaintenanceWindowTaskParameters;
+    /**
+     * The parameters to pass to the task when it executes.
+     */
+    TaskInvocationParameters?: MaintenanceWindowTaskInvocationParameters;
+    /**
+     * The priority of the task when it executes. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.
+     */
+    Priority?: MaintenanceWindowTaskPriority;
+    /**
+     * The maximum number of targets allowed to run this task in parallel.
+     */
+    MaxConcurrency?: MaxConcurrency;
+    /**
+     * The maximum number of errors allowed before the task stops being scheduled.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The location in Amazon S3 where the task results will be logged.
+     */
+    LoggingInfo?: LoggingInfo;
+    /**
+     * The retrieved task name.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * The retrieved task description.
+     */
+    Description?: MaintenanceWindowDescription;
   }
   export interface GetParameterHistoryRequest {
     /**
@@ -3279,6 +3625,10 @@ declare namespace SSM {
      * The inventory data of the inventory type.
      */
     Content?: InventoryItemEntryList;
+    /**
+     * A map of associated properties for a specified inventory type. For example, with this attribute, you can specify the ExecutionId, ExecutionType, ComplianceType properties of the AWS:ComplianceItem type.
+     */
+    Context?: InventoryItemContentContext;
   }
   export interface InventoryItemAttribute {
     /**
@@ -3293,6 +3643,7 @@ declare namespace SSM {
   export type InventoryItemAttributeList = InventoryItemAttribute[];
   export type InventoryItemAttributeName = string;
   export type InventoryItemCaptureTime = string;
+  export type InventoryItemContentContext = {[key: string]: AttributeValue};
   export type InventoryItemContentHash = string;
   export type InventoryItemEntry = {[key: string]: AttributeValue};
   export type InventoryItemEntryList = InventoryItemEntry[];
@@ -3353,6 +3704,7 @@ declare namespace SSM {
   export type InventoryResultItemKey = string;
   export type InventoryResultItemMap = {[key: string]: InventoryResultItem};
   export type InvocationTraceOutput = string;
+  export type IsSubTypeSchema = boolean;
   export type KeyList = TagKey[];
   export type LastResourceDataSyncStatus = "Successful"|"Failed"|"InProgress"|string;
   export type LastResourceDataSyncTime = Date;
@@ -3446,6 +3798,62 @@ declare namespace SSM {
     Commands?: CommandList;
     /**
      * (Optional) The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListComplianceItemsRequest {
+    /**
+     * One or more compliance filters. Use a filter to return a more specific list of results.
+     */
+    Filters?: ComplianceStringFilterList;
+    /**
+     * The ID for the resources from which you want to get compliance information. Currently, you can only specify one resource ID.
+     */
+    ResourceIds?: ComplianceResourceIdList;
+    /**
+     * The type of resource from which you want to get compliance information. Currently, the only supported resource type is ManagedInstance.
+     */
+    ResourceTypes?: ComplianceResourceTypeList;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListComplianceItemsResult {
+    /**
+     * A list of compliance information for the specified resource ID. 
+     */
+    ComplianceItems?: ComplianceItemList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListComplianceSummariesRequest {
+    /**
+     * One or more compliance or inventory filters. Use a filter to return a more specific list of results.
+     */
+    Filters?: ComplianceStringFilterList;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return for this call. Currently, you can specify null or 50. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListComplianceSummariesResult {
+    /**
+     * A list of compliant and non-compliant summary counts based on compliance types. For example, this call returns State Manager associations, patches, or custom compliance types according to the filter criteria you specified.
+     */
+    ComplianceSummaryItems?: ComplianceSummaryItemList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -3545,6 +3953,30 @@ declare namespace SSM {
      */
     NextToken?: NextToken;
   }
+  export interface ListResourceComplianceSummariesRequest {
+    /**
+     * One or more filters. Use a filter to return a more specific list of results.
+     */
+    Filters?: ComplianceStringFilterList;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListResourceComplianceSummariesResult {
+    /**
+     * A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch statuses, or custom items according to the filter criteria you specify. 
+     */
+    ResourceComplianceSummaryItems?: ResourceComplianceSummaryItemList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListResourceDataSyncRequest {
     /**
      * A token to start the list. Use this token to get the next set of results. 
@@ -3596,7 +4028,18 @@ declare namespace SSM {
     S3Region: S3Region;
   }
   export type MaintenanceWindowAllowUnassociatedTargets = boolean;
+  export interface MaintenanceWindowAutomationParameters {
+    /**
+     * The version of an SSM Automation document to use during task execution.
+     */
+    DocumentVersion?: DocumentVersion;
+    /**
+     * Parameters for the AUTOMATION task.
+     */
+    Parameters?: AutomationParameterMap;
+  }
   export type MaintenanceWindowCutoff = number;
+  export type MaintenanceWindowDescription = string;
   export type MaintenanceWindowDurationHours = number;
   export type MaintenanceWindowEnabled = boolean;
   export interface MaintenanceWindowExecution {
@@ -3686,6 +4129,10 @@ declare namespace SSM {
      */
     ExecutionId?: MaintenanceWindowExecutionTaskExecutionId;
     /**
+     * The task type.
+     */
+    TaskType?: MaintenanceWindowTaskType;
+    /**
      * The parameters that were provided for the invocation when it was executed.
      */
     Parameters?: MaintenanceWindowExecutionTaskInvocationParameters;
@@ -3741,6 +4188,10 @@ declare namespace SSM {
      */
     Name?: MaintenanceWindowName;
     /**
+     * A description of the Maintenance Window.
+     */
+    Description?: MaintenanceWindowDescription;
+    /**
      * Whether the Maintenance Window is enabled.
      */
     Enabled?: MaintenanceWindowEnabled;
@@ -3754,10 +4205,77 @@ declare namespace SSM {
     Cutoff?: MaintenanceWindowCutoff;
   }
   export type MaintenanceWindowIdentityList = MaintenanceWindowIdentity[];
+  export type MaintenanceWindowLambdaClientContext = string;
+  export interface MaintenanceWindowLambdaParameters {
+    /**
+     * Using the ClientContext you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable.
+     */
+    ClientContext?: MaintenanceWindowLambdaClientContext;
+    /**
+     * You can use this optional parameter to specify a Lambda function version or alias name. If you specify a function version, the API uses the qualified function ARN to invoke a specific Lambda function. If you specify an alias name, the API uses the alias ARN to invoke the Lambda function version to which the alias points.
+     */
+    Qualifier?: MaintenanceWindowLambdaQualifier;
+    /**
+     * JSON that you want to provide to your Lambda function as input.
+     */
+    Payload?: MaintenanceWindowLambdaPayload;
+  }
+  export type MaintenanceWindowLambdaPayload = Buffer|Uint8Array|Blob|string;
+  export type MaintenanceWindowLambdaQualifier = string;
   export type MaintenanceWindowMaxResults = number;
   export type MaintenanceWindowName = string;
   export type MaintenanceWindowResourceType = "INSTANCE"|string;
+  export interface MaintenanceWindowRunCommandParameters {
+    /**
+     * Information about the command(s) to execute.
+     */
+    Comment?: Comment;
+    /**
+     * The Sha256 or Sha1 hash created by the system when the document was created. Sha1 hashes have been deprecated.
+     */
+    DocumentHash?: DocumentHash;
+    /**
+     * Sha256 or Sha1. Sha1 hashes have been deprecated.
+     */
+    DocumentHashType?: DocumentHashType;
+    /**
+     * Configurations for sending notifications about command status changes on a per instance basis.
+     */
+    NotificationConfig?: NotificationConfig;
+    /**
+     * The name of the Amazon S3 bucket.
+     */
+    OutputS3BucketName?: S3BucketName;
+    /**
+     * The Amazon S3 bucket subfolder.
+     */
+    OutputS3KeyPrefix?: S3KeyPrefix;
+    /**
+     * Parameters for the RUN_COMMAND task execution.
+     */
+    Parameters?: Parameters;
+    /**
+     * The IAM service role that to assume during task execution.
+     */
+    ServiceRoleArn?: ServiceRole;
+    /**
+     * If this time is reached and the command has not already started executing, it will not execute.
+     */
+    TimeoutSeconds?: TimeoutSeconds;
+  }
   export type MaintenanceWindowSchedule = string;
+  export type MaintenanceWindowStepFunctionsInput = string;
+  export type MaintenanceWindowStepFunctionsName = string;
+  export interface MaintenanceWindowStepFunctionsParameters {
+    /**
+     * The inputs for the STEP_FUNCTION task.
+     */
+    Input?: MaintenanceWindowStepFunctionsInput;
+    /**
+     * The name of the STEP_FUNCTION task.
+     */
+    Name?: MaintenanceWindowStepFunctionsName;
+  }
   export interface MaintenanceWindowTarget {
     /**
      * The Maintenance Window ID where the target is registered.
@@ -3779,6 +4297,14 @@ declare namespace SSM {
      * User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
      */
     OwnerInformation?: OwnerInformation;
+    /**
+     * The target name.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * A description of the target.
+     */
+    Description?: MaintenanceWindowDescription;
   }
   export type MaintenanceWindowTargetId = string;
   export type MaintenanceWindowTargetList = MaintenanceWindowTarget[];
@@ -3792,11 +4318,11 @@ declare namespace SSM {
      */
     WindowTaskId?: MaintenanceWindowTaskId;
     /**
-     * The ARN of the task to execute.
+     * TaskArn is the resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document Name/ARN. For LAMBDA tasks, it's the Function Name/ARN. For STEP_FUNCTION tasks, it's the State Machine ARN.
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
-     * The type of task.
+     * The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION, LAMBDA, or STEP_FUNCTION.
      */
     Type?: MaintenanceWindowTaskType;
     /**
@@ -3808,7 +4334,7 @@ declare namespace SSM {
      */
     TaskParameters?: MaintenanceWindowTaskParameters;
     /**
-     * The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.
+     * The priority of the task in the Maintenance Window. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.
      */
     Priority?: MaintenanceWindowTaskPriority;
     /**
@@ -3827,9 +4353,35 @@ declare namespace SSM {
      * The maximum number of errors allowed before this task stops being scheduled.
      */
     MaxErrors?: MaxErrors;
+    /**
+     * The task name.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * A description of the task.
+     */
+    Description?: MaintenanceWindowDescription;
   }
   export type MaintenanceWindowTaskArn = string;
   export type MaintenanceWindowTaskId = string;
+  export interface MaintenanceWindowTaskInvocationParameters {
+    /**
+     * Parameters for a RUN_COMMAND task type.
+     */
+    RunCommand?: MaintenanceWindowRunCommandParameters;
+    /**
+     * Parameters for a AUTOMATION task type.
+     */
+    Automation?: MaintenanceWindowAutomationParameters;
+    /**
+     * Parameters for a STEP_FUNCTION task type.
+     */
+    StepFunctions?: MaintenanceWindowStepFunctionsParameters;
+    /**
+     * Parameters for a LAMBDA task type.
+     */
+    Lambda?: MaintenanceWindowLambdaParameters;
+  }
   export type MaintenanceWindowTaskList = MaintenanceWindowTask[];
   export type MaintenanceWindowTaskParameterName = string;
   export type MaintenanceWindowTaskParameterValue = string;
@@ -3844,7 +4396,7 @@ declare namespace SSM {
   export type MaintenanceWindowTaskParametersList = MaintenanceWindowTaskParameters[];
   export type MaintenanceWindowTaskPriority = number;
   export type MaintenanceWindowTaskTargetId = string;
-  export type MaintenanceWindowTaskType = "RUN_COMMAND"|string;
+  export type MaintenanceWindowTaskType = "RUN_COMMAND"|"AUTOMATION"|"STEP_FUNCTIONS"|"LAMBDA"|string;
   export type ManagedInstanceId = string;
   export type MaxConcurrency = string;
   export type MaxErrors = string;
@@ -3871,6 +4423,16 @@ declare namespace SSM {
   export interface ModifyDocumentPermissionResponse {
   }
   export type NextToken = string;
+  export interface NonCompliantSummary {
+    /**
+     * The total number of compliance items that are not compliant.
+     */
+    NonCompliantCount?: ComplianceSummaryCount;
+    /**
+     * A summary of the non-compliance severity by compliance type
+     */
+    SeveritySummary?: SeveritySummary;
+  }
   export type NormalStringMap = {[key: string]: String};
   export type NotificationArn = string;
   export interface NotificationConfig {
@@ -4232,6 +4794,34 @@ declare namespace SSM {
   export type PlatformType = "Windows"|"Linux"|string;
   export type PlatformTypeList = PlatformType[];
   export type Product = string;
+  export interface PutComplianceItemsRequest {
+    /**
+     * Specify an ID for this resource. For a managed instance, this is the instance ID.
+     */
+    ResourceId: ComplianceResourceId;
+    /**
+     * Specify the type of resource. ManagedInstance is currently the only supported resource type.
+     */
+    ResourceType: ComplianceResourceType;
+    /**
+     * Specify the compliance type. For example, specify Association (for a State Manager association), Patch, or Custom:string.
+     */
+    ComplianceType: ComplianceTypeName;
+    /**
+     * A summary of the call execution that includes an execution ID, the type of execution (for example, Command), and the date/time of the execution using a datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+     */
+    ExecutionSummary: ComplianceExecutionSummary;
+    /**
+     * Information about the compliance as defined by the resource type. For example, for a patch compliance type, Items includes information about the PatchSeverity, Classification, etc.
+     */
+    Items: ComplianceItemEntryList;
+    /**
+     * MD5 or Sha256 content hash. The content hash is used to determine if existing information should be overwritten or ignored. If the content hashes match, ,the request to put compliance information is ignored.
+     */
+    ItemContentHash?: ComplianceItemContentHash;
+  }
+  export interface PutComplianceItemsResult {
+  }
   export interface PutInventoryRequest {
     /**
      * One or more instance IDs where you want to add or update inventory items.
@@ -4326,6 +4916,14 @@ declare namespace SSM {
      */
     OwnerInformation?: OwnerInformation;
     /**
+     * An optional name for the target.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * An optional description for the target.
+     */
+    Description?: MaintenanceWindowDescription;
+    /**
      * User-provided idempotency token.
      */
     ClientToken?: ClientToken;
@@ -4362,6 +4960,10 @@ declare namespace SSM {
      */
     TaskParameters?: MaintenanceWindowTaskParameters;
     /**
+     * Parameters the task should use during execution. Populate only the fields that match the task type. All other fields should be empty. 
+     */
+    TaskInvocationParameters?: MaintenanceWindowTaskInvocationParameters;
+    /**
      * The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.
      */
     Priority?: MaintenanceWindowTaskPriority;
@@ -4377,6 +4979,14 @@ declare namespace SSM {
      * A structure containing information about an Amazon S3 bucket to write instance-level logs to. 
      */
     LoggingInfo?: LoggingInfo;
+    /**
+     * An optional name for the task.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * An optional description for the task.
+     */
+    Description?: MaintenanceWindowDescription;
     /**
      * User-provided idempotency token.
      */
@@ -4406,6 +5016,41 @@ declare namespace SSM {
   }
   export interface RemoveTagsFromResourceResult {
   }
+  export interface ResourceComplianceSummaryItem {
+    /**
+     * The compliance type.
+     */
+    ComplianceType?: ComplianceTypeName;
+    /**
+     * The resource type.
+     */
+    ResourceType?: ComplianceResourceType;
+    /**
+     * The resource ID.
+     */
+    ResourceId?: ComplianceResourceId;
+    /**
+     * The compliance status for the resource.
+     */
+    Status?: ComplianceStatus;
+    /**
+     * The highest severity item found for the resource. The resource is compliant for this item.
+     */
+    OverallSeverity?: ComplianceSeverity;
+    /**
+     * Information about the execution.
+     */
+    ExecutionSummary?: ComplianceExecutionSummary;
+    /**
+     * A list of items that are compliant for the resource.
+     */
+    CompliantSummary?: CompliantSummary;
+    /**
+     * A list of items that aren't compliant for the resource.
+     */
+    NonCompliantSummary?: NonCompliantSummary;
+  }
+  export type ResourceComplianceSummaryItemList = ResourceComplianceSummaryItem[];
   export type ResourceDataSyncCreatedTime = Date;
   export interface ResourceDataSyncItem {
     /**
@@ -4577,6 +5222,32 @@ declare namespace SSM {
     Command?: Command;
   }
   export type ServiceRole = string;
+  export interface SeveritySummary {
+    /**
+     * The total number of resources or compliance items that have a severity level of critical. Critical severity is determined by the organization that published the compliance items.
+     */
+    CriticalCount?: ComplianceSummaryCount;
+    /**
+     * The total number of resources or compliance items that have a severity level of high. High severity is determined by the organization that published the compliance items.
+     */
+    HighCount?: ComplianceSummaryCount;
+    /**
+     * The total number of resources or compliance items that have a severity level of medium. Medium severity is determined by the organization that published the compliance items.
+     */
+    MediumCount?: ComplianceSummaryCount;
+    /**
+     * The total number of resources or compliance items that have a severity level of low. Low severity is determined by the organization that published the compliance items.
+     */
+    LowCount?: ComplianceSummaryCount;
+    /**
+     * The total number of resources or compliance items that have a severity level of informational. Informational severity is determined by the organization that published the compliance items.
+     */
+    InformationalCount?: ComplianceSummaryCount;
+    /**
+     * The total number of resources or compliance items that have a severity level of unspecified. Unspecified severity is determined by the organization that published the compliance items.
+     */
+    UnspecifiedCount?: ComplianceSummaryCount;
+  }
   export type SignalType = "Approve"|"Reject"|string;
   export type SnapshotDownloadUrl = string;
   export type SnapshotId = string;
@@ -4795,6 +5466,48 @@ declare namespace SSM {
      */
     Name?: MaintenanceWindowName;
     /**
+     * An optional description for the update request.
+     */
+    Description?: MaintenanceWindowDescription;
+    /**
+     * The schedule of the Maintenance Window in the form of a cron or rate expression.
+     */
+    Schedule?: MaintenanceWindowSchedule;
+    /**
+     * The duration of the Maintenance Window in hours.
+     */
+    Duration?: MaintenanceWindowDurationHours;
+    /**
+     * The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
+     */
+    Cutoff?: MaintenanceWindowCutoff;
+    /**
+     * Whether targets must be registered with the Maintenance Window before tasks can be defined for those targets.
+     */
+    AllowUnassociatedTargets?: MaintenanceWindowAllowUnassociatedTargets;
+    /**
+     * Whether the Maintenance Window is enabled.
+     */
+    Enabled?: MaintenanceWindowEnabled;
+    /**
+     * If you specify True, then all fields that are required by the CreateMaintenanceWindow API are also required for this API request. Optional fields that are not specified will be set to null. 
+     */
+    Replace?: Boolean;
+  }
+  export interface UpdateMaintenanceWindowResult {
+    /**
+     * The ID of the created Maintenance Window.
+     */
+    WindowId?: MaintenanceWindowId;
+    /**
+     * The name of the Maintenance Window.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * An optional description of the update.
+     */
+    Description?: MaintenanceWindowDescription;
+    /**
      * The schedule of the Maintenance Window in the form of a cron or rate expression.
      */
     Schedule?: MaintenanceWindowSchedule;
@@ -4815,35 +5528,173 @@ declare namespace SSM {
      */
     Enabled?: MaintenanceWindowEnabled;
   }
-  export interface UpdateMaintenanceWindowResult {
+  export interface UpdateMaintenanceWindowTargetRequest {
     /**
-     * The ID of the created Maintenance Window.
+     * The Maintenance Window ID for which you want to modify the target.
      */
-    WindowId?: MaintenanceWindowId;
+    WindowId: MaintenanceWindowId;
     /**
-     * The name of the Maintenance Window.
+     * The target ID that you want to modify.
+     */
+    WindowTargetId: MaintenanceWindowTargetId;
+    /**
+     * The targets that you want to add or replace.
+     */
+    Targets?: Targets;
+    /**
+     * User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
+     */
+    OwnerInformation?: OwnerInformation;
+    /**
+     * A name for the update.
      */
     Name?: MaintenanceWindowName;
     /**
-     * The schedule of the Maintenance Window in the form of a cron or rate expression.
+     * An optional description for the update.
      */
-    Schedule?: MaintenanceWindowSchedule;
+    Description?: MaintenanceWindowDescription;
     /**
-     * The duration of the Maintenance Window in hours.
+     * If you specify True, then all fields that are required by the RegisterTargetWithMaintenanceWindow API are also required for this API request. Optional fields that are not specified will be set to null.
      */
-    Duration?: MaintenanceWindowDurationHours;
+    Replace?: Boolean;
+  }
+  export interface UpdateMaintenanceWindowTargetResult {
     /**
-     * The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
+     * The Maintenance Window ID specified in the update request.
      */
-    Cutoff?: MaintenanceWindowCutoff;
+    WindowId?: MaintenanceWindowId;
     /**
-     * Whether targets must be registered with the Maintenance Window before tasks can be defined for those targets.
+     * The target ID specified in the update request.
      */
-    AllowUnassociatedTargets?: MaintenanceWindowAllowUnassociatedTargets;
+    WindowTargetId?: MaintenanceWindowTargetId;
     /**
-     * Whether the Maintenance Window is enabled.
+     * The updated targets.
      */
-    Enabled?: MaintenanceWindowEnabled;
+    Targets?: Targets;
+    /**
+     * The updated owner.
+     */
+    OwnerInformation?: OwnerInformation;
+    /**
+     * The updated name.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * The updated description.
+     */
+    Description?: MaintenanceWindowDescription;
+  }
+  export interface UpdateMaintenanceWindowTaskRequest {
+    /**
+     * The Maintenance Window ID that contains the task that you want to modify.
+     */
+    WindowId: MaintenanceWindowId;
+    /**
+     * The task ID that you want to modify.
+     */
+    WindowTaskId: MaintenanceWindowTaskId;
+    /**
+     * The targets (either instances or tags) that you want to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. 
+     */
+    Targets?: Targets;
+    /**
+     * The task ARN that you want to modify.
+     */
+    TaskArn?: MaintenanceWindowTaskArn;
+    /**
+     * The IAM service role ARN that you want to modify. The system assumes this role during task exectuion. 
+     */
+    ServiceRoleArn?: ServiceRole;
+    /**
+     * The parameters that you want to modify. The map has the following format: Key: string, between 1 and 255 characters Value: an array of strings, each string is between 1 and 255 characters
+     */
+    TaskParameters?: MaintenanceWindowTaskParameters;
+    /**
+     * Parameters the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.
+     */
+    TaskInvocationParameters?: MaintenanceWindowTaskInvocationParameters;
+    /**
+     * The new task priority that you want to specify. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.
+     */
+    Priority?: MaintenanceWindowTaskPriority;
+    /**
+     * The new MaxConcurrency value you want to specify. MaxConcurrency is the number of targets that are allowed to run this task in parallel.
+     */
+    MaxConcurrency?: MaxConcurrency;
+    /**
+     * The new MaxErrors value you want to specify. MaxErrors is the maximum number of errors that are allowed before the task stops being scheduled.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The new logging location in Amazon S3 that you want to specify.
+     */
+    LoggingInfo?: LoggingInfo;
+    /**
+     * The new task name that you want to specify.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * The new task description that you want to specify.
+     */
+    Description?: MaintenanceWindowDescription;
+    /**
+     * If you specify True, then all fields that are required by the RegisterTaskWithMaintenanceWndow API are also required for this API request. Optional fields that are not specified will be set to null.
+     */
+    Replace?: Boolean;
+  }
+  export interface UpdateMaintenanceWindowTaskResult {
+    /**
+     * The Maintenance Window ID that was updated.
+     */
+    WindowId?: MaintenanceWindowId;
+    /**
+     * The Maintenance Window task ID that was updated.
+     */
+    WindowTaskId?: MaintenanceWindowTaskId;
+    /**
+     * The updated target values.
+     */
+    Targets?: Targets;
+    /**
+     * The updated task ARN value.
+     */
+    TaskArn?: MaintenanceWindowTaskArn;
+    /**
+     * The updated service role ARN value.
+     */
+    ServiceRoleArn?: ServiceRole;
+    /**
+     * The updated parameter values.
+     */
+    TaskParameters?: MaintenanceWindowTaskParameters;
+    /**
+     * The updated parameter values.
+     */
+    TaskInvocationParameters?: MaintenanceWindowTaskInvocationParameters;
+    /**
+     * The updated priority value.
+     */
+    Priority?: MaintenanceWindowTaskPriority;
+    /**
+     * The updated MaxConcurrency value.
+     */
+    MaxConcurrency?: MaxConcurrency;
+    /**
+     * The updated MaxErrors value.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The updated logging information in Amazon S3.
+     */
+    LoggingInfo?: LoggingInfo;
+    /**
+     * The updated task name.
+     */
+    Name?: MaintenanceWindowName;
+    /**
+     * The updated task description.
+     */
+    Description?: MaintenanceWindowDescription;
   }
   export interface UpdateManagedInstanceRoleRequest {
     /**

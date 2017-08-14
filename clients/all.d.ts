@@ -100,3 +100,6 @@ export import MarketplaceEntitlementService = require('./marketplaceentitlements
 export import Athena = require('./athena');
 export import Greengrass = require('./greengrass');
 export import DAX = require('./dax');
+export import MigrationHub = require('./migrationhub');
+export import CloudHSMV2 = require('./cloudhsmv2');
+export import Glue = require('./glue');

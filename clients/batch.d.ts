@@ -158,6 +158,7 @@ declare namespace Batch {
      * A short (255 max characters) human-readable string to provide additional details about a running or stopped container.
      */
     reason?: String;
+    logStreamName?: String;
   }
   export interface AttemptDetail {
     /**
@@ -378,6 +379,7 @@ declare namespace Batch {
      * The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job.
      */
     taskArn?: String;
+    logStreamName?: String;
   }
   export interface ContainerOverrides {
     /**

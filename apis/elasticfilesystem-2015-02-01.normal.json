@@ -223,6 +223,14 @@
         "PerformanceMode":{
           "shape":"PerformanceMode",
           "documentation":"<p>The <code>PerformanceMode</code> of the file system. We recommend <code>generalPurpose</code> performance mode for most file systems. File systems using the <code>maxIO</code> performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. This can't be changed after the file system has been created.</p>"
+        },
+        "Encrypted":{
+          "shape":"Encrypted",
+          "documentation":"<p>A boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying a <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don't specify a CMK, then the default CMK for Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system. </p>"
+        },
+        "KmsKeyId":{
+          "shape":"KmsKeyId",
+          "documentation":"<p>The id of the AWS KMS CMK that will be used to protect the encrypted file system. This parameter is only required if you want to use a non-default CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This id can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key. For example, <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name for the key. For example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key. For example, <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An Amazon Resource Name for a key alias. For example, <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>Note that if the KmsKeyId is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>"
         }
       }
     },
@@ -496,6 +504,7 @@
       },
       "documentation":"<p/>"
     },
+    "Encrypted":{"type":"boolean"},
     "ErrorCode":{
       "type":"string",
       "min":1
@@ -564,6 +573,14 @@
         "PerformanceMode":{
           "shape":"PerformanceMode",
           "documentation":"<p>The <code>PerformanceMode</code> of the file system.</p>"
+        },
+        "Encrypted":{
+          "shape":"Encrypted",
+          "documentation":"<p>A boolean value that, if true, indicates that the file system is encrypted.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"KmsKeyId",
+          "documentation":"<p>The id of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.</p>"
         }
       },
       "documentation":"<p>Description of the file system.</p>"
@@ -669,6 +686,11 @@
       "documentation":"<p>Returned if the request specified an <code>IpAddress</code> that is already in use in the subnet.</p>",
       "error":{"httpStatusCode":409},
       "exception":true
+    },
+    "KmsKeyId":{
+      "type":"string",
+      "max":2048,
+      "min":1
     },
     "LifeCycleState":{
       "type":"string",
@@ -885,7 +907,7 @@
         "ErrorCode":{"shape":"ErrorCode"},
         "Message":{"shape":"ErrorMessage"}
       },
-      "documentation":"<p></p>",
+      "documentation":"<p/>",
       "error":{"httpStatusCode":400},
       "exception":true
     }

@@ -438,5 +438,15 @@
   },
   "dax": {
     "name": "DAX"
+  },
+  "migrationhub": {
+    "prefix": "AWSMigrationHub",
+    "name": "MigrationHub"
+  },
+  "cloudhsmv2": {
+    "name": "CloudHSMV2"
+  },
+  "glue": {
+    "name": "Glue"
   }
 }

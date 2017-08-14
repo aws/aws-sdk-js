@@ -102,6 +102,9 @@ export abstract class ConfigurationServicePlaceholders {
   athena?: AWS.Athena.Types.ClientConfiguration;
   greengrass?: AWS.Greengrass.Types.ClientConfiguration;
   dax?: AWS.DAX.Types.ClientConfiguration;
+  migrationhub?: AWS.MigrationHub.Types.ClientConfiguration;
+  cloudhsmv2?: AWS.CloudHSMV2.Types.ClientConfiguration;
+  glue?: AWS.Glue.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -206,4 +209,7 @@ export interface ConfigurationServiceApiVersions {
   athena?: AWS.Athena.Types.apiVersion;
   greengrass?: AWS.Greengrass.Types.apiVersion;
   dax?: AWS.DAX.Types.apiVersion;
+  migrationhub?: AWS.MigrationHub.Types.apiVersion;
+  cloudhsmv2?: AWS.CloudHSMV2.Types.apiVersion;
+  glue?: AWS.Glue.Types.apiVersion;
 }

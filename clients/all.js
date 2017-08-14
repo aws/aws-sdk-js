@@ -101,5 +101,8 @@ module.exports = {
   MarketplaceEntitlementService: require('./marketplaceentitlementservice'),
   Athena: require('./athena'),
   Greengrass: require('./greengrass'),
-  DAX: require('./dax')
+  DAX: require('./dax'),
+  MigrationHub: require('./migrationhub'),
+  CloudHSMV2: require('./cloudhsmv2'),
+  Glue: require('./glue')
 };

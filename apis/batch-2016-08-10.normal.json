@@ -255,7 +255,8 @@
         "reason":{
           "shape":"String",
           "documentation":"<p>A short (255 max characters) human-readable string to provide additional details about a running or stopped container.</p>"
-        }
+        },
+        "logStreamName":{"shape":"String"}
       },
       "documentation":"<p>An object representing the details of a container that is part of a job attempt.</p>"
     },
@@ -573,7 +574,8 @@
         "taskArn":{
           "shape":"String",
           "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job.</p>"
-        }
+        },
+        "logStreamName":{"shape":"String"}
       },
       "documentation":"<p>An object representing the details of a container that is part of a job.</p>"
     },

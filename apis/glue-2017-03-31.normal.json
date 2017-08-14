@@ -1,0 +1,5463 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2017-03-31",
+    "endpointPrefix":"glue",
+    "jsonVersion":"1.1",
+    "protocol":"json",
+    "serviceFullName":"AWS Glue",
+    "signatureVersion":"v4",
+    "targetPrefix":"AWSGlue",
+    "uid":"glue-2017-03-31"
+  },
+  "operations":{
+    "BatchCreatePartition":{
+      "name":"BatchCreatePartition",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchCreatePartitionRequest"},
+      "output":{"shape":"BatchCreatePartitionResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"AlreadyExistsException"},
+        {"shape":"ResourceNumberLimitExceededException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Creates one or more partitions in a batch operation.</p>"
+    },
+    "BatchDeleteConnection":{
+      "name":"BatchDeleteConnection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchDeleteConnectionRequest"},
+      "output":{"shape":"BatchDeleteConnectionResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes a list of connection definitions from the Data Catalog.</p>"
+    },
+    "BatchDeletePartition":{
+      "name":"BatchDeletePartition",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchDeletePartitionRequest"},
+      "output":{"shape":"BatchDeletePartitionResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes one or more partitions in a batch operation.</p>"
+    },
+    "BatchDeleteTable":{
+      "name":"BatchDeleteTable",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchDeleteTableRequest"},
+      "output":{"shape":"BatchDeleteTableResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes multiple tables at once.</p>"
+    },
+    "BatchGetPartition":{
+      "name":"BatchGetPartition",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchGetPartitionRequest"},
+      "output":{"shape":"BatchGetPartitionResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "documentation":"<p>Retrieves partitions in a batch request.</p>"
+    },
+    "CreateClassifier":{
+      "name":"CreateClassifier",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateClassifierRequest"},
+      "output":{"shape":"CreateClassifierResponse"},
+      "errors":[
+        {"shape":"AlreadyExistsException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Creates a <code>Classifier</code> in the user's account.</p>"
+    },
+    "CreateConnection":{
+      "name":"CreateConnection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateConnectionRequest"},
+      "output":{"shape":"CreateConnectionResponse"},
+      "errors":[
+        {"shape":"AlreadyExistsException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Creates a connection definition in the Data Catalog.</p>"
+    },
+    "CreateCrawler":{
+      "name":"CreateCrawler",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateCrawlerRequest"},
+      "output":{"shape":"CreateCrawlerResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"AlreadyExistsException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ResourceNumberLimitExceededException"}
+      ],
+      "documentation":"<p>Creates a new <code>Crawler</code> with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the <i>s3Targets</i> or the <i>jdbcTargets</i> field.</p>"
+    },
+    "CreateDatabase":{
+      "name":"CreateDatabase",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDatabaseRequest"},
+      "output":{"shape":"CreateDatabaseResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"AlreadyExistsException"},
+        {"shape":"ResourceNumberLimitExceededException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Creates a new database in a Data Catalog.</p>"
+    },
+    "CreateDevEndpoint":{
+      "name":"CreateDevEndpoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDevEndpointRequest"},
+      "output":{"shape":"CreateDevEndpointResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"AlreadyExistsException"},
+        {"shape":"IdempotentParameterMismatchException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNumberLimitExceededException"}
+      ],
+      "documentation":"<p>Creates a new DevEndpoint.</p>"
+    },
+    "CreateJob":{
+      "name":"CreateJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateJobRequest"},
+      "output":{"shape":"CreateJobResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"IdempotentParameterMismatchException"},
+        {"shape":"AlreadyExistsException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ResourceNumberLimitExceededException"}
+      ],
+      "documentation":"<p>Creates a new job.</p>"
+    },
+    "CreatePartition":{
+      "name":"CreatePartition",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreatePartitionRequest"},
+      "output":{"shape":"CreatePartitionResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"AlreadyExistsException"},
+        {"shape":"ResourceNumberLimitExceededException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Creates a new partition.</p>"
+    },
+    "CreateScript":{
+      "name":"CreateScript",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateScriptRequest"},
+      "output":{"shape":"CreateScriptResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Transforms a directed acyclic graph (DAG) into a Python script.</p>"
+    },
+    "CreateTable":{
+      "name":"CreateTable",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTableRequest"},
+      "output":{"shape":"CreateTableResponse"},
+      "errors":[
+        {"shape":"AlreadyExistsException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"ResourceNumberLimitExceededException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Creates a new table definition in the Data Catalog.</p>"
+    },
+    "CreateTrigger":{
+      "name":"CreateTrigger",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTriggerRequest"},
+      "output":{"shape":"CreateTriggerResponse"},
+      "errors":[
+        {"shape":"AlreadyExistsException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ResourceNumberLimitExceededException"}
+      ],
+      "documentation":"<p>Creates a new trigger.</p>"
+    },
+    "CreateUserDefinedFunction":{
+      "name":"CreateUserDefinedFunction",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateUserDefinedFunctionRequest"},
+      "output":{"shape":"CreateUserDefinedFunctionResponse"},
+      "errors":[
+        {"shape":"AlreadyExistsException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Creates a new function definition in the Data Catalog.</p>"
+    },
+    "DeleteClassifier":{
+      "name":"DeleteClassifier",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteClassifierRequest"},
+      "output":{"shape":"DeleteClassifierResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Removes a <code>Classifier</code> from the metadata store.</p>"
+    },
+    "DeleteConnection":{
+      "name":"DeleteConnection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteConnectionRequest"},
+      "output":{"shape":"DeleteConnectionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes a connection from the Data Catalog.</p>"
+    },
+    "DeleteCrawler":{
+      "name":"DeleteCrawler",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteCrawlerRequest"},
+      "output":{"shape":"DeleteCrawlerResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"CrawlerRunningException"},
+        {"shape":"SchedulerTransitioningException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Removes a specified <code>Crawler</code> from the metadata store, unless the <code>Crawler</code> state is <code>RUNNING</code>.</p>"
+    },
+    "DeleteDatabase":{
+      "name":"DeleteDatabase",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteDatabaseRequest"},
+      "output":{"shape":"DeleteDatabaseResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Removes a specified Database from a Data Catalog.</p>"
+    },
+    "DeleteDevEndpoint":{
+      "name":"DeleteDevEndpoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteDevEndpointRequest"},
+      "output":{"shape":"DeleteDevEndpointResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InvalidInputException"}
+      ],
+      "documentation":"<p>Deletes a specified DevEndpoint.</p>"
+    },
+    "DeleteJob":{
+      "name":"DeleteJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteJobRequest"},
+      "output":{"shape":"DeleteJobResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes a specified job.</p>"
+    },
+    "DeletePartition":{
+      "name":"DeletePartition",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeletePartitionRequest"},
+      "output":{"shape":"DeletePartitionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes a specified partition.</p>"
+    },
+    "DeleteTable":{
+      "name":"DeleteTable",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTableRequest"},
+      "output":{"shape":"DeleteTableResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Removes a table definition from the Data Catalog.</p>"
+    },
+    "DeleteTrigger":{
+      "name":"DeleteTrigger",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTriggerRequest"},
+      "output":{"shape":"DeleteTriggerResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes a specified trigger.</p>"
+    },
+    "DeleteUserDefinedFunction":{
+      "name":"DeleteUserDefinedFunction",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteUserDefinedFunctionRequest"},
+      "output":{"shape":"DeleteUserDefinedFunctionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes an existing function definition from the Data Catalog.</p>"
+    },
+    "GetCatalogImportStatus":{
+      "name":"GetCatalogImportStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetCatalogImportStatusRequest"},
+      "output":{"shape":"GetCatalogImportStatusResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves the status of a migration operation.</p>"
+    },
+    "GetClassifier":{
+      "name":"GetClassifier",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetClassifierRequest"},
+      "output":{"shape":"GetClassifierResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieve a <code>Classifier</code> by name.</p>"
+    },
+    "GetClassifiers":{
+      "name":"GetClassifiers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetClassifiersRequest"},
+      "output":{"shape":"GetClassifiersResponse"},
+      "errors":[
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Lists all Classifier objects in the metadata store.</p>"
+    },
+    "GetConnection":{
+      "name":"GetConnection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetConnectionRequest"},
+      "output":{"shape":"GetConnectionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves a connection definition from the Data Catalog.</p>"
+    },
+    "GetConnections":{
+      "name":"GetConnections",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetConnectionsRequest"},
+      "output":{"shape":"GetConnectionsResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves a list of connection definitions from the Data Catalog.</p>"
+    },
+    "GetCrawler":{
+      "name":"GetCrawler",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetCrawlerRequest"},
+      "output":{"shape":"GetCrawlerResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves metadata for a specified <code>Crawler</code>.</p>"
+    },
+    "GetCrawlerMetrics":{
+      "name":"GetCrawlerMetrics",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetCrawlerMetricsRequest"},
+      "output":{"shape":"GetCrawlerMetricsResponse"},
+      "errors":[
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves metrics about specified crawlers.</p>"
+    },
+    "GetCrawlers":{
+      "name":"GetCrawlers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetCrawlersRequest"},
+      "output":{"shape":"GetCrawlersResponse"},
+      "errors":[
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves metadata for all <code>Crawlers</code> defined in the customer account.</p>"
+    },
+    "GetDatabase":{
+      "name":"GetDatabase",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDatabaseRequest"},
+      "output":{"shape":"GetDatabaseResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves the definition of a specified database.</p>"
+    },
+    "GetDatabases":{
+      "name":"GetDatabases",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDatabasesRequest"},
+      "output":{"shape":"GetDatabasesResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves all Databases defined in a given Data Catalog.</p>"
+    },
+    "GetDataflowGraph":{
+      "name":"GetDataflowGraph",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDataflowGraphRequest"},
+      "output":{"shape":"GetDataflowGraphResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Transforms a Python script into a directed acyclic graph (DAG). </p>"
+    },
+    "GetDevEndpoint":{
+      "name":"GetDevEndpoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDevEndpointRequest"},
+      "output":{"shape":"GetDevEndpointResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InvalidInputException"}
+      ],
+      "documentation":"<p>Retrieves information about a specified DevEndpoint.</p>"
+    },
+    "GetDevEndpoints":{
+      "name":"GetDevEndpoints",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDevEndpointsRequest"},
+      "output":{"shape":"GetDevEndpointsResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InvalidInputException"}
+      ],
+      "documentation":"<p>Retrieves all the DevEndpoints in this AWS account.</p>"
+    },
+    "GetJob":{
+      "name":"GetJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetJobRequest"},
+      "output":{"shape":"GetJobResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves an existing job definition.</p>"
+    },
+    "GetJobRun":{
+      "name":"GetJobRun",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetJobRunRequest"},
+      "output":{"shape":"GetJobRunResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves the metadata for a given job run.</p>"
+    },
+    "GetJobRuns":{
+      "name":"GetJobRuns",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetJobRunsRequest"},
+      "output":{"shape":"GetJobRunsResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves metadata for all runs of a given job.</p>"
+    },
+    "GetJobs":{
+      "name":"GetJobs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetJobsRequest"},
+      "output":{"shape":"GetJobsResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves all current jobs.</p>"
+    },
+    "GetMapping":{
+      "name":"GetMapping",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetMappingRequest"},
+      "output":{"shape":"GetMappingResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Creates mappings.</p>"
+    },
+    "GetPartition":{
+      "name":"GetPartition",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetPartitionRequest"},
+      "output":{"shape":"GetPartitionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves information about a specified partition.</p>"
+    },
+    "GetPartitions":{
+      "name":"GetPartitions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetPartitionsRequest"},
+      "output":{"shape":"GetPartitionsResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "documentation":"<p>Retrieves information about the partitions in a table.</p>"
+    },
+    "GetPlan":{
+      "name":"GetPlan",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetPlanRequest"},
+      "output":{"shape":"GetPlanResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Gets a Python script to perform a specified mapping.</p>"
+    },
+    "GetTable":{
+      "name":"GetTable",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTableRequest"},
+      "output":{"shape":"GetTableResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves the <code>Table</code> definition in a Data Catalog for a specified table.</p>"
+    },
+    "GetTableVersions":{
+      "name":"GetTableVersions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTableVersionsRequest"},
+      "output":{"shape":"GetTableVersionsResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves a list of strings that identify available versions of a specified table.</p>"
+    },
+    "GetTables":{
+      "name":"GetTables",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTablesRequest"},
+      "output":{"shape":"GetTablesResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "documentation":"<p>Retrieves the definitions of some or all of the tables in a given <code>Database</code>.</p>"
+    },
+    "GetTrigger":{
+      "name":"GetTrigger",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTriggerRequest"},
+      "output":{"shape":"GetTriggerResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves the definition of a trigger.</p>"
+    },
+    "GetTriggers":{
+      "name":"GetTriggers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTriggersRequest"},
+      "output":{"shape":"GetTriggersResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Gets all the triggers associated with a job.</p>"
+    },
+    "GetUserDefinedFunction":{
+      "name":"GetUserDefinedFunction",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetUserDefinedFunctionRequest"},
+      "output":{"shape":"GetUserDefinedFunctionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves a specified function definition from the Data Catalog.</p>"
+    },
+    "GetUserDefinedFunctions":{
+      "name":"GetUserDefinedFunctions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetUserDefinedFunctionsRequest"},
+      "output":{"shape":"GetUserDefinedFunctionsResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"}
+      ],
+      "documentation":"<p>Retrieves a multiple function definitions from the Data Catalog.</p>"
+    },
+    "ImportCatalogToGlue":{
+      "name":"ImportCatalogToGlue",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ImportCatalogToGlueRequest"},
+      "output":{"shape":"ImportCatalogToGlueResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Imports an existing Athena Data Catalog to AWS Glue</p>"
+    },
+    "ResetJobBookmark":{
+      "name":"ResetJobBookmark",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ResetJobBookmarkRequest"},
+      "output":{"shape":"ResetJobBookmarkResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Resets a bookmark entry.</p>"
+    },
+    "StartCrawler":{
+      "name":"StartCrawler",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartCrawlerRequest"},
+      "output":{"shape":"StartCrawlerResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"CrawlerRunningException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Starts a crawl using the specified <code>Crawler</code>, regardless of what is scheduled. If the <code>Crawler</code> is already running, does nothing.</p>"
+    },
+    "StartCrawlerSchedule":{
+      "name":"StartCrawlerSchedule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartCrawlerScheduleRequest"},
+      "output":{"shape":"StartCrawlerScheduleResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"SchedulerRunningException"},
+        {"shape":"SchedulerTransitioningException"},
+        {"shape":"NoScheduleException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Changes the schedule state of the specified crawler to <code>SCHEDULED</code>, unless the crawler is already running or the schedule state is already <code>SCHEDULED</code>.</p>"
+    },
+    "StartJobRun":{
+      "name":"StartJobRun",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartJobRunRequest"},
+      "output":{"shape":"StartJobRunResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ResourceNumberLimitExceededException"},
+        {"shape":"ConcurrentRunsExceededException"}
+      ],
+      "documentation":"<p>Runs a job.</p>"
+    },
+    "StartTrigger":{
+      "name":"StartTrigger",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartTriggerRequest"},
+      "output":{"shape":"StartTriggerResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ResourceNumberLimitExceededException"},
+        {"shape":"ConcurrentRunsExceededException"}
+      ],
+      "documentation":"<p>Starts an existing trigger.</p>"
+    },
+    "StopCrawler":{
+      "name":"StopCrawler",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopCrawlerRequest"},
+      "output":{"shape":"StopCrawlerResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"CrawlerNotRunningException"},
+        {"shape":"CrawlerStoppingException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>If the specified <code>Crawler</code> is running, stops the crawl.</p>"
+    },
+    "StopCrawlerSchedule":{
+      "name":"StopCrawlerSchedule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopCrawlerScheduleRequest"},
+      "output":{"shape":"StopCrawlerScheduleResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"SchedulerNotRunningException"},
+        {"shape":"SchedulerTransitioningException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Sets the schedule state of the specified crawler to <code>NOT_SCHEDULED</code>, but does not stop the crawler if it is already running.</p>"
+    },
+    "StopTrigger":{
+      "name":"StopTrigger",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopTriggerRequest"},
+      "output":{"shape":"StopTriggerResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Stops a specified trigger.</p>"
+    },
+    "UpdateClassifier":{
+      "name":"UpdateClassifier",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateClassifierRequest"},
+      "output":{"shape":"UpdateClassifierResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"VersionMismatchException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Modifies an existing <code>Classifier</code>.</p>"
+    },
+    "UpdateConnection":{
+      "name":"UpdateConnection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateConnectionRequest"},
+      "output":{"shape":"UpdateConnectionResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Updates a connection definition in the Data Catalog.</p>"
+    },
+    "UpdateCrawler":{
+      "name":"UpdateCrawler",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateCrawlerRequest"},
+      "output":{"shape":"UpdateCrawlerResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"VersionMismatchException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"CrawlerRunningException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Updates a <code>Crawler</code>. If a <code>Crawler</code> is running, you must stop it using <code>StopCrawler</code> before updating it.</p>"
+    },
+    "UpdateCrawlerSchedule":{
+      "name":"UpdateCrawlerSchedule",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateCrawlerScheduleRequest"},
+      "output":{"shape":"UpdateCrawlerScheduleResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"VersionMismatchException"},
+        {"shape":"SchedulerTransitioningException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Updates the schedule of a crawler using a Cron expression. </p>"
+    },
+    "UpdateDatabase":{
+      "name":"UpdateDatabase",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateDatabaseRequest"},
+      "output":{"shape":"UpdateDatabaseResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Updates an existing database definition in a Data Catalog.</p>"
+    },
+    "UpdateDevEndpoint":{
+      "name":"UpdateDevEndpoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateDevEndpointRequest"},
+      "output":{"shape":"UpdateDevEndpointResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ValidationException"}
+      ],
+      "documentation":"<p>Updates a specified DevEndpoint.</p>"
+    },
+    "UpdateJob":{
+      "name":"UpdateJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateJobRequest"},
+      "output":{"shape":"UpdateJobResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Updates an existing job definition.</p>"
+    },
+    "UpdatePartition":{
+      "name":"UpdatePartition",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdatePartitionRequest"},
+      "output":{"shape":"UpdatePartitionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Updates a partition.</p>"
+    },
+    "UpdateTable":{
+      "name":"UpdateTable",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateTableRequest"},
+      "output":{"shape":"UpdateTableResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ConcurrentModificationException"}
+      ],
+      "documentation":"<p>Updates a metadata table in the Data Catalog.</p>"
+    },
+    "UpdateTrigger":{
+      "name":"UpdateTrigger",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateTriggerRequest"},
+      "output":{"shape":"UpdateTriggerResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Updates a trigger definition.</p>"
+    },
+    "UpdateUserDefinedFunction":{
+      "name":"UpdateUserDefinedFunction",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateUserDefinedFunctionRequest"},
+      "output":{"shape":"UpdateUserDefinedFunctionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Updates an existing function definition in the Data Catalog.</p>"
+    }
+  },
+  "shapes":{
+    "AccessDeniedException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>Access to a resource was denied.</p>",
+      "exception":true
+    },
+    "Action":{
+      "type":"structure",
+      "members":{
+        "JobName":{"shape":"NameString"},
+        "Arguments":{"shape":"GenericMap"}
+      }
+    },
+    "ActionList":{
+      "type":"list",
+      "member":{"shape":"Action"}
+    },
+    "AlreadyExistsException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>A resource to be created or added already exists.</p>",
+      "exception":true
+    },
+    "AttemptCount":{"type":"integer"},
+    "BatchCreatePartitionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "PartitionInputList"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the catalog in which the partion is to be created. Currently, this should be the AWS account ID.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the metadata database in which the partition is to be created.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the metadata table in which the partition is to be created.</p>"
+        },
+        "PartitionInputList":{
+          "shape":"PartitionInputList",
+          "documentation":"<p>A list of <code>PartitionInput</code> structures that define the partitions to be created.</p>"
+        }
+      }
+    },
+    "BatchCreatePartitionResponse":{
+      "type":"structure",
+      "members":{
+        "Errors":{
+          "shape":"PartitionErrors",
+          "documentation":"<p>Errors encountered when trying to create the requested partitions.</p>"
+        }
+      }
+    },
+    "BatchDeleteConnectionRequest":{
+      "type":"structure",
+      "required":["ConnectionNameList"],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "ConnectionNameList":{
+          "shape":"DeleteConnectionNameList",
+          "documentation":"<p>A list of names of the connections to delete.</p>"
+        }
+      }
+    },
+    "BatchDeleteConnectionResponse":{
+      "type":"structure",
+      "members":{
+        "Succeeded":{
+          "shape":"NameStringList",
+          "documentation":"<p>A list of names of the connection definitions that were successfully deleted.</p>"
+        },
+        "Errors":{
+          "shape":"ErrorByName",
+          "documentation":"<p>A map of the names of connections that were not successfully deleted to error details.</p>"
+        }
+      }
+    },
+    "BatchDeletePartitionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "PartitionsToDelete"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database in which the table in question resides.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table where the partitions to be deleted is located.</p>"
+        },
+        "PartitionsToDelete":{
+          "shape":"BatchDeletePartitionValueList",
+          "documentation":"<p>A list of <code>PartitionInput</code> structures that define the partitions to be deleted.</p>"
+        }
+      }
+    },
+    "BatchDeletePartitionResponse":{
+      "type":"structure",
+      "members":{
+        "Errors":{
+          "shape":"PartitionErrors",
+          "documentation":"<p>Errors encountered when trying to delete the requested partitions.</p>"
+        }
+      }
+    },
+    "BatchDeletePartitionValueList":{
+      "type":"list",
+      "member":{"shape":"PartitionValueList"},
+      "max":25,
+      "min":0
+    },
+    "BatchDeleteTableNameList":{
+      "type":"list",
+      "member":{"shape":"NameString"},
+      "max":100,
+      "min":0
+    },
+    "BatchDeleteTableRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TablesToDelete"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database where the tables to delete reside.</p>"
+        },
+        "TablesToDelete":{
+          "shape":"BatchDeleteTableNameList",
+          "documentation":"<p>A list of the table to delete.</p>"
+        }
+      }
+    },
+    "BatchDeleteTableResponse":{
+      "type":"structure",
+      "members":{
+        "Errors":{
+          "shape":"TableErrors",
+          "documentation":"<p>A list of errors encountered in attempting to delete the specified tables.</p>"
+        }
+      }
+    },
+    "BatchGetPartitionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "PartitionsToGet"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database where the partitions reside.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the partitions' table.</p>"
+        },
+        "PartitionsToGet":{
+          "shape":"BatchGetPartitionValueList",
+          "documentation":"<p>A list of partition values identifying the partitions to retrieve.</p>"
+        }
+      }
+    },
+    "BatchGetPartitionResponse":{
+      "type":"structure",
+      "members":{
+        "Partitions":{
+          "shape":"PartitionList",
+          "documentation":"<p>A list of the requested partitions.</p>"
+        },
+        "UnprocessedKeys":{
+          "shape":"BatchGetPartitionValueList",
+          "documentation":"<p>A list of the partition values in the request for which partions were not returned.</p>"
+        }
+      }
+    },
+    "BatchGetPartitionValueList":{
+      "type":"list",
+      "member":{"shape":"PartitionValueList"},
+      "max":1000,
+      "min":0
+    },
+    "Boolean":{"type":"boolean"},
+    "BooleanValue":{"type":"boolean"},
+    "BoundedPartitionValueList":{
+      "type":"list",
+      "member":{"shape":"ValueString"},
+      "max":100,
+      "min":0
+    },
+    "CatalogEntries":{
+      "type":"list",
+      "member":{"shape":"CatalogEntry"}
+    },
+    "CatalogEntry":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName"
+      ],
+      "members":{
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The database in which the table metadata resides.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table in question.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a table definition in the Data Catalog.</p>"
+    },
+    "CatalogIdString":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "CatalogImportStatus":{
+      "type":"structure",
+      "members":{
+        "ImportCompleted":{
+          "shape":"Boolean",
+          "documentation":"<p>True if the migration has completed, or False otherwise.</p>"
+        },
+        "ImportTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time that the migration was started.</p>"
+        },
+        "ImportedBy":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the person who initiated the migration.</p>"
+        }
+      },
+      "documentation":"<p>A structure containing migration status information.</p>"
+    },
+    "Classification":{"type":"string"},
+    "Classifier":{
+      "type":"structure",
+      "members":{
+        "GrokClassifier":{
+          "shape":"GrokClassifier",
+          "documentation":"<p>A GrokClassifier object.</p>"
+        }
+      },
+      "documentation":"<p>Classifiers are written in Python and triggered during a Crawl Task. You can write your own Classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A Classifier first checks whether a given file is in a format it can handle, and then, if so, creates a schema in the form of a <code>StructType</code> object that matches that data format.</p>"
+    },
+    "ClassifierList":{
+      "type":"list",
+      "member":{"shape":"Classifier"}
+    },
+    "ClassifierNameList":{
+      "type":"list",
+      "member":{"shape":"NameString"}
+    },
+    "CodeGenArgName":{"type":"string"},
+    "CodeGenArgValue":{"type":"string"},
+    "CodeGenEdge":{
+      "type":"structure",
+      "required":[
+        "Source",
+        "Target"
+      ],
+      "members":{
+        "Source":{
+          "shape":"CodeGenIdentifier",
+          "documentation":"<p>The ID of the node at which the edge starts.</p>"
+        },
+        "Target":{
+          "shape":"CodeGenIdentifier",
+          "documentation":"<p>The ID of the node at which the edge ends.</p>"
+        },
+        "TargetParameter":{
+          "shape":"CodeGenArgName",
+          "documentation":"<p>The target of the edge.</p>"
+        }
+      },
+      "documentation":"<p>Represents a directional edge in a directed acyclic graph (DAG).</p>"
+    },
+    "CodeGenIdentifier":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[A-Za-z_][A-Za-z0-9_]*"
+    },
+    "CodeGenNode":{
+      "type":"structure",
+      "required":[
+        "Id",
+        "NodeType",
+        "Args"
+      ],
+      "members":{
+        "Id":{
+          "shape":"CodeGenIdentifier",
+          "documentation":"<p>A node identifier that is unique within the node's graph.</p>"
+        },
+        "NodeType":{
+          "shape":"CodeGenNodeType",
+          "documentation":"<p>The type of node this is.</p>"
+        },
+        "Args":{
+          "shape":"CodeGenNodeArgs",
+          "documentation":"<p>Properties of the node, in the form of name-value pairs.</p>"
+        },
+        "LineNumber":{
+          "shape":"Integer",
+          "documentation":"<p>The line number of the node.</p>"
+        }
+      },
+      "documentation":"<p>Represents a node in a directed acyclic graph (DAG)</p>"
+    },
+    "CodeGenNodeArg":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Value"
+      ],
+      "members":{
+        "Name":{
+          "shape":"CodeGenArgName",
+          "documentation":"<p>The name of the argument or property.</p>"
+        },
+        "Value":{
+          "shape":"CodeGenArgValue",
+          "documentation":"<p>The value of the argument or property.</p>"
+        },
+        "Param":{
+          "shape":"Boolean",
+          "documentation":"<p>True if the value is used as a parameter.</p>"
+        }
+      },
+      "documentation":"<p>An argument or property of a node.</p>"
+    },
+    "CodeGenNodeArgs":{
+      "type":"list",
+      "member":{"shape":"CodeGenNodeArg"},
+      "max":50,
+      "min":0
+    },
+    "CodeGenNodeType":{"type":"string"},
+    "Column":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the <code>Column</code>.</p>"
+        },
+        "Type":{
+          "shape":"ColumnTypeString",
+          "documentation":"<p>The datatype of data in the <code>Column</code>.</p>"
+        },
+        "Comment":{
+          "shape":"CommentString",
+          "documentation":"<p>Free-form text comment.</p>"
+        }
+      },
+      "documentation":"<p>A column in a <code>Table</code>.</p>"
+    },
+    "ColumnList":{
+      "type":"list",
+      "member":{"shape":"Column"}
+    },
+    "ColumnTypeString":{
+      "type":"string",
+      "max":131072,
+      "min":0,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "ColumnValueStringList":{
+      "type":"list",
+      "member":{"shape":"ColumnValuesString"}
+    },
+    "ColumnValuesString":{"type":"string"},
+    "CommentString":{
+      "type":"string",
+      "max":255,
+      "min":0,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "ConcurrentModificationException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>Two processes are trying to modify a resource simultaneously.</p>",
+      "exception":true
+    },
+    "ConcurrentRunsExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>Too many jobs are being run concurrently.</p>",
+      "exception":true
+    },
+    "Condition":{
+      "type":"structure",
+      "members":{
+        "LogicalOperator":{"shape":"LogicalOperator"},
+        "JobName":{"shape":"NameString"},
+        "State":{"shape":"JobRunState"}
+      }
+    },
+    "ConditionList":{
+      "type":"list",
+      "member":{"shape":"Condition"}
+    },
+    "Connection":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the connection definition.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Description of the connection.</p>"
+        },
+        "ConnectionType":{
+          "shape":"ConnectionType",
+          "documentation":"<p>The type of the connection.</p>"
+        },
+        "MatchCriteria":{
+          "shape":"MatchCriteria",
+          "documentation":"<p>A list of criteria that can be used in selecting this connection.</p>"
+        },
+        "ConnectionProperties":{
+          "shape":"ConnectionProperties",
+          "documentation":"<p>A list of key-value pairs used as parameters for this connection.</p>"
+        },
+        "PhysicalConnectionRequirements":{
+          "shape":"PhysicalConnectionRequirements",
+          "documentation":"<p>A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time this connection definition was created.</p>"
+        },
+        "LastUpdatedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time this connection definition was updated.</p>"
+        },
+        "LastUpdatedBy":{
+          "shape":"NameString",
+          "documentation":"<p>The user, group or role that last updated this connection definition.</p>"
+        }
+      },
+      "documentation":"<p>Defines a connection to a data source.</p>"
+    },
+    "ConnectionInput":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the connection.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Description of the connection.</p>"
+        },
+        "ConnectionType":{
+          "shape":"ConnectionType",
+          "documentation":"<p>The type of the connection.</p>"
+        },
+        "MatchCriteria":{
+          "shape":"MatchCriteria",
+          "documentation":"<p>A list of criteria that can be used in selecting this connection.</p>"
+        },
+        "ConnectionProperties":{
+          "shape":"ConnectionProperties",
+          "documentation":"<p>A list of key-value pairs used as parameters for this connection.</p>"
+        },
+        "PhysicalConnectionRequirements":{
+          "shape":"PhysicalConnectionRequirements",
+          "documentation":"<p>A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.</p>"
+        }
+      },
+      "documentation":"<p>A structure used to specify a connection to create or update.</p>"
+    },
+    "ConnectionList":{
+      "type":"list",
+      "member":{"shape":"Connection"}
+    },
+    "ConnectionName":{"type":"string"},
+    "ConnectionProperties":{
+      "type":"map",
+      "key":{"shape":"ConnectionPropertyKey"},
+      "value":{"shape":"ValueString"},
+      "max":100,
+      "min":0
+    },
+    "ConnectionPropertyKey":{
+      "type":"string",
+      "enum":[
+        "HOST",
+        "PORT",
+        "USERNAME",
+        "PASSWORD",
+        "JDBC_DRIVER_JAR_URI",
+        "JDBC_DRIVER_CLASS_NAME",
+        "JDBC_ENGINE",
+        "JDBC_ENGINE_VERSION",
+        "CONFIG_FILES",
+        "INSTANCE_ID",
+        "JDBC_CONNECTION_URL"
+      ]
+    },
+    "ConnectionType":{
+      "type":"string",
+      "enum":[
+        "JDBC",
+        "SFTP"
+      ]
+    },
+    "ConnectionsList":{
+      "type":"structure",
+      "members":{
+        "Connections":{
+          "shape":"StringList",
+          "documentation":"<p>A list of connections used by the job.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the connections used by a job.</p>"
+    },
+    "Crawler":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The <code>Crawler</code> name.</p>"
+        },
+        "Role":{
+          "shape":"RoleArn",
+          "documentation":"<p>The ARN of an IAM role used to access customer resources such as data in S3.</p>"
+        },
+        "Targets":{
+          "shape":"CrawlerTargets",
+          "documentation":"<p>A collection of targets to crawl.</p>"
+        },
+        "DatabaseName":{
+          "shape":"DatabaseName",
+          "documentation":"<p>The <code>Database</code> where this Crawler's output should be stored.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>A description of this Crawler and where it should be used.</p>"
+        },
+        "Classifiers":{
+          "shape":"ClassifierNameList",
+          "documentation":"<p>A list of custom <code>Classifier</code>s associated with this Crawler.</p>"
+        },
+        "SchemaChangePolicy":{
+          "shape":"SchemaChangePolicy",
+          "documentation":"<p>Sets policy for the crawler's update and delete behavior.</p>"
+        },
+        "State":{
+          "shape":"CrawlerState",
+          "documentation":"<p>Indicates whether this Crawler is running, or whether a run is pending.</p>"
+        },
+        "TablePrefix":{
+          "shape":"TablePrefix",
+          "documentation":"<p>The table prefix used for catalog tables created.</p>"
+        },
+        "Schedule":{
+          "shape":"Schedule",
+          "documentation":"<p>A <code>Schedule</code> object that specifies the schedule on which this Crawler is to be run.</p>"
+        },
+        "CrawlElapsedTime":{
+          "shape":"MillisecondsCount",
+          "documentation":"<p>If this Crawler is running, contains the total time elapsed since the last crawl began.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time when the Crawler was created.</p>"
+        },
+        "LastUpdated":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time the Crawler was last updated.</p>"
+        },
+        "LastCrawl":{
+          "shape":"LastCrawlInfo",
+          "documentation":"<p>The status of the last crawl, and potentially error information if an error occurred.</p>"
+        },
+        "Version":{
+          "shape":"VersionId",
+          "documentation":"<p>The version of the Crawler.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a crawler program that examines a data source and uses classifiers to try to its schema. If successful, the crawler records metatdata concerning the data source in the Data Catalog.</p>"
+    },
+    "CrawlerList":{
+      "type":"list",
+      "member":{"shape":"Crawler"}
+    },
+    "CrawlerMetrics":{
+      "type":"structure",
+      "members":{
+        "CrawlerName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the crawler.</p>"
+        },
+        "TimeLeftSeconds":{
+          "shape":"NonNegativeDouble",
+          "documentation":"<p>The estimated time left to complete a running crawl.</p>"
+        },
+        "StillEstimating":{
+          "shape":"Boolean",
+          "documentation":"<p>True if the crawler is estimating its </p>"
+        },
+        "LastRuntimeSeconds":{
+          "shape":"NonNegativeDouble",
+          "documentation":"<p>The duration of the crawler's most recent run, in seconds.</p>"
+        },
+        "MedianRuntimeSeconds":{
+          "shape":"NonNegativeDouble",
+          "documentation":"<p>The median duration of this crawler's runs, in seconds.</p>"
+        },
+        "TablesCreated":{
+          "shape":"NonNegativeInteger",
+          "documentation":"<p>A list of the tables created by this crawler.</p>"
+        },
+        "TablesUpdated":{
+          "shape":"NonNegativeInteger",
+          "documentation":"<p>A list of the tables created by this crawler.</p>"
+        },
+        "TablesDeleted":{
+          "shape":"NonNegativeInteger",
+          "documentation":"<p>A list of the tables deleted by this crawler.</p>"
+        }
+      },
+      "documentation":"<p>Metrics for a specified crawler.</p>"
+    },
+    "CrawlerMetricsList":{
+      "type":"list",
+      "member":{"shape":"CrawlerMetrics"}
+    },
+    "CrawlerNameList":{
+      "type":"list",
+      "member":{"shape":"NameString"},
+      "max":100,
+      "min":0
+    },
+    "CrawlerNotRunningException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>The specified crawler is not running.</p>",
+      "exception":true
+    },
+    "CrawlerRunningException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>The operation cannot be performed because the crawler is already running.</p>",
+      "exception":true
+    },
+    "CrawlerState":{
+      "type":"string",
+      "enum":[
+        "READY",
+        "RUNNING",
+        "STOPPING"
+      ]
+    },
+    "CrawlerStoppingException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>The specified crawler is stopping.</p>",
+      "exception":true
+    },
+    "CrawlerTargets":{
+      "type":"structure",
+      "members":{
+        "S3Targets":{
+          "shape":"S3TargetList",
+          "documentation":"<p>Specifies targets in AWS S3.</p>"
+        },
+        "JdbcTargets":{
+          "shape":"JdbcTargetList",
+          "documentation":"<p>Specifies JDBC targets.</p>"
+        }
+      },
+      "documentation":"<p>Specifies crawler targets.</p>"
+    },
+    "CreateClassifierRequest":{
+      "type":"structure",
+      "members":{
+        "GrokClassifier":{
+          "shape":"CreateGrokClassifierRequest",
+          "documentation":"<p>A grok classifier to create.</p>"
+        }
+      }
+    },
+    "CreateClassifierResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "CreateConnectionRequest":{
+      "type":"structure",
+      "required":["ConnectionInput"],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "ConnectionInput":{
+          "shape":"ConnectionInput",
+          "documentation":"<p>A <code>ConnectionInput</code> object defining the connection to create.</p>"
+        }
+      }
+    },
+    "CreateConnectionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "CreateCrawlerRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Role",
+        "DatabaseName",
+        "Targets"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the new <code>Crawler</code>.</p>"
+        },
+        "Role":{
+          "shape":"RoleArn",
+          "documentation":"<p>The AWS ARN of the IAM role used by the new <code>Crawler</code> to access customer resources.</p>"
+        },
+        "DatabaseName":{
+          "shape":"DatabaseName",
+          "documentation":"<p>The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>A description of the new <code>Crawler</code>.</p>"
+        },
+        "Targets":{
+          "shape":"CrawlerTargets",
+          "documentation":"<p>A list of collection of targets to crawl.</p>"
+        },
+        "Schedule":{
+          "shape":"CronExpression",
+          "documentation":"<p>A cron expression that can be used as a Cloudwatch event (see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">CloudWatch Schedule Expression Syntax</a>. For example, to run every day at 12:15 UTC, specify: <code>cron(15 12 * * ? *)</code>.</p>"
+        },
+        "Classifiers":{
+          "shape":"ClassifierNameList",
+          "documentation":"<p>A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>"
+        },
+        "TablePrefix":{
+          "shape":"TablePrefix",
+          "documentation":"<p>The table prefix used for catalog tables created.</p>"
+        },
+        "SchemaChangePolicy":{
+          "shape":"SchemaChangePolicy",
+          "documentation":"<p>Policy for the crawler's update and deletion behavior.</p>"
+        }
+      }
+    },
+    "CreateCrawlerResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "CreateDatabaseRequest":{
+      "type":"structure",
+      "required":["DatabaseInput"],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which to create the database. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseInput":{
+          "shape":"DatabaseInput",
+          "documentation":"<p>A <code>DatabaseInput</code> object defining the metadata database to create in the catalog.</p>"
+        }
+      }
+    },
+    "CreateDatabaseResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "CreateDevEndpointRequest":{
+      "type":"structure",
+      "required":[
+        "EndpointName",
+        "RoleArn",
+        "SecurityGroupIds",
+        "SubnetId"
+      ],
+      "members":{
+        "EndpointName":{
+          "shape":"GenericString",
+          "documentation":"<p>The name to be assigned to the new DevEndpoint.</p>"
+        },
+        "RoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The IAM role for the DevEndpoint.</p>"
+        },
+        "SecurityGroupIds":{
+          "shape":"StringList",
+          "documentation":"<p>Security group IDs for the security groups to be used by the new DevEndpoint.</p>"
+        },
+        "SubnetId":{
+          "shape":"GenericString",
+          "documentation":"<p>The subnet ID for the new DevEndpoint to use.</p>"
+        },
+        "PublicKey":{
+          "shape":"GenericString",
+          "documentation":"<p>The public key to use for authentication.</p>"
+        },
+        "NumberOfNodes":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The number of nodes to use.</p>"
+        },
+        "ExtraPythonLibsS3Path":{
+          "shape":"GenericString",
+          "documentation":"<p>Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+        },
+        "ExtraJarsS3Path":{
+          "shape":"GenericString",
+          "documentation":"<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+        }
+      }
+    },
+    "CreateDevEndpointResponse":{
+      "type":"structure",
+      "members":{
+        "EndpointName":{
+          "shape":"GenericString",
+          "documentation":"<p>The name assigned to the new DevEndpoint.</p>"
+        },
+        "Status":{
+          "shape":"GenericString",
+          "documentation":"<p>The current status of the new DevEndpoint.</p>"
+        },
+        "SecurityGroupIds":{
+          "shape":"StringList",
+          "documentation":"<p>The security groups assigned to the new DevEndpoint.</p>"
+        },
+        "SubnetId":{
+          "shape":"GenericString",
+          "documentation":"<p>The subnet ID assigned to the new DevEndpoint.</p>"
+        },
+        "RoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The AWS ARN of the role assigned to the new DevEndpoint.</p>"
+        },
+        "YarnEndpointAddress":{
+          "shape":"GenericString",
+          "documentation":"<p>The address of the YARN endpoint used by this DevEndpoint.</p>"
+        },
+        "NumberOfNodes":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The number of nodes in this DevEndpoint.</p>"
+        },
+        "AvailabilityZone":{
+          "shape":"GenericString",
+          "documentation":"<p>The AWS availability zone where this DevEndpoint is located.</p>"
+        },
+        "VpcId":{
+          "shape":"GenericString",
+          "documentation":"<p>The ID of the VPC used by this DevEndpoint.</p>"
+        },
+        "ExtraPythonLibsS3Path":{
+          "shape":"GenericString",
+          "documentation":"<p>Path to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.</p>"
+        },
+        "ExtraJarsS3Path":{
+          "shape":"GenericString",
+          "documentation":"<p>Path to one or more Java Jars in an S3 bucket that will be loaded in your DevEndpoint.</p>"
+        },
+        "FailureReason":{
+          "shape":"GenericString",
+          "documentation":"<p>The reason for a current failure in this DevEndpoint.</p>"
+        },
+        "CreatedTimestamp":{
+          "shape":"TimestampValue",
+          "documentation":"<p>The point in time at which this DevEndpoint was created.</p>"
+        }
+      }
+    },
+    "CreateGrokClassifierRequest":{
+      "type":"structure",
+      "required":[
+        "Classification",
+        "Name",
+        "GrokPattern"
+      ],
+      "members":{
+        "Classification":{
+          "shape":"Classification",
+          "documentation":"<p>The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.</p>"
+        },
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the new Classifier.</p>"
+        },
+        "GrokPattern":{
+          "shape":"GrokPattern",
+          "documentation":"<p>The grok pattern used by this classifier.</p>"
+        },
+        "CustomPatterns":{
+          "shape":"CustomPatterns",
+          "documentation":"<p>Custom grok patterns used by this classifier.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a Grok classifier for CreateClassifier to create.</p>"
+    },
+    "CreateJobRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Role",
+        "Command"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name you assign to this job.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Description of the job.</p>"
+        },
+        "LogUri":{
+          "shape":"UriString",
+          "documentation":"<p>Location of the logs for this job.</p>"
+        },
+        "Role":{
+          "shape":"RoleString",
+          "documentation":"<p>The role associated with this job.</p>"
+        },
+        "ExecutionProperty":{
+          "shape":"ExecutionProperty",
+          "documentation":"<p>An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.</p>"
+        },
+        "Command":{
+          "shape":"JobCommand",
+          "documentation":"<p>The JobCommand that executes this job.</p>"
+        },
+        "DefaultArguments":{
+          "shape":"GenericMap",
+          "documentation":"<p>The default parameters for this job.</p>"
+        },
+        "Connections":{
+          "shape":"ConnectionsList",
+          "documentation":"<p>The connections used for this job.</p>"
+        },
+        "MaxRetries":{
+          "shape":"MaxRetries",
+          "documentation":"<p>The maximum number of times to retry this job if it fails.</p>"
+        },
+        "AllocatedCapacity":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The number of capacity units allocated to this job.</p>"
+        }
+      }
+    },
+    "CreateJobResponse":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The unique name of the new job that has been created.</p>"
+        }
+      }
+    },
+    "CreatePartitionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "PartitionInput"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the catalog in which the partion is to be created. Currently, this should be the AWS account ID.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the metadata database in which the partition is to be created.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the metadata table in which the partition is to be created.</p>"
+        },
+        "PartitionInput":{
+          "shape":"PartitionInput",
+          "documentation":"<p>A <code>PartitionInput</code> structure defining the partition to be created.</p>"
+        }
+      }
+    },
+    "CreatePartitionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "CreateScriptRequest":{
+      "type":"structure",
+      "members":{
+        "DagNodes":{
+          "shape":"DagNodes",
+          "documentation":"<p>A list of the nodes in the DAG.</p>"
+        },
+        "DagEdges":{
+          "shape":"DagEdges",
+          "documentation":"<p>A list of the edges in the DAG.</p>"
+        }
+      }
+    },
+    "CreateScriptResponse":{
+      "type":"structure",
+      "members":{
+        "PythonScript":{
+          "shape":"PythonScript",
+          "documentation":"<p>The Python script generated from the DAG.</p>"
+        }
+      }
+    },
+    "CreateTableRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableInput"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which to create the <code>Table</code>. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The catalog database in which to create the new table.</p>"
+        },
+        "TableInput":{
+          "shape":"TableInput",
+          "documentation":"<p>The <code>TableInput</code> object that defines the metadata table to create in the catalog.</p>"
+        }
+      }
+    },
+    "CreateTableResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "CreateTriggerRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Type",
+        "Actions"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name to assign to the new trigger.</p>"
+        },
+        "Type":{
+          "shape":"TriggerType",
+          "documentation":"<p>The type of the new trigger.</p>"
+        },
+        "Schedule":{
+          "shape":"GenericString",
+          "documentation":"<p>A cron schedule expression for the new trigger.</p>"
+        },
+        "Predicate":{
+          "shape":"Predicate",
+          "documentation":"<p>A predicate to specify when the new trigger should fire.</p>"
+        },
+        "Actions":{
+          "shape":"ActionList",
+          "documentation":"<p>The actions initiated by this trigger when it fires.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>A description of the new trigger.</p>"
+        }
+      }
+    },
+    "CreateTriggerResponse":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name assigned to the new trigger.</p>"
+        }
+      }
+    },
+    "CreateUserDefinedFunctionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "FunctionInput"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which to create the function. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database in which to create the function.</p>"
+        },
+        "FunctionInput":{
+          "shape":"UserDefinedFunctionInput",
+          "documentation":"<p>A <code>FunctionInput</code> object that defines the function to create in the Data Catalog.</p>"
+        }
+      }
+    },
+    "CreateUserDefinedFunctionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "CronExpression":{"type":"string"},
+    "CustomPatterns":{
+      "type":"string",
+      "max":16000,
+      "min":0,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "DagEdges":{
+      "type":"list",
+      "member":{"shape":"CodeGenEdge"}
+    },
+    "DagNodes":{
+      "type":"list",
+      "member":{"shape":"CodeGenNode"}
+    },
+    "Database":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the database.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Description of the database.</p>"
+        },
+        "LocationUri":{
+          "shape":"URI",
+          "documentation":"<p>The location of the database (for example, an HDFS path).</p>"
+        },
+        "Parameters":{
+          "shape":"ParametersMap",
+          "documentation":"<p>A list of key-value pairs that define parameters and properties of the database.</p>"
+        },
+        "CreateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time at which the metadata database was created in the catalog.</p>"
+        }
+      },
+      "documentation":"<p>The <code>Database</code> object represents a logical grouping of tables that may reside in a Hive metastore or an RDBMS.</p>"
+    },
+    "DatabaseInput":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the database.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Description of the database</p>"
+        },
+        "LocationUri":{
+          "shape":"URI",
+          "documentation":"<p>The location of the database (for example, an HDFS path).</p>"
+        },
+        "Parameters":{
+          "shape":"ParametersMap",
+          "documentation":"<p>A list of key-value pairs that define parameters and properties of the database.</p>"
+        }
+      },
+      "documentation":"<p>The structure used to create or updata a database.</p>"
+    },
+    "DatabaseList":{
+      "type":"list",
+      "member":{"shape":"Database"}
+    },
+    "DatabaseName":{"type":"string"},
+    "DeleteBehavior":{
+      "type":"string",
+      "enum":[
+        "LOG",
+        "DELETE_FROM_DATABASE",
+        "DEPRECATE_IN_DATABASE"
+      ]
+    },
+    "DeleteClassifierRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the <code>Classifier</code> to remove.</p>"
+        }
+      }
+    },
+    "DeleteClassifierResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteConnectionNameList":{
+      "type":"list",
+      "member":{"shape":"NameString"},
+      "max":25,
+      "min":0
+    },
+    "DeleteConnectionRequest":{
+      "type":"structure",
+      "required":["ConnectionName"],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "ConnectionName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the connection to delete.</p>"
+        }
+      }
+    },
+    "DeleteConnectionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteCrawlerRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the <code>Crawler</code> to remove.</p>"
+        }
+      }
+    },
+    "DeleteCrawlerResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteDatabaseRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which the database resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the Database to delete.</p>"
+        }
+      }
+    },
+    "DeleteDatabaseResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteDevEndpointRequest":{
+      "type":"structure",
+      "required":["EndpointName"],
+      "members":{
+        "EndpointName":{
+          "shape":"GenericString",
+          "documentation":"<p>The name of the DevEndpoint.</p>"
+        }
+      }
+    },
+    "DeleteDevEndpointResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteJobRequest":{
+      "type":"structure",
+      "required":["JobName"],
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job to delete.</p>"
+        }
+      }
+    },
+    "DeleteJobResponse":{
+      "type":"structure",
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job that was deleted.</p>"
+        }
+      }
+    },
+    "DeletePartitionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "PartitionValues"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database in which the table in question resides.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table where the partition to be deleted is located.</p>"
+        },
+        "PartitionValues":{
+          "shape":"ValueStringList",
+          "documentation":"<p>The values that define the partition.</p>"
+        }
+      }
+    },
+    "DeletePartitionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteTableRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "Name"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database in which the table resides.</p>"
+        },
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table to be deleted.</p>"
+        }
+      }
+    },
+    "DeleteTableResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteTriggerRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger to delete.</p>"
+        }
+      }
+    },
+    "DeleteTriggerResponse":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger that was deleted.</p>"
+        }
+      }
+    },
+    "DeleteUserDefinedFunctionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "FunctionName"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the function to be deleted is located. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database where the function is located.</p>"
+        },
+        "FunctionName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the function definition to be deleted.</p>"
+        }
+      }
+    },
+    "DeleteUserDefinedFunctionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescriptionString":{
+      "type":"string",
+      "max":2048,
+      "min":0,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "DescriptionStringRemovable":{
+      "type":"string",
+      "max":2048,
+      "min":0,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "DevEndpoint":{
+      "type":"structure",
+      "members":{
+        "EndpointName":{
+          "shape":"GenericString",
+          "documentation":"<p>The name of the DevEndpoint.</p>"
+        },
+        "RoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The AWS ARN of the IAM role used in this DevEndpoint.</p>"
+        },
+        "SecurityGroupIds":{
+          "shape":"StringList",
+          "documentation":"<p>A list of security group identifiers used in this DevEndpoint.</p>"
+        },
+        "SubnetId":{
+          "shape":"GenericString",
+          "documentation":"<p>The subnet ID for this DevEndpoint.</p>"
+        },
+        "YarnEndpointAddress":{
+          "shape":"GenericString",
+          "documentation":"<p>The YARN endpoint address used by this DevEndpoint.</p>"
+        },
+        "PublicAddress":{
+          "shape":"GenericString",
+          "documentation":"<p>The public address used by this DevEndpoint.</p>"
+        },
+        "Status":{
+          "shape":"GenericString",
+          "documentation":"<p>The current status of this DevEndpoint.</p>"
+        },
+        "NumberOfNodes":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The number of nodes used by this DevEndpoint.</p>"
+        },
+        "AvailabilityZone":{
+          "shape":"GenericString",
+          "documentation":"<p>The AWS availability zone where this DevEndpoint is located.</p>"
+        },
+        "VpcId":{
+          "shape":"GenericString",
+          "documentation":"<p>The ID of the virtual private cloud (VPC) used by this DevEndpoint.</p>"
+        },
+        "ExtraPythonLibsS3Path":{
+          "shape":"GenericString",
+          "documentation":"<p>Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+        },
+        "ExtraJarsS3Path":{
+          "shape":"GenericString",
+          "documentation":"<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+        },
+        "FailureReason":{
+          "shape":"GenericString",
+          "documentation":"<p>The reason for a current failure in this DevEndpoint.</p>"
+        },
+        "LastUpdateStatus":{
+          "shape":"GenericString",
+          "documentation":"<p>The status of the last update.</p>"
+        },
+        "CreatedTimestamp":{
+          "shape":"TimestampValue",
+          "documentation":"<p>The point in time at which this DevEndpoint was created.</p>"
+        },
+        "LastModifiedTimestamp":{
+          "shape":"TimestampValue",
+          "documentation":"<p>The point in time at which this DevEndpoint was last modified.</p>"
+        },
+        "PublicKey":{
+          "shape":"GenericString",
+          "documentation":"<p>The public key to be used by this DevEndpoint for authentication.</p>"
+        }
+      },
+      "documentation":"<p>A development endpoint where a developer can remotely debug ETL scripts.</p>"
+    },
+    "DevEndpointCustomLibraries":{
+      "type":"structure",
+      "members":{
+        "ExtraPythonLibsS3Path":{
+          "shape":"GenericString",
+          "documentation":"<p>Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+        },
+        "ExtraJarsS3Path":{
+          "shape":"GenericString",
+          "documentation":"<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+        }
+      },
+      "documentation":"<p>Custom libraries to be loaded into a DevEndpoint.</p>"
+    },
+    "DevEndpointList":{
+      "type":"list",
+      "member":{"shape":"DevEndpoint"}
+    },
+    "EntityNotFoundException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>A specified entity does not exist</p>",
+      "exception":true
+    },
+    "ErrorByName":{
+      "type":"map",
+      "key":{"shape":"NameString"},
+      "value":{"shape":"ErrorDetail"}
+    },
+    "ErrorDetail":{
+      "type":"structure",
+      "members":{
+        "ErrorCode":{
+          "shape":"NameString",
+          "documentation":"<p>The code associated with this error.</p>"
+        },
+        "ErrorMessage":{
+          "shape":"DescriptionString",
+          "documentation":"<p>A message describing the error.</p>"
+        }
+      },
+      "documentation":"<p>Contains details about an error.</p>"
+    },
+    "ErrorString":{"type":"string"},
+    "ExecutionProperty":{
+      "type":"structure",
+      "members":{
+        "MaxConcurrentRuns":{
+          "shape":"MaxConcurrentRuns",
+          "documentation":"<p>The maximum number of concurrent runs allowed for a job.</p>"
+        }
+      },
+      "documentation":"<p>An execution property of a job.</p>"
+    },
+    "FieldType":{"type":"string"},
+    "FilterString":{
+      "type":"string",
+      "max":2048,
+      "min":0,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "FormatString":{
+      "type":"string",
+      "max":128,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "GenericMap":{
+      "type":"map",
+      "key":{"shape":"GenericString"},
+      "value":{"shape":"GenericString"}
+    },
+    "GenericString":{"type":"string"},
+    "GetCatalogImportStatusRequest":{
+      "type":"structure",
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the catalog to migrate. Currently, this should be the AWS account ID.</p>"
+        }
+      }
+    },
+    "GetCatalogImportStatusResponse":{
+      "type":"structure",
+      "members":{
+        "ImportStatus":{
+          "shape":"CatalogImportStatus",
+          "documentation":"<p>The status of the specified catalog migration.</p>"
+        }
+      }
+    },
+    "GetClassifierRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the <code>Classifier</code> to retrieve.</p>"
+        }
+      }
+    },
+    "GetClassifierResponse":{
+      "type":"structure",
+      "members":{
+        "Classifier":{
+          "shape":"Classifier",
+          "documentation":"<p>The requested <code>Classifier</code>.</p>"
+        }
+      }
+    },
+    "GetClassifiersRequest":{
+      "type":"structure",
+      "members":{
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>Size of the list to return (optional).</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>An optional continuation token.</p>"
+        }
+      }
+    },
+    "GetClassifiersResponse":{
+      "type":"structure",
+      "members":{
+        "Classifiers":{
+          "shape":"ClassifierList",
+          "documentation":"<p>The requested list of <code>Classifier</code> objects.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token.</p>"
+        }
+      }
+    },
+    "GetConnectionRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the connection definition to retrieve.</p>"
+        }
+      }
+    },
+    "GetConnectionResponse":{
+      "type":"structure",
+      "members":{
+        "Connection":{
+          "shape":"Connection",
+          "documentation":"<p>The requested connection definition.</p>"
+        }
+      }
+    },
+    "GetConnectionsFilter":{
+      "type":"structure",
+      "members":{
+        "MatchCriteria":{
+          "shape":"MatchCriteria",
+          "documentation":"<p>A criteria string that must match the criteria recorded in the connection definition for that connection definition to be returned.</p>"
+        },
+        "ConnectionType":{
+          "shape":"ConnectionType",
+          "documentation":"<p>The type of connections to return.</p>"
+        }
+      },
+      "documentation":"<p>Filters the connection definitions returned by the <code>GetConnections</code> API.</p>"
+    },
+    "GetConnectionsRequest":{
+      "type":"structure",
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "Filter":{
+          "shape":"GetConnectionsFilter",
+          "documentation":"<p>A filter that controls which connections will be returned.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if this is a continuation call.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of connections to return in one response.</p>"
+        }
+      }
+    },
+    "GetConnectionsResponse":{
+      "type":"structure",
+      "members":{
+        "ConnectionList":{
+          "shape":"ConnectionList",
+          "documentation":"<p>A list of requested connection definitions.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if the list of connections returned does not include the last of the filtered connections.</p>"
+        }
+      }
+    },
+    "GetCrawlerMetricsRequest":{
+      "type":"structure",
+      "members":{
+        "CrawlerNameList":{
+          "shape":"CrawlerNameList",
+          "documentation":"<p>A list of the names of crawlers about which to retrieve metrics.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum size of a list to return.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if this is a continuation call.</p>"
+        }
+      }
+    },
+    "GetCrawlerMetricsResponse":{
+      "type":"structure",
+      "members":{
+        "CrawlerMetricsList":{
+          "shape":"CrawlerMetricsList",
+          "documentation":"<p>A list of metrics for the specified crawler.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if the returned list does not contain the last metric available.</p>"
+        }
+      }
+    },
+    "GetCrawlerRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the <code>Crawler</code> to retrieve metadata for.</p>"
+        }
+      }
+    },
+    "GetCrawlerResponse":{
+      "type":"structure",
+      "members":{
+        "Crawler":{
+          "shape":"Crawler",
+          "documentation":"<p>The metadata for the specified <code>Crawler</code>.</p>"
+        }
+      }
+    },
+    "GetCrawlersRequest":{
+      "type":"structure",
+      "members":{
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The number of Crawlers to return on each call.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if this is a continuation request.</p>"
+        }
+      }
+    },
+    "GetCrawlersResponse":{
+      "type":"structure",
+      "members":{
+        "Crawlers":{
+          "shape":"CrawlerList",
+          "documentation":"<p>A list of <code>Crawler</code> metadata.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if the returned list has not reached the end of those defined in this customer account.</p>"
+        }
+      }
+    },
+    "GetDatabaseRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which the database resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the database to retrieve.</p>"
+        }
+      }
+    },
+    "GetDatabaseResponse":{
+      "type":"structure",
+      "members":{
+        "Database":{
+          "shape":"Database",
+          "documentation":"<p>The definition of the specified database in the catalog.</p>"
+        }
+      }
+    },
+    "GetDatabasesRequest":{
+      "type":"structure",
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog from which to retrieve <code>Databases</code>. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if this is a continuation call.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of databases to return in one response.</p>"
+        }
+      }
+    },
+    "GetDatabasesResponse":{
+      "type":"structure",
+      "required":["DatabaseList"],
+      "members":{
+        "DatabaseList":{
+          "shape":"DatabaseList",
+          "documentation":"<p>A list of <code>Database</code> objects from the specified catalog.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>"
+        }
+      }
+    },
+    "GetDataflowGraphRequest":{
+      "type":"structure",
+      "members":{
+        "PythonScript":{
+          "shape":"PythonScript",
+          "documentation":"<p>The Python script to transform.</p>"
+        }
+      }
+    },
+    "GetDataflowGraphResponse":{
+      "type":"structure",
+      "members":{
+        "DagNodes":{
+          "shape":"DagNodes",
+          "documentation":"<p>A list of the nodes in the resulting DAG.</p>"
+        },
+        "DagEdges":{
+          "shape":"DagEdges",
+          "documentation":"<p>A list of the edges in the resulting DAG.</p>"
+        }
+      }
+    },
+    "GetDevEndpointRequest":{
+      "type":"structure",
+      "required":["EndpointName"],
+      "members":{
+        "EndpointName":{
+          "shape":"GenericString",
+          "documentation":"<p>Name of the DevEndpoint for which to retrieve information.</p>"
+        }
+      }
+    },
+    "GetDevEndpointResponse":{
+      "type":"structure",
+      "members":{
+        "DevEndpoint":{
+          "shape":"DevEndpoint",
+          "documentation":"<p>A DevEndpoint definition.</p>"
+        }
+      }
+    },
+    "GetDevEndpointsRequest":{
+      "type":"structure",
+      "members":{
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum size of information to return.</p>"
+        },
+        "NextToken":{
+          "shape":"GenericString",
+          "documentation":"<p>A continuation token, if this is a continuation call.</p>"
+        }
+      }
+    },
+    "GetDevEndpointsResponse":{
+      "type":"structure",
+      "members":{
+        "DevEndpoints":{
+          "shape":"DevEndpointList",
+          "documentation":"<p>A list of DevEndpoint definitions.</p>"
+        },
+        "NextToken":{
+          "shape":"GenericString",
+          "documentation":"<p>A continuation token, if not all DevEndpoint definitions have yet been returned.</p>"
+        }
+      }
+    },
+    "GetJobRequest":{
+      "type":"structure",
+      "required":["JobName"],
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job to retrieve.</p>"
+        }
+      }
+    },
+    "GetJobResponse":{
+      "type":"structure",
+      "members":{
+        "Job":{
+          "shape":"Job",
+          "documentation":"<p>The requested job definition.</p>"
+        }
+      }
+    },
+    "GetJobRunRequest":{
+      "type":"structure",
+      "required":[
+        "JobName",
+        "RunId"
+      ],
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the job being run.</p>"
+        },
+        "RunId":{
+          "shape":"IdString",
+          "documentation":"<p>The ID of the job run.</p>"
+        },
+        "PredecessorsIncluded":{
+          "shape":"BooleanValue",
+          "documentation":"<p>A list of the predecessor runs to return as well.</p>"
+        }
+      }
+    },
+    "GetJobRunResponse":{
+      "type":"structure",
+      "members":{
+        "JobRun":{
+          "shape":"JobRun",
+          "documentation":"<p>The requested job-run metadata.</p>"
+        }
+      }
+    },
+    "GetJobRunsRequest":{
+      "type":"structure",
+      "required":["JobName"],
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job for which to retrieve all job runs.</p>"
+        },
+        "NextToken":{
+          "shape":"GenericString",
+          "documentation":"<p>A continuation token, if this is a continuation call.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum size of the response.</p>"
+        }
+      }
+    },
+    "GetJobRunsResponse":{
+      "type":"structure",
+      "members":{
+        "JobRuns":{
+          "shape":"JobRunList",
+          "documentation":"<p>A list of job-run metatdata objects.</p>"
+        },
+        "NextToken":{
+          "shape":"GenericString",
+          "documentation":"<p>A continuation token, if not all reequested job runs have been returned.</p>"
+        }
+      }
+    },
+    "GetJobsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"GenericString",
+          "documentation":"<p>A continuation token, if this is a continuation call.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum size of the response.</p>"
+        }
+      }
+    },
+    "GetJobsResponse":{
+      "type":"structure",
+      "members":{
+        "Jobs":{
+          "shape":"JobList",
+          "documentation":"<p>A list of jobs.</p>"
+        },
+        "NextToken":{
+          "shape":"GenericString",
+          "documentation":"<p>A continuation token, if not all jobs have yet been returned.</p>"
+        }
+      }
+    },
+    "GetMappingRequest":{
+      "type":"structure",
+      "required":["Source"],
+      "members":{
+        "Source":{
+          "shape":"CatalogEntry",
+          "documentation":"<p>Specifies the source table.</p>"
+        },
+        "Sinks":{
+          "shape":"CatalogEntries",
+          "documentation":"<p>A list of target tables.</p>"
+        },
+        "Location":{
+          "shape":"Location",
+          "documentation":"<p>Parameters for the mapping.</p>"
+        }
+      }
+    },
+    "GetMappingResponse":{
+      "type":"structure",
+      "required":["Mapping"],
+      "members":{
+        "Mapping":{
+          "shape":"MappingList",
+          "documentation":"<p>A list of mappings to the specified targets.</p>"
+        }
+      }
+    },
+    "GetPartitionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "PartitionValues"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the partition in question resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database where the partition resides.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the partition's table.</p>"
+        },
+        "PartitionValues":{
+          "shape":"ValueStringList",
+          "documentation":"<p>The values that define the partition.</p>"
+        }
+      }
+    },
+    "GetPartitionResponse":{
+      "type":"structure",
+      "members":{
+        "Partition":{
+          "shape":"Partition",
+          "documentation":"<p>The requested information, in the form of a <code>Partition</code> object.</p>"
+        }
+      }
+    },
+    "GetPartitionsRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database where the partitions reside.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the partitions' table.</p>"
+        },
+        "Expression":{
+          "shape":"PredicateString",
+          "documentation":"<p>An expression filtering the partitions to be returned.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if this is not the first call to retrieve these partitions.</p>"
+        },
+        "Segment":{
+          "shape":"Segment",
+          "documentation":"<p>The segment of the table's partitions to scan in this request.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of partitions to return in a single response.</p>"
+        }
+      }
+    },
+    "GetPartitionsResponse":{
+      "type":"structure",
+      "members":{
+        "Partitions":{
+          "shape":"PartitionList",
+          "documentation":"<p>A list of requested partitions.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if the returned list of partitions does not does not include the last one.</p>"
+        }
+      }
+    },
+    "GetPlanRequest":{
+      "type":"structure",
+      "required":[
+        "Mapping",
+        "Source"
+      ],
+      "members":{
+        "Mapping":{
+          "shape":"MappingList",
+          "documentation":"<p>The list of mappings from a source table to target tables.</p>"
+        },
+        "Source":{
+          "shape":"CatalogEntry",
+          "documentation":"<p>The source table.</p>"
+        },
+        "Sinks":{
+          "shape":"CatalogEntries",
+          "documentation":"<p>The target tables.</p>"
+        },
+        "Location":{
+          "shape":"Location",
+          "documentation":"<p>Parameters for the mapping.</p>"
+        }
+      }
+    },
+    "GetPlanResponse":{
+      "type":"structure",
+      "members":{
+        "PythonScript":{
+          "shape":"PythonScript",
+          "documentation":"<p>A python script to perform the mapping.</p>"
+        }
+      }
+    },
+    "GetTableRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "Name"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the database in the catalog in which the table resides.</p>"
+        },
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table for which to retrieve the definition.</p>"
+        }
+      }
+    },
+    "GetTableResponse":{
+      "type":"structure",
+      "members":{
+        "Table":{
+          "shape":"Table",
+          "documentation":"<p>The <code>Table</code> object that defines the specified table.</p>"
+        }
+      }
+    },
+    "GetTableVersionsList":{
+      "type":"list",
+      "member":{"shape":"TableVersion"}
+    },
+    "GetTableVersionsRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The database in the catalog in which the table resides.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if this is not the first call.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of table versions to return in one response.</p>"
+        }
+      }
+    },
+    "GetTableVersionsResponse":{
+      "type":"structure",
+      "members":{
+        "TableVersions":{
+          "shape":"GetTableVersionsList",
+          "documentation":"<p>A list of strings identifying available versions of the specified table.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if the list of available versions does not include the last one.</p>"
+        }
+      }
+    },
+    "GetTablesRequest":{
+      "type":"structure",
+      "required":["DatabaseName"],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The database in the catalog whose tables to list.</p>"
+        },
+        "Expression":{
+          "shape":"FilterString",
+          "documentation":"<p>A regular expression pattern. If present, only those tables whose names match the pattern are returned.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, included if this is a continuation call.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of tables to return in a single response.</p>"
+        }
+      }
+    },
+    "GetTablesResponse":{
+      "type":"structure",
+      "members":{
+        "TableList":{
+          "shape":"TableList",
+          "documentation":"<p>A list of the requested <code>Table</code> objects.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, present if the current list segment is not the last.</p>"
+        }
+      }
+    },
+    "GetTriggerRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger to retrieve.</p>"
+        }
+      }
+    },
+    "GetTriggerResponse":{
+      "type":"structure",
+      "members":{
+        "Trigger":{
+          "shape":"Trigger",
+          "documentation":"<p>The requested trigger definition.</p>"
+        }
+      }
+    },
+    "GetTriggersRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"GenericString",
+          "documentation":"<p>A continuation token, if this is a continuation call.</p>"
+        },
+        "DependentJobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job for which to retrieve triggers.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum size of the response.</p>"
+        }
+      }
+    },
+    "GetTriggersResponse":{
+      "type":"structure",
+      "members":{
+        "Triggers":{
+          "shape":"TriggerList",
+          "documentation":"<p>A list of triggers for the specified job.</p>"
+        },
+        "NextToken":{
+          "shape":"GenericString",
+          "documentation":"<p>A continuation token, if not all the requested triggers have yet been returned.</p>"
+        }
+      }
+    },
+    "GetUserDefinedFunctionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "FunctionName"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the function to be retrieved is located. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database where the function is located.</p>"
+        },
+        "FunctionName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the function.</p>"
+        }
+      }
+    },
+    "GetUserDefinedFunctionResponse":{
+      "type":"structure",
+      "members":{
+        "UserDefinedFunction":{
+          "shape":"UserDefinedFunction",
+          "documentation":"<p>The requested function definition.</p>"
+        }
+      }
+    },
+    "GetUserDefinedFunctionsRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "Pattern"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the functions to be retrieved are located. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database where the functions are located.</p>"
+        },
+        "Pattern":{
+          "shape":"NameString",
+          "documentation":"<p>An optional function-name pattern string that filters the function definitions returned.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if this is a continuation call.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of functions to return in one response.</p>"
+        }
+      }
+    },
+    "GetUserDefinedFunctionsResponse":{
+      "type":"structure",
+      "members":{
+        "UserDefinedFunctions":{
+          "shape":"UserDefinedFunctionList",
+          "documentation":"<p>A list of requested function definitions.</p>"
+        },
+        "NextToken":{
+          "shape":"Token",
+          "documentation":"<p>A continuation token, if the list of functions returned does not include the last requested function.</p>"
+        }
+      }
+    },
+    "GrokClassifier":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Classification",
+        "GrokPattern"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the classifier.</p>"
+        },
+        "Classification":{
+          "shape":"Classification",
+          "documentation":"<p>The data form that the classifier matches, such as Twitter, JSON, Omniture Logs, and so forth.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time this classifier was registered.</p>"
+        },
+        "LastUpdated":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time this classifier was last updated.</p>"
+        },
+        "Version":{
+          "shape":"VersionId",
+          "documentation":"<p>The version of this classifier.</p>"
+        },
+        "GrokPattern":{
+          "shape":"GrokPattern",
+          "documentation":"<p>The grok pattern used by this classifier.</p>"
+        },
+        "CustomPatterns":{
+          "shape":"CustomPatterns",
+          "documentation":"<p>Custom grok patterns used by this classifier.</p>"
+        }
+      },
+      "documentation":"<p>A classifier that uses <code>grok</code>.</p>"
+    },
+    "GrokPattern":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\t]*"
+    },
+    "IdString":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "IdempotentParameterMismatchException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>The same unique identifier was associated with two different records.</p>",
+      "exception":true
+    },
+    "ImportCatalogToGlueRequest":{
+      "type":"structure",
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the catalog to import. Currently, this should be the AWS account ID.</p>"
+        }
+      }
+    },
+    "ImportCatalogToGlueResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "Integer":{"type":"integer"},
+    "IntegerFlag":{
+      "type":"integer",
+      "max":1,
+      "min":0
+    },
+    "IntegerValue":{"type":"integer"},
+    "InternalServiceException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>An internal service error occurred.</p>",
+      "exception":true,
+      "fault":true
+    },
+    "InvalidInputException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>The input provided was not valid.</p>",
+      "exception":true
+    },
+    "JdbcTarget":{
+      "type":"structure",
+      "members":{
+        "ConnectionName":{
+          "shape":"ConnectionName",
+          "documentation":"<p>The name of the connection to use for the JDBC target.</p>"
+        },
+        "Path":{
+          "shape":"Path",
+          "documentation":"<p>The path of the JDBC target.</p>"
+        },
+        "Exclusions":{
+          "shape":"PathList",
+          "documentation":"<p>A list of items to exclude from the crawl.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a JDBC target for a crawl.</p>"
+    },
+    "JdbcTargetList":{
+      "type":"list",
+      "member":{"shape":"JdbcTarget"}
+    },
+    "Job":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name you assign to this job.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Description of this job.</p>"
+        },
+        "LogUri":{
+          "shape":"UriString",
+          "documentation":"<p>Location of the logs for this job.</p>"
+        },
+        "Role":{
+          "shape":"RoleString",
+          "documentation":"<p>The role associated with this job.</p>"
+        },
+        "CreatedOn":{
+          "shape":"TimestampValue",
+          "documentation":"<p>The time and date that this job specification was created.</p>"
+        },
+        "LastModifiedOn":{
+          "shape":"TimestampValue",
+          "documentation":"<p>The last point in time when this job specification was modified.</p>"
+        },
+        "ExecutionProperty":{
+          "shape":"ExecutionProperty",
+          "documentation":"<p>An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.</p>"
+        },
+        "Command":{
+          "shape":"JobCommand",
+          "documentation":"<p>The JobCommand that executes this job.</p>"
+        },
+        "DefaultArguments":{
+          "shape":"GenericMap",
+          "documentation":"<p>The default parameters for this job.</p>"
+        },
+        "Connections":{
+          "shape":"ConnectionsList",
+          "documentation":"<p>The connections used for this job.</p>"
+        },
+        "MaxRetries":{
+          "shape":"MaxRetries",
+          "documentation":"<p>The maximum number of times to retry this job if it fails.</p>"
+        },
+        "AllocatedCapacity":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The number of capacity units allocated to this job.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a job in the Data Catalog.</p>"
+    },
+    "JobBookmarkEntry":{
+      "type":"structure",
+      "members":{
+        "JobName":{
+          "shape":"JobName",
+          "documentation":"<p>Name of the job in question.</p>"
+        },
+        "Version":{
+          "shape":"IntegerValue",
+          "documentation":"<p>Version of the job.</p>"
+        },
+        "Run":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The run ID number.</p>"
+        },
+        "Attempt":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The attempt ID number.</p>"
+        },
+        "JobBookmark":{
+          "shape":"JsonValue",
+          "documentation":"<p>The bookmark itself.</p>"
+        }
+      },
+      "documentation":"<p>Defines a point which a job can resume processing.</p>"
+    },
+    "JobCommand":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"GenericString",
+          "documentation":"<p>The name of this job command.</p>"
+        },
+        "ScriptLocation":{
+          "shape":"ScriptLocationString",
+          "documentation":"<p>Specifies the location of a script that executes a job.</p>"
+        }
+      },
+      "documentation":"<p>Specifies code that executes a job.</p>"
+    },
+    "JobList":{
+      "type":"list",
+      "member":{"shape":"Job"}
+    },
+    "JobName":{"type":"string"},
+    "JobRun":{
+      "type":"structure",
+      "members":{
+        "Id":{
+          "shape":"IdString",
+          "documentation":"<p>The ID of this job run.</p>"
+        },
+        "Attempt":{
+          "shape":"AttemptCount",
+          "documentation":"<p>The number or the attempt to run this job.</p>"
+        },
+        "PreviousRunId":{
+          "shape":"IdString",
+          "documentation":"<p>The ID of the previous run of this job.</p>"
+        },
+        "TriggerName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger for this job run.</p>"
+        },
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job being run.</p>"
+        },
+        "StartedOn":{
+          "shape":"TimestampValue",
+          "documentation":"<p>The date and time at which this job run was started.</p>"
+        },
+        "LastModifiedOn":{
+          "shape":"TimestampValue",
+          "documentation":"<p>The last time this job run was modified.</p>"
+        },
+        "CompletedOn":{
+          "shape":"TimestampValue",
+          "documentation":"<p>The date and time this job run completed.</p>"
+        },
+        "JobRunState":{
+          "shape":"JobRunState",
+          "documentation":"<p>The current state of the job run.</p>"
+        },
+        "Arguments":{
+          "shape":"GenericMap",
+          "documentation":"<p>The job arguments associated with this run.</p>"
+        },
+        "ErrorMessage":{
+          "shape":"ErrorString",
+          "documentation":"<p>An error message associated with this job run.</p>"
+        },
+        "PredecessorRuns":{
+          "shape":"PredecessorList",
+          "documentation":"<p>A list of predecessors to this job run.</p>"
+        },
+        "AllocatedCapacity":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The amount of infrastructure capacity allocated to this job run.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about a job run.</p>"
+    },
+    "JobRunList":{
+      "type":"list",
+      "member":{"shape":"JobRun"}
+    },
+    "JobRunState":{
+      "type":"string",
+      "enum":[
+        "STARTING",
+        "RUNNING",
+        "STOPPING",
+        "STOPPED",
+        "SUCCEEDED",
+        "FAILED"
+      ]
+    },
+    "JobUpdate":{
+      "type":"structure",
+      "members":{
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Description of the job.</p>"
+        },
+        "LogUri":{
+          "shape":"UriString",
+          "documentation":"<p>Location of the logs for this job.</p>"
+        },
+        "Role":{
+          "shape":"RoleString",
+          "documentation":"<p>The role associated with this job.</p>"
+        },
+        "ExecutionProperty":{
+          "shape":"ExecutionProperty",
+          "documentation":"<p>An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.</p>"
+        },
+        "Command":{
+          "shape":"JobCommand",
+          "documentation":"<p>The JobCommand that executes this job.</p>"
+        },
+        "DefaultArguments":{
+          "shape":"GenericMap",
+          "documentation":"<p>The default parameters for this job.</p>"
+        },
+        "Connections":{
+          "shape":"ConnectionsList",
+          "documentation":"<p>The connections used for this job.</p>"
+        },
+        "MaxRetries":{
+          "shape":"MaxRetries",
+          "documentation":"<p>The maximum number of times to retry this job if it fails.</p>"
+        },
+        "AllocatedCapacity":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The number of capacity units allocated to this job.</p>"
+        }
+      },
+      "documentation":"<p>Specifies information used to update an existing job.</p>"
+    },
+    "JsonValue":{"type":"string"},
+    "KeyString":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "LastCrawlInfo":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"LastCrawlStatus",
+          "documentation":"<p>Status of the last crawl.</p>"
+        },
+        "ErrorMessage":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Error information about the last crawl, if an error occurred.</p>"
+        },
+        "LogGroup":{
+          "shape":"LogGroup",
+          "documentation":"<p>The log group for the last crawl.</p>"
+        },
+        "LogStream":{
+          "shape":"LogStream",
+          "documentation":"<p>The log stream for the last crawl.</p>"
+        },
+        "MessagePrefix":{
+          "shape":"MessagePrefix",
+          "documentation":"<p>The prefix for a message about this crawl.</p>"
+        },
+        "StartTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time at which the crawl started.</p>"
+        }
+      },
+      "documentation":"<p>Status and error information about the most recent crawl.</p>"
+    },
+    "LastCrawlStatus":{
+      "type":"string",
+      "enum":[
+        "SUCCEEDED",
+        "CANCELLED",
+        "FAILED"
+      ]
+    },
+    "Location":{
+      "type":"structure",
+      "members":{
+        "Jdbc":{
+          "shape":"CodeGenNodeArgs",
+          "documentation":"<p>A JDBC location.</p>"
+        },
+        "S3":{
+          "shape":"CodeGenNodeArgs",
+          "documentation":"<p>An AWS S3 location.</p>"
+        }
+      },
+      "documentation":"<p>The location of resources.</p>"
+    },
+    "LocationMap":{
+      "type":"map",
+      "key":{"shape":"ColumnValuesString"},
+      "value":{"shape":"ColumnValuesString"}
+    },
+    "LocationString":{
+      "type":"string",
+      "max":2056,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "LogGroup":{
+      "type":"string",
+      "max":512,
+      "min":1,
+      "pattern":"[\\.\\-_/#A-Za-z0-9]+"
+    },
+    "LogStream":{
+      "type":"string",
+      "max":512,
+      "min":1,
+      "pattern":"[^:*]*"
+    },
+    "Logical":{
+      "type":"string",
+      "enum":["AND"]
+    },
+    "LogicalOperator":{
+      "type":"string",
+      "enum":["EQUALS"]
+    },
+    "MappingEntry":{
+      "type":"structure",
+      "members":{
+        "SourceTable":{
+          "shape":"TableName",
+          "documentation":"<p>The name of the source table.</p>"
+        },
+        "SourcePath":{
+          "shape":"SchemaPathString",
+          "documentation":"<p>The source path.</p>"
+        },
+        "SourceType":{
+          "shape":"FieldType",
+          "documentation":"<p>The source type.</p>"
+        },
+        "TargetTable":{
+          "shape":"TableName",
+          "documentation":"<p>The target table.</p>"
+        },
+        "TargetPath":{
+          "shape":"SchemaPathString",
+          "documentation":"<p>The target path.</p>"
+        },
+        "TargetType":{
+          "shape":"FieldType",
+          "documentation":"<p>The target type.</p>"
+        }
+      },
+      "documentation":"<p>Defines a mapping.</p>"
+    },
+    "MappingList":{
+      "type":"list",
+      "member":{"shape":"MappingEntry"}
+    },
+    "MatchCriteria":{
+      "type":"list",
+      "member":{"shape":"NameString"},
+      "max":10,
+      "min":0
+    },
+    "MaxConcurrentRuns":{"type":"integer"},
+    "MaxRetries":{"type":"integer"},
+    "MessagePrefix":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "MessageString":{"type":"string"},
+    "MillisecondsCount":{"type":"long"},
+    "NameString":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "NameStringList":{
+      "type":"list",
+      "member":{"shape":"NameString"}
+    },
+    "NoScheduleException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>There is no applicable schedule.</p>",
+      "exception":true
+    },
+    "NonNegativeDouble":{
+      "type":"double",
+      "min":0.0
+    },
+    "NonNegativeInteger":{
+      "type":"integer",
+      "min":0
+    },
+    "OperationTimeoutException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>The operation timed out.</p>",
+      "exception":true
+    },
+    "Order":{
+      "type":"structure",
+      "required":[
+        "Column",
+        "SortOrder"
+      ],
+      "members":{
+        "Column":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the column.</p>"
+        },
+        "SortOrder":{
+          "shape":"IntegerFlag",
+          "documentation":"<p>Indicates that the column is sorted in ascending order (<code>== 1</code>), or in descending order (<code>==0</code>).</p>"
+        }
+      },
+      "documentation":"<p>Specifies the sort order of a sorted column.</p>"
+    },
+    "OrderList":{
+      "type":"list",
+      "member":{"shape":"Order"}
+    },
+    "PageSize":{
+      "type":"integer",
+      "box":true,
+      "max":1000,
+      "min":1
+    },
+    "ParametersMap":{
+      "type":"map",
+      "key":{"shape":"KeyString"},
+      "value":{"shape":"ParametersMapValue"}
+    },
+    "ParametersMapValue":{
+      "type":"string",
+      "max":51200
+    },
+    "Partition":{
+      "type":"structure",
+      "members":{
+        "Values":{
+          "shape":"ValueStringList",
+          "documentation":"<p>The values of the partition.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database where the table in question is located.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table in question.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time at which the partition was created.</p>"
+        },
+        "LastAccessTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time at which the partition was accessed.</p>"
+        },
+        "StorageDescriptor":{
+          "shape":"StorageDescriptor",
+          "documentation":"<p>Provides information about the physical location where the partition is stored.</p>"
+        },
+        "Parameters":{
+          "shape":"ParametersMap",
+          "documentation":"<p>Partition parameters, in the form of a list of key-value pairs.</p>"
+        },
+        "LastAnalyzedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time at which column statistics were computed for this partition.</p>"
+        }
+      },
+      "documentation":"<p>Represents a slice of table data.</p>"
+    },
+    "PartitionError":{
+      "type":"structure",
+      "members":{
+        "PartitionValues":{
+          "shape":"ValueStringList",
+          "documentation":"<p>The values that define the partition.</p>"
+        },
+        "ErrorDetail":{
+          "shape":"ErrorDetail",
+          "documentation":"<p>Details about the partition error.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about a partition error.</p>"
+    },
+    "PartitionErrors":{
+      "type":"list",
+      "member":{"shape":"PartitionError"}
+    },
+    "PartitionInput":{
+      "type":"structure",
+      "members":{
+        "Values":{
+          "shape":"ValueStringList",
+          "documentation":"<p>The values of the partition.</p>"
+        },
+        "LastAccessTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time at which the partition was accessed.</p>"
+        },
+        "StorageDescriptor":{
+          "shape":"StorageDescriptor",
+          "documentation":"<p>Provides information about the physical location where the partition is stored.</p>"
+        },
+        "Parameters":{
+          "shape":"ParametersMap",
+          "documentation":"<p>Partition parameters, in the form of a list of key-value pairs.</p>"
+        },
+        "LastAnalyzedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The last time at which column statistics were computed for this partition.</p>"
+        }
+      },
+      "documentation":"<p>The structure used to create and update a partion.</p>"
+    },
+    "PartitionInputList":{
+      "type":"list",
+      "member":{"shape":"PartitionInput"},
+      "max":100,
+      "min":0
+    },
+    "PartitionList":{
+      "type":"list",
+      "member":{"shape":"Partition"}
+    },
+    "PartitionValueList":{
+      "type":"structure",
+      "required":["Values"],
+      "members":{
+        "Values":{"shape":"ValueStringList"}
+      }
+    },
+    "Path":{"type":"string"},
+    "PathList":{
+      "type":"list",
+      "member":{"shape":"Path"}
+    },
+    "PhysicalConnectionRequirements":{
+      "type":"structure",
+      "members":{
+        "SubnetId":{
+          "shape":"NameString",
+          "documentation":"<p>The subnet ID used by the connection.</p>"
+        },
+        "SecurityGroupIdList":{
+          "shape":"SecurityGroupIdList",
+          "documentation":"<p>The security group ID list used by the connection.</p>"
+        },
+        "AvailabilityZone":{
+          "shape":"NameString",
+          "documentation":"<p>The connection's availability zone.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the physical requirements for a connection.</p>"
+    },
+    "Predecessor":{
+      "type":"structure",
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the predecessor job.</p>"
+        },
+        "RunId":{
+          "shape":"IdString",
+          "documentation":"<p>The job-run ID of the precessor job run.</p>"
+        }
+      },
+      "documentation":"<p>A job run that preceded this one.</p>"
+    },
+    "PredecessorList":{
+      "type":"list",
+      "member":{"shape":"Predecessor"}
+    },
+    "Predicate":{
+      "type":"structure",
+      "members":{
+        "Logical":{
+          "shape":"Logical",
+          "documentation":"<p>Currently \"OR\" is not supported.</p>"
+        },
+        "Conditions":{
+          "shape":"ConditionList",
+          "documentation":"<p>A list of the conditions that determine when the trigger will fire.</p>"
+        }
+      },
+      "documentation":"<p>Defines the predicate of the trigger, which determines when it fires.</p>"
+    },
+    "PredicateString":{
+      "type":"string",
+      "max":2048,
+      "min":0,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "PrincipalType":{
+      "type":"string",
+      "enum":[
+        "USER",
+        "ROLE",
+        "GROUP"
+      ]
+    },
+    "PythonScript":{"type":"string"},
+    "ResetJobBookmarkRequest":{
+      "type":"structure",
+      "required":["JobName"],
+      "members":{
+        "JobName":{
+          "shape":"JobName",
+          "documentation":"<p>The name of the job in question.</p>"
+        }
+      }
+    },
+    "ResetJobBookmarkResponse":{
+      "type":"structure",
+      "members":{
+        "JobBookmarkEntry":{
+          "shape":"JobBookmarkEntry",
+          "documentation":"<p>The reset bookmark entry.</p>"
+        }
+      }
+    },
+    "ResourceNumberLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>A resource numerical limit was exceeded.</p>",
+      "exception":true
+    },
+    "ResourceType":{
+      "type":"string",
+      "enum":[
+        "JAR",
+        "FILE",
+        "ARCHIVE"
+      ]
+    },
+    "ResourceUri":{
+      "type":"structure",
+      "members":{
+        "ResourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The type of the resource.</p>"
+        },
+        "Uri":{
+          "shape":"URI",
+          "documentation":"<p>The URI for accessing the resource.</p>"
+        }
+      },
+      "documentation":"<p>URIs for function resources.</p>"
+    },
+    "ResourceUriList":{
+      "type":"list",
+      "member":{"shape":"ResourceUri"},
+      "max":1000,
+      "min":0
+    },
+    "RoleArn":{
+      "type":"string",
+      "pattern":"arn:aws:iam::\\d{12}:role/.*"
+    },
+    "RoleString":{"type":"string"},
+    "S3Target":{
+      "type":"structure",
+      "members":{
+        "Path":{
+          "shape":"Path",
+          "documentation":"<p>The path to the S3 target.</p>"
+        },
+        "Exclusions":{
+          "shape":"PathList",
+          "documentation":"<p>A list of S3 objects to exclude from the crawl.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a crawler target in AWS S3.</p>"
+    },
+    "S3TargetList":{
+      "type":"list",
+      "member":{"shape":"S3Target"}
+    },
+    "Schedule":{
+      "type":"structure",
+      "members":{
+        "ScheduleExpression":{
+          "shape":"CronExpression",
+          "documentation":"<p>A <code>cron</code> expression that can be used as a Cloudwatch event to schedule something (see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">CloudWatch Schedule Expression Syntax</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
+        },
+        "State":{
+          "shape":"ScheduleState",
+          "documentation":"<p>The state of the schedule.</p>"
+        }
+      },
+      "documentation":"<p>A scheduling object using a <code>cron</code> statement to schedule an event.</p>"
+    },
+    "ScheduleState":{
+      "type":"string",
+      "enum":[
+        "SCHEDULED",
+        "NOT_SCHEDULED",
+        "TRANSITIONING"
+      ]
+    },
+    "SchedulerNotRunningException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>The specified scheduler is not running.</p>",
+      "exception":true
+    },
+    "SchedulerRunningException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>The specified scheduler is already running.</p>",
+      "exception":true
+    },
+    "SchedulerTransitioningException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>The specified scheduler is transitioning.</p>",
+      "exception":true
+    },
+    "SchemaChangePolicy":{
+      "type":"structure",
+      "members":{
+        "UpdateBehavior":{
+          "shape":"UpdateBehavior",
+          "documentation":"<p>The update behavior.</p>"
+        },
+        "DeleteBehavior":{
+          "shape":"DeleteBehavior",
+          "documentation":"<p>The deletion behavior.</p>"
+        }
+      },
+      "documentation":"<p>Crawler policy for update and deletion behavior.</p>"
+    },
+    "SchemaPathString":{"type":"string"},
+    "ScriptLocationString":{"type":"string"},
+    "SecurityGroupIdList":{
+      "type":"list",
+      "member":{"shape":"NameString"},
+      "max":50,
+      "min":0
+    },
+    "Segment":{
+      "type":"structure",
+      "required":[
+        "SegmentNumber",
+        "TotalSegments"
+      ],
+      "members":{
+        "SegmentNumber":{
+          "shape":"NonNegativeInteger",
+          "documentation":"<p>The zero-based index number of the this segment. For example, if the total number of segments is 4, SegmentNumber values will range from zero through three.</p>"
+        },
+        "TotalSegments":{
+          "shape":"TotalSegmentsInteger",
+          "documentation":"<p>The total numer of segments.</p>"
+        }
+      },
+      "documentation":"<p>Defines a non-overlapping region of a table's partitions, allowing multiple requests to be executed in parallel.</p>"
+    },
+    "SerDeInfo":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the SerDe.</p>"
+        },
+        "SerializationLibrary":{
+          "shape":"NameString",
+          "documentation":"<p>Usually the class that implements the SerDe. An example is: <code>org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe</code>.</p>"
+        },
+        "Parameters":{
+          "shape":"ParametersMap",
+          "documentation":"<p>A list of initialization parameters for the SerDe, in key-value form.</p>"
+        }
+      },
+      "documentation":"<p>Information about a serialization/deserialization program (SerDe) which serves as an extractor and loader.</p>"
+    },
+    "SkewedInfo":{
+      "type":"structure",
+      "members":{
+        "SkewedColumnNames":{
+          "shape":"NameStringList",
+          "documentation":"<p>A list of names of columns that contain skewed values.</p>"
+        },
+        "SkewedColumnValues":{
+          "shape":"ColumnValueStringList",
+          "documentation":"<p>A list of values that appear so frequently as to be considered skewed.</p>"
+        },
+        "SkewedColumnValueLocationMaps":{
+          "shape":"LocationMap",
+          "documentation":"<p>A mapping of skewed values to the columns that contain them.</p>"
+        }
+      },
+      "documentation":"<p>Specifies skewed values in a table. Skewed are ones that occur with very high frequency.</p>"
+    },
+    "StartCrawlerRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the <code>Crawler</code> to start.</p>"
+        }
+      }
+    },
+    "StartCrawlerResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "StartCrawlerScheduleRequest":{
+      "type":"structure",
+      "required":["CrawlerName"],
+      "members":{
+        "CrawlerName":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the crawler to schedule.</p>"
+        }
+      }
+    },
+    "StartCrawlerScheduleResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "StartJobRunRequest":{
+      "type":"structure",
+      "required":["JobName"],
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job to start.</p>"
+        },
+        "JobRunId":{
+          "shape":"IdString",
+          "documentation":"<p>The ID of the job run to start.</p>"
+        },
+        "Arguments":{
+          "shape":"GenericMap",
+          "documentation":"<p>Specific arguments for this job run.</p>"
+        },
+        "AllocatedCapacity":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The infrastructure capacity to allocate to this job.</p>"
+        }
+      }
+    },
+    "StartJobRunResponse":{
+      "type":"structure",
+      "members":{
+        "JobRunId":{
+          "shape":"IdString",
+          "documentation":"<p>The ID assigned to this job run.</p>"
+        }
+      }
+    },
+    "StartTriggerRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger to start.</p>"
+        }
+      }
+    },
+    "StartTriggerResponse":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger that was started.</p>"
+        }
+      }
+    },
+    "StopCrawlerRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the <code>Crawler</code> to stop.</p>"
+        }
+      }
+    },
+    "StopCrawlerResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "StopCrawlerScheduleRequest":{
+      "type":"structure",
+      "required":["CrawlerName"],
+      "members":{
+        "CrawlerName":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the crawler whose schedule state to set.</p>"
+        }
+      }
+    },
+    "StopCrawlerScheduleResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "StopTriggerRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger to stop.</p>"
+        }
+      }
+    },
+    "StopTriggerResponse":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger that was stopped.</p>"
+        }
+      }
+    },
+    "StorageDescriptor":{
+      "type":"structure",
+      "members":{
+        "Columns":{
+          "shape":"ColumnList",
+          "documentation":"<p>A list of the <code>Columns</code> in the table.</p>"
+        },
+        "Location":{
+          "shape":"LocationString",
+          "documentation":"<p>The physical location of the table. By default this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.</p>"
+        },
+        "InputFormat":{
+          "shape":"FormatString",
+          "documentation":"<p>The input format: <code>SequenceFileInputFormat</code> (binary), or <code>TextInputFormat</code>, or a custom format.</p>"
+        },
+        "OutputFormat":{
+          "shape":"FormatString",
+          "documentation":"<p>The output format: <code>SequenceFileOutputFormat</code> (binary), or <code>IgnoreKeyTextOutputFormat</code>, or a custom format.</p>"
+        },
+        "Compressed":{
+          "shape":"Boolean",
+          "documentation":"<p>True if the data in the table is compressed, or False if not.</p>"
+        },
+        "NumberOfBuckets":{
+          "shape":"Integer",
+          "documentation":"<p>Must be specified if the table contains any dimension columns.</p>"
+        },
+        "SerdeInfo":{
+          "shape":"SerDeInfo",
+          "documentation":"<p>Serialization/deserialization (SerDe) information.</p>"
+        },
+        "BucketColumns":{
+          "shape":"NameStringList",
+          "documentation":"<p>A list of reducer grouping columns, clustering columns, and bucketing columns in the table.</p>"
+        },
+        "SortColumns":{
+          "shape":"OrderList",
+          "documentation":"<p>A list specifying the sort order of each bucket in the table.</p>"
+        },
+        "Parameters":{
+          "shape":"ParametersMap",
+          "documentation":"<p>User-supplied properties in key-value form.</p>"
+        },
+        "SkewedInfo":{
+          "shape":"SkewedInfo",
+          "documentation":"<p>Information about values that appear very frequently in a column (skewed values).</p>"
+        },
+        "StoredAsSubDirectories":{
+          "shape":"Boolean",
+          "documentation":"<p>True if the table data is stored in subdirectories, or False if not.</p>"
+        }
+      },
+      "documentation":"<p>Describes the physical storage of table data.</p>"
+    },
+    "StringList":{
+      "type":"list",
+      "member":{"shape":"GenericString"}
+    },
+    "Table":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the table.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the metadata database where the table metadata resides.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Description of the table.</p>"
+        },
+        "Owner":{
+          "shape":"NameString",
+          "documentation":"<p>Owner of the table.</p>"
+        },
+        "CreateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Time when the table definition was created in the Data Catalog.</p>"
+        },
+        "UpdateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Last time the table was updated.</p>"
+        },
+        "LastAccessTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Last time the table was accessed. This is usually taken from HDFS, and may not be reliable.</p>"
+        },
+        "LastAnalyzedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Last time column statistics were computed for this table.</p>"
+        },
+        "Retention":{
+          "shape":"NonNegativeInteger",
+          "documentation":"<p>Retention time for this table.</p>"
+        },
+        "StorageDescriptor":{
+          "shape":"StorageDescriptor",
+          "documentation":"<p>A storage descriptor containing information about the physical storage of this table.</p>"
+        },
+        "PartitionKeys":{
+          "shape":"ColumnList",
+          "documentation":"<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p>"
+        },
+        "ViewOriginalText":{
+          "shape":"ViewTextString",
+          "documentation":"<p>If the table is a view, the original text of the view; otherwise <code>null</code>.</p>"
+        },
+        "ViewExpandedText":{
+          "shape":"ViewTextString",
+          "documentation":"<p>If the table is a view, the expanded text of the view; otherwise <code>null</code>.</p>"
+        },
+        "TableType":{
+          "shape":"TableTypeString",
+          "documentation":"<p>The type of this table (<code>EXTERNAL_TABLE</code>, <code>VIRTUAL_VIEW</code>, etc.).</p>"
+        },
+        "Parameters":{
+          "shape":"ParametersMap",
+          "documentation":"<p>Properties associated with this table, as a list of key-value pairs.</p>"
+        },
+        "CreatedBy":{
+          "shape":"NameString",
+          "documentation":"<p>Person or entity who created the table.</p>"
+        }
+      },
+      "documentation":"<p>Represents a collection of related data organized in columns and rows.</p>"
+    },
+    "TableError":{
+      "type":"structure",
+      "members":{
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the table.</p>"
+        },
+        "ErrorDetail":{
+          "shape":"ErrorDetail",
+          "documentation":"<p>Detail about the error.</p>"
+        }
+      },
+      "documentation":"<p>An error record for table operations.</p>"
+    },
+    "TableErrors":{
+      "type":"list",
+      "member":{"shape":"TableError"}
+    },
+    "TableInput":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the table.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>Description of the table.</p>"
+        },
+        "Owner":{
+          "shape":"NameString",
+          "documentation":"<p>Owner of the table.</p>"
+        },
+        "LastAccessTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Last time the table was accessed.</p>"
+        },
+        "LastAnalyzedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>Last time column statistics were computed for this table.</p>"
+        },
+        "Retention":{
+          "shape":"NonNegativeInteger",
+          "documentation":"<p>Retention time for this table.</p>"
+        },
+        "StorageDescriptor":{
+          "shape":"StorageDescriptor",
+          "documentation":"<p>A storage descriptor containing information about the physical storage of this table.</p>"
+        },
+        "PartitionKeys":{
+          "shape":"ColumnList",
+          "documentation":"<p>A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.</p>"
+        },
+        "ViewOriginalText":{
+          "shape":"ViewTextString",
+          "documentation":"<p>If the table is a view, the original text of the view; otherwise <code>null</code>.</p>"
+        },
+        "ViewExpandedText":{
+          "shape":"ViewTextString",
+          "documentation":"<p>If the table is a view, the expanded text of the view; otherwise <code>null</code>.</p>"
+        },
+        "TableType":{
+          "shape":"TableTypeString",
+          "documentation":"<p>The type of this table (<code>EXTERNAL_TABLE</code>, <code>VIRTUAL_VIEW</code>, etc.).</p>"
+        },
+        "Parameters":{
+          "shape":"ParametersMap",
+          "documentation":"<p>Properties associated with this table, as a list of key-value pairs.</p>"
+        }
+      },
+      "documentation":"<p>Structure used to create or update the table.</p>"
+    },
+    "TableList":{
+      "type":"list",
+      "member":{"shape":"Table"}
+    },
+    "TableName":{"type":"string"},
+    "TablePrefix":{
+      "type":"string",
+      "max":128,
+      "min":0
+    },
+    "TableTypeString":{
+      "type":"string",
+      "max":255
+    },
+    "TableVersion":{
+      "type":"structure",
+      "members":{
+        "Table":{"shape":"Table"},
+        "VersionId":{"shape":"VersionString"}
+      }
+    },
+    "Timestamp":{"type":"timestamp"},
+    "TimestampValue":{"type":"timestamp"},
+    "Token":{"type":"string"},
+    "TotalSegmentsInteger":{
+      "type":"integer",
+      "max":10,
+      "min":1
+    },
+    "Trigger":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the trigger.</p>"
+        },
+        "Id":{
+          "shape":"IdString",
+          "documentation":"<p>The trigger ID.</p>"
+        },
+        "Type":{
+          "shape":"TriggerType",
+          "documentation":"<p>The type of trigger that this is.</p>"
+        },
+        "State":{
+          "shape":"TriggerState",
+          "documentation":"<p>The current state of the trigger.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>A description of this trigger.</p>"
+        },
+        "Schedule":{
+          "shape":"GenericString",
+          "documentation":"<p>A cron schedule expression.</p>"
+        },
+        "Actions":{
+          "shape":"ActionList",
+          "documentation":"<p>The actions initiated by this trigger.</p>"
+        },
+        "Predicate":{
+          "shape":"Predicate",
+          "documentation":"<p>The predicate of this trigger.</p>"
+        }
+      },
+      "documentation":"<p>Information about a specific trigger.</p>"
+    },
+    "TriggerList":{
+      "type":"list",
+      "member":{"shape":"Trigger"}
+    },
+    "TriggerState":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "CREATED",
+        "ACTIVATING",
+        "ACTIVATED",
+        "DEACTIVATING",
+        "DEACTIVATED",
+        "DELETING",
+        "UPDATING"
+      ]
+    },
+    "TriggerType":{
+      "type":"string",
+      "enum":[
+        "SCHEDULED",
+        "CONDITIONAL",
+        "ON_DEMAND"
+      ]
+    },
+    "TriggerUpdate":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionString",
+          "documentation":"<p>A description of this trigger.</p>"
+        },
+        "Schedule":{
+          "shape":"GenericString",
+          "documentation":"<p>A cron expression specifying the schedule.</p>"
+        },
+        "Actions":{
+          "shape":"ActionList",
+          "documentation":"<p>The actions initiated by this trigger.</p>"
+        },
+        "Predicate":{
+          "shape":"Predicate",
+          "documentation":"<p>The predicate of this trigger, which defines when it will fire.</p>"
+        }
+      },
+      "documentation":"<p>A structure used to provide information used to updata a trigger.</p>"
+    },
+    "URI":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "UpdateBehavior":{
+      "type":"string",
+      "enum":[
+        "LOG",
+        "UPDATE_IN_DATABASE"
+      ]
+    },
+    "UpdateClassifierRequest":{
+      "type":"structure",
+      "members":{
+        "GrokClassifier":{
+          "shape":"UpdateGrokClassifierRequest",
+          "documentation":"<p>A <code>GrokClassifier</code> object with updated fields.</p>"
+        }
+      }
+    },
+    "UpdateClassifierResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateConnectionRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "ConnectionInput"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the connection definition to update.</p>"
+        },
+        "ConnectionInput":{
+          "shape":"ConnectionInput",
+          "documentation":"<p>A <code>ConnectionInput</code> object that redefines the connection in question.</p>"
+        }
+      }
+    },
+    "UpdateConnectionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateCrawlerRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the new <code>Crawler</code>.</p>"
+        },
+        "Role":{
+          "shape":"RoleArn",
+          "documentation":"<p>The AWS ARN of the IAM role used by the new <code>Crawler</code> to access customer resources.</p>"
+        },
+        "DatabaseName":{
+          "shape":"DatabaseName",
+          "documentation":"<p>The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>"
+        },
+        "Description":{
+          "shape":"DescriptionStringRemovable",
+          "documentation":"<p>A description of the new <code>Crawler</code>.</p>"
+        },
+        "Targets":{
+          "shape":"CrawlerTargets",
+          "documentation":"<p>A list of collection of targets to crawl.</p>"
+        },
+        "Schedule":{
+          "shape":"CronExpression",
+          "documentation":"<p>A cron expression that can be used as a Cloudwatch event (see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">CloudWatch Schedule Expression Syntax</a>. For example, to run every day at 12:15 UTC, specify: <code>cron(15 12 * * ? *)</code>.</p>"
+        },
+        "Classifiers":{
+          "shape":"ClassifierNameList",
+          "documentation":"<p>A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>"
+        },
+        "TablePrefix":{
+          "shape":"TablePrefix",
+          "documentation":"<p>The table prefix used for catalog tables created.</p>"
+        },
+        "SchemaChangePolicy":{
+          "shape":"SchemaChangePolicy",
+          "documentation":"<p>Policy for the crawler's update and deletion behavior.</p>"
+        }
+      }
+    },
+    "UpdateCrawlerResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateCrawlerScheduleRequest":{
+      "type":"structure",
+      "required":["CrawlerName"],
+      "members":{
+        "CrawlerName":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the crawler whose schedule to update.</p>"
+        },
+        "Schedule":{
+          "shape":"CronExpression",
+          "documentation":"<p>Cron expression of the updated schedule.</p>"
+        }
+      }
+    },
+    "UpdateCrawlerScheduleResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateDatabaseRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "DatabaseInput"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog in which the metadata database resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the metadata database to update in the catalog.</p>"
+        },
+        "DatabaseInput":{
+          "shape":"DatabaseInput",
+          "documentation":"<p>A <code>DatabaseInput</code> object specifying the new definition of the metadata database in the catalog.</p>"
+        }
+      }
+    },
+    "UpdateDatabaseResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateDevEndpointRequest":{
+      "type":"structure",
+      "required":["EndpointName"],
+      "members":{
+        "EndpointName":{
+          "shape":"GenericString",
+          "documentation":"<p>The name of the DevEndpoint to be updated.</p>"
+        },
+        "PublicKey":{
+          "shape":"GenericString",
+          "documentation":"<p>The public key for the DevEndpoint to use.</p>"
+        },
+        "CustomLibraries":{
+          "shape":"DevEndpointCustomLibraries",
+          "documentation":"<p>Custom Python or Java custom libraries to be loaded in the DevEndpoint.</p>"
+        }
+      }
+    },
+    "UpdateDevEndpointResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateGrokClassifierRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the <code>GrokClassifier</code>.</p>"
+        },
+        "Classification":{
+          "shape":"Classification",
+          "documentation":"<p>The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.</p>"
+        },
+        "GrokPattern":{
+          "shape":"GrokPattern",
+          "documentation":"<p>The grok pattern used by this classifier.</p>"
+        },
+        "CustomPatterns":{
+          "shape":"CustomPatterns",
+          "documentation":"<p>Custom grok patterns used by this classifier.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a Grok classifier to update when passed to UpdateClassifier.</p>"
+    },
+    "UpdateJobRequest":{
+      "type":"structure",
+      "required":[
+        "JobName",
+        "JobUpdate"
+      ],
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>Name of the job definition to update.</p>"
+        },
+        "JobUpdate":{
+          "shape":"JobUpdate",
+          "documentation":"<p>Specifies the values with which to update the job.</p>"
+        }
+      }
+    },
+    "UpdateJobResponse":{
+      "type":"structure",
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>Returns the name of the updated job.</p>"
+        }
+      }
+    },
+    "UpdatePartitionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "PartitionValueList",
+        "PartitionInput"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the partition to be updated resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database in which the table in question resides.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table where the partition to be updated is located.</p>"
+        },
+        "PartitionValueList":{
+          "shape":"BoundedPartitionValueList",
+          "documentation":"<p>A list of the values defining the partition.</p>"
+        },
+        "PartitionInput":{
+          "shape":"PartitionInput",
+          "documentation":"<p>The new partition object to which to update the partition.</p>"
+        }
+      }
+    },
+    "UpdatePartitionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateTableRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableInput"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database in which the table resides.</p>"
+        },
+        "TableInput":{
+          "shape":"TableInput",
+          "documentation":"<p>An updated <code>TableInput</code> object to define the metadata table in the catalog.</p>"
+        }
+      }
+    },
+    "UpdateTableResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateTriggerRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "TriggerUpdate"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the trigger to update.</p>"
+        },
+        "TriggerUpdate":{
+          "shape":"TriggerUpdate",
+          "documentation":"<p>The new values with which to update the trigger.</p>"
+        }
+      }
+    },
+    "UpdateTriggerResponse":{
+      "type":"structure",
+      "members":{
+        "Trigger":{
+          "shape":"Trigger",
+          "documentation":"<p>The resulting trigger definition.</p>"
+        }
+      }
+    },
+    "UpdateUserDefinedFunctionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "FunctionName",
+        "FunctionInput"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the function to be updated is located. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the catalog database where the function to be updated is located.</p>"
+        },
+        "FunctionName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the function.</p>"
+        },
+        "FunctionInput":{
+          "shape":"UserDefinedFunctionInput",
+          "documentation":"<p>A <code>FunctionInput</code> object that re-defines the function in the Data Catalog.</p>"
+        }
+      }
+    },
+    "UpdateUserDefinedFunctionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UriString":{"type":"string"},
+    "UserDefinedFunction":{
+      "type":"structure",
+      "members":{
+        "FunctionName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the function.</p>"
+        },
+        "ClassName":{
+          "shape":"NameString",
+          "documentation":"<p>The Java class that contains the function code.</p>"
+        },
+        "OwnerName":{
+          "shape":"NameString",
+          "documentation":"<p>The owner of the function.</p>"
+        },
+        "OwnerType":{
+          "shape":"PrincipalType",
+          "documentation":"<p>The owner type.</p>"
+        },
+        "CreateTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time at which the function was created.</p>"
+        },
+        "ResourceUris":{
+          "shape":"ResourceUriList",
+          "documentation":"<p>The resource URIs for the function.</p>"
+        }
+      },
+      "documentation":"<p>Represents the equivalent of a Hive user-defined function (<code>UDF</code>) definition.</p>"
+    },
+    "UserDefinedFunctionInput":{
+      "type":"structure",
+      "members":{
+        "FunctionName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the function.</p>"
+        },
+        "ClassName":{
+          "shape":"NameString",
+          "documentation":"<p>The Java class that contains the function code.</p>"
+        },
+        "OwnerName":{
+          "shape":"NameString",
+          "documentation":"<p>The owner of the function.</p>"
+        },
+        "OwnerType":{
+          "shape":"PrincipalType",
+          "documentation":"<p>The owner type.</p>"
+        },
+        "ResourceUris":{
+          "shape":"ResourceUriList",
+          "documentation":"<p>The resource URIs for the function.</p>"
+        }
+      },
+      "documentation":"<p>A structure used to create or updata a user-defined function.</p>"
+    },
+    "UserDefinedFunctionList":{
+      "type":"list",
+      "member":{"shape":"UserDefinedFunction"}
+    },
+    "ValidationException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>A value could not be validated.</p>",
+      "exception":true
+    },
+    "ValueString":{
+      "type":"string",
+      "max":1024
+    },
+    "ValueStringList":{
+      "type":"list",
+      "member":{"shape":"ValueString"}
+    },
+    "VersionId":{"type":"long"},
+    "VersionMismatchException":{
+      "type":"structure",
+      "members":{
+        "Message":{
+          "shape":"MessageString",
+          "documentation":"<p>A message describing the problem.</p>"
+        }
+      },
+      "documentation":"<p>There was a version conflict.</p>",
+      "exception":true
+    },
+    "VersionString":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "ViewTextString":{
+      "type":"string",
+      "max":2048
+    }
+  },
+  "documentation":"Defines service operations used by the GlueFrontendService"
+}
