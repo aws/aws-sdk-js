@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.98.0-->
+<!--LATEST=2.99.0-->
 <!--ENTRYINSERT-->
+
+## 2.99.0
+* feature: EC2: Fixed bug in EC2 clients preventing HostReservation from being set
 
 ## 2.98.0
 * feature: Batch: This release enhances the DescribeJobs API to include the CloudWatch logStreamName attribute in ContainerDetail and ContainerDetailAttempt
