@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.99.0-->
+<!--LATEST=2.100.0-->
 <!--ENTRYINSERT-->
+
+## 2.100.0
+* feature: GameLift: The Matchmaking Grouping Service is a new feature that groups player match requests for a given game together into game sessions based on developer configured rules.
 
 ## 2.99.0
 * feature: EC2: Fixed bug in EC2 clients preventing HostReservation from being set

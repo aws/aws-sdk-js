@@ -12,6 +12,14 @@ declare class GameLift extends Service {
   constructor(options?: GameLift.Types.ClientConfiguration)
   config: Config & GameLift.Types.ClientConfiguration;
   /**
+   * Registers a player's acceptance or rejection of a proposed FlexMatch match. A matchmaking configuration may require player acceptance; if so, then matches built with that configuration cannot be completed unless all players accept the proposed match within a specified time limit.  When FlexMatch builds a match, all the matchmaking tickets involved in the proposed match are placed into status REQUIRES_ACCEPTANCE. This is a trigger for your game to get acceptance from all players in the ticket. Acceptances are only valid for tickets when they are in this status; all other acceptances result in an error. To register acceptance, specify the ticket ID, a response, and one or more players. Once all players have registered acceptance, the matchmaking tickets advance to status PLACING, where a new game session is created for the match.  If any player rejects the match, or if acceptances are not received before a specified timeout, the proposed match is dropped. The matchmaking tickets are then handled in one of two ways: For tickets where all players accepted the match, the ticket status is returned to SEARCHING to find a new match. For tickets where one or more players failed to accept the match, the ticket status is set to FAILED, and processing is terminated. A new matchmaking request for these players can be submitted as needed.  Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  acceptMatch(params: GameLift.Types.AcceptMatchInput, callback?: (err: AWSError, data: GameLift.Types.AcceptMatchOutput) => void): Request<GameLift.Types.AcceptMatchOutput, AWSError>;
+  /**
+   * Registers a player's acceptance or rejection of a proposed FlexMatch match. A matchmaking configuration may require player acceptance; if so, then matches built with that configuration cannot be completed unless all players accept the proposed match within a specified time limit.  When FlexMatch builds a match, all the matchmaking tickets involved in the proposed match are placed into status REQUIRES_ACCEPTANCE. This is a trigger for your game to get acceptance from all players in the ticket. Acceptances are only valid for tickets when they are in this status; all other acceptances result in an error. To register acceptance, specify the ticket ID, a response, and one or more players. Once all players have registered acceptance, the matchmaking tickets advance to status PLACING, where a new game session is created for the match.  If any player rejects the match, or if acceptances are not received before a specified timeout, the proposed match is dropped. The matchmaking tickets are then handled in one of two ways: For tickets where all players accepted the match, the ticket status is returned to SEARCHING to find a new match. For tickets where one or more players failed to accept the match, the ticket status is set to FAILED, and processing is terminated. A new matchmaking request for these players can be submitted as needed.  Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  acceptMatch(callback?: (err: AWSError, data: GameLift.Types.AcceptMatchOutput) => void): Request<GameLift.Types.AcceptMatchOutput, AWSError>;
+  /**
    * Creates an alias for a fleet. In most situations, you can use an alias ID in place of a fleet ID. By using a fleet alias instead of a specific fleet ID, you can switch gameplay and players to a new fleet without changing your game client or other game components. For example, for games in production, using an alias allows you to seamlessly redirect your player base to a new game server update.  Amazon GameLift supports two types of routing strategies for aliases: simple and terminal. A simple alias points to an active fleet. A terminal alias is used to display messaging or link to a URL instead of routing players to an active fleet. For example, you might use a terminal alias when a game version is no longer supported and you want to direct players to an upgrade site.  To create a fleet alias, specify an alias name, routing strategy, and optional description. Each simple alias can point to only one fleet, but a fleet can have multiple aliases. If successful, a new alias record is returned, including an alias ID, which you can reference when creating a game session. You can reassign an alias to another fleet by calling UpdateAlias. Alias-related operations include:    CreateAlias     ListAliases     DescribeAlias     UpdateAlias     DeleteAlias     ResolveAlias   
    */
   createAlias(params: GameLift.Types.CreateAliasInput, callback?: (err: AWSError, data: GameLift.Types.CreateAliasOutput) => void): Request<GameLift.Types.CreateAliasOutput, AWSError>;
@@ -28,19 +36,19 @@ declare class GameLift extends Service {
    */
   createBuild(callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
-   * Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see Amazon EC2 Instance Types for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the ACTIVE status, it can begin hosting game sessions. To create a new fleet, you must specify the following: (1) fleet name, (2) build ID of an uploaded game build, (3) an EC2 instance type, and (4) a run-time configuration that describes which server processes to run on each instance in the fleet. (Although the run-time configuration is not a required parameter, the fleet cannot be successfully activated without it.) You can also configure the new fleet with the following settings:   Fleet description   Access permissions for inbound traffic   Fleetwide game session protection   Resource creation limit   If you use Amazon CloudWatch for metrics, you can add the new fleet to a metric group. This allows you to view aggregated metrics for a set of fleets. Once you specify a metric group, the new fleet's metrics are included in the metric group's data. If the CreateFleet call is successful, Amazon GameLift performs the following tasks:   Creates a fleet record and sets the status to NEW (followed by other statuses as the fleet is activated).   Sets the fleet's target capacity to 1 (desired instances), which causes Amazon GameLift to start one new EC2 instance.   Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, Amazon GameLift staggers each launch by a few seconds.   Begins writing events to the fleet event log, which can be accessed in the Amazon GameLift console.   Sets the fleet's status to ACTIVE as soon as one server process in the fleet is ready to host a game session.   Fleet-related operations include:    CreateFleet     ListFleets    Describe fleets:    DescribeFleetAttributes     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeFleetEvents      Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration      Manage fleet capacity:    DescribeFleetCapacity     UpdateFleetCapacity     PutScalingPolicy (automatic scaling)    DescribeScalingPolicies (automatic scaling)    DeleteScalingPolicy (automatic scaling)    DescribeEC2InstanceLimits       DeleteFleet   
+   * Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see Amazon EC2 Instance Types for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the ACTIVE status, it can begin hosting game sessions. To create a new fleet, you must specify the following: (1) fleet name, (2) build ID of an uploaded game build, (3) an EC2 instance type, and (4) a run-time configuration that describes which server processes to run on each instance in the fleet. (Although the run-time configuration is not a required parameter, the fleet cannot be successfully activated without it.) You can also configure the new fleet with the following settings:   Fleet description   Access permissions for inbound traffic   Fleet-wide game session protection   Resource creation limit   If you use Amazon CloudWatch for metrics, you can add the new fleet to a metric group. This allows you to view aggregated metrics for a set of fleets. Once you specify a metric group, the new fleet's metrics are included in the metric group's data. If the CreateFleet call is successful, Amazon GameLift performs the following tasks:   Creates a fleet record and sets the status to NEW (followed by other statuses as the fleet is activated).   Sets the fleet's target capacity to 1 (desired instances), which causes Amazon GameLift to start one new EC2 instance.   Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, Amazon GameLift staggers each launch by a few seconds.   Begins writing events to the fleet event log, which can be accessed in the Amazon GameLift console.   Sets the fleet's status to ACTIVE as soon as one server process in the fleet is ready to host a game session.   Fleet-related operations include:    CreateFleet     ListFleets    Describe fleets:    DescribeFleetAttributes     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeFleetEvents      Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration      Manage fleet capacity:    DescribeFleetCapacity     UpdateFleetCapacity     PutScalingPolicy (automatic scaling)    DescribeScalingPolicies (automatic scaling)    DeleteScalingPolicy (automatic scaling)    DescribeEC2InstanceLimits       DeleteFleet   
    */
   createFleet(params: GameLift.Types.CreateFleetInput, callback?: (err: AWSError, data: GameLift.Types.CreateFleetOutput) => void): Request<GameLift.Types.CreateFleetOutput, AWSError>;
   /**
-   * Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see Amazon EC2 Instance Types for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the ACTIVE status, it can begin hosting game sessions. To create a new fleet, you must specify the following: (1) fleet name, (2) build ID of an uploaded game build, (3) an EC2 instance type, and (4) a run-time configuration that describes which server processes to run on each instance in the fleet. (Although the run-time configuration is not a required parameter, the fleet cannot be successfully activated without it.) You can also configure the new fleet with the following settings:   Fleet description   Access permissions for inbound traffic   Fleetwide game session protection   Resource creation limit   If you use Amazon CloudWatch for metrics, you can add the new fleet to a metric group. This allows you to view aggregated metrics for a set of fleets. Once you specify a metric group, the new fleet's metrics are included in the metric group's data. If the CreateFleet call is successful, Amazon GameLift performs the following tasks:   Creates a fleet record and sets the status to NEW (followed by other statuses as the fleet is activated).   Sets the fleet's target capacity to 1 (desired instances), which causes Amazon GameLift to start one new EC2 instance.   Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, Amazon GameLift staggers each launch by a few seconds.   Begins writing events to the fleet event log, which can be accessed in the Amazon GameLift console.   Sets the fleet's status to ACTIVE as soon as one server process in the fleet is ready to host a game session.   Fleet-related operations include:    CreateFleet     ListFleets    Describe fleets:    DescribeFleetAttributes     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeFleetEvents      Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration      Manage fleet capacity:    DescribeFleetCapacity     UpdateFleetCapacity     PutScalingPolicy (automatic scaling)    DescribeScalingPolicies (automatic scaling)    DeleteScalingPolicy (automatic scaling)    DescribeEC2InstanceLimits       DeleteFleet   
+   * Creates a new fleet to run your game servers. A fleet is a set of Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can run multiple server processes to host game sessions. You configure a fleet to create instances with certain hardware specifications (see Amazon EC2 Instance Types for more information), and deploy a specified game build to each instance. A newly created fleet passes through several statuses; once it reaches the ACTIVE status, it can begin hosting game sessions. To create a new fleet, you must specify the following: (1) fleet name, (2) build ID of an uploaded game build, (3) an EC2 instance type, and (4) a run-time configuration that describes which server processes to run on each instance in the fleet. (Although the run-time configuration is not a required parameter, the fleet cannot be successfully activated without it.) You can also configure the new fleet with the following settings:   Fleet description   Access permissions for inbound traffic   Fleet-wide game session protection   Resource creation limit   If you use Amazon CloudWatch for metrics, you can add the new fleet to a metric group. This allows you to view aggregated metrics for a set of fleets. Once you specify a metric group, the new fleet's metrics are included in the metric group's data. If the CreateFleet call is successful, Amazon GameLift performs the following tasks:   Creates a fleet record and sets the status to NEW (followed by other statuses as the fleet is activated).   Sets the fleet's target capacity to 1 (desired instances), which causes Amazon GameLift to start one new EC2 instance.   Starts launching server processes on the instance. If the fleet is configured to run multiple server processes per instance, Amazon GameLift staggers each launch by a few seconds.   Begins writing events to the fleet event log, which can be accessed in the Amazon GameLift console.   Sets the fleet's status to ACTIVE as soon as one server process in the fleet is ready to host a game session.   Fleet-related operations include:    CreateFleet     ListFleets    Describe fleets:    DescribeFleetAttributes     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeFleetEvents      Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration      Manage fleet capacity:    DescribeFleetCapacity     UpdateFleetCapacity     PutScalingPolicy (automatic scaling)    DescribeScalingPolicies (automatic scaling)    DeleteScalingPolicy (automatic scaling)    DescribeEC2InstanceLimits       DeleteFleet   
    */
   createFleet(callback?: (err: AWSError, data: GameLift.Types.CreateFleetOutput) => void): Request<GameLift.Types.CreateFleetOutput, AWSError>;
   /**
-   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing game session properties, including a game session ID with the custom string you provided.  Idempotency tokens. You can add a token that uniquely identifies game session requests. This is useful for ensuring that game session requests are idempotent. Multiple requests with the same idempotency token are processed only once; subsequent requests return the original result. All response values are the same with the exception of game session status, which may change.  Resource creation limits. If you are creating a game session on a fleet with a resource creation limit policy in force, then you must specify a creator ID. Without this ID, Amazon GameLift has no way to evaluate the policy for this new game session request.  By default, newly created game sessions allow new players to join. Use UpdateGameSession to change the game session's player session creation policy.  Available in Amazon GameLift Local.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing the game session properties and other settings you specified.  Idempotency tokens. You can add a token that uniquely identifies game session requests. This is useful for ensuring that game session requests are idempotent. Multiple requests with the same idempotency token are processed only once; subsequent requests return the original result. All response values are the same with the exception of game session status, which may change.  Resource creation limits. If you are creating a game session on a fleet with a resource creation limit policy in force, then you must specify a creator ID. Without this ID, Amazon GameLift has no way to evaluate the policy for this new game session request.  Player acceptance policy. By default, newly created game sessions are open to new players. You can restrict new player access by using UpdateGameSession to change the game session's player session creation policy.  Game session logs. Logs are retained for all active game sessions for 14 days. To access the logs, call GetGameSessionLogUrl to download the log files.  Available in Amazon GameLift Local.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   createGameSession(params: GameLift.Types.CreateGameSessionInput, callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionOutput) => void): Request<GameLift.Types.CreateGameSessionOutput, AWSError>;
   /**
-   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing game session properties, including a game session ID with the custom string you provided.  Idempotency tokens. You can add a token that uniquely identifies game session requests. This is useful for ensuring that game session requests are idempotent. Multiple requests with the same idempotency token are processed only once; subsequent requests return the original result. All response values are the same with the exception of game session status, which may change.  Resource creation limits. If you are creating a game session on a fleet with a resource creation limit policy in force, then you must specify a creator ID. Without this ID, Amazon GameLift has no way to evaluate the policy for this new game session request.  By default, newly created game sessions allow new players to join. Use UpdateGameSession to change the game session's player session creation policy.  Available in Amazon GameLift Local.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing the game session properties and other settings you specified.  Idempotency tokens. You can add a token that uniquely identifies game session requests. This is useful for ensuring that game session requests are idempotent. Multiple requests with the same idempotency token are processed only once; subsequent requests return the original result. All response values are the same with the exception of game session status, which may change.  Resource creation limits. If you are creating a game session on a fleet with a resource creation limit policy in force, then you must specify a creator ID. Without this ID, Amazon GameLift has no way to evaluate the policy for this new game session request.  Player acceptance policy. By default, newly created game sessions are open to new players. You can restrict new player access by using UpdateGameSession to change the game session's player session creation policy.  Game session logs. Logs are retained for all active game sessions for 14 days. To access the logs, call GetGameSessionLogUrl to download the log files.  Available in Amazon GameLift Local.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   createGameSession(callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionOutput) => void): Request<GameLift.Types.CreateGameSessionOutput, AWSError>;
   /**
@@ -51,6 +59,22 @@ declare class GameLift extends Service {
    * Establishes a new queue for processing requests to place new game sessions. A queue identifies where new game sessions can be hosted -- by specifying a list of destinations (fleets or aliases) -- and how long requests can wait in the queue before timing out. You can set up a queue to try to place game sessions on fleets in multiple regions. To add placement requests to a queue, call StartGameSessionPlacement and reference the queue name.  Destination order. When processing a request for a game session, Amazon GameLift tries each destination in order until it finds one with available resources to host the new game session. A queue's default order is determined by how destinations are listed. The default order is overridden when a game session placement request provides player latency information. Player latency information enables Amazon GameLift to prioritize destinations where players report the lowest average latency, as a result placing the new game session where the majority of players will have the best possible gameplay experience.  Player latency policies. For placement requests containing player latency information, use player latency policies to protect individual players from very high latencies. With a latency cap, even when a destination can deliver a low latency for most players, the game is not placed where any individual player is reporting latency higher than a policy's maximum. A queue can have multiple latency policies, which are enforced consecutively starting with the policy with the lowest latency cap. Use multiple policies to gradually relax latency controls; for example, you might set a policy with a low latency cap for the first 60 seconds, a second policy with a higher cap for the next 60 seconds, etc.  To create a new queue, provide a name, timeout value, a list of destinations and, if desired, a set of latency policies. If successful, a new queue object is returned. Queue-related operations include:    CreateGameSessionQueue     DescribeGameSessionQueues     UpdateGameSessionQueue     DeleteGameSessionQueue   
    */
   createGameSessionQueue(callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionQueueOutput) => void): Request<GameLift.Types.CreateGameSessionQueueOutput, AWSError>;
+  /**
+   * Defines a new matchmaking configuration for use with FlexMatch. A matchmaking configuration sets out guidelines for matching players and getting the matches into games. You can set up multiple matchmaking configurations to handle the scenarios needed for your game. Each matchmaking request (StartMatchmaking) specifies a configuration for the match and provides player attributes to support the configuration being used.  To create a matchmaking configuration, at a minimum you must specify the following: configuration name; a rule set that governs how to evaluate players and find acceptable matches; a game session queue to use when placing a new game session for the match; and the maximum time allowed for a matchmaking attempt.  Player acceptance -- In each configuration, you have the option to require that all players accept participation in a proposed match. To enable this feature, set AcceptanceRequired to true and specify a time limit for player acceptance. Players have the option to accept or reject a proposed match, and a match does not move ahead to game session placement unless all matched players accept.   Matchmaking status notification -- There are two ways to track the progress of matchmaking tickets: (1) polling ticket status with DescribeMatchmaking; or (2) receiving notifications with Amazon Simple Notification Service (SNS). To use notifications, you first need to set up an SNS topic to receive the notifications, and provide the topic ARN in the matchmaking configuration (see  Setting up Notifications for Matchmaking). Since notifications promise only "best effort" delivery, we recommend calling DescribeMatchmaking if no notifications are received within 30 seconds. Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  createMatchmakingConfiguration(params: GameLift.Types.CreateMatchmakingConfigurationInput, callback?: (err: AWSError, data: GameLift.Types.CreateMatchmakingConfigurationOutput) => void): Request<GameLift.Types.CreateMatchmakingConfigurationOutput, AWSError>;
+  /**
+   * Defines a new matchmaking configuration for use with FlexMatch. A matchmaking configuration sets out guidelines for matching players and getting the matches into games. You can set up multiple matchmaking configurations to handle the scenarios needed for your game. Each matchmaking request (StartMatchmaking) specifies a configuration for the match and provides player attributes to support the configuration being used.  To create a matchmaking configuration, at a minimum you must specify the following: configuration name; a rule set that governs how to evaluate players and find acceptable matches; a game session queue to use when placing a new game session for the match; and the maximum time allowed for a matchmaking attempt.  Player acceptance -- In each configuration, you have the option to require that all players accept participation in a proposed match. To enable this feature, set AcceptanceRequired to true and specify a time limit for player acceptance. Players have the option to accept or reject a proposed match, and a match does not move ahead to game session placement unless all matched players accept.   Matchmaking status notification -- There are two ways to track the progress of matchmaking tickets: (1) polling ticket status with DescribeMatchmaking; or (2) receiving notifications with Amazon Simple Notification Service (SNS). To use notifications, you first need to set up an SNS topic to receive the notifications, and provide the topic ARN in the matchmaking configuration (see  Setting up Notifications for Matchmaking). Since notifications promise only "best effort" delivery, we recommend calling DescribeMatchmaking if no notifications are received within 30 seconds. Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  createMatchmakingConfiguration(callback?: (err: AWSError, data: GameLift.Types.CreateMatchmakingConfigurationOutput) => void): Request<GameLift.Types.CreateMatchmakingConfigurationOutput, AWSError>;
+  /**
+   * Creates a new rule set for FlexMatch matchmaking. A rule set describes the type of match to create, such as the number and size of teams, and sets the parameters for acceptable player matches, such as minimum skill level or character type. Rule sets are used in matchmaking configurations, which define how matchmaking requests are handled. Each MatchmakingConfiguration uses one rule set; you can set up multiple rule sets to handle the scenarios that suit your game (such as for different game modes), and create a separate matchmaking configuration for each rule set. See additional information on rule set content in the MatchmakingRuleSet structure. For help creating rule sets, including useful examples, see the topic  Adding FlexMatch to Your Game. Once created, matchmaking rule sets cannot be changed or deleted, so we recommend checking the rule set syntax using ValidateMatchmakingRuleSetbefore creating the rule set. To create a matchmaking rule set, provide the set of rules and a unique name. Rule sets must be defined in the same region as the matchmaking configuration they will be used with. Rule sets cannot be edited or deleted. If you need to change a rule set, create a new one with the necessary edits and then update matchmaking configurations to use the new rule set. Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  createMatchmakingRuleSet(params: GameLift.Types.CreateMatchmakingRuleSetInput, callback?: (err: AWSError, data: GameLift.Types.CreateMatchmakingRuleSetOutput) => void): Request<GameLift.Types.CreateMatchmakingRuleSetOutput, AWSError>;
+  /**
+   * Creates a new rule set for FlexMatch matchmaking. A rule set describes the type of match to create, such as the number and size of teams, and sets the parameters for acceptable player matches, such as minimum skill level or character type. Rule sets are used in matchmaking configurations, which define how matchmaking requests are handled. Each MatchmakingConfiguration uses one rule set; you can set up multiple rule sets to handle the scenarios that suit your game (such as for different game modes), and create a separate matchmaking configuration for each rule set. See additional information on rule set content in the MatchmakingRuleSet structure. For help creating rule sets, including useful examples, see the topic  Adding FlexMatch to Your Game. Once created, matchmaking rule sets cannot be changed or deleted, so we recommend checking the rule set syntax using ValidateMatchmakingRuleSetbefore creating the rule set. To create a matchmaking rule set, provide the set of rules and a unique name. Rule sets must be defined in the same region as the matchmaking configuration they will be used with. Rule sets cannot be edited or deleted. If you need to change a rule set, create a new one with the necessary edits and then update matchmaking configurations to use the new rule set. Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  createMatchmakingRuleSet(callback?: (err: AWSError, data: GameLift.Types.CreateMatchmakingRuleSetOutput) => void): Request<GameLift.Types.CreateMatchmakingRuleSetOutput, AWSError>;
   /**
    * Adds a player to a game session and creates a player session record. Before a player can be added, a game session must have an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot. To add a group of players to a game session, use CreatePlayerSessions. To create a player session, specify a game session ID, player ID, and optionally a string of player data. If successful, the player is added to the game session and a new PlayerSession object is returned. Player sessions cannot be updated.   Available in Amazon GameLift Local.  Player-session-related operations include:    CreatePlayerSession     CreatePlayerSessions     DescribePlayerSessions    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
@@ -99,6 +123,14 @@ declare class GameLift extends Service {
    * Deletes a game session queue. This action means that any StartGameSessionPlacement requests that reference this queue will fail. To delete a queue, specify the queue name. Queue-related operations include:    CreateGameSessionQueue     DescribeGameSessionQueues     UpdateGameSessionQueue     DeleteGameSessionQueue   
    */
   deleteGameSessionQueue(callback?: (err: AWSError, data: GameLift.Types.DeleteGameSessionQueueOutput) => void): Request<GameLift.Types.DeleteGameSessionQueueOutput, AWSError>;
+  /**
+   * Permanently removes a FlexMatch matchmaking configuration. To delete, specify the configuration name. A matchmaking configuration cannot be deleted if it is being used in any active matchmaking tickets. Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  deleteMatchmakingConfiguration(params: GameLift.Types.DeleteMatchmakingConfigurationInput, callback?: (err: AWSError, data: GameLift.Types.DeleteMatchmakingConfigurationOutput) => void): Request<GameLift.Types.DeleteMatchmakingConfigurationOutput, AWSError>;
+  /**
+   * Permanently removes a FlexMatch matchmaking configuration. To delete, specify the configuration name. A matchmaking configuration cannot be deleted if it is being used in any active matchmaking tickets. Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  deleteMatchmakingConfiguration(callback?: (err: AWSError, data: GameLift.Types.DeleteMatchmakingConfigurationOutput) => void): Request<GameLift.Types.DeleteMatchmakingConfigurationOutput, AWSError>;
   /**
    * Deletes a fleet scaling policy. This action means that the policy is no longer in force and removes all record of it. To delete a scaling policy, specify both the scaling policy name and the fleet ID it is associated with. Fleet-related operations include:    CreateFleet     ListFleets    Describe fleets:    DescribeFleetAttributes     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeFleetEvents      Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration      Manage fleet capacity:    DescribeFleetCapacity     UpdateFleetCapacity     PutScalingPolicy (automatic scaling)    DescribeScalingPolicies (automatic scaling)    DeleteScalingPolicy (automatic scaling)    DescribeEC2InstanceLimits       DeleteFleet   
    */
@@ -212,6 +244,30 @@ declare class GameLift extends Service {
    */
   describeInstances(callback?: (err: AWSError, data: GameLift.Types.DescribeInstancesOutput) => void): Request<GameLift.Types.DescribeInstancesOutput, AWSError>;
   /**
+   * Retrieves a set of one or more matchmaking tickets. Use this operation to retrieve ticket information, including status and--once a successful match is made--acquire connection information for the resulting new game session.  You can use this operation to track the progress of matchmaking requests (through polling) as an alternative to using event notifications. See more details on tracking matchmaking requests through polling or notifications in StartMatchmaking.  You can request data for a one or a list of ticket IDs. If the request is successful, a ticket object is returned for each requested ID. When specifying a list of ticket IDs, objects are returned only for tickets that currently exist.  Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  describeMatchmaking(params: GameLift.Types.DescribeMatchmakingInput, callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingOutput) => void): Request<GameLift.Types.DescribeMatchmakingOutput, AWSError>;
+  /**
+   * Retrieves a set of one or more matchmaking tickets. Use this operation to retrieve ticket information, including status and--once a successful match is made--acquire connection information for the resulting new game session.  You can use this operation to track the progress of matchmaking requests (through polling) as an alternative to using event notifications. See more details on tracking matchmaking requests through polling or notifications in StartMatchmaking.  You can request data for a one or a list of ticket IDs. If the request is successful, a ticket object is returned for each requested ID. When specifying a list of ticket IDs, objects are returned only for tickets that currently exist.  Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  describeMatchmaking(callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingOutput) => void): Request<GameLift.Types.DescribeMatchmakingOutput, AWSError>;
+  /**
+   * Retrieves the details of FlexMatch matchmaking configurations. with this operation, you have the following options: (1) retrieve all existing configurations, (2) provide the names of one or more configurations to retrieve, or (3) retrieve all configurations that use a specified rule set name. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a configuration is returned for each requested name. When specifying a list of names, only configurations that currently exist are returned.  Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  describeMatchmakingConfigurations(params: GameLift.Types.DescribeMatchmakingConfigurationsInput, callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingConfigurationsOutput) => void): Request<GameLift.Types.DescribeMatchmakingConfigurationsOutput, AWSError>;
+  /**
+   * Retrieves the details of FlexMatch matchmaking configurations. with this operation, you have the following options: (1) retrieve all existing configurations, (2) provide the names of one or more configurations to retrieve, or (3) retrieve all configurations that use a specified rule set name. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a configuration is returned for each requested name. When specifying a list of names, only configurations that currently exist are returned.  Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  describeMatchmakingConfigurations(callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingConfigurationsOutput) => void): Request<GameLift.Types.DescribeMatchmakingConfigurationsOutput, AWSError>;
+  /**
+   * Retrieves the details for FlexMatch matchmaking rule sets. You can request all existing rule sets for the region, or provide a list of one or more rule set names. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a rule set is returned for each requested name.  Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  describeMatchmakingRuleSets(params: GameLift.Types.DescribeMatchmakingRuleSetsInput, callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingRuleSetsOutput) => void): Request<GameLift.Types.DescribeMatchmakingRuleSetsOutput, AWSError>;
+  /**
+   * Retrieves the details for FlexMatch matchmaking rule sets. You can request all existing rule sets for the region, or provide a list of one or more rule set names. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a rule set is returned for each requested name.  Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  describeMatchmakingRuleSets(callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingRuleSetsOutput) => void): Request<GameLift.Types.DescribeMatchmakingRuleSetsOutput, AWSError>;
+  /**
    * Retrieves properties for one or more player sessions. This action can be used in several ways: (1) provide a PlayerSessionId to request properties for a specific player session; (2) provide a GameSessionId to request properties for all player sessions in the specified game session; (3) provide a PlayerId to request properties for all player sessions of a specified player.  To get game session record(s), specify only one of the following: a player session ID, a game session ID, or a player ID. You can filter this request by player session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a PlayerSession object is returned for each session matching the request.  Available in Amazon GameLift Local.  Player-session-related operations include:    CreatePlayerSession     CreatePlayerSessions     DescribePlayerSessions    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   describePlayerSessions(params: GameLift.Types.DescribePlayerSessionsInput, callback?: (err: AWSError, data: GameLift.Types.DescribePlayerSessionsOutput) => void): Request<GameLift.Types.DescribePlayerSessionsOutput, AWSError>;
@@ -236,11 +292,11 @@ declare class GameLift extends Service {
    */
   describeScalingPolicies(callback?: (err: AWSError, data: GameLift.Types.DescribeScalingPoliciesOutput) => void): Request<GameLift.Types.DescribeScalingPoliciesOutput, AWSError>;
   /**
-   * Retrieves the location of stored game session logs for a specified game session. When a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3. Use this URL to download the logs.  See the AWS Service Limits page for maximum log file sizes. Log files that exceed this limit are not saved.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Retrieves the location of stored game session logs for a specified game session. When a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3 and retains them for 14 days. Use this URL to download the logs.  See the AWS Service Limits page for maximum log file sizes. Log files that exceed this limit are not saved.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   getGameSessionLogUrl(params: GameLift.Types.GetGameSessionLogUrlInput, callback?: (err: AWSError, data: GameLift.Types.GetGameSessionLogUrlOutput) => void): Request<GameLift.Types.GetGameSessionLogUrlOutput, AWSError>;
   /**
-   * Retrieves the location of stored game session logs for a specified game session. When a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3. Use this URL to download the logs.  See the AWS Service Limits page for maximum log file sizes. Log files that exceed this limit are not saved.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Retrieves the location of stored game session logs for a specified game session. When a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3 and retains them for 14 days. Use this URL to download the logs.  See the AWS Service Limits page for maximum log file sizes. Log files that exceed this limit are not saved.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   getGameSessionLogUrl(callback?: (err: AWSError, data: GameLift.Types.GetGameSessionLogUrlOutput) => void): Request<GameLift.Types.GetGameSessionLogUrlOutput, AWSError>;
   /**
@@ -308,21 +364,37 @@ declare class GameLift extends Service {
    */
   searchGameSessions(callback?: (err: AWSError, data: GameLift.Types.SearchGameSessionsOutput) => void): Request<GameLift.Types.SearchGameSessionsOutput, AWSError>;
   /**
-   * Places a request for a new game session in a queue (see CreateGameSessionQueue). When processing a placement request, Amazon GameLift searches for available resources on the queue's destinations, scanning each until it finds resources or the placement request times out. A game session placement request can also request player sessions. When a new game session is successfully created, Amazon GameLift creates a player session for each player included in the request. When placing a game session, by default Amazon GameLift tries each fleet in the order they are listed in the queue configuration. Ideally, a queue's destinations are listed in preference order. Alternatively, when requesting a game session with players, you can also provide latency data for each player in relevant regions. Latency data indicates the performance lag a player experiences when connected to a fleet in the region. Amazon GameLift uses latency data to reorder the list of destinations to place the game session in a region with minimal lag. If latency data is provided for multiple players, Amazon GameLift calculates each region's average lag for all players and reorders to get the best game play across all players.  To place a new game session request, specify the following:   The queue name and a set of game session properties and settings   A unique ID (such as a UUID) for the placement. You use this ID to track the status of the placement request   (Optional) A set of IDs and player data for each player you want to join to the new game session   Latency data for all players (if you want to optimize game play for the players)   If successful, a new game session placement is created. To track the status of a placement request, call DescribeGameSessionPlacement and check the request's status. If the status is Fulfilled, a new game session has been created and a game session ARN and region are referenced. If the placement request times out, you can resubmit the request or retry it with a different queue.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Places a request for a new game session in a queue (see CreateGameSessionQueue). When processing a placement request, Amazon GameLift searches for available resources on the queue's destinations, scanning each until it finds resources or the placement request times out. A game session placement request can also request player sessions. When a new game session is successfully created, Amazon GameLift creates a player session for each player included in the request. When placing a game session, by default Amazon GameLift tries each fleet in the order they are listed in the queue configuration. Ideally, a queue's destinations are listed in preference order. Alternatively, when requesting a game session with players, you can also provide latency data for each player in relevant regions. Latency data indicates the performance lag a player experiences when connected to a fleet in the region. Amazon GameLift uses latency data to reorder the list of destinations to place the game session in a region with minimal lag. If latency data is provided for multiple players, Amazon GameLift calculates each region's average lag for all players and reorders to get the best game play across all players.  To place a new game session request, specify the following:   The queue name and a set of game session properties and settings   A unique ID (such as a UUID) for the placement. You use this ID to track the status of the placement request   (Optional) A set of IDs and player data for each player you want to join to the new game session   Latency data for all players (if you want to optimize game play for the players)   If successful, a new game session placement is created. To track the status of a placement request, call DescribeGameSessionPlacement and check the request's status. If the status is FULFILLED, a new game session has been created and a game session ARN and region are referenced. If the placement request times out, you can resubmit the request or retry it with a different queue.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   startGameSessionPlacement(params: GameLift.Types.StartGameSessionPlacementInput, callback?: (err: AWSError, data: GameLift.Types.StartGameSessionPlacementOutput) => void): Request<GameLift.Types.StartGameSessionPlacementOutput, AWSError>;
   /**
-   * Places a request for a new game session in a queue (see CreateGameSessionQueue). When processing a placement request, Amazon GameLift searches for available resources on the queue's destinations, scanning each until it finds resources or the placement request times out. A game session placement request can also request player sessions. When a new game session is successfully created, Amazon GameLift creates a player session for each player included in the request. When placing a game session, by default Amazon GameLift tries each fleet in the order they are listed in the queue configuration. Ideally, a queue's destinations are listed in preference order. Alternatively, when requesting a game session with players, you can also provide latency data for each player in relevant regions. Latency data indicates the performance lag a player experiences when connected to a fleet in the region. Amazon GameLift uses latency data to reorder the list of destinations to place the game session in a region with minimal lag. If latency data is provided for multiple players, Amazon GameLift calculates each region's average lag for all players and reorders to get the best game play across all players.  To place a new game session request, specify the following:   The queue name and a set of game session properties and settings   A unique ID (such as a UUID) for the placement. You use this ID to track the status of the placement request   (Optional) A set of IDs and player data for each player you want to join to the new game session   Latency data for all players (if you want to optimize game play for the players)   If successful, a new game session placement is created. To track the status of a placement request, call DescribeGameSessionPlacement and check the request's status. If the status is Fulfilled, a new game session has been created and a game session ARN and region are referenced. If the placement request times out, you can resubmit the request or retry it with a different queue.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Places a request for a new game session in a queue (see CreateGameSessionQueue). When processing a placement request, Amazon GameLift searches for available resources on the queue's destinations, scanning each until it finds resources or the placement request times out. A game session placement request can also request player sessions. When a new game session is successfully created, Amazon GameLift creates a player session for each player included in the request. When placing a game session, by default Amazon GameLift tries each fleet in the order they are listed in the queue configuration. Ideally, a queue's destinations are listed in preference order. Alternatively, when requesting a game session with players, you can also provide latency data for each player in relevant regions. Latency data indicates the performance lag a player experiences when connected to a fleet in the region. Amazon GameLift uses latency data to reorder the list of destinations to place the game session in a region with minimal lag. If latency data is provided for multiple players, Amazon GameLift calculates each region's average lag for all players and reorders to get the best game play across all players.  To place a new game session request, specify the following:   The queue name and a set of game session properties and settings   A unique ID (such as a UUID) for the placement. You use this ID to track the status of the placement request   (Optional) A set of IDs and player data for each player you want to join to the new game session   Latency data for all players (if you want to optimize game play for the players)   If successful, a new game session placement is created. To track the status of a placement request, call DescribeGameSessionPlacement and check the request's status. If the status is FULFILLED, a new game session has been created and a game session ARN and region are referenced. If the placement request times out, you can resubmit the request or retry it with a different queue.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   startGameSessionPlacement(callback?: (err: AWSError, data: GameLift.Types.StartGameSessionPlacementOutput) => void): Request<GameLift.Types.StartGameSessionPlacementOutput, AWSError>;
   /**
-   * Cancels a game session placement that is in Pending status. To stop a placement, provide the placement ID values. If successful, the placement is moved to Cancelled status. Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Uses FlexMatch to create a game match for a group of players based on custom matchmaking rules, and starts a new game for the matched players. Each matchmaking request specifies the type of match to build (team configuration, rules for an acceptable match, etc.). The request also specifies the players to find a match for and where to host the new game session for optimal performance. A matchmaking request might start with a single player or a group of players who want to play together. FlexMatch finds additional players as needed to fill the match. Match type, rules, and the queue used to place a new game session are defined in a MatchmakingConfiguration. For complete information on setting up and using FlexMatch, see the topic  Adding FlexMatch to Your Game. To start matchmaking, provide a unique ticket ID, specify a matchmaking configuration, and include the players to be matched. You must also include a set of player attributes relevant for the matchmaking configuration. If successful, a matchmaking ticket is returned with status set to QUEUED. Track the status of the ticket to respond as needed and acquire game session connection information for sucessfully completed matches.  Tracking ticket status -- A couple of options are available for tracking the status of matchmaking requests:    Polling -- Call DescribeMatchmaking. This operation returns the full ticket object, including current status and (for completed tickets) game session connection info. We recommend polling no more than once every 10 seconds.   Notifications -- Get event notifications for changes in ticket status using Amazon Simple Notification Service (SNS). Notifications are easy to set up (see CreateMatchmakingConfiguration) and typically deliver match status changes faster and more efficiently than polling. We recommend that you use polling to back up to notifications (since delivery is not guaranteed) and call DescribeMatchmaking only when notifications are not received within 30 seconds.    Processing a matchmaking request -- FlexMatch handles a matchmaking request as follows:    Your client code submits a StartMatchmaking request for one or more players and tracks the status of the request ticket.    FlexMatch uses this ticket and others in process to build an acceptable match. When a potential match is identified, all tickets in the proposed match are advanced to the next status.    If the match requires player acceptance (set in the matchmaking configuration), the tickets move into status REQUIRES_ACCEPTANCE. This status triggers your client code to solicit acceptance from all players in every ticket involved in the match, and then call AcceptMatch for each player. If any player rejects or fails to accept the match before a specified timeout, the proposed match is dropped (see AcceptMatch for more details).   Once a match is proposed and accepted, the matchmaking tickets move into status PLACING. FlexMatch locates resources for a new game session using the game session queue (set in the matchmaking configuration) and creates the game session based on the match data.    When the match is successfully placed, the matchmaking tickets move into COMPLETED status. Connection information (including game session endpoint and player session) is added to the matchmaking tickets. Matched players can use the connection information to join the game.    Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  startMatchmaking(params: GameLift.Types.StartMatchmakingInput, callback?: (err: AWSError, data: GameLift.Types.StartMatchmakingOutput) => void): Request<GameLift.Types.StartMatchmakingOutput, AWSError>;
+  /**
+   * Uses FlexMatch to create a game match for a group of players based on custom matchmaking rules, and starts a new game for the matched players. Each matchmaking request specifies the type of match to build (team configuration, rules for an acceptable match, etc.). The request also specifies the players to find a match for and where to host the new game session for optimal performance. A matchmaking request might start with a single player or a group of players who want to play together. FlexMatch finds additional players as needed to fill the match. Match type, rules, and the queue used to place a new game session are defined in a MatchmakingConfiguration. For complete information on setting up and using FlexMatch, see the topic  Adding FlexMatch to Your Game. To start matchmaking, provide a unique ticket ID, specify a matchmaking configuration, and include the players to be matched. You must also include a set of player attributes relevant for the matchmaking configuration. If successful, a matchmaking ticket is returned with status set to QUEUED. Track the status of the ticket to respond as needed and acquire game session connection information for sucessfully completed matches.  Tracking ticket status -- A couple of options are available for tracking the status of matchmaking requests:    Polling -- Call DescribeMatchmaking. This operation returns the full ticket object, including current status and (for completed tickets) game session connection info. We recommend polling no more than once every 10 seconds.   Notifications -- Get event notifications for changes in ticket status using Amazon Simple Notification Service (SNS). Notifications are easy to set up (see CreateMatchmakingConfiguration) and typically deliver match status changes faster and more efficiently than polling. We recommend that you use polling to back up to notifications (since delivery is not guaranteed) and call DescribeMatchmaking only when notifications are not received within 30 seconds.    Processing a matchmaking request -- FlexMatch handles a matchmaking request as follows:    Your client code submits a StartMatchmaking request for one or more players and tracks the status of the request ticket.    FlexMatch uses this ticket and others in process to build an acceptable match. When a potential match is identified, all tickets in the proposed match are advanced to the next status.    If the match requires player acceptance (set in the matchmaking configuration), the tickets move into status REQUIRES_ACCEPTANCE. This status triggers your client code to solicit acceptance from all players in every ticket involved in the match, and then call AcceptMatch for each player. If any player rejects or fails to accept the match before a specified timeout, the proposed match is dropped (see AcceptMatch for more details).   Once a match is proposed and accepted, the matchmaking tickets move into status PLACING. FlexMatch locates resources for a new game session using the game session queue (set in the matchmaking configuration) and creates the game session based on the match data.    When the match is successfully placed, the matchmaking tickets move into COMPLETED status. Connection information (including game session endpoint and player session) is added to the matchmaking tickets. Matched players can use the connection information to join the game.    Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  startMatchmaking(callback?: (err: AWSError, data: GameLift.Types.StartMatchmakingOutput) => void): Request<GameLift.Types.StartMatchmakingOutput, AWSError>;
+  /**
+   * Cancels a game session placement that is in PENDING status. To stop a placement, provide the placement ID values. If successful, the placement is moved to CANCELLED status. Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   stopGameSessionPlacement(params: GameLift.Types.StopGameSessionPlacementInput, callback?: (err: AWSError, data: GameLift.Types.StopGameSessionPlacementOutput) => void): Request<GameLift.Types.StopGameSessionPlacementOutput, AWSError>;
   /**
-   * Cancels a game session placement that is in Pending status. To stop a placement, provide the placement ID values. If successful, the placement is moved to Cancelled status. Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Cancels a game session placement that is in PENDING status. To stop a placement, provide the placement ID values. If successful, the placement is moved to CANCELLED status. Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   stopGameSessionPlacement(callback?: (err: AWSError, data: GameLift.Types.StopGameSessionPlacementOutput) => void): Request<GameLift.Types.StopGameSessionPlacementOutput, AWSError>;
+  /**
+   * Cancels a matchmaking ticket that is currently being processed. To stop the matchmaking operation, specify the ticket ID. If successful, work on the ticket is stopped, and the ticket status is changed to CANCELLED. Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  stopMatchmaking(params: GameLift.Types.StopMatchmakingInput, callback?: (err: AWSError, data: GameLift.Types.StopMatchmakingOutput) => void): Request<GameLift.Types.StopMatchmakingOutput, AWSError>;
+  /**
+   * Cancels a matchmaking ticket that is currently being processed. To stop the matchmaking operation, specify the ticket ID. If successful, work on the ticket is stopped, and the ticket status is changed to CANCELLED. Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  stopMatchmaking(callback?: (err: AWSError, data: GameLift.Types.StopMatchmakingOutput) => void): Request<GameLift.Types.StopMatchmakingOutput, AWSError>;
   /**
    * Updates properties for an alias. To update properties, specify the alias ID to be updated and provide the information to be changed. To reassign an alias to another fleet, provide an updated routing strategy. If successful, the updated alias record is returned. Alias-related operations include:    CreateAlias     ListAliases     DescribeAlias     UpdateAlias     DeleteAlias     ResolveAlias   
    */
@@ -380,6 +452,14 @@ declare class GameLift extends Service {
    */
   updateGameSessionQueue(callback?: (err: AWSError, data: GameLift.Types.UpdateGameSessionQueueOutput) => void): Request<GameLift.Types.UpdateGameSessionQueueOutput, AWSError>;
   /**
+   * Updates settings for a FlexMatch matchmaking configuration. To update settings, specify the configuration name to be updated and provide the new settings.  Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  updateMatchmakingConfiguration(params: GameLift.Types.UpdateMatchmakingConfigurationInput, callback?: (err: AWSError, data: GameLift.Types.UpdateMatchmakingConfigurationOutput) => void): Request<GameLift.Types.UpdateMatchmakingConfigurationOutput, AWSError>;
+  /**
+   * Updates settings for a FlexMatch matchmaking configuration. To update settings, specify the configuration name to be updated and provide the new settings.  Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  updateMatchmakingConfiguration(callback?: (err: AWSError, data: GameLift.Types.UpdateMatchmakingConfigurationOutput) => void): Request<GameLift.Types.UpdateMatchmakingConfigurationOutput, AWSError>;
+  /**
    * Updates the current run-time configuration for the specified fleet, which tells Amazon GameLift how to launch server processes on instances in the fleet. You can update a fleet's run-time configuration at any time after the fleet is created; it does not need to be in an ACTIVE status. To update run-time configuration, specify the fleet ID and provide a RuntimeConfiguration object with the updated collection of server process configurations. Each instance in a Amazon GameLift fleet checks regularly for an updated run-time configuration and changes how it launches server processes to comply with the latest version. Existing server processes are not affected by the update; they continue to run until they end, while Amazon GameLift simply adds new server processes to fit the current run-time configuration. As a result, the run-time configuration changes are applied gradually as existing processes shut down and new processes are launched in Amazon GameLift's normal process recycling activity. Fleet-related operations include:    CreateFleet     ListFleets    Describe fleets:    DescribeFleetAttributes     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeFleetEvents      Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration      Manage fleet capacity:    DescribeFleetCapacity     UpdateFleetCapacity     PutScalingPolicy (automatic scaling)    DescribeScalingPolicies (automatic scaling)    DeleteScalingPolicy (automatic scaling)    DescribeEC2InstanceLimits       DeleteFleet   
    */
   updateRuntimeConfiguration(params: GameLift.Types.UpdateRuntimeConfigurationInput, callback?: (err: AWSError, data: GameLift.Types.UpdateRuntimeConfigurationOutput) => void): Request<GameLift.Types.UpdateRuntimeConfigurationOutput, AWSError>;
@@ -387,8 +467,33 @@ declare class GameLift extends Service {
    * Updates the current run-time configuration for the specified fleet, which tells Amazon GameLift how to launch server processes on instances in the fleet. You can update a fleet's run-time configuration at any time after the fleet is created; it does not need to be in an ACTIVE status. To update run-time configuration, specify the fleet ID and provide a RuntimeConfiguration object with the updated collection of server process configurations. Each instance in a Amazon GameLift fleet checks regularly for an updated run-time configuration and changes how it launches server processes to comply with the latest version. Existing server processes are not affected by the update; they continue to run until they end, while Amazon GameLift simply adds new server processes to fit the current run-time configuration. As a result, the run-time configuration changes are applied gradually as existing processes shut down and new processes are launched in Amazon GameLift's normal process recycling activity. Fleet-related operations include:    CreateFleet     ListFleets    Describe fleets:    DescribeFleetAttributes     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeFleetEvents      Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration      Manage fleet capacity:    DescribeFleetCapacity     UpdateFleetCapacity     PutScalingPolicy (automatic scaling)    DescribeScalingPolicies (automatic scaling)    DeleteScalingPolicy (automatic scaling)    DescribeEC2InstanceLimits       DeleteFleet   
    */
   updateRuntimeConfiguration(callback?: (err: AWSError, data: GameLift.Types.UpdateRuntimeConfigurationOutput) => void): Request<GameLift.Types.UpdateRuntimeConfigurationOutput, AWSError>;
+  /**
+   * Validates the syntax of a matchmaking rule or rule set. This operation checks that the rule set uses syntactically correct JSON and that it conforms to allowed property expressions. To validate syntax, provide a rule set string. Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  validateMatchmakingRuleSet(params: GameLift.Types.ValidateMatchmakingRuleSetInput, callback?: (err: AWSError, data: GameLift.Types.ValidateMatchmakingRuleSetOutput) => void): Request<GameLift.Types.ValidateMatchmakingRuleSetOutput, AWSError>;
+  /**
+   * Validates the syntax of a matchmaking rule or rule set. This operation checks that the rule set uses syntactically correct JSON and that it conforms to allowed property expressions. To validate syntax, provide a rule set string. Operations related to match configurations and rule sets include:    CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet   
+   */
+  validateMatchmakingRuleSet(callback?: (err: AWSError, data: GameLift.Types.ValidateMatchmakingRuleSetOutput) => void): Request<GameLift.Types.ValidateMatchmakingRuleSetOutput, AWSError>;
 }
 declare namespace GameLift {
+  export interface AcceptMatchInput {
+    /**
+     * Unique identifier for a matchmaking ticket. The ticket must be in status REQUIRES_ACCEPTANCE; otherwise this request will fail.
+     */
+    TicketId: MatchmakingIdStringModel;
+    /**
+     * Unique identifier for a player delivering the response. This parameter can include one or multiple player IDs.
+     */
+    PlayerIds: MatchmakingPlayerIdList;
+    /**
+     * Player response to the proposed match.
+     */
+    AcceptanceType: AcceptanceType;
+  }
+  export interface AcceptMatchOutput {
+  }
+  export type AcceptanceType = "ACCEPT"|"REJECT"|string;
   export interface Alias {
     /**
      * Unique identifier for an alias; alias IDs are unique within a region.
@@ -422,20 +527,39 @@ declare namespace GameLift {
   export type AliasId = string;
   export type AliasList = Alias[];
   export type ArnStringModel = string;
+  export interface AttributeValue {
+    /**
+     * For single string values. Maximum string length is 100 characters.
+     */
+    S?: NonZeroAndMaxString;
+    /**
+     * For number values, expressed as double.
+     */
+    N?: DoubleObject;
+    /**
+     * For a list of up to 10 strings. Maximum length for each string is 100 characters. Duplicate values are not recognized; all occurances of the the repeated value after the first of a repeated value are ignored.
+     */
+    SL?: StringList;
+    /**
+     * For a map of up to 10 type:value pairs. Maximum length for each string value is 100 characters. 
+     */
+    SDM?: StringDoubleMap;
+  }
   export interface AwsCredentials {
     /**
-     * Access key for an AWS account.
+     * Temporary key allowing access to the Amazon GameLift S3 account.
      */
     AccessKeyId?: NonEmptyString;
     /**
-     * Secret key for an AWS account.
+     * Temporary secret key allowing access to the Amazon GameLift S3 account.
      */
     SecretAccessKey?: NonEmptyString;
     /**
-     * Token specific to a build ID.
+     * Token used to associate a specific build ID with the files uploaded using these credentials.
      */
     SessionToken?: NonEmptyString;
   }
+  export type Boolean = boolean;
   export interface Build {
     /**
      * Unique identifier for a build.
@@ -596,7 +720,7 @@ declare namespace GameLift {
      */
     Name?: NonZeroAndMaxString;
     /**
-     * Set of developer-defined properties for a game session. These properties are passed to the server process hosting the game session.
+     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
      */
     GameProperties?: GamePropertyList;
     /**
@@ -608,9 +732,13 @@ declare namespace GameLift {
      */
     GameSessionId?: IdStringModel;
     /**
-     * Custom string that uniquely identifies a request for a new game session. Maximum token length is 48 characters. If provided, this string is included in the new game session's ID. (A game session ID has the following format: arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet ID&gt;/&lt;custom ID string or idempotency token&gt;.) 
+     * Custom string that uniquely identifies a request for a new game session. Maximum token length is 48 characters. If provided, this string is included in the new game session's ID. (A game session ID has the following format: arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet ID&gt;/&lt;custom ID string or idempotency token&gt;.) Idempotency tokens remain in use for 30 days after a game session has ended; game session objects are retained for this time period and then deleted.
      */
     IdempotencyToken?: IdStringModel;
+    /**
+     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     */
+    GameSessionData?: GameSessionData;
   }
   export interface CreateGameSessionOutput {
     /**
@@ -620,7 +748,7 @@ declare namespace GameLift {
   }
   export interface CreateGameSessionQueueInput {
     /**
-     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     * Descriptive label that is associated with game session queue. Queue names must be unique within each region.
      */
     Name: GameSessionQueueName;
     /**
@@ -641,6 +769,78 @@ declare namespace GameLift {
      * Object that describes the newly created game session queue.
      */
     GameSessionQueue?: GameSessionQueue;
+  }
+  export interface CreateMatchmakingConfigurationInput {
+    /**
+     * Unique identifier for a matchmaking configuration. This name is used to identify the configuration associated with a matchmaking request or ticket.
+     */
+    Name: MatchmakingIdStringModel;
+    /**
+     * Meaningful description of the matchmaking configuration. 
+     */
+    Description?: NonZeroAndMaxString;
+    /**
+     * Amazon Resource Name (ARN) that is assigned to a game session queue and uniquely identifies it. Format is arn:aws:gamelift:&lt;region&gt;::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912. These queues are used when placing game sessions for matches that are created with this matchmaking configuration. Queues can be located in any region.
+     */
+    GameSessionQueueArns: QueueArnsList;
+    /**
+     * Maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out. Requests that time out can be resubmitted as needed.
+     */
+    RequestTimeoutSeconds: MatchmakingRequestTimeoutInteger;
+    /**
+     * Length of time (in seconds) to wait for players to accept a proposed match. If any player rejects the match or fails to accept before the timeout, the ticket continues to look for an acceptable match.
+     */
+    AcceptanceTimeoutSeconds?: MatchmakingAcceptanceTimeoutInteger;
+    /**
+     * Flag that determines whether or not a match that was created with this configuration must be accepted by the matched players. To require acceptance, set to TRUE.
+     */
+    AcceptanceRequired: Boolean;
+    /**
+     * Unique identifier for a matchmaking rule set to use with this configuration. A matchmaking configuration can only use rule sets that are defined in the same region.
+     */
+    RuleSetName: MatchmakingIdStringModel;
+    /**
+     * SNS topic ARN that is set up to receive matchmaking notifications.
+     */
+    NotificationTarget?: SnsArnStringModel;
+    /**
+     * Number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies a match for a single 12-person team, and the additional player count is set to 2, only 10 players are selected for the match.
+     */
+    AdditionalPlayerCount?: WholeNumber;
+    /**
+     * Information to attached to all events related to the matchmaking configuration. 
+     */
+    CustomEventData?: CustomEventData;
+    /**
+     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     */
+    GameProperties?: GamePropertyList;
+    /**
+     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match.
+     */
+    GameSessionData?: GameSessionData;
+  }
+  export interface CreateMatchmakingConfigurationOutput {
+    /**
+     * Object that describes the newly created matchmaking configuration.
+     */
+    Configuration?: MatchmakingConfiguration;
+  }
+  export interface CreateMatchmakingRuleSetInput {
+    /**
+     * Unique identifier for a matchmaking rule set. This name is used to identify the rule set associated with a matchmaking configuration.
+     */
+    Name: MatchmakingIdStringModel;
+    /**
+     * Collection of matchmaking rules, formatted as a JSON string. (Note that comments are not allowed in JSON, but most elements support a description field.)
+     */
+    RuleSetBody: RuleSetBody;
+  }
+  export interface CreateMatchmakingRuleSetOutput {
+    /**
+     * Object that describes the newly created matchmaking rule set.
+     */
+    RuleSet: MatchmakingRuleSet;
   }
   export interface CreatePlayerSessionInput {
     /**
@@ -682,6 +882,7 @@ declare namespace GameLift {
      */
     PlayerSessions?: PlayerSessionList;
   }
+  export type CustomEventData = string;
   export interface DeleteAliasInput {
     /**
      * Unique identifier for a fleet alias. Specify the alias you want to delete.
@@ -702,11 +903,19 @@ declare namespace GameLift {
   }
   export interface DeleteGameSessionQueueInput {
     /**
-     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     * Descriptive label that is associated with game session queue. Queue names must be unique within each region.
      */
     Name: GameSessionQueueName;
   }
   export interface DeleteGameSessionQueueOutput {
+  }
+  export interface DeleteMatchmakingConfigurationInput {
+    /**
+     * Unique identifier for a matchmaking configuration
+     */
+    Name: MatchmakingIdStringModel;
+  }
+  export interface DeleteMatchmakingConfigurationOutput {
   }
   export interface DeleteScalingPolicyInput {
     /**
@@ -764,7 +973,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -788,7 +997,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -820,7 +1029,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -856,7 +1065,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -892,7 +1101,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -928,7 +1137,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -964,7 +1173,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -992,7 +1201,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1001,6 +1210,70 @@ declare namespace GameLift {
      * Collection of objects containing properties for each instance returned.
      */
     Instances?: InstanceList;
+    /**
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     */
+    NextToken?: NonZeroAndMaxString;
+  }
+  export interface DescribeMatchmakingConfigurationsInput {
+    /**
+     * Unique identifier for a matchmaking configuration(s) to retrieve. To request all existing configurations, leave this parameter empty.
+     */
+    Names?: MatchmakingIdList;
+    /**
+     * Unique identifier for a matchmaking rule set. Use this parameter to retrieve all matchmaking configurations that use this rule set.
+     */
+    RuleSetName?: MatchmakingIdStringModel;
+    /**
+     * Maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages. This parameter is limited to 10.
+     */
+    Limit?: PositiveInteger;
+    /**
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     */
+    NextToken?: NonZeroAndMaxString;
+  }
+  export interface DescribeMatchmakingConfigurationsOutput {
+    /**
+     * Collection of requested matchmaking configuration objects.
+     */
+    Configurations?: MatchmakingConfigurationList;
+    /**
+     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     */
+    NextToken?: NonZeroAndMaxString;
+  }
+  export interface DescribeMatchmakingInput {
+    /**
+     * Unique identifier for a matchmaking ticket. To request all existing tickets, leave this parameter empty.
+     */
+    TicketIds: MatchmakingIdList;
+  }
+  export interface DescribeMatchmakingOutput {
+    /**
+     * Collection of existing matchmaking ticket objects matching the request.
+     */
+    TicketList?: MatchmakingTicketList;
+  }
+  export interface DescribeMatchmakingRuleSetsInput {
+    /**
+     * Unique identifier for a matchmaking rule set. This name is used to identify the rule set associated with a matchmaking configuration.
+     */
+    Names?: MatchmakingRuleSetNameList;
+    /**
+     * Maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     */
+    Limit?: RuleSetLimit;
+    /**
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     */
+    NextToken?: NonZeroAndMaxString;
+  }
+  export interface DescribeMatchmakingRuleSetsOutput {
+    /**
+     * Collection of requested matchmaking rule set objects. 
+     */
+    RuleSets: MatchmakingRuleSetList;
     /**
      * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
      */
@@ -1028,7 +1301,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value. If a player session ID is specified, this parameter is ignored.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. If a player session ID is specified, this parameter is ignored.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1068,7 +1341,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1094,6 +1367,7 @@ declare namespace GameLift {
   }
   export type DesiredPlayerSessionList = DesiredPlayerSession[];
   export type Double = number;
+  export type DoubleObject = number;
   export interface EC2InstanceCounts {
     /**
      * Ideal number of active instances in the fleet.
@@ -1150,7 +1424,7 @@ declare namespace GameLift {
      */
     ResourceId?: NonZeroAndMaxString;
     /**
-     * Type of event being logged. The following events are currently in use:   General events:    GENERIC_EVENT – An unspecified event has occurred.     Fleet creation events:    FLEET_CREATED – A fleet record was successfully created with a status of NEW. Event messaging includes the fleet ID.    FLEET_STATE_DOWNLOADING – Fleet status changed from NEW to DOWNLOADING. The compressed build has started downloading to a fleet instance for installation.    FLEET_BINARY_DOWNLOAD_FAILED – The build failed to download to the fleet instance.    FLEET_CREATION_EXTRACTING_BUILD – The game server build was successfully downloaded to an instance, and the build files are now being extracted from the uploaded build and saved to an instance. Failure at this stage prevents a fleet from moving to ACTIVE status. Logs for this stage display a list of the files that are extracted and saved on the instance. Access the logs by using the URL in PreSignedLogUrl).    FLEET_CREATION_RUNNING_INSTALLER – The game server build files were successfully extracted, and the Amazon GameLift is now running the build's install script (if one is included). Failure in this stage prevents a fleet from moving to ACTIVE status. Logs for this stage list the installation steps and whether or not the install completed sucessfully. Access the logs by using the URL in PreSignedLogUrl).     FLEET_CREATION_VALIDATING_RUNTIME_CONFIG – The build process was successful, and the Amazon GameLift is now verifying that the game server launch path(s), which are specified in the fleet's run-time configuration, exist. If any listed launch path exists, Amazon GameLift tries to launch a game server process and waits for the process to report ready. Failures in this stage prevent a fleet from moving to ACTIVE status. Logs for this stage list the launch paths in the run-time configuration and indicate whether each is found. Access the logs by using the URL in PreSignedLogUrl). Once the game server is launched, failures and crashes are logged; these logs can be downloaded from the Amazon GameLift console.     FLEET_STATE_VALIDATING – Fleet status changed from DOWNLOADING to VALIDATING.    FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND – Validation of the run-time validation failed because the executable specified in a launch path does not exist on the instance.    FLEET_STATE_BUILDING – Fleet status changed from VALIDATING to BUILDING.    FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE – Validation of the runtime validation failed because the executable specified in a launch path failed to run on the fleet instance.    FLEET_STATE_ACTIVATING – Fleet status changed from BUILDING to ACTIVATING.     FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete one of the steps in the fleet activation process. This event code indicates that the game build was successfully downloaded to a fleet instance, built, and validated, but was not able to start a server process. A possible reason for failure is that the game server is not reporting "process ready" to the Amazon GameLift service.    FLEET_STATE_ACTIVE – The fleet's status changed from ACTIVATING to ACTIVE. The fleet is now ready to host game sessions.     Other fleet events:    FLEET_SCALING_EVENT – A change was made to the fleet's capacity settings (desired instances, minimum/maximum scaling limits). Event messaging includes the new capacity settings.    FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED – A change was made to the fleet's game session protection policy setting. Event messaging includes both the old and new policy setting.     FLEET_DELETED – A request to delete a fleet was initiated.    
+     * Type of event being logged. The following events are currently in use:   General events:    GENERIC_EVENT – An unspecified event has occurred.     Fleet creation events:    FLEET_CREATED – A fleet record was successfully created with a status of NEW. Event messaging includes the fleet ID.    FLEET_STATE_DOWNLOADING – Fleet status changed from NEW to DOWNLOADING. The compressed build has started downloading to a fleet instance for installation.    FLEET_BINARY_DOWNLOAD_FAILED – The build failed to download to the fleet instance.    FLEET_CREATION_EXTRACTING_BUILD – The game server build was successfully downloaded to an instance, and the build files are now being extracted from the uploaded build and saved to an instance. Failure at this stage prevents a fleet from moving to ACTIVE status. Logs for this stage display a list of the files that are extracted and saved on the instance. Access the logs by using the URL in PreSignedLogUrl.    FLEET_CREATION_RUNNING_INSTALLER – The game server build files were successfully extracted, and the Amazon GameLift is now running the build's install script (if one is included). Failure in this stage prevents a fleet from moving to ACTIVE status. Logs for this stage list the installation steps and whether or not the install completed successfully. Access the logs by using the URL in PreSignedLogUrl.     FLEET_CREATION_VALIDATING_RUNTIME_CONFIG – The build process was successful, and the Amazon GameLift is now verifying that the game server launch paths, which are specified in the fleet's run-time configuration, exist. If any listed launch path exists, Amazon GameLift tries to launch a game server process and waits for the process to report ready. Failures in this stage prevent a fleet from moving to ACTIVE status. Logs for this stage list the launch paths in the run-time configuration and indicate whether each is found. Access the logs by using the URL in PreSignedLogUrl.     FLEET_STATE_VALIDATING – Fleet status changed from DOWNLOADING to VALIDATING.    FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND – Validation of the run-time configuration failed because the executable specified in a launch path does not exist on the instance.    FLEET_STATE_BUILDING – Fleet status changed from VALIDATING to BUILDING.    FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE – Validation of the run-time configuration failed because the executable specified in a launch path failed to run on the fleet instance.    FLEET_STATE_ACTIVATING – Fleet status changed from BUILDING to ACTIVATING.     FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete one of the steps in the fleet activation process. This event code indicates that the game build was successfully downloaded to a fleet instance, built, and validated, but was not able to start a server process. A possible reason for failure is that the game server is not reporting "process ready" to the Amazon GameLift service.    FLEET_STATE_ACTIVE – The fleet's status changed from ACTIVATING to ACTIVE. The fleet is now ready to host game sessions.     Other fleet events:    FLEET_SCALING_EVENT – A change was made to the fleet's capacity settings (desired instances, minimum/maximum scaling limits). Event messaging includes the new capacity settings.    FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED – A change was made to the fleet's game session protection policy setting. Event messaging includes both the old and new policy setting.     FLEET_DELETED – A request to delete a fleet was initiated.    
      */
     EventCode?: EventCode;
     /**
@@ -1162,7 +1436,7 @@ declare namespace GameLift {
      */
     EventTime?: Timestamp;
     /**
-     * Location of stored logs with additional detail related to the event, useful for debugging issues. The URL is valid for 15 minutes. Fleet creation logs can also be accessed through the Amazon GameLift console.
+     * Location of stored logs with additional detail that is related to the event. This is useful for debugging issues. The URL is valid for 15 minutes. You can also access fleet creation logs through the Amazon GameLift console.
      */
     PreSignedLogUrl?: NonZeroAndMaxString;
   }
@@ -1276,11 +1550,11 @@ declare namespace GameLift {
   export type FreeText = string;
   export interface GameProperty {
     /**
-     * TBD
+     * Game property identifier.
      */
     Key: GamePropertyKey;
     /**
-     * TBD
+     * Game property value.
      */
     Value: GamePropertyValue;
   }
@@ -1321,7 +1595,7 @@ declare namespace GameLift {
      */
     Status?: GameSessionStatus;
     /**
-     * Set of developer-defined properties for a game session. These properties are passed to the server process hosting the game session.
+     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
      */
     GameProperties?: GamePropertyList;
     /**
@@ -1340,8 +1614,31 @@ declare namespace GameLift {
      * Unique identifier for a player. This ID is used to enforce a resource protection policy (if one exists), that limits the number of game sessions a player can create.
      */
     CreatorId?: NonZeroAndMaxString;
+    /**
+     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     */
+    GameSessionData?: GameSessionData;
   }
   export type GameSessionActivationTimeoutSeconds = number;
+  export interface GameSessionConnectionInfo {
+    /**
+     * Amazon Resource Name (ARN) that is assigned to a game session and uniquely identifies it.
+     */
+    GameSessionArn?: ArnStringModel;
+    /**
+     * IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
+     */
+    IpAddress?: StringModel;
+    /**
+     * Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
+     */
+    Port?: PositiveInteger;
+    /**
+     * Collection of player session IDs, one for each player ID that was included in the original matchmaking request. 
+     */
+    MatchedPlayerSessions?: MatchedPlayerSessionList;
+  }
+  export type GameSessionData = string;
   export interface GameSessionDetail {
     /**
      * Object that describes a game session.
@@ -1360,7 +1657,7 @@ declare namespace GameLift {
      */
     PlacementId?: IdStringModel;
     /**
-     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     * Descriptive label that is associated with game session queue. Queue names must be unique within each region.
      */
     GameSessionQueueName?: GameSessionQueueName;
     /**
@@ -1368,7 +1665,7 @@ declare namespace GameLift {
      */
     Status?: GameSessionPlacementState;
     /**
-     * Set of developer-defined properties for a game session. These properties are passed to the server process hosting the game session.
+     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
      */
     GameProperties?: GamePropertyList;
     /**
@@ -1380,19 +1677,19 @@ declare namespace GameLift {
      */
     GameSessionName?: NonZeroAndMaxString;
     /**
-     * Unique identifier for the game session. This value is set once the new game session is placed (placement status is Fulfilled).
+     * Unique identifier for the game session. This value is set once the new game session is placed (placement status is FULFILLED).
      */
     GameSessionId?: NonZeroAndMaxString;
     /**
-     * Identifier for the game session created by this placement request. This value is set once the new game session is placed (placement status is Fulfilled). This identifier is unique across all regions. You can use this value as a GameSessionId value as needed.
+     * Identifier for the game session created by this placement request. This value is set once the new game session is placed (placement status is FULFILLED). This identifier is unique across all regions. You can use this value as a GameSessionId value as needed.
      */
     GameSessionArn?: NonZeroAndMaxString;
     /**
-     * Name of the region where the game session created by this placement request is running. This value is set once the new game session is placed (placement status is Fulfilled).
+     * Name of the region where the game session created by this placement request is running. This value is set once the new game session is placed (placement status is FULFILLED).
      */
     GameSessionRegion?: NonZeroAndMaxString;
     /**
-     * Set of values, expressed in milliseconds, indicating the amount of latency that players are experiencing when connected to AWS regions.
+     * Set of values, expressed in milliseconds, indicating the amount of latency that a player experiences when connected to AWS regions.
      */
     PlayerLatencies?: PlayerLatencyList;
     /**
@@ -1404,22 +1701,26 @@ declare namespace GameLift {
      */
     EndTime?: Timestamp;
     /**
-     * IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is Fulfilled). 
+     * IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is FULFILLED). 
      */
     IpAddress?: IpAddress;
     /**
-     * Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is Fulfilled).
+     * Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is FULFILLED).
      */
     Port?: PortNumber;
     /**
-     * Collection of information on player sessions created in response to the game session placement request. These player sessions are created only once a new game session is successfully placed (placement status is Fulfilled). This information includes the player ID (as provided in the placement request) and the corresponding player session ID. Retrieve full player sessions by calling DescribePlayerSessions with the player session ID.
+     * Collection of information on player sessions created in response to the game session placement request. These player sessions are created only once a new game session is successfully placed (placement status is FULFILLED). This information includes the player ID (as provided in the placement request) and the corresponding player session ID. Retrieve full player sessions by calling DescribePlayerSessions with the player session ID.
      */
     PlacedPlayerSessions?: PlacedPlayerSessionList;
+    /**
+     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     */
+    GameSessionData?: GameSessionData;
   }
   export type GameSessionPlacementState = "PENDING"|"FULFILLED"|"CANCELLED"|"TIMED_OUT"|string;
   export interface GameSessionQueue {
     /**
-     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     * Descriptive label that is associated with game session queue. Queue names must be unique within each region.
      */
     Name?: GameSessionQueueName;
     /**
@@ -1566,6 +1867,7 @@ declare namespace GameLift {
   }
   export type IpPermissionsList = IpPermission[];
   export type IpProtocol = "TCP"|"UDP"|string;
+  export type LatencyMap = {[key: string]: PositiveInteger};
   export interface ListAliasesInput {
     /**
      * Type of routing to filter results on. Use this parameter to retrieve only aliases of a certain type. To retrieve all aliases, leave this parameter empty. Possible routing types include the following:    SIMPLE – The alias resolves to one specific fleet. Use this type when routing to active fleets.    TERMINAL – The alias does not resolve to a fleet but instead can be used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException with the RoutingStrategy message embedded.  
@@ -1580,7 +1882,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonEmptyString;
   }
@@ -1604,7 +1906,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonEmptyString;
   }
@@ -1628,7 +1930,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1642,6 +1944,129 @@ declare namespace GameLift {
      */
     NextToken?: NonZeroAndMaxString;
   }
+  export interface MatchedPlayerSession {
+    /**
+     * Unique identifier for a player 
+     */
+    PlayerId?: NonZeroAndMaxString;
+    /**
+     * Unique identifier for a player session
+     */
+    PlayerSessionId?: PlayerSessionId;
+  }
+  export type MatchedPlayerSessionList = MatchedPlayerSession[];
+  export type MatchmakingAcceptanceTimeoutInteger = number;
+  export interface MatchmakingConfiguration {
+    /**
+     * Unique identifier for a matchmaking configuration. This name is used to identify the configuration associated with a matchmaking request or ticket.
+     */
+    Name?: MatchmakingIdStringModel;
+    /**
+     * Descriptive label that is associated with matchmaking configuration.
+     */
+    Description?: NonZeroAndMaxString;
+    /**
+     * Amazon Resource Name (ARN) that is assigned to a game session queue and uniquely identifies it. Format is arn:aws:gamelift:&lt;region&gt;::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912. These queues are used when placing game sessions for matches that are created with this matchmaking configuration. Queues can be located in any region.
+     */
+    GameSessionQueueArns?: QueueArnsList;
+    /**
+     * Maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out. Requests that time out can be resubmitted as needed.
+     */
+    RequestTimeoutSeconds?: MatchmakingRequestTimeoutInteger;
+    /**
+     * Length of time (in seconds) to wait for players to accept a proposed match. If any player rejects the match or fails to accept before the timeout, the ticket continues to look for an acceptable match.
+     */
+    AcceptanceTimeoutSeconds?: MatchmakingAcceptanceTimeoutInteger;
+    /**
+     * Flag that determines whether or not a match that was created with this configuration must be accepted by the matched players. To require acceptance, set to TRUE.
+     */
+    AcceptanceRequired?: Boolean;
+    /**
+     * Unique identifier for a matchmaking rule set to use with this configuration. A matchmaking configuration can only use rule sets that are defined in the same region.
+     */
+    RuleSetName?: MatchmakingIdStringModel;
+    /**
+     * SNS topic ARN that is set up to receive matchmaking notifications.
+     */
+    NotificationTarget?: SnsArnStringModel;
+    /**
+     * Number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies a match for a single 12-person team, and the additional player count is set to 2, only 10 players are selected for the match.
+     */
+    AdditionalPlayerCount?: WholeNumber;
+    /**
+     * Information to attached to all events related to the matchmaking configuration. 
+     */
+    CustomEventData?: CustomEventData;
+    /**
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
+     */
+    CreationTime?: Timestamp;
+    /**
+     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     */
+    GameProperties?: GamePropertyList;
+    /**
+     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     */
+    GameSessionData?: GameSessionData;
+  }
+  export type MatchmakingConfigurationList = MatchmakingConfiguration[];
+  export type MatchmakingConfigurationStatus = "CANCELED"|"COMPLETE"|"FAILED"|"PLACING"|"QUEUED"|"REQUIRES_ACCEPTANCE"|"SEARCHING"|"TIMED_OUT"|string;
+  export type MatchmakingIdList = MatchmakingIdStringModel[];
+  export type MatchmakingIdStringModel = string;
+  export type MatchmakingPlayerIdList = PlayerIdStringModel[];
+  export type MatchmakingRequestTimeoutInteger = number;
+  export interface MatchmakingRuleSet {
+    /**
+     * Unique identifier for a matchmaking rule set
+     */
+    RuleSetName?: MatchmakingIdStringModel;
+    /**
+     * Collection of matchmaking rules, formatted as a JSON string. (Note that comments14 are not allowed in JSON, but most elements support a description field.)
+     */
+    RuleSetBody: RuleSetBody;
+    /**
+     * Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
+     */
+    CreationTime?: Timestamp;
+  }
+  export type MatchmakingRuleSetList = MatchmakingRuleSet[];
+  export type MatchmakingRuleSetNameList = MatchmakingIdStringModel[];
+  export interface MatchmakingTicket {
+    /**
+     * Unique identifier for a matchmaking ticket.
+     */
+    TicketId?: MatchmakingIdStringModel;
+    /**
+     * Name of the MatchmakingConfiguration that is used with this ticket. Matchmaking configurations determine how players are grouped into a match and how a new game session is created for the match.
+     */
+    ConfigurationName?: MatchmakingIdStringModel;
+    /**
+     * Current status of the matchmaking request.    QUEUED – The matchmaking request has been received and is currently waiting to be processed.    SEARCHING – The matchmaking request is currently being processed.     REQUIRES_ACCEPTANCE – A match has been proposed and the players must accept the match (see AcceptMatch). This status is used only with requests that use a matchmaking configuration with a player acceptance requirement.    PLACING – The FlexMatch engine has matched players and is in the process of placing a new game session for the match.    COMPLETED – Players have been matched and a game session is ready to host the players. A ticket in this state contains the necessary connection information for players.    FAILED – The matchmaking request was not completed. Tickets with players who fail to accept a proposed match are placed in FAILED status; new matchmaking requests can be submitted for these players.    CANCELLED – The matchmaking request was canceled with a call to StopMatchmaking.    TIMED_OUT – The matchmaking request was not completed within the duration specified in the matchmaking configuration. Matchmaking requests that time out can be resubmitted.  
+     */
+    Status?: MatchmakingConfigurationStatus;
+    /**
+     * Code to explain the current status. For example, a status reason may indicate when a ticket has returned to SEARCHING status after a proposed match fails to receive player acceptances.
+     */
+    StatusReason?: StringModel;
+    /**
+     * Additional information about the current status.
+     */
+    StatusMessage?: StringModel;
+    /**
+     * Time stamp indicating when this matchmaking request was received. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
+     */
+    StartTime?: Timestamp;
+    /**
+     * A set of Player objects, each representing a player to find matches for. Players are identified by a unique player ID and may include latency data for use during matchmaking. If the ticket is in status COMPLETED, the Player objects include the team the players were assigned to in the resulting match.
+     */
+    Players?: PlayerList;
+    /**
+     * Identifier and connection information of the game session created for the match. This information is added to the ticket only after the matchmaking request has been successfully completed.
+     */
+    GameSessionConnectionInfo?: GameSessionConnectionInfo;
+  }
+  export type MatchmakingTicketList = MatchmakingTicket[];
   export type MaxConcurrentGameSessionActivations = number;
   export type MetricGroup = string;
   export type MetricGroupList = MetricGroup[];
@@ -1662,9 +2087,29 @@ declare namespace GameLift {
     PlayerSessionId?: PlayerSessionId;
   }
   export type PlacedPlayerSessionList = PlacedPlayerSession[];
+  export interface Player {
+    /**
+     * Unique identifier for a player
+     */
+    PlayerId?: PlayerIdStringModel;
+    /**
+     * Collection of name:value pairs containing player information for use in matchmaking. Player attribute names need to match playerAttributes names in the rule set being used. Example: "PlayerAttributes": {"skill": {"N": "23"}, "gameMode": {"S": "deathmatch"}}.
+     */
+    PlayerAttributes?: PlayerAttributeMap;
+    /**
+     * Name of the team that the player is assigned to in a match. Team names are defined in a matchmaking rule set.
+     */
+    Team?: NonZeroAndMaxString;
+    /**
+     * Set of values, expressed in milliseconds, indicating the amount of latency that a player experiences when connected to AWS regions. If this property is present, FlexMatch considers placing the match only in regions that are included in the object map. If not present (that is, null), FlexMatch ignores latency issues and may place the match in any region in the queue.  If this property contains an empty map, FlexMatch assumes that no regions are available to the player. In this scenario, the ticket is not matchable and always times out unless canceled.  
+     */
+    LatencyInMs?: LatencyMap;
+  }
+  export type PlayerAttributeMap = {[key: string]: AttributeValue};
   export type PlayerData = string;
   export type PlayerDataMap = {[key: string]: PlayerData};
   export type PlayerIdList = NonZeroAndMaxString[];
+  export type PlayerIdStringModel = string;
   export interface PlayerLatency {
     /**
      * Unique identifier for a player associated with the latency data.
@@ -1691,6 +2136,7 @@ declare namespace GameLift {
     PolicyDurationSeconds?: WholeNumber;
   }
   export type PlayerLatencyPolicyList = PlayerLatencyPolicy[];
+  export type PlayerList = Player[];
   export interface PlayerSession {
     /**
      * Unique identifier for a player session.
@@ -1781,6 +2227,7 @@ declare namespace GameLift {
      */
     Name?: NonZeroAndMaxString;
   }
+  export type QueueArnsList = ArnStringModel[];
   export interface RequestUploadCredentialsInput {
     /**
      * Unique identifier for a build to get credentials for.
@@ -1834,6 +2281,8 @@ declare namespace GameLift {
     Message?: FreeText;
   }
   export type RoutingStrategyType = "SIMPLE"|"TERMINAL"|string;
+  export type RuleSetBody = string;
+  export type RuleSetLimit = number;
   export interface RuntimeConfiguration {
     /**
      * Collection of server process configurations that describe which server processes to run on each instance in a fleet.
@@ -1925,7 +2374,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To specify the start of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1954,6 +2403,7 @@ declare namespace GameLift {
     ConcurrentExecutions: PositiveInteger;
   }
   export type ServerProcessList = ServerProcess[];
+  export type SnsArnStringModel = string;
   export interface StartGameSessionPlacementInput {
     /**
      * Unique identifier to assign to the new game session placement. This value is developer-defined. The value must be unique across all regions and cannot be reused unless you are resubmitting a canceled or timed-out placement request.
@@ -1964,7 +2414,7 @@ declare namespace GameLift {
      */
     GameSessionQueueName: GameSessionQueueName;
     /**
-     * Set of developer-defined properties for a game session. These properties are passed to the server process hosting the game session.
+     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
      */
     GameProperties?: GamePropertyList;
     /**
@@ -1976,19 +2426,43 @@ declare namespace GameLift {
      */
     GameSessionName?: NonZeroAndMaxString;
     /**
-     * Set of values, expressed in milliseconds, indicating the amount of latency that players are experiencing when connected to AWS regions. This information is used to try to place the new game session where it can offer the best possible gameplay experience for the players. 
+     * Set of values, expressed in milliseconds, indicating the amount of latency that a player experiences when connected to AWS regions. This information is used to try to place the new game session where it can offer the best possible gameplay experience for the players. 
      */
     PlayerLatencies?: PlayerLatencyList;
     /**
      * Set of information on each player to create a player session for.
      */
     DesiredPlayerSessions?: DesiredPlayerSessionList;
+    /**
+     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     */
+    GameSessionData?: GameSessionData;
   }
   export interface StartGameSessionPlacementOutput {
     /**
      * Object that describes the newly created game session placement. This object includes all the information provided in the request, as well as start/end time stamps and placement status. 
      */
     GameSessionPlacement?: GameSessionPlacement;
+  }
+  export interface StartMatchmakingInput {
+    /**
+     * Unique identifier for a matchmaking ticket. Use this identifier to track the matchmaking ticket status and retrieve match results.
+     */
+    TicketId?: MatchmakingIdStringModel;
+    /**
+     * Name of the matchmaking configuration to use for this request. Matchmaking configurations must exist in the same region as this request.
+     */
+    ConfigurationName: MatchmakingIdStringModel;
+    /**
+     * Information on each player to be matched. This information must include a player ID, and may contain player attributes and latency data to be used in the matchmaking process. After a successful match, Player objects contain the name of the team the player is assigned to.
+     */
+    Players: PlayerList;
+  }
+  export interface StartMatchmakingOutput {
+    /**
+     * Ticket representing the matchmaking request. This object include the information included in the request, ticket status, and match results as generated during the matchmaking process.
+     */
+    MatchmakingTicket?: MatchmakingTicket;
   }
   export interface StopGameSessionPlacementInput {
     /**
@@ -1998,11 +2472,21 @@ declare namespace GameLift {
   }
   export interface StopGameSessionPlacementOutput {
     /**
-     * Object that describes the canceled game session placement, with Cancelled status and an end time stamp. 
+     * Object that describes the canceled game session placement, with CANCELLED status and an end time stamp. 
      */
     GameSessionPlacement?: GameSessionPlacement;
   }
+  export interface StopMatchmakingInput {
+    /**
+     * Unique identifier for a matchmaking ticket.
+     */
+    TicketId: MatchmakingIdStringModel;
+  }
+  export interface StopMatchmakingOutput {
+  }
+  export type StringDoubleMap = {[key: string]: DoubleObject};
   export type StringList = NonZeroAndMaxString[];
+  export type StringModel = string;
   export type Timestamp = Date;
   export interface UpdateAliasInput {
     /**
@@ -2154,7 +2638,7 @@ declare namespace GameLift {
   }
   export interface UpdateGameSessionQueueInput {
     /**
-     * Descriptive label that is associated with queue. Queue names must be unique within each region.
+     * Descriptive label that is associated with game session queue. Queue names must be unique within each region.
      */
     Name: GameSessionQueueName;
     /**
@@ -2176,6 +2660,62 @@ declare namespace GameLift {
      */
     GameSessionQueue?: GameSessionQueue;
   }
+  export interface UpdateMatchmakingConfigurationInput {
+    /**
+     * Unique identifier for a matchmaking configuration to update.
+     */
+    Name: MatchmakingIdStringModel;
+    /**
+     * Descriptive label that is associated with matchmaking configuration.
+     */
+    Description?: NonZeroAndMaxString;
+    /**
+     * Amazon Resource Name (ARN) that is assigned to a game session queue and uniquely identifies it. Format is arn:aws:gamelift:&lt;region&gt;::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912. These queues are used when placing game sessions for matches that are created with this matchmaking configuration. Queues can be located in any region.
+     */
+    GameSessionQueueArns?: QueueArnsList;
+    /**
+     * Maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out. Requests that time out can be resubmitted as needed.
+     */
+    RequestTimeoutSeconds?: MatchmakingRequestTimeoutInteger;
+    /**
+     * Length of time (in seconds) to wait for players to accept a proposed match. If any player rejects the match or fails to accept before the timeout, the ticket continues to look for an acceptable match.
+     */
+    AcceptanceTimeoutSeconds?: MatchmakingAcceptanceTimeoutInteger;
+    /**
+     * Flag that determines whether or not a match that was created with this configuration must be accepted by the matched players. To require acceptance, set to TRUE.
+     */
+    AcceptanceRequired?: Boolean;
+    /**
+     * Unique identifier for a matchmaking rule set to use with this configuration. A matchmaking configuration can only use rule sets that are defined in the same region.
+     */
+    RuleSetName?: MatchmakingIdStringModel;
+    /**
+     * SNS topic ARN that is set up to receive matchmaking notifications. See  Setting up Notifications for Matchmaking for more information.
+     */
+    NotificationTarget?: SnsArnStringModel;
+    /**
+     * Number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies a match for a single 12-person team, and the additional player count is set to 2, only 10 players are selected for the match.
+     */
+    AdditionalPlayerCount?: WholeNumber;
+    /**
+     * Information to attached to all events related to the matchmaking configuration. 
+     */
+    CustomEventData?: CustomEventData;
+    /**
+     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     */
+    GameProperties?: GamePropertyList;
+    /**
+     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     */
+    GameSessionData?: GameSessionData;
+  }
+  export interface UpdateMatchmakingConfigurationOutput {
+    /**
+     * Object that describes the updated matchmaking configuration.
+     */
+    Configuration?: MatchmakingConfiguration;
+  }
   export interface UpdateRuntimeConfigurationInput {
     /**
      * Unique identifier for a fleet to update run-time configuration for.
@@ -2191,6 +2731,18 @@ declare namespace GameLift {
      * The run-time configuration currently in force. If the update was successful, this object matches the one in the request.
      */
     RuntimeConfiguration?: RuntimeConfiguration;
+  }
+  export interface ValidateMatchmakingRuleSetInput {
+    /**
+     * Collection of matchmaking rules to validate, formatted as a JSON string.
+     */
+    RuleSetBody: RuleSetBody;
+  }
+  export interface ValidateMatchmakingRuleSetOutput {
+    /**
+     * Response indicating whether or not the rule set is valid.
+     */
+    Valid?: Boolean;
   }
   export type WholeNumber = number;
   /**
