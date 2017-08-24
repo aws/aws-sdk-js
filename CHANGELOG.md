@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.102.0-->
+<!--LATEST=2.103.0-->
 <!--ENTRYINSERT-->
+
+## 2.103.0
+* feature: Rekognition: Update the enum value of LandmarkType and GenderType to be consistent with service response
 
 ## 2.102.0
 * feature: SSM: Changes to associations in Systems Manager State Manager can now be recorded. Previously, when you edited associations, you could not go back and review older association settings. Now, associations are versioned, and can be named using human-readable strings, allowing you to see a trail of association changes. You can also perform rate-based scheduling, which allows you to schedule associations more granularly.

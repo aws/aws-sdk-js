@@ -308,7 +308,7 @@ declare namespace AppStream {
      */
     ImageName: String;
     /**
-     * The instance type of compute resources for the fleet. Fleet instances are launched from this instance type. Available instance types are:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge  
+     * The instance type of compute resources for the fleet. Fleet instances are launched from this instance type. Available instance types are:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge   stream.graphics-desktop.2xlarge  
      */
     InstanceType: String;
     /**
@@ -938,7 +938,7 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The instance type of compute resources for the fleet. Fleet instances are launched from this instance type. Available instance types are:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge  
+     * The instance type of compute resources for the fleet. Fleet instances are launched from this instance type. Available instance types are:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge   stream.graphics-desktop.2xlarge  
      */
     InstanceType?: String;
     /**

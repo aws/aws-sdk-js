@@ -531,7 +531,7 @@ declare namespace Rekognition {
      */
     Confidence?: Percent;
   }
-  export type GenderType = "MALE"|"FEMALE"|string;
+  export type GenderType = "Male"|"Female"|string;
   export interface GetCelebrityInfoRequest {
     /**
      * The ID for the celebrity. You get the celebrity ID from a call to the operation, which recognizes celebrities in an image. 
@@ -615,15 +615,15 @@ declare namespace Rekognition {
      */
     Type?: LandmarkType;
     /**
-     * x-coordinate from the top left of the landmark expressed as the ration of the width of the image. For example, if the images is 700x200 and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. 
+     * x-coordinate from the top left of the landmark expressed as the ratio of the width of the image. For example, if the images is 700x200 and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. 
      */
     X?: Float;
     /**
-     * y-coordinate from the top left of the landmark expressed as the ration of the height of the image. For example, if the images is 700x200 and the y-coordinate of the landmark is at 100 pixels, this value is 0.5.
+     * y-coordinate from the top left of the landmark expressed as the ratio of the height of the image. For example, if the images is 700x200 and the y-coordinate of the landmark is at 100 pixels, this value is 0.5.
      */
     Y?: Float;
   }
-  export type LandmarkType = "EYE_LEFT"|"EYE_RIGHT"|"NOSE"|"MOUTH_LEFT"|"MOUTH_RIGHT"|"LEFT_EYEBROW_LEFT"|"LEFT_EYEBROW_RIGHT"|"LEFT_EYEBROW_UP"|"RIGHT_EYEBROW_LEFT"|"RIGHT_EYEBROW_RIGHT"|"RIGHT_EYEBROW_UP"|"LEFT_EYE_LEFT"|"LEFT_EYE_RIGHT"|"LEFT_EYE_UP"|"LEFT_EYE_DOWN"|"RIGHT_EYE_LEFT"|"RIGHT_EYE_RIGHT"|"RIGHT_EYE_UP"|"RIGHT_EYE_DOWN"|"NOSE_LEFT"|"NOSE_RIGHT"|"MOUTH_UP"|"MOUTH_DOWN"|"LEFT_PUPIL"|"RIGHT_PUPIL"|string;
+  export type LandmarkType = "eyeLeft"|"eyeRight"|"nose"|"mouthLeft"|"mouthRight"|"leftEyeBrowLeft"|"leftEyeBrowRight"|"leftEyeBrowUp"|"rightEyeBrowLeft"|"rightEyeBrowRight"|"rightEyeBrowUp"|"leftEyeLeft"|"leftEyeRight"|"leftEyeUp"|"leftEyeDown"|"rightEyeLeft"|"rightEyeRight"|"rightEyeUp"|"rightEyeDown"|"noseLeft"|"noseRight"|"mouthUp"|"mouthDown"|"leftPupil"|"rightPupil"|string;
   export type Landmarks = Landmark[];
   export interface ListCollectionsRequest {
     /**
