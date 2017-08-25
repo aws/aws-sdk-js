@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.103.0-->
+<!--LATEST=2.104.0-->
 <!--ENTRYINSERT-->
+
+## 2.104.0
+* feature: CloudFormation: Rollback triggers enable you to have AWS CloudFormation monitor the state of your application during stack creation and updating, and to roll back that operation if the application breaches the threshold of any of the alarms you've specified.
+* feature: GameLift: Update spelling of MatchmakingTicket status values for internal consistency.
+* feature: RDS: Option group options now contain additional properties that identify requirements for certain options. Check these properties to determine if your DB instance must be in a VPC or have auto minor upgrade turned on before you can use an option. Check to see if you can downgrade the version of an option after you have installed it.
 
 ## 2.103.0
 * feature: Rekognition: Update the enum value of LandmarkType and GenderType to be consistent with service response

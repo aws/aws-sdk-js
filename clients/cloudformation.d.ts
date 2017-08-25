@@ -196,11 +196,11 @@ declare class CloudFormation extends Service {
    */
   getTemplate(callback?: (err: AWSError, data: CloudFormation.Types.GetTemplateOutput) => void): Request<CloudFormation.Types.GetTemplateOutput, AWSError>;
   /**
-   * Returns information about a new or existing template. The GetTemplateSummary action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack. You can use the GetTemplateSummary action when you submit a template, or you can get template information for a running or deleted stack. For deleted stacks, GetTemplateSummary returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a ValidationError is returned.
+   * Returns information about a new or existing template. The GetTemplateSummary action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack or stack set. You can use the GetTemplateSummary action when you submit a template, or you can get template information for a stack set, or a running or deleted stack. For deleted stacks, GetTemplateSummary returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a ValidationError is returned.
    */
   getTemplateSummary(params: CloudFormation.Types.GetTemplateSummaryInput, callback?: (err: AWSError, data: CloudFormation.Types.GetTemplateSummaryOutput) => void): Request<CloudFormation.Types.GetTemplateSummaryOutput, AWSError>;
   /**
-   * Returns information about a new or existing template. The GetTemplateSummary action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack. You can use the GetTemplateSummary action when you submit a template, or you can get template information for a running or deleted stack. For deleted stacks, GetTemplateSummary returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a ValidationError is returned.
+   * Returns information about a new or existing template. The GetTemplateSummary action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack or stack set. You can use the GetTemplateSummary action when you submit a template, or you can get template information for a stack set, or a running or deleted stack. For deleted stacks, GetTemplateSummary returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a ValidationError is returned.
    */
   getTemplateSummary(callback?: (err: AWSError, data: CloudFormation.Types.GetTemplateSummaryOutput) => void): Request<CloudFormation.Types.GetTemplateSummaryOutput, AWSError>;
   /**
@@ -368,11 +368,11 @@ declare namespace CloudFormation {
   export type Account = string;
   export interface AccountGateResult {
     /**
-     * The status of the account gate function.    SUCCEEDED: The account gate function has determined that the account passes any requirements for stack set operations to occur. AWS CloudFormation proceeds with stack operations in the account.     FAILED: The account gate function has determined that the account does not meet the requirements for stack set operations to occur. AWS CloudFormation cancels the stack set operations in that account, and the stack set operation status is set to FAILED.    SKIPPED: An account gate function has not been specified for the account, or the AWSCloudFormationStackSetExecutionRole of the stack set adminstration account lacks permissions to invoke the function. AWS CloudFormation proceeds with stack set operations in the account.   
+     * The status of the account gate function.    SUCCEEDED: The account gate function has determined that the account and region passes any requirements for a stack set operation to occur. AWS CloudFormation proceeds with the stack operation in that account and region.     FAILED: The account gate function has determined that the account and region does not meet the requirements for a stack set operation to occur. AWS CloudFormation cancels the stack set operation in that account and region, and sets the stack set operation result status for that account and region to FAILED.     SKIPPED: AWS CloudFormation has skipped calling the account gate function for this account and region, for one of the following reasons:   An account gate function has not been specified for the account and region. AWS CloudFormation proceeds with the stack set operation in this account and region.   The AWSCloudFormationStackSetExecutionRole of the stack set adminstration account lacks permissions to invoke the function. AWS CloudFormation proceeds with the stack set operation in this account and region.   Either no action is necessary, or no action is possible, on the stack. AWS CloudFormation skips the stack set operation in this account and region.    
      */
     Status?: AccountGateStatus;
     /**
-     * The reason for the account gate status assigned to this account.
+     * The reason for the account gate status assigned to this account and region for the stack set operation.
      */
     StatusReason?: AccountGateStatusReason;
   }
@@ -392,6 +392,7 @@ declare namespace CloudFormation {
   export type AccountList = Account[];
   export type AllowedValue = string;
   export type AllowedValues = AllowedValue[];
+  export type Arn = string;
   export interface CancelUpdateStackInput {
     /**
      * The name or the unique stack ID that is associated with the stack.
@@ -521,6 +522,10 @@ declare namespace CloudFormation {
      */
     RoleARN?: RoleARN;
     /**
+     * The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
+     */
+    RollbackConfiguration?: RollbackConfiguration;
+    /**
      * The Amazon Resource Names (ARNs) of Amazon Simple Notification Service (Amazon SNS) topics that AWS CloudFormation associates with the stack. To remove all associated notification topics, specify an empty list.
      */
     NotificationARNs?: NotificationARNs;
@@ -576,6 +581,10 @@ declare namespace CloudFormation {
      * Set to true to disable rollback of the stack if stack creation failed. You can specify either DisableRollback or OnFailure, but not both. Default: false 
      */
     DisableRollback?: DisableRollback;
+    /**
+     * The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
+     */
+    RollbackConfiguration?: RollbackConfiguration;
     /**
      * The amount of time that can pass before the stack status becomes CREATE_FAILED; if DisableRollback is not set or is set to false, the stack will be rolled back.
      */
@@ -740,7 +749,7 @@ declare namespace CloudFormation {
      */
     OperationPreferences?: StackSetOperationPreferences;
     /**
-     * Removes the stack instances from the specified stack set, but doesn't delete the stacks. You can't reassociate a retained stack or add an existing, saved stack to a new stack set.
+     * Removes the stack instances from the specified stack set, but doesn't delete the stacks. You can't reassociate a retained stack or add an existing, saved stack to a new stack set. For more information, see Stack set operation options.
      */
     RetainStacks: RetainStacks;
     /**
@@ -838,6 +847,10 @@ declare namespace CloudFormation {
      * The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that will be associated with the stack if you execute the change set.
      */
     NotificationARNs?: NotificationARNs;
+    /**
+     * The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
+     */
+    RollbackConfiguration?: RollbackConfiguration;
     /**
      * If you execute the change set, the list of capabilities that were explicitly acknowledged when the change set was created.
      */
@@ -1077,19 +1090,19 @@ declare namespace CloudFormation {
   }
   export interface GetTemplateSummaryInput {
     /**
-     * Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information about templates, see Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify only one of the following parameters: StackName, TemplateBody, or TemplateURL.
+     * Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. For more information about templates, see Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify only one of the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
      */
     TemplateBody?: TemplateBody;
     /**
-     * Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information about templates, see Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify only one of the following parameters: StackName, TemplateBody, or TemplateURL.
+     * Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information about templates, see Template Anatomy in the AWS CloudFormation User Guide. Conditional: You must specify only one of the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
      */
     TemplateURL?: TemplateURL;
     /**
-     * The name or the stack ID that is associated with the stack, which are not always interchangeable. For running stacks, you can specify either the stack's name or its unique stack ID. For deleted stack, you must specify the unique stack ID. Conditional: You must specify only one of the following parameters: StackName, TemplateBody, or TemplateURL.
+     * The name or the stack ID that is associated with the stack, which are not always interchangeable. For running stacks, you can specify either the stack's name or its unique stack ID. For deleted stack, you must specify the unique stack ID. Conditional: You must specify only one of the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
      */
     StackName?: StackNameOrId;
     /**
-     * The name or unique ID of the stack set from which the stack was created.
+     * The name or unique ID of the stack set from which the stack was created. Conditional: You must specify only one of the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
      */
     StackSetName?: StackSetNameOrId;
   }
@@ -1340,6 +1353,7 @@ declare namespace CloudFormation {
   export type MaxConcurrentPercentage = number;
   export type MaxResults = number;
   export type Metadata = string;
+  export type MonitoringTimeInMinutes = number;
   export type NextToken = string;
   export type NoEcho = boolean;
   export type NotificationARN = string;
@@ -1501,6 +1515,27 @@ declare namespace CloudFormation {
   export type RetainStacks = boolean;
   export type RetainStacksNullable = boolean;
   export type RoleARN = string;
+  export interface RollbackConfiguration {
+    /**
+     * The triggers to monitor during stack creation or update actions.  By default, AWS CloudFormation saves the rollback triggers specified for a stack and applies them to any subsequent update operations for the stack, unless you specify otherwise. If you do specify rollback triggers for this parameter, those triggers replace any list of triggers previously specified for the stack. This means:   If you don't specify this parameter, AWS CloudFormation uses the rollback triggers previously specified for this stack, if any.   If you specify any rollback triggers using this parameter, you must specify all the triggers that you want used for this stack, even triggers you've specifed before (for example, when creating the stack or during a previous stack update). Any triggers that you don't include in the updated list of triggers are no longer applied to the stack.   If you specify an empty list, AWS CloudFormation removes all currently specified triggers.   If a specified Cloudwatch alarm is missing, the entire stack operation fails and is rolled back. 
+     */
+    RollbackTriggers?: RollbackTriggers;
+    /**
+     * The amount of time, in minutes, during which CloudFormation should monitor all the rollback triggers after the stack creation or update operation deploys all necessary resources. If any of the alarms goes to ALERT state during the stack operation or this monitoring period, CloudFormation rolls back the entire stack operation. Then, for update operations, if the monitoring period expires without any alarms going to ALERT state CloudFormation proceeds to dispose of old resources as usual. If you specify a monitoring period but do not specify any rollback triggers, CloudFormation still waits the specified period of time before cleaning up old resources for update operations. You can use this monitoring period to perform any manual stack validation desired, and manually cancel the stack creation or update (using CancelUpdateStack, for example) as necessary. If you specify 0 for this parameter, CloudFormation still monitors the specified rollback triggers during stack creation and update operations. Then, for update operations, it begins disposing of old resources immediately once the operation completes.
+     */
+    MonitoringTimeInMinutes?: MonitoringTimeInMinutes;
+  }
+  export interface RollbackTrigger {
+    /**
+     * The Amazon Resource Name (ARN) of the rollback trigger.
+     */
+    Arn: Arn;
+    /**
+     * The resource type of the rollback trigger. Currently, AWS::CloudWatch::Alarm is the only supported resource type.
+     */
+    Type: Type;
+  }
+  export type RollbackTriggers = RollbackTrigger[];
   export type Scope = ResourceAttribute[];
   export interface SetStackPolicyInput {
     /**
@@ -1563,6 +1598,10 @@ declare namespace CloudFormation {
      * The time the stack was last updated. This field will only be returned if the stack has been updated at least once.
      */
     LastUpdatedTime?: LastUpdatedTime;
+    /**
+     * The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
+     */
+    RollbackConfiguration?: RollbackConfiguration;
     /**
      * Current status of the stack.
      */
@@ -1666,7 +1705,7 @@ declare namespace CloudFormation {
      */
     StackId?: StackId;
     /**
-     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet and DeleteStackInstances operations. You might need to clean up the stack manually.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.    The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.       CURRENT: The stack is currently up to date with the stack set.  
+     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.    The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.       CURRENT: The stack is currently up to date with the stack set.  
      */
     Status?: StackInstanceStatus;
     /**
@@ -1694,7 +1733,7 @@ declare namespace CloudFormation {
      */
     StackId?: StackId;
     /**
-     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet and DeleteStackInstances operations. You might need to clean up the stack manually.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.    The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.       CURRENT: The stack is currently up to date with the stack set.  
+     * The status of the stack instance, in terms of its synchronization with its associated stack set.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.    OUTDATED: The stack isn't currently up to date with the stack set because:   The associated stack failed during a CreateStackSet or UpdateStackSet operation.    The stack was part of a CreateStackSet or UpdateStackSet operation that failed or was stopped before the stack was created or updated.       CURRENT: The stack is currently up to date with the stack set.  
      */
     Status?: StackInstanceStatus;
     /**
@@ -2070,6 +2109,7 @@ declare namespace CloudFormation {
   export type Timestamp = Date;
   export type TransformName = string;
   export type TransformsList = TransformName[];
+  export type Type = string;
   export interface UpdateStackInput {
     /**
      * The name or unique stack ID of the stack to update.
@@ -2111,6 +2151,10 @@ declare namespace CloudFormation {
      * The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that AWS CloudFormation assumes to update the stack. AWS CloudFormation uses the role's credentials to make calls on your behalf. AWS CloudFormation always uses this role for all future operations on the stack. As long as users have permission to operate on the stack, AWS CloudFormation uses this role even if the users don't have permission to pass it. Ensure that the role grants least privilege. If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.
      */
     RoleARN?: RoleARN;
+    /**
+     * The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
+     */
+    RollbackConfiguration?: RollbackConfiguration;
     /**
      * Structure containing a new stack policy body. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both. You might update the stack policy, for example, in order to protect a new resource that you created during a stack update. If you do not specify a stack policy, the current policy that is associated with the stack is unchanged.
      */

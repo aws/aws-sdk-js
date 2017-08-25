@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.103.0
+// AWS SDK for JavaScript v2.104.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -6593,11 +6593,14 @@ module.exports={
             "shape": "Sl"
           },
           "RoleARN": {},
-          "NotificationARNs": {
+          "RollbackConfiguration": {
             "shape": "Sn"
           },
+          "NotificationARNs": {
+            "shape": "St"
+          },
           "Tags": {
-            "shape": "Sp"
+            "shape": "Sv"
           },
           "ChangeSetName": {},
           "ClientToken": {},
@@ -6630,11 +6633,14 @@ module.exports={
           "DisableRollback": {
             "type": "boolean"
           },
+          "RollbackConfiguration": {
+            "shape": "Sn"
+          },
           "TimeoutInMinutes": {
             "type": "integer"
           },
           "NotificationARNs": {
-            "shape": "Sn"
+            "shape": "St"
           },
           "Capabilities": {
             "shape": "Sj"
@@ -6647,7 +6653,7 @@ module.exports={
           "StackPolicyBody": {},
           "StackPolicyURL": {},
           "Tags": {
-            "shape": "Sp"
+            "shape": "Sv"
           },
           "ClientRequestToken": {}
         }
@@ -6671,13 +6677,13 @@ module.exports={
         "members": {
           "StackSetName": {},
           "Accounts": {
-            "shape": "S19"
+            "shape": "S1f"
           },
           "Regions": {
-            "shape": "S1b"
+            "shape": "S1h"
           },
           "OperationPreferences": {
-            "shape": "S1d"
+            "shape": "S1j"
           },
           "OperationId": {
             "idempotencyToken": true
@@ -6710,7 +6716,7 @@ module.exports={
             "shape": "Sj"
           },
           "Tags": {
-            "shape": "Sp"
+            "shape": "Sv"
           },
           "ClientRequestToken": {
             "idempotencyToken": true
@@ -6771,13 +6777,13 @@ module.exports={
         "members": {
           "StackSetName": {},
           "Accounts": {
-            "shape": "S19"
+            "shape": "S1f"
           },
           "Regions": {
-            "shape": "S1b"
+            "shape": "S1h"
           },
           "OperationPreferences": {
-            "shape": "S1d"
+            "shape": "S1j"
           },
           "RetainStacks": {
             "type": "boolean"
@@ -6869,13 +6875,16 @@ module.exports={
           "Status": {},
           "StatusReason": {},
           "NotificationARNs": {
+            "shape": "St"
+          },
+          "RollbackConfiguration": {
             "shape": "Sn"
           },
           "Capabilities": {
             "shape": "Sj"
           },
           "Tags": {
-            "shape": "Sp"
+            "shape": "Sv"
           },
           "Changes": {
             "type": "list",
@@ -7110,7 +7119,7 @@ module.exports={
                 "shape": "Sj"
               },
               "Tags": {
-                "shape": "Sp"
+                "shape": "Sv"
               }
             }
           }
@@ -7141,7 +7150,7 @@ module.exports={
               "Action": {},
               "Status": {},
               "OperationPreferences": {
-                "shape": "S1d"
+                "shape": "S1j"
               },
               "RetainStacks": {
                 "type": "boolean"
@@ -7192,13 +7201,16 @@ module.exports={
                 "LastUpdatedTime": {
                   "type": "timestamp"
                 },
+                "RollbackConfiguration": {
+                  "shape": "Sn"
+                },
                 "StackStatus": {},
                 "StackStatusReason": {},
                 "DisableRollback": {
                   "type": "boolean"
                 },
                 "NotificationARNs": {
-                  "shape": "Sn"
+                  "shape": "St"
                 },
                 "TimeoutInMinutes": {
                   "type": "integer"
@@ -7220,7 +7232,7 @@ module.exports={
                 },
                 "RoleARN": {},
                 "Tags": {
-                  "shape": "Sp"
+                  "shape": "Sv"
                 }
               }
             }
@@ -7354,7 +7366,7 @@ module.exports={
           "Version": {},
           "Metadata": {},
           "DeclaredTransforms": {
-            "shape": "S4m"
+            "shape": "S4s"
           }
         }
       }
@@ -7757,13 +7769,16 @@ module.exports={
             "shape": "Sl"
           },
           "RoleARN": {},
+          "RollbackConfiguration": {
+            "shape": "Sn"
+          },
           "StackPolicyBody": {},
           "StackPolicyURL": {},
           "NotificationARNs": {
-            "shape": "Sn"
+            "shape": "St"
           },
           "Tags": {
-            "shape": "Sp"
+            "shape": "Sv"
           },
           "ClientRequestToken": {}
         }
@@ -7797,10 +7812,10 @@ module.exports={
             "shape": "Sj"
           },
           "Tags": {
-            "shape": "Sp"
+            "shape": "Sv"
           },
           "OperationPreferences": {
-            "shape": "S1d"
+            "shape": "S1j"
           },
           "OperationId": {
             "idempotencyToken": true
@@ -7847,7 +7862,7 @@ module.exports={
           },
           "CapabilitiesReason": {},
           "DeclaredTransforms": {
-            "shape": "S4m"
+            "shape": "S4s"
           }
         }
       }
@@ -7876,10 +7891,32 @@ module.exports={
       "member": {}
     },
     "Sn": {
+      "type": "structure",
+      "members": {
+        "RollbackTriggers": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "Arn",
+              "Type"
+            ],
+            "members": {
+              "Arn": {},
+              "Type": {}
+            }
+          }
+        },
+        "MonitoringTimeInMinutes": {
+          "type": "integer"
+        }
+      }
+    },
+    "St": {
       "type": "list",
       "member": {}
     },
-    "Sp": {
+    "Sv": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -7893,19 +7930,19 @@ module.exports={
         }
       }
     },
-    "S19": {
+    "S1f": {
       "type": "list",
       "member": {}
     },
-    "S1b": {
+    "S1h": {
       "type": "list",
       "member": {}
     },
-    "S1d": {
+    "S1j": {
       "type": "structure",
       "members": {
         "RegionOrder": {
-          "shape": "S1b"
+          "shape": "S1h"
         },
         "FailureToleranceCount": {
           "type": "integer"
@@ -7921,7 +7958,7 @@ module.exports={
         }
       }
     },
-    "S4m": {
+    "S4s": {
       "type": "list",
       "member": {}
     }
@@ -78859,6 +78896,15 @@ module.exports={
                 "Permanent": {
                   "type": "boolean"
                 },
+                "RequiresAutoMinorEngineVersionUpgrade": {
+                  "type": "boolean"
+                },
+                "VpcOnly": {
+                  "type": "boolean"
+                },
+                "SupportsOptionVersionDowngrade": {
+                  "type": "boolean"
+                },
                 "OptionGroupOptionSettings": {
                   "type": "list",
                   "member": {
@@ -106644,7 +106690,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.103.0',
+  VERSION: '2.104.0',
 
 
   Signers: {},

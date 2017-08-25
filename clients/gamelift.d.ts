@@ -2011,7 +2011,7 @@ declare namespace GameLift {
     GameSessionData?: GameSessionData;
   }
   export type MatchmakingConfigurationList = MatchmakingConfiguration[];
-  export type MatchmakingConfigurationStatus = "CANCELED"|"COMPLETE"|"FAILED"|"PLACING"|"QUEUED"|"REQUIRES_ACCEPTANCE"|"SEARCHING"|"TIMED_OUT"|string;
+  export type MatchmakingConfigurationStatus = "CANCELLED"|"COMPLETED"|"FAILED"|"PLACING"|"QUEUED"|"REQUIRES_ACCEPTANCE"|"SEARCHING"|"TIMED_OUT"|string;
   export type MatchmakingIdList = MatchmakingIdStringModel[];
   export type MatchmakingIdStringModel = string;
   export type MatchmakingPlayerIdList = PlayerIdStringModel[];
