@@ -230,6 +230,7 @@ declare namespace ConfigService {
   export type AllSupported = boolean;
   export type AvailabilityZone = string;
   export type AwsRegion = string;
+  export type BaseResourceId = string;
   export type Boolean = boolean;
   export type ChannelName = string;
   export type ChronologicalOrder = "Reverse"|"Forward"|string;
@@ -262,7 +263,7 @@ declare namespace ConfigService {
     /**
      * The ID of the AWS resource that was evaluated.
      */
-    ResourceId?: StringWithCharLimit256;
+    ResourceId?: BaseResourceId;
     /**
      * Indicates whether the AWS resource complies with all of the AWS Config rules that evaluated it.
      */
@@ -691,7 +692,7 @@ declare namespace ConfigService {
     /**
      * The ID of the AWS resource for which you want compliance information. You can specify only one resource ID. If you specify a resource ID, you must also specify a type for ResourceType.
      */
-    ResourceId?: StringWithCharLimit256;
+    ResourceId?: BaseResourceId;
     /**
      * Filters the results by compliance. The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
      */
@@ -817,7 +818,7 @@ declare namespace ConfigService {
     /**
      * The ID of the AWS resource that was evaluated.
      */
-    ComplianceResourceId: StringWithCharLimit256;
+    ComplianceResourceId: BaseResourceId;
     /**
      * Indicates whether the AWS resource complies with the AWS Config rule that it was evaluated against. For the Evaluation data type, AWS Config supports only the COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE values. AWS Config does not support the INSUFFICIENT_DATA value for this data type. Similarly, AWS Config does not accept INSUFFICIENT_DATA as the value for ComplianceType from a PutEvaluations request. For example, an AWS Lambda function for a custom Config rule cannot pass an INSUFFICIENT_DATA value to AWS Config.
      */
@@ -879,7 +880,7 @@ declare namespace ConfigService {
     /**
      * The ID of the evaluated AWS resource.
      */
-    ResourceId?: StringWithCharLimit256;
+    ResourceId?: BaseResourceId;
   }
   export type EvaluationResults = EvaluationResult[];
   export type Evaluations = Evaluation[];
@@ -920,7 +921,7 @@ declare namespace ConfigService {
     /**
      * The ID of the AWS resource for which you want compliance information.
      */
-    ResourceId: StringWithCharLimit256;
+    ResourceId: BaseResourceId;
     /**
      * Filters the results by compliance. The allowed values are COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE.
      */
@@ -1205,7 +1206,7 @@ declare namespace ConfigService {
     /**
      * The IDs of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ComplianceResourceTypes.
      */
-    ComplianceResourceId?: StringWithCharLimit256;
+    ComplianceResourceId?: BaseResourceId;
   }
   export interface Source {
     /**

@@ -100,11 +100,11 @@ declare class EC2 extends Service {
    */
   associateSubnetCidrBlock(callback?: (err: AWSError, data: EC2.Types.AssociateSubnetCidrBlockResult) => void): Request<EC2.Types.AssociateSubnetCidrBlockResult, AWSError>;
   /**
-   * Associates a CIDR block with your VPC. You can only associate a single Amazon-provided IPv6 CIDR block with your VPC. The IPv6 CIDR block size is fixed at /56.
+   * Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR block. The IPv6 CIDR block size is fixed at /56. For more information about associating CIDR blocks with your VPC and applicable restrictions, see VPC and Subnet Sizing in the Amazon Virtual Private Cloud User Guide.
    */
   associateVpcCidrBlock(params: EC2.Types.AssociateVpcCidrBlockRequest, callback?: (err: AWSError, data: EC2.Types.AssociateVpcCidrBlockResult) => void): Request<EC2.Types.AssociateVpcCidrBlockResult, AWSError>;
   /**
-   * Associates a CIDR block with your VPC. You can only associate a single Amazon-provided IPv6 CIDR block with your VPC. The IPv6 CIDR block size is fixed at /56.
+   * Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR block. The IPv6 CIDR block size is fixed at /56. For more information about associating CIDR blocks with your VPC and applicable restrictions, see VPC and Subnet Sizing in the Amazon Virtual Private Cloud User Guide.
    */
   associateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.AssociateVpcCidrBlockResult) => void): Request<EC2.Types.AssociateVpcCidrBlockResult, AWSError>;
   /**
@@ -428,11 +428,11 @@ declare class EC2 extends Service {
    */
   createSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The subnet's IPv4 CIDR block can be the same as the VPC's IPv4 CIDR block (assuming you want only a single subnet in the VPC), or a subset of the VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the IPv4 CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(params: EC2.Types.CreateSubnetRequest, callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
-   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The subnet's IPv4 CIDR block can be the same as the VPC's IPv4 CIDR block (assuming you want only a single subnet in the VPC), or a subset of the VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and the IPv4 CIDR block you want for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
@@ -644,11 +644,11 @@ declare class EC2 extends Service {
    */
   deleteSubnet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified set of tags from the specified set of resources. This call is designed to follow a DescribeTags request. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified set of tags from the specified set of resources. To list the current tags, use DescribeTags. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteTags(params: EC2.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified set of tags from the specified set of resources. This call is designed to follow a DescribeTags request. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified set of tags from the specified set of resources. To list the current tags, use DescribeTags. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1372,11 +1372,11 @@ declare class EC2 extends Service {
    */
   disassociateSubnetCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateSubnetCidrBlockResult) => void): Request<EC2.Types.DisassociateSubnetCidrBlockResult, AWSError>;
   /**
-   * Disassociates a CIDR block from a VPC. Currently, you can disassociate an IPv6 CIDR block only. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it. 
+   * Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you must specify its association ID. You can get the association ID by using DescribeVpcs. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it.  You cannot disassociate the CIDR block with which you originally created the VPC (the primary CIDR block).
    */
   disassociateVpcCidrBlock(params: EC2.Types.DisassociateVpcCidrBlockRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
   /**
-   * Disassociates a CIDR block from a VPC. Currently, you can disassociate an IPv6 CIDR block only. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it. 
+   * Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you must specify its association ID. You can get the association ID by using DescribeVpcs. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it.  You cannot disassociate the CIDR block with which you originally created the VPC (the primary CIDR block).
    */
   disassociateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
   /**
@@ -2459,6 +2459,10 @@ declare namespace EC2 {
      */
     AmazonProvidedIpv6CidrBlock?: Boolean;
     /**
+     * An IPv4 CIDR block to associate with the VPC.
+     */
+    CidrBlock?: String;
+    /**
      * The ID of the VPC.
      */
     VpcId: String;
@@ -2468,6 +2472,10 @@ declare namespace EC2 {
      * Information about the IPv6 CIDR block association.
      */
     Ipv6CidrBlockAssociation?: VpcIpv6CidrBlockAssociation;
+    /**
+     * Information about the IPv4 CIDR block association.
+     */
+    CidrBlockAssociation?: VpcCidrBlockAssociation;
     /**
      * The ID of the VPC.
      */
@@ -2965,6 +2973,13 @@ declare namespace EC2 {
     State?: CancelSpotInstanceRequestState;
   }
   export type CancelledSpotInstanceRequestList = CancelledSpotInstanceRequest[];
+  export interface CidrBlock {
+    /**
+     * The IPv4 CIDR block.
+     */
+    CidrBlock?: String;
+  }
+  export type CidrBlockSet = CidrBlock[];
   export interface ClassicLinkDnsSupport {
     /**
      * Indicates whether ClassicLink DNS support is enabled for the VPC.
@@ -4190,11 +4205,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the resource. For example, ami-1a2b3c4d. You can specify more than one resource ID.
+     * The IDs of one or more resources.
      */
     Resources: ResourceIdList;
     /**
-     * One or more tags to delete. If you omit the value parameter, we delete the tag regardless of its value. If you specify this parameter with an empty string as the value, we delete the key only if its value is an empty string.
+     * One or more tags to delete. If you omit this parameter, we delete all tags for the specified resources. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string.
      */
     Tags?: TagList;
   }
@@ -6101,7 +6116,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcsRequest {
     /**
-     * One or more filters.    cidr - The IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC's CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, /28).    dhcp-options-id - The ID of a set of DHCP options.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the VPC.    ipv6-cidr-block-association.association-id - The association ID for an IPv6 CIDR block associated with the VPC.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the VPC.    isDefault - Indicates whether the VPC is the default VPC.    state - The state of the VPC (pending | available).    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC.  
+     * One or more filters.    cidr - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC's CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, /28).    cidr-block-association.cidr-block - An IPv4 CIDR block associated with the VPC.    cidr-block-association.association-id - The association ID for an IPv4 CIDR block associated with the VPC.    cidr-block-association.state - The state of an IPv4 CIDR block associated with the VPC.    dhcp-options-id - The ID of a set of DHCP options.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the VPC.    ipv6-cidr-block-association.association-id - The association ID for an IPv6 CIDR block associated with the VPC.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the VPC.    isDefault - Indicates whether the VPC is the default VPC.    state - The state of the VPC (pending | available).    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-id - The ID of the VPC.  
      */
     Filters?: FilterList;
     /**
@@ -6373,6 +6388,10 @@ declare namespace EC2 {
      * Information about the IPv6 CIDR block association.
      */
     Ipv6CidrBlockAssociation?: VpcIpv6CidrBlockAssociation;
+    /**
+     * Information about the IPv4 CIDR block association.
+     */
+    CidrBlockAssociation?: VpcCidrBlockAssociation;
     /**
      * The ID of the VPC.
      */
@@ -11941,7 +11960,7 @@ declare namespace EC2 {
      */
     Code?: String;
     /**
-     * The message for the state change.    Server.InsufficientInstanceCapacity: There was insufficient instance capacity to satisfy the launch request.    Server.InternalError: An internal error occurred during instance launch, resulting in termination.    Server.ScheduledStop: The instance was stopped due to a scheduled retirement.    Server.SpotInstanceTermination: A Spot instance was terminated due to an increase in the market price.    Client.InternalError: A client error caused the instance to terminate on launch.    Client.InstanceInitiatedShutdown: The instance was shut down using the shutdown -h command from the instance.    Client.UserInitiatedShutdown: The instance was shut down using the Amazon EC2 API.    Client.VolumeLimitExceeded: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits.    Client.InvalidSnapshot.NotFound: The specified snapshot was not found.  
+     * The message for the state change.    Server.InsufficientInstanceCapacity: There was insufficient instance capacity to satisfy the launch request.    Server.InternalError: An internal error occurred during instance launch, resulting in termination.    Server.ScheduledStop: The instance was stopped due to a scheduled retirement.    Server.SpotInstanceTermination: A Spot instance was terminated due to an increase in the market price.    Client.InternalError: A client error caused the instance to terminate on launch.    Client.InstanceInitiatedShutdown: The instance was shut down using the shutdown -h command from the instance.    Client.InstanceTerminated: The instance was terminated or rebooted during AMI creation.    Client.UserInitiatedShutdown: The instance was shut down using the Amazon EC2 API.    Client.VolumeLimitExceeded: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits.    Client.InvalidSnapshot.NotFound: The specified snapshot was not found.  
      */
     Message?: String;
   }
@@ -12533,7 +12552,7 @@ declare namespace EC2 {
   export type VolumeType = "standard"|"io1"|"gp2"|"sc1"|"st1"|string;
   export interface Vpc {
     /**
-     * The IPv4 CIDR block for the VPC.
+     * The primary IPv4 CIDR block for the VPC.
      */
     CidrBlock?: String;
     /**
@@ -12557,6 +12576,10 @@ declare namespace EC2 {
      */
     Ipv6CidrBlockAssociationSet?: VpcIpv6CidrBlockAssociationSet;
     /**
+     * Information about the IPv4 CIDR blocks associated with the VPC.
+     */
+    CidrBlockAssociationSet?: VpcCidrBlockAssociationSet;
+    /**
      * Indicates whether the VPC is the default VPC.
      */
     IsDefault?: Boolean;
@@ -12577,6 +12600,21 @@ declare namespace EC2 {
   }
   export type VpcAttachmentList = VpcAttachment[];
   export type VpcAttributeName = "enableDnsSupport"|"enableDnsHostnames"|string;
+  export interface VpcCidrBlockAssociation {
+    /**
+     * The association ID for the IPv4 CIDR block.
+     */
+    AssociationId?: String;
+    /**
+     * The IPv4 CIDR block.
+     */
+    CidrBlock?: String;
+    /**
+     * Information about the state of the CIDR block.
+     */
+    CidrBlockState?: VpcCidrBlockState;
+  }
+  export type VpcCidrBlockAssociationSet = VpcCidrBlockAssociation[];
   export interface VpcCidrBlockState {
     /**
      * The state of the CIDR block.
@@ -12713,6 +12751,10 @@ declare namespace EC2 {
      * The IPv6 CIDR block for the VPC.
      */
     Ipv6CidrBlockSet?: Ipv6CidrBlockSet;
+    /**
+     * Information about the IPv4 CIDR blocks for the VPC.
+     */
+    CidrBlockSet?: CidrBlockSet;
     /**
      * The AWS account ID of the VPC owner.
      */

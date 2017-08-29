@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.104.0-->
+<!--LATEST=2.105.0-->
 <!--ENTRYINSERT-->
+
+## 2.105.0
+* feature: ConfigService: Increased the internal size limit of resourceId
+* feature: EC2: Provides capability to add secondary CIDR blocks to a VPC.
 
 ## 2.104.0
 * feature: CloudFormation: Rollback triggers enable you to have AWS CloudFormation monitor the state of your application during stack creation and updating, and to roll back that operation if the application breaches the threshold of any of the alarms you've specified.
