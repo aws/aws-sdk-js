@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.105.0-->
+<!--LATEST=2.106.0-->
 <!--ENTRYINSERT-->
+
+## 2.106.0
+* feature: ApplicationAutoScaling: Application Auto Scaling now supports the DisableScaleIn option for Target Tracking Scaling Policies. This allows customers to create scaling policies that will only add capacity to the target.
+* feature: Organizations: The exception ConstraintViolationException now contains a new reason subcode MASTERACCOUNT_MISSING_CONTACT_INFO to make it easier to understand why attempting to remove an account from an Organization can fail. We also improved several other of the text descriptions and examples.
 
 ## 2.105.0
 * feature: ConfigService: Increased the internal size limit of resourceId

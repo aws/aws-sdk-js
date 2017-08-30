@@ -379,6 +379,7 @@
         }
       }
     },
+    "DisableScaleIn":{"type":"boolean"},
     "ErrorMessage":{"type":"string"},
     "FailedResourceAccessException":{
       "type":"structure",
@@ -892,7 +893,8 @@
         "ScaleInCooldown":{
           "shape":"Cooldown",
           "documentation":"<p>The amount of time, in seconds, after a scale in activity completes before another scale in activity can start.</p> <p>The cooldown period is used to block subsequent scale in requests until it has expired. The intention is to scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, Application Auto Scaling scales out your scalable target immediately.</p>"
-        }
+        },
+        "DisableScaleIn":{"shape":"DisableScaleIn"}
       },
       "documentation":"<p>Represents a target tracking scaling policy configuration.</p>"
     },

@@ -240,6 +240,7 @@ declare namespace ApplicationAutoScaling {
      */
     NextToken?: XmlString;
   }
+  export type DisableScaleIn = boolean;
   export type ErrorMessage = string;
   export type MaxResults = number;
   export type MetricAggregationType = "Average"|"Minimum"|"Maximum"|string;
@@ -531,6 +532,7 @@ declare namespace ApplicationAutoScaling {
      * The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. The intention is to scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, Application Auto Scaling scales out your scalable target immediately.
      */
     ScaleInCooldown?: Cooldown;
+    DisableScaleIn?: DisableScaleIn;
   }
   export type TimestampType = Date;
   export type XmlString = string;
