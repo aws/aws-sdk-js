@@ -108,11 +108,11 @@ declare class LexModelBuildingService extends Service {
    */
   deleteUtterances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias.   The GetBot operation requires permissions for the lex:GetBot action. 
+   * Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias.   This operation requires permissions for the lex:GetBot action. 
    */
   getBot(params: LexModelBuildingService.Types.GetBotRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotResponse) => void): Request<LexModelBuildingService.Types.GetBotResponse, AWSError>;
   /**
-   * Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias.   The GetBot operation requires permissions for the lex:GetBot action. 
+   * Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias.   This operation requires permissions for the lex:GetBot action. 
    */
   getBot(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotResponse) => void): Request<LexModelBuildingService.Types.GetBotResponse, AWSError>;
   /**
@@ -601,6 +601,10 @@ declare namespace LexModelBuildingService {
      * Checksum of the $LATEST version of the slot type.
      */
     checksum?: String;
+    /**
+     * The strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
+     */
+    valueSelectionStrategy?: SlotValueSelectionStrategy;
   }
   export type CustomOrBuiltinSlotTypeName = string;
   export interface DeleteBotAliasRequest {
@@ -691,6 +695,10 @@ declare namespace LexModelBuildingService {
      * The value of the slot type.
      */
     value: Value;
+    /**
+     * Additional values related to the slot type value.
+     */
+    synonyms?: SynonymList;
   }
   export type EnumerationValues = EnumerationValue[];
   export interface FollowUpPrompt {
@@ -1213,6 +1221,10 @@ declare namespace LexModelBuildingService {
      * Checksum of the $LATEST version of the slot type.
      */
     checksum?: String;
+    /**
+     * The strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
+     */
+    valueSelectionStrategy?: SlotValueSelectionStrategy;
   }
   export interface GetSlotTypeVersionsRequest {
     /**
@@ -1530,7 +1542,7 @@ declare namespace LexModelBuildingService {
      */
     description?: Description;
     /**
-     * An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see &lt;xref linkend="how-it-works"/&gt;. 
+     * An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see how-it-works. 
      */
     slots?: SlotList;
     /**
@@ -1558,7 +1570,7 @@ declare namespace LexModelBuildingService {
      */
     dialogCodeHook?: CodeHook;
     /**
-     *  Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, fulfillmentActivity defines how the bot places an order with a local pizza store.   You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). 
+     * Required. Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, fulfillmentActivity defines how the bot places an order with a local pizza store.   You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). 
      */
     fulfillmentActivity?: FulfillmentActivity;
     /**
@@ -1642,13 +1654,17 @@ declare namespace LexModelBuildingService {
      */
     description?: Description;
     /**
-     * A list of EnumerationValue objects that defines the values that the slot type can take.
+     * A list of EnumerationValue objects that defines the values that the slot type can take. Each value can have a list of synonyms, which are additional values that help train the machine learning model about the values that it resolves for a slot.  When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The valueSelectionStrategy field indicates the option to use. 
      */
     enumerationValues?: EnumerationValues;
     /**
      * Identifies a specific revision of the $LATEST version. When you create a new slot type, leave the checksum field blank. If you specify a checksum you get a BadRequestException exception. When you want to update a slot type, set the checksum field to the checksum of the most recent revision of the $LATEST version. If you don't specify the  checksum field, or if the checksum does not match the $LATEST version, you get a PreconditionFailedException exception.
      */
     checksum?: String;
+    /**
+     * Determines the strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:    ORIGINAL_VALUE - Returns the value entered by the user.    TOP_RESOLUTION - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy is not provided, the default is ORIGINAL_VALUE.
+     */
+    valueSelectionStrategy?: SlotValueSelectionStrategy;
   }
   export interface PutSlotTypeResponse {
     /**
@@ -1679,6 +1695,10 @@ declare namespace LexModelBuildingService {
      * Checksum of the $LATEST version of the slot type.
      */
     checksum?: String;
+    /**
+     * The strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
+     */
+    valueSelectionStrategy?: SlotValueSelectionStrategy;
   }
   export type ReferenceType = "Intent"|"Bot"|"BotAlias"|"BotChannel"|string;
   export interface ResourceReference {
@@ -1759,6 +1779,7 @@ declare namespace LexModelBuildingService {
   export type SlotTypeMetadataList = SlotTypeMetadata[];
   export type SlotTypeName = string;
   export type SlotUtteranceList = Utterance[];
+  export type SlotValueSelectionStrategy = "ORIGINAL_VALUE"|"TOP_RESOLUTION"|string;
   export interface Statement {
     /**
      * A collection of message objects.
@@ -1772,6 +1793,7 @@ declare namespace LexModelBuildingService {
   export type Status = "BUILDING"|"READY"|"FAILED"|"NOT_BUILT"|string;
   export type StatusType = "Detected"|"Missed"|string;
   export type String = string;
+  export type SynonymList = Value[];
   export type Timestamp = Date;
   export type UserId = string;
   export type Utterance = string;

@@ -185,7 +185,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"AuthorizeSecurityGroupEgressRequest"},
-      "documentation":"<p>[EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination IPv4 or IPv6 CIDR address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. For more information about security group limits, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html\">Amazon VPC Limits</a>.</p> <p>Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.</p> <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p>"
+      "documentation":"<p>[EC2-VPC only] Adds one or more egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to one or more destination IPv4 or IPv6 CIDR address ranges, or to one or more destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. For more information about security group limits, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html\">Amazon VPC Limits</a>.</p> <p>Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. You can optionally specify a description for the rule.</p> <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p>"
     },
     "AuthorizeSecurityGroupIngress":{
       "name":"AuthorizeSecurityGroupIngress",
@@ -194,7 +194,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"AuthorizeSecurityGroupIngressRequest"},
-      "documentation":"<p>Adds one or more ingress rules to a security group.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p> <p>[EC2-Classic] This action gives one or more IPv4 CIDR address ranges permission to access a security group in your account, or gives one or more security groups (called the <i>source groups</i>) permission to access a security group for your account. A source group can be for your own AWS account, or another. You can have up to 100 rules per group.</p> <p>[EC2-VPC] This action gives one or more IPv4 or IPv6 CIDR address ranges permission to access a security group in your VPC, or gives one or more other security groups (called the <i>source groups</i>) permission to access a security group for your VPC. The security groups must all be for the same VPC or a peer VPC in a VPC peering connection. For more information about VPC security group limits, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html\">Amazon VPC Limits</a>.</p>"
+      "documentation":"<p>Adds one or more ingress rules to a security group.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p> <p>[EC2-Classic] This action gives one or more IPv4 CIDR address ranges permission to access a security group in your account, or gives one or more security groups (called the <i>source groups</i>) permission to access a security group for your account. A source group can be for your own AWS account, or another. You can have up to 100 rules per group.</p> <p>[EC2-VPC] This action gives one or more IPv4 or IPv6 CIDR address ranges permission to access a security group in your VPC, or gives one or more other security groups (called the <i>source groups</i>) permission to access a security group for your VPC. The security groups must all be for the same VPC or a peer VPC in a VPC peering connection. For more information about VPC security group limits, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html\">Amazon VPC Limits</a>.</p> <p>You can optionally specify a description for the security group rule.</p>"
     },
     "BundleInstance":{
       "name":"BundleInstance",
@@ -2200,7 +2200,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"RevokeSecurityGroupEgressRequest"},
-      "documentation":"<p>[EC2-VPC only] Removes one or more egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be revoked.</p> <p>Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>"
+      "documentation":"<p>[EC2-VPC only] Removes one or more egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.</p> <p>Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>"
     },
     "RevokeSecurityGroupIngress":{
       "name":"RevokeSecurityGroupIngress",
@@ -2209,7 +2209,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"RevokeSecurityGroupIngressRequest"},
-      "documentation":"<p>Removes one or more ingress rules from a security group. The values that you specify in the revoke request (for example, ports) must match the existing rule's values for the rule to be removed.</p> <note> <p>[EC2-Classic security groups only] If the values you specify do not match the existing rule's values, no error is returned. Use <a>DescribeSecurityGroups</a> to verify that the rule has been removed.</p> </note> <p>Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>"
+      "documentation":"<p>Removes one or more ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.</p> <note> <p>[EC2-Classic security groups only] If the values you specify do not match the existing rule's values, no error is returned. Use <a>DescribeSecurityGroups</a> to verify that the rule has been removed.</p> </note> <p>Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>"
     },
     "RunInstances":{
       "name":"RunInstances",
@@ -2289,6 +2289,26 @@
       "input":{"shape":"UnmonitorInstancesRequest"},
       "output":{"shape":"UnmonitorInstancesResult"},
       "documentation":"<p>Disables detailed monitoring for a running instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html\">Monitoring Your Instances and Volumes</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "UpdateSecurityGroupRuleDescriptionsEgress":{
+      "name":"UpdateSecurityGroupRuleDescriptionsEgress",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateSecurityGroupRuleDescriptionsEgressRequest"},
+      "output":{"shape":"UpdateSecurityGroupRuleDescriptionsEgressResult"},
+      "documentation":"<p>[EC2-VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously.</p> <p>You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.</p>"
+    },
+    "UpdateSecurityGroupRuleDescriptionsIngress":{
+      "name":"UpdateSecurityGroupRuleDescriptionsIngress",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateSecurityGroupRuleDescriptionsIngressRequest"},
+      "output":{"shape":"UpdateSecurityGroupRuleDescriptionsIngressResult"},
+      "documentation":"<p>Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously.</p> <p>You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.</p>"
     }
   },
   "shapes":{
@@ -3168,15 +3188,15 @@
         },
         "FromPort":{
           "shape":"Integer",
-          "documentation":"<p>The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use <code>-1</code> to specify all types.</p>"
+          "documentation":"<p>The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use <code>-1</code> to specify all types. If you specify all ICMP/ICMPv6 types, you must specify all codes.</p>"
         },
         "GroupId":{
           "shape":"String",
-          "documentation":"<p>The ID of the security group. Required for a nondefault VPC.</p>"
+          "documentation":"<p>The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.</p>"
         },
         "GroupName":{
           "shape":"String",
-          "documentation":"<p>[EC2-Classic, default VPC] The name of the security group.</p>"
+          "documentation":"<p>[EC2-Classic, default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.</p>"
         },
         "IpPermissions":{
           "shape":"IpPermissionList",
@@ -3196,7 +3216,7 @@
         },
         "ToPort":{
           "shape":"Integer",
-          "documentation":"<p>The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use <code>-1</code> to specify all codes.</p>"
+          "documentation":"<p>The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use <code>-1</code> to specify all codes. If you specify all ICMP/ICMPv6 types, you must specify all codes.</p>"
         },
         "DryRun":{
           "shape":"Boolean",
@@ -12437,7 +12457,7 @@
       "members":{
         "FromPort":{
           "shape":"Integer",
-          "documentation":"<p>The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of <code>-1</code> indicates all ICMP/ICMPv6 types.</p>",
+          "documentation":"<p>The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of <code>-1</code> indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.</p>",
           "locationName":"fromPort"
         },
         "IpProtocol":{
@@ -12462,7 +12482,7 @@
         },
         "ToPort":{
           "shape":"Integer",
-          "documentation":"<p>The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes for the specified ICMP type.</p>",
+          "documentation":"<p>The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes for the specified ICMP type. If you specify all ICMP/ICMPv6 types, you must specify all codes.</p>",
           "locationName":"toPort"
         },
         "UserIdGroupPairs":{
@@ -12487,6 +12507,11 @@
           "shape":"String",
           "documentation":"<p>The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix.</p>",
           "locationName":"cidrIp"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A description for the security group rule that references this IPv4 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>",
+          "locationName":"description"
         }
       },
       "documentation":"<p>Describes an IPv4 range.</p>"
@@ -12538,6 +12563,11 @@
           "shape":"String",
           "documentation":"<p>The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix.</p>",
           "locationName":"cidrIpv6"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A description for the security group rule that references this IPv6 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>",
+          "locationName":"description"
         }
       },
       "documentation":"<p>[EC2-VPC only] Describes an IPv6 range.</p>"
@@ -14288,6 +14318,11 @@
     "PrefixListId":{
       "type":"structure",
       "members":{
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A description for the security group rule that references this prefix list ID.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>",
+          "locationName":"description"
+        },
         "PrefixListId":{
           "shape":"String",
           "documentation":"<p>The ID of the prefix.</p>",
@@ -18751,6 +18786,74 @@
         "locationName":"item"
       }
     },
+    "UpdateSecurityGroupRuleDescriptionsEgressRequest":{
+      "type":"structure",
+      "required":["IpPermissions"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "GroupId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.</p>"
+        },
+        "GroupName":{
+          "shape":"String",
+          "documentation":"<p>[Default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.</p>"
+        },
+        "IpPermissions":{
+          "shape":"IpPermissionList",
+          "documentation":"<p>The IP permissions for the security group rule.</p>"
+        }
+      },
+      "documentation":"<p>Contains the parameters for UpdateSecurityGroupRuleDescriptionsEgress.</p>"
+    },
+    "UpdateSecurityGroupRuleDescriptionsEgressResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
+          "locationName":"return"
+        }
+      },
+      "documentation":"<p>Contains the output of UpdateSecurityGroupRuleDescriptionsEgress.</p>"
+    },
+    "UpdateSecurityGroupRuleDescriptionsIngressRequest":{
+      "type":"structure",
+      "required":["IpPermissions"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "GroupId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.</p>"
+        },
+        "GroupName":{
+          "shape":"String",
+          "documentation":"<p>[EC2-Classic, default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.</p>"
+        },
+        "IpPermissions":{
+          "shape":"IpPermissionList",
+          "documentation":"<p>The IP permissions for the security group rule. </p>"
+        }
+      },
+      "documentation":"<p>Contains the parameters for UpdateSecurityGroupRuleDescriptionsIngress.</p>"
+    },
+    "UpdateSecurityGroupRuleDescriptionsIngressResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
+          "locationName":"return"
+        }
+      },
+      "documentation":"<p>Contains the output of UpdateSecurityGroupRuleDescriptionsIngress.</p>"
+    },
     "UserBucket":{
       "type":"structure",
       "members":{
@@ -18802,6 +18905,11 @@
     "UserIdGroupPair":{
       "type":"structure",
       "members":{
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A description for the security group rule that references this user ID group pair.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>",
+          "locationName":"description"
+        },
         "GroupId":{
           "shape":"String",
           "documentation":"<p>The ID of the security group.</p>",

@@ -242,7 +242,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias. </p> <p> The GetBot operation requires permissions for the <code>lex:GetBot</code> action. </p>"
+      "documentation":"<p>Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias. </p> <p> This operation requires permissions for the <code>lex:GetBot</code> action. </p>"
     },
     "GetBotAlias":{
       "name":"GetBotAlias",
@@ -792,7 +792,8 @@
       "key":{"shape":"String"},
       "value":{"shape":"String"},
       "max":10,
-      "min":1
+      "min":1,
+      "sensitive":true
     },
     "ChannelType":{
       "type":"string",
@@ -1050,6 +1051,10 @@
         "checksum":{
           "shape":"String",
           "documentation":"<p>Checksum of the <code>$LATEST</code> version of the slot type.</p>"
+        },
+        "valueSelectionStrategy":{
+          "shape":"SlotValueSelectionStrategy",
+          "documentation":"<p>The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.</p>"
         }
       }
     },
@@ -1240,6 +1245,10 @@
         "value":{
           "shape":"Value",
           "documentation":"<p>The value of the slot type.</p>"
+        },
+        "synonyms":{
+          "shape":"SynonymList",
+          "documentation":"<p>Additional values related to the slot type value.</p>"
         }
       },
       "documentation":"<p>Each slot type can have a set of values. Each enumeration value represents a value the slot type can take. </p> <p>For example, a pizza ordering bot could have a slot type that specifies the type of crust that the pizza should have. The slot type could include the values </p> <ul> <li> <p>thick</p> </li> <li> <p>thin</p> </li> <li> <p>stuffed</p> </li> </ul>"
@@ -1982,6 +1991,10 @@
         "checksum":{
           "shape":"String",
           "documentation":"<p>Checksum of the <code>$LATEST</code> version of the slot type.</p>"
+        },
+        "valueSelectionStrategy":{
+          "shape":"SlotValueSelectionStrategy",
+          "documentation":"<p>The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.</p>"
         }
       }
     },
@@ -2520,7 +2533,7 @@
         },
         "slots":{
           "shape":"SlotList",
-          "documentation":"<p>An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see &lt;xref linkend=\"how-it-works\"/&gt;. </p>"
+          "documentation":"<p>An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see <a>how-it-works</a>. </p>"
         },
         "sampleUtterances":{
           "shape":"IntentUtteranceList",
@@ -2548,7 +2561,7 @@
         },
         "fulfillmentActivity":{
           "shape":"FulfillmentActivity",
-          "documentation":"<p> Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, <code>fulfillmentActivity</code> defines how the bot places an order with a local pizza store. </p> <p> You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). </p>"
+          "documentation":"<p>Required. Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, <code>fulfillmentActivity</code> defines how the bot places an order with a local pizza store. </p> <p> You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). </p>"
         },
         "parentIntentSignature":{
           "shape":"BuiltinIntentSignature",
@@ -2641,11 +2654,15 @@
         },
         "enumerationValues":{
           "shape":"EnumerationValues",
-          "documentation":"<p>A list of <code>EnumerationValue</code> objects that defines the values that the slot type can take.</p>"
+          "documentation":"<p>A list of <code>EnumerationValue</code> objects that defines the values that the slot type can take. Each value can have a list of <code>synonyms</code>, which are additional values that help train the machine learning model about the values that it resolves for a slot. </p> <p>When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The <code>valueSelectionStrategy</code> field indicates the option to use. </p>"
         },
         "checksum":{
           "shape":"String",
           "documentation":"<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new slot type, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a slot type, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don't specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>"
+        },
+        "valueSelectionStrategy":{
+          "shape":"SlotValueSelectionStrategy",
+          "documentation":"<p>Determines the strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don't specify the <code>valueSelectionStrategy</code> is not provided, the default is <code>ORIGINAL_VALUE</code>.</p>"
         }
       }
     },
@@ -2679,6 +2696,10 @@
         "checksum":{
           "shape":"String",
           "documentation":"<p>Checksum of the <code>$LATEST</code> version of the slot type.</p>"
+        },
+        "valueSelectionStrategy":{
+          "shape":"SlotValueSelectionStrategy",
+          "documentation":"<p>The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.</p>"
         }
       }
     },
@@ -2832,6 +2853,13 @@
       "max":10,
       "min":0
     },
+    "SlotValueSelectionStrategy":{
+      "type":"string",
+      "enum":[
+        "ORIGINAL_VALUE",
+        "TOP_RESOLUTION"
+      ]
+    },
     "Statement":{
       "type":"structure",
       "required":["messages"],
@@ -2864,6 +2892,10 @@
       ]
     },
     "String":{"type":"string"},
+    "SynonymList":{
+      "type":"list",
+      "member":{"shape":"Value"}
+    },
     "Timestamp":{"type":"timestamp"},
     "UserId":{
       "type":"string",

@@ -496,6 +496,10 @@ declare namespace ELBv2 {
      * The HTTP codes to use when checking for a successful response from a target. The default is 200.
      */
     Matcher?: Matcher;
+    /**
+     * The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address). The default is instance. Note that you can't specify targets for a target group using both instance IDs and IP addresses. If the target type is ip, specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.
+     */
+    TargetType?: TargetTypeEnum;
   }
   export interface CreateTargetGroupOutput {
     /**
@@ -1223,13 +1227,17 @@ declare namespace ELBv2 {
   export type TagValue = string;
   export interface TargetDescription {
     /**
-     * The ID of the target.
+     * The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address.
      */
     Id: TargetId;
     /**
      * The port on which the target is listening.
      */
     Port?: Port;
+    /**
+     * The Availability Zone where the IP address is to be registered. Specify all to register an IP address outside the target group VPC with all Availability Zones that are enabled for the load balancer. If the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. This parameter is not supported if the target type of the target group is instance.
+     */
+    AvailabilityZone?: ZoneName;
   }
   export type TargetDescriptions = TargetDescription[];
   export interface TargetGroup {
@@ -1289,6 +1297,10 @@ declare namespace ELBv2 {
      * The Amazon Resource Names (ARN) of the load balancers that route traffic to this target group.
      */
     LoadBalancerArns?: LoadBalancerArns;
+    /**
+     * The type of target that you must specify when registering targets with this target group. The possible values are instance (targets are specified by instance ID) or ip (targets are specified by IP address).
+     */
+    TargetType?: TargetTypeEnum;
   }
   export type TargetGroupArn = string;
   export type TargetGroupArns = TargetGroupArn[];
@@ -1337,9 +1349,10 @@ declare namespace ELBv2 {
     TargetHealth?: TargetHealth;
   }
   export type TargetHealthDescriptions = TargetHealthDescription[];
-  export type TargetHealthReasonEnum = "Elb.RegistrationInProgress"|"Elb.InitialHealthChecking"|"Target.ResponseCodeMismatch"|"Target.Timeout"|"Target.FailedHealthChecks"|"Target.NotRegistered"|"Target.NotInUse"|"Target.DeregistrationInProgress"|"Target.InvalidState"|"Elb.InternalError"|string;
+  export type TargetHealthReasonEnum = "Elb.RegistrationInProgress"|"Elb.InitialHealthChecking"|"Target.ResponseCodeMismatch"|"Target.Timeout"|"Target.FailedHealthChecks"|"Target.NotRegistered"|"Target.NotInUse"|"Target.DeregistrationInProgress"|"Target.InvalidState"|"Target.IpUnusable"|"Elb.InternalError"|string;
   export type TargetHealthStateEnum = "initial"|"healthy"|"unhealthy"|"unused"|"draining"|string;
   export type TargetId = string;
+  export type TargetTypeEnum = "instance"|"ip"|string;
   export type VpcId = string;
   export type ZoneName = string;
   /**
