@@ -3399,6 +3399,7 @@ declare namespace SSM {
   }
   export type IPAddress = string;
   export type IamRole = string;
+  export type IdempotencyToken = string;
   export interface InstanceAggregatedAssociationOverview {
     /**
      * Detailed status information about the aggregated associations.
@@ -5168,6 +5169,7 @@ declare namespace SSM {
     NonCompliantSummary?: NonCompliantSummary;
   }
   export type ResourceComplianceSummaryItemList = ResourceComplianceSummaryItem[];
+  export type ResourceDataSyncAWSKMSKeyARN = string;
   export type ResourceDataSyncCreatedTime = Date;
   export interface ResourceDataSyncItem {
     /**
@@ -5215,6 +5217,10 @@ declare namespace SSM {
      * The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.
      */
     Region: ResourceDataSyncS3Region;
+    /**
+     * The ARN of an encryption key for a destination in Amazon S3. Must belong to the same region as the destination Amazon S3 bucket.
+     */
+    AWSKMSKeyARN?: ResourceDataSyncAWSKMSKeyARN;
   }
   export type ResourceDataSyncS3Format = "JsonSerDe"|string;
   export type ResourceDataSyncS3Prefix = string;
@@ -5383,6 +5389,10 @@ declare namespace SSM {
      * A key-value map of execution parameters, which match the declared parameters in the Automation document.
      */
     Parameters?: AutomationParameterMap;
+    /**
+     * User-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can't be reused.
+     */
+    ClientToken?: IdempotencyToken;
   }
   export interface StartAutomationExecutionResult {
     /**

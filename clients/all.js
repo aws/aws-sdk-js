@@ -104,5 +104,6 @@ module.exports = {
   DAX: require('./dax'),
   MigrationHub: require('./migrationhub'),
   CloudHSMV2: require('./cloudhsmv2'),
-  Glue: require('./glue')
+  Glue: require('./glue'),
+  Mobile: require('./mobile')
 };

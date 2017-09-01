@@ -1340,6 +1340,7 @@
         {"shape":"InvalidAutomationExecutionParametersException"},
         {"shape":"AutomationExecutionLimitExceededException"},
         {"shape":"AutomationDefinitionVersionNotFoundException"},
+        {"shape":"IdempotentParameterMismatch"},
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Initiates execution of an Automation document.</p>"
@@ -5459,6 +5460,12 @@
       "type":"string",
       "max":64
     },
+    "IdempotencyToken":{
+      "type":"string",
+      "max":36,
+      "min":36,
+      "pattern":"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+    },
     "IdempotentParameterMismatch":{
       "type":"structure",
       "members":{
@@ -8747,6 +8754,12 @@
         "locationName":"Item"
       }
     },
+    "ResourceDataSyncAWSKMSKeyARN":{
+      "type":"string",
+      "max":512,
+      "min":1,
+      "pattern":"arn:.*"
+    },
     "ResourceDataSyncAlreadyExistsException":{
       "type":"structure",
       "members":{
@@ -8847,6 +8860,10 @@
         "Region":{
           "shape":"ResourceDataSyncS3Region",
           "documentation":"<p>The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.</p>"
+        },
+        "AWSKMSKeyARN":{
+          "shape":"ResourceDataSyncAWSKMSKeyARN",
+          "documentation":"<p>The ARN of an encryption key for a destination in Amazon S3. Must belong to the same region as the destination Amazon S3 bucket.</p>"
         }
       },
       "documentation":"<p>Information about the target Amazon S3 bucket for the Resource Data Sync.</p>"
@@ -9137,6 +9154,10 @@
         "Parameters":{
           "shape":"AutomationParameterMap",
           "documentation":"<p>A key-value map of execution parameters, which match the declared parameters in the Automation document.</p>"
+        },
+        "ClientToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>User-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can't be reused.</p>"
         }
       }
     },

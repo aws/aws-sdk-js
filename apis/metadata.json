@@ -448,5 +448,8 @@
   },
   "glue": {
     "name": "Glue"
+  },
+  "mobile": {
+    "name": "Mobile"
   }
 }
