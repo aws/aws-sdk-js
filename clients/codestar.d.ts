@@ -92,6 +92,14 @@ declare class CodeStar extends Service {
    */
   listResources(callback?: (err: AWSError, data: CodeStar.Types.ListResourcesResult) => void): Request<CodeStar.Types.ListResourcesResult, AWSError>;
   /**
+   * Gets the tags for a project.
+   */
+  listTagsForProject(params: CodeStar.Types.ListTagsForProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.ListTagsForProjectResult) => void): Request<CodeStar.Types.ListTagsForProjectResult, AWSError>;
+  /**
+   * Gets the tags for a project.
+   */
+  listTagsForProject(callback?: (err: AWSError, data: CodeStar.Types.ListTagsForProjectResult) => void): Request<CodeStar.Types.ListTagsForProjectResult, AWSError>;
+  /**
    * Lists all team members associated with a project.
    */
   listTeamMembers(params: CodeStar.Types.ListTeamMembersRequest, callback?: (err: AWSError, data: CodeStar.Types.ListTeamMembersResult) => void): Request<CodeStar.Types.ListTeamMembersResult, AWSError>;
@@ -107,6 +115,22 @@ declare class CodeStar extends Service {
    * Lists all the user profiles configured for your AWS account in AWS CodeStar.
    */
   listUserProfiles(callback?: (err: AWSError, data: CodeStar.Types.ListUserProfilesResult) => void): Request<CodeStar.Types.ListUserProfilesResult, AWSError>;
+  /**
+   * Adds tags to a project.
+   */
+  tagProject(params: CodeStar.Types.TagProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.TagProjectResult) => void): Request<CodeStar.Types.TagProjectResult, AWSError>;
+  /**
+   * Adds tags to a project.
+   */
+  tagProject(callback?: (err: AWSError, data: CodeStar.Types.TagProjectResult) => void): Request<CodeStar.Types.TagProjectResult, AWSError>;
+  /**
+   * Removes tags from a project.
+   */
+  untagProject(params: CodeStar.Types.UntagProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.UntagProjectResult) => void): Request<CodeStar.Types.UntagProjectResult, AWSError>;
+  /**
+   * Removes tags from a project.
+   */
+  untagProject(callback?: (err: AWSError, data: CodeStar.Types.UntagProjectResult) => void): Request<CodeStar.Types.UntagProjectResult, AWSError>;
   /**
    * Updates a project in AWS CodeStar.
    */
@@ -139,7 +163,7 @@ declare namespace CodeStar {
      */
     projectId: ProjectId;
     /**
-     * A user- or system-generated token that identifies the entity that requested the team member association to the project. This token can be used to repeat the request. 
+     * A user- or system-generated token that identifies the entity that requested the team member association to the project. This token can be used to repeat the request.
      */
     clientRequestToken?: ClientRequestToken;
     /**
@@ -157,7 +181,7 @@ declare namespace CodeStar {
   }
   export interface AssociateTeamMemberResult {
     /**
-     * The user- or system-generated token from the initial request that can be used to repeat the request. 
+     * The user- or system-generated token from the initial request that can be used to repeat the request.
      */
     clientRequestToken?: ClientRequestToken;
   }
@@ -396,7 +420,7 @@ declare namespace CodeStar {
      */
     nextToken?: PaginationToken;
     /**
-     * he maximum amount of data that can be contained in a single set of results.
+     * The maximum amount of data that can be contained in a single set of results.
      */
     maxResults?: MaxResults;
   }
@@ -407,6 +431,30 @@ declare namespace CodeStar {
     resources?: ResourcesResult;
     /**
      * The continuation token to use when requesting the next set of results, if there are more results to be returned.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListTagsForProjectRequest {
+    /**
+     * The ID of the project to get tags for.
+     */
+    id: ProjectId;
+    /**
+     * Reserved for future use.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Reserved for future use.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListTagsForProjectResult {
+    /**
+     * The tags for the project.
+     */
+    tags?: Tags;
+    /**
+     * Reserved for future use.
      */
     nextToken?: PaginationToken;
   }
@@ -484,6 +532,26 @@ declare namespace CodeStar {
   export type Role = string;
   export type SshPublicKey = string;
   export type StackId = string;
+  export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export interface TagProjectRequest {
+    /**
+     * The ID of the project you want to add a tag to.
+     */
+    id: ProjectId;
+    /**
+     * The tags you want to add to the project.
+     */
+    tags: Tags;
+  }
+  export interface TagProjectResult {
+    /**
+     * The tags for the project.
+     */
+    tags?: Tags;
+  }
+  export type TagValue = string;
+  export type Tags = {[key: string]: TagValue};
   export interface TeamMember {
     /**
      * The Amazon Resource Name (ARN) of the user in IAM.
@@ -499,6 +567,18 @@ declare namespace CodeStar {
     remoteAccessAllowed?: RemoteAccessAllowed;
   }
   export type TeamMemberResult = TeamMember[];
+  export interface UntagProjectRequest {
+    /**
+     * The ID of the project to remove tags from.
+     */
+    id: ProjectId;
+    /**
+     * The tags to remove from the project.
+     */
+    tags: TagKeys;
+  }
+  export interface UntagProjectResult {
+  }
   export interface UpdateProjectRequest {
     /**
      * The ID of the project you want to update.

@@ -168,6 +168,21 @@
       ],
       "documentation":"<p>Lists resources associated with a project in AWS CodeStar.</p>"
     },
+    "ListTagsForProject":{
+      "name":"ListTagsForProject",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForProjectRequest"},
+      "output":{"shape":"ListTagsForProjectResult"},
+      "errors":[
+        {"shape":"ProjectNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"InvalidNextTokenException"}
+      ],
+      "documentation":"<p>Gets the tags for a project.</p>"
+    },
     "ListTeamMembers":{
       "name":"ListTeamMembers",
       "http":{
@@ -196,6 +211,38 @@
         {"shape":"ValidationException"}
       ],
       "documentation":"<p>Lists all the user profiles configured for your AWS account in AWS CodeStar.</p>"
+    },
+    "TagProject":{
+      "name":"TagProject",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagProjectRequest"},
+      "output":{"shape":"TagProjectResult"},
+      "errors":[
+        {"shape":"ProjectNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ConcurrentModificationException"}
+      ],
+      "documentation":"<p>Adds tags to a project.</p>"
+    },
+    "UntagProject":{
+      "name":"UntagProject",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagProjectRequest"},
+      "output":{"shape":"UntagProjectResult"},
+      "errors":[
+        {"shape":"ProjectNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ConcurrentModificationException"}
+      ],
+      "documentation":"<p>Removes tags from a project.</p>"
     },
     "UpdateProject":{
       "name":"UpdateProject",
@@ -260,7 +307,7 @@
         },
         "clientRequestToken":{
           "shape":"ClientRequestToken",
-          "documentation":"<p>A user- or system-generated token that identifies the entity that requested the team member association to the project. This token can be used to repeat the request. </p>"
+          "documentation":"<p>A user- or system-generated token that identifies the entity that requested the team member association to the project. This token can be used to repeat the request.</p>"
         },
         "userArn":{
           "shape":"UserArn",
@@ -282,7 +329,7 @@
       "members":{
         "clientRequestToken":{
           "shape":"ClientRequestToken",
-          "documentation":"<p>The user- or system-generated token from the initial request that can be used to repeat the request. </p>"
+          "documentation":"<p>The user- or system-generated token from the initial request that can be used to repeat the request.</p>"
         }
       }
     },
@@ -642,7 +689,7 @@
         },
         "maxResults":{
           "shape":"MaxResults",
-          "documentation":"<p>he maximum amount of data that can be contained in a single set of results.</p>",
+          "documentation":"<p>The maximum amount of data that can be contained in a single set of results.</p>",
           "box":true
         }
       }
@@ -657,6 +704,38 @@
         "nextToken":{
           "shape":"PaginationToken",
           "documentation":"<p>The continuation token to use when requesting the next set of results, if there are more results to be returned.</p>"
+        }
+      }
+    },
+    "ListTagsForProjectRequest":{
+      "type":"structure",
+      "required":["id"],
+      "members":{
+        "id":{
+          "shape":"ProjectId",
+          "documentation":"<p>The ID of the project to get tags for.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>Reserved for future use.</p>"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>Reserved for future use.</p>",
+          "box":true
+        }
+      }
+    },
+    "ListTagsForProjectResult":{
+      "type":"structure",
+      "members":{
+        "tags":{
+          "shape":"Tags",
+          "documentation":"<p>The tags for the project.</p>"
+        },
+        "nextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>Reserved for future use.</p>"
         }
       }
     },
@@ -840,6 +919,52 @@
       "type":"string",
       "pattern":"^arn:aws[^:\\s]*:cloudformation:[^:\\s]+:[0-9]{12}:stack\\/[^:\\s]+\\/[^:\\s]+$"
     },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TagKeys":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagProjectRequest":{
+      "type":"structure",
+      "required":[
+        "id",
+        "tags"
+      ],
+      "members":{
+        "id":{
+          "shape":"ProjectId",
+          "documentation":"<p>The ID of the project you want to add a tag to.</p>"
+        },
+        "tags":{
+          "shape":"Tags",
+          "documentation":"<p>The tags you want to add to the project.</p>"
+        }
+      }
+    },
+    "TagProjectResult":{
+      "type":"structure",
+      "members":{
+        "tags":{
+          "shape":"Tags",
+          "documentation":"<p>The tags for the project.</p>"
+        }
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "Tags":{
+      "type":"map",
+      "key":{"shape":"TagKey"},
+      "value":{"shape":"TagValue"}
+    },
     "TeamMember":{
       "type":"structure",
       "required":[
@@ -853,7 +978,7 @@
         },
         "projectRole":{
           "shape":"Role",
-          "documentation":"<p>The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href=\"http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html\">Working with Teams</a> in the AWS CodeStar User Guide. </p>"
+          "documentation":"<p>The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href=\"http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html\">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>. </p>"
         },
         "remoteAccessAllowed":{
           "shape":"RemoteAccessAllowed",
@@ -880,6 +1005,28 @@
     "TeamMemberResult":{
       "type":"list",
       "member":{"shape":"TeamMember"}
+    },
+    "UntagProjectRequest":{
+      "type":"structure",
+      "required":[
+        "id",
+        "tags"
+      ],
+      "members":{
+        "id":{
+          "shape":"ProjectId",
+          "documentation":"<p>The ID of the project to remove tags from.</p>"
+        },
+        "tags":{
+          "shape":"TagKeys",
+          "documentation":"<p>The tags to remove from the project.</p>"
+        }
+      }
+    },
+    "UntagProjectResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "UpdateProjectRequest":{
       "type":"structure",
@@ -921,7 +1068,7 @@
         },
         "projectRole":{
           "shape":"Role",
-          "documentation":"<p>The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href=\"http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html\">Working with Teams</a> in the AWS CodeStar User Guide.</p>"
+          "documentation":"<p>The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href=\"http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html\">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>.</p>"
         },
         "remoteAccessAllowed":{
           "shape":"RemoteAccessAllowed",
@@ -1060,5 +1207,5 @@
       "exception":true
     }
   },
-  "documentation":"<fullname>AWS CodeStar</fullname> <p>This is the API reference for AWS CodeStar. This reference provides descriptions of the operations and data types for the AWS CodeStar API along with usage examples.</p> <p>You can use the AWS CodeStar API to work with:</p> <p>Projects and their resources, by calling the following:</p> <ul> <li> <p> <a>DeleteProject</a>, which deletes a project in AWS CodeStar.</p> </li> <li> <p> <a>DescribeProject</a>, which lists the attributes of a project.</p> </li> <li> <p> <a>ListProjects</a>, which lists all AWS CodeStar projects associated with your AWS account.</p> </li> <li> <p> <a>ListResources</a>, which lists the resources associated with an AWS CodeStar project.</p> </li> <li> <p> <a>UpdateProject</a>, which updates the attributes of an AWS CodeStar project.</p> </li> </ul> <p>Teams and team members, by calling the following:</p> <ul> <li> <p> <a>AssociateTeamMember</a>, which adds an IAM user to the team for an AWS CodeStar project.</p> </li> <li> <p> <a>DisassociateTeamMember</a>, which removes an IAM user from the team for an AWS CodeStar project.</p> </li> <li> <p> <a>ListTeamMembers</a>, which lists all the IAM users in the team for an AWS CodeStar project, including their roles and attributes.</p> </li> </ul> <p>Users, by calling the following:</p> <ul> <li> <p> <a>CreateUserProfile</a>, which creates a user profile that contains data associated with the user across all AWS CodeStar projects.</p> </li> <li> <p> <a>DeleteUserProfile</a>, which deletes all user profile information across all AWS CodeStar projects.</p> </li> <li> <p> <a>DescribeUserProfile</a>, which describes the profile of a user.</p> </li> <li> <p> <a>ListUserProfiles</a>, which lists all AWS CodeStar user profiles.</p> </li> <li> <p> <a>UpdateUserProfile</a>, which updates the profile for an AWS CodeStar user. </p> </li> </ul>"
+  "documentation":"<fullname>AWS CodeStar</fullname> <p>This is the API reference for AWS CodeStar. This reference provides descriptions of the operations and data types for the AWS CodeStar API along with usage examples.</p> <p>You can use the AWS CodeStar API to work with:</p> <p>Projects and their resources, by calling the following:</p> <ul> <li> <p> <code>DeleteProject</code>, which deletes a project.</p> </li> <li> <p> <code>DescribeProject</code>, which lists the attributes of a project.</p> </li> <li> <p> <code>ListProjects</code>, which lists all projects associated with your AWS account.</p> </li> <li> <p> <code>ListResources</code>, which lists the resources associated with a project.</p> </li> <li> <p> <code>ListTagsForProject</code>, which lists the tags associated with a project.</p> </li> <li> <p> <code>TagProject</code>, which adds tags to a project.</p> </li> <li> <p> <code>UntagProject</code>, which removes tags from a project.</p> </li> <li> <p> <code>UpdateProject</code>, which updates the attributes of a project.</p> </li> </ul> <p>Teams and team members, by calling the following:</p> <ul> <li> <p> <code>AssociateTeamMember</code>, which adds an IAM user to the team for a project.</p> </li> <li> <p> <code>DisassociateTeamMember</code>, which removes an IAM user from the team for a project.</p> </li> <li> <p> <code>ListTeamMembers</code>, which lists all the IAM users in the team for a project, including their roles and attributes.</p> </li> <li> <p> <code>UpdateTeamMember</code>, which updates a team member's attributes in a project.</p> </li> </ul> <p>Users, by calling the following:</p> <ul> <li> <p> <code>CreateUserProfile</code>, which creates a user profile that contains data associated with the user across all projects.</p> </li> <li> <p> <code>DeleteUserProfile</code>, which deletes all user profile information across all projects.</p> </li> <li> <p> <code>DescribeUserProfile</code>, which describes the profile of a user.</p> </li> <li> <p> <code>ListUserProfiles</code>, which lists all user profiles.</p> </li> <li> <p> <code>UpdateUserProfile</code>, which updates the profile for a user.</p> </li> </ul>"
 }

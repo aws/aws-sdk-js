@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.108.0-->
+<!--LATEST=2.109.0-->
 <!--ENTRYINSERT-->
+
+## 2.109.0
+* feature: CodeStar: Added support to tag CodeStar projects. Tags can be used to organize and find CodeStar projects on key-value pairs that you can choose. For example, you could add a tag with a key of "Release" and a value of "Beta" to projects your organization is working on for an upcoming beta release.
 
 ## 2.108.0
 * feature: GameLift: GameLift VPC resources can be peered with any other AWS VPC. R4 memory-optimized instances now available to deploy.
