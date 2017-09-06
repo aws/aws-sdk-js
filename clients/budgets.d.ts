@@ -232,6 +232,7 @@ declare namespace Budgets {
     NotificationType: NotificationType;
     ComparisonOperator: ComparisonOperator;
     Threshold: NotificationThreshold;
+    ThresholdType?: ThresholdType;
   }
   export type NotificationThreshold = number;
   export type NotificationType = "ACTUAL"|"FORECASTED"|string;
@@ -252,6 +253,7 @@ declare namespace Budgets {
   }
   export type Subscribers = Subscriber[];
   export type SubscriptionType = "SNS"|"EMAIL"|string;
+  export type ThresholdType = "PERCENTAGE"|"ABSOLUTE_VALUE"|string;
   export interface TimePeriod {
     Start: GenericTimestamp;
     End: GenericTimestamp;

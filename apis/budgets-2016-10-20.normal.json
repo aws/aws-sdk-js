@@ -275,7 +275,7 @@
         "ActualSpend":{"shape":"Spend"},
         "ForecastedSpend":{"shape":"Spend"}
       },
-      "documentation":"A structure holds the actual and forecasted spend for a budget."
+      "documentation":"A structure that holds the actual and forecasted spend for a budget."
     },
     "ComparisonOperator":{
       "type":"string",
@@ -290,7 +290,7 @@
       "type":"map",
       "key":{"shape":"GenericString"},
       "value":{"shape":"DimensionValues"},
-      "documentation":"A map represents the cost filters applied to the budget."
+      "documentation":"A map that represents the cost filters applied to the budget."
     },
     "CostTypes":{
       "type":"structure",
@@ -578,7 +578,7 @@
     },
     "MaxResults":{
       "type":"integer",
-      "documentation":"An integer to represent how many entries should a pagianted response contains. Maxium is set to 100.",
+      "documentation":"An integer to represent how many entries a paginated response contains. Maximum is set to 100.",
       "box":true,
       "max":100,
       "min":1
@@ -601,14 +601,15 @@
       "members":{
         "NotificationType":{"shape":"NotificationType"},
         "ComparisonOperator":{"shape":"ComparisonOperator"},
-        "Threshold":{"shape":"NotificationThreshold"}
+        "Threshold":{"shape":"NotificationThreshold"},
+        "ThresholdType":{"shape":"ThresholdType"}
       },
       "documentation":"Notification model. Each budget may contain multiple notifications with different settings."
     },
     "NotificationThreshold":{
       "type":"double",
-      "documentation":"The threshold of the a notification. It should be a number between 0 and 100.",
-      "max":300,
+      "documentation":"The threshold of a notification. It should be a number between 0 and 1,000,000,000.",
+      "max":1000000000,
       "min":0.1
     },
     "NotificationType":{
@@ -657,7 +658,7 @@
         "Amount":{"shape":"NumericValue"},
         "Unit":{"shape":"UnitValue"}
       },
-      "documentation":"A structure represent either a cost spend or usage spend. Contains an amount and a unit."
+      "documentation":"A structure that represents either a cost spend or usage spend. Contains an amount and a unit."
     },
     "Subscriber":{
       "type":"structure",
@@ -686,6 +687,14 @@
         "EMAIL"
       ]
     },
+    "ThresholdType":{
+      "type":"string",
+      "documentation":"The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.",
+      "enum":[
+        "PERCENTAGE",
+        "ABSOLUTE_VALUE"
+      ]
+    },
     "TimePeriod":{
       "type":"structure",
       "required":[
@@ -696,7 +705,7 @@
         "Start":{"shape":"GenericTimestamp"},
         "End":{"shape":"GenericTimestamp"}
       },
-      "documentation":"A time period indicated the start date and end date of a budget."
+      "documentation":"A time period indicating the start date and end date of a budget."
     },
     "TimeUnit":{
       "type":"string",
