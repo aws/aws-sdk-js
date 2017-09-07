@@ -393,6 +393,23 @@
       ],
       "documentation":"<p>Gets a list of built-in slot types that meet the specified criteria.</p> <p>For a list of built-in slot types, see <a href=\"https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference\">Slot Type Reference</a> in the <i>Alexa Skills Kit</i>.</p> <p>This operation requires permission for the <code>lex:GetBuiltInSlotTypes</code> action.</p>"
     },
+    "GetExport":{
+      "name":"GetExport",
+      "http":{
+        "method":"GET",
+        "requestUri":"/exports/",
+        "responseCode":200
+      },
+      "input":{"shape":"GetExportRequest"},
+      "output":{"shape":"GetExportResponse"},
+      "errors":[
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"BadRequestException"}
+      ],
+      "documentation":"<p>Exports the contents of a Amazon Lex resource in a specified format. </p>"
+    },
     "GetIntent":{
       "name":"GetIntent",
       "http":{
@@ -1259,6 +1276,18 @@
       "max":10000,
       "min":1
     },
+    "ExportStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "READY",
+        "FAILED"
+      ]
+    },
+    "ExportType":{
+      "type":"string",
+      "enum":["ALEXA_SKILLS_KIT"]
+    },
     "FollowUpPrompt":{
       "type":"structure",
       "required":[
@@ -1781,6 +1810,74 @@
         }
       }
     },
+    "GetExportRequest":{
+      "type":"structure",
+      "required":[
+        "name",
+        "version",
+        "resourceType",
+        "exportType"
+      ],
+      "members":{
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the bot to export.</p>",
+          "location":"querystring",
+          "locationName":"name"
+        },
+        "version":{
+          "shape":"NumericalVersion",
+          "documentation":"<p>The version of the bot to export.</p>",
+          "location":"querystring",
+          "locationName":"version"
+        },
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The type of resource to export. </p>",
+          "location":"querystring",
+          "locationName":"resourceType"
+        },
+        "exportType":{
+          "shape":"ExportType",
+          "documentation":"<p>The format of the exported data.</p>",
+          "location":"querystring",
+          "locationName":"exportType"
+        }
+      }
+    },
+    "GetExportResponse":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the bot being exported.</p>"
+        },
+        "version":{
+          "shape":"NumericalVersion",
+          "documentation":"<p>The version of the bot being exported.</p>"
+        },
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The type of the exported resource.</p>"
+        },
+        "exportType":{
+          "shape":"ExportType",
+          "documentation":"<p>The format of the exported data.</p>"
+        },
+        "exportStatus":{
+          "shape":"ExportStatus",
+          "documentation":"<p>The status of the export. </p> <ul> <li> <p> <code>IN_PROGRESS</code> - The export is in progress.</p> </li> <li> <p> <code>READY</code> - The export is complete.</p> </li> <li> <p> <code>FAILED</code> - The export could not be completed.</p> </li> </ul>"
+        },
+        "failureReason":{
+          "shape":"String",
+          "documentation":"<p>If <code>status</code> is <code>FAILED</code>, Amazon Lex provides the reason that it failed to export the resource.</p>"
+        },
+        "url":{
+          "shape":"String",
+          "documentation":"<p>An S3 pre-signed URL that provides the location of the exported resource. The exported resource is a ZIP archive that contains the exported resource in JSON format. The structure of the archive may change. Your code should not rely on the archive structure.</p>"
+        }
+      }
+    },
     "GetIntentRequest":{
       "type":"structure",
       "required":[
@@ -2132,9 +2229,7 @@
     },
     "IntentList":{
       "type":"list",
-      "member":{"shape":"Intent"},
-      "max":100,
-      "min":1
+      "member":{"shape":"Intent"}
     },
     "IntentMetadata":{
       "type":"structure",
@@ -2263,7 +2358,7 @@
       "type":"string",
       "max":64,
       "min":1,
-      "pattern":"[a-zA-Z]+"
+      "pattern":"[a-zA-Z_]+"
     },
     "NextToken":{"type":"string"},
     "NotFoundException":{
@@ -2662,7 +2757,7 @@
         },
         "valueSelectionStrategy":{
           "shape":"SlotValueSelectionStrategy",
-          "documentation":"<p>Determines the strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don't specify the <code>valueSelectionStrategy</code> is not provided, the default is <code>ORIGINAL_VALUE</code>.</p>"
+          "documentation":"<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don't specify the <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>"
         }
       }
     },
@@ -2699,7 +2794,7 @@
         },
         "valueSelectionStrategy":{
           "shape":"SlotValueSelectionStrategy",
-          "documentation":"<p>The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.</p>"
+          "documentation":"<p>The slot resolution strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.</p>"
         }
       }
     },
@@ -2735,6 +2830,10 @@
         }
       },
       "documentation":"<p>Describes the resource that refers to the resource that you are attempting to delete. This object is returned as part of the <code>ResourceInUseException</code> exception. </p>"
+    },
+    "ResourceType":{
+      "type":"string",
+      "enum":["BOT"]
     },
     "ResponseCard":{
       "type":"string",

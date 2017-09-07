@@ -12,43 +12,43 @@ declare class ELBv2 extends Service {
   constructor(options?: ELBv2.Types.ClientConfiguration)
   config: Config & ELBv2.Types.ClientConfiguration;
   /**
-   * Adds the specified tags to the specified resource. You can tag your Application Load Balancers and your target groups. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value. To list the current tags for your resources, use DescribeTags. To remove tags from your resources, use RemoveTags.
+   * Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, and your target groups. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value. To list the current tags for your resources, use DescribeTags. To remove tags from your resources, use RemoveTags.
    */
   addTags(params: ELBv2.Types.AddTagsInput, callback?: (err: AWSError, data: ELBv2.Types.AddTagsOutput) => void): Request<ELBv2.Types.AddTagsOutput, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. You can tag your Application Load Balancers and your target groups. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value. To list the current tags for your resources, use DescribeTags. To remove tags from your resources, use RemoveTags.
+   * Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, and your target groups. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value. To list the current tags for your resources, use DescribeTags. To remove tags from your resources, use RemoveTags.
    */
   addTags(callback?: (err: AWSError, data: ELBv2.Types.AddTagsOutput) => void): Request<ELBv2.Types.AddTagsOutput, AWSError>;
   /**
-   * Creates a listener for the specified Application Load Balancer. You can create up to 10 listeners per load balancer. To update a listener, use ModifyListener. When you are finished with a listener, you can delete it using DeleteListener. If you are finished with both the listener and the load balancer, you can delete them both using DeleteLoadBalancer. For more information, see Listeners for Your Application Load Balancers in the Application Load Balancers Guide.
+   * Creates a listener for the specified Application Load Balancer or Network Load Balancer. You can create up to 10 listeners per load balancer. To update a listener, use ModifyListener. When you are finished with a listener, you can delete it using DeleteListener. If you are finished with both the listener and the load balancer, you can delete them both using DeleteLoadBalancer. For more information, see Listeners for Your Application Load Balancers in the Application Load Balancers Guide and Listeners for Your Network Load Balancers in the Network Load Balancers Guide.
    */
   createListener(params: ELBv2.Types.CreateListenerInput, callback?: (err: AWSError, data: ELBv2.Types.CreateListenerOutput) => void): Request<ELBv2.Types.CreateListenerOutput, AWSError>;
   /**
-   * Creates a listener for the specified Application Load Balancer. You can create up to 10 listeners per load balancer. To update a listener, use ModifyListener. When you are finished with a listener, you can delete it using DeleteListener. If you are finished with both the listener and the load balancer, you can delete them both using DeleteLoadBalancer. For more information, see Listeners for Your Application Load Balancers in the Application Load Balancers Guide.
+   * Creates a listener for the specified Application Load Balancer or Network Load Balancer. You can create up to 10 listeners per load balancer. To update a listener, use ModifyListener. When you are finished with a listener, you can delete it using DeleteListener. If you are finished with both the listener and the load balancer, you can delete them both using DeleteLoadBalancer. For more information, see Listeners for Your Application Load Balancers in the Application Load Balancers Guide and Listeners for Your Network Load Balancers in the Network Load Balancers Guide.
    */
   createListener(callback?: (err: AWSError, data: ELBv2.Types.CreateListenerOutput) => void): Request<ELBv2.Types.CreateListenerOutput, AWSError>;
   /**
-   * Creates an Application Load Balancer. When you create a load balancer, you can specify security groups, subnets, IP address type, and tags. Otherwise, you could do so later using SetSecurityGroups, SetSubnets, SetIpAddressType, and AddTags. To create listeners for your load balancer, use CreateListener. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancers Guide. For more information, see Application Load Balancers in the Application Load Balancers Guide.
+   * Creates an Application Load Balancer or a Network Load Balancer. When you create a load balancer, you can specify security groups, subnets, IP address type, and tags. Otherwise, you could do so later using SetSecurityGroups, SetSubnets, SetIpAddressType, and AddTags. To create listeners for your load balancer, use CreateListener. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancers Guide and Limits for Your Network Load Balancer in the Network Load Balancers Guide. For more information, see Application Load Balancers in the Application Load Balancers Guide and Network Load Balancers in the Network Load Balancers Guide.
    */
   createLoadBalancer(params: ELBv2.Types.CreateLoadBalancerInput, callback?: (err: AWSError, data: ELBv2.Types.CreateLoadBalancerOutput) => void): Request<ELBv2.Types.CreateLoadBalancerOutput, AWSError>;
   /**
-   * Creates an Application Load Balancer. When you create a load balancer, you can specify security groups, subnets, IP address type, and tags. Otherwise, you could do so later using SetSecurityGroups, SetSubnets, SetIpAddressType, and AddTags. To create listeners for your load balancer, use CreateListener. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancers Guide. For more information, see Application Load Balancers in the Application Load Balancers Guide.
+   * Creates an Application Load Balancer or a Network Load Balancer. When you create a load balancer, you can specify security groups, subnets, IP address type, and tags. Otherwise, you could do so later using SetSecurityGroups, SetSubnets, SetIpAddressType, and AddTags. To create listeners for your load balancer, use CreateListener. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancers Guide and Limits for Your Network Load Balancer in the Network Load Balancers Guide. For more information, see Application Load Balancers in the Application Load Balancers Guide and Network Load Balancers in the Network Load Balancers Guide.
    */
   createLoadBalancer(callback?: (err: AWSError, data: ELBv2.Types.CreateLoadBalancerOutput) => void): Request<ELBv2.Types.CreateLoadBalancerOutput, AWSError>;
   /**
-   * Creates a rule for the specified listener. Each rule can have one action and one condition. Rules are evaluated in priority order, from the lowest value to the highest value. When the condition for a rule is met, the specified action is taken. If no conditions are met, the default action for the default rule is taken. For more information, see Listener Rules in the Application Load Balancers Guide. To view your current rules, use DescribeRules. To update a rule, use ModifyRule. To set the priorities of your rules, use SetRulePriorities. To delete a rule, use DeleteRule.
+   * Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value. When the condition for a rule is met, the specified action is taken. If no conditions are met, the action for the default rule is taken. For more information, see Listener Rules in the Application Load Balancers Guide. To view your current rules, use DescribeRules. To update a rule, use ModifyRule. To set the priorities of your rules, use SetRulePriorities. To delete a rule, use DeleteRule.
    */
   createRule(params: ELBv2.Types.CreateRuleInput, callback?: (err: AWSError, data: ELBv2.Types.CreateRuleOutput) => void): Request<ELBv2.Types.CreateRuleOutput, AWSError>;
   /**
-   * Creates a rule for the specified listener. Each rule can have one action and one condition. Rules are evaluated in priority order, from the lowest value to the highest value. When the condition for a rule is met, the specified action is taken. If no conditions are met, the default action for the default rule is taken. For more information, see Listener Rules in the Application Load Balancers Guide. To view your current rules, use DescribeRules. To update a rule, use ModifyRule. To set the priorities of your rules, use SetRulePriorities. To delete a rule, use DeleteRule.
+   * Creates a rule for the specified listener. The listener must be associated with an Application Load Balancer. Rules are evaluated in priority order, from the lowest value to the highest value. When the condition for a rule is met, the specified action is taken. If no conditions are met, the action for the default rule is taken. For more information, see Listener Rules in the Application Load Balancers Guide. To view your current rules, use DescribeRules. To update a rule, use ModifyRule. To set the priorities of your rules, use SetRulePriorities. To delete a rule, use DeleteRule.
    */
   createRule(callback?: (err: AWSError, data: ELBv2.Types.CreateRuleOutput) => void): Request<ELBv2.Types.CreateRuleOutput, AWSError>;
   /**
-   * Creates a target group. To register targets with the target group, use RegisterTargets. To update the health check settings for the target group, use ModifyTargetGroup. To monitor the health of targets in the target group, use DescribeTargetHealth. To route traffic to the targets in a target group, specify the target group in an action using CreateListener or CreateRule. To delete a target group, use DeleteTargetGroup. For more information, see Target Groups for Your Application Load Balancers in the Application Load Balancers Guide.
+   * Creates a target group. To register targets with the target group, use RegisterTargets. To update the health check settings for the target group, use ModifyTargetGroup. To monitor the health of targets in the target group, use DescribeTargetHealth. To route traffic to the targets in a target group, specify the target group in an action using CreateListener or CreateRule. To delete a target group, use DeleteTargetGroup. For more information, see Target Groups for Your Application Load Balancers in the Application Load Balancers Guide or Target Groups for Your Network Load Balancers in the Network Load Balancers Guide.
    */
   createTargetGroup(params: ELBv2.Types.CreateTargetGroupInput, callback?: (err: AWSError, data: ELBv2.Types.CreateTargetGroupOutput) => void): Request<ELBv2.Types.CreateTargetGroupOutput, AWSError>;
   /**
-   * Creates a target group. To register targets with the target group, use RegisterTargets. To update the health check settings for the target group, use ModifyTargetGroup. To monitor the health of targets in the target group, use DescribeTargetHealth. To route traffic to the targets in a target group, specify the target group in an action using CreateListener or CreateRule. To delete a target group, use DeleteTargetGroup. For more information, see Target Groups for Your Application Load Balancers in the Application Load Balancers Guide.
+   * Creates a target group. To register targets with the target group, use RegisterTargets. To update the health check settings for the target group, use ModifyTargetGroup. To monitor the health of targets in the target group, use DescribeTargetHealth. To route traffic to the targets in a target group, specify the target group in an action using CreateListener or CreateRule. To delete a target group, use DeleteTargetGroup. For more information, see Target Groups for Your Application Load Balancers in the Application Load Balancers Guide or Target Groups for Your Network Load Balancers in the Network Load Balancers Guide.
    */
   createTargetGroup(callback?: (err: AWSError, data: ELBv2.Types.CreateTargetGroupOutput) => void): Request<ELBv2.Types.CreateTargetGroupOutput, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class ELBv2 extends Service {
    */
   deleteListener(callback?: (err: AWSError, data: ELBv2.Types.DeleteListenerOutput) => void): Request<ELBv2.Types.DeleteListenerOutput, AWSError>;
   /**
-   * Deletes the specified Application Load Balancer and its attached listeners. You can't delete a load balancer if deletion protection is enabled. If the load balancer does not exist or has already been deleted, the call succeeds. Deleting a load balancer does not affect its registered targets. For example, your EC2 instances continue to run and are still registered to their target groups. If you no longer need these EC2 instances, you can stop or terminate them.
+   * Deletes the specified Application Load Balancer or Network Load Balancer and its attached listeners. You can't delete a load balancer if deletion protection is enabled. If the load balancer does not exist or has already been deleted, the call succeeds. Deleting a load balancer does not affect its registered targets. For example, your EC2 instances continue to run and are still registered to their target groups. If you no longer need these EC2 instances, you can stop or terminate them.
    */
   deleteLoadBalancer(params: ELBv2.Types.DeleteLoadBalancerInput, callback?: (err: AWSError, data: ELBv2.Types.DeleteLoadBalancerOutput) => void): Request<ELBv2.Types.DeleteLoadBalancerOutput, AWSError>;
   /**
-   * Deletes the specified Application Load Balancer and its attached listeners. You can't delete a load balancer if deletion protection is enabled. If the load balancer does not exist or has already been deleted, the call succeeds. Deleting a load balancer does not affect its registered targets. For example, your EC2 instances continue to run and are still registered to their target groups. If you no longer need these EC2 instances, you can stop or terminate them.
+   * Deletes the specified Application Load Balancer or Network Load Balancer and its attached listeners. You can't delete a load balancer if deletion protection is enabled. If the load balancer does not exist or has already been deleted, the call succeeds. Deleting a load balancer does not affect its registered targets. For example, your EC2 instances continue to run and are still registered to their target groups. If you no longer need these EC2 instances, you can stop or terminate them.
    */
   deleteLoadBalancer(callback?: (err: AWSError, data: ELBv2.Types.DeleteLoadBalancerOutput) => void): Request<ELBv2.Types.DeleteLoadBalancerOutput, AWSError>;
   /**
@@ -92,35 +92,35 @@ declare class ELBv2 extends Service {
    */
   deregisterTargets(callback?: (err: AWSError, data: ELBv2.Types.DeregisterTargetsOutput) => void): Request<ELBv2.Types.DeregisterTargetsOutput, AWSError>;
   /**
-   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancer Guide.
+   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Application Load Balancers in the Application Load Balancer Guide or Limits for Your Network Load Balancers in the Network Load Balancers Guide.
    */
   describeAccountLimits(params: ELBv2.Types.DescribeAccountLimitsInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeAccountLimitsOutput) => void): Request<ELBv2.Types.DescribeAccountLimitsOutput, AWSError>;
   /**
-   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Application Load Balancer in the Application Load Balancer Guide.
+   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Application Load Balancers in the Application Load Balancer Guide or Limits for Your Network Load Balancers in the Network Load Balancers Guide.
    */
   describeAccountLimits(callback?: (err: AWSError, data: ELBv2.Types.DescribeAccountLimitsOutput) => void): Request<ELBv2.Types.DescribeAccountLimitsOutput, AWSError>;
   /**
-   * Describes the specified listeners or the listeners for the specified Application Load Balancer. You must specify either a load balancer or one or more listeners.
+   * Describes the specified listeners or the listeners for the specified Application Load Balancer or Network Load Balancer. You must specify either a load balancer or one or more listeners.
    */
   describeListeners(params: ELBv2.Types.DescribeListenersInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeListenersOutput) => void): Request<ELBv2.Types.DescribeListenersOutput, AWSError>;
   /**
-   * Describes the specified listeners or the listeners for the specified Application Load Balancer. You must specify either a load balancer or one or more listeners.
+   * Describes the specified listeners or the listeners for the specified Application Load Balancer or Network Load Balancer. You must specify either a load balancer or one or more listeners.
    */
   describeListeners(callback?: (err: AWSError, data: ELBv2.Types.DescribeListenersOutput) => void): Request<ELBv2.Types.DescribeListenersOutput, AWSError>;
   /**
-   * Describes the attributes for the specified Application Load Balancer.
+   * Describes the attributes for the specified Application Load Balancer or Network Load Balancer.
    */
   describeLoadBalancerAttributes(params: ELBv2.Types.DescribeLoadBalancerAttributesInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeLoadBalancerAttributesOutput) => void): Request<ELBv2.Types.DescribeLoadBalancerAttributesOutput, AWSError>;
   /**
-   * Describes the attributes for the specified Application Load Balancer.
+   * Describes the attributes for the specified Application Load Balancer or Network Load Balancer.
    */
   describeLoadBalancerAttributes(callback?: (err: AWSError, data: ELBv2.Types.DescribeLoadBalancerAttributesOutput) => void): Request<ELBv2.Types.DescribeLoadBalancerAttributesOutput, AWSError>;
   /**
-   * Describes the specified Application Load Balancers or all of your Application Load Balancers. To describe the listeners for a load balancer, use DescribeListeners. To describe the attributes for a load balancer, use DescribeLoadBalancerAttributes.
+   * Describes the specified load balancers or all of your load balancers. To describe the listeners for a load balancer, use DescribeListeners. To describe the attributes for a load balancer, use DescribeLoadBalancerAttributes.
    */
   describeLoadBalancers(params: ELBv2.Types.DescribeLoadBalancersInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeLoadBalancersOutput) => void): Request<ELBv2.Types.DescribeLoadBalancersOutput, AWSError>;
   /**
-   * Describes the specified Application Load Balancers or all of your Application Load Balancers. To describe the listeners for a load balancer, use DescribeListeners. To describe the attributes for a load balancer, use DescribeLoadBalancerAttributes.
+   * Describes the specified load balancers or all of your load balancers. To describe the listeners for a load balancer, use DescribeListeners. To describe the attributes for a load balancer, use DescribeLoadBalancerAttributes.
    */
   describeLoadBalancers(callback?: (err: AWSError, data: ELBv2.Types.DescribeLoadBalancersOutput) => void): Request<ELBv2.Types.DescribeLoadBalancersOutput, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class ELBv2 extends Service {
    */
   describeSSLPolicies(callback?: (err: AWSError, data: ELBv2.Types.DescribeSSLPoliciesOutput) => void): Request<ELBv2.Types.DescribeSSLPoliciesOutput, AWSError>;
   /**
-   * Describes the tags for the specified resources. You can describe the tags for one or more Application Load Balancers and target groups.
+   * Describes the tags for the specified resources. You can describe the tags for one or more Application Load Balancers, Network Load Balancers, and target groups.
    */
   describeTags(params: ELBv2.Types.DescribeTagsInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeTagsOutput) => void): Request<ELBv2.Types.DescribeTagsOutput, AWSError>;
   /**
-   * Describes the tags for the specified resources. You can describe the tags for one or more Application Load Balancers and target groups.
+   * Describes the tags for the specified resources. You can describe the tags for one or more Application Load Balancers, Network Load Balancers, and target groups.
    */
   describeTags(callback?: (err: AWSError, data: ELBv2.Types.DescribeTagsOutput) => void): Request<ELBv2.Types.DescribeTagsOutput, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class ELBv2 extends Service {
    */
   modifyListener(callback?: (err: AWSError, data: ELBv2.Types.ModifyListenerOutput) => void): Request<ELBv2.Types.ModifyListenerOutput, AWSError>;
   /**
-   * Modifies the specified attributes of the specified Application Load Balancer. If any of the specified attributes can't be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.
+   * Modifies the specified attributes of the specified Application Load Balancer or Network Load Balancer. If any of the specified attributes can't be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.
    */
   modifyLoadBalancerAttributes(params: ELBv2.Types.ModifyLoadBalancerAttributesInput, callback?: (err: AWSError, data: ELBv2.Types.ModifyLoadBalancerAttributesOutput) => void): Request<ELBv2.Types.ModifyLoadBalancerAttributesOutput, AWSError>;
   /**
-   * Modifies the specified attributes of the specified Application Load Balancer. If any of the specified attributes can't be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.
+   * Modifies the specified attributes of the specified Application Load Balancer or Network Load Balancer. If any of the specified attributes can't be modified as requested, the call fails. Any existing attributes that you do not modify retain their current values.
    */
   modifyLoadBalancerAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyLoadBalancerAttributesOutput) => void): Request<ELBv2.Types.ModifyLoadBalancerAttributesOutput, AWSError>;
   /**
@@ -212,27 +212,27 @@ declare class ELBv2 extends Service {
    */
   modifyTargetGroupAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyTargetGroupAttributesOutput) => void): Request<ELBv2.Types.ModifyTargetGroupAttributesOutput, AWSError>;
   /**
-   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the running state when you register it. To remove a target from a target group, use DeregisterTargets.
+   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the running state when you register it. Network Load Balancers do not support the following instance types as targets: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. To remove a target from a target group, use DeregisterTargets.
    */
   registerTargets(params: ELBv2.Types.RegisterTargetsInput, callback?: (err: AWSError, data: ELBv2.Types.RegisterTargetsOutput) => void): Request<ELBv2.Types.RegisterTargetsOutput, AWSError>;
   /**
-   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the running state when you register it. To remove a target from a target group, use DeregisterTargets.
+   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the running state when you register it. Network Load Balancers do not support the following instance types as targets: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. To remove a target from a target group, use DeregisterTargets.
    */
   registerTargets(callback?: (err: AWSError, data: ELBv2.Types.RegisterTargetsOutput) => void): Request<ELBv2.Types.RegisterTargetsOutput, AWSError>;
   /**
-   * Removes the specified tags from the specified resource. To list the current tags for your resources, use DescribeTags.
+   * Removes the specified tags from the specified Elastic Load Balancing resource. To list the current tags for your resources, use DescribeTags.
    */
   removeTags(params: ELBv2.Types.RemoveTagsInput, callback?: (err: AWSError, data: ELBv2.Types.RemoveTagsOutput) => void): Request<ELBv2.Types.RemoveTagsOutput, AWSError>;
   /**
-   * Removes the specified tags from the specified resource. To list the current tags for your resources, use DescribeTags.
+   * Removes the specified tags from the specified Elastic Load Balancing resource. To list the current tags for your resources, use DescribeTags.
    */
   removeTags(callback?: (err: AWSError, data: ELBv2.Types.RemoveTagsOutput) => void): Request<ELBv2.Types.RemoveTagsOutput, AWSError>;
   /**
-   * Sets the type of IP addresses used by the subnets of the specified Application Load Balancer.
+   * Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer. Note that Network Load Balancers must use ipv4.
    */
   setIpAddressType(params: ELBv2.Types.SetIpAddressTypeInput, callback?: (err: AWSError, data: ELBv2.Types.SetIpAddressTypeOutput) => void): Request<ELBv2.Types.SetIpAddressTypeOutput, AWSError>;
   /**
-   * Sets the type of IP addresses used by the subnets of the specified Application Load Balancer.
+   * Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer. Note that Network Load Balancers must use ipv4.
    */
   setIpAddressType(callback?: (err: AWSError, data: ELBv2.Types.SetIpAddressTypeOutput) => void): Request<ELBv2.Types.SetIpAddressTypeOutput, AWSError>;
   /**
@@ -244,19 +244,19 @@ declare class ELBv2 extends Service {
    */
   setRulePriorities(callback?: (err: AWSError, data: ELBv2.Types.SetRulePrioritiesOutput) => void): Request<ELBv2.Types.SetRulePrioritiesOutput, AWSError>;
   /**
-   * Associates the specified security groups with the specified load balancer. The specified security groups override the previously associated security groups.
+   * Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups. Note that you can't specify a security group for a Network Load Balancer.
    */
   setSecurityGroups(params: ELBv2.Types.SetSecurityGroupsInput, callback?: (err: AWSError, data: ELBv2.Types.SetSecurityGroupsOutput) => void): Request<ELBv2.Types.SetSecurityGroupsOutput, AWSError>;
   /**
-   * Associates the specified security groups with the specified load balancer. The specified security groups override the previously associated security groups.
+   * Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups. Note that you can't specify a security group for a Network Load Balancer.
    */
   setSecurityGroups(callback?: (err: AWSError, data: ELBv2.Types.SetSecurityGroupsOutput) => void): Request<ELBv2.Types.SetSecurityGroupsOutput, AWSError>;
   /**
-   * Enables the Availability Zone for the specified subnets for the specified load balancer. The specified subnets replace the previously enabled subnets.
+   * Enables the Availability Zone for the specified subnets for the specified Application Load Balancer. The specified subnets replace the previously enabled subnets. Note that you can't change the subnets for a Network Load Balancer.
    */
   setSubnets(params: ELBv2.Types.SetSubnetsInput, callback?: (err: AWSError, data: ELBv2.Types.SetSubnetsOutput) => void): Request<ELBv2.Types.SetSubnetsOutput, AWSError>;
   /**
-   * Enables the Availability Zone for the specified subnets for the specified load balancer. The specified subnets replace the previously enabled subnets.
+   * Enables the Availability Zone for the specified subnets for the specified Application Load Balancer. The specified subnets replace the previously enabled subnets. Note that you can't change the subnets for a Network Load Balancer.
    */
   setSubnets(callback?: (err: AWSError, data: ELBv2.Types.SetSubnetsOutput) => void): Request<ELBv2.Types.SetSubnetsOutput, AWSError>;
   /**
@@ -325,6 +325,7 @@ declare namespace ELBv2 {
   }
   export interface AddTagsOutput {
   }
+  export type AllocationId = string;
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -334,6 +335,10 @@ declare namespace ELBv2 {
      * The ID of the subnet.
      */
     SubnetId?: SubnetId;
+    /**
+     * [Network Load Balancers] The static IP address.
+     */
+    LoadBalancerAddresses?: LoadBalancerAddresses;
   }
   export type AvailabilityZones = AvailabilityZone[];
   export type CanonicalHostedZoneId = string;
@@ -365,7 +370,7 @@ declare namespace ELBv2 {
      */
     LoadBalancerArn: LoadBalancerArn;
     /**
-     * The protocol for connections from clients to the load balancer.
+     * The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP.
      */
     Protocol: ProtocolEnum;
     /**
@@ -373,15 +378,15 @@ declare namespace ELBv2 {
      */
     Port: Port;
     /**
-     * The security policy that defines which ciphers and protocols are supported. The default is the current predefined security policy.
+     * [HTTPS listeners] The security policy that defines which ciphers and protocols are supported. The default is the current predefined security policy.
      */
     SslPolicy?: SslPolicyName;
     /**
-     * The SSL server certificate. You must provide exactly one certificate if the protocol is HTTPS.
+     * [HTTPS listeners] The SSL server certificate. You must provide exactly one certificate.
      */
     Certificates?: CertificateList;
     /**
-     * The default action for the listener.
+     * The default action for the listener. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.
      */
     DefaultActions: Actions;
   }
@@ -397,11 +402,15 @@ declare namespace ELBv2 {
      */
     Name: LoadBalancerName;
     /**
-     * The IDs of the subnets to attach to the load balancer. You can specify only one subnet per Availability Zone. You must specify subnets from at least two Availability Zones.
+     * The IDs of the subnets to attach to the load balancer. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Application Load Balancers] You must specify subnets from at least two Availability Zones.
      */
-    Subnets: Subnets;
+    Subnets?: Subnets;
     /**
-     * The IDs of the security groups to assign to the load balancer.
+     * The IDs of the subnets to attach to the load balancer. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Network Load Balancers] You can specify one Elastic IP address per subnet. [Application Load Balancers] You cannot specify Elastic IP addresses for your subnets.
+     */
+    SubnetMappings?: SubnetMappings;
+    /**
+     * [Application Load Balancers] The IDs of the security groups to assign to the load balancer.
      */
     SecurityGroups?: SecurityGroups;
     /**
@@ -413,7 +422,11 @@ declare namespace ELBv2 {
      */
     Tags?: TagList;
     /**
-     * The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use ipv4.
+     * The type of load balancer to create. The default is application.
+     */
+    Type?: LoadBalancerTypeEnum;
+    /**
+     * [Application Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use ipv4.
      */
     IpAddressType?: IpAddressType;
   }
@@ -429,7 +442,7 @@ declare namespace ELBv2 {
      */
     ListenerArn: ListenerArn;
     /**
-     * A condition. Each condition specifies a field name and a single value. If the field name is host-header, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   - .   * (matches 0 or more characters)   ? (matches exactly 1 character)   If the field name is path-pattern, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
+     * The conditions. Each condition specifies a field name and a single value. If the field name is host-header, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   - .   * (matches 0 or more characters)   ? (matches exactly 1 character)   If the field name is path-pattern, you can specify a single path pattern. A path pattern is case sensitive, can be up to 128 characters in length, and can contain any of the following characters. Note that you can include up to three wildcard characters.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
      */
     Conditions: RuleConditionList;
     /**
@@ -453,7 +466,7 @@ declare namespace ELBv2 {
      */
     Name: TargetGroupName;
     /**
-     * The protocol to use for routing traffic to the targets.
+     * The protocol to use for routing traffic to the targets. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP.
      */
     Protocol: ProtocolEnum;
     /**
@@ -465,35 +478,35 @@ declare namespace ELBv2 {
      */
     VpcId: VpcId;
     /**
-     * The protocol the load balancer uses when performing health checks on targets. The default is the HTTP protocol.
+     * The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported only if the protocol of the target group is TCP. For Application Load Balancers, the default is HTTP. For Network Load Balancers, the default is TCP.
      */
     HealthCheckProtocol?: ProtocolEnum;
     /**
-     * The port the load balancer uses when performing health checks on targets. The default is traffic-port, which indicates the port on which each target receives traffic from the load balancer.
+     * The port the load balancer uses when performing health checks on targets. The default is traffic-port, which is the port on which each target receives traffic from the load balancer.
      */
     HealthCheckPort?: HealthCheckPort;
     /**
-     * The ping path that is the destination on the targets for health checks. The default is /.
+     * [HTTP/HTTPS health checks] The ping path that is the destination on the targets for health checks. The default is /.
      */
     HealthCheckPath?: Path;
     /**
-     * The approximate amount of time, in seconds, between health checks of an individual target. The default is 30 seconds.
+     * The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. The default is 30 seconds.
      */
     HealthCheckIntervalSeconds?: HealthCheckIntervalSeconds;
     /**
-     * The amount of time, in seconds, during which no response from a target means a failed health check. The default is 5 seconds.
+     * The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2 to 60 seconds and the default is 5 seconds. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.
      */
     HealthCheckTimeoutSeconds?: HealthCheckTimeoutSeconds;
     /**
-     * The number of consecutive health checks successes required before considering an unhealthy target healthy. The default is 5.
+     * The number of consecutive health checks successes required before considering an unhealthy target healthy. For Application Load Balancers, the default is 5. For Network Load Balancers, the default is 3.
      */
     HealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * The number of consecutive health check failures required before considering a target unhealthy. The default is 2.
+     * The number of consecutive health check failures required before considering a target unhealthy. For Application Load Balancers, the default is 2. For Network Load Balancers, this value must be the same as the healthy threshold count.
      */
     UnhealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * The HTTP codes to use when checking for a successful response from a target. The default is 200.
+     * [HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.
      */
     Matcher?: Matcher;
     /**
@@ -771,11 +784,12 @@ declare namespace ELBv2 {
   export type HealthCheckThresholdCount = number;
   export type HealthCheckTimeoutSeconds = number;
   export type HttpCode = string;
+  export type IpAddress = string;
   export type IpAddressType = "ipv4"|"dualstack"|string;
   export type IsDefault = boolean;
   export interface Limit {
     /**
-     * The name of the limit. The possible values are:   application-load-balancers   listeners-per-application-load-balancer   rules-per-application-load-balancer   target-groups   targets-per-application-load-balancer  
+     * The name of the limit. The possible values are:   application-load-balancers   listeners-per-application-load-balancer   listeners-per-network-load-balancer   network-load-balancers   rules-per-application-load-balancer   target-groups   targets-per-application-load-balancer  
      */
     Name?: Name;
     /**
@@ -868,11 +882,22 @@ declare namespace ELBv2 {
      */
     IpAddressType?: IpAddressType;
   }
+  export interface LoadBalancerAddress {
+    /**
+     * The static IP address.
+     */
+    IpAddress?: IpAddress;
+    /**
+     * [Network Load Balancers] The allocation ID of the Elastic IP address.
+     */
+    AllocationId?: AllocationId;
+  }
+  export type LoadBalancerAddresses = LoadBalancerAddress[];
   export type LoadBalancerArn = string;
   export type LoadBalancerArns = LoadBalancerArn[];
   export interface LoadBalancerAttribute {
     /**
-     * The name of the attribute.    access_logs.s3.enabled - Indicates whether access logs stored in Amazon S3 are enabled. The value is true or false.    access_logs.s3.bucket - The name of the S3 bucket for the access logs. This attribute is required if access logs in Amazon S3 are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permission to write to the bucket.    access_logs.s3.prefix - The prefix for the location in the S3 bucket. If you don't specify a prefix, the access logs are stored in the root of the bucket.    deletion_protection.enabled - Indicates whether deletion protection is enabled. The value is true or false.    idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid range is 1-3600. The default is 60 seconds.  
+     * The name of the attribute.    access_logs.s3.enabled - [Application Load Balancers] Indicates whether access logs stored in Amazon S3 are enabled. The value is true or false.    access_logs.s3.bucket - [Application Load Balancers] The name of the S3 bucket for the access logs. This attribute is required if access logs in Amazon S3 are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permission to write to the bucket.    access_logs.s3.prefix - [Application Load Balancers] The prefix for the location in the S3 bucket. If you don't specify a prefix, the access logs are stored in the root of the bucket.    deletion_protection.enabled - Indicates whether deletion protection is enabled. The value is true or false.    idle_timeout.timeout_seconds - [Application Load Balancers] The idle timeout value, in seconds. The valid range is 1-4000. The default is 60 seconds.  
      */
     Key?: LoadBalancerAttributeKey;
     /**
@@ -896,13 +921,13 @@ declare namespace ELBv2 {
      */
     Reason?: StateReason;
   }
-  export type LoadBalancerStateEnum = "active"|"provisioning"|"failed"|string;
-  export type LoadBalancerTypeEnum = "application"|string;
+  export type LoadBalancerStateEnum = "active"|"provisioning"|"active_impaired"|"failed"|string;
+  export type LoadBalancerTypeEnum = "application"|"network"|string;
   export type LoadBalancers = LoadBalancer[];
   export type Marker = string;
   export interface Matcher {
     /**
-     * The HTTP codes. You can specify values between 200 and 499. The default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").
+     * The HTTP codes. For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"). For Network Load Balancers, this is 200 to 399.
      */
     HttpCode: HttpCode;
   }
@@ -917,7 +942,7 @@ declare namespace ELBv2 {
      */
     Port?: Port;
     /**
-     * The protocol for connections from clients to the load balancer.
+     * The protocol for connections from clients to the load balancer. Application Load Balancers support HTTP and HTTPS and Network Load Balancers support TCP.
      */
     Protocol?: ProtocolEnum;
     /**
@@ -929,7 +954,7 @@ declare namespace ELBv2 {
      */
     Certificates?: CertificateList;
     /**
-     * The default actions.
+     * The default action. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.
      */
     DefaultActions?: Actions;
   }
@@ -965,7 +990,7 @@ declare namespace ELBv2 {
      */
     Conditions?: RuleConditionList;
     /**
-     * The actions.
+     * The actions. The target group must use the HTTP or HTTPS protocol.
      */
     Actions?: Actions;
   }
@@ -997,23 +1022,23 @@ declare namespace ELBv2 {
      */
     TargetGroupArn: TargetGroupArn;
     /**
-     * The protocol to use to connect with the target.
+     * The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported only if the protocol of the target group is TCP.
      */
     HealthCheckProtocol?: ProtocolEnum;
     /**
-     * The port to use to connect with the target.
+     * The port the load balancer uses when performing health checks on targets.
      */
     HealthCheckPort?: HealthCheckPort;
     /**
-     * The ping path that is the destination for the health check request.
+     * [HTTP/HTTPS health checks] The ping path that is the destination for the health check request.
      */
     HealthCheckPath?: Path;
     /**
-     * The approximate amount of time, in seconds, between health checks of an individual target.
+     * The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.
      */
     HealthCheckIntervalSeconds?: HealthCheckIntervalSeconds;
     /**
-     * The amount of time, in seconds, during which no response means a failed health check.
+     * [HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check.
      */
     HealthCheckTimeoutSeconds?: HealthCheckTimeoutSeconds;
     /**
@@ -1021,11 +1046,11 @@ declare namespace ELBv2 {
      */
     HealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * The number of consecutive health check failures required before considering the target unhealthy.
+     * The number of consecutive health check failures required before considering the target unhealthy. For Network Load Balancers, this value must be the same as the healthy threshold count.
      */
     UnhealthyThresholdCount?: HealthCheckThresholdCount;
     /**
-     * The HTTP codes to use when checking for a successful response from a target.
+     * [HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.
      */
     Matcher?: Matcher;
   }
@@ -1039,7 +1064,7 @@ declare namespace ELBv2 {
   export type PageSize = number;
   export type Path = string;
   export type Port = number;
-  export type ProtocolEnum = "HTTP"|"HTTPS"|string;
+  export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|string;
   export interface RegisterTargetsInput {
     /**
      * The Amazon Resource Name (ARN) of the target group.
@@ -1166,9 +1191,13 @@ declare namespace ELBv2 {
      */
     LoadBalancerArn: LoadBalancerArn;
     /**
-     * The IDs of the subnets. You must specify at least two subnets. You can add only one subnet per Availability Zone.
+     * The IDs of the subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
      */
     Subnets: Subnets;
+    /**
+     * The IDs of the subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. The load balancer is allocated one static IP address per subnet. You cannot specify your own Elastic IP addresses.
+     */
+    SubnetMappings?: SubnetMappings;
   }
   export interface SetSubnetsOutput {
     /**
@@ -1199,6 +1228,17 @@ declare namespace ELBv2 {
   export type String = string;
   export type StringValue = string;
   export type SubnetId = string;
+  export interface SubnetMapping {
+    /**
+     * The ID of the subnet.
+     */
+    SubnetId?: SubnetId;
+    /**
+     * [Network Load Balancers] The allocation ID of the Elastic IP address.
+     */
+    AllocationId?: AllocationId;
+  }
+  export type SubnetMappings = SubnetMapping[];
   export type Subnets = SubnetId[];
   export interface Tag {
     /**
@@ -1306,7 +1346,7 @@ declare namespace ELBv2 {
   export type TargetGroupArns = TargetGroupArn[];
   export interface TargetGroupAttribute {
     /**
-     * The name of the attribute.    deregistration_delay.timeout_seconds - The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds.    stickiness.enabled - Indicates whether sticky sessions are enabled. The value is true or false.    stickiness.type - The type of sticky sessions. The possible value is lb_cookie.    stickiness.lb_cookie.duration_seconds - The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).  
+     * The name of the attribute.    deregistration_delay.timeout_seconds - The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused. The range is 0-3600 seconds. The default value is 300 seconds.    stickiness.enabled - [Application Load Balancers] Indicates whether sticky sessions are enabled. The value is true or false.    stickiness.type - [Application Load Balancers] The type of sticky sessions. The possible value is lb_cookie.    stickiness.lb_cookie.duration_seconds - [Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).  
      */
     Key?: TargetGroupAttributeKey;
     /**
@@ -1326,7 +1366,7 @@ declare namespace ELBv2 {
      */
     State?: TargetHealthStateEnum;
     /**
-     * The reason code. If the target state is healthy, a reason code is not provided. If the target state is initial, the reason code can be one of the following values:    Elb.RegistrationInProgress - The target is in the process of being registered with the load balancer.    Elb.InitialHealthChecking - The load balancer is still sending the target the minimum number of health checks required to determine its health status.   If the target state is unhealthy, the reason code can be one of the following values:    Target.ResponseCodeMismatch - The health checks did not return an expected HTTP code.    Target.Timeout - The health check requests timed out.    Target.FailedHealthChecks - The health checks failed because the connection to the target timed out, the target response was malformed, or the target failed the health check for an unknown reason.    Elb.InternalError - The health checks failed due to an internal error.   If the target state is unused, the reason code can be one of the following values:    Target.NotRegistered - The target is not registered with the target group.    Target.NotInUse - The target group is not used by any load balancer or the target is in an Availability Zone that is not enabled for its load balancer.    Target.InvalidState - The target is in the stopped or terminated state.   If the target state is draining, the reason code can be the following value:    Target.DeregistrationInProgress - The target is in the process of being deregistered and the deregistration delay period has not expired.  
+     * The reason code. If the target state is healthy, a reason code is not provided. If the target state is initial, the reason code can be one of the following values:    Elb.RegistrationInProgress - The target is in the process of being registered with the load balancer.    Elb.InitialHealthChecking - The load balancer is still sending the target the minimum number of health checks required to determine its health status.   If the target state is unhealthy, the reason code can be one of the following values:    Target.ResponseCodeMismatch - The health checks did not return an expected HTTP code.    Target.Timeout - The health check requests timed out.    Target.FailedHealthChecks - The health checks failed because the connection to the target timed out, the target response was malformed, or the target failed the health check for an unknown reason.    Elb.InternalError - The health checks failed due to an internal error.   If the target state is unused, the reason code can be one of the following values:    Target.NotRegistered - The target is not registered with the target group.    Target.NotInUse - The target group is not used by any load balancer or the target is in an Availability Zone that is not enabled for its load balancer.    Target.IpUnusable - The target IP address is reserved for use by a load balancer.    Target.InvalidState - The target is in the stopped or terminated state.   If the target state is draining, the reason code can be the following value:    Target.DeregistrationInProgress - The target is in the process of being deregistered and the deregistration delay period has not expired.  
      */
     Reason?: TargetHealthReasonEnum;
     /**
@@ -1350,7 +1390,7 @@ declare namespace ELBv2 {
   }
   export type TargetHealthDescriptions = TargetHealthDescription[];
   export type TargetHealthReasonEnum = "Elb.RegistrationInProgress"|"Elb.InitialHealthChecking"|"Target.ResponseCodeMismatch"|"Target.Timeout"|"Target.FailedHealthChecks"|"Target.NotRegistered"|"Target.NotInUse"|"Target.DeregistrationInProgress"|"Target.InvalidState"|"Target.IpUnusable"|"Elb.InternalError"|string;
-  export type TargetHealthStateEnum = "initial"|"healthy"|"unhealthy"|"unused"|"draining"|string;
+  export type TargetHealthStateEnum = "initial"|"healthy"|"unhealthy"|"unused"|"draining"|"unavailable"|string;
   export type TargetId = string;
   export type TargetTypeEnum = "instance"|"ip"|string;
   export type VpcId = string;

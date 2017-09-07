@@ -532,6 +532,9 @@ declare namespace ApplicationAutoScaling {
      * The amount of time, in seconds, after a scale in activity completes before another scale in activity can start. The cooldown period is used to block subsequent scale in requests until it has expired. The intention is to scale in conservatively to protect your application's availability. However, if another alarm triggers a scale out policy during the cooldown period after a scale-in, Application Auto Scaling scales out your scalable target immediately.
      */
     ScaleInCooldown?: Cooldown;
+    /**
+     * Indicates whether scale in by the target tracking policy is disabled. If the value is true, scale in is disabled and the target tracking policy won't remove capacity from the scalable resource. Otherwise, scale in is enabled and the target tracking policy can remove capacity from the scalable resource. The default value is false.
+     */
     DisableScaleIn?: DisableScaleIn;
   }
   export type TimestampType = Date;

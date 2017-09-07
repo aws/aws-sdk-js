@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.110.0-->
+<!--LATEST=2.111.0-->
 <!--ENTRYINSERT-->
+
+## 2.111.0
+* feature: EC2: With Tagging support, you can add Key and Value metadata to search, filter and organize your NAT Gateways according to your organization's needs.
+* feature: ELBv2: The feature enables the new Network Load Balancer that is optimized to handle volatile traffic patterns while using a single static IP address per Availability Zone. Network Load Balancer operates at the connection level (Layer 4), routing connections to Amazon EC2 instances and containers, within Amazon Virtual Private Cloud (Amazon VPC) based on IP protocol data.
+* feature: LexModelBuildingService: Amazon Lex provides the ability to export your Amazon Lex chatbot definition as a JSON file that can be added to the target platform. The JSON configuration file contains the structure of your Amazon Lex chatbot, including the intent schema with utterances, slots, prompts and slot-types.
+* feature: Route53: You can configure Amazon Route 53 to log information about the DNS queries that Amazon Route 53 receives for your domains and subdomains. When you configure query logging, Amazon Route 53 starts to send logs to CloudWatch Logs. You can use various tools, including the AWS console, to access the query logs.
 
 ## 2.110.0
 * feature: Budgets: Add an optional "thresholdType" to notifications to support percentage or absolute value thresholds.

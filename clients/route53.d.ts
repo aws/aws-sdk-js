@@ -52,6 +52,14 @@ declare class Route53 extends Service {
    */
   createHostedZone(callback?: (err: AWSError, data: Route53.Types.CreateHostedZoneResponse) => void): Request<Route53.Types.CreateHostedZoneResponse, AWSError>;
   /**
+   * Creates a configuration for DNS query logging. After you create a query logging configuration, Amazon Route 53 begins to publish log data to an Amazon CloudWatch Logs log group. DNS query logs contain information about the queries that Amazon Route 53 receives for a specified public hosted zone, such as the following:   Amazon Route 53 edge location that responded to the DNS query   Domain or subdomain that was requested   DNS record type, such as A or AAAA   DNS response code, such as NoError or ServFail     Log Group and Resource Policy  Before you create a query logging configuration, perform the following operations.  If you create a query logging configuration using the Amazon Route 53 console, Amazon Route 53 performs these operations automatically.    Create a CloudWatch Logs log group, and make note of the ARN, which you specify when you create a query logging configuration. Note the following:   You must create the log group in the us-east-1 region.   You must use the same AWS account to create the log group and the hosted zone that you want to configure query logging for.   When you create log groups for query logging, we recommend that you use a consistent prefix, for example:  /aws/route53/hosted zone name   In the next step, you'll create a resource policy, which controls access to one or more log groups and the associated AWS resources, such as Amazon Route 53 hosted zones. There's a limit on the number of resource policies that you can create, so we recommend that you use a consistent prefix so you can use the same resource policy for all the log groups that you create for query logging.     Create a CloudWatch Logs resource policy, and give it the permissions that Amazon Route 53 needs to create log streams and to to send query logs to log streams. For the value of Resource, specify the ARN for the log group that you created in the previous step. To use the same resource policy for all the CloudWatch Logs log groups that you created for query logging configurations, replace the hosted zone name with *, for example:  arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/*   You can't use the CloudWatch console to create or edit a resource policy. You must use the CloudWatch API, one of the AWS SDKs, or the AWS CLI.     Log Streams and Edge Locations  When Amazon Route 53 finishes creating the configuration for DNS query logging, it does the following:   Creates a log stream for an edge location the first time that the edge location responds to DNS queries for the specified hosted zone. That log stream is used to log all queries that Amazon Route 53 responds to for that edge location.   Begins to send query logs to the applicable log stream.   The name of each log stream is in the following format:   hosted zone ID/edge location code   The edge location code is a three-letter code and an arbitrarily assigned number, for example, DFW3. The three-letter code typically corresponds with the International Air Transport Association airport code for an airport near the edge location. (These abbreviations might change in the future.) For a list of edge locations, see "The Amazon Route 53 Global Network" on the Amazon Route 53 Product Details page.  Queries That Are Logged  Query logs contain only the queries that DNS resolvers forward to Amazon Route 53. If a DNS resolver has already cached the response to a query (such as the IP address for a load balancer for example.com), the resolver will continue to return the cached response. It doesn't forward another query to Amazon Route 53 until the TTL for the corresponding resource record set expires. Depending on how many DNS queries are submitted for a resource record set, and depending on the TTL for that resource record set, query logs might contain information about only one query out of every several thousand queries that are submitted to DNS. For more information about how DNS works, see Routing Internet Traffic to Your Website or Web Application in the Amazon Route 53 Developer Guide.  Log File Format  For a list of the values in each query log and the format of each value, see Logging DNS Queries in the Amazon Route 53 Developer Guide.  Pricing  For information about charges for query logs, see Amazon CloudWatch Pricing.  How to Stop Logging  If you want Amazon Route 53 to stop sending query logs to CloudWatch Logs, delete the query logging configuration. For more information, see DeleteQueryLoggingConfig.  
+   */
+  createQueryLoggingConfig(params: Route53.Types.CreateQueryLoggingConfigRequest, callback?: (err: AWSError, data: Route53.Types.CreateQueryLoggingConfigResponse) => void): Request<Route53.Types.CreateQueryLoggingConfigResponse, AWSError>;
+  /**
+   * Creates a configuration for DNS query logging. After you create a query logging configuration, Amazon Route 53 begins to publish log data to an Amazon CloudWatch Logs log group. DNS query logs contain information about the queries that Amazon Route 53 receives for a specified public hosted zone, such as the following:   Amazon Route 53 edge location that responded to the DNS query   Domain or subdomain that was requested   DNS record type, such as A or AAAA   DNS response code, such as NoError or ServFail     Log Group and Resource Policy  Before you create a query logging configuration, perform the following operations.  If you create a query logging configuration using the Amazon Route 53 console, Amazon Route 53 performs these operations automatically.    Create a CloudWatch Logs log group, and make note of the ARN, which you specify when you create a query logging configuration. Note the following:   You must create the log group in the us-east-1 region.   You must use the same AWS account to create the log group and the hosted zone that you want to configure query logging for.   When you create log groups for query logging, we recommend that you use a consistent prefix, for example:  /aws/route53/hosted zone name   In the next step, you'll create a resource policy, which controls access to one or more log groups and the associated AWS resources, such as Amazon Route 53 hosted zones. There's a limit on the number of resource policies that you can create, so we recommend that you use a consistent prefix so you can use the same resource policy for all the log groups that you create for query logging.     Create a CloudWatch Logs resource policy, and give it the permissions that Amazon Route 53 needs to create log streams and to to send query logs to log streams. For the value of Resource, specify the ARN for the log group that you created in the previous step. To use the same resource policy for all the CloudWatch Logs log groups that you created for query logging configurations, replace the hosted zone name with *, for example:  arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/*   You can't use the CloudWatch console to create or edit a resource policy. You must use the CloudWatch API, one of the AWS SDKs, or the AWS CLI.     Log Streams and Edge Locations  When Amazon Route 53 finishes creating the configuration for DNS query logging, it does the following:   Creates a log stream for an edge location the first time that the edge location responds to DNS queries for the specified hosted zone. That log stream is used to log all queries that Amazon Route 53 responds to for that edge location.   Begins to send query logs to the applicable log stream.   The name of each log stream is in the following format:   hosted zone ID/edge location code   The edge location code is a three-letter code and an arbitrarily assigned number, for example, DFW3. The three-letter code typically corresponds with the International Air Transport Association airport code for an airport near the edge location. (These abbreviations might change in the future.) For a list of edge locations, see "The Amazon Route 53 Global Network" on the Amazon Route 53 Product Details page.  Queries That Are Logged  Query logs contain only the queries that DNS resolvers forward to Amazon Route 53. If a DNS resolver has already cached the response to a query (such as the IP address for a load balancer for example.com), the resolver will continue to return the cached response. It doesn't forward another query to Amazon Route 53 until the TTL for the corresponding resource record set expires. Depending on how many DNS queries are submitted for a resource record set, and depending on the TTL for that resource record set, query logs might contain information about only one query out of every several thousand queries that are submitted to DNS. For more information about how DNS works, see Routing Internet Traffic to Your Website or Web Application in the Amazon Route 53 Developer Guide.  Log File Format  For a list of the values in each query log and the format of each value, see Logging DNS Queries in the Amazon Route 53 Developer Guide.  Pricing  For information about charges for query logs, see Amazon CloudWatch Pricing.  How to Stop Logging  If you want Amazon Route 53 to stop sending query logs to CloudWatch Logs, delete the query logging configuration. For more information, see DeleteQueryLoggingConfig.  
+   */
+  createQueryLoggingConfig(callback?: (err: AWSError, data: Route53.Types.CreateQueryLoggingConfigResponse) => void): Request<Route53.Types.CreateQueryLoggingConfigResponse, AWSError>;
+  /**
    * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet marks the delegation set associated with that zone as reusable  A reusable delegation set can't be associated with a private hosted zone.  For information on how to use a reusable delegation set to configure white label name servers, see Configuring White Label Name Servers.
    */
   createReusableDelegationSet(params: Route53.Types.CreateReusableDelegationSetRequest, callback?: (err: AWSError, data: Route53.Types.CreateReusableDelegationSetResponse) => void): Request<Route53.Types.CreateReusableDelegationSetResponse, AWSError>;
@@ -107,6 +115,14 @@ declare class Route53 extends Service {
    * Deletes a hosted zone.  If the name servers for the hosted zone are associated with a domain and if you want to make the domain unavailable on the Internet, we recommend that you delete the name servers from the domain to prevent future DNS queries from possibly being misrouted. If the domain is registered with Amazon Route 53, see UpdateDomainNameservers. If the domain is registered with another registrar, use the method provided by the registrar to delete name servers for the domain. Some domain registries don't allow you to remove all of the name servers for a domain. If the registry for your domain requires one or more name servers, we recommend that you delete the hosted zone only if you transfer DNS service to another service provider, and you replace the name servers for the domain with name servers from the new provider.  You can delete a hosted zone only if it contains only the default SOA record and NS resource record sets. If the hosted zone contains other resource record sets, you must delete them before you can delete the hosted zone. If you try to delete a hosted zone that contains other resource record sets, the request fails, and Amazon Route 53 returns a HostedZoneNotEmpty error. For information about deleting records from your hosted zone, see ChangeResourceRecordSets. To verify that the hosted zone has been deleted, do one of the following:   Use the GetHostedZone action to request information about the hosted zone.   Use the ListHostedZones action to get a list of the hosted zones associated with the current AWS account.  
    */
   deleteHostedZone(callback?: (err: AWSError, data: Route53.Types.DeleteHostedZoneResponse) => void): Request<Route53.Types.DeleteHostedZoneResponse, AWSError>;
+  /**
+   * Deletes a configuration for DNS query logging. If you delete a configuration, Amazon Route 53 stops sending query logs to CloudWatch Logs. Amazon Route 53 doesn't delete any logs that are already in CloudWatch Logs. For more information about DNS query logs, see CreateQueryLoggingConfig.
+   */
+  deleteQueryLoggingConfig(params: Route53.Types.DeleteQueryLoggingConfigRequest, callback?: (err: AWSError, data: Route53.Types.DeleteQueryLoggingConfigResponse) => void): Request<Route53.Types.DeleteQueryLoggingConfigResponse, AWSError>;
+  /**
+   * Deletes a configuration for DNS query logging. If you delete a configuration, Amazon Route 53 stops sending query logs to CloudWatch Logs. Amazon Route 53 doesn't delete any logs that are already in CloudWatch Logs. For more information about DNS query logs, see CreateQueryLoggingConfig.
+   */
+  deleteQueryLoggingConfig(callback?: (err: AWSError, data: Route53.Types.DeleteQueryLoggingConfigResponse) => void): Request<Route53.Types.DeleteQueryLoggingConfigResponse, AWSError>;
   /**
    * Deletes a reusable delegation set.  You can delete a reusable delegation set only if it isn't associated with any hosted zones.  To verify that the reusable delegation set is not associated with any hosted zones, submit a GetReusableDelegationSet request and specify the ID of the reusable delegation set that you want to delete.
    */
@@ -220,6 +236,14 @@ declare class Route53 extends Service {
    */
   getHostedZoneCount(callback?: (err: AWSError, data: Route53.Types.GetHostedZoneCountResponse) => void): Request<Route53.Types.GetHostedZoneCountResponse, AWSError>;
   /**
+   * Gets information about a specified configuration for DNS query logging. For more information about DNS query logs, see CreateQueryLoggingConfig and Logging DNS Queries.
+   */
+  getQueryLoggingConfig(params: Route53.Types.GetQueryLoggingConfigRequest, callback?: (err: AWSError, data: Route53.Types.GetQueryLoggingConfigResponse) => void): Request<Route53.Types.GetQueryLoggingConfigResponse, AWSError>;
+  /**
+   * Gets information about a specified configuration for DNS query logging. For more information about DNS query logs, see CreateQueryLoggingConfig and Logging DNS Queries.
+   */
+  getQueryLoggingConfig(callback?: (err: AWSError, data: Route53.Types.GetQueryLoggingConfigResponse) => void): Request<Route53.Types.GetQueryLoggingConfigResponse, AWSError>;
+  /**
    * Retrieves information about a specified reusable delegation set, including the four name servers that are assigned to the delegation set.
    */
   getReusableDelegationSet(params: Route53.Types.GetReusableDelegationSetRequest, callback?: (err: AWSError, data: Route53.Types.GetReusableDelegationSetResponse) => void): Request<Route53.Types.GetReusableDelegationSetResponse, AWSError>;
@@ -283,6 +307,14 @@ declare class Route53 extends Service {
    * Retrieves a list of your hosted zones in lexicographic order. The response includes a HostedZones child element for each hosted zone created by the current AWS account.   ListHostedZonesByName sorts hosted zones by name with the labels reversed. For example:  com.example.www.  Note the trailing dot, which can change the sort order in some circumstances. If the domain name includes escape characters or Punycode, ListHostedZonesByName alphabetizes the domain name using the escaped or Punycoded value, which is the format that Amazon Route 53 saves in its database. For example, to create a hosted zone for exämple.com, you specify ex\344mple.com for the domain name. ListHostedZonesByName alphabetizes it as:  com.ex\344mple.  The labels are reversed and alphabetized using the escaped value. For more information about valid domain name formats, including internationalized domain names, see DNS Domain Name Format in the Amazon Route 53 Developer Guide. Amazon Route 53 returns up to 100 items in each response. If you have a lot of hosted zones, use the MaxItems parameter to list them in groups of up to 100. The response includes values that help navigate from one group of MaxItems hosted zones to the next:   The DNSName and HostedZoneId elements in the response contain the values, if any, specified for the dnsname and hostedzoneid parameters in the request that produced the current response.   The MaxItems element in the response contains the value, if any, that you specified for the maxitems parameter in the request that produced the current response.   If the value of IsTruncated in the response is true, there are more hosted zones associated with the current AWS account.  If IsTruncated is false, this response includes the last hosted zone that is associated with the current account. The NextDNSName element and NextHostedZoneId elements are omitted from the response.   The NextDNSName and NextHostedZoneId elements in the response contain the domain name and the hosted zone ID of the next hosted zone that is associated with the current AWS account. If you want to list more hosted zones, make another call to ListHostedZonesByName, and specify the value of NextDNSName and NextHostedZoneId in the dnsname and hostedzoneid parameters, respectively.  
    */
   listHostedZonesByName(callback?: (err: AWSError, data: Route53.Types.ListHostedZonesByNameResponse) => void): Request<Route53.Types.ListHostedZonesByNameResponse, AWSError>;
+  /**
+   * Lists the configurations for DNS query logging that are associated with the current AWS account or the configuration that is associated with a specified hosted zone. For more information about DNS query logs, see CreateQueryLoggingConfig. Additional information, including the format of DNS query logs, appears in Logging DNS Queries in the Amazon Route 53 Developer Guide.
+   */
+  listQueryLoggingConfigs(params: Route53.Types.ListQueryLoggingConfigsRequest, callback?: (err: AWSError, data: Route53.Types.ListQueryLoggingConfigsResponse) => void): Request<Route53.Types.ListQueryLoggingConfigsResponse, AWSError>;
+  /**
+   * Lists the configurations for DNS query logging that are associated with the current AWS account or the configuration that is associated with a specified hosted zone. For more information about DNS query logs, see CreateQueryLoggingConfig. Additional information, including the format of DNS query logs, appears in Logging DNS Queries in the Amazon Route 53 Developer Guide.
+   */
+  listQueryLoggingConfigs(callback?: (err: AWSError, data: Route53.Types.ListQueryLoggingConfigsResponse) => void): Request<Route53.Types.ListQueryLoggingConfigsResponse, AWSError>;
   /**
    * Lists the resource record sets in a specified hosted zone.  ListResourceRecordSets returns up to 100 resource record sets at a time in ASCII order, beginning at a position specified by the name and type elements. The action sorts results first by DNS name with the labels reversed, for example:  com.example.www.  Note the trailing dot, which can change the sort order in some circumstances. When multiple records have the same DNS name, the action sorts results by the record type. You can use the name and type elements to adjust the beginning position of the list of resource record sets returned:  If you do not specify Name or Type  The results begin with the first resource record set that the hosted zone contains.  If you specify Name but not Type  The results begin with the first resource record set in the list whose name is greater than or equal to Name.  If you specify Type but not Name  Amazon Route 53 returns the InvalidInput error.  If you specify both Name and Type  The results begin with the first resource record set in the list whose name is greater than or equal to Name, and whose type is greater than or equal to Type.   This action returns the most current version of the records. This includes records that are PENDING, and that are not yet available on all Amazon Route 53 DNS servers. To ensure that you get an accurate listing of the resource record sets for a hosted zone at a point in time, do not submit a ChangeResourceRecordSets request while you're paging through the results of a ListResourceRecordSets request. If you do, some pages may display results without the latest changes while other pages display results with the latest changes.
    */
@@ -573,6 +605,7 @@ declare namespace Route53 {
      */
     Dimensions?: DimensionList;
   }
+  export type CloudWatchLogsLogGroupArn = string;
   export type CloudWatchRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|string;
   export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
   export interface CreateHealthCheckRequest {
@@ -636,6 +669,26 @@ declare namespace Route53 {
     VPC?: VPC;
     /**
      * The unique URL representing the new hosted zone.
+     */
+    Location: ResourceURI;
+  }
+  export interface CreateQueryLoggingConfigRequest {
+    /**
+     * The ID of the hosted zone that you want to log queries for. You can log queries only for public hosted zones.
+     */
+    HostedZoneId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the log group that you want to Amazon Route 53 to send query logs to. This is the format of the ARN: arn:aws:logs:region:account-id:log-group:log_group_name  To get the ARN for a log group, you can use the CloudWatch console, the DescribeLogGroups API action, the describe-log-groups command, or the applicable command in one of the AWS SDKs.
+     */
+    CloudWatchLogsLogGroupArn: CloudWatchLogsLogGroupArn;
+  }
+  export interface CreateQueryLoggingConfigResponse {
+    /**
+     * A complex type that contains the ID for a query logging configuration, the ID of the hosted zone that you want to log queries for, and the ARN for the log group that you want Amazon Route 53 to send query logs to.
+     */
+    QueryLoggingConfig: QueryLoggingConfig;
+    /**
+     * The unique URL representing the new query logging configuration.
      */
     Location: ResourceURI;
   }
@@ -796,6 +849,14 @@ declare namespace Route53 {
      * A complex type that contains the ID, the status, and the date and time of a request to delete a hosted zone.
      */
     ChangeInfo: ChangeInfo;
+  }
+  export interface DeleteQueryLoggingConfigRequest {
+    /**
+     * The ID of the configuration that you want to delete. 
+     */
+    Id: QueryLoggingConfigId;
+  }
+  export interface DeleteQueryLoggingConfigResponse {
   }
   export interface DeleteReusableDelegationSetRequest {
     /**
@@ -1031,6 +1092,18 @@ declare namespace Route53 {
      * A complex type that contains information about the VPCs that are associated with the specified hosted zone.
      */
     VPCs?: VPCs;
+  }
+  export interface GetQueryLoggingConfigRequest {
+    /**
+     * The ID of the configuration for DNS query logging that you want to get information about.
+     */
+    Id: QueryLoggingConfigId;
+  }
+  export interface GetQueryLoggingConfigResponse {
+    /**
+     * A complex type that contains information about the query logging configuration that you specified in a GetQueryLoggingConfig request.
+     */
+    QueryLoggingConfig: QueryLoggingConfig;
   }
   export interface GetReusableDelegationSetRequest {
     /**
@@ -1388,6 +1461,30 @@ declare namespace Route53 {
      */
     MaxItems: PageMaxItems;
   }
+  export interface ListQueryLoggingConfigsRequest {
+    /**
+     * (Optional) If you want to list the query logging configuration that is associated with a hosted zone, specify the ID in HostedZoneId.  If you don't specify a hosted zone ID, ListQueryLoggingConfigs returns all of the configurations that are associated with the current AWS account.
+     */
+    HostedZoneId?: ResourceId;
+    /**
+     * (Optional) If the current AWS account has more than MaxResults query logging configurations, use NextToken to get the second and subsequent pages of results. For the first ListQueryLoggingConfigs request, omit this value. For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * (Optional) The maximum number of query logging configurations that you want Amazon Route 53 to return in response to the current request. If the current AWS account has more than MaxResults configurations, use the value of ListQueryLoggingConfigsResponse$NextToken in the response to get the next page of results. If you don't specify a value for MaxResults, Amazon Route 53 returns up to 100 configurations.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListQueryLoggingConfigsResponse {
+    /**
+     * An array that contains one QueryLoggingConfig element for each configuration for DNS query logging that is associated with the current AWS account.
+     */
+    QueryLoggingConfigs: QueryLoggingConfigs;
+    /**
+     * If a response includes the last of the query logging configurations that are associated with the current AWS account, NextToken doesn't appear in the response. If a response doesn't include the last of the configurations, you can get more configurations by submitting another ListQueryLoggingConfigs request. Get the value of NextToken that Amazon Route 53 returned in the previous response and include it in NextToken in the next request.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListResourceRecordSetsRequest {
     /**
      * The ID of the hosted zone that contains the resource record sets that you want to list.
@@ -1737,6 +1834,22 @@ declare namespace Route53 {
   export type PaginationToken = string;
   export type Period = number;
   export type Port = number;
+  export interface QueryLoggingConfig {
+    /**
+     * The ID for a configuration for DNS query logging.
+     */
+    Id: QueryLoggingConfigId;
+    /**
+     * The ID of the hosted zone that CloudWatch Logs is logging queries for. 
+     */
+    HostedZoneId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.
+     */
+    CloudWatchLogsLogGroupArn: CloudWatchLogsLogGroupArn;
+  }
+  export type QueryLoggingConfigId = string;
+  export type QueryLoggingConfigs = QueryLoggingConfig[];
   export type RData = string;
   export type RRType = "SOA"|"A"|"TXT"|"NS"|"CNAME"|"MX"|"NAPTR"|"PTR"|"SRV"|"SPF"|"AAAA"|"CAA"|string;
   export type RecordData = RecordDataEntry[];

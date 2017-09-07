@@ -188,6 +188,14 @@ declare class LexModelBuildingService extends Service {
    */
   getBuiltinSlotTypes(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBuiltinSlotTypesResponse) => void): Request<LexModelBuildingService.Types.GetBuiltinSlotTypesResponse, AWSError>;
   /**
+   * Exports the contents of a Amazon Lex resource in a specified format. 
+   */
+  getExport(params: LexModelBuildingService.Types.GetExportRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetExportResponse) => void): Request<LexModelBuildingService.Types.GetExportResponse, AWSError>;
+  /**
+   * Exports the contents of a Amazon Lex resource in a specified format. 
+   */
+  getExport(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetExportResponse) => void): Request<LexModelBuildingService.Types.GetExportResponse, AWSError>;
+  /**
    *  Returns information about an intent. In addition to the intent name, you must specify the intent version.   This operation requires permissions to perform the lex:GetIntent action. 
    */
   getIntent(params: LexModelBuildingService.Types.GetIntentRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetIntentResponse) => void): Request<LexModelBuildingService.Types.GetIntentResponse, AWSError>;
@@ -701,6 +709,8 @@ declare namespace LexModelBuildingService {
     synonyms?: SynonymList;
   }
   export type EnumerationValues = EnumerationValue[];
+  export type ExportStatus = "IN_PROGRESS"|"READY"|"FAILED"|string;
+  export type ExportType = "ALEXA_SKILLS_KIT"|string;
   export interface FollowUpPrompt {
     /**
      * Prompts for information from the user. 
@@ -1061,6 +1071,54 @@ declare namespace LexModelBuildingService {
      * If the response is truncated, the response includes a pagination token that you can use in your next request to fetch the next page of slot types.
      */
     nextToken?: NextToken;
+  }
+  export interface GetExportRequest {
+    /**
+     * The name of the bot to export.
+     */
+    name: Name;
+    /**
+     * The version of the bot to export.
+     */
+    version: NumericalVersion;
+    /**
+     * The type of resource to export. 
+     */
+    resourceType: ResourceType;
+    /**
+     * The format of the exported data.
+     */
+    exportType: ExportType;
+  }
+  export interface GetExportResponse {
+    /**
+     * The name of the bot being exported.
+     */
+    name?: Name;
+    /**
+     * The version of the bot being exported.
+     */
+    version?: NumericalVersion;
+    /**
+     * The type of the exported resource.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The format of the exported data.
+     */
+    exportType?: ExportType;
+    /**
+     * The status of the export.     IN_PROGRESS - The export is in progress.    READY - The export is complete.    FAILED - The export could not be completed.  
+     */
+    exportStatus?: ExportStatus;
+    /**
+     * If status is FAILED, Amazon Lex provides the reason that it failed to export the resource.
+     */
+    failureReason?: String;
+    /**
+     * An S3 pre-signed URL that provides the location of the exported resource. The exported resource is a ZIP archive that contains the exported resource in JSON format. The structure of the archive may change. Your code should not rely on the archive structure.
+     */
+    url?: String;
   }
   export interface GetIntentRequest {
     /**
@@ -1662,7 +1720,7 @@ declare namespace LexModelBuildingService {
      */
     checksum?: String;
     /**
-     * Determines the strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:    ORIGINAL_VALUE - Returns the value entered by the user.    TOP_RESOLUTION - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy is not provided, the default is ORIGINAL_VALUE.
+     * Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:    ORIGINAL_VALUE - Returns the value entered by the user, if the user value is similar to the slot value.    TOP_RESOLUTION - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy, the default is ORIGINAL_VALUE.
      */
     valueSelectionStrategy?: SlotValueSelectionStrategy;
   }
@@ -1696,7 +1754,7 @@ declare namespace LexModelBuildingService {
      */
     checksum?: String;
     /**
-     * The strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
+     * The slot resolution strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
      */
     valueSelectionStrategy?: SlotValueSelectionStrategy;
   }
@@ -1711,6 +1769,7 @@ declare namespace LexModelBuildingService {
      */
     version?: Version;
   }
+  export type ResourceType = "BOT"|string;
   export type ResponseCard = string;
   export type SessionTTL = number;
   export interface Slot {
