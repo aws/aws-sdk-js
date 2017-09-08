@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.111.0-->
+<!--LATEST=2.112.0-->
 <!--ENTRYINSERT-->
+
+## 2.112.0
+* feature: CloudWatchLogs: Adds support for the PutResourcePolicy, DescribeResourcePolicy and DeleteResourcePolicy APIs.
 
 ## 2.111.0
 * feature: EC2: With Tagging support, you can add Key and Value metadata to search, filter and organize your NAT Gateways according to your organization's needs.
