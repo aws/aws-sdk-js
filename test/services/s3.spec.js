@@ -2541,6 +2541,36 @@ describe('AWS.S3', function() {
     });
   });
 
+  if (typeof Promise === 'function') {
+    return describe('getSignedUrlPromise', function() {
+      var catchFunction, err;
+      err = null;
+      catchFunction = function(e) {
+        err = e;
+      };
+      beforeEach(function() {
+        AWS.util.addPromises(AWS.S3, Promise);
+        err = null;
+      });
+      it('resolves when getSignedUrl is successful', function() {
+        return s3.getSignedUrlPromise('getObject', {
+          Bucket: 'bucket',
+          Key: 'key'
+        }).then(function(url) {
+          expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=4mlYnRmz%2BBFEPrgYz5tXcl9Wc4w%3D&x-amz-security-token=session');
+          expect(err).to.be["null"];
+        }, catchFunction);
+      });
+      it('rejects when getSignedUrl is unsuccessful', function() {
+        return s3.getSignedUrlPromise('getObjectsd', {
+          Bucket: 'bucket',
+          Key: 'key',
+        })["catch"](catchFunction).then(function() {
+          expect(err).to.not.be["null"];
+        });
+      });
+    });
+  }
   describe('createPresignedPost', function() {
     it('should include a url and a hash of form fields', function(done) {
       s3 = new AWS.S3();
