@@ -126,7 +126,7 @@
     describe('getDate', function() {
       it('should return current date by default', function() {
         var now, obj;
-        now = {};
+        now = new Date(0);
         obj = AWS.util.isNode() ? global : window;
         helpers.spyOn(obj, 'Date').andCallFake(function() {
           return now;

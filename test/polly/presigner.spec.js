@@ -2,19 +2,6 @@ var helpers = require('../helpers');
 var AWS = helpers.AWS;
 
 describe('AWS.Polly.Presigner', function() {
-  var getDate = null;
-  // Each test will treat the date as 'Date(0)'
-  beforeEach(function() {
-    getDate = AWS.util.date.getDate;
-    AWS.util.date.getDate = function() {
-      return new Date(0);
-    };
-  });
-
-  afterEach(function() {
-    AWS.util.date.getDate = getDate;
-  });
-
   describe('constructor', function() {
 
     it('can use global config if no options are provided', function() {
@@ -89,13 +76,17 @@ describe('AWS.Polly.Presigner', function() {
   });
 
   describe('getSynthesizeSpeechUrl', function() {
-      var presigner = new AWS.Polly.Presigner({
-          region: 'us-west-2',
-          credentials: {
-            accessKeyId: 'akid',
-            secretAccessKey: 'secret'
-          }
-        });
+    var presigner = new AWS.Polly.Presigner({
+      region: 'us-west-2',
+      credentials: {
+        accessKeyId: 'akid',
+        secretAccessKey: 'secret'
+      }
+    });
+    beforeEach(function() {
+      helpers.spyOn(presigner.service, 'getServiceClock').andReturn(new Date(0));
+    });
+
     describe('generates a url with', function() {
       var presigner = null;
 
@@ -107,6 +98,7 @@ describe('AWS.Polly.Presigner', function() {
             secretAccessKey: 'secret'
           }
         });
+        helpers.spyOn(presigner.service, 'getServiceClock').andReturn(new Date(0));
       });
 
       it('plain text', function() {
@@ -172,6 +164,7 @@ describe('AWS.Polly.Presigner', function() {
               VoiceId: 'fake'
             }
         });
+        helpers.spyOn(presigner.service, 'getServiceClock').andReturn(new Date(0));
         var expectedUrl = 'https://polly.us-west-2.amazonaws.com/v1/speech?OutputFormat=mp3&Text=Hello%20world&TextType=text&VoiceId=fake&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F19700101%2Fus-west-2%2Fpolly%2Faws4_request&X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Signature=ad22388e7298c19a491bc77b0c1fd8f169de31f031497a0266a15e1379520ff8&X-Amz-SignedHeaders=host';
         var url = presigner.getSynthesizeSpeechUrl({
           Text: 'Hello world'
