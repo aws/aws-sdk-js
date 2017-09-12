@@ -728,7 +728,7 @@
         });
       });
     });
-    return describe('customizeRequests', function() {
+    describe('customizeRequests', function() {
       it('should accept nullable types', function() {
         var didError, err;
         didError = false;
@@ -769,33 +769,34 @@
     });
     describe('Service date sync functions', function() { 
       beforeEach(function(done) {
-        AWS.config = new AWS.Config();
-        return done();
-      });    
-      it('should find clock skew if service time is skewed within 30 seconds', function() {
         AWS.config.update({
-          systemClockOffset: 120000
+          systemClockOffset: 0
         });
-        var mockService = new MockService();
-        expect(mockService.isClockSkewed()).to.equal(true);
-        mockService.config.update({
-          systemClockOffset: 30000 - 1
-        })
-        expect(mockService.isClockSkewed()).to.equal(false);
-        expect(AWS.util.date.isClockSkewed()).to.equal(true); 
+        done();
       });
+      it('should find clock skew if service time is skewed within 30 seconds', function() {
+        var mockService = new MockService();
+        var now = new Date().getTime();
+        helpers.spyOn(mockService, 'getServiceClock').andReturn(new Date(now + 120000));
+        expect(mockService.isClockSkewed(now)).to.equal(true);
+        helpers.spyOn(mockService, 'getServiceClock').andReturn(new Date(now + 29900));
+        expect(mockService.isClockSkewed(now)).to.equal(false);
+      }); 
       it('should apply the clock offset to service config', function() {
         var mockService = new MockService();
         expect(mockService.config.systemClockOffset).to.equal(0);
-        mockService.applyClockOffset(new Date() + 30000);
-        expect(mockService.config.systemClockOffset).to.equal(30000);
+        mockService.applyClockOffset(new Date().getTime() + 30000);
+        var offset = mockService.config.systemClockOffset
+        expect(offset > 29900 && offset < 30100).to.equal(true);
       });
       it('should get date for each service', function() {
         var mockService = new MockService();
         mockService.config.update({
           systemClockOffset: 30000
         })
-        expect(mockService.getServiceClock()).to.equal(new Date().getTime() + 30000);
+        var now = new Date().getTime();
+        var serviceTime = mockService.getServiceClock().getTime()
+        expect(now + 29900 < serviceTime && serviceTime < now + 30100).to.equal(true);
       });
     });
   });
