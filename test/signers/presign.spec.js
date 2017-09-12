@@ -14,6 +14,7 @@
     var resultUrl;
     resultUrl = "https://monitoring.mock-region.amazonaws.com/?" + ("Action=ListMetrics&Version=" + cw.api.apiVersion + "&") + "X-Amz-Algorithm=AWS4-HMAC-SHA256&" + "X-Amz-Credential=akid%2F19700101%2Fmock-region%2Fmonitoring%2Faws4_request&" + "X-Amz-Date=19700101T000000Z&X-Amz-Expires=3600&X-Amz-Security-Token=session&" + "X-Amz-Signature=953bd6d74e86c12adc305f656473d614269d2f20a0c18c5edbb3d7f57ca2b439&" + "X-Amz-SignedHeaders=host";
     beforeEach(function() {
+      helpers.spyOn(cw, 'getServiceClock').andReturn(new Date(0));
       return helpers.spyOn(AWS.util.date, 'getDate').andReturn(new Date(0));
     });
     it('presigns requests', function() {

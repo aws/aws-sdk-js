@@ -43,6 +43,16 @@
         expect(service.config.sslEnabled).to.equal(true);
         return expect(service.config.maxRetries).to.equal(5);
       });
+      it('should inherit the config from global config if it is not set specificly', function() {
+        var s3;
+        AWS.config.update({
+          correctClockSkew: true,
+          systemClockOffset: 120000
+        })
+        s3 = new AWS.S3;
+        expect(s3.config.systemClockOffset).to.equal(120000);
+        return expect(s3.config.correctClockSkew).to.equal(true);
+      })
       it('merges service-specific configuration from global config', function() {
         var s3;
         AWS.config.update({
@@ -755,6 +765,37 @@
           didError = true;
         }
         return expect(didError).to.equal(true);
+      });
+    });
+    describe('Service date sync functions', function() { 
+      beforeEach(function(done) {
+        AWS.config = new AWS.Config();
+        return done();
+      });    
+      it('should find clock skew if service time is skewed within 30 seconds', function() {
+        AWS.config.update({
+          systemClockOffset: 120000
+        });
+        var mockService = new MockService();
+        expect(mockService.isClockSkewed()).to.equal(true);
+        mockService.config.update({
+          systemClockOffset: 30000 - 1
+        })
+        expect(mockService.isClockSkewed()).to.equal(false);
+        expect(AWS.util.date.isClockSkewed()).to.equal(true); 
+      });
+      it('should apply the clock offset to service config', function() {
+        var mockService = new MockService();
+        expect(mockService.config.systemClockOffset).to.equal(0);
+        mockService.applyClockOffset(new Date() + 30000);
+        expect(mockService.config.systemClockOffset).to.equal(30000);
+      });
+      it('should get date for each service', function() {
+        var mockService = new MockService();
+        mockService.config.update({
+          systemClockOffset: 30000
+        })
+        expect(mockService.getServiceClock()).to.equal(new Date().getTime() + 30000);
       });
     });
   });
