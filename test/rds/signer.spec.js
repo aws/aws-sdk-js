@@ -28,7 +28,7 @@ describe('AWS.RDS.Signer', function() {
         var requiredOptions = Object.keys(testOptions);
         var rdsSigner = new AWS.RDS.Signer();
         beforeEach(function() {
-            helpers.spyOn(AWS.Service.prototype, 'getServiceClock').andReturn(new Date(0));
+            helpers.spyOn(AWS.Service.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
         });
         requiredOptions.forEach(function(field) {
             it('will error if ' + field + 'is not accessible', function() {

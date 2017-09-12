@@ -170,6 +170,30 @@
         });
       });
     });
+
+    describe('applyClockOffset', function() {
+      it('should apply new clock offset to AWS.config given new service time', function() {
+        var now = new Date().getTime();
+        AWS.config.systemClockOffset = 0;
+        AWS.util.applyClockOffset(now + 30000);
+        var updatedOffset = AWS.config.systemClockOffset;
+        expect(29900 < updatedOffset && 30100 > updatedOffset).to.equal(true);
+      });
+    });
+
+    describe('isClockSkewed', function() {
+      it('should apply new clock offset to AWS.config given new service time', function() {
+        var util = AWS.util;
+        var now = new Date();
+        obj = AWS.util.isNode() ? global : window;
+        helpers.spyOn(obj, 'Date').andCallFake(function() {
+          return now;
+        });
+        expect(util.isClockSkewed(now.getTime() + 300100)).to.equal(true);
+        expect(util.isClockSkewed(now.getTime() + 299900)).to.equal(false);
+      });
+    });
+
     describe('iso8601', function() {
       it('should return date formatted as YYYYMMDDTHHmmssZ', function() {
         var date;
@@ -187,6 +211,7 @@
         return expect(util.iso8601(date)).to.equal('1970-01-01T00:11:00Z');
       });
     });
+
     describe('rfc822', function() {
       it('should return date formatted as YYYYMMDDTHHmmssZ', function() {
         var date;

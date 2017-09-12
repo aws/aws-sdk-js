@@ -777,9 +777,9 @@
       it('should find clock skew if service time is skewed within 30 seconds', function() {
         var mockService = new MockService();
         var now = new Date().getTime();
-        helpers.spyOn(mockService, 'getServiceClock').andReturn(new Date(now + 120000));
+        helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 120000));
         expect(mockService.isClockSkewed(now)).to.equal(true);
-        helpers.spyOn(mockService, 'getServiceClock').andReturn(new Date(now + 29900));
+        helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 29900));
         expect(mockService.isClockSkewed(now)).to.equal(false);
       }); 
       it('should apply the clock offset to service config', function() {
@@ -795,7 +795,7 @@
           systemClockOffset: 30000
         })
         var now = new Date().getTime();
-        var serviceTime = mockService.getServiceClock().getTime()
+        var serviceTime = mockService.getSkewCorrectedDate().getTime()
         expect(now + 29900 < serviceTime && serviceTime < now + 30100).to.equal(true);
       });
     });

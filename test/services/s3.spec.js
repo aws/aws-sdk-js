@@ -2299,8 +2299,8 @@ describe('AWS.S3', function() {
     var date = null;
 
     beforeEach(function(done) {
-      helpers.spyOn(s3, 'getServiceClock').andReturn(new Date(0));
-      helpers.spyOn(s3.constructor.prototype, 'getServiceClock').andReturn(new Date(0));
+      helpers.spyOn(s3, 'getSkewCorrectedDate').andReturn(new Date(0));
+      helpers.spyOn(s3.constructor.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
       return done();
     });
 
@@ -2616,7 +2616,7 @@ describe('AWS.S3', function() {
 
     it('should default to expiration in one hour', function(done) {
       s3 = new AWS.S3();
-      helpers.spyOn(s3, 'getServiceClock').andReturn(new Date(946684800 * 1000));
+      helpers.spyOn(s3, 'getSkewCorrectedDate').andReturn(new Date(946684800 * 1000));
       s3.createPresignedPost({
         Bucket: 'bucket'
       }, function(err, data) {
@@ -2629,7 +2629,7 @@ describe('AWS.S3', function() {
     it('should allow users to provide a custom expiration', function(done) {
       var customTtl = 900;
       s3 = new AWS.S3();
-      helpers.spyOn(s3, 'getServiceClock').andReturn(new Date(946684800 * 1000));
+      helpers.spyOn(s3, 'getSkewCorrectedDate').andReturn(new Date(946684800 * 1000));
       return s3.createPresignedPost({
         Bucket: 'bucket',
         Expires: customTtl

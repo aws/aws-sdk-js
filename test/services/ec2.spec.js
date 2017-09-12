@@ -25,7 +25,7 @@
     describe('copySnapshot', function() {
       return it('generates PresignedUrl and DestinationRegion parameters', function() {
         var params;
-        helpers.spyOn(ec2.constructor.prototype, 'getServiceClock').andReturn(new Date(0));
+        helpers.spyOn(ec2.constructor.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
         helpers.mockHttpResponse(200, {}, '');
         params = {
           SourceRegion: 'src-region',
