@@ -126,6 +126,12 @@ s3.putObject({
     Body: fs.createReadStream('/fake/path')
 });
 
+s3.getSignedUrlPromise('getObject', {
+  Bucket: 'bucket',
+  Key: 'key'
+}).then(function(url) {
+    console.log(url);
+});
 const upload = s3.upload(
     {
         Bucket: 'BUCKET',

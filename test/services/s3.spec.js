@@ -2536,36 +2536,56 @@ describe('AWS.S3', function() {
         );
         done();
       });
-
       invocationDeferred = true;
     });
   });
-
   if (typeof Promise === 'function') {
     return describe('getSignedUrlPromise', function() {
-      var catchFunction, err;
+      var catchFunction, resolveFunction, err, url, date;
       err = null;
+      url = null;
+      date = null;
+
       catchFunction = function(e) {
         err = e;
       };
-      beforeEach(function() {
-        AWS.util.addPromises(AWS.S3, Promise);
+
+      resolveFunction = function(u) {
+        url = u;
+      };
+
+      beforeEach(function(done) {
         err = null;
+        url = null
+        date = AWS.util.date.getDate;
+        AWS.util.addPromises(AWS.S3, Promise);
+        AWS.util.date.getDate = function() {
+          return new Date(0);
+        };
+        return done();
       });
+
+      afterEach(function(done) {
+        AWS.util.date.getDate = date;
+        done();
+      });
+
       it('resolves when getSignedUrl is successful', function() {
         return s3.getSignedUrlPromise('getObject', {
           Bucket: 'bucket',
           Key: 'key'
-        }).then(function(url) {
+        }).then(resolveFunction).catch(catchFunction).then(function() {
           expect(url).to.equal('https://bucket.s3.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=4mlYnRmz%2BBFEPrgYz5tXcl9Wc4w%3D&x-amz-security-token=session');
           expect(err).to.be["null"];
-        }, catchFunction);
+        });
       });
+
       it('rejects when getSignedUrl is unsuccessful', function() {
-        return s3.getSignedUrlPromise('getObjectsd', {
+        return s3.getSignedUrlPromise('invalidOperation', {
           Bucket: 'bucket',
           Key: 'key',
-        })["catch"](catchFunction).then(function() {
+        }).then(resolveFunction).catch(catchFunction).then(function() {
+          expect(url).to.be["null"]
           expect(err).to.not.be["null"];
         });
       });
