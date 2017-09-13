@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.114.0
+// AWS SDK for JavaScript v2.115.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -4933,8 +4933,28 @@ module.exports={
           "NewInstancesProtectedFromScaleIn": {
             "type": "boolean"
           },
+          "LifecycleHookSpecificationList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "LifecycleHookName"
+              ],
+              "members": {
+                "LifecycleHookName": {},
+                "LifecycleTransition": {},
+                "NotificationMetadata": {},
+                "HeartbeatTimeout": {
+                  "type": "integer"
+                },
+                "DefaultResult": {},
+                "NotificationTargetARN": {},
+                "RoleARN": {}
+              }
+            }
+          },
           "Tags": {
-            "shape": "Su"
+            "shape": "S10"
           }
         }
       }
@@ -4950,11 +4970,11 @@ module.exports={
           "ImageId": {},
           "KeyName": {},
           "SecurityGroups": {
-            "shape": "S11"
+            "shape": "S17"
           },
           "ClassicLinkVPCId": {},
           "ClassicLinkVPCSecurityGroups": {
-            "shape": "S12"
+            "shape": "S18"
           },
           "UserData": {},
           "InstanceId": {},
@@ -4962,10 +4982,10 @@ module.exports={
           "KernelId": {},
           "RamdiskId": {},
           "BlockDeviceMappings": {
-            "shape": "S14"
+            "shape": "S1a"
           },
           "InstanceMonitoring": {
-            "shape": "S1d"
+            "shape": "S1j"
           },
           "SpotPrice": {},
           "IamInstanceProfile": {},
@@ -4987,7 +5007,7 @@ module.exports={
         ],
         "members": {
           "Tags": {
-            "shape": "Su"
+            "shape": "S10"
           }
         }
       }
@@ -5081,7 +5101,7 @@ module.exports={
         ],
         "members": {
           "Tags": {
-            "shape": "Su"
+            "shape": "S10"
           }
         }
       }
@@ -5128,7 +5148,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AutoScalingGroupNames": {
-            "shape": "S22"
+            "shape": "S28"
           },
           "NextToken": {},
           "MaxRecords": {
@@ -5237,7 +5257,7 @@ module.exports={
                 },
                 "Status": {},
                 "Tags": {
-                  "shape": "S2f"
+                  "shape": "S2l"
                 },
                 "TerminationPolicies": {
                   "shape": "Sr"
@@ -5305,7 +5325,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AutoScalingNotificationTypes": {
-            "shape": "S2m"
+            "shape": "S2s"
           }
         }
       }
@@ -5347,21 +5367,21 @@ module.exports={
                 "ImageId": {},
                 "KeyName": {},
                 "SecurityGroups": {
-                  "shape": "S11"
+                  "shape": "S17"
                 },
                 "ClassicLinkVPCId": {},
                 "ClassicLinkVPCSecurityGroups": {
-                  "shape": "S12"
+                  "shape": "S18"
                 },
                 "UserData": {},
                 "InstanceType": {},
                 "KernelId": {},
                 "RamdiskId": {},
                 "BlockDeviceMappings": {
-                  "shape": "S14"
+                  "shape": "S1a"
                 },
                 "InstanceMonitoring": {
-                  "shape": "S1d"
+                  "shape": "S1j"
                 },
                 "SpotPrice": {},
                 "IamInstanceProfile": {},
@@ -5388,7 +5408,7 @@ module.exports={
         "type": "structure",
         "members": {
           "LifecycleHookTypes": {
-            "shape": "S2m"
+            "shape": "S2s"
           }
         }
       }
@@ -5530,7 +5550,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AutoScalingGroupNames": {
-            "shape": "S22"
+            "shape": "S28"
           },
           "NextToken": {},
           "MaxRecords": {
@@ -5594,7 +5614,7 @@ module.exports={
                 "PolicyType": {},
                 "AdjustmentType": {},
                 "MinAdjustmentStep": {
-                  "shape": "S3p"
+                  "shape": "S3s"
                 },
                 "MinAdjustmentMagnitude": {
                   "type": "integer"
@@ -5606,17 +5626,17 @@ module.exports={
                   "type": "integer"
                 },
                 "StepAdjustments": {
-                  "shape": "S3s"
+                  "shape": "S3v"
                 },
                 "MetricAggregationType": {},
                 "EstimatedInstanceWarmup": {
                   "type": "integer"
                 },
                 "Alarms": {
-                  "shape": "S3w"
+                  "shape": "S3z"
                 },
                 "TargetTrackingConfiguration": {
-                  "shape": "S3y"
+                  "shape": "S41"
                 }
               }
             }
@@ -5648,7 +5668,7 @@ module.exports={
         ],
         "members": {
           "Activities": {
-            "shape": "S4e"
+            "shape": "S4h"
           },
           "NextToken": {}
         }
@@ -5761,7 +5781,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Tags": {
-            "shape": "S2f"
+            "shape": "S2l"
           },
           "NextToken": {}
         }
@@ -5800,7 +5820,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Activities": {
-            "shape": "S4e"
+            "shape": "S4h"
           }
         }
       }
@@ -5854,7 +5874,7 @@ module.exports={
         "members": {
           "AutoScalingGroupName": {},
           "Metrics": {
-            "shape": "S54"
+            "shape": "S57"
           }
         }
       }
@@ -5869,7 +5889,7 @@ module.exports={
         "members": {
           "AutoScalingGroupName": {},
           "Metrics": {
-            "shape": "S54"
+            "shape": "S57"
           },
           "Granularity": {}
         }
@@ -5897,7 +5917,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Activities": {
-            "shape": "S4e"
+            "shape": "S4h"
           }
         }
       }
@@ -5941,7 +5961,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Activities": {
-            "shape": "S4e"
+            "shape": "S4h"
           }
         }
       }
@@ -5984,7 +6004,7 @@ module.exports={
           "AutoScalingGroupName": {},
           "TopicARN": {},
           "NotificationTypes": {
-            "shape": "S2m"
+            "shape": "S2s"
           }
         }
       }
@@ -6002,7 +6022,7 @@ module.exports={
           "PolicyType": {},
           "AdjustmentType": {},
           "MinAdjustmentStep": {
-            "shape": "S3p"
+            "shape": "S3s"
           },
           "MinAdjustmentMagnitude": {
             "type": "integer"
@@ -6015,13 +6035,13 @@ module.exports={
           },
           "MetricAggregationType": {},
           "StepAdjustments": {
-            "shape": "S3s"
+            "shape": "S3v"
           },
           "EstimatedInstanceWarmup": {
             "type": "integer"
           },
           "TargetTrackingConfiguration": {
-            "shape": "S3y"
+            "shape": "S41"
           }
         }
       },
@@ -6031,7 +6051,7 @@ module.exports={
         "members": {
           "PolicyARN": {},
           "Alarms": {
-            "shape": "S3w"
+            "shape": "S3z"
           }
         }
       }
@@ -6090,7 +6110,7 @@ module.exports={
     },
     "ResumeProcesses": {
       "input": {
-        "shape": "S5l"
+        "shape": "S5n"
       }
     },
     "SetDesiredCapacity": {
@@ -6153,7 +6173,7 @@ module.exports={
     },
     "SuspendProcesses": {
       "input": {
-        "shape": "S5l"
+        "shape": "S5n"
       }
     },
     "TerminateInstanceInAutoScalingGroup": {
@@ -6175,7 +6195,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Activity": {
-            "shape": "S4f"
+            "shape": "S4i"
           }
         }
       }
@@ -6241,7 +6261,7 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "Su": {
+    "S10": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -6259,15 +6279,15 @@ module.exports={
         }
       }
     },
-    "S11": {
+    "S17": {
       "type": "list",
       "member": {}
     },
-    "S12": {
+    "S18": {
       "type": "list",
       "member": {}
     },
-    "S14": {
+    "S1a": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -6302,7 +6322,7 @@ module.exports={
         }
       }
     },
-    "S1d": {
+    "S1j": {
       "type": "structure",
       "members": {
         "Enabled": {
@@ -6310,11 +6330,11 @@ module.exports={
         }
       }
     },
-    "S22": {
+    "S28": {
       "type": "list",
       "member": {}
     },
-    "S2f": {
+    "S2l": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -6329,15 +6349,15 @@ module.exports={
         }
       }
     },
-    "S2m": {
+    "S2s": {
       "type": "list",
       "member": {}
     },
-    "S3p": {
+    "S3s": {
       "type": "integer",
       "deprecated": true
     },
-    "S3s": {
+    "S3v": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -6357,7 +6377,7 @@ module.exports={
         }
       }
     },
-    "S3w": {
+    "S3z": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -6367,7 +6387,7 @@ module.exports={
         }
       }
     },
-    "S3y": {
+    "S41": {
       "type": "structure",
       "required": [
         "TargetValue"
@@ -6419,13 +6439,13 @@ module.exports={
         }
       }
     },
-    "S4e": {
+    "S4h": {
       "type": "list",
       "member": {
-        "shape": "S4f"
+        "shape": "S4i"
       }
     },
-    "S4f": {
+    "S4i": {
       "type": "structure",
       "required": [
         "ActivityId",
@@ -6453,11 +6473,11 @@ module.exports={
         "Details": {}
       }
     },
-    "S54": {
+    "S57": {
       "type": "list",
       "member": {}
     },
-    "S5l": {
+    "S5n": {
       "type": "structure",
       "required": [
         "AutoScalingGroupName"
@@ -107229,7 +107249,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.114.0',
+  VERSION: '2.115.0',
 
 
   Signers: {},
