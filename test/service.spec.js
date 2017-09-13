@@ -790,14 +790,14 @@
         return expect(didError).to.equal(true);
       });
     });
-    describe('Service date sync functions', function() { 
+    describe('Service clock sync functions', function() { 
       beforeEach(function(done) {
         AWS.config.update({
           systemClockOffset: 0
         });
         done();
       });
-      it('should find clock skew if service time is skewed within 30 seconds', function() {
+      it('should find whether a time deviates from skew-corrected date for more than 30 seconds', function() {
         var mockService = new MockService();
         var now = new Date().getTime();
         helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 120000));
@@ -812,7 +812,7 @@
         var offset = mockService.config.systemClockOffset
         expect(offset > 29900 && offset < 30100).to.equal(true);
       });
-      it('should get date for each service', function() {
+      it('should get skew-corrected date for each service', function() {
         var mockService = new MockService();
         mockService.config.update({
           systemClockOffset: 30000
@@ -820,6 +820,25 @@
         var now = new Date().getTime();
         var serviceTime = mockService.getSkewCorrectedDate().getTime()
         expect(now + 29900 < serviceTime && serviceTime < now + 30100).to.equal(true);
+      });
+      it('should update each client\'s systemClockOffset respectively', function() {
+        helpers.spyOn(Date, 'now').andReturn(0);
+        var mockService1 = new MockService({correctClockSkew: true});
+        var serverDate = new Date(60000);
+        helpers.mockHttpResponse(200, {
+          date: serverDate.toString()
+        }, '');
+        mockService1.makeRequest().send();
+        var mockService2 = new MockService({correctClockSkew: true});
+        serverDate = new Date(120000);
+        helpers.mockHttpResponse(200, {
+          date: serverDate.toString()
+        }, '');
+        mockService2.makeRequest().send();
+        var offset = mockService1.config.systemClockOffset
+        expect(59900 < offset && 60100 > offset).to.equal(true);
+        offset = mockService2.config.systemClockOffset
+        expect(119900 < offset && 120100 > offset).to.equal(true);
       });
     });
   });

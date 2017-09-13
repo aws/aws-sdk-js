@@ -2299,8 +2299,7 @@ describe('AWS.S3', function() {
     var date = null;
 
     beforeEach(function(done) {
-      helpers.spyOn(s3, 'getSkewCorrectedDate').andReturn(new Date(0));
-      helpers.spyOn(s3.constructor.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
+      helpers.spyOn(AWS.S3.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
       return done();
     });
 
