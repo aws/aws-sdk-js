@@ -30,12 +30,14 @@
         return expect(CustomService.apiVersions).to.eql(['1999-05-05', '2001-01-01']);
       });
     });
+
     describe('constructor', function() {
       it('should use AWS.config copy if no config is provided', function() {
         service = new AWS.Service();
         expect(service.config).not.to.equal(AWS.config);
         return expect(service.config.sslEnabled).to.equal(true);
       });
+
       it('should merge custom options on top of global defaults if config provided', function() {
         service = new AWS.Service({
           maxRetries: 5
@@ -43,6 +45,18 @@
         expect(service.config.sslEnabled).to.equal(true);
         return expect(service.config.maxRetries).to.equal(5);
       });
+
+      it('should inherit the config from global config if it is not set specificly', function() {
+        var s3;
+        AWS.config.update({
+          correctClockSkew: true,
+          systemClockOffset: 120000
+        })
+        s3 = new AWS.S3;
+        expect(s3.config.systemClockOffset).to.equal(120000);
+        return expect(s3.config.correctClockSkew).to.equal(true);
+      })
+
       it('merges service-specific configuration from global config', function() {
         var s3;
         AWS.config.update({
@@ -54,6 +68,7 @@
         expect(s3.endpoint.host).to.equal('localhost');
         return delete AWS.config.s3;
       });
+
       it('service-specific global config overrides global config', function() {
         var region, s3;
         region = AWS.config.region;
@@ -68,6 +83,7 @@
         AWS.config.region = region;
         return delete AWS.config.s3;
       });
+
       it('service-specific local config overrides service-specific global config', function() {
         var s3;
         AWS.config.update({
@@ -81,6 +97,7 @@
         expect(s3.config.region).to.equal('eu-west-1');
         return delete AWS.config.s3;
       });
+
       it('merges credential data into config', function() {
         service = new AWS.Service({
           accessKeyId: 'foo',
@@ -89,6 +106,7 @@
         expect(service.config.credentials.accessKeyId).to.equal('foo');
         return expect(service.config.credentials.secretAccessKey).to.equal('bar');
       });
+
       it('should allow AWS.config to be object literal', function() {
         var cfg;
         cfg = AWS.config;
@@ -100,6 +118,7 @@
         expect(service.config.sslEnabled).to.equal(true);
         return AWS.config = cfg;
       });
+
       it('tries to construct service with latest API version', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
@@ -108,6 +127,7 @@
           return new CustomService();
         }).to["throw"](errmsg);
       });
+
       it('tries to construct service with exact API version match', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
@@ -118,6 +138,7 @@
           });
         }).to["throw"](errmsg);
       });
+
       it('skips any API versions with a * and uses next (future) service', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['1998-01-01', '1999-05-05*', '2001-01-01']);
@@ -128,6 +149,7 @@
           });
         }).to["throw"](errmsg);
       });
+
       it('skips multiple API versions with a * and uses next (future) service', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['1998-01-01', '1999-05-05*', '1999-07-07*', '2001-01-01']);
@@ -138,6 +160,7 @@
           });
         }).to["throw"](errmsg);
       });
+
       it('tries to construct service with fuzzy API version match', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
@@ -148,6 +171,7 @@
           });
         }).to["throw"](errmsg);
       });
+
       it('uses global apiVersion value when constructing versioned services', function() {
         var CustomService, errmsg;
         AWS.config.apiVersion = '2002-03-04';
@@ -158,6 +182,7 @@
         }).to["throw"](errmsg);
         return AWS.config.apiVersion = null;
       });
+
       it('uses global apiVersions value when constructing versioned services', function() {
         var CustomService, errmsg;
         AWS.config.apiVersions = {
@@ -170,6 +195,7 @@
         }).to["throw"](errmsg);
         return AWS.config.apiVersions = {};
       });
+
       it('uses service specific apiVersions before apiVersion', function() {
         var CustomService, errmsg;
         AWS.config.apiVersions = {
@@ -184,6 +210,7 @@
         AWS.config.apiVersion = null;
         return AWS.config.apiVersions = {};
       });
+
       it('tries to construct service with fuzzy API version match', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
@@ -194,6 +221,7 @@
           });
         }).to["throw"](errmsg);
       });
+
       it('fails if apiVersion matches nothing', function() {
         var CustomService, errmsg;
         CustomService = AWS.Service.defineService('custom', ['2001-01-01', '1999-05-05']);
@@ -204,6 +232,7 @@
           });
         }).to["throw"](errmsg);
       });
+
       it('allows construction of services from one-off apiConfig properties', function() {
         service = new AWS.Service({
           apiConfig: {
@@ -218,6 +247,7 @@
         expect(typeof service.operationName).to.equal('function');
         return expect(service.operationName() instanceof AWS.Request).to.equal(true);
       });
+
       it('interpolates endpoint when reading from configuration', function() {
         service = new MockService({
           endpoint: '{scheme}://{service}.{region}.domain.tld'
@@ -229,7 +259,8 @@
         });
         return expect(service.config.endpoint).to.equal('http://mockservice.mock-region.domain.tld');
       });
-      return describe('will work with', function() {
+
+      describe('will work with', function() {
         var allServices, className, ctor, obsoleteVersions, results, serviceIdentifier, version;
         allServices = require('../clients/all');
         results = [];
@@ -259,6 +290,7 @@
         return results;
       });
     });
+    
     describe('setEndpoint', function() {
       var FooService;
       FooService = null;
@@ -718,7 +750,8 @@
         });
       });
     });
-    return describe('customizeRequests', function() {
+
+    describe('customizeRequests', function() {
       it('should accept nullable types', function() {
         var didError, err;
         didError = false;
@@ -755,6 +788,57 @@
           didError = true;
         }
         return expect(didError).to.equal(true);
+      });
+    });
+    describe('Service clock sync functions', function() { 
+      beforeEach(function(done) {
+        AWS.config.update({
+          systemClockOffset: 0
+        });
+        done();
+      });
+      it('should find whether a time deviates from skew-corrected date for more than 30 seconds', function() {
+        var mockService = new MockService();
+        var now = new Date().getTime();
+        helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 120000));
+        expect(mockService.isClockSkewed(now)).to.equal(true);
+        helpers.spyOn(mockService, 'getSkewCorrectedDate').andReturn(new Date(now + 29900));
+        expect(mockService.isClockSkewed(now)).to.equal(false);
+      }); 
+      it('should apply the clock offset to service config', function() {
+        var mockService = new MockService();
+        expect(mockService.config.systemClockOffset).to.equal(0);
+        mockService.applyClockOffset(new Date().getTime() + 30000);
+        var offset = mockService.config.systemClockOffset
+        expect(offset > 29900 && offset < 30100).to.equal(true);
+      });
+      it('should get skew-corrected date for each service', function() {
+        var mockService = new MockService();
+        mockService.config.update({
+          systemClockOffset: 30000
+        })
+        var now = new Date().getTime();
+        var serviceTime = mockService.getSkewCorrectedDate().getTime()
+        expect(now + 29900 < serviceTime && serviceTime < now + 30100).to.equal(true);
+      });
+      it('should update each client\'s systemClockOffset respectively', function() {
+        helpers.spyOn(Date, 'now').andReturn(0);
+        var mockService1 = new MockService({correctClockSkew: true});
+        var serverDate = new Date(60000);
+        helpers.mockHttpResponse(200, {
+          date: serverDate.toString()
+        }, '');
+        mockService1.makeRequest().send();
+        var mockService2 = new MockService({correctClockSkew: true});
+        serverDate = new Date(120000);
+        helpers.mockHttpResponse(200, {
+          date: serverDate.toString()
+        }, '');
+        mockService2.makeRequest().send();
+        var offset = mockService1.config.systemClockOffset
+        expect(59900 < offset && 60100 > offset).to.equal(true);
+        offset = mockService2.config.systemClockOffset
+        expect(119900 < offset && 120100 > offset).to.equal(true);
       });
     });
   });

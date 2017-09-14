@@ -325,12 +325,12 @@
         helpers.mockHttpResponse(200, {
           date: serverDate.toString()
         }, '');
-        helpers.spyOn(AWS.util, 'isClockSkewed').andReturn(true);
+        helpers.spyOn(service, 'isClockSkewed').andReturn(true);
         request = makeRequest();
         response = request.send();
-        offset = Math.abs(AWS.config.systemClockOffset);
+        offset = Math.abs(service.config.systemClockOffset);
         expect(offset > 299000 && offset < 310000).to.equal(true);
-        AWS.config.systemClockOffset = 0;
+        service.config.systemClockOffset = 0;
         return done();
       });
     });
