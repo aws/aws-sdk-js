@@ -80,7 +80,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.115.0',
+	  VERSION: '2.116.0',
 
 	  /**
 	   * @api private
@@ -9932,6 +9932,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @api private
 	   */
+	  getSkewCorrectedDate: function getSkewCorrectedDate() {
+	    return new Date(Date.now() + this.config.systemClockOffset);
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  applyClockOffset: function applyClockOffset(newServerTime) {
+	    if (newServerTime) {
+	      this.config.systemClockOffset = newServerTime - Date.now();
+	    }
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  isClockSkewed: function isClockSkewed(newServerTime) {
+	    if (newServerTime) {
+	      return Math.abs(this.getSkewCorrectedDate().getTime() - newServerTime) >= 30000;
+	    }
+	  },
+
+	  /**
+	   * @api private
+	   */
 	  throttledError: function throttledError(error) {
 	    // this logic varies between services
 	    switch (error.code) {
@@ -11804,7 +11829,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 
 	        try {
-	          var date = AWS.util.date.getDate();
+	          var date = service.getSkewCorrectedDate();
 	          var SignerClass = service.getSignerClass(req);
 	          var signer = new SignerClass(req.httpRequest,
 	            service.api.signingName || service.api.endpointPrefix,
@@ -11916,8 +11941,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          error(err);
 	        }
 	      }
-
-	      var timeDiff = (AWS.util.date.getDate() - this.signedAt) / 1000;
+	      var timeDiff = (resp.request.service.getSkewCorrectedDate() - this.signedAt) / 1000;
 	      if (timeDiff >= 60 * 10) { // if we signed 10min ago, re-sign
 	        this.emit('sign', [this], function(err) {
 	          if (err) done(err);
@@ -11937,11 +11961,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      resp.httpResponse.buffers = [];
 	      resp.httpResponse.numBytes = 0;
 	      var dateHeader = headers.date || headers.Date;
+	      var service = resp.request.service;
 	      if (dateHeader) {
 	        var serverTime = Date.parse(dateHeader);
-	        if (resp.request.service.config.correctClockSkew
-	            && AWS.util.isClockSkewed(serverTime)) {
-	          AWS.util.applyClockOffset(serverTime);
+	        if (service.config.correctClockSkew
+	            && service.isClockSkewed(serverTime)) {
+	          service.applyClockOffset(serverTime);
 	        }
 	      }
 	    });
@@ -12080,7 +12105,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!logger) return;
 
 	      function buildMessage() {
-	        var time = AWS.util.date.getDate().getTime();
+	        var time = resp.request.service.getSkewCorrectedDate().getTime();
 	        var delta = (time - req.startTime.getTime()) / 1000;
 	        var ansi = logger.isTTY ? true : false;
 	        var status = resp.httpResponse.statusCode;
@@ -13104,7 +13129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.params = params || {};
 	    this.httpRequest = new AWS.HttpRequest(endpoint, region);
 	    this.httpRequest.appendToUserAgent(customUserAgent);
-	    this.startTime = AWS.util.date.getDate();
+	    this.startTime = service.getSkewCorrectedDate();
 
 	    this.response = new AWS.Response(this);
 	    this._asm = new AcceptorStateMachine(fsm.states, 'validate');
@@ -16459,8 +16484,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    request.httpRequest.headers[expiresHeader] = expires;
 	  } else if (signerClass === AWS.Signers.S3) {
+	    var now = request.service ? request.service.getSkewCorrectedDate() : AWS.util.date.getDate();
 	    request.httpRequest.headers[expiresHeader] = parseInt(
-	      AWS.util.date.unixTimestamp() + expires, 10).toString();
+	      AWS.util.date.unixTimestamp(now) + expires, 10).toString();
 	  } else {
 	    throw AWS.util.error(new Error(), {
 	      message: 'Presigning only supports S3 or SigV4 signing.',

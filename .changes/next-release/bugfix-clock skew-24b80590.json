@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "clock skew",
-  "description": "put the updating clock skew logic to each service client instead of using global config"
-}

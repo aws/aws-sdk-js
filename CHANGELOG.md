@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.115.0-->
+<!--LATEST=2.116.0-->
 <!--ENTRYINSERT-->
+
+## 2.116.0
+* bugfix: clock skew: put the updating clock skew logic to each service client instead of using global config
+* feature: CodeBuild: Supporting Parameter Store in environment variables for AWS CodeBuild
+* feature: ServiceCatalog: This release of Service Catalog adds API support to copy products.
 
 ## 2.115.0
 * feature: AutoScaling: Customers can create Life Cycle Hooks at the time of creating Auto Scaling Groups through the CreateAutoScalingGroup API

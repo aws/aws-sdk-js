@@ -44,6 +44,14 @@ declare class ServiceCatalog extends Service {
    */
   associateTagOptionWithResource(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateTagOptionWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateTagOptionWithResourceOutput, AWSError>;
   /**
+   * Copies the specified source product to the specified target product or a new product. You can copy the product to the same account or another account. You can copy the product to the same region or another region. This operation is performed asynchronously. To track the progress of the operation, use DescribeCopyProductStatus.
+   */
+  copyProduct(params: ServiceCatalog.Types.CopyProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CopyProductOutput) => void): Request<ServiceCatalog.Types.CopyProductOutput, AWSError>;
+  /**
+   * Copies the specified source product to the specified target product or a new product. You can copy the product to the same account or another account. You can copy the product to the same region or another region. This operation is performed asynchronously. To track the progress of the operation, use DescribeCopyProductStatus.
+   */
+  copyProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.CopyProductOutput) => void): Request<ServiceCatalog.Types.CopyProductOutput, AWSError>;
+  /**
    * Creates a new constraint. For more information, see Using Constraints.
    */
   createConstraint(params: ServiceCatalog.Types.CreateConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateConstraintOutput) => void): Request<ServiceCatalog.Types.CreateConstraintOutput, AWSError>;
@@ -76,11 +84,11 @@ declare class ServiceCatalog extends Service {
    */
   createProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
   /**
-   * Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you. See the bottom of this topic for an example JSON request.
+   * Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.
    */
   createProvisioningArtifact(params: ServiceCatalog.Types.CreateProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
   /**
-   * Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you. See the bottom of this topic for an example JSON request.
+   * Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.
    */
   createProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
   /**
@@ -139,6 +147,14 @@ declare class ServiceCatalog extends Service {
    * Retrieves detailed information for a specified constraint.
    */
   describeConstraint(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeConstraintOutput) => void): Request<ServiceCatalog.Types.DescribeConstraintOutput, AWSError>;
+  /**
+   * Describes the status of the specified copy product operation.
+   */
+  describeCopyProductStatus(params: ServiceCatalog.Types.DescribeCopyProductStatusInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeCopyProductStatusOutput) => void): Request<ServiceCatalog.Types.DescribeCopyProductStatusOutput, AWSError>;
+  /**
+   * Describes the status of the specified copy product operation.
+   */
+  describeCopyProductStatus(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeCopyProductStatusOutput) => void): Request<ServiceCatalog.Types.DescribeCopyProductStatusOutput, AWSError>;
   /**
    * Retrieves detailed information and any tags associated with the specified portfolio.
    */
@@ -424,7 +440,7 @@ declare namespace ServiceCatalog {
   export type AcceptLanguage = string;
   export interface AcceptPortfolioShareInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -454,7 +470,7 @@ declare namespace ServiceCatalog {
   export type ApproximateCount = number;
   export interface AssociatePrincipalWithPortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -474,7 +490,7 @@ declare namespace ServiceCatalog {
   }
   export interface AssociateProductWithPortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -538,9 +554,48 @@ declare namespace ServiceCatalog {
     Description?: ConstraintDescription;
   }
   export type ConstraintType = string;
+  export type CopyOption = "CopyTags"|string;
+  export type CopyOptions = CopyOption[];
+  export interface CopyProductInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The Amazon Resource Name (ARN) of the source product.
+     */
+    SourceProductArn: ProductArn;
+    /**
+     * The ID of the target product. By default, a new product is created.
+     */
+    TargetProductId?: Id;
+    /**
+     * A name for the target product. The default is the name of the source product.
+     */
+    TargetProductName?: ProductViewName;
+    /**
+     * The IDs of the product versions to copy. By default, all provisioning artifacts are copied.
+     */
+    SourceProvisioningArtifactIdentifiers?: SourceProvisioningArtifactProperties;
+    /**
+     * The copy options. If the value is CopyTags, the tags from the source product are copied to the target product.
+     */
+    CopyOptions?: CopyOptions;
+    /**
+     *  A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request. 
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface CopyProductOutput {
+    /**
+     * A unique token to pass to DescribeCopyProductStatus to track the progress of the operation.
+     */
+    CopyProductToken?: Id;
+  }
+  export type CopyProductStatus = "SUCCEEDED"|"IN_PROGRESS"|"FAILED"|string;
   export interface CreateConstraintInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -552,7 +607,7 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The constraint parameters. Expected values vary depending on which Type is specified. For examples, see the bottom of this topic. For Type LAUNCH, the RoleArn property is required.  For Type NOTIFICATION, the NotificationArns property is required. For Type TEMPLATE, the Rules property is required.
+     * The constraint parameters. Expected values vary depending on which Type is specified. For more information, see the Examples section. For Type LAUNCH, the RoleArn property is required.  For Type NOTIFICATION, the NotificationArns property is required. For Type TEMPLATE, the Rules property is required.
      */
     Parameters: ConstraintParameters;
     /**
@@ -564,7 +619,7 @@ declare namespace ServiceCatalog {
      */
     Description?: ConstraintDescription;
     /**
-     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
+     * A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.
      */
     IdempotencyToken: IdempotencyToken;
   }
@@ -584,7 +639,7 @@ declare namespace ServiceCatalog {
   }
   export interface CreatePortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -604,7 +659,7 @@ declare namespace ServiceCatalog {
      */
     Tags?: AddTags;
     /**
-     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
+     * A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.
      */
     IdempotencyToken: IdempotencyToken;
   }
@@ -620,7 +675,7 @@ declare namespace ServiceCatalog {
   }
   export interface CreatePortfolioShareInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -636,7 +691,7 @@ declare namespace ServiceCatalog {
   }
   export interface CreateProductInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -680,7 +735,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactParameters: ProvisioningArtifactProperties;
     /**
-     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
+     * A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.
      */
     IdempotencyToken: IdempotencyToken;
   }
@@ -700,7 +755,7 @@ declare namespace ServiceCatalog {
   }
   export interface CreateProvisioningArtifactInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -712,7 +767,7 @@ declare namespace ServiceCatalog {
      */
     Parameters: ProvisioningArtifactProperties;
     /**
-     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
+     * A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.
      */
     IdempotencyToken: IdempotencyToken;
   }
@@ -751,7 +806,7 @@ declare namespace ServiceCatalog {
   export type DefaultValue = string;
   export interface DeleteConstraintInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -763,7 +818,7 @@ declare namespace ServiceCatalog {
   }
   export interface DeletePortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -775,7 +830,7 @@ declare namespace ServiceCatalog {
   }
   export interface DeletePortfolioShareInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -791,7 +846,7 @@ declare namespace ServiceCatalog {
   }
   export interface DeleteProductInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -803,7 +858,7 @@ declare namespace ServiceCatalog {
   }
   export interface DeleteProvisioningArtifactInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -819,7 +874,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeConstraintInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -841,9 +896,33 @@ declare namespace ServiceCatalog {
      */
     Status?: Status;
   }
+  export interface DescribeCopyProductStatusInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The token returned from the call to CopyProduct that initiated the operation.
+     */
+    CopyProductToken: Id;
+  }
+  export interface DescribeCopyProductStatusOutput {
+    /**
+     * The status of the copy product operation.
+     */
+    CopyProductStatus?: CopyProductStatus;
+    /**
+     * The ID of the copied product.
+     */
+    TargetProductId?: Id;
+    /**
+     * The status message.
+     */
+    StatusDetail?: StatusDetail;
+  }
   export interface DescribePortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -867,7 +946,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProductAsAdminInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -895,7 +974,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProductInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -915,7 +994,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProductViewInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -935,7 +1014,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProvisionedProductInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -951,7 +1030,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProvisioningArtifactInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -983,7 +1062,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProvisioningParametersInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1019,7 +1098,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeRecordInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1064,7 +1143,7 @@ declare namespace ServiceCatalog {
   export type Description = string;
   export interface DisassociatePrincipalFromPortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1080,7 +1159,7 @@ declare namespace ServiceCatalog {
   }
   export interface DisassociateProductFromPortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1136,7 +1215,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListAcceptedPortfolioSharesInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1160,7 +1239,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListConstraintsForPortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1192,7 +1271,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListLaunchPathsInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1220,7 +1299,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListPortfolioAccessInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1240,7 +1319,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListPortfoliosForProductInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1268,7 +1347,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListPortfoliosInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1292,7 +1371,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListPrincipalsForPortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1320,7 +1399,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListProvisioningArtifactsInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1340,7 +1419,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListRecordHistoryInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1505,6 +1584,7 @@ declare namespace ServiceCatalog {
   export type PrincipalARN = string;
   export type PrincipalType = "IAM"|string;
   export type Principals = Principal[];
+  export type ProductArn = string;
   export type ProductSource = "ACCOUNT"|string;
   export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE"|string;
   export type ProductViewAggregationType = string;
@@ -1598,7 +1678,7 @@ declare namespace ServiceCatalog {
   export type ProviderName = string;
   export interface ProvisionProductInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1670,7 +1750,7 @@ declare namespace ServiceCatalog {
      */
     CreatedTime?: CreatedTime;
     /**
-     * A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.
+     * A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.
      */
     IdempotencyToken?: IdempotencyToken;
     /**
@@ -1777,6 +1857,8 @@ declare namespace ServiceCatalog {
      */
     Type?: ProvisioningArtifactType;
   }
+  export type ProvisioningArtifactPropertyName = "Id"|string;
+  export type ProvisioningArtifactPropertyValue = string;
   export type ProvisioningArtifactSummaries = ProvisioningArtifactSummary[];
   export interface ProvisioningArtifactSummary {
     /**
@@ -1911,7 +1993,7 @@ declare namespace ServiceCatalog {
   export type RecordType = string;
   export interface RejectPortfolioShareInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1954,7 +2036,7 @@ declare namespace ServiceCatalog {
   export type ResourceType = string;
   export interface ScanProvisionedProductsInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1984,7 +2066,7 @@ declare namespace ServiceCatalog {
   export type SearchFilterValue = string;
   export interface SearchProductsAsAdminInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2028,7 +2110,7 @@ declare namespace ServiceCatalog {
   }
   export interface SearchProductsInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2067,7 +2149,10 @@ declare namespace ServiceCatalog {
     NextPageToken?: PageToken;
   }
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SourceProvisioningArtifactProperties = SourceProvisioningArtifactPropertiesMap[];
+  export type SourceProvisioningArtifactPropertiesMap = {[key: string]: ProvisioningArtifactPropertyValue};
   export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string;
+  export type StatusDetail = string;
   export type SupportDescription = string;
   export type SupportEmail = string;
   export type SupportUrl = string;
@@ -2138,7 +2223,7 @@ declare namespace ServiceCatalog {
      */
     IgnoreErrors?: IgnoreErrors;
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -2150,7 +2235,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdateConstraintInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2178,7 +2263,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdatePortfolioInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2218,7 +2303,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdateProductInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2274,7 +2359,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdateProvisionedProductInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2314,7 +2399,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdateProvisioningArtifactInput {
     /**
-     * The language code to use for this operation. Supported language codes are as follows: "en" (English) "jp" (Japanese) "zh" (Chinese) If no code is specified, "en" is used as the default.
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**

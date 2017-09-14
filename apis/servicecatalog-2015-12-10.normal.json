@@ -74,6 +74,20 @@
       ],
       "documentation":"<p>Associate a TagOption identifier with a resource identifier.</p>"
     },
+    "CopyProduct":{
+      "name":"CopyProduct",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyProductInput"},
+      "output":{"shape":"CopyProductOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Copies the specified source product to the specified target product or a new product.</p> <p>You can copy the product to the same account or another account. You can copy the product to the same region or another region.</p> <p>This operation is performed asynchronously. To track the progress of the operation, use <a>DescribeCopyProductStatus</a>.</p>"
+    },
     "CreateConstraint":{
       "name":"CreateConstraint",
       "http":{
@@ -148,7 +162,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.</p> <p>See the bottom of this topic for an example JSON request.</p>"
+      "documentation":"<p>Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.</p>"
     },
     "CreateTagOption":{
       "name":"CreateTagOption",
@@ -251,6 +265,19 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Retrieves detailed information for a specified constraint.</p>"
+    },
+    "DescribeCopyProductStatus":{
+      "name":"DescribeCopyProductStatus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeCopyProductStatusInput"},
+      "output":{"shape":"DescribeCopyProductStatusOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Describes the status of the specified copy product operation.</p>"
     },
     "DescribePortfolio":{
       "name":"DescribePortfolio",
@@ -746,7 +773,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -811,7 +838,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -841,7 +868,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",
@@ -939,6 +966,69 @@
       "max":1024,
       "min":1
     },
+    "CopyOption":{
+      "type":"string",
+      "enum":["CopyTags"]
+    },
+    "CopyOptions":{
+      "type":"list",
+      "member":{"shape":"CopyOption"}
+    },
+    "CopyProductInput":{
+      "type":"structure",
+      "required":[
+        "SourceProductArn",
+        "IdempotencyToken"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "SourceProductArn":{
+          "shape":"ProductArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the source product.</p>"
+        },
+        "TargetProductId":{
+          "shape":"Id",
+          "documentation":"<p>The ID of the target product. By default, a new product is created.</p>"
+        },
+        "TargetProductName":{
+          "shape":"ProductViewName",
+          "documentation":"<p>A name for the target product. The default is the name of the source product.</p>"
+        },
+        "SourceProvisioningArtifactIdentifiers":{
+          "shape":"SourceProvisioningArtifactProperties",
+          "documentation":"<p>The IDs of the product versions to copy. By default, all provisioning artifacts are copied.</p>"
+        },
+        "CopyOptions":{
+          "shape":"CopyOptions",
+          "documentation":"<p>The copy options. If the value is <code>CopyTags</code>, the tags from the source product are copied to the target product.</p>"
+        },
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p> A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request. </p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CopyProductOutput":{
+      "type":"structure",
+      "members":{
+        "CopyProductToken":{
+          "shape":"Id",
+          "documentation":"<p>A unique token to pass to <code>DescribeCopyProductStatus</code> to track the progress of the operation.</p>"
+        }
+      }
+    },
+    "CopyProductStatus":{
+      "type":"string",
+      "enum":[
+        "SUCCEEDED",
+        "IN_PROGRESS",
+        "FAILED"
+      ]
+    },
     "CreateConstraintInput":{
       "type":"structure",
       "required":[
@@ -951,7 +1041,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -963,7 +1053,7 @@
         },
         "Parameters":{
           "shape":"ConstraintParameters",
-          "documentation":"<p>The constraint parameters. Expected values vary depending on which <b>Type</b> is specified. For examples, see the bottom of this topic.</p> <p>For Type <code>LAUNCH</code>, the <code>RoleArn</code> property is required. </p> <p>For Type <code>NOTIFICATION</code>, the <code>NotificationArns</code> property is required.</p> <p>For Type <code>TEMPLATE</code>, the <code>Rules</code> property is required.</p>"
+          "documentation":"<p>The constraint parameters. Expected values vary depending on which <b>Type</b> is specified. For more information, see the Examples section.</p> <p>For Type <code>LAUNCH</code>, the <code>RoleArn</code> property is required. </p> <p>For Type <code>NOTIFICATION</code>, the <code>NotificationArns</code> property is required.</p> <p>For Type <code>TEMPLATE</code>, the <code>Rules</code> property is required.</p>"
         },
         "Type":{
           "shape":"ConstraintType",
@@ -975,7 +1065,7 @@
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
           "idempotencyToken":true
         }
       }
@@ -1007,7 +1097,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "DisplayName":{
           "shape":"PortfolioDisplayName",
@@ -1027,7 +1117,7 @@
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
           "idempotencyToken":true
         }
       }
@@ -1054,7 +1144,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -1083,7 +1173,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Name":{
           "shape":"ProductViewName",
@@ -1127,7 +1217,7 @@
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
           "idempotencyToken":true
         }
       }
@@ -1159,7 +1249,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",
@@ -1171,7 +1261,7 @@
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
           "idempotencyToken":true
         }
       }
@@ -1228,7 +1318,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1247,7 +1337,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1269,7 +1359,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -1292,7 +1382,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1314,7 +1404,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",
@@ -1337,7 +1427,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1362,13 +1452,44 @@
         }
       }
     },
+    "DescribeCopyProductStatusInput":{
+      "type":"structure",
+      "required":["CopyProductToken"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "CopyProductToken":{
+          "shape":"Id",
+          "documentation":"<p>The token returned from the call to <code>CopyProduct</code> that initiated the operation.</p>"
+        }
+      }
+    },
+    "DescribeCopyProductStatusOutput":{
+      "type":"structure",
+      "members":{
+        "CopyProductStatus":{
+          "shape":"CopyProductStatus",
+          "documentation":"<p>The status of the copy product operation.</p>"
+        },
+        "TargetProductId":{
+          "shape":"Id",
+          "documentation":"<p>The ID of the copied product.</p>"
+        },
+        "StatusDetail":{
+          "shape":"StatusDetail",
+          "documentation":"<p>The status message.</p>"
+        }
+      }
+    },
     "DescribePortfolioInput":{
       "type":"structure",
       "required":["Id"],
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1399,7 +1520,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1434,7 +1555,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1461,7 +1582,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1488,7 +1609,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1514,7 +1635,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
@@ -1556,7 +1677,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",
@@ -1599,7 +1720,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -1661,7 +1782,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -1687,7 +1808,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",
@@ -1803,7 +1924,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PageToken":{
           "shape":"PageToken",
@@ -1834,7 +1955,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -1873,7 +1994,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",
@@ -1908,7 +2029,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -1935,7 +2056,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",
@@ -1969,7 +2090,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PageToken":{
           "shape":"PageToken",
@@ -2000,7 +2121,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -2035,7 +2156,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",
@@ -2061,7 +2182,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "AccessLevelFilter":{
           "shape":"AccessLevelFilter",
@@ -2305,6 +2426,12 @@
       "type":"list",
       "member":{"shape":"Principal"}
     },
+    "ProductArn":{
+      "type":"string",
+      "max":1224,
+      "min":1,
+      "pattern":"arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+    },
     "ProductSource":{
       "type":"string",
       "enum":["ACCOUNT"]
@@ -2467,7 +2594,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",
@@ -2546,7 +2673,7 @@
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>"
+          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>"
         },
         "LastRecordId":{
           "shape":"LastRequestId",
@@ -2704,6 +2831,11 @@
       },
       "documentation":"<p>Provisioning artifact properties. For example request JSON, see <a>CreateProvisioningArtifact</a>.</p>"
     },
+    "ProvisioningArtifactPropertyName":{
+      "type":"string",
+      "enum":["Id"]
+    },
+    "ProvisioningArtifactPropertyValue":{"type":"string"},
     "ProvisioningArtifactSummaries":{
       "type":"list",
       "member":{"shape":"ProvisioningArtifactSummary"}
@@ -2914,7 +3046,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -2988,7 +3120,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "AccessLevelFilter":{
           "shape":"AccessLevelFilter",
@@ -3024,7 +3156,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "PortfolioId":{
           "shape":"Id",
@@ -3074,7 +3206,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Filters":{
           "shape":"ProductViewFilters",
@@ -3122,6 +3254,15 @@
         "DESCENDING"
       ]
     },
+    "SourceProvisioningArtifactProperties":{
+      "type":"list",
+      "member":{"shape":"SourceProvisioningArtifactPropertiesMap"}
+    },
+    "SourceProvisioningArtifactPropertiesMap":{
+      "type":"map",
+      "key":{"shape":"ProvisioningArtifactPropertyName"},
+      "value":{"shape":"ProvisioningArtifactPropertyValue"}
+    },
     "Status":{
       "type":"string",
       "enum":[
@@ -3130,6 +3271,7 @@
         "FAILED"
       ]
     },
+    "StatusDetail":{"type":"string"},
     "SupportDescription":{"type":"string"},
     "SupportEmail":{"type":"string"},
     "SupportUrl":{"type":"string"},
@@ -3268,7 +3410,7 @@
         },
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         }
       }
     },
@@ -3287,7 +3429,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -3322,7 +3464,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -3369,7 +3511,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "Id":{
           "shape":"Id",
@@ -3432,7 +3574,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProvisionedProductName":{
           "shape":"ProvisionedProductNameOrArn",
@@ -3483,7 +3625,7 @@
       "members":{
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
-          "documentation":"<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>\"en\" (English)</p> <p>\"jp\" (Japanese)</p> <p>\"zh\" (Chinese)</p> <p>If no code is specified, \"en\" is used as the default.</p>"
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
         },
         "ProductId":{
           "shape":"Id",

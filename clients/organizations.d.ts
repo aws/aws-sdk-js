@@ -148,11 +148,11 @@ declare class Organizations extends Service {
    */
   detachPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disables an organizational control policy type in a root. A poicy of a certain type can be attached to entities in a root only if that type is enabled in the root. After you perform this operation, you no longer can attach policies of the specified type to that root or to any OU or account in that root. You can undo this by using the EnablePolicyType operation. This operation can be called only from the organization's master account.
+   * Disables an organizational control policy type in a root. A policy of a certain type can be attached to entities in a root only if that type is enabled in the root. After you perform this operation, you no longer can attach policies of the specified type to that root or to any OU or account in that root. You can undo this by using the EnablePolicyType operation. This operation can be called only from the organization's master account.
    */
   disablePolicyType(params: Organizations.Types.DisablePolicyTypeRequest, callback?: (err: AWSError, data: Organizations.Types.DisablePolicyTypeResponse) => void): Request<Organizations.Types.DisablePolicyTypeResponse, AWSError>;
   /**
-   * Disables an organizational control policy type in a root. A poicy of a certain type can be attached to entities in a root only if that type is enabled in the root. After you perform this operation, you no longer can attach policies of the specified type to that root or to any OU or account in that root. You can undo this by using the EnablePolicyType operation. This operation can be called only from the organization's master account.
+   * Disables an organizational control policy type in a root. A policy of a certain type can be attached to entities in a root only if that type is enabled in the root. After you perform this operation, you no longer can attach policies of the specified type to that root or to any OU or account in that root. You can undo this by using the EnablePolicyType operation. This operation can be called only from the organization's master account.
    */
   disablePolicyType(callback?: (err: AWSError, data: Organizations.Types.DisablePolicyTypeResponse) => void): Request<Organizations.Types.DisablePolicyTypeResponse, AWSError>;
   /**
@@ -402,7 +402,7 @@ declare namespace Organizations {
   export type CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"|"EMAIL_ALREADY_EXISTS"|"INVALID_ADDRESS"|"INVALID_EMAIL"|"INTERNAL_FAILURE"|string;
   export interface CreateAccountRequest {
     /**
-     * The email address of the owner to assign to the new member account. This email address must not already be associated with another AWS account.
+     * The email address of the owner to assign to the new member account. This email address must not already be associated with another AWS account. You must use a valid email address to complete account creation. You cannot access the root user of the account or remove an account that was created with an invalid email address.
      */
     Email: Email;
     /**
@@ -738,7 +738,7 @@ declare namespace Organizations {
   export type InvalidInputExceptionReason = "INVALID_PARTY_TYPE_TARGET"|"INVALID_SYNTAX_ORGANIZATION_ARN"|"INVALID_SYNTAX_POLICY_ID"|"INVALID_ENUM"|"INVALID_LIST_MEMBER"|"MAX_LENGTH_EXCEEDED"|"MAX_VALUE_EXCEEDED"|"MIN_LENGTH_EXCEEDED"|"MIN_VALUE_EXCEEDED"|"IMMUTABLE_POLICY"|"INVALID_PATTERN"|"INVALID_PATTERN_TARGET_ID"|"INPUT_REQUIRED"|"INVALID_NEXT_TOKEN"|"MAX_LIMIT_EXCEEDED_FILTER"|"MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"|"INVALID_FULL_NAME_TARGET"|string;
   export interface InviteAccountToOrganizationRequest {
     /**
-     * The identifier (ID) of the AWS account that you want to invite to join your organization. This is a JSON object that contains the following elements:   { "Type": "ACCOUNT", "Id": "&lt; account id number &gt;" }  If you use the AWS CLI, you can submit this as a single string, similar to the following example:  --target id=123456789012,type=ACCOUNT  If you specify "Type": "ACCOUNT", then you must provide the AWS account ID number as the Id. If you specify "Type": "EMAIL", then you must specify the email address that is associated with the account.  --target id=bill@example.com,type=EMAIL 
+     * The identifier (ID) of the AWS account that you want to invite to join your organization. This is a JSON object that contains the following elements:   { "Type": "ACCOUNT", "Id": "&lt; account id number &gt;" }  If you use the AWS CLI, you can submit this as a single string, similar to the following example:  --target Id=123456789012,Type=ACCOUNT  If you specify "Type": "ACCOUNT", then you must provide the AWS account ID number as the Id. If you specify "Type": "EMAIL", then you must specify the email address that is associated with the account.  --target Id=bill@example.com,Type=EMAIL 
      */
     Target: HandshakeParty;
     /**
