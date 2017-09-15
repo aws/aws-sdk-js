@@ -1007,39 +1007,39 @@ declare namespace APIGateway {
      */
     name?: String;
     /**
-     * [Required] The type of the authorizer. Currently, the valid type is TOKEN for a Lambda function or COGNITO_USER_POOLS for an Amazon Cognito user pool.
+     * [Required] The authorizer type. Valid values are TOKEN for a Lambda function using a single authorization token submitted in a custom header, REQUEST for a Lambda function using incoming request parameters, and COGNITO_USER_POOLS for using an Amazon Cognito user pool.
      */
     type?: AuthorizerType;
     /**
-     * A list of the provider ARNs of the authorizer. For an TOKEN authorizer, this is not defined. For authorizers of the COGNITO_USER_POOLS type, each element corresponds to a user pool ARN of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. 
+     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined. 
      */
     providerARNs?: ListOfARNs;
     /**
-     * Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.
+     * Optional customer-defined field, used in Swagger imports and exports without functional impact.
      */
     authType?: String;
     /**
-     * [Required] Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form arn:aws:apigateway:{region}:lambda:path/{service_api}, where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
+     * Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or REQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form arn:aws:apigateway:{region}:lambda:path/{service_api}, where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
      */
     authorizerUri?: String;
     /**
-     * Specifies the credentials required for the authorizer, if any. Two options are available. To specify an IAM role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
+     * Specifies the required credentials as an IAM role for Amazon API Gateway to invoke the authorizer. To specify an IAM role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
      */
     authorizerCredentials?: String;
     /**
-     * [Required] The source of the identity in an incoming request. For a TOKEN authorizer, this value is a mapping expression with the same syntax as integration parameter mappings. The only valid source for tokens is 'header', so the expression should match 'method.request.header.[headerName]'. The value of the header '[headerName]' will be interpreted as the incoming token. For COGNITO_USER_POOLS authorizers, this property is used.
+     * The identity source for which authorization is requested. For a TOKEN authorizer, this is required and specifies the request header mapping expression for the custom header holding the authorization token submitted by the client. For example, if the token header name is Auth, the header mapping expression is method.request.header.Auth.For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header, a Name query string parameter are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.For a COGNITO_USER_POOLS authorizer, this property is not used.
      */
     identitySource?: String;
     /**
-     * A validation expression for the incoming identity. For TOKEN authorizers, this value should be a regular expression. The incoming token from the client is matched against this expression, and will proceed if the token matches. If the token doesn't match, the client receives a 401 Unauthorized response.
+     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. Amazon API Gateway will match the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
      */
     identityValidationExpression?: String;
     /**
-     * The TTL in seconds of cached authorizer results. If greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.
+     * The TTL in seconds of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.
      */
     authorizerResultTtlInSeconds?: NullableInteger;
   }
-  export type AuthorizerType = "TOKEN"|"COGNITO_USER_POOLS"|string;
+  export type AuthorizerType = "TOKEN"|"REQUEST"|"COGNITO_USER_POOLS"|string;
   export interface Authorizers {
     position?: String;
     /**
@@ -1142,35 +1142,35 @@ declare namespace APIGateway {
      */
     name: String;
     /**
-     * [Required] The type of the authorizer.
+     * [Required] The authorizer type. Valid values are TOKEN for a Lambda function using a single authorization token submitted in a custom header, REQUEST for a Lambda function using incoming request parameters, and COGNITO_USER_POOLS for using an Amazon Cognito user pool.
      */
     type: AuthorizerType;
     /**
-     * A list of the Cognito Your User Pool authorizer's provider ARNs.
+     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined. 
      */
     providerARNs?: ListOfARNs;
     /**
-     * Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.
+     * Optional customer-defined field, used in Swagger imports and exports without functional impact.
      */
     authType?: String;
     /**
-     * [Required] Specifies the authorizer's Uniform Resource Identifier (URI).
+     * Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or REQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form arn:aws:apigateway:{region}:lambda:path/{service_api}, where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
      */
     authorizerUri?: String;
     /**
-     * Specifies the credentials required for the authorizer, if any.
+     * Specifies the required credentials as an IAM role for Amazon API Gateway to invoke the authorizer. To specify an IAM role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
      */
     authorizerCredentials?: String;
     /**
-     * [Required] The source of the identity in an incoming request.
+     * The identity source for which authorization is requested. For a TOKEN authorizer, this is required and specifies the request header mapping expression for the custom header holding the authorization token submitted by the client. For example, if the token header name is Auth, the header mapping expression is method.request.header.Auth.For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header, a Name query string parameter are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.For a COGNITO_USER_POOLS authorizer, this property is not used.
      */
-    identitySource: String;
+    identitySource?: String;
     /**
-     * A validation expression for the incoming identity.
+     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. Amazon API Gateway will match the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
      */
     identityValidationExpression?: String;
     /**
-     * The TTL of cached authorizer results.
+     * The TTL in seconds of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.
      */
     authorizerResultTtlInSeconds?: NullableInteger;
   }
@@ -1286,7 +1286,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * The name of the model.
+     * The name of the model. Must be alphanumeric.
      */
     name: String;
     /**
@@ -1681,7 +1681,7 @@ declare namespace APIGateway {
   }
   export interface DocumentationPartLocation {
     /**
-     * The type of API entity to which the documentation content applies. It is a valid and required field for API entity types of API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. Content inheritance does not apply to any entity of the API, AUTHROZER, METHOD, MODEL, REQUEST_BODY, or RESOURCE type.
+     * The type of API entity to which the documentation content applies. It is a valid and required field for API entity types of API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. Content inheritance does not apply to any entity of the API, AUTHORIZER, METHOD, MODEL, REQUEST_BODY, or RESOURCE type.
      */
     type: DocumentationPartType;
     /**
@@ -2263,11 +2263,11 @@ declare namespace APIGateway {
      */
     stageName: String;
     /**
-     * The language for the generated SDK. Currently javascript, android, and objectivec (for iOS) are supported.
+     * The language for the generated SDK. Currently java, javascript, android, objectivec and swift (for iOS) are supported.
      */
     sdkType: String;
     /**
-     * A key-value map of query string parameters that specify properties of the SDK, depending on the requested sdkType. For sdkType of objectivec, a parameter named classPrefix is required. For sdkType of android, parameters named groupId, artifactId, artifactVersion, and invokerPackage are required.
+     * A string-to-string key-value map of query parameters sdkType-dependent properties of the SDK. For sdkType of objectivec or swift, a parameter named classPrefix is required. For sdkType of android, parameters named groupId, artifactId, artifactVersion, and invokerPackage are required. For sdkType of java, parameters named serviceName and javaPackageName are required. 
      */
     parameters?: MapOfStringToString;
   }
@@ -2647,7 +2647,7 @@ declare namespace APIGateway {
      */
     id?: String;
     /**
-     * The name of the model.
+     * The name of the model. Must be an alphanumeric string.
      */
     name?: String;
     /**

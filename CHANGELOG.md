@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.116.0-->
+<!--LATEST=2.117.0-->
 <!--ENTRYINSERT-->
+
+## 2.117.0
+* feature: APIGateway: Add a new enum "REQUEST" to '--type <value>' field in the current create-authorizer API, and make "identitySource" optional.
 
 ## 2.116.0
 * bugfix: clock skew: put the updating clock skew logic to each service client instead of using global config
