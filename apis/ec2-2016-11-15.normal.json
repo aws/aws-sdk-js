@@ -11829,6 +11829,13 @@
         "locationName":"InstanceId"
       }
     },
+    "InstanceInterruptionBehavior":{
+      "type":"string",
+      "enum":[
+        "stop",
+        "terminate"
+      ]
+    },
     "InstanceIpv6Address":{
       "type":"structure",
       "members":{
@@ -15426,6 +15433,10 @@
           "shape":"DateTime",
           "documentation":"<p>The end date of the request. If this is a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date and time is reached.</p> <p>Default: The request is effective indefinitely.</p>",
           "locationName":"validUntil"
+        },
+        "InstanceInterruptionBehavior":{
+          "shape":"InstanceInterruptionBehavior",
+          "documentation":"<p>Indicates whether a Spot instance stops or terminates when it is interrupted.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for RequestSpotInstances.</p>"
@@ -17843,6 +17854,11 @@
           "shape":"Boolean",
           "documentation":"<p>Indicates whether Spot fleet should replace unhealthy instances.</p>",
           "locationName":"replaceUnhealthyInstances"
+        },
+        "InstanceInterruptionBehavior":{
+          "shape":"InstanceInterruptionBehavior",
+          "documentation":"<p>Indicates whether a Spot instance stops or terminates when it is interrupted.</p>",
+          "locationName":"instanceInterruptionBehavior"
         }
       },
       "documentation":"<p>Describes the configuration of a Spot fleet request.</p>"
@@ -17969,6 +17985,11 @@
           "shape":"DateTime",
           "documentation":"<p>The end date of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). If this is a one-time request, it remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date is reached.</p>",
           "locationName":"validUntil"
+        },
+        "InstanceInterruptionBehavior":{
+          "shape":"InstanceInterruptionBehavior",
+          "documentation":"<p>Indicates whether a Spot instance stops or terminates when it is interrupted.</p>",
+          "locationName":"instanceInterruptionBehavior"
         }
       },
       "documentation":"<p>Describes a Spot instance request.</p>"

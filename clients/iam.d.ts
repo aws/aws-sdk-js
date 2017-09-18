@@ -304,6 +304,14 @@ declare class IAM extends Service {
    */
   deleteServerCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Submits a service-linked role deletion request and returns a DeletionTaskId, which you can use to check the status of the deletion. Before you call this operation, confirm that the role has no active sessions and that any resources used by the role in the linked service are deleted. If you call this operation more than once for the same service-linked role and an earlier deletion task is not complete, then the DeletionTaskId of the earlier request is returned. If you submit a deletion request for a service-linked role whose linked service is still accessing a resource, then the deletion task fails. If it fails, the GetServiceLinkedRoleDeletionStatus API operation returns the reason for the failure, including the resources that must be deleted. To delete the service-linked role, you must first remove those resources from the linked service and then submit the deletion request again. Resources are specific to the service that is linked to the role. For more information about removing resources from a service, see the AWS documentation for your service. For more information about service-linked roles, see Roles Terms and Concepts: AWS Service-Linked Role in the IAM User Guide.
+   */
+  deleteServiceLinkedRole(params: IAM.Types.DeleteServiceLinkedRoleRequest, callback?: (err: AWSError, data: IAM.Types.DeleteServiceLinkedRoleResponse) => void): Request<IAM.Types.DeleteServiceLinkedRoleResponse, AWSError>;
+  /**
+   * Submits a service-linked role deletion request and returns a DeletionTaskId, which you can use to check the status of the deletion. Before you call this operation, confirm that the role has no active sessions and that any resources used by the role in the linked service are deleted. If you call this operation more than once for the same service-linked role and an earlier deletion task is not complete, then the DeletionTaskId of the earlier request is returned. If you submit a deletion request for a service-linked role whose linked service is still accessing a resource, then the deletion task fails. If it fails, the GetServiceLinkedRoleDeletionStatus API operation returns the reason for the failure, including the resources that must be deleted. To delete the service-linked role, you must first remove those resources from the linked service and then submit the deletion request again. Resources are specific to the service that is linked to the role. For more information about removing resources from a service, see the AWS documentation for your service. For more information about service-linked roles, see Roles Terms and Concepts: AWS Service-Linked Role in the IAM User Guide.
+   */
+  deleteServiceLinkedRole(callback?: (err: AWSError, data: IAM.Types.DeleteServiceLinkedRoleResponse) => void): Request<IAM.Types.DeleteServiceLinkedRoleResponse, AWSError>;
+  /**
    * Deletes the specified service-specific credential.
    */
   deleteServiceSpecificCredential(params: IAM.Types.DeleteServiceSpecificCredentialRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -519,6 +527,14 @@ declare class IAM extends Service {
    * Retrieves information about the specified server certificate stored in IAM. For more information about working with server certificates, including a list of AWS services that can use the server certificates that you manage with IAM, go to Working with Server Certificates in the IAM User Guide.
    */
   getServerCertificate(callback?: (err: AWSError, data: IAM.Types.GetServerCertificateResponse) => void): Request<IAM.Types.GetServerCertificateResponse, AWSError>;
+  /**
+   * Retrieves the status of your service-linked role deletion. After you use the DeleteServiceLinkedRole API operation to submit a service-linked role for deletion, you can use the DeletionTaskId parameter in GetServiceLinkedRoleDeletionStatus to check the status of the deletion. If the deletion fails, this operation returns the reason that it failed.
+   */
+  getServiceLinkedRoleDeletionStatus(params: IAM.Types.GetServiceLinkedRoleDeletionStatusRequest, callback?: (err: AWSError, data: IAM.Types.GetServiceLinkedRoleDeletionStatusResponse) => void): Request<IAM.Types.GetServiceLinkedRoleDeletionStatusResponse, AWSError>;
+  /**
+   * Retrieves the status of your service-linked role deletion. After you use the DeleteServiceLinkedRole API operation to submit a service-linked role for deletion, you can use the DeletionTaskId parameter in GetServiceLinkedRoleDeletionStatus to check the status of the deletion. If the deletion fails, this operation returns the reason that it failed.
+   */
+  getServiceLinkedRoleDeletionStatus(callback?: (err: AWSError, data: IAM.Types.GetServiceLinkedRoleDeletionStatusResponse) => void): Request<IAM.Types.GetServiceLinkedRoleDeletionStatusResponse, AWSError>;
   /**
    * Retrieves information about the specified IAM user, including the user's creation date, path, unique ID, and ARN. If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID used to sign the request to this API.
    */
@@ -1055,6 +1071,7 @@ declare namespace IAM {
      */
     UserName: existingUserNameType;
   }
+  export type ArnListType = arnType[];
   export interface AttachGroupPolicyRequest {
     /**
      * The name (friendly name, not ARN) of the group to attach the policy to. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
@@ -1216,7 +1233,7 @@ declare namespace IAM {
   }
   export interface CreatePolicyRequest {
     /**
-     * The friendly name of the policy. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The friendly name of the policy. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
     /**
@@ -1398,7 +1415,7 @@ declare namespace IAM {
      */
     GroupName: groupNameType;
     /**
-     * The name identifying the policy document to delete. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The name identifying the policy document to delete. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
   }
@@ -1448,7 +1465,7 @@ declare namespace IAM {
      */
     RoleName: roleNameType;
     /**
-     * The name of the inline policy to delete from the specified IAM role. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The name of the inline policy to delete from the specified IAM role. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
   }
@@ -1480,6 +1497,18 @@ declare namespace IAM {
      */
     ServerCertificateName: serverCertificateNameType;
   }
+  export interface DeleteServiceLinkedRoleRequest {
+    /**
+     * The name of the service-linked role to be deleted.
+     */
+    RoleName: roleNameType;
+  }
+  export interface DeleteServiceLinkedRoleResponse {
+    /**
+     * The deletion task identifier that you can use to check the status of the deletion. This identifier is returned in the format task/aws-service-role/&lt;service-principal-name&gt;/&lt;role-name&gt;/&lt;task-uuid&gt;.
+     */
+    DeletionTaskId: DeletionTaskIdType;
+  }
   export interface DeleteServiceSpecificCredentialRequest {
     /**
      * The name of the IAM user associated with the service-specific credential. If this value is not specified, then the operation assumes the user whose credentials are used to call the operation. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
@@ -1506,7 +1535,7 @@ declare namespace IAM {
      */
     UserName: existingUserNameType;
     /**
-     * The name identifying the policy document to delete. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The name identifying the policy document to delete. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
   }
@@ -1522,6 +1551,18 @@ declare namespace IAM {
      */
     SerialNumber: serialNumberType;
   }
+  export interface DeletionTaskFailureReasonType {
+    /**
+     * A short description of the reason that the service-linked role deletion failed.
+     */
+    Reason?: ReasonType;
+    /**
+     * A list of objects that contains details about the service-linked role deletion failure. If the service-linked role has active sessions or if any resources that were used by the role have not been deleted from the linked service, the role can't be deleted. This parameter includes a list of the resources that are associated with the role and the region in which the resources are being used.
+     */
+    RoleUsageList?: RoleUsageListType;
+  }
+  export type DeletionTaskIdType = string;
+  export type DeletionTaskStatusType = "SUCCEEDED"|"IN_PROGRESS"|"FAILED"|"NOT_STARTED"|string;
   export interface DetachGroupPolicyRequest {
     /**
      * The name (friendly name, not ARN) of the IAM group to detach the policy from. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
@@ -1728,7 +1769,7 @@ declare namespace IAM {
      */
     GroupName: groupNameType;
     /**
-     * The name of the policy document to get. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The name of the policy document to get. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
   }
@@ -1860,7 +1901,7 @@ declare namespace IAM {
      */
     RoleName: roleNameType;
     /**
-     * The name of the policy document to get. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The name of the policy document to get. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
   }
@@ -1942,13 +1983,29 @@ declare namespace IAM {
      */
     ServerCertificate: ServerCertificate;
   }
+  export interface GetServiceLinkedRoleDeletionStatusRequest {
+    /**
+     * The deletion task identifier. This identifier is returned by the DeleteServiceLinkedRole operation in the format task/aws-service-role/&lt;service-principal-name&gt;/&lt;role-name&gt;/&lt;task-uuid&gt;.
+     */
+    DeletionTaskId: DeletionTaskIdType;
+  }
+  export interface GetServiceLinkedRoleDeletionStatusResponse {
+    /**
+     * The status of the deletion.
+     */
+    Status: DeletionTaskStatusType;
+    /**
+     * An object that contains details about the reason the deletion failed.
+     */
+    Reason?: DeletionTaskFailureReasonType;
+  }
   export interface GetUserPolicyRequest {
     /**
      * The name of the user who the policy is associated with. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
      */
     UserName: existingUserNameType;
     /**
-     * The name of the policy document to get. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The name of the policy document to get. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
   }
@@ -2262,7 +2319,7 @@ declare namespace IAM {
   }
   export interface ListGroupPoliciesResponse {
     /**
-     * A list of policy names.
+     * A list of policy names. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyNames: policyNameListType;
     /**
@@ -2978,7 +3035,7 @@ declare namespace IAM {
      */
     GroupName: groupNameType;
     /**
-     * The name of the policy document. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The name of the policy document. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
     /**
@@ -2992,7 +3049,7 @@ declare namespace IAM {
      */
     RoleName: roleNameType;
     /**
-     * The name of the policy document. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The name of the policy document. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
     /**
@@ -3006,7 +3063,7 @@ declare namespace IAM {
      */
     UserName: existingUserNameType;
     /**
-     * The name of the policy document. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-
+     * The name of the policy document. This parameter allows (per its regex pattern) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@-+
      */
     PolicyName: policyNameType;
     /**
@@ -3014,6 +3071,8 @@ declare namespace IAM {
      */
     PolicyDocument: policyDocumentType;
   }
+  export type ReasonType = string;
+  export type RegionNameType = string;
   export interface RemoveClientIDFromOpenIDConnectProviderRequest {
     /**
      * The Amazon Resource Name (ARN) of the IAM OIDC provider resource to remove the client ID from. You can get a list of OIDC provider ARNs by using the ListOpenIDConnectProviders action. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
@@ -3172,6 +3231,17 @@ declare namespace IAM {
      * A list of managed policies attached to the role. These policies are the role's access (permissions) policies.
      */
     AttachedManagedPolicies?: attachedPoliciesListType;
+  }
+  export type RoleUsageListType = RoleUsageType[];
+  export interface RoleUsageType {
+    /**
+     * The name of the region where the service-linked role is being used.
+     */
+    Region?: RegionNameType;
+    /**
+     * The name of the resource that is using the service-linked role.
+     */
+    Resources?: ArnListType;
   }
   export type SAMLMetadataDocumentType = string;
   export interface SAMLProviderListEntry {
@@ -3770,7 +3840,7 @@ declare namespace IAM {
      */
     CreateDate: dateType;
     /**
-     * The date and time, in ISO 8601 date-time format, when the user's password was last used to sign in to an AWS website. For a list of AWS websites that capture a user's last sign-in time, see the Credential Reports topic in the Using IAM guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. This field is null (not present) when:   The user does not have a password   The password exists but has never been used (at least not since IAM started tracking this information on October 20th, 2014   there is no sign-in data associated with the user   This value is returned only in the GetUser and ListUsers actions. 
+     * The date and time, in ISO 8601 date-time format, when the user's password was last used to sign in to an AWS website. For a list of AWS websites that capture a user's last sign-in time, see the Credential Reports topic in the Using IAM guide. If a password is used more than once in a five-minute span, only the first use is returned in this field. If the field is null (no value) then it indicates that they never signed in with a password. This can be because:   The user never had a password.   A password exists but has not been used since IAM started tracking this information on October 20th, 2014.   A null does not mean that the user never had a password. Also, if the user does not currently have a password, but had one in the past, then this field contains the date and time the most recent password was used. This value is returned only in the GetUser and ListUsers actions. 
      */
     PasswordLastUsed?: dateType;
   }
@@ -3893,6 +3963,7 @@ declare namespace IAM {
   export type policyListType = Policy[];
   export type policyNameListType = policyNameType[];
   export type policyNameType = string;
+  export type policyNotAttachableMessage = string;
   export type policyPathType = string;
   export type policyScopeType = "All"|"AWS"|"Local"|string;
   export type policyVersionIdType = string;

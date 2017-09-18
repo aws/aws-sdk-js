@@ -8103,6 +8103,7 @@ declare namespace EC2 {
   export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
   export type InstanceIdSet = String[];
   export type InstanceIdStringList = String[];
+  export type InstanceInterruptionBehavior = "stop"|"terminate"|string;
   export interface InstanceIpv6Address {
     /**
      * The IPv6 address.
@@ -10161,6 +10162,10 @@ declare namespace EC2 {
      * The end date of the request. If this is a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date and time is reached. Default: The request is effective indefinitely.
      */
     ValidUntil?: DateTime;
+    /**
+     * Indicates whether a Spot instance stops or terminates when it is interrupted.
+     */
+    InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
   }
   export interface RequestSpotInstancesResult {
     /**
@@ -11759,6 +11764,10 @@ declare namespace EC2 {
      * Indicates whether Spot fleet should replace unhealthy instances.
      */
     ReplaceUnhealthyInstances?: Boolean;
+    /**
+     * Indicates whether a Spot instance stops or terminates when it is interrupted.
+     */
+    InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
   }
   export type SpotFleetRequestConfigSet = SpotFleetRequestConfig[];
   export interface SpotFleetTagSpecification {
@@ -11845,6 +11854,10 @@ declare namespace EC2 {
      * The end date of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). If this is a one-time request, it remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date is reached.
      */
     ValidUntil?: DateTime;
+    /**
+     * Indicates whether a Spot instance stops or terminates when it is interrupted.
+     */
+    InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
   }
   export type SpotInstanceRequestIdList = String[];
   export type SpotInstanceRequestList = SpotInstanceRequest[];
