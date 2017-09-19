@@ -634,7 +634,6 @@
         return it('retries clock skew errors', function() {
           var request, response;
           helpers.mockHttpResponse(400, {}, '');
-          AWS.config.isClockSkewed = true;
           service = new MockService({
             maxRetries: 3,
             correctClockSkew: true
@@ -653,7 +652,6 @@
       it('does not apply clock skew correction when correctClockSkew is false', function() {
         var request, response;
         helpers.mockHttpResponse(400, {}, '');
-        AWS.config.isClockSkewed = true;
         request = makeRequest();
         request.on('extractError', function(resp) {
           return resp.error = {
