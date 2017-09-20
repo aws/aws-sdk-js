@@ -670,6 +670,7 @@
           };
         });
         response = request.send();
+        console.log('__________________________', response.retryCount);
         return expect(response.retryCount).to.equal(0);
       });
       it('does not retry other signature errors if clock is not skewed', function() {
@@ -684,6 +685,7 @@
           };
         });
         response = request.send();
+        console.log('__________________________', response.retryCount);
         return expect(response.retryCount).to.equal(0);
       });
       [301, 307].forEach(function(code) {
