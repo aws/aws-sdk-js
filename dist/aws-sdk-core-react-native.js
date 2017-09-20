@@ -80,7 +80,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.119.0',
+	  VERSION: '2.120.0',
 
 	  /**
 	   * @api private
@@ -12028,8 +12028,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    add('CLOCK_SKEWED', 'retry', function CLOCK_SKEWED(resp) {
 	      if (!resp.error) return;
 	      if (this.service.clockSkewError(resp.error)
-	          && this.service.config.correctClockSkew
-	          && AWS.config.isClockSkewed) {
+	          && this.service.config.correctClockSkew) {
 	        resp.error.retryable = true;
 	      }
 	    });

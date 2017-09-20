@@ -1114,6 +1114,26 @@
       "errors" : [ ],
       "documentation" : "Retrieves a list of subscription definitions."
     },
+    "ResetDeployments" : {
+      "name" : "ResetDeployments",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/greengrass/groups/{GroupId}/deployments/$reset",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "ResetDeploymentsRequest"
+      },
+      "output" : {
+        "shape" : "ResetDeploymentsResponse",
+        "documentation" : "Success. The group's deployments were reset."
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "invalid request"
+      } ],
+      "documentation" : "Resets a group's deployments."
+    },
     "UpdateConnectivityInfo" : {
       "name" : "UpdateConnectivityInfo",
       "http" : {
@@ -1334,7 +1354,7 @@
         },
         "Message" : {
           "shape" : "__string",
-          "documentation" : "Message"
+          "documentation" : "Message containing information about the error"
         }
       },
       "documentation" : "General Error",
@@ -1508,7 +1528,7 @@
         },
         "DeploymentType" : {
           "shape" : "DeploymentType",
-          "documentation" : "Type of deployment"
+          "documentation" : "Type of deployment. When used in CreateDeployment, only NewDeployment and Redeployment are valid. "
         },
         "GroupId" : {
           "shape" : "__string",
@@ -1528,11 +1548,11 @@
       "members" : {
         "DeploymentArn" : {
           "shape" : "__string",
-          "documentation" : "Arn of the deployment."
+          "documentation" : "The arn of the deployment."
         },
         "DeploymentId" : {
           "shape" : "__string",
-          "documentation" : "Id of the deployment."
+          "documentation" : "The id of the deployment."
         }
       }
     },
@@ -2200,6 +2220,10 @@
           "shape" : "__string",
           "documentation" : "Id of the deployment."
         },
+        "DeploymentType" : {
+          "shape" : "DeploymentType",
+          "documentation" : "The type of deployment."
+        },
         "GroupArn" : {
           "shape" : "__string",
           "documentation" : "Arn of the group for this deployment."
@@ -2209,7 +2233,7 @@
     },
     "DeploymentType" : {
       "type" : "string",
-      "enum" : [ "NewDeployment", "Redeployment" ]
+      "enum" : [ "NewDeployment", "Redeployment", "ResetDeployment", "ForceResetDeployment" ]
     },
     "Deployments" : {
       "type" : "list",
@@ -2386,7 +2410,7 @@
         },
         "Message" : {
           "shape" : "__string",
-          "documentation" : "Message"
+          "documentation" : "Message containing information about the error"
         }
       },
       "documentation" : "General Error"
@@ -2433,7 +2457,7 @@
       "members" : {
         "ConnectivityInfo" : {
           "shape" : "ListOfConnectivityInfo",
-          "documentation" : "Connectivity info array"
+          "documentation" : "Connectivity info list"
         },
         "Message" : {
           "shape" : "__string",
@@ -2554,6 +2578,14 @@
         "DeploymentStatus" : {
           "shape" : "__string",
           "documentation" : "Status of the deployment."
+        },
+        "DeploymentType" : {
+          "shape" : "DeploymentType",
+          "documentation" : "The type of the deployment."
+        },
+        "ErrorDetails" : {
+          "shape" : "ErrorDetails",
+          "documentation" : "The error Details"
         },
         "ErrorMessage" : {
           "shape" : "__string",
@@ -2728,7 +2760,8 @@
           "documentation" : "Timestamp when the funtion definition version was created."
         },
         "Definition" : {
-          "shape" : "FunctionDefinitionVersion"
+          "shape" : "FunctionDefinitionVersion",
+          "documentation" : "Information on the definition."
         },
         "Id" : {
           "shape" : "__string",
@@ -3149,7 +3182,7 @@
           "documentation" : "Name of a group."
         }
       },
-      "documentation" : "Information of a group"
+      "documentation" : "Information on the group"
     },
     "GroupVersion" : {
       "type" : "structure",
@@ -3186,7 +3219,7 @@
         },
         "Message" : {
           "shape" : "__string",
-          "documentation" : "Message"
+          "documentation" : "Message containing information about the error"
         }
       },
       "documentation" : "General Error",
@@ -3274,7 +3307,7 @@
           "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
         }
       },
-      "documentation" : "List of definition response"
+      "documentation" : "List of definition responses"
     },
     "ListDeploymentsRequest" : {
       "type" : "structure",
@@ -3305,7 +3338,7 @@
       "members" : {
         "Deployments" : {
           "shape" : "Deployments",
-          "documentation" : "Information on deployments"
+          "documentation" : "List of deployments for the requested groups"
         },
         "NextToken" : {
           "shape" : "__string",
@@ -3800,6 +3833,42 @@
         "shape" : "__string"
       }
     },
+    "ResetDeploymentsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "AmznClientToken" : {
+          "shape" : "__string",
+          "location" : "header",
+          "locationName" : "X-Amzn-Client-Token",
+          "documentation" : "The client token used to request idempotent operations."
+        },
+        "Force" : {
+          "shape" : "__boolean",
+          "documentation" : "When set to true, perform a best-effort only core reset."
+        },
+        "GroupId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "GroupId",
+          "documentation" : "The unique Id of the AWS Greengrass Group"
+        }
+      },
+      "documentation" : "Information needed to perform a reset of a group's deployments.",
+      "required" : [ "GroupId" ]
+    },
+    "ResetDeploymentsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "DeploymentArn" : {
+          "shape" : "__string",
+          "documentation" : "The arn of the reset deployment."
+        },
+        "DeploymentId" : {
+          "shape" : "__string",
+          "documentation" : "The id of the reset deployment."
+        }
+      }
+    },
     "Subscription" : {
       "type" : "structure",
       "members" : {
@@ -3837,7 +3906,7 @@
       "members" : {
         "ConnectivityInfo" : {
           "shape" : "ListOfConnectivityInfo",
-          "documentation" : "Connectivity info array"
+          "documentation" : "Connectivity info list"
         },
         "ThingName" : {
           "shape" : "__string",

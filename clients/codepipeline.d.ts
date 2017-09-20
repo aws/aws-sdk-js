@@ -308,7 +308,7 @@ declare namespace CodePipeline {
      */
     secret: Boolean;
     /**
-     * Indicates that the proprety will be used in conjunction with PollForJobs. When creating a custom action, an action can have up to one queryable property. If it has one, that property must be both required and not secret. If you create a pipeline with a custom action type, and that custom action contains a queryable property, the value for that configuration property is subject to additional restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens.
+     * Indicates that the property will be used in conjunction with PollForJobs. When creating a custom action, an action can have up to one queryable property. If it has one, that property must be both required and not secret. If you create a pipeline with a custom action type, and that custom action contains a queryable property, the value for that configuration property is subject to additional restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens.
      */
     queryable?: Boolean;
     /**
@@ -827,6 +827,10 @@ declare namespace CodePipeline {
      * Represents the structure of actions and stages to be performed in the pipeline. 
      */
     pipeline?: PipelineDeclaration;
+    /**
+     * Represents the pipeline metadata information returned as part of the output of a GetPipeline action.
+     */
+    metadata?: PipelineMetadata;
   }
   export interface GetPipelineStateInput {
     /**
@@ -981,7 +985,7 @@ declare namespace CodePipeline {
      */
     maxResults?: MaxResults;
     /**
-     * The token that was returned from the previous list pipeline executions call, which can be used to return the next set of pipeline executions in the list.
+     * The token that was returned from the previous ListPipelineExecutions call, which can be used to return the next set of pipeline executions in the list.
      */
     nextToken?: NextToken;
   }
@@ -991,7 +995,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionSummaries?: PipelineExecutionSummaryList;
     /**
-     * A token that can be used in the next list pipeline executions call to return the next set of pipeline executions. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.
+     * A token that can be used in the next ListPipelineExecutions call. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.
      */
     nextToken?: NextToken;
   }
@@ -1026,6 +1030,7 @@ declare namespace CodePipeline {
   }
   export type OutputArtifactList = OutputArtifact[];
   export type Percentage = number;
+  export type PipelineArn = string;
   export interface PipelineContext {
     /**
      * The name of the pipeline. This is a user-specified value. Pipeline names must be unique across all pipeline names under an Amazon Web Services account.
@@ -1036,7 +1041,7 @@ declare namespace CodePipeline {
      */
     stage?: StageContext;
     /**
-     * 
+     * The context of an action to a job worker within the stage of a pipeline.
      */
     action?: ActionContext;
   }
@@ -1050,7 +1055,7 @@ declare namespace CodePipeline {
      */
     roleArn: RoleArn;
     /**
-     * Represents the context of an action within the stage of a pipeline to a job worker. 
+     * Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline. 
      */
     artifactStore: ArtifactStore;
     /**
@@ -1076,7 +1081,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
     /**
-     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Succeeded: The pipeline execution completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead.    Failed: The pipeline execution did not complete successfully.  
+     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead.    Failed: The pipeline execution was not completed successfully.  
      */
     status?: PipelineExecutionStatus;
     /**
@@ -1092,7 +1097,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
     /**
-     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Succeeded: The pipeline execution completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead.    Failed: The pipeline execution did not complete successfully.  
+     * The status of the pipeline execution.   InProgress: The pipeline execution is currently running.   Succeeded: The pipeline execution was completed successfully.    Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead.    Failed: The pipeline execution was not completed successfully.  
      */
     status?: PipelineExecutionStatus;
     /**
@@ -1106,6 +1111,20 @@ declare namespace CodePipeline {
   }
   export type PipelineExecutionSummaryList = PipelineExecutionSummary[];
   export type PipelineList = PipelineSummary[];
+  export interface PipelineMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline.
+     */
+    pipelineArn?: PipelineArn;
+    /**
+     * The date and time the pipeline was created, in timestamp format.
+     */
+    created?: Timestamp;
+    /**
+     * The date and time the pipeline was last updated, in timestamp format.
+     */
+    updated?: Timestamp;
+  }
   export type PipelineName = string;
   export type PipelineStageDeclarationList = StageDeclaration[];
   export interface PipelineSummary {

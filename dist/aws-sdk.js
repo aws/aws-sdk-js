@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.119.0
+// AWS SDK for JavaScript v2.120.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -15345,6 +15345,18 @@ module.exports={
         "members": {
           "pipeline": {
             "shape": "Sv"
+          },
+          "metadata": {
+            "type": "structure",
+            "members": {
+              "pipelineArn": {},
+              "created": {
+                "type": "timestamp"
+              },
+              "updated": {
+                "type": "timestamp"
+              }
+            }
           }
         }
       }
@@ -15437,7 +15449,7 @@ module.exports={
                     "members": {
                       "actionName": {},
                       "currentRevision": {
-                        "shape": "S32"
+                        "shape": "S34"
                       },
                       "latestExecution": {
                         "type": "structure",
@@ -15721,7 +15733,7 @@ module.exports={
           "stageName": {},
           "actionName": {},
           "actionRevision": {
-            "shape": "S32"
+            "shape": "S34"
           }
         }
       },
@@ -15782,7 +15794,7 @@ module.exports={
         "members": {
           "jobId": {},
           "failureDetails": {
-            "shape": "S4h"
+            "shape": "S4j"
           }
         }
       }
@@ -15796,11 +15808,11 @@ module.exports={
         "members": {
           "jobId": {},
           "currentRevision": {
-            "shape": "S4k"
+            "shape": "S4m"
           },
           "continuationToken": {},
           "executionDetails": {
-            "shape": "S4m"
+            "shape": "S4o"
           }
         }
       }
@@ -15817,7 +15829,7 @@ module.exports={
           "jobId": {},
           "clientToken": {},
           "failureDetails": {
-            "shape": "S4h"
+            "shape": "S4j"
           }
         }
       }
@@ -15833,11 +15845,11 @@ module.exports={
           "jobId": {},
           "clientToken": {},
           "currentRevision": {
-            "shape": "S4k"
+            "shape": "S4m"
           },
           "continuationToken": {},
           "executionDetails": {
-            "shape": "S4m"
+            "shape": "S4o"
           }
         }
       }
@@ -16212,7 +16224,7 @@ module.exports={
       },
       "sensitive": true
     },
-    "S32": {
+    "S34": {
       "type": "structure",
       "required": [
         "revisionId",
@@ -16227,7 +16239,7 @@ module.exports={
         }
       }
     },
-    "S4h": {
+    "S4j": {
       "type": "structure",
       "required": [
         "type",
@@ -16239,7 +16251,7 @@ module.exports={
         "externalExecutionId": {}
       }
     },
-    "S4k": {
+    "S4m": {
       "type": "structure",
       "required": [
         "revision",
@@ -16254,7 +16266,7 @@ module.exports={
         "revisionSummary": {}
       }
     },
-    "S4m": {
+    "S4o": {
       "type": "structure",
       "members": {
         "summary": {},
@@ -78209,7 +78221,11 @@ module.exports={
           "Timezone": {},
           "EnableIAMDatabaseAuthentication": {
             "type": "boolean"
-          }
+          },
+          "EnablePerformanceInsights": {
+            "type": "boolean"
+          },
+          "PerformanceInsightsKMSKeyId": {}
         }
       },
       "output": {
@@ -78264,6 +78280,10 @@ module.exports={
           "EnableIAMDatabaseAuthentication": {
             "type": "boolean"
           },
+          "EnablePerformanceInsights": {
+            "type": "boolean"
+          },
+          "PerformanceInsightsKMSKeyId": {},
           "SourceRegion": {}
         }
       },
@@ -79527,6 +79547,9 @@ module.exports={
                 },
                 "SupportsIAMDatabaseAuthentication": {
                   "type": "boolean"
+                },
+                "SupportsPerformanceInsights": {
+                  "type": "boolean"
                 }
               },
               "wrapper": true
@@ -79921,7 +79944,11 @@ module.exports={
           },
           "EnableIAMDatabaseAuthentication": {
             "type": "boolean"
-          }
+          },
+          "EnablePerformanceInsights": {
+            "type": "boolean"
+          },
+          "PerformanceInsightsKMSKeyId": {}
         }
       },
       "output": {
@@ -79961,7 +79988,8 @@ module.exports={
         ],
         "members": {
           "DBSnapshotIdentifier": {},
-          "EngineVersion": {}
+          "EngineVersion": {},
+          "OptionGroupName": {}
         }
       },
       "output": {
@@ -81248,7 +81276,11 @@ module.exports={
         "Timezone": {},
         "IAMDatabaseAuthenticationEnabled": {
           "type": "boolean"
-        }
+        },
+        "PerformanceInsightsEnabled": {
+          "type": "boolean"
+        },
+        "PerformanceInsightsKMSKeyId": {}
       },
       "wrapper": true
     },
@@ -88111,9 +88143,16 @@ module.exports={
             "locationName": "userId"
           },
           "sessionAttributes": {
+            "shape": "S5",
             "jsonvalue": true,
             "location": "header",
             "locationName": "x-amz-lex-session-attributes"
+          },
+          "requestAttributes": {
+            "shape": "S5",
+            "jsonvalue": true,
+            "location": "header",
+            "locationName": "x-amz-lex-request-attributes"
           },
           "contentType": {
             "location": "header",
@@ -88151,6 +88190,7 @@ module.exports={
             "locationName": "x-amz-lex-session-attributes"
           },
           "message": {
+            "shape": "Sc",
             "location": "header",
             "locationName": "x-amz-lex-message"
           },
@@ -88200,9 +88240,14 @@ module.exports={
             "locationName": "userId"
           },
           "sessionAttributes": {
-            "shape": "Se"
+            "shape": "Sf"
           },
-          "inputText": {}
+          "requestAttributes": {
+            "shape": "Sf"
+          },
+          "inputText": {
+            "shape": "Sc"
+          }
         }
       },
       "output": {
@@ -88210,12 +88255,14 @@ module.exports={
         "members": {
           "intentName": {},
           "slots": {
-            "shape": "Se"
+            "shape": "Sf"
           },
           "sessionAttributes": {
-            "shape": "Se"
+            "shape": "Sf"
           },
-          "message": {},
+          "message": {
+            "shape": "Sc"
+          },
           "dialogState": {},
           "slotToElicit": {},
           "responseCard": {
@@ -88256,14 +88303,23 @@ module.exports={
     }
   },
   "shapes": {
+    "S5": {
+      "type": "string",
+      "sensitive": true
+    },
     "S8": {
       "type": "blob",
       "streaming": true
     },
-    "Se": {
+    "Sc": {
+      "type": "string",
+      "sensitive": true
+    },
+    "Sf": {
       "type": "map",
       "key": {},
-      "value": {}
+      "value": {},
+      "sensitive": true
     }
   }
 }
@@ -107417,7 +107473,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.119.0',
+  VERSION: '2.120.0',
 
 
   Signers: {},
@@ -108901,8 +108957,7 @@ AWS.EventListeners = {
     add('CLOCK_SKEWED', 'retry', function CLOCK_SKEWED(resp) {
       if (!resp.error) return;
       if (this.service.clockSkewError(resp.error)
-          && this.service.config.correctClockSkew
-          && AWS.config.isClockSkewed) {
+          && this.service.config.correctClockSkew) {
         resp.error.retryable = true;
       }
     });

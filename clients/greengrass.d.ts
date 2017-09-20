@@ -460,6 +460,14 @@ declare class Greengrass extends Service {
    */
   listSubscriptionDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionsResponse, AWSError>;
   /**
+   * Resets a group's deployments.
+   */
+  resetDeployments(params: Greengrass.Types.ResetDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
+  /**
+   * Resets a group's deployments.
+   */
+  resetDeployments(callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
+  /**
    * Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
    */
   updateConnectivityInfo(params: Greengrass.Types.UpdateConnectivityInfoRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectivityInfoResponse) => void): Request<Greengrass.Types.UpdateConnectivityInfoResponse, AWSError>;
@@ -681,7 +689,7 @@ declare namespace Greengrass {
      */
     DeploymentId?: __string;
     /**
-     * Type of deployment
+     * Type of deployment. When used in CreateDeployment, only NewDeployment and Redeployment are valid. 
      */
     DeploymentType?: DeploymentType;
     /**
@@ -695,11 +703,11 @@ declare namespace Greengrass {
   }
   export interface CreateDeploymentResponse {
     /**
-     * Arn of the deployment.
+     * The arn of the deployment.
      */
     DeploymentArn?: __string;
     /**
-     * Id of the deployment.
+     * The id of the deployment.
      */
     DeploymentId?: __string;
   }
@@ -1207,11 +1215,15 @@ declare namespace Greengrass {
      */
     DeploymentId?: __string;
     /**
+     * The type of deployment.
+     */
+    DeploymentType?: DeploymentType;
+    /**
      * Arn of the group for this deployment.
      */
     GroupArn?: __string;
   }
-  export type DeploymentType = "NewDeployment"|"Redeployment"|string;
+  export type DeploymentType = "NewDeployment"|"Redeployment"|"ResetDeployment"|"ForceResetDeployment"|string;
   export type Deployments = Deployment[];
   export interface Device {
     /**
@@ -1328,7 +1340,7 @@ declare namespace Greengrass {
      */
     ErrorDetails?: ErrorDetails;
     /**
-     * Message
+     * Message containing information about the error
      */
     Message?: __string;
   }
@@ -1356,7 +1368,7 @@ declare namespace Greengrass {
   }
   export interface GetConnectivityInfoResponse {
     /**
-     * Connectivity info array
+     * Connectivity info list
      */
     ConnectivityInfo?: ListOfConnectivityInfo;
     /**
@@ -1447,6 +1459,14 @@ declare namespace Greengrass {
      * Status of the deployment.
      */
     DeploymentStatus?: __string;
+    /**
+     * The type of the deployment.
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * The error Details
+     */
+    ErrorDetails?: ErrorDetails;
     /**
      * Error Message
      */
@@ -1579,6 +1599,9 @@ declare namespace Greengrass {
      * Timestamp when the funtion definition version was created.
      */
     CreationTimestamp?: __string;
+    /**
+     * Information on the definition.
+     */
     Definition?: FunctionDefinitionVersion;
     /**
      * Id of the function definition the version belongs to.
@@ -1995,7 +2018,7 @@ declare namespace Greengrass {
   }
   export interface ListDeploymentsResponse {
     /**
-     * Information on deployments
+     * List of deployments for the requested groups
      */
     Deployments?: Deployments;
     /**
@@ -2287,6 +2310,30 @@ declare namespace Greengrass {
   export type LoggerLevel = "DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
   export type LoggerType = "FileSystem"|"AWSCloudWatch"|string;
   export type MapOf__string = {[key: string]: __string};
+  export interface ResetDeploymentsRequest {
+    /**
+     * The client token used to request idempotent operations.
+     */
+    AmznClientToken?: __string;
+    /**
+     * When set to true, perform a best-effort only core reset.
+     */
+    Force?: __boolean;
+    /**
+     * The unique Id of the AWS Greengrass Group
+     */
+    GroupId: __string;
+  }
+  export interface ResetDeploymentsResponse {
+    /**
+     * The arn of the reset deployment.
+     */
+    DeploymentArn?: __string;
+    /**
+     * The id of the reset deployment.
+     */
+    DeploymentId?: __string;
+  }
   export interface Subscription {
     /**
      * Element Id for this entry in the list.
@@ -2313,7 +2360,7 @@ declare namespace Greengrass {
   }
   export interface UpdateConnectivityInfoRequest {
     /**
-     * Connectivity info array
+     * Connectivity info list
      */
     ConnectivityInfo?: ListOfConnectivityInfo;
     /**

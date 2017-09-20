@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.119.0-->
+<!--LATEST=2.120.0-->
 <!--ENTRYINSERT-->
+
+## 2.120.0
+* feature: AppStream: API updates for supporting On-Demand fleets.
+* feature: CodePipeline: This change includes a PipelineMetadata object that is part of the output from the GetPipeline API that includes the Pipeline ARN, created, and updated timestamp.
+* feature: Greengrass: Reset Deployments feature allows you to clean-up the cloud resource so you can delete the group. It also cleans up the core so that it goes back to the pre-deployment state.
+* feature: LexRuntime: Request attributes can be used to pass client specific information from the client to Amazon Lex as part of each request.
+* feature: RDS: Introduces the --option-group-name parameter to the ModifyDBSnapshot CLI command. You can specify this parameter when you upgrade an Oracle DB snapshot. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance.  For more information, see http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG
 
 ## 2.119.0
 * feature: EC2: Fixed bug in EC2 clients preventing ElasticGpuSet from being set.
