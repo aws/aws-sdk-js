@@ -66,6 +66,7 @@
         return request;
       }
     };
+    
     describe('validate', function() {
       it('takes the request object as a parameter', function() {
         var request, response;
@@ -135,6 +136,7 @@
         return delete service.isGlobalEndpoint;
       });
     });
+
     describe('build', function() {
       return it('takes the request object as a parameter', function() {
         var request, response;
@@ -148,6 +150,7 @@
         return expect(response.error.message).to.equal("ERROR");
       });
     });
+
     describe('afterBuild', function() {
       var fs, request, sendRequest;
       request = null;
@@ -213,6 +216,7 @@
         }
       });
     });
+
     describe('restart', function() {
       var request;
       request = null;
@@ -233,6 +237,7 @@
         return expect(request.httpRequest).not.to.eql(httpRequest);
       });
     });
+
     describe('sign', function() {
       it('takes the request object as a parameter', function() {
         var request, response;
@@ -272,6 +277,7 @@
         return expect(response.error).to.equal('mockservice');
       });
     });
+
     describe('send', function() {
       it('passes httpOptions from config', function() {
         var options;
@@ -314,8 +320,9 @@
         return done();
       });
     });
+
     describe('httpHeaders', function() {
-      return it('applies clock skew offset when correcClockSkew is true', function(done) {
+      return it('applies clock skew offset when correcClockSkew is true', function() {
         var offset, request, response, serverDate;
         service = new MockService({
           maxRetries: 3,
@@ -330,10 +337,9 @@
         response = request.send();
         offset = Math.abs(service.config.systemClockOffset);
         expect(offset > 299000 && offset < 310000).to.equal(true);
-        service.config.systemClockOffset = 0;
-        return done();
       });
     });
+
     describe('httpData', function() {
       beforeEach(function() {
         return helpers.mockHttpResponse(200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']);
@@ -409,6 +415,7 @@
         });
       });
     }
+
     describe('httpError', function() {
       it('rewrites ENOTFOUND error to include helpful message', function() {
         var request;
@@ -446,6 +453,7 @@
         return expect(sendHandler.calls.length).to.equal(service.config.maxRetries + 1);
       });
     });
+
     describe('retry', function() {
       it('retries a request with a set maximum retries', function() {
         var request, response, sendHandler;
@@ -634,7 +642,6 @@
         return it('retries clock skew errors', function() {
           var request, response;
           helpers.mockHttpResponse(400, {}, '');
-          AWS.config.isClockSkewed = true;
           service = new MockService({
             maxRetries: 3,
             correctClockSkew: true
@@ -653,7 +660,10 @@
       it('does not apply clock skew correction when correctClockSkew is false', function() {
         var request, response;
         helpers.mockHttpResponse(400, {}, '');
-        AWS.config.isClockSkewed = true;
+        service = new MockService({
+            maxRetries: 3,
+            correctClockSkew: false
+        });
         request = makeRequest();
         request.on('extractError', function(resp) {
           return resp.error = {
@@ -667,6 +677,10 @@
       it('does not retry other signature errors if clock is not skewed', function() {
         var request, response;
         helpers.mockHttpResponse(403, {}, '');
+        service = new MockService({
+            maxRetries: 3,
+            correctClockSkew: false
+        });
         request = makeRequest();
         request.on('extractError', function(resp) {
           return resp.error = {
@@ -704,6 +718,7 @@
         return expect(response.error.retryable).to.equal(false);
       });
     });
+
     describe('success', function() {
       return it('emits success on a successful response', function() {
         var response;
@@ -716,6 +731,7 @@
         return expect(response.retryCount).to.equal(0);
       });
     });
+
     describe('error', function() {
       it('emits error if error found and should not be retrying', function() {
         var response;
@@ -748,6 +764,7 @@
         return expect(completeHandler.calls.length).not.to.equal(0);
       });
     });
+
     describe('logging', function() {
       var data, logfn, logger, match;
       data = null;
