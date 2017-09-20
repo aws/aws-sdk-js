@@ -662,6 +662,10 @@
       it('does not apply clock skew correction when correctClockSkew is false', function() {
         var request, response;
         helpers.mockHttpResponse(400, {}, '');
+        service = new MockService({
+            maxRetries: 3,
+            correctClockSkew: false
+        });
         request = makeRequest();
         request.on('extractError', function(resp) {
           return resp.error = {
@@ -670,12 +674,12 @@
           };
         });
         response = request.send();
-        console.log('__________________________', response.retryCount);
         return expect(response.retryCount).to.equal(0);
       });
       it('does not retry other signature errors if clock is not skewed', function() {
         var request, response;
         helpers.mockHttpResponse(403, {}, '');
+        service.config.systemClockOffset = 0;
         request = makeRequest();
         request.on('extractError', function(resp) {
           return resp.error = {
@@ -685,7 +689,6 @@
           };
         });
         response = request.send();
-        console.log('__________________________', response.retryCount);
         return expect(response.retryCount).to.equal(0);
       });
       [301, 307].forEach(function(code) {
