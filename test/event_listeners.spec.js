@@ -322,7 +322,7 @@
     });
 
     describe('httpHeaders', function() {
-      return it('applies clock skew offset when correcClockSkew is true', function(done) {
+      return it('applies clock skew offset when correcClockSkew is true', function() {
         var offset, request, response, serverDate;
         service = new MockService({
           maxRetries: 3,
@@ -337,8 +337,6 @@
         response = request.send();
         offset = Math.abs(service.config.systemClockOffset);
         expect(offset > 299000 && offset < 310000).to.equal(true);
-        service.config.systemClockOffset = 0;
-        return done();
       });
     });
 
@@ -679,7 +677,10 @@
       it('does not retry other signature errors if clock is not skewed', function() {
         var request, response;
         helpers.mockHttpResponse(403, {}, '');
-        service.config.systemClockOffset = 0;
+        service = new MockService({
+            maxRetries: 3,
+            correctClockSkew: false
+        });
         request = makeRequest();
         request.on('extractError', function(resp) {
           return resp.error = {
