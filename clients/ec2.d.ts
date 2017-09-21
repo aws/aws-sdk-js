@@ -236,6 +236,14 @@ declare class EC2 extends Service {
    */
   confirmProductInstance(callback?: (err: AWSError, data: EC2.Types.ConfirmProductInstanceResult) => void): Request<EC2.Types.ConfirmProductInstanceResult, AWSError>;
   /**
+   * Copies the specified Amazon FPGA Image (AFI) to the current region.
+   */
+  copyFpgaImage(params: EC2.Types.CopyFpgaImageRequest, callback?: (err: AWSError, data: EC2.Types.CopyFpgaImageResult) => void): Request<EC2.Types.CopyFpgaImageResult, AWSError>;
+  /**
+   * Copies the specified Amazon FPGA Image (AFI) to the current region.
+   */
+  copyFpgaImage(callback?: (err: AWSError, data: EC2.Types.CopyFpgaImageResult) => void): Request<EC2.Types.CopyFpgaImageResult, AWSError>;
+  /**
    * Initiates the copy of an AMI from the specified source region to the current region. You specify the destination region by using its endpoint when making the request. For more information about the prerequisites and limits when copying an AMI, see Copying an AMI in the Amazon Elastic Compute Cloud User Guide.
    */
   copyImage(params: EC2.Types.CopyImageRequest, callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
@@ -532,6 +540,14 @@ declare class EC2 extends Service {
    */
   deleteFlowLogs(callback?: (err: AWSError, data: EC2.Types.DeleteFlowLogsResult) => void): Request<EC2.Types.DeleteFlowLogsResult, AWSError>;
   /**
+   * Deletes the specified Amazon FPGA Image (AFI).
+   */
+  deleteFpgaImage(params: EC2.Types.DeleteFpgaImageRequest, callback?: (err: AWSError, data: EC2.Types.DeleteFpgaImageResult) => void): Request<EC2.Types.DeleteFpgaImageResult, AWSError>;
+  /**
+   * Deletes the specified Amazon FPGA Image (AFI).
+   */
+  deleteFpgaImage(callback?: (err: AWSError, data: EC2.Types.DeleteFpgaImageResult) => void): Request<EC2.Types.DeleteFpgaImageResult, AWSError>;
+  /**
    * Deletes the specified Internet gateway. You must detach the Internet gateway from the VPC before you can delete it.
    */
   deleteInternetGateway(params: EC2.Types.DeleteInternetGatewayRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -811,6 +827,14 @@ declare class EC2 extends Service {
    * Describes one or more flow logs. To view the information in your flow logs (the log streams for the network interfaces), you must use the CloudWatch Logs console or the CloudWatch Logs API.
    */
   describeFlowLogs(callback?: (err: AWSError, data: EC2.Types.DescribeFlowLogsResult) => void): Request<EC2.Types.DescribeFlowLogsResult, AWSError>;
+  /**
+   * Describes the specified attribute of the specified Amazon FPGA Image (AFI).
+   */
+  describeFpgaImageAttribute(params: EC2.Types.DescribeFpgaImageAttributeRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFpgaImageAttributeResult) => void): Request<EC2.Types.DescribeFpgaImageAttributeResult, AWSError>;
+  /**
+   * Describes the specified attribute of the specified Amazon FPGA Image (AFI).
+   */
+  describeFpgaImageAttribute(callback?: (err: AWSError, data: EC2.Types.DescribeFpgaImageAttributeResult) => void): Request<EC2.Types.DescribeFpgaImageAttributeResult, AWSError>;
   /**
    * Describes one or more available Amazon FPGA Images (AFIs). These include public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for which you have load permissions.
    */
@@ -1436,11 +1460,11 @@ declare class EC2 extends Service {
    */
   getHostReservationPurchasePreview(callback?: (err: AWSError, data: EC2.Types.GetHostReservationPurchasePreviewResult) => void): Request<EC2.Types.GetHostReservationPurchasePreviewResult, AWSError>;
   /**
-   * Retrieves the encrypted administrator password for an instance running Windows. The Windows password is generated at boot if the EC2Config service plugin, Ec2SetPassword, is enabled. This usually only happens the first time an AMI is launched, and then Ec2SetPassword is automatically disabled. The password is not generated for rebundled AMIs unless Ec2SetPassword is enabled before bundling. The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file. Password generation and encryption takes a few moments. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.
+   * Retrieves the encrypted administrator password for a running Windows instance. The Windows password is generated at boot by the EC2Config service or EC2Launch scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see EC2Config and EC2Launch in the Amazon Elastic Compute Cloud User Guide. For the EC2Config service, the password is not generated for rebundled AMIs unless Ec2SetPassword is enabled before bundling. The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file. When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it's available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.
    */
   getPasswordData(params: EC2.Types.GetPasswordDataRequest, callback?: (err: AWSError, data: EC2.Types.GetPasswordDataResult) => void): Request<EC2.Types.GetPasswordDataResult, AWSError>;
   /**
-   * Retrieves the encrypted administrator password for an instance running Windows. The Windows password is generated at boot if the EC2Config service plugin, Ec2SetPassword, is enabled. This usually only happens the first time an AMI is launched, and then Ec2SetPassword is automatically disabled. The password is not generated for rebundled AMIs unless Ec2SetPassword is enabled before bundling. The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file. Password generation and encryption takes a few moments. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.
+   * Retrieves the encrypted administrator password for a running Windows instance. The Windows password is generated at boot by the EC2Config service or EC2Launch scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see EC2Config and EC2Launch in the Amazon Elastic Compute Cloud User Guide. For the EC2Config service, the password is not generated for rebundled AMIs unless Ec2SetPassword is enabled before bundling. The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file. When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it's available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.
    */
   getPasswordData(callback?: (err: AWSError, data: EC2.Types.GetPasswordDataResult) => void): Request<EC2.Types.GetPasswordDataResult, AWSError>;
   /**
@@ -1491,6 +1515,14 @@ declare class EC2 extends Service {
    * Creates an import volume task using metadata from the specified disk image.For more information, see Importing Disks to Amazon EBS. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
+  /**
+   * Modifies the specified attribute of the specified Amazon FPGA Image (AFI).
+   */
+  modifyFpgaImageAttribute(params: EC2.Types.ModifyFpgaImageAttributeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyFpgaImageAttributeResult) => void): Request<EC2.Types.ModifyFpgaImageAttributeResult, AWSError>;
+  /**
+   * Modifies the specified attribute of the specified Amazon FPGA Image (AFI).
+   */
+  modifyFpgaImageAttribute(callback?: (err: AWSError, data: EC2.Types.ModifyFpgaImageAttributeResult) => void): Request<EC2.Types.ModifyFpgaImageAttributeResult, AWSError>;
   /**
    * Modify the auto-placement setting of a Dedicated Host. When auto-placement is enabled, AWS will place instances that you launch with a tenancy of host, but without targeting a specific host ID, onto any available Dedicated Host in your account which has auto-placement enabled. When auto-placement is disabled, you need to provide a host ID if you want the instance to launch onto a specific host. If no host ID is provided, the instance will be launched onto a suitable host which has auto-placement enabled.
    */
@@ -1763,6 +1795,14 @@ declare class EC2 extends Service {
    * Creates a Spot instance request. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot Instance capacity and current Spot instance requests. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.
    */
   requestSpotInstances(callback?: (err: AWSError, data: EC2.Types.RequestSpotInstancesResult) => void): Request<EC2.Types.RequestSpotInstancesResult, AWSError>;
+  /**
+   * Resets the specified attribute of the specified Amazon FPGA Image (AFI) to its default value. You can only reset the load permission attribute.
+   */
+  resetFpgaImageAttribute(params: EC2.Types.ResetFpgaImageAttributeRequest, callback?: (err: AWSError, data: EC2.Types.ResetFpgaImageAttributeResult) => void): Request<EC2.Types.ResetFpgaImageAttributeResult, AWSError>;
+  /**
+   * Resets the specified attribute of the specified Amazon FPGA Image (AFI) to its default value. You can only reset the load permission attribute.
+   */
+  resetFpgaImageAttribute(callback?: (err: AWSError, data: EC2.Types.ResetFpgaImageAttributeResult) => void): Request<EC2.Types.ResetFpgaImageAttributeResult, AWSError>;
   /**
    * Resets an attribute of an AMI to its default value.  The productCodes attribute can't be reset. 
    */
@@ -3101,6 +3141,38 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type ConversionTaskState = "active"|"cancelling"|"cancelled"|"completed"|string;
+  export interface CopyFpgaImageRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the source AFI.
+     */
+    SourceFpgaImageId: String;
+    /**
+     * The description for the new AFI.
+     */
+    Description?: String;
+    /**
+     * The name for the new AFI. The default is the name of the source AFI.
+     */
+    Name?: String;
+    /**
+     * The region that contains the source AFI.
+     */
+    SourceRegion: String;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CopyFpgaImageResult {
+    /**
+     * The ID of the new AFI.
+     */
+    FpgaImageId?: String;
+  }
   export interface CopyImageRequest {
     /**
      * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see How to Ensure Idempotency in the Amazon Elastic Compute Cloud User Guide.
@@ -4047,6 +4119,22 @@ declare namespace EC2 {
      */
     Unsuccessful?: UnsuccessfulItemSet;
   }
+  export interface DeleteFpgaImageRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the AFI.
+     */
+    FpgaImageId: String;
+  }
+  export interface DeleteFpgaImageResult {
+    /**
+     * Is true if the request succeeds, and an error otherwise.
+     */
+    Return?: Boolean;
+  }
   export interface DeleteInternetGatewayRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -4593,6 +4681,26 @@ declare namespace EC2 {
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: String;
+  }
+  export interface DescribeFpgaImageAttributeRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the AFI.
+     */
+    FpgaImageId: String;
+    /**
+     * The AFI attribute.
+     */
+    Attribute: FpgaImageAttributeName;
+  }
+  export interface DescribeFpgaImageAttributeResult {
+    /**
+     * Information about the attribute.
+     */
+    FpgaImageAttribute?: FpgaImageAttribute;
   }
   export interface DescribeFpgaImagesRequest {
     /**
@@ -6840,7 +6948,34 @@ declare namespace EC2 {
      * Any tags assigned to the AFI.
      */
     Tags?: TagList;
+    /**
+     * Indicates whether the AFI is public.
+     */
+    Public?: Boolean;
   }
+  export interface FpgaImageAttribute {
+    /**
+     * The ID of the AFI.
+     */
+    FpgaImageId?: String;
+    /**
+     * The name of the AFI.
+     */
+    Name?: String;
+    /**
+     * The description of the AFI.
+     */
+    Description?: String;
+    /**
+     * One or more load permissions.
+     */
+    LoadPermissions?: LoadPermissionList;
+    /**
+     * One or more product codes.
+     */
+    ProductCodes?: ProductCodeList;
+  }
+  export type FpgaImageAttributeName = "description"|"name"|"loadPermission"|"productCodes"|string;
   export type FpgaImageIdList = String[];
   export type FpgaImageList = FpgaImage[];
   export interface FpgaImageState {
@@ -6947,7 +7082,7 @@ declare namespace EC2 {
      */
     InstanceId?: String;
     /**
-     * The password of the instance.
+     * The password of the instance. Returns an empty string if the password is not available.
      */
     PasswordData?: String;
     /**
@@ -8592,8 +8727,88 @@ declare namespace EC2 {
   export type LaunchSpecsList = SpotFleetLaunchSpecification[];
   export type ListingState = "available"|"sold"|"cancelled"|"pending"|string;
   export type ListingStatus = "active"|"pending"|"cancelled"|"closed"|string;
+  export interface LoadPermission {
+    /**
+     * The AWS account ID.
+     */
+    UserId?: String;
+    /**
+     * The name of the group.
+     */
+    Group?: PermissionGroup;
+  }
+  export type LoadPermissionList = LoadPermission[];
+  export type LoadPermissionListRequest = LoadPermissionRequest[];
+  export interface LoadPermissionModifications {
+    /**
+     * The load permissions to add.
+     */
+    Add?: LoadPermissionListRequest;
+    /**
+     * The load permissions to remove.
+     */
+    Remove?: LoadPermissionListRequest;
+  }
+  export interface LoadPermissionRequest {
+    /**
+     * The name of the group.
+     */
+    Group?: PermissionGroup;
+    /**
+     * The AWS account ID.
+     */
+    UserId?: String;
+  }
   export type Long = number;
   export type MaxResults = number;
+  export interface ModifyFpgaImageAttributeRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the AFI.
+     */
+    FpgaImageId: String;
+    /**
+     * The name of the attribute.
+     */
+    Attribute?: FpgaImageAttributeName;
+    /**
+     * The operation type.
+     */
+    OperationType?: OperationType;
+    /**
+     * One or more AWS account IDs. This parameter is valid only when modifying the loadPermission attribute.
+     */
+    UserIds?: UserIdStringList;
+    /**
+     * One or more user groups. This parameter is valid only when modifying the loadPermission attribute.
+     */
+    UserGroups?: UserGroupStringList;
+    /**
+     * One or more product codes. After you add a product code to an AFI, it can't be removed. This parameter is valid only when modifying the productCodes attribute.
+     */
+    ProductCodes?: ProductCodeStringList;
+    /**
+     * The load permission for the AFI.
+     */
+    LoadPermission?: LoadPermissionModifications;
+    /**
+     * A description for the AFI.
+     */
+    Description?: String;
+    /**
+     * A name for the AFI.
+     */
+    Name?: String;
+  }
+  export interface ModifyFpgaImageAttributeResult {
+    /**
+     * Information about the attribute.
+     */
+    FpgaImageAttribute?: FpgaImageAttribute;
+  }
   export interface ModifyHostsRequest {
     /**
      * Specify whether to enable or disable auto-placement.
@@ -10564,6 +10779,27 @@ declare namespace EC2 {
   export type ReservedInstancesOfferingIdStringList = String[];
   export type ReservedInstancesOfferingList = ReservedInstancesOffering[];
   export type ReservedIntancesIds = ReservedInstancesId[];
+  export type ResetFpgaImageAttributeName = "loadPermission"|string;
+  export interface ResetFpgaImageAttributeRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the AFI.
+     */
+    FpgaImageId: String;
+    /**
+     * The attribute.
+     */
+    Attribute?: ResetFpgaImageAttributeName;
+  }
+  export interface ResetFpgaImageAttributeResult {
+    /**
+     * Is true if the request succeeds, and an error otherwise.
+     */
+    Return?: Boolean;
+  }
   export type ResetImageAttributeName = "launchPermission"|string;
   export interface ResetImageAttributeRequest {
     /**

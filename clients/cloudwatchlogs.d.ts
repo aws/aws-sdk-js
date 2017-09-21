@@ -12,6 +12,14 @@ declare class CloudWatchLogs extends Service {
   constructor(options?: CloudWatchLogs.Types.ClientConfiguration)
   config: Config & CloudWatchLogs.Types.ClientConfiguration;
   /**
+   * Associates the specified AWS Key Management Service (AWS KMS) customer master key (CMK) with the specified log group. Associating an AWS KMS CMK with a log group overrides any existing associations between the log group and a CMK. After a CMK is associated with a log group, all newly ingested data for the log group is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested. Note that it can take up to 5 minutes for this operation to take effect. If you attempt to associate a CMK with a log group but the CMK does not exist or the CMK is disabled, you will receive an InvalidParameterException error. 
+   */
+  associateKmsKey(params: CloudWatchLogs.Types.AssociateKmsKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates the specified AWS Key Management Service (AWS KMS) customer master key (CMK) with the specified log group. Associating an AWS KMS CMK with a log group overrides any existing associations between the log group and a CMK. After a CMK is associated with a log group, all newly ingested data for the log group is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested. Note that it can take up to 5 minutes for this operation to take effect. If you attempt to associate a CMK with a log group but the CMK does not exist or the CMK is disabled, you will receive an InvalidParameterException error. 
+   */
+  associateKmsKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Cancels the specified export task. The task must be in the PENDING or RUNNING state.
    */
   cancelExportTask(params: CloudWatchLogs.Types.CancelExportTaskRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -28,11 +36,11 @@ declare class CloudWatchLogs extends Service {
    */
   createExportTask(callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateExportTaskResponse) => void): Request<CloudWatchLogs.Types.CreateExportTaskResponse, AWSError>;
   /**
-   * Creates a log group with the specified name. You can create up to 5000 log groups per account. You must use the following guidelines when naming a log group:   Log group names must be unique within a region for an AWS account.   Log group names can be between 1 and 512 characters long.   Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).  
+   * Creates a log group with the specified name. You can create up to 5000 log groups per account. You must use the following guidelines when naming a log group:   Log group names must be unique within a region for an AWS account.   Log group names can be between 1 and 512 characters long.   Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).   If you associate a AWS Key Management Service (AWS KMS) customer master key (CMK) with the log group, ingested data is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested. If you attempt to associate a CMK with the log group but the CMK does not exist or the CMK is disabled, you will receive an InvalidParameterException error. 
    */
   createLogGroup(params: CloudWatchLogs.Types.CreateLogGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a log group with the specified name. You can create up to 5000 log groups per account. You must use the following guidelines when naming a log group:   Log group names must be unique within a region for an AWS account.   Log group names can be between 1 and 512 characters long.   Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).  
+   * Creates a log group with the specified name. You can create up to 5000 log groups per account. You must use the following guidelines when naming a log group:   Log group names must be unique within a region for an AWS account.   Log group names can be between 1 and 512 characters long.   Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).   If you associate a AWS Key Management Service (AWS KMS) customer master key (CMK) with the log group, ingested data is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested. If you attempt to associate a CMK with the log group but the CMK does not exist or the CMK is disabled, you will receive an InvalidParameterException error. 
    */
   createLogGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -132,11 +140,11 @@ declare class CloudWatchLogs extends Service {
    */
   describeLogStreams(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeLogStreamsResponse) => void): Request<CloudWatchLogs.Types.DescribeLogStreamsResponse, AWSError>;
   /**
-   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, and metric namespace. The results are ASCII-sorted by filter name.
+   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, or metric namespace. The results are ASCII-sorted by filter name.
    */
   describeMetricFilters(params: CloudWatchLogs.Types.DescribeMetricFiltersRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeMetricFiltersResponse) => void): Request<CloudWatchLogs.Types.DescribeMetricFiltersResponse, AWSError>;
   /**
-   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, and metric namespace. The results are ASCII-sorted by filter name.
+   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, or metric namespace. The results are ASCII-sorted by filter name.
    */
   describeMetricFilters(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeMetricFiltersResponse) => void): Request<CloudWatchLogs.Types.DescribeMetricFiltersResponse, AWSError>;
   /**
@@ -156,6 +164,14 @@ declare class CloudWatchLogs extends Service {
    */
   describeSubscriptionFilters(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeSubscriptionFiltersResponse) => void): Request<CloudWatchLogs.Types.DescribeSubscriptionFiltersResponse, AWSError>;
   /**
+   * Disassociates the associated AWS Key Management Service (AWS KMS) customer master key (CMK) from the specified log group. After the AWS KMS CMK is disassociated from the log group, AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested. Note that it can take up to 5 minutes for this operation to take effect.
+   */
+  disassociateKmsKey(params: CloudWatchLogs.Types.DisassociateKmsKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociates the associated AWS Key Management Service (AWS KMS) customer master key (CMK) from the specified log group. After the AWS KMS CMK is disassociated from the log group, AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested. Note that it can take up to 5 minutes for this operation to take effect.
+   */
+  disassociateKmsKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Lists log events from the specified log group. You can list all the log events or filter the results using a filter pattern, a time range, and the name of the log stream. By default, this operation returns as many log events as can fit in 1 MB (up to 10,000 log events), or all the events found within the time range that you specify. If the results include a token, then there are more log events available, and you can get additional results by specifying the token in a subsequent call.
    */
   filterLogEvents(params: CloudWatchLogs.Types.FilterLogEventsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.FilterLogEventsResponse) => void): Request<CloudWatchLogs.Types.FilterLogEventsResponse, AWSError>;
@@ -164,19 +180,19 @@ declare class CloudWatchLogs extends Service {
    */
   filterLogEvents(callback?: (err: AWSError, data: CloudWatchLogs.Types.FilterLogEventsResponse) => void): Request<CloudWatchLogs.Types.FilterLogEventsResponse, AWSError>;
   /**
-   * Lists log events from the specified log stream. You can list all the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1 MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call.
+   * Lists log events from the specified log stream. You can list all the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call.
    */
   getLogEvents(params: CloudWatchLogs.Types.GetLogEventsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogEventsResponse) => void): Request<CloudWatchLogs.Types.GetLogEventsResponse, AWSError>;
   /**
-   * Lists log events from the specified log stream. You can list all the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1 MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call.
+   * Lists log events from the specified log stream. You can list all the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call.
    */
   getLogEvents(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogEventsResponse) => void): Request<CloudWatchLogs.Types.GetLogEventsResponse, AWSError>;
   /**
-   * Lists the tags for the specified log group. To add tags, use TagLogGroup. To remove tags, use UntagLogGroup.
+   * Lists the tags for the specified log group.
    */
   listTagsLogGroup(params: CloudWatchLogs.Types.ListTagsLogGroupRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsLogGroupResponse) => void): Request<CloudWatchLogs.Types.ListTagsLogGroupResponse, AWSError>;
   /**
-   * Lists the tags for the specified log group. To add tags, use TagLogGroup. To remove tags, use UntagLogGroup.
+   * Lists the tags for the specified log group.
    */
   listTagsLogGroup(callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsLogGroupResponse) => void): Request<CloudWatchLogs.Types.ListTagsLogGroupResponse, AWSError>;
   /**
@@ -263,6 +279,16 @@ declare class CloudWatchLogs extends Service {
 declare namespace CloudWatchLogs {
   export type AccessPolicy = string;
   export type Arn = string;
+  export interface AssociateKmsKeyRequest {
+    /**
+     * The name of the log group.
+     */
+    logGroupName: LogGroupName;
+    /**
+     * The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see Amazon Resource Names - AWS Key Management Service (AWS KMS).
+     */
+    kmsKeyId: KmsKeyId;
+  }
   export interface CancelExportTaskRequest {
     /**
      * The ID of the export task.
@@ -310,6 +336,10 @@ declare namespace CloudWatchLogs {
      * The name of the log group.
      */
     logGroupName: LogGroupName;
+    /**
+     * The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see Amazon Resource Names - AWS Key Management Service (AWS KMS).
+     */
+    kmsKeyId?: KmsKeyId;
     /**
      * The key-value pairs to use for the tags.
      */
@@ -500,9 +530,6 @@ declare namespace CloudWatchLogs {
      * The maximum number of items returned. If you don't specify a value, the default is up to 50 items.
      */
     limit?: DescribeLimit;
-    /**
-     * The name of the CloudWatch metric.
-     */
     metricName?: MetricName;
     /**
      * The namespace of the CloudWatch metric.
@@ -584,6 +611,12 @@ declare namespace CloudWatchLogs {
   export type DestinationArn = string;
   export type DestinationName = string;
   export type Destinations = Destination[];
+  export interface DisassociateKmsKeyRequest {
+    /**
+     * The name of the log group.
+     */
+    logGroupName: LogGroupName;
+  }
   export type Distribution = "Random"|"ByLogStream"|string;
   export type EventId = string;
   export type EventMessage = string;
@@ -786,6 +819,7 @@ declare namespace CloudWatchLogs {
   export type InputLogEvents = InputLogEvent[];
   export type InputLogStreamNames = LogStreamName[];
   export type Interleaved = boolean;
+  export type KmsKeyId = string;
   export interface ListTagsLogGroupRequest {
     /**
      * The name of the log group.
@@ -794,7 +828,7 @@ declare namespace CloudWatchLogs {
   }
   export interface ListTagsLogGroupResponse {
     /**
-     * The tags.
+     * The tags for the log group.
      */
     tags?: Tags;
   }
@@ -821,6 +855,10 @@ declare namespace CloudWatchLogs {
      * The number of bytes stored.
      */
     storedBytes?: StoredBytes;
+    /**
+     * The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
+     */
+    kmsKeyId?: KmsKeyId;
   }
   export type LogGroupName = string;
   export type LogGroups = LogGroup[];
@@ -1058,7 +1096,7 @@ declare namespace CloudWatchLogs {
      */
     roleArn?: RoleArn;
     /**
-     * The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream. By default, log data is grouped by log stream. For a more even distribution, you can group log data randomly.
+     * The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. 
      */
     distribution?: Distribution;
   }
@@ -1124,9 +1162,6 @@ declare namespace CloudWatchLogs {
      * 
      */
     roleArn?: RoleArn;
-    /**
-     * The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream.
-     */
     distribution?: Distribution;
     /**
      * The creation time of the subscription filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.

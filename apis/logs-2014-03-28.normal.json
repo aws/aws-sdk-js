@@ -11,6 +11,21 @@
     "uid":"logs-2014-03-28"
   },
   "operations":{
+    "AssociateKmsKey":{
+      "name":"AssociateKmsKey",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateKmsKeyRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Associates the specified AWS Key Management Service (AWS KMS) customer master key (CMK) with the specified log group.</p> <p>Associating an AWS KMS CMK with a log group overrides any existing associations between the log group and a CMK. After a CMK is associated with a log group, all newly ingested data for the log group is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested.</p> <p>Note that it can take up to 5 minutes for this operation to take effect.</p> <p>If you attempt to associate a CMK with a log group but the CMK does not exist or the CMK is disabled, you will receive an <code>InvalidParameterException</code> error. </p>"
+    },
     "CancelExportTask":{
       "name":"CancelExportTask",
       "http":{
@@ -58,7 +73,7 @@
         {"shape":"OperationAbortedException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Creates a log group with the specified name.</p> <p>You can create up to 5000 log groups per account.</p> <p>You must use the following guidelines when naming a log group:</p> <ul> <li> <p>Log group names must be unique within a region for an AWS account.</p> </li> <li> <p>Log group names can be between 1 and 512 characters long.</p> </li> <li> <p>Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).</p> </li> </ul>"
+      "documentation":"<p>Creates a log group with the specified name.</p> <p>You can create up to 5000 log groups per account.</p> <p>You must use the following guidelines when naming a log group:</p> <ul> <li> <p>Log group names must be unique within a region for an AWS account.</p> </li> <li> <p>Log group names can be between 1 and 512 characters long.</p> </li> <li> <p>Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).</p> </li> </ul> <p>If you associate a AWS Key Management Service (AWS KMS) customer master key (CMK) with the log group, ingested data is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested.</p> <p>If you attempt to associate a CMK with the log group but the CMK does not exist or the CMK is disabled, you will receive an <code>InvalidParameterException</code> error. </p>"
     },
     "CreateLogStream":{
       "name":"CreateLogStream",
@@ -249,7 +264,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, and metric namespace. The results are ASCII-sorted by filter name.</p>"
+      "documentation":"<p>Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, or metric namespace. The results are ASCII-sorted by filter name.</p>"
     },
     "DescribeResourcePolicies":{
       "name":"DescribeResourcePolicies",
@@ -280,6 +295,21 @@
       ],
       "documentation":"<p>Lists the subscription filters for the specified log group. You can list all the subscription filters or filter the results by prefix. The results are ASCII-sorted by filter name.</p>"
     },
+    "DisassociateKmsKey":{
+      "name":"DisassociateKmsKey",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateKmsKeyRequest"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationAbortedException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Disassociates the associated AWS Key Management Service (AWS KMS) customer master key (CMK) from the specified log group.</p> <p>After the AWS KMS CMK is disassociated from the log group, AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested.</p> <p>Note that it can take up to 5 minutes for this operation to take effect.</p>"
+    },
     "FilterLogEvents":{
       "name":"FilterLogEvents",
       "http":{
@@ -308,7 +338,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Lists log events from the specified log stream. You can list all the log events or filter using a time range.</p> <p>By default, this operation returns as many log events as can fit in a response size of 1 MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call.</p>"
+      "documentation":"<p>Lists log events from the specified log stream. You can list all the log events or filter using a time range.</p> <p>By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call.</p>"
     },
     "ListTagsLogGroup":{
       "name":"ListTagsLogGroup",
@@ -322,7 +352,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Lists the tags for the specified log group.</p> <p>To add tags, use <a>TagLogGroup</a>. To remove tags, use <a>UntagLogGroup</a>.</p>"
+      "documentation":"<p>Lists the tags for the specified log group.</p>"
     },
     "PutDestination":{
       "name":"PutDestination",
@@ -478,6 +508,23 @@
       "min":1
     },
     "Arn":{"type":"string"},
+    "AssociateKmsKeyRequest":{
+      "type":"structure",
+      "required":[
+        "logGroupName",
+        "kmsKeyId"
+      ],
+      "members":{
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group.</p>"
+        },
+        "kmsKeyId":{
+          "shape":"KmsKeyId",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms\">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.</p>"
+        }
+      }
+    },
     "CancelExportTaskRequest":{
       "type":"structure",
       "required":["taskId"],
@@ -543,6 +590,10 @@
         "logGroupName":{
           "shape":"LogGroupName",
           "documentation":"<p>The name of the log group.</p>"
+        },
+        "kmsKeyId":{
+          "shape":"KmsKeyId",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms\">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.</p>"
         },
         "tags":{
           "shape":"Tags",
@@ -820,10 +871,7 @@
           "shape":"DescribeLimit",
           "documentation":"<p>The maximum number of items returned. If you don't specify a value, the default is up to 50 items.</p>"
         },
-        "metricName":{
-          "shape":"MetricName",
-          "documentation":"<p>The name of the CloudWatch metric.</p>"
-        },
+        "metricName":{"shape":"MetricName"},
         "metricNamespace":{
           "shape":"MetricNamespace",
           "documentation":"<p>The namespace of the CloudWatch metric.</p>"
@@ -936,8 +984,19 @@
       "type":"list",
       "member":{"shape":"Destination"}
     },
+    "DisassociateKmsKeyRequest":{
+      "type":"structure",
+      "required":["logGroupName"],
+      "members":{
+        "logGroupName":{
+          "shape":"LogGroupName",
+          "documentation":"<p>The name of the log group.</p>"
+        }
+      }
+    },
     "Distribution":{
       "type":"string",
+      "documentation":"<p>The method used to distribute log data to the destination, which can be either random or grouped by log stream.</p>",
       "enum":[
         "Random",
         "ByLogStream"
@@ -1266,6 +1325,10 @@
       "documentation":"<p>The sequence token is not valid.</p>",
       "exception":true
     },
+    "KmsKeyId":{
+      "type":"string",
+      "max":256
+    },
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -1288,7 +1351,7 @@
       "members":{
         "tags":{
           "shape":"Tags",
-          "documentation":"<p>The tags.</p>"
+          "documentation":"<p>The tags for the log group.</p>"
         }
       }
     },
@@ -1316,6 +1379,10 @@
         "storedBytes":{
           "shape":"StoredBytes",
           "documentation":"<p>The number of bytes stored.</p>"
+        },
+        "kmsKeyId":{
+          "shape":"KmsKeyId",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.</p>"
         }
       },
       "documentation":"<p>Represents a log group.</p>"
@@ -1705,7 +1772,7 @@
         },
         "distribution":{
           "shape":"Distribution",
-          "documentation":"<p>The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream. By default, log data is grouped by log stream. For a more even distribution, you can group log data randomly.</p>"
+          "documentation":"<p>The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. </p>"
         }
       }
     },
@@ -1822,10 +1889,7 @@
           "shape":"RoleArn",
           "documentation":"<p/>"
         },
-        "distribution":{
-          "shape":"Distribution",
-          "documentation":"<p>The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream.</p>"
-        },
+        "distribution":{"shape":"Distribution"},
         "creationTime":{
           "shape":"Timestamp",
           "documentation":"<p>The creation time of the subscription filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.</p>"

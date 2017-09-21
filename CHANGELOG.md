@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.120.0-->
+<!--LATEST=2.121.0-->
 <!--ENTRYINSERT-->
+
+## 2.121.0
+* feature: Budgets: Including "DuplicateRecordException" in UpdateNotification and UpdateSubscriber. 
+* feature: CloudWatchLogs: Adds support for associating LogGroups with KMS Keys.
+* feature: EC2: Add EC2 APIs to copy Amazon FPGA Images (AFIs) within the same region and across multiple regions, delete AFIs, and modify AFI attributes. AFI attributes include name, description and granting/denying other AWS accounts to load the AFI.
 
 ## 2.120.0
 * feature: AppStream: API updates for supporting On-Demand fleets.

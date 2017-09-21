@@ -284,6 +284,16 @@
       "output":{"shape":"ConfirmProductInstanceResult"},
       "documentation":"<p>Determines whether a product code is associated with an instance. This action can only be used by the owner of the product code. It is useful when a product code owner needs to verify whether another user's instance is eligible for support.</p>"
     },
+    "CopyFpgaImage":{
+      "name":"CopyFpgaImage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyFpgaImageRequest"},
+      "output":{"shape":"CopyFpgaImageResult"},
+      "documentation":"<p>Copies the specified Amazon FPGA Image (AFI) to the current region.</p>"
+    },
     "CopyImage":{
       "name":"CopyImage",
       "http":{
@@ -648,6 +658,16 @@
       "output":{"shape":"DeleteFlowLogsResult"},
       "documentation":"<p>Deletes one or more flow logs.</p>"
     },
+    "DeleteFpgaImage":{
+      "name":"DeleteFpgaImage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteFpgaImageRequest"},
+      "output":{"shape":"DeleteFpgaImageResult"},
+      "documentation":"<p>Deletes the specified Amazon FPGA Image (AFI).</p>"
+    },
     "DeleteInternetGateway":{
       "name":"DeleteInternetGateway",
       "http":{
@@ -978,6 +998,16 @@
       "input":{"shape":"DescribeFlowLogsRequest"},
       "output":{"shape":"DescribeFlowLogsResult"},
       "documentation":"<p>Describes one or more flow logs. To view the information in your flow logs (the log streams for the network interfaces), you must use the CloudWatch Logs console or the CloudWatch Logs API.</p>"
+    },
+    "DescribeFpgaImageAttribute":{
+      "name":"DescribeFpgaImageAttribute",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeFpgaImageAttributeRequest"},
+      "output":{"shape":"DescribeFpgaImageAttributeResult"},
+      "documentation":"<p>Describes the specified attribute of the specified Amazon FPGA Image (AFI).</p>"
     },
     "DescribeFpgaImages":{
       "name":"DescribeFpgaImages",
@@ -1759,7 +1789,7 @@
       },
       "input":{"shape":"GetPasswordDataRequest"},
       "output":{"shape":"GetPasswordDataResult"},
-      "documentation":"<p>Retrieves the encrypted administrator password for an instance running Windows.</p> <p>The Windows password is generated at boot if the <code>EC2Config</code> service plugin, <code>Ec2SetPassword</code>, is enabled. This usually only happens the first time an AMI is launched, and then <code>Ec2SetPassword</code> is automatically disabled. The password is not generated for rebundled AMIs unless <code>Ec2SetPassword</code> is enabled before bundling.</p> <p>The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file.</p> <p>Password generation and encryption takes a few moments. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.</p>"
+      "documentation":"<p>Retrieves the encrypted administrator password for a running Windows instance.</p> <p>The Windows password is generated at boot by the <code>EC2Config</code> service or <code>EC2Launch</code> scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html\">EC2Config</a> and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html\">EC2Launch</a> in the Amazon Elastic Compute Cloud User Guide.</p> <p>For the <code>EC2Config</code> service, the password is not generated for rebundled AMIs unless <code>Ec2SetPassword</code> is enabled before bundling.</p> <p>The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file.</p> <p>When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it's available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.</p>"
     },
     "GetReservedInstancesExchangeQuote":{
       "name":"GetReservedInstancesExchangeQuote",
@@ -1820,6 +1850,16 @@
       "input":{"shape":"ImportVolumeRequest"},
       "output":{"shape":"ImportVolumeResult"},
       "documentation":"<p>Creates an import volume task using metadata from the specified disk image.For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/importing-your-volumes-into-amazon-ebs.html\">Importing Disks to Amazon EBS</a>.</p> <p>For information about the import manifest referenced by this API action, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
+    },
+    "ModifyFpgaImageAttribute":{
+      "name":"ModifyFpgaImageAttribute",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyFpgaImageAttributeRequest"},
+      "output":{"shape":"ModifyFpgaImageAttributeResult"},
+      "documentation":"<p>Modifies the specified attribute of the specified Amazon FPGA Image (AFI).</p>"
     },
     "ModifyHosts":{
       "name":"ModifyHosts",
@@ -2146,6 +2186,16 @@
       "input":{"shape":"RequestSpotInstancesRequest"},
       "output":{"shape":"RequestSpotInstancesResult"},
       "documentation":"<p>Creates a Spot instance request. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot Instance capacity and current Spot instance requests. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html\">Spot Instance Requests</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "ResetFpgaImageAttribute":{
+      "name":"ResetFpgaImageAttribute",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ResetFpgaImageAttributeRequest"},
+      "output":{"shape":"ResetFpgaImageAttributeResult"},
+      "documentation":"<p>Resets the specified attribute of the specified Amazon FPGA Image (AFI) to its default value. You can only reset the load permission attribute.</p>"
     },
     "ResetImageAttribute":{
       "name":"ResetImageAttribute",
@@ -4022,6 +4072,49 @@
         "completed"
       ]
     },
+    "CopyFpgaImageRequest":{
+      "type":"structure",
+      "required":[
+        "SourceFpgaImageId",
+        "SourceRegion"
+      ],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "SourceFpgaImageId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the source AFI.</p>"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>The description for the new AFI.</p>"
+        },
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>The name for the new AFI. The default is the name of the source AFI.</p>"
+        },
+        "SourceRegion":{
+          "shape":"String",
+          "documentation":"<p>The region that contains the source AFI.</p>"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "documentation":"<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>"
+        }
+      }
+    },
+    "CopyFpgaImageResult":{
+      "type":"structure",
+      "members":{
+        "FpgaImageId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the new AFI.</p>",
+          "locationName":"fpgaImageId"
+        }
+      }
+    },
     "CopyImageRequest":{
       "type":"structure",
       "required":[
@@ -5488,6 +5581,30 @@
       },
       "documentation":"<p>Contains the output of DeleteFlowLogs.</p>"
     },
+    "DeleteFpgaImageRequest":{
+      "type":"structure",
+      "required":["FpgaImageId"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "FpgaImageId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the AFI.</p>"
+        }
+      }
+    },
+    "DeleteFpgaImageResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>",
+          "locationName":"return"
+        }
+      }
+    },
     "DeleteInternetGatewayRequest":{
       "type":"structure",
       "required":["InternetGatewayId"],
@@ -6353,6 +6470,37 @@
         }
       },
       "documentation":"<p>Contains the output of DescribeFlowLogs.</p>"
+    },
+    "DescribeFpgaImageAttributeRequest":{
+      "type":"structure",
+      "required":[
+        "FpgaImageId",
+        "Attribute"
+      ],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "FpgaImageId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the AFI.</p>"
+        },
+        "Attribute":{
+          "shape":"FpgaImageAttributeName",
+          "documentation":"<p>The AFI attribute.</p>"
+        }
+      }
+    },
+    "DescribeFpgaImageAttributeResult":{
+      "type":"structure",
+      "members":{
+        "FpgaImageAttribute":{
+          "shape":"FpgaImageAttribute",
+          "documentation":"<p>Information about the attribute.</p>",
+          "locationName":"fpgaImageAttribute"
+        }
+      }
     },
     "DescribeFpgaImagesRequest":{
       "type":"structure",
@@ -9842,9 +9990,54 @@
           "shape":"TagList",
           "documentation":"<p>Any tags assigned to the AFI.</p>",
           "locationName":"tags"
+        },
+        "Public":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether the AFI is public.</p>",
+          "locationName":"public"
         }
       },
       "documentation":"<p>Describes an Amazon FPGA image (AFI).</p>"
+    },
+    "FpgaImageAttribute":{
+      "type":"structure",
+      "members":{
+        "FpgaImageId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the AFI.</p>",
+          "locationName":"fpgaImageId"
+        },
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>The name of the AFI.</p>",
+          "locationName":"name"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>The description of the AFI.</p>",
+          "locationName":"description"
+        },
+        "LoadPermissions":{
+          "shape":"LoadPermissionList",
+          "documentation":"<p>One or more load permissions.</p>",
+          "locationName":"loadPermissions"
+        },
+        "ProductCodes":{
+          "shape":"ProductCodeList",
+          "documentation":"<p>One or more product codes.</p>",
+          "locationName":"productCodes"
+        }
+      },
+      "documentation":"<p>Describes an Amazon FPGA image (AFI) attribute.</p>"
+    },
+    "FpgaImageAttributeName":{
+      "type":"string",
+      "enum":[
+        "description",
+        "name",
+        "loadPermission",
+        "productCodes"
+      ]
     },
     "FpgaImageIdList":{
       "type":"list",
@@ -10029,7 +10222,7 @@
         },
         "PasswordData":{
           "shape":"String",
-          "documentation":"<p>The password of the instance.</p>",
+          "documentation":"<p>The password of the instance. Returns an empty string if the password is not available.</p>",
           "locationName":"passwordData"
         },
         "Timestamp":{
@@ -12787,11 +12980,128 @@
         "closed"
       ]
     },
+    "LoadPermission":{
+      "type":"structure",
+      "members":{
+        "UserId":{
+          "shape":"String",
+          "documentation":"<p>The AWS account ID.</p>",
+          "locationName":"userId"
+        },
+        "Group":{
+          "shape":"PermissionGroup",
+          "documentation":"<p>The name of the group.</p>",
+          "locationName":"group"
+        }
+      },
+      "documentation":"<p>Describes a load permission.</p>"
+    },
+    "LoadPermissionList":{
+      "type":"list",
+      "member":{
+        "shape":"LoadPermission",
+        "locationName":"item"
+      }
+    },
+    "LoadPermissionListRequest":{
+      "type":"list",
+      "member":{
+        "shape":"LoadPermissionRequest",
+        "locationName":"item"
+      }
+    },
+    "LoadPermissionModifications":{
+      "type":"structure",
+      "members":{
+        "Add":{
+          "shape":"LoadPermissionListRequest",
+          "documentation":"<p>The load permissions to add.</p>"
+        },
+        "Remove":{
+          "shape":"LoadPermissionListRequest",
+          "documentation":"<p>The load permissions to remove.</p>"
+        }
+      },
+      "documentation":"<p>Describes modifications to the load permissions of an Amazon FPGA image (AFI).</p>"
+    },
+    "LoadPermissionRequest":{
+      "type":"structure",
+      "members":{
+        "Group":{
+          "shape":"PermissionGroup",
+          "documentation":"<p>The name of the group.</p>"
+        },
+        "UserId":{
+          "shape":"String",
+          "documentation":"<p>The AWS account ID.</p>"
+        }
+      },
+      "documentation":"<p>Describes a load permission.</p>"
+    },
     "Long":{"type":"long"},
     "MaxResults":{
       "type":"integer",
       "max":255,
       "min":5
+    },
+    "ModifyFpgaImageAttributeRequest":{
+      "type":"structure",
+      "required":["FpgaImageId"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "FpgaImageId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the AFI.</p>"
+        },
+        "Attribute":{
+          "shape":"FpgaImageAttributeName",
+          "documentation":"<p>The name of the attribute.</p>"
+        },
+        "OperationType":{
+          "shape":"OperationType",
+          "documentation":"<p>The operation type.</p>"
+        },
+        "UserIds":{
+          "shape":"UserIdStringList",
+          "documentation":"<p>One or more AWS account IDs. This parameter is valid only when modifying the <code>loadPermission</code> attribute.</p>",
+          "locationName":"UserId"
+        },
+        "UserGroups":{
+          "shape":"UserGroupStringList",
+          "documentation":"<p>One or more user groups. This parameter is valid only when modifying the <code>loadPermission</code> attribute.</p>",
+          "locationName":"UserGroup"
+        },
+        "ProductCodes":{
+          "shape":"ProductCodeStringList",
+          "documentation":"<p>One or more product codes. After you add a product code to an AFI, it can't be removed. This parameter is valid only when modifying the <code>productCodes</code> attribute.</p>",
+          "locationName":"ProductCode"
+        },
+        "LoadPermission":{
+          "shape":"LoadPermissionModifications",
+          "documentation":"<p>The load permission for the AFI.</p>"
+        },
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A description for the AFI.</p>"
+        },
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>A name for the AFI.</p>"
+        }
+      }
+    },
+    "ModifyFpgaImageAttributeResult":{
+      "type":"structure",
+      "members":{
+        "FpgaImageAttribute":{
+          "shape":"FpgaImageAttribute",
+          "documentation":"<p>Information about the attribute.</p>",
+          "locationName":"fpgaImageAttribute"
+        }
+      }
     },
     "ModifyHostsRequest":{
       "type":"structure",
@@ -16071,6 +16381,38 @@
       "member":{
         "shape":"ReservedInstancesId",
         "locationName":"item"
+      }
+    },
+    "ResetFpgaImageAttributeName":{
+      "type":"string",
+      "enum":["loadPermission"]
+    },
+    "ResetFpgaImageAttributeRequest":{
+      "type":"structure",
+      "required":["FpgaImageId"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "FpgaImageId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the AFI.</p>"
+        },
+        "Attribute":{
+          "shape":"ResetFpgaImageAttributeName",
+          "documentation":"<p>The attribute.</p>"
+        }
+      }
+    },
+    "ResetFpgaImageAttributeResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "documentation":"<p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>",
+          "locationName":"return"
+        }
       }
     },
     "ResetImageAttributeName":{

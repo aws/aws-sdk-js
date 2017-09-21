@@ -199,7 +199,8 @@
       "errors":[
         {"shape":"InternalErrorException"},
         {"shape":"InvalidParameterException"},
-        {"shape":"NotFoundException"}
+        {"shape":"NotFoundException"},
+        {"shape":"DuplicateRecordException"}
       ],
       "documentation":"Update the information about a notification already created"
     },
@@ -214,7 +215,8 @@
       "errors":[
         {"shape":"InternalErrorException"},
         {"shape":"InvalidParameterException"},
-        {"shape":"NotFoundException"}
+        {"shape":"NotFoundException"},
+        {"shape":"DuplicateRecordException"}
       ],
       "documentation":"Update a subscriber"
     }
