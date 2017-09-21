@@ -211,7 +211,6 @@ class SharedExampleVisitor
       when 'float', 'double', 'bigdecimal' then 'FloatShape'
       when 'integer', 'long', 'short', 'biginteger' then 'IntegerShape'
       when 'string', 'character' then 'StringShape'
-      when 'base64' then 'Base64Shape'
       when 'binary', 'blob' then 'BinaryShape'
       else type
     end
@@ -432,13 +431,13 @@ class ExampleShapeVisitor
     "true || false"
   end
 
-  def visit_base64(node, required = false)
-    "new Buffer('...') || 'STRING_VALUE'"
-  end
-
   def visit_binary(node, required = false)
     value = "new Buffer('...') || 'STRING_VALUE'"
-    value += " || streamObject" if node['streaming']
+    if node['streaming']
+      value += " || streamObject"
+    else
+      value += " /* Strings will be Base-64 encoded on your behalf */"
+    end
     value
   end
   alias visit_blob visit_binary
@@ -480,7 +479,6 @@ class ShapeDocumentor
     when 'double' then 'Float'
     when 'bigdecimal' then 'Float'
     when 'boolean' then 'Boolean'
-    when 'base64' then 'Buffer, Typed Array, Blob, String'
     when 'binary' then 'Buffer, Typed Array, Blob, String'
     when 'blob' then 'Buffer, Typed Array, Blob, String'
     when 'timestamp' then 'Date'
