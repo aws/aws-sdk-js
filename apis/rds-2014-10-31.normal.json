@@ -1731,7 +1731,7 @@
           "shape": "DBSnapshotNotFoundFault"
         }
       ],
-      "documentation": "<p>Updates a manual DB snapshot, which can be encrypted or not encrypted, with a new engine version. You can update the engine version to either a new major or minor engine version. </p> <p>Amazon RDS supports upgrading a MySQL DB snapshot from MySQL 5.1 to MySQL 5.5.</p>"
+      "documentation": "<p>Updates a manual DB snapshot, which can be encrypted or not encrypted, with a new engine version. </p> <p>Amazon RDS supports upgrading DB snapshots for MySQL and Oracle. </p>"
     },
     "ModifyDBSnapshotAttribute": {
       "name": "ModifyDBSnapshotAttribute",
@@ -7152,10 +7152,11 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The engine version to update the DB snapshot to. </p>"
+          "documentation": "<p>The engine version to upgrade the DB snapshot to. </p> <p>The following are the database engines and engine versions that are available when you upgrade a DB snapshot. </p> <p> <b>MySQL</b> </p> <ul> <li> <p> <code>5.5.46</code> (supported for 5.1 DB snapshots)</p> </li> </ul> <p> <b>Oracle</b> </p> <ul> <li> <p> <code>12.1.0.2.v8</code> (supported for 12.1.0.1 DB snapshots)</p> </li> <li> <p> <code>11.2.0.4.v12</code> (supported for 11.2.0.2 DB snapshots)</p> </li> <li> <p> <code>11.2.0.4.v11</code> (supported for 11.2.0.3 DB snapshots)</p> </li> </ul>"
         },
         "OptionGroupName": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The option group to identify with the upgraded DB snapshot. </p> <p>You can specify this parameter when you upgrade an Oracle DB snapshot. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG\">Option Group Considerations</a>. </p>"
         }
       }
     },

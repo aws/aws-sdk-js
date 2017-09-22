@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.121.0-->
+<!--LATEST=2.122.0-->
 <!--ENTRYINSERT-->
+
+## 2.122.0
+* feature: ConfigService: AWS Config support for DynamoDB tables and Auto Scaling resource types
+* feature: ECS: Amazon ECS users can now add and drop Linux capabilities to their containers through the use of docker's cap-add and cap-drop features. Customers can specify the capabilities they wish to add or drop for each container in their task definition. 
 
 ## 2.121.0
 * feature: Budgets: Including "DuplicateRecordException" in UpdateNotification and UpdateSubscriber. 

@@ -571,7 +571,7 @@
           "documentation":"<p>The time that the next delivery occurs.</p>"
         }
       },
-      "documentation":"<p>A list that contains the status of the delivery of either the snapshot or the configuration history to the specified Amazon S3 bucket.</p>"
+      "documentation":"<p>Provides status of the delivery of the snapshot or the configuration history to the specified Amazon S3 bucket. Also provides the status of notifications about the Amazon S3 delivery to the specified Amazon SNS topic.</p>"
     },
     "ConfigRule":{
       "type":"structure",
@@ -2035,7 +2035,12 @@
         "AWS::Redshift::ClusterSubnetGroup",
         "AWS::Redshift::EventSubscription",
         "AWS::CloudWatch::Alarm",
-        "AWS::CloudFormation::Stack"
+        "AWS::CloudFormation::Stack",
+        "AWS::DynamoDB::Table",
+        "AWS::AutoScaling::AutoScalingGroup",
+        "AWS::AutoScaling::LaunchConfiguration",
+        "AWS::AutoScaling::ScalingPolicy",
+        "AWS::AutoScaling::ScheduledAction"
       ]
     },
     "ResourceTypeList":{
@@ -2062,7 +2067,7 @@
         },
         "TagKey":{
           "shape":"StringWithCharLimit128",
-          "documentation":"<p>The tag key that is applied to only those AWS resources that you want you want to trigger an evaluation for the rule.</p>"
+          "documentation":"<p>The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.</p>"
         },
         "TagValue":{
           "shape":"StringWithCharLimit256",
