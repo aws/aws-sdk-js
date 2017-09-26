@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.122.0-->
+<!--LATEST=2.123.0-->
 <!--ENTRYINSERT-->
+
+## 2.123.0
+* feature: CloudFormation: You can now prevent a stack from being accidentally deleted by enabling termination protection on the stack. If you attempt to delete a stack with termination protection enabled, the deletion fails and the stack, including its status, remains unchanged. You can enable termination protection on a stack when you create it. Termination protection on stacks is disabled by default. After creation, you can set termination protection on a stack whose status is CREATE_COMPLETE, UPDATE_COMPLETE, or UPDATE_ROLLBACK_COMPLETE.
 
 ## 2.122.0
 * feature: ConfigService: AWS Config support for DynamoDB tables and Auto Scaling resource types
