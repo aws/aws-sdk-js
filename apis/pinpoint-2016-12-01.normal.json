@@ -3,10 +3,11 @@
     "apiVersion" : "2016-12-01",
     "endpointPrefix" : "pinpoint",
     "signingName" : "mobiletargeting",
-    "signatureVersion":"v4",
     "serviceFullName" : "Amazon Pinpoint",
+    "signatureVersion":"v4",
     "protocol" : "rest-json",
-    "jsonVersion" : "1.1"
+    "jsonVersion" : "1.1",
+    "uid":"pinpoint-2016-12-01"
   },
   "operations" : {
     "CreateApp" : {
@@ -35,7 +36,7 @@
       }, {
         "shape" : "TooManyRequestsException"
       } ],
-      "documentation" : "Used to create an app."
+      "documentation" : "Creates or updates an app."
     },
     "CreateCampaign" : {
       "name" : "CreateCampaign",
@@ -121,6 +122,34 @@
       } ],
       "documentation" : "Used to create or update a segment."
     },
+    "DeleteAdmChannel" : {
+      "name" : "DeleteAdmChannel",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/v1/apps/{application-id}/channels/adm",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "DeleteAdmChannelRequest"
+      },
+      "output" : {
+        "shape" : "DeleteAdmChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Delete an ADM channel"
+    },
     "DeleteApnsChannel" : {
       "name" : "DeleteApnsChannel",
       "http" : {
@@ -204,6 +233,34 @@
         "shape" : "TooManyRequestsException"
       } ],
       "documentation" : "Deletes an app."
+    },
+    "DeleteBaiduChannel" : {
+      "name" : "DeleteBaiduChannel",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/v1/apps/{application-id}/channels/baidu",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "DeleteBaiduChannelRequest"
+      },
+      "output" : {
+        "shape" : "DeleteBaiduChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Delete a BAIDU GCM channel"
     },
     "DeleteCampaign" : {
       "name" : "DeleteCampaign",
@@ -373,6 +430,34 @@
       } ],
       "documentation" : "Delete an SMS channel"
     },
+    "GetAdmChannel" : {
+      "name" : "GetAdmChannel",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/channels/adm",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetAdmChannelRequest"
+      },
+      "output" : {
+        "shape" : "GetAdmChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Get an ADM channel"
+    },
     "GetApnsChannel" : {
       "name" : "GetApnsChannel",
       "http" : {
@@ -512,6 +597,34 @@
         "shape" : "TooManyRequestsException"
       } ],
       "documentation" : "Returns information about your apps."
+    },
+    "GetBaiduChannel" : {
+      "name" : "GetBaiduChannel",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/channels/baidu",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetBaiduChannelRequest"
+      },
+      "output" : {
+        "shape" : "GetBaiduChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Get a BAIDU GCM channel"
     },
     "GetCampaign" : {
       "name" : "GetCampaign",
@@ -1045,6 +1158,62 @@
       } ],
       "documentation" : "Send a batch of messages"
     },
+    "SendUsersMessages" : {
+      "name" : "SendUsersMessages",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/v1/apps/{application-id}/users-messages",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "SendUsersMessagesRequest"
+      },
+      "output" : {
+        "shape" : "SendUsersMessagesResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Send a batch of messages to users"
+    },
+    "UpdateAdmChannel" : {
+      "name" : "UpdateAdmChannel",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/v1/apps/{application-id}/channels/adm",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "UpdateAdmChannelRequest"
+      },
+      "output" : {
+        "shape" : "UpdateAdmChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Update an ADM channel"
+    },
     "UpdateApnsChannel" : {
       "name" : "UpdateApnsChannel",
       "http" : {
@@ -1128,6 +1297,34 @@
         "shape" : "TooManyRequestsException"
       } ],
       "documentation" : "Used to update the settings for an app."
+    },
+    "UpdateBaiduChannel" : {
+      "name" : "UpdateBaiduChannel",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/v1/apps/{application-id}/channels/baidu",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "UpdateBaiduChannelRequest"
+      },
+      "output" : {
+        "shape" : "UpdateBaiduChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Update a BAIDU GCM channel"
     },
     "UpdateCampaign" : {
       "name" : "UpdateCampaign",
@@ -1327,12 +1524,154 @@
     }
   },
   "shapes" : {
+    "ADMChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ClientId" : {
+          "shape" : "__string",
+          "documentation" : "Client ID as gotten from Amazon"
+        },
+        "ClientSecret" : {
+          "shape" : "__string",
+          "documentation" : "Client secret as gotten from Amazon"
+        },
+        "Enabled" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is enabled for sending messages."
+        }
+      },
+      "documentation" : "Amazon Device Messaging channel definition."
+    },
+    "ADMChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "documentation" : "Application id"
+        },
+        "CreationDate" : {
+          "shape" : "__string",
+          "documentation" : "When was this segment created"
+        },
+        "Enabled" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is enabled for sending messages."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Channel ID. Not used, only for backwards compatibility."
+        },
+        "IsArchived" : {
+          "shape" : "__boolean",
+          "documentation" : "Is this channel archived"
+        },
+        "LastModifiedBy" : {
+          "shape" : "__string",
+          "documentation" : "Who last updated this entry"
+        },
+        "LastModifiedDate" : {
+          "shape" : "__string",
+          "documentation" : "Last date this was updated"
+        },
+        "Platform" : {
+          "shape" : "__string",
+          "documentation" : "Platform type. Will be \"ADM\""
+        },
+        "Version" : {
+          "shape" : "__integer",
+          "documentation" : "Version of channel"
+        }
+      },
+      "documentation" : "Amazon Device Messaging channel definition."
+    },
+    "ADMMessage" : {
+      "type" : "structure",
+      "members" : {
+        "Action" : {
+          "shape" : "Action",
+          "documentation" : "The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL"
+        },
+        "Body" : {
+          "shape" : "__string",
+          "documentation" : "The message body of the notification, the email body or the text message."
+        },
+        "ConsolidationKey" : {
+          "shape" : "__string",
+          "documentation" : "Optional. Arbitrary string used to indicate multiple messages are logically the same and that ADM is allowed to drop previously enqueued messages in favor of this one."
+        },
+        "Data" : {
+          "shape" : "MapOf__string",
+          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
+        },
+        "ExpiresAfter" : {
+          "shape" : "__string",
+          "documentation" : "Optional. Number of seconds ADM should retain the message if the device is offline"
+        },
+        "IconReference" : {
+          "shape" : "__string",
+          "documentation" : "The icon image name of the asset saved in your application."
+        },
+        "ImageIconUrl" : {
+          "shape" : "__string",
+          "documentation" : "The URL that points to an image used as the large icon to the notification content view."
+        },
+        "ImageUrl" : {
+          "shape" : "__string",
+          "documentation" : "The URL that points to an image used in the push notification."
+        },
+        "JsonData" : {
+          "shape" : "__string",
+          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
+        },
+        "MD5" : {
+          "shape" : "__string",
+          "documentation" : "Optional. Base-64-encoded MD5 checksum of the data parameter. Used to verify data integrity"
+        },
+        "RawContent" : {
+          "shape" : "__string",
+          "documentation" : "The Raw JSON formatted string to be used as the payload. This value overrides the message."
+        },
+        "SilentPush" : {
+          "shape" : "__boolean",
+          "documentation" : "Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases."
+        },
+        "SmallImageIconUrl" : {
+          "shape" : "__string",
+          "documentation" : "The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view"
+        },
+        "Sound" : {
+          "shape" : "__string",
+          "documentation" : "Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/"
+        },
+        "Substitutions" : {
+          "shape" : "MapOfListOf__string",
+          "documentation" : "Default message substitutions. Can be overridden by individual address substitutions."
+        },
+        "Title" : {
+          "shape" : "__string",
+          "documentation" : "The message title that displays above the message on the user's device."
+        },
+        "Url" : {
+          "shape" : "__string",
+          "documentation" : "The URL to open in the user's mobile browser. Used if the value for Action is URL."
+        }
+      },
+      "documentation" : "ADM Message."
+    },
     "APNSChannelRequest" : {
       "type" : "structure",
       "members" : {
+        "BundleId" : {
+          "shape" : "__string",
+          "documentation" : "The bundle id used for APNs Tokens."
+        },
         "Certificate" : {
           "shape" : "__string",
           "documentation" : "The distribution certificate from Apple."
+        },
+        "DefaultAuthenticationMethod" : {
+          "shape" : "__string",
+          "documentation" : "The default authentication method used for APNs."
         },
         "Enabled" : {
           "shape" : "__boolean",
@@ -1341,6 +1680,18 @@
         "PrivateKey" : {
           "shape" : "__string",
           "documentation" : "The certificate private key."
+        },
+        "TeamId" : {
+          "shape" : "__string",
+          "documentation" : "The team id used for APNs Tokens."
+        },
+        "TokenKey" : {
+          "shape" : "__string",
+          "documentation" : "The token key used for APNs Tokens."
+        },
+        "TokenKeyId" : {
+          "shape" : "__string",
+          "documentation" : "The token key used for APNs Tokens."
         }
       },
       "documentation" : "Apple Push Notification Service channel definition."
@@ -1410,9 +1761,17 @@
           "shape" : "MapOf__string",
           "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
         },
+        "JsonData" : {
+          "shape" : "__string",
+          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
+        },
         "MediaUrl" : {
           "shape" : "__string",
           "documentation" : "The URL that points to a video used in the push notification."
+        },
+        "PreferredAuthenticationMethod" : {
+          "shape" : "__string",
+          "documentation" : "The preferred authentication method, either \"CERTIFICATE\" or \"TOKEN\""
         },
         "RawContent" : {
           "shape" : "__string",
@@ -1448,9 +1807,17 @@
     "APNSSandboxChannelRequest" : {
       "type" : "structure",
       "members" : {
+        "BundleId" : {
+          "shape" : "__string",
+          "documentation" : "The bundle id used for APNs Tokens."
+        },
         "Certificate" : {
           "shape" : "__string",
           "documentation" : "The distribution certificate from Apple."
+        },
+        "DefaultAuthenticationMethod" : {
+          "shape" : "__string",
+          "documentation" : "The default authentication method used for APNs."
         },
         "Enabled" : {
           "shape" : "__boolean",
@@ -1459,6 +1826,18 @@
         "PrivateKey" : {
           "shape" : "__string",
           "documentation" : "The certificate private key."
+        },
+        "TeamId" : {
+          "shape" : "__string",
+          "documentation" : "The team id used for APNs Tokens."
+        },
+        "TokenKey" : {
+          "shape" : "__string",
+          "documentation" : "The token key used for APNs Tokens."
+        },
+        "TokenKeyId" : {
+          "shape" : "__string",
+          "documentation" : "The token key used for APNs Tokens."
         }
       },
       "documentation" : "Apple Development Push Notification Service channel definition."
@@ -1693,6 +2072,132 @@
         "httpStatusCode" : 400
       }
     },
+    "BaiduChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApiKey" : {
+          "shape" : "__string",
+          "documentation" : "Platform credential API key from Baidu."
+        },
+        "Enabled" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is enabled for sending messages."
+        },
+        "SecretKey" : {
+          "shape" : "__string",
+          "documentation" : "Platform credential Secret key from Baidu."
+        }
+      },
+      "documentation" : "Baidu Cloud Push credentials"
+    },
+    "BaiduChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "documentation" : "Application id"
+        },
+        "CreationDate" : {
+          "shape" : "__string",
+          "documentation" : "When was this segment created"
+        },
+        "Credential" : {
+          "shape" : "__string",
+          "documentation" : "The Baidu API key from Baidu."
+        },
+        "Enabled" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is enabled for sending messages."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Channel ID. Not used, only for backwards compatibility."
+        },
+        "IsArchived" : {
+          "shape" : "__boolean",
+          "documentation" : "Is this channel archived"
+        },
+        "LastModifiedBy" : {
+          "shape" : "__string",
+          "documentation" : "Who made the last change"
+        },
+        "LastModifiedDate" : {
+          "shape" : "__string",
+          "documentation" : "Last date this was updated"
+        },
+        "Platform" : {
+          "shape" : "__string",
+          "documentation" : "The platform type. Will be BAIDU"
+        },
+        "Version" : {
+          "shape" : "__integer",
+          "documentation" : "Version of channel"
+        }
+      },
+      "documentation" : "Baidu Cloud Messaging channel definition"
+    },
+    "BaiduMessage" : {
+      "type" : "structure",
+      "members" : {
+        "Action" : {
+          "shape" : "Action",
+          "documentation" : "The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL"
+        },
+        "Body" : {
+          "shape" : "__string",
+          "documentation" : "The message body of the notification, the email body or the text message."
+        },
+        "Data" : {
+          "shape" : "MapOf__string",
+          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
+        },
+        "IconReference" : {
+          "shape" : "__string",
+          "documentation" : "The icon image name of the asset saved in your application."
+        },
+        "ImageIconUrl" : {
+          "shape" : "__string",
+          "documentation" : "The URL that points to an image used as the large icon to the notification content view."
+        },
+        "ImageUrl" : {
+          "shape" : "__string",
+          "documentation" : "The URL that points to an image used in the push notification."
+        },
+        "JsonData" : {
+          "shape" : "__string",
+          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
+        },
+        "RawContent" : {
+          "shape" : "__string",
+          "documentation" : "The Raw JSON formatted string to be used as the payload. This value overrides the message."
+        },
+        "SilentPush" : {
+          "shape" : "__boolean",
+          "documentation" : "Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases."
+        },
+        "SmallImageIconUrl" : {
+          "shape" : "__string",
+          "documentation" : "The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view"
+        },
+        "Sound" : {
+          "shape" : "__string",
+          "documentation" : "Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/"
+        },
+        "Substitutions" : {
+          "shape" : "MapOfListOf__string",
+          "documentation" : "Default message substitutions. Can be overridden by individual address substitutions."
+        },
+        "Title" : {
+          "shape" : "__string",
+          "documentation" : "The message title that displays above the message on the user's device."
+        },
+        "Url" : {
+          "shape" : "__string",
+          "documentation" : "The URL to open in the user's mobile browser. Used if the value for Action is URL."
+        }
+      },
+      "documentation" : "Baidu Message."
+    },
     "CampaignEmailMessage" : {
       "type" : "structure",
       "members" : {
@@ -1721,6 +2226,14 @@
         "Daily" : {
           "shape" : "__integer",
           "documentation" : "The maximum number of messages that the campaign can send daily."
+        },
+        "MaximumDuration" : {
+          "shape" : "__integer",
+          "documentation" : "The maximum duration of a campaign from the scheduled start. Must be a minimum of 60 seconds."
+        },
+        "MessagesPerSecond" : {
+          "shape" : "__integer",
+          "documentation" : "The maximum number of messages per second that the campaign will send. This is a best effort maximum cap and can go as high as 20000 and as low as 50"
         },
         "Total" : {
           "shape" : "__integer",
@@ -1859,7 +2372,7 @@
     },
     "ChannelType" : {
       "type" : "string",
-      "enum" : [ "GCM", "APNS", "APNS_SANDBOX", "ADM", "SMS", "EMAIL" ]
+      "enum" : [ "GCM", "APNS", "APNS_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU" ]
     },
     "CreateAppRequest" : {
       "type" : "structure",
@@ -1995,6 +2508,10 @@
           "shape" : "MapOf__string",
           "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
         },
+        "JsonData" : {
+          "shape" : "__string",
+          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
+        },
         "SilentPush" : {
           "shape" : "__boolean",
           "documentation" : "Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases."
@@ -2013,6 +2530,27 @@
         }
       },
       "documentation" : "Default Push Notification Message."
+    },
+    "DeleteAdmChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "DeleteAdmChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ADMChannelResponse" : {
+          "shape" : "ADMChannelResponse"
+        }
+      },
+      "required" : [ "ADMChannelResponse" ],
+      "payload" : "ADMChannelResponse"
     },
     "DeleteApnsChannelRequest" : {
       "type" : "structure",
@@ -2076,6 +2614,27 @@
       },
       "required" : [ "ApplicationResponse" ],
       "payload" : "ApplicationResponse"
+    },
+    "DeleteBaiduChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "DeleteBaiduChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "BaiduChannelResponse" : {
+          "shape" : "BaiduChannelResponse"
+        }
+      },
+      "required" : [ "BaiduChannelResponse" ],
+      "payload" : "BaiduChannelResponse"
     },
     "DeleteCampaignRequest" : {
       "type" : "structure",
@@ -2145,8 +2704,7 @@
         }
       },
       "required" : [ "EventStream" ],
-      "payload" : "EventStream",
-      "documentation": "DeleteEventStream Response"
+      "payload" : "EventStream"
     },
     "DeleteGcmChannelRequest" : {
       "type" : "structure",
@@ -2218,7 +2776,7 @@
     },
     "DeliveryStatus" : {
       "type" : "string",
-      "enum" : [ "SUCCESSFUL", "THROTTLED", "TEMPORARY_FAILURE", "PERMANENT_FAILURE" ]
+      "enum" : [ "SUCCESSFUL", "THROTTLED", "TEMPORARY_FAILURE", "PERMANENT_FAILURE", "UNKNOWN_FAILURE", "OPT_OUT", "DUPLICATE" ]
     },
     "DimensionType" : {
       "type" : "string",
@@ -2227,9 +2785,17 @@
     "DirectMessageConfiguration" : {
       "type" : "structure",
       "members" : {
+        "ADMMessage" : {
+          "shape" : "ADMMessage",
+          "documentation" : "The message to ADM channels. Overrides the default push notification message."
+        },
         "APNSMessage" : {
           "shape" : "APNSMessage",
           "documentation" : "The message to APNS channels. Overrides the default push notification message."
+        },
+        "BaiduMessage" : {
+          "shape" : "BaiduMessage",
+          "documentation" : "The message to Baidu GCM channels. Overrides the default push notification message."
         },
         "DefaultMessage" : {
           "shape" : "DefaultMessage",
@@ -2238,6 +2804,10 @@
         "DefaultPushNotificationMessage" : {
           "shape" : "DefaultPushNotificationMessage",
           "documentation" : "The default push notification message for all push channels."
+        },
+        "EmailMessage" : {
+          "shape" : "EmailMessage",
+          "documentation" : "The message to Email channels. Overrides the default message."
         },
         "GCMMessage" : {
           "shape" : "GCMMessage",
@@ -2329,6 +2899,36 @@
         }
       },
       "documentation" : "Email Channel Response."
+    },
+    "EmailMessage" : {
+      "type" : "structure",
+      "members" : {
+        "Body" : {
+          "shape" : "__string",
+          "documentation" : "The message body of the notification, the email body or the text message."
+        },
+        "FromAddress" : {
+          "shape" : "__string",
+          "documentation" : "The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel."
+        },
+        "HtmlBody" : {
+          "shape" : "__string",
+          "documentation" : "The HTML part of the email."
+        },
+        "Substitutions" : {
+          "shape" : "MapOfListOf__string",
+          "documentation" : "Default message substitutions. Can be overridden by individual address substitutions."
+        },
+        "TemplateArn" : {
+          "shape" : "__string",
+          "documentation" : "The ARN of the template to use for the email."
+        },
+        "Title" : {
+          "shape" : "__string",
+          "documentation" : "The subject of the email."
+        }
+      },
+      "documentation" : "Email Message."
     },
     "EndpointBatchItem" : {
       "type" : "structure",
@@ -2462,6 +3062,32 @@
       },
       "documentation" : "Endpoint location data"
     },
+    "EndpointMessageResult" : {
+      "type" : "structure",
+      "members" : {
+        "Address" : {
+          "shape" : "__string",
+          "documentation" : "Address that endpoint message was delivered to."
+        },
+        "DeliveryStatus" : {
+          "shape" : "DeliveryStatus",
+          "documentation" : "Delivery status of message."
+        },
+        "StatusCode" : {
+          "shape" : "__integer",
+          "documentation" : "Downstream service status code."
+        },
+        "StatusMessage" : {
+          "shape" : "__string",
+          "documentation" : "Status message for message delivery."
+        },
+        "UpdatedToken" : {
+          "shape" : "__string",
+          "documentation" : "If token was updated as part of delivery. (This is GCM Specific)"
+        }
+      },
+      "documentation" : "The result from sending a message to an endpoint."
+    },
     "EndpointRequest" : {
       "type" : "structure",
       "members" : {
@@ -2571,16 +3197,42 @@
           "shape" : "__string",
           "documentation" : "The unique ID for the most recent request to update the endpoint."
         },
+        "ShardId" : {
+          "shape" : "__string",
+          "documentation" : "The ShardId of endpoint."
+        },
         "User" : {
           "shape" : "EndpointUser",
           "documentation" : "Custom user-specific attributes that your app reports to Amazon Pinpoint."
-        },
-        "ShardId" : {
-          "shape" : "__string",
-          "documentation" : "The ShardId of endpoint"
         }
       },
       "documentation" : "Endpoint response"
+    },
+    "EndpointSendConfiguration" : {
+      "type" : "structure",
+      "members" : {
+        "BodyOverride" : {
+          "shape" : "__string",
+          "documentation" : "Body override. If specified will override default body."
+        },
+        "Context" : {
+          "shape" : "MapOf__string",
+          "documentation" : "A map of custom attributes to attributes to be attached to the message for this address. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes."
+        },
+        "RawContent" : {
+          "shape" : "__string",
+          "documentation" : "The Raw JSON formatted string to be used as the payload. This value overrides the message."
+        },
+        "Substitutions" : {
+          "shape" : "MapOfListOf__string",
+          "documentation" : "A map of substitution values for the message to be merged with the DefaultMessage's substitutions. Substitutions on this map take precedence over the all other substitutions."
+        },
+        "TitleOverride" : {
+          "shape" : "__string",
+          "documentation" : "Title override. If specified will override default title if applicable."
+        }
+      },
+      "documentation" : "Endpoint send configuration."
     },
     "EndpointUser" : {
       "type" : "structure",
@@ -2743,6 +3395,10 @@
           "shape" : "__string",
           "documentation" : "The URL that points to an image used in the push notification."
         },
+        "JsonData" : {
+          "shape" : "__string",
+          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
+        },
         "RawContent" : {
           "shape" : "__string",
           "documentation" : "The Raw JSON formatted string to be used as the payload. This value overrides the message."
@@ -2777,6 +3433,27 @@
         }
       },
       "documentation" : "GCM Message."
+    },
+    "GetAdmChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "GetAdmChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ADMChannelResponse" : {
+          "shape" : "ADMChannelResponse"
+        }
+      },
+      "required" : [ "ADMChannelResponse" ],
+      "payload" : "ADMChannelResponse"
     },
     "GetApnsChannelRequest" : {
       "type" : "structure",
@@ -2886,6 +3563,27 @@
       },
       "required" : [ "ApplicationsResponse" ],
       "payload" : "ApplicationsResponse"
+    },
+    "GetBaiduChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "GetBaiduChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "BaiduChannelResponse" : {
+          "shape" : "BaiduChannelResponse"
+        }
+      },
+      "required" : [ "BaiduChannelResponse" ],
+      "payload" : "BaiduChannelResponse"
     },
     "GetCampaignActivitiesRequest" : {
       "type" : "structure",
@@ -3121,8 +3819,7 @@
         }
       },
       "required" : [ "EventStream" ],
-      "payload" : "EventStream",
-      "documentation": "GetEventStream Response"
+      "payload" : "EventStream"
     },
     "GetGcmChannelRequest" : {
       "type" : "structure",
@@ -3630,6 +4327,24 @@
         "shape" : "AttributeDimension"
       }
     },
+    "MapOfEndpointMessageResult" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "EndpointMessageResult"
+      }
+    },
+    "MapOfEndpointSendConfiguration" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "EndpointSendConfiguration"
+      }
+    },
     "MapOfListOf__string" : {
       "type" : "map",
       "key" : {
@@ -3637,6 +4352,15 @@
       },
       "value" : {
         "shape" : "ListOf__string"
+      }
+    },
+    "MapOfMapOfEndpointMessageResult" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "MapOfEndpointMessageResult"
       }
     },
     "MapOfMessageResult" : {
@@ -3771,13 +4495,25 @@
           "shape" : "MapOfAddressConfiguration",
           "documentation" : "A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value."
         },
+        "Campaign" : {
+          "shape" : "MapOf__string",
+          "documentation" : "The JSON payload used for campaign attributes. This payload is added to the notifications' data->pinpoint->campaign' object in iOS and flattened to pinpoint.campaign.{AttributeName} keys in Android. Email will use the attribute campaign_id to save the templates."
+        },
         "Context" : {
           "shape" : "MapOf__string",
           "documentation" : "A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes."
         },
+        "Endpoints" : {
+          "shape" : "MapOfEndpointSendConfiguration",
+          "documentation" : "A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value."
+        },
         "MessageConfiguration" : {
           "shape" : "DirectMessageConfiguration",
           "documentation" : "Message configuration."
+        },
+        "RequestId" : {
+          "shape" : "__string",
+          "documentation" : "Original request Id for which this message is delivered."
         }
       },
       "documentation" : "Send message request."
@@ -3788,6 +4524,10 @@
         "ApplicationId" : {
           "shape" : "__string",
           "documentation" : "Application id of the message."
+        },
+        "EndpointResult" : {
+          "shape" : "MapOfEndpointMessageResult",
+          "documentation" : "A map containing a multi part response for each address, with the endpointId as the key and the result as the value."
         },
         "RequestId" : {
           "shape" : "__string",
@@ -3877,8 +4617,7 @@
         }
       },
       "required" : [ "ApplicationId", "WriteEventStream" ],
-      "payload" : "WriteEventStream",
-      "documentation": "PutEventStream Request"
+      "payload" : "WriteEventStream"
     },
     "PutEventStreamResponse" : {
       "type" : "structure",
@@ -3932,6 +4671,10 @@
         "SenderId" : {
           "shape" : "__string",
           "documentation" : "Sender identifier of your messages."
+        },
+        "ShortCode" : {
+          "shape" : "__string",
+          "documentation" : "ShortCode registered with phone provider."
         }
       },
       "documentation" : "SMS Channel Request"
@@ -4229,6 +4972,71 @@
       "required" : [ "MessageResponse" ],
       "payload" : "MessageResponse"
     },
+    "SendUsersMessageRequest" : {
+      "type" : "structure",
+      "members" : {
+        "Context" : {
+          "shape" : "MapOf__string",
+          "documentation" : "A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes."
+        },
+        "MessageConfiguration" : {
+          "shape" : "DirectMessageConfiguration",
+          "documentation" : "Message configuration."
+        },
+        "RequestId" : {
+          "shape" : "__string",
+          "documentation" : "Original request Id for which this message is delivered."
+        },
+        "Users" : {
+          "shape" : "MapOfEndpointSendConfiguration",
+          "documentation" : "A map of destination endpoints, with the EndpointId as the key Endpoint Message Configuration as the value."
+        }
+      },
+      "documentation" : "Send message request."
+    },
+    "SendUsersMessageResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "documentation" : "Application id of the message."
+        },
+        "RequestId" : {
+          "shape" : "__string",
+          "documentation" : "Original request Id for which this message was delivered."
+        },
+        "Result" : {
+          "shape" : "MapOfMapOfEndpointMessageResult",
+          "documentation" : "A map containing of UserId to Map of EndpointId to Endpoint Message Result."
+        }
+      },
+      "documentation" : "User send message response."
+    },
+    "SendUsersMessagesRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        },
+        "SendUsersMessageRequest" : {
+          "shape" : "SendUsersMessageRequest"
+        }
+      },
+      "required" : [ "ApplicationId", "SendUsersMessageRequest" ],
+      "payload" : "SendUsersMessageRequest"
+    },
+    "SendUsersMessagesResponse" : {
+      "type" : "structure",
+      "members" : {
+        "SendUsersMessageResponse" : {
+          "shape" : "SendUsersMessageResponse"
+        }
+      },
+      "required" : [ "SendUsersMessageResponse" ],
+      "payload" : "SendUsersMessageResponse"
+    },
     "SetDimension" : {
       "type" : "structure",
       "members" : {
@@ -4294,6 +5102,31 @@
         }
       },
       "documentation" : "Treatment resource"
+    },
+    "UpdateAdmChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ADMChannelRequest" : {
+          "shape" : "ADMChannelRequest"
+        },
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId", "ADMChannelRequest" ],
+      "payload" : "ADMChannelRequest"
+    },
+    "UpdateAdmChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ADMChannelResponse" : {
+          "shape" : "ADMChannelResponse"
+        }
+      },
+      "required" : [ "ADMChannelResponse" ],
+      "payload" : "ADMChannelResponse"
     },
     "UpdateApnsChannelRequest" : {
       "type" : "structure",
@@ -4369,6 +5202,31 @@
       },
       "required" : [ "ApplicationSettingsResource" ],
       "payload" : "ApplicationSettingsResource"
+    },
+    "UpdateBaiduChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        },
+        "BaiduChannelRequest" : {
+          "shape" : "BaiduChannelRequest"
+        }
+      },
+      "required" : [ "ApplicationId", "BaiduChannelRequest" ],
+      "payload" : "BaiduChannelRequest"
+    },
+    "UpdateBaiduChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "BaiduChannelResponse" : {
+          "shape" : "BaiduChannelResponse"
+        }
+      },
+      "required" : [ "BaiduChannelResponse" ],
+      "payload" : "BaiduChannelResponse"
     },
     "UpdateCampaignRequest" : {
       "type" : "structure",
@@ -4616,6 +5474,10 @@
         "SegmentVersion" : {
           "shape" : "__integer",
           "documentation" : "The version of the segment to which the campaign sends messages."
+        },
+        "Trace" : {
+          "shape" : "__boolean",
+          "documentation" : "Whether or not to enable trace logging for the campaign. Undocumented"
         },
         "TreatmentDescription" : {
           "shape" : "__string",
