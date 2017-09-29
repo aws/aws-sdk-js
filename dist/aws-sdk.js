@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.124.0
+// AWS SDK for JavaScript v2.125.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -65310,7 +65310,8 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "HITId"
+          "HITId",
+          "NumberOfAdditionalAssignments"
         ],
         "members": {
           "HITId": {},
@@ -66064,7 +66065,8 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "AssignmentId"
+          "AssignmentId",
+          "RequesterFeedback"
         ],
         "members": {
           "AssignmentId": {},
@@ -66099,7 +66101,8 @@ module.exports={
         "required": [
           "WorkerId",
           "BonusAmount",
-          "AssignmentId"
+          "AssignmentId",
+          "Reason"
         ],
         "members": {
           "WorkerId": {},
@@ -66137,7 +66140,8 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "HITId"
+          "HITId",
+          "ExpireAt"
         ],
         "members": {
           "HITId": {},
@@ -66289,6 +66293,9 @@ module.exports={
     },
     "Sp": {
       "type": "structure",
+      "required": [
+        "PolicyName"
+      ],
       "members": {
         "PolicyName": {},
         "Parameters": {
@@ -66325,6 +66332,10 @@ module.exports={
       "type": "list",
       "member": {
         "type": "structure",
+        "required": [
+          "Name",
+          "Value"
+        ],
         "members": {
           "Name": {},
           "Value": {}
@@ -66498,7 +66509,9 @@ module.exports={
       "type": "structure",
       "required": [
         "Destination",
-        "Transport"
+        "Transport",
+        "Version",
+        "EventTypes"
       ],
       "members": {
         "Destination": {},
@@ -87038,7 +87051,13 @@ module.exports={
           "AlarmIdentifier": {
             "shape": "S1t"
           },
-          "InsufficientDataHealthStatus": {}
+          "InsufficientDataHealthStatus": {},
+          "ResetElements": {
+            "type": "list",
+            "member": {
+              "locationName": "ResettableElementName"
+            }
+          }
         }
       },
       "output": {
@@ -107754,7 +107773,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.124.0',
+  VERSION: '2.125.0',
 
 
   Signers: {},

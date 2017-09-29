@@ -612,7 +612,7 @@ declare namespace Organizations {
   }
   export interface DisablePolicyTypeRequest {
     /**
-     * The unique identifier (ID) of the root in which you want to disable a policy type. You can get the ID from the ListPolicies operation. The regex pattern for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.
+     * The unique identifier (ID) of the root in which you want to disable a policy type. You can get the ID from the ListRoots operation. The regex pattern for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.
      */
     RootId: RootId;
     /**
@@ -707,11 +707,11 @@ declare namespace Organizations {
     /**
      * The unique identifier (ID) for the party. The regex pattern for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.
      */
-    Id?: HandshakePartyId;
+    Id: HandshakePartyId;
     /**
      * The type of party.
      */
-    Type?: HandshakePartyType;
+    Type: HandshakePartyType;
   }
   export type HandshakePartyId = string;
   export type HandshakePartyType = "ACCOUNT"|"ORGANIZATION"|"EMAIL"|string;

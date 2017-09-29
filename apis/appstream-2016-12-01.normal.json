@@ -27,7 +27,7 @@
         {"shape":"IncompatibleImageException"},
         {"shape":"OperationNotPermittedException"}
       ],
-      "documentation":"<p>Associate a fleet to a stack.</p>"
+      "documentation":"<p>Associates the specified fleet with the specified stack.</p>"
     },
     "CreateDirectoryConfig":{
       "name":"CreateDirectoryConfig",
@@ -41,7 +41,7 @@
         {"shape":"ResourceAlreadyExistsException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Creates a directory configuration with the given parameters.</p>"
+      "documentation":"<p>Creates a directory configuration.</p>"
     },
     "CreateFleet":{
       "name":"CreateFleet",
@@ -61,7 +61,39 @@
         {"shape":"InvalidParameterCombinationException"},
         {"shape":"IncompatibleImageException"}
       ],
-      "documentation":"<p>Creates a new fleet.</p>"
+      "documentation":"<p>Creates a fleet.</p>"
+    },
+    "CreateImageBuilder":{
+      "name":"CreateImageBuilder",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateImageBuilderRequest"},
+      "output":{"shape":"CreateImageBuilderResult"},
+      "errors":[
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ResourceNotAvailableException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRoleException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"InvalidParameterCombinationException"},
+        {"shape":"IncompatibleImageException"}
+      ]
+    },
+    "CreateImageBuilderStreamingURL":{
+      "name":"CreateImageBuilderStreamingURL",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateImageBuilderStreamingURLRequest"},
+      "output":{"shape":"CreateImageBuilderStreamingURLResult"},
+      "errors":[
+        {"shape":"OperationNotPermittedException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
     },
     "CreateStack":{
       "name":"CreateStack",
@@ -79,7 +111,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
-      "documentation":"<p>Create a new stack.</p>"
+      "documentation":"<p>Creates a stack.</p>"
     },
     "CreateStreamingURL":{
       "name":"CreateStreamingURL",
@@ -95,7 +127,7 @@
         {"shape":"OperationNotPermittedException"},
         {"shape":"InvalidParameterCombinationException"}
       ],
-      "documentation":"<p>Creates a URL to start an AppStream 2.0 streaming session for a user. By default, the URL is valid only for 1 minute from the time that it is generated.</p>"
+      "documentation":"<p>Creates a URL to start a streaming session for the specified user.</p> <p>By default, the URL is valid only for one minute from the time that it is generated.</p>"
     },
     "DeleteDirectoryConfig":{
       "name":"DeleteDirectoryConfig",
@@ -109,7 +141,7 @@
         {"shape":"ResourceInUseException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Deletes the directory configuration with the given parameters.</p>"
+      "documentation":"<p>Deletes the specified directory configuration.</p>"
     },
     "DeleteFleet":{
       "name":"DeleteFleet",
@@ -124,7 +156,36 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Deletes a fleet.</p>"
+      "documentation":"<p>Deletes the specified fleet.</p>"
+    },
+    "DeleteImage":{
+      "name":"DeleteImage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteImageRequest"},
+      "output":{"shape":"DeleteImageResult"},
+      "errors":[
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationNotPermittedException"},
+        {"shape":"ConcurrentModificationException"}
+      ]
+    },
+    "DeleteImageBuilder":{
+      "name":"DeleteImageBuilder",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteImageBuilderRequest"},
+      "output":{"shape":"DeleteImageBuilderResult"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationNotPermittedException"},
+        {"shape":"ConcurrentModificationException"}
+      ]
     },
     "DeleteStack":{
       "name":"DeleteStack",
@@ -139,7 +200,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Deletes the stack. After this operation completes, the environment can no longer be activated, and any reservations made for the stack are released.</p>"
+      "documentation":"<p>Deletes the specified stack. After this operation completes, the environment can no longer be activated and any reservations made for the stack are released.</p>"
     },
     "DescribeDirectoryConfigs":{
       "name":"DescribeDirectoryConfigs",
@@ -152,7 +213,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Returns a list describing the specified directory configurations.</p>"
+      "documentation":"<p>Describes the specified directory configurations.</p>"
     },
     "DescribeFleets":{
       "name":"DescribeFleets",
@@ -165,7 +226,19 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>If fleet names are provided, this operation describes the specified fleets; otherwise, all the fleets in the account are described.</p>"
+      "documentation":"<p>Describes the specified fleets or all fleets in the account.</p>"
+    },
+    "DescribeImageBuilders":{
+      "name":"DescribeImageBuilders",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeImageBuildersRequest"},
+      "output":{"shape":"DescribeImageBuildersResult"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ]
     },
     "DescribeImages":{
       "name":"DescribeImages",
@@ -178,7 +251,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Describes the images. If a list of names is not provided, all images in your account are returned. This operation does not return a paginated result.</p>"
+      "documentation":"<p>Describes the specified images or all images in the account.</p>"
     },
     "DescribeSessions":{
       "name":"DescribeSessions",
@@ -191,7 +264,7 @@
       "errors":[
         {"shape":"InvalidParameterCombinationException"}
       ],
-      "documentation":"<p>Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. To retrieve the next set of items, pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.</p>"
+      "documentation":"<p>Describes the streaming sessions for the specified stack and fleet. If a user ID is provided, only the streaming sessions for only that user are returned. If an authentication type is not provided, the default is to authenticate users using a streaming URL.</p>"
     },
     "DescribeStacks":{
       "name":"DescribeStacks",
@@ -204,7 +277,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. To retrieve the next set of items, pass the <code>nextToken</code> value in a subsequent call to this operation.</p>"
+      "documentation":"<p>Describes the specified stacks or all stacks in the account.</p>"
     },
     "DisassociateFleet":{
       "name":"DisassociateFleet",
@@ -219,7 +292,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Disassociates a fleet from a stack.</p>"
+      "documentation":"<p>Disassociates the specified fleet from the specified stack.</p>"
     },
     "ExpireSession":{
       "name":"ExpireSession",
@@ -229,7 +302,7 @@
       },
       "input":{"shape":"ExpireSessionRequest"},
       "output":{"shape":"ExpireSessionResult"},
-      "documentation":"<p>This operation immediately stops a streaming session.</p>"
+      "documentation":"<p>Stops the specified streaming session.</p>"
     },
     "ListAssociatedFleets":{
       "name":"ListAssociatedFleets",
@@ -239,7 +312,7 @@
       },
       "input":{"shape":"ListAssociatedFleetsRequest"},
       "output":{"shape":"ListAssociatedFleetsResult"},
-      "documentation":"<p>Lists all fleets associated with the stack.</p>"
+      "documentation":"<p>Lists the fleets associated with the specified stack.</p>"
     },
     "ListAssociatedStacks":{
       "name":"ListAssociatedStacks",
@@ -249,7 +322,7 @@
       },
       "input":{"shape":"ListAssociatedStacksRequest"},
       "output":{"shape":"ListAssociatedStacksResult"},
-      "documentation":"<p>Lists all stacks to which the specified fleet is associated.</p>"
+      "documentation":"<p>Lists the stacks associated with the specified fleet.</p>"
     },
     "StartFleet":{
       "name":"StartFleet",
@@ -265,7 +338,21 @@
         {"shape":"LimitExceededException"},
         {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Starts a fleet.</p>"
+      "documentation":"<p>Starts the specified fleet.</p>"
+    },
+    "StartImageBuilder":{
+      "name":"StartImageBuilder",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartImageBuilderRequest"},
+      "output":{"shape":"StartImageBuilderResult"},
+      "errors":[
+        {"shape":"ResourceNotAvailableException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConcurrentModificationException"}
+      ]
     },
     "StopFleet":{
       "name":"StopFleet",
@@ -279,7 +366,21 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Stops a fleet.</p>"
+      "documentation":"<p>Stops the specified fleet.</p>"
+    },
+    "StopImageBuilder":{
+      "name":"StopImageBuilder",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopImageBuilderRequest"},
+      "output":{"shape":"StopImageBuilderResult"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OperationNotPermittedException"},
+        {"shape":"ConcurrentModificationException"}
+      ]
     },
     "UpdateDirectoryConfig":{
       "name":"UpdateDirectoryConfig",
@@ -294,7 +395,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"ConcurrentModificationException"}
       ],
-      "documentation":"<p>Updates the directory configuration with the given parameters.</p>"
+      "documentation":"<p>Updates the specified directory configuration.</p>"
     },
     "UpdateFleet":{
       "name":"UpdateFleet",
@@ -315,7 +416,7 @@
         {"shape":"IncompatibleImageException"},
         {"shape":"OperationNotPermittedException"}
       ],
-      "documentation":"<p>Updates an existing fleet. All the attributes except the fleet name can be updated in the <b>STOPPED</b> state. When a fleet is in the <b>RUNNING</b> state, only <code>DisplayName</code> and <code>ComputeCapacity</code> can be updated. A fleet cannot be updated in a status of <b>STARTING</b> or <b>STOPPING</b>.</p>"
+      "documentation":"<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code> and <code>ComputeCapacity</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.</p>"
     },
     "UpdateStack":{
       "name":"UpdateStack",
@@ -333,7 +434,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"IncompatibleImageException"}
       ],
-      "documentation":"<p>Updates the specified fields in the stack with the specified name.</p>"
+      "documentation":"<p>Updates the specified stack.</p>"
     }
   },
   "shapes":{
@@ -353,15 +454,15 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The unique identifier for the application.</p>"
+          "documentation":"<p>The name of the application.</p>"
         },
         "DisplayName":{
           "shape":"String",
-          "documentation":"<p>The name of the application shown to the end users.</p>"
+          "documentation":"<p>The application name displayed to end users.</p>"
         },
         "IconURL":{
           "shape":"String",
-          "documentation":"<p>The URL for the application icon. This URL may be time-limited.</p>"
+          "documentation":"<p>The URL for the application icon. This URL might be time-limited.</p>"
         },
         "LaunchPath":{
           "shape":"String",
@@ -369,18 +470,18 @@
         },
         "LaunchParameters":{
           "shape":"String",
-          "documentation":"<p>A list of arguments that are passed to the application at launch.</p>"
+          "documentation":"<p>The arguments that are passed to the application at launch.</p>"
         },
         "Enabled":{
           "shape":"Boolean",
-          "documentation":"<p>If there is a problem, an application can be disabled after image creation.</p>"
+          "documentation":"<p>If there is a problem, the application can be disabled after image creation.</p>"
         },
         "Metadata":{
           "shape":"Metadata",
           "documentation":"<p>Additional attributes that describe the application.</p>"
         }
       },
-      "documentation":"<p>An entry for a single application in the application catalog.</p>"
+      "documentation":"<p>Describes an application in the application catalog.</p>"
     },
     "Applications":{
       "type":"list",
@@ -399,11 +500,11 @@
       "members":{
         "FleetName":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet to associate.</p>"
+          "documentation":"<p>The name of the fleet.</p>"
         },
         "StackName":{
           "shape":"String",
-          "documentation":"<p>The name of the stack to which the fleet is associated.</p>"
+          "documentation":"<p>The name of the stack.</p>"
         }
       }
     },
@@ -431,7 +532,7 @@
           "documentation":"<p>The desired number of streaming instances.</p>"
         }
       },
-      "documentation":"<p>The capacity configuration for the fleet.</p>"
+      "documentation":"<p>Describes the capacity for a fleet.</p>"
     },
     "ComputeCapacityStatus":{
       "type":"structure",
@@ -447,14 +548,14 @@
         },
         "InUse":{
           "shape":"Integer",
-          "documentation":"<p>The number of instances that are being used for streaming.</p>"
+          "documentation":"<p>The number of instances in use for streaming.</p>"
         },
         "Available":{
           "shape":"Integer",
           "documentation":"<p>The number of currently available instances that can be used to stream sessions.</p>"
         }
       },
-      "documentation":"<p>The capacity information for the fleet.</p>"
+      "documentation":"<p>Describes the capacity status for a fleet.</p>"
     },
     "ConcurrentModificationException":{
       "type":"structure",
@@ -474,15 +575,15 @@
       "members":{
         "DirectoryName":{
           "shape":"DirectoryName",
-          "documentation":"<p>The fully qualified name of the directory, such as corp.example.com</p>"
+          "documentation":"<p>The fully qualified name of the directory (for example, corp.example.com).</p>"
         },
         "OrganizationalUnitDistinguishedNames":{
           "shape":"OrganizationalUnitDistinguishedNamesList",
-          "documentation":"<p>The list of the distinguished names of organizational units to place computer accounts in.</p>"
+          "documentation":"<p>The distinguished names of the organizational units for computer accounts.</p>"
         },
         "ServiceAccountCredentials":{
           "shape":"ServiceAccountCredentials",
-          "documentation":"<p>The <i>AccountName</i> and <i>AccountPassword</i> values for the service account, which are used by the streaming instance to connect to the directory.</p>"
+          "documentation":"<p>The credentials for the service account used by the streaming instance to connect to the directory.</p>"
         }
       }
     },
@@ -491,7 +592,7 @@
       "members":{
         "DirectoryConfig":{
           "shape":"DirectoryConfig",
-          "documentation":"<p>Directory configuration details.</p>"
+          "documentation":"<p>Information about the directory configuration.</p>"
         }
       }
     },
@@ -506,11 +607,11 @@
       "members":{
         "Name":{
           "shape":"Name",
-          "documentation":"<p>A unique identifier for the fleet.</p>"
+          "documentation":"<p>A unique name for the fleet.</p>"
         },
         "ImageName":{
           "shape":"String",
-          "documentation":"<p>Unique name of the image used by the fleet.</p>"
+          "documentation":"<p>The name of the image used by the fleet.</p>"
         },
         "InstanceType":{
           "shape":"String",
@@ -519,7 +620,7 @@
         "FleetType":{"shape":"FleetType"},
         "ComputeCapacity":{
           "shape":"ComputeCapacity",
-          "documentation":"<p>The parameters for the capacity allocated to the fleet.</p>"
+          "documentation":"<p>The desired capacity for the fleet.</p>"
         },
         "VpcConfig":{
           "shape":"VpcConfig",
@@ -527,19 +628,19 @@
         },
         "MaxUserDurationInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.</p>"
+          "documentation":"<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.</p>"
         },
         "DisconnectTimeoutInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600. </p>"
+          "documentation":"<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.</p>"
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>The description of the fleet.</p>"
+          "documentation":"<p>The description displayed to end users.</p>"
         },
         "DisplayName":{
           "shape":"DisplayName",
-          "documentation":"<p>The display name of the fleet.</p>"
+          "documentation":"<p>The fleet name displayed to end users.</p>"
         },
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
@@ -547,18 +648,56 @@
         },
         "DomainJoinInfo":{
           "shape":"DomainJoinInfo",
-          "documentation":"<p>The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
+          "documentation":"<p>The information needed for streaming instances to join a domain.</p>"
         }
-      },
-      "documentation":"<p>Contains the parameters for the new fleet to create.</p>"
+      }
     },
     "CreateFleetResult":{
       "type":"structure",
       "members":{
         "Fleet":{
           "shape":"Fleet",
-          "documentation":"<p>The details for the created fleet.</p>"
+          "documentation":"<p>Information about the fleet.</p>"
         }
+      }
+    },
+    "CreateImageBuilderRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "ImageName",
+        "InstanceType"
+      ],
+      "members":{
+        "Name":{"shape":"Name"},
+        "ImageName":{"shape":"String"},
+        "InstanceType":{"shape":"String"},
+        "Description":{"shape":"Description"},
+        "DisplayName":{"shape":"DisplayName"},
+        "VpcConfig":{"shape":"VpcConfig"},
+        "EnableDefaultInternetAccess":{"shape":"BooleanObject"},
+        "DomainJoinInfo":{"shape":"DomainJoinInfo"}
+      }
+    },
+    "CreateImageBuilderResult":{
+      "type":"structure",
+      "members":{
+        "ImageBuilder":{"shape":"ImageBuilder"}
+      }
+    },
+    "CreateImageBuilderStreamingURLRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"String"},
+        "Validity":{"shape":"Long"}
+      }
+    },
+    "CreateImageBuilderStreamingURLResult":{
+      "type":"structure",
+      "members":{
+        "StreamingURL":{"shape":"String"},
+        "Expires":{"shape":"Timestamp"}
       }
     },
     "CreateStackRequest":{
@@ -567,19 +706,19 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The unique identifier for this stack.</p>"
+          "documentation":"<p>The name of the stack.</p>"
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>The description displayed to end users on the AppStream 2.0 portal.</p>"
+          "documentation":"<p>The description displayed to end users.</p>"
         },
         "DisplayName":{
           "shape":"DisplayName",
-          "documentation":"<p>The name displayed to end users on the AppStream 2.0 portal.</p>"
+          "documentation":"<p>The stack name displayed to end users.</p>"
         },
         "StorageConnectors":{
           "shape":"StorageConnectorList",
-          "documentation":"<p>The storage connectors to be enabled for the stack.</p>"
+          "documentation":"<p>The storage connectors to enable.</p>"
         }
       }
     },
@@ -588,7 +727,7 @@
       "members":{
         "Stack":{
           "shape":"Stack",
-          "documentation":"<p>The details for the created stack.</p>"
+          "documentation":"<p>Information about the stack.</p>"
         }
       }
     },
@@ -602,15 +741,15 @@
       "members":{
         "StackName":{
           "shape":"String",
-          "documentation":"<p>The stack for which the URL is generated.</p>"
+          "documentation":"<p>The name of the stack.</p>"
         },
         "FleetName":{
           "shape":"String",
-          "documentation":"<p>The fleet for which the URL is generated.</p>"
+          "documentation":"<p>The name of the fleet.</p>"
         },
         "UserId":{
           "shape":"StreamingUrlUserId",
-          "documentation":"<p>A unique user ID for whom the URL is generated.</p>"
+          "documentation":"<p>The ID of the user.</p>"
         },
         "ApplicationId":{
           "shape":"String",
@@ -618,11 +757,11 @@
         },
         "Validity":{
           "shape":"Long",
-          "documentation":"<p>The duration up to which the URL returned by this action is valid. The input can be any numeric value in seconds between 1 and 604800 seconds.</p>"
+          "documentation":"<p>The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds.</p>"
         },
         "SessionContext":{
           "shape":"String",
-          "documentation":"<p>The sessionContext of the streaming URL.</p>"
+          "documentation":"<p>The session context of the streaming URL.</p>"
         }
       }
     },
@@ -635,7 +774,7 @@
         },
         "Expires":{
           "shape":"Timestamp",
-          "documentation":"<p>Elapsed seconds after the Unix epoch, when this URL expires.</p>"
+          "documentation":"<p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>"
         }
       }
     },
@@ -645,7 +784,7 @@
       "members":{
         "DirectoryName":{
           "shape":"DirectoryName",
-          "documentation":"<p>The name of the directory configuration to be deleted.</p>"
+          "documentation":"<p>The name of the directory configuration.</p>"
         }
       }
     },
@@ -660,7 +799,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet to be deleted.</p>"
+          "documentation":"<p>The name of the fleet.</p>"
         }
       }
     },
@@ -669,13 +808,39 @@
       "members":{
       }
     },
+    "DeleteImageBuilderRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"Name"}
+      }
+    },
+    "DeleteImageBuilderResult":{
+      "type":"structure",
+      "members":{
+        "ImageBuilder":{"shape":"ImageBuilder"}
+      }
+    },
+    "DeleteImageRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"Name"}
+      }
+    },
+    "DeleteImageResult":{
+      "type":"structure",
+      "members":{
+        "Image":{"shape":"Image"}
+      }
+    },
     "DeleteStackRequest":{
       "type":"structure",
       "required":["Name"],
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of the stack to delete.</p>"
+          "documentation":"<p>The name of the stack.</p>"
         }
       }
     },
@@ -689,15 +854,15 @@
       "members":{
         "DirectoryNames":{
           "shape":"DirectoryNameList",
-          "documentation":"<p>A specific list of directory names.</p>"
+          "documentation":"<p>The directory names.</p>"
         },
         "MaxResults":{
           "shape":"Integer",
-          "documentation":"<p>The size of each page of results.</p>"
+          "documentation":"<p>The maximum size of each page of results.</p>"
         },
         "NextToken":{
           "shape":"String",
-          "documentation":"<p>The DescribeDirectoryConfigsResult.NextToken from a previous call to DescribeDirectoryConfigs. If this is the first call, pass null.</p>"
+          "documentation":"<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
         }
       }
     },
@@ -706,11 +871,11 @@
       "members":{
         "DirectoryConfigs":{
           "shape":"DirectoryConfigList",
-          "documentation":"<p>The list of directory configurations.</p>"
+          "documentation":"<p>Information about the directory configurations.</p>"
         },
         "NextToken":{
           "shape":"String",
-          "documentation":"<p>If not null, more results are available. To retrieve the next set of items, pass this value for the NextToken parameter in a subsequent call to DescribeDirectoryConfigs.</p>"
+          "documentation":"<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
         }
       }
     },
@@ -719,7 +884,7 @@
       "members":{
         "Names":{
           "shape":"StringList",
-          "documentation":"<p>The fleet names to describe. Use null to describe all the fleets for the AWS account.</p>"
+          "documentation":"<p>The names of the fleets to describe.</p>"
         },
         "NextToken":{
           "shape":"String",
@@ -732,7 +897,7 @@
       "members":{
         "Fleets":{
           "shape":"FleetList",
-          "documentation":"<p>The list of fleet details.</p>"
+          "documentation":"<p>Information about the fleets.</p>"
         },
         "NextToken":{
           "shape":"String",
@@ -740,12 +905,27 @@
         }
       }
     },
+    "DescribeImageBuildersRequest":{
+      "type":"structure",
+      "members":{
+        "Names":{"shape":"StringList"},
+        "MaxResults":{"shape":"Integer"},
+        "NextToken":{"shape":"String"}
+      }
+    },
+    "DescribeImageBuildersResult":{
+      "type":"structure",
+      "members":{
+        "ImageBuilders":{"shape":"ImageBuilderList"},
+        "NextToken":{"shape":"String"}
+      }
+    },
     "DescribeImagesRequest":{
       "type":"structure",
       "members":{
         "Names":{
           "shape":"StringList",
-          "documentation":"<p>A specific list of images to describe.</p>"
+          "documentation":"<p>The names of the images to describe.</p>"
         }
       }
     },
@@ -754,7 +934,7 @@
       "members":{
         "Images":{
           "shape":"ImageList",
-          "documentation":"<p>The list of images.</p>"
+          "documentation":"<p>Information about the images.</p>"
         }
       }
     },
@@ -767,15 +947,15 @@
       "members":{
         "StackName":{
           "shape":"String",
-          "documentation":"<p>The name of the stack for which to list sessions.</p>"
+          "documentation":"<p>The name of the stack.</p>"
         },
         "FleetName":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet for which to list sessions.</p>"
+          "documentation":"<p>The name of the fleet.</p>"
         },
         "UserId":{
           "shape":"UserId",
-          "documentation":"<p>The user for whom to list sessions. Use null to describe all the sessions for the stack and fleet.</p>"
+          "documentation":"<p>The user ID.</p>"
         },
         "NextToken":{
           "shape":"String",
@@ -783,11 +963,11 @@
         },
         "Limit":{
           "shape":"Integer",
-          "documentation":"<p>The size of each page of results. The default value is 20 and the maximum supported value is 50.</p>"
+          "documentation":"<p>The size of each page of results. The default value is 20 and the maximum value is 50.</p>"
         },
         "AuthenticationType":{
           "shape":"AuthenticationType",
-          "documentation":"<p>The authentication method of the user. It can be <code>API</code> for a user authenticated using a streaming URL, or <code>SAML</code> for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.</p>"
+          "documentation":"<p>The authentication method. Specify <code>API</code> for a user authenticated using a streaming URL or <code>SAML</code> for a SAML federated user. The default is to authenticate users using a streaming URL.</p>"
         }
       }
     },
@@ -796,7 +976,7 @@
       "members":{
         "Sessions":{
           "shape":"SessionList",
-          "documentation":"<p>The list of streaming sessions.</p>"
+          "documentation":"<p>Information about the streaming sessions.</p>"
         },
         "NextToken":{
           "shape":"String",
@@ -809,7 +989,7 @@
       "members":{
         "Names":{
           "shape":"StringList",
-          "documentation":"<p>The stack names to describe. Use null to describe all the stacks for the AWS account.</p>"
+          "documentation":"<p>The names of the stacks to describe.</p>"
         },
         "NextToken":{
           "shape":"String",
@@ -822,7 +1002,7 @@
       "members":{
         "Stacks":{
           "shape":"StackList",
-          "documentation":"<p>The list of stack details.</p>"
+          "documentation":"<p>Information about the stacks.</p>"
         },
         "NextToken":{
           "shape":"String",
@@ -840,22 +1020,22 @@
       "members":{
         "DirectoryName":{
           "shape":"DirectoryName",
-          "documentation":"<p>The fully qualified name of the directory, such as corp.example.com</p>"
+          "documentation":"<p>The fully qualified name of the directory (for example, corp.example.com).</p>"
         },
         "OrganizationalUnitDistinguishedNames":{
           "shape":"OrganizationalUnitDistinguishedNamesList",
-          "documentation":"<p>The list of the distinguished names of organizational units in which to place computer accounts.</p>"
+          "documentation":"<p>The distinguished names of the organizational units for computer accounts.</p>"
         },
         "ServiceAccountCredentials":{
           "shape":"ServiceAccountCredentials",
-          "documentation":"<p>The <i>AccountName</i> and <i>AccountPassword</i> of the service account, to be used by the streaming instance to connect to the directory.</p>"
+          "documentation":"<p>The credentials for the service account used by the streaming instance to connect to the directory.</p>"
         },
         "CreatedTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The time stamp when the directory configuration was created within AppStream 2.0.</p>"
+          "documentation":"<p>The time the directory configuration was created.</p>"
         }
       },
-      "documentation":"<p>Full directory configuration details, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
+      "documentation":"<p>Configuration information for the directory used to join domains.</p>"
     },
     "DirectoryConfigList":{
       "type":"list",
@@ -875,11 +1055,11 @@
       "members":{
         "FleetName":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet to disassociate.</p>"
+          "documentation":"<p>The name of the fleet.</p>"
         },
         "StackName":{
           "shape":"String",
-          "documentation":"<p>The name of the stack with which the fleet is associated.</p>"
+          "documentation":"<p>The name of the stack.</p>"
         }
       }
     },
@@ -897,14 +1077,14 @@
       "members":{
         "DirectoryName":{
           "shape":"DirectoryName",
-          "documentation":"<p>The fully qualified name of the directory, such as corp.example.com</p>"
+          "documentation":"<p>The fully qualified name of the directory (for example, corp.example.com).</p>"
         },
         "OrganizationalUnitDistinguishedName":{
           "shape":"OrganizationalUnitDistinguishedName",
-          "documentation":"<p>The distinguished name of the organizational unit to place the computer account in.</p>"
+          "documentation":"<p>The distinguished name of the organizational unit for computer accounts.</p>"
         }
       },
-      "documentation":"<p>The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
+      "documentation":"<p>Contains the information needed for streaming instances to join a domain.</p>"
     },
     "ErrorMessage":{
       "type":"string",
@@ -916,7 +1096,7 @@
       "members":{
         "SessionId":{
           "shape":"String",
-          "documentation":"<p>The unique identifier of the streaming session to be stopped.</p>"
+          "documentation":"<p>The ID of the streaming session.</p>"
         }
       }
     },
@@ -946,11 +1126,11 @@
         },
         "DisplayName":{
           "shape":"String",
-          "documentation":"<p>The name displayed to end users on the AppStream 2.0 portal.</p>"
+          "documentation":"<p>The fleet name displayed to end users.</p>"
         },
         "Description":{
           "shape":"String",
-          "documentation":"<p>The description displayed to end users on the AppStream 2.0 portal.</p>"
+          "documentation":"<p>The description displayed to end users.</p>"
         },
         "ImageName":{
           "shape":"String",
@@ -963,15 +1143,15 @@
         "FleetType":{"shape":"FleetType"},
         "ComputeCapacityStatus":{
           "shape":"ComputeCapacityStatus",
-          "documentation":"<p>The capacity information for the fleet.</p>"
+          "documentation":"<p>The capacity status for the fleet.</p>"
         },
         "MaxUserDurationInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The maximum time for which a streaming session can run. The value can be any numeric value in seconds between 600 and 57600.</p>"
+          "documentation":"<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.</p>"
         },
         "DisconnectTimeoutInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.</p>"
+          "documentation":"<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.</p>"
         },
         "State":{
           "shape":"FleetState",
@@ -983,26 +1163,26 @@
         },
         "CreatedTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The time at which the fleet was created.</p>"
+          "documentation":"<p>The time the fleet was created.</p>"
         },
         "FleetErrors":{
           "shape":"FleetErrors",
-          "documentation":"<p>The list of fleet errors is appended to this list.</p>"
+          "documentation":"<p>The fleet errors.</p>"
         },
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
-          "documentation":"<p>Whether default internet access is enabled for the fleet. </p>"
+          "documentation":"<p>Indicates whether default internet access is enabled for the fleet.</p>"
         },
         "DomainJoinInfo":{
           "shape":"DomainJoinInfo",
-          "documentation":"<p>The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
+          "documentation":"<p>The information needed for streaming instances to join a domain.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for a fleet.</p>"
     },
     "FleetAttribute":{
       "type":"string",
-      "documentation":"<p>Fleet attribute.</p>",
+      "documentation":"<p>The fleet attribute.</p>",
       "enum":[
         "VPC_CONFIGURATION",
         "VPC_CONFIGURATION_SECURITY_GROUP_IDS",
@@ -1012,21 +1192,21 @@
     "FleetAttributes":{
       "type":"list",
       "member":{"shape":"FleetAttribute"},
-      "documentation":"<p>A list of fleet attributes.</p>"
+      "documentation":"<p>The fleet attributes.</p>"
     },
     "FleetError":{
       "type":"structure",
       "members":{
         "ErrorCode":{
           "shape":"FleetErrorCode",
-          "documentation":"<p>The error code for the fleet error.</p>"
+          "documentation":"<p>The error code.</p>"
         },
         "ErrorMessage":{
           "shape":"String",
-          "documentation":"<p>The error message generated when the fleet has errors.</p>"
+          "documentation":"<p>The error message.</p>"
         }
       },
-      "documentation":"<p>The details of the fleet error.</p>"
+      "documentation":"<p>Describes a fleet error.</p>"
     },
     "FleetErrorCode":{
       "type":"string",
@@ -1066,7 +1246,7 @@
     "FleetList":{
       "type":"list",
       "member":{"shape":"Fleet"},
-      "documentation":"<p>A list of fleets.</p>"
+      "documentation":"<p>The fleets.</p>"
     },
     "FleetState":{
       "type":"string",
@@ -1090,31 +1270,31 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The unique identifier for the image.</p>"
+          "documentation":"<p>The name of the image.</p>"
         },
         "Arn":{
           "shape":"Arn",
-          "documentation":"<p>The ARN for the image.</p>"
+          "documentation":"<p>The ARN of the image.</p>"
         },
         "BaseImageArn":{
           "shape":"Arn",
-          "documentation":"<p>The source image ARN from which this image was created.</p>"
+          "documentation":"<p>The ARN of the image from which this image was created.</p>"
         },
         "DisplayName":{
           "shape":"String",
-          "documentation":"<p>The display name for the image.</p>"
+          "documentation":"<p>The image name displayed to end users.</p>"
         },
         "State":{
           "shape":"ImageState",
-          "documentation":"<p>The image starts in the <b>PENDING</b> state. If image creation succeeds, it moves to <b>AVAILABLE</b>. If image creation fails, it moves to <b>FAILED</b>.</p>"
+          "documentation":"<p>The image starts in the <code>PENDING</code> state. If image creation succeeds, the state is <code>AVAILABLE</code>. If image creation fails, the state is <code>FAILED</code>.</p>"
         },
         "Visibility":{
           "shape":"VisibilityType",
-          "documentation":"<p>The visibility of an image to the user; images can be public or private.</p>"
+          "documentation":"<p>Indicates whether the image is public or private.</p>"
         },
         "ImageBuilderSupported":{
           "shape":"Boolean",
-          "documentation":"<p>Whether an image builder can be launched from this image.</p>"
+          "documentation":"<p>Indicates whether an image builder can be launched from this image.</p>"
         },
         "Platform":{
           "shape":"PlatformType",
@@ -1122,7 +1302,7 @@
         },
         "Description":{
           "shape":"String",
-          "documentation":"<p>A meaningful description for the image.</p>"
+          "documentation":"<p>The description displayed to end users.</p>"
         },
         "StateChangeReason":{
           "shape":"ImageStateChangeReason",
@@ -1130,18 +1310,69 @@
         },
         "Applications":{
           "shape":"Applications",
-          "documentation":"<p>The applications associated with an image.</p>"
+          "documentation":"<p>The applications associated with the image.</p>"
         },
         "CreatedTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The time stamp when the image was created.</p>"
+          "documentation":"<p>The time the image was created.</p>"
         },
         "PublicBaseImageReleasedDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The AWS release date of the public base image. For private images, this date is the release date of the base image from which the image was created.</p>"
+          "documentation":"<p>The release date of the public base image. For private images, this date is the release date of the base image from which the image was created.</p>"
         }
       },
-      "documentation":"<p>New streaming instances are booted from images. The image stores the application catalog and is connected to fleets.</p>"
+      "documentation":"<p>Describes an image.</p>"
+    },
+    "ImageBuilder":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"String"},
+        "Arn":{"shape":"Arn"},
+        "ImageArn":{"shape":"Arn"},
+        "Description":{"shape":"String"},
+        "DisplayName":{"shape":"String"},
+        "VpcConfig":{"shape":"VpcConfig"},
+        "InstanceType":{"shape":"String"},
+        "Platform":{"shape":"PlatformType"},
+        "State":{"shape":"ImageBuilderState"},
+        "StateChangeReason":{"shape":"ImageBuilderStateChangeReason"},
+        "CreatedTime":{"shape":"Timestamp"},
+        "EnableDefaultInternetAccess":{"shape":"BooleanObject"},
+        "DomainJoinInfo":{"shape":"DomainJoinInfo"},
+        "ImageBuilderErrors":{"shape":"ResourceErrors"}
+      }
+    },
+    "ImageBuilderList":{
+      "type":"list",
+      "member":{"shape":"ImageBuilder"}
+    },
+    "ImageBuilderState":{
+      "type":"string",
+      "enum":[
+        "PENDING",
+        "RUNNING",
+        "STOPPING",
+        "STOPPED",
+        "REBOOTING",
+        "SNAPSHOTTING",
+        "DELETING",
+        "FAILED"
+      ]
+    },
+    "ImageBuilderStateChangeReason":{
+      "type":"structure",
+      "members":{
+        "Code":{"shape":"ImageBuilderStateChangeReasonCode"},
+        "Message":{"shape":"String"}
+      }
+    },
+    "ImageBuilderStateChangeReasonCode":{
+      "type":"string",
+      "enum":[
+        "INTERNAL_ERROR",
+        "IMAGE_UNAVAILABLE"
+      ]
     },
     "ImageList":{
       "type":"list",
@@ -1161,14 +1392,14 @@
       "members":{
         "Code":{
           "shape":"ImageStateChangeReasonCode",
-          "documentation":"<p>The state change reason code of the image.</p>"
+          "documentation":"<p>The state change reason code.</p>"
         },
         "Message":{
           "shape":"String",
-          "documentation":"<p>The state change reason message to the end user.</p>"
+          "documentation":"<p>The state change reason message.</p>"
         }
       },
-      "documentation":"<p>The reason why the last state change occurred.</p>"
+      "documentation":"<p>Describes the reason why the last state change occurred.</p>"
     },
     "ImageStateChangeReasonCode":{
       "type":"string",
@@ -1216,7 +1447,7 @@
       "members":{
         "StackName":{
           "shape":"String",
-          "documentation":"<p>The name of the stack whose associated fleets are listed.</p>"
+          "documentation":"<p>The name of the stack.</p>"
         },
         "NextToken":{
           "shape":"String",
@@ -1229,14 +1460,13 @@
       "members":{
         "Names":{
           "shape":"StringList",
-          "documentation":"<p>The names of associated fleets.</p>"
+          "documentation":"<p>The names of the fleets.</p>"
         },
         "NextToken":{
           "shape":"String",
           "documentation":"<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
         }
-      },
-      "documentation":"<p>The response from a successful operation.</p>"
+      }
     },
     "ListAssociatedStacksRequest":{
       "type":"structure",
@@ -1244,7 +1474,7 @@
       "members":{
         "FleetName":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet whose associated stacks are listed.</p>"
+          "documentation":"<p>The name of the fleet.</p>"
         },
         "NextToken":{
           "shape":"String",
@@ -1257,14 +1487,13 @@
       "members":{
         "Names":{
           "shape":"StringList",
-          "documentation":"<p>The names of associated stacks.</p>"
+          "documentation":"<p>The names of the stacks.</p>"
         },
         "NextToken":{
           "shape":"String",
           "documentation":"<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
         }
-      },
-      "documentation":"<p>The response from a successful operation.</p>"
+      }
     },
     "Long":{"type":"long"},
     "Metadata":{
@@ -1304,6 +1533,18 @@
       "documentation":"<p>The specified resource already exists.</p>",
       "exception":true
     },
+    "ResourceError":{
+      "type":"structure",
+      "members":{
+        "ErrorCode":{"shape":"FleetErrorCode"},
+        "ErrorMessage":{"shape":"String"},
+        "ErrorTimestamp":{"shape":"Timestamp"}
+      }
+    },
+    "ResourceErrors":{
+      "type":"list",
+      "member":{"shape":"ResourceError"}
+    },
     "ResourceIdentifier":{
       "type":"string",
       "documentation":"<p>The ARN of the resource.</p>",
@@ -1336,7 +1577,7 @@
     "SecurityGroupIdList":{
       "type":"list",
       "member":{"shape":"String"},
-      "documentation":"<p>A list of security groups.</p>",
+      "documentation":"<p>The security group IDs.</p>",
       "max":5
     },
     "ServiceAccountCredentials":{
@@ -1348,14 +1589,14 @@
       "members":{
         "AccountName":{
           "shape":"AccountName",
-          "documentation":"<p>The user name of an account in the directory that is used by AppStream 2.0 streaming instances to connect to the directory. This account must have the following privileges: create computer objects, join computers to the domain, change/reset the password on descendant computer objects for the organizational units specified.</p>"
+          "documentation":"<p>The user name of the account. This account must have the following privileges: create computer objects, join computers to the domain, and change/reset the password on descendant computer objects for the organizational units specified.</p>"
         },
         "AccountPassword":{
           "shape":"AccountPassword",
-          "documentation":"<p>The password for the user account for directory actions.</p>"
+          "documentation":"<p>The password for the account.</p>"
         }
       },
-      "documentation":"<p>The <i>AccountName</i> and <i>AccountPassword</i> of the service account, to be used by the streaming instance to connect to the directory.</p>"
+      "documentation":"<p>Describes the credentials for the service account used by the streaming instance to connect to the directory.</p>"
     },
     "Session":{
       "type":"structure",
@@ -1369,7 +1610,7 @@
       "members":{
         "Id":{
           "shape":"String",
-          "documentation":"<p>The unique ID for a streaming session.</p>"
+          "documentation":"<p>The ID of the streaming session.</p>"
         },
         "UserId":{
           "shape":"UserId",
@@ -1377,11 +1618,11 @@
         },
         "StackName":{
           "shape":"String",
-          "documentation":"<p>The name of the stack for which the streaming session was created.</p>"
+          "documentation":"<p>The name of the stack for the streaming session.</p>"
         },
         "FleetName":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet for which the streaming session was created.</p>"
+          "documentation":"<p>The name of the fleet for the streaming session.</p>"
         },
         "State":{
           "shape":"SessionState",
@@ -1389,10 +1630,10 @@
         },
         "AuthenticationType":{
           "shape":"AuthenticationType",
-          "documentation":"<p>The authentication method of the user for whom the session was created. It can be <code>API</code> for a user authenticated using a streaming URL or <code>SAML</code> for a SAML federated user.</p>"
+          "documentation":"<p>The authentication method. The user is authenticated using a streaming URL (<code>API</code>) or SAML federation (<code>SAML</code>).</p>"
         }
       },
-      "documentation":"<p>Contains the parameters for a streaming session.</p>"
+      "documentation":"<p>Describes a streaming session.</p>"
     },
     "SessionList":{
       "type":"list",
@@ -1418,44 +1659,44 @@
         },
         "Name":{
           "shape":"String",
-          "documentation":"<p>The unique identifier of the stack.</p>"
+          "documentation":"<p>The name of the stack.</p>"
         },
         "Description":{
           "shape":"String",
-          "documentation":"<p>A meaningful description for the stack.</p>"
+          "documentation":"<p>The description displayed to end users.</p>"
         },
         "DisplayName":{
           "shape":"String",
-          "documentation":"<p>A display name for the stack.</p>"
+          "documentation":"<p>The stack name displayed to end users.</p>"
         },
         "CreatedTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The time stamp when the stack was created.</p>"
+          "documentation":"<p>The time the stack was created.</p>"
         },
         "StorageConnectors":{
           "shape":"StorageConnectorList",
-          "documentation":"<p>The storage connectors to be enabled for the stack.</p>"
+          "documentation":"<p>The storage connectors to enable.</p>"
         },
         "StackErrors":{
           "shape":"StackErrors",
-          "documentation":"<p>The list of errors associated with the stack.</p>"
+          "documentation":"<p>The errors for the stack.</p>"
         }
       },
-      "documentation":"<p>Details about a stack.</p>"
+      "documentation":"<p>Describes a stack.</p>"
     },
     "StackError":{
       "type":"structure",
       "members":{
         "ErrorCode":{
           "shape":"StackErrorCode",
-          "documentation":"<p>The error code of a stack error.</p>"
+          "documentation":"<p>The error code.</p>"
         },
         "ErrorMessage":{
           "shape":"String",
-          "documentation":"<p>The error message of a stack error.</p>"
+          "documentation":"<p>The error message.</p>"
         }
       },
-      "documentation":"<p>Contains the parameters for a stack error.</p>"
+      "documentation":"<p>Describes a stack error.</p>"
     },
     "StackErrorCode":{
       "type":"string",
@@ -1467,12 +1708,12 @@
     "StackErrors":{
       "type":"list",
       "member":{"shape":"StackError"},
-      "documentation":"<p>A list of stack errors.</p>"
+      "documentation":"<p>The stack errors.</p>"
     },
     "StackList":{
       "type":"list",
       "member":{"shape":"Stack"},
-      "documentation":"<p>A list of stacks.</p>"
+      "documentation":"<p>The stacks.</p>"
     },
     "StartFleetRequest":{
       "type":"structure",
@@ -1480,7 +1721,7 @@
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet to start.</p>"
+          "documentation":"<p>The name of the fleet.</p>"
         }
       }
     },
@@ -1489,13 +1730,26 @@
       "members":{
       }
     },
+    "StartImageBuilderRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"String"}
+      }
+    },
+    "StartImageBuilderResult":{
+      "type":"structure",
+      "members":{
+        "ImageBuilder":{"shape":"ImageBuilder"}
+      }
+    },
     "StopFleetRequest":{
       "type":"structure",
       "required":["Name"],
       "members":{
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet to stop.</p>"
+          "documentation":"<p>The name of the fleet.</p>"
         }
       }
     },
@@ -1504,29 +1758,42 @@
       "members":{
       }
     },
+    "StopImageBuilderRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"String"}
+      }
+    },
+    "StopImageBuilderResult":{
+      "type":"structure",
+      "members":{
+        "ImageBuilder":{"shape":"ImageBuilder"}
+      }
+    },
     "StorageConnector":{
       "type":"structure",
       "required":["ConnectorType"],
       "members":{
         "ConnectorType":{
           "shape":"StorageConnectorType",
-          "documentation":"<p>The type of storage connector. The possible values include: HOMEFOLDERS.</p>"
+          "documentation":"<p>The type of storage connector.</p>"
         },
         "ResourceIdentifier":{
           "shape":"ResourceIdentifier",
-          "documentation":"<p>The ARN associated with the storage connector.</p>"
+          "documentation":"<p>The ARN of the storage connector.</p>"
         }
       },
-      "documentation":"<p>Contains the parameters for a storage connector.</p>"
+      "documentation":"<p>Describes a storage connector.</p>"
     },
     "StorageConnectorList":{
       "type":"list",
       "member":{"shape":"StorageConnector"},
-      "documentation":"<p>A list of storage connectors.</p>"
+      "documentation":"<p>The storage connectors.</p>"
     },
     "StorageConnectorType":{
       "type":"string",
-      "documentation":"<p>The type of storage connector. The possible values include: HOMEFOLDERS.</p>",
+      "documentation":"<p>The type of storage connector.</p>",
       "enum":["HOMEFOLDERS"]
     },
     "StreamingUrlUserId":{
@@ -1546,7 +1813,7 @@
     "SubnetIdList":{
       "type":"list",
       "member":{"shape":"String"},
-      "documentation":"<p>A list of subnet IDs.</p>"
+      "documentation":"<p>The subnet IDs.</p>"
     },
     "Timestamp":{"type":"timestamp"},
     "UpdateDirectoryConfigRequest":{
@@ -1555,15 +1822,15 @@
       "members":{
         "DirectoryName":{
           "shape":"DirectoryName",
-          "documentation":"<p>The name of the existing directory configuration to be updated.</p>"
+          "documentation":"<p>The name of the directory configuration.</p>"
         },
         "OrganizationalUnitDistinguishedNames":{
           "shape":"OrganizationalUnitDistinguishedNamesList",
-          "documentation":"<p>The list of the distinguished names of organizational units to place computer accounts in.</p>"
+          "documentation":"<p>The distinguished names of the organizational units for computer accounts.</p>"
         },
         "ServiceAccountCredentials":{
           "shape":"ServiceAccountCredentials",
-          "documentation":"<p>The <i>AccountName</i> and <i>AccountPassword</i> values for the service account, which are used by the streaming instance to connect to the directory</p>"
+          "documentation":"<p>The credentials for the service account used by the streaming instance to connect to the directory.</p>"
         }
       }
     },
@@ -1572,7 +1839,7 @@
       "members":{
         "DirectoryConfig":{
           "shape":"DirectoryConfig",
-          "documentation":"<p>The updated directory configuration details.</p>"
+          "documentation":"<p>Information about the directory configuration.</p>"
         }
       }
     },
@@ -1582,11 +1849,11 @@
       "members":{
         "ImageName":{
           "shape":"String",
-          "documentation":"<p>The image name from which a fleet is created.</p>"
+          "documentation":"<p>The name of the image used by the fleet.</p>"
         },
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet.</p>"
+          "documentation":"<p>A unique name for the fleet.</p>"
         },
         "InstanceType":{
           "shape":"String",
@@ -1594,7 +1861,7 @@
         },
         "ComputeCapacity":{
           "shape":"ComputeCapacity",
-          "documentation":"<p>The parameters for the capacity allocated to the fleet. </p>"
+          "documentation":"<p>The desired capacity for the fleet.</p>"
         },
         "VpcConfig":{
           "shape":"VpcConfig",
@@ -1602,24 +1869,24 @@
         },
         "MaxUserDurationInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.</p>"
+          "documentation":"<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.</p>"
         },
         "DisconnectTimeoutInSeconds":{
           "shape":"Integer",
-          "documentation":"<p>The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.</p>"
+          "documentation":"<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.</p>"
         },
         "DeleteVpcConfig":{
           "shape":"Boolean",
-          "documentation":"<p>Delete the VPC association for the specified fleet.</p>",
+          "documentation":"<p>Deletes the VPC association for the specified fleet.</p>",
           "deprecated":true
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>The description displayed to end users on the AppStream 2.0 portal.</p>"
+          "documentation":"<p>The description displayed to end users.</p>"
         },
         "DisplayName":{
           "shape":"DisplayName",
-          "documentation":"<p>The name displayed to end users on the AppStream 2.0 portal.</p>"
+          "documentation":"<p>The fleet name displayed to end users.</p>"
         },
         "EnableDefaultInternetAccess":{
           "shape":"BooleanObject",
@@ -1627,11 +1894,11 @@
         },
         "DomainJoinInfo":{
           "shape":"DomainJoinInfo",
-          "documentation":"<p>The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.</p>"
+          "documentation":"<p>The information needed for streaming instances to join a domain.</p>"
         },
         "AttributesToDelete":{
           "shape":"FleetAttributes",
-          "documentation":"<p>Fleet attributes to be deleted.</p>"
+          "documentation":"<p>The fleet attributes to delete.</p>"
         }
       }
     },
@@ -1640,7 +1907,7 @@
       "members":{
         "Fleet":{
           "shape":"Fleet",
-          "documentation":"<p>A list of fleet details.</p>"
+          "documentation":"<p>Information about the fleet.</p>"
         }
       }
     },
@@ -1650,23 +1917,23 @@
       "members":{
         "DisplayName":{
           "shape":"DisplayName",
-          "documentation":"<p>The name displayed to end users on the AppStream 2.0 portal.</p>"
+          "documentation":"<p>The stack name displayed to end users.</p>"
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>The description displayed to end users on the AppStream 2.0 portal.</p>"
+          "documentation":"<p>The description displayed to end users.</p>"
         },
         "Name":{
           "shape":"String",
-          "documentation":"<p>The name of the stack to update.</p>"
+          "documentation":"<p>The name of the stack.</p>"
         },
         "StorageConnectors":{
           "shape":"StorageConnectorList",
-          "documentation":"<p>The storage connectors to be enabled for the stack.</p>"
+          "documentation":"<p>The storage connectors to enable.</p>"
         },
         "DeleteStorageConnectors":{
           "shape":"Boolean",
-          "documentation":"<p>Remove all the storage connectors currently enabled for the stack.</p>"
+          "documentation":"<p>Deletes the storage connectors currently enabled for the stack.</p>"
         }
       }
     },
@@ -1675,7 +1942,7 @@
       "members":{
         "Stack":{
           "shape":"Stack",
-          "documentation":"<p>A list of stack details.</p>"
+          "documentation":"<p>Information about the stack.</p>"
         }
       }
     },
@@ -1696,15 +1963,15 @@
       "members":{
         "SubnetIds":{
           "shape":"SubnetIdList",
-          "documentation":"<p>The list of subnets to which a network interface is established from the fleet instance.</p>"
+          "documentation":"<p>The subnets to which a network interface is established from the fleet instance.</p>"
         },
         "SecurityGroupIds":{
           "shape":"SecurityGroupIdList",
-          "documentation":"<p>Security groups associated with the fleet.</p>"
+          "documentation":"<p>The security groups for the fleet.</p>"
         }
       },
-      "documentation":"<p>VPC configuration information.</p>"
+      "documentation":"<p>Describes VPC configuration information.</p>"
     }
   },
-  "documentation":"<fullname>Amazon AppStream 2.0</fullname> <p>API documentation for Amazon AppStream 2.0.</p>"
+  "documentation":"<fullname>Amazon AppStream 2.0</fullname> <p>You can use Amazon AppStream 2.0 to stream desktop applications to any device running a web browser, without rewriting them.</p>"
 }

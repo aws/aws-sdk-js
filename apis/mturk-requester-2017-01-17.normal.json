@@ -735,7 +735,7 @@
           "shape":"CustomerId",
           "documentation":"<p>The ID of the Worker to whom the bonus was paid.</p>"
         },
-        "BonusAmount":{"shape":"NumericValue"},
+        "BonusAmount":{"shape":"CurrencyAmount"},
         "AssignmentId":{
           "shape":"EntityId",
           "documentation":"<p>The ID of the assignment associated with this bonus payment.</p>"
@@ -778,7 +778,10 @@
     },
     "CreateAdditionalAssignmentsForHITRequest":{
       "type":"structure",
-      "required":["HITId"],
+      "required":[
+        "HITId",
+        "NumberOfAdditionalAssignments"
+      ],
       "members":{
         "HITId":{
           "shape":"EntityId",
@@ -826,7 +829,7 @@
           "documentation":"<p> The amount of time, in seconds, that a Worker has to complete the HIT after accepting it. If a Worker does not complete the assignment within the specified duration, the assignment is considered abandoned. If the HIT is still active (that is, its lifetime has not elapsed), the assignment becomes available for other users to find and accept. </p>"
         },
         "Reward":{
-          "shape":"NumericValue",
+          "shape":"CurrencyAmount",
           "documentation":"<p> The amount of money the Requester will pay a Worker for successfully completing the HIT. </p>"
         },
         "Title":{
@@ -902,7 +905,7 @@
           "documentation":"<p> The amount of time, in seconds, that a Worker has to complete the HIT after accepting it. If a Worker does not complete the assignment within the specified duration, the assignment is considered abandoned. If the HIT is still active (that is, its lifetime has not elapsed), the assignment becomes available for other users to find and accept. </p>"
         },
         "Reward":{
-          "shape":"NumericValue",
+          "shape":"CurrencyAmount",
           "documentation":"<p> The amount of money the Requester will pay a Worker for successfully completing the HIT. </p>"
         },
         "Title":{
@@ -1071,6 +1074,11 @@
       "members":{
       }
     },
+    "CurrencyAmount":{
+      "type":"string",
+      "documentation":"<p>A string representing a currency amount.</p>",
+      "pattern":"^[0-9]+(\\.)?[0-9]{0,2}$"
+    },
     "CustomerId":{
       "type":"string",
       "max":64,
@@ -1192,8 +1200,8 @@
     "GetAccountBalanceResponse":{
       "type":"structure",
       "members":{
-        "AvailableBalance":{"shape":"NumericValue"},
-        "OnHoldBalance":{"shape":"NumericValue"}
+        "AvailableBalance":{"shape":"CurrencyAmount"},
+        "OnHoldBalance":{"shape":"CurrencyAmount"}
       }
     },
     "GetAssignmentRequest":{
@@ -1356,7 +1364,7 @@
           "shape":"Integer",
           "documentation":"<p>The number of times the HIT can be accepted and completed before the HIT becomes unavailable. </p>"
         },
-        "Reward":{"shape":"NumericValue"},
+        "Reward":{"shape":"CurrencyAmount"},
         "AutoApprovalDelayInSeconds":{
           "shape":"Long",
           "documentation":"<p>The amount of time, in seconds, after the Worker submits an assignment for the HIT that the results are automatically approved by Amazon Mechanical Turk. This is the amount of time the Requester has to reject an assignment submitted by a Worker before the assignment is auto-approved and the Worker is paid. </p>"
@@ -1398,6 +1406,10 @@
     },
     "HITLayoutParameter":{
       "type":"structure",
+      "required":[
+        "Name",
+        "Value"
+      ],
       "members":{
         "Name":{
           "shape":"String",
@@ -1808,16 +1820,18 @@
       "type":"structure",
       "required":[
         "Destination",
-        "Transport"
+        "Transport",
+        "Version",
+        "EventTypes"
       ],
       "members":{
         "Destination":{
           "shape":"String",
-          "documentation":"<p> The destination for notification messages. or email notifications (if Transport is Email), this is an email address. For Amazon Simple Queue Service (Amazon SQS) notifications (if Transport is SQS), this is the URL for your Amazon SQS queue. </p>"
+          "documentation":"<p> The target for notification messages. The Destination’s format is determined by the specified Transport: </p> <ul> <li> <p>When Transport is Email, the Destination is your email address.</p> </li> <li> <p>When Transport is SQS, the Destination is your queue URL.</p> </li> <li> <p>When Transport is SNS, the Destination is the ARN of your topic.</p> </li> </ul>"
         },
         "Transport":{
           "shape":"NotificationTransport",
-          "documentation":"<p> The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS. </p>"
+          "documentation":"<p> The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS | SNS. </p>"
         },
         "Version":{
           "shape":"String",
@@ -1834,7 +1848,8 @@
       "type":"string",
       "enum":[
         "Email",
-        "SQS"
+        "SQS",
+        "SNS"
       ]
     },
     "NotifyWorkersFailureCode":{
@@ -1896,11 +1911,6 @@
           "documentation":"<p> When MTurk sends notifications to the list of Workers, it returns back any failures it encounters in this list of NotifyWorkersFailureStatus objects. </p>"
         }
       }
-    },
-    "NumericValue":{
-      "type":"string",
-      "documentation":"<p>A string representing a numeric value.</p>",
-      "pattern":"^[0-9]+(\\.)?[0-9]*$"
     },
     "PaginationToken":{
       "type":"string",
@@ -2125,7 +2135,10 @@
     },
     "RejectAssignmentRequest":{
       "type":"structure",
-      "required":["AssignmentId"],
+      "required":[
+        "AssignmentId",
+        "RequesterFeedback"
+      ],
       "members":{
         "AssignmentId":{
           "shape":"EntityId",
@@ -2228,6 +2241,7 @@
     },
     "ReviewPolicy":{
       "type":"structure",
+      "required":["PolicyName"],
       "members":{
         "PolicyName":{
           "shape":"String",
@@ -2311,7 +2325,8 @@
       "required":[
         "WorkerId",
         "BonusAmount",
-        "AssignmentId"
+        "AssignmentId",
+        "Reason"
       ],
       "members":{
         "WorkerId":{
@@ -2319,7 +2334,7 @@
           "documentation":"<p>The ID of the Worker being paid the bonus.</p>"
         },
         "BonusAmount":{
-          "shape":"NumericValue",
+          "shape":"CurrencyAmount",
           "documentation":"<p> The Bonus amount is a US Dollar amount specified using a string (for example, \"5\" represents $5.00 USD and \"101.42\" represents $101.42 USD). Do not include currency symbols or currency codes. </p>"
         },
         "AssignmentId":{
@@ -2382,7 +2397,10 @@
     "TurkErrorCode":{"type":"string"},
     "UpdateExpirationForHITRequest":{
       "type":"structure",
-      "required":["HITId"],
+      "required":[
+        "HITId",
+        "ExpireAt"
+      ],
       "members":{
         "HITId":{
           "shape":"EntityId",

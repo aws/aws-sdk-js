@@ -12,179 +12,235 @@ declare class AppStream extends Service {
   constructor(options?: AppStream.Types.ClientConfiguration)
   config: Config & AppStream.Types.ClientConfiguration;
   /**
-   * Associate a fleet to a stack.
+   * Associates the specified fleet with the specified stack.
    */
   associateFleet(params: AppStream.Types.AssociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateFleetResult) => void): Request<AppStream.Types.AssociateFleetResult, AWSError>;
   /**
-   * Associate a fleet to a stack.
+   * Associates the specified fleet with the specified stack.
    */
   associateFleet(callback?: (err: AWSError, data: AppStream.Types.AssociateFleetResult) => void): Request<AppStream.Types.AssociateFleetResult, AWSError>;
   /**
-   * Creates a directory configuration with the given parameters.
+   * Creates a directory configuration.
    */
   createDirectoryConfig(params: AppStream.Types.CreateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
   /**
-   * Creates a directory configuration with the given parameters.
+   * Creates a directory configuration.
    */
   createDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
   /**
-   * Creates a new fleet.
+   * Creates a fleet.
    */
   createFleet(params: AppStream.Types.CreateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.CreateFleetResult) => void): Request<AppStream.Types.CreateFleetResult, AWSError>;
   /**
-   * Creates a new fleet.
+   * Creates a fleet.
    */
   createFleet(callback?: (err: AWSError, data: AppStream.Types.CreateFleetResult) => void): Request<AppStream.Types.CreateFleetResult, AWSError>;
   /**
-   * Create a new stack.
+   * 
+   */
+  createImageBuilder(params: AppStream.Types.CreateImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderResult) => void): Request<AppStream.Types.CreateImageBuilderResult, AWSError>;
+  /**
+   * 
+   */
+  createImageBuilder(callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderResult) => void): Request<AppStream.Types.CreateImageBuilderResult, AWSError>;
+  /**
+   * 
+   */
+  createImageBuilderStreamingURL(params: AppStream.Types.CreateImageBuilderStreamingURLRequest, callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateImageBuilderStreamingURLResult, AWSError>;
+  /**
+   * 
+   */
+  createImageBuilderStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateImageBuilderStreamingURLResult, AWSError>;
+  /**
+   * Creates a stack.
    */
   createStack(params: AppStream.Types.CreateStackRequest, callback?: (err: AWSError, data: AppStream.Types.CreateStackResult) => void): Request<AppStream.Types.CreateStackResult, AWSError>;
   /**
-   * Create a new stack.
+   * Creates a stack.
    */
   createStack(callback?: (err: AWSError, data: AppStream.Types.CreateStackResult) => void): Request<AppStream.Types.CreateStackResult, AWSError>;
   /**
-   * Creates a URL to start an AppStream 2.0 streaming session for a user. By default, the URL is valid only for 1 minute from the time that it is generated.
+   * Creates a URL to start a streaming session for the specified user. By default, the URL is valid only for one minute from the time that it is generated.
    */
   createStreamingURL(params: AppStream.Types.CreateStreamingURLRequest, callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
-   * Creates a URL to start an AppStream 2.0 streaming session for a user. By default, the URL is valid only for 1 minute from the time that it is generated.
+   * Creates a URL to start a streaming session for the specified user. By default, the URL is valid only for one minute from the time that it is generated.
    */
   createStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
-   * Deletes the directory configuration with the given parameters.
+   * Deletes the specified directory configuration.
    */
   deleteDirectoryConfig(params: AppStream.Types.DeleteDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
   /**
-   * Deletes the directory configuration with the given parameters.
+   * Deletes the specified directory configuration.
    */
   deleteDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
   /**
-   * Deletes a fleet.
+   * Deletes the specified fleet.
    */
   deleteFleet(params: AppStream.Types.DeleteFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteFleetResult) => void): Request<AppStream.Types.DeleteFleetResult, AWSError>;
   /**
-   * Deletes a fleet.
+   * Deletes the specified fleet.
    */
   deleteFleet(callback?: (err: AWSError, data: AppStream.Types.DeleteFleetResult) => void): Request<AppStream.Types.DeleteFleetResult, AWSError>;
   /**
-   * Deletes the stack. After this operation completes, the environment can no longer be activated, and any reservations made for the stack are released.
+   * 
+   */
+  deleteImage(params: AppStream.Types.DeleteImageRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteImageResult) => void): Request<AppStream.Types.DeleteImageResult, AWSError>;
+  /**
+   * 
+   */
+  deleteImage(callback?: (err: AWSError, data: AppStream.Types.DeleteImageResult) => void): Request<AppStream.Types.DeleteImageResult, AWSError>;
+  /**
+   * 
+   */
+  deleteImageBuilder(params: AppStream.Types.DeleteImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteImageBuilderResult) => void): Request<AppStream.Types.DeleteImageBuilderResult, AWSError>;
+  /**
+   * 
+   */
+  deleteImageBuilder(callback?: (err: AWSError, data: AppStream.Types.DeleteImageBuilderResult) => void): Request<AppStream.Types.DeleteImageBuilderResult, AWSError>;
+  /**
+   * Deletes the specified stack. After this operation completes, the environment can no longer be activated and any reservations made for the stack are released.
    */
   deleteStack(params: AppStream.Types.DeleteStackRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
   /**
-   * Deletes the stack. After this operation completes, the environment can no longer be activated, and any reservations made for the stack are released.
+   * Deletes the specified stack. After this operation completes, the environment can no longer be activated and any reservations made for the stack are released.
    */
   deleteStack(callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
   /**
-   * Returns a list describing the specified directory configurations.
+   * Describes the specified directory configurations.
    */
   describeDirectoryConfigs(params: AppStream.Types.DescribeDirectoryConfigsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
   /**
-   * Returns a list describing the specified directory configurations.
+   * Describes the specified directory configurations.
    */
   describeDirectoryConfigs(callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
   /**
-   * If fleet names are provided, this operation describes the specified fleets; otherwise, all the fleets in the account are described.
+   * Describes the specified fleets or all fleets in the account.
    */
   describeFleets(params: AppStream.Types.DescribeFleetsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeFleetsResult) => void): Request<AppStream.Types.DescribeFleetsResult, AWSError>;
   /**
-   * If fleet names are provided, this operation describes the specified fleets; otherwise, all the fleets in the account are described.
+   * Describes the specified fleets or all fleets in the account.
    */
   describeFleets(callback?: (err: AWSError, data: AppStream.Types.DescribeFleetsResult) => void): Request<AppStream.Types.DescribeFleetsResult, AWSError>;
   /**
-   * Describes the images. If a list of names is not provided, all images in your account are returned. This operation does not return a paginated result.
+   * 
+   */
+  describeImageBuilders(params: AppStream.Types.DescribeImageBuildersRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImageBuildersResult) => void): Request<AppStream.Types.DescribeImageBuildersResult, AWSError>;
+  /**
+   * 
+   */
+  describeImageBuilders(callback?: (err: AWSError, data: AppStream.Types.DescribeImageBuildersResult) => void): Request<AppStream.Types.DescribeImageBuildersResult, AWSError>;
+  /**
+   * Describes the specified images or all images in the account.
    */
   describeImages(params: AppStream.Types.DescribeImagesRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
-   * Describes the images. If a list of names is not provided, all images in your account are returned. This operation does not return a paginated result.
+   * Describes the specified images or all images in the account.
    */
   describeImages(callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
-   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. To retrieve the next set of items, pass this value for the nextToken parameter in a subsequent call to this operation. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.
+   * Describes the streaming sessions for the specified stack and fleet. If a user ID is provided, only the streaming sessions for only that user are returned. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
   describeSessions(params: AppStream.Types.DescribeSessionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
-   * Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. To retrieve the next set of items, pass this value for the nextToken parameter in a subsequent call to this operation. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.
+   * Describes the streaming sessions for the specified stack and fleet. If a user ID is provided, only the streaming sessions for only that user are returned. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
   describeSessions(callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
-   * If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. To retrieve the next set of items, pass the nextToken value in a subsequent call to this operation.
+   * Describes the specified stacks or all stacks in the account.
    */
   describeStacks(params: AppStream.Types.DescribeStacksRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeStacksResult) => void): Request<AppStream.Types.DescribeStacksResult, AWSError>;
   /**
-   * If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. To retrieve the next set of items, pass the nextToken value in a subsequent call to this operation.
+   * Describes the specified stacks or all stacks in the account.
    */
   describeStacks(callback?: (err: AWSError, data: AppStream.Types.DescribeStacksResult) => void): Request<AppStream.Types.DescribeStacksResult, AWSError>;
   /**
-   * Disassociates a fleet from a stack.
+   * Disassociates the specified fleet from the specified stack.
    */
   disassociateFleet(params: AppStream.Types.DisassociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
   /**
-   * Disassociates a fleet from a stack.
+   * Disassociates the specified fleet from the specified stack.
    */
   disassociateFleet(callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
   /**
-   * This operation immediately stops a streaming session.
+   * Stops the specified streaming session.
    */
   expireSession(params: AppStream.Types.ExpireSessionRequest, callback?: (err: AWSError, data: AppStream.Types.ExpireSessionResult) => void): Request<AppStream.Types.ExpireSessionResult, AWSError>;
   /**
-   * This operation immediately stops a streaming session.
+   * Stops the specified streaming session.
    */
   expireSession(callback?: (err: AWSError, data: AppStream.Types.ExpireSessionResult) => void): Request<AppStream.Types.ExpireSessionResult, AWSError>;
   /**
-   * Lists all fleets associated with the stack.
+   * Lists the fleets associated with the specified stack.
    */
   listAssociatedFleets(params: AppStream.Types.ListAssociatedFleetsRequest, callback?: (err: AWSError, data: AppStream.Types.ListAssociatedFleetsResult) => void): Request<AppStream.Types.ListAssociatedFleetsResult, AWSError>;
   /**
-   * Lists all fleets associated with the stack.
+   * Lists the fleets associated with the specified stack.
    */
   listAssociatedFleets(callback?: (err: AWSError, data: AppStream.Types.ListAssociatedFleetsResult) => void): Request<AppStream.Types.ListAssociatedFleetsResult, AWSError>;
   /**
-   * Lists all stacks to which the specified fleet is associated.
+   * Lists the stacks associated with the specified fleet.
    */
   listAssociatedStacks(params: AppStream.Types.ListAssociatedStacksRequest, callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
   /**
-   * Lists all stacks to which the specified fleet is associated.
+   * Lists the stacks associated with the specified fleet.
    */
   listAssociatedStacks(callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
   /**
-   * Starts a fleet.
+   * Starts the specified fleet.
    */
   startFleet(params: AppStream.Types.StartFleetRequest, callback?: (err: AWSError, data: AppStream.Types.StartFleetResult) => void): Request<AppStream.Types.StartFleetResult, AWSError>;
   /**
-   * Starts a fleet.
+   * Starts the specified fleet.
    */
   startFleet(callback?: (err: AWSError, data: AppStream.Types.StartFleetResult) => void): Request<AppStream.Types.StartFleetResult, AWSError>;
   /**
-   * Stops a fleet.
+   * 
+   */
+  startImageBuilder(params: AppStream.Types.StartImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StartImageBuilderResult) => void): Request<AppStream.Types.StartImageBuilderResult, AWSError>;
+  /**
+   * 
+   */
+  startImageBuilder(callback?: (err: AWSError, data: AppStream.Types.StartImageBuilderResult) => void): Request<AppStream.Types.StartImageBuilderResult, AWSError>;
+  /**
+   * Stops the specified fleet.
    */
   stopFleet(params: AppStream.Types.StopFleetRequest, callback?: (err: AWSError, data: AppStream.Types.StopFleetResult) => void): Request<AppStream.Types.StopFleetResult, AWSError>;
   /**
-   * Stops a fleet.
+   * Stops the specified fleet.
    */
   stopFleet(callback?: (err: AWSError, data: AppStream.Types.StopFleetResult) => void): Request<AppStream.Types.StopFleetResult, AWSError>;
   /**
-   * Updates the directory configuration with the given parameters.
+   * 
+   */
+  stopImageBuilder(params: AppStream.Types.StopImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StopImageBuilderResult) => void): Request<AppStream.Types.StopImageBuilderResult, AWSError>;
+  /**
+   * 
+   */
+  stopImageBuilder(callback?: (err: AWSError, data: AppStream.Types.StopImageBuilderResult) => void): Request<AppStream.Types.StopImageBuilderResult, AWSError>;
+  /**
+   * Updates the specified directory configuration.
    */
   updateDirectoryConfig(params: AppStream.Types.UpdateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
   /**
-   * Updates the directory configuration with the given parameters.
+   * Updates the specified directory configuration.
    */
   updateDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
   /**
-   * Updates an existing fleet. All the attributes except the fleet name can be updated in the STOPPED state. When a fleet is in the RUNNING state, only DisplayName and ComputeCapacity can be updated. A fleet cannot be updated in a status of STARTING or STOPPING.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
    */
   updateFleet(params: AppStream.Types.UpdateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
-   * Updates an existing fleet. All the attributes except the fleet name can be updated in the STOPPED state. When a fleet is in the RUNNING state, only DisplayName and ComputeCapacity can be updated. A fleet cannot be updated in a status of STARTING or STOPPING.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
    */
   updateFleet(callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
-   * Updates the specified fields in the stack with the specified name.
+   * Updates the specified stack.
    */
   updateStack(params: AppStream.Types.UpdateStackRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateStackResult) => void): Request<AppStream.Types.UpdateStackResult, AWSError>;
   /**
-   * Updates the specified fields in the stack with the specified name.
+   * Updates the specified stack.
    */
   updateStack(callback?: (err: AWSError, data: AppStream.Types.UpdateStackResult) => void): Request<AppStream.Types.UpdateStackResult, AWSError>;
   /**
@@ -209,15 +265,15 @@ declare namespace AppStream {
   export type AccountPassword = string;
   export interface Application {
     /**
-     * The unique identifier for the application.
+     * The name of the application.
      */
     Name?: String;
     /**
-     * The name of the application shown to the end users.
+     * The application name displayed to end users.
      */
     DisplayName?: String;
     /**
-     * The URL for the application icon. This URL may be time-limited.
+     * The URL for the application icon. This URL might be time-limited.
      */
     IconURL?: String;
     /**
@@ -225,11 +281,11 @@ declare namespace AppStream {
      */
     LaunchPath?: String;
     /**
-     * A list of arguments that are passed to the application at launch.
+     * The arguments that are passed to the application at launch.
      */
     LaunchParameters?: String;
     /**
-     * If there is a problem, an application can be disabled after image creation.
+     * If there is a problem, the application can be disabled after image creation.
      */
     Enabled?: Boolean;
     /**
@@ -241,11 +297,11 @@ declare namespace AppStream {
   export type Arn = string;
   export interface AssociateFleetRequest {
     /**
-     * The name of the fleet to associate.
+     * The name of the fleet.
      */
     FleetName: String;
     /**
-     * The name of the stack to which the fleet is associated.
+     * The name of the stack.
      */
     StackName: String;
   }
@@ -270,7 +326,7 @@ declare namespace AppStream {
      */
     Running?: Integer;
     /**
-     * The number of instances that are being used for streaming.
+     * The number of instances in use for streaming.
      */
     InUse?: Integer;
     /**
@@ -280,31 +336,31 @@ declare namespace AppStream {
   }
   export interface CreateDirectoryConfigRequest {
     /**
-     * The fully qualified name of the directory, such as corp.example.com
+     * The fully qualified name of the directory (for example, corp.example.com).
      */
     DirectoryName: DirectoryName;
     /**
-     * The list of the distinguished names of organizational units to place computer accounts in.
+     * The distinguished names of the organizational units for computer accounts.
      */
     OrganizationalUnitDistinguishedNames: OrganizationalUnitDistinguishedNamesList;
     /**
-     * The AccountName and AccountPassword values for the service account, which are used by the streaming instance to connect to the directory.
+     * The credentials for the service account used by the streaming instance to connect to the directory.
      */
     ServiceAccountCredentials: ServiceAccountCredentials;
   }
   export interface CreateDirectoryConfigResult {
     /**
-     * Directory configuration details.
+     * Information about the directory configuration.
      */
     DirectoryConfig?: DirectoryConfig;
   }
   export interface CreateFleetRequest {
     /**
-     * A unique identifier for the fleet.
+     * A unique name for the fleet.
      */
     Name: Name;
     /**
-     * Unique name of the image used by the fleet.
+     * The name of the image used by the fleet.
      */
     ImageName: String;
     /**
@@ -313,7 +369,7 @@ declare namespace AppStream {
     InstanceType: String;
     FleetType?: FleetType;
     /**
-     * The parameters for the capacity allocated to the fleet.
+     * The desired capacity for the fleet.
      */
     ComputeCapacity: ComputeCapacity;
     /**
@@ -321,19 +377,19 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.
+     * The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600. 
+     * The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
-     * The description of the fleet.
+     * The description displayed to end users.
      */
     Description?: Description;
     /**
-     * The display name of the fleet.
+     * The fleet name displayed to end users.
      */
     DisplayName?: DisplayName;
     /**
@@ -341,51 +397,72 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The DirectoryName and OrganizationalUnitDistinguishedName values, which are used to join domains for the AppStream 2.0 streaming instances.
+     * The information needed for streaming instances to join a domain.
      */
     DomainJoinInfo?: DomainJoinInfo;
   }
   export interface CreateFleetResult {
     /**
-     * The details for the created fleet.
+     * Information about the fleet.
      */
     Fleet?: Fleet;
   }
+  export interface CreateImageBuilderRequest {
+    Name: Name;
+    ImageName: String;
+    InstanceType: String;
+    Description?: Description;
+    DisplayName?: DisplayName;
+    VpcConfig?: VpcConfig;
+    EnableDefaultInternetAccess?: BooleanObject;
+    DomainJoinInfo?: DomainJoinInfo;
+  }
+  export interface CreateImageBuilderResult {
+    ImageBuilder?: ImageBuilder;
+  }
+  export interface CreateImageBuilderStreamingURLRequest {
+    Name: String;
+    Validity?: Long;
+  }
+  export interface CreateImageBuilderStreamingURLResult {
+    StreamingURL?: String;
+    Expires?: Timestamp;
+  }
   export interface CreateStackRequest {
     /**
-     * The unique identifier for this stack.
+     * The name of the stack.
      */
     Name: String;
     /**
-     * The description displayed to end users on the AppStream 2.0 portal.
+     * The description displayed to end users.
      */
     Description?: Description;
     /**
-     * The name displayed to end users on the AppStream 2.0 portal.
+     * The stack name displayed to end users.
      */
     DisplayName?: DisplayName;
     /**
-     * The storage connectors to be enabled for the stack.
+     * The storage connectors to enable.
      */
     StorageConnectors?: StorageConnectorList;
   }
   export interface CreateStackResult {
     /**
-     * The details for the created stack.
+     * Information about the stack.
      */
     Stack?: Stack;
   }
   export interface CreateStreamingURLRequest {
     /**
-     * The stack for which the URL is generated.
+     * The name of the stack.
      */
     StackName: String;
     /**
-     * The fleet for which the URL is generated.
+     * The name of the fleet.
      */
     FleetName: String;
     /**
-     * A unique user ID for whom the URL is generated.
+     * The ID of the user.
      */
     UserId: StreamingUrlUserId;
     /**
@@ -393,11 +470,11 @@ declare namespace AppStream {
      */
     ApplicationId?: String;
     /**
-     * The duration up to which the URL returned by this action is valid. The input can be any numeric value in seconds between 1 and 604800 seconds.
+     * The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds.
      */
     Validity?: Long;
     /**
-     * The sessionContext of the streaming URL.
+     * The session context of the streaming URL.
      */
     SessionContext?: String;
   }
@@ -407,13 +484,13 @@ declare namespace AppStream {
      */
     StreamingURL?: String;
     /**
-     * Elapsed seconds after the Unix epoch, when this URL expires.
+     * The elapsed time, in seconds after the Unix epoch, when this URL expires.
      */
     Expires?: Timestamp;
   }
   export interface DeleteDirectoryConfigRequest {
     /**
-     * The name of the directory configuration to be deleted.
+     * The name of the directory configuration.
      */
     DirectoryName: DirectoryName;
   }
@@ -421,15 +498,27 @@ declare namespace AppStream {
   }
   export interface DeleteFleetRequest {
     /**
-     * The name of the fleet to be deleted.
+     * The name of the fleet.
      */
     Name: String;
   }
   export interface DeleteFleetResult {
   }
+  export interface DeleteImageBuilderRequest {
+    Name: Name;
+  }
+  export interface DeleteImageBuilderResult {
+    ImageBuilder?: ImageBuilder;
+  }
+  export interface DeleteImageRequest {
+    Name: Name;
+  }
+  export interface DeleteImageResult {
+    Image?: Image;
+  }
   export interface DeleteStackRequest {
     /**
-     * The name of the stack to delete.
+     * The name of the stack.
      */
     Name: String;
   }
@@ -437,31 +526,31 @@ declare namespace AppStream {
   }
   export interface DescribeDirectoryConfigsRequest {
     /**
-     * A specific list of directory names.
+     * The directory names.
      */
     DirectoryNames?: DirectoryNameList;
     /**
-     * The size of each page of results.
+     * The maximum size of each page of results.
      */
     MaxResults?: Integer;
     /**
-     * The DescribeDirectoryConfigsResult.NextToken from a previous call to DescribeDirectoryConfigs. If this is the first call, pass null.
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: String;
   }
   export interface DescribeDirectoryConfigsResult {
     /**
-     * The list of directory configurations.
+     * Information about the directory configurations.
      */
     DirectoryConfigs?: DirectoryConfigList;
     /**
-     * If not null, more results are available. To retrieve the next set of items, pass this value for the NextToken parameter in a subsequent call to DescribeDirectoryConfigs.
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
     NextToken?: String;
   }
   export interface DescribeFleetsRequest {
     /**
-     * The fleet names to describe. Use null to describe all the fleets for the AWS account.
+     * The names of the fleets to describe.
      */
     Names?: StringList;
     /**
@@ -471,7 +560,7 @@ declare namespace AppStream {
   }
   export interface DescribeFleetsResult {
     /**
-     * The list of fleet details.
+     * Information about the fleets.
      */
     Fleets?: FleetList;
     /**
@@ -479,29 +568,38 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export interface DescribeImageBuildersRequest {
+    Names?: StringList;
+    MaxResults?: Integer;
+    NextToken?: String;
+  }
+  export interface DescribeImageBuildersResult {
+    ImageBuilders?: ImageBuilderList;
+    NextToken?: String;
+  }
   export interface DescribeImagesRequest {
     /**
-     * A specific list of images to describe.
+     * The names of the images to describe.
      */
     Names?: StringList;
   }
   export interface DescribeImagesResult {
     /**
-     * The list of images.
+     * Information about the images.
      */
     Images?: ImageList;
   }
   export interface DescribeSessionsRequest {
     /**
-     * The name of the stack for which to list sessions.
+     * The name of the stack.
      */
     StackName: String;
     /**
-     * The name of the fleet for which to list sessions.
+     * The name of the fleet.
      */
     FleetName: String;
     /**
-     * The user for whom to list sessions. Use null to describe all the sessions for the stack and fleet.
+     * The user ID.
      */
     UserId?: UserId;
     /**
@@ -509,17 +607,17 @@ declare namespace AppStream {
      */
     NextToken?: String;
     /**
-     * The size of each page of results. The default value is 20 and the maximum supported value is 50.
+     * The size of each page of results. The default value is 20 and the maximum value is 50.
      */
     Limit?: Integer;
     /**
-     * The authentication method of the user. It can be API for a user authenticated using a streaming URL, or SAML for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.
+     * The authentication method. Specify API for a user authenticated using a streaming URL or SAML for a SAML federated user. The default is to authenticate users using a streaming URL.
      */
     AuthenticationType?: AuthenticationType;
   }
   export interface DescribeSessionsResult {
     /**
-     * The list of streaming sessions.
+     * Information about the streaming sessions.
      */
     Sessions?: SessionList;
     /**
@@ -529,7 +627,7 @@ declare namespace AppStream {
   }
   export interface DescribeStacksRequest {
     /**
-     * The stack names to describe. Use null to describe all the stacks for the AWS account.
+     * The names of the stacks to describe.
      */
     Names?: StringList;
     /**
@@ -539,7 +637,7 @@ declare namespace AppStream {
   }
   export interface DescribeStacksResult {
     /**
-     * The list of stack details.
+     * Information about the stacks.
      */
     Stacks?: StackList;
     /**
@@ -550,19 +648,19 @@ declare namespace AppStream {
   export type Description = string;
   export interface DirectoryConfig {
     /**
-     * The fully qualified name of the directory, such as corp.example.com
+     * The fully qualified name of the directory (for example, corp.example.com).
      */
     DirectoryName: DirectoryName;
     /**
-     * The list of the distinguished names of organizational units in which to place computer accounts.
+     * The distinguished names of the organizational units for computer accounts.
      */
     OrganizationalUnitDistinguishedNames?: OrganizationalUnitDistinguishedNamesList;
     /**
-     * The AccountName and AccountPassword of the service account, to be used by the streaming instance to connect to the directory.
+     * The credentials for the service account used by the streaming instance to connect to the directory.
      */
     ServiceAccountCredentials?: ServiceAccountCredentials;
     /**
-     * The time stamp when the directory configuration was created within AppStream 2.0.
+     * The time the directory configuration was created.
      */
     CreatedTime?: Timestamp;
   }
@@ -571,11 +669,11 @@ declare namespace AppStream {
   export type DirectoryNameList = DirectoryName[];
   export interface DisassociateFleetRequest {
     /**
-     * The name of the fleet to disassociate.
+     * The name of the fleet.
      */
     FleetName: String;
     /**
-     * The name of the stack with which the fleet is associated.
+     * The name of the stack.
      */
     StackName: String;
   }
@@ -584,18 +682,18 @@ declare namespace AppStream {
   export type DisplayName = string;
   export interface DomainJoinInfo {
     /**
-     * The fully qualified name of the directory, such as corp.example.com
+     * The fully qualified name of the directory (for example, corp.example.com).
      */
     DirectoryName?: DirectoryName;
     /**
-     * The distinguished name of the organizational unit to place the computer account in.
+     * The distinguished name of the organizational unit for computer accounts.
      */
     OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
   }
   export type ErrorMessage = string;
   export interface ExpireSessionRequest {
     /**
-     * The unique identifier of the streaming session to be stopped.
+     * The ID of the streaming session.
      */
     SessionId: String;
   }
@@ -611,11 +709,11 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The name displayed to end users on the AppStream 2.0 portal.
+     * The fleet name displayed to end users.
      */
     DisplayName?: String;
     /**
-     * The description displayed to end users on the AppStream 2.0 portal.
+     * The description displayed to end users.
      */
     Description?: String;
     /**
@@ -628,15 +726,15 @@ declare namespace AppStream {
     InstanceType: String;
     FleetType?: FleetType;
     /**
-     * The capacity information for the fleet.
+     * The capacity status for the fleet.
      */
     ComputeCapacityStatus: ComputeCapacityStatus;
     /**
-     * The maximum time for which a streaming session can run. The value can be any numeric value in seconds between 600 and 57600.
+     * The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.
+     * The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -648,19 +746,19 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The time at which the fleet was created.
+     * The time the fleet was created.
      */
     CreatedTime?: Timestamp;
     /**
-     * The list of fleet errors is appended to this list.
+     * The fleet errors.
      */
     FleetErrors?: FleetErrors;
     /**
-     * Whether default internet access is enabled for the fleet. 
+     * Indicates whether default internet access is enabled for the fleet.
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The DirectoryName and OrganizationalUnitDistinguishedName values, which are used to join domains for the AppStream 2.0 streaming instances.
+     * The information needed for streaming instances to join a domain.
      */
     DomainJoinInfo?: DomainJoinInfo;
   }
@@ -668,11 +766,11 @@ declare namespace AppStream {
   export type FleetAttributes = FleetAttribute[];
   export interface FleetError {
     /**
-     * The error code for the fleet error.
+     * The error code.
      */
     ErrorCode?: FleetErrorCode;
     /**
-     * The error message generated when the fleet has errors.
+     * The error message.
      */
     ErrorMessage?: String;
   }
@@ -683,31 +781,31 @@ declare namespace AppStream {
   export type FleetType = "ALWAYS_ON"|"ON_DEMAND"|string;
   export interface Image {
     /**
-     * The unique identifier for the image.
+     * The name of the image.
      */
     Name: String;
     /**
-     * The ARN for the image.
+     * The ARN of the image.
      */
     Arn?: Arn;
     /**
-     * The source image ARN from which this image was created.
+     * The ARN of the image from which this image was created.
      */
     BaseImageArn?: Arn;
     /**
-     * The display name for the image.
+     * The image name displayed to end users.
      */
     DisplayName?: String;
     /**
-     * The image starts in the PENDING state. If image creation succeeds, it moves to AVAILABLE. If image creation fails, it moves to FAILED.
+     * The image starts in the PENDING state. If image creation succeeds, the state is AVAILABLE. If image creation fails, the state is FAILED.
      */
     State?: ImageState;
     /**
-     * The visibility of an image to the user; images can be public or private.
+     * Indicates whether the image is public or private.
      */
     Visibility?: VisibilityType;
     /**
-     * Whether an image builder can be launched from this image.
+     * Indicates whether an image builder can be launched from this image.
      */
     ImageBuilderSupported?: Boolean;
     /**
@@ -715,7 +813,7 @@ declare namespace AppStream {
      */
     Platform?: PlatformType;
     /**
-     * A meaningful description for the image.
+     * The description displayed to end users.
      */
     Description?: String;
     /**
@@ -723,27 +821,50 @@ declare namespace AppStream {
      */
     StateChangeReason?: ImageStateChangeReason;
     /**
-     * The applications associated with an image.
+     * The applications associated with the image.
      */
     Applications?: Applications;
     /**
-     * The time stamp when the image was created.
+     * The time the image was created.
      */
     CreatedTime?: Timestamp;
     /**
-     * The AWS release date of the public base image. For private images, this date is the release date of the base image from which the image was created.
+     * The release date of the public base image. For private images, this date is the release date of the base image from which the image was created.
      */
     PublicBaseImageReleasedDate?: Timestamp;
   }
+  export interface ImageBuilder {
+    Name: String;
+    Arn?: Arn;
+    ImageArn?: Arn;
+    Description?: String;
+    DisplayName?: String;
+    VpcConfig?: VpcConfig;
+    InstanceType?: String;
+    Platform?: PlatformType;
+    State?: ImageBuilderState;
+    StateChangeReason?: ImageBuilderStateChangeReason;
+    CreatedTime?: Timestamp;
+    EnableDefaultInternetAccess?: BooleanObject;
+    DomainJoinInfo?: DomainJoinInfo;
+    ImageBuilderErrors?: ResourceErrors;
+  }
+  export type ImageBuilderList = ImageBuilder[];
+  export type ImageBuilderState = "PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|string;
+  export interface ImageBuilderStateChangeReason {
+    Code?: ImageBuilderStateChangeReasonCode;
+    Message?: String;
+  }
+  export type ImageBuilderStateChangeReasonCode = "INTERNAL_ERROR"|"IMAGE_UNAVAILABLE"|string;
   export type ImageList = Image[];
   export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"DELETING"|string;
   export interface ImageStateChangeReason {
     /**
-     * The state change reason code of the image.
+     * The state change reason code.
      */
     Code?: ImageStateChangeReasonCode;
     /**
-     * The state change reason message to the end user.
+     * The state change reason message.
      */
     Message?: String;
   }
@@ -751,7 +872,7 @@ declare namespace AppStream {
   export type Integer = number;
   export interface ListAssociatedFleetsRequest {
     /**
-     * The name of the stack whose associated fleets are listed.
+     * The name of the stack.
      */
     StackName: String;
     /**
@@ -761,7 +882,7 @@ declare namespace AppStream {
   }
   export interface ListAssociatedFleetsResult {
     /**
-     * The names of associated fleets.
+     * The names of the fleets.
      */
     Names?: StringList;
     /**
@@ -771,7 +892,7 @@ declare namespace AppStream {
   }
   export interface ListAssociatedStacksRequest {
     /**
-     * The name of the fleet whose associated stacks are listed.
+     * The name of the fleet.
      */
     FleetName: String;
     /**
@@ -781,7 +902,7 @@ declare namespace AppStream {
   }
   export interface ListAssociatedStacksResult {
     /**
-     * The names of associated stacks.
+     * The names of the stacks.
      */
     Names?: StringList;
     /**
@@ -795,21 +916,27 @@ declare namespace AppStream {
   export type OrganizationalUnitDistinguishedName = string;
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
   export type PlatformType = "WINDOWS"|string;
+  export interface ResourceError {
+    ErrorCode?: FleetErrorCode;
+    ErrorMessage?: String;
+    ErrorTimestamp?: Timestamp;
+  }
+  export type ResourceErrors = ResourceError[];
   export type ResourceIdentifier = string;
   export type SecurityGroupIdList = String[];
   export interface ServiceAccountCredentials {
     /**
-     * The user name of an account in the directory that is used by AppStream 2.0 streaming instances to connect to the directory. This account must have the following privileges: create computer objects, join computers to the domain, change/reset the password on descendant computer objects for the organizational units specified.
+     * The user name of the account. This account must have the following privileges: create computer objects, join computers to the domain, and change/reset the password on descendant computer objects for the organizational units specified.
      */
     AccountName: AccountName;
     /**
-     * The password for the user account for directory actions.
+     * The password for the account.
      */
     AccountPassword: AccountPassword;
   }
   export interface Session {
     /**
-     * The unique ID for a streaming session.
+     * The ID of the streaming session.
      */
     Id: String;
     /**
@@ -817,11 +944,11 @@ declare namespace AppStream {
      */
     UserId: UserId;
     /**
-     * The name of the stack for which the streaming session was created.
+     * The name of the stack for the streaming session.
      */
     StackName: String;
     /**
-     * The name of the fleet for which the streaming session was created.
+     * The name of the fleet for the streaming session.
      */
     FleetName: String;
     /**
@@ -829,7 +956,7 @@ declare namespace AppStream {
      */
     State: SessionState;
     /**
-     * The authentication method of the user for whom the session was created. It can be API for a user authenticated using a streaming URL or SAML for a SAML federated user.
+     * The authentication method. The user is authenticated using a streaming URL (API) or SAML federation (SAML).
      */
     AuthenticationType?: AuthenticationType;
   }
@@ -841,37 +968,37 @@ declare namespace AppStream {
      */
     Arn?: Arn;
     /**
-     * The unique identifier of the stack.
+     * The name of the stack.
      */
     Name: String;
     /**
-     * A meaningful description for the stack.
+     * The description displayed to end users.
      */
     Description?: String;
     /**
-     * A display name for the stack.
+     * The stack name displayed to end users.
      */
     DisplayName?: String;
     /**
-     * The time stamp when the stack was created.
+     * The time the stack was created.
      */
     CreatedTime?: Timestamp;
     /**
-     * The storage connectors to be enabled for the stack.
+     * The storage connectors to enable.
      */
     StorageConnectors?: StorageConnectorList;
     /**
-     * The list of errors associated with the stack.
+     * The errors for the stack.
      */
     StackErrors?: StackErrors;
   }
   export interface StackError {
     /**
-     * The error code of a stack error.
+     * The error code.
      */
     ErrorCode?: StackErrorCode;
     /**
-     * The error message of a stack error.
+     * The error message.
      */
     ErrorMessage?: String;
   }
@@ -880,27 +1007,39 @@ declare namespace AppStream {
   export type StackList = Stack[];
   export interface StartFleetRequest {
     /**
-     * The name of the fleet to start.
+     * The name of the fleet.
      */
     Name: String;
   }
   export interface StartFleetResult {
   }
+  export interface StartImageBuilderRequest {
+    Name: String;
+  }
+  export interface StartImageBuilderResult {
+    ImageBuilder?: ImageBuilder;
+  }
   export interface StopFleetRequest {
     /**
-     * The name of the fleet to stop.
+     * The name of the fleet.
      */
     Name: String;
   }
   export interface StopFleetResult {
   }
+  export interface StopImageBuilderRequest {
+    Name: String;
+  }
+  export interface StopImageBuilderResult {
+    ImageBuilder?: ImageBuilder;
+  }
   export interface StorageConnector {
     /**
-     * The type of storage connector. The possible values include: HOMEFOLDERS.
+     * The type of storage connector.
      */
     ConnectorType: StorageConnectorType;
     /**
-     * The ARN associated with the storage connector.
+     * The ARN of the storage connector.
      */
     ResourceIdentifier?: ResourceIdentifier;
   }
@@ -913,31 +1052,31 @@ declare namespace AppStream {
   export type Timestamp = Date;
   export interface UpdateDirectoryConfigRequest {
     /**
-     * The name of the existing directory configuration to be updated.
+     * The name of the directory configuration.
      */
     DirectoryName: DirectoryName;
     /**
-     * The list of the distinguished names of organizational units to place computer accounts in.
+     * The distinguished names of the organizational units for computer accounts.
      */
     OrganizationalUnitDistinguishedNames?: OrganizationalUnitDistinguishedNamesList;
     /**
-     * The AccountName and AccountPassword values for the service account, which are used by the streaming instance to connect to the directory
+     * The credentials for the service account used by the streaming instance to connect to the directory.
      */
     ServiceAccountCredentials?: ServiceAccountCredentials;
   }
   export interface UpdateDirectoryConfigResult {
     /**
-     * The updated directory configuration details.
+     * Information about the directory configuration.
      */
     DirectoryConfig?: DirectoryConfig;
   }
   export interface UpdateFleetRequest {
     /**
-     * The image name from which a fleet is created.
+     * The name of the image used by the fleet.
      */
     ImageName?: String;
     /**
-     * The name of the fleet.
+     * A unique name for the fleet.
      */
     Name: String;
     /**
@@ -945,7 +1084,7 @@ declare namespace AppStream {
      */
     InstanceType?: String;
     /**
-     * The parameters for the capacity allocated to the fleet. 
+     * The desired capacity for the fleet.
      */
     ComputeCapacity?: ComputeCapacity;
     /**
@@ -953,23 +1092,23 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.
+     * The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.
+     * The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
-     * Delete the VPC association for the specified fleet.
+     * Deletes the VPC association for the specified fleet.
      */
     DeleteVpcConfig?: Boolean;
     /**
-     * The description displayed to end users on the AppStream 2.0 portal.
+     * The description displayed to end users.
      */
     Description?: Description;
     /**
-     * The name displayed to end users on the AppStream 2.0 portal.
+     * The fleet name displayed to end users.
      */
     DisplayName?: DisplayName;
     /**
@@ -977,45 +1116,45 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The DirectoryName and OrganizationalUnitDistinguishedName values, which are used to join domains for the AppStream 2.0 streaming instances.
+     * The information needed for streaming instances to join a domain.
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
-     * Fleet attributes to be deleted.
+     * The fleet attributes to delete.
      */
     AttributesToDelete?: FleetAttributes;
   }
   export interface UpdateFleetResult {
     /**
-     * A list of fleet details.
+     * Information about the fleet.
      */
     Fleet?: Fleet;
   }
   export interface UpdateStackRequest {
     /**
-     * The name displayed to end users on the AppStream 2.0 portal.
+     * The stack name displayed to end users.
      */
     DisplayName?: DisplayName;
     /**
-     * The description displayed to end users on the AppStream 2.0 portal.
+     * The description displayed to end users.
      */
     Description?: Description;
     /**
-     * The name of the stack to update.
+     * The name of the stack.
      */
     Name: String;
     /**
-     * The storage connectors to be enabled for the stack.
+     * The storage connectors to enable.
      */
     StorageConnectors?: StorageConnectorList;
     /**
-     * Remove all the storage connectors currently enabled for the stack.
+     * Deletes the storage connectors currently enabled for the stack.
      */
     DeleteStorageConnectors?: Boolean;
   }
   export interface UpdateStackResult {
     /**
-     * A list of stack details.
+     * Information about the stack.
      */
     Stack?: Stack;
   }
@@ -1023,11 +1162,11 @@ declare namespace AppStream {
   export type VisibilityType = "PUBLIC"|"PRIVATE"|string;
   export interface VpcConfig {
     /**
-     * The list of subnets to which a network interface is established from the fleet instance.
+     * The subnets to which a network interface is established from the fleet instance.
      */
     SubnetIds?: SubnetIdList;
     /**
-     * Security groups associated with the fleet.
+     * The security groups for the fleet.
      */
     SecurityGroupIds?: SecurityGroupIdList;
   }

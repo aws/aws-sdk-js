@@ -44,6 +44,14 @@ declare class CodeBuild extends Service {
    */
   createProject(callback?: (err: AWSError, data: CodeBuild.Types.CreateProjectOutput) => void): Request<CodeBuild.Types.CreateProjectOutput, AWSError>;
   /**
+   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in Change a Build Project’s Settings. 
+   */
+  createWebhook(params: CodeBuild.Types.CreateWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
+  /**
+   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in Change a Build Project’s Settings. 
+   */
+  createWebhook(callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
+  /**
    * Deletes a build project.
    */
   deleteProject(params: CodeBuild.Types.DeleteProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteProjectOutput) => void): Request<CodeBuild.Types.DeleteProjectOutput, AWSError>;
@@ -51,6 +59,14 @@ declare class CodeBuild extends Service {
    * Deletes a build project.
    */
   deleteProject(callback?: (err: AWSError, data: CodeBuild.Types.DeleteProjectOutput) => void): Request<CodeBuild.Types.DeleteProjectOutput, AWSError>;
+  /**
+   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, stops AWS CodeBuild from automatically rebuilding the source code every time a code change is pushed to the repository.
+   */
+  deleteWebhook(params: CodeBuild.Types.DeleteWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
+  /**
+   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, stops AWS CodeBuild from automatically rebuilding the source code every time a code change is pushed to the repository.
+   */
+  deleteWebhook(callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
   /**
    * Gets a list of build IDs, with each build ID representing a single build.
    */
@@ -327,6 +343,18 @@ declare namespace CodeBuild {
      */
     project?: Project;
   }
+  export interface CreateWebhookInput {
+    /**
+     * The name of the build project.
+     */
+    projectName: ProjectName;
+  }
+  export interface CreateWebhookOutput {
+    /**
+     * Information about a webhook in GitHub that connects repository events to a build project in AWS CodeBuild.
+     */
+    webhook?: Webhook;
+  }
   export interface DeleteProjectInput {
     /**
      * The name of the build project.
@@ -334,6 +362,14 @@ declare namespace CodeBuild {
     name: NonEmptyString;
   }
   export interface DeleteProjectOutput {
+  }
+  export interface DeleteWebhookInput {
+    /**
+     * The name of the build project.
+     */
+    projectName: ProjectName;
+  }
+  export interface DeleteWebhookOutput {
   }
   export interface EnvironmentImage {
     /**
@@ -539,6 +575,10 @@ declare namespace CodeBuild {
      * When the build project's settings were last modified, expressed in Unix time format.
      */
     lastModified?: Timestamp;
+    /**
+     * Information about a webhook in GitHub that connects repository events to a build project in AWS CodeBuild.
+     */
+    webhook?: Webhook;
   }
   export interface ProjectArtifacts {
     /**
@@ -728,6 +768,12 @@ declare namespace CodeBuild {
     project?: Project;
   }
   export type ValueInput = string;
+  export interface Webhook {
+    /**
+     * The URL to the webhook.
+     */
+    url?: NonEmptyString;
+  }
   export type WrapperBoolean = boolean;
   export type WrapperInt = number;
   export type WrapperLong = number;

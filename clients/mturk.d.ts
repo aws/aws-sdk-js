@@ -431,7 +431,7 @@ declare namespace MTurk {
      * The ID of the Worker to whom the bonus was paid.
      */
     WorkerId?: CustomerId;
-    BonusAmount?: NumericValue;
+    BonusAmount?: CurrencyAmount;
     /**
      * The ID of the assignment associated with this bonus payment.
      */
@@ -457,7 +457,7 @@ declare namespace MTurk {
     /**
      * The number of additional assignments to request for this HIT.
      */
-    NumberOfAdditionalAssignments?: Integer;
+    NumberOfAdditionalAssignments: Integer;
     /**
      *  A unique identifier for this request, which allows you to retry the call on error without extending the HIT multiple times. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the extend HIT already exists in the system from a previous call using the same UniqueRequestToken, subsequent calls will return an error with a message containing the request ID. 
      */
@@ -485,7 +485,7 @@ declare namespace MTurk {
     /**
      *  The amount of money the Requester will pay a Worker for successfully completing the HIT. 
      */
-    Reward: NumericValue;
+    Reward: CurrencyAmount;
     /**
      *  The title of the HIT. A title should be short and descriptive about the kind of task the HIT contains. On the Amazon Mechanical Turk web site, the HIT title appears in search results, and everywhere the HIT is mentioned. 
      */
@@ -549,7 +549,7 @@ declare namespace MTurk {
     /**
      *  The amount of money the Requester will pay a Worker for successfully completing the HIT. 
      */
-    Reward: NumericValue;
+    Reward: CurrencyAmount;
     /**
      *  The title of the HIT. A title should be short and descriptive about the kind of task the HIT contains. On the Amazon Mechanical Turk web site, the HIT title appears in search results, and everywhere the HIT is mentioned. 
      */
@@ -681,6 +681,7 @@ declare namespace MTurk {
   }
   export interface CreateWorkerBlockResponse {
   }
+  export type CurrencyAmount = string;
   export type CustomerId = string;
   export type CustomerIdList = CustomerId[];
   export interface DeleteHITRequest {
@@ -734,8 +735,8 @@ declare namespace MTurk {
   export interface GetAccountBalanceRequest {
   }
   export interface GetAccountBalanceResponse {
-    AvailableBalance?: NumericValue;
-    OnHoldBalance?: NumericValue;
+    AvailableBalance?: CurrencyAmount;
+    OnHoldBalance?: CurrencyAmount;
   }
   export interface GetAssignmentRequest {
     /**
@@ -854,7 +855,7 @@ declare namespace MTurk {
      * The number of times the HIT can be accepted and completed before the HIT becomes unavailable. 
      */
     MaxAssignments?: Integer;
-    Reward?: NumericValue;
+    Reward?: CurrencyAmount;
     /**
      * The amount of time, in seconds, after the Worker submits an assignment for the HIT that the results are automatically approved by Amazon Mechanical Turk. This is the amount of time the Requester has to reject an assignment submitted by a Worker before the assignment is auto-approved and the Worker is paid. 
      */
@@ -896,11 +897,11 @@ declare namespace MTurk {
     /**
      *  The name of the parameter in the HITLayout. 
      */
-    Name?: String;
+    Name: String;
     /**
      * The value substituted for the parameter referenced in the HITLayout. 
      */
-    Value?: String;
+    Value: String;
   }
   export type HITLayoutParameterList = HITLayoutParameter[];
   export type HITList = HIT[];
@@ -1195,23 +1196,23 @@ declare namespace MTurk {
   export type Long = number;
   export interface NotificationSpecification {
     /**
-     *  The destination for notification messages. or email notifications (if Transport is Email), this is an email address. For Amazon Simple Queue Service (Amazon SQS) notifications (if Transport is SQS), this is the URL for your Amazon SQS queue. 
+     *  The target for notification messages. The Destination’s format is determined by the specified Transport:    When Transport is Email, the Destination is your email address.   When Transport is SQS, the Destination is your queue URL.   When Transport is SNS, the Destination is the ARN of your topic.  
      */
     Destination: String;
     /**
-     *  The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS. 
+     *  The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS | SNS. 
      */
     Transport: NotificationTransport;
     /**
      * The version of the Notification API to use. Valid value is 2006-05-05.
      */
-    Version?: String;
+    Version: String;
     /**
      *  The list of events that should cause notifications to be sent. Valid Values: AssignmentAccepted | AssignmentAbandoned | AssignmentReturned | AssignmentSubmitted | AssignmentRejected | AssignmentApproved | HITCreated | HITExtended | HITDisposed | HITReviewable | HITExpired | Ping. The Ping event is only valid for the SendTestEventNotification operation. 
      */
-    EventTypes?: EventTypeList;
+    EventTypes: EventTypeList;
   }
-  export type NotificationTransport = "Email"|"SQS"|string;
+  export type NotificationTransport = "Email"|"SQS"|"SNS"|string;
   export type NotifyWorkersFailureCode = "SoftFailure"|"HardFailure"|string;
   export interface NotifyWorkersFailureStatus {
     /**
@@ -1248,7 +1249,6 @@ declare namespace MTurk {
      */
     NotifyWorkersFailureStatuses?: NotifyWorkersFailureStatusList;
   }
-  export type NumericValue = string;
   export type PaginationToken = string;
   export interface ParameterMapEntry {
     /**
@@ -1415,7 +1415,7 @@ declare namespace MTurk {
     /**
      *  A message for the Worker, which the Worker can see in the Status section of the web site. 
      */
-    RequesterFeedback?: String;
+    RequesterFeedback: String;
   }
   export interface RejectAssignmentResponse {
   }
@@ -1472,7 +1472,7 @@ declare namespace MTurk {
     /**
      *  Name of a Review Policy: SimplePlurality/2011-09-01 or ScoreMyKnownAnswers/2011-09-01 
      */
-    PolicyName?: String;
+    PolicyName: String;
     /**
      * Name of the parameter from the Review policy.
      */
@@ -1526,7 +1526,7 @@ declare namespace MTurk {
     /**
      *  The Bonus amount is a US Dollar amount specified using a string (for example, "5" represents $5.00 USD and "101.42" represents $101.42 USD). Do not include currency symbols or currency codes. 
      */
-    BonusAmount: NumericValue;
+    BonusAmount: CurrencyAmount;
     /**
      * The ID of the assignment for which this bonus is paid.
      */
@@ -1534,7 +1534,7 @@ declare namespace MTurk {
     /**
      * A message that explains the reason for the bonus payment. The Worker receiving the bonus can see this message.
      */
-    Reason?: String;
+    Reason: String;
     /**
      * A unique identifier for this request, which allows you to retry the call on error without granting multiple bonuses. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the bonus already exists in the system from a previous call using the same UniqueRequestToken, subsequent calls will return an error with a message containing the request ID.
      */
@@ -1566,7 +1566,7 @@ declare namespace MTurk {
     /**
      *  The date and time at which you want the HIT to expire 
      */
-    ExpireAt?: Timestamp;
+    ExpireAt: Timestamp;
   }
   export interface UpdateExpirationForHITResponse {
   }
