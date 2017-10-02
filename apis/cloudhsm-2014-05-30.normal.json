@@ -55,7 +55,7 @@
         {"shape":"CloudHsmInternalException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Creates an uninitialized HSM instance.</p> <p>There is an upfront fee charged for each HSM instance that you create with the <a>CreateHsm</a> operation. If you accidentally provision an HSM and want to request a refund, delete the instance using the <a>DeleteHsm</a> operation, go to the <a href=\"https://console.aws.amazon.com/support/home#/\">AWS Support Center</a>, create a new case, and select <b>Account and Billing Support</b>.</p> <important> <p>It can take up to 20 minutes to create and provision an HSM. You can monitor the status of the HSM with the <a>DescribeHsm</a> operation. The HSM is ready to be initialized when the status changes to <code>RUNNING</code>.</p> </important>"
+      "documentation":"<p>Creates an uninitialized HSM instance.</p> <p>There is an upfront fee charged for each HSM instance that you create with the <code>CreateHsm</code> operation. If you accidentally provision an HSM and want to request a refund, delete the instance using the <a>DeleteHsm</a> operation, go to the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a>, create a new case, and select <b>Account and Billing Support</b>.</p> <important> <p>It can take up to 20 minutes to create and provision an HSM. You can monitor the status of the HSM with the <a>DescribeHsm</a> operation. The HSM is ready to be initialized when the status changes to <code>RUNNING</code>.</p> </important>"
     },
     "CreateLunaClient":{
       "name":"CreateLunaClient",
@@ -205,7 +205,7 @@
         {"shape":"CloudHsmInternalException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Lists the high-availability partition groups for the account.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> member. If more results are available, the <i>NextToken</i> member of the response contains a token that you pass in the next call to <a>ListHapgs</a> to retrieve the next set of items.</p>"
+      "documentation":"<p>Lists the high-availability partition groups for the account.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> member. If more results are available, the <code>NextToken</code> member of the response contains a token that you pass in the next call to <code>ListHapgs</code> to retrieve the next set of items.</p>"
     },
     "ListHsms":{
       "name":"ListHsms",
@@ -220,7 +220,7 @@
         {"shape":"CloudHsmInternalException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Retrieves the identifiers of all of the HSMs provisioned for the current customer.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> member. If more results are available, the <i>NextToken</i> member of the response contains a token that you pass in the next call to <a>ListHsms</a> to retrieve the next set of items.</p>"
+      "documentation":"<p>Retrieves the identifiers of all of the HSMs provisioned for the current customer.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> member. If more results are available, the <code>NextToken</code> member of the response contains a token that you pass in the next call to <code>ListHsms</code> to retrieve the next set of items.</p>"
     },
     "ListLunaClients":{
       "name":"ListLunaClients",
@@ -235,7 +235,7 @@
         {"shape":"CloudHsmInternalException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Lists all of the clients.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> member. If more results are available, the <i>NextToken</i> member of the response contains a token that you pass in the next call to <a>ListLunaClients</a> to retrieve the next set of items.</p>"
+      "documentation":"<p>Lists all of the clients.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> member. If more results are available, the <code>NextToken</code> member of the response contains a token that you pass in the next call to <code>ListLunaClients</code> to retrieve the next set of items.</p>"
     },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
@@ -464,7 +464,7 @@
         },
         "ExternalId":{
           "shape":"ExternalId",
-          "documentation":"<p>The external ID from <b>IamRoleArn</b>, if present.</p>",
+          "documentation":"<p>The external ID from <code>IamRoleArn</code>, if present.</p>",
           "locationName":"ExternalId"
         },
         "SubscriptionType":{
@@ -482,7 +482,7 @@
           "locationName":"SyslogIp"
         }
       },
-      "documentation":"<p>Contains the inputs for the <a>CreateHsm</a> operation.</p>",
+      "documentation":"<p>Contains the inputs for the <code>CreateHsm</code> operation.</p>",
       "locationName":"CreateHsmRequest"
     },
     "CreateHsmResponse":{
@@ -493,7 +493,7 @@
           "documentation":"<p>The ARN of the HSM.</p>"
         }
       },
-      "documentation":"<p>Contains the output of the <a>CreateHsm</a> operation.</p>"
+      "documentation":"<p>Contains the output of the <code>CreateHsm</code> operation.</p>"
     },
     "CreateLunaClientRequest":{
       "type":"structure",
@@ -608,9 +608,18 @@
           "shape":"String",
           "documentation":"<p>The serial number of the high-availability partition group.</p>"
         },
-        "HsmsLastActionFailed":{"shape":"HsmList"},
-        "HsmsPendingDeletion":{"shape":"HsmList"},
-        "HsmsPendingRegistration":{"shape":"HsmList"},
+        "HsmsLastActionFailed":{
+          "shape":"HsmList",
+          "documentation":"<p/>"
+        },
+        "HsmsPendingDeletion":{
+          "shape":"HsmList",
+          "documentation":"<p/>"
+        },
+        "HsmsPendingRegistration":{
+          "shape":"HsmList",
+          "documentation":"<p/>"
+        },
         "Label":{
           "shape":"Label",
           "documentation":"<p>The label for the high-availability partition group.</p>"
@@ -635,14 +644,14 @@
       "members":{
         "HsmArn":{
           "shape":"HsmArn",
-          "documentation":"<p>The ARN of the HSM. Either the <i>HsmArn</i> or the <i>SerialNumber</i> parameter must be specified.</p>"
+          "documentation":"<p>The ARN of the HSM. Either the <code>HsmArn</code> or the <code>SerialNumber</code> parameter must be specified.</p>"
         },
         "HsmSerialNumber":{
           "shape":"HsmSerialNumber",
-          "documentation":"<p>The serial number of the HSM. Either the <i>HsmArn</i> or the <i>HsmSerialNumber</i> parameter must be specified.</p>"
+          "documentation":"<p>The serial number of the HSM. Either the <code>HsmArn</code> or the <code>HsmSerialNumber</code> parameter must be specified.</p>"
         }
       },
-      "documentation":"<p>Contains the inputs for the <a>DescribeHsm</a> operation. </p>"
+      "documentation":"<p>Contains the inputs for the <a>DescribeHsm</a> operation.</p>"
     },
     "DescribeHsmResponse":{
       "type":"structure",
@@ -889,7 +898,7 @@
       "members":{
         "NextToken":{
           "shape":"PaginationToken",
-          "documentation":"<p>The <i>NextToken</i> value from a previous call to <a>ListHapgs</a>. Pass null if this is the first call.</p>"
+          "documentation":"<p>The <code>NextToken</code> value from a previous call to <code>ListHapgs</code>. Pass null if this is the first call.</p>"
         }
       }
     },
@@ -903,7 +912,7 @@
         },
         "NextToken":{
           "shape":"PaginationToken",
-          "documentation":"<p>If not null, more results are available. Pass this value to <a>ListHapgs</a> to retrieve the next set of items.</p>"
+          "documentation":"<p>If not null, more results are available. Pass this value to <code>ListHapgs</code> to retrieve the next set of items.</p>"
         }
       }
     },
@@ -912,7 +921,7 @@
       "members":{
         "NextToken":{
           "shape":"PaginationToken",
-          "documentation":"<p>The <i>NextToken</i> value from a previous call to <a>ListHsms</a>. Pass null if this is the first call.</p>"
+          "documentation":"<p>The <code>NextToken</code> value from a previous call to <code>ListHsms</code>. Pass null if this is the first call.</p>"
         }
       }
     },
@@ -925,17 +934,17 @@
         },
         "NextToken":{
           "shape":"PaginationToken",
-          "documentation":"<p>If not null, more results are available. Pass this value to <a>ListHsms</a> to retrieve the next set of items.</p>"
+          "documentation":"<p>If not null, more results are available. Pass this value to <code>ListHsms</code> to retrieve the next set of items.</p>"
         }
       },
-      "documentation":"<p>Contains the output of the <a>ListHsms</a> operation.</p>"
+      "documentation":"<p>Contains the output of the <code>ListHsms</code> operation.</p>"
     },
     "ListLunaClientsRequest":{
       "type":"structure",
       "members":{
         "NextToken":{
           "shape":"PaginationToken",
-          "documentation":"<p>The <i>NextToken</i> value from a previous call to <a>ListLunaClients</a>. Pass null if this is the first call.</p>"
+          "documentation":"<p>The <code>NextToken</code> value from a previous call to <code>ListLunaClients</code>. Pass null if this is the first call.</p>"
         }
       }
     },
@@ -949,7 +958,7 @@
         },
         "NextToken":{
           "shape":"PaginationToken",
-          "documentation":"<p>If not null, more results are available. Pass this to <a>ListLunaClients</a> to retrieve the next set of items.</p>"
+          "documentation":"<p>If not null, more results are available. Pass this to <code>ListLunaClients</code> to retrieve the next set of items.</p>"
         }
       }
     },
@@ -1135,7 +1144,7 @@
     },
     "SubscriptionType":{
       "type":"string",
-      "documentation":"<p>Specifies the type of subscription for the HSM.</p> <ul> <li><b>PRODUCTION</b> - The HSM is being used in a production environment.</li> <li><b>TRIAL</b> - The HSM is being used in a product trial.</li> </ul>",
+      "documentation":"<p>Specifies the type of subscription for the HSM.</p> <ul> <li> <p> <b>PRODUCTION</b> - The HSM is being used in a production environment.</p> </li> <li> <p> <b>TRIAL</b> - The HSM is being used in a product trial.</p> </li> </ul>",
       "enum":["PRODUCTION"]
     },
     "Tag":{
@@ -1183,5 +1192,5 @@
       "pattern":"vpc-[0-9a-f]{8}"
     }
   },
-  "documentation":"<fullname>AWS CloudHSM Service</fullname>"
+  "documentation":"<fullname>AWS CloudHSM Service</fullname> <p>This is the reference for AWS CloudHSM Classic. For more information, see <a href=\"http://aws.amazon.com/cloudhsm/faqs-classic/\">AWS CloudHSM Classic FAQs</a> and the <a href=\"http://docs.aws.amazon.com/cloudhsm/classic/userguide/\">AWS CloudHSM Classic User Guide</a>.</p> <p>For more information about AWS CloudHSM, see <a href=\"http://aws.amazon.com/cloudhsm/\">AWS CloudHSM</a> and the <a href=\"http://docs.aws.amazon.com/cloudhsm/latest/userguide/\">AWS CloudHSM User Guide</a>.</p>"
 }
