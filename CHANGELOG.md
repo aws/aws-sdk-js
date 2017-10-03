@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.125.0-->
+<!--LATEST=2.126.0-->
 <!--ENTRYINSERT-->
+
+## 2.126.0
+* feature: EC2: This release includes service updates to AWS VPN.
+* feature: SSM: EC2 Systems Manager support for tagging SSM Documents. Also support for tag-based permissions to restrict access to SSM Documents based on these tags.
 
 ## 2.125.0
 * feature: AppStream: Includes APIs for managing and accessing image builders, and deleting images.

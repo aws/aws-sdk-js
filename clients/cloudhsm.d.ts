@@ -316,8 +316,17 @@ declare namespace CloudHSM {
      * The serial number of the high-availability partition group.
      */
     HapgSerial?: String;
+    /**
+     * 
+     */
     HsmsLastActionFailed?: HsmList;
+    /**
+     * 
+     */
     HsmsPendingDeletion?: HsmList;
+    /**
+     * 
+     */
     HsmsPendingRegistration?: HsmList;
     /**
      * The label for the high-availability partition group.

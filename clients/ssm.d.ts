@@ -12,11 +12,11 @@ declare class SSM extends Service {
   constructor(options?: SSM.Types.ClientConfiguration)
   config: Config & SSM.Types.ClientConfiguration;
   /**
-   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances, Maintenance Windows, or Parameter Store parameters. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters.  For more information about tags, see Tagging Your Amazon EC2 Resources in the Amazon EC2 User Guide.
+   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters.  For more information about tags, see Tagging Your Amazon EC2 Resources in the Amazon EC2 User Guide.
    */
   addTagsToResource(params: SSM.Types.AddTagsToResourceRequest, callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances, Maintenance Windows, or Parameter Store parameters. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters.  For more information about tags, see Tagging Your Amazon EC2 Resources in the Amazon EC2 User Guide.
+   * Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test. Each resource can have a maximum of 10 tags.  We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters.  For more information about tags, see Tagging Your Amazon EC2 Resources in the Amazon EC2 User Guide.
    */
   addTagsToResource(callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
   /**
@@ -212,11 +212,11 @@ declare class SSM extends Service {
    */
   describeAvailablePatches(callback?: (err: AWSError, data: SSM.Types.DescribeAvailablePatchesResult) => void): Request<SSM.Types.DescribeAvailablePatchesResult, AWSError>;
   /**
-   * Describes the specified SSM document.
+   * Describes the specified Systems Manager document.
    */
   describeDocument(params: SSM.Types.DescribeDocumentRequest, callback?: (err: AWSError, data: SSM.Types.DescribeDocumentResult) => void): Request<SSM.Types.DescribeDocumentResult, AWSError>;
   /**
-   * Describes the specified SSM document.
+   * Describes the specified Systems Manager document.
    */
   describeDocument(callback?: (err: AWSError, data: SSM.Types.DescribeDocumentResult) => void): Request<SSM.Types.DescribeDocumentResult, AWSError>;
   /**
@@ -396,11 +396,11 @@ declare class SSM extends Service {
    */
   getDeployablePatchSnapshotForInstance(callback?: (err: AWSError, data: SSM.Types.GetDeployablePatchSnapshotForInstanceResult) => void): Request<SSM.Types.GetDeployablePatchSnapshotForInstanceResult, AWSError>;
   /**
-   * Gets the contents of the specified SSM document.
+   * Gets the contents of the specified Systems Manager document.
    */
   getDocument(params: SSM.Types.GetDocumentRequest, callback?: (err: AWSError, data: SSM.Types.GetDocumentResult) => void): Request<SSM.Types.GetDocumentResult, AWSError>;
   /**
-   * Gets the contents of the specified SSM document.
+   * Gets the contents of the specified Systems Manager document.
    */
   getDocument(callback?: (err: AWSError, data: SSM.Types.GetDocumentResult) => void): Request<SSM.Types.GetDocumentResult, AWSError>;
   /**
@@ -564,11 +564,11 @@ declare class SSM extends Service {
    */
   listDocumentVersions(callback?: (err: AWSError, data: SSM.Types.ListDocumentVersionsResult) => void): Request<SSM.Types.ListDocumentVersionsResult, AWSError>;
   /**
-   * Describes one or more of your SSM documents.
+   * Describes one or more of your Systems Manager documents.
    */
   listDocuments(params: SSM.Types.ListDocumentsRequest, callback?: (err: AWSError, data: SSM.Types.ListDocumentsResult) => void): Request<SSM.Types.ListDocumentsResult, AWSError>;
   /**
-   * Describes one or more of your SSM documents.
+   * Describes one or more of your Systems Manager documents.
    */
   listDocuments(callback?: (err: AWSError, data: SSM.Types.ListDocumentsResult) => void): Request<SSM.Types.ListDocumentsResult, AWSError>;
   /**
@@ -846,7 +846,7 @@ declare namespace SSM {
   export type ApproveAfterDays = number;
   export interface Association {
     /**
-     * The name of the SSM document.
+     * The name of the Systems Manager document.
      */
     Name?: DocumentName;
     /**
@@ -888,7 +888,7 @@ declare namespace SSM {
   }
   export interface AssociationDescription {
     /**
-     * The name of the SSM document.
+     * The name of the Systems Manager document.
      */
     Name?: DocumentName;
     /**
@@ -1022,7 +1022,7 @@ declare namespace SSM {
      */
     Name?: DocumentName;
     /**
-     * The version of an SSM document used when the association version was created.
+     * The version of a Systems Manager document used when the association version was created.
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -1953,7 +1953,7 @@ declare namespace SSM {
   }
   export interface DescribeAssociationRequest {
     /**
-     * The name of the SSM document.
+     * The name of the Systems Manager document.
      */
     Name?: DocumentName;
     /**
@@ -2041,7 +2041,7 @@ declare namespace SSM {
   }
   export interface DescribeDocumentRequest {
     /**
-     * The name of the SSM document.
+     * The name of the Systems Manager document.
      */
     Name: DocumentARN;
     /**
@@ -2051,7 +2051,7 @@ declare namespace SSM {
   }
   export interface DescribeDocumentResult {
     /**
-     * Information about the SSM document.
+     * Information about the Systems Manager document.
      */
     Document?: DocumentDescription;
   }
@@ -2526,7 +2526,7 @@ declare namespace SSM {
   }
   export interface DocumentDescription {
     /**
-     * The SHA1 hash of the document, which you can use for verification purposes.
+     * The SHA1 hash of the document, which you can use for verification.
      */
     Sha1?: DocumentSha1;
     /**
@@ -2538,11 +2538,11 @@ declare namespace SSM {
      */
     HashType?: DocumentHashType;
     /**
-     * The name of the SSM document.
+     * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
     /**
-     * The AWS user account of the person who created the document.
+     * The AWS user account that created the document.
      */
     Owner?: DocumentOwner;
     /**
@@ -2550,7 +2550,7 @@ declare namespace SSM {
      */
     CreatedDate?: DateTime;
     /**
-     * The status of the SSM document.
+     * The status of the Systems Manager document.
      */
     Status?: DocumentStatus;
     /**
@@ -2566,7 +2566,7 @@ declare namespace SSM {
      */
     Parameters?: DocumentParameterList;
     /**
-     * The list of OS platforms compatible with this SSM document. 
+     * The list of OS platforms compatible with this Systems Manager document. 
      */
     PlatformTypes?: PlatformTypeList;
     /**
@@ -2585,6 +2585,10 @@ declare namespace SSM {
      * The default version.
      */
     DefaultVersion?: DocumentVersion;
+    /**
+     * The tags, or metadata, that have been applied to the document.
+     */
+    Tags?: TagList;
   }
   export interface DocumentFilter {
     /**
@@ -2603,11 +2607,11 @@ declare namespace SSM {
   export type DocumentHashType = "Sha256"|"Sha1"|string;
   export interface DocumentIdentifier {
     /**
-     * The name of the SSM document.
+     * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
     /**
-     * The AWS user account of the person who created the document.
+     * The AWS user account that created the document.
      */
     Owner?: DocumentOwner;
     /**
@@ -2626,8 +2630,26 @@ declare namespace SSM {
      * The schema version.
      */
     SchemaVersion?: DocumentSchemaVersion;
+    /**
+     * The tags, or metadata, that have been applied to the document.
+     */
+    Tags?: TagList;
   }
   export type DocumentIdentifierList = DocumentIdentifier[];
+  export interface DocumentKeyValuesFilter {
+    /**
+     * The name of the filter key.
+     */
+    Key?: DocumentKeyValuesFilterKey;
+    /**
+     * The value for the filter key.
+     */
+    Values?: DocumentKeyValuesFilterValues;
+  }
+  export type DocumentKeyValuesFilterKey = string;
+  export type DocumentKeyValuesFilterList = DocumentKeyValuesFilter[];
+  export type DocumentKeyValuesFilterValue = string;
+  export type DocumentKeyValuesFilterValues = DocumentKeyValuesFilterValue[];
   export type DocumentName = string;
   export type DocumentOwner = string;
   export interface DocumentParameter {
@@ -2857,7 +2879,7 @@ declare namespace SSM {
   }
   export interface GetDocumentRequest {
     /**
-     * The name of the SSM document.
+     * The name of the Systems Manager document.
      */
     Name: DocumentARN;
     /**
@@ -2867,7 +2889,7 @@ declare namespace SSM {
   }
   export interface GetDocumentResult {
     /**
-     * The name of the SSM document.
+     * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
     /**
@@ -2875,7 +2897,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The contents of the SSM document.
+     * The contents of the Systems Manager document.
      */
     Content?: DocumentContent;
     /**
@@ -3172,7 +3194,7 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
-     * The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTION tasks, the value is the state machine ARN.
+     * The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTION tasks, the value is the state machine ARN.
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
@@ -4005,6 +4027,10 @@ declare namespace SSM {
      */
     DocumentFilterList?: DocumentFilterList;
     /**
+     * One or more filters. Use a filter to return a more specific list of results.
+     */
+    Filters?: DocumentKeyValuesFilterList;
+    /**
      * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
      */
     MaxResults?: MaxResults;
@@ -4015,7 +4041,7 @@ declare namespace SSM {
   }
   export interface ListDocumentsResult {
     /**
-     * The names of the SSM documents.
+     * The names of the Systems Manager documents.
      */
     DocumentIdentifiers?: DocumentIdentifierList;
     /**
@@ -4436,7 +4462,7 @@ declare namespace SSM {
      */
     WindowTaskId?: MaintenanceWindowTaskId;
     /**
-     * The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, TaskArn is the SSM document name or ARN. For LAMBDA tasks, it's the function name or ARN. For STEP_FUNCTION tasks, it's the state machine ARN.
+     * The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, TaskArn is the Systems Manager document name or ARN. For LAMBDA tasks, it's the function name or ARN. For STEP_FUNCTION tasks, it's the state machine ARN.
      */
     TaskArn?: MaintenanceWindowTaskArn;
     /**
@@ -5227,7 +5253,7 @@ declare namespace SSM {
   export type ResourceDataSyncS3Region = string;
   export type ResourceId = string;
   export type ResourceType = "ManagedInstance"|"Document"|"EC2Instance"|string;
-  export type ResourceTypeForTagging = "ManagedInstance"|"MaintenanceWindow"|"Parameter"|string;
+  export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|string;
   export type ResponseCode = number;
   export interface ResultAttribute {
     /**
@@ -5537,7 +5563,7 @@ declare namespace SSM {
   }
   export interface UpdateAssociationStatusRequest {
     /**
-     * The name of the SSM document.
+     * The name of the Systems Manager document.
      */
     Name: DocumentName;
     /**
