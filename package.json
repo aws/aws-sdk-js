@@ -29,7 +29,7 @@
     "karma": "^1.4.1",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.2",
-    "mocha": "*",
+    "mocha": "4.0.0",
     "repl.history": "*",
     "semver": "*",
     "typescript": "2.0.8",
