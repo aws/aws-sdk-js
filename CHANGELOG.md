@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.126.0-->
+<!--LATEST=2.127.0-->
 <!--ENTRYINSERT-->
+
+## 2.127.0
+* feature: KinesisAnalytics: Kinesis Analytics now supports schema discovery on objects in S3.  Additionally, Kinesis Analytics now supports input data preprocessing through Lambda.
+* feature: Route53Domains: Added a new API that checks whether a domain name can be transferred to Amazon Route 53.
 
 ## 2.126.0
 * feature: EC2: This release includes service updates to AWS VPN.

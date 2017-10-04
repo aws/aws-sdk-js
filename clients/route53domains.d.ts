@@ -20,11 +20,19 @@ declare class Route53Domains extends Service {
    */
   checkDomainAvailability(callback?: (err: AWSError, data: Route53Domains.Types.CheckDomainAvailabilityResponse) => void): Request<Route53Domains.Types.CheckDomainAvailabilityResponse, AWSError>;
   /**
-   * This operation deletes the specified tags for a domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * Checks whether a domain name can be transferred to Amazon Route 53. 
+   */
+  checkDomainTransferability(params: Route53Domains.Types.CheckDomainTransferabilityRequest, callback?: (err: AWSError, data: Route53Domains.Types.CheckDomainTransferabilityResponse) => void): Request<Route53Domains.Types.CheckDomainTransferabilityResponse, AWSError>;
+  /**
+   * Checks whether a domain name can be transferred to Amazon Route 53. 
+   */
+  checkDomainTransferability(callback?: (err: AWSError, data: Route53Domains.Types.CheckDomainTransferabilityResponse) => void): Request<Route53Domains.Types.CheckDomainTransferabilityResponse, AWSError>;
+  /**
+   * This operation deletes the specified tags for a domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   deleteTagsForDomain(params: Route53Domains.Types.DeleteTagsForDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.DeleteTagsForDomainResponse) => void): Request<Route53Domains.Types.DeleteTagsForDomainResponse, AWSError>;
   /**
-   * This operation deletes the specified tags for a domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation deletes the specified tags for a domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   deleteTagsForDomain(callback?: (err: AWSError, data: Route53Domains.Types.DeleteTagsForDomainResponse) => void): Request<Route53Domains.Types.DeleteTagsForDomainResponse, AWSError>;
   /**
@@ -108,11 +116,11 @@ declare class Route53Domains extends Service {
    */
   listOperations(callback?: (err: AWSError, data: Route53Domains.Types.ListOperationsResponse) => void): Request<Route53Domains.Types.ListOperationsResponse, AWSError>;
   /**
-   * This operation returns all of the tags that are associated with the specified domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation returns all of the tags that are associated with the specified domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   listTagsForDomain(params: Route53Domains.Types.ListTagsForDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.ListTagsForDomainResponse) => void): Request<Route53Domains.Types.ListTagsForDomainResponse, AWSError>;
   /**
-   * This operation returns all of the tags that are associated with the specified domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation returns all of the tags that are associated with the specified domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   listTagsForDomain(callback?: (err: AWSError, data: Route53Domains.Types.ListTagsForDomainResponse) => void): Request<Route53Domains.Types.ListTagsForDomainResponse, AWSError>;
   /**
@@ -180,11 +188,11 @@ declare class Route53Domains extends Service {
    */
   updateDomainNameservers(callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainNameserversResponse) => void): Request<Route53Domains.Types.UpdateDomainNameserversResponse, AWSError>;
   /**
-   * This operation adds or updates tags for a specified domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation adds or updates tags for a specified domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   updateTagsForDomain(params: Route53Domains.Types.UpdateTagsForDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.UpdateTagsForDomainResponse) => void): Request<Route53Domains.Types.UpdateTagsForDomainResponse, AWSError>;
   /**
-   * This operation adds or updates tags for a specified domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation adds or updates tags for a specified domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   updateTagsForDomain(callback?: (err: AWSError, data: Route53Domains.Types.UpdateTagsForDomainResponse) => void): Request<Route53Domains.Types.UpdateTagsForDomainResponse, AWSError>;
   /**
@@ -234,9 +242,25 @@ declare namespace Route53Domains {
   }
   export interface CheckDomainAvailabilityResponse {
     /**
-     * Whether the domain name is available for registering.  You can only register domains designated as AVAILABLE.  Valid values:  AVAILABLE  The domain name is available.  AVAILABLE_RESERVED  The domain name is reserved under specific conditions.  AVAILABLE_PREORDER  The domain name is available and can be preordered.  DONT_KNOW  The TLD registry didn't reply with a definitive answer about whether the domain name is available. Amazon Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later.  PENDING  The TLD registry didn't return a response in the expected amount of time. When the response is delayed, it usually takes just a few extra seconds. You can resubmit the request immediately.  RESERVED  The domain name has been reserved for another person or organization.  UNAVAILABLE  The domain name is not available.  UNAVAILABLE_PREMIUM  The domain name is not available.  UNAVAILABLE_RESTRICTED  The domain name is forbidden.  
+     * Whether the domain name is available for registering.  You can register only domains designated as AVAILABLE.  Valid values:  AVAILABLE  The domain name is available.  AVAILABLE_RESERVED  The domain name is reserved under specific conditions.  AVAILABLE_PREORDER  The domain name is available and can be preordered.  DONT_KNOW  The TLD registry didn't reply with a definitive answer about whether the domain name is available. Amazon Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later.  PENDING  The TLD registry didn't return a response in the expected amount of time. When the response is delayed, it usually takes just a few extra seconds. You can resubmit the request immediately.  RESERVED  The domain name has been reserved for another person or organization.  UNAVAILABLE  The domain name is not available.  UNAVAILABLE_PREMIUM  The domain name is not available.  UNAVAILABLE_RESTRICTED  The domain name is forbidden.  
      */
     Availability: DomainAvailability;
+  }
+  export interface CheckDomainTransferabilityRequest {
+    /**
+     * The name of the domain that you want to transfer to Amazon Route 53. Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.
+     */
+    DomainName: DomainName;
+    /**
+     * If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, the code that you got from the current registrar for the domain.
+     */
+    AuthCode?: DomainAuthCode;
+  }
+  export interface CheckDomainTransferabilityResponse {
+    /**
+     * A complex type that contains information about whether the specified domain can be transferred to Amazon Route 53.
+     */
+    Transferability: DomainTransferability;
   }
   export type City = string;
   export interface ContactDetail {
@@ -370,6 +394,9 @@ declare namespace Route53Domains {
     Expiry?: Timestamp;
   }
   export type DomainSummaryList = DomainSummary[];
+  export interface DomainTransferability {
+    Transferable?: Transferable;
+  }
   export type DurationInYears = number;
   export type Email = string;
   export interface EnableDomainAutoRenewRequest {
@@ -404,7 +431,7 @@ declare namespace Route53Domains {
     Value: ExtraParamValue;
   }
   export type ExtraParamList = ExtraParam[];
-  export type ExtraParamName = "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"CA_BUSINESS_ENTITY_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"IT_PIN"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER"|string;
+  export type ExtraParamName = "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"CA_BUSINESS_ENTITY_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"FI_NATIONALITY"|"FI_ORGANIZATION_TYPE"|"IT_PIN"|"IT_REGISTRANT_ENTITY_TYPE"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER"|"UK_CONTACT_TYPE"|"UK_COMPANY_NUMBER"|string;
   export type ExtraParamValue = string;
   export type FIAuthKey = string;
   export interface GetContactReachabilityStatusRequest {
@@ -657,7 +684,7 @@ declare namespace Route53Domains {
     SubmittedDate: Timestamp;
   }
   export type OperationSummaryList = OperationSummary[];
-  export type OperationType = "REGISTER_DOMAIN"|"DELETE_DOMAIN"|"TRANSFER_IN_DOMAIN"|"UPDATE_DOMAIN_CONTACT"|"UPDATE_NAMESERVER"|"CHANGE_PRIVACY_PROTECTION"|"DOMAIN_LOCK"|string;
+  export type OperationType = "REGISTER_DOMAIN"|"DELETE_DOMAIN"|"TRANSFER_IN_DOMAIN"|"UPDATE_DOMAIN_CONTACT"|"UPDATE_NAMESERVER"|"CHANGE_PRIVACY_PROTECTION"|"DOMAIN_LOCK"|"ENABLE_AUTORENEW"|"DISABLE_AUTORENEW"|"ADD_DNSSEC"|"REMOVE_DNSSEC"|"EXPIRE_DOMAIN"|"TRANSFER_OUT_DOMAIN"|"CHANGE_DOMAIN_OWNER"|"RENEW_DOMAIN"|"PUSH_DOMAIN"|string;
   export type PageMarker = string;
   export type PageMaxItems = number;
   export type Price = number;
@@ -840,6 +867,7 @@ declare namespace Route53Domains {
      */
     OperationId: OperationId;
   }
+  export type Transferable = "TRANSFERABLE"|"UNTRANSFERABLE"|"DONT_KNOW"|string;
   export interface UpdateDomainContactPrivacyRequest {
     /**
      * The name of the domain that you want to update the privacy setting for.

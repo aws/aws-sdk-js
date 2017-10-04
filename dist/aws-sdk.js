@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.126.0
+// AWS SDK for JavaScript v2.127.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -87694,6 +87694,34 @@ module.exports={
         }
       }
     },
+    "CheckDomainTransferability": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DomainName"
+        ],
+        "members": {
+          "DomainName": {},
+          "AuthCode": {
+            "shape": "S7"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Transferability"
+        ],
+        "members": {
+          "Transferability": {
+            "type": "structure",
+            "members": {
+              "Transferable": {}
+            }
+          }
+        }
+      }
+    },
     "DeleteTagsForDomain": {
       "input": {
         "type": "structure",
@@ -87821,19 +87849,19 @@ module.exports={
         "members": {
           "DomainName": {},
           "Nameservers": {
-            "shape": "So"
+            "shape": "St"
           },
           "AutoRenew": {
             "type": "boolean"
           },
           "AdminContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "RegistrantContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "TechContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "AdminPrivacy": {
             "type": "boolean"
@@ -88024,7 +88052,7 @@ module.exports={
         ],
         "members": {
           "TagList": {
-            "shape": "S24"
+            "shape": "S29"
           }
         }
       }
@@ -88049,13 +88077,13 @@ module.exports={
             "type": "boolean"
           },
           "AdminContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "RegistrantContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "TechContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "PrivacyProtectAdminContact": {
             "type": "boolean"
@@ -88140,7 +88168,7 @@ module.exports={
         ],
         "members": {
           "AuthCode": {
-            "shape": "S2h"
+            "shape": "S7"
           }
         }
       }
@@ -88162,22 +88190,22 @@ module.exports={
             "type": "integer"
           },
           "Nameservers": {
-            "shape": "So"
+            "shape": "St"
           },
           "AuthCode": {
-            "shape": "S2h"
+            "shape": "S7"
           },
           "AutoRenew": {
             "type": "boolean"
           },
           "AdminContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "RegistrantContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "TechContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "PrivacyProtectAdminContact": {
             "type": "boolean"
@@ -88209,13 +88237,13 @@ module.exports={
         "members": {
           "DomainName": {},
           "AdminContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "RegistrantContact": {
-            "shape": "Su"
+            "shape": "Sz"
           },
           "TechContact": {
-            "shape": "Su"
+            "shape": "Sz"
           }
         }
       },
@@ -88267,9 +88295,11 @@ module.exports={
         ],
         "members": {
           "DomainName": {},
-          "FIAuthKey": {},
+          "FIAuthKey": {
+            "deprecated": true
+          },
           "Nameservers": {
-            "shape": "So"
+            "shape": "St"
           }
         }
       },
@@ -88292,7 +88322,7 @@ module.exports={
         "members": {
           "DomainName": {},
           "TagsToUpdate": {
-            "shape": "S24"
+            "shape": "S29"
           }
         }
       },
@@ -88343,7 +88373,11 @@ module.exports={
     }
   },
   "shapes": {
-    "So": {
+    "S7": {
+      "type": "string",
+      "sensitive": true
+    },
+    "St": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -88359,7 +88393,7 @@ module.exports={
         }
       }
     },
-    "Su": {
+    "Sz": {
       "type": "structure",
       "members": {
         "FirstName": {},
@@ -88392,7 +88426,7 @@ module.exports={
       },
       "sensitive": true
     },
-    "S24": {
+    "S29": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -88401,10 +88435,6 @@ module.exports={
           "Value": {}
         }
       }
-    },
-    "S2h": {
-      "type": "string",
-      "sensitive": true
     }
   }
 }
@@ -107816,7 +107846,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.126.0',
+  VERSION: '2.127.0',
 
 
   Signers: {},
@@ -125138,7 +125168,7 @@ for (var i = 0; i < 256; ++i) {
 function bytesToUuid(buf, offset) {
   var i = offset || 0;
   var bth = byteToHex;
-  return  bth[buf[i++]] + bth[buf[i++]] +
+  return bth[buf[i++]] + bth[buf[i++]] +
           bth[buf[i++]] + bth[buf[i++]] + '-' +
           bth[buf[i++]] + bth[buf[i++]] + '-' +
           bth[buf[i++]] + bth[buf[i++]] + '-' +
@@ -125156,7 +125186,7 @@ var rng;
 
 var crypto = global.crypto || global.msCrypto; // for IE 11
 if (crypto && crypto.getRandomValues) {
-  var rnds8 = new Uint8Array(16);
+  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
   rng = function whatwgRNG() {
     crypto.getRandomValues(rnds8);
     return rnds8;
@@ -125164,7 +125194,7 @@ if (crypto && crypto.getRandomValues) {
 }
 
 if (!rng) {
-  var  rnds = new Array(16);
+  var rnds = new Array(16);
   rng = function() {
     for (var i = 0, r; i < 16; i++) {
       if ((i & 0x03) === 0) r = Math.random() * 0x100000000;

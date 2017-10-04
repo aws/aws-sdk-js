@@ -46,6 +46,22 @@
       ],
       "documentation":"<p> Adds a streaming source to your Amazon Kinesis application. For conceptual information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p> <p>You can add a streaming source either when you create an application or you can use this operation to add a streaming source after you create an application. For more information, see <a>CreateApplication</a>.</p> <p>Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationInput</code> action.</p>"
     },
+    "AddApplicationInputProcessingConfiguration":{
+      "name":"AddApplicationInputProcessingConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddApplicationInputProcessingConfigurationRequest"},
+      "output":{"shape":"AddApplicationInputProcessingConfigurationResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ConcurrentModificationException"}
+      ],
+      "documentation":"<p>Adds an <a>InputProcessingConfiguration</a> to an application. An input processor preprocesses records on the input stream before the application's SQL code executes. Currently, the only input processor available is <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a>.</p>"
+    },
     "AddApplicationOutput":{
       "name":"AddApplicationOutput",
       "http":{
@@ -124,6 +140,22 @@
         {"shape":"ConcurrentModificationException"}
       ],
       "documentation":"<p>Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
+    },
+    "DeleteApplicationInputProcessingConfiguration":{
+      "name":"DeleteApplicationInputProcessingConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteApplicationInputProcessingConfigurationRequest"},
+      "output":{"shape":"DeleteApplicationInputProcessingConfigurationResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ConcurrentModificationException"}
+      ],
+      "documentation":"<p>Deletes an <a>InputProcessingConfiguration</a> from an input.</p>"
     },
     "DeleteApplicationOutput":{
       "name":"DeleteApplicationOutput",
@@ -272,6 +304,38 @@
       "members":{
       }
     },
+    "AddApplicationInputProcessingConfigurationRequest":{
+      "type":"structure",
+      "required":[
+        "ApplicationName",
+        "CurrentApplicationVersionId",
+        "InputId",
+        "InputProcessingConfiguration"
+      ],
+      "members":{
+        "ApplicationName":{
+          "shape":"ApplicationName",
+          "documentation":"<p>Name of the application to which you want to add the input processing configuration.</p>"
+        },
+        "CurrentApplicationVersionId":{
+          "shape":"ApplicationVersionId",
+          "documentation":"<p>Version of the application to which you want to add the input processing configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
+        },
+        "InputId":{
+          "shape":"Id",
+          "documentation":"<p>The ID of the input configuration to which to add the input configuration. You can get a list of the input IDs for an application using the <a>DescribeApplication</a> operation.</p>"
+        },
+        "InputProcessingConfiguration":{
+          "shape":"InputProcessingConfiguration",
+          "documentation":"<p>The <a>InputProcessingConfiguration</a> to add to the application.</p>"
+        }
+      }
+    },
+    "AddApplicationInputProcessingConfigurationResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "AddApplicationInputRequest":{
       "type":"structure",
       "required":[
@@ -290,7 +354,7 @@
         },
         "Input":{
           "shape":"Input",
-          "documentation":"<p/>"
+          "documentation":"<p>The <a>Input</a> to add.</p>"
         }
       },
       "documentation":"<p/>"
@@ -691,6 +755,33 @@
       "members":{
       }
     },
+    "DeleteApplicationInputProcessingConfigurationRequest":{
+      "type":"structure",
+      "required":[
+        "ApplicationName",
+        "CurrentApplicationVersionId",
+        "InputId"
+      ],
+      "members":{
+        "ApplicationName":{
+          "shape":"ApplicationName",
+          "documentation":"<p>The Kinesis Analytics application name.</p>"
+        },
+        "CurrentApplicationVersionId":{
+          "shape":"ApplicationVersionId",
+          "documentation":"<p>The version ID of the Kinesis Analytics application.</p>"
+        },
+        "InputId":{
+          "shape":"Id",
+          "documentation":"<p>The ID of the input configuration from which to delete the input configuration. You can get a list of the input IDs for an application using the <a>DescribeApplication</a> operation.</p>"
+        }
+      }
+    },
+    "DeleteApplicationInputProcessingConfigurationResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteApplicationOutputRequest":{
       "type":"structure",
       "required":[
@@ -805,11 +896,6 @@
     },
     "DiscoverInputSchemaRequest":{
       "type":"structure",
-      "required":[
-        "ResourceARN",
-        "RoleARN",
-        "InputStartingPositionConfiguration"
-      ],
       "members":{
         "ResourceARN":{
           "shape":"ResourceARN",
@@ -822,9 +908,13 @@
         "InputStartingPositionConfiguration":{
           "shape":"InputStartingPositionConfiguration",
           "documentation":"<p>Point at which you want Amazon Kinesis Analytics to start reading records from the specified streaming source discovery purposes.</p>"
+        },
+        "S3Configuration":{"shape":"S3Configuration"},
+        "InputProcessingConfiguration":{
+          "shape":"InputProcessingConfiguration",
+          "documentation":"<p>The <a>InputProcessingConfiguration</a> to use to preprocess the records before discovering the schema of the records.</p>"
         }
-      },
-      "documentation":"<p/>"
+      }
     },
     "DiscoverInputSchemaResponse":{
       "type":"structure",
@@ -837,6 +927,10 @@
           "shape":"ParsedInputRecords",
           "documentation":"<p>An array of elements, where each element corresponds to a row in a stream record (a stream record can have more than one row).</p>"
         },
+        "ProcessedInputRecords":{
+          "shape":"ProcessedInputRecords",
+          "documentation":"<p>Stream data that was modified by the processor specified in the <code>InputProcessingConfiguration</code> parameter.</p>"
+        },
         "RawInputRecords":{
           "shape":"RawInputRecords",
           "documentation":"<p>Raw stream data that was sampled to infer the schema.</p>"
@@ -845,7 +939,11 @@
       "documentation":"<p/>"
     },
     "ErrorMessage":{"type":"string"},
-    "FileKey":{"type":"string"},
+    "FileKey":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
     "Id":{
       "type":"string",
       "max":50,
@@ -878,6 +976,10 @@
         "NamePrefix":{
           "shape":"InAppStreamName",
           "documentation":"<p>Name prefix to use when creating in-application stream. Suppose you specify a prefix \"MyInApplicationStream\". Amazon Kinesis Analytics will then create one or more (as per the <code>InputParallelism</code> count you specified) in-application streams with names \"MyInApplicationStream_001\", \"MyInApplicationStream_002\" and so on. </p>"
+        },
+        "InputProcessingConfiguration":{
+          "shape":"InputProcessingConfiguration",
+          "documentation":"<p>The <a>InputProcessingConfiguration</a> for the Input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is <a>InputLambdaProcessor</a>.</p>"
         },
         "KinesisStreamsInput":{
           "shape":"KinesisStreamsInput",
@@ -935,6 +1037,10 @@
           "shape":"InAppStreamNames",
           "documentation":"<p>Returns the in-application stream names that are mapped to the stream source.</p>"
         },
+        "InputProcessingConfigurationDescription":{
+          "shape":"InputProcessingConfigurationDescription",
+          "documentation":"<p>The description of the preprocessor that executes on records in this input before the application's code is run.</p>"
+        },
         "KinesisStreamsInputDescription":{
           "shape":"KinesisStreamsInputDescription",
           "documentation":"<p>If an Amazon Kinesis stream is configured as streaming source, provides Amazon Kinesis stream's ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p>"
@@ -943,7 +1049,10 @@
           "shape":"KinesisFirehoseInputDescription",
           "documentation":"<p>If an Amazon Kinesis Firehose delivery stream is configured as a streaming source, provides the Firehose delivery stream's Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p>"
         },
-        "InputSchema":{"shape":"SourceSchema"},
+        "InputSchema":{
+          "shape":"SourceSchema",
+          "documentation":"<p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created. </p>"
+        },
         "InputParallelism":{
           "shape":"InputParallelism",
           "documentation":"<p>Describes the configured parallelism (number of in-application streams mapped to the streaming source).</p>"
@@ -958,6 +1067,52 @@
     "InputDescriptions":{
       "type":"list",
       "member":{"shape":"InputDescription"}
+    },
+    "InputLambdaProcessor":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "RoleARN"
+      ],
+      "members":{
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The ARN of the <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that operates on records in the stream.</p>"
+        },
+        "RoleARN":{
+          "shape":"RoleARN",
+          "documentation":"<p>The ARN of the IAM role used to access the AWS Lambda function.</p>"
+        }
+      },
+      "documentation":"<p>An object that contains the ARN of the <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role used to access the AWS Lambda function. </p>"
+    },
+    "InputLambdaProcessorDescription":{
+      "type":"structure",
+      "members":{
+        "ResourceARN":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The ARN of the <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that is used to preprocess the records in the stream.</p>"
+        },
+        "RoleARN":{
+          "shape":"RoleARN",
+          "documentation":"<p>The ARN of the IAM role used to access the AWS Lambda function.</p>"
+        }
+      },
+      "documentation":"<p>An object that contains the ARN of the <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role used to access the AWS Lambda expression.</p>"
+    },
+    "InputLambdaProcessorUpdate":{
+      "type":"structure",
+      "members":{
+        "ResourceARNUpdate":{
+          "shape":"ResourceARN",
+          "documentation":"<p>The ARN of the new <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that is used to preprocess the records in the stream.</p>"
+        },
+        "RoleARNUpdate":{
+          "shape":"RoleARN",
+          "documentation":"<p>The ARN of the new IAM role used to access the AWS Lambda function.</p>"
+        }
+      },
+      "documentation":"<p>Represents an update to the <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream.</p>"
     },
     "InputParallelism":{
       "type":"structure",
@@ -984,6 +1139,38 @@
       },
       "documentation":"<p>Provides updates to the parallelism count.</p>"
     },
+    "InputProcessingConfiguration":{
+      "type":"structure",
+      "required":["InputLambdaProcessor"],
+      "members":{
+        "InputLambdaProcessor":{
+          "shape":"InputLambdaProcessor",
+          "documentation":"<p>The <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream prior to being processed by your application code.</p>"
+        }
+      },
+      "documentation":"<p>Provides a description of a processor that is used to preprocess the records in the stream prior to being processed by your application code. Currently, the only input processor available is <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a>.</p>"
+    },
+    "InputProcessingConfigurationDescription":{
+      "type":"structure",
+      "members":{
+        "InputLambdaProcessorDescription":{
+          "shape":"InputLambdaProcessorDescription",
+          "documentation":"<p>Provides configuration information about the associated <a>InputLambdaProcessorDescription</a>.</p>"
+        }
+      },
+      "documentation":"<p>Provides configuration information about an input processor. Currently, the only input processor available is <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a>.</p>"
+    },
+    "InputProcessingConfigurationUpdate":{
+      "type":"structure",
+      "required":["InputLambdaProcessorUpdate"],
+      "members":{
+        "InputLambdaProcessorUpdate":{
+          "shape":"InputLambdaProcessorUpdate",
+          "documentation":"<p>Provides update information for an <a>InputLambdaProcessor</a>.</p>"
+        }
+      },
+      "documentation":"<p>Describes updates to an <a>InputProcessingConfiguration</a>. </p>"
+    },
     "InputSchemaUpdate":{
       "type":"structure",
       "members":{
@@ -1000,7 +1187,7 @@
           "documentation":"<p>A list of <code>RecordColumn</code> objects. Each object describes the mapping of the streaming source element to the corresponding column in the in-application stream. </p>"
         }
       },
-      "documentation":"<p> Describes updates for the application's input schema. </p>"
+      "documentation":"<p>Describes updates for the application's input schema.</p>"
     },
     "InputStartingPosition":{
       "type":"string",
@@ -1031,6 +1218,10 @@
         "NamePrefixUpdate":{
           "shape":"InAppStreamName",
           "documentation":"<p>Name prefix for in-application streams that Amazon Kinesis Analytics creates for the specific streaming source.</p>"
+        },
+        "InputProcessingConfigurationUpdate":{
+          "shape":"InputProcessingConfigurationUpdate",
+          "documentation":"<p>Describes updates for an input processing configuration.</p>"
         },
         "KinesisStreamsInputUpdate":{
           "shape":"KinesisStreamsInputUpdate",
@@ -1438,6 +1629,11 @@
       "type":"list",
       "member":{"shape":"ParsedInputRecord"}
     },
+    "ProcessedInputRecord":{"type":"string"},
+    "ProcessedInputRecords":{
+      "type":"list",
+      "member":{"shape":"ProcessedInputRecord"}
+    },
     "RawInputRecord":{"type":"string"},
     "RawInputRecords":{
       "type":"list",
@@ -1474,7 +1670,10 @@
       "type":"string",
       "pattern":"[a-zA-Z_][a-zA-Z0-9_]*"
     },
-    "RecordColumnSqlType":{"type":"string"},
+    "RecordColumnSqlType":{
+      "type":"string",
+      "min":1
+    },
     "RecordColumns":{
       "type":"list",
       "member":{"shape":"RecordColumn"},
@@ -1508,7 +1707,10 @@
       "type":"string",
       "min":1
     },
-    "RecordRowPath":{"type":"string"},
+    "RecordRowPath":{
+      "type":"string",
+      "min":1
+    },
     "ReferenceDataSource":{
       "type":"structure",
       "required":[
@@ -1581,7 +1783,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"arn:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:\\d{12}:[a-zA-Z_0-9+=,.@\\-_/:]+"
+      "pattern":"arn:.*"
     },
     "ResourceInUseException":{
       "type":"structure",
@@ -1618,6 +1820,19 @@
       "max":2048,
       "min":1,
       "pattern":"arn:aws:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"
+    },
+    "S3Configuration":{
+      "type":"structure",
+      "required":[
+        "RoleARN",
+        "BucketARN",
+        "FileKey"
+      ],
+      "members":{
+        "RoleARN":{"shape":"RoleARN"},
+        "BucketARN":{"shape":"BucketARN"},
+        "FileKey":{"shape":"FileKey"}
+      }
     },
     "S3ReferenceDataSource":{
       "type":"structure",
@@ -1689,7 +1904,8 @@
         "message":{"shape":"ErrorMessage"}
       },
       "documentation":"<p>The service is unavailable, back off and retry the operation. </p>",
-      "exception":true
+      "exception":true,
+      "fault":true
     },
     "SourceSchema":{
       "type":"structure",
@@ -1759,7 +1975,8 @@
       "type":"structure",
       "members":{
         "message":{"shape":"ErrorMessage"},
-        "RawInputRecords":{"shape":"RawInputRecords"}
+        "RawInputRecords":{"shape":"RawInputRecords"},
+        "ProcessedInputRecords":{"shape":"ProcessedInputRecords"}
       },
       "documentation":"<p>Data format is not valid, Amazon Kinesis Analytics is not able to detect schema for the given streaming source.</p>",
       "exception":true

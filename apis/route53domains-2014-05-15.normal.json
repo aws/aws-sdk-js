@@ -25,6 +25,20 @@
       ],
       "documentation":"<p>This operation checks the availability of one domain name. Note that if the availability status of a domain is pending, you must submit another request to determine the availability of the domain name.</p>"
     },
+    "CheckDomainTransferability":{
+      "name":"CheckDomainTransferability",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CheckDomainTransferabilityRequest"},
+      "output":{"shape":"CheckDomainTransferabilityResponse"},
+      "errors":[
+        {"shape":"InvalidInput"},
+        {"shape":"UnsupportedTLD"}
+      ],
+      "documentation":"<p>Checks whether a domain name can be transferred to Amazon Route 53. </p>"
+    },
     "DeleteTagsForDomain":{
       "name":"DeleteTagsForDomain",
       "http":{
@@ -38,7 +52,7 @@
         {"shape":"OperationLimitExceeded"},
         {"shape":"UnsupportedTLD"}
       ],
-      "documentation":"<p>This operation deletes the specified tags for a domain.</p> <p>All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.</p>"
+      "documentation":"<p>This operation deletes the specified tags for a domain.</p> <p>All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.</p>"
     },
     "DisableDomainAutoRenew":{
       "name":"DisableDomainAutoRenew",
@@ -198,7 +212,7 @@
         {"shape":"OperationLimitExceeded"},
         {"shape":"UnsupportedTLD"}
       ],
-      "documentation":"<p>This operation returns all of the tags that are associated with the specified domain.</p> <p>All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.</p>"
+      "documentation":"<p>This operation returns all of the tags that are associated with the specified domain.</p> <p>All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.</p>"
     },
     "RegisterDomain":{
       "name":"RegisterDomain",
@@ -346,7 +360,7 @@
         {"shape":"OperationLimitExceeded"},
         {"shape":"UnsupportedTLD"}
       ],
-      "documentation":"<p>This operation adds or updates tags for a specified domain.</p> <p>All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.</p>"
+      "documentation":"<p>This operation adds or updates tags for a specified domain.</p> <p>All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.</p>"
     },
     "ViewBilling":{
       "name":"ViewBilling",
@@ -419,10 +433,36 @@
       "members":{
         "Availability":{
           "shape":"DomainAvailability",
-          "documentation":"<p>Whether the domain name is available for registering.</p> <note> <p>You can only register domains designated as <code>AVAILABLE</code>.</p> </note> <p>Valid values:</p> <dl> <dt>AVAILABLE</dt> <dd> <p>The domain name is available.</p> </dd> <dt>AVAILABLE_RESERVED</dt> <dd> <p>The domain name is reserved under specific conditions.</p> </dd> <dt>AVAILABLE_PREORDER</dt> <dd> <p>The domain name is available and can be preordered.</p> </dd> <dt>DONT_KNOW</dt> <dd> <p>The TLD registry didn't reply with a definitive answer about whether the domain name is available. Amazon Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later.</p> </dd> <dt>PENDING</dt> <dd> <p>The TLD registry didn't return a response in the expected amount of time. When the response is delayed, it usually takes just a few extra seconds. You can resubmit the request immediately.</p> </dd> <dt>RESERVED</dt> <dd> <p>The domain name has been reserved for another person or organization.</p> </dd> <dt>UNAVAILABLE</dt> <dd> <p>The domain name is not available.</p> </dd> <dt>UNAVAILABLE_PREMIUM</dt> <dd> <p>The domain name is not available.</p> </dd> <dt>UNAVAILABLE_RESTRICTED</dt> <dd> <p>The domain name is forbidden.</p> </dd> </dl>"
+          "documentation":"<p>Whether the domain name is available for registering.</p> <note> <p>You can register only domains designated as <code>AVAILABLE</code>.</p> </note> <p>Valid values:</p> <dl> <dt>AVAILABLE</dt> <dd> <p>The domain name is available.</p> </dd> <dt>AVAILABLE_RESERVED</dt> <dd> <p>The domain name is reserved under specific conditions.</p> </dd> <dt>AVAILABLE_PREORDER</dt> <dd> <p>The domain name is available and can be preordered.</p> </dd> <dt>DONT_KNOW</dt> <dd> <p>The TLD registry didn't reply with a definitive answer about whether the domain name is available. Amazon Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later.</p> </dd> <dt>PENDING</dt> <dd> <p>The TLD registry didn't return a response in the expected amount of time. When the response is delayed, it usually takes just a few extra seconds. You can resubmit the request immediately.</p> </dd> <dt>RESERVED</dt> <dd> <p>The domain name has been reserved for another person or organization.</p> </dd> <dt>UNAVAILABLE</dt> <dd> <p>The domain name is not available.</p> </dd> <dt>UNAVAILABLE_PREMIUM</dt> <dd> <p>The domain name is not available.</p> </dd> <dt>UNAVAILABLE_RESTRICTED</dt> <dd> <p>The domain name is forbidden.</p> </dd> </dl>"
         }
       },
       "documentation":"<p>The CheckDomainAvailability response includes the following elements.</p>"
+    },
+    "CheckDomainTransferabilityRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "documentation":"<p>The name of the domain that you want to transfer to Amazon Route 53.</p> <p>Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.</p>"
+        },
+        "AuthCode":{
+          "shape":"DomainAuthCode",
+          "documentation":"<p>If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, the code that you got from the current registrar for the domain.</p>"
+        }
+      },
+      "documentation":"<p>The CheckDomainTransferability request contains the following elements.</p>"
+    },
+    "CheckDomainTransferabilityResponse":{
+      "type":"structure",
+      "required":["Transferability"],
+      "members":{
+        "Transferability":{
+          "shape":"DomainTransferability",
+          "documentation":"<p>A complex type that contains information about whether the specified domain can be transferred to Amazon Route 53.</p>"
+        }
+      },
+      "documentation":"<p>The CheckDomainTransferability response includes the following elements.</p>"
     },
     "City":{
       "type":"string",
@@ -836,8 +876,7 @@
     },
     "DomainName":{
       "type":"string",
-      "max":255,
-      "pattern":"[a-zA-Z0-9_\\-.]*"
+      "max":255
     },
     "DomainStatus":{"type":"string"},
     "DomainStatusList":{
@@ -888,6 +927,12 @@
     "DomainSummaryList":{
       "type":"list",
       "member":{"shape":"DomainSummary"}
+    },
+    "DomainTransferability":{
+      "type":"structure",
+      "members":{
+        "Transferable":{"shape":"Transferable"}
+      }
     },
     "DuplicateRequest":{
       "type":"structure",
@@ -988,11 +1033,16 @@
         "ES_LEGAL_FORM",
         "FI_BUSINESS_NUMBER",
         "FI_ID_NUMBER",
+        "FI_NATIONALITY",
+        "FI_ORGANIZATION_TYPE",
         "IT_PIN",
+        "IT_REGISTRANT_ENTITY_TYPE",
         "RU_PASSPORT_DATA",
         "SE_ID_NUMBER",
         "SG_ID_NUMBER",
-        "VAT_NUMBER"
+        "VAT_NUMBER",
+        "UK_CONTACT_TYPE",
+        "UK_COMPANY_NUMBER"
       ]
     },
     "ExtraParamValue":{
@@ -1221,10 +1271,10 @@
       "members":{
         "message":{
           "shape":"ErrorMessage",
-          "documentation":"<p>The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.</p>"
+          "documentation":"<p>The requested item is not acceptable. For example, for an OperationId it might refer to the ID of an operation that is already completed. For a domain name, it might not be a valid domain name or belong to the requester account.</p>"
         }
       },
-      "documentation":"<p>The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.</p>",
+      "documentation":"<p>The requested item is not acceptable. For example, for an OperationId it might refer to the ID of an operation that is already completed. For a domain name, it might not be a valid domain name or belong to the requester account.</p>",
       "exception":true
     },
     "InvoiceId":{"type":"string"},
@@ -1397,7 +1447,16 @@
         "UPDATE_DOMAIN_CONTACT",
         "UPDATE_NAMESERVER",
         "CHANGE_PRIVACY_PROTECTION",
-        "DOMAIN_LOCK"
+        "DOMAIN_LOCK",
+        "ENABLE_AUTORENEW",
+        "DISABLE_AUTORENEW",
+        "ADD_DNSSEC",
+        "REMOVE_DNSSEC",
+        "EXPIRE_DOMAIN",
+        "TRANSFER_OUT_DOMAIN",
+        "CHANGE_DOMAIN_OWNER",
+        "RENEW_DOMAIN",
+        "PUSH_DOMAIN"
       ]
     },
     "PageMarker":{
@@ -1679,15 +1738,24 @@
       },
       "documentation":"<p>The TranserDomain response includes the following element.</p>"
     },
+    "Transferable":{
+      "type":"string",
+      "documentation":"<p>Whether the domain name can be transferred to Amazon Route 53.</p> <note> <p>You can transfer only domains that have a value of <code>TRANSFERABLE</code> for <code>Transferable</code>.</p> </note> <p>Valid values:</p> <dl> <dt>TRANSFERABLE</dt> <dd> <p>The domain name can be transferred to Amazon Route 53.</p> </dd> <dt>UNTRANSFERRABLE</dt> <dd> <p>The domain name can't be transferred to Amazon Route 53.</p> </dd> <dt>DONT_KNOW</dt> <dd> <p>Reserved for future use.</p> </dd> </dl>",
+      "enum":[
+        "TRANSFERABLE",
+        "UNTRANSFERABLE",
+        "DONT_KNOW"
+      ]
+    },
     "UnsupportedTLD":{
       "type":"structure",
       "members":{
         "message":{
           "shape":"ErrorMessage",
-          "documentation":"<p>Amazon Route 53 does not support this top-level domain.</p>"
+          "documentation":"<p>Amazon Route 53 does not support this top-level domain (TLD).</p>"
         }
       },
-      "documentation":"<p>Amazon Route 53 does not support this top-level domain.</p>",
+      "documentation":"<p>Amazon Route 53 does not support this top-level domain (TLD).</p>",
       "exception":true
     },
     "UpdateDomainContactPrivacyRequest":{
@@ -1771,7 +1839,8 @@
         },
         "FIAuthKey":{
           "shape":"FIAuthKey",
-          "documentation":"<p>The authorization key for .fi domains</p>"
+          "documentation":"<p>The authorization key for .fi domains</p>",
+          "deprecated":true
         },
         "Nameservers":{
           "shape":"NameserverList",

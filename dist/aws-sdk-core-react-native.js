@@ -80,7 +80,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.126.0',
+	  VERSION: '2.127.0',
 
 	  /**
 	   * @api private
@@ -1572,9 +1572,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// Unique ID creation requires a high quality random # generator.  We feature
-	// detect to determine the best RNG source, normalizing to a function that
-	// returns 128-bits of randomness, since that's what's usually required
 	var rng = __webpack_require__(10);
 	var bytesToUuid = __webpack_require__(11);
 
@@ -1690,7 +1687,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var crypto = global.crypto || global.msCrypto; // for IE 11
 	if (crypto && crypto.getRandomValues) {
 	  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
-	  var rnds8 = new Uint8Array(16);
+	  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
 	  rng = function whatwgRNG() {
 	    crypto.getRandomValues(rnds8);
 	    return rnds8;
@@ -1702,7 +1699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  //
 	  // If all else fails, use Math.random().  It's fast, but is of unspecified
 	  // quality.
-	  var  rnds = new Array(16);
+	  var rnds = new Array(16);
 	  rng = function() {
 	    for (var i = 0, r; i < 16; i++) {
 	      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
@@ -1723,7 +1720,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * Convert array of 16 byte values to UUID string format of the form:
-	 * XXXXXXXX-XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+	 * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 	 */
 	var byteToHex = [];
 	for (var i = 0; i < 256; ++i) {
@@ -1733,7 +1730,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function bytesToUuid(buf, offset) {
 	  var i = offset || 0;
 	  var bth = byteToHex;
-	  return  bth[buf[i++]] + bth[buf[i++]] +
+	  return bth[buf[i++]] + bth[buf[i++]] +
 	          bth[buf[i++]] + bth[buf[i++]] + '-' +
 	          bth[buf[i++]] + bth[buf[i++]] + '-' +
 	          bth[buf[i++]] + bth[buf[i++]] + '-' +

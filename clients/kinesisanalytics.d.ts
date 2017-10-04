@@ -28,6 +28,14 @@ declare class KinesisAnalytics extends Service {
    */
   addApplicationInput(callback?: (err: AWSError, data: KinesisAnalytics.Types.AddApplicationInputResponse) => void): Request<KinesisAnalytics.Types.AddApplicationInputResponse, AWSError>;
   /**
+   * Adds an InputProcessingConfiguration to an application. An input processor preprocesses records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
+   */
+  addApplicationInputProcessingConfiguration(params: KinesisAnalytics.Types.AddApplicationInputProcessingConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalytics.Types.AddApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalytics.Types.AddApplicationInputProcessingConfigurationResponse, AWSError>;
+  /**
+   * Adds an InputProcessingConfiguration to an application. An input processor preprocesses records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
+   */
+  addApplicationInputProcessingConfiguration(callback?: (err: AWSError, data: KinesisAnalytics.Types.AddApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalytics.Types.AddApplicationInputProcessingConfigurationResponse, AWSError>;
+  /**
    * Adds an external destination to your Amazon Kinesis Analytics application. If you want Amazon Kinesis Analytics to deliver data from an in-application stream within your application to an external destination (such as an Amazon Kinesis stream or a Firehose delivery stream), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. For conceptual information, see Understanding Application Output (Destination).   Note that any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version. For the limits on the number of application inputs and outputs you can configure, see Limits. This operation requires permissions to perform the kinesisanalytics:AddApplicationOutput action.
    */
   addApplicationOutput(params: KinesisAnalytics.Types.AddApplicationOutputRequest, callback?: (err: AWSError, data: KinesisAnalytics.Types.AddApplicationOutputResponse) => void): Request<KinesisAnalytics.Types.AddApplicationOutputResponse, AWSError>;
@@ -67,6 +75,14 @@ declare class KinesisAnalytics extends Service {
    * Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see Working with Amazon CloudWatch Logs.
    */
   deleteApplicationCloudWatchLoggingOption(callback?: (err: AWSError, data: KinesisAnalytics.Types.DeleteApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalytics.Types.DeleteApplicationCloudWatchLoggingOptionResponse, AWSError>;
+  /**
+   * Deletes an InputProcessingConfiguration from an input.
+   */
+  deleteApplicationInputProcessingConfiguration(params: KinesisAnalytics.Types.DeleteApplicationInputProcessingConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalytics.Types.DeleteApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalytics.Types.DeleteApplicationInputProcessingConfigurationResponse, AWSError>;
+  /**
+   * Deletes an InputProcessingConfiguration from an input.
+   */
+  deleteApplicationInputProcessingConfiguration(callback?: (err: AWSError, data: KinesisAnalytics.Types.DeleteApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalytics.Types.DeleteApplicationInputProcessingConfigurationResponse, AWSError>;
   /**
    * Deletes output destination configuration from your application configuration. Amazon Kinesis Analytics will no longer write data from the corresponding in-application stream to the external output destination. This operation requires permissions to perform the kinesisanalytics:DeleteApplicationOutput action.
    */
@@ -149,6 +165,26 @@ declare namespace KinesisAnalytics {
   }
   export interface AddApplicationCloudWatchLoggingOptionResponse {
   }
+  export interface AddApplicationInputProcessingConfigurationRequest {
+    /**
+     * Name of the application to which you want to add the input processing configuration.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * Version of the application to which you want to add the input processing configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
+     */
+    CurrentApplicationVersionId: ApplicationVersionId;
+    /**
+     * The ID of the input configuration to which to add the input configuration. You can get a list of the input IDs for an application using the DescribeApplication operation.
+     */
+    InputId: Id;
+    /**
+     * The InputProcessingConfiguration to add to the application.
+     */
+    InputProcessingConfiguration: InputProcessingConfiguration;
+  }
+  export interface AddApplicationInputProcessingConfigurationResponse {
+  }
   export interface AddApplicationInputRequest {
     /**
      * Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.
@@ -159,7 +195,7 @@ declare namespace KinesisAnalytics {
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
-     * 
+     * The Input to add.
      */
     Input: Input;
   }
@@ -390,6 +426,22 @@ declare namespace KinesisAnalytics {
   }
   export interface DeleteApplicationCloudWatchLoggingOptionResponse {
   }
+  export interface DeleteApplicationInputProcessingConfigurationRequest {
+    /**
+     * The Kinesis Analytics application name.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The version ID of the Kinesis Analytics application.
+     */
+    CurrentApplicationVersionId: ApplicationVersionId;
+    /**
+     * The ID of the input configuration from which to delete the input configuration. You can get a list of the input IDs for an application using the DescribeApplication operation.
+     */
+    InputId: Id;
+  }
+  export interface DeleteApplicationInputProcessingConfigurationResponse {
+  }
   export interface DeleteApplicationOutputRequest {
     /**
      * Amazon Kinesis Analytics application name.
@@ -456,15 +508,20 @@ declare namespace KinesisAnalytics {
     /**
      * Amazon Resource Name (ARN) of the streaming source.
      */
-    ResourceARN: ResourceARN;
+    ResourceARN?: ResourceARN;
     /**
      * ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf.
      */
-    RoleARN: RoleARN;
+    RoleARN?: RoleARN;
     /**
      * Point at which you want Amazon Kinesis Analytics to start reading records from the specified streaming source discovery purposes.
      */
-    InputStartingPositionConfiguration: InputStartingPositionConfiguration;
+    InputStartingPositionConfiguration?: InputStartingPositionConfiguration;
+    S3Configuration?: S3Configuration;
+    /**
+     * The InputProcessingConfiguration to use to preprocess the records before discovering the schema of the records.
+     */
+    InputProcessingConfiguration?: InputProcessingConfiguration;
   }
   export interface DiscoverInputSchemaResponse {
     /**
@@ -475,6 +532,10 @@ declare namespace KinesisAnalytics {
      * An array of elements, where each element corresponds to a row in a stream record (a stream record can have more than one row).
      */
     ParsedInputRecords?: ParsedInputRecords;
+    /**
+     * Stream data that was modified by the processor specified in the InputProcessingConfiguration parameter.
+     */
+    ProcessedInputRecords?: ProcessedInputRecords;
     /**
      * Raw stream data that was sampled to infer the schema.
      */
@@ -491,6 +552,10 @@ declare namespace KinesisAnalytics {
      * Name prefix to use when creating in-application stream. Suppose you specify a prefix "MyInApplicationStream". Amazon Kinesis Analytics will then create one or more (as per the InputParallelism count you specified) in-application streams with names "MyInApplicationStream_001", "MyInApplicationStream_002" and so on. 
      */
     NamePrefix: InAppStreamName;
+    /**
+     * The InputProcessingConfiguration for the Input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is InputLambdaProcessor.
+     */
+    InputProcessingConfiguration?: InputProcessingConfiguration;
     /**
      * If the streaming source is an Amazon Kinesis stream, identifies the stream's Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf. Note: Either KinesisStreamsInput or KinesisFirehoseInput is required.
      */
@@ -533,6 +598,10 @@ declare namespace KinesisAnalytics {
      */
     InAppStreamNames?: InAppStreamNames;
     /**
+     * The description of the preprocessor that executes on records in this input before the application's code is run.
+     */
+    InputProcessingConfigurationDescription?: InputProcessingConfigurationDescription;
+    /**
      * If an Amazon Kinesis stream is configured as streaming source, provides Amazon Kinesis stream's ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.
      */
     KinesisStreamsInputDescription?: KinesisStreamsInputDescription;
@@ -540,6 +609,9 @@ declare namespace KinesisAnalytics {
      * If an Amazon Kinesis Firehose delivery stream is configured as a streaming source, provides the Firehose delivery stream's Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.
      */
     KinesisFirehoseInputDescription?: KinesisFirehoseInputDescription;
+    /**
+     * Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created. 
+     */
     InputSchema?: SourceSchema;
     /**
      * Describes the configured parallelism (number of in-application streams mapped to the streaming source).
@@ -551,6 +623,36 @@ declare namespace KinesisAnalytics {
     InputStartingPositionConfiguration?: InputStartingPositionConfiguration;
   }
   export type InputDescriptions = InputDescription[];
+  export interface InputLambdaProcessor {
+    /**
+     * The ARN of the AWS Lambda function that operates on records in the stream.
+     */
+    ResourceARN: ResourceARN;
+    /**
+     * The ARN of the IAM role used to access the AWS Lambda function.
+     */
+    RoleARN: RoleARN;
+  }
+  export interface InputLambdaProcessorDescription {
+    /**
+     * The ARN of the AWS Lambda function that is used to preprocess the records in the stream.
+     */
+    ResourceARN?: ResourceARN;
+    /**
+     * The ARN of the IAM role used to access the AWS Lambda function.
+     */
+    RoleARN?: RoleARN;
+  }
+  export interface InputLambdaProcessorUpdate {
+    /**
+     * The ARN of the new AWS Lambda function that is used to preprocess the records in the stream.
+     */
+    ResourceARNUpdate?: ResourceARN;
+    /**
+     * The ARN of the new IAM role used to access the AWS Lambda function.
+     */
+    RoleARNUpdate?: RoleARN;
+  }
   export interface InputParallelism {
     /**
      * Number of in-application streams to create. For more information, see Limits. 
@@ -563,6 +665,24 @@ declare namespace KinesisAnalytics {
      * Number of in-application streams to create for the specified streaming source.
      */
     CountUpdate?: InputParallelismCount;
+  }
+  export interface InputProcessingConfiguration {
+    /**
+     * The InputLambdaProcessor that is used to preprocess the records in the stream prior to being processed by your application code.
+     */
+    InputLambdaProcessor: InputLambdaProcessor;
+  }
+  export interface InputProcessingConfigurationDescription {
+    /**
+     * Provides configuration information about the associated InputLambdaProcessorDescription.
+     */
+    InputLambdaProcessorDescription?: InputLambdaProcessorDescription;
+  }
+  export interface InputProcessingConfigurationUpdate {
+    /**
+     * Provides update information for an InputLambdaProcessor.
+     */
+    InputLambdaProcessorUpdate: InputLambdaProcessorUpdate;
   }
   export interface InputSchemaUpdate {
     /**
@@ -594,6 +714,10 @@ declare namespace KinesisAnalytics {
      * Name prefix for in-application streams that Amazon Kinesis Analytics creates for the specific streaming source.
      */
     NamePrefixUpdate?: InAppStreamName;
+    /**
+     * Describes updates for an input processing configuration.
+     */
+    InputProcessingConfigurationUpdate?: InputProcessingConfigurationUpdate;
     /**
      * If a Amazon Kinesis stream is the streaming source to be updated, provides an updated stream ARN and IAM role ARN.
      */
@@ -833,6 +957,8 @@ declare namespace KinesisAnalytics {
   export type ParsedInputRecord = ParsedInputRecordField[];
   export type ParsedInputRecordField = string;
   export type ParsedInputRecords = ParsedInputRecord[];
+  export type ProcessedInputRecord = string;
+  export type ProcessedInputRecords = ProcessedInputRecord[];
   export type RawInputRecord = string;
   export type RawInputRecords = RawInputRecord[];
   export interface RecordColumn {
@@ -907,6 +1033,11 @@ declare namespace KinesisAnalytics {
   export type ReferenceDataSourceUpdates = ReferenceDataSourceUpdate[];
   export type ResourceARN = string;
   export type RoleARN = string;
+  export interface S3Configuration {
+    RoleARN: RoleARN;
+    BucketARN: BucketARN;
+    FileKey: FileKey;
+  }
   export interface S3ReferenceDataSource {
     /**
      * Amazon Resource Name (ARN) of the S3 bucket.
