@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.127.0-->
+<!--LATEST=2.128.0-->
 <!--ENTRYINSERT-->
+
+## 2.128.0
+* feature: Redshift: DescribeEventSubscriptions API supports tag keys and tag values as request parameters. 
 
 ## 2.127.0
 * feature: KinesisAnalytics: Kinesis Analytics now supports schema discovery on objects in S3.  Additionally, Kinesis Analytics now supports input data preprocessing through Lambda.
