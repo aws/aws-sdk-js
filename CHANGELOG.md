@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.129.0-->
+<!--LATEST=2.130.0-->
 <!--ENTRYINSERT-->
+
+## 2.130.0
+* feature: ConfigService: Revert: Added missing enumeration values for ConfigurationItemStatus
 
 ## 2.129.0
 * feature: ConfigService: Added missing enumeration values for ConfigurationItemStatus
