@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.128.0-->
+<!--LATEST=2.129.0-->
 <!--ENTRYINSERT-->
+
+## 2.129.0
+* feature: ConfigService: Added missing enumeration values for ConfigurationItemStatus
 
 ## 2.128.0
 * feature: Redshift: DescribeEventSubscriptions API supports tag keys and tag values as request parameters. 

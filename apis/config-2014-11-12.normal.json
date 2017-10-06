@@ -812,7 +812,12 @@
         "Ok",
         "Failed",
         "Discovered",
-        "Deleted"
+        "Deleted",
+        "OK",
+        "ResourceDiscovered",
+        "ResourceNotRecorded",
+        "ResourceDeleted",
+        "ResourceDeletedNotRecorded"
       ]
     },
     "ConfigurationRecorder":{
