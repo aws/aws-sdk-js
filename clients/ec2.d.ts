@@ -140,11 +140,11 @@ declare class EC2 extends Service {
    */
   attachVolume(callback?: (err: AWSError, data: EC2.Types.VolumeAttachment) => void): Request<EC2.Types.VolumeAttachment, AWSError>;
   /**
-   * Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time. For more information, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time. For more information, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   attachVpnGateway(params: EC2.Types.AttachVpnGatewayRequest, callback?: (err: AWSError, data: EC2.Types.AttachVpnGatewayResult) => void): Request<EC2.Types.AttachVpnGatewayResult, AWSError>;
   /**
-   * Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time. For more information, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time. For more information, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   attachVpnGateway(callback?: (err: AWSError, data: EC2.Types.AttachVpnGatewayResult) => void): Request<EC2.Types.AttachVpnGatewayResult, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class EC2 extends Service {
    */
   copySnapshot(callback?: (err: AWSError, data: EC2.Types.CopySnapshotResult) => void): Request<EC2.Types.CopySnapshotResult, AWSError>;
   /**
-   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 region, and 9059, which is reserved in the eu-west-1 region.  For more information about VPN customer gateways, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
+   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 region, and 9059, which is reserved in the eu-west-1 region.  For more information about VPN customer gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
    */
   createCustomerGateway(params: EC2.Types.CreateCustomerGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
-   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 region, and 9059, which is reserved in the eu-west-1 region.  For more information about VPN customer gateways, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
+   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the us-east-1 region, and 9059, which is reserved in the eu-west-1 region.  For more information about VPN customer gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.  You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources. 
    */
   createCustomerGateway(callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
@@ -492,19 +492,19 @@ declare class EC2 extends Service {
    */
   createVpnConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpnConnectionResult) => void): Request<EC2.Types.CreateVpnConnectionResult, AWSError>;
   /**
-   * Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway. For more information about VPN connections, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway. For more information about VPN connections, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   createVpnConnectionRoute(params: EC2.Types.CreateVpnConnectionRouteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway. For more information about VPN connections, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway. For more information about VPN connections, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   createVpnConnectionRoute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information about virtual private gateways, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information about virtual private gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   createVpnGateway(params: EC2.Types.CreateVpnGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpnGatewayResult) => void): Request<EC2.Types.CreateVpnGatewayResult, AWSError>;
   /**
-   * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information about virtual private gateways, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information about virtual private gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   createVpnGateway(callback?: (err: AWSError, data: EC2.Types.CreateVpnGatewayResult) => void): Request<EC2.Types.CreateVpnGatewayResult, AWSError>;
   /**
@@ -780,11 +780,11 @@ declare class EC2 extends Service {
    */
   describeConversionTasks(callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
   /**
-   * Describes one or more of your VPN customer gateways. For more information about VPN customer gateways, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your VPN customer gateways. For more information about VPN customer gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   describeCustomerGateways(params: EC2.Types.DescribeCustomerGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeCustomerGatewaysResult) => void): Request<EC2.Types.DescribeCustomerGatewaysResult, AWSError>;
   /**
-   * Describes one or more of your VPN customer gateways. For more information about VPN customer gateways, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your VPN customer gateways. For more information about VPN customer gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   describeCustomerGateways(callback?: (err: AWSError, data: EC2.Types.DescribeCustomerGatewaysResult) => void): Request<EC2.Types.DescribeCustomerGatewaysResult, AWSError>;
   /**
@@ -1284,19 +1284,19 @@ declare class EC2 extends Service {
    */
   describeVpcs(callback?: (err: AWSError, data: EC2.Types.DescribeVpcsResult) => void): Request<EC2.Types.DescribeVpcsResult, AWSError>;
   /**
-   * Describes one or more of your VPN connections. For more information about VPN connections, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your VPN connections. For more information about VPN connections, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   describeVpnConnections(params: EC2.Types.DescribeVpnConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpnConnectionsResult) => void): Request<EC2.Types.DescribeVpnConnectionsResult, AWSError>;
   /**
-   * Describes one or more of your VPN connections. For more information about VPN connections, see Adding a Hardware Virtual Private Gateway to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your VPN connections. For more information about VPN connections, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   describeVpnConnections(callback?: (err: AWSError, data: EC2.Types.DescribeVpnConnectionsResult) => void): Request<EC2.Types.DescribeVpnConnectionsResult, AWSError>;
   /**
-   * Describes one or more of your virtual private gateways. For more information about virtual private gateways, see Adding an IPsec Hardware VPN to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your virtual private gateways. For more information about virtual private gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   describeVpnGateways(params: EC2.Types.DescribeVpnGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpnGatewaysResult) => void): Request<EC2.Types.DescribeVpnGatewaysResult, AWSError>;
   /**
-   * Describes one or more of your virtual private gateways. For more information about virtual private gateways, see Adding an IPsec Hardware VPN to Your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Describes one or more of your virtual private gateways. For more information about virtual private gateways, see AWS Managed VPN Connections in the Amazon Virtual Private Cloud User Guide.
    */
   describeVpnGateways(callback?: (err: AWSError, data: EC2.Types.DescribeVpnGatewaysResult) => void): Request<EC2.Types.DescribeVpnGatewaysResult, AWSError>;
   /**
@@ -1548,11 +1548,11 @@ declare class EC2 extends Service {
    */
   modifyIdentityIdFormat(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time.  AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public.   The SriovNetSupport enhanced networking attribute cannot be changed using this command. Instead, enable SriovNetSupport on an instance and create an AMI from the instance. This will result in an image with SriovNetSupport enabled. 
+   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the Attribute parameter to specify the attribute or one of the following parameters: Description, LaunchPermission, or ProductCode. AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
    */
   modifyImageAttribute(params: EC2.Types.ModifyImageAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time.  AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public.   The SriovNetSupport enhanced networking attribute cannot be changed using this command. Instead, enable SriovNetSupport on an instance and create an AMI from the instance. This will result in an image with SriovNetSupport enabled. 
+   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the Attribute parameter to specify the attribute or one of the following parameters: Description, LaunchPermission, or ProductCode. AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
    */
   modifyImageAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2661,31 +2661,31 @@ declare namespace EC2 {
      */
     GroupId: String;
     /**
-     * A set of IP permissions. You can't specify a destination security group and a CIDR IP address range.
+     * One or more sets of IP permissions. You can't specify a destination security group and a CIDR IP address range in the same set of permissions.
      */
     IpPermissions?: IpPermissionList;
     /**
-     * The CIDR IPv4 address range. We recommend that you specify the CIDR range in a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify the CIDR.
      */
     CidrIp?: String;
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify the port.
      */
     FromPort?: Integer;
     /**
-     * The IP protocol name or number. We recommend that you specify the protocol in a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify the protocol name or number.
      */
     IpProtocol?: String;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify the port.
      */
     ToPort?: Integer;
     /**
-     * The name of a destination security group. To authorize outbound access to a destination security group, we recommend that you use a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify a destination security group.
      */
     SourceSecurityGroupName?: String;
     /**
-     * The AWS account number for a destination security group. To authorize outbound access to a destination security group, we recommend that you use a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify a destination security group.
      */
     SourceSecurityGroupOwnerId?: String;
   }
@@ -2707,7 +2707,7 @@ declare namespace EC2 {
      */
     GroupName?: String;
     /**
-     * A set of IP permissions. Can be used to specify multiple rules in a single command.
+     * One or more sets of IP permissions. Can be used to specify multiple rules in a single command.
      */
     IpPermissions?: IpPermissionList;
     /**
@@ -2719,7 +2719,7 @@ declare namespace EC2 {
      */
     SourceSecurityGroupName?: String;
     /**
-     * [EC2-Classic] The AWS account number for the source security group, if the source security group is in a different account. You can't specify this parameter in combination with the following parameters: the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. Creates rules that grant full ICMP, UDP, and TCP access. To create a rule with a specific IP protocol and port range, use a set of IP permissions instead.
+     * [EC2-Classic] The AWS account ID for the source security group, if the source security group is in a different account. You can't specify this parameter in combination with the following parameters: the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. Creates rules that grant full ICMP, UDP, and TCP access. To create a rule with a specific IP protocol and port range, use a set of IP permissions instead.
      */
     SourceSecurityGroupOwnerId?: String;
     /**
@@ -4029,6 +4029,10 @@ declare namespace EC2 {
      * The type of VPN connection this virtual private gateway supports.
      */
     Type: GatewayType;
+    /**
+     * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. If you're using a 16-bit ASN, it must be in the 64512 to 65534 range. If you're using a 32-bit ASN, it must be in the 4200000000 to 4294967294 range. Default: 64512
+     */
+    AmazonSideAsn?: Long;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -6280,7 +6284,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpnGatewaysRequest {
     /**
-     * One or more filters.    attachment.state - The current state of the attachment between the gateway and the VPC (attaching | attached | detaching | detached).    attachment.vpc-id - The ID of an attached VPC.    availability-zone - The Availability Zone for the virtual private gateway (if applicable).    state - The state of the virtual private gateway (pending | available | deleting | deleted).    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    type - The type of virtual private gateway. Currently the only supported type is ipsec.1.    vpn-gateway-id - The ID of the virtual private gateway.  
+     * One or more filters.    amazon-side-asn - The Autonomous System Number (ASN) for the Amazon side of the gateway.    attachment.state - The current state of the attachment between the gateway and the VPC (attaching | attached | detaching | detached).    attachment.vpc-id - The ID of an attached VPC.    availability-zone - The Availability Zone for the virtual private gateway (if applicable).    state - The state of the virtual private gateway (pending | available | deleting | deleted).    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    type - The type of virtual private gateway. Currently the only supported type is ipsec.1.    vpn-gateway-id - The ID of the virtual private gateway.  
      */
     Filters?: FilterList;
     /**
@@ -8588,7 +8592,7 @@ declare namespace EC2 {
   export type IpPermissionList = IpPermission[];
   export interface IpRange {
     /**
-     * The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix.
+     * The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix length.
      */
     CidrIp?: String;
     /**
@@ -8609,7 +8613,7 @@ declare namespace EC2 {
   export type Ipv6CidrBlockSet = Ipv6CidrBlock[];
   export interface Ipv6Range {
     /**
-     * The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix.
+     * The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix length.
      */
     CidrIpv6?: String;
     /**
@@ -8855,11 +8859,11 @@ declare namespace EC2 {
   }
   export interface ModifyImageAttributeRequest {
     /**
-     * The name of the attribute to modify.
+     * The name of the attribute to modify. The valid values are description, launchPermission, and productCodes.
      */
     Attribute?: String;
     /**
-     * A description for the AMI.
+     * A new description for the AMI.
      */
     Description?: AttributeValue;
     /**
@@ -8867,27 +8871,27 @@ declare namespace EC2 {
      */
     ImageId: String;
     /**
-     * A launch permission modification.
+     * A new launch permission for the AMI.
      */
     LaunchPermission?: LaunchPermissionModifications;
     /**
-     * The operation type.
+     * The operation type. This parameter can be used only when the Attribute parameter is launchPermission.
      */
     OperationType?: OperationType;
     /**
-     * One or more product codes. After you add a product code to an AMI, it can't be removed. This is only valid when modifying the productCodes attribute.
+     * One or more DevPay product codes. After you add a product code to an AMI, it can't be removed.
      */
     ProductCodes?: ProductCodeStringList;
     /**
-     * One or more user groups. This is only valid when modifying the launchPermission attribute.
+     * One or more user groups. This parameter can be used only when the Attribute parameter is launchPermission.
      */
     UserGroups?: UserGroupStringList;
     /**
-     * One or more AWS account IDs. This is only valid when modifying the launchPermission attribute.
+     * One or more AWS account IDs. This parameter can be used only when the Attribute parameter is launchPermission.
      */
     UserIds?: UserIdStringList;
     /**
-     * The value of the attribute being modified. This is only valid when modifying the description attribute.
+     * The value of the attribute being modified. This parameter can be used only when the Attribute parameter is description or productCodes.
      */
     Value?: String;
     /**
@@ -10892,31 +10896,31 @@ declare namespace EC2 {
      */
     GroupId: String;
     /**
-     * A set of IP permissions. You can't specify a destination security group and a CIDR IP address range.
+     * One or more sets of IP permissions. You can't specify a destination security group and a CIDR IP address range in the same set of permissions.
      */
     IpPermissions?: IpPermissionList;
     /**
-     * The CIDR IP address range. We recommend that you specify the CIDR range in a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify the CIDR.
      */
     CidrIp?: String;
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify the port.
      */
     FromPort?: Integer;
     /**
-     * The IP protocol name or number. We recommend that you specify the protocol in a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify the protocol name or number.
      */
     IpProtocol?: String;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify the port.
      */
     ToPort?: Integer;
     /**
-     * The name of a destination security group. To revoke outbound access to a destination security group, we recommend that you use a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify a destination security group.
      */
     SourceSecurityGroupName?: String;
     /**
-     * The AWS account number for a destination security group. To revoke outbound access to a destination security group, we recommend that you use a set of IP permissions instead.
+     * Not supported. Use a set of IP permissions to specify a destination security group.
      */
     SourceSecurityGroupOwnerId?: String;
   }
@@ -10930,15 +10934,15 @@ declare namespace EC2 {
      */
     FromPort?: Integer;
     /**
-     * The ID of the security group. Required for a security group in a nondefault VPC.
+     * The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.
      */
     GroupId?: String;
     /**
-     * [EC2-Classic, default VPC] The name of the security group.
+     * [EC2-Classic, default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.
      */
     GroupName?: String;
     /**
-     * A set of IP permissions. You can't specify a source security group and a CIDR IP address range.
+     * One or more sets of IP permissions. You can't specify a source security group and a CIDR IP address range in the same set of permissions.
      */
     IpPermissions?: IpPermissionList;
     /**
@@ -13188,6 +13192,10 @@ declare namespace EC2 {
      * The ID of the virtual private gateway.
      */
     VpnGatewayId?: String;
+    /**
+     * The private Autonomous System Number (ASN) for the Amazon side of a BGP session.
+     */
+    AmazonSideAsn?: Long;
     /**
      * Any tags assigned to the virtual private gateway.
      */

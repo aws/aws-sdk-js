@@ -11,6 +11,24 @@
     "xmlNamespace":"http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"
   },
   "operations":{
+    "AddListenerCertificates":{
+      "name":"AddListenerCertificates",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddListenerCertificatesInput"},
+      "output":{
+        "shape":"AddListenerCertificatesOutput",
+        "resultWrapper":"AddListenerCertificatesResult"
+      },
+      "errors":[
+        {"shape":"ListenerNotFoundException"},
+        {"shape":"TooManyCertificatesException"},
+        {"shape":"CertificateNotFoundException"}
+      ],
+      "documentation":"<p>Adds the specified certificate to the specified secure listener.</p> <p>If the certificate was already added, the call is successful but the certificate is not added again.</p> <p>To list the certificates for your listener, use <a>DescribeListenerCertificates</a>. To remove certificates from your listener, use <a>RemoveListenerCertificates</a>.</p>"
+    },
     "AddTags":{
       "name":"AddTags",
       "http":{
@@ -223,6 +241,22 @@
         "resultWrapper":"DescribeAccountLimitsResult"
       },
       "documentation":"<p>Describes the current Elastic Load Balancing resource limits for your AWS account.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html\">Limits for Your Application Load Balancers</a> in the <i>Application Load Balancer Guide</i> or <a href=\"http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html\">Limits for Your Network Load Balancers</a> in the <i>Network Load Balancers Guide</i>.</p>"
+    },
+    "DescribeListenerCertificates":{
+      "name":"DescribeListenerCertificates",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeListenerCertificatesInput"},
+      "output":{
+        "shape":"DescribeListenerCertificatesOutput",
+        "resultWrapper":"DescribeListenerCertificatesResult"
+      },
+      "errors":[
+        {"shape":"ListenerNotFoundException"}
+      ],
+      "documentation":"<p>Describes the certificates for the specified secure listener.</p>"
     },
     "DescribeListeners":{
       "name":"DescribeListeners",
@@ -494,7 +528,24 @@
         {"shape":"InvalidTargetException"},
         {"shape":"TooManyRegistrationsForTargetIdException"}
       ],
-      "documentation":"<p>Registers the specified targets with the specified target group.</p> <p>By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it.</p> <p>The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the <code>running</code> state when you register it.</p> <p>Network Load Balancers do not support the following instance types as targets: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1.</p> <p>To remove a target from a target group, use <a>DeregisterTargets</a>.</p>"
+      "documentation":"<p>Registers the specified targets with the specified target group.</p> <p>You can register targets by instance ID or by IP address. If the target is an EC2 instance, it must be in the <code>running</code> state when you register it.</p> <p>By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports.</p> <p>With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address.</p> <p>To remove a target from a target group, use <a>DeregisterTargets</a>.</p>"
+    },
+    "RemoveListenerCertificates":{
+      "name":"RemoveListenerCertificates",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveListenerCertificatesInput"},
+      "output":{
+        "shape":"RemoveListenerCertificatesOutput",
+        "resultWrapper":"RemoveListenerCertificatesResult"
+      },
+      "errors":[
+        {"shape":"ListenerNotFoundException"},
+        {"shape":"OperationNotPermittedException"}
+      ],
+      "documentation":"<p>Removes the specified certificate from the specified secure listener.</p> <p>You can't remove the default certificate for a listener. To replace the default certificate, call <a>ModifyListener</a>.</p> <p>To list the certificates for your listener, use <a>DescribeListenerCertificates</a>.</p>"
     },
     "RemoveTags":{
       "name":"RemoveTags",
@@ -619,6 +670,32 @@
       "type":"list",
       "member":{"shape":"Action"}
     },
+    "AddListenerCertificatesInput":{
+      "type":"structure",
+      "required":[
+        "ListenerArn",
+        "Certificates"
+      ],
+      "members":{
+        "ListenerArn":{
+          "shape":"ListenerArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the listener.</p>"
+        },
+        "Certificates":{
+          "shape":"CertificateList",
+          "documentation":"<p>The certificate to add. You can specify one certificate per call.</p>"
+        }
+      }
+    },
+    "AddListenerCertificatesOutput":{
+      "type":"structure",
+      "members":{
+        "Certificates":{
+          "shape":"CertificateList",
+          "documentation":"<p>Information about the certificates.</p>"
+        }
+      }
+    },
     "AddTagsInput":{
       "type":"structure",
       "required":[
@@ -695,9 +772,13 @@
         "CertificateArn":{
           "shape":"CertificateArn",
           "documentation":"<p>The Amazon Resource Name (ARN) of the certificate.</p>"
+        },
+        "IsDefault":{
+          "shape":"Default",
+          "documentation":"<p>Indicates whether the certificate is the default certificate.</p>"
         }
       },
-      "documentation":"<p>Information about an SSL server certificate deployed on a load balancer.</p>"
+      "documentation":"<p>Information about an SSL server certificate.</p>"
     },
     "CertificateArn":{"type":"string"},
     "CertificateList":{
@@ -941,6 +1022,7 @@
     },
     "CreatedTime":{"type":"timestamp"},
     "DNSName":{"type":"string"},
+    "Default":{"type":"boolean"},
     "DeleteListenerInput":{
       "type":"structure",
       "required":["ListenerArn"],
@@ -1042,6 +1124,37 @@
         "Limits":{
           "shape":"Limits",
           "documentation":"<p>Information about the limits.</p>"
+        },
+        "NextMarker":{
+          "shape":"Marker",
+          "documentation":"<p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>"
+        }
+      }
+    },
+    "DescribeListenerCertificatesInput":{
+      "type":"structure",
+      "required":["ListenerArn"],
+      "members":{
+        "ListenerArn":{
+          "shape":"ListenerArn",
+          "documentation":"<p>The Amazon Resource Names (ARN) of the listener.</p>"
+        },
+        "Marker":{
+          "shape":"Marker",
+          "documentation":"<p>The marker for the next set of results. (You received this marker from a previous call.)</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of results to return with this call.</p>"
+        }
+      }
+    },
+    "DescribeListenerCertificatesOutput":{
+      "type":"structure",
+      "members":{
+        "Certificates":{
+          "shape":"CertificateList",
+          "documentation":"<p>Information about the certificates.</p>"
         },
         "NextMarker":{
           "shape":"Marker",
@@ -1732,7 +1845,7 @@
         },
         "Certificates":{
           "shape":"CertificateList",
-          "documentation":"<p>The SSL server certificate.</p>"
+          "documentation":"<p>The default SSL server certificate.</p>"
         },
         "DefaultActions":{
           "shape":"Actions",
@@ -1940,11 +2053,33 @@
         },
         "Targets":{
           "shape":"TargetDescriptions",
-          "documentation":"<p>The targets. The default port for a target is the port for the target group. You can specify a port override. If a target is already registered, you can register it again using a different port.</p>"
+          "documentation":"<p>The targets.</p>"
         }
       }
     },
     "RegisterTargetsOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "RemoveListenerCertificatesInput":{
+      "type":"structure",
+      "required":[
+        "ListenerArn",
+        "Certificates"
+      ],
+      "members":{
+        "ListenerArn":{
+          "shape":"ListenerArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the listener.</p>"
+        },
+        "Certificates":{
+          "shape":"CertificateList",
+          "documentation":"<p>The certificate to remove. You can specify one certificate per call.</p>"
+        }
+      }
+    },
+    "RemoveListenerCertificatesOutput":{
       "type":"structure",
       "members":{
       }
@@ -2332,7 +2467,7 @@
         },
         "AvailabilityZone":{
           "shape":"ZoneName",
-          "documentation":"<p>The Availability Zone where the IP address is to be registered. Specify <code>all</code> to register an IP address outside the target group VPC with all Availability Zones that are enabled for the load balancer.</p> <p>If the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional.</p> <p>This parameter is not supported if the target type of the target group is <code>instance</code>.</p>"
+          "documentation":"<p>An Availability Zone or <code>all</code>. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer.</p> <p>This parameter is not supported if the target type of the target group is <code>instance</code>. If the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required.</p> <p>With an Application Load Balancer, if the IP address is outside the VPC for the target group, the only supported value is <code>all</code>.</p>"
         }
       },
       "documentation":"<p>Information about a target.</p>"
@@ -2548,7 +2683,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>You've reached the limit on the number of certificates per listener.</p>",
+      "documentation":"<p>You've reached the limit on the number of certificates per load balancer.</p>",
       "error":{
         "code":"TooManyCertificates",
         "httpStatusCode":400,

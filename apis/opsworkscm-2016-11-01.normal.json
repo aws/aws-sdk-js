@@ -520,11 +520,11 @@
         },
         "ServiceRoleArn":{
           "shape":"ServiceRoleArn",
-          "documentation":"<p> The service role that the AWS OpsWorks for Chef Automate service backend uses to work with your account. Although the AWS OpsWorks management console typically creates the service role for you, if you are using the AWS CLI or API commands, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml. This template creates a CloudFormation stack that includes the service role that you need. </p>"
+          "documentation":"<p> The service role that the AWS OpsWorks for Chef Automate service backend uses to work with your account. Although the AWS OpsWorks management console typically creates the service role for you, if you are using the AWS CLI or API commands, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml. This template creates a CloudFormation stack that includes the service role that you need. </p>"
         },
         "SubnetIds":{
           "shape":"Strings",
-          "documentation":"<p> The IDs of subnets in which to launch the server EC2 instance. </p> <p> Amazon EC2-Classic customers: This field is required. All servers must run within a VPC. The VPC must have \"Auto Assign Public IP\" enabled. </p> <p> EC2-VPC customers: This field is optional. If you do not specify subnet IDs, your EC2 instances are created in a default subnet that is selected by Amazon EC2. If you specify subnet IDs, the VPC must have \"Auto Assign Public IP\" enabled. </p> <p>For more information about supported Amazon EC2 platforms, see <a href=\"http://docs.aws.amazon.com/https:/docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html\">Supported Platforms</a>.</p>"
+          "documentation":"<p> The IDs of subnets in which to launch the server EC2 instance. </p> <p> Amazon EC2-Classic customers: This field is required. All servers must run within a VPC. The VPC must have \"Auto Assign Public IP\" enabled. </p> <p> EC2-VPC customers: This field is optional. If you do not specify subnet IDs, your EC2 instances are created in a default subnet that is selected by Amazon EC2. If you specify subnet IDs, the VPC must have \"Auto Assign Public IP\" enabled. </p> <p>For more information about supported Amazon EC2 platforms, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html\">Supported Platforms</a>.</p>"
         },
         "BackupId":{
           "shape":"BackupId",
@@ -657,7 +657,10 @@
         "ServerName"
       ],
       "members":{
-        "NodeAssociationStatusToken":{"shape":"NodeAssociationStatusToken"},
+        "NodeAssociationStatusToken":{
+          "shape":"NodeAssociationStatusToken",
+          "documentation":"<p>The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse. </p>"
+        },
         "ServerName":{
           "shape":"ServerName",
           "documentation":"<p>The name of the server from which to disassociate the node. </p>"
@@ -670,6 +673,10 @@
         "NodeAssociationStatus":{
           "shape":"NodeAssociationStatus",
           "documentation":"<p>The status of the association or disassociation request. </p> <p class=\"title\"> <b>Possible values:</b> </p> <ul> <li> <p> <code>SUCCESS</code>: The association or disassociation succeeded. </p> </li> <li> <p> <code>FAILED</code>: The association or disassociation failed. </p> </li> <li> <p> <code>IN_PROGRESS</code>: The association or disassociation is still in progress. </p> </li> </ul>"
+        },
+        "EngineAttributes":{
+          "shape":"EngineAttributes",
+          "documentation":"<p>Attributes specific to the node association. </p>"
         }
       }
     },
@@ -1037,6 +1044,10 @@
         "ServerName":{
           "shape":"ServerName",
           "documentation":"<p>The name of the server on which to run maintenance. </p>"
+        },
+        "EngineAttributes":{
+          "shape":"EngineAttributes",
+          "documentation":"<p>Engine attributes that are specific to the server on which you want to run maintenance. </p>"
         }
       }
     },

@@ -348,7 +348,7 @@ declare namespace OpsWorksCM {
      */
     SecurityGroupIds?: Strings;
     /**
-     *  The service role that the AWS OpsWorks for Chef Automate service backend uses to work with your account. Although the AWS OpsWorks management console typically creates the service role for you, if you are using the AWS CLI or API commands, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml. This template creates a CloudFormation stack that includes the service role that you need. 
+     *  The service role that the AWS OpsWorks for Chef Automate service backend uses to work with your account. Although the AWS OpsWorks management console typically creates the service role for you, if you are using the AWS CLI or API commands, run the service-role-creation.yaml AWS CloudFormation template, located at https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml. This template creates a CloudFormation stack that includes the service role that you need. 
      */
     ServiceRoleArn: ServiceRoleArn;
     /**
@@ -443,6 +443,9 @@ declare namespace OpsWorksCM {
     NextToken?: String;
   }
   export interface DescribeNodeAssociationStatusRequest {
+    /**
+     * The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse. 
+     */
     NodeAssociationStatusToken: NodeAssociationStatusToken;
     /**
      * The name of the server from which to disassociate the node. 
@@ -454,6 +457,10 @@ declare namespace OpsWorksCM {
      * The status of the association or disassociation request.   Possible values:     SUCCESS: The association or disassociation succeeded.     FAILED: The association or disassociation failed.     IN_PROGRESS: The association or disassociation is still in progress.   
      */
     NodeAssociationStatus?: NodeAssociationStatus;
+    /**
+     * Attributes specific to the node association. 
+     */
+    EngineAttributes?: EngineAttributes;
   }
   export interface DescribeServersRequest {
     /**
@@ -663,6 +670,10 @@ declare namespace OpsWorksCM {
      * The name of the server on which to run maintenance. 
      */
     ServerName: ServerName;
+    /**
+     * Engine attributes that are specific to the server on which you want to run maintenance. 
+     */
+    EngineAttributes?: EngineAttributes;
   }
   export interface StartMaintenanceResponse {
     /**

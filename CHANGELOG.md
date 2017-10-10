@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.130.0-->
+<!--LATEST=2.131.0-->
 <!--ENTRYINSERT-->
+
+## 2.131.0
+* feature: EC2: This release includes updates to AWS Virtual Private Gateway.
+* feature: ELBv2: Server Name Indication (SNI) is an extension to the TLS protocol by which a client indicates the hostname to connect to at the start of the TLS handshake. The load balancer can present multiple certificates through the same secure listener, which enables it to support multiple secure websites using a single secure listener. Application Load Balancers also support a smart certificate selection algorithm with SNI. If the hostname indicated by a client matches multiple certificates, the load balancer determines the best certificate to use based on multiple factors including the capabilities of the client.
+* feature: OpsWorksCM: Provide engine specific information for node associations.
 
 ## 2.130.0
 * feature: ConfigService: Revert: Added missing enumeration values for ConfigurationItemStatus

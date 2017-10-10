@@ -12,6 +12,14 @@ declare class ELBv2 extends Service {
   constructor(options?: ELBv2.Types.ClientConfiguration)
   config: Config & ELBv2.Types.ClientConfiguration;
   /**
+   * Adds the specified certificate to the specified secure listener. If the certificate was already added, the call is successful but the certificate is not added again. To list the certificates for your listener, use DescribeListenerCertificates. To remove certificates from your listener, use RemoveListenerCertificates.
+   */
+  addListenerCertificates(params: ELBv2.Types.AddListenerCertificatesInput, callback?: (err: AWSError, data: ELBv2.Types.AddListenerCertificatesOutput) => void): Request<ELBv2.Types.AddListenerCertificatesOutput, AWSError>;
+  /**
+   * Adds the specified certificate to the specified secure listener. If the certificate was already added, the call is successful but the certificate is not added again. To list the certificates for your listener, use DescribeListenerCertificates. To remove certificates from your listener, use RemoveListenerCertificates.
+   */
+  addListenerCertificates(callback?: (err: AWSError, data: ELBv2.Types.AddListenerCertificatesOutput) => void): Request<ELBv2.Types.AddListenerCertificatesOutput, AWSError>;
+  /**
    * Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, and your target groups. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value. To list the current tags for your resources, use DescribeTags. To remove tags from your resources, use RemoveTags.
    */
   addTags(params: ELBv2.Types.AddTagsInput, callback?: (err: AWSError, data: ELBv2.Types.AddTagsOutput) => void): Request<ELBv2.Types.AddTagsOutput, AWSError>;
@@ -99,6 +107,14 @@ declare class ELBv2 extends Service {
    * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Application Load Balancers in the Application Load Balancer Guide or Limits for Your Network Load Balancers in the Network Load Balancers Guide.
    */
   describeAccountLimits(callback?: (err: AWSError, data: ELBv2.Types.DescribeAccountLimitsOutput) => void): Request<ELBv2.Types.DescribeAccountLimitsOutput, AWSError>;
+  /**
+   * Describes the certificates for the specified secure listener.
+   */
+  describeListenerCertificates(params: ELBv2.Types.DescribeListenerCertificatesInput, callback?: (err: AWSError, data: ELBv2.Types.DescribeListenerCertificatesOutput) => void): Request<ELBv2.Types.DescribeListenerCertificatesOutput, AWSError>;
+  /**
+   * Describes the certificates for the specified secure listener.
+   */
+  describeListenerCertificates(callback?: (err: AWSError, data: ELBv2.Types.DescribeListenerCertificatesOutput) => void): Request<ELBv2.Types.DescribeListenerCertificatesOutput, AWSError>;
   /**
    * Describes the specified listeners or the listeners for the specified Application Load Balancer or Network Load Balancer. You must specify either a load balancer or one or more listeners.
    */
@@ -212,13 +228,21 @@ declare class ELBv2 extends Service {
    */
   modifyTargetGroupAttributes(callback?: (err: AWSError, data: ELBv2.Types.ModifyTargetGroupAttributesOutput) => void): Request<ELBv2.Types.ModifyTargetGroupAttributesOutput, AWSError>;
   /**
-   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the running state when you register it. Network Load Balancers do not support the following instance types as targets: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. To remove a target from a target group, use DeregisterTargets.
+   * Registers the specified targets with the specified target group. You can register targets by instance ID or by IP address. If the target is an EC2 instance, it must be in the running state when you register it. By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports. With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address. To remove a target from a target group, use DeregisterTargets.
    */
   registerTargets(params: ELBv2.Types.RegisterTargetsInput, callback?: (err: AWSError, data: ELBv2.Types.RegisterTargetsOutput) => void): Request<ELBv2.Types.RegisterTargetsOutput, AWSError>;
   /**
-   * Registers the specified targets with the specified target group. By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it. The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the running state when you register it. Network Load Balancers do not support the following instance types as targets: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. To remove a target from a target group, use DeregisterTargets.
+   * Registers the specified targets with the specified target group. You can register targets by instance ID or by IP address. If the target is an EC2 instance, it must be in the running state when you register it. By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports. With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address. To remove a target from a target group, use DeregisterTargets.
    */
   registerTargets(callback?: (err: AWSError, data: ELBv2.Types.RegisterTargetsOutput) => void): Request<ELBv2.Types.RegisterTargetsOutput, AWSError>;
+  /**
+   * Removes the specified certificate from the specified secure listener. You can't remove the default certificate for a listener. To replace the default certificate, call ModifyListener. To list the certificates for your listener, use DescribeListenerCertificates.
+   */
+  removeListenerCertificates(params: ELBv2.Types.RemoveListenerCertificatesInput, callback?: (err: AWSError, data: ELBv2.Types.RemoveListenerCertificatesOutput) => void): Request<ELBv2.Types.RemoveListenerCertificatesOutput, AWSError>;
+  /**
+   * Removes the specified certificate from the specified secure listener. You can't remove the default certificate for a listener. To replace the default certificate, call ModifyListener. To list the certificates for your listener, use DescribeListenerCertificates.
+   */
+  removeListenerCertificates(callback?: (err: AWSError, data: ELBv2.Types.RemoveListenerCertificatesOutput) => void): Request<ELBv2.Types.RemoveListenerCertificatesOutput, AWSError>;
   /**
    * Removes the specified tags from the specified Elastic Load Balancing resource. To list the current tags for your resources, use DescribeTags.
    */
@@ -313,6 +337,22 @@ declare namespace ELBv2 {
   }
   export type ActionTypeEnum = "forward"|string;
   export type Actions = Action[];
+  export interface AddListenerCertificatesInput {
+    /**
+     * The Amazon Resource Name (ARN) of the listener.
+     */
+    ListenerArn: ListenerArn;
+    /**
+     * The certificate to add. You can specify one certificate per call.
+     */
+    Certificates: CertificateList;
+  }
+  export interface AddListenerCertificatesOutput {
+    /**
+     * Information about the certificates.
+     */
+    Certificates?: CertificateList;
+  }
   export interface AddTagsInput {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -347,6 +387,10 @@ declare namespace ELBv2 {
      * The Amazon Resource Name (ARN) of the certificate.
      */
     CertificateArn?: CertificateArn;
+    /**
+     * Indicates whether the certificate is the default certificate.
+     */
+    IsDefault?: Default;
   }
   export type CertificateArn = string;
   export type CertificateList = Certificate[];
@@ -522,6 +566,7 @@ declare namespace ELBv2 {
   }
   export type CreatedTime = Date;
   export type DNSName = string;
+  export type Default = boolean;
   export interface DeleteListenerInput {
     /**
      * The Amazon Resource Name (ARN) of the listener.
@@ -581,6 +626,30 @@ declare namespace ELBv2 {
      * Information about the limits.
      */
     Limits?: Limits;
+    /**
+     * The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+     */
+    NextMarker?: Marker;
+  }
+  export interface DescribeListenerCertificatesInput {
+    /**
+     * The Amazon Resource Names (ARN) of the listener.
+     */
+    ListenerArn: ListenerArn;
+    /**
+     * The marker for the next set of results. (You received this marker from a previous call.)
+     */
+    Marker?: Marker;
+    /**
+     * The maximum number of results to return with this call.
+     */
+    PageSize?: PageSize;
+  }
+  export interface DescribeListenerCertificatesOutput {
+    /**
+     * Information about the certificates.
+     */
+    Certificates?: CertificateList;
     /**
      * The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
      */
@@ -950,7 +1019,7 @@ declare namespace ELBv2 {
      */
     SslPolicy?: SslPolicyName;
     /**
-     * The SSL server certificate.
+     * The default SSL server certificate.
      */
     Certificates?: CertificateList;
     /**
@@ -1071,11 +1140,23 @@ declare namespace ELBv2 {
      */
     TargetGroupArn: TargetGroupArn;
     /**
-     * The targets. The default port for a target is the port for the target group. You can specify a port override. If a target is already registered, you can register it again using a different port.
+     * The targets.
      */
     Targets: TargetDescriptions;
   }
   export interface RegisterTargetsOutput {
+  }
+  export interface RemoveListenerCertificatesInput {
+    /**
+     * The Amazon Resource Name (ARN) of the listener.
+     */
+    ListenerArn: ListenerArn;
+    /**
+     * The certificate to remove. You can specify one certificate per call.
+     */
+    Certificates: CertificateList;
+  }
+  export interface RemoveListenerCertificatesOutput {
   }
   export interface RemoveTagsInput {
     /**
@@ -1275,7 +1356,7 @@ declare namespace ELBv2 {
      */
     Port?: Port;
     /**
-     * The Availability Zone where the IP address is to be registered. Specify all to register an IP address outside the target group VPC with all Availability Zones that are enabled for the load balancer. If the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. This parameter is not supported if the target type of the target group is instance.
+     * An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer. This parameter is not supported if the target type of the target group is instance. If the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required. With an Application Load Balancer, if the IP address is outside the VPC for the target group, the only supported value is all.
      */
     AvailabilityZone?: ZoneName;
   }
