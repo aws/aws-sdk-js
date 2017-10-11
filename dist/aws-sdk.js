@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.131.0
+// AWS SDK for JavaScript v2.132.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -39285,7 +39285,6 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
-    "uid": "ecr-2015-09-21",
     "apiVersion": "2015-09-21",
     "endpointPrefix": "ecr",
     "jsonVersion": "1.1",
@@ -39293,7 +39292,8 @@ module.exports={
     "serviceAbbreviation": "Amazon ECR",
     "serviceFullName": "Amazon EC2 Container Registry",
     "signatureVersion": "v4",
-    "targetPrefix": "AmazonEC2ContainerRegistry_V20150921"
+    "targetPrefix": "AmazonEC2ContainerRegistry_V20150921",
+    "uid": "ecr-2015-09-21"
   },
   "operations": {
     "BatchCheckLayerAvailability": {
@@ -39451,6 +39451,29 @@ module.exports={
         }
       }
     },
+    "DeleteLifecyclePolicy": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName"
+        ],
+        "members": {
+          "registryId": {},
+          "repositoryName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "registryId": {},
+          "repositoryName": {},
+          "lifecyclePolicyText": {},
+          "lastEvaluatedAt": {
+            "type": "timestamp"
+          }
+        }
+      }
+    },
     "DeleteRepository": {
       "input": {
         "type": "structure",
@@ -39530,8 +39553,7 @@ module.exports={
                 "repositoryName": {},
                 "imageDigest": {},
                 "imageTags": {
-                  "type": "list",
-                  "member": {}
+                  "shape": "S1p"
                 },
                 "imageSizeInBytes": {
                   "type": "long"
@@ -39621,6 +39643,96 @@ module.exports={
         "members": {
           "downloadUrl": {},
           "layerDigest": {}
+        }
+      }
+    },
+    "GetLifecyclePolicy": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName"
+        ],
+        "members": {
+          "registryId": {},
+          "repositoryName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "registryId": {},
+          "repositoryName": {},
+          "lifecyclePolicyText": {},
+          "lastEvaluatedAt": {
+            "type": "timestamp"
+          }
+        }
+      }
+    },
+    "GetLifecyclePolicyPreview": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName"
+        ],
+        "members": {
+          "registryId": {},
+          "repositoryName": {},
+          "imageIds": {
+            "shape": "Si"
+          },
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "filter": {
+            "type": "structure",
+            "members": {
+              "tagStatus": {}
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "registryId": {},
+          "repositoryName": {},
+          "lifecyclePolicyText": {},
+          "status": {},
+          "nextToken": {},
+          "previewResults": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "imageTags": {
+                  "shape": "S1p"
+                },
+                "imageDigest": {},
+                "imagePushedAt": {
+                  "type": "timestamp"
+                },
+                "action": {
+                  "type": "structure",
+                  "members": {
+                    "type": {}
+                  }
+                },
+                "appliedRulePriority": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "summary": {
+            "type": "structure",
+            "members": {
+              "expiringImageTotalCount": {
+                "type": "integer"
+              }
+            }
+          }
         }
       }
     },
@@ -39719,6 +39831,28 @@ module.exports={
         }
       }
     },
+    "PutLifecyclePolicy": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName",
+          "lifecyclePolicyText"
+        ],
+        "members": {
+          "registryId": {},
+          "repositoryName": {},
+          "lifecyclePolicyText": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "registryId": {},
+          "repositoryName": {},
+          "lifecyclePolicyText": {}
+        }
+      }
+    },
     "SetRepositoryPolicy": {
       "input": {
         "type": "structure",
@@ -39741,6 +39875,28 @@ module.exports={
           "registryId": {},
           "repositoryName": {},
           "policyText": {}
+        }
+      }
+    },
+    "StartLifecyclePolicyPreview": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName"
+        ],
+        "members": {
+          "registryId": {},
+          "repositoryName": {},
+          "lifecyclePolicyText": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "registryId": {},
+          "repositoryName": {},
+          "lifecyclePolicyText": {},
+          "status": {}
         }
       }
     },
@@ -39831,33 +39987,36 @@ module.exports={
           "type": "timestamp"
         }
       }
+    },
+    "S1p": {
+      "type": "list",
+      "member": {}
     }
   }
 }
 },{}],52:[function(require,module,exports){
 module.exports={
   "pagination": {
-    "ListImages": {
-      "input_token": "nextToken",
-      "output_token": "nextToken",
-      "limit_key": "maxResults",
-      "result_key": "imageIds"
-    },
     "DescribeImages": {
       "input_token": "nextToken",
-      "output_token": "nextToken",
       "limit_key": "maxResults",
+      "output_token": "nextToken",
       "result_key": "imageDetails"
     },
     "DescribeRepositories": {
       "input_token": "nextToken",
-      "output_token": "nextToken",
       "limit_key": "maxResults",
+      "output_token": "nextToken",
       "result_key": "repositories"
+    },
+    "ListImages": {
+      "input_token": "nextToken",
+      "limit_key": "maxResults",
+      "output_token": "nextToken",
+      "result_key": "imageIds"
     }
   }
 }
-
 },{}],53:[function(require,module,exports){
 module.exports={
   "version": "2.0",
@@ -50659,6 +50818,24 @@ module.exports={
         "members": {}
       }
     },
+    "CreateTemplate": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Template"
+        ],
+        "members": {
+          "Template": {
+            "shape": "S1t"
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "CreateTemplateResult",
+        "type": "structure",
+        "members": {}
+      }
+    },
     "DeleteConfigurationSet": {
       "input": {
         "type": "structure",
@@ -50793,6 +50970,22 @@ module.exports={
         "members": {}
       }
     },
+    "DeleteTemplate": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "TemplateName"
+        ],
+        "members": {
+          "TemplateName": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "DeleteTemplateResult",
+        "type": "structure",
+        "members": {}
+      }
+    },
     "DeleteVerifiedEmailAddress": {
       "input": {
         "type": "structure",
@@ -50814,10 +51007,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "S2d"
+            "shape": "S2m"
           },
           "Rules": {
-            "shape": "S2f"
+            "shape": "S2o"
           }
         }
       }
@@ -50892,10 +51085,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Metadata": {
-            "shape": "S2d"
+            "shape": "S2m"
           },
           "Rules": {
-            "shape": "S2f"
+            "shape": "S2o"
           }
         }
       }
@@ -50908,7 +51101,7 @@ module.exports={
         ],
         "members": {
           "Identities": {
-            "shape": "S2q"
+            "shape": "S2z"
           }
         }
       },
@@ -50934,7 +51127,7 @@ module.exports={
                 },
                 "DkimVerificationStatus": {},
                 "DkimTokens": {
-                  "shape": "S2v"
+                  "shape": "S34"
                 }
               }
             }
@@ -50950,7 +51143,7 @@ module.exports={
         ],
         "members": {
           "Identities": {
-            "shape": "S2q"
+            "shape": "S2z"
           }
         }
       },
@@ -50989,7 +51182,7 @@ module.exports={
         ],
         "members": {
           "Identities": {
-            "shape": "S2q"
+            "shape": "S2z"
           }
         }
       },
@@ -51043,7 +51236,7 @@ module.exports={
         "members": {
           "Identity": {},
           "PolicyNames": {
-            "shape": "S3a"
+            "shape": "S3j"
           }
         }
       },
@@ -51070,7 +51263,7 @@ module.exports={
         ],
         "members": {
           "Identities": {
-            "shape": "S2q"
+            "shape": "S2z"
           }
         }
       },
@@ -51146,6 +51339,26 @@ module.exports={
         }
       }
     },
+    "GetTemplate": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "TemplateName"
+        ],
+        "members": {
+          "TemplateName": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "GetTemplateResult",
+        "type": "structure",
+        "members": {
+          "Template": {
+            "shape": "S1t"
+          }
+        }
+      }
+    },
     "ListConfigurationSets": {
       "input": {
         "type": "structure",
@@ -51189,7 +51402,7 @@ module.exports={
         ],
         "members": {
           "Identities": {
-            "shape": "S2q"
+            "shape": "S2z"
           },
           "NextToken": {}
         }
@@ -51213,7 +51426,7 @@ module.exports={
         ],
         "members": {
           "PolicyNames": {
-            "shape": "S3a"
+            "shape": "S3j"
           }
         }
       }
@@ -51250,7 +51463,37 @@ module.exports={
           "RuleSets": {
             "type": "list",
             "member": {
-              "shape": "S2d"
+              "shape": "S2m"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTemplates": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "MaxItems": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "ListTemplatesResult",
+        "type": "structure",
+        "members": {
+          "TemplatesMetadata": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Name": {},
+                "CreatedTimestamp": {
+                  "type": "timestamp"
+                }
+              }
             }
           },
           "NextToken": {}
@@ -51263,7 +51506,7 @@ module.exports={
         "type": "structure",
         "members": {
           "VerifiedEmailAddresses": {
-            "shape": "S47"
+            "shape": "S4m"
           }
         }
       }
@@ -51332,7 +51575,7 @@ module.exports={
                 "type": "timestamp"
               },
               "ExtensionFields": {
-                "shape": "S4j"
+                "shape": "S4y"
               }
             }
           },
@@ -51363,7 +51606,7 @@ module.exports={
                       "type": "timestamp"
                     },
                     "ExtensionFields": {
-                      "shape": "S4j"
+                      "shape": "S4y"
                     }
                   }
                 }
@@ -51381,6 +51624,70 @@ module.exports={
         }
       }
     },
+    "SendBulkTemplatedEmail": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Source",
+          "Template",
+          "Destinations"
+        ],
+        "members": {
+          "Source": {},
+          "SourceArn": {},
+          "ReplyToAddresses": {
+            "shape": "S4m"
+          },
+          "ReturnPath": {},
+          "ReturnPathArn": {},
+          "ConfigurationSetName": {},
+          "DefaultTags": {
+            "shape": "S5d"
+          },
+          "Template": {},
+          "TemplateArn": {},
+          "DefaultTemplateData": {},
+          "Destinations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Destination"
+              ],
+              "members": {
+                "Destination": {
+                  "shape": "S5k"
+                },
+                "ReplacementTags": {
+                  "shape": "S5d"
+                },
+                "ReplacementTemplateData": {}
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "SendBulkTemplatedEmailResult",
+        "type": "structure",
+        "required": [
+          "Status"
+        ],
+        "members": {
+          "Status": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Status": {},
+                "Error": {},
+                "MessageId": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "SendEmail": {
       "input": {
         "type": "structure",
@@ -51392,18 +51699,7 @@ module.exports={
         "members": {
           "Source": {},
           "Destination": {
-            "type": "structure",
-            "members": {
-              "ToAddresses": {
-                "shape": "S47"
-              },
-              "CcAddresses": {
-                "shape": "S47"
-              },
-              "BccAddresses": {
-                "shape": "S47"
-              }
-            }
+            "shape": "S5k"
           },
           "Message": {
             "type": "structure",
@@ -51413,29 +51709,29 @@ module.exports={
             ],
             "members": {
               "Subject": {
-                "shape": "S50"
+                "shape": "S5s"
               },
               "Body": {
                 "type": "structure",
                 "members": {
                   "Text": {
-                    "shape": "S50"
+                    "shape": "S5s"
                   },
                   "Html": {
-                    "shape": "S50"
+                    "shape": "S5s"
                   }
                 }
               }
             }
           },
           "ReplyToAddresses": {
-            "shape": "S47"
+            "shape": "S4m"
           },
           "ReturnPath": {},
           "SourceArn": {},
           "ReturnPathArn": {},
           "Tags": {
-            "shape": "S54"
+            "shape": "S5d"
           },
           "ConfigurationSetName": {}
         }
@@ -51460,7 +51756,7 @@ module.exports={
         "members": {
           "Source": {},
           "Destinations": {
-            "shape": "S47"
+            "shape": "S4m"
           },
           "RawMessage": {
             "type": "structure",
@@ -51477,13 +51773,53 @@ module.exports={
           "SourceArn": {},
           "ReturnPathArn": {},
           "Tags": {
-            "shape": "S54"
+            "shape": "S5d"
           },
           "ConfigurationSetName": {}
         }
       },
       "output": {
         "resultWrapper": "SendRawEmailResult",
+        "type": "structure",
+        "required": [
+          "MessageId"
+        ],
+        "members": {
+          "MessageId": {}
+        }
+      }
+    },
+    "SendTemplatedEmail": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Source",
+          "Destination",
+          "Template",
+          "TemplateData"
+        ],
+        "members": {
+          "Source": {},
+          "Destination": {
+            "shape": "S5k"
+          },
+          "ReplyToAddresses": {
+            "shape": "S4m"
+          },
+          "ReturnPath": {},
+          "SourceArn": {},
+          "ReturnPathArn": {},
+          "Tags": {
+            "shape": "S5d"
+          },
+          "ConfigurationSetName": {},
+          "Template": {},
+          "TemplateArn": {},
+          "TemplateData": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "SendTemplatedEmailResult",
         "type": "structure",
         "required": [
           "MessageId"
@@ -51624,6 +51960,26 @@ module.exports={
         "members": {}
       }
     },
+    "TestRenderTemplate": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "TemplateName",
+          "TemplateData"
+        ],
+        "members": {
+          "TemplateName": {},
+          "TemplateData": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "TestRenderTemplateResult",
+        "type": "structure",
+        "members": {
+          "RenderedTemplate": {}
+        }
+      }
+    },
     "UpdateConfigurationSetEventDestination": {
       "input": {
         "type": "structure",
@@ -51684,6 +52040,24 @@ module.exports={
         "members": {}
       }
     },
+    "UpdateTemplate": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Template"
+        ],
+        "members": {
+          "Template": {
+            "shape": "S1t"
+          }
+        }
+      },
+      "output": {
+        "resultWrapper": "UpdateTemplateResult",
+        "type": "structure",
+        "members": {}
+      }
+    },
     "VerifyDomainDkim": {
       "input": {
         "type": "structure",
@@ -51702,7 +52076,7 @@ module.exports={
         ],
         "members": {
           "DkimTokens": {
-            "shape": "S2v"
+            "shape": "S34"
           }
         }
       }
@@ -51961,7 +52335,19 @@ module.exports={
         }
       }
     },
-    "S2d": {
+    "S1t": {
+      "type": "structure",
+      "required": [
+        "TemplateName"
+      ],
+      "members": {
+        "TemplateName": {},
+        "SubjectPart": {},
+        "TextPart": {},
+        "HtmlPart": {}
+      }
+    },
+    "S2m": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -51970,29 +52356,29 @@ module.exports={
         }
       }
     },
-    "S2f": {
+    "S2o": {
       "type": "list",
       "member": {
         "shape": "S11"
       }
     },
-    "S2q": {
+    "S2z": {
       "type": "list",
       "member": {}
     },
-    "S2v": {
+    "S34": {
       "type": "list",
       "member": {}
     },
-    "S3a": {
+    "S3j": {
       "type": "list",
       "member": {}
     },
-    "S47": {
+    "S4m": {
       "type": "list",
       "member": {}
     },
-    "S4j": {
+    "S4y": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -52006,7 +52392,35 @@ module.exports={
         }
       }
     },
-    "S50": {
+    "S5d": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "Value"
+        ],
+        "members": {
+          "Name": {},
+          "Value": {}
+        }
+      }
+    },
+    "S5k": {
+      "type": "structure",
+      "members": {
+        "ToAddresses": {
+          "shape": "S4m"
+        },
+        "CcAddresses": {
+          "shape": "S4m"
+        },
+        "BccAddresses": {
+          "shape": "S4m"
+        }
+      }
+    },
+    "S5s": {
       "type": "structure",
       "required": [
         "Data"
@@ -52014,20 +52428,6 @@ module.exports={
       "members": {
         "Data": {},
         "Charset": {}
-      }
-    },
-    "S54": {
-      "type": "list",
-      "member": {
-        "type": "structure",
-        "required": [
-          "Name",
-          "Value"
-        ],
-        "members": {
-          "Name": {},
-          "Value": {}
-        }
       }
     }
   }
@@ -107931,7 +108331,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.131.0',
+  VERSION: '2.132.0',
 
 
   Signers: {},

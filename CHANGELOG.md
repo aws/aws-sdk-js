@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.131.0-->
+<!--LATEST=2.132.0-->
 <!--ENTRYINSERT-->
+
+## 2.132.0
+* feature: ECR: Adds support for new API set used to manage Amazon ECR repository lifecycle policies. Amazon ECR lifecycle policies enable you to specify the lifecycle management of images in a repository. The configuration is a set of one or more rules, where each rule defines an action for Amazon ECR to apply to an image. This allows the automation of cleaning up unused images, for example expiring images based on age or status. A lifecycle policy preview API is provided as well, which allows you to see the impact of a lifecycle policy on an image repository before you execute it
+* feature: SES: Added content related to email template management and templated email sending operations.
 
 ## 2.131.0
 * feature: EC2: This release includes updates to AWS Virtual Private Gateway.

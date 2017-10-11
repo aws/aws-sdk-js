@@ -12,83 +12,91 @@ declare class SES extends Service {
   constructor(options?: SES.Types.ClientConfiguration)
   config: Config & SES.Types.ClientConfiguration;
   /**
-   * Creates a receipt rule set by cloning an existing one. All receipt rules and configurations are copied to the new receipt rule set and are completely independent of the source rule set. For information about setting up rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a receipt rule set by cloning an existing one. All receipt rules and configurations are copied to the new receipt rule set and are completely independent of the source rule set. For information about setting up rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   cloneReceiptRuleSet(params: SES.Types.CloneReceiptRuleSetRequest, callback?: (err: AWSError, data: SES.Types.CloneReceiptRuleSetResponse) => void): Request<SES.Types.CloneReceiptRuleSetResponse, AWSError>;
   /**
-   * Creates a receipt rule set by cloning an existing one. All receipt rules and configurations are copied to the new receipt rule set and are completely independent of the source rule set. For information about setting up rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a receipt rule set by cloning an existing one. All receipt rules and configurations are copied to the new receipt rule set and are completely independent of the source rule set. For information about setting up rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   cloneReceiptRuleSet(callback?: (err: AWSError, data: SES.Types.CloneReceiptRuleSetResponse) => void): Request<SES.Types.CloneReceiptRuleSetResponse, AWSError>;
   /**
-   * Creates a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createConfigurationSet(params: SES.Types.CreateConfigurationSetRequest, callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetResponse) => void): Request<SES.Types.CreateConfigurationSetResponse, AWSError>;
   /**
-   * Creates a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createConfigurationSet(callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetResponse) => void): Request<SES.Types.CreateConfigurationSetResponse, AWSError>;
   /**
-   * Creates a configuration set event destination.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a configuration set event destination.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createConfigurationSetEventDestination(params: SES.Types.CreateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<SES.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Creates a configuration set event destination.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a configuration set event destination.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createConfigurationSetEventDestination(callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<SES.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Creates an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events by redirecting them to the Amazon SES-operated domain. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the  Amazon SES Developer Guide. 
+   * Creates an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
    */
   createConfigurationSetTrackingOptions(params: SES.Types.CreateConfigurationSetTrackingOptionsRequest, callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.CreateConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
-   * Creates an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events by redirecting them to the Amazon SES-operated domain. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the  Amazon SES Developer Guide. 
+   * Creates an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
    */
   createConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.CreateConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
-   * Creates a new IP address filter. For information about setting up IP address filters, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a new IP address filter. For information about setting up IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createReceiptFilter(params: SES.Types.CreateReceiptFilterRequest, callback?: (err: AWSError, data: SES.Types.CreateReceiptFilterResponse) => void): Request<SES.Types.CreateReceiptFilterResponse, AWSError>;
   /**
-   * Creates a new IP address filter. For information about setting up IP address filters, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a new IP address filter. For information about setting up IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createReceiptFilter(callback?: (err: AWSError, data: SES.Types.CreateReceiptFilterResponse) => void): Request<SES.Types.CreateReceiptFilterResponse, AWSError>;
   /**
-   * Creates a receipt rule. For information about setting up receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a receipt rule. For information about setting up receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createReceiptRule(params: SES.Types.CreateReceiptRuleRequest, callback?: (err: AWSError, data: SES.Types.CreateReceiptRuleResponse) => void): Request<SES.Types.CreateReceiptRuleResponse, AWSError>;
   /**
-   * Creates a receipt rule. For information about setting up receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates a receipt rule. For information about setting up receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createReceiptRule(callback?: (err: AWSError, data: SES.Types.CreateReceiptRuleResponse) => void): Request<SES.Types.CreateReceiptRuleResponse, AWSError>;
   /**
-   * Creates an empty receipt rule set. For information about setting up receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates an empty receipt rule set. For information about setting up receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createReceiptRuleSet(params: SES.Types.CreateReceiptRuleSetRequest, callback?: (err: AWSError, data: SES.Types.CreateReceiptRuleSetResponse) => void): Request<SES.Types.CreateReceiptRuleSetResponse, AWSError>;
   /**
-   * Creates an empty receipt rule set. For information about setting up receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates an empty receipt rule set. For information about setting up receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createReceiptRuleSet(callback?: (err: AWSError, data: SES.Types.CreateReceiptRuleSetResponse) => void): Request<SES.Types.CreateReceiptRuleSetResponse, AWSError>;
   /**
-   * Deletes a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Creates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  createTemplate(params: SES.Types.CreateTemplateRequest, callback?: (err: AWSError, data: SES.Types.CreateTemplateResponse) => void): Request<SES.Types.CreateTemplateResponse, AWSError>;
+  /**
+   * Creates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  createTemplate(callback?: (err: AWSError, data: SES.Types.CreateTemplateResponse) => void): Request<SES.Types.CreateTemplateResponse, AWSError>;
+  /**
+   * Deletes a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteConfigurationSet(params: SES.Types.DeleteConfigurationSetRequest, callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetResponse) => void): Request<SES.Types.DeleteConfigurationSetResponse, AWSError>;
   /**
-   * Deletes a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteConfigurationSet(callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetResponse) => void): Request<SES.Types.DeleteConfigurationSetResponse, AWSError>;
   /**
-   * Deletes a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteConfigurationSetEventDestination(params: SES.Types.DeleteConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<SES.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Deletes a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteConfigurationSetEventDestination(callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<SES.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Deletes an association between a configuration set and a custom domain for open and click event tracking. By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events by redirecting them to the Amazon SES-operated domain. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the  Amazon SES Developer Guide.   Deleting this kind of association will result in emails sent using the specified configuration set to capture open and click events using the standard, Amazon SES-operated domains. 
+   * Deletes an association between a configuration set and a custom domain for open and click event tracking. By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.  Deleting this kind of association will result in emails sent using the specified configuration set to capture open and click events using the standard, Amazon SES-operated domains. 
    */
   deleteConfigurationSetTrackingOptions(params: SES.Types.DeleteConfigurationSetTrackingOptionsRequest, callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.DeleteConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
-   * Deletes an association between a configuration set and a custom domain for open and click event tracking. By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events by redirecting them to the Amazon SES-operated domain. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the  Amazon SES Developer Guide.   Deleting this kind of association will result in emails sent using the specified configuration set to capture open and click events using the standard, Amazon SES-operated domains. 
+   * Deletes an association between a configuration set and a custom domain for open and click event tracking. By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.  Deleting this kind of association will result in emails sent using the specified configuration set to capture open and click events using the standard, Amazon SES-operated domains. 
    */
   deleteConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.DeleteConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
@@ -100,37 +108,45 @@ declare class SES extends Service {
    */
   deleteIdentity(callback?: (err: AWSError, data: SES.Types.DeleteIdentityResponse) => void): Request<SES.Types.DeleteIdentityResponse, AWSError>;
   /**
-   * Deletes the specified sending authorization policy for the given identity (an email address or a domain). This API returns successfully even if a policy with the specified name does not exist.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes the specified sending authorization policy for the given identity (an email address or a domain). This API returns successfully even if a policy with the specified name does not exist.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteIdentityPolicy(params: SES.Types.DeleteIdentityPolicyRequest, callback?: (err: AWSError, data: SES.Types.DeleteIdentityPolicyResponse) => void): Request<SES.Types.DeleteIdentityPolicyResponse, AWSError>;
   /**
-   * Deletes the specified sending authorization policy for the given identity (an email address or a domain). This API returns successfully even if a policy with the specified name does not exist.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes the specified sending authorization policy for the given identity (an email address or a domain). This API returns successfully even if a policy with the specified name does not exist.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteIdentityPolicy(callback?: (err: AWSError, data: SES.Types.DeleteIdentityPolicyResponse) => void): Request<SES.Types.DeleteIdentityPolicyResponse, AWSError>;
   /**
-   * Deletes the specified IP address filter. For information about managing IP address filters, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes the specified IP address filter. For information about managing IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteReceiptFilter(params: SES.Types.DeleteReceiptFilterRequest, callback?: (err: AWSError, data: SES.Types.DeleteReceiptFilterResponse) => void): Request<SES.Types.DeleteReceiptFilterResponse, AWSError>;
   /**
-   * Deletes the specified IP address filter. For information about managing IP address filters, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes the specified IP address filter. For information about managing IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteReceiptFilter(callback?: (err: AWSError, data: SES.Types.DeleteReceiptFilterResponse) => void): Request<SES.Types.DeleteReceiptFilterResponse, AWSError>;
   /**
-   * Deletes the specified receipt rule. For information about managing receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes the specified receipt rule. For information about managing receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteReceiptRule(params: SES.Types.DeleteReceiptRuleRequest, callback?: (err: AWSError, data: SES.Types.DeleteReceiptRuleResponse) => void): Request<SES.Types.DeleteReceiptRuleResponse, AWSError>;
   /**
-   * Deletes the specified receipt rule. For information about managing receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes the specified receipt rule. For information about managing receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteReceiptRule(callback?: (err: AWSError, data: SES.Types.DeleteReceiptRuleResponse) => void): Request<SES.Types.DeleteReceiptRuleResponse, AWSError>;
   /**
-   * Deletes the specified receipt rule set and all of the receipt rules it contains.  The currently active rule set cannot be deleted.  For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes the specified receipt rule set and all of the receipt rules it contains.  The currently active rule set cannot be deleted.  For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteReceiptRuleSet(params: SES.Types.DeleteReceiptRuleSetRequest, callback?: (err: AWSError, data: SES.Types.DeleteReceiptRuleSetResponse) => void): Request<SES.Types.DeleteReceiptRuleSetResponse, AWSError>;
   /**
-   * Deletes the specified receipt rule set and all of the receipt rules it contains.  The currently active rule set cannot be deleted.  For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Deletes the specified receipt rule set and all of the receipt rules it contains.  The currently active rule set cannot be deleted.  For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteReceiptRuleSet(callback?: (err: AWSError, data: SES.Types.DeleteReceiptRuleSetResponse) => void): Request<SES.Types.DeleteReceiptRuleSetResponse, AWSError>;
+  /**
+   * Deletes an email template. You can execute this operation no more than once per second.
+   */
+  deleteTemplate(params: SES.Types.DeleteTemplateRequest, callback?: (err: AWSError, data: SES.Types.DeleteTemplateResponse) => void): Request<SES.Types.DeleteTemplateResponse, AWSError>;
+  /**
+   * Deletes an email template. You can execute this operation no more than once per second.
+   */
+  deleteTemplate(callback?: (err: AWSError, data: SES.Types.DeleteTemplateResponse) => void): Request<SES.Types.DeleteTemplateResponse, AWSError>;
   /**
    * Deprecated. Use the DeleteIdentity operation to delete email addresses and domains.
    */
@@ -140,43 +156,43 @@ declare class SES extends Service {
    */
   deleteVerifiedEmailAddress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns the metadata and receipt rules for the receipt rule set that is currently active. For information about setting up receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the metadata and receipt rules for the receipt rule set that is currently active. For information about setting up receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   describeActiveReceiptRuleSet(params: SES.Types.DescribeActiveReceiptRuleSetRequest, callback?: (err: AWSError, data: SES.Types.DescribeActiveReceiptRuleSetResponse) => void): Request<SES.Types.DescribeActiveReceiptRuleSetResponse, AWSError>;
   /**
-   * Returns the metadata and receipt rules for the receipt rule set that is currently active. For information about setting up receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the metadata and receipt rules for the receipt rule set that is currently active. For information about setting up receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   describeActiveReceiptRuleSet(callback?: (err: AWSError, data: SES.Types.DescribeActiveReceiptRuleSetResponse) => void): Request<SES.Types.DescribeActiveReceiptRuleSetResponse, AWSError>;
   /**
-   * Returns the details of the specified configuration set. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the details of the specified configuration set. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   describeConfigurationSet(params: SES.Types.DescribeConfigurationSetRequest, callback?: (err: AWSError, data: SES.Types.DescribeConfigurationSetResponse) => void): Request<SES.Types.DescribeConfigurationSetResponse, AWSError>;
   /**
-   * Returns the details of the specified configuration set. For information about using configuration sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the details of the specified configuration set. For information about using configuration sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   describeConfigurationSet(callback?: (err: AWSError, data: SES.Types.DescribeConfigurationSetResponse) => void): Request<SES.Types.DescribeConfigurationSetResponse, AWSError>;
   /**
-   * Returns the details of the specified receipt rule. For information about setting up receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the details of the specified receipt rule. For information about setting up receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   describeReceiptRule(params: SES.Types.DescribeReceiptRuleRequest, callback?: (err: AWSError, data: SES.Types.DescribeReceiptRuleResponse) => void): Request<SES.Types.DescribeReceiptRuleResponse, AWSError>;
   /**
-   * Returns the details of the specified receipt rule. For information about setting up receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the details of the specified receipt rule. For information about setting up receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   describeReceiptRule(callback?: (err: AWSError, data: SES.Types.DescribeReceiptRuleResponse) => void): Request<SES.Types.DescribeReceiptRuleResponse, AWSError>;
   /**
-   * Returns the details of the specified receipt rule set. For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the details of the specified receipt rule set. For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   describeReceiptRuleSet(params: SES.Types.DescribeReceiptRuleSetRequest, callback?: (err: AWSError, data: SES.Types.DescribeReceiptRuleSetResponse) => void): Request<SES.Types.DescribeReceiptRuleSetResponse, AWSError>;
   /**
-   * Returns the details of the specified receipt rule set. For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the details of the specified receipt rule set. For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   describeReceiptRuleSet(callback?: (err: AWSError, data: SES.Types.DescribeReceiptRuleSetResponse) => void): Request<SES.Types.DescribeReceiptRuleSetResponse, AWSError>;
   /**
-   * Returns the current status of Easy DKIM signing for an entity. For domain name identities, this operation also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published. This operation takes a list of identities as input and returns the following information for each:   Whether Easy DKIM signing is enabled or disabled.   A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.   Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.   This operation is throttled at one request per second and can only get DKIM attributes for up to 100 identities at a time. For more information about creating DNS records using DKIM tokens, go to the  Amazon SES Developer Guide. 
+   * Returns the current status of Easy DKIM signing for an entity. For domain name identities, this operation also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published. This operation takes a list of identities as input and returns the following information for each:   Whether Easy DKIM signing is enabled or disabled.   A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.   Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.   This operation is throttled at one request per second and can only get DKIM attributes for up to 100 identities at a time. For more information about creating DNS records using DKIM tokens, go to the Amazon SES Developer Guide.
    */
   getIdentityDkimAttributes(params: SES.Types.GetIdentityDkimAttributesRequest, callback?: (err: AWSError, data: SES.Types.GetIdentityDkimAttributesResponse) => void): Request<SES.Types.GetIdentityDkimAttributesResponse, AWSError>;
   /**
-   * Returns the current status of Easy DKIM signing for an entity. For domain name identities, this operation also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published. This operation takes a list of identities as input and returns the following information for each:   Whether Easy DKIM signing is enabled or disabled.   A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.   Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.   This operation is throttled at one request per second and can only get DKIM attributes for up to 100 identities at a time. For more information about creating DNS records using DKIM tokens, go to the  Amazon SES Developer Guide. 
+   * Returns the current status of Easy DKIM signing for an entity. For domain name identities, this operation also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published. This operation takes a list of identities as input and returns the following information for each:   Whether Easy DKIM signing is enabled or disabled.   A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.   Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.   This operation is throttled at one request per second and can only get DKIM attributes for up to 100 identities at a time. For more information about creating DNS records using DKIM tokens, go to the Amazon SES Developer Guide.
    */
   getIdentityDkimAttributes(callback?: (err: AWSError, data: SES.Types.GetIdentityDkimAttributesResponse) => void): Request<SES.Types.GetIdentityDkimAttributesResponse, AWSError>;
   /**
@@ -188,19 +204,19 @@ declare class SES extends Service {
    */
   getIdentityMailFromDomainAttributes(callback?: (err: AWSError, data: SES.Types.GetIdentityMailFromDomainAttributesResponse) => void): Request<SES.Types.GetIdentityMailFromDomainAttributesResponse, AWSError>;
   /**
-   * Given a list of verified identities (email addresses and/or domains), returns a structure describing identity notification attributes. This operation is throttled at one request per second and can only get notification attributes for up to 100 identities at a time. For more information about using notifications with Amazon SES, see the  Amazon SES Developer Guide. 
+   * Given a list of verified identities (email addresses and/or domains), returns a structure describing identity notification attributes. This operation is throttled at one request per second and can only get notification attributes for up to 100 identities at a time. For more information about using notifications with Amazon SES, see the Amazon SES Developer Guide.
    */
   getIdentityNotificationAttributes(params: SES.Types.GetIdentityNotificationAttributesRequest, callback?: (err: AWSError, data: SES.Types.GetIdentityNotificationAttributesResponse) => void): Request<SES.Types.GetIdentityNotificationAttributesResponse, AWSError>;
   /**
-   * Given a list of verified identities (email addresses and/or domains), returns a structure describing identity notification attributes. This operation is throttled at one request per second and can only get notification attributes for up to 100 identities at a time. For more information about using notifications with Amazon SES, see the  Amazon SES Developer Guide. 
+   * Given a list of verified identities (email addresses and/or domains), returns a structure describing identity notification attributes. This operation is throttled at one request per second and can only get notification attributes for up to 100 identities at a time. For more information about using notifications with Amazon SES, see the Amazon SES Developer Guide.
    */
   getIdentityNotificationAttributes(callback?: (err: AWSError, data: SES.Types.GetIdentityNotificationAttributesResponse) => void): Request<SES.Types.GetIdentityNotificationAttributesResponse, AWSError>;
   /**
-   * Returns the requested sending authorization policies for the given identity (an email address or a domain). The policies are returned as a map of policy names to policy contents. You can retrieve a maximum of 20 policies at a time.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the requested sending authorization policies for the given identity (an email address or a domain). The policies are returned as a map of policy names to policy contents. You can retrieve a maximum of 20 policies at a time.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   getIdentityPolicies(params: SES.Types.GetIdentityPoliciesRequest, callback?: (err: AWSError, data: SES.Types.GetIdentityPoliciesResponse) => void): Request<SES.Types.GetIdentityPoliciesResponse, AWSError>;
   /**
-   * Returns the requested sending authorization policies for the given identity (an email address or a domain). The policies are returned as a map of policy names to policy contents. You can retrieve a maximum of 20 policies at a time.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns the requested sending authorization policies for the given identity (an email address or a domain). The policies are returned as a map of policy names to policy contents. You can retrieve a maximum of 20 policies at a time.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   getIdentityPolicies(callback?: (err: AWSError, data: SES.Types.GetIdentityPoliciesResponse) => void): Request<SES.Types.GetIdentityPoliciesResponse, AWSError>;
   /**
@@ -220,11 +236,19 @@ declare class SES extends Service {
    */
   getSendStatistics(callback?: (err: AWSError, data: SES.Types.GetSendStatisticsResponse) => void): Request<SES.Types.GetSendStatisticsResponse, AWSError>;
   /**
-   * Provides a list of the configuration sets associated with your Amazon SES account. For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide. You can execute this operation no more than once per second. This operation will return up to 50 configuration sets each time it is run. If your Amazon SES account has more than 50 configuration sets, this operation will also return a NextToken element. You can then execute the ListConfigurationSets operation again, passing the NextToken parameter and the value of the NextToken element to retrieve additional results.
+   * Displays the template object (which includes the Subject line, HTML part and text part) for the template you specify. You can execute this operation no more than once per second.
+   */
+  getTemplate(params: SES.Types.GetTemplateRequest, callback?: (err: AWSError, data: SES.Types.GetTemplateResponse) => void): Request<SES.Types.GetTemplateResponse, AWSError>;
+  /**
+   * Displays the template object (which includes the Subject line, HTML part and text part) for the template you specify. You can execute this operation no more than once per second.
+   */
+  getTemplate(callback?: (err: AWSError, data: SES.Types.GetTemplateResponse) => void): Request<SES.Types.GetTemplateResponse, AWSError>;
+  /**
+   * Provides a list of the configuration sets associated with your Amazon SES account. For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.  You can execute this operation no more than once per second. This operation will return up to 1,000 configuration sets each time it is run. If your Amazon SES account has more than 1,000 configuration sets, this operation will also return a NextToken element. You can then execute the ListConfigurationSets operation again, passing the NextToken parameter and the value of the NextToken element to retrieve additional results.
    */
   listConfigurationSets(params: SES.Types.ListConfigurationSetsRequest, callback?: (err: AWSError, data: SES.Types.ListConfigurationSetsResponse) => void): Request<SES.Types.ListConfigurationSetsResponse, AWSError>;
   /**
-   * Provides a list of the configuration sets associated with your Amazon SES account. For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide. You can execute this operation no more than once per second. This operation will return up to 50 configuration sets each time it is run. If your Amazon SES account has more than 50 configuration sets, this operation will also return a NextToken element. You can then execute the ListConfigurationSets operation again, passing the NextToken parameter and the value of the NextToken element to retrieve additional results.
+   * Provides a list of the configuration sets associated with your Amazon SES account. For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.  You can execute this operation no more than once per second. This operation will return up to 1,000 configuration sets each time it is run. If your Amazon SES account has more than 1,000 configuration sets, this operation will also return a NextToken element. You can then execute the ListConfigurationSets operation again, passing the NextToken parameter and the value of the NextToken element to retrieve additional results.
    */
   listConfigurationSets(callback?: (err: AWSError, data: SES.Types.ListConfigurationSetsResponse) => void): Request<SES.Types.ListConfigurationSetsResponse, AWSError>;
   /**
@@ -236,167 +260,207 @@ declare class SES extends Service {
    */
   listIdentities(callback?: (err: AWSError, data: SES.Types.ListIdentitiesResponse) => void): Request<SES.Types.ListIdentitiesResponse, AWSError>;
   /**
-   * Returns a list of sending authorization policies that are attached to the given identity (an email address or a domain). This API returns only a list. If you want the actual policy content, you can use GetIdentityPolicies.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns a list of sending authorization policies that are attached to the given identity (an email address or a domain). This API returns only a list. If you want the actual policy content, you can use GetIdentityPolicies.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listIdentityPolicies(params: SES.Types.ListIdentityPoliciesRequest, callback?: (err: AWSError, data: SES.Types.ListIdentityPoliciesResponse) => void): Request<SES.Types.ListIdentityPoliciesResponse, AWSError>;
   /**
-   * Returns a list of sending authorization policies that are attached to the given identity (an email address or a domain). This API returns only a list. If you want the actual policy content, you can use GetIdentityPolicies.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Returns a list of sending authorization policies that are attached to the given identity (an email address or a domain). This API returns only a list. If you want the actual policy content, you can use GetIdentityPolicies.  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listIdentityPolicies(callback?: (err: AWSError, data: SES.Types.ListIdentityPoliciesResponse) => void): Request<SES.Types.ListIdentityPoliciesResponse, AWSError>;
   /**
-   * Lists the IP address filters associated with your AWS account. For information about managing IP address filters, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Lists the IP address filters associated with your AWS account. For information about managing IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listReceiptFilters(params: SES.Types.ListReceiptFiltersRequest, callback?: (err: AWSError, data: SES.Types.ListReceiptFiltersResponse) => void): Request<SES.Types.ListReceiptFiltersResponse, AWSError>;
   /**
-   * Lists the IP address filters associated with your AWS account. For information about managing IP address filters, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Lists the IP address filters associated with your AWS account. For information about managing IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listReceiptFilters(callback?: (err: AWSError, data: SES.Types.ListReceiptFiltersResponse) => void): Request<SES.Types.ListReceiptFiltersResponse, AWSError>;
   /**
-   * Lists the receipt rule sets that exist under your AWS account. If there are additional receipt rule sets to be retrieved, you will receive a NextToken that you can provide to the next call to ListReceiptRuleSets to retrieve the additional entries. For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Lists the receipt rule sets that exist under your AWS account. If there are additional receipt rule sets to be retrieved, you will receive a NextToken that you can provide to the next call to ListReceiptRuleSets to retrieve the additional entries. For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listReceiptRuleSets(params: SES.Types.ListReceiptRuleSetsRequest, callback?: (err: AWSError, data: SES.Types.ListReceiptRuleSetsResponse) => void): Request<SES.Types.ListReceiptRuleSetsResponse, AWSError>;
   /**
-   * Lists the receipt rule sets that exist under your AWS account. If there are additional receipt rule sets to be retrieved, you will receive a NextToken that you can provide to the next call to ListReceiptRuleSets to retrieve the additional entries. For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Lists the receipt rule sets that exist under your AWS account. If there are additional receipt rule sets to be retrieved, you will receive a NextToken that you can provide to the next call to ListReceiptRuleSets to retrieve the additional entries. For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listReceiptRuleSets(callback?: (err: AWSError, data: SES.Types.ListReceiptRuleSetsResponse) => void): Request<SES.Types.ListReceiptRuleSetsResponse, AWSError>;
+  /**
+   * Lists the email templates present in your Amazon SES account. You can execute this operation no more than once per second.
+   */
+  listTemplates(params: SES.Types.ListTemplatesRequest, callback?: (err: AWSError, data: SES.Types.ListTemplatesResponse) => void): Request<SES.Types.ListTemplatesResponse, AWSError>;
+  /**
+   * Lists the email templates present in your Amazon SES account. You can execute this operation no more than once per second.
+   */
+  listTemplates(callback?: (err: AWSError, data: SES.Types.ListTemplatesResponse) => void): Request<SES.Types.ListTemplatesResponse, AWSError>;
   /**
    * Deprecated. Use the ListIdentities operation to list the email addresses and domains associated with your account.
    */
   listVerifiedEmailAddresses(callback?: (err: AWSError, data: SES.Types.ListVerifiedEmailAddressesResponse) => void): Request<SES.Types.ListVerifiedEmailAddressesResponse, AWSError>;
   /**
-   * Adds or updates a sending authorization policy for the specified identity (an email address or a domain).  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Adds or updates a sending authorization policy for the specified identity (an email address or a domain).  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   putIdentityPolicy(params: SES.Types.PutIdentityPolicyRequest, callback?: (err: AWSError, data: SES.Types.PutIdentityPolicyResponse) => void): Request<SES.Types.PutIdentityPolicyResponse, AWSError>;
   /**
-   * Adds or updates a sending authorization policy for the specified identity (an email address or a domain).  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Adds or updates a sending authorization policy for the specified identity (an email address or a domain).  This API is for the identity owner only. If you have not verified the identity, this API will return an error.  Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   putIdentityPolicy(callback?: (err: AWSError, data: SES.Types.PutIdentityPolicyResponse) => void): Request<SES.Types.PutIdentityPolicyResponse, AWSError>;
   /**
-   * Reorders the receipt rules within a receipt rule set.  All of the rules in the rule set must be represented in this request. That is, this API will return an error if the reorder request doesn't explicitly position all of the rules.  For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Reorders the receipt rules within a receipt rule set.  All of the rules in the rule set must be represented in this request. That is, this API will return an error if the reorder request doesn't explicitly position all of the rules.  For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   reorderReceiptRuleSet(params: SES.Types.ReorderReceiptRuleSetRequest, callback?: (err: AWSError, data: SES.Types.ReorderReceiptRuleSetResponse) => void): Request<SES.Types.ReorderReceiptRuleSetResponse, AWSError>;
   /**
-   * Reorders the receipt rules within a receipt rule set.  All of the rules in the rule set must be represented in this request. That is, this API will return an error if the reorder request doesn't explicitly position all of the rules.  For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Reorders the receipt rules within a receipt rule set.  All of the rules in the rule set must be represented in this request. That is, this API will return an error if the reorder request doesn't explicitly position all of the rules.  For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   reorderReceiptRuleSet(callback?: (err: AWSError, data: SES.Types.ReorderReceiptRuleSetResponse) => void): Request<SES.Types.ReorderReceiptRuleSetResponse, AWSError>;
   /**
-   * Generates and sends a bounce message to the sender of an email you received through Amazon SES. You can only use this API on an email up to 24 hours after you receive it.  You cannot use this API to send generic bounces for mail that was not received by Amazon SES.  For information about receiving email through Amazon SES, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Generates and sends a bounce message to the sender of an email you received through Amazon SES. You can only use this API on an email up to 24 hours after you receive it.  You cannot use this API to send generic bounces for mail that was not received by Amazon SES.  For information about receiving email through Amazon SES, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendBounce(params: SES.Types.SendBounceRequest, callback?: (err: AWSError, data: SES.Types.SendBounceResponse) => void): Request<SES.Types.SendBounceResponse, AWSError>;
   /**
-   * Generates and sends a bounce message to the sender of an email you received through Amazon SES. You can only use this API on an email up to 24 hours after you receive it.  You cannot use this API to send generic bounces for mail that was not received by Amazon SES.  For information about receiving email through Amazon SES, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Generates and sends a bounce message to the sender of an email you received through Amazon SES. You can only use this API on an email up to 24 hours after you receive it.  You cannot use this API to send generic bounces for mail that was not received by Amazon SES.  For information about receiving email through Amazon SES, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendBounce(callback?: (err: AWSError, data: SES.Types.SendBounceResponse) => void): Request<SES.Types.SendBounceResponse, AWSError>;
   /**
-   * Composes an email message and immediately queues it for sending. In order to send email using the SendEmail operation, your message must meet the following requirements:   The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an "Email address not verified" error.    If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.   The total size of the message, including attachments, must be smaller than 10 MB.   The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.   The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the SendEmail operation several times to send the message to each group.    For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your sending quota). For more information about sending quotas in Amazon SES, see Managing Your Amazon SES Sending Limits in the Amazon SES Developer Guide. 
+   * Composes an email message to multiple destinations. The message body is created using an email template. In order to send email using the SendBulkTemplatedEmail operation, your call to the API must meet the following requirements:   The call must refer to an existing email template. You can create email templates using the CreateTemplate operation.   The message must be sent from a verified email address or domain.   If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be less than 10 MB.   Each Destination parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.  
+   */
+  sendBulkTemplatedEmail(params: SES.Types.SendBulkTemplatedEmailRequest, callback?: (err: AWSError, data: SES.Types.SendBulkTemplatedEmailResponse) => void): Request<SES.Types.SendBulkTemplatedEmailResponse, AWSError>;
+  /**
+   * Composes an email message to multiple destinations. The message body is created using an email template. In order to send email using the SendBulkTemplatedEmail operation, your call to the API must meet the following requirements:   The call must refer to an existing email template. You can create email templates using the CreateTemplate operation.   The message must be sent from a verified email address or domain.   If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be less than 10 MB.   Each Destination parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.  
+   */
+  sendBulkTemplatedEmail(callback?: (err: AWSError, data: SES.Types.SendBulkTemplatedEmailResponse) => void): Request<SES.Types.SendBulkTemplatedEmailResponse, AWSError>;
+  /**
+   * Composes an email message and immediately queues it for sending. In order to send email using the SendEmail operation, your message must meet the following requirements:   The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an "Email address not verified" error.    If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be smaller than 10 MB.   The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.   The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the SendEmail operation several times to send the message to each group.    For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your sending quota). For more information about sending quotas in Amazon SES, see Managing Your Amazon SES Sending Limits in the Amazon SES Developer Guide.  
    */
   sendEmail(params: SES.Types.SendEmailRequest, callback?: (err: AWSError, data: SES.Types.SendEmailResponse) => void): Request<SES.Types.SendEmailResponse, AWSError>;
   /**
-   * Composes an email message and immediately queues it for sending. In order to send email using the SendEmail operation, your message must meet the following requirements:   The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an "Email address not verified" error.    If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.   The total size of the message, including attachments, must be smaller than 10 MB.   The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.   The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the SendEmail operation several times to send the message to each group.    For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your sending quota). For more information about sending quotas in Amazon SES, see Managing Your Amazon SES Sending Limits in the Amazon SES Developer Guide. 
+   * Composes an email message and immediately queues it for sending. In order to send email using the SendEmail operation, your message must meet the following requirements:   The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an "Email address not verified" error.    If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be smaller than 10 MB.   The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.   The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the SendEmail operation several times to send the message to each group.    For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your sending quota). For more information about sending quotas in Amazon SES, see Managing Your Amazon SES Sending Limits in the Amazon SES Developer Guide.  
    */
   sendEmail(callback?: (err: AWSError, data: SES.Types.SendEmailResponse) => void): Request<SES.Types.SendEmailResponse, AWSError>;
   /**
-   * Composes an email message and immediately queues it for sending. When calling this operation, you may specify the message headers as well as the content. The SendRawEmail operation is particularly useful for sending multipart MIME emails (such as those that contain both a plain-text and an HTML version).  In order to send email using the SendRawEmail operation, your message must meet the following requirements:   The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an "Email address not verified" error.    If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.   The total size of the message, including attachments, must be smaller than 10 MB.   The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.   The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the SendRawEmail operation several times to send the message to each group.    For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your sending quota). For more information about sending quotas in Amazon SES, see Managing Your Amazon SES Sending Limits in the Amazon SES Developer Guide.  Additionally, keep the following considerations in mind when using the SendRawEmail operation:   Although you can customize the message headers when using the SendRawEmail operation, Amazon SES will automatically apply its own Message-ID and Date headers; if you passed these headers when creating the message, they will be overwritten by the values that Amazon SES provides.   If you are using sending authorization to send on behalf of another user, SendRawEmail enables you to specify the cross-account identity for the email's Source, From, and Return-Path parameters in one of two ways: you can pass optional parameters SourceArn, FromArn, and/or ReturnPathArn to the API, or you can include the following X-headers in the header of your raw email:    X-SES-SOURCE-ARN     X-SES-FROM-ARN     X-SES-RETURN-PATH-ARN     Do not include these X-headers in the DKIM signature; Amazon SES will remove them before sending the email.  For most common sending authorization scenarios, we recommend that you specify the SourceIdentityArn parameter and not the FromIdentityArn or ReturnPathIdentityArn parameters. If you only specify the SourceIdentityArn parameter, Amazon SES will set the From and Return Path addresses to the identity specified in SourceIdentityArn. For more information about sending authorization, see the Using Sending Authorization with Amazon SES in the Amazon SES Developer Guide.  
+   * Composes an email message and immediately queues it for sending. When calling this operation, you may specify the message headers as well as the content. The SendRawEmail operation is particularly useful for sending multipart MIME emails (such as those that contain both a plain-text and an HTML version).  In order to send email using the SendRawEmail operation, your message must meet the following requirements:   The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an "Email address not verified" error.    If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be smaller than 10 MB.   The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.   The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the SendRawEmail operation several times to send the message to each group.    For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your sending quota). For more information about sending quotas in Amazon SES, see Managing Your Amazon SES Sending Limits in the Amazon SES Developer Guide.   Additionally, keep the following considerations in mind when using the SendRawEmail operation:   Although you can customize the message headers when using the SendRawEmail operation, Amazon SES will automatically apply its own Message-ID and Date headers; if you passed these headers when creating the message, they will be overwritten by the values that Amazon SES provides.   If you are using sending authorization to send on behalf of another user, SendRawEmail enables you to specify the cross-account identity for the email's Source, From, and Return-Path parameters in one of two ways: you can pass optional parameters SourceArn, FromArn, and/or ReturnPathArn to the API, or you can include the following X-headers in the header of your raw email:    X-SES-SOURCE-ARN     X-SES-FROM-ARN     X-SES-RETURN-PATH-ARN     Do not include these X-headers in the DKIM signature; Amazon SES will remove them before sending the email.  For most common sending authorization scenarios, we recommend that you specify the SourceIdentityArn parameter and not the FromIdentityArn or ReturnPathIdentityArn parameters. If you only specify the SourceIdentityArn parameter, Amazon SES will set the From and Return Path addresses to the identity specified in SourceIdentityArn. For more information about sending authorization, see the Using Sending Authorization with Amazon SES in the Amazon SES Developer Guide.   
    */
   sendRawEmail(params: SES.Types.SendRawEmailRequest, callback?: (err: AWSError, data: SES.Types.SendRawEmailResponse) => void): Request<SES.Types.SendRawEmailResponse, AWSError>;
   /**
-   * Composes an email message and immediately queues it for sending. When calling this operation, you may specify the message headers as well as the content. The SendRawEmail operation is particularly useful for sending multipart MIME emails (such as those that contain both a plain-text and an HTML version).  In order to send email using the SendRawEmail operation, your message must meet the following requirements:   The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an "Email address not verified" error.    If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.   The total size of the message, including attachments, must be smaller than 10 MB.   The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.   The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the SendRawEmail operation several times to send the message to each group.    For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your sending quota). For more information about sending quotas in Amazon SES, see Managing Your Amazon SES Sending Limits in the Amazon SES Developer Guide.  Additionally, keep the following considerations in mind when using the SendRawEmail operation:   Although you can customize the message headers when using the SendRawEmail operation, Amazon SES will automatically apply its own Message-ID and Date headers; if you passed these headers when creating the message, they will be overwritten by the values that Amazon SES provides.   If you are using sending authorization to send on behalf of another user, SendRawEmail enables you to specify the cross-account identity for the email's Source, From, and Return-Path parameters in one of two ways: you can pass optional parameters SourceArn, FromArn, and/or ReturnPathArn to the API, or you can include the following X-headers in the header of your raw email:    X-SES-SOURCE-ARN     X-SES-FROM-ARN     X-SES-RETURN-PATH-ARN     Do not include these X-headers in the DKIM signature; Amazon SES will remove them before sending the email.  For most common sending authorization scenarios, we recommend that you specify the SourceIdentityArn parameter and not the FromIdentityArn or ReturnPathIdentityArn parameters. If you only specify the SourceIdentityArn parameter, Amazon SES will set the From and Return Path addresses to the identity specified in SourceIdentityArn. For more information about sending authorization, see the Using Sending Authorization with Amazon SES in the Amazon SES Developer Guide.  
+   * Composes an email message and immediately queues it for sending. When calling this operation, you may specify the message headers as well as the content. The SendRawEmail operation is particularly useful for sending multipart MIME emails (such as those that contain both a plain-text and an HTML version).  In order to send email using the SendRawEmail operation, your message must meet the following requirements:   The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an "Email address not verified" error.    If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be smaller than 10 MB.   The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.   The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the SendRawEmail operation several times to send the message to each group.    For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your sending quota). For more information about sending quotas in Amazon SES, see Managing Your Amazon SES Sending Limits in the Amazon SES Developer Guide.   Additionally, keep the following considerations in mind when using the SendRawEmail operation:   Although you can customize the message headers when using the SendRawEmail operation, Amazon SES will automatically apply its own Message-ID and Date headers; if you passed these headers when creating the message, they will be overwritten by the values that Amazon SES provides.   If you are using sending authorization to send on behalf of another user, SendRawEmail enables you to specify the cross-account identity for the email's Source, From, and Return-Path parameters in one of two ways: you can pass optional parameters SourceArn, FromArn, and/or ReturnPathArn to the API, or you can include the following X-headers in the header of your raw email:    X-SES-SOURCE-ARN     X-SES-FROM-ARN     X-SES-RETURN-PATH-ARN     Do not include these X-headers in the DKIM signature; Amazon SES will remove them before sending the email.  For most common sending authorization scenarios, we recommend that you specify the SourceIdentityArn parameter and not the FromIdentityArn or ReturnPathIdentityArn parameters. If you only specify the SourceIdentityArn parameter, Amazon SES will set the From and Return Path addresses to the identity specified in SourceIdentityArn. For more information about sending authorization, see the Using Sending Authorization with Amazon SES in the Amazon SES Developer Guide.   
    */
   sendRawEmail(callback?: (err: AWSError, data: SES.Types.SendRawEmailResponse) => void): Request<SES.Types.SendRawEmailResponse, AWSError>;
   /**
-   * Sets the specified receipt rule set as the active receipt rule set.  To disable your email-receiving through Amazon SES completely, you can call this API with RuleSetName set to null.  For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Composes an email message using an email template and immediately queues it for sending. In order to send email using the SendTemplatedEmail operation, your call to the API must meet the following requirements:   The call must refer to an existing email template. You can create email templates using the CreateTemplate operation.   The message must be sent from a verified email address or domain.   If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be less than 10 MB.   Calls to the SendTemplatedEmail operation may only include one Destination parameter. A destination is a set of recipients who will receive the same version of the email. The Destination parameter can include up to 50 recipients, across the To:, CC: and BCC: fields.   The Destination parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.  
+   */
+  sendTemplatedEmail(params: SES.Types.SendTemplatedEmailRequest, callback?: (err: AWSError, data: SES.Types.SendTemplatedEmailResponse) => void): Request<SES.Types.SendTemplatedEmailResponse, AWSError>;
+  /**
+   * Composes an email message using an email template and immediately queues it for sending. In order to send email using the SendTemplatedEmail operation, your call to the API must meet the following requirements:   The call must refer to an existing email template. You can create email templates using the CreateTemplate operation.   The message must be sent from a verified email address or domain.   If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be less than 10 MB.   Calls to the SendTemplatedEmail operation may only include one Destination parameter. A destination is a set of recipients who will receive the same version of the email. The Destination parameter can include up to 50 recipients, across the To:, CC: and BCC: fields.   The Destination parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.  
+   */
+  sendTemplatedEmail(callback?: (err: AWSError, data: SES.Types.SendTemplatedEmailResponse) => void): Request<SES.Types.SendTemplatedEmailResponse, AWSError>;
+  /**
+   * Sets the specified receipt rule set as the active receipt rule set.  To disable your email-receiving through Amazon SES completely, you can call this API with RuleSetName set to null.  For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   setActiveReceiptRuleSet(params: SES.Types.SetActiveReceiptRuleSetRequest, callback?: (err: AWSError, data: SES.Types.SetActiveReceiptRuleSetResponse) => void): Request<SES.Types.SetActiveReceiptRuleSetResponse, AWSError>;
   /**
-   * Sets the specified receipt rule set as the active receipt rule set.  To disable your email-receiving through Amazon SES completely, you can call this API with RuleSetName set to null.  For information about managing receipt rule sets, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Sets the specified receipt rule set as the active receipt rule set.  To disable your email-receiving through Amazon SES completely, you can call this API with RuleSetName set to null.  For information about managing receipt rule sets, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   setActiveReceiptRuleSet(callback?: (err: AWSError, data: SES.Types.SetActiveReceiptRuleSetResponse) => void): Request<SES.Types.SetActiveReceiptRuleSetResponse, AWSError>;
   /**
-   * Enables or disables Easy DKIM signing of email sent from an identity:   If Easy DKIM signing is enabled for a domain name identity (such as example.com), then Amazon SES will DKIM-sign all email sent by addresses under that domain name (for example, user@example.com).   If Easy DKIM signing is enabled for an email address, then Amazon SES will DKIM-sign all email sent by that email address.   For email addresses (for example, user@example.com), you can only enable Easy DKIM signing if the corresponding domain (in this case, example.com) has been set up for Easy DKIM using the AWS Console or the VerifyDomainDkim operation. You can execute this operation no more than once per second. For more information about Easy DKIM signing, go to the  Amazon SES Developer Guide. 
+   * Enables or disables Easy DKIM signing of email sent from an identity:   If Easy DKIM signing is enabled for a domain name identity (such as example.com), then Amazon SES will DKIM-sign all email sent by addresses under that domain name (for example, user@example.com).   If Easy DKIM signing is enabled for an email address, then Amazon SES will DKIM-sign all email sent by that email address.   For email addresses (for example, user@example.com), you can only enable Easy DKIM signing if the corresponding domain (in this case, example.com) has been set up for Easy DKIM using the AWS Console or the VerifyDomainDkim operation. You can execute this operation no more than once per second. For more information about Easy DKIM signing, go to the Amazon SES Developer Guide.
    */
   setIdentityDkimEnabled(params: SES.Types.SetIdentityDkimEnabledRequest, callback?: (err: AWSError, data: SES.Types.SetIdentityDkimEnabledResponse) => void): Request<SES.Types.SetIdentityDkimEnabledResponse, AWSError>;
   /**
-   * Enables or disables Easy DKIM signing of email sent from an identity:   If Easy DKIM signing is enabled for a domain name identity (such as example.com), then Amazon SES will DKIM-sign all email sent by addresses under that domain name (for example, user@example.com).   If Easy DKIM signing is enabled for an email address, then Amazon SES will DKIM-sign all email sent by that email address.   For email addresses (for example, user@example.com), you can only enable Easy DKIM signing if the corresponding domain (in this case, example.com) has been set up for Easy DKIM using the AWS Console or the VerifyDomainDkim operation. You can execute this operation no more than once per second. For more information about Easy DKIM signing, go to the  Amazon SES Developer Guide. 
+   * Enables or disables Easy DKIM signing of email sent from an identity:   If Easy DKIM signing is enabled for a domain name identity (such as example.com), then Amazon SES will DKIM-sign all email sent by addresses under that domain name (for example, user@example.com).   If Easy DKIM signing is enabled for an email address, then Amazon SES will DKIM-sign all email sent by that email address.   For email addresses (for example, user@example.com), you can only enable Easy DKIM signing if the corresponding domain (in this case, example.com) has been set up for Easy DKIM using the AWS Console or the VerifyDomainDkim operation. You can execute this operation no more than once per second. For more information about Easy DKIM signing, go to the Amazon SES Developer Guide.
    */
   setIdentityDkimEnabled(callback?: (err: AWSError, data: SES.Types.SetIdentityDkimEnabledResponse) => void): Request<SES.Types.SetIdentityDkimEnabledResponse, AWSError>;
   /**
-   * Given an identity (an email address or a domain), enables or disables whether Amazon SES forwards bounce and complaint notifications as email. Feedback forwarding can only be disabled when Amazon Simple Notification Service (Amazon SNS) topics are specified for both bounces and complaints.  Feedback forwarding does not apply to delivery notifications. Delivery notifications are only available through Amazon SNS.  You can execute this operation no more than once per second. For more information about using notifications with Amazon SES, see the  Amazon SES Developer Guide. 
+   * Given an identity (an email address or a domain), enables or disables whether Amazon SES forwards bounce and complaint notifications as email. Feedback forwarding can only be disabled when Amazon Simple Notification Service (Amazon SNS) topics are specified for both bounces and complaints.  Feedback forwarding does not apply to delivery notifications. Delivery notifications are only available through Amazon SNS.  You can execute this operation no more than once per second. For more information about using notifications with Amazon SES, see the Amazon SES Developer Guide.
    */
   setIdentityFeedbackForwardingEnabled(params: SES.Types.SetIdentityFeedbackForwardingEnabledRequest, callback?: (err: AWSError, data: SES.Types.SetIdentityFeedbackForwardingEnabledResponse) => void): Request<SES.Types.SetIdentityFeedbackForwardingEnabledResponse, AWSError>;
   /**
-   * Given an identity (an email address or a domain), enables or disables whether Amazon SES forwards bounce and complaint notifications as email. Feedback forwarding can only be disabled when Amazon Simple Notification Service (Amazon SNS) topics are specified for both bounces and complaints.  Feedback forwarding does not apply to delivery notifications. Delivery notifications are only available through Amazon SNS.  You can execute this operation no more than once per second. For more information about using notifications with Amazon SES, see the  Amazon SES Developer Guide. 
+   * Given an identity (an email address or a domain), enables or disables whether Amazon SES forwards bounce and complaint notifications as email. Feedback forwarding can only be disabled when Amazon Simple Notification Service (Amazon SNS) topics are specified for both bounces and complaints.  Feedback forwarding does not apply to delivery notifications. Delivery notifications are only available through Amazon SNS.  You can execute this operation no more than once per second. For more information about using notifications with Amazon SES, see the Amazon SES Developer Guide.
    */
   setIdentityFeedbackForwardingEnabled(callback?: (err: AWSError, data: SES.Types.SetIdentityFeedbackForwardingEnabledResponse) => void): Request<SES.Types.SetIdentityFeedbackForwardingEnabledResponse, AWSError>;
   /**
-   * Given an identity (an email address or a domain), sets whether Amazon SES includes the original email headers in the Amazon Simple Notification Service (Amazon SNS) notifications of a specified type. You can execute this operation no more than once per second. For more information about using notifications with Amazon SES, see the  Amazon SES Developer Guide. 
+   * Given an identity (an email address or a domain), sets whether Amazon SES includes the original email headers in the Amazon Simple Notification Service (Amazon SNS) notifications of a specified type. You can execute this operation no more than once per second. For more information about using notifications with Amazon SES, see the Amazon SES Developer Guide.
    */
   setIdentityHeadersInNotificationsEnabled(params: SES.Types.SetIdentityHeadersInNotificationsEnabledRequest, callback?: (err: AWSError, data: SES.Types.SetIdentityHeadersInNotificationsEnabledResponse) => void): Request<SES.Types.SetIdentityHeadersInNotificationsEnabledResponse, AWSError>;
   /**
-   * Given an identity (an email address or a domain), sets whether Amazon SES includes the original email headers in the Amazon Simple Notification Service (Amazon SNS) notifications of a specified type. You can execute this operation no more than once per second. For more information about using notifications with Amazon SES, see the  Amazon SES Developer Guide. 
+   * Given an identity (an email address or a domain), sets whether Amazon SES includes the original email headers in the Amazon Simple Notification Service (Amazon SNS) notifications of a specified type. You can execute this operation no more than once per second. For more information about using notifications with Amazon SES, see the Amazon SES Developer Guide.
    */
   setIdentityHeadersInNotificationsEnabled(callback?: (err: AWSError, data: SES.Types.SetIdentityHeadersInNotificationsEnabledResponse) => void): Request<SES.Types.SetIdentityHeadersInNotificationsEnabledResponse, AWSError>;
   /**
-   * Enables or disables the custom MAIL FROM domain setup for a verified identity (an email address or a domain).  To send emails using the specified MAIL FROM domain, you must add an MX record to your MAIL FROM domain's DNS settings. If you want your emails to pass Sender Policy Framework (SPF) checks, you must also add or update an SPF record. For more information, see the  Amazon SES Developer Guide.   You can execute this operation no more than once per second.
+   * Enables or disables the custom MAIL FROM domain setup for a verified identity (an email address or a domain).  To send emails using the specified MAIL FROM domain, you must add an MX record to your MAIL FROM domain's DNS settings. If you want your emails to pass Sender Policy Framework (SPF) checks, you must also add or update an SPF record. For more information, see the Amazon SES Developer Guide.  You can execute this operation no more than once per second.
    */
   setIdentityMailFromDomain(params: SES.Types.SetIdentityMailFromDomainRequest, callback?: (err: AWSError, data: SES.Types.SetIdentityMailFromDomainResponse) => void): Request<SES.Types.SetIdentityMailFromDomainResponse, AWSError>;
   /**
-   * Enables or disables the custom MAIL FROM domain setup for a verified identity (an email address or a domain).  To send emails using the specified MAIL FROM domain, you must add an MX record to your MAIL FROM domain's DNS settings. If you want your emails to pass Sender Policy Framework (SPF) checks, you must also add or update an SPF record. For more information, see the  Amazon SES Developer Guide.   You can execute this operation no more than once per second.
+   * Enables or disables the custom MAIL FROM domain setup for a verified identity (an email address or a domain).  To send emails using the specified MAIL FROM domain, you must add an MX record to your MAIL FROM domain's DNS settings. If you want your emails to pass Sender Policy Framework (SPF) checks, you must also add or update an SPF record. For more information, see the Amazon SES Developer Guide.  You can execute this operation no more than once per second.
    */
   setIdentityMailFromDomain(callback?: (err: AWSError, data: SES.Types.SetIdentityMailFromDomainResponse) => void): Request<SES.Types.SetIdentityMailFromDomainResponse, AWSError>;
   /**
-   * Given an identity (an email address or a domain), sets the Amazon Simple Notification Service (Amazon SNS) topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with that identity as the Source.  Unless feedback forwarding is enabled, you must specify Amazon SNS topics for bounce and complaint notifications. For more information, see SetIdentityFeedbackForwardingEnabled.  You can execute this operation no more than once per second. For more information about feedback notification, see the  Amazon SES Developer Guide. 
+   * Given an identity (an email address or a domain), sets the Amazon Simple Notification Service (Amazon SNS) topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with that identity as the Source.  Unless feedback forwarding is enabled, you must specify Amazon SNS topics for bounce and complaint notifications. For more information, see SetIdentityFeedbackForwardingEnabled.  You can execute this operation no more than once per second. For more information about feedback notification, see the Amazon SES Developer Guide.
    */
   setIdentityNotificationTopic(params: SES.Types.SetIdentityNotificationTopicRequest, callback?: (err: AWSError, data: SES.Types.SetIdentityNotificationTopicResponse) => void): Request<SES.Types.SetIdentityNotificationTopicResponse, AWSError>;
   /**
-   * Given an identity (an email address or a domain), sets the Amazon Simple Notification Service (Amazon SNS) topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with that identity as the Source.  Unless feedback forwarding is enabled, you must specify Amazon SNS topics for bounce and complaint notifications. For more information, see SetIdentityFeedbackForwardingEnabled.  You can execute this operation no more than once per second. For more information about feedback notification, see the  Amazon SES Developer Guide. 
+   * Given an identity (an email address or a domain), sets the Amazon Simple Notification Service (Amazon SNS) topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with that identity as the Source.  Unless feedback forwarding is enabled, you must specify Amazon SNS topics for bounce and complaint notifications. For more information, see SetIdentityFeedbackForwardingEnabled.  You can execute this operation no more than once per second. For more information about feedback notification, see the Amazon SES Developer Guide.
    */
   setIdentityNotificationTopic(callback?: (err: AWSError, data: SES.Types.SetIdentityNotificationTopicResponse) => void): Request<SES.Types.SetIdentityNotificationTopicResponse, AWSError>;
   /**
-   * Sets the position of the specified receipt rule in the receipt rule set. For information about managing receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Sets the position of the specified receipt rule in the receipt rule set. For information about managing receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   setReceiptRulePosition(params: SES.Types.SetReceiptRulePositionRequest, callback?: (err: AWSError, data: SES.Types.SetReceiptRulePositionResponse) => void): Request<SES.Types.SetReceiptRulePositionResponse, AWSError>;
   /**
-   * Sets the position of the specified receipt rule in the receipt rule set. For information about managing receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Sets the position of the specified receipt rule in the receipt rule set. For information about managing receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   setReceiptRulePosition(callback?: (err: AWSError, data: SES.Types.SetReceiptRulePositionResponse) => void): Request<SES.Types.SetReceiptRulePositionResponse, AWSError>;
   /**
-   * Updates the event destination of a configuration set. Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS). For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  You can execute this operation no more than once per second.
+   * Creates a preview of the MIME content of an email when provided with a template and a set of replacement data. You can execute this operation no more than once per second.
+   */
+  testRenderTemplate(params: SES.Types.TestRenderTemplateRequest, callback?: (err: AWSError, data: SES.Types.TestRenderTemplateResponse) => void): Request<SES.Types.TestRenderTemplateResponse, AWSError>;
+  /**
+   * Creates a preview of the MIME content of an email when provided with a template and a set of replacement data. You can execute this operation no more than once per second.
+   */
+  testRenderTemplate(callback?: (err: AWSError, data: SES.Types.TestRenderTemplateResponse) => void): Request<SES.Types.TestRenderTemplateResponse, AWSError>;
+  /**
+   * Updates the event destination of a configuration set. Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS). For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.   When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  You can execute this operation no more than once per second.
    */
   updateConfigurationSetEventDestination(params: SES.Types.UpdateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SES.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Updates the event destination of a configuration set. Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS). For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.  When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  You can execute this operation no more than once per second.
+   * Updates the event destination of a configuration set. Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS). For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.   When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  You can execute this operation no more than once per second.
    */
   updateConfigurationSetEventDestination(callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SES.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events by redirecting them to the Amazon SES-operated domain. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the  Amazon SES Developer Guide. 
+   * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
    */
   updateConfigurationSetTrackingOptions(params: SES.Types.UpdateConfigurationSetTrackingOptionsRequest, callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.UpdateConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
-   * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events by redirecting them to the Amazon SES-operated domain. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the  Amazon SES Developer Guide. 
+   * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
    */
   updateConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.UpdateConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
-   * Updates a receipt rule. For information about managing receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Updates a receipt rule. For information about managing receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   updateReceiptRule(params: SES.Types.UpdateReceiptRuleRequest, callback?: (err: AWSError, data: SES.Types.UpdateReceiptRuleResponse) => void): Request<SES.Types.UpdateReceiptRuleResponse, AWSError>;
   /**
-   * Updates a receipt rule. For information about managing receipt rules, see the  Amazon SES Developer Guide.  You can execute this operation no more than once per second.
+   * Updates a receipt rule. For information about managing receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   updateReceiptRule(callback?: (err: AWSError, data: SES.Types.UpdateReceiptRuleResponse) => void): Request<SES.Types.UpdateReceiptRuleResponse, AWSError>;
   /**
-   * Returns a set of DKIM tokens for a domain. DKIM tokens are character strings that represent your domain's identity. Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign email originating from that domain. You can execute this operation no more than once per second. To enable or disable Easy DKIM signing for a domain, use the SetIdentityDkimEnabled operation. For more information about creating DNS records using DKIM tokens, go to the  Amazon SES Developer Guide. 
+   * Updates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  updateTemplate(params: SES.Types.UpdateTemplateRequest, callback?: (err: AWSError, data: SES.Types.UpdateTemplateResponse) => void): Request<SES.Types.UpdateTemplateResponse, AWSError>;
+  /**
+   * Updates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  updateTemplate(callback?: (err: AWSError, data: SES.Types.UpdateTemplateResponse) => void): Request<SES.Types.UpdateTemplateResponse, AWSError>;
+  /**
+   * Returns a set of DKIM tokens for a domain. DKIM tokens are character strings that represent your domain's identity. Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign email originating from that domain. You can execute this operation no more than once per second. To enable or disable Easy DKIM signing for a domain, use the SetIdentityDkimEnabled operation. For more information about creating DNS records using DKIM tokens, go to the Amazon SES Developer Guide.
    */
   verifyDomainDkim(params: SES.Types.VerifyDomainDkimRequest, callback?: (err: AWSError, data: SES.Types.VerifyDomainDkimResponse) => void): Request<SES.Types.VerifyDomainDkimResponse, AWSError>;
   /**
-   * Returns a set of DKIM tokens for a domain. DKIM tokens are character strings that represent your domain's identity. Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign email originating from that domain. You can execute this operation no more than once per second. To enable or disable Easy DKIM signing for a domain, use the SetIdentityDkimEnabled operation. For more information about creating DNS records using DKIM tokens, go to the  Amazon SES Developer Guide. 
+   * Returns a set of DKIM tokens for a domain. DKIM tokens are character strings that represent your domain's identity. Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign email originating from that domain. You can execute this operation no more than once per second. To enable or disable Easy DKIM signing for a domain, use the SetIdentityDkimEnabled operation. For more information about creating DNS records using DKIM tokens, go to the Amazon SES Developer Guide.
    */
   verifyDomainDkim(callback?: (err: AWSError, data: SES.Types.VerifyDomainDkimResponse) => void): Request<SES.Types.VerifyDomainDkimResponse, AWSError>;
   /**
-   * Adds a domain to the list of identities for your Amazon SES account and attempts to verify it. For more information about verifying domains, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Adds a domain to the list of identities for your Amazon SES account and attempts to verify it. For more information about verifying domains, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.  You can execute this operation no more than once per second.
    */
   verifyDomainIdentity(params: SES.Types.VerifyDomainIdentityRequest, callback?: (err: AWSError, data: SES.Types.VerifyDomainIdentityResponse) => void): Request<SES.Types.VerifyDomainIdentityResponse, AWSError>;
   /**
-   * Adds a domain to the list of identities for your Amazon SES account and attempts to verify it. For more information about verifying domains, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Adds a domain to the list of identities for your Amazon SES account and attempts to verify it. For more information about verifying domains, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.  You can execute this operation no more than once per second.
    */
   verifyDomainIdentity(callback?: (err: AWSError, data: SES.Types.VerifyDomainIdentityResponse) => void): Request<SES.Types.VerifyDomainIdentityResponse, AWSError>;
   /**
@@ -495,6 +559,34 @@ declare namespace SES {
     RecipientDsnFields?: RecipientDsnFields;
   }
   export type BouncedRecipientInfoList = BouncedRecipientInfo[];
+  export interface BulkEmailDestination {
+    Destination: Destination;
+    /**
+     * A list of tags, in the form of name/value pairs, to apply to an email that you send using SendBulkTemplatedEmail. Tags correspond to characteristics of the email that you define, so that you can publish email sending events.
+     */
+    ReplacementTags?: MessageTagList;
+    /**
+     * A list of replacement values to apply to the template. This parameter is a JSON object, typically consisting of key-value pairs in which the keys correspond to replacement tags in the email template.
+     */
+    ReplacementTemplateData?: TemplateData;
+  }
+  export type BulkEmailDestinationList = BulkEmailDestination[];
+  export interface BulkEmailDestinationStatus {
+    /**
+     * The status of a message sent using the SendBulkTemplatedEmail operation. Possible values for this parameter include:    Success: Amazon SES accepted the message, and will attempt to deliver it to the recipients.    MessageRejected: The message was rejected because it contained a virus.    MailFromDomainNotVerified: The sender's email address or domain was not verified.    ConfigurationSetDoesNotExist: The configuration set you specified does not exist.    TemplateDoesNotExist: The template you specified does not exist.    AccountSuspended: Your account has been shut down because of issues related to your email sending practices.    AccountThrottled: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.    AccountDailyQuotaExceeded: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.    InvalidSendingPoolName: The configuration set you specified refers to an IP pool that does not exist.    InvalidParameterValue: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.    TransientFailure: Amazon SES was unable to process your request because of a temporary issue.    Failed: Amazon SES was unable to process your request. See the error message for additional information.  
+     */
+    Status?: BulkEmailStatus;
+    /**
+     * A description of an error that prevented a message being sent using the SendBulkTemplatedEmail operation.
+     */
+    Error?: Error;
+    /**
+     * The unique message identifier returned from the SendBulkTemplatedEmail operation.
+     */
+    MessageId?: MessageId;
+  }
+  export type BulkEmailDestinationStatusList = BulkEmailDestinationStatus[];
+  export type BulkEmailStatus = "Success"|"MessageRejected"|"MailFromDomainNotVerified"|"ConfigurationSetDoesNotExist"|"TemplateDoesNotExist"|"AccountSuspended"|"AccountThrottled"|"AccountDailyQuotaExceeded"|"InvalidSendingPoolName"|"InvalidParameterValue"|"TransientFailure"|"Failed"|string;
   export type Charset = string;
   export type Cidr = string;
   export interface CloneReceiptRuleSetRequest {
@@ -612,6 +704,14 @@ declare namespace SES {
   }
   export interface CreateReceiptRuleSetResponse {
   }
+  export interface CreateTemplateRequest {
+    /**
+     * The content of the email, composed of a subject line, an HTML part, and a text-only part.
+     */
+    Template: Template;
+  }
+  export interface CreateTemplateResponse {
+  }
   export type CustomMailFromStatus = "Pending"|"Success"|"Failed"|"TemporaryFailure"|string;
   export type CustomRedirectDomain = string;
   export type DefaultDimensionValue = string;
@@ -690,6 +790,14 @@ declare namespace SES {
     RuleSetName: ReceiptRuleSetName;
   }
   export interface DeleteReceiptRuleSetResponse {
+  }
+  export interface DeleteTemplateRequest {
+    /**
+     * The name of the template to be deleted.
+     */
+    TemplateName: TemplateName;
+  }
+  export interface DeleteTemplateResponse {
   }
   export interface DeleteVerifiedEmailAddressRequest {
     /**
@@ -787,6 +895,7 @@ declare namespace SES {
   export type DsnAction = "failed"|"delayed"|"delivered"|"relayed"|"expanded"|string;
   export type DsnStatus = string;
   export type Enabled = boolean;
+  export type Error = string;
   export interface EventDestination {
     /**
      * The name of the event destination. The name must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 64 characters.  
@@ -815,7 +924,7 @@ declare namespace SES {
   }
   export type EventDestinationName = string;
   export type EventDestinations = EventDestination[];
-  export type EventType = "send"|"reject"|"bounce"|"complaint"|"delivery"|"open"|"click"|string;
+  export type EventType = "send"|"reject"|"bounce"|"complaint"|"delivery"|"open"|"click"|"renderingFailure"|string;
   export type EventTypes = EventType[];
   export type Explanation = string;
   export interface ExtensionField {
@@ -915,8 +1024,18 @@ declare namespace SES {
      */
     SendDataPoints?: SendDataPointList;
   }
+  export interface GetTemplateRequest {
+    /**
+     * The name of the template you want to retrieve.
+     */
+    TemplateName: TemplateName;
+  }
+  export interface GetTemplateResponse {
+    Template?: Template;
+  }
   export type HeaderName = string;
   export type HeaderValue = string;
+  export type HtmlPart = string;
   export type Identity = string;
   export interface IdentityDkimAttributes {
     /**
@@ -1001,15 +1120,15 @@ declare namespace SES {
   }
   export interface LambdaAction {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the Lambda action is taken. An example of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon SNS topics, see the  Amazon SNS Developer Guide. 
+     * The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the Lambda action is taken. An example of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon SNS topics, see the Amazon SNS Developer Guide.
      */
     TopicArn?: AmazonResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Lambda function. An example of an AWS Lambda function ARN is arn:aws:lambda:us-west-2:account-id:function:MyFunction. For more information about AWS Lambda, see the  AWS Lambda Developer Guide. 
+     * The Amazon Resource Name (ARN) of the AWS Lambda function. An example of an AWS Lambda function ARN is arn:aws:lambda:us-west-2:account-id:function:MyFunction. For more information about AWS Lambda, see the AWS Lambda Developer Guide.
      */
     FunctionArn: AmazonResourceName;
     /**
-     * The invocation type of the AWS Lambda function. An invocation type of RequestResponse means that the execution of the function will immediately result in a response, and a value of Event means that the function will be invoked asynchronously. The default value is Event. For information about AWS Lambda invocation types, see the  AWS Lambda Developer Guide.   There is a 30-second timeout on RequestResponse invocations. You should use Event invocation in most cases. Use RequestResponse only when you want to make a mail flow decision, such as whether to stop the receipt rule or the receipt rule set. 
+     * The invocation type of the AWS Lambda function. An invocation type of RequestResponse means that the execution of the function will immediately result in a response, and a value of Event means that the function will be invoked asynchronously. The default value is Event. For information about AWS Lambda invocation types, see the AWS Lambda Developer Guide.  There is a 30-second timeout on RequestResponse invocations. You should use Event invocation in most cases. Use RequestResponse only when you want to make a mail flow decision, such as whether to stop the receipt rule or the receipt rule set. 
      */
     InvocationType?: InvocationType;
   }
@@ -1094,6 +1213,26 @@ declare namespace SES {
      */
     NextToken?: NextToken;
   }
+  export interface ListTemplatesRequest {
+    /**
+     * The token to use for pagination.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of templates to return. This value must be at least 1 and less than or equal to 10. If you do not specify a value, or if you specify a value less than 1 or greater than 10, the operation will return up to 10 results.
+     */
+    MaxItems?: MaxItems;
+  }
+  export interface ListTemplatesResponse {
+    /**
+     * An array the contains the name of creation time stamp for each template in your Amazon SES account.
+     */
+    TemplatesMetadata?: TemplateMetadataList;
+    /**
+     * The token to use for pagination.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListVerifiedEmailAddressesResponse {
     /**
      * A list of email addresses that have been verified.
@@ -1170,7 +1309,7 @@ declare namespace SES {
   }
   export interface RawMessage {
     /**
-     * The raw data of the message. This data needs to base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an AWS SDK, the SDK takes care of the base 64-encoding for you. In all cases, the client must ensure that the message format complies with Internet email standards regarding email header fields, MIME types, and MIME encoding. The To:, CC:, and BCC: headers in the raw message can contain a group list. If you are using SendRawEmail with sending authorization, you can include X-headers in the raw message to specify the "Source," "From," and "Return-Path" addresses. For more information, see the documentation for SendRawEmail.   Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.  For more information, go to the Amazon SES Developer Guide. 
+     * The raw data of the message. This data needs to base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an AWS SDK, the SDK takes care of the base 64-encoding for you. In all cases, the client must ensure that the message format complies with Internet email standards regarding email header fields, MIME types, and MIME encoding. The To:, CC:, and BCC: headers in the raw message can contain a group list. If you are using SendRawEmail with sending authorization, you can include X-headers in the raw message to specify the "Source," "From," and "Return-Path" addresses. For more information, see the documentation for SendRawEmail.   Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.  For more information, go to the Amazon SES Developer Guide.
      */
     Data: RawMessageData;
   }
@@ -1303,6 +1442,7 @@ declare namespace SES {
   }
   export type RecipientsList = Recipient[];
   export type RemoteMta = string;
+  export type RenderedTemplate = string;
   export interface ReorderReceiptRuleSetRequest {
     /**
      * The name of the receipt rule set to reorder.
@@ -1350,7 +1490,7 @@ declare namespace SES {
   export type SNSActionEncoding = "UTF-8"|"Base64"|string;
   export interface SNSDestination {
     /**
-     * The ARN of the Amazon SNS topic that email sending events will be published to. An example of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon SNS topics, see the  Amazon SNS Developer Guide. 
+     * The ARN of the Amazon SNS topic that email sending events will be published to. An example of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic. For more information about Amazon SNS topics, see the Amazon SNS Developer Guide.
      */
     TopicARN: AmazonResourceName;
   }
@@ -1385,6 +1525,58 @@ declare namespace SES {
      * The message ID of the bounce message.
      */
     MessageId?: MessageId;
+  }
+  export interface SendBulkTemplatedEmailRequest {
+    /**
+     * The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the Amazon SES Developer Guide. If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the SourceArn parameter. For more information about sending authorization, see the Amazon SES Developer Guide.  In all cases, the email address must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. For more information, see RFC 2047. 
+     */
+    Source: Address;
+    /**
+     * This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to send for the email address specified in the Source parameter. For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to send from user@example.com, then you would specify the SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the Source to be user@example.com. For more information about sending authorization, see the Amazon SES Developer Guide.
+     */
+    SourceArn?: AmazonResourceName;
+    /**
+     * The reply-to email address(es) for the message. If the recipient replies to the message, each reply-to address will receive the reply.
+     */
+    ReplyToAddresses?: AddressList;
+    /**
+     * The email address that bounces and complaints will be forwarded to when feedback forwarding is enabled. If the message cannot be delivered to the recipient, then an error message will be returned from the recipient's ISP; this message will then be forwarded to the email address specified by the ReturnPath parameter. The ReturnPath parameter is never overwritten. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. 
+     */
+    ReturnPath?: Address;
+    /**
+     * This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the ReturnPath parameter. For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the ReturnPath to be feedback@example.com. For more information about sending authorization, see the Amazon SES Developer Guide.
+     */
+    ReturnPathArn?: AmazonResourceName;
+    /**
+     * The name of the configuration set to use when you send an email using SendBulkTemplatedEmail.
+     */
+    ConfigurationSetName?: ConfigurationSetName;
+    /**
+     * A list of tags, in the form of name/value pairs, to apply to an email that you send to a destination using SendBulkTemplatedEmail.
+     */
+    DefaultTags?: MessageTagList;
+    /**
+     * The template to use when sending this email.
+     */
+    Template: TemplateName;
+    /**
+     * The ARN of the template to use when sending this email.
+     */
+    TemplateArn?: AmazonResourceName;
+    /**
+     * A list of replacement values to apply to the template when replacement data is not specified in a Destination object. These values act as a default or fallback option when no other data is available. The template data is a JSON object, typically consisting of key-value pairs in which the keys correspond to replacement tags in the email template.
+     */
+    DefaultTemplateData?: TemplateData;
+    /**
+     * One or more Destination objects. All of the recipients in a Destination will receive the same version of the email. You can specify up to 50 Destination objects within a Destinations array.
+     */
+    Destinations: BulkEmailDestinationList;
+  }
+  export interface SendBulkTemplatedEmailResponse {
+    /**
+     * The unique message identifier returned from the SendBulkTemplatedEmail action.
+     */
+    Status: BulkEmailDestinationStatusList;
   }
   export interface SendDataPoint {
     /**
@@ -1431,11 +1623,11 @@ declare namespace SES {
      */
     ReturnPath?: Address;
     /**
-     * This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to send for the email address specified in the Source parameter. For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to send from user@example.com, then you would specify the SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the Source to be user@example.com. For more information about sending authorization, see the Amazon SES Developer Guide. 
+     * This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to send for the email address specified in the Source parameter. For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to send from user@example.com, then you would specify the SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the Source to be user@example.com. For more information about sending authorization, see the Amazon SES Developer Guide.
      */
     SourceArn?: AmazonResourceName;
     /**
-     * This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the ReturnPath parameter. For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the ReturnPath to be feedback@example.com. For more information about sending authorization, see the Amazon SES Developer Guide. 
+     * This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the ReturnPath parameter. For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the ReturnPath to be feedback@example.com. For more information about sending authorization, see the Amazon SES Developer Guide.
      */
     ReturnPathArn?: AmazonResourceName;
     /**
@@ -1490,6 +1682,58 @@ declare namespace SES {
   export interface SendRawEmailResponse {
     /**
      * The unique message identifier returned from the SendRawEmail action. 
+     */
+    MessageId: MessageId;
+  }
+  export interface SendTemplatedEmailRequest {
+    /**
+     * The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the Amazon SES Developer Guide. If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the SourceArn parameter. For more information about sending authorization, see the Amazon SES Developer Guide.  In all cases, the email address must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. For more information, see RFC 2047. 
+     */
+    Source: Address;
+    /**
+     * The destination for this email, composed of To:, CC:, and BCC: fields. A Destination can include up to 50 recipients across these three fields.
+     */
+    Destination: Destination;
+    /**
+     * The reply-to email address(es) for the message. If the recipient replies to the message, each reply-to address will receive the reply.
+     */
+    ReplyToAddresses?: AddressList;
+    /**
+     * The email address that bounces and complaints will be forwarded to when feedback forwarding is enabled. If the message cannot be delivered to the recipient, then an error message will be returned from the recipient's ISP; this message will then be forwarded to the email address specified by the ReturnPath parameter. The ReturnPath parameter is never overwritten. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. 
+     */
+    ReturnPath?: Address;
+    /**
+     * This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to send for the email address specified in the Source parameter. For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to send from user@example.com, then you would specify the SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the Source to be user@example.com. For more information about sending authorization, see the Amazon SES Developer Guide.
+     */
+    SourceArn?: AmazonResourceName;
+    /**
+     * This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the ReturnPath parameter. For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the ReturnPath to be feedback@example.com. For more information about sending authorization, see the Amazon SES Developer Guide.
+     */
+    ReturnPathArn?: AmazonResourceName;
+    /**
+     * A list of tags, in the form of name/value pairs, to apply to an email that you send using SendTemplatedEmail. Tags correspond to characteristics of the email that you define, so that you can publish email sending events.
+     */
+    Tags?: MessageTagList;
+    /**
+     * The name of the configuration set to use when you send an email using SendTemplatedEmail.
+     */
+    ConfigurationSetName?: ConfigurationSetName;
+    /**
+     * The template to use when sending this email.
+     */
+    Template: TemplateName;
+    /**
+     * The ARN of the template to use when sending this email.
+     */
+    TemplateArn?: AmazonResourceName;
+    /**
+     * A list of replacement values to apply to the template. This parameter is a JSON object, typically consisting of key-value pairs in which the keys correspond to replacement tags in the email template.
+     */
+    TemplateData: TemplateData;
+  }
+  export interface SendTemplatedEmailResponse {
+    /**
+     * The unique message identifier returned from the SendTemplatedEmail action. 
      */
     MessageId: MessageId;
   }
@@ -1601,6 +1845,55 @@ declare namespace SES {
     TopicArn?: AmazonResourceName;
   }
   export type StopScope = "RuleSet"|string;
+  export type SubjectPart = string;
+  export interface Template {
+    /**
+     * The name of the template. You will refer to this name when you send email using the SendTemplatedEmail or SendBulkTemplatedEmail operations.
+     */
+    TemplateName: TemplateName;
+    /**
+     * The subject line of the email.
+     */
+    SubjectPart?: SubjectPart;
+    /**
+     * The email body that will be visible to recipients whose email clients do not display HTML.
+     */
+    TextPart?: TextPart;
+    /**
+     * The HTML body of the email.
+     */
+    HtmlPart?: HtmlPart;
+  }
+  export type TemplateData = string;
+  export interface TemplateMetadata {
+    /**
+     * The name of the template.
+     */
+    Name?: TemplateName;
+    /**
+     * The time and date the template was created.
+     */
+    CreatedTimestamp?: Timestamp;
+  }
+  export type TemplateMetadataList = TemplateMetadata[];
+  export type TemplateName = string;
+  export interface TestRenderTemplateRequest {
+    /**
+     * The name of the template that you want to render.
+     */
+    TemplateName: TemplateName;
+    /**
+     * A list of replacement values to apply to the template. This parameter is a JSON object, typically consisting of key-value pairs in which the keys correspond to replacement tags in the email template.
+     */
+    TemplateData: TemplateData;
+  }
+  export interface TestRenderTemplateResponse {
+    /**
+     * The complete MIME message rendered by applying the data in the TemplateData parameter to the template specified in the TemplateName parameter.
+     */
+    RenderedTemplate?: RenderedTemplate;
+  }
+  export type TextPart = string;
   export type Timestamp = Date;
   export type TlsPolicy = "Require"|"Optional"|string;
   export interface TrackingOptions {
@@ -1641,6 +1934,11 @@ declare namespace SES {
     Rule: ReceiptRule;
   }
   export interface UpdateReceiptRuleResponse {
+  }
+  export interface UpdateTemplateRequest {
+    Template: Template;
+  }
+  export interface UpdateTemplateResponse {
   }
   export type VerificationAttributes = {[key: string]: IdentityVerificationAttributes};
   export type VerificationStatus = "Pending"|"Success"|"Failed"|"TemporaryFailure"|"NotStarted"|string;

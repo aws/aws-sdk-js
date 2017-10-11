@@ -1,7 +1,6 @@
 {
   "version":"2.0",
   "metadata":{
-    "uid":"ecr-2015-09-21",
     "apiVersion":"2015-09-21",
     "endpointPrefix":"ecr",
     "jsonVersion":"1.1",
@@ -9,7 +8,8 @@
     "serviceAbbreviation":"Amazon ECR",
     "serviceFullName":"Amazon EC2 Container Registry",
     "signatureVersion":"v4",
-    "targetPrefix":"AmazonEC2ContainerRegistry_V20150921"
+    "targetPrefix":"AmazonEC2ContainerRegistry_V20150921",
+    "uid":"ecr-2015-09-21"
   },
   "operations":{
     "BatchCheckLayerAvailability":{
@@ -75,7 +75,7 @@
         {"shape":"LayerAlreadyExistsException"},
         {"shape":"EmptyUploadException"}
       ],
-      "documentation":"<p>Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
+      "documentation":"<p>Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
     "CreateRepository":{
       "name":"CreateRepository",
@@ -92,6 +92,22 @@
         {"shape":"LimitExceededException"}
       ],
       "documentation":"<p>Creates an image repository.</p>"
+    },
+    "DeleteLifecyclePolicy":{
+      "name":"DeleteLifecyclePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteLifecyclePolicyRequest"},
+      "output":{"shape":"DeleteLifecyclePolicyResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"RepositoryNotFoundException"},
+        {"shape":"LifecyclePolicyNotFoundException"}
+      ],
+      "documentation":"<p>Deletes the specified lifecycle policy.</p>"
     },
     "DeleteRepository":{
       "name":"DeleteRepository",
@@ -187,6 +203,38 @@
       ],
       "documentation":"<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
+    "GetLifecyclePolicy":{
+      "name":"GetLifecyclePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetLifecyclePolicyRequest"},
+      "output":{"shape":"GetLifecyclePolicyResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"RepositoryNotFoundException"},
+        {"shape":"LifecyclePolicyNotFoundException"}
+      ],
+      "documentation":"<p>Retrieves the specified lifecycle policy.</p>"
+    },
+    "GetLifecyclePolicyPreview":{
+      "name":"GetLifecyclePolicyPreview",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetLifecyclePolicyPreviewRequest"},
+      "output":{"shape":"GetLifecyclePolicyPreviewResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"RepositoryNotFoundException"},
+        {"shape":"LifecyclePolicyPreviewNotFoundException"}
+      ],
+      "documentation":"<p>Retrieves the results of the specified lifecycle policy preview request.</p>"
+    },
     "GetRepositoryPolicy":{
       "name":"GetRepositoryPolicy",
       "http":{
@@ -251,6 +299,21 @@
       ],
       "documentation":"<p>Creates or updates the image manifest and tags associated with an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>"
     },
+    "PutLifecyclePolicy":{
+      "name":"PutLifecyclePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutLifecyclePolicyRequest"},
+      "output":{"shape":"PutLifecyclePolicyResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"RepositoryNotFoundException"}
+      ],
+      "documentation":"<p>Creates or updates a lifecycle policy.</p>"
+    },
     "SetRepositoryPolicy":{
       "name":"SetRepositoryPolicy",
       "http":{
@@ -265,6 +328,23 @@
         {"shape":"RepositoryNotFoundException"}
       ],
       "documentation":"<p>Applies a repository policy on a specified repository to control access permissions.</p>"
+    },
+    "StartLifecyclePolicyPreview":{
+      "name":"StartLifecyclePolicyPreview",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartLifecyclePolicyPreviewRequest"},
+      "output":{"shape":"StartLifecyclePolicyPreviewResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"RepositoryNotFoundException"},
+        {"shape":"LifecyclePolicyNotFoundException"},
+        {"shape":"LifecyclePolicyPreviewInProgressException"}
+      ],
+      "documentation":"<p>Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.</p>"
     },
     "UploadLayerPart":{
       "name":"UploadLayerPart",
@@ -498,6 +578,41 @@
       }
     },
     "CreationTimestamp":{"type":"timestamp"},
+    "DeleteLifecyclePolicyRequest":{
+      "type":"structure",
+      "required":["repositoryName"],
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository that is associated with the repository policy to&#8232; delete.</p>"
+        }
+      }
+    },
+    "DeleteLifecyclePolicyResponse":{
+      "type":"structure",
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The registry ID associated with the request.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The repository name associated with the request.</p>"
+        },
+        "lifecyclePolicyText":{
+          "shape":"LifecyclePolicyText",
+          "documentation":"<p>The JSON repository policy text.</p>"
+        },
+        "lastEvaluatedAt":{
+          "shape":"EvaluationTimestamp",
+          "documentation":"<p>The time stamp of the last time that the lifecycle policy was run.</p>"
+        }
+      }
+    },
     "DeleteRepositoryPolicyRequest":{
       "type":"structure",
       "required":["repositoryName"],
@@ -543,7 +658,7 @@
         },
         "force":{
           "shape":"ForceFlag",
-          "documentation":"<p>Force the deletion of the repository if it contains images.</p>"
+          "documentation":"<p> If a repository contains images, forces the deletion.</p>"
         }
       }
     },
@@ -654,6 +769,7 @@
       "documentation":"<p>The specified layer upload does not contain any layer parts.</p>",
       "exception":true
     },
+    "EvaluationTimestamp":{"type":"timestamp"},
     "ExceptionMessage":{"type":"string"},
     "ExpirationTimestamp":{"type":"timestamp"},
     "ForceFlag":{"type":"boolean"},
@@ -715,6 +831,104 @@
         }
       }
     },
+    "GetLifecyclePolicyPreviewRequest":{
+      "type":"structure",
+      "required":["repositoryName"],
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository with the policy to retrieve.</p>"
+        },
+        "imageIds":{
+          "shape":"ImageIdentifierList",
+          "documentation":"<p>The list of imageIDs to be included.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated&#8232; <code>GetLifecyclePolicyPreviewRequest</code> request where <code>maxResults</code> was used and the&#8232; results exceeded the value of that parameter. Pagination continues from the end of the&#8232; previous results that returned the <code>nextToken</code> value. This value is&#8232; <code>null</code> when there are no more results to return.</p>"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of repository results returned by <code>GetLifecyclePolicyPreviewRequest</code> in&#8232; paginated output. When this parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns&#8232; <code>maxResults</code> results in a single page along with a <code>nextToken</code>&#8232; response element. The remaining results of the initial request can be seen by sending&#8232; another <code>GetLifecyclePolicyPreviewRequest</code> request with the returned <code>nextToken</code>&#8232; value. This value can be between 1 and 100. If this&#8232; parameter is not used, then <code>GetLifecyclePolicyPreviewRequest</code> returns up to&#8232; 100 results and a <code>nextToken</code> value, if&#8232; applicable.</p>"
+        },
+        "filter":{
+          "shape":"LifecyclePolicyPreviewFilter",
+          "documentation":"<p>An optional parameter that filters results based on image tag status and all tags, if tagged.</p>"
+        }
+      }
+    },
+    "GetLifecyclePolicyPreviewResponse":{
+      "type":"structure",
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The registry ID associated with the request.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The repository name associated with the request.</p>"
+        },
+        "lifecyclePolicyText":{
+          "shape":"LifecyclePolicyText",
+          "documentation":"<p>The JSON repository policy text.</p>"
+        },
+        "status":{
+          "shape":"LifecyclePolicyPreviewStatus",
+          "documentation":"<p>The status of the lifecycle policy preview request.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The <code>nextToken</code> value to include in a future <code>GetLifecyclePolicyPreview</code> request. When the results of a <code>GetLifecyclePolicyPreview</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        },
+        "previewResults":{
+          "shape":"LifecyclePolicyPreviewResultList",
+          "documentation":"<p>The results of the lifecycle policy preview request.</p>"
+        },
+        "summary":{
+          "shape":"LifecyclePolicyPreviewSummary",
+          "documentation":"<p>The list of images that is returned as a result of the action.</p>"
+        }
+      }
+    },
+    "GetLifecyclePolicyRequest":{
+      "type":"structure",
+      "required":["repositoryName"],
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository with the policy to retrieve.</p>"
+        }
+      }
+    },
+    "GetLifecyclePolicyResponse":{
+      "type":"structure",
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The registry ID associated with the request.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The repository name associated with the request.</p>"
+        },
+        "lifecyclePolicyText":{
+          "shape":"LifecyclePolicyText",
+          "documentation":"<p>The JSON repository policy text.</p>"
+        },
+        "lastEvaluatedAt":{
+          "shape":"EvaluationTimestamp",
+          "documentation":"<p>The time stamp of the last time that the lifecycle policy was run.</p>"
+        }
+      }
+    },
     "GetRepositoryPolicyRequest":{
       "type":"structure",
       "required":["repositoryName"],
@@ -725,7 +939,7 @@
         },
         "repositoryName":{
           "shape":"RepositoryName",
-          "documentation":"<p>The name of the repository whose policy you want to retrieve.</p>"
+          "documentation":"<p>The name of the repository with the policy to retrieve.</p>"
         }
       }
     },
@@ -768,6 +982,10 @@
       },
       "documentation":"<p>An object representing an Amazon ECR image.</p>"
     },
+    "ImageActionType":{
+      "type":"string",
+      "enum":["EXPIRE"]
+    },
     "ImageAlreadyExistsException":{
       "type":"structure",
       "members":{
@@ -776,8 +994,12 @@
           "documentation":"<p>The error message associated with the exception.</p>"
         }
       },
-      "documentation":"<p>The specified image has already been pushed, and there are no changes to the manifest or image tag since the last push.</p>",
+      "documentation":"<p>The specified image has already been pushed, and there were no changes to the manifest or image tag after the last push.</p>",
       "exception":true
+    },
+    "ImageCount":{
+      "type":"integer",
+      "min":0
     },
     "ImageDetail":{
       "type":"structure",
@@ -892,11 +1114,11 @@
       "members":{
         "registryId":{
           "shape":"RegistryId",
-          "documentation":"<p>The AWS account ID associated with the registry that you intend to upload layers to. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation":"<p>The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName":{
           "shape":"RepositoryName",
-          "documentation":"<p>The name of the repository that you intend to upload layers to.</p>"
+          "documentation":"<p>The name of the repository to which you intend to upload layers.</p>"
         }
       }
     },
@@ -1081,6 +1303,108 @@
       "documentation":"<p>The specified layers could not be found, or the specified layer is not valid for this repository.</p>",
       "exception":true
     },
+    "LifecyclePolicyNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "documentation":"<p>The lifecycle policy could not be found, and no policy is set to the repository.</p>",
+      "exception":true
+    },
+    "LifecyclePolicyPreviewFilter":{
+      "type":"structure",
+      "members":{
+        "tagStatus":{
+          "shape":"TagStatus",
+          "documentation":"<p>The tag status of the image.</p>"
+        }
+      },
+      "documentation":"<p>The filter for the lifecycle policy preview.</p>"
+    },
+    "LifecyclePolicyPreviewInProgressException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "documentation":"<p>The previous lifecycle policy preview request has not completed. Please try again later.</p>",
+      "exception":true
+    },
+    "LifecyclePolicyPreviewNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "documentation":"<p>There is no dry run for this repository.</p>",
+      "exception":true
+    },
+    "LifecyclePolicyPreviewResult":{
+      "type":"structure",
+      "members":{
+        "imageTags":{
+          "shape":"ImageTagList",
+          "documentation":"<p>The list of tags associated with this image.</p>"
+        },
+        "imageDigest":{
+          "shape":"ImageDigest",
+          "documentation":"<p>The <code>sha256</code> digest of the image manifest.</p>"
+        },
+        "imagePushedAt":{
+          "shape":"PushTimestamp",
+          "documentation":"<p>The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository.</p>"
+        },
+        "action":{
+          "shape":"LifecyclePolicyRuleAction",
+          "documentation":"<p>The type of action to be taken.</p>"
+        },
+        "appliedRulePriority":{
+          "shape":"LifecyclePolicyRulePriority",
+          "documentation":"<p>The priority of the applied rule.</p>"
+        }
+      },
+      "documentation":"<p>The result of the lifecycle policy preview.</p>"
+    },
+    "LifecyclePolicyPreviewResultList":{
+      "type":"list",
+      "member":{"shape":"LifecyclePolicyPreviewResult"}
+    },
+    "LifecyclePolicyPreviewStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "COMPLETE",
+        "EXPIRED",
+        "FAILED"
+      ]
+    },
+    "LifecyclePolicyPreviewSummary":{
+      "type":"structure",
+      "members":{
+        "expiringImageTotalCount":{
+          "shape":"ImageCount",
+          "documentation":"<p>The number of expiring images.</p>"
+        }
+      },
+      "documentation":"<p>The summary of the lifecycle policy preview request.</p>"
+    },
+    "LifecyclePolicyRuleAction":{
+      "type":"structure",
+      "members":{
+        "type":{
+          "shape":"ImageActionType",
+          "documentation":"<p>The type of action to be taken.</p>"
+        }
+      },
+      "documentation":"<p>The type of action to be taken.</p>"
+    },
+    "LifecyclePolicyRulePriority":{
+      "type":"integer",
+      "min":1
+    },
+    "LifecyclePolicyText":{
+      "type":"string",
+      "max":10240,
+      "min":100
+    },
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -1108,11 +1432,11 @@
       "members":{
         "registryId":{
           "shape":"RegistryId",
-          "documentation":"<p>The AWS account ID associated with the registry that contains the repository to list images in. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation":"<p>The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName":{
           "shape":"RepositoryName",
-          "documentation":"<p>The repository whose image IDs are to be listed.</p>"
+          "documentation":"<p>The repository with image IDs to be listed.</p>"
         },
         "nextToken":{
           "shape":"NextToken",
@@ -1146,10 +1470,7 @@
       "max":100,
       "min":1
     },
-    "MediaType":{
-      "type":"string",
-      "pattern":"\\w{1,127}\\/[-+.\\w]{1,127}"
-    },
+    "MediaType":{"type":"string"},
     "MediaTypeList":{
       "type":"list",
       "member":{"shape":"MediaType"},
@@ -1197,6 +1518,44 @@
         }
       }
     },
+    "PutLifecyclePolicyRequest":{
+      "type":"structure",
+      "required":[
+        "repositoryName",
+        "lifecyclePolicyText"
+      ],
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The AWS account ID associated with the registry that contains the repository. If you do&#8232; not specify a registry, the default registry is assumed.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository to receive the policy.</p>"
+        },
+        "lifecyclePolicyText":{
+          "shape":"LifecyclePolicyText",
+          "documentation":"<p>The JSON repository policy text to apply to the repository.</p>"
+        }
+      }
+    },
+    "PutLifecyclePolicyResponse":{
+      "type":"structure",
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The registry ID associated with the request.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The repository name associated with the request.</p>"
+        },
+        "lifecyclePolicyText":{
+          "shape":"LifecyclePolicyText",
+          "documentation":"<p>The JSON repository policy text.</p>"
+        }
+      }
+    },
     "RegistryId":{
       "type":"string",
       "pattern":"[0-9]{12}"
@@ -1206,7 +1565,7 @@
       "members":{
         "repositoryArn":{
           "shape":"Arn",
-          "documentation":"<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, the AWS account ID of the repository owner, the repository namespace, and then the repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.</p>"
         },
         "registryId":{
           "shape":"RegistryId",
@@ -1218,11 +1577,11 @@
         },
         "repositoryUri":{
           "shape":"Url",
-          "documentation":"<p>The URI for the repository. You can use this URI for Docker <code>push</code> and <code>pull</code> operations.</p>"
+          "documentation":"<p>The URI for the repository. You can use this URI for Docker <code>push</code> or <code>pull</code> operations.</p>"
         },
         "createdAt":{
           "shape":"CreationTimestamp",
-          "documentation":"<p>The date and time, in JavaScript date/time format, when the repository was created.</p>"
+          "documentation":"<p>The date and time, in JavaScript date format, when the repository was created.</p>"
         }
       },
       "documentation":"<p>An object representing a repository.</p>"
@@ -1346,6 +1705,45 @@
         }
       }
     },
+    "StartLifecyclePolicyPreviewRequest":{
+      "type":"structure",
+      "required":["repositoryName"],
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The name of the repository to be evaluated.</p>"
+        },
+        "lifecyclePolicyText":{
+          "shape":"LifecyclePolicyText",
+          "documentation":"<p>The policy to be evaluated against. If you do not specify a policy, the current policy for the repository is used.</p>"
+        }
+      }
+    },
+    "StartLifecyclePolicyPreviewResponse":{
+      "type":"structure",
+      "members":{
+        "registryId":{
+          "shape":"RegistryId",
+          "documentation":"<p>The registry ID associated with the request.</p>"
+        },
+        "repositoryName":{
+          "shape":"RepositoryName",
+          "documentation":"<p>The repository name associated with the request.</p>"
+        },
+        "lifecyclePolicyText":{
+          "shape":"LifecyclePolicyText",
+          "documentation":"<p>The JSON repository policy text.</p>"
+        },
+        "status":{
+          "shape":"LifecyclePolicyPreviewStatus",
+          "documentation":"<p>The status of the lifecycle policy preview request.</p>"
+        }
+      }
+    },
     "TagStatus":{
       "type":"string",
       "enum":[
@@ -1369,11 +1767,11 @@
       "members":{
         "registryId":{
           "shape":"RegistryId",
-          "documentation":"<p>The AWS account ID associated with the registry that you are uploading layer parts to. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation":"<p>The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName":{
           "shape":"RepositoryName",
-          "documentation":"<p>The name of the repository that you are uploading layer parts to.</p>"
+          "documentation":"<p>The name of the repository to which you are uploading layer parts.</p>"
         },
         "uploadId":{
           "shape":"UploadId",
@@ -1427,5 +1825,5 @@
     },
     "Url":{"type":"string"}
   },
-  "documentation":"<p>Amazon EC2 Container Registry (Amazon ECR) is a managed AWS Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using AWS IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.</p>"
+  "documentation":"<p>Amazon EC2 Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.</p>"
 }
