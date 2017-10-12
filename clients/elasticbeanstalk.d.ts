@@ -236,6 +236,14 @@ declare class ElasticBeanstalk extends Service {
    */
   listPlatformVersions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
   /**
+   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging Elastic Beanstalk environments.
+   */
+  listTagsForResource(params: ElasticBeanstalk.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ResourceTagsDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ResourceTagsDescriptionMessage, AWSError>;
+  /**
+   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging Elastic Beanstalk environments.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ResourceTagsDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ResourceTagsDescriptionMessage, AWSError>;
+  /**
    * Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.
    */
   rebuildEnvironment(params: ElasticBeanstalk.Types.RebuildEnvironmentMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -323,6 +331,14 @@ declare class ElasticBeanstalk extends Service {
    * Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.  Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an InvalidParameterCombination error.   When updating the configuration settings to a new template or individual settings, a draft configuration is created and DescribeConfigurationSettings for this environment returns two setting descriptions with different DeploymentStatus values. 
    */
   updateEnvironment(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
+  /**
+   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments.
+   */
+  updateTagsForResource(params: ElasticBeanstalk.Types.UpdateTagsForResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments.
+   */
+  updateTagsForResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid. This action returns a list of messages indicating any errors or warnings associated with the selection of option values.
    */
@@ -1716,6 +1732,12 @@ declare namespace ElasticBeanstalk {
      */
     NextToken?: Token;
   }
+  export interface ListTagsForResourceMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the resouce for which a tag list is requested. Must be the ARN of an Elastic Beanstalk environment.
+     */
+    ResourceArn: ResourceArn;
+  }
   export interface Listener {
     /**
      * The protocol that is used by the Listener.
@@ -2072,8 +2094,19 @@ declare namespace ElasticBeanstalk {
     InfoType: EnvironmentInfoType;
   }
   export type RequestId = string;
+  export type ResourceArn = string;
   export type ResourceId = string;
   export type ResourceName = string;
+  export interface ResourceTagsDescriptionMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the resouce for which a tag list was requested.
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     * A list of tag key-value pairs.
+     */
+    ResourceTags?: TagList;
+  }
   export interface RestartAppServerMessage {
     /**
      * The ID of the environment to restart the server for.  Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter error. 
@@ -2260,6 +2293,8 @@ declare namespace ElasticBeanstalk {
     Value?: TagValue;
   }
   export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
   export type TagValue = string;
   export type Tags = Tag[];
   export type TerminateEnvForce = boolean;
@@ -2399,6 +2434,20 @@ declare namespace ElasticBeanstalk {
      * A list of custom user-defined configuration options to remove from the configuration set for this environment.
      */
     OptionsToRemove?: OptionsSpecifierList;
+  }
+  export interface UpdateTagsForResourceMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the resouce to be updated. Must be the ARN of an Elastic Beanstalk environment.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * A list of tags to add or update. If a key of an existing tag is added, the tag's value is updated.
+     */
+    TagsToAdd?: TagList;
+    /**
+     * A list of tag keys to remove. If a tag key doesn't exist, it is silently ignored.
+     */
+    TagsToRemove?: TagKeyList;
   }
   export type UserDefinedOption = boolean;
   export interface ValidateConfigurationSettingsMessage {

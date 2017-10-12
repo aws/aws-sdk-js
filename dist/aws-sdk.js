@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.132.0
+// AWS SDK for JavaScript v2.133.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -13344,6 +13344,27 @@ module.exports={
         }
       }
     },
+    "DeleteBranch": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName",
+          "branchName"
+        ],
+        "members": {
+          "repositoryName": {},
+          "branchName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "deletedBranch": {
+            "shape": "Sn"
+          }
+        }
+      }
+    },
     "DeleteRepository": {
       "input": {
         "type": "structure",
@@ -13397,11 +13418,7 @@ module.exports={
         "type": "structure",
         "members": {
           "branch": {
-            "type": "structure",
-            "members": {
-              "branchName": {},
-              "commitId": {}
-            }
+            "shape": "Sn"
           }
         }
       }
@@ -13427,6 +13444,7 @@ module.exports={
           "commit": {
             "type": "structure",
             "members": {
+              "commitId": {},
               "treeId": {},
               "parents": {
                 "type": "list",
@@ -13434,10 +13452,10 @@ module.exports={
               },
               "message": {},
               "author": {
-                "shape": "Sz"
+                "shape": "S11"
               },
               "committer": {
-                "shape": "Sz"
+                "shape": "S11"
               },
               "additionalData": {}
             }
@@ -13473,10 +13491,10 @@ module.exports={
               "type": "structure",
               "members": {
                 "beforeBlob": {
-                  "shape": "S1c"
+                  "shape": "S1e"
                 },
                 "afterBlob": {
-                  "shape": "S1c"
+                  "shape": "S1e"
                 },
                 "changeType": {}
               }
@@ -13520,7 +13538,7 @@ module.exports={
         "members": {
           "configurationId": {},
           "triggers": {
-            "shape": "S1k"
+            "shape": "S1m"
           }
         }
       }
@@ -13540,7 +13558,7 @@ module.exports={
         "type": "structure",
         "members": {
           "branches": {
-            "shape": "S1o"
+            "shape": "S1q"
           },
           "nextToken": {}
         }
@@ -13582,7 +13600,7 @@ module.exports={
         "members": {
           "repositoryName": {},
           "triggers": {
-            "shape": "S1k"
+            "shape": "S1m"
           }
         }
       },
@@ -13603,7 +13621,7 @@ module.exports={
         "members": {
           "repositoryName": {},
           "triggers": {
-            "shape": "S1k"
+            "shape": "S1m"
           }
         }
       },
@@ -13686,7 +13704,14 @@ module.exports={
         "Arn": {}
       }
     },
-    "Sz": {
+    "Sn": {
+      "type": "structure",
+      "members": {
+        "branchName": {},
+        "commitId": {}
+      }
+    },
+    "S11": {
       "type": "structure",
       "members": {
         "name": {},
@@ -13694,7 +13719,7 @@ module.exports={
         "date": {}
       }
     },
-    "S1c": {
+    "S1e": {
       "type": "structure",
       "members": {
         "blobId": {},
@@ -13702,7 +13727,7 @@ module.exports={
         "mode": {}
       }
     },
-    "S1k": {
+    "S1m": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -13716,7 +13741,7 @@ module.exports={
           "destinationArn": {},
           "customData": {},
           "branches": {
-            "shape": "S1o"
+            "shape": "S1q"
           },
           "events": {
             "type": "list",
@@ -13725,7 +13750,7 @@ module.exports={
         }
       }
     },
-    "S1o": {
+    "S1q": {
       "type": "list",
       "member": {}
     }
@@ -43507,11 +43532,7 @@ module.exports={
           "Tags": {
             "type": "list",
             "member": {
-              "type": "structure",
-              "members": {
-                "Key": {},
-                "Value": {}
-              }
+              "shape": "S29"
             }
           },
           "VersionLabel": {},
@@ -44305,6 +44326,27 @@ module.exports={
         }
       }
     },
+    "ListTagsForResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "ListTagsForResourceResult",
+        "type": "structure",
+        "members": {
+          "ResourceArn": {},
+          "ResourceTags": {
+            "shape": "S6q"
+          }
+        }
+      }
+    },
     "RebuildEnvironment": {
       "input": {
         "type": "structure",
@@ -44509,6 +44551,24 @@ module.exports={
       "output": {
         "shape": "Sk",
         "resultWrapper": "UpdateEnvironmentResult"
+      }
+    },
+    "UpdateTagsForResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "TagsToAdd": {
+            "shape": "S6q"
+          },
+          "TagsToRemove": {
+            "type": "list",
+            "member": {}
+          }
+        }
       }
     },
     "ValidateConfigurationSettings": {
@@ -44796,6 +44856,13 @@ module.exports={
         }
       }
     },
+    "S29": {
+      "type": "structure",
+      "members": {
+        "Key": {},
+        "Value": {}
+      }
+    },
     "S2c": {
       "type": "list",
       "member": {
@@ -44891,6 +44958,12 @@ module.exports={
             }
           }
         }
+      }
+    },
+    "S6q": {
+      "type": "list",
+      "member": {
+        "shape": "S29"
       }
     }
   }
@@ -80514,6 +80587,60 @@ module.exports={
         }
       }
     },
+    "DescribeValidDBInstanceModifications": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DBInstanceIdentifier"
+        ],
+        "members": {
+          "DBInstanceIdentifier": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "DescribeValidDBInstanceModificationsResult",
+        "type": "structure",
+        "members": {
+          "ValidDBInstanceModificationsMessage": {
+            "type": "structure",
+            "members": {
+              "Storage": {
+                "type": "list",
+                "member": {
+                  "locationName": "ValidStorageOptions",
+                  "type": "structure",
+                  "members": {
+                    "StorageType": {},
+                    "StorageSize": {
+                      "shape": "S6r"
+                    },
+                    "ProvisionedIops": {
+                      "shape": "S6r"
+                    },
+                    "IopsToStorageRatio": {
+                      "type": "list",
+                      "member": {
+                        "locationName": "DoubleRange",
+                        "type": "structure",
+                        "members": {
+                          "From": {
+                            "type": "double"
+                          },
+                          "To": {
+                            "type": "double"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "wrapper": true
+          }
+        }
+      }
+    },
     "DownloadDBLogFilePortion": {
       "input": {
         "type": "structure",
@@ -80639,7 +80766,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S6v",
+        "shape": "S74",
         "resultWrapper": "ModifyDBClusterParameterGroupResult"
       }
     },
@@ -80772,7 +80899,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S71",
+        "shape": "S7a",
         "resultWrapper": "ModifyDBParameterGroupResult"
       }
     },
@@ -81098,7 +81225,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S6v",
+        "shape": "S74",
         "resultWrapper": "ResetDBClusterParameterGroupResult"
       }
     },
@@ -81119,7 +81246,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S71",
+        "shape": "S7a",
         "resultWrapper": "ResetDBParameterGroupResult"
       }
     },
@@ -82273,13 +82400,31 @@ module.exports={
         "wrapper": true
       }
     },
-    "S6v": {
+    "S6r": {
+      "type": "list",
+      "member": {
+        "locationName": "Range",
+        "type": "structure",
+        "members": {
+          "From": {
+            "type": "integer"
+          },
+          "To": {
+            "type": "integer"
+          },
+          "Step": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "S74": {
       "type": "structure",
       "members": {
         "DBClusterParameterGroupName": {}
       }
     },
-    "S71": {
+    "S7a": {
       "type": "structure",
       "members": {
         "DBParameterGroupName": {}
@@ -108331,7 +108476,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.132.0',
+  VERSION: '2.133.0',
 
 
   Signers: {},

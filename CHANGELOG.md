@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.132.0-->
+<!--LATEST=2.133.0-->
 <!--ENTRYINSERT-->
+
+## 2.133.0
+* feature: CodeCommit: This release includes the DeleteBranch API and a change to the contents of a Commit object.
+* feature: DMS: This change includes addition of new optional parameter to an existing API
+* feature: ElasticBeanstalk: Added the ability to add, delete or update Tags
+* feature: Polly: Amazon Polly exposes two new voices: "Matthew" (US English) and "Takumi" (Japanese)
+* feature: RDS: You can now call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You can use this information when you call ModifyDBInstance.
 
 ## 2.132.0
 * feature: ECR: Adds support for new API set used to manage Amazon ECR repository lifecycle policies. Amazon ECR lifecycle policies enable you to specify the lifecycle management of images in a repository. The configuration is a set of one or more rules, where each rule defines an action for Amazon ECR to apply to an image. This allows the automation of cleaning up unused images, for example expiring images based on age or status. A lifecycle policy preview API is provided as well, which allows you to see the impact of a lifecycle policy on an image repository before you execute it

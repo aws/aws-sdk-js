@@ -455,6 +455,24 @@
       ],
       "documentation":"<p>Lists the available platforms.</p>"
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceMessage"},
+      "output":{
+        "shape":"ResourceTagsDescriptionMessage",
+        "resultWrapper":"ListTagsForResourceResult"
+      },
+      "errors":[
+        {"shape":"InsufficientPrivilegesException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceTypeNotSupportedException"}
+      ],
+      "documentation":"<p>Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs.</p> <p>Currently, Elastic Beanstalk only supports tagging Elastic Beanstalk environments.</p>"
+    },
     "RebuildEnvironment":{
       "name":"RebuildEnvironment",
       "http":{
@@ -598,6 +616,22 @@
         {"shape":"TooManyBucketsException"}
       ],
       "documentation":"<p>Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.</p> <p> Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p> <p> When updating the configuration settings to a new template or individual settings, a draft configuration is created and <a>DescribeConfigurationSettings</a> for this environment returns two setting descriptions with different <code>DeploymentStatus</code> values. </p>"
+    },
+    "UpdateTagsForResource":{
+      "name":"UpdateTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateTagsForResourceMessage"},
+      "errors":[
+        {"shape":"InsufficientPrivilegesException"},
+        {"shape":"OperationInProgressException"},
+        {"shape":"TooManyTagsException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceTypeNotSupportedException"}
+      ],
+      "documentation":"<p>Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: <code>TagsToAdd</code> for tags to add or update, and <code>TagsToRemove</code>.</p> <p>Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments.</p>"
     },
     "ValidateConfigurationSettings":{
       "name":"ValidateConfigurationSettings",
@@ -2620,6 +2654,16 @@
         }
       }
     },
+    "ListTagsForResourceMessage":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.</p> <p>Must be the ARN of an Elastic Beanstalk environment.</p>"
+        }
+      }
+    },
     "Listener":{
       "type":"structure",
       "members":{
@@ -3146,11 +3190,49 @@
       "documentation":"<p>Request to retrieve logs from an environment and store them in your Elastic Beanstalk storage bucket.</p>"
     },
     "RequestId":{"type":"string"},
+    "ResourceArn":{"type":"string"},
     "ResourceId":{"type":"string"},
     "ResourceName":{
       "type":"string",
       "max":256,
       "min":1
+    },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>A resource doesn't exist for the specified Amazon Resource Name (ARN).</p>",
+      "error":{
+        "code":"ResourceNotFoundException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ResourceTagsDescriptionMessage":{
+      "type":"structure",
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resouce for which a tag list was requested.</p>"
+        },
+        "ResourceTags":{
+          "shape":"TagList",
+          "documentation":"<p>A list of tag key-value pairs.</p>"
+        }
+      }
+    },
+    "ResourceTypeNotSupportedException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The type of the specified Amazon Resource Name (ARN) isn't supported for this operation.</p>",
+      "error":{
+        "code":"ResourceTypeNotSupportedException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
     },
     "RestartAppServerMessage":{
       "type":"structure",
@@ -3464,6 +3546,14 @@
       "max":128,
       "min":1
     },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
     "TagValue":{
       "type":"string",
       "max":256,
@@ -3563,6 +3653,18 @@
       "documentation":"<p>You have exceeded the maximum number of allowed platforms associated with the account.</p>",
       "error":{
         "code":"TooManyPlatformsException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "TooManyTagsException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The number of tags in the resource would exceed the number of tags that each resource can have.</p> <p>To calculate this, the operation considers both the number of tags the resource already has and the tags this operation would add if it succeeded.</p>",
+      "error":{
+        "code":"TooManyTagsException",
         "httpStatusCode":400,
         "senderFault":true
       },
@@ -3720,6 +3822,24 @@
         }
       },
       "documentation":"<p>Request to update an environment.</p>"
+    },
+    "UpdateTagsForResourceMessage":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resouce to be updated.</p> <p>Must be the ARN of an Elastic Beanstalk environment.</p>"
+        },
+        "TagsToAdd":{
+          "shape":"TagList",
+          "documentation":"<p>A list of tags to add or update.</p> <p>If a key of an existing tag is added, the tag's value is updated.</p>"
+        },
+        "TagsToRemove":{
+          "shape":"TagKeyList",
+          "documentation":"<p>A list of tag keys to remove.</p> <p>If a tag key doesn't exist, it is silently ignored.</p>"
+        }
+      }
     },
     "UserDefinedOption":{"type":"boolean"},
     "ValidateConfigurationSettingsMessage":{

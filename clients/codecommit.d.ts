@@ -36,11 +36,19 @@ declare class CodeCommit extends Service {
    */
   createRepository(callback?: (err: AWSError, data: CodeCommit.Types.CreateRepositoryOutput) => void): Request<CodeCommit.Types.CreateRepositoryOutput, AWSError>;
   /**
-   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned. Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
+   * Deletes a branch from a repository, unless that branch is the default branch for the repository. 
+   */
+  deleteBranch(params: CodeCommit.Types.DeleteBranchInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteBranchOutput) => void): Request<CodeCommit.Types.DeleteBranchOutput, AWSError>;
+  /**
+   * Deletes a branch from a repository, unless that branch is the default branch for the repository. 
+   */
+  deleteBranch(callback?: (err: AWSError, data: CodeCommit.Types.DeleteBranchOutput) => void): Request<CodeCommit.Types.DeleteBranchOutput, AWSError>;
+  /**
+   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
    */
   deleteRepository(params: CodeCommit.Types.DeleteRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
   /**
-   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned. Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
+   * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
    */
   deleteRepository(callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
   /**
@@ -199,6 +207,10 @@ declare namespace CodeCommit {
   export type CloneUrlSsh = string;
   export interface Commit {
     /**
+     * The full SHA of the specified commit. 
+     */
+    commitId?: ObjectId;
+    /**
      * Tree information for the specified commit.
      */
     treeId?: ObjectId;
@@ -257,6 +269,22 @@ declare namespace CodeCommit {
   }
   export type CreationDate = Date;
   export type _Date = string;
+  export interface DeleteBranchInput {
+    /**
+     * The name of the repository that contains the branch to be deleted.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The name of the branch to delete.
+     */
+    branchName: BranchName;
+  }
+  export interface DeleteBranchOutput {
+    /**
+     * Information about the branch deleted by the operation, including the branch name and the commit ID that was the tip of the branch.
+     */
+    deletedBranch?: BranchInfo;
+  }
   export interface DeleteRepositoryInput {
     /**
      * The name of the repository to delete.
@@ -323,7 +351,7 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * The commit ID.
+     * The commit ID. Commit IDs are the full SHA of the commit.
      */
     commitId: ObjectId;
   }
@@ -544,7 +572,7 @@ declare namespace CodeCommit {
      */
     customData?: RepositoryTriggerCustomData;
     /**
-     * The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches.
+     * The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.  While no content is required in the array, you must include the array itself. 
      */
     branches?: BranchNameList;
     /**

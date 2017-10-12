@@ -220,11 +220,11 @@ declare class DMS extends Service {
    */
   describeSchemas(callback?: (err: AWSError, data: DMS.Types.DescribeSchemasResponse) => void): Request<DMS.Types.DescribeSchemasResponse, AWSError>;
   /**
-   * Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted.
+   * Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted. Note that the "last updated" column the DMS console only indicates the time that AWS DMS last updated the table statistics record for a table. It does not indicate the time of the last update to the table.
    */
   describeTableStatistics(params: DMS.Types.DescribeTableStatisticsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeTableStatisticsResponse) => void): Request<DMS.Types.DescribeTableStatisticsResponse, AWSError>;
   /**
-   * Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted.
+   * Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted. Note that the "last updated" column the DMS console only indicates the time that AWS DMS last updated the table statistics record for a table. It does not indicate the time of the last update to the table.
    */
   describeTableStatistics(callback?: (err: AWSError, data: DMS.Types.DescribeTableStatisticsResponse) => void): Request<DMS.Types.DescribeTableStatisticsResponse, AWSError>;
   /**
@@ -1076,13 +1076,17 @@ declare namespace DMS {
      */
     ReplicationTaskArn: String;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 500.
      */
     MaxRecords?: IntegerOptional;
     /**
      *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
      */
     Marker?: String;
+    /**
+     * Filters applied to the describe table statistics action. Valid filter names: schema-name | table-name | table-state A combination of filters creates an AND condition where each record matches all specified filters.
+     */
+    Filters?: FilterList;
   }
   export interface DescribeTableStatisticsResponse {
     /**
@@ -1342,7 +1346,7 @@ declare namespace DMS {
      */
     DatabaseName?: String;
     /**
-     * Additional attributes associated with the connection.
+     * Additional attributes associated with the connection. To reset this parameter, pass the empty string ("") as an argument.
      */
     ExtraConnectionAttributes?: String;
     /**
@@ -2008,7 +2012,7 @@ declare namespace DMS {
      */
     LastUpdateTime?: TStamp;
     /**
-     * The state of the table.
+     * The state of the tables described. Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table all | Table updates | Table is being reloaded
      */
     TableState?: String;
   }
