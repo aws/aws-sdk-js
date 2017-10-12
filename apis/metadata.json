@@ -424,7 +424,8 @@
   },
   "lexmodelbuildingservice": {
     "prefix": "lex-models",
-    "name": "LexModelBuildingService"
+    "name": "LexModelBuildingService",
+    "cors": true
   },
   "marketplaceentitlementservice": {
     "prefix": "entitlement.marketplace",
