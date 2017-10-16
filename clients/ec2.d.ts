@@ -1468,11 +1468,11 @@ declare class EC2 extends Service {
    */
   getPasswordData(callback?: (err: AWSError, data: EC2.Types.GetPasswordDataResult) => void): Request<EC2.Types.GetPasswordDataResult, AWSError>;
   /**
-   * Returns details about the values and term of your specified Convertible Reserved Instances. When a target configuration is specified, it returns information about whether the exchange is valid and can be performed.
+   * Returns a quote and exchange information for exchanging one or more specified Convertible Reserved Instances for a new Convertible Reserved Instance. If the exchange cannot be performed, the reason is returned in the response. Use AcceptReservedInstancesExchangeQuote to perform the exchange.
    */
   getReservedInstancesExchangeQuote(params: EC2.Types.GetReservedInstancesExchangeQuoteRequest, callback?: (err: AWSError, data: EC2.Types.GetReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.GetReservedInstancesExchangeQuoteResult, AWSError>;
   /**
-   * Returns details about the values and term of your specified Convertible Reserved Instances. When a target configuration is specified, it returns information about whether the exchange is valid and can be performed.
+   * Returns a quote and exchange information for exchanging one or more specified Convertible Reserved Instances for a new Convertible Reserved Instance. If the exchange cannot be performed, the reason is returned in the response. Use AcceptReservedInstancesExchangeQuote to perform the exchange.
    */
   getReservedInstancesExchangeQuote(callback?: (err: AWSError, data: EC2.Types.GetReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.GetReservedInstancesExchangeQuoteResult, AWSError>;
   /**
@@ -1580,11 +1580,11 @@ declare class EC2 extends Service {
    */
   modifyNetworkInterfaceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Standard Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type. For more information, see Modifying Reserved Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type. For more information, see Modifying Reserved Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyReservedInstances(params: EC2.Types.ModifyReservedInstancesRequest, callback?: (err: AWSError, data: EC2.Types.ModifyReservedInstancesResult) => void): Request<EC2.Types.ModifyReservedInstancesResult, AWSError>;
   /**
-   * Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Standard Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type. For more information, see Modifying Reserved Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type. For more information, see Modifying Reserved Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyReservedInstances(callback?: (err: AWSError, data: EC2.Types.ModifyReservedInstancesResult) => void): Request<EC2.Types.ModifyReservedInstancesResult, AWSError>;
   /**
@@ -1651,6 +1651,14 @@ declare class EC2 extends Service {
    * Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:   Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.   Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.   Enable/disable a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.   If the peered VPCs are in different accounts, each owner must initiate a separate request to modify the peering connection options, depending on whether their VPC was the requester or accepter for the VPC peering connection. If the peered VPCs are in the same account, you can modify the requester and accepter options in the same request. To confirm which VPC is the accepter and requester for a VPC peering connection, use the DescribeVpcPeeringConnections command.
    */
   modifyVpcPeeringConnectionOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcPeeringConnectionOptionsResult) => void): Request<EC2.Types.ModifyVpcPeeringConnectionOptionsResult, AWSError>;
+  /**
+   * Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to default only. You cannot change the instance tenancy attribute to dedicated. After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of default, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected. For more information about Dedicated Instances, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifyVpcTenancy(params: EC2.Types.ModifyVpcTenancyRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcTenancyResult) => void): Request<EC2.Types.ModifyVpcTenancyResult, AWSError>;
+  /**
+   * Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to default only. You cannot change the instance tenancy attribute to dedicated. After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of default, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected. For more information about Dedicated Instances, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifyVpcTenancy(callback?: (err: AWSError, data: EC2.Types.ModifyVpcTenancyResult) => void): Request<EC2.Types.ModifyVpcTenancyResult, AWSError>;
   /**
    * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide. To disable detailed monitoring, see .
    */
@@ -2195,11 +2203,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of the Convertible Reserved Instances to exchange for other Convertible Reserved Instances of the same or higher value.
+     * The IDs of the Convertible Reserved Instances to exchange for another Convertible Reserved Instance of the same or higher value.
      */
     ReservedInstanceIds: ReservedInstanceIdSet;
     /**
-     * The configurations of the Convertible Reserved Instance offerings that you are purchasing in this exchange.
+     * The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.
      */
     TargetConfigurations?: TargetConfigurationRequestSet;
   }
@@ -7104,7 +7112,7 @@ declare namespace EC2 {
      */
     ReservedInstanceIds: ReservedInstanceIdSet;
     /**
-     * The configuration requirements of the Convertible Reserved Instances to exchange for your current Convertible Reserved Instances.
+     * The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.
      */
     TargetConfigurations?: TargetConfigurationRequestSet;
   }
@@ -9212,6 +9220,26 @@ declare namespace EC2 {
      */
     RequesterPeeringConnectionOptions?: PeeringConnectionOptions;
   }
+  export interface ModifyVpcTenancyRequest {
+    /**
+     * The ID of the VPC.
+     */
+    VpcId: String;
+    /**
+     * The instance tenancy attribute for the VPC. 
+     */
+    InstanceTenancy: VpcTenancy;
+    /**
+     * Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyVpcTenancyResult {
+    /**
+     * Returns true if the request succeeds; otherwise, returns an error.
+     */
+    ReturnValue?: Boolean;
+  }
   export interface MonitorInstancesRequest {
     /**
      * One or more instance IDs.
@@ -11134,7 +11162,7 @@ declare namespace EC2 {
      */
     SubnetId?: String;
     /**
-     * The user data to make available to the instance. For more information, see Running Commands on Your Linux Instance at Launch (Linux) and Adding User Data (Windows). If you are using an AWS SDK or command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text.
+     * The user data to make available to the instance. For more information, see Running Commands on Your Linux Instance at Launch (Linux) and Adding User Data (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text.
      */
     UserData?: String;
     /**
@@ -13107,6 +13135,7 @@ declare namespace EC2 {
     VpcId?: String;
   }
   export type VpcState = "pending"|"available"|string;
+  export type VpcTenancy = "default"|string;
   export interface VpnConnection {
     /**
      * The configuration information for the VPN connection's customer gateway (in the native XML format). This element is always present in the CreateVpnConnection response; however, it's present in the DescribeVpnConnections response only if the VPN connection is in the pending or available state.

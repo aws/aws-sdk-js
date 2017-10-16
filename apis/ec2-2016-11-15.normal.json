@@ -1799,7 +1799,7 @@
       },
       "input":{"shape":"GetReservedInstancesExchangeQuoteRequest"},
       "output":{"shape":"GetReservedInstancesExchangeQuoteResult"},
-      "documentation":"<p>Returns details about the values and term of your specified Convertible Reserved Instances. When a target configuration is specified, it returns information about whether the exchange is valid and can be performed.</p>"
+      "documentation":"<p>Returns a quote and exchange information for exchanging one or more specified Convertible Reserved Instances for a new Convertible Reserved Instance. If the exchange cannot be performed, the reason is returned in the response. Use <a>AcceptReservedInstancesExchangeQuote</a> to perform the exchange.</p>"
     },
     "ImportImage":{
       "name":"ImportImage",
@@ -1934,7 +1934,7 @@
       },
       "input":{"shape":"ModifyReservedInstancesRequest"},
       "output":{"shape":"ModifyReservedInstancesResult"},
-      "documentation":"<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Standard Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
+      "documentation":"<p>Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the Amazon Elastic Compute Cloud User Guide.</p>"
     },
     "ModifySnapshotAttribute":{
       "name":"ModifySnapshotAttribute",
@@ -2011,6 +2011,16 @@
       "input":{"shape":"ModifyVpcPeeringConnectionOptionsRequest"},
       "output":{"shape":"ModifyVpcPeeringConnectionOptionsResult"},
       "documentation":"<p>Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:</p> <ul> <li> <p>Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.</p> </li> <li> <p>Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.</p> </li> <li> <p>Enable/disable a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.</p> </li> </ul> <p>If the peered VPCs are in different accounts, each owner must initiate a separate request to modify the peering connection options, depending on whether their VPC was the requester or accepter for the VPC peering connection. If the peered VPCs are in the same account, you can modify the requester and accepter options in the same request. To confirm which VPC is the accepter and requester for a VPC peering connection, use the <a>DescribeVpcPeeringConnections</a> command.</p>"
+    },
+    "ModifyVpcTenancy":{
+      "name":"ModifyVpcTenancy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyVpcTenancyRequest"},
+      "output":{"shape":"ModifyVpcTenancyResult"},
+      "documentation":"<p>Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to <code>default</code> only. You cannot change the instance tenancy attribute to <code>dedicated</code>.</p> <p>After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of <code>default</code>, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected.</p> <p>For more information about Dedicated Instances, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html\">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "MonitorInstances":{
       "name":"MonitorInstances",
@@ -2372,12 +2382,12 @@
         },
         "ReservedInstanceIds":{
           "shape":"ReservedInstanceIdSet",
-          "documentation":"<p>The IDs of the Convertible Reserved Instances to exchange for other Convertible Reserved Instances of the same or higher value.</p>",
+          "documentation":"<p>The IDs of the Convertible Reserved Instances to exchange for another Convertible Reserved Instance of the same or higher value.</p>",
           "locationName":"ReservedInstanceId"
         },
         "TargetConfigurations":{
           "shape":"TargetConfigurationRequestSet",
-          "documentation":"<p>The configurations of the Convertible Reserved Instance offerings that you are purchasing in this exchange.</p>",
+          "documentation":"<p>The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.</p>",
           "locationName":"TargetConfiguration"
         }
       },
@@ -10252,7 +10262,7 @@
         },
         "TargetConfigurations":{
           "shape":"TargetConfigurationRequestSet",
-          "documentation":"<p>The configuration requirements of the Convertible Reserved Instances to exchange for your current Convertible Reserved Instances.</p>",
+          "documentation":"<p>The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.</p>",
           "locationName":"TargetConfiguration"
         }
       },
@@ -13680,6 +13690,39 @@
         }
       }
     },
+    "ModifyVpcTenancyRequest":{
+      "type":"structure",
+      "required":[
+        "VpcId",
+        "InstanceTenancy"
+      ],
+      "members":{
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC.</p>"
+        },
+        "InstanceTenancy":{
+          "shape":"VpcTenancy",
+          "documentation":"<p>The instance tenancy attribute for the VPC. </p>"
+        },
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      },
+      "documentation":"<p>Contains the parameters for ModifyVpcTenancy.</p>"
+    },
+    "ModifyVpcTenancyResult":{
+      "type":"structure",
+      "members":{
+        "ReturnValue":{
+          "shape":"Boolean",
+          "documentation":"<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
+          "locationName":"return"
+        }
+      },
+      "documentation":"<p>Contains the output of ModifyVpcTenancy.</p>"
+    },
     "MonitorInstancesRequest":{
       "type":"structure",
       "required":["InstanceIds"],
@@ -16952,7 +16995,7 @@
         },
         "UserData":{
           "shape":"String",
-          "documentation":"<p>The user data to make available to the instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Running Commands on Your Linux Instance at Launch</a> (Linux) and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data\">Adding User Data</a> (Windows). If you are using an AWS SDK or command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text.</p>"
+          "documentation":"<p>The user data to make available to the instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Running Commands on Your Linux Instance at Launch</a> (Linux) and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data\">Adding User Data</a> (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text.</p>"
         },
         "AdditionalInfo":{
           "shape":"String",
@@ -20219,6 +20262,10 @@
         "pending",
         "available"
       ]
+    },
+    "VpcTenancy":{
+      "type":"string",
+      "enum":["default"]
     },
     "VpnConnection":{
       "type":"structure",

@@ -157,6 +157,7 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type Boolean = boolean;
+  export type CloudWatchLogsLogGroupArn = string;
   export interface CreateElasticsearchDomainRequest {
     /**
      * The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
@@ -186,6 +187,10 @@ declare namespace ES {
      *  Option to allow references to indices in an HTTP request body. Must be false when configuring access to individual sub-resources. By default, the value is true. See Configuration Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptions;
+    /**
+     * Map of LogType and LogPublishingOption, each containing options to publish a given type of Elasticsearch log.
+     */
+    LogPublishingOptions?: LogPublishingOptions;
   }
   export interface CreateElasticsearchDomainResponse {
     /**
@@ -358,6 +363,10 @@ declare namespace ES {
      * Specifies the AdvancedOptions for the domain. See Configuring Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptionsStatus;
+    /**
+     * Log publishing options for the given domain.
+     */
+    LogPublishingOptions?: LogPublishingOptionsStatus;
   }
   export interface ElasticsearchDomainStatus {
     /**
@@ -409,6 +418,10 @@ declare namespace ES {
      * Specifies the status of the AdvancedOptions
      */
     AdvancedOptions?: AdvancedOptions;
+    /**
+     * Log publishing options for the given domain.
+     */
+    LogPublishingOptions?: LogPublishingOptions;
   }
   export type ElasticsearchDomainStatusList = ElasticsearchDomainStatus[];
   export type ElasticsearchInstanceTypeList = ESPartitionInstanceType[];
@@ -506,6 +519,25 @@ declare namespace ES {
      */
     TagList?: TagList;
   }
+  export interface LogPublishingOption {
+    CloudWatchLogsLogGroupArn?: CloudWatchLogsLogGroupArn;
+    /**
+     *  Specifies whether given log publishing option is enabled or not.
+     */
+    Enabled?: Boolean;
+  }
+  export type LogPublishingOptions = {[key: string]: LogPublishingOption};
+  export interface LogPublishingOptionsStatus {
+    /**
+     * The log publishing options configured for the Elasticsearch domain.
+     */
+    Options?: LogPublishingOptions;
+    /**
+     * The status of the log publishing options for the Elasticsearch domain. See OptionStatus for the status information that's included. 
+     */
+    Status?: OptionStatus;
+  }
+  export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|string;
   export type MaxResults = number;
   export type MaximumInstanceCount = number;
   export type MinimumInstanceCount = number;
@@ -624,6 +656,10 @@ declare namespace ES {
      * IAM access policy as a JSON-formatted string.
      */
     AccessPolicies?: PolicyDocument;
+    /**
+     * Map of LogType and LogPublishingOption, each containing options to publish a given type of Elasticsearch log.
+     */
+    LogPublishingOptions?: LogPublishingOptions;
   }
   export interface UpdateElasticsearchDomainConfigResponse {
     /**

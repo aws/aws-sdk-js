@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.133.0-->
+<!--LATEST=2.134.0-->
 <!--ENTRYINSERT-->
+
+## 2.134.0
+* feature: CORS: The LexModelBuildingService supports CORS. This change adds the service to the browser version of the SDK by default.
+* feature: EC2: You can now change the tenancy of your VPC from dedicated to default with a single API operation. For more details refer to the documentation for changing VPC tenancy.
+* feature: ES: AWS Elasticsearch adds support for enabling slow log publishing. Using slow log publishing options customers can configure and enable index/query slow log publishing of their domain to preferred AWS Cloudwatch log group.
+* feature: RDS: Adds waiters for DBSnapshotAvailable and DBSnapshotDeleted.
+* feature: WAF: This release adds support for regular expressions as match conditions in rules, and support for geographical location by country of request IP address as a match condition in rules.
+* feature: WAFRegional: This release adds support for regular expressions as match conditions in rules, and support for geographical location by country of request IP address as a match condition in rules.
 
 ## 2.133.0
 * feature: CodeCommit: This release includes the DeleteBranch API and a change to the contents of a Commit object.

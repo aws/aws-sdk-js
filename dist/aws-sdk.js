@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.133.0
+// AWS SDK for JavaScript v2.134.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -12203,6 +12203,7 @@ module.exports={
     "protocol": "json",
     "serviceAbbreviation": "CloudHSM",
     "serviceFullName": "Amazon CloudHSM",
+    "serviceId": "CloudHSM",
     "signatureVersion": "v4",
     "targetPrefix": "CloudHsmFrontendService",
     "uid": "cloudhsm-2014-05-30"
@@ -33829,6 +33830,31 @@ module.exports={
         }
       }
     },
+    "ModifyVpcTenancy": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "VpcId",
+          "InstanceTenancy"
+        ],
+        "members": {
+          "VpcId": {},
+          "InstanceTenancy": {},
+          "DryRun": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ReturnValue": {
+            "locationName": "return",
+            "type": "boolean"
+          }
+        }
+      }
+    },
     "MonitorInstances": {
       "input": {
         "type": "structure",
@@ -33850,7 +33876,7 @@ module.exports={
         "type": "structure",
         "members": {
           "InstanceMonitorings": {
-            "shape": "Sop",
+            "shape": "Sos",
             "locationName": "instancesSet"
           }
         }
@@ -34905,7 +34931,7 @@ module.exports={
                       "type": "integer"
                     },
                     "Groups": {
-                      "shape": "Sqi",
+                      "shape": "Sql",
                       "locationName": "Group"
                     },
                     "Ipv6AddressCount": {
@@ -34954,7 +34980,7 @@ module.exports={
               },
               "RamdiskId": {},
               "SecurityGroupIds": {
-                "shape": "Sqi",
+                "shape": "Sql",
                 "locationName": "SecurityGroupId"
               },
               "SubnetId": {},
@@ -35001,7 +35027,7 @@ module.exports={
         "type": "structure",
         "members": {
           "StartingInstances": {
-            "shape": "Sqt",
+            "shape": "Sqw",
             "locationName": "instancesSet"
           }
         }
@@ -35032,7 +35058,7 @@ module.exports={
         "type": "structure",
         "members": {
           "StoppingInstances": {
-            "shape": "Sqt",
+            "shape": "Sqw",
             "locationName": "instancesSet"
           }
         }
@@ -35059,7 +35085,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TerminatingInstances": {
-            "shape": "Sqt",
+            "shape": "Sqw",
             "locationName": "instancesSet"
           }
         }
@@ -35134,7 +35160,7 @@ module.exports={
         "type": "structure",
         "members": {
           "InstanceMonitorings": {
-            "shape": "Sop",
+            "shape": "Sos",
             "locationName": "instancesSet"
           }
         }
@@ -38493,7 +38519,7 @@ module.exports={
         }
       }
     },
-    "Sop": {
+    "Sos": {
       "type": "list",
       "member": {
         "locationName": "item",
@@ -38509,13 +38535,13 @@ module.exports={
         }
       }
     },
-    "Sqi": {
+    "Sql": {
       "type": "list",
       "member": {
         "locationName": "SecurityGroupId"
       }
     },
-    "Sqt": {
+    "Sqw": {
       "type": "list",
       "member": {
         "locationName": "item",
@@ -62389,6 +62415,1715 @@ module.exports={
 module.exports={
   "version": "2.0",
   "metadata": {
+    "apiVersion": "2017-04-19",
+    "endpointPrefix": "models.lex",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "Amazon Lex Model Building Service",
+    "signatureVersion": "v4",
+    "signingName": "lex",
+    "uid": "lex-models-2017-04-19"
+  },
+  "operations": {
+    "CreateBotVersion": {
+      "http": {
+        "requestUri": "/bots/{name}/versions",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "checksum": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "intents": {
+            "shape": "S6"
+          },
+          "clarificationPrompt": {
+            "shape": "Sa"
+          },
+          "abortStatement": {
+            "shape": "Sh"
+          },
+          "status": {},
+          "failureReason": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "idleSessionTTLInSeconds": {
+            "type": "integer"
+          },
+          "voiceId": {},
+          "checksum": {},
+          "version": {},
+          "locale": {},
+          "childDirected": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "CreateIntentVersion": {
+      "http": {
+        "requestUri": "/intents/{name}/versions",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "checksum": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "slots": {
+            "shape": "Sp"
+          },
+          "sampleUtterances": {
+            "shape": "Sx"
+          },
+          "confirmationPrompt": {
+            "shape": "Sa"
+          },
+          "rejectionStatement": {
+            "shape": "Sh"
+          },
+          "followUpPrompt": {
+            "shape": "Sy"
+          },
+          "conclusionStatement": {
+            "shape": "Sh"
+          },
+          "dialogCodeHook": {
+            "shape": "Sz"
+          },
+          "fulfillmentActivity": {
+            "shape": "S12"
+          },
+          "parentIntentSignature": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "version": {},
+          "checksum": {}
+        }
+      }
+    },
+    "CreateSlotTypeVersion": {
+      "http": {
+        "requestUri": "/slottypes/{name}/versions",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "checksum": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "enumerationValues": {
+            "shape": "S18"
+          },
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "version": {},
+          "checksum": {},
+          "valueSelectionStrategy": {}
+        }
+      }
+    },
+    "DeleteBot": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/bots/{name}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          }
+        }
+      }
+    },
+    "DeleteBotAlias": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/bots/{botName}/aliases/{name}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "botName"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "botName": {
+            "location": "uri",
+            "locationName": "botName"
+          }
+        }
+      }
+    },
+    "DeleteBotChannelAssociation": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/bots/{botName}/aliases/{aliasName}/channels/{name}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "botName",
+          "botAlias"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "botName": {
+            "location": "uri",
+            "locationName": "botName"
+          },
+          "botAlias": {
+            "location": "uri",
+            "locationName": "aliasName"
+          }
+        }
+      }
+    },
+    "DeleteBotVersion": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/bots/{name}/versions/{version}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "version"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "version": {
+            "location": "uri",
+            "locationName": "version"
+          }
+        }
+      }
+    },
+    "DeleteIntent": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/intents/{name}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          }
+        }
+      }
+    },
+    "DeleteIntentVersion": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/intents/{name}/versions/{version}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "version"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "version": {
+            "location": "uri",
+            "locationName": "version"
+          }
+        }
+      }
+    },
+    "DeleteSlotType": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/slottypes/{name}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          }
+        }
+      }
+    },
+    "DeleteSlotTypeVersion": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/slottypes/{name}/version/{version}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "version"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "version": {
+            "location": "uri",
+            "locationName": "version"
+          }
+        }
+      }
+    },
+    "DeleteUtterances": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/bots/{botName}/utterances/{userId}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "botName",
+          "userId"
+        ],
+        "members": {
+          "botName": {
+            "location": "uri",
+            "locationName": "botName"
+          },
+          "userId": {
+            "location": "uri",
+            "locationName": "userId"
+          }
+        }
+      }
+    },
+    "GetBot": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bots/{name}/versions/{versionoralias}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "versionOrAlias"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "versionOrAlias": {
+            "location": "uri",
+            "locationName": "versionoralias"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "intents": {
+            "shape": "S6"
+          },
+          "clarificationPrompt": {
+            "shape": "Sa"
+          },
+          "abortStatement": {
+            "shape": "Sh"
+          },
+          "status": {},
+          "failureReason": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "idleSessionTTLInSeconds": {
+            "type": "integer"
+          },
+          "voiceId": {},
+          "checksum": {},
+          "version": {},
+          "locale": {},
+          "childDirected": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "GetBotAlias": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bots/{botName}/aliases/{name}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "botName"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "botName": {
+            "location": "uri",
+            "locationName": "botName"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "botVersion": {},
+          "botName": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "checksum": {}
+        }
+      }
+    },
+    "GetBotAliases": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bots/{botName}/aliases/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "botName"
+        ],
+        "members": {
+          "botName": {
+            "location": "uri",
+            "locationName": "botName"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "BotAliases": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "name": {},
+                "description": {},
+                "botVersion": {},
+                "botName": {},
+                "lastUpdatedDate": {
+                  "type": "timestamp"
+                },
+                "createdDate": {
+                  "type": "timestamp"
+                },
+                "checksum": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetBotChannelAssociation": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bots/{botName}/aliases/{aliasName}/channels/{name}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "botName",
+          "botAlias"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "botName": {
+            "location": "uri",
+            "locationName": "botName"
+          },
+          "botAlias": {
+            "location": "uri",
+            "locationName": "aliasName"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "botAlias": {},
+          "botName": {},
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "type": {},
+          "botConfiguration": {
+            "shape": "S23"
+          }
+        }
+      }
+    },
+    "GetBotChannelAssociations": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bots/{botName}/aliases/{aliasName}/channels/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "botName",
+          "botAlias"
+        ],
+        "members": {
+          "botName": {
+            "location": "uri",
+            "locationName": "botName"
+          },
+          "botAlias": {
+            "location": "uri",
+            "locationName": "aliasName"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "botChannelAssociations": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "name": {},
+                "description": {},
+                "botAlias": {},
+                "botName": {},
+                "createdDate": {
+                  "type": "timestamp"
+                },
+                "type": {},
+                "botConfiguration": {
+                  "shape": "S23"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetBotVersions": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bots/{name}/versions/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "bots": {
+            "shape": "S2b"
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetBots": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bots/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "bots": {
+            "shape": "S2b"
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetBuiltinIntent": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/builtins/intents/{signature}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "signature"
+        ],
+        "members": {
+          "signature": {
+            "location": "uri",
+            "locationName": "signature"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "signature": {},
+          "supportedLocales": {
+            "shape": "S2h"
+          },
+          "slots": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "name": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetBuiltinIntents": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/builtins/intents/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "locale": {
+            "location": "querystring",
+            "locationName": "locale"
+          },
+          "signatureContains": {
+            "location": "querystring",
+            "locationName": "signatureContains"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "intents": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "signature": {},
+                "supportedLocales": {
+                  "shape": "S2h"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetBuiltinSlotTypes": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/builtins/slottypes/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "locale": {
+            "location": "querystring",
+            "locationName": "locale"
+          },
+          "signatureContains": {
+            "location": "querystring",
+            "locationName": "signatureContains"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "slotTypes": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "signature": {},
+                "supportedLocales": {
+                  "shape": "S2h"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetExport": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/exports/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "version",
+          "resourceType",
+          "exportType"
+        ],
+        "members": {
+          "name": {
+            "location": "querystring",
+            "locationName": "name"
+          },
+          "version": {
+            "location": "querystring",
+            "locationName": "version"
+          },
+          "resourceType": {
+            "location": "querystring",
+            "locationName": "resourceType"
+          },
+          "exportType": {
+            "location": "querystring",
+            "locationName": "exportType"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "version": {},
+          "resourceType": {},
+          "exportType": {},
+          "exportStatus": {},
+          "failureReason": {},
+          "url": {}
+        }
+      }
+    },
+    "GetIntent": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/intents/{name}/versions/{version}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "version"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "version": {
+            "location": "uri",
+            "locationName": "version"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "slots": {
+            "shape": "Sp"
+          },
+          "sampleUtterances": {
+            "shape": "Sx"
+          },
+          "confirmationPrompt": {
+            "shape": "Sa"
+          },
+          "rejectionStatement": {
+            "shape": "Sh"
+          },
+          "followUpPrompt": {
+            "shape": "Sy"
+          },
+          "conclusionStatement": {
+            "shape": "Sh"
+          },
+          "dialogCodeHook": {
+            "shape": "Sz"
+          },
+          "fulfillmentActivity": {
+            "shape": "S12"
+          },
+          "parentIntentSignature": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "version": {},
+          "checksum": {}
+        }
+      }
+    },
+    "GetIntentVersions": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/intents/{name}/versions/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "intents": {
+            "shape": "S33"
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetIntents": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/intents/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "intents": {
+            "shape": "S33"
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetSlotType": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/slottypes/{name}/versions/{version}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "version"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "version": {
+            "location": "uri",
+            "locationName": "version"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "enumerationValues": {
+            "shape": "S18"
+          },
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "version": {},
+          "checksum": {},
+          "valueSelectionStrategy": {}
+        }
+      }
+    },
+    "GetSlotTypeVersions": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/slottypes/{name}/versions/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "slotTypes": {
+            "shape": "S3b"
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetSlotTypes": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/slottypes/",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          },
+          "nameContains": {
+            "location": "querystring",
+            "locationName": "nameContains"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "slotTypes": {
+            "shape": "S3b"
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "GetUtterancesView": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bots/{botname}/utterances?view=aggregation",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "botName",
+          "botVersions",
+          "statusType"
+        ],
+        "members": {
+          "botName": {
+            "location": "uri",
+            "locationName": "botname"
+          },
+          "botVersions": {
+            "location": "querystring",
+            "locationName": "bot_versions",
+            "type": "list",
+            "member": {}
+          },
+          "statusType": {
+            "location": "querystring",
+            "locationName": "status_type"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "botName": {},
+          "utterances": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "botVersion": {},
+                "utterances": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "members": {
+                      "utteranceString": {},
+                      "count": {
+                        "type": "integer"
+                      },
+                      "distinctUsers": {
+                        "type": "integer"
+                      },
+                      "firstUtteredDate": {
+                        "type": "timestamp"
+                      },
+                      "lastUtteredDate": {
+                        "type": "timestamp"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "PutBot": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/bots/{name}/versions/$LATEST",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "locale",
+          "childDirected"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "description": {},
+          "intents": {
+            "shape": "S6"
+          },
+          "clarificationPrompt": {
+            "shape": "Sa"
+          },
+          "abortStatement": {
+            "shape": "Sh"
+          },
+          "idleSessionTTLInSeconds": {
+            "type": "integer"
+          },
+          "voiceId": {},
+          "checksum": {},
+          "processBehavior": {},
+          "locale": {},
+          "childDirected": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "intents": {
+            "shape": "S6"
+          },
+          "clarificationPrompt": {
+            "shape": "Sa"
+          },
+          "abortStatement": {
+            "shape": "Sh"
+          },
+          "status": {},
+          "failureReason": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "idleSessionTTLInSeconds": {
+            "type": "integer"
+          },
+          "voiceId": {},
+          "checksum": {},
+          "version": {},
+          "locale": {},
+          "childDirected": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "PutBotAlias": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/bots/{botName}/aliases/{name}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name",
+          "botVersion",
+          "botName"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "description": {},
+          "botVersion": {},
+          "botName": {
+            "location": "uri",
+            "locationName": "botName"
+          },
+          "checksum": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "botVersion": {},
+          "botName": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "checksum": {}
+        }
+      }
+    },
+    "PutIntent": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/intents/{name}/versions/$LATEST",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "description": {},
+          "slots": {
+            "shape": "Sp"
+          },
+          "sampleUtterances": {
+            "shape": "Sx"
+          },
+          "confirmationPrompt": {
+            "shape": "Sa"
+          },
+          "rejectionStatement": {
+            "shape": "Sh"
+          },
+          "followUpPrompt": {
+            "shape": "Sy"
+          },
+          "conclusionStatement": {
+            "shape": "Sh"
+          },
+          "dialogCodeHook": {
+            "shape": "Sz"
+          },
+          "fulfillmentActivity": {
+            "shape": "S12"
+          },
+          "parentIntentSignature": {},
+          "checksum": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "slots": {
+            "shape": "Sp"
+          },
+          "sampleUtterances": {
+            "shape": "Sx"
+          },
+          "confirmationPrompt": {
+            "shape": "Sa"
+          },
+          "rejectionStatement": {
+            "shape": "Sh"
+          },
+          "followUpPrompt": {
+            "shape": "Sy"
+          },
+          "conclusionStatement": {
+            "shape": "Sh"
+          },
+          "dialogCodeHook": {
+            "shape": "Sz"
+          },
+          "fulfillmentActivity": {
+            "shape": "S12"
+          },
+          "parentIntentSignature": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "version": {},
+          "checksum": {}
+        }
+      }
+    },
+    "PutSlotType": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/slottypes/{name}/versions/$LATEST",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "name"
+        ],
+        "members": {
+          "name": {
+            "location": "uri",
+            "locationName": "name"
+          },
+          "description": {},
+          "enumerationValues": {
+            "shape": "S18"
+          },
+          "checksum": {},
+          "valueSelectionStrategy": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "enumerationValues": {
+            "shape": "S18"
+          },
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "version": {},
+          "checksum": {},
+          "valueSelectionStrategy": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S6": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "intentName",
+          "intentVersion"
+        ],
+        "members": {
+          "intentName": {},
+          "intentVersion": {}
+        }
+      }
+    },
+    "Sa": {
+      "type": "structure",
+      "required": [
+        "messages",
+        "maxAttempts"
+      ],
+      "members": {
+        "messages": {
+          "shape": "Sb"
+        },
+        "maxAttempts": {
+          "type": "integer"
+        },
+        "responseCard": {}
+      }
+    },
+    "Sb": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "contentType",
+          "content"
+        ],
+        "members": {
+          "contentType": {},
+          "content": {}
+        }
+      }
+    },
+    "Sh": {
+      "type": "structure",
+      "required": [
+        "messages"
+      ],
+      "members": {
+        "messages": {
+          "shape": "Sb"
+        },
+        "responseCard": {}
+      }
+    },
+    "Sp": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "name",
+          "slotConstraint"
+        ],
+        "members": {
+          "name": {},
+          "description": {},
+          "slotConstraint": {},
+          "slotType": {},
+          "slotTypeVersion": {},
+          "valueElicitationPrompt": {
+            "shape": "Sa"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "sampleUtterances": {
+            "type": "list",
+            "member": {}
+          },
+          "responseCard": {}
+        }
+      }
+    },
+    "Sx": {
+      "type": "list",
+      "member": {}
+    },
+    "Sy": {
+      "type": "structure",
+      "required": [
+        "prompt",
+        "rejectionStatement"
+      ],
+      "members": {
+        "prompt": {
+          "shape": "Sa"
+        },
+        "rejectionStatement": {
+          "shape": "Sh"
+        }
+      }
+    },
+    "Sz": {
+      "type": "structure",
+      "required": [
+        "uri",
+        "messageVersion"
+      ],
+      "members": {
+        "uri": {},
+        "messageVersion": {}
+      }
+    },
+    "S12": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "type": {},
+        "codeHook": {
+          "shape": "Sz"
+        }
+      }
+    },
+    "S18": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "value"
+        ],
+        "members": {
+          "value": {},
+          "synonyms": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      }
+    },
+    "S23": {
+      "type": "map",
+      "key": {},
+      "value": {},
+      "sensitive": true
+    },
+    "S2b": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "status": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "version": {}
+        }
+      }
+    },
+    "S2h": {
+      "type": "list",
+      "member": {}
+    },
+    "S33": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "version": {}
+        }
+      }
+    },
+    "S3b": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "description": {},
+          "lastUpdatedDate": {
+            "type": "timestamp"
+          },
+          "createdDate": {
+            "type": "timestamp"
+          },
+          "version": {}
+        }
+      }
+    }
+  }
+}
+},{}],99:[function(require,module,exports){
+module.exports={
+  "pagination": {
+    "GetBotAliases": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "GetBotChannelAssociations": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "GetBotVersions": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "GetBots": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "GetBuiltinIntents": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "GetBuiltinSlotTypes": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "GetIntentVersions": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "GetIntents": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "GetSlotTypeVersions": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    },
+    "GetSlotTypes": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults"
+    }
+  }
+}
+
+},{}],100:[function(require,module,exports){
+module.exports={
+  "version": "2.0",
+  "metadata": {
     "apiVersion": "2014-03-28",
     "endpointPrefix": "logs",
     "jsonVersion": "1.1",
@@ -63253,7 +64988,7 @@ module.exports={
     }
   }
 }
-},{}],99:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDestinations": {
@@ -63303,7 +65038,7 @@ module.exports={
     }
   }
 }
-},{}],100:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -64412,7 +66147,7 @@ module.exports={
   },
   "examples": {}
 }
-},{}],101:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeBatchPredictions": {
@@ -64442,7 +66177,7 @@ module.exports={
   }
 }
 
-},{}],102:[function(require,module,exports){
+},{}],104:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -64525,7 +66260,7 @@ module.exports={
   }
 }
 
-},{}],103:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -64611,9 +66346,9 @@ module.exports={
     }
   }
 }
-},{}],104:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],105:[function(require,module,exports){
+},{"dup":19}],107:[function(require,module,exports){
 module.exports={
   "acm": {
     "name": "ACM",
@@ -65040,7 +66775,8 @@ module.exports={
   },
   "lexmodelbuildingservice": {
     "prefix": "lex-models",
-    "name": "LexModelBuildingService"
+    "name": "LexModelBuildingService",
+    "cors": true
   },
   "marketplaceentitlementservice": {
     "prefix": "entitlement.marketplace",
@@ -65069,7 +66805,7 @@ module.exports={
     "name": "Mobile"
   }
 }
-},{}],106:[function(require,module,exports){
+},{}],108:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -65144,7 +66880,7 @@ module.exports={
   },
   "shapes": {}
 }
-},{}],107:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -65760,7 +67496,7 @@ module.exports={
     }
   }
 }
-},{}],108:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeAlarmHistory": {
@@ -65785,7 +67521,7 @@ module.exports={
     }
   }
 }
-},{}],109:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -65805,7 +67541,7 @@ module.exports={
   }
 }
 
-},{}],110:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -67100,7 +68836,7 @@ module.exports={
     }
   }
 }
-},{}],111:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListAssignmentsForHIT": {
@@ -67156,7 +68892,7 @@ module.exports={
   }
 }
 
-},{}],112:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -69403,7 +71139,7 @@ module.exports={
     }
   }
 }
-},{}],113:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeApps": {
@@ -69459,7 +71195,7 @@ module.exports={
     }
   }
 }
-},{}],114:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -69756,7 +71492,7 @@ module.exports={
   }
 }
 
-},{}],115:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -70005,9 +71741,9 @@ module.exports={
     }
   }
 }
-},{}],116:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],117:[function(require,module,exports){
+},{"dup":19}],119:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -70016,6 +71752,7 @@ module.exports={
     "protocol": "query",
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
+    "serviceId": "RDS",
     "signatureVersion": "v4",
     "uid": "rds-2013-01-10",
     "xmlNamespace": "http://rds.amazonaws.com/doc/2013-01-10/"
@@ -71904,7 +73641,7 @@ module.exports={
     }
   }
 }
-},{}],118:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDBEngineVersions": {
@@ -72002,7 +73739,7 @@ module.exports={
     }
   }
 }
-},{}],119:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -72011,6 +73748,7 @@ module.exports={
     "protocol": "query",
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
+    "serviceId": "RDS",
     "signatureVersion": "v4",
     "uid": "rds-2013-02-12",
     "xmlNamespace": "http://rds.amazonaws.com/doc/2013-02-12/"
@@ -74031,7 +75769,7 @@ module.exports={
     }
   }
 }
-},{}],120:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDBEngineVersions": {
@@ -74142,7 +75880,7 @@ module.exports={
     }
   }
 }
-},{}],121:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -74151,6 +75889,7 @@ module.exports={
     "protocol": "query",
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
+    "serviceId": "RDS",
     "signatureVersion": "v4",
     "uid": "rds-2013-09-09",
     "xmlNamespace": "http://rds.amazonaws.com/doc/2013-09-09/"
@@ -76307,9 +78046,9 @@ module.exports={
     }
   }
 }
-},{}],122:[function(require,module,exports){
-arguments[4][120][0].apply(exports,arguments)
-},{"dup":120}],123:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
+arguments[4][122][0].apply(exports,arguments)
+},{"dup":122}],125:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -76408,7 +78147,7 @@ module.exports={
   }
 }
 
-},{}],124:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -76417,6 +78156,7 @@ module.exports={
     "protocol": "query",
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
+    "serviceId": "RDS",
     "signatureVersion": "v4",
     "uid": "rds-2014-09-01",
     "xmlNamespace": "http://rds.amazonaws.com/doc/2014-09-01/"
@@ -78646,9 +80386,9 @@ module.exports={
     }
   }
 }
-},{}],125:[function(require,module,exports){
+},{}],127:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],126:[function(require,module,exports){
+},{"dup":19}],128:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -78657,6 +80397,7 @@ module.exports={
     "protocol": "query",
     "serviceAbbreviation": "Amazon RDS",
     "serviceFullName": "Amazon Relational Database Service",
+    "serviceId": "RDS",
     "signatureVersion": "v4",
     "uid": "rds-2014-10-31",
     "xmlNamespace": "http://rds.amazonaws.com/doc/2014-10-31/"
@@ -82432,9 +84173,9 @@ module.exports={
     }
   }
 }
-},{}],127:[function(require,module,exports){
-arguments[4][120][0].apply(exports,arguments)
-},{"dup":120}],128:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
+arguments[4][122][0].apply(exports,arguments)
+},{"dup":122}],130:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -82522,11 +84263,96 @@ module.exports={
           "argument": "DBInstances[].DBInstanceStatus"
         }
       ]
+    },
+    "DBSnapshotAvailable": {
+      "delay": 30,
+      "operation": "DescribeDBSnapshots",
+      "maxAttempts": 60,
+      "acceptors": [
+        {
+          "expected": "available",
+          "matcher": "pathAll",
+          "state": "success",
+          "argument": "DBSnapshots[].Status"
+        },
+        {
+          "expected": "deleted",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBSnapshots[].Status"
+        },
+        {
+          "expected": "deleting",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBSnapshots[].Status"
+        },
+        {
+          "expected": "failed",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBSnapshots[].Status"
+        },
+        {
+          "expected": "incompatible-restore",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBSnapshots[].Status"
+        },
+        {
+          "expected": "incompatible-parameters",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBSnapshots[].Status"
+        }
+      ]
+    },
+    "DBSnapshotDeleted": {
+      "delay": 30,
+      "operation": "DescribeDBSnapshots",
+      "maxAttempts": 60,
+      "acceptors": [
+        {
+          "expected": "deleted",
+          "matcher": "pathAll",
+          "state": "success",
+          "argument": "DBSnapshots[].Status"
+        },
+        {
+          "expected": "DBSnapshotNotFound",
+          "matcher": "error",
+          "state": "success"
+        },
+        {
+          "expected": "creating",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBSnapshots[].Status"
+        },
+        {
+          "expected": "modifying",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBSnapshots[].Status"
+        },
+        {
+          "expected": "rebooting",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBSnapshots[].Status"
+        },
+        {
+          "expected": "resetting-master-credentials",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "DBSnapshots[].Status"
+        }
+      ]
     }
   }
 }
 
-},{}],129:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -84881,7 +86707,7 @@ module.exports={
     }
   }
 }
-},{}],130:[function(require,module,exports){
+},{}],132:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeClusterParameterGroups": {
@@ -84976,7 +86802,7 @@ module.exports={
     }
   }
 }
-},{}],131:[function(require,module,exports){
+},{}],133:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -85075,7 +86901,7 @@ module.exports={
   }
 }
 
-},{}],132:[function(require,module,exports){
+},{}],134:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -85788,7 +87614,7 @@ module.exports={
     }
   }
 }
-},{}],133:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListCollections": {
@@ -85805,7 +87631,7 @@ module.exports={
     }
   }
 }
-},{}],134:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -88235,7 +90061,7 @@ module.exports={
     }
   }
 }
-},{}],135:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListHealthChecks": {
@@ -88269,7 +90095,7 @@ module.exports={
     }
   }
 }
-},{}],136:[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -88289,7 +90115,7 @@ module.exports={
   }
 }
 
-},{}],137:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -89068,7 +90894,7 @@ module.exports={
     }
   }
 }
-},{}],138:[function(require,module,exports){
+},{}],140:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListDomains": {
@@ -89085,7 +90911,7 @@ module.exports={
     }
   }
 }
-},{}],139:[function(require,module,exports){
+},{}],141:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -89306,9 +91132,9 @@ module.exports={
     }
   }
 }
-},{}],140:[function(require,module,exports){
+},{}],142:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],141:[function(require,module,exports){
+},{"dup":19}],143:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -93819,7 +95645,7 @@ module.exports={
     }
   }
 }
-},{}],142:[function(require,module,exports){
+},{}],144:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListBuckets": {
@@ -93886,7 +95712,7 @@ module.exports={
     }
   }
 }
-},{}],143:[function(require,module,exports){
+},{}],145:[function(require,module,exports){
 module.exports={
   "version": 2,
   "waiters": {
@@ -93961,7 +95787,7 @@ module.exports={
   }
 }
 
-},{}],144:[function(require,module,exports){
+},{}],146:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -95654,7 +97480,7 @@ module.exports={
     }
   }
 }
-},{}],145:[function(require,module,exports){
+},{}],147:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListAcceptedPortfolioShares": {
@@ -95710,7 +97536,7 @@ module.exports={
   }
 }
 
-},{}],146:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -96334,7 +98160,7 @@ module.exports={
     }
   }
 }
-},{}],147:[function(require,module,exports){
+},{}],149:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListEndpointsByPlatformApplication": {
@@ -96365,7 +98191,7 @@ module.exports={
   }
 }
 
-},{}],148:[function(require,module,exports){
+},{}],150:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -96964,7 +98790,7 @@ module.exports={
     }
   }
 }
-},{}],149:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 module.exports={
   "pagination": {
     "ListQueues": {
@@ -96972,7 +98798,7 @@ module.exports={
     }
   }
 }
-},{}],150:[function(require,module,exports){
+},{}],152:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -101040,7 +102866,7 @@ module.exports={
     }
   }
 }
-},{}],151:[function(require,module,exports){
+},{}],153:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeActivations": {
@@ -101096,7 +102922,7 @@ module.exports={
     }
   }
 }
-},{}],152:[function(require,module,exports){
+},{}],154:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -102806,7 +104632,7 @@ module.exports={
     }
   }
 }
-},{}],153:[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeCachediSCSIVolumes": {
@@ -102859,7 +104685,7 @@ module.exports={
     }
   }
 }
-},{}],154:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -103106,9 +104932,9 @@ module.exports={
     }
   }
 }
-},{}],155:[function(require,module,exports){
+},{}],157:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],156:[function(require,module,exports){
+},{"dup":19}],158:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -103359,9 +105185,9 @@ module.exports={
     }
   }
 }
-},{}],157:[function(require,module,exports){
+},{}],159:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],158:[function(require,module,exports){
+},{"dup":19}],160:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -103398,6 +105224,28 @@ module.exports={
         }
       }
     },
+    "CreateGeoMatchSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "ChangeToken"
+        ],
+        "members": {
+          "Name": {},
+          "ChangeToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GeoMatchSet": {
+            "shape": "Sh"
+          },
+          "ChangeToken": {}
+        }
+      }
+    },
     "CreateIPSet": {
       "input": {
         "type": "structure",
@@ -103414,7 +105262,7 @@ module.exports={
         "type": "structure",
         "members": {
           "IPSet": {
-            "shape": "Sh"
+            "shape": "So"
           },
           "ChangeToken": {}
         }
@@ -103444,7 +105292,51 @@ module.exports={
         "type": "structure",
         "members": {
           "Rule": {
-            "shape": "Sr"
+            "shape": "Sy"
+          },
+          "ChangeToken": {}
+        }
+      }
+    },
+    "CreateRegexMatchSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "ChangeToken"
+        ],
+        "members": {
+          "Name": {},
+          "ChangeToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RegexMatchSet": {
+            "shape": "S15"
+          },
+          "ChangeToken": {}
+        }
+      }
+    },
+    "CreateRegexPatternSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "ChangeToken"
+        ],
+        "members": {
+          "Name": {},
+          "ChangeToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RegexPatternSet": {
+            "shape": "S1a"
           },
           "ChangeToken": {}
         }
@@ -103468,7 +105360,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rule": {
-            "shape": "Sy"
+            "shape": "S1f"
           },
           "ChangeToken": {}
         }
@@ -103490,7 +105382,7 @@ module.exports={
         "type": "structure",
         "members": {
           "SizeConstraintSet": {
-            "shape": "S11"
+            "shape": "S1i"
           },
           "ChangeToken": {}
         }
@@ -103512,7 +105404,7 @@ module.exports={
         "type": "structure",
         "members": {
           "SqlInjectionMatchSet": {
-            "shape": "S18"
+            "shape": "S1p"
           },
           "ChangeToken": {}
         }
@@ -103531,7 +105423,7 @@ module.exports={
           "Name": {},
           "MetricName": {},
           "DefaultAction": {
-            "shape": "S1c"
+            "shape": "S1t"
           },
           "ChangeToken": {}
         }
@@ -103540,7 +105432,7 @@ module.exports={
         "type": "structure",
         "members": {
           "WebACL": {
-            "shape": "S1f"
+            "shape": "S1w"
           },
           "ChangeToken": {}
         }
@@ -103562,7 +105454,7 @@ module.exports={
         "type": "structure",
         "members": {
           "XssMatchSet": {
-            "shape": "S1m"
+            "shape": "S23"
           },
           "ChangeToken": {}
         }
@@ -103577,6 +105469,25 @@ module.exports={
         ],
         "members": {
           "ByteMatchSetId": {},
+          "ChangeToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChangeToken": {}
+        }
+      }
+    },
+    "DeleteGeoMatchSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "GeoMatchSetId",
+          "ChangeToken"
+        ],
+        "members": {
+          "GeoMatchSetId": {},
           "ChangeToken": {}
         }
       },
@@ -103615,6 +105526,44 @@ module.exports={
         ],
         "members": {
           "RuleId": {},
+          "ChangeToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChangeToken": {}
+        }
+      }
+    },
+    "DeleteRegexMatchSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "RegexMatchSetId",
+          "ChangeToken"
+        ],
+        "members": {
+          "RegexMatchSetId": {},
+          "ChangeToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChangeToken": {}
+        }
+      }
+    },
+    "DeleteRegexPatternSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "RegexPatternSetId",
+          "ChangeToken"
+        ],
+        "members": {
+          "RegexPatternSetId": {},
           "ChangeToken": {}
         }
       },
@@ -103768,6 +105717,25 @@ module.exports={
         }
       }
     },
+    "GetGeoMatchSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "GeoMatchSetId"
+        ],
+        "members": {
+          "GeoMatchSetId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "GeoMatchSet": {
+            "shape": "Sh"
+          }
+        }
+      }
+    },
     "GetIPSet": {
       "input": {
         "type": "structure",
@@ -103782,7 +105750,7 @@ module.exports={
         "type": "structure",
         "members": {
           "IPSet": {
-            "shape": "Sh"
+            "shape": "So"
           }
         }
       }
@@ -103801,7 +105769,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rule": {
-            "shape": "Sr"
+            "shape": "Sy"
           }
         }
       }
@@ -103828,6 +105796,44 @@ module.exports={
         }
       }
     },
+    "GetRegexMatchSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "RegexMatchSetId"
+        ],
+        "members": {
+          "RegexMatchSetId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RegexMatchSet": {
+            "shape": "S15"
+          }
+        }
+      }
+    },
+    "GetRegexPatternSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "RegexPatternSetId"
+        ],
+        "members": {
+          "RegexPatternSetId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "RegexPatternSet": {
+            "shape": "S1a"
+          }
+        }
+      }
+    },
     "GetRule": {
       "input": {
         "type": "structure",
@@ -103842,7 +105848,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rule": {
-            "shape": "Sy"
+            "shape": "S1f"
           }
         }
       }
@@ -103860,7 +105866,7 @@ module.exports={
           "WebAclId": {},
           "RuleId": {},
           "TimeWindow": {
-            "shape": "S2o"
+            "shape": "S3h"
           },
           "MaxItems": {
             "type": "long"
@@ -103913,7 +105919,7 @@ module.exports={
             "type": "long"
           },
           "TimeWindow": {
-            "shape": "S2o"
+            "shape": "S3h"
           }
         }
       }
@@ -103932,7 +105938,7 @@ module.exports={
         "type": "structure",
         "members": {
           "SizeConstraintSet": {
-            "shape": "S11"
+            "shape": "S1i"
           }
         }
       }
@@ -103951,7 +105957,7 @@ module.exports={
         "type": "structure",
         "members": {
           "SqlInjectionMatchSet": {
-            "shape": "S18"
+            "shape": "S1p"
           }
         }
       }
@@ -103970,7 +105976,7 @@ module.exports={
         "type": "structure",
         "members": {
           "WebACL": {
-            "shape": "S1f"
+            "shape": "S1w"
           }
         }
       }
@@ -103989,7 +105995,7 @@ module.exports={
         "type": "structure",
         "members": {
           "XssMatchSet": {
-            "shape": "S1m"
+            "shape": "S23"
           }
         }
       }
@@ -104018,6 +106024,37 @@ module.exports={
               ],
               "members": {
                 "ByteMatchSetId": {},
+                "Name": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListGeoMatchSets": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextMarker": {},
+          "Limit": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextMarker": {},
+          "GeoMatchSets": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "GeoMatchSetId",
+                "Name"
+              ],
+              "members": {
+                "GeoMatchSetId": {},
                 "Name": {}
               }
             }
@@ -104071,7 +106108,69 @@ module.exports={
         "members": {
           "NextMarker": {},
           "Rules": {
-            "shape": "S3q"
+            "shape": "S4n"
+          }
+        }
+      }
+    },
+    "ListRegexMatchSets": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextMarker": {},
+          "Limit": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextMarker": {},
+          "RegexMatchSets": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "RegexMatchSetId",
+                "Name"
+              ],
+              "members": {
+                "RegexMatchSetId": {},
+                "Name": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListRegexPatternSets": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextMarker": {},
+          "Limit": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "NextMarker": {},
+          "RegexPatternSets": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "RegexPatternSetId",
+                "Name"
+              ],
+              "members": {
+                "RegexPatternSetId": {},
+                "Name": {}
+              }
+            }
           }
         }
       }
@@ -104091,7 +106190,7 @@ module.exports={
         "members": {
           "NextMarker": {},
           "Rules": {
-            "shape": "S3q"
+            "shape": "S4n"
           }
         }
       }
@@ -104256,6 +106355,42 @@ module.exports={
         }
       }
     },
+    "UpdateGeoMatchSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "GeoMatchSetId",
+          "ChangeToken",
+          "Updates"
+        ],
+        "members": {
+          "GeoMatchSetId": {},
+          "ChangeToken": {},
+          "Updates": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Action",
+                "GeoMatchConstraint"
+              ],
+              "members": {
+                "Action": {},
+                "GeoMatchConstraint": {
+                  "shape": "Sj"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChangeToken": {}
+        }
+      }
+    },
     "UpdateIPSet": {
       "input": {
         "type": "structure",
@@ -104278,7 +106413,7 @@ module.exports={
               "members": {
                 "Action": {},
                 "IPSetDescriptor": {
-                  "shape": "Sj"
+                  "shape": "Sq"
                 }
               }
             }
@@ -104305,11 +106440,81 @@ module.exports={
           "RuleId": {},
           "ChangeToken": {},
           "Updates": {
-            "shape": "S4k"
+            "shape": "S5t"
           },
           "RateLimit": {
             "type": "long"
           }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChangeToken": {}
+        }
+      }
+    },
+    "UpdateRegexMatchSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "RegexMatchSetId",
+          "Updates",
+          "ChangeToken"
+        ],
+        "members": {
+          "RegexMatchSetId": {},
+          "Updates": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Action",
+                "RegexMatchTuple"
+              ],
+              "members": {
+                "Action": {},
+                "RegexMatchTuple": {
+                  "shape": "S17"
+                }
+              }
+            }
+          },
+          "ChangeToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ChangeToken": {}
+        }
+      }
+    },
+    "UpdateRegexPatternSet": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "RegexPatternSetId",
+          "Updates",
+          "ChangeToken"
+        ],
+        "members": {
+          "RegexPatternSetId": {},
+          "Updates": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "Action",
+                "RegexPatternString"
+              ],
+              "members": {
+                "Action": {},
+                "RegexPatternString": {}
+              }
+            }
+          },
+          "ChangeToken": {}
         }
       },
       "output": {
@@ -104331,7 +106536,7 @@ module.exports={
           "RuleId": {},
           "ChangeToken": {},
           "Updates": {
-            "shape": "S4k"
+            "shape": "S5t"
           }
         }
       },
@@ -104364,7 +106569,7 @@ module.exports={
               "members": {
                 "Action": {},
                 "SizeConstraint": {
-                  "shape": "S13"
+                  "shape": "S1k"
                 }
               }
             }
@@ -104400,7 +106605,7 @@ module.exports={
               "members": {
                 "Action": {},
                 "SqlInjectionMatchTuple": {
-                  "shape": "S1a"
+                  "shape": "S1r"
                 }
               }
             }
@@ -104435,13 +106640,13 @@ module.exports={
               "members": {
                 "Action": {},
                 "ActivatedRule": {
-                  "shape": "S1h"
+                  "shape": "S1y"
                 }
               }
             }
           },
           "DefaultAction": {
-            "shape": "S1c"
+            "shape": "S1t"
           }
         }
       },
@@ -104474,7 +106679,7 @@ module.exports={
               "members": {
                 "Action": {},
                 "XssMatchTuple": {
-                  "shape": "S1o"
+                  "shape": "S25"
                 }
               }
             }
@@ -104539,13 +106744,13 @@ module.exports={
     "Sh": {
       "type": "structure",
       "required": [
-        "IPSetId",
-        "IPSetDescriptors"
+        "GeoMatchSetId",
+        "GeoMatchConstraints"
       ],
       "members": {
-        "IPSetId": {},
+        "GeoMatchSetId": {},
         "Name": {},
-        "IPSetDescriptors": {
+        "GeoMatchConstraints": {
           "type": "list",
           "member": {
             "shape": "Sj"
@@ -104564,7 +106769,35 @@ module.exports={
         "Value": {}
       }
     },
-    "Sr": {
+    "So": {
+      "type": "structure",
+      "required": [
+        "IPSetId",
+        "IPSetDescriptors"
+      ],
+      "members": {
+        "IPSetId": {},
+        "Name": {},
+        "IPSetDescriptors": {
+          "type": "list",
+          "member": {
+            "shape": "Sq"
+          }
+        }
+      }
+    },
+    "Sq": {
+      "type": "structure",
+      "required": [
+        "Type",
+        "Value"
+      ],
+      "members": {
+        "Type": {},
+        "Value": {}
+      }
+    },
+    "Sy": {
       "type": "structure",
       "required": [
         "RuleId",
@@ -104577,7 +106810,7 @@ module.exports={
         "Name": {},
         "MetricName": {},
         "MatchPredicates": {
-          "shape": "Ss"
+          "shape": "Sz"
         },
         "RateKey": {},
         "RateLimit": {
@@ -104585,13 +106818,13 @@ module.exports={
         }
       }
     },
-    "Ss": {
+    "Sz": {
       "type": "list",
       "member": {
-        "shape": "St"
+        "shape": "S10"
       }
     },
-    "St": {
+    "S10": {
       "type": "structure",
       "required": [
         "Negated",
@@ -104606,7 +106839,50 @@ module.exports={
         "DataId": {}
       }
     },
-    "Sy": {
+    "S15": {
+      "type": "structure",
+      "members": {
+        "RegexMatchSetId": {},
+        "Name": {},
+        "RegexMatchTuples": {
+          "type": "list",
+          "member": {
+            "shape": "S17"
+          }
+        }
+      }
+    },
+    "S17": {
+      "type": "structure",
+      "required": [
+        "FieldToMatch",
+        "TextTransformation",
+        "RegexPatternSetId"
+      ],
+      "members": {
+        "FieldToMatch": {
+          "shape": "S9"
+        },
+        "TextTransformation": {},
+        "RegexPatternSetId": {}
+      }
+    },
+    "S1a": {
+      "type": "structure",
+      "required": [
+        "RegexPatternSetId",
+        "RegexPatternStrings"
+      ],
+      "members": {
+        "RegexPatternSetId": {},
+        "Name": {},
+        "RegexPatternStrings": {
+          "type": "list",
+          "member": {}
+        }
+      }
+    },
+    "S1f": {
       "type": "structure",
       "required": [
         "RuleId",
@@ -104617,11 +106893,11 @@ module.exports={
         "Name": {},
         "MetricName": {},
         "Predicates": {
-          "shape": "Ss"
+          "shape": "Sz"
         }
       }
     },
-    "S11": {
+    "S1i": {
       "type": "structure",
       "required": [
         "SizeConstraintSetId",
@@ -104633,12 +106909,12 @@ module.exports={
         "SizeConstraints": {
           "type": "list",
           "member": {
-            "shape": "S13"
+            "shape": "S1k"
           }
         }
       }
     },
-    "S13": {
+    "S1k": {
       "type": "structure",
       "required": [
         "FieldToMatch",
@@ -104657,7 +106933,7 @@ module.exports={
         }
       }
     },
-    "S18": {
+    "S1p": {
       "type": "structure",
       "required": [
         "SqlInjectionMatchSetId",
@@ -104669,12 +106945,12 @@ module.exports={
         "SqlInjectionMatchTuples": {
           "type": "list",
           "member": {
-            "shape": "S1a"
+            "shape": "S1r"
           }
         }
       }
     },
-    "S1a": {
+    "S1r": {
       "type": "structure",
       "required": [
         "FieldToMatch",
@@ -104687,7 +106963,7 @@ module.exports={
         "TextTransformation": {}
       }
     },
-    "S1c": {
+    "S1t": {
       "type": "structure",
       "required": [
         "Type"
@@ -104696,7 +106972,7 @@ module.exports={
         "Type": {}
       }
     },
-    "S1f": {
+    "S1w": {
       "type": "structure",
       "required": [
         "WebACLId",
@@ -104708,17 +106984,17 @@ module.exports={
         "Name": {},
         "MetricName": {},
         "DefaultAction": {
-          "shape": "S1c"
+          "shape": "S1t"
         },
         "Rules": {
           "type": "list",
           "member": {
-            "shape": "S1h"
+            "shape": "S1y"
           }
         }
       }
     },
-    "S1h": {
+    "S1y": {
       "type": "structure",
       "required": [
         "Priority",
@@ -104731,12 +107007,12 @@ module.exports={
         },
         "RuleId": {},
         "Action": {
-          "shape": "S1c"
+          "shape": "S1t"
         },
         "Type": {}
       }
     },
-    "S1m": {
+    "S23": {
       "type": "structure",
       "required": [
         "XssMatchSetId",
@@ -104748,12 +107024,12 @@ module.exports={
         "XssMatchTuples": {
           "type": "list",
           "member": {
-            "shape": "S1o"
+            "shape": "S25"
           }
         }
       }
     },
-    "S1o": {
+    "S25": {
       "type": "structure",
       "required": [
         "FieldToMatch",
@@ -104766,7 +107042,7 @@ module.exports={
         "TextTransformation": {}
       }
     },
-    "S2o": {
+    "S3h": {
       "type": "structure",
       "required": [
         "StartTime",
@@ -104781,7 +107057,7 @@ module.exports={
         }
       }
     },
-    "S3q": {
+    "S4n": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -104795,7 +107071,7 @@ module.exports={
         }
       }
     },
-    "S4k": {
+    "S5t": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -104806,16 +107082,16 @@ module.exports={
         "members": {
           "Action": {},
           "Predicate": {
-            "shape": "St"
+            "shape": "S10"
           }
         }
       }
     }
   }
 }
-},{}],159:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
-},{"dup":19}],160:[function(require,module,exports){
+},{"dup":19}],162:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -106620,7 +108896,7 @@ module.exports={
     }
   }
 }
-},{}],161:[function(require,module,exports){
+},{}],163:[function(require,module,exports){
 module.exports={
   "pagination": {
     "DescribeDocumentVersions": {
@@ -106646,7 +108922,7 @@ module.exports={
     }
   }
 }
-},{}],162:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106666,7 +108942,7 @@ Object.defineProperty(apiLoader.services['acm'], '2015-12-08', {
 
 module.exports = AWS.ACM;
 
-},{"../apis/acm-2015-12-08.min.json":1,"../apis/acm-2015-12-08.paginators.json":2,"../lib/core":230,"../lib/node_loader":227}],163:[function(require,module,exports){
+},{"../apis/acm-2015-12-08.min.json":1,"../apis/acm-2015-12-08.paginators.json":2,"../lib/core":233,"../lib/node_loader":230}],165:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106687,7 +108963,7 @@ Object.defineProperty(apiLoader.services['apigateway'], '2015-07-09', {
 
 module.exports = AWS.APIGateway;
 
-},{"../apis/apigateway-2015-07-09.min.json":3,"../apis/apigateway-2015-07-09.paginators.json":4,"../lib/core":230,"../lib/node_loader":227,"../lib/services/apigateway":271}],164:[function(require,module,exports){
+},{"../apis/apigateway-2015-07-09.min.json":3,"../apis/apigateway-2015-07-09.paginators.json":4,"../lib/core":233,"../lib/node_loader":230,"../lib/services/apigateway":274}],166:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106707,7 +108983,7 @@ Object.defineProperty(apiLoader.services['applicationautoscaling'], '2016-02-06'
 
 module.exports = AWS.ApplicationAutoScaling;
 
-},{"../apis/application-autoscaling-2016-02-06.min.json":5,"../apis/application-autoscaling-2016-02-06.paginators.json":6,"../lib/core":230,"../lib/node_loader":227}],165:[function(require,module,exports){
+},{"../apis/application-autoscaling-2016-02-06.min.json":5,"../apis/application-autoscaling-2016-02-06.paginators.json":6,"../lib/core":233,"../lib/node_loader":230}],167:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106727,7 +109003,7 @@ Object.defineProperty(apiLoader.services['autoscaling'], '2011-01-01', {
 
 module.exports = AWS.AutoScaling;
 
-},{"../apis/autoscaling-2011-01-01.min.json":7,"../apis/autoscaling-2011-01-01.paginators.json":8,"../lib/core":230,"../lib/node_loader":227}],166:[function(require,module,exports){
+},{"../apis/autoscaling-2011-01-01.min.json":7,"../apis/autoscaling-2011-01-01.paginators.json":8,"../lib/core":233,"../lib/node_loader":230}],168:[function(require,module,exports){
 require('../lib/node_loader');
 module.exports = {
   ACM: require('./acm'),
@@ -106792,9 +109068,10 @@ module.exports = {
   StorageGateway: require('./storagegateway'),
   STS: require('./sts'),
   WAF: require('./waf'),
-  WorkDocs: require('./workdocs')
+  WorkDocs: require('./workdocs'),
+  LexModelBuildingService: require('./lexmodelbuildingservice')
 };
-},{"../lib/node_loader":227,"./acm":162,"./apigateway":163,"./applicationautoscaling":164,"./autoscaling":165,"./cloudformation":167,"./cloudfront":168,"./cloudhsm":169,"./cloudtrail":170,"./cloudwatch":171,"./cloudwatchevents":172,"./cloudwatchlogs":173,"./codecommit":174,"./codedeploy":175,"./codepipeline":176,"./cognitoidentity":177,"./cognitoidentityserviceprovider":178,"./cognitosync":179,"./configservice":180,"./cur":181,"./devicefarm":182,"./directconnect":183,"./dynamodb":184,"./dynamodbstreams":185,"./ec2":186,"./ecr":187,"./ecs":188,"./efs":189,"./elasticache":190,"./elasticbeanstalk":191,"./elastictranscoder":192,"./elb":193,"./elbv2":194,"./emr":195,"./firehose":196,"./gamelift":197,"./inspector":198,"./iot":199,"./iotdata":200,"./kinesis":201,"./kms":202,"./lambda":203,"./lexruntime":204,"./machinelearning":205,"./marketplacecommerceanalytics":206,"./mobileanalytics":207,"./mturk":208,"./opsworks":209,"./polly":210,"./rds":211,"./redshift":212,"./rekognition":213,"./route53":214,"./route53domains":215,"./s3":216,"./servicecatalog":217,"./ses":218,"./sns":219,"./sqs":220,"./ssm":221,"./storagegateway":222,"./sts":223,"./waf":224,"./workdocs":225}],167:[function(require,module,exports){
+},{"../lib/node_loader":230,"./acm":164,"./apigateway":165,"./applicationautoscaling":166,"./autoscaling":167,"./cloudformation":169,"./cloudfront":170,"./cloudhsm":171,"./cloudtrail":172,"./cloudwatch":173,"./cloudwatchevents":174,"./cloudwatchlogs":175,"./codecommit":176,"./codedeploy":177,"./codepipeline":178,"./cognitoidentity":179,"./cognitoidentityserviceprovider":180,"./cognitosync":181,"./configservice":182,"./cur":183,"./devicefarm":184,"./directconnect":185,"./dynamodb":186,"./dynamodbstreams":187,"./ec2":188,"./ecr":189,"./ecs":190,"./efs":191,"./elasticache":192,"./elasticbeanstalk":193,"./elastictranscoder":194,"./elb":195,"./elbv2":196,"./emr":197,"./firehose":198,"./gamelift":199,"./inspector":200,"./iot":201,"./iotdata":202,"./kinesis":203,"./kms":204,"./lambda":205,"./lexmodelbuildingservice":206,"./lexruntime":207,"./machinelearning":208,"./marketplacecommerceanalytics":209,"./mobileanalytics":210,"./mturk":211,"./opsworks":212,"./polly":213,"./rds":214,"./redshift":215,"./rekognition":216,"./route53":217,"./route53domains":218,"./s3":219,"./servicecatalog":220,"./ses":221,"./sns":222,"./sqs":223,"./ssm":224,"./storagegateway":225,"./sts":226,"./waf":227,"./workdocs":228}],169:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106815,7 +109092,7 @@ Object.defineProperty(apiLoader.services['cloudformation'], '2010-05-15', {
 
 module.exports = AWS.CloudFormation;
 
-},{"../apis/cloudformation-2010-05-15.min.json":9,"../apis/cloudformation-2010-05-15.paginators.json":10,"../apis/cloudformation-2010-05-15.waiters2.json":11,"../lib/core":230,"../lib/node_loader":227}],168:[function(require,module,exports){
+},{"../apis/cloudformation-2010-05-15.min.json":9,"../apis/cloudformation-2010-05-15.paginators.json":10,"../apis/cloudformation-2010-05-15.waiters2.json":11,"../lib/core":233,"../lib/node_loader":230}],170:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106847,7 +109124,7 @@ Object.defineProperty(apiLoader.services['cloudfront'], '2017-03-25', {
 
 module.exports = AWS.CloudFront;
 
-},{"../apis/cloudfront-2016-11-25.min.json":12,"../apis/cloudfront-2016-11-25.paginators.json":13,"../apis/cloudfront-2016-11-25.waiters2.json":14,"../apis/cloudfront-2017-03-25.min.json":15,"../apis/cloudfront-2017-03-25.paginators.json":16,"../apis/cloudfront-2017-03-25.waiters2.json":17,"../lib/core":230,"../lib/node_loader":227,"../lib/services/cloudfront":272}],169:[function(require,module,exports){
+},{"../apis/cloudfront-2016-11-25.min.json":12,"../apis/cloudfront-2016-11-25.paginators.json":13,"../apis/cloudfront-2016-11-25.waiters2.json":14,"../apis/cloudfront-2017-03-25.min.json":15,"../apis/cloudfront-2017-03-25.paginators.json":16,"../apis/cloudfront-2017-03-25.waiters2.json":17,"../lib/core":233,"../lib/node_loader":230,"../lib/services/cloudfront":275}],171:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106867,7 +109144,7 @@ Object.defineProperty(apiLoader.services['cloudhsm'], '2014-05-30', {
 
 module.exports = AWS.CloudHSM;
 
-},{"../apis/cloudhsm-2014-05-30.min.json":18,"../apis/cloudhsm-2014-05-30.paginators.json":19,"../lib/core":230,"../lib/node_loader":227}],170:[function(require,module,exports){
+},{"../apis/cloudhsm-2014-05-30.min.json":18,"../apis/cloudhsm-2014-05-30.paginators.json":19,"../lib/core":233,"../lib/node_loader":230}],172:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106887,7 +109164,7 @@ Object.defineProperty(apiLoader.services['cloudtrail'], '2013-11-01', {
 
 module.exports = AWS.CloudTrail;
 
-},{"../apis/cloudtrail-2013-11-01.min.json":20,"../apis/cloudtrail-2013-11-01.paginators.json":21,"../lib/core":230,"../lib/node_loader":227}],171:[function(require,module,exports){
+},{"../apis/cloudtrail-2013-11-01.min.json":20,"../apis/cloudtrail-2013-11-01.paginators.json":21,"../lib/core":233,"../lib/node_loader":230}],173:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106908,7 +109185,7 @@ Object.defineProperty(apiLoader.services['cloudwatch'], '2010-08-01', {
 
 module.exports = AWS.CloudWatch;
 
-},{"../apis/monitoring-2010-08-01.min.json":107,"../apis/monitoring-2010-08-01.paginators.json":108,"../apis/monitoring-2010-08-01.waiters2.json":109,"../lib/core":230,"../lib/node_loader":227}],172:[function(require,module,exports){
+},{"../apis/monitoring-2010-08-01.min.json":109,"../apis/monitoring-2010-08-01.paginators.json":110,"../apis/monitoring-2010-08-01.waiters2.json":111,"../lib/core":233,"../lib/node_loader":230}],174:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106928,7 +109205,7 @@ Object.defineProperty(apiLoader.services['cloudwatchevents'], '2015-10-07', {
 
 module.exports = AWS.CloudWatchEvents;
 
-},{"../apis/events-2015-10-07.min.json":78,"../apis/events-2015-10-07.paginators.json":79,"../lib/core":230,"../lib/node_loader":227}],173:[function(require,module,exports){
+},{"../apis/events-2015-10-07.min.json":78,"../apis/events-2015-10-07.paginators.json":79,"../lib/core":233,"../lib/node_loader":230}],175:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106948,7 +109225,7 @@ Object.defineProperty(apiLoader.services['cloudwatchlogs'], '2014-03-28', {
 
 module.exports = AWS.CloudWatchLogs;
 
-},{"../apis/logs-2014-03-28.min.json":98,"../apis/logs-2014-03-28.paginators.json":99,"../lib/core":230,"../lib/node_loader":227}],174:[function(require,module,exports){
+},{"../apis/logs-2014-03-28.min.json":100,"../apis/logs-2014-03-28.paginators.json":101,"../lib/core":233,"../lib/node_loader":230}],176:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106968,7 +109245,7 @@ Object.defineProperty(apiLoader.services['codecommit'], '2015-04-13', {
 
 module.exports = AWS.CodeCommit;
 
-},{"../apis/codecommit-2015-04-13.min.json":22,"../apis/codecommit-2015-04-13.paginators.json":23,"../lib/core":230,"../lib/node_loader":227}],175:[function(require,module,exports){
+},{"../apis/codecommit-2015-04-13.min.json":22,"../apis/codecommit-2015-04-13.paginators.json":23,"../lib/core":233,"../lib/node_loader":230}],177:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -106989,7 +109266,7 @@ Object.defineProperty(apiLoader.services['codedeploy'], '2014-10-06', {
 
 module.exports = AWS.CodeDeploy;
 
-},{"../apis/codedeploy-2014-10-06.min.json":24,"../apis/codedeploy-2014-10-06.paginators.json":25,"../apis/codedeploy-2014-10-06.waiters2.json":26,"../lib/core":230,"../lib/node_loader":227}],176:[function(require,module,exports){
+},{"../apis/codedeploy-2014-10-06.min.json":24,"../apis/codedeploy-2014-10-06.paginators.json":25,"../apis/codedeploy-2014-10-06.waiters2.json":26,"../lib/core":233,"../lib/node_loader":230}],178:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107009,7 +109286,7 @@ Object.defineProperty(apiLoader.services['codepipeline'], '2015-07-09', {
 
 module.exports = AWS.CodePipeline;
 
-},{"../apis/codepipeline-2015-07-09.min.json":27,"../apis/codepipeline-2015-07-09.paginators.json":28,"../lib/core":230,"../lib/node_loader":227}],177:[function(require,module,exports){
+},{"../apis/codepipeline-2015-07-09.min.json":27,"../apis/codepipeline-2015-07-09.paginators.json":28,"../lib/core":233,"../lib/node_loader":230}],179:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107030,7 +109307,7 @@ Object.defineProperty(apiLoader.services['cognitoidentity'], '2014-06-30', {
 
 module.exports = AWS.CognitoIdentity;
 
-},{"../apis/cognito-identity-2014-06-30.min.json":29,"../apis/cognito-identity-2014-06-30.paginators.json":30,"../lib/core":230,"../lib/node_loader":227,"../lib/services/cognitoidentity":273}],178:[function(require,module,exports){
+},{"../apis/cognito-identity-2014-06-30.min.json":29,"../apis/cognito-identity-2014-06-30.paginators.json":30,"../lib/core":233,"../lib/node_loader":230,"../lib/services/cognitoidentity":276}],180:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107050,7 +109327,7 @@ Object.defineProperty(apiLoader.services['cognitoidentityserviceprovider'], '201
 
 module.exports = AWS.CognitoIdentityServiceProvider;
 
-},{"../apis/cognito-idp-2016-04-18.min.json":31,"../apis/cognito-idp-2016-04-18.paginators.json":32,"../lib/core":230,"../lib/node_loader":227}],179:[function(require,module,exports){
+},{"../apis/cognito-idp-2016-04-18.min.json":31,"../apis/cognito-idp-2016-04-18.paginators.json":32,"../lib/core":233,"../lib/node_loader":230}],181:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107069,7 +109346,7 @@ Object.defineProperty(apiLoader.services['cognitosync'], '2014-06-30', {
 
 module.exports = AWS.CognitoSync;
 
-},{"../apis/cognito-sync-2014-06-30.min.json":33,"../lib/core":230,"../lib/node_loader":227}],180:[function(require,module,exports){
+},{"../apis/cognito-sync-2014-06-30.min.json":33,"../lib/core":233,"../lib/node_loader":230}],182:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107089,7 +109366,7 @@ Object.defineProperty(apiLoader.services['configservice'], '2014-11-12', {
 
 module.exports = AWS.ConfigService;
 
-},{"../apis/config-2014-11-12.min.json":34,"../apis/config-2014-11-12.paginators.json":35,"../lib/core":230,"../lib/node_loader":227}],181:[function(require,module,exports){
+},{"../apis/config-2014-11-12.min.json":34,"../apis/config-2014-11-12.paginators.json":35,"../lib/core":233,"../lib/node_loader":230}],183:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107109,7 +109386,7 @@ Object.defineProperty(apiLoader.services['cur'], '2017-01-06', {
 
 module.exports = AWS.CUR;
 
-},{"../apis/cur-2017-01-06.min.json":36,"../apis/cur-2017-01-06.paginators.json":37,"../lib/core":230,"../lib/node_loader":227}],182:[function(require,module,exports){
+},{"../apis/cur-2017-01-06.min.json":36,"../apis/cur-2017-01-06.paginators.json":37,"../lib/core":233,"../lib/node_loader":230}],184:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107129,7 +109406,7 @@ Object.defineProperty(apiLoader.services['devicefarm'], '2015-06-23', {
 
 module.exports = AWS.DeviceFarm;
 
-},{"../apis/devicefarm-2015-06-23.min.json":38,"../apis/devicefarm-2015-06-23.paginators.json":39,"../lib/core":230,"../lib/node_loader":227}],183:[function(require,module,exports){
+},{"../apis/devicefarm-2015-06-23.min.json":38,"../apis/devicefarm-2015-06-23.paginators.json":39,"../lib/core":233,"../lib/node_loader":230}],185:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107149,7 +109426,7 @@ Object.defineProperty(apiLoader.services['directconnect'], '2012-10-25', {
 
 module.exports = AWS.DirectConnect;
 
-},{"../apis/directconnect-2012-10-25.min.json":40,"../apis/directconnect-2012-10-25.paginators.json":41,"../lib/core":230,"../lib/node_loader":227}],184:[function(require,module,exports){
+},{"../apis/directconnect-2012-10-25.min.json":40,"../apis/directconnect-2012-10-25.paginators.json":41,"../lib/core":233,"../lib/node_loader":230}],186:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107181,7 +109458,7 @@ Object.defineProperty(apiLoader.services['dynamodb'], '2012-08-10', {
 
 module.exports = AWS.DynamoDB;
 
-},{"../apis/dynamodb-2011-12-05.min.json":42,"../apis/dynamodb-2011-12-05.paginators.json":43,"../apis/dynamodb-2011-12-05.waiters2.json":44,"../apis/dynamodb-2012-08-10.min.json":45,"../apis/dynamodb-2012-08-10.paginators.json":46,"../apis/dynamodb-2012-08-10.waiters2.json":47,"../lib/core":230,"../lib/node_loader":227,"../lib/services/dynamodb":274}],185:[function(require,module,exports){
+},{"../apis/dynamodb-2011-12-05.min.json":42,"../apis/dynamodb-2011-12-05.paginators.json":43,"../apis/dynamodb-2011-12-05.waiters2.json":44,"../apis/dynamodb-2012-08-10.min.json":45,"../apis/dynamodb-2012-08-10.paginators.json":46,"../apis/dynamodb-2012-08-10.waiters2.json":47,"../lib/core":233,"../lib/node_loader":230,"../lib/services/dynamodb":277}],187:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107201,7 +109478,7 @@ Object.defineProperty(apiLoader.services['dynamodbstreams'], '2012-08-10', {
 
 module.exports = AWS.DynamoDBStreams;
 
-},{"../apis/streams.dynamodb-2012-08-10.min.json":154,"../apis/streams.dynamodb-2012-08-10.paginators.json":155,"../lib/core":230,"../lib/node_loader":227}],186:[function(require,module,exports){
+},{"../apis/streams.dynamodb-2012-08-10.min.json":156,"../apis/streams.dynamodb-2012-08-10.paginators.json":157,"../lib/core":233,"../lib/node_loader":230}],188:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107223,7 +109500,7 @@ Object.defineProperty(apiLoader.services['ec2'], '2016-11-15', {
 
 module.exports = AWS.EC2;
 
-},{"../apis/ec2-2016-11-15.min.json":48,"../apis/ec2-2016-11-15.paginators.json":49,"../apis/ec2-2016-11-15.waiters2.json":50,"../lib/core":230,"../lib/node_loader":227,"../lib/services/ec2":275}],187:[function(require,module,exports){
+},{"../apis/ec2-2016-11-15.min.json":48,"../apis/ec2-2016-11-15.paginators.json":49,"../apis/ec2-2016-11-15.waiters2.json":50,"../lib/core":233,"../lib/node_loader":230,"../lib/services/ec2":278}],189:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107243,7 +109520,7 @@ Object.defineProperty(apiLoader.services['ecr'], '2015-09-21', {
 
 module.exports = AWS.ECR;
 
-},{"../apis/ecr-2015-09-21.min.json":51,"../apis/ecr-2015-09-21.paginators.json":52,"../lib/core":230,"../lib/node_loader":227}],188:[function(require,module,exports){
+},{"../apis/ecr-2015-09-21.min.json":51,"../apis/ecr-2015-09-21.paginators.json":52,"../lib/core":233,"../lib/node_loader":230}],190:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107264,7 +109541,7 @@ Object.defineProperty(apiLoader.services['ecs'], '2014-11-13', {
 
 module.exports = AWS.ECS;
 
-},{"../apis/ecs-2014-11-13.min.json":53,"../apis/ecs-2014-11-13.paginators.json":54,"../apis/ecs-2014-11-13.waiters2.json":55,"../lib/core":230,"../lib/node_loader":227}],189:[function(require,module,exports){
+},{"../apis/ecs-2014-11-13.min.json":53,"../apis/ecs-2014-11-13.paginators.json":54,"../apis/ecs-2014-11-13.waiters2.json":55,"../lib/core":233,"../lib/node_loader":230}],191:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107284,7 +109561,7 @@ Object.defineProperty(apiLoader.services['efs'], '2015-02-01', {
 
 module.exports = AWS.EFS;
 
-},{"../apis/elasticfilesystem-2015-02-01.min.json":61,"../apis/elasticfilesystem-2015-02-01.paginators.json":62,"../lib/core":230,"../lib/node_loader":227}],190:[function(require,module,exports){
+},{"../apis/elasticfilesystem-2015-02-01.min.json":61,"../apis/elasticfilesystem-2015-02-01.paginators.json":62,"../lib/core":233,"../lib/node_loader":230}],192:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107305,7 +109582,7 @@ Object.defineProperty(apiLoader.services['elasticache'], '2015-02-02', {
 
 module.exports = AWS.ElastiCache;
 
-},{"../apis/elasticache-2015-02-02.min.json":56,"../apis/elasticache-2015-02-02.paginators.json":57,"../apis/elasticache-2015-02-02.waiters2.json":58,"../lib/core":230,"../lib/node_loader":227}],191:[function(require,module,exports){
+},{"../apis/elasticache-2015-02-02.min.json":56,"../apis/elasticache-2015-02-02.paginators.json":57,"../apis/elasticache-2015-02-02.waiters2.json":58,"../lib/core":233,"../lib/node_loader":230}],193:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107325,7 +109602,7 @@ Object.defineProperty(apiLoader.services['elasticbeanstalk'], '2010-12-01', {
 
 module.exports = AWS.ElasticBeanstalk;
 
-},{"../apis/elasticbeanstalk-2010-12-01.min.json":59,"../apis/elasticbeanstalk-2010-12-01.paginators.json":60,"../lib/core":230,"../lib/node_loader":227}],192:[function(require,module,exports){
+},{"../apis/elasticbeanstalk-2010-12-01.min.json":59,"../apis/elasticbeanstalk-2010-12-01.paginators.json":60,"../lib/core":233,"../lib/node_loader":230}],194:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107346,7 +109623,7 @@ Object.defineProperty(apiLoader.services['elastictranscoder'], '2012-09-25', {
 
 module.exports = AWS.ElasticTranscoder;
 
-},{"../apis/elastictranscoder-2012-09-25.min.json":72,"../apis/elastictranscoder-2012-09-25.paginators.json":73,"../apis/elastictranscoder-2012-09-25.waiters2.json":74,"../lib/core":230,"../lib/node_loader":227}],193:[function(require,module,exports){
+},{"../apis/elastictranscoder-2012-09-25.min.json":72,"../apis/elastictranscoder-2012-09-25.paginators.json":73,"../apis/elastictranscoder-2012-09-25.waiters2.json":74,"../lib/core":233,"../lib/node_loader":230}],195:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107367,7 +109644,7 @@ Object.defineProperty(apiLoader.services['elb'], '2012-06-01', {
 
 module.exports = AWS.ELB;
 
-},{"../apis/elasticloadbalancing-2012-06-01.min.json":63,"../apis/elasticloadbalancing-2012-06-01.paginators.json":64,"../apis/elasticloadbalancing-2012-06-01.waiters2.json":65,"../lib/core":230,"../lib/node_loader":227}],194:[function(require,module,exports){
+},{"../apis/elasticloadbalancing-2012-06-01.min.json":63,"../apis/elasticloadbalancing-2012-06-01.paginators.json":64,"../apis/elasticloadbalancing-2012-06-01.waiters2.json":65,"../lib/core":233,"../lib/node_loader":230}],196:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107388,7 +109665,7 @@ Object.defineProperty(apiLoader.services['elbv2'], '2015-12-01', {
 
 module.exports = AWS.ELBv2;
 
-},{"../apis/elasticloadbalancingv2-2015-12-01.min.json":66,"../apis/elasticloadbalancingv2-2015-12-01.paginators.json":67,"../apis/elasticloadbalancingv2-2015-12-01.waiters2.json":68,"../lib/core":230,"../lib/node_loader":227}],195:[function(require,module,exports){
+},{"../apis/elasticloadbalancingv2-2015-12-01.min.json":66,"../apis/elasticloadbalancingv2-2015-12-01.paginators.json":67,"../apis/elasticloadbalancingv2-2015-12-01.waiters2.json":68,"../lib/core":233,"../lib/node_loader":230}],197:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107409,7 +109686,7 @@ Object.defineProperty(apiLoader.services['emr'], '2009-03-31', {
 
 module.exports = AWS.EMR;
 
-},{"../apis/elasticmapreduce-2009-03-31.min.json":69,"../apis/elasticmapreduce-2009-03-31.paginators.json":70,"../apis/elasticmapreduce-2009-03-31.waiters2.json":71,"../lib/core":230,"../lib/node_loader":227}],196:[function(require,module,exports){
+},{"../apis/elasticmapreduce-2009-03-31.min.json":69,"../apis/elasticmapreduce-2009-03-31.paginators.json":70,"../apis/elasticmapreduce-2009-03-31.waiters2.json":71,"../lib/core":233,"../lib/node_loader":230}],198:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107429,7 +109706,7 @@ Object.defineProperty(apiLoader.services['firehose'], '2015-08-04', {
 
 module.exports = AWS.Firehose;
 
-},{"../apis/firehose-2015-08-04.min.json":80,"../apis/firehose-2015-08-04.paginators.json":81,"../lib/core":230,"../lib/node_loader":227}],197:[function(require,module,exports){
+},{"../apis/firehose-2015-08-04.min.json":80,"../apis/firehose-2015-08-04.paginators.json":81,"../lib/core":233,"../lib/node_loader":230}],199:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107449,7 +109726,7 @@ Object.defineProperty(apiLoader.services['gamelift'], '2015-10-01', {
 
 module.exports = AWS.GameLift;
 
-},{"../apis/gamelift-2015-10-01.min.json":82,"../apis/gamelift-2015-10-01.paginators.json":83,"../lib/core":230,"../lib/node_loader":227}],198:[function(require,module,exports){
+},{"../apis/gamelift-2015-10-01.min.json":82,"../apis/gamelift-2015-10-01.paginators.json":83,"../lib/core":233,"../lib/node_loader":230}],200:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107469,7 +109746,7 @@ Object.defineProperty(apiLoader.services['inspector'], '2016-02-16', {
 
 module.exports = AWS.Inspector;
 
-},{"../apis/inspector-2016-02-16.min.json":84,"../apis/inspector-2016-02-16.paginators.json":85,"../lib/core":230,"../lib/node_loader":227}],199:[function(require,module,exports){
+},{"../apis/inspector-2016-02-16.min.json":84,"../apis/inspector-2016-02-16.paginators.json":85,"../lib/core":233,"../lib/node_loader":230}],201:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107489,7 +109766,7 @@ Object.defineProperty(apiLoader.services['iot'], '2015-05-28', {
 
 module.exports = AWS.Iot;
 
-},{"../apis/iot-2015-05-28.min.json":86,"../apis/iot-2015-05-28.paginators.json":87,"../lib/core":230,"../lib/node_loader":227}],200:[function(require,module,exports){
+},{"../apis/iot-2015-05-28.min.json":86,"../apis/iot-2015-05-28.paginators.json":87,"../lib/core":233,"../lib/node_loader":230}],202:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107509,7 +109786,7 @@ Object.defineProperty(apiLoader.services['iotdata'], '2015-05-28', {
 
 module.exports = AWS.IotData;
 
-},{"../apis/iot-data-2015-05-28.min.json":88,"../lib/core":230,"../lib/node_loader":227,"../lib/services/iotdata":276}],201:[function(require,module,exports){
+},{"../apis/iot-data-2015-05-28.min.json":88,"../lib/core":233,"../lib/node_loader":230,"../lib/services/iotdata":279}],203:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107530,7 +109807,7 @@ Object.defineProperty(apiLoader.services['kinesis'], '2013-12-02', {
 
 module.exports = AWS.Kinesis;
 
-},{"../apis/kinesis-2013-12-02.min.json":89,"../apis/kinesis-2013-12-02.paginators.json":90,"../apis/kinesis-2013-12-02.waiters2.json":91,"../lib/core":230,"../lib/node_loader":227}],202:[function(require,module,exports){
+},{"../apis/kinesis-2013-12-02.min.json":89,"../apis/kinesis-2013-12-02.paginators.json":90,"../apis/kinesis-2013-12-02.waiters2.json":91,"../lib/core":233,"../lib/node_loader":230}],204:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107550,7 +109827,7 @@ Object.defineProperty(apiLoader.services['kms'], '2014-11-01', {
 
 module.exports = AWS.KMS;
 
-},{"../apis/kms-2014-11-01.min.json":92,"../apis/kms-2014-11-01.paginators.json":93,"../lib/core":230,"../lib/node_loader":227}],203:[function(require,module,exports){
+},{"../apis/kms-2014-11-01.min.json":92,"../apis/kms-2014-11-01.paginators.json":93,"../lib/core":233,"../lib/node_loader":230}],205:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107580,7 +109857,27 @@ Object.defineProperty(apiLoader.services['lambda'], '2015-03-31', {
 
 module.exports = AWS.Lambda;
 
-},{"../apis/lambda-2014-11-11.min.json":94,"../apis/lambda-2014-11-11.paginators.json":95,"../apis/lambda-2015-03-31.min.json":96,"../apis/lambda-2015-03-31.paginators.json":97,"../lib/core":230,"../lib/node_loader":227,"../lib/services/lambda":277}],204:[function(require,module,exports){
+},{"../apis/lambda-2014-11-11.min.json":94,"../apis/lambda-2014-11-11.paginators.json":95,"../apis/lambda-2015-03-31.min.json":96,"../apis/lambda-2015-03-31.paginators.json":97,"../lib/core":233,"../lib/node_loader":230,"../lib/services/lambda":280}],206:[function(require,module,exports){
+require('../lib/node_loader');
+var AWS = require('../lib/core');
+var Service = AWS.Service;
+var apiLoader = AWS.apiLoader;
+
+apiLoader.services['lexmodelbuildingservice'] = {};
+AWS.LexModelBuildingService = Service.defineService('lexmodelbuildingservice', ['2017-04-19']);
+Object.defineProperty(apiLoader.services['lexmodelbuildingservice'], '2017-04-19', {
+  get: function get() {
+    var model = require('../apis/lex-models-2017-04-19.min.json');
+    model.paginators = require('../apis/lex-models-2017-04-19.paginators.json').pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+
+module.exports = AWS.LexModelBuildingService;
+
+},{"../apis/lex-models-2017-04-19.min.json":98,"../apis/lex-models-2017-04-19.paginators.json":99,"../lib/core":233,"../lib/node_loader":230}],207:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107600,7 +109897,7 @@ Object.defineProperty(apiLoader.services['lexruntime'], '2016-11-28', {
 
 module.exports = AWS.LexRuntime;
 
-},{"../apis/runtime.lex-2016-11-28.min.json":139,"../apis/runtime.lex-2016-11-28.paginators.json":140,"../lib/core":230,"../lib/node_loader":227}],205:[function(require,module,exports){
+},{"../apis/runtime.lex-2016-11-28.min.json":141,"../apis/runtime.lex-2016-11-28.paginators.json":142,"../lib/core":233,"../lib/node_loader":230}],208:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107622,7 +109919,7 @@ Object.defineProperty(apiLoader.services['machinelearning'], '2014-12-12', {
 
 module.exports = AWS.MachineLearning;
 
-},{"../apis/machinelearning-2014-12-12.min.json":100,"../apis/machinelearning-2014-12-12.paginators.json":101,"../apis/machinelearning-2014-12-12.waiters2.json":102,"../lib/core":230,"../lib/node_loader":227,"../lib/services/machinelearning":278}],206:[function(require,module,exports){
+},{"../apis/machinelearning-2014-12-12.min.json":102,"../apis/machinelearning-2014-12-12.paginators.json":103,"../apis/machinelearning-2014-12-12.waiters2.json":104,"../lib/core":233,"../lib/node_loader":230,"../lib/services/machinelearning":281}],209:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107642,7 +109939,7 @@ Object.defineProperty(apiLoader.services['marketplacecommerceanalytics'], '2015-
 
 module.exports = AWS.MarketplaceCommerceAnalytics;
 
-},{"../apis/marketplacecommerceanalytics-2015-07-01.min.json":103,"../apis/marketplacecommerceanalytics-2015-07-01.paginators.json":104,"../lib/core":230,"../lib/node_loader":227}],207:[function(require,module,exports){
+},{"../apis/marketplacecommerceanalytics-2015-07-01.min.json":105,"../apis/marketplacecommerceanalytics-2015-07-01.paginators.json":106,"../lib/core":233,"../lib/node_loader":230}],210:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107661,7 +109958,7 @@ Object.defineProperty(apiLoader.services['mobileanalytics'], '2014-06-05', {
 
 module.exports = AWS.MobileAnalytics;
 
-},{"../apis/mobileanalytics-2014-06-05.min.json":106,"../lib/core":230,"../lib/node_loader":227}],208:[function(require,module,exports){
+},{"../apis/mobileanalytics-2014-06-05.min.json":108,"../lib/core":233,"../lib/node_loader":230}],211:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107681,7 +109978,7 @@ Object.defineProperty(apiLoader.services['mturk'], '2017-01-17', {
 
 module.exports = AWS.MTurk;
 
-},{"../apis/mturk-requester-2017-01-17.min.json":110,"../apis/mturk-requester-2017-01-17.paginators.json":111,"../lib/core":230,"../lib/node_loader":227}],209:[function(require,module,exports){
+},{"../apis/mturk-requester-2017-01-17.min.json":112,"../apis/mturk-requester-2017-01-17.paginators.json":113,"../lib/core":233,"../lib/node_loader":230}],212:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107702,7 +109999,7 @@ Object.defineProperty(apiLoader.services['opsworks'], '2013-02-18', {
 
 module.exports = AWS.OpsWorks;
 
-},{"../apis/opsworks-2013-02-18.min.json":112,"../apis/opsworks-2013-02-18.paginators.json":113,"../apis/opsworks-2013-02-18.waiters2.json":114,"../lib/core":230,"../lib/node_loader":227}],210:[function(require,module,exports){
+},{"../apis/opsworks-2013-02-18.min.json":114,"../apis/opsworks-2013-02-18.paginators.json":115,"../apis/opsworks-2013-02-18.waiters2.json":116,"../lib/core":233,"../lib/node_loader":230}],213:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107723,7 +110020,7 @@ Object.defineProperty(apiLoader.services['polly'], '2016-06-10', {
 
 module.exports = AWS.Polly;
 
-},{"../apis/polly-2016-06-10.min.json":115,"../apis/polly-2016-06-10.paginators.json":116,"../lib/core":230,"../lib/node_loader":227,"../lib/services/polly":279}],211:[function(require,module,exports){
+},{"../apis/polly-2016-06-10.min.json":117,"../apis/polly-2016-06-10.paginators.json":118,"../lib/core":233,"../lib/node_loader":230,"../lib/services/polly":282}],214:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107782,7 +110079,7 @@ Object.defineProperty(apiLoader.services['rds'], '2014-10-31', {
 
 module.exports = AWS.RDS;
 
-},{"../apis/rds-2013-01-10.min.json":117,"../apis/rds-2013-01-10.paginators.json":118,"../apis/rds-2013-02-12.min.json":119,"../apis/rds-2013-02-12.paginators.json":120,"../apis/rds-2013-09-09.min.json":121,"../apis/rds-2013-09-09.paginators.json":122,"../apis/rds-2013-09-09.waiters2.json":123,"../apis/rds-2014-09-01.min.json":124,"../apis/rds-2014-09-01.paginators.json":125,"../apis/rds-2014-10-31.min.json":126,"../apis/rds-2014-10-31.paginators.json":127,"../apis/rds-2014-10-31.waiters2.json":128,"../lib/core":230,"../lib/node_loader":227,"../lib/services/rds":280}],212:[function(require,module,exports){
+},{"../apis/rds-2013-01-10.min.json":119,"../apis/rds-2013-01-10.paginators.json":120,"../apis/rds-2013-02-12.min.json":121,"../apis/rds-2013-02-12.paginators.json":122,"../apis/rds-2013-09-09.min.json":123,"../apis/rds-2013-09-09.paginators.json":124,"../apis/rds-2013-09-09.waiters2.json":125,"../apis/rds-2014-09-01.min.json":126,"../apis/rds-2014-09-01.paginators.json":127,"../apis/rds-2014-10-31.min.json":128,"../apis/rds-2014-10-31.paginators.json":129,"../apis/rds-2014-10-31.waiters2.json":130,"../lib/core":233,"../lib/node_loader":230,"../lib/services/rds":283}],215:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107803,7 +110100,7 @@ Object.defineProperty(apiLoader.services['redshift'], '2012-12-01', {
 
 module.exports = AWS.Redshift;
 
-},{"../apis/redshift-2012-12-01.min.json":129,"../apis/redshift-2012-12-01.paginators.json":130,"../apis/redshift-2012-12-01.waiters2.json":131,"../lib/core":230,"../lib/node_loader":227}],213:[function(require,module,exports){
+},{"../apis/redshift-2012-12-01.min.json":131,"../apis/redshift-2012-12-01.paginators.json":132,"../apis/redshift-2012-12-01.waiters2.json":133,"../lib/core":233,"../lib/node_loader":230}],216:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107823,7 +110120,7 @@ Object.defineProperty(apiLoader.services['rekognition'], '2016-06-27', {
 
 module.exports = AWS.Rekognition;
 
-},{"../apis/rekognition-2016-06-27.min.json":132,"../apis/rekognition-2016-06-27.paginators.json":133,"../lib/core":230,"../lib/node_loader":227}],214:[function(require,module,exports){
+},{"../apis/rekognition-2016-06-27.min.json":134,"../apis/rekognition-2016-06-27.paginators.json":135,"../lib/core":233,"../lib/node_loader":230}],217:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107845,7 +110142,7 @@ Object.defineProperty(apiLoader.services['route53'], '2013-04-01', {
 
 module.exports = AWS.Route53;
 
-},{"../apis/route53-2013-04-01.min.json":134,"../apis/route53-2013-04-01.paginators.json":135,"../apis/route53-2013-04-01.waiters2.json":136,"../lib/core":230,"../lib/node_loader":227,"../lib/services/route53":281}],215:[function(require,module,exports){
+},{"../apis/route53-2013-04-01.min.json":136,"../apis/route53-2013-04-01.paginators.json":137,"../apis/route53-2013-04-01.waiters2.json":138,"../lib/core":233,"../lib/node_loader":230,"../lib/services/route53":284}],218:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107865,7 +110162,7 @@ Object.defineProperty(apiLoader.services['route53domains'], '2014-05-15', {
 
 module.exports = AWS.Route53Domains;
 
-},{"../apis/route53domains-2014-05-15.min.json":137,"../apis/route53domains-2014-05-15.paginators.json":138,"../lib/core":230,"../lib/node_loader":227}],216:[function(require,module,exports){
+},{"../apis/route53domains-2014-05-15.min.json":139,"../apis/route53domains-2014-05-15.paginators.json":140,"../lib/core":233,"../lib/node_loader":230}],219:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107887,7 +110184,7 @@ Object.defineProperty(apiLoader.services['s3'], '2006-03-01', {
 
 module.exports = AWS.S3;
 
-},{"../apis/s3-2006-03-01.min.json":141,"../apis/s3-2006-03-01.paginators.json":142,"../apis/s3-2006-03-01.waiters2.json":143,"../lib/core":230,"../lib/node_loader":227,"../lib/services/s3":282}],217:[function(require,module,exports){
+},{"../apis/s3-2006-03-01.min.json":143,"../apis/s3-2006-03-01.paginators.json":144,"../apis/s3-2006-03-01.waiters2.json":145,"../lib/core":233,"../lib/node_loader":230,"../lib/services/s3":285}],220:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107907,7 +110204,7 @@ Object.defineProperty(apiLoader.services['servicecatalog'], '2015-12-10', {
 
 module.exports = AWS.ServiceCatalog;
 
-},{"../apis/servicecatalog-2015-12-10.min.json":144,"../apis/servicecatalog-2015-12-10.paginators.json":145,"../lib/core":230,"../lib/node_loader":227}],218:[function(require,module,exports){
+},{"../apis/servicecatalog-2015-12-10.min.json":146,"../apis/servicecatalog-2015-12-10.paginators.json":147,"../lib/core":233,"../lib/node_loader":230}],221:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107928,7 +110225,7 @@ Object.defineProperty(apiLoader.services['ses'], '2010-12-01', {
 
 module.exports = AWS.SES;
 
-},{"../apis/email-2010-12-01.min.json":75,"../apis/email-2010-12-01.paginators.json":76,"../apis/email-2010-12-01.waiters2.json":77,"../lib/core":230,"../lib/node_loader":227}],219:[function(require,module,exports){
+},{"../apis/email-2010-12-01.min.json":75,"../apis/email-2010-12-01.paginators.json":76,"../apis/email-2010-12-01.waiters2.json":77,"../lib/core":233,"../lib/node_loader":230}],222:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107948,7 +110245,7 @@ Object.defineProperty(apiLoader.services['sns'], '2010-03-31', {
 
 module.exports = AWS.SNS;
 
-},{"../apis/sns-2010-03-31.min.json":146,"../apis/sns-2010-03-31.paginators.json":147,"../lib/core":230,"../lib/node_loader":227}],220:[function(require,module,exports){
+},{"../apis/sns-2010-03-31.min.json":148,"../apis/sns-2010-03-31.paginators.json":149,"../lib/core":233,"../lib/node_loader":230}],223:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107969,7 +110266,7 @@ Object.defineProperty(apiLoader.services['sqs'], '2012-11-05', {
 
 module.exports = AWS.SQS;
 
-},{"../apis/sqs-2012-11-05.min.json":148,"../apis/sqs-2012-11-05.paginators.json":149,"../lib/core":230,"../lib/node_loader":227,"../lib/services/sqs":283}],221:[function(require,module,exports){
+},{"../apis/sqs-2012-11-05.min.json":150,"../apis/sqs-2012-11-05.paginators.json":151,"../lib/core":233,"../lib/node_loader":230,"../lib/services/sqs":286}],224:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -107989,7 +110286,7 @@ Object.defineProperty(apiLoader.services['ssm'], '2014-11-06', {
 
 module.exports = AWS.SSM;
 
-},{"../apis/ssm-2014-11-06.min.json":150,"../apis/ssm-2014-11-06.paginators.json":151,"../lib/core":230,"../lib/node_loader":227}],222:[function(require,module,exports){
+},{"../apis/ssm-2014-11-06.min.json":152,"../apis/ssm-2014-11-06.paginators.json":153,"../lib/core":233,"../lib/node_loader":230}],225:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -108009,7 +110306,7 @@ Object.defineProperty(apiLoader.services['storagegateway'], '2013-06-30', {
 
 module.exports = AWS.StorageGateway;
 
-},{"../apis/storagegateway-2013-06-30.min.json":152,"../apis/storagegateway-2013-06-30.paginators.json":153,"../lib/core":230,"../lib/node_loader":227}],223:[function(require,module,exports){
+},{"../apis/storagegateway-2013-06-30.min.json":154,"../apis/storagegateway-2013-06-30.paginators.json":155,"../lib/core":233,"../lib/node_loader":230}],226:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -108030,7 +110327,7 @@ Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
 
 module.exports = AWS.STS;
 
-},{"../apis/sts-2011-06-15.min.json":156,"../apis/sts-2011-06-15.paginators.json":157,"../lib/core":230,"../lib/node_loader":227,"../lib/services/sts":284}],224:[function(require,module,exports){
+},{"../apis/sts-2011-06-15.min.json":158,"../apis/sts-2011-06-15.paginators.json":159,"../lib/core":233,"../lib/node_loader":230,"../lib/services/sts":287}],227:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -108050,7 +110347,7 @@ Object.defineProperty(apiLoader.services['waf'], '2015-08-24', {
 
 module.exports = AWS.WAF;
 
-},{"../apis/waf-2015-08-24.min.json":158,"../apis/waf-2015-08-24.paginators.json":159,"../lib/core":230,"../lib/node_loader":227}],225:[function(require,module,exports){
+},{"../apis/waf-2015-08-24.min.json":160,"../apis/waf-2015-08-24.paginators.json":161,"../lib/core":233,"../lib/node_loader":230}],228:[function(require,module,exports){
 require('../lib/node_loader');
 var AWS = require('../lib/core');
 var Service = AWS.Service;
@@ -108070,7 +110367,7 @@ Object.defineProperty(apiLoader.services['workdocs'], '2016-05-01', {
 
 module.exports = AWS.WorkDocs;
 
-},{"../apis/workdocs-2016-05-01.min.json":160,"../apis/workdocs-2016-05-01.paginators.json":161,"../lib/core":230,"../lib/node_loader":227}],226:[function(require,module,exports){
+},{"../apis/workdocs-2016-05-01.min.json":162,"../apis/workdocs-2016-05-01.paginators.json":163,"../lib/core":233,"../lib/node_loader":230}],229:[function(require,module,exports){
 function apiLoader(svc, version) {
   if (!apiLoader.services.hasOwnProperty(svc)) {
     throw new Error('InvalidService: Failed to load api for ' + svc);
@@ -108082,7 +110379,7 @@ function apiLoader(svc, version) {
 apiLoader.services = {};
 module.exports = apiLoader;
 
-},{}],227:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 (function (process){
 var util = require('./util');
 
@@ -108112,7 +110409,7 @@ if (typeof process === 'undefined') {
   };
 }
 }).call(this,require('_process'))
-},{"./core":230,"./credentials":231,"./credentials/cognito_identity_credentials":232,"./credentials/credential_provider_chain":233,"./credentials/saml_credentials":234,"./credentials/temporary_credentials":235,"./credentials/web_identity_credentials":236,"./http/xhr":245,"./util":294,"./xml/browser_parser":295,"_process":450,"buffer/":299,"crypto-browserify":301,"querystring/":457,"url/":458}],228:[function(require,module,exports){
+},{"./core":233,"./credentials":234,"./credentials/cognito_identity_credentials":235,"./credentials/credential_provider_chain":236,"./credentials/saml_credentials":237,"./credentials/temporary_credentials":238,"./credentials/web_identity_credentials":239,"./http/xhr":248,"./util":297,"./xml/browser_parser":298,"_process":453,"buffer/":302,"crypto-browserify":304,"querystring/":460,"url/":461}],231:[function(require,module,exports){
 var AWS = require('../core'),
     url = AWS.util.url,
     crypto = AWS.util.crypto.lib,
@@ -108267,7 +110564,7 @@ AWS.CloudFront.Signer = inherit({
 
 module.exports = AWS.CloudFront.Signer;
 
-},{"../core":230}],229:[function(require,module,exports){
+},{"../core":233}],232:[function(require,module,exports){
 var AWS = require('./core');
 require('./credentials');
 require('./credentials/credential_provider_chain');
@@ -108464,7 +110761,7 @@ AWS.Config = AWS.util.inherit({
 
 AWS.config = new AWS.Config();
 
-},{"./core":230,"./credentials":231,"./credentials/credential_provider_chain":233}],230:[function(require,module,exports){
+},{"./core":233,"./credentials":234,"./credentials/credential_provider_chain":236}],233:[function(require,module,exports){
 
 var AWS = { util: require('./util') };
 
@@ -108476,7 +110773,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.133.0',
+  VERSION: '2.134.0',
 
 
   Signers: {},
@@ -108530,7 +110827,7 @@ require('./param_validator');
 
 AWS.events = new AWS.SequentialExecutor();
 
-},{"./api_loader":226,"./config":229,"./event_listeners":243,"./http":244,"./json/builder":246,"./json/parser":247,"./model/api":248,"./model/operation":250,"./model/paginator":251,"./model/resource_waiter":252,"./model/shape":253,"./param_validator":254,"./protocol/json":256,"./protocol/query":257,"./protocol/rest":258,"./protocol/rest_json":259,"./protocol/rest_xml":260,"./request":265,"./resource_waiter":266,"./response":267,"./sequential_executor":269,"./service":270,"./signers/request_signer":286,"./util":294,"./xml/builder":296}],231:[function(require,module,exports){
+},{"./api_loader":229,"./config":232,"./event_listeners":246,"./http":247,"./json/builder":249,"./json/parser":250,"./model/api":251,"./model/operation":253,"./model/paginator":254,"./model/resource_waiter":255,"./model/shape":256,"./param_validator":257,"./protocol/json":259,"./protocol/query":260,"./protocol/rest":261,"./protocol/rest_json":262,"./protocol/rest_xml":263,"./request":268,"./resource_waiter":269,"./response":270,"./sequential_executor":272,"./service":273,"./signers/request_signer":289,"./util":297,"./xml/builder":299}],234:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -108606,7 +110903,7 @@ AWS.Credentials.deletePromisesFromClass = function deletePromisesFromClass() {
 
 AWS.util.addPromises(AWS.Credentials);
 
-},{"./core":230}],232:[function(require,module,exports){
+},{"./core":233}],235:[function(require,module,exports){
 var AWS = require('../core');
 var CognitoIdentity = require('../../clients/cognitoidentity');
 var STS = require('../../clients/sts');
@@ -108821,7 +111118,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   })()
 });
 
-},{"../../clients/cognitoidentity":177,"../../clients/sts":223,"../core":230}],233:[function(require,module,exports){
+},{"../../clients/cognitoidentity":179,"../../clients/sts":226,"../core":233}],236:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -108890,7 +111187,7 @@ AWS.CredentialProviderChain.deletePromisesFromClass = function deletePromisesFro
 
 AWS.util.addPromises(AWS.CredentialProviderChain);
 
-},{"../core":230}],234:[function(require,module,exports){
+},{"../core":233}],237:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -108924,7 +111221,7 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":223,"../core":230}],235:[function(require,module,exports){
+},{"../../clients/sts":226,"../core":233}],238:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -108981,7 +111278,7 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":223,"../core":230}],236:[function(require,module,exports){
+},{"../../clients/sts":226,"../core":233}],239:[function(require,module,exports){
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
@@ -109024,7 +111321,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 });
 
-},{"../../clients/sts":223,"../core":230}],237:[function(require,module,exports){
+},{"../../clients/sts":226,"../core":233}],240:[function(require,module,exports){
 var AWS = require('../core');
 var util = AWS.util;
 var typeOf = require('./types').typeOf;
@@ -109196,7 +111493,7 @@ function filterEmptySetValues(set) {
 
 module.exports = AWS.DynamoDB.Converter;
 
-},{"../core":230,"./numberValue":239,"./set":240,"./types":242}],238:[function(require,module,exports){
+},{"../core":233,"./numberValue":242,"./set":243,"./types":245}],241:[function(require,module,exports){
 var AWS = require('../core');
 var Translator = require('./translator');
 var DynamoDBSet = require('./set');
@@ -109410,7 +111707,7 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
 
 module.exports = AWS.DynamoDB.DocumentClient;
 
-},{"../core":230,"./set":240,"./translator":241}],239:[function(require,module,exports){
+},{"../core":233,"./set":243,"./translator":244}],242:[function(require,module,exports){
 var util = require('../core').util;
 
 
@@ -109436,7 +111733,7 @@ var DynamoDBNumberValue = util.inherit({
 });
 
 module.exports = DynamoDBNumberValue;
-},{"../core":230}],240:[function(require,module,exports){
+},{"../core":233}],243:[function(require,module,exports){
 var util = require('../core').util;
 var typeOf = require('./types').typeOf;
 
@@ -109492,7 +111789,7 @@ var DynamoDBSet = util.inherit({
 
 module.exports = DynamoDBSet;
 
-},{"../core":230,"./types":242}],241:[function(require,module,exports){
+},{"../core":233,"./types":245}],244:[function(require,module,exports){
 var util = require('../core').util;
 var convert = require('./converter');
 
@@ -109578,7 +111875,7 @@ Translator.prototype.translateScalar = function(value, shape) {
 
 module.exports = Translator;
 
-},{"../core":230,"./converter":237}],242:[function(require,module,exports){
+},{"../core":233,"./converter":240}],245:[function(require,module,exports){
 var util = require('../core').util;
 
 function typeOf(data) {
@@ -109624,7 +111921,7 @@ module.exports = {
   isBinary: isBinary
 };
 
-},{"../core":230}],243:[function(require,module,exports){
+},{"../core":233}],246:[function(require,module,exports){
 var AWS = require('./core');
 var SequentialExecutor = require('./sequential_executor');
 
@@ -110098,7 +112395,7 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":230,"./protocol/json":256,"./protocol/query":257,"./protocol/rest":258,"./protocol/rest_json":259,"./protocol/rest_xml":260,"./sequential_executor":269,"util":461}],244:[function(require,module,exports){
+},{"./core":233,"./protocol/json":259,"./protocol/query":260,"./protocol/rest":261,"./protocol/rest_json":262,"./protocol/rest_xml":263,"./sequential_executor":272,"util":464}],247:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
@@ -110218,7 +112515,7 @@ AWS.HttpClient.getInstance = function getInstance() {
   return this.singleton;
 };
 
-},{"./core":230}],245:[function(require,module,exports){
+},{"./core":233}],248:[function(require,module,exports){
 var AWS = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
@@ -110350,7 +112647,7 @@ AWS.HttpClient.prototype = AWS.XHRClient.prototype;
 
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":230,"../http":244,"events":306}],246:[function(require,module,exports){
+},{"../core":233,"../http":247,"events":309}],249:[function(require,module,exports){
 var util = require('../util');
 
 function JsonBuilder() { }
@@ -110408,7 +112705,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonBuilder;
 
-},{"../util":294}],247:[function(require,module,exports){
+},{"../util":297}],250:[function(require,module,exports){
 var util = require('../util');
 
 function JsonParser() { }
@@ -110474,7 +112771,7 @@ function translateScalar(value, shape) {
 
 module.exports = JsonParser;
 
-},{"../util":294}],248:[function(require,module,exports){
+},{"../util":297}],251:[function(require,module,exports){
 var Collection = require('./collection');
 var Operation = require('./operation');
 var Shape = require('./shape');
@@ -110539,7 +112836,7 @@ function Api(api, options) {
 
 module.exports = Api;
 
-},{"../util":294,"./collection":249,"./operation":250,"./paginator":251,"./resource_waiter":252,"./shape":253}],249:[function(require,module,exports){
+},{"../util":297,"./collection":252,"./operation":253,"./paginator":254,"./resource_waiter":255,"./shape":256}],252:[function(require,module,exports){
 var memoizedProperty = require('../util').memoizedProperty;
 
 function memoize(name, value, fn, nameTr) {
@@ -110561,7 +112858,7 @@ function Collection(iterable, options, fn, nameTr) {
 
 module.exports = Collection;
 
-},{"../util":294}],250:[function(require,module,exports){
+},{"../util":297}],253:[function(require,module,exports){
 var Shape = require('./shape');
 
 var util = require('../util');
@@ -110636,7 +112933,7 @@ function Operation(name, operation, options) {
 
 module.exports = Operation;
 
-},{"../util":294,"./shape":253}],251:[function(require,module,exports){
+},{"../util":297,"./shape":256}],254:[function(require,module,exports){
 var property = require('../util').property;
 
 function Paginator(name, paginator) {
@@ -110649,7 +112946,7 @@ function Paginator(name, paginator) {
 
 module.exports = Paginator;
 
-},{"../util":294}],252:[function(require,module,exports){
+},{"../util":297}],255:[function(require,module,exports){
 var util = require('../util');
 var property = util.property;
 
@@ -110681,7 +112978,7 @@ function ResourceWaiter(name, waiter, options) {
 
 module.exports = ResourceWaiter;
 
-},{"../util":294}],253:[function(require,module,exports){
+},{"../util":297}],256:[function(require,module,exports){
 var Collection = require('./collection');
 
 var util = require('../util');
@@ -111025,7 +113322,7 @@ Shape.shapes = {
 
 module.exports = Shape;
 
-},{"../util":294,"./collection":249}],254:[function(require,module,exports){
+},{"../util":297,"./collection":252}],257:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -111259,7 +113556,7 @@ AWS.ParamValidator = AWS.util.inherit({
   }
 });
 
-},{"./core":230}],255:[function(require,module,exports){
+},{"./core":233}],258:[function(require,module,exports){
 var AWS = require('../core');
 var rest = AWS.Protocol.Rest;
 
@@ -111331,7 +113628,7 @@ AWS.Polly.Presigner = AWS.util.inherit({
     }
 });
 
-},{"../core":230}],256:[function(require,module,exports){
+},{"../core":233}],259:[function(require,module,exports){
 var util = require('../util');
 var JsonBuilder = require('../json/builder');
 var JsonParser = require('../json/parser');
@@ -111400,7 +113697,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":246,"../json/parser":247,"../util":294}],257:[function(require,module,exports){
+},{"../json/builder":249,"../json/parser":250,"../util":297}],260:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var QueryParamSerializer = require('../query/query_param_serializer');
@@ -111503,7 +113800,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":230,"../model/shape":253,"../query/query_param_serializer":261,"../util":294}],258:[function(require,module,exports){
+},{"../core":233,"../model/shape":256,"../query/query_param_serializer":264,"../util":297}],261:[function(require,module,exports){
 var util = require('../util');
 
 function populateMethod(req) {
@@ -111647,7 +113944,7 @@ module.exports = {
   generateURI: generateURI
 };
 
-},{"../util":294}],259:[function(require,module,exports){
+},{"../util":297}],262:[function(require,module,exports){
 var util = require('../util');
 var Rest = require('./rest');
 var Json = require('./json');
@@ -111723,7 +114020,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../json/builder":246,"../json/parser":247,"../util":294,"./json":256,"./rest":258}],260:[function(require,module,exports){
+},{"../json/builder":249,"../json/parser":250,"../util":297,"./json":259,"./rest":261}],263:[function(require,module,exports){
 var AWS = require('../core');
 var util = require('../util');
 var Rest = require('./rest');
@@ -111820,7 +114117,7 @@ module.exports = {
   extractData: extractData
 };
 
-},{"../core":230,"../util":294,"./rest":258}],261:[function(require,module,exports){
+},{"../core":233,"../util":297,"./rest":261}],264:[function(require,module,exports){
 var util = require('../util');
 
 function QueryParamSerializer() {
@@ -111902,7 +114199,7 @@ function serializeMember(name, value, rules, fn) {
 
 module.exports = QueryParamSerializer;
 
-},{"../util":294}],262:[function(require,module,exports){
+},{"../util":297}],265:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -112014,7 +114311,7 @@ AWS.RDS.Signer = AWS.util.inherit({
         return true;
     }
 });
-},{"../core":230}],263:[function(require,module,exports){
+},{"../core":233}],266:[function(require,module,exports){
 var util = require('./util');
 var regionConfig = require('./region_config_data.json');
 
@@ -112081,7 +114378,7 @@ function configureEndpoint(service) {
 
 module.exports = configureEndpoint;
 
-},{"./region_config_data.json":264,"./util":294}],264:[function(require,module,exports){
+},{"./region_config_data.json":267,"./util":297}],267:[function(require,module,exports){
 module.exports={
   "rules": {
     "*/*": {
@@ -112146,7 +114443,7 @@ module.exports={
   }
 }
 
-},{}],265:[function(require,module,exports){
+},{}],268:[function(require,module,exports){
 (function (process){
 var AWS = require('./core');
 var AcceptorStateMachine = require('./state_machine');
@@ -112549,7 +114846,7 @@ AWS.util.addPromises(AWS.Request);
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require('_process'))
-},{"./core":230,"./state_machine":293,"_process":450,"jmespath":309}],266:[function(require,module,exports){
+},{"./core":233,"./state_machine":296,"_process":453,"jmespath":312}],269:[function(require,module,exports){
 
 
 var AWS = require('./core');
@@ -112723,7 +115020,7 @@ AWS.ResourceWaiter = inherit({
   }
 });
 
-},{"./core":230,"jmespath":309}],267:[function(require,module,exports){
+},{"./core":233,"jmespath":312}],270:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 var jmespath = require('jmespath');
@@ -112811,7 +115108,7 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":230,"jmespath":309}],268:[function(require,module,exports){
+},{"./core":233,"jmespath":312}],271:[function(require,module,exports){
 var AWS = require('../core');
 var byteLength = AWS.util.string.byteLength;
 var Buffer = AWS.util.Buffer;
@@ -113309,7 +115606,7 @@ AWS.util.addPromises(AWS.S3.ManagedUpload);
 
 module.exports = AWS.S3.ManagedUpload;
 
-},{"../core":230}],269:[function(require,module,exports){
+},{"../core":233}],272:[function(require,module,exports){
 var AWS = require('./core');
 
 
@@ -113458,7 +115755,7 @@ AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.
 
 module.exports = AWS.SequentialExecutor;
 
-},{"./core":230}],270:[function(require,module,exports){
+},{"./core":233}],273:[function(require,module,exports){
 var AWS = require('./core');
 var Api = require('./model/api');
 var regionConfig = require('./region_config');
@@ -113923,7 +116220,7 @@ AWS.util.update(AWS.Service, {
 
 module.exports = AWS.Service;
 
-},{"./core":230,"./model/api":248,"./region_config":263}],271:[function(require,module,exports){
+},{"./core":233,"./model/api":251,"./region_config":266}],274:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.APIGateway.prototype, {
@@ -113948,7 +116245,7 @@ AWS.util.update(AWS.APIGateway.prototype, {
 });
 
 
-},{"../core":230}],272:[function(require,module,exports){
+},{"../core":233}],275:[function(require,module,exports){
 var AWS = require('../core');
 
 require('../cloudfront/signer');
@@ -113961,7 +116258,7 @@ AWS.util.update(AWS.CloudFront.prototype, {
 
 });
 
-},{"../cloudfront/signer":228,"../core":230}],273:[function(require,module,exports){
+},{"../cloudfront/signer":231,"../core":233}],276:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.CognitoIdentity.prototype, {
@@ -113978,7 +116275,7 @@ AWS.util.update(AWS.CognitoIdentity.prototype, {
   }
 });
 
-},{"../core":230}],274:[function(require,module,exports){
+},{"../core":233}],277:[function(require,module,exports){
 var AWS = require('../core');
 require('../dynamodb/document_client');
 
@@ -114028,7 +116325,7 @@ AWS.util.update(AWS.DynamoDB.prototype, {
   }
 });
 
-},{"../core":230,"../dynamodb/document_client":238}],275:[function(require,module,exports){
+},{"../core":233,"../dynamodb/document_client":241}],278:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.EC2.prototype, {
@@ -114085,7 +116382,7 @@ AWS.util.update(AWS.EC2.prototype, {
   }
 });
 
-},{"../core":230}],276:[function(require,module,exports){
+},{"../core":233}],279:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -114126,7 +116423,7 @@ AWS.util.update(AWS.IotData.prototype, {
 
 });
 
-},{"../core":230}],277:[function(require,module,exports){
+},{"../core":233}],280:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Lambda.prototype, {
@@ -114139,7 +116436,7 @@ AWS.util.update(AWS.Lambda.prototype, {
 });
 
 
-},{"../core":230}],278:[function(require,module,exports){
+},{"../core":233}],281:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.MachineLearning.prototype, {
@@ -114160,9 +116457,9 @@ AWS.util.update(AWS.MachineLearning.prototype, {
 
 });
 
-},{"../core":230}],279:[function(require,module,exports){
+},{"../core":233}],282:[function(require,module,exports){
 require('../polly/presigner');
-},{"../polly/presigner":255}],280:[function(require,module,exports){
+},{"../polly/presigner":258}],283:[function(require,module,exports){
 var AWS = require('../core');
 require('../rds/signer');
 
@@ -114216,7 +116513,7 @@ require('../rds/signer');
      });
    }
  });
-},{"../core":230,"../rds/signer":262}],281:[function(require,module,exports){
+},{"../core":233,"../rds/signer":265}],284:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.Route53.prototype, {
@@ -114243,7 +116540,7 @@ AWS.util.update(AWS.Route53.prototype, {
   }
 });
 
-},{"../core":230}],282:[function(require,module,exports){
+},{"../core":233}],285:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('../signers/v4_credentials');
 
@@ -115011,7 +117308,7 @@ AWS.util.update(AWS.S3.prototype, {
   }
 });
 
-},{"../core":230,"../s3/managed_upload":268,"../signers/v4_credentials":292}],283:[function(require,module,exports){
+},{"../core":233,"../s3/managed_upload":271,"../signers/v4_credentials":295}],286:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.SQS.prototype, {
@@ -115126,7 +117423,7 @@ AWS.util.update(AWS.SQS.prototype, {
   }
 });
 
-},{"../core":230}],284:[function(require,module,exports){
+},{"../core":233}],287:[function(require,module,exports){
 var AWS = require('../core');
 
 AWS.util.update(AWS.STS.prototype, {
@@ -115151,7 +117448,7 @@ AWS.util.update(AWS.STS.prototype, {
   }
 });
 
-},{"../core":230}],285:[function(require,module,exports){
+},{"../core":233}],288:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -115257,7 +117554,7 @@ AWS.Signers.Presign = inherit({
 
 module.exports = AWS.Signers.Presign;
 
-},{"../core":230}],286:[function(require,module,exports){
+},{"../core":233}],289:[function(require,module,exports){
 var AWS = require('../core');
 
 var inherit = AWS.util.inherit;
@@ -115295,7 +117592,7 @@ require('./v4');
 require('./s3');
 require('./presign');
 
-},{"../core":230,"./presign":285,"./s3":287,"./v2":288,"./v3":289,"./v3https":290,"./v4":291}],287:[function(require,module,exports){
+},{"../core":233,"./presign":288,"./s3":290,"./v2":291,"./v3":292,"./v3https":293,"./v4":294}],290:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -115457,7 +117754,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.S3;
 
-},{"../core":230}],288:[function(require,module,exports){
+},{"../core":233}],291:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -115502,7 +117799,7 @@ AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V2;
 
-},{"../core":230}],289:[function(require,module,exports){
+},{"../core":233}],292:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -115576,7 +117873,7 @@ AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V3;
 
-},{"../core":230}],290:[function(require,module,exports){
+},{"../core":233}],293:[function(require,module,exports){
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
@@ -115598,7 +117895,7 @@ AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
 
 module.exports = AWS.Signers.V3Https;
 
-},{"../core":230,"./v3":289}],291:[function(require,module,exports){
+},{"../core":233,"./v3":292}],294:[function(require,module,exports){
 var AWS = require('../core');
 var v4Credentials = require('./v4_credentials');
 var inherit = AWS.util.inherit;
@@ -115805,7 +118102,7 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
 
 module.exports = AWS.Signers.V4;
 
-},{"../core":230,"./v4_credentials":292}],292:[function(require,module,exports){
+},{"../core":233,"./v4_credentials":295}],295:[function(require,module,exports){
 var AWS = require('../core');
 
 
@@ -115874,7 +118171,7 @@ module.exports = {
   }
 };
 
-},{"../core":230}],293:[function(require,module,exports){
+},{"../core":233}],296:[function(require,module,exports){
 function AcceptorStateMachine(states, state) {
   this.currentState = state || null;
   this.states = states || {};
@@ -115918,7 +118215,7 @@ AcceptorStateMachine.prototype.addState = function addState(name, acceptState, f
 
 module.exports = AcceptorStateMachine;
 
-},{}],294:[function(require,module,exports){
+},{}],297:[function(require,module,exports){
 (function (process){
 
 var AWS;
@@ -116753,7 +119050,7 @@ var util = {
 module.exports = util;
 
 }).call(this,require('_process'))
-},{"../apis/metadata.json":105,"./core":230,"_process":450,"fs":298,"uuid":462}],295:[function(require,module,exports){
+},{"../apis/metadata.json":107,"./core":233,"_process":453,"fs":301,"uuid":465}],298:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -116938,7 +119235,7 @@ function parseUnknown(xml) {
 
 module.exports = DomXmlParser;
 
-},{"../model/shape":253,"../util":294}],296:[function(require,module,exports){
+},{"../model/shape":256,"../util":297}],299:[function(require,module,exports){
 var util = require('../util');
 var builder = require('xmlbuilder');
 
@@ -117026,7 +119323,7 @@ function applyNamespaces(xml, shape) {
 
 module.exports = XmlBuilder;
 
-},{"../util":294,"xmlbuilder":483}],297:[function(require,module,exports){
+},{"../util":297,"xmlbuilder":486}],300:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -117133,9 +119430,9 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],298:[function(require,module,exports){
+},{}],301:[function(require,module,exports){
 
-},{}],299:[function(require,module,exports){
+},{}],302:[function(require,module,exports){
 (function (global){
 
 
@@ -118790,7 +121087,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":297,"ieee754":307,"isarray":308}],300:[function(require,module,exports){
+},{"base64-js":300,"ieee754":310,"isarray":311}],303:[function(require,module,exports){
 var Buffer = require('buffer').Buffer;
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -118827,7 +121124,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 
 module.exports = { hash: hash };
 
-},{"buffer":299}],301:[function(require,module,exports){
+},{"buffer":302}],304:[function(require,module,exports){
 var Buffer = require('buffer').Buffer
 var sha = require('./sha')
 var sha256 = require('./sha256')
@@ -118925,7 +121222,7 @@ each(['createCredentials'
   }
 })
 
-},{"./md5":302,"./rng":303,"./sha":304,"./sha256":305,"buffer":299}],302:[function(require,module,exports){
+},{"./md5":305,"./rng":306,"./sha":307,"./sha256":308,"buffer":302}],305:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -119072,7 +121369,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":300}],303:[function(require,module,exports){
+},{"./helpers":303}],306:[function(require,module,exports){
 (function() {
   var _global = this;
 
@@ -119102,7 +121399,7 @@ module.exports = function md5(buf) {
 
 }())
 
-},{}],304:[function(require,module,exports){
+},{}],307:[function(require,module,exports){
 
 
 var helpers = require('./helpers');
@@ -119186,7 +121483,7 @@ module.exports = function sha1(buf) {
   return helpers.hash(buf, core_sha1, 20, true);
 };
 
-},{"./helpers":300}],305:[function(require,module,exports){
+},{"./helpers":303}],308:[function(require,module,exports){
 
 
 
@@ -119261,7 +121558,7 @@ module.exports = function sha256(buf) {
   return helpers.hash(buf, core_sha256, 32, true);
 };
 
-},{"./helpers":300}],306:[function(require,module,exports){
+},{"./helpers":303}],309:[function(require,module,exports){
 
 function EventEmitter() {
   this._events = this._events || {};
@@ -119525,7 +121822,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],307:[function(require,module,exports){
+},{}],310:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -119611,14 +121908,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],308:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],309:[function(require,module,exports){
+},{}],312:[function(require,module,exports){
 (function(exports) {
   "use strict";
 
@@ -121201,7 +123498,7 @@ module.exports = Array.isArray || function (arr) {
   exports.strictDeepEqual = strictDeepEqual;
 })(typeof exports === "undefined" ? this.jmespath = {} : exports);
 
-},{}],310:[function(require,module,exports){
+},{}],313:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -121210,7 +123507,7 @@ var DataView = getNative(root, 'DataView');
 
 module.exports = DataView;
 
-},{"./_getNative":374,"./_root":411}],311:[function(require,module,exports){
+},{"./_getNative":377,"./_root":414}],314:[function(require,module,exports){
 var hashClear = require('./_hashClear'),
     hashDelete = require('./_hashDelete'),
     hashGet = require('./_hashGet'),
@@ -121237,7 +123534,7 @@ Hash.prototype.set = hashSet;
 
 module.exports = Hash;
 
-},{"./_hashClear":380,"./_hashDelete":381,"./_hashGet":382,"./_hashHas":383,"./_hashSet":384}],312:[function(require,module,exports){
+},{"./_hashClear":383,"./_hashDelete":384,"./_hashGet":385,"./_hashHas":386,"./_hashSet":387}],315:[function(require,module,exports){
 var listCacheClear = require('./_listCacheClear'),
     listCacheDelete = require('./_listCacheDelete'),
     listCacheGet = require('./_listCacheGet'),
@@ -121264,7 +123561,7 @@ ListCache.prototype.set = listCacheSet;
 
 module.exports = ListCache;
 
-},{"./_listCacheClear":392,"./_listCacheDelete":393,"./_listCacheGet":394,"./_listCacheHas":395,"./_listCacheSet":396}],313:[function(require,module,exports){
+},{"./_listCacheClear":395,"./_listCacheDelete":396,"./_listCacheGet":397,"./_listCacheHas":398,"./_listCacheSet":399}],316:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -121273,7 +123570,7 @@ var Map = getNative(root, 'Map');
 
 module.exports = Map;
 
-},{"./_getNative":374,"./_root":411}],314:[function(require,module,exports){
+},{"./_getNative":377,"./_root":414}],317:[function(require,module,exports){
 var mapCacheClear = require('./_mapCacheClear'),
     mapCacheDelete = require('./_mapCacheDelete'),
     mapCacheGet = require('./_mapCacheGet'),
@@ -121300,7 +123597,7 @@ MapCache.prototype.set = mapCacheSet;
 
 module.exports = MapCache;
 
-},{"./_mapCacheClear":397,"./_mapCacheDelete":398,"./_mapCacheGet":399,"./_mapCacheHas":400,"./_mapCacheSet":401}],315:[function(require,module,exports){
+},{"./_mapCacheClear":400,"./_mapCacheDelete":401,"./_mapCacheGet":402,"./_mapCacheHas":403,"./_mapCacheSet":404}],318:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -121309,7 +123606,7 @@ var Promise = getNative(root, 'Promise');
 
 module.exports = Promise;
 
-},{"./_getNative":374,"./_root":411}],316:[function(require,module,exports){
+},{"./_getNative":377,"./_root":414}],319:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -121318,7 +123615,7 @@ var Set = getNative(root, 'Set');
 
 module.exports = Set;
 
-},{"./_getNative":374,"./_root":411}],317:[function(require,module,exports){
+},{"./_getNative":377,"./_root":414}],320:[function(require,module,exports){
 var MapCache = require('./_MapCache'),
     setCacheAdd = require('./_setCacheAdd'),
     setCacheHas = require('./_setCacheHas');
@@ -121339,7 +123636,7 @@ SetCache.prototype.has = setCacheHas;
 
 module.exports = SetCache;
 
-},{"./_MapCache":314,"./_setCacheAdd":412,"./_setCacheHas":413}],318:[function(require,module,exports){
+},{"./_MapCache":317,"./_setCacheAdd":415,"./_setCacheHas":416}],321:[function(require,module,exports){
 var ListCache = require('./_ListCache'),
     stackClear = require('./_stackClear'),
     stackDelete = require('./_stackDelete'),
@@ -121361,7 +123658,7 @@ Stack.prototype.set = stackSet;
 
 module.exports = Stack;
 
-},{"./_ListCache":312,"./_stackClear":417,"./_stackDelete":418,"./_stackGet":419,"./_stackHas":420,"./_stackSet":421}],319:[function(require,module,exports){
+},{"./_ListCache":315,"./_stackClear":420,"./_stackDelete":421,"./_stackGet":422,"./_stackHas":423,"./_stackSet":424}],322:[function(require,module,exports){
 var root = require('./_root');
 
 
@@ -121369,7 +123666,7 @@ var Symbol = root.Symbol;
 
 module.exports = Symbol;
 
-},{"./_root":411}],320:[function(require,module,exports){
+},{"./_root":414}],323:[function(require,module,exports){
 var root = require('./_root');
 
 
@@ -121377,7 +123674,7 @@ var Uint8Array = root.Uint8Array;
 
 module.exports = Uint8Array;
 
-},{"./_root":411}],321:[function(require,module,exports){
+},{"./_root":414}],324:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
@@ -121386,7 +123683,7 @@ var WeakMap = getNative(root, 'WeakMap');
 
 module.exports = WeakMap;
 
-},{"./_getNative":374,"./_root":411}],322:[function(require,module,exports){
+},{"./_getNative":377,"./_root":414}],325:[function(require,module,exports){
 
 function apply(func, thisArg, args) {
   switch (args.length) {
@@ -121400,7 +123697,7 @@ function apply(func, thisArg, args) {
 
 module.exports = apply;
 
-},{}],323:[function(require,module,exports){
+},{}],326:[function(require,module,exports){
 
 function arrayEvery(array, predicate) {
   var index = -1,
@@ -121416,7 +123713,7 @@ function arrayEvery(array, predicate) {
 
 module.exports = arrayEvery;
 
-},{}],324:[function(require,module,exports){
+},{}],327:[function(require,module,exports){
 
 function arrayFilter(array, predicate) {
   var index = -1,
@@ -121435,7 +123732,7 @@ function arrayFilter(array, predicate) {
 
 module.exports = arrayFilter;
 
-},{}],325:[function(require,module,exports){
+},{}],328:[function(require,module,exports){
 var baseTimes = require('./_baseTimes'),
     isArguments = require('./isArguments'),
     isArray = require('./isArray'),
@@ -121475,7 +123772,7 @@ function arrayLikeKeys(value, inherited) {
 
 module.exports = arrayLikeKeys;
 
-},{"./_baseTimes":356,"./_isIndex":385,"./isArguments":433,"./isArray":434,"./isBuffer":436,"./isTypedArray":443}],326:[function(require,module,exports){
+},{"./_baseTimes":359,"./_isIndex":388,"./isArguments":436,"./isArray":437,"./isBuffer":439,"./isTypedArray":446}],329:[function(require,module,exports){
 
 function arrayMap(array, iteratee) {
   var index = -1,
@@ -121490,7 +123787,7 @@ function arrayMap(array, iteratee) {
 
 module.exports = arrayMap;
 
-},{}],327:[function(require,module,exports){
+},{}],330:[function(require,module,exports){
 
 function arrayPush(array, values) {
   var index = -1,
@@ -121505,7 +123802,7 @@ function arrayPush(array, values) {
 
 module.exports = arrayPush;
 
-},{}],328:[function(require,module,exports){
+},{}],331:[function(require,module,exports){
 
 function arraySome(array, predicate) {
   var index = -1,
@@ -121521,7 +123818,7 @@ function arraySome(array, predicate) {
 
 module.exports = arraySome;
 
-},{}],329:[function(require,module,exports){
+},{}],332:[function(require,module,exports){
 var baseAssignValue = require('./_baseAssignValue'),
     eq = require('./eq');
 
@@ -121542,7 +123839,7 @@ function assignValue(object, key, value) {
 
 module.exports = assignValue;
 
-},{"./_baseAssignValue":332,"./eq":428}],330:[function(require,module,exports){
+},{"./_baseAssignValue":335,"./eq":431}],333:[function(require,module,exports){
 var eq = require('./eq');
 
 
@@ -121558,7 +123855,7 @@ function assocIndexOf(array, key) {
 
 module.exports = assocIndexOf;
 
-},{"./eq":428}],331:[function(require,module,exports){
+},{"./eq":431}],334:[function(require,module,exports){
 var copyObject = require('./_copyObject'),
     keys = require('./keys');
 
@@ -121569,7 +123866,7 @@ function baseAssign(object, source) {
 
 module.exports = baseAssign;
 
-},{"./_copyObject":361,"./keys":444}],332:[function(require,module,exports){
+},{"./_copyObject":364,"./keys":447}],335:[function(require,module,exports){
 var defineProperty = require('./_defineProperty');
 
 
@@ -121588,7 +123885,7 @@ function baseAssignValue(object, key, value) {
 
 module.exports = baseAssignValue;
 
-},{"./_defineProperty":366}],333:[function(require,module,exports){
+},{"./_defineProperty":369}],336:[function(require,module,exports){
 var isObject = require('./isObject');
 
 
@@ -121613,7 +123910,7 @@ var baseCreate = (function() {
 
 module.exports = baseCreate;
 
-},{"./isObject":440}],334:[function(require,module,exports){
+},{"./isObject":443}],337:[function(require,module,exports){
 var baseForOwn = require('./_baseForOwn'),
     createBaseEach = require('./_createBaseEach');
 
@@ -121622,7 +123919,7 @@ var baseEach = createBaseEach(baseForOwn);
 
 module.exports = baseEach;
 
-},{"./_baseForOwn":337,"./_createBaseEach":364}],335:[function(require,module,exports){
+},{"./_baseForOwn":340,"./_createBaseEach":367}],338:[function(require,module,exports){
 var baseEach = require('./_baseEach');
 
 
@@ -121637,7 +123934,7 @@ function baseEvery(collection, predicate) {
 
 module.exports = baseEvery;
 
-},{"./_baseEach":334}],336:[function(require,module,exports){
+},{"./_baseEach":337}],339:[function(require,module,exports){
 var createBaseFor = require('./_createBaseFor');
 
 
@@ -121645,7 +123942,7 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"./_createBaseFor":365}],337:[function(require,module,exports){
+},{"./_createBaseFor":368}],340:[function(require,module,exports){
 var baseFor = require('./_baseFor'),
     keys = require('./keys');
 
@@ -121656,7 +123953,7 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"./_baseFor":336,"./keys":444}],338:[function(require,module,exports){
+},{"./_baseFor":339,"./keys":447}],341:[function(require,module,exports){
 var castPath = require('./_castPath'),
     toKey = require('./_toKey');
 
@@ -121675,7 +123972,7 @@ function baseGet(object, path) {
 
 module.exports = baseGet;
 
-},{"./_castPath":360,"./_toKey":423}],339:[function(require,module,exports){
+},{"./_castPath":363,"./_toKey":426}],342:[function(require,module,exports){
 var arrayPush = require('./_arrayPush'),
     isArray = require('./isArray');
 
@@ -121687,7 +123984,7 @@ function baseGetAllKeys(object, keysFunc, symbolsFunc) {
 
 module.exports = baseGetAllKeys;
 
-},{"./_arrayPush":327,"./isArray":434}],340:[function(require,module,exports){
+},{"./_arrayPush":330,"./isArray":437}],343:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     getRawTag = require('./_getRawTag'),
     objectToString = require('./_objectToString');
@@ -121711,7 +124008,7 @@ function baseGetTag(value) {
 
 module.exports = baseGetTag;
 
-},{"./_Symbol":319,"./_getRawTag":375,"./_objectToString":408}],341:[function(require,module,exports){
+},{"./_Symbol":322,"./_getRawTag":378,"./_objectToString":411}],344:[function(require,module,exports){
 
 function baseHasIn(object, key) {
   return object != null && key in Object(object);
@@ -121719,7 +124016,7 @@ function baseHasIn(object, key) {
 
 module.exports = baseHasIn;
 
-},{}],342:[function(require,module,exports){
+},{}],345:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObjectLike = require('./isObjectLike');
 
@@ -121733,7 +124030,7 @@ function baseIsArguments(value) {
 
 module.exports = baseIsArguments;
 
-},{"./_baseGetTag":340,"./isObjectLike":441}],343:[function(require,module,exports){
+},{"./_baseGetTag":343,"./isObjectLike":444}],346:[function(require,module,exports){
 var baseIsEqualDeep = require('./_baseIsEqualDeep'),
     isObjectLike = require('./isObjectLike');
 
@@ -121750,7 +124047,7 @@ function baseIsEqual(value, other, bitmask, customizer, stack) {
 
 module.exports = baseIsEqual;
 
-},{"./_baseIsEqualDeep":344,"./isObjectLike":441}],344:[function(require,module,exports){
+},{"./_baseIsEqualDeep":347,"./isObjectLike":444}],347:[function(require,module,exports){
 var Stack = require('./_Stack'),
     equalArrays = require('./_equalArrays'),
     equalByTag = require('./_equalByTag'),
@@ -121822,7 +124119,7 @@ function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
 
 module.exports = baseIsEqualDeep;
 
-},{"./_Stack":318,"./_equalArrays":367,"./_equalByTag":368,"./_equalObjects":369,"./_getTag":377,"./isArray":434,"./isBuffer":436,"./isTypedArray":443}],345:[function(require,module,exports){
+},{"./_Stack":321,"./_equalArrays":370,"./_equalByTag":371,"./_equalObjects":372,"./_getTag":380,"./isArray":437,"./isBuffer":439,"./isTypedArray":446}],348:[function(require,module,exports){
 var Stack = require('./_Stack'),
     baseIsEqual = require('./_baseIsEqual');
 
@@ -121877,7 +124174,7 @@ function baseIsMatch(object, source, matchData, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"./_Stack":318,"./_baseIsEqual":343}],346:[function(require,module,exports){
+},{"./_Stack":321,"./_baseIsEqual":346}],349:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isMasked = require('./_isMasked'),
     isObject = require('./isObject'),
@@ -121916,7 +124213,7 @@ function baseIsNative(value) {
 
 module.exports = baseIsNative;
 
-},{"./_isMasked":389,"./_toSource":424,"./isFunction":438,"./isObject":440}],347:[function(require,module,exports){
+},{"./_isMasked":392,"./_toSource":427,"./isFunction":441,"./isObject":443}],350:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isLength = require('./isLength'),
     isObjectLike = require('./isObjectLike');
@@ -121972,7 +124269,7 @@ function baseIsTypedArray(value) {
 
 module.exports = baseIsTypedArray;
 
-},{"./_baseGetTag":340,"./isLength":439,"./isObjectLike":441}],348:[function(require,module,exports){
+},{"./_baseGetTag":343,"./isLength":442,"./isObjectLike":444}],351:[function(require,module,exports){
 var baseMatches = require('./_baseMatches'),
     baseMatchesProperty = require('./_baseMatchesProperty'),
     identity = require('./identity'),
@@ -121997,7 +124294,7 @@ function baseIteratee(value) {
 
 module.exports = baseIteratee;
 
-},{"./_baseMatches":350,"./_baseMatchesProperty":351,"./identity":432,"./isArray":434,"./property":446}],349:[function(require,module,exports){
+},{"./_baseMatches":353,"./_baseMatchesProperty":354,"./identity":435,"./isArray":437,"./property":449}],352:[function(require,module,exports){
 var isPrototype = require('./_isPrototype'),
     nativeKeys = require('./_nativeKeys');
 
@@ -122023,7 +124320,7 @@ function baseKeys(object) {
 
 module.exports = baseKeys;
 
-},{"./_isPrototype":390,"./_nativeKeys":406}],350:[function(require,module,exports){
+},{"./_isPrototype":393,"./_nativeKeys":409}],353:[function(require,module,exports){
 var baseIsMatch = require('./_baseIsMatch'),
     getMatchData = require('./_getMatchData'),
     matchesStrictComparable = require('./_matchesStrictComparable');
@@ -122041,7 +124338,7 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"./_baseIsMatch":345,"./_getMatchData":373,"./_matchesStrictComparable":403}],351:[function(require,module,exports){
+},{"./_baseIsMatch":348,"./_getMatchData":376,"./_matchesStrictComparable":406}],354:[function(require,module,exports){
 var baseIsEqual = require('./_baseIsEqual'),
     get = require('./get'),
     hasIn = require('./hasIn'),
@@ -122069,7 +124366,7 @@ function baseMatchesProperty(path, srcValue) {
 
 module.exports = baseMatchesProperty;
 
-},{"./_baseIsEqual":343,"./_isKey":387,"./_isStrictComparable":391,"./_matchesStrictComparable":403,"./_toKey":423,"./get":430,"./hasIn":431}],352:[function(require,module,exports){
+},{"./_baseIsEqual":346,"./_isKey":390,"./_isStrictComparable":394,"./_matchesStrictComparable":406,"./_toKey":426,"./get":433,"./hasIn":434}],355:[function(require,module,exports){
 
 function baseProperty(key) {
   return function(object) {
@@ -122079,7 +124376,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],353:[function(require,module,exports){
+},{}],356:[function(require,module,exports){
 var baseGet = require('./_baseGet');
 
 
@@ -122091,7 +124388,7 @@ function basePropertyDeep(path) {
 
 module.exports = basePropertyDeep;
 
-},{"./_baseGet":338}],354:[function(require,module,exports){
+},{"./_baseGet":341}],357:[function(require,module,exports){
 var identity = require('./identity'),
     overRest = require('./_overRest'),
     setToString = require('./_setToString');
@@ -122103,7 +124400,7 @@ function baseRest(func, start) {
 
 module.exports = baseRest;
 
-},{"./_overRest":410,"./_setToString":415,"./identity":432}],355:[function(require,module,exports){
+},{"./_overRest":413,"./_setToString":418,"./identity":435}],358:[function(require,module,exports){
 var constant = require('./constant'),
     defineProperty = require('./_defineProperty'),
     identity = require('./identity');
@@ -122120,7 +124417,7 @@ var baseSetToString = !defineProperty ? identity : function(func, string) {
 
 module.exports = baseSetToString;
 
-},{"./_defineProperty":366,"./constant":426,"./identity":432}],356:[function(require,module,exports){
+},{"./_defineProperty":369,"./constant":429,"./identity":435}],359:[function(require,module,exports){
 
 function baseTimes(n, iteratee) {
   var index = -1,
@@ -122134,7 +124431,7 @@ function baseTimes(n, iteratee) {
 
 module.exports = baseTimes;
 
-},{}],357:[function(require,module,exports){
+},{}],360:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     arrayMap = require('./_arrayMap'),
     isArray = require('./isArray'),
@@ -122164,7 +124461,7 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{"./_Symbol":319,"./_arrayMap":326,"./isArray":434,"./isSymbol":442}],358:[function(require,module,exports){
+},{"./_Symbol":322,"./_arrayMap":329,"./isArray":437,"./isSymbol":445}],361:[function(require,module,exports){
 
 function baseUnary(func) {
   return function(value) {
@@ -122174,7 +124471,7 @@ function baseUnary(func) {
 
 module.exports = baseUnary;
 
-},{}],359:[function(require,module,exports){
+},{}],362:[function(require,module,exports){
 
 function cacheHas(cache, key) {
   return cache.has(key);
@@ -122182,7 +124479,7 @@ function cacheHas(cache, key) {
 
 module.exports = cacheHas;
 
-},{}],360:[function(require,module,exports){
+},{}],363:[function(require,module,exports){
 var isArray = require('./isArray'),
     isKey = require('./_isKey'),
     stringToPath = require('./_stringToPath'),
@@ -122198,7 +124495,7 @@ function castPath(value, object) {
 
 module.exports = castPath;
 
-},{"./_isKey":387,"./_stringToPath":422,"./isArray":434,"./toString":449}],361:[function(require,module,exports){
+},{"./_isKey":390,"./_stringToPath":425,"./isArray":437,"./toString":452}],364:[function(require,module,exports){
 var assignValue = require('./_assignValue'),
     baseAssignValue = require('./_baseAssignValue');
 
@@ -122231,7 +124528,7 @@ function copyObject(source, props, object, customizer) {
 
 module.exports = copyObject;
 
-},{"./_assignValue":329,"./_baseAssignValue":332}],362:[function(require,module,exports){
+},{"./_assignValue":332,"./_baseAssignValue":335}],365:[function(require,module,exports){
 var root = require('./_root');
 
 
@@ -122239,7 +124536,7 @@ var coreJsData = root['__core-js_shared__'];
 
 module.exports = coreJsData;
 
-},{"./_root":411}],363:[function(require,module,exports){
+},{"./_root":414}],366:[function(require,module,exports){
 var baseRest = require('./_baseRest'),
     isIterateeCall = require('./_isIterateeCall');
 
@@ -122272,7 +124569,7 @@ function createAssigner(assigner) {
 
 module.exports = createAssigner;
 
-},{"./_baseRest":354,"./_isIterateeCall":386}],364:[function(require,module,exports){
+},{"./_baseRest":357,"./_isIterateeCall":389}],367:[function(require,module,exports){
 var isArrayLike = require('./isArrayLike');
 
 
@@ -122299,7 +124596,7 @@ function createBaseEach(eachFunc, fromRight) {
 
 module.exports = createBaseEach;
 
-},{"./isArrayLike":435}],365:[function(require,module,exports){
+},{"./isArrayLike":438}],368:[function(require,module,exports){
 
 function createBaseFor(fromRight) {
   return function(object, iteratee, keysFunc) {
@@ -122320,7 +124617,7 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-},{}],366:[function(require,module,exports){
+},{}],369:[function(require,module,exports){
 var getNative = require('./_getNative');
 
 var defineProperty = (function() {
@@ -122333,7 +124630,7 @@ var defineProperty = (function() {
 
 module.exports = defineProperty;
 
-},{"./_getNative":374}],367:[function(require,module,exports){
+},{"./_getNative":377}],370:[function(require,module,exports){
 var SetCache = require('./_SetCache'),
     arraySome = require('./_arraySome'),
     cacheHas = require('./_cacheHas');
@@ -122403,7 +124700,7 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
 
 module.exports = equalArrays;
 
-},{"./_SetCache":317,"./_arraySome":328,"./_cacheHas":359}],368:[function(require,module,exports){
+},{"./_SetCache":320,"./_arraySome":331,"./_cacheHas":362}],371:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     Uint8Array = require('./_Uint8Array'),
     eq = require('./eq'),
@@ -122494,7 +124791,7 @@ function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
 
 module.exports = equalByTag;
 
-},{"./_Symbol":319,"./_Uint8Array":320,"./_equalArrays":367,"./_mapToArray":402,"./_setToArray":414,"./eq":428}],369:[function(require,module,exports){
+},{"./_Symbol":322,"./_Uint8Array":323,"./_equalArrays":370,"./_mapToArray":405,"./_setToArray":417,"./eq":431}],372:[function(require,module,exports){
 var getAllKeys = require('./_getAllKeys');
 
 
@@ -122570,7 +124867,7 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
 
 module.exports = equalObjects;
 
-},{"./_getAllKeys":371}],370:[function(require,module,exports){
+},{"./_getAllKeys":374}],373:[function(require,module,exports){
 (function (global){
 
 var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
@@ -122578,7 +124875,7 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 module.exports = freeGlobal;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],371:[function(require,module,exports){
+},{}],374:[function(require,module,exports){
 var baseGetAllKeys = require('./_baseGetAllKeys'),
     getSymbols = require('./_getSymbols'),
     keys = require('./keys');
@@ -122590,7 +124887,7 @@ function getAllKeys(object) {
 
 module.exports = getAllKeys;
 
-},{"./_baseGetAllKeys":339,"./_getSymbols":376,"./keys":444}],372:[function(require,module,exports){
+},{"./_baseGetAllKeys":342,"./_getSymbols":379,"./keys":447}],375:[function(require,module,exports){
 var isKeyable = require('./_isKeyable');
 
 
@@ -122603,7 +124900,7 @@ function getMapData(map, key) {
 
 module.exports = getMapData;
 
-},{"./_isKeyable":388}],373:[function(require,module,exports){
+},{"./_isKeyable":391}],376:[function(require,module,exports){
 var isStrictComparable = require('./_isStrictComparable'),
     keys = require('./keys');
 
@@ -122623,7 +124920,7 @@ function getMatchData(object) {
 
 module.exports = getMatchData;
 
-},{"./_isStrictComparable":391,"./keys":444}],374:[function(require,module,exports){
+},{"./_isStrictComparable":394,"./keys":447}],377:[function(require,module,exports){
 var baseIsNative = require('./_baseIsNative'),
     getValue = require('./_getValue');
 
@@ -122635,7 +124932,7 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"./_baseIsNative":346,"./_getValue":378}],375:[function(require,module,exports){
+},{"./_baseIsNative":349,"./_getValue":381}],378:[function(require,module,exports){
 var Symbol = require('./_Symbol');
 
 
@@ -122673,7 +124970,7 @@ function getRawTag(value) {
 
 module.exports = getRawTag;
 
-},{"./_Symbol":319}],376:[function(require,module,exports){
+},{"./_Symbol":322}],379:[function(require,module,exports){
 var arrayFilter = require('./_arrayFilter'),
     stubArray = require('./stubArray');
 
@@ -122699,7 +124996,7 @@ var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
 
 module.exports = getSymbols;
 
-},{"./_arrayFilter":324,"./stubArray":447}],377:[function(require,module,exports){
+},{"./_arrayFilter":327,"./stubArray":450}],380:[function(require,module,exports){
 var DataView = require('./_DataView'),
     Map = require('./_Map'),
     Promise = require('./_Promise'),
@@ -122752,7 +125049,7 @@ if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
 
 module.exports = getTag;
 
-},{"./_DataView":310,"./_Map":313,"./_Promise":315,"./_Set":316,"./_WeakMap":321,"./_baseGetTag":340,"./_toSource":424}],378:[function(require,module,exports){
+},{"./_DataView":313,"./_Map":316,"./_Promise":318,"./_Set":319,"./_WeakMap":324,"./_baseGetTag":343,"./_toSource":427}],381:[function(require,module,exports){
 
 function getValue(object, key) {
   return object == null ? undefined : object[key];
@@ -122760,7 +125057,7 @@ function getValue(object, key) {
 
 module.exports = getValue;
 
-},{}],379:[function(require,module,exports){
+},{}],382:[function(require,module,exports){
 var castPath = require('./_castPath'),
     isArguments = require('./isArguments'),
     isArray = require('./isArray'),
@@ -122793,7 +125090,7 @@ function hasPath(object, path, hasFunc) {
 
 module.exports = hasPath;
 
-},{"./_castPath":360,"./_isIndex":385,"./_toKey":423,"./isArguments":433,"./isArray":434,"./isLength":439}],380:[function(require,module,exports){
+},{"./_castPath":363,"./_isIndex":388,"./_toKey":426,"./isArguments":436,"./isArray":437,"./isLength":442}],383:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 
@@ -122804,7 +125101,7 @@ function hashClear() {
 
 module.exports = hashClear;
 
-},{"./_nativeCreate":405}],381:[function(require,module,exports){
+},{"./_nativeCreate":408}],384:[function(require,module,exports){
 
 function hashDelete(key) {
   var result = this.has(key) && delete this.__data__[key];
@@ -122814,7 +125111,7 @@ function hashDelete(key) {
 
 module.exports = hashDelete;
 
-},{}],382:[function(require,module,exports){
+},{}],385:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 
@@ -122838,7 +125135,7 @@ function hashGet(key) {
 
 module.exports = hashGet;
 
-},{"./_nativeCreate":405}],383:[function(require,module,exports){
+},{"./_nativeCreate":408}],386:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 
@@ -122855,7 +125152,7 @@ function hashHas(key) {
 
 module.exports = hashHas;
 
-},{"./_nativeCreate":405}],384:[function(require,module,exports){
+},{"./_nativeCreate":408}],387:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
 
@@ -122871,7 +125168,7 @@ function hashSet(key, value) {
 
 module.exports = hashSet;
 
-},{"./_nativeCreate":405}],385:[function(require,module,exports){
+},{"./_nativeCreate":408}],388:[function(require,module,exports){
 
 var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -122888,7 +125185,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],386:[function(require,module,exports){
+},{}],389:[function(require,module,exports){
 var eq = require('./eq'),
     isArrayLike = require('./isArrayLike'),
     isIndex = require('./_isIndex'),
@@ -122911,7 +125208,7 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
-},{"./_isIndex":385,"./eq":428,"./isArrayLike":435,"./isObject":440}],387:[function(require,module,exports){
+},{"./_isIndex":388,"./eq":431,"./isArrayLike":438,"./isObject":443}],390:[function(require,module,exports){
 var isArray = require('./isArray'),
     isSymbol = require('./isSymbol');
 
@@ -122935,7 +125232,7 @@ function isKey(value, object) {
 
 module.exports = isKey;
 
-},{"./isArray":434,"./isSymbol":442}],388:[function(require,module,exports){
+},{"./isArray":437,"./isSymbol":445}],391:[function(require,module,exports){
 
 function isKeyable(value) {
   var type = typeof value;
@@ -122946,7 +125243,7 @@ function isKeyable(value) {
 
 module.exports = isKeyable;
 
-},{}],389:[function(require,module,exports){
+},{}],392:[function(require,module,exports){
 var coreJsData = require('./_coreJsData');
 
 
@@ -122962,7 +125259,7 @@ function isMasked(func) {
 
 module.exports = isMasked;
 
-},{"./_coreJsData":362}],390:[function(require,module,exports){
+},{"./_coreJsData":365}],393:[function(require,module,exports){
 
 var objectProto = Object.prototype;
 
@@ -122976,7 +125273,7 @@ function isPrototype(value) {
 
 module.exports = isPrototype;
 
-},{}],391:[function(require,module,exports){
+},{}],394:[function(require,module,exports){
 var isObject = require('./isObject');
 
 
@@ -122986,7 +125283,7 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"./isObject":440}],392:[function(require,module,exports){
+},{"./isObject":443}],395:[function(require,module,exports){
 
 function listCacheClear() {
   this.__data__ = [];
@@ -122995,7 +125292,7 @@ function listCacheClear() {
 
 module.exports = listCacheClear;
 
-},{}],393:[function(require,module,exports){
+},{}],396:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 
@@ -123024,7 +125321,7 @@ function listCacheDelete(key) {
 
 module.exports = listCacheDelete;
 
-},{"./_assocIndexOf":330}],394:[function(require,module,exports){
+},{"./_assocIndexOf":333}],397:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 
@@ -123037,7 +125334,7 @@ function listCacheGet(key) {
 
 module.exports = listCacheGet;
 
-},{"./_assocIndexOf":330}],395:[function(require,module,exports){
+},{"./_assocIndexOf":333}],398:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 
@@ -123047,7 +125344,7 @@ function listCacheHas(key) {
 
 module.exports = listCacheHas;
 
-},{"./_assocIndexOf":330}],396:[function(require,module,exports){
+},{"./_assocIndexOf":333}],399:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
 
@@ -123066,7 +125363,7 @@ function listCacheSet(key, value) {
 
 module.exports = listCacheSet;
 
-},{"./_assocIndexOf":330}],397:[function(require,module,exports){
+},{"./_assocIndexOf":333}],400:[function(require,module,exports){
 var Hash = require('./_Hash'),
     ListCache = require('./_ListCache'),
     Map = require('./_Map');
@@ -123083,7 +125380,7 @@ function mapCacheClear() {
 
 module.exports = mapCacheClear;
 
-},{"./_Hash":311,"./_ListCache":312,"./_Map":313}],398:[function(require,module,exports){
+},{"./_Hash":314,"./_ListCache":315,"./_Map":316}],401:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 
@@ -123095,7 +125392,7 @@ function mapCacheDelete(key) {
 
 module.exports = mapCacheDelete;
 
-},{"./_getMapData":372}],399:[function(require,module,exports){
+},{"./_getMapData":375}],402:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 
@@ -123105,7 +125402,7 @@ function mapCacheGet(key) {
 
 module.exports = mapCacheGet;
 
-},{"./_getMapData":372}],400:[function(require,module,exports){
+},{"./_getMapData":375}],403:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 
@@ -123115,7 +125412,7 @@ function mapCacheHas(key) {
 
 module.exports = mapCacheHas;
 
-},{"./_getMapData":372}],401:[function(require,module,exports){
+},{"./_getMapData":375}],404:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
 
@@ -123130,7 +125427,7 @@ function mapCacheSet(key, value) {
 
 module.exports = mapCacheSet;
 
-},{"./_getMapData":372}],402:[function(require,module,exports){
+},{"./_getMapData":375}],405:[function(require,module,exports){
 
 function mapToArray(map) {
   var index = -1,
@@ -123144,7 +125441,7 @@ function mapToArray(map) {
 
 module.exports = mapToArray;
 
-},{}],403:[function(require,module,exports){
+},{}],406:[function(require,module,exports){
 
 function matchesStrictComparable(key, srcValue) {
   return function(object) {
@@ -123158,7 +125455,7 @@ function matchesStrictComparable(key, srcValue) {
 
 module.exports = matchesStrictComparable;
 
-},{}],404:[function(require,module,exports){
+},{}],407:[function(require,module,exports){
 var memoize = require('./memoize');
 
 
@@ -123179,7 +125476,7 @@ function memoizeCapped(func) {
 
 module.exports = memoizeCapped;
 
-},{"./memoize":445}],405:[function(require,module,exports){
+},{"./memoize":448}],408:[function(require,module,exports){
 var getNative = require('./_getNative');
 
 
@@ -123187,7 +125484,7 @@ var nativeCreate = getNative(Object, 'create');
 
 module.exports = nativeCreate;
 
-},{"./_getNative":374}],406:[function(require,module,exports){
+},{"./_getNative":377}],409:[function(require,module,exports){
 var overArg = require('./_overArg');
 
 
@@ -123195,7 +125492,7 @@ var nativeKeys = overArg(Object.keys, Object);
 
 module.exports = nativeKeys;
 
-},{"./_overArg":409}],407:[function(require,module,exports){
+},{"./_overArg":412}],410:[function(require,module,exports){
 var freeGlobal = require('./_freeGlobal');
 
 
@@ -123219,7 +125516,7 @@ var nodeUtil = (function() {
 
 module.exports = nodeUtil;
 
-},{"./_freeGlobal":370}],408:[function(require,module,exports){
+},{"./_freeGlobal":373}],411:[function(require,module,exports){
 
 var objectProto = Object.prototype;
 
@@ -123233,7 +125530,7 @@ function objectToString(value) {
 
 module.exports = objectToString;
 
-},{}],409:[function(require,module,exports){
+},{}],412:[function(require,module,exports){
 
 function overArg(func, transform) {
   return function(arg) {
@@ -123243,7 +125540,7 @@ function overArg(func, transform) {
 
 module.exports = overArg;
 
-},{}],410:[function(require,module,exports){
+},{}],413:[function(require,module,exports){
 var apply = require('./_apply');
 
 
@@ -123273,7 +125570,7 @@ function overRest(func, start, transform) {
 
 module.exports = overRest;
 
-},{"./_apply":322}],411:[function(require,module,exports){
+},{"./_apply":325}],414:[function(require,module,exports){
 var freeGlobal = require('./_freeGlobal');
 
 
@@ -123284,7 +125581,7 @@ var root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root;
 
-},{"./_freeGlobal":370}],412:[function(require,module,exports){
+},{"./_freeGlobal":373}],415:[function(require,module,exports){
 
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
@@ -123296,7 +125593,7 @@ function setCacheAdd(value) {
 
 module.exports = setCacheAdd;
 
-},{}],413:[function(require,module,exports){
+},{}],416:[function(require,module,exports){
 
 function setCacheHas(value) {
   return this.__data__.has(value);
@@ -123304,7 +125601,7 @@ function setCacheHas(value) {
 
 module.exports = setCacheHas;
 
-},{}],414:[function(require,module,exports){
+},{}],417:[function(require,module,exports){
 
 function setToArray(set) {
   var index = -1,
@@ -123318,7 +125615,7 @@ function setToArray(set) {
 
 module.exports = setToArray;
 
-},{}],415:[function(require,module,exports){
+},{}],418:[function(require,module,exports){
 var baseSetToString = require('./_baseSetToString'),
     shortOut = require('./_shortOut');
 
@@ -123327,7 +125624,7 @@ var setToString = shortOut(baseSetToString);
 
 module.exports = setToString;
 
-},{"./_baseSetToString":355,"./_shortOut":416}],416:[function(require,module,exports){
+},{"./_baseSetToString":358,"./_shortOut":419}],419:[function(require,module,exports){
 
 var HOT_COUNT = 800,
     HOT_SPAN = 16;
@@ -123358,7 +125655,7 @@ function shortOut(func) {
 
 module.exports = shortOut;
 
-},{}],417:[function(require,module,exports){
+},{}],420:[function(require,module,exports){
 var ListCache = require('./_ListCache');
 
 
@@ -123369,7 +125666,7 @@ function stackClear() {
 
 module.exports = stackClear;
 
-},{"./_ListCache":312}],418:[function(require,module,exports){
+},{"./_ListCache":315}],421:[function(require,module,exports){
 
 function stackDelete(key) {
   var data = this.__data__,
@@ -123381,7 +125678,7 @@ function stackDelete(key) {
 
 module.exports = stackDelete;
 
-},{}],419:[function(require,module,exports){
+},{}],422:[function(require,module,exports){
 
 function stackGet(key) {
   return this.__data__.get(key);
@@ -123389,7 +125686,7 @@ function stackGet(key) {
 
 module.exports = stackGet;
 
-},{}],420:[function(require,module,exports){
+},{}],423:[function(require,module,exports){
 
 function stackHas(key) {
   return this.__data__.has(key);
@@ -123397,7 +125694,7 @@ function stackHas(key) {
 
 module.exports = stackHas;
 
-},{}],421:[function(require,module,exports){
+},{}],424:[function(require,module,exports){
 var ListCache = require('./_ListCache'),
     Map = require('./_Map'),
     MapCache = require('./_MapCache');
@@ -123424,7 +125721,7 @@ function stackSet(key, value) {
 
 module.exports = stackSet;
 
-},{"./_ListCache":312,"./_Map":313,"./_MapCache":314}],422:[function(require,module,exports){
+},{"./_ListCache":315,"./_Map":316,"./_MapCache":317}],425:[function(require,module,exports){
 var memoizeCapped = require('./_memoizeCapped');
 
 
@@ -123448,7 +125745,7 @@ var stringToPath = memoizeCapped(function(string) {
 
 module.exports = stringToPath;
 
-},{"./_memoizeCapped":404}],423:[function(require,module,exports){
+},{"./_memoizeCapped":407}],426:[function(require,module,exports){
 var isSymbol = require('./isSymbol');
 
 
@@ -123465,7 +125762,7 @@ function toKey(value) {
 
 module.exports = toKey;
 
-},{"./isSymbol":442}],424:[function(require,module,exports){
+},{"./isSymbol":445}],427:[function(require,module,exports){
 
 var funcProto = Function.prototype;
 
@@ -123487,7 +125784,7 @@ function toSource(func) {
 
 module.exports = toSource;
 
-},{}],425:[function(require,module,exports){
+},{}],428:[function(require,module,exports){
 var assignValue = require('./_assignValue'),
     copyObject = require('./_copyObject'),
     createAssigner = require('./_createAssigner'),
@@ -123516,7 +125813,7 @@ var assign = createAssigner(function(object, source) {
 
 module.exports = assign;
 
-},{"./_assignValue":329,"./_copyObject":361,"./_createAssigner":363,"./_isPrototype":390,"./isArrayLike":435,"./keys":444}],426:[function(require,module,exports){
+},{"./_assignValue":332,"./_copyObject":364,"./_createAssigner":366,"./_isPrototype":393,"./isArrayLike":438,"./keys":447}],429:[function(require,module,exports){
 
 function constant(value) {
   return function() {
@@ -123526,7 +125823,7 @@ function constant(value) {
 
 module.exports = constant;
 
-},{}],427:[function(require,module,exports){
+},{}],430:[function(require,module,exports){
 var baseAssign = require('./_baseAssign'),
     baseCreate = require('./_baseCreate');
 
@@ -123538,7 +125835,7 @@ function create(prototype, properties) {
 
 module.exports = create;
 
-},{"./_baseAssign":331,"./_baseCreate":333}],428:[function(require,module,exports){
+},{"./_baseAssign":334,"./_baseCreate":336}],431:[function(require,module,exports){
 
 function eq(value, other) {
   return value === other || (value !== value && other !== other);
@@ -123546,7 +125843,7 @@ function eq(value, other) {
 
 module.exports = eq;
 
-},{}],429:[function(require,module,exports){
+},{}],432:[function(require,module,exports){
 var arrayEvery = require('./_arrayEvery'),
     baseEvery = require('./_baseEvery'),
     baseIteratee = require('./_baseIteratee'),
@@ -123564,7 +125861,7 @@ function every(collection, predicate, guard) {
 
 module.exports = every;
 
-},{"./_arrayEvery":323,"./_baseEvery":335,"./_baseIteratee":348,"./_isIterateeCall":386,"./isArray":434}],430:[function(require,module,exports){
+},{"./_arrayEvery":326,"./_baseEvery":338,"./_baseIteratee":351,"./_isIterateeCall":389,"./isArray":437}],433:[function(require,module,exports){
 var baseGet = require('./_baseGet');
 
 
@@ -123575,7 +125872,7 @@ function get(object, path, defaultValue) {
 
 module.exports = get;
 
-},{"./_baseGet":338}],431:[function(require,module,exports){
+},{"./_baseGet":341}],434:[function(require,module,exports){
 var baseHasIn = require('./_baseHasIn'),
     hasPath = require('./_hasPath');
 
@@ -123586,7 +125883,7 @@ function hasIn(object, path) {
 
 module.exports = hasIn;
 
-},{"./_baseHasIn":341,"./_hasPath":379}],432:[function(require,module,exports){
+},{"./_baseHasIn":344,"./_hasPath":382}],435:[function(require,module,exports){
 
 function identity(value) {
   return value;
@@ -123594,7 +125891,7 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],433:[function(require,module,exports){
+},{}],436:[function(require,module,exports){
 var baseIsArguments = require('./_baseIsArguments'),
     isObjectLike = require('./isObjectLike');
 
@@ -123615,13 +125912,13 @@ var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsAr
 
 module.exports = isArguments;
 
-},{"./_baseIsArguments":342,"./isObjectLike":441}],434:[function(require,module,exports){
+},{"./_baseIsArguments":345,"./isObjectLike":444}],437:[function(require,module,exports){
 
 var isArray = Array.isArray;
 
 module.exports = isArray;
 
-},{}],435:[function(require,module,exports){
+},{}],438:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isLength = require('./isLength');
 
@@ -123632,7 +125929,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./isFunction":438,"./isLength":439}],436:[function(require,module,exports){
+},{"./isFunction":441,"./isLength":442}],439:[function(require,module,exports){
 var root = require('./_root'),
     stubFalse = require('./stubFalse');
 
@@ -123656,7 +125953,7 @@ var isBuffer = nativeIsBuffer || stubFalse;
 
 module.exports = isBuffer;
 
-},{"./_root":411,"./stubFalse":448}],437:[function(require,module,exports){
+},{"./_root":414,"./stubFalse":451}],440:[function(require,module,exports){
 var baseKeys = require('./_baseKeys'),
     getTag = require('./_getTag'),
     isArguments = require('./isArguments'),
@@ -123703,7 +126000,7 @@ function isEmpty(value) {
 
 module.exports = isEmpty;
 
-},{"./_baseKeys":349,"./_getTag":377,"./_isPrototype":390,"./isArguments":433,"./isArray":434,"./isArrayLike":435,"./isBuffer":436,"./isTypedArray":443}],438:[function(require,module,exports){
+},{"./_baseKeys":352,"./_getTag":380,"./_isPrototype":393,"./isArguments":436,"./isArray":437,"./isArrayLike":438,"./isBuffer":439,"./isTypedArray":446}],441:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObject = require('./isObject');
 
@@ -123724,7 +126021,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"./_baseGetTag":340,"./isObject":440}],439:[function(require,module,exports){
+},{"./_baseGetTag":343,"./isObject":443}],442:[function(require,module,exports){
 
 var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -123736,7 +126033,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],440:[function(require,module,exports){
+},{}],443:[function(require,module,exports){
 
 function isObject(value) {
   var type = typeof value;
@@ -123745,7 +126042,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],441:[function(require,module,exports){
+},{}],444:[function(require,module,exports){
 
 function isObjectLike(value) {
   return value != null && typeof value == 'object';
@@ -123753,7 +126050,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],442:[function(require,module,exports){
+},{}],445:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObjectLike = require('./isObjectLike');
 
@@ -123768,7 +126065,7 @@ function isSymbol(value) {
 
 module.exports = isSymbol;
 
-},{"./_baseGetTag":340,"./isObjectLike":441}],443:[function(require,module,exports){
+},{"./_baseGetTag":343,"./isObjectLike":444}],446:[function(require,module,exports){
 var baseIsTypedArray = require('./_baseIsTypedArray'),
     baseUnary = require('./_baseUnary'),
     nodeUtil = require('./_nodeUtil');
@@ -123781,7 +126078,7 @@ var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedA
 
 module.exports = isTypedArray;
 
-},{"./_baseIsTypedArray":347,"./_baseUnary":358,"./_nodeUtil":407}],444:[function(require,module,exports){
+},{"./_baseIsTypedArray":350,"./_baseUnary":361,"./_nodeUtil":410}],447:[function(require,module,exports){
 var arrayLikeKeys = require('./_arrayLikeKeys'),
     baseKeys = require('./_baseKeys'),
     isArrayLike = require('./isArrayLike');
@@ -123793,7 +126090,7 @@ function keys(object) {
 
 module.exports = keys;
 
-},{"./_arrayLikeKeys":325,"./_baseKeys":349,"./isArrayLike":435}],445:[function(require,module,exports){
+},{"./_arrayLikeKeys":328,"./_baseKeys":352,"./isArrayLike":438}],448:[function(require,module,exports){
 var MapCache = require('./_MapCache');
 
 
@@ -123824,7 +126121,7 @@ memoize.Cache = MapCache;
 
 module.exports = memoize;
 
-},{"./_MapCache":314}],446:[function(require,module,exports){
+},{"./_MapCache":317}],449:[function(require,module,exports){
 var baseProperty = require('./_baseProperty'),
     basePropertyDeep = require('./_basePropertyDeep'),
     isKey = require('./_isKey'),
@@ -123837,7 +126134,7 @@ function property(path) {
 
 module.exports = property;
 
-},{"./_baseProperty":352,"./_basePropertyDeep":353,"./_isKey":387,"./_toKey":423}],447:[function(require,module,exports){
+},{"./_baseProperty":355,"./_basePropertyDeep":356,"./_isKey":390,"./_toKey":426}],450:[function(require,module,exports){
 
 function stubArray() {
   return [];
@@ -123845,7 +126142,7 @@ function stubArray() {
 
 module.exports = stubArray;
 
-},{}],448:[function(require,module,exports){
+},{}],451:[function(require,module,exports){
 
 function stubFalse() {
   return false;
@@ -123853,7 +126150,7 @@ function stubFalse() {
 
 module.exports = stubFalse;
 
-},{}],449:[function(require,module,exports){
+},{}],452:[function(require,module,exports){
 var baseToString = require('./_baseToString');
 
 
@@ -123863,7 +126160,7 @@ function toString(value) {
 
 module.exports = toString;
 
-},{"./_baseToString":357}],450:[function(require,module,exports){
+},{"./_baseToString":360}],453:[function(require,module,exports){
 var process = module.exports = {};
 
 
@@ -124032,7 +126329,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],451:[function(require,module,exports){
+},{}],454:[function(require,module,exports){
 (function (global){
 
 ;(function(root) {
@@ -124420,7 +126717,7 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],452:[function(require,module,exports){
+},{}],455:[function(require,module,exports){
 
 'use strict';
 
@@ -124482,7 +126779,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],453:[function(require,module,exports){
+},{}],456:[function(require,module,exports){
 
 'use strict';
 
@@ -124549,13 +126846,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],454:[function(require,module,exports){
+},{}],457:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":452,"./encode":453}],455:[function(require,module,exports){
+},{"./decode":455,"./encode":456}],458:[function(require,module,exports){
 
 'use strict';
 
@@ -124613,7 +126910,7 @@ module.exports = function(qs, sep, eq, options) {
   return obj;
 };
 
-},{}],456:[function(require,module,exports){
+},{}],459:[function(require,module,exports){
 
 'use strict';
 
@@ -124659,9 +126956,9 @@ module.exports = function(obj, sep, eq, name) {
          encodeURIComponent(stringifyPrimitive(obj));
 };
 
-},{}],457:[function(require,module,exports){
-arguments[4][454][0].apply(exports,arguments)
-},{"./decode":455,"./encode":456,"dup":454}],458:[function(require,module,exports){
+},{}],460:[function(require,module,exports){
+arguments[4][457][0].apply(exports,arguments)
+},{"./decode":458,"./encode":459,"dup":457}],461:[function(require,module,exports){
 
 var punycode = require('punycode');
 
@@ -125228,7 +127525,7 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":451,"querystring":454}],459:[function(require,module,exports){
+},{"punycode":454,"querystring":457}],462:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   module.exports = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor
@@ -125251,14 +127548,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],460:[function(require,module,exports){
+},{}],463:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],461:[function(require,module,exports){
+},{}],464:[function(require,module,exports){
 (function (process,global){
 
 var formatRegExp = /%[sdj%]/g;
@@ -125778,7 +128075,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":460,"_process":450,"inherits":459}],462:[function(require,module,exports){
+},{"./support/isBuffer":463,"_process":453,"inherits":462}],465:[function(require,module,exports){
 var v1 = require('./v1');
 var v4 = require('./v4');
 
@@ -125788,7 +128085,7 @@ uuid.v4 = v4;
 
 module.exports = uuid;
 
-},{"./v1":465,"./v4":466}],463:[function(require,module,exports){
+},{"./v1":468,"./v4":469}],466:[function(require,module,exports){
 
 var byteToHex = [];
 for (var i = 0; i < 256; ++i) {
@@ -125810,7 +128107,7 @@ function bytesToUuid(buf, offset) {
 
 module.exports = bytesToUuid;
 
-},{}],464:[function(require,module,exports){
+},{}],467:[function(require,module,exports){
 (function (global){
 var rng;
 
@@ -125838,7 +128135,7 @@ if (!rng) {
 module.exports = rng;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],465:[function(require,module,exports){
+},{}],468:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -125913,7 +128210,7 @@ function v1(options, buf, offset) {
 
 module.exports = v1;
 
-},{"./lib/bytesToUuid":463,"./lib/rng":464}],466:[function(require,module,exports){
+},{"./lib/bytesToUuid":466,"./lib/rng":467}],469:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -125942,7 +128239,7 @@ function v4(options, buf, offset) {
 
 module.exports = v4;
 
-},{"./lib/bytesToUuid":463,"./lib/rng":464}],467:[function(require,module,exports){
+},{"./lib/bytesToUuid":466,"./lib/rng":467}],470:[function(require,module,exports){
 (function() {
   var XMLAttribute, create;
 
@@ -125975,7 +128272,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":427}],468:[function(require,module,exports){
+},{"lodash/create":430}],471:[function(require,module,exports){
 (function() {
   var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
 
@@ -126045,7 +128342,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLDeclaration":475,"./XMLDocType":476,"./XMLElement":477,"./XMLStringifier":481}],469:[function(require,module,exports){
+},{"./XMLDeclaration":478,"./XMLDocType":479,"./XMLElement":480,"./XMLStringifier":484}],472:[function(require,module,exports){
 (function() {
   var XMLCData, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -126095,7 +128392,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":478,"lodash/create":427}],470:[function(require,module,exports){
+},{"./XMLNode":481,"lodash/create":430}],473:[function(require,module,exports){
 (function() {
   var XMLComment, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -126145,7 +128442,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":478,"lodash/create":427}],471:[function(require,module,exports){
+},{"./XMLNode":481,"lodash/create":430}],474:[function(require,module,exports){
 (function() {
   var XMLDTDAttList, create;
 
@@ -126214,7 +128511,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":427}],472:[function(require,module,exports){
+},{"lodash/create":430}],475:[function(require,module,exports){
 (function() {
   var XMLDTDElement, create;
 
@@ -126261,7 +128558,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":427}],473:[function(require,module,exports){
+},{"lodash/create":430}],476:[function(require,module,exports){
 (function() {
   var XMLDTDEntity, create, isObject;
 
@@ -126346,7 +128643,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":427,"lodash/isObject":440}],474:[function(require,module,exports){
+},{"lodash/create":430,"lodash/isObject":443}],477:[function(require,module,exports){
 (function() {
   var XMLDTDNotation, create;
 
@@ -126403,7 +128700,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":427}],475:[function(require,module,exports){
+},{"lodash/create":430}],478:[function(require,module,exports){
 (function() {
   var XMLDeclaration, XMLNode, create, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -126469,7 +128766,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":478,"lodash/create":427,"lodash/isObject":440}],476:[function(require,module,exports){
+},{"./XMLNode":481,"lodash/create":430,"lodash/isObject":443}],479:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
 
@@ -126658,7 +128955,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLCData":469,"./XMLComment":470,"./XMLDTDAttList":471,"./XMLDTDElement":472,"./XMLDTDEntity":473,"./XMLDTDNotation":474,"./XMLProcessingInstruction":479,"lodash/create":427,"lodash/isObject":440}],477:[function(require,module,exports){
+},{"./XMLCData":472,"./XMLComment":473,"./XMLDTDAttList":474,"./XMLDTDElement":475,"./XMLDTDEntity":476,"./XMLDTDNotation":477,"./XMLProcessingInstruction":482,"lodash/create":430,"lodash/isObject":443}],480:[function(require,module,exports){
 (function() {
   var XMLAttribute, XMLElement, XMLNode, XMLProcessingInstruction, create, every, isFunction, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -126871,7 +129168,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLAttribute":467,"./XMLNode":478,"./XMLProcessingInstruction":479,"lodash/create":427,"lodash/every":429,"lodash/isFunction":438,"lodash/isObject":440}],478:[function(require,module,exports){
+},{"./XMLAttribute":470,"./XMLNode":481,"./XMLProcessingInstruction":482,"lodash/create":430,"lodash/every":432,"lodash/isFunction":441,"lodash/isObject":443}],481:[function(require,module,exports){
 (function() {
   var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isEmpty, isFunction, isObject,
     hasProp = {}.hasOwnProperty;
@@ -127203,7 +129500,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLCData":469,"./XMLComment":470,"./XMLDeclaration":475,"./XMLDocType":476,"./XMLElement":477,"./XMLRaw":480,"./XMLText":482,"lodash/isEmpty":437,"lodash/isFunction":438,"lodash/isObject":440}],479:[function(require,module,exports){
+},{"./XMLCData":472,"./XMLComment":473,"./XMLDeclaration":478,"./XMLDocType":479,"./XMLElement":480,"./XMLRaw":483,"./XMLText":485,"lodash/isEmpty":440,"lodash/isFunction":441,"lodash/isObject":443}],482:[function(require,module,exports){
 (function() {
   var XMLProcessingInstruction, create;
 
@@ -127255,7 +129552,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":427}],480:[function(require,module,exports){
+},{"lodash/create":430}],483:[function(require,module,exports){
 (function() {
   var XMLNode, XMLRaw, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -127305,7 +129602,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":478,"lodash/create":427}],481:[function(require,module,exports){
+},{"./XMLNode":481,"lodash/create":430}],484:[function(require,module,exports){
 (function() {
   var XMLStringifier,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -127476,7 +129773,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{}],482:[function(require,module,exports){
+},{}],485:[function(require,module,exports){
 (function() {
   var XMLNode, XMLText, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -127526,7 +129823,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":478,"lodash/create":427}],483:[function(require,module,exports){
+},{"./XMLNode":481,"lodash/create":430}],486:[function(require,module,exports){
 (function() {
   var XMLBuilder, assign;
 
@@ -127541,7 +129838,7 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLBuilder":468,"lodash/assign":425}],484:[function(require,module,exports){
+},{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
 require('./browser_loader');
 
 var AWS = require('./core');
@@ -127552,5 +129849,5 @@ if (typeof self !== 'undefined') self.AWS = AWS;
 
 
 require('../clients/browser_default');
-},{"../clients/browser_default":166,"./browser_loader":227,"./core":230}]},{},[484]);
+},{"../clients/browser_default":168,"./browser_loader":230,"./core":233}]},{},[487]);
 

@@ -313,6 +313,10 @@
       "exception":true
     },
     "Boolean":{"type":"boolean"},
+    "CloudWatchLogsLogGroupArn":{
+      "type":"string",
+      "documentation":"<p>ARN of the Cloudwatch log group to which log needs to be published.</p>"
+    },
     "CreateElasticsearchDomainRequest":{
       "type":"structure",
       "required":["DomainName"],
@@ -344,6 +348,10 @@
         "AdvancedOptions":{
           "shape":"AdvancedOptions",
           "documentation":"<p> Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\" target=\"_blank\">Configuration Advanced Options</a> for more information.</p>"
+        },
+        "LogPublishingOptions":{
+          "shape":"LogPublishingOptions",
+          "documentation":"<p>Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.</p>"
         }
       }
     },
@@ -678,6 +686,10 @@
         "AdvancedOptions":{
           "shape":"AdvancedOptionsStatus",
           "documentation":"<p>Specifies the <code>AdvancedOptions</code> for the domain. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\" target=\"_blank\">Configuring Advanced Options</a> for more information.</p>"
+        },
+        "LogPublishingOptions":{
+          "shape":"LogPublishingOptionsStatus",
+          "documentation":"<p>Log publishing options for the given domain.</p>"
         }
       },
       "documentation":"<p>The configuration of an Elasticsearch domain.</p>"
@@ -739,6 +751,10 @@
         "AdvancedOptions":{
           "shape":"AdvancedOptions",
           "documentation":"<p>Specifies the status of the <code>AdvancedOptions</code></p>"
+        },
+        "LogPublishingOptions":{
+          "shape":"LogPublishingOptions",
+          "documentation":"<p>Log publishing options for the given domain.</p>"
         }
       },
       "documentation":"<p>The current status of an Elasticsearch domain.</p>"
@@ -948,6 +964,44 @@
         }
       },
       "documentation":"<p>The result of a <code>ListTags</code> operation. Contains tags for all requested Elasticsearch domains.</p>"
+    },
+    "LogPublishingOption":{
+      "type":"structure",
+      "members":{
+        "CloudWatchLogsLogGroupArn":{"shape":"CloudWatchLogsLogGroupArn"},
+        "Enabled":{
+          "shape":"Boolean",
+          "documentation":"<p> Specifies whether given log publishing option is enabled or not.</p>"
+        }
+      },
+      "documentation":"<p>Log Publishing option that is set for given domain. <br/>Attributes and their details: <ul> <li>CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to which log needs to be published.</li> <li>Enabled: Whether the log publishing for given log type is enabled or not</li> </ul> </p>"
+    },
+    "LogPublishingOptions":{
+      "type":"map",
+      "key":{"shape":"LogType"},
+      "value":{"shape":"LogPublishingOption"}
+    },
+    "LogPublishingOptionsStatus":{
+      "type":"structure",
+      "members":{
+        "Options":{
+          "shape":"LogPublishingOptions",
+          "documentation":"<p>The log publishing options configured for the Elasticsearch domain.</p>"
+        },
+        "Status":{
+          "shape":"OptionStatus",
+          "documentation":"<p>The status of the log publishing options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that's included. </p>"
+        }
+      },
+      "documentation":"<p>The configured log publishing options for the domain and their current status.</p>"
+    },
+    "LogType":{
+      "type":"string",
+      "documentation":"<p>Type of Log File, it can be one of the following: <ul> <li>INDEX_SLOW_LOGS: Index slow logs contains insert requests that took more time than configured index query log threshold to execute.</li> <li>SEARCH_SLOW_LOGS: Search slow logs contains search queries that took more time than configured search query log threshold to execute.</li> </ul> </p>",
+      "enum":[
+        "INDEX_SLOW_LOGS",
+        "SEARCH_SLOW_LOGS"
+      ]
     },
     "MaxResults":{
       "type":"integer",
@@ -1191,6 +1245,10 @@
         "AccessPolicies":{
           "shape":"PolicyDocument",
           "documentation":"<p>IAM access policy as a JSON-formatted string.</p>"
+        },
+        "LogPublishingOptions":{
+          "shape":"LogPublishingOptions",
+          "documentation":"<p>Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.</p>"
         }
       },
       "documentation":"<p>Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.</p>"

@@ -28,6 +28,14 @@ declare class WAFRegional extends Service {
    */
   createByteMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.CreateByteMatchSetResponse) => void): Request<WAFRegional.Types.CreateByteMatchSetResponse, AWSError>;
   /**
+   * Creates an GeoMatchSet, which you use to specify which web requests you want to allow or block based on the country that the requests originate from. For example, if you're receiving a lot of requests from one or more countries and you want to block the requests, you can create an GeoMatchSet that contains those countries and then configure AWS WAF to block the requests.  To create and configure a GeoMatchSet, perform the following steps:   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateGeoMatchSet request.   Submit a CreateGeoMatchSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateGeoMatchSet request.   Submit an UpdateGeoMatchSetSet request to specify the countries that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createGeoMatchSet(params: WAFRegional.Types.CreateGeoMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.CreateGeoMatchSetResponse) => void): Request<WAFRegional.Types.CreateGeoMatchSetResponse, AWSError>;
+  /**
+   * Creates an GeoMatchSet, which you use to specify which web requests you want to allow or block based on the country that the requests originate from. For example, if you're receiving a lot of requests from one or more countries and you want to block the requests, you can create an GeoMatchSet that contains those countries and then configure AWS WAF to block the requests.  To create and configure a GeoMatchSet, perform the following steps:   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateGeoMatchSet request.   Submit a CreateGeoMatchSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateGeoMatchSet request.   Submit an UpdateGeoMatchSetSet request to specify the countries that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createGeoMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.CreateGeoMatchSetResponse) => void): Request<WAFRegional.Types.CreateGeoMatchSetResponse, AWSError>;
+  /**
    * Creates an IPSet, which you use to specify which web requests you want to allow or block based on the IP addresses that the requests originate from. For example, if you're receiving a lot of requests from one or more individual IP addresses or one or more ranges of IP addresses and you want to block the requests, you can create an IPSet that contains those IP addresses and then configure AWS WAF to block the requests.  To create and configure an IPSet, perform the following steps:   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateIPSet request.   Submit a CreateIPSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateIPSet request.   Submit an UpdateIPSet request to specify the IP addresses that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   createIPSet(params: WAFRegional.Types.CreateIPSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.CreateIPSetResponse) => void): Request<WAFRegional.Types.CreateIPSetResponse, AWSError>;
@@ -43,6 +51,22 @@ declare class WAFRegional extends Service {
    * Creates a RateBasedRule. The RateBasedRule contains a RateLimit, which specifies the maximum number of requests that AWS WAF allows from a specified IP address in a five-minute period. The RateBasedRule also contains the IPSet objects, ByteMatchSet objects, and other predicates that identify the requests that you want to count or block if these requests exceed the RateLimit. If you add more than one predicate to a RateBasedRule, a request not only must exceed the RateLimit, but it also must match all the specifications to be counted or blocked. For example, suppose you add the following to a RateBasedRule:   An IPSet that matches the IP address 192.0.2.44/32    A ByteMatchSet that matches BadBot in the User-Agent header   Further, you specify a RateLimit of 15,000. You then add the RateBasedRule to a WebACL and specify that you want to block requests that meet the conditions in the rule. For a request to be blocked, it must come from the IP address 192.0.2.44 and the User-Agent header in the request must contain the value BadBot. Further, requests that match these two conditions must be received at a rate of more than 15,000 requests every five minutes. If both conditions are met and the rate is exceeded, AWS WAF blocks the requests. If the rate drops below 15,000 for a five-minute period, AWS WAF no longer blocks the requests. As a second example, suppose you want to limit requests to a particular page on your site. To do this, you could add the following to a RateBasedRule:   A ByteMatchSet with FieldToMatch of URI    A PositionalConstraint of STARTS_WITH    A TargetString of login    Further, you specify a RateLimit of 15,000. By adding this RateBasedRule to a WebACL, you could limit requests to your login page without affecting the rest of your site. To create and configure a RateBasedRule, perform the following steps:   Create and update the predicates that you want to include in the rule. For more information, see CreateByteMatchSet, CreateIPSet, and CreateSqlInjectionMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateRule request.   Submit a CreateRateBasedRule request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRule request.   Submit an UpdateRateBasedRule request to specify the predicates that you want to include in the rule.   Create and update a WebACL that contains the RateBasedRule. For more information, see CreateWebACL.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   createRateBasedRule(callback?: (err: AWSError, data: WAFRegional.Types.CreateRateBasedRuleResponse) => void): Request<WAFRegional.Types.CreateRateBasedRuleResponse, AWSError>;
+  /**
+   * Creates a RegexMatchSet. You then use UpdateRegexMatchSet to identify the part of a web request that you want AWS WAF to inspect, such as the values of the User-Agent header or the query string. For example, you can create a RegexMatchSet that contains a RegexMatchTuple that looks for any requests with User-Agent headers that match a RegexPatternSet with pattern B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexMatchSet, perform the following steps:   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateRegexMatchSet request.   Submit a CreateRegexMatchSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexMatchSet request.   Submit an UpdateRegexMatchSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value, using a RegexPatternSet, that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createRegexMatchSet(params: WAFRegional.Types.CreateRegexMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.CreateRegexMatchSetResponse) => void): Request<WAFRegional.Types.CreateRegexMatchSetResponse, AWSError>;
+  /**
+   * Creates a RegexMatchSet. You then use UpdateRegexMatchSet to identify the part of a web request that you want AWS WAF to inspect, such as the values of the User-Agent header or the query string. For example, you can create a RegexMatchSet that contains a RegexMatchTuple that looks for any requests with User-Agent headers that match a RegexPatternSet with pattern B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexMatchSet, perform the following steps:   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateRegexMatchSet request.   Submit a CreateRegexMatchSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexMatchSet request.   Submit an UpdateRegexMatchSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value, using a RegexPatternSet, that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createRegexMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.CreateRegexMatchSetResponse) => void): Request<WAFRegional.Types.CreateRegexMatchSetResponse, AWSError>;
+  /**
+   * Creates a RegexPatternSet. You then use UpdateRegexPatternSet to specify the regular expression (regex) pattern that you want AWS WAF to search for, such as B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexPatternSet, perform the following steps:   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateRegexPatternSet request.   Submit a CreateRegexPatternSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexPatternSet request.   Submit an UpdateRegexPatternSet request to specify the string that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createRegexPatternSet(params: WAFRegional.Types.CreateRegexPatternSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.CreateRegexPatternSetResponse) => void): Request<WAFRegional.Types.CreateRegexPatternSetResponse, AWSError>;
+  /**
+   * Creates a RegexPatternSet. You then use UpdateRegexPatternSet to specify the regular expression (regex) pattern that you want AWS WAF to search for, such as B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexPatternSet, perform the following steps:   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateRegexPatternSet request.   Submit a CreateRegexPatternSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexPatternSet request.   Submit an UpdateRegexPatternSet request to specify the string that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createRegexPatternSet(callback?: (err: AWSError, data: WAFRegional.Types.CreateRegexPatternSetResponse) => void): Request<WAFRegional.Types.CreateRegexPatternSetResponse, AWSError>;
   /**
    * Creates a Rule, which contains the IPSet objects, ByteMatchSet objects, and other predicates that identify the requests that you want to block. If you add more than one predicate to a Rule, a request must match all of the specifications to be allowed or blocked. For example, suppose you add the following to a Rule:   An IPSet that matches the IP address 192.0.2.44/32    A ByteMatchSet that matches BadBot in the User-Agent header   You then add the Rule to a WebACL and specify that you want to blocks requests that satisfy the Rule. For a request to be blocked, it must come from the IP address 192.0.2.44 and the User-Agent header in the request must contain the value BadBot. To create and configure a Rule, perform the following steps:   Create and update the predicates that you want to include in the Rule. For more information, see CreateByteMatchSet, CreateIPSet, and CreateSqlInjectionMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateRule request.   Submit a CreateRule request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRule request.   Submit an UpdateRule request to specify the predicates that you want to include in the Rule.   Create and update a WebACL that contains the Rule. For more information, see CreateWebACL.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
@@ -92,6 +116,14 @@ declare class WAFRegional extends Service {
    */
   deleteByteMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.DeleteByteMatchSetResponse) => void): Request<WAFRegional.Types.DeleteByteMatchSetResponse, AWSError>;
   /**
+   * Permanently deletes a GeoMatchSet. You can't delete a GeoMatchSet if it's still used in any Rules or if it still includes any countries. If you just want to remove a GeoMatchSet from a Rule, use UpdateRule. To permanently delete a GeoMatchSet from AWS WAF, perform the following steps:   Update the GeoMatchSet to remove any countries. For more information, see UpdateGeoMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteGeoMatchSet request.   Submit a DeleteGeoMatchSet request.  
+   */
+  deleteGeoMatchSet(params: WAFRegional.Types.DeleteGeoMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.DeleteGeoMatchSetResponse) => void): Request<WAFRegional.Types.DeleteGeoMatchSetResponse, AWSError>;
+  /**
+   * Permanently deletes a GeoMatchSet. You can't delete a GeoMatchSet if it's still used in any Rules or if it still includes any countries. If you just want to remove a GeoMatchSet from a Rule, use UpdateRule. To permanently delete a GeoMatchSet from AWS WAF, perform the following steps:   Update the GeoMatchSet to remove any countries. For more information, see UpdateGeoMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteGeoMatchSet request.   Submit a DeleteGeoMatchSet request.  
+   */
+  deleteGeoMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.DeleteGeoMatchSetResponse) => void): Request<WAFRegional.Types.DeleteGeoMatchSetResponse, AWSError>;
+  /**
    * Permanently deletes an IPSet. You can't delete an IPSet if it's still used in any Rules or if it still includes any IP addresses. If you just want to remove an IPSet from a Rule, use UpdateRule. To permanently delete an IPSet from AWS WAF, perform the following steps:   Update the IPSet to remove IP address ranges, if any. For more information, see UpdateIPSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteIPSet request.   Submit a DeleteIPSet request.  
    */
   deleteIPSet(params: WAFRegional.Types.DeleteIPSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.DeleteIPSetResponse) => void): Request<WAFRegional.Types.DeleteIPSetResponse, AWSError>;
@@ -107,6 +139,22 @@ declare class WAFRegional extends Service {
    * Permanently deletes a RateBasedRule. You can't delete a rule if it's still used in any WebACL objects or if it still includes any predicates, such as ByteMatchSet objects. If you just want to remove a rule from a WebACL, use UpdateWebACL. To permanently delete a RateBasedRule from AWS WAF, perform the following steps:   Update the RateBasedRule to remove predicates, if any. For more information, see UpdateRateBasedRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRateBasedRule request.   Submit a DeleteRateBasedRule request.  
    */
   deleteRateBasedRule(callback?: (err: AWSError, data: WAFRegional.Types.DeleteRateBasedRuleResponse) => void): Request<WAFRegional.Types.DeleteRateBasedRuleResponse, AWSError>;
+  /**
+   * Permanently deletes a RegexMatchSet. You can't delete a RegexMatchSet if it's still used in any Rules or if it still includes any RegexMatchTuples objects (any filters). If you just want to remove a RegexMatchSet from a Rule, use UpdateRule. To permanently delete a RegexMatchSet, perform the following steps:   Update the RegexMatchSet to remove filters, if any. For more information, see UpdateRegexMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRegexMatchSet request.   Submit a DeleteRegexMatchSet request.  
+   */
+  deleteRegexMatchSet(params: WAFRegional.Types.DeleteRegexMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.DeleteRegexMatchSetResponse) => void): Request<WAFRegional.Types.DeleteRegexMatchSetResponse, AWSError>;
+  /**
+   * Permanently deletes a RegexMatchSet. You can't delete a RegexMatchSet if it's still used in any Rules or if it still includes any RegexMatchTuples objects (any filters). If you just want to remove a RegexMatchSet from a Rule, use UpdateRule. To permanently delete a RegexMatchSet, perform the following steps:   Update the RegexMatchSet to remove filters, if any. For more information, see UpdateRegexMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRegexMatchSet request.   Submit a DeleteRegexMatchSet request.  
+   */
+  deleteRegexMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.DeleteRegexMatchSetResponse) => void): Request<WAFRegional.Types.DeleteRegexMatchSetResponse, AWSError>;
+  /**
+   * Permanently deletes a RegexPatternSet. You can't delete a RegexPatternSet if it's still used in any RegexMatchSet or if the RegexPatternSet is not empty. 
+   */
+  deleteRegexPatternSet(params: WAFRegional.Types.DeleteRegexPatternSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.DeleteRegexPatternSetResponse) => void): Request<WAFRegional.Types.DeleteRegexPatternSetResponse, AWSError>;
+  /**
+   * Permanently deletes a RegexPatternSet. You can't delete a RegexPatternSet if it's still used in any RegexMatchSet or if the RegexPatternSet is not empty. 
+   */
+  deleteRegexPatternSet(callback?: (err: AWSError, data: WAFRegional.Types.DeleteRegexPatternSetResponse) => void): Request<WAFRegional.Types.DeleteRegexPatternSetResponse, AWSError>;
   /**
    * Permanently deletes a Rule. You can't delete a Rule if it's still used in any WebACL objects or if it still includes any predicates, such as ByteMatchSet objects. If you just want to remove a Rule from a WebACL, use UpdateWebACL. To permanently delete a Rule from AWS WAF, perform the following steps:   Update the Rule to remove predicates, if any. For more information, see UpdateRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRule request.   Submit a DeleteRule request.  
    */
@@ -180,6 +228,14 @@ declare class WAFRegional extends Service {
    */
   getChangeTokenStatus(callback?: (err: AWSError, data: WAFRegional.Types.GetChangeTokenStatusResponse) => void): Request<WAFRegional.Types.GetChangeTokenStatusResponse, AWSError>;
   /**
+   * Returns the GeoMatchSet that is specified by GeoMatchSetId.
+   */
+  getGeoMatchSet(params: WAFRegional.Types.GetGeoMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.GetGeoMatchSetResponse) => void): Request<WAFRegional.Types.GetGeoMatchSetResponse, AWSError>;
+  /**
+   * Returns the GeoMatchSet that is specified by GeoMatchSetId.
+   */
+  getGeoMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.GetGeoMatchSetResponse) => void): Request<WAFRegional.Types.GetGeoMatchSetResponse, AWSError>;
+  /**
    * Returns the IPSet that is specified by IPSetId.
    */
   getIPSet(params: WAFRegional.Types.GetIPSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.GetIPSetResponse) => void): Request<WAFRegional.Types.GetIPSetResponse, AWSError>;
@@ -203,6 +259,22 @@ declare class WAFRegional extends Service {
    * Returns an array of IP addresses currently being blocked by the RateBasedRule that is specified by the RuleId. The maximum number of managed keys that will be blocked is 10,000. If more than 10,000 addresses exceed the rate limit, the 10,000 addresses with the highest rates will be blocked.
    */
   getRateBasedRuleManagedKeys(callback?: (err: AWSError, data: WAFRegional.Types.GetRateBasedRuleManagedKeysResponse) => void): Request<WAFRegional.Types.GetRateBasedRuleManagedKeysResponse, AWSError>;
+  /**
+   * Returns the RegexMatchSet specified by RegexMatchSetId.
+   */
+  getRegexMatchSet(params: WAFRegional.Types.GetRegexMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.GetRegexMatchSetResponse) => void): Request<WAFRegional.Types.GetRegexMatchSetResponse, AWSError>;
+  /**
+   * Returns the RegexMatchSet specified by RegexMatchSetId.
+   */
+  getRegexMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.GetRegexMatchSetResponse) => void): Request<WAFRegional.Types.GetRegexMatchSetResponse, AWSError>;
+  /**
+   * Returns the RegexPatternSet specified by RegexPatternSetId.
+   */
+  getRegexPatternSet(params: WAFRegional.Types.GetRegexPatternSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.GetRegexPatternSetResponse) => void): Request<WAFRegional.Types.GetRegexPatternSetResponse, AWSError>;
+  /**
+   * Returns the RegexPatternSet specified by RegexPatternSetId.
+   */
+  getRegexPatternSet(callback?: (err: AWSError, data: WAFRegional.Types.GetRegexPatternSetResponse) => void): Request<WAFRegional.Types.GetRegexPatternSetResponse, AWSError>;
   /**
    * Returns the Rule that is specified by the RuleId that you included in the GetRule request.
    */
@@ -268,6 +340,14 @@ declare class WAFRegional extends Service {
    */
   listByteMatchSets(callback?: (err: AWSError, data: WAFRegional.Types.ListByteMatchSetsResponse) => void): Request<WAFRegional.Types.ListByteMatchSetsResponse, AWSError>;
   /**
+   * Returns an array of GeoMatchSetSummary objects in the response.
+   */
+  listGeoMatchSets(params: WAFRegional.Types.ListGeoMatchSetsRequest, callback?: (err: AWSError, data: WAFRegional.Types.ListGeoMatchSetsResponse) => void): Request<WAFRegional.Types.ListGeoMatchSetsResponse, AWSError>;
+  /**
+   * Returns an array of GeoMatchSetSummary objects in the response.
+   */
+  listGeoMatchSets(callback?: (err: AWSError, data: WAFRegional.Types.ListGeoMatchSetsResponse) => void): Request<WAFRegional.Types.ListGeoMatchSetsResponse, AWSError>;
+  /**
    * Returns an array of IPSetSummary objects in the response.
    */
   listIPSets(params: WAFRegional.Types.ListIPSetsRequest, callback?: (err: AWSError, data: WAFRegional.Types.ListIPSetsResponse) => void): Request<WAFRegional.Types.ListIPSetsResponse, AWSError>;
@@ -283,6 +363,22 @@ declare class WAFRegional extends Service {
    * Returns an array of RuleSummary objects.
    */
   listRateBasedRules(callback?: (err: AWSError, data: WAFRegional.Types.ListRateBasedRulesResponse) => void): Request<WAFRegional.Types.ListRateBasedRulesResponse, AWSError>;
+  /**
+   * Returns an array of RegexMatchSetSummary objects.
+   */
+  listRegexMatchSets(params: WAFRegional.Types.ListRegexMatchSetsRequest, callback?: (err: AWSError, data: WAFRegional.Types.ListRegexMatchSetsResponse) => void): Request<WAFRegional.Types.ListRegexMatchSetsResponse, AWSError>;
+  /**
+   * Returns an array of RegexMatchSetSummary objects.
+   */
+  listRegexMatchSets(callback?: (err: AWSError, data: WAFRegional.Types.ListRegexMatchSetsResponse) => void): Request<WAFRegional.Types.ListRegexMatchSetsResponse, AWSError>;
+  /**
+   * Returns an array of RegexPatternSetSummary objects.
+   */
+  listRegexPatternSets(params: WAFRegional.Types.ListRegexPatternSetsRequest, callback?: (err: AWSError, data: WAFRegional.Types.ListRegexPatternSetsResponse) => void): Request<WAFRegional.Types.ListRegexPatternSetsResponse, AWSError>;
+  /**
+   * Returns an array of RegexPatternSetSummary objects.
+   */
+  listRegexPatternSets(callback?: (err: AWSError, data: WAFRegional.Types.ListRegexPatternSetsResponse) => void): Request<WAFRegional.Types.ListRegexPatternSetsResponse, AWSError>;
   /**
    * Returns an array of resources associated with the specified web ACL.
    */
@@ -340,6 +436,14 @@ declare class WAFRegional extends Service {
    */
   updateByteMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.UpdateByteMatchSetResponse) => void): Request<WAFRegional.Types.UpdateByteMatchSetResponse, AWSError>;
   /**
+   * Inserts or deletes GeoMatchConstraint objects in an GeoMatchSet. For each GeoMatchConstraint object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change an GeoMatchConstraint object, you delete the existing object and add a new one.   The Type. The only valid value for Type is Country.   The Value, which is a two character code for the country to add to the GeoMatchConstraint object. Valid codes are listed in GeoMatchConstraint$Value.   To create and configure an GeoMatchSet, perform the following steps:   Submit a CreateGeoMatchSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateGeoMatchSet request.   Submit an UpdateGeoMatchSet request to specify the country that you want AWS WAF to watch for.   When you update an GeoMatchSet, you specify the country that you want to add and/or the country that you want to delete. If you want to change a country, you delete the existing country and add the new one. For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  updateGeoMatchSet(params: WAFRegional.Types.UpdateGeoMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.UpdateGeoMatchSetResponse) => void): Request<WAFRegional.Types.UpdateGeoMatchSetResponse, AWSError>;
+  /**
+   * Inserts or deletes GeoMatchConstraint objects in an GeoMatchSet. For each GeoMatchConstraint object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change an GeoMatchConstraint object, you delete the existing object and add a new one.   The Type. The only valid value for Type is Country.   The Value, which is a two character code for the country to add to the GeoMatchConstraint object. Valid codes are listed in GeoMatchConstraint$Value.   To create and configure an GeoMatchSet, perform the following steps:   Submit a CreateGeoMatchSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateGeoMatchSet request.   Submit an UpdateGeoMatchSet request to specify the country that you want AWS WAF to watch for.   When you update an GeoMatchSet, you specify the country that you want to add and/or the country that you want to delete. If you want to change a country, you delete the existing country and add the new one. For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  updateGeoMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.UpdateGeoMatchSetResponse) => void): Request<WAFRegional.Types.UpdateGeoMatchSetResponse, AWSError>;
+  /**
    * Inserts or deletes IPSetDescriptor objects in an IPSet. For each IPSetDescriptor object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change an IPSetDescriptor object, you delete the existing object and add a new one.   The IP address version, IPv4 or IPv6.    The IP address in CIDR notation, for example, 192.0.2.0/24 (for the range of IP addresses from 192.0.2.0 to 192.0.2.255) or 192.0.2.44/32 (for the individual IP address 192.0.2.44).    AWS WAF supports /8, /16, /24, and /32 IP address ranges for IPv4, and /24, /32, /48, /56, /64 and /128 for IPv6. For more information about CIDR notation, see the Wikipedia entry Classless Inter-Domain Routing. IPv6 addresses can be represented using any of the following formats:   1111:0000:0000:0000:0000:0000:0000:0111/128   1111:0:0:0:0:0:0:0111/128   1111::0111/128   1111::111/128   You use an IPSet to specify which web requests you want to allow or block based on the IP addresses that the requests originated from. For example, if you're receiving a lot of requests from one or a small number of IP addresses and you want to block the requests, you can create an IPSet that specifies those IP addresses, and then configure AWS WAF to block the requests.  To create and configure an IPSet, perform the following steps:   Submit a CreateIPSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateIPSet request.   Submit an UpdateIPSet request to specify the IP addresses that you want AWS WAF to watch for.   When you update an IPSet, you specify the IP addresses that you want to add and/or the IP addresses that you want to delete. If you want to change an IP address, you delete the existing IP address and add the new one. For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateIPSet(params: WAFRegional.Types.UpdateIPSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.UpdateIPSetResponse) => void): Request<WAFRegional.Types.UpdateIPSetResponse, AWSError>;
@@ -355,6 +459,22 @@ declare class WAFRegional extends Service {
    * Inserts or deletes Predicate objects in a rule and updates the RateLimit in the rule.  Each Predicate object identifies a predicate, such as a ByteMatchSet or an IPSet, that specifies the web requests that you want to block or count. The RateLimit specifies the number of requests every five minutes that triggers the rule. If you add more than one predicate to a RateBasedRule, a request must match all the predicates and exceed the RateLimit to be counted or blocked. For example, suppose you add the following to a RateBasedRule:   An IPSet that matches the IP address 192.0.2.44/32    A ByteMatchSet that matches BadBot in the User-Agent header   Further, you specify a RateLimit of 15,000. You then add the RateBasedRule to a WebACL and specify that you want to block requests that satisfy the rule. For a request to be blocked, it must come from the IP address 192.0.2.44 and the User-Agent header in the request must contain the value BadBot. Further, requests that match these two conditions much be received at a rate of more than 15,000 every five minutes. If the rate drops below this limit, AWS WAF no longer blocks the requests. As a second example, suppose you want to limit requests to a particular page on your site. To do this, you could add the following to a RateBasedRule:   A ByteMatchSet with FieldToMatch of URI    A PositionalConstraint of STARTS_WITH    A TargetString of login    Further, you specify a RateLimit of 15,000. By adding this RateBasedRule to a WebACL, you could limit requests to your login page without affecting the rest of your site.
    */
   updateRateBasedRule(callback?: (err: AWSError, data: WAFRegional.Types.UpdateRateBasedRuleResponse) => void): Request<WAFRegional.Types.UpdateRateBasedRuleResponse, AWSError>;
+  /**
+   * Inserts or deletes RegexMatchSetUpdate objects (filters) in a RegexMatchSet. For each RegexMatchSetUpdate object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexMatchSetUpdate object, you delete the existing object and add a new one.   The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the User-Agent header.    The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see RegexPatternSet.    Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.    For example, you can create a RegexPatternSet that matches any requests with User-Agent headers that contain the string B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexMatchSet, perform the following steps:   Create a RegexMatchSet. For more information, see CreateRegexMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexMatchSet request.   Submit an UpdateRegexMatchSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the identifier of the RegexPatternSet that contain the regular expression patters you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  updateRegexMatchSet(params: WAFRegional.Types.UpdateRegexMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.UpdateRegexMatchSetResponse) => void): Request<WAFRegional.Types.UpdateRegexMatchSetResponse, AWSError>;
+  /**
+   * Inserts or deletes RegexMatchSetUpdate objects (filters) in a RegexMatchSet. For each RegexMatchSetUpdate object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexMatchSetUpdate object, you delete the existing object and add a new one.   The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the User-Agent header.    The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see RegexPatternSet.    Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.    For example, you can create a RegexPatternSet that matches any requests with User-Agent headers that contain the string B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexMatchSet, perform the following steps:   Create a RegexMatchSet. For more information, see CreateRegexMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexMatchSet request.   Submit an UpdateRegexMatchSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the identifier of the RegexPatternSet that contain the regular expression patters you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  updateRegexMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.UpdateRegexMatchSetResponse) => void): Request<WAFRegional.Types.UpdateRegexMatchSetResponse, AWSError>;
+  /**
+   * Inserts or deletes RegexMatchSetUpdate objects (filters) in a RegexPatternSet. For each RegexPatternSet object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexPatternSet object, you delete the existing object and add a new one.   The regular expression pattern that you want AWS WAF to look for. For more information, see RegexPatternSet.     For example, you can create a RegexPatternString such as B[a@]dB[o0]t. AWS WAF will match this RegexPatternString to:   BadBot   BadB0t   B@dBot   B@dB0t   To create and configure a RegexPatternSet, perform the following steps:   Create a RegexPatternSet. For more information, see CreateRegexPatternSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexPatternSet request.   Submit an UpdateRegexPatternSet request to specify the regular expression pattern that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  updateRegexPatternSet(params: WAFRegional.Types.UpdateRegexPatternSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.UpdateRegexPatternSetResponse) => void): Request<WAFRegional.Types.UpdateRegexPatternSetResponse, AWSError>;
+  /**
+   * Inserts or deletes RegexMatchSetUpdate objects (filters) in a RegexPatternSet. For each RegexPatternSet object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexPatternSet object, you delete the existing object and add a new one.   The regular expression pattern that you want AWS WAF to look for. For more information, see RegexPatternSet.     For example, you can create a RegexPatternString such as B[a@]dB[o0]t. AWS WAF will match this RegexPatternString to:   BadBot   BadB0t   B@dBot   B@dB0t   To create and configure a RegexPatternSet, perform the following steps:   Create a RegexPatternSet. For more information, see CreateRegexPatternSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexPatternSet request.   Submit an UpdateRegexPatternSet request to specify the regular expression pattern that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  updateRegexPatternSet(callback?: (err: AWSError, data: WAFRegional.Types.UpdateRegexPatternSetResponse) => void): Request<WAFRegional.Types.UpdateRegexPatternSetResponse, AWSError>;
   /**
    * Inserts or deletes Predicate objects in a Rule. Each Predicate object identifies a predicate, such as a ByteMatchSet or an IPSet, that specifies the web requests that you want to allow, block, or count. If you add more than one predicate to a Rule, a request must match all of the specifications to be allowed, blocked, or counted. For example, suppose you add the following to a Rule:    A ByteMatchSet that matches the value BadBot in the User-Agent header   An IPSet that matches the IP address 192.0.2.44    You then add the Rule to a WebACL and specify that you want to block requests that satisfy the Rule. For a request to be blocked, the User-Agent header in the request must contain the value BadBot and the request must originate from the IP address 192.0.2.44. To create and configure a Rule, perform the following steps:   Create and update the predicates that you want to include in the Rule.   Create the Rule. See CreateRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRule request.   Submit an UpdateRule request to add predicates to the Rule.   Create and update a WebACL that contains the Rule. See CreateWebACL.   If you want to replace one ByteMatchSet or IPSet with another, you delete the existing one and add the new one. For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
@@ -510,6 +630,26 @@ declare namespace WAFRegional {
      */
     ChangeToken?: ChangeToken;
   }
+  export interface CreateGeoMatchSetRequest {
+    /**
+     * A friendly name or description of the GeoMatchSet. You can't change Name after you create the GeoMatchSet.
+     */
+    Name: ResourceName;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface CreateGeoMatchSetResponse {
+    /**
+     * The GeoMatchSet returned in the CreateGeoMatchSet response. The GeoMatchSet contains no GeoMatchConstraints.
+     */
+    GeoMatchSet?: GeoMatchSet;
+    /**
+     * The ChangeToken that you used to submit the CreateGeoMatchSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
   export interface CreateIPSetRequest {
     /**
      * A friendly name or description of the IPSet. You can't change Name after you create the IPSet.
@@ -559,6 +699,46 @@ declare namespace WAFRegional {
     Rule?: RateBasedRule;
     /**
      * The ChangeToken that you used to submit the CreateRateBasedRule request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
+  export interface CreateRegexMatchSetRequest {
+    /**
+     * A friendly name or description of the RegexMatchSet. You can't change Name after you create a RegexMatchSet.
+     */
+    Name: ResourceName;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface CreateRegexMatchSetResponse {
+    /**
+     * A RegexMatchSet that contains no RegexMatchTuple objects.
+     */
+    RegexMatchSet?: RegexMatchSet;
+    /**
+     * The ChangeToken that you used to submit the CreateRegexMatchSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
+  export interface CreateRegexPatternSetRequest {
+    /**
+     * A friendly name or description of the RegexPatternSet. You can't change Name after you create a RegexPatternSet.
+     */
+    Name: ResourceName;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface CreateRegexPatternSetResponse {
+    /**
+     * A RegexPatternSet that contains no objects.
+     */
+    RegexPatternSet?: RegexPatternSet;
+    /**
+     * The ChangeToken that you used to submit the CreateRegexPatternSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
      */
     ChangeToken?: ChangeToken;
   }
@@ -690,6 +870,22 @@ declare namespace WAFRegional {
      */
     ChangeToken?: ChangeToken;
   }
+  export interface DeleteGeoMatchSetRequest {
+    /**
+     * The GeoMatchSetID of the GeoMatchSet that you want to delete. GeoMatchSetId is returned by CreateGeoMatchSet and by ListGeoMatchSets.
+     */
+    GeoMatchSetId: ResourceId;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface DeleteGeoMatchSetResponse {
+    /**
+     * The ChangeToken that you used to submit the DeleteGeoMatchSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
   export interface DeleteIPSetRequest {
     /**
      * The IPSetId of the IPSet that you want to delete. IPSetId is returned by CreateIPSet and by ListIPSets.
@@ -719,6 +915,38 @@ declare namespace WAFRegional {
   export interface DeleteRateBasedRuleResponse {
     /**
      * The ChangeToken that you used to submit the DeleteRateBasedRule request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
+  export interface DeleteRegexMatchSetRequest {
+    /**
+     * The RegexMatchSetId of the RegexMatchSet that you want to delete. RegexMatchSetId is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+     */
+    RegexMatchSetId: ResourceId;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface DeleteRegexMatchSetResponse {
+    /**
+     * The ChangeToken that you used to submit the DeleteRegexMatchSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
+  export interface DeleteRegexPatternSetRequest {
+    /**
+     * The RegexPatternSetId of the RegexPatternSet that you want to delete. RegexPatternSetId is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+     */
+    RegexPatternSetId: ResourceId;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface DeleteRegexPatternSetResponse {
+    /**
+     * The ChangeToken that you used to submit the DeleteRegexPatternSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
      */
     ChangeToken?: ChangeToken;
   }
@@ -820,6 +1048,55 @@ declare namespace WAFRegional {
      */
     Data?: MatchFieldData;
   }
+  export interface GeoMatchConstraint {
+    /**
+     * The type of geographical area you want AWS WAF to search for. Currently Country is the only valid value.
+     */
+    Type: GeoMatchConstraintType;
+    /**
+     * The country that you want AWS WAF to search for.
+     */
+    Value: GeoMatchConstraintValue;
+  }
+  export type GeoMatchConstraintType = "Country"|string;
+  export type GeoMatchConstraintValue = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
+  export type GeoMatchConstraints = GeoMatchConstraint[];
+  export interface GeoMatchSet {
+    /**
+     * The GeoMatchSetId for an GeoMatchSet. You use GeoMatchSetId to get information about a GeoMatchSet (see GeoMatchSet), update a GeoMatchSet (see UpdateGeoMatchSet), insert a GeoMatchSet into a Rule or delete one from a Rule (see UpdateRule), and delete a GeoMatchSet from AWS WAF (see DeleteGeoMatchSet).  GeoMatchSetId is returned by CreateGeoMatchSet and by ListGeoMatchSets.
+     */
+    GeoMatchSetId: ResourceId;
+    /**
+     * A friendly name or description of the GeoMatchSet. You can't change the name of an GeoMatchSet after you create it.
+     */
+    Name?: ResourceName;
+    /**
+     * An array of GeoMatchConstraint objects, which contain the country that you want AWS WAF to search for.
+     */
+    GeoMatchConstraints: GeoMatchConstraints;
+  }
+  export type GeoMatchSetSummaries = GeoMatchSetSummary[];
+  export interface GeoMatchSetSummary {
+    /**
+     * The GeoMatchSetId for an GeoMatchSet. You can use GeoMatchSetId in a GetGeoMatchSet request to get detailed information about an GeoMatchSet.
+     */
+    GeoMatchSetId: ResourceId;
+    /**
+     * A friendly name or description of the GeoMatchSet. You can't change the name of an GeoMatchSet after you create it.
+     */
+    Name: ResourceName;
+  }
+  export interface GeoMatchSetUpdate {
+    /**
+     * Specifies whether to insert or delete a country with UpdateGeoMatchSet.
+     */
+    Action: ChangeAction;
+    /**
+     * The country from which web requests originate that you want AWS WAF to search for.
+     */
+    GeoMatchConstraint: GeoMatchConstraint;
+  }
+  export type GeoMatchSetUpdates = GeoMatchSetUpdate[];
   export interface GetByteMatchSetRequest {
     /**
      * The ByteMatchSetId of the ByteMatchSet that you want to get. ByteMatchSetId is returned by CreateByteMatchSet and by ListByteMatchSets.
@@ -851,6 +1128,18 @@ declare namespace WAFRegional {
      * The status of the change token.
      */
     ChangeTokenStatus?: ChangeTokenStatus;
+  }
+  export interface GetGeoMatchSetRequest {
+    /**
+     * The GeoMatchSetId of the GeoMatchSet that you want to get. GeoMatchSetId is returned by CreateGeoMatchSet and by ListGeoMatchSets.
+     */
+    GeoMatchSetId: ResourceId;
+  }
+  export interface GetGeoMatchSetResponse {
+    /**
+     * Information about the GeoMatchSet that you specified in the GetGeoMatchSet request. This includes the Type, which for a GeoMatchContraint is always Country, as well as the Value, which is the identifier for a specific country.
+     */
+    GeoMatchSet?: GeoMatchSet;
   }
   export interface GetIPSetRequest {
     /**
@@ -895,6 +1184,30 @@ declare namespace WAFRegional {
      * Information about the RateBasedRule that you specified in the GetRateBasedRule request.
      */
     Rule?: RateBasedRule;
+  }
+  export interface GetRegexMatchSetRequest {
+    /**
+     * The RegexMatchSetId of the RegexMatchSet that you want to get. RegexMatchSetId is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+     */
+    RegexMatchSetId: ResourceId;
+  }
+  export interface GetRegexMatchSetResponse {
+    /**
+     * Information about the RegexMatchSet that you specified in the GetRegexMatchSet request. For more information, see RegexMatchTuple.
+     */
+    RegexMatchSet?: RegexMatchSet;
+  }
+  export interface GetRegexPatternSetRequest {
+    /**
+     * The RegexPatternSetId of the RegexPatternSet that you want to get. RegexPatternSetId is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+     */
+    RegexPatternSetId: ResourceId;
+  }
+  export interface GetRegexPatternSetResponse {
+    /**
+     * Information about the RegexPatternSet that you specified in the GetRegexPatternSet request, including the identifier of the pattern set and the regular expression patterns you want AWS WAF to search for. 
+     */
+    RegexPatternSet?: RegexPatternSet;
   }
   export interface GetRuleRequest {
     /**
@@ -1112,9 +1425,29 @@ declare namespace WAFRegional {
      */
     ByteMatchSets?: ByteMatchSetSummaries;
   }
+  export interface ListGeoMatchSetsRequest {
+    /**
+     * If you specify a value for Limit and you have more GeoMatchSets than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of GeoMatchSet objects. For the second and subsequent ListGeoMatchSets requests, specify the value of NextMarker from the previous response to get information about another batch of GeoMatchSet objects.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * Specifies the number of GeoMatchSet objects that you want AWS WAF to return for this request. If you have more GeoMatchSet objects than the number you specify for Limit, the response includes a NextMarker value that you can use to get another batch of GeoMatchSet objects.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListGeoMatchSetsResponse {
+    /**
+     * If you have more GeoMatchSet objects than the number that you specified for Limit in the request, the response includes a NextMarker value. To list more GeoMatchSet objects, submit another ListGeoMatchSets request, and specify the NextMarker value from the response in the NextMarker value in the next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * An array of GeoMatchSetSummary objects.
+     */
+    GeoMatchSets?: GeoMatchSetSummaries;
+  }
   export interface ListIPSetsRequest {
     /**
-     * If you specify a value for Limit and you have more IPSets than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of IPSets. For the second and subsequent ListIPSets requests, specify the value of NextMarker from the previous response to get information about another batch of ByteMatchSets.
+     * If you specify a value for Limit and you have more IPSets than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of IPSets. For the second and subsequent ListIPSets requests, specify the value of NextMarker from the previous response to get information about another batch of IPSets.
      */
     NextMarker?: NextMarker;
     /**
@@ -1151,6 +1484,46 @@ declare namespace WAFRegional {
      * An array of RuleSummary objects.
      */
     Rules?: RuleSummaries;
+  }
+  export interface ListRegexMatchSetsRequest {
+    /**
+     * If you specify a value for Limit and you have more RegexMatchSet objects than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of ByteMatchSets. For the second and subsequent ListRegexMatchSets requests, specify the value of NextMarker from the previous response to get information about another batch of RegexMatchSet objects.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * Specifies the number of RegexMatchSet objects that you want AWS WAF to return for this request. If you have more RegexMatchSet objects than the number you specify for Limit, the response includes a NextMarker value that you can use to get another batch of RegexMatchSet objects.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListRegexMatchSetsResponse {
+    /**
+     * If you have more RegexMatchSet objects than the number that you specified for Limit in the request, the response includes a NextMarker value. To list more RegexMatchSet objects, submit another ListRegexMatchSets request, and specify the NextMarker value from the response in the NextMarker value in the next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * An array of RegexMatchSetSummary objects.
+     */
+    RegexMatchSets?: RegexMatchSetSummaries;
+  }
+  export interface ListRegexPatternSetsRequest {
+    /**
+     * If you specify a value for Limit and you have more RegexPatternSet objects than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of RegexPatternSet objects. For the second and subsequent ListRegexPatternSets requests, specify the value of NextMarker from the previous response to get information about another batch of RegexPatternSet objects.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * Specifies the number of RegexPatternSet objects that you want AWS WAF to return for this request. If you have more RegexPatternSet objects than the number you specify for Limit, the response includes a NextMarker value that you can use to get another batch of RegexPatternSet objects.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListRegexPatternSetsResponse {
+    /**
+     * If you have more RegexPatternSet objects than the number that you specified for Limit in the request, the response includes a NextMarker value. To list more RegexPatternSet objects, submit another ListRegexPatternSets request, and specify the NextMarker value from the response in the NextMarker value in the next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * An array of RegexPatternSetSummary objects.
+     */
+    RegexPatternSets?: RegexPatternSetSummaries;
   }
   export interface ListResourcesForWebACLRequest {
     /**
@@ -1272,14 +1645,14 @@ declare namespace WAFRegional {
   export type Negated = boolean;
   export type NextMarker = string;
   export type PaginationLimit = number;
-  export type ParameterExceptionField = "CHANGE_ACTION"|"WAF_ACTION"|"PREDICATE_TYPE"|"IPSET_TYPE"|"BYTE_MATCH_FIELD_TYPE"|"SQL_INJECTION_MATCH_FIELD_TYPE"|"BYTE_MATCH_TEXT_TRANSFORMATION"|"BYTE_MATCH_POSITIONAL_CONSTRAINT"|"SIZE_CONSTRAINT_COMPARISON_OPERATOR"|"RATE_KEY"|"RULE_TYPE"|"NEXT_MARKER"|string;
+  export type ParameterExceptionField = "CHANGE_ACTION"|"WAF_ACTION"|"PREDICATE_TYPE"|"IPSET_TYPE"|"BYTE_MATCH_FIELD_TYPE"|"SQL_INJECTION_MATCH_FIELD_TYPE"|"BYTE_MATCH_TEXT_TRANSFORMATION"|"BYTE_MATCH_POSITIONAL_CONSTRAINT"|"SIZE_CONSTRAINT_COMPARISON_OPERATOR"|"GEO_MATCH_LOCATION_TYPE"|"GEO_MATCH_LOCATION_VALUE"|"RATE_KEY"|"RULE_TYPE"|"NEXT_MARKER"|string;
   export type ParameterExceptionParameter = string;
   export type ParameterExceptionReason = "INVALID_OPTION"|"ILLEGAL_COMBINATION"|string;
   export type PopulationSize = number;
   export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD"|string;
   export interface Predicate {
     /**
-     * Set Negated to False if you want AWS WAF to allow, block, or count requests based on the settings in the specified ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, or SizeConstraintSet. For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block requests based on that IP address. Set Negated to True if you want AWS WAF to allow or block a request based on the negation of the settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, or SizeConstraintSet. For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow, block, or count requests based on all IP addresses except 192.0.2.44.
+     * Set Negated to False if you want AWS WAF to allow, block, or count requests based on the settings in the specified ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, or SizeConstraintSet. For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block requests based on that IP address. Set Negated to True if you want AWS WAF to allow or block a request based on the negation of the settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, or SizeConstraintSet. For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow, block, or count requests based on all IP addresses except 192.0.2.44.
      */
     Negated: Negated;
     /**
@@ -1291,7 +1664,7 @@ declare namespace WAFRegional {
      */
     DataId: ResourceId;
   }
-  export type PredicateType = "IPMatch"|"ByteMatch"|"SqlInjectionMatch"|"SizeConstraint"|"XssMatch"|string;
+  export type PredicateType = "IPMatch"|"ByteMatch"|"SqlInjectionMatch"|"GeoMatch"|"SizeConstraint"|"XssMatch"|"RegexMatch"|string;
   export type Predicates = Predicate[];
   export interface RateBasedRule {
     /**
@@ -1321,6 +1694,95 @@ declare namespace WAFRegional {
   }
   export type RateKey = "IP"|string;
   export type RateLimit = number;
+  export interface RegexMatchSet {
+    /**
+     * The RegexMatchSetId for a RegexMatchSet. You use RegexMatchSetId to get information about a RegexMatchSet (see GetRegexMatchSet), update a RegexMatchSet (see UpdateRegexMatchSet), insert a RegexMatchSet into a Rule or delete one from a Rule (see UpdateRule), and delete a RegexMatchSet from AWS WAF (see DeleteRegexMatchSet).  RegexMatchSetId is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+     */
+    RegexMatchSetId?: ResourceId;
+    /**
+     * A friendly name or description of the RegexMatchSet. You can't change Name after you create a RegexMatchSet.
+     */
+    Name?: ResourceName;
+    /**
+     * Contains an array of RegexMatchTuple objects. Each RegexMatchTuple object contains:    The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the User-Agent header.    The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see RegexPatternSet.   Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.  
+     */
+    RegexMatchTuples?: RegexMatchTuples;
+  }
+  export type RegexMatchSetSummaries = RegexMatchSetSummary[];
+  export interface RegexMatchSetSummary {
+    /**
+     * The RegexMatchSetId for a RegexMatchSet. You use RegexMatchSetId to get information about a RegexMatchSet, update a RegexMatchSet, remove a RegexMatchSet from a Rule, and delete a RegexMatchSet from AWS WAF.  RegexMatchSetId is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+     */
+    RegexMatchSetId: ResourceId;
+    /**
+     * A friendly name or description of the RegexMatchSet. You can't change Name after you create a RegexMatchSet.
+     */
+    Name: ResourceName;
+  }
+  export interface RegexMatchSetUpdate {
+    /**
+     * Specifies whether to insert or delete a RegexMatchTuple.
+     */
+    Action: ChangeAction;
+    /**
+     * Information about the part of a web request that you want AWS WAF to inspect and the identifier of the regular expression (regex) pattern that you want AWS WAF to search for. If you specify DELETE for the value of Action, the RegexMatchTuple values must exactly match the values in the RegexMatchTuple that you want to delete from the RegexMatchSet.
+     */
+    RegexMatchTuple: RegexMatchTuple;
+  }
+  export type RegexMatchSetUpdates = RegexMatchSetUpdate[];
+  export interface RegexMatchTuple {
+    /**
+     * Specifies where in a web request to look for the RegexPatternSet.
+     */
+    FieldToMatch: FieldToMatch;
+    /**
+     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass AWS WAF. If you specify a transformation, AWS WAF performs the transformation on RegexPatternSet before inspecting a request for a match.  CMD_LINE  When you're concerned that attackers are injecting an operating system commandline command and using unusual formatting to disguise some or all of the command, use this option to perform the following transformations:   Delete the following characters: \ " ' ^   Delete spaces before the following characters: / (   Replace the following characters with a space: , ;   Replace multiple spaces with one space   Convert uppercase letters (A-Z) to lowercase (a-z)    COMPRESS_WHITE_SPACE  Use this option to replace the following characters with a space character (decimal 32):   \f, formfeed, decimal 12   \t, tab, decimal 9   \n, newline, decimal 10   \r, carriage return, decimal 13   \v, vertical tab, decimal 11   non-breaking space, decimal 160    COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.  HTML_ENTITY_DECODE  Use this option to replace HTML-encoded characters with unencoded characters. HTML_ENTITY_DECODE performs the following operations:   Replaces (ampersand)quot; with "    Replaces (ampersand)nbsp; with a non-breaking space, decimal 160   Replaces (ampersand)lt; with a "less than" symbol   Replaces (ampersand)gt; with &gt;    Replaces characters that are represented in hexadecimal format, (ampersand)#xhhhh;, with the corresponding characters   Replaces characters that are represented in decimal format, (ampersand)#nnnn;, with the corresponding characters    LOWERCASE  Use this option to convert uppercase letters (A-Z) to lowercase (a-z).  URL_DECODE  Use this option to decode a URL-encoded value.  NONE  Specify NONE if you don't want to perform any text transformations.
+     */
+    TextTransformation: TextTransformation;
+    /**
+     * The RegexPatternSetId for a RegexPatternSet. You use RegexPatternSetId to get information about a RegexPatternSet (see GetRegexPatternSet), update a RegexPatternSet (see UpdateRegexPatternSet), insert a RegexPatternSet into a RegexMatchSet or delete one from a RegexMatchSet (see UpdateRegexMatchSet), and delete an RegexPatternSet from AWS WAF (see DeleteRegexPatternSet).  RegexPatternSetId is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+     */
+    RegexPatternSetId: ResourceId;
+  }
+  export type RegexMatchTuples = RegexMatchTuple[];
+  export interface RegexPatternSet {
+    /**
+     * The identifier for the RegexPatternSet. You use RegexPatternSetId to get information about a RegexPatternSet, update a RegexPatternSet, remove a RegexPatternSet from a RegexMatchSet, and delete a RegexPatternSet from AWS WAF.  RegexMatchSetId is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+     */
+    RegexPatternSetId: ResourceId;
+    /**
+     * A friendly name or description of the RegexPatternSet. You can't change Name after you create a RegexPatternSet.
+     */
+    Name?: ResourceName;
+    /**
+     * Specifies the regular expression (regex) patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t.
+     */
+    RegexPatternStrings: RegexPatternStrings;
+  }
+  export type RegexPatternSetSummaries = RegexPatternSetSummary[];
+  export interface RegexPatternSetSummary {
+    /**
+     * The RegexPatternSetId for a RegexPatternSet. You use RegexPatternSetId to get information about a RegexPatternSet, update a RegexPatternSet, remove a RegexPatternSet from a RegexMatchSet, and delete a RegexPatternSet from AWS WAF.  RegexPatternSetId is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+     */
+    RegexPatternSetId: ResourceId;
+    /**
+     * A friendly name or description of the RegexPatternSet. You can't change Name after you create a RegexPatternSet.
+     */
+    Name: ResourceName;
+  }
+  export interface RegexPatternSetUpdate {
+    /**
+     * Specifies whether to insert or delete a RegexPatternString.
+     */
+    Action: ChangeAction;
+    /**
+     * Specifies the regular expression (regex) pattern that you want AWS WAF to search for, such as B[a@]dB[o0]t.
+     */
+    RegexPatternString: RegexPatternString;
+  }
+  export type RegexPatternSetUpdates = RegexPatternSetUpdate[];
+  export type RegexPatternString = string;
+  export type RegexPatternStrings = RegexPatternString[];
   export type ResourceArn = string;
   export type ResourceArns = ResourceArn[];
   export type ResourceId = string;
@@ -1522,6 +1984,26 @@ declare namespace WAFRegional {
      */
     ChangeToken?: ChangeToken;
   }
+  export interface UpdateGeoMatchSetRequest {
+    /**
+     * The GeoMatchSetId of the GeoMatchSet that you want to update. GeoMatchSetId is returned by CreateGeoMatchSet and by ListGeoMatchSets.
+     */
+    GeoMatchSetId: ResourceId;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+    /**
+     * An array of GeoMatchSetUpdate objects that you want to insert into or delete from an GeoMatchSet. For more information, see the applicable data types:    GeoMatchSetUpdate: Contains Action and GeoMatchConstraint     GeoMatchConstraint: Contains Type and Value  You can have only one Type and Value per GeoMatchConstraint. To add multiple countries, include multiple GeoMatchSetUpdate objects in your request.  
+     */
+    Updates: GeoMatchSetUpdates;
+  }
+  export interface UpdateGeoMatchSetResponse {
+    /**
+     * The ChangeToken that you used to submit the UpdateGeoMatchSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
   export interface UpdateIPSetRequest {
     /**
      * The IPSetId of the IPSet that you want to update. IPSetId is returned by CreateIPSet and by ListIPSets.
@@ -1563,6 +2045,46 @@ declare namespace WAFRegional {
   export interface UpdateRateBasedRuleResponse {
     /**
      * The ChangeToken that you used to submit the UpdateRateBasedRule request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
+  export interface UpdateRegexMatchSetRequest {
+    /**
+     * The RegexMatchSetId of the RegexMatchSet that you want to update. RegexMatchSetId is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+     */
+    RegexMatchSetId: ResourceId;
+    /**
+     * An array of RegexMatchSetUpdate objects that you want to insert into or delete from a RegexMatchSet. For more information, see RegexMatchTuple.
+     */
+    Updates: RegexMatchSetUpdates;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface UpdateRegexMatchSetResponse {
+    /**
+     * The ChangeToken that you used to submit the UpdateRegexMatchSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
+  export interface UpdateRegexPatternSetRequest {
+    /**
+     * The RegexPatternSetId of the RegexPatternSet that you want to update. RegexPatternSetId is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+     */
+    RegexPatternSetId: ResourceId;
+    /**
+     * An array of RegexPatternSetUpdate objects that you want to insert into or delete from a RegexPatternSet.
+     */
+    Updates: RegexPatternSetUpdates;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface UpdateRegexPatternSetResponse {
+    /**
+     * The ChangeToken that you used to submit the UpdateRegexPatternSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
      */
     ChangeToken?: ChangeToken;
   }

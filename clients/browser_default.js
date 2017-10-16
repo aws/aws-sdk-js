@@ -62,5 +62,6 @@ module.exports = {
   StorageGateway: require('./storagegateway'),
   STS: require('./sts'),
   WAF: require('./waf'),
-  WorkDocs: require('./workdocs')
+  WorkDocs: require('./workdocs'),
+  LexModelBuildingService: require('./lexmodelbuildingservice')
 };

@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "CORS",
-  "description": "The LexModelBuildingService supports CORS. This change adds the service to the browser version of the SDK by default."
-}
