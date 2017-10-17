@@ -59,6 +59,19 @@
       ],
       "documentation":"<p>Permanently deletes the specified Elasticsearch domain and all of its data. Once a domain is deleted, it cannot be recovered.</p>"
     },
+    "DeleteElasticsearchServiceRole":{
+      "name":"DeleteElasticsearchServiceRole",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/2015-01-01/es/role"
+      },
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"ValidationException"}
+      ],
+      "documentation":"<p>Deletes the service-linked role that Elasticsearch Service uses to manage and maintain VPC domains. Role deletion will fail if any existing VPC domains use the role. You must delete any such Elasticsearch domains before deleting the role. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-enabling-slr\" target=\"_blank\">Deleting Elasticsearch Service Role</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>.</p>"
+    },
     "DescribeElasticsearchDomain":{
       "name":"DescribeElasticsearchDomain",
       "http":{
@@ -345,6 +358,10 @@
           "shape":"SnapshotOptions",
           "documentation":"<p>Option to set time, in UTC format, of the daily automated snapshot. Default value is 0 hours. </p>"
         },
+        "VPCOptions":{
+          "shape":"VPCOptions",
+          "documentation":"<p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc\" target=\"_blank\">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i></p>"
+        },
         "AdvancedOptions":{
           "shape":"AdvancedOptions",
           "documentation":"<p> Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\" target=\"_blank\">Configuration Advanced Options</a> for more information.</p>"
@@ -609,7 +626,13 @@
         "r4.2xlarge.elasticsearch",
         "r4.4xlarge.elasticsearch",
         "r4.8xlarge.elasticsearch",
-        "r4.16xlarge.elasticsearch"
+        "r4.16xlarge.elasticsearch",
+        "i3.large.elasticsearch",
+        "i3.xlarge.elasticsearch",
+        "i3.2xlarge.elasticsearch",
+        "i3.4xlarge.elasticsearch",
+        "i3.8xlarge.elasticsearch",
+        "i3.16xlarge.elasticsearch"
       ]
     },
     "ElasticsearchClusterConfig":{
@@ -683,6 +706,10 @@
           "shape":"SnapshotOptionsStatus",
           "documentation":"<p>Specifies the <code>SnapshotOptions</code> for the Elasticsearch domain.</p>"
         },
+        "VPCOptions":{
+          "shape":"VPCDerivedInfoStatus",
+          "documentation":"<p>The <code>VPCOptions</code> for the specified domain. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html\" target=\"_blank\">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>"
+        },
         "AdvancedOptions":{
           "shape":"AdvancedOptionsStatus",
           "documentation":"<p>Specifies the <code>AdvancedOptions</code> for the domain. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\" target=\"_blank\">Configuring Advanced Options</a> for more information.</p>"
@@ -727,6 +754,10 @@
           "shape":"ServiceUrl",
           "documentation":"<p>The Elasticsearch domain endpoint that you use to submit index and search requests.</p>"
         },
+        "Endpoints":{
+          "shape":"EndpointsMap",
+          "documentation":"<p>Map containing the Elasticsearch domain endpoints used to submit index and search requests. Example <code>key, value</code>: <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>.</p>"
+        },
         "Processing":{
           "shape":"Boolean",
           "documentation":"<p>The status of the Elasticsearch domain configuration. <code>True</code> if Amazon Elasticsearch Service is processing configuration changes. <code>False</code> if the configuration is active.</p>"
@@ -747,6 +778,10 @@
         "SnapshotOptions":{
           "shape":"SnapshotOptions",
           "documentation":"<p>Specifies the status of the <code>SnapshotOptions</code></p>"
+        },
+        "VPCOptions":{
+          "shape":"VPCDerivedInfo",
+          "documentation":"<p>The <code>VPCOptions</code> for the specified domain. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html\" target=\"_blank\">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>"
         },
         "AdvancedOptions":{
           "shape":"AdvancedOptions",
@@ -793,6 +828,11 @@
       "documentation":"<p> Status of the Elasticsearch version options for the specified Elasticsearch domain.</p>"
     },
     "ElasticsearchVersionString":{"type":"string"},
+    "EndpointsMap":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"ServiceUrl"}
+    },
     "ErrorMessage":{"type":"string"},
     "InstanceCountLimits":{
       "type":"structure",
@@ -1238,6 +1278,10 @@
           "shape":"SnapshotOptions",
           "documentation":"<p>Option to set the time, in UTC format, for the daily automated snapshot. Default value is <code>0</code> hours. </p>"
         },
+        "VPCOptions":{
+          "shape":"VPCOptions",
+          "documentation":"<p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc\" target=\"_blank\">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i></p>"
+        },
         "AdvancedOptions":{
           "shape":"AdvancedOptions",
           "documentation":"<p>Modifies the advanced option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\" target=\"_blank\">Configuration Advanced Options</a> for more information.</p>"
@@ -1265,6 +1309,60 @@
       "documentation":"<p>The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.</p>"
     },
     "UpdateTimestamp":{"type":"timestamp"},
+    "VPCDerivedInfo":{
+      "type":"structure",
+      "members":{
+        "VPCId":{
+          "shape":"String",
+          "documentation":"<p>The VPC Id for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.</p>"
+        },
+        "SubnetIds":{
+          "shape":"StringList",
+          "documentation":"<p>Specifies the subnets for VPC endpoint.</p>"
+        },
+        "AvailabilityZones":{
+          "shape":"StringList",
+          "documentation":"<p>The availability zones for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.</p>"
+        },
+        "SecurityGroupIds":{
+          "shape":"StringList",
+          "documentation":"<p>Specifies the security groups for VPC endpoint.</p>"
+        }
+      },
+      "documentation":"<p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html\" target=\"_blank\"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>"
+    },
+    "VPCDerivedInfoStatus":{
+      "type":"structure",
+      "required":[
+        "Options",
+        "Status"
+      ],
+      "members":{
+        "Options":{
+          "shape":"VPCDerivedInfo",
+          "documentation":"<p> Specifies the VPC options for the specified Elasticsearch domain.</p>"
+        },
+        "Status":{
+          "shape":"OptionStatus",
+          "documentation":"<p> Specifies the status of the VPC options for the specified Elasticsearch domain.</p>"
+        }
+      },
+      "documentation":"<p> Status of the VPC options for the specified Elasticsearch domain.</p>"
+    },
+    "VPCOptions":{
+      "type":"structure",
+      "members":{
+        "SubnetIds":{
+          "shape":"StringList",
+          "documentation":"<p>Specifies the subnets for VPC endpoint.</p>"
+        },
+        "SecurityGroupIds":{
+          "shape":"StringList",
+          "documentation":"<p>Specifies the security groups for VPC endpoint.</p>"
+        }
+      },
+      "documentation":"<p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html\" target=\"_blank\"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>"
+    },
     "ValidationException":{
       "type":"structure",
       "members":{

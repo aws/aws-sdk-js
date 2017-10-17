@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.134.0-->
+<!--LATEST=2.135.0-->
 <!--ENTRYINSERT-->
+
+## 2.135.0
+* feature: ES: This release adds support for VPC access to Amazon Elasticsearch Service.
 
 ## 2.134.0
 * feature: CORS: The LexModelBuildingService supports CORS. This change adds the service to the browser version of the SDK by default.

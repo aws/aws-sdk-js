@@ -80,7 +80,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.134.0',
+	  VERSION: '2.135.0',
 
 	  /**
 	   * @api private
@@ -10338,8 +10338,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *       SSL connections, a special Agent object is used in order to enable
 	 *       peer certificate verification. This feature is only supported in the
 	 *       Node.js environment.
-	 *     * **timeout** [Integer] &mdash; The number of milliseconds to wait before
-	 *       giving up on a connection attempt. Defaults to two minutes (120000).
+	 *     * **connectTimeout** [Integer] &mdash; Sets the socket to timeout after
+	 *       failing to establish a connection with the server after
+	 *       `connectTimeout` milliseconds. This timeout has no effect once a socket
+	 *       connection has been established.
+	 *     * **timeout** [Integer] &mdash; Sets the socket to timeout after timeout
+	 *       milliseconds of inactivity on the socket. Defaults to two minutes
+	 *       (120000)
 	 *     * **xhrAsync** [Boolean] &mdash; Whether the SDK will send asynchronous
 	 *       HTTP requests. Used in the browser environment only. Set to false to
 	 *       send requests synchronously. Defaults to true (async on).

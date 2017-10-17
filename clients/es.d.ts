@@ -36,6 +36,10 @@ declare class ES extends Service {
    */
   deleteElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.DeleteElasticsearchDomainResponse) => void): Request<ES.Types.DeleteElasticsearchDomainResponse, AWSError>;
   /**
+   * Deletes the service-linked role that Elasticsearch Service uses to manage and maintain VPC domains. Role deletion will fail if any existing VPC domains use the role. You must delete any such Elasticsearch domains before deleting the role. See Deleting Elasticsearch Service Role in VPC Endpoints for Amazon Elasticsearch Service Domains.
+   */
+  deleteElasticsearchServiceRole(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Returns domain configuration information about the specified Elasticsearch domain, including the domain ID, domain endpoint, and domain ARN.
    */
   describeElasticsearchDomain(params: ES.Types.DescribeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainResponse) => void): Request<ES.Types.DescribeElasticsearchDomainResponse, AWSError>;
@@ -184,6 +188,10 @@ declare namespace ES {
      */
     SnapshotOptions?: SnapshotOptions;
     /**
+     * Options to specify the subnets and security groups for VPC endpoint. For more information, see Creating a VPC in VPC Endpoints for Amazon Elasticsearch Service Domains
+     */
+    VPCOptions?: VPCOptions;
+    /**
      *  Option to allow references to indices in an HTTP request body. Must be false when configuring access to individual sub-resources. By default, the value is true. See Configuration Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptions;
@@ -301,7 +309,7 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
-  export type ESPartitionInstanceType = "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|"d2.xlarge.elasticsearch"|"d2.2xlarge.elasticsearch"|"d2.4xlarge.elasticsearch"|"d2.8xlarge.elasticsearch"|"c4.large.elasticsearch"|"c4.xlarge.elasticsearch"|"c4.2xlarge.elasticsearch"|"c4.4xlarge.elasticsearch"|"c4.8xlarge.elasticsearch"|"r4.large.elasticsearch"|"r4.xlarge.elasticsearch"|"r4.2xlarge.elasticsearch"|"r4.4xlarge.elasticsearch"|"r4.8xlarge.elasticsearch"|"r4.16xlarge.elasticsearch"|string;
+  export type ESPartitionInstanceType = "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|"d2.xlarge.elasticsearch"|"d2.2xlarge.elasticsearch"|"d2.4xlarge.elasticsearch"|"d2.8xlarge.elasticsearch"|"c4.large.elasticsearch"|"c4.xlarge.elasticsearch"|"c4.2xlarge.elasticsearch"|"c4.4xlarge.elasticsearch"|"c4.8xlarge.elasticsearch"|"r4.large.elasticsearch"|"r4.xlarge.elasticsearch"|"r4.2xlarge.elasticsearch"|"r4.4xlarge.elasticsearch"|"r4.8xlarge.elasticsearch"|"r4.16xlarge.elasticsearch"|"i3.large.elasticsearch"|"i3.xlarge.elasticsearch"|"i3.2xlarge.elasticsearch"|"i3.4xlarge.elasticsearch"|"i3.8xlarge.elasticsearch"|"i3.16xlarge.elasticsearch"|string;
   export interface ElasticsearchClusterConfig {
     /**
      * The instance type for an Elasticsearch cluster.
@@ -360,6 +368,10 @@ declare namespace ES {
      */
     SnapshotOptions?: SnapshotOptionsStatus;
     /**
+     * The VPCOptions for the specified domain. For more information, see VPC Endpoints for Amazon Elasticsearch Service Domains.
+     */
+    VPCOptions?: VPCDerivedInfoStatus;
+    /**
      * Specifies the AdvancedOptions for the domain. See Configuring Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptionsStatus;
@@ -394,6 +406,10 @@ declare namespace ES {
      */
     Endpoint?: ServiceUrl;
     /**
+     * Map containing the Elasticsearch domain endpoints used to submit index and search requests. Example key, value: 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
+     */
+    Endpoints?: EndpointsMap;
+    /**
      * The status of the Elasticsearch domain configuration. True if Amazon Elasticsearch Service is processing configuration changes. False if the configuration is active.
      */
     Processing?: Boolean;
@@ -414,6 +430,10 @@ declare namespace ES {
      * Specifies the status of the SnapshotOptions
      */
     SnapshotOptions?: SnapshotOptions;
+    /**
+     * The VPCOptions for the specified domain. For more information, see VPC Endpoints for Amazon Elasticsearch Service Domains.
+     */
+    VPCOptions?: VPCDerivedInfo;
     /**
      * Specifies the status of the AdvancedOptions
      */
@@ -437,6 +457,7 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type ElasticsearchVersionString = string;
+  export type EndpointsMap = {[key: string]: ServiceUrl};
   export type ErrorMessage = string;
   export interface InstanceCountLimits {
     MinimumInstanceCount?: MinimumInstanceCount;
@@ -649,6 +670,10 @@ declare namespace ES {
      */
     SnapshotOptions?: SnapshotOptions;
     /**
+     * Options to specify the subnets and security groups for VPC endpoint. For more information, see Creating a VPC in VPC Endpoints for Amazon Elasticsearch Service Domains
+     */
+    VPCOptions?: VPCOptions;
+    /**
      * Modifies the advanced option to allow references to indices in an HTTP request body. Must be false when configuring access to individual sub-resources. By default, the value is true. See Configuration Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptions;
@@ -668,6 +693,44 @@ declare namespace ES {
     DomainConfig: ElasticsearchDomainConfig;
   }
   export type UpdateTimestamp = Date;
+  export interface VPCDerivedInfo {
+    /**
+     * The VPC Id for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
+     */
+    VPCId?: String;
+    /**
+     * Specifies the subnets for VPC endpoint.
+     */
+    SubnetIds?: StringList;
+    /**
+     * The availability zones for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
+     */
+    AvailabilityZones?: StringList;
+    /**
+     * Specifies the security groups for VPC endpoint.
+     */
+    SecurityGroupIds?: StringList;
+  }
+  export interface VPCDerivedInfoStatus {
+    /**
+     *  Specifies the VPC options for the specified Elasticsearch domain.
+     */
+    Options: VPCDerivedInfo;
+    /**
+     *  Specifies the status of the VPC options for the specified Elasticsearch domain.
+     */
+    Status: OptionStatus;
+  }
+  export interface VPCOptions {
+    /**
+     * Specifies the subnets for VPC endpoint.
+     */
+    SubnetIds?: StringList;
+    /**
+     * Specifies the security groups for VPC endpoint.
+     */
+    SecurityGroupIds?: StringList;
+  }
   export type VolumeType = "standard"|"gp2"|"io1"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
