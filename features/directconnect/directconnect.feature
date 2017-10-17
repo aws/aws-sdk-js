@@ -5,11 +5,8 @@ Feature: AWS Direct Connect
   I want to use AWS Direct Connect
 
   Scenario: Managing connections
-    Given I create a Direct Connect connection with name prefix "aws-sdk-js"
-    Then I should get a Direct Connect connection ID
-    And I describe the connection
-    Then the bandwidth should match the connection bandwidth
-    And I delete the Direct Connect connection
+    Given I describe the connection
+    Then I should get response of type Array
 
   Scenario: Error handling
     Given I create a Direct Connect connection with an invalid location
