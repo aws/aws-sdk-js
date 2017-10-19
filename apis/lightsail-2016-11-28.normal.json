@@ -1047,7 +1047,7 @@
         },
         "minPower":{
           "shape":"integer",
-          "documentation":"<p>The minimum machine size required to run this blueprint. <code>0</code> indicates that the blueprint runs on all instances.</p>"
+          "documentation":"<p>The minimum bundle power required to run this blueprint. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500. <code>0</code> indicates that the blueprint runs on all instance sizes. </p>"
         },
         "version":{
           "shape":"string",
@@ -1064,6 +1064,10 @@
         "licenseUrl":{
           "shape":"string",
           "documentation":"<p>The end-user license agreement URL for the image or blueprint.</p>"
+        },
+        "platform":{
+          "shape":"InstancePlatform",
+          "documentation":"<p>The operating system platform (either Linux/Unix-based or Windows Server-based) of the blueprint.</p>"
         }
       },
       "documentation":"<p>Describes a blueprint (a virtual private server image).</p>"
@@ -1112,7 +1116,7 @@
         },
         "power":{
           "shape":"integer",
-          "documentation":"<p>The power of the bundle (e.g., <code>500</code>).</p>"
+          "documentation":"<p>A numeric value that represents the power of the bundle (e.g., <code>500</code>). You can use the bundle's power value in conjunction with a blueprint's minimum power value to determine whether the blueprint will run on the bundle. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500.</p>"
         },
         "ramSizeInGb":{
           "shape":"float",
@@ -1121,6 +1125,10 @@
         "transferPerMonthInGb":{
           "shape":"integer",
           "documentation":"<p>The data transfer rate per month in GB (e.g., <code>2000</code>).</p>"
+        },
+        "supportedPlatforms":{
+          "shape":"InstancePlatformList",
+          "documentation":"<p>The operating system platform (Linux/Unix-based or Windows Server-based) that the bundle supports. You can only launch a <code>WINDOWS</code> bundle on a blueprint that supports the <code>WINDOWS</code> platform. <code>LINUX_UNIX</code> blueprints require a <code>LINUX_UNIX</code> bundle.</p>"
         }
       },
       "documentation":"<p>Describes a bundle, which is a set of specs describing your virtual private server (or <i>instance</i>).</p>"
@@ -1302,7 +1310,7 @@
         },
         "userData":{
           "shape":"string",
-          "documentation":"<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps\">Dev Guide</a>.</p> </note>"
+          "documentation":"<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image\">Dev Guide</a>.</p> </note>"
         },
         "keyPairName":{
           "shape":"ResourceName",
@@ -2238,7 +2246,11 @@
         },
         "password":{
           "shape":"string",
-          "documentation":"<p>For RDP access, the temporary password of the Amazon EC2 instance.</p>"
+          "documentation":"<p>For RDP access, the password for your Amazon Lightsail instance. Password will be an empty string if the password for your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.</p> <note> <p>If you create an instance using any key pair other than the default (<code>LightsailDefaultKeyPair</code>), <code>password</code> will always be an empty string.</p> <p>If you change the Administrator password on the instance, Lightsail will continue to return the original password value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default.</p> </note>"
+        },
+        "passwordData":{
+          "shape":"PasswordData",
+          "documentation":"<p>For a Windows Server-based instance, an object with the data you can use to retrieve your password. This is only needed if <code>password</code> is empty and the instance is not new (and therefore the password is not ready yet). When you create an instance, it can take up to 15 minutes for the instance to be ready.</p>"
         },
         "privateKey":{
           "shape":"string",
@@ -2312,6 +2324,17 @@
         }
       },
       "documentation":"<p>Describes monthly data transfer rates and port information for an instance.</p>"
+    },
+    "InstancePlatform":{
+      "type":"string",
+      "enum":[
+        "LINUX_UNIX",
+        "WINDOWS"
+      ]
+    },
+    "InstancePlatformList":{
+      "type":"list",
+      "member":{"shape":"InstancePlatform"}
     },
     "InstancePortInfo":{
       "type":"structure",
@@ -2782,6 +2805,20 @@
         "DeleteInstanceSnapshot",
         "CreateInstancesFromSnapshot"
       ]
+    },
+    "PasswordData":{
+      "type":"structure",
+      "members":{
+        "ciphertext":{
+          "shape":"string",
+          "documentation":"<p>The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.</p> <note> <p>If you use the default key pair (<code>LightsailDefaultKeyPair</code>), the decrypted password will be available in the password field.</p> <p>If you are using a custom key pair, you need to use your own means of decryption.</p> <p>If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default.</p> </note>"
+        },
+        "keyPairName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the key pair that you used when creating your instance. If no key pair name was specified when creating the instance, Lightsail uses the default key pair (<code>LightsailDefaultKeyPair</code>).</p> <p>If you are using a custom key pair, you need to use your own means of decrypting your password using the <code>ciphertext</code>. Lightsail creates the ciphertext by encrypting your password with the public key part of this key pair.</p>"
+        }
+      },
+      "documentation":"<p>The password data for the Windows Server-based instance, including the ciphertext and the key pair name.</p>"
     },
     "PeerVpcRequest":{
       "type":"structure",

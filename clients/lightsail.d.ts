@@ -464,7 +464,7 @@ declare namespace Lightsail {
      */
     isActive?: boolean;
     /**
-     * The minimum machine size required to run this blueprint. 0 indicates that the blueprint runs on all instances.
+     * The minimum bundle power required to run this blueprint. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500. 0 indicates that the blueprint runs on all instance sizes. 
      */
     minPower?: integer;
     /**
@@ -483,6 +483,10 @@ declare namespace Lightsail {
      * The end-user license agreement URL for the image or blueprint.
      */
     licenseUrl?: string;
+    /**
+     * The operating system platform (either Linux/Unix-based or Windows Server-based) of the blueprint.
+     */
+    platform?: InstancePlatform;
   }
   export type BlueprintList = Blueprint[];
   export type BlueprintType = "os"|"app"|string;
@@ -516,7 +520,7 @@ declare namespace Lightsail {
      */
     name?: string;
     /**
-     * The power of the bundle (e.g., 500).
+     * A numeric value that represents the power of the bundle (e.g., 500). You can use the bundle's power value in conjunction with a blueprint's minimum power value to determine whether the blueprint will run on the bundle. For example, you need a bundle with a power value of 500 or more to create an instance that uses a blueprint with a minimum power value of 500.
      */
     power?: integer;
     /**
@@ -527,6 +531,10 @@ declare namespace Lightsail {
      * The data transfer rate per month in GB (e.g., 2000).
      */
     transferPerMonthInGb?: integer;
+    /**
+     * The operating system platform (Linux/Unix-based or Windows Server-based) that the bundle supports. You can only launch a WINDOWS bundle on a blueprint that supports the WINDOWS platform. LINUX_UNIX blueprints require a LINUX_UNIX bundle.
+     */
+    supportedPlatforms?: InstancePlatformList;
   }
   export type BundleList = Bundle[];
   export interface CloseInstancePublicPortsRequest {
@@ -1330,9 +1338,13 @@ declare namespace Lightsail {
      */
     ipAddress?: IpAddress;
     /**
-     * For RDP access, the temporary password of the Amazon EC2 instance.
+     * For RDP access, the password for your Amazon Lightsail instance. Password will be an empty string if the password for your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.  If you create an instance using any key pair other than the default (LightsailDefaultKeyPair), password will always be an empty string. If you change the Administrator password on the instance, Lightsail will continue to return the original password value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default. 
      */
     password?: string;
+    /**
+     * For a Windows Server-based instance, an object with the data you can use to retrieve your password. This is only needed if password is empty and the instance is not new (and therefore the password is not ready yet). When you create an instance, it can take up to 15 minutes for the instance to be ready.
+     */
+    passwordData?: PasswordData;
     /**
      * For SSH access, the temporary private key. For OpenSSH clients (e.g., command line SSH), you should save this value to tempkey).
      */
@@ -1377,6 +1389,8 @@ declare namespace Lightsail {
      */
     ports?: InstancePortInfoList;
   }
+  export type InstancePlatform = "LINUX_UNIX"|"WINDOWS"|string;
+  export type InstancePlatformList = InstancePlatform[];
   export interface InstancePortInfo {
     /**
      * The first port in the range.
@@ -1647,6 +1661,16 @@ declare namespace Lightsail {
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|string;
   export type OperationType = "DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|string;
+  export interface PasswordData {
+    /**
+     * The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.  If you use the default key pair (LightsailDefaultKeyPair), the decrypted password will be available in the password field. If you are using a custom key pair, you need to use your own means of decryption. If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default. 
+     */
+    ciphertext?: string;
+    /**
+     * The name of the key pair that you used when creating your instance. If no key pair name was specified when creating the instance, Lightsail uses the default key pair (LightsailDefaultKeyPair). If you are using a custom key pair, you need to use your own means of decrypting your password using the ciphertext. Lightsail creates the ciphertext by encrypting your password with the public key part of this key pair.
+     */
+    keyPairName?: ResourceName;
+  }
   export interface PeerVpcRequest {
   }
   export interface PeerVpcResult {
