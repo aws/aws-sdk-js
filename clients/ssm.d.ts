@@ -831,7 +831,7 @@ declare namespace SSM {
      */
     ResourceType: ResourceTypeForTagging;
     /**
-     * The resource ID you want to tag.
+     * The resource ID you want to tag. For the ManagedInstance, MaintenanceWindow, and PatchBaseline values, use the ID of the resource, such as mw-01234361858c9b57b for a Maintenance Window. For the Document and Parameter values, use the name of the resource.
      */
     ResourceId: ResourceId;
     /**
@@ -4600,6 +4600,7 @@ declare namespace SSM {
   export type OwnerInformation = string;
   export type PSParameterName = string;
   export type PSParameterValue = string;
+  export type PSParameterVersion = number;
   export interface Parameter {
     /**
      * The name of the parameter.
@@ -4613,6 +4614,10 @@ declare namespace SSM {
      * The parameter value.
      */
     Value?: PSParameterValue;
+    /**
+     * The parameter version.
+     */
+    Version?: PSParameterVersion;
   }
   export type ParameterDescription = string;
   export interface ParameterHistory {
@@ -4648,6 +4653,10 @@ declare namespace SSM {
      * Parameter names can include the following letters and symbols. a-zA-Z0-9_.-
      */
     AllowedPattern?: AllowedPattern;
+    /**
+     * The parameter version.
+     */
+    Version?: PSParameterVersion;
   }
   export type ParameterHistoryList = ParameterHistory[];
   export type ParameterKeyId = string;
@@ -4681,6 +4690,10 @@ declare namespace SSM {
      * A parameter name can include only the following letters and symbols. a-zA-Z0-9_.-
      */
     AllowedPattern?: AllowedPattern;
+    /**
+     * The parameter version.
+     */
+    Version?: PSParameterVersion;
   }
   export type ParameterMetadataList = ParameterMetadata[];
   export type ParameterName = string;
@@ -5009,6 +5022,10 @@ declare namespace SSM {
     AllowedPattern?: AllowedPattern;
   }
   export interface PutParameterResult {
+    /**
+     * The new version number of a parameter. If you edit a parameter value, Parameter Store automatically creates a new version and assigns this new version a unique ID. You can reference a parameter version ID in API actions or in Systems Manager documents (SSM documents). By default, if you don't specify a specific version, the system returns the latest parameter value when a parameter is called.
+     */
+    Version?: PSParameterVersion;
   }
   export interface RegisterDefaultPatchBaselineRequest {
     /**

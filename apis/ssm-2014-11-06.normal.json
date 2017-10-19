@@ -178,7 +178,8 @@
       "errors":[
         {"shape":"InvalidActivationId"},
         {"shape":"InvalidActivation"},
-        {"shape":"InternalServerError"}
+        {"shape":"InternalServerError"},
+        {"shape":"TooManyUpdates"}
       ],
       "documentation":"<p>Deletes an activation. You are not required to delete an activation. If you delete an activation, you can no longer use it to register additional managed instances. Deleting an activation does not de-register managed instances. You must manually de-register managed instances.</p>"
     },
@@ -862,7 +863,8 @@
       "errors":[
         {"shape":"InternalServerError"},
         {"shape":"InvalidKeyId"},
-        {"shape":"ParameterNotFound"}
+        {"shape":"ParameterNotFound"},
+        {"shape":"ParameterVersionNotFound"}
       ],
       "documentation":"<p>Get information about a parameter by using the parameter name. </p>"
     },
@@ -1205,6 +1207,7 @@
         {"shape":"HierarchyLevelLimitExceededException"},
         {"shape":"HierarchyTypeMismatchException"},
         {"shape":"InvalidAllowedPatternException"},
+        {"shape":"ParameterMaxVersionLimitExceeded"},
         {"shape":"ParameterPatternMismatchException"},
         {"shape":"UnsupportedParameterType"}
       ],
@@ -1595,7 +1598,7 @@
         },
         "ResourceId":{
           "shape":"ResourceId",
-          "documentation":"<p>The resource ID you want to tag.</p>"
+          "documentation":"<p>The resource ID you want to tag.</p> <p>For the ManagedInstance, MaintenanceWindow, and PatchBaseline values, use the ID of the resource, such as mw-01234361858c9b57b for a Maintenance Window.</p> <p>For the Document and Parameter values, use the name of the resource.</p>"
         },
         "Tags":{
           "shape":"TagList",
@@ -7756,7 +7759,7 @@
     },
     "PSParameterName":{
       "type":"string",
-      "max":1024,
+      "max":2048,
       "min":1
     },
     "PSParameterValue":{
@@ -7764,6 +7767,7 @@
       "max":4096,
       "min":1
     },
+    "PSParameterVersion":{"type":"long"},
     "Parameter":{
       "type":"structure",
       "members":{
@@ -7778,6 +7782,10 @@
         "Value":{
           "shape":"PSParameterValue",
           "documentation":"<p>The parameter value.</p>"
+        },
+        "Version":{
+          "shape":"PSParameterVersion",
+          "documentation":"<p>The parameter version.</p>"
         }
       },
       "documentation":"<p>An Amazon EC2 Systems Manager parameter in Parameter Store.</p>"
@@ -7793,7 +7801,7 @@
     "ParameterDescription":{
       "type":"string",
       "max":1024,
-      "min":1
+      "min":0
     },
     "ParameterHistory":{
       "type":"structure",
@@ -7829,6 +7837,10 @@
         "AllowedPattern":{
           "shape":"AllowedPattern",
           "documentation":"<p>Parameter names can include the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>"
+        },
+        "Version":{
+          "shape":"PSParameterVersion",
+          "documentation":"<p>The parameter version.</p>"
         }
       },
       "documentation":"<p>Information about parameter usage.</p>"
@@ -7854,6 +7866,14 @@
     "ParameterList":{
       "type":"list",
       "member":{"shape":"Parameter"}
+    },
+    "ParameterMaxVersionLimitExceeded":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "documentation":"<p>The parameter exceeded the maximum number of allowed versions.</p>",
+      "exception":true
     },
     "ParameterMetadata":{
       "type":"structure",
@@ -7885,6 +7905,10 @@
         "AllowedPattern":{
           "shape":"AllowedPattern",
           "documentation":"<p>A parameter name can include only the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>"
+        },
+        "Version":{
+          "shape":"PSParameterVersion",
+          "documentation":"<p>The parameter version.</p>"
         }
       },
       "documentation":"<p>Metada includes information like the ARN of the last user and the date/time the parameter was last used.</p>"
@@ -7976,6 +8000,14 @@
     "ParameterValueList":{
       "type":"list",
       "member":{"shape":"ParameterValue"}
+    },
+    "ParameterVersionNotFound":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "documentation":"<p>The specified parameter version was not found. Verify the parameter name and version, and try again.</p>",
+      "exception":true
     },
     "Parameters":{
       "type":"map",
@@ -8538,6 +8570,10 @@
     "PutParameterResult":{
       "type":"structure",
       "members":{
+        "Version":{
+          "shape":"PSParameterVersion",
+          "documentation":"<p>The new version number of a parameter. If you edit a parameter value, Parameter Store automatically creates a new version and assigns this new version a unique ID. You can reference a parameter version ID in API actions or in Systems Manager documents (SSM documents). By default, if you don't specify a specific version, the system returns the latest parameter value when a parameter is called.</p>"
+        }
       }
     },
     "RegisterDefaultPatchBaselineRequest":{

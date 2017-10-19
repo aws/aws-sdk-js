@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.136.0-->
+<!--LATEST=2.137.0-->
 <!--ENTRYINSERT-->
+
+## 2.137.0
+* feature: SQS: Added support for tracking cost allocation by adding, updating, removing, and listing the metadata tags of Amazon SQS queues.
+* feature: SSM: EC2 Systems Manager versioning support for Parameter Store. Also support for referencing parameter versions in SSM Documents.
 
 ## 2.136.0
 * feature: Lightsail: This release adds support for Windows Server-based Lightsail instances. The GetInstanceAccessDetails API now returns the password of your Windows Server-based instance when using the default key pair. GetInstanceAccessDetails also returns a PasswordData object for Windows Server instances containing the ciphertext and keyPairName. The Blueprint data type now includes a list of platform values (LINUX_UNIX or WINDOWS). The Bundle data type now includes a list of SupportedPlatforms values (LINUX_UNIX or WINDOWS).
