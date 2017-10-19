@@ -5,8 +5,9 @@ Feature: Amazon Redshift
   I want to use Amazon Redshift
 
   Scenario: Describe cluster parameter groups
-    When I describe Redshift cluster parameter groups
-    Then the response should be type of "Array"
+    Given I run the "describeClusterParameterGroups" operation
+    Then the request should be successful
+    And the value at "ParameterGroups" should be a list
 
   Scenario: Error handling
     Given I create a Redshift cluster parameter group with prefix name ""

@@ -13,14 +13,4 @@ module.exports = function() {
     };
     this.request(null, 'createClusterParameterGroup', params, callback, false);
   });
-
-  this.When(/^I describe Redshift cluster parameter groups$/, function(callback) {
-    this.request(null, 'describeClusterParameterGroups', {}, callback);
-  });
-
-  this.Then(/^the response should be type of "([^"]*)"$/, function(array, callback) {
-    this.assert.equal(this.data.ParameterGroups.constructor.name, array);
-    callback();
-  });
-
 };

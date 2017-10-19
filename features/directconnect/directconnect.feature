@@ -5,8 +5,9 @@ Feature: AWS Direct Connect
   I want to use AWS Direct Connect
 
   Scenario: describe connections
-    When I describe the connection
-    Then I should get response of type "Array"
+    Given I run the "describeConnections" operation
+    Then the request should be successful
+    And the value at "connections" should be a list
 
   Scenario: Error handling
     Given I create a Direct Connect connection with an invalid location
