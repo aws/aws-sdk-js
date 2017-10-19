@@ -4,31 +4,15 @@ module.exports = function() {
     callback();
   });
 
-  this.Given(/^I describe the connection$/, function(prefix, callback) {
-    var params = {};
+  this.When(/^I describe the connection$/, function(callback) {
+    var params = {connectionId: this.connectionId};
     this.request(null, 'describeConnections', params, callback);
   });
 
-  this.Then(/^I should get response of type ([^"]*)$/, function(callback) {
-      console.log('_____________', this.data.connections.prototype.constructor.name)
-    this.assert.equal(this.data.connections.prototype.constructor.name, type)
+  this.Then(/^I should get response of type "([^"]*)"$/, function(array, callback) {
+    this.assert.equal(this.data.connections.constructor.name, array)
     callback();
   });
-
-//   this.Then(/^I describe the connection$/, function(callback) {
-//     var params = {connectionId: this.connectionId};
-//     this.request(null, 'describeConnections', params, callback);
-//   });
-
-//   this.Then(/^the bandwidth should match the connection bandwidth$/, function(callback) {
-//     this.assert.equal(this.connectionData.bandwidth, this.data.connections[0].bandwidth);
-//     callback();
-//   });
-
-//   this.Then(/^I delete the Direct Connect connection$/, function(callback) {
-//     var params = {connectionId: this.connectionId};
-//     this.request(null, 'deleteConnection', params, callback);
-//   });
 
   this.Given(/^I create a Direct Connect connection with an invalid location$/, function(callback) {
     var params = {
