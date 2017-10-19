@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "integration test",
-  "description": "remove some integration tests that could claim too much resources"
-}
