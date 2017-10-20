@@ -7844,6 +7844,14 @@
           "shape":"Boolean",
           "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName":"dryRun"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to request the next page of results.</p>"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for DescribeSecurityGroups.</p>"
@@ -7855,6 +7863,11 @@
           "shape":"SecurityGroupList",
           "documentation":"<p>Information about one or more security groups.</p>",
           "locationName":"securityGroupInfo"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName":"nextToken"
         }
       },
       "documentation":"<p>Contains the output of DescribeSecurityGroups.</p>"
@@ -12908,7 +12921,7 @@
         },
         "BlockDeviceMappings":{
           "shape":"BlockDeviceMappingList",
-          "documentation":"<p>One or more block device mapping entries.</p> <p>Although you can specify encrypted EBS volumes in this block device mapping for your Spot Instances, these volumes are not encrypted.</p>",
+          "documentation":"<p>One or more block device mapping entries.</p>",
           "locationName":"blockDeviceMapping"
         },
         "EbsOptimized":{
@@ -15835,7 +15848,7 @@
         },
         "BlockDeviceMappings":{
           "shape":"BlockDeviceMappingList",
-          "documentation":"<p>One or more block device mapping entries.</p> <p>Although you can specify encrypted EBS volumes in this block device mapping for your Spot Instances, these volumes are not encrypted.</p>",
+          "documentation":"<p>One or more block device mapping entries.</p>",
           "locationName":"blockDeviceMapping"
         },
         "EbsOptimized":{

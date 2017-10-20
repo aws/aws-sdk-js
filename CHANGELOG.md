@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.137.0-->
+<!--LATEST=2.138.0-->
 <!--ENTRYINSERT-->
+
+## 2.138.0
+* feature: EC2: Adding pagination support for DescribeSecurityGroups for EC2 Classic and VPC Security Groups
 
 ## 2.137.0
 * feature: SQS: Added support for tracking cost allocation by adding, updating, removing, and listing the metadata tags of Amazon SQS queues.

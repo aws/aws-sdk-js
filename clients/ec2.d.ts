@@ -5639,12 +5639,24 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. This value can be between 5 and 1000.
+     */
+    MaxResults?: Integer;
   }
   export interface DescribeSecurityGroupsResult {
     /**
      * Information about one or more security groups.
      */
     SecurityGroups?: SecurityGroupList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeSnapshotAttributeRequest {
     /**
@@ -8691,7 +8703,7 @@ declare namespace EC2 {
      */
     AddressingType?: String;
     /**
-     * One or more block device mapping entries. Although you can specify encrypted EBS volumes in this block device mapping for your Spot Instances, these volumes are not encrypted.
+     * One or more block device mapping entries.
      */
     BlockDeviceMappings?: BlockDeviceMappingList;
     /**
@@ -10434,7 +10446,7 @@ declare namespace EC2 {
      */
     AddressingType?: String;
     /**
-     * One or more block device mapping entries. Although you can specify encrypted EBS volumes in this block device mapping for your Spot Instances, these volumes are not encrypted.
+     * One or more block device mapping entries.
      */
     BlockDeviceMappings?: BlockDeviceMappingList;
     /**
