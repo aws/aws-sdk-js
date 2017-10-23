@@ -124,6 +124,14 @@ var AWS = require('aws-sdk/global');
 var S3 = require('aws-sdk/clients/s3');
 ```
 
+### With Angular
+Due to the SDK's reliance on node.js typings, you may encounter compilation 
+[issues](https://github.com/aws/aws-sdk-js/issues/1271) when using the
+typings provided by the SDK in an Angular project created using the Angular CLI.
+
+To resolve these issues, either add `"types": ["node"]` to the project's `tsconfig.app.json`
+file, or remove the `"types"` field entirely.
+
 ### Known Limitations
 There are a few known limitations with the bundled TypeScript definitions at this time:
 
