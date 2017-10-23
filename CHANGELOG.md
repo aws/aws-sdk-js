@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.138.0-->
+<!--LATEST=2.139.0-->
 <!--ENTRYINSERT-->
+
+## 2.139.0
+* feature: Organizations: This release supports integrating other AWS services with AWS Organizations through the use of an IAM service-linked role called AWSServiceRoleForOrganizations. Certain operations automatically create that role if it does not already exist.
 
 ## 2.138.0
 * feature: EC2: Adding pagination support for DescribeSecurityGroups for EC2 Classic and VPC Security Groups
