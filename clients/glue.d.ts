@@ -52,6 +52,14 @@ declare class Glue extends Service {
    */
   batchGetPartition(callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
   /**
+   * Stops a batch of job runs for a given job.
+   */
+  batchStopJobRun(params: Glue.Types.BatchStopJobRunRequest, callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
+  /**
+   * Stops a batch of job runs for a given job.
+   */
+  batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
+  /**
    * Creates a Classifier in the user's account.
    */
   createClassifier(params: Glue.Types.CreateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
@@ -606,7 +614,13 @@ declare class Glue extends Service {
 }
 declare namespace Glue {
   export interface Action {
+    /**
+     * The name of a job to be executed.
+     */
     JobName?: NameString;
+    /**
+     * Arguments to be passed to the job.
+     */
     Arguments?: GenericMap;
   }
   export type ActionList = Action[];
@@ -730,6 +744,53 @@ declare namespace Glue {
     UnprocessedKeys?: BatchGetPartitionValueList;
   }
   export type BatchGetPartitionValueList = PartitionValueList[];
+  export interface BatchStopJobRunError {
+    /**
+     * The name of the job.
+     */
+    JobName?: NameString;
+    /**
+     * The job run Id.
+     */
+    JobRunId?: IdString;
+    /**
+     * The details of the error that occurred.
+     */
+    ErrorDetail?: ErrorDetail;
+  }
+  export type BatchStopJobRunErrorList = BatchStopJobRunError[];
+  export type BatchStopJobRunJobRunIdList = IdString[];
+  export interface BatchStopJobRunRequest {
+    /**
+     * The name of the job whose job runs are to be stopped.
+     */
+    JobName: NameString;
+    /**
+     * A list of job run Ids of the given job to be stopped.
+     */
+    JobRunIds: BatchStopJobRunJobRunIdList;
+  }
+  export interface BatchStopJobRunResponse {
+    /**
+     * A list of job runs which are successfully submitted for stopping.
+     */
+    SuccessfulSubmissions?: BatchStopJobRunSuccessfulSubmissionList;
+    /**
+     * A list containing the job run Ids and details of the error that occurred for each job run while submitting to stop.
+     */
+    Errors?: BatchStopJobRunErrorList;
+  }
+  export interface BatchStopJobRunSuccessfulSubmission {
+    /**
+     * The name of the job.
+     */
+    JobName?: NameString;
+    /**
+     * The job run Id.
+     */
+    JobRunId?: IdString;
+  }
+  export type BatchStopJobRunSuccessfulSubmissionList = BatchStopJobRunSuccessfulSubmission[];
   export type Boolean = boolean;
   export type BooleanValue = boolean;
   export type BoundedPartitionValueList = ValueString[];
@@ -839,8 +900,17 @@ declare namespace Glue {
   export type ColumnValuesString = string;
   export type CommentString = string;
   export interface Condition {
+    /**
+     * A logical operator.
+     */
     LogicalOperator?: LogicalOperator;
+    /**
+     * The name of the job in question.
+     */
     JobName?: NameString;
+    /**
+     * The condition state.
+     */
     State?: JobRunState;
   }
   export type ConditionList = Condition[];
@@ -854,7 +924,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The type of the connection.
+     * The type of the connection. Currently, only JDBC is supported; SFTP is not supported.
      */
     ConnectionType?: ConnectionType;
     /**
@@ -892,7 +962,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The type of the connection.
+     * The type of the connection. Currently, only JDBC is supported; SFTP is not supported.
      */
     ConnectionType?: ConnectionType;
     /**
@@ -925,7 +995,7 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
-     * The ARN of an IAM role used to access customer resources such as data in S3.
+     * The IAM role (or ARN of an IAM role) used to access customer resources such as data in S3.
      */
     Role?: RoleArn;
     /**
@@ -1055,7 +1125,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The AWS ARN of the IAM role used by the new Crawler to access customer resources.
+     * The IAM role (or ARN of an IAM role) used by the new Crawler to access customer resources.
      */
     Role: RoleArn;
     /**
@@ -1071,7 +1141,7 @@ declare namespace Glue {
      */
     Targets: CrawlerTargets;
     /**
-     * A cron expression that can be used as a Cloudwatch event (see CloudWatch Schedule Expression Syntax. For example, to run every day at 12:15 UTC, specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: CronExpression;
     /**
@@ -1113,21 +1183,21 @@ declare namespace Glue {
     /**
      * Security group IDs for the security groups to be used by the new DevEndpoint.
      */
-    SecurityGroupIds: StringList;
+    SecurityGroupIds?: StringList;
     /**
      * The subnet ID for the new DevEndpoint to use.
      */
-    SubnetId: GenericString;
+    SubnetId?: GenericString;
     /**
      * The public key to use for authentication.
      */
-    PublicKey?: GenericString;
+    PublicKey: GenericString;
     /**
-     * The number of nodes to use.
+     * The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
      */
     NumberOfNodes?: IntegerValue;
     /**
-     * Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.
+     * Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma. Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported.
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
@@ -1161,7 +1231,11 @@ declare namespace Glue {
      */
     YarnEndpointAddress?: GenericString;
     /**
-     * The number of nodes in this DevEndpoint.
+     * The Apache Zeppelin port for the remote Apache Spark interpreter.
+     */
+    ZeppelinRemoteSparkInterpreterPort?: IntegerValue;
+    /**
+     * The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
      */
     NumberOfNodes?: IntegerValue;
     /**
@@ -1173,7 +1247,7 @@ declare namespace Glue {
      */
     VpcId?: GenericString;
     /**
-     * Path to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.
+     * Path(s) to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
@@ -1217,7 +1291,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * Location of the logs for this job.
+     * This field is reserved for future use.
      */
     LogUri?: UriString;
     /**
@@ -1317,7 +1391,7 @@ declare namespace Glue {
      */
     Type: TriggerType;
     /**
-     * A cron schedule expression for the new trigger.
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: GenericString;
     /**
@@ -1551,6 +1625,10 @@ declare namespace Glue {
      */
     YarnEndpointAddress?: GenericString;
     /**
+     * The Apache Zeppelin port for the remote Apache Spark interpreter.
+     */
+    ZeppelinRemoteSparkInterpreterPort?: IntegerValue;
+    /**
      * The public address used by this DevEndpoint.
      */
     PublicAddress?: GenericString;
@@ -1559,7 +1637,7 @@ declare namespace Glue {
      */
     Status?: GenericString;
     /**
-     * The number of nodes used by this DevEndpoint.
+     * The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
      */
     NumberOfNodes?: IntegerValue;
     /**
@@ -1571,11 +1649,11 @@ declare namespace Glue {
      */
     VpcId?: GenericString;
     /**
-     * Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.
+     * Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma. Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported.
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
+     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint. Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.
      */
     ExtraJarsS3Path?: GenericString;
     /**
@@ -1601,11 +1679,11 @@ declare namespace Glue {
   }
   export interface DevEndpointCustomLibraries {
     /**
-     * Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.
+     * Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma. Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported.
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
+     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint. Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.
      */
     ExtraJarsS3Path?: GenericString;
   }
@@ -1699,7 +1777,7 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * The type of connections to return.
+     * The type of connections to return. Currently, only JDBC is supported; SFTP is not supported.
      */
     ConnectionType?: ConnectionType;
   }
@@ -2300,7 +2378,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * Location of the logs for this job.
+     * This field is reserved for future use.
      */
     LogUri?: UriString;
     /**
@@ -2436,7 +2514,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * Location of the logs for this job.
+     * This field is reserved for future use.
      */
     LogUri?: UriString;
     /**
@@ -2634,6 +2712,9 @@ declare namespace Glue {
   export type PartitionInputList = PartitionInput[];
   export type PartitionList = Partition[];
   export interface PartitionValueList {
+    /**
+     * The list of values.
+     */
     Values: ValueStringList;
   }
   export type Path = string;
@@ -2715,7 +2796,7 @@ declare namespace Glue {
   export type S3TargetList = S3Target[];
   export interface Schedule {
     /**
-     * A cron expression that can be used as a Cloudwatch event to schedule something (see CloudWatch Schedule Expression Syntax. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     ScheduleExpression?: CronExpression;
     /**
@@ -3038,7 +3119,13 @@ declare namespace Glue {
   export type TablePrefix = string;
   export type TableTypeString = string;
   export interface TableVersion {
+    /**
+     * The table in question
+     */
     Table?: Table;
+    /**
+     * The ID value that identifies this table version.
+     */
     VersionId?: VersionString;
   }
   export type Timestamp = Date;
@@ -3067,7 +3154,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * A cron schedule expression.
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: GenericString;
     /**
@@ -3092,7 +3179,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * A cron expression specifying the schedule.
+     * An updated cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: GenericString;
     /**
@@ -3136,7 +3223,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The AWS ARN of the IAM role used by the new Crawler to access customer resources.
+     * The IAM role (or ARN of an IAM role) used by the new Crawler to access customer resources.
      */
     Role?: RoleArn;
     /**
@@ -3152,7 +3239,7 @@ declare namespace Glue {
      */
     Targets?: CrawlerTargets;
     /**
-     * A cron expression that can be used as a Cloudwatch event (see CloudWatch Schedule Expression Syntax. For example, to run every day at 12:15 UTC, specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: CronExpression;
     /**
@@ -3176,7 +3263,7 @@ declare namespace Glue {
      */
     CrawlerName: NameString;
     /**
-     * Cron expression of the updated schedule.
+     * The updated cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: CronExpression;
   }
@@ -3208,9 +3295,13 @@ declare namespace Glue {
      */
     PublicKey?: GenericString;
     /**
-     * Custom Python or Java custom libraries to be loaded in the DevEndpoint.
+     * Custom Python or Java libraries to be loaded in the DevEndpoint.
      */
     CustomLibraries?: DevEndpointCustomLibraries;
+    /**
+     * True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.
+     */
+    UpdateEtlLibraries?: BooleanValue;
   }
   export interface UpdateDevEndpointResponse {
   }

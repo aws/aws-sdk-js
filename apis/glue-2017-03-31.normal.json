@@ -91,6 +91,21 @@
       ],
       "documentation":"<p>Retrieves partitions in a batch request.</p>"
     },
+    "BatchStopJobRun":{
+      "name":"BatchStopJobRun",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchStopJobRunRequest"},
+      "output":{"shape":"BatchStopJobRunResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Stops a batch of job runs for a given job.</p>"
+    },
     "CreateClassifier":{
       "name":"CreateClassifier",
       "http":{
@@ -1197,9 +1212,16 @@
     "Action":{
       "type":"structure",
       "members":{
-        "JobName":{"shape":"NameString"},
-        "Arguments":{"shape":"GenericMap"}
-      }
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of a job to be executed.</p>"
+        },
+        "Arguments":{
+          "shape":"GenericMap",
+          "documentation":"<p>Arguments to be passed to the job.</p>"
+        }
+      },
+      "documentation":"<p>Defines an action to be initiated by a trigger.</p>"
     },
     "ActionList":{
       "type":"list",
@@ -1400,6 +1422,82 @@
       "member":{"shape":"PartitionValueList"},
       "max":1000,
       "min":0
+    },
+    "BatchStopJobRunError":{
+      "type":"structure",
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job.</p>"
+        },
+        "JobRunId":{
+          "shape":"IdString",
+          "documentation":"<p>The job run Id.</p>"
+        },
+        "ErrorDetail":{
+          "shape":"ErrorDetail",
+          "documentation":"<p>The details of the error that occurred.</p>"
+        }
+      },
+      "documentation":"<p>Details about the job run and the error that occurred while trying to submit it for stopping.</p>"
+    },
+    "BatchStopJobRunErrorList":{
+      "type":"list",
+      "member":{"shape":"BatchStopJobRunError"}
+    },
+    "BatchStopJobRunJobRunIdList":{
+      "type":"list",
+      "member":{"shape":"IdString"},
+      "max":25,
+      "min":1
+    },
+    "BatchStopJobRunRequest":{
+      "type":"structure",
+      "required":[
+        "JobName",
+        "JobRunIds"
+      ],
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job whose job runs are to be stopped.</p>"
+        },
+        "JobRunIds":{
+          "shape":"BatchStopJobRunJobRunIdList",
+          "documentation":"<p>A list of job run Ids of the given job to be stopped.</p>"
+        }
+      }
+    },
+    "BatchStopJobRunResponse":{
+      "type":"structure",
+      "members":{
+        "SuccessfulSubmissions":{
+          "shape":"BatchStopJobRunSuccessfulSubmissionList",
+          "documentation":"<p>A list of job runs which are successfully submitted for stopping.</p>"
+        },
+        "Errors":{
+          "shape":"BatchStopJobRunErrorList",
+          "documentation":"<p>A list containing the job run Ids and details of the error that occurred for each job run while submitting to stop.</p>"
+        }
+      }
+    },
+    "BatchStopJobRunSuccessfulSubmission":{
+      "type":"structure",
+      "members":{
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job.</p>"
+        },
+        "JobRunId":{
+          "shape":"IdString",
+          "documentation":"<p>The job run Id.</p>"
+        }
+      },
+      "documentation":"<p>Details about the job run which is submitted successfully for stopping.</p>"
+    },
+    "BatchStopJobRunSuccessfulSubmissionList":{
+      "type":"list",
+      "member":{"shape":"BatchStopJobRunSuccessfulSubmission"}
     },
     "Boolean":{"type":"boolean"},
     "BooleanValue":{"type":"boolean"},
@@ -1625,10 +1723,20 @@
     "Condition":{
       "type":"structure",
       "members":{
-        "LogicalOperator":{"shape":"LogicalOperator"},
-        "JobName":{"shape":"NameString"},
-        "State":{"shape":"JobRunState"}
-      }
+        "LogicalOperator":{
+          "shape":"LogicalOperator",
+          "documentation":"<p>A logical operator.</p>"
+        },
+        "JobName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the job in question.</p>"
+        },
+        "State":{
+          "shape":"JobRunState",
+          "documentation":"<p>The condition state.</p>"
+        }
+      },
+      "documentation":"<p>Defines a condition under which a trigger fires.</p>"
     },
     "ConditionList":{
       "type":"list",
@@ -1647,7 +1755,7 @@
         },
         "ConnectionType":{
           "shape":"ConnectionType",
-          "documentation":"<p>The type of the connection.</p>"
+          "documentation":"<p>The type of the connection. Currently, only JDBC is supported; SFTP is not supported.</p>"
         },
         "MatchCriteria":{
           "shape":"MatchCriteria",
@@ -1689,7 +1797,7 @@
         },
         "ConnectionType":{
           "shape":"ConnectionType",
-          "documentation":"<p>The type of the connection.</p>"
+          "documentation":"<p>The type of the connection. Currently, only JDBC is supported; SFTP is not supported.</p>"
         },
         "MatchCriteria":{
           "shape":"MatchCriteria",
@@ -1760,7 +1868,7 @@
         },
         "Role":{
           "shape":"RoleArn",
-          "documentation":"<p>The ARN of an IAM role used to access customer resources such as data in S3.</p>"
+          "documentation":"<p>The IAM role (or ARN of an IAM role) used to access customer resources such as data in S3.</p>"
         },
         "Targets":{
           "shape":"CrawlerTargets",
@@ -1815,7 +1923,7 @@
           "documentation":"<p>The version of the Crawler.</p>"
         }
       },
-      "documentation":"<p>Specifies a crawler program that examines a data source and uses classifiers to try to its schema. If successful, the crawler records metatdata concerning the data source in the Data Catalog.</p>"
+      "documentation":"<p>Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metatdata concerning the data source in the Data Catalog.</p>"
     },
     "CrawlerList":{
       "type":"list",
@@ -1972,7 +2080,7 @@
         },
         "Role":{
           "shape":"RoleArn",
-          "documentation":"<p>The AWS ARN of the IAM role used by the new <code>Crawler</code> to access customer resources.</p>"
+          "documentation":"<p>The IAM role (or ARN of an IAM role) used by the new <code>Crawler</code> to access customer resources.</p>"
         },
         "DatabaseName":{
           "shape":"DatabaseName",
@@ -1988,7 +2096,7 @@
         },
         "Schedule":{
           "shape":"CronExpression",
-          "documentation":"<p>A cron expression that can be used as a Cloudwatch event (see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">CloudWatch Schedule Expression Syntax</a>. For example, to run every day at 12:15 UTC, specify: <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation":"<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "Classifiers":{
           "shape":"ClassifierNameList",
@@ -2033,8 +2141,7 @@
       "required":[
         "EndpointName",
         "RoleArn",
-        "SecurityGroupIds",
-        "SubnetId"
+        "PublicKey"
       ],
       "members":{
         "EndpointName":{
@@ -2059,11 +2166,11 @@
         },
         "NumberOfNodes":{
           "shape":"IntegerValue",
-          "documentation":"<p>The number of nodes to use.</p>"
+          "documentation":"<p>The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.</p>"
         },
         "ExtraPythonLibsS3Path":{
           "shape":"GenericString",
-          "documentation":"<p>Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+          "documentation":"<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p>"
         },
         "ExtraJarsS3Path":{
           "shape":"GenericString",
@@ -2098,9 +2205,13 @@
           "shape":"GenericString",
           "documentation":"<p>The address of the YARN endpoint used by this DevEndpoint.</p>"
         },
+        "ZeppelinRemoteSparkInterpreterPort":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The Apache Zeppelin port for the remote Apache Spark interpreter.</p>"
+        },
         "NumberOfNodes":{
           "shape":"IntegerValue",
-          "documentation":"<p>The number of nodes in this DevEndpoint.</p>"
+          "documentation":"<p>The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.</p>"
         },
         "AvailabilityZone":{
           "shape":"GenericString",
@@ -2112,7 +2223,7 @@
         },
         "ExtraPythonLibsS3Path":{
           "shape":"GenericString",
-          "documentation":"<p>Path to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.</p>"
+          "documentation":"<p>Path(s) to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.</p>"
         },
         "ExtraJarsS3Path":{
           "shape":"GenericString",
@@ -2173,7 +2284,7 @@
         },
         "LogUri":{
           "shape":"UriString",
-          "documentation":"<p>Location of the logs for this job.</p>"
+          "documentation":"<p>This field is reserved for future use.</p>"
         },
         "Role":{
           "shape":"RoleString",
@@ -2311,7 +2422,7 @@
         },
         "Schedule":{
           "shape":"GenericString",
-          "documentation":"<p>A cron schedule expression for the new trigger.</p>"
+          "documentation":"<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "Predicate":{
           "shape":"Predicate",
@@ -2685,6 +2796,10 @@
           "shape":"GenericString",
           "documentation":"<p>The YARN endpoint address used by this DevEndpoint.</p>"
         },
+        "ZeppelinRemoteSparkInterpreterPort":{
+          "shape":"IntegerValue",
+          "documentation":"<p>The Apache Zeppelin port for the remote Apache Spark interpreter.</p>"
+        },
         "PublicAddress":{
           "shape":"GenericString",
           "documentation":"<p>The public address used by this DevEndpoint.</p>"
@@ -2695,7 +2810,7 @@
         },
         "NumberOfNodes":{
           "shape":"IntegerValue",
-          "documentation":"<p>The number of nodes used by this DevEndpoint.</p>"
+          "documentation":"<p>The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.</p>"
         },
         "AvailabilityZone":{
           "shape":"GenericString",
@@ -2707,11 +2822,11 @@
         },
         "ExtraPythonLibsS3Path":{
           "shape":"GenericString",
-          "documentation":"<p>Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+          "documentation":"<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p>"
         },
         "ExtraJarsS3Path":{
           "shape":"GenericString",
-          "documentation":"<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+          "documentation":"<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p> <p>Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.</p>"
         },
         "FailureReason":{
           "shape":"GenericString",
@@ -2741,11 +2856,11 @@
       "members":{
         "ExtraPythonLibsS3Path":{
           "shape":"GenericString",
-          "documentation":"<p>Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+          "documentation":"<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p>"
         },
         "ExtraJarsS3Path":{
           "shape":"GenericString",
-          "documentation":"<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p>"
+          "documentation":"<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p> <p>Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.</p>"
         }
       },
       "documentation":"<p>Custom libraries to be loaded into a DevEndpoint.</p>"
@@ -2908,7 +3023,7 @@
         },
         "ConnectionType":{
           "shape":"ConnectionType",
-          "documentation":"<p>The type of connections to return.</p>"
+          "documentation":"<p>The type of connections to return. Currently, only JDBC is supported; SFTP is not supported.</p>"
         }
       },
       "documentation":"<p>Filters the connection definitions returned by the <code>GetConnections</code> API.</p>"
@@ -3773,7 +3888,7 @@
         },
         "LogUri":{
           "shape":"UriString",
-          "documentation":"<p>Location of the logs for this job.</p>"
+          "documentation":"<p>This field is reserved for future use.</p>"
         },
         "Role":{
           "shape":"RoleString",
@@ -3941,7 +4056,7 @@
         },
         "LogUri":{
           "shape":"UriString",
-          "documentation":"<p>Location of the logs for this job.</p>"
+          "documentation":"<p>This field is reserved for future use.</p>"
         },
         "Role":{
           "shape":"RoleString",
@@ -4286,8 +4401,12 @@
       "type":"structure",
       "required":["Values"],
       "members":{
-        "Values":{"shape":"ValueStringList"}
-      }
+        "Values":{
+          "shape":"ValueStringList",
+          "documentation":"<p>The list of values.</p>"
+        }
+      },
+      "documentation":"<p>Contains a list of values defining partitions.</p>"
     },
     "Path":{"type":"string"},
     "PathList":{
@@ -4445,7 +4564,7 @@
       "members":{
         "ScheduleExpression":{
           "shape":"CronExpression",
-          "documentation":"<p>A <code>cron</code> expression that can be used as a Cloudwatch event to schedule something (see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">CloudWatch Schedule Expression Syntax</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation":"<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "State":{
           "shape":"ScheduleState",
@@ -4919,9 +5038,16 @@
     "TableVersion":{
       "type":"structure",
       "members":{
-        "Table":{"shape":"Table"},
-        "VersionId":{"shape":"VersionString"}
-      }
+        "Table":{
+          "shape":"Table",
+          "documentation":"<p>The table in question</p>"
+        },
+        "VersionId":{
+          "shape":"VersionString",
+          "documentation":"<p>The ID value that identifies this table version.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a version of a table.</p>"
     },
     "Timestamp":{"type":"timestamp"},
     "TimestampValue":{"type":"timestamp"},
@@ -4956,7 +5082,7 @@
         },
         "Schedule":{
           "shape":"GenericString",
-          "documentation":"<p>A cron schedule expression.</p>"
+          "documentation":"<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "Actions":{
           "shape":"ActionList",
@@ -5007,7 +5133,7 @@
         },
         "Schedule":{
           "shape":"GenericString",
-          "documentation":"<p>A cron expression specifying the schedule.</p>"
+          "documentation":"<p>An updated <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "Actions":{
           "shape":"ActionList",
@@ -5083,7 +5209,7 @@
         },
         "Role":{
           "shape":"RoleArn",
-          "documentation":"<p>The AWS ARN of the IAM role used by the new <code>Crawler</code> to access customer resources.</p>"
+          "documentation":"<p>The IAM role (or ARN of an IAM role) used by the new <code>Crawler</code> to access customer resources.</p>"
         },
         "DatabaseName":{
           "shape":"DatabaseName",
@@ -5099,7 +5225,7 @@
         },
         "Schedule":{
           "shape":"CronExpression",
-          "documentation":"<p>A cron expression that can be used as a Cloudwatch event (see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">CloudWatch Schedule Expression Syntax</a>. For example, to run every day at 12:15 UTC, specify: <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation":"<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "Classifiers":{
           "shape":"ClassifierNameList",
@@ -5130,7 +5256,7 @@
         },
         "Schedule":{
           "shape":"CronExpression",
-          "documentation":"<p>Cron expression of the updated schedule.</p>"
+          "documentation":"<p>The updated <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         }
       }
     },
@@ -5179,7 +5305,11 @@
         },
         "CustomLibraries":{
           "shape":"DevEndpointCustomLibraries",
-          "documentation":"<p>Custom Python or Java custom libraries to be loaded in the DevEndpoint.</p>"
+          "documentation":"<p>Custom Python or Java libraries to be loaded in the DevEndpoint.</p>"
+        },
+        "UpdateEtlLibraries":{
+          "shape":"BooleanValue",
+          "documentation":"<p>True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.</p>"
         }
       }
     },
@@ -5459,5 +5589,5 @@
       "max":2048
     }
   },
-  "documentation":"Defines service operations used by the GlueFrontendService"
+  "documentation":"<fullname>AWS Glue</fullname> <p>Defines the public endpoint for the AWS Glue service.</p>"
 }

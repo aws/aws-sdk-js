@@ -4,10 +4,10 @@
     "endpointPrefix" : "pinpoint",
     "signingName" : "mobiletargeting",
     "serviceFullName" : "Amazon Pinpoint",
-    "signatureVersion":"v4",
     "protocol" : "rest-json",
     "jsonVersion" : "1.1",
-    "uid":"pinpoint-2016-12-01"
+    "uid" : "pinpoint-2016-12-01",
+    "signatureVersion" : "v4"
   },
   "operations" : {
     "CreateApp" : {
@@ -205,6 +205,62 @@
         "shape" : "TooManyRequestsException"
       } ],
       "documentation" : "Delete an APNS sandbox channel"
+    },
+    "DeleteApnsVoipChannel" : {
+      "name" : "DeleteApnsVoipChannel",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/v1/apps/{application-id}/channels/apns_voip",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "DeleteApnsVoipChannelRequest"
+      },
+      "output" : {
+        "shape" : "DeleteApnsVoipChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Delete an APNS VoIP channel"
+    },
+    "DeleteApnsVoipSandboxChannel" : {
+      "name" : "DeleteApnsVoipSandboxChannel",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/v1/apps/{application-id}/channels/apns_voip_sandbox",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "DeleteApnsVoipSandboxChannelRequest"
+      },
+      "output" : {
+        "shape" : "DeleteApnsVoipSandboxChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Delete an APNS VoIP sandbox channel"
     },
     "DeleteApp" : {
       "name" : "DeleteApp",
@@ -513,6 +569,62 @@
         "shape" : "TooManyRequestsException"
       } ],
       "documentation" : "Get an APNS sandbox channel"
+    },
+    "GetApnsVoipChannel" : {
+      "name" : "GetApnsVoipChannel",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/channels/apns_voip",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetApnsVoipChannelRequest"
+      },
+      "output" : {
+        "shape" : "GetApnsVoipChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Get an APNS VoIP channel"
+    },
+    "GetApnsVoipSandboxChannel" : {
+      "name" : "GetApnsVoipSandboxChannel",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/v1/apps/{application-id}/channels/apns_voip_sandbox",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetApnsVoipSandboxChannelRequest"
+      },
+      "output" : {
+        "shape" : "GetApnsVoipSandboxChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Get an APNS VoipSandbox channel"
     },
     "GetApp" : {
       "name" : "GetApp",
@@ -1270,6 +1382,62 @@
       } ],
       "documentation" : "Update an APNS sandbox channel"
     },
+    "UpdateApnsVoipChannel" : {
+      "name" : "UpdateApnsVoipChannel",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/v1/apps/{application-id}/channels/apns_voip",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "UpdateApnsVoipChannelRequest"
+      },
+      "output" : {
+        "shape" : "UpdateApnsVoipChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Update an APNS VoIP channel"
+    },
+    "UpdateApnsVoipSandboxChannel" : {
+      "name" : "UpdateApnsVoipSandboxChannel",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/v1/apps/{application-id}/channels/apns_voip_sandbox",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "UpdateApnsVoipSandboxChannelRequest"
+      },
+      "output" : {
+        "shape" : "UpdateApnsVoipSandboxChannelResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      }, {
+        "shape" : "ForbiddenException"
+      }, {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "MethodNotAllowedException"
+      }, {
+        "shape" : "TooManyRequestsException"
+      } ],
+      "documentation" : "Update an APNS VoIP sandbox channel"
+    },
     "UpdateApplicationSettings" : {
       "name" : "UpdateApplicationSettings",
       "http" : {
@@ -1557,6 +1725,10 @@
           "shape" : "__boolean",
           "documentation" : "If the channel is enabled for sending messages."
         },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a credential for authentication."
+        },
         "Id" : {
           "shape" : "__string",
           "documentation" : "Channel ID. Not used, only for backwards compatibility."
@@ -1618,10 +1790,6 @@
         "ImageUrl" : {
           "shape" : "__string",
           "documentation" : "The URL that points to an image used in the push notification."
-        },
-        "JsonData" : {
-          "shape" : "__string",
-          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
         },
         "MD5" : {
           "shape" : "__string",
@@ -1707,9 +1875,21 @@
           "shape" : "__string",
           "documentation" : "When was this segment created"
         },
+        "DefaultAuthenticationMethod" : {
+          "shape" : "__string",
+          "documentation" : "The default authentication method used for APNs."
+        },
         "Enabled" : {
           "shape" : "__boolean",
           "documentation" : "If the channel is enabled for sending messages."
+        },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a credential for authentication."
+        },
+        "HasTokenKey" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a token key for authentication."
         },
         "Id" : {
           "shape" : "__string",
@@ -1757,12 +1937,12 @@
           "shape" : "__string",
           "documentation" : "Provide this key with a string value that represents the notification's type. This value corresponds to the value in the identifier property of one of your app's registered categories."
         },
+        "CollapseId" : {
+          "shape" : "__string",
+          "documentation" : "Multiple notifications with the same collapse identifier are displayed to the user as a single notification. The value of this key must not exceed 64 bytes."
+        },
         "Data" : {
           "shape" : "MapOf__string",
-          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
-        },
-        "JsonData" : {
-          "shape" : "__string",
           "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
         },
         "MediaUrl" : {
@@ -1772,6 +1952,10 @@
         "PreferredAuthenticationMethod" : {
           "shape" : "__string",
           "documentation" : "The preferred authentication method, either \"CERTIFICATE\" or \"TOKEN\""
+        },
+        "Priority" : {
+          "shape" : "__string",
+          "documentation" : "Is this a transaction priority message or lower priority."
         },
         "RawContent" : {
           "shape" : "__string",
@@ -1792,6 +1976,10 @@
         "ThreadId" : {
           "shape" : "__string",
           "documentation" : "Provide this key with a string value that represents the app-specific identifier for grouping notifications. If you provide a Notification Content app extension, you can use this value to group your notifications together."
+        },
+        "TimeToLive" : {
+          "shape" : "__integer",
+          "documentation" : "This parameter specifies how long (in seconds) the message should be kept if APNS is unable to deliver the notification the first time. If the value is 0, APNS treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to APNS"
         },
         "Title" : {
           "shape" : "__string",
@@ -1853,9 +2041,21 @@
           "shape" : "__string",
           "documentation" : "When was this segment created"
         },
+        "DefaultAuthenticationMethod" : {
+          "shape" : "__string",
+          "documentation" : "The default authentication method used for APNs."
+        },
         "Enabled" : {
           "shape" : "__boolean",
           "documentation" : "If the channel is enabled for sending messages."
+        },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a credential for authentication."
+        },
+        "HasTokenKey" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a token key for authentication."
         },
         "Id" : {
           "shape" : "__string",
@@ -1883,6 +2083,190 @@
         }
       },
       "documentation" : "Apple Development Push Notification Service channel definition."
+    },
+    "APNSVoipChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "BundleId" : {
+          "shape" : "__string",
+          "documentation" : "The bundle id used for APNs Tokens."
+        },
+        "Certificate" : {
+          "shape" : "__string",
+          "documentation" : "The distribution certificate from Apple."
+        },
+        "DefaultAuthenticationMethod" : {
+          "shape" : "__string",
+          "documentation" : "The default authentication method used for APNs."
+        },
+        "Enabled" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is enabled for sending messages."
+        },
+        "PrivateKey" : {
+          "shape" : "__string",
+          "documentation" : "The certificate private key."
+        },
+        "TeamId" : {
+          "shape" : "__string",
+          "documentation" : "The team id used for APNs Tokens."
+        },
+        "TokenKey" : {
+          "shape" : "__string",
+          "documentation" : "The token key used for APNs Tokens."
+        },
+        "TokenKeyId" : {
+          "shape" : "__string",
+          "documentation" : "The token key used for APNs Tokens."
+        }
+      },
+      "documentation" : "Apple VoIP Push Notification Service channel definition."
+    },
+    "APNSVoipChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "documentation" : "Application id"
+        },
+        "CreationDate" : {
+          "shape" : "__string",
+          "documentation" : "When was this segment created"
+        },
+        "DefaultAuthenticationMethod" : {
+          "shape" : "__string",
+          "documentation" : "The default authentication method used for APNs."
+        },
+        "Enabled" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is enabled for sending messages."
+        },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a credential for authentication."
+        },
+        "HasTokenKey" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a token key for authentication."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Channel ID. Not used, only for backwards compatibility."
+        },
+        "IsArchived" : {
+          "shape" : "__boolean",
+          "documentation" : "Is this channel archived"
+        },
+        "LastModifiedBy" : {
+          "shape" : "__string",
+          "documentation" : "Who made the last change"
+        },
+        "LastModifiedDate" : {
+          "shape" : "__string",
+          "documentation" : "Last date this was updated"
+        },
+        "Platform" : {
+          "shape" : "__string",
+          "documentation" : "The platform type. Will be APNS."
+        },
+        "Version" : {
+          "shape" : "__integer",
+          "documentation" : "Version of channel"
+        }
+      },
+      "documentation" : "Apple VoIP Push Notification Service channel definition."
+    },
+    "APNSVoipSandboxChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "BundleId" : {
+          "shape" : "__string",
+          "documentation" : "The bundle id used for APNs Tokens."
+        },
+        "Certificate" : {
+          "shape" : "__string",
+          "documentation" : "The distribution certificate from Apple."
+        },
+        "DefaultAuthenticationMethod" : {
+          "shape" : "__string",
+          "documentation" : "The default authentication method used for APNs."
+        },
+        "Enabled" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is enabled for sending messages."
+        },
+        "PrivateKey" : {
+          "shape" : "__string",
+          "documentation" : "The certificate private key."
+        },
+        "TeamId" : {
+          "shape" : "__string",
+          "documentation" : "The team id used for APNs Tokens."
+        },
+        "TokenKey" : {
+          "shape" : "__string",
+          "documentation" : "The token key used for APNs Tokens."
+        },
+        "TokenKeyId" : {
+          "shape" : "__string",
+          "documentation" : "The token key used for APNs Tokens."
+        }
+      },
+      "documentation" : "Apple VoIP Developer Push Notification Service channel definition."
+    },
+    "APNSVoipSandboxChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "documentation" : "Application id"
+        },
+        "CreationDate" : {
+          "shape" : "__string",
+          "documentation" : "When was this segment created"
+        },
+        "DefaultAuthenticationMethod" : {
+          "shape" : "__string",
+          "documentation" : "The default authentication method used for APNs."
+        },
+        "Enabled" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is enabled for sending messages."
+        },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a credential for authentication."
+        },
+        "HasTokenKey" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a token key for authentication."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Channel ID. Not used, only for backwards compatibility."
+        },
+        "IsArchived" : {
+          "shape" : "__boolean",
+          "documentation" : "Is this channel archived"
+        },
+        "LastModifiedBy" : {
+          "shape" : "__string",
+          "documentation" : "Who made the last change"
+        },
+        "LastModifiedDate" : {
+          "shape" : "__string",
+          "documentation" : "Last date this was updated"
+        },
+        "Platform" : {
+          "shape" : "__string",
+          "documentation" : "The platform type. Will be APNS."
+        },
+        "Version" : {
+          "shape" : "__integer",
+          "documentation" : "Version of channel"
+        }
+      },
+      "documentation" : "Apple VoIP Developer Push Notification Service channel definition."
     },
     "Action" : {
       "type" : "string",
@@ -2109,6 +2493,10 @@
           "shape" : "__boolean",
           "documentation" : "If the channel is enabled for sending messages."
         },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a credential for authentication."
+        },
         "Id" : {
           "shape" : "__string",
           "documentation" : "Channel ID. Not used, only for backwards compatibility."
@@ -2162,10 +2550,6 @@
         "ImageUrl" : {
           "shape" : "__string",
           "documentation" : "The URL that points to an image used in the push notification."
-        },
-        "JsonData" : {
-          "shape" : "__string",
-          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
         },
         "RawContent" : {
           "shape" : "__string",
@@ -2372,7 +2756,7 @@
     },
     "ChannelType" : {
       "type" : "string",
-      "enum" : [ "GCM", "APNS", "APNS_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU" ]
+      "enum" : [ "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU"]
     },
     "CreateAppRequest" : {
       "type" : "structure",
@@ -2508,10 +2892,6 @@
           "shape" : "MapOf__string",
           "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
         },
-        "JsonData" : {
-          "shape" : "__string",
-          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
-        },
         "SilentPush" : {
           "shape" : "__boolean",
           "documentation" : "Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases."
@@ -2593,6 +2973,48 @@
       },
       "required" : [ "APNSSandboxChannelResponse" ],
       "payload" : "APNSSandboxChannelResponse"
+    },
+    "DeleteApnsVoipChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "DeleteApnsVoipChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "APNSVoipChannelResponse" : {
+          "shape" : "APNSVoipChannelResponse"
+        }
+      },
+      "required" : [ "APNSVoipChannelResponse" ],
+      "payload" : "APNSVoipChannelResponse"
+    },
+    "DeleteApnsVoipSandboxChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "DeleteApnsVoipSandboxChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "APNSVoipSandboxChannelResponse" : {
+          "shape" : "APNSVoipSandboxChannelResponse"
+        }
+      },
+      "required" : [ "APNSVoipSandboxChannelResponse" ],
+      "payload" : "APNSVoipSandboxChannelResponse"
     },
     "DeleteAppRequest" : {
       "type" : "structure",
@@ -2690,11 +3112,11 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "application-id",
-          "documentation": "ApplicationId"
+          "documentation" : "ApplicationId"
         }
       },
       "required" : [ "ApplicationId" ],
-      "documentation": "DeleteEventStream Request"
+      "documentation" : "DeleteEventStream Request"
     },
     "DeleteEventStreamResponse" : {
       "type" : "structure",
@@ -2805,10 +3227,6 @@
           "shape" : "DefaultPushNotificationMessage",
           "documentation" : "The default push notification message for all push channels."
         },
-        "EmailMessage" : {
-          "shape" : "EmailMessage",
-          "documentation" : "The message to Email channels. Overrides the default message."
-        },
         "GCMMessage" : {
           "shape" : "GCMMessage",
           "documentation" : "The message to GCM channels. Overrides the default push notification message."
@@ -2865,6 +3283,10 @@
           "shape" : "__string",
           "documentation" : "The email address used to send emails from."
         },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a credential for authentication."
+        },
         "Id" : {
           "shape" : "__string",
           "documentation" : "Channel ID. Not used, only for backwards compatibility."
@@ -2899,36 +3321,6 @@
         }
       },
       "documentation" : "Email Channel Response."
-    },
-    "EmailMessage" : {
-      "type" : "structure",
-      "members" : {
-        "Body" : {
-          "shape" : "__string",
-          "documentation" : "The message body of the notification, the email body or the text message."
-        },
-        "FromAddress" : {
-          "shape" : "__string",
-          "documentation" : "The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel."
-        },
-        "HtmlBody" : {
-          "shape" : "__string",
-          "documentation" : "The HTML part of the email."
-        },
-        "Substitutions" : {
-          "shape" : "MapOfListOf__string",
-          "documentation" : "Default message substitutions. Can be overridden by individual address substitutions."
-        },
-        "TemplateArn" : {
-          "shape" : "__string",
-          "documentation" : "The ARN of the template to use for the email."
-        },
-        "Title" : {
-          "shape" : "__string",
-          "documentation" : "The subject of the email."
-        }
-      },
-      "documentation" : "Email Message."
     },
     "EndpointBatchItem" : {
       "type" : "structure",
@@ -3197,10 +3589,6 @@
           "shape" : "__string",
           "documentation" : "The unique ID for the most recent request to update the endpoint."
         },
-        "ShardId" : {
-          "shape" : "__string",
-          "documentation" : "The ShardId of endpoint."
-        },
         "User" : {
           "shape" : "EndpointUser",
           "documentation" : "Custom user-specific attributes that your app reports to Amazon Pinpoint."
@@ -3337,6 +3725,10 @@
           "shape" : "__boolean",
           "documentation" : "If the channel is enabled for sending messages."
         },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a credential for authentication."
+        },
         "Id" : {
           "shape" : "__string",
           "documentation" : "Channel ID. Not used. Present only for backwards compatibility."
@@ -3395,9 +3787,9 @@
           "shape" : "__string",
           "documentation" : "The URL that points to an image used in the push notification."
         },
-        "JsonData" : {
+        "Priority" : {
           "shape" : "__string",
-          "documentation" : "The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object"
+          "documentation" : "Is this a transaction priority message or lower priority."
         },
         "RawContent" : {
           "shape" : "__string",
@@ -3422,6 +3814,10 @@
         "Substitutions" : {
           "shape" : "MapOfListOf__string",
           "documentation" : "Default message substitutions. Can be overridden by individual address substitutions."
+        },
+        "TimeToLive" : {
+          "shape" : "__integer",
+          "documentation" : "This parameter specifies how long (in seconds) the message should be kept in GCM storage if the device is offline. The maximum time to live supported is 4 weeks, and the default value is 4 weeks."
         },
         "Title" : {
           "shape" : "__string",
@@ -3496,6 +3892,48 @@
       },
       "required" : [ "APNSSandboxChannelResponse" ],
       "payload" : "APNSSandboxChannelResponse"
+    },
+    "GetApnsVoipChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "GetApnsVoipChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "APNSVoipChannelResponse" : {
+          "shape" : "APNSVoipChannelResponse"
+        }
+      },
+      "required" : [ "APNSVoipChannelResponse" ],
+      "payload" : "APNSVoipChannelResponse"
+    },
+    "GetApnsVoipSandboxChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId" ]
+    },
+    "GetApnsVoipSandboxChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "APNSVoipSandboxChannelResponse" : {
+          "shape" : "APNSVoipSandboxChannelResponse"
+        }
+      },
+      "required" : [ "APNSVoipSandboxChannelResponse" ],
+      "payload" : "APNSVoipSandboxChannelResponse"
     },
     "GetAppRequest" : {
       "type" : "structure",
@@ -3805,11 +4243,11 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "application-id",
-          "documentation": "ApplicationId"
+          "documentation" : "ApplicationId"
         }
       },
       "required" : [ "ApplicationId" ],
-      "documentation": "GetEventStream Request"
+      "documentation" : "GetEventStreamRequest"
     },
     "GetEventStreamResponse" : {
       "type" : "structure",
@@ -4465,9 +4903,17 @@
     "MessageConfiguration" : {
       "type" : "structure",
       "members" : {
+        "ADMMessage" : {
+          "shape" : "Message",
+          "documentation" : "The message that the campaign delivers to ADM channels. Overrides the default message."
+        },
         "APNSMessage" : {
           "shape" : "Message",
           "documentation" : "The message that the campaign delivers to APNS channels. Overrides the default message."
+        },
+        "BaiduMessage" : {
+          "shape" : "Message",
+          "documentation" : "The message that the campaign delivers to Baidu channels. Overrides the default message."
         },
         "DefaultMessage" : {
           "shape" : "Message",
@@ -4495,10 +4941,6 @@
           "shape" : "MapOfAddressConfiguration",
           "documentation" : "A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value."
         },
-        "Campaign" : {
-          "shape" : "MapOf__string",
-          "documentation" : "The JSON payload used for campaign attributes. This payload is added to the notifications' data->pinpoint->campaign' object in iOS and flattened to pinpoint.campaign.{AttributeName} keys in Android. Email will use the attribute campaign_id to save the templates."
-        },
         "Context" : {
           "shape" : "MapOf__string",
           "documentation" : "A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes."
@@ -4510,10 +4952,6 @@
         "MessageConfiguration" : {
           "shape" : "DirectMessageConfiguration",
           "documentation" : "Message configuration."
-        },
-        "RequestId" : {
-          "shape" : "__string",
-          "documentation" : "Original request Id for which this message is delivered."
         }
       },
       "documentation" : "Send message request."
@@ -4609,11 +5047,11 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "application-id",
-          "documentation": "ApplicationId"
+          "documentation" : "ApplicationId"
         },
         "WriteEventStream" : {
           "shape" : "WriteEventStream",
-          "documentation": "EventStream to write."
+          "documentation" : "EventStream to write."
         }
       },
       "required" : [ "ApplicationId", "WriteEventStream" ],
@@ -4693,6 +5131,10 @@
         "Enabled" : {
           "shape" : "__boolean",
           "documentation" : "If the channel is enabled for sending messages."
+        },
+        "HasCredential" : {
+          "shape" : "__boolean",
+          "documentation" : "If the channel is registered with a credential for authentication."
         },
         "Id" : {
           "shape" : "__string",
@@ -4983,10 +5425,6 @@
           "shape" : "DirectMessageConfiguration",
           "documentation" : "Message configuration."
         },
-        "RequestId" : {
-          "shape" : "__string",
-          "documentation" : "Original request Id for which this message is delivered."
-        },
         "Users" : {
           "shape" : "MapOfEndpointSendConfiguration",
           "documentation" : "A map of destination endpoints, with the EndpointId as the key Endpoint Message Configuration as the value."
@@ -5177,6 +5615,56 @@
       },
       "required" : [ "APNSSandboxChannelResponse" ],
       "payload" : "APNSSandboxChannelResponse"
+    },
+    "UpdateApnsVoipChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "APNSVoipChannelRequest" : {
+          "shape" : "APNSVoipChannelRequest"
+        },
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId", "APNSVoipChannelRequest" ],
+      "payload" : "APNSVoipChannelRequest"
+    },
+    "UpdateApnsVoipChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "APNSVoipChannelResponse" : {
+          "shape" : "APNSVoipChannelResponse"
+        }
+      },
+      "required" : [ "APNSVoipChannelResponse" ],
+      "payload" : "APNSVoipChannelResponse"
+    },
+    "UpdateApnsVoipSandboxChannelRequest" : {
+      "type" : "structure",
+      "members" : {
+        "APNSVoipSandboxChannelRequest" : {
+          "shape" : "APNSVoipSandboxChannelRequest"
+        },
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        }
+      },
+      "required" : [ "ApplicationId", "APNSVoipSandboxChannelRequest" ],
+      "payload" : "APNSVoipSandboxChannelRequest"
+    },
+    "UpdateApnsVoipSandboxChannelResponse" : {
+      "type" : "structure",
+      "members" : {
+        "APNSVoipSandboxChannelResponse" : {
+          "shape" : "APNSVoipSandboxChannelResponse"
+        }
+      },
+      "required" : [ "APNSVoipSandboxChannelResponse" ],
+      "payload" : "APNSVoipSandboxChannelResponse"
     },
     "UpdateApplicationSettingsRequest" : {
       "type" : "structure",
@@ -5475,10 +5963,6 @@
           "shape" : "__integer",
           "documentation" : "The version of the segment to which the campaign sends messages."
         },
-        "Trace" : {
-          "shape" : "__boolean",
-          "documentation" : "Whether or not to enable trace logging for the campaign. Undocumented"
-        },
         "TreatmentDescription" : {
           "shape" : "__string",
           "documentation" : "A custom description for the treatment."
@@ -5496,10 +5980,6 @@
         "DestinationStreamArn" : {
           "shape" : "__string",
           "documentation" : "The Amazon Resource Name (ARN) of the Amazon Kinesis stream or Firehose delivery stream to which you want to publish events.\n Firehose ARN: arn:aws:firehose:REGION:ACCOUNT_ID:deliverystream/STREAM_NAME\n Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME"
-        },
-        "ExternalId" : {
-          "shape" : "__string",
-          "documentation" : "The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream."
         },
         "RoleArn" : {
           "shape" : "__string",

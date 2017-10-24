@@ -68,6 +68,22 @@ declare class Pinpoint extends Service {
    */
   deleteApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
   /**
+   * Delete an APNS VoIP channel
+   */
+  deleteApnsVoipChannel(params: Pinpoint.Types.DeleteApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipChannelResponse, AWSError>;
+  /**
+   * Delete an APNS VoIP channel
+   */
+  deleteApnsVoipChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipChannelResponse, AWSError>;
+  /**
+   * Delete an APNS VoIP sandbox channel
+   */
+  deleteApnsVoipSandboxChannel(params: Pinpoint.Types.DeleteApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse, AWSError>;
+  /**
+   * Delete an APNS VoIP sandbox channel
+   */
+  deleteApnsVoipSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse, AWSError>;
+  /**
    * Deletes an app.
    */
   deleteApp(params: Pinpoint.Types.DeleteAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAppResponse) => void): Request<Pinpoint.Types.DeleteAppResponse, AWSError>;
@@ -155,6 +171,22 @@ declare class Pinpoint extends Service {
    * Get an APNS sandbox channel
    */
   getApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
+  /**
+   * Get an APNS VoIP channel
+   */
+  getApnsVoipChannel(params: Pinpoint.Types.GetApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipChannelResponse, AWSError>;
+  /**
+   * Get an APNS VoIP channel
+   */
+  getApnsVoipChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipChannelResponse, AWSError>;
+  /**
+   * Get an APNS VoipSandbox channel
+   */
+  getApnsVoipSandboxChannel(params: Pinpoint.Types.GetApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipSandboxChannelResponse, AWSError>;
+  /**
+   * Get an APNS VoipSandbox channel
+   */
+  getApnsVoipSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipSandboxChannelResponse, AWSError>;
   /**
    * Returns information about an app.
    */
@@ -372,6 +404,22 @@ declare class Pinpoint extends Service {
    */
   updateApnsSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
   /**
+   * Update an APNS VoIP channel
+   */
+  updateApnsVoipChannel(params: Pinpoint.Types.UpdateApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipChannelResponse, AWSError>;
+  /**
+   * Update an APNS VoIP channel
+   */
+  updateApnsVoipChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipChannelResponse, AWSError>;
+  /**
+   * Update an APNS VoIP sandbox channel
+   */
+  updateApnsVoipSandboxChannel(params: Pinpoint.Types.UpdateApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse, AWSError>;
+  /**
+   * Update an APNS VoIP sandbox channel
+   */
+  updateApnsVoipSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse, AWSError>;
+  /**
    * Used to update the settings for an app.
    */
   updateApplicationSettings(params: Pinpoint.Types.UpdateApplicationSettingsRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApplicationSettingsResponse) => void): Request<Pinpoint.Types.UpdateApplicationSettingsResponse, AWSError>;
@@ -473,6 +521,10 @@ declare namespace Pinpoint {
      */
     Enabled?: __boolean;
     /**
+     * If the channel is registered with a credential for authentication.
+     */
+    HasCredential?: __boolean;
+    /**
      * Channel ID. Not used, only for backwards compatibility.
      */
     Id?: __string;
@@ -530,10 +582,6 @@ declare namespace Pinpoint {
      * The URL that points to an image used in the push notification.
      */
     ImageUrl?: __string;
-    /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
-     */
-    JsonData?: __string;
     /**
      * Optional. Base-64-encoded MD5 checksum of the data parameter. Used to verify data integrity
      */
@@ -611,9 +659,21 @@ declare namespace Pinpoint {
      */
     CreationDate?: __string;
     /**
+     * The default authentication method used for APNs.
+     */
+    DefaultAuthenticationMethod?: __string;
+    /**
      * If the channel is enabled for sending messages.
      */
     Enabled?: __boolean;
+    /**
+     * If the channel is registered with a credential for authentication.
+     */
+    HasCredential?: __boolean;
+    /**
+     * If the channel is registered with a token key for authentication.
+     */
+    HasTokenKey?: __boolean;
     /**
      * Channel ID. Not used. Present only for backwards compatibility.
      */
@@ -657,13 +717,13 @@ declare namespace Pinpoint {
      */
     Category?: __string;
     /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     * Multiple notifications with the same collapse identifier are displayed to the user as a single notification. The value of this key must not exceed 64 bytes.
      */
-    Data?: MapOf__string;
+    CollapseId?: __string;
     /**
      * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
      */
-    JsonData?: __string;
+    Data?: MapOf__string;
     /**
      * The URL that points to a video used in the push notification.
      */
@@ -672,6 +732,10 @@ declare namespace Pinpoint {
      * The preferred authentication method, either "CERTIFICATE" or "TOKEN"
      */
     PreferredAuthenticationMethod?: __string;
+    /**
+     * Is this a transaction priority message or lower priority.
+     */
+    Priority?: __string;
     /**
      * The Raw JSON formatted string to be used as the payload. This value overrides the message.
      */
@@ -692,6 +756,10 @@ declare namespace Pinpoint {
      * Provide this key with a string value that represents the app-specific identifier for grouping notifications. If you provide a Notification Content app extension, you can use this value to group your notifications together.
      */
     ThreadId?: __string;
+    /**
+     * This parameter specifies how long (in seconds) the message should be kept if APNS is unable to deliver the notification the first time. If the value is 0, APNS treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to APNS
+     */
+    TimeToLive?: __integer;
     /**
      * The message title that displays above the message on the user's device.
      */
@@ -745,9 +813,21 @@ declare namespace Pinpoint {
      */
     CreationDate?: __string;
     /**
+     * The default authentication method used for APNs.
+     */
+    DefaultAuthenticationMethod?: __string;
+    /**
      * If the channel is enabled for sending messages.
      */
     Enabled?: __boolean;
+    /**
+     * If the channel is registered with a credential for authentication.
+     */
+    HasCredential?: __boolean;
+    /**
+     * If the channel is registered with a token key for authentication.
+     */
+    HasTokenKey?: __boolean;
     /**
      * Channel ID. Not used, only for backwards compatibility.
      */
@@ -766,6 +846,174 @@ declare namespace Pinpoint {
     LastModifiedDate?: __string;
     /**
      * The platform type. Will be APNS_SANDBOX.
+     */
+    Platform?: __string;
+    /**
+     * Version of channel
+     */
+    Version?: __integer;
+  }
+  export interface APNSVoipChannelRequest {
+    /**
+     * The bundle id used for APNs Tokens.
+     */
+    BundleId?: __string;
+    /**
+     * The distribution certificate from Apple.
+     */
+    Certificate?: __string;
+    /**
+     * The default authentication method used for APNs.
+     */
+    DefaultAuthenticationMethod?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * The certificate private key.
+     */
+    PrivateKey?: __string;
+    /**
+     * The team id used for APNs Tokens.
+     */
+    TeamId?: __string;
+    /**
+     * The token key used for APNs Tokens.
+     */
+    TokenKey?: __string;
+    /**
+     * The token key used for APNs Tokens.
+     */
+    TokenKeyId?: __string;
+  }
+  export interface APNSVoipChannelResponse {
+    /**
+     * Application id
+     */
+    ApplicationId?: __string;
+    /**
+     * When was this segment created
+     */
+    CreationDate?: __string;
+    /**
+     * The default authentication method used for APNs.
+     */
+    DefaultAuthenticationMethod?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * If the channel is registered with a credential for authentication.
+     */
+    HasCredential?: __boolean;
+    /**
+     * If the channel is registered with a token key for authentication.
+     */
+    HasTokenKey?: __boolean;
+    /**
+     * Channel ID. Not used, only for backwards compatibility.
+     */
+    Id?: __string;
+    /**
+     * Is this channel archived
+     */
+    IsArchived?: __boolean;
+    /**
+     * Who made the last change
+     */
+    LastModifiedBy?: __string;
+    /**
+     * Last date this was updated
+     */
+    LastModifiedDate?: __string;
+    /**
+     * The platform type. Will be APNS.
+     */
+    Platform?: __string;
+    /**
+     * Version of channel
+     */
+    Version?: __integer;
+  }
+  export interface APNSVoipSandboxChannelRequest {
+    /**
+     * The bundle id used for APNs Tokens.
+     */
+    BundleId?: __string;
+    /**
+     * The distribution certificate from Apple.
+     */
+    Certificate?: __string;
+    /**
+     * The default authentication method used for APNs.
+     */
+    DefaultAuthenticationMethod?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * The certificate private key.
+     */
+    PrivateKey?: __string;
+    /**
+     * The team id used for APNs Tokens.
+     */
+    TeamId?: __string;
+    /**
+     * The token key used for APNs Tokens.
+     */
+    TokenKey?: __string;
+    /**
+     * The token key used for APNs Tokens.
+     */
+    TokenKeyId?: __string;
+  }
+  export interface APNSVoipSandboxChannelResponse {
+    /**
+     * Application id
+     */
+    ApplicationId?: __string;
+    /**
+     * When was this segment created
+     */
+    CreationDate?: __string;
+    /**
+     * The default authentication method used for APNs.
+     */
+    DefaultAuthenticationMethod?: __string;
+    /**
+     * If the channel is enabled for sending messages.
+     */
+    Enabled?: __boolean;
+    /**
+     * If the channel is registered with a credential for authentication.
+     */
+    HasCredential?: __boolean;
+    /**
+     * If the channel is registered with a token key for authentication.
+     */
+    HasTokenKey?: __boolean;
+    /**
+     * Channel ID. Not used, only for backwards compatibility.
+     */
+    Id?: __string;
+    /**
+     * Is this channel archived
+     */
+    IsArchived?: __boolean;
+    /**
+     * Who made the last change
+     */
+    LastModifiedBy?: __string;
+    /**
+     * Last date this was updated
+     */
+    LastModifiedDate?: __string;
+    /**
+     * The platform type. Will be APNS.
      */
     Platform?: __string;
     /**
@@ -949,6 +1197,10 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     Enabled?: __boolean;
     /**
+     * If the channel is registered with a credential for authentication.
+     */
+    HasCredential?: __boolean;
+    /**
      * Channel ID. Not used, only for backwards compatibility.
      */
     Id?: __string;
@@ -998,10 +1250,6 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      * The URL that points to an image used in the push notification.
      */
     ImageUrl?: __string;
-    /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
-     */
-    JsonData?: __string;
     /**
      * The Raw JSON formatted string to be used as the payload. This value overrides the message.
      */
@@ -1180,7 +1428,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     NextToken?: __string;
   }
-  export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"ADM"|"SMS"|"EMAIL"|"BAIDU"|string;
+  export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"EMAIL"|"BAIDU"|string;
   export interface CreateAppRequest {
     CreateApplicationRequest: CreateApplicationRequest;
   }
@@ -1238,10 +1486,6 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     Data?: MapOf__string;
     /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
-     */
-    JsonData?: __string;
-    /**
      * Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     SilentPush?: __boolean;
@@ -1275,6 +1519,18 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface DeleteApnsSandboxChannelResponse {
     APNSSandboxChannelResponse: APNSSandboxChannelResponse;
+  }
+  export interface DeleteApnsVoipChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface DeleteApnsVoipChannelResponse {
+    APNSVoipChannelResponse: APNSVoipChannelResponse;
+  }
+  export interface DeleteApnsVoipSandboxChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface DeleteApnsVoipSandboxChannelResponse {
+    APNSVoipSandboxChannelResponse: APNSVoipSandboxChannelResponse;
   }
   export interface DeleteAppRequest {
     ApplicationId: __string;
@@ -1353,10 +1609,6 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     DefaultPushNotificationMessage?: DefaultPushNotificationMessage;
     /**
-     * The message to Email channels. Overrides the default message.
-     */
-    EmailMessage?: EmailMessage;
-    /**
      * The message to GCM channels. Overrides the default push notification message.
      */
     GCMMessage?: GCMMessage;
@@ -1402,6 +1654,10 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     FromAddress?: __string;
     /**
+     * If the channel is registered with a credential for authentication.
+     */
+    HasCredential?: __boolean;
+    /**
      * Channel ID. Not used, only for backwards compatibility.
      */
     Id?: __string;
@@ -1433,32 +1689,6 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      * Version of channel
      */
     Version?: __integer;
-  }
-  export interface EmailMessage {
-    /**
-     * The message body of the notification, the email body or the text message.
-     */
-    Body?: __string;
-    /**
-     * The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel.
-     */
-    FromAddress?: __string;
-    /**
-     * The HTML part of the email.
-     */
-    HtmlBody?: __string;
-    /**
-     * Default message substitutions. Can be overridden by individual address substitutions.
-     */
-    Substitutions?: MapOfListOf__string;
-    /**
-     * The ARN of the template to use for the email.
-     */
-    TemplateArn?: __string;
-    /**
-     * The subject of the email.
-     */
-    Title?: __string;
   }
   export interface EndpointBatchItem {
     /**
@@ -1721,10 +1951,6 @@ NONE - Users has not opted out and receives all messages.
      */
     RequestId?: __string;
     /**
-     * The ShardId of endpoint.
-     */
-    ShardId?: __string;
-    /**
      * Custom user-specific attributes that your app reports to Amazon Pinpoint.
      */
     User?: EndpointUser;
@@ -1819,6 +2045,10 @@ NONE - Users has not opted out and receives all messages.
      */
     Enabled?: __boolean;
     /**
+     * If the channel is registered with a credential for authentication.
+     */
+    HasCredential?: __boolean;
+    /**
      * Channel ID. Not used. Present only for backwards compatibility.
      */
     Id?: __string;
@@ -1873,9 +2103,9 @@ NONE - Users has not opted out and receives all messages.
      */
     ImageUrl?: __string;
     /**
-     * The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+     * Is this a transaction priority message or lower priority.
      */
-    JsonData?: __string;
+    Priority?: __string;
     /**
      * The Raw JSON formatted string to be used as the payload. This value overrides the message.
      */
@@ -1900,6 +2130,10 @@ NONE - Users has not opted out and receives all messages.
      * Default message substitutions. Can be overridden by individual address substitutions.
      */
     Substitutions?: MapOfListOf__string;
+    /**
+     * This parameter specifies how long (in seconds) the message should be kept in GCM storage if the device is offline. The maximum time to live supported is 4 weeks, and the default value is 4 weeks.
+     */
+    TimeToLive?: __integer;
     /**
      * The message title that displays above the message on the user's device.
      */
@@ -1926,6 +2160,18 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface GetApnsSandboxChannelResponse {
     APNSSandboxChannelResponse: APNSSandboxChannelResponse;
+  }
+  export interface GetApnsVoipChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface GetApnsVoipChannelResponse {
+    APNSVoipChannelResponse: APNSVoipChannelResponse;
+  }
+  export interface GetApnsVoipSandboxChannelRequest {
+    ApplicationId: __string;
+  }
+  export interface GetApnsVoipSandboxChannelResponse {
+    APNSVoipSandboxChannelResponse: APNSVoipSandboxChannelResponse;
   }
   export interface GetAppRequest {
     ApplicationId: __string;
@@ -2353,9 +2599,17 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
   }
   export interface MessageConfiguration {
     /**
+     * The message that the campaign delivers to ADM channels. Overrides the default message.
+     */
+    ADMMessage?: Message;
+    /**
      * The message that the campaign delivers to APNS channels. Overrides the default message.
      */
     APNSMessage?: Message;
+    /**
+     * The message that the campaign delivers to Baidu channels. Overrides the default message.
+     */
+    BaiduMessage?: Message;
     /**
      * The default message for all channels.
      */
@@ -2379,10 +2633,6 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      */
     Addresses?: MapOfAddressConfiguration;
     /**
-     * The JSON payload used for campaign attributes. This payload is added to the notifications' data->pinpoint->campaign' object in iOS and flattened to pinpoint.campaign.{AttributeName} keys in Android. Email will use the attribute campaign_id to save the templates.
-     */
-    Campaign?: MapOf__string;
-    /**
      * A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
      */
     Context?: MapOf__string;
@@ -2394,10 +2644,6 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
      * Message configuration.
      */
     MessageConfiguration?: DirectMessageConfiguration;
-    /**
-     * Original request Id for which this message is delivered.
-     */
-    RequestId?: __string;
   }
   export interface MessageResponse {
     /**
@@ -2500,6 +2746,10 @@ INACTIVE - Users who have not used your app within the specified duration are in
      * If the channel is enabled for sending messages.
      */
     Enabled?: __boolean;
+    /**
+     * If the channel is registered with a credential for authentication.
+     */
+    HasCredential?: __boolean;
     /**
      * Channel ID. Not used, only for backwards compatibility.
      */
@@ -2767,10 +3017,6 @@ IMPORT - A static segment built from an imported set of endpoint definitions. Yo
      */
     MessageConfiguration?: DirectMessageConfiguration;
     /**
-     * Original request Id for which this message is delivered.
-     */
-    RequestId?: __string;
-    /**
      * A map of destination endpoints, with the EndpointId as the key Endpoint Message Configuration as the value.
      */
     Users?: MapOfEndpointSendConfiguration;
@@ -2858,6 +3104,20 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface UpdateApnsSandboxChannelResponse {
     APNSSandboxChannelResponse: APNSSandboxChannelResponse;
+  }
+  export interface UpdateApnsVoipChannelRequest {
+    APNSVoipChannelRequest: APNSVoipChannelRequest;
+    ApplicationId: __string;
+  }
+  export interface UpdateApnsVoipChannelResponse {
+    APNSVoipChannelResponse: APNSVoipChannelResponse;
+  }
+  export interface UpdateApnsVoipSandboxChannelRequest {
+    APNSVoipSandboxChannelRequest: APNSVoipSandboxChannelRequest;
+    ApplicationId: __string;
+  }
+  export interface UpdateApnsVoipSandboxChannelResponse {
+    APNSVoipSandboxChannelResponse: APNSVoipSandboxChannelResponse;
   }
   export interface UpdateApplicationSettingsRequest {
     ApplicationId: __string;
@@ -2977,10 +3237,6 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     SegmentVersion?: __integer;
     /**
-     * Whether or not to enable trace logging for the campaign. Undocumented
-     */
-    Trace?: __boolean;
-    /**
      * A custom description for the treatment.
      */
     TreatmentDescription?: __string;
@@ -2996,10 +3252,6 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
  Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
      */
     DestinationStreamArn?: __string;
-    /**
-     * The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream.
-     */
-    ExternalId?: __string;
     /**
      * The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
      */

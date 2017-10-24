@@ -2040,7 +2040,8 @@
         "AWS::AutoScaling::AutoScalingGroup",
         "AWS::AutoScaling::LaunchConfiguration",
         "AWS::AutoScaling::ScalingPolicy",
-        "AWS::AutoScaling::ScheduledAction"
+        "AWS::AutoScaling::ScheduledAction",
+        "AWS::CodeBuild::Project"
       ]
     },
     "ResourceTypeList":{
