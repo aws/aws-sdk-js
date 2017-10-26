@@ -8,6 +8,27 @@
 
   describe('AWS.Model.Shape', function() {
     describe('Traits', function() {
+      it('inherits sensitive trait', function() {
+        var api, shape;
+        api = new AWS.Model.Api({
+          shapes: {
+            S2: {
+              'type': 'blob',
+              'sensitive': true
+            }
+          }
+        });
+        shape = AWS.Model.Shape.create({
+          members: {
+            body: {
+              shape: 'S2'
+            }
+          }
+        }, {
+          api: api
+        });
+        return expect(shape.members.body.isSensitive).to.eql(true);
+      });
       return it('inherits streaming trait', function() {
         var api, shape;
         api = new AWS.Model.Api({

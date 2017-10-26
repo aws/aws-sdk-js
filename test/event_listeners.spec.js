@@ -801,6 +801,9 @@
         return expect(data).to.match(match);
       });
     });
+    // describe('logging sensitive information', function() {
+    //     beforEach
+    // })
     return describe('terminal callback error handling', function() {
       describe('without domains', function() {
         it('emits uncaughtException', function() {
