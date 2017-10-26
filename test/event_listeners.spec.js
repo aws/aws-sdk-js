@@ -7,6 +7,7 @@
   AWS = helpers.AWS;
 
   MockService = helpers.MockService;
+  MockServiceFromApi = helpers.MockServiceFromApi;
 
   describe('AWS.EventListeners', function() {
     var completeHandler, config, delays, errorHandler, makeRequest, oldMathRandom, oldSetTimeout, randomValues, retryHandler, service, successHandler, totalWaited;
@@ -801,9 +802,156 @@
         return expect(data).to.match(match);
       });
     });
-    // describe('logging sensitive information', function() {
-    //     beforEach
-    // })
+    describe('logging sensitive information', function() {
+      var logger;
+      var data = null;
+      var apiJSON = null;
+      logfn = function(d) {
+        return data += d;
+      };
+      beforeEach(function() {
+        logger = {};
+        data = '';
+        apiJSON = {
+          operations: {
+            mockMethod: {
+              input: {
+                type: "structure",
+                members: {
+                  foo: {
+                    type: "string",
+                    sensitive: true
+                  }
+                }
+              },
+              output: {}
+            }
+          }
+        }
+      })
+      it('with sensitive trait in shape\'s own property', function() {
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        var request = service.makeRequest('mockMethod', {
+          foo: 'secret_key_id'
+        });
+        request.send();
+        expect(data.indexOf('secret_key_id')).to.eql(-1);
+      });
+      it('from input shape of structure and with un-inlined shape', function() {
+        var api = new AWS.Model.Api({
+          operations: {
+            mockMethod: {
+              input: {
+                type: "structure",
+                members: {
+                  foo: {
+                    shape: "S1"
+                  },
+                  poo: {
+                    type: 'structure',
+                    members: {
+                      bar: {}
+                    }
+                  }
+                }
+              },
+              output: {}
+            }
+          },
+          shapes: {
+            S1: {
+              type: 'blob',
+              sensitive: true
+            }
+          }
+        })
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        var request = service.makeRequest('mockMethod', {
+          foo: 'secret_key_id',
+          poo: {
+            bar: 'should log'
+          }
+        });
+        request.send();
+        expect(data.indexOf('secret_key_id')).to.eql(-1);
+        return expect(data.indexOf('bar: \'should log\'') >= 0).to.eql(true);
+      });
+      it('from input shape of list', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'structure',
+            members: {
+              bar: {
+                sensitive: true
+              }
+            }
+          }
+        }
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        var request = service.makeRequest('mockMethod', {
+          foo: [{bar: 'secret_key_id'}, {bar: 'secret_access_key'}]
+        });
+        request.send();
+        expect(data.indexOf('secret_key_id')).to.eql(-1);
+        return expect(data.indexOf('secret_access_key')).to.eql(-1);
+      });
+      it('from input shape of map', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'map',
+          key: {
+            type: 'string'
+          },
+          value: {
+            type: 'string',
+            sensitive: true
+          }
+        }
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        var request = service.makeRequest('mockMethod', {
+          foo: {
+            key0: 'secret_key_id',
+            key1: 'secret_key_id'
+          }
+        });
+        request.send();
+        return expect(data.indexOf('secret_key_id')).to.eql(-1);
+      });
+      it('from input shape of scalars', function() {
+        var allShapeTypes = ['boolean', 'timestamp', 'float','integer', 'string', 'base64', 'binary'];
+        Array.prototype.forEach.call(allShapeTypes, function(shapeType){
+          apiJSON.operations.mockMethod.input.members.foo = {
+            type: shapeType,
+            sensitive: true
+          };
+          var api = new AWS.Model.Api(apiJSON);
+          var CustomMockService = MockServiceFromApi(api);
+          service = new CustomMockService({logger: logger});
+          helpers.mockHttpResponse(200, {}, []);
+          logger.log = logfn;
+          var request = service.makeRequest('mockMethod', {
+            foo: '1234567'
+          });
+          request.send();
+          return expect(data.indexOf('1234567')).to.eql(-1);
+        })
+      })
+    })
     return describe('terminal callback error handling', function() {
       describe('without domains', function() {
         it('emits uncaughtException', function() {

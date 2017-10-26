@@ -167,6 +167,36 @@
     })
   });
 
+  MockServiceFromApi = function(customApi) {
+    customApi.metadata = {
+      endpointPrefix: 'mockservice',
+      signatureVersion: 'v4'
+    };
+    return AWS.Service.defineService('mock', {
+      serviceIdentifier: 'mock',
+      initialize: function(config) {
+        AWS.Service.prototype.initialize.call(this, config);
+        this.config.credentials = {
+          accessKeyId: 'akid',
+          secretAccessKey: 'secret'
+        };
+        return this.config.region = 'mock-region';
+      },
+      setupRequestListeners: function(request) {
+        request.on('extractData', function(resp) {
+          return resp.data = (resp.httpResponse.body || '').toString();
+        });
+        return request.on('extractError', function(resp) {
+          return resp.error = {
+            code: (resp.httpResponse.body || '').toString() || resp.httpResponse.statusCode,
+            message: null
+          };
+        });
+      },
+      api: new AWS.Model.Api(customApi)
+    });
+  }
+
   mockHttpSuccessfulResponse = function(status, headers, data, cb) {
     var httpResp;
     if (!Array.isArray(data)) {
@@ -351,6 +381,7 @@
     mockResponses: mockResponses,
     operationsForRequests: operationsForRequests,
     MockService: MockService,
+    MockServiceFromApi: MockServiceFromApi,
     MockCredentialsProvider: MockCredentialsProvider
   };
 
