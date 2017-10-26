@@ -4,15 +4,10 @@ Feature: AWS Data Pipeline
 
   I want to use AWS Data Pipeline
 
-  Scenario: Managing pipelines
-    Given I create a Data Pipeline with name prefix "aws-sdk-js"
-    Then the response should contain the pipeline ID
-    When I describe the Data Pipelines
-    Then the pipeline should be in the list
-    And I put a Data Pipeline definition
-    And I get the Data Pipeline definition
-    And the the objects should be in the Data Pipeline definition
-    And I delete the Data Pipeline
+  Scenario: Listing pipelines
+    Given I run the "listPipelines" operation
+    Then the request should be successful
+    And the value at "pipelineIdList" should be a list
 
   Scenario: Error handling
     Given I create a Data Pipeline with name prefix ""
