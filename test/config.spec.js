@@ -159,6 +159,47 @@ describe('AWS.Config', function() {
     });
   });
 
+  describe('logger', function() {
+      var oldEnv = process.env;
+
+      beforeEach(function(done) {
+        process.env = {};
+        done();
+      });
+
+      afterEach(function() {
+        process.env = oldEnv;
+      });
+
+      it('defaults to null', function() {
+        expect(configure().logger).not.to.exist;
+      });
+
+      it('can be set to an object', function() {
+        var myLogger = {log: function() {}};
+        expect(configure({
+          logger: myLogger
+        }).logger).to.equal(myLogger);
+      });
+
+      if (AWS.util.isNode()) {
+        it('grabs AWSJS_DEBUG from the env', function() {
+          process.env.AWSJS_DEBUG = '1';
+          var config = new AWS.Config();
+          expect(config.logger).to.equal(console);
+        });
+
+        it('should prefer loggers supplied in code', function() {
+          process.env.AWSJS_DEBUG = '1';
+
+          var myLogger = {log: function() {}};
+          expect(configure({
+            logger: myLogger
+          }).logger).to.equal(myLogger);
+        });
+      }
+  });
+
   describe('maxRetries', function() {
     it('defaults to unefined', function() {
       expect(configure().maxRetries).to.equal(void 0);
