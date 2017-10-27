@@ -830,6 +830,7 @@
           }
         }
       })
+
       it('with sensitive trait in shape\'s own property', function() {
         var api = new AWS.Model.Api(apiJSON);
         var CustomMockService = MockServiceFromApi(api);
@@ -840,8 +841,10 @@
           foo: 'secret_key_id'
         });
         request.send();
-        expect(data.indexOf('secret_key_id')).to.eql(-1);
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(JSON.stringify(request.params).indexOf('secret_key_id') >= 0).to.equal(true);
       });
+
       it('from input shape of structure and with un-inlined shape', function() {
         var api = new AWS.Model.Api({
           operations: {
@@ -876,14 +879,15 @@
         logger.log = logfn;
         var request = service.makeRequest('mockMethod', {
           foo: 'secret_key_id',
-          poo: {
+          baz: {
             bar: 'should log'
           }
         });
         request.send();
-        expect(data.indexOf('secret_key_id')).to.eql(-1);
-        return expect(data.indexOf('bar: \'should log\'') >= 0).to.eql(true);
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('bar: \'should log\'') >= 0).to.equal(true);
       });
+
       it('from input shape of list', function() {
         apiJSON.operations.mockMethod.input.members.foo = {
           type: 'list',
@@ -900,9 +904,10 @@
           foo: ['secret_key_id', 'secret_access_key']
         });
         request.send();
-        expect(data.indexOf('secret_key_id')).to.eql(-1);
-        return expect(data.indexOf('secret_access_key')).to.eql(-1);
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
       });
+
       it('from input shape of map', function() {
         apiJSON.operations.mockMethod.input.members.foo = {
           type: 'map',
@@ -926,8 +931,9 @@
           }
         });
         request.send();
-        return expect(data.indexOf('secret_key_id')).to.eql(-1);
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
       });
+
       it('with complex input shape', function() {
         apiJSON.operations.mockMethod.input.members.foo = {
           type: 'map',
@@ -955,9 +961,10 @@
           }
         });
         request.send();
-        expect(data.indexOf('secret_key_id')).to.eql(-1);
-        expect(data.indexOf('secret_access_key')).to.eql(-1);
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
       })
+
       it('from input shape of scalars', function() {
         var allShapeTypes = ['boolean', 'timestamp', 'float','integer', 'string', 'base64', 'binary'];
         Array.prototype.forEach.call(allShapeTypes, function(shapeType){
@@ -974,7 +981,7 @@
             foo: '1234567'
           });
           request.send();
-          return expect(data.indexOf('1234567')).to.eql(-1);
+          expect(data.indexOf('1234567')).to.equal(-1);
         })
       })
     })
