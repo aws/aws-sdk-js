@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Logger",
-  "description": "filter out sensitive information from logger"
-}

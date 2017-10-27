@@ -802,6 +802,7 @@
         return expect(data).to.match(match);
       });
     });
+
     describe('logging sensitive information', function() {
       var logger;
       var data = null;
@@ -851,7 +852,7 @@
                   foo: {
                     shape: "S1"
                   },
-                  poo: {
+                  baz: {
                     type: 'structure',
                     members: {
                       bar: {}
@@ -887,12 +888,7 @@
         apiJSON.operations.mockMethod.input.members.foo = {
           type: 'list',
           member: {
-            type: 'structure',
-            members: {
-              bar: {
-                sensitive: true
-              }
-            }
+            sensitive: true
           }
         }
         var api = new AWS.Model.Api(apiJSON);
@@ -901,7 +897,7 @@
         helpers.mockHttpResponse(200, {}, []);
         logger.log = logfn;
         var request = service.makeRequest('mockMethod', {
-          foo: [{bar: 'secret_key_id'}, {bar: 'secret_access_key'}]
+          foo: ['secret_key_id', 'secret_access_key']
         });
         request.send();
         expect(data.indexOf('secret_key_id')).to.eql(-1);
@@ -932,6 +928,36 @@
         request.send();
         return expect(data.indexOf('secret_key_id')).to.eql(-1);
       });
+      it('with complex input shape', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'map',
+          key: {
+            type: 'string'
+          },
+          value: {
+            type: 'list',
+            member: {
+              type: 'structure',
+              members: {
+                bar: {sensitive: true}
+              }
+            }
+          }
+        }
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        var request = service.makeRequest('mockMethod', {
+          foo: {
+            key0: [{bar: 'secret_key_id'}, {bar: 'secret_access_key'}]
+          }
+        });
+        request.send();
+        expect(data.indexOf('secret_key_id')).to.eql(-1);
+        expect(data.indexOf('secret_access_key')).to.eql(-1);
+      })
       it('from input shape of scalars', function() {
         var allShapeTypes = ['boolean', 'timestamp', 'float','integer', 'string', 'base64', 'binary'];
         Array.prototype.forEach.call(allShapeTypes, function(shapeType){
@@ -952,6 +978,7 @@
         })
       })
     })
+
     return describe('terminal callback error handling', function() {
       describe('without domains', function() {
         it('emits uncaughtException', function() {
