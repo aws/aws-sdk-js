@@ -877,13 +877,12 @@
         service = new CustomMockService({logger: logger});
         helpers.mockHttpResponse(200, {}, []);
         logger.log = logfn;
-        var request = service.makeRequest('mockMethod', {
+        service.makeRequest('mockMethod', {
           foo: 'secret_key_id',
           baz: {
             bar: 'should log'
           }
-        });
-        request.send();
+        }).send();
         expect(data.indexOf('secret_key_id')).to.equal(-1);
         expect(data.indexOf('bar: \'should log\'') >= 0).to.equal(true);
       });
@@ -900,10 +899,9 @@
         service = new CustomMockService({logger: logger});
         helpers.mockHttpResponse(200, {}, []);
         logger.log = logfn;
-        var request = service.makeRequest('mockMethod', {
+        service.makeRequest('mockMethod', {
           foo: ['secret_key_id', 'secret_access_key']
-        });
-        request.send();
+        }).send();
         expect(data.indexOf('secret_key_id')).to.equal(-1);
         expect(data.indexOf('secret_access_key')).to.equal(-1);
       });
@@ -924,17 +922,16 @@
         service = new CustomMockService({logger: logger});
         helpers.mockHttpResponse(200, {}, []);
         logger.log = logfn;
-        var request = service.makeRequest('mockMethod', {
+        service.makeRequest('mockMethod', {
           foo: {
             key0: 'secret_key_id',
             key1: 'secret_key_id'
           }
-        });
-        request.send();
+        }).send();
         expect(data.indexOf('secret_key_id')).to.equal(-1);
       });
 
-      it('with complex input shape', function() {
+      it('with recursive input shape', function() {
         apiJSON.operations.mockMethod.input.members.foo = {
           type: 'map',
           key: {
@@ -955,12 +952,11 @@
         service = new CustomMockService({logger: logger});
         helpers.mockHttpResponse(200, {}, []);
         logger.log = logfn;
-        var request = service.makeRequest('mockMethod', {
+        service.makeRequest('mockMethod', {
           foo: {
             key0: [{bar: 'secret_key_id'}, {bar: 'secret_access_key'}]
           }
-        });
-        request.send();
+        }).send();
         expect(data.indexOf('secret_key_id')).to.equal(-1);
         expect(data.indexOf('secret_access_key')).to.equal(-1);
       })
@@ -977,16 +973,39 @@
           service = new CustomMockService({logger: logger});
           helpers.mockHttpResponse(200, {}, []);
           logger.log = logfn;
-          var request = service.makeRequest('mockMethod', {
+          service.makeRequest('mockMethod', {
             foo: '1234567'
-          });
-          request.send();
+          }).send();
           expect(data.indexOf('1234567')).to.equal(-1);
         })
-      })
-    })
+      });
 
-    return describe('terminal callback error handling', function() {
+      it('from input of undefined', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'structure',
+            members: {
+              bar: {},
+              baz: {}
+            }
+          }
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: [undefined, {bar: 'bar'}]
+        }).send();
+        expect(data.indexOf('bar: \'bar\'') >= 0).to.equal(true);
+        expect(data.indexOf('undefined') >= 0).to.equal(true);
+        expect(data.indexOf('{}')).to.equal(-1);
+      })
+    });
+
+    describe('terminal callback error handling', function() {
       describe('without domains', function() {
         it('emits uncaughtException', function() {
           helpers.mockResponse({
