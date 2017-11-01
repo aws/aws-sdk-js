@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.141.0
+// AWS SDK for JavaScript v2.142.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -23395,7 +23395,7 @@ module.exports={
               "customerAddress": {},
               "addressFamily": {},
               "routeFilterPrefixes": {
-                "shape": "Sv"
+                "shape": "Sx"
               }
             }
           }
@@ -23474,12 +23474,12 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "virtualInterfaceId",
-          "virtualGatewayId"
+          "virtualInterfaceId"
         ],
         "members": {
           "virtualInterfaceId": {},
-          "virtualGatewayId": {}
+          "virtualGatewayId": {},
+          "directConnectGatewayId": {}
         }
       },
       "output": {
@@ -23553,6 +23553,49 @@ module.exports={
         "shape": "S7"
       }
     },
+    "CreateDirectConnectGateway": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "directConnectGatewayName"
+        ],
+        "members": {
+          "directConnectGatewayName": {},
+          "amazonSideAsn": {
+            "type": "long"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "directConnectGateway": {
+            "shape": "S1m"
+          }
+        }
+      }
+    },
+    "CreateDirectConnectGatewayAssociation": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "directConnectGatewayId",
+          "virtualGatewayId"
+        ],
+        "members": {
+          "directConnectGatewayId": {},
+          "virtualGatewayId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "directConnectGatewayAssociation": {
+            "shape": "S1r"
+          }
+        }
+      }
+    },
     "CreateInterconnect": {
       "input": {
         "type": "structure",
@@ -23569,7 +23612,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1j"
+        "shape": "S1w"
       }
     },
     "CreateLag": {
@@ -23592,7 +23635,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1o"
+        "shape": "S21"
       }
     },
     "CreatePrivateVirtualInterface": {
@@ -23609,8 +23652,7 @@ module.exports={
             "required": [
               "virtualInterfaceName",
               "vlan",
-              "asn",
-              "virtualGatewayId"
+              "asn"
             ],
             "members": {
               "virtualInterfaceName": {},
@@ -23624,7 +23666,8 @@ module.exports={
               "amazonAddress": {},
               "customerAddress": {},
               "addressFamily": {},
-              "virtualGatewayId": {}
+              "virtualGatewayId": {},
+              "directConnectGatewayId": {}
             }
           }
         }
@@ -23662,7 +23705,7 @@ module.exports={
               "customerAddress": {},
               "addressFamily": {},
               "routeFilterPrefixes": {
-                "shape": "Sv"
+                "shape": "Sx"
               }
             }
           }
@@ -23706,6 +23749,46 @@ module.exports={
         "shape": "S7"
       }
     },
+    "DeleteDirectConnectGateway": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "directConnectGatewayId"
+        ],
+        "members": {
+          "directConnectGatewayId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "directConnectGateway": {
+            "shape": "S1m"
+          }
+        }
+      }
+    },
+    "DeleteDirectConnectGatewayAssociation": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "directConnectGatewayId",
+          "virtualGatewayId"
+        ],
+        "members": {
+          "directConnectGatewayId": {},
+          "virtualGatewayId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "directConnectGatewayAssociation": {
+            "shape": "S1r"
+          }
+        }
+      }
+    },
     "DeleteInterconnect": {
       "input": {
         "type": "structure",
@@ -23734,7 +23817,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1o"
+        "shape": "S21"
       }
     },
     "DeleteVirtualInterface": {
@@ -23770,7 +23853,7 @@ module.exports={
         "type": "structure",
         "members": {
           "loa": {
-            "shape": "S28"
+            "shape": "S2p"
           }
         }
       },
@@ -23784,7 +23867,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S2b"
+        "shape": "S2s"
       }
     },
     "DescribeConnectionsOnInterconnect": {
@@ -23798,9 +23881,91 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S2b"
+        "shape": "S2s"
       },
       "deprecated": true
+    },
+    "DescribeDirectConnectGatewayAssociations": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "directConnectGatewayId": {},
+          "virtualGatewayId": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "directConnectGatewayAssociations": {
+            "type": "list",
+            "member": {
+              "shape": "S1r"
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "DescribeDirectConnectGatewayAttachments": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "directConnectGatewayId": {},
+          "virtualInterfaceId": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "directConnectGatewayAttachments": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "directConnectGatewayId": {},
+                "virtualInterfaceId": {},
+                "virtualInterfaceRegion": {},
+                "virtualInterfaceOwnerAccount": {},
+                "attachmentState": {},
+                "stateChangeError": {}
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    },
+    "DescribeDirectConnectGateways": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "directConnectGatewayId": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "nextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "directConnectGateways": {
+            "type": "list",
+            "member": {
+              "shape": "S1m"
+            }
+          },
+          "nextToken": {}
+        }
+      }
     },
     "DescribeHostedConnections": {
       "input": {
@@ -23813,7 +23978,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S2b"
+        "shape": "S2s"
       }
     },
     "DescribeInterconnectLoa": {
@@ -23832,7 +23997,7 @@ module.exports={
         "type": "structure",
         "members": {
           "loa": {
-            "shape": "S28"
+            "shape": "S2p"
           }
         }
       },
@@ -23851,7 +24016,7 @@ module.exports={
           "interconnects": {
             "type": "list",
             "member": {
-              "shape": "S1j"
+              "shape": "S1w"
             }
           }
         }
@@ -23870,7 +24035,7 @@ module.exports={
           "lags": {
             "type": "list",
             "member": {
-              "shape": "S1o"
+              "shape": "S21"
             }
           }
         }
@@ -23889,7 +24054,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S28"
+        "shape": "S2p"
       }
     },
     "DescribeLocations": {
@@ -23932,7 +24097,7 @@ module.exports={
               "members": {
                 "resourceArn": {},
                 "tags": {
-                  "shape": "S2x"
+                  "shape": "S3s"
                 }
               }
             }
@@ -24003,7 +24168,7 @@ module.exports={
         "members": {
           "resourceArn": {},
           "tags": {
-            "shape": "S2x"
+            "shape": "S3s"
           }
         }
       },
@@ -24047,7 +24212,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S1o"
+        "shape": "S21"
       }
     }
   },
@@ -24088,6 +24253,9 @@ module.exports={
         "asn": {
           "type": "integer"
         },
+        "amazonSideAsn": {
+          "type": "long"
+        },
         "authKey": {},
         "amazonAddress": {},
         "customerAddress": {},
@@ -24095,8 +24263,9 @@ module.exports={
         "virtualInterfaceState": {},
         "customerRouterConfig": {},
         "virtualGatewayId": {},
+        "directConnectGatewayId": {},
         "routeFilterPrefixes": {
-          "shape": "Sv"
+          "shape": "Sx"
         },
         "bgpPeers": {
           "type": "list",
@@ -24117,7 +24286,7 @@ module.exports={
         }
       }
     },
-    "Sv": {
+    "Sx": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -24126,7 +24295,31 @@ module.exports={
         }
       }
     },
-    "S1j": {
+    "S1m": {
+      "type": "structure",
+      "members": {
+        "directConnectGatewayId": {},
+        "directConnectGatewayName": {},
+        "amazonSideAsn": {
+          "type": "long"
+        },
+        "ownerAccount": {},
+        "directConnectGatewayState": {},
+        "stateChangeError": {}
+      }
+    },
+    "S1r": {
+      "type": "structure",
+      "members": {
+        "directConnectGatewayId": {},
+        "virtualGatewayId": {},
+        "virtualGatewayRegion": {},
+        "virtualGatewayOwnerAccount": {},
+        "associationState": {},
+        "stateChangeError": {}
+      }
+    },
+    "S1w": {
       "type": "structure",
       "members": {
         "interconnectId": {},
@@ -24142,7 +24335,7 @@ module.exports={
         "awsDevice": {}
       }
     },
-    "S1o": {
+    "S21": {
       "type": "structure",
       "members": {
         "connectionsBandwidth": {},
@@ -24160,20 +24353,20 @@ module.exports={
         },
         "awsDevice": {},
         "connections": {
-          "shape": "S1q"
+          "shape": "S23"
         },
         "allowsHostedConnections": {
           "type": "boolean"
         }
       }
     },
-    "S1q": {
+    "S23": {
       "type": "list",
       "member": {
         "shape": "S7"
       }
     },
-    "S28": {
+    "S2p": {
       "type": "structure",
       "members": {
         "loaContent": {
@@ -24182,15 +24375,15 @@ module.exports={
         "loaContentType": {}
       }
     },
-    "S2b": {
+    "S2s": {
       "type": "structure",
       "members": {
         "connections": {
-          "shape": "S1q"
+          "shape": "S23"
         }
       }
     },
-    "S2x": {
+    "S3s": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -110902,7 +111095,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.141.0',
+  VERSION: '2.142.0',
 
 
   Signers: {},

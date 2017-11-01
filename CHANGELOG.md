@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.141.0-->
+<!--LATEST=2.142.0-->
 <!--ENTRYINSERT-->
+
+## 2.142.0
+* feature: Configuration: Allow the logger by SDK clients to be controlled via the environment if not defined programmatically. If the `AWSJS_DEBUG` environment variable is set to a truthy value and no other logger is defined, the global `console` object will be used.
+* feature: DirectConnect: AWS DirectConnect now provides support for Global Access for Virtual Private Cloud (VPC) via a new feature called Direct Connect Gateway. A Direct Connect Gateway will allow you to group multiple Direct Connect Private Virtual Interfaces (DX-VIF) and Private Virtual Gateways (VGW) from different AWS regions (but belonging to the same AWS Account) and pass traffic from any DX-VIF to any VPC in the grouping.
 
 ## 2.141.0
 * feature: CloudFront: You can now specify additional options for MinimumProtocolVersion, which controls the SSL/TLS protocol that CloudFront uses to communicate with viewers. The minimum protocol version that you choose also determines the ciphers that CloudFront uses to encrypt the content that it returns to viewers.

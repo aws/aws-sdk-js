@@ -60,11 +60,11 @@ declare class DirectConnect extends Service {
    */
   associateHostedConnection(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
-   * Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to AWS is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails.  Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using AssociateHostedConnection. Hosted virtual interfaces (an interface for which the owner of the connection is not the owner of physical connection) can only be reassociated by the owner of the physical connection.
+   * Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to AWS is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails.  Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using AssociateHostedConnection. In order to reassociate a virtual interface to a new connection or LAG, the requester must own either the virtual interface itself or the connection to which the virtual interface is currently associated. Additionally, the requester must own the connection or LAG to which the virtual interface will be newly associated.
    */
   associateVirtualInterface(params: DirectConnect.Types.AssociateVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to AWS is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails.  Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using AssociateHostedConnection. Hosted virtual interfaces (an interface for which the owner of the connection is not the owner of physical connection) can only be reassociated by the owner of the physical connection.
+   * Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to AWS is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails.  Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using AssociateHostedConnection. In order to reassociate a virtual interface to a new connection or LAG, the requester must own either the virtual interface itself or the connection to which the virtual interface is currently associated. Additionally, the requester must own the connection or LAG to which the virtual interface will be newly associated.
    */
   associateVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class DirectConnect extends Service {
    */
   confirmConnection(callback?: (err: AWSError, data: DirectConnect.Types.ConfirmConnectionResponse) => void): Request<DirectConnect.Types.ConfirmConnectionResponse, AWSError>;
   /**
-   * Accept ownership of a private virtual interface created by another customer. After the virtual interface owner calls this function, the virtual interface will be created and attached to the given virtual private gateway, and will be available for handling traffic.
+   * Accept ownership of a private virtual interface created by another customer. After the virtual interface owner calls this function, the virtual interface will be created and attached to the given virtual private gateway or direct connect gateway, and will be available for handling traffic.
    */
   confirmPrivateVirtualInterface(params: DirectConnect.Types.ConfirmPrivateVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.ConfirmPrivateVirtualInterfaceResponse) => void): Request<DirectConnect.Types.ConfirmPrivateVirtualInterfaceResponse, AWSError>;
   /**
-   * Accept ownership of a private virtual interface created by another customer. After the virtual interface owner calls this function, the virtual interface will be created and attached to the given virtual private gateway, and will be available for handling traffic.
+   * Accept ownership of a private virtual interface created by another customer. After the virtual interface owner calls this function, the virtual interface will be created and attached to the given virtual private gateway or direct connect gateway, and will be available for handling traffic.
    */
   confirmPrivateVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.ConfirmPrivateVirtualInterfaceResponse) => void): Request<DirectConnect.Types.ConfirmPrivateVirtualInterfaceResponse, AWSError>;
   /**
@@ -100,13 +100,29 @@ declare class DirectConnect extends Service {
    */
   createBGPPeer(callback?: (err: AWSError, data: DirectConnect.Types.CreateBGPPeerResponse) => void): Request<DirectConnect.Types.CreateBGPPeerResponse, AWSError>;
   /**
-   * Creates a new connection between the customer network and a specific AWS Direct Connect location. A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. An AWS Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions. You can automatically add the new connection to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new connection is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no connection will be created.
+   * Creates a new connection between the customer network and a specific AWS Direct Connect location. A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. An AWS Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions. To find the locations for your region, use DescribeLocations. You can automatically add the new connection to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new connection is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no connection will be created.
    */
   createConnection(params: DirectConnect.Types.CreateConnectionRequest, callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
-   * Creates a new connection between the customer network and a specific AWS Direct Connect location. A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. An AWS Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions. You can automatically add the new connection to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new connection is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no connection will be created.
+   * Creates a new connection between the customer network and a specific AWS Direct Connect location. A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. An AWS Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions. To find the locations for your region, use DescribeLocations. You can automatically add the new connection to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new connection is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no connection will be created.
    */
   createConnection(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
+  /**
+   * Creates a new direct connect gateway. A direct connect gateway is an intermediate object that enables you to connect a set of virtual interfaces and virtual private gateways. direct connect gateways are global and visible in any AWS region after they are created. The virtual interfaces and virtual private gateways that are connected through a direct connect gateway can be in different regions. This enables you to connect to a VPC in any region, regardless of the region in which the virtual interfaces are located, and pass traffic between them.
+   */
+  createDirectConnectGateway(params: DirectConnect.Types.CreateDirectConnectGatewayRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayResult, AWSError>;
+  /**
+   * Creates a new direct connect gateway. A direct connect gateway is an intermediate object that enables you to connect a set of virtual interfaces and virtual private gateways. direct connect gateways are global and visible in any AWS region after they are created. The virtual interfaces and virtual private gateways that are connected through a direct connect gateway can be in different regions. This enables you to connect to a VPC in any region, regardless of the region in which the virtual interfaces are located, and pass traffic between them.
+   */
+  createDirectConnectGateway(callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayResult, AWSError>;
+  /**
+   * Creates an association between a direct connect gateway and a virtual private gateway (VGW). The VGW must be attached to a VPC and must not be associated with another direct connect gateway.
+   */
+  createDirectConnectGatewayAssociation(params: DirectConnect.Types.CreateDirectConnectGatewayAssociationRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayAssociationResult, AWSError>;
+  /**
+   * Creates an association between a direct connect gateway and a virtual private gateway (VGW). The VGW must be attached to a VPC and must not be associated with another direct connect gateway.
+   */
+  createDirectConnectGatewayAssociation(callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayAssociationResult, AWSError>;
   /**
    * Creates a new interconnect between a AWS Direct Connect partner's network and a specific AWS Direct Connect location. An interconnect is a connection which is capable of hosting other connections. The AWS Direct Connect partner can use an interconnect to provide sub-1Gbps AWS Direct Connect service to tier 2 customers who do not have their own connections. Like a standard connection, an interconnect links the AWS Direct Connect partner's network to an AWS Direct Connect location over a standard 1 Gbps or 10 Gbps Ethernet fiber-optic cable. One end is connected to the partner's router, the other to an AWS Direct Connect router. You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect will be created. For each end customer, the AWS Direct Connect partner provisions a connection on their interconnect by calling AllocateConnectionOnInterconnect. The end customer can then connect to AWS resources by creating a virtual interface on their connection, using the VLAN assigned to them by the AWS Direct Connect partner.  This is intended for use by AWS Direct Connect partners only. 
    */
@@ -156,6 +172,22 @@ declare class DirectConnect extends Service {
    */
   deleteConnection(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
+   * Deletes a direct connect gateway. You must first delete all virtual interfaces that are attached to the direct connect gateway and disassociate all virtual private gateways that are associated with the direct connect gateway.
+   */
+  deleteDirectConnectGateway(params: DirectConnect.Types.DeleteDirectConnectGatewayRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayResult, AWSError>;
+  /**
+   * Deletes a direct connect gateway. You must first delete all virtual interfaces that are attached to the direct connect gateway and disassociate all virtual private gateways that are associated with the direct connect gateway.
+   */
+  deleteDirectConnectGateway(callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayResult, AWSError>;
+  /**
+   * Deletes the association between a direct connect gateway and a virtual private gateway.
+   */
+  deleteDirectConnectGatewayAssociation(params: DirectConnect.Types.DeleteDirectConnectGatewayAssociationRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult, AWSError>;
+  /**
+   * Deletes the association between a direct connect gateway and a virtual private gateway.
+   */
+  deleteDirectConnectGatewayAssociation(callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult, AWSError>;
+  /**
    * Deletes the specified interconnect.  This is intended for use by AWS Direct Connect partners only. 
    */
   deleteInterconnect(params: DirectConnect.Types.DeleteInterconnectRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteInterconnectResponse) => void): Request<DirectConnect.Types.DeleteInterconnectResponse, AWSError>;
@@ -203,6 +235,30 @@ declare class DirectConnect extends Service {
    * Deprecated in favor of DescribeHostedConnections. Returns a list of connections that have been provisioned on the given interconnect.  This is intended for use by AWS Direct Connect partners only. 
    */
   describeConnectionsOnInterconnect(callback?: (err: AWSError, data: DirectConnect.Types.Connections) => void): Request<DirectConnect.Types.Connections, AWSError>;
+  /**
+   * Returns a list of all direct connect gateway and virtual private gateway (VGW) associations. Either a direct connect gateway ID or a VGW ID must be provided in the request. If a direct connect gateway ID is provided, the response returns all VGWs associated with the direct connect gateway. If a VGW ID is provided, the response returns all direct connect gateways associated with the VGW. If both are provided, the response only returns the association that matches both the direct connect gateway and the VGW.
+   */
+  describeDirectConnectGatewayAssociations(params: DirectConnect.Types.DescribeDirectConnectGatewayAssociationsRequest, callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewayAssociationsResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewayAssociationsResult, AWSError>;
+  /**
+   * Returns a list of all direct connect gateway and virtual private gateway (VGW) associations. Either a direct connect gateway ID or a VGW ID must be provided in the request. If a direct connect gateway ID is provided, the response returns all VGWs associated with the direct connect gateway. If a VGW ID is provided, the response returns all direct connect gateways associated with the VGW. If both are provided, the response only returns the association that matches both the direct connect gateway and the VGW.
+   */
+  describeDirectConnectGatewayAssociations(callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewayAssociationsResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewayAssociationsResult, AWSError>;
+  /**
+   * Returns a list of all direct connect gateway and virtual interface (VIF) attachments. Either a direct connect gateway ID or a VIF ID must be provided in the request. If a direct connect gateway ID is provided, the response returns all VIFs attached to the direct connect gateway. If a VIF ID is provided, the response returns all direct connect gateways attached to the VIF. If both are provided, the response only returns the attachment that matches both the direct connect gateway and the VIF.
+   */
+  describeDirectConnectGatewayAttachments(params: DirectConnect.Types.DescribeDirectConnectGatewayAttachmentsRequest, callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewayAttachmentsResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewayAttachmentsResult, AWSError>;
+  /**
+   * Returns a list of all direct connect gateway and virtual interface (VIF) attachments. Either a direct connect gateway ID or a VIF ID must be provided in the request. If a direct connect gateway ID is provided, the response returns all VIFs attached to the direct connect gateway. If a VIF ID is provided, the response returns all direct connect gateways attached to the VIF. If both are provided, the response only returns the attachment that matches both the direct connect gateway and the VIF.
+   */
+  describeDirectConnectGatewayAttachments(callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewayAttachmentsResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewayAttachmentsResult, AWSError>;
+  /**
+   * Returns a list of direct connect gateways in your account. Deleted direct connect gateways are not returned. You can provide a direct connect gateway ID in the request to return information about the specific direct connect gateway only. Otherwise, if a direct connect gateway ID is not provided, information about all of your direct connect gateways is returned. 
+   */
+  describeDirectConnectGateways(params: DirectConnect.Types.DescribeDirectConnectGatewaysRequest, callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewaysResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewaysResult, AWSError>;
+  /**
+   * Returns a list of direct connect gateways in your account. Deleted direct connect gateways are not returned. You can provide a direct connect gateway ID in the request to return information about the specific direct connect gateway only. Otherwise, if a direct connect gateway ID is not provided, information about all of your direct connect gateways is returned. 
+   */
+  describeDirectConnectGateways(callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewaysResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewaysResult, AWSError>;
   /**
    * Returns a list of hosted connections that have been provisioned on the given interconnect or link aggregation group (LAG).  This is intended for use by AWS Direct Connect partners only. 
    */
@@ -434,7 +490,11 @@ declare namespace DirectConnect {
     /**
      * ID of the virtual private gateway that will be attached to the virtual interface.  A virtual private gateway can be managed via the Amazon Virtual Private Cloud (VPC) console or the EC2 CreateVpnGateway action. Default: None
      */
-    virtualGatewayId: VirtualGatewayId;
+    virtualGatewayId?: VirtualGatewayId;
+    /**
+     * ID of the direct connect gateway that will be attached to the virtual interface.  A direct connect gateway can be managed via the AWS Direct Connect console or the CreateDirectConnectGateway action. Default: None
+     */
+    directConnectGatewayId?: DirectConnectGatewayId;
   }
   export interface ConfirmPrivateVirtualInterfaceResponse {
     virtualInterfaceState?: VirtualInterfaceState;
@@ -504,6 +564,38 @@ declare namespace DirectConnect {
     connectionName: ConnectionName;
     lagId?: LagId;
   }
+  export interface CreateDirectConnectGatewayAssociationRequest {
+    /**
+     * The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+     */
+    directConnectGatewayId: DirectConnectGatewayId;
+    /**
+     * The ID of the virtual private gateway. Example: "vgw-abc123ef" Default: None
+     */
+    virtualGatewayId: VirtualGatewayId;
+  }
+  export interface CreateDirectConnectGatewayAssociationResult {
+    /**
+     * The direct connect gateway association to be created.
+     */
+    directConnectGatewayAssociation?: DirectConnectGatewayAssociation;
+  }
+  export interface CreateDirectConnectGatewayRequest {
+    /**
+     * The name of the direct connect gateway. Example: "My direct connect gateway" Default: None
+     */
+    directConnectGatewayName: DirectConnectGatewayName;
+    /**
+     * The autonomous system number (ASN) for Border Gateway Protocol (BGP) to be configured on the Amazon side of the connection. The ASN must be in the private range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294  Example: 65200 Default: 64512
+     */
+    amazonSideAsn?: LongAsn;
+  }
+  export interface CreateDirectConnectGatewayResult {
+    /**
+     * The direct connect gateway to be created.
+     */
+    directConnectGateway?: DirectConnectGateway;
+  }
   export interface CreateInterconnectRequest {
     /**
      * The name of the interconnect. Example: "1G Interconnect to AWS" Default: None
@@ -570,6 +662,34 @@ declare namespace DirectConnect {
   export interface DeleteConnectionRequest {
     connectionId: ConnectionId;
   }
+  export interface DeleteDirectConnectGatewayAssociationRequest {
+    /**
+     * The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+     */
+    directConnectGatewayId: DirectConnectGatewayId;
+    /**
+     * The ID of the virtual private gateway. Example: "vgw-abc123ef" Default: None
+     */
+    virtualGatewayId: VirtualGatewayId;
+  }
+  export interface DeleteDirectConnectGatewayAssociationResult {
+    /**
+     * The direct connect gateway association to be deleted.
+     */
+    directConnectGatewayAssociation?: DirectConnectGatewayAssociation;
+  }
+  export interface DeleteDirectConnectGatewayRequest {
+    /**
+     * The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+     */
+    directConnectGatewayId: DirectConnectGatewayId;
+  }
+  export interface DeleteDirectConnectGatewayResult {
+    /**
+     * The direct connect gateway to be deleted.
+     */
+    directConnectGateway?: DirectConnectGateway;
+  }
   export interface DeleteInterconnectRequest {
     interconnectId: InterconnectId;
   }
@@ -607,6 +727,77 @@ declare namespace DirectConnect {
   }
   export interface DescribeConnectionsRequest {
     connectionId?: ConnectionId;
+  }
+  export interface DescribeDirectConnectGatewayAssociationsRequest {
+    /**
+     * The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+     */
+    directConnectGatewayId?: DirectConnectGatewayId;
+    /**
+     * The ID of the virtual private gateway. Example: "vgw-abc123ef" Default: None
+     */
+    virtualGatewayId?: VirtualGatewayId;
+    /**
+     * The maximum number of direct connect gateway associations to return per page. Example: 15 Default: None
+     */
+    maxResults?: MaxResultSetSize;
+    /**
+     * The token provided in the previous describe result to retrieve the next page of the result. Default: None
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeDirectConnectGatewayAssociationsResult {
+    /**
+     * Information about the direct connect gateway associations.
+     */
+    directConnectGatewayAssociations?: DirectConnectGatewayAssociationList;
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeDirectConnectGatewayAttachmentsRequest {
+    /**
+     * The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+     */
+    directConnectGatewayId?: DirectConnectGatewayId;
+    /**
+     * The ID of the virtual interface. Example: "dxvif-abc123ef" Default: None
+     */
+    virtualInterfaceId?: VirtualInterfaceId;
+    /**
+     * The maximum number of direct connect gateway attachments to return per page. Example: 15 Default: None
+     */
+    maxResults?: MaxResultSetSize;
+    /**
+     * The token provided in the previous describe result to retrieve the next page of the result. Default: None
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeDirectConnectGatewayAttachmentsResult {
+    /**
+     * Information about the direct connect gateway attachments.
+     */
+    directConnectGatewayAttachments?: DirectConnectGatewayAttachmentList;
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeDirectConnectGatewaysRequest {
+    /**
+     * The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+     */
+    directConnectGatewayId?: DirectConnectGatewayId;
+    /**
+     * The maximum number of direct connect gateways to return per page. Example: 15 Default: None
+     */
+    maxResults?: MaxResultSetSize;
+    /**
+     * The token provided in the previous describe result to retrieve the next page of the result. Default: None
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeDirectConnectGatewaysResult {
+    /**
+     * Information about the direct connect gateways.
+     */
+    directConnectGateways?: DirectConnectGatewayList;
+    nextToken?: PaginationToken;
   }
   export interface DescribeHostedConnectionsRequest {
     /**
@@ -664,6 +855,50 @@ declare namespace DirectConnect {
     connectionId?: ConnectionId;
     virtualInterfaceId?: VirtualInterfaceId;
   }
+  export interface DirectConnectGateway {
+    directConnectGatewayId?: DirectConnectGatewayId;
+    directConnectGatewayName?: DirectConnectGatewayName;
+    /**
+     * The autonomous system number (ASN) for the Amazon side of the connection.
+     */
+    amazonSideAsn?: LongAsn;
+    /**
+     * The AWS account ID of the owner of the direct connect gateway.
+     */
+    ownerAccount?: OwnerAccount;
+    directConnectGatewayState?: DirectConnectGatewayState;
+    stateChangeError?: StateChangeError;
+  }
+  export interface DirectConnectGatewayAssociation {
+    directConnectGatewayId?: DirectConnectGatewayId;
+    virtualGatewayId?: VirtualGatewayId;
+    virtualGatewayRegion?: VirtualGatewayRegion;
+    /**
+     * The AWS account ID of the owner of the virtual private gateway.
+     */
+    virtualGatewayOwnerAccount?: OwnerAccount;
+    associationState?: DirectConnectGatewayAssociationState;
+    stateChangeError?: StateChangeError;
+  }
+  export type DirectConnectGatewayAssociationList = DirectConnectGatewayAssociation[];
+  export type DirectConnectGatewayAssociationState = "associating"|"associated"|"disassociating"|"disassociated"|string;
+  export interface DirectConnectGatewayAttachment {
+    directConnectGatewayId?: DirectConnectGatewayId;
+    virtualInterfaceId?: VirtualInterfaceId;
+    virtualInterfaceRegion?: VirtualInterfaceRegion;
+    /**
+     * The AWS account ID of the owner of the virtual interface.
+     */
+    virtualInterfaceOwnerAccount?: OwnerAccount;
+    attachmentState?: DirectConnectGatewayAttachmentState;
+    stateChangeError?: StateChangeError;
+  }
+  export type DirectConnectGatewayAttachmentList = DirectConnectGatewayAttachment[];
+  export type DirectConnectGatewayAttachmentState = "attaching"|"attached"|"detaching"|"detached"|string;
+  export type DirectConnectGatewayId = string;
+  export type DirectConnectGatewayList = DirectConnectGateway[];
+  export type DirectConnectGatewayName = string;
+  export type DirectConnectGatewayState = "pending"|"available"|"deleting"|"deleted"|string;
   export interface DisassociateConnectionFromLagRequest {
     /**
      * The ID of the connection to disassociate from the LAG. Example: dxcon-abc123 Default: None
@@ -776,6 +1011,8 @@ declare namespace DirectConnect {
      */
     locations?: LocationList;
   }
+  export type LongAsn = number;
+  export type MaxResultSetSize = number;
   export interface NewBGPPeer {
     asn?: ASN;
     authKey?: BGPAuthKey;
@@ -791,7 +1028,8 @@ declare namespace DirectConnect {
     amazonAddress?: AmazonAddress;
     customerAddress?: CustomerAddress;
     addressFamily?: AddressFamily;
-    virtualGatewayId: VirtualGatewayId;
+    virtualGatewayId?: VirtualGatewayId;
+    directConnectGatewayId?: DirectConnectGatewayId;
   }
   export interface NewPrivateVirtualInterfaceAllocation {
     virtualInterfaceName: VirtualInterfaceName;
@@ -823,6 +1061,7 @@ declare namespace DirectConnect {
     routeFilterPrefixes?: RouteFilterPrefixList;
   }
   export type OwnerAccount = string;
+  export type PaginationToken = string;
   export type PartnerName = string;
   export type ProviderName = string;
   export type Region = string;
@@ -847,6 +1086,7 @@ declare namespace DirectConnect {
   }
   export type RouteFilterPrefixList = RouteFilterPrefix[];
   export type RouterConfig = string;
+  export type StateChangeError = string;
   export interface Tag {
     /**
      * The key of the tag.
@@ -906,6 +1146,7 @@ declare namespace DirectConnect {
   }
   export type VirtualGatewayId = string;
   export type VirtualGatewayList = VirtualGateway[];
+  export type VirtualGatewayRegion = string;
   export type VirtualGatewayState = string;
   export interface VirtualGateways {
     /**
@@ -925,6 +1166,10 @@ declare namespace DirectConnect {
     virtualInterfaceName?: VirtualInterfaceName;
     vlan?: VLAN;
     asn?: ASN;
+    /**
+     * The autonomous system number (ASN) for the Amazon side of the connection.
+     */
+    amazonSideAsn?: LongAsn;
     authKey?: BGPAuthKey;
     amazonAddress?: AmazonAddress;
     customerAddress?: CustomerAddress;
@@ -935,12 +1180,14 @@ declare namespace DirectConnect {
      */
     customerRouterConfig?: RouterConfig;
     virtualGatewayId?: VirtualGatewayId;
+    directConnectGatewayId?: DirectConnectGatewayId;
     routeFilterPrefixes?: RouteFilterPrefixList;
     bgpPeers?: BGPPeerList;
   }
   export type VirtualInterfaceId = string;
   export type VirtualInterfaceList = VirtualInterface[];
   export type VirtualInterfaceName = string;
+  export type VirtualInterfaceRegion = string;
   export type VirtualInterfaceState = "confirming"|"verifying"|"pending"|"available"|"down"|"deleting"|"deleted"|"rejected"|string;
   export type VirtualInterfaceType = string;
   export interface VirtualInterfaces {
