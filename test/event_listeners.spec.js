@@ -881,10 +881,12 @@
           foo: 'secret_key_id',
           baz: {
             bar: 'should log'
-          }
+          },
+          qux: 'nonsense'
         }).send();
         expect(data.indexOf('secret_key_id')).to.equal(-1);
         expect(data.indexOf('bar: \'should log\'') >= 0).to.equal(true);
+        expect(data.indexOf('qux: \'nonsense\'') >= 0).to.equal(true);
       });
 
       it('from input shape of list', function() {
