@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.142.0-->
+<!--LATEST=2.143.0-->
 <!--ENTRYINSERT-->
+
+## 2.143.0
+* feature: DirectConnect: AWS DirectConnect now provides support for Global Access for Virtual Private Cloud (VPC) via a new feature called Direct Connect Gateway. A Direct Connect Gateway will allow you to group multiple Direct Connect Private Virtual Interfaces (DX-VIF) and Private Virtual Gateways (VGW) from different AWS regions (but belonging to the same AWS Account) and pass traffic from any DX-VIF to any VPC in the grouping.
 
 ## 2.142.0
 * feature: Configuration: Allow the logger by SDK clients to be controlled via the environment if not defined programmatically. If the `AWSJS_DEBUG` environment variable is set to a truthy value and no other logger is defined, the global `console` object will be used.
