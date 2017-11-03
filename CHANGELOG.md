@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.144.0-->
+<!--LATEST=2.145.0-->
 <!--ENTRYINSERT-->
+
+## 2.145.0
+* feature: ECS: Amazon ECS users can now add devices to their containers and enable init process in containers through the use of docker's 'devices' and 'init' features. These fields can be specified under linuxParameters in ContainerDefinition in the Task Definition Template. 
 
 ## 2.144.0
 * feature: APIGateway: This release supports creating and managing Regional and Edge-Optimized API endpoints.

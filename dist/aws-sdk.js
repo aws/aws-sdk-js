@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.144.0
+// AWS SDK for JavaScript v2.145.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -40506,7 +40506,7 @@ module.exports={
             }
           },
           "failures": {
-            "shape": "S2a"
+            "shape": "S2e"
           }
         }
       }
@@ -40528,10 +40528,10 @@ module.exports={
         "type": "structure",
         "members": {
           "containerInstances": {
-            "shape": "S2e"
+            "shape": "S2i"
           },
           "failures": {
-            "shape": "S2a"
+            "shape": "S2e"
           }
         }
       }
@@ -40559,7 +40559,7 @@ module.exports={
             }
           },
           "failures": {
-            "shape": "S2a"
+            "shape": "S2e"
           }
         }
       }
@@ -40600,10 +40600,10 @@ module.exports={
         "type": "structure",
         "members": {
           "tasks": {
-            "shape": "S2m"
+            "shape": "S2q"
           },
           "failures": {
-            "shape": "S2a"
+            "shape": "S2e"
           }
         }
       }
@@ -40851,10 +40851,10 @@ module.exports={
             "shape": "S1c"
           },
           "volumes": {
-            "shape": "S1z"
+            "shape": "S23"
           },
           "placementConstraints": {
-            "shape": "S24"
+            "shape": "S28"
           }
         }
       },
@@ -40877,7 +40877,7 @@ module.exports={
           "cluster": {},
           "taskDefinition": {},
           "overrides": {
-            "shape": "S2o"
+            "shape": "S2s"
           },
           "count": {
             "type": "integer"
@@ -40896,10 +40896,10 @@ module.exports={
         "type": "structure",
         "members": {
           "tasks": {
-            "shape": "S2m"
+            "shape": "S2q"
           },
           "failures": {
-            "shape": "S2a"
+            "shape": "S2e"
           }
         }
       }
@@ -40915,7 +40915,7 @@ module.exports={
           "cluster": {},
           "taskDefinition": {},
           "overrides": {
-            "shape": "S2o"
+            "shape": "S2s"
           },
           "containerInstances": {
             "shape": "S16"
@@ -40928,10 +40928,10 @@ module.exports={
         "type": "structure",
         "members": {
           "tasks": {
-            "shape": "S2m"
+            "shape": "S2q"
           },
           "failures": {
-            "shape": "S2a"
+            "shape": "S2e"
           }
         }
       }
@@ -40952,7 +40952,7 @@ module.exports={
         "type": "structure",
         "members": {
           "task": {
-            "shape": "S2n"
+            "shape": "S2r"
           }
         }
       }
@@ -40970,7 +40970,7 @@ module.exports={
           },
           "reason": {},
           "networkBindings": {
-            "shape": "S2t"
+            "shape": "S2x"
           }
         }
       },
@@ -41037,10 +41037,10 @@ module.exports={
         "type": "structure",
         "members": {
           "containerInstances": {
-            "shape": "S2e"
+            "shape": "S2i"
           },
           "failures": {
-            "shape": "S2a"
+            "shape": "S2e"
           }
         }
       }
@@ -41315,7 +41315,7 @@ module.exports={
           "type": "integer"
         },
         "volumes": {
-          "shape": "S1z"
+          "shape": "S23"
         },
         "status": {},
         "requiresAttributes": {
@@ -41325,7 +41325,7 @@ module.exports={
           }
         },
         "placementConstraints": {
-          "shape": "S24"
+          "shape": "S28"
         }
       }
     },
@@ -41413,6 +41413,26 @@ module.exports={
                     "shape": "S16"
                   }
                 }
+              },
+              "devices": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "required": [
+                    "hostPath"
+                  ],
+                  "members": {
+                    "hostPath": {},
+                    "containerPath": {},
+                    "permissions": {
+                      "type": "list",
+                      "member": {}
+                    }
+                  }
+                }
+              },
+              "initProcessEnabled": {
+                "type": "boolean"
               }
             }
           },
@@ -41503,7 +41523,7 @@ module.exports={
         }
       }
     },
-    "S1z": {
+    "S23": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -41518,7 +41538,7 @@ module.exports={
         }
       }
     },
-    "S24": {
+    "S28": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -41528,7 +41548,7 @@ module.exports={
         }
       }
     },
-    "S2a": {
+    "S2e": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -41538,19 +41558,19 @@ module.exports={
         }
       }
     },
-    "S2e": {
+    "S2i": {
       "type": "list",
       "member": {
         "shape": "S10"
       }
     },
-    "S2m": {
+    "S2q": {
       "type": "list",
       "member": {
-        "shape": "S2n"
+        "shape": "S2r"
       }
     },
-    "S2n": {
+    "S2r": {
       "type": "structure",
       "members": {
         "taskArn": {},
@@ -41558,7 +41578,7 @@ module.exports={
         "taskDefinitionArn": {},
         "containerInstanceArn": {},
         "overrides": {
-          "shape": "S2o"
+          "shape": "S2s"
         },
         "lastStatus": {},
         "desiredStatus": {},
@@ -41576,7 +41596,7 @@ module.exports={
               },
               "reason": {},
               "networkBindings": {
-                "shape": "S2t"
+                "shape": "S2x"
               }
             }
           }
@@ -41598,7 +41618,7 @@ module.exports={
         "group": {}
       }
     },
-    "S2o": {
+    "S2s": {
       "type": "structure",
       "members": {
         "containerOverrides": {
@@ -41628,7 +41648,7 @@ module.exports={
         "taskRoleArn": {}
       }
     },
-    "S2t": {
+    "S2x": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -111121,7 +111141,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.144.0',
+  VERSION: '2.145.0',
 
 
   Signers: {},
