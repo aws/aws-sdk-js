@@ -1260,25 +1260,37 @@ declare namespace APIGateway {
      */
     domainName: String;
     /**
-     * The user-friendly name of the certificate.
+     * The user-friendly name of the certificate that will be used by edge-optimized endpoint for this domain name.
      */
     certificateName?: String;
     /**
-     * [Deprecated] The body of the server certificate provided by your certificate authority.
+     * [Deprecated] The body of the server certificate that will be used by edge-optimized endpoint for this domain name provided by your certificate authority.
      */
     certificateBody?: String;
     /**
-     * [Deprecated] Your certificate's private key.
+     * [Deprecated] Your edge-optimized endpoint's domain name certificate's private key.
      */
     certificatePrivateKey?: String;
     /**
-     * [Deprecated] The intermediate certificates and optionally the root certificate, one after the other without any blank lines. If you include the root certificate, your certificate chain must start with intermediate certificates and end with the root certificate. Use the intermediate certificates that were provided by your certificate authority. Do not include any intermediaries that are not in the chain of trust path.
+     * [Deprecated] The intermediate certificates and optionally the root certificate, one after the other without any blank lines, used by an edge-optimized endpoint for this domain name. If you include the root certificate, your certificate chain must start with intermediate certificates and end with the root certificate. Use the intermediate certificates that were provided by your certificate authority. Do not include any intermediaries that are not in the chain of trust path.
      */
     certificateChain?: String;
     /**
-     * The reference to an AWS-managed certificate. AWS Certificate Manager is the only supported source.
+     * The reference to an AWS-managed certificate that will be used by edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
      */
     certificateArn?: String;
+    /**
+     * The user-friendly name of the certificate that will be used by regional endpoint for this domain name.
+     */
+    regionalCertificateName?: String;
+    /**
+     * The reference to an AWS-managed certificate that will be used by regional endpoint for this domain name. AWS Certificate Manager is the only supported source.
+     */
+    regionalCertificateArn?: String;
+    /**
+     * The endpoint configuration of this DomainName showing the endpoint types of the domain name. 
+     */
+    endpointConfiguration?: EndpointConfiguration;
   }
   export interface CreateModelRequest {
     /**
@@ -1355,6 +1367,10 @@ declare namespace APIGateway {
      * The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.
      */
     binaryMediaTypes?: ListOfString;
+    /**
+     * The endpoint configuration of this RestApi showing the endpoint types of the API. 
+     */
+    endpointConfiguration?: EndpointConfiguration;
   }
   export interface CreateStageRequest {
     /**
@@ -1737,21 +1753,37 @@ declare namespace APIGateway {
      */
     domainName?: String;
     /**
-     * The name of the certificate.
+     * The name of the certificate that will be used by edge-optimized endpoint for this domain name.
      */
     certificateName?: String;
     /**
-     * The reference to an AWS-managed certificate. AWS Certificate Manager is the only supported source.
+     * The reference to an AWS-managed certificate that will be used by edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
      */
     certificateArn?: String;
     /**
-     * The timestamp when the certificate was uploaded.
+     * The timestamp when the certificate that was used by edge-optimized endpoint for this domain name was uploaded.
      */
     certificateUploadDate?: Timestamp;
     /**
-     * The domain name of the Amazon CloudFront distribution. For more information, see the Amazon CloudFront documentation.
+     * The domain name associated with the regional endpoint for this custom domain name. You set up this association by adding a DNS record that points the custom domain name to this regional domain name. The regional domain name is returned by Amazon API Gateway when you create a regional endpoint.
+     */
+    regionalDomainName?: String;
+    /**
+     * The name of the certificate that will be used for validating the regional domain name.
+     */
+    regionalCertificateName?: String;
+    /**
+     * The reference to an AWS-managed certificate that will be used for validating the regional domain name. AWS Certificate Manager is the only supported source.
+     */
+    regionalCertificateArn?: String;
+    /**
+     * The domain name of the Amazon CloudFront distribution associated with this custom domain name for an edge-optimized endpoint. You set up this association when adding a DNS record pointing the custom domain name to this distribution name. For more information about CloudFront distributions, see the Amazon CloudFront documentation.
      */
     distributionDomainName?: String;
+    /**
+     * The endpoint configuration of this DomainName showing the endpoint types of the domain name. 
+     */
+    endpointConfiguration?: EndpointConfiguration;
   }
   export interface DomainNames {
     position?: String;
@@ -1761,6 +1793,13 @@ declare namespace APIGateway {
     items?: ListOfDomainName;
   }
   export type Double = number;
+  export interface EndpointConfiguration {
+    /**
+     * A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is "EDGE". For a regional API and its custom domain name, the endpoint type is REGIONAL.
+     */
+    types?: ListOfEndpointType;
+  }
+  export type EndpointType = "REGIONAL"|"EDGE"|string;
   export interface ExportResponse {
     /**
      * The content-type header value in the HTTP response. This will correspond to a valid 'accept' type in the request.
@@ -2507,6 +2546,7 @@ declare namespace APIGateway {
   export type ListOfDocumentationPart = DocumentationPart[];
   export type ListOfDocumentationVersion = DocumentationVersion[];
   export type ListOfDomainName = DomainName[];
+  export type ListOfEndpointType = EndpointType[];
   export type ListOfGatewayResponse = GatewayResponse[];
   export type ListOfLong = Long[];
   export type ListOfModel = Model[];
@@ -2992,6 +3032,10 @@ declare namespace APIGateway {
      * The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.
      */
     binaryMediaTypes?: ListOfString;
+    /**
+     * The endpoint configuration of this RestApi showing the endpoint types of the API. 
+     */
+    endpointConfiguration?: EndpointConfiguration;
   }
   export interface RestApis {
     position?: String;
