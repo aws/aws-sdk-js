@@ -53,17 +53,17 @@ describe('region_config.js', function() {
     expect(service.config.signatureVersion).to.equal('v4');
   });
 
-  it('uses - as separator for S3 in public regions and GovCloud', function() {
+  it('does not use - as separator for S3 in public regions and GovCloud', function() {
     var service = new AWS.S3({
       region: 'us-west-2'
     });
     expect(service.isGlobalEndpoint).to.equal(false);
-    expect(service.endpoint.host).to.equal('s3-us-west-2.amazonaws.com');
+    expect(service.endpoint.host).to.equal('s3.us-west-2.amazonaws.com');
     service = new AWS.S3({
       region: 'us-gov-west-1'
     });
     expect(service.isGlobalEndpoint).to.equal(false);
-    expect(service.endpoint.host).to.equal('s3-us-gov-west-1.amazonaws.com');
+    expect(service.endpoint.host).to.equal('s3.us-gov-west-1.amazonaws.com');
   });
 
   it('uses . as separator for S3 in cn-*', function() {
