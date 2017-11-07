@@ -12,19 +12,19 @@ declare class StepFunctions extends Service {
   constructor(options?: StepFunctions.Types.ClientConfiguration)
   config: Config & StepFunctions.Types.ClientConfiguration;
   /**
-   * Creates an activity.
+   * Creates an activity. An Activity is a task which you write, in any language and hosted on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask and respond using SendTask* API calls. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
    */
   createActivity(params: StepFunctions.Types.CreateActivityInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates an activity.
+   * Creates an activity. An Activity is a task which you write, in any language and hosted on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask and respond using SendTask* API calls. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
    */
   createActivity(callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates a state machine.
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine which states to transition to next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.
    */
   createStateMachine(params: StepFunctions.Types.CreateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
-   * Creates a state machine.
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine which states to transition to next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.
    */
   createStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class StepFunctions extends Service {
    */
   deleteActivity(callback?: (err: AWSError, data: StepFunctions.Types.DeleteActivityOutput) => void): Request<StepFunctions.Types.DeleteActivityOutput, AWSError>;
   /**
-   * Deletes a state machine. This is an asynchronous operation-- it sets the state machine's status to "DELETING" and begins the delete process.
+   * Deletes a state machine. This is an asynchronous operation-- it sets the state machine's status to "DELETING" and begins the delete process. Each state machine execution will be deleted the next time it makes a state transition. After all executions have completed or been deleted, the state machine itself will be deleted.
    */
   deleteStateMachine(params: StepFunctions.Types.DeleteStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineOutput) => void): Request<StepFunctions.Types.DeleteStateMachineOutput, AWSError>;
   /**
-   * Deletes a state machine. This is an asynchronous operation-- it sets the state machine's status to "DELETING" and begins the delete process.
+   * Deletes a state machine. This is an asynchronous operation-- it sets the state machine's status to "DELETING" and begins the delete process. Each state machine execution will be deleted the next time it makes a state transition. After all executions have completed or been deleted, the state machine itself will be deleted.
    */
   deleteStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineOutput) => void): Request<StepFunctions.Types.DeleteStateMachineOutput, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class StepFunctions extends Service {
    */
   describeStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineOutput) => void): Request<StepFunctions.Types.DescribeStateMachineOutput, AWSError>;
   /**
-   * Used by workers to retrieve a task (with the specified activity ARN) scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return an empty result, that is, the taskToken returned is an empty string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
+   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
    */
   getActivityTask(params: StepFunctions.Types.GetActivityTaskInput, callback?: (err: AWSError, data: StepFunctions.Types.GetActivityTaskOutput) => void): Request<StepFunctions.Types.GetActivityTaskOutput, AWSError>;
   /**
-   * Used by workers to retrieve a task (with the specified activity ARN) scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return an empty result, that is, the taskToken returned is an empty string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
+   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
    */
   getActivityTask(callback?: (err: AWSError, data: StepFunctions.Types.GetActivityTaskOutput) => void): Request<StepFunctions.Types.GetActivityTaskOutput, AWSError>;
   /**
@@ -166,7 +166,7 @@ declare namespace StepFunctions {
      */
     activityArn: Arn;
     /**
-     * The name of the activity.
+     * The name of the activity. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
     /**
@@ -228,7 +228,7 @@ declare namespace StepFunctions {
   export type Cause = string;
   export interface CreateActivityInput {
     /**
-     * The name of the activity to create. This name must be unique for your AWS account and region.
+     * The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
   }
@@ -244,7 +244,7 @@ declare namespace StepFunctions {
   }
   export interface CreateStateMachineInput {
     /**
-     * The name of the state machine. This name must be unique for your AWS account and region.
+     * The name of the state machine. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
     /**
@@ -296,7 +296,7 @@ declare namespace StepFunctions {
      */
     activityArn: Arn;
     /**
-     * The name of the activity.
+     * The name of the activity. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
     /**
@@ -320,7 +320,7 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The name of the execution.
+     * The name of the execution. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name?: Name;
     /**
@@ -336,7 +336,7 @@ declare namespace StepFunctions {
      */
     stopDate?: Timestamp;
     /**
-     * The JSON input data of the execution.
+     * The string that contains the JSON input data of the execution.
      */
     input: Data;
     /**
@@ -356,7 +356,7 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The name of the state machine.
+     * The name of the state machine. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
     /**
@@ -368,7 +368,7 @@ declare namespace StepFunctions {
      */
     definition: Definition;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role used for executing this state machine.
+     * The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
      */
     roleArn: Arn;
     /**
@@ -410,7 +410,7 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The name of the execution.
+     * The name of the execution. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
     /**
@@ -455,11 +455,11 @@ declare namespace StepFunctions {
   }
   export interface GetActivityTaskInput {
     /**
-     * The Amazon Resource Name (ARN) of the activity to retrieve tasks from.
+     * The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using CreateActivity.)
      */
     activityArn: Arn;
     /**
-     * An arbitrary name may be provided in order to identify the worker that the task is assigned to. This name will be used when it is logged in the execution history.
+     * You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name will be used when it is logged in the execution history.
      */
     workerName?: Name;
   }
@@ -469,7 +469,7 @@ declare namespace StepFunctions {
      */
     taskToken?: TaskToken;
     /**
-     * The JSON input data for the task.
+     * The string that contains the JSON input data for the task.
      */
     input?: Data;
   }
@@ -479,7 +479,7 @@ declare namespace StepFunctions {
      */
     executionArn: Arn;
     /**
-     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
@@ -503,7 +503,7 @@ declare namespace StepFunctions {
   }
   export interface HistoryEvent {
     /**
-     * The date the event occured.
+     * The date the event occurred.
      */
     timestamp: Timestamp;
     /**
@@ -519,6 +519,9 @@ declare namespace StepFunctions {
      */
     previousEventId?: EventId;
     activityFailedEventDetails?: ActivityFailedEventDetails;
+    /**
+     * Contains details about an activity schedule event which failed during an execution.
+     */
     activityScheduleFailedEventDetails?: ActivityScheduleFailedEventDetails;
     activityScheduledEventDetails?: ActivityScheduledEventDetails;
     activityStartedEventDetails?: ActivityStartedEventDetails;
@@ -532,14 +535,20 @@ declare namespace StepFunctions {
     lambdaFunctionFailedEventDetails?: LambdaFunctionFailedEventDetails;
     lambdaFunctionScheduleFailedEventDetails?: LambdaFunctionScheduleFailedEventDetails;
     lambdaFunctionScheduledEventDetails?: LambdaFunctionScheduledEventDetails;
+    /**
+     * Contains details about a lambda function which failed to start during an execution.
+     */
     lambdaFunctionStartFailedEventDetails?: LambdaFunctionStartFailedEventDetails;
+    /**
+     * Contains details about a lambda function which terminated successfully during an execution.
+     */
     lambdaFunctionSucceededEventDetails?: LambdaFunctionSucceededEventDetails;
     lambdaFunctionTimedOutEventDetails?: LambdaFunctionTimedOutEventDetails;
     stateEnteredEventDetails?: StateEnteredEventDetails;
     stateExitedEventDetails?: StateExitedEventDetails;
   }
   export type HistoryEventList = HistoryEvent[];
-  export type HistoryEventType = "ActivityFailed"|"ActivityScheduleFailed"|"ActivityScheduled"|"ActivityStarted"|"ActivitySucceeded"|"ActivityTimedOut"|"ChoiceStateEntered"|"ChoiceStateExited"|"ExecutionFailed"|"ExecutionStarted"|"ExecutionSucceeded"|"ExecutionAborted"|"ExecutionTimedOut"|"FailStateEntered"|"LambdaFunctionFailed"|"LambdaFunctionScheduleFailed"|"LambdaFunctionScheduled"|"LambdaFunctionStartFailed"|"LambdaFunctionStarted"|"LambdaFunctionSucceeded"|"LambdaFunctionTimedOut"|"SucceedStateEntered"|"SucceedStateExited"|"TaskStateEntered"|"TaskStateExited"|"PassStateEntered"|"PassStateExited"|"ParallelStateEntered"|"ParallelStateExited"|"WaitStateEntered"|"WaitStateExited"|string;
+  export type HistoryEventType = "ActivityFailed"|"ActivityScheduleFailed"|"ActivityScheduled"|"ActivityStarted"|"ActivitySucceeded"|"ActivityTimedOut"|"ChoiceStateEntered"|"ChoiceStateExited"|"ExecutionFailed"|"ExecutionStarted"|"ExecutionSucceeded"|"ExecutionAborted"|"ExecutionTimedOut"|"FailStateEntered"|"LambdaFunctionFailed"|"LambdaFunctionScheduleFailed"|"LambdaFunctionScheduled"|"LambdaFunctionStartFailed"|"LambdaFunctionStarted"|"LambdaFunctionSucceeded"|"LambdaFunctionTimedOut"|"SucceedStateEntered"|"SucceedStateExited"|"TaskStateAborted"|"TaskStateEntered"|"TaskStateExited"|"PassStateEntered"|"PassStateExited"|"ParallelStateAborted"|"ParallelStateEntered"|"ParallelStateExited"|"ParallelStateFailed"|"ParallelStateStarted"|"ParallelStateSucceeded"|"WaitStateAborted"|"WaitStateEntered"|"WaitStateExited"|string;
   export type Identity = string;
   export interface LambdaFunctionFailedEventDetails {
     /**
@@ -603,7 +612,7 @@ declare namespace StepFunctions {
   }
   export interface ListActivitiesInput {
     /**
-     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
@@ -631,7 +640,7 @@ declare namespace StepFunctions {
      */
     statusFilter?: ExecutionStatus;
     /**
-     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
@@ -651,7 +660,7 @@ declare namespace StepFunctions {
   }
   export interface ListStateMachinesInput {
     /**
-     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
@@ -712,11 +721,11 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The name of the execution. This name must be unique for your AWS account and region.
+     * The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name?: Name;
     /**
-     * The JSON input data for the execution.
+     * The string that contains the JSON input data for the execution, for example:  "input": "{\"first_name\" : \"test\"}"   If you don't include any JSON input data, you still must include the two braces, for example: "input": "{}"  
      */
     input?: Data;
   }
@@ -736,13 +745,13 @@ declare namespace StepFunctions {
      */
     name: Name;
     /**
-     * The JSON input data to the state.
+     * The string that contains the JSON input data for the state.
      */
     input?: Data;
   }
   export interface StateExitedEventDetails {
     /**
-     * The name of the state.
+     * The name of the state. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
     /**
@@ -757,7 +766,7 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The name of the state machine.
+     * The name of the state machine. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
     /**

@@ -452,5 +452,8 @@
   },
   "mobile": {
     "name": "Mobile"
+  },
+  "pricing": {
+    "name": "Pricing"
   }
 }

@@ -104,3 +104,4 @@ export import MigrationHub = require('./migrationhub');
 export import CloudHSMV2 = require('./cloudhsmv2');
 export import Glue = require('./glue');
 export import Mobile = require('./mobile');
+export import Pricing = require('./pricing');

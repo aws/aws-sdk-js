@@ -106,6 +106,7 @@ export abstract class ConfigurationServicePlaceholders {
   cloudhsmv2?: AWS.CloudHSMV2.Types.ClientConfiguration;
   glue?: AWS.Glue.Types.ClientConfiguration;
   mobile?: AWS.Mobile.Types.ClientConfiguration;
+  pricing?: AWS.Pricing.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -214,4 +215,5 @@ export interface ConfigurationServiceApiVersions {
   cloudhsmv2?: AWS.CloudHSMV2.Types.apiVersion;
   glue?: AWS.Glue.Types.apiVersion;
   mobile?: AWS.Mobile.Types.apiVersion;
+  pricing?: AWS.Pricing.Types.apiVersion;
 }
