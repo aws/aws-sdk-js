@@ -80,6 +80,14 @@ declare class S3 extends S3Customizations {
    */
   deleteBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the server-side encryption configuration from the bucket.
+   */
+  deleteBucketEncryption(params: S3.Types.DeleteBucketEncryptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the server-side encryption configuration from the bucket.
+   */
+  deleteBucketEncryption(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes an inventory configuration (identified by the inventory ID) from the bucket.
    */
   deleteBucketInventoryConfiguration(params: S3.Types.DeleteBucketInventoryConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -191,6 +199,14 @@ declare class S3 extends S3Customizations {
    * Returns the cors configuration for the bucket.
    */
   getBucketCors(callback?: (err: AWSError, data: S3.Types.GetBucketCorsOutput) => void): Request<S3.Types.GetBucketCorsOutput, AWSError>;
+  /**
+   * Returns the server-side encryption configuration of a bucket.
+   */
+  getBucketEncryption(params: S3.Types.GetBucketEncryptionRequest, callback?: (err: AWSError, data: S3.Types.GetBucketEncryptionOutput) => void): Request<S3.Types.GetBucketEncryptionOutput, AWSError>;
+  /**
+   * Returns the server-side encryption configuration of a bucket.
+   */
+  getBucketEncryption(callback?: (err: AWSError, data: S3.Types.GetBucketEncryptionOutput) => void): Request<S3.Types.GetBucketEncryptionOutput, AWSError>;
   /**
    * Returns an inventory configuration (identified by the inventory ID) from the bucket.
    */
@@ -452,6 +468,14 @@ declare class S3 extends S3Customizations {
    */
   putBucketCors(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a new server-side encryption configuration (or replaces an existing one, if present).
+   */
+  putBucketEncryption(params: S3.Types.PutBucketEncryptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates a new server-side encryption configuration (or replaces an existing one, if present).
+   */
+  putBucketEncryption(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Adds an inventory configuration (identified by the inventory ID) from the bucket.
    */
   putBucketInventoryConfiguration(params: S3.Types.PutBucketInventoryConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -672,6 +696,12 @@ declare namespace S3 {
     Grants?: Grants;
     Owner?: Owner;
   }
+  export interface AccessControlTranslation {
+    /**
+     * The override value for the owner of the replica object.
+     */
+    Owner: OwnerOverride;
+  }
   export type AccountId = string;
   export type AllowedHeader = string;
   export type AllowedHeaders = AllowedHeader[];
@@ -866,6 +896,7 @@ declare namespace S3 {
      */
     KeyPrefixEquals?: KeyPrefixEquals;
   }
+  export type ConfirmRemoveSelfBucketAccess = boolean;
   export type ContentDisposition = string;
   export type ContentEncoding = string;
   export type ContentLanguage = string;
@@ -1236,6 +1267,12 @@ declare namespace S3 {
   export interface DeleteBucketCorsRequest {
     Bucket: BucketName;
   }
+  export interface DeleteBucketEncryptionRequest {
+    /**
+     * The name of the bucket containing the server-side encryption configuration to delete.
+     */
+    Bucket: BucketName;
+  }
   export interface DeleteBucketInventoryConfigurationRequest {
     /**
      * The name of the bucket containing the inventory configuration to delete.
@@ -1362,14 +1399,32 @@ declare namespace S3 {
      */
     Bucket: BucketName;
     /**
+     * Account ID of the destination bucket. Currently this is only being verified if Access Control Translation is enabled
+     */
+    Account?: AccountId;
+    /**
      * The class of storage used to store the object.
      */
     StorageClass?: StorageClass;
+    /**
+     * Container for information regarding the access control for replicas.
+     */
+    AccessControlTranslation?: AccessControlTranslation;
+    /**
+     * Container for information regarding encryption based configuration for replicas.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
   }
   export type DisplayName = string;
   export type ETag = string;
   export type EmailAddress = string;
   export type EncodingType = "url"|string;
+  export interface EncryptionConfiguration {
+    /**
+     * The id of the KMS key used to encrypt the replica object.
+     */
+    ReplicaKmsKeyID?: ReplicaKmsKeyID;
+  }
   export interface Error {
     Key?: ObjectKey;
     VersionId?: ObjectVersionId;
@@ -1444,6 +1499,15 @@ declare namespace S3 {
     CORSRules?: CORSRules;
   }
   export interface GetBucketCorsRequest {
+    Bucket: BucketName;
+  }
+  export interface GetBucketEncryptionOutput {
+    ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
+  }
+  export interface GetBucketEncryptionRequest {
+    /**
+     * The name of the bucket from which the server-side encryption configuration is retrieved.
+     */
     Bucket: BucketName;
   }
   export interface GetBucketInventoryConfigurationOutput {
@@ -2007,6 +2071,16 @@ declare namespace S3 {
      */
     S3BucketDestination: InventoryS3BucketDestination;
   }
+  export interface InventoryEncryption {
+    /**
+     * Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+     */
+    SSES3?: SSES3;
+    /**
+     * Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+     */
+    SSEKMS?: SSEKMS;
+  }
   export interface InventoryFilter {
     /**
      * The prefix that an object must have to be included in the inventory results.
@@ -2017,7 +2091,7 @@ declare namespace S3 {
   export type InventoryFrequency = "Daily"|"Weekly"|string;
   export type InventoryId = string;
   export type InventoryIncludedObjectVersions = "All"|"Current"|string;
-  export type InventoryOptionalField = "Size"|"LastModifiedDate"|"StorageClass"|"ETag"|"IsMultipartUploaded"|"ReplicationStatus"|string;
+  export type InventoryOptionalField = "Size"|"LastModifiedDate"|"StorageClass"|"ETag"|"IsMultipartUploaded"|"ReplicationStatus"|"EncryptionStatus"|string;
   export type InventoryOptionalFields = InventoryOptionalField[];
   export interface InventoryS3BucketDestination {
     /**
@@ -2036,6 +2110,10 @@ declare namespace S3 {
      * The prefix that is prepended to all inventory results.
      */
     Prefix?: Prefix;
+    /**
+     * Contains the type of server-side encryption used to encrypt the inventory results.
+     */
+    Encryption?: InventoryEncryption;
   }
   export interface InventorySchedule {
     /**
@@ -2708,6 +2786,7 @@ declare namespace S3 {
     DisplayName?: DisplayName;
     ID?: ID;
   }
+  export type OwnerOverride = "Destination"|string;
   export interface Part {
     /**
      * Part number identifying the part. This is a positive integer between 1 and 10,000.
@@ -2793,6 +2872,17 @@ declare namespace S3 {
     CORSConfiguration: CORSConfiguration;
     ContentMD5?: ContentMD5;
   }
+  export interface PutBucketEncryptionRequest {
+    /**
+     * The name of the bucket for which the server-side encryption configuration is set.
+     */
+    Bucket: BucketName;
+    /**
+     * The base64-encoded 128-bit MD5 digest of the server-side encryption configuration.
+     */
+    ContentMD5?: ContentMD5;
+    ServerSideEncryptionConfiguration: ServerSideEncryptionConfiguration;
+  }
   export interface PutBucketInventoryConfigurationRequest {
     /**
      * The name of the bucket where the inventory configuration will be stored.
@@ -2847,6 +2937,10 @@ declare namespace S3 {
   export interface PutBucketPolicyRequest {
     Bucket: BucketName;
     ContentMD5?: ContentMD5;
+    /**
+     * Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
+     */
+    ConfirmRemoveSelfBucketAccess?: ConfirmRemoveSelfBucketAccess;
     /**
      * The bucket policy as a JSON document.
      */
@@ -3116,6 +3210,7 @@ declare namespace S3 {
   }
   export type ReplaceKeyPrefixWith = string;
   export type ReplaceKeyWith = string;
+  export type ReplicaKmsKeyID = string;
   export interface ReplicationConfiguration {
     /**
      * Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume when replicating the objects.
@@ -3139,6 +3234,13 @@ declare namespace S3 {
      * The rule is ignored if status is not Enabled.
      */
     Status: ReplicationRuleStatus;
+    /**
+     * Container for filters that define which source objects should be replicated.
+     */
+    SourceSelectionCriteria?: SourceSelectionCriteria;
+    /**
+     * Container for replication destination information.
+     */
     Destination: Destination;
   }
   export type ReplicationRuleStatus = "Enabled"|"Disabled"|string;
@@ -3217,9 +3319,53 @@ declare namespace S3 {
   export type SSECustomerAlgorithm = string;
   export type SSECustomerKey = Buffer|Uint8Array|Blob|string;
   export type SSECustomerKeyMD5 = string;
+  export interface SSEKMS {
+    /**
+     * Specifies the ID of the AWS Key Management Service (KMS) master encryption key to use for encrypting Inventory reports.
+     */
+    KeyId: SSEKMSKeyId;
+  }
   export type SSEKMSKeyId = string;
+  export interface SSES3 {
+  }
   export type ServerSideEncryption = "AES256"|"aws:kms"|string;
+  export interface ServerSideEncryptionByDefault {
+    /**
+     * Server-side encryption algorithm to use for the default encryption.
+     */
+    SSEAlgorithm: ServerSideEncryption;
+    /**
+     * KMS master key ID to use for the default encryption. This parameter is allowed if SSEAlgorithm is aws:kms.
+     */
+    KMSMasterKeyID?: SSEKMSKeyId;
+  }
+  export interface ServerSideEncryptionConfiguration {
+    /**
+     * Container for information about a particular server-side encryption configuration rule.
+     */
+    Rules: ServerSideEncryptionRules;
+  }
+  export interface ServerSideEncryptionRule {
+    /**
+     * Describes the default server-side encryption to apply to new objects in the bucket. If Put Object request does not specify any server-side encryption, this default encryption will be applied.
+     */
+    ApplyServerSideEncryptionByDefault?: ServerSideEncryptionByDefault;
+  }
+  export type ServerSideEncryptionRules = ServerSideEncryptionRule[];
   export type Size = number;
+  export interface SourceSelectionCriteria {
+    /**
+     * Container for filter information of selection of KMS Encrypted S3 objects.
+     */
+    SseKmsEncryptedObjects?: SseKmsEncryptedObjects;
+  }
+  export interface SseKmsEncryptedObjects {
+    /**
+     * The replication for KMS encrypted S3 objects is disabled if status is not Enabled.
+     */
+    Status: SseKmsEncryptedObjectsStatus;
+  }
+  export type SseKmsEncryptedObjectsStatus = "Enabled"|"Disabled"|string;
   export type StartAfter = string;
   export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|string;
   export interface StorageClassAnalysis {

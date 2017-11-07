@@ -190,7 +190,7 @@
           "shape": "KMSKeyNotAccessibleFault"
         }
       ],
-      "documentation": "<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the <code>CopyDBClusterSnapshot</code> action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS Key Management System (KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>PreSignedUrl</code> - A URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> action to be called in the source AWS Region where the DB cluster snapshot will be copied from. The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot will be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\"> Signature Version 4 Signing Process</a>.</p> </li> <li> <p> <code>TargetDBClusterSnapshotIdentifier</code> - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the <code>SourceDBClusterSnapshotIdentifier</code> in the pre-signed URL. </p> </li> </ul> <p>To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in \"copying\" status.</p> <p>For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBClusterSnapshot.CrossRegion\"> Copying a DB Cluster Snapshot in the Same Account, Either in the Same Region or Across Regions</a> in the Amazon RDS User Guide.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>"
+      "documentation": "<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the <code>CopyDBClusterSnapshot</code> action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS Key Management System (KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>PreSignedUrl</code> - A URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot will be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\"> Signature Version 4 Signing Process</a>.</p> </li> <li> <p> <code>TargetDBClusterSnapshotIdentifier</code> - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the <code>SourceDBClusterSnapshotIdentifier</code> in the pre-signed URL. </p> </li> </ul> <p>To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in \"copying\" status.</p> <p>For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBClusterSnapshot.CrossRegion\"> Copying a DB Cluster Snapshot in the Same Account, Either in the Same Region or Across Regions</a> in the Amazon RDS User Guide.</p> <p>For more information on Amazon Aurora, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html\">Aurora on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>"
     },
     "CopyDBParameterGroup": {
       "name": "CopyDBParameterGroup",
@@ -681,7 +681,7 @@
           "shape": "SourceNotFoundFault"
         }
       ],
-      "documentation": "<p>Creates an RDS event notification subscription. This action requires a topic ARN (Amazon Resource Name) created by either the RDS console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the type of source (SourceType) you want to be notified of, provide a list of RDS sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup.</p> <p>If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you will be notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you will receive notice of the events for that source type for all your RDS sources. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all RDS sources belonging to your customer account.</p>"
+      "documentation": "<p>Creates an RDS event notification subscription. This action requires a topic ARN (Amazon Resource Name) created by either the RDS console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the type of source (SourceType) you want to be notified of, provide a list of RDS sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup.</p> <p>If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your RDS sources. If you do not specify either the SourceType nor the SourceIdentifier, you are notified of events generated from all RDS sources belonging to your customer account.</p>"
     },
     "CreateOptionGroup": {
       "name": "CreateOptionGroup",
@@ -1966,7 +1966,7 @@
           "shape": "DBInstanceNotFoundFault"
         }
       ],
-      "documentation": "<p>Rebooting a DB instance restarts the database engine service. A reboot also applies to the DB instance any modifications to the associated DB parameter group that were pending. Rebooting a DB instance results in a momentary outage of the instance, during which the DB instance status is set to rebooting. If the RDS instance is configured for MultiAZ, it is possible that the reboot will be conducted through a failover. An Amazon RDS event is created when the reboot is completed.</p> <p>If your DB instance is deployed in multiple Availability Zones, you can force a failover from one AZ to the other during the reboot. You might force a failover to test the availability of your DB instance deployment or to restore operations to the original AZ after a failover occurs.</p> <p>The time required to reboot is a function of the specific database engine's crash recovery process. To improve the reboot time, we recommend that you reduce database activities as much as possible during the reboot process to reduce rollback activity for in-transit transactions.</p>"
+      "documentation": "<p>Rebooting a DB instance restarts the database engine service. A reboot also applies to the DB instance any modifications to the associated DB parameter group that were pending. Rebooting a DB instance results in a momentary outage of the instance, during which the DB instance status is set to rebooting. If the RDS instance is configured for MultiAZ, it is possible that the reboot is conducted through a failover. An Amazon RDS event is created when the reboot is completed.</p> <p>If your DB instance is deployed in multiple Availability Zones, you can force a failover from one AZ to the other during the reboot. You might force a failover to test the availability of your DB instance deployment or to restore operations to the original AZ after a failover occurs.</p> <p>The time required to reboot is a function of the specific database engine's crash recovery process. To improve the reboot time, we recommend that you reduce database activities as much as possible during the reboot process to reduce rollback activity for in-transit transactions.</p>"
     },
     "RemoveRoleFromDBCluster": {
       "name": "RemoveRoleFromDBCluster",
@@ -2613,7 +2613,7 @@
       "members": {
         "ResourceName": {
           "shape": "String",
-          "documentation": "<p>The Amazon RDS resource the tags will be added to. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
+          "documentation": "<p>The Amazon RDS resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -2985,7 +2985,7 @@
         },
         "PreSignedUrl": {
           "shape": "String",
-          "documentation": "<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBSnapshot</code> API action in the source AWS Region that contains the source DB snapshot to copy. </p> <p>You must specify this parameter when you copy an encrypted DB snapshot from another AWS Region by using the Amazon RDS API. You can specify the source region option instead of this parameter when you copy an encrypted DB snapshot from another AWS Region by using the AWS CLI. </p> <p>The presigned URL must be a valid request for the <code>CopyDBSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB snapshot to be copied. The presigned URL request must contain the following parameter values: </p> <ul> <li> <p> <code>DestinationRegion</code> - The AWS Region that the encrypted DB snapshot will be copied to. This AWS Region is the same one where the <code>CopyDBSnapshot</code> action is called that contains this presigned URL. </p> <p>For example, if you copy an encrypted DB snapshot from the us-west-2 region to the us-east-1 region, then you call the <code>CopyDBSnapshot</code> action in the us-east-1 region and provide a presigned URL that contains a call to the <code>CopyDBSnapshot</code> action in the us-west-2 region. For this example, the <code>DestinationRegion</code> in the presigned URL must be set to the us-east-1 region. </p> </li> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBSnapshot</code> action that is called in the destination AWS Region, and the action contained in the presigned URL. </p> </li> <li> <p> <code>SourceDBSnapshotIdentifier</code> - The DB snapshot identifier for the encrypted snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB snapshot from the us-west-2 region, then your <code>SourceDBSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115</code>. </p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\">Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>. </p><note><p>If you supply a value for this operation's <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>"
+          "documentation": "<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBSnapshot</code> API action in the source AWS Region that contains the source DB snapshot to copy. </p> <p>You must specify this parameter when you copy an encrypted DB snapshot from another AWS Region by using the Amazon RDS API. You can specify the source region option instead of this parameter when you copy an encrypted DB snapshot from another AWS Region by using the AWS CLI. </p> <p>The presigned URL must be a valid request for the <code>CopyDBSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB snapshot to be copied. The presigned URL request must contain the following parameter values: </p> <ul> <li> <p> <code>DestinationRegion</code> - The AWS Region that the encrypted DB snapshot is copied to. This AWS Region is the same one where the <code>CopyDBSnapshot</code> action is called that contains this presigned URL. </p> <p>For example, if you copy an encrypted DB snapshot from the us-west-2 region to the us-east-1 region, then you call the <code>CopyDBSnapshot</code> action in the us-east-1 region and provide a presigned URL that contains a call to the <code>CopyDBSnapshot</code> action in the us-west-2 region. For this example, the <code>DestinationRegion</code> in the presigned URL must be set to the us-east-1 region. </p> </li> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBSnapshot</code> action that is called in the destination AWS Region, and the action contained in the presigned URL. </p> </li> <li> <p> <code>SourceDBSnapshotIdentifier</code> - The DB snapshot identifier for the encrypted snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB snapshot from the us-west-2 region, then your <code>SourceDBSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115</code>. </p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\">Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>. </p><note><p>If you supply a value for this operation's <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>"
         },
         "OptionGroupName": {
           "shape": "String",
@@ -3069,7 +3069,7 @@
         },
         "DBClusterParameterGroupName": {
           "shape": "String",
-          "documentation": "<p> The name of the DB cluster parameter group to associate with this DB cluster. If this argument is omitted, <code>default.aurora5.6</code> will be used. </p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBClusterParameterGroup.</p> </li> </ul>"
+          "documentation": "<p> The name of the DB cluster parameter group to associate with this DB cluster. If this argument is omitted, <code>default.aurora5.6</code> is used. </p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBClusterParameterGroup.</p> </li> </ul>"
         },
         "VpcSecurityGroupIds": {
           "shape": "VpcSecurityGroupIdList",
@@ -3128,7 +3128,7 @@
         },
         "PreSignedUrl": {
           "shape": "String",
-          "documentation": "<p>A URL that contains a Signature Version 4 signed request for the <code>CreateDBCluster</code> action to be called in the source AWS Region where the DB cluster will be replicated from. You only need to specify <code>PreSignedUrl</code> when you are performing cross-region replication from an encrypted DB cluster.</p> <p>The pre-signed URL must be a valid request for the <code>CreateDBCluster</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB cluster in the destination AWS Region. This should refer to the same KMS key for both the <code>CreateDBCluster</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that Aurora Read Replica will be created in.</p> </li> <li> <p> <code>ReplicationSourceIdentifier</code> - The DB cluster identifier for the encrypted DB cluster to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster from the us-west-2 region, then your <code>ReplicationSourceIdentifier</code> would look like Example: <code>arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\"> Signature Version 4 Signing Process</a>.</p><note><p>If you supply a value for this operation's <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>"
+          "documentation": "<p>A URL that contains a Signature Version 4 signed request for the <code>CreateDBCluster</code> action to be called in the source AWS Region where the DB cluster is replicated from. You only need to specify <code>PreSignedUrl</code> when you are performing cross-region replication from an encrypted DB cluster.</p> <p>The pre-signed URL must be a valid request for the <code>CreateDBCluster</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB cluster in the destination AWS Region. This should refer to the same KMS key for both the <code>CreateDBCluster</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that Aurora Read Replica will be created in.</p> </li> <li> <p> <code>ReplicationSourceIdentifier</code> - The DB cluster identifier for the encrypted DB cluster to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster from the us-west-2 region, then your <code>ReplicationSourceIdentifier</code> would look like Example: <code>arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\"> Signature Version 4 Signing Process</a>.</p><note><p>If you supply a value for this operation's <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>"
         },
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
@@ -3235,7 +3235,7 @@
         },
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p>The compute and memory capacity of the DB instance. Note that not all instance classes are available in all regions for all DB engines.</p> <p> Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code> </p>"
+          "documentation": "<p>The compute and memory capacity of the DB instance, for example, <code>db.m4.large</code>. Not all DB instance classes are available in all regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the Amazon RDS User Guide. </p>"
         },
         "Engine": {
           "shape": "String",
@@ -3259,7 +3259,7 @@
         },
         "AvailabilityZone": {
           "shape": "String",
-          "documentation": "<p> The EC2 Availability Zone that the database instance will be created in. For information on regions and Availability Zones, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html\">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The AvailabilityZone parameter cannot be specified if the MultiAZ parameter is set to <code>true</code>. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p>"
+          "documentation": "<p> The EC2 Availability Zone that the database instance is created in. For information on regions and Availability Zones, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html\">Regions and Availability Zones</a>. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The AvailabilityZone parameter cannot be specified if the MultiAZ parameter is set to <code>true</code>. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p>"
         },
         "DBSubnetGroupName": {
           "shape": "String",
@@ -3271,7 +3271,7 @@
         },
         "DBParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine will be used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul>"
+          "documentation": "<p>The name of the DB parameter group to associate with this DB instance. If this argument is omitted, the default DBParameterGroup for the specified engine is used.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul>"
         },
         "BackupRetentionPeriod": {
           "shape": "IntegerOptional",
@@ -3291,11 +3291,11 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The version number of the database engine to use.</p> <p>The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS Region.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster. For more information, see <a>CreateDBCluster</a>.</p> <p> <b>MariaDB</b> </p> <ul> <li> <p> <code>10.1.23</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.1.19</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.1.14</code> (supported in all regions except us-east-2)</p> </li> </ul> <p/> <ul> <li> <p> <code>10.0.31</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.0.28</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.0.24</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.0.17</code> (supported in all regions except us-east-2, ca-central-1, eu-west-2)</p> </li> </ul> <p> <b>Microsoft SQL Server 2016</b> </p> <ul> <li> <p> <code>13.00.4422.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>13.00.2164.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> </ul> <p> <b>Microsoft SQL Server 2014</b> </p> <ul> <li> <p> <code>12.00.5546.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>12.00.5000.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>12.00.4422.0.v1</code> (supported for all editions except Enterprise Edition, and all AWS regions except ca-central-1 and eu-west-2)</p> </li> </ul> <p> <b>Microsoft SQL Server 2012</b> </p> <ul> <li> <p> <code>11.00.6594.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>11.00.6020.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>11.00.5058.0.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> <li> <p> <code>11.00.2100.60.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> </ul> <p> <b>Microsoft SQL Server 2008 R2</b> </p> <ul> <li> <p> <code>10.50.6529.0.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> <li> <p> <code>10.50.6000.34.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> <li> <p> <code>10.50.2789.0.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> </ul> <p> <b>MySQL</b> </p> <ul> <li> <p> <code>5.7.17</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.7.16</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.7.11</code> (supported in all AWS regions)</p> </li> </ul> <p/> <ul> <li> <p> <code>5.6.35</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.6.34</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.6.29</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.6.27</code> (supported in all regions except us-east-2, ca-central-1, eu-west-2)</p> </li> </ul> <p/> <ul> <li> <p> <code>5.5.54</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.5.53</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.5.46</code> (supported in all AWS regions)</p> </li> </ul> <p> <b>Oracle 12c</b> </p> <ul> <li> <p> <code>12.1.0.2.v8</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v7</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v6</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v5</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v4</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v3</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v2</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v1</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> </ul> <p> <b>Oracle 11g</b> </p> <ul> <li> <p> <code>11.2.0.4.v12</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v11</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v10</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v9</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v8</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v7</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v6</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v5</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v4</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v3</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v1</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <ul> <li> <p> <b>Version 9.6.x:</b> <code> 9.6.1 | 9.6.2 | 9.6.3</code> </p> </li> <li> <p> <b>Version 9.5.x:</b> <code>9.5.6 | 9.5.4 | 9.5.2</code> </p> </li> <li> <p> <b>Version 9.4.x:</b> <code>9.4.11 | 9.4.9 | 9.4.7</code> </p> </li> <li> <p> <b>Version 9.3.x:</b> <code>9.3.16 | 9.3.14 | 9.3.12</code> </p> </li> </ul>"
+          "documentation": "<p>The version number of the database engine to use.</p> <p>The following are the database engines and major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS Region.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster. For more information, see <a>CreateDBCluster</a>.</p> <p> <b>MariaDB</b> </p> <ul> <li> <p> <code>10.1.23</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.1.19</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.1.14</code> (supported in all regions except us-east-2)</p> </li> </ul> <p/> <ul> <li> <p> <code>10.0.31</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.0.28</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.0.24</code> (supported in all AWS regions)</p> </li> <li> <p> <code>10.0.17</code> (supported in all regions except us-east-2, ca-central-1, eu-west-2)</p> </li> </ul> <p> <b>Microsoft SQL Server 2016</b> </p> <ul> <li> <p> <code>13.00.4422.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>13.00.2164.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> </ul> <p> <b>Microsoft SQL Server 2014</b> </p> <ul> <li> <p> <code>12.00.5546.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>12.00.5000.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>12.00.4422.0.v1</code> (supported for all editions except Enterprise Edition, and all AWS regions except ca-central-1 and eu-west-2)</p> </li> </ul> <p> <b>Microsoft SQL Server 2012</b> </p> <ul> <li> <p> <code>11.00.6594.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>11.00.6020.0.v1</code> (supported for all editions, and all AWS regions)</p> </li> <li> <p> <code>11.00.5058.0.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> <li> <p> <code>11.00.2100.60.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> </ul> <p> <b>Microsoft SQL Server 2008 R2</b> </p> <ul> <li> <p> <code>10.50.6529.0.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> <li> <p> <code>10.50.6000.34.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> <li> <p> <code>10.50.2789.0.v1</code> (supported for all editions, and all AWS regions except us-east-2, ca-central-1, and eu-west-2)</p> </li> </ul> <p> <b>MySQL</b> </p> <ul> <li> <p> <code>5.7.19</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.7.17</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.7.16</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.7.11</code> (supported in all AWS regions)</p> </li> </ul> <p/> <ul> <li> <p> <code>5.6.37</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.6.35</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.6.34</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.6.29</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.6.27</code> (supported in all regions except us-east-2, ca-central-1, eu-west-2)</p> </li> </ul> <p/> <ul> <li> <p> <code>5.5.57</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.5.54</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.5.53</code> (supported in all AWS regions)</p> </li> <li> <p> <code>5.5.46</code> (supported in all AWS regions)</p> </li> </ul> <p> <b>Oracle 12c</b> </p> <ul> <li> <p> <code>12.1.0.2.v9</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v8</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v7</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v6</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v5</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v4</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v3</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v2</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> <li> <p> <code>12.1.0.2.v1</code> (supported for EE in all AWS regions, and SE2 in all AWS regions except us-gov-west-1)</p> </li> </ul> <p> <b>Oracle 11g</b> </p> <ul> <li> <p> <code>11.2.0.4.v13</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v12</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v11</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v10</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v9</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v8</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v7</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v6</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v5</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v4</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v3</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> <li> <p> <code>11.2.0.4.v1</code> (supported for EE, SE1, and SE, in all AWS regions)</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <ul> <li> <p> <b>Version 9.6.x:</b> <code> 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1</code> </p> </li> <li> <p> <b>Version 9.5.x:</b> <code> 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2</code> </p> </li> <li> <p> <b>Version 9.4.x:</b> <code> 9.4.14 | 9.4.12 | 9.4.11 | 9.4.9 | 9.4.7</code> </p> </li> <li> <p> <b>Version 9.3.x:</b> <code> 9.3.19 | 9.3.17 | 9.3.16 | 9.3.14 | 9.3.12</code> </p> </li> </ul>"
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window.</p> <p>Default: <code>true</code> </p>"
+          "documentation": "<p>Indicates that minor engine upgrades are applied automatically to the DB instance during the maintenance window.</p> <p>Default: <code>true</code> </p>"
         },
         "LicenseModel": {
           "shape": "String",
@@ -3315,7 +3315,7 @@
         },
         "PubliclyAccessible": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b> true</p> </li> <li> <p> <b>VPC:</b> false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.</p>"
+          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b> true</p> </li> <li> <p> <b>VPC:</b> false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>"
         },
         "Tags": {
           "shape": "TagList"
@@ -3377,10 +3377,12 @@
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts; otherwise false. </p> <p> You can enable IAM database authentication for the following database engines:</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. Mapping AWS IAM accounts to database accounts is managed by the DB cluster. For more information, see <a>CreateDBCluster</a>.</p> <p> <b>MySQL</b> </p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> </ul> <p>Default: <code>false</code> </p>"
         },
         "EnablePerformanceInsights": {
-          "shape": "BooleanOptional"
+          "shape": "BooleanOptional",
+          "documentation": "<p> True to enable Performance Insights for the DB instance; otherwise false. </p>"
         },
         "PerformanceInsightsKMSKeyId": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
         }
       },
       "documentation": "<p/>"
@@ -3402,11 +3404,11 @@
         },
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p>The compute and memory capacity of the Read Replica. Note that not all instance classes are available in all regions for all DB engines.</p> <p> Valid Values: <code>db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code> </p> <p>Default: Inherits from the source DB instance.</p>"
+          "documentation": "<p>The compute and memory capacity of the Read Replica, for example, <code>db.m4.large</code>. Not all DB instance classes are available in all regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the Amazon RDS User Guide. </p> <p>Default: Inherits from the source DB instance.</p>"
         },
         "AvailabilityZone": {
           "shape": "String",
-          "documentation": "<p>The Amazon EC2 Availability Zone that the Read Replica will be created in.</p> <p>Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.</p> <p> Example: <code>us-east-1d</code> </p>"
+          "documentation": "<p>The Amazon EC2 Availability Zone that the Read Replica is created in.</p> <p>Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.</p> <p> Example: <code>us-east-1d</code> </p>"
         },
         "Port": {
           "shape": "IntegerOptional",
@@ -3414,7 +3416,7 @@
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates that minor engine upgrades will be applied automatically to the Read Replica during the maintenance window.</p> <p>Default: Inherits from the source DB instance</p>"
+          "documentation": "<p>Indicates that minor engine upgrades are applied automatically to the Read Replica during the maintenance window.</p> <p>Default: Inherits from the source DB instance</p>"
         },
         "Iops": {
           "shape": "IntegerOptional",
@@ -3422,18 +3424,18 @@
         },
         "OptionGroupName": {
           "shape": "String",
-          "documentation": "<p>The option group the DB instance will be associated with. If omitted, the default option group for the engine specified will be used.</p>"
+          "documentation": "<p>The option group the DB instance is associated with. If omitted, the default option group for the engine specified is used.</p>"
         },
         "PubliclyAccessible": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.</p>"
+          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>"
         },
         "Tags": {
           "shape": "TagList"
         },
         "DBSubnetGroupName": {
           "shape": "String",
-          "documentation": "<p>Specifies a DB subnet group for the DB instance. The new DB instance will be created in the VPC associated with the DB subnet group. If no DB subnet group is specified, then the new DB instance is not created in a VPC.</p> <p>Constraints:</p> <ul> <li> <p>Can only be specified if the source DB instance identifier specifies a DB instance in another AWS Region.</p> </li> <li> <p>If supplied, must match the name of an existing DBSubnetGroup.</p> </li> <li> <p>The specified DB subnet group must be in the same AWS Region in which the operation is running.</p> </li> <li> <p>All Read Replicas in one AWS Region that are created from the same source DB instance must either:&gt;</p> <ul> <li> <p>Specify DB subnet groups from the same VPC. All these Read Replicas will be created in the same VPC.</p> </li> <li> <p>Not specify a DB subnet group. All these Read Replicas will be created outside of any VPC.</p> </li> </ul> </li> </ul> <p>Example: <code>mySubnetgroup</code> </p>"
+          "documentation": "<p>Specifies a DB subnet group for the DB instance. The new DB instance is created in the VPC associated with the DB subnet group. If no DB subnet group is specified, then the new DB instance is not created in a VPC.</p> <p>Constraints:</p> <ul> <li> <p>Can only be specified if the source DB instance identifier specifies a DB instance in another AWS Region.</p> </li> <li> <p>If supplied, must match the name of an existing DBSubnetGroup.</p> </li> <li> <p>The specified DB subnet group must be in the same AWS Region in which the operation is running.</p> </li> <li> <p>All Read Replicas in one AWS Region that are created from the same source DB instance must either:&gt;</p> <ul> <li> <p>Specify DB subnet groups from the same VPC. All these Read Replicas are created in the same VPC.</p> </li> <li> <p>Not specify a DB subnet group. All these Read Replicas are created outside of any VPC.</p> </li> </ul> </li> </ul> <p>Example: <code>mySubnetgroup</code> </p>"
         },
         "StorageType": {
           "shape": "String",
@@ -3457,17 +3459,19 @@
         },
         "PreSignedUrl": {
           "shape": "String",
-          "documentation": "<p>The URL that contains a Signature Version 4 signed request for the <code>CreateDBInstanceReadReplica</code> API action in the source AWS Region that contains the source DB instance. </p> <p>You must specify this parameter when you create an encrypted Read Replica from another AWS Region by using the Amazon RDS API. You can specify the source region option instead of this parameter when you create an encrypted Read Replica from another AWS Region by using the AWS CLI. </p> <p>The presigned URL must be a valid request for the <code>CreateDBInstanceReadReplica</code> API action that can be executed in the source AWS Region that contains the encrypted source DB instance. The presigned URL request must contain the following parameter values: </p> <ul> <li> <p> <code>DestinationRegion</code> - The AWS Region that the encrypted Read Replica will be created in. This AWS Region is the same one where the <code>CreateDBInstanceReadReplica</code> action is called that contains this presigned URL. </p> <p>For example, if you create an encrypted DB instance in the us-west-1 region, from a source DB instance in the us-east-2 region, then you call the <code>CreateDBInstanceReadReplica</code> action in the us-east-1 region and provide a presigned URL that contains a call to the <code>CreateDBInstanceReadReplica</code> action in the us-west-2 region. For this example, the <code>DestinationRegion</code> in the presigned URL must be set to the us-east-1 region. </p> </li> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the Read Replica in the destination AWS Region. This is the same identifier for both the <code>CreateDBInstanceReadReplica</code> action that is called in the destination AWS Region, and the action contained in the presigned URL. </p> </li> <li> <p> <code>SourceDBInstanceIdentifier</code> - The DB instance identifier for the encrypted DB instance to be replicated. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are creating an encrypted Read Replica from a DB instance in the us-west-2 region, then your <code>SourceDBInstanceIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115</code>. </p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\">Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>. </p><note><p>If you supply a value for this operation's <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>"
+          "documentation": "<p>The URL that contains a Signature Version 4 signed request for the <code>CreateDBInstanceReadReplica</code> API action in the source AWS Region that contains the source DB instance. </p> <p>You must specify this parameter when you create an encrypted Read Replica from another AWS Region by using the Amazon RDS API. You can specify the source region option instead of this parameter when you create an encrypted Read Replica from another AWS Region by using the AWS CLI. </p> <p>The presigned URL must be a valid request for the <code>CreateDBInstanceReadReplica</code> API action that can be executed in the source AWS Region that contains the encrypted source DB instance. The presigned URL request must contain the following parameter values: </p> <ul> <li> <p> <code>DestinationRegion</code> - The AWS Region that the encrypted Read Replica is created in. This AWS Region is the same one where the <code>CreateDBInstanceReadReplica</code> action is called that contains this presigned URL. </p> <p>For example, if you create an encrypted DB instance in the us-west-1 region, from a source DB instance in the us-east-2 region, then you call the <code>CreateDBInstanceReadReplica</code> action in the us-east-1 region and provide a presigned URL that contains a call to the <code>CreateDBInstanceReadReplica</code> action in the us-west-2 region. For this example, the <code>DestinationRegion</code> in the presigned URL must be set to the us-east-1 region. </p> </li> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the Read Replica in the destination AWS Region. This is the same identifier for both the <code>CreateDBInstanceReadReplica</code> action that is called in the destination AWS Region, and the action contained in the presigned URL. </p> </li> <li> <p> <code>SourceDBInstanceIdentifier</code> - The DB instance identifier for the encrypted DB instance to be replicated. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are creating an encrypted Read Replica from a DB instance in the us-west-2 region, then your <code>SourceDBInstanceIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115</code>. </p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\">Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>. </p><note><p>If you supply a value for this operation's <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>"
         },
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts; otherwise false.</p> <p>You can enable IAM database authentication for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher.</p> </li> </ul> <p>Default: <code>false</code> </p>"
         },
         "EnablePerformanceInsights": {
-          "shape": "BooleanOptional"
+          "shape": "BooleanOptional",
+          "documentation": "<p> True to enable Performance Insights for the read replica; otherwise false. </p>"
         },
         "PerformanceInsightsKMSKeyId": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
         },
         "SourceRegion": {
           "shape": "String",
@@ -3634,7 +3638,7 @@
         },
         "SourceType": {
           "shape": "String",
-          "documentation": "<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. if this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code> </p>"
+          "documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. if this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code> </p>"
         },
         "EventCategories": {
           "shape": "EventCategoriesList",
@@ -3642,7 +3646,7 @@
         },
         "SourceIds": {
           "shape": "SourceIdsList",
-          "documentation": "<p>The list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens.</p> <p>Constraints:</p> <ul> <li> <p>If SourceIds are supplied, SourceType must also be provided.</p> </li> <li> <p>If the source type is a DB instance, then a <code>DBInstanceIdentifier</code> must be supplied.</p> </li> <li> <p>If the source type is a DB security group, a <code>DBSecurityGroupName</code> must be supplied.</p> </li> <li> <p>If the source type is a DB parameter group, a <code>DBParameterGroupName</code> must be supplied.</p> </li> <li> <p>If the source type is a DB snapshot, a <code>DBSnapshotIdentifier</code> must be supplied.</p> </li> </ul>"
+          "documentation": "<p>The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens.</p> <p>Constraints:</p> <ul> <li> <p>If SourceIds are supplied, SourceType must also be provided.</p> </li> <li> <p>If the source type is a DB instance, then a <code>DBInstanceIdentifier</code> must be supplied.</p> </li> <li> <p>If the source type is a DB security group, a <code>DBSecurityGroupName</code> must be supplied.</p> </li> <li> <p>If the source type is a DB parameter group, a <code>DBParameterGroupName</code> must be supplied.</p> </li> <li> <p>If the source type is a DB snapshot, a <code>DBSnapshotIdentifier</code> must be supplied.</p> </li> </ul>"
         },
         "Enabled": {
           "shape": "BooleanOptional",
@@ -3754,7 +3758,7 @@
         },
         "ReaderEndpoint": {
           "shape": "String",
-          "documentation": "<p>The reader endpoint for the DB cluster. The reader endpoint for a DB cluster load-balances connections across the Aurora Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Aurora distributes the connection requests among the Aurora Replicas in the DB cluster. This functionality can help balance your read workload across multiple Aurora Replicas in your DB cluster. </p> <p>If a failover occurs, and the Aurora Replica that you are connected to is promoted to be the primary instance, your connection will be dropped. To continue sending your read workload to other Aurora Replicas in the cluster, you can then reconnect to the reader endpoint.</p>"
+          "documentation": "<p>The reader endpoint for the DB cluster. The reader endpoint for a DB cluster load-balances connections across the Aurora Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Aurora distributes the connection requests among the Aurora Replicas in the DB cluster. This functionality can help balance your read workload across multiple Aurora Replicas in your DB cluster. </p> <p>If a failover occurs, and the Aurora Replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Aurora Replicas in the cluster, you can then reconnect to the reader endpoint.</p>"
         },
         "MultiAZ": {
           "shape": "Boolean",
@@ -4440,11 +4444,11 @@
         },
         "PubliclyAccessible": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.</p>"
+          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>"
         },
         "StatusInfos": {
           "shape": "DBInstanceStatusInfoList",
-          "documentation": "<p>The status of a Read Replica. If the instance is not a Read Replica, this will be blank.</p>"
+          "documentation": "<p>The status of a Read Replica. If the instance is not a Read Replica, this is blank.</p>"
         },
         "StorageType": {
           "shape": "String",
@@ -4515,10 +4519,12 @@
           "documentation": "<p>True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled; otherwise false.</p> <p>IAM database authentication can be enabled for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher. To enable IAM database authentication for Aurora, see DBCluster Type.</p> </li> </ul>"
         },
         "PerformanceInsightsEnabled": {
-          "shape": "BooleanOptional"
+          "shape": "BooleanOptional",
+          "documentation": "<p>True if Performance Insights is enabled for the DB instance; otherwise false.</p>"
         },
         "PerformanceInsightsKMSKeyId": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
         }
       },
       "documentation": "<p>Contains the result of a successful invocation of the following actions:</p> <ul> <li> <p> <a>CreateDBInstance</a> </p> </li> <li> <p> <a>DeleteDBInstance</a> </p> </li> <li> <p> <a>ModifyDBInstance</a> </p> </li> <li> <p> <a>StopDBInstance</a> </p> </li> <li> <p> <a>StartDBInstance</a> </p> </li> </ul> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action.</p>",
@@ -5885,7 +5891,7 @@
       "members": {
         "SourceType": {
           "shape": "String",
-          "documentation": "<p>The type of source that will be generating the events.</p> <p>Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot</p>"
+          "documentation": "<p>The type of source that is generating the events.</p> <p>Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot</p>"
         },
         "Filters": {
           "shape": "FilterList",
@@ -5921,7 +5927,7 @@
       "members": {
         "SourceIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the event source for which events will be returned. If not specified, then all sources are included in the response.</p> <p>Constraints:</p> <ul> <li> <p>If SourceIdentifier is supplied, SourceType must also be provided.</p> </li> <li> <p>If the source type is <code>DBInstance</code>, then a <code>DBInstanceIdentifier</code> must be supplied.</p> </li> <li> <p>If the source type is <code>DBSecurityGroup</code>, a <code>DBSecurityGroupName</code> must be supplied.</p> </li> <li> <p>If the source type is <code>DBParameterGroup</code>, a <code>DBParameterGroupName</code> must be supplied.</p> </li> <li> <p>If the source type is <code>DBSnapshot</code>, a <code>DBSnapshotIdentifier</code> must be supplied.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
+          "documentation": "<p>The identifier of the event source for which events are returned. If not specified, then all sources are included in the response.</p> <p>Constraints:</p> <ul> <li> <p>If SourceIdentifier is supplied, SourceType must also be provided.</p> </li> <li> <p>If the source type is <code>DBInstance</code>, then a <code>DBInstanceIdentifier</code> must be supplied.</p> </li> <li> <p>If the source type is <code>DBSecurityGroup</code>, a <code>DBSecurityGroupName</code> must be supplied.</p> </li> <li> <p>If the source type is <code>DBParameterGroup</code>, a <code>DBParameterGroupName</code> must be supplied.</p> </li> <li> <p>If the source type is <code>DBSnapshot</code>, a <code>DBSnapshotIdentifier</code> must be supplied.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
         },
         "SourceType": {
           "shape": "SourceType",
@@ -5966,7 +5972,7 @@
       "members": {
         "EngineName": {
           "shape": "String",
-          "documentation": "<p>A required parameter. Options available for the given engine name will be described.</p>"
+          "documentation": "<p>A required parameter. Options available for the given engine name are described.</p>"
         },
         "MajorEngineVersion": {
           "shape": "String",
@@ -6255,6 +6261,9 @@
     "Double": {
       "type": "double"
     },
+    "DoubleOptional": {
+      "type": "double"
+    },
     "DoubleRange": {
       "type": "structure",
       "members": {
@@ -6315,7 +6324,7 @@
         },
         "NumberOfLines": {
           "shape": "Integer",
-          "documentation": "<p>The number of lines to download. If the number of lines specified results in a file over 1 MB in size, the file will be truncated at 1 MB in size.</p> <p>If the NumberOfLines parameter is specified, then the block of lines returned can be from the beginning or the end of the log file, depending on the value of the Marker parameter.</p> <ul> <li> <p>If neither Marker or NumberOfLines are specified, the entire log file is returned up to a maximum of 10000 lines, starting with the most recent log entries first.</p> </li> <li> <p>If NumberOfLines is specified and Marker is not specified, then the most recent lines from the end of the log file are returned.</p> </li> <li> <p>If Marker is specified as \"0\", then the specified number of lines from the beginning of the log file are returned.</p> </li> <li> <p>You can download the log file in blocks of lines by specifying the size of the block using the NumberOfLines parameter, and by specifying a value of \"0\" for the Marker parameter in your first request. Include the Marker value returned in the response as the Marker value for the next request, continuing until the AdditionalDataPending response element returns false.</p> </li> </ul>"
+          "documentation": "<p>The number of lines to download. If the number of lines specified results in a file over 1 MB in size, the file is truncated at 1 MB in size.</p> <p>If the NumberOfLines parameter is specified, then the block of lines returned can be from the beginning or the end of the log file, depending on the value of the Marker parameter.</p> <ul> <li> <p>If neither Marker or NumberOfLines are specified, the entire log file is returned up to a maximum of 10000 lines, starting with the most recent log entries first.</p> </li> <li> <p>If NumberOfLines is specified and Marker is not specified, then the most recent lines from the end of the log file are returned.</p> </li> <li> <p>If Marker is specified as \"0\", then the specified number of lines from the beginning of the log file are returned.</p> </li> <li> <p>You can download the log file in blocks of lines by specifying the size of the block using the NumberOfLines parameter, and by specifying a value of \"0\" for the Marker parameter in your first request. Include the Marker value returned in the response as the Marker value for the next request, continuing until the AdditionalDataPending response element returns false.</p> </li> </ul>"
         }
       },
       "documentation": "<p/>"
@@ -7011,11 +7020,11 @@
         },
         "AllocatedStorage": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The new storage capacity of the RDS instance. Changing this setting does not result in an outage and the change is applied during the next maintenance window unless <code>ApplyImmediately</code> is set to <code>true</code> for this request. </p> <p> <b>MySQL</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>MariaDB</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>PostgreSQL</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>Oracle</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 10-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p> <b>SQL Server</b> </p> <p>Cannot be modified.</p> <p>If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance.</p>"
+          "documentation": "<p> The new storage capacity of the RDS instance. Changing this setting does not result in an outage and the change is applied during the next maintenance window unless <code>ApplyImmediately</code> is set to <code>true</code> for this request. </p> <p> <b>MySQL</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>MariaDB</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>PostgreSQL</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 5-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p>Type: Integer</p> <p> <b>Oracle</b> </p> <p>Default: Uses existing setting</p> <p>Valid Values: 10-6144</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p> <p> <b>SQL Server</b> </p> <p>Cannot be modified.</p> <p>If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance is available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance are suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance.</p>"
         },
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p> The new compute and memory capacity of the DB instance. To determine the instance classes that are available for a particular DB engine, use the <a>DescribeOrderableDBInstanceOptions</a> action. Note that not all instance classes are available in all regions for all DB engines. </p> <p> Passing a value for this setting causes an outage during the change and is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code> </p>"
+          "documentation": "<p>The new compute and memory capacity of the DB instance, for example, <code>db.m4.large</code>. Not all DB instance classes are available in all regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the Amazon RDS User Guide. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting</p>"
         },
         "DBSubnetGroupName": {
           "shape": "String",
@@ -7031,7 +7040,7 @@
         },
         "ApplyImmediately": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p> If this parameter is set to <code>false</code>, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and will be applied on the next call to <a>RebootDBInstance</a>, or the next failure reboot. Review the table of parameters in <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html\">Modifying a DB Instance and Using the Apply Immediately Parameter</a> to see the impact that setting <code>ApplyImmediately</code> to <code>true</code> or <code>false</code> has for each modified parameter and to determine when the changes will be applied. </p> <p>Default: <code>false</code> </p>"
+          "documentation": "<p>Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p> If this parameter is set to <code>false</code>, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and are applied on the next call to <a>RebootDBInstance</a>, or the next failure reboot. Review the table of parameters in <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html\">Modifying a DB Instance and Using the Apply Immediately Parameter</a> to see the impact that setting <code>ApplyImmediately</code> to <code>true</code> or <code>false</code> has for each modified parameter and to determine when the changes are applied. </p> <p>Default: <code>false</code> </p>"
         },
         "MasterUserPassword": {
           "shape": "String",
@@ -7067,7 +7076,7 @@
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
-          "documentation": "<p> Indicates that minor version upgrades will be applied automatically to the DB instance during the maintenance window. Changing this parameter does not result in an outage except in the following case and the change is asynchronously applied as soon as possible. An outage will result if this parameter is set to <code>true</code> during the maintenance window, and a newer minor version is available, and RDS has enabled auto patching for that engine version. </p>"
+          "documentation": "<p> Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window. Changing this parameter does not result in an outage except in the following case and the change is asynchronously applied as soon as possible. An outage will result if this parameter is set to <code>true</code> during the maintenance window, and a newer minor version is available, and RDS has enabled auto patching for that engine version. </p>"
         },
         "LicenseModel": {
           "shape": "String",
@@ -7075,7 +7084,7 @@
         },
         "Iops": {
           "shape": "IntegerOptional",
-          "documentation": "<p> The new Provisioned IOPS (I/O operations per second) value for the RDS instance. Changing this setting does not result in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value. If you are migrating from Provisioned IOPS to standard storage, set this value to 0. The DB instance will require a reboot for the change in storage type to take effect.</p> <p> <b>SQL Server</b> </p> <p>Setting the IOPS value for the SQL Server database engine is not supported.</p> <p>Type: Integer</p> <p>If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance will be available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance will be suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance.</p>"
+          "documentation": "<p> The new Provisioned IOPS (I/O operations per second) value for the RDS instance. Changing this setting does not result in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code> for this request. </p> <p>Default: Uses existing setting</p> <p>Constraints: Value supplied must be at least 10% greater than the current value. Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value. If you are migrating from Provisioned IOPS to standard storage, set this value to 0. The DB instance will require a reboot for the change in storage type to take effect.</p> <p> <b>SQL Server</b> </p> <p>Setting the IOPS value for the SQL Server database engine is not supported.</p> <p>Type: Integer</p> <p>If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance is available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance are suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance.</p>"
         },
         "OptionGroupName": {
           "shape": "String",
@@ -7138,10 +7147,12 @@
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts; otherwise false.</p> <p> You can enable IAM database authentication for the following database engines</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. Mapping AWS IAM accounts to database accounts is managed by the DB cluster. For more information, see <a>ModifyDBCluster</a>.</p> <p> <b>MySQL</b> </p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> </ul> <p>Default: <code>false</code> </p>"
         },
         "EnablePerformanceInsights": {
-          "shape": "BooleanOptional"
+          "shape": "BooleanOptional",
+          "documentation": "<p>True to enable Performance Insights for the DB instance; otherwise false.</p>"
         },
         "PerformanceInsightsKMSKeyId": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
         }
       },
       "documentation": "<p/>"
@@ -7280,7 +7291,7 @@
         },
         "SourceType": {
           "shape": "String",
-          "documentation": "<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. if this value is not specified, all events are returned.</p> <p>Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot</p>"
+          "documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. if this value is not specified, all events are returned.</p> <p>Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot</p>"
         },
         "EventCategories": {
           "shape": "EventCategoriesList",
@@ -7767,61 +7778,86 @@
       "members": {
         "Engine": {
           "shape": "String",
-          "documentation": "<p>The engine type of the orderable DB instance.</p>"
+          "documentation": "<p>The engine type of a DB instance.</p>"
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The engine version of the orderable DB instance.</p>"
+          "documentation": "<p>The engine version of a DB instance.</p>"
         },
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p>The DB instance class for the orderable DB instance.</p>"
+          "documentation": "<p>The DB instance class for a DB instance.</p>"
         },
         "LicenseModel": {
           "shape": "String",
-          "documentation": "<p>The license model for the orderable DB instance.</p>"
+          "documentation": "<p>The license model for a DB instance.</p>"
         },
         "AvailabilityZones": {
           "shape": "AvailabilityZoneList",
-          "documentation": "<p>A list of Availability Zones for the orderable DB instance.</p>"
+          "documentation": "<p>A list of Availability Zones for a DB instance.</p>"
         },
         "MultiAZCapable": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether this orderable DB instance is multi-AZ capable.</p>"
+          "documentation": "<p>Indicates whether a DB instance is Multi-AZ capable.</p>"
         },
         "ReadReplicaCapable": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether this orderable DB instance can have a Read Replica.</p>"
+          "documentation": "<p>Indicates whether a DB instance can have a Read Replica.</p>"
         },
         "Vpc": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether this is a VPC orderable DB instance.</p>"
+          "documentation": "<p>Indicates whether a DB instance is in a VPC.</p>"
         },
         "SupportsStorageEncryption": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether this orderable DB instance supports encrypted storage.</p>"
+          "documentation": "<p>Indicates whether a DB instance supports encrypted storage.</p>"
         },
         "StorageType": {
           "shape": "String",
-          "documentation": "<p>Indicates the storage type for this orderable DB instance.</p>"
+          "documentation": "<p>Indicates the storage type for a DB instance.</p>"
         },
         "SupportsIops": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether this orderable DB instance supports provisioned IOPS.</p>"
+          "documentation": "<p>Indicates whether a DB instance supports provisioned IOPS.</p>"
         },
         "SupportsEnhancedMonitoring": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the DB instance supports enhanced monitoring at intervals from 1 to 60 seconds.</p>"
+          "documentation": "<p>Indicates whether a DB instance supports Enhanced Monitoring at intervals from 1 to 60 seconds.</p>"
         },
         "SupportsIAMDatabaseAuthentication": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether this orderable DB instance supports IAM database authentication.</p>"
+          "documentation": "<p>Indicates whether a DB instance supports IAM database authentication.</p>"
         },
         "SupportsPerformanceInsights": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>True if a DB instance supports Performance Insights, otherwise false.</p>"
+        },
+        "MinStorageSize": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Minimum storage size for a DB instance.</p>"
+        },
+        "MaxStorageSize": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Maximum storage size for a DB instance.</p>"
+        },
+        "MinIopsPerDbInstance": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Minimum total provisioned IOPS for a DB instance.</p>"
+        },
+        "MaxIopsPerDbInstance": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Maximum total provisioned IOPS for a DB instance.</p>"
+        },
+        "MinIopsPerGib": {
+          "shape": "DoubleOptional",
+          "documentation": "<p>Minimum provisioned IOPS per GiB for a DB instance.</p>"
+        },
+        "MaxIopsPerGib": {
+          "shape": "DoubleOptional",
+          "documentation": "<p>Maximum provisioned IOPS per GiB for a DB instance.</p>"
         }
       },
-      "documentation": "<p>Contains a list of available options for a DB instance</p> <p> This data type is used as a response element in the <a>DescribeOrderableDBInstanceOptions</a> action. </p>",
+      "documentation": "<p>Contains a list of available options for a DB instance.</p> <p> This data type is used as a response element in the <a>DescribeOrderableDBInstanceOptions</a> action. </p>",
       "wrapper": true
     },
     "OrderableDBInstanceOptionsList": {
@@ -7907,11 +7943,11 @@
         },
         "AutoAppliedAfterDate": {
           "shape": "TStamp",
-          "documentation": "<p>The date of the maintenance window when the action will be applied. The maintenance action will be applied to the resource during its first maintenance window after this date. If this date is specified, any <code>next-maintenance</code> opt-in requests are ignored.</p>"
+          "documentation": "<p>The date of the maintenance window when the action is applied. The maintenance action is applied to the resource during its first maintenance window after this date. If this date is specified, any <code>next-maintenance</code> opt-in requests are ignored.</p>"
         },
         "ForcedApplyDate": {
           "shape": "TStamp",
-          "documentation": "<p>The date when the maintenance action will be automatically applied. The maintenance action will be applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any <code>immediate</code> opt-in requests are ignored.</p>"
+          "documentation": "<p>The date when the maintenance action is automatically applied. The maintenance action is applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any <code>immediate</code> opt-in requests are ignored.</p>"
         },
         "OptInStatus": {
           "shape": "String",
@@ -7919,7 +7955,7 @@
         },
         "CurrentApplyDate": {
           "shape": "TStamp",
-          "documentation": "<p>The effective date when the pending maintenance action will be applied to the resource. This date takes into account opt-in requests received from the <a>ApplyPendingMaintenanceAction</a> API, the <code>AutoAppliedAfterDate</code>, and the <code>ForcedApplyDate</code>. This value is blank if an opt-in request has not been received and nothing has been specified as <code>AutoAppliedAfterDate</code> or <code>ForcedApplyDate</code>.</p>"
+          "documentation": "<p>The effective date when the pending maintenance action is applied to the resource. This date takes into account opt-in requests received from the <a>ApplyPendingMaintenanceAction</a> API, the <code>AutoAppliedAfterDate</code>, and the <code>ForcedApplyDate</code>. This value is blank if an opt-in request has not been received and nothing has been specified as <code>AutoAppliedAfterDate</code> or <code>ForcedApplyDate</code>.</p>"
         },
         "Description": {
           "shape": "String",
@@ -7961,15 +7997,15 @@
       "members": {
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p> Contains the new <code>DBInstanceClass</code> for the DB instance that will be applied or is in progress. </p>"
+          "documentation": "<p> Contains the new <code>DBInstanceClass</code> for the DB instance that will be applied or is currently being applied. </p>"
         },
         "AllocatedStorage": {
           "shape": "IntegerOptional",
-          "documentation": "<p> Contains the new <code>AllocatedStorage</code> size for the DB instance that will be applied or is in progress. </p>"
+          "documentation": "<p> Contains the new <code>AllocatedStorage</code> size for the DB instance that will be applied or is currently being applied. </p>"
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>Contains the pending or in-progress change of the master credentials for the DB instance.</p>"
+          "documentation": "<p>Contains the pending or currently-in-progress change of the master credentials for the DB instance.</p>"
         },
         "Port": {
           "shape": "IntegerOptional",
@@ -7993,11 +8029,11 @@
         },
         "Iops": {
           "shape": "IntegerOptional",
-          "documentation": "<p>Specifies the new Provisioned IOPS value for the DB instance that will be applied or is being applied.</p>"
+          "documentation": "<p>Specifies the new Provisioned IOPS value for the DB instance that will be applied or is currently being applied.</p>"
         },
         "DBInstanceIdentifier": {
           "shape": "String",
-          "documentation": "<p> Contains the new <code>DBInstanceIdentifier</code> for the DB instance that will be applied or is in progress. </p>"
+          "documentation": "<p> Contains the new <code>DBInstanceIdentifier</code> for the DB instance that will be applied or is currently being applied. </p>"
         },
         "StorageType": {
           "shape": "String",
@@ -8176,7 +8212,7 @@
         },
         "ForceFailover": {
           "shape": "BooleanOptional",
-          "documentation": "<p> When <code>true</code>, the reboot will be conducted through a MultiAZ failover. </p> <p>Constraint: You cannot specify <code>true</code> if the instance is not configured for MultiAZ.</p>"
+          "documentation": "<p> When <code>true</code>, the reboot is conducted through a MultiAZ failover. </p> <p>Constraint: You cannot specify <code>true</code> if the instance is not configured for MultiAZ.</p>"
         }
       },
       "documentation": "<p/>"
@@ -8263,7 +8299,7 @@
       "members": {
         "ResourceName": {
           "shape": "String",
-          "documentation": "<p>The Amazon RDS resource the tags will be removed from. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
+          "documentation": "<p>The Amazon RDS resource that the tags are removed from. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an RDS Amazon Resource Name (ARN)</a>.</p>"
         },
         "TagKeys": {
           "shape": "KeyList",
@@ -8575,7 +8611,7 @@
         },
         "DBClusterParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the DB cluster parameter group to associate with the restored DB cluster. If this argument is omitted, <code>default.aurora5.6</code> will be used. </p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBClusterParameterGroup.</p> </li> </ul>"
+          "documentation": "<p>The name of the DB cluster parameter group to associate with the restored DB cluster. If this argument is omitted, <code>default.aurora5.6</code> is used. </p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBClusterParameterGroup.</p> </li> </ul>"
         },
         "VpcSecurityGroupIds": {
           "shape": "VpcSecurityGroupIdList",
@@ -8781,7 +8817,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>You can restore to a new DB cluster and encrypt the new DB cluster with a KMS key that is different than the KMS key used to encrypt the source DB cluster. The new DB cluster will be encrypted with the KMS key identified by the <code>KmsKeyId</code> parameter.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following will occur:</p> <ul> <li> <p>If the DB cluster is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the source DB cluster.</p> </li> <li> <p>If the DB cluster is not encrypted, then the restored DB cluster is not encrypted.</p> </li> </ul> <p>If <code>DBClusterIdentifier</code> refers to a DB cluster that is not encrypted, then the restore request is rejected.</p>"
+          "documentation": "<p>The KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>You can restore to a new DB cluster and encrypt the new DB cluster with a KMS key that is different than the KMS key used to encrypt the source DB cluster. The new DB cluster is encrypted with the KMS key identified by the <code>KmsKeyId</code> parameter.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following will occur:</p> <ul> <li> <p>If the DB cluster is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the source DB cluster.</p> </li> <li> <p>If the DB cluster is not encrypted, then the restored DB cluster is not encrypted.</p> </li> </ul> <p>If <code>DBClusterIdentifier</code> refers to a DB cluster that is not encrypted, then the restore request is rejected.</p>"
         },
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
@@ -8815,7 +8851,7 @@
         },
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p>The compute and memory capacity of the Amazon RDS DB instance.</p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code> </p>"
+          "documentation": "<p>The compute and memory capacity of the Amazon RDS DB instance, for example, <code>db.m4.large</code>. Not all DB instance classes are available in all regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the Amazon RDS User Guide. </p> <p>Default: The same DBInstanceClass as the original DB instance.</p>"
         },
         "Port": {
           "shape": "IntegerOptional",
@@ -8823,7 +8859,7 @@
         },
         "AvailabilityZone": {
           "shape": "String",
-          "documentation": "<p>The EC2 Availability Zone that the database instance will be created in.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Constraint: You cannot specify the AvailabilityZone parameter if the MultiAZ parameter is set to <code>true</code>.</p> <p>Example: <code>us-east-1a</code> </p>"
+          "documentation": "<p>The EC2 Availability Zone that the database instance is created in.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Constraint: You cannot specify the AvailabilityZone parameter if the MultiAZ parameter is set to <code>true</code>.</p> <p>Example: <code>us-east-1a</code> </p>"
         },
         "DBSubnetGroupName": {
           "shape": "String",
@@ -8835,11 +8871,11 @@
         },
         "PubliclyAccessible": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b> true</p> </li> <li> <p> <b>VPC:</b> false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.</p>"
+          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b> true</p> </li> <li> <p> <b>VPC:</b> false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>"
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates that minor version upgrades will be applied automatically to the DB instance during the maintenance window.</p>"
+          "documentation": "<p>Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window.</p>"
         },
         "LicenseModel": {
           "shape": "String",
@@ -8855,7 +8891,7 @@
         },
         "Iops": {
           "shape": "IntegerOptional",
-          "documentation": "<p>Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O operations per second. If this parameter is not specified, the IOPS value will be taken from the backup. If this parameter is set to 0, the new instance will be converted to a non-PIOPS instance, which will take additional time, though your DB instance will be available for connections before the conversion starts.</p> <p>Constraints: Must be an integer greater than 1000.</p> <p> <b>SQL Server</b> </p> <p>Setting the IOPS value for the SQL Server database engine is not supported.</p>"
+          "documentation": "<p>Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O operations per second. If this parameter is not specified, the IOPS value is taken from the backup. If this parameter is set to 0, the new instance is converted to a non-PIOPS instance. The conversion takes additional time, though your DB instance is available for connections before the conversion starts. </p> <p>The provisioned IOPS value must follow the requirements for your database engine. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS\">Amazon RDS Provisioned IOPS Storage to Improve Performance</a>. </p> <p>Constraints: Must be an integer greater than 1000.</p>"
         },
         "OptionGroupName": {
           "shape": "String",
@@ -8928,7 +8964,7 @@
         },
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p>The compute and memory capacity of the Amazon RDS DB instance.</p> <p>Valid Values: <code>db.t1.micro | db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge | db.m2.2xlarge | db.m2.4xlarge | db.m3.medium | db.m3.large | db.m3.xlarge | db.m3.2xlarge | db.m4.large | db.m4.xlarge | db.m4.2xlarge | db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium | db.t2.large</code> </p> <p>Default: The same DBInstanceClass as the original DB instance.</p>"
+          "documentation": "<p>The compute and memory capacity of the Amazon RDS DB instance, for example, <code>db.m4.large</code>. Not all DB instance classes are available in all regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the Amazon RDS User Guide. </p> <p>Default: The same DBInstanceClass as the original DB instance.</p>"
         },
         "Port": {
           "shape": "IntegerOptional",
@@ -8936,7 +8972,7 @@
         },
         "AvailabilityZone": {
           "shape": "String",
-          "documentation": "<p>The EC2 Availability Zone that the database instance will be created in.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Constraint: You cannot specify the AvailabilityZone parameter if the MultiAZ parameter is set to true.</p> <p>Example: <code>us-east-1a</code> </p>"
+          "documentation": "<p>The EC2 Availability Zone that the database instance is created in.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Constraint: You cannot specify the AvailabilityZone parameter if the MultiAZ parameter is set to true.</p> <p>Example: <code>us-east-1a</code> </p>"
         },
         "DBSubnetGroupName": {
           "shape": "String",
@@ -8948,11 +8984,11 @@
         },
         "PubliclyAccessible": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance will be private.</p>"
+          "documentation": "<p>Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether a VPC has been requested or not. The following list shows the default behavior in each case.</p> <ul> <li> <p> <b>Default VPC:</b>true</p> </li> <li> <p> <b>VPC:</b>false</p> </li> </ul> <p>If no DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is publicly accessible. If a specific DB subnet group has been specified as part of the request and the PubliclyAccessible value has not been set, the DB instance is private.</p>"
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates that minor version upgrades will be applied automatically to the DB instance during the maintenance window.</p>"
+          "documentation": "<p>Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window.</p>"
         },
         "LicenseModel": {
           "shape": "String",
@@ -9396,11 +9432,11 @@
         },
         "AutoUpgrade": {
           "shape": "Boolean",
-          "documentation": "<p>A value that indicates whether the target version will be applied to any source DB instances that have AutoMinorVersionUpgrade set to true.</p>"
+          "documentation": "<p>A value that indicates whether the target version is applied to any source DB instances that have AutoMinorVersionUpgrade set to true.</p>"
         },
         "IsMajorVersionUpgrade": {
           "shape": "Boolean",
-          "documentation": "<p>A value that indicates whether a database engine will be upgraded to a major version.</p>"
+          "documentation": "<p>A value that indicates whether a database engine is upgraded to a major version.</p>"
         }
       },
       "documentation": "<p>The version of the database engine that a DB instance can be upgraded to.</p>"

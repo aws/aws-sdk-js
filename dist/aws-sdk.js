@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.146.0
+// AWS SDK for JavaScript v2.147.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -82454,6 +82454,24 @@ module.exports={
                 },
                 "SupportsPerformanceInsights": {
                   "type": "boolean"
+                },
+                "MinStorageSize": {
+                  "type": "integer"
+                },
+                "MaxStorageSize": {
+                  "type": "integer"
+                },
+                "MinIopsPerDbInstance": {
+                  "type": "integer"
+                },
+                "MaxIopsPerDbInstance": {
+                  "type": "integer"
+                },
+                "MinIopsPerGib": {
+                  "type": "double"
+                },
+                "MaxIopsPerGib": {
+                  "type": "double"
                 }
               },
               "wrapper": true
@@ -82522,7 +82540,7 @@ module.exports={
           "ReservedDBInstances": {
             "type": "list",
             "member": {
-              "shape": "S6a",
+              "shape": "S6b",
               "locationName": "ReservedDBInstance"
             }
           }
@@ -82579,7 +82597,7 @@ module.exports={
                   "type": "boolean"
                 },
                 "RecurringCharges": {
-                  "shape": "S6c"
+                  "shape": "S6d"
                 }
               },
               "wrapper": true
@@ -82647,10 +82665,10 @@ module.exports={
                   "members": {
                     "StorageType": {},
                     "StorageSize": {
-                      "shape": "S6r"
+                      "shape": "S6s"
                     },
                     "ProvisionedIops": {
-                      "shape": "S6r"
+                      "shape": "S6s"
                     },
                     "IopsToStorageRatio": {
                       "type": "list",
@@ -82801,7 +82819,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S74",
+        "shape": "S75",
         "resultWrapper": "ModifyDBClusterParameterGroupResult"
       }
     },
@@ -82934,7 +82952,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S7a",
+        "shape": "S7b",
         "resultWrapper": "ModifyDBParameterGroupResult"
       }
     },
@@ -83164,7 +83182,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ReservedDBInstance": {
-            "shape": "S6a"
+            "shape": "S6b"
           }
         }
       }
@@ -83260,7 +83278,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S74",
+        "shape": "S75",
         "resultWrapper": "ResetDBClusterParameterGroupResult"
       }
     },
@@ -83281,7 +83299,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S7a",
+        "shape": "S7b",
         "resultWrapper": "ResetDBParameterGroupResult"
       }
     },
@@ -84386,7 +84404,7 @@ module.exports={
       },
       "wrapper": true
     },
-    "S6a": {
+    "S6b": {
       "type": "structure",
       "members": {
         "ReservedDBInstanceId": {},
@@ -84415,13 +84433,13 @@ module.exports={
         },
         "State": {},
         "RecurringCharges": {
-          "shape": "S6c"
+          "shape": "S6d"
         },
         "ReservedDBInstanceArn": {}
       },
       "wrapper": true
     },
-    "S6c": {
+    "S6d": {
       "type": "list",
       "member": {
         "locationName": "RecurringCharge",
@@ -84435,7 +84453,7 @@ module.exports={
         "wrapper": true
       }
     },
-    "S6r": {
+    "S6s": {
       "type": "list",
       "member": {
         "locationName": "Range",
@@ -84453,13 +84471,13 @@ module.exports={
         }
       }
     },
-    "S74": {
+    "S75": {
       "type": "structure",
       "members": {
         "DBClusterParameterGroupName": {}
       }
     },
-    "S7a": {
+    "S7b": {
       "type": "structure",
       "members": {
         "DBParameterGroupName": {}
@@ -91439,6 +91457,7 @@ module.exports={
     "protocol": "rest-xml",
     "serviceAbbreviation": "Amazon S3",
     "serviceFullName": "Amazon Simple Storage Service",
+    "serviceId": "S3",
     "signatureVersion": "s3",
     "timestampFormat": "rfc822",
     "uid": "s3-2006-03-01"
@@ -92047,6 +92066,24 @@ module.exports={
         }
       }
     },
+    "DeleteBucketEncryption": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/{Bucket}?encryption"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Bucket"
+        ],
+        "members": {
+          "Bucket": {
+            "location": "uri",
+            "locationName": "Bucket"
+          }
+        }
+      }
+    },
     "DeleteBucketInventoryConfiguration": {
       "http": {
         "method": "DELETE",
@@ -92413,10 +92450,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Owner": {
-            "shape": "S2u"
+            "shape": "S2v"
           },
           "Grants": {
-            "shape": "S2x",
+            "shape": "S2y",
             "locationName": "AccessControlList"
           }
         }
@@ -92448,7 +92485,7 @@ module.exports={
         "type": "structure",
         "members": {
           "AnalyticsConfiguration": {
-            "shape": "S36"
+            "shape": "S37"
           }
         },
         "payload": "AnalyticsConfiguration"
@@ -92475,10 +92512,37 @@ module.exports={
         "type": "structure",
         "members": {
           "CORSRules": {
-            "shape": "S3m",
+            "shape": "S3n",
             "locationName": "CORSRule"
           }
         }
+      }
+    },
+    "GetBucketEncryption": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/{Bucket}?encryption"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Bucket"
+        ],
+        "members": {
+          "Bucket": {
+            "location": "uri",
+            "locationName": "Bucket"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ServerSideEncryptionConfiguration": {
+            "shape": "S40"
+          }
+        },
+        "payload": "ServerSideEncryptionConfiguration"
       }
     },
     "GetBucketInventoryConfiguration": {
@@ -92507,7 +92571,7 @@ module.exports={
         "type": "structure",
         "members": {
           "InventoryConfiguration": {
-            "shape": "S3z"
+            "shape": "S46"
           }
         },
         "payload": "InventoryConfiguration"
@@ -92534,7 +92598,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rules": {
-            "shape": "S4c",
+            "shape": "S4m",
             "locationName": "Rule"
           }
         }
@@ -92562,7 +92626,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Rules": {
-            "shape": "S4r",
+            "shape": "S51",
             "locationName": "Rule"
           }
         }
@@ -92613,7 +92677,7 @@ module.exports={
         "type": "structure",
         "members": {
           "LoggingEnabled": {
-            "shape": "S51"
+            "shape": "S5b"
           }
         }
       }
@@ -92644,7 +92708,7 @@ module.exports={
         "type": "structure",
         "members": {
           "MetricsConfiguration": {
-            "shape": "S59"
+            "shape": "S5j"
           }
         },
         "payload": "MetricsConfiguration"
@@ -92656,10 +92720,10 @@ module.exports={
         "requestUri": "/{Bucket}?notification"
       },
       "input": {
-        "shape": "S5c"
+        "shape": "S5m"
       },
       "output": {
-        "shape": "S5d"
+        "shape": "S5n"
       },
       "deprecated": true
     },
@@ -92669,10 +92733,10 @@ module.exports={
         "requestUri": "/{Bucket}?notification"
       },
       "input": {
-        "shape": "S5c"
+        "shape": "S5m"
       },
       "output": {
-        "shape": "S5o"
+        "shape": "S5y"
       }
     },
     "GetBucketPolicy": {
@@ -92721,7 +92785,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ReplicationConfiguration": {
-            "shape": "S67"
+            "shape": "S6h"
           }
         },
         "payload": "ReplicationConfiguration"
@@ -92775,7 +92839,7 @@ module.exports={
         ],
         "members": {
           "TagSet": {
-            "shape": "S3c"
+            "shape": "S3d"
           }
         }
       }
@@ -92828,16 +92892,16 @@ module.exports={
         "type": "structure",
         "members": {
           "RedirectAllRequestsTo": {
-            "shape": "S6o"
+            "shape": "S75"
           },
           "IndexDocument": {
-            "shape": "S6r"
+            "shape": "S78"
           },
           "ErrorDocument": {
-            "shape": "S6t"
+            "shape": "S7a"
           },
           "RoutingRules": {
-            "shape": "S6u"
+            "shape": "S7b"
           }
         }
       }
@@ -93099,10 +93163,10 @@ module.exports={
         "type": "structure",
         "members": {
           "Owner": {
-            "shape": "S2u"
+            "shape": "S2v"
           },
           "Grants": {
-            "shape": "S2x",
+            "shape": "S2y",
             "locationName": "AccessControlList"
           },
           "RequestCharged": {
@@ -93149,7 +93213,7 @@ module.exports={
             "locationName": "x-amz-version-id"
           },
           "TagSet": {
-            "shape": "S3c"
+            "shape": "S3d"
           }
         }
       }
@@ -93430,7 +93494,7 @@ module.exports={
             "locationName": "AnalyticsConfiguration",
             "type": "list",
             "member": {
-              "shape": "S36"
+              "shape": "S37"
             },
             "flattened": true
           }
@@ -93466,7 +93530,7 @@ module.exports={
             "locationName": "InventoryConfiguration",
             "type": "list",
             "member": {
-              "shape": "S3z"
+              "shape": "S46"
             },
             "flattened": true
           },
@@ -93510,7 +93574,7 @@ module.exports={
             "locationName": "MetricsConfiguration",
             "type": "list",
             "member": {
-              "shape": "S59"
+              "shape": "S5j"
             },
             "flattened": true
           }
@@ -93538,7 +93602,7 @@ module.exports={
             }
           },
           "Owner": {
-            "shape": "S2u"
+            "shape": "S2v"
           }
         }
       },
@@ -93615,17 +93679,17 @@ module.exports={
                 },
                 "StorageClass": {},
                 "Owner": {
-                  "shape": "S2u"
+                  "shape": "S2v"
                 },
                 "Initiator": {
-                  "shape": "S8q"
+                  "shape": "S97"
                 }
               }
             },
             "flattened": true
           },
           "CommonPrefixes": {
-            "shape": "S8r"
+            "shape": "S98"
           },
           "EncodingType": {}
         }
@@ -93703,7 +93767,7 @@ module.exports={
                   "type": "timestamp"
                 },
                 "Owner": {
-                  "shape": "S2u"
+                  "shape": "S2v"
                 }
               }
             },
@@ -93716,7 +93780,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "Owner": {
-                  "shape": "S2u"
+                  "shape": "S2v"
                 },
                 "Key": {},
                 "VersionId": {},
@@ -93737,7 +93801,7 @@ module.exports={
             "type": "integer"
           },
           "CommonPrefixes": {
-            "shape": "S8r"
+            "shape": "S98"
           },
           "EncodingType": {}
         }
@@ -93795,7 +93859,7 @@ module.exports={
           "Marker": {},
           "NextMarker": {},
           "Contents": {
-            "shape": "S99"
+            "shape": "S9q"
           },
           "Name": {},
           "Prefix": {},
@@ -93804,7 +93868,7 @@ module.exports={
             "type": "integer"
           },
           "CommonPrefixes": {
-            "shape": "S8r"
+            "shape": "S98"
           },
           "EncodingType": {}
         }
@@ -93869,7 +93933,7 @@ module.exports={
             "type": "boolean"
           },
           "Contents": {
-            "shape": "S99"
+            "shape": "S9q"
           },
           "Name": {},
           "Prefix": {},
@@ -93878,7 +93942,7 @@ module.exports={
             "type": "integer"
           },
           "CommonPrefixes": {
-            "shape": "S8r"
+            "shape": "S98"
           },
           "EncodingType": {},
           "KeyCount": {
@@ -93979,10 +94043,10 @@ module.exports={
             "flattened": true
           },
           "Initiator": {
-            "shape": "S8q"
+            "shape": "S97"
           },
           "Owner": {
-            "shape": "S2u"
+            "shape": "S2v"
           },
           "StorageClass": {},
           "RequestCharged": {
@@ -94038,7 +94102,7 @@ module.exports={
             "locationName": "x-amz-acl"
           },
           "AccessControlPolicy": {
-            "shape": "S9r",
+            "shape": "Sa8",
             "locationName": "AccessControlPolicy",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -94098,7 +94162,7 @@ module.exports={
             "locationName": "id"
           },
           "AnalyticsConfiguration": {
-            "shape": "S36",
+            "shape": "S37",
             "locationName": "AnalyticsConfiguration",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -94135,7 +94199,7 @@ module.exports={
             ],
             "members": {
               "CORSRules": {
-                "shape": "S3m",
+                "shape": "S3n",
                 "locationName": "CORSRule"
               }
             }
@@ -94146,6 +94210,37 @@ module.exports={
           }
         },
         "payload": "CORSConfiguration"
+      }
+    },
+    "PutBucketEncryption": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/{Bucket}?encryption"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Bucket",
+          "ServerSideEncryptionConfiguration"
+        ],
+        "members": {
+          "Bucket": {
+            "location": "uri",
+            "locationName": "Bucket"
+          },
+          "ContentMD5": {
+            "location": "header",
+            "locationName": "Content-MD5"
+          },
+          "ServerSideEncryptionConfiguration": {
+            "shape": "S40",
+            "locationName": "ServerSideEncryptionConfiguration",
+            "xmlNamespace": {
+              "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
+            }
+          }
+        },
+        "payload": "ServerSideEncryptionConfiguration"
       }
     },
     "PutBucketInventoryConfiguration": {
@@ -94170,7 +94265,7 @@ module.exports={
             "locationName": "id"
           },
           "InventoryConfiguration": {
-            "shape": "S3z",
+            "shape": "S46",
             "locationName": "InventoryConfiguration",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -94210,7 +94305,7 @@ module.exports={
             ],
             "members": {
               "Rules": {
-                "shape": "S4c",
+                "shape": "S4m",
                 "locationName": "Rule"
               }
             }
@@ -94246,7 +94341,7 @@ module.exports={
             ],
             "members": {
               "Rules": {
-                "shape": "S4r",
+                "shape": "S51",
                 "locationName": "Rule"
               }
             }
@@ -94279,7 +94374,7 @@ module.exports={
             "type": "structure",
             "members": {
               "LoggingEnabled": {
-                "shape": "S51"
+                "shape": "S5b"
               }
             }
           },
@@ -94313,7 +94408,7 @@ module.exports={
             "locationName": "id"
           },
           "MetricsConfiguration": {
-            "shape": "S59",
+            "shape": "S5j",
             "locationName": "MetricsConfiguration",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -94344,7 +94439,7 @@ module.exports={
             "locationName": "Content-MD5"
           },
           "NotificationConfiguration": {
-            "shape": "S5d",
+            "shape": "S5n",
             "locationName": "NotificationConfiguration",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -94372,7 +94467,7 @@ module.exports={
             "locationName": "Bucket"
           },
           "NotificationConfiguration": {
-            "shape": "S5o",
+            "shape": "S5y",
             "locationName": "NotificationConfiguration",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -94402,6 +94497,11 @@ module.exports={
             "location": "header",
             "locationName": "Content-MD5"
           },
+          "ConfirmRemoveSelfBucketAccess": {
+            "location": "header",
+            "locationName": "x-amz-confirm-remove-self-bucket-access",
+            "type": "boolean"
+          },
           "Policy": {}
         },
         "payload": "Policy"
@@ -94428,7 +94528,7 @@ module.exports={
             "locationName": "Content-MD5"
           },
           "ReplicationConfiguration": {
-            "shape": "S67",
+            "shape": "S6h",
             "locationName": "ReplicationConfiguration",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -94496,7 +94596,7 @@ module.exports={
             "locationName": "Content-MD5"
           },
           "Tagging": {
-            "shape": "Sab",
+            "shape": "Sau",
             "locationName": "Tagging",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -94575,16 +94675,16 @@ module.exports={
             "type": "structure",
             "members": {
               "ErrorDocument": {
-                "shape": "S6t"
+                "shape": "S7a"
               },
               "IndexDocument": {
-                "shape": "S6r"
+                "shape": "S78"
               },
               "RedirectAllRequestsTo": {
-                "shape": "S6o"
+                "shape": "S75"
               },
               "RoutingRules": {
-                "shape": "S6u"
+                "shape": "S7b"
               }
             }
           }
@@ -94772,7 +94872,7 @@ module.exports={
             "locationName": "x-amz-acl"
           },
           "AccessControlPolicy": {
-            "shape": "S9r",
+            "shape": "Sa8",
             "locationName": "AccessControlPolicy",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -94861,7 +94961,7 @@ module.exports={
             "locationName": "Content-MD5"
           },
           "Tagging": {
-            "shape": "Sab",
+            "shape": "Sau",
             "locationName": "Tagging",
             "xmlNamespace": {
               "uri": "http://s3.amazonaws.com/doc/2006-03-01/"
@@ -95190,27 +95290,27 @@ module.exports={
       "type": "blob",
       "sensitive": true
     },
-    "S2u": {
+    "S2v": {
       "type": "structure",
       "members": {
         "DisplayName": {},
         "ID": {}
       }
     },
-    "S2x": {
+    "S2y": {
       "type": "list",
       "member": {
         "locationName": "Grant",
         "type": "structure",
         "members": {
           "Grantee": {
-            "shape": "S2z"
+            "shape": "S30"
           },
           "Permission": {}
         }
       }
     },
-    "S2z": {
+    "S30": {
       "type": "structure",
       "required": [
         "Type"
@@ -95230,7 +95330,7 @@ module.exports={
         "uri": "http://www.w3.org/2001/XMLSchema-instance"
       }
     },
-    "S36": {
+    "S37": {
       "type": "structure",
       "required": [
         "Id",
@@ -95243,14 +95343,14 @@ module.exports={
           "members": {
             "Prefix": {},
             "Tag": {
-              "shape": "S39"
+              "shape": "S3a"
             },
             "And": {
               "type": "structure",
               "members": {
                 "Prefix": {},
                 "Tags": {
-                  "shape": "S3c",
+                  "shape": "S3d",
                   "flattened": true,
                   "locationName": "Tag"
                 }
@@ -95296,7 +95396,7 @@ module.exports={
         }
       }
     },
-    "S39": {
+    "S3a": {
       "type": "structure",
       "required": [
         "Key",
@@ -95307,14 +95407,14 @@ module.exports={
         "Value": {}
       }
     },
-    "S3c": {
+    "S3d": {
       "type": "list",
       "member": {
-        "shape": "S39",
+        "shape": "S3a",
         "locationName": "Tag"
       }
     },
-    "S3m": {
+    "S3n": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -95354,7 +95454,37 @@ module.exports={
       },
       "flattened": true
     },
-    "S3z": {
+    "S40": {
+      "type": "structure",
+      "required": [
+        "Rules"
+      ],
+      "members": {
+        "Rules": {
+          "locationName": "Rule",
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "ApplyServerSideEncryptionByDefault": {
+                "type": "structure",
+                "required": [
+                  "SSEAlgorithm"
+                ],
+                "members": {
+                  "SSEAlgorithm": {},
+                  "KMSMasterKeyID": {
+                    "shape": "Sj"
+                  }
+                }
+              }
+            }
+          },
+          "flattened": true
+        }
+      }
+    },
+    "S46": {
       "type": "structure",
       "required": [
         "Destination",
@@ -95380,7 +95510,29 @@ module.exports={
                 "AccountId": {},
                 "Bucket": {},
                 "Format": {},
-                "Prefix": {}
+                "Prefix": {},
+                "Encryption": {
+                  "type": "structure",
+                  "members": {
+                    "SSES3": {
+                      "locationName": "SSE-S3",
+                      "type": "structure",
+                      "members": {}
+                    },
+                    "SSEKMS": {
+                      "locationName": "SSE-KMS",
+                      "type": "structure",
+                      "required": [
+                        "KeyId"
+                      ],
+                      "members": {
+                        "KeyId": {
+                          "shape": "Sj"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -95416,7 +95568,7 @@ module.exports={
         }
       }
     },
-    "S4c": {
+    "S4m": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -95426,32 +95578,32 @@ module.exports={
         ],
         "members": {
           "Expiration": {
-            "shape": "S4e"
+            "shape": "S4o"
           },
           "ID": {},
           "Prefix": {},
           "Status": {},
           "Transition": {
-            "shape": "S4j"
+            "shape": "S4t"
           },
           "NoncurrentVersionTransition": {
-            "shape": "S4l"
+            "shape": "S4v"
           },
           "NoncurrentVersionExpiration": {
-            "shape": "S4m"
+            "shape": "S4w"
           },
           "AbortIncompleteMultipartUpload": {
-            "shape": "S4n"
+            "shape": "S4x"
           }
         }
       },
       "flattened": true
     },
-    "S4e": {
+    "S4o": {
       "type": "structure",
       "members": {
         "Date": {
-          "shape": "S4f"
+          "shape": "S4p"
         },
         "Days": {
           "type": "integer"
@@ -95461,15 +95613,15 @@ module.exports={
         }
       }
     },
-    "S4f": {
+    "S4p": {
       "type": "timestamp",
       "timestampFormat": "iso8601"
     },
-    "S4j": {
+    "S4t": {
       "type": "structure",
       "members": {
         "Date": {
-          "shape": "S4f"
+          "shape": "S4p"
         },
         "Days": {
           "type": "integer"
@@ -95477,7 +95629,7 @@ module.exports={
         "StorageClass": {}
       }
     },
-    "S4l": {
+    "S4v": {
       "type": "structure",
       "members": {
         "NoncurrentDays": {
@@ -95486,7 +95638,7 @@ module.exports={
         "StorageClass": {}
       }
     },
-    "S4m": {
+    "S4w": {
       "type": "structure",
       "members": {
         "NoncurrentDays": {
@@ -95494,7 +95646,7 @@ module.exports={
         }
       }
     },
-    "S4n": {
+    "S4x": {
       "type": "structure",
       "members": {
         "DaysAfterInitiation": {
@@ -95502,7 +95654,7 @@ module.exports={
         }
       }
     },
-    "S4r": {
+    "S51": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -95511,7 +95663,7 @@ module.exports={
         ],
         "members": {
           "Expiration": {
-            "shape": "S4e"
+            "shape": "S4o"
           },
           "ID": {},
           "Prefix": {
@@ -95522,14 +95674,14 @@ module.exports={
             "members": {
               "Prefix": {},
               "Tag": {
-                "shape": "S39"
+                "shape": "S3a"
               },
               "And": {
                 "type": "structure",
                 "members": {
                   "Prefix": {},
                   "Tags": {
-                    "shape": "S3c",
+                    "shape": "S3d",
                     "flattened": true,
                     "locationName": "Tag"
                   }
@@ -95542,7 +95694,7 @@ module.exports={
             "locationName": "Transition",
             "type": "list",
             "member": {
-              "shape": "S4j"
+              "shape": "S4t"
             },
             "flattened": true
           },
@@ -95550,21 +95702,21 @@ module.exports={
             "locationName": "NoncurrentVersionTransition",
             "type": "list",
             "member": {
-              "shape": "S4l"
+              "shape": "S4v"
             },
             "flattened": true
           },
           "NoncurrentVersionExpiration": {
-            "shape": "S4m"
+            "shape": "S4w"
           },
           "AbortIncompleteMultipartUpload": {
-            "shape": "S4n"
+            "shape": "S4x"
           }
         }
       },
       "flattened": true
     },
-    "S51": {
+    "S5b": {
       "type": "structure",
       "members": {
         "TargetBucket": {},
@@ -95575,7 +95727,7 @@ module.exports={
             "type": "structure",
             "members": {
               "Grantee": {
-                "shape": "S2z"
+                "shape": "S30"
               },
               "Permission": {}
             }
@@ -95584,7 +95736,7 @@ module.exports={
         "TargetPrefix": {}
       }
     },
-    "S59": {
+    "S5j": {
       "type": "structure",
       "required": [
         "Id"
@@ -95596,14 +95748,14 @@ module.exports={
           "members": {
             "Prefix": {},
             "Tag": {
-              "shape": "S39"
+              "shape": "S3a"
             },
             "And": {
               "type": "structure",
               "members": {
                 "Prefix": {},
                 "Tags": {
-                  "shape": "S3c",
+                  "shape": "S3d",
                   "flattened": true,
                   "locationName": "Tag"
                 }
@@ -95613,7 +95765,7 @@ module.exports={
         }
       }
     },
-    "S5c": {
+    "S5m": {
       "type": "structure",
       "required": [
         "Bucket"
@@ -95625,7 +95777,7 @@ module.exports={
         }
       }
     },
-    "S5d": {
+    "S5n": {
       "type": "structure",
       "members": {
         "TopicConfiguration": {
@@ -95633,7 +95785,7 @@ module.exports={
           "members": {
             "Id": {},
             "Events": {
-              "shape": "S5g",
+              "shape": "S5q",
               "locationName": "Event"
             },
             "Event": {
@@ -95650,7 +95802,7 @@ module.exports={
               "deprecated": true
             },
             "Events": {
-              "shape": "S5g",
+              "shape": "S5q",
               "locationName": "Event"
             },
             "Queue": {}
@@ -95664,7 +95816,7 @@ module.exports={
               "deprecated": true
             },
             "Events": {
-              "shape": "S5g",
+              "shape": "S5q",
               "locationName": "Event"
             },
             "CloudFunction": {},
@@ -95673,12 +95825,12 @@ module.exports={
         }
       }
     },
-    "S5g": {
+    "S5q": {
       "type": "list",
       "member": {},
       "flattened": true
     },
-    "S5o": {
+    "S5y": {
       "type": "structure",
       "members": {
         "TopicConfigurations": {
@@ -95696,11 +95848,11 @@ module.exports={
                 "locationName": "Topic"
               },
               "Events": {
-                "shape": "S5g",
+                "shape": "S5q",
                 "locationName": "Event"
               },
               "Filter": {
-                "shape": "S5r"
+                "shape": "S61"
               }
             }
           },
@@ -95721,11 +95873,11 @@ module.exports={
                 "locationName": "Queue"
               },
               "Events": {
-                "shape": "S5g",
+                "shape": "S5q",
                 "locationName": "Event"
               },
               "Filter": {
-                "shape": "S5r"
+                "shape": "S61"
               }
             }
           },
@@ -95746,11 +95898,11 @@ module.exports={
                 "locationName": "CloudFunction"
               },
               "Events": {
-                "shape": "S5g",
+                "shape": "S5q",
                 "locationName": "Event"
               },
               "Filter": {
-                "shape": "S5r"
+                "shape": "S61"
               }
             }
           },
@@ -95758,7 +95910,7 @@ module.exports={
         }
       }
     },
-    "S5r": {
+    "S61": {
       "type": "structure",
       "members": {
         "Key": {
@@ -95781,7 +95933,7 @@ module.exports={
         }
       }
     },
-    "S67": {
+    "S6h": {
       "type": "structure",
       "required": [
         "Role",
@@ -95803,6 +95955,20 @@ module.exports={
               "ID": {},
               "Prefix": {},
               "Status": {},
+              "SourceSelectionCriteria": {
+                "type": "structure",
+                "members": {
+                  "SseKmsEncryptedObjects": {
+                    "type": "structure",
+                    "required": [
+                      "Status"
+                    ],
+                    "members": {
+                      "Status": {}
+                    }
+                  }
+                }
+              },
               "Destination": {
                 "type": "structure",
                 "required": [
@@ -95810,7 +95976,23 @@ module.exports={
                 ],
                 "members": {
                   "Bucket": {},
-                  "StorageClass": {}
+                  "Account": {},
+                  "StorageClass": {},
+                  "AccessControlTranslation": {
+                    "type": "structure",
+                    "required": [
+                      "Owner"
+                    ],
+                    "members": {
+                      "Owner": {}
+                    }
+                  },
+                  "EncryptionConfiguration": {
+                    "type": "structure",
+                    "members": {
+                      "ReplicaKmsKeyID": {}
+                    }
+                  }
                 }
               }
             }
@@ -95819,7 +96001,7 @@ module.exports={
         }
       }
     },
-    "S6o": {
+    "S75": {
       "type": "structure",
       "required": [
         "HostName"
@@ -95829,7 +96011,7 @@ module.exports={
         "Protocol": {}
       }
     },
-    "S6r": {
+    "S78": {
       "type": "structure",
       "required": [
         "Suffix"
@@ -95838,7 +96020,7 @@ module.exports={
         "Suffix": {}
       }
     },
-    "S6t": {
+    "S7a": {
       "type": "structure",
       "required": [
         "Key"
@@ -95847,7 +96029,7 @@ module.exports={
         "Key": {}
       }
     },
-    "S6u": {
+    "S7b": {
       "type": "list",
       "member": {
         "locationName": "RoutingRule",
@@ -95876,14 +96058,14 @@ module.exports={
         }
       }
     },
-    "S8q": {
+    "S97": {
       "type": "structure",
       "members": {
         "ID": {},
         "DisplayName": {}
       }
     },
-    "S8r": {
+    "S98": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -95893,7 +96075,7 @@ module.exports={
       },
       "flattened": true
     },
-    "S99": {
+    "S9q": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -95908,32 +96090,32 @@ module.exports={
           },
           "StorageClass": {},
           "Owner": {
-            "shape": "S2u"
+            "shape": "S2v"
           }
         }
       },
       "flattened": true
     },
-    "S9r": {
+    "Sa8": {
       "type": "structure",
       "members": {
         "Grants": {
-          "shape": "S2x",
+          "shape": "S2y",
           "locationName": "AccessControlList"
         },
         "Owner": {
-          "shape": "S2u"
+          "shape": "S2v"
         }
       }
     },
-    "Sab": {
+    "Sau": {
       "type": "structure",
       "required": [
         "TagSet"
       ],
       "members": {
         "TagSet": {
-          "shape": "S3c"
+          "shape": "S3d"
         }
       }
     }
@@ -111146,7 +111328,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.146.0',
+  VERSION: '2.147.0',
 
 
   Signers: {},

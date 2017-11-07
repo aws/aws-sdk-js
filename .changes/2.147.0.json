@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "Added a new limit related to Network Load Balancers on the number of targets per load balancer per AZ."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "DescribeOrderableDBInstanceOptions now returns the minimum and maximum allowed values for storage size, total provisioned IOPS, and provisioned IOPS per GiB for a DB instance."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "This releases adds support for 4 features: 1. Default encryption for S3 Bucket, 2. Encryption status in inventory and Encryption support for inventory.  3. Cross region replication of KMS-encrypted objects, and 4. ownership overwrite for CRR. "
+    }
+]
