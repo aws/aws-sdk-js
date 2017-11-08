@@ -12,11 +12,11 @@ declare class Batch extends Service {
   constructor(options?: Batch.Types.ClientConfiguration)
   config: Config & Batch.Types.ClientConfiguration;
   /**
-   * Cancels jobs in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING, or RUNNABLE state are cancelled. Jobs that have progressed to STARTING or RUNNING are not cancelled (but the API operation still succeeds, even if no jobs are cancelled); these jobs must be terminated with the TerminateJob operation.
+   * Cancels a job in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING, or RUNNABLE state are cancelled. Jobs that have progressed to STARTING or RUNNING are not cancelled (but the API operation still succeeds, even if no job is cancelled); these jobs must be terminated with the TerminateJob operation.
    */
   cancelJob(params: Batch.Types.CancelJobRequest, callback?: (err: AWSError, data: Batch.Types.CancelJobResponse) => void): Request<Batch.Types.CancelJobResponse, AWSError>;
   /**
-   * Cancels jobs in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING, or RUNNABLE state are cancelled. Jobs that have progressed to STARTING or RUNNING are not cancelled (but the API operation still succeeds, even if no jobs are cancelled); these jobs must be terminated with the TerminateJob operation.
+   * Cancels a job in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING, or RUNNABLE state are cancelled. Jobs that have progressed to STARTING or RUNNING are not cancelled (but the API operation still succeeds, even if no job is cancelled); these jobs must be terminated with the TerminateJob operation.
    */
   cancelJob(callback?: (err: AWSError, data: Batch.Types.CancelJobResponse) => void): Request<Batch.Types.CancelJobResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class Batch extends Service {
    */
   submitJob(callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
-   * Terminates jobs in a job queue. Jobs that are in the STARTING or RUNNING state are terminated, which causes them to transition to FAILED. Jobs that have not progressed to the STARTING state are cancelled.
+   * Terminates a job in a job queue. Jobs that are in the STARTING or RUNNING state are terminated, which causes them to transition to FAILED. Jobs that have not progressed to the STARTING state are cancelled.
    */
   terminateJob(params: Batch.Types.TerminateJobRequest, callback?: (err: AWSError, data: Batch.Types.TerminateJobResponse) => void): Request<Batch.Types.TerminateJobResponse, AWSError>;
   /**
-   * Terminates jobs in a job queue. Jobs that are in the STARTING or RUNNING state are terminated, which causes them to transition to FAILED. Jobs that have not progressed to the STARTING state are cancelled.
+   * Terminates a job in a job queue. Jobs that are in the STARTING or RUNNING state are terminated, which causes them to transition to FAILED. Jobs that have not progressed to the STARTING state are cancelled.
    */
   terminateJob(callback?: (err: AWSError, data: Batch.Types.TerminateJobResponse) => void): Request<Batch.Types.TerminateJobResponse, AWSError>;
   /**
@@ -147,7 +147,7 @@ declare namespace Batch {
      */
     containerInstanceArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the job attempt.
+     * The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the job attempt. Each container attempt receives a task ARN when they reach the STARTING status.
      */
     taskArn?: String;
     /**
@@ -189,7 +189,7 @@ declare namespace Batch {
   export type CRType = "EC2"|"SPOT"|string;
   export interface CancelJobRequest {
     /**
-     * A list of up to 100 job IDs to cancel.
+     * The AWS Batch job ID of the job to cancel.
      */
     jobId: String;
     /**
@@ -267,7 +267,7 @@ declare namespace Batch {
      */
     desiredvCpus?: Integer;
     /**
-     * The instances types that may launched.
+     * The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, c4 or p3), or you can specify specific sizes within a family (such as c4.8xlarge). You can also choose optimal to pick instance types (from the latest C, M, and R instance families) on the fly that match the demand of your job queues.
      */
     instanceTypes: StringList;
     /**
@@ -343,7 +343,7 @@ declare namespace Batch {
      */
     volumes?: Volumes;
     /**
-     * The environment variables to pass to a container.
+     * The environment variables to pass to a container.  Environment variables must not start with AWS_BATCH; this naming convention is reserved for variables that are set by the AWS Batch service. 
      */
     environment?: EnvironmentVariables;
     /**
@@ -379,7 +379,7 @@ declare namespace Batch {
      */
     containerInstanceArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job.
+     * The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job. Each container attempt receives a task ARN when they reach the STARTING status.
      */
     taskArn?: String;
     /**
@@ -401,7 +401,7 @@ declare namespace Batch {
      */
     command?: StringList;
     /**
-     * The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.
+     * The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.  Environment variables must not start with AWS_BATCH; this naming convention is reserved for variables that are set by the AWS Batch service. 
      */
     environment?: EnvironmentVariables;
   }
@@ -431,7 +431,7 @@ declare namespace Batch {
      */
     volumes?: Volumes;
     /**
-     * The environment variables to pass to a container. This parameter maps to Env in the Create a container section of the Docker Remote API and the --env option to docker run.  We do not recommend using plain text environment variables for sensitive information, such as credential data. 
+     * The environment variables to pass to a container. This parameter maps to Env in the Create a container section of the Docker Remote API and the --env option to docker run.  We do not recommend using plain text environment variables for sensitive information, such as credential data.   Environment variables must not start with AWS_BATCH; this naming convention is reserved for variables that are set by the AWS Batch service. 
      */
     environment?: EnvironmentVariables;
     /**
@@ -457,7 +457,7 @@ declare namespace Batch {
   }
   export interface CreateComputeEnvironmentRequest {
     /**
-     * The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, and underscores are allowed.
+     * The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
      */
     computeEnvironmentName: String;
     /**
@@ -928,7 +928,7 @@ declare namespace Batch {
   export type TagsMap = {[key: string]: String};
   export interface TerminateJobRequest {
     /**
-     * Job IDs to be terminated. Up to 100 jobs can be specified.
+     * The AWS Batch job ID of the job to terminate.
      */
     jobId: String;
     /**

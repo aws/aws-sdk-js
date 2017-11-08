@@ -23,7 +23,7 @@
         {"shape":"ClientException"},
         {"shape":"ServerException"}
       ],
-      "documentation":"<p>Cancels jobs in an AWS Batch job queue. Jobs that are in the <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled. Jobs that have progressed to <code>STARTING</code> or <code>RUNNING</code> are not cancelled (but the API operation still succeeds, even if no jobs are cancelled); these jobs must be terminated with the <a>TerminateJob</a> operation.</p>"
+      "documentation":"<p>Cancels a job in an AWS Batch job queue. Jobs that are in the <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled. Jobs that have progressed to <code>STARTING</code> or <code>RUNNING</code> are not cancelled (but the API operation still succeeds, even if no job is cancelled); these jobs must be terminated with the <a>TerminateJob</a> operation.</p>"
     },
     "CreateComputeEnvironment":{
       "name":"CreateComputeEnvironment",
@@ -205,7 +205,7 @@
         {"shape":"ClientException"},
         {"shape":"ServerException"}
       ],
-      "documentation":"<p>Terminates jobs in a job queue. Jobs that are in the <code>STARTING</code> or <code>RUNNING</code> state are terminated, which causes them to transition to <code>FAILED</code>. Jobs that have not progressed to the <code>STARTING</code> state are cancelled.</p>"
+      "documentation":"<p>Terminates a job in a job queue. Jobs that are in the <code>STARTING</code> or <code>RUNNING</code> state are terminated, which causes them to transition to <code>FAILED</code>. Jobs that have not progressed to the <code>STARTING</code> state are cancelled.</p>"
     },
     "UpdateComputeEnvironment":{
       "name":"UpdateComputeEnvironment",
@@ -246,7 +246,7 @@
         },
         "taskArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the job attempt.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the job attempt. Each container attempt receives a task ARN when they reach the <code>STARTING</code> status.</p>"
         },
         "exitCode":{
           "shape":"Integer",
@@ -331,7 +331,7 @@
       "members":{
         "jobId":{
           "shape":"String",
-          "documentation":"<p>A list of up to 100 job IDs to cancel.</p>"
+          "documentation":"<p>The AWS Batch job ID of the job to cancel.</p>"
         },
         "reason":{
           "shape":"String",
@@ -456,7 +456,7 @@
         },
         "instanceTypes":{
           "shape":"StringList",
-          "documentation":"<p>The instances types that may launched.</p>"
+          "documentation":"<p>The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, <code>c4</code> or <code>p3</code>), or you can specify specific sizes within a family (such as <code>c4.8xlarge</code>). You can also choose <code>optimal</code> to pick instance types (from the latest C, M, and R instance families) on the fly that match the demand of your job queues.</p>"
         },
         "imageId":{
           "shape":"String",
@@ -540,7 +540,7 @@
         },
         "environment":{
           "shape":"EnvironmentVariables",
-          "documentation":"<p>The environment variables to pass to a container.</p>"
+          "documentation":"<p>The environment variables to pass to a container.</p> <note> <p>Environment variables must not start with <code>AWS_BATCH</code>; this naming convention is reserved for variables that are set by the AWS Batch service.</p> </note>"
         },
         "mountPoints":{
           "shape":"MountPoints",
@@ -576,7 +576,7 @@
         },
         "taskArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job. Each container attempt receives a task ARN when they reach the <code>STARTING</code> status.</p>"
         },
         "logStreamName":{
           "shape":"String",
@@ -602,7 +602,7 @@
         },
         "environment":{
           "shape":"EnvironmentVariables",
-          "documentation":"<p>The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.</p>"
+          "documentation":"<p>The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.</p> <note> <p>Environment variables must not start with <code>AWS_BATCH</code>; this naming convention is reserved for variables that are set by the AWS Batch service.</p> </note>"
         }
       },
       "documentation":"<p>The overrides that should be sent to a container.</p>"
@@ -641,7 +641,7 @@
         },
         "environment":{
           "shape":"EnvironmentVariables",
-          "documentation":"<p>The environment variables to pass to a container. This parameter maps to <code>Env</code> in the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/\">Docker Remote API</a> and the <code>--env</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p> <important> <p>We do not recommend using plain text environment variables for sensitive information, such as credential data.</p> </important>"
+          "documentation":"<p>The environment variables to pass to a container. This parameter maps to <code>Env</code> in the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/\">Docker Remote API</a> and the <code>--env</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p> <important> <p>We do not recommend using plain text environment variables for sensitive information, such as credential data.</p> </important> <note> <p>Environment variables must not start with <code>AWS_BATCH</code>; this naming convention is reserved for variables that are set by the AWS Batch service.</p> </note>"
         },
         "mountPoints":{
           "shape":"MountPoints",
@@ -676,7 +676,7 @@
       "members":{
         "computeEnvironmentName":{
           "shape":"String",
-          "documentation":"<p>The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, and underscores are allowed.</p>"
+          "documentation":"<p>The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.</p>"
         },
         "type":{
           "shape":"CEType",
@@ -1389,7 +1389,7 @@
       "members":{
         "jobId":{
           "shape":"String",
-          "documentation":"<p>Job IDs to be terminated. Up to 100 jobs can be specified.</p>"
+          "documentation":"<p>The AWS Batch job ID of the job to terminate.</p>"
         },
         "reason":{
           "shape":"String",

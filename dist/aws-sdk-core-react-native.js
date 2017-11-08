@@ -80,7 +80,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.147.0',
+	  VERSION: '2.148.0',
 
 	  /**
 	   * @api private
@@ -2220,6 +2220,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'isLocationName', Boolean(shape.locationName), false);
 	  property(this, 'isIdempotent', shape.idempotencyToken === true);
 	  property(this, 'isJsonValue', shape.jsonvalue === true);
+	  property(this, 'isSensitive', shape.sensitive === true || shape.prototype && shape.prototype.sensitive === true);
 
 	  if (options.documentation) {
 	    property(this, 'documentation', shape.documentation);
@@ -12104,14 +12105,57 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var req = resp.request;
 	      var logger = req.service.config.logger;
 	      if (!logger) return;
+	      function filterSensitiveLog(inputShape, shape) {
+	        if (!shape) {
+	          return shape;
+	        }
+	        switch (inputShape.type) {
+	          case 'structure':
+	            var struct = {};
+	            AWS.util.each(shape, function(subShapeName, subShape) {
+	              if (Object.prototype.hasOwnProperty.call(inputShape.members, subShapeName)) {
+	                struct[subShapeName] = filterSensitiveLog(inputShape.members[subShapeName], subShape);
+	              } else {
+	                struct[subShapeName] = subShape;
+	              }
+	            })
+	            return struct
+	          case 'list':
+	            var list = [];
+	            AWS.util.arrayEach(shape, function(subShape, index) {
+	              list.push(filterSensitiveLog(inputShape.member, subShape));
+	            })
+	            return list;
+	          case 'map':
+	            var map = {};
+	            AWS.util.each(shape, function(key, value) {
+	              map[key] = filterSensitiveLog(inputShape.value, value);
+	            })
+	            return map;
+	          default:
+	            if (inputShape.isSensitive) {
+	              return '***SensitiveInformation***'
+	            } else {
+	              return shape;
+	            }
+	        }
+	      }
 
 	      function buildMessage() {
 	        var time = resp.request.service.getSkewCorrectedDate().getTime();
 	        var delta = (time - req.startTime.getTime()) / 1000;
 	        var ansi = logger.isTTY ? true : false;
 	        var status = resp.httpResponse.statusCode;
-	        var params = __webpack_require__(196).inspect(req.params, true, null);
-
+	        var censoredParams = req.params;
+	        if (
+	          req.service.api.operations &&
+	              req.service.api.operations[req.operation] &&
+	              req.service.api.operations[req.operation].input
+	        ) {
+	          var inputShape = req.service.api.operations[req.operation].input;
+	          censoredParams = filterSensitiveLog(inputShape, req.params);
+	        }
+	        var params = __webpack_require__(196).inspect(censoredParams, true, null);
 	        var message = '';
 	        if (ansi) message += '\x1B[33m';
 	        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.147.0-->
+<!--LATEST=2.148.0-->
 <!--ENTRYINSERT-->
+
+## 2.148.0
+* feature: ApplicationAutoScaling: Application Auto Scaling customers are now able to schedule adjustments to their MinCapacity and MaxCapacity, which makes it possible to pre-provision adequate capacity for anticipated demand and then reduce the provisioned capacity as demand lulls.
+* feature: EC2: AWS PrivateLink for Amazon Services - Customers can now privately access Amazon services from their Amazon Virtual Private Cloud (VPC), without using public IPs, and without requiring the traffic to traverse across the Internet.
+* feature: ElastiCache: This release adds online resharding for ElastiCache for Redis offering, providing the ability to add and remove shards from a running cluster. Developers can now dynamically scale-out or scale-in their Redis cluster workloads to adapt to changes in demand. ElastiCache will resize the cluster by adding or removing shards and redistribute hash slots uniformly across the new shard configuration, all while the cluster continues to stay online and serves requests.
+* feature: Logger: Update the request logger to exclude sensitive input parammeters from being logged
 
 ## 2.147.0
 * feature: ELBv2: Added a new limit related to Network Load Balancers on the number of targets per load balancer per AZ.

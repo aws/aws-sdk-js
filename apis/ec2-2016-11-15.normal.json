@@ -579,7 +579,7 @@
       },
       "input":{"shape":"CreateVpcEndpointRequest"},
       "output":{"shape":"CreateVpcEndpointResult"},
-      "documentation":"<p>Creates a VPC endpoint for a specified AWS service. An endpoint enables you to create a private connection between your VPC and another AWS service in your account. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported AWS services.</p>"
+      "documentation":"<p>Creates a VPC endpoint for a specified AWS service. An endpoint enables you to create a private connection between your VPC and another AWS service in your account. You can create a gateway endpoint or an interface endpoint. </p> <p>A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify the VPC route tables that use the endpoint, and you can optionally specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC.</p> <p>An interface endpoint is a network interface in your subnet with a private IP address that serves as an entry point for traffic destined to the AWS service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the network interface.</p>"
     },
     "CreateVpcPeeringConnection":{
       "name":"CreateVpcPeeringConnection",
@@ -831,7 +831,7 @@
       },
       "input":{"shape":"DeleteVpcEndpointsRequest"},
       "output":{"shape":"DeleteVpcEndpointsResult"},
-      "documentation":"<p>Deletes one or more specified VPC endpoints. Deleting the endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint.</p>"
+      "documentation":"<p>Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint deletes the endpoint network interfaces.</p>"
     },
     "DeleteVpcPeeringConnection":{
       "name":"DeleteVpcPeeringConnection",
@@ -977,7 +977,7 @@
       },
       "input":{"shape":"DescribeElasticGpusRequest"},
       "output":{"shape":"DescribeElasticGpusResult"},
-      "documentation":"<p>Describes the Elastic GPUs associated with your instances. For more information about Elastic GPUs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-gpus.html\">Amazon EC2 Elastic GPUs</a>.</p>"
+      "documentation":"<p>Describes the Elastic GPUs associated with your instances. For more information about Elastic GPUs, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-gpus.html\">Amazon EC2 Elastic GPUs</a>.</p>"
     },
     "DescribeExportTasks":{
       "name":"DescribeExportTasks",
@@ -2000,7 +2000,7 @@
       },
       "input":{"shape":"ModifyVpcEndpointRequest"},
       "output":{"shape":"ModifyVpcEndpointResult"},
-      "documentation":"<p>Modifies attributes of a specified VPC endpoint. You can modify the policy associated with the endpoint, and you can add and remove route tables associated with the endpoint.</p>"
+      "documentation":"<p>Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html\">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "ModifyVpcPeeringConnectionOptions":{
       "name":"ModifyVpcPeeringConnectionOptions",
@@ -5235,34 +5235,52 @@
     "CreateVpcEndpointRequest":{
       "type":"structure",
       "required":[
-        "ServiceName",
-        "VpcId"
+        "VpcId",
+        "ServiceName"
       ],
       "members":{
-        "ClientToken":{
-          "shape":"String",
-          "documentation":"<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
-        },
         "DryRun":{
           "shape":"Boolean",
           "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
-        "PolicyDocument":{
-          "shape":"String",
-          "documentation":"<p>A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.</p>"
+        "VpcEndpointType":{
+          "shape":"VpcEndpointType",
+          "documentation":"<p>The type of endpoint. If not specified, the default is a gateway endpoint.</p>"
         },
-        "RouteTableIds":{
-          "shape":"ValueStringList",
-          "documentation":"<p>One or more route table IDs.</p>",
-          "locationName":"RouteTableId"
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC in which the endpoint will be used.</p>"
         },
         "ServiceName":{
           "shape":"String",
           "documentation":"<p>The AWS service name, in the form <code>com.amazonaws.<i>region</i>.<i>service</i> </code>. To get a list of available services, use the <a>DescribeVpcEndpointServices</a> request.</p>"
         },
-        "VpcId":{
+        "PolicyDocument":{
           "shape":"String",
-          "documentation":"<p>The ID of the VPC in which the endpoint will be used.</p>"
+          "documentation":"<p>(Gateway endpoint) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.</p>"
+        },
+        "RouteTableIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Gateway endpoint) One or more route table IDs.</p>",
+          "locationName":"RouteTableId"
+        },
+        "SubnetIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Interface endpoint) The ID of one or more subnets in which to create a network interface for the endpoint.</p>",
+          "locationName":"SubnetId"
+        },
+        "SecurityGroupIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Interface endpoint) The ID of one or more security groups to associate with the network interface.</p>",
+          "locationName":"SecurityGroupId"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "documentation":"<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>"
+        },
+        "PrivateDnsEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>(Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the region (for example, <code>kinesis.us-east-1.amazonaws.com</code>) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service.</p> <p>To use a private hosted zone, you must set the following VPC attributes to <code>true</code>: <code>enableDnsHostnames</code> and <code>enableDnsSupport</code>. Use <a>ModifyVpcAttribute</a> to set the VPC attributes.</p> <p>Default: <code>true</code> </p>"
         }
       },
       "documentation":"<p>Contains the parameters for CreateVpcEndpoint.</p>"
@@ -5270,15 +5288,15 @@
     "CreateVpcEndpointResult":{
       "type":"structure",
       "members":{
-        "ClientToken":{
-          "shape":"String",
-          "documentation":"<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request.</p>",
-          "locationName":"clientToken"
-        },
         "VpcEndpoint":{
           "shape":"VpcEndpoint",
           "documentation":"<p>Information about the endpoint.</p>",
           "locationName":"vpcEndpoint"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "documentation":"<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request.</p>",
+          "locationName":"clientToken"
         }
       },
       "documentation":"<p>Contains the output of CreateVpcEndpoint.</p>"
@@ -6805,7 +6823,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name for the EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - String value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the image owner.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify <code>tag:Purpose</code> for the filter name and <code>X</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name for the EBS volume (for example, <code>/dev/sdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - String value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the image owner.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>sriov-net-support</code> - A value of <code>simple</code> indicates that enhanced networking with the Intel 82599 VF interface is enabled.</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify <code>tag:Purpose</code> for the filter name and <code>X</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
           "locationName":"Filter"
         },
         "ImageIds":{
@@ -7827,7 +7845,7 @@
       "members":{
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p> <ul> <li> <p> <code>description</code> - The description of the security group.</p> </li> <li> <p> <code>egress.ip-permission.prefix-list-id</code> - The ID (prefix) of the AWS service to which the security group allows access.</p> </li> <li> <p> <code>group-id</code> - The ID of the security group. </p> </li> <li> <p> <code>group-name</code> - The name of the security group.</p> </li> <li> <p> <code>ip-permission.cidr</code> - An IPv4 CIDR range that has been granted permission in a security group rule.</p> </li> <li> <p> <code>ip-permission.from-port</code> - The start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>ip-permission.group-id</code> - The ID of a security group that has been granted permission.</p> </li> <li> <p> <code>ip-permission.group-name</code> - The name of a security group that has been granted permission.</p> </li> <li> <p> <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR range that has been granted permission in a security group rule.</p> </li> <li> <p> <code>ip-permission.protocol</code> - The IP protocol for the permission (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>ip-permission.to-port</code> - The end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>ip-permission.user-id</code> - The ID of an AWS account that has been granted permission.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the security group.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the security group.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>",
+          "documentation":"<p>One or more filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p> <ul> <li> <p> <code>description</code> - The description of the security group.</p> </li> <li> <p> <code>egress.ip-permission.cidr</code> - An IPv4 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.from-port</code> - For an outbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>egress.ip-permission.group-id</code> - The ID of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.group-name</code> - The name of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.prefix-list-id</code> - The ID (prefix) of the AWS service to which a security group rule allows outbound access.</p> </li> <li> <p> <code>egress.ip-permission.protocol</code> - The IP protocol for an outbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>egress.ip-permission.to-port</code> - For an outbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>egress.ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>group-id</code> - The ID of the security group. </p> </li> <li> <p> <code>group-name</code> - The name of the security group.</p> </li> <li> <p> <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.from-port</code> - For an inbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>ip-permission.group-id</code> - The ID of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.group-name</code> - The name of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.prefix-list-id</code> - The ID (prefix) of the AWS service from which a security group rule allows inbound access.</p> </li> <li> <p> <code>ip-permission.protocol</code> - The IP protocol for an inbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>ip-permission.to-port</code> - For an inbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the security group.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the security group.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>",
           "locationName":"Filter"
         },
         "GroupIds":{
@@ -8669,6 +8687,16 @@
           "shape":"Boolean",
           "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
+        "ServiceNames":{
+          "shape":"ValueStringList",
+          "documentation":"<p>One or more service names.</p>",
+          "locationName":"ServiceName"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> </ul>",
+          "locationName":"Filter"
+        },
         "MaxResults":{
           "shape":"Integer",
           "documentation":"<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>"
@@ -8683,15 +8711,20 @@
     "DescribeVpcEndpointServicesResult":{
       "type":"structure",
       "members":{
-        "NextToken":{
-          "shape":"String",
-          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>",
-          "locationName":"nextToken"
-        },
         "ServiceNames":{
           "shape":"ValueStringList",
           "documentation":"<p>A list of supported AWS services.</p>",
           "locationName":"serviceNameSet"
+        },
+        "ServiceDetails":{
+          "shape":"ServiceDetailSet",
+          "documentation":"<p>Information about the service.</p>",
+          "locationName":"serviceDetailSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>",
+          "locationName":"nextToken"
         }
       },
       "documentation":"<p>Contains the output of DescribeVpcEndpointServices.</p>"
@@ -8702,6 +8735,11 @@
         "DryRun":{
           "shape":"Boolean",
           "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "VpcEndpointIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>One or more endpoint IDs.</p>",
+          "locationName":"VpcEndpointId"
         },
         "Filters":{
           "shape":"FilterList",
@@ -8715,11 +8753,6 @@
         "NextToken":{
           "shape":"String",
           "documentation":"<p>The token for the next set of items to return. (You received this token from a prior call.)</p>"
-        },
-        "VpcEndpointIds":{
-          "shape":"ValueStringList",
-          "documentation":"<p>One or more endpoint IDs.</p>",
-          "locationName":"VpcEndpointId"
         }
       },
       "documentation":"<p>Contains the parameters for DescribeVpcEndpoints.</p>"
@@ -8727,15 +8760,15 @@
     "DescribeVpcEndpointsResult":{
       "type":"structure",
       "members":{
-        "NextToken":{
-          "shape":"String",
-          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>",
-          "locationName":"nextToken"
-        },
         "VpcEndpoints":{
           "shape":"VpcEndpointSet",
           "documentation":"<p>Information about the endpoints.</p>",
           "locationName":"vpcEndpointSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>",
+          "locationName":"nextToken"
         }
       },
       "documentation":"<p>Contains the output of DescribeVpcEndpoints.</p>"
@@ -9358,6 +9391,29 @@
       },
       "documentation":"<p>Describes a disk image volume.</p>"
     },
+    "DnsEntry":{
+      "type":"structure",
+      "members":{
+        "DnsName":{
+          "shape":"String",
+          "documentation":"<p>The DNS name.</p>",
+          "locationName":"dnsName"
+        },
+        "HostedZoneId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the private hosted zone.</p>",
+          "locationName":"hostedZoneId"
+        }
+      },
+      "documentation":"<p>Describes a DNS entry.</p>"
+    },
+    "DnsEntrySet":{
+      "type":"list",
+      "member":{
+        "shape":"DnsEntry",
+        "locationName":"item"
+      }
+    },
     "DomainType":{
       "type":"string",
       "enum":[
@@ -9371,7 +9427,7 @@
       "members":{
         "Encrypted":{
           "shape":"Boolean",
-          "documentation":"<p>Indicates whether the EBS volume is encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption.</p>",
+          "documentation":"<p>Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value. This is because only blank volumes can be encrypted on creation.</p>",
           "locationName":"encrypted"
         },
         "DeleteOnTermination":{
@@ -10359,6 +10415,13 @@
       "type":"list",
       "member":{
         "shape":"GroupIdentifier",
+        "locationName":"item"
+      }
+    },
+    "GroupIdentifierSet":{
+      "type":"list",
+      "member":{
+        "shape":"SecurityGroupIdentifier",
         "locationName":"item"
       }
     },
@@ -13635,31 +13698,55 @@
       "type":"structure",
       "required":["VpcEndpointId"],
       "members":{
-        "AddRouteTableIds":{
-          "shape":"ValueStringList",
-          "documentation":"<p>One or more route tables IDs to associate with the endpoint.</p>",
-          "locationName":"AddRouteTableId"
-        },
         "DryRun":{
           "shape":"Boolean",
           "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
-        "PolicyDocument":{
-          "shape":"String",
-          "documentation":"<p>A policy document to attach to the endpoint. The policy must be in valid JSON format.</p>"
-        },
-        "RemoveRouteTableIds":{
-          "shape":"ValueStringList",
-          "documentation":"<p>One or more route table IDs to disassociate from the endpoint.</p>",
-          "locationName":"RemoveRouteTableId"
-        },
-        "ResetPolicy":{
-          "shape":"Boolean",
-          "documentation":"<p>Specify <code>true</code> to reset the policy document to the default policy. The default policy allows access to the service.</p>"
-        },
         "VpcEndpointId":{
           "shape":"String",
           "documentation":"<p>The ID of the endpoint.</p>"
+        },
+        "ResetPolicy":{
+          "shape":"Boolean",
+          "documentation":"<p>(Gateway endpoint) Specify <code>true</code> to reset the policy document to the default policy. The default policy allows full access to the service.</p>"
+        },
+        "PolicyDocument":{
+          "shape":"String",
+          "documentation":"<p>(Gateway endpoint) A policy document to attach to the endpoint. The policy must be in valid JSON format.</p>"
+        },
+        "AddRouteTableIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Gateway endpoint) One or more route tables IDs to associate with the endpoint.</p>",
+          "locationName":"AddRouteTableId"
+        },
+        "RemoveRouteTableIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Gateway endpoint) One or more route table IDs to disassociate from the endpoint.</p>",
+          "locationName":"RemoveRouteTableId"
+        },
+        "AddSubnetIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Interface endpoint) One or more subnet IDs in which to serve the endpoint.</p>",
+          "locationName":"AddSubnetId"
+        },
+        "RemoveSubnetIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Interface endpoint) One or more subnets IDs in which to remove the endpoint.</p>",
+          "locationName":"RemoveSubnetId"
+        },
+        "AddSecurityGroupIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Interface endpoint) One or more security group IDs to associate with the network interface.</p>",
+          "locationName":"AddSecurityGroupId"
+        },
+        "RemoveSecurityGroupIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Interface endpoint) One or more security group IDs to disassociate from the network interface.</p>",
+          "locationName":"RemoveSecurityGroupId"
+        },
+        "PrivateDnsEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>(Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for ModifyVpcEndpoint.</p>"
@@ -13672,8 +13759,7 @@
           "documentation":"<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
           "locationName":"return"
         }
-      },
-      "documentation":"<p>Contains the output of ModifyVpcEndpoint.</p>"
+      }
     },
     "ModifyVpcPeeringConnectionOptionsRequest":{
       "type":"structure",
@@ -15857,7 +15943,7 @@
         },
         "BlockDeviceMappings":{
           "shape":"BlockDeviceMappingList",
-          "documentation":"<p>One or more block device mapping entries.</p>",
+          "documentation":"<p>One or more block device mapping entries. You can't specify both a snapshot ID and an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for a volume, it is not blank and its encryption status is used for the volume encryption status.</p>",
           "locationName":"blockDeviceMapping"
         },
         "EbsOptimized":{
@@ -16953,7 +17039,7 @@
       "members":{
         "BlockDeviceMappings":{
           "shape":"BlockDeviceMappingRequestList",
-          "documentation":"<p>The block device mapping.</p> <important> <p>Supplying both a snapshot ID and an encryption value as arguments for block-device mapping results in an error. This is because only blank volumes can be encrypted on start, and these are not created from a snapshot. If a snapshot is the basis for the volume, it contains data by definition and its encryption status cannot be changed using this action.</p> </important>",
+          "documentation":"<p>One or more block device mapping entries. You can't specify both a snapshot ID and an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for a volume, it is not blank and its encryption status is used for the volume encryption status.</p>",
           "locationName":"BlockDeviceMapping"
         },
         "ImageId":{
@@ -17697,6 +17783,22 @@
         "locationName":"SecurityGroupId"
       }
     },
+    "SecurityGroupIdentifier":{
+      "type":"structure",
+      "members":{
+        "GroupId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the security group.</p>",
+          "locationName":"groupId"
+        },
+        "GroupName":{
+          "shape":"String",
+          "documentation":"<p>The name of the security group.</p>",
+          "locationName":"groupName"
+        }
+      },
+      "documentation":"<p>Describes a security group.</p>"
+    },
     "SecurityGroupList":{
       "type":"list",
       "member":{
@@ -17741,6 +17843,84 @@
       "member":{
         "shape":"String",
         "locationName":"SecurityGroup"
+      }
+    },
+    "ServiceDetail":{
+      "type":"structure",
+      "members":{
+        "ServiceName":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the service.</p>",
+          "locationName":"serviceName"
+        },
+        "ServiceType":{
+          "shape":"ServiceTypeDetailSet",
+          "documentation":"<p>The type of service.</p>",
+          "locationName":"serviceType"
+        },
+        "AvailabilityZones":{
+          "shape":"ValueStringList",
+          "documentation":"<p>The Availability Zones in which the service is available.</p>",
+          "locationName":"availabilityZoneSet"
+        },
+        "Owner":{
+          "shape":"String",
+          "documentation":"<p>The AWS account ID of the service owner.</p>",
+          "locationName":"owner"
+        },
+        "BaseEndpointDnsNames":{
+          "shape":"ValueStringList",
+          "documentation":"<p>The DNS names for the service.</p>",
+          "locationName":"baseEndpointDnsNameSet"
+        },
+        "PrivateDnsName":{
+          "shape":"String",
+          "documentation":"<p>The private DNS name for the service.</p>",
+          "locationName":"privateDnsName"
+        },
+        "VpcEndpointPolicySupported":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether the service supports endpoint policies.</p>",
+          "locationName":"vpcEndpointPolicySupported"
+        },
+        "AcceptanceRequired":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether VPC endpoint connection requests to the service must be accepted by the service owner.</p>",
+          "locationName":"acceptanceRequired"
+        }
+      },
+      "documentation":"<p>Describes a service.</p>"
+    },
+    "ServiceDetailSet":{
+      "type":"list",
+      "member":{
+        "shape":"ServiceDetail",
+        "locationName":"item"
+      }
+    },
+    "ServiceType":{
+      "type":"string",
+      "enum":[
+        "Interface",
+        "Gateway"
+      ]
+    },
+    "ServiceTypeDetail":{
+      "type":"structure",
+      "members":{
+        "ServiceType":{
+          "shape":"ServiceType",
+          "documentation":"<p>The type of service.</p>",
+          "locationName":"serviceType"
+        }
+      },
+      "documentation":"<p>Describes the type of service for a VPC endpoint.</p>"
+    },
+    "ServiceTypeDetailSet":{
+      "type":"list",
+      "member":{
+        "shape":"ServiceTypeDetail",
+        "locationName":"item"
       }
     },
     "ShutdownBehavior":{
@@ -18069,7 +18249,7 @@
         },
         "BlockDeviceMappings":{
           "shape":"BlockDeviceMappingList",
-          "documentation":"<p>One or more block device mapping entries.</p>",
+          "documentation":"<p>One or more block device mapping entries. You can't specify both a snapshot ID and an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for a volume, it is not blank and its encryption status is used for the volume encryption status.</p>",
           "locationName":"blockDeviceMapping"
         },
         "EbsOptimized":{
@@ -18661,10 +18841,14 @@
     "State":{
       "type":"string",
       "enum":[
+        "PendingAcceptance",
         "Pending",
         "Available",
         "Deleting",
-        "Deleted"
+        "Deleted",
+        "Rejected",
+        "Failed",
+        "Expired"
       ]
     },
     "StateReason":{
@@ -20061,20 +20245,20 @@
     "VpcEndpoint":{
       "type":"structure",
       "members":{
-        "CreationTimestamp":{
-          "shape":"DateTime",
-          "documentation":"<p>The date and time the VPC endpoint was created.</p>",
-          "locationName":"creationTimestamp"
-        },
-        "PolicyDocument":{
+        "VpcEndpointId":{
           "shape":"String",
-          "documentation":"<p>The policy document associated with the endpoint.</p>",
-          "locationName":"policyDocument"
+          "documentation":"<p>The ID of the VPC endpoint.</p>",
+          "locationName":"vpcEndpointId"
         },
-        "RouteTableIds":{
-          "shape":"ValueStringList",
-          "documentation":"<p>One or more route tables associated with the endpoint.</p>",
-          "locationName":"routeTableIdSet"
+        "VpcEndpointType":{
+          "shape":"VpcEndpointType",
+          "documentation":"<p>The type of endpoint.</p>",
+          "locationName":"vpcEndpointType"
+        },
+        "VpcId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the VPC to which the endpoint is associated.</p>",
+          "locationName":"vpcId"
         },
         "ServiceName":{
           "shape":"String",
@@ -20086,15 +20270,45 @@
           "documentation":"<p>The state of the VPC endpoint.</p>",
           "locationName":"state"
         },
-        "VpcEndpointId":{
+        "PolicyDocument":{
           "shape":"String",
-          "documentation":"<p>The ID of the VPC endpoint.</p>",
-          "locationName":"vpcEndpointId"
+          "documentation":"<p>The policy document associated with the endpoint, if applicable.</p>",
+          "locationName":"policyDocument"
         },
-        "VpcId":{
-          "shape":"String",
-          "documentation":"<p>The ID of the VPC to which the endpoint is associated.</p>",
-          "locationName":"vpcId"
+        "RouteTableIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Gateway endpoint) One or more route tables associated with the endpoint.</p>",
+          "locationName":"routeTableIdSet"
+        },
+        "SubnetIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Interface endpoint) One or more subnets in which the endpoint is located.</p>",
+          "locationName":"subnetIdSet"
+        },
+        "Groups":{
+          "shape":"GroupIdentifierSet",
+          "documentation":"<p>(Interface endpoint) Information about the security groups associated with the network interface.</p>",
+          "locationName":"groupSet"
+        },
+        "PrivateDnsEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>(Interface endpoint) Indicates whether the VPC is associated with a private hosted zone.</p>",
+          "locationName":"privateDnsEnabled"
+        },
+        "NetworkInterfaceIds":{
+          "shape":"ValueStringList",
+          "documentation":"<p>(Interface endpoint) One or more network interfaces for the endpoint.</p>",
+          "locationName":"networkInterfaceIdSet"
+        },
+        "DnsEntries":{
+          "shape":"DnsEntrySet",
+          "documentation":"<p>(Interface endpoint) The DNS entries for the endpoint.</p>",
+          "locationName":"dnsEntrySet"
+        },
+        "CreationTimestamp":{
+          "shape":"DateTime",
+          "documentation":"<p>The date and time the VPC endpoint was created.</p>",
+          "locationName":"creationTimestamp"
         }
       },
       "documentation":"<p>Describes a VPC endpoint.</p>"
@@ -20105,6 +20319,13 @@
         "shape":"VpcEndpoint",
         "locationName":"item"
       }
+    },
+    "VpcEndpointType":{
+      "type":"string",
+      "enum":[
+        "Interface",
+        "Gateway"
+      ]
     },
     "VpcIdStringList":{
       "type":"list",

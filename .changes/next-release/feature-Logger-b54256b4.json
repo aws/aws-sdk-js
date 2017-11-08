@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Logger",
-  "description": "Update the request logger to exclude sensitive input parammeters from being logged"
-}

@@ -468,11 +468,11 @@ declare class EC2 extends Service {
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified AWS service. An endpoint enables you to create a private connection between your VPC and another AWS service in your account. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. Use DescribeVpcEndpointServices to get a list of supported AWS services.
+   * Creates a VPC endpoint for a specified AWS service. An endpoint enables you to create a private connection between your VPC and another AWS service in your account. You can create a gateway endpoint or an interface endpoint.  A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify the VPC route tables that use the endpoint, and you can optionally specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. An interface endpoint is a network interface in your subnet with a private IP address that serves as an entry point for traffic destined to the AWS service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the network interface.
    */
   createVpcEndpoint(params: EC2.Types.CreateVpcEndpointRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified AWS service. An endpoint enables you to create a private connection between your VPC and another AWS service in your account. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. Use DescribeVpcEndpointServices to get a list of supported AWS services.
+   * Creates a VPC endpoint for a specified AWS service. An endpoint enables you to create a private connection between your VPC and another AWS service in your account. You can create a gateway endpoint or an interface endpoint.  A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify the VPC route tables that use the endpoint, and you can optionally specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. An interface endpoint is a network interface in your subnet with a private IP address that serves as an entry point for traffic destined to the AWS service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the network interface.
    */
   createVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
@@ -684,11 +684,11 @@ declare class EC2 extends Service {
    */
   deleteVpc(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes one or more specified VPC endpoints. Deleting the endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint.
+   * Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint deletes the endpoint network interfaces.
    */
   deleteVpcEndpoints(params: EC2.Types.DeleteVpcEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
-   * Deletes one or more specified VPC endpoints. Deleting the endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint.
+   * Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint deletes the endpoint network interfaces.
    */
   deleteVpcEndpoints(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
@@ -1636,11 +1636,11 @@ declare class EC2 extends Service {
    */
   modifyVpcAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies attributes of a specified VPC endpoint. You can modify the policy associated with the endpoint, and you can add and remove route tables associated with the endpoint.
+   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide.
    */
   modifyVpcEndpoint(params: EC2.Types.ModifyVpcEndpointRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointResult) => void): Request<EC2.Types.ModifyVpcEndpointResult, AWSError>;
   /**
-   * Modifies attributes of a specified VPC endpoint. You can modify the policy associated with the endpoint, and you can add and remove route tables associated with the endpoint.
+   * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide.
    */
   modifyVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointResult) => void): Request<EC2.Types.ModifyVpcEndpointResult, AWSError>;
   /**
@@ -3908,39 +3908,55 @@ declare namespace EC2 {
   }
   export interface CreateVpcEndpointRequest {
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
-     */
-    ClientToken?: String;
-    /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
     /**
-     * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.
+     * The type of endpoint. If not specified, the default is a gateway endpoint.
      */
-    PolicyDocument?: String;
+    VpcEndpointType?: VpcEndpointType;
     /**
-     * One or more route table IDs.
+     * The ID of the VPC in which the endpoint will be used.
      */
-    RouteTableIds?: ValueStringList;
+    VpcId: String;
     /**
      * The AWS service name, in the form com.amazonaws.region.service . To get a list of available services, use the DescribeVpcEndpointServices request.
      */
     ServiceName: String;
     /**
-     * The ID of the VPC in which the endpoint will be used.
+     * (Gateway endpoint) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.
      */
-    VpcId: String;
-  }
-  export interface CreateVpcEndpointResult {
+    PolicyDocument?: String;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     * (Gateway endpoint) One or more route table IDs.
+     */
+    RouteTableIds?: ValueStringList;
+    /**
+     * (Interface endpoint) The ID of one or more subnets in which to create a network interface for the endpoint.
+     */
+    SubnetIds?: ValueStringList;
+    /**
+     * (Interface endpoint) The ID of one or more security groups to associate with the network interface.
+     */
+    SecurityGroupIds?: ValueStringList;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
+    /**
+     * (Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the region (for example, kinesis.us-east-1.amazonaws.com) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service. To use a private hosted zone, you must set the following VPC attributes to true: enableDnsHostnames and enableDnsSupport. Use ModifyVpcAttribute to set the VPC attributes. Default: true 
+     */
+    PrivateDnsEnabled?: Boolean;
+  }
+  export interface CreateVpcEndpointResult {
     /**
      * Information about the endpoint.
      */
     VpcEndpoint?: VpcEndpoint;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: String;
   }
   export interface CreateVpcPeeringConnectionRequest {
     /**
@@ -4918,7 +4934,7 @@ declare namespace EC2 {
      */
     ExecutableUsers?: ExecutableByStringList;
     /**
-     * One or more filters.    architecture - The image architecture (i386 | x86_64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name for the EBS volume (for example, /dev/sdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | st1 | sc1 | standard).    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - String value from an Amazon-maintained list (amazon | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The AWS account ID of the image owner.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    virtualization-type - The virtualization type (paravirtual | hvm).  
+     * One or more filters.    architecture - The image architecture (i386 | x86_64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name for the EBS volume (for example, /dev/sdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | st1 | sc1 | standard).    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - String value from an Amazon-maintained list (amazon | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The AWS account ID of the image owner.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    virtualization-type - The virtualization type (paravirtual | hvm).  
      */
     Filters?: FilterList;
     /**
@@ -5624,7 +5640,7 @@ declare namespace EC2 {
   }
   export interface DescribeSecurityGroupsRequest {
     /**
-     * One or more filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.    description - The description of the security group.    egress.ip-permission.prefix-list-id - The ID (prefix) of the AWS service to which the security group allows access.    group-id - The ID of the security group.     group-name - The name of the security group.    ip-permission.cidr - An IPv4 CIDR range that has been granted permission in a security group rule.    ip-permission.from-port - The start of port range for the TCP and UDP protocols, or an ICMP type number.    ip-permission.group-id - The ID of a security group that has been granted permission.    ip-permission.group-name - The name of a security group that has been granted permission.    ip-permission.ipv6-cidr - An IPv6 CIDR range that has been granted permission in a security group rule.    ip-permission.protocol - The IP protocol for the permission (tcp | udp | icmp or a protocol number).    ip-permission.to-port - The end of port range for the TCP and UDP protocols, or an ICMP code.    ip-permission.user-id - The ID of an AWS account that has been granted permission.    owner-id - The AWS account ID of the owner of the security group.    tag-key - The key of a tag assigned to the security group.    tag-value - The value of a tag assigned to the security group.    vpc-id - The ID of the VPC specified when the security group was created.  
+     * One or more filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.    description - The description of the security group.    egress.ip-permission.cidr - An IPv4 CIDR block for an outbound security group rule.    egress.ip-permission.from-port - For an outbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.    egress.ip-permission.group-id - The ID of a security group that has been referenced in an outbound security group rule.    egress.ip-permission.group-name - The name of a security group that has been referenced in an outbound security group rule.    egress.ip-permission.ipv6-cidr - An IPv6 CIDR block for an outbound security group rule.    egress.ip-permission.prefix-list-id - The ID (prefix) of the AWS service to which a security group rule allows outbound access.    egress.ip-permission.protocol - The IP protocol for an outbound security group rule (tcp | udp | icmp or a protocol number).    egress.ip-permission.to-port - For an outbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.    egress.ip-permission.user-id - The ID of an AWS account that has been referenced in an outbound security group rule.    group-id - The ID of the security group.     group-name - The name of the security group.    ip-permission.cidr - An IPv4 CIDR block for an inbound security group rule.    ip-permission.from-port - For an inbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.    ip-permission.group-id - The ID of a security group that has been referenced in an inbound security group rule.    ip-permission.group-name - The name of a security group that has been referenced in an inbound security group rule.    ip-permission.ipv6-cidr - An IPv6 CIDR block for an inbound security group rule.    ip-permission.prefix-list-id - The ID (prefix) of the AWS service from which a security group rule allows inbound access.    ip-permission.protocol - The IP protocol for an inbound security group rule (tcp | udp | icmp or a protocol number).    ip-permission.to-port - For an inbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.    ip-permission.user-id - The ID of an AWS account that has been referenced in an inbound security group rule.    owner-id - The AWS account ID of the owner of the security group.    tag-key - The key of a tag assigned to the security group.    tag-value - The value of a tag assigned to the security group.    vpc-id - The ID of the VPC specified when the security group was created.  
      */
     Filters?: FilterList;
     /**
@@ -6192,6 +6208,14 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
+     * One or more service names.
+     */
+    ServiceNames?: ValueStringList;
+    /**
+     * One or more filters.    service-name: The name of the service.  
+     */
+    Filters?: FilterList;
+    /**
      * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. Constraint: If the value is greater than 1000, we return only 1000 items.
      */
     MaxResults?: Integer;
@@ -6202,19 +6226,27 @@ declare namespace EC2 {
   }
   export interface DescribeVpcEndpointServicesResult {
     /**
-     * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
-     */
-    NextToken?: String;
-    /**
      * A list of supported AWS services.
      */
     ServiceNames?: ValueStringList;
+    /**
+     * Information about the service.
+     */
+    ServiceDetails?: ServiceDetailSet;
+    /**
+     * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: String;
   }
   export interface DescribeVpcEndpointsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * One or more endpoint IDs.
+     */
+    VpcEndpointIds?: ValueStringList;
     /**
      * One or more filters.    service-name: The name of the AWS service.    vpc-id: The ID of the VPC in which the endpoint resides.    vpc-endpoint-id: The ID of the endpoint.    vpc-endpoint-state: The state of the endpoint. (pending | available | deleting | deleted)  
      */
@@ -6227,20 +6259,16 @@ declare namespace EC2 {
      * The token for the next set of items to return. (You received this token from a prior call.)
      */
     NextToken?: String;
-    /**
-     * One or more endpoint IDs.
-     */
-    VpcEndpointIds?: ValueStringList;
   }
   export interface DescribeVpcEndpointsResult {
-    /**
-     * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
-     */
-    NextToken?: String;
     /**
      * Information about the endpoints.
      */
     VpcEndpoints?: VpcEndpointSet;
+    /**
+     * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: String;
   }
   export interface DescribeVpcPeeringConnectionsRequest {
     /**
@@ -6603,11 +6631,22 @@ declare namespace EC2 {
      */
     Size?: Long;
   }
+  export interface DnsEntry {
+    /**
+     * The DNS name.
+     */
+    DnsName?: String;
+    /**
+     * The ID of the private hosted zone.
+     */
+    HostedZoneId?: String;
+  }
+  export type DnsEntrySet = DnsEntry[];
   export type DomainType = "vpc"|"standard"|string;
   export type Double = number;
   export interface EbsBlockDevice {
     /**
-     * Indicates whether the EBS volume is encrypted. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption.
+     * Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value. This is because only blank volumes can be encrypted on creation.
      */
     Encrypted?: Boolean;
     /**
@@ -7178,6 +7217,7 @@ declare namespace EC2 {
     GroupId?: String;
   }
   export type GroupIdentifierList = GroupIdentifier[];
+  export type GroupIdentifierSet = SecurityGroupIdentifier[];
   export type GroupIds = String[];
   export type GroupNameStringList = String[];
   export interface HistoryRecord {
@@ -9174,29 +9214,49 @@ declare namespace EC2 {
   }
   export interface ModifyVpcEndpointRequest {
     /**
-     * One or more route tables IDs to associate with the endpoint.
-     */
-    AddRouteTableIds?: ValueStringList;
-    /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
     /**
-     * A policy document to attach to the endpoint. The policy must be in valid JSON format.
-     */
-    PolicyDocument?: String;
-    /**
-     * One or more route table IDs to disassociate from the endpoint.
-     */
-    RemoveRouteTableIds?: ValueStringList;
-    /**
-     * Specify true to reset the policy document to the default policy. The default policy allows access to the service.
-     */
-    ResetPolicy?: Boolean;
-    /**
      * The ID of the endpoint.
      */
     VpcEndpointId: String;
+    /**
+     * (Gateway endpoint) Specify true to reset the policy document to the default policy. The default policy allows full access to the service.
+     */
+    ResetPolicy?: Boolean;
+    /**
+     * (Gateway endpoint) A policy document to attach to the endpoint. The policy must be in valid JSON format.
+     */
+    PolicyDocument?: String;
+    /**
+     * (Gateway endpoint) One or more route tables IDs to associate with the endpoint.
+     */
+    AddRouteTableIds?: ValueStringList;
+    /**
+     * (Gateway endpoint) One or more route table IDs to disassociate from the endpoint.
+     */
+    RemoveRouteTableIds?: ValueStringList;
+    /**
+     * (Interface endpoint) One or more subnet IDs in which to serve the endpoint.
+     */
+    AddSubnetIds?: ValueStringList;
+    /**
+     * (Interface endpoint) One or more subnets IDs in which to remove the endpoint.
+     */
+    RemoveSubnetIds?: ValueStringList;
+    /**
+     * (Interface endpoint) One or more security group IDs to associate with the network interface.
+     */
+    AddSecurityGroupIds?: ValueStringList;
+    /**
+     * (Interface endpoint) One or more security group IDs to disassociate from the network interface.
+     */
+    RemoveSecurityGroupIds?: ValueStringList;
+    /**
+     * (Interface endpoint) Indicate whether a private hosted zone is associated with the VPC.
+     */
+    PrivateDnsEnabled?: Boolean;
   }
   export interface ModifyVpcEndpointResult {
     /**
@@ -10446,7 +10506,7 @@ declare namespace EC2 {
      */
     AddressingType?: String;
     /**
-     * One or more block device mapping entries.
+     * One or more block device mapping entries. You can't specify both a snapshot ID and an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for a volume, it is not blank and its encryption status is used for the volume encryption status.
      */
     BlockDeviceMappings?: BlockDeviceMappingList;
     /**
@@ -11114,7 +11174,7 @@ declare namespace EC2 {
   }
   export interface RunInstancesRequest {
     /**
-     * The block device mapping.  Supplying both a snapshot ID and an encryption value as arguments for block-device mapping results in an error. This is because only blank volumes can be encrypted on start, and these are not created from a snapshot. If a snapshot is the basis for the volume, it contains data by definition and its encryption status cannot be changed using this action. 
+     * One or more block device mapping entries. You can't specify both a snapshot ID and an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for a volume, it is not blank and its encryption status is used for the volume encryption status.
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
@@ -11668,6 +11728,16 @@ declare namespace EC2 {
     VpcId?: String;
   }
   export type SecurityGroupIdStringList = String[];
+  export interface SecurityGroupIdentifier {
+    /**
+     * The ID of the security group.
+     */
+    GroupId?: String;
+    /**
+     * The name of the security group.
+     */
+    GroupName?: String;
+  }
   export type SecurityGroupList = SecurityGroup[];
   export interface SecurityGroupReference {
     /**
@@ -11685,6 +11755,49 @@ declare namespace EC2 {
   }
   export type SecurityGroupReferences = SecurityGroupReference[];
   export type SecurityGroupStringList = String[];
+  export interface ServiceDetail {
+    /**
+     * The Amazon Resource Name (ARN) of the service.
+     */
+    ServiceName?: String;
+    /**
+     * The type of service.
+     */
+    ServiceType?: ServiceTypeDetailSet;
+    /**
+     * The Availability Zones in which the service is available.
+     */
+    AvailabilityZones?: ValueStringList;
+    /**
+     * The AWS account ID of the service owner.
+     */
+    Owner?: String;
+    /**
+     * The DNS names for the service.
+     */
+    BaseEndpointDnsNames?: ValueStringList;
+    /**
+     * The private DNS name for the service.
+     */
+    PrivateDnsName?: String;
+    /**
+     * Indicates whether the service supports endpoint policies.
+     */
+    VpcEndpointPolicySupported?: Boolean;
+    /**
+     * Indicates whether VPC endpoint connection requests to the service must be accepted by the service owner.
+     */
+    AcceptanceRequired?: Boolean;
+  }
+  export type ServiceDetailSet = ServiceDetail[];
+  export type ServiceType = "Interface"|"Gateway"|string;
+  export interface ServiceTypeDetail {
+    /**
+     * The type of service.
+     */
+    ServiceType?: ServiceType;
+  }
+  export type ServiceTypeDetailSet = ServiceTypeDetail[];
   export type ShutdownBehavior = "stop"|"terminate"|string;
   export interface SlotDateTimeRangeRequest {
     /**
@@ -11899,7 +12012,7 @@ declare namespace EC2 {
      */
     AddressingType?: String;
     /**
-     * One or more block device mapping entries.
+     * One or more block device mapping entries. You can't specify both a snapshot ID and an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for a volume, it is not blank and its encryption status is used for the volume encryption status.
      */
     BlockDeviceMappings?: BlockDeviceMappingList;
     /**
@@ -12278,7 +12391,7 @@ declare namespace EC2 {
      */
     StartingInstances?: InstanceStateChangeList;
   }
-  export type State = "Pending"|"Available"|"Deleting"|"Deleted"|string;
+  export type State = "PendingAcceptance"|"Pending"|"Available"|"Deleting"|"Deleted"|"Rejected"|"Failed"|"Expired"|string;
   export interface StateReason {
     /**
      * The reason code for the state change.
@@ -13022,17 +13135,17 @@ declare namespace EC2 {
   export type VpcClassicLinkList = VpcClassicLink[];
   export interface VpcEndpoint {
     /**
-     * The date and time the VPC endpoint was created.
+     * The ID of the VPC endpoint.
      */
-    CreationTimestamp?: DateTime;
+    VpcEndpointId?: String;
     /**
-     * The policy document associated with the endpoint.
+     * The type of endpoint.
      */
-    PolicyDocument?: String;
+    VpcEndpointType?: VpcEndpointType;
     /**
-     * One or more route tables associated with the endpoint.
+     * The ID of the VPC to which the endpoint is associated.
      */
-    RouteTableIds?: ValueStringList;
+    VpcId?: String;
     /**
      * The name of the AWS service to which the endpoint is associated.
      */
@@ -13042,15 +13155,40 @@ declare namespace EC2 {
      */
     State?: State;
     /**
-     * The ID of the VPC endpoint.
+     * The policy document associated with the endpoint, if applicable.
      */
-    VpcEndpointId?: String;
+    PolicyDocument?: String;
     /**
-     * The ID of the VPC to which the endpoint is associated.
+     * (Gateway endpoint) One or more route tables associated with the endpoint.
      */
-    VpcId?: String;
+    RouteTableIds?: ValueStringList;
+    /**
+     * (Interface endpoint) One or more subnets in which the endpoint is located.
+     */
+    SubnetIds?: ValueStringList;
+    /**
+     * (Interface endpoint) Information about the security groups associated with the network interface.
+     */
+    Groups?: GroupIdentifierSet;
+    /**
+     * (Interface endpoint) Indicates whether the VPC is associated with a private hosted zone.
+     */
+    PrivateDnsEnabled?: Boolean;
+    /**
+     * (Interface endpoint) One or more network interfaces for the endpoint.
+     */
+    NetworkInterfaceIds?: ValueStringList;
+    /**
+     * (Interface endpoint) The DNS entries for the endpoint.
+     */
+    DnsEntries?: DnsEntrySet;
+    /**
+     * The date and time the VPC endpoint was created.
+     */
+    CreationTimestamp?: DateTime;
   }
   export type VpcEndpointSet = VpcEndpoint[];
+  export type VpcEndpointType = "Interface"|"Gateway"|string;
   export type VpcIdStringList = String[];
   export interface VpcIpv6CidrBlockAssociation {
     /**
