@@ -87,11 +87,11 @@ describe('AWS.S3', function() {
       expect(s3.config.region).to.equal('us-east-1');
     });
 
-    it('combines the region with s3 in the endpoint using a - instead of .', function() {
+    it('combines the region with s3 in the endpoint using a .', function() {
       s3 = new AWS.S3({
         region: 'us-west-1'
       });
-      expect(s3.endpoint.hostname).to.equal('s3-us-west-1.amazonaws.com');
+      expect(s3.endpoint.hostname).to.equal('s3.us-west-1.amazonaws.com');
     });
 
     it('sets a region-specific dualstack endpoint when dualstack enabled', function() {
@@ -554,8 +554,8 @@ describe('AWS.S3', function() {
       req = s3.headBucket(param).build();
       httpRequest = req.httpRequest;
       expect(httpRequest.region).to.equal('us-west-2');
-      expect(httpRequest.endpoint.hostname).to.equal('name.s3-us-west-2.amazonaws.com');
-      expect(httpRequest.headers.Host).to.equal('name.s3-us-west-2.amazonaws.com');
+      expect(httpRequest.endpoint.hostname).to.equal('name.s3.us-west-2.amazonaws.com');
+      expect(httpRequest.headers.Host).to.equal('name.s3.us-west-2.amazonaws.com');
       expect(httpRequest.path).to.equal('/');
     });
 
@@ -572,8 +572,8 @@ describe('AWS.S3', function() {
       req = s3.headBucket(param).build();
       httpRequest = req.httpRequest;
       expect(httpRequest.region).to.equal('us-west-2');
-      expect(httpRequest.endpoint.hostname).to.equal('s3-us-west-2.amazonaws.com');
-      expect(httpRequest.headers.Host).to.equal('s3-us-west-2.amazonaws.com');
+      expect(httpRequest.endpoint.hostname).to.equal('s3.us-west-2.amazonaws.com');
+      expect(httpRequest.headers.Host).to.equal('s3.us-west-2.amazonaws.com');
       expect(httpRequest.path).to.equal('/name');
     });
 
@@ -1493,7 +1493,7 @@ describe('AWS.S3', function() {
       var retryable = s3.retryableError(err, req);
       expect(retryable).to.equal(true);
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
     it('should retry on error code 301 with updated region and endpoint', function() {
@@ -1509,7 +1509,7 @@ describe('AWS.S3', function() {
       var retryable = s3.retryableError(err, req);
       expect(retryable).to.equal(true);
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
     it('should retry with updated region but not endpoint if non-S3 url endpoint is specified', function() {
@@ -1539,7 +1539,7 @@ describe('AWS.S3', function() {
         region: 'eu-west-1'
       };
       s3 = new AWS.S3({
-        endpoint: 'https://name.s3-us-west-2.amazonaws.com',
+        endpoint: 'https://name.s3.us-west-2.amazonaws.com',
         s3BucketEndpoint: true
       });
       var req = request('operation', {
@@ -1549,7 +1549,7 @@ describe('AWS.S3', function() {
       var retryable = s3.retryableError(err, req);
       expect(retryable).to.equal(true);
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
     it('should retry with updated region but not endpoint if accelerate endpoint is used', function() {
@@ -1663,7 +1663,7 @@ describe('AWS.S3', function() {
       s3.bucketRegionCache.name = 'eu-west-1';
       callNetworkingErrorListener(req);
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
       expect(spy.calls.length).to.equal(0);
     });
 
@@ -1677,7 +1677,7 @@ describe('AWS.S3', function() {
       expect(regionReq.httpRequest.region).to.equal('us-east-1');
       expect(regionReq.httpRequest.endpoint.hostname).to.equal('name.s3.amazonaws.com');
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
     it('makes async request in us-east-1 if cached region matches current region', function() {
@@ -1691,7 +1691,7 @@ describe('AWS.S3', function() {
       expect(regionReq.httpRequest.region).to.equal('us-east-1');
       expect(regionReq.httpRequest.endpoint.hostname).to.equal('name.s3.amazonaws.com');
       expect(req.httpRequest.region).to.equal('eu-west-1');
-      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3-eu-west-1.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('name.s3.eu-west-1.amazonaws.com');
     });
 
     it('does not update region if path-style bucket is dns-compliant and not in cache', function() {
@@ -1703,7 +1703,7 @@ describe('AWS.S3', function() {
       var req = callNetworkingErrorListener();
       expect(spy.calls.length).to.equal(0);
       expect(req.httpRequest.region).to.equal('us-west-2');
-      expect(req.httpRequest.endpoint.hostname).to.equal('s3-us-west-2.amazonaws.com');
+      expect(req.httpRequest.endpoint.hostname).to.equal('s3.us-west-2.amazonaws.com');
     });
   });
 
