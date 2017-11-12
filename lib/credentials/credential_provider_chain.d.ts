@@ -4,7 +4,7 @@ export class CredentialProviderChain extends Credentials {
     /**
      * Creates a new CredentialProviderChain with a default set of providers specified by defaultProviders.
      */
-    constructor(providers: provider[])
+    constructor(providers?: provider[])
     /**
      * Resolves the provider chain by searching for the first set of credentials in providers.
      */
