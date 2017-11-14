@@ -602,13 +602,21 @@
       });
     });
     describe('AWS.ECSCredentials', function() {
-      var creds, mockEndpoint, responseData;
+      var creds, mockEndpoint, responseData, responseDataNew;
       creds = null;
       responseData = {
         AccessKeyId: 'KEY',
         SecretAccessKey: 'SECRET',
         Token: 'TOKEN',
         Expiration: (new Date(0)).toISOString()
+      };
+      responseDataNew = {
+        credentials: {
+          accessKeyId: 'KEY',
+          secretAccessKey: 'SECRET',
+          sessionToken: 'TOKEN',
+          expiration: (new Date(0)).toISOString()
+        }
       };
       beforeEach(function() {
         creds = new AWS.ECSCredentials({
@@ -745,11 +753,57 @@
         it(
           'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
           function () {
-            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'https://s3-us-west-2.amazonaws.com/bucket/credentials';
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://s3-us-west-2.amazonaws.com/bucket/credentials';
             expect(creds.getECSFullUri.bind(creds))
               .to.throw(/Unsupported hostname/);
           }
         );
+
+        it(
+          'returns a full URI when the full URI environment variable is set to a non-localhost https URI',
+          function () {
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'https://s3-us-west-2.amazonaws.com/bucket/credentials';
+            expect(creds.getECSFullUri())
+              .to.equal('https://s3-us-west-2.amazonaws.com/bucket/credentials');
+          }
+        );
+      });
+
+      describe('formatCreds', function() {
+        var formattedCreds;
+
+        it('removes invalid keys', function() {
+          var invalidData;
+          invalidData = {
+            accessKeyId: 'KEY',
+            InvalidKey: 'someValue'
+          };
+          formattedCreds = creds.formatCreds(invalidData);
+          expect(formattedCreds.InvalidKey).to.be.undefined;
+          expect(formattedCreds.accessKeyId).to.be["KEY"];
+        });
+        it('renames valid keys', function() {
+          formattedCreds = creds.formatCreds(responseData);
+          expect(formattedCreds.accessKeyId).to.be["KEY"];
+          expect(formattedCreds.secretAccessKey).to.be["SECRET"];
+          expect(formattedCreds.sessionToken).to.be["TOKEN"];
+        });
+        it('restructures valid creds', function() {
+          var validData;
+          validData = {
+            credentials: {
+              accessKeyId: 'KEY',
+              secretAccessKey: 'SECRET',
+              sessionToken: 'TOKEN',
+              expiration: (new Date(0)).toISOString()
+            }
+          };
+          formattedCreds = creds.formatCreds(validData);
+          expect(formattedCreds.accessKeyId).to.be["KEY"];
+          expect(formattedCreds.secretAccessKey).to.be["SECRET"];
+          expect(formattedCreds.sessionToken).to.be["TOKEN"];
+          expect(formattedCreds.expireTime).to.eql(new Date(0));
+        });
       });
 
       describe('credsFormatIsValid', function() {
@@ -762,8 +816,9 @@
           };
           expect(creds.credsFormatIsValid(incompleteData)).to.be["false"];
         });
-        it('returns true when data has all required properties', function() {
-          expect(creds.credsFormatIsValid(responseData)).to.be["true"];
+        it('returns true when formatted data has all required properties', function() {
+          expect(creds.credsFormatIsValid(responseData)).to.be["false"];
+          expect(creds.credsFormatIsValid(creds.formatCreds(responseData))).to.be["true"];
         });
       });
 

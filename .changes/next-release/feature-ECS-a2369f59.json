@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "ECS",
+  "description": "Remove localhost restriction for ECS credential provider"
+}
