@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"AWS Database Migration Service",
+    "serviceId":"Database Migration Service",
     "signatureVersion":"v4",
     "targetPrefix":"AmazonDMSv20160101",
     "uid":"dms-2016-01-01"
@@ -343,6 +344,19 @@
       ],
       "documentation":"<p>Returns information about the replication subnet groups.</p>"
     },
+    "DescribeReplicationTaskAssessmentResults":{
+      "name":"DescribeReplicationTaskAssessmentResults",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeReplicationTaskAssessmentResultsMessage"},
+      "output":{"shape":"DescribeReplicationTaskAssessmentResultsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundFault"}
+      ],
+      "documentation":"<p>Returns the task assessment results from Amazon S3. This action always returns the latest results.</p>"
+    },
     "DescribeReplicationTasks":{
       "name":"DescribeReplicationTasks",
       "http":{
@@ -553,6 +567,20 @@
       ],
       "documentation":"<p>Starts the replication task.</p> <p>For more information about AWS DMS tasks, see the AWS DMS user guide at <a href=\"http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html\"> Working with Migration Tasks </a> </p>"
     },
+    "StartReplicationTaskAssessment":{
+      "name":"StartReplicationTaskAssessment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartReplicationTaskAssessmentMessage"},
+      "output":{"shape":"StartReplicationTaskAssessmentResponse"},
+      "errors":[
+        {"shape":"InvalidResourceStateFault"},
+        {"shape":"ResourceNotFoundFault"}
+      ],
+      "documentation":"<p> Starts the replication task assessment for unsupported data types in the source database. </p>"
+    },
     "StopReplicationTask":{
       "name":"StopReplicationTask",
       "http":{
@@ -616,10 +644,7 @@
     },
     "AccountQuotaList":{
       "type":"list",
-      "member":{
-        "shape":"AccountQuota",
-        "locationName":"AccountQuota"
-      }
+      "member":{"shape":"AccountQuota"}
     },
     "AddTagsToResourceMessage":{
       "type":"structure",
@@ -720,10 +745,7 @@
     },
     "CertificateList":{
       "type":"list",
-      "member":{
-        "shape":"Certificate",
-        "locationName":"Certificate"
-      }
+      "member":{"shape":"Certificate"}
     },
     "CertificateWallet":{"type":"blob"},
     "CompressionTypeValue":{
@@ -765,10 +787,7 @@
     },
     "ConnectionList":{
       "type":"list",
-      "member":{
-        "shape":"Connection",
-        "locationName":"Connection"
-      }
+      "member":{"shape":"Connection"}
     },
     "CreateEndpointMessage":{
       "type":"structure",
@@ -824,7 +843,7 @@
         },
         "CertificateArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Number (ARN) for the certificate.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) for the certificate.</p>"
         },
         "SslMode":{
           "shape":"DmsSslModeValue",
@@ -1563,6 +1582,42 @@
       },
       "documentation":"<p/>"
     },
+    "DescribeReplicationTaskAssessmentResultsMessage":{
+      "type":"structure",
+      "members":{
+        "ReplicationTaskArn":{
+          "shape":"String",
+          "documentation":"<p>- The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified the API will return only one result and ignore the values of the max-records and marker parameters. </p>"
+        },
+        "MaxRecords":{
+          "shape":"IntegerOptional",
+          "documentation":"<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
+    "DescribeReplicationTaskAssessmentResultsResponse":{
+      "type":"structure",
+      "members":{
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+        },
+        "BucketName":{
+          "shape":"String",
+          "documentation":"<p>- The Amazon S3 bucket where the task assessment report is located. </p>"
+        },
+        "ReplicationTaskAssessmentResults":{
+          "shape":"ReplicationTaskAssessmentResultList",
+          "documentation":"<p> The task assessment report. </p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
     "DescribeReplicationTasksMessage":{
       "type":"structure",
       "members":{
@@ -1765,10 +1820,7 @@
     },
     "EndpointList":{
       "type":"list",
-      "member":{
-        "shape":"Endpoint",
-        "locationName":"Endpoint"
-      }
+      "member":{"shape":"Endpoint"}
     },
     "Event":{
       "type":"structure",
@@ -1798,10 +1850,7 @@
     },
     "EventCategoriesList":{
       "type":"list",
-      "member":{
-        "shape":"String",
-        "locationName":"EventCategory"
-      }
+      "member":{"shape":"String"}
     },
     "EventCategoryGroup":{
       "type":"structure",
@@ -1819,17 +1868,11 @@
     },
     "EventCategoryGroupList":{
       "type":"list",
-      "member":{
-        "shape":"EventCategoryGroup",
-        "locationName":"EventCategoryGroup"
-      }
+      "member":{"shape":"EventCategoryGroup"}
     },
     "EventList":{
       "type":"list",
-      "member":{
-        "shape":"Event",
-        "locationName":"Event"
-      }
+      "member":{"shape":"Event"}
     },
     "EventSubscription":{
       "type":"structure",
@@ -1875,10 +1918,7 @@
     },
     "EventSubscriptionsList":{
       "type":"list",
-      "member":{
-        "shape":"EventSubscription",
-        "locationName":"EventSubscription"
-      }
+      "member":{"shape":"EventSubscription"}
     },
     "ExceptionMessage":{"type":"string"},
     "Filter":{
@@ -1901,17 +1941,11 @@
     },
     "FilterList":{
       "type":"list",
-      "member":{
-        "shape":"Filter",
-        "locationName":"Filter"
-      }
+      "member":{"shape":"Filter"}
     },
     "FilterValueList":{
       "type":"list",
-      "member":{
-        "shape":"String",
-        "locationName":"Value"
-      }
+      "member":{"shape":"String"}
     },
     "ImportCertificateMessage":{
       "type":"structure",
@@ -2373,10 +2407,7 @@
     },
     "OrderableReplicationInstanceList":{
       "type":"list",
-      "member":{
-        "shape":"OrderableReplicationInstance",
-        "locationName":"OrderableReplicationInstance"
-      }
+      "member":{"shape":"OrderableReplicationInstance"}
     },
     "RefreshSchemasMessage":{
       "type":"structure",
@@ -2591,10 +2622,7 @@
     },
     "ReplicationInstanceList":{
       "type":"list",
-      "member":{
-        "shape":"ReplicationInstance",
-        "locationName":"ReplicationInstance"
-      }
+      "member":{"shape":"ReplicationInstance"}
     },
     "ReplicationInstancePrivateIpAddressList":{
       "type":"list",
@@ -2665,10 +2693,7 @@
     },
     "ReplicationSubnetGroups":{
       "type":"list",
-      "member":{
-        "shape":"ReplicationSubnetGroup",
-        "locationName":"ReplicationSubnetGroup"
-      }
+      "member":{"shape":"ReplicationSubnetGroup"}
     },
     "ReplicationTask":{
       "type":"structure",
@@ -2732,12 +2757,47 @@
       },
       "documentation":"<p/>"
     },
+    "ReplicationTaskAssessmentResult":{
+      "type":"structure",
+      "members":{
+        "ReplicationTaskIdentifier":{
+          "shape":"String",
+          "documentation":"<p> The replication task identifier of the task on which the task assessment was run. </p>"
+        },
+        "ReplicationTaskArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the replication task. </p>"
+        },
+        "ReplicationTaskLastAssessmentDate":{
+          "shape":"TStamp",
+          "documentation":"<p>The date the task assessment was completed. </p>"
+        },
+        "AssessmentStatus":{
+          "shape":"String",
+          "documentation":"<p> The status of the task assessment. </p>"
+        },
+        "AssessmentResultsFile":{
+          "shape":"String",
+          "documentation":"<p> The file containing the results of the task assessment. </p>"
+        },
+        "AssessmentResults":{
+          "shape":"String",
+          "documentation":"<p> The task assessment results in JSON format. </p>"
+        },
+        "S3ObjectUrl":{
+          "shape":"String",
+          "documentation":"<p> The URL of the S3 object containing the task assessment results. </p>"
+        }
+      },
+      "documentation":"<p> The task assessment report in JSON format. </p>"
+    },
+    "ReplicationTaskAssessmentResultList":{
+      "type":"list",
+      "member":{"shape":"ReplicationTaskAssessmentResult"}
+    },
     "ReplicationTaskList":{
       "type":"list",
-      "member":{
-        "shape":"ReplicationTask",
-        "locationName":"ReplicationTask"
-      }
+      "member":{"shape":"ReplicationTask"}
     },
     "ReplicationTaskStats":{
       "type":"structure",
@@ -2868,14 +2928,32 @@
     },
     "SourceIdsList":{
       "type":"list",
-      "member":{
-        "shape":"String",
-        "locationName":"SourceId"
-      }
+      "member":{"shape":"String"}
     },
     "SourceType":{
       "type":"string",
       "enum":["replication-instance"]
+    },
+    "StartReplicationTaskAssessmentMessage":{
+      "type":"structure",
+      "required":["ReplicationTaskArn"],
+      "members":{
+        "ReplicationTaskArn":{
+          "shape":"String",
+          "documentation":"<p> The Amazon Resource Name (ARN) of the replication task. </p>"
+        }
+      },
+      "documentation":"<p/>"
+    },
+    "StartReplicationTaskAssessmentResponse":{
+      "type":"structure",
+      "members":{
+        "ReplicationTask":{
+          "shape":"ReplicationTask",
+          "documentation":"<p> The assessed replication task. </p>"
+        }
+      },
+      "documentation":"<p/>"
     },
     "StartReplicationTaskMessage":{
       "type":"structure",
@@ -2886,7 +2964,7 @@
       "members":{
         "ReplicationTaskArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Number (ARN) of the replication task to be started.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the replication task to be started.</p>"
         },
         "StartReplicationTaskType":{
           "shape":"StartReplicationTaskTypeValue",
@@ -2923,7 +3001,7 @@
       "members":{
         "ReplicationTaskArn":{
           "shape":"String",
-          "documentation":"<p>The Amazon Resource Number(ARN) of the replication task to be stopped.</p>"
+          "documentation":"<p>The Amazon Resource Name(ARN) of the replication task to be stopped.</p>"
         }
       },
       "documentation":"<p/>"
@@ -2981,17 +3059,11 @@
     },
     "SubnetIdentifierList":{
       "type":"list",
-      "member":{
-        "shape":"String",
-        "locationName":"SubnetIdentifier"
-      }
+      "member":{"shape":"String"}
     },
     "SubnetList":{
       "type":"list",
-      "member":{
-        "shape":"Subnet",
-        "locationName":"Subnet"
-      }
+      "member":{"shape":"Subnet"}
     },
     "SupportedEndpointType":{
       "type":"structure",
@@ -3013,10 +3085,7 @@
     },
     "SupportedEndpointTypeList":{
       "type":"list",
-      "member":{
-        "shape":"SupportedEndpointType",
-        "locationName":"SupportedEndpointType"
-      }
+      "member":{"shape":"SupportedEndpointType"}
     },
     "TStamp":{"type":"timestamp"},
     "TableListToReload":{
@@ -3069,6 +3138,22 @@
         "TableState":{
           "shape":"String",
           "documentation":"<p>The state of the tables described.</p> <p>Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table all | Table updates | Table is being reloaded</p>"
+        },
+        "ValidationPendingRecords":{
+          "shape":"Long",
+          "documentation":"<p>The number of records that have yet to be validated.</p>"
+        },
+        "ValidationFailedRecords":{
+          "shape":"Long",
+          "documentation":"<p>The number of records that failed validation.</p>"
+        },
+        "ValidationSuspendedRecords":{
+          "shape":"Long",
+          "documentation":"<p>The number of records that could not be validated.</p>"
+        },
+        "ValidationState":{
+          "shape":"String",
+          "documentation":"<p>The validation state of the table.</p> <p>The parameter can have the following values</p> <ul> <li> <p>Not enabled—Validation is not enabled for the table in the migration task.</p> </li> <li> <p>Pending records—Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records—Some records in the table do not match between the source and target.</p> </li> <li> <p>Suspended records—Some records in the table could not be validated.</p> </li> <li> <p>No primary key—The table could not be validated because it had no primary key.</p> </li> <li> <p>Table error—The table was not validated because it was in an error state and some data was not migrated.</p> </li> <li> <p>Validated—All rows in the table were validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error—The table could not be validated because of an unexpected error.</p> </li> </ul>"
         }
       },
       "documentation":"<p/>"
@@ -3107,10 +3192,7 @@
     },
     "TagList":{
       "type":"list",
-      "member":{
-        "shape":"Tag",
-        "locationName":"Tag"
-      }
+      "member":{"shape":"Tag"}
     },
     "TestConnectionMessage":{
       "type":"structure",
@@ -3153,10 +3235,7 @@
     },
     "VpcSecurityGroupIdList":{
       "type":"list",
-      "member":{
-        "shape":"String",
-        "locationName":"VpcSecurityGroupId"
-      }
+      "member":{"shape":"String"}
     },
     "VpcSecurityGroupMembership":{
       "type":"structure",
@@ -3174,10 +3253,7 @@
     },
     "VpcSecurityGroupMembershipList":{
       "type":"list",
-      "member":{
-        "shape":"VpcSecurityGroupMembership",
-        "locationName":"VpcSecurityGroupMembership"
-      }
+      "member":{"shape":"VpcSecurityGroupMembership"}
     }
   },
   "documentation":"<fullname>AWS Database Migration Service</fullname> <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to MySQL or SQL Server to PostgreSQL.</p> <p>For more information about AWS DMS, see the AWS DMS user guide at <a href=\"http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html\"> What Is AWS Database Migration Service? </a> </p>"

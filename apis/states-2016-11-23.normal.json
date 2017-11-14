@@ -7,6 +7,7 @@
     "protocol":"json",
     "serviceAbbreviation":"AWS SFN",
     "serviceFullName":"AWS Step Functions",
+    "serviceId":"SFN",
     "signatureVersion":"v4",
     "targetPrefix":"AWSStepFunctions",
     "uid":"states-2016-11-23"
@@ -24,7 +25,7 @@
         {"shape":"ActivityLimitExceeded"},
         {"shape":"InvalidName"}
       ],
-      "documentation":"<p>Creates an activity. An Activity is a task which you write, in any language and hosted on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the <code>GetActivityTask</code> and respond using <code>SendTask*</code> API calls. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.</p>",
+      "documentation":"<p>Creates an activity. An activity is a task which you write in any programming language and host on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.</p>",
       "idempotent":true
     },
     "CreateStateMachine":{
@@ -43,7 +44,7 @@
         {"shape":"StateMachineDeleting"},
         {"shape":"StateMachineLimitExceeded"}
       ],
-      "documentation":"<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine which states to transition to next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language.</p>",
+      "documentation":"<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language.</p>",
       "idempotent":true
     },
     "DeleteActivity":{
@@ -70,7 +71,7 @@
       "errors":[
         {"shape":"InvalidArn"}
       ],
-      "documentation":"<p>Deletes a state machine. This is an asynchronous operation-- it sets the state machine's status to \"DELETING\" and begins the delete process. Each state machine execution will be deleted the next time it makes a state transition. After all executions have completed or been deleted, the state machine itself will be deleted.</p>"
+      "documentation":"<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to <code>DELETING</code> and begins the deletion process. Each state machine execution is deleted the next time it makes a state transition.</p> <note> <p>The state machine itself is deleted after all executions are completed or deleted.</p> </note>"
     },
     "DescribeActivity":{
       "name":"DescribeActivity",
@@ -114,6 +115,20 @@
       ],
       "documentation":"<p>Describes a state machine.</p>"
     },
+    "DescribeStateMachineForExecution":{
+      "name":"DescribeStateMachineForExecution",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeStateMachineForExecutionInput"},
+      "output":{"shape":"DescribeStateMachineForExecutionOutput"},
+      "errors":[
+        {"shape":"ExecutionDoesNotExist"},
+        {"shape":"InvalidArn"}
+      ],
+      "documentation":"<p>Describes the state machine associated with a specific execution.</p>"
+    },
     "GetActivityTask":{
       "name":"GetActivityTask",
       "http":{
@@ -127,7 +142,7 @@
         {"shape":"ActivityWorkerLimitExceeded"},
         {"shape":"InvalidArn"}
       ],
-      "documentation":"<p>Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return a <code>taskToken</code> with a null string.</p> <important> <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).</p> </important>"
+      "documentation":"<p>Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a <code>taskToken</code> with a null string.</p> <important> <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).</p> </important>"
     },
     "GetExecutionHistory":{
       "name":"GetExecutionHistory",
@@ -142,7 +157,7 @@
         {"shape":"InvalidArn"},
         {"shape":"InvalidToken"}
       ],
-      "documentation":"<p>Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the <code>timeStamp</code> of the events. Use the <code>reverseOrder</code> parameter to get the latest events first. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the <code>nextToken</code> returned by the previous call.</p>"
+      "documentation":"<p>Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the <code>timeStamp</code> of the events. Use the <code>reverseOrder</code> parameter to get the latest events first.</p> <p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p>"
     },
     "ListActivities":{
       "name":"ListActivities",
@@ -155,7 +170,7 @@
       "errors":[
         {"shape":"InvalidToken"}
       ],
-      "documentation":"<p>Lists the existing activities. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the <code>nextToken</code> returned by the previous call.</p>"
+      "documentation":"<p>Lists the existing activities.</p> <p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p>"
     },
     "ListExecutions":{
       "name":"ListExecutions",
@@ -170,7 +185,7 @@
         {"shape":"InvalidToken"},
         {"shape":"StateMachineDoesNotExist"}
       ],
-      "documentation":"<p>Lists the executions of a state machine that meet the filtering criteria. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the <code>nextToken</code> returned by the previous call.</p>"
+      "documentation":"<p>Lists the executions of a state machine that meet the filtering criteria.</p> <p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p>"
     },
     "ListStateMachines":{
       "name":"ListStateMachines",
@@ -183,7 +198,7 @@
       "errors":[
         {"shape":"InvalidToken"}
       ],
-      "documentation":"<p>Lists the existing state machines. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the <code>nextToken</code> returned by the previous call.</p>"
+      "documentation":"<p>Lists the existing state machines.</p> <p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p>"
     },
     "SendTaskFailure":{
       "name":"SendTaskFailure",
@@ -213,7 +228,7 @@
         {"shape":"InvalidToken"},
         {"shape":"TaskTimedOut"}
       ],
-      "documentation":"<p>Used by workers to report to the service that the task represented by the specified <code>taskToken</code> is still making progress. This action resets the <code>Heartbeat</code> clock. The <code>Heartbeat</code> threshold is specified in the state machine's Amazon States Language definition. This action does not in itself create an event in the execution history. However, if the task times out, the execution history will contain an <code>ActivityTimedOut</code> event.</p> <note> <p>The <code>Timeout</code> of a task, defined in the state machine's Amazon States Language definition, is its maximum allowed duration, regardless of the number of <a>SendTaskHeartbeat</a> requests received.</p> </note> <note> <p>This operation is only useful for long-lived tasks to report the liveliness of the task.</p> </note>"
+      "documentation":"<p>Used by workers to report to the service that the task represented by the specified <code>taskToken</code> is still making progress. This action resets the <code>Heartbeat</code> clock. The <code>Heartbeat</code> threshold is specified in the state machine's Amazon States Language definition. This action does not in itself create an event in the execution history. However, if the task times out, the execution history contains an <code>ActivityTimedOut</code> event.</p> <note> <p>The <code>Timeout</code> of a task, defined in the state machine's Amazon States Language definition, is its maximum allowed duration, regardless of the number of <a>SendTaskHeartbeat</a> requests received.</p> </note> <note> <p>This operation is only useful for long-lived tasks to report the liveliness of the task.</p> </note>"
     },
     "SendTaskSuccess":{
       "name":"SendTaskSuccess",
@@ -264,6 +279,24 @@
         {"shape":"InvalidArn"}
       ],
       "documentation":"<p>Stops an execution.</p>"
+    },
+    "UpdateStateMachine":{
+      "name":"UpdateStateMachine",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateStateMachineInput"},
+      "output":{"shape":"UpdateStateMachineOutput"},
+      "errors":[
+        {"shape":"InvalidArn"},
+        {"shape":"InvalidDefinition"},
+        {"shape":"MissingRequiredParameter"},
+        {"shape":"StateMachineDeleting"},
+        {"shape":"StateMachineDoesNotExist"}
+      ],
+      "documentation":"<p>Updates an existing state machine by modifying its <code>definition</code> and/or <code>roleArn</code>. Running executions will continue to use the previous <code>definition</code> and <code>roleArn</code>.</p> <note> <p>All <code>StartExecution</code> calls within a few seconds will use the updated <code>definition</code> and <code>roleArn</code>. Executions started immediately after calling <code>UpdateStateMachine</code> may use the previous state machine <code>definition</code> and <code>roleArn</code>. You must include at least one of <code>definition</code> or <code>roleArn</code> or you will receive a <code>MissingRequiredParameter</code> error.</p> </note>",
+      "idempotent":true
     }
   },
   "shapes":{
@@ -319,7 +352,7 @@
         },
         "creationDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date the activity was created.</p>"
+          "documentation":"<p>The date the activity is created.</p>"
         }
       },
       "documentation":"<p>Contains details about an activity.</p>"
@@ -368,7 +401,7 @@
       "members":{
         "workerName":{
           "shape":"Identity",
-          "documentation":"<p>The name of the worker that the task was assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>.</p>"
+          "documentation":"<p>The name of the worker that the task is assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>.</p>"
         }
       },
       "documentation":"<p>Contains details about the start of an activity during an execution.</p>"
@@ -438,7 +471,7 @@
         },
         "creationDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date the activity was created.</p>"
+          "documentation":"<p>The date the activity is created.</p>"
         }
       }
     },
@@ -477,7 +510,7 @@
         },
         "creationDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date the state machine was created.</p>"
+          "documentation":"<p>The date the state machine is created.</p>"
         }
       }
     },
@@ -548,7 +581,7 @@
         },
         "creationDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date the activity was created.</p>"
+          "documentation":"<p>The date the activity is created.</p>"
         }
       }
     },
@@ -590,7 +623,7 @@
         },
         "startDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date the execution was started.</p>"
+          "documentation":"<p>The date the execution is started.</p>"
         },
         "stopDate":{
           "shape":"Timestamp",
@@ -602,7 +635,49 @@
         },
         "output":{
           "shape":"Data",
-          "documentation":"<p>The JSON output data of the execution.</p>"
+          "documentation":"<p>The JSON output data of the execution.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>"
+        }
+      }
+    },
+    "DescribeStateMachineForExecutionInput":{
+      "type":"structure",
+      "required":["executionArn"],
+      "members":{
+        "executionArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the execution you want state machine information for.</p>"
+        }
+      }
+    },
+    "DescribeStateMachineForExecutionOutput":{
+      "type":"structure",
+      "required":[
+        "stateMachineArn",
+        "name",
+        "definition",
+        "roleArn",
+        "updateDate"
+      ],
+      "members":{
+        "stateMachineArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the state machine associated with the execution.</p>"
+        },
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name of the state machine associated with the execution.</p>"
+        },
+        "definition":{
+          "shape":"Definition",
+          "documentation":"<p>The Amazon States Language definition of the state machine.</p>"
+        },
+        "roleArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role of the State Machine for the execution. </p>"
+        },
+        "updateDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date and time the state machine associated with an execution was updated. For a newly created state machine, this is the creation date.</p>"
         }
       }
     },
@@ -648,7 +723,7 @@
         },
         "creationDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date the state machine was created.</p>"
+          "documentation":"<p>The date the state machine is created.</p>"
         }
       }
     },
@@ -810,7 +885,7 @@
         },
         "workerName":{
           "shape":"Name",
-          "documentation":"<p>You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name will be used when it is logged in the execution history.</p>"
+          "documentation":"<p>You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.</p>"
         }
       }
     },
@@ -837,7 +912,7 @@
         },
         "maxResults":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
         },
         "reverseOrder":{
           "shape":"ReverseOrder",
@@ -845,7 +920,7 @@
         },
         "nextToken":{
           "shape":"PageToken",
-          "documentation":"<p>If a <code>nextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
+          "documentation":"<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
         }
       }
     },
@@ -859,7 +934,7 @@
         },
         "nextToken":{
           "shape":"PageToken",
-          "documentation":"<p>If a <code>nextToken</code> is returned, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
+          "documentation":"<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
         }
       }
     },
@@ -1108,11 +1183,11 @@
       "members":{
         "maxResults":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
         },
         "nextToken":{
           "shape":"PageToken",
-          "documentation":"<p>If a <code>nextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
+          "documentation":"<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
         }
       }
     },
@@ -1126,7 +1201,7 @@
         },
         "nextToken":{
           "shape":"PageToken",
-          "documentation":"<p>If a <code>nextToken</code> is returned, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
+          "documentation":"<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
         }
       }
     },
@@ -1136,7 +1211,7 @@
       "members":{
         "stateMachineArn":{
           "shape":"Arn",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the state machine whose executions will be listed.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the state machine whose executions is listed.</p>"
         },
         "statusFilter":{
           "shape":"ExecutionStatus",
@@ -1144,11 +1219,11 @@
         },
         "maxResults":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
         },
         "nextToken":{
           "shape":"PageToken",
-          "documentation":"<p>If a <code>nextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
+          "documentation":"<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
         }
       }
     },
@@ -1162,7 +1237,7 @@
         },
         "nextToken":{
           "shape":"PageToken",
-          "documentation":"<p>If a <code>nextToken</code> is returned, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
+          "documentation":"<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
         }
       }
     },
@@ -1171,11 +1246,11 @@
       "members":{
         "maxResults":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of results that will be returned per call. <code>nextToken</code> can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default.</p> <p>This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.</p>"
+          "documentation":"<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
         },
         "nextToken":{
           "shape":"PageToken",
-          "documentation":"<p>If a <code>nextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
+          "documentation":"<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
         }
       }
     },
@@ -1186,9 +1261,17 @@
         "stateMachines":{"shape":"StateMachineList"},
         "nextToken":{
           "shape":"PageToken",
-          "documentation":"<p>If a <code>nextToken</code> is returned, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
+          "documentation":"<p>If a <code>nextToken</code> is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>nextToken</code>. Keep all other arguments unchanged.</p> <p>The configured <code>maxResults</code> determines how many results can be returned in a single call.</p>"
         }
       }
+    },
+    "MissingRequiredParameter":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>Request is missing a required parameter. This error occurs if both <code>definition</code> and <code>roleArn</code> are not specified.</p>",
+      "exception":true
     },
     "Name":{
       "type":"string",
@@ -1235,7 +1318,7 @@
       "members":{
         "taskToken":{
           "shape":"TaskToken",
-          "documentation":"<p>The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTask::taskToken).</p>"
+          "documentation":"<p>The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).</p>"
         }
       }
     },
@@ -1253,7 +1336,7 @@
       "members":{
         "taskToken":{
           "shape":"TaskToken",
-          "documentation":"<p>The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTask::taskToken).</p>"
+          "documentation":"<p>The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see <a>GetActivityTaskOutput$taskToken</a>).</p>"
         },
         "output":{
           "shape":"Data",
@@ -1276,7 +1359,7 @@
         },
         "name":{
           "shape":"Name",
-          "documentation":"<p>The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see <a href=\"http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
+          "documentation":"<p>The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see <a href=\"http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <important> <p>An execution can't use the name of another execution for 90 days.</p> <p>When you make multiple <code>StartExecution</code> calls with the same name, the new execution doesn't run and the following rules apply:</p> <ul> <li> <p>When the original execution is open and the execution input from the new call is <i>different</i>, the <code>ExecutionAlreadyExists</code> message is returned.</p> </li> <li> <p>When the original execution is open and the execution input from the new call is <i>identical</i>, the <code>Success</code> message is returned.</p> </li> <li> <p>When the original execution is closed, the <code>ExecutionAlreadyExists</code> message is returned regardless of input.</p> </li> </ul> </important> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>whitespace</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul>"
         },
         "input":{
           "shape":"Data",
@@ -1297,7 +1380,7 @@
         },
         "startDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date the execution was started.</p>"
+          "documentation":"<p>The date the execution is started.</p>"
         }
       }
     },
@@ -1385,7 +1468,7 @@
         },
         "creationDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date the state machine was created.</p>"
+          "documentation":"<p>The date the state machine is created.</p>"
         }
       },
       "documentation":"<p>Contains details about the state machine.</p>"
@@ -1421,7 +1504,7 @@
       "members":{
         "stopDate":{
           "shape":"Timestamp",
-          "documentation":"<p>The date the execution was stopped.</p>"
+          "documentation":"<p>The date the execution is stopped.</p>"
         }
       }
     },
@@ -1445,7 +1528,35 @@
       "min":1
     },
     "TimeoutInSeconds":{"type":"long"},
-    "Timestamp":{"type":"timestamp"}
+    "Timestamp":{"type":"timestamp"},
+    "UpdateStateMachineInput":{
+      "type":"structure",
+      "required":["stateMachineArn"],
+      "members":{
+        "stateMachineArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the state machine.</p>"
+        },
+        "definition":{
+          "shape":"Definition",
+          "documentation":"<p>The Amazon States Language definition of the state machine.</p>"
+        },
+        "roleArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role of the state machine.</p>"
+        }
+      }
+    },
+    "UpdateStateMachineOutput":{
+      "type":"structure",
+      "required":["updateDate"],
+      "members":{
+        "updateDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The date and time the state machine was updated.</p>"
+        }
+      }
+    }
   },
-  "documentation":"<fullname>AWS Step Functions</fullname> <p>AWS Step Functions is a service that lets you coordinate the components of distributed applications and microservices using visual workflows.</p> <p>You can use Step Functions to build applications from individual components, each of which performs a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a console that helps visualize the components of your application as a series of steps. Step Functions automatically triggers and tracks each step, and retries steps when there are errors, so your application executes in order and as expected, every time. Step Functions logs the state of each step, so you can diagnose and debug problems quickly.</p> <p>Step Functions manages operations and underlying infrastructure to ensure your application is available at any scale. You can run tasks on AWS, your own servers, or any system that has access to AWS. You can access and use Step Functions using the console, the AWS SDKs, or an HTTP API. For more information about Step Functions, see the <i> <a href=\"http://docs.aws.amazon.com/step-functions/latest/dg/welcome.html\">AWS Step Functions Developer Guide</a> </i>.</p>"
+  "documentation":"<fullname>AWS Step Functions</fullname> <p>AWS Step Functions is a service that lets you coordinate the components of distributed applications and microservices using visual workflows.</p> <p>You can use Step Functions to build applications from individual components, each of which performs a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a console that helps visualize the components of your application as a series of steps. Step Functions automatically triggers and tracks each step, and retries steps when there are errors, so your application executes predictably and in the right order every time. Step Functions logs the state of each step, so you can quickly diagnose and debug any issues.</p> <p>Step Functions manages operations and underlying infrastructure to ensure your application is available at any scale. You can run tasks on AWS, your own servers, or any system that has access to AWS. You can access and use Step Functions using the console, the AWS SDKs, or an HTTP API. For more information about Step Functions, see the <i> <a href=\"http://docs.aws.amazon.com/step-functions/latest/dg/welcome.html\">AWS Step Functions Developer Guide</a> </i>.</p>"
 }

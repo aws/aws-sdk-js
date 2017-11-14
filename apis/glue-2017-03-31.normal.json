@@ -119,7 +119,7 @@
         {"shape":"InvalidInputException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Creates a <code>Classifier</code> in the user's account.</p>"
+      "documentation":"<p>Creates a classifier in the user's account. This may be either a <code>GrokClassifier</code> or an <code>XMLClassifier</code>. </p>"
     },
     "CreateConnection":{
       "name":"CreateConnection",
@@ -150,7 +150,7 @@
         {"shape":"OperationTimeoutException"},
         {"shape":"ResourceNumberLimitExceededException"}
       ],
-      "documentation":"<p>Creates a new <code>Crawler</code> with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the <i>s3Targets</i> or the <i>jdbcTargets</i> field.</p>"
+      "documentation":"<p>Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the <i>s3Targets</i> or the <i>jdbcTargets</i> field.</p>"
     },
     "CreateDatabase":{
       "name":"CreateDatabase",
@@ -304,7 +304,7 @@
         {"shape":"EntityNotFoundException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Removes a <code>Classifier</code> from the metadata store.</p>"
+      "documentation":"<p>Removes a classifier from the Data Catalog.</p>"
     },
     "DeleteConnection":{
       "name":"DeleteConnection",
@@ -334,7 +334,7 @@
         {"shape":"SchedulerTransitioningException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Removes a specified <code>Crawler</code> from the metadata store, unless the <code>Crawler</code> state is <code>RUNNING</code>.</p>"
+      "documentation":"<p>Removes a specified crawler from the Data Catalog, unless the crawler state is <code>RUNNING</code>.</p>"
     },
     "DeleteDatabase":{
       "name":"DeleteDatabase",
@@ -472,7 +472,7 @@
         {"shape":"EntityNotFoundException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Retrieve a <code>Classifier</code> by name.</p>"
+      "documentation":"<p>Retrieve a classifier by name.</p>"
     },
     "GetClassifiers":{
       "name":"GetClassifiers",
@@ -485,7 +485,7 @@
       "errors":[
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Lists all Classifier objects in the metadata store.</p>"
+      "documentation":"<p>Lists all classifier objects in the Data Catalog.</p>"
     },
     "GetConnection":{
       "name":"GetConnection",
@@ -527,7 +527,7 @@
         {"shape":"EntityNotFoundException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Retrieves metadata for a specified <code>Crawler</code>.</p>"
+      "documentation":"<p>Retrieves metadata for a specified crawler.</p>"
     },
     "GetCrawlerMetrics":{
       "name":"GetCrawlerMetrics",
@@ -553,7 +553,7 @@
       "errors":[
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Retrieves metadata for all <code>Crawlers</code> defined in the customer account.</p>"
+      "documentation":"<p>Retrieves metadata for all crawlers defined in the customer account.</p>"
     },
     "GetDatabase":{
       "name":"GetDatabase",
@@ -708,7 +708,8 @@
       "errors":[
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"EntityNotFoundException"}
       ],
       "documentation":"<p>Creates mappings.</p>"
     },
@@ -914,7 +915,7 @@
         {"shape":"CrawlerRunningException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Starts a crawl using the specified <code>Crawler</code>, regardless of what is scheduled. If the <code>Crawler</code> is already running, does nothing.</p>"
+      "documentation":"<p>Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.</p>"
     },
     "StartCrawlerSchedule":{
       "name":"StartCrawlerSchedule",
@@ -983,7 +984,7 @@
         {"shape":"CrawlerStoppingException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>If the specified <code>Crawler</code> is running, stops the crawl.</p>"
+      "documentation":"<p>If the specified crawler is running, stops the crawl.</p>"
     },
     "StopCrawlerSchedule":{
       "name":"StopCrawlerSchedule",
@@ -1031,7 +1032,7 @@
         {"shape":"EntityNotFoundException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Modifies an existing <code>Classifier</code>.</p>"
+      "documentation":"<p>Modifies an existing classifier (either a <code>GrokClassifier</code> or an <code>XMLClassifier</code>).</p>"
     },
     "UpdateConnection":{
       "name":"UpdateConnection",
@@ -1063,7 +1064,7 @@
         {"shape":"CrawlerRunningException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Updates a <code>Crawler</code>. If a <code>Crawler</code> is running, you must stop it using <code>StopCrawler</code> before updating it.</p>"
+      "documentation":"<p>Updates a crawler. If a crawler is running, you must stop it using <code>StopCrawler</code> before updating it.</p>"
     },
     "UpdateCrawlerSchedule":{
       "name":"UpdateCrawlerSchedule",
@@ -1080,7 +1081,7 @@
         {"shape":"SchedulerTransitioningException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Updates the schedule of a crawler using a Cron expression. </p>"
+      "documentation":"<p>Updates the schedule of a crawler using a <code>cron</code> expression. </p>"
     },
     "UpdateDatabase":{
       "name":"UpdateDatabase",
@@ -1559,10 +1560,14 @@
       "members":{
         "GrokClassifier":{
           "shape":"GrokClassifier",
-          "documentation":"<p>A GrokClassifier object.</p>"
+          "documentation":"<p>A <code>GrokClassifier</code> object.</p>"
+        },
+        "XMLClassifier":{
+          "shape":"XMLClassifier",
+          "documentation":"<p>An <code>XMLClassifier</code> object.</p>"
         }
       },
-      "documentation":"<p>Classifiers are written in Python and triggered during a Crawl Task. You can write your own Classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A Classifier first checks whether a given file is in a format it can handle, and then, if so, creates a schema in the form of a <code>StructType</code> object that matches that data format.</p>"
+      "documentation":"<p>Classifiers are written in Python and triggered during a crawl task. You can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>A classifier can be either a <code>grok</code> classifier or an XML classifier, specified in one or the other field of the <code>Classifier</code> object.</p>"
     },
     "ClassifierList":{
       "type":"list",
@@ -1864,11 +1869,11 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The <code>Crawler</code> name.</p>"
+          "documentation":"<p>The crawler name.</p>"
         },
         "Role":{
-          "shape":"RoleArn",
-          "documentation":"<p>The IAM role (or ARN of an IAM role) used to access customer resources such as data in S3.</p>"
+          "shape":"Role",
+          "documentation":"<p>The IAM role (or ARN of an IAM role) used to access customer resources, such as data in Amazon S3.</p>"
         },
         "Targets":{
           "shape":"CrawlerTargets",
@@ -1876,43 +1881,43 @@
         },
         "DatabaseName":{
           "shape":"DatabaseName",
-          "documentation":"<p>The <code>Database</code> where this Crawler's output should be stored.</p>"
+          "documentation":"<p>The database where metadata is written by this crawler.</p>"
         },
         "Description":{
           "shape":"DescriptionString",
-          "documentation":"<p>A description of this Crawler and where it should be used.</p>"
+          "documentation":"<p>A description of the crawler.</p>"
         },
         "Classifiers":{
           "shape":"ClassifierNameList",
-          "documentation":"<p>A list of custom <code>Classifier</code>s associated with this Crawler.</p>"
+          "documentation":"<p>A list of custom classifiers associated with the crawler.</p>"
         },
         "SchemaChangePolicy":{
           "shape":"SchemaChangePolicy",
-          "documentation":"<p>Sets policy for the crawler's update and delete behavior.</p>"
+          "documentation":"<p>Sets the behavior when the crawler finds a changed or deleted object.</p>"
         },
         "State":{
           "shape":"CrawlerState",
-          "documentation":"<p>Indicates whether this Crawler is running, or whether a run is pending.</p>"
+          "documentation":"<p>Indicates whether the crawler is running, or whether a run is pending.</p>"
         },
         "TablePrefix":{
           "shape":"TablePrefix",
-          "documentation":"<p>The table prefix used for catalog tables created.</p>"
+          "documentation":"<p>The prefix added to the names of tables that are created.</p>"
         },
         "Schedule":{
           "shape":"Schedule",
-          "documentation":"<p>A <code>Schedule</code> object that specifies the schedule on which this Crawler is to be run.</p>"
+          "documentation":"<p>For scheduled crawlers, the schedule when the crawler runs.</p>"
         },
         "CrawlElapsedTime":{
           "shape":"MillisecondsCount",
-          "documentation":"<p>If this Crawler is running, contains the total time elapsed since the last crawl began.</p>"
+          "documentation":"<p>If the crawler is running, contains the total time elapsed since the last crawl began.</p>"
         },
         "CreationTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The time when the Crawler was created.</p>"
+          "documentation":"<p>The time when the crawler was created.</p>"
         },
         "LastUpdated":{
           "shape":"Timestamp",
-          "documentation":"<p>The time the Crawler was last updated.</p>"
+          "documentation":"<p>The time the crawler was last updated.</p>"
         },
         "LastCrawl":{
           "shape":"LastCrawlInfo",
@@ -1920,11 +1925,16 @@
         },
         "Version":{
           "shape":"VersionId",
-          "documentation":"<p>The version of the Crawler.</p>"
+          "documentation":"<p>The version of the crawler.</p>"
+        },
+        "Configuration":{
+          "shape":"CrawlerConfiguration",
+          "documentation":"<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p>"
         }
       },
-      "documentation":"<p>Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metatdata concerning the data source in the Data Catalog.</p>"
+      "documentation":"<p>Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.</p>"
     },
+    "CrawlerConfiguration":{"type":"string"},
     "CrawlerList":{
       "type":"list",
       "member":{"shape":"Crawler"}
@@ -1942,7 +1952,7 @@
         },
         "StillEstimating":{
           "shape":"Boolean",
-          "documentation":"<p>True if the crawler is estimating its </p>"
+          "documentation":"<p>True if the crawler is still estimating how long it will take to complete this run.</p>"
         },
         "LastRuntimeSeconds":{
           "shape":"NonNegativeDouble",
@@ -1954,15 +1964,15 @@
         },
         "TablesCreated":{
           "shape":"NonNegativeInteger",
-          "documentation":"<p>A list of the tables created by this crawler.</p>"
+          "documentation":"<p>The number of tables created by this crawler.</p>"
         },
         "TablesUpdated":{
           "shape":"NonNegativeInteger",
-          "documentation":"<p>A list of the tables created by this crawler.</p>"
+          "documentation":"<p>The number of tables updated by this crawler.</p>"
         },
         "TablesDeleted":{
           "shape":"NonNegativeInteger",
-          "documentation":"<p>A list of the tables deleted by this crawler.</p>"
+          "documentation":"<p>The number of tables deleted by this crawler.</p>"
         }
       },
       "documentation":"<p>Metrics for a specified crawler.</p>"
@@ -2023,21 +2033,25 @@
       "members":{
         "S3Targets":{
           "shape":"S3TargetList",
-          "documentation":"<p>Specifies targets in AWS S3.</p>"
+          "documentation":"<p>Specifies Amazon S3 targets.</p>"
         },
         "JdbcTargets":{
           "shape":"JdbcTargetList",
           "documentation":"<p>Specifies JDBC targets.</p>"
         }
       },
-      "documentation":"<p>Specifies crawler targets.</p>"
+      "documentation":"<p>Specifies data stores to crawl.</p>"
     },
     "CreateClassifierRequest":{
       "type":"structure",
       "members":{
         "GrokClassifier":{
           "shape":"CreateGrokClassifierRequest",
-          "documentation":"<p>A grok classifier to create.</p>"
+          "documentation":"<p>A <code>GrokClassifier</code> object specifying the classifier to create.</p>"
+        },
+        "XMLClassifier":{
+          "shape":"CreateXMLClassifierRequest",
+          "documentation":"<p>An <code>XMLClassifier</code> object specifying the classifier to create.</p>"
         }
       }
     },
@@ -2076,19 +2090,19 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the new <code>Crawler</code>.</p>"
+          "documentation":"<p>Name of the new crawler.</p>"
         },
         "Role":{
-          "shape":"RoleArn",
-          "documentation":"<p>The IAM role (or ARN of an IAM role) used by the new <code>Crawler</code> to access customer resources.</p>"
+          "shape":"Role",
+          "documentation":"<p>The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.</p>"
         },
         "DatabaseName":{
           "shape":"DatabaseName",
-          "documentation":"<p>The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>"
+          "documentation":"<p>The AWS Glue database where results are written, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>"
         },
         "Description":{
           "shape":"DescriptionString",
-          "documentation":"<p>A description of the new <code>Crawler</code>.</p>"
+          "documentation":"<p>A description of the new crawler.</p>"
         },
         "Targets":{
           "shape":"CrawlerTargets",
@@ -2100,15 +2114,19 @@
         },
         "Classifiers":{
           "shape":"ClassifierNameList",
-          "documentation":"<p>A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>"
+          "documentation":"<p>A list of custom classifiers that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>"
         },
         "TablePrefix":{
           "shape":"TablePrefix",
-          "documentation":"<p>The table prefix used for catalog tables created.</p>"
+          "documentation":"<p>The table prefix used for catalog tables that are created.</p>"
         },
         "SchemaChangePolicy":{
           "shape":"SchemaChangePolicy",
           "documentation":"<p>Policy for the crawler's update and deletion behavior.</p>"
+        },
+        "Configuration":{
+          "shape":"CrawlerConfiguration",
+          "documentation":"<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition.</p>"
         }
       }
     },
@@ -2249,11 +2267,11 @@
       "members":{
         "Classification":{
           "shape":"Classification",
-          "documentation":"<p>The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.</p>"
+          "documentation":"<p>An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.</p>"
         },
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The name of the new Classifier.</p>"
+          "documentation":"<p>The name of the new classifier.</p>"
         },
         "GrokPattern":{
           "shape":"GrokPattern",
@@ -2261,10 +2279,10 @@
         },
         "CustomPatterns":{
           "shape":"CustomPatterns",
-          "documentation":"<p>Custom grok patterns used by this classifier.</p>"
+          "documentation":"<p>Optional custom grok patterns used by this classifier.</p>"
         }
       },
-      "documentation":"<p>Specifies a Grok classifier for CreateClassifier to create.</p>"
+      "documentation":"<p>Specifies a <code>grok</code> classifier for <code>CreateClassifier</code> to create.</p>"
     },
     "CreateJobRequest":{
       "type":"structure",
@@ -2473,6 +2491,28 @@
       "members":{
       }
     },
+    "CreateXMLClassifierRequest":{
+      "type":"structure",
+      "required":[
+        "Classification",
+        "Name"
+      ],
+      "members":{
+        "Classification":{
+          "shape":"Classification",
+          "documentation":"<p>An identifier of the data format that the classifier matches.</p>"
+        },
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the classifier.</p>"
+        },
+        "RowTag":{
+          "shape":"RowTag",
+          "documentation":"<p>The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.</p>"
+        }
+      },
+      "documentation":"<p>Specifies an XML classifier for <code>CreateClassifier</code> to create.</p>"
+    },
     "CronExpression":{"type":"string"},
     "CustomPatterns":{
       "type":"string",
@@ -2557,7 +2597,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the <code>Classifier</code> to remove.</p>"
+          "documentation":"<p>Name of the classifier to remove.</p>"
         }
       }
     },
@@ -2597,7 +2637,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the <code>Crawler</code> to remove.</p>"
+          "documentation":"<p>Name of the crawler to remove.</p>"
         }
       }
     },
@@ -2952,7 +2992,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the <code>Classifier</code> to retrieve.</p>"
+          "documentation":"<p>Name of the classifier to retrieve.</p>"
         }
       }
     },
@@ -2961,7 +3001,7 @@
       "members":{
         "Classifier":{
           "shape":"Classifier",
-          "documentation":"<p>The requested <code>Classifier</code>.</p>"
+          "documentation":"<p>The requested classifier.</p>"
         }
       }
     },
@@ -2983,7 +3023,7 @@
       "members":{
         "Classifiers":{
           "shape":"ClassifierList",
-          "documentation":"<p>The requested list of <code>Classifier</code> objects.</p>"
+          "documentation":"<p>The requested list of classifier objects.</p>"
         },
         "NextToken":{
           "shape":"Token",
@@ -3098,7 +3138,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the <code>Crawler</code> to retrieve metadata for.</p>"
+          "documentation":"<p>Name of the crawler to retrieve metadata for.</p>"
         }
       }
     },
@@ -3107,7 +3147,7 @@
       "members":{
         "Crawler":{
           "shape":"Crawler",
-          "documentation":"<p>The metadata for the specified <code>Crawler</code>.</p>"
+          "documentation":"<p>The metadata for the specified crawler.</p>"
         }
       }
     },
@@ -3116,7 +3156,7 @@
       "members":{
         "MaxResults":{
           "shape":"PageSize",
-          "documentation":"<p>The number of Crawlers to return on each call.</p>"
+          "documentation":"<p>The number of crawlers to return on each call.</p>"
         },
         "NextToken":{
           "shape":"Token",
@@ -3129,7 +3169,7 @@
       "members":{
         "Crawlers":{
           "shape":"CrawlerList",
-          "documentation":"<p>A list of <code>Crawler</code> metadata.</p>"
+          "documentation":"<p>A list of crawler metadata.</p>"
         },
         "NextToken":{
           "shape":"Token",
@@ -3507,7 +3547,7 @@
       "members":{
         "PythonScript":{
           "shape":"PythonScript",
-          "documentation":"<p>A python script to perform the mapping.</p>"
+          "documentation":"<p>A Python script to perform the mapping.</p>"
         }
       }
     },
@@ -3761,7 +3801,7 @@
         },
         "Classification":{
           "shape":"Classification",
-          "documentation":"<p>The data form that the classifier matches, such as Twitter, JSON, Omniture Logs, and so forth.</p>"
+          "documentation":"<p>An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on.</p>"
         },
         "CreationTime":{
           "shape":"Timestamp",
@@ -3777,14 +3817,14 @@
         },
         "GrokPattern":{
           "shape":"GrokPattern",
-          "documentation":"<p>The grok pattern used by this classifier.</p>"
+          "documentation":"<p>The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifers</a>.</p>"
         },
         "CustomPatterns":{
           "shape":"CustomPatterns",
-          "documentation":"<p>Custom grok patterns used by this classifier.</p>"
+          "documentation":"<p>Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifers</a>.</p>"
         }
       },
-      "documentation":"<p>A classifier that uses <code>grok</code>.</p>"
+      "documentation":"<p>A classifier that uses <code>grok</code> patterns.</p>"
     },
     "GrokPattern":{
       "type":"string",
@@ -3858,7 +3898,7 @@
       "members":{
         "ConnectionName":{
           "shape":"ConnectionName",
-          "documentation":"<p>The name of the connection to use for the JDBC target.</p>"
+          "documentation":"<p>The name of the connection to use to connect to the JDBC target.</p>"
         },
         "Path":{
           "shape":"Path",
@@ -3866,10 +3906,10 @@
         },
         "Exclusions":{
           "shape":"PathList",
-          "documentation":"<p>A list of items to exclude from the crawl.</p>"
+          "documentation":"<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
         }
       },
-      "documentation":"<p>Specifies a JDBC target for a crawl.</p>"
+      "documentation":"<p>Specifies a JDBC data store to crawl.</p>"
     },
     "JdbcTargetList":{
       "type":"list",
@@ -4105,7 +4145,7 @@
         },
         "ErrorMessage":{
           "shape":"DescriptionString",
-          "documentation":"<p>Error information about the last crawl, if an error occurred.</p>"
+          "documentation":"<p>If an error occurred, the error information about the last crawl.</p>"
         },
         "LogGroup":{
           "shape":"LogGroup",
@@ -4143,7 +4183,7 @@
         },
         "S3":{
           "shape":"CodeGenNodeArgs",
-          "documentation":"<p>An AWS S3 location.</p>"
+          "documentation":"<p>An Amazon S3 location.</p>"
         }
       },
       "documentation":"<p>The location of resources.</p>"
@@ -4536,24 +4576,26 @@
       "max":1000,
       "min":0
     },
+    "Role":{"type":"string"},
     "RoleArn":{
       "type":"string",
       "pattern":"arn:aws:iam::\\d{12}:role/.*"
     },
     "RoleString":{"type":"string"},
+    "RowTag":{"type":"string"},
     "S3Target":{
       "type":"structure",
       "members":{
         "Path":{
           "shape":"Path",
-          "documentation":"<p>The path to the S3 target.</p>"
+          "documentation":"<p>The path to the Amazon S3 target.</p>"
         },
         "Exclusions":{
           "shape":"PathList",
-          "documentation":"<p>A list of S3 objects to exclude from the crawl.</p>"
+          "documentation":"<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
         }
       },
-      "documentation":"<p>Specifies a crawler target in AWS S3.</p>"
+      "documentation":"<p>Specifies a data store in Amazon S3.</p>"
     },
     "S3TargetList":{
       "type":"list",
@@ -4619,11 +4661,11 @@
       "members":{
         "UpdateBehavior":{
           "shape":"UpdateBehavior",
-          "documentation":"<p>The update behavior.</p>"
+          "documentation":"<p>The update behavior when the crawler finds a changed schema.</p>"
         },
         "DeleteBehavior":{
           "shape":"DeleteBehavior",
-          "documentation":"<p>The deletion behavior.</p>"
+          "documentation":"<p>The deletion behavior when the crawler finds a deleted object.</p>"
         }
       },
       "documentation":"<p>Crawler policy for update and deletion behavior.</p>"
@@ -4696,7 +4738,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the <code>Crawler</code> to start.</p>"
+          "documentation":"<p>Name of the crawler to start.</p>"
         }
       }
     },
@@ -4776,7 +4818,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the <code>Crawler</code> to stop.</p>"
+          "documentation":"<p>Name of the crawler to stop.</p>"
         }
       }
     },
@@ -5165,6 +5207,10 @@
         "GrokClassifier":{
           "shape":"UpdateGrokClassifierRequest",
           "documentation":"<p>A <code>GrokClassifier</code> object with updated fields.</p>"
+        },
+        "XMLClassifier":{
+          "shape":"UpdateXMLClassifierRequest",
+          "documentation":"<p>An <code>XMLClassifier</code> object with updated fields.</p>"
         }
       }
     },
@@ -5205,23 +5251,23 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the new <code>Crawler</code>.</p>"
+          "documentation":"<p>Name of the new crawler.</p>"
         },
         "Role":{
-          "shape":"RoleArn",
-          "documentation":"<p>The IAM role (or ARN of an IAM role) used by the new <code>Crawler</code> to access customer resources.</p>"
+          "shape":"Role",
+          "documentation":"<p>The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.</p>"
         },
         "DatabaseName":{
           "shape":"DatabaseName",
-          "documentation":"<p>The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>"
+          "documentation":"<p>The AWS Glue database where results are stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>"
         },
         "Description":{
           "shape":"DescriptionStringRemovable",
-          "documentation":"<p>A description of the new <code>Crawler</code>.</p>"
+          "documentation":"<p>A description of the new crawler.</p>"
         },
         "Targets":{
           "shape":"CrawlerTargets",
-          "documentation":"<p>A list of collection of targets to crawl.</p>"
+          "documentation":"<p>A list of targets to crawl.</p>"
         },
         "Schedule":{
           "shape":"CronExpression",
@@ -5229,15 +5275,19 @@
         },
         "Classifiers":{
           "shape":"ClassifierNameList",
-          "documentation":"<p>A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>"
+          "documentation":"<p>A list of custom classifiers that the user has registered. By default, all classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>"
         },
         "TablePrefix":{
           "shape":"TablePrefix",
-          "documentation":"<p>The table prefix used for catalog tables created.</p>"
+          "documentation":"<p>The table prefix used for catalog tables that are created.</p>"
         },
         "SchemaChangePolicy":{
           "shape":"SchemaChangePolicy",
           "documentation":"<p>Policy for the crawler's update and deletion behavior.</p>"
+        },
+        "Configuration":{
+          "shape":"CrawlerConfiguration",
+          "documentation":"<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p>"
         }
       }
     },
@@ -5328,7 +5378,7 @@
         },
         "Classification":{
           "shape":"Classification",
-          "documentation":"<p>The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.</p>"
+          "documentation":"<p>An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.</p>"
         },
         "GrokPattern":{
           "shape":"GrokPattern",
@@ -5336,10 +5386,10 @@
         },
         "CustomPatterns":{
           "shape":"CustomPatterns",
-          "documentation":"<p>Custom grok patterns used by this classifier.</p>"
+          "documentation":"<p>Optional custom grok patterns used by this classifier.</p>"
         }
       },
-      "documentation":"<p>Specifies a Grok classifier to update when passed to UpdateClassifier.</p>"
+      "documentation":"<p>Specifies a grok classifier to update when passed to <code>UpdateClassifier</code>.</p>"
     },
     "UpdateJobRequest":{
       "type":"structure",
@@ -5486,6 +5536,25 @@
       "members":{
       }
     },
+    "UpdateXMLClassifierRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the classifier.</p>"
+        },
+        "Classification":{
+          "shape":"Classification",
+          "documentation":"<p>An identifier of the data format that the classifier matches.</p>"
+        },
+        "RowTag":{
+          "shape":"RowTag",
+          "documentation":"<p>The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.</p>"
+        }
+      },
+      "documentation":"<p>Specifies an XML classifier to be updated.</p>"
+    },
     "UriString":{"type":"string"},
     "UserDefinedFunction":{
       "type":"structure",
@@ -5587,6 +5656,40 @@
     "ViewTextString":{
       "type":"string",
       "max":2048
+    },
+    "XMLClassifier":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Classification"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the classifier.</p>"
+        },
+        "Classification":{
+          "shape":"Classification",
+          "documentation":"<p>An identifier of the data format that the classifier matches.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time this classifier was registered.</p>"
+        },
+        "LastUpdated":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time this classifier was last updated.</p>"
+        },
+        "Version":{
+          "shape":"VersionId",
+          "documentation":"<p>The version of this classifier.</p>"
+        },
+        "RowTag":{
+          "shape":"RowTag",
+          "documentation":"<p>The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.</p>"
+        }
+      },
+      "documentation":"<p>A classifier for <code>XML</code> content.</p>"
     }
   },
   "documentation":"<fullname>AWS Glue</fullname> <p>Defines the public endpoint for the AWS Glue service.</p>"

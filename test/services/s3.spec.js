@@ -300,7 +300,7 @@ describe('AWS.S3', function() {
       describe('will return "s3" when', function() {
         it('user does not specify a signatureVersion for a region that supports v2', function(done) {
           s3 = new AWS.S3({
-            region: 'us-east-1'
+            region: 'eu-west-1'
           });
           expect(s3.getSignatureVersion(req)).to.equal('s3');
           done();

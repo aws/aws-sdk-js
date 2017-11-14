@@ -188,6 +188,10 @@ declare class SES extends Service {
    */
   describeReceiptRuleSet(callback?: (err: AWSError, data: SES.Types.DescribeReceiptRuleSetResponse) => void): Request<SES.Types.DescribeReceiptRuleSetResponse, AWSError>;
   /**
+   * Returns the email sending status of the Amazon SES account. You can execute this operation no more than once per second.
+   */
+  getAccountSendingEnabled(callback?: (err: AWSError, data: SES.Types.GetAccountSendingEnabledResponse) => void): Request<SES.Types.GetAccountSendingEnabledResponse, AWSError>;
+  /**
    * Returns the current status of Easy DKIM signing for an entity. For domain name identities, this operation also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published. This operation takes a list of identities as input and returns the following information for each:   Whether Easy DKIM signing is enabled or disabled.   A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.   Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.   This operation is throttled at one request per second and can only get DKIM attributes for up to 100 identities at a time. For more information about creating DNS records using DKIM tokens, go to the Amazon SES Developer Guide.
    */
   getIdentityDkimAttributes(params: SES.Types.GetIdentityDkimAttributesRequest, callback?: (err: AWSError, data: SES.Types.GetIdentityDkimAttributesResponse) => void): Request<SES.Types.GetIdentityDkimAttributesResponse, AWSError>;
@@ -416,6 +420,14 @@ declare class SES extends Service {
    */
   testRenderTemplate(callback?: (err: AWSError, data: SES.Types.TestRenderTemplateResponse) => void): Request<SES.Types.TestRenderTemplateResponse, AWSError>;
   /**
+   * Enables or disables email sending across your entire Amazon SES account. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending across your Amazon SES account when reputation metrics (such as your bounce on complaint rate) reach certain thresholds. You can execute this operation no more than once per second.
+   */
+  updateAccountSendingEnabled(params: SES.Types.UpdateAccountSendingEnabledRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Enables or disables email sending across your entire Amazon SES account. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending across your Amazon SES account when reputation metrics (such as your bounce on complaint rate) reach certain thresholds. You can execute this operation no more than once per second.
+   */
+  updateAccountSendingEnabled(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates the event destination of a configuration set. Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS). For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.   When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  You can execute this operation no more than once per second.
    */
   updateConfigurationSetEventDestination(params: SES.Types.UpdateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SES.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
@@ -423,6 +435,22 @@ declare class SES extends Service {
    * Updates the event destination of a configuration set. Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS). For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.   When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).  You can execute this operation no more than once per second.
    */
   updateConfigurationSetEventDestination(callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SES.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
+  /**
+   * Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using Amazon CloudWatch, you can create alarms when bounce or complaint rates exceed a certain threshold. You can execute this operation no more than once per second.
+   */
+  updateConfigurationSetReputationMetricsEnabled(params: SES.Types.UpdateConfigurationSetReputationMetricsEnabledRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using Amazon CloudWatch, you can create alarms when bounce or complaint rates exceed a certain threshold. You can execute this operation no more than once per second.
+   */
+  updateConfigurationSetReputationMetricsEnabled(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Enables or disables email sending for messages sent using a specific configuration set. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending for a configuration set when the reputation metrics for that configuration set (such as your bounce on complaint rate) reach certain thresholds. You can execute this operation no more than once per second.
+   */
+  updateConfigurationSetSendingEnabled(params: SES.Types.UpdateConfigurationSetSendingEnabledRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Enables or disables email sending for messages sent using a specific configuration set. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending for a configuration set when the reputation metrics for that configuration set (such as your bounce on complaint rate) reach certain thresholds. You can execute this operation no more than once per second.
+   */
+  updateConfigurationSetSendingEnabled(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
    */
@@ -573,7 +601,7 @@ declare namespace SES {
   export type BulkEmailDestinationList = BulkEmailDestination[];
   export interface BulkEmailDestinationStatus {
     /**
-     * The status of a message sent using the SendBulkTemplatedEmail operation. Possible values for this parameter include:    Success: Amazon SES accepted the message, and will attempt to deliver it to the recipients.    MessageRejected: The message was rejected because it contained a virus.    MailFromDomainNotVerified: The sender's email address or domain was not verified.    ConfigurationSetDoesNotExist: The configuration set you specified does not exist.    TemplateDoesNotExist: The template you specified does not exist.    AccountSuspended: Your account has been shut down because of issues related to your email sending practices.    AccountThrottled: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.    AccountDailyQuotaExceeded: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.    InvalidSendingPoolName: The configuration set you specified refers to an IP pool that does not exist.    InvalidParameterValue: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.    TransientFailure: Amazon SES was unable to process your request because of a temporary issue.    Failed: Amazon SES was unable to process your request. See the error message for additional information.  
+     * The status of a message sent using the SendBulkTemplatedEmail operation. Possible values for this parameter include:    Success: Amazon SES accepted the message, and will attempt to deliver it to the recipients.    MessageRejected: The message was rejected because it contained a virus.    MailFromDomainNotVerified: The sender's email address or domain was not verified.    ConfigurationSetDoesNotExist: The configuration set you specified does not exist.    TemplateDoesNotExist: The template you specified does not exist.    AccountSuspended: Your account has been shut down because of issues related to your email sending practices.    AccountThrottled: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.    AccountDailyQuotaExceeded: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.    InvalidSendingPoolName: The configuration set you specified refers to an IP pool that does not exist.    AccountSendingPaused: Email sending for the Amazon SES account was disabled using the UpdateAccountSendingEnabled operation.    ConfigurationSetSendingPaused: Email sending for this configuration set was disabled using the UpdateConfigurationSetSendingEnabled operation.    InvalidParameterValue: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.    TransientFailure: Amazon SES was unable to process your request because of a temporary issue.    Failed: Amazon SES was unable to process your request. See the error message for additional information.  
      */
     Status?: BulkEmailStatus;
     /**
@@ -586,7 +614,7 @@ declare namespace SES {
     MessageId?: MessageId;
   }
   export type BulkEmailDestinationStatusList = BulkEmailDestinationStatus[];
-  export type BulkEmailStatus = "Success"|"MessageRejected"|"MailFromDomainNotVerified"|"ConfigurationSetDoesNotExist"|"TemplateDoesNotExist"|"AccountSuspended"|"AccountThrottled"|"AccountDailyQuotaExceeded"|"InvalidSendingPoolName"|"InvalidParameterValue"|"TransientFailure"|"Failed"|string;
+  export type BulkEmailStatus = "Success"|"MessageRejected"|"MailFromDomainNotVerified"|"ConfigurationSetDoesNotExist"|"TemplateDoesNotExist"|"AccountSuspended"|"AccountThrottled"|"AccountDailyQuotaExceeded"|"InvalidSendingPoolName"|"AccountSendingPaused"|"ConfigurationSetSendingPaused"|"InvalidParameterValue"|"TransientFailure"|"Failed"|string;
   export type Charset = string;
   export type Cidr = string;
   export interface CloneReceiptRuleSetRequest {
@@ -628,7 +656,7 @@ declare namespace SES {
      */
     Name: ConfigurationSetName;
   }
-  export type ConfigurationSetAttribute = "eventDestinations"|"trackingOptions"|string;
+  export type ConfigurationSetAttribute = "eventDestinations"|"trackingOptions"|"reputationOptions"|string;
   export type ConfigurationSetAttributeList = ConfigurationSetAttribute[];
   export type ConfigurationSetName = string;
   export type ConfigurationSets = ConfigurationSet[];
@@ -840,6 +868,10 @@ declare namespace SES {
      * The name of the custom open and click tracking domain associated with the configuration set.
      */
     TrackingOptions?: TrackingOptions;
+    /**
+     * An object that represents the reputation settings for the configuration set. 
+     */
+    ReputationOptions?: ReputationOptions;
   }
   export interface DescribeReceiptRuleRequest {
     /**
@@ -940,6 +972,12 @@ declare namespace SES {
   export type ExtensionFieldList = ExtensionField[];
   export type ExtensionFieldName = string;
   export type ExtensionFieldValue = string;
+  export interface GetAccountSendingEnabledResponse {
+    /**
+     * Describes whether email sending is enabled or disabled for your Amazon SES account.
+     */
+    Enabled?: Enabled;
+  }
   export interface GetIdentityDkimAttributesRequest {
     /**
      * A list of one or more verified identities - email addresses, domains, or both.
@@ -1133,6 +1171,7 @@ declare namespace SES {
     InvocationType?: InvocationType;
   }
   export type LastAttemptDate = Date;
+  export type LastFreshStart = Date;
   export interface ListConfigurationSetsRequest {
     /**
      * A token returned from a previous call to ListConfigurationSets to indicate the position of the configuration set in the configuration set list.
@@ -1456,6 +1495,20 @@ declare namespace SES {
   export interface ReorderReceiptRuleSetResponse {
   }
   export type ReportingMta = string;
+  export interface ReputationOptions {
+    /**
+     * Describes whether email sending is enabled or disabled for the configuration set. If the value is true, then Amazon SES will send emails that use the configuration set. If the value is false, Amazon SES will not send emails that use the configuration set. The default value is true. You can change this setting using UpdateConfigurationSetSendingEnabled.
+     */
+    SendingEnabled?: Enabled;
+    /**
+     * Describes whether or not Amazon SES publishes reputation metrics for the configuration set, such as bounce and complaint rates, to Amazon CloudWatch. If the value is true, reputation metrics are published. If the value is false, reputation metrics are not published. The default value is false.
+     */
+    ReputationMetricsEnabled?: Enabled;
+    /**
+     * The date and time at which the reputation metrics for the configuration set were last reset. Resetting these metrics is known as a fresh start. When you disable email sending for a configuration set using UpdateConfigurationSetSendingEnabled and later re-enable it, the reputation metrics for the configuration set (but not for the entire Amazon SES account) are reset. If email sending for the configuration set has never been disabled and later re-enabled, the value of this attribute is null.
+     */
+    LastFreshStart?: LastFreshStart;
+  }
   export type RuleOrRuleSetName = string;
   export interface S3Action {
     /**
@@ -1902,6 +1955,12 @@ declare namespace SES {
      */
     CustomRedirectDomain?: CustomRedirectDomain;
   }
+  export interface UpdateAccountSendingEnabledRequest {
+    /**
+     * Describes whether email sending is enabled or disabled for your Amazon SES account.
+     */
+    Enabled?: Enabled;
+  }
   export interface UpdateConfigurationSetEventDestinationRequest {
     /**
      * The name of the configuration set that contains the event destination that you want to update.
@@ -1913,6 +1972,26 @@ declare namespace SES {
     EventDestination: EventDestination;
   }
   export interface UpdateConfigurationSetEventDestinationResponse {
+  }
+  export interface UpdateConfigurationSetReputationMetricsEnabledRequest {
+    /**
+     * The name of the configuration set that you want to update.
+     */
+    ConfigurationSetName: ConfigurationSetName;
+    /**
+     * Describes whether or not Amazon SES will publish reputation metrics for the configuration set, such as bounce and complaint rates, to Amazon CloudWatch.
+     */
+    Enabled: Enabled;
+  }
+  export interface UpdateConfigurationSetSendingEnabledRequest {
+    /**
+     * The name of the configuration set that you want to update.
+     */
+    ConfigurationSetName: ConfigurationSetName;
+    /**
+     * Describes whether email sending is enabled or disabled for the configuration set. 
+     */
+    Enabled: Enabled;
   }
   export interface UpdateConfigurationSetTrackingOptionsRequest {
     /**

@@ -165,7 +165,7 @@
         {"shape":"ResourceDataSyncAlreadyExistsException"},
         {"shape":"ResourceDataSyncInvalidConfigurationException"}
       ],
-      "documentation":"<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a href=\"API_ListResourceDataSync.html\">ListResourceDataSync</a> operation.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync\">Configuring Resource Data Sync for Inventory</a>.</p>"
+      "documentation":"<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a>ListResourceDataSync</a>.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync\">Configuring Resource Data Sync for Inventory</a>.</p>"
     },
     "DeleteActivation":{
       "name":"DeleteActivation",
@@ -371,7 +371,7 @@
         {"shape":"InvalidDocument"},
         {"shape":"InvalidInstanceId"}
       ],
-      "documentation":"<p>Describes the associations for the specified Systems Manager document or instance.</p>"
+      "documentation":"<p>Describes the association for the specified target or instance. If you created the association by using the <code>Targets</code> parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and a Systems Manager document, then you retrieve the association by specifying the document name and the instance ID. </p>"
     },
     "DescribeAutomationExecutions":{
       "name":"DescribeAutomationExecutions",
@@ -1518,10 +1518,7 @@
     },
     "AccountIdList":{
       "type":"list",
-      "member":{
-        "shape":"AccountId",
-        "locationName":"AccountId"
-      },
+      "member":{"shape":"AccountId"},
       "max":20
     },
     "Activation":{
@@ -1615,6 +1612,7 @@
       "type":"string",
       "max":10
     },
+    "AggregatorSchemaOnly":{"type":"boolean"},
     "AllowedPattern":{
       "type":"string",
       "max":1024,
@@ -1765,10 +1763,7 @@
     },
     "AssociationDescriptionList":{
       "type":"list",
-      "member":{
-        "shape":"AssociationDescription",
-        "locationName":"AssociationDescription"
-      }
+      "member":{"shape":"AssociationDescription"}
     },
     "AssociationDoesNotExist":{
       "type":"structure",
@@ -1810,10 +1805,7 @@
     },
     "AssociationFilterList":{
       "type":"list",
-      "member":{
-        "shape":"AssociationFilter",
-        "locationName":"AssociationFilter"
-      },
+      "member":{"shape":"AssociationFilter"},
       "min":1
     },
     "AssociationFilterValue":{
@@ -1833,10 +1825,7 @@
     },
     "AssociationList":{
       "type":"list",
-      "member":{
-        "shape":"Association",
-        "locationName":"Association"
-      }
+      "member":{"shape":"Association"}
     },
     "AssociationName":{
       "type":"string",
@@ -2658,10 +2647,7 @@
     },
     "ComplianceItemList":{
       "type":"list",
-      "member":{
-        "shape":"ComplianceItem",
-        "locationName":"Item"
-      }
+      "member":{"shape":"ComplianceItem"}
     },
     "ComplianceItemTitle":{
       "type":"string",
@@ -2740,17 +2726,11 @@
     },
     "ComplianceStringFilterList":{
       "type":"list",
-      "member":{
-        "shape":"ComplianceStringFilter",
-        "locationName":"ComplianceFilter"
-      }
+      "member":{"shape":"ComplianceStringFilter"}
     },
     "ComplianceStringFilterValueList":{
       "type":"list",
-      "member":{
-        "shape":"ComplianceFilterValue",
-        "locationName":"FilterValue"
-      },
+      "member":{"shape":"ComplianceFilterValue"},
       "max":20,
       "min":1
     },
@@ -2775,10 +2755,7 @@
     },
     "ComplianceSummaryItemList":{
       "type":"list",
-      "member":{
-        "shape":"ComplianceSummaryItem",
-        "locationName":"Item"
-      }
+      "member":{"shape":"ComplianceSummaryItem"}
     },
     "ComplianceTypeCountLimitExceededException":{
       "type":"structure",
@@ -2865,10 +2842,7 @@
     },
     "CreateAssociationBatchRequestEntries":{
       "type":"list",
-      "member":{
-        "shape":"CreateAssociationBatchRequestEntry",
-        "locationName":"entries"
-      },
+      "member":{"shape":"CreateAssociationBatchRequestEntry"},
       "min":1
     },
     "CreateAssociationBatchRequestEntry":{
@@ -3056,7 +3030,7 @@
       "members":{
         "OperatingSystem":{
           "shape":"OperatingSystem",
-          "documentation":"<p>Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS.</p>"
+          "documentation":"<p>Defines the operating system the patch baseline applies to. The Default value is WINDOWS.</p>"
         },
         "Name":{
           "shape":"BaselineName",
@@ -4311,10 +4285,7 @@
     },
     "DocumentFilterList":{
       "type":"list",
-      "member":{
-        "shape":"DocumentFilter",
-        "locationName":"DocumentFilter"
-      },
+      "member":{"shape":"DocumentFilter"},
       "min":1
     },
     "DocumentFilterValue":{
@@ -4368,10 +4339,7 @@
     },
     "DocumentIdentifierList":{
       "type":"list",
-      "member":{
-        "shape":"DocumentIdentifier",
-        "locationName":"DocumentIdentifier"
-      }
+      "member":{"shape":"DocumentIdentifier"}
     },
     "DocumentKeyValuesFilter":{
       "type":"structure",
@@ -4446,10 +4414,7 @@
     "DocumentParameterDescrption":{"type":"string"},
     "DocumentParameterList":{
       "type":"list",
-      "member":{
-        "shape":"DocumentParameter",
-        "locationName":"DocumentParameter"
-      }
+      "member":{"shape":"DocumentParameter"}
     },
     "DocumentParameterName":{"type":"string"},
     "DocumentParameterType":{
@@ -4604,10 +4569,7 @@
     },
     "FailedCreateAssociationList":{
       "type":"list",
-      "member":{
-        "shape":"FailedCreateAssociation",
-        "locationName":"FailedCreateAssociationEntry"
-      }
+      "member":{"shape":"FailedCreateAssociation"}
     },
     "FailureDetails":{
       "type":"structure",
@@ -4850,6 +4812,10 @@
           "shape":"InventoryFilterList",
           "documentation":"<p>One or more filters. Use a filter to return a more specific list of results.</p>"
         },
+        "Aggregators":{
+          "shape":"InventoryAggregatorList",
+          "documentation":"<p>Returns counts of inventory types based on one or more expressions. For example, if you aggregate by using an expression that uses the <code>AWS:InstanceInformation.PlatformType</code> type, you can see a count of how many Windows and Linux instances exist in your inventoried fleet.</p>"
+        },
         "ResultAttributes":{
           "shape":"ResultAttributeList",
           "documentation":"<p>The list of inventory item types to return.</p>"
@@ -4898,6 +4864,10 @@
           "shape":"GetInventorySchemaMaxResults",
           "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
           "box":true
+        },
+        "Aggregator":{
+          "shape":"AggregatorSchemaOnly",
+          "documentation":"<p>Returns inventory schemas that support aggregation. For example, this call returns the <code>AWS:InstanceInformation</code> type, because it supports aggregation based on the <code>PlatformName</code>, <code>PlatformType</code>, and <code>PlatformVersion</code> attributes.</p>"
         },
         "SubType":{
           "shape":"IsSubTypeSchema",
@@ -5312,7 +5282,7 @@
       "members":{
         "Path":{
           "shape":"PSParameterName",
-          "documentation":"<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. Examples: /Environment/Test/DBString003</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p>"
+          "documentation":"<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. For example: <code>/Finance/Prod/IAD/WinServ2016/license15</code> </p>"
         },
         "Recursive":{
           "shape":"Boolean",
@@ -5776,10 +5746,7 @@
     },
     "InstanceInformationFilterList":{
       "type":"list",
-      "member":{
-        "shape":"InstanceInformationFilter",
-        "locationName":"InstanceInformationFilter"
-      },
+      "member":{"shape":"InstanceInformationFilter"},
       "min":0
     },
     "InstanceInformationFilterValue":{
@@ -5788,19 +5755,13 @@
     },
     "InstanceInformationFilterValueSet":{
       "type":"list",
-      "member":{
-        "shape":"InstanceInformationFilterValue",
-        "locationName":"InstanceInformationFilterValue"
-      },
+      "member":{"shape":"InstanceInformationFilterValue"},
       "max":100,
       "min":1
     },
     "InstanceInformationList":{
       "type":"list",
-      "member":{
-        "shape":"InstanceInformation",
-        "locationName":"InstanceInformation"
-      }
+      "member":{"shape":"InstanceInformation"}
     },
     "InstanceInformationStringFilter":{
       "type":"structure",
@@ -5826,10 +5787,7 @@
     },
     "InstanceInformationStringFilterList":{
       "type":"list",
-      "member":{
-        "shape":"InstanceInformationStringFilter",
-        "locationName":"InstanceInformationStringFilter"
-      },
+      "member":{"shape":"InstanceInformationStringFilter"},
       "min":0
     },
     "InstancePatchState":{
@@ -6264,6 +6222,31 @@
       "documentation":"<p>The update is not valid.</p>",
       "exception":true
     },
+    "InventoryAggregator":{
+      "type":"structure",
+      "members":{
+        "Expression":{
+          "shape":"InventoryAggregatorExpression",
+          "documentation":"<p>The inventory type and attribute name for aggregation.</p>"
+        },
+        "Aggregators":{
+          "shape":"InventoryAggregatorList",
+          "documentation":"<p>Nested aggregators to further refine aggregation for an inventory type.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the inventory type and attribute for the aggregation execution.</p>"
+    },
+    "InventoryAggregatorExpression":{
+      "type":"string",
+      "max":1000,
+      "min":1
+    },
+    "InventoryAggregatorList":{
+      "type":"list",
+      "member":{"shape":"InventoryAggregator"},
+      "max":10,
+      "min":1
+    },
     "InventoryAttributeDataType":{
       "type":"string",
       "enum":[
@@ -6300,20 +6283,14 @@
     },
     "InventoryFilterList":{
       "type":"list",
-      "member":{
-        "shape":"InventoryFilter",
-        "locationName":"InventoryFilter"
-      },
+      "member":{"shape":"InventoryFilter"},
       "max":5,
       "min":1
     },
     "InventoryFilterValue":{"type":"string"},
     "InventoryFilterValueList":{
       "type":"list",
-      "member":{
-        "shape":"InventoryFilterValue",
-        "locationName":"FilterValue"
-      },
+      "member":{"shape":"InventoryFilterValue"},
       "max":20,
       "min":1
     },
@@ -6372,10 +6349,7 @@
     },
     "InventoryItemAttributeList":{
       "type":"list",
-      "member":{
-        "shape":"InventoryItemAttribute",
-        "locationName":"Attribute"
-      },
+      "member":{"shape":"InventoryItemAttribute"},
       "max":50,
       "min":1
     },
@@ -6410,10 +6384,7 @@
     },
     "InventoryItemList":{
       "type":"list",
-      "member":{
-        "shape":"InventoryItem",
-        "locationName":"Item"
-      },
+      "member":{"shape":"InventoryItem"},
       "max":30,
       "min":1
     },
@@ -6435,6 +6406,10 @@
         "Attributes":{
           "shape":"InventoryItemAttributeList",
           "documentation":"<p>The schema attributes for inventory. This contains data type and attribute name.</p>"
+        },
+        "DisplayName":{
+          "shape":"InventoryTypeDisplayName",
+          "documentation":"<p>The alias name of the inventory type. The alias name is used for display purposes.</p>"
         }
       },
       "documentation":"<p>The inventory item schema definition. Users can use this to compose inventory query filters.</p>"
@@ -6485,10 +6460,7 @@
     "InventoryResultEntityId":{"type":"string"},
     "InventoryResultEntityList":{
       "type":"list",
-      "member":{
-        "shape":"InventoryResultEntity",
-        "locationName":"Entity"
-      }
+      "member":{"shape":"InventoryResultEntity"}
     },
     "InventoryResultItem":{
       "type":"structure",
@@ -6527,6 +6499,7 @@
       "key":{"shape":"InventoryResultItemKey"},
       "value":{"shape":"InventoryResultItem"}
     },
+    "InventoryTypeDisplayName":{"type":"string"},
     "InvocationDoesNotExist":{
       "type":"structure",
       "members":{
@@ -8126,7 +8099,7 @@
         },
         "OperatingSystem":{
           "shape":"OperatingSystem",
-          "documentation":"<p>Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS. </p>"
+          "documentation":"<p>Defines the operating system the patch baseline applies to. The Default value is WINDOWS. </p>"
         },
         "BaselineDescription":{
           "shape":"BaselineDescription",
@@ -8459,10 +8432,7 @@
     },
     "PlatformTypeList":{
       "type":"list",
-      "member":{
-        "shape":"PlatformType",
-        "locationName":"PlatformType"
-      }
+      "member":{"shape":"PlatformType"}
     },
     "Product":{"type":"string"},
     "PutComplianceItemsRequest":{
@@ -8538,11 +8508,11 @@
       "members":{
         "Name":{
           "shape":"PSParameterName",
-          "documentation":"<p>The name of the parameter that you want to add to the system.</p>"
+          "documentation":"<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters. </p> </note>"
         },
         "Description":{
           "shape":"ParameterDescription",
-          "documentation":"<p>Information about the parameter that you want to add to the system</p>"
+          "documentation":"<p>Information about the parameter that you want to add to the system.</p>"
         },
         "Value":{
           "shape":"PSParameterValue",
@@ -8831,10 +8801,7 @@
     },
     "ResourceComplianceSummaryItemList":{
       "type":"list",
-      "member":{
-        "shape":"ResourceComplianceSummaryItem",
-        "locationName":"Item"
-      }
+      "member":{"shape":"ResourceComplianceSummaryItem"}
     },
     "ResourceDataSyncAWSKMSKeyARN":{
       "type":"string",
@@ -9013,10 +8980,7 @@
     },
     "ResultAttributeList":{
       "type":"list",
-      "member":{
-        "shape":"ResultAttribute",
-        "locationName":"ResultAttribute"
-      },
+      "member":{"shape":"ResultAttribute"},
       "max":1,
       "min":1
     },

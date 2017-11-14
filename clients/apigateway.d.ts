@@ -1769,6 +1769,10 @@ declare namespace APIGateway {
      */
     regionalDomainName?: String;
     /**
+     * The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway. 
+     */
+    regionalHostedZoneId?: String;
+    /**
      * The name of the certificate that will be used for validating the regional domain name.
      */
     regionalCertificateName?: String;
@@ -1780,6 +1784,10 @@ declare namespace APIGateway {
      * The domain name of the Amazon CloudFront distribution associated with this custom domain name for an edge-optimized endpoint. You set up this association when adding a DNS record pointing the custom domain name to this distribution name. For more information about CloudFront distributions, see the Amazon CloudFront documentation.
      */
     distributionDomainName?: String;
+    /**
+     * The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway. 
+     */
+    distributionHostedZoneId?: String;
     /**
      * The endpoint configuration of this DomainName showing the endpoint types of the domain name. 
      */
@@ -2031,6 +2039,10 @@ declare namespace APIGateway {
      * The maximum number of returned results per page.
      */
     limit?: NullableInteger;
+    /**
+     * The status of the API documentation parts to retrieve. Valid values are DOCUMENTED for retrieving DocumentationPart resources with content and UNDOCUMENTED for DocumentationPart resources without content.
+     */
+    locationStatus?: LocationStatusType;
   }
   export interface GetDocumentationVersionRequest {
     /**
@@ -2302,7 +2314,7 @@ declare namespace APIGateway {
      */
     stageName: String;
     /**
-     * The language for the generated SDK. Currently java, javascript, android, objectivec and swift (for iOS) are supported.
+     * The language for the generated SDK. Currently java, javascript, android, objectivec (for iOS), swift (for iOS), and ruby are supported.
      */
     sdkType: String;
     /**
@@ -2458,7 +2470,7 @@ declare namespace APIGateway {
      */
     failOnWarnings?: Boolean;
     /**
-     * Custom header parameters as part of the request. For example, to exclude DocumentationParts from an imported API, set ignore=documentation as a parameters value, as in the AWS CLI command of aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json.
+     * A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.  To exclude DocumentationParts from the import, set parameters as ignore=documentation.  To configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE orendpointConfigurationTypes=REGIONAL. The default endpoint type is EDGE.  To handle imported basePath, set parameters as basePath=ignore, basePath=prepend or basePath=split. For example, the AWS CLI command to exclude documentation from the imported API is: aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json The AWS CLI command to set the regional endpoint on the imported API is: aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json
      */
     parameters?: MapOfStringToString;
     /**
@@ -2562,6 +2574,7 @@ declare namespace APIGateway {
   export type ListOfUsage = ListOfLong[];
   export type ListOfUsagePlan = UsagePlan[];
   export type ListOfUsagePlanKey = UsagePlanKey[];
+  export type LocationStatusType = "DOCUMENTED"|"UNDOCUMENTED"|string;
   export type Long = number;
   export type MapOfHeaderValues = {[key: string]: String};
   export type MapOfIntegrationResponse = {[key: string]: IntegrationResponse};

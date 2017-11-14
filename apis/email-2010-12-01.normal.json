@@ -6,6 +6,7 @@
     "protocol":"query",
     "serviceAbbreviation":"Amazon SES",
     "serviceFullName":"Amazon Simple Email Service",
+    "serviceId":"SES",
     "signatureVersion":"v4",
     "signingName":"ses",
     "uid":"email-2010-12-01",
@@ -366,6 +367,18 @@
       ],
       "documentation":"<p>Returns the details of the specified receipt rule set.</p> <p>For information about managing receipt rule sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html\">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>"
     },
+    "GetAccountSendingEnabled":{
+      "name":"GetAccountSendingEnabled",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"GetAccountSendingEnabledResponse",
+        "resultWrapper":"GetAccountSendingEnabledResult"
+      },
+      "documentation":"<p>Returns the email sending status of the Amazon SES account.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
     "GetIdentityDkimAttributes":{
       "name":"GetIdentityDkimAttributes",
       "http":{
@@ -625,7 +638,9 @@
         {"shape":"MessageRejected"},
         {"shape":"MailFromDomainNotVerifiedException"},
         {"shape":"ConfigurationSetDoesNotExistException"},
-        {"shape":"TemplateDoesNotExistException"}
+        {"shape":"TemplateDoesNotExistException"},
+        {"shape":"ConfigurationSetSendingPausedException"},
+        {"shape":"AccountSendingPausedException"}
       ],
       "documentation":"<p>Composes an email message to multiple destinations. The message body is created using an email template.</p> <p>In order to send email using the <code>SendBulkTemplatedEmail</code> operation, your call to the API must meet the following requirements:</p> <ul> <li> <p>The call must refer to an existing email template. You can create email templates using the <a>CreateTemplate</a> operation.</p> </li> <li> <p>The message must be sent from a verified email address or domain.</p> </li> <li> <p>If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Verifying Email Addresses and Domains</a> in the <i>Amazon SES Developer Guide.</i> </p> </li> <li> <p>The total size of the message, including attachments, must be less than 10 MB.</p> </li> <li> <p>Each <code>Destination</code> parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format <i>UserName@[SubDomain.]Domain.TopLevelDomain</i>), the entire message will be rejected, even if the message contains other recipients that are valid.</p> </li> </ul>"
     },
@@ -643,7 +658,9 @@
       "errors":[
         {"shape":"MessageRejected"},
         {"shape":"MailFromDomainNotVerifiedException"},
-        {"shape":"ConfigurationSetDoesNotExistException"}
+        {"shape":"ConfigurationSetDoesNotExistException"},
+        {"shape":"ConfigurationSetSendingPausedException"},
+        {"shape":"AccountSendingPausedException"}
       ],
       "documentation":"<p>Composes an email message and immediately queues it for sending. In order to send email using the <code>SendEmail</code> operation, your message must meet the following requirements:</p> <ul> <li> <p>The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an \"Email address not verified\" error. </p> </li> <li> <p>If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Verifying Email Addresses and Domains</a> in the <i>Amazon SES Developer Guide.</i> </p> </li> <li> <p>The total size of the message, including attachments, must be smaller than 10 MB.</p> </li> <li> <p>The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format <i>UserName@[SubDomain.]Domain.TopLevelDomain</i>), the entire message will be rejected, even if the message contains other recipients that are valid.</p> </li> <li> <p>The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the <code>SendEmail</code> operation several times to send the message to each group.</p> </li> </ul> <important> <p>For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your <i>sending quota</i>). For more information about sending quotas in Amazon SES, see <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Managing Your Amazon SES Sending Limits</a> in the <i>Amazon SES Developer Guide.</i> </p> </important>"
     },
@@ -661,7 +678,9 @@
       "errors":[
         {"shape":"MessageRejected"},
         {"shape":"MailFromDomainNotVerifiedException"},
-        {"shape":"ConfigurationSetDoesNotExistException"}
+        {"shape":"ConfigurationSetDoesNotExistException"},
+        {"shape":"ConfigurationSetSendingPausedException"},
+        {"shape":"AccountSendingPausedException"}
       ],
       "documentation":"<p>Composes an email message and immediately queues it for sending. When calling this operation, you may specify the message headers as well as the content. The <code>SendRawEmail</code> operation is particularly useful for sending multipart MIME emails (such as those that contain both a plain-text and an HTML version). </p> <p>In order to send email using the <code>SendRawEmail</code> operation, your message must meet the following requirements:</p> <ul> <li> <p>The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an \"Email address not verified\" error. </p> </li> <li> <p>If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Verifying Email Addresses and Domains</a> in the <i>Amazon SES Developer Guide.</i> </p> </li> <li> <p>The total size of the message, including attachments, must be smaller than 10 MB.</p> </li> <li> <p>The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format <i>UserName@[SubDomain.]Domain.TopLevelDomain</i>), the entire message will be rejected, even if the message contains other recipients that are valid.</p> </li> <li> <p>The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the <code>SendRawEmail</code> operation several times to send the message to each group.</p> </li> </ul> <important> <p>For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your <i>sending quota</i>). For more information about sending quotas in Amazon SES, see <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html\">Managing Your Amazon SES Sending Limits</a> in the <i>Amazon SES Developer Guide.</i> </p> </important> <p>Additionally, keep the following considerations in mind when using the <code>SendRawEmail</code> operation:</p> <ul> <li> <p>Although you can customize the message headers when using the <code>SendRawEmail</code> operation, Amazon SES will automatically apply its own <code>Message-ID</code> and <code>Date</code> headers; if you passed these headers when creating the message, they will be overwritten by the values that Amazon SES provides.</p> </li> <li> <p>If you are using sending authorization to send on behalf of another user, <code>SendRawEmail</code> enables you to specify the cross-account identity for the email's Source, From, and Return-Path parameters in one of two ways: you can pass optional parameters <code>SourceArn</code>, <code>FromArn</code>, and/or <code>ReturnPathArn</code> to the API, or you can include the following X-headers in the header of your raw email:</p> <ul> <li> <p> <code>X-SES-SOURCE-ARN</code> </p> </li> <li> <p> <code>X-SES-FROM-ARN</code> </p> </li> <li> <p> <code>X-SES-RETURN-PATH-ARN</code> </p> </li> </ul> <important> <p>Do not include these X-headers in the DKIM signature; Amazon SES will remove them before sending the email.</p> </important> <p>For most common sending authorization scenarios, we recommend that you specify the <code>SourceIdentityArn</code> parameter and not the <code>FromIdentityArn</code> or <code>ReturnPathIdentityArn</code> parameters. If you only specify the <code>SourceIdentityArn</code> parameter, Amazon SES will set the From and Return Path addresses to the identity specified in <code>SourceIdentityArn</code>. For more information about sending authorization, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Using Sending Authorization with Amazon SES</a> in the <i>Amazon SES Developer Guide.</i> </p> </li> </ul>"
     },
@@ -680,7 +699,9 @@
         {"shape":"MessageRejected"},
         {"shape":"MailFromDomainNotVerifiedException"},
         {"shape":"ConfigurationSetDoesNotExistException"},
-        {"shape":"TemplateDoesNotExistException"}
+        {"shape":"TemplateDoesNotExistException"},
+        {"shape":"ConfigurationSetSendingPausedException"},
+        {"shape":"AccountSendingPausedException"}
       ],
       "documentation":"<p>Composes an email message using an email template and immediately queues it for sending.</p> <p>In order to send email using the <code>SendTemplatedEmail</code> operation, your call to the API must meet the following requirements:</p> <ul> <li> <p>The call must refer to an existing email template. You can create email templates using the <a>CreateTemplate</a> operation.</p> </li> <li> <p>The message must be sent from a verified email address or domain.</p> </li> <li> <p>If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html\">Verifying Email Addresses and Domains</a> in the <i>Amazon SES Developer Guide.</i> </p> </li> <li> <p>The total size of the message, including attachments, must be less than 10 MB.</p> </li> <li> <p>Calls to the <code>SendTemplatedEmail</code> operation may only include one <code>Destination</code> parameter. A destination is a set of recipients who will receive the same version of the email. The <code>Destination</code> parameter can include up to 50 recipients, across the To:, CC: and BCC: fields.</p> </li> <li> <p>The <code>Destination</code> parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format <i>UserName@[SubDomain.]Domain.TopLevelDomain</i>), the entire message will be rejected, even if the message contains other recipients that are valid.</p> </li> </ul>"
     },
@@ -800,6 +821,15 @@
       ],
       "documentation":"<p>Creates a preview of the MIME content of an email when provided with a template and a set of replacement data.</p> <p>You can execute this operation no more than once per second.</p>"
     },
+    "UpdateAccountSendingEnabled":{
+      "name":"UpdateAccountSendingEnabled",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateAccountSendingEnabledRequest"},
+      "documentation":"<p>Enables or disables email sending across your entire Amazon SES account. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending across your Amazon SES account when reputation metrics (such as your bounce on complaint rate) reach certain thresholds.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
     "UpdateConfigurationSetEventDestination":{
       "name":"UpdateConfigurationSetEventDestination",
       "http":{
@@ -819,6 +849,30 @@
         {"shape":"InvalidSNSDestinationException"}
       ],
       "documentation":"<p>Updates the event destination of a configuration set. Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS). For information about using configuration sets, see <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Monitoring Your Amazon SES Sending Activity</a> in the <i>Amazon SES Developer Guide.</i> </p> <note> <p>When you create or update an event destination, you must provide one, and only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification Service (Amazon SNS).</p> </note> <p>You can execute this operation no more than once per second.</p>"
+    },
+    "UpdateConfigurationSetReputationMetricsEnabled":{
+      "name":"UpdateConfigurationSetReputationMetricsEnabled",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateConfigurationSetReputationMetricsEnabledRequest"},
+      "errors":[
+        {"shape":"ConfigurationSetDoesNotExistException"}
+      ],
+      "documentation":"<p>Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using Amazon CloudWatch, you can create alarms when bounce or complaint rates exceed a certain threshold.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
+    "UpdateConfigurationSetSendingEnabled":{
+      "name":"UpdateConfigurationSetSendingEnabled",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateConfigurationSetSendingEnabledRequest"},
+      "errors":[
+        {"shape":"ConfigurationSetDoesNotExistException"}
+      ],
+      "documentation":"<p>Enables or disables email sending for messages sent using a specific configuration set. You can use this operation in conjunction with Amazon CloudWatch alarms to temporarily pause email sending for a configuration set when the reputation metrics for that configuration set (such as your bounce on complaint rate) reach certain thresholds.</p> <p>You can execute this operation no more than once per second.</p>"
     },
     "UpdateConfigurationSetTrackingOptions":{
       "name":"UpdateConfigurationSetTrackingOptions",
@@ -926,6 +980,18 @@
     }
   },
   "shapes":{
+    "AccountSendingPausedException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Indicates that email sending is disabled for your entire Amazon SES account.</p> <p>You can enable or disable email sending for your Amazon SES account using <a>UpdateAccountSendingEnabled</a>.</p>",
+      "error":{
+        "code":"AccountSendingPausedException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "AddHeaderAction":{
       "type":"structure",
       "required":[
@@ -1085,7 +1151,7 @@
       "members":{
         "Status":{
           "shape":"BulkEmailStatus",
-          "documentation":"<p>The status of a message sent using the <code>SendBulkTemplatedEmail</code> operation.</p> <p>Possible values for this parameter include:</p> <ul> <li> <p> <code>Success</code>: Amazon SES accepted the message, and will attempt to deliver it to the recipients.</p> </li> <li> <p> <code>MessageRejected</code>: The message was rejected because it contained a virus.</p> </li> <li> <p> <code>MailFromDomainNotVerified</code>: The sender's email address or domain was not verified.</p> </li> <li> <p> <code>ConfigurationSetDoesNotExist</code>: The configuration set you specified does not exist.</p> </li> <li> <p> <code>TemplateDoesNotExist</code>: The template you specified does not exist.</p> </li> <li> <p> <code>AccountSuspended</code>: Your account has been shut down because of issues related to your email sending practices.</p> </li> <li> <p> <code>AccountThrottled</code>: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.</p> </li> <li> <p> <code>AccountDailyQuotaExceeded</code>: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.</p> </li> <li> <p> <code>InvalidSendingPoolName</code>: The configuration set you specified refers to an IP pool that does not exist.</p> </li> <li> <p> <code>InvalidParameterValue</code>: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.</p> </li> <li> <p> <code>TransientFailure</code>: Amazon SES was unable to process your request because of a temporary issue.</p> </li> <li> <p> <code>Failed</code>: Amazon SES was unable to process your request. See the error message for additional information.</p> </li> </ul>"
+          "documentation":"<p>The status of a message sent using the <code>SendBulkTemplatedEmail</code> operation.</p> <p>Possible values for this parameter include:</p> <ul> <li> <p> <code>Success</code>: Amazon SES accepted the message, and will attempt to deliver it to the recipients.</p> </li> <li> <p> <code>MessageRejected</code>: The message was rejected because it contained a virus.</p> </li> <li> <p> <code>MailFromDomainNotVerified</code>: The sender's email address or domain was not verified.</p> </li> <li> <p> <code>ConfigurationSetDoesNotExist</code>: The configuration set you specified does not exist.</p> </li> <li> <p> <code>TemplateDoesNotExist</code>: The template you specified does not exist.</p> </li> <li> <p> <code>AccountSuspended</code>: Your account has been shut down because of issues related to your email sending practices.</p> </li> <li> <p> <code>AccountThrottled</code>: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.</p> </li> <li> <p> <code>AccountDailyQuotaExceeded</code>: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.</p> </li> <li> <p> <code>InvalidSendingPoolName</code>: The configuration set you specified refers to an IP pool that does not exist.</p> </li> <li> <p> <code>AccountSendingPaused</code>: Email sending for the Amazon SES account was disabled using the <a>UpdateAccountSendingEnabled</a> operation.</p> </li> <li> <p> <code>ConfigurationSetSendingPaused</code>: Email sending for this configuration set was disabled using the <a>UpdateConfigurationSetSendingEnabled</a> operation.</p> </li> <li> <p> <code>InvalidParameterValue</code>: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.</p> </li> <li> <p> <code>TransientFailure</code>: Amazon SES was unable to process your request because of a temporary issue.</p> </li> <li> <p> <code>Failed</code>: Amazon SES was unable to process your request. See the error message for additional information.</p> </li> </ul>"
         },
         "Error":{
           "shape":"Error",
@@ -1114,6 +1180,8 @@
         "AccountThrottled",
         "AccountDailyQuotaExceeded",
         "InvalidSendingPoolName",
+        "AccountSendingPaused",
+        "ConfigurationSetSendingPaused",
         "InvalidParameterValue",
         "TransientFailure",
         "Failed"
@@ -1230,7 +1298,8 @@
       "type":"string",
       "enum":[
         "eventDestinations",
-        "trackingOptions"
+        "trackingOptions",
+        "reputationOptions"
       ]
     },
     "ConfigurationSetAttributeList":{
@@ -1254,6 +1323,22 @@
       "exception":true
     },
     "ConfigurationSetName":{"type":"string"},
+    "ConfigurationSetSendingPausedException":{
+      "type":"structure",
+      "members":{
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set for which email sending is disabled.</p>"
+        }
+      },
+      "documentation":"<p>Indicates that email sending is disabled for the configuration set.</p> <p>You can enable or disable email sending for a configuration set using <a>UpdateConfigurationSetSendingEnabled</a>.</p>",
+      "error":{
+        "code":"ConfigurationSetSendingPausedException",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "ConfigurationSets":{
       "type":"list",
       "member":{"shape":"ConfigurationSet"}
@@ -1658,6 +1743,10 @@
         "TrackingOptions":{
           "shape":"TrackingOptions",
           "documentation":"<p>The name of the custom open and click tracking domain associated with the configuration set.</p>"
+        },
+        "ReputationOptions":{
+          "shape":"ReputationOptions",
+          "documentation":"<p>An object that represents the reputation settings for the configuration set. </p>"
         }
       },
       "documentation":"<p>Represents the details of a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html\">Amazon SES Developer Guide</a>.</p>"
@@ -1883,6 +1972,16 @@
     },
     "ExtensionFieldName":{"type":"string"},
     "ExtensionFieldValue":{"type":"string"},
+    "GetAccountSendingEnabledResponse":{
+      "type":"structure",
+      "members":{
+        "Enabled":{
+          "shape":"Enabled",
+          "documentation":"<p>Describes whether email sending is enabled or disabled for your Amazon SES account.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to return the email sending status for your Amazon SES account.</p>"
+    },
     "GetIdentityDkimAttributesRequest":{
       "type":"structure",
       "required":["Identities"],
@@ -2374,6 +2473,7 @@
       "documentation":"<p>When included in a receipt rule, this action calls an AWS Lambda function and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>To enable Amazon SES to call your AWS Lambda function or to publish to an Amazon SNS topic of another account, Amazon SES must have permission to access those resources. For information about giving permissions, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html\">Amazon SES Developer Guide</a>.</p> <p>For information about using AWS Lambda actions in receipt rules, see the <a href=\"http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html\">Amazon SES Developer Guide</a>.</p>"
     },
     "LastAttemptDate":{"type":"timestamp"},
+    "LastFreshStart":{"type":"timestamp"},
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -2943,6 +3043,24 @@
       "documentation":"<p>An empty element returned on a successful request.</p>"
     },
     "ReportingMta":{"type":"string"},
+    "ReputationOptions":{
+      "type":"structure",
+      "members":{
+        "SendingEnabled":{
+          "shape":"Enabled",
+          "documentation":"<p>Describes whether email sending is enabled or disabled for the configuration set. If the value is <code>true</code>, then Amazon SES will send emails that use the configuration set. If the value is <code>false</code>, Amazon SES will not send emails that use the configuration set. The default value is <code>true</code>. You can change this setting using <a>UpdateConfigurationSetSendingEnabled</a>.</p>"
+        },
+        "ReputationMetricsEnabled":{
+          "shape":"Enabled",
+          "documentation":"<p>Describes whether or not Amazon SES publishes reputation metrics for the configuration set, such as bounce and complaint rates, to Amazon CloudWatch.</p> <p>If the value is <code>true</code>, reputation metrics are published. If the value is <code>false</code>, reputation metrics are not published. The default value is <code>false</code>.</p>"
+        },
+        "LastFreshStart":{
+          "shape":"LastFreshStart",
+          "documentation":"<p>The date and time at which the reputation metrics for the configuration set were last reset. Resetting these metrics is known as a <i>fresh start</i>.</p> <p>When you disable email sending for a configuration set using <a>UpdateConfigurationSetSendingEnabled</a> and later re-enable it, the reputation metrics for the configuration set (but not for the entire Amazon SES account) are reset.</p> <p>If email sending for the configuration set has never been disabled and later re-enabled, the value of this attribute is <code>null</code>.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about the reputation settings for a configuration set.</p>"
+    },
     "RuleDoesNotExistException":{
       "type":"structure",
       "members":{
@@ -3679,6 +3797,16 @@
       },
       "exception":true
     },
+    "UpdateAccountSendingEnabledRequest":{
+      "type":"structure",
+      "members":{
+        "Enabled":{
+          "shape":"Enabled",
+          "documentation":"<p>Describes whether email sending is enabled or disabled for your Amazon SES account.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to enable or disable the email sending capabilities for your entire Amazon SES account.</p>"
+    },
     "UpdateConfigurationSetEventDestinationRequest":{
       "type":"structure",
       "required":[
@@ -3702,6 +3830,42 @@
       "members":{
       },
       "documentation":"<p>An empty element returned on a successful request.</p>"
+    },
+    "UpdateConfigurationSetReputationMetricsEnabledRequest":{
+      "type":"structure",
+      "required":[
+        "ConfigurationSetName",
+        "Enabled"
+      ],
+      "members":{
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set that you want to update.</p>"
+        },
+        "Enabled":{
+          "shape":"Enabled",
+          "documentation":"<p>Describes whether or not Amazon SES will publish reputation metrics for the configuration set, such as bounce and complaint rates, to Amazon CloudWatch.</p>"
+        }
+      },
+      "documentation":"<p>Represents a request to modify the reputation metric publishing settings for a configuration set.</p>"
+    },
+    "UpdateConfigurationSetSendingEnabledRequest":{
+      "type":"structure",
+      "required":[
+        "ConfigurationSetName",
+        "Enabled"
+      ],
+      "members":{
+        "ConfigurationSetName":{
+          "shape":"ConfigurationSetName",
+          "documentation":"<p>The name of the configuration set that you want to update.</p>"
+        },
+        "Enabled":{
+          "shape":"Enabled",
+          "documentation":"<p>Describes whether email sending is enabled or disabled for the configuration set. </p>"
+        }
+      },
+      "documentation":"<p>Represents a request to enable or disable the email sending capabilities for a specific configuration set.</p>"
     },
     "UpdateConfigurationSetTrackingOptionsRequest":{
       "type":"structure",

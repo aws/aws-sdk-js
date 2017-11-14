@@ -12,19 +12,19 @@ declare class StepFunctions extends Service {
   constructor(options?: StepFunctions.Types.ClientConfiguration)
   config: Config & StepFunctions.Types.ClientConfiguration;
   /**
-   * Creates an activity. An Activity is a task which you write, in any language and hosted on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask and respond using SendTask* API calls. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
+   * Creates an activity. An activity is a task which you write in any programming language and host on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
    */
   createActivity(params: StepFunctions.Types.CreateActivityInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates an activity. An Activity is a task which you write, in any language and hosted on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask and respond using SendTask* API calls. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
+   * Creates an activity. An activity is a task which you write in any programming language and host on any machine which has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
    */
   createActivity(callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine which states to transition to next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.
    */
   createStateMachine(params: StepFunctions.Types.CreateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine which states to transition to next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.
    */
   createStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class StepFunctions extends Service {
    */
   deleteActivity(callback?: (err: AWSError, data: StepFunctions.Types.DeleteActivityOutput) => void): Request<StepFunctions.Types.DeleteActivityOutput, AWSError>;
   /**
-   * Deletes a state machine. This is an asynchronous operation-- it sets the state machine's status to "DELETING" and begins the delete process. Each state machine execution will be deleted the next time it makes a state transition. After all executions have completed or been deleted, the state machine itself will be deleted.
+   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process. Each state machine execution is deleted the next time it makes a state transition.  The state machine itself is deleted after all executions are completed or deleted. 
    */
   deleteStateMachine(params: StepFunctions.Types.DeleteStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineOutput) => void): Request<StepFunctions.Types.DeleteStateMachineOutput, AWSError>;
   /**
-   * Deletes a state machine. This is an asynchronous operation-- it sets the state machine's status to "DELETING" and begins the delete process. Each state machine execution will be deleted the next time it makes a state transition. After all executions have completed or been deleted, the state machine itself will be deleted.
+   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process. Each state machine execution is deleted the next time it makes a state transition.  The state machine itself is deleted after all executions are completed or deleted. 
    */
   deleteStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineOutput) => void): Request<StepFunctions.Types.DeleteStateMachineOutput, AWSError>;
   /**
@@ -68,43 +68,51 @@ declare class StepFunctions extends Service {
    */
   describeStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineOutput) => void): Request<StepFunctions.Types.DescribeStateMachineOutput, AWSError>;
   /**
-   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
+   * Describes the state machine associated with a specific execution.
+   */
+  describeStateMachineForExecution(params: StepFunctions.Types.DescribeStateMachineForExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineForExecutionOutput) => void): Request<StepFunctions.Types.DescribeStateMachineForExecutionOutput, AWSError>;
+  /**
+   * Describes the state machine associated with a specific execution.
+   */
+  describeStateMachineForExecution(callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineForExecutionOutput) => void): Request<StepFunctions.Types.DescribeStateMachineForExecutionOutput, AWSError>;
+  /**
+   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
    */
   getActivityTask(params: StepFunctions.Types.GetActivityTaskInput, callback?: (err: AWSError, data: StepFunctions.Types.GetActivityTaskOutput) => void): Request<StepFunctions.Types.GetActivityTaskOutput, AWSError>;
   /**
-   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
+   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). 
    */
   getActivityTask(callback?: (err: AWSError, data: StepFunctions.Types.GetActivityTaskOutput) => void): Request<StepFunctions.Types.GetActivityTaskOutput, AWSError>;
   /**
-   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextToken returned by the previous call.
+   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
    */
   getExecutionHistory(params: StepFunctions.Types.GetExecutionHistoryInput, callback?: (err: AWSError, data: StepFunctions.Types.GetExecutionHistoryOutput) => void): Request<StepFunctions.Types.GetExecutionHistoryOutput, AWSError>;
   /**
-   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextToken returned by the previous call.
+   * Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the timeStamp of the events. Use the reverseOrder parameter to get the latest events first. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
    */
   getExecutionHistory(callback?: (err: AWSError, data: StepFunctions.Types.GetExecutionHistoryOutput) => void): Request<StepFunctions.Types.GetExecutionHistoryOutput, AWSError>;
   /**
-   * Lists the existing activities. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextToken returned by the previous call.
+   * Lists the existing activities. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
    */
   listActivities(params: StepFunctions.Types.ListActivitiesInput, callback?: (err: AWSError, data: StepFunctions.Types.ListActivitiesOutput) => void): Request<StepFunctions.Types.ListActivitiesOutput, AWSError>;
   /**
-   * Lists the existing activities. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextToken returned by the previous call.
+   * Lists the existing activities. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
    */
   listActivities(callback?: (err: AWSError, data: StepFunctions.Types.ListActivitiesOutput) => void): Request<StepFunctions.Types.ListActivitiesOutput, AWSError>;
   /**
-   * Lists the executions of a state machine that meet the filtering criteria. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextToken returned by the previous call.
+   * Lists the executions of a state machine that meet the filtering criteria. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
    */
   listExecutions(params: StepFunctions.Types.ListExecutionsInput, callback?: (err: AWSError, data: StepFunctions.Types.ListExecutionsOutput) => void): Request<StepFunctions.Types.ListExecutionsOutput, AWSError>;
   /**
-   * Lists the executions of a state machine that meet the filtering criteria. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextToken returned by the previous call.
+   * Lists the executions of a state machine that meet the filtering criteria. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
    */
   listExecutions(callback?: (err: AWSError, data: StepFunctions.Types.ListExecutionsOutput) => void): Request<StepFunctions.Types.ListExecutionsOutput, AWSError>;
   /**
-   * Lists the existing state machines. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextToken returned by the previous call.
+   * Lists the existing state machines. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
    */
   listStateMachines(params: StepFunctions.Types.ListStateMachinesInput, callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachinesOutput) => void): Request<StepFunctions.Types.ListStateMachinesOutput, AWSError>;
   /**
-   * Lists the existing state machines. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextToken returned by the previous call.
+   * Lists the existing state machines. If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged.
    */
   listStateMachines(callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachinesOutput) => void): Request<StepFunctions.Types.ListStateMachinesOutput, AWSError>;
   /**
@@ -116,11 +124,11 @@ declare class StepFunctions extends Service {
    */
   sendTaskFailure(callback?: (err: AWSError, data: StepFunctions.Types.SendTaskFailureOutput) => void): Request<StepFunctions.Types.SendTaskFailureOutput, AWSError>;
   /**
-   * Used by workers to report to the service that the task represented by the specified taskToken is still making progress. This action resets the Heartbeat clock. The Heartbeat threshold is specified in the state machine's Amazon States Language definition. This action does not in itself create an event in the execution history. However, if the task times out, the execution history will contain an ActivityTimedOut event.  The Timeout of a task, defined in the state machine's Amazon States Language definition, is its maximum allowed duration, regardless of the number of SendTaskHeartbeat requests received.   This operation is only useful for long-lived tasks to report the liveliness of the task. 
+   * Used by workers to report to the service that the task represented by the specified taskToken is still making progress. This action resets the Heartbeat clock. The Heartbeat threshold is specified in the state machine's Amazon States Language definition. This action does not in itself create an event in the execution history. However, if the task times out, the execution history contains an ActivityTimedOut event.  The Timeout of a task, defined in the state machine's Amazon States Language definition, is its maximum allowed duration, regardless of the number of SendTaskHeartbeat requests received.   This operation is only useful for long-lived tasks to report the liveliness of the task. 
    */
   sendTaskHeartbeat(params: StepFunctions.Types.SendTaskHeartbeatInput, callback?: (err: AWSError, data: StepFunctions.Types.SendTaskHeartbeatOutput) => void): Request<StepFunctions.Types.SendTaskHeartbeatOutput, AWSError>;
   /**
-   * Used by workers to report to the service that the task represented by the specified taskToken is still making progress. This action resets the Heartbeat clock. The Heartbeat threshold is specified in the state machine's Amazon States Language definition. This action does not in itself create an event in the execution history. However, if the task times out, the execution history will contain an ActivityTimedOut event.  The Timeout of a task, defined in the state machine's Amazon States Language definition, is its maximum allowed duration, regardless of the number of SendTaskHeartbeat requests received.   This operation is only useful for long-lived tasks to report the liveliness of the task. 
+   * Used by workers to report to the service that the task represented by the specified taskToken is still making progress. This action resets the Heartbeat clock. The Heartbeat threshold is specified in the state machine's Amazon States Language definition. This action does not in itself create an event in the execution history. However, if the task times out, the execution history contains an ActivityTimedOut event.  The Timeout of a task, defined in the state machine's Amazon States Language definition, is its maximum allowed duration, regardless of the number of SendTaskHeartbeat requests received.   This operation is only useful for long-lived tasks to report the liveliness of the task. 
    */
   sendTaskHeartbeat(callback?: (err: AWSError, data: StepFunctions.Types.SendTaskHeartbeatOutput) => void): Request<StepFunctions.Types.SendTaskHeartbeatOutput, AWSError>;
   /**
@@ -147,6 +155,14 @@ declare class StepFunctions extends Service {
    * Stops an execution.
    */
   stopExecution(callback?: (err: AWSError, data: StepFunctions.Types.StopExecutionOutput) => void): Request<StepFunctions.Types.StopExecutionOutput, AWSError>;
+  /**
+   * Updates an existing state machine by modifying its definition and/or roleArn. Running executions will continue to use the previous definition and roleArn.  All StartExecution calls within a few seconds will use the updated definition and roleArn. Executions started immediately after calling UpdateStateMachine may use the previous state machine definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error. 
+   */
+  updateStateMachine(params: StepFunctions.Types.UpdateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.UpdateStateMachineOutput) => void): Request<StepFunctions.Types.UpdateStateMachineOutput, AWSError>;
+  /**
+   * Updates an existing state machine by modifying its definition and/or roleArn. Running executions will continue to use the previous definition and roleArn.  All StartExecution calls within a few seconds will use the updated definition and roleArn. Executions started immediately after calling UpdateStateMachine may use the previous state machine definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error. 
+   */
+  updateStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.UpdateStateMachineOutput) => void): Request<StepFunctions.Types.UpdateStateMachineOutput, AWSError>;
 }
 declare namespace StepFunctions {
   export interface ActivityFailedEventDetails {
@@ -170,7 +186,7 @@ declare namespace StepFunctions {
      */
     name: Name;
     /**
-     * The date the activity was created.
+     * The date the activity is created.
      */
     creationDate: Timestamp;
   }
@@ -204,7 +220,7 @@ declare namespace StepFunctions {
   }
   export interface ActivityStartedEventDetails {
     /**
-     * The name of the worker that the task was assigned to. These names are provided by the workers when calling GetActivityTask.
+     * The name of the worker that the task is assigned to. These names are provided by the workers when calling GetActivityTask.
      */
     workerName?: Identity;
   }
@@ -238,7 +254,7 @@ declare namespace StepFunctions {
      */
     activityArn: Arn;
     /**
-     * The date the activity was created.
+     * The date the activity is created.
      */
     creationDate: Timestamp;
   }
@@ -262,7 +278,7 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The date the state machine was created.
+     * The date the state machine is created.
      */
     creationDate: Timestamp;
   }
@@ -300,7 +316,7 @@ declare namespace StepFunctions {
      */
     name: Name;
     /**
-     * The date the activity was created.
+     * The date the activity is created.
      */
     creationDate: Timestamp;
   }
@@ -328,7 +344,7 @@ declare namespace StepFunctions {
      */
     status: ExecutionStatus;
     /**
-     * The date the execution was started.
+     * The date the execution is started.
      */
     startDate: Timestamp;
     /**
@@ -340,9 +356,37 @@ declare namespace StepFunctions {
      */
     input: Data;
     /**
-     * The JSON output data of the execution.
+     * The JSON output data of the execution.  This field is set only if the execution succeeds. If the execution fails, this field is null. 
      */
     output?: Data;
+  }
+  export interface DescribeStateMachineForExecutionInput {
+    /**
+     * The Amazon Resource Name (ARN) of the execution you want state machine information for.
+     */
+    executionArn: Arn;
+  }
+  export interface DescribeStateMachineForExecutionOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine associated with the execution.
+     */
+    stateMachineArn: Arn;
+    /**
+     * The name of the state machine associated with the execution.
+     */
+    name: Name;
+    /**
+     * The Amazon States Language definition of the state machine.
+     */
+    definition: Definition;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role of the State Machine for the execution. 
+     */
+    roleArn: Arn;
+    /**
+     * The date and time the state machine associated with an execution was updated. For a newly created state machine, this is the creation date.
+     */
+    updateDate: Timestamp;
   }
   export interface DescribeStateMachineInput {
     /**
@@ -372,7 +416,7 @@ declare namespace StepFunctions {
      */
     roleArn: Arn;
     /**
-     * The date the state machine was created.
+     * The date the state machine is created.
      */
     creationDate: Timestamp;
   }
@@ -459,7 +503,7 @@ declare namespace StepFunctions {
      */
     activityArn: Arn;
     /**
-     * You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name will be used when it is logged in the execution history.
+     * You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
      */
     workerName?: Name;
   }
@@ -479,7 +523,7 @@ declare namespace StepFunctions {
      */
     executionArn: Arn;
     /**
-     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
@@ -487,7 +531,7 @@ declare namespace StepFunctions {
      */
     reverseOrder?: ReverseOrder;
     /**
-     * If a nextToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
      */
     nextToken?: PageToken;
   }
@@ -497,7 +541,7 @@ declare namespace StepFunctions {
      */
     events: HistoryEventList;
     /**
-     * If a nextToken is returned, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
      */
     nextToken?: PageToken;
   }
@@ -612,11 +656,11 @@ declare namespace StepFunctions {
   }
   export interface ListActivitiesInput {
     /**
-     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
-     * If a nextToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
      */
     nextToken?: PageToken;
   }
@@ -626,13 +670,13 @@ declare namespace StepFunctions {
      */
     activities: ActivityList;
     /**
-     * If a nextToken is returned, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
      */
     nextToken?: PageToken;
   }
   export interface ListExecutionsInput {
     /**
-     * The Amazon Resource Name (ARN) of the state machine whose executions will be listed.
+     * The Amazon Resource Name (ARN) of the state machine whose executions is listed.
      */
     stateMachineArn: Arn;
     /**
@@ -640,11 +684,11 @@ declare namespace StepFunctions {
      */
     statusFilter?: ExecutionStatus;
     /**
-     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
-     * If a nextToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
      */
     nextToken?: PageToken;
   }
@@ -654,24 +698,24 @@ declare namespace StepFunctions {
      */
     executions: ExecutionList;
     /**
-     * If a nextToken is returned, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
      */
     nextToken?: PageToken;
   }
   export interface ListStateMachinesInput {
     /**
-     * The maximum number of results that will be returned per call. nextToken can be used to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 means to use the default. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
      */
     maxResults?: PageSize;
     /**
-     * If a nextToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
      */
     nextToken?: PageToken;
   }
   export interface ListStateMachinesOutput {
     stateMachines: StateMachineList;
     /**
-     * If a nextToken is returned, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
+     * If a nextToken is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextToken. Keep all other arguments unchanged. The configured maxResults determines how many results can be returned in a single call.
      */
     nextToken?: PageToken;
   }
@@ -697,7 +741,7 @@ declare namespace StepFunctions {
   }
   export interface SendTaskHeartbeatInput {
     /**
-     * The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTask::taskToken).
+     * The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTaskOutput$taskToken).
      */
     taskToken: TaskToken;
   }
@@ -705,7 +749,7 @@ declare namespace StepFunctions {
   }
   export interface SendTaskSuccessInput {
     /**
-     * The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTask::taskToken).
+     * The token that represents this task. Task tokens are generated by the service when the tasks are assigned to a worker (see GetActivityTaskOutput$taskToken).
      */
     taskToken: TaskToken;
     /**
@@ -721,7 +765,7 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
+     * The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide.  An execution can't use the name of another execution for 90 days. When you make multiple StartExecution calls with the same name, the new execution doesn't run and the following rules apply:   When the original execution is open and the execution input from the new call is different, the ExecutionAlreadyExists message is returned.   When the original execution is open and the execution input from the new call is identical, the Success message is returned.   When the original execution is closed, the ExecutionAlreadyExists message is returned regardless of input.    A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name?: Name;
     /**
@@ -735,7 +779,7 @@ declare namespace StepFunctions {
      */
     executionArn: Arn;
     /**
-     * The date the execution was started.
+     * The date the execution is started.
      */
     startDate: Timestamp;
   }
@@ -770,7 +814,7 @@ declare namespace StepFunctions {
      */
     name: Name;
     /**
-     * The date the state machine was created.
+     * The date the state machine is created.
      */
     creationDate: Timestamp;
   }
@@ -791,13 +835,33 @@ declare namespace StepFunctions {
   }
   export interface StopExecutionOutput {
     /**
-     * The date the execution was stopped.
+     * The date the execution is stopped.
      */
     stopDate: Timestamp;
   }
   export type TaskToken = string;
   export type TimeoutInSeconds = number;
   export type Timestamp = Date;
+  export interface UpdateStateMachineInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine.
+     */
+    stateMachineArn: Arn;
+    /**
+     * The Amazon States Language definition of the state machine.
+     */
+    definition?: Definition;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role of the state machine.
+     */
+    roleArn?: Arn;
+  }
+  export interface UpdateStateMachineOutput {
+    /**
+     * The date and time the state machine was updated.
+     */
+    updateDate: Timestamp;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

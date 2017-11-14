@@ -76,11 +76,11 @@ declare class SSM extends Service {
    */
   createPatchBaseline(callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
   /**
-   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync operation. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Configuring Resource Data Sync for Inventory.
+   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Configuring Resource Data Sync for Inventory.
    */
   createResourceDataSync(params: SSM.Types.CreateResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
-   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync operation. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Configuring Resource Data Sync for Inventory.
+   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Configuring Resource Data Sync for Inventory.
    */
   createResourceDataSync(callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class SSM extends Service {
    */
   describeActivations(callback?: (err: AWSError, data: SSM.Types.DescribeActivationsResult) => void): Request<SSM.Types.DescribeActivationsResult, AWSError>;
   /**
-   * Describes the associations for the specified Systems Manager document or instance.
+   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and a Systems Manager document, then you retrieve the association by specifying the document name and the instance ID. 
    */
   describeAssociation(params: SSM.Types.DescribeAssociationRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAssociationResult) => void): Request<SSM.Types.DescribeAssociationResult, AWSError>;
   /**
-   * Describes the associations for the specified Systems Manager document or instance.
+   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and a Systems Manager document, then you retrieve the association by specifying the document name and the instance ID. 
    */
   describeAssociation(callback?: (err: AWSError, data: SSM.Types.DescribeAssociationResult) => void): Request<SSM.Types.DescribeAssociationResult, AWSError>;
   /**
@@ -842,6 +842,7 @@ declare namespace SSM {
   export interface AddTagsToResourceResult {
   }
   export type AgentErrorCode = string;
+  export type AggregatorSchemaOnly = boolean;
   export type AllowedPattern = string;
   export type ApproveAfterDays = number;
   export interface Association {
@@ -1697,7 +1698,7 @@ declare namespace SSM {
   }
   export interface CreatePatchBaselineRequest {
     /**
-     * Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS.
+     * Defines the operating system the patch baseline applies to. The Default value is WINDOWS.
      */
     OperatingSystem?: OperatingSystem;
     /**
@@ -2911,6 +2912,10 @@ declare namespace SSM {
      */
     Filters?: InventoryFilterList;
     /**
+     * Returns counts of inventory types based on one or more expressions. For example, if you aggregate by using an expression that uses the AWS:InstanceInformation.PlatformType type, you can see a count of how many Windows and Linux instances exist in your inventoried fleet.
+     */
+    Aggregators?: InventoryAggregatorList;
+    /**
      * The list of inventory item types to return.
      */
     ResultAttributes?: ResultAttributeList;
@@ -2947,6 +2952,10 @@ declare namespace SSM {
      * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
      */
     MaxResults?: GetInventorySchemaMaxResults;
+    /**
+     * Returns inventory schemas that support aggregation. For example, this call returns the AWS:InstanceInformation type, because it supports aggregation based on the PlatformName, PlatformType, and PlatformVersion attributes.
+     */
+    Aggregator?: AggregatorSchemaOnly;
     /**
      * Returns the sub-type schema for a specified inventory type.
      */
@@ -3285,7 +3294,7 @@ declare namespace SSM {
   export type GetParametersByPathMaxResults = number;
   export interface GetParametersByPathRequest {
     /**
-     * The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. Examples: /Environment/Test/DBString003 /Finance/Prod/IAD/OS/WinServ2016/license15
+     * The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. For example: /Finance/Prod/IAD/WinServ2016/license15 
      */
     Path: PSParameterName;
     /**
@@ -3701,6 +3710,18 @@ declare namespace SSM {
   export type InstancePatchStatesList = InstancePatchState[];
   export type InstanceTagName = string;
   export type Integer = number;
+  export interface InventoryAggregator {
+    /**
+     * The inventory type and attribute name for aggregation.
+     */
+    Expression?: InventoryAggregatorExpression;
+    /**
+     * Nested aggregators to further refine aggregation for an inventory type.
+     */
+    Aggregators?: InventoryAggregatorList;
+  }
+  export type InventoryAggregatorExpression = string;
+  export type InventoryAggregatorList = InventoryAggregator[];
   export type InventoryAttributeDataType = "string"|"number"|string;
   export interface InventoryFilter {
     /**
@@ -3777,6 +3798,10 @@ declare namespace SSM {
      * The schema attributes for inventory. This contains data type and attribute name.
      */
     Attributes: InventoryItemAttributeList;
+    /**
+     * The alias name of the inventory type. The alias name is used for display purposes.
+     */
+    DisplayName?: InventoryTypeDisplayName;
   }
   export type InventoryItemSchemaResultList = InventoryItemSchema[];
   export type InventoryItemSchemaVersion = string;
@@ -3819,6 +3844,7 @@ declare namespace SSM {
   }
   export type InventoryResultItemKey = string;
   export type InventoryResultItemMap = {[key: string]: InventoryResultItem};
+  export type InventoryTypeDisplayName = string;
   export type InvocationTraceOutput = string;
   export type IsSubTypeSchema = boolean;
   export type KeyList = TagKey[];
@@ -4799,7 +4825,7 @@ declare namespace SSM {
      */
     BaselineName?: BaselineName;
     /**
-     * Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS. 
+     * Defines the operating system the patch baseline applies to. The Default value is WINDOWS. 
      */
     OperatingSystem?: OperatingSystem;
     /**
@@ -4993,11 +5019,11 @@ declare namespace SSM {
   }
   export interface PutParameterRequest {
     /**
-     * The name of the parameter that you want to add to the system.
+     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: /Dev/DBServer/MySQL/db-string13   The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters.  
      */
     Name: PSParameterName;
     /**
-     * Information about the parameter that you want to add to the system
+     * Information about the parameter that you want to add to the system.
      */
     Description?: ParameterDescription;
     /**

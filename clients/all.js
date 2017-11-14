@@ -106,5 +106,6 @@ module.exports = {
   CloudHSMV2: require('./cloudhsmv2'),
   Glue: require('./glue'),
   Mobile: require('./mobile'),
-  Pricing: require('./pricing')
+  Pricing: require('./pricing'),
+  CostExplorer: require('./costexplorer')
 };

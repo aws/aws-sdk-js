@@ -1,6 +1,40 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.149.0-->
+<!--LATEST=2.154.0-->
 <!--ENTRYINSERT-->
+
+## 2.154.0
+* feature: CodeCommit: AWS CodeCommit now supports pull requests. You can use pull requests to collaboratively review code changes for minor changes or fixes, major feature additions, or new versions of your released software.
+* feature: CostExplorer: The AWS Cost Explorer API gives customers programmatic access to AWS cost and usage information, allowing them to perform adhoc queries and build interactive cost management applications that leverage this dataset.
+* feature: Firehose: This release includes a new Kinesis Firehose feature that supports Splunk as Kinesis Firehose delivery destination. You can now use Kinesis Firehose to ingest real-time data to Splunk in a serverless, reliable, and salable manner. This release also includes a new feature that allows you to configure Lambda buffer size in Kinesis Firehose data transformation feature. You can now customize the data buffer size before invoking Lambda function in Kinesis Firehose for data transformation. This feature allows you to flexibly trade-off processing and delivery latency with cost and efficiency based on your specific use cases and requirements. 
+* feature: Kinesis: Customers can now obtain the important characteristics of their stream with DescribeStreamSummary. The response will not include the shard list for the stream but will have the number of open shards, and all the other fields included in the DescribeStream response.
+* feature: WorkDocs: DescribeGroups API and miscellaneous enhancements
+
+## 2.153.0
+* feature: ApplicationAutoScaling: This SDK update contains support for Target Tracking scaling for EC2 Spot Fleet. It allows you to scale an EC2 Spot Fleet using a Target Tracking scaling policy.
+* feature: DMS: Support for migration task assessment. Support for data validation after the migration.
+* feature: RDS: Amazon RDS now supports importing MySQL databases by using backup files from Amazon S3.
+* feature: S3: Added ORC to the supported S3 Inventory formats.
+
+## 2.152.0
+* bugfix: S3: Reverts default signatureVersion for S3 presigned URLs to the lowest signatureVersion the region supports. 2.150.0 changed the default signatureVersion of all presigned URLs to v4. This change does not affect S3 clients that had the signatureVersion explicitly defined.
+* feature: ApplicationAutoScaling: Application Auto Scaling now supports automatic scaling of Amazon Aurora replicas
+* feature: EC2: You are now able to create and launch EC2 x1e smaller instance sizes
+* feature: Glue: API update for AWS Glue. New crawler configuration attribute enables customers to specify crawler behavior. New XML classifier enables classification of XML data.
+* feature: Organizations: This release adds APIs that you can use to enable and disable integration with AWS services designed to work with AWS Organizations. This integration allows the AWS service to perform operations on your behalf on all of the accounts in your organization. Although you can use these APIs yourself, we recommend that you instead use the commands provided in the other AWS service to enable integration with AWS Organizations.
+* feature: Route53: You can use Route 53's GetAccountLimit/GetHostedZoneLimit/GetReusableDelegationSetLimit APIs to view your current limits (including custom set limits) on Route 53 resources such as hosted zones and health checks. These APIs also return the number of each resource you're currently using to enable comparison against your current limits.
+
+## 2.151.0
+* feature: APIGateway: 1. Extended GetDocumentationParts operation to support retrieving documentation parts resources without contents.  2. Added hosted zone ID in the custom domain response.
+* feature: Polly: Amazon Polly adds Korean language support with new female voice - "Seoyeon" and new Indian English female voice - "Aditi"
+* feature: SES: SES launches Configuration Set Reputation Metrics and Email Pausing Today, two features that build upon the capabilities of the reputation dashboard. The first is the ability to export reputation metrics for individual configuration sets. The second is the ability to temporarily pause email sending, either at the configuration set level, or across your entire Amazon SES account.
+* feature: StepFunctions: You can now use the UpdateStateMachine API to update your state machine definition and role ARN. Existing executions will continue to use the previous definition and role ARN. You can use the DescribeStateMachineForExecution API to determine which state machine definition and role ARN is associated with an execution
+
+## 2.150.0
+* feature: ECS: Added new mode for Task Networking in ECS, called awsvpc mode. Mode configuration parameters to be passed in via awsvpcConfiguration. Updated APIs now use/show this new mode - RegisterTaskDefinition, CreateService, UpdateService, RunTask, StartTask.
+* feature: ECS: Remove localhost restriction for ECS credential provider
+* feature: Lightsail: Lightsail now supports attached block storage, which allows you to scale your applications and protect application data with additional SSD-backed storage disks. This feature allows Lightsail customers to attach secure storage disks to their Lightsail instances and manage their attached disks, including creating and deleting disks, attaching and detaching disks from instances, and backing up disks via snapshot.
+* feature: Route53: When a Route 53 health check or hosted zone is created by a linked AWS service, the object now includes information about the service that created it. Hosted zones or health checks that are created by a linked service can't be updated or deleted using Route 53.
+* feature: SSM: EC2 Systems Manager GetInventory API adds support for aggregation.
 
 ## 2.149.0
 * feature: EC2: Introduces the following features: 1. Create a default subnet in an Availability Zone if no default subnet exists. 2. Spot Fleet integrates with Elastic Load Balancing to enable you to attach one or more load balancers to a Spot Fleet request. When you attach the load balancer, it automatically registers the instance in the Spot Fleet to the load balancers which distributes incoming traffic across the instances. 

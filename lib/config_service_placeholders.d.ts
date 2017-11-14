@@ -107,6 +107,7 @@ export abstract class ConfigurationServicePlaceholders {
   glue?: AWS.Glue.Types.ClientConfiguration;
   mobile?: AWS.Mobile.Types.ClientConfiguration;
   pricing?: AWS.Pricing.Types.ClientConfiguration;
+  costexplorer?: AWS.CostExplorer.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -216,4 +217,5 @@ export interface ConfigurationServiceApiVersions {
   glue?: AWS.Glue.Types.apiVersion;
   mobile?: AWS.Mobile.Types.apiVersion;
   pricing?: AWS.Pricing.Types.apiVersion;
+  costexplorer?: AWS.CostExplorer.Types.apiVersion;
 }

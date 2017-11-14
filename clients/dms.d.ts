@@ -204,6 +204,14 @@ declare class DMS extends Service {
    */
   describeReplicationSubnetGroups(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationSubnetGroupsResponse) => void): Request<DMS.Types.DescribeReplicationSubnetGroupsResponse, AWSError>;
   /**
+   * Returns the task assessment results from Amazon S3. This action always returns the latest results.
+   */
+  describeReplicationTaskAssessmentResults(params: DMS.Types.DescribeReplicationTaskAssessmentResultsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentResultsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentResultsResponse, AWSError>;
+  /**
+   * Returns the task assessment results from Amazon S3. This action always returns the latest results.
+   */
+  describeReplicationTaskAssessmentResults(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentResultsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentResultsResponse, AWSError>;
+  /**
    * Returns information about replication tasks for your account in the current region.
    */
   describeReplicationTasks(params: DMS.Types.DescribeReplicationTasksMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
@@ -315,6 +323,14 @@ declare class DMS extends Service {
    * Starts the replication task. For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
    */
   startReplicationTask(callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
+  /**
+   *  Starts the replication task assessment for unsupported data types in the source database. 
+   */
+  startReplicationTaskAssessment(params: DMS.Types.StartReplicationTaskAssessmentMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentResponse, AWSError>;
+  /**
+   *  Starts the replication task assessment for unsupported data types in the source database. 
+   */
+  startReplicationTaskAssessment(callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentResponse, AWSError>;
   /**
    * Stops the replication task. 
    */
@@ -488,7 +504,7 @@ declare namespace DMS {
      */
     Tags?: TagList;
     /**
-     * The Amazon Resource Number (ARN) for the certificate.
+     * The Amazon Resource Name (ARN) for the certificate.
      */
     CertificateArn?: String;
     /**
@@ -1021,6 +1037,34 @@ declare namespace DMS {
      * A description of the replication subnet groups.
      */
     ReplicationSubnetGroups?: ReplicationSubnetGroups;
+  }
+  export interface DescribeReplicationTaskAssessmentResultsMessage {
+    /**
+     * - The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified the API will return only one result and ignore the values of the max-records and marker parameters. 
+     */
+    ReplicationTaskArn?: String;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeReplicationTaskAssessmentResultsResponse {
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * - The Amazon S3 bucket where the task assessment report is located. 
+     */
+    BucketName?: String;
+    /**
+     *  The task assessment report. 
+     */
+    ReplicationTaskAssessmentResults?: ReplicationTaskAssessmentResultList;
   }
   export interface DescribeReplicationTasksMessage {
     /**
@@ -1842,6 +1886,37 @@ declare namespace DMS {
      */
     ReplicationTaskStats?: ReplicationTaskStats;
   }
+  export interface ReplicationTaskAssessmentResult {
+    /**
+     *  The replication task identifier of the task on which the task assessment was run. 
+     */
+    ReplicationTaskIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the replication task. 
+     */
+    ReplicationTaskArn?: String;
+    /**
+     * The date the task assessment was completed. 
+     */
+    ReplicationTaskLastAssessmentDate?: TStamp;
+    /**
+     *  The status of the task assessment. 
+     */
+    AssessmentStatus?: String;
+    /**
+     *  The file containing the results of the task assessment. 
+     */
+    AssessmentResultsFile?: String;
+    /**
+     *  The task assessment results in JSON format. 
+     */
+    AssessmentResults?: String;
+    /**
+     *  The URL of the S3 object containing the task assessment results. 
+     */
+    S3ObjectUrl?: String;
+  }
+  export type ReplicationTaskAssessmentResultList = ReplicationTaskAssessmentResult[];
   export type ReplicationTaskList = ReplicationTask[];
   export interface ReplicationTaskStats {
     /**
@@ -1903,9 +1978,21 @@ declare namespace DMS {
   export type SecretString = string;
   export type SourceIdsList = String[];
   export type SourceType = "replication-instance"|string;
+  export interface StartReplicationTaskAssessmentMessage {
+    /**
+     *  The Amazon Resource Name (ARN) of the replication task. 
+     */
+    ReplicationTaskArn: String;
+  }
+  export interface StartReplicationTaskAssessmentResponse {
+    /**
+     *  The assessed replication task. 
+     */
+    ReplicationTask?: ReplicationTask;
+  }
   export interface StartReplicationTaskMessage {
     /**
-     * The Amazon Resource Number (ARN) of the replication task to be started.
+     * The Amazon Resource Name (ARN) of the replication task to be started.
      */
     ReplicationTaskArn: String;
     /**
@@ -1926,7 +2013,7 @@ declare namespace DMS {
   export type StartReplicationTaskTypeValue = "start-replication"|"resume-processing"|"reload-target"|string;
   export interface StopReplicationTaskMessage {
     /**
-     * The Amazon Resource Number(ARN) of the replication task to be stopped.
+     * The Amazon Resource Name(ARN) of the replication task to be stopped.
      */
     ReplicationTaskArn: String;
   }
@@ -2015,6 +2102,22 @@ declare namespace DMS {
      * The state of the tables described. Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table all | Table updates | Table is being reloaded
      */
     TableState?: String;
+    /**
+     * The number of records that have yet to be validated.
+     */
+    ValidationPendingRecords?: Long;
+    /**
+     * The number of records that failed validation.
+     */
+    ValidationFailedRecords?: Long;
+    /**
+     * The number of records that could not be validated.
+     */
+    ValidationSuspendedRecords?: Long;
+    /**
+     * The validation state of the table. The parameter can have the following values   Not enabled—Validation is not enabled for the table in the migration task.   Pending records—Some records in the table are waiting for validation.   Mismatched records—Some records in the table do not match between the source and target.   Suspended records—Some records in the table could not be validated.   No primary key—The table could not be validated because it had no primary key.   Table error—The table was not validated because it was in an error state and some data was not migrated.   Validated—All rows in the table were validated. If the table is updated, the status can change from Validated.   Error—The table could not be validated because of an unexpected error.  
+     */
+    ValidationState?: String;
   }
   export type TableStatisticsList = TableStatistics[];
   export interface TableToReload {
