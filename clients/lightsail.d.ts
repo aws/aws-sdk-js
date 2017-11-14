@@ -20,6 +20,14 @@ declare class Lightsail extends Service {
    */
   allocateStaticIp(callback?: (err: AWSError, data: Lightsail.Types.AllocateStaticIpResult) => void): Request<Lightsail.Types.AllocateStaticIpResult, AWSError>;
   /**
+   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.
+   */
+  attachDisk(params: Lightsail.Types.AttachDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachDiskResult) => void): Request<Lightsail.Types.AttachDiskResult, AWSError>;
+  /**
+   * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.
+   */
+  attachDisk(callback?: (err: AWSError, data: Lightsail.Types.AttachDiskResult) => void): Request<Lightsail.Types.AttachDiskResult, AWSError>;
+  /**
    * Attaches a static IP address to a specific Amazon Lightsail instance.
    */
   attachStaticIp(params: Lightsail.Types.AttachStaticIpRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachStaticIpResult) => void): Request<Lightsail.Types.AttachStaticIpResult, AWSError>;
@@ -35,6 +43,30 @@ declare class Lightsail extends Service {
    * Closes the public ports on a specific Amazon Lightsail instance.
    */
   closeInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.CloseInstancePublicPortsResult) => void): Request<Lightsail.Types.CloseInstancePublicPortsResult, AWSError>;
+  /**
+   * Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see Regions and Availability Zones in Lightsail.
+   */
+  createDisk(params: Lightsail.Types.CreateDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskResult) => void): Request<Lightsail.Types.CreateDiskResult, AWSError>;
+  /**
+   * Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see Regions and Availability Zones in Lightsail.
+   */
+  createDisk(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskResult) => void): Request<Lightsail.Types.CreateDiskResult, AWSError>;
+  /**
+   * Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see Regions and Availability Zones in Lightsail.
+   */
+  createDiskFromSnapshot(params: Lightsail.Types.CreateDiskFromSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskFromSnapshotResult) => void): Request<Lightsail.Types.CreateDiskFromSnapshotResult, AWSError>;
+  /**
+   * Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see Regions and Availability Zones in Lightsail.
+   */
+  createDiskFromSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskFromSnapshotResult) => void): Request<Lightsail.Types.CreateDiskFromSnapshotResult, AWSError>;
+  /**
+   * Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance. You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.
+   */
+  createDiskSnapshot(params: Lightsail.Types.CreateDiskSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDiskSnapshotResult) => void): Request<Lightsail.Types.CreateDiskSnapshotResult, AWSError>;
+  /**
+   * Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance. You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.
+   */
+  createDiskSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskSnapshotResult) => void): Request<Lightsail.Types.CreateDiskSnapshotResult, AWSError>;
   /**
    * Creates a domain resource for the specified domain (e.g., example.com).
    */
@@ -84,6 +116,22 @@ declare class Lightsail extends Service {
    */
   createKeyPair(callback?: (err: AWSError, data: Lightsail.Types.CreateKeyPairResult) => void): Request<Lightsail.Types.CreateKeyPairResult, AWSError>;
   /**
+   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes. 
+   */
+  deleteDisk(params: Lightsail.Types.DeleteDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskResult) => void): Request<Lightsail.Types.DeleteDiskResult, AWSError>;
+  /**
+   * Deletes the specified block storage disk. The disk must be in the available state (not attached to a Lightsail instance).  The disk may remain in the deleting state for several minutes. 
+   */
+  deleteDisk(callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskResult) => void): Request<Lightsail.Types.DeleteDiskResult, AWSError>;
+  /**
+   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.
+   */
+  deleteDiskSnapshot(params: Lightsail.Types.DeleteDiskSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskSnapshotResult) => void): Request<Lightsail.Types.DeleteDiskSnapshotResult, AWSError>;
+  /**
+   * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.
+   */
+  deleteDiskSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskSnapshotResult) => void): Request<Lightsail.Types.DeleteDiskSnapshotResult, AWSError>;
+  /**
    * Deletes the specified domain recordset and all of its domain records.
    */
   deleteDomain(params: Lightsail.Types.DeleteDomainRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDomainResult) => void): Request<Lightsail.Types.DeleteDomainResult, AWSError>;
@@ -124,6 +172,14 @@ declare class Lightsail extends Service {
    */
   deleteKeyPair(callback?: (err: AWSError, data: Lightsail.Types.DeleteKeyPairResult) => void): Request<Lightsail.Types.DeleteKeyPairResult, AWSError>;
   /**
+   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.
+   */
+  detachDisk(params: Lightsail.Types.DetachDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.DetachDiskResult) => void): Request<Lightsail.Types.DetachDiskResult, AWSError>;
+  /**
+   * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.
+   */
+  detachDisk(callback?: (err: AWSError, data: Lightsail.Types.DetachDiskResult) => void): Request<Lightsail.Types.DetachDiskResult, AWSError>;
+  /**
    * Detaches a static IP from the Amazon Lightsail instance to which it is attached.
    */
   detachStaticIp(params: Lightsail.Types.DetachStaticIpRequest, callback?: (err: AWSError, data: Lightsail.Types.DetachStaticIpResult) => void): Request<Lightsail.Types.DetachStaticIpResult, AWSError>;
@@ -163,6 +219,38 @@ declare class Lightsail extends Service {
    * Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or instance).
    */
   getBundles(callback?: (err: AWSError, data: Lightsail.Types.GetBundlesResult) => void): Request<Lightsail.Types.GetBundlesResult, AWSError>;
+  /**
+   * Returns information about a specific block storage disk.
+   */
+  getDisk(params: Lightsail.Types.GetDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDiskResult) => void): Request<Lightsail.Types.GetDiskResult, AWSError>;
+  /**
+   * Returns information about a specific block storage disk.
+   */
+  getDisk(callback?: (err: AWSError, data: Lightsail.Types.GetDiskResult) => void): Request<Lightsail.Types.GetDiskResult, AWSError>;
+  /**
+   * Returns information about a specific block storage disk snapshot.
+   */
+  getDiskSnapshot(params: Lightsail.Types.GetDiskSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDiskSnapshotResult) => void): Request<Lightsail.Types.GetDiskSnapshotResult, AWSError>;
+  /**
+   * Returns information about a specific block storage disk snapshot.
+   */
+  getDiskSnapshot(callback?: (err: AWSError, data: Lightsail.Types.GetDiskSnapshotResult) => void): Request<Lightsail.Types.GetDiskSnapshotResult, AWSError>;
+  /**
+   * Returns information about all block storage disk snapshots in your AWS account and region. If you are describing a long list of disk snapshots, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   */
+  getDiskSnapshots(params: Lightsail.Types.GetDiskSnapshotsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDiskSnapshotsResult) => void): Request<Lightsail.Types.GetDiskSnapshotsResult, AWSError>;
+  /**
+   * Returns information about all block storage disk snapshots in your AWS account and region. If you are describing a long list of disk snapshots, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   */
+  getDiskSnapshots(callback?: (err: AWSError, data: Lightsail.Types.GetDiskSnapshotsResult) => void): Request<Lightsail.Types.GetDiskSnapshotsResult, AWSError>;
+  /**
+   * Returns information about all block storage disks in your AWS account and region. If you are describing a long list of disks, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   */
+  getDisks(params: Lightsail.Types.GetDisksRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDisksResult) => void): Request<Lightsail.Types.GetDisksResult, AWSError>;
+  /**
+   * Returns information about all block storage disks in your AWS account and region. If you are describing a long list of disks, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
+   */
+  getDisks(callback?: (err: AWSError, data: Lightsail.Types.GetDisksResult) => void): Request<Lightsail.Types.GetDisksResult, AWSError>;
   /**
    * Returns information about a specific domain recordset.
    */
@@ -410,6 +498,26 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface AttachDiskRequest {
+    /**
+     * The unique Lightsail disk name (e.g., my-disk).
+     */
+    diskName: ResourceName;
+    /**
+     * The name of the Lightsail instance where you want to utilize the storage disk.
+     */
+    instanceName: ResourceName;
+    /**
+     * The disk path to expose to the instance (e.g., /dev/xvdf).
+     */
+    diskPath: NonEmptyString;
+  }
+  export interface AttachDiskResult {
+    /**
+     * An object describing the API operation.
+     */
+    operations?: OperationList;
+  }
   export interface AttachStaticIpRequest {
     /**
      * The name of the static IP.
@@ -426,9 +534,10 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type AttachedDiskMap = {[key: string]: DiskMapList};
   export interface AvailabilityZone {
     /**
-     * The name of the Availability Zone. The format is us-east-1a (case-sensitive).
+     * The name of the Availability Zone. The format is us-east-2a (case-sensitive).
      */
     zoneName?: NonEmptyString;
     /**
@@ -553,6 +662,66 @@ declare namespace Lightsail {
      */
     operation?: Operation;
   }
+  export interface CreateDiskFromSnapshotRequest {
+    /**
+     * The unique Lightsail disk name (e.g., my-disk).
+     */
+    diskName: ResourceName;
+    /**
+     * The name of the disk snapshot (e.g., my-snapshot) from which to create the new storage disk.
+     */
+    diskSnapshotName: ResourceName;
+    /**
+     * The Availability Zone where you want to create the disk (e.g., us-east-2a). Choose the same Availability Zone as the Lightsail instance where you want to create the disk. Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.
+     */
+    availabilityZone: NonEmptyString;
+    /**
+     * The size of the disk in GB (e.g., 32).
+     */
+    sizeInGb: integer;
+  }
+  export interface CreateDiskFromSnapshotResult {
+    /**
+     * An object describing the API operations.
+     */
+    operations?: OperationList;
+  }
+  export interface CreateDiskRequest {
+    /**
+     * The unique Lightsail disk name (e.g., my-disk).
+     */
+    diskName: ResourceName;
+    /**
+     * The Availability Zone where you want to create the disk (e.g., us-east-2a). Choose the same Availability Zone as the Lightsail instance where you want to create the disk. Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.
+     */
+    availabilityZone: NonEmptyString;
+    /**
+     * The size of the disk in GB (e.g., 32).
+     */
+    sizeInGb: integer;
+  }
+  export interface CreateDiskResult {
+    /**
+     * An object describing the API operations.
+     */
+    operations?: OperationList;
+  }
+  export interface CreateDiskSnapshotRequest {
+    /**
+     * The unique name of the source disk (e.g., my-source-disk).
+     */
+    diskName: ResourceName;
+    /**
+     * The name of the destination disk snapshot (e.g., my-disk-snapshot) based on the source disk.
+     */
+    diskSnapshotName: ResourceName;
+  }
+  export interface CreateDiskSnapshotResult {
+    /**
+     * An object describing the API operations.
+     */
+    operations?: OperationList;
+  }
   export interface CreateDomainEntryRequest {
     /**
      * The domain name (e.g., example.com) for which you want to create the domain entry.
@@ -603,7 +772,11 @@ declare namespace Lightsail {
      */
     instanceNames: StringList;
     /**
-     * The Availability Zone where you want to create your instances. Use the following formatting: us-east-1a (case sensitive). You can get a list of availability zones by using the get regions operation. Be sure to add the include availability zones parameter to your request.
+     * An object containing information about one or more disk mappings.
+     */
+    attachedDiskMapping?: AttachedDiskMap;
+    /**
+     * The Availability Zone where you want to create your instances. Use the following formatting: us-east-2a (case sensitive). You can get a list of availability zones by using the get regions operation. Be sure to add the include availability zones parameter to your request.
      */
     availabilityZone: string;
     /**
@@ -635,7 +808,7 @@ declare namespace Lightsail {
      */
     instanceNames: StringList;
     /**
-     * The Availability Zone in which to create your instance. Use the following format: us-east-1a (case sensitive). You can get a list of availability zones by using the get regions operation. Be sure to add the include availability zones parameter to your request.
+     * The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). You can get a list of availability zones by using the get regions operation. Be sure to add the include availability zones parameter to your request.
      */
     availabilityZone: string;
     /**
@@ -688,6 +861,30 @@ declare namespace Lightsail {
      * An array of key-value pairs containing information about the results of your create key pair request.
      */
     operation?: Operation;
+  }
+  export interface DeleteDiskRequest {
+    /**
+     * The unique name of the disk you want to delete (e.g., my-disk).
+     */
+    diskName: ResourceName;
+  }
+  export interface DeleteDiskResult {
+    /**
+     * An object describing the API operations.
+     */
+    operations?: OperationList;
+  }
+  export interface DeleteDiskSnapshotRequest {
+    /**
+     * The name of the disk snapshot you want to delete (e.g., my-disk-snapshot).
+     */
+    diskSnapshotName: ResourceName;
+  }
+  export interface DeleteDiskSnapshotResult {
+    /**
+     * An object describing the API operations.
+     */
+    operations?: OperationList;
   }
   export interface DeleteDomainEntryRequest {
     /**
@@ -753,6 +950,18 @@ declare namespace Lightsail {
      */
     operation?: Operation;
   }
+  export interface DetachDiskRequest {
+    /**
+     * The unique name of the disk you want to detach from your instance (e.g., my-disk).
+     */
+    diskName: ResourceName;
+  }
+  export interface DetachDiskResult {
+    /**
+     * An object describing the API operations.
+     */
+    operations?: OperationList;
+  }
   export interface DetachStaticIpRequest {
     /**
      * The name of the static IP to detach from the instance.
@@ -767,7 +976,7 @@ declare namespace Lightsail {
   }
   export interface Disk {
     /**
-     * The name of the disk.
+     * The unique name of the disk.
      */
     name?: ResourceName;
     /**
@@ -783,21 +992,17 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The region and Availability Zone where the disk is located.
+     * The AWS Region and Availability Zone where the disk is located.
      */
     location?: ResourceLocation;
     /**
-     * The resource type of the disk. 
+     * The Lightsail resource type (e.g., Disk).
      */
     resourceType?: ResourceType;
     /**
      * The size of the disk in GB.
      */
     sizeInGb?: integer;
-    /**
-     * The number of GB in use by the disk.
-     */
-    gbInUse?: integer;
     /**
      * A Boolean value indicating whether this disk is a system disk (has an operating system loaded on it).
      */
@@ -811,19 +1016,87 @@ declare namespace Lightsail {
      */
     path?: string;
     /**
+     * Describes the status of the disk.
+     */
+    state?: DiskState;
+    /**
      * The resources to which the disk is attached.
      */
-    attachedTo?: string;
+    attachedTo?: ResourceName;
     /**
      * A Boolean value indicating whether the disk is attached.
      */
     isAttached?: boolean;
     /**
-     * The attachment state of the disk.
+     * (Deprecated) The attachment state of the disk.  In releases prior to November 9, 2017, this parameter returned attached for system disks in the API response. It is now deprecated, but still included in the response. Use isAttached instead. 
      */
     attachmentState?: string;
+    /**
+     * (Deprecated) The number of GB in use by the disk.  In releases prior to November 9, 2017, this parameter was not included in the API response. It is now deprecated. 
+     */
+    gbInUse?: integer;
   }
   export type DiskList = Disk[];
+  export interface DiskMap {
+    /**
+     * The original disk path exposed to the instance (for example, /dev/sdh).
+     */
+    originalDiskPath?: NonEmptyString;
+    /**
+     * The new disk name (e.g., my-new-disk).
+     */
+    newDiskName?: ResourceName;
+  }
+  export type DiskMapList = DiskMap[];
+  export interface DiskSnapshot {
+    /**
+     * The name of the disk snapshot (e.g., my-disk-snapshot).
+     */
+    name?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the disk snapshot.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+     */
+    supportCode?: string;
+    /**
+     * The date when the disk snapshot was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * The AWS Region and Availability Zone where the disk snapshot was created.
+     */
+    location?: ResourceLocation;
+    /**
+     * The Lightsail resource type (e.g., DiskSnapshot).
+     */
+    resourceType?: ResourceType;
+    /**
+     * The size of the disk in GB.
+     */
+    sizeInGb?: integer;
+    /**
+     * The status of the disk snapshot operation.
+     */
+    state?: DiskSnapshotState;
+    /**
+     * The progress of the disk snapshot operation.
+     */
+    progress?: string;
+    /**
+     * The unique name of the source disk from which you are creating the disk snapshot.
+     */
+    fromDiskName?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the source disk from which you are creating the disk snapshot.
+     */
+    fromDiskArn?: NonEmptyString;
+  }
+  export type DiskSnapshotList = DiskSnapshot[];
+  export type DiskSnapshotState = "pending"|"completed"|"error"|"unknown"|string;
+  export type DiskState = "pending"|"error"|"available"|"in-use"|"unknown"|string;
   export interface Domain {
     /**
      * The name of the domain.
@@ -947,6 +1220,62 @@ declare namespace Lightsail {
     bundles?: BundleList;
     /**
      * A token used for advancing to the next page of results from your get active names request.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetDiskRequest {
+    /**
+     * The name of the disk (e.g., my-disk).
+     */
+    diskName: ResourceName;
+  }
+  export interface GetDiskResult {
+    /**
+     * An object containing information about the disk.
+     */
+    disk?: Disk;
+  }
+  export interface GetDiskSnapshotRequest {
+    /**
+     * The name of the disk snapshot (e.g., my-disk-snapshot).
+     */
+    diskSnapshotName: ResourceName;
+  }
+  export interface GetDiskSnapshotResult {
+    /**
+     * An object containing information about the disk snapshot.
+     */
+    diskSnapshot?: DiskSnapshot;
+  }
+  export interface GetDiskSnapshotsRequest {
+    /**
+     * A token used for advancing to the next page of results from your GetDiskSnapshots request.
+     */
+    pageToken?: string;
+  }
+  export interface GetDiskSnapshotsResult {
+    /**
+     * An array of objects containing information about all block storage disk snapshots.
+     */
+    diskSnapshots?: DiskSnapshotList;
+    /**
+     * A token used for advancing to the next page of results from your GetDiskSnapshots request.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetDisksRequest {
+    /**
+     * A token used for advancing to the next page of results from your GetDisks request.
+     */
+    pageToken?: string;
+  }
+  export interface GetDisksResult {
+    /**
+     * An array of objects containing information about all block storage disks.
+     */
+    disks?: DiskList;
+    /**
+     * A token used for advancing to the next page of results from your GetDisks request.
      */
     nextPageToken?: string;
   }
@@ -1196,7 +1525,7 @@ declare namespace Lightsail {
   }
   export interface GetRegionsRequest {
     /**
-     * A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., us-east-1a.
+     * A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., us-east-2a.
      */
     includeAvailabilityZones?: boolean;
   }
@@ -1252,11 +1581,11 @@ declare namespace Lightsail {
   }
   export interface Instance {
     /**
-     * The name the user gave the instance (e.g., Amazon_Linux-1GB-Virginia-1).
+     * The name the user gave the instance (e.g., Amazon_Linux-1GB-Ohio-1).
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the instance (e.g., arn:aws:lightsail:us-east-1:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the instance (e.g., arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -1447,7 +1776,7 @@ declare namespace Lightsail {
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the snapshot (e.g., arn:aws:lightsail:us-east-1:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the snapshot (e.g., arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -1475,11 +1804,15 @@ declare namespace Lightsail {
      */
     progress?: string;
     /**
+     * An array of disk objects containing information about all block storage disks.
+     */
+    fromAttachedDisks?: DiskList;
+    /**
      * The instance from which the snapshot was created.
      */
     fromInstanceName?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., arn:aws:lightsail:us-east-1:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE).
      */
     fromInstanceArn?: NonEmptyString;
     /**
@@ -1524,7 +1857,7 @@ declare namespace Lightsail {
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the key pair (e.g., arn:aws:lightsail:us-east-1:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the key pair (e.g., arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -1634,7 +1967,7 @@ declare namespace Lightsail {
      */
     isTerminal?: boolean;
     /**
-     * Details about the operation (e.g., Debian-1GB-Virginia-1).
+     * Details about the operation (e.g., Debian-1GB-Ohio-1).
      */
     operationDetails?: string;
     /**
@@ -1660,7 +1993,7 @@ declare namespace Lightsail {
   }
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|string;
-  export type OperationType = "DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|string;
+  export type OperationType = "DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|string;
   export interface PasswordData {
     /**
      * The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.  If you use the default key pair (LightsailDefaultKeyPair), the decrypted password will be available in the password field. If you are using a custom key pair, you need to use your own means of decryption. If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default. 
@@ -1735,15 +2068,15 @@ declare namespace Lightsail {
      */
     description?: string;
     /**
-     * The display name (e.g., Virginia).
+     * The display name (e.g., Ohio).
      */
     displayName?: string;
     /**
-     * The region name (e.g., us-east-1).
+     * The region name (e.g., us-east-2).
      */
     name?: RegionName;
     /**
-     * The Availability Zones. Follows the format us-east-1a (case-sensitive).
+     * The Availability Zones. Follows the format us-east-2a (case-sensitive).
      */
     availabilityZones?: AvailabilityZoneList;
   }
@@ -1763,7 +2096,7 @@ declare namespace Lightsail {
   }
   export interface ResourceLocation {
     /**
-     * The Availability Zone. Follows the format us-east-1a (case-sensitive).
+     * The Availability Zone. Follows the format us-east-2a (case-sensitive).
      */
     availabilityZone?: string;
     /**
@@ -1772,7 +2105,7 @@ declare namespace Lightsail {
     regionName?: RegionName;
   }
   export type ResourceName = string;
-  export type ResourceType = "Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|string;
+  export type ResourceType = "Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"Disk"|"DiskSnapshot"|string;
   export interface StartInstanceRequest {
     /**
      * The name of the instance (a virtual private server) to start.
@@ -1787,11 +2120,11 @@ declare namespace Lightsail {
   }
   export interface StaticIp {
     /**
-     * The name of the static IP (e.g., StaticIP-Virginia-EXAMPLE).
+     * The name of the static IP (e.g., StaticIP-Ohio-EXAMPLE).
      */
     name?: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the static IP (e.g., arn:aws:lightsail:us-east-1:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE).
+     * The Amazon Resource Name (ARN) of the static IP (e.g., arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE).
      */
     arn?: NonEmptyString;
     /**
@@ -1815,7 +2148,7 @@ declare namespace Lightsail {
      */
     ipAddress?: IpAddress;
     /**
-     * The instance where the static IP is attached (e.g., Amazon_Linux-1GB-Virginia-1).
+     * The instance where the static IP is attached (e.g., Amazon_Linux-1GB-Ohio-1).
      */
     attachedTo?: ResourceName;
     /**
@@ -1829,6 +2162,10 @@ declare namespace Lightsail {
      * The name of the instance (a virtual private server) to stop.
      */
     instanceName: ResourceName;
+    /**
+     * When set to True, forces a Lightsail instance that is stuck in a stopping state to stop.  Only use the force parameter if your instance is stuck in the stopping state. In any other state, your instance should stop normally without adding this parameter to your API request. 
+     */
+    force?: boolean;
   }
   export interface StopInstanceResult {
     /**

@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"Amazon Lightsail",
+    "serviceId":"Lightsail",
     "signatureVersion":"v4",
     "targetPrefix":"Lightsail_20161128",
     "uid":"lightsail-2016-11-28"
@@ -29,6 +30,25 @@
         {"shape":"UnauthenticatedException"}
       ],
       "documentation":"<p>Allocates a static IP address.</p>"
+    },
+    "AttachDisk":{
+      "name":"AttachDisk",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachDiskRequest"},
+      "output":{"shape":"AttachDiskResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.</p>"
     },
     "AttachStaticIp":{
       "name":"AttachStaticIp",
@@ -67,6 +87,63 @@
         {"shape":"UnauthenticatedException"}
       ],
       "documentation":"<p>Closes the public ports on a specific Amazon Lightsail instance.</p>"
+    },
+    "CreateDisk":{
+      "name":"CreateDisk",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDiskRequest"},
+      "output":{"shape":"CreateDiskResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Creates a block storage disk that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail\">Regions and Availability Zones in Lightsail</a>.</p>"
+    },
+    "CreateDiskFromSnapshot":{
+      "name":"CreateDiskFromSnapshot",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDiskFromSnapshotRequest"},
+      "output":{"shape":"CreateDiskFromSnapshotResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Creates a block storage disk from a disk snapshot that can be attached to a Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>). The disk is created in the regional endpoint that you send the HTTP request to. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail\">Regions and Availability Zones in Lightsail</a>.</p>"
+    },
+    "CreateDiskSnapshot":{
+      "name":"CreateDiskSnapshot",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateDiskSnapshotRequest"},
+      "output":{"shape":"CreateDiskSnapshotResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance.</p> <p>You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.</p>"
     },
     "CreateDomain":{
       "name":"CreateDomain",
@@ -182,6 +259,44 @@
       ],
       "documentation":"<p>Creates sn SSH key pair.</p>"
     },
+    "DeleteDisk":{
+      "name":"DeleteDisk",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteDiskRequest"},
+      "output":{"shape":"DeleteDiskResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note>"
+    },
+    "DeleteDiskSnapshot":{
+      "name":"DeleteDiskSnapshot",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteDiskSnapshotRequest"},
+      "output":{"shape":"DeleteDiskSnapshotResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p>"
+    },
     "DeleteDomain":{
       "name":"DeleteDomain",
       "http":{
@@ -277,6 +392,25 @@
       ],
       "documentation":"<p>Deletes a specific SSH key pair.</p>"
     },
+    "DetachDisk":{
+      "name":"DetachDisk",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetachDiskRequest"},
+      "output":{"shape":"DetachDiskResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.</p>"
+    },
     "DetachStaticIp":{
       "name":"DetachStaticIp",
       "http":{
@@ -371,6 +505,82 @@
         {"shape":"UnauthenticatedException"}
       ],
       "documentation":"<p>Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or <i>instance</i>).</p>"
+    },
+    "GetDisk":{
+      "name":"GetDisk",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDiskRequest"},
+      "output":{"shape":"GetDiskResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Returns information about a specific block storage disk.</p>"
+    },
+    "GetDiskSnapshot":{
+      "name":"GetDiskSnapshot",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDiskSnapshotRequest"},
+      "output":{"shape":"GetDiskSnapshotResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Returns information about a specific block storage disk snapshot.</p>"
+    },
+    "GetDiskSnapshots":{
+      "name":"GetDiskSnapshots",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDiskSnapshotsRequest"},
+      "output":{"shape":"GetDiskSnapshotsResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Returns information about all block storage disk snapshots in your AWS account and region.</p> <p>If you are describing a long list of disk snapshots, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.</p>"
+    },
+    "GetDisks":{
+      "name":"GetDisks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetDisksRequest"},
+      "output":{"shape":"GetDisksResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Returns information about all block storage disks in your AWS account and region.</p> <p>If you are describing a long list of disks, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.</p>"
     },
     "GetDomain":{
       "name":"GetDomain",
@@ -973,6 +1183,37 @@
         }
       }
     },
+    "AttachDiskRequest":{
+      "type":"structure",
+      "required":[
+        "diskName",
+        "instanceName",
+        "diskPath"
+      ],
+      "members":{
+        "diskName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The unique Lightsail disk name (e.g., <code>my-disk</code>).</p>"
+        },
+        "instanceName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Lightsail instance where you want to utilize the storage disk.</p>"
+        },
+        "diskPath":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The disk path to expose to the instance (e.g., <code>/dev/xvdf</code>).</p>"
+        }
+      }
+    },
+    "AttachDiskResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operation.</p>"
+        }
+      }
+    },
     "AttachStaticIpRequest":{
       "type":"structure",
       "required":[
@@ -999,12 +1240,17 @@
         }
       }
     },
+    "AttachedDiskMap":{
+      "type":"map",
+      "key":{"shape":"ResourceName"},
+      "value":{"shape":"DiskMapList"}
+    },
     "AvailabilityZone":{
       "type":"structure",
       "members":{
         "zoneName":{
           "shape":"NonEmptyString",
-          "documentation":"<p>The name of the Availability Zone. The format is <code>us-east-1a</code> (case-sensitive).</p>"
+          "documentation":"<p>The name of the Availability Zone. The format is <code>us-east-2a</code> (case-sensitive).</p>"
         },
         "state":{
           "shape":"NonEmptyString",
@@ -1163,6 +1409,99 @@
         }
       }
     },
+    "CreateDiskFromSnapshotRequest":{
+      "type":"structure",
+      "required":[
+        "diskName",
+        "diskSnapshotName",
+        "availabilityZone",
+        "sizeInGb"
+      ],
+      "members":{
+        "diskName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The unique Lightsail disk name (e.g., <code>my-disk</code>).</p>"
+        },
+        "diskSnapshotName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the disk snapshot (e.g., <code>my-snapshot</code>) from which to create the new storage disk.</p>"
+        },
+        "availabilityZone":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>). Choose the same Availability Zone as the Lightsail instance where you want to create the disk.</p> <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.</p>"
+        },
+        "sizeInGb":{
+          "shape":"integer",
+          "documentation":"<p>The size of the disk in GB (e.g., <code>32</code>).</p>"
+        }
+      }
+    },
+    "CreateDiskFromSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
+        }
+      }
+    },
+    "CreateDiskRequest":{
+      "type":"structure",
+      "required":[
+        "diskName",
+        "availabilityZone",
+        "sizeInGb"
+      ],
+      "members":{
+        "diskName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The unique Lightsail disk name (e.g., <code>my-disk</code>).</p>"
+        },
+        "availabilityZone":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The Availability Zone where you want to create the disk (e.g., <code>us-east-2a</code>). Choose the same Availability Zone as the Lightsail instance where you want to create the disk.</p> <p>Use the GetRegions operation to list the Availability Zones where Lightsail is currently available.</p>"
+        },
+        "sizeInGb":{
+          "shape":"integer",
+          "documentation":"<p>The size of the disk in GB (e.g., <code>32</code>).</p>"
+        }
+      }
+    },
+    "CreateDiskResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
+        }
+      }
+    },
+    "CreateDiskSnapshotRequest":{
+      "type":"structure",
+      "required":[
+        "diskName",
+        "diskSnapshotName"
+      ],
+      "members":{
+        "diskName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The unique name of the source disk (e.g., <code>my-source-disk</code>).</p>"
+        },
+        "diskSnapshotName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the destination disk snapshot (e.g., <code>my-disk-snapshot</code>) based on the source disk.</p>"
+        }
+      }
+    },
+    "CreateDiskSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
+        }
+      }
+    },
     "CreateDomainEntryRequest":{
       "type":"structure",
       "required":[
@@ -1247,9 +1586,13 @@
           "shape":"StringList",
           "documentation":"<p>The names for your new instances.</p>"
         },
+        "attachedDiskMapping":{
+          "shape":"AttachedDiskMap",
+          "documentation":"<p>An object containing information about one or more disk mappings.</p>"
+        },
         "availabilityZone":{
           "shape":"string",
-          "documentation":"<p>The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-1a</code> (case sensitive). You can get a list of availability zones by using the <a href=\"http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html\">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.</p>"
+          "documentation":"<p>The Availability Zone where you want to create your instances. Use the following formatting: <code>us-east-2a</code> (case sensitive). You can get a list of availability zones by using the <a href=\"http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html\">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.</p>"
         },
         "instanceSnapshotName":{
           "shape":"ResourceName",
@@ -1293,7 +1636,7 @@
         },
         "availabilityZone":{
           "shape":"string",
-          "documentation":"<p>The Availability Zone in which to create your instance. Use the following format: <code>us-east-1a</code> (case sensitive). You can get a list of availability zones by using the <a href=\"http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html\">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.</p>"
+          "documentation":"<p>The Availability Zone in which to create your instance. Use the following format: <code>us-east-2a</code> (case sensitive). You can get a list of availability zones by using the <a href=\"http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html\">get regions</a> operation. Be sure to add the <code>include availability zones</code> parameter to your request.</p>"
         },
         "customImageName":{
           "shape":"ResourceName",
@@ -1355,6 +1698,44 @@
         "operation":{
           "shape":"Operation",
           "documentation":"<p>An array of key-value pairs containing information about the results of your create key pair request.</p>"
+        }
+      }
+    },
+    "DeleteDiskRequest":{
+      "type":"structure",
+      "required":["diskName"],
+      "members":{
+        "diskName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The unique name of the disk you want to delete (e.g., <code>my-disk</code>).</p>"
+        }
+      }
+    },
+    "DeleteDiskResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
+        }
+      }
+    },
+    "DeleteDiskSnapshotRequest":{
+      "type":"structure",
+      "required":["diskSnapshotName"],
+      "members":{
+        "diskSnapshotName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the disk snapshot you want to delete (e.g., <code>my-disk-snapshot</code>).</p>"
+        }
+      }
+    },
+    "DeleteDiskSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
         }
       }
     },
@@ -1460,6 +1841,25 @@
         }
       }
     },
+    "DetachDiskRequest":{
+      "type":"structure",
+      "required":["diskName"],
+      "members":{
+        "diskName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The unique name of the disk you want to detach from your instance (e.g., <code>my-disk</code>).</p>"
+        }
+      }
+    },
+    "DetachDiskResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
+        }
+      }
+    },
     "DetachStaticIpRequest":{
       "type":"structure",
       "required":["staticIpName"],
@@ -1484,7 +1884,7 @@
       "members":{
         "name":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the disk.</p>"
+          "documentation":"<p>The unique name of the disk.</p>"
         },
         "arn":{
           "shape":"NonEmptyString",
@@ -1500,19 +1900,15 @@
         },
         "location":{
           "shape":"ResourceLocation",
-          "documentation":"<p>The region and Availability Zone where the disk is located.</p>"
+          "documentation":"<p>The AWS Region and Availability Zone where the disk is located.</p>"
         },
         "resourceType":{
           "shape":"ResourceType",
-          "documentation":"<p>The resource type of the disk. </p>"
+          "documentation":"<p>The Lightsail resource type (e.g., <code>Disk</code>).</p>"
         },
         "sizeInGb":{
           "shape":"integer",
           "documentation":"<p>The size of the disk in GB.</p>"
-        },
-        "gbInUse":{
-          "shape":"integer",
-          "documentation":"<p>The number of GB in use by the disk.</p>"
         },
         "isSystemDisk":{
           "shape":"boolean",
@@ -1526,8 +1922,12 @@
           "shape":"string",
           "documentation":"<p>The disk path.</p>"
         },
+        "state":{
+          "shape":"DiskState",
+          "documentation":"<p>Describes the status of the disk.</p>"
+        },
         "attachedTo":{
-          "shape":"string",
+          "shape":"ResourceName",
           "documentation":"<p>The resources to which the disk is attached.</p>"
         },
         "isAttached":{
@@ -1536,14 +1936,111 @@
         },
         "attachmentState":{
           "shape":"string",
-          "documentation":"<p>The attachment state of the disk.</p>"
+          "documentation":"<p>(Deprecated) The attachment state of the disk.</p> <note> <p>In releases prior to November 9, 2017, this parameter returned <code>attached</code> for system disks in the API response. It is now deprecated, but still included in the response. Use <code>isAttached</code> instead.</p> </note>",
+          "deprecated":true
+        },
+        "gbInUse":{
+          "shape":"integer",
+          "documentation":"<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 9, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>",
+          "deprecated":true
         }
       },
-      "documentation":"<p>Describes the hard disk (an SSD).</p>"
+      "documentation":"<p>Describes a system disk or an block storage disk.</p>"
     },
     "DiskList":{
       "type":"list",
       "member":{"shape":"Disk"}
+    },
+    "DiskMap":{
+      "type":"structure",
+      "members":{
+        "originalDiskPath":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The original disk path exposed to the instance (for example, <code>/dev/sdh</code>).</p>"
+        },
+        "newDiskName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The new disk name (e.g., <code>my-new-disk</code>).</p>"
+        }
+      },
+      "documentation":"<p>Describes a block storage disk mapping.</p>"
+    },
+    "DiskMapList":{
+      "type":"list",
+      "member":{"shape":"DiskMap"}
+    },
+    "DiskSnapshot":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the disk snapshot (e.g., <code>my-disk-snapshot</code>).</p>"
+        },
+        "arn":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the disk snapshot.</p>"
+        },
+        "supportCode":{
+          "shape":"string",
+          "documentation":"<p>The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.</p>"
+        },
+        "createdAt":{
+          "shape":"IsoDate",
+          "documentation":"<p>The date when the disk snapshot was created.</p>"
+        },
+        "location":{
+          "shape":"ResourceLocation",
+          "documentation":"<p>The AWS Region and Availability Zone where the disk snapshot was created.</p>"
+        },
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The Lightsail resource type (e.g., <code>DiskSnapshot</code>).</p>"
+        },
+        "sizeInGb":{
+          "shape":"integer",
+          "documentation":"<p>The size of the disk in GB.</p>"
+        },
+        "state":{
+          "shape":"DiskSnapshotState",
+          "documentation":"<p>The status of the disk snapshot operation.</p>"
+        },
+        "progress":{
+          "shape":"string",
+          "documentation":"<p>The progress of the disk snapshot operation.</p>"
+        },
+        "fromDiskName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The unique name of the source disk from which you are creating the disk snapshot.</p>"
+        },
+        "fromDiskArn":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the source disk from which you are creating the disk snapshot.</p>"
+        }
+      },
+      "documentation":"<p>Describes a block storage disk snapshot.</p>"
+    },
+    "DiskSnapshotList":{
+      "type":"list",
+      "member":{"shape":"DiskSnapshot"}
+    },
+    "DiskSnapshotState":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "completed",
+        "error",
+        "unknown"
+      ]
+    },
+    "DiskState":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "error",
+        "available",
+        "in-use",
+        "unknown"
+      ]
     },
     "Domain":{
       "type":"structure",
@@ -1710,6 +2207,88 @@
         "nextPageToken":{
           "shape":"string",
           "documentation":"<p>A token used for advancing to the next page of results from your get active names request.</p>"
+        }
+      }
+    },
+    "GetDiskRequest":{
+      "type":"structure",
+      "required":["diskName"],
+      "members":{
+        "diskName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the disk (e.g., <code>my-disk</code>).</p>"
+        }
+      }
+    },
+    "GetDiskResult":{
+      "type":"structure",
+      "members":{
+        "disk":{
+          "shape":"Disk",
+          "documentation":"<p>An object containing information about the disk.</p>"
+        }
+      }
+    },
+    "GetDiskSnapshotRequest":{
+      "type":"structure",
+      "required":["diskSnapshotName"],
+      "members":{
+        "diskSnapshotName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the disk snapshot (e.g., <code>my-disk-snapshot</code>).</p>"
+        }
+      }
+    },
+    "GetDiskSnapshotResult":{
+      "type":"structure",
+      "members":{
+        "diskSnapshot":{
+          "shape":"DiskSnapshot",
+          "documentation":"<p>An object containing information about the disk snapshot.</p>"
+        }
+      }
+    },
+    "GetDiskSnapshotsRequest":{
+      "type":"structure",
+      "members":{
+        "pageToken":{
+          "shape":"string",
+          "documentation":"<p>A token used for advancing to the next page of results from your GetDiskSnapshots request.</p>"
+        }
+      }
+    },
+    "GetDiskSnapshotsResult":{
+      "type":"structure",
+      "members":{
+        "diskSnapshots":{
+          "shape":"DiskSnapshotList",
+          "documentation":"<p>An array of objects containing information about all block storage disk snapshots.</p>"
+        },
+        "nextPageToken":{
+          "shape":"string",
+          "documentation":"<p>A token used for advancing to the next page of results from your GetDiskSnapshots request.</p>"
+        }
+      }
+    },
+    "GetDisksRequest":{
+      "type":"structure",
+      "members":{
+        "pageToken":{
+          "shape":"string",
+          "documentation":"<p>A token used for advancing to the next page of results from your GetDisks request.</p>"
+        }
+      }
+    },
+    "GetDisksResult":{
+      "type":"structure",
+      "members":{
+        "disks":{
+          "shape":"DiskList",
+          "documentation":"<p>An array of objects containing information about all block storage disks.</p>"
+        },
+        "nextPageToken":{
+          "shape":"string",
+          "documentation":"<p>A token used for advancing to the next page of results from your GetDisks request.</p>"
         }
       }
     },
@@ -2071,7 +2650,7 @@
       "members":{
         "includeAvailabilityZones":{
           "shape":"boolean",
-          "documentation":"<p>A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., <code>us-east-1a</code>.</p>"
+          "documentation":"<p>A Boolean value indicating whether to also include Availability Zones in your get regions request. Availability Zones are indicated with a letter: e.g., <code>us-east-2a</code>.</p>"
         }
       }
     },
@@ -2156,11 +2735,11 @@
       "members":{
         "name":{
           "shape":"ResourceName",
-          "documentation":"<p>The name the user gave the instance (e.g., <code>Amazon_Linux-1GB-Virginia-1</code>).</p>"
+          "documentation":"<p>The name the user gave the instance (e.g., <code>Amazon_Linux-1GB-Ohio-1</code>).</p>"
         },
         "arn":{
           "shape":"NonEmptyString",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the instance (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the instance (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE</code>).</p>"
         },
         "supportCode":{
           "shape":"string",
@@ -2409,7 +2988,7 @@
         },
         "arn":{
           "shape":"NonEmptyString",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the snapshot (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the snapshot (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE</code>).</p>"
         },
         "supportCode":{
           "shape":"string",
@@ -2435,13 +3014,17 @@
           "shape":"string",
           "documentation":"<p>The progress of the snapshot.</p>"
         },
+        "fromAttachedDisks":{
+          "shape":"DiskList",
+          "documentation":"<p>An array of disk objects containing information about all block storage disks.</p>"
+        },
         "fromInstanceName":{
           "shape":"ResourceName",
           "documentation":"<p>The instance from which the snapshot was created.</p>"
         },
         "fromInstanceArn":{
           "shape":"NonEmptyString",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE</code>).</p>"
         },
         "fromBlueprintId":{
           "shape":"string",
@@ -2527,7 +3110,7 @@
         },
         "arn":{
           "shape":"NonEmptyString",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the key pair (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the key pair (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE</code>).</p>"
         },
         "supportCode":{
           "shape":"string",
@@ -2733,7 +3316,7 @@
         },
         "operationDetails":{
           "shape":"string",
-          "documentation":"<p>Details about the operation (e.g., <code>Debian-1GB-Virginia-1</code>).</p>"
+          "documentation":"<p>Details about the operation (e.g., <code>Debian-1GB-Ohio-1</code>).</p>"
         },
         "operationType":{
           "shape":"OperationType",
@@ -2803,7 +3386,14 @@
         "DeleteDomain",
         "CreateInstanceSnapshot",
         "DeleteInstanceSnapshot",
-        "CreateInstancesFromSnapshot"
+        "CreateInstancesFromSnapshot",
+        "CreateDisk",
+        "DeleteDisk",
+        "AttachDisk",
+        "DetachDisk",
+        "CreateDiskSnapshot",
+        "DeleteDiskSnapshot",
+        "CreateDiskFromSnapshot"
       ]
     },
     "PasswordData":{
@@ -2933,15 +3523,15 @@
         },
         "displayName":{
           "shape":"string",
-          "documentation":"<p>The display name (e.g., <code>Virginia</code>).</p>"
+          "documentation":"<p>The display name (e.g., <code>Ohio</code>).</p>"
         },
         "name":{
           "shape":"RegionName",
-          "documentation":"<p>The region name (e.g., <code>us-east-1</code>).</p>"
+          "documentation":"<p>The region name (e.g., <code>us-east-2</code>).</p>"
         },
         "availabilityZones":{
           "shape":"AvailabilityZoneList",
-          "documentation":"<p>The Availability Zones. Follows the format <code>us-east-1a</code> (case-sensitive).</p>"
+          "documentation":"<p>The Availability Zones. Follows the format <code>us-east-2a</code> (case-sensitive).</p>"
         }
       },
       "documentation":"<p>Describes the AWS Region.</p>"
@@ -2990,7 +3580,7 @@
       "members":{
         "availabilityZone":{
           "shape":"string",
-          "documentation":"<p>The Availability Zone. Follows the format <code>us-east-1a</code> (case-sensitive).</p>"
+          "documentation":"<p>The Availability Zone. Follows the format <code>us-east-2a</code> (case-sensitive).</p>"
         },
         "regionName":{
           "shape":"RegionName",
@@ -3011,7 +3601,9 @@
         "KeyPair",
         "InstanceSnapshot",
         "Domain",
-        "PeeredVpc"
+        "PeeredVpc",
+        "Disk",
+        "DiskSnapshot"
       ]
     },
     "ServiceException":{
@@ -3050,11 +3642,11 @@
       "members":{
         "name":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the static IP (e.g., <code>StaticIP-Virginia-EXAMPLE</code>).</p>"
+          "documentation":"<p>The name of the static IP (e.g., <code>StaticIP-Ohio-EXAMPLE</code>).</p>"
         },
         "arn":{
           "shape":"NonEmptyString",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the static IP (e.g., <code>arn:aws:lightsail:us-east-1:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the static IP (e.g., <code>arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE</code>).</p>"
         },
         "supportCode":{
           "shape":"string",
@@ -3078,7 +3670,7 @@
         },
         "attachedTo":{
           "shape":"ResourceName",
-          "documentation":"<p>The instance where the static IP is attached (e.g., <code>Amazon_Linux-1GB-Virginia-1</code>).</p>"
+          "documentation":"<p>The instance where the static IP is attached (e.g., <code>Amazon_Linux-1GB-Ohio-1</code>).</p>"
         },
         "isAttached":{
           "shape":"boolean",
@@ -3098,6 +3690,10 @@
         "instanceName":{
           "shape":"ResourceName",
           "documentation":"<p>The name of the instance (a virtual private server) to stop.</p>"
+        },
+        "force":{
+          "shape":"boolean",
+          "documentation":"<p>When set to <code>True</code>, forces a Lightsail instance that is stuck in a <code>stopping</code> state to stop.</p> <important> <p>Only use the <code>force</code> parameter if your instance is stuck in the <code>stopping</code> state. In any other state, your instance should stop normally without adding this parameter to your API request.</p> </important>"
         }
       }
     },

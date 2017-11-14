@@ -12,11 +12,11 @@ declare class ECS extends Service {
   constructor(options?: ECS.Types.ClientConfiguration)
   config: Config & ECS.Types.ClientConfiguration;
   /**
-   * Creates a new Amazon ECS cluster. By default, your account receives a default cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the CreateCluster action.
+   * Creates a new Amazon ECS cluster. By default, your account receives a default cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the CreateCluster action.  When you call the CreateCluster API operation, Amazon ECS attempts to create the service-linked role for your account so that required resources in other AWS services can be managed on your behalf. However, if the IAM user that makes the call does not have permissions to create the service-linked role, it is not created. For more information, see Using Service-Linked Roles for Amazon ECS in the Amazon EC2 Container Service Developer Guide. 
    */
   createCluster(params: ECS.Types.CreateClusterRequest, callback?: (err: AWSError, data: ECS.Types.CreateClusterResponse) => void): Request<ECS.Types.CreateClusterResponse, AWSError>;
   /**
-   * Creates a new Amazon ECS cluster. By default, your account receives a default cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the CreateCluster action.
+   * Creates a new Amazon ECS cluster. By default, your account receives a default cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the CreateCluster action.  When you call the CreateCluster API operation, Amazon ECS attempts to create the service-linked role for your account so that required resources in other AWS services can be managed on your behalf. However, if the IAM user that makes the call does not have permissions to create the service-linked role, it is not created. For more information, see Using Service-Linked Roles for Amazon ECS in the Amazon EC2 Container Service Developer Guide. 
    */
   createCluster(callback?: (err: AWSError, data: ECS.Types.CreateClusterResponse) => void): Request<ECS.Types.CreateClusterResponse, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class ECS extends Service {
    */
   updateContainerInstancesState(callback?: (err: AWSError, data: ECS.Types.UpdateContainerInstancesStateResponse) => void): Request<ECS.Types.UpdateContainerInstancesStateResponse, AWSError>;
   /**
-   * Modifies the desired count, deployment configuration, or task definition used in a service. You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new desiredCount parameter. You can use UpdateService to modify your task definition and deploy a new version of your service. You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, minimumHealthyPercent and maximumPercent, to determine the deployment strategy.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during a deployment. For example, if desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).   When UpdateService stops a task during a deployment, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM and a 30-second timeout, after which SIGKILL is sent and the containers are forcibly stopped. If the container handles the SIGTERM gracefully and exits within 30 seconds from receiving it, no SIGKILL is sent. When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:   Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).   By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):   Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.   Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.     When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic:    Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.   Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.  
+   * Modifies the desired count, deployment configuration, network configuration, or task definition used in a service. You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new desiredCount parameter. You can use UpdateService to modify your task definition and deploy a new version of your service. You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, minimumHealthyPercent and maximumPercent, to determine the deployment strategy.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during a deployment. For example, if desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).   When UpdateService stops a task during a deployment, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM and a 30-second timeout, after which SIGKILL is sent and the containers are forcibly stopped. If the container handles the SIGTERM gracefully and exits within 30 seconds from receiving it, no SIGKILL is sent. When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:   Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).   By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):   Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.   Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.     When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic:    Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.   Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.  
    */
   updateService(params: ECS.Types.UpdateServiceRequest, callback?: (err: AWSError, data: ECS.Types.UpdateServiceResponse) => void): Request<ECS.Types.UpdateServiceResponse, AWSError>;
   /**
-   * Modifies the desired count, deployment configuration, or task definition used in a service. You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new desiredCount parameter. You can use UpdateService to modify your task definition and deploy a new version of your service. You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, minimumHealthyPercent and maximumPercent, to determine the deployment strategy.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during a deployment. For example, if desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).   When UpdateService stops a task during a deployment, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM and a 30-second timeout, after which SIGKILL is sent and the containers are forcibly stopped. If the container handles the SIGTERM gracefully and exits within 30 seconds from receiving it, no SIGKILL is sent. When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:   Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).   By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):   Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.   Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.     When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic:    Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.   Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.  
+   * Modifies the desired count, deployment configuration, network configuration, or task definition used in a service. You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new desiredCount parameter. You can use UpdateService to modify your task definition and deploy a new version of your service. You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, minimumHealthyPercent and maximumPercent, to determine the deployment strategy.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during a deployment. For example, if desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).   When UpdateService stops a task during a deployment, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM and a 30-second timeout, after which SIGKILL is sent and the containers are forcibly stopped. If the container handles the SIGTERM gracefully and exits within 30 seconds from receiving it, no SIGKILL is sent. When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:   Determine which of the container instances in your cluster can support your service's task definition (for example, they have the required CPU, memory, ports, and container instance attributes).   By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):   Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.   Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.     When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic:    Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.   Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.  
    */
   updateService(callback?: (err: AWSError, data: ECS.Types.UpdateServiceResponse) => void): Request<ECS.Types.UpdateServiceResponse, AWSError>;
   /**
@@ -294,6 +294,37 @@ declare class ECS extends Service {
 }
 declare namespace ECS {
   export type AgentUpdateStatus = "PENDING"|"STAGING"|"STAGED"|"UPDATING"|"UPDATED"|"FAILED"|string;
+  export interface Attachment {
+    /**
+     * The unique identifier for the attachment.
+     */
+    id?: String;
+    /**
+     * The type of the attachment, such as an ElasticNetworkInterface.
+     */
+    type?: String;
+    /**
+     *  The status of the attachment. Valid values are PRECREATED, CREATED, ATTACHING, ATTACHED, DETACHING, DETACHED, and DELETED.
+     */
+    status?: String;
+    /**
+     * Details of the attachment. For Elastic Network Interfaces, this includes the network interface ID, the MAC address, the subnet ID, and the private IPv4 address.
+     */
+    details?: AttachmentDetails;
+  }
+  export type AttachmentDetails = KeyValuePair[];
+  export interface AttachmentStateChange {
+    /**
+     * The Amazon Resource Name (ARN) of the attachment.
+     */
+    attachmentArn: String;
+    /**
+     * The status of the attachment.
+     */
+    status: String;
+  }
+  export type AttachmentStateChanges = AttachmentStateChange[];
+  export type Attachments = Attachment[];
   export interface Attribute {
     /**
      * The name of the attribute. Up to 128 letters (uppercase and lowercase), numbers, hyphens, underscores, and periods are allowed.
@@ -313,6 +344,16 @@ declare namespace ECS {
     targetId?: String;
   }
   export type Attributes = Attribute[];
+  export interface AwsVpcConfiguration {
+    /**
+     * The subnets associated with the task or service.
+     */
+    subnets: StringList;
+    /**
+     * The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+     */
+    securityGroups?: StringList;
+  }
   export type Boolean = boolean;
   export type BoxedBoolean = boolean;
   export type BoxedInteger = number;
@@ -376,6 +417,10 @@ declare namespace ECS {
      * The network bindings associated with the container.
      */
     networkBindings?: NetworkBindings;
+    /**
+     * The network interfaces associated with the container.
+     */
+    networkInterfaces?: NetworkInterfaces;
   }
   export interface ContainerDefinition {
     /**
@@ -541,6 +586,10 @@ declare namespace ECS {
      * The Unix timestamp for when the container instance was registered.
      */
     registeredAt?: Timestamp;
+    /**
+     * The Elastic Network Interfaces associated with the container instance.
+     */
+    attachments?: Attachments;
   }
   export type ContainerInstanceStatus = "ACTIVE"|"DRAINING"|string;
   export type ContainerInstances = ContainerInstance[];
@@ -571,6 +620,29 @@ declare namespace ECS {
     memoryReservation?: BoxedInteger;
   }
   export type ContainerOverrides = ContainerOverride[];
+  export interface ContainerStateChange {
+    /**
+     * The name of the container.
+     */
+    containerName?: String;
+    /**
+     * The exit code for the container, if the state change is a result of the container exiting.
+     */
+    exitCode?: BoxedInteger;
+    /**
+     * Any network bindings associated with the container.
+     */
+    networkBindings?: NetworkBindings;
+    /**
+     * The reason for the state change.
+     */
+    reason?: String;
+    /**
+     * The status of the container.
+     */
+    status?: String;
+  }
+  export type ContainerStateChanges = ContainerStateChange[];
   export type Containers = Container[];
   export interface CreateClusterRequest {
     /**
@@ -610,7 +682,7 @@ declare namespace ECS {
      */
     clientToken?: String;
     /**
-     * The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service. If you specify the role parameter, you must also specify a load balancer object with the loadBalancers parameter. If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name bar has a path of /foo/ then you would specify /foo/bar as the role name. For more information, see Friendly Names and Paths in the IAM User Guide.
+     * The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is only permitted if you are using a load balancer with your service and your task definition does not use the awsvpc network mode. If you specify the role parameter, you must also specify a load balancer object with the loadBalancers parameter.  If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here. The service-linked role is required if your task definition uses the awsvpc network mode, in which case you should not specify a role here. For more information, see Using Service-Linked Roles for Amazon ECS in the Amazon EC2 Container Service Developer Guide.  If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path. For example, if a role with the name bar has a path of /foo/ then you would specify /foo/bar as the role name. For more information, see Friendly Names and Paths in the IAM User Guide.
      */
     role?: String;
     /**
@@ -625,6 +697,10 @@ declare namespace ECS {
      * The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules per service.
      */
     placementStrategy?: PlacementStrategies;
+    /**
+     * The network configuration for the service. This parameter is required for task definitions that use the awsvpc network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. For more information, see Task Networking in the Amazon EC2 Container Service Developer Guide.
+     */
+    networkConfiguration?: NetworkConfiguration;
   }
   export interface CreateServiceResponse {
     /**
@@ -709,6 +785,10 @@ declare namespace ECS {
      * The Unix timestamp for when the service was last updated.
      */
     updatedAt?: Timestamp;
+    /**
+     * The VPC subnet and security group configuration for tasks that receive their own Elastic Network Interface by using the awsvpc networking mode.
+     */
+    networkConfiguration?: NetworkConfiguration;
   }
   export interface DeploymentConfiguration {
     /**
@@ -1227,7 +1307,28 @@ declare namespace ECS {
     protocol?: TransportProtocol;
   }
   export type NetworkBindings = NetworkBinding[];
-  export type NetworkMode = "bridge"|"host"|"none"|string;
+  export interface NetworkConfiguration {
+    /**
+     * The VPC subnets and security groups associated with a task.
+     */
+    awsvpcConfiguration?: AwsVpcConfiguration;
+  }
+  export interface NetworkInterface {
+    /**
+     * The attachment ID for the network interface.
+     */
+    attachmentId?: String;
+    /**
+     * The private IPv4 address for the network interface.
+     */
+    privateIpv4Address?: String;
+    /**
+     * The private IPv6 address for the network interface.
+     */
+    ipv6Address?: String;
+  }
+  export type NetworkInterfaces = NetworkInterface[];
+  export type NetworkMode = "bridge"|"host"|"awsvpc"|"none"|string;
   export interface PlacementConstraint {
     /**
      * The type of constraint. Use distinctInstance to ensure that each task in a particular group is running on a different container instance. Use memberOf to restrict selection to a group of valid candidates. Note that distinctInstance is not supported in task definitions.
@@ -1329,7 +1430,7 @@ declare namespace ECS {
      */
     taskRoleArn?: String;
     /**
-     * The Docker networking mode to use for the containers in the task. The valid values are none, bridge, and host.  The default Docker network mode is bridge. If the network mode is set to none, you cannot specify port mappings in your container definitions, and the task's containers do not have external connectivity. The host network mode offers the highest networking performance for containers because they use the host network stack instead of the virtualized network stack provided by the bridge mode; however, exposed container ports are mapped directly to the corresponding host port, so you cannot take advantage of dynamic host port mappings or run multiple instantiations of the same task on a single container instance if port mappings are used. For more information, see Network settings in the Docker run reference.
+     * The Docker networking mode to use for the containers in the task. The valid values are none, bridge, awsvpc, and host. The default Docker network mode is bridge. If the network mode is set to none, you cannot specify port mappings in your container definitions, and the task's containers do not have external connectivity. The host and awsvpc network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the bridge mode. With the host and awsvpc network modes, exposed container ports are mapped directly to the corresponding host port (for the host network mode) or the attached ENI port (for the awsvpc network mode), so you cannot take advantage of dynamic host port mappings.  If the network mode is awsvpc, the task is allocated an Elastic Network Interface, and you must specify a NetworkConfiguration when you create a service or run a task with the task definition. For more information, see Task Networking in the Amazon EC2 Container Service Developer Guide. If the network mode is host, you can not run multiple instantiations of the same task on a single container instance when port mappings are used. For more information, see Network settings in the Docker run reference.
      */
     networkMode?: NetworkMode;
     /**
@@ -1412,6 +1513,10 @@ declare namespace ECS {
      * The placement strategy objects to use for the task. You can specify a maximum of 5 strategy rules per task.
      */
     placementStrategy?: PlacementStrategies;
+    /**
+     * The network configuration for the task. This parameter is required for task definitions that use the awsvpc network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. For more information, see Task Networking in the Amazon EC2 Container Service Developer Guide.
+     */
+    networkConfiguration?: NetworkConfiguration;
   }
   export interface RunTaskResponse {
     /**
@@ -1488,6 +1593,10 @@ declare namespace ECS {
      * The placement strategy that determines how tasks for the service are placed.
      */
     placementStrategy?: PlacementStrategies;
+    /**
+     * The VPC subnet and security group configuration for tasks that receive their own Elastic Network Interface by using the awsvpc networking mode.
+     */
+    networkConfiguration?: NetworkConfiguration;
   }
   export interface ServiceEvent {
     /**
@@ -1531,6 +1640,10 @@ declare namespace ECS {
      * The name of the task group to associate with the task. The default value is the family name of the task definition (for example, family:my-family-name).
      */
     group?: String;
+    /**
+     * The VPC subnet and security group configuration for tasks that receive their own Elastic Network Interface by using the awsvpc networking mode.
+     */
+    networkConfiguration?: NetworkConfiguration;
   }
   export interface StartTaskResponse {
     /**
@@ -1617,6 +1730,14 @@ declare namespace ECS {
      * The reason for the state change request.
      */
     reason?: String;
+    /**
+     * Any containers associated with the state change request.
+     */
+    containers?: ContainerStateChanges;
+    /**
+     * Any attachments associated with the state change request.
+     */
+    attachments?: AttachmentStateChanges;
   }
   export interface SubmitTaskStateChangeResponse {
     /**
@@ -1686,6 +1807,10 @@ declare namespace ECS {
      * The name of the task group associated with the task.
      */
     group?: String;
+    /**
+     * The Elastic Network Adapter associated with the task if the task uses the awsvpc network mode.
+     */
+    attachments?: Attachments;
   }
   export interface TaskDefinition {
     /**
@@ -1705,7 +1830,7 @@ declare namespace ECS {
      */
     taskRoleArn?: String;
     /**
-     * The Docker networking mode to use for the containers in the task. The valid values are none, bridge, and host.  If the network mode is none, the containers do not have external connectivity. The default Docker network mode is bridge. The host network mode offers the highest networking performance for containers because it uses the host network stack instead of the virtualized network stack provided by the bridge mode. For more information, see Network settings in the Docker run reference.
+     * The Docker networking mode to use for the containers in the task. The valid values are none, bridge, awsvpc, and host.  If the network mode is none, the containers do not have external connectivity. The default Docker network mode is bridge. If the network mode is awsvpc, the task is allocated an Elastic Network Interface. The host and awsvpc network modes offer the highest networking performance for containers because they use the EC2 network stack instead of the virtualized network stack provided by the bridge mode. For more information, see Network settings in the Docker run reference.
      */
     networkMode?: NetworkMode;
     /**
@@ -1833,6 +1958,10 @@ declare namespace ECS {
      * Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.
      */
     deploymentConfiguration?: DeploymentConfiguration;
+    /**
+     * The network configuration for the service. This parameter is required for task definitions that use the awsvpc network mode to receive their own Elastic Network Interface, and it is not supported for other network modes. For more information, see Task Networking in the Amazon EC2 Container Service Developer Guide.  Updating a service to add a subnet to a list of existing subnets does not trigger a service deployment. For example, if your network configuration change is to keep the existing subnets and simply add another subnet to the network configuration, this does not trigger a new service deployment. 
+     */
+    networkConfiguration?: NetworkConfiguration;
   }
   export interface UpdateServiceResponse {
     /**
