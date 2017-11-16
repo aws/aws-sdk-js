@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.151.0
+// AWS SDK for JavaScript v2.152.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -89206,6 +89206,49 @@ module.exports={
         }
       }
     },
+    "GetAccountLimit": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/accountlimit/{Type}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Type"
+        ],
+        "members": {
+          "Type": {
+            "location": "uri",
+            "locationName": "Type"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Limit",
+          "Count"
+        ],
+        "members": {
+          "Limit": {
+            "type": "structure",
+            "required": [
+              "Type",
+              "Value"
+            ],
+            "members": {
+              "Type": {},
+              "Value": {
+                "type": "long"
+              }
+            }
+          },
+          "Count": {
+            "type": "long"
+          }
+        }
+      }
+    },
     "GetChange": {
       "http": {
         "method": "GET",
@@ -89286,7 +89329,7 @@ module.exports={
         ],
         "members": {
           "GeoLocationDetails": {
-            "shape": "S40"
+            "shape": "S46"
           }
         }
       }
@@ -89365,7 +89408,7 @@ module.exports={
         ],
         "members": {
           "HealthCheckObservations": {
-            "shape": "S4b"
+            "shape": "S4h"
           }
         }
       }
@@ -89394,7 +89437,7 @@ module.exports={
         ],
         "members": {
           "HealthCheckObservations": {
-            "shape": "S4b"
+            "shape": "S4h"
           }
         }
       }
@@ -89429,7 +89472,7 @@ module.exports={
             "shape": "S2l"
           },
           "VPCs": {
-            "shape": "S4j"
+            "shape": "S4p"
           }
         }
       }
@@ -89450,6 +89493,54 @@ module.exports={
         ],
         "members": {
           "HostedZoneCount": {
+            "type": "long"
+          }
+        }
+      }
+    },
+    "GetHostedZoneLimit": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/hostedzonelimit/{Id}/{Type}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Type",
+          "HostedZoneId"
+        ],
+        "members": {
+          "Type": {
+            "location": "uri",
+            "locationName": "Type"
+          },
+          "HostedZoneId": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Limit",
+          "Count"
+        ],
+        "members": {
+          "Limit": {
+            "type": "structure",
+            "required": [
+              "Type",
+              "Value"
+            ],
+            "members": {
+              "Type": {},
+              "Value": {
+                "type": "long"
+              }
+            }
+          },
+          "Count": {
             "type": "long"
           }
         }
@@ -89509,6 +89600,54 @@ module.exports={
         "members": {
           "DelegationSet": {
             "shape": "S2l"
+          }
+        }
+      }
+    },
+    "GetReusableDelegationSetLimit": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/reusabledelegationsetlimit/{Id}/{Type}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "Type",
+          "DelegationSetId"
+        ],
+        "members": {
+          "Type": {
+            "location": "uri",
+            "locationName": "Type"
+          },
+          "DelegationSetId": {
+            "location": "uri",
+            "locationName": "Id"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Limit",
+          "Count"
+        ],
+        "members": {
+          "Limit": {
+            "type": "structure",
+            "required": [
+              "Type",
+              "Value"
+            ],
+            "members": {
+              "Type": {},
+              "Value": {
+                "type": "long"
+              }
+            }
+          },
+          "Count": {
+            "type": "long"
           }
         }
       }
@@ -89635,7 +89774,7 @@ module.exports={
           "GeoLocationDetailsList": {
             "type": "list",
             "member": {
-              "shape": "S40",
+              "shape": "S46",
               "locationName": "GeoLocationDetails"
             }
           },
@@ -89724,7 +89863,7 @@ module.exports={
         ],
         "members": {
           "HostedZones": {
-            "shape": "S59"
+            "shape": "S5n"
           },
           "Marker": {},
           "IsTruncated": {
@@ -89766,7 +89905,7 @@ module.exports={
         ],
         "members": {
           "HostedZones": {
-            "shape": "S59"
+            "shape": "S5n"
           },
           "DNSName": {},
           "HostedZoneId": {},
@@ -89948,7 +90087,7 @@ module.exports={
         ],
         "members": {
           "ResourceTagSet": {
-            "shape": "S5p"
+            "shape": "S63"
           }
         }
       }
@@ -89989,7 +90128,7 @@ module.exports={
           "ResourceTagSets": {
             "type": "list",
             "member": {
-              "shape": "S5p",
+              "shape": "S63",
               "locationName": "ResourceTagSet"
             }
           }
@@ -90091,7 +90230,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstances": {
-            "shape": "S60"
+            "shape": "S6e"
           },
           "HostedZoneIdMarker": {},
           "TrafficPolicyInstanceNameMarker": {},
@@ -90141,7 +90280,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstances": {
-            "shape": "S60"
+            "shape": "S6e"
           },
           "TrafficPolicyInstanceNameMarker": {},
           "TrafficPolicyInstanceTypeMarker": {},
@@ -90200,7 +90339,7 @@ module.exports={
         ],
         "members": {
           "TrafficPolicyInstances": {
-            "shape": "S60"
+            "shape": "S6e"
           },
           "HostedZoneIdMarker": {},
           "TrafficPolicyInstanceNameMarker": {},
@@ -90296,7 +90435,7 @@ module.exports={
           "HostedZoneId": {},
           "NextToken": {},
           "VPCs": {
-            "shape": "S4j"
+            "shape": "S4p"
           }
         }
       }
@@ -90894,7 +91033,7 @@ module.exports={
         "TrafficPolicyType": {}
       }
     },
-    "S40": {
+    "S46": {
       "type": "structure",
       "members": {
         "ContinentCode": {},
@@ -90905,7 +91044,7 @@ module.exports={
         "SubdivisionName": {}
       }
     },
-    "S4b": {
+    "S4h": {
       "type": "list",
       "member": {
         "locationName": "HealthCheckObservation",
@@ -90925,21 +91064,21 @@ module.exports={
         }
       }
     },
-    "S4j": {
+    "S4p": {
       "type": "list",
       "member": {
         "shape": "S3",
         "locationName": "VPC"
       }
     },
-    "S59": {
+    "S5n": {
       "type": "list",
       "member": {
         "shape": "S2j",
         "locationName": "HostedZone"
       }
     },
-    "S5p": {
+    "S63": {
       "type": "structure",
       "members": {
         "ResourceType": {},
@@ -90949,7 +91088,7 @@ module.exports={
         }
       }
     },
-    "S60": {
+    "S6e": {
       "type": "list",
       "member": {
         "shape": "S34",
@@ -111902,7 +112041,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.151.0',
+  VERSION: '2.152.0',
 
 
   Signers: {},
@@ -115579,6 +115718,14 @@ module.exports={
     "us-gov-*/sts": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },
+    "us-gov-west-1/s3": "s3signature",
+    "us-west-1/s3": "s3signature",
+    "us-west-2/s3": "s3signature",
+    "eu-west-1/s3": "s3signature",
+    "ap-southeast-1/s3": "s3signature",
+    "ap-southeast-2/s3": "s3signature",
+    "ap-northeast-1/s3": "s3signature",
+    "sa-east-1/s3": "s3signature",
     "us-east-1/s3": {
       "endpoint": "{service}.amazonaws.com",
       "signatureVersion": "s3"
@@ -115601,8 +115748,8 @@ module.exports={
     "globalGovCloud": {
       "endpoint": "{service}.us-gov.amazonaws.com"
     },
-    "s3dash": {
-      "endpoint": "{service}-{region}.amazonaws.com",
+    "s3signature": {
+      "endpoint": "{service}.{region}.amazonaws.com",
       "signatureVersion": "s3"
     }
   }

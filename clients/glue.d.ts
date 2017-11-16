@@ -60,11 +60,11 @@ declare class Glue extends Service {
    */
   batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Creates a Classifier in the user's account.
+   * Creates a classifier in the user's account. This may be either a GrokClassifier or an XMLClassifier. 
    */
   createClassifier(params: Glue.Types.CreateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
-   * Creates a Classifier in the user's account.
+   * Creates a classifier in the user's account. This may be either a GrokClassifier or an XMLClassifier. 
    */
   createClassifier(callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class Glue extends Service {
    */
   createConnection(callback?: (err: AWSError, data: Glue.Types.CreateConnectionResponse) => void): Request<Glue.Types.CreateConnectionResponse, AWSError>;
   /**
-   * Creates a new Crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the s3Targets or the jdbcTargets field.
+   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the s3Targets or the jdbcTargets field.
    */
   createCrawler(params: Glue.Types.CreateCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
   /**
-   * Creates a new Crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the s3Targets or the jdbcTargets field.
+   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the s3Targets or the jdbcTargets field.
    */
   createCrawler(callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class Glue extends Service {
    */
   createUserDefinedFunction(callback?: (err: AWSError, data: Glue.Types.CreateUserDefinedFunctionResponse) => void): Request<Glue.Types.CreateUserDefinedFunctionResponse, AWSError>;
   /**
-   * Removes a Classifier from the metadata store.
+   * Removes a classifier from the Data Catalog.
    */
   deleteClassifier(params: Glue.Types.DeleteClassifierRequest, callback?: (err: AWSError, data: Glue.Types.DeleteClassifierResponse) => void): Request<Glue.Types.DeleteClassifierResponse, AWSError>;
   /**
-   * Removes a Classifier from the metadata store.
+   * Removes a classifier from the Data Catalog.
    */
   deleteClassifier(callback?: (err: AWSError, data: Glue.Types.DeleteClassifierResponse) => void): Request<Glue.Types.DeleteClassifierResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class Glue extends Service {
    */
   deleteConnection(callback?: (err: AWSError, data: Glue.Types.DeleteConnectionResponse) => void): Request<Glue.Types.DeleteConnectionResponse, AWSError>;
   /**
-   * Removes a specified Crawler from the metadata store, unless the Crawler state is RUNNING.
+   * Removes a specified crawler from the Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(params: Glue.Types.DeleteCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
-   * Removes a specified Crawler from the metadata store, unless the Crawler state is RUNNING.
+   * Removes a specified crawler from the Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
@@ -236,19 +236,19 @@ declare class Glue extends Service {
    */
   getCatalogImportStatus(callback?: (err: AWSError, data: Glue.Types.GetCatalogImportStatusResponse) => void): Request<Glue.Types.GetCatalogImportStatusResponse, AWSError>;
   /**
-   * Retrieve a Classifier by name.
+   * Retrieve a classifier by name.
    */
   getClassifier(params: Glue.Types.GetClassifierRequest, callback?: (err: AWSError, data: Glue.Types.GetClassifierResponse) => void): Request<Glue.Types.GetClassifierResponse, AWSError>;
   /**
-   * Retrieve a Classifier by name.
+   * Retrieve a classifier by name.
    */
   getClassifier(callback?: (err: AWSError, data: Glue.Types.GetClassifierResponse) => void): Request<Glue.Types.GetClassifierResponse, AWSError>;
   /**
-   * Lists all Classifier objects in the metadata store.
+   * Lists all classifier objects in the Data Catalog.
    */
   getClassifiers(params: Glue.Types.GetClassifiersRequest, callback?: (err: AWSError, data: Glue.Types.GetClassifiersResponse) => void): Request<Glue.Types.GetClassifiersResponse, AWSError>;
   /**
-   * Lists all Classifier objects in the metadata store.
+   * Lists all classifier objects in the Data Catalog.
    */
   getClassifiers(callback?: (err: AWSError, data: Glue.Types.GetClassifiersResponse) => void): Request<Glue.Types.GetClassifiersResponse, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class Glue extends Service {
    */
   getConnections(callback?: (err: AWSError, data: Glue.Types.GetConnectionsResponse) => void): Request<Glue.Types.GetConnectionsResponse, AWSError>;
   /**
-   * Retrieves metadata for a specified Crawler.
+   * Retrieves metadata for a specified crawler.
    */
   getCrawler(params: Glue.Types.GetCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.GetCrawlerResponse) => void): Request<Glue.Types.GetCrawlerResponse, AWSError>;
   /**
-   * Retrieves metadata for a specified Crawler.
+   * Retrieves metadata for a specified crawler.
    */
   getCrawler(callback?: (err: AWSError, data: Glue.Types.GetCrawlerResponse) => void): Request<Glue.Types.GetCrawlerResponse, AWSError>;
   /**
@@ -284,11 +284,11 @@ declare class Glue extends Service {
    */
   getCrawlerMetrics(callback?: (err: AWSError, data: Glue.Types.GetCrawlerMetricsResponse) => void): Request<Glue.Types.GetCrawlerMetricsResponse, AWSError>;
   /**
-   * Retrieves metadata for all Crawlers defined in the customer account.
+   * Retrieves metadata for all crawlers defined in the customer account.
    */
   getCrawlers(params: Glue.Types.GetCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
   /**
-   * Retrieves metadata for all Crawlers defined in the customer account.
+   * Retrieves metadata for all crawlers defined in the customer account.
    */
   getCrawlers(callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
   /**
@@ -468,11 +468,11 @@ declare class Glue extends Service {
    */
   resetJobBookmark(callback?: (err: AWSError, data: Glue.Types.ResetJobBookmarkResponse) => void): Request<Glue.Types.ResetJobBookmarkResponse, AWSError>;
   /**
-   * Starts a crawl using the specified Crawler, regardless of what is scheduled. If the Crawler is already running, does nothing.
+   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.
    */
   startCrawler(params: Glue.Types.StartCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
   /**
-   * Starts a crawl using the specified Crawler, regardless of what is scheduled. If the Crawler is already running, does nothing.
+   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.
    */
   startCrawler(callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
   /**
@@ -500,11 +500,11 @@ declare class Glue extends Service {
    */
   startTrigger(callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
   /**
-   * If the specified Crawler is running, stops the crawl.
+   * If the specified crawler is running, stops the crawl.
    */
   stopCrawler(params: Glue.Types.StopCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.StopCrawlerResponse) => void): Request<Glue.Types.StopCrawlerResponse, AWSError>;
   /**
-   * If the specified Crawler is running, stops the crawl.
+   * If the specified crawler is running, stops the crawl.
    */
   stopCrawler(callback?: (err: AWSError, data: Glue.Types.StopCrawlerResponse) => void): Request<Glue.Types.StopCrawlerResponse, AWSError>;
   /**
@@ -524,11 +524,11 @@ declare class Glue extends Service {
    */
   stopTrigger(callback?: (err: AWSError, data: Glue.Types.StopTriggerResponse) => void): Request<Glue.Types.StopTriggerResponse, AWSError>;
   /**
-   * Modifies an existing Classifier.
+   * Modifies an existing classifier (either a GrokClassifier or an XMLClassifier).
    */
   updateClassifier(params: Glue.Types.UpdateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
-   * Modifies an existing Classifier.
+   * Modifies an existing classifier (either a GrokClassifier or an XMLClassifier).
    */
   updateClassifier(callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
@@ -540,19 +540,19 @@ declare class Glue extends Service {
    */
   updateConnection(callback?: (err: AWSError, data: Glue.Types.UpdateConnectionResponse) => void): Request<Glue.Types.UpdateConnectionResponse, AWSError>;
   /**
-   * Updates a Crawler. If a Crawler is running, you must stop it using StopCrawler before updating it.
+   * Updates a crawler. If a crawler is running, you must stop it using StopCrawler before updating it.
    */
   updateCrawler(params: Glue.Types.UpdateCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.UpdateCrawlerResponse) => void): Request<Glue.Types.UpdateCrawlerResponse, AWSError>;
   /**
-   * Updates a Crawler. If a Crawler is running, you must stop it using StopCrawler before updating it.
+   * Updates a crawler. If a crawler is running, you must stop it using StopCrawler before updating it.
    */
   updateCrawler(callback?: (err: AWSError, data: Glue.Types.UpdateCrawlerResponse) => void): Request<Glue.Types.UpdateCrawlerResponse, AWSError>;
   /**
-   * Updates the schedule of a crawler using a Cron expression. 
+   * Updates the schedule of a crawler using a cron expression. 
    */
   updateCrawlerSchedule(params: Glue.Types.UpdateCrawlerScheduleRequest, callback?: (err: AWSError, data: Glue.Types.UpdateCrawlerScheduleResponse) => void): Request<Glue.Types.UpdateCrawlerScheduleResponse, AWSError>;
   /**
-   * Updates the schedule of a crawler using a Cron expression. 
+   * Updates the schedule of a crawler using a cron expression. 
    */
   updateCrawlerSchedule(callback?: (err: AWSError, data: Glue.Types.UpdateCrawlerScheduleResponse) => void): Request<Glue.Types.UpdateCrawlerScheduleResponse, AWSError>;
   /**
@@ -826,6 +826,10 @@ declare namespace Glue {
      * A GrokClassifier object.
      */
     GrokClassifier?: GrokClassifier;
+    /**
+     * An XMLClassifier object.
+     */
+    XMLClassifier?: XMLClassifier;
   }
   export type ClassifierList = Classifier[];
   export type ClassifierNameList = NameString[];
@@ -991,55 +995,55 @@ declare namespace Glue {
   }
   export interface Crawler {
     /**
-     * The Crawler name.
+     * The crawler name.
      */
     Name?: NameString;
     /**
-     * The IAM role (or ARN of an IAM role) used to access customer resources such as data in S3.
+     * The IAM role (or ARN of an IAM role) used to access customer resources, such as data in Amazon S3.
      */
-    Role?: RoleArn;
+    Role?: Role;
     /**
      * A collection of targets to crawl.
      */
     Targets?: CrawlerTargets;
     /**
-     * The Database where this Crawler's output should be stored.
+     * The database where metadata is written by this crawler.
      */
     DatabaseName?: DatabaseName;
     /**
-     * A description of this Crawler and where it should be used.
+     * A description of the crawler.
      */
     Description?: DescriptionString;
     /**
-     * A list of custom Classifiers associated with this Crawler.
+     * A list of custom classifiers associated with the crawler.
      */
     Classifiers?: ClassifierNameList;
     /**
-     * Sets policy for the crawler's update and delete behavior.
+     * Sets the behavior when the crawler finds a changed or deleted object.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Indicates whether this Crawler is running, or whether a run is pending.
+     * Indicates whether the crawler is running, or whether a run is pending.
      */
     State?: CrawlerState;
     /**
-     * The table prefix used for catalog tables created.
+     * The prefix added to the names of tables that are created.
      */
     TablePrefix?: TablePrefix;
     /**
-     * A Schedule object that specifies the schedule on which this Crawler is to be run.
+     * For scheduled crawlers, the schedule when the crawler runs.
      */
     Schedule?: Schedule;
     /**
-     * If this Crawler is running, contains the total time elapsed since the last crawl began.
+     * If the crawler is running, contains the total time elapsed since the last crawl began.
      */
     CrawlElapsedTime?: MillisecondsCount;
     /**
-     * The time when the Crawler was created.
+     * The time when the crawler was created.
      */
     CreationTime?: Timestamp;
     /**
-     * The time the Crawler was last updated.
+     * The time the crawler was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -1047,10 +1051,15 @@ declare namespace Glue {
      */
     LastCrawl?: LastCrawlInfo;
     /**
-     * The version of the Crawler.
+     * The version of the crawler.
      */
     Version?: VersionId;
+    /**
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:
+     */
+    Configuration?: CrawlerConfiguration;
   }
+  export type CrawlerConfiguration = string;
   export type CrawlerList = Crawler[];
   export interface CrawlerMetrics {
     /**
@@ -1062,7 +1071,7 @@ declare namespace Glue {
      */
     TimeLeftSeconds?: NonNegativeDouble;
     /**
-     * True if the crawler is estimating its 
+     * True if the crawler is still estimating how long it will take to complete this run.
      */
     StillEstimating?: Boolean;
     /**
@@ -1074,15 +1083,15 @@ declare namespace Glue {
      */
     MedianRuntimeSeconds?: NonNegativeDouble;
     /**
-     * A list of the tables created by this crawler.
+     * The number of tables created by this crawler.
      */
     TablesCreated?: NonNegativeInteger;
     /**
-     * A list of the tables created by this crawler.
+     * The number of tables updated by this crawler.
      */
     TablesUpdated?: NonNegativeInteger;
     /**
-     * A list of the tables deleted by this crawler.
+     * The number of tables deleted by this crawler.
      */
     TablesDeleted?: NonNegativeInteger;
   }
@@ -1091,7 +1100,7 @@ declare namespace Glue {
   export type CrawlerState = "READY"|"RUNNING"|"STOPPING"|string;
   export interface CrawlerTargets {
     /**
-     * Specifies targets in AWS S3.
+     * Specifies Amazon S3 targets.
      */
     S3Targets?: S3TargetList;
     /**
@@ -1101,9 +1110,13 @@ declare namespace Glue {
   }
   export interface CreateClassifierRequest {
     /**
-     * A grok classifier to create.
+     * A GrokClassifier object specifying the classifier to create.
      */
     GrokClassifier?: CreateGrokClassifierRequest;
+    /**
+     * An XMLClassifier object specifying the classifier to create.
+     */
+    XMLClassifier?: CreateXMLClassifierRequest;
   }
   export interface CreateClassifierResponse {
   }
@@ -1121,19 +1134,19 @@ declare namespace Glue {
   }
   export interface CreateCrawlerRequest {
     /**
-     * Name of the new Crawler.
+     * Name of the new crawler.
      */
     Name: NameString;
     /**
-     * The IAM role (or ARN of an IAM role) used by the new Crawler to access customer resources.
+     * The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
      */
-    Role: RoleArn;
+    Role: Role;
     /**
-     * The Glue Database where results will be stored, such as: arn:aws:daylight:us-east-1::database/sometable/*.
+     * The AWS Glue database where results are written, such as: arn:aws:daylight:us-east-1::database/sometable/*.
      */
     DatabaseName: DatabaseName;
     /**
-     * A description of the new Crawler.
+     * A description of the new crawler.
      */
     Description?: DescriptionString;
     /**
@@ -1145,17 +1158,21 @@ declare namespace Glue {
      */
     Schedule?: CronExpression;
     /**
-     * A list of custom Classifier names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
+     * A list of custom classifiers that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
      */
     Classifiers?: ClassifierNameList;
     /**
-     * The table prefix used for catalog tables created.
+     * The table prefix used for catalog tables that are created.
      */
     TablePrefix?: TablePrefix;
     /**
      * Policy for the crawler's update and deletion behavior.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
+    /**
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition.
+     */
+    Configuration?: CrawlerConfiguration;
   }
   export interface CreateCrawlerResponse {
   }
@@ -1265,11 +1282,11 @@ declare namespace Glue {
   }
   export interface CreateGrokClassifierRequest {
     /**
-     * The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.
+     * An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.
      */
     Classification: Classification;
     /**
-     * The name of the new Classifier.
+     * The name of the new classifier.
      */
     Name: NameString;
     /**
@@ -1277,7 +1294,7 @@ declare namespace Glue {
      */
     GrokPattern: GrokPattern;
     /**
-     * Custom grok patterns used by this classifier.
+     * Optional custom grok patterns used by this classifier.
      */
     CustomPatterns?: CustomPatterns;
   }
@@ -1429,6 +1446,20 @@ declare namespace Glue {
   }
   export interface CreateUserDefinedFunctionResponse {
   }
+  export interface CreateXMLClassifierRequest {
+    /**
+     * An identifier of the data format that the classifier matches.
+     */
+    Classification: Classification;
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+     */
+    RowTag?: RowTag;
+  }
   export type CronExpression = string;
   export type CustomPatterns = string;
   export type DagEdges = CodeGenEdge[];
@@ -1478,7 +1509,7 @@ declare namespace Glue {
   export type DeleteBehavior = "LOG"|"DELETE_FROM_DATABASE"|"DEPRECATE_IN_DATABASE"|string;
   export interface DeleteClassifierRequest {
     /**
-     * Name of the Classifier to remove.
+     * Name of the classifier to remove.
      */
     Name: NameString;
   }
@@ -1499,7 +1530,7 @@ declare namespace Glue {
   }
   export interface DeleteCrawlerRequest {
     /**
-     * Name of the Crawler to remove.
+     * Name of the crawler to remove.
      */
     Name: NameString;
   }
@@ -1725,13 +1756,13 @@ declare namespace Glue {
   }
   export interface GetClassifierRequest {
     /**
-     * Name of the Classifier to retrieve.
+     * Name of the classifier to retrieve.
      */
     Name: NameString;
   }
   export interface GetClassifierResponse {
     /**
-     * The requested Classifier.
+     * The requested classifier.
      */
     Classifier?: Classifier;
   }
@@ -1747,7 +1778,7 @@ declare namespace Glue {
   }
   export interface GetClassifiersResponse {
     /**
-     * The requested list of Classifier objects.
+     * The requested list of classifier objects.
      */
     Classifiers?: ClassifierList;
     /**
@@ -1835,19 +1866,19 @@ declare namespace Glue {
   }
   export interface GetCrawlerRequest {
     /**
-     * Name of the Crawler to retrieve metadata for.
+     * Name of the crawler to retrieve metadata for.
      */
     Name: NameString;
   }
   export interface GetCrawlerResponse {
     /**
-     * The metadata for the specified Crawler.
+     * The metadata for the specified crawler.
      */
     Crawler?: Crawler;
   }
   export interface GetCrawlersRequest {
     /**
-     * The number of Crawlers to return on each call.
+     * The number of crawlers to return on each call.
      */
     MaxResults?: PageSize;
     /**
@@ -1857,7 +1888,7 @@ declare namespace Glue {
   }
   export interface GetCrawlersResponse {
     /**
-     * A list of Crawler metadata.
+     * A list of crawler metadata.
      */
     Crawlers?: CrawlerList;
     /**
@@ -2133,7 +2164,7 @@ declare namespace Glue {
   }
   export interface GetPlanResponse {
     /**
-     * A python script to perform the mapping.
+     * A Python script to perform the mapping.
      */
     PythonScript?: PythonScript;
   }
@@ -2316,7 +2347,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The data form that the classifier matches, such as Twitter, JSON, Omniture Logs, and so forth.
+     * An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on.
      */
     Classification: Classification;
     /**
@@ -2332,11 +2363,11 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * The grok pattern used by this classifier.
+     * The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in Writing Custom Classifers.
      */
     GrokPattern: GrokPattern;
     /**
-     * Custom grok patterns used by this classifier.
+     * Optional custom grok patterns defined by this classifier. For more information, see custom patterns in Writing Custom Classifers.
      */
     CustomPatterns?: CustomPatterns;
   }
@@ -2355,7 +2386,7 @@ declare namespace Glue {
   export type IntegerValue = number;
   export interface JdbcTarget {
     /**
-     * The name of the connection to use for the JDBC target.
+     * The name of the connection to use to connect to the JDBC target.
      */
     ConnectionName?: ConnectionName;
     /**
@@ -2363,7 +2394,7 @@ declare namespace Glue {
      */
     Path?: Path;
     /**
-     * A list of items to exclude from the crawl.
+     * A list of glob patterns used to exclude from the crawl. For more information, see Catalog Tables with a Crawler.
      */
     Exclusions?: PathList;
   }
@@ -2554,7 +2585,7 @@ declare namespace Glue {
      */
     Status?: LastCrawlStatus;
     /**
-     * Error information about the last crawl, if an error occurred.
+     * If an error occurred, the error information about the last crawl.
      */
     ErrorMessage?: DescriptionString;
     /**
@@ -2581,7 +2612,7 @@ declare namespace Glue {
      */
     Jdbc?: CodeGenNodeArgs;
     /**
-     * An AWS S3 location.
+     * An Amazon S3 location.
      */
     S3?: CodeGenNodeArgs;
   }
@@ -2781,15 +2812,17 @@ declare namespace Glue {
     Uri?: URI;
   }
   export type ResourceUriList = ResourceUri[];
+  export type Role = string;
   export type RoleArn = string;
   export type RoleString = string;
+  export type RowTag = string;
   export interface S3Target {
     /**
-     * The path to the S3 target.
+     * The path to the Amazon S3 target.
      */
     Path?: Path;
     /**
-     * A list of S3 objects to exclude from the crawl.
+     * A list of glob patterns used to exclude from the crawl. For more information, see Catalog Tables with a Crawler.
      */
     Exclusions?: PathList;
   }
@@ -2807,11 +2840,11 @@ declare namespace Glue {
   export type ScheduleState = "SCHEDULED"|"NOT_SCHEDULED"|"TRANSITIONING"|string;
   export interface SchemaChangePolicy {
     /**
-     * The update behavior.
+     * The update behavior when the crawler finds a changed schema.
      */
     UpdateBehavior?: UpdateBehavior;
     /**
-     * The deletion behavior.
+     * The deletion behavior when the crawler finds a deleted object.
      */
     DeleteBehavior?: DeleteBehavior;
   }
@@ -2858,7 +2891,7 @@ declare namespace Glue {
   }
   export interface StartCrawlerRequest {
     /**
-     * Name of the Crawler to start.
+     * Name of the crawler to start.
      */
     Name: NameString;
   }
@@ -2910,7 +2943,7 @@ declare namespace Glue {
   }
   export interface StopCrawlerRequest {
     /**
-     * Name of the Crawler to stop.
+     * Name of the crawler to stop.
      */
     Name: NameString;
   }
@@ -3198,6 +3231,10 @@ declare namespace Glue {
      * A GrokClassifier object with updated fields.
      */
     GrokClassifier?: UpdateGrokClassifierRequest;
+    /**
+     * An XMLClassifier object with updated fields.
+     */
+    XMLClassifier?: UpdateXMLClassifierRequest;
   }
   export interface UpdateClassifierResponse {
   }
@@ -3219,23 +3256,23 @@ declare namespace Glue {
   }
   export interface UpdateCrawlerRequest {
     /**
-     * Name of the new Crawler.
+     * Name of the new crawler.
      */
     Name: NameString;
     /**
-     * The IAM role (or ARN of an IAM role) used by the new Crawler to access customer resources.
+     * The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
      */
-    Role?: RoleArn;
+    Role?: Role;
     /**
-     * The Glue Database where results will be stored, such as: arn:aws:daylight:us-east-1::database/sometable/*.
+     * The AWS Glue database where results are stored, such as: arn:aws:daylight:us-east-1::database/sometable/*.
      */
     DatabaseName?: DatabaseName;
     /**
-     * A description of the new Crawler.
+     * A description of the new crawler.
      */
     Description?: DescriptionStringRemovable;
     /**
-     * A list of collection of targets to crawl.
+     * A list of targets to crawl.
      */
     Targets?: CrawlerTargets;
     /**
@@ -3243,17 +3280,21 @@ declare namespace Glue {
      */
     Schedule?: CronExpression;
     /**
-     * A list of custom Classifier names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
+     * A list of custom classifiers that the user has registered. By default, all classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
      */
     Classifiers?: ClassifierNameList;
     /**
-     * The table prefix used for catalog tables created.
+     * The table prefix used for catalog tables that are created.
      */
     TablePrefix?: TablePrefix;
     /**
      * Policy for the crawler's update and deletion behavior.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
+    /**
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:
+     */
+    Configuration?: CrawlerConfiguration;
   }
   export interface UpdateCrawlerResponse {
   }
@@ -3311,7 +3352,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.
+     * An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.
      */
     Classification?: Classification;
     /**
@@ -3319,7 +3360,7 @@ declare namespace Glue {
      */
     GrokPattern?: GrokPattern;
     /**
-     * Custom grok patterns used by this classifier.
+     * Optional custom grok patterns used by this classifier.
      */
     CustomPatterns?: CustomPatterns;
   }
@@ -3415,6 +3456,20 @@ declare namespace Glue {
   }
   export interface UpdateUserDefinedFunctionResponse {
   }
+  export interface UpdateXMLClassifierRequest {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * An identifier of the data format that the classifier matches.
+     */
+    Classification?: Classification;
+    /**
+     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+     */
+    RowTag?: RowTag;
+  }
   export type UriString = string;
   export interface UserDefinedFunction {
     /**
@@ -3470,6 +3525,32 @@ declare namespace Glue {
   export type VersionId = number;
   export type VersionString = string;
   export type ViewTextString = string;
+  export interface XMLClassifier {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * An identifier of the data format that the classifier matches.
+     */
+    Classification: Classification;
+    /**
+     * The time this classifier was registered.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time this classifier was last updated.
+     */
+    LastUpdated?: Timestamp;
+    /**
+     * The version of this classifier.
+     */
+    Version?: VersionId;
+    /**
+     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+     */
+    RowTag?: RowTag;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
