@@ -4203,7 +4203,8 @@
     "InventoryFormat": {
       "type": "string",
       "enum": [
-        "CSV"
+        "CSV",
+        "ORC"
       ]
     },
     "InventoryFrequency": {

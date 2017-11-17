@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"Application Auto Scaling",
+    "serviceId":"Application Auto Scaling",
     "signatureVersion":"v4",
     "signingName":"application-autoscaling",
     "targetPrefix":"AnyScaleFrontendService",
@@ -587,8 +588,12 @@
       "enum":[
         "DynamoDBReadCapacityUtilization",
         "DynamoDBWriteCapacityUtilization",
+        "ALBRequestCountPerTarget",
         "RDSReaderAverageCPUUtilization",
-        "RDSReaderAverageDatabaseConnections"
+        "RDSReaderAverageDatabaseConnections",
+        "EC2SpotFleetRequestAverageCPUUtilization",
+        "EC2SpotFleetRequestAverageNetworkIn",
+        "EC2SpotFleetRequestAverageNetworkOut"
       ]
     },
     "MetricUnit":{"type":"string"},
@@ -620,11 +625,11 @@
       "members":{
         "PredefinedMetricType":{
           "shape":"MetricType",
-          "documentation":"<p>The metric type.</p>"
+          "documentation":"<p>The metric type. The <code>ALBRequestCountPerTarget</code> metric type applies only to Spot fleet requests.</p>"
         },
         "ResourceLabel":{
           "shape":"ResourceLabel",
-          "documentation":"<p>Reserved for future use.</p>"
+          "documentation":"<p>Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group attached to the Spot fleet request.</p> <p>The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:</p> <ul> <li> <p>app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN</p> </li> <li> <p>targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.</p> </li> </ul>"
         }
       },
       "documentation":"<p>Configures a predefined metric for a target tracking policy.</p>"

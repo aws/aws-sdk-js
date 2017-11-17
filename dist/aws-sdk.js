@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.152.0
+// AWS SDK for JavaScript v2.153.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -4414,6 +4414,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Application Auto Scaling",
+    "serviceId": "Application Auto Scaling",
     "signatureVersion": "v4",
     "signingName": "application-autoscaling",
     "targetPrefix": "AnyScaleFrontendService",
@@ -47308,6 +47309,7 @@ module.exports={
     "protocol": "query",
     "serviceAbbreviation": "Elastic Load Balancing v2",
     "serviceFullName": "Elastic Load Balancing",
+    "serviceId": "Elastic Load Balancing v2",
     "signatureVersion": "v4",
     "uid": "elasticloadbalancingv2-2015-12-01",
     "xmlNamespace": "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"
@@ -84086,6 +84088,99 @@ module.exports={
         }
       }
     },
+    "RestoreDBInstanceFromS3": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "DBInstanceIdentifier",
+          "DBInstanceClass",
+          "Engine",
+          "SourceEngine",
+          "SourceEngineVersion",
+          "S3BucketName",
+          "S3IngestionRoleArn"
+        ],
+        "members": {
+          "DBName": {},
+          "DBInstanceIdentifier": {},
+          "AllocatedStorage": {
+            "type": "integer"
+          },
+          "DBInstanceClass": {},
+          "Engine": {},
+          "MasterUsername": {},
+          "MasterUserPassword": {},
+          "DBSecurityGroups": {
+            "shape": "S1w"
+          },
+          "VpcSecurityGroupIds": {
+            "shape": "S1h"
+          },
+          "AvailabilityZone": {},
+          "DBSubnetGroupName": {},
+          "PreferredMaintenanceWindow": {},
+          "DBParameterGroupName": {},
+          "BackupRetentionPeriod": {
+            "type": "integer"
+          },
+          "PreferredBackupWindow": {},
+          "Port": {
+            "type": "integer"
+          },
+          "MultiAZ": {
+            "type": "boolean"
+          },
+          "EngineVersion": {},
+          "AutoMinorVersionUpgrade": {
+            "type": "boolean"
+          },
+          "LicenseModel": {},
+          "Iops": {
+            "type": "integer"
+          },
+          "OptionGroupName": {},
+          "PubliclyAccessible": {
+            "type": "boolean"
+          },
+          "Tags": {
+            "shape": "Sa"
+          },
+          "StorageType": {},
+          "StorageEncrypted": {
+            "type": "boolean"
+          },
+          "KmsKeyId": {},
+          "CopyTagsToSnapshot": {
+            "type": "boolean"
+          },
+          "MonitoringInterval": {
+            "type": "integer"
+          },
+          "MonitoringRoleArn": {},
+          "EnableIAMDatabaseAuthentication": {
+            "type": "boolean"
+          },
+          "SourceEngine": {},
+          "SourceEngineVersion": {},
+          "S3BucketName": {},
+          "S3Prefix": {},
+          "S3IngestionRoleArn": {},
+          "EnablePerformanceInsights": {
+            "type": "boolean"
+          },
+          "PerformanceInsightsKMSKeyId": {}
+        }
+      },
+      "output": {
+        "resultWrapper": "RestoreDBInstanceFromS3Result",
+        "type": "structure",
+        "members": {
+          "DBInstance": {
+            "shape": "S1y"
+          }
+        }
+      }
+    },
     "RestoreDBInstanceToPointInTime": {
       "input": {
         "type": "structure",
@@ -112041,7 +112136,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.152.0',
+  VERSION: '2.153.0',
 
 
   Signers: {},

@@ -341,18 +341,18 @@ declare namespace ApplicationAutoScaling {
   export type MetricNamespace = string;
   export type MetricScale = number;
   export type MetricStatistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum"|string;
-  export type MetricType = "DynamoDBReadCapacityUtilization"|"DynamoDBWriteCapacityUtilization"|"RDSReaderAverageCPUUtilization"|"RDSReaderAverageDatabaseConnections"|string;
+  export type MetricType = "DynamoDBReadCapacityUtilization"|"DynamoDBWriteCapacityUtilization"|"ALBRequestCountPerTarget"|"RDSReaderAverageCPUUtilization"|"RDSReaderAverageDatabaseConnections"|"EC2SpotFleetRequestAverageCPUUtilization"|"EC2SpotFleetRequestAverageNetworkIn"|"EC2SpotFleetRequestAverageNetworkOut"|string;
   export type MetricUnit = string;
   export type MinAdjustmentMagnitude = number;
   export type PolicyName = string;
   export type PolicyType = "StepScaling"|"TargetTrackingScaling"|string;
   export interface PredefinedMetricSpecification {
     /**
-     * The metric type.
+     * The metric type. The ALBRequestCountPerTarget metric type applies only to Spot fleet requests.
      */
     PredefinedMetricType: MetricType;
     /**
-     * Reserved for future use.
+     * Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ALBRequestCountPerTarget and there is a target group attached to the Spot fleet request. The format is app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;, where:   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt; is the final portion of the load balancer ARN   targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt; is the final portion of the target group ARN.  
      */
     ResourceLabel?: ResourceLabel;
   }

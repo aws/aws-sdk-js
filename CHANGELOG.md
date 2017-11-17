@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.152.0-->
+<!--LATEST=2.153.0-->
 <!--ENTRYINSERT-->
+
+## 2.153.0
+* feature: ApplicationAutoScaling: This SDK update contains support for Target Tracking scaling for EC2 Spot Fleet. It allows you to scale an EC2 Spot Fleet using a Target Tracking scaling policy.
+* feature: DMS: Support for migration task assessment. Support for data validation after the migration.
+* feature: RDS: Amazon RDS now supports importing MySQL databases by using backup files from Amazon S3.
+* feature: S3: Added ORC to the supported S3 Inventory formats.
 
 ## 2.152.0
 * bugfix: S3: Reverts default signatureVersion for S3 presigned URLs to the lowest signatureVersion the region supports. 2.150.0 changed the default signatureVersion of all presigned URLs to v4. This change does not affect S3 clients that had the signatureVersion explicitly defined.
