@@ -2314,7 +2314,7 @@ declare namespace APIGateway {
      */
     stageName: String;
     /**
-     * The language for the generated SDK. Currently java, javascript, android, objectivec and swift (for iOS) are supported.
+     * The language for the generated SDK. Currently java, javascript, android, objectivec (for iOS), swift (for iOS), and ruby are supported.
      */
     sdkType: String;
     /**

@@ -105,3 +105,4 @@ export import CloudHSMV2 = require('./cloudhsmv2');
 export import Glue = require('./glue');
 export import Mobile = require('./mobile');
 export import Pricing = require('./pricing');
+export import CostExplorer = require('./costexplorer');

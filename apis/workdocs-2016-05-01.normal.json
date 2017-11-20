@@ -414,6 +414,23 @@
       ],
       "documentation":"<p>Describes the contents of the specified folder, including its documents and subfolders.</p> <p>By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.</p>"
     },
+    "DescribeGroups":{
+      "name":"DescribeGroups",
+      "http":{
+        "method":"GET",
+        "requestUri":"/api/v1/groups",
+        "responseCode":200
+      },
+      "input":{"shape":"DescribeGroupsRequest"},
+      "output":{"shape":"DescribeGroupsResponse"},
+      "errors":[
+        {"shape":"UnauthorizedOperationException"},
+        {"shape":"UnauthorizedResourceAccessException"},
+        {"shape":"FailedDependencyException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Describes the groups specified by query.</p>"
+    },
     "DescribeNotificationSubscriptions":{
       "name":"DescribeNotificationSubscriptions",
       "http":{
@@ -463,7 +480,7 @@
         {"shape":"FailedDependencyException"},
         {"shape":"ServiceUnavailableException"}
       ],
-      "documentation":"<p>Describes the current user's special folders; the <code>RootFolder</code> and the <code>RecyleBin</code>. <code>RootFolder</code> is the root of user's files and folders and <code>RecyleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.</p>"
+      "documentation":"<p>Describes the current user's special folders; the <code>RootFolder</code> and the <code>RecycleBin</code>. <code>RootFolder</code> is the root of user's files and folders and <code>RecycleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.</p>"
     },
     "DescribeUsers":{
       "name":"DescribeUsers",
@@ -516,7 +533,8 @@
         {"shape":"UnauthorizedResourceAccessException"},
         {"shape":"InvalidArgumentException"},
         {"shape":"FailedDependencyException"},
-        {"shape":"ServiceUnavailableException"}
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InvalidPasswordException"}
       ],
       "documentation":"<p>Retrieves details of a document.</p>"
     },
@@ -553,7 +571,8 @@
         {"shape":"UnauthorizedResourceAccessException"},
         {"shape":"FailedDependencyException"},
         {"shape":"ServiceUnavailableException"},
-        {"shape":"ProhibitedStateException"}
+        {"shape":"ProhibitedStateException"},
+        {"shape":"InvalidPasswordException"}
       ],
       "documentation":"<p>Retrieves version metadata for the specified document.</p>"
     },
@@ -729,7 +748,8 @@
         {"shape":"IllegalUserStateException"},
         {"shape":"FailedDependencyException"},
         {"shape":"ServiceUnavailableException"},
-        {"shape":"DeactivatingLastSystemUserException"}
+        {"shape":"DeactivatingLastSystemUserException"},
+        {"shape":"InvalidArgumentException"}
       ],
       "documentation":"<p>Updates the specified attributes of the specified user, and grants or revokes administrative privileges to the Amazon WorkDocs site.</p>"
     }
@@ -744,7 +764,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -774,7 +794,7 @@
         },
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         }
@@ -872,7 +892,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -885,6 +905,10 @@
         "Principals":{
           "shape":"SharePrincipalList",
           "documentation":"<p>The users, groups, or organization being granted permission.</p>"
+        },
+        "NotificationOptions":{
+          "shape":"NotificationOptions",
+          "documentation":"<p>The notification options.</p>"
         }
       }
     },
@@ -902,6 +926,13 @@
       "max":8199,
       "min":1,
       "sensitive":true
+    },
+    "BooleanEnumType":{
+      "type":"string",
+      "enum":[
+        "TRUE",
+        "FALSE"
+      ]
     },
     "BooleanType":{"type":"boolean"},
     "Comment":{
@@ -968,8 +999,14 @@
           "shape":"User",
           "documentation":"<p>The user who made the comment.</p>"
         },
-        "CreatedTimestamp":{"shape":"TimestampType"},
-        "CommentStatus":{"shape":"CommentStatusType"},
+        "CreatedTimestamp":{
+          "shape":"TimestampType",
+          "documentation":"<p>The timestamp that the comment was created.</p>"
+        },
+        "CommentStatus":{
+          "shape":"CommentStatusType",
+          "documentation":"<p>The status of the comment.</p>"
+        },
         "RecipientId":{
           "shape":"IdType",
           "documentation":"<p>The ID of the user being replied to.</p>"
@@ -1017,7 +1054,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1073,7 +1110,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1106,7 +1143,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1143,12 +1180,12 @@
           "locationName":"ResourceId"
         },
         "Labels":{
-          "shape":"Labels",
+          "shape":"SharedLabels",
           "documentation":"<p>List of labels to add to the resource.</p>"
         },
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         }
@@ -1180,7 +1217,7 @@
         },
         "Protocol":{
           "shape":"SubscriptionProtocolType",
-          "documentation":"<p>The protocol to use. The supported value is https, which delivers JSON-encoded messasges using HTTPS POST.</p>"
+          "documentation":"<p>The protocol to use. The supported value is https, which delivers JSON-encoded messages using HTTPS POST.</p>"
         },
         "SubscriptionType":{
           "shape":"SubscriptionType",
@@ -1240,7 +1277,7 @@
         },
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         }
@@ -1300,7 +1337,7 @@
         },
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         }
@@ -1324,7 +1361,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1354,7 +1391,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1395,7 +1432,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1413,7 +1450,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1431,7 +1468,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1455,12 +1492,12 @@
         },
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
         "Labels":{
-          "shape":"Labels",
+          "shape":"SharedLabels",
           "documentation":"<p>List of labels to delete from the resource.</p>",
           "location":"querystring",
           "locationName":"labels"
@@ -1505,7 +1542,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1522,19 +1559,19 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
         "StartTime":{
           "shape":"TimestampType",
-          "documentation":"<p>The timestamp that determines the starting time of the activities; the response includes the activities performed after the specified timestamp.</p>",
+          "documentation":"<p>The timestamp that determines the starting time of the activities. The response includes the activities performed after the specified timestamp.</p>",
           "location":"querystring",
           "locationName":"startTime"
         },
         "EndTime":{
           "shape":"TimestampType",
-          "documentation":"<p>The timestamp that determines the end time of the activities; the response includes the activities performed before the specified timestamp.</p>",
+          "documentation":"<p>The timestamp that determines the end time of the activities. The response includes the activities performed before the specified timestamp.</p>",
           "location":"querystring",
           "locationName":"endTime"
         },
@@ -1558,7 +1595,7 @@
         },
         "Marker":{
           "shape":"MarkerType",
-          "documentation":"<p>The marker for the next set of results. (You received this marker from a previous call.)</p>",
+          "documentation":"<p>The marker for the next set of results.</p>",
           "location":"querystring",
           "locationName":"marker"
         }
@@ -1586,7 +1623,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1635,7 +1672,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1690,7 +1727,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1755,6 +1792,55 @@
         }
       }
     },
+    "DescribeGroupsRequest":{
+      "type":"structure",
+      "required":["SearchQuery"],
+      "members":{
+        "AuthenticationToken":{
+          "shape":"AuthenticationHeaderType",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "location":"header",
+          "locationName":"Authentication"
+        },
+        "SearchQuery":{
+          "shape":"SearchQueryType",
+          "documentation":"<p>A query to describe groups by group name.</p>",
+          "location":"querystring",
+          "locationName":"searchQuery"
+        },
+        "OrganizationId":{
+          "shape":"IdType",
+          "documentation":"<p>The ID of the organization.</p>",
+          "location":"querystring",
+          "locationName":"organizationId"
+        },
+        "Marker":{
+          "shape":"MarkerType",
+          "documentation":"<p>The marker for the next set of results. (You received this marker from a previous call.)</p>",
+          "location":"querystring",
+          "locationName":"marker"
+        },
+        "Limit":{
+          "shape":"PositiveIntegerType",
+          "documentation":"<p>The maximum number of items to return with this call.</p>",
+          "location":"querystring",
+          "locationName":"limit"
+        }
+      }
+    },
+    "DescribeGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "Groups":{
+          "shape":"GroupMetadataList",
+          "documentation":"<p>The list of groups.</p>"
+        },
+        "Marker":{
+          "shape":"MarkerType",
+          "documentation":"<p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>"
+        }
+      }
+    },
     "DescribeNotificationSubscriptionsRequest":{
       "type":"structure",
       "required":["OrganizationId"],
@@ -1798,7 +1884,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1807,6 +1893,12 @@
           "documentation":"<p>The ID of the resource.</p>",
           "location":"uri",
           "locationName":"ResourceId"
+        },
+        "PrincipalId":{
+          "shape":"IdType",
+          "documentation":"<p>The ID of the principal to filter permissions by.</p>",
+          "location":"querystring",
+          "locationName":"principalId"
         },
         "Limit":{
           "shape":"LimitType",
@@ -1841,7 +1933,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1877,7 +1969,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -1946,7 +2038,8 @@
         },
         "TotalNumberOfUsers":{
           "shape":"SizeType",
-          "documentation":"<p>The total number of users included in the results.</p>"
+          "documentation":"<p>The total number of users included in the results.</p>",
+          "deprecated":true
         },
         "Marker":{
           "shape":"PageMarkerType",
@@ -2000,7 +2093,7 @@
           "documentation":"<p>The resource state.</p>"
         },
         "Labels":{
-          "shape":"Labels",
+          "shape":"SharedLabels",
           "documentation":"<p>List of labels on the document.</p>"
         }
       },
@@ -2077,19 +2170,19 @@
         },
         "CreatedTimestamp":{
           "shape":"TimestampType",
-          "documentation":"<p>The time stamp when the document was first uploaded.</p>"
+          "documentation":"<p>The timestamp when the document was first uploaded.</p>"
         },
         "ModifiedTimestamp":{
           "shape":"TimestampType",
-          "documentation":"<p>The time stamp when the document was last uploaded.</p>"
+          "documentation":"<p>The timestamp when the document was last uploaded.</p>"
         },
         "ContentCreatedTimestamp":{
           "shape":"TimestampType",
-          "documentation":"<p>The time stamp when the content of the document was originally created.</p>"
+          "documentation":"<p>The timestamp when the content of the document was originally created.</p>"
         },
         "ContentModifiedTimestamp":{
           "shape":"TimestampType",
-          "documentation":"<p>The time stamp when the content of the document was modified.</p>"
+          "documentation":"<p>The timestamp when the content of the document was modified.</p>"
         },
         "CreatorId":{
           "shape":"IdType",
@@ -2158,7 +2251,7 @@
       "members":{
         "Message":{"shape":"ErrorMessageType"}
       },
-      "documentation":"<p>The AWS Directory Service cannot reach an on-premises instance. Or a dependency under the control of the organization is failing, such as a connected active directory.</p>",
+      "documentation":"<p>The AWS Directory Service cannot reach an on-premises instance. Or a dependency under the control of the organization is failing, such as a connected Active Directory.</p>",
       "error":{"httpStatusCode":424},
       "exception":true
     },
@@ -2212,7 +2305,7 @@
           "documentation":"<p>The unique identifier created from the subfolders and documents of the folder.</p>"
         },
         "Labels":{
-          "shape":"Labels",
+          "shape":"SharedLabels",
           "documentation":"<p>List of labels on the folder.</p>"
         },
         "Size":{
@@ -2236,7 +2329,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         }
@@ -2257,7 +2350,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -2302,7 +2395,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -2342,7 +2435,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -2391,7 +2484,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -2436,7 +2529,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -2524,7 +2617,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -2538,11 +2631,11 @@
         },
         "ContentCreatedTimestamp":{
           "shape":"TimestampType",
-          "documentation":"<p>The time stamp when the content of the document was originally created.</p>"
+          "documentation":"<p>The timestamp when the content of the document was originally created.</p>"
         },
         "ContentModifiedTimestamp":{
           "shape":"TimestampType",
-          "documentation":"<p>The time stamp when the content of the document was modified.</p>"
+          "documentation":"<p>The timestamp when the content of the document was modified.</p>"
         },
         "ContentType":{
           "shape":"DocumentContentType",
@@ -2576,7 +2669,7 @@
       "members":{
         "Message":{"shape":"ErrorMessageType"}
       },
-      "documentation":"<p>The pagination marker and/or limit fields are not valid.</p>",
+      "documentation":"<p>The pagination marker or limit fields are not valid.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -2589,16 +2682,14 @@
       "error":{"httpStatusCode":405},
       "exception":true
     },
-    "Label":{
-      "type":"string",
-      "max":32,
-      "min":1,
-      "pattern":"[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*"
-    },
-    "Labels":{
-      "type":"list",
-      "member":{"shape":"Label"},
-      "max":20
+    "InvalidPasswordException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessageType"}
+      },
+      "documentation":"<p>The password is invalid.</p>",
+      "error":{"httpStatusCode":401},
+      "exception":true
     },
     "LimitExceededException":{
       "type":"structure",
@@ -2642,6 +2733,20 @@
       "min":0,
       "sensitive":true
     },
+    "NotificationOptions":{
+      "type":"structure",
+      "members":{
+        "SendEmail":{
+          "shape":"BooleanType",
+          "documentation":"<p>Boolean value to indicate an email notification should be sent to the receipients.</p>"
+        },
+        "EmailMessage":{
+          "shape":"MessageType",
+          "documentation":"<p>Text value to be included in the email body.</p>"
+        }
+      },
+      "documentation":"<p>Set of options which defines notification preferences of given action.</p>"
+    },
     "OrderType":{
       "type":"string",
       "enum":[
@@ -2670,7 +2775,7 @@
           "documentation":"<p>The list of user groups.</p>"
         }
       },
-      "documentation":"<p>Describes the users and/or user groups.</p>"
+      "documentation":"<p>Describes the users or user groups.</p>"
     },
     "PasswordType":{
       "type":"string",
@@ -2696,6 +2801,10 @@
     "PermissionInfoList":{
       "type":"list",
       "member":{"shape":"PermissionInfo"}
+    },
+    "PositiveIntegerType":{
+      "type":"integer",
+      "min":1
     },
     "PositiveSizeType":{
       "type":"long",
@@ -2748,7 +2857,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -2769,7 +2878,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -2821,7 +2930,7 @@
         },
         "OriginalName":{
           "shape":"ResourceNameType",
-          "documentation":"<p>The original name of the resource prior to a rename operation.</p>"
+          "documentation":"<p>The original name of the resource before a rename operation.</p>"
         },
         "Id":{
           "shape":"ResourceIdType",
@@ -2996,6 +3105,17 @@
         "FAILURE"
       ]
     },
+    "SharedLabel":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*"
+    },
+    "SharedLabels":{
+      "type":"list",
+      "member":{"shape":"SharedLabel"},
+      "max":20
+    },
     "SignedHeaderMap":{
       "type":"map",
       "key":{"shape":"HeaderNameType"},
@@ -3124,7 +3244,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -3144,7 +3264,7 @@
         },
         "ResourceState":{
           "shape":"ResourceStateType",
-          "documentation":"<p>The resource state of the document. Note that only ACTIVE and RECYCLED are supported.</p>"
+          "documentation":"<p>The resource state of the document. Only ACTIVE and RECYCLED are supported.</p>"
         }
       }
     },
@@ -3157,7 +3277,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -3185,7 +3305,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -3205,7 +3325,7 @@
         },
         "ResourceState":{
           "shape":"ResourceStateType",
-          "documentation":"<p>The resource state of the folder. Note that only ACTIVE and RECYCLED are accepted values from the API.</p>"
+          "documentation":"<p>The resource state of the folder. Only ACTIVE and RECYCLED are accepted values from the API.</p>"
         }
       }
     },
@@ -3215,7 +3335,7 @@
       "members":{
         "AuthenticationToken":{
           "shape":"AuthenticationHeaderType",
-          "documentation":"<p>Amazon WorkDocs authentication token. This field should not be set when using administrative API actions, as in accessing the API using AWS credentials.</p>",
+          "documentation":"<p>Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.</p>",
           "location":"header",
           "locationName":"Authentication"
         },
@@ -3248,6 +3368,10 @@
         "Locale":{
           "shape":"LocaleType",
           "documentation":"<p>The locale of the user.</p>"
+        },
+        "GrantPoweruserPrivileges":{
+          "shape":"BooleanEnumType",
+          "documentation":"<p>Boolean value to determine whether the user is granted Poweruser privileges.</p>"
         }
       }
     },
@@ -3377,7 +3501,7 @@
         },
         "Username":{
           "shape":"UsernameType",
-          "documentation":"<p>The username of the user.</p>"
+          "documentation":"<p>The name of the user.</p>"
         },
         "GivenName":{
           "shape":"UserAttributeValueType",
@@ -3421,7 +3545,7 @@
       "members":{
         "StorageUtilizedInBytes":{
           "shape":"SizeType",
-          "documentation":"<p>The amount of storage utilized, in bytes.</p>"
+          "documentation":"<p>The amount of storage used, in bytes.</p>"
         },
         "StorageRule":{
           "shape":"StorageRuleType",
@@ -3434,7 +3558,10 @@
       "type":"string",
       "enum":[
         "USER",
-        "ADMIN"
+        "ADMIN",
+        "POWERUSER",
+        "MINIMALUSER",
+        "WORKSPACESUSER"
       ]
     },
     "UsernameType":{
@@ -3444,5 +3571,5 @@
       "pattern":"[\\w\\-+.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]+)?"
     }
   },
-  "documentation":"<p>The WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premise or off-premise file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as anti-virus or data loss prevention. The APIs, in conjunction with Amazon CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs, so the application can take the necessary actions and replace the target file. The application can also choose to email the user if the target file violates the policy.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic and/or record the actions in an Amazon WorkDocs site, in conjunction with Amazon CloudTrails, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs APIs are Amazon authenticated, certificate-signed APIs. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>"
+  "documentation":"<p>The WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premises or off-premises file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as antivirus or data loss prevention. The API actions, along with AWS CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs. Then, the application can take the necessary actions and replace the target file. If the target file violates the policy, the application can also choose to email the user.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic or record the actions in an Amazon WorkDocs site, along with AWS CloudTrail, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>"
 }

@@ -4266,7 +4266,7 @@
         },
         "sdkType":{
           "shape":"String",
-          "documentation":"<p>The language for the generated SDK. Currently <code>java</code>, <code>javascript</code>, <code>android</code>, <code>objectivec</code> and <code>swift</code> (for iOS) are supported.</p>",
+          "documentation":"<p>The language for the generated SDK. Currently <code>java</code>, <code>javascript</code>, <code>android</code>, <code>objectivec</code> (for iOS), <code>swift</code> (for iOS), and <code>ruby</code> are supported.</p>",
           "location":"uri",
           "locationName":"sdk_type"
         },

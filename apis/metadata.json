@@ -455,5 +455,9 @@
   },
   "pricing": {
     "name": "Pricing"
+  },
+  "costexplorer": {
+    "prefix": "ce",
+    "name": "CostExplorer"
   }
 }

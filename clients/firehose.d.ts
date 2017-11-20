@@ -36,14 +36,6 @@ declare class Firehose extends Service {
    */
   describeDeliveryStream(callback?: (err: AWSError, data: Firehose.Types.DescribeDeliveryStreamOutput) => void): Request<Firehose.Types.DescribeDeliveryStreamOutput, AWSError>;
   /**
-   * 
-   */
-  getKinesisStream(params: Firehose.Types.GetKinesisStreamInput, callback?: (err: AWSError, data: Firehose.Types.GetKinesisStreamOutput) => void): Request<Firehose.Types.GetKinesisStreamOutput, AWSError>;
-  /**
-   * 
-   */
-  getKinesisStream(callback?: (err: AWSError, data: Firehose.Types.GetKinesisStreamOutput) => void): Request<Firehose.Types.GetKinesisStreamOutput, AWSError>;
-  /**
    * Lists your delivery streams. The number of delivery streams might be too large to return using a single call to ListDeliveryStreams. You can limit the number of delivery streams returned, using the Limit parameter. To determine whether there are more delivery streams to list, check the value of HasMoreDeliveryStreams in the output. If there are more delivery streams to list, you can request them by specifying the name of the last delivery stream returned in the call in the ExclusiveStartDeliveryStreamName parameter of a subsequent call.
    */
   listDeliveryStreams(params: Firehose.Types.ListDeliveryStreamsInput, callback?: (err: AWSError, data: Firehose.Types.ListDeliveryStreamsOutput) => void): Request<Firehose.Types.ListDeliveryStreamsOutput, AWSError>;
@@ -78,7 +70,6 @@ declare class Firehose extends Service {
 }
 declare namespace Firehose {
   export type AWSKMSKeyARN = string;
-  export type AccessKeyId = string;
   export type BooleanObject = boolean;
   export type BucketARN = string;
   export interface BufferingHints {
@@ -151,6 +142,10 @@ declare namespace Firehose {
      * The destination in Amazon ES. You can specify only one destination.
      */
     ElasticsearchDestinationConfiguration?: ElasticsearchDestinationConfiguration;
+    /**
+     * The destination in Splunk. You can specify only one destination.
+     */
+    SplunkDestinationConfiguration?: SplunkDestinationConfiguration;
   }
   export interface CreateDeliveryStreamOutput {
     /**
@@ -260,6 +255,10 @@ declare namespace Firehose {
      * The destination in Amazon ES.
      */
     ElasticsearchDestinationDescription?: ElasticsearchDestinationDescription;
+    /**
+     * The destination in Splunk.
+     */
+    SplunkDestinationDescription?: SplunkDestinationDescription;
   }
   export type DestinationDescriptionList = DestinationDescription[];
   export type DestinationId = string;
@@ -559,14 +558,10 @@ declare namespace Firehose {
      */
     S3BackupUpdate?: S3DestinationUpdate;
   }
-  export type FirehoseSource = string;
-  export interface GetKinesisStreamInput {
-    DeliveryStreamARN: DeliveryStreamARN;
-  }
-  export interface GetKinesisStreamOutput {
-    KinesisStreamARN?: KinesisStreamARN;
-    CredentialsForReadingKinesisStream?: SessionCredentials;
-  }
+  export type HECAcknowledgmentTimeoutInSeconds = number;
+  export type HECEndpoint = string;
+  export type HECEndpointType = "Raw"|"Event"|string;
+  export type HECToken = string;
   export type IntervalInSeconds = number;
   export interface KMSEncryptionConfig {
     /**
@@ -601,7 +596,7 @@ declare namespace Firehose {
   }
   export interface ListDeliveryStreamsInput {
     /**
-     * The maximum number of delivery streams to list.
+     * The maximum number of delivery streams to list. The default value is 10.
      */
     Limit?: ListDeliveryStreamsInputLimit;
     /**
@@ -662,7 +657,7 @@ declare namespace Firehose {
     ParameterValue: ProcessorParameterValue;
   }
   export type ProcessorParameterList = ProcessorParameter[];
-  export type ProcessorParameterName = "LambdaArn"|"NumberOfRetries"|string;
+  export type ProcessorParameterName = "LambdaArn"|"NumberOfRetries"|"RoleArn"|"BufferSizeInMBs"|"BufferIntervalInSeconds"|string;
   export type ProcessorParameterValue = string;
   export type ProcessorType = "Lambda"|string;
   export interface PutRecordBatchInput {
@@ -958,14 +953,6 @@ declare namespace Firehose {
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
   }
-  export type SecretAccessKey = string;
-  export interface SessionCredentials {
-    AccessKeyId: AccessKeyId;
-    SecretAccessKey: SecretAccessKey;
-    SessionToken: SessionToken;
-    Expiration: Timestamp;
-  }
-  export type SessionToken = string;
   export type SizeInMBs = number;
   export interface SourceDescription {
     /**
@@ -973,6 +960,128 @@ declare namespace Firehose {
      */
     KinesisStreamSourceDescription?: KinesisStreamSourceDescription;
   }
+  export interface SplunkDestinationConfiguration {
+    /**
+     * The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
+     */
+    HECEndpoint: HECEndpoint;
+    /**
+     * This type can be either "Raw" or "Event".
+     */
+    HECEndpointType: HECEndpointType;
+    /**
+     * This is a GUID you obtain from your Splunk cluster when you create a new HEC endpoint.
+     */
+    HECToken: HECToken;
+    /**
+     * The amount of time that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data. At the end of the timeout period Kinesis Firehose either tries to send the data again or considers it an error, based on your retry settings.
+     */
+    HECAcknowledgmentTimeoutInSeconds?: HECAcknowledgmentTimeoutInSeconds;
+    /**
+     * The retry behavior in case Kinesis Firehose is unable to deliver data to Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+     */
+    RetryOptions?: SplunkRetryOptions;
+    /**
+     * Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly, Kinesis Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to AllDocuments, Kinesis Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is FailedDocumentsOnly. 
+     */
+    S3BackupMode?: SplunkS3BackupMode;
+    /**
+     * The configuration for the backup Amazon S3 location.
+     */
+    S3Configuration: S3DestinationConfiguration;
+    /**
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The CloudWatch logging options for your delivery stream.
+     */
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+  }
+  export interface SplunkDestinationDescription {
+    /**
+     * The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
+     */
+    HECEndpoint?: HECEndpoint;
+    /**
+     * This type can be either "Raw" or "Event".
+     */
+    HECEndpointType?: HECEndpointType;
+    /**
+     * This is a GUID you obtain from your Splunk cluster when you create a new HEC endpoint.
+     */
+    HECToken?: HECToken;
+    /**
+     * The amount of time that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data. At the end of the timeout period Kinesis Firehose either tries to send the data again or considers it an error, based on your retry settings.
+     */
+    HECAcknowledgmentTimeoutInSeconds?: HECAcknowledgmentTimeoutInSeconds;
+    /**
+     * The retry behavior in case Kinesis Firehose is unable to deliver data to Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+     */
+    RetryOptions?: SplunkRetryOptions;
+    /**
+     * Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly, Kinesis Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to AllDocuments, Kinesis Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is FailedDocumentsOnly. 
+     */
+    S3BackupMode?: SplunkS3BackupMode;
+    /**
+     * The Amazon S3 destination.&gt;
+     */
+    S3DestinationDescription?: S3DestinationDescription;
+    /**
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The CloudWatch logging options for your delivery stream.
+     */
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+  }
+  export interface SplunkDestinationUpdate {
+    /**
+     * The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
+     */
+    HECEndpoint?: HECEndpoint;
+    /**
+     * This type can be either "Raw" or "Event".
+     */
+    HECEndpointType?: HECEndpointType;
+    /**
+     * This is a GUID you obtain from your Splunk cluster when you create a new HEC endpoint.
+     */
+    HECToken?: HECToken;
+    /**
+     * The amount of time that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data. At the end of the timeout period Kinesis Firehose either tries to send the data again or considers it an error, based on your retry settings.
+     */
+    HECAcknowledgmentTimeoutInSeconds?: HECAcknowledgmentTimeoutInSeconds;
+    /**
+     * The retry behavior in case Kinesis Firehose is unable to deliver data to Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+     */
+    RetryOptions?: SplunkRetryOptions;
+    /**
+     * Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly, Kinesis Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to AllDocuments, Kinesis Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is FailedDocumentsOnly. 
+     */
+    S3BackupMode?: SplunkS3BackupMode;
+    /**
+     * Your update to the configuration of the backup Amazon S3 location.
+     */
+    S3Update?: S3DestinationUpdate;
+    /**
+     * The data processing configuration.
+     */
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * The CloudWatch logging options for your delivery stream.
+     */
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+  }
+  export type SplunkRetryDurationInSeconds = number;
+  export interface SplunkRetryOptions {
+    /**
+     * The total amount of time that Kinesis Firehose spends on retries. This duration starts after the initial attempt to send data to Splunk fails and doesn't include the periods during which Kinesis Firehose waits for acknowledgment from Splunk after each attempt.
+     */
+    DurationInSeconds?: SplunkRetryDurationInSeconds;
+  }
+  export type SplunkS3BackupMode = "FailedEventsOnly"|"AllEvents"|string;
   export type Timestamp = Date;
   export interface UpdateDestinationInput {
     /**
@@ -1003,6 +1112,10 @@ declare namespace Firehose {
      * Describes an update for a destination in Amazon ES.
      */
     ElasticsearchDestinationUpdate?: ElasticsearchDestinationUpdate;
+    /**
+     * Describes an update for a destination in Splunk.
+     */
+    SplunkDestinationUpdate?: SplunkDestinationUpdate;
   }
   export interface UpdateDestinationOutput {
   }
