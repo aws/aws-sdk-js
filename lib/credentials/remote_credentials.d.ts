@@ -15,3 +15,4 @@ export class RemoteCredentials extends Credentials {
         }
         maxRetries?: number
     }
+export class ECSCredentials extends RemoteCredentials
