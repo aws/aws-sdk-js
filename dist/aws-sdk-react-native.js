@@ -381,7 +381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		  /**
 		   * @constant
 		   */
-		  VERSION: '2.155.0',
+		  VERSION: '2.156.0',
 
 		  /**
 		   * @api private
@@ -3040,6 +3040,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		      applyContentTypeHeader(req);
 		    } else { // non-JSON payload
 		      req.httpRequest.body = params;
+		      if (payloadShape.type === 'binary' || payloadShape.isStreaming) {
+		        applyContentTypeHeader(req, true);
+		      }
 		    }
 		  } else {
 		    req.httpRequest.body = builder.build(req.params, input);
@@ -3047,9 +3050,13 @@ return /******/ (function(modules) { // webpackBootstrap
 		  }
 		}
 
-		function applyContentTypeHeader(req) {
+		function applyContentTypeHeader(req, isBinary) {
+		  var operation = req.service.api.operations[req.operation];
+		  var input = operation.input;
+
 		  if (!req.httpRequest.headers['Content-Type']) {
-		    req.httpRequest.headers['Content-Type'] = 'application/json';
+		    var type = isBinary ? 'binary/octet-stream' : 'application/json';
+		    req.httpRequest.headers['Content-Type'] = type;
 		  }
 		}
 
@@ -16853,22 +16860,24 @@ return /******/ (function(modules) { // webpackBootstrap
 		    queryParams = AWS.util.queryStringParse(parsedUrl.search.substr(1));
 		  }
 
-		  AWS.util.each(request.httpRequest.headers, function (key, value) {
-		    if (key === expiresHeader) key = 'Expires';
-		    if (key.indexOf('x-amz-meta-') === 0) {
-		      // Delete existing, potentially not normalized key
-		      delete queryParams[key];
-		      key = key.toLowerCase();
-		    }
-		    queryParams[key] = value;
-		  });
-		  delete request.httpRequest.headers[expiresHeader];
-
-		  var auth = queryParams['Authorization'].split(' ');
+		  var auth = request.httpRequest.headers['Authorization'].split(' ');
 		  if (auth[0] === 'AWS') {
 		    auth = auth[1].split(':');
 		    queryParams['AWSAccessKeyId'] = auth[0];
 		    queryParams['Signature'] = auth[1];
+
+		    AWS.util.each(request.httpRequest.headers, function (key, value) {
+		      if (key === expiresHeader) key = 'Expires';
+		      if (key.indexOf('x-amz-meta-') === 0) {
+		        // Delete existing, potentially not normalized key
+		        delete queryParams[key];
+		        key = key.toLowerCase();
+		      }
+		      queryParams[key] = value;
+		    });
+		    delete request.httpRequest.headers[expiresHeader];
+		    delete queryParams['Authorization'];
+		    delete queryParams['Host'];
 		  } else if (auth[0] === 'AWS4-HMAC-SHA256') { // SigV4 signing
 		    auth.shift();
 		    var rest = auth.join(' ');
@@ -16876,8 +16885,6 @@ return /******/ (function(modules) { // webpackBootstrap
 		    queryParams['X-Amz-Signature'] = signature;
 		    delete queryParams['Expires'];
 		  }
-		  delete queryParams['Authorization'];
-		  delete queryParams['Host'];
 
 		  // build URL
 		  endpoint.pathname = parsedUrl.pathname;
@@ -38301,7 +38308,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 45 */
 /***/ (function(module, exports) {
 
-	module.exports = {"version":"2.0","metadata":{"apiVersion":"2015-12-08","endpointPrefix":"acm","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"ACM","serviceFullName":"AWS Certificate Manager","signatureVersion":"v4","targetPrefix":"CertificateManager","uid":"acm-2015-12-08"},"operations":{"AddTagsToCertificate":{"input":{"type":"structure","required":["CertificateArn","Tags"],"members":{"CertificateArn":{},"Tags":{"shape":"S3"}}}},"DeleteCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}}},"DescribeCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Certificate":{"type":"structure","members":{"CertificateArn":{},"DomainName":{},"SubjectAlternativeNames":{"shape":"Sc"},"DomainValidationOptions":{"shape":"Sd"},"Serial":{},"Subject":{},"Issuer":{},"CreatedAt":{"type":"timestamp"},"IssuedAt":{"type":"timestamp"},"ImportedAt":{"type":"timestamp"},"Status":{},"RevokedAt":{"type":"timestamp"},"RevocationReason":{},"NotBefore":{"type":"timestamp"},"NotAfter":{"type":"timestamp"},"KeyAlgorithm":{},"SignatureAlgorithm":{},"InUseBy":{"type":"list","member":{}},"FailureReason":{},"Type":{},"RenewalSummary":{"type":"structure","required":["RenewalStatus","DomainValidationOptions"],"members":{"RenewalStatus":{},"DomainValidationOptions":{"shape":"Sd"}}}}}}}},"GetCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Certificate":{},"CertificateChain":{}}}},"ImportCertificate":{"input":{"type":"structure","required":["Certificate","PrivateKey"],"members":{"CertificateArn":{},"Certificate":{"type":"blob"},"PrivateKey":{"type":"blob","sensitive":true},"CertificateChain":{"type":"blob"}}},"output":{"type":"structure","members":{"CertificateArn":{}}}},"ListCertificates":{"input":{"type":"structure","members":{"CertificateStatuses":{"type":"list","member":{}},"NextToken":{},"MaxItems":{"type":"integer"}}},"output":{"type":"structure","members":{"NextToken":{},"CertificateSummaryList":{"type":"list","member":{"type":"structure","members":{"CertificateArn":{},"DomainName":{}}}}}}},"ListTagsForCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Tags":{"shape":"S3"}}}},"RemoveTagsFromCertificate":{"input":{"type":"structure","required":["CertificateArn","Tags"],"members":{"CertificateArn":{},"Tags":{"shape":"S3"}}}},"RequestCertificate":{"input":{"type":"structure","required":["DomainName"],"members":{"DomainName":{},"SubjectAlternativeNames":{"shape":"Sc"},"IdempotencyToken":{},"DomainValidationOptions":{"type":"list","member":{"type":"structure","required":["DomainName","ValidationDomain"],"members":{"DomainName":{},"ValidationDomain":{}}}}}},"output":{"type":"structure","members":{"CertificateArn":{}}}},"ResendValidationEmail":{"input":{"type":"structure","required":["CertificateArn","Domain","ValidationDomain"],"members":{"CertificateArn":{},"Domain":{},"ValidationDomain":{}}}}},"shapes":{"S3":{"type":"list","member":{"type":"structure","required":["Key"],"members":{"Key":{},"Value":{}}}},"Sc":{"type":"list","member":{}},"Sd":{"type":"list","member":{"type":"structure","required":["DomainName"],"members":{"DomainName":{},"ValidationEmails":{"type":"list","member":{}},"ValidationDomain":{},"ValidationStatus":{}}}}}}
+	module.exports = {"version":"2.0","metadata":{"apiVersion":"2015-12-08","endpointPrefix":"acm","jsonVersion":"1.1","protocol":"json","serviceAbbreviation":"ACM","serviceFullName":"AWS Certificate Manager","signatureVersion":"v4","targetPrefix":"CertificateManager","uid":"acm-2015-12-08"},"operations":{"AddTagsToCertificate":{"input":{"type":"structure","required":["CertificateArn","Tags"],"members":{"CertificateArn":{},"Tags":{"shape":"S3"}}}},"DeleteCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}}},"DescribeCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Certificate":{"type":"structure","members":{"CertificateArn":{},"DomainName":{},"SubjectAlternativeNames":{"shape":"Sc"},"DomainValidationOptions":{"shape":"Sd"},"Serial":{},"Subject":{},"Issuer":{},"CreatedAt":{"type":"timestamp"},"IssuedAt":{"type":"timestamp"},"ImportedAt":{"type":"timestamp"},"Status":{},"RevokedAt":{"type":"timestamp"},"RevocationReason":{},"NotBefore":{"type":"timestamp"},"NotAfter":{"type":"timestamp"},"KeyAlgorithm":{},"SignatureAlgorithm":{},"InUseBy":{"type":"list","member":{}},"FailureReason":{},"Type":{},"RenewalSummary":{"type":"structure","required":["RenewalStatus","DomainValidationOptions"],"members":{"RenewalStatus":{},"DomainValidationOptions":{"shape":"Sd"}}},"KeyUsages":{"type":"list","member":{"type":"structure","members":{"Name":{}}}},"ExtendedKeyUsages":{"type":"list","member":{"type":"structure","members":{"Name":{},"OID":{}}}}}}}}},"GetCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Certificate":{},"CertificateChain":{}}}},"ImportCertificate":{"input":{"type":"structure","required":["Certificate","PrivateKey"],"members":{"CertificateArn":{},"Certificate":{"type":"blob"},"PrivateKey":{"type":"blob","sensitive":true},"CertificateChain":{"type":"blob"}}},"output":{"type":"structure","members":{"CertificateArn":{}}}},"ListCertificates":{"input":{"type":"structure","members":{"CertificateStatuses":{"type":"list","member":{}},"Includes":{"type":"structure","members":{"extendedKeyUsage":{"type":"list","member":{}},"keyUsage":{"type":"list","member":{}},"keyTypes":{"type":"list","member":{}}}},"NextToken":{},"MaxItems":{"type":"integer"}}},"output":{"type":"structure","members":{"NextToken":{},"CertificateSummaryList":{"type":"list","member":{"type":"structure","members":{"CertificateArn":{},"DomainName":{}}}}}}},"ListTagsForCertificate":{"input":{"type":"structure","required":["CertificateArn"],"members":{"CertificateArn":{}}},"output":{"type":"structure","members":{"Tags":{"shape":"S3"}}}},"RemoveTagsFromCertificate":{"input":{"type":"structure","required":["CertificateArn","Tags"],"members":{"CertificateArn":{},"Tags":{"shape":"S3"}}}},"RequestCertificate":{"input":{"type":"structure","required":["DomainName"],"members":{"DomainName":{},"ValidationMethod":{},"SubjectAlternativeNames":{"shape":"Sc"},"IdempotencyToken":{},"DomainValidationOptions":{"type":"list","member":{"type":"structure","required":["DomainName","ValidationDomain"],"members":{"DomainName":{},"ValidationDomain":{}}}}}},"output":{"type":"structure","members":{"CertificateArn":{}}}},"ResendValidationEmail":{"input":{"type":"structure","required":["CertificateArn","Domain","ValidationDomain"],"members":{"CertificateArn":{},"Domain":{},"ValidationDomain":{}}}}},"shapes":{"S3":{"type":"list","member":{"type":"structure","required":["Key"],"members":{"Key":{},"Value":{}}}},"Sc":{"type":"list","member":{}},"Sd":{"type":"list","member":{"type":"structure","required":["DomainName"],"members":{"DomainName":{},"ValidationEmails":{"type":"list","member":{}},"ValidationDomain":{},"ValidationStatus":{},"ResourceRecord":{"type":"structure","required":["Name","Type","Value"],"members":{"Name":{},"Type":{},"Value":{}}},"ValidationMethod":{}}}}}}
 
 /***/ }),
 /* 46 */

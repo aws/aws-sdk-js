@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.155.0-->
+<!--LATEST=2.156.0-->
 <!--ENTRYINSERT-->
+
+## 2.156.0
+* bugfix: Presigner: Update presigner to only hoist headers in v2
+* feature: ACM: AWS Certificate Manager now supports the ability to import domainless certs and additional Key Types as well as an additional validation method for DNS.
 
 ## 2.155.0
 * feature: APIGateway: Add support for Access logs and customizable integration timeouts

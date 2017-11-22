@@ -80,7 +80,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.155.0',
+	  VERSION: '2.156.0',
 
 	  /**
 	   * @api private
@@ -2739,6 +2739,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      applyContentTypeHeader(req);
 	    } else { // non-JSON payload
 	      req.httpRequest.body = params;
+	      if (payloadShape.type === 'binary' || payloadShape.isStreaming) {
+	        applyContentTypeHeader(req, true);
+	      }
 	    }
 	  } else {
 	    req.httpRequest.body = builder.build(req.params, input);
@@ -2746,9 +2749,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
-	function applyContentTypeHeader(req) {
+	function applyContentTypeHeader(req, isBinary) {
+	  var operation = req.service.api.operations[req.operation];
+	  var input = operation.input;
+
 	  if (!req.httpRequest.headers['Content-Type']) {
-	    req.httpRequest.headers['Content-Type'] = 'application/json';
+	    var type = isBinary ? 'binary/octet-stream' : 'application/json';
+	    req.httpRequest.headers['Content-Type'] = type;
 	  }
 	}
 
@@ -16552,22 +16559,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    queryParams = AWS.util.queryStringParse(parsedUrl.search.substr(1));
 	  }
 
-	  AWS.util.each(request.httpRequest.headers, function (key, value) {
-	    if (key === expiresHeader) key = 'Expires';
-	    if (key.indexOf('x-amz-meta-') === 0) {
-	      // Delete existing, potentially not normalized key
-	      delete queryParams[key];
-	      key = key.toLowerCase();
-	    }
-	    queryParams[key] = value;
-	  });
-	  delete request.httpRequest.headers[expiresHeader];
-
-	  var auth = queryParams['Authorization'].split(' ');
+	  var auth = request.httpRequest.headers['Authorization'].split(' ');
 	  if (auth[0] === 'AWS') {
 	    auth = auth[1].split(':');
 	    queryParams['AWSAccessKeyId'] = auth[0];
 	    queryParams['Signature'] = auth[1];
+
+	    AWS.util.each(request.httpRequest.headers, function (key, value) {
+	      if (key === expiresHeader) key = 'Expires';
+	      if (key.indexOf('x-amz-meta-') === 0) {
+	        // Delete existing, potentially not normalized key
+	        delete queryParams[key];
+	        key = key.toLowerCase();
+	      }
+	      queryParams[key] = value;
+	    });
+	    delete request.httpRequest.headers[expiresHeader];
+	    delete queryParams['Authorization'];
+	    delete queryParams['Host'];
 	  } else if (auth[0] === 'AWS4-HMAC-SHA256') { // SigV4 signing
 	    auth.shift();
 	    var rest = auth.join(' ');
@@ -16575,8 +16584,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    queryParams['X-Amz-Signature'] = signature;
 	    delete queryParams['Expires'];
 	  }
-	  delete queryParams['Authorization'];
-	  delete queryParams['Host'];
 
 	  // build URL
 	  endpoint.pathname = parsedUrl.pathname;

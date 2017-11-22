@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.155.0
+// AWS SDK for JavaScript v2.156.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -109,6 +109,25 @@ module.exports={
                     "shape": "Sd"
                   }
                 }
+              },
+              "KeyUsages": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "Name": {}
+                  }
+                }
+              },
+              "ExtendedKeyUsages": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "Name": {},
+                    "OID": {}
+                  }
+                }
               }
             }
           }
@@ -168,6 +187,23 @@ module.exports={
           "CertificateStatuses": {
             "type": "list",
             "member": {}
+          },
+          "Includes": {
+            "type": "structure",
+            "members": {
+              "extendedKeyUsage": {
+                "type": "list",
+                "member": {}
+              },
+              "keyUsage": {
+                "type": "list",
+                "member": {}
+              },
+              "keyTypes": {
+                "type": "list",
+                "member": {}
+              }
+            }
           },
           "NextToken": {},
           "MaxItems": {
@@ -234,6 +270,7 @@ module.exports={
         ],
         "members": {
           "DomainName": {},
+          "ValidationMethod": {},
           "SubjectAlternativeNames": {
             "shape": "Sc"
           },
@@ -309,7 +346,21 @@ module.exports={
             "member": {}
           },
           "ValidationDomain": {},
-          "ValidationStatus": {}
+          "ValidationStatus": {},
+          "ResourceRecord": {
+            "type": "structure",
+            "required": [
+              "Name",
+              "Type",
+              "Value"
+            ],
+            "members": {
+              "Name": {},
+              "Type": {},
+              "Value": {}
+            }
+          },
+          "ValidationMethod": {}
         }
       }
     }
@@ -113133,7 +113184,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.155.0',
+  VERSION: '2.156.0',
 
 
   Signers: {},
@@ -116370,6 +116421,9 @@ function populateBody(req) {
       applyContentTypeHeader(req);
     } else { // non-JSON payload
       req.httpRequest.body = params;
+      if (payloadShape.type === 'binary' || payloadShape.isStreaming) {
+        applyContentTypeHeader(req, true);
+      }
     }
   } else {
     req.httpRequest.body = builder.build(req.params, input);
@@ -116377,9 +116431,13 @@ function populateBody(req) {
   }
 }
 
-function applyContentTypeHeader(req) {
+function applyContentTypeHeader(req, isBinary) {
+  var operation = req.service.api.operations[req.operation];
+  var input = operation.input;
+
   if (!req.httpRequest.headers['Content-Type']) {
-    req.httpRequest.headers['Content-Type'] = 'application/json';
+    var type = isBinary ? 'binary/octet-stream' : 'application/json';
+    req.httpRequest.headers['Content-Type'] = type;
   }
 }
 
@@ -119898,21 +119956,23 @@ function signedUrlSigner(request) {
     queryParams = AWS.util.queryStringParse(parsedUrl.search.substr(1));
   }
 
-  AWS.util.each(request.httpRequest.headers, function (key, value) {
-    if (key === expiresHeader) key = 'Expires';
-    if (key.indexOf('x-amz-meta-') === 0) {
-      delete queryParams[key];
-      key = key.toLowerCase();
-    }
-    queryParams[key] = value;
-  });
-  delete request.httpRequest.headers[expiresHeader];
-
-  var auth = queryParams['Authorization'].split(' ');
+  var auth = request.httpRequest.headers['Authorization'].split(' ');
   if (auth[0] === 'AWS') {
     auth = auth[1].split(':');
     queryParams['AWSAccessKeyId'] = auth[0];
     queryParams['Signature'] = auth[1];
+
+    AWS.util.each(request.httpRequest.headers, function (key, value) {
+      if (key === expiresHeader) key = 'Expires';
+      if (key.indexOf('x-amz-meta-') === 0) {
+        delete queryParams[key];
+        key = key.toLowerCase();
+      }
+      queryParams[key] = value;
+    });
+    delete request.httpRequest.headers[expiresHeader];
+    delete queryParams['Authorization'];
+    delete queryParams['Host'];
   } else if (auth[0] === 'AWS4-HMAC-SHA256') { // SigV4 signing
     auth.shift();
     var rest = auth.join(' ');
@@ -119920,8 +119980,6 @@ function signedUrlSigner(request) {
     queryParams['X-Amz-Signature'] = signature;
     delete queryParams['Expires'];
   }
-  delete queryParams['Authorization'];
-  delete queryParams['Host'];
 
   endpoint.pathname = parsedUrl.pathname;
   endpoint.search = AWS.util.queryParamsToString(queryParams);
