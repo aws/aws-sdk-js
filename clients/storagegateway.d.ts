@@ -20,11 +20,11 @@ declare class StorageGateway extends Service {
    */
   activateGateway(callback?: (err: AWSError, data: StorageGateway.Types.ActivateGatewayOutput) => void): Request<StorageGateway.Types.ActivateGatewayOutput, AWSError>;
   /**
-   * Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape and file gateway architectures (see Storage Gateway Concepts). In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache.
+   * Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape and file gateway type (see Storage Gateway Concepts). In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache.
    */
   addCache(params: StorageGateway.Types.AddCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.AddCacheOutput) => void): Request<StorageGateway.Types.AddCacheOutput, AWSError>;
   /**
-   * Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape and file gateway architectures (see Storage Gateway Concepts). In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache.
+   * Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape and file gateway type (see Storage Gateway Concepts). In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache.
    */
   addCache(callback?: (err: AWSError, data: StorageGateway.Types.AddCacheOutput) => void): Request<StorageGateway.Types.AddCacheOutput, AWSError>;
   /**
@@ -36,91 +36,91 @@ declare class StorageGateway extends Service {
    */
   addTagsToResource(callback?: (err: AWSError, data: StorageGateway.Types.AddTagsToResourceOutput) => void): Request<StorageGateway.Types.AddTagsToResourceOutput, AWSError>;
   /**
-   * Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume and tape gateway architectures. In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.
+   * Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume and tape gateway types. In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.
    */
   addUploadBuffer(params: StorageGateway.Types.AddUploadBufferInput, callback?: (err: AWSError, data: StorageGateway.Types.AddUploadBufferOutput) => void): Request<StorageGateway.Types.AddUploadBufferOutput, AWSError>;
   /**
-   * Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume and tape gateway architectures. In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.
+   * Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume and tape gateway types. In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.
    */
   addUploadBuffer(callback?: (err: AWSError, data: StorageGateway.Types.AddUploadBufferOutput) => void): Request<StorageGateway.Types.AddUploadBufferOutput, AWSError>;
   /**
-   * Configures one or more gateway local disks as working storage for a gateway. This operation is only supported in the stored volume gateway architecture. This operation is deprecated in cached volume API version 20120630. Use AddUploadBuffer instead.  Working storage is also referred to as upload buffer. You can also use the AddUploadBuffer operation to add upload buffer to a stored volume gateway.  In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add working storage, and one or more disk IDs that you want to configure as working storage.
+   * Configures one or more gateway local disks as working storage for a gateway. This operation is only supported in the stored volume gateway type. This operation is deprecated in cached volume API version 20120630. Use AddUploadBuffer instead.  Working storage is also referred to as upload buffer. You can also use the AddUploadBuffer operation to add upload buffer to a stored volume gateway.  In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add working storage, and one or more disk IDs that you want to configure as working storage.
    */
   addWorkingStorage(params: StorageGateway.Types.AddWorkingStorageInput, callback?: (err: AWSError, data: StorageGateway.Types.AddWorkingStorageOutput) => void): Request<StorageGateway.Types.AddWorkingStorageOutput, AWSError>;
   /**
-   * Configures one or more gateway local disks as working storage for a gateway. This operation is only supported in the stored volume gateway architecture. This operation is deprecated in cached volume API version 20120630. Use AddUploadBuffer instead.  Working storage is also referred to as upload buffer. You can also use the AddUploadBuffer operation to add upload buffer to a stored volume gateway.  In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add working storage, and one or more disk IDs that you want to configure as working storage.
+   * Configures one or more gateway local disks as working storage for a gateway. This operation is only supported in the stored volume gateway type. This operation is deprecated in cached volume API version 20120630. Use AddUploadBuffer instead.  Working storage is also referred to as upload buffer. You can also use the AddUploadBuffer operation to add upload buffer to a stored volume gateway.  In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add working storage, and one or more disk IDs that you want to configure as working storage.
    */
   addWorkingStorage(callback?: (err: AWSError, data: StorageGateway.Types.AddWorkingStorageOutput) => void): Request<StorageGateway.Types.AddWorkingStorageOutput, AWSError>;
   /**
-   * Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving process is initiated. This operation is only supported in the tape gateway architecture.
+   * Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving process is initiated. This operation is only supported in the tape gateway type.
    */
   cancelArchival(params: StorageGateway.Types.CancelArchivalInput, callback?: (err: AWSError, data: StorageGateway.Types.CancelArchivalOutput) => void): Request<StorageGateway.Types.CancelArchivalOutput, AWSError>;
   /**
-   * Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving process is initiated. This operation is only supported in the tape gateway architecture.
+   * Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving process is initiated. This operation is only supported in the tape gateway type.
    */
   cancelArchival(callback?: (err: AWSError, data: StorageGateway.Types.CancelArchivalOutput) => void): Request<StorageGateway.Types.CancelArchivalOutput, AWSError>;
   /**
-   * Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to a gateway after the retrieval process is initiated. The virtual tape is returned to the VTS.
+   * Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to a gateway after the retrieval process is initiated. The virtual tape is returned to the VTS. This operation is only supported in the tape gateway type.
    */
   cancelRetrieval(params: StorageGateway.Types.CancelRetrievalInput, callback?: (err: AWSError, data: StorageGateway.Types.CancelRetrievalOutput) => void): Request<StorageGateway.Types.CancelRetrievalOutput, AWSError>;
   /**
-   * Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to a gateway after the retrieval process is initiated. The virtual tape is returned to the VTS.
+   * Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to a gateway after the retrieval process is initiated. The virtual tape is returned to the VTS. This operation is only supported in the tape gateway type.
    */
   cancelRetrieval(callback?: (err: AWSError, data: StorageGateway.Types.CancelRetrievalOutput) => void): Request<StorageGateway.Types.CancelRetrievalOutput, AWSError>;
   /**
-   * Creates a cached volume on a specified cached volume gateway. This operation is only supported in the cached volume gateway architecture.  Cache storage must be allocated to the gateway before you can create a cached volume. Use the AddCache operation to add cache storage to a gateway.   In the request, you must specify the gateway, size of the volume in bytes, the iSCSI target name, an IP address on which to expose the target, and a unique client token. In response, the gateway creates the volume and returns information about it. This information includes the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target. Optionally, you can provide the ARN for an existing volume as the SourceVolumeARN for this cached volume, which creates an exact copy of the existing volume’s latest recovery point. The VolumeSizeInBytes value must be equal to or larger than the size of the copied volume, in bytes.
+   * Creates a cached volume on a specified cached volume gateway. This operation is only supported in the cached volume gateway type.  Cache storage must be allocated to the gateway before you can create a cached volume. Use the AddCache operation to add cache storage to a gateway.   In the request, you must specify the gateway, size of the volume in bytes, the iSCSI target name, an IP address on which to expose the target, and a unique client token. In response, the gateway creates the volume and returns information about it. This information includes the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target. Optionally, you can provide the ARN for an existing volume as the SourceVolumeARN for this cached volume, which creates an exact copy of the existing volume’s latest recovery point. The VolumeSizeInBytes value must be equal to or larger than the size of the copied volume, in bytes.
    */
   createCachediSCSIVolume(params: StorageGateway.Types.CreateCachediSCSIVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateCachediSCSIVolumeOutput) => void): Request<StorageGateway.Types.CreateCachediSCSIVolumeOutput, AWSError>;
   /**
-   * Creates a cached volume on a specified cached volume gateway. This operation is only supported in the cached volume gateway architecture.  Cache storage must be allocated to the gateway before you can create a cached volume. Use the AddCache operation to add cache storage to a gateway.   In the request, you must specify the gateway, size of the volume in bytes, the iSCSI target name, an IP address on which to expose the target, and a unique client token. In response, the gateway creates the volume and returns information about it. This information includes the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target. Optionally, you can provide the ARN for an existing volume as the SourceVolumeARN for this cached volume, which creates an exact copy of the existing volume’s latest recovery point. The VolumeSizeInBytes value must be equal to or larger than the size of the copied volume, in bytes.
+   * Creates a cached volume on a specified cached volume gateway. This operation is only supported in the cached volume gateway type.  Cache storage must be allocated to the gateway before you can create a cached volume. Use the AddCache operation to add cache storage to a gateway.   In the request, you must specify the gateway, size of the volume in bytes, the iSCSI target name, an IP address on which to expose the target, and a unique client token. In response, the gateway creates the volume and returns information about it. This information includes the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target. Optionally, you can provide the ARN for an existing volume as the SourceVolumeARN for this cached volume, which creates an exact copy of the existing volume’s latest recovery point. The VolumeSizeInBytes value must be equal to or larger than the size of the copied volume, in bytes.
    */
   createCachediSCSIVolume(callback?: (err: AWSError, data: StorageGateway.Types.CreateCachediSCSIVolumeOutput) => void): Request<StorageGateway.Types.CreateCachediSCSIVolumeOutput, AWSError>;
   /**
-   * Creates a file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a Network File System (NFS) interface. This operation is only supported in the file gateway architecture.  File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateway does not support creating hard or symbolic links on a file share. 
+   * Creates a file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a Network File System (NFS) interface. This operation is only supported in the file gateway type.  File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateway does not support creating hard or symbolic links on a file share. 
    */
   createNFSFileShare(params: StorageGateway.Types.CreateNFSFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateNFSFileShareOutput) => void): Request<StorageGateway.Types.CreateNFSFileShareOutput, AWSError>;
   /**
-   * Creates a file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a Network File System (NFS) interface. This operation is only supported in the file gateway architecture.  File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateway does not support creating hard or symbolic links on a file share. 
+   * Creates a file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a Network File System (NFS) interface. This operation is only supported in the file gateway type.  File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateway does not support creating hard or symbolic links on a file share. 
    */
   createNFSFileShare(callback?: (err: AWSError, data: StorageGateway.Types.CreateNFSFileShareOutput) => void): Request<StorageGateway.Types.CreateNFSFileShareOutput, AWSError>;
   /**
-   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad-hoc basis. This API enables you to take ad-hoc snapshot. For more information, see Editing a Snapshot Schedule. In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway architecture.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the EC2 API reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
+   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad-hoc basis. This API enables you to take ad-hoc snapshot. For more information, see Editing a Snapshot Schedule. In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the EC2 API reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
    */
   createSnapshot(params: StorageGateway.Types.CreateSnapshotInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateSnapshotOutput) => void): Request<StorageGateway.Types.CreateSnapshotOutput, AWSError>;
   /**
-   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad-hoc basis. This API enables you to take ad-hoc snapshot. For more information, see Editing a Snapshot Schedule. In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway architecture.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the EC2 API reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
+   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad-hoc basis. This API enables you to take ad-hoc snapshot. For more information, see Editing a Snapshot Schedule. In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the EC2 API reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
    */
   createSnapshot(callback?: (err: AWSError, data: StorageGateway.Types.CreateSnapshotOutput) => void): Request<StorageGateway.Types.CreateSnapshotOutput, AWSError>;
   /**
-   * Initiates a snapshot of a gateway from a volume recovery point. This operation is only supported in the cached volume gateway architecture. A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot. To get a list of volume recovery point for cached volume gateway, use ListVolumeRecoveryPoints. In the CreateSnapshotFromVolumeRecoveryPoint request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide a description for the snapshot. When the gateway takes a snapshot of the specified volume, the snapshot and its description appear in the AWS Storage Gateway console. In response, the gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, in Amazon Elastic Compute Cloud API Reference. 
+   * Initiates a snapshot of a gateway from a volume recovery point. This operation is only supported in the cached volume gateway type. A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot. To get a list of volume recovery point for cached volume gateway, use ListVolumeRecoveryPoints. In the CreateSnapshotFromVolumeRecoveryPoint request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide a description for the snapshot. When the gateway takes a snapshot of the specified volume, the snapshot and its description appear in the AWS Storage Gateway console. In response, the gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, in Amazon Elastic Compute Cloud API Reference. 
    */
   createSnapshotFromVolumeRecoveryPoint(params: StorageGateway.Types.CreateSnapshotFromVolumeRecoveryPointInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateSnapshotFromVolumeRecoveryPointOutput) => void): Request<StorageGateway.Types.CreateSnapshotFromVolumeRecoveryPointOutput, AWSError>;
   /**
-   * Initiates a snapshot of a gateway from a volume recovery point. This operation is only supported in the cached volume gateway architecture. A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot. To get a list of volume recovery point for cached volume gateway, use ListVolumeRecoveryPoints. In the CreateSnapshotFromVolumeRecoveryPoint request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide a description for the snapshot. When the gateway takes a snapshot of the specified volume, the snapshot and its description appear in the AWS Storage Gateway console. In response, the gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, in Amazon Elastic Compute Cloud API Reference. 
+   * Initiates a snapshot of a gateway from a volume recovery point. This operation is only supported in the cached volume gateway type. A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot. To get a list of volume recovery point for cached volume gateway, use ListVolumeRecoveryPoints. In the CreateSnapshotFromVolumeRecoveryPoint request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide a description for the snapshot. When the gateway takes a snapshot of the specified volume, the snapshot and its description appear in the AWS Storage Gateway console. In response, the gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, in Amazon Elastic Compute Cloud API Reference. 
    */
   createSnapshotFromVolumeRecoveryPoint(callback?: (err: AWSError, data: StorageGateway.Types.CreateSnapshotFromVolumeRecoveryPointOutput) => void): Request<StorageGateway.Types.CreateSnapshotFromVolumeRecoveryPointOutput, AWSError>;
   /**
-   * Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway architecture. The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased. In the request you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
+   * Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway type. The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased. In the request you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
    */
   createStorediSCSIVolume(params: StorageGateway.Types.CreateStorediSCSIVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateStorediSCSIVolumeOutput) => void): Request<StorageGateway.Types.CreateStorediSCSIVolumeOutput, AWSError>;
   /**
-   * Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway architecture. The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased. In the request you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
+   * Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway type. The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased. In the request you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
    */
   createStorediSCSIVolume(callback?: (err: AWSError, data: StorageGateway.Types.CreateStorediSCSIVolumeOutput) => void): Request<StorageGateway.Types.CreateStorediSCSIVolumeOutput, AWSError>;
   /**
-   * Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and can not be reused if it has already been used on a tape . This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway. architecture.  Cache storage must be allocated to the gateway before you can create a virtual tape. Use the AddCache operation to add cache storage to a gateway. 
+   * Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and can not be reused if it has already been used on a tape . This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.  Cache storage must be allocated to the gateway before you can create a virtual tape. Use the AddCache operation to add cache storage to a gateway. 
    */
   createTapeWithBarcode(params: StorageGateway.Types.CreateTapeWithBarcodeInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateTapeWithBarcodeOutput) => void): Request<StorageGateway.Types.CreateTapeWithBarcodeOutput, AWSError>;
   /**
-   * Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and can not be reused if it has already been used on a tape . This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway. architecture.  Cache storage must be allocated to the gateway before you can create a virtual tape. Use the AddCache operation to add cache storage to a gateway. 
+   * Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and can not be reused if it has already been used on a tape . This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.  Cache storage must be allocated to the gateway before you can create a virtual tape. Use the AddCache operation to add cache storage to a gateway. 
    */
   createTapeWithBarcode(callback?: (err: AWSError, data: StorageGateway.Types.CreateTapeWithBarcodeOutput) => void): Request<StorageGateway.Types.CreateTapeWithBarcodeOutput, AWSError>;
   /**
-   * Creates one or more virtual tapes. You write data to the virtual tapes and then archive the tapes. This operation is only supported in the tape gateway architecture.  Cache storage must be allocated to the gateway before you can create virtual tapes. Use the AddCache operation to add cache storage to a gateway.  
+   * Creates one or more virtual tapes. You write data to the virtual tapes and then archive the tapes. This operation is only supported in the tape gateway type.  Cache storage must be allocated to the gateway before you can create virtual tapes. Use the AddCache operation to add cache storage to a gateway.  
    */
   createTapes(params: StorageGateway.Types.CreateTapesInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateTapesOutput) => void): Request<StorageGateway.Types.CreateTapesOutput, AWSError>;
   /**
-   * Creates one or more virtual tapes. You write data to the virtual tapes and then archive the tapes. This operation is only supported in the tape gateway architecture.  Cache storage must be allocated to the gateway before you can create virtual tapes. Use the AddCache operation to add cache storage to a gateway.  
+   * Creates one or more virtual tapes. You write data to the virtual tapes and then archive the tapes. This operation is only supported in the tape gateway type.  Cache storage must be allocated to the gateway before you can create virtual tapes. Use the AddCache operation to add cache storage to a gateway.  
    */
   createTapes(callback?: (err: AWSError, data: StorageGateway.Types.CreateTapesOutput) => void): Request<StorageGateway.Types.CreateTapesOutput, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class StorageGateway extends Service {
    */
   deleteChapCredentials(callback?: (err: AWSError, data: StorageGateway.Types.DeleteChapCredentialsOutput) => void): Request<StorageGateway.Types.DeleteChapCredentialsOutput, AWSError>;
   /**
-   * Deletes a file share from a file gateway. This operation is only supported in the file gateway architecture.
+   * Deletes a file share from a file gateway. This operation is only supported in the file gateway type.
    */
   deleteFileShare(params: StorageGateway.Types.DeleteFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteFileShareOutput) => void): Request<StorageGateway.Types.DeleteFileShareOutput, AWSError>;
   /**
-   * Deletes a file share from a file gateway. This operation is only supported in the file gateway architecture.
+   * Deletes a file share from a file gateway. This operation is only supported in the file gateway type.
    */
   deleteFileShare(callback?: (err: AWSError, data: StorageGateway.Types.DeleteFileShareOutput) => void): Request<StorageGateway.Types.DeleteFileShareOutput, AWSError>;
   /**
@@ -156,35 +156,35 @@ declare class StorageGateway extends Service {
    */
   deleteGateway(callback?: (err: AWSError, data: StorageGateway.Types.DeleteGatewayOutput) => void): Request<StorageGateway.Types.DeleteGatewayOutput, AWSError>;
   /**
-   * Deletes a snapshot of a volume. You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see Working with Snapshots. In the DeleteSnapshotSchedule request, you identify the volume by providing its Amazon Resource Name (ARN).   To list or delete a snapshot, you must use the Amazon EC2 API. in Amazon Elastic Compute Cloud API Reference. 
+   * Deletes a snapshot of a volume. You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see Working with Snapshots. In the DeleteSnapshotSchedule request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.  To list or delete a snapshot, you must use the Amazon EC2 API. in Amazon Elastic Compute Cloud API Reference. 
    */
   deleteSnapshotSchedule(params: StorageGateway.Types.DeleteSnapshotScheduleInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteSnapshotScheduleOutput) => void): Request<StorageGateway.Types.DeleteSnapshotScheduleOutput, AWSError>;
   /**
-   * Deletes a snapshot of a volume. You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see Working with Snapshots. In the DeleteSnapshotSchedule request, you identify the volume by providing its Amazon Resource Name (ARN).   To list or delete a snapshot, you must use the Amazon EC2 API. in Amazon Elastic Compute Cloud API Reference. 
+   * Deletes a snapshot of a volume. You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see Working with Snapshots. In the DeleteSnapshotSchedule request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.  To list or delete a snapshot, you must use the Amazon EC2 API. in Amazon Elastic Compute Cloud API Reference. 
    */
   deleteSnapshotSchedule(callback?: (err: AWSError, data: StorageGateway.Types.DeleteSnapshotScheduleOutput) => void): Request<StorageGateway.Types.DeleteSnapshotScheduleOutput, AWSError>;
   /**
-   * Deletes the specified virtual tape. This operation is only supported in the tape gateway architecture.
+   * Deletes the specified virtual tape. This operation is only supported in the tape gateway type.
    */
   deleteTape(params: StorageGateway.Types.DeleteTapeInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteTapeOutput) => void): Request<StorageGateway.Types.DeleteTapeOutput, AWSError>;
   /**
-   * Deletes the specified virtual tape. This operation is only supported in the tape gateway architecture.
+   * Deletes the specified virtual tape. This operation is only supported in the tape gateway type.
    */
   deleteTape(callback?: (err: AWSError, data: StorageGateway.Types.DeleteTapeOutput) => void): Request<StorageGateway.Types.DeleteTapeOutput, AWSError>;
   /**
-   * Deletes the specified virtual tape from the virtual tape shelf (VTS). This operation is only supported in the tape gateway architecture.
+   * Deletes the specified virtual tape from the virtual tape shelf (VTS). This operation is only supported in the tape gateway type.
    */
   deleteTapeArchive(params: StorageGateway.Types.DeleteTapeArchiveInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteTapeArchiveOutput) => void): Request<StorageGateway.Types.DeleteTapeArchiveOutput, AWSError>;
   /**
-   * Deletes the specified virtual tape from the virtual tape shelf (VTS). This operation is only supported in the tape gateway architecture.
+   * Deletes the specified virtual tape from the virtual tape shelf (VTS). This operation is only supported in the tape gateway type.
    */
   deleteTapeArchive(callback?: (err: AWSError, data: StorageGateway.Types.DeleteTapeArchiveOutput) => void): Request<StorageGateway.Types.DeleteTapeArchiveOutput, AWSError>;
   /**
-   * Deletes the specified storage volume that you previously created using the CreateCachediSCSIVolume or CreateStorediSCSIVolume API. This operation is only supported in the cached volume and stored volume architectures. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume.  Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference. In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.
+   * Deletes the specified storage volume that you previously created using the CreateCachediSCSIVolume or CreateStorediSCSIVolume API. This operation is only supported in the cached volume and stored volume types. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume.  Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference. In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.
    */
   deleteVolume(params: StorageGateway.Types.DeleteVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteVolumeOutput) => void): Request<StorageGateway.Types.DeleteVolumeOutput, AWSError>;
   /**
-   * Deletes the specified storage volume that you previously created using the CreateCachediSCSIVolume or CreateStorediSCSIVolume API. This operation is only supported in the cached volume and stored volume architectures. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume.  Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference. In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.
+   * Deletes the specified storage volume that you previously created using the CreateCachediSCSIVolume or CreateStorediSCSIVolume API. This operation is only supported in the cached volume and stored volume types. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume.  Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference. In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.
    */
   deleteVolume(callback?: (err: AWSError, data: StorageGateway.Types.DeleteVolumeOutput) => void): Request<StorageGateway.Types.DeleteVolumeOutput, AWSError>;
   /**
@@ -196,19 +196,19 @@ declare class StorageGateway extends Service {
    */
   describeBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitOutput, AWSError>;
   /**
-   * Returns information about the cache of a gateway. This operation is only supported in the cached volume,tape and file gateway architectures. The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used.
+   * Returns information about the cache of a gateway. This operation is only supported in the cached volume, tape and file gateway types. The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used.
    */
   describeCache(params: StorageGateway.Types.DescribeCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeCacheOutput) => void): Request<StorageGateway.Types.DescribeCacheOutput, AWSError>;
   /**
-   * Returns information about the cache of a gateway. This operation is only supported in the cached volume,tape and file gateway architectures. The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used.
+   * Returns information about the cache of a gateway. This operation is only supported in the cached volume, tape and file gateway types. The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used.
    */
   describeCache(callback?: (err: AWSError, data: StorageGateway.Types.DescribeCacheOutput) => void): Request<StorageGateway.Types.DescribeCacheOutput, AWSError>;
   /**
-   * Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway architecture. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).
+   * Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway types. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).
    */
   describeCachediSCSIVolumes(params: StorageGateway.Types.DescribeCachediSCSIVolumesInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeCachediSCSIVolumesOutput) => void): Request<StorageGateway.Types.DescribeCachediSCSIVolumesOutput, AWSError>;
   /**
-   * Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway architecture. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).
+   * Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway types. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).
    */
   describeCachediSCSIVolumes(callback?: (err: AWSError, data: StorageGateway.Types.DescribeCachediSCSIVolumesOutput) => void): Request<StorageGateway.Types.DescribeCachediSCSIVolumesOutput, AWSError>;
   /**
@@ -236,91 +236,91 @@ declare class StorageGateway extends Service {
    */
   describeMaintenanceStartTime(callback?: (err: AWSError, data: StorageGateway.Types.DescribeMaintenanceStartTimeOutput) => void): Request<StorageGateway.Types.DescribeMaintenanceStartTimeOutput, AWSError>;
   /**
-   * Gets a description for one or more file shares from a file gateway. This operation is only supported in file gateways.
+   * Gets a description for one or more file shares from a file gateway. This operation is only supported in the file gateway type.
    */
   describeNFSFileShares(params: StorageGateway.Types.DescribeNFSFileSharesInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeNFSFileSharesOutput) => void): Request<StorageGateway.Types.DescribeNFSFileSharesOutput, AWSError>;
   /**
-   * Gets a description for one or more file shares from a file gateway. This operation is only supported in file gateways.
+   * Gets a description for one or more file shares from a file gateway. This operation is only supported in the file gateway type.
    */
   describeNFSFileShares(callback?: (err: AWSError, data: StorageGateway.Types.DescribeNFSFileSharesOutput) => void): Request<StorageGateway.Types.DescribeNFSFileSharesOutput, AWSError>;
   /**
-   * Describes the snapshot schedule for the specified gateway volume. The snapshot schedule information includes intervals at which snapshots are automatically initiated on the volume. This operation is only supported in the cached volume and stored volume architectures.
+   * Describes the snapshot schedule for the specified gateway volume. The snapshot schedule information includes intervals at which snapshots are automatically initiated on the volume. This operation is only supported in the cached volume and stored volume types.
    */
   describeSnapshotSchedule(params: StorageGateway.Types.DescribeSnapshotScheduleInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeSnapshotScheduleOutput) => void): Request<StorageGateway.Types.DescribeSnapshotScheduleOutput, AWSError>;
   /**
-   * Describes the snapshot schedule for the specified gateway volume. The snapshot schedule information includes intervals at which snapshots are automatically initiated on the volume. This operation is only supported in the cached volume and stored volume architectures.
+   * Describes the snapshot schedule for the specified gateway volume. The snapshot schedule information includes intervals at which snapshots are automatically initiated on the volume. This operation is only supported in the cached volume and stored volume types.
    */
   describeSnapshotSchedule(callback?: (err: AWSError, data: StorageGateway.Types.DescribeSnapshotScheduleOutput) => void): Request<StorageGateway.Types.DescribeSnapshotScheduleOutput, AWSError>;
   /**
-   * Returns the description of the gateway volumes specified in the request. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume ARNs. This operation is only supported in stored volume gateway architecture.
+   * Returns the description of the gateway volumes specified in the request. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume ARNs. This operation is only supported in stored volume gateway type.
    */
   describeStorediSCSIVolumes(params: StorageGateway.Types.DescribeStorediSCSIVolumesInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeStorediSCSIVolumesOutput) => void): Request<StorageGateway.Types.DescribeStorediSCSIVolumesOutput, AWSError>;
   /**
-   * Returns the description of the gateway volumes specified in the request. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume ARNs. This operation is only supported in stored volume gateway architecture.
+   * Returns the description of the gateway volumes specified in the request. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume ARNs. This operation is only supported in stored volume gateway type.
    */
   describeStorediSCSIVolumes(callback?: (err: AWSError, data: StorageGateway.Types.DescribeStorediSCSIVolumesOutput) => void): Request<StorageGateway.Types.DescribeStorediSCSIVolumesOutput, AWSError>;
   /**
-   * Returns a description of specified virtual tapes in the virtual tape shelf (VTS). This operation is only supported in the tape gateway architecture. If a specific TapeARN is not specified, AWS Storage Gateway returns a description of all virtual tapes found in the VTS associated with your account.
+   * Returns a description of specified virtual tapes in the virtual tape shelf (VTS). This operation is only supported in the tape gateway type. If a specific TapeARN is not specified, AWS Storage Gateway returns a description of all virtual tapes found in the VTS associated with your account.
    */
   describeTapeArchives(params: StorageGateway.Types.DescribeTapeArchivesInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeTapeArchivesOutput) => void): Request<StorageGateway.Types.DescribeTapeArchivesOutput, AWSError>;
   /**
-   * Returns a description of specified virtual tapes in the virtual tape shelf (VTS). This operation is only supported in the tape gateway architecture. If a specific TapeARN is not specified, AWS Storage Gateway returns a description of all virtual tapes found in the VTS associated with your account.
+   * Returns a description of specified virtual tapes in the virtual tape shelf (VTS). This operation is only supported in the tape gateway type. If a specific TapeARN is not specified, AWS Storage Gateway returns a description of all virtual tapes found in the VTS associated with your account.
    */
   describeTapeArchives(callback?: (err: AWSError, data: StorageGateway.Types.DescribeTapeArchivesOutput) => void): Request<StorageGateway.Types.DescribeTapeArchivesOutput, AWSError>;
   /**
-   * Returns a list of virtual tape recovery points that are available for the specified tape gateway. A recovery point is a point-in-time view of a virtual tape at which all the data on the virtual tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway. This operation is only supported in the tape gateway architecture.
+   * Returns a list of virtual tape recovery points that are available for the specified tape gateway. A recovery point is a point-in-time view of a virtual tape at which all the data on the virtual tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway. This operation is only supported in the tape gateway type.
    */
   describeTapeRecoveryPoints(params: StorageGateway.Types.DescribeTapeRecoveryPointsInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeTapeRecoveryPointsOutput) => void): Request<StorageGateway.Types.DescribeTapeRecoveryPointsOutput, AWSError>;
   /**
-   * Returns a list of virtual tape recovery points that are available for the specified tape gateway. A recovery point is a point-in-time view of a virtual tape at which all the data on the virtual tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway. This operation is only supported in the tape gateway architecture.
+   * Returns a list of virtual tape recovery points that are available for the specified tape gateway. A recovery point is a point-in-time view of a virtual tape at which all the data on the virtual tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway. This operation is only supported in the tape gateway type.
    */
   describeTapeRecoveryPoints(callback?: (err: AWSError, data: StorageGateway.Types.DescribeTapeRecoveryPointsOutput) => void): Request<StorageGateway.Types.DescribeTapeRecoveryPointsOutput, AWSError>;
   /**
-   * Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes. If a TapeARN is not specified, returns a description of all virtual tapes associated with the specified gateway. This operation is only supported in the tape gateway architecture.
+   * Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes. If a TapeARN is not specified, returns a description of all virtual tapes associated with the specified gateway. This operation is only supported in the tape gateway type.
    */
   describeTapes(params: StorageGateway.Types.DescribeTapesInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeTapesOutput) => void): Request<StorageGateway.Types.DescribeTapesOutput, AWSError>;
   /**
-   * Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes. If a TapeARN is not specified, returns a description of all virtual tapes associated with the specified gateway. This operation is only supported in the tape gateway architecture.
+   * Returns a description of the specified Amazon Resource Name (ARN) of virtual tapes. If a TapeARN is not specified, returns a description of all virtual tapes associated with the specified gateway. This operation is only supported in the tape gateway type.
    */
   describeTapes(callback?: (err: AWSError, data: StorageGateway.Types.DescribeTapesOutput) => void): Request<StorageGateway.Types.DescribeTapesOutput, AWSError>;
   /**
-   * Returns information about the upload buffer of a gateway. This operation is supported for the stored volume, cached volume and tape gateway architectures. The response includes disk IDs that are configured as upload buffer space, and it includes the amount of upload buffer space allocated and used.
+   * Returns information about the upload buffer of a gateway. This operation is supported for the stored volume, cached volume and tape gateway types. The response includes disk IDs that are configured as upload buffer space, and it includes the amount of upload buffer space allocated and used.
    */
   describeUploadBuffer(params: StorageGateway.Types.DescribeUploadBufferInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeUploadBufferOutput) => void): Request<StorageGateway.Types.DescribeUploadBufferOutput, AWSError>;
   /**
-   * Returns information about the upload buffer of a gateway. This operation is supported for the stored volume, cached volume and tape gateway architectures. The response includes disk IDs that are configured as upload buffer space, and it includes the amount of upload buffer space allocated and used.
+   * Returns information about the upload buffer of a gateway. This operation is supported for the stored volume, cached volume and tape gateway types. The response includes disk IDs that are configured as upload buffer space, and it includes the amount of upload buffer space allocated and used.
    */
   describeUploadBuffer(callback?: (err: AWSError, data: StorageGateway.Types.DescribeUploadBufferOutput) => void): Request<StorageGateway.Types.DescribeUploadBufferOutput, AWSError>;
   /**
-   * Returns a description of virtual tape library (VTL) devices for the specified tape gateway. In the response, AWS Storage Gateway returns VTL device information. This operation is only supported in the tape gateway architecture.
+   * Returns a description of virtual tape library (VTL) devices for the specified tape gateway. In the response, AWS Storage Gateway returns VTL device information. This operation is only supported in the tape gateway type.
    */
   describeVTLDevices(params: StorageGateway.Types.DescribeVTLDevicesInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeVTLDevicesOutput) => void): Request<StorageGateway.Types.DescribeVTLDevicesOutput, AWSError>;
   /**
-   * Returns a description of virtual tape library (VTL) devices for the specified tape gateway. In the response, AWS Storage Gateway returns VTL device information. This operation is only supported in the tape gateway architecture.
+   * Returns a description of virtual tape library (VTL) devices for the specified tape gateway. In the response, AWS Storage Gateway returns VTL device information. This operation is only supported in the tape gateway type.
    */
   describeVTLDevices(callback?: (err: AWSError, data: StorageGateway.Types.DescribeVTLDevicesOutput) => void): Request<StorageGateway.Types.DescribeVTLDevicesOutput, AWSError>;
   /**
-   * Returns information about the working storage of a gateway. This operation is only supported in the stored volumes gateway architecture. This operation is deprecated in cached volumes API version (20120630). Use DescribeUploadBuffer instead.  Working storage is also referred to as upload buffer. You can also use the DescribeUploadBuffer operation to add upload buffer to a stored volume gateway.  The response includes disk IDs that are configured as working storage, and it includes the amount of working storage allocated and used.
+   * Returns information about the working storage of a gateway. This operation is only supported in the stored volumes gateway type. This operation is deprecated in cached volumes API version (20120630). Use DescribeUploadBuffer instead.  Working storage is also referred to as upload buffer. You can also use the DescribeUploadBuffer operation to add upload buffer to a stored volume gateway.  The response includes disk IDs that are configured as working storage, and it includes the amount of working storage allocated and used.
    */
   describeWorkingStorage(params: StorageGateway.Types.DescribeWorkingStorageInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeWorkingStorageOutput) => void): Request<StorageGateway.Types.DescribeWorkingStorageOutput, AWSError>;
   /**
-   * Returns information about the working storage of a gateway. This operation is only supported in the stored volumes gateway architecture. This operation is deprecated in cached volumes API version (20120630). Use DescribeUploadBuffer instead.  Working storage is also referred to as upload buffer. You can also use the DescribeUploadBuffer operation to add upload buffer to a stored volume gateway.  The response includes disk IDs that are configured as working storage, and it includes the amount of working storage allocated and used.
+   * Returns information about the working storage of a gateway. This operation is only supported in the stored volumes gateway type. This operation is deprecated in cached volumes API version (20120630). Use DescribeUploadBuffer instead.  Working storage is also referred to as upload buffer. You can also use the DescribeUploadBuffer operation to add upload buffer to a stored volume gateway.  The response includes disk IDs that are configured as working storage, and it includes the amount of working storage allocated and used.
    */
   describeWorkingStorage(callback?: (err: AWSError, data: StorageGateway.Types.DescribeWorkingStorageOutput) => void): Request<StorageGateway.Types.DescribeWorkingStorageOutput, AWSError>;
   /**
-   * Disables a tape gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes. Use this operation for a tape gateway that is not reachable or not functioning. This operation is only supported in the tape gateway architectures.  Once a gateway is disabled it cannot be enabled. 
+   * Disables a tape gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes. Use this operation for a tape gateway that is not reachable or not functioning. This operation is only supported in the tape gateway type.  Once a gateway is disabled it cannot be enabled. 
    */
   disableGateway(params: StorageGateway.Types.DisableGatewayInput, callback?: (err: AWSError, data: StorageGateway.Types.DisableGatewayOutput) => void): Request<StorageGateway.Types.DisableGatewayOutput, AWSError>;
   /**
-   * Disables a tape gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes. Use this operation for a tape gateway that is not reachable or not functioning. This operation is only supported in the tape gateway architectures.  Once a gateway is disabled it cannot be enabled. 
+   * Disables a tape gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes. Use this operation for a tape gateway that is not reachable or not functioning. This operation is only supported in the tape gateway type.  Once a gateway is disabled it cannot be enabled. 
    */
   disableGateway(callback?: (err: AWSError, data: StorageGateway.Types.DisableGatewayOutput) => void): Request<StorageGateway.Types.DisableGatewayOutput, AWSError>;
   /**
-   * Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported in the file gateway architecture.
+   * Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported in the file gateway type.
    */
   listFileShares(params: StorageGateway.Types.ListFileSharesInput, callback?: (err: AWSError, data: StorageGateway.Types.ListFileSharesOutput) => void): Request<StorageGateway.Types.ListFileSharesOutput, AWSError>;
   /**
-   * Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported in the file gateway architecture.
+   * Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported in the file gateway type.
    */
   listFileShares(callback?: (err: AWSError, data: StorageGateway.Types.ListFileSharesOutput) => void): Request<StorageGateway.Types.ListFileSharesOutput, AWSError>;
   /**
@@ -340,83 +340,91 @@ declare class StorageGateway extends Service {
    */
   listLocalDisks(callback?: (err: AWSError, data: StorageGateway.Types.ListLocalDisksOutput) => void): Request<StorageGateway.Types.ListLocalDisksOutput, AWSError>;
   /**
-   * Lists the tags that have been added to the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway architecture.
+   * Lists the tags that have been added to the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway type.
    */
   listTagsForResource(params: StorageGateway.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: StorageGateway.Types.ListTagsForResourceOutput) => void): Request<StorageGateway.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Lists the tags that have been added to the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway architecture.
+   * Lists the tags that have been added to the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway type.
    */
   listTagsForResource(callback?: (err: AWSError, data: StorageGateway.Types.ListTagsForResourceOutput) => void): Request<StorageGateway.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Lists virtual tapes in your virtual tape library (VTL) and your virtual tape shelf (VTS). You specify the tapes to list by specifying one or more tape Amazon Resource Names (ARNs). If you don't specify a tape ARN, the operation lists all virtual tapes in both your VTL and VTS. This operation supports pagination. By default, the operation returns a maximum of up to 100 tapes. You can optionally specify the Limit parameter in the body to limit the number of tapes in the response. If the number of tapes returned in the response is truncated, the response includes a Marker element that you can use in your subsequent request to retrieve the next set of tapes. This operation is only supported in the tape gateway architecture.
+   * Lists virtual tapes in your virtual tape library (VTL) and your virtual tape shelf (VTS). You specify the tapes to list by specifying one or more tape Amazon Resource Names (ARNs). If you don't specify a tape ARN, the operation lists all virtual tapes in both your VTL and VTS. This operation supports pagination. By default, the operation returns a maximum of up to 100 tapes. You can optionally specify the Limit parameter in the body to limit the number of tapes in the response. If the number of tapes returned in the response is truncated, the response includes a Marker element that you can use in your subsequent request to retrieve the next set of tapes. This operation is only supported in the tape gateway type.
    */
   listTapes(params: StorageGateway.Types.ListTapesInput, callback?: (err: AWSError, data: StorageGateway.Types.ListTapesOutput) => void): Request<StorageGateway.Types.ListTapesOutput, AWSError>;
   /**
-   * Lists virtual tapes in your virtual tape library (VTL) and your virtual tape shelf (VTS). You specify the tapes to list by specifying one or more tape Amazon Resource Names (ARNs). If you don't specify a tape ARN, the operation lists all virtual tapes in both your VTL and VTS. This operation supports pagination. By default, the operation returns a maximum of up to 100 tapes. You can optionally specify the Limit parameter in the body to limit the number of tapes in the response. If the number of tapes returned in the response is truncated, the response includes a Marker element that you can use in your subsequent request to retrieve the next set of tapes. This operation is only supported in the tape gateway architecture.
+   * Lists virtual tapes in your virtual tape library (VTL) and your virtual tape shelf (VTS). You specify the tapes to list by specifying one or more tape Amazon Resource Names (ARNs). If you don't specify a tape ARN, the operation lists all virtual tapes in both your VTL and VTS. This operation supports pagination. By default, the operation returns a maximum of up to 100 tapes. You can optionally specify the Limit parameter in the body to limit the number of tapes in the response. If the number of tapes returned in the response is truncated, the response includes a Marker element that you can use in your subsequent request to retrieve the next set of tapes. This operation is only supported in the tape gateway type.
    */
   listTapes(callback?: (err: AWSError, data: StorageGateway.Types.ListTapesOutput) => void): Request<StorageGateway.Types.ListTapesOutput, AWSError>;
   /**
-   * Lists iSCSI initiators that are connected to a volume. You can use this operation to determine whether a volume is being used or not. This operation is only supported in the cached volume and stored volume gateway architecture.
+   * Lists iSCSI initiators that are connected to a volume. You can use this operation to determine whether a volume is being used or not. This operation is only supported in the cached volume and stored volume gateway types.
    */
   listVolumeInitiators(params: StorageGateway.Types.ListVolumeInitiatorsInput, callback?: (err: AWSError, data: StorageGateway.Types.ListVolumeInitiatorsOutput) => void): Request<StorageGateway.Types.ListVolumeInitiatorsOutput, AWSError>;
   /**
-   * Lists iSCSI initiators that are connected to a volume. You can use this operation to determine whether a volume is being used or not. This operation is only supported in the cached volume and stored volume gateway architecture.
+   * Lists iSCSI initiators that are connected to a volume. You can use this operation to determine whether a volume is being used or not. This operation is only supported in the cached volume and stored volume gateway types.
    */
   listVolumeInitiators(callback?: (err: AWSError, data: StorageGateway.Types.ListVolumeInitiatorsOutput) => void): Request<StorageGateway.Types.ListVolumeInitiatorsOutput, AWSError>;
   /**
-   * Lists the recovery points for a specified gateway. This operation is only supported in the cached volume gateway architecture. Each cache volume has one recovery point. A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot or clone a new cached volume from a source volume. To create a snapshot from a volume recovery point use the CreateSnapshotFromVolumeRecoveryPoint operation.
+   * Lists the recovery points for a specified gateway. This operation is only supported in the cached volume gateway type. Each cache volume has one recovery point. A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot or clone a new cached volume from a source volume. To create a snapshot from a volume recovery point use the CreateSnapshotFromVolumeRecoveryPoint operation.
    */
   listVolumeRecoveryPoints(params: StorageGateway.Types.ListVolumeRecoveryPointsInput, callback?: (err: AWSError, data: StorageGateway.Types.ListVolumeRecoveryPointsOutput) => void): Request<StorageGateway.Types.ListVolumeRecoveryPointsOutput, AWSError>;
   /**
-   * Lists the recovery points for a specified gateway. This operation is only supported in the cached volume gateway architecture. Each cache volume has one recovery point. A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot or clone a new cached volume from a source volume. To create a snapshot from a volume recovery point use the CreateSnapshotFromVolumeRecoveryPoint operation.
+   * Lists the recovery points for a specified gateway. This operation is only supported in the cached volume gateway type. Each cache volume has one recovery point. A volume recovery point is a point in time at which all data of the volume is consistent and from which you can create a snapshot or clone a new cached volume from a source volume. To create a snapshot from a volume recovery point use the CreateSnapshotFromVolumeRecoveryPoint operation.
    */
   listVolumeRecoveryPoints(callback?: (err: AWSError, data: StorageGateway.Types.ListVolumeRecoveryPointsOutput) => void): Request<StorageGateway.Types.ListVolumeRecoveryPointsOutput, AWSError>;
   /**
-   * Lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN. The response includes only the volume ARNs. If you want additional volume information, use the DescribeStorediSCSIVolumes or the DescribeCachediSCSIVolumes API. The operation supports pagination. By default, the operation returns a maximum of up to 100 volumes. You can optionally specify the Limit field in the body to limit the number of volumes in the response. If the number of volumes returned in the response is truncated, the response includes a Marker field. You can use this Marker value in your subsequent request to retrieve the next set of volumes. This operation is only supported in the cached volume and stored volume gateway architectures.
+   * Lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN. The response includes only the volume ARNs. If you want additional volume information, use the DescribeStorediSCSIVolumes or the DescribeCachediSCSIVolumes API. The operation supports pagination. By default, the operation returns a maximum of up to 100 volumes. You can optionally specify the Limit field in the body to limit the number of volumes in the response. If the number of volumes returned in the response is truncated, the response includes a Marker field. You can use this Marker value in your subsequent request to retrieve the next set of volumes. This operation is only supported in the cached volume and stored volume gateway types.
    */
   listVolumes(params: StorageGateway.Types.ListVolumesInput, callback?: (err: AWSError, data: StorageGateway.Types.ListVolumesOutput) => void): Request<StorageGateway.Types.ListVolumesOutput, AWSError>;
   /**
-   * Lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN. The response includes only the volume ARNs. If you want additional volume information, use the DescribeStorediSCSIVolumes or the DescribeCachediSCSIVolumes API. The operation supports pagination. By default, the operation returns a maximum of up to 100 volumes. You can optionally specify the Limit field in the body to limit the number of volumes in the response. If the number of volumes returned in the response is truncated, the response includes a Marker field. You can use this Marker value in your subsequent request to retrieve the next set of volumes. This operation is only supported in the cached volume and stored volume gateway architectures.
+   * Lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN. The response includes only the volume ARNs. If you want additional volume information, use the DescribeStorediSCSIVolumes or the DescribeCachediSCSIVolumes API. The operation supports pagination. By default, the operation returns a maximum of up to 100 volumes. You can optionally specify the Limit field in the body to limit the number of volumes in the response. If the number of volumes returned in the response is truncated, the response includes a Marker field. You can use this Marker value in your subsequent request to retrieve the next set of volumes. This operation is only supported in the cached volume and stored volume gateway types.
    */
   listVolumes(callback?: (err: AWSError, data: StorageGateway.Types.ListVolumesOutput) => void): Request<StorageGateway.Types.ListVolumesOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results.
+   * Sends you notification when all file data written to the NFS file share has been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch event. You can configure CloudWatch Events to sent the notification through event targets such as email, SNS or a Lambda function. text or Lambda functions. This operation is only supported in the file gateway type.
+   */
+  notifyWhenUploaded(params: StorageGateway.Types.NotifyWhenUploadedInput, callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
+  /**
+   * Sends you notification when all file data written to the NFS file share has been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch event. You can configure CloudWatch Events to sent the notification through event targets such as email, SNS or a Lambda function. text or Lambda functions. This operation is only supported in the file gateway type.
+   */
+  notifyWhenUploaded(callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
+  /**
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type.
    */
   refreshCache(params: StorageGateway.Types.RefreshCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results.
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type.
    */
   refreshCache(callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
-   * Removes one or more tags from the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway architectures.
+   * Removes one or more tags from the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway types.
    */
   removeTagsFromResource(params: StorageGateway.Types.RemoveTagsFromResourceInput, callback?: (err: AWSError, data: StorageGateway.Types.RemoveTagsFromResourceOutput) => void): Request<StorageGateway.Types.RemoveTagsFromResourceOutput, AWSError>;
   /**
-   * Removes one or more tags from the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway architectures.
+   * Removes one or more tags from the specified resource. This operation is only supported in the cached volume, stored volume and tape gateway types.
    */
   removeTagsFromResource(callback?: (err: AWSError, data: StorageGateway.Types.RemoveTagsFromResourceOutput) => void): Request<StorageGateway.Types.RemoveTagsFromResourceOutput, AWSError>;
   /**
-   * Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume,tape and file gateway architectures.  If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly. 
+   * Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume, tape and file gateway types.  If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly. 
    */
   resetCache(params: StorageGateway.Types.ResetCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.ResetCacheOutput) => void): Request<StorageGateway.Types.ResetCacheOutput, AWSError>;
   /**
-   * Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume,tape and file gateway architectures.  If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly. 
+   * Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume, tape and file gateway types.  If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly. 
    */
   resetCache(callback?: (err: AWSError, data: StorageGateway.Types.ResetCacheOutput) => void): Request<StorageGateway.Types.ResetCacheOutput, AWSError>;
   /**
-   * Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a tape gateway. Virtual tapes archived in the VTS are not associated with any gateway. However after a tape is retrieved, it is associated with a gateway, even though it is also listed in the VTS, that is, archive. This operation is only supported in the tape gateway architecture. Once a tape is successfully retrieved to a gateway, it cannot be retrieved again to another gateway. You must archive the tape again before you can retrieve it to another gateway. This operation is only supported in the tape gateway architecture.
+   * Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a tape gateway. Virtual tapes archived in the VTS are not associated with any gateway. However after a tape is retrieved, it is associated with a gateway, even though it is also listed in the VTS, that is, archive. This operation is only supported in the tape gateway type. Once a tape is successfully retrieved to a gateway, it cannot be retrieved again to another gateway. You must archive the tape again before you can retrieve it to another gateway. This operation is only supported in the tape gateway type.
    */
   retrieveTapeArchive(params: StorageGateway.Types.RetrieveTapeArchiveInput, callback?: (err: AWSError, data: StorageGateway.Types.RetrieveTapeArchiveOutput) => void): Request<StorageGateway.Types.RetrieveTapeArchiveOutput, AWSError>;
   /**
-   * Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a tape gateway. Virtual tapes archived in the VTS are not associated with any gateway. However after a tape is retrieved, it is associated with a gateway, even though it is also listed in the VTS, that is, archive. This operation is only supported in the tape gateway architecture. Once a tape is successfully retrieved to a gateway, it cannot be retrieved again to another gateway. You must archive the tape again before you can retrieve it to another gateway. This operation is only supported in the tape gateway architecture.
+   * Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a tape gateway. Virtual tapes archived in the VTS are not associated with any gateway. However after a tape is retrieved, it is associated with a gateway, even though it is also listed in the VTS, that is, archive. This operation is only supported in the tape gateway type. Once a tape is successfully retrieved to a gateway, it cannot be retrieved again to another gateway. You must archive the tape again before you can retrieve it to another gateway. This operation is only supported in the tape gateway type.
    */
   retrieveTapeArchive(callback?: (err: AWSError, data: StorageGateway.Types.RetrieveTapeArchiveOutput) => void): Request<StorageGateway.Types.RetrieveTapeArchiveOutput, AWSError>;
   /**
-   * Retrieves the recovery point for the specified virtual tape. This operation is only supported in the tape gateway architecture. A recovery point is a point in time view of a virtual tape at which all the data on the tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway.  The virtual tape can be retrieved to only one gateway. The retrieved tape is read-only. The virtual tape can be retrieved to only a tape gateway. There is no charge for retrieving recovery points. 
+   * Retrieves the recovery point for the specified virtual tape. This operation is only supported in the tape gateway type. A recovery point is a point in time view of a virtual tape at which all the data on the tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway.  The virtual tape can be retrieved to only one gateway. The retrieved tape is read-only. The virtual tape can be retrieved to only a tape gateway. There is no charge for retrieving recovery points. 
    */
   retrieveTapeRecoveryPoint(params: StorageGateway.Types.RetrieveTapeRecoveryPointInput, callback?: (err: AWSError, data: StorageGateway.Types.RetrieveTapeRecoveryPointOutput) => void): Request<StorageGateway.Types.RetrieveTapeRecoveryPointOutput, AWSError>;
   /**
-   * Retrieves the recovery point for the specified virtual tape. This operation is only supported in the tape gateway architecture. A recovery point is a point in time view of a virtual tape at which all the data on the tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway.  The virtual tape can be retrieved to only one gateway. The retrieved tape is read-only. The virtual tape can be retrieved to only a tape gateway. There is no charge for retrieving recovery points. 
+   * Retrieves the recovery point for the specified virtual tape. This operation is only supported in the tape gateway type. A recovery point is a point in time view of a virtual tape at which all the data on the tape is consistent. If your gateway crashes, virtual tapes that have recovery points can be recovered to a new gateway.  The virtual tape can be retrieved to only one gateway. The retrieved tape is read-only. The virtual tape can be retrieved to only a tape gateway. There is no charge for retrieving recovery points. 
    */
   retrieveTapeRecoveryPoint(callback?: (err: AWSError, data: StorageGateway.Types.RetrieveTapeRecoveryPointOutput) => void): Request<StorageGateway.Types.RetrieveTapeRecoveryPointOutput, AWSError>;
   /**
@@ -484,27 +492,27 @@ declare class StorageGateway extends Service {
    */
   updateMaintenanceStartTime(callback?: (err: AWSError, data: StorageGateway.Types.UpdateMaintenanceStartTimeOutput) => void): Request<StorageGateway.Types.UpdateMaintenanceStartTimeOutput, AWSError>;
   /**
-   * Updates a file share. This operation is only supported in the file gateway architecture.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
+   * Updates a file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
    */
   updateNFSFileShare(params: StorageGateway.Types.UpdateNFSFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateNFSFileShareOutput) => void): Request<StorageGateway.Types.UpdateNFSFileShareOutput, AWSError>;
   /**
-   * Updates a file share. This operation is only supported in the file gateway architecture.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
+   * Updates a file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
    */
   updateNFSFileShare(callback?: (err: AWSError, data: StorageGateway.Types.UpdateNFSFileShareOutput) => void): Request<StorageGateway.Types.UpdateNFSFileShareOutput, AWSError>;
   /**
-   * Updates a snapshot schedule configured for a gateway volume. This operation is only supported in the cached volume and stored volume gateway architectures. The default snapshot schedule for volume is once every 24 hours, starting at the creation time of the volume. You can use this API to change the snapshot schedule configured for the volume. In the request you must identify the gateway volume whose snapshot schedule you want to update, and the schedule information, including when you want the snapshot to begin on a day and the frequency (in hours) of snapshots.
+   * Updates a snapshot schedule configured for a gateway volume. This operation is only supported in the cached volume and stored volume gateway types. The default snapshot schedule for volume is once every 24 hours, starting at the creation time of the volume. You can use this API to change the snapshot schedule configured for the volume. In the request you must identify the gateway volume whose snapshot schedule you want to update, and the schedule information, including when you want the snapshot to begin on a day and the frequency (in hours) of snapshots.
    */
   updateSnapshotSchedule(params: StorageGateway.Types.UpdateSnapshotScheduleInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateSnapshotScheduleOutput) => void): Request<StorageGateway.Types.UpdateSnapshotScheduleOutput, AWSError>;
   /**
-   * Updates a snapshot schedule configured for a gateway volume. This operation is only supported in the cached volume and stored volume gateway architectures. The default snapshot schedule for volume is once every 24 hours, starting at the creation time of the volume. You can use this API to change the snapshot schedule configured for the volume. In the request you must identify the gateway volume whose snapshot schedule you want to update, and the schedule information, including when you want the snapshot to begin on a day and the frequency (in hours) of snapshots.
+   * Updates a snapshot schedule configured for a gateway volume. This operation is only supported in the cached volume and stored volume gateway types. The default snapshot schedule for volume is once every 24 hours, starting at the creation time of the volume. You can use this API to change the snapshot schedule configured for the volume. In the request you must identify the gateway volume whose snapshot schedule you want to update, and the schedule information, including when you want the snapshot to begin on a day and the frequency (in hours) of snapshots.
    */
   updateSnapshotSchedule(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSnapshotScheduleOutput) => void): Request<StorageGateway.Types.UpdateSnapshotScheduleOutput, AWSError>;
   /**
-   * Updates the type of medium changer in a tape gateway. When you activate a tape gateway, you select a medium changer type for the tape gateway. This operation enables you to select a different type of medium changer after a tape gateway is activated. This operation is only supported in the tape gateway architecture.
+   * Updates the type of medium changer in a tape gateway. When you activate a tape gateway, you select a medium changer type for the tape gateway. This operation enables you to select a different type of medium changer after a tape gateway is activated. This operation is only supported in the tape gateway type.
    */
   updateVTLDeviceType(params: StorageGateway.Types.UpdateVTLDeviceTypeInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateVTLDeviceTypeOutput) => void): Request<StorageGateway.Types.UpdateVTLDeviceTypeOutput, AWSError>;
   /**
-   * Updates the type of medium changer in a tape gateway. When you activate a tape gateway, you select a medium changer type for the tape gateway. This operation enables you to select a different type of medium changer after a tape gateway is activated. This operation is only supported in the tape gateway architecture.
+   * Updates the type of medium changer in a tape gateway. When you activate a tape gateway, you select a medium changer type for the tape gateway. This operation enables you to select a different type of medium changer after a tape gateway is activated. This operation is only supported in the tape gateway type.
    */
   updateVTLDeviceType(callback?: (err: AWSError, data: StorageGateway.Types.UpdateVTLDeviceTypeOutput) => void): Request<StorageGateway.Types.UpdateVTLDeviceTypeOutput, AWSError>;
 }
@@ -624,6 +632,10 @@ declare namespace StorageGateway {
      * The date the volume was created. Volumes created prior to March 28, 2017 don’t have this time stamp.
      */
     CreatedDate?: CreatedDate;
+    /**
+     * The size of the data stored on the volume in bytes.  This value is not available for volumes created prior to May 13, 2015, until you store data on the volume. 
+     */
+    VolumeUsedInBytes?: VolumeUsedInBytes;
   }
   export type CachediSCSIVolumes = CachediSCSIVolume[];
   export interface CancelArchivalInput {
@@ -734,6 +746,10 @@ declare namespace StorageGateway {
      * Sets the write status of a file share: "true" if the write status is read-only, and otherwise "false".
      */
     ReadOnly?: Boolean;
+    /**
+     * Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".
+     */
+    GuessMIMETypeEnabled?: Boolean;
   }
   export interface CreateNFSFileShareOutput {
     /**
@@ -893,7 +909,7 @@ declare namespace StorageGateway {
      */
     FileShareARN: FileShareARN;
     /**
-     * If set to true, deletes a file share immediately and aborts all data uploads to AWS. Otherwise the file share is not deleted until all data is uploaded to AWS. This process aborts the data upload process and the file share enters the FORCE_DELETING status.
+     * If this value is set to true, the operation deletes a file share immediately and aborts all data uploads to AWS. Otherwise, the file share is not deleted until all data is uploaded to AWS. This process aborts the data upload process, and the file share enters the FORCE_DELETING status.
      */
     ForceDelete?: boolean;
   }
@@ -1485,6 +1501,10 @@ declare namespace StorageGateway {
     ClientList?: FileShareClientList;
     Squash?: Squash;
     ReadOnly?: Boolean;
+    /**
+     * Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".
+     */
+    GuessMIMETypeEnabled?: Boolean;
   }
   export type NFSFileShareInfoList = NFSFileShareInfo[];
   export interface NetworkInterface {
@@ -1503,6 +1523,14 @@ declare namespace StorageGateway {
   }
   export type NetworkInterfaceId = string;
   export type NextUpdateAvailabilityDate = string;
+  export type NotificationId = string;
+  export interface NotifyWhenUploadedInput {
+    FileShareARN: FileShareARN;
+  }
+  export interface NotifyWhenUploadedOutput {
+    FileShareARN?: FileShareARN;
+    NotificationId?: NotificationId;
+  }
   export type NumTapesToCreate = number;
   export type Path = string;
   export type PermissionId = number;
@@ -1650,6 +1678,10 @@ declare namespace StorageGateway {
      * The date the volume was created. Volumes created prior to March 28, 2017 don’t have this time stamp.
      */
     CreatedDate?: CreatedDate;
+    /**
+     * The size of the data stored on the volume in bytes.   This value is not available for volumes created prior to May 13, 2015, until you store data on the volume. 
+     */
+    VolumeUsedInBytes?: VolumeUsedInBytes;
   }
   export type StorediSCSIVolumes = StorediSCSIVolume[];
   export interface Tag {
@@ -1690,7 +1722,7 @@ declare namespace StorageGateway {
      */
     Progress?: DoubleObject;
     /**
-     * The size, in bytes, of data written to the virtual tape.  This value is not available for tapes created prior to May 13, 2015. 
+     * The size, in bytes, of data stored on the virtual tape.  This value is not available for tapes created prior to May 13, 2015. 
      */
     TapeUsedInBytes?: TapeUsage;
   }
@@ -1723,7 +1755,7 @@ declare namespace StorageGateway {
      */
     TapeStatus?: TapeArchiveStatus;
     /**
-     * The size, in bytes, of data written to the virtual tape.  This value is not available for tapes created prior to May 13, 2015. 
+     * The size, in bytes, of data stored on the virtual tape.  This value is not available for tapes created prior to May 13, 2015. 
      */
     TapeUsedInBytes?: TapeUsage;
   }
@@ -1887,6 +1919,10 @@ declare namespace StorageGateway {
      * Sets the write status of a file share: "true" if the write status is read-only, otherwise "false".
      */
     ReadOnly?: Boolean;
+    /**
+     * Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".
+     */
+    GuessMIMETypeEnabled?: Boolean;
   }
   export interface UpdateNFSFileShareOutput {
     /**
@@ -1986,6 +2022,7 @@ declare namespace StorageGateway {
   export type VolumeRecoveryPointInfos = VolumeRecoveryPointInfo[];
   export type VolumeStatus = string;
   export type VolumeType = string;
+  export type VolumeUsedInBytes = number;
   export interface VolumeiSCSIAttributes {
     /**
      * The Amazon Resource Name (ARN) of the volume target.

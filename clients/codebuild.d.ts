@@ -68,6 +68,14 @@ declare class CodeBuild extends Service {
    */
   deleteWebhook(callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
   /**
+   * Resets the cache for a project.
+   */
+  invalidateProjectCache(params: CodeBuild.Types.InvalidateProjectCacheInput, callback?: (err: AWSError, data: CodeBuild.Types.InvalidateProjectCacheOutput) => void): Request<CodeBuild.Types.InvalidateProjectCacheOutput, AWSError>;
+  /**
+   * Resets the cache for a project.
+   */
+  invalidateProjectCache(callback?: (err: AWSError, data: CodeBuild.Types.InvalidateProjectCacheOutput) => void): Request<CodeBuild.Types.InvalidateProjectCacheOutput, AWSError>;
+  /**
    * Gets a list of build IDs, with each build ID representing a single build.
    */
   listBuilds(params: CodeBuild.Types.ListBuildsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsOutput) => void): Request<CodeBuild.Types.ListBuildsOutput, AWSError>;
@@ -223,6 +231,10 @@ declare namespace CodeBuild {
      */
     artifacts?: BuildArtifacts;
     /**
+     * Information about the cache for the build.
+     */
+    cache?: ProjectCache;
+    /**
      * Information about the build environment for this build.
      */
     environment?: ProjectEnvironment;
@@ -242,6 +254,14 @@ declare namespace CodeBuild {
      * The entity that started the build. Valid values include:   If AWS CodePipeline started the build, the pipeline's name (for example, codepipeline/my-demo-pipeline).   If an AWS Identity and Access Management (IAM) user started the build, the user's name (for example MyUserName).   If the Jenkins plugin for AWS CodeBuild started the build, the string CodeBuild-Jenkins-Plugin.  
      */
     initiator?: String;
+    /**
+     * If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.
+     */
+    vpcConfig?: VpcConfig;
+    /**
+     * Describes a network interface.
+     */
+    networkInterface?: NetworkInterface;
   }
   export interface BuildArtifacts {
     /**
@@ -298,6 +318,7 @@ declare namespace CodeBuild {
   export type BuildPhases = BuildPhase[];
   export type Builds = Build[];
   export type BuildsNotDeleted = BuildNotDeleted[];
+  export type CacheType = "NO_CACHE"|"S3"|string;
   export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE"|string;
   export interface CreateProjectInput {
     /**
@@ -316,6 +337,10 @@ declare namespace CodeBuild {
      * Information about the build output artifacts for the build project.
      */
     artifacts: ProjectArtifacts;
+    /**
+     * Stores recently used information so that it can be quickly accessed at a later time.
+     */
+    cache?: ProjectCache;
     /**
      * Information about the build environment for the build project.
      */
@@ -336,6 +361,14 @@ declare namespace CodeBuild {
      * A set of tags for this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
      */
     tags?: TagList;
+    /**
+     * VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+     */
+    vpcConfig?: VpcConfig;
+    /**
+     * Set this to true to generate a publicly-accessible URL for your project's build badge.
+     */
+    badgeEnabled?: WrapperBoolean;
   }
   export interface CreateProjectOutput {
     /**
@@ -421,6 +454,14 @@ declare namespace CodeBuild {
   }
   export type EnvironmentVariableType = "PLAINTEXT"|"PARAMETER_STORE"|string;
   export type EnvironmentVariables = EnvironmentVariable[];
+  export interface InvalidateProjectCacheInput {
+    /**
+     * The name of the build project that the cache will be reset for.
+     */
+    projectName: NonEmptyString;
+  }
+  export interface InvalidateProjectCacheOutput {
+  }
   export type KeyInput = string;
   export type LanguageType = "JAVA"|"PYTHON"|"NODE_JS"|"RUBY"|"GOLANG"|"DOCKER"|"ANDROID"|"DOTNET"|"BASE"|string;
   export interface ListBuildsForProjectInput {
@@ -513,6 +554,16 @@ declare namespace CodeBuild {
      */
     deepLink?: String;
   }
+  export interface NetworkInterface {
+    /**
+     * The ID of the subnet.
+     */
+    subnetId?: NonEmptyString;
+    /**
+     * The ID of the network interface.
+     */
+    networkInterfaceId?: NonEmptyString;
+  }
   export type NonEmptyString = string;
   export interface PhaseContext {
     /**
@@ -548,6 +599,10 @@ declare namespace CodeBuild {
      */
     artifacts?: ProjectArtifacts;
     /**
+     * Information about the cache for the build project.
+     */
+    cache?: ProjectCache;
+    /**
      * Information about the build environment for this build project.
      */
     environment?: ProjectEnvironment;
@@ -579,6 +634,14 @@ declare namespace CodeBuild {
      * Information about a webhook in GitHub that connects repository events to a build project in AWS CodeBuild.
      */
     webhook?: Webhook;
+    /**
+     * If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.
+     */
+    vpcConfig?: VpcConfig;
+    /**
+     * Information about the build badge for the build project.
+     */
+    badge?: ProjectBadge;
   }
   export interface ProjectArtifacts {
     /**
@@ -605,6 +668,26 @@ declare namespace CodeBuild {
      * The type of build output artifact to create, as follows:   If type is set to CODEPIPELINE, then AWS CodePipeline will ignore this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.   If type is set to NO_ARTIFACTS, then this value will be ignored if specified, because no build output will be produced.   If type is set to S3, valid values include:    NONE: AWS CodeBuild will create in the output bucket a folder containing the build output. This is the default if packaging is not specified.    ZIP: AWS CodeBuild will create in the output bucket a ZIP file containing the build output.    
      */
     packaging?: ArtifactPackaging;
+  }
+  export interface ProjectBadge {
+    /**
+     * Set this to true to generate a publicly-accessible URL for your project's build badge.
+     */
+    badgeEnabled?: Boolean;
+    /**
+     * The publicly-accessible URL through which you can access the build badge for your project. 
+     */
+    badgeRequestUrl?: String;
+  }
+  export interface ProjectCache {
+    /**
+     * The type of cache used by the build project. Valid values include:    NO_CACHE: The build project will not use any cache.    S3: The build project will read and write from/to S3.  
+     */
+    type: CacheType;
+    /**
+     * Information about the cache location, as follows:     NO_CACHE: This value will be ignored.    S3: This is the S3 bucket name/prefix.  
+     */
+    location?: String;
   }
   export type ProjectDescription = string;
   export interface ProjectEnvironment {
@@ -651,6 +734,7 @@ declare namespace CodeBuild {
     auth?: SourceAuth;
   }
   export type Projects = Project[];
+  export type SecurityGroupIds = NonEmptyString[];
   export type SortOrderType = "ASCENDING"|"DESCENDING"|string;
   export interface SourceAuth {
     /**
@@ -710,6 +794,7 @@ declare namespace CodeBuild {
     build?: Build;
   }
   export type String = string;
+  export type Subnets = NonEmptyString[];
   export interface Tag {
     /**
      * The tag's key.
@@ -741,6 +826,10 @@ declare namespace CodeBuild {
      */
     artifacts?: ProjectArtifacts;
     /**
+     * Stores recently used information so that it can be quickly accessed at a later time.
+     */
+    cache?: ProjectCache;
+    /**
      * Information to be changed about the build environment for the build project.
      */
     environment?: ProjectEnvironment;
@@ -760,6 +849,14 @@ declare namespace CodeBuild {
      * The replacement set of tags for this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
      */
     tags?: TagList;
+    /**
+     * VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+     */
+    vpcConfig?: VpcConfig;
+    /**
+     * Set this to true to generate a publicly-accessible URL for your project's build badge.
+     */
+    badgeEnabled?: WrapperBoolean;
   }
   export interface UpdateProjectOutput {
     /**
@@ -768,6 +865,20 @@ declare namespace CodeBuild {
     project?: Project;
   }
   export type ValueInput = string;
+  export interface VpcConfig {
+    /**
+     * The ID of the Amazon VPC.
+     */
+    vpcId?: NonEmptyString;
+    /**
+     * A list of one or more subnet IDs in your Amazon VPC.
+     */
+    subnets?: Subnets;
+    /**
+     * A list of one or more security groups IDs in your Amazon VPC.
+     */
+    securityGroupIds?: SecurityGroupIds;
+  }
   export interface Webhook {
     /**
      * The URL to the webhook.

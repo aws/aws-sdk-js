@@ -468,11 +468,11 @@ declare class APIGateway extends Service {
    */
   getGatewayResponses(callback?: (err: AWSError, data: APIGateway.Types.GatewayResponses) => void): Request<APIGateway.Types.GatewayResponses, AWSError>;
   /**
-   * Represents a get integration.
+   * Get the integration settings.
    */
   getIntegration(params: APIGateway.Types.GetIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
-   * Represents a get integration.
+   * Get the integration settings.
    */
   getIntegration(callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
@@ -909,6 +909,16 @@ declare class APIGateway extends Service {
   updateUsagePlan(callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
 }
 declare namespace APIGateway {
+  export interface AccessLogSettings {
+    /**
+     * A single line format of the access logs of data, as specified by selected $context variables. The format must include at least $context.requestId.
+     */
+    format?: String;
+    /**
+     * The ARN of the CloudWatch Logs log group to receive access logs.
+     */
+    destinationArn?: String;
+  }
   export interface Account {
     /**
      * The ARN of an Amazon CloudWatch role for the current Account. 
@@ -2513,6 +2523,10 @@ declare namespace APIGateway {
      */
     contentHandling?: ContentHandlingStrategy;
     /**
+     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
+     */
+    timeoutInMillis?: Integer;
+    /**
      * Specifies the integration's cache namespace.
      */
     cacheNamespace?: String;
@@ -2821,6 +2835,10 @@ declare namespace APIGateway {
      * Specifies how to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:  CONVERT_TO_BINARY: Converts a request payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a request payload from a binary blob to a Base64-encoded string.  If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the passthroughBehaviors is configured to support payload pass-through.
      */
     contentHandling?: ContentHandlingStrategy;
+    /**
+     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
+     */
+    timeoutInMillis?: NullableInteger;
   }
   export interface PutIntegrationResponseRequest {
     /**
@@ -3159,6 +3177,10 @@ declare namespace APIGateway {
      * The version of the associated API documentation.
      */
     documentationVersion?: String;
+    /**
+     * The access log settings in this stage.
+     */
+    accessLogSettings?: AccessLogSettings;
     /**
      * The timestamp when the stage was created.
      */

@@ -36,11 +36,11 @@ declare class EMR extends Service {
    */
   addJobFlowSteps(callback?: (err: AWSError, data: EMR.Types.AddJobFlowStepsOutput) => void): Request<EMR.Types.AddJobFlowStepsOutput, AWSError>;
   /**
-   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tagging Amazon EMR Resources. 
+   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters. 
    */
   addTags(params: EMR.Types.AddTagsInput, callback?: (err: AWSError, data: EMR.Types.AddTagsOutput) => void): Request<EMR.Types.AddTagsOutput, AWSError>;
   /**
-   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tagging Amazon EMR Resources. 
+   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters. 
    */
   addTags(callback?: (err: AWSError, data: EMR.Types.AddTagsOutput) => void): Request<EMR.Types.AddTagsOutput, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class EMR extends Service {
    */
   removeAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.RemoveAutoScalingPolicyOutput) => void): Request<EMR.Types.RemoveAutoScalingPolicyOutput, AWSError>;
   /**
-   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tagging Amazon EMR Resources.  The following example removes the stack tag with value Prod from a cluster:
+   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters.  The following example removes the stack tag with value Prod from a cluster:
    */
   removeTags(params: EMR.Types.RemoveTagsInput, callback?: (err: AWSError, data: EMR.Types.RemoveTagsOutput) => void): Request<EMR.Types.RemoveTagsOutput, AWSError>;
   /**
-   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tagging Amazon EMR Resources.  The following example removes the stack tag with value Prod from a cluster:
+   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters.  The following example removes the stack tag with value Prod from a cluster:
    */
   removeTags(callback?: (err: AWSError, data: EMR.Types.RemoveTagsOutput) => void): Request<EMR.Types.RemoveTagsOutput, AWSError>;
   /**
@@ -544,7 +544,7 @@ declare namespace EMR {
      */
     NormalizedInstanceHours?: Integer;
     /**
-     * The public DNS name of the master EC2 instance.
+     * The DNS name of the master node. If the cluster is on a private subnet, this is the private DNS name. On a public subnet, this is the public DNS name.
      */
     MasterPublicDnsName?: String;
     /**
@@ -575,6 +575,10 @@ declare namespace EMR {
      * Applies only when CustomAmiID is used. Specifies the type of updates that are applied from the Amazon Linux AMI package repositories when an instance boots using the AMI.
      */
     RepoUpgradeOnBoot?: RepoUpgradeOnBoot;
+    /**
+     * Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see Use Kerberos Authentication in the EMR Management Guide.
+     */
+    KerberosAttributes?: KerberosAttributes;
   }
   export type ClusterId = string;
   export type ClusterState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
@@ -674,7 +678,7 @@ declare namespace EMR {
      */
     Name: XmlString;
     /**
-     * The security configuration details in JSON format.
+     * The security configuration details in JSON format. For JSON parameters and examples, see Use Security Configurations to Set Up Cluster Security in the Amazon EMR Management Guide.
      */
     SecurityConfiguration: String;
   }
@@ -1068,7 +1072,7 @@ declare namespace EMR {
   export type InstanceFleetStateChangeReasonCode = "INTERNAL_ERROR"|"VALIDATION_ERROR"|"INSTANCE_FAILURE"|"CLUSTER_TERMINATED"|string;
   export interface InstanceFleetStatus {
     /**
-     * A code representing the instance fleet status.
+     * A code representing the instance fleet status.    PROVISIONING—The instance fleet is provisioning EC2 resources and is not yet ready to run jobs.    BOOTSTRAPPING—EC2 instances and other resources have been provisioned and the bootstrap actions specified for the instances are underway.    RUNNING—EC2 instances and other resources are running. They are either executing jobs or waiting to execute jobs.    RESIZING—A resize operation is underway. EC2 instances are either being added or removed.    SUSPENDED—A resize operation could not complete. Existing EC2 instances are running, but instances can't be added or removed.    TERMINATING—The instance fleet is terminating EC2 instances.    TERMINATED—The instance fleet is no longer active, and all EC2 instances have been terminated.  
      */
     State?: InstanceFleetState;
     /**
@@ -1596,7 +1600,7 @@ declare namespace EMR {
      */
     MasterInstanceType: InstanceType;
     /**
-     * The DNS name of the master node.
+     * The DNS name of the master node. If the cluster is on a private subnet, this is the private DNS name. On a public subnet, this is the public DNS name.
      */
     MasterPublicDnsName?: XmlString;
     /**
@@ -1643,6 +1647,28 @@ declare namespace EMR {
      * The Hadoop version for the cluster.
      */
     HadoopVersion?: XmlStringMaxLen256;
+  }
+  export interface KerberosAttributes {
+    /**
+     * The name of the Kerberos realm to which all nodes in a cluster belong. For example, EC2.INTERNAL. 
+     */
+    Realm: XmlStringMaxLen256;
+    /**
+     * The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.
+     */
+    KdcAdminPassword: XmlStringMaxLen256;
+    /**
+     * Required only when establishing a cross-realm trust with a KDC in a different realm. The cross-realm principal password, which must be identical across realms.
+     */
+    CrossRealmTrustPrincipalPassword?: XmlStringMaxLen256;
+    /**
+     * Required only when establishing a cross-realm trust with an Active Directory domain. A user with sufficient privileges to join resources to the domain.
+     */
+    ADDomainJoinUser?: XmlStringMaxLen256;
+    /**
+     * The Active Directory password for ADDomainJoinUser.
+     */
+    ADDomainJoinPassword?: XmlStringMaxLen256;
   }
   export interface KeyValue {
     /**
@@ -1960,7 +1986,7 @@ declare namespace EMR {
      */
     BootstrapActions?: BootstrapActionConfigList;
     /**
-     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.  A list of strings that indicates third-party software to use. For more information, see Use Third Party Applications with Amazon EMR. Currently supported values are:   "mapr-m3" - launch the job flow using MapR M3 Edition.   "mapr-m5" - launch the job flow using MapR M5 Edition.  
+     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.  A list of strings that indicates third-party software to use. For more information, see the Amazon EMR Developer Guide. Currently supported values are:   "mapr-m3" - launch the job flow using MapR M3 Edition.   "mapr-m5" - launch the job flow using MapR M5 Edition.  
      */
     SupportedProducts?: SupportedProductsList;
     /**
@@ -2015,6 +2041,10 @@ declare namespace EMR {
      * Applies only when CustomAmiID is used. Specifies which updates from the Amazon Linux AMI package repositories to apply automatically when the instance boots using the AMI. If omitted, the default is SECURITY, which indicates that only security updates are applied. If NONE is specified, no updates are applied, and all updates must be applied manually.
      */
     RepoUpgradeOnBoot?: RepoUpgradeOnBoot;
+    /**
+     * Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see Use Kerberos Authentication in the EMR Management Guide.
+     */
+    KerberosAttributes?: KerberosAttributes;
   }
   export interface RunJobFlowOutput {
     /**
@@ -2122,11 +2152,11 @@ declare namespace EMR {
   }
   export interface SimpleScalingPolicyConfiguration {
     /**
-     * The way in which EC2 instances are added (if ScalingAdjustment is a positive number) or terminated (if ScalingAdjustment is a negative number) each time the scaling activity is triggered. CHANGE_IN_CAPACITY is the default. CHANGE_IN_CAPACITY indicates that the EC2 instance count increments or decrements by ScalingAdjustment, which should be expressed as an integer. PERCENT_CHANGE_IN_CAPACITY indicates the instance count increments or decrements by the percentage specified by ScalingAdjustment, which should be expressed as a decimal. For example, 0.20 indicates an increase in 20% increments of cluster capacity. EXACT_CAPACITY indicates the scaling activity results in an instance group with the number of EC2 instances specified by ScalingAdjustment, which should be expressed as a positive integer.
+     * The way in which EC2 instances are added (if ScalingAdjustment is a positive number) or terminated (if ScalingAdjustment is a negative number) each time the scaling activity is triggered. CHANGE_IN_CAPACITY is the default. CHANGE_IN_CAPACITY indicates that the EC2 instance count increments or decrements by ScalingAdjustment, which should be expressed as an integer. PERCENT_CHANGE_IN_CAPACITY indicates the instance count increments or decrements by the percentage specified by ScalingAdjustment, which should be expressed as an integer. For example, 20 indicates an increase in 20% increments of cluster capacity. EXACT_CAPACITY indicates the scaling activity results in an instance group with the number of EC2 instances specified by ScalingAdjustment, which should be expressed as a positive integer.
      */
     AdjustmentType?: AdjustmentType;
     /**
-     * The amount by which to scale in or scale out, based on the specified AdjustmentType. A positive value adds to the instance group's EC2 instance count while a negative number removes instances. If AdjustmentType is set to EXACT_CAPACITY, the number should only be a positive integer. If AdjustmentType is set to PERCENT_CHANGE_IN_CAPACITY, the value should express the percentage as a decimal. For example, -0.20 indicates a decrease in 20% increments of cluster capacity.
+     * The amount by which to scale in or scale out, based on the specified AdjustmentType. A positive value adds to the instance group's EC2 instance count while a negative number removes instances. If AdjustmentType is set to EXACT_CAPACITY, the number should only be a positive integer. If AdjustmentType is set to PERCENT_CHANGE_IN_CAPACITY, the value should express the percentage as an integer. For example, -20 indicates a decrease in 20% increments of cluster capacity.
      */
     ScalingAdjustment: Integer;
     /**
@@ -2307,11 +2337,11 @@ declare namespace EMR {
   export type SupportedProductsList = XmlStringMaxLen256[];
   export interface Tag {
     /**
-     * A user-defined key, which is the minimum required information for a valid tag. For more information, see Tagging Amazon EMR Resources. 
+     * A user-defined key, which is the minimum required information for a valid tag. For more information, see Tag . 
      */
     Key?: String;
     /**
-     * A user-defined value, which is optional in a tag. For more information, see Tagging Amazon EMR Resources. 
+     * A user-defined value, which is optional in a tag. For more information, see Tag Clusters. 
      */
     Value?: String;
   }

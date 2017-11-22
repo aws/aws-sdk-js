@@ -144,6 +144,7 @@ declare namespace XRay {
     NextToken?: String;
   }
   export type Double = number;
+  export type EC2InstanceId = string;
   export interface Edge {
     /**
      * Identifier of the edge. Unique within a service map.
@@ -193,6 +194,7 @@ declare namespace XRay {
      */
     TotalResponseTime?: NullableDouble;
   }
+  export type ErrorMessage = string;
   export interface ErrorStatistics {
     /**
      * The number of requests that failed with a 419 throttling status code.
@@ -321,6 +323,7 @@ declare namespace XRay {
      */
     Count?: Integer;
   }
+  export type Hostname = string;
   export interface Http {
     /**
      * The request URL.
@@ -356,15 +359,15 @@ declare namespace XRay {
     /**
      * 
      */
-    EC2InstanceId?: String;
+    EC2InstanceId?: EC2InstanceId;
     /**
      * 
      */
-    Hostname?: String;
+    Hostname?: Hostname;
     /**
      * 
      */
-    ResourceARN?: String;
+    ResourceARN?: ResourceARN;
   }
   export interface PutTelemetryRecordsResult {
   }
@@ -380,6 +383,7 @@ declare namespace XRay {
      */
     UnprocessedTraceSegments?: UnprocessedTraceSegmentList;
   }
+  export type ResourceARN = string;
   export interface Segment {
     /**
      * The segment's ID.
@@ -495,7 +499,7 @@ declare namespace XRay {
     /**
      * 
      */
-    Timestamp?: Timestamp;
+    Timestamp: Timestamp;
     /**
      * 
      */

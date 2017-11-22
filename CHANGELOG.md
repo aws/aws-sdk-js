@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.154.0-->
+<!--LATEST=2.155.0-->
 <!--ENTRYINSERT-->
+
+## 2.155.0
+* feature: APIGateway: Add support for Access logs and customizable integration timeouts
+* feature: CloudFormation: 1) Instance-level parameter overrides (CloudFormation-StackSet feature): This feature will allow the customers to override the template parameters on specific stackInstances. Customers will also have ability to update their existing instances with/without parameter-overrides using a new API "UpdateStackInstances"                                                                                                                                                                                                                                                         2) Add support for SSM parameters in CloudFormation - This feature will allow the customers to use Systems Manager parameters in CloudFormation templates. They will be able to see values for these parameters in Describe APIs.
+* feature: CodeBuild: Adding support for accessing Amazon VPC resources from AWS CodeBuild, dependency caching and build badges.
+* feature: EMR: Enable Kerberos on Amazon EMR. 
+* feature: Rekognition: This release includes updates to Amazon Rekognition for the following APIs. The new DetectText API allows you to recognize and extract textual content from images. Face Model Versioning has been added to operations that deal with face detection.
+* feature: Shield: The AWS Shield SDK has been updated in order to support Elastic IP address protections, the addition of AttackProperties objects in DescribeAttack responses, and a new GetSubscriptionState operation.
+* feature: StorageGateway: AWS Storage Gateway now enables you to get notification when all your files written to your NFS file share have been uploaded to Amazon S3. Storage Gateway also enables guessing of the MIME type for uploaded objects based on file extensions.
+* feature: XRay: Added automatic pagination support for AWS X-Ray APIs in the SDKs that support this feature.
 
 ## 2.154.0
 * feature: CodeCommit: AWS CodeCommit now supports pull requests. You can use pull requests to collaboratively review code changes for minor changes or fixes, major feature additions, or new versions of your released software.

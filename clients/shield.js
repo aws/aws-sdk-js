@@ -8,6 +8,7 @@ AWS.Shield = Service.defineService('shield', ['2016-06-02']);
 Object.defineProperty(apiLoader.services['shield'], '2016-06-02', {
   get: function get() {
     var model = require('../apis/shield-2016-06-02.min.json');
+    model.paginators = require('../apis/shield-2016-06-02.paginators.json').pagination;
     return model;
   },
   enumerable: true,

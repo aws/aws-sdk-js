@@ -12,11 +12,11 @@ declare class Shield extends Service {
   constructor(options?: Shield.Types.ClientConfiguration)
   config: Config & Shield.Types.ClientConfiguration;
   /**
-   * Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, or an Amazon Route 53 hosted zone.
+   * Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Elastic IP Address, or an Amazon Route 53 hosted zone.
    */
   createProtection(params: Shield.Types.CreateProtectionRequest, callback?: (err: AWSError, data: Shield.Types.CreateProtectionResponse) => void): Request<Shield.Types.CreateProtectionResponse, AWSError>;
   /**
-   * Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, or an Amazon Route 53 hosted zone.
+   * Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Elastic IP Address, or an Amazon Route 53 hosted zone.
    */
   createProtection(callback?: (err: AWSError, data: Shield.Types.CreateProtectionResponse) => void): Request<Shield.Types.CreateProtectionResponse, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class Shield extends Service {
    */
   deleteProtection(callback?: (err: AWSError, data: Shield.Types.DeleteProtectionResponse) => void): Request<Shield.Types.DeleteProtectionResponse, AWSError>;
   /**
-   * Removes AWS Shield Advanced from an account.
+   * Removes AWS Shield Advanced from an account. AWS Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. 
    */
   deleteSubscription(params: Shield.Types.DeleteSubscriptionRequest, callback?: (err: AWSError, data: Shield.Types.DeleteSubscriptionResponse) => void): Request<Shield.Types.DeleteSubscriptionResponse, AWSError>;
   /**
-   * Removes AWS Shield Advanced from an account.
+   * Removes AWS Shield Advanced from an account. AWS Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. 
    */
   deleteSubscription(callback?: (err: AWSError, data: Shield.Types.DeleteSubscriptionResponse) => void): Request<Shield.Types.DeleteSubscriptionResponse, AWSError>;
   /**
@@ -67,6 +67,14 @@ declare class Shield extends Service {
    * Provides details about the AWS Shield Advanced subscription for an account.
    */
   describeSubscription(callback?: (err: AWSError, data: Shield.Types.DescribeSubscriptionResponse) => void): Request<Shield.Types.DescribeSubscriptionResponse, AWSError>;
+  /**
+   * Returns the SubscriptionState, either Active or Inactive.
+   */
+  getSubscriptionState(params: Shield.Types.GetSubscriptionStateRequest, callback?: (err: AWSError, data: Shield.Types.GetSubscriptionStateResponse) => void): Request<Shield.Types.GetSubscriptionStateResponse, AWSError>;
+  /**
+   * Returns the SubscriptionState, either Active or Inactive.
+   */
+  getSubscriptionState(callback?: (err: AWSError, data: Shield.Types.GetSubscriptionStateResponse) => void): Request<Shield.Types.GetSubscriptionStateResponse, AWSError>;
   /**
    * Returns all ongoing DDoS attacks or all DDoS attacks during a specified time period.
    */
@@ -99,11 +107,11 @@ declare namespace Shield {
      */
     SubResources?: SubResourceSummaryList;
     /**
-     * The time the attack started, in the format 2016-12-16T13:50Z.
+     * The time the attack started, in Unix time in seconds. For more information see timestamp.
      */
     StartTime?: AttackTimestamp;
     /**
-     * The time the attack ended, in the format 2016-12-16T13:50Z.
+     * The time the attack ended, in Unix time in seconds. For more information see timestamp.
      */
     EndTime?: AttackTimestamp;
     /**
@@ -111,11 +119,40 @@ declare namespace Shield {
      */
     AttackCounters?: SummarizedCounterList;
     /**
+     * The array of AttackProperty objects.
+     */
+    AttackProperties?: AttackProperties;
+    /**
      * List of mitigation actions taken for the attack.
      */
     Mitigations?: MitigationList;
   }
   export type AttackId = string;
+  export type AttackLayer = "NETWORK"|"APPLICATION"|string;
+  export type AttackProperties = AttackProperty[];
+  export interface AttackProperty {
+    /**
+     * The type of DDoS event that was observed. NETWORK indicates layer 3 and layer 4 events and APPLICATION indicates layer 7 events.
+     */
+    AttackLayer?: AttackLayer;
+    /**
+     * Defines the DDoS attack property information that is provided.
+     */
+    AttackPropertyIdentifier?: AttackPropertyIdentifier;
+    /**
+     * The array of Contributor objects that includes the top five contributors to an attack. 
+     */
+    TopContributors?: TopContributors;
+    /**
+     * The unit of the Value of the contributions.
+     */
+    Unit?: Unit;
+    /**
+     * The total contributions made to this attack by all contributors, not just the five listed in the TopContributors list.
+     */
+    Total?: Long;
+  }
+  export type AttackPropertyIdentifier = "DESTINATION_URL"|"REFERRER"|"SOURCE_ASN"|"SOURCE_COUNTRY"|"SOURCE_IP_ADDRESS"|"SOURCE_USER_AGENT"|string;
   export type AttackSummaries = AttackSummary[];
   export interface AttackSummary {
     /**
@@ -127,11 +164,11 @@ declare namespace Shield {
      */
     ResourceArn?: String;
     /**
-     * The start time of the attack, in the format 2016-12-16T13:50Z.
+     * The start time of the attack, in Unix time in seconds. For more information see timestamp.
      */
     StartTime?: AttackTimestamp;
     /**
-     * The end time of the attack, in the format 2016-12-16T13:50Z.
+     * The end time of the attack, in Unix time in seconds. For more information see timestamp.
      */
     EndTime?: AttackTimestamp;
     /**
@@ -142,18 +179,28 @@ declare namespace Shield {
   export type AttackTimestamp = Date;
   export interface AttackVectorDescription {
     /**
-     * The attack type, for example, SNMP reflection or SYN flood.
+     * The attack type. Valid values:   UDP_TRAFFIC   UDP_FRAGMENT   GENERIC_UDP_REFLECTION   DNS_REFLECTION   NTP_REFLECTION   CHARGEN_REFLECTION   SSDP_REFLECTION   PORT_MAPPER   RIP_REFLECTION   SNMP_REFLECTION   MSSQL_REFLECTION   NET_BIOS_REFLECTION   SYN_FLOOD   ACK_FLOOD   REQUEST_FLOOD  
      */
     VectorType: String;
   }
   export type AttackVectorDescriptionList = AttackVectorDescription[];
+  export interface Contributor {
+    /**
+     * The name of the contributor. This is dependent on the AttackPropertyIdentifier. For example, if the AttackPropertyIdentifier is SOURCE_COUNTRY, the Name could be United States.
+     */
+    Name?: String;
+    /**
+     * The contribution of this contributor expressed in Protection units. For example 10,000.
+     */
+    Value?: Long;
+  }
   export interface CreateProtectionRequest {
     /**
      * Friendly name for the Protection you are creating.
      */
     Name: ProtectionName;
     /**
-     * The ARN (Amazon Resource Name) of the resource to be protected.
+     * The ARN (Amazon Resource Name) of the resource to be protected. The ARN should be in one of the following formats:   For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id     For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name     For AWS CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id     For Amazon Route 53: arn:aws:route53::account-id:hostedzone/hosted-zone-id     For an Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id    
      */
     ResourceArn: ResourceArn;
   }
@@ -213,6 +260,14 @@ declare namespace Shield {
   }
   export type Double = number;
   export type DurationInSeconds = number;
+  export interface GetSubscriptionStateRequest {
+  }
+  export interface GetSubscriptionStateResponse {
+    /**
+     * The status of the subscription.
+     */
+    SubscriptionState: SubscriptionState;
+  }
   export type Integer = number;
   export type LimitNumber = number;
   export type LimitType = string;
@@ -222,11 +277,11 @@ declare namespace Shield {
      */
     ResourceArns?: ResourceArnFilterList;
     /**
-     * The time period for the attacks.
+     * The start of the time period for the attacks. This is a timestamp type. The sample request above indicates a number type because the default used by WAF is Unix time in seconds. However any valid timestamp format is allowed. 
      */
     StartTime?: TimeRange;
     /**
-     * The end of the time period for the attacks.
+     * The end of the time period for the attacks. This is a timestamp type. The sample request above indicates a number type because the default used by WAF is Unix time in seconds. However any valid timestamp format is allowed. 
      */
     EndTime?: TimeRange;
     /**
@@ -268,6 +323,7 @@ declare namespace Shield {
      */
     NextToken?: Token;
   }
+  export type Long = number;
   export type MaxResults = number;
   export interface Mitigation {
     /**
@@ -318,7 +374,7 @@ declare namespace Shield {
   export type SubResourceType = "IP"|"URL"|string;
   export interface Subscription {
     /**
-     * The start time of the subscription, in the format "2016-12-16T13:50Z".
+     * The start time of the subscription, in Unix time in seconds. For more information see timestamp.
      */
     StartTime?: Timestamp;
     /**
@@ -326,6 +382,7 @@ declare namespace Shield {
      */
     TimeCommitmentInSeconds?: DurationInSeconds;
   }
+  export type SubscriptionState = "ACTIVE"|"INACTIVE"|string;
   export interface SummarizedAttackVector {
     /**
      * The attack type, for example, SNMP reflection or SYN flood.
@@ -366,16 +423,18 @@ declare namespace Shield {
   export type SummarizedCounterList = SummarizedCounter[];
   export interface TimeRange {
     /**
-     * The start time, in the format 2016-12-16T13:50Z.
+     * The start time, in Unix time in seconds. For more information see timestamp.
      */
     FromInclusive?: AttackTimestamp;
     /**
-     * The end time, in the format 2016-12-16T15:50Z.
+     * The end time, in Unix time in seconds. For more information see timestamp.
      */
     ToExclusive?: AttackTimestamp;
   }
   export type Timestamp = Date;
   export type Token = string;
+  export type TopContributors = Contributor[];
+  export type Unit = "BITS"|"BYTES"|"PACKETS"|"REQUESTS"|string;
   export type errorMessage = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

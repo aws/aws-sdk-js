@@ -207,6 +207,10 @@
       }
     },
     "Double":{"type":"double"},
+    "EC2InstanceId":{
+      "type":"string",
+      "max":20
+    },
     "Edge":{
       "type":"structure",
       "members":{
@@ -267,6 +271,7 @@
       },
       "documentation":"<p>Response statistics for an edge.</p>"
     },
+    "ErrorMessage":{"type":"string"},
     "ErrorStatistics":{
       "type":"structure",
       "members":{
@@ -302,7 +307,7 @@
     "FilterExpression":{
       "type":"string",
       "max":2000,
-      "min":0
+      "min":1
     },
     "GetServiceGraphRequest":{
       "type":"structure",
@@ -441,6 +446,10 @@
       },
       "documentation":"<p>An entry in a histogram for a statistic. A histogram maps the range of observed values on the X axis, and the prevalence of each value on the Y axis.</p>"
     },
+    "Hostname":{
+      "type":"string",
+      "max":255
+    },
     "Http":{
       "type":"structure",
       "members":{
@@ -471,6 +480,7 @@
     "InvalidRequestException":{
       "type":"structure",
       "members":{
+        "Message":{"shape":"ErrorMessage"}
       },
       "documentation":"<p>The request is missing required parameters or has invalid parameters.</p>",
       "exception":true
@@ -488,15 +498,15 @@
           "documentation":"<p/>"
         },
         "EC2InstanceId":{
-          "shape":"String",
+          "shape":"EC2InstanceId",
           "documentation":"<p/>"
         },
         "Hostname":{
-          "shape":"String",
+          "shape":"Hostname",
           "documentation":"<p/>"
         },
         "ResourceARN":{
-          "shape":"String",
+          "shape":"ResourceARN",
           "documentation":"<p/>"
         }
       }
@@ -525,6 +535,10 @@
         }
       }
     },
+    "ResourceARN":{
+      "type":"string",
+      "max":500
+    },
     "Segment":{
       "type":"structure",
       "members":{
@@ -543,11 +557,7 @@
       "type":"string",
       "min":1
     },
-    "SegmentId":{
-      "type":"string",
-      "max":16,
-      "min":16
-    },
+    "SegmentId":{"type":"string"},
     "SegmentList":{
       "type":"list",
       "member":{"shape":"Segment"}
@@ -673,6 +683,7 @@
     "String":{"type":"string"},
     "TelemetryRecord":{
       "type":"structure",
+      "required":["Timestamp"],
       "members":{
         "Timestamp":{
           "shape":"Timestamp",
@@ -708,6 +719,7 @@
     "ThrottledException":{
       "type":"structure",
       "members":{
+        "Message":{"shape":"ErrorMessage"}
       },
       "documentation":"<p>The request exceeds the maximum number of requests per second.</p>",
       "error":{"httpStatusCode":429},
@@ -735,7 +747,7 @@
     "TraceId":{
       "type":"string",
       "max":35,
-      "min":35
+      "min":1
     },
     "TraceIdList":{
       "type":"list",

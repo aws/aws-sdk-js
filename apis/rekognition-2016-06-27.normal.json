@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"Amazon Rekognition",
+    "serviceId":"Rekognition",
     "signatureVersion":"v4",
     "targetPrefix":"RekognitionService",
     "uid":"rekognition-2016-06-27"
@@ -29,7 +30,7 @@
         {"shape":"ProvisionedThroughputExceededException"},
         {"shape":"InvalidImageFormatException"}
       ],
-      "documentation":"<p>Compares a face in the <i>source</i> input image with each face detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>If the image doesn't contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn't persist.</p> </note> <p>For an example, see <a>get-started-exercise-compare-faces</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>"
+      "documentation":"<p>Compares a face in the <i>source</i> input image with each of the 100 largest faces detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>You pass the input and target images either as base64-encoded image bytes or as a references to images in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>If the image doesn't contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an <code>InvalidParameterException</code> error. </p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn't persist.</p> </note> <p>For an example, see <a>get-started-exercise-compare-faces</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>"
     },
     "CreateCollection":{
       "name":"CreateCollection",
@@ -103,7 +104,7 @@
         {"shape":"ProvisionedThroughputExceededException"},
         {"shape":"InvalidImageFormatException"}
       ],
-      "documentation":"<p>Detects faces within an image (JPEG or PNG) that is provided as input.</p> <p> For each face detected, the operation returns face details including a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), gender, presence of beard, sunglasses, etc. </p> <p>The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm may not detect the faces or might detect faces with lower confidence. </p> <note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> </note> <p>For an example, see <a>get-started-exercise-detect-faces</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectFaces</code> action. </p>"
+      "documentation":"<p>Detects faces within an image that is provided as input.</p> <p> <code>DetectFaces</code> detects the 100 largest faces in the image. For each face detected, the operation returns face details including a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), gender, presence of beard, sunglasses, etc. </p> <p>The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm may not detect the faces or might detect faces with lower confidence. </p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> </note> <p>For an example, see <a>get-started-exercise-detect-faces</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectFaces</code> action. </p>"
     },
     "DetectLabels":{
       "name":"DetectLabels",
@@ -123,7 +124,7 @@
         {"shape":"ProvisionedThroughputExceededException"},
         {"shape":"InvalidImageFormatException"}
       ],
-      "documentation":"<p>Detects instances of real-world labels within an image (JPEG or PNG) provided as input. This includes objects like flower, tree, and table; events like wedding, graduation, and birthday party; and concepts like landscape, evening, and nature. For an example, see <a>get-started-exercise-detect-labels</a>.</p> <p> For each object, scene, and concept the API returns one or more labels. Each label provides the object name, and the level of confidence that the image contains the object. For example, suppose the input image has a lighthouse, the sea, and a rock. The response will include all three labels, one for each object. </p> <p> <code>{Name: lighthouse, Confidence: 98.4629}</code> </p> <p> <code>{Name: rock,Confidence: 79.2097}</code> </p> <p> <code> {Name: sea,Confidence: 75.061}</code> </p> <p> In the preceding example, the operation returns one label for each of the three objects. The operation can also return multiple labels for the same object in the image. For example, if the input image shows a flower (for example, a tulip), the operation might return the following three labels. </p> <p> <code>{Name: flower,Confidence: 99.0562}</code> </p> <p> <code>{Name: plant,Confidence: 99.0562}</code> </p> <p> <code>{Name: tulip,Confidence: 99.0562}</code> </p> <p>In this example, the detection algorithm more precisely identifies the flower as a tulip.</p> <p>You can provide the input image as an S3 object or as base64-encoded bytes. In response, the API returns an array of labels. In addition, the response also includes the orientation correction. Optionally, you can specify <code>MinConfidence</code> to control the confidence threshold for the labels returned. The default is 50%. You can also add the <code>MaxLabels</code> parameter to limit the number of labels returned. </p> <note> <p>If the object detected is a person, the operation doesn't provide the same facial details that the <a>DetectFaces</a> operation provides.</p> </note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectLabels</code> action. </p>"
+      "documentation":"<p>Detects instances of real-world labels within an image (JPEG or PNG) provided as input. This includes objects like flower, tree, and table; events like wedding, graduation, and birthday party; and concepts like landscape, evening, and nature. For an example, see <a>get-started-exercise-detect-labels</a>.</p> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> For each object, scene, and concept the API returns one or more labels. Each label provides the object name, and the level of confidence that the image contains the object. For example, suppose the input image has a lighthouse, the sea, and a rock. The response will include all three labels, one for each object. </p> <p> <code>{Name: lighthouse, Confidence: 98.4629}</code> </p> <p> <code>{Name: rock,Confidence: 79.2097}</code> </p> <p> <code> {Name: sea,Confidence: 75.061}</code> </p> <p> In the preceding example, the operation returns one label for each of the three objects. The operation can also return multiple labels for the same object in the image. For example, if the input image shows a flower (for example, a tulip), the operation might return the following three labels. </p> <p> <code>{Name: flower,Confidence: 99.0562}</code> </p> <p> <code>{Name: plant,Confidence: 99.0562}</code> </p> <p> <code>{Name: tulip,Confidence: 99.0562}</code> </p> <p>In this example, the detection algorithm more precisely identifies the flower as a tulip.</p> <p>In response, the API returns an array of labels. In addition, the response also includes the orientation correction. Optionally, you can specify <code>MinConfidence</code> to control the confidence threshold for the labels returned. The default is 50%. You can also add the <code>MaxLabels</code> parameter to limit the number of labels returned. </p> <note> <p>If the object detected is a person, the operation doesn't provide the same facial details that the <a>DetectFaces</a> operation provides.</p> </note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectLabels</code> action. </p>"
     },
     "DetectModerationLabels":{
       "name":"DetectModerationLabels",
@@ -143,7 +144,27 @@
         {"shape":"ProvisionedThroughputExceededException"},
         {"shape":"InvalidImageFormatException"}
       ],
-      "documentation":"<p>Detects explicit or suggestive adult content in a specified JPEG or PNG format image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate. For information about moderation labels, see <a>image-moderation</a>.</p>"
+      "documentation":"<p>Detects explicit or suggestive adult content in a specified JPEG or PNG format image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate. For information about moderation labels, see <a>image-moderation</a>.</p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>"
+    },
+    "DetectText":{
+      "name":"DetectText",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetectTextRequest"},
+      "output":{"shape":"DetectTextResponse"},
+      "errors":[
+        {"shape":"InvalidS3ObjectException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ImageTooLargeException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"InvalidImageFormatException"}
+      ],
+      "documentation":"<p>Detects text in the input image and converts it into machine-readable text.</p> <p>Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file. </p> <p>The <code>DetectText</code> operation returns text in an array of elements, <code>TextDetections</code>. Each <code>TextDetection</code> element provides information about a single word or line of text that was detected in the image. </p> <p>A word is one or more ISO basic latin script characters that are not separated by spaces. <code>DetectText</code> can detect up to 50 words in an image.</p> <p>A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the <code>DetectText</code> operation returns multiple lines.</p> <p>To determine whether a <code>TextDetection</code> element is a line of text or a word, use the <code>TextDetection</code> object <code>Type</code> field. </p> <p>To be detected, text must be within +/- 30 degrees orientation of the horizontal axis.</p> <p>For more information, see <a>text-detection</a>.</p>"
     },
     "GetCelebrityInfo":{
       "name":"GetCelebrityInfo",
@@ -182,7 +203,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidImageFormatException"}
       ],
-      "documentation":"<p>Detects faces in the input image and adds them to the specified collection. </p> <p> Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations. </p> <p>If you provide the optional <code>externalImageID</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. </p> <p>In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image. If you request all facial attributes (using the <code>detectionAttributes</code> parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mount) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn't save duplicate face metadata. </p> <p>For an example, see <a>example2</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>"
+      "documentation":"<p>Detects faces in the input image and adds them to the specified collection. </p> <p>Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations.</p> <p>If you are using version 1.0 of the face detection model, <code>IndexFaces</code> indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. To determine which version of the model you are using, check the the value of <code>FaceModelVersion</code> in the response from <code>IndexFaces</code>. For more information, see <a>face-detection-model</a>.</p> <p>If you provide the optional <code>ExternalImageID</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. </p> <p>In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image. If you request all facial attributes (using the <code>detectionAttributes</code> parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mount) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn't save duplicate face metadata. </p> <p>The input image is passed either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p>For an example, see <a>example2</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>"
     },
     "ListCollections":{
       "name":"ListCollections",
@@ -241,7 +262,7 @@
         {"shape":"ProvisionedThroughputExceededException"},
         {"shape":"InvalidImageFormatException"}
       ],
-      "documentation":"<p>Returns an array of celebrities recognized in the input image. The image is passed either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. The image must be either a PNG or JPEG formatted file. For more information, see <a>celebrity-recognition</a>. </p> <p> <code>RecognizeCelebrities</code> returns the 15 largest faces in the image. It lists recognized celebrities in the <code>CelebrityFaces</code> list and unrecognized faces in the <code>UnrecognizedFaces</code> list. The operation doesn't return celebrities whose face sizes are smaller than the largest 15 faces in the image.</p> <p>For each celebrity recognized, the API returns a <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity name, ID, URL links to additional information, match confidence, and a <code>ComparedFace</code> object that you can use to locate the celebrity's face on the image.</p> <p>Rekognition does not retain information about which images a celebrity has been recognized in. Your application must store this information and use the <code>Celebrity</code> ID property as a unique identifier for the celebrity. If you don't store the celebrity name or additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the ID to identify the celebrity in a call to the operation.</p> <p>For an example, see <a>recognize-celebrities-tutorial</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:RecognizeCelebrities</code> operation.</p>"
+      "documentation":"<p>Returns an array of celebrities recognized in the input image. For more information, see <a>celebrity-recognition</a>. </p> <p> <code>RecognizeCelebrities</code> returns the 100 largest faces in the image. It lists recognized celebrities in the <code>CelebrityFaces</code> array and unrecognized faces in the <code>UnrecognizedFaces</code> array. <code>RecognizeCelebrities</code> doesn't return celebrities whose faces are not amongst the largest 100 faces in the image.</p> <p>For each celebrity recognized, the <code>RecognizeCelebrities</code> returns a <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity name, ID, URL links to additional information, match confidence, and a <code>ComparedFace</code> object that you can use to locate the celebrity's face on the image.</p> <p>Rekognition does not retain information about which images a celebrity has been recognized in. Your application must store this information and use the <code>Celebrity</code> ID property as a unique identifier for the celebrity. If you don't store the celebrity name or additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the ID to identify the celebrity in a call to the operation.</p> <p>You pass the imput image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p>For an example, see <a>recognize-celebrities-tutorial</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:RecognizeCelebrities</code> operation.</p>"
     },
     "SearchFaces":{
       "name":"SearchFaces",
@@ -280,7 +301,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidImageFormatException"}
       ],
-      "documentation":"<p>For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection. </p> <note> <p> To search for all faces in an input image, you might first call the operation, and then use the face IDs returned in subsequent calls to the operation. </p> <p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes in the response to make face crops, which then you can pass in to the <code>SearchFacesByImage</code> operation. </p> </note> <p> The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a <code>similarity</code> indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image. </p> <p>For an example, see <a>example3</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code> action.</p>"
+      "documentation":"<p>For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection. </p> <note> <p> To search for all faces in an input image, you might first call the operation, and then use the face IDs returned in subsequent calls to the operation. </p> <p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes in the response to make face crops, which then you can pass in to the <code>SearchFacesByImage</code> operation. </p> </note> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a <code>similarity</code> indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image. </p> <p>For an example, see <a>example3</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code> action.</p>"
     }
   },
   "shapes":{
@@ -351,7 +372,7 @@
           "documentation":"<p>Top coordinate of the bounding box as a ratio of overall image height.</p>"
         }
       },
-      "documentation":"<p>Identifies the bounding box around the object or face. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p> The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>"
+      "documentation":"<p>Identifies the bounding box around the object, face or text. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>"
     },
     "Celebrity":{
       "type":"structure",
@@ -420,11 +441,11 @@
       "members":{
         "SourceImage":{
           "shape":"Image",
-          "documentation":"<p>The source image, either as bytes or as an S3 object.</p>"
+          "documentation":"<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p>"
         },
         "TargetImage":{
           "shape":"Image",
-          "documentation":"<p>The target image, either as bytes or as an S3 object.</p>"
+          "documentation":"<p>The target image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p>"
         },
         "SimilarityThreshold":{
           "shape":"Percent",
@@ -525,6 +546,10 @@
         "CollectionArn":{
           "shape":"String",
           "documentation":"<p>Amazon Resource Name (ARN) of the collection. You can use this to manage permissions on your resources. </p>"
+        },
+        "FaceModelVersion":{
+          "shape":"String",
+          "documentation":"<p>Version number of the face detection model associated with the collection you are creating.</p>"
         }
       }
     },
@@ -584,7 +609,7 @@
       "members":{
         "Image":{
           "shape":"Image",
-          "documentation":"<p>The image in which you want to detect faces. You can specify a blob or an S3 object. </p>"
+          "documentation":"<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p>"
         },
         "Attributes":{
           "shape":"Attributes",
@@ -611,7 +636,7 @@
       "members":{
         "Image":{
           "shape":"Image",
-          "documentation":"<p>The input image. You can provide a blob of image bytes or an S3 object.</p>"
+          "documentation":"<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p>"
         },
         "MaxLabels":{
           "shape":"UInteger",
@@ -642,7 +667,7 @@
       "members":{
         "Image":{
           "shape":"Image",
-          "documentation":"<p>The input image as bytes or an S3 object.</p>"
+          "documentation":"<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p>"
         },
         "MinConfidence":{
           "shape":"Percent",
@@ -655,7 +680,26 @@
       "members":{
         "ModerationLabels":{
           "shape":"ModerationLabels",
-          "documentation":"<p>An array of labels for explicit or suggestive adult content found in the image. The list includes the top-level label and each child label detected in the image. This is useful for filtering specific categories of content. </p>"
+          "documentation":"<p>An array of labels for explicit or suggestive adult content found in the image. The list includes the top-level label and each second-level label detected in the image. This is useful for filtering specific categories of content. </p>"
+        }
+      }
+    },
+    "DetectTextRequest":{
+      "type":"structure",
+      "required":["Image"],
+      "members":{
+        "Image":{
+          "shape":"Image",
+          "documentation":"<p>The input image as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI to call Amazon Rekognition operations, you can't pass image bytes. </p>"
+        }
+      }
+    },
+    "DetectTextResponse":{
+      "type":"structure",
+      "members":{
+        "TextDetections":{
+          "shape":"TextDetectionList",
+          "documentation":"<p>An array of text that was detected in the input image.</p>"
         }
       }
     },
@@ -852,6 +896,10 @@
       "type":"list",
       "member":{"shape":"FaceMatch"}
     },
+    "FaceModelVersionList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "FaceRecord":{
       "type":"structure",
       "members":{
@@ -891,6 +939,20 @@
         "Male",
         "Female"
       ]
+    },
+    "Geometry":{
+      "type":"structure",
+      "members":{
+        "BoundingBox":{
+          "shape":"BoundingBox",
+          "documentation":"<p>An axis-aligned coarse representation of the detected text's location on the image.</p>"
+        },
+        "Polygon":{
+          "shape":"Polygon",
+          "documentation":"<p>Within the bounding box, a fine-grained polygon around the detected text.</p>"
+        }
+      },
+      "documentation":"<p>Information about where text detected by is located on an image.</p>"
     },
     "GetCelebrityInfoRequest":{
       "type":"structure",
@@ -972,7 +1034,7 @@
         },
         "Image":{
           "shape":"Image",
-          "documentation":"<p>The input image as bytes or an S3 object.</p>"
+          "documentation":"<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p>"
         },
         "ExternalImageId":{
           "shape":"ExternalImageId",
@@ -994,6 +1056,10 @@
         "OrientationCorrection":{
           "shape":"OrientationCorrection",
           "documentation":"<p>The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct image orientation. The bounding box coordinates returned in <code>FaceRecords</code> represent face locations before the image orientation is corrected. </p> <note> <p>If the input image is in jpeg format, it might contain exchangeable image (Exif) metadata. If so, and the Exif metadata populates the orientation field, the value of <code>OrientationCorrection</code> is null and the bounding box coordinates in <code>FaceRecords</code> represent face locations after Exif metadata is used to correct the image orientation. Images in .png format don't contain Exif metadata.</p> </note>"
+        },
+        "FaceModelVersion":{
+          "shape":"String",
+          "documentation":"<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
         }
       }
     },
@@ -1126,6 +1192,10 @@
         "NextToken":{
           "shape":"PaginationToken",
           "documentation":"<p>If the result is truncated, the response provides a <code>NextToken</code> that you can use in the subsequent request to fetch the next set of collection IDs.</p>"
+        },
+        "FaceModelVersions":{
+          "shape":"FaceModelVersionList",
+          "documentation":"<p>Version numbers of the face detection models associated with the collections in the array <code>CollectionIds</code>. For example, the value of <code>FaceModelVersions[2]</code> is the version number for the face detection model used by the collection in <code>CollectionId[2]</code>.</p>"
         }
       }
     },
@@ -1157,6 +1227,10 @@
         "NextToken":{
           "shape":"String",
           "documentation":"<p>If the response is truncated, Amazon Rekognition returns this token that you can use in the subsequent request to retrieve the next set of faces.</p>"
+        },
+        "FaceModelVersion":{
+          "shape":"String",
+          "documentation":"<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
         }
       }
     },
@@ -1238,6 +1312,24 @@
       "max":100,
       "min":0
     },
+    "Point":{
+      "type":"structure",
+      "members":{
+        "X":{
+          "shape":"Float",
+          "documentation":"<p>The value of the X coordinate for a point on a <code>Polygon</code>.</p>"
+        },
+        "Y":{
+          "shape":"Float",
+          "documentation":"<p>The value of the Y coordinate for a point on a <code>Polygon</code>.</p>"
+        }
+      },
+      "documentation":"<p>The X and Y coordinates of a point on an image. The X and Y values returned are ratios of the overall image size. For example, if the input image is 700x200 and the operation returns X=0.5 and Y=0.25, then the point is at the (350,50) pixel coordinate on the image.</p> <p>An array of <code>Point</code> objects, <code>Polygon</code>, is returned by . <code>Polygon</code> represents a fine-grained polygon around detected text. For more information, see . </p>"
+    },
+    "Polygon":{
+      "type":"list",
+      "member":{"shape":"Point"}
+    },
     "Pose":{
       "type":"structure",
       "members":{
@@ -1269,7 +1361,7 @@
       "members":{
         "Image":{
           "shape":"Image",
-          "documentation":"<p>The input image to use for celebrity recognition.</p>"
+          "documentation":"<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p>"
         }
       }
     },
@@ -1305,7 +1397,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>Collection specified in the request is not found.</p>",
+      "documentation":"<p>The collection specified in the request cannot be found.</p>",
       "exception":true
     },
     "S3Bucket":{
@@ -1355,7 +1447,7 @@
         },
         "Image":{
           "shape":"Image",
-          "documentation":"<p>The input image as bytes or an S3 object.</p>"
+          "documentation":"<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p>"
         },
         "MaxFaces":{
           "shape":"MaxFaces",
@@ -1381,6 +1473,10 @@
         "FaceMatches":{
           "shape":"FaceMatchList",
           "documentation":"<p>An array of faces that match the input face, along with the confidence in the match.</p>"
+        },
+        "FaceModelVersion":{
+          "shape":"String",
+          "documentation":"<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
         }
       }
     },
@@ -1419,6 +1515,10 @@
         "FaceMatches":{
           "shape":"FaceMatchList",
           "documentation":"<p>An array of faces that matched the input face, along with the confidence in the match.</p>"
+        },
+        "FaceModelVersion":{
+          "shape":"String",
+          "documentation":"<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
         }
       }
     },
@@ -1450,6 +1550,47 @@
         }
       },
       "documentation":"<p>Indicates whether or not the face is wearing sunglasses, and the confidence level in the determination.</p>"
+    },
+    "TextDetection":{
+      "type":"structure",
+      "members":{
+        "DetectedText":{
+          "shape":"String",
+          "documentation":"<p>The word or line of text recognized by Amazon Rekognition. </p>"
+        },
+        "Type":{
+          "shape":"TextTypes",
+          "documentation":"<p>The type of text that was detected.</p>"
+        },
+        "Id":{
+          "shape":"UInteger",
+          "documentation":"<p>The identifier for the detected text. The identifier is only unique for a single call to <code>DetectText</code>. </p>"
+        },
+        "ParentId":{
+          "shape":"UInteger",
+          "documentation":"<p>The Parent identifier for the detected text identified by the value of <code>ID</code>. If the type of detected text is <code>LINE</code>, the value of <code>ParentId</code> is <code>Null</code>. </p>"
+        },
+        "Confidence":{
+          "shape":"Percent",
+          "documentation":"<p>The confidence that Amazon Rekognition has in the accuracy of the detected text and the accuracy of the geometry points around the detected text.</p>"
+        },
+        "Geometry":{
+          "shape":"Geometry",
+          "documentation":"<p>The location of the detected text on the image. Includes an axis aligned coarse bounding box surrounding the text and a finer grain polygon for more accurate spatial information.</p>"
+        }
+      },
+      "documentation":"<p>Information about a word or line of text detected by .</p> <p>The <code>DetectedText</code> field contains the text that Amazon Rekognition detected in the image. </p> <p>Every word and line has an identifier (<code>Id</code>). Each word belongs to a line and has a parent identifier (<code>ParentId</code>) that identifies the line of text in which the word appears. The word <code>Id</code> is also an index for the word within a line of words. </p> <p>For more information, see <a>text-detection</a>.</p>"
+    },
+    "TextDetectionList":{
+      "type":"list",
+      "member":{"shape":"TextDetection"}
+    },
+    "TextTypes":{
+      "type":"string",
+      "enum":[
+        "LINE",
+        "WORD"
+      ]
     },
     "ThrottlingException":{
       "type":"structure",

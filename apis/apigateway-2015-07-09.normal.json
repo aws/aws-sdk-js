@@ -5,6 +5,7 @@
     "endpointPrefix":"apigateway",
     "protocol":"rest-json",
     "serviceFullName":"Amazon API Gateway",
+    "serviceId":"API Gateway",
     "signatureVersion":"v4",
     "uid":"apigateway-2015-07-09"
   },
@@ -960,7 +961,7 @@
         {"shape":"NotFoundException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Represents a get integration.</p>"
+      "documentation":"<p>Get the integration settings.</p>"
     },
     "GetIntegrationResponse":{
       "name":"GetIntegrationResponse",
@@ -1853,6 +1854,20 @@
     }
   },
   "shapes":{
+    "AccessLogSettings":{
+      "type":"structure",
+      "members":{
+        "format":{
+          "shape":"String",
+          "documentation":"<p>A single line format of the access logs of data, as specified by selected <a href=\"http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference\">$context variables</a>. The format must include at least <code>$context.requestId</code>.</p>"
+        },
+        "destinationArn":{
+          "shape":"String",
+          "documentation":"<p>The ARN of the CloudWatch Logs log group to receive access logs.</p>"
+        }
+      },
+      "documentation":"<p>Access log settings, including the access log format and access log destination ARN.</p>"
+    },
     "Account":{
       "type":"structure",
       "members":{
@@ -3929,7 +3944,7 @@
           "locationName":"http_method"
         }
       },
-      "documentation":"<p>Represents a get integration request.</p>"
+      "documentation":"<p>Represents a request to get the integration configuration.</p>"
     },
     "GetIntegrationResponseRequest":{
       "type":"structure",
@@ -4606,6 +4621,10 @@
           "shape":"ContentHandlingStrategy",
           "documentation":"<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a request payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a request payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehaviors</code> is configured to support payload pass-through.</p>"
         },
+        "timeoutInMillis":{
+          "shape":"Integer",
+          "documentation":"<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.</p>"
+        },
         "cacheNamespace":{
           "shape":"String",
           "documentation":"<p>Specifies the integration's cache namespace.</p>"
@@ -5148,6 +5167,10 @@
         "contentHandling":{
           "shape":"ContentHandlingStrategy",
           "documentation":"<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a request payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a request payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehaviors</code> is configured to support payload pass-through.</p>"
+        },
+        "timeoutInMillis":{
+          "shape":"NullableInteger",
+          "documentation":"<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.</p>"
         }
       },
       "documentation":"<p>Sets up a method's integration.</p>"
@@ -5639,6 +5662,10 @@
         "documentationVersion":{
           "shape":"String",
           "documentation":"<p>The version of the associated API documentation.</p>"
+        },
+        "accessLogSettings":{
+          "shape":"AccessLogSettings",
+          "documentation":"<p>The access log settings in this stage.</p>"
         },
         "createdDate":{
           "shape":"Timestamp",

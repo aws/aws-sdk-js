@@ -5,6 +5,7 @@
     "endpointPrefix":"cloudformation",
     "protocol":"query",
     "serviceFullName":"AWS CloudFormation",
+    "serviceId":"CloudFormation",
     "signatureVersion":"v4",
     "uid":"cloudformation-2010-05-15",
     "xmlNamespace":"http://cloudformation.amazonaws.com/doc/2010-05-15/"
@@ -567,6 +568,27 @@
       ],
       "documentation":"<p>Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the <a>DescribeStacks</a> action.</p> <p>To get a copy of the template for an existing stack, you can use the <a>GetTemplate</a> action.</p> <p>For more information about creating an update template, updating a stack, and monitoring the progress of the update, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html\">Updating a Stack</a>.</p>"
     },
+    "UpdateStackInstances":{
+      "name":"UpdateStackInstances",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateStackInstancesInput"},
+      "output":{
+        "shape":"UpdateStackInstancesOutput",
+        "resultWrapper":"UpdateStackInstancesResult"
+      },
+      "errors":[
+        {"shape":"StackSetNotFoundException"},
+        {"shape":"StackInstanceNotFoundException"},
+        {"shape":"OperationInProgressException"},
+        {"shape":"OperationIdAlreadyExistsException"},
+        {"shape":"StaleRequestException"},
+        {"shape":"InvalidOperationException"}
+      ],
+      "documentation":"<p>Updates the parameter values for stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. </p> <p>You can only update stack instances in regions and accounts where they already exist; to create additional stack instances, use <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html\">CreateStackInstances</a>. </p> <p>During stack set updates, any parameters overridden for a stack instance are not updated, but retain their overridden value.</p> <p>You can only update the parameter <i>values</i> that are specified in the stack set; to add or delete a parameter itself, use <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html\">UpdateStackSet</a> to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html\">UpdateStackSet</a> to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using <code>UpdateStackInstances</code>.</p>"
+    },
     "UpdateStackSet":{
       "name":"UpdateStackSet",
       "http":{
@@ -1061,6 +1083,10 @@
         "Regions":{
           "shape":"RegionList",
           "documentation":"<p>The names of one or more regions where you want to create stack instances using the specified AWS account(s). </p>"
+        },
+        "ParameterOverrides":{
+          "shape":"Parameters",
+          "documentation":"<p>A list of stack set parameters whose values you want to override in the selected stack instances.</p> <p>Any overridden parameter values will be applied to all stack instances in the specified accounts and regions. When specifying parameters and their values, be aware of how AWS CloudFormation sets parameter values during stack instance operations:</p> <ul> <li> <p>To override the current value for a parameter, include the parameter and specify its value.</p> </li> <li> <p>To leave a parameter set to its present value, you can do one of the following:</p> <ul> <li> <p>Do not include the parameter in the list.</p> </li> <li> <p>Include the parameter and specify <code>UsePreviousValue</code> as <code>true</code>. (You cannot specify both a value and set <code>UsePreviousValue</code> to <code>true</code>.)</p> </li> </ul> </li> <li> <p>To set all overridden parameter back to the values specified in the stack set, specify a parameter list but do not include any parameters.</p> </li> <li> <p>To leave all parameters set to their present values, do not specify this property at all.</p> </li> </ul> <p>During stack set updates, any parameter values overridden for a stack instance are not updated, but retain their overridden value.</p> <p>You can only override the parameter <i>values</i> that are specified in the stack set; to add or delete a parameter itself, use <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html\">UpdateStackSet</a> to update the stack set template.</p>"
         },
         "OperationPreferences":{
           "shape":"StackSetOperationPreferences",
@@ -2238,11 +2264,15 @@
         },
         "ParameterValue":{
           "shape":"ParameterValue",
-          "documentation":"<p>The value associated with the parameter.</p>"
+          "documentation":"<p>The input value associated with the parameter.</p>"
         },
         "UsePreviousValue":{
           "shape":"UsePreviousValue",
           "documentation":"<p>During a stack update, use the existing parameter value that the stack is using for a given parameter key. If you specify <code>true</code>, do not specify a parameter value.</p>"
+        },
+        "ResolvedValue":{
+          "shape":"ParameterValue",
+          "documentation":"<p>Read-only. The value that corresponds to a Systems Manager parameter key. This field is returned only for <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types\"> <code>SSM</code> parameter types</a> in the template.</p>"
         }
       },
       "documentation":"<p>The Parameter data type.</p>"
@@ -2731,6 +2761,10 @@
           "shape":"StackId",
           "documentation":"<p>The ID of the stack instance.</p>"
         },
+        "ParameterOverrides":{
+          "shape":"Parameters",
+          "documentation":"<p>A list of parameters from the stack set template whose values have been overridden in this stack instance.</p>"
+        },
         "Status":{
           "shape":"StackInstanceStatus",
           "documentation":"<p>The status of the stack instance, in terms of its synchronization with its associated stack set.</p> <ul> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to <code>true</code>, to delete the stack instance, and then delete the stack manually.</p> </li> <li> <p> <code>OUTDATED</code>: The stack isn't currently up to date with the stack set because:</p> <ul> <li> <p>The associated stack failed during a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation. </p> </li> <li> <p>The stack was part of a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation that failed or was stopped before the stack was created or updated. </p> </li> </ul> </li> <li> <p> <code>CURRENT</code>: The stack is currently up to date with the stack set.</p> </li> </ul>"
@@ -3008,8 +3042,7 @@
     "StackSetName":{"type":"string"},
     "StackSetNameOrId":{
       "type":"string",
-      "min":1,
-      "pattern":"[a-zA-Z][-a-zA-Z0-9]*"
+      "pattern":"[a-zA-Z][-a-zA-Z0-9]*(?::[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12})?"
     },
     "StackSetNotEmptyException":{
       "type":"structure",
@@ -3513,6 +3546,50 @@
         }
       },
       "documentation":"<p>The input for an <a>UpdateStack</a> action.</p>"
+    },
+    "UpdateStackInstancesInput":{
+      "type":"structure",
+      "required":[
+        "StackSetName",
+        "Accounts",
+        "Regions"
+      ],
+      "members":{
+        "StackSetName":{
+          "shape":"StackSetName",
+          "documentation":"<p>The name or unique ID of the stack set associated with the stack instances.</p>"
+        },
+        "Accounts":{
+          "shape":"AccountList",
+          "documentation":"<p>The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions.</p>"
+        },
+        "Regions":{
+          "shape":"RegionList",
+          "documentation":"<p>The names of one or more regions in which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions.</p>"
+        },
+        "ParameterOverrides":{
+          "shape":"Parameters",
+          "documentation":"<p> A list of input parameters whose values you want to update for the specified stack instances. </p> <p>Any overridden parameter values will be applied to all stack instances in the specified accounts and regions. When specifying parameters and their values, be aware of how AWS CloudFormation sets parameter values during stack instance update operations:</p> <ul> <li> <p>To override the current value for a parameter, include the parameter and specify its value.</p> </li> <li> <p>To leave a parameter set to its present value, you can do one of the following:</p> <ul> <li> <p>Do not include the parameter in the list.</p> </li> <li> <p>Include the parameter and specify <code>UsePreviousValue</code> as <code>true</code>. (You cannot specify both a value and set <code>UsePreviousValue</code> to <code>true</code>.)</p> </li> </ul> </li> <li> <p>To set all overridden parameter back to the values specified in the stack set, specify a parameter list but do not include any parameters.</p> </li> <li> <p>To leave all parameters set to their present values, do not specify this property at all.</p> </li> </ul> <p>During stack set updates, any parameter values overridden for a stack instance are not updated, but retain their overridden value.</p> <p>You can only override the parameter <i>values</i> that are specified in the stack set; to add or delete a parameter itself, use <code>UpdateStackSet</code> to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html\">UpdateStackSet</a> to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using <code>UpdateStackInstances</code>.</p>"
+        },
+        "OperationPreferences":{
+          "shape":"StackSetOperationPreferences",
+          "documentation":"<p>Preferences for how AWS CloudFormation performs this stack set operation.</p>"
+        },
+        "OperationId":{
+          "shape":"ClientRequestToken",
+          "documentation":"<p>The unique identifier for this stack set operation. </p> <p>The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You might retry stack set operation requests to ensure that AWS CloudFormation successfully received them.</p> <p>If you don't specify an operation ID, the SDK generates one automatically. </p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "UpdateStackInstancesOutput":{
+      "type":"structure",
+      "members":{
+        "OperationId":{
+          "shape":"ClientRequestToken",
+          "documentation":"<p>The unique identifier for this stack set operation. </p>"
+        }
+      }
     },
     "UpdateStackOutput":{
       "type":"structure",

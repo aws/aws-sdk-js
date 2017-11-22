@@ -29,7 +29,7 @@
         {"shape":"OptimisticLockException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, or an Amazon Route 53 hosted zone.</p>"
+      "documentation":"<p>Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Elastic IP Address, or an Amazon Route 53 hosted zone.</p>"
     },
     "CreateSubscription":{
       "name":"CreateSubscription",
@@ -73,7 +73,7 @@
         {"shape":"LockedSubscriptionException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Removes AWS Shield Advanced from an account.</p>"
+      "documentation":"<p>Removes AWS Shield Advanced from an account. AWS Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. </p>"
     },
     "DescribeAttack":{
       "name":"DescribeAttack",
@@ -116,6 +116,19 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Provides details about the AWS Shield Advanced subscription for an account.</p>"
+    },
+    "GetSubscriptionState":{
+      "name":"GetSubscriptionState",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetSubscriptionStateRequest"},
+      "output":{"shape":"GetSubscriptionStateResponse"},
+      "errors":[
+        {"shape":"InternalErrorException"}
+      ],
+      "documentation":"<p>Returns the <code>SubscriptionState</code>, either <code>Active</code> or <code>Inactive</code>.</p>"
     },
     "ListAttacks":{
       "name":"ListAttacks",
@@ -165,15 +178,19 @@
         },
         "StartTime":{
           "shape":"AttackTimestamp",
-          "documentation":"<p>The time the attack started, in the format 2016-12-16T13:50Z.</p>"
+          "documentation":"<p>The time the attack started, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
         },
         "EndTime":{
           "shape":"AttackTimestamp",
-          "documentation":"<p>The time the attack ended, in the format 2016-12-16T13:50Z.</p>"
+          "documentation":"<p>The time the attack ended, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
         },
         "AttackCounters":{
           "shape":"SummarizedCounterList",
           "documentation":"<p>List of counters that describe the attack for the specified time period.</p>"
+        },
+        "AttackProperties":{
+          "shape":"AttackProperties",
+          "documentation":"<p>The array of <a>AttackProperty</a> objects.</p>"
         },
         "Mitigations":{
           "shape":"MitigationList",
@@ -187,6 +204,54 @@
       "max":128,
       "min":1,
       "pattern":"[a-zA-Z0-9\\\\-]*"
+    },
+    "AttackLayer":{
+      "type":"string",
+      "enum":[
+        "NETWORK",
+        "APPLICATION"
+      ]
+    },
+    "AttackProperties":{
+      "type":"list",
+      "member":{"shape":"AttackProperty"}
+    },
+    "AttackProperty":{
+      "type":"structure",
+      "members":{
+        "AttackLayer":{
+          "shape":"AttackLayer",
+          "documentation":"<p>The type of DDoS event that was observed. <code>NETWORK</code> indicates layer 3 and layer 4 events and <code>APPLICATION</code> indicates layer 7 events.</p>"
+        },
+        "AttackPropertyIdentifier":{
+          "shape":"AttackPropertyIdentifier",
+          "documentation":"<p>Defines the DDoS attack property information that is provided.</p>"
+        },
+        "TopContributors":{
+          "shape":"TopContributors",
+          "documentation":"<p>The array of <a>Contributor</a> objects that includes the top five contributors to an attack. </p>"
+        },
+        "Unit":{
+          "shape":"Unit",
+          "documentation":"<p>The unit of the <code>Value</code> of the contributions.</p>"
+        },
+        "Total":{
+          "shape":"Long",
+          "documentation":"<p>The total contributions made to this attack by all contributors, not just the five listed in the <code>TopContributors</code> list.</p>"
+        }
+      },
+      "documentation":"<p>Details of the described attack.</p>"
+    },
+    "AttackPropertyIdentifier":{
+      "type":"string",
+      "enum":[
+        "DESTINATION_URL",
+        "REFERRER",
+        "SOURCE_ASN",
+        "SOURCE_COUNTRY",
+        "SOURCE_IP_ADDRESS",
+        "SOURCE_USER_AGENT"
+      ]
     },
     "AttackSummaries":{
       "type":"list",
@@ -205,11 +270,11 @@
         },
         "StartTime":{
           "shape":"AttackTimestamp",
-          "documentation":"<p>The start time of the attack, in the format 2016-12-16T13:50Z.</p>"
+          "documentation":"<p>The start time of the attack, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
         },
         "EndTime":{
           "shape":"AttackTimestamp",
-          "documentation":"<p>The end time of the attack, in the format 2016-12-16T13:50Z.</p>"
+          "documentation":"<p>The end time of the attack, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
         },
         "AttackVectors":{
           "shape":"AttackVectorDescriptionList",
@@ -225,7 +290,7 @@
       "members":{
         "VectorType":{
           "shape":"String",
-          "documentation":"<p>The attack type, for example, SNMP reflection or SYN flood.</p>"
+          "documentation":"<p>The attack type. Valid values:</p> <ul> <li> <p>UDP_TRAFFIC</p> </li> <li> <p>UDP_FRAGMENT</p> </li> <li> <p>GENERIC_UDP_REFLECTION</p> </li> <li> <p>DNS_REFLECTION</p> </li> <li> <p>NTP_REFLECTION</p> </li> <li> <p>CHARGEN_REFLECTION</p> </li> <li> <p>SSDP_REFLECTION</p> </li> <li> <p>PORT_MAPPER</p> </li> <li> <p>RIP_REFLECTION</p> </li> <li> <p>SNMP_REFLECTION</p> </li> <li> <p>MSSQL_REFLECTION</p> </li> <li> <p>NET_BIOS_REFLECTION</p> </li> <li> <p>SYN_FLOOD</p> </li> <li> <p>ACK_FLOOD</p> </li> <li> <p>REQUEST_FLOOD</p> </li> </ul>"
         }
       },
       "documentation":"<p>Describes the attack.</p>"
@@ -233,6 +298,20 @@
     "AttackVectorDescriptionList":{
       "type":"list",
       "member":{"shape":"AttackVectorDescription"}
+    },
+    "Contributor":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"String",
+          "documentation":"<p>The name of the contributor. This is dependent on the <code>AttackPropertyIdentifier</code>. For example, if the <code>AttackPropertyIdentifier</code> is <code>SOURCE_COUNTRY</code>, the <code>Name</code> could be <code>United States</code>.</p>"
+        },
+        "Value":{
+          "shape":"Long",
+          "documentation":"<p>The contribution of this contributor expressed in <a>Protection</a> units. For example <code>10,000</code>.</p>"
+        }
+      },
+      "documentation":"<p>A contributor to the attack and their contribution.</p>"
     },
     "CreateProtectionRequest":{
       "type":"structure",
@@ -247,7 +326,7 @@
         },
         "ResourceArn":{
           "shape":"ResourceArn",
-          "documentation":"<p>The ARN (Amazon Resource Name) of the resource to be protected.</p>"
+          "documentation":"<p>The ARN (Amazon Resource Name) of the resource to be protected.</p> <p>The ARN should be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i> </code> </p> </li> <li> <p>For AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For Amazon Route 53: <code>arn:aws:route53::<i>account-id</i>:hostedzone/<i>hosted-zone-id</i> </code> </p> </li> <li> <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i> </code> </p> </li> </ul>"
         }
       }
     },
@@ -352,6 +431,21 @@
       "type":"long",
       "min":0
     },
+    "GetSubscriptionStateRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "GetSubscriptionStateResponse":{
+      "type":"structure",
+      "required":["SubscriptionState"],
+      "members":{
+        "SubscriptionState":{
+          "shape":"SubscriptionState",
+          "documentation":"<p>The status of the subscription.</p>"
+        }
+      }
+    },
     "Integer":{"type":"integer"},
     "InternalErrorException":{
       "type":"structure",
@@ -395,7 +489,7 @@
         "Type":{"shape":"LimitType"},
         "Limit":{"shape":"LimitNumber"}
       },
-      "documentation":"<p>Exception that indicates that the operation would exceed a limit.</p>",
+      "documentation":"<p>Exception that indicates that the operation would exceed a limit.</p> <p> <code>Type</code> is the type of limit that would be exceeded.</p> <p> <code>Limit</code> is the threshold that would be exceeded.</p>",
       "exception":true
     },
     "ListAttacksRequest":{
@@ -407,11 +501,11 @@
         },
         "StartTime":{
           "shape":"TimeRange",
-          "documentation":"<p>The time period for the attacks.</p>"
+          "documentation":"<p>The start of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp format</a> is allowed. </p>"
         },
         "EndTime":{
           "shape":"TimeRange",
-          "documentation":"<p>The end of the time period for the attacks.</p>"
+          "documentation":"<p>The end of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp format</a> is allowed. </p>"
         },
         "NextToken":{
           "shape":"Token",
@@ -467,13 +561,14 @@
       "members":{
         "message":{"shape":"errorMessage"}
       },
-      "documentation":"<p>Exception that indicates that the subscription has been modified by another client. You can retry the request.</p>",
+      "documentation":"<p>Exception that indicates that the subscription you are trying to delete has not yet completed the 1-year commitment. You cannot delete this subscription.</p>",
       "exception":true
     },
+    "Long":{"type":"long"},
     "MaxResults":{
       "type":"integer",
       "box":true,
-      "max":100,
+      "max":10000,
       "min":0
     },
     "Mitigation":{
@@ -595,7 +690,7 @@
       "members":{
         "StartTime":{
           "shape":"Timestamp",
-          "documentation":"<p>The start time of the subscription, in the format \"2016-12-16T13:50Z\".</p>"
+          "documentation":"<p>The start time of the subscription, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
         },
         "TimeCommitmentInSeconds":{
           "shape":"DurationInSeconds",
@@ -603,6 +698,13 @@
         }
       },
       "documentation":"<p>Information about the AWS Shield Advanced subscription for an account.</p>"
+    },
+    "SubscriptionState":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "INACTIVE"
+      ]
     },
     "SummarizedAttackVector":{
       "type":"structure",
@@ -662,11 +764,11 @@
       "members":{
         "FromInclusive":{
           "shape":"AttackTimestamp",
-          "documentation":"<p>The start time, in the format 2016-12-16T13:50Z.</p>"
+          "documentation":"<p>The start time, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
         },
         "ToExclusive":{
           "shape":"AttackTimestamp",
-          "documentation":"<p>The end time, in the format 2016-12-16T15:50Z.</p>"
+          "documentation":"<p>The end time, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
         }
       },
       "documentation":"<p>The time range.</p>"
@@ -675,6 +777,19 @@
     "Token":{
       "type":"string",
       "min":1
+    },
+    "TopContributors":{
+      "type":"list",
+      "member":{"shape":"Contributor"}
+    },
+    "Unit":{
+      "type":"string",
+      "enum":[
+        "BITS",
+        "BYTES",
+        "PACKETS",
+        "REQUESTS"
+      ]
     },
     "errorMessage":{"type":"string"}
   },

@@ -109,6 +109,20 @@
       ],
       "documentation":"<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, stops AWS CodeBuild from automatically rebuilding the source code every time a code change is pushed to the repository.</p>"
     },
+    "InvalidateProjectCache":{
+      "name":"InvalidateProjectCache",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"InvalidateProjectCacheInput"},
+      "output":{"shape":"InvalidateProjectCacheOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Resets the cache for a project.</p>"
+    },
     "ListBuilds":{
       "name":"ListBuilds",
       "http":{
@@ -350,6 +364,10 @@
           "shape":"BuildArtifacts",
           "documentation":"<p>Information about the output artifacts for the build.</p>"
         },
+        "cache":{
+          "shape":"ProjectCache",
+          "documentation":"<p>Information about the cache for the build.</p>"
+        },
         "environment":{
           "shape":"ProjectEnvironment",
           "documentation":"<p>Information about the build environment for this build.</p>"
@@ -369,6 +387,14 @@
         "initiator":{
           "shape":"String",
           "documentation":"<p>The entity that started the build. Valid values include:</p> <ul> <li> <p>If AWS CodePipeline started the build, the pipeline's name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an AWS Identity and Access Management (IAM) user started the build, the user's name (for example <code>MyUserName</code>).</p> </li> <li> <p>If the Jenkins plugin for AWS CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>"
+        },
+        "vpcConfig":{
+          "shape":"VpcConfig",
+          "documentation":"<p>If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.</p>"
+        },
+        "networkInterface":{
+          "shape":"NetworkInterface",
+          "documentation":"<p>Describes a network interface.</p>"
         }
       },
       "documentation":"<p>Information about a build.</p>"
@@ -468,6 +494,13 @@
       "type":"list",
       "member":{"shape":"BuildNotDeleted"}
     },
+    "CacheType":{
+      "type":"string",
+      "enum":[
+        "NO_CACHE",
+        "S3"
+      ]
+    },
     "ComputeType":{
       "type":"string",
       "enum":[
@@ -501,6 +534,10 @@
           "shape":"ProjectArtifacts",
           "documentation":"<p>Information about the build output artifacts for the build project.</p>"
         },
+        "cache":{
+          "shape":"ProjectCache",
+          "documentation":"<p>Stores recently used information so that it can be quickly accessed at a later time.</p>"
+        },
         "environment":{
           "shape":"ProjectEnvironment",
           "documentation":"<p>Information about the build environment for the build project.</p>"
@@ -520,6 +557,14 @@
         "tags":{
           "shape":"TagList",
           "documentation":"<p>A set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>"
+        },
+        "vpcConfig":{
+          "shape":"VpcConfig",
+          "documentation":"<p>VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.</p>"
+        },
+        "badgeEnabled":{
+          "shape":"WrapperBoolean",
+          "documentation":"<p>Set this to true to generate a publicly-accessible URL for your project's build badge.</p>"
         }
       }
     },
@@ -679,6 +724,21 @@
       "documentation":"<p>The input value that was provided is not valid.</p>",
       "exception":true
     },
+    "InvalidateProjectCacheInput":{
+      "type":"structure",
+      "required":["projectName"],
+      "members":{
+        "projectName":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The name of the build project that the cache will be reset for.</p>"
+        }
+      }
+    },
+    "InvalidateProjectCacheOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "KeyInput":{
       "type":"string",
       "max":127,
@@ -818,6 +878,20 @@
       },
       "documentation":"<p>Information about build logs in Amazon CloudWatch Logs.</p>"
     },
+    "NetworkInterface":{
+      "type":"structure",
+      "members":{
+        "subnetId":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The ID of the subnet.</p>"
+        },
+        "networkInterfaceId":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The ID of the network interface.</p>"
+        }
+      },
+      "documentation":"<p>Describes a network interface.</p>"
+    },
     "NonEmptyString":{
       "type":"string",
       "min":1
@@ -878,6 +952,10 @@
           "shape":"ProjectArtifacts",
           "documentation":"<p>Information about the build output artifacts for the build project.</p>"
         },
+        "cache":{
+          "shape":"ProjectCache",
+          "documentation":"<p>Information about the cache for the build project.</p>"
+        },
         "environment":{
           "shape":"ProjectEnvironment",
           "documentation":"<p>Information about the build environment for this build project.</p>"
@@ -909,6 +987,14 @@
         "webhook":{
           "shape":"Webhook",
           "documentation":"<p>Information about a webhook in GitHub that connects repository events to a build project in AWS CodeBuild.</p>"
+        },
+        "vpcConfig":{
+          "shape":"VpcConfig",
+          "documentation":"<p>If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.</p>"
+        },
+        "badge":{
+          "shape":"ProjectBadge",
+          "documentation":"<p>Information about the build badge for the build project.</p>"
         }
       },
       "documentation":"<p>Information about a build project.</p>"
@@ -943,6 +1029,35 @@
         }
       },
       "documentation":"<p>Information about the build output artifacts for the build project.</p>"
+    },
+    "ProjectBadge":{
+      "type":"structure",
+      "members":{
+        "badgeEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Set this to true to generate a publicly-accessible URL for your project's build badge.</p>"
+        },
+        "badgeRequestUrl":{
+          "shape":"String",
+          "documentation":"<p>The publicly-accessible URL through which you can access the build badge for your project. </p>"
+        }
+      },
+      "documentation":"<p>Information about the build badge for the build project.</p>"
+    },
+    "ProjectCache":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "type":{
+          "shape":"CacheType",
+          "documentation":"<p>The type of cache used by the build project. Valid values include:</p> <ul> <li> <p> <code>NO_CACHE</code>: The build project will not use any cache.</p> </li> <li> <p> <code>S3</code>: The build project will read and write from/to S3.</p> </li> </ul>"
+        },
+        "location":{
+          "shape":"String",
+          "documentation":"<p>Information about the cache location, as follows: </p> <ul> <li> <p> <code>NO_CACHE</code>: This value will be ignored.</p> </li> <li> <p> <code>S3</code>: This is the S3 bucket name/prefix.</p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>Information about the cache for the build project.</p>"
     },
     "ProjectDescription":{
       "type":"string",
@@ -1040,6 +1155,11 @@
       },
       "documentation":"<p>The specified AWS resource cannot be found.</p>",
       "exception":true
+    },
+    "SecurityGroupIds":{
+      "type":"list",
+      "member":{"shape":"NonEmptyString"},
+      "max":5
     },
     "SortOrderType":{
       "type":"string",
@@ -1147,6 +1267,11 @@
       }
     },
     "String":{"type":"string"},
+    "Subnets":{
+      "type":"list",
+      "member":{"shape":"NonEmptyString"},
+      "max":16
+    },
     "Tag":{
       "type":"structure",
       "members":{
@@ -1193,6 +1318,10 @@
           "shape":"ProjectArtifacts",
           "documentation":"<p>Information to be changed about the build output artifacts for the build project.</p>"
         },
+        "cache":{
+          "shape":"ProjectCache",
+          "documentation":"<p>Stores recently used information so that it can be quickly accessed at a later time.</p>"
+        },
         "environment":{
           "shape":"ProjectEnvironment",
           "documentation":"<p>Information to be changed about the build environment for the build project.</p>"
@@ -1212,6 +1341,14 @@
         "tags":{
           "shape":"TagList",
           "documentation":"<p>The replacement set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>"
+        },
+        "vpcConfig":{
+          "shape":"VpcConfig",
+          "documentation":"<p>VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.</p>"
+        },
+        "badgeEnabled":{
+          "shape":"WrapperBoolean",
+          "documentation":"<p>Set this to true to generate a publicly-accessible URL for your project's build badge.</p>"
         }
       }
     },
@@ -1229,6 +1366,24 @@
       "max":255,
       "min":1,
       "pattern":"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=@+\\\\-]*)$"
+    },
+    "VpcConfig":{
+      "type":"structure",
+      "members":{
+        "vpcId":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The ID of the Amazon VPC.</p>"
+        },
+        "subnets":{
+          "shape":"Subnets",
+          "documentation":"<p>A list of one or more subnet IDs in your Amazon VPC.</p>"
+        },
+        "securityGroupIds":{
+          "shape":"SecurityGroupIds",
+          "documentation":"<p>A list of one or more security groups IDs in your Amazon VPC.</p>"
+        }
+      },
+      "documentation":"<p>If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.</p>"
     },
     "Webhook":{
       "type":"structure",
