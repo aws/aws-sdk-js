@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Presigner",
+  "description": "Update presigner to only hoist headers in v2"
+}
