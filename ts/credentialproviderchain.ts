@@ -9,3 +9,5 @@ providerChain.resolvePromise().then(
 );
 
 providerChain.resolve(() => {});
+
+const providerChainNoArgs = new CredentialProviderChain();
