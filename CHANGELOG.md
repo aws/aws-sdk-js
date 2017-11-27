@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.156.0-->
+<!--LATEST=2.157.0-->
 <!--ENTRYINSERT-->
+
+## 2.157.0
+* feature: MediaConvert: AWS Elemental MediaConvert is a file-based video conversion service that transforms media into formats required for traditional broadcast and for internet streaming to multi-screen devices.
+* feature: MediaLive: AWS Elemental MediaLive is a video service that lets you easily create live outputs for broadcast and streaming delivery.
+* feature: MediaPackage: AWS Elemental MediaPackage is a just-in-time video packaging and origination service that lets you format highly secure and reliable live outputs for a variety of devices.
+* feature: MediaStore: AWS Elemental MediaStore is an AWS storage service optimized for media. It gives you the performance, consistency, and low latency required to deliver live and on-demand video content. AWS Elemental MediaStore acts as the origin store in your video workflow.
+* feature: MediaStoreData: AWS Elemental MediaStore is an AWS storage service optimized for media. It gives you the performance, consistency, and low latency required to deliver live and on-demand video content. AWS Elemental MediaStore acts as the origin store in your video workflow.
 
 ## 2.156.0
 * bugfix: Presigner: Update presigner to only hoist headers in v2

@@ -107,5 +107,10 @@ module.exports = {
   Glue: require('./glue'),
   Mobile: require('./mobile'),
   Pricing: require('./pricing'),
-  CostExplorer: require('./costexplorer')
+  CostExplorer: require('./costexplorer'),
+  MediaConvert: require('./mediaconvert'),
+  MediaLive: require('./medialive'),
+  MediaPackage: require('./mediapackage'),
+  MediaStore: require('./mediastore'),
+  MediaStoreData: require('./mediastoredata')
 };

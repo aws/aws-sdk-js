@@ -108,6 +108,11 @@ export abstract class ConfigurationServicePlaceholders {
   mobile?: AWS.Mobile.Types.ClientConfiguration;
   pricing?: AWS.Pricing.Types.ClientConfiguration;
   costexplorer?: AWS.CostExplorer.Types.ClientConfiguration;
+  mediaconvert?: AWS.MediaConvert.Types.ClientConfiguration;
+  medialive?: AWS.MediaLive.Types.ClientConfiguration;
+  mediapackage?: AWS.MediaPackage.Types.ClientConfiguration;
+  mediastore?: AWS.MediaStore.Types.ClientConfiguration;
+  mediastoredata?: AWS.MediaStoreData.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -218,4 +223,9 @@ export interface ConfigurationServiceApiVersions {
   mobile?: AWS.Mobile.Types.apiVersion;
   pricing?: AWS.Pricing.Types.apiVersion;
   costexplorer?: AWS.CostExplorer.Types.apiVersion;
+  mediaconvert?: AWS.MediaConvert.Types.apiVersion;
+  medialive?: AWS.MediaLive.Types.apiVersion;
+  mediapackage?: AWS.MediaPackage.Types.apiVersion;
+  mediastore?: AWS.MediaStore.Types.apiVersion;
+  mediastoredata?: AWS.MediaStoreData.Types.apiVersion;
 }

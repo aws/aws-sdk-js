@@ -459,5 +459,21 @@
   "costexplorer": {
     "prefix": "ce",
     "name": "CostExplorer"
+  },
+  "mediaconvert": {
+    "name": "MediaConvert"
+  },
+  "medialive": {
+    "name": "MediaLive"
+  },
+  "mediapackage": {
+    "name": "MediaPackage"
+  },
+  "mediastore": {
+    "name": "MediaStore"
+  },
+  "mediastoredata": {
+    "prefix": "mediastore-data",
+    "name": "MediaStoreData"
   }
 }
