@@ -3,6 +3,7 @@ export {Credentials} from './credentials';
 export {CognitoIdentityCredentials} from './credentials/cognito_identity_credentials';
 export {CredentialProviderChain} from './credentials/credential_provider_chain';
 export {EC2MetadataCredentials} from './credentials/ec2_metadata_credentials';
+export {RemoteCredentials} from './credentials/remote_credentials';
 export {ECSCredentials} from './credentials/ecs_credentials';
 export {EnvironmentCredentials} from './credentials/environment_credentials';
 export {FileSystemCredentials} from './credentials/file_system_credentials';

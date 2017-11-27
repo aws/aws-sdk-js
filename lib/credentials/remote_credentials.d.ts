@@ -1,12 +1,12 @@
-import {RemoteCredentials} from './remote_credentials';
-export class ECSCredentials extends RemoteCredentials {
+import {Credentials} from '../credentials';
+export class RemoteCredentials extends Credentials {
         /**
          * Represents credentials received.
          * @param {object} options - Override the default (1s) timeout period.
          */
-        constructor(options?: ECSCredentialsOptions);
+        constructor(options?: RemoteCredentialsOptions);
     }
-    interface ECSCredentialsOptions {
+    interface RemoteCredentialsOptions {
         httpOptions?: {
             /**
              * Timeout in milliseconds.
