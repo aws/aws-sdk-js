@@ -663,14 +663,14 @@
         it('returns false when process is not available', function() {
           var process_copy = process;
           process = void 0;
-          expect(creds.isConfiguredForRemoteCredentials()).to.equal(false);
+          expect(creds.isConfiguredForEcsCredentials()).to.equal(false);
           process = process_copy;
         });
 
         it(
           'returns false when relative URI environment variable not set',
           function() {
-            expect(creds.isConfiguredForRemoteCredentials()).to.equal(false);
+            expect(creds.isConfiguredForEcsCredentials()).to.equal(false);
           }
         );
 
@@ -678,7 +678,7 @@
           'returns true when the relative URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-            expect(creds.isConfiguredForRemoteCredentials()).to.equal(true);
+            expect(creds.isConfiguredForEcsCredentials()).to.equal(true);
           }
         );
 
@@ -686,7 +686,7 @@
           'returns true when the full URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-            expect(creds.isConfiguredForRemoteCredentials()).to.equal(true);
+            expect(creds.isConfiguredForEcsCredentials()).to.equal(true);
           }
         );
 
@@ -694,7 +694,7 @@
           'returns true from the object prototype when the relative URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-            expect(AWS.RemoteCredentials.prototype.isConfiguredForRemoteCredentials())
+            expect(AWS.RemoteCredentials.prototype.isConfiguredForEcsCredentials())
               .to.equal(true);
           }
         );
@@ -703,7 +703,7 @@
           'returns true from the object prototype when the full URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-            expect(AWS.RemoteCredentials.prototype.isConfiguredForRemoteCredentials())
+            expect(AWS.RemoteCredentials.prototype.isConfiguredForEcsCredentials())
               .to.equal(true);
           }
         );
@@ -714,14 +714,14 @@
           var process, process_copy;
           process_copy = process;
           process = void 0;
-          expect(creds.getRemoteFullUri()).to.equal(void 0);
+          expect(creds.getECSFullUri()).to.equal(void 0);
           process = process_copy;
         });
 
         it(
           'returns undefined when neither the relative URI environment variable nor the full URI environment variable is set',
           function() {
-            expect(creds.getRemoteFullUri()).to.equal(void 0);
+            expect(creds.getECSFullUri()).to.equal(void 0);
           }
         );
 
@@ -729,7 +729,7 @@
           'returns a full URI when the relative URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-            expect(creds.getRemoteFullUri()).to.equal('http://169.254.170.2/path');
+            expect(creds.getECSFullUri()).to.equal('http://169.254.170.2/path');
           }
         );
 
@@ -737,7 +737,7 @@
           'returns a full URI when the full URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-            expect(creds.getRemoteFullUri())
+            expect(creds.getECSFullUri())
                 .to.equal('http://localhost/get-credentials');
           }
         );
@@ -746,7 +746,7 @@
           'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
           function () {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'wss://localhost/get-credentials';
-            expect(creds.getRemoteFullUri.bind(creds))
+            expect(creds.getECSFullUri.bind(creds))
                 .to.throw(/Unsupported protocol/);
           }
         );
@@ -755,7 +755,7 @@
           'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
           function () {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://s3-us-west-2.amazonaws.com/bucket/credentials';
-            expect(creds.getRemoteFullUri.bind(creds))
+            expect(creds.getECSFullUri.bind(creds))
               .to.throw(/Unsupported hostname/);
           }
         );
@@ -764,7 +764,7 @@
           'returns a full URI when the full URI environment variable is set to a non-localhost https URI',
           function () {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'https://s3-us-west-2.amazonaws.com/bucket/credentials';
-            expect(creds.getRemoteFullUri())
+            expect(creds.getECSFullUri())
               .to.equal('https://s3-us-west-2.amazonaws.com/bucket/credentials');
           }
         );
@@ -1012,14 +1012,14 @@
         it('returns false when process is not available', function() {
           var process_copy = process;
           process = void 0;
-          expect(creds.isConfiguredForRemoteCredentials()).to.equal(false);
+          expect(creds.isConfiguredForEcsCredentials()).to.equal(false);
           process = process_copy;
         });
 
         it(
           'returns false when relative URI environment variable not set',
           function() {
-            expect(creds.isConfiguredForRemoteCredentials()).to.equal(false);
+            expect(creds.isConfiguredForEcsCredentials()).to.equal(false);
           }
         );
 
@@ -1027,7 +1027,7 @@
           'returns true when the relative URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-            expect(creds.isConfiguredForRemoteCredentials()).to.equal(true);
+            expect(creds.isConfiguredForEcsCredentials()).to.equal(true);
           }
         );
 
@@ -1035,7 +1035,7 @@
           'returns true when the full URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-            expect(creds.isConfiguredForRemoteCredentials()).to.equal(true);
+            expect(creds.isConfiguredForEcsCredentials()).to.equal(true);
           }
         );
 
@@ -1046,14 +1046,14 @@
           var process, process_copy;
           process_copy = process;
           process = void 0;
-          expect(creds.getRemoteFullUri()).to.equal(void 0);
+          expect(creds.getECSFullUri()).to.equal(void 0);
           process = process_copy;
         });
 
         it(
           'returns undefined when neither the relative URI environment variable nor the full URI environment variable is set',
           function() {
-            expect(creds.getRemoteFullUri()).to.equal(void 0);
+            expect(creds.getECSFullUri()).to.equal(void 0);
           }
         );
 
@@ -1061,7 +1061,7 @@
           'returns a full URI when the relative URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
-            expect(creds.getRemoteFullUri()).to.equal('http://169.254.170.2/path');
+            expect(creds.getECSFullUri()).to.equal('http://169.254.170.2/path');
           }
         );
 
@@ -1069,7 +1069,7 @@
           'returns a full URI when the full URI environment variable is set',
           function() {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-            expect(creds.getRemoteFullUri())
+            expect(creds.getECSFullUri())
                 .to.equal('http://localhost/get-credentials');
           }
         );
@@ -1078,7 +1078,7 @@
           'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
           function () {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'wss://localhost/get-credentials';
-            expect(creds.getRemoteFullUri.bind(creds))
+            expect(creds.getECSFullUri.bind(creds))
                 .to.throw(/Unsupported protocol/);
           }
         );
@@ -1087,7 +1087,7 @@
           'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
           function () {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://s3-us-west-2.amazonaws.com/bucket/credentials';
-            expect(creds.getRemoteFullUri.bind(creds))
+            expect(creds.getECSFullUri.bind(creds))
               .to.throw(/Unsupported hostname/);
           }
         );
@@ -1096,7 +1096,7 @@
           'returns a full URI when the full URI environment variable is set to a non-localhost https URI',
           function () {
             process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'https://s3-us-west-2.amazonaws.com/bucket/credentials';
-            expect(creds.getRemoteFullUri())
+            expect(creds.getECSFullUri())
               .to.equal('https://s3-us-west-2.amazonaws.com/bucket/credentials');
           }
         );
