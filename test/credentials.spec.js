@@ -677,7 +677,7 @@
         it(
           'returns true when the relative URI environment variable is set',
           function() {
-            process.env['AWS_REMOTE_CREDENTIALS_RELATIVE_URI'] = '/path';
+            process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
             expect(creds.isConfiguredForRemoteCredentials()).to.equal(true);
           }
         );
@@ -685,7 +685,7 @@
         it(
           'returns true when the full URI environment variable is set',
           function() {
-            process.env['AWS_REMOTE_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
             expect(creds.isConfiguredForRemoteCredentials()).to.equal(true);
           }
         );
@@ -693,7 +693,7 @@
         it(
           'returns true from the object prototype when the relative URI environment variable is set',
           function() {
-            process.env['AWS_REMOTE_CREDENTIALS_RELATIVE_URI'] = '/path';
+            process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
             expect(AWS.RemoteCredentials.prototype.isConfiguredForRemoteCredentials())
               .to.equal(true);
           }
@@ -702,7 +702,7 @@
         it(
           'returns true from the object prototype when the full URI environment variable is set',
           function() {
-            process.env['AWS_REMOTE_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
             expect(AWS.RemoteCredentials.prototype.isConfiguredForRemoteCredentials())
               .to.equal(true);
           }
@@ -728,7 +728,7 @@
         it(
           'returns a full URI when the relative URI environment variable is set',
           function() {
-            process.env['AWS_REMOTE_CREDENTIALS_RELATIVE_URI'] = '/path';
+            process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
             expect(creds.getRemoteFullUri()).to.equal('http://169.254.170.2/path');
           }
         );
@@ -736,7 +736,7 @@
         it(
           'returns a full URI when the full URI environment variable is set',
           function() {
-            process.env['AWS_REMOTE_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
             expect(creds.getRemoteFullUri())
                 .to.equal('http://localhost/get-credentials');
           }
@@ -745,7 +745,7 @@
         it(
           'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
           function () {
-            process.env['AWS_REMOTE_CREDENTIALS_FULL_URI'] = 'wss://localhost/get-credentials';
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'wss://localhost/get-credentials';
             expect(creds.getRemoteFullUri.bind(creds))
                 .to.throw(/Unsupported protocol/);
           }
@@ -754,7 +754,7 @@
         it(
           'throws an error when the full URI environment variable contains a URI with an unsupported protocol',
           function () {
-            process.env['AWS_REMOTE_CREDENTIALS_FULL_URI'] = 'http://s3-us-west-2.amazonaws.com/bucket/credentials';
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://s3-us-west-2.amazonaws.com/bucket/credentials';
             expect(creds.getRemoteFullUri.bind(creds))
               .to.throw(/Unsupported hostname/);
           }
@@ -763,7 +763,7 @@
         it(
           'returns a full URI when the full URI environment variable is set to a non-localhost https URI',
           function () {
-            process.env['AWS_REMOTE_CREDENTIALS_FULL_URI'] = 'https://s3-us-west-2.amazonaws.com/bucket/credentials';
+            process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'https://s3-us-west-2.amazonaws.com/bucket/credentials';
             expect(creds.getRemoteFullUri())
               .to.equal('https://s3-us-west-2.amazonaws.com/bucket/credentials');
           }
@@ -826,7 +826,7 @@
       describe('needsRefresh', function() {
         return it('can be expired based on expire time from URI endpoint', function() {
           var spy;
-          process.env['AWS_REMOTE_CREDENTIALS_RELATIVE_URI'] = '/path';
+          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
           spy = mockEndpoint(new Date(0));
           creds.refresh(function() {});
           expect(spy.calls.length).to.equal(1);
@@ -837,7 +837,7 @@
       describe('refresh', function() {
         it('loads credentials from specified relative URI', function() {
           var callbackErr = null;
-          process.env['AWS_REMOTE_CREDENTIALS_RELATIVE_URI'] = '/path';
+          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
           var spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000));
           creds.refresh(function(err) {
             callbackErr = err;
@@ -854,7 +854,7 @@
 
         it('loads credentials from specified full URI', function() {
           var callbackErr = null;
-          process.env['AWS_REMOTE_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+          process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
           var spy = mockEndpoint(new Date(AWS.util.date.getDate().getTime() + 100000));
           creds.refresh(function(err) {
             callbackErr = err;
@@ -882,7 +882,7 @@
 
         it('retries up to specified maxRetries for timeout errors', function(done) {
           var httpClient, options, spy;
-          process.env['AWS_REMOTE_CREDENTIALS_RELATIVE_URI'] = '/path';
+          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
           options = {
             maxRetries: 3
           };
@@ -902,8 +902,8 @@
         });
 
         it('passes the environmental auth token to the request', function(done) {
-          process.env['AWS_REMOTE_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
-          process.env['AWS_REMOTE_AUTHORIZATION_TOKEN'] = 'Basic abcd';
+          process.env['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = 'http://localhost/get-credentials';
+          process.env['AWS_CONTAINER_AUTHORIZATION_TOKEN'] = 'Basic abcd';
           creds = new AWS.RemoteCredentials();
           var httpClient = AWS.HttpClient.getInstance();
           helpers.spyOn(httpClient, 'handleRequest').andCallFake(function(httpReq, httpOp, cb, errCb) {
@@ -919,7 +919,7 @@
         it('makes only one request when multiple calls are made before first one finishes', function(done) {
           var callRefresh, concurrency, countdown, j, providers, ref, results, spy, x;
           concurrency = countdown = 10;
-          process.env['AWS_REMOTE_CREDENTIALS_RELATIVE_URI'] = '/path';
+          process.env['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = '/path';
           spy = helpers.spyOn(AWS.RemoteCredentials.prototype, 'request').andCallFake(function(path, cb) {
             var respond;
             respond = function() {
