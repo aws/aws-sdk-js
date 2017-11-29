@@ -113,6 +113,9 @@ export abstract class ConfigurationServicePlaceholders {
   mediapackage?: AWS.MediaPackage.Types.ClientConfiguration;
   mediastore?: AWS.MediaStore.Types.ClientConfiguration;
   mediastoredata?: AWS.MediaStoreData.Types.ClientConfiguration;
+  appsync?: AWS.AppSync.Types.ClientConfiguration;
+  guardduty?: AWS.GuardDuty.Types.ClientConfiguration;
+  mq?: AWS.MQ.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -228,4 +231,7 @@ export interface ConfigurationServiceApiVersions {
   mediapackage?: AWS.MediaPackage.Types.apiVersion;
   mediastore?: AWS.MediaStore.Types.apiVersion;
   mediastoredata?: AWS.MediaStoreData.Types.apiVersion;
+  appsync?: AWS.AppSync.Types.apiVersion;
+  guardduty?: AWS.GuardDuty.Types.apiVersion;
+  mq?: AWS.MQ.Types.apiVersion;
 }

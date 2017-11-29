@@ -475,5 +475,14 @@
   "mediastoredata": {
     "prefix": "mediastore-data",
     "name": "MediaStoreData"
+  },
+  "appsync": {
+    "name": "AppSync"
+  },
+  "guardduty": {
+    "name": "GuardDuty"
+  },
+  "mq": {
+    "name": "MQ"
   }
 }

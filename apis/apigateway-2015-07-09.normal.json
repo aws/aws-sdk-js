@@ -2113,6 +2113,28 @@
         "FLUSH_IN_PROGRESS"
       ]
     },
+    "CanarySettings":{
+      "type":"structure",
+      "members":{
+        "percentTraffic":{
+          "shape":"Double",
+          "documentation":"<p>The percent (0-100) of traffic diverted to a canary deployment.</p>"
+        },
+        "deploymentId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the canary deployment.</p>"
+        },
+        "stageVariableOverrides":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.</p>"
+        },
+        "useStageCache":{
+          "shape":"Boolean",
+          "documentation":"<p>A Boolean flag to indicate whether the canary deployment uses the stage cache or not.</p>"
+        }
+      },
+      "documentation":"<p>Configuration settings of a canary deployment.</p>"
+    },
     "ClientCertificate":{
       "type":"structure",
       "members":{
@@ -2315,6 +2337,10 @@
         "variables":{
           "shape":"MapOfStringToString",
           "documentation":"<p>A map that defines the stage variables for the <a>Stage</a> resource that is associated with the new deployment. Variable names can have alphanumeric and underscore characters, and the values must match <code>[A-Za-z0-9-._~:/?#&amp;=,]+</code>.</p>"
+        },
+        "canarySettings":{
+          "shape":"DeploymentCanarySettings",
+          "documentation":"<p>The input configuration for the canary deployment when the deployment is a canary release deployment. </p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to create a <a>Deployment</a> resource.</p>"
@@ -2547,11 +2573,11 @@
         },
         "stageName":{
           "shape":"String",
-          "documentation":"<p>The name for the <a>Stage</a> resource.</p>"
+          "documentation":"<p>{Required] The name for the <a>Stage</a> resource.</p>"
         },
         "deploymentId":{
           "shape":"String",
-          "documentation":"<p>The identifier of the <a>Deployment</a> resource for the <a>Stage</a> resource.</p>"
+          "documentation":"<p>[Required] The identifier of the <a>Deployment</a> resource for the <a>Stage</a> resource.</p>"
         },
         "description":{
           "shape":"String",
@@ -2572,6 +2598,10 @@
         "documentationVersion":{
           "shape":"String",
           "documentation":"<p>The version of the associated API documentation.</p>"
+        },
+        "canarySettings":{
+          "shape":"CanarySettings",
+          "documentation":"<p>The canary deployment settings of this stage.</p>"
         }
       },
       "documentation":"<p>Requests Amazon API Gateway to create a <a>Stage</a> resource.</p>"
@@ -3086,6 +3116,24 @@
         }
       },
       "documentation":"<p>An immutable representation of a <a>RestApi</a> resource that can be called by users using <a>Stages</a>. A deployment must be associated with a <a>Stage</a> for it to be callable over the Internet.</p> <div class=\"remarks\">To create a deployment, call <code>POST</code> on the <a>Deployments</a> resource of a <a>RestApi</a>. To view, update, or delete a deployment, call <code>GET</code>, <code>PATCH</code>, or <code>DELETE</code> on the specified deployment resource (<code>/restapis/{restapi_id}/deployments/{deployment_id}</code>).</div> <div class=\"seeAlso\"><a>RestApi</a>, <a>Deployments</a>, <a>Stage</a>, <a href=\"http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html\">AWS CLI</a>, <a href=\"https://aws.amazon.com/tools/\">AWS SDKs</a> </div>"
+    },
+    "DeploymentCanarySettings":{
+      "type":"structure",
+      "members":{
+        "percentTraffic":{
+          "shape":"Double",
+          "documentation":"<p>The percentage (0.0-100.0) of traffic routed to the canary deployment.</p>"
+        },
+        "stageVariableOverrides":{
+          "shape":"MapOfStringToString",
+          "documentation":"<p>A stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.</p>"
+        },
+        "useStageCache":{
+          "shape":"Boolean",
+          "documentation":"<p>A Boolean flag to indicate whether the canary release deployment uses the stage cache or not.</p>"
+        }
+      },
+      "documentation":"<p>The input configuration for a canary deployment.</p>"
     },
     "Deployments":{
       "type":"structure",
@@ -5043,7 +5091,7 @@
       "members":{
         "op":{
           "shape":"Op",
-          "documentation":"<p>An update operation to be performed with this PATCH request. The valid value can be \"add\", \"remove\", or \"replace\". Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.</p>"
+          "documentation":"<p> An update operation to be performed with this PATCH request. The valid value can be <code>add</code>, <code>remove</code>, <code>replace</code> or <code>copy</code>. Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.</p>"
         },
         "path":{
           "shape":"String",
@@ -5051,11 +5099,11 @@
         },
         "value":{
           "shape":"String",
-          "documentation":"<p>The new target value of the update operation. When using AWS CLI to update a property of a JSON value, enclose the JSON object with a pair of single quotes in a Linux shell, e.g., '{\"a\": ...}'. In a Windows shell, see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json\">Using JSON for Parameters</a>.</p>"
+          "documentation":"<p>The new target value of the update operation. It is applicable for the <code>add</code> or <code>replace</code> operation. When using AWS CLI to update a property of a JSON value, enclose the JSON object with a pair of single quotes in a Linux shell, e.g., '{\"a\": ...}'. In a Windows shell, see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json\">Using JSON for Parameters</a>.</p>"
         },
         "from":{
           "shape":"String",
-          "documentation":"<p> Not supported.</p>"
+          "documentation":"<p>The <code>copy</code> update operation's source as identified by a <code>JSON-Pointer</code> value referencing the location within the targeted resource to copy the value from. For example, to promote a canary deployment, you copy the canary deployment ID to the affiliated deployment ID by calling a PATCH request on a <a>Stage</a> resource with <code>\"op\":\"copy\"</code>, <code>\"from\":\"/canarySettings/deploymentId\"</code> and <code>\"path\":\"/deploymentId\"</code>.</p>"
         }
       },
       "documentation":"A single patch operation to apply to the specified resource. Please refer to http://tools.ietf.org/html/rfc6902#section-4 for an explanation of how each operation is used."
@@ -5665,7 +5713,11 @@
         },
         "accessLogSettings":{
           "shape":"AccessLogSettings",
-          "documentation":"<p>The access log settings in this stage.</p>"
+          "documentation":"<p>Settings for logging access in this stage.</p>"
+        },
+        "canarySettings":{
+          "shape":"CanarySettings",
+          "documentation":"<p>Settings for the canary deployment in this stage.</p>"
         },
         "createdDate":{
           "shape":"Timestamp",

@@ -252,7 +252,7 @@ declare namespace Lambda {
      */
     CodeSizeZipped?: Long;
     /**
-     * Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see Lambda Function Concurrent Executions. The default limit is 100.
+     * Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see Lambda Function Concurrent Executions. The default limit is 1000.
      */
     ConcurrentExecutions?: Integer;
   }
@@ -307,6 +307,8 @@ declare namespace Lambda {
      */
     Statement?: String;
   }
+  export type AdditionalVersion = string;
+  export type AdditionalVersionWeights = {[key: string]: Weight};
   export type Alias = string;
   export interface AliasConfiguration {
     /**
@@ -325,8 +327,18 @@ declare namespace Lambda {
      * Alias description.
      */
     Description?: Description;
+    /**
+     * Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see lambda-traffic-shifting-using-aliases.
+     */
+    RoutingConfig?: AliasRoutingConfiguration;
   }
   export type AliasList = AliasConfiguration[];
+  export interface AliasRoutingConfiguration {
+    /**
+     * Set this property value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke function-version.
+     */
+    AdditionalVersionWeights?: AdditionalVersionWeights;
+  }
   export type Arn = string;
   export type BatchSize = number;
   export type _Blob = Buffer|Uint8Array|Blob|string;
@@ -349,6 +361,10 @@ declare namespace Lambda {
      * Description of the alias.
      */
     Description?: Description;
+    /**
+     * Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see lambda-traffic-shifting-using-aliases.
+     */
+    RoutingConfig?: AliasRoutingConfiguration;
   }
   export interface CreateEventSourceMappingRequest {
     /**
@@ -677,7 +693,7 @@ declare namespace Lambda {
      */
     FunctionName: NamespacedFunctionName;
     /**
-     * Using this optional parameter to specify a function version or an alias name. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the $LATEST version of the Lambda function.
+     * Use this optional parameter to specify a function version or an alias name. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the $LATEST version of the Lambda function. 
      */
     Qualifier?: Qualifier;
   }
@@ -722,7 +738,7 @@ declare namespace Lambda {
      */
     LogType?: LogType;
     /**
-     * Using the ClientContext you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable. For an example of a ClientContext JSON, see PutEvents in the Amazon Mobile Analytics API Reference and User Guide. The ClientContext JSON must be base64-encoded.
+     * Using the ClientContext you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable. For an example of a ClientContext JSON, see PutEvents in the Amazon Mobile Analytics API Reference and User Guide. The ClientContext JSON must be base64-encoded and has a maximum size of 3583 bytes.
      */
     ClientContext?: String;
     /**
@@ -751,6 +767,10 @@ declare namespace Lambda {
      *  It is the JSON representation of the object returned by the Lambda function. This is present only if the invocation type is RequestResponse.  In the event of a function error this field contains a message describing the error. For the Handled errors the Lambda function will report this message. For Unhandled errors AWS Lambda reports the message. 
      */
     Payload?: _Blob;
+    /**
+     * The function version that has been executed. This value is returned only if the invocation type is RequestResponse.
+     */
+    ExecutedVersion?: Version;
   }
   export type InvocationType = "Event"|"RequestResponse"|"DryRun"|string;
   export interface InvokeAsyncRequest {
@@ -828,11 +848,11 @@ declare namespace Lambda {
   }
   export interface ListFunctionsRequest {
     /**
-     * Optional string. If not specified, will return only regular function versions (i.e., non-replicated versions). Valid values are: The region from which the functions are replicated. For example, if you specify us-east-1, only functions replicated from that region will be returned.  ALL _ Will return all functions from any region. If specified, you also must specify a valid FunctionVersion parameter.
+     * Optional string. If not specified, will return only regular function versions (i.e., non-replicated versions). Valid values are: The region from which the functions are replicated. For example, if you specify us-east-1, only functions replicated from that region will be returned.  ALL: Will return all functions from any region. If specified, you also must specify a valid FunctionVersion parameter.
      */
     MasterRegion?: MasterRegion;
     /**
-     * Optional string. If not specified, only the unqualified functions ARNs (Amazon Resource Names) will be returned. Valid value:  ALL _ Will return all versions, including $LATEST which will have fully qualified ARNs (Amazon Resource Names).
+     * Optional string. If not specified, only the unqualified functions ARNs (Amazon Resource Names) will be returned. Valid value:  ALL: Will return all versions, including $LATEST which will have fully qualified ARNs (Amazon Resource Names).
      */
     FunctionVersion?: FunctionVersion;
     /**
@@ -905,7 +925,7 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter value must match the SHA256 of the $LATEST version for the publication to succeed.
+     * The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter, the value must match the SHA256 of the $LATEST version for the publication to succeed. You can use the DryRun parameter of UpdateFunctionCode to verify the hash value that will be returned before publishing your new version.
      */
     CodeSha256?: String;
     /**
@@ -999,6 +1019,10 @@ declare namespace Lambda {
      * You can change the description of the alias using this parameter.
      */
     Description?: Description;
+    /**
+     * Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see lambda-traffic-shifting-using-aliases.
+     */
+    RoutingConfig?: AliasRoutingConfiguration;
   }
   export interface UpdateEventSourceMappingRequest {
     /**
@@ -1044,7 +1068,7 @@ declare namespace Lambda {
      */
     Publish?: Boolean;
     /**
-     * This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the CodeSha256 hash value the provided code will also be computed and returned in the response.
+     * This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the CodeSha256 hash value of the provided code will also be computed and returned in the response.
      */
     DryRun?: Boolean;
   }
@@ -1121,6 +1145,7 @@ declare namespace Lambda {
     VpcId?: VpcId;
   }
   export type VpcId = string;
+  export type Weight = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

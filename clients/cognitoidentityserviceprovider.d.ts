@@ -36,11 +36,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminConfirmSignUp(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
-   * Creates a new user in the specified user pool and sends a welcome message via email or phone (SMS). This message is based on a template that you configured in your call to CreateUserPool or UpdateUserPool. This template includes your custom sign-up instructions and placeholders for user name and temporary password. Requires developer credentials.
+   * Creates a new user in the specified user pool. If MessageAction is not set, the default is to send a welcome message via email or phone (SMS).  This message is based on a template that you configured in your call to or . This template includes your custom sign-up instructions and placeholders for user name and temporary password.  Alternatively, you can call AdminCreateUser with “SUPPRESS” for the MessageAction parameter, and Amazon Cognito will not send any email.  In either case, the user will be in the FORCE_CHANGE_PASSWORD state until they sign in and change their password. AdminCreateUser requires developer credentials.
    */
   adminCreateUser(params: CognitoIdentityServiceProvider.Types.AdminCreateUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminCreateUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminCreateUserResponse, AWSError>;
   /**
-   * Creates a new user in the specified user pool and sends a welcome message via email or phone (SMS). This message is based on a template that you configured in your call to CreateUserPool or UpdateUserPool. This template includes your custom sign-up instructions and placeholders for user name and temporary password. Requires developer credentials.
+   * Creates a new user in the specified user pool. If MessageAction is not set, the default is to send a welcome message via email or phone (SMS).  This message is based on a template that you configured in your call to or . This template includes your custom sign-up instructions and placeholders for user name and temporary password.  Alternatively, you can call AdminCreateUser with “SUPPRESS” for the MessageAction parameter, and Amazon Cognito will not send any email.  In either case, the user will be in the FORCE_CHANGE_PASSWORD state until they sign in and change their password. AdminCreateUser requires developer credentials.
    */
   adminCreateUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminCreateUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminCreateUserResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminDeleteUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse, AWSError>;
   /**
-   * Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked DestinationUser) signs in, they must create a new user account. See AdminLinkProviderForUser. This action is enabled only for admin access and requires developer credentials. The ProviderName must match the value specified when creating an IdP for the pool.  To disable a native username + password user, the ProviderName value must be Cognito and the ProviderAttributeName must be Cognito_Subject, with the ProviderAttributeValue being the name that is used in the user pool for the user. The ProviderAttributeName must always be Cognito_Subject for social identity providers. The ProviderAttributeValue must always be the exact subject that was used when the user was originally linked as a source user. For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the ProviderAttributeName and ProviderAttributeValue must be the same values that were used for the SourceUser when the identities were originally linked in the AdminLinkProviderForUser call. (If the linking was done with ProviderAttributeName set to Cognito_Subject, the same applies here). However, if the user has already signed in, the ProviderAttributeName must be Cognito_Subject and ProviderAttributeValue must be the subject of the SAML assertion.
+   * Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked DestinationUser) signs in, they must create a new user account. See . This action is enabled only for admin access and requires developer credentials. The ProviderName must match the value specified when creating an IdP for the pool.  To disable a native username + password user, the ProviderName value must be Cognito and the ProviderAttributeName must be Cognito_Subject, with the ProviderAttributeValue being the name that is used in the user pool for the user. The ProviderAttributeName must always be Cognito_Subject for social identity providers. The ProviderAttributeValue must always be the exact subject that was used when the user was originally linked as a source user. For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the ProviderAttributeName and ProviderAttributeValue must be the same values that were used for the SourceUser when the identities were originally linked in the call. (If the linking was done with ProviderAttributeName set to Cognito_Subject, the same applies here). However, if the user has already signed in, the ProviderAttributeName must be Cognito_Subject and ProviderAttributeValue must be the subject of the SAML assertion.
    */
   adminDisableProviderForUser(params: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse, AWSError>;
   /**
-   * Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked DestinationUser) signs in, they must create a new user account. See AdminLinkProviderForUser. This action is enabled only for admin access and requires developer credentials. The ProviderName must match the value specified when creating an IdP for the pool.  To disable a native username + password user, the ProviderName value must be Cognito and the ProviderAttributeName must be Cognito_Subject, with the ProviderAttributeValue being the name that is used in the user pool for the user. The ProviderAttributeName must always be Cognito_Subject for social identity providers. The ProviderAttributeValue must always be the exact subject that was used when the user was originally linked as a source user. For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the ProviderAttributeName and ProviderAttributeValue must be the same values that were used for the SourceUser when the identities were originally linked in the AdminLinkProviderForUser call. (If the linking was done with ProviderAttributeName set to Cognito_Subject, the same applies here). However, if the user has already signed in, the ProviderAttributeName must be Cognito_Subject and ProviderAttributeValue must be the subject of the SAML assertion.
+   * Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked DestinationUser) signs in, they must create a new user account. See . This action is enabled only for admin access and requires developer credentials. The ProviderName must match the value specified when creating an IdP for the pool.  To disable a native username + password user, the ProviderName value must be Cognito and the ProviderAttributeName must be Cognito_Subject, with the ProviderAttributeValue being the name that is used in the user pool for the user. The ProviderAttributeName must always be Cognito_Subject for social identity providers. The ProviderAttributeValue must always be the exact subject that was used when the user was originally linked as a source user. For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the ProviderAttributeName and ProviderAttributeValue must be the same values that were used for the SourceUser when the identities were originally linked in the call. (If the linking was done with ProviderAttributeName set to Cognito_Subject, the same applies here). However, if the user has already signed in, the ProviderAttributeName must be Cognito_Subject and ProviderAttributeValue must be the subject of the SAML assertion.
    */
   adminDisableProviderForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminInitiateAuth(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse, AWSError>;
   /**
-   * Links an existing user account in a user pool (DestinationUser) to an identity from an external identity provider (SourceUser) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account.   For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account.   Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.  See also AdminDisableProviderForUser. This action is enabled only for admin access and requires developer credentials.
+   * Links an existing user account in a user pool (DestinationUser) to an identity from an external identity provider (SourceUser) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account.   For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account.   Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.  See also . This action is enabled only for admin access and requires developer credentials.
    */
   adminLinkProviderForUser(params: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse, AWSError>;
   /**
-   * Links an existing user account in a user pool (DestinationUser) to an identity from an external identity provider (SourceUser) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account.   For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account.   Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.  See also AdminDisableProviderForUser. This action is enabled only for admin access and requires developer credentials.
+   * Links an existing user account in a user pool (DestinationUser) to an identity from an external identity provider (SourceUser) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account.   For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account.   Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.  See also . This action is enabled only for admin access and requires developer credentials.
    */
   adminLinkProviderForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse, AWSError>;
   /**
@@ -139,6 +139,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Lists the groups that the user belongs to. Requires developer credentials.
    */
   adminListGroupsForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse, AWSError>;
+  /**
+   * Lists a history of user activity and any risks detected as part of Amazon Cognito advanced security.
+   */
+  adminListUserAuthEvents(params: CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse, AWSError>;
+  /**
+   * Lists a history of user activity and any risks detected as part of Amazon Cognito advanced security.
+   */
+  adminListUserAuthEvents(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse, AWSError>;
   /**
    * Removes the specified user from the specified group. Requires developer credentials.
    */
@@ -164,6 +172,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminRespondToAuthChallenge(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse, AWSError>;
   /**
+   * Sets the user's multi-factor authentication (MFA) preference.
+   */
+  adminSetUserMFAPreference(params: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse, AWSError>;
+  /**
+   * Sets the user's multi-factor authentication (MFA) preference.
+   */
+  adminSetUserMFAPreference(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse, AWSError>;
+  /**
    * Sets all the user settings for a specified user name. Works on any user. Requires developer credentials.
    */
   adminSetUserSettings(params: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse, AWSError>;
@@ -171,6 +187,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Sets all the user settings for a specified user name. Works on any user. Requires developer credentials.
    */
   adminSetUserSettings(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse, AWSError>;
+  /**
+   * Provides feedback for an authentication event as to whether it was from a valid user. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
+   */
+  adminUpdateAuthEventFeedback(params: CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse, AWSError>;
+  /**
+   * Provides feedback for an authentication event as to whether it was from a valid user. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
+   */
+  adminUpdateAuthEventFeedback(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse, AWSError>;
   /**
    * Updates the device status as an administrator. Requires developer credentials.
    */
@@ -195,6 +219,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Signs out users from all devices, as an administrator. Requires developer credentials.
    */
   adminUserGlobalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
+  /**
+   * Returns a unique generated shared secret key code for the user account. The request takes an access token or a session string, but not both.
+   */
+  associateSoftwareToken(params: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse, AWSError>;
+  /**
+   * Returns a unique generated shared secret key code for the user account. The request takes an access token or a session string, but not both.
+   */
+  associateSoftwareToken(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse, AWSError>;
   /**
    * Changes the password for a specified user in a user pool.
    */
@@ -364,6 +396,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   describeResourceServer(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse, AWSError>;
   /**
+   * Describes the risk configuration.
+   */
+  describeRiskConfiguration(params: CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationResponse, AWSError>;
+  /**
+   * Describes the risk configuration.
+   */
+  describeRiskConfiguration(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationResponse, AWSError>;
+  /**
    * Describes the user import job.
    */
   describeUserImportJob(params: CognitoIdentityServiceProvider.Types.DescribeUserImportJobRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserImportJobResponse, AWSError>;
@@ -404,11 +444,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   forgetDevice(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Calling this API causes a message to be sent to the end user with a confirmation code that is required to change the user's password. For the Username parameter, you can use the username or user alias. If a verified phone number exists for the user, the confirmation code is sent to the phone number. Otherwise, if a verified email exists, the confirmation code is sent to the email. If neither a verified phone number nor a verified email exists, InvalidParameterException is thrown. To use the confirmation code for resetting the password, call ConfirmForgotPassword.
+   * Calling this API causes a message to be sent to the end user with a confirmation code that is required to change the user's password. For the Username parameter, you can use the username or user alias. If a verified phone number exists for the user, the confirmation code is sent to the phone number. Otherwise, if a verified email exists, the confirmation code is sent to the email. If neither a verified phone number nor a verified email exists, InvalidParameterException is thrown. To use the confirmation code for resetting the password, call .
    */
   forgotPassword(params: CognitoIdentityServiceProvider.Types.ForgotPasswordRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ForgotPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.ForgotPasswordResponse, AWSError>;
   /**
-   * Calling this API causes a message to be sent to the end user with a confirmation code that is required to change the user's password. For the Username parameter, you can use the username or user alias. If a verified phone number exists for the user, the confirmation code is sent to the phone number. Otherwise, if a verified email exists, the confirmation code is sent to the email. If neither a verified phone number nor a verified email exists, InvalidParameterException is thrown. To use the confirmation code for resetting the password, call ConfirmForgotPassword.
+   * Calling this API causes a message to be sent to the end user with a confirmation code that is required to change the user's password. For the Username parameter, you can use the username or user alias. If a verified phone number exists for the user, the confirmation code is sent to the phone number. Otherwise, if a verified email exists, the confirmation code is sent to the email. If neither a verified phone number nor a verified email exists, InvalidParameterException is thrown. To use the confirmation code for resetting the password, call .
    */
   forgotPassword(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ForgotPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.ForgotPasswordResponse, AWSError>;
   /**
@@ -467,6 +507,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Gets the user attribute verification code for the specified attribute name.
    */
   getUserAttributeVerificationCode(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserAttributeVerificationCodeResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserAttributeVerificationCodeResponse, AWSError>;
+  /**
+   * Gets the user pool multi-factor authentication (MFA) configuration.
+   */
+  getUserPoolMfaConfig(params: CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse, AWSError>;
+  /**
+   * Gets the user pool multi-factor authentication (MFA) configuration.
+   */
+  getUserPoolMfaConfig(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse, AWSError>;
   /**
    * Signs out users from all devices.
    */
@@ -572,6 +620,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   respondToAuthChallenge(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse, AWSError>;
   /**
+   * Configures actions on detected risks. To delete the risk configuration for UserPoolId or ClientId, pass null values for all four configuration types. To enable Amazon Cognito advanced security features, update the user pool to include the UserPoolAddOns keyAdvancedSecurityMode. See .
+   */
+  setRiskConfiguration(params: CognitoIdentityServiceProvider.Types.SetRiskConfigurationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetRiskConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetRiskConfigurationResponse, AWSError>;
+  /**
+   * Configures actions on detected risks. To delete the risk configuration for UserPoolId or ClientId, pass null values for all four configuration types. To enable Amazon Cognito advanced security features, update the user pool to include the UserPoolAddOns keyAdvancedSecurityMode. See .
+   */
+  setRiskConfiguration(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetRiskConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetRiskConfigurationResponse, AWSError>;
+  /**
    * Sets the UI customization information for a user pool's built-in app UI. You can specify app UI customization settings for a single client (with a specific clientId) or for all clients (by setting the clientId to ALL). If you specify ALL, the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the ALL configuration.   To use this API, your user pool must have a domain associated with it. Otherwise, there is no place to host the app's pages, and the service will throw an error. 
    */
   setUICustomization(params: CognitoIdentityServiceProvider.Types.SetUICustomizationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUICustomizationResponse, AWSError>;
@@ -579,6 +635,22 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Sets the UI customization information for a user pool's built-in app UI. You can specify app UI customization settings for a single client (with a specific clientId) or for all clients (by setting the clientId to ALL). If you specify ALL, the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the ALL configuration.   To use this API, your user pool must have a domain associated with it. Otherwise, there is no place to host the app's pages, and the service will throw an error. 
    */
   setUICustomization(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUICustomizationResponse, AWSError>;
+  /**
+   * Set the user's multi-factor authentication (MFA) method preference.
+   */
+  setUserMFAPreference(params: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse, AWSError>;
+  /**
+   * Set the user's multi-factor authentication (MFA) method preference.
+   */
+  setUserMFAPreference(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse, AWSError>;
+  /**
+   * Set the user pool MFA configuration.
+   */
+  setUserPoolMfaConfig(params: CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse, AWSError>;
+  /**
+   * Set the user pool MFA configuration.
+   */
+  setUserPoolMfaConfig(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse, AWSError>;
   /**
    * Sets the user settings like multi-factor authentication (MFA). If MFA is to be removed for a particular attribute pass the attribute with code delivery as null. If null list is passed, all MFA options are removed.
    */
@@ -611,6 +683,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    * Stops the user import job.
    */
   stopUserImportJob(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.StopUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.StopUserImportJobResponse, AWSError>;
+  /**
+   * Provides the feedback for an authentication event whether it was from a valid user or not. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
+   */
+  updateAuthEventFeedback(params: CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackResponse, AWSError>;
+  /**
+   * Provides the feedback for an authentication event whether it was from a valid user or not. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
+   */
+  updateAuthEventFeedback(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackResponse, AWSError>;
   /**
    * Updates the device status.
    */
@@ -668,6 +748,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   updateUserPoolClient(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse, AWSError>;
   /**
+   * Use this API to register a user's entered TOTP code and mark the user's software token MFA status as "verified" if successful,
+   */
+  verifySoftwareToken(params: CognitoIdentityServiceProvider.Types.VerifySoftwareTokenRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse, AWSError>;
+  /**
+   * Use this API to register a user's entered TOTP code and mark the user's software token MFA status as "verified" if successful,
+   */
+  verifySoftwareToken(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse, AWSError>;
+  /**
    * Verifies the specified user attributes in the user pool.
    */
   verifyUserAttribute(params: CognitoIdentityServiceProvider.Types.VerifyUserAttributeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifyUserAttributeResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifyUserAttributeResponse, AWSError>;
@@ -678,6 +766,42 @@ declare class CognitoIdentityServiceProvider extends Service {
 }
 declare namespace CognitoIdentityServiceProvider {
   export type AWSAccountIdType = string;
+  export type AccountTakeoverActionNotifyType = boolean;
+  export interface AccountTakeoverActionType {
+    /**
+     * Flag specifying whether to send a notification.
+     */
+    Notify: AccountTakeoverActionNotifyType;
+    /**
+     * The event action.    BLOCK Choosing this action will block the request.    MFA_IF_CONFIGURED Throw MFA challenge if user has configured it, else allow the request.    MFA_REQUIRED Throw MFA challenge if user has configured it, else block the request.    NO_ACTION Allow the user sign-in.  
+     */
+    EventAction: AccountTakeoverEventActionType;
+  }
+  export interface AccountTakeoverActionsType {
+    /**
+     * Action to take for a low risk.
+     */
+    LowAction?: AccountTakeoverActionType;
+    /**
+     * Action to take for a medium risk.
+     */
+    MediumAction?: AccountTakeoverActionType;
+    /**
+     * Action to take for a high risk.
+     */
+    HighAction?: AccountTakeoverActionType;
+  }
+  export type AccountTakeoverEventActionType = "BLOCK"|"MFA_IF_CONFIGURED"|"MFA_REQUIRED"|"NO_ACTION"|string;
+  export interface AccountTakeoverRiskConfigurationType {
+    /**
+     * The notify configuration used to construct email notifications.
+     */
+    NotifyConfiguration?: NotifyConfigurationType;
+    /**
+     * Account takeover risk configuration actions
+     */
+    Actions: AccountTakeoverActionsType;
+  }
   export interface AddCustomAttributesRequest {
     /**
      * The user pool ID for the user pool where you want to add custom attributes.
@@ -726,7 +850,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UnusedAccountValidityDays?: AdminCreateUserUnusedAccountValidityDaysType;
     /**
-     * The message template to be used for the welcome message to new users.
+     * The message template to be used for the welcome message to new users. See also Customizing User Invitation Messages.
      */
     InviteMessageTemplate?: MessageTemplateType;
   }
@@ -740,7 +864,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Username: UsernameType;
     /**
-     * An array of name-value pairs that contain user attributes and attribute values to be set for the user to be created. You can create a user without specifying any attributes other than Username. However, any attributes that you specify as required (in CreateUserPool or in the Attributes tab of the console) must be supplied either by you (in your call to AdminCreateUser) or by the user (when he or she signs up in response to your welcome message). For custom attributes, you must prepend the custom: prefix to the attribute name. To send a message inviting the user to sign up, you must specify the user's email address or phone number. This can be done in your call to AdminCreateUser or in the Users tab of the Amazon Cognito console for managing your user pools. In your call to AdminCreateUser, you can set the email_verified attribute to True, and you can set the phone_number_verified attribute to True. (You can also do this by calling AdminUpdateUserAttributes.)    email: The email address of the user to whom the message that contains the code and username will be sent. Required if the email_verified attribute is set to True, or if "EMAIL" is specified in the DesiredDeliveryMediums parameter.    phone_number: The phone number of the user to whom the message that contains the code and username will be sent. Required if the phone_number_verified attribute is set to True, or if "SMS" is specified in the DesiredDeliveryMediums parameter.  
+     * An array of name-value pairs that contain user attributes and attribute values to be set for the user to be created. You can create a user without specifying any attributes other than Username. However, any attributes that you specify as required (in or in the Attributes tab of the console) must be supplied either by you (in your call to AdminCreateUser) or by the user (when he or she signs up in response to your welcome message). For custom attributes, you must prepend the custom: prefix to the attribute name. To send a message inviting the user to sign up, you must specify the user's email address or phone number. This can be done in your call to AdminCreateUser or in the Users tab of the Amazon Cognito console for managing your user pools. In your call to AdminCreateUser, you can set the email_verified attribute to True, and you can set the phone_number_verified attribute to True. (You can also do this by calling .)    email: The email address of the user to whom the message that contains the code and username will be sent. Required if the email_verified attribute is set to True, or if "EMAIL" is specified in the DesiredDeliveryMediums parameter.    phone_number: The phone number of the user to whom the message that contains the code and username will be sent. Required if the phone_number_verified attribute is set to True, or if "SMS" is specified in the DesiredDeliveryMediums parameter.  
      */
     UserAttributes?: AttributeListType;
     /**
@@ -906,6 +1030,8 @@ declare namespace CognitoIdentityServiceProvider {
      * Specifies the options for MFA (e.g., email or phone number).
      */
     MFAOptions?: MFAOptionListType;
+    PreferredMfaSetting?: StringType;
+    UserMFASettingList?: UserMFASettingListType;
   }
   export interface AdminInitiateAuthRequest {
     /**
@@ -928,6 +1054,14 @@ declare namespace CognitoIdentityServiceProvider {
      * This is a random key-value pair map which can contain any key and will be passed to your PreAuthentication Lambda trigger as-is. It can be used to implement additional validations around authentication.
      */
     ClientMetadata?: ClientMetadataType;
+    /**
+     * The analytics metadata for collecting Amazon Pinpoint metrics for AdminInitiateAuth calls.
+     */
+    AnalyticsMetadata?: AnalyticsMetadataType;
+    /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    ContextData?: ContextDataType;
   }
   export interface AdminInitiateAuthResponse {
     /**
@@ -953,7 +1087,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: StringType;
     /**
-     * The existing user in the user pool to be linked to the external identity provider user account. Can be a native (Username + Password) Cognito User Pools user or a federated user (for example, a SAML or Facebook user). If the user doesn't exist, an exception is thrown. This is the user that is returned when the new user (with the linked identity provider attribute) signs in. The ProviderAttributeValue for the DestinationUser must match the username for the user in the user pool. The ProviderAttributeName will always be ignored.
+     * The existing user in the user pool to be linked to the external identity provider user account. Can be a native (Username + Password) Cognito User Pools user or a federated user (for example, a SAML or Facebook user). If the user doesn't exist, an exception is thrown. This is the user that is returned when the new user (with the linked identity provider attribute) signs in. For a native username + password user, the ProviderAttributeValue for the DestinationUser should be the username in the user pool. For a federated user, it should be the provider-specific user_id. The ProviderAttributeName of the DestinationUser is ignored. The ProviderName should be set to Cognito for users in Cognito user pools.
      */
     DestinationUser: ProviderUserIdentifierType;
     /**
@@ -1019,6 +1153,34 @@ declare namespace CognitoIdentityServiceProvider {
      */
     NextToken?: PaginationKey;
   }
+  export interface AdminListUserAuthEventsRequest {
+    /**
+     * The user pool ID.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The user pool username.
+     */
+    Username: UsernameType;
+    /**
+     * The maximum number of authentication events to return.
+     */
+    MaxResults?: QueryLimitType;
+    /**
+     * A pagination token.
+     */
+    NextToken?: PaginationKey;
+  }
+  export interface AdminListUserAuthEventsResponse {
+    /**
+     * The response object. It includes the EventID, EventType, CreationDate, EventRisk, and EventResponse.
+     */
+    AuthEvents?: AuthEventsType;
+    /**
+     * A pagination token.
+     */
+    NextToken?: PaginationKey;
+  }
   export interface AdminRemoveUserFromGroupRequest {
     /**
      * The user pool ID for the user pool.
@@ -1055,7 +1217,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ClientId: ClientIdType;
     /**
-     * The challenge name. For more information, see AdminInitiateAuth.
+     * The challenge name. For more information, see .
      */
     ChallengeName: ChallengeNameType;
     /**
@@ -1066,24 +1228,52 @@ declare namespace CognitoIdentityServiceProvider {
      * The session which should be passed both ways in challenge-response calls to the service. If InitiateAuth or RespondToAuthChallenge API call determines that the caller needs to go through another challenge, they return a session with other challenge parameters. This session should be passed as it is to the next RespondToAuthChallenge API call.
      */
     Session?: SessionType;
+    /**
+     * The analytics metadata for collecting Amazon Pinpoint metrics for AdminRespondToAuthChallenge calls.
+     */
+    AnalyticsMetadata?: AnalyticsMetadataType;
+    /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    ContextData?: ContextDataType;
   }
   export interface AdminRespondToAuthChallengeResponse {
     /**
-     * The name of the challenge. For more information, see AdminInitiateAuth.
+     * The name of the challenge. For more information, see .
      */
     ChallengeName?: ChallengeNameType;
     /**
-     * The session which should be passed both ways in challenge-response calls to the service. If the InitiateAuth or RespondToAuthChallenge API call determines that the caller needs to go through another challenge, they return a session with other challenge parameters. This session should be passed as it is to the next RespondToAuthChallenge API call.
+     * The session which should be passed both ways in challenge-response calls to the service. If the or API call determines that the caller needs to go through another challenge, they return a session with other challenge parameters. This session should be passed as it is to the next RespondToAuthChallenge API call.
      */
     Session?: SessionType;
     /**
-     * The challenge parameters. For more information, see AdminInitiateAuth.
+     * The challenge parameters. For more information, see .
      */
     ChallengeParameters?: ChallengeParametersType;
     /**
      * The result returned by the server in response to the authentication request.
      */
     AuthenticationResult?: AuthenticationResultType;
+  }
+  export interface AdminSetUserMFAPreferenceRequest {
+    /**
+     * The SMS text message MFA settings.
+     */
+    SMSMfaSettings?: SMSMfaSettingsType;
+    /**
+     * The time-based one-time password software token MFA settings.
+     */
+    SoftwareTokenMfaSettings?: SoftwareTokenMfaSettingsType;
+    /**
+     * The user pool username.
+     */
+    Username: UsernameType;
+    /**
+     * The user pool ID.
+     */
+    UserPoolId: UserPoolIdType;
+  }
+  export interface AdminSetUserMFAPreferenceResponse {
   }
   export interface AdminSetUserSettingsRequest {
     /**
@@ -1100,6 +1290,26 @@ declare namespace CognitoIdentityServiceProvider {
     MFAOptions: MFAOptionListType;
   }
   export interface AdminSetUserSettingsResponse {
+  }
+  export interface AdminUpdateAuthEventFeedbackRequest {
+    /**
+     * The user pool ID.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The user pool username.
+     */
+    Username: UsernameType;
+    /**
+     * The authentication event ID.
+     */
+    EventId: EventIdType;
+    /**
+     * The authentication event feedback value.
+     */
+    FeedbackValue: FeedbackValueType;
+  }
+  export interface AdminUpdateAuthEventFeedbackResponse {
   }
   export interface AdminUpdateDeviceStatusRequest {
     /**
@@ -1149,9 +1359,54 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface AdminUserGlobalSignOutResponse {
   }
+  export type AdvancedSecurityModeType = "OFF"|"AUDIT"|"ENFORCED"|string;
   export type AliasAttributeType = "phone_number"|"email"|"preferred_username"|string;
   export type AliasAttributesListType = AliasAttributeType[];
+  export interface AnalyticsConfigurationType {
+    /**
+     * The application ID for an Amazon Pinpoint application.
+     */
+    ApplicationId: HexStringType;
+    /**
+     * The ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics.
+     */
+    RoleArn: ArnType;
+    /**
+     * The external ID.
+     */
+    ExternalId: StringType;
+    /**
+     * If UserDataShared is true, Amazon Cognito will include user data in the events it publishes to Amazon Pinpoint analytics.
+     */
+    UserDataShared?: BooleanType;
+  }
+  export interface AnalyticsMetadataType {
+    /**
+     * The endpoint ID.
+     */
+    AnalyticsEndpointId?: StringType;
+  }
   export type ArnType = string;
+  export interface AssociateSoftwareTokenRequest {
+    /**
+     * The access token.
+     */
+    AccessToken?: TokenModelType;
+    /**
+     * The session which should be passed both ways in challenge-response calls to the service. This allows authentication of the user as part of the MFA setup process.
+     */
+    Session?: SessionType;
+  }
+  export interface AssociateSoftwareTokenResponse {
+    /**
+     * A unique generated shared secret code that is used in the TOTP algorithm to generate a one time code.
+     */
+    SecretCode?: SecretCodeType;
+    /**
+     * The session which should be passed both ways in challenge-response calls to the service. This allows authentication of the user as part of the MFA setup process.
+     */
+    Session?: SessionType;
+  }
   export type AttributeDataType = "String"|"Number"|"DateTime"|"Boolean"|string;
   export type AttributeListType = AttributeType[];
   export type AttributeMappingKeyType = string;
@@ -1169,11 +1424,46 @@ declare namespace CognitoIdentityServiceProvider {
     Value?: AttributeValueType;
   }
   export type AttributeValueType = string;
+  export interface AuthEventType {
+    /**
+     * The event ID.
+     */
+    EventId?: StringType;
+    /**
+     * The event type.
+     */
+    EventType?: EventType;
+    /**
+     * The creation date
+     */
+    CreationDate?: DateType;
+    /**
+     * The event response.
+     */
+    EventResponse?: EventResponseType;
+    /**
+     * The event risk.
+     */
+    EventRisk?: EventRiskType;
+    /**
+     * The challenge responses.
+     */
+    ChallengeResponses?: ChallengeResponseListType;
+    /**
+     * The user context data captured at the time of an event request. It provides additional information about the client from which event the request is received.
+     */
+    EventContextData?: EventContextDataType;
+    /**
+     * A flag specifying the user feedback captured at the time of an event request is good or bad. 
+     */
+    EventFeedback?: EventFeedbackType;
+  }
+  export type AuthEventsType = AuthEventType[];
   export type AuthFlowType = "USER_SRP_AUTH"|"REFRESH_TOKEN_AUTH"|"REFRESH_TOKEN"|"CUSTOM_AUTH"|"ADMIN_NO_SRP_AUTH"|string;
   export type AuthParametersType = {[key: string]: StringType};
   export interface AuthenticationResultType {
     /**
-     * The access token of the authentication result.
+     * The access token.
      */
     AccessToken?: TokenModelType;
     /**
@@ -1181,15 +1471,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ExpiresIn?: IntegerType;
     /**
-     * The token type of the authentication result.
+     * The token type.
      */
     TokenType?: StringType;
     /**
-     * The refresh token of the authentication result.
+     * The refresh token.
      */
     RefreshToken?: TokenModelType;
     /**
-     * The ID token of the authentication result.
+     * The ID token.
      */
     IdToken?: TokenModelType;
     /**
@@ -1197,24 +1487,38 @@ declare namespace CognitoIdentityServiceProvider {
      */
     NewDeviceMetadata?: NewDeviceMetadataType;
   }
+  export type BlockedIPRangeListType = StringType[];
   export type BooleanType = boolean;
   export type CSSType = string;
   export type CSSVersionType = string;
   export type CallbackURLsListType = RedirectUrlType[];
-  export type ChallengeNameType = "SMS_MFA"|"PASSWORD_VERIFIER"|"CUSTOM_CHALLENGE"|"DEVICE_SRP_AUTH"|"DEVICE_PASSWORD_VERIFIER"|"ADMIN_NO_SRP_AUTH"|"NEW_PASSWORD_REQUIRED"|string;
+  export type ChallengeName = "Password"|"Mfa"|string;
+  export type ChallengeNameType = "SMS_MFA"|"SOFTWARE_TOKEN_MFA"|"SELECT_MFA_TYPE"|"MFA_SETUP"|"PASSWORD_VERIFIER"|"CUSTOM_CHALLENGE"|"DEVICE_SRP_AUTH"|"DEVICE_PASSWORD_VERIFIER"|"ADMIN_NO_SRP_AUTH"|"NEW_PASSWORD_REQUIRED"|string;
   export type ChallengeParametersType = {[key: string]: StringType};
+  export type ChallengeResponse = "Success"|"Failure"|string;
+  export type ChallengeResponseListType = ChallengeResponseType[];
+  export interface ChallengeResponseType {
+    /**
+     * The challenge name
+     */
+    ChallengeName?: ChallengeName;
+    /**
+     * The challenge response.
+     */
+    ChallengeResponse?: ChallengeResponse;
+  }
   export type ChallengeResponsesType = {[key: string]: StringType};
   export interface ChangePasswordRequest {
     /**
-     * The old password in the change password request.
+     * The old password.
      */
     PreviousPassword: PasswordType;
     /**
-     * The new password in the change password request.
+     * The new password.
      */
     ProposedPassword: PasswordType;
     /**
-     * The access token in the change password request.
+     * The access token.
      */
     AccessToken: TokenModelType;
   }
@@ -1237,11 +1541,28 @@ declare namespace CognitoIdentityServiceProvider {
      */
     DeliveryMedium?: DeliveryMediumType;
     /**
-     * The name of the attribute in the code delivery details type.
+     * The attribute name.
      */
     AttributeName?: AttributeNameType;
   }
   export type CompletionMessageType = string;
+  export interface CompromisedCredentialsActionsType {
+    /**
+     * The event action.
+     */
+    EventAction: CompromisedCredentialsEventActionType;
+  }
+  export type CompromisedCredentialsEventActionType = "BLOCK"|"NO_ACTION"|string;
+  export interface CompromisedCredentialsRiskConfigurationType {
+    /**
+     * Perform the action for these events. The default is to perform all events if no event filter is specified.
+     */
+    EventFilter?: EventFiltersType;
+    /**
+     * The compromised credentials risk configuration actions.
+     */
+    Actions: CompromisedCredentialsActionsType;
+  }
   export interface ConfirmDeviceRequest {
     /**
      * The access token.
@@ -1280,13 +1601,21 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Username: UsernameType;
     /**
-     * The confirmation code sent by a user's request to retrieve a forgotten password. For more information, see ForgotPassword 
+     * The confirmation code sent by a user's request to retrieve a forgotten password. For more information, see 
      */
     ConfirmationCode: ConfirmationCodeType;
     /**
      * The password sent by a user's request to retrieve a forgotten password.
      */
     Password: PasswordType;
+    /**
+     * The Amazon Pinpoint analytics metadata for collecting metrics for ConfirmForgotPassword calls.
+     */
+    AnalyticsMetadata?: AnalyticsMetadataType;
+    /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    UserContextData?: UserContextDataType;
   }
   export interface ConfirmForgotPasswordResponse {
   }
@@ -1311,10 +1640,40 @@ declare namespace CognitoIdentityServiceProvider {
      * Boolean to be specified to force user confirmation irrespective of existing alias. By default set to False. If this parameter is set to True and the phone number/email used for sign up confirmation already exists as an alias with a different user, the API call will migrate the alias from the previous user to the newly created user being confirmed. If set to False, the API will throw an AliasExistsException error.
      */
     ForceAliasCreation?: ForceAliasCreation;
+    /**
+     * The Amazon Pinpoint analytics metadata for collecting metrics for ConfirmSignUp calls.
+     */
+    AnalyticsMetadata?: AnalyticsMetadataType;
+    /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    UserContextData?: UserContextDataType;
   }
   export interface ConfirmSignUpResponse {
   }
   export type ConfirmationCodeType = string;
+  export interface ContextDataType {
+    /**
+     * Source IP address of your user.
+     */
+    IpAddress: StringType;
+    /**
+     * Your server endpoint where this API is invoked.
+     */
+    ServerName: StringType;
+    /**
+     * Your server path where this API is invoked. 
+     */
+    ServerPath: StringType;
+    /**
+     * HttpHeaders received on your server in same order.
+     */
+    HttpHeaders: HttpHeaderList;
+    /**
+     * Encoded data containing device fingerprinting details, collected using the Amazon Cognito context data collection library.
+     */
+    EncodedData?: StringType;
+  }
   export interface CreateGroupRequest {
     /**
      * The name of the group. Must be unique.
@@ -1476,6 +1835,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Set to True if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      */
     AllowedOAuthFlowsUserPoolClient?: BooleanType;
+    /**
+     * The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
+     */
+    AnalyticsConfiguration?: AnalyticsConfigurationType;
   }
   export interface CreateUserPoolClientResponse {
     /**
@@ -1568,6 +1931,10 @@ declare namespace CognitoIdentityServiceProvider {
      * An array of schema attributes for the new user pool. These attributes can be standard or custom attributes.
      */
     Schema?: SchemaAttributesListType;
+    /**
+     * Used to enable advanced security risk detection. Set the key AdvancedSecurityMode to the value "AUDIT".
+     */
+    UserPoolAddOns?: UserPoolAddOnsType;
   }
   export interface CreateUserPoolResponse {
     /**
@@ -1688,6 +2055,22 @@ declare namespace CognitoIdentityServiceProvider {
      * The resource server.
      */
     ResourceServer: ResourceServerType;
+  }
+  export interface DescribeRiskConfigurationRequest {
+    /**
+     * The user pool ID.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The app client ID.
+     */
+    ClientId?: ClientIdType;
+  }
+  export interface DescribeRiskConfigurationResponse {
+    /**
+     * The risk configuration.
+     */
+    RiskConfiguration: RiskConfigurationType;
   }
   export interface DescribeUserImportJobRequest {
     /**
@@ -1832,16 +2215,70 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SourceArn?: ArnType;
     /**
-     * The REPLY-TO email address.
+     * The destination to which the receiver of the email should reply to.
      */
     ReplyToEmailAddress?: EmailAddressType;
   }
+  export type EmailNotificationBodyType = string;
+  export type EmailNotificationSubjectType = string;
   export type EmailVerificationMessageByLinkType = string;
   export type EmailVerificationMessageType = string;
   export type EmailVerificationSubjectByLinkType = string;
   export type EmailVerificationSubjectType = string;
+  export interface EventContextDataType {
+    /**
+     * The user's IP address.
+     */
+    IpAddress?: StringType;
+    /**
+     * The user's device name.
+     */
+    DeviceName?: StringType;
+    /**
+     * The user's time zone.
+     */
+    Timezone?: StringType;
+    /**
+     * The user's city.
+     */
+    City?: StringType;
+    /**
+     * The user's country.
+     */
+    Country?: StringType;
+  }
+  export interface EventFeedbackType {
+    /**
+     * The event feedback value.
+     */
+    FeedbackValue: FeedbackValueType;
+    /**
+     * The provider.
+     */
+    Provider: StringType;
+    /**
+     * The event feedback date.
+     */
+    FeedbackDate?: DateType;
+  }
+  export type EventFilterType = "SIGN_IN"|"PASSWORD_CHANGE"|"SIGN_UP"|string;
+  export type EventFiltersType = EventFilterType[];
+  export type EventIdType = string;
+  export type EventResponseType = "Success"|"Failure"|string;
+  export interface EventRiskType {
+    /**
+     * The risk decision.
+     */
+    RiskDecision?: RiskDecisionType;
+    /**
+     * The risk level.
+     */
+    RiskLevel?: RiskLevelType;
+  }
+  export type EventType = "SignIn"|"SignUp"|"ForgotPassword"|string;
   export type ExplicitAuthFlowsListType = ExplicitAuthFlowsType[];
   export type ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"|"CUSTOM_AUTH_FLOW_ONLY"|string;
+  export type FeedbackValueType = "Valid"|"Invalid"|string;
   export type ForceAliasCreation = boolean;
   export interface ForgetDeviceRequest {
     /**
@@ -1863,9 +2300,17 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SecretHash?: SecretHashType;
     /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    UserContextData?: UserContextDataType;
+    /**
      * The user name of the user for whom you want to enter a code to reset a forgotten password.
      */
     Username: UsernameType;
+    /**
+     * The Amazon Pinpoint analytics metadata for collecting metrics for ForgotPassword calls.
+     */
+    AnalyticsMetadata?: AnalyticsMetadataType;
   }
   export interface ForgotPasswordResponse {
     /**
@@ -1970,6 +2415,26 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CodeDeliveryDetails?: CodeDeliveryDetailsType;
   }
+  export interface GetUserPoolMfaConfigRequest {
+    /**
+     * The user pool ID.
+     */
+    UserPoolId: UserPoolIdType;
+  }
+  export interface GetUserPoolMfaConfigResponse {
+    /**
+     * The SMS text message multi-factor (MFA) configuration.
+     */
+    SmsMfaConfiguration?: SmsMfaConfigType;
+    /**
+     * The software token multi-factor (MFA) configuration.
+     */
+    SoftwareTokenMfaConfiguration?: SoftwareTokenMfaConfigType;
+    /**
+     * The multi-factor (MFA) configuration.
+     */
+    MfaConfiguration?: UserPoolMfaType;
+  }
   export interface GetUserRequest {
     /**
      * The access token returned by the server response to get information about the user.
@@ -1989,6 +2454,8 @@ declare namespace CognitoIdentityServiceProvider {
      * Specifies the options for MFA (e.g., email or phone number).
      */
     MFAOptions?: MFAOptionListType;
+    PreferredMfaSetting?: StringType;
+    UserMFASettingList?: UserMFASettingListType;
   }
   export interface GlobalSignOutRequest {
     /**
@@ -2030,6 +2497,18 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CreationDate?: DateType;
   }
+  export type HexStringType = string;
+  export interface HttpHeader {
+    /**
+     * The header name
+     */
+    headerName?: StringType;
+    /**
+     * The header value.
+     */
+    headerValue?: StringType;
+  }
+  export type HttpHeaderList = HttpHeader[];
   export interface IdentityProviderType {
     /**
      * The user pool ID.
@@ -2086,6 +2565,14 @@ declare namespace CognitoIdentityServiceProvider {
      * The app client ID.
      */
     ClientId: ClientIdType;
+    /**
+     * The Amazon Pinpoint analytics metadata for collecting metrics for InitiateAuth calls.
+     */
+    AnalyticsMetadata?: AnalyticsMetadataType;
+    /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    UserContextData?: UserContextDataType;
   }
   export interface InitiateAuthResponse {
     /**
@@ -2093,7 +2580,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ChallengeName?: ChallengeNameType;
     /**
-     * The session which should be passed both ways in challenge-response calls to the service. If the InitiateAuth or RespondToAuthChallenge API call determines that the caller needs to go through another challenge, they return a session with other challenge parameters. This session should be passed as it is to the next RespondToAuthChallenge API call.
+     * The session which should be passed both ways in challenge-response calls to the service. If the or API call determines that the caller needs to go through another challenge, they return a session with other challenge parameters. This session should be passed as it is to the next RespondToAuthChallenge API call.
      */
     Session?: SessionType;
     /**
@@ -2139,6 +2626,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Verifies the authentication challenge response.
      */
     VerifyAuthChallengeResponse?: ArnType;
+    /**
+     * A Lambda trigger that is invoked before token generation.
+     */
+    PreTokenGeneration?: ArnType;
   }
   export interface ListDevicesRequest {
     /**
@@ -2341,7 +2832,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserPoolId: UserPoolIdType;
     /**
-     * An array of strings, where each string is the name of a user attribute to be returned for each user in the search results. If the array is empty, all attributes are returned.
+     * An array of strings, where each string is the name of a user attribute to be returned for each user in the search results. If the array is null, all attributes are returned.
      */
     AttributesToGet?: SearchedAttributeNamesListType;
     /**
@@ -2353,7 +2844,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     PaginationToken?: SearchPaginationTokenType;
     /**
-     * A filter string of the form "AttributeName Filter-Type "AttributeValue"". Quotation marks within the filter string must be escaped using the backslash (\) character. For example, "family_name = \"Reddy\"".    AttributeName: The name of the attribute to search for. You can only search for one attribute at a time.    Filter-Type: For an exact match, use =, for example, "given_name = \"Jon\"". For a prefix ("starts with") match, use ^=, for example, "given_name ^= \"Jon\"".     AttributeValue: The attribute value that must be matched for each user.   If the filter string is empty, ListUsers returns all users in the user pool. You can only search for the following standard attributes:    username (case-sensitive)    email     phone_number     name     given_name     family_name     preferred_username     cognito:user_status (called Enabled in the Console) (case-sensitive)    status (case-insensitive)   Custom attributes are not searchable. For more information, see Searching for Users Using the ListUsers API and Examples of Using the ListUsers API in the Amazon Cognito Developer Guide.
+     * A filter string of the form "AttributeName Filter-Type "AttributeValue"". Quotation marks within the filter string must be escaped using the backslash (\) character. For example, "family_name = \"Reddy\"".    AttributeName: The name of the attribute to search for. You can only search for one attribute at a time.    Filter-Type: For an exact match, use =, for example, "given_name = \"Jon\"". For a prefix ("starts with") match, use ^=, for example, "given_name ^= \"Jon\"".     AttributeValue: The attribute value that must be matched for each user.   If the filter string is empty, ListUsers returns all users in the user pool. You can only search for the following standard attributes:    username (case-sensitive)    email     phone_number     name     given_name     family_name     preferred_username     cognito:user_status (called Enabled in the Console) (case-sensitive)    status (case-insensitive)    sub    Custom attributes are not searchable. For more information, see Searching for Users Using the ListUsers API and Examples of Using the ListUsers API in the Amazon Cognito Developer Guide.
      */
     Filter?: UserFilterType;
   }
@@ -2405,6 +2896,46 @@ declare namespace CognitoIdentityServiceProvider {
      * The device group key.
      */
     DeviceGroupKey?: StringType;
+  }
+  export interface NotifyConfigurationType {
+    /**
+     * The email address that is sending the email. It must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES.
+     */
+    From?: StringType;
+    /**
+     * The destination to which the receiver of an email should reply to.
+     */
+    ReplyTo?: StringType;
+    /**
+     * The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. It permits Amazon Cognito to send for the email address specified in the From parameter.
+     */
+    SourceArn: ArnType;
+    /**
+     * Email template used when a detected risk event is blocked.
+     */
+    BlockEmail?: NotifyEmailType;
+    /**
+     * The email template used when a detected risk event is allowed.
+     */
+    NoActionEmail?: NotifyEmailType;
+    /**
+     * The MFA email template used when MFA is challenged as part of a detected risk.
+     */
+    MfaEmail?: NotifyEmailType;
+  }
+  export interface NotifyEmailType {
+    /**
+     * The subject.
+     */
+    Subject: EmailNotificationSubjectType;
+    /**
+     * The HTML body.
+     */
+    HtmlBody?: EmailNotificationBodyType;
+    /**
+     * The text body.
+     */
+    TextBody?: EmailNotificationBodyType;
   }
   export interface NumberAttributeConstraintsType {
     /**
@@ -2497,9 +3028,17 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SecretHash?: SecretHashType;
     /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    UserContextData?: UserContextDataType;
+    /**
      * The user name of the user to whom you wish to resend a confirmation code.
      */
     Username: UsernameType;
+    /**
+     * The Amazon Pinpoint analytics metadata for collecting metrics for ResendConfirmationCode calls.
+     */
+    AnalyticsMetadata?: AnalyticsMetadataType;
   }
   export interface ResendConfirmationCodeResponse {
     /**
@@ -2547,7 +3086,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ClientId: ClientIdType;
     /**
-     * The challenge name. For more information, see InitiateAuth.  ADMIN_NO_SRP_AUTH is not a valid value.
+     * The challenge name. For more information, see .  ADMIN_NO_SRP_AUTH is not a valid value.
      */
     ChallengeName: ChallengeNameType;
     /**
@@ -2558,18 +3097,26 @@ declare namespace CognitoIdentityServiceProvider {
      * The challenge responses. These are inputs corresponding to the value of ChallengeName, for example:    SMS_MFA: SMS_MFA_CODE, USERNAME, SECRET_HASH (if app client is configured with client secret).    PASSWORD_VERIFIER: PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME, SECRET_HASH (if app client is configured with client secret).    NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required attributes, USERNAME, SECRET_HASH (if app client is configured with client secret).   
      */
     ChallengeResponses?: ChallengeResponsesType;
+    /**
+     * The Amazon Pinpoint analytics metadata for collecting metrics for RespondToAuthChallenge calls.
+     */
+    AnalyticsMetadata?: AnalyticsMetadataType;
+    /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    UserContextData?: UserContextDataType;
   }
   export interface RespondToAuthChallengeResponse {
     /**
-     * The challenge name. For more information, see InitiateAuth.
+     * The challenge name. For more information, see .
      */
     ChallengeName?: ChallengeNameType;
     /**
-     * The session which should be passed both ways in challenge-response calls to the service. If the InitiateAuth or RespondToAuthChallenge API call determines that the caller needs to go through another challenge, they return a session with other challenge parameters. This session should be passed as it is to the next RespondToAuthChallenge API call.
+     * The session which should be passed both ways in challenge-response calls to the service. If the or API call determines that the caller needs to go through another challenge, they return a session with other challenge parameters. This session should be passed as it is to the next RespondToAuthChallenge API call.
      */
     Session?: SessionType;
     /**
-     * The challenge parameters. For more information, see InitiateAuth.
+     * The challenge parameters. For more information, see .
      */
     ChallengeParameters?: ChallengeParametersType;
     /**
@@ -2577,7 +3124,55 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AuthenticationResult?: AuthenticationResultType;
   }
+  export interface RiskConfigurationType {
+    /**
+     * The user pool ID.
+     */
+    UserPoolId?: UserPoolIdType;
+    /**
+     * The app client ID.
+     */
+    ClientId?: ClientIdType;
+    /**
+     * The compromised credentials risk configuration object including the EventFilter and the EventAction 
+     */
+    CompromisedCredentialsRiskConfiguration?: CompromisedCredentialsRiskConfigurationType;
+    /**
+     * The account takeover risk configuration object including the NotifyConfiguration object and Actions to take in the case of an account takeover.
+     */
+    AccountTakeoverRiskConfiguration?: AccountTakeoverRiskConfigurationType;
+    /**
+     * The configuration to override the risk decision.
+     */
+    RiskExceptionConfiguration?: RiskExceptionConfigurationType;
+    /**
+     * The last modified date.
+     */
+    LastModifiedDate?: DateType;
+  }
+  export type RiskDecisionType = "NoRisk"|"AccountTakeover"|"Block"|string;
+  export interface RiskExceptionConfigurationType {
+    /**
+     * Overrides the risk decision to always block the pre-authentication requests. The IP range is in CIDR notation: a compact representation of an IP address and its associated routing prefix.
+     */
+    BlockedIPRangeList?: BlockedIPRangeListType;
+    /**
+     * Risk detection is not performed on the IP addresses in the range list. The IP range is in CIDR notation.
+     */
+    SkippedIPRangeList?: SkippedIPRangeListType;
+  }
+  export type RiskLevelType = "Low"|"Medium"|"High"|string;
   export type S3BucketType = string;
+  export interface SMSMfaSettingsType {
+    /**
+     * Specifies whether SMS text message MFA is enabled.
+     */
+    Enabled?: BooleanType;
+    /**
+     * The preferred MFA method.
+     */
+    PreferredMfa?: BooleanType;
+  }
   export interface SchemaAttributeType {
     /**
      * A schema attribute of the name type.
@@ -2613,8 +3208,37 @@ declare namespace CognitoIdentityServiceProvider {
   export type ScopeType = string;
   export type SearchPaginationTokenType = string;
   export type SearchedAttributeNamesListType = AttributeNameType[];
+  export type SecretCodeType = string;
   export type SecretHashType = string;
   export type SessionType = string;
+  export interface SetRiskConfigurationRequest {
+    /**
+     * The user pool ID. 
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The app client ID. If ClientId is null, then the risk configuration is mapped to userPoolId. When the client ID is null, the same risk configuration is applied to all the clients in the userPool. Otherwise, ClientId is mapped to the client. When the client ID is not null, the user pool configuration is overridden and the risk configuration for the client is used instead.
+     */
+    ClientId?: ClientIdType;
+    /**
+     * The compromised credentials risk configuration.
+     */
+    CompromisedCredentialsRiskConfiguration?: CompromisedCredentialsRiskConfigurationType;
+    /**
+     * The account takeover risk configuration.
+     */
+    AccountTakeoverRiskConfiguration?: AccountTakeoverRiskConfigurationType;
+    /**
+     * The configuration to override the risk decision.
+     */
+    RiskExceptionConfiguration?: RiskExceptionConfigurationType;
+  }
+  export interface SetRiskConfigurationResponse {
+    /**
+     * The risk configuration.
+     */
+    RiskConfiguration: RiskConfigurationType;
+  }
   export interface SetUICustomizationRequest {
     /**
      * The user pool ID for the user pool.
@@ -2638,6 +3262,54 @@ declare namespace CognitoIdentityServiceProvider {
      * The UI customization information.
      */
     UICustomization: UICustomizationType;
+  }
+  export interface SetUserMFAPreferenceRequest {
+    /**
+     * The SMS text message multi-factor authentication (MFA) settings.
+     */
+    SMSMfaSettings?: SMSMfaSettingsType;
+    /**
+     * The time-based one-time password software token MFA settings.
+     */
+    SoftwareTokenMfaSettings?: SoftwareTokenMfaSettingsType;
+    /**
+     * The access token.
+     */
+    AccessToken: TokenModelType;
+  }
+  export interface SetUserMFAPreferenceResponse {
+  }
+  export interface SetUserPoolMfaConfigRequest {
+    /**
+     * The user pool ID.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The SMS text message MFA configuration.
+     */
+    SmsMfaConfiguration?: SmsMfaConfigType;
+    /**
+     * The software token MFA configuration.
+     */
+    SoftwareTokenMfaConfiguration?: SoftwareTokenMfaConfigType;
+    /**
+     * The MFA configuration.
+     */
+    MfaConfiguration?: UserPoolMfaType;
+  }
+  export interface SetUserPoolMfaConfigResponse {
+    /**
+     * The SMS text message MFA configuration.
+     */
+    SmsMfaConfiguration?: SmsMfaConfigType;
+    /**
+     * The software token MFA configuration.
+     */
+    SoftwareTokenMfaConfiguration?: SoftwareTokenMfaConfigType;
+    /**
+     * The MFA configuration.
+     */
+    MfaConfiguration?: UserPoolMfaType;
   }
   export interface SetUserSettingsRequest {
     /**
@@ -2676,6 +3348,14 @@ declare namespace CognitoIdentityServiceProvider {
      * The validation data in the request to register a user.
      */
     ValidationData?: AttributeListType;
+    /**
+     * The Amazon Pinpoint analytics metadata for collecting metrics for SignUp calls.
+     */
+    AnalyticsMetadata?: AnalyticsMetadataType;
+    /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    UserContextData?: UserContextDataType;
   }
   export interface SignUpResponse {
     /**
@@ -2691,6 +3371,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserSub: StringType;
   }
+  export type SkippedIPRangeListType = StringType[];
   export interface SmsConfigurationType {
     /**
      * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) caller.
@@ -2701,7 +3382,34 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ExternalId?: StringType;
   }
+  export interface SmsMfaConfigType {
+    /**
+     * The SMS authentication message.
+     */
+    SmsAuthenticationMessage?: SmsVerificationMessageType;
+    /**
+     * The SMS configuration.
+     */
+    SmsConfiguration?: SmsConfigurationType;
+  }
   export type SmsVerificationMessageType = string;
+  export type SoftwareTokenMFAUserCodeType = string;
+  export interface SoftwareTokenMfaConfigType {
+    /**
+     * Specifies whether software token MFA is enabled.
+     */
+    Enabled?: BooleanType;
+  }
+  export interface SoftwareTokenMfaSettingsType {
+    /**
+     * Specifies whether software token MFA is enabled.
+     */
+    Enabled?: BooleanType;
+    /**
+     * The preferred MFA method.
+     */
+    PreferredMfa?: BooleanType;
+  }
   export interface StartUserImportJobRequest {
     /**
      * The user pool ID for the user pool that the users are being imported into.
@@ -2737,11 +3445,11 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface StringAttributeConstraintsType {
     /**
-     * The minimum length of an attribute value of the string type.
+     * The minimum length.
      */
     MinLength?: StringType;
     /**
-     * The maximum length of an attribute value of the string type.
+     * The maximum length.
      */
     MaxLength?: StringType;
   }
@@ -2778,6 +3486,30 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CreationDate?: DateType;
   }
+  export interface UpdateAuthEventFeedbackRequest {
+    /**
+     * The user pool ID.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The user pool username.
+     */
+    Username: UsernameType;
+    /**
+     * The event ID.
+     */
+    EventId: EventIdType;
+    /**
+     * The feedback token.
+     */
+    FeedbackToken: TokenModelType;
+    /**
+     * The authentication event feedback value.
+     */
+    FeedbackValue: FeedbackValueType;
+  }
+  export interface UpdateAuthEventFeedbackResponse {
+  }
   export interface UpdateDeviceStatusRequest {
     /**
      * The access token.
@@ -2812,7 +3544,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     RoleArn?: ArnType;
     /**
-     * The new precedence value for the group. For more information about this parameter, see CreateGroup.
+     * The new precedence value for the group. For more information about this parameter, see .
      */
     Precedence?: PrecedenceType;
   }
@@ -2947,6 +3679,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Set to TRUE if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      */
     AllowedOAuthFlowsUserPoolClient?: BooleanType;
+    /**
+     * The Amazon Pinpoint analytics configuration for collecting metrics for this user pool.
+     */
+    AnalyticsConfiguration?: AnalyticsConfigurationType;
   }
   export interface UpdateUserPoolClientResponse {
     /**
@@ -3015,8 +3751,18 @@ declare namespace CognitoIdentityServiceProvider {
      * The configuration for AdminCreateUser requests.
      */
     AdminCreateUserConfig?: AdminCreateUserConfigType;
+    /**
+     * Used to enable advanced security risk detection. Set the key AdvancedSecurityMode to the value "AUDIT".
+     */
+    UserPoolAddOns?: UserPoolAddOnsType;
   }
   export interface UpdateUserPoolResponse {
+  }
+  export interface UserContextDataType {
+    /**
+     * Contextual data such as the user's device fingerprint, IP address, or location used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.
+     */
+    EncodedData?: StringType;
   }
   export type UserFilterType = string;
   export type UserImportJobIdType = string;
@@ -3077,6 +3823,13 @@ declare namespace CognitoIdentityServiceProvider {
     CompletionMessage?: CompletionMessageType;
   }
   export type UserImportJobsListType = UserImportJobType[];
+  export type UserMFASettingListType = StringType[];
+  export interface UserPoolAddOnsType {
+    /**
+     * The advanced security mode.
+     */
+    AdvancedSecurityMode: AdvancedSecurityModeType;
+  }
   export interface UserPoolClientDescription {
     /**
      * The ID of the client associated with the user pool.
@@ -3161,6 +3914,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Set to TRUE if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
      */
     AllowedOAuthFlowsUserPoolClient?: BooleanType;
+    /**
+     * The Amazon Pinpoint analytics configuration for the user pool client.
+     */
+    AnalyticsConfiguration?: AnalyticsConfigurationType;
   }
   export interface UserPoolDescriptionType {
     /**
@@ -3194,7 +3951,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type UserPoolNameType = string;
   export interface UserPoolPolicyType {
     /**
-     * A container for information about the user pool password policy.
+     * The password policy.
      */
     PasswordPolicy?: PasswordPolicyType;
   }
@@ -3209,11 +3966,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Name?: UserPoolNameType;
     /**
-     * A container for the policies associated with a user pool.
+     * The policies associated with the user pool.
      */
     Policies?: UserPoolPolicyType;
     /**
-     * A container for the AWS Lambda triggers associated with a user pool.
+     * The AWS Lambda triggers associated with tue user pool.
      */
     LambdaConfig?: LambdaConfigType;
     /**
@@ -3300,6 +4057,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The configuration for AdminCreateUser requests.
      */
     AdminCreateUserConfig?: AdminCreateUserConfigType;
+    /**
+     * The user pool add-ons.
+     */
+    UserPoolAddOns?: UserPoolAddOnsType;
   }
   export type UserStatusType = "UNCONFIRMED"|"CONFIRMED"|"ARCHIVED"|"COMPROMISED"|"UNKNOWN"|"RESET_REQUIRED"|"FORCE_CHANGE_PASSWORD"|string;
   export interface UserType {
@@ -3364,6 +4125,35 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type VerifiedAttributeType = "phone_number"|"email"|string;
   export type VerifiedAttributesListType = VerifiedAttributeType[];
+  export interface VerifySoftwareTokenRequest {
+    /**
+     * The access token.
+     */
+    AccessToken?: TokenModelType;
+    /**
+     * The session which should be passed both ways in challenge-response calls to the service.
+     */
+    Session?: SessionType;
+    /**
+     * The one time password computed using the secret code returned by 
+     */
+    UserCode: SoftwareTokenMFAUserCodeType;
+    /**
+     * The friendly device name.
+     */
+    FriendlyDeviceName?: StringType;
+  }
+  export interface VerifySoftwareTokenResponse {
+    /**
+     * The status of the verify software token.
+     */
+    Status?: VerifySoftwareTokenResponseType;
+    /**
+     * The session which should be passed both ways in challenge-response calls to the service.
+     */
+    Session?: SessionType;
+  }
+  export type VerifySoftwareTokenResponseType = "SUCCESS"|"ERROR"|string;
   export interface VerifyUserAttributeRequest {
     /**
      * Represents the access token of the request to verify user attributes.

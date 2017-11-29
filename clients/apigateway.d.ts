@@ -1082,6 +1082,24 @@ declare namespace APIGateway {
   export type Boolean = boolean;
   export type CacheClusterSize = "0.5"|"1.6"|"6.1"|"13.5"|"28.4"|"58.2"|"118"|"237"|string;
   export type CacheClusterStatus = "CREATE_IN_PROGRESS"|"AVAILABLE"|"DELETE_IN_PROGRESS"|"NOT_AVAILABLE"|"FLUSH_IN_PROGRESS"|string;
+  export interface CanarySettings {
+    /**
+     * The percent (0-100) of traffic diverted to a canary deployment.
+     */
+    percentTraffic?: Double;
+    /**
+     * The ID of the canary deployment.
+     */
+    deploymentId?: String;
+    /**
+     * Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.
+     */
+    stageVariableOverrides?: MapOfStringToString;
+    /**
+     * A Boolean flag to indicate whether the canary deployment uses the stage cache or not.
+     */
+    useStageCache?: Boolean;
+  }
   export interface ClientCertificate {
     /**
      * The identifier of the client certificate.
@@ -1231,6 +1249,10 @@ declare namespace APIGateway {
      * A map that defines the stage variables for the Stage resource that is associated with the new deployment. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.
      */
     variables?: MapOfStringToString;
+    /**
+     * The input configuration for the canary deployment when the deployment is a canary release deployment. 
+     */
+    canarySettings?: DeploymentCanarySettings;
   }
   export interface CreateDocumentationPartRequest {
     /**
@@ -1388,11 +1410,11 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * The name for the Stage resource.
+     * {Required] The name for the Stage resource.
      */
     stageName: String;
     /**
-     * The identifier of the Deployment resource for the Stage resource.
+     * [Required] The identifier of the Deployment resource for the Stage resource.
      */
     deploymentId: String;
     /**
@@ -1415,6 +1437,10 @@ declare namespace APIGateway {
      * The version of the associated API documentation.
      */
     documentationVersion?: String;
+    /**
+     * The canary deployment settings of this stage.
+     */
+    canarySettings?: CanarySettings;
   }
   export interface CreateUsagePlanKeyRequest {
     /**
@@ -1673,6 +1699,20 @@ declare namespace APIGateway {
      * A summary of the RestApi at the date and time that the deployment resource was created.
      */
     apiSummary?: PathToMapOfMethodSnapshot;
+  }
+  export interface DeploymentCanarySettings {
+    /**
+     * The percentage (0.0-100.0) of traffic routed to the canary deployment.
+     */
+    percentTraffic?: Double;
+    /**
+     * A stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.
+     */
+    stageVariableOverrides?: MapOfStringToString;
+    /**
+     * A Boolean flag to indicate whether the canary release deployment uses the stage cache or not.
+     */
+    useStageCache?: Boolean;
   }
   export interface Deployments {
     position?: String;
@@ -2742,7 +2782,7 @@ declare namespace APIGateway {
   export type Op = "add"|"remove"|"replace"|"move"|"copy"|"test"|string;
   export interface PatchOperation {
     /**
-     * An update operation to be performed with this PATCH request. The valid value can be "add", "remove", or "replace". Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.
+     *  An update operation to be performed with this PATCH request. The valid value can be add, remove, replace or copy. Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message.
      */
     op?: Op;
     /**
@@ -2750,11 +2790,11 @@ declare namespace APIGateway {
      */
     path?: String;
     /**
-     * The new target value of the update operation. When using AWS CLI to update a property of a JSON value, enclose the JSON object with a pair of single quotes in a Linux shell, e.g., '{"a": ...}'. In a Windows shell, see Using JSON for Parameters.
+     * The new target value of the update operation. It is applicable for the add or replace operation. When using AWS CLI to update a property of a JSON value, enclose the JSON object with a pair of single quotes in a Linux shell, e.g., '{"a": ...}'. In a Windows shell, see Using JSON for Parameters.
      */
     value?: String;
     /**
-     *  Not supported.
+     * The copy update operation's source as identified by a JSON-Pointer value referencing the location within the targeted resource to copy the value from. For example, to promote a canary deployment, you copy the canary deployment ID to the affiliated deployment ID by calling a PATCH request on a Stage resource with "op":"copy", "from":"/canarySettings/deploymentId" and "path":"/deploymentId".
      */
     from?: String;
   }
@@ -3178,9 +3218,13 @@ declare namespace APIGateway {
      */
     documentationVersion?: String;
     /**
-     * The access log settings in this stage.
+     * Settings for logging access in this stage.
      */
     accessLogSettings?: AccessLogSettings;
+    /**
+     * Settings for the canary deployment in this stage.
+     */
+    canarySettings?: CanarySettings;
     /**
      * The timestamp when the stage was created.
      */

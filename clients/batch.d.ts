@@ -20,11 +20,11 @@ declare class Batch extends Service {
    */
   cancelJob(callback?: (err: AWSError, data: Batch.Types.CancelJobResponse) => void): Request<Batch.Types.CancelJobResponse, AWSError>;
   /**
-   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use a recent, approved version of the Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand instances in your managed compute environment, or you can use Amazon EC2 Spot instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon EC2 Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon EC2 Container Service Developer Guide.
+   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use a recent, approved version of the Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand Instances in your managed compute environment, or you can use Amazon EC2 Spot Instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon Elastic Container Service Developer Guide.
    */
   createComputeEnvironment(params: Batch.Types.CreateComputeEnvironmentRequest, callback?: (err: AWSError, data: Batch.Types.CreateComputeEnvironmentResponse) => void): Request<Batch.Types.CreateComputeEnvironmentResponse, AWSError>;
   /**
-   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use a recent, approved version of the Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand instances in your managed compute environment, or you can use Amazon EC2 Spot instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon EC2 Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon EC2 Container Service Developer Guide.
+   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use a recent, approved version of the Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand Instances in your managed compute environment, or you can use Amazon EC2 Spot Instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon Elastic Container Service Developer Guide.
    */
   createComputeEnvironment(callback?: (err: AWSError, data: Batch.Types.CreateComputeEnvironmentResponse) => void): Request<Batch.Types.CreateComputeEnvironmentResponse, AWSError>;
   /**
@@ -141,6 +141,38 @@ declare class Batch extends Service {
   updateJobQueue(callback?: (err: AWSError, data: Batch.Types.UpdateJobQueueResponse) => void): Request<Batch.Types.UpdateJobQueueResponse, AWSError>;
 }
 declare namespace Batch {
+  export type ArrayJobDependency = "N_TO_N"|"SEQUENTIAL"|string;
+  export type ArrayJobStatusSummary = {[key: string]: Integer};
+  export interface ArrayProperties {
+    /**
+     * The size of the array job.
+     */
+    size?: Integer;
+  }
+  export interface ArrayPropertiesDetail {
+    /**
+     * A summary of the number of array job children in each available job status. This parameter is returned for parent array jobs.
+     */
+    statusSummary?: ArrayJobStatusSummary;
+    /**
+     * The size of the array job. This parameter is returned for parent array jobs.
+     */
+    size?: Integer;
+    /**
+     * The job index within the array that is associated with this job. This parameter is returned for array job children.
+     */
+    index?: Integer;
+  }
+  export interface ArrayPropertiesSummary {
+    /**
+     * The size of the array job. This parameter is returned for parent array jobs.
+     */
+    size?: Integer;
+    /**
+     * The job index within the array that is associated with this job. This parameter is returned for children of array jobs.
+     */
+    index?: Integer;
+  }
   export interface AttemptContainerDetail {
     /**
      * The Amazon Resource Name (ARN) of the Amazon ECS container instance that hosts the job attempt.
@@ -169,11 +201,11 @@ declare namespace Batch {
      */
     container?: AttemptContainerDetail;
     /**
-     * The Unix timestamp for when the attempt was started (when the task transitioned from the PENDING state to the RUNNING state).
+     * The Unix time stamp for when the attempt was started (when the attempt transitioned from the STARTING state to the RUNNING state).
      */
     startedAt?: Long;
     /**
-     * The Unix timestamp for when the attempt was stopped (when the task transitioned from the RUNNING state to the STOPPED state).
+     * The Unix time stamp for when the attempt was stopped (when the attempt transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
      */
     stoppedAt?: Long;
     /**
@@ -193,7 +225,7 @@ declare namespace Batch {
      */
     jobId: String;
     /**
-     * A message to attach to the job that explains the reason for cancelling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs. 
+     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs. 
      */
     reason: String;
   }
@@ -411,7 +443,7 @@ declare namespace Batch {
      */
     image: String;
     /**
-     * The number of vCPUs reserved for the container. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least 1 vCPU.
+     * The number of vCPUs reserved for the container. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU.
      */
     vcpus: Integer;
     /**
@@ -431,7 +463,7 @@ declare namespace Batch {
      */
     volumes?: Volumes;
     /**
-     * The environment variables to pass to a container. This parameter maps to Env in the Create a container section of the Docker Remote API and the --env option to docker run.  We do not recommend using plain text environment variables for sensitive information, such as credential data.   Environment variables must not start with AWS_BATCH; this naming convention is reserved for variables that are set by the AWS Batch service. 
+     * The environment variables to pass to a container. This parameter maps to Env in the Create a container section of the Docker Remote API and the --env option to docker run.  We do not recommend using plaintext environment variables for sensitive information, such as credential data.   Environment variables must not start with AWS_BATCH; this naming convention is reserved for variables that are set by the AWS Batch service. 
      */
     environment?: EnvironmentVariables;
     /**
@@ -454,6 +486,16 @@ declare namespace Batch {
      * The user name to use inside the container. This parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run.
      */
     user?: String;
+  }
+  export interface ContainerSummary {
+    /**
+     * The exit code to return upon completion.
+     */
+    exitCode?: Integer;
+    /**
+     * A short (255 max characters) human-readable string to provide additional details about a running or stopped container.
+     */
+    reason?: String;
   }
   export interface CreateComputeEnvironmentRequest {
     /**
@@ -501,7 +543,7 @@ declare namespace Batch {
      */
     priority: Integer;
     /**
-     * The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to 3 compute environments with a job queue.
+     * The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
      */
     computeEnvironmentOrder: ComputeEnvironmentOrders;
   }
@@ -682,6 +724,10 @@ declare namespace Batch {
      * The job ID of the AWS Batch job associated with this dependency.
      */
     jobId?: String;
+    /**
+     * The type of the job dependency.
+     */
+    type?: ArrayJobDependency;
   }
   export type JobDependencyList = JobDependency[];
   export interface JobDetail {
@@ -710,7 +756,7 @@ declare namespace Batch {
      */
     statusReason?: String;
     /**
-     * The Unix timestamp for when the job was created (when the task entered the PENDING state). 
+     * The Unix time stamp for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
      */
     createdAt?: Long;
     /**
@@ -718,11 +764,11 @@ declare namespace Batch {
      */
     retryStrategy?: RetryStrategy;
     /**
-     * The Unix timestamp for when the job was started (when the task transitioned from the PENDING state to the RUNNING state). 
+     * The Unix time stamp for when the job was started (when the job transitioned from the STARTING state to the RUNNING state).
      */
     startedAt: Long;
     /**
-     * The Unix timestamp for when the job was stopped (when the task transitioned from the RUNNING state to the STOPPED state).
+     * The Unix time stamp for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
      */
     stoppedAt?: Long;
     /**
@@ -741,6 +787,10 @@ declare namespace Batch {
      * An object representing the details of the container that is associated with the job.
      */
     container?: ContainerDetail;
+    /**
+     * The array properties of the job, if it is an array job.
+     */
+    arrayProperties?: ArrayPropertiesDetail;
   }
   export type JobDetailList = JobDetail[];
   export interface JobQueueDetail {
@@ -784,15 +834,43 @@ declare namespace Batch {
      * The name of the job.
      */
     jobName: String;
+    /**
+     * The Unix time stamp for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
+     */
+    createdAt?: Long;
+    /**
+     * The current status for the job.
+     */
+    status?: JobStatus;
+    /**
+     * A short, human-readable string to provide additional details about the current status of the job.
+     */
+    statusReason?: String;
+    /**
+     * The Unix time stamp for when the job was started (when the job transitioned from the STARTING state to the RUNNING state).
+     */
+    startedAt?: Long;
+    /**
+     * The Unix time stamp for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
+     */
+    stoppedAt?: Long;
+    /**
+     * An object representing the details of the container that is associated with the job.
+     */
+    container?: ContainerSummary;
+    /**
+     * The array properties of the job, if it is an array job.
+     */
+    arrayProperties?: ArrayPropertiesSummary;
   }
   export type JobSummaryList = JobSummary[];
   export interface KeyValuePair {
     /**
-     * The name of the key value pair. For environment variables, this is the name of the environment variable.
+     * The name of the key-value pair. For environment variables, this is the name of the environment variable.
      */
     name?: String;
     /**
-     * The value of the key value pair. For environment variables, this is the value of the environment variable.
+     * The value of the key-value pair. For environment variables, this is the value of the environment variable.
      */
     value?: String;
   }
@@ -800,7 +878,11 @@ declare namespace Batch {
     /**
      * The name or full Amazon Resource Name (ARN) of the job queue with which to list jobs.
      */
-    jobQueue: String;
+    jobQueue?: String;
+    /**
+     * The job ID for an array job. Specifying an array job ID with this parameter lists all child jobs from within the specified array.
+     */
+    arrayJobId?: String;
     /**
      * The job status with which to filter jobs in the specified queue. If you do not specify a status, only RUNNING jobs are returned.
      */
@@ -879,7 +961,7 @@ declare namespace Batch {
   }
   export interface RetryStrategy {
     /**
-     * The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts. If attempts is greater than one, the job is retried if it fails until it has moved to RUNNABLE that many times.
+     * The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts. If the value of attempts is greater than one, the job is retried if it fails until it has moved to RUNNABLE that many times.
      */
     attempts?: Integer;
   }
@@ -891,11 +973,15 @@ declare namespace Batch {
      */
     jobName: String;
     /**
-     * The job queue into which the job will be submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. 
+     * The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. 
      */
     jobQueue: String;
     /**
-     * A list of job IDs on which this job depends. A job can depend upon a maximum of 20 jobs. 
+     * The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. For more information, see Array Jobs in the AWS Batch User Guide.
+     */
+    arrayProperties?: ArrayProperties;
+    /**
+     * A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs so that each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.
      */
     dependsOn?: JobDependencyList;
     /**
@@ -932,7 +1018,7 @@ declare namespace Batch {
      */
     jobId: String;
     /**
-     * A message to attach to the job that explains the reason for cancelling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs. 
+     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs. 
      */
     reason: String;
   }
@@ -1011,7 +1097,7 @@ declare namespace Batch {
   }
   export interface Volume {
     /**
-     * The contents of the host parameter determine whether your data volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume, but the data is not guaranteed to persist after the containers associated with it stop running.
+     * The contents of the host parameter determine whether your data volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume. However, the data is not guaranteed to persist after the containers associated with it stop running.
      */
     host?: Host;
     /**

@@ -111,3 +111,6 @@ export import MediaLive = require('./medialive');
 export import MediaPackage = require('./mediapackage');
 export import MediaStore = require('./mediastore');
 export import MediaStoreData = require('./mediastoredata');
+export import AppSync = require('./appsync');
+export import GuardDuty = require('./guardduty');
+export import MQ = require('./mq');

@@ -112,5 +112,8 @@ module.exports = {
   MediaLive: require('./medialive'),
   MediaPackage: require('./mediapackage'),
   MediaStore: require('./mediastore'),
-  MediaStoreData: require('./mediastoredata')
+  MediaStoreData: require('./mediastoredata'),
+  AppSync: require('./appsync'),
+  GuardDuty: require('./guardduty'),
+  MQ: require('./mq')
 };
