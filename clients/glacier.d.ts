@@ -93,11 +93,11 @@ declare class Glacier extends GlacierCustomizations {
    */
   deleteVaultNotifications(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon Glacier completes the job. For more information about initiating a job, see InitiateJob.   This operation enables you to check the status of your job. However, it is strongly recommended that you set up an Amazon SNS topic and specify it in your initiate job request so that Amazon Glacier can notify the topic after it completes the job.  A job ID will not expire for at least 24 hours after Amazon Glacier completes the job. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For information about the underlying REST API, see Working with Archives in Amazon Glacier in the Amazon Glacier Developer Guide. 
+   * This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon Glacier completes the job. For more information about initiating a job, see InitiateJob.   This operation enables you to check the status of your job. However, it is strongly recommended that you set up an Amazon SNS topic and specify it in your initiate job request so that Amazon Glacier can notify the topic after it completes the job.  A job ID will not expire for at least 24 hours after Amazon Glacier completes the job. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For more information about using this operation, see the documentation for the underlying REST API Describe Job in the Amazon Glacier Developer Guide. 
    */
   describeJob(params: Glacier.Types.DescribeJobInput, callback?: (err: AWSError, data: Glacier.Types.GlacierJobDescription) => void): Request<Glacier.Types.GlacierJobDescription, AWSError>;
   /**
-   * This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon Glacier completes the job. For more information about initiating a job, see InitiateJob.   This operation enables you to check the status of your job. However, it is strongly recommended that you set up an Amazon SNS topic and specify it in your initiate job request so that Amazon Glacier can notify the topic after it completes the job.  A job ID will not expire for at least 24 hours after Amazon Glacier completes the job. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For information about the underlying REST API, see Working with Archives in Amazon Glacier in the Amazon Glacier Developer Guide. 
+   * This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon Glacier completes the job. For more information about initiating a job, see InitiateJob.   This operation enables you to check the status of your job. However, it is strongly recommended that you set up an Amazon SNS topic and specify it in your initiate job request so that Amazon Glacier can notify the topic after it completes the job.  A job ID will not expire for at least 24 hours after Amazon Glacier completes the job. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  For more information about using this operation, see the documentation for the underlying REST API Describe Job in the Amazon Glacier Developer Guide. 
    */
   describeJob(callback?: (err: AWSError, data: Glacier.Types.GlacierJobDescription) => void): Request<Glacier.Types.GlacierJobDescription, AWSError>;
   /**
@@ -149,11 +149,11 @@ declare class Glacier extends GlacierCustomizations {
    */
   getVaultNotifications(callback?: (err: AWSError, data: Glacier.Types.GetVaultNotificationsOutput) => void): Request<Glacier.Types.GetVaultNotificationsOutput, AWSError>;
   /**
-   * This operation initiates a job of the specified type. In this release, you can initiate a job to retrieve either an archive or a vault inventory (a list of archives in a vault). Retrieving data from Amazon Glacier is a two-step process:   Initiate a retrieval job.  A data retrieval policy can cause your initiate retrieval job request to fail with a PolicyEnforcedException exception. For more information about data retrieval policies, see Amazon Glacier Data Retrieval Policies. For more information about the PolicyEnforcedException exception, see Error Responses.    After the job completes, download the bytes.   The retrieval request is executed asynchronously. When you initiate a retrieval job, Amazon Glacier creates a job and returns a job ID in the response. When Amazon Glacier completes the job, you can get the job output (archive or inventory data). For information about getting job output, see GetJobOutput operation.  The job must complete before you can get its output. To determine when a job is complete, you have the following options:    Use Amazon SNS Notification You can specify an Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Glacier can post a notification after the job is completed. You can specify an SNS topic per job request. The notification is sent only after Amazon Glacier completes the job. In addition to specifying an SNS topic per job request, you can configure vault notifications for a vault so that job notifications are always sent. For more information, see SetVaultNotifications.    Get job details You can make a DescribeJob request to obtain job status information while a job is in progress. However, it is more efficient to use an Amazon SNS notification to determine when a job is complete.    The information you get via notification is same that you get by calling DescribeJob.  If for a specific event, you add both the notification configuration on the vault and also specify an SNS topic in your initiate job request, Amazon Glacier sends both notifications. For more information, see SetVaultNotifications. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  About the Vault Inventory  Amazon Glacier prepares an inventory for each vault periodically, every 24 hours. When you initiate a job for a vault inventory, Amazon Glacier returns the last inventory for the vault. The inventory data you get might be up to a day or two days old. Also, the initiate inventory job might take some time to complete before you can download the vault inventory. So you do not want to retrieve a vault inventory for each vault operation. However, in some scenarios, you might find the vault inventory useful. For example, when you upload an archive, you can provide an archive description but not an archive name. Amazon Glacier provides you a unique archive ID, an opaque string of characters. So, you might maintain your own database that maps archive names to their corresponding Amazon Glacier assigned archive IDs. You might find the vault inventory useful in the event you need to reconcile information in your database with the actual vault inventory.  Range Inventory Retrieval  You can limit the number of inventory items retrieved by filtering on the archive creation date or by setting a limit.  Filtering by Archive Creation Date  You can retrieve inventory items for archives created between StartDate and EndDate by specifying values for these parameters in the InitiateJob request. Archives created on or after the StartDate and before the EndDate will be returned. If you only provide the StartDate without the EndDate, you will retrieve the inventory for all archives created on or after the StartDate. If you only provide the EndDate without the StartDate, you will get back the inventory for all archives created before the EndDate.  Limiting Inventory Items per Retrieval  You can limit the number of inventory items returned by setting the Limit parameter in the InitiateJob request. The inventory job output will contain inventory items up to the specified Limit. If there are more inventory items available, the result is paginated. After a job is complete you can use the DescribeJob operation to get a marker that you use in a subsequent InitiateJob request. The marker will indicate the starting point to retrieve the next set of inventory items. You can page through your entire inventory by repeatedly making InitiateJob requests with the marker from the previous DescribeJob output, until you get a marker from DescribeJob that returns null, indicating that there are no more inventory items available. You can use the Limit parameter together with the date range parameters.  About Ranged Archive Retrieval  You can initiate an archive retrieval for the whole archive or a range of the archive. In the case of ranged archive retrieval, you specify a byte range to return or the whole archive. The range specified must be megabyte (MB) aligned, that is the range start value must be divisible by 1 MB and range end value plus 1 must be divisible by 1 MB or equal the end of the archive. If the ranged archive retrieval is not megabyte aligned, this operation returns a 400 response. Furthermore, to ensure you get checksum values for data you download using Get Job Output API, the range must be tree hash aligned. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, see Initiate a Job and Downloading a Vault Inventory   Expedited and Bulk Archive Retrievals  When retrieving an archive, you can specify one of the following options in the Tier field of the request body:     Standard The default type of retrieval, which allows access to any of your archives within several hours. Standard retrievals typically complete within 3–5 hours.    Bulk Amazon Glacier’s lowest-cost retrieval option, which enables you to retrieve large amounts of data inexpensively in a day. Bulk retrieval requests typically complete within 5–12 hours.     Expedited Amazon Glacier’s option for the fastest retrievals. Archives requested using the expedited retrievals typically become accessible within 1–5 minutes.    For more information about expedited and bulk retrievals, see Retrieving Amazon Glacier Archives.
+   * This operation initiates a job of the specified type, which can be a select, an archival retrieval, or a vault retrieval. For more information about using this operation, see the documentation for the underlying REST API Initiate a Job. 
    */
   initiateJob(params: Glacier.Types.InitiateJobInput, callback?: (err: AWSError, data: Glacier.Types.InitiateJobOutput) => void): Request<Glacier.Types.InitiateJobOutput, AWSError>;
   /**
-   * This operation initiates a job of the specified type. In this release, you can initiate a job to retrieve either an archive or a vault inventory (a list of archives in a vault). Retrieving data from Amazon Glacier is a two-step process:   Initiate a retrieval job.  A data retrieval policy can cause your initiate retrieval job request to fail with a PolicyEnforcedException exception. For more information about data retrieval policies, see Amazon Glacier Data Retrieval Policies. For more information about the PolicyEnforcedException exception, see Error Responses.    After the job completes, download the bytes.   The retrieval request is executed asynchronously. When you initiate a retrieval job, Amazon Glacier creates a job and returns a job ID in the response. When Amazon Glacier completes the job, you can get the job output (archive or inventory data). For information about getting job output, see GetJobOutput operation.  The job must complete before you can get its output. To determine when a job is complete, you have the following options:    Use Amazon SNS Notification You can specify an Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Glacier can post a notification after the job is completed. You can specify an SNS topic per job request. The notification is sent only after Amazon Glacier completes the job. In addition to specifying an SNS topic per job request, you can configure vault notifications for a vault so that job notifications are always sent. For more information, see SetVaultNotifications.    Get job details You can make a DescribeJob request to obtain job status information while a job is in progress. However, it is more efficient to use an Amazon SNS notification to determine when a job is complete.    The information you get via notification is same that you get by calling DescribeJob.  If for a specific event, you add both the notification configuration on the vault and also specify an SNS topic in your initiate job request, Amazon Glacier sends both notifications. For more information, see SetVaultNotifications. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM).  About the Vault Inventory  Amazon Glacier prepares an inventory for each vault periodically, every 24 hours. When you initiate a job for a vault inventory, Amazon Glacier returns the last inventory for the vault. The inventory data you get might be up to a day or two days old. Also, the initiate inventory job might take some time to complete before you can download the vault inventory. So you do not want to retrieve a vault inventory for each vault operation. However, in some scenarios, you might find the vault inventory useful. For example, when you upload an archive, you can provide an archive description but not an archive name. Amazon Glacier provides you a unique archive ID, an opaque string of characters. So, you might maintain your own database that maps archive names to their corresponding Amazon Glacier assigned archive IDs. You might find the vault inventory useful in the event you need to reconcile information in your database with the actual vault inventory.  Range Inventory Retrieval  You can limit the number of inventory items retrieved by filtering on the archive creation date or by setting a limit.  Filtering by Archive Creation Date  You can retrieve inventory items for archives created between StartDate and EndDate by specifying values for these parameters in the InitiateJob request. Archives created on or after the StartDate and before the EndDate will be returned. If you only provide the StartDate without the EndDate, you will retrieve the inventory for all archives created on or after the StartDate. If you only provide the EndDate without the StartDate, you will get back the inventory for all archives created before the EndDate.  Limiting Inventory Items per Retrieval  You can limit the number of inventory items returned by setting the Limit parameter in the InitiateJob request. The inventory job output will contain inventory items up to the specified Limit. If there are more inventory items available, the result is paginated. After a job is complete you can use the DescribeJob operation to get a marker that you use in a subsequent InitiateJob request. The marker will indicate the starting point to retrieve the next set of inventory items. You can page through your entire inventory by repeatedly making InitiateJob requests with the marker from the previous DescribeJob output, until you get a marker from DescribeJob that returns null, indicating that there are no more inventory items available. You can use the Limit parameter together with the date range parameters.  About Ranged Archive Retrieval  You can initiate an archive retrieval for the whole archive or a range of the archive. In the case of ranged archive retrieval, you specify a byte range to return or the whole archive. The range specified must be megabyte (MB) aligned, that is the range start value must be divisible by 1 MB and range end value plus 1 must be divisible by 1 MB or equal the end of the archive. If the ranged archive retrieval is not megabyte aligned, this operation returns a 400 response. Furthermore, to ensure you get checksum values for data you download using Get Job Output API, the range must be tree hash aligned. An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see Access Control Using AWS Identity and Access Management (IAM). For conceptual information and the underlying REST API, see Initiate a Job and Downloading a Vault Inventory   Expedited and Bulk Archive Retrievals  When retrieving an archive, you can specify one of the following options in the Tier field of the request body:     Standard The default type of retrieval, which allows access to any of your archives within several hours. Standard retrievals typically complete within 3–5 hours.    Bulk Amazon Glacier’s lowest-cost retrieval option, which enables you to retrieve large amounts of data inexpensively in a day. Bulk retrieval requests typically complete within 5–12 hours.     Expedited Amazon Glacier’s option for the fastest retrievals. Archives requested using the expedited retrievals typically become accessible within 1–5 minutes.    For more information about expedited and bulk retrievals, see Retrieving Amazon Glacier Archives.
+   * This operation initiates a job of the specified type, which can be a select, an archival retrieval, or a vault retrieval. For more information about using this operation, see the documentation for the underlying REST API Initiate a Job. 
    */
   initiateJob(callback?: (err: AWSError, data: Glacier.Types.InitiateJobOutput) => void): Request<Glacier.Types.InitiateJobOutput, AWSError>;
   /**
@@ -173,11 +173,11 @@ declare class Glacier extends GlacierCustomizations {
    */
   initiateVaultLock(callback?: (err: AWSError, data: Glacier.Types.InitiateVaultLockOutput) => void): Request<Glacier.Types.InitiateVaultLockOutput, AWSError>;
   /**
-   * This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished.  Amazon Glacier retains recently completed jobs for a period before deleting them; however, it eventually removes completed jobs. The output of completed jobs can be retrieved. Retaining completed jobs for a period of time after they have completed enables you to get a job output in the event you miss the job completion notification or your first attempt to download it fails. For example, suppose you start an archive retrieval job to download an archive. After the job completes, you start to download the archive but encounter a network error. In this scenario, you can retry and download the archive while the job exists.  To retrieve an archive or retrieve a vault inventory from Amazon Glacier, you first initiate a job, and after the job completes, you download the data. For an archive retrieval, the output is the archive data. For an inventory retrieval, it is the inventory list. The List Job operation returns a list of these jobs sorted by job initiation time. The List Jobs operation supports pagination. You should always check the response Marker field. If there are no more jobs to list, the Marker field is set to null. If there are more jobs to list, the Marker field is set to a non-null value, which you can use to continue the pagination of the list. To return a list of jobs that begins at a specific job, set the marker request parameter to the Marker value for that job that you obtained from a previous List Jobs request. You can set a maximum limit for the number of jobs returned in the response by specifying the limit parameter in the request. The default limit is 1000. The number of jobs returned might be fewer than the limit, but the number of returned jobs never exceeds the limit. Additionally, you can filter the jobs list returned by specifying the optional statuscode parameter or completed parameter, or both. Using the statuscode parameter, you can specify to return only jobs that match either the InProgress, Succeeded, or Failed status. Using the completed parameter, you can specify to return only jobs that were completed (true) or jobs that were not completed (false). For the underlying REST API, see List Jobs. 
+   * This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished. The List Job operation returns a list of these jobs sorted by job initiation time.  Amazon Glacier retains recently completed jobs for a period before deleting them; however, it eventually removes completed jobs. The output of completed jobs can be retrieved. Retaining completed jobs for a period of time after they have completed enables you to get a job output in the event you miss the job completion notification or your first attempt to download it fails. For example, suppose you start an archive retrieval job to download an archive. After the job completes, you start to download the archive but encounter a network error. In this scenario, you can retry and download the archive while the job exists.  The List Jobs operation supports pagination. You should always check the response Marker field. If there are no more jobs to list, the Marker field is set to null. If there are more jobs to list, the Marker field is set to a non-null value, which you can use to continue the pagination of the list. To return a list of jobs that begins at a specific job, set the marker request parameter to the Marker value for that job that you obtained from a previous List Jobs request. You can set a maximum limit for the number of jobs returned in the response by specifying the limit parameter in the request. The default limit is 1000. The number of jobs returned might be fewer than the limit, but the number of returned jobs never exceeds the limit. Additionally, you can filter the jobs list returned by specifying the optional statuscode parameter or completed parameter, or both. Using the statuscode parameter, you can specify to return only jobs that match either the InProgress, Succeeded, or Failed status. Using the completed parameter, you can specify to return only jobs that were completed (true) or jobs that were not completed (false). For more information about using this operation, see the documentation for the underlying REST API List Jobs. 
    */
   listJobs(params: Glacier.Types.ListJobsInput, callback?: (err: AWSError, data: Glacier.Types.ListJobsOutput) => void): Request<Glacier.Types.ListJobsOutput, AWSError>;
   /**
-   * This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished.  Amazon Glacier retains recently completed jobs for a period before deleting them; however, it eventually removes completed jobs. The output of completed jobs can be retrieved. Retaining completed jobs for a period of time after they have completed enables you to get a job output in the event you miss the job completion notification or your first attempt to download it fails. For example, suppose you start an archive retrieval job to download an archive. After the job completes, you start to download the archive but encounter a network error. In this scenario, you can retry and download the archive while the job exists.  To retrieve an archive or retrieve a vault inventory from Amazon Glacier, you first initiate a job, and after the job completes, you download the data. For an archive retrieval, the output is the archive data. For an inventory retrieval, it is the inventory list. The List Job operation returns a list of these jobs sorted by job initiation time. The List Jobs operation supports pagination. You should always check the response Marker field. If there are no more jobs to list, the Marker field is set to null. If there are more jobs to list, the Marker field is set to a non-null value, which you can use to continue the pagination of the list. To return a list of jobs that begins at a specific job, set the marker request parameter to the Marker value for that job that you obtained from a previous List Jobs request. You can set a maximum limit for the number of jobs returned in the response by specifying the limit parameter in the request. The default limit is 1000. The number of jobs returned might be fewer than the limit, but the number of returned jobs never exceeds the limit. Additionally, you can filter the jobs list returned by specifying the optional statuscode parameter or completed parameter, or both. Using the statuscode parameter, you can specify to return only jobs that match either the InProgress, Succeeded, or Failed status. Using the completed parameter, you can specify to return only jobs that were completed (true) or jobs that were not completed (false). For the underlying REST API, see List Jobs. 
+   * This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished. The List Job operation returns a list of these jobs sorted by job initiation time.  Amazon Glacier retains recently completed jobs for a period before deleting them; however, it eventually removes completed jobs. The output of completed jobs can be retrieved. Retaining completed jobs for a period of time after they have completed enables you to get a job output in the event you miss the job completion notification or your first attempt to download it fails. For example, suppose you start an archive retrieval job to download an archive. After the job completes, you start to download the archive but encounter a network error. In this scenario, you can retry and download the archive while the job exists.  The List Jobs operation supports pagination. You should always check the response Marker field. If there are no more jobs to list, the Marker field is set to null. If there are more jobs to list, the Marker field is set to a non-null value, which you can use to continue the pagination of the list. To return a list of jobs that begins at a specific job, set the marker request parameter to the Marker value for that job that you obtained from a previous List Jobs request. You can set a maximum limit for the number of jobs returned in the response by specifying the limit parameter in the request. The default limit is 1000. The number of jobs returned might be fewer than the limit, but the number of returned jobs never exceeds the limit. Additionally, you can filter the jobs list returned by specifying the optional statuscode parameter or completed parameter, or both. Using the statuscode parameter, you can specify to return only jobs that match either the InProgress, Succeeded, or Failed status. Using the completed parameter, you can specify to return only jobs that were completed (true) or jobs that were not completed (false). For more information about using this operation, see the documentation for the underlying REST API List Jobs. 
    */
   listJobs(callback?: (err: AWSError, data: Glacier.Types.ListJobsOutput) => void): Request<Glacier.Types.ListJobsOutput, AWSError>;
   /**
@@ -197,11 +197,11 @@ declare class Glacier extends GlacierCustomizations {
    */
   listParts(callback?: (err: AWSError, data: Glacier.Types.ListPartsOutput) => void): Request<Glacier.Types.ListPartsOutput, AWSError>;
   /**
-   * This operation lists the provisioned capacity for the specified AWS account.
+   * This operation lists the provisioned capacity units for the specified AWS account.
    */
   listProvisionedCapacity(params: Glacier.Types.ListProvisionedCapacityInput, callback?: (err: AWSError, data: Glacier.Types.ListProvisionedCapacityOutput) => void): Request<Glacier.Types.ListProvisionedCapacityOutput, AWSError>;
   /**
-   * This operation lists the provisioned capacity for the specified AWS account.
+   * This operation lists the provisioned capacity units for the specified AWS account.
    */
   listProvisionedCapacity(callback?: (err: AWSError, data: Glacier.Types.ListProvisionedCapacityOutput) => void): Request<Glacier.Types.ListProvisionedCapacityOutput, AWSError>;
   /**
@@ -221,11 +221,11 @@ declare class Glacier extends GlacierCustomizations {
    */
   listVaults(callback?: (err: AWSError, data: Glacier.Types.ListVaultsOutput) => void): Request<Glacier.Types.ListVaultsOutput, AWSError>;
   /**
-   * This operation purchases a provisioned capacity unit for an AWS account.
+   * This operation purchases a provisioned capacity unit for an AWS account. 
    */
   purchaseProvisionedCapacity(params: Glacier.Types.PurchaseProvisionedCapacityInput, callback?: (err: AWSError, data: Glacier.Types.PurchaseProvisionedCapacityOutput) => void): Request<Glacier.Types.PurchaseProvisionedCapacityOutput, AWSError>;
   /**
-   * This operation purchases a provisioned capacity unit for an AWS account.
+   * This operation purchases a provisioned capacity unit for an AWS account. 
    */
   purchaseProvisionedCapacity(callback?: (err: AWSError, data: Glacier.Types.PurchaseProvisionedCapacityOutput) => void): Request<Glacier.Types.PurchaseProvisionedCapacityOutput, AWSError>;
   /**
@@ -318,7 +318,8 @@ declare namespace Glacier {
      */
     vaultName: string;
   }
-  export type ActionCode = "ArchiveRetrieval"|"InventoryRetrieval"|string;
+  export type AccessControlPolicyList = Grant[];
+  export type ActionCode = "ArchiveRetrieval"|"InventoryRetrieval"|"Select"|string;
   export interface AddTagsToVaultInput {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
@@ -347,6 +348,55 @@ declare namespace Glacier {
      */
     archiveId?: string;
   }
+  export interface CSVInput {
+    /**
+     * Describes the first line of input. Valid values are None, Ignore, and Use.
+     */
+    FileHeaderInfo?: FileHeaderInfo;
+    /**
+     * A single character used to indicate that a row should be ignored when the character is present at the start of that row.
+     */
+    Comments?: string;
+    /**
+     * A single character used for escaping the quotation-mark character inside an already escaped value.
+     */
+    QuoteEscapeCharacter?: string;
+    /**
+     * A value used to separate individual records from each other.
+     */
+    RecordDelimiter?: string;
+    /**
+     * A value used to separate individual fields from each other within a record.
+     */
+    FieldDelimiter?: string;
+    /**
+     * A value used as an escape character where the field delimiter is part of the value.
+     */
+    QuoteCharacter?: string;
+  }
+  export interface CSVOutput {
+    /**
+     * A value that indicates whether all output fields should be contained within quotation marks.
+     */
+    QuoteFields?: QuoteFields;
+    /**
+     * A single character used for escaping the quotation-mark character inside an already escaped value.
+     */
+    QuoteEscapeCharacter?: string;
+    /**
+     * A value used to separate individual records from each other.
+     */
+    RecordDelimiter?: string;
+    /**
+     * A value used to separate individual fields from each other within a record.
+     */
+    FieldDelimiter?: string;
+    /**
+     * A value used as an escape character where the field delimiter is part of the value.
+     */
+    QuoteCharacter?: string;
+  }
+  export type CannedACL = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|string;
   export interface CompleteMultipartUploadInput {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
@@ -511,6 +561,23 @@ declare namespace Glacier {
      */
     SizeInBytes?: long;
   }
+  export interface Encryption {
+    /**
+     * The server-side encryption algorithm used when storing job results in Amazon S3, for example AES256 or aws:kms.
+     */
+    EncryptionType?: EncryptionType;
+    /**
+     * The AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS fail if not made by using Secure Sockets Layer (SSL) or Signature Version 4. 
+     */
+    KMSKeyId?: string;
+    /**
+     * Optional. If the encryption type is aws:kms, you can use this value to specify the encryption context for the restore results.
+     */
+    KMSContext?: string;
+  }
+  export type EncryptionType = "aws:kms"|"AES256"|string;
+  export type ExpressionType = "SQL"|string;
+  export type FileHeaderInfo = "USE"|"IGNORE"|"NONE"|string;
   export interface GetDataRetrievalPolicyInput {
     /**
      * The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. 
@@ -637,27 +704,27 @@ declare namespace Glacier {
      */
     JobId?: string;
     /**
-     * The job description you provided when you initiated the job.
+     * The job description provided when initiating the job.
      */
     JobDescription?: string;
     /**
-     * The job type. It is either ArchiveRetrieval or InventoryRetrieval.
+     * The job type. This value is either ArchiveRetrieval, InventoryRetrieval, or Select. 
      */
     Action?: ActionCode;
     /**
-     * For an ArchiveRetrieval job, this is the archive ID requested for download. Otherwise, this field is null.
+     * The archive ID requested for a select job or archive retrieval. Otherwise, this field is null.
      */
     ArchiveId?: string;
     /**
-     * The Amazon Resource Name (ARN) of the vault from which the archive retrieval was requested.
+     * The Amazon Resource Name (ARN) of the vault from which an archive retrieval was requested.
      */
     VaultARN?: string;
     /**
-     * The UTC date when the job was created. A string representation of ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
+     * The UTC date when the job was created. This value is a string representation of ISO 8601 date format, for example "2012-03-20T17:03:43.221Z".
      */
     CreationDate?: string;
     /**
-     * The job status. When a job is completed, you get the job's output.
+     * The job status. When a job is completed, you get the job's output using Get Job Output (GET output).
      */
     Completed?: boolean;
     /**
@@ -669,31 +736,31 @@ declare namespace Glacier {
      */
     StatusMessage?: string;
     /**
-     * For an ArchiveRetrieval job, this is the size in bytes of the archive being requested for download. For the InventoryRetrieval job, the value is null.
+     * For an archive retrieval job, this value is the size in bytes of the archive being requested for download. For an inventory retrieval or select job, this value is null.
      */
     ArchiveSizeInBytes?: Size;
     /**
-     * For an InventoryRetrieval job, this is the size in bytes of the inventory requested for download. For the ArchiveRetrieval job, the value is null.
+     * For an inventory retrieval job, this value is the size in bytes of the inventory requested for download. For an archive retrieval or select job, this value is null.
      */
     InventorySizeInBytes?: Size;
     /**
-     * An Amazon Simple Notification Service (Amazon SNS) topic that receives notification.
+     * An Amazon SNS topic that receives notification.
      */
     SNSTopic?: string;
     /**
-     * The UTC time that the archive retrieval request completed. While the job is in progress, the value will be null.
+     * The UTC time that the job request completed. While the job is in progress, the value is null.
      */
     CompletionDate?: string;
     /**
-     * For an ArchiveRetrieval job, it is the checksum of the archive. Otherwise, the value is null. The SHA256 tree hash value for the requested range of an archive. If the Initiate a Job request for an archive specified a tree-hash aligned range, then this field returns a value. For the specific case when the whole archive is retrieved, this value is the same as the ArchiveSHA256TreeHash value. This field is null in the following situations:   Archive retrieval jobs that specify a range that is not tree-hash aligned.     Archival jobs that specify a range that is equal to the whole archive and the job status is InProgress.     Inventory jobs.  
+     * For an archive retrieval job, this value is the checksum of the archive. Otherwise, this value is null. The SHA256 tree hash value for the requested range of an archive. If the InitiateJob request for an archive specified a tree-hash aligned range, then this field returns a value. If the whole archive is retrieved, this value is the same as the ArchiveSHA256TreeHash value. This field is null for the following:   Archive retrieval jobs that specify a range that is not tree-hash aligned     Archival jobs that specify a range that is equal to the whole archive, when the job status is InProgress      Inventory jobs   Select jobs  
      */
     SHA256TreeHash?: string;
     /**
-     * The SHA256 tree hash of the entire archive for an archive retrieval. For inventory retrieval jobs, this field is null.
+     * The SHA256 tree hash of the entire archive for an archive retrieval. For inventory retrieval or select jobs, this field is null.
      */
     ArchiveSHA256TreeHash?: string;
     /**
-     * The retrieved byte range for archive retrieval jobs in the form "StartByteValue-EndByteValue" If no range was specified in the archive retrieval, then the whole archive is retrieved and StartByteValue equals 0 and EndByteValue equals the size of the archive minus 1. For inventory retrieval jobs this field is null. 
+     * The retrieved byte range for archive retrieval jobs in the form StartByteValue-EndByteValue. If no range was specified in the archive retrieval, then the whole archive is retrieved. In this case, StartByteValue equals 0 and EndByteValue equals the size of the archive minus 1. For inventory retrieval or select jobs, this field is null. 
      */
     RetrievalByteRange?: string;
     /**
@@ -704,6 +771,50 @@ declare namespace Glacier {
      * Parameters used for range inventory retrieval.
      */
     InventoryRetrievalParameters?: InventoryRetrievalJobDescription;
+    /**
+     * Contains the job output location.
+     */
+    JobOutputPath?: string;
+    /**
+     * Contains the parameters that define a select job.
+     */
+    SelectParameters?: SelectParameters;
+    /**
+     * Contains the location where the data from the select job is stored.
+     */
+    OutputLocation?: OutputLocation;
+  }
+  export interface Grant {
+    /**
+     * The grantee.
+     */
+    Grantee?: Grantee;
+    /**
+     * Specifies the permission given to the grantee. 
+     */
+    Permission?: Permission;
+  }
+  export interface Grantee {
+    /**
+     * Type of grantee
+     */
+    Type: Type;
+    /**
+     * Screen name of the grantee.
+     */
+    DisplayName?: string;
+    /**
+     * URI of the grantee group.
+     */
+    URI?: string;
+    /**
+     * The canonical user ID of the grantee.
+     */
+    ID?: string;
+    /**
+     * Email address of the grantee.
+     */
+    EmailAddress?: string;
   }
   export interface InitiateJobInput {
     /**
@@ -728,6 +839,10 @@ declare namespace Glacier {
      * The ID of the job.
      */
     jobId?: string;
+    /**
+     * The path to the location of where the select results are stored.
+     */
+    jobOutputPath?: string;
   }
   export interface InitiateMultipartUploadInput {
     /**
@@ -777,6 +892,12 @@ declare namespace Glacier {
      */
     lockId?: string;
   }
+  export interface InputSerialization {
+    /**
+     * Describes the serialization of a CSV-encoded object.
+     */
+    csv?: CSVInput;
+  }
   export interface InventoryRetrievalJobDescription {
     /**
      * The output format for the vault inventory list, which is set by the InitiateJob request when initiating a job to retrieve a vault inventory. Valid values are CSV and JSON.
@@ -824,11 +945,11 @@ declare namespace Glacier {
      */
     Format?: string;
     /**
-     * The job type. You can initiate a job to retrieve an archive or get an inventory of a vault. Valid values are "archive-retrieval" and "inventory-retrieval".
+     * The job type. You can initiate a job to perform a select query on an archive, retrieve an archive, or get an inventory of a vault. Valid values are "select", "archive-retrieval" and "inventory-retrieval".
      */
     Type?: string;
     /**
-     * The ID of the archive that you want to retrieve. This field is required only if Type is set to archive-retrieval. An error occurs if you specify this request parameter for an inventory retrieval job request. 
+     * The ID of the archive that you want to retrieve. This field is required only if Type is set to select or archive-retrievalcode&gt;. An error occurs if you specify this request parameter for an inventory retrieval job request. 
      */
     ArchiveId?: string;
     /**
@@ -844,13 +965,21 @@ declare namespace Glacier {
      */
     RetrievalByteRange?: string;
     /**
-     * The retrieval option to use for the archive retrieval. Valid values are Expedited, Standard, or Bulk. Standard is the default.
+     * The retrieval option to use for a select or archive retrieval job. Valid values are Expedited, Standard, or Bulk. Standard is the default.
      */
     Tier?: string;
     /**
      * Input parameters used for range inventory retrieval.
      */
     InventoryRetrievalParameters?: InventoryRetrievalJobInput;
+    /**
+     * Contains the parameters that define a job.
+     */
+    SelectParameters?: SelectParameters;
+    /**
+     * Contains information about the location where the select job results are stored.
+     */
+    OutputLocation?: OutputLocation;
   }
   export interface ListJobsInput {
     /**
@@ -970,7 +1099,7 @@ declare namespace Glacier {
   }
   export interface ListProvisionedCapacityInput {
     /**
-     * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID. 
+     * The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID. 
      */
     accountId: string;
   }
@@ -1022,6 +1151,18 @@ declare namespace Glacier {
   }
   export type NotificationEventList = string[];
   export type NullableLong = number;
+  export interface OutputLocation {
+    /**
+     * Describes an S3 location that will receive the results of the restore request.
+     */
+    S3?: S3Location;
+  }
+  export interface OutputSerialization {
+    /**
+     * Describes the serialization of CSV-encoded query results.
+     */
+    csv?: CSVOutput;
+  }
   export type PartList = PartListElement[];
   export interface PartListElement {
     /**
@@ -1033,6 +1174,7 @@ declare namespace Glacier {
      */
     SHA256TreeHash?: string;
   }
+  export type Permission = "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP"|string;
   export interface ProvisionedCapacityDescription {
     /**
      * The ID that identifies the provisioned capacity unit.
@@ -1060,6 +1202,7 @@ declare namespace Glacier {
      */
     capacityId?: string;
   }
+  export type QuoteFields = "ALWAYS"|"ASNEEDED"|string;
   export interface RemoveTagsFromVaultInput {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
@@ -1073,6 +1216,58 @@ declare namespace Glacier {
      * A list of tag keys. Each corresponding tag is removed from the vault.
      */
     TagKeys?: TagKeyList;
+  }
+  export interface S3Location {
+    /**
+     * The name of the bucket where the restore results are stored.
+     */
+    BucketName?: string;
+    /**
+     * The prefix that is prepended to the restore results for this request.
+     */
+    Prefix?: string;
+    /**
+     * Contains information about the encryption used to store the job results in Amazon S3.
+     */
+    Encryption?: Encryption;
+    /**
+     * The canned ACL to apply to the restore results.
+     */
+    CannedACL?: CannedACL;
+    /**
+     * A list of grants that control access to the staged results.
+     */
+    AccessControlList?: AccessControlPolicyList;
+    /**
+     * The tag-set that is applied to the restore results.
+     */
+    Tagging?: hashmap;
+    /**
+     * A map of metadata to store with the restore results in Amazon S3.
+     */
+    UserMetadata?: hashmap;
+    /**
+     * The storage class used to store the restore results.
+     */
+    StorageClass?: StorageClass;
+  }
+  export interface SelectParameters {
+    /**
+     * Describes the serialization format of the object.
+     */
+    InputSerialization?: InputSerialization;
+    /**
+     * The type of the provided expression, for example SQL.
+     */
+    ExpressionType?: ExpressionType;
+    /**
+     * The expression that is used to select the object.
+     */
+    Expression?: string;
+    /**
+     * Describes how the results of the select job are serialized.
+     */
+    OutputSerialization?: OutputSerialization;
   }
   export interface SetDataRetrievalPolicyInput {
     /**
@@ -1114,11 +1309,13 @@ declare namespace Glacier {
   }
   export type Size = number;
   export type StatusCode = "InProgress"|"Succeeded"|"Failed"|string;
+  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|string;
   export type Stream = Buffer|Uint8Array|Blob|string|Readable;
   export type TagKey = string;
   export type TagKeyList = string[];
   export type TagMap = {[key: string]: TagValue};
   export type TagValue = string;
+  export type Type = "AmazonCustomerByEmail"|"CanonicalUser"|"Group"|string;
   export interface UploadArchiveInput {
     /**
      * The name of the vault.
@@ -1219,6 +1416,7 @@ declare namespace Glacier {
      */
     Events?: NotificationEventList;
   }
+  export type hashmap = {[key: string]: string};
   export type httpstatus = number;
   export type long = number;
   /**

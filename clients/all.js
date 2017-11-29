@@ -115,5 +115,13 @@ module.exports = {
   MediaStoreData: require('./mediastoredata'),
   AppSync: require('./appsync'),
   GuardDuty: require('./guardduty'),
-  MQ: require('./mq')
+  MQ: require('./mq'),
+  Comprehend: require('./comprehend'),
+  IoTJobsDataPlane: require('./iotjobsdataplane'),
+  KinesisVideoArchivedMedia: require('./kinesisvideoarchivedmedia'),
+  KinesisVideoMedia: require('./kinesisvideomedia'),
+  KinesisVideo: require('./kinesisvideo'),
+  SageMakerRuntime: require('./sagemakerruntime'),
+  SageMaker: require('./sagemaker'),
+  Translate: require('./translate')
 };

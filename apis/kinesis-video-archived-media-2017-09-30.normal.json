@@ -1,0 +1,265 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2017-09-30",
+    "endpointPrefix":"kinesisvideo",
+    "protocol":"rest-json",
+    "serviceAbbreviation":"Kinesis Video Archived Media",
+    "serviceFullName":"Amazon Kinesis Video Streams Archived Media",
+    "serviceId":"Kinesis Video Archived Media",
+    "signatureVersion":"v4",
+    "uid":"kinesis-video-archived-media-2017-09-30"
+  },
+  "operations":{
+    "GetMediaForFragmentList":{
+      "name":"GetMediaForFragmentList",
+      "http":{
+        "method":"POST",
+        "requestUri":"/getMediaForFragmentList"
+      },
+      "input":{"shape":"GetMediaForFragmentListInput"},
+      "output":{"shape":"GetMediaForFragmentListOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ClientLimitExceededException"},
+        {"shape":"NotAuthorizedException"}
+      ],
+      "documentation":"<p>Gets media for a list of fragments (specified by fragment number) from the archived data in a Kinesis video stream.</p> <note> <p>This operation is only available for the AWS SDK for Java. It is not supported in AWS SDKs for other languages.</p> </note> <p>The following limits apply when using the <code>GetMediaForFragmentList</code> API:</p> <ul> <li> <p>A client can call <code>GetMediaForFragmentList</code> up to five times per second per stream. </p> </li> <li> <p>Kinesis Video Streams sends media data at a rate of up to 25 megabytes per second (or 200 megabits per second) during a <code>GetMediaForFragmentList</code> session. </p> </li> </ul>"
+    },
+    "ListFragments":{
+      "name":"ListFragments",
+      "http":{
+        "method":"POST",
+        "requestUri":"/listFragments"
+      },
+      "input":{"shape":"ListFragmentsInput"},
+      "output":{"shape":"ListFragmentsOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ClientLimitExceededException"},
+        {"shape":"NotAuthorizedException"}
+      ],
+      "documentation":"<p>Returns a list of <a>Fragment</a> objects from the specified stream and start location within the archived data.</p>"
+    }
+  },
+  "shapes":{
+    "ClientLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>Kinesis Video Streams has throttled the request because you have exceeded the limit of allowed client calls. Try making the call later.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "ContentType":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9_\\.\\-]+$"
+    },
+    "ErrorMessage":{"type":"string"},
+    "Fragment":{
+      "type":"structure",
+      "members":{
+        "FragmentNumber":{
+          "shape":"String",
+          "documentation":"<p>The index value of the fragment.</p>"
+        },
+        "FragmentSizeInBytes":{
+          "shape":"Long",
+          "documentation":"<p>The total fragment size, including information about the fragment and contained media data.</p>"
+        },
+        "ProducerTimestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time stamp from the producer corresponding to the fragment.</p>"
+        },
+        "ServerTimestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time stamp from the AWS server corresponding to the fragment.</p>"
+        },
+        "FragmentLengthInMilliseconds":{
+          "shape":"Long",
+          "documentation":"<p>The playback duration or other time value associated with the fragment.</p>"
+        }
+      },
+      "documentation":"<p>Represents a segment of video or other time-delimited data.</p>"
+    },
+    "FragmentList":{
+      "type":"list",
+      "member":{"shape":"Fragment"}
+    },
+    "FragmentNumberList":{
+      "type":"list",
+      "member":{"shape":"FragmentNumberString"}
+    },
+    "FragmentNumberString":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^[0-9]+$"
+    },
+    "FragmentSelector":{
+      "type":"structure",
+      "required":[
+        "FragmentSelectorType",
+        "TimestampRange"
+      ],
+      "members":{
+        "FragmentSelectorType":{
+          "shape":"FragmentSelectorType",
+          "documentation":"<p>The origin of the time stamps to use (Server or Producer).</p>"
+        },
+        "TimestampRange":{
+          "shape":"TimestampRange",
+          "documentation":"<p>The range of time stamps to return.</p>"
+        }
+      },
+      "documentation":"<p>Describes the time stamp range and time stamp origin of a range of fragments.</p>"
+    },
+    "FragmentSelectorType":{
+      "type":"string",
+      "enum":[
+        "PRODUCER_TIMESTAMP",
+        "SERVER_TIMESTAMP"
+      ]
+    },
+    "GetMediaForFragmentListInput":{
+      "type":"structure",
+      "required":[
+        "StreamName",
+        "Fragments"
+      ],
+      "members":{
+        "StreamName":{
+          "shape":"StreamName",
+          "documentation":"<p>The name of the stream from which to retrieve fragment media.</p>"
+        },
+        "Fragments":{
+          "shape":"FragmentNumberList",
+          "documentation":"<p>A list of the numbers of fragments for which to retrieve media. You retrieve these values with <a>ListFragments</a>.</p>"
+        }
+      }
+    },
+    "GetMediaForFragmentListOutput":{
+      "type":"structure",
+      "members":{
+        "ContentType":{
+          "shape":"ContentType",
+          "documentation":"<p>The content type of the requested media.</p>",
+          "location":"header",
+          "locationName":"Content-Type"
+        },
+        "Payload":{
+          "shape":"Payload",
+          "documentation":"<p>The payload that Kinesis Video Streams returns is a sequence of chunks from the specified stream. For information about the chunks, see <a href=\"docs.aws.amazon.com/acuity/latest/dg/API_dataplane_PutMedia.html\">PutMedia</a>. The chunks that Kinesis Video Streams returns in the <code>GetMediaForFragmentList</code> call also include the following additional Matroska (MKV) tags: </p> <ul> <li> <p>AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the chunk.</p> </li> <li> <p>AWS_KINESISVIDEO_SERVER_SIDE_TIMESTAMP - Server-side time stamp of the fragment.</p> </li> <li> <p>AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side time stamp of the fragment.</p> </li> </ul> <p>The following tags will be included if an exception occurs:</p> <ul> <li> <p>AWS_KINESISVIDEO_FRAGMENT_NUMBER - The number of the fragment that threw the exception</p> </li> <li> <p>AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the exception</p> </li> <li> <p>AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the exception</p> </li> </ul>"
+        }
+      },
+      "payload":"Payload"
+    },
+    "InvalidArgumentException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>A specified parameter exceeds its restrictions, is not supported, or can't be used.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "ListFragmentsInput":{
+      "type":"structure",
+      "required":["StreamName"],
+      "members":{
+        "StreamName":{
+          "shape":"StreamName",
+          "documentation":"<p>The name of the stream from which to retrieve a fragment list.</p>"
+        },
+        "MaxResults":{
+          "shape":"PageLimit",
+          "documentation":"<p>The total number of fragments to return. If the total number of fragments available is more than the value specified in <code>max-results</code>, then a <a>ListFragmentsOutput$NextToken</a> is provided in the output that you can use to resume pagination.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>A token to specify where to start paginating. This is the <a>ListFragmentsOutput$NextToken</a> from a previously truncated response.</p>"
+        },
+        "FragmentSelector":{
+          "shape":"FragmentSelector",
+          "documentation":"<p>Describes the time stamp range and time stamp origin for the range of fragments to return.</p>"
+        }
+      }
+    },
+    "ListFragmentsOutput":{
+      "type":"structure",
+      "members":{
+        "Fragments":{
+          "shape":"FragmentList",
+          "documentation":"<p>A list of fragment numbers that correspond to the time stamp range provided.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>If the returned list is truncated, the operation returns this token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
+    "Long":{"type":"long"},
+    "NotAuthorizedException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>Status Code: 403, The caller is not authorized to perform an operation on the given stream, or the token has expired.</p>",
+      "error":{"httpStatusCode":401},
+      "exception":true
+    },
+    "PageLimit":{
+      "type":"long",
+      "max":1000,
+      "min":1
+    },
+    "Payload":{
+      "type":"blob",
+      "streaming":true
+    },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "documentation":"<p>Kinesis Video Streams can't find the stream that you specified.</p>",
+      "error":{"httpStatusCode":404},
+      "exception":true
+    },
+    "StreamName":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_.-]+"
+    },
+    "String":{
+      "type":"string",
+      "min":1
+    },
+    "Timestamp":{"type":"timestamp"},
+    "TimestampRange":{
+      "type":"structure",
+      "required":[
+        "StartTimestamp",
+        "EndTimestamp"
+      ],
+      "members":{
+        "StartTimestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The starting time stamp in the range of time stamps for which to return fragments.</p>"
+        },
+        "EndTimestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The ending time stamp in the range of time stamps for which to return fragments.</p>"
+        }
+      },
+      "documentation":"<p>The range of time stamps for which to return fragments.</p>"
+    }
+  },
+  "documentation":"<p/>"
+}

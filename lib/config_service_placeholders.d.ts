@@ -116,6 +116,14 @@ export abstract class ConfigurationServicePlaceholders {
   appsync?: AWS.AppSync.Types.ClientConfiguration;
   guardduty?: AWS.GuardDuty.Types.ClientConfiguration;
   mq?: AWS.MQ.Types.ClientConfiguration;
+  comprehend?: AWS.Comprehend.Types.ClientConfiguration;
+  iotjobsdataplane?: AWS.IoTJobsDataPlane.Types.ClientConfiguration;
+  kinesisvideoarchivedmedia?: AWS.KinesisVideoArchivedMedia.Types.ClientConfiguration;
+  kinesisvideomedia?: AWS.KinesisVideoMedia.Types.ClientConfiguration;
+  kinesisvideo?: AWS.KinesisVideo.Types.ClientConfiguration;
+  sagemakerruntime?: AWS.SageMakerRuntime.Types.ClientConfiguration;
+  sagemaker?: AWS.SageMaker.Types.ClientConfiguration;
+  translate?: AWS.Translate.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -234,4 +242,12 @@ export interface ConfigurationServiceApiVersions {
   appsync?: AWS.AppSync.Types.apiVersion;
   guardduty?: AWS.GuardDuty.Types.apiVersion;
   mq?: AWS.MQ.Types.apiVersion;
+  comprehend?: AWS.Comprehend.Types.apiVersion;
+  iotjobsdataplane?: AWS.IoTJobsDataPlane.Types.apiVersion;
+  kinesisvideoarchivedmedia?: AWS.KinesisVideoArchivedMedia.Types.apiVersion;
+  kinesisvideomedia?: AWS.KinesisVideoMedia.Types.apiVersion;
+  kinesisvideo?: AWS.KinesisVideo.Types.apiVersion;
+  sagemakerruntime?: AWS.SageMakerRuntime.Types.apiVersion;
+  sagemaker?: AWS.SageMaker.Types.apiVersion;
+  translate?: AWS.Translate.Types.apiVersion;
 }

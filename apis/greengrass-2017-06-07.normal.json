@@ -291,6 +291,67 @@
       } ],
       "documentation" : "Creates a version of a logger definition that has already been defined."
     },
+    "CreateResourceDefinition" : {
+      "name" : "CreateResourceDefinition",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/greengrass/definition/resources",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "CreateResourceDefinitionRequest"
+      },
+      "output" : {
+        "shape" : "CreateResourceDefinitionResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "user error"
+      } ],
+      "documentation" : "Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ``CreateResourceDefinitionVersion`` later."
+    },
+    "CreateResourceDefinitionVersion" : {
+      "name" : "CreateResourceDefinitionVersion",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/greengrass/definition/resources/{ResourceDefinitionId}/versions",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "CreateResourceDefinitionVersionRequest"
+      },
+      "output" : {
+        "shape" : "CreateResourceDefinitionVersionResponse"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "user error"
+      } ],
+      "documentation" : "Create a version of a resource definition that has already been defined."
+    },
+    "CreateSoftwareUpdateJob" : {
+      "name" : "CreateSoftwareUpdateJob",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/greengrass/updates",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "CreateSoftwareUpdateJobRequest"
+      },
+      "output" : {
+        "shape" : "CreateSoftwareUpdateJobResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
+      } ],
+      "documentation" : "Creates an Iot Job that will trigger your Greengrass Cores to update the software they are running."
+    },
     "CreateSubscriptionDefinition" : {
       "name" : "CreateSubscriptionDefinition",
       "http" : {
@@ -428,6 +489,26 @@
         "documentation" : "user error"
       } ],
       "documentation" : "Deletes a logger definition. The logger definition must not have been used in a deployment."
+    },
+    "DeleteResourceDefinition" : {
+      "name" : "DeleteResourceDefinition",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/greengrass/definition/resources/{ResourceDefinitionId}",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "DeleteResourceDefinitionRequest"
+      },
+      "output" : {
+        "shape" : "DeleteResourceDefinitionResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "user error"
+      } ],
+      "documentation" : "Deletes a resource definition."
     },
     "DeleteSubscriptionDefinition" : {
       "name" : "DeleteSubscriptionDefinition",
@@ -800,6 +881,46 @@
       } ],
       "documentation" : "Retrieves information about a logger definition version."
     },
+    "GetResourceDefinition" : {
+      "name" : "GetResourceDefinition",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/greengrass/definition/resources/{ResourceDefinitionId}",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetResourceDefinitionRequest"
+      },
+      "output" : {
+        "shape" : "GetResourceDefinitionResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "user error"
+      } ],
+      "documentation" : "Retrieves information about a resource definition, such as its creation time and latest version."
+    },
+    "GetResourceDefinitionVersion" : {
+      "name" : "GetResourceDefinitionVersion",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/greengrass/definition/resources/{ResourceDefinitionId}/versions/{ResourceDefinitionVersionId}",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetResourceDefinitionVersionRequest"
+      },
+      "output" : {
+        "shape" : "GetResourceDefinitionVersionResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "user error"
+      } ],
+      "documentation" : "Retrieves information about a resource definition version, such as which resources are included in the version."
+    },
     "GetServiceRoleForAccount" : {
       "name" : "GetServiceRoleForAccount",
       "http" : {
@@ -1079,6 +1200,43 @@
       "errors" : [ ],
       "documentation" : "Retrieves a list of logger definitions."
     },
+    "ListResourceDefinitionVersions" : {
+      "name" : "ListResourceDefinitionVersions",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/greengrass/definition/resources/{ResourceDefinitionId}/versions",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "ListResourceDefinitionVersionsRequest"
+      },
+      "output" : {
+        "shape" : "ListResourceDefinitionVersionsResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "user error"
+      } ],
+      "documentation" : "Lists the versions of a resource definition."
+    },
+    "ListResourceDefinitions" : {
+      "name" : "ListResourceDefinitions",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/greengrass/definition/resources",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "ListResourceDefinitionsRequest"
+      },
+      "output" : {
+        "shape" : "ListResourceDefinitionsResponse",
+        "documentation" : "The Ids of all the Greengrass Resource Definitions in this account."
+      },
+      "errors" : [ ],
+      "documentation" : "Retrieves a list of resource definitions."
+    },
     "ListSubscriptionDefinitionVersions" : {
       "name" : "ListSubscriptionDefinitionVersions",
       "http" : {
@@ -1279,6 +1437,26 @@
         "documentation" : "user error"
       } ],
       "documentation" : "Updates a logger definition."
+    },
+    "UpdateResourceDefinition" : {
+      "name" : "UpdateResourceDefinition",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/greengrass/definition/resources/{ResourceDefinitionId}",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "UpdateResourceDefinitionRequest"
+      },
+      "output" : {
+        "shape" : "UpdateResourceDefinitionResponse",
+        "documentation" : "200 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "user error"
+      } ],
+      "documentation" : "Updates a resource definition."
     },
     "UpdateSubscriptionDefinition" : {
       "name" : "UpdateSubscriptionDefinition",
@@ -1855,7 +2033,11 @@
         },
         "LoggerDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Logger definitionv ersion arn for this group."
+          "documentation" : "Logger definition version arn for this group."
+        },
+        "ResourceDefinitionVersionArn" : {
+          "shape" : "__string",
+          "documentation" : "Resource definition version arn for this group."
         },
         "SubscriptionDefinitionVersionArn" : {
           "shape" : "__string",
@@ -1977,6 +2159,143 @@
         "Version" : {
           "shape" : "__string",
           "documentation" : "Unique Id of a version."
+        }
+      }
+    },
+    "CreateResourceDefinitionRequest" : {
+      "type" : "structure",
+      "members" : {
+        "AmznClientToken" : {
+          "shape" : "__string",
+          "location" : "header",
+          "locationName" : "X-Amzn-Client-Token",
+          "documentation" : "The client token used to request idempotent operations."
+        },
+        "InitialVersion" : {
+          "shape" : "ResourceDefinitionVersion",
+          "documentation" : "Information on the initial version"
+        },
+        "Name" : {
+          "shape" : "__string",
+          "documentation" : "Name of the resource definition"
+        }
+      }
+    },
+    "CreateResourceDefinitionResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Arn" : {
+          "shape" : "__string",
+          "documentation" : "Arn of the definition."
+        },
+        "CreationTimestamp" : {
+          "shape" : "__string",
+          "documentation" : "Timestamp of when the definition was created."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Id of the definition."
+        },
+        "LastUpdatedTimestamp" : {
+          "shape" : "__string",
+          "documentation" : "Last updated timestamp of the definition."
+        },
+        "LatestVersion" : {
+          "shape" : "__string",
+          "documentation" : "Last version of the definition."
+        },
+        "LatestVersionArn" : {
+          "shape" : "__string",
+          "documentation" : "Latest version arn of the definition."
+        },
+        "Name" : {
+          "shape" : "__string",
+          "documentation" : "Name of the definition."
+        }
+      }
+    },
+    "CreateResourceDefinitionVersionRequest" : {
+      "type" : "structure",
+      "members" : {
+        "AmznClientToken" : {
+          "shape" : "__string",
+          "location" : "header",
+          "locationName" : "X-Amzn-Client-Token",
+          "documentation" : "The client token used to request idempotent operations."
+        },
+        "ResourceDefinitionId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "ResourceDefinitionId",
+          "documentation" : "Resource definition Id."
+        },
+        "Resources" : {
+          "shape" : "ListOfResource",
+          "documentation" : "List of resources."
+        }
+      },
+      "required" : [ "ResourceDefinitionId" ]
+    },
+    "CreateResourceDefinitionVersionResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Arn" : {
+          "shape" : "__string",
+          "documentation" : "Arn of the version."
+        },
+        "CreationTimestamp" : {
+          "shape" : "__string",
+          "documentation" : "Timestamp of when the version was created."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Id of the resource container."
+        },
+        "Version" : {
+          "shape" : "__string",
+          "documentation" : "Unique Id of a version."
+        }
+      }
+    },
+    "CreateSoftwareUpdateJobRequest" : {
+      "type" : "structure",
+      "members" : {
+        "AmznClientToken" : {
+          "shape" : "__string",
+          "location" : "header",
+          "locationName" : "X-Amzn-Client-Token",
+          "documentation" : "The client token used to request idempotent operations."
+        },
+        "S3UrlSignerRole" : {
+          "shape" : "S3UrlSignerRole"
+        },
+        "SoftwareToUpdate" : {
+          "shape" : "SoftwareToUpdate"
+        },
+        "UpdateAgentLogLevel" : {
+          "shape" : "UpdateAgentLogLevel"
+        },
+        "UpdateTargets" : {
+          "shape" : "UpdateTargets"
+        },
+        "UpdateTargetsArchitecture" : {
+          "shape" : "UpdateTargetsArchitecture"
+        },
+        "UpdateTargetsOperatingSystem" : {
+          "shape" : "UpdateTargetsOperatingSystem"
+        }
+      }
+    },
+    "CreateSoftwareUpdateJobResponse" : {
+      "type" : "structure",
+      "members" : {
+        "IotJobArn" : {
+          "shape" : "__string",
+          "documentation" : "The Iot Job Arn corresponding to this update."
+        },
+        "IotJobId" : {
+          "shape" : "__string",
+          "documentation" : "The Iot Job Id corresponding to this update."
         }
       }
     },
@@ -2189,6 +2508,22 @@
       "type" : "structure",
       "members" : { }
     },
+    "DeleteResourceDefinitionRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ResourceDefinitionId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "ResourceDefinitionId",
+          "documentation" : "Resource definition Id."
+        }
+      },
+      "required" : [ "ResourceDefinitionId" ]
+    },
+    "DeleteResourceDefinitionResponse" : {
+      "type" : "structure",
+      "members" : { }
+    },
     "DeleteSubscriptionDefinitionRequest" : {
       "type" : "structure",
       "members" : {
@@ -2384,6 +2719,14 @@
     "FunctionConfigurationEnvironment" : {
       "type" : "structure",
       "members" : {
+        "AccessSysfs" : {
+          "shape" : "__boolean",
+          "documentation" : "Flag to allow lambda access sys filesystem."
+        },
+        "ResourceAccessPolicies" : {
+          "shape" : "ListOfResourceAccessPolicy",
+          "documentation" : "Policies for the function to access resources."
+        },
         "Variables" : {
           "shape" : "MapOf__string",
           "documentation" : "Environment variables for the lambda function."
@@ -2761,7 +3104,7 @@
         },
         "Definition" : {
           "shape" : "FunctionDefinitionVersion",
-          "documentation" : "Information on the definition."
+          "documentation" : "Information on the definition"
         },
         "Id" : {
           "shape" : "__string",
@@ -3013,6 +3356,94 @@
         }
       }
     },
+    "GetResourceDefinitionRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ResourceDefinitionId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "ResourceDefinitionId",
+          "documentation" : "Resource definition Id."
+        }
+      },
+      "required" : [ "ResourceDefinitionId" ]
+    },
+    "GetResourceDefinitionResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Arn" : {
+          "shape" : "__string",
+          "documentation" : "Arn of the definition."
+        },
+        "CreationTimestamp" : {
+          "shape" : "__string",
+          "documentation" : "Timestamp of when the definition was created."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Id of the definition."
+        },
+        "LastUpdatedTimestamp" : {
+          "shape" : "__string",
+          "documentation" : "Last updated timestamp of the definition."
+        },
+        "LatestVersion" : {
+          "shape" : "__string",
+          "documentation" : "Last version of the definition."
+        },
+        "LatestVersionArn" : {
+          "shape" : "__string",
+          "documentation" : "Latest version arn of the definition."
+        },
+        "Name" : {
+          "shape" : "__string",
+          "documentation" : "Name of the definition."
+        }
+      }
+    },
+    "GetResourceDefinitionVersionRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ResourceDefinitionId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "ResourceDefinitionId",
+          "documentation" : "Resource definition Id."
+        },
+        "ResourceDefinitionVersionId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "ResourceDefinitionVersionId",
+          "documentation" : "Resource definition version Id."
+        }
+      },
+      "required" : [ "ResourceDefinitionVersionId", "ResourceDefinitionId" ]
+    },
+    "GetResourceDefinitionVersionResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Arn" : {
+          "shape" : "__string",
+          "documentation" : "Arn of the resource definition version."
+        },
+        "CreationTimestamp" : {
+          "shape" : "__string",
+          "documentation" : "Timestamp of when the resource definition version was created."
+        },
+        "Definition" : {
+          "shape" : "ResourceDefinitionVersion",
+          "documentation" : "Information on definition."
+        },
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Id of the resource definition the version belongs to."
+        },
+        "Version" : {
+          "shape" : "__string",
+          "documentation" : "Version of the resource definition version."
+        }
+      }
+    },
     "GetServiceRoleForAccountRequest" : {
       "type" : "structure",
       "members" : { }
@@ -3184,6 +3615,20 @@
       },
       "documentation" : "Information on the group"
     },
+    "GroupOwnerSetting" : {
+      "type" : "structure",
+      "members" : {
+        "AutoAddGroupOwner" : {
+          "shape" : "__boolean",
+          "documentation" : "Eanble the auto added group owner."
+        },
+        "GroupOwner" : {
+          "shape" : "__string",
+          "documentation" : "Name of the group owner."
+        }
+      },
+      "documentation" : "Group owner related settings for local resources."
+    },
     "GroupVersion" : {
       "type" : "structure",
       "members" : {
@@ -3201,7 +3646,11 @@
         },
         "LoggerDefinitionVersionArn" : {
           "shape" : "__string",
-          "documentation" : "Logger definitionv ersion arn for this group."
+          "documentation" : "Logger definition version arn for this group."
+        },
+        "ResourceDefinitionVersionArn" : {
+          "shape" : "__string",
+          "documentation" : "Resource definition version arn for this group."
         },
         "SubscriptionDefinitionVersionArn" : {
           "shape" : "__string",
@@ -3683,6 +4132,18 @@
         "shape" : "Logger"
       }
     },
+    "ListOfResource" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "Resource"
+      }
+    },
+    "ListOfResourceAccessPolicy" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ResourceAccessPolicy"
+      }
+    },
     "ListOfSubscription" : {
       "type" : "list",
       "member" : {
@@ -3693,6 +4154,73 @@
       "type" : "list",
       "member" : {
         "shape" : "VersionInformation"
+      }
+    },
+    "ListResourceDefinitionVersionsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "MaxResults" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "MaxResults",
+          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+        },
+        "NextToken" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "NextToken",
+          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+        },
+        "ResourceDefinitionId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "ResourceDefinitionId",
+          "documentation" : "Resource definition Id."
+        }
+      },
+      "required" : [ "ResourceDefinitionId" ]
+    },
+    "ListResourceDefinitionVersionsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "NextToken" : {
+          "shape" : "__string",
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
+        },
+        "Versions" : {
+          "shape" : "ListOfVersionInformation",
+          "documentation" : "Versions"
+        }
+      }
+    },
+    "ListResourceDefinitionsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "MaxResults" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "MaxResults",
+          "documentation" : "Specifies the maximum number of list results to be returned in this page"
+        },
+        "NextToken" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "NextToken",
+          "documentation" : "Specifies the pagination token used when iterating through a paginated request"
+        }
+      }
+    },
+    "ListResourceDefinitionsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Definitions" : {
+          "shape" : "ListOfDefinitionInformation",
+          "documentation" : "Definitions"
+        },
+        "NextToken" : {
+          "shape" : "__string",
+          "documentation" : "The token for the next set of results, or ''null'' if there are no additional results."
+        }
       }
     },
     "ListSubscriptionDefinitionVersionsRequest" : {
@@ -3776,6 +4304,38 @@
       },
       "documentation" : "List of versions response"
     },
+    "LocalDeviceResourceData" : {
+      "type" : "structure",
+      "members" : {
+        "GroupOwnerSetting" : {
+          "shape" : "GroupOwnerSetting",
+          "documentation" : "Group owner related settings for local resources."
+        },
+        "SourcePath" : {
+          "shape" : "__string",
+          "documentation" : "Local source path of the resource."
+        }
+      },
+      "documentation" : "Attributes that define the Local Device Resource."
+    },
+    "LocalVolumeResourceData" : {
+      "type" : "structure",
+      "members" : {
+        "DestinationPath" : {
+          "shape" : "__string",
+          "documentation" : "Local destination path of the resource."
+        },
+        "GroupOwnerSetting" : {
+          "shape" : "GroupOwnerSetting",
+          "documentation" : "Group owner related settings for local resources."
+        },
+        "SourcePath" : {
+          "shape" : "__string",
+          "documentation" : "Local source path of the resource."
+        }
+      },
+      "documentation" : "Attributes that define the Local Volume Resource."
+    },
     "Logger" : {
       "type" : "structure",
       "members" : {
@@ -3833,6 +4393,11 @@
         "shape" : "__string"
       }
     },
+    "Permission" : {
+      "type" : "string",
+      "documentation" : "Type of permissions a function could have to access a resource.",
+      "enum" : [ "ro", "rw" ]
+    },
     "ResetDeploymentsRequest" : {
       "type" : "structure",
       "members" : {
@@ -3869,6 +4434,71 @@
         }
       }
     },
+    "Resource" : {
+      "type" : "structure",
+      "members" : {
+        "Id" : {
+          "shape" : "__string",
+          "documentation" : "Resource Id."
+        },
+        "Name" : {
+          "shape" : "__string",
+          "documentation" : "A descriptive resource name."
+        },
+        "ResourceDataContainer" : {
+          "shape" : "ResourceDataContainer",
+          "documentation" : "A container of data for all resource types."
+        }
+      },
+      "documentation" : "Information on the resource."
+    },
+    "ResourceAccessPolicy" : {
+      "type" : "structure",
+      "members" : {
+        "Permission" : {
+          "shape" : "Permission",
+          "documentation" : "The function's access permission to the resource."
+        },
+        "ResourceId" : {
+          "shape" : "__string",
+          "documentation" : "Id of the resource. A reference to the resource definiton."
+        }
+      },
+      "documentation" : "Policy for the function to access a resource."
+    },
+    "ResourceDataContainer" : {
+      "type" : "structure",
+      "members" : {
+        "LocalDeviceResourceData" : {
+          "shape" : "LocalDeviceResourceData",
+          "documentation" : "Attributes that define the Local Device Resource."
+        },
+        "LocalVolumeResourceData" : {
+          "shape" : "LocalVolumeResourceData",
+          "documentation" : "Attributes that define the Local Volume Resource."
+        }
+      },
+      "documentation" : "A container of data for all resource types."
+    },
+    "ResourceDefinitionVersion" : {
+      "type" : "structure",
+      "members" : {
+        "Resources" : {
+          "shape" : "ListOfResource",
+          "documentation" : "List of resources."
+        }
+      },
+      "documentation" : "Information on resource definition version"
+    },
+    "S3UrlSignerRole" : {
+      "type" : "string",
+      "documentation" : "The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact."
+    },
+    "SoftwareToUpdate" : {
+      "type" : "string",
+      "documentation" : "The piece of software on the Greengrass Core that will be updated.",
+      "enum" : [ "core", "ota_agent" ]
+    },
     "Subscription" : {
       "type" : "structure",
       "members" : {
@@ -3900,6 +4530,11 @@
         }
       },
       "documentation" : "Information on subscription definition version"
+    },
+    "UpdateAgentLogLevel" : {
+      "type" : "string",
+      "documentation" : "The minimum level of log statements that should be logged by the OTA Agent during an update.",
+      "enum" : [ "NONE", "TRACE", "DEBUG", "VERBOSE", "INFO", "WARN", "ERROR", "FATAL" ]
     },
     "UpdateConnectivityInfoRequest" : {
       "type" : "structure",
@@ -4065,6 +4700,26 @@
       "type" : "structure",
       "members" : { }
     },
+    "UpdateResourceDefinitionRequest" : {
+      "type" : "structure",
+      "members" : {
+        "Name" : {
+          "shape" : "__string",
+          "documentation" : "name of the definition"
+        },
+        "ResourceDefinitionId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "ResourceDefinitionId",
+          "documentation" : "Resource definition Id."
+        }
+      },
+      "required" : [ "ResourceDefinitionId" ]
+    },
+    "UpdateResourceDefinitionResponse" : {
+      "type" : "structure",
+      "members" : { }
+    },
     "UpdateSubscriptionDefinitionRequest" : {
       "type" : "structure",
       "members" : {
@@ -4084,6 +4739,23 @@
     "UpdateSubscriptionDefinitionResponse" : {
       "type" : "structure",
       "members" : { }
+    },
+    "UpdateTargets" : {
+      "type" : "list",
+      "documentation" : "The target arns that this update will be applied to.",
+      "member" : {
+        "shape" : "__string"
+      }
+    },
+    "UpdateTargetsArchitecture" : {
+      "type" : "string",
+      "documentation" : "The architecture of the Cores in the targets of an update",
+      "enum" : [ "armv7l", "x86_64", "aarch64" ]
+    },
+    "UpdateTargetsOperatingSystem" : {
+      "type" : "string",
+      "documentation" : "The operating system of the Cores in the targets of an update",
+      "enum" : [ "ubuntu", "raspbian", "amazon_linux" ]
     },
     "VersionInformation" : {
       "type" : "structure",

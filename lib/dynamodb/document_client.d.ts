@@ -145,6 +145,83 @@ export namespace DocumentClient {
     Action?: AttributeAction;
   }
   export type Backfilling = boolean;
+  export type BackupArn = string;
+  export type BackupCreationDateTime = Date;
+  export interface BackupDescription {
+    /**
+     * Contains the details of the backup created for the table. 
+     */
+    BackupDetails?: BackupDetails;
+    /**
+     * Contains the details of the table when the backup was created. 
+     */
+    SourceTableDetails?: SourceTableDetails;
+    /**
+     * Contains the details of the features enabled on the table when the backup was created. For example, LSIs, GSIs, streams, TTL.
+     */
+    SourceTableFeatureDetails?: SourceTableFeatureDetails;
+  }
+  export interface BackupDetails {
+    /**
+     * ARN associated with the backup.
+     */
+    BackupArn: BackupArn;
+    /**
+     * Name of the requested backup.
+     */
+    BackupName: BackupName;
+    /**
+     * Size of the backup in bytes.
+     */
+    BackupSizeBytes?: BackupSizeBytes;
+    /**
+     * Backup can be in one of the following states: CREATING, ACTIVE, DELETED. 
+     */
+    BackupStatus: BackupStatus;
+    /**
+     * Time at which the backup was created. This is the request time of the backup. 
+     */
+    BackupCreationDateTime: BackupCreationDateTime;
+  }
+  export type BackupName = string;
+  export type BackupSizeBytes = number;
+  export type BackupStatus = "CREATING"|"DELETED"|"AVAILABLE"|string;
+  export type BackupSummaries = BackupSummary[];
+  export interface BackupSummary {
+    /**
+     * Name of the table.
+     */
+    TableName?: TableName;
+    /**
+     * Unique identifier for the table.
+     */
+    TableId?: TableId;
+    /**
+     * ARN associated with the table.
+     */
+    TableArn?: TableArn;
+    /**
+     * ARN associated with the backup.
+     */
+    BackupArn?: BackupArn;
+    /**
+     * Name of the specified backup.
+     */
+    BackupName?: BackupName;
+    /**
+     * Time at which the backup was created.
+     */
+    BackupCreationDateTime?: BackupCreationDateTime;
+    /**
+     * Backup can be in one of the following states: CREATING, ACTIVE, DELETED.
+     */
+    BackupStatus?: BackupStatus;
+    /**
+     * Size of the backup in bytes.
+     */
+    BackupSizeBytes?: BackupSizeBytes;
+  }
+  export type BackupsInputLimit = number;
   export interface BatchGetItemInput {
     /**
      * A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table. Each table name can be used only once per BatchGetItem request. Each element in the map of items to retrieve consists of the following:    ConsistentRead - If true, a strongly consistent read is used; if false (the default), an eventually consistent read is used.    ExpressionAttributeNames - One or more substitution tokens for attribute names in the ProjectionExpression parameter. The following are some use cases for using ExpressionAttributeNames:   To access an attribute whose name conflicts with a DynamoDB reserved word.   To create a placeholder for repeating occurrences of an attribute name in an expression.   To prevent special characters in an attribute name from being misinterpreted in an expression.   Use the # character in an expression to dereference an attribute name. For example, consider the following attribute name:    Percentile    The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide). To work around this, you could specify the following for ExpressionAttributeNames:    {"#P":"Percentile"}    You could then use this substitution in an expression, as in this example:    #P = :val     Tokens that begin with the : character are expression attribute values, which are placeholders for the actual value at runtime.  For more information on expression attribute names, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    Keys - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide the partition key value. For a composite key, you must provide both the partition key value and the sort key value.    ProjectionExpression - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes will be returned. If any of the requested attributes are not found, they will not appear in the result. For more information, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    AttributesToGet - This is a legacy parameter. Use ProjectionExpression instead. For more information, see AttributesToGet in the Amazon DynamoDB Developer Guide.   
@@ -185,7 +262,7 @@ export namespace DocumentClient {
      */
     UnprocessedItems?: BatchWriteItemRequestMap;
     /**
-     * A list of tables that were processed by BatchWriteItem and, for each table, information about any item collections that were affected by individual DeleteItem or PutItem operations. Each entry consists of the following subelements:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item.    SizeEstimateRange - An estimate of item collection size, expressed in GB. This is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on the table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
+     * A list of tables that were processed by BatchWriteItem and, for each table, information about any item collections that were affected by individual DeleteItem or PutItem operations. Each entry consists of the following subelements:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item.    SizeEstimateRangeGB - An estimate of item collection size, expressed in GB. This is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on the table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
      */
     ItemCollectionMetrics?: ItemCollectionMetricsPerTable;
     /**
@@ -242,6 +319,29 @@ export namespace DocumentClient {
   }
   export type ConsumedCapacityMultiple = ConsumedCapacity[];
   export type ConsumedCapacityUnits = number;
+  export interface ContinuousBackupsDescription {
+    /**
+     * ContinuousBackupsStatus can be one of the following states : ENABLED, DISABLED
+     */
+    ContinuousBackupsStatus: ContinuousBackupsStatus;
+  }
+  export type ContinuousBackupsStatus = "ENABLED"|"DISABLED"|string;
+  export interface CreateBackupInput {
+    /**
+     * The name of the table.
+     */
+    TableName: TableName;
+    /**
+     * Specified name for the backup.
+     */
+    BackupName: BackupName;
+  }
+  export interface CreateBackupOutput {
+    /**
+     * Contains the details of the backup created for the table.
+     */
+    BackupDetails?: BackupDetails;
+  }
   export interface CreateGlobalSecondaryIndexAction {
     /**
      * The name of the global secondary index to be created.
@@ -259,6 +359,28 @@ export namespace DocumentClient {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput: ProvisionedThroughput;
+  }
+  export interface CreateGlobalTableInput {
+    /**
+     * The global table name.
+     */
+    GlobalTableName: TableName;
+    /**
+     * The regions where the global table needs to be created.
+     */
+    ReplicationGroup: ReplicaList;
+  }
+  export interface CreateGlobalTableOutput {
+    /**
+     * Contains the details of the global table.
+     */
+    GlobalTableDescription?: GlobalTableDescription;
+  }
+  export interface CreateReplicaAction {
+    /**
+     * The region of the replica to be added.
+     */
+    RegionName: RegionName;
   }
   export interface CreateTableInput {
     /**
@@ -297,6 +419,18 @@ export namespace DocumentClient {
     TableDescription?: TableDescription;
   }
   export type _Date = Date;
+  export interface DeleteBackupInput {
+    /**
+     * The ARN associated with the backup.
+     */
+    BackupArn: BackupArn;
+  }
+  export interface DeleteBackupOutput {
+    /**
+     * Contains the description of the backup created for the table.
+     */
+    BackupDescription?: BackupDescription;
+  }
   export interface DeleteGlobalSecondaryIndexAction {
     /**
      * The name of the global secondary index to be deleted.
@@ -352,9 +486,15 @@ export namespace DocumentClient {
      */
     ConsumedCapacity?: ConsumedCapacity;
     /**
-     * Information about item collections, if any, that were affected by the DeleteItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRange - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
+     * Information about item collections, if any, that were affected by the DeleteItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRangeGB - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
+  }
+  export interface DeleteReplicaAction {
+    /**
+     * The region of the replica to be removed.
+     */
+    RegionName: RegionName;
   }
   export interface DeleteRequest {
     /**
@@ -373,6 +513,42 @@ export namespace DocumentClient {
      * Represents the properties of a table.
      */
     TableDescription?: TableDescription;
+  }
+  export interface DescribeBackupInput {
+    /**
+     * The ARN associated with the backup.
+     */
+    BackupArn: BackupArn;
+  }
+  export interface DescribeBackupOutput {
+    /**
+     * Contains the description of the backup created for the table.
+     */
+    BackupDescription?: BackupDescription;
+  }
+  export interface DescribeContinuousBackupsInput {
+    /**
+     * Name of the table for which the customer wants to check the backup and restore settings.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeContinuousBackupsOutput {
+    /**
+     *  ContinuousBackupsDescription can be one of the following : ENABLED, DISABLED. 
+     */
+    ContinuousBackupsDescription?: ContinuousBackupsDescription;
+  }
+  export interface DescribeGlobalTableInput {
+    /**
+     * The name of the global table.
+     */
+    GlobalTableName: TableName;
+  }
+  export interface DescribeGlobalTableOutput {
+    /**
+     * Contains the details of the global table.
+     */
+    GlobalTableDescription?: GlobalTableDescription;
   }
   export interface DescribeLimitsInput {
   }
@@ -537,6 +713,24 @@ export namespace DocumentClient {
     IndexArn?: String;
   }
   export type GlobalSecondaryIndexDescriptionList = GlobalSecondaryIndexDescription[];
+  export interface GlobalSecondaryIndexInfo {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    /**
+     * The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     */
+    KeySchema?: KeySchema;
+    /**
+     * Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. 
+     */
+    Projection?: Projection;
+    /**
+     * Represents the provisioned throughput settings for the specified global secondary index. 
+     */
+    ProvisionedThroughput?: ProvisionedThroughput;
+  }
   export type GlobalSecondaryIndexList = GlobalSecondaryIndex[];
   export interface GlobalSecondaryIndexUpdate {
     /**
@@ -553,6 +747,42 @@ export namespace DocumentClient {
     Delete?: DeleteGlobalSecondaryIndexAction;
   }
   export type GlobalSecondaryIndexUpdateList = GlobalSecondaryIndexUpdate[];
+  export type GlobalSecondaryIndexes = GlobalSecondaryIndexInfo[];
+  export interface GlobalTable {
+    /**
+     * The global table name.
+     */
+    GlobalTableName?: TableName;
+    /**
+     * The regions where the global table has replicas.
+     */
+    ReplicationGroup?: ReplicaList;
+  }
+  export type GlobalTableArnString = string;
+  export interface GlobalTableDescription {
+    /**
+     * The regions where the global table has replicas.
+     */
+    ReplicationGroup?: ReplicaDescriptionList;
+    /**
+     * The unique identifier of the global table.
+     */
+    GlobalTableArn?: GlobalTableArnString;
+    /**
+     * The creation time of the global table.
+     */
+    CreationDateTime?: _Date;
+    /**
+     * The current state of the global table:    CREATING - The global table is being created.    UPDATING - The global table is being updated.    DELETING - The global table is being deleted.    ACTIVE - The global table is ready for use.  
+     */
+    GlobalTableStatus?: GlobalTableStatus;
+    /**
+     * The global table name.
+     */
+    GlobalTableName?: TableName;
+  }
+  export type GlobalTableList = GlobalTable[];
+  export type GlobalTableStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|string;
   export type IndexName = string;
   export type IndexStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
   export type Integer = number;
@@ -571,6 +801,7 @@ export namespace DocumentClient {
   export type ItemCollectionMetricsPerTable = {[key: string]: ItemCollectionMetricsMultiple};
   export type ItemCollectionSizeEstimateBound = number;
   export type ItemCollectionSizeEstimateRange = ItemCollectionSizeEstimateBound[];
+  export type ItemCount = number;
   export type ItemList = AttributeMap[];
   export type Key = {[key: string]: AttributeValue};
   export type KeyConditions = {[key: string]: Condition};
@@ -612,6 +843,62 @@ export namespace DocumentClient {
     ExpressionAttributeNames?: ExpressionAttributeNameMap;
   }
   export type ListAttributeValue = AttributeValue[];
+  export interface ListBackupsInput {
+    /**
+     * The backups from the table specified by TableName are listed. 
+     */
+    TableName?: TableName;
+    /**
+     * Maximum number of backups to return at once.
+     */
+    Limit?: BackupsInputLimit;
+    /**
+     * Only backups created after this time are listed. TimeRangeLowerBound is inclusive.
+     */
+    TimeRangeLowerBound?: TimeRangeLowerBound;
+    /**
+     * Only backups created before this time are listed. TimeRangeUpperBound is exclusive. 
+     */
+    TimeRangeUpperBound?: TimeRangeUpperBound;
+    /**
+     *  LastEvaluatedBackupARN returned by the previous ListBackups call. 
+     */
+    ExclusiveStartBackupArn?: BackupArn;
+  }
+  export interface ListBackupsOutput {
+    /**
+     * List of BackupSummary objects.
+     */
+    BackupSummaries?: BackupSummaries;
+    /**
+     * Last evaluated BackupARN.
+     */
+    LastEvaluatedBackupArn?: BackupArn;
+  }
+  export interface ListGlobalTablesInput {
+    /**
+     * The first global table name that this operation will evaluate.
+     */
+    ExclusiveStartGlobalTableName?: TableName;
+    /**
+     * The maximum number of table names to return.
+     */
+    Limit?: PositiveIntegerObject;
+    /**
+     * Lists the global tables in a specific region.
+     */
+    RegionName?: RegionName;
+  }
+  export interface ListGlobalTablesOutput {
+    /**
+     * List of global table names.
+     */
+    GlobalTables?: GlobalTableList;
+    /**
+     * Last evaluated global table name.
+     */
+    LastEvaluatedGlobalTableName?: TableName;
+  }
   export interface ListTablesInput {
     /**
      * The first table name that this operation will evaluate. Use the value that was returned for LastEvaluatedTableName in a previous operation, so that you can obtain the next page of results.
@@ -694,7 +981,22 @@ export namespace DocumentClient {
     IndexArn?: String;
   }
   export type LocalSecondaryIndexDescriptionList = LocalSecondaryIndexDescription[];
+  export interface LocalSecondaryIndexInfo {
+    /**
+     * Represents the name of the local secondary index.
+     */
+    IndexName?: IndexName;
+    /**
+     * The complete key schema for a local secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     */
+    KeySchema?: KeySchema;
+    /**
+     * Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. 
+     */
+    Projection?: Projection;
+  }
   export type LocalSecondaryIndexList = LocalSecondaryIndex[];
+  export type LocalSecondaryIndexes = LocalSecondaryIndexInfo[];
   export type Long = number;
   export type MapAttributeValue = {[key: string]: AttributeValue};
   export type NextTokenString = string;
@@ -799,7 +1101,7 @@ export namespace DocumentClient {
      */
     ConsumedCapacity?: ConsumedCapacity;
     /**
-     * Information about item collections, if any, that were affected by the PutItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRange - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
+     * Information about item collections, if any, that were affected by the PutItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRangeGB - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
   }
@@ -898,7 +1200,69 @@ export namespace DocumentClient {
      */
     ConsumedCapacity?: ConsumedCapacity;
   }
+  export type RegionName = string;
+  export interface Replica {
+    /**
+     * The region where the replica needs to be created.
+     */
+    RegionName?: RegionName;
+  }
+  export interface ReplicaDescription {
+    /**
+     * The name of the region.
+     */
+    RegionName?: RegionName;
+  }
+  export type ReplicaDescriptionList = ReplicaDescription[];
+  export type ReplicaList = Replica[];
+  export interface ReplicaUpdate {
+    /**
+     * The parameters required for creating a replica on an existing global table.
+     */
+    Create?: CreateReplicaAction;
+    /**
+     * The name of the existing replica to be removed.
+     */
+    Delete?: DeleteReplicaAction;
+  }
+  export type ReplicaUpdateList = ReplicaUpdate[];
   export type ResourceArnString = string;
+  export type RestoreDateTime = Date;
+  export type RestoreInProgress = boolean;
+  export interface RestoreSummary {
+    /**
+     * ARN of the backup from which the table was restored.
+     */
+    SourceBackupArn?: BackupArn;
+    /**
+     * ARN of the source table of the backup that is being restored.
+     */
+    SourceTableArn?: TableArn;
+    /**
+     * Point in time or source backup time.
+     */
+    RestoreDateTime: RestoreDateTime;
+    /**
+     * Indicates if a restore is in progress or not.
+     */
+    RestoreInProgress: RestoreInProgress;
+  }
+  export interface RestoreTableFromBackupInput {
+    /**
+     * The name of the new table to which the backup must be restored.
+     */
+    TargetTableName: TableName;
+    /**
+     * The ARN associated with the backup.
+     */
+    BackupArn: BackupArn;
+  }
+  export interface RestoreTableFromBackupOutput {
+    /**
+     * The description of the table created from an existing backup.
+     */
+    TableDescription?: TableDescription;
+  }
   export type ReturnConsumedCapacity = "INDEXES"|"TOTAL"|"NONE"|string;
   export type ReturnItemCollectionMetrics = "SIZE"|"NONE"|string;
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
@@ -992,6 +1356,58 @@ export namespace DocumentClient {
   export type ScanTotalSegments = number;
   export type SecondaryIndexesCapacityMap = {[key: string]: Capacity};
   export type Select = "ALL_ATTRIBUTES"|"ALL_PROJECTED_ATTRIBUTES"|"SPECIFIC_ATTRIBUTES"|"COUNT"|string;
+  export interface SourceTableDetails {
+    /**
+     * The name of the table for which the backup was created. 
+     */
+    TableName: TableName;
+    /**
+     * Unique identifier for the table for which the backup was created. 
+     */
+    TableId: TableId;
+    /**
+     * ARN of the table for which backup was created. 
+     */
+    TableArn?: TableArn;
+    /**
+     * Size of the table in bytes. Please note this is an approximate value.
+     */
+    TableSizeBytes?: Long;
+    /**
+     * Schema of the table. 
+     */
+    KeySchema: KeySchema;
+    /**
+     * Time when the source table was created. 
+     */
+    TableCreationDateTime: TableCreationDateTime;
+    /**
+     * Read IOPs and Write IOPS on the table when the backup was created.
+     */
+    ProvisionedThroughput: ProvisionedThroughput;
+    /**
+     * Number of items in the table. Please note this is an approximate value. 
+     */
+    ItemCount?: ItemCount;
+  }
+  export interface SourceTableFeatureDetails {
+    /**
+     * Represents the LSI properties for the table when the backup was created. It includes the IndexName, KeySchema and Projection for the LSIs on the table at the time of backup. 
+     */
+    LocalSecondaryIndexes?: LocalSecondaryIndexes;
+    /**
+     * Represents the GSI properties for the table when the backup was created. It includes the IndexName, KeySchema, Projection and ProvisionedThroughput for the GSIs on the table at the time of backup. 
+     */
+    GlobalSecondaryIndexes?: GlobalSecondaryIndexes;
+    /**
+     * Stream settings on the table when the backup was created.
+     */
+    StreamDescription?: StreamSpecification;
+    /**
+     * Time to Live settings on the table when the backup was created.
+     */
+    TimeToLiveDescription?: TimeToLiveDescription;
+  }
   export type StreamArn = string;
   export type StreamEnabled = boolean;
   export interface StreamSpecification {
@@ -1008,6 +1424,8 @@ export namespace DocumentClient {
   export type String = string;
   export type StringAttributeValue = string;
   export type StringSetAttributeValue = StringAttributeValue[];
+  export type TableArn = string;
+  export type TableCreationDateTime = Date;
   export interface TableDescription {
     /**
      * An array of AttributeDefinition objects. Each of these objects describes one attribute in the table and index key schema. Each AttributeDefinition object in this array is composed of:    AttributeName - The name of the attribute.    AttributeType - The data type for the attribute.  
@@ -1046,6 +1464,10 @@ export namespace DocumentClient {
      */
     TableArn?: String;
     /**
+     * Unique identifier for the table for which the backup was created. 
+     */
+    TableId?: TableId;
+    /**
      * Represents one or more local secondary indexes on the table. Each index is scoped to a given partition key value. Tables with one or more local secondary indexes are subject to an item collection size limit, where the amount of data within a given item collection cannot exceed 10 GB. Each element is composed of:    IndexName - The name of the local secondary index.    KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes are in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      IndexSizeBytes - Represents the total size of the index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.    ItemCount - Represents the number of items in the index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.   If the table is in the DELETING state, no information about indexes will be returned.
      */
     LocalSecondaryIndexes?: LocalSecondaryIndexDescriptionList;
@@ -1065,7 +1487,12 @@ export namespace DocumentClient {
      * The Amazon Resource Name (ARN) that uniquely identifies the latest stream for this table.
      */
     LatestStreamArn?: StreamArn;
+    /**
+     * Contains details for the restore.
+     */
+    RestoreSummary?: RestoreSummary;
   }
+  export type TableId = string;
   export type TableName = string;
   export type TableNameList = TableName[];
   export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
@@ -1093,6 +1520,8 @@ export namespace DocumentClient {
     Tags: TagList;
   }
   export type TagValueString = string;
+  export type TimeRangeLowerBound = Date;
+  export type TimeRangeUpperBound = Date;
   export type TimeToLiveAttributeName = string;
   export interface TimeToLiveDescription {
     /**
@@ -1136,6 +1565,22 @@ export namespace DocumentClient {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput: ProvisionedThroughput;
+  }
+  export interface UpdateGlobalTableInput {
+    /**
+     * The global table name.
+     */
+    GlobalTableName: TableName;
+    /**
+     * A list of regions that should be added or removed from the global table.
+     */
+    ReplicaUpdates: ReplicaUpdateList;
+  }
+  export interface UpdateGlobalTableOutput {
+    /**
+     * Contains the details of the global table.
+     */
+    GlobalTableDescription?: GlobalTableDescription;
   }
   export interface UpdateItemInput {
     /**
@@ -1194,7 +1639,7 @@ export namespace DocumentClient {
      */
     ConsumedCapacity?: ConsumedCapacity;
     /**
-     * Information about item collections, if any, that were affected by the UpdateItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRange - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
+     * Information about item collections, if any, that were affected by the UpdateItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRangeGB - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
   }
