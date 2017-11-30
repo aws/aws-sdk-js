@@ -69,6 +69,14 @@ declare class Lambda extends Service {
    */
   deleteFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Removes concurrent execution limits from this function.
+   */
+  deleteFunctionConcurrency(params: Lambda.Types.DeleteFunctionConcurrencyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes concurrent execution limits from this function.
+   */
+  deleteFunctionConcurrency(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Returns a customer's account settings. You can use this operation to retrieve Lambda limits information, such as code size and concurrency limits. For more information about limits, see AWS Lambda Limits. You can also retrieve resource usage statistics, such as code storage usage and function count.
    */
   getAccountSettings(params: Lambda.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
@@ -181,6 +189,14 @@ declare class Lambda extends Service {
    */
   publishVersion(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
+   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.
+   */
+  putFunctionConcurrency(params: Lambda.Types.PutFunctionConcurrencyRequest, callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
+  /**
+   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.
+   */
+  putFunctionConcurrency(callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
+  /**
    * You can remove individual permissions from an resource policy associated with a Lambda function by providing a statement ID that you provided when you added the permission. If you are using versioning, the permissions you remove are specific to the Lambda function version or alias you specify in the AddPermission request via the Qualifier parameter. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  Note that removal of a permission will cause an active event source to lose permission to the function. You need permission for the lambda:RemovePermission action.
    */
   removePermission(params: Lambda.Types.RemovePermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -255,6 +271,10 @@ declare namespace Lambda {
      * Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see Lambda Function Concurrent Executions. The default limit is 1000.
      */
     ConcurrentExecutions?: Integer;
+    /**
+     * The number of concurrent executions available to functions that do not have concurrency limits set.
+     */
+    UnreservedConcurrentExecutions?: UnreservedConcurrentExecutions;
   }
   export interface AccountUsage {
     /**
@@ -344,6 +364,12 @@ declare namespace Lambda {
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type BlobStream = Buffer|Uint8Array|Blob|string|Readable;
   export type Boolean = boolean;
+  export interface Concurrency {
+    /**
+     * The number of concurrent executions reserved for this function.
+     */
+    ReservedConcurrentExecutions?: ReservedConcurrentExecutions;
+  }
   export interface CreateAliasRequest {
     /**
      * Name of the Lambda function for which you want to create an alias. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -398,7 +424,7 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The runtime environment for the Lambda function you are uploading. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
+     * The runtime environment for the Lambda function you are uploading. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
      */
     Runtime: Runtime;
     /**
@@ -473,6 +499,12 @@ declare namespace Lambda {
      * The event source mapping ID.
      */
     UUID: String;
+  }
+  export interface DeleteFunctionConcurrencyRequest {
+    /**
+     * The name of the function you are removing concurrent execution limits from.
+     */
+    FunctionName: FunctionName;
   }
   export interface DeleteFunctionRequest {
     /**
@@ -704,6 +736,10 @@ declare namespace Lambda {
      * Returns the list of tags associated with the function.
      */
     Tags?: Tags;
+    /**
+     * The concurrent execution limit set for this function.
+     */
+    Concurrency?: Concurrency;
   }
   export interface GetPolicyRequest {
     /**
@@ -933,6 +969,16 @@ declare namespace Lambda {
      */
     Description?: Description;
   }
+  export interface PutFunctionConcurrencyRequest {
+    /**
+     * The name of the function you are setting concurrent execution limits on.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The concurrent execution limit reserved for this function.
+     */
+    ReservedConcurrentExecutions: ReservedConcurrentExecutions;
+  }
   export type Qualifier = string;
   export interface RemovePermissionRequest {
     /**
@@ -948,6 +994,7 @@ declare namespace Lambda {
      */
     Qualifier?: Qualifier;
   }
+  export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
   export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"java8"|"python2.7"|"python3.6"|"dotnetcore1.0"|"nodejs4.3-edge"|string;
@@ -976,7 +1023,7 @@ declare namespace Lambda {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
-  export type ThrottleReason = "ConcurrentInvocationLimitExceeded"|"FunctionInvocationRateLimitExceeded"|"CallerRateLimitExceeded"|string;
+  export type ThrottleReason = "ConcurrentInvocationLimitExceeded"|"FunctionInvocationRateLimitExceeded"|"ReservedFunctionConcurrentInvocationLimitExceeded"|"ReservedFunctionInvocationRateLimitExceeded"|"CallerRateLimitExceeded"|string;
   export type Timeout = number;
   export type Timestamp = string;
   export interface TracingConfig {
@@ -992,6 +1039,7 @@ declare namespace Lambda {
     Mode?: TracingMode;
   }
   export type TracingMode = "Active"|"PassThrough"|string;
+  export type UnreservedConcurrentExecutions = number;
   export interface UntagResourceRequest {
     /**
      * The ARN (Amazon Resource Name) of the function.
@@ -1103,7 +1151,7 @@ declare namespace Lambda {
      */
     Environment?: Environment;
     /**
-     * The runtime environment for the Lambda function. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
+     * The runtime environment for the Lambda function. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
      */
     Runtime?: Runtime;
     /**

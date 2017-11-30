@@ -124,6 +124,14 @@ declare class APIGateway extends Service {
    */
   createUsagePlanKey(callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
   /**
+   * Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.
+   */
+  createVpcLink(params: APIGateway.Types.CreateVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  /**
+   * Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.
+   */
+  createVpcLink(callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  /**
    * Deletes the ApiKey resource.
    */
   deleteApiKey(params: APIGateway.Types.DeleteApiKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -283,6 +291,14 @@ declare class APIGateway extends Service {
    * Deletes a usage plan key and remove the underlying API key from the associated usage plan.
    */
   deleteUsagePlanKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an existing VpcLink of a specified identifier.
+   */
+  deleteVpcLink(params: APIGateway.Types.DeleteVpcLinkRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an existing VpcLink of a specified identifier.
+   */
+  deleteVpcLink(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Flushes all authorizer cache entries on a stage.
    */
@@ -460,11 +476,11 @@ declare class APIGateway extends Service {
    */
   getGatewayResponse(callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
-   * Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the Amazon API Gateway-generated default GatewayResponses collection for the supported response types.
+   * Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.
    */
   getGatewayResponses(params: APIGateway.Types.GetGatewayResponsesRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponses) => void): Request<APIGateway.Types.GatewayResponses, AWSError>;
   /**
-   * Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the Amazon API Gateway-generated default GatewayResponses collection for the supported response types.
+   * Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.
    */
   getGatewayResponses(callback?: (err: AWSError, data: APIGateway.Types.GatewayResponses) => void): Request<APIGateway.Types.GatewayResponses, AWSError>;
   /**
@@ -652,6 +668,22 @@ declare class APIGateway extends Service {
    */
   getUsagePlans(callback?: (err: AWSError, data: APIGateway.Types.UsagePlans) => void): Request<APIGateway.Types.UsagePlans, AWSError>;
   /**
+   * Gets a specified VPC link under the caller's account in a region.
+   */
+  getVpcLink(params: APIGateway.Types.GetVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  /**
+   * Gets a specified VPC link under the caller's account in a region.
+   */
+  getVpcLink(callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  /**
+   * Gets the VpcLinks collection under the caller's account in a selected region.
+   */
+  getVpcLinks(params: APIGateway.Types.GetVpcLinksRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLinks) => void): Request<APIGateway.Types.VpcLinks, AWSError>;
+  /**
+   * Gets the VpcLinks collection under the caller's account in a selected region.
+   */
+  getVpcLinks(callback?: (err: AWSError, data: APIGateway.Types.VpcLinks) => void): Request<APIGateway.Types.VpcLinks, AWSError>;
+  /**
    * Import API keys from an external source, such as a CSV-formatted file.
    */
   importApiKeys(params: APIGateway.Types.ImportApiKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKeyIds) => void): Request<APIGateway.Types.ApiKeyIds, AWSError>;
@@ -668,11 +700,11 @@ declare class APIGateway extends Service {
    */
   importDocumentationParts(callback?: (err: AWSError, data: APIGateway.Types.DocumentationPartIds) => void): Request<APIGateway.Types.DocumentationPartIds, AWSError>;
   /**
-   * A feature of the Amazon API Gateway control service for creating a new API from an external API definition file.
+   * A feature of the API Gateway control service for creating a new API from an external API definition file.
    */
   importRestApi(params: APIGateway.Types.ImportRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
-   * A feature of the Amazon API Gateway control service for creating a new API from an external API definition file.
+   * A feature of the API Gateway control service for creating a new API from an external API definition file.
    */
   importRestApi(callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
@@ -716,11 +748,11 @@ declare class APIGateway extends Service {
    */
   putMethodResponse(callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
-   * A feature of the Amazon API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
+   * A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
    */
   putRestApi(params: APIGateway.Types.PutRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
-   * A feature of the Amazon API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
+   * A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
    */
   putRestApi(callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
@@ -907,6 +939,14 @@ declare class APIGateway extends Service {
    * Updates a usage plan of a given plan Id.
    */
   updateUsagePlan(callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
+  /**
+   * Updates an existing VpcLink of a specified identifier.
+   */
+  updateVpcLink(params: APIGateway.Types.UpdateVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  /**
+   * Updates an existing VpcLink of a specified identifier.
+   */
+  updateVpcLink(callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
 }
 declare namespace APIGateway {
   export interface AccessLogSettings {
@@ -1033,7 +1073,7 @@ declare namespace APIGateway {
      */
     authorizerUri?: String;
     /**
-     * Specifies the required credentials as an IAM role for Amazon API Gateway to invoke the authorizer. To specify an IAM role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
+     * Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
      */
     authorizerCredentials?: String;
     /**
@@ -1041,7 +1081,7 @@ declare namespace APIGateway {
      */
     identitySource?: String;
     /**
-     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. Amazon API Gateway will match the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
+     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. API Gateway will match the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
      */
     identityValidationExpression?: String;
     /**
@@ -1129,6 +1169,7 @@ declare namespace APIGateway {
      */
     items?: ListOfClientCertificate;
   }
+  export type ConnectionType = "INTERNET"|"VPC_LINK"|string;
   export type ContentHandlingStrategy = "CONVERT_TO_BINARY"|"CONVERT_TO_TEXT"|string;
   export interface CreateApiKeyRequest {
     /**
@@ -1186,7 +1227,7 @@ declare namespace APIGateway {
      */
     authorizerUri?: String;
     /**
-     * Specifies the required credentials as an IAM role for Amazon API Gateway to invoke the authorizer. To specify an IAM role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
+     * Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
      */
     authorizerCredentials?: String;
     /**
@@ -1194,7 +1235,7 @@ declare namespace APIGateway {
      */
     identitySource?: String;
     /**
-     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. Amazon API Gateway will match the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
+     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. API Gateway will match the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
      */
     identityValidationExpression?: String;
     /**
@@ -1410,7 +1451,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * {Required] The name for the Stage resource.
+     * [Required] The name for the Stage resource.
      */
     stageName: String;
     /**
@@ -1477,6 +1518,20 @@ declare namespace APIGateway {
      * The quota of the usage plan.
      */
     quota?: QuotaSettings;
+  }
+  export interface CreateVpcLinkRequest {
+    /**
+     * [Required] The name used to label and identify the VPC link.
+     */
+    name: String;
+    /**
+     * The description of the VPC link.
+     */
+    description?: String;
+    /**
+     * [Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.
+     */
+    targetArns: ListOfString;
   }
   export interface DeleteApiKeyRequest {
     /**
@@ -1682,6 +1737,12 @@ declare namespace APIGateway {
      */
     usagePlanId: String;
   }
+  export interface DeleteVpcLinkRequest {
+    /**
+     * [Required] The identifier of the VpcLink. It is used in an Integration to reference this VpcLink.
+     */
+    vpcLinkId: String;
+  }
   export interface Deployment {
     /**
      * The identifier for the deployment resource.
@@ -1723,7 +1784,7 @@ declare namespace APIGateway {
   }
   export interface DocumentationPart {
     /**
-     * The DocumentationPart identifier, generated by Amazon API Gateway when the DocumentationPart is created.
+     * The DocumentationPart identifier, generated by API Gateway when the DocumentationPart is created.
      */
     id?: String;
     /**
@@ -1815,7 +1876,7 @@ declare namespace APIGateway {
      */
     certificateUploadDate?: Timestamp;
     /**
-     * The domain name associated with the regional endpoint for this custom domain name. You set up this association by adding a DNS record that points the custom domain name to this regional domain name. The regional domain name is returned by Amazon API Gateway when you create a regional endpoint.
+     * The domain name associated with the regional endpoint for this custom domain name. You set up this association by adding a DNS record that points the custom domain name to this regional domain name. The regional domain name is returned by API Gateway when you create a regional endpoint.
      */
     regionalDomainName?: String;
     /**
@@ -1910,7 +1971,7 @@ declare namespace APIGateway {
      */
     responseTemplates?: MapOfStringToString;
     /**
-     * A Boolean flag to indicate whether this GatewayResponse is the default gateway response (true) or not (false). A default gateway response is one generated by Amazon API Gateway without any customization by an API developer. 
+     * A Boolean flag to indicate whether this GatewayResponse is the default gateway response (true) or not (false). A default gateway response is one generated by API Gateway without any customization by an API developer. 
      */
     defaultResponse?: Boolean;
   }
@@ -2482,6 +2543,22 @@ declare namespace APIGateway {
      */
     limit?: NullableInteger;
   }
+  export interface GetVpcLinkRequest {
+    /**
+     * [Required] The identifier of the VpcLink. It is used in an Integration to reference this VpcLink.
+     */
+    vpcLinkId: String;
+  }
+  export interface GetVpcLinksRequest {
+    /**
+     * The current pagination position in the paged result set.
+     */
+    position?: String;
+    /**
+     * The maximum number of returned results per page.
+     */
+    limit?: NullableInteger;
+  }
   export interface ImportApiKeysRequest {
     /**
      * The payload of the POST request to import API keys. For the payload format, see API Key File Format.
@@ -2531,7 +2608,7 @@ declare namespace APIGateway {
   export type Integer = number;
   export interface Integration {
     /**
-     * Specifies the integration's type. The valid value is HTTP for integrating with an HTTP back end, AWS for any AWS service endpoints, MOCK for testing without actually invoking the back end, HTTP_PROXY for integrating with the HTTP proxy integration, or AWS_PROXY for integrating with the Lambda proxy integration type.
+     * Specifies an API method integration type. The valid value is one of the following:  AWS: for integrating the API method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. AWS_PROXY: for integrating the API method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as the Lambda proxy integration. HTTP: for integrating the API method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration. HTTP_PROXY: for integrating the API method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as the HTTP proxy integration. MOCK: for integrating the API method request with API Gateway as a "loop-back" endpoint without invoking any backend.  For the HTTP and HTTP proxy integrations, each integration can specify a protocol (http/https), port and path. Standard 80 and 443 ports are supported as well as custom ports above 1024. An HTTP or HTTP proxy integration with a connectionType of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
      */
     type?: IntegrationType;
     /**
@@ -2539,11 +2616,19 @@ declare namespace APIGateway {
      */
     httpMethod?: String;
     /**
-     * Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification. For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. Region, subdomain and service are used to determine the right endpoint. For AWS services that use the Action= query string parameter, service_api should be a valid action for the desired service. For RESTful AWS service APIs, path is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial /.
+     * Specifies Uniform Resource Identifier (URI) of the integration endpoint.   For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.    For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&amp;{p1}={v1}&amp;p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the uri can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&amp;Bucket={bucket}&amp;Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key} 
      */
     uri?: String;
     /**
-     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::\*:user/\*. To use resource-based permissions on supported AWS services, specify null.
+     * The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and an network load balancer in a VPC. The default value is INTERNET.
+     */
+    connectionType?: ConnectionType;
+    /**
+     * The (id) of the VpcLink used for the integration when connectionType=VPC_LINK and undefined, otherwise.
+     */
+    connectionId?: String;
+    /**
+     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::\*:user/\*. To use resource-based permissions on supported AWS services, specify null.
      */
     credentials?: String;
     /**
@@ -2555,7 +2640,7 @@ declare namespace APIGateway {
      */
     requestTemplates?: MapOfStringToString;
     /**
-     *   Specifies how the method request body of an unmapped content type will be passed through the integration request to the back end without transformation. A content type is unmapped if no mapping template is defined in the integration or the content type does not match any of the mapped content types, as specified in requestTemplates. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER.    WHEN_NO_MATCH passes the method request body through the integration request to the back end without transformation when the method request content type does not match any content type associated with the mapping templates defined in the integration request.   WHEN_NO_TEMPLATES passes the method request body through the integration request to the back end without transformation when no mapping template is defined in the integration request. If a template is defined when this option is selected, the method request of an unmapped content-type will be rejected with an HTTP 415 Unsupported Media Type response.   NEVER rejects the method request with an HTTP 415 Unsupported Media Type response when either the method request content type does not match any content type associated with the mapping templates defined in the integration request or no mapping template is defined in the integration request.   
+     *   Specifies how the method request body of an unmapped content type will be passed through the integration request to the back end without transformation. A content type is unmapped if no mapping template is defined in the integration or the content type does not match any of the mapped content types, as specified in requestTemplates. The valid value is one of the following:    WHEN_NO_MATCH: passes the method request body through the integration request to the back end without transformation when the method request content type does not match any content type associated with the mapping templates defined in the integration request.   WHEN_NO_TEMPLATES: passes the method request body through the integration request to the back end without transformation when no mapping template is defined in the integration request. If a template is defined when this option is selected, the method request of an unmapped content-type will be rejected with an HTTP 415 Unsupported Media Type response.   NEVER: rejects the method request with an HTTP 415 Unsupported Media Type response when either the method request content type does not match any content type associated with the mapping templates defined in the integration request or no mapping template is defined in the integration request.   
      */
     passthroughBehavior?: String;
     /**
@@ -2628,6 +2713,7 @@ declare namespace APIGateway {
   export type ListOfUsage = ListOfLong[];
   export type ListOfUsagePlan = UsagePlan[];
   export type ListOfUsagePlanKey = UsagePlanKey[];
+  export type ListOfVpcLink = VpcLink[];
   export type LocationStatusType = "DOCUMENTED"|"UNDOCUMENTED"|string;
   export type Long = number;
   export type MapOfHeaderValues = {[key: string]: String};
@@ -2666,7 +2752,7 @@ declare namespace APIGateway {
      */
     operationName?: String;
     /**
-     * A key-value map defining required or optional method request parameters that can be accepted by Amazon API Gateway. A key is a method request parameter name matching the pattern of method.request.{location}.{name}, where location is querystring, path, or header and name is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (true) or optional (false). The method request parameter names defined here are available in Integration to be mapped to integration request parameters or templates.
+     * A key-value map defining required or optional method request parameters that can be accepted by API Gateway. A key is a method request parameter name matching the pattern of method.request.{location}.{name}, where location is querystring, path, or header and name is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (true) or optional (false). The method request parameter names defined here are available in Integration to be mapped to integration request parameters or templates.
      */
     requestParameters?: MapOfStringToBoolean;
     /**
@@ -2688,7 +2774,7 @@ declare namespace APIGateway {
      */
     statusCode?: StatusCode;
     /**
-     * A key-value map specifying required or optional response parameters that Amazon API Gateway can send back to the caller. A key defines a method response header and the value specifies whether the associated method response header is required or not. The expression of the key must match the pattern method.response.header.{name}, where name is a valid and unique header name. Amazon API Gateway passes certain integration response data to the method response headers specified here according to the mapping you prescribe in the API's IntegrationResponse. The integration response data that can be mapped include an integration response header expressed in integration.response.header.{name}, a static value enclosed within a pair of single quotes (e.g., 'application/json'), or a JSON expression from the back-end response payload in the form of integration.response.body.{JSON-expression}, where JSON-expression is a valid JSON expression without the $ prefix.)
+     * A key-value map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header and the value specifies whether the associated method response header is required or not. The expression of the key must match the pattern method.response.header.{name}, where name is a valid and unique header name. API Gateway passes certain integration response data to the method response headers specified here according to the mapping you prescribe in the API's IntegrationResponse. The integration response data that can be mapped include an integration response header expressed in integration.response.header.{name}, a static value enclosed within a pair of single quotes (e.g., 'application/json'), or a JSON expression from the back-end response payload in the form of integration.response.body.{JSON-expression}, where JSON-expression is a valid JSON expression without the $ prefix.)
      */
     responseParameters?: MapOfStringToBoolean;
     /**
@@ -2844,9 +2930,17 @@ declare namespace APIGateway {
      */
     integrationHttpMethod?: String;
     /**
-     * Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification. For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. Region, subdomain and service are used to determine the right endpoint. For AWS services that use the Action= query string parameter, service_api should be a valid action for the desired service. For RESTful AWS service APIs, path is used to indicate that the remaining substring in the URI should be treated as the path to the resource, including the initial /.
+     * Specifies Uniform Resource Identifier (URI) of the integration endpoint.   For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.    For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&amp;{p1}={v1}&amp;p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the uri can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&amp;Bucket={bucket}&amp;Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key} 
      */
     uri?: String;
+    /**
+     * The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and an network load balancer in a VPC. The default value is INTERNET.
+     */
+    connectionType?: ConnectionType;
+    /**
+     * The (id) of the VpcLink used for the integration when connectionType=VPC_LINK and undefined, otherwise.
+     */
+    connectionId?: String;
     /**
      * Specifies whether credentials are required for a put integration.
      */
@@ -2944,7 +3038,7 @@ declare namespace APIGateway {
      */
     operationName?: String;
     /**
-     * A key-value map defining required or optional method request parameters that can be accepted by Amazon API Gateway. A key defines a method request parameter name matching the pattern of method.request.{location}.{name}, where location is querystring, path, or header and name is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (true) or optional (false). The method request parameter names defined here are available in Integration to be mapped to integration request parameters or body-mapping templates.
+     * A key-value map defining required or optional method request parameters that can be accepted by API Gateway. A key defines a method request parameter name matching the pattern of method.request.{location}.{name}, where location is querystring, path, or header and name is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (true) or optional (false). The method request parameter names defined here are available in Integration to be mapped to integration request parameters or body-mapping templates.
      */
     requestParameters?: MapOfStringToBoolean;
     /**
@@ -2974,7 +3068,7 @@ declare namespace APIGateway {
      */
     statusCode: StatusCode;
     /**
-     * A key-value map specifying required or optional response parameters that Amazon API Gateway can send back to the caller. A key defines a method response header name and the associated value is a Boolean flag indicating whether the method response parameter is required or not. The method response header names must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The response parameter names defined here are available in the integration response to be mapped from an integration response header expressed in integration.response.header.{name}, a static value enclosed within a pair of single quotes (e.g., 'application/json'), or a JSON expression from the back-end response payload in the form of integration.response.body.{JSON-expression}, where JSON-expression is a valid JSON expression without the $ prefix.)
+     * A key-value map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header name and the associated value is a Boolean flag indicating whether the method response parameter is required or not. The method response header names must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The response parameter names defined here are available in the integration response to be mapped from an integration response header expressed in integration.response.header.{name}, a static value enclosed within a pair of single quotes (e.g., 'application/json'), or a JSON expression from the back-end response payload in the form of integration.response.body.{JSON-expression}, where JSON-expression is a valid JSON expression without the $ prefix.)
      */
     responseParameters?: MapOfStringToBoolean;
     /**
@@ -3076,7 +3170,7 @@ declare namespace APIGateway {
   }
   export interface RestApi {
     /**
-     * The API's identifier. This identifier is unique across all of your APIs in Amazon API Gateway.
+     * The API's identifier. This identifier is unique across all of your APIs in API Gateway.
      */
     id?: String;
     /**
@@ -3186,7 +3280,7 @@ declare namespace APIGateway {
      */
     clientCertificateId?: String;
     /**
-     * The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to Amazon API Gateway.
+     * The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to API Gateway.
      */
     stageName?: String;
     /**
@@ -3294,7 +3388,7 @@ declare namespace APIGateway {
      */
     clientStatus?: Integer;
     /**
-     * The Amazon API Gateway execution log for the test authorizer request.
+     * The API Gateway execution log for the test authorizer request.
      */
     log?: String;
     /**
@@ -3363,7 +3457,7 @@ declare namespace APIGateway {
      */
     headers?: MapOfHeaderValues;
     /**
-     * The Amazon API Gateway execution log for the test invoke request.
+     * The API Gateway execution log for the test invoke request.
      */
     log?: String;
     /**
@@ -3673,6 +3767,16 @@ declare namespace APIGateway {
      */
     patchOperations?: ListOfPatchOperation;
   }
+  export interface UpdateVpcLinkRequest {
+    /**
+     * [Required] The identifier of the VpcLink. It is used in an Integration to reference this VpcLink.
+     */
+    vpcLinkId: String;
+    /**
+     * A list of update operations to be applied to the specified resource and in the order specified in this list.
+     */
+    patchOperations?: ListOfPatchOperation;
+  }
   export interface Usage {
     /**
      * The plan Id associated with this usage data.
@@ -3753,6 +3857,40 @@ declare namespace APIGateway {
      * The current page of elements from this collection.
      */
     items?: ListOfUsagePlan;
+  }
+  export interface VpcLink {
+    /**
+     * The identifier of the VpcLink. It is used in an Integration to reference this VpcLink.
+     */
+    id?: String;
+    /**
+     * The name used to label and identify the VPC link.
+     */
+    name?: String;
+    /**
+     * The description of the VPC link.
+     */
+    description?: String;
+    /**
+     * The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.
+     */
+    targetArns?: ListOfString;
+    /**
+     * The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING, or FAILED. Deploying an API will wait if the status is PENDING and will fail if the status is DELETING. 
+     */
+    status?: VpcLinkStatus;
+    /**
+     * A description about the VPC link status.
+     */
+    statusMessage?: String;
+  }
+  export type VpcLinkStatus = "AVAILABLE"|"PENDING"|"DELETING"|"FAILED"|string;
+  export interface VpcLinks {
+    position?: String;
+    /**
+     * The current page of elements from this collection.
+     */
+    items?: ListOfVpcLink;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

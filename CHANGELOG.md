@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.160.0-->
+<!--LATEST=2.161.0-->
 <!--ENTRYINSERT-->
+
+## 2.161.0
+* feature: APIGateway: Added support Private Integration and VPC Link features in API Gateway. This allows to create an API with the API Gateway private integration, thus providing clients access to HTTP/HTTPS resources in an Amazon VPC from outside of the VPC through a VpcLink resource.
+* feature: AlexaForBusiness: Alexa for Business is now generally available for production use. Alexa for Business makes it easy for you to use Alexa in your organization. The Alexa for Business SDK gives you APIs to manage Alexa devices, enroll users, and assign skills at scale. For more information about Alexa for Business, go to https://aws.amazon.com/alexaforbusiness 
+* feature: Cloud9: Adds support for creating and managing AWS Cloud9 development environments. AWS Cloud9 is a cloud-based integrated development environment (IDE) that you use to write, run, and debug code.
+* feature: EC2: Adds the following updates: 1. Spread Placement ensures that instances are placed on distinct hardware in order to reduce correlated failures. 2. Inter-region VPC Peering allows customers to peer VPCs across different AWS regions without requiring additional gateways, VPN connections or physical hardware 
+* feature: Lambda: AWS Lambda now supports the ability to set the concurrency limits for individual functions, and increasing memory to 3008 GB.
+* feature: ServerlessApplicationRepository: First release of the AWS Serverless Application Repository SDK
 
 ## 2.160.0
 * feature: AutoScaling: You can now use Auto Scaling with EC2 Launch Templates via the CreateAutoScalingGroup and UpdateAutoScalingGroup APIs.

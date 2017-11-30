@@ -124,5 +124,8 @@ module.exports = {
   SageMakerRuntime: require('./sagemakerruntime'),
   SageMaker: require('./sagemaker'),
   Translate: require('./translate'),
-  ResourceGroups: require('./resourcegroups')
+  ResourceGroups: require('./resourcegroups'),
+  AlexaForBusiness: require('./alexaforbusiness'),
+  Cloud9: require('./cloud9'),
+  ServerlessApplicationRepository: require('./serverlessapplicationrepository')
 };
