@@ -22,7 +22,7 @@
     {
         "type": "feature",
         "category": "Lambda",
-        "description": "AWS Lambda now supports the ability to set the concurrency limits for individual functions, and increasing memory to 3008 GB."
+        "description": "AWS Lambda now supports the ability to set the concurrency limits for individual functions, and increasing memory to 3 GB."
     },
     {
         "type": "feature",
