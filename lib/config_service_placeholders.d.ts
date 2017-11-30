@@ -124,6 +124,7 @@ export abstract class ConfigurationServicePlaceholders {
   sagemakerruntime?: AWS.SageMakerRuntime.Types.ClientConfiguration;
   sagemaker?: AWS.SageMaker.Types.ClientConfiguration;
   translate?: AWS.Translate.Types.ClientConfiguration;
+  resourcegroups?: AWS.ResourceGroups.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -250,4 +251,5 @@ export interface ConfigurationServiceApiVersions {
   sagemakerruntime?: AWS.SageMakerRuntime.Types.apiVersion;
   sagemaker?: AWS.SageMaker.Types.apiVersion;
   translate?: AWS.Translate.Types.apiVersion;
+  resourcegroups?: AWS.ResourceGroups.Types.apiVersion;
 }

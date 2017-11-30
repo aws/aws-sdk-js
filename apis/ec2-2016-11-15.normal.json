@@ -1230,6 +1230,16 @@
       "output":{"shape":"InstanceAttribute"},
       "documentation":"<p>Describes the specified attribute of the specified instance. You can specify only one attribute at a time. Valid attribute values are: <code>instanceType</code> | <code>kernel</code> | <code>ramdisk</code> | <code>userData</code> | <code>disableApiTermination</code> | <code>instanceInitiatedShutdownBehavior</code> | <code>rootDeviceName</code> | <code>blockDeviceMapping</code> | <code>productCodes</code> | <code>sourceDestCheck</code> | <code>groupSet</code> | <code>ebsOptimized</code> | <code>sriovNetSupport</code> </p>"
     },
+    "DescribeInstanceCreditSpecifications":{
+      "name":"DescribeInstanceCreditSpecifications",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeInstanceCreditSpecificationsRequest"},
+      "output":{"shape":"DescribeInstanceCreditSpecificationsResult"},
+      "documentation":"<p>Describes the credit option for CPU usage of one or more of your T2 instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns only the T2 instances with the <code>unlimited</code> credit option. If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 instance, an error is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html\">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
     "DescribeInstanceStatus":{
       "name":"DescribeInstanceStatus",
       "http":{
@@ -2077,6 +2087,16 @@
       },
       "input":{"shape":"ModifyInstanceAttributeRequest"},
       "documentation":"<p>Modifies the specified attribute of the specified instance. You can specify only one attribute at a time.</p> <p>To modify some attributes, the instance must be stopped. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html\">Modifying Attributes of a Stopped Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "ModifyInstanceCreditSpecification":{
+      "name":"ModifyInstanceCreditSpecification",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyInstanceCreditSpecificationRequest"},
+      "output":{"shape":"ModifyInstanceCreditSpecificationResult"},
+      "documentation":"<p>Modifies the credit option for CPU usage on a running or stopped T2 instance. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html\">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "ModifyInstancePlacement":{
       "name":"ModifyInstancePlacement",
@@ -6046,6 +6066,7 @@
     },
     "CreditSpecificationRequest":{
       "type":"structure",
+      "required":["CpuCredits"],
       "members":{
         "CpuCredits":{
           "shape":"String",
@@ -7723,6 +7744,48 @@
         }
       },
       "documentation":"<p>Contains the parameters for DescribeInstanceAttribute.</p>"
+    },
+    "DescribeInstanceCreditSpecificationsRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>instance-id</code> - The ID of the instance.</p> </li> </ul>",
+          "locationName":"Filter"
+        },
+        "InstanceIds":{
+          "shape":"InstanceIdStringList",
+          "documentation":"<p>One or more instance IDs.</p> <p>Default: Describes all your instances.</p> <p>Constraints: Maximum 1000 explicitly specified instance IDs.</p>",
+          "locationName":"InstanceId"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.</p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to retrieve the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeInstanceCreditSpecificationsResult":{
+      "type":"structure",
+      "members":{
+        "InstanceCreditSpecifications":{
+          "shape":"InstanceCreditSpecificationList",
+          "documentation":"<p>Information about the credit option for CPU usage of an instance.</p>",
+          "locationName":"instanceCreditSpecificationSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName":"nextToken"
+        }
+      }
     },
     "DescribeInstanceStatusRequest":{
       "type":"structure",
@@ -13177,6 +13240,50 @@
         "locationName":"item"
       }
     },
+    "InstanceCreditSpecification":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance.</p>",
+          "locationName":"instanceId"
+        },
+        "CpuCredits":{
+          "shape":"String",
+          "documentation":"<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>",
+          "locationName":"cpuCredits"
+        }
+      },
+      "documentation":"<p>Describes the credit option for CPU usage of a T2 instance. </p>"
+    },
+    "InstanceCreditSpecificationList":{
+      "type":"list",
+      "member":{
+        "shape":"InstanceCreditSpecification",
+        "locationName":"item"
+      }
+    },
+    "InstanceCreditSpecificationListRequest":{
+      "type":"list",
+      "member":{
+        "shape":"InstanceCreditSpecificationRequest",
+        "locationName":"item"
+      }
+    },
+    "InstanceCreditSpecificationRequest":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance.</p>"
+        },
+        "CpuCredits":{
+          "shape":"String",
+          "documentation":"<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>"
+        }
+      },
+      "documentation":"<p>Describes the credit option for CPU usage of a T2 instance.</p>"
+    },
     "InstanceExportDetails":{
       "type":"structure",
       "members":{
@@ -13828,7 +13935,17 @@
         "d2.4xlarge",
         "d2.8xlarge",
         "f1.2xlarge",
-        "f1.16xlarge"
+        "f1.16xlarge",
+        "m5.large",
+        "m5.xlarge",
+        "m5.2xlarge",
+        "m5.4xlarge",
+        "m5.12xlarge",
+        "m5.24xlarge",
+        "h1.2xlarge",
+        "h1.4xlarge",
+        "h1.8xlarge",
+        "h1.16xlarge"
       ]
     },
     "InstanceTypeList":{
@@ -15298,6 +15415,40 @@
         }
       },
       "documentation":"<p>Contains the parameters for ModifyInstanceAttribute.</p>"
+    },
+    "ModifyInstanceCreditSpecificationRequest":{
+      "type":"structure",
+      "required":["InstanceCreditSpecifications"],
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ClientToken":{
+          "shape":"String",
+          "documentation":"<p>A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>"
+        },
+        "InstanceCreditSpecifications":{
+          "shape":"InstanceCreditSpecificationListRequest",
+          "documentation":"<p>Information about the credit option for CPU usage.</p>",
+          "locationName":"InstanceCreditSpecification"
+        }
+      }
+    },
+    "ModifyInstanceCreditSpecificationResult":{
+      "type":"structure",
+      "members":{
+        "SuccessfulInstanceCreditSpecifications":{
+          "shape":"SuccessfulInstanceCreditSpecificationSet",
+          "documentation":"<p>Information about the instances whose credit option for CPU usage was successfully modified.</p>",
+          "locationName":"successfulInstanceCreditSpecificationSet"
+        },
+        "UnsuccessfulInstanceCreditSpecifications":{
+          "shape":"UnsuccessfulInstanceCreditSpecificationSet",
+          "documentation":"<p>Information about the instances whose credit option for CPU usage was not modified.</p>",
+          "locationName":"unsuccessfulInstanceCreditSpecificationSet"
+        }
+      }
     },
     "ModifyInstancePlacementRequest":{
       "type":"structure",
@@ -19439,6 +19590,10 @@
         "InstanceMarketOptions":{
           "shape":"InstanceMarketOptionsRequest",
           "documentation":"<p>The market (purchasing) option for the instances.</p>"
+        },
+        "CreditSpecification":{
+          "shape":"CreditSpecificationRequest",
+          "documentation":"<p>The credit option for CPU usage of the instance. Valid values are <code>standard</code> and <code>unlimited</code>. To change this attribute after launch, use <a>ModifyInstanceCreditSpecification</a>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html\">T2 Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>standard</code> </p>"
         }
       },
       "documentation":"<p>Contains the parameters for RunInstances.</p>"
@@ -21466,6 +21621,24 @@
         "available"
       ]
     },
+    "SuccessfulInstanceCreditSpecificationItem":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance.</p>",
+          "locationName":"instanceId"
+        }
+      },
+      "documentation":"<p>Describes the T2 instance whose credit option for CPU usage was successfully modified.</p>"
+    },
+    "SuccessfulInstanceCreditSpecificationSet":{
+      "type":"list",
+      "member":{
+        "shape":"SuccessfulInstanceCreditSpecificationItem",
+        "locationName":"item"
+      }
+    },
     "SummaryStatus":{
       "type":"string",
       "enum":[
@@ -21788,6 +21961,54 @@
         }
       },
       "documentation":"<p>Contains the output of UnmonitorInstances.</p>"
+    },
+    "UnsuccessfulInstanceCreditSpecificationErrorCode":{
+      "type":"string",
+      "enum":[
+        "InvalidInstanceID.Malformed",
+        "InvalidInstanceID.NotFound",
+        "IncorrectInstanceState",
+        "InstanceCreditSpecification.NotSupported"
+      ]
+    },
+    "UnsuccessfulInstanceCreditSpecificationItem":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance.</p>",
+          "locationName":"instanceId"
+        },
+        "Error":{
+          "shape":"UnsuccessfulInstanceCreditSpecificationItemError",
+          "documentation":"<p>The applicable error for the T2 instance whose credit option for CPU usage was not modified.</p>",
+          "locationName":"error"
+        }
+      },
+      "documentation":"<p>Describes the T2 instance whose credit option for CPU usage was not modified.</p>"
+    },
+    "UnsuccessfulInstanceCreditSpecificationItemError":{
+      "type":"structure",
+      "members":{
+        "Code":{
+          "shape":"UnsuccessfulInstanceCreditSpecificationErrorCode",
+          "documentation":"<p>The error code.</p>",
+          "locationName":"code"
+        },
+        "Message":{
+          "shape":"String",
+          "documentation":"<p>The applicable error message.</p>",
+          "locationName":"message"
+        }
+      },
+      "documentation":"<p>Information about the error for the T2 instance whose credit option for CPU usage was not modified.</p>"
+    },
+    "UnsuccessfulInstanceCreditSpecificationSet":{
+      "type":"list",
+      "member":{
+        "shape":"UnsuccessfulInstanceCreditSpecificationItem",
+        "locationName":"item"
+      }
     },
     "UnsuccessfulItem":{
       "type":"structure",

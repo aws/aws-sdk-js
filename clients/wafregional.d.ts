@@ -76,6 +76,14 @@ declare class WAFRegional extends Service {
    */
   createRule(callback?: (err: AWSError, data: WAFRegional.Types.CreateRuleResponse) => void): Request<WAFRegional.Types.CreateRuleResponse, AWSError>;
   /**
+   * Creates a RuleGroup. A rule group is a collection of predefined rules that you add to a web ACL. You use UpdateRuleGroup to add rules to the rule group. Rule groups are subject to the following limits:   Three rule groups per account. You can request an increase to this limit by contacting customer support.   One rule group per web ACL.   Ten rules per rule group.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createRuleGroup(params: WAFRegional.Types.CreateRuleGroupRequest, callback?: (err: AWSError, data: WAFRegional.Types.CreateRuleGroupResponse) => void): Request<WAFRegional.Types.CreateRuleGroupResponse, AWSError>;
+  /**
+   * Creates a RuleGroup. A rule group is a collection of predefined rules that you add to a web ACL. You use UpdateRuleGroup to add rules to the rule group. Rule groups are subject to the following limits:   Three rule groups per account. You can request an increase to this limit by contacting customer support.   One rule group per web ACL.   Ten rules per rule group.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  createRuleGroup(callback?: (err: AWSError, data: WAFRegional.Types.CreateRuleGroupResponse) => void): Request<WAFRegional.Types.CreateRuleGroupResponse, AWSError>;
+  /**
    * Creates a SizeConstraintSet. You then use UpdateSizeConstraintSet to identify the part of a web request that you want AWS WAF to check for length, such as the length of the User-Agent header or the length of the query string. For example, you can create a SizeConstraintSet that matches any requests that have a query string that is longer than 100 bytes. You can then configure AWS WAF to reject those requests. To create and configure a SizeConstraintSet, perform the following steps:   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a CreateSizeConstraintSet request.   Submit a CreateSizeConstraintSet request.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateSizeConstraintSet request.   Submit an UpdateSizeConstraintSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   createSizeConstraintSet(params: WAFRegional.Types.CreateSizeConstraintSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.CreateSizeConstraintSetResponse) => void): Request<WAFRegional.Types.CreateSizeConstraintSetResponse, AWSError>;
@@ -163,6 +171,14 @@ declare class WAFRegional extends Service {
    * Permanently deletes a Rule. You can't delete a Rule if it's still used in any WebACL objects or if it still includes any predicates, such as ByteMatchSet objects. If you just want to remove a Rule from a WebACL, use UpdateWebACL. To permanently delete a Rule from AWS WAF, perform the following steps:   Update the Rule to remove predicates, if any. For more information, see UpdateRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRule request.   Submit a DeleteRule request.  
    */
   deleteRule(callback?: (err: AWSError, data: WAFRegional.Types.DeleteRuleResponse) => void): Request<WAFRegional.Types.DeleteRuleResponse, AWSError>;
+  /**
+   * Permanently deletes a RuleGroup. You can't delete a RuleGroup if it's still used in any WebACL objects or if it still includes any rules. If you just want to remove a RuleGroup from a WebACL, use UpdateWebACL. To permanently delete a RuleGroup from AWS WAF, perform the following steps:   Update the RuleGroup to remove rules, if any. For more information, see UpdateRuleGroup.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRuleGroup request.   Submit a DeleteRuleGroup request.  
+   */
+  deleteRuleGroup(params: WAFRegional.Types.DeleteRuleGroupRequest, callback?: (err: AWSError, data: WAFRegional.Types.DeleteRuleGroupResponse) => void): Request<WAFRegional.Types.DeleteRuleGroupResponse, AWSError>;
+  /**
+   * Permanently deletes a RuleGroup. You can't delete a RuleGroup if it's still used in any WebACL objects or if it still includes any rules. If you just want to remove a RuleGroup from a WebACL, use UpdateWebACL. To permanently delete a RuleGroup from AWS WAF, perform the following steps:   Update the RuleGroup to remove rules, if any. For more information, see UpdateRuleGroup.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRuleGroup request.   Submit a DeleteRuleGroup request.  
+   */
+  deleteRuleGroup(callback?: (err: AWSError, data: WAFRegional.Types.DeleteRuleGroupResponse) => void): Request<WAFRegional.Types.DeleteRuleGroupResponse, AWSError>;
   /**
    * Permanently deletes a SizeConstraintSet. You can't delete a SizeConstraintSet if it's still used in any Rules or if it still includes any SizeConstraint objects (any filters). If you just want to remove a SizeConstraintSet from a Rule, use UpdateRule. To permanently delete a SizeConstraintSet, perform the following steps:   Update the SizeConstraintSet to remove filters, if any. For more information, see UpdateSizeConstraintSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteSizeConstraintSet request.   Submit a DeleteSizeConstraintSet request.  
    */
@@ -284,6 +300,14 @@ declare class WAFRegional extends Service {
    */
   getRule(callback?: (err: AWSError, data: WAFRegional.Types.GetRuleResponse) => void): Request<WAFRegional.Types.GetRuleResponse, AWSError>;
   /**
+   * Returns the RuleGroup that is specified by the RuleGroupId that you included in the GetRuleGroup request. To view the rules in a rule group, use ListActivatedRulesInRuleGroup.
+   */
+  getRuleGroup(params: WAFRegional.Types.GetRuleGroupRequest, callback?: (err: AWSError, data: WAFRegional.Types.GetRuleGroupResponse) => void): Request<WAFRegional.Types.GetRuleGroupResponse, AWSError>;
+  /**
+   * Returns the RuleGroup that is specified by the RuleGroupId that you included in the GetRuleGroup request. To view the rules in a rule group, use ListActivatedRulesInRuleGroup.
+   */
+  getRuleGroup(callback?: (err: AWSError, data: WAFRegional.Types.GetRuleGroupResponse) => void): Request<WAFRegional.Types.GetRuleGroupResponse, AWSError>;
+  /**
    * Gets detailed information about a specified number of requests--a sample--that AWS WAF randomly selects from among the first 5,000 requests that your AWS resource received during a time range that you choose. You can specify a sample size of up to 500 requests, and you can specify any time range in the previous three hours.  GetSampledRequests returns a time range, which is usually the time range that you specified. However, if your resource (such as a CloudFront distribution) received 5,000 requests before the specified time range elapsed, GetSampledRequests returns an updated time range. This new time range indicates the actual period during which AWS WAF selected the requests in the sample.
    */
   getSampledRequests(params: WAFRegional.Types.GetSampledRequestsRequest, callback?: (err: AWSError, data: WAFRegional.Types.GetSampledRequestsResponse) => void): Request<WAFRegional.Types.GetSampledRequestsResponse, AWSError>;
@@ -331,6 +355,14 @@ declare class WAFRegional extends Service {
    * Returns the XssMatchSet that is specified by XssMatchSetId.
    */
   getXssMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.GetXssMatchSetResponse) => void): Request<WAFRegional.Types.GetXssMatchSetResponse, AWSError>;
+  /**
+   * Returns an array of ActivatedRule objects.
+   */
+  listActivatedRulesInRuleGroup(params: WAFRegional.Types.ListActivatedRulesInRuleGroupRequest, callback?: (err: AWSError, data: WAFRegional.Types.ListActivatedRulesInRuleGroupResponse) => void): Request<WAFRegional.Types.ListActivatedRulesInRuleGroupResponse, AWSError>;
+  /**
+   * Returns an array of ActivatedRule objects.
+   */
+  listActivatedRulesInRuleGroup(callback?: (err: AWSError, data: WAFRegional.Types.ListActivatedRulesInRuleGroupResponse) => void): Request<WAFRegional.Types.ListActivatedRulesInRuleGroupResponse, AWSError>;
   /**
    * Returns an array of ByteMatchSetSummary objects.
    */
@@ -388,6 +420,14 @@ declare class WAFRegional extends Service {
    */
   listResourcesForWebACL(callback?: (err: AWSError, data: WAFRegional.Types.ListResourcesForWebACLResponse) => void): Request<WAFRegional.Types.ListResourcesForWebACLResponse, AWSError>;
   /**
+   * Returns an array of RuleGroup objects.
+   */
+  listRuleGroups(params: WAFRegional.Types.ListRuleGroupsRequest, callback?: (err: AWSError, data: WAFRegional.Types.ListRuleGroupsResponse) => void): Request<WAFRegional.Types.ListRuleGroupsResponse, AWSError>;
+  /**
+   * Returns an array of RuleGroup objects.
+   */
+  listRuleGroups(callback?: (err: AWSError, data: WAFRegional.Types.ListRuleGroupsResponse) => void): Request<WAFRegional.Types.ListRuleGroupsResponse, AWSError>;
+  /**
    * Returns an array of RuleSummary objects.
    */
   listRules(params: WAFRegional.Types.ListRulesRequest, callback?: (err: AWSError, data: WAFRegional.Types.ListRulesResponse) => void): Request<WAFRegional.Types.ListRulesResponse, AWSError>;
@@ -411,6 +451,14 @@ declare class WAFRegional extends Service {
    * Returns an array of SqlInjectionMatchSet objects.
    */
   listSqlInjectionMatchSets(callback?: (err: AWSError, data: WAFRegional.Types.ListSqlInjectionMatchSetsResponse) => void): Request<WAFRegional.Types.ListSqlInjectionMatchSetsResponse, AWSError>;
+  /**
+   * Returns an array of RuleGroup objects that you are subscribed to.
+   */
+  listSubscribedRuleGroups(params: WAFRegional.Types.ListSubscribedRuleGroupsRequest, callback?: (err: AWSError, data: WAFRegional.Types.ListSubscribedRuleGroupsResponse) => void): Request<WAFRegional.Types.ListSubscribedRuleGroupsResponse, AWSError>;
+  /**
+   * Returns an array of RuleGroup objects that you are subscribed to.
+   */
+  listSubscribedRuleGroups(callback?: (err: AWSError, data: WAFRegional.Types.ListSubscribedRuleGroupsResponse) => void): Request<WAFRegional.Types.ListSubscribedRuleGroupsResponse, AWSError>;
   /**
    * Returns an array of WebACLSummary objects in the response.
    */
@@ -460,19 +508,19 @@ declare class WAFRegional extends Service {
    */
   updateRateBasedRule(callback?: (err: AWSError, data: WAFRegional.Types.UpdateRateBasedRuleResponse) => void): Request<WAFRegional.Types.UpdateRateBasedRuleResponse, AWSError>;
   /**
-   * Inserts or deletes RegexMatchSetUpdate objects (filters) in a RegexMatchSet. For each RegexMatchSetUpdate object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexMatchSetUpdate object, you delete the existing object and add a new one.   The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the User-Agent header.    The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see RegexPatternSet.    Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.    For example, you can create a RegexPatternSet that matches any requests with User-Agent headers that contain the string B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexMatchSet, perform the following steps:   Create a RegexMatchSet. For more information, see CreateRegexMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexMatchSet request.   Submit an UpdateRegexMatchSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the identifier of the RegexPatternSet that contain the regular expression patters you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   * Inserts or deletes RegexMatchTuple objects (filters) in a RegexMatchSet. For each RegexMatchSetUpdate object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexMatchSetUpdate object, you delete the existing object and add a new one.   The part of a web request that you want AWS WAF to inspectupdate, such as a query string or the value of the User-Agent header.    The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see RegexPatternSet.    Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.    For example, you can create a RegexPatternSet that matches any requests with User-Agent headers that contain the string B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexMatchSet, perform the following steps:   Create a RegexMatchSet. For more information, see CreateRegexMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexMatchSet request.   Submit an UpdateRegexMatchSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the identifier of the RegexPatternSet that contain the regular expression patters you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateRegexMatchSet(params: WAFRegional.Types.UpdateRegexMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.UpdateRegexMatchSetResponse) => void): Request<WAFRegional.Types.UpdateRegexMatchSetResponse, AWSError>;
   /**
-   * Inserts or deletes RegexMatchSetUpdate objects (filters) in a RegexMatchSet. For each RegexMatchSetUpdate object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexMatchSetUpdate object, you delete the existing object and add a new one.   The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the User-Agent header.    The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see RegexPatternSet.    Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.    For example, you can create a RegexPatternSet that matches any requests with User-Agent headers that contain the string B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexMatchSet, perform the following steps:   Create a RegexMatchSet. For more information, see CreateRegexMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexMatchSet request.   Submit an UpdateRegexMatchSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the identifier of the RegexPatternSet that contain the regular expression patters you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   * Inserts or deletes RegexMatchTuple objects (filters) in a RegexMatchSet. For each RegexMatchSetUpdate object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexMatchSetUpdate object, you delete the existing object and add a new one.   The part of a web request that you want AWS WAF to inspectupdate, such as a query string or the value of the User-Agent header.    The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see RegexPatternSet.    Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.    For example, you can create a RegexPatternSet that matches any requests with User-Agent headers that contain the string B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests. To create and configure a RegexMatchSet, perform the following steps:   Create a RegexMatchSet. For more information, see CreateRegexMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexMatchSet request.   Submit an UpdateRegexMatchSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the identifier of the RegexPatternSet that contain the regular expression patters you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateRegexMatchSet(callback?: (err: AWSError, data: WAFRegional.Types.UpdateRegexMatchSetResponse) => void): Request<WAFRegional.Types.UpdateRegexMatchSetResponse, AWSError>;
   /**
-   * Inserts or deletes RegexMatchSetUpdate objects (filters) in a RegexPatternSet. For each RegexPatternSet object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexPatternSet object, you delete the existing object and add a new one.   The regular expression pattern that you want AWS WAF to look for. For more information, see RegexPatternSet.     For example, you can create a RegexPatternString such as B[a@]dB[o0]t. AWS WAF will match this RegexPatternString to:   BadBot   BadB0t   B@dBot   B@dB0t   To create and configure a RegexPatternSet, perform the following steps:   Create a RegexPatternSet. For more information, see CreateRegexPatternSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexPatternSet request.   Submit an UpdateRegexPatternSet request to specify the regular expression pattern that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   * Inserts or deletes RegexPatternString objects in a RegexPatternSet. For each RegexPatternString object, you specify the following values:    Whether to insert or delete the RegexPatternString.   The regular expression pattern that you want to insert or delete. For more information, see RegexPatternSet.     For example, you can create a RegexPatternString such as B[a@]dB[o0]t. AWS WAF will match this RegexPatternString to:   BadBot   BadB0t   B@dBot   B@dB0t   To create and configure a RegexPatternSet, perform the following steps:   Create a RegexPatternSet. For more information, see CreateRegexPatternSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexPatternSet request.   Submit an UpdateRegexPatternSet request to specify the regular expression pattern that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateRegexPatternSet(params: WAFRegional.Types.UpdateRegexPatternSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.UpdateRegexPatternSetResponse) => void): Request<WAFRegional.Types.UpdateRegexPatternSetResponse, AWSError>;
   /**
-   * Inserts or deletes RegexMatchSetUpdate objects (filters) in a RegexPatternSet. For each RegexPatternSet object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a RegexPatternSet object, you delete the existing object and add a new one.   The regular expression pattern that you want AWS WAF to look for. For more information, see RegexPatternSet.     For example, you can create a RegexPatternString such as B[a@]dB[o0]t. AWS WAF will match this RegexPatternString to:   BadBot   BadB0t   B@dBot   B@dB0t   To create and configure a RegexPatternSet, perform the following steps:   Create a RegexPatternSet. For more information, see CreateRegexPatternSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexPatternSet request.   Submit an UpdateRegexPatternSet request to specify the regular expression pattern that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   * Inserts or deletes RegexPatternString objects in a RegexPatternSet. For each RegexPatternString object, you specify the following values:    Whether to insert or delete the RegexPatternString.   The regular expression pattern that you want to insert or delete. For more information, see RegexPatternSet.     For example, you can create a RegexPatternString such as B[a@]dB[o0]t. AWS WAF will match this RegexPatternString to:   BadBot   BadB0t   B@dBot   B@dB0t   To create and configure a RegexPatternSet, perform the following steps:   Create a RegexPatternSet. For more information, see CreateRegexPatternSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRegexPatternSet request.   Submit an UpdateRegexPatternSet request to specify the regular expression pattern that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateRegexPatternSet(callback?: (err: AWSError, data: WAFRegional.Types.UpdateRegexPatternSetResponse) => void): Request<WAFRegional.Types.UpdateRegexPatternSetResponse, AWSError>;
   /**
@@ -483,6 +531,14 @@ declare class WAFRegional extends Service {
    * Inserts or deletes Predicate objects in a Rule. Each Predicate object identifies a predicate, such as a ByteMatchSet or an IPSet, that specifies the web requests that you want to allow, block, or count. If you add more than one predicate to a Rule, a request must match all of the specifications to be allowed, blocked, or counted. For example, suppose you add the following to a Rule:    A ByteMatchSet that matches the value BadBot in the User-Agent header   An IPSet that matches the IP address 192.0.2.44    You then add the Rule to a WebACL and specify that you want to block requests that satisfy the Rule. For a request to be blocked, the User-Agent header in the request must contain the value BadBot and the request must originate from the IP address 192.0.2.44. To create and configure a Rule, perform the following steps:   Create and update the predicates that you want to include in the Rule.   Create the Rule. See CreateRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRule request.   Submit an UpdateRule request to add predicates to the Rule.   Create and update a WebACL that contains the Rule. See CreateWebACL.   If you want to replace one ByteMatchSet or IPSet with another, you delete the existing one and add the new one. For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateRule(callback?: (err: AWSError, data: WAFRegional.Types.UpdateRuleResponse) => void): Request<WAFRegional.Types.UpdateRuleResponse, AWSError>;
+  /**
+   * Inserts or deletes ActivatedRule objects in a RuleGroup. You can only insert REGULAR rules into a rule group. You can have a maximum of ten rules per rule group. To create and configure a RuleGroup, perform the following steps:   Create and update the Rules that you want to include in the RuleGroup. See CreateRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRuleGroup request.   Submit an UpdateRuleGroup request to add Rules to the RuleGroup.   Create and update a WebACL that contains the RuleGroup. See CreateWebACL.   If you want to replace one Rule with another, you delete the existing one and add the new one. For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  updateRuleGroup(params: WAFRegional.Types.UpdateRuleGroupRequest, callback?: (err: AWSError, data: WAFRegional.Types.UpdateRuleGroupResponse) => void): Request<WAFRegional.Types.UpdateRuleGroupResponse, AWSError>;
+  /**
+   * Inserts or deletes ActivatedRule objects in a RuleGroup. You can only insert REGULAR rules into a rule group. You can have a maximum of ten rules per rule group. To create and configure a RuleGroup, perform the following steps:   Create and update the Rules that you want to include in the RuleGroup. See CreateRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateRuleGroup request.   Submit an UpdateRuleGroup request to add Rules to the RuleGroup.   Create and update a WebACL that contains the RuleGroup. See CreateWebACL.   If you want to replace one Rule with another, you delete the existing one and add the new one. For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
+   */
+  updateRuleGroup(callback?: (err: AWSError, data: WAFRegional.Types.UpdateRuleGroupResponse) => void): Request<WAFRegional.Types.UpdateRuleGroupResponse, AWSError>;
   /**
    * Inserts or deletes SizeConstraint objects (filters) in a SizeConstraintSet. For each SizeConstraint object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a SizeConstraintSetUpdate object, you delete the existing object and add a new one.   The part of a web request that you want AWS WAF to evaluate, such as the length of a query string or the length of the User-Agent header.   Whether to perform any transformations on the request, such as converting it to lowercase, before checking its length. Note that transformations of the request body are not supported because the AWS resource forwards only the first 8192 bytes of your request to AWS WAF.   A ComparisonOperator used for evaluating the selected part of the request against the specified Size, such as equals, greater than, less than, and so on.   The length, in bytes, that you want AWS WAF to watch for in selected part of the request. The length is computed after applying the transformation.   For example, you can add a SizeConstraintSetUpdate object that matches web requests in which the length of the User-Agent header is greater than 100 bytes. You can then configure AWS WAF to block those requests. To create and configure a SizeConstraintSet, perform the following steps:   Create a SizeConstraintSet. For more information, see CreateSizeConstraintSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateSizeConstraintSet request.   Submit an UpdateSizeConstraintSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
@@ -528,11 +584,15 @@ declare namespace WAFRegional {
      */
     RuleId: ResourceId;
     /**
-     * Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. Valid values for Action include the following:    ALLOW: CloudFront responds with the requested object.    BLOCK: CloudFront responds with an HTTP 403 (Forbidden) status code.    COUNT: AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL.   
+     * Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. Valid values for Action include the following:    ALLOW: CloudFront responds with the requested object.    BLOCK: CloudFront responds with an HTTP 403 (Forbidden) status code.    COUNT: AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL.    The Action data type within ActivatedRule is used only when submitting an UpdateWebACL request. ActivatedRule|Action is not applicable and therefore not available for UpdateRuleGroup.
      */
-    Action: WafAction;
+    Action?: WafAction;
     /**
-     * The rule type, either REGULAR, as defined by Rule, or RATE_BASED, as defined by RateBasedRule. The default is REGULAR. Although this field is optional, be aware that if you try to add a RATE_BASED rule to a web ACL without setting the type, the UpdateWebACL request will fail because the request tries to add a REGULAR rule with the specified ID, which does not exist. 
+     * Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can potentially block a request. If you set the OverrideAction to None, the RuleGroup will block a request if any individual rule in the RuleGroup matches the request and is configured to block that request. However if you first want to test the RuleGroup, set the OverrideAction to Count. The RuleGroup will then override any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests will be counted. You can view a record of counted requests using GetSampledRequests.  The OverrideAction data type within ActivatedRule is used only when submitting an UpdateRuleGroup request. ActivatedRule|OverrideAction is not applicable and therefore not available for UpdateWebACL.
+     */
+    OverrideAction?: WafOverrideAction;
+    /**
+     * The rule type, either REGULAR, as defined by Rule, RATE_BASED, as defined by RateBasedRule, or GROUP, as defined by RuleGroup. The default is REGULAR. Although this field is optional, be aware that if you try to add a RATE_BASED rule to a web ACL without setting the type, the UpdateWebACL request will fail because the request tries to add a REGULAR rule with the specified ID, which does not exist. 
      */
     Type?: WafRuleType;
   }
@@ -742,6 +802,30 @@ declare namespace WAFRegional {
      */
     ChangeToken?: ChangeToken;
   }
+  export interface CreateRuleGroupRequest {
+    /**
+     * A friendly name or description of the RuleGroup. You can't change Name after you create a RuleGroup.
+     */
+    Name: ResourceName;
+    /**
+     * A friendly name or description for the metrics for this RuleGroup. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the RuleGroup.
+     */
+    MetricName: MetricName;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface CreateRuleGroupResponse {
+    /**
+     * An empty RuleGroup.
+     */
+    RuleGroup?: RuleGroup;
+    /**
+     * The ChangeToken that you used to submit the CreateRuleGroup request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
   export interface CreateRuleRequest {
     /**
      * A friendly name or description of the Rule. You can't change the name of a Rule after you create it.
@@ -947,6 +1031,22 @@ declare namespace WAFRegional {
   export interface DeleteRegexPatternSetResponse {
     /**
      * The ChangeToken that you used to submit the DeleteRegexPatternSet request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
+  export interface DeleteRuleGroupRequest {
+    /**
+     * The RuleGroupId of the RuleGroup that you want to delete. RuleGroupId is returned by CreateRuleGroup and by ListRuleGroups.
+     */
+    RuleGroupId: ResourceId;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface DeleteRuleGroupResponse {
+    /**
+     * The ChangeToken that you used to submit the DeleteRuleGroup request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
      */
     ChangeToken?: ChangeToken;
   }
@@ -1209,6 +1309,18 @@ declare namespace WAFRegional {
      */
     RegexPatternSet?: RegexPatternSet;
   }
+  export interface GetRuleGroupRequest {
+    /**
+     * The RuleGroupId of the RuleGroup that you want to get. RuleGroupId is returned by CreateRuleGroup and by ListRuleGroups.
+     */
+    RuleGroupId: ResourceId;
+  }
+  export interface GetRuleGroupResponse {
+    /**
+     * Information about the RuleGroup that you specified in the GetRuleGroup request. 
+     */
+    RuleGroup?: RuleGroup;
+  }
   export interface GetRuleRequest {
     /**
      * The RuleId of the Rule that you want to get. RuleId is returned by CreateRule and by ListRules.
@@ -1228,7 +1340,7 @@ declare namespace WAFRegional {
      */
     WebAclId: ResourceId;
     /**
-     *  RuleId is one of two values:   The RuleId of the Rule for which you want GetSampledRequests to return a sample of requests.    Default_Action, which causes GetSampledRequests to return a sample of the requests that didn't match any of the rules in the specified WebACL.  
+     *  RuleId is one of three values:   The RuleId of the Rule or the RuleGroupId of the RuleGroup for which you want GetSampledRequests to return a sample of requests.    Default_Action, which causes GetSampledRequests to return a sample of the requests that didn't match any of the rules in the specified WebACL.  
      */
     RuleId: ResourceId;
     /**
@@ -1405,6 +1517,30 @@ declare namespace WAFRegional {
   }
   export type IPSetUpdates = IPSetUpdate[];
   export type IPString = string;
+  export interface ListActivatedRulesInRuleGroupRequest {
+    /**
+     * The RuleGroupId of the RuleGroup for which you want to get a list of ActivatedRule objects.
+     */
+    RuleGroupId?: ResourceId;
+    /**
+     * If you specify a value for Limit and you have more ActivatedRules than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of ActivatedRules. For the second and subsequent ListActivatedRulesInRuleGroup requests, specify the value of NextMarker from the previous response to get information about another batch of ActivatedRules.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * Specifies the number of ActivatedRules that you want AWS WAF to return for this request. If you have more ActivatedRules than the number that you specify for Limit, the response includes a NextMarker value that you can use to get another batch of ActivatedRules.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListActivatedRulesInRuleGroupResponse {
+    /**
+     * If you have more ActivatedRules than the number that you specified for Limit in the request, the response includes a NextMarker value. To list more ActivatedRules, submit another ListActivatedRulesInRuleGroup request, and specify the NextMarker value from the response in the NextMarker value in the next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * An array of ActivatedRules objects.
+     */
+    ActivatedRules?: ActivatedRules;
+  }
   export interface ListByteMatchSetsRequest {
     /**
      * If you specify a value for Limit and you have more ByteMatchSets than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of ByteMatchSets. For the second and subsequent ListByteMatchSets requests, specify the value of NextMarker from the previous response to get information about another batch of ByteMatchSets.
@@ -1537,6 +1673,26 @@ declare namespace WAFRegional {
      */
     ResourceArns?: ResourceArns;
   }
+  export interface ListRuleGroupsRequest {
+    /**
+     * If you specify a value for Limit and you have more RuleGroups than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of RuleGroups. For the second and subsequent ListRuleGroups requests, specify the value of NextMarker from the previous response to get information about another batch of RuleGroups.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * Specifies the number of RuleGroups that you want AWS WAF to return for this request. If you have more RuleGroups than the number that you specify for Limit, the response includes a NextMarker value that you can use to get another batch of RuleGroups.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListRuleGroupsResponse {
+    /**
+     * If you have more RuleGroups than the number that you specified for Limit in the request, the response includes a NextMarker value. To list more RuleGroups, submit another ListRuleGroups request, and specify the NextMarker value from the response in the NextMarker value in the next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * An array of RuleGroup objects.
+     */
+    RuleGroups?: RuleGroupSummaries;
+  }
   export interface ListRulesRequest {
     /**
      * If you specify a value for Limit and you have more Rules than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of Rules. For the second and subsequent ListRules requests, specify the value of NextMarker from the previous response to get information about another batch of Rules.
@@ -1597,6 +1753,26 @@ declare namespace WAFRegional {
      */
     SqlInjectionMatchSets?: SqlInjectionMatchSetSummaries;
   }
+  export interface ListSubscribedRuleGroupsRequest {
+    /**
+     * If you specify a value for Limit and you have more ByteMatchSetssubscribed rule groups than the value of Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of subscribed rule groups. For the second and subsequent ListSubscribedRuleGroupsRequest requests, specify the value of NextMarker from the previous response to get information about another batch of subscribed rule groups.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * Specifies the number of subscribed rule groups that you want AWS WAF to return for this request. If you have more objects than the number you specify for Limit, the response includes a NextMarker value that you can use to get another batch of objects.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListSubscribedRuleGroupsResponse {
+    /**
+     * If you have more objects than the number that you specified for Limit in the request, the response includes a NextMarker value. To list more objects, submit another ListSubscribedRuleGroups request, and specify the NextMarker value from the response in the NextMarker value in the next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * An array of RuleGroup objects.
+     */
+    RuleGroups?: SubscribedRuleGroupSummaries;
+  }
   export interface ListWebACLsRequest {
     /**
      * If you specify a value for Limit and you have more WebACL objects than the number that you specify for Limit, AWS WAF returns a NextMarker value in the response that allows you to list another group of WebACL objects. For the second and subsequent ListWebACLs requests, specify the value of NextMarker from the previous response to get information about another batch of WebACL objects.
@@ -1645,7 +1821,7 @@ declare namespace WAFRegional {
   export type Negated = boolean;
   export type NextMarker = string;
   export type PaginationLimit = number;
-  export type ParameterExceptionField = "CHANGE_ACTION"|"WAF_ACTION"|"PREDICATE_TYPE"|"IPSET_TYPE"|"BYTE_MATCH_FIELD_TYPE"|"SQL_INJECTION_MATCH_FIELD_TYPE"|"BYTE_MATCH_TEXT_TRANSFORMATION"|"BYTE_MATCH_POSITIONAL_CONSTRAINT"|"SIZE_CONSTRAINT_COMPARISON_OPERATOR"|"GEO_MATCH_LOCATION_TYPE"|"GEO_MATCH_LOCATION_VALUE"|"RATE_KEY"|"RULE_TYPE"|"NEXT_MARKER"|string;
+  export type ParameterExceptionField = "CHANGE_ACTION"|"WAF_ACTION"|"WAF_OVERRIDE_ACTION"|"PREDICATE_TYPE"|"IPSET_TYPE"|"BYTE_MATCH_FIELD_TYPE"|"SQL_INJECTION_MATCH_FIELD_TYPE"|"BYTE_MATCH_TEXT_TRANSFORMATION"|"BYTE_MATCH_POSITIONAL_CONSTRAINT"|"SIZE_CONSTRAINT_COMPARISON_OPERATOR"|"GEO_MATCH_LOCATION_TYPE"|"GEO_MATCH_LOCATION_VALUE"|"RATE_KEY"|"RULE_TYPE"|"NEXT_MARKER"|string;
   export type ParameterExceptionParameter = string;
   export type ParameterExceptionReason = "INVALID_OPTION"|"ILLEGAL_COMBINATION"|string;
   export type PopulationSize = number;
@@ -1805,6 +1981,42 @@ declare namespace WAFRegional {
      */
     Predicates: Predicates;
   }
+  export interface RuleGroup {
+    /**
+     * A unique identifier for a RuleGroup. You use RuleGroupId to get more information about a RuleGroup (see GetRuleGroup), update a RuleGroup (see UpdateRuleGroup), insert a RuleGroup into a WebACL or delete a one from a WebACL (see UpdateWebACL), or delete a RuleGroup from AWS WAF (see DeleteRuleGroup).  RuleGroupId is returned by CreateRuleGroup and by ListRuleGroups.
+     */
+    RuleGroupId: ResourceId;
+    /**
+     * The friendly name or description for the RuleGroup. You can't change the name of a RuleGroup after you create it.
+     */
+    Name?: ResourceName;
+    /**
+     * A friendly name or description for the metrics for this RuleGroup. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the RuleGroup.
+     */
+    MetricName?: MetricName;
+  }
+  export type RuleGroupSummaries = RuleGroupSummary[];
+  export interface RuleGroupSummary {
+    /**
+     * A unique identifier for a RuleGroup. You use RuleGroupId to get more information about a RuleGroup (see GetRuleGroup), update a RuleGroup (see UpdateRuleGroup), insert a RuleGroup into a WebACL or delete one from a WebACL (see UpdateWebACL), or delete a RuleGroup from AWS WAF (see DeleteRuleGroup).  RuleGroupId is returned by CreateRuleGroup and by ListRuleGroups.
+     */
+    RuleGroupId: ResourceId;
+    /**
+     * A friendly name or description of the RuleGroup. You can't change the name of a RuleGroup after you create it.
+     */
+    Name: ResourceName;
+  }
+  export interface RuleGroupUpdate {
+    /**
+     * Specify INSERT to add an ActivatedRule to a RuleGroup. Use DELETE to remove an ActivatedRule from a RuleGroup.
+     */
+    Action: ChangeAction;
+    /**
+     * The ActivatedRule object specifies a Rule that you want to insert or delete, the priority of the Rule in the WebACL, and the action that you want AWS WAF to take when a web request matches the Rule (ALLOW, BLOCK, or COUNT).
+     */
+    ActivatedRule: ActivatedRule;
+  }
+  export type RuleGroupUpdates = RuleGroupUpdate[];
   export type RulePriority = number;
   export type RuleSummaries = RuleSummary[];
   export interface RuleSummary {
@@ -1846,6 +2058,10 @@ declare namespace WAFRegional {
      * The action for the Rule that the request matched: ALLOW, BLOCK, or COUNT.
      */
     Action?: Action;
+    /**
+     * This value is returned if the GetSampledRequests request specifies the ID of a RuleGroup rather than the ID of an individual rule. RuleWithinRuleGroup is the rule within the specified RuleGroup that matched the request listed in the response.
+     */
+    RuleWithinRuleGroup?: ResourceId;
   }
   export type SampledHTTPRequests = SampledHTTPRequest[];
   export type Size = number;
@@ -1951,6 +2167,21 @@ declare namespace WAFRegional {
     TextTransformation: TextTransformation;
   }
   export type SqlInjectionMatchTuples = SqlInjectionMatchTuple[];
+  export type SubscribedRuleGroupSummaries = SubscribedRuleGroupSummary[];
+  export interface SubscribedRuleGroupSummary {
+    /**
+     * A unique identifier for a RuleGroup.
+     */
+    RuleGroupId: ResourceId;
+    /**
+     * A friendly name or description of the RuleGroup. You can't change the name of a RuleGroup after you create it.
+     */
+    Name: ResourceName;
+    /**
+     * A friendly name or description for the metrics for this RuleGroup. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the RuleGroup.
+     */
+    MetricName: MetricName;
+  }
   export type TextTransformation = "NONE"|"COMPRESS_WHITE_SPACE"|"HTML_ENTITY_DECODE"|"LOWERCASE"|"CMD_LINE"|"URL_DECODE"|string;
   export interface TimeWindow {
     /**
@@ -2088,6 +2319,26 @@ declare namespace WAFRegional {
      */
     ChangeToken?: ChangeToken;
   }
+  export interface UpdateRuleGroupRequest {
+    /**
+     * The RuleGroupId of the RuleGroup that you want to update. RuleGroupId is returned by CreateRuleGroup and by ListRuleGroups.
+     */
+    RuleGroupId: ResourceId;
+    /**
+     * An array of RuleGroupUpdate objects that you want to insert into or delete from a RuleGroup. You can only insert REGULAR rules into a rule group. The Action data type within ActivatedRule is used only when submitting an UpdateWebACL request. ActivatedRule|Action is not applicable and therefore not available for UpdateRuleGroup.
+     */
+    Updates: RuleGroupUpdates;
+    /**
+     * The value returned by the most recent call to GetChangeToken.
+     */
+    ChangeToken: ChangeToken;
+  }
+  export interface UpdateRuleGroupResponse {
+    /**
+     * The ChangeToken that you used to submit the UpdateRuleGroup request. You can also use this value to query the status of the request. For more information, see GetChangeTokenStatus.
+     */
+    ChangeToken?: ChangeToken;
+  }
   export interface UpdateRuleRequest {
     /**
      * The RuleId of the Rule that you want to update. RuleId is returned by CreateRule and by ListRules.
@@ -2158,7 +2409,7 @@ declare namespace WAFRegional {
      */
     ChangeToken: ChangeToken;
     /**
-     * An array of updates to make to the WebACL. An array of WebACLUpdate objects that you want to insert into or delete from a WebACL. For more information, see the applicable data types:    WebACLUpdate: Contains Action and ActivatedRule     ActivatedRule: Contains Action, Priority, RuleId, and Type     WafAction: Contains Type   
+     * An array of updates to make to the WebACL. An array of WebACLUpdate objects that you want to insert into or delete from a WebACL. For more information, see the applicable data types:    WebACLUpdate: Contains Action and ActivatedRule     ActivatedRule: Contains Action, Priority, RuleId, and Type. The OverrideAction data type within ActivatedRule is used only when submitting an UpdateRuleGroup request. ActivatedRule|OverrideAction is not applicable and therefore not available for UpdateWebACL.     WafAction: Contains Type   
      */
     Updates?: WebACLUpdates;
     /**
@@ -2199,7 +2450,14 @@ declare namespace WAFRegional {
     Type: WafActionType;
   }
   export type WafActionType = "BLOCK"|"ALLOW"|"COUNT"|string;
-  export type WafRuleType = "REGULAR"|"RATE_BASED"|string;
+  export interface WafOverrideAction {
+    /**
+     *  COUNT overrides the action specified by the individual rule within a RuleGroup . If set to NONE, the rule's action will take place.
+     */
+    Type: WafOverrideActionType;
+  }
+  export type WafOverrideActionType = "NONE"|"COUNT"|string;
+  export type WafRuleType = "REGULAR"|"RATE_BASED"|"GROUP"|string;
   export interface WebACL {
     /**
      * A unique identifier for a WebACL. You use WebACLId to get information about a WebACL (see GetWebACL), update a WebACL (see UpdateWebACL), and delete a WebACL from AWS WAF (see DeleteWebACL).  WebACLId is returned by CreateWebACL and by ListWebACLs.

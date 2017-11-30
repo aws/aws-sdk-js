@@ -50,6 +50,44 @@
       ],
       "documentation":"<p>Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.</p>"
     },
+    "AttachInstancesToLoadBalancer":{
+      "name":"AttachInstancesToLoadBalancer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachInstancesToLoadBalancerRequest"},
+      "output":{"shape":"AttachInstancesToLoadBalancerResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Attaches one or more Lightsail instances to a load balancer.</p>"
+    },
+    "AttachLoadBalancerTlsCertificate":{
+      "name":"AttachLoadBalancerTlsCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachLoadBalancerTlsCertificateRequest"},
+      "output":{"shape":"AttachLoadBalancerTlsCertificateResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>"
+    },
     "AttachStaticIp":{
       "name":"AttachStaticIp",
       "http":{
@@ -259,6 +297,44 @@
       ],
       "documentation":"<p>Creates sn SSH key pair.</p>"
     },
+    "CreateLoadBalancer":{
+      "name":"CreateLoadBalancer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateLoadBalancerRequest"},
+      "output":{"shape":"CreateLoadBalancerResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Creates a Lightsail load balancer.</p> <p>When you create a load balancer, you can specify certificates and port settings. You can create up to 5 load balancers per AWS Region in your account.</p>"
+    },
+    "CreateLoadBalancerTlsCertificate":{
+      "name":"CreateLoadBalancerTlsCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateLoadBalancerTlsCertificateRequest"},
+      "output":{"shape":"CreateLoadBalancerTlsCertificateResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Creates a Lightsail load balancer TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>"
+    },
     "DeleteDisk":{
       "name":"DeleteDisk",
       "http":{
@@ -392,6 +468,44 @@
       ],
       "documentation":"<p>Deletes a specific SSH key pair.</p>"
     },
+    "DeleteLoadBalancer":{
+      "name":"DeleteLoadBalancer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteLoadBalancerRequest"},
+      "output":{"shape":"DeleteLoadBalancerResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Deletes a Lightsail load balancer.</p>"
+    },
+    "DeleteLoadBalancerTlsCertificate":{
+      "name":"DeleteLoadBalancerTlsCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteLoadBalancerTlsCertificateRequest"},
+      "output":{"shape":"DeleteLoadBalancerTlsCertificateResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Deletes a TLS/SSL certificate associated with a Lightsail load balancer.</p>"
+    },
     "DetachDisk":{
       "name":"DetachDisk",
       "http":{
@@ -410,6 +524,25 @@
         {"shape":"UnauthenticatedException"}
       ],
       "documentation":"<p>Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.</p>"
+    },
+    "DetachInstancesFromLoadBalancer":{
+      "name":"DetachInstancesFromLoadBalancer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetachInstancesFromLoadBalancerRequest"},
+      "output":{"shape":"DetachInstancesFromLoadBalancerResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Detaches the specified instances from a Lightsail load balancer.</p>"
     },
     "DetachStaticIp":{
       "name":"DetachStaticIp",
@@ -810,6 +943,82 @@
       ],
       "documentation":"<p>Returns information about all key pairs in the user's account.</p>"
     },
+    "GetLoadBalancer":{
+      "name":"GetLoadBalancer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetLoadBalancerRequest"},
+      "output":{"shape":"GetLoadBalancerResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Returns information about the specified Lightsail load balancer.</p>"
+    },
+    "GetLoadBalancerMetricData":{
+      "name":"GetLoadBalancerMetricData",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetLoadBalancerMetricDataRequest"},
+      "output":{"shape":"GetLoadBalancerMetricDataResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Returns information about health metrics for your Lightsail load balancer.</p>"
+    },
+    "GetLoadBalancerTlsCertificates":{
+      "name":"GetLoadBalancerTlsCertificates",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetLoadBalancerTlsCertificatesRequest"},
+      "output":{"shape":"GetLoadBalancerTlsCertificatesResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Returns information about the TLS certificates that are associated with the specified Lightsail load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>"
+    },
+    "GetLoadBalancers":{
+      "name":"GetLoadBalancers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetLoadBalancersRequest"},
+      "output":{"shape":"GetLoadBalancersResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Returns information about all load balancers in an account.</p> <p>If you are describing a long list of load balancers, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.</p>"
+    },
     "GetOperation":{
       "name":"GetOperation",
       "http":{
@@ -1132,6 +1341,25 @@
         {"shape":"UnauthenticatedException"}
       ],
       "documentation":"<p>Updates a domain recordset after it is created.</p>"
+    },
+    "UpdateLoadBalancerAttribute":{
+      "name":"UpdateLoadBalancerAttribute",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateLoadBalancerAttributeRequest"},
+      "output":{"shape":"UpdateLoadBalancerAttributeResult"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"NotFoundException"},
+        {"shape":"OperationFailureException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"AccountSetupInProgressException"},
+        {"shape":"UnauthenticatedException"}
+      ],
+      "documentation":"<p>Updates the specified attribute for a load balancer.</p>"
     }
   },
   "shapes":{
@@ -1210,7 +1438,59 @@
       "members":{
         "operations":{
           "shape":"OperationList",
-          "documentation":"<p>An object describing the API operation.</p>"
+          "documentation":"<p>An object describing the API operations.</p>"
+        }
+      }
+    },
+    "AttachInstancesToLoadBalancerRequest":{
+      "type":"structure",
+      "required":[
+        "loadBalancerName",
+        "instanceNames"
+      ],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the load balancer.</p>"
+        },
+        "instanceNames":{
+          "shape":"ResourceNameList",
+          "documentation":"<p>An array of strings representing the instance name(s) you want to attach to your load balancer.</p>"
+        }
+      }
+    },
+    "AttachInstancesToLoadBalancerResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object representing the API operations.</p>"
+        }
+      }
+    },
+    "AttachLoadBalancerTlsCertificateRequest":{
+      "type":"structure",
+      "required":[
+        "loadBalancerName",
+        "certificateName"
+      ],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the load balancer to which you want to associate the TLS/SSL certificate.</p>"
+        },
+        "certificateName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of your TLS/SSL certificate.</p>"
+        }
+      }
+    },
+    "AttachLoadBalancerTlsCertificateResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object representing the API operations.</p>"
         }
       }
     },
@@ -1604,7 +1884,7 @@
         },
         "userData":{
           "shape":"string",
-          "documentation":"<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps\">Dev Guide</a>.</p> </note>"
+          "documentation":"<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps\">Dev Guide</a>.</p> </note>"
         },
         "keyPairName":{
           "shape":"ResourceName",
@@ -1653,7 +1933,7 @@
         },
         "userData":{
           "shape":"string",
-          "documentation":"<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get –y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image\">Dev Guide</a>.</p> </note>"
+          "documentation":"<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image\">Dev Guide</a>.</p> </note>"
         },
         "keyPairName":{
           "shape":"ResourceName",
@@ -1698,6 +1978,83 @@
         "operation":{
           "shape":"Operation",
           "documentation":"<p>An array of key-value pairs containing information about the results of your create key pair request.</p>"
+        }
+      }
+    },
+    "CreateLoadBalancerRequest":{
+      "type":"structure",
+      "required":[
+        "loadBalancerName",
+        "instancePort"
+      ],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of your load balancer.</p>"
+        },
+        "instancePort":{
+          "shape":"Port",
+          "documentation":"<p>The instance port where you're creating your load balancer.</p>"
+        },
+        "healthCheckPath":{
+          "shape":"string",
+          "documentation":"<p>The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., <code>\"/\"</code>).</p>"
+        },
+        "certificateName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the TLS/SSL certificate.</p> <p>If you specify <code>certificateName</code>, then <code>certificateDomainName</code> is required (and vice-versa).</p>"
+        },
+        "certificateDomainName":{
+          "shape":"DomainName",
+          "documentation":"<p>The domain name with which your certificate is associated (e.g., <code>example.com</code>).</p> <p>If you specify <code>certificateDomainName</code>, then <code>certificateName</code> is required (and vice-versa).</p>"
+        },
+        "certificateAlternativeNames":{
+          "shape":"DomainNameList",
+          "documentation":"<p>The alternative domain names to use with your TLS/SSL certificate (e.g., <code>www.example.com</code>, <code>www.ejemplo.com</code>, <code>ejemplo.com</code>).</p>"
+        }
+      }
+    },
+    "CreateLoadBalancerResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object containing information about the API operations.</p>"
+        }
+      }
+    },
+    "CreateLoadBalancerTlsCertificateRequest":{
+      "type":"structure",
+      "required":[
+        "loadBalancerName",
+        "certificateName",
+        "certificateDomainName"
+      ],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The load balancer name where you want to create the TLS/SSL certificate.</p>"
+        },
+        "certificateName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The TLS/SSL certificate name.</p>"
+        },
+        "certificateDomainName":{
+          "shape":"DomainName",
+          "documentation":"<p>The domain name (e.g., <code>example.com</code>) for your TLS/SSL certificate.</p>"
+        },
+        "certificateAlternativeNames":{
+          "shape":"DomainNameList",
+          "documentation":"<p>An array of strings listing alternative domain names for your TLS/SSL certificate.</p>"
+        }
+      }
+    },
+    "CreateLoadBalancerTlsCertificateResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object containing information about the API operations.</p>"
         }
       }
     },
@@ -1841,6 +2198,55 @@
         }
       }
     },
+    "DeleteLoadBalancerRequest":{
+      "type":"structure",
+      "required":["loadBalancerName"],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the load balancer you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteLoadBalancerResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
+        }
+      }
+    },
+    "DeleteLoadBalancerTlsCertificateRequest":{
+      "type":"structure",
+      "required":[
+        "loadBalancerName",
+        "certificateName"
+      ],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The load balancer name.</p>"
+        },
+        "certificateName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The TLS/SSL certificate name.</p>"
+        },
+        "force":{
+          "shape":"boolean",
+          "documentation":"<p>When <code>true</code>, forces the deletion of a TLS/SSL certificate.</p>"
+        }
+      }
+    },
+    "DeleteLoadBalancerTlsCertificateResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
+        }
+      }
+    },
     "DetachDiskRequest":{
       "type":"structure",
       "required":["diskName"],
@@ -1852,6 +2258,32 @@
       }
     },
     "DetachDiskResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
+        }
+      }
+    },
+    "DetachInstancesFromLoadBalancerRequest":{
+      "type":"structure",
+      "required":[
+        "loadBalancerName",
+        "instanceNames"
+      ],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Lightsail load balancer.</p>"
+        },
+        "instanceNames":{
+          "shape":"ResourceNameList",
+          "documentation":"<p>An array of strings containing the names of the instances you want to detach from the load balancer.</p>"
+        }
+      }
+    },
+    "DetachInstancesFromLoadBalancerResult":{
       "type":"structure",
       "members":{
         "operations":{
@@ -1936,12 +2368,12 @@
         },
         "attachmentState":{
           "shape":"string",
-          "documentation":"<p>(Deprecated) The attachment state of the disk.</p> <note> <p>In releases prior to November 9, 2017, this parameter returned <code>attached</code> for system disks in the API response. It is now deprecated, but still included in the response. Use <code>isAttached</code> instead.</p> </note>",
+          "documentation":"<p>(Deprecated) The attachment state of the disk.</p> <note> <p>In releases prior to November 14, 2017, this parameter returned <code>attached</code> for system disks in the API response. It is now deprecated, but still included in the response. Use <code>isAttached</code> instead.</p> </note>",
           "deprecated":true
         },
         "gbInUse":{
           "shape":"integer",
-          "documentation":"<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 9, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>",
+          "documentation":"<p>(Deprecated) The number of GB in use by the disk.</p> <note> <p>In releases prior to November 14, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>",
           "deprecated":true
         }
       },
@@ -2091,13 +2523,18 @@
           "shape":"string",
           "documentation":"<p>The target AWS name server (e.g., <code>ns-111.awsdns-22.com.</code>).</p>"
         },
+        "isAlias":{
+          "shape":"boolean",
+          "documentation":"<p>When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer.</p>"
+        },
         "type":{
           "shape":"DomainEntryType",
           "documentation":"<p>The type of domain entry (e.g., <code>SOA</code> or <code>NS</code>).</p>"
         },
         "options":{
           "shape":"DomainEntryOptions",
-          "documentation":"<p>The options for the domain entry.</p>"
+          "documentation":"<p>(Deprecated) The options for the domain entry.</p> <note> <p>In releases prior to November 29, 2017, this parameter was not included in the API response. It is now deprecated.</p> </note>",
+          "deprecated":true
         }
       },
       "documentation":"<p>Describes a domain recordset entry.</p>"
@@ -2118,6 +2555,10 @@
       "member":{"shape":"Domain"}
     },
     "DomainName":{"type":"string"},
+    "DomainNameList":{
+      "type":"list",
+      "member":{"shape":"DomainName"}
+    },
     "DownloadDefaultKeyPairRequest":{
       "type":"structure",
       "members":{
@@ -2403,7 +2844,7 @@
       "members":{
         "metricName":{
           "shape":"InstanceMetricName",
-          "documentation":"<p>The metric name to return data for. </p>"
+          "documentation":"<p>The metric name to return data for.</p>"
         },
         "metricData":{
           "shape":"MetricDatapointList",
@@ -2569,6 +3010,121 @@
         "nextPageToken":{
           "shape":"string",
           "documentation":"<p>A token used for advancing to the next page of results from your get key pairs request.</p>"
+        }
+      }
+    },
+    "GetLoadBalancerMetricDataRequest":{
+      "type":"structure",
+      "required":[
+        "loadBalancerName",
+        "metricName",
+        "period",
+        "startTime",
+        "endTime",
+        "unit",
+        "statistics"
+      ],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the load balancer.</p>"
+        },
+        "metricName":{
+          "shape":"LoadBalancerMetricName",
+          "documentation":"<p>The metric about which you want to return information. Valid values are listed below, along with the most useful <code>statistics</code> to include in your request.</p> <ul> <li> <p> <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number of TLS connections initiated by the client that did not establish a session with the load balancer. Possible causes include a mismatch of ciphers or protocols.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> </li> <li> <p> <b> <code>HealthyHostCount</code> </b> - The number of target instances that are considered healthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> </li> <li> <p> <b> <code>UnhealthyHostCount</code> </b> - The number of target instances that are considered unhealthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP 4XX client error codes that originate from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests have not been received by the target instance. This count does not include any response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP 5XX server error codes that originate from the load balancer. This count does not include any response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer. </p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of HTTP response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> <li> <p> <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> </li> <li> <p> <b> <code>RejectedConnectionCount</code> </b> - The number of connections that were rejected because the load balancer had reached its maximum number of connections.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> </li> <li> <p> <b> <code>RequestCount</code> </b> - The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> </li> </ul>"
+        },
+        "period":{
+          "shape":"MetricPeriod",
+          "documentation":"<p>The time period duration for your health data request.</p>"
+        },
+        "startTime":{
+          "shape":"timestamp",
+          "documentation":"<p>The start time of the period.</p>"
+        },
+        "endTime":{
+          "shape":"timestamp",
+          "documentation":"<p>The end time of the period.</p>"
+        },
+        "unit":{
+          "shape":"MetricUnit",
+          "documentation":"<p>The unit for the time period request. Valid values are listed below.</p>"
+        },
+        "statistics":{
+          "shape":"MetricStatisticList",
+          "documentation":"<p>An array of statistics that you want to request metrics for. Valid values are listed below.</p>"
+        }
+      }
+    },
+    "GetLoadBalancerMetricDataResult":{
+      "type":"structure",
+      "members":{
+        "metricName":{
+          "shape":"LoadBalancerMetricName",
+          "documentation":"<p>The metric about which you are receiving information. Valid values are listed below.</p>"
+        },
+        "metricData":{
+          "shape":"MetricDatapointList",
+          "documentation":"<p>An array of metric datapoint objects.</p>"
+        }
+      }
+    },
+    "GetLoadBalancerRequest":{
+      "type":"structure",
+      "required":["loadBalancerName"],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the load balancer.</p>"
+        }
+      }
+    },
+    "GetLoadBalancerResult":{
+      "type":"structure",
+      "members":{
+        "loadBalancer":{
+          "shape":"LoadBalancer",
+          "documentation":"<p>An object containing information about your load balancer.</p>"
+        }
+      }
+    },
+    "GetLoadBalancerTlsCertificatesRequest":{
+      "type":"structure",
+      "required":["loadBalancerName"],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the load balancer where you stored your TLS/SSL certificate.</p>"
+        }
+      }
+    },
+    "GetLoadBalancerTlsCertificatesResult":{
+      "type":"structure",
+      "members":{
+        "tlsCertificates":{
+          "shape":"LoadBalancerTlsCertificateList",
+          "documentation":"<p>An array of LoadBalancerTlsCertificate objects describing your TLS/SSL certificates.</p>"
+        }
+      }
+    },
+    "GetLoadBalancersRequest":{
+      "type":"structure",
+      "members":{
+        "pageToken":{
+          "shape":"string",
+          "documentation":"<p>A token used for paginating the results from your GetLoadBalancers request.</p>"
+        }
+      }
+    },
+    "GetLoadBalancersResult":{
+      "type":"structure",
+      "members":{
+        "loadBalancers":{
+          "shape":"LoadBalancerList",
+          "documentation":"<p>An array of LoadBalancer objects describing your load balancers.</p>"
+        },
+        "nextPageToken":{
+          "shape":"string",
+          "documentation":"<p>A token used for advancing to the next page of results from your GetLoadBalancers request.</p>"
         }
       }
     },
@@ -2875,6 +3431,55 @@
       },
       "documentation":"<p>Describes the hardware for the instance.</p>"
     },
+    "InstanceHealthReason":{
+      "type":"string",
+      "enum":[
+        "Lb.RegistrationInProgress",
+        "Lb.InitialHealthChecking",
+        "Lb.InternalError",
+        "Instance.ResponseCodeMismatch",
+        "Instance.Timeout",
+        "Instance.FailedHealthChecks",
+        "Instance.NotRegistered",
+        "Instance.NotInUse",
+        "Instance.DeregistrationInProgress",
+        "Instance.InvalidState",
+        "Instance.IpUnusable"
+      ]
+    },
+    "InstanceHealthState":{
+      "type":"string",
+      "enum":[
+        "initial",
+        "healthy",
+        "unhealthy",
+        "unused",
+        "draining",
+        "unavailable"
+      ]
+    },
+    "InstanceHealthSummary":{
+      "type":"structure",
+      "members":{
+        "instanceName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the Lightsail instance for which you are requesting health check data.</p>"
+        },
+        "instanceHealth":{
+          "shape":"InstanceHealthState",
+          "documentation":"<p>Describes the overall instance health. Valid values are below.</p>"
+        },
+        "instanceHealthReason":{
+          "shape":"InstanceHealthReason",
+          "documentation":"<p>More information about the instance health. Valid values are below.</p>"
+        }
+      },
+      "documentation":"<p>Describes information about the health of the instance.</p>"
+    },
+    "InstanceHealthSummaryList":{
+      "type":"list",
+      "member":{"shape":"InstanceHealthSummary"}
+    },
     "InstanceList":{
       "type":"list",
       "member":{"shape":"Instance"}
@@ -3139,6 +3744,364 @@
       "type":"list",
       "member":{"shape":"KeyPair"}
     },
+    "LoadBalancer":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the load balancer (e.g., <code>my-load-balancer</code>).</p>"
+        },
+        "arn":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the load balancer.</p>"
+        },
+        "supportCode":{
+          "shape":"string",
+          "documentation":"<p>The support code. Include this code in your email to support when you have questions about your Lightsail load balancer. This code enables our support team to look up your Lightsail information more easily.</p>"
+        },
+        "createdAt":{
+          "shape":"IsoDate",
+          "documentation":"<p>The date when your load balancer was created.</p>"
+        },
+        "location":{
+          "shape":"ResourceLocation",
+          "documentation":"<p>The AWS Region and Availability Zone where your load balancer was created (e.g., <code>us-east-2a</code>).</p>"
+        },
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The resource type (e.g., <code>LoadBalancer</code>.</p>"
+        },
+        "dnsName":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The DNS name of your Lightsail load balancer.</p>"
+        },
+        "state":{
+          "shape":"LoadBalancerState",
+          "documentation":"<p>The status of your load balancer. Valid values are below.</p>"
+        },
+        "protocol":{
+          "shape":"LoadBalancerProtocol",
+          "documentation":"<p>The protocol you have enabled for your load balancer. Valid values are below.</p>"
+        },
+        "publicPorts":{
+          "shape":"PortList",
+          "documentation":"<p>An array of public port settings for your load balancer.</p>"
+        },
+        "healthCheckPath":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The path you specified to perform your health checks. If no path is specified, the load balancer tries to make a request to the default (root) page.</p>"
+        },
+        "instancePort":{
+          "shape":"integer",
+          "documentation":"<p>The instance port where the load balancer is listening.</p>"
+        },
+        "instanceHealthSummary":{
+          "shape":"InstanceHealthSummaryList",
+          "documentation":"<p>An array of InstanceHealthSummary objects describing the health of the load balancer.</p>"
+        },
+        "tlsCertificateSummaries":{
+          "shape":"LoadBalancerTlsCertificateSummaryList",
+          "documentation":"<p>An array of LoadBalancerTlsCertificateSummary objects that provide additional information about the TLS/SSL certificates.</p>"
+        },
+        "configurationOptions":{
+          "shape":"LoadBalancerConfigurationOptions",
+          "documentation":"<p>A string to string map of the configuration options for your load balancer. Valid values are listed below.</p>"
+        }
+      },
+      "documentation":"<p>Describes the Lightsail load balancer.</p>"
+    },
+    "LoadBalancerAttributeName":{
+      "type":"string",
+      "enum":[
+        "HealthCheckPath",
+        "SessionStickinessEnabled",
+        "SessionStickiness_LB_CookieDurationSeconds"
+      ]
+    },
+    "LoadBalancerConfigurationOptions":{
+      "type":"map",
+      "key":{"shape":"LoadBalancerAttributeName"},
+      "value":{"shape":"string"}
+    },
+    "LoadBalancerList":{
+      "type":"list",
+      "member":{"shape":"LoadBalancer"}
+    },
+    "LoadBalancerMetricName":{
+      "type":"string",
+      "enum":[
+        "ClientTLSNegotiationErrorCount",
+        "HealthyHostCount",
+        "UnhealthyHostCount",
+        "HTTPCode_LB_4XX_Count",
+        "HTTPCode_LB_5XX_Count",
+        "HTTPCode_Instance_2XX_Count",
+        "HTTPCode_Instance_3XX_Count",
+        "HTTPCode_Instance_4XX_Count",
+        "HTTPCode_Instance_5XX_Count",
+        "InstanceResponseTime",
+        "RejectedConnectionCount",
+        "RequestCount"
+      ]
+    },
+    "LoadBalancerProtocol":{
+      "type":"string",
+      "enum":[
+        "HTTP_HTTPS",
+        "HTTP"
+      ]
+    },
+    "LoadBalancerState":{
+      "type":"string",
+      "enum":[
+        "active",
+        "provisioning",
+        "active_impaired",
+        "failed",
+        "unknown"
+      ]
+    },
+    "LoadBalancerTlsCertificate":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the TLS/SSL certificate (e.g., <code>my-certificate</code>).</p>"
+        },
+        "arn":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the TLS/SSL certificate.</p>"
+        },
+        "supportCode":{
+          "shape":"string",
+          "documentation":"<p>The support code. Include this code in your email to support when you have questions about your Lightsail load balancer or TLS/SSL certificate. This code enables our support team to look up your Lightsail information more easily.</p>"
+        },
+        "createdAt":{
+          "shape":"IsoDate",
+          "documentation":"<p>The time when you created your TLS/SSL certificate.</p>"
+        },
+        "location":{
+          "shape":"ResourceLocation",
+          "documentation":"<p>The AWS Region and Availability Zone where you created your certificate.</p>"
+        },
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The resource type (e.g., <code>LoadBalancerTlsCertificate</code>.</p>"
+        },
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The load balancer name where your TLS/SSL certificate is attached.</p>"
+        },
+        "isAttached":{
+          "shape":"boolean",
+          "documentation":"<p>When <code>true</code>, the TLS/SSL certificate is attached to the Lightsail load balancer.</p>"
+        },
+        "status":{
+          "shape":"LoadBalancerTlsCertificateStatus",
+          "documentation":"<p>The status of the TLS/SSL certificate. Valid values are below.</p>"
+        },
+        "domainName":{
+          "shape":"DomainName",
+          "documentation":"<p>The domain name for your TLS/SSL certificate.</p>"
+        },
+        "domainValidationRecords":{
+          "shape":"LoadBalancerTlsCertificateDomainValidationRecordList",
+          "documentation":"<p>An array of LoadBalancerTlsCertificateDomainValidationRecord objects describing the records.</p>"
+        },
+        "failureReason":{
+          "shape":"LoadBalancerTlsCertificateFailureReason",
+          "documentation":"<p>The reason for the TLS/SSL certificate validation failure.</p>"
+        },
+        "issuedAt":{
+          "shape":"IsoDate",
+          "documentation":"<p>The time when the TLS/SSL certificate was issued.</p>"
+        },
+        "issuer":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The issuer of the certificate.</p>"
+        },
+        "keyAlgorithm":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The algorithm that was used to generate the key pair (the public and private key).</p>"
+        },
+        "notAfter":{
+          "shape":"IsoDate",
+          "documentation":"<p>The timestamp when the TLS/SSL certificate expires.</p>"
+        },
+        "notBefore":{
+          "shape":"IsoDate",
+          "documentation":"<p>The timestamp when the TLS/SSL certificate is first valid.</p>"
+        },
+        "renewalSummary":{
+          "shape":"LoadBalancerTlsCertificateRenewalSummary",
+          "documentation":"<p>An object containing information about the status of Lightsail's managed renewal for the certificate.</p>"
+        },
+        "revocationReason":{
+          "shape":"LoadBalancerTlsCertificateRevocationReason",
+          "documentation":"<p>The reason the certificate was revoked. Valid values are below.</p>"
+        },
+        "revokedAt":{
+          "shape":"IsoDate",
+          "documentation":"<p>The timestamp when the TLS/SSL certificate was revoked.</p>"
+        },
+        "serial":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The serial number of the certificate.</p>"
+        },
+        "signatureAlgorithm":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The algorithm that was used to sign the certificate.</p>"
+        },
+        "subject":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The name of the entity that is associated with the public key contained in the certificate.</p>"
+        },
+        "subjectAlternativeNames":{
+          "shape":"StringList",
+          "documentation":"<p>One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website.</p>"
+        }
+      },
+      "documentation":"<p>Describes a load balancer TLS/SSL certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>"
+    },
+    "LoadBalancerTlsCertificateDomainStatus":{
+      "type":"string",
+      "enum":[
+        "PENDING_VALIDATION",
+        "FAILED",
+        "SUCCESS"
+      ]
+    },
+    "LoadBalancerTlsCertificateDomainValidationOption":{
+      "type":"structure",
+      "members":{
+        "domainName":{
+          "shape":"DomainName",
+          "documentation":"<p>A fully qualified domain name in the certificate request.</p>"
+        },
+        "validationStatus":{
+          "shape":"LoadBalancerTlsCertificateDomainStatus",
+          "documentation":"<p>The status of the domain validation. Valid values are listed below.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about the domain names on a TLS/SSL certificate that you will use to validate domain ownership.</p>"
+    },
+    "LoadBalancerTlsCertificateDomainValidationOptionList":{
+      "type":"list",
+      "member":{"shape":"LoadBalancerTlsCertificateDomainValidationOption"}
+    },
+    "LoadBalancerTlsCertificateDomainValidationRecord":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>A fully qualified domain name in the certificate. For example, <code>example.com</code>.</p>"
+        },
+        "type":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The type of validation record. For example, <code>CNAME</code> for domain validation.</p>"
+        },
+        "value":{
+          "shape":"NonEmptyString",
+          "documentation":"<p>The value for that type.</p>"
+        },
+        "validationStatus":{
+          "shape":"LoadBalancerTlsCertificateDomainStatus",
+          "documentation":"<p>The validation status. Valid values are listed below.</p>"
+        },
+        "domainName":{
+          "shape":"DomainName",
+          "documentation":"<p>The domain name against which your TLS/SSL certificate was validated.</p>"
+        }
+      },
+      "documentation":"<p>Describes the validation record of each domain name in the TLS/SSL certificate.</p>"
+    },
+    "LoadBalancerTlsCertificateDomainValidationRecordList":{
+      "type":"list",
+      "member":{"shape":"LoadBalancerTlsCertificateDomainValidationRecord"}
+    },
+    "LoadBalancerTlsCertificateFailureReason":{
+      "type":"string",
+      "enum":[
+        "NO_AVAILABLE_CONTACTS",
+        "ADDITIONAL_VERIFICATION_REQUIRED",
+        "DOMAIN_NOT_ALLOWED",
+        "INVALID_PUBLIC_DOMAIN",
+        "OTHER"
+      ]
+    },
+    "LoadBalancerTlsCertificateList":{
+      "type":"list",
+      "member":{"shape":"LoadBalancerTlsCertificate"}
+    },
+    "LoadBalancerTlsCertificateRenewalStatus":{
+      "type":"string",
+      "enum":[
+        "PENDING_AUTO_RENEWAL",
+        "PENDING_VALIDATION",
+        "SUCCESS",
+        "FAILED"
+      ]
+    },
+    "LoadBalancerTlsCertificateRenewalSummary":{
+      "type":"structure",
+      "members":{
+        "renewalStatus":{
+          "shape":"LoadBalancerTlsCertificateRenewalStatus",
+          "documentation":"<p>The status of Lightsail's managed renewal of the certificate. Valid values are listed below.</p>"
+        },
+        "domainValidationOptions":{
+          "shape":"LoadBalancerTlsCertificateDomainValidationOptionList",
+          "documentation":"<p>Contains information about the validation of each domain name in the certificate, as it pertains to Lightsail's managed renewal. This is different from the initial validation that occurs as a result of the RequestCertificate request.</p>"
+        }
+      },
+      "documentation":"<p>Contains information about the status of Lightsail's managed renewal for the certificate.</p>"
+    },
+    "LoadBalancerTlsCertificateRevocationReason":{
+      "type":"string",
+      "enum":[
+        "UNSPECIFIED",
+        "KEY_COMPROMISE",
+        "CA_COMPROMISE",
+        "AFFILIATION_CHANGED",
+        "SUPERCEDED",
+        "CESSATION_OF_OPERATION",
+        "CERTIFICATE_HOLD",
+        "REMOVE_FROM_CRL",
+        "PRIVILEGE_WITHDRAWN",
+        "A_A_COMPROMISE"
+      ]
+    },
+    "LoadBalancerTlsCertificateStatus":{
+      "type":"string",
+      "enum":[
+        "PENDING_VALIDATION",
+        "ISSUED",
+        "INACTIVE",
+        "EXPIRED",
+        "VALIDATION_TIMED_OUT",
+        "REVOKED",
+        "FAILED",
+        "UNKNOWN"
+      ]
+    },
+    "LoadBalancerTlsCertificateSummary":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the TLS/SSL certificate.</p>"
+        },
+        "isAttached":{
+          "shape":"boolean",
+          "documentation":"<p>When <code>true</code>, the TLS/SSL certificate is attached to the Lightsail load balancer.</p>"
+        }
+      },
+      "documentation":"<p>Provides a summary of TLS/SSL certificate metadata.</p>"
+    },
+    "LoadBalancerTlsCertificateSummaryList":{
+      "type":"list",
+      "member":{"shape":"LoadBalancerTlsCertificateSummary"}
+    },
     "MetricDatapoint":{
       "type":"structure",
       "members":{
@@ -3387,6 +4350,14 @@
         "CreateInstanceSnapshot",
         "DeleteInstanceSnapshot",
         "CreateInstancesFromSnapshot",
+        "CreateLoadBalancer",
+        "DeleteLoadBalancer",
+        "AttachInstancesToLoadBalancer",
+        "DetachInstancesFromLoadBalancer",
+        "UpdateLoadBalancerAttribute",
+        "CreateLoadBalancerTlsCertificate",
+        "DeleteLoadBalancerTlsCertificate",
+        "AttachLoadBalancerTlsCertificate",
         "CreateDisk",
         "DeleteDisk",
         "AttachDisk",
@@ -3457,6 +4428,10 @@
     "PortInfoList":{
       "type":"list",
       "member":{"shape":"PortInfo"}
+    },
+    "PortList":{
+      "type":"list",
+      "member":{"shape":"Port"}
     },
     "PortState":{
       "type":"string",
@@ -3593,6 +4568,10 @@
       "type":"string",
       "pattern":"\\w[\\w\\-]*\\w"
     },
+    "ResourceNameList":{
+      "type":"list",
+      "member":{"shape":"ResourceName"}
+    },
     "ResourceType":{
       "type":"string",
       "enum":[
@@ -3602,6 +4581,8 @@
         "InstanceSnapshot",
         "Domain",
         "PeeredVpc",
+        "LoadBalancer",
+        "LoadBalancerTlsCertificate",
         "Disk",
         "DiskSnapshot"
       ]
@@ -3710,6 +4691,11 @@
       "type":"list",
       "member":{"shape":"string"}
     },
+    "StringMax256":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "UnauthenticatedException":{
       "type":"structure",
       "members":{
@@ -3758,6 +4744,37 @@
         "operations":{
           "shape":"OperationList",
           "documentation":"<p>An array of key-value pairs containing information about the request operation.</p>"
+        }
+      }
+    },
+    "UpdateLoadBalancerAttributeRequest":{
+      "type":"structure",
+      "required":[
+        "loadBalancerName",
+        "attributeName",
+        "attributeValue"
+      ],
+      "members":{
+        "loadBalancerName":{
+          "shape":"ResourceName",
+          "documentation":"<p>The name of the load balancer that you want to modify.</p>"
+        },
+        "attributeName":{
+          "shape":"LoadBalancerAttributeName",
+          "documentation":"<p>The name of the attribute you want to update. Valid values are below.</p>"
+        },
+        "attributeValue":{
+          "shape":"StringMax256",
+          "documentation":"<p>The value that you want to specify for the attribute name.</p>"
+        }
+      }
+    },
+    "UpdateLoadBalancerAttributeResult":{
+      "type":"structure",
+      "members":{
+        "operations":{
+          "shape":"OperationList",
+          "documentation":"<p>An object describing the API operations.</p>"
         }
       }
     },

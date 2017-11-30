@@ -122,3 +122,4 @@ export import KinesisVideo = require('./kinesisvideo');
 export import SageMakerRuntime = require('./sagemakerruntime');
 export import SageMaker = require('./sagemaker');
 export import Translate = require('./translate');
+export import ResourceGroups = require('./resourcegroups');

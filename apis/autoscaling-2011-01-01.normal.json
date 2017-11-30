@@ -937,7 +937,7 @@
         },
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         }
       }
     },
@@ -977,7 +977,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "LoadBalancerNames":{
           "shape":"LoadBalancerNames",
@@ -1000,15 +1000,19 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "AutoScalingGroupARN":{
           "shape":"ResourceName",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the group.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>"
         },
         "LaunchConfigurationName":{
           "shape":"XmlStringMaxLen255",
           "documentation":"<p>The name of the associated launch configuration.</p>"
+        },
+        "LaunchTemplate":{
+          "shape":"LaunchTemplateSpecification",
+          "documentation":"<p>The launch template for the group.</p>"
         },
         "MinSize":{
           "shape":"AutoScalingGroupMinSize",
@@ -1101,7 +1105,7 @@
       "members":{
         "AutoScalingGroupNames":{
           "shape":"AutoScalingGroupNames",
-          "documentation":"<p>The group names. If you omit this parameter, all Auto Scaling groups are described.</p>"
+          "documentation":"<p>The names of the Auto Scaling groups. If you omit this parameter, all Auto Scaling groups are described.</p>"
         },
         "NextToken":{
           "shape":"XmlString",
@@ -1139,7 +1143,6 @@
         "AvailabilityZone",
         "LifecycleState",
         "HealthStatus",
-        "LaunchConfigurationName",
         "ProtectedFromScaleIn"
       ],
       "members":{
@@ -1149,7 +1152,7 @@
         },
         "AutoScalingGroupName":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>The name of the Auto Scaling group associated with the instance.</p>"
+          "documentation":"<p>The name of the Auto Scaling group for the instance.</p>"
         },
         "AvailabilityZone":{
           "shape":"XmlStringMaxLen255",
@@ -1166,6 +1169,10 @@
         "LaunchConfigurationName":{
           "shape":"XmlStringMaxLen255",
           "documentation":"<p>The launch configuration used to launch the instance. This value is not available if you attached the instance to the Auto Scaling group.</p>"
+        },
+        "LaunchTemplate":{
+          "shape":"LaunchTemplateSpecification",
+          "documentation":"<p>The launch template for the instance.</p>"
         },
         "ProtectedFromScaleIn":{
           "shape":"InstanceProtected",
@@ -1267,7 +1274,7 @@
         },
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group for the lifecycle hook.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "LifecycleActionToken":{
           "shape":"LifecycleActionToken",
@@ -1294,15 +1301,19 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>The name of the group. This name must be unique within the scope of your AWS account.</p>"
+          "documentation":"<p>The name of the Auto Scaling group. This name must be unique within the scope of your AWS account.</p>"
         },
         "LaunchConfigurationName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the launch configuration. Alternatively, specify an EC2 instance instead of a launch configuration.</p>"
+          "documentation":"<p>The name of the launch configuration. You must specify one of the following: a launch configuration, a launch template, or an EC2 instance.</p>"
+        },
+        "LaunchTemplate":{
+          "shape":"LaunchTemplateSpecification",
+          "documentation":"<p>The launch template to use to launch instances. You must specify one of the following: a launch template, a launch configuration, or an EC2 instance.</p>"
         },
         "InstanceId":{
           "shape":"XmlStringMaxLen19",
-          "documentation":"<p>The ID of the instance used to create a launch configuration for the group. Alternatively, specify a launch configuration instead of an EC2 instance.</p> <p>When you specify an ID of an instance, Auto Scaling creates a new launch configuration and associates it with the group. This launch configuration derives its attributes from the specified instance, with the exception of the block device mapping.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html\">Create an Auto Scaling Group Using an EC2 Instance</a> in the <i>Auto Scaling User Guide</i>.</p>"
+          "documentation":"<p>The ID of the instance used to create a launch configuration for the group. You must specify one of the following: an EC2 instance, a launch configuration, or a launch template.</p> <p>When you specify an ID of an instance, Auto Scaling creates a new launch configuration and associates it with the group. This launch configuration derives its attributes from the specified instance, with the exception of the block device mapping.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html\">Create an Auto Scaling Group Using an EC2 Instance</a> in the <i>Auto Scaling User Guide</i>.</p>"
         },
         "MinSize":{
           "shape":"AutoScalingGroupMinSize",
@@ -1491,7 +1502,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group to delete.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "ForceDelete":{
           "shape":"ForceDelete",
@@ -1517,7 +1528,7 @@
         },
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the Auto Scaling group for the lifecycle hook.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         }
       }
     },
@@ -1659,7 +1670,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "LifecycleHookNames":{
           "shape":"LifecycleHookNames",
@@ -1704,7 +1715,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "NextToken":{
           "shape":"XmlString",
@@ -1761,7 +1772,7 @@
       "members":{
         "AutoScalingGroupNames":{
           "shape":"AutoScalingGroupNames",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "NextToken":{
           "shape":"XmlString",
@@ -1778,11 +1789,11 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "PolicyNames":{
           "shape":"PolicyNames",
-          "documentation":"<p>One or more policy names or policy ARNs to be described. If you omit this parameter, all policy names are described. If an group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.</p>"
+          "documentation":"<p>The names of one or more policies. If you omit this parameter, all policies are described. If an group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.</p>"
         },
         "PolicyTypes":{
           "shape":"PolicyTypes",
@@ -1807,7 +1818,7 @@
         },
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "MaxRecords":{
           "shape":"MaxRecords",
@@ -1824,7 +1835,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "ScheduledActionNames":{
           "shape":"ScheduledActionNames",
@@ -1896,7 +1907,7 @@
         },
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "ShouldDecrementDesiredCapacity":{
           "shape":"ShouldDecrementDesiredCapacity",
@@ -1954,7 +1965,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name or Amazon Resource Name (ARN) of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "Metrics":{
           "shape":"Metrics",
@@ -2003,7 +2014,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name or ARN of the Auto Scaling group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "Metrics":{
           "shape":"Metrics",
@@ -2070,7 +2081,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name or Amazon Resource Name (ARN) of the Auto Scaling group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "PolicyName":{
           "shape":"ResourceName",
@@ -2143,7 +2154,6 @@
         "AvailabilityZone",
         "LifecycleState",
         "HealthStatus",
-        "LaunchConfigurationName",
         "ProtectedFromScaleIn"
       ],
       "members":{
@@ -2166,6 +2176,10 @@
         "LaunchConfigurationName":{
           "shape":"XmlStringMaxLen255",
           "documentation":"<p>The launch configuration associated with the instance.</p>"
+        },
+        "LaunchTemplate":{
+          "shape":"LaunchTemplateSpecification",
+          "documentation":"<p>The launch template for the instance.</p>"
         },
         "ProtectedFromScaleIn":{
           "shape":"InstanceProtected",
@@ -2346,6 +2360,30 @@
         }
       }
     },
+    "LaunchTemplateName":{
+      "type":"string",
+      "max":128,
+      "min":3,
+      "pattern":"[a-zA-Z0-9\\(\\)\\.-/_]+"
+    },
+    "LaunchTemplateSpecification":{
+      "type":"structure",
+      "members":{
+        "LaunchTemplateId":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>The ID of the launch template. You must specify either a template ID or a template name.</p>"
+        },
+        "LaunchTemplateName":{
+          "shape":"LaunchTemplateName",
+          "documentation":"<p>The name of the launch template. You must specify either a template name or a template ID.</p>"
+        },
+        "Version":{
+          "shape":"XmlStringMaxLen255",
+          "documentation":"<p>The version number. By default, the default version of the launch template is used.</p>"
+        }
+      },
+      "documentation":"<p>Describes a launch template.</p>"
+    },
     "LifecycleActionResult":{"type":"string"},
     "LifecycleActionToken":{
       "type":"string",
@@ -2401,7 +2439,10 @@
     },
     "LifecycleHookSpecification":{
       "type":"structure",
-      "required":["LifecycleHookName"],
+      "required":[
+        "LifecycleHookName",
+        "LifecycleTransition"
+      ],
       "members":{
         "LifecycleHookName":{
           "shape":"AsciiStringMaxLen255",
@@ -2421,7 +2462,7 @@
         },
         "DefaultResult":{
           "shape":"LifecycleActionResult",
-          "documentation":"<p>Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The valid values are <code>CONTINUE</code> and <code>ABANDON</code>. The default value is <code>CONTINUE</code>.</p>"
+          "documentation":"<p>Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The valid values are <code>CONTINUE</code> and <code>ABANDON</code>.</p>"
         },
         "NotificationTargetARN":{
           "shape":"NotificationTargetResourceName",
@@ -2611,7 +2652,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "TopicARN":{
           "shape":"ResourceName",
@@ -2682,7 +2723,7 @@
         },
         "ResourceLabel":{
           "shape":"XmlStringMaxLen1023",
-          "documentation":"<p>Identifies the resource associated with the metric type. The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> - average CPU utilization of the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkIn</code> - average number of bytes received on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkOut</code> - average number of bytes sent out on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> - number of requests completed per target in an Application Load Balancer target group</p> </li> </ul> <p>For predefined metric types <code>ASGAverageCPUUtilization</code>, <code>ASGAverageNetworkIn</code> and <code>ASGAverageNetworkOut</code>, the parameter must not be specified as the resource associated with the metric type is the Auto Scaling group. For predefined metric type <code>ALBRequestCountPerTarget</code>, the parameter must be specified in the format: <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i>/targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code>, where <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> is the final portion of the load balancer ARN, and <code>targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code> is the final portion of the target group ARN. The target group must be attached to the Auto Scaling group.</p>"
+          "documentation":"<p>Identifies the resource associated with the metric type. The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> - average CPU utilization of the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkIn</code> - average number of bytes received on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ASGAverageNetworkOut</code> - average number of bytes sent out on all network interfaces by the Auto Scaling group</p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> - number of requests completed per target in an Application Load Balancer target group</p> </li> </ul> <p>For predefined metric types <code>ASGAverageCPUUtilization</code>, <code>ASGAverageNetworkIn</code>, and <code>ASGAverageNetworkOut</code>, the parameter must not be specified as the resource associated with the metric type is the Auto Scaling group. For predefined metric type <code>ALBRequestCountPerTarget</code>, the parameter must be specified in the format: <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i>/targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code>, where <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> is the final portion of the load balancer ARN, and <code>targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code> is the final portion of the target group ARN. The target group must be attached to the Auto Scaling group.</p>"
         }
       },
       "documentation":"<p>Configures a predefined metric for a target tracking policy.</p>"
@@ -2736,7 +2777,7 @@
         },
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the Auto Scaling group to which you want to assign the lifecycle hook.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "LifecycleTransition":{
           "shape":"LifecycleTransition",
@@ -2795,7 +2836,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name or ARN of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "PolicyName":{
           "shape":"XmlStringMaxLen255",
@@ -2852,7 +2893,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name or Amazon Resource Name (ARN) of the Auto Scaling group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "ScheduledActionName":{
           "shape":"XmlStringMaxLen255",
@@ -2906,7 +2947,7 @@
         },
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the Auto Scaling group for the hook.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "LifecycleActionToken":{
           "shape":"LifecycleActionToken",
@@ -2998,7 +3039,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>The name of the Auto Scaling group associated with this scaling policy.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "PolicyName":{
           "shape":"XmlStringMaxLen255",
@@ -3061,7 +3102,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name or Amazon Resource Name (ARN) of the Auto Scaling group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "ScalingProcesses":{
           "shape":"ProcessNames",
@@ -3091,7 +3132,7 @@
       "members":{
         "AutoScalingGroupName":{
           "shape":"XmlStringMaxLen255",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "ScheduledActionName":{
           "shape":"XmlStringMaxLen255",
@@ -3201,7 +3242,7 @@
         },
         "AutoScalingGroupName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the group.</p>"
+          "documentation":"<p>The name of the Auto Scaling group.</p>"
         },
         "ProtectedFromScaleIn":{
           "shape":"ProtectedFromScaleIn",
@@ -3402,7 +3443,11 @@
         },
         "LaunchConfigurationName":{
           "shape":"ResourceName",
-          "documentation":"<p>The name of the launch configuration.</p>"
+          "documentation":"<p>The name of the launch configuration. You must specify either a launch configuration or a launch template.</p>"
+        },
+        "LaunchTemplate":{
+          "shape":"LaunchTemplateSpecification",
+          "documentation":"<p>The launch template to use to specify the updates. You must specify a launch configuration or a launch template.</p>"
         },
         "MinSize":{
           "shape":"AutoScalingGroupMinSize",

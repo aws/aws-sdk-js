@@ -1012,6 +1012,14 @@ declare class EC2 extends Service {
    */
   describeInstanceAttribute(callback?: (err: AWSError, data: EC2.Types.InstanceAttribute) => void): Request<EC2.Types.InstanceAttribute, AWSError>;
   /**
+   * Describes the credit option for CPU usage of one or more of your T2 instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns only the T2 instances with the unlimited credit option. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  describeInstanceCreditSpecifications(params: EC2.Types.DescribeInstanceCreditSpecificationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceCreditSpecificationsResult) => void): Request<EC2.Types.DescribeInstanceCreditSpecificationsResult, AWSError>;
+  /**
+   * Describes the credit option for CPU usage of one or more of your T2 instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns only the T2 instances with the unlimited credit option. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  describeInstanceCreditSpecifications(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceCreditSpecificationsResult) => void): Request<EC2.Types.DescribeInstanceCreditSpecificationsResult, AWSError>;
+  /**
    * Describes the status of one or more instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status Checks for Your Instances and Troubleshooting Instances with Failed Status Checks in the Amazon Elastic Compute Cloud User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled Events for Your Instances in the Amazon Elastic Compute Cloud User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide.  
    */
   describeInstanceStatus(params: EC2.Types.DescribeInstanceStatusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
@@ -1699,6 +1707,14 @@ declare class EC2 extends Service {
    * Modifies the specified attribute of the specified instance. You can specify only one attribute at a time. To modify some attributes, the instance must be stopped. For more information, see Modifying Attributes of a Stopped Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyInstanceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Modifies the credit option for CPU usage on a running or stopped T2 instance. The credit options are standard and unlimited. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifyInstanceCreditSpecification(params: EC2.Types.ModifyInstanceCreditSpecificationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCreditSpecificationResult) => void): Request<EC2.Types.ModifyInstanceCreditSpecificationResult, AWSError>;
+  /**
+   * Modifies the credit option for CPU usage on a running or stopped T2 instance. The credit options are standard and unlimited. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifyInstanceCreditSpecification(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCreditSpecificationResult) => void): Request<EC2.Types.ModifyInstanceCreditSpecificationResult, AWSError>;
   /**
    * Set the instance affinity value for a specific stopped instance and modify the instance tenancy setting. Instance affinity is disabled by default. When instance affinity is host and it is not associated with a specific Dedicated Host, the next time it is launched it will automatically be associated with the host it lands on. This relationship will persist if the instance is stopped/started, or rebooted. You can modify the host ID associated with a stopped instance. If a stopped instance has a new host ID association, the instance will target that host when restarted. You can modify the tenancy of a stopped instance with a tenancy of host or dedicated. Affinity, hostID, and tenancy are not required parameters, but at least one of them must be specified in the request. Affinity and tenancy can be modified in the same request, but tenancy can only be modified on instances that are stopped.
    */
@@ -4475,7 +4491,7 @@ declare namespace EC2 {
     /**
      * The credit option for CPU usage of a T2 instance. Valid values are standard and unlimited.
      */
-    CpuCredits?: String;
+    CpuCredits: String;
   }
   export type CurrencyCodeValues = "USD"|string;
   export interface CustomerGateway {
@@ -5556,6 +5572,38 @@ declare namespace EC2 {
      * The ID of the instance.
      */
     InstanceId: String;
+  }
+  export interface DescribeInstanceCreditSpecificationsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters.    instance-id - The ID of the instance.  
+     */
+    Filters?: FilterList;
+    /**
+     * One or more instance IDs. Default: Describes all your instances. Constraints: Maximum 1000 explicitly specified instance IDs.
+     */
+    InstanceIds?: InstanceIdStringList;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeInstanceCreditSpecificationsResult {
+    /**
+     * Information about the credit option for CPU usage of an instance.
+     */
+    InstanceCreditSpecifications?: InstanceCreditSpecificationList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeInstanceStatusRequest {
     /**
@@ -9062,6 +9110,28 @@ declare namespace EC2 {
     State?: ListingState;
   }
   export type InstanceCountList = InstanceCount[];
+  export interface InstanceCreditSpecification {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+    /**
+     * The credit option for CPU usage of the instance. Valid values are standard and unlimited.
+     */
+    CpuCredits?: String;
+  }
+  export type InstanceCreditSpecificationList = InstanceCreditSpecification[];
+  export type InstanceCreditSpecificationListRequest = InstanceCreditSpecificationRequest[];
+  export interface InstanceCreditSpecificationRequest {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+    /**
+     * The credit option for CPU usage of the instance. Valid values are standard and unlimited.
+     */
+    CpuCredits?: String;
+  }
   export interface InstanceExportDetails {
     /**
      * The ID of the resource being exported.
@@ -9379,7 +9449,7 @@ declare namespace EC2 {
      */
     Status?: SummaryStatus;
   }
-  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.16xlarge"|string;
+  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.12xlarge"|"m5.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|string;
   export type InstanceTypeList = InstanceType[];
   export type Integer = number;
   export type InterfacePermissionType = "INSTANCE-ATTACH"|"EIP-ASSOCIATE"|string;
@@ -10312,6 +10382,30 @@ declare namespace EC2 {
      * A new value for the attribute. Use only with the kernel, ramdisk, userData, disableApiTermination, or instanceInitiatedShutdownBehavior attribute.
      */
     Value?: String;
+  }
+  export interface ModifyInstanceCreditSpecificationRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Information about the credit option for CPU usage.
+     */
+    InstanceCreditSpecifications: InstanceCreditSpecificationListRequest;
+  }
+  export interface ModifyInstanceCreditSpecificationResult {
+    /**
+     * Information about the instances whose credit option for CPU usage was successfully modified.
+     */
+    SuccessfulInstanceCreditSpecifications?: SuccessfulInstanceCreditSpecificationSet;
+    /**
+     * Information about the instances whose credit option for CPU usage was not modified.
+     */
+    UnsuccessfulInstanceCreditSpecifications?: UnsuccessfulInstanceCreditSpecificationSet;
   }
   export interface ModifyInstancePlacementRequest {
     /**
@@ -12876,6 +12970,10 @@ declare namespace EC2 {
      * The market (purchasing) option for the instances.
      */
     InstanceMarketOptions?: InstanceMarketOptionsRequest;
+    /**
+     * The credit option for CPU usage of the instance. Valid values are standard and unlimited. To change this attribute after launch, use ModifyInstanceCreditSpecification. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide. Default: standard 
+     */
+    CreditSpecification?: CreditSpecificationRequest;
   }
   export interface RunScheduledInstancesRequest {
     /**
@@ -14182,6 +14280,13 @@ declare namespace EC2 {
   export type SubnetIpv6CidrBlockAssociationSet = SubnetIpv6CidrBlockAssociation[];
   export type SubnetList = Subnet[];
   export type SubnetState = "pending"|"available"|string;
+  export interface SuccessfulInstanceCreditSpecificationItem {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+  }
+  export type SuccessfulInstanceCreditSpecificationSet = SuccessfulInstanceCreditSpecificationItem[];
   export type SummaryStatus = "ok"|"impaired"|"insufficient-data"|"not-applicable"|"initializing"|string;
   export interface Tag {
     /**
@@ -14335,6 +14440,28 @@ declare namespace EC2 {
      */
     InstanceMonitorings?: InstanceMonitoringList;
   }
+  export type UnsuccessfulInstanceCreditSpecificationErrorCode = "InvalidInstanceID.Malformed"|"InvalidInstanceID.NotFound"|"IncorrectInstanceState"|"InstanceCreditSpecification.NotSupported"|string;
+  export interface UnsuccessfulInstanceCreditSpecificationItem {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+    /**
+     * The applicable error for the T2 instance whose credit option for CPU usage was not modified.
+     */
+    Error?: UnsuccessfulInstanceCreditSpecificationItemError;
+  }
+  export interface UnsuccessfulInstanceCreditSpecificationItemError {
+    /**
+     * The error code.
+     */
+    Code?: UnsuccessfulInstanceCreditSpecificationErrorCode;
+    /**
+     * The applicable error message.
+     */
+    Message?: String;
+  }
+  export type UnsuccessfulInstanceCreditSpecificationSet = UnsuccessfulInstanceCreditSpecificationItem[];
   export interface UnsuccessfulItem {
     /**
      * Information about the error.

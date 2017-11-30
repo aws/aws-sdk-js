@@ -512,5 +512,9 @@
   },
   "translate": {
     "name": "Translate"
+  },
+  "resourcegroups": {
+    "prefix": "resource-groups",
+    "name": "ResourceGroups"
   }
 }

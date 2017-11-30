@@ -123,5 +123,6 @@ module.exports = {
   KinesisVideo: require('./kinesisvideo'),
   SageMakerRuntime: require('./sagemakerruntime'),
   SageMaker: require('./sagemaker'),
-  Translate: require('./translate')
+  Translate: require('./translate'),
+  ResourceGroups: require('./resourcegroups')
 };
