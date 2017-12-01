@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.161.0-->
+<!--LATEST=2.162.0-->
 <!--ENTRYINSERT-->
+
+## 2.162.0
+* feature: SageMaker: Preparing to release updated waiters week of December 4, 2017 for all supported SDKs.
 
 ## 2.161.0
 * feature: APIGateway: Added support Private Integration and VPC Link features in API Gateway. This allows to create an API with the API Gateway private integration, thus providing clients access to HTTP/HTTPS resources in an Amazon VPC from outside of the VPC through a VpcLink resource.
