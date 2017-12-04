@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "Budgets",
+        "description": "Add additional costTypes to support finer control for different charges included in a cost budget."
+    }
+]

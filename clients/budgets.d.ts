@@ -122,7 +122,7 @@ declare namespace Budgets {
     BudgetName: BudgetName;
     BudgetLimit: Spend;
     CostFilters?: CostFilters;
-    CostTypes: CostTypes;
+    CostTypes?: CostTypes;
     TimeUnit: TimeUnit;
     TimePeriod: TimePeriod;
     CalculatedSpend?: CalculatedSpend;
@@ -138,9 +138,42 @@ declare namespace Budgets {
   export type ComparisonOperator = "GREATER_THAN"|"LESS_THAN"|"EQUAL_TO"|string;
   export type CostFilters = {[key: string]: DimensionValues};
   export interface CostTypes {
-    IncludeTax: GenericBoolean;
-    IncludeSubscription: GenericBoolean;
-    UseBlended: GenericBoolean;
+    /**
+     * A boolean value whether to include tax in the cost budget.
+     */
+    IncludeTax?: NullableBoolean;
+    /**
+     * A boolean value whether to include subscriptions in the cost budget.
+     */
+    IncludeSubscription?: NullableBoolean;
+    /**
+     * A boolean value whether to use blended costs in the cost budget.
+     */
+    UseBlended?: NullableBoolean;
+    /**
+     * A boolean value whether to include refunds in the cost budget.
+     */
+    IncludeRefund?: NullableBoolean;
+    /**
+     * A boolean value whether to include credits in the cost budget.
+     */
+    IncludeCredit?: NullableBoolean;
+    /**
+     * A boolean value whether to include upfront costs in the cost budget.
+     */
+    IncludeUpfront?: NullableBoolean;
+    /**
+     * A boolean value whether to include recurring costs in the cost budget.
+     */
+    IncludeRecurring?: NullableBoolean;
+    /**
+     * A boolean value whether to include other subscription costs in the cost budget.
+     */
+    IncludeOtherSubscription?: NullableBoolean;
+    /**
+     * A boolean value whether to include support costs in the cost budget.
+     */
+    IncludeSupport?: NullableBoolean;
   }
   export interface CreateBudgetRequest {
     AccountId: AccountId;
@@ -224,7 +257,6 @@ declare namespace Budgets {
     NextToken?: GenericString;
   }
   export type DimensionValues = GenericString[];
-  export type GenericBoolean = boolean;
   export type GenericString = string;
   export type GenericTimestamp = Date;
   export type MaxResults = number;
@@ -242,6 +274,7 @@ declare namespace Budgets {
   }
   export type NotificationWithSubscribersList = NotificationWithSubscribers[];
   export type Notifications = Notification[];
+  export type NullableBoolean = boolean;
   export type NumericValue = string;
   export interface Spend {
     Amount: NumericValue;
@@ -249,8 +282,9 @@ declare namespace Budgets {
   }
   export interface Subscriber {
     SubscriptionType: SubscriptionType;
-    Address: GenericString;
+    Address: SubscriberAddress;
   }
+  export type SubscriberAddress = string;
   export type Subscribers = Subscriber[];
   export type SubscriptionType = "SNS"|"EMAIL"|string;
   export type ThresholdType = "PERCENTAGE"|"ABSOLUTE_VALUE"|string;

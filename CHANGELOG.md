@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.162.0-->
+<!--LATEST=2.163.0-->
 <!--ENTRYINSERT-->
+
+## 2.163.0
+* feature: Budgets: Add additional costTypes to support finer control for different charges included in a cost budget.
 
 ## 2.162.0
 * feature: SageMaker: Preparing to release updated waiters week of December 4, 2017 for all supported SDKs.

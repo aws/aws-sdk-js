@@ -233,7 +233,6 @@
       "required":[
         "BudgetName",
         "BudgetLimit",
-        "CostTypes",
         "TimeUnit",
         "TimePeriod",
         "BudgetType"
@@ -296,15 +295,43 @@
     },
     "CostTypes":{
       "type":"structure",
-      "required":[
-        "IncludeTax",
-        "IncludeSubscription",
-        "UseBlended"
-      ],
       "members":{
-        "IncludeTax":{"shape":"GenericBoolean"},
-        "IncludeSubscription":{"shape":"GenericBoolean"},
-        "UseBlended":{"shape":"GenericBoolean"}
+        "IncludeTax":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include tax in the cost budget."
+        },
+        "IncludeSubscription":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include subscriptions in the cost budget."
+        },
+        "UseBlended":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to use blended costs in the cost budget."
+        },
+        "IncludeRefund":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include refunds in the cost budget."
+        },
+        "IncludeCredit":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include credits in the cost budget."
+        },
+        "IncludeUpfront":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include upfront costs in the cost budget."
+        },
+        "IncludeRecurring":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include recurring costs in the cost budget."
+        },
+        "IncludeOtherSubscription":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include other subscription costs in the cost budget."
+        },
+        "IncludeSupport":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include support costs in the cost budget."
+        }
       },
       "documentation":"This includes the options for getting the cost of a budget."
     },
@@ -542,10 +569,6 @@
       "documentation":"This exception is thrown if the paging token is expired - past its TTL",
       "exception":true
     },
-    "GenericBoolean":{
-      "type":"boolean",
-      "documentation":"A generic boolean value."
-    },
     "GenericString":{
       "type":"string",
       "documentation":"A generic String."
@@ -645,6 +668,10 @@
       "member":{"shape":"Notification"},
       "documentation":"A list of notifications."
     },
+    "NullableBoolean":{
+      "type":"boolean",
+      "box":true
+    },
     "NumericValue":{
       "type":"string",
       "documentation":"A string to represent NumericValue.",
@@ -670,9 +697,14 @@
       ],
       "members":{
         "SubscriptionType":{"shape":"SubscriptionType"},
-        "Address":{"shape":"GenericString"}
+        "Address":{"shape":"SubscriberAddress"}
       },
       "documentation":"Subscriber model. Each notification may contain multiple subscribers with different addresses."
+    },
+    "SubscriberAddress":{
+      "type":"string",
+      "documentation":"String containing email or sns topic for the subscriber address.",
+      "min":1
     },
     "Subscribers":{
       "type":"list",
