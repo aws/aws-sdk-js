@@ -24,7 +24,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Accepts an offer to share a portfolio.</p>"
+      "documentation":"<p>Accepts an offer to share the specified portfolio.</p>"
     },
     "AssociatePrincipalWithPortfolio":{
       "name":"AssociatePrincipalWithPortfolio",
@@ -54,7 +54,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Associates a product with a portfolio.</p>"
+      "documentation":"<p>Associates the specified product with the specified portfolio.</p>"
     },
     "AssociateTagOptionWithResource":{
       "name":"AssociateTagOptionWithResource",
@@ -72,7 +72,7 @@
         {"shape":"DuplicateResourceException"},
         {"shape":"InvalidStateException"}
       ],
-      "documentation":"<p>Associate a TagOption identifier with a resource identifier.</p>"
+      "documentation":"<p>Associate the specified TagOption with the specified portfolio or product.</p>"
     },
     "CopyProduct":{
       "name":"CopyProduct",
@@ -86,7 +86,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Copies the specified source product to the specified target product or a new product.</p> <p>You can copy the product to the same account or another account. You can copy the product to the same region or another region.</p> <p>This operation is performed asynchronously. To track the progress of the operation, use <a>DescribeCopyProductStatus</a>.</p>"
+      "documentation":"<p>Copies the specified source product to the specified target product or a new product.</p> <p>You can copy a product to the same account or another account. You can copy a product to the same region or another region.</p> <p>This operation is performed asynchronously. To track the progress of the operation, use <a>DescribeCopyProductStatus</a>.</p>"
     },
     "CreateConstraint":{
       "name":"CreateConstraint",
@@ -102,7 +102,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"DuplicateResourceException"}
       ],
-      "documentation":"<p>Creates a new constraint. For more information, see <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html\">Using Constraints</a>.</p>"
+      "documentation":"<p>Creates a constraint.</p>"
     },
     "CreatePortfolio":{
       "name":"CreatePortfolio",
@@ -117,7 +117,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"TagOptionNotMigratedException"}
       ],
-      "documentation":"<p>Creates a new portfolio.</p>"
+      "documentation":"<p>Creates a portfolio.</p>"
     },
     "CreatePortfolioShare":{
       "name":"CreatePortfolioShare",
@@ -132,7 +132,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Creates a new portfolio share.</p>"
+      "documentation":"<p>Shares the specified portfolio with the specified account.</p>"
     },
     "CreateProduct":{
       "name":"CreateProduct",
@@ -147,7 +147,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"TagOptionNotMigratedException"}
       ],
-      "documentation":"<p>Creates a new product.</p>"
+      "documentation":"<p>Creates a product.</p>"
     },
     "CreateProvisioningArtifact":{
       "name":"CreateProvisioningArtifact",
@@ -162,7 +162,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.</p>"
+      "documentation":"<p>Creates a provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot create a provisioning artifact for a product that was shared with you.</p>"
     },
     "CreateTagOption":{
       "name":"CreateTagOption",
@@ -177,7 +177,7 @@
         {"shape":"DuplicateResourceException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Create a new TagOption.</p>"
+      "documentation":"<p>Creates a TagOption.</p>"
     },
     "DeleteConstraint":{
       "name":"DeleteConstraint",
@@ -207,7 +207,7 @@
         {"shape":"ResourceInUseException"},
         {"shape":"TagOptionNotMigratedException"}
       ],
-      "documentation":"<p>Deletes the specified portfolio. This operation does not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.</p>"
+      "documentation":"<p>Deletes the specified portfolio.</p> <p>You cannot delete a portfolio if it was shared with you or if it has associated products, users, constraints, or shared accounts.</p>"
     },
     "DeletePortfolioShare":{
       "name":"DeletePortfolioShare",
@@ -220,7 +220,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Deletes the specified portfolio share.</p>"
+      "documentation":"<p>Stops sharing the specified portfolio with the specified account.</p>"
     },
     "DeleteProduct":{
       "name":"DeleteProduct",
@@ -236,7 +236,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"TagOptionNotMigratedException"}
       ],
-      "documentation":"<p>Deletes the specified product. This operation does not work with a product that has been shared with you or is associated with a portfolio. </p>"
+      "documentation":"<p>Deletes the specified product.</p> <p>You cannot delete a product if it was shared with you or is associated with a portfolio.</p>"
     },
     "DeleteProvisioningArtifact":{
       "name":"DeleteProvisioningArtifact",
@@ -251,7 +251,7 @@
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Deletes the specified provisioning artifact. This operation does not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).</p>"
+      "documentation":"<p>Deletes the specified provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.</p>"
     },
     "DescribeConstraint":{
       "name":"DescribeConstraint",
@@ -264,7 +264,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Retrieves detailed information for a specified constraint.</p>"
+      "documentation":"<p>Gets information about the specified constraint.</p>"
     },
     "DescribeCopyProductStatus":{
       "name":"DescribeCopyProductStatus",
@@ -277,7 +277,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Describes the status of the specified copy product operation.</p>"
+      "documentation":"<p>Gets the status of the specified copy product operation.</p>"
     },
     "DescribePortfolio":{
       "name":"DescribePortfolio",
@@ -290,7 +290,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Retrieves detailed information and any tags associated with the specified portfolio.</p>"
+      "documentation":"<p>Gets information about the specified portfolio.</p>"
     },
     "DescribeProduct":{
       "name":"DescribeProduct",
@@ -304,7 +304,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Retrieves information about a specified product.</p> <p>This operation is functionally identical to <a>DescribeProductView</a> except that it takes as input <code>ProductId</code> instead of <code>ProductViewId</code>.</p>"
+      "documentation":"<p>Gets information about the specified product.</p>"
     },
     "DescribeProductAsAdmin":{
       "name":"DescribeProductAsAdmin",
@@ -317,7 +317,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Retrieves information about a specified product, run with administrator access.</p>"
+      "documentation":"<p>Gets information about the specified product. This operation is run with administrator access.</p>"
     },
     "DescribeProductView":{
       "name":"DescribeProductView",
@@ -331,7 +331,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Retrieves information about a specified product.</p> <p>This operation is functionally identical to <a>DescribeProduct</a> except that it takes as input <code>ProductViewId</code> instead of <code>ProductId</code>.</p>"
+      "documentation":"<p>Gets information about the specified product.</p>"
     },
     "DescribeProvisionedProduct":{
       "name":"DescribeProvisionedProduct",
@@ -344,7 +344,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Retrieve detailed information about the provisioned product.</p>"
+      "documentation":"<p>Gets information about the specified provisioned product.</p>"
     },
     "DescribeProvisioningArtifact":{
       "name":"DescribeProvisioningArtifact",
@@ -357,7 +357,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Retrieves detailed information about the specified provisioning artifact.</p>"
+      "documentation":"<p>Gets information about the specified provisioning artifact (also known as a version) for the specified product.</p>"
     },
     "DescribeProvisioningParameters":{
       "name":"DescribeProvisioningParameters",
@@ -371,7 +371,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of <code>ProvisioningArtifactParameters</code> parameters available to call the <a>ProvisionProduct</a> operation for the specified product.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to the <code>ProvisionProduct</code> operation, do not include conflicted TagOption keys as tags. Calls to <code>ProvisionProduct</code> with empty TagOption values cause the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i> \". Calls to <code>ProvisionProduct</code> with conflicted TagOption keys automatically tag the provisioned product with the conflicted keys with the value \"<code>sc-tagoption-conflict-portfolioId-productId</code>\".</p>"
+      "documentation":"<p>Gets information about the configuration required to provision the specified product using the specified provisioning artifact.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to <a>ProvisionProduct</a>, do not include conflicted TagOption keys as tags, or this will cause the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\" and tag the provisioned product with the value <code>sc-tagoption-conflict-portfolioId-productId</code>.</p>"
     },
     "DescribeRecord":{
       "name":"DescribeRecord",
@@ -384,7 +384,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Retrieves a paginated list of the full details of a specific request. Use this operation after calling a request operation (<a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p>"
+      "documentation":"<p>Gets information about the specified request operation.</p> <p>Use this operation after calling a request operation (for example, <a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p>"
     },
     "DescribeTagOption":{
       "name":"DescribeTagOption",
@@ -398,7 +398,7 @@
         {"shape":"TagOptionNotMigratedException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Describes a TagOption.</p>"
+      "documentation":"<p>Gets information about the specified TagOption.</p>"
     },
     "DisassociatePrincipalFromPortfolio":{
       "name":"DisassociatePrincipalFromPortfolio",
@@ -441,7 +441,7 @@
         {"shape":"TagOptionNotMigratedException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Disassociates a TagOption from a resource.</p>"
+      "documentation":"<p>Disassociates the specified TagOption from the specified resource.</p>"
     },
     "ListAcceptedPortfolioShares":{
       "name":"ListAcceptedPortfolioShares",
@@ -454,7 +454,7 @@
       "errors":[
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Lists details of all portfolios for which sharing was accepted by this account.</p>"
+      "documentation":"<p>Lists all portfolios for which sharing was accepted by this account.</p>"
     },
     "ListConstraintsForPortfolio":{
       "name":"ListConstraintsForPortfolio",
@@ -468,7 +468,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Retrieves detailed constraint information for the specified portfolio and product.</p>"
+      "documentation":"<p>Lists the constraints for the specified portfolio and product.</p>"
     },
     "ListLaunchPaths":{
       "name":"ListLaunchPaths",
@@ -482,7 +482,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Returns a paginated list of all paths to a specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.</p>"
+      "documentation":"<p>Lists the paths to the specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.</p>"
     },
     "ListPortfolioAccess":{
       "name":"ListPortfolioAccess",
@@ -495,7 +495,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Lists the account IDs that have been authorized sharing of the specified portfolio.</p>"
+      "documentation":"<p>Lists the account IDs that have access to the specified portfolio.</p>"
     },
     "ListPortfolios":{
       "name":"ListPortfolios",
@@ -550,7 +550,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Lists all provisioning artifacts associated with the specified product.</p>"
+      "documentation":"<p>Lists all provisioning artifacts (also known as versions) for the specified product.</p>"
     },
     "ListRecordHistory":{
       "name":"ListRecordHistory",
@@ -563,7 +563,7 @@
       "errors":[
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Returns a paginated list of all performed requests, in the form of RecordDetails objects that are filtered as specified.</p>"
+      "documentation":"<p>Lists the specified requests or all performed requests.</p>"
     },
     "ListResourcesForTagOption":{
       "name":"ListResourcesForTagOption",
@@ -578,7 +578,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Lists resources associated with a TagOption.</p>"
+      "documentation":"<p>Lists the resources associated with the specified TagOption.</p>"
     },
     "ListTagOptions":{
       "name":"ListTagOptions",
@@ -592,7 +592,7 @@
         {"shape":"TagOptionNotMigratedException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Lists detailed TagOptions information.</p>"
+      "documentation":"<p>Lists the specified TagOptions or all TagOptions.</p>"
     },
     "ProvisionProduct":{
       "name":"ProvisionProduct",
@@ -607,7 +607,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"DuplicateResourceException"}
       ],
-      "documentation":"<p>Requests a <i>provision</i> of a specified product. A <i>provisioned product</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation. The error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\" indicates that your request contains a tag which has a tag key but no corresponding tag value (value is empty or null). Your call may have included values returned from a <code>DescribeProvisioningParameters</code> call that resulted in a TagOption key with an empty list. This happens when TagOption keys are in conflict. For more information, see <a>DescribeProvisioningParameters</a>.</p>"
+      "documentation":"<p>Provisions the specified product.</p> <p>A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using <a>DescribeRecord</a>.</p> <p>If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this will cause the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\".</p>"
     },
     "RejectPortfolioShare":{
       "name":"RejectPortfolioShare",
@@ -620,7 +620,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Rejects an offer to share a portfolio.</p>"
+      "documentation":"<p>Rejects an offer to share the specified portfolio.</p>"
     },
     "ScanProvisionedProducts":{
       "name":"ScanProvisionedProducts",
@@ -633,7 +633,7 @@
       "errors":[
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Returns a paginated list of all the ProvisionedProduct objects that are currently available (not terminated). </p>"
+      "documentation":"<p>Lists the provisioned products that are available (not terminated).</p>"
     },
     "SearchProducts":{
       "name":"SearchProducts",
@@ -646,7 +646,7 @@
       "errors":[
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Returns a paginated list all of the <code>Products</code> objects to which the caller has access. </p> <p>The output of this operation can be used as input for other operations, such as <a>DescribeProductView</a>.</p>"
+      "documentation":"<p>Gets information about the products to which the caller has access.</p>"
     },
     "SearchProductsAsAdmin":{
       "name":"SearchProductsAsAdmin",
@@ -660,7 +660,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Retrieves summary and status information about all products created within the caller's account. If a portfolio ID is provided, this operation retrieves information for only those products that are associated with the specified portfolio.</p>"
+      "documentation":"<p>Gets information about the products for the specified portfolio or all products.</p>"
     },
     "TerminateProvisionedProduct":{
       "name":"TerminateProvisionedProduct",
@@ -673,7 +673,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Requests termination of an existing ProvisionedProduct object. If there are <code>Tags</code> associated with the object, they are terminated when the ProvisionedProduct object is terminated. </p> <p>This operation does not delete any records associated with the ProvisionedProduct object.</p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
+      "documentation":"<p>Terminates the specified provisioned product.</p> <p>This operation does not delete any records associated with the provisioned product.</p> <p>You can check the status of this request using <a>DescribeRecord</a>.</p>"
     },
     "UpdateConstraint":{
       "name":"UpdateConstraint",
@@ -687,7 +687,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Updates an existing constraint.</p>"
+      "documentation":"<p>Updates the specified constraint.</p>"
     },
     "UpdatePortfolio":{
       "name":"UpdatePortfolio",
@@ -703,7 +703,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"TagOptionNotMigratedException"}
       ],
-      "documentation":"<p>Updates the specified portfolio's details. This operation does not work with a product that has been shared with you.</p>"
+      "documentation":"<p>Updates the specified portfolio.</p> <p>You cannot update a product that was shared with you.</p>"
     },
     "UpdateProduct":{
       "name":"UpdateProduct",
@@ -718,7 +718,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"TagOptionNotMigratedException"}
       ],
-      "documentation":"<p>Updates an existing product.</p>"
+      "documentation":"<p>Updates the specified product.</p>"
     },
     "UpdateProvisionedProduct":{
       "name":"UpdateProvisionedProduct",
@@ -732,7 +732,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Requests updates to the configuration of an existing ProvisionedProduct object. If there are tags associated with the object, they cannot be updated or added with this operation. Depending on the specific updates requested, this operation may update with no interruption, with some interruption, or replace the ProvisionedProduct object entirely. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>"
+      "documentation":"<p>Requests updates to the configuration of the specified provisioned product.</p> <p>If there are tags associated with the object, they cannot be updated or added. Depending on the specific updates requested, this operation can update with no interruption, with some interruption, or replace the provisioned product entirely.</p> <p>You can check the status of this request using <a>DescribeRecord</a>.</p>"
     },
     "UpdateProvisioningArtifact":{
       "name":"UpdateProvisioningArtifact",
@@ -746,7 +746,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Updates an existing provisioning artifact's information. This operation does not work on a provisioning artifact associated with a product that has been shared with you.</p>"
+      "documentation":"<p>Updates the specified provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot update a provisioning artifact for a product that was shared with you.</p>"
     },
     "UpdateTagOption":{
       "name":"UpdateTagOption",
@@ -762,7 +762,7 @@
         {"shape":"DuplicateResourceException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Updates an existing TagOption.</p>"
+      "documentation":"<p>Updates the specified TagOption.</p>"
     }
   },
   "shapes":{
@@ -791,14 +791,14 @@
       "members":{
         "Key":{
           "shape":"AccessLevelFilterKey",
-          "documentation":"<p>Specifies the access level.</p> <p> <code>Account</code> allows results at the account level. </p> <p> <code>Role</code> allows results based on the federated role of the specified user.</p> <p> <code>User</code> allows results limited to the specified user. </p>"
+          "documentation":"<p>The access level.</p> <ul> <li> <p> <code>Account</code> - Filter results based on the account.</p> </li> <li> <p> <code>Role</code> - Filter results based on the federated role of the specified user.</p> </li> <li> <p> <code>User</code> - Filter results based on the specified user.</p> </li> </ul>"
         },
         "Value":{
           "shape":"AccessLevelFilterValue",
-          "documentation":"<p>Specifies the user to which the access level applies. A value of <code>Self</code> is currently supported.</p>"
+          "documentation":"<p>The user to which the access level applies. The only supported value is <code>Self</code>.</p>"
         }
       },
-      "documentation":"<p>The access level to limit results.</p>"
+      "documentation":"<p>The access level to use to filter results.</p>"
     },
     "AccessLevelFilterKey":{
       "type":"string",
@@ -846,11 +846,11 @@
         },
         "PrincipalARN":{
           "shape":"PrincipalARN",
-          "documentation":"<p>The ARN representing the principal (IAM user, role, or group).</p>"
+          "documentation":"<p>The ARN of the principal (IAM user, role, or group).</p>"
         },
         "PrincipalType":{
           "shape":"PrincipalType",
-          "documentation":"<p>The principal type. Must be <code>IAM</code> </p>"
+          "documentation":"<p>The principal type. The supported value is <code>IAM</code>.</p>"
         }
       }
     },
@@ -880,7 +880,7 @@
         },
         "SourcePortfolioId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the source portfolio to use with this association.</p>"
+          "documentation":"<p>The identifier of the source portfolio.</p>"
         }
       }
     },
@@ -925,18 +925,18 @@
         },
         "Type":{
           "shape":"ConstraintType",
-          "documentation":"<p>The type of the constraint.</p>"
+          "documentation":"<p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>"
         },
         "Description":{
           "shape":"ConstraintDescription",
-          "documentation":"<p>The text description of the constraint.</p>"
+          "documentation":"<p>The description of the constraint.</p>"
         },
         "Owner":{
           "shape":"AccountId",
           "documentation":"<p>The owner of the constraint.</p>"
         }
       },
-      "documentation":"<p>Detailed constraint information.</p>"
+      "documentation":"<p>Information about a constraint.</p>"
     },
     "ConstraintDetails":{
       "type":"list",
@@ -952,14 +952,14 @@
       "members":{
         "Type":{
           "shape":"ConstraintType",
-          "documentation":"<p>The type of the constraint. </p>"
+          "documentation":"<p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>"
         },
         "Description":{
           "shape":"ConstraintDescription",
-          "documentation":"<p>The text description of the constraint.</p>"
+          "documentation":"<p>The description of the constraint.</p>"
         }
       },
-      "documentation":"<p>An administrator-specified constraint to apply when provisioning a product.</p>"
+      "documentation":"<p>Summary information about a constraint.</p>"
     },
     "ConstraintType":{
       "type":"string",
@@ -991,7 +991,7 @@
         },
         "TargetProductId":{
           "shape":"Id",
-          "documentation":"<p>The ID of the target product. By default, a new product is created.</p>"
+          "documentation":"<p>The identifier of the target product. By default, a new product is created.</p>"
         },
         "TargetProductName":{
           "shape":"ProductViewName",
@@ -999,7 +999,7 @@
         },
         "SourceProvisioningArtifactIdentifiers":{
           "shape":"SourceProvisioningArtifactProperties",
-          "documentation":"<p>The IDs of the product versions to copy. By default, all provisioning artifacts are copied.</p>"
+          "documentation":"<p>The identifiers of the provisioning artifacts (also known as versions) of the product to copy. By default, all provisioning artifacts are copied.</p>"
         },
         "CopyOptions":{
           "shape":"CopyOptions",
@@ -1007,7 +1007,7 @@
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p> A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request. </p>",
+          "documentation":"<p> A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request. </p>",
           "idempotencyToken":true
         }
       }
@@ -1017,7 +1017,7 @@
       "members":{
         "CopyProductToken":{
           "shape":"Id",
-          "documentation":"<p>A unique token to pass to <code>DescribeCopyProductStatus</code> to track the progress of the operation.</p>"
+          "documentation":"<p>The token to use to track the progress of the operation.</p>"
         }
       }
     },
@@ -1053,19 +1053,19 @@
         },
         "Parameters":{
           "shape":"ConstraintParameters",
-          "documentation":"<p>The constraint parameters. Expected values vary depending on which <b>Type</b> is specified. For more information, see the Examples section.</p> <p>For Type <code>LAUNCH</code>, the <code>RoleArn</code> property is required. </p> <p>For Type <code>NOTIFICATION</code>, the <code>NotificationArns</code> property is required.</p> <p>For Type <code>TEMPLATE</code>, the <code>Rules</code> property is required.</p>"
+          "documentation":"<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>Specify the <code>RoleArn</code> property as follows:</p> <p>\\\"RoleArn\\\" : \\\"arn:aws:iam::123456789012:role/LaunchRole\\\"</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p>\\\"NotificationArns\\\" : [\\\"arn:aws:sns:us-east-1:123456789012:Topic\\\"]</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html\">Template Constraint Rules</a>.</p> </dd> </dl>"
         },
         "Type":{
           "shape":"ConstraintType",
-          "documentation":"<p>The type of the constraint. Case-sensitive valid values are: <code>LAUNCH</code>, <code>NOTIFICATION</code>, or <code>TEMPLATE</code>. </p>"
+          "documentation":"<p>The type of constraint.</p> <ul> <li> <p> <code>LAUNCH</code> </p> </li> <li> <p> <code>NOTIFICATION</code> </p> </li> <li> <p> <code>TEMPLATE</code> </p> </li> </ul>"
         },
         "Description":{
           "shape":"ConstraintDescription",
-          "documentation":"<p>The text description of the constraint.</p>"
+          "documentation":"<p>The description of the constraint.</p>"
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "documentation":"<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
           "idempotencyToken":true
         }
       }
@@ -1075,11 +1075,11 @@
       "members":{
         "ConstraintDetail":{
           "shape":"ConstraintDetail",
-          "documentation":"<p>The resulting detailed constraint information.</p>"
+          "documentation":"<p>Information about the constraint.</p>"
         },
         "ConstraintParameters":{
           "shape":"ConstraintParameters",
-          "documentation":"<p>The resulting constraint parameters.</p>"
+          "documentation":"<p>The constraint parameters.</p>"
         },
         "Status":{
           "shape":"Status",
@@ -1105,7 +1105,7 @@
         },
         "Description":{
           "shape":"PortfolioDescription",
-          "documentation":"<p>The text description of the portfolio.</p>"
+          "documentation":"<p>The description of the portfolio.</p>"
         },
         "ProviderName":{
           "shape":"ProviderName",
@@ -1113,11 +1113,11 @@
         },
         "Tags":{
           "shape":"AddTags",
-          "documentation":"<p>Tags to associate with the new portfolio.</p>"
+          "documentation":"<p>The tags to associate with the portfolio.</p>"
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "documentation":"<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
           "idempotencyToken":true
         }
       }
@@ -1127,11 +1127,11 @@
       "members":{
         "PortfolioDetail":{
           "shape":"PortfolioDetail",
-          "documentation":"<p>The resulting detailed portfolio information.</p>"
+          "documentation":"<p>Information about the portfolio.</p>"
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>Tags successfully associated with the new portfolio.</p>"
+          "documentation":"<p>Information about the tags associated with the portfolio.</p>"
         }
       }
     },
@@ -1152,7 +1152,7 @@
         },
         "AccountId":{
           "shape":"AccountId",
-          "documentation":"<p>The account ID with which to share the portfolio.</p>"
+          "documentation":"<p>The AWS account ID.</p>"
         }
       }
     },
@@ -1185,7 +1185,7 @@
         },
         "Description":{
           "shape":"ProductViewShortDescription",
-          "documentation":"<p>The text description of the product.</p>"
+          "documentation":"<p>The description of the product.</p>"
         },
         "Distributor":{
           "shape":"ProductViewOwner",
@@ -1193,31 +1193,31 @@
         },
         "SupportDescription":{
           "shape":"SupportDescription",
-          "documentation":"<p>Support information about the product.</p>"
+          "documentation":"<p>The support information about the product.</p>"
         },
         "SupportEmail":{
           "shape":"SupportEmail",
-          "documentation":"<p>Contact email for product support.</p>"
+          "documentation":"<p>The contact email for product support.</p>"
         },
         "SupportUrl":{
           "shape":"SupportUrl",
-          "documentation":"<p>Contact URL for product support.</p>"
+          "documentation":"<p>The contact URL for product support.</p>"
         },
         "ProductType":{
           "shape":"ProductType",
-          "documentation":"<p>The type of the product to create.</p>"
+          "documentation":"<p>The type of product.</p>"
         },
         "Tags":{
           "shape":"AddTags",
-          "documentation":"<p>Tags to associate with the new product.</p>"
+          "documentation":"<p>The tags to associate with the product.</p>"
         },
         "ProvisioningArtifactParameters":{
           "shape":"ProvisioningArtifactProperties",
-          "documentation":"<p>Parameters for the provisioning artifact.</p>"
+          "documentation":"<p>The configuration of the provisioning artifact.</p>"
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "documentation":"<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
           "idempotencyToken":true
         }
       }
@@ -1227,15 +1227,15 @@
       "members":{
         "ProductViewDetail":{
           "shape":"ProductViewDetail",
-          "documentation":"<p>The resulting detailed product view information.</p>"
+          "documentation":"<p>Information about the product view.</p>"
         },
         "ProvisioningArtifactDetail":{
           "shape":"ProvisioningArtifactDetail",
-          "documentation":"<p>The resulting detailed provisioning artifact information.</p>"
+          "documentation":"<p>Information about the provisioning artifact.</p>"
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>Tags successfully associated with the new product.</p>"
+          "documentation":"<p>Information about the tags associated with the product.</p>"
         }
       }
     },
@@ -1257,11 +1257,11 @@
         },
         "Parameters":{
           "shape":"ProvisioningArtifactProperties",
-          "documentation":"<p>The parameters to use when creating the new provisioning artifact.</p>"
+          "documentation":"<p>The configuration for the provisioning artifact.</p>"
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>",
+          "documentation":"<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
           "idempotencyToken":true
         }
       }
@@ -1271,11 +1271,11 @@
       "members":{
         "ProvisioningArtifactDetail":{
           "shape":"ProvisioningArtifactDetail",
-          "documentation":"<p>The resulting detailed provisioning artifact information.</p>"
+          "documentation":"<p>Information about the provisioning artifact.</p>"
         },
         "Info":{
           "shape":"ProvisioningArtifactInfo",
-          "documentation":"<p>Additional information about the creation request for the provisioning artifact.</p>"
+          "documentation":"<p>The URL of the CloudFormation template in Amazon S3, in JSON format.</p>"
         },
         "Status":{
           "shape":"Status",
@@ -1305,7 +1305,7 @@
       "members":{
         "TagOptionDetail":{
           "shape":"TagOptionDetail",
-          "documentation":"<p>The resulting detailed TagOption information.</p>"
+          "documentation":"<p>Information about the TagOption.</p>"
         }
       }
     },
@@ -1322,7 +1322,7 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the constraint to delete.</p>"
+          "documentation":"<p>The identifier of the constraint.</p>"
         }
       }
     },
@@ -1341,7 +1341,7 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the portfolio for the delete request.</p>"
+          "documentation":"<p>The portfolio identifier.</p>"
         }
       }
     },
@@ -1367,7 +1367,7 @@
         },
         "AccountId":{
           "shape":"AccountId",
-          "documentation":"<p>The account ID associated with the share to delete.</p>"
+          "documentation":"<p>The AWS account ID.</p>"
         }
       }
     },
@@ -1386,7 +1386,7 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the product for the delete request.</p>"
+          "documentation":"<p>The product identifier.</p>"
         }
       }
     },
@@ -1412,7 +1412,7 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the provisioning artifact for the delete request. This is sometimes referred to as the product version.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         }
       }
     },
@@ -1440,11 +1440,11 @@
       "members":{
         "ConstraintDetail":{
           "shape":"ConstraintDetail",
-          "documentation":"<p>Detailed constraint information.</p>"
+          "documentation":"<p>Information about the constraint.</p>"
         },
         "ConstraintParameters":{
           "shape":"ConstraintParameters",
-          "documentation":"<p>The current parameters associated with the specified constraint.</p>"
+          "documentation":"<p>The constraint parameters.</p>"
         },
         "Status":{
           "shape":"Status",
@@ -1462,7 +1462,7 @@
         },
         "CopyProductToken":{
           "shape":"Id",
-          "documentation":"<p>The token returned from the call to <code>CopyProduct</code> that initiated the operation.</p>"
+          "documentation":"<p>The token for the copy product operation. This token is returned by <a>CopyProduct</a>.</p>"
         }
       }
     },
@@ -1475,7 +1475,7 @@
         },
         "TargetProductId":{
           "shape":"Id",
-          "documentation":"<p>The ID of the copied product.</p>"
+          "documentation":"<p>The identifier of the copied product.</p>"
         },
         "StatusDetail":{
           "shape":"StatusDetail",
@@ -1493,7 +1493,7 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the portfolio for which to retrieve information.</p>"
+          "documentation":"<p>The portfolio identifier.</p>"
         }
       }
     },
@@ -1502,15 +1502,15 @@
       "members":{
         "PortfolioDetail":{
           "shape":"PortfolioDetail",
-          "documentation":"<p>Detailed portfolio information.</p>"
+          "documentation":"<p>Information about the portfolio.</p>"
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>Tags associated with the portfolio.</p>"
+          "documentation":"<p>Information about the tags associated with the portfolio.</p>"
         },
         "TagOptions":{
           "shape":"TagOptionDetails",
-          "documentation":"<p>TagOptions associated with the portfolio.</p>"
+          "documentation":"<p>Information about the TagOptions associated with the portfolio.</p>"
         }
       }
     },
@@ -1524,7 +1524,7 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the product for which to retrieve information.</p>"
+          "documentation":"<p>The product identifier.</p>"
         }
       }
     },
@@ -1533,19 +1533,19 @@
       "members":{
         "ProductViewDetail":{
           "shape":"ProductViewDetail",
-          "documentation":"<p>Detailed product view information.</p>"
+          "documentation":"<p>Information about the product view.</p>"
         },
         "ProvisioningArtifactSummaries":{
           "shape":"ProvisioningArtifactSummaries",
-          "documentation":"<p>A list of provisioning artifact summaries for the product.</p>"
+          "documentation":"<p>Information about the provisioning artifacts (also known as versions) for the specified product.</p>"
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>Tags associated with the product.</p>"
+          "documentation":"<p>Information about the tags associated with the product.</p>"
         },
         "TagOptions":{
           "shape":"TagOptionDetails",
-          "documentation":"<p>List of TagOptions associated with the product.</p>"
+          "documentation":"<p>Information about the TagOptions associated with the product.</p>"
         }
       }
     },
@@ -1559,7 +1559,7 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The <code>ProductId</code> of the product to describe.</p>"
+          "documentation":"<p>The product identifier.</p>"
         }
       }
     },
@@ -1568,11 +1568,11 @@
       "members":{
         "ProductViewSummary":{
           "shape":"ProductViewSummary",
-          "documentation":"<p>The summary metadata about the specified product.</p>"
+          "documentation":"<p>Summary information about the product view.</p>"
         },
         "ProvisioningArtifacts":{
           "shape":"ProvisioningArtifacts",
-          "documentation":"<p>A list of provisioning artifact objects for the specified product. The <code>ProvisioningArtifacts</code> parameter represent the ways the specified product can be provisioned.</p>"
+          "documentation":"<p>Information about the provisioning artifacts for the specified product.</p>"
         }
       }
     },
@@ -1586,7 +1586,7 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The <code>ProductViewId</code> of the product to describe.</p>"
+          "documentation":"<p>The product view identifier.</p>"
         }
       }
     },
@@ -1595,11 +1595,11 @@
       "members":{
         "ProductViewSummary":{
           "shape":"ProductViewSummary",
-          "documentation":"<p>The summary metadata about the specified product.</p>"
+          "documentation":"<p>Summary information about the product.</p>"
         },
         "ProvisioningArtifacts":{
           "shape":"ProvisioningArtifacts",
-          "documentation":"<p>A list of provisioning artifact objects for the specified product. The <code>ProvisioningArtifacts</code> represent the ways in which the specified product can be provisioned.</p>"
+          "documentation":"<p>Information about the provisioning artifacts for the product.</p>"
         }
       }
     },
@@ -1622,7 +1622,7 @@
       "members":{
         "ProvisionedProductDetail":{
           "shape":"ProvisionedProductDetail",
-          "documentation":"<p>Detailed provisioned product information.</p>"
+          "documentation":"<p>Information about the provisioned product.</p>"
         }
       }
     },
@@ -1639,7 +1639,7 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the provisioning artifact. This is sometimes referred to as the product version.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         },
         "ProductId":{
           "shape":"Id",
@@ -1647,7 +1647,7 @@
         },
         "Verbose":{
           "shape":"Verbose",
-          "documentation":"<p>Enable a verbose level of details for the provisioning artifact.</p>"
+          "documentation":"<p>Indicates whether a verbose level of detail is enabled.</p>"
         }
       }
     },
@@ -1656,11 +1656,11 @@
       "members":{
         "ProvisioningArtifactDetail":{
           "shape":"ProvisioningArtifactDetail",
-          "documentation":"<p>Detailed provisioning artifact information.</p>"
+          "documentation":"<p>Information about the provisioning artifact.</p>"
         },
         "Info":{
           "shape":"ProvisioningArtifactInfo",
-          "documentation":"<p>Additional information about the provisioning artifact.</p>"
+          "documentation":"<p>The URL of the CloudFormation template in Amazon S3.</p>"
         },
         "Status":{
           "shape":"Status",
@@ -1685,11 +1685,11 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The provisioning artifact identifier for this product. This is sometimes referred to as the product version.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         },
         "PathId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the path for this product's provisioning. This value is optional if the product has a default path, and is required if there is more than one path for the specified product.</p>"
+          "documentation":"<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.</p>"
         }
       }
     },
@@ -1698,11 +1698,11 @@
       "members":{
         "ProvisioningArtifactParameters":{
           "shape":"ProvisioningArtifactParameters",
-          "documentation":"<p>The list of parameters used to successfully provision the product. Each parameter includes a list of allowable values and additional metadata about each parameter.</p>"
+          "documentation":"<p>Information about the parameters used to provision the product.</p>"
         },
         "ConstraintSummaries":{
           "shape":"ConstraintSummaries",
-          "documentation":"<p>The list of constraint summaries that apply to provisioning this product.</p>"
+          "documentation":"<p>Information about the constraints used to provision the product.</p>"
         },
         "UsageInstructions":{
           "shape":"UsageInstructions",
@@ -1710,7 +1710,7 @@
         },
         "TagOptions":{
           "shape":"TagOptionSummaries",
-          "documentation":"<p>List of TagOptions associated with the provisioned provisioning parameters.</p>"
+          "documentation":"<p>Information about the TagOptions associated with the resource.</p>"
         }
       }
     },
@@ -1724,15 +1724,15 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The record identifier of the ProvisionedProduct object for which to retrieve output information. This is the <code>RecordDetail.RecordId</code> obtained from the request operation's response.</p>"
+          "documentation":"<p>The record identifier of the provisioned product. This identifier is returned by the request operation.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         }
       }
     },
@@ -1741,15 +1741,15 @@
       "members":{
         "RecordDetail":{
           "shape":"RecordDetail",
-          "documentation":"<p>Detailed record information for the specified product. </p>"
+          "documentation":"<p>Information about the product.</p>"
         },
         "RecordOutputs":{
           "shape":"RecordOutputs",
-          "documentation":"<p>A list of outputs for the specified Product object created as the result of a request. For example, a CloudFormation-backed product that creates an S3 bucket would have an output for the S3 bucket URL.</p>"
+          "documentation":"<p>Information about the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -1759,7 +1759,7 @@
       "members":{
         "Id":{
           "shape":"TagOptionId",
-          "documentation":"<p>The identifier of the TagOption.</p>"
+          "documentation":"<p>The TagOption identifier.</p>"
         }
       }
     },
@@ -1768,7 +1768,7 @@
       "members":{
         "TagOptionDetail":{
           "shape":"TagOptionDetail",
-          "documentation":"<p>The resulting detailed TagOption information.</p>"
+          "documentation":"<p>Information about the TagOption.</p>"
         }
       }
     },
@@ -1790,7 +1790,7 @@
         },
         "PrincipalARN":{
           "shape":"PrincipalARN",
-          "documentation":"<p>The ARN representing the principal (IAM user, role, or group).</p>"
+          "documentation":"<p>The ARN of the principal (IAM user, role, or group).</p>"
         }
       }
     },
@@ -1834,11 +1834,11 @@
       "members":{
         "ResourceId":{
           "shape":"ResourceId",
-          "documentation":"<p>Identifier of the resource from which to disassociate the TagOption.</p>"
+          "documentation":"<p>The resource identifier.</p>"
         },
         "TagOptionId":{
           "shape":"TagOptionId",
-          "documentation":"<p>Identifier of the TagOption to disassociate from the resource.</p>"
+          "documentation":"<p>The TagOption identifier.</p>"
         }
       }
     },
@@ -1875,14 +1875,14 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>One or more parameters provided to the operation are invalid.</p>",
+      "documentation":"<p>One or more parameters provided to the operation are not valid.</p>",
       "exception":true
     },
     "InvalidStateException":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>An attempt was made to modify a resource that is in an invalid state. Inspect the resource you are using for this operation to ensure that all resource states are valid before retrying the operation.</p>",
+      "documentation":"<p>An attempt was made to modify a resource that is in a state that is not valid. Check your resources to ensure that they are in valid states before retrying the operation.</p>",
       "exception":true
     },
     "LastRequestId":{"type":"string"},
@@ -1895,28 +1895,28 @@
       "members":{
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The unique identifier of the product path.</p>"
+          "documentation":"<p>The identifier of the product path.</p>"
         },
         "ConstraintSummaries":{
           "shape":"ConstraintSummaries",
-          "documentation":"<p>List of constraints on the portfolio-product relationship.</p>"
+          "documentation":"<p>The constraints on the portfolio-product relationship.</p>"
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>List of tags used by this launch path.</p>"
+          "documentation":"<p>The tags associated with this product path.</p>"
         },
         "Name":{
           "shape":"PortfolioName",
-          "documentation":"<p>Corresponds to the name of the portfolio to which the user was assigned.</p>"
+          "documentation":"<p>The name of the portfolio to which the user was assigned.</p>"
         }
       },
-      "documentation":"<p>Summary information about a path for a user to have access to a specified product.</p>"
+      "documentation":"<p>Summary information about a product path for a user.</p>"
     },
     "LimitExceededException":{
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The current limits of the service would have been exceeded by this operation. Reduce the resource use or increase the service limits and retry the operation.</p>",
+      "documentation":"<p>The current limits of the service would have been exceeded by this operation. Decrease your resource use or increase your service limits and retry the operation.</p>",
       "exception":true
     },
     "ListAcceptedPortfolioSharesInput":{
@@ -1928,11 +1928,11 @@
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         }
       }
     },
@@ -1941,11 +1941,11 @@
       "members":{
         "PortfolioDetails":{
           "shape":"PortfolioDetails",
-          "documentation":"<p>List of detailed portfolio information objects.</p>"
+          "documentation":"<p>Information about the portfolios.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -1967,11 +1967,11 @@
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -1980,11 +1980,11 @@
       "members":{
         "ConstraintDetails":{
           "shape":"ConstraintDetails",
-          "documentation":"<p>List of detailed constraint information objects.</p>"
+          "documentation":"<p>Information about the constraints.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -1998,15 +1998,15 @@
         },
         "ProductId":{
           "shape":"Id",
-          "documentation":"<p>The product identifier. Identifies the product for which to retrieve <code>LaunchPathSummaries</code> information.</p>"
+          "documentation":"<p>The product identifier.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -2015,11 +2015,11 @@
       "members":{
         "LaunchPathSummaries":{
           "shape":"LaunchPathSummaries",
-          "documentation":"<p>List of launch path information summaries for the specified <code>PageToken</code>.</p>"
+          "documentation":"<p>Information about the launch path.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -2042,11 +2042,11 @@
       "members":{
         "AccountIds":{
           "shape":"AccountIds",
-          "documentation":"<p>List of account IDs associated with access to the portfolio.</p>"
+          "documentation":"<p>Information about the AWS accounts with access to the portfolio.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -2064,11 +2064,11 @@
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         }
       }
     },
@@ -2077,11 +2077,11 @@
       "members":{
         "PortfolioDetails":{
           "shape":"PortfolioDetails",
-          "documentation":"<p>List of detailed portfolio information objects.</p>"
+          "documentation":"<p>Information about the portfolios.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -2094,11 +2094,11 @@
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         }
       }
     },
@@ -2107,11 +2107,11 @@
       "members":{
         "PortfolioDetails":{
           "shape":"PortfolioDetails",
-          "documentation":"<p>List of detailed portfolio information objects.</p>"
+          "documentation":"<p>Information about the portfolios.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -2129,11 +2129,11 @@
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -2146,7 +2146,7 @@
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -2169,11 +2169,11 @@
       "members":{
         "ProvisioningArtifactDetails":{
           "shape":"ProvisioningArtifactDetails",
-          "documentation":"<p>List of detailed provisioning artifact information objects.</p>"
+          "documentation":"<p>Information about the provisioning artifacts.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -2186,19 +2186,19 @@
         },
         "AccessLevelFilter":{
           "shape":"AccessLevelFilter",
-          "documentation":"<p>The access level for obtaining results. If left unspecified, <code>User</code> level access is used.</p>"
+          "documentation":"<p>The access level to use to obtain results. The default is <code>User</code>.</p>"
         },
         "SearchFilter":{
           "shape":"ListRecordHistorySearchFilter",
-          "documentation":"<p>The filter to limit search results. </p>"
+          "documentation":"<p>The search filter to scope the results.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -2207,11 +2207,11 @@
       "members":{
         "RecordDetails":{
           "shape":"RecordDetails",
-          "documentation":"<p>A list of record detail objects, listed in reverse chronological order.</p>"
+          "documentation":"<p>The records, in reverse chronological order.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -2220,14 +2220,14 @@
       "members":{
         "Key":{
           "shape":"SearchFilterKey",
-          "documentation":"<p>The filter key.</p>"
+          "documentation":"<p>The filter key.</p> <ul> <li> <p> <code>product</code> - Filter results based on the specified product identifier.</p> </li> <li> <p> <code>provisionedproduct</code> - Filter results based on the provisioned product identifier.</p> </li> </ul>"
         },
         "Value":{
           "shape":"SearchFilterValue",
-          "documentation":"<p>The filter value for <code>Key</code>.</p>"
+          "documentation":"<p>The filter value.</p>"
         }
       },
-      "documentation":"<p>The search filter to limit results when listing request history records.</p>"
+      "documentation":"<p>The search filter to use when listing history records.</p>"
     },
     "ListResourcesForTagOptionInput":{
       "type":"structure",
@@ -2235,19 +2235,19 @@
       "members":{
         "TagOptionId":{
           "shape":"TagOptionId",
-          "documentation":"<p>Identifier of the TagOption.</p>"
+          "documentation":"<p>The TagOption identifier.</p>"
         },
         "ResourceType":{
           "shape":"ResourceType",
-          "documentation":"<p>Resource type.</p>"
+          "documentation":"<p>The resource type.</p> <ul> <li> <p> <code>Portfolio</code> </p> </li> <li> <p> <code>Product</code> </p> </li> </ul>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -2256,11 +2256,11 @@
       "members":{
         "ResourceDetails":{
           "shape":"ResourceDetails",
-          "documentation":"<p>The resulting detailed resource information.</p>"
+          "documentation":"<p>Information about the resources.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -2269,33 +2269,33 @@
       "members":{
         "Key":{
           "shape":"TagOptionKey",
-          "documentation":"<p>The ListTagOptionsFilters key.</p>"
+          "documentation":"<p>The TagOption key.</p>"
         },
         "Value":{
           "shape":"TagOptionValue",
-          "documentation":"<p>The ListTagOptionsFilters value.</p>"
+          "documentation":"<p>The TagOption value.</p>"
         },
         "Active":{
           "shape":"TagOptionActive",
-          "documentation":"<p>The ListTagOptionsFilters active state.</p>"
+          "documentation":"<p>The active state.</p>"
         }
       },
-      "documentation":"<p>The ListTagOptions filters.</p>"
+      "documentation":"<p>Filters to use when listing TagOptions.</p>"
     },
     "ListTagOptionsInput":{
       "type":"structure",
       "members":{
         "Filters":{
           "shape":"ListTagOptionsFilters",
-          "documentation":"<p>The list of filters with which to limit search results. If no search filters are specified, the output is all TagOptions. </p>"
+          "documentation":"<p>The search filters. If no search filters are specified, the output includes all TagOptions.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -2304,11 +2304,11 @@
       "members":{
         "TagOptionDetails":{
           "shape":"TagOptionDetails",
-          "documentation":"<p>The resulting detailed TagOption information.</p>"
+          "documentation":"<p>Information about the TagOptions.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -2364,7 +2364,7 @@
       "members":{
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier for the portfolio.</p>"
+          "documentation":"<p>The portfolio identifier.</p>"
         },
         "ARN":{
           "shape":"ResourceARN",
@@ -2376,7 +2376,7 @@
         },
         "Description":{
           "shape":"PortfolioDescription",
-          "documentation":"<p>The text description of the portfolio.</p>"
+          "documentation":"<p>The description of the portfolio.</p>"
         },
         "CreatedTime":{
           "shape":"CreationTime",
@@ -2387,7 +2387,7 @@
           "documentation":"<p>The name of the portfolio provider.</p>"
         }
       },
-      "documentation":"<p>Detailed portfolio information.</p>"
+      "documentation":"<p>Information about a portfolio.</p>"
     },
     "PortfolioDetails":{
       "type":"list",
@@ -2404,14 +2404,14 @@
       "members":{
         "PrincipalARN":{
           "shape":"PrincipalARN",
-          "documentation":"<p>The ARN representing the principal (IAM user, role, or group).</p>"
+          "documentation":"<p>The ARN of the principal (IAM user, role, or group).</p>"
         },
         "PrincipalType":{
           "shape":"PrincipalType",
-          "documentation":"<p>The principal type. Must be <code>IAM</code> </p>"
+          "documentation":"<p>The principal type. The supported value is <code>IAM</code>.</p>"
         }
       },
-      "documentation":"<p>A principal's ARN and type.</p>"
+      "documentation":"<p>Information about a principal.</p>"
     },
     "PrincipalARN":{
       "type":"string",
@@ -2472,22 +2472,22 @@
       "members":{
         "ProductViewSummary":{
           "shape":"ProductViewSummary",
-          "documentation":"<p>The summary metadata about the specified product view.</p>"
+          "documentation":"<p>Summary information about the product view.</p>"
         },
         "Status":{
           "shape":"Status",
-          "documentation":"<p>Current status of the product.</p> <p> <code>AVAILABLE</code> - Product is available for use.</p> <p> <code>CREATING</code> - Creation of product started, not ready for use.</p> <p> <code>FAILED</code> - Action on product failed.</p>"
+          "documentation":"<p>The status of the product.</p> <ul> <li> <p> <code>AVAILABLE</code> - The product is ready for use.</p> </li> <li> <p> <code>CREATING</code> - Product creation has started; the product is not ready for use.</p> </li> <li> <p> <code>FAILED</code> - An action failed.</p> </li> </ul>"
         },
         "ProductARN":{
           "shape":"ResourceARN",
-          "documentation":"<p>The ARN associated with the product.</p>"
+          "documentation":"<p>The ARN of the product.</p>"
         },
         "CreatedTime":{
           "shape":"CreatedTime",
           "documentation":"<p>The UTC timestamp of the creation time.</p>"
         }
       },
-      "documentation":"<p>Detailed product view information.</p>"
+      "documentation":"<p>Information about a product view.</p>"
     },
     "ProductViewDetails":{
       "type":"list",
@@ -2561,7 +2561,7 @@
         },
         "HasDefaultPath":{
           "shape":"HasDefaultPath",
-          "documentation":"<p>A value of <code>false</code> indicates that the product does not have a default path, while a value of <code>true</code> indicates that it does. If it's false, call <a>ListLaunchPaths</a> to disambiguate between paths. If true, <a>ListLaunchPaths</a> is not required, and the output of the <a>ProductViewSummary</a> operation can be used directly with <a>DescribeProvisioningParameters</a>.</p>"
+          "documentation":"<p>Indicates whether the product has a default path. If the product does not have a default path, call <a>ListLaunchPaths</a> to disambiguate between paths. Otherwise, <a>ListLaunchPaths</a> is not required, and the output of <a>ProductViewSummary</a> can be used directly with <a>DescribeProvisioningParameters</a>.</p>"
         },
         "SupportEmail":{
           "shape":"SupportEmail",
@@ -2576,7 +2576,7 @@
           "documentation":"<p>The URL information to obtain support for this Product.</p>"
         }
       },
-      "documentation":"<p>The summary metadata about the specified product.</p>"
+      "documentation":"<p>Summary information about a product view.</p>"
     },
     "ProviderName":{
       "type":"string",
@@ -2602,15 +2602,15 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The provisioning artifact identifier for this product. This is sometimes referred to as the product version.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         },
         "PathId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the path for this product's provisioning. This value is optional if the product has a default path, and is required if there is more than one path for the specified product.</p>"
+          "documentation":"<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.</p>"
         },
         "ProvisionedProductName":{
           "shape":"ProvisionedProductName",
-          "documentation":"<p>A user-friendly name to identify the ProvisionedProduct object. This value must be unique for the AWS account and cannot be updated after the product is provisioned.</p>"
+          "documentation":"<p>A user-friendly name for the provisioned product. This value must be unique for the AWS account and cannot be updated after the product is provisioned.</p>"
         },
         "ProvisioningParameters":{
           "shape":"ProvisioningParameters",
@@ -2618,7 +2618,7 @@
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>A list of tags to use as provisioning options.</p>"
+          "documentation":"<p>The tags to use as provisioning options.</p>"
         },
         "NotificationArns":{
           "shape":"NotificationArns",
@@ -2626,7 +2626,7 @@
         },
         "ProvisionToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>An idempotency token that uniquely identifies the provisioning request. </p>",
+          "documentation":"<p>An idempotency token that uniquely identifies the provisioning request.</p>",
           "idempotencyToken":true
         }
       }
@@ -2636,7 +2636,7 @@
       "members":{
         "RecordDetail":{
           "shape":"RecordDetail",
-          "documentation":"<p>The detailed result of the <a>ProvisionProduct</a> request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object of the request, and a list of any errors that the request encountered. </p>"
+          "documentation":"<p>Information about the result of <a>ProvisionProduct</a>.</p>"
         }
       }
     },
@@ -2645,27 +2645,27 @@
       "members":{
         "Name":{
           "shape":"ProvisionedProductNameOrArn",
-          "documentation":"<p>The user-friendly name of the ProvisionedProduct object.</p>"
+          "documentation":"<p>The user-friendly name of the provisioned product.</p>"
         },
         "Arn":{
           "shape":"ProvisionedProductNameOrArn",
-          "documentation":"<p>The ARN associated with the ProvisionedProduct object.</p>"
+          "documentation":"<p>The ARN of the provisioned product.</p>"
         },
         "Type":{
           "shape":"ProvisionedProductType",
-          "documentation":"<p>The type of the ProvisionedProduct object.</p>"
+          "documentation":"<p>The type of provisioned product. The supported value is <code>CFN_STACK</code>.</p>"
         },
         "Id":{
           "shape":"ProvisionedProductId",
-          "documentation":"<p>The identifier of the ProvisionedProduct object.</p>"
+          "documentation":"<p>The identifier of the provisioned product.</p>"
         },
         "Status":{
           "shape":"ProvisionedProductStatus",
-          "documentation":"<p>The current status of the ProvisionedProduct.</p> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent action request succeeded and completed.</p> <p> <code>UNDER_CHANGE</code> - Transitive state, operations performed may or may not have valid results. Wait for an <code>AVAILABLE</code> status before performing operations.</p> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version. </p> <p> <code>ERROR</code> - Something unexpected happened such that the provisioned product exists but the stack is not running. For example, CloudFormation received an invalid parameter value and could not launch the stack.</p>"
+          "documentation":"<p>The current status of the provisioned product.</p> <ul> <li> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent operation succeeded and completed.</p> </li> <li> <p> <code>UNDER_CHANGE</code> - Transitive state, operations performed might not have valid results. Wait for an <code>AVAILABLE</code> status before performing operations.</p> </li> <li> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.</p> </li> <li> <p> <code>ERROR</code> - An unexpected error occurred, the provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.</p> </li> </ul>"
         },
         "StatusMessage":{
           "shape":"ProvisionedProductStatusMessage",
-          "documentation":"<p>The current status message of the ProvisionedProduct.</p>"
+          "documentation":"<p>The current status message of the provisioned product.</p>"
         },
         "CreatedTime":{
           "shape":"CreatedTime",
@@ -2673,14 +2673,14 @@
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.</p>"
+          "documentation":"<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>"
         },
         "LastRecordId":{
           "shape":"LastRequestId",
-          "documentation":"<p>The record identifier of the last request performed on this ProvisionedProduct object.</p>"
+          "documentation":"<p>The record identifier of the last request performed on this provisioned product.</p>"
         }
       },
-      "documentation":"<p>Detailed information about a ProvisionedProduct object.</p>"
+      "documentation":"<p>Information about a provisioned product.</p>"
     },
     "ProvisionedProductDetails":{
       "type":"list",
@@ -2715,23 +2715,24 @@
       "members":{
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier for the artifact. This is sometimes referred to as the product version.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         },
         "Name":{
           "shape":"ProvisioningArtifactName",
-          "documentation":"<p>The name of the artifact.</p>"
+          "documentation":"<p>The name of the provisioning artifact.</p>"
         },
         "Description":{
           "shape":"ProvisioningArtifactDescription",
-          "documentation":"<p>The text description of the artifact.</p>"
+          "documentation":"<p>The description of the provisioning artifact.</p>"
         },
         "CreatedTime":{
           "shape":"ProvisioningArtifactCreatedTime",
           "documentation":"<p>The UTC timestamp of the creation time.</p>"
         }
       },
-      "documentation":"<p>Contains information indicating the ways in which a product can be provisioned.</p>"
+      "documentation":"<p>Information about a provisioning artifact. A provisioning artifact is also known as a product version.</p>"
     },
+    "ProvisioningArtifactActive":{"type":"boolean"},
     "ProvisioningArtifactCreatedTime":{"type":"timestamp"},
     "ProvisioningArtifactDescription":{"type":"string"},
     "ProvisioningArtifactDetail":{
@@ -2739,26 +2740,30 @@
       "members":{
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the provisioning artifact. This is sometimes referred to as the product version.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         },
         "Name":{
           "shape":"ProvisioningArtifactName",
-          "documentation":"<p>The name assigned to the provisioning artifact.</p>"
+          "documentation":"<p>The name of the provisioning artifact.</p>"
         },
         "Description":{
           "shape":"ProvisioningArtifactName",
-          "documentation":"<p>The text description of the provisioning artifact.</p>"
+          "documentation":"<p>The description of the provisioning artifact.</p>"
         },
         "Type":{
           "shape":"ProvisioningArtifactType",
-          "documentation":"<p>The type of the provisioning artifact. The following provisioning artifact types are used by AWS Marketplace products:</p> <p> <code>MARKETPLACE_AMI</code> - AMI products.</p> <p> <code>MARKETPLACE_CAR</code> - CAR (Cluster and AWS Resources) products.</p>"
+          "documentation":"<p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>"
         },
         "CreatedTime":{
           "shape":"CreationTime",
           "documentation":"<p>The UTC timestamp of the creation time.</p>"
+        },
+        "Active":{
+          "shape":"ProvisioningArtifactActive",
+          "documentation":"<p>Indicates whether the product version is active.</p>"
         }
       },
-      "documentation":"<p>Detailed provisioning artifact information.</p>"
+      "documentation":"<p>Information about a provisioning artifact (also known as a version) for a product.</p>"
     },
     "ProvisioningArtifactDetails":{
       "type":"list",
@@ -2779,11 +2784,11 @@
       "members":{
         "ParameterKey":{
           "shape":"ParameterKey",
-          "documentation":"<p>The parameter key. </p>"
+          "documentation":"<p>The parameter key.</p>"
         },
         "DefaultValue":{
           "shape":"DefaultValue",
-          "documentation":"<p>The default value for this parameter.</p>"
+          "documentation":"<p>The default value.</p>"
         },
         "ParameterType":{
           "shape":"ParameterType",
@@ -2795,14 +2800,14 @@
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>The text description of the parameter.</p>"
+          "documentation":"<p>The description of the parameter.</p>"
         },
         "ParameterConstraints":{
           "shape":"ParameterConstraints",
-          "documentation":"<p>The list of constraints that the administrator has put on the parameter.</p>"
+          "documentation":"<p>Constraints that the administrator has put on a parameter.</p>"
         }
       },
-      "documentation":"<p>A parameter used to successfully provision the product. This value includes a list of allowable values and additional metadata. </p>"
+      "documentation":"<p>Information about a parameter used to provision a product.</p>"
     },
     "ProvisioningArtifactParameters":{
       "type":"list",
@@ -2814,22 +2819,22 @@
       "members":{
         "Name":{
           "shape":"ProvisioningArtifactName",
-          "documentation":"<p>The name assigned to the provisioning artifact properties.</p>"
+          "documentation":"<p>The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.</p>"
         },
         "Description":{
           "shape":"ProvisioningArtifactDescription",
-          "documentation":"<p>The text description of the provisioning artifact properties.</p>"
+          "documentation":"<p>The description of the provisioning artifact, including how it differs from the previous provisioning artifact.</p>"
         },
         "Info":{
           "shape":"ProvisioningArtifactInfo",
-          "documentation":"<p>Additional information about the provisioning artifact properties. When using this element in a request, you must specify <code>LoadTemplateFromURL</code>. For more information, see <a>CreateProvisioningArtifact</a>.</p>"
+          "documentation":"<p>The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:</p> <p> <code>\"LoadTemplateFromURL\": \"https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/...\"</code> </p>"
         },
         "Type":{
           "shape":"ProvisioningArtifactType",
-          "documentation":"<p>The type of the provisioning artifact properties. The following provisioning artifact property types are used by AWS Marketplace products:</p> <p> <code>MARKETPLACE_AMI</code> - AMI products.</p> <p> <code>MARKETPLACE_CAR</code> - CAR (Cluster and AWS Resources) products.</p>"
+          "documentation":"<p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>"
         }
       },
-      "documentation":"<p>Provisioning artifact properties. For example request JSON, see <a>CreateProvisioningArtifact</a>.</p>"
+      "documentation":"<p>Information about a provisioning artifact (also known as a version) for a product.</p>"
     },
     "ProvisioningArtifactPropertyName":{
       "type":"string",
@@ -2861,10 +2866,10 @@
         },
         "ProvisioningArtifactMetadata":{
           "shape":"ProvisioningArtifactInfo",
-          "documentation":"<p>The provisioning artifact metadata. This data is used with products created by AWS Marketplace.</p>"
+          "documentation":"<p>The metadata for the provisioning artifact. This is used with AWS Marketplace products.</p>"
         }
       },
-      "documentation":"<p>Stores summary information about a provisioning artifact.</p>"
+      "documentation":"<p>Summary information about a provisioning artifact (also known as a version) for a product.</p>"
     },
     "ProvisioningArtifactType":{
       "type":"string",
@@ -2883,14 +2888,14 @@
       "members":{
         "Key":{
           "shape":"ParameterKey",
-          "documentation":"<p>The <code>ProvisioningArtifactParameter.ParameterKey</code> parameter from <a>DescribeProvisioningParameters</a>.</p>"
+          "documentation":"<p>The parameter key.</p>"
         },
         "Value":{
           "shape":"ParameterValue",
-          "documentation":"<p>The value to use for provisioning. Any constraints on this value can be found in <code>ProvisioningArtifactParameter</code> for <code>Key</code>.</p>"
+          "documentation":"<p>The parameter value.</p>"
         }
       },
-      "documentation":"<p>The parameter key-value pairs used to provision a product.</p>"
+      "documentation":"<p>Information about a parameter used to provision a product.</p>"
     },
     "ProvisioningParameters":{
       "type":"list",
@@ -2901,15 +2906,15 @@
       "members":{
         "RecordId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the ProvisionedProduct object record.</p>"
+          "documentation":"<p>The identifier of the record.</p>"
         },
         "ProvisionedProductName":{
           "shape":"ProvisionedProductName",
-          "documentation":"<p>The user-friendly name of the ProvisionedProduct object.</p>"
+          "documentation":"<p>The user-friendly name of the provisioned product.</p>"
         },
         "Status":{
           "shape":"RecordStatus",
-          "documentation":"<p>The status of the ProvisionedProduct object.</p> <p> <code>CREATED</code> - Request created but the operation has not yet started.</p> <p> <code>IN_PROGRESS</code> - The requested operation is in-progress.</p> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> <p> <code>FAILED</code> - The requested operation has completed but has failed. Investigate using the error messages returned.</p>"
+          "documentation":"<p>The status of the provisioned product.</p> <ul> <li> <p> <code>CREATED</code> - The request was created but the operation has not started.</p> </li> <li> <p> <code>IN_PROGRESS</code> - The requested operation is in progress.</p> </li> <li> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> </li> <li> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> </li> <li> <p> <code>FAILED</code> - The requested operation has unsuccessfully completed. Investigate using the error messages returned.</p> </li> </ul>"
         },
         "CreatedTime":{
           "shape":"CreatedTime",
@@ -2917,19 +2922,19 @@
         },
         "UpdatedTime":{
           "shape":"UpdatedTime",
-          "documentation":"<p>The time when the record for the ProvisionedProduct object was last updated.</p>"
+          "documentation":"<p>The time when the record was last updated.</p>"
         },
         "ProvisionedProductType":{
           "shape":"ProvisionedProductType",
-          "documentation":"<p>The type of the ProvisionedProduct object.</p>"
+          "documentation":"<p>The type of provisioned product. The supported value is <code>CFN_STACK</code>.</p>"
         },
         "RecordType":{
           "shape":"RecordType",
-          "documentation":"<p>The record type for this record.</p>"
+          "documentation":"<p>The record type for this record.</p> <ul> <li> <p> <code>PROVISION_PRODUCT</code> </p> </li> <li> <p> <code>UPDATE_PROVISIONED_PRODUCT</code> </p> </li> <li> <p> <code>TERMINATE_PROVISIONED_PRODUCT</code> </p> </li> </ul>"
         },
         "ProvisionedProductId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the ProvisionedProduct object.</p>"
+          "documentation":"<p>The identifier of the provisioned product.</p>"
         },
         "ProductId":{
           "shape":"Id",
@@ -2937,22 +2942,22 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The provisioning artifact identifier for this product. This is sometimes referred to as the product version.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         },
         "PathId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the path for this product's provisioning.</p>"
+          "documentation":"<p>The path identifier.</p>"
         },
         "RecordErrors":{
           "shape":"RecordErrors",
-          "documentation":"<p>A list of errors that occurred while processing the request.</p>"
+          "documentation":"<p>The errors that occurred while processing the request.</p>"
         },
         "RecordTags":{
           "shape":"RecordTags",
-          "documentation":"<p>List of tags associated with this record.</p>"
+          "documentation":"<p>The tags associated with this record.</p>"
         }
       },
-      "documentation":"<p>The full details of a specific ProvisionedProduct object.</p>"
+      "documentation":"<p>Information about a request operation.</p>"
     },
     "RecordDetails":{
       "type":"list",
@@ -2967,7 +2972,7 @@
         },
         "Description":{
           "shape":"ErrorDescription",
-          "documentation":"<p>The text description of the error.</p>"
+          "documentation":"<p>The description of the error.</p>"
         }
       },
       "documentation":"<p>The error code and description resulting from an operation.</p>"
@@ -2989,10 +2994,10 @@
         },
         "Description":{
           "shape":"Description",
-          "documentation":"<p>The text description of the output.</p>"
+          "documentation":"<p>The description of the output.</p>"
         }
       },
-      "documentation":"<p>An output for the specified Product object created as the result of a request. For example, a CloudFormation-backed product that creates an S3 bucket would have an output for the S3 bucket URL.</p>"
+      "documentation":"<p>The output for the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL.</p>"
     },
     "RecordOutputs":{
       "type":"list",
@@ -3069,26 +3074,26 @@
       "members":{
         "Id":{
           "shape":"ResourceDetailId",
-          "documentation":"<p>Identifier of the resource.</p>"
+          "documentation":"<p>The identifier of the resource.</p>"
         },
         "ARN":{
           "shape":"ResourceDetailARN",
-          "documentation":"<p>ARN of the resource.</p>"
+          "documentation":"<p>The ARN of the resource.</p>"
         },
         "Name":{
           "shape":"ResourceDetailName",
-          "documentation":"<p>Name of the resource.</p>"
+          "documentation":"<p>The name of the resource.</p>"
         },
         "Description":{
           "shape":"ResourceDetailDescription",
-          "documentation":"<p>Description of the resource.</p>"
+          "documentation":"<p>The description of the resource.</p>"
         },
         "CreatedTime":{
           "shape":"ResourceDetailCreatedTime",
-          "documentation":"<p>Creation time of the resource.</p>"
+          "documentation":"<p>The creation time of the resource.</p>"
         }
       },
-      "documentation":"<p>Detailed resource information.</p>"
+      "documentation":"<p>Information about a resource.</p>"
     },
     "ResourceDetailARN":{"type":"string"},
     "ResourceDetailCreatedTime":{"type":"timestamp"},
@@ -3104,7 +3109,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>The operation was requested against a resource that is currently in use. Free the resource from use and retry the operation.</p>",
+      "documentation":"<p>A resource that is currently in use. Ensure the resource is not in use and retry the operation.</p>",
       "exception":true
     },
     "ResourceNotFoundException":{
@@ -3124,15 +3129,15 @@
         },
         "AccessLevelFilter":{
           "shape":"AccessLevelFilter",
-          "documentation":"<p>The access level for obtaining results. If left unspecified, <code>User</code> level access is used.</p>"
+          "documentation":"<p>The access level to use to obtain results. The default is <code>User</code>.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -3141,11 +3146,11 @@
       "members":{
         "ProvisionedProducts":{
           "shape":"ProvisionedProductDetails",
-          "documentation":"<p>A list of ProvisionedProduct detail objects.</p>"
+          "documentation":"<p>Information about the provisioned products.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -3164,23 +3169,23 @@
         },
         "Filters":{
           "shape":"ProductViewFilters",
-          "documentation":"<p>The list of filters with which to limit search results. If no search filters are specified, the output is all the products to which the administrator has access.</p>"
+          "documentation":"<p>The search filters. If no search filters are specified, the output includes all products to which the administrator has access.</p>"
         },
         "SortBy":{
           "shape":"ProductViewSortBy",
-          "documentation":"<p>The sort field specifier. If no value is specified, results are not sorted.</p>"
+          "documentation":"<p>The sort field. If no value is specified, the results are not sorted.</p>"
         },
         "SortOrder":{
           "shape":"SortOrder",
-          "documentation":"<p>The sort order specifier. If no value is specified, results are not sorted.</p>"
+          "documentation":"<p>The sort order. If no value is specified, the results are not sorted.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         },
         "ProductSource":{
           "shape":"ProductSource",
@@ -3193,11 +3198,11 @@
       "members":{
         "ProductViewDetails":{
           "shape":"ProductViewDetails",
-          "documentation":"<p>List of detailed product view information objects.</p>"
+          "documentation":"<p>Information about the product views.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -3210,23 +3215,23 @@
         },
         "Filters":{
           "shape":"ProductViewFilters",
-          "documentation":"<p>The list of filters with which to limit search results. If no search filters are specified, the output is all the products to which the calling user has access. </p>"
+          "documentation":"<p>The search filters. If no search filters are specified, the output includes all products to which the caller has access.</p>"
         },
         "PageSize":{
           "shape":"PageSize",
-          "documentation":"<p>The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.</p>"
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
         },
         "SortBy":{
           "shape":"ProductViewSortBy",
-          "documentation":"<p>The sort field specifier. If no value is specified, results are not sorted.</p>"
+          "documentation":"<p>The sort field. If no value is specified, the results are not sorted.</p>"
         },
         "SortOrder":{
           "shape":"SortOrder",
-          "documentation":"<p>The sort order specifier. If no value is specified, results are not sorted.</p>"
+          "documentation":"<p>The sort order. If no value is specified, the results are not sorted.</p>"
         },
         "PageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.</p>"
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
         }
       }
     },
@@ -3235,15 +3240,15 @@
       "members":{
         "ProductViewSummaries":{
           "shape":"ProductViewSummaries",
-          "documentation":"<p>A list of the product view summary objects.</p>"
+          "documentation":"<p>Information about the product views.</p>"
         },
         "ProductViewAggregations":{
           "shape":"ProductViewAggregations",
-          "documentation":"<p>A list of the product view aggregation value objects.</p>"
+          "documentation":"<p>The product view aggregations.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
-          "documentation":"<p>The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -3284,14 +3289,14 @@
       "members":{
         "Key":{
           "shape":"TagKey",
-          "documentation":"<p>The <code>ProvisioningArtifactParameter.TagKey</code> parameter from <a>DescribeProvisioningParameters</a>.</p>"
+          "documentation":"<p>The tag key.</p>"
         },
         "Value":{
           "shape":"TagValue",
-          "documentation":"<p>The desired value for this key.</p>"
+          "documentation":"<p>The value for this key.</p>"
         }
       },
-      "documentation":"<p>Key-value pairs to associate with this provisioning. These tags are entirely discretionary and are propagated to the resources created in the provisioning.</p>"
+      "documentation":"<p>Information about a tag. A tag is a key-value pair. Tags are entirely discretionary and are propagated to the resources created when provisioning a product.</p>"
     },
     "TagKey":{
       "type":"string",
@@ -3309,22 +3314,22 @@
       "members":{
         "Key":{
           "shape":"TagOptionKey",
-          "documentation":"<p>The TagOptionDetail key.</p>"
+          "documentation":"<p>The TagOption key.</p>"
         },
         "Value":{
           "shape":"TagOptionValue",
-          "documentation":"<p>The TagOptionDetail value.</p>"
+          "documentation":"<p>The TagOption value.</p>"
         },
         "Active":{
           "shape":"TagOptionActive",
-          "documentation":"<p>The TagOptionDetail active state.</p>"
+          "documentation":"<p>The TagOption active state.</p>"
         },
         "Id":{
           "shape":"TagOptionId",
-          "documentation":"<p>The TagOptionDetail identifier.</p>"
+          "documentation":"<p>The TagOption identifier.</p>"
         }
       },
-      "documentation":"<p>The TagOption details.</p>"
+      "documentation":"<p>Information about a TagOption.</p>"
     },
     "TagOptionDetails":{
       "type":"list",
@@ -3357,14 +3362,14 @@
       "members":{
         "Key":{
           "shape":"TagOptionKey",
-          "documentation":"<p>The TagOptionSummary key.</p>"
+          "documentation":"<p>The TagOption key.</p>"
         },
         "Values":{
           "shape":"TagOptionValues",
-          "documentation":"<p>The TagOptionSummary value.</p>"
+          "documentation":"<p>The TagOption value.</p>"
         }
       },
-      "documentation":"<p>The TagOption summary key-value pair.</p>"
+      "documentation":"<p>Summary information about a TagOption.</p>"
     },
     "TagOptionValue":{
       "type":"string",
@@ -3393,20 +3398,20 @@
       "members":{
         "ProvisionedProductName":{
           "shape":"ProvisionedProductNameOrArn",
-          "documentation":"<p>The name of the ProvisionedProduct object to terminate. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+          "documentation":"<p>The name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>"
         },
         "ProvisionedProductId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the ProvisionedProduct object to terminate. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+          "documentation":"<p>The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>"
         },
         "TerminateToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>An idempotency token that uniquely identifies the termination request. This token is only valid during the termination process. After the ProvisionedProduct object is terminated, further requests to terminate the same ProvisionedProduct object always return <b>ResourceNotFound</b> regardless of the value of <code>TerminateToken</code>.</p>",
+          "documentation":"<p>An idempotency token that uniquely identifies the termination request. This token is only valid during the termination process. After the provisioned product is terminated, subsequent requests to terminate the same provisioned product always return <b>ResourceNotFound</b>.</p>",
           "idempotencyToken":true
         },
         "IgnoreErrors":{
           "shape":"IgnoreErrors",
-          "documentation":"<p>If set to true, AWS Service Catalog stops managing the specified ProvisionedProduct object even if it cannot delete the underlying resources.</p>"
+          "documentation":"<p>If set to true, AWS Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.</p>"
         },
         "AcceptLanguage":{
           "shape":"AcceptLanguage",
@@ -3419,7 +3424,7 @@
       "members":{
         "RecordDetail":{
           "shape":"RecordDetail",
-          "documentation":"<p>The detailed result of the <a>TerminateProvisionedProduct</a> request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object that the request is modifying, and a list of any errors that the request encountered.</p>"
+          "documentation":"<p>Information about the result of this request.</p>"
         }
       }
     },
@@ -3433,11 +3438,11 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the constraint to update.</p>"
+          "documentation":"<p>The identifier of the constraint.</p>"
         },
         "Description":{
           "shape":"ConstraintDescription",
-          "documentation":"<p>The updated text description of the constraint.</p>"
+          "documentation":"<p>The updated description of the constraint.</p>"
         }
       }
     },
@@ -3446,11 +3451,11 @@
       "members":{
         "ConstraintDetail":{
           "shape":"ConstraintDetail",
-          "documentation":"<p>The resulting detailed constraint information.</p>"
+          "documentation":"<p>Information about the constraint.</p>"
         },
         "ConstraintParameters":{
           "shape":"ConstraintParameters",
-          "documentation":"<p>The resulting updated constraint parameters.</p>"
+          "documentation":"<p>The constraint parameters.</p>"
         },
         "Status":{
           "shape":"Status",
@@ -3468,7 +3473,7 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the portfolio for the update request.</p>"
+          "documentation":"<p>The portfolio identifier.</p>"
         },
         "DisplayName":{
           "shape":"PortfolioDisplayName",
@@ -3476,7 +3481,7 @@
         },
         "Description":{
           "shape":"PortfolioDescription",
-          "documentation":"<p>The updated text description of the portfolio.</p>"
+          "documentation":"<p>The updated description of the portfolio.</p>"
         },
         "ProviderName":{
           "shape":"ProviderName",
@@ -3484,11 +3489,11 @@
         },
         "AddTags":{
           "shape":"AddTags",
-          "documentation":"<p>Tags to add to the existing list of tags associated with the portfolio.</p>"
+          "documentation":"<p>The tags to add.</p>"
         },
         "RemoveTags":{
           "shape":"TagKeys",
-          "documentation":"<p>Tags to remove from the existing list of tags associated with the portfolio.</p>"
+          "documentation":"<p>The tags to remove.</p>"
         }
       }
     },
@@ -3497,11 +3502,11 @@
       "members":{
         "PortfolioDetail":{
           "shape":"PortfolioDetail",
-          "documentation":"<p>The resulting detailed portfolio information.</p>"
+          "documentation":"<p>Information about the portfolio.</p>"
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>Tags associated with the portfolio.</p>"
+          "documentation":"<p>Information about the tags associated with the portfolio.</p>"
         }
       }
     },
@@ -3515,7 +3520,7 @@
         },
         "Id":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the product for the update request.</p>"
+          "documentation":"<p>The product identifier.</p>"
         },
         "Name":{
           "shape":"ProductViewName",
@@ -3527,7 +3532,7 @@
         },
         "Description":{
           "shape":"ProductViewShortDescription",
-          "documentation":"<p>The updated text description of the product.</p>"
+          "documentation":"<p>The updated description of the product.</p>"
         },
         "Distributor":{
           "shape":"ProductViewOwner",
@@ -3547,11 +3552,11 @@
         },
         "AddTags":{
           "shape":"AddTags",
-          "documentation":"<p>Tags to add to the existing list of tags associated with the product.</p>"
+          "documentation":"<p>The tags to add to the product.</p>"
         },
         "RemoveTags":{
           "shape":"TagKeys",
-          "documentation":"<p>Tags to remove from the existing list of tags associated with the product.</p>"
+          "documentation":"<p>The tags to remove from the product.</p>"
         }
       }
     },
@@ -3560,11 +3565,11 @@
       "members":{
         "ProductViewDetail":{
           "shape":"ProductViewDetail",
-          "documentation":"<p>The resulting detailed product view information.</p>"
+          "documentation":"<p>Information about the product view.</p>"
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>Tags associated with the product.</p>"
+          "documentation":"<p>Information about the tags associated with the product.</p>"
         }
       }
     },
@@ -3578,31 +3583,31 @@
         },
         "ProvisionedProductName":{
           "shape":"ProvisionedProductNameOrArn",
-          "documentation":"<p>The updated name of the ProvisionedProduct object. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+          "documentation":"<p>The updated name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>"
         },
         "ProvisionedProductId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the ProvisionedProduct object to update. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.</p>"
+          "documentation":"<p>The identifier of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>"
         },
         "ProductId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the ProvisionedProduct object.</p>"
+          "documentation":"<p>The identifier of the provisioned product.</p>"
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The provisioning artifact identifier for this product. This is sometimes referred to as the product version.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         },
         "PathId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the path to use in the updated ProvisionedProduct object. This value is optional if the product has a default path, and is required if there is more than one path for the specified product.</p>"
+          "documentation":"<p>The new path identifier. This value is optional if the product has a default path, and required if the product has more than one path.</p>"
         },
         "ProvisioningParameters":{
           "shape":"UpdateProvisioningParameters",
-          "documentation":"<p>A list of <code>ProvisioningParameter</code> objects used to update the ProvisionedProduct object.</p>"
+          "documentation":"<p>The new parameters.</p>"
         },
         "UpdateToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>The idempotency token that uniquely identifies the provisioning update request.</p>",
+          "documentation":"<p>The idempotency token that uniquely identifies the provisioning update rquest.</p>",
           "idempotencyToken":true
         }
       }
@@ -3612,7 +3617,7 @@
       "members":{
         "RecordDetail":{
           "shape":"RecordDetail",
-          "documentation":"<p>The detailed result of the <a>UpdateProvisionedProduct</a> request, containing the inputs made to that request, the current state of the request, a pointer to the ProvisionedProduct object that the request is modifying, and a list of any errors that the request encountered.</p>"
+          "documentation":"<p>Information about the result of the request.</p>"
         }
       }
     },
@@ -3633,7 +3638,7 @@
         },
         "ProvisioningArtifactId":{
           "shape":"Id",
-          "documentation":"<p>The identifier of the provisioning artifact for the update request. This is sometimes referred to as the product version.</p>"
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         },
         "Name":{
           "shape":"ProvisioningArtifactName",
@@ -3641,7 +3646,11 @@
         },
         "Description":{
           "shape":"ProvisioningArtifactDescription",
-          "documentation":"<p>The updated text description of the provisioning artifact.</p>"
+          "documentation":"<p>The updated description of the provisioning artifact.</p>"
+        },
+        "Active":{
+          "shape":"ProvisioningArtifactActive",
+          "documentation":"<p>Indicates whether the product version is active.</p>"
         }
       }
     },
@@ -3650,11 +3659,11 @@
       "members":{
         "ProvisioningArtifactDetail":{
           "shape":"ProvisioningArtifactDetail",
-          "documentation":"<p>The resulting detailed provisioning artifact information.</p>"
+          "documentation":"<p>Information about the provisioning artifact.</p>"
         },
         "Info":{
           "shape":"ProvisioningArtifactInfo",
-          "documentation":"<p>Additional information about the provisioning artifact update request.</p>"
+          "documentation":"<p>The URL of the CloudFormation template in Amazon S3.</p>"
         },
         "Status":{
           "shape":"Status",
@@ -3667,18 +3676,18 @@
       "members":{
         "Key":{
           "shape":"ParameterKey",
-          "documentation":"<p>The <code>ProvisioningArtifactParameter.ParameterKey</code> parameter from <a>DescribeProvisioningParameters</a>.</p>"
+          "documentation":"<p>The parameter key.</p>"
         },
         "Value":{
           "shape":"ParameterValue",
-          "documentation":"<p>The value to use for updating the product provisioning. Any constraints on this value can be found in the <code>ProvisioningArtifactParameter</code> parameter for <code>Key</code>.</p>"
+          "documentation":"<p>The parameter value.</p>"
         },
         "UsePreviousValue":{
           "shape":"UsePreviousValue",
-          "documentation":"<p>If true, uses the currently set value for <code>Key</code>, ignoring <code>UpdateProvisioningParameter.Value</code>.</p>"
+          "documentation":"<p>If set to true, <code>Value</code> is ignored and the previous parameter value is kept.</p>"
         }
       },
-      "documentation":"<p>The parameter key-value pair used to update a ProvisionedProduct object. If <code>UsePreviousValue</code> is set to true, <code>Value</code> is ignored and the value for <code>Key</code> is kept as previously set (current value).</p>"
+      "documentation":"<p>The parameter key-value pair used to update a provisioned product.</p>"
     },
     "UpdateProvisioningParameters":{
       "type":"list",
@@ -3690,7 +3699,7 @@
       "members":{
         "Id":{
           "shape":"TagOptionId",
-          "documentation":"<p>The identifier of the constraint to update.</p>"
+          "documentation":"<p>The TagOption identifier.</p>"
         },
         "Value":{
           "shape":"TagOptionValue",
@@ -3707,7 +3716,7 @@
       "members":{
         "TagOptionDetail":{
           "shape":"TagOptionDetail",
-          "documentation":"<p>The resulting detailed TagOption information.</p>"
+          "documentation":"<p>Information about the TagOption.</p>"
         }
       }
     },
@@ -3733,5 +3742,5 @@
     "UsePreviousValue":{"type":"boolean"},
     "Verbose":{"type":"boolean"}
   },
-  "documentation":"<fullname>AWS Service Catalog</fullname> <p> <b>Overview</b> </p> <p> <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> allows organizations to create and manage catalogs of IT services that are approved for use on AWS. This documentation provides reference material for the AWS Service Catalog end user API. To get the most out of this documentation, be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">AWS Service Catalog Concepts</a>.</p> <p> <i>Additional Resources</i> </p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">AWS Service Catalog Administrator Guide</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/userguide/introduction.html\">AWS Service Catalog User Guide</a> </p> </li> </ul>"
+  "documentation":"<fullname>AWS Service Catalog</fullname> <p> <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> enables organizations to create and manage catalogs of IT services that are approved for use on AWS. To get the most out of this documentation, you should be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">AWS Service Catalog Concepts</a>.</p>"
 }

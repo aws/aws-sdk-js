@@ -526,5 +526,8 @@
   "serverlessapplicationrepository": {
     "prefix": "serverlessrepo",
     "name": "ServerlessApplicationRepository"
+  },
+  "servicediscovery": {
+    "name": "ServiceDiscovery"
   }
 }

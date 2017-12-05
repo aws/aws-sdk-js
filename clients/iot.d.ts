@@ -292,11 +292,11 @@ declare class Iot extends Service {
    */
   describeCACertificate(callback?: (err: AWSError, data: Iot.Types.DescribeCACertificateResponse) => void): Request<Iot.Types.DescribeCACertificateResponse, AWSError>;
   /**
-   * Gets information about the specified certificate. You may specify the certificate using either its ID or PEM.
+   * Gets information about the specified certificate.
    */
   describeCertificate(params: Iot.Types.DescribeCertificateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
   /**
-   * Gets information about the specified certificate. You may specify the certificate using either its ID or PEM.
+   * Gets information about the specified certificate.
    */
   describeCertificate(callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
   /**
@@ -4199,6 +4199,10 @@ declare namespace Iot {
      * The version of the SQL rules engine to use when evaluating the rule.
      */
     awsIotSqlVersion?: AwsIotSqlVersion;
+    /**
+     * The action to perform when an error occurs.
+     */
+    errorAction?: Action;
   }
   export type TopicRuleList = TopicRuleListItem[];
   export interface TopicRuleListItem {
@@ -4244,6 +4248,10 @@ declare namespace Iot {
      * The version of the SQL rules engine to use when evaluating the rule.
      */
     awsIotSqlVersion?: AwsIotSqlVersion;
+    /**
+     * The action to take when an error occurs.
+     */
+    errorAction?: Action;
   }
   export interface TransferCertificateRequest {
     /**

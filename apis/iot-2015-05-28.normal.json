@@ -648,7 +648,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Gets information about the specified certificate. You may specify the certificate using either its ID or PEM.</p>"
+      "documentation":"<p>Gets information about the specified certificate.</p>"
     },
     "DescribeDefaultAuthorizer":{
       "name":"DescribeDefaultAuthorizer",
@@ -7472,6 +7472,10 @@
         "awsIotSqlVersion":{
           "shape":"AwsIotSqlVersion",
           "documentation":"<p>The version of the SQL rules engine to use when evaluating the rule.</p>"
+        },
+        "errorAction":{
+          "shape":"Action",
+          "documentation":"<p>The action to perform when an error occurs.</p>"
         }
       },
       "documentation":"<p>Describes a rule.</p>"
@@ -7532,6 +7536,10 @@
         "awsIotSqlVersion":{
           "shape":"AwsIotSqlVersion",
           "documentation":"<p>The version of the SQL rules engine to use when evaluating the rule.</p>"
+        },
+        "errorAction":{
+          "shape":"Action",
+          "documentation":"<p>The action to take when an error occurs.</p>"
         }
       },
       "documentation":"<p>Describes a rule.</p>"

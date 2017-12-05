@@ -128,6 +128,7 @@ export abstract class ConfigurationServicePlaceholders {
   alexaforbusiness?: AWS.AlexaForBusiness.Types.ClientConfiguration;
   cloud9?: AWS.Cloud9.Types.ClientConfiguration;
   serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.ClientConfiguration;
+  servicediscovery?: AWS.ServiceDiscovery.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -258,4 +259,5 @@ export interface ConfigurationServiceApiVersions {
   alexaforbusiness?: AWS.AlexaForBusiness.Types.apiVersion;
   cloud9?: AWS.Cloud9.Types.apiVersion;
   serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.apiVersion;
+  servicediscovery?: AWS.ServiceDiscovery.Types.apiVersion;
 }

@@ -127,5 +127,6 @@ module.exports = {
   ResourceGroups: require('./resourcegroups'),
   AlexaForBusiness: require('./alexaforbusiness'),
   Cloud9: require('./cloud9'),
-  ServerlessApplicationRepository: require('./serverlessapplicationrepository')
+  ServerlessApplicationRepository: require('./serverlessapplicationrepository'),
+  ServiceDiscovery: require('./servicediscovery')
 };
