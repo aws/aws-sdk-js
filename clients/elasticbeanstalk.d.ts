@@ -84,7 +84,7 @@ declare class ElasticBeanstalk extends Service {
    */
   createPlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.CreatePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.CreatePlatformVersionResult, AWSError>;
   /**
-   * Creates the Amazon S3 storage location for the account. This location is used to store user log files.
+   * Creates a bucket in Amazon S3 to store application versions, logs, and other files used by Elastic Beanstalk environments. The Elastic Beanstalk console and EB CLI call this API the first time you create an environment in a region. If the storage location already exists, CreateStorageLocation still returns the bucket name but does not create a new bucket.
    */
   createStorageLocation(callback?: (err: AWSError, data: ElasticBeanstalk.Types.CreateStorageLocationResultMessage) => void): Request<ElasticBeanstalk.Types.CreateStorageLocationResultMessage, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class ElasticBeanstalk extends Service {
    */
   listPlatformVersions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
   /**
-   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging Elastic Beanstalk environments.
+   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment.
    */
   listTagsForResource(params: ElasticBeanstalk.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ResourceTagsDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ResourceTagsDescriptionMessage, AWSError>;
   /**
-   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging Elastic Beanstalk environments.
+   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment.
    */
   listTagsForResource(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ResourceTagsDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ResourceTagsDescriptionMessage, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class ElasticBeanstalk extends Service {
    */
   updateEnvironment(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
-   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments.
+   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment. If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:  elasticbeanstalk:AddTags  Controls permission to call UpdateTagsForResource and pass a list of tags to add in the TagsToAdd parameter.  elasticbeanstalk:RemoveTags  Controls permission to call UpdateTagsForResource and pass a list of tag keys to remove in the TagsToRemove parameter.   For details about creating a custom user policy, see Creating a Custom User Policy.
    */
   updateTagsForResource(params: ElasticBeanstalk.Types.UpdateTagsForResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments.
+   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment. If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:  elasticbeanstalk:AddTags  Controls permission to call UpdateTagsForResource and pass a list of tags to add in the TagsToAdd parameter.  elasticbeanstalk:RemoveTags  Controls permission to call UpdateTagsForResource and pass a list of tag keys to remove in the TagsToRemove parameter.   For details about creating a custom user policy, see Creating a Custom User Policy.
    */
   updateTagsForResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -839,7 +839,7 @@ declare namespace ElasticBeanstalk {
      */
     AutoCreateApplication?: AutoCreateApplication;
     /**
-     * Preprocesses and validates the environment manifest and configuration files in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment.
+     * Preprocesses and validates the environment manifest (env.yaml) and configuration files (*.config files in the .ebextensions folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment.  The Process option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server or Docker configuration. 
      */
     Process?: ApplicationVersionProccess;
   }
@@ -857,7 +857,7 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the custome platform.
+     * The ARN of the custom platform.
      */
     PlatformArn?: PlatformArn;
     /**

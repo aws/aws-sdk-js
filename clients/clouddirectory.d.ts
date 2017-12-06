@@ -20,11 +20,11 @@ declare class CloudDirectory extends Service {
    */
   addFacetToObject(callback?: (err: AWSError, data: CloudDirectory.Types.AddFacetToObjectResponse) => void): Request<CloudDirectory.Types.AddFacetToObjectResponse, AWSError>;
   /**
-   * Copies the input published schema into the Directory with the same name and version as that of the published schema .
+   * Copies the input published schema, at the specified version, into the Directory with the same name and version as that of the published schema.
    */
   applySchema(params: CloudDirectory.Types.ApplySchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ApplySchemaResponse) => void): Request<CloudDirectory.Types.ApplySchemaResponse, AWSError>;
   /**
-   * Copies the input published schema into the Directory with the same name and version as that of the published schema .
+   * Copies the input published schema, at the specified version, into the Directory with the same name and version as that of the published schema.
    */
   applySchema(callback?: (err: AWSError, data: CloudDirectory.Types.ApplySchemaResponse) => void): Request<CloudDirectory.Types.ApplySchemaResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class CloudDirectory extends Service {
    */
   batchRead(callback?: (err: AWSError, data: CloudDirectory.Types.BatchReadResponse) => void): Request<CloudDirectory.Types.BatchReadResponse, AWSError>;
   /**
-   * Performs all the write operations in a batch. Either all the operations succeed or none. Batch writes supports only object-related operations.
+   * Performs all the write operations in a batch. Either all the operations succeed or none.
    */
   batchWrite(params: CloudDirectory.Types.BatchWriteRequest, callback?: (err: AWSError, data: CloudDirectory.Types.BatchWriteResponse) => void): Request<CloudDirectory.Types.BatchWriteResponse, AWSError>;
   /**
-   * Performs all the write operations in a batch. Either all the operations succeed or none. Batch writes supports only object-related operations.
+   * Performs all the write operations in a batch. Either all the operations succeed or none.
    */
   batchWrite(callback?: (err: AWSError, data: CloudDirectory.Types.BatchWriteResponse) => void): Request<CloudDirectory.Types.BatchWriteResponse, AWSError>;
   /**
@@ -212,6 +212,14 @@ declare class CloudDirectory extends Service {
    */
   enableDirectory(callback?: (err: AWSError, data: CloudDirectory.Types.EnableDirectoryResponse) => void): Request<CloudDirectory.Types.EnableDirectoryResponse, AWSError>;
   /**
+   * Returns current applied schema version ARN, including the minor version in use.
+   */
+  getAppliedSchemaVersion(params: CloudDirectory.Types.GetAppliedSchemaVersionRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetAppliedSchemaVersionResponse) => void): Request<CloudDirectory.Types.GetAppliedSchemaVersionResponse, AWSError>;
+  /**
+   * Returns current applied schema version ARN, including the minor version in use.
+   */
+  getAppliedSchemaVersion(callback?: (err: AWSError, data: CloudDirectory.Types.GetAppliedSchemaVersionResponse) => void): Request<CloudDirectory.Types.GetAppliedSchemaVersionResponse, AWSError>;
+  /**
    * Retrieves metadata about a directory.
    */
   getDirectory(params: CloudDirectory.Types.GetDirectoryRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetDirectoryResponse) => void): Request<CloudDirectory.Types.GetDirectoryResponse, AWSError>;
@@ -252,19 +260,19 @@ declare class CloudDirectory extends Service {
    */
   getTypedLinkFacetInformation(callback?: (err: AWSError, data: CloudDirectory.Types.GetTypedLinkFacetInformationResponse) => void): Request<CloudDirectory.Types.GetTypedLinkFacetInformationResponse, AWSError>;
   /**
-   * Lists schemas applied to a directory.
+   * Lists schema major versions applied to a directory. If SchemaArn is provided, lists the minor version.
    */
   listAppliedSchemaArns(params: CloudDirectory.Types.ListAppliedSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListAppliedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListAppliedSchemaArnsResponse, AWSError>;
   /**
-   * Lists schemas applied to a directory.
+   * Lists schema major versions applied to a directory. If SchemaArn is provided, lists the minor version.
    */
   listAppliedSchemaArns(callback?: (err: AWSError, data: CloudDirectory.Types.ListAppliedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListAppliedSchemaArnsResponse, AWSError>;
   /**
-   * Lists indices attached to an object.
+   * Lists indices attached to the specified object.
    */
   listAttachedIndices(params: CloudDirectory.Types.ListAttachedIndicesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListAttachedIndicesResponse) => void): Request<CloudDirectory.Types.ListAttachedIndicesResponse, AWSError>;
   /**
-   * Lists indices attached to an object.
+   * Lists indices attached to the specified object.
    */
   listAttachedIndices(callback?: (err: AWSError, data: CloudDirectory.Types.ListAttachedIndicesResponse) => void): Request<CloudDirectory.Types.ListAttachedIndicesResponse, AWSError>;
   /**
@@ -308,11 +316,11 @@ declare class CloudDirectory extends Service {
    */
   listIncomingTypedLinks(callback?: (err: AWSError, data: CloudDirectory.Types.ListIncomingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListIncomingTypedLinksResponse, AWSError>;
   /**
-   * Lists objects attached to the specified index.
+   * Lists objects and indexed values attached to the index.
    */
   listIndex(params: CloudDirectory.Types.ListIndexRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
   /**
-   * Lists objects attached to the specified index.
+   * Lists objects and indexed values attached to the index.
    */
   listIndex(callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
   /**
@@ -372,11 +380,11 @@ declare class CloudDirectory extends Service {
    */
   listPolicyAttachments(callback?: (err: AWSError, data: CloudDirectory.Types.ListPolicyAttachmentsResponse) => void): Request<CloudDirectory.Types.ListPolicyAttachmentsResponse, AWSError>;
   /**
-   * Retrieves each published schema Amazon Resource Name (ARN).
+   * Lists schema major versions for a published schema. If SchemaArn is provided, lists the minor version.
    */
   listPublishedSchemaArns(params: CloudDirectory.Types.ListPublishedSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListPublishedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListPublishedSchemaArnsResponse, AWSError>;
   /**
-   * Retrieves each published schema Amazon Resource Name (ARN).
+   * Lists schema major versions for a published schema. If SchemaArn is provided, lists the minor version.
    */
   listPublishedSchemaArns(callback?: (err: AWSError, data: CloudDirectory.Types.ListPublishedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListPublishedSchemaArnsResponse, AWSError>;
   /**
@@ -412,11 +420,11 @@ declare class CloudDirectory extends Service {
    */
   lookupPolicy(callback?: (err: AWSError, data: CloudDirectory.Types.LookupPolicyResponse) => void): Request<CloudDirectory.Types.LookupPolicyResponse, AWSError>;
   /**
-   * Publishes a development schema with a version. If description and attributes are specified, PublishSchema overrides the development schema description and attributes. If not, the development schema description and attributes are used.
+   * Publishes a development schema with a major version and a recommended minor version.
    */
   publishSchema(params: CloudDirectory.Types.PublishSchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.PublishSchemaResponse) => void): Request<CloudDirectory.Types.PublishSchemaResponse, AWSError>;
   /**
-   * Publishes a development schema with a version. If description and attributes are specified, PublishSchema overrides the development schema description and attributes. If not, the development schema description and attributes are used.
+   * Publishes a development schema with a major version and a recommended minor version.
    */
   publishSchema(callback?: (err: AWSError, data: CloudDirectory.Types.PublishSchemaResponse) => void): Request<CloudDirectory.Types.PublishSchemaResponse, AWSError>;
   /**
@@ -483,6 +491,22 @@ declare class CloudDirectory extends Service {
    * Updates a TypedLinkFacet. For more information, see Typed link.
    */
   updateTypedLinkFacet(callback?: (err: AWSError, data: CloudDirectory.Types.UpdateTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.UpdateTypedLinkFacetResponse, AWSError>;
+  /**
+   * Upgrades a single directory in-place using the PublishedSchemaArn with schema updates found in MinorVersion. Backwards-compatible minor version upgrades are instantaneously available for readers on all objects in the directory. Note: This is a synchronous API call and upgrades only one schema on a given directory per call. To upgrade multiple directories from one schema, you would need to call this API on each directory.
+   */
+  upgradeAppliedSchema(params: CloudDirectory.Types.UpgradeAppliedSchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpgradeAppliedSchemaResponse) => void): Request<CloudDirectory.Types.UpgradeAppliedSchemaResponse, AWSError>;
+  /**
+   * Upgrades a single directory in-place using the PublishedSchemaArn with schema updates found in MinorVersion. Backwards-compatible minor version upgrades are instantaneously available for readers on all objects in the directory. Note: This is a synchronous API call and upgrades only one schema on a given directory per call. To upgrade multiple directories from one schema, you would need to call this API on each directory.
+   */
+  upgradeAppliedSchema(callback?: (err: AWSError, data: CloudDirectory.Types.UpgradeAppliedSchemaResponse) => void): Request<CloudDirectory.Types.UpgradeAppliedSchemaResponse, AWSError>;
+  /**
+   * Upgrades a published schema under a new minor version revision using the current contents of DevelopmentSchemaArn.
+   */
+  upgradePublishedSchema(params: CloudDirectory.Types.UpgradePublishedSchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpgradePublishedSchemaResponse) => void): Request<CloudDirectory.Types.UpgradePublishedSchemaResponse, AWSError>;
+  /**
+   * Upgrades a published schema under a new minor version revision using the current contents of DevelopmentSchemaArn.
+   */
+  upgradePublishedSchema(callback?: (err: AWSError, data: CloudDirectory.Types.UpgradePublishedSchemaResponse) => void): Request<CloudDirectory.Types.UpgradePublishedSchemaResponse, AWSError>;
 }
 declare namespace CloudDirectory {
   export interface AddFacetToObjectRequest {
@@ -491,7 +515,7 @@ declare namespace CloudDirectory {
      */
     DirectoryArn: Arn;
     /**
-     * Identifiers for the facet that you are adding to the object.
+     * Identifiers for the facet that you are adding to the object. See SchemaFacet for details.
      */
     SchemaFacet: SchemaFacet;
     /**
@@ -1528,7 +1552,7 @@ declare namespace CloudDirectory {
      */
     DirectoryArn: Arn;
     /**
-     * A list of schema facets to be associated with the object that contains SchemaArn and facet name. For more information, see arns.
+     * A list of schema facets to be associated with the object. Do not provide minor version components. See SchemaFacet for details.
      */
     SchemaFacets: SchemaFacetList;
     /**
@@ -1820,6 +1844,18 @@ declare namespace CloudDirectory {
   export type FacetAttributeUpdateList = FacetAttributeUpdate[];
   export type FacetName = string;
   export type FacetNameList = FacetName[];
+  export interface GetAppliedSchemaVersionRequest {
+    /**
+     * The ARN of the applied schema.
+     */
+    SchemaArn: Arn;
+  }
+  export interface GetAppliedSchemaVersionResponse {
+    /**
+     * Current applied schema ARN, including the minor version in use if one was provided.
+     */
+    AppliedSchemaArn?: Arn;
+  }
   export interface GetDirectoryRequest {
     /**
      * The ARN of the directory.
@@ -1864,7 +1900,7 @@ declare namespace CloudDirectory {
   }
   export interface GetObjectInformationResponse {
     /**
-     * The facets attached to the specified object.
+     * The facets attached to the specified object. Although the response does not include minor version information, the most recently applied minor version of each Facet is in effect. See GetAppliedSchemaVersion for details.
      */
     SchemaFacets?: SchemaFacetList;
     /**
@@ -1910,7 +1946,7 @@ declare namespace CloudDirectory {
      */
     IndexedAttributes?: AttributeKeyAndValueList;
     /**
-     * The ObjectIdentifier of the object attached to the index.
+     * In response to ListIndex, the ObjectIdentifier of the object attached to the index. In response to ListAttachedIndices, the ObjectIdentifier of the index attached to the object. This field will always contain the ObjectIdentifier of the object on the opposite side of the attachment specified in the query.
      */
     ObjectIdentifier?: ObjectIdentifier;
   }
@@ -1922,6 +1958,10 @@ declare namespace CloudDirectory {
      * The ARN of the directory you are listing.
      */
     DirectoryArn: Arn;
+    /**
+     * The response for ListAppliedSchemaArns when this parameter is used will list all minor version ARNs for a major version.
+     */
+    SchemaArn?: Arn;
     /**
      * The pagination token.
      */
@@ -2123,7 +2163,7 @@ declare namespace CloudDirectory {
      */
     IndexReference: ObjectReference;
     /**
-     * The maximum number of results to retrieve from the index.
+     * The maximum number of objects in a single page to retrieve from the index during a request. For more information, see AWS Directory Service Limits.
      */
     MaxResults?: NumberResults;
     /**
@@ -2379,6 +2419,10 @@ declare namespace CloudDirectory {
   }
   export interface ListPublishedSchemaArnsRequest {
     /**
+     * The response for ListPublishedSchemaArns when this parameter is used will list all minor version ARNs for a major version.
+     */
+    SchemaArn?: Arn;
+    /**
      * The pagination token.
      */
     NextToken?: NextToken;
@@ -2591,9 +2635,13 @@ declare namespace CloudDirectory {
      */
     DevelopmentSchemaArn: Arn;
     /**
-     * The version under which the schema will be published.
+     * The major version under which the schema will be published. Schemas have both a major and minor version associated with them.
      */
     Version: Version;
+    /**
+     * The minor version under which the schema will be published. This parameter is recommended. Schemas have both a major and minor version associated with them.
+     */
+    MinorVersion?: Version;
     /**
      * The new name under which the schema will be published. If this is not provided, the development schema is considered.
      */
@@ -2628,7 +2676,7 @@ declare namespace CloudDirectory {
      */
     DirectoryArn: Arn;
     /**
-     * The facet to remove.
+     * The facet to remove. See SchemaFacet for details.
      */
     SchemaFacet: SchemaFacet;
     /**
@@ -2657,7 +2705,7 @@ declare namespace CloudDirectory {
   export type RuleType = "BINARY_LENGTH"|"NUMBER_COMPARISON"|"STRING_FROM_SET"|"STRING_LENGTH"|string;
   export interface SchemaFacet {
     /**
-     * The ARN of the schema that contains the facet.
+     * The ARN of the schema that contains the facet with no minor component. See arns and In-Place Schema Upgrade for a description of when to provide minor versions.
      */
     SchemaArn?: Arn;
     /**
@@ -2919,6 +2967,54 @@ declare namespace CloudDirectory {
     IdentityAttributeOrder: AttributeNameList;
   }
   export interface UpdateTypedLinkFacetResponse {
+  }
+  export interface UpgradeAppliedSchemaRequest {
+    /**
+     * The revision of the published schema to upgrade the directory to.
+     */
+    PublishedSchemaArn: Arn;
+    /**
+     * The ARN for the directory to which the upgraded schema will be applied.
+     */
+    DirectoryArn: Arn;
+    /**
+     * Used for testing whether the major version schemas are backward compatible or not. If schema compatibility fails, an exception would be thrown else the call would succeed but no changes will be saved. This parameter is optional.
+     */
+    DryRun?: Bool;
+  }
+  export interface UpgradeAppliedSchemaResponse {
+    /**
+     * The ARN of the upgraded schema that is returned as part of the response.
+     */
+    UpgradedSchemaArn?: Arn;
+    /**
+     * The ARN of the directory that is returned as part of the response.
+     */
+    DirectoryArn?: Arn;
+  }
+  export interface UpgradePublishedSchemaRequest {
+    /**
+     * The ARN of the development schema with the changes used for the upgrade.
+     */
+    DevelopmentSchemaArn: Arn;
+    /**
+     * The ARN of the published schema to be upgraded.
+     */
+    PublishedSchemaArn: Arn;
+    /**
+     * Identifies the minor version of the published schema that will be created. This parameter is NOT optional.
+     */
+    MinorVersion: Version;
+    /**
+     * Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.
+     */
+    DryRun?: Bool;
+  }
+  export interface UpgradePublishedSchemaResponse {
+    /**
+     * The ARN of the upgraded schema that is returned as part of the response.
+     */
+    UpgradedSchemaArn?: Arn;
   }
   export type Version = string;
   /**

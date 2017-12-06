@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.164.0-->
+<!--LATEST=2.165.0-->
 <!--ENTRYINSERT-->
+
+## 2.165.0
+* feature: CloudDirectory: Amazon Cloud Directory makes it easier for you to apply schema changes across your directories with in-place schema upgrades. Your directories now remain available while backward-compatible schema changes are being applied, such as the addition of new fields. You also can view the history of your schema changes in Cloud Directory by using both major and minor version identifiers, which can help you track and audit schema versions across directories.
+* feature: SageMaker: Initial waiters for common SageMaker workflows.
 
 ## 2.164.0
 * feature: Iot: Add error action API for RulesEngine. 
