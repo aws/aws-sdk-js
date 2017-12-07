@@ -1,0 +1,2276 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2017-07-24",
+    "endpointPrefix":"sagemaker",
+    "jsonVersion":"1.1",
+    "protocol":"json",
+    "serviceAbbreviation":"SageMaker",
+    "serviceFullName":"Amazon SageMaker Service",
+    "signatureVersion":"v4",
+    "signingName":"sagemaker",
+    "targetPrefix":"SageMaker",
+    "uid":"sagemaker-2017-07-24"
+  },
+  "operations":{
+    "AddTags":{
+      "name":"AddTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddTagsInput"},
+      "output":{"shape":"AddTagsOutput"},
+      "documentation":"<p>Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add tags to notebook instances, training jobs, models, endpoint configurations, and endpoints. </p> <p>Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see <a href=\"http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>"
+    },
+    "CreateEndpoint":{
+      "name":"CreateEndpoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateEndpointInput"},
+      "output":{"shape":"CreateEndpointOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html\">CreateEndpointConfig</a> API. </p> <note> <p> Use this API only for hosting models using Amazon SageMaker hosting services. </p> </note> <p>The endpoint name must be unique within an AWS Region in your AWS account. </p> <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them. </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Creating</code>. After it creates the endpoint, it sets the status to <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html\">DescribeEndpoint</a> API.</p> <p>For an example, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html\">Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker</a>. </p>"
+    },
+    "CreateEndpointConfig":{
+      "name":"CreateEndpointConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateEndpointConfigInput"},
+      "output":{"shape":"CreateEndpointConfigOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p>Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the <code>CreateModel</code> API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html\">CreateEndpoint</a> API. </p> <note> <p> Use this API only if you want to use Amazon SageMaker hosting services to deploy models into production. </p> </note> <p>In the request, you define one or more <code>ProductionVariant</code>s, each of which identifies a model. Each <code>ProductionVariant</code> parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy. </p> <p>If you are hosting multiple models, you also assign a <code>VariantWeight</code> to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. </p>"
+    },
+    "CreateModel":{
+      "name":"CreateModel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateModelInput"},
+      "output":{"shape":"CreateModelOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe one or more containers. For each container, you specify the docker image containing inference code, artifacts (from prior training), and custom environment map that the inference code uses when you deploy the model into production. </p> <p>Use this API to create a model only if you want to use Amazon SageMaker hosting services. To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. </p> <p>Amazon SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>In the <code>CreateModel</code> request, you must define at least one container with the <code>PrimaryContainer</code> parameter. You can optionally specify additional containers with the <code>SupplementalContainers</code> parameter. </p> <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other AWS resources, you grant necessary permissions via this role.</p>"
+    },
+    "CreateNotebookInstance":{
+      "name":"CreateNotebookInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateNotebookInstanceInput"},
+      "output":{"shape":"CreateNotebookInstanceOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p>Creates an Amazon SageMaker notebook instance. A notebook instance is an ML compute instance running on a Jupyter notebook. </p> <p>In a <code>CreateNotebookInstance</code> request, you specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance. </p> <p>Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific an algorithm or with a machine learning framework. </p> <p>After receiving the request, Amazon SageMaker does the following:</p> <ol> <li> <p>Creates a network interface in the Amazon SageMaker VPC.</p> </li> <li> <p>(Option) If you specified <code>SubnetId</code>, creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.</p> </li> <li> <p>Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified <code>SubnetId</code> of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.</p> </li> </ol> <p>After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN).</p> <p>After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
+    },
+    "CreatePresignedNotebookInstanceUrl":{
+      "name":"CreatePresignedNotebookInstanceUrl",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreatePresignedNotebookInstanceUrlInput"},
+      "output":{"shape":"CreatePresignedNotebookInstanceUrlOutput"},
+      "documentation":"<p>Returns a URL that you can use to connect to the Juypter server from a notebook instance. In the Amazon SageMaker console, when you choose <code>Open</code> next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page. </p>"
+    },
+    "CreateTrainingJob":{
+      "name":"CreateTrainingJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTrainingJobRequest"},
+      "output":{"shape":"CreateTrainingJobResponse"},
+      "errors":[
+        {"shape":"ResourceInUse"},
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p> Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify. </p> <p>If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a deep learning service other than Amazon SageMaker, provided that you know how to use them for inferences. </p> <p>In the request body, you provide the following: </p> <ul> <li> <p> <code>AlgorithmSpecification</code> - Identifies the training algorithm to use. </p> </li> <li> <p> <code>HyperParameters</code> - Specify these algorithm-specific parameters to influence the quality of the final model. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p> </li> <li> <p> <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3 location where it is stored.</p> </li> <li> <p> <code>OutputDataConfig</code> - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results of model training. </p> <p/> </li> <li> <p> <code>ResourceConfig</code> - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance. </p> </li> <li> <p> <code>RoleARN</code> - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training. </p> </li> <li> <p> <code>StoppingCondition</code> - Sets a duration for training. Use this parameter to cap model training costs. </p> </li> </ul> <p> For more information about Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
+    },
+    "DeleteEndpoint":{
+      "name":"DeleteEndpoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteEndpointInput"},
+      "documentation":"<p>Deletes an endpoint. Amazon SageMaker frees up all of the resources that were deployed when the endpoint was created. </p>"
+    },
+    "DeleteEndpointConfig":{
+      "name":"DeleteEndpointConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteEndpointConfigInput"},
+      "documentation":"<p>Deletes an endpoint configuration. The <code>DeleteEndpoingConfig</code> API deletes only the specified configuration. It does not delete endpoints created using the configuration. </p>"
+    },
+    "DeleteModel":{
+      "name":"DeleteModel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteModelInput"},
+      "documentation":"<p>Deletes a model. The <code>DeleteModel</code> API deletes only the model entry that was created in Amazon SageMaker when you called the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html\">CreateModel</a> API. It does not delete model artifacts, inference code, or the IAM role that you specified when creating the model. </p>"
+    },
+    "DeleteNotebookInstance":{
+      "name":"DeleteNotebookInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteNotebookInstanceInput"},
+      "documentation":"<p> Deletes an Amazon SageMaker notebook instance. Before you can delete a notebook instance, you must call the <code>StopNotebookInstance</code> API. </p> <important> <p>When you delete a notebook instance, you lose all of your data. Amazon SageMaker removes the ML compute instance, and deletes the ML storage volume and the network interface associated with the notebook instance. </p> </important>"
+    },
+    "DeleteTags":{
+      "name":"DeleteTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTagsInput"},
+      "output":{"shape":"DeleteTagsOutput"},
+      "documentation":"<p>Deletes the specified tags from an Amazon SageMaker resource.</p> <p>To list a resource's tags, use the <code>ListTags</code> API. </p>"
+    },
+    "DescribeEndpoint":{
+      "name":"DescribeEndpoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeEndpointInput"},
+      "output":{"shape":"DescribeEndpointOutput"},
+      "documentation":"<p>Returns the description of an endpoint.</p>"
+    },
+    "DescribeEndpointConfig":{
+      "name":"DescribeEndpointConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeEndpointConfigInput"},
+      "output":{"shape":"DescribeEndpointConfigOutput"},
+      "documentation":"<p>Returns the description of an endpoint configuration created using the <code>CreateEndpointConfig</code> API.</p>"
+    },
+    "DescribeModel":{
+      "name":"DescribeModel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeModelInput"},
+      "output":{"shape":"DescribeModelOutput"},
+      "documentation":"<p>Describes a model that you created using the <code>CreateModel</code> API.</p>"
+    },
+    "DescribeNotebookInstance":{
+      "name":"DescribeNotebookInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeNotebookInstanceInput"},
+      "output":{"shape":"DescribeNotebookInstanceOutput"},
+      "documentation":"<p>Returns information about a notebook instance.</p>"
+    },
+    "DescribeTrainingJob":{
+      "name":"DescribeTrainingJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTrainingJobRequest"},
+      "output":{"shape":"DescribeTrainingJobResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ],
+      "documentation":"<p>Returns information about a training job.</p>"
+    },
+    "ListEndpointConfigs":{
+      "name":"ListEndpointConfigs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListEndpointConfigsInput"},
+      "output":{"shape":"ListEndpointConfigsOutput"},
+      "documentation":"<p>Lists endpoint configurations.</p>"
+    },
+    "ListEndpoints":{
+      "name":"ListEndpoints",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListEndpointsInput"},
+      "output":{"shape":"ListEndpointsOutput"},
+      "documentation":"<p>Lists endpoints.</p>"
+    },
+    "ListModels":{
+      "name":"ListModels",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListModelsInput"},
+      "output":{"shape":"ListModelsOutput"},
+      "documentation":"<p>Lists models created with the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html\">CreateModel</a> API.</p>"
+    },
+    "ListNotebookInstances":{
+      "name":"ListNotebookInstances",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListNotebookInstancesInput"},
+      "output":{"shape":"ListNotebookInstancesOutput"},
+      "documentation":"<p>Returns a list of the Amazon SageMaker notebook instances in the requester's account in an AWS Region. </p>"
+    },
+    "ListTags":{
+      "name":"ListTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsInput"},
+      "output":{"shape":"ListTagsOutput"},
+      "documentation":"<p>Returns the tags for the specified Amazon SageMaker resource.</p>"
+    },
+    "ListTrainingJobs":{
+      "name":"ListTrainingJobs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTrainingJobsRequest"},
+      "output":{"shape":"ListTrainingJobsResponse"},
+      "documentation":"<p>Lists training jobs.</p>"
+    },
+    "StartNotebookInstance":{
+      "name":"StartNotebookInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StartNotebookInstanceInput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p>Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to <code>InService</code>. A notebook instance's status must be <code>InService</code> (is this same as \"Running\" in the console?) before you can connect to your Jupyter notebook. </p>"
+    },
+    "StopNotebookInstance":{
+      "name":"StopNotebookInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopNotebookInstanceInput"},
+      "documentation":"<p>Terminates the ML compute instance. Before terminating the instance, Amazon SageMaker disconnects the ML storage volume from it. Amazon SageMaker preserves the ML storage volume. </p> <p>To access data on the ML storage volume for a notebook instance that has been terminated, call the <code>StartNotebookInstance</code> API. <code>StartNotebookInstance</code> launches another ML compute instance, configures it, and attaches the preserved ML storage volume so you can continue your work. </p>"
+    },
+    "StopTrainingJob":{
+      "name":"StopTrainingJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopTrainingJobRequest"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ],
+      "documentation":"<p>Stops a training job. To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts, so the results of the training is not lost. </p> <p>Training algorithms provided by Amazon SageMaker save the intermediate results of a model training job. This intermediate data is a valid model artifact. You can use the model artifacts that are saved when Amazon SageMaker stops a training job to create a model. </p> <p>When it receives a <code>StopTrainingJob</code> request, Amazon SageMaker changes the status of the job to <code>Stopping</code>. After Amazon SageMaker stops the job, it sets the status to <code>Stopped</code>.</p>"
+    },
+    "UpdateEndpoint":{
+      "name":"UpdateEndpoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateEndpointInput"},
+      "output":{"shape":"UpdateEndpointOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p> Deploys the new <code>EndpointConfig</code> specified in the request, switches to using newly created endpoint, and then deletes resources provisioned for the endpoint using the previous <code>EndpointConfig</code> (there is no availability loss). </p> <p>When Amazon SageMaker receives the request, it sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html\">DescribeEndpoint</a> API. </p>"
+    },
+    "UpdateEndpointWeightsAndCapacities":{
+      "name":"UpdateEndpointWeightsAndCapacities",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateEndpointWeightsAndCapacitiesInput"},
+      "output":{"shape":"UpdateEndpointWeightsAndCapacitiesOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p>Updates variant weight, capacity, or both of one or more variants associated with an endpoint. This operation updates weight, capacity, or both for the previously provisioned endpoint. When it receives the request, Amazon SageMaker sets the endpoint status to <code>Updating</code>. After updating the endpoint, it sets the status to <code>InService</code>. To check the status of an endpoint, use the <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html\">DescribeEndpoint</a> API. </p>"
+    },
+    "UpdateNotebookInstance":{
+      "name":"UpdateNotebookInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateNotebookInstanceInput"},
+      "output":{"shape":"UpdateNotebookInstanceOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ],
+      "documentation":"<p>Updates a notebook instance. NotebookInstance updates include upgrading or downgrading the ML compute instance used for your notebook instance to accommodate changes in your workload requirements. You can also update the VPC security groups.</p>"
+    }
+  },
+  "shapes":{
+    "AddTagsInput":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "Tags"
+      ],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource that you want to tag. </p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>An array of <code>Tag</code> objects. Each tag is a key-value pair. Only the <code>key</code> parameter is required. If you don't specify a value, Amazon SageMaker sets the value to an empty string. </p>"
+        }
+      }
+    },
+    "AddTagsOutput":{
+      "type":"structure",
+      "members":{
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>A list of tags associated with the Amazon SageMaker resource.</p>"
+        }
+      }
+    },
+    "AlgorithmImage":{
+      "type":"string",
+      "max":255
+    },
+    "AlgorithmSpecification":{
+      "type":"structure",
+      "required":[
+        "TrainingImage",
+        "TrainingInputMode"
+      ],
+      "members":{
+        "TrainingImage":{
+          "shape":"AlgorithmImage",
+          "documentation":"<p>The registry path of the Docker image that contains the training algorithm. For information about using your own algorithms, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos-docker-registry-paths.html\">Docker Registry Paths for Algorithms Provided by Amazon SageMaker </a>. </p>"
+        },
+        "TrainingInputMode":{
+          "shape":"TrainingInputMode",
+          "documentation":"<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p> <p> In File mode, make sure you provision ML storage volume with sufficient capacity to accomodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any. </p> <p> For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. </p>"
+        }
+      },
+      "documentation":"<p>Specifies the training algorithm to use in a <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html\">CreateTrainingJob</a> request. </p> <p>For more information about algorithms provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about using your own algorithms, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html\">Bring Your Own Algorithms </a>. </p>"
+    },
+    "Channel":{
+      "type":"structure",
+      "required":[
+        "ChannelName",
+        "DataSource"
+      ],
+      "members":{
+        "ChannelName":{
+          "shape":"ChannelName",
+          "documentation":"<p>The name of the channel. </p>"
+        },
+        "DataSource":{
+          "shape":"DataSource",
+          "documentation":"<p>The location of the channel data.</p>"
+        },
+        "ContentType":{
+          "shape":"ContentType",
+          "documentation":"<p>The MIME type of the data.</p>"
+        },
+        "CompressionType":{
+          "shape":"CompressionType",
+          "documentation":"<p>If training data is compressed, the compression type. The default value is <code>None</code>. <code>CompressionType</code> is used only in PIPE input mode. In FILE mode, leave this field unset or set it to None.</p>"
+        },
+        "RecordWrapperType":{
+          "shape":"RecordWrapper",
+          "documentation":"<p/> <p>Specify RecordIO as the value when input data is in raw format but the training algorithm requires the RecordIO format, in which caseAmazon SageMaker wraps each individual S3 object in a RecordIO record. If the input data is already in RecordIO format, you don't need to set this attribute. For more information, see <a href=\"https://mxnet.incubator.apache.org/how_to/recordio.html?highlight=im2rec\">Create a Dataset Using RecordIO</a>. </p> <p>In FILE mode, leave this field unset or set it to None.</p> <p/>"
+        }
+      },
+      "documentation":"<p>A channel is a named input source that training algorithms can consume. </p>"
+    },
+    "ChannelName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[A-Za-z0-9\\.\\-_]+"
+    },
+    "CompressionType":{
+      "type":"string",
+      "enum":[
+        "None",
+        "Gzip"
+      ]
+    },
+    "ContainerDefinition":{
+      "type":"structure",
+      "required":["Image"],
+      "members":{
+        "ContainerHostname":{
+          "shape":"ContainerHostname",
+          "documentation":"<p>The DNS host name for the container after Amazon SageMaker deploys it.</p>"
+        },
+        "Image":{
+          "shape":"Image",
+          "documentation":"<p>The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a> </p>"
+        },
+        "ModelDataUrl":{
+          "shape":"Url",
+          "documentation":"<p>The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). </p>"
+        },
+        "Environment":{
+          "shape":"EnvironmentMap",
+          "documentation":"<p>The environment variables to set in the Docker container. Each key and value in the <code>Environment</code> string to string map can have length of up to 1024. We support up to 16 entries in the map. </p>"
+        }
+      },
+      "documentation":"<p>Describes the container, as part of model definition.</p>"
+    },
+    "ContainerDefinitionList":{
+      "type":"list",
+      "member":{"shape":"ContainerDefinition"},
+      "max":5
+    },
+    "ContainerHostname":{
+      "type":"string",
+      "max":63,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "ContentType":{
+      "type":"string",
+      "max":256
+    },
+    "CreateEndpointConfigInput":{
+      "type":"structure",
+      "required":[
+        "EndpointConfigName",
+        "ProductionVariants"
+      ],
+      "members":{
+        "EndpointConfigName":{
+          "shape":"EndpointConfigName",
+          "documentation":"<p>The name of the endpoint configuration. You specify this name in a <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html\">CreateEndpoint</a> request. </p>"
+        },
+        "ProductionVariants":{
+          "shape":"ProductionVariantList",
+          "documentation":"<p>An array of <code>ProductionVariant</code> objects, one for each model that you want to host at this endpoint.</p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>An array of key-value pairs. For more information, see <a href=\"http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>"
+        }
+      }
+    },
+    "CreateEndpointConfigOutput":{
+      "type":"structure",
+      "required":["EndpointConfigArn"],
+      "members":{
+        "EndpointConfigArn":{
+          "shape":"EndpointConfigArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the endpoint configuration. </p>"
+        }
+      }
+    },
+    "CreateEndpointInput":{
+      "type":"structure",
+      "required":[
+        "EndpointName",
+        "EndpointConfigName"
+      ],
+      "members":{
+        "EndpointName":{
+          "shape":"EndpointName",
+          "documentation":"<p>The name of the endpoint. The name must be unique within an AWS Region in your AWS account.</p>"
+        },
+        "EndpointConfigName":{
+          "shape":"EndpointConfigName",
+          "documentation":"<p>The name of an endpoint configuration. For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html\">CreateEndpointConfig</a>. </p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>An array of key-value pairs. For more information, see <a href=\"http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using Cost Allocation Tags</a>in the <i>AWS Billing and Cost Management User Guide</i>. </p>"
+        }
+      }
+    },
+    "CreateEndpointOutput":{
+      "type":"structure",
+      "required":["EndpointArn"],
+      "members":{
+        "EndpointArn":{
+          "shape":"EndpointArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the endpoint.</p>"
+        }
+      }
+    },
+    "CreateModelInput":{
+      "type":"structure",
+      "required":[
+        "ModelName",
+        "PrimaryContainer"
+      ],
+      "members":{
+        "ModelName":{
+          "shape":"ModelName",
+          "documentation":"<p>The name of the new model.</p>"
+        },
+        "PrimaryContainer":{
+          "shape":"ContainerDefinition",
+          "documentation":"<p>The location of the primary docker image containing inference code, associated artifacts, and custom environment map that the inference code uses when the model is deployed into production. </p>"
+        },
+        "SupplementalContainers":{
+          "shape":"ContainerDefinitionList",
+          "documentation":"<p>The additional optional containers to deploy.</p>"
+        },
+        "ExecutionRoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute instances. Deploying on ML compute instances is part of model hosting. For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html\">Amazon SageMaker Roles</a>. </p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>An array of key-value pairs. For more information, see <a href=\"http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>"
+        }
+      }
+    },
+    "CreateModelOutput":{
+      "type":"structure",
+      "required":["ModelArn"],
+      "members":{
+        "ModelArn":{
+          "shape":"ModelArn",
+          "documentation":"<p>The ARN of the model created in Amazon SageMaker.</p>"
+        }
+      }
+    },
+    "CreateNotebookInstanceInput":{
+      "type":"structure",
+      "required":[
+        "NotebookInstanceName",
+        "InstanceType",
+        "RoleArn"
+      ],
+      "members":{
+        "NotebookInstanceName":{
+          "shape":"NotebookInstanceName",
+          "documentation":"<p>The name of the new notebook instance.</p>"
+        },
+        "InstanceType":{
+          "shape":"InstanceType",
+          "documentation":"<p>The type of ML compute instance to launch for the notebook instance.</p>"
+        },
+        "SubnetId":{
+          "shape":"SubnetId",
+          "documentation":"<p>The ID of the subnet in a VPC to which you would like to have a connectivity from your ML compute instance. </p>"
+        },
+        "SecurityGroupIds":{
+          "shape":"SecurityGroupIds",
+          "documentation":"<p>The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet. </p>"
+        },
+        "RoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p> When you send any requests to AWS resources from the notebook instance, Amazon SageMaker assumes this role to perform tasks on your behalf. You must grant this role necessary permissions so Amazon SageMaker can perform these tasks. The policy must allow the Amazon SageMaker service principal (sagemaker.amazonaws.com) permissions to assume this role. For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html\">Amazon SageMaker Roles</a>. </p>"
+        },
+        "KmsKeyId":{
+          "shape":"KmsKeyId",
+          "documentation":"<p> If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance. </p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>A list of tags to associate with the notebook instance. You can add tags later by using the <code>CreateTags</code> API.</p>"
+        }
+      }
+    },
+    "CreateNotebookInstanceOutput":{
+      "type":"structure",
+      "members":{
+        "NotebookInstanceArn":{
+          "shape":"NotebookInstanceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the notebook instance. </p>"
+        }
+      }
+    },
+    "CreatePresignedNotebookInstanceUrlInput":{
+      "type":"structure",
+      "required":["NotebookInstanceName"],
+      "members":{
+        "NotebookInstanceName":{
+          "shape":"NotebookInstanceName",
+          "documentation":"<p>The name of the notebook instance.</p>"
+        },
+        "SessionExpirationDurationInSeconds":{
+          "shape":"SessionExpirationDurationInSeconds",
+          "documentation":"<p>The duration of the session, in seconds. The default is 12 hours.</p>"
+        }
+      }
+    },
+    "CreatePresignedNotebookInstanceUrlOutput":{
+      "type":"structure",
+      "members":{
+        "AuthorizedUrl":{
+          "shape":"NotebookInstanceUrl",
+          "documentation":"<p>A JSON object that contains the URL string. </p>"
+        }
+      }
+    },
+    "CreateTrainingJobRequest":{
+      "type":"structure",
+      "required":[
+        "TrainingJobName",
+        "AlgorithmSpecification",
+        "RoleArn",
+        "InputDataConfig",
+        "OutputDataConfig",
+        "ResourceConfig",
+        "StoppingCondition"
+      ],
+      "members":{
+        "TrainingJobName":{
+          "shape":"TrainingJobName",
+          "documentation":"<p>The name of the training job. The name must be unique within an AWS Region in an AWS account. It appears in the Amazon SageMaker console. </p>"
+        },
+        "HyperParameters":{
+          "shape":"HyperParameters",
+          "documentation":"<p>Algorithm-specific parameters. You set hyperparameters before you start the learning process. Hyperparameters influence the quality of the model. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p> <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value pair. Each key and value is limited to 256 characters, as specified by the <code>Length Constraint</code>. </p>"
+        },
+        "AlgorithmSpecification":{
+          "shape":"AlgorithmSpecification",
+          "documentation":"<p>The registry path of the Docker image that contains the training algorithm and algorithm-specific metadata, including the input mode. For more information about algorithms provided by Amazon SageMaker, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about providing your own algorithms, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html\">Bring Your Own Algorithms </a>. </p>"
+        },
+        "RoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf. </p> <p>During model training, Amazon SageMaker needs your permission to read input data from an S3 bucket, download a Docker image that contains training code, write model artifacts to an S3 bucket, write logs to Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch. You grant permissions for all of these tasks to an IAM role. For more information, see <a href=\"http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html\">Amazon SageMaker Roles</a>. </p>"
+        },
+        "InputDataConfig":{
+          "shape":"InputDataConfig",
+          "documentation":"<p>An array of <code>Channel</code> objects. Each channel is a named input source. <code>InputDataConfig</code> describes the input data and its location. </p> <p>Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of input data, <code>training_data</code> and <code>validation_data</code>. The configuration for each channel provides the S3 location where the input data is stored. It also provides information about the stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format. </p> <p>Depending on the input mode that the algorithm supports, Amazon SageMaker either copies input data files from an S3 bucket to a local directory in the Docker container, or makes it available as input streams. </p>"
+        },
+        "OutputDataConfig":{
+          "shape":"OutputDataConfig",
+          "documentation":"<p>Specifies the path to the S3 bucket where you want to store model artifacts. Amazon SageMaker creates subfolders for the artifacts. </p>"
+        },
+        "ResourceConfig":{
+          "shape":"ResourceConfig",
+          "documentation":"<p>The resources, including the ML compute instances and ML storage volumes, to use for model training. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use ML storage volumes for scratch space. If you want Amazon SageMaker to use the ML storage volume to store the training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.</p>"
+        },
+        "StoppingCondition":{
+          "shape":"StoppingCondition",
+          "documentation":"<p>Sets a duration for training. Use this parameter to cap model training costs. To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms might use this 120-second window to save the model artifacts. </p> <p>When Amazon SageMaker terminates a job because the stopping condition has been met, training algorithms provided by Amazon SageMaker save the intermediate results of the job. This intermediate data is a valid model artifact. You can use it to create a model using the <code>CreateModel</code> API. </p>"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>An array of key-value pairs. For more information, see <a href=\"http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>"
+        }
+      }
+    },
+    "CreateTrainingJobResponse":{
+      "type":"structure",
+      "required":["TrainingJobArn"],
+      "members":{
+        "TrainingJobArn":{
+          "shape":"TrainingJobArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the training job.</p>"
+        }
+      }
+    },
+    "CreationTime":{"type":"timestamp"},
+    "DataSource":{
+      "type":"structure",
+      "required":["S3DataSource"],
+      "members":{
+        "S3DataSource":{
+          "shape":"S3DataSource",
+          "documentation":"<p>The S3 location of the data source that is associated with a channel.</p>"
+        }
+      },
+      "documentation":"<p>Describes the location of the channel data.</p>"
+    },
+    "DeleteEndpointConfigInput":{
+      "type":"structure",
+      "required":["EndpointConfigName"],
+      "members":{
+        "EndpointConfigName":{
+          "shape":"EndpointConfigName",
+          "documentation":"<p>The name of the endpoint configuration that you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteEndpointInput":{
+      "type":"structure",
+      "required":["EndpointName"],
+      "members":{
+        "EndpointName":{
+          "shape":"EndpointName",
+          "documentation":"<p>The name of the endpoint that you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteModelInput":{
+      "type":"structure",
+      "required":["ModelName"],
+      "members":{
+        "ModelName":{
+          "shape":"ModelName",
+          "documentation":"<p>The name of the model to delete.</p>"
+        }
+      }
+    },
+    "DeleteNotebookInstanceInput":{
+      "type":"structure",
+      "required":["NotebookInstanceName"],
+      "members":{
+        "NotebookInstanceName":{
+          "shape":"NotebookInstanceName",
+          "documentation":"<p>The name of the Amazon SageMaker notebook instance to delete.</p>"
+        }
+      }
+    },
+    "DeleteTagsInput":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource whose tags you want to delete.</p>"
+        },
+        "TagKeys":{
+          "shape":"TagKeyList",
+          "documentation":"<p>An array or one or more tag keys to delete.</p>"
+        }
+      }
+    },
+    "DeleteTagsOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeEndpointConfigInput":{
+      "type":"structure",
+      "required":["EndpointConfigName"],
+      "members":{
+        "EndpointConfigName":{
+          "shape":"EndpointConfigName",
+          "documentation":"<p>The name of the endpoint configuration.</p>"
+        }
+      }
+    },
+    "DescribeEndpointConfigOutput":{
+      "type":"structure",
+      "required":[
+        "EndpointConfigName",
+        "EndpointConfigArn",
+        "ProductionVariants",
+        "CreationTime"
+      ],
+      "members":{
+        "EndpointConfigName":{
+          "shape":"EndpointConfigName",
+          "documentation":"<p>Name of the Amazon SageMaker endpoint configuration.</p>"
+        },
+        "EndpointConfigArn":{
+          "shape":"EndpointConfigArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the endpoint configuration.</p>"
+        },
+        "ProductionVariants":{
+          "shape":"ProductionVariantList",
+          "documentation":"<p>An array of <code>ProductionVariant</code> objects, one for each model that you want to host at this endpoint.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that shows when the endpoint configuration was created.</p>"
+        }
+      }
+    },
+    "DescribeEndpointInput":{
+      "type":"structure",
+      "required":["EndpointName"],
+      "members":{
+        "EndpointName":{
+          "shape":"EndpointName",
+          "documentation":"<p>The name of the endpoint.</p>"
+        }
+      }
+    },
+    "DescribeEndpointOutput":{
+      "type":"structure",
+      "required":[
+        "EndpointName",
+        "EndpointArn",
+        "EndpointConfigName",
+        "EndpointStatus",
+        "CreationTime",
+        "LastModifiedTime"
+      ],
+      "members":{
+        "EndpointName":{
+          "shape":"EndpointName",
+          "documentation":"<p>Name of the endpoint.</p>"
+        },
+        "EndpointArn":{
+          "shape":"EndpointArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the endpoint.</p>"
+        },
+        "EndpointConfigName":{
+          "shape":"EndpointConfigName",
+          "documentation":"<p>The name of the endpoint configuration associated with this endpoint.</p>"
+        },
+        "ProductionVariants":{
+          "shape":"ProductionVariantSummaryList",
+          "documentation":"<p> An array of ProductionVariant objects, one for each model hosted behind this endpoint. </p>"
+        },
+        "EndpointStatus":{
+          "shape":"EndpointStatus",
+          "documentation":"<p>The status of the endpoint.</p>"
+        },
+        "FailureReason":{
+          "shape":"FailureReason",
+          "documentation":"<p>If the status of the endpoint is <code>Failed</code>, the reason why it failed. </p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that shows when the endpoint was created.</p>"
+        },
+        "LastModifiedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that shows when the endpoint was last modified.</p>"
+        }
+      }
+    },
+    "DescribeModelInput":{
+      "type":"structure",
+      "required":["ModelName"],
+      "members":{
+        "ModelName":{
+          "shape":"ModelName",
+          "documentation":"<p>The name of the model.</p>"
+        }
+      }
+    },
+    "DescribeModelOutput":{
+      "type":"structure",
+      "required":[
+        "ModelName",
+        "PrimaryContainer",
+        "SupplementalContainers",
+        "ExecutionRoleArn",
+        "CreationTime",
+        "ModelArn"
+      ],
+      "members":{
+        "ModelName":{
+          "shape":"ModelName",
+          "documentation":"<p>Name of the Amazon SageMaker model.</p>"
+        },
+        "PrimaryContainer":{
+          "shape":"ContainerDefinition",
+          "documentation":"<p>The location of the primary inference code, associated artifacts, and custom environment map that the inference code uses when it is deployed in production. </p>"
+        },
+        "SupplementalContainers":{
+          "shape":"ContainerDefinitionList",
+          "documentation":"<p>The description of additional optional containers that you defined when creating the model.</p>"
+        },
+        "ExecutionRoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role that you specified for the model.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that shows when the model was created.</p>"
+        },
+        "ModelArn":{
+          "shape":"ModelArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the model.</p>"
+        }
+      }
+    },
+    "DescribeNotebookInstanceInput":{
+      "type":"structure",
+      "required":["NotebookInstanceName"],
+      "members":{
+        "NotebookInstanceName":{
+          "shape":"NotebookInstanceName",
+          "documentation":"<p>The name of the notebook instance that you want information about.</p>"
+        }
+      }
+    },
+    "DescribeNotebookInstanceOutput":{
+      "type":"structure",
+      "members":{
+        "NotebookInstanceArn":{
+          "shape":"NotebookInstanceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the notebook instance.</p>"
+        },
+        "NotebookInstanceName":{
+          "shape":"NotebookInstanceName",
+          "documentation":"<p> Name of the Amazon SageMaker notebook instance. </p>"
+        },
+        "NotebookInstanceStatus":{
+          "shape":"NotebookInstanceStatus",
+          "documentation":"<p>The status of the notebook instance.</p>"
+        },
+        "FailureReason":{
+          "shape":"FailureReason",
+          "documentation":"<p>If staus is failed, the reason it failed.</p>"
+        },
+        "Url":{
+          "shape":"NotebookInstanceUrl",
+          "documentation":"<p>The URL that you use to connect to the Jupyter notebook that is running in your notebook instance. </p>"
+        },
+        "InstanceType":{
+          "shape":"InstanceType",
+          "documentation":"<p>The type of ML compute instance running on the notebook instance.</p>"
+        },
+        "SubnetId":{
+          "shape":"SubnetId",
+          "documentation":"<p>The ID of the VPC subnet.</p>"
+        },
+        "SecurityGroups":{
+          "shape":"SecurityGroupIds",
+          "documentation":"<p>The IDs of the VPC security groups.</p>"
+        },
+        "RoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p> Amazon Resource Name (ARN) of the IAM role associated with the instance. </p>"
+        },
+        "KmsKeyId":{
+          "shape":"KmsKeyId",
+          "documentation":"<p> AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage volume attached to the instance. </p>"
+        },
+        "NetworkInterfaceId":{
+          "shape":"NetworkInterfaceId",
+          "documentation":"<p> Network interface IDs that Amazon SageMaker created at the time of creating the instance. </p>"
+        },
+        "LastModifiedTime":{
+          "shape":"LastModifiedTime",
+          "documentation":"<p>A timestamp. Use this parameter to retrieve the time when the notebook instance was last modified. </p>"
+        },
+        "CreationTime":{
+          "shape":"CreationTime",
+          "documentation":"<p>A timestamp. Use this parameter to return the time when the notebook instance was created</p>"
+        }
+      }
+    },
+    "DescribeTrainingJobRequest":{
+      "type":"structure",
+      "required":["TrainingJobName"],
+      "members":{
+        "TrainingJobName":{
+          "shape":"TrainingJobName",
+          "documentation":"<p>The name of the training job.</p>"
+        }
+      }
+    },
+    "DescribeTrainingJobResponse":{
+      "type":"structure",
+      "required":[
+        "TrainingJobName",
+        "TrainingJobArn",
+        "ModelArtifacts",
+        "TrainingJobStatus",
+        "SecondaryStatus",
+        "AlgorithmSpecification",
+        "InputDataConfig",
+        "ResourceConfig",
+        "StoppingCondition",
+        "CreationTime"
+      ],
+      "members":{
+        "TrainingJobName":{
+          "shape":"TrainingJobName",
+          "documentation":"<p> Name of the model training job. </p>"
+        },
+        "TrainingJobArn":{
+          "shape":"TrainingJobArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the training job.</p>"
+        },
+        "ModelArtifacts":{
+          "shape":"ModelArtifacts",
+          "documentation":"<p>Information about the Amazon S3 location that is configured for storing model artifacts. </p>"
+        },
+        "TrainingJobStatus":{
+          "shape":"TrainingJobStatus",
+          "documentation":"<p>The status of the training job. </p> <p>For the <code>InProgress</code> status, Amazon SageMaker can return these secondary statuses:</p> <ul> <li> <p>Starting - Preparing for training.</p> </li> <li> <p>Downloading - Optional stage for algorithms that support File training input mode. It indicates data is being downloaded to ML storage volumes.</p> </li> <li> <p>Training - Training is in progress.</p> </li> <li> <p>Uploading - Training is complete and model upload is in progress.</p> </li> </ul> <p>For the <code>Stopped</code> training status, Amazon SageMaker can return these secondary statuses:</p> <ul> <li> <p>MaxRuntimeExceeded - Job stopped as a result of maximum allowed runtime exceeded.</p> </li> </ul>"
+        },
+        "SecondaryStatus":{
+          "shape":"SecondaryStatus",
+          "documentation":"<p> Provides granular information about the system state. For more information, see <code>TrainingJobStatus</code>. </p>"
+        },
+        "FailureReason":{
+          "shape":"FailureReason",
+          "documentation":"<p>If the training job failed, the reason it failed. </p>"
+        },
+        "HyperParameters":{
+          "shape":"HyperParameters",
+          "documentation":"<p>Algorithm-specific parameters. </p>"
+        },
+        "AlgorithmSpecification":{
+          "shape":"AlgorithmSpecification",
+          "documentation":"<p>Information about the algorithm used for training, and algorithm metadata. </p>"
+        },
+        "RoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The AWS Identity and Access Management (IAM) role configured for the training job. </p>"
+        },
+        "InputDataConfig":{
+          "shape":"InputDataConfig",
+          "documentation":"<p>An array of <code>Channel</code> objects that describes each data input channel. </p>"
+        },
+        "OutputDataConfig":{
+          "shape":"OutputDataConfig",
+          "documentation":"<p>The S3 path where model artifacts that you configured when creating the job are stored. Amazon SageMaker creates subfolders for model artifacts. </p>"
+        },
+        "ResourceConfig":{
+          "shape":"ResourceConfig",
+          "documentation":"<p>Resources, including ML compute instances and ML storage volumes, that are configured for model training. </p>"
+        },
+        "StoppingCondition":{
+          "shape":"StoppingCondition",
+          "documentation":"<p>The condition under which to stop the training job. </p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that indicates when the training job was created.</p>"
+        },
+        "TrainingStartTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that indicates when training started.</p>"
+        },
+        "TrainingEndTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that indicates when model training ended.</p>"
+        },
+        "LastModifiedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that indicates when the status of the training job was last modified.</p>"
+        }
+      }
+    },
+    "DesiredWeightAndCapacity":{
+      "type":"structure",
+      "required":["VariantName"],
+      "members":{
+        "VariantName":{
+          "shape":"VariantName",
+          "documentation":"<p>The name of the variant to update.</p>"
+        },
+        "DesiredWeight":{
+          "shape":"VariantWeight",
+          "documentation":"<p>The variant's weight.</p>"
+        },
+        "DesiredInstanceCount":{
+          "shape":"TaskCount",
+          "documentation":"<p>The variant's capacity.</p>"
+        }
+      },
+      "documentation":"<p>Specifies weight and capacity values for a production variant.</p>"
+    },
+    "DesiredWeightAndCapacityList":{
+      "type":"list",
+      "member":{"shape":"DesiredWeightAndCapacity"},
+      "min":1
+    },
+    "EndpointArn":{
+      "type":"string",
+      "max":2048,
+      "min":20
+    },
+    "EndpointConfigArn":{
+      "type":"string",
+      "max":2048,
+      "min":20
+    },
+    "EndpointConfigName":{
+      "type":"string",
+      "max":63,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "EndpointConfigNameContains":{
+      "type":"string",
+      "pattern":"[a-zA-Z0-9-]+"
+    },
+    "EndpointConfigSortKey":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "CreationTime"
+      ]
+    },
+    "EndpointConfigSummary":{
+      "type":"structure",
+      "required":[
+        "EndpointConfigName",
+        "EndpointConfigArn",
+        "CreationTime"
+      ],
+      "members":{
+        "EndpointConfigName":{
+          "shape":"EndpointConfigName",
+          "documentation":"<p>The name of the endpoint configuration.</p>"
+        },
+        "EndpointConfigArn":{
+          "shape":"EndpointConfigArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the endpoint configuration.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that shows when the endpoint configuration was created.</p>"
+        }
+      },
+      "documentation":"<p>Provides summary information for an endpoint configuration.</p>"
+    },
+    "EndpointConfigSummaryList":{
+      "type":"list",
+      "member":{"shape":"EndpointConfigSummary"}
+    },
+    "EndpointName":{
+      "type":"string",
+      "max":63,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "EndpointNameContains":{
+      "type":"string",
+      "pattern":"[a-zA-Z0-9-]+"
+    },
+    "EndpointSortKey":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "CreationTime",
+        "Status"
+      ]
+    },
+    "EndpointStatus":{
+      "type":"string",
+      "enum":[
+        "OutOfService",
+        "Creating",
+        "Updating",
+        "RollingBack",
+        "InService",
+        "Deleting",
+        "Failed"
+      ]
+    },
+    "EndpointSummary":{
+      "type":"structure",
+      "required":[
+        "EndpointName",
+        "EndpointArn",
+        "CreationTime",
+        "LastModifiedTime",
+        "EndpointStatus"
+      ],
+      "members":{
+        "EndpointName":{
+          "shape":"EndpointName",
+          "documentation":"<p>The name of the endpoint.</p>"
+        },
+        "EndpointArn":{
+          "shape":"EndpointArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the endpoint.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that shows when the endpoint was created.</p>"
+        },
+        "LastModifiedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that shows when the endpoint was last modified.</p>"
+        },
+        "EndpointStatus":{
+          "shape":"EndpointStatus",
+          "documentation":"<p>The status of the endpoint.</p>"
+        }
+      },
+      "documentation":"<p>Provides summary information for an endpoint.</p>"
+    },
+    "EndpointSummaryList":{
+      "type":"list",
+      "member":{"shape":"EndpointSummary"}
+    },
+    "EnvironmentKey":{
+      "type":"string",
+      "max":1024,
+      "pattern":"[a-zA-Z_][a-zA-Z0-9_]*"
+    },
+    "EnvironmentMap":{
+      "type":"map",
+      "key":{"shape":"EnvironmentKey"},
+      "value":{"shape":"EnvironmentValue"},
+      "max":16
+    },
+    "EnvironmentValue":{
+      "type":"string",
+      "max":1024
+    },
+    "FailureReason":{
+      "type":"string",
+      "max":1024
+    },
+    "HyperParameters":{
+      "type":"map",
+      "key":{"shape":"ParameterKey"},
+      "value":{"shape":"ParameterValue"},
+      "max":100,
+      "min":0
+    },
+    "Image":{
+      "type":"string",
+      "max":255,
+      "pattern":"[\\S]+"
+    },
+    "InputDataConfig":{
+      "type":"list",
+      "member":{"shape":"Channel"},
+      "max":8,
+      "min":1
+    },
+    "InstanceType":{
+      "type":"string",
+      "enum":[
+        "ml.t2.medium",
+        "ml.m4.xlarge",
+        "ml.p2.xlarge"
+      ]
+    },
+    "KmsKeyId":{
+      "type":"string",
+      "max":2048
+    },
+    "LastModifiedTime":{"type":"timestamp"},
+    "ListEndpointConfigsInput":{
+      "type":"structure",
+      "members":{
+        "SortBy":{
+          "shape":"EndpointConfigSortKey",
+          "documentation":"<p>The field to sort results by. The default is <code>CreationTime</code>.</p>"
+        },
+        "SortOrder":{
+          "shape":"OrderKey",
+          "documentation":"<p>The sort order for results. The default is <code>Ascending</code>.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>If the result of the previous <code>ListEndpointConfig</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of endpoint configurations, use the token in the next request. </p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of training jobs to return in the response.</p>"
+        },
+        "NameContains":{
+          "shape":"EndpointConfigNameContains",
+          "documentation":"<p>A string in the endpoint configuration name. This filter returns only endpoint configurations whose name contains the specified string. </p>"
+        },
+        "CreationTimeBefore":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that returns only endpoint configurations created before the specified time (timestamp).</p>"
+        },
+        "CreationTimeAfter":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that returns only endpoint configurations created after the specified time (timestamp).</p>"
+        }
+      }
+    },
+    "ListEndpointConfigsOutput":{
+      "type":"structure",
+      "required":["EndpointConfigs"],
+      "members":{
+        "EndpointConfigs":{
+          "shape":"EndpointConfigSummaryList",
+          "documentation":"<p>An array of endpoint configurations.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p> If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of endpoint configurations, use it in the subsequent request </p>"
+        }
+      }
+    },
+    "ListEndpointsInput":{
+      "type":"structure",
+      "members":{
+        "SortBy":{
+          "shape":"EndpointSortKey",
+          "documentation":"<p>Sorts the list of results. The default is <code>CreationTime</code>.</p>"
+        },
+        "SortOrder":{
+          "shape":"OrderKey",
+          "documentation":"<p>The sort order for results. The default is <code>Ascending</code>.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>If the result of a <code>ListEndpoints</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of endpoints, use the token in the next request.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of endpoints to return in the response.</p>"
+        },
+        "NameContains":{
+          "shape":"EndpointNameContains",
+          "documentation":"<p>A string in endpoint names. This filter returns only endpoints whose name contains the specified string.</p>"
+        },
+        "CreationTimeBefore":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that returns only endpoints that were created before the specified time (timestamp).</p>"
+        },
+        "CreationTimeAfter":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that returns only endpoints that were created after the specified time (timestamp).</p>"
+        },
+        "LastModifiedTimeBefore":{
+          "shape":"Timestamp",
+          "documentation":"<p> A filter that returns only endpoints that were modified before the specified timestamp. </p>"
+        },
+        "LastModifiedTimeAfter":{
+          "shape":"Timestamp",
+          "documentation":"<p> A filter that returns only endpoints that were modified after the specified timestamp. </p>"
+        },
+        "StatusEquals":{
+          "shape":"EndpointStatus",
+          "documentation":"<p> A filter that returns only endpoints with the specified status. </p>"
+        }
+      }
+    },
+    "ListEndpointsOutput":{
+      "type":"structure",
+      "required":["Endpoints"],
+      "members":{
+        "Endpoints":{
+          "shape":"EndpointSummaryList",
+          "documentation":"<p> An array or endpoint objects. </p>"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p> If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request. </p>"
+        }
+      }
+    },
+    "ListModelsInput":{
+      "type":"structure",
+      "members":{
+        "SortBy":{
+          "shape":"ModelSortKey",
+          "documentation":"<p>Sorts the list of results. The default is <code>CreationTime</code>.</p>"
+        },
+        "SortOrder":{
+          "shape":"OrderKey",
+          "documentation":"<p>The sort order for results. The default is <code>Ascending</code>.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p>If the response to a previous <code>ListModels</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of models, use the token in the next request.</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of models to return in the response.</p>"
+        },
+        "NameContains":{
+          "shape":"ModelNameContains",
+          "documentation":"<p>A string in the training job name. This filter returns only models in the training job whose name contains the specified string.</p>"
+        },
+        "CreationTimeBefore":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that returns only models created before the specified time (timestamp).</p>"
+        },
+        "CreationTimeAfter":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that returns only models created after the specified time (timestamp).</p>"
+        }
+      }
+    },
+    "ListModelsOutput":{
+      "type":"structure",
+      "required":["Models"],
+      "members":{
+        "Models":{
+          "shape":"ModelSummaryList",
+          "documentation":"<p>An array of <code>ModelSummary</code> objects, each of which lists a model.</p>"
+        },
+        "NextToken":{
+          "shape":"PaginationToken",
+          "documentation":"<p> If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of models, use it in the subsequent request. </p>"
+        }
+      }
+    },
+    "ListNotebookInstancesInput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p> If the previous call to the <code>ListNotebookInstances</code> is truncated, the response includes a <code>NextToken</code>. You can use this token in your subsequent <code>ListNotebookInstances</code> request to fetch the next set of notebook instances. </p> <note> <p> You might specify a filter or a sort order in your request. When response is truncated, you must use the same values for the filer and sort order in the next request. </p> </note>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of notebook instances to return.</p>"
+        },
+        "SortBy":{
+          "shape":"NotebookInstanceSortKey",
+          "documentation":"<p>The field to sort results by. The default is <code>Name</code>.</p>"
+        },
+        "SortOrder":{
+          "shape":"NotebookInstanceSortOrder",
+          "documentation":"<p>The sort order for results. </p>"
+        },
+        "NameContains":{
+          "shape":"NotebookInstanceNameContains",
+          "documentation":"<p>A string in the notebook instances' name. This filter returns only notebook instances whose name contains the specified string. </p>"
+        },
+        "CreationTimeBefore":{
+          "shape":"CreationTime",
+          "documentation":"<p>A filter that returns only notebook instances that were created before the specified time (timestamp). </p>"
+        },
+        "CreationTimeAfter":{
+          "shape":"CreationTime",
+          "documentation":"<p>A filter that returns only notebook instances that were created after the specified time (timestamp).</p>"
+        },
+        "LastModifiedTimeBefore":{
+          "shape":"LastModifiedTime",
+          "documentation":"<p>A filter that returns only notebook instances that were modified before the specified time (timestamp).</p>"
+        },
+        "LastModifiedTimeAfter":{
+          "shape":"LastModifiedTime",
+          "documentation":"<p>A filter that returns only notebook instances that were modified after the specified time (timestamp).</p>"
+        },
+        "StatusEquals":{
+          "shape":"NotebookInstanceStatus",
+          "documentation":"<p>A filter that returns only notebook instances with the specified status.</p>"
+        }
+      }
+    },
+    "ListNotebookInstancesOutput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If the response to the previous <code>ListNotebookInstances</code> request was truncated, Amazon SageMaker returns this token. To retrieve the next set of notebook instances, use the token in the next request.</p>"
+        },
+        "NotebookInstances":{
+          "shape":"NotebookInstanceSummaryList",
+          "documentation":"<p>An array of <code>NotebookInstanceSummary</code> objects, one for each notebook instance.</p>"
+        }
+      }
+    },
+    "ListTagsInput":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p> If the response to the previous <code>ListTags</code> request is truncated, Amazon SageMaker returns this token. To retrieve the next set of tags, use it in the subsequent request. </p>"
+        },
+        "MaxResults":{
+          "shape":"ListTagsMaxResults",
+          "documentation":"<p>Maximum number of tags to return.</p>"
+        }
+      }
+    },
+    "ListTagsMaxResults":{
+      "type":"integer",
+      "min":50
+    },
+    "ListTagsOutput":{
+      "type":"structure",
+      "members":{
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>An array of <code>Tag</code> objects, each with a tag key and a value.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p> If response is truncated, Amazon SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens. </p>"
+        }
+      }
+    },
+    "ListTrainingJobsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If the result of the previous <code>ListTrainingJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of training jobs, use the token in the next request. </p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of training jobs to return in the response.</p>",
+          "box":true
+        },
+        "CreationTimeAfter":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that only training jobs created after the specified time (timestamp).</p>"
+        },
+        "CreationTimeBefore":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that returns only training jobs created before the specified time (timestamp).</p>"
+        },
+        "LastModifiedTimeAfter":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that returns only training jobs modified after the specified time (timestamp).</p>"
+        },
+        "LastModifiedTimeBefore":{
+          "shape":"Timestamp",
+          "documentation":"<p>A filter that returns only training jobs modified before the specified time (timestamp).</p>"
+        },
+        "NameContains":{
+          "shape":"NameContains",
+          "documentation":"<p>A string in the training job name. This filter returns only models whose name contains the specified string.</p>"
+        },
+        "StatusEquals":{
+          "shape":"TrainingJobStatus",
+          "documentation":"<p>A filter that retrieves only training jobs with a specific status.</p>"
+        },
+        "SortBy":{
+          "shape":"SortBy",
+          "documentation":"<p>The field to sort results by. The default is <code>CreationTime</code>.</p>"
+        },
+        "SortOrder":{
+          "shape":"SortOrder",
+          "documentation":"<p>The sort order for results. The default is <code>Ascending</code>.</p>"
+        }
+      }
+    },
+    "ListTrainingJobsResponse":{
+      "type":"structure",
+      "required":["TrainingJobSummaries"],
+      "members":{
+        "TrainingJobSummaries":{
+          "shape":"TrainingJobSummaries",
+          "documentation":"<p>An array of <code>TrainingJobSummary</code> objects, each listing a training job.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of training jobs, use it in the subsequent request.</p>"
+        }
+      }
+    },
+    "MaxResults":{
+      "type":"integer",
+      "max":100,
+      "min":1
+    },
+    "MaxRuntimeInSeconds":{
+      "type":"integer",
+      "min":1
+    },
+    "ModelArn":{
+      "type":"string",
+      "max":2048,
+      "min":20
+    },
+    "ModelArtifacts":{
+      "type":"structure",
+      "required":["S3ModelArtifacts"],
+      "members":{
+        "S3ModelArtifacts":{
+          "shape":"S3Uri",
+          "documentation":"<p>The path of the S3 object that contains the model artifacts. For example, <code>s3://bucket-name/keynameprefix/model.tar.gz</code>.</p>"
+        }
+      },
+      "documentation":"<p>Provides information about the location that is configured for storing model artifacts. </p>"
+    },
+    "ModelName":{
+      "type":"string",
+      "max":63,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "ModelNameContains":{
+      "type":"string",
+      "pattern":"[a-zA-Z0-9-]+"
+    },
+    "ModelSortKey":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "CreationTime"
+      ]
+    },
+    "ModelSummary":{
+      "type":"structure",
+      "required":[
+        "ModelName",
+        "ModelArn",
+        "CreationTime"
+      ],
+      "members":{
+        "ModelName":{
+          "shape":"ModelName",
+          "documentation":"<p>The name of the model that you want a summary for.</p>"
+        },
+        "ModelArn":{
+          "shape":"ModelArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the model.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that indicates when the model was created.</p>"
+        }
+      },
+      "documentation":"<p>Provides summary information about a model.</p>"
+    },
+    "ModelSummaryList":{
+      "type":"list",
+      "member":{"shape":"ModelSummary"}
+    },
+    "NameContains":{
+      "type":"string",
+      "max":63,
+      "pattern":"[a-zA-Z0-9\\-]+"
+    },
+    "NetworkInterfaceId":{"type":"string"},
+    "NextToken":{
+      "type":"string",
+      "max":8192
+    },
+    "NotebookInstanceArn":{
+      "type":"string",
+      "max":256
+    },
+    "NotebookInstanceName":{
+      "type":"string",
+      "max":63,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "NotebookInstanceNameContains":{
+      "type":"string",
+      "pattern":"[a-zA-Z0-9-]+"
+    },
+    "NotebookInstanceSortKey":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "CreationTime",
+        "Status"
+      ]
+    },
+    "NotebookInstanceSortOrder":{
+      "type":"string",
+      "enum":[
+        "Ascending",
+        "Descending"
+      ]
+    },
+    "NotebookInstanceStatus":{
+      "type":"string",
+      "enum":[
+        "Pending",
+        "InService",
+        "Stopping",
+        "Stopped",
+        "Failed",
+        "Deleting"
+      ]
+    },
+    "NotebookInstanceSummary":{
+      "type":"structure",
+      "required":[
+        "NotebookInstanceName",
+        "NotebookInstanceArn"
+      ],
+      "members":{
+        "NotebookInstanceName":{
+          "shape":"NotebookInstanceName",
+          "documentation":"<p>The name of the notebook instance that you want a summary for.</p>"
+        },
+        "NotebookInstanceArn":{
+          "shape":"NotebookInstanceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the notebook instance.</p>"
+        },
+        "NotebookInstanceStatus":{
+          "shape":"NotebookInstanceStatus",
+          "documentation":"<p>The status of the notebook instance.</p>"
+        },
+        "Url":{
+          "shape":"NotebookInstanceUrl",
+          "documentation":"<p>The URL that you use to connect to the Jupyter instance running in your notebook instance. </p>"
+        },
+        "InstanceType":{
+          "shape":"InstanceType",
+          "documentation":"<p>The type of ML compute instance that the notebook instance is running on.</p>"
+        },
+        "CreationTime":{
+          "shape":"CreationTime",
+          "documentation":"<p>A timestamp that shows when the notebook instance was created.</p>"
+        },
+        "LastModifiedTime":{
+          "shape":"LastModifiedTime",
+          "documentation":"<p>A timestamp that shows when the notebook instance was last modified.</p>"
+        }
+      },
+      "documentation":"<p>Provides summary information for an Amazon SageMaker notebook instance.</p>"
+    },
+    "NotebookInstanceSummaryList":{
+      "type":"list",
+      "member":{"shape":"NotebookInstanceSummary"}
+    },
+    "NotebookInstanceUrl":{"type":"string"},
+    "OrderKey":{
+      "type":"string",
+      "enum":[
+        "Ascending",
+        "Descending"
+      ]
+    },
+    "OutputDataConfig":{
+      "type":"structure",
+      "required":["S3OutputPath"],
+      "members":{
+        "KmsKeyId":{
+          "shape":"KmsKeyId",
+          "documentation":"<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. </p> <note> <p>If the configuration of the output S3 bucket requires server-side encryption for objects, and you don't provide the KMS key ID, Amazon SageMaker uses the default service key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in Amazon Simple Storage Service developer guide.</p> </note> <note> <p> The KMS key policy must grant permission to the IAM role you specify in your <code>CreateTrainingJob</code> request. <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS KMS</a> in the AWS Key Management Service Developer Guide. </p> </note>"
+        },
+        "S3OutputPath":{
+          "shape":"S3Uri",
+          "documentation":"<p>Identifies the S3 path where you want Amazon SageMaker to store the model artifacts. For example, <code>s3://bucket-name/key-name-prefix</code>. </p>"
+        }
+      },
+      "documentation":"<p>Provides information about how to store model training results (model artifacts).</p>"
+    },
+    "PaginationToken":{
+      "type":"string",
+      "max":8192
+    },
+    "ParameterKey":{
+      "type":"string",
+      "max":256
+    },
+    "ParameterValue":{
+      "type":"string",
+      "max":256
+    },
+    "ProductionVariant":{
+      "type":"structure",
+      "required":[
+        "VariantName",
+        "ModelName",
+        "InitialInstanceCount",
+        "InstanceType"
+      ],
+      "members":{
+        "VariantName":{
+          "shape":"VariantName",
+          "documentation":"<p>The name of the production variant.</p>"
+        },
+        "ModelName":{
+          "shape":"ModelName",
+          "documentation":"<p>The name of the model that you want to host. This is the name that you specified when creating the model.</p>"
+        },
+        "InitialInstanceCount":{
+          "shape":"TaskCount",
+          "documentation":"<p>Number of instances to launch initially.</p>"
+        },
+        "InstanceType":{
+          "shape":"ProductionVariantInstanceType",
+          "documentation":"<p>The ML compute instance type.</p>"
+        },
+        "InitialVariantWeight":{
+          "shape":"VariantWeight",
+          "documentation":"<p>Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. The traffic to a production variant is determined by the ratio of the <code>VariantWeight</code> to the sum of all <code>VariantWeight</code> values across all ProductionVariants. If unspecified, it defaults to 1.0. </p>"
+        }
+      },
+      "documentation":"<p>Identifies a model that you want to host and the resources to deploy for hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic among the models by specifying variant weights. </p>"
+    },
+    "ProductionVariantInstanceType":{
+      "type":"string",
+      "enum":[
+        "ml.c4.2xlarge",
+        "ml.c4.8xlarge",
+        "ml.c4.xlarge",
+        "ml.c5.2xlarge",
+        "ml.c5.9xlarge",
+        "ml.c5.xlarge",
+        "ml.m4.xlarge",
+        "ml.p2.xlarge",
+        "ml.p3.2xlarge",
+        "ml.t2.medium"
+      ]
+    },
+    "ProductionVariantList":{
+      "type":"list",
+      "member":{"shape":"ProductionVariant"},
+      "min":1
+    },
+    "ProductionVariantSummary":{
+      "type":"structure",
+      "required":["VariantName"],
+      "members":{
+        "VariantName":{
+          "shape":"VariantName",
+          "documentation":"<p>The name of the variant.</p>"
+        },
+        "CurrentWeight":{
+          "shape":"VariantWeight",
+          "documentation":"<p>The weight associated with the variant.</p>"
+        },
+        "DesiredWeight":{
+          "shape":"VariantWeight",
+          "documentation":"<p>The requested weight, as specified in the <code>UpdateWeightAndCapacities</code> request. </p>"
+        },
+        "CurrentInstanceCount":{
+          "shape":"TaskCount",
+          "documentation":"<p>The number of instances associated with the variant.</p>"
+        },
+        "DesiredInstanceCount":{
+          "shape":"TaskCount",
+          "documentation":"<p>The number of instances requested in the <code>UpdateWeightAndCapacities</code> request. </p>"
+        }
+      },
+      "documentation":"<p>Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateWeightAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values. </p>"
+    },
+    "ProductionVariantSummaryList":{
+      "type":"list",
+      "member":{"shape":"ProductionVariantSummary"},
+      "min":1
+    },
+    "RecordWrapper":{
+      "type":"string",
+      "enum":[
+        "None",
+        "RecordIO"
+      ]
+    },
+    "ResourceArn":{
+      "type":"string",
+      "max":256
+    },
+    "ResourceConfig":{
+      "type":"structure",
+      "required":[
+        "InstanceType",
+        "InstanceCount",
+        "VolumeSizeInGB"
+      ],
+      "members":{
+        "InstanceType":{
+          "shape":"TrainingInstanceType",
+          "documentation":"<p>The ML compute instance type. </p>"
+        },
+        "InstanceCount":{
+          "shape":"TrainingInstanceCount",
+          "documentation":"<p>The number of ML compute instances to use. For distributed training, provide a value greater than 1. </p>"
+        },
+        "VolumeSizeInGB":{
+          "shape":"VolumeSizeInGB",
+          "documentation":"<p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>You must specify sufficient ML storage for your scenario. </p> <note> <p> Amazon SageMaker supports only the General Purpose SSD (gp2) ML storage volume type. </p> </note>"
+        }
+      },
+      "documentation":"<p>Describes the resources, including ML compute instances and ML storage volumes, to use for model training. </p>"
+    },
+    "ResourceInUse":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"FailureReason"}
+      },
+      "documentation":"<p>Resource being accessed is in use.</p>",
+      "exception":true
+    },
+    "ResourceLimitExceeded":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"FailureReason"}
+      },
+      "documentation":"<p> You have exceeded an Amazon SageMaker resource limit. For example, you might have too many training jobs created. </p>",
+      "exception":true
+    },
+    "ResourceNotFound":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"FailureReason"}
+      },
+      "documentation":"<p>Resource being access is not found.</p>",
+      "exception":true
+    },
+    "RoleArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+    },
+    "S3DataDistribution":{
+      "type":"string",
+      "enum":[
+        "FullyReplicated",
+        "ShardedByS3Key"
+      ]
+    },
+    "S3DataSource":{
+      "type":"structure",
+      "required":[
+        "S3DataType",
+        "S3Uri"
+      ],
+      "members":{
+        "S3DataType":{
+          "shape":"S3DataType",
+          "documentation":"<p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for model training. </p> <p>If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for model training. </p>"
+        },
+        "S3Uri":{
+          "shape":"S3Uri",
+          "documentation":"<p>Depending on the value specified for the <code>S3DataType</code>, identifies either a key name prefix or a manifest. For example: </p> <ul> <li> <p> A key name prefix might look like this: <code>s3://bucketname/exampleprefix</code>. </p> </li> <li> <p> A manifest might look like this: <code>s3://bucketname/example.manifest</code> </p> <p> The manifest is an S3 object which is a JSON file with the following format: </p> <p> <code>[</code> </p> <p> <code> {\"prefix\": \"s3://customer_bucket/some/prefix/\"},</code> </p> <p> <code> \"relative/path/to/custdata-1\",</code> </p> <p> <code> \"relative/path/custdata-2\",</code> </p> <p> <code> ...</code> </p> <p> <code> ]</code> </p> <p> The preceding JSON matches the following <code>s3Uris</code>: </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code> </p> <p> <code>s3://customer_bucket/some/prefix/relative/path/custdata-1</code> </p> <p> <code>...</code> </p> <p> The complete set of <code>s3uris</code> in this manifest constitutes the input data for the channel for this datasource. The object that each <code>s3uris</code> points to must readable by the IAM role that Amazon SageMaker uses to perform tasks on your behalf. </p> </li> </ul>"
+        },
+        "S3DataDistributionType":{
+          "shape":"S3DataDistribution",
+          "documentation":"<p>If you want Amazon SageMaker to replicate the entire dataset on each ML compute instance that is launched for model training, specify <code>FullyReplicated</code>. </p> <p>If you want Amazon SageMaker to replicate a subset of data on each ML compute instance that is launched for model training, specify <code>ShardedByS3Key</code>. If there are <i>n</i> ML compute instances launched for a training job, each instance gets approximately 1/<i>n</i> of the number of S3 objects. In this case, model training on each machine uses only the subset of training data. </p> <p>Don't choose more ML compute instances for training than available S3 objects. If you do, some nodes won't get any data and you will pay for nodes that aren't getting any training data. This applies in both FILE and PIPE modes. Keep this in mind when developing algorithms. </p> <p>In distributed training, where you use multiple ML compute EC2 instances, you might choose <code>ShardedByS3Key</code>. If the algorithm requires copying training data to the ML storage volume (when <code>TrainingInputMode</code> is set to <code>File</code>), this copies 1/<i>n</i> of the number of objects. </p>"
+        }
+      },
+      "documentation":"<p>Describes the S3 data source.</p>"
+    },
+    "S3DataType":{
+      "type":"string",
+      "enum":[
+        "ManifestFile",
+        "S3Prefix"
+      ]
+    },
+    "S3Uri":{
+      "type":"string",
+      "max":1024,
+      "pattern":"^(https|s3)://([^/]+)/?(.*)$"
+    },
+    "SecondaryStatus":{
+      "type":"string",
+      "enum":[
+        "Starting",
+        "Downloading",
+        "Training",
+        "Uploading",
+        "Stopping",
+        "Stopped",
+        "MaxRuntimeExceeded",
+        "Completed",
+        "Failed"
+      ]
+    },
+    "SecurityGroupId":{
+      "type":"string",
+      "max":32
+    },
+    "SecurityGroupIds":{
+      "type":"list",
+      "member":{"shape":"SecurityGroupId"},
+      "max":5
+    },
+    "SessionExpirationDurationInSeconds":{
+      "type":"integer",
+      "max":43200,
+      "min":1800
+    },
+    "SortBy":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "CreationTime",
+        "Status"
+      ]
+    },
+    "SortOrder":{
+      "type":"string",
+      "enum":[
+        "Ascending",
+        "Descending"
+      ]
+    },
+    "StartNotebookInstanceInput":{
+      "type":"structure",
+      "required":["NotebookInstanceName"],
+      "members":{
+        "NotebookInstanceName":{
+          "shape":"NotebookInstanceName",
+          "documentation":"<p>The name of the notebook instance to start.</p>"
+        }
+      }
+    },
+    "StopNotebookInstanceInput":{
+      "type":"structure",
+      "required":["NotebookInstanceName"],
+      "members":{
+        "NotebookInstanceName":{
+          "shape":"NotebookInstanceName",
+          "documentation":"<p>The name of the notebook instance to terminate.</p>"
+        }
+      }
+    },
+    "StopTrainingJobRequest":{
+      "type":"structure",
+      "required":["TrainingJobName"],
+      "members":{
+        "TrainingJobName":{
+          "shape":"TrainingJobName",
+          "documentation":"<p>The name of the training job to stop.</p>"
+        }
+      }
+    },
+    "StoppingCondition":{
+      "type":"structure",
+      "members":{
+        "MaxRuntimeInSeconds":{
+          "shape":"MaxRuntimeInSeconds",
+          "documentation":"<p>The maximum length of time, in seconds, that the training job can run. If model training does not complete during this time, Amazon SageMaker ends the job. If value is not specified, default value is 1 day. Maximum value is 5 days.</p>"
+        }
+      },
+      "documentation":"<p>Specifies how long model training can run. When model training reaches the limit, Amazon SageMaker ends the training job. Use this API to cap model training cost.</p> <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for120 seconds. Algorithms might use this 120-second window to save the model artifacts, so the results of training is not lost. </p> <p>Training algorithms provided by Amazon SageMaker automatically saves the intermediate results of a model training job (it is best effort case, as model might not be ready to save as some stages, for example training just started). This intermediate data is a valid model artifact. You can use it to create a model (<code>CreateModel</code>). </p>"
+    },
+    "SubnetId":{
+      "type":"string",
+      "max":32
+    },
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{
+          "shape":"TagKey",
+          "documentation":"<p>The tag key.</p>"
+        },
+        "Value":{
+          "shape":"TagValue",
+          "documentation":"<p>The tag value.</p>"
+        }
+      },
+      "documentation":"<p>Describes a tag. </p>"
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^((?!aws:)[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"},
+      "max":50,
+      "min":1
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "max":50,
+      "min":0
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TaskCount":{
+      "type":"integer",
+      "min":1
+    },
+    "Timestamp":{"type":"timestamp"},
+    "TrainingInputMode":{
+      "type":"string",
+      "enum":[
+        "Pipe",
+        "File"
+      ]
+    },
+    "TrainingInstanceCount":{
+      "type":"integer",
+      "min":1
+    },
+    "TrainingInstanceType":{
+      "type":"string",
+      "enum":[
+        "ml.m4.xlarge",
+        "ml.m4.4xlarge",
+        "ml.m4.10xlarge",
+        "ml.c4.xlarge",
+        "ml.c4.2xlarge",
+        "ml.c4.8xlarge",
+        "ml.p2.xlarge",
+        "ml.p2.8xlarge",
+        "ml.p2.16xlarge",
+        "ml.p3.2xlarge",
+        "ml.p3.8xlarge",
+        "ml.p3.16xlarge",
+        "ml.c5.xlarge",
+        "ml.c5.2xlarge",
+        "ml.c5.4xlarge",
+        "ml.c5.9xlarge",
+        "ml.c5.18xlarge"
+      ]
+    },
+    "TrainingJobArn":{
+      "type":"string",
+      "max":256,
+      "pattern":"arn:aws:sagemaker:[\\p{Alnum}\\-]*:[0-9]{12}:training-job/.*"
+    },
+    "TrainingJobName":{
+      "type":"string",
+      "max":63,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "TrainingJobStatus":{
+      "type":"string",
+      "enum":[
+        "InProgress",
+        "Completed",
+        "Failed",
+        "Stopping",
+        "Stopped"
+      ]
+    },
+    "TrainingJobSummaries":{
+      "type":"list",
+      "member":{"shape":"TrainingJobSummary"}
+    },
+    "TrainingJobSummary":{
+      "type":"structure",
+      "required":[
+        "TrainingJobName",
+        "TrainingJobArn",
+        "CreationTime",
+        "TrainingJobStatus"
+      ],
+      "members":{
+        "TrainingJobName":{
+          "shape":"TrainingJobName",
+          "documentation":"<p>The name of the training job that you want a summary for.</p>"
+        },
+        "TrainingJobArn":{
+          "shape":"TrainingJobArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the training job.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that shows when the training job was created.</p>"
+        },
+        "TrainingEndTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp that shows when the training job ended. This field is set only if the training job has one of the terminal statuses (<code>Completed</code>, <code>Failed</code>, or <code>Stopped</code>). </p>"
+        },
+        "LastModifiedTime":{
+          "shape":"Timestamp",
+          "documentation":"<p> Timestamp when the training job was last modified. </p>"
+        },
+        "TrainingJobStatus":{
+          "shape":"TrainingJobStatus",
+          "documentation":"<p>The status of the training job.</p>"
+        }
+      },
+      "documentation":"<p>Provides summary information about a training job.</p>"
+    },
+    "UpdateEndpointInput":{
+      "type":"structure",
+      "required":[
+        "EndpointName",
+        "EndpointConfigName"
+      ],
+      "members":{
+        "EndpointName":{
+          "shape":"EndpointName",
+          "documentation":"<p>The name of the endpoint whose configuration you want to update.</p>"
+        },
+        "EndpointConfigName":{
+          "shape":"EndpointConfigName",
+          "documentation":"<p>The name of the new endpoint configuration.</p>"
+        }
+      }
+    },
+    "UpdateEndpointOutput":{
+      "type":"structure",
+      "required":["EndpointArn"],
+      "members":{
+        "EndpointArn":{
+          "shape":"EndpointArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the endpoint.</p>"
+        }
+      }
+    },
+    "UpdateEndpointWeightsAndCapacitiesInput":{
+      "type":"structure",
+      "required":[
+        "EndpointName",
+        "DesiredWeightsAndCapacities"
+      ],
+      "members":{
+        "EndpointName":{
+          "shape":"EndpointName",
+          "documentation":"<p>The name of an existing Amazon SageMaker endpoint.</p>"
+        },
+        "DesiredWeightsAndCapacities":{
+          "shape":"DesiredWeightAndCapacityList",
+          "documentation":"<p>An object that provides new capacity and weight values for a variant.</p>"
+        }
+      }
+    },
+    "UpdateEndpointWeightsAndCapacitiesOutput":{
+      "type":"structure",
+      "required":["EndpointArn"],
+      "members":{
+        "EndpointArn":{
+          "shape":"EndpointArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the updated endpoint.</p>"
+        }
+      }
+    },
+    "UpdateNotebookInstanceInput":{
+      "type":"structure",
+      "required":["NotebookInstanceName"],
+      "members":{
+        "NotebookInstanceName":{
+          "shape":"NotebookInstanceName",
+          "documentation":"<p>The name of the notebook instance to update.</p>"
+        },
+        "InstanceType":{
+          "shape":"InstanceType",
+          "documentation":"<p>The Amazon ML compute instance type.</p>"
+        },
+        "RoleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>Amazon Resource Name (ARN) of the IAM role to associate with the instance.</p>"
+        }
+      }
+    },
+    "UpdateNotebookInstanceOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "Url":{
+      "type":"string",
+      "max":1024,
+      "pattern":"^(https|s3)://([^/]+)/?(.*)$"
+    },
+    "VariantName":{
+      "type":"string",
+      "max":63,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "VariantWeight":{
+      "type":"float",
+      "min":0
+    },
+    "VolumeSizeInGB":{
+      "type":"integer",
+      "min":1
+    }
+  },
+  "documentation":"Definition of the public APIs exposed by SageMaker"
+}

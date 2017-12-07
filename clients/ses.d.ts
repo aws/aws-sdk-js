@@ -44,6 +44,14 @@ declare class SES extends Service {
    */
   createConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SES.Types.CreateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.CreateConfigurationSetTrackingOptionsResponse, AWSError>;
   /**
+   * Creates a new custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  createCustomVerificationEmailTemplate(params: SES.Types.CreateCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates a new custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  createCustomVerificationEmailTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Creates a new IP address filter. For information about setting up IP address filters, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createReceiptFilter(params: SES.Types.CreateReceiptFilterRequest, callback?: (err: AWSError, data: SES.Types.CreateReceiptFilterResponse) => void): Request<SES.Types.CreateReceiptFilterResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class SES extends Service {
    * Deletes an association between a configuration set and a custom domain for open and click event tracking. By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.  Deleting this kind of association will result in emails sent using the specified configuration set to capture open and click events using the standard, Amazon SES-operated domains. 
    */
   deleteConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SES.Types.DeleteConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.DeleteConfigurationSetTrackingOptionsResponse, AWSError>;
+  /**
+   * Deletes an existing custom verification email template.  For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  deleteCustomVerificationEmailTemplate(params: SES.Types.DeleteCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an existing custom verification email template.  For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  deleteCustomVerificationEmailTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified identity (an email address or a domain) from the list of verified identities. You can execute this operation no more than once per second.
    */
@@ -192,6 +208,14 @@ declare class SES extends Service {
    */
   getAccountSendingEnabled(callback?: (err: AWSError, data: SES.Types.GetAccountSendingEnabledResponse) => void): Request<SES.Types.GetAccountSendingEnabledResponse, AWSError>;
   /**
+   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  getCustomVerificationEmailTemplate(params: SES.Types.GetCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SES.Types.GetCustomVerificationEmailTemplateResponse) => void): Request<SES.Types.GetCustomVerificationEmailTemplateResponse, AWSError>;
+  /**
+   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  getCustomVerificationEmailTemplate(callback?: (err: AWSError, data: SES.Types.GetCustomVerificationEmailTemplateResponse) => void): Request<SES.Types.GetCustomVerificationEmailTemplateResponse, AWSError>;
+  /**
    * Returns the current status of Easy DKIM signing for an entity. For domain name identities, this operation also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published. This operation takes a list of identities as input and returns the following information for each:   Whether Easy DKIM signing is enabled or disabled.   A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.   Whether Amazon SES has successfully verified the DKIM tokens published in the domain's DNS. This information is only returned for domain name identities, not for email addresses.   This operation is throttled at one request per second and can only get DKIM attributes for up to 100 identities at a time. For more information about creating DNS records using DKIM tokens, go to the Amazon SES Developer Guide.
    */
   getIdentityDkimAttributes(params: SES.Types.GetIdentityDkimAttributesRequest, callback?: (err: AWSError, data: SES.Types.GetIdentityDkimAttributesResponse) => void): Request<SES.Types.GetIdentityDkimAttributesResponse, AWSError>;
@@ -255,6 +279,14 @@ declare class SES extends Service {
    * Provides a list of the configuration sets associated with your Amazon SES account. For information about using configuration sets, see Monitoring Your Amazon SES Sending Activity in the Amazon SES Developer Guide.  You can execute this operation no more than once per second. This operation will return up to 1,000 configuration sets each time it is run. If your Amazon SES account has more than 1,000 configuration sets, this operation will also return a NextToken element. You can then execute the ListConfigurationSets operation again, passing the NextToken parameter and the value of the NextToken element to retrieve additional results.
    */
   listConfigurationSets(callback?: (err: AWSError, data: SES.Types.ListConfigurationSetsResponse) => void): Request<SES.Types.ListConfigurationSetsResponse, AWSError>;
+  /**
+   * Lists the existing custom verification email templates for your account. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  listCustomVerificationEmailTemplates(params: SES.Types.ListCustomVerificationEmailTemplatesRequest, callback?: (err: AWSError, data: SES.Types.ListCustomVerificationEmailTemplatesResponse) => void): Request<SES.Types.ListCustomVerificationEmailTemplatesResponse, AWSError>;
+  /**
+   * Lists the existing custom verification email templates for your account. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  listCustomVerificationEmailTemplates(callback?: (err: AWSError, data: SES.Types.ListCustomVerificationEmailTemplatesResponse) => void): Request<SES.Types.ListCustomVerificationEmailTemplatesResponse, AWSError>;
   /**
    * Returns a list containing all of the identities (email addresses and domains) for your AWS account, regardless of verification status. You can execute this operation no more than once per second.
    */
@@ -331,6 +363,14 @@ declare class SES extends Service {
    * Composes an email message to multiple destinations. The message body is created using an email template. In order to send email using the SendBulkTemplatedEmail operation, your call to the API must meet the following requirements:   The call must refer to an existing email template. You can create email templates using the CreateTemplate operation.   The message must be sent from a verified email address or domain.   If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be less than 10 MB.   Each Destination parameter must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.  
    */
   sendBulkTemplatedEmail(callback?: (err: AWSError, data: SES.Types.SendBulkTemplatedEmailResponse) => void): Request<SES.Types.SendBulkTemplatedEmailResponse, AWSError>;
+  /**
+   * Sends a custom verification email to a specified recipient. Verification emails sent using this operation are counted against your 24-hour sending quota and per-second sending rate. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide.
+   */
+  sendCustomVerificationEmail(params: SES.Types.SendCustomVerificationEmailRequest, callback?: (err: AWSError, data: SES.Types.SendCustomVerificationEmailResponse) => void): Request<SES.Types.SendCustomVerificationEmailResponse, AWSError>;
+  /**
+   * Sends a custom verification email to a specified recipient. Verification emails sent using this operation are counted against your 24-hour sending quota and per-second sending rate. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide.
+   */
+  sendCustomVerificationEmail(callback?: (err: AWSError, data: SES.Types.SendCustomVerificationEmailResponse) => void): Request<SES.Types.SendCustomVerificationEmailResponse, AWSError>;
   /**
    * Composes an email message and immediately queues it for sending. In order to send email using the SendEmail operation, your message must meet the following requirements:   The message must be sent from a verified email address or domain. If you attempt to send email using a non-verified address or domain, the operation will result in an "Email address not verified" error.    If your account is still in the Amazon SES sandbox, you may only send to verified addresses or domains, or to email addresses associated with the Amazon SES Mailbox Simulator. For more information, see Verifying Email Addresses and Domains in the Amazon SES Developer Guide.    The total size of the message, including attachments, must be smaller than 10 MB.   The message must include at least one recipient email address. The recipient address can be a To: address, a CC: address, or a BCC: address. If a recipient email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be rejected, even if the message contains other recipients that are valid.   The message may not include more than 50 recipients, across the To:, CC: and BCC: fields. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call the SendEmail operation several times to send the message to each group.    For every message that you send, the total number of recipients (including each recipient in the To:, CC: and BCC: fields) is counted against the maximum number of emails you can send in a 24-hour period (your sending quota). For more information about sending quotas in Amazon SES, see Managing Your Amazon SES Sending Limits in the Amazon SES Developer Guide.  
    */
@@ -459,6 +499,14 @@ declare class SES extends Service {
    * Modifies an association between a configuration set and a custom domain for open and click event tracking.  By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see Configuring Custom Domains to Handle Open and Click Tracking in the Amazon SES Developer Guide.
    */
   updateConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SES.Types.UpdateConfigurationSetTrackingOptionsResponse) => void): Request<SES.Types.UpdateConfigurationSetTrackingOptionsResponse, AWSError>;
+  /**
+   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  updateCustomVerificationEmailTemplate(params: SES.Types.UpdateCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   */
+  updateCustomVerificationEmailTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a receipt rule. For information about managing receipt rules, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
@@ -700,6 +748,32 @@ declare namespace SES {
   }
   export interface CreateConfigurationSetTrackingOptionsResponse {
   }
+  export interface CreateCustomVerificationEmailTemplateRequest {
+    /**
+     * The name of the custom verification email template.
+     */
+    TemplateName: TemplateName;
+    /**
+     * The email address that the custom verification email is sent from.
+     */
+    FromEmailAddress: FromAddress;
+    /**
+     * The subject line of the custom verification email.
+     */
+    TemplateSubject: Subject;
+    /**
+     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom Verification Email Frequently Asked Questions in the Amazon SES Developer Guide.
+     */
+    TemplateContent: TemplateContent;
+    /**
+     * The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+     */
+    SuccessRedirectionURL: SuccessRedirectionURL;
+    /**
+     * The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+     */
+    FailureRedirectionURL: FailureRedirectionURL;
+  }
   export interface CreateReceiptFilterRequest {
     /**
      * A data structure that describes the IP address filter to create, which consists of a name, an IP address range, and whether to allow or block mail from it.
@@ -742,6 +816,29 @@ declare namespace SES {
   }
   export type CustomMailFromStatus = "Pending"|"Success"|"Failed"|"TemporaryFailure"|string;
   export type CustomRedirectDomain = string;
+  export interface CustomVerificationEmailTemplate {
+    /**
+     * The name of the custom verification email template.
+     */
+    TemplateName?: TemplateName;
+    /**
+     * The email address that the custom verification email is sent from.
+     */
+    FromEmailAddress?: FromAddress;
+    /**
+     * The subject line of the custom verification email.
+     */
+    TemplateSubject?: Subject;
+    /**
+     * The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+     */
+    SuccessRedirectionURL?: SuccessRedirectionURL;
+    /**
+     * The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+     */
+    FailureRedirectionURL?: FailureRedirectionURL;
+  }
+  export type CustomVerificationEmailTemplates = CustomVerificationEmailTemplate[];
   export type DefaultDimensionValue = string;
   export interface DeleteConfigurationSetEventDestinationRequest {
     /**
@@ -770,6 +867,12 @@ declare namespace SES {
     ConfigurationSetName: ConfigurationSetName;
   }
   export interface DeleteConfigurationSetTrackingOptionsResponse {
+  }
+  export interface DeleteCustomVerificationEmailTemplateRequest {
+    /**
+     * The name of the custom verification email template that you want to delete.
+     */
+    TemplateName: TemplateName;
   }
   export interface DeleteIdentityPolicyRequest {
     /**
@@ -972,11 +1075,45 @@ declare namespace SES {
   export type ExtensionFieldList = ExtensionField[];
   export type ExtensionFieldName = string;
   export type ExtensionFieldValue = string;
+  export type FailureRedirectionURL = string;
+  export type FromAddress = string;
   export interface GetAccountSendingEnabledResponse {
     /**
      * Describes whether email sending is enabled or disabled for your Amazon SES account.
      */
     Enabled?: Enabled;
+  }
+  export interface GetCustomVerificationEmailTemplateRequest {
+    /**
+     * The name of the custom verification email template that you want to retrieve.
+     */
+    TemplateName: TemplateName;
+  }
+  export interface GetCustomVerificationEmailTemplateResponse {
+    /**
+     * The name of the custom verification email template.
+     */
+    TemplateName?: TemplateName;
+    /**
+     * The email address that the custom verification email is sent from.
+     */
+    FromEmailAddress?: FromAddress;
+    /**
+     * The subject line of the custom verification email.
+     */
+    TemplateSubject?: Subject;
+    /**
+     * The content of the custom verification email.
+     */
+    TemplateContent?: TemplateContent;
+    /**
+     * The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+     */
+    SuccessRedirectionURL?: SuccessRedirectionURL;
+    /**
+     * The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+     */
+    FailureRedirectionURL?: FailureRedirectionURL;
   }
   export interface GetIdentityDkimAttributesRequest {
     /**
@@ -1192,6 +1329,26 @@ declare namespace SES {
      */
     NextToken?: NextToken;
   }
+  export interface ListCustomVerificationEmailTemplatesRequest {
+    /**
+     * A token returned from a previous call to ListCustomVerificationEmailTemplates to indicate the position in the list of email templates.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of custom verification email templates to return. This value must be at least 1 and less than or equal to 50. If you do not specify a value, or if you specify a value less than 1 or greater than 50, the operation will return up to 50 results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListCustomVerificationEmailTemplatesResponse {
+    /**
+     * A list of the custom verification email templates that exist in your account.
+     */
+    CustomVerificationEmailTemplates?: CustomVerificationEmailTemplates;
+    /**
+     * A token indicating that there are additional custom verification email templates available to be listed. Pass this token to a subsequent call to ListCustomVerificationEmailTemplates to retrieve the next 50 custom verification email templates.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListIdentitiesRequest {
     /**
      * The type of the identities to list. Possible values are "EmailAddress" and "Domain". If this parameter is omitted, then all identities will be listed.
@@ -1282,6 +1439,7 @@ declare namespace SES {
   export type MailFromDomainName = string;
   export type Max24HourSend = number;
   export type MaxItems = number;
+  export type MaxResults = number;
   export type MaxSendRate = number;
   export interface Message {
     /**
@@ -1581,7 +1739,7 @@ declare namespace SES {
   }
   export interface SendBulkTemplatedEmailRequest {
     /**
-     * The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the Amazon SES Developer Guide. If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the SourceArn parameter. For more information about sending authorization, see the Amazon SES Developer Guide.  In all cases, the email address must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. For more information, see RFC 2047. 
+     * The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the Amazon SES Developer Guide. If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the SourceArn parameter. For more information about sending authorization, see the Amazon SES Developer Guide.  Amazon SES does not support the SMTPUTF8 extension, as described in RFC6531. For this reason, the local part of a source email address (the part of the email address that precedes the @ sign) may only contain 7-bit ASCII characters. If the domain part of an address (the part after the @ sign) contains non-ASCII characters, they must be encoded using Punycode, as described in RFC3492. The sender name (also known as the friendly name) may contain non-ASCII characters. These characters must be encoded using MIME encoded-word syntax, as described in RFC 2047. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. 
      */
     Source: Address;
     /**
@@ -1631,6 +1789,26 @@ declare namespace SES {
      */
     Status: BulkEmailDestinationStatusList;
   }
+  export interface SendCustomVerificationEmailRequest {
+    /**
+     * The email address to verify.
+     */
+    EmailAddress: Address;
+    /**
+     * The name of the custom verification email template to use when sending the verification email.
+     */
+    TemplateName: TemplateName;
+    /**
+     * Name of a configuration set to use when sending the verification email.
+     */
+    ConfigurationSetName?: ConfigurationSetName;
+  }
+  export interface SendCustomVerificationEmailResponse {
+    /**
+     * The unique message identifier returned from the SendCustomVerificationEmail operation.
+     */
+    MessageId?: MessageId;
+  }
   export interface SendDataPoint {
     /**
      * Time of the data point.
@@ -1656,7 +1834,7 @@ declare namespace SES {
   export type SendDataPointList = SendDataPoint[];
   export interface SendEmailRequest {
     /**
-     * The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the Amazon SES Developer Guide. If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the SourceArn parameter. For more information about sending authorization, see the Amazon SES Developer Guide.  In all cases, the email address must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. For more information, see RFC 2047. 
+     * The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the Amazon SES Developer Guide. If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the SourceArn parameter. For more information about sending authorization, see the Amazon SES Developer Guide.  Amazon SES does not support the SMTPUTF8 extension, as described in RFC6531. For this reason, the local part of a source email address (the part of the email address that precedes the @ sign) may only contain 7-bit ASCII characters. If the domain part of an address (the part after the @ sign) contains non-ASCII characters, they must be encoded using Punycode, as described in RFC3492. The sender name (also known as the friendly name) may contain non-ASCII characters. These characters must be encoded using MIME encoded-word syntax, as described in RFC 2047. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. 
      */
     Source: Address;
     /**
@@ -1700,7 +1878,7 @@ declare namespace SES {
   }
   export interface SendRawEmailRequest {
     /**
-     * The identity's email address. If you do not provide a value for this parameter, you must specify a "From" address in the raw text of the message. (You can also specify both.)  By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. For more information, see RFC 2047.   If you specify the Source parameter and have feedback forwarding enabled, then bounces and complaints will be sent to this email address. This takes precedence over any Return-Path header that you might include in the raw text of the message. 
+     * The identity's email address. If you do not provide a value for this parameter, you must specify a "From" address in the raw text of the message. (You can also specify both.)  Amazon SES does not support the SMTPUTF8 extension, as described inRFC6531. For this reason, the local part of a source email address (the part of the email address that precedes the @ sign) may only contain 7-bit ASCII characters. If the domain part of an address (the part after the @ sign) contains non-ASCII characters, they must be encoded using Punycode, as described in RFC3492. The sender name (also known as the friendly name) may contain non-ASCII characters. These characters must be encoded using MIME encoded-word syntax, as described in RFC 2047. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=.  If you specify the Source parameter and have feedback forwarding enabled, then bounces and complaints will be sent to this email address. This takes precedence over any Return-Path header that you might include in the raw text of the message.
      */
     Source?: Address;
     /**
@@ -1740,7 +1918,7 @@ declare namespace SES {
   }
   export interface SendTemplatedEmailRequest {
     /**
-     * The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the Amazon SES Developer Guide. If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the SourceArn parameter. For more information about sending authorization, see the Amazon SES Developer Guide.  In all cases, the email address must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. For more information, see RFC 2047. 
+     * The email address that is sending the email. This email address must be either individually verified with Amazon SES, or from a domain that has been verified with Amazon SES. For information about verifying identities, see the Amazon SES Developer Guide. If you are sending on behalf of another user and have been permitted to do so by a sending authorization policy, then you must also specify the SourceArn parameter. For more information about sending authorization, see the Amazon SES Developer Guide.  Amazon SES does not support the SMTPUTF8 extension, as described in RFC6531. For this reason, the local part of a source email address (the part of the email address that precedes the @ sign) may only contain 7-bit ASCII characters. If the domain part of an address (the part after the @ sign) contains non-ASCII characters, they must be encoded using Punycode, as described in RFC3492. The sender name (also known as the friendly name) may contain non-ASCII characters. These characters must be encoded using MIME encoded-word syntax, as described inRFC 2047. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=. 
      */
     Source: Address;
     /**
@@ -1898,7 +2076,9 @@ declare namespace SES {
     TopicArn?: AmazonResourceName;
   }
   export type StopScope = "RuleSet"|string;
+  export type Subject = string;
   export type SubjectPart = string;
+  export type SuccessRedirectionURL = string;
   export interface Template {
     /**
      * The name of the template. You will refer to this name when you send email using the SendTemplatedEmail or SendBulkTemplatedEmail operations.
@@ -1917,6 +2097,7 @@ declare namespace SES {
      */
     HtmlPart?: HtmlPart;
   }
+  export type TemplateContent = string;
   export type TemplateData = string;
   export interface TemplateMetadata {
     /**
@@ -2001,6 +2182,32 @@ declare namespace SES {
     TrackingOptions: TrackingOptions;
   }
   export interface UpdateConfigurationSetTrackingOptionsResponse {
+  }
+  export interface UpdateCustomVerificationEmailTemplateRequest {
+    /**
+     * The name of the custom verification email template that you want to update.
+     */
+    TemplateName: TemplateName;
+    /**
+     * The email address that the custom verification email is sent from.
+     */
+    FromEmailAddress?: FromAddress;
+    /**
+     * The subject line of the custom verification email.
+     */
+    TemplateSubject?: Subject;
+    /**
+     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom Verification Email Frequently Asked Questions in the Amazon SES Developer Guide.
+     */
+    TemplateContent?: TemplateContent;
+    /**
+     * The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+     */
+    SuccessRedirectionURL?: SuccessRedirectionURL;
+    /**
+     * The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.
+     */
+    FailureRedirectionURL?: FailureRedirectionURL;
   }
   export interface UpdateReceiptRuleRequest {
     /**

@@ -30,6 +30,22 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   batchWriteItem(callback?: (err: AWSError, data: DynamoDB.Types.BatchWriteItemOutput) => void): Request<DynamoDB.Types.BatchWriteItemOutput, AWSError>;
   /**
+   * Creates a backup for an existing table.  Each time you create an On-Demand Backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken.  You can call CreateBackup at a maximum rate of 50 times per second. All backups in DynamoDB work without consuming any provisioned throughput on the table. This results in a fast, low-cost, and scalable backup process. In general, the larger the table, the more time it takes to back up. The backup is stored in an S3 data store that is maintained and managed by DynamoDB. Backups incorporate all writes (delete, put, update) that were completed within the last minute before the backup request was initiated. Backups might include some writes (delete, put, update) that were completed before the backup request was finished.  For example, if you submit the backup request on 2018-12-14 at 14:25:00, the backup is guaranteed to contain all data committed to the table up to 14:24:00, and data committed after 14:26:00 will not be. The backup may or may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand Backup does not support causal consistency.   Along with data, the following are also included on the backups:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Streams   Provisioned read and write capacity  
+   */
+  createBackup(params: DynamoDB.Types.CreateBackupInput, callback?: (err: AWSError, data: DynamoDB.Types.CreateBackupOutput) => void): Request<DynamoDB.Types.CreateBackupOutput, AWSError>;
+  /**
+   * Creates a backup for an existing table.  Each time you create an On-Demand Backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken.  You can call CreateBackup at a maximum rate of 50 times per second. All backups in DynamoDB work without consuming any provisioned throughput on the table. This results in a fast, low-cost, and scalable backup process. In general, the larger the table, the more time it takes to back up. The backup is stored in an S3 data store that is maintained and managed by DynamoDB. Backups incorporate all writes (delete, put, update) that were completed within the last minute before the backup request was initiated. Backups might include some writes (delete, put, update) that were completed before the backup request was finished.  For example, if you submit the backup request on 2018-12-14 at 14:25:00, the backup is guaranteed to contain all data committed to the table up to 14:24:00, and data committed after 14:26:00 will not be. The backup may or may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand Backup does not support causal consistency.   Along with data, the following are also included on the backups:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Streams   Provisioned read and write capacity  
+   */
+  createBackup(callback?: (err: AWSError, data: DynamoDB.Types.CreateBackupOutput) => void): Request<DynamoDB.Types.CreateBackupOutput, AWSError>;
+  /**
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.   Tables can only be added as the replicas of a global table group under the following conditions:     The tables must have the same name.     The tables must contain no items.     The tables must have the same hash key and sort key (if present).     The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).   
+   */
+  createGlobalTable(params: DynamoDB.Types.CreateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
+  /**
+   * Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided regions.   Tables can only be added as the replicas of a global table group under the following conditions:     The tables must have the same name.     The tables must contain no items.     The tables must have the same hash key and sort key (if present).     The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).   
+   */
+  createGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.CreateGlobalTableOutput) => void): Request<DynamoDB.Types.CreateGlobalTableOutput, AWSError>;
+  /**
    * The CreateTable operation adds a new table to your account. In an AWS account, table names must be unique within each region. That is, you can have two tables with same name if you create the tables in different regions.  CreateTable is an asynchronous operation. Upon receiving a CreateTable request, DynamoDB immediately returns a response with a TableStatus of CREATING. After the table is created, DynamoDB sets the TableStatus to ACTIVE. You can perform read and write operations only on an ACTIVE table.  You can optionally define secondary indexes on the new table, as part of the CreateTable operation. If you want to create multiple tables with secondary indexes on them, you must create the tables sequentially. Only one table with secondary indexes can be in the CREATING state at any given time. You can use the DescribeTable action to check the table status.
    */
   createTable(params: DynamoDB.Types.CreateTableInput, callback?: (err: AWSError, data: DynamoDB.Types.CreateTableOutput) => void): Request<DynamoDB.Types.CreateTableOutput, AWSError>;
@@ -37,6 +53,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * The CreateTable operation adds a new table to your account. In an AWS account, table names must be unique within each region. That is, you can have two tables with same name if you create the tables in different regions.  CreateTable is an asynchronous operation. Upon receiving a CreateTable request, DynamoDB immediately returns a response with a TableStatus of CREATING. After the table is created, DynamoDB sets the TableStatus to ACTIVE. You can perform read and write operations only on an ACTIVE table.  You can optionally define secondary indexes on the new table, as part of the CreateTable operation. If you want to create multiple tables with secondary indexes on them, you must create the tables sequentially. Only one table with secondary indexes can be in the CREATING state at any given time. You can use the DescribeTable action to check the table status.
    */
   createTable(callback?: (err: AWSError, data: DynamoDB.Types.CreateTableOutput) => void): Request<DynamoDB.Types.CreateTableOutput, AWSError>;
+  /**
+   * Deletes an existing backup of a table. You can call DeleteBackup at a maximum rate of 10 times per second.
+   */
+  deleteBackup(params: DynamoDB.Types.DeleteBackupInput, callback?: (err: AWSError, data: DynamoDB.Types.DeleteBackupOutput) => void): Request<DynamoDB.Types.DeleteBackupOutput, AWSError>;
+  /**
+   * Deletes an existing backup of a table. You can call DeleteBackup at a maximum rate of 10 times per second.
+   */
+  deleteBackup(callback?: (err: AWSError, data: DynamoDB.Types.DeleteBackupOutput) => void): Request<DynamoDB.Types.DeleteBackupOutput, AWSError>;
   /**
    * Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value. In addition to deleting an item, you can also return the item's attribute values in the same operation, using the ReturnValues parameter. Unless you specify conditions, the DeleteItem is an idempotent operation; running it multiple times on the same item or attribute does not result in an error response. Conditional deletes are useful for deleting items only if specific conditions are met. If those conditions are met, DynamoDB performs the delete. Otherwise, the item is not deleted.
    */
@@ -53,6 +77,30 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * The DeleteTable operation deletes a table and all of its items. After a DeleteTable request, the specified table is in the DELETING state until DynamoDB completes the deletion. If the table is in the ACTIVE state, you can delete it. If a table is in CREATING or UPDATING states, then DynamoDB returns a ResourceInUseException. If the specified table does not exist, DynamoDB returns a ResourceNotFoundException. If table is already in the DELETING state, no error is returned.   DynamoDB might continue to accept data read and write operations, such as GetItem and PutItem, on a table in the DELETING state until the table deletion is complete.  When you delete a table, any indexes on that table are also deleted. If you have DynamoDB Streams enabled on the table, then the corresponding stream on that table goes into the DISABLED state, and the stream is automatically deleted after 24 hours. Use the DescribeTable action to check the status of the table. 
    */
   deleteTable(callback?: (err: AWSError, data: DynamoDB.Types.DeleteTableOutput) => void): Request<DynamoDB.Types.DeleteTableOutput, AWSError>;
+  /**
+   * Describes an existing backup of a table. You can call DescribeBackup at a maximum rate of 10 times per second.
+   */
+  describeBackup(params: DynamoDB.Types.DescribeBackupInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeBackupOutput) => void): Request<DynamoDB.Types.DescribeBackupOutput, AWSError>;
+  /**
+   * Describes an existing backup of a table. You can call DescribeBackup at a maximum rate of 10 times per second.
+   */
+  describeBackup(callback?: (err: AWSError, data: DynamoDB.Types.DescribeBackupOutput) => void): Request<DynamoDB.Types.DescribeBackupOutput, AWSError>;
+  /**
+   * Checks the status of the backup restore settings on the specified table. If backups are enabled, ContinuousBackupsStatus will bet set to ENABLED. You can call DescribeContinuousBackups at a maximum rate of 10 times per second.
+   */
+  describeContinuousBackups(params: DynamoDB.Types.DescribeContinuousBackupsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeContinuousBackupsOutput) => void): Request<DynamoDB.Types.DescribeContinuousBackupsOutput, AWSError>;
+  /**
+   * Checks the status of the backup restore settings on the specified table. If backups are enabled, ContinuousBackupsStatus will bet set to ENABLED. You can call DescribeContinuousBackups at a maximum rate of 10 times per second.
+   */
+  describeContinuousBackups(callback?: (err: AWSError, data: DynamoDB.Types.DescribeContinuousBackupsOutput) => void): Request<DynamoDB.Types.DescribeContinuousBackupsOutput, AWSError>;
+  /**
+   * Returns information about the global table.
+   */
+  describeGlobalTable(params: DynamoDB.Types.DescribeGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
+  /**
+   * Returns information about the global table.
+   */
+  describeGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
   /**
    * Returns the current provisioned-capacity limits for your AWS account in a region, both for the region as a whole and for any one DynamoDB table that you create there. When you establish an AWS account, the account has initial limits on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given region. Also, there are per-table limits that apply when you create a table there. For more information, see Limits page in the Amazon DynamoDB Developer Guide. Although you can increase these limits by filing a case at AWS Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those limits imposed by your account so that you have enough time to apply for an increase before you hit a limit. For example, you could use one of the AWS SDKs to do the following:   Call DescribeLimits for a particular region to obtain your current account limits on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account limits for that region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level limits. The per-table limits apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB will not let you increase provisioned capacity extremely rapidly, but the only upper limit that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account limits.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
    */
@@ -86,6 +134,22 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   getItem(callback?: (err: AWSError, data: DynamoDB.Types.GetItemOutput) => void): Request<DynamoDB.Types.GetItemOutput, AWSError>;
   /**
+   * List backups associated with an AWS account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1MB worth of items in a page. You can also specify a limit for the maximum number of entries to be returned in a page.  In the request, start time is inclusive but end time is exclusive. Note that these limits are for the time at which the original backup was requested. You can call ListBackups a maximum of 5 times per second.
+   */
+  listBackups(params: DynamoDB.Types.ListBackupsInput, callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
+  /**
+   * List backups associated with an AWS account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1MB worth of items in a page. You can also specify a limit for the maximum number of entries to be returned in a page.  In the request, start time is inclusive but end time is exclusive. Note that these limits are for the time at which the original backup was requested. You can call ListBackups a maximum of 5 times per second.
+   */
+  listBackups(callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
+  /**
+   * Lists all the global tables. Only those global tables that have replicas in the region specified as input are returned.
+   */
+  listGlobalTables(params: DynamoDB.Types.ListGlobalTablesInput, callback?: (err: AWSError, data: DynamoDB.Types.ListGlobalTablesOutput) => void): Request<DynamoDB.Types.ListGlobalTablesOutput, AWSError>;
+  /**
+   * Lists all the global tables. Only those global tables that have replicas in the region specified as input are returned.
+   */
+  listGlobalTables(callback?: (err: AWSError, data: DynamoDB.Types.ListGlobalTablesOutput) => void): Request<DynamoDB.Types.ListGlobalTablesOutput, AWSError>;
+  /**
    * Returns an array of table names associated with the current account and endpoint. The output from ListTables is paginated, with each page returning a maximum of 100 table names.
    */
   listTables(params: DynamoDB.Types.ListTablesInput, callback?: (err: AWSError, data: DynamoDB.Types.ListTablesOutput) => void): Request<DynamoDB.Types.ListTablesOutput, AWSError>;
@@ -118,6 +182,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   query(callback?: (err: AWSError, data: DynamoDB.Types.QueryOutput) => void): Request<DynamoDB.Types.QueryOutput, AWSError>;
   /**
+   * Creates a new table from an existing backup. Any number of users can execute up to 10 concurrent restores in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Time to Live (TTL) settings  
+   */
+  restoreTableFromBackup(params: DynamoDB.Types.RestoreTableFromBackupInput, callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableFromBackupOutput) => void): Request<DynamoDB.Types.RestoreTableFromBackupOutput, AWSError>;
+  /**
+   * Creates a new table from an existing backup. Any number of users can execute up to 10 concurrent restores in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Time to Live (TTL) settings  
+   */
+  restoreTableFromBackup(callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableFromBackupOutput) => void): Request<DynamoDB.Types.RestoreTableFromBackupOutput, AWSError>;
+  /**
    * The Scan operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a FilterExpression operation. If the total number of scanned items exceeds the maximum data set size limit of 1 MB, the scan stops and results are returned to the user as a LastEvaluatedKey value to continue the scan in a subsequent operation. The results also include the number of items exceeding the limit. A scan can result in no table data meeting the filter criteria.  A single Scan operation will read up to the maximum number of items set (if using the Limit parameter) or a maximum of 1 MB of data and then apply any filtering to the results using FilterExpression. If LastEvaluatedKey is present in the response, you will need to paginate the result set. For more information, see Paginating the Results in the Amazon DynamoDB Developer Guide.   Scan operations proceed sequentially; however, for faster performance on a large table or secondary index, applications can request a parallel Scan operation by providing the Segment and TotalSegments parameters. For more information, see Parallel Scan in the Amazon DynamoDB Developer Guide.  Scan uses eventually consistent reads when accessing the data in a table; therefore, the result set might not include the changes to data in the table immediately before the operation began. If you need a consistent copy of the data, as of the time that the Scan begins, you can set the ConsistentRead parameter to true.
    */
   scan(params: DynamoDB.Types.ScanInput, callback?: (err: AWSError, data: DynamoDB.Types.ScanOutput) => void): Request<DynamoDB.Types.ScanOutput, AWSError>;
@@ -141,6 +213,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * Removes the association of tags from an Amazon DynamoDB resource. You can call UntagResource up to 5 times per second, per account.  For an overview on tagging DynamoDB resources, see Tagging for DynamoDB in the Amazon DynamoDB Developer Guide.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or removes replicas to the specified global table. The global table should already exist to be able to use this operation. Currently, the replica to be added should be empty. 
+   */
+  updateGlobalTable(params: DynamoDB.Types.UpdateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableOutput, AWSError>;
+  /**
+   * Adds or removes replicas to the specified global table. The global table should already exist to be able to use this operation. Currently, the replica to be added should be empty. 
+   */
+  updateGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableOutput, AWSError>;
   /**
    * Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values). You can also return the item's attribute values in the same UpdateItem operation using the ReturnValues parameter.
    */
@@ -257,6 +337,83 @@ declare namespace DynamoDB {
     Action?: AttributeAction;
   }
   export type Backfilling = boolean;
+  export type BackupArn = string;
+  export type BackupCreationDateTime = Date;
+  export interface BackupDescription {
+    /**
+     * Contains the details of the backup created for the table. 
+     */
+    BackupDetails?: BackupDetails;
+    /**
+     * Contains the details of the table when the backup was created. 
+     */
+    SourceTableDetails?: SourceTableDetails;
+    /**
+     * Contains the details of the features enabled on the table when the backup was created. For example, LSIs, GSIs, streams, TTL.
+     */
+    SourceTableFeatureDetails?: SourceTableFeatureDetails;
+  }
+  export interface BackupDetails {
+    /**
+     * ARN associated with the backup.
+     */
+    BackupArn: BackupArn;
+    /**
+     * Name of the requested backup.
+     */
+    BackupName: BackupName;
+    /**
+     * Size of the backup in bytes.
+     */
+    BackupSizeBytes?: BackupSizeBytes;
+    /**
+     * Backup can be in one of the following states: CREATING, ACTIVE, DELETED. 
+     */
+    BackupStatus: BackupStatus;
+    /**
+     * Time at which the backup was created. This is the request time of the backup. 
+     */
+    BackupCreationDateTime: BackupCreationDateTime;
+  }
+  export type BackupName = string;
+  export type BackupSizeBytes = number;
+  export type BackupStatus = "CREATING"|"DELETED"|"AVAILABLE"|string;
+  export type BackupSummaries = BackupSummary[];
+  export interface BackupSummary {
+    /**
+     * Name of the table.
+     */
+    TableName?: TableName;
+    /**
+     * Unique identifier for the table.
+     */
+    TableId?: TableId;
+    /**
+     * ARN associated with the table.
+     */
+    TableArn?: TableArn;
+    /**
+     * ARN associated with the backup.
+     */
+    BackupArn?: BackupArn;
+    /**
+     * Name of the specified backup.
+     */
+    BackupName?: BackupName;
+    /**
+     * Time at which the backup was created.
+     */
+    BackupCreationDateTime?: BackupCreationDateTime;
+    /**
+     * Backup can be in one of the following states: CREATING, ACTIVE, DELETED.
+     */
+    BackupStatus?: BackupStatus;
+    /**
+     * Size of the backup in bytes.
+     */
+    BackupSizeBytes?: BackupSizeBytes;
+  }
+  export type BackupsInputLimit = number;
   export interface BatchGetItemInput {
     /**
      * A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table. Each table name can be used only once per BatchGetItem request. Each element in the map of items to retrieve consists of the following:    ConsistentRead - If true, a strongly consistent read is used; if false (the default), an eventually consistent read is used.    ExpressionAttributeNames - One or more substitution tokens for attribute names in the ProjectionExpression parameter. The following are some use cases for using ExpressionAttributeNames:   To access an attribute whose name conflicts with a DynamoDB reserved word.   To create a placeholder for repeating occurrences of an attribute name in an expression.   To prevent special characters in an attribute name from being misinterpreted in an expression.   Use the # character in an expression to dereference an attribute name. For example, consider the following attribute name:    Percentile    The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide). To work around this, you could specify the following for ExpressionAttributeNames:    {"#P":"Percentile"}    You could then use this substitution in an expression, as in this example:    #P = :val     Tokens that begin with the : character are expression attribute values, which are placeholders for the actual value at runtime.  For more information on expression attribute names, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    Keys - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide the partition key value. For a composite key, you must provide both the partition key value and the sort key value.    ProjectionExpression - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes will be returned. If any of the requested attributes are not found, they will not appear in the result. For more information, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    AttributesToGet - This is a legacy parameter. Use ProjectionExpression instead. For more information, see AttributesToGet in the Amazon DynamoDB Developer Guide.   
@@ -297,7 +454,7 @@ declare namespace DynamoDB {
      */
     UnprocessedItems?: BatchWriteItemRequestMap;
     /**
-     * A list of tables that were processed by BatchWriteItem and, for each table, information about any item collections that were affected by individual DeleteItem or PutItem operations. Each entry consists of the following subelements:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item.    SizeEstimateRange - An estimate of item collection size, expressed in GB. This is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on the table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
+     * A list of tables that were processed by BatchWriteItem and, for each table, information about any item collections that were affected by individual DeleteItem or PutItem operations. Each entry consists of the following subelements:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item.    SizeEstimateRangeGB - An estimate of item collection size, expressed in GB. This is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on the table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
      */
     ItemCollectionMetrics?: ItemCollectionMetricsPerTable;
     /**
@@ -354,6 +511,29 @@ declare namespace DynamoDB {
   }
   export type ConsumedCapacityMultiple = ConsumedCapacity[];
   export type ConsumedCapacityUnits = number;
+  export interface ContinuousBackupsDescription {
+    /**
+     * ContinuousBackupsStatus can be one of the following states : ENABLED, DISABLED
+     */
+    ContinuousBackupsStatus: ContinuousBackupsStatus;
+  }
+  export type ContinuousBackupsStatus = "ENABLED"|"DISABLED"|string;
+  export interface CreateBackupInput {
+    /**
+     * The name of the table.
+     */
+    TableName: TableName;
+    /**
+     * Specified name for the backup.
+     */
+    BackupName: BackupName;
+  }
+  export interface CreateBackupOutput {
+    /**
+     * Contains the details of the backup created for the table.
+     */
+    BackupDetails?: BackupDetails;
+  }
   export interface CreateGlobalSecondaryIndexAction {
     /**
      * The name of the global secondary index to be created.
@@ -371,6 +551,28 @@ declare namespace DynamoDB {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput: ProvisionedThroughput;
+  }
+  export interface CreateGlobalTableInput {
+    /**
+     * The global table name.
+     */
+    GlobalTableName: TableName;
+    /**
+     * The regions where the global table needs to be created.
+     */
+    ReplicationGroup: ReplicaList;
+  }
+  export interface CreateGlobalTableOutput {
+    /**
+     * Contains the details of the global table.
+     */
+    GlobalTableDescription?: GlobalTableDescription;
+  }
+  export interface CreateReplicaAction {
+    /**
+     * The region of the replica to be added.
+     */
+    RegionName: RegionName;
   }
   export interface CreateTableInput {
     /**
@@ -409,6 +611,18 @@ declare namespace DynamoDB {
     TableDescription?: TableDescription;
   }
   export type _Date = Date;
+  export interface DeleteBackupInput {
+    /**
+     * The ARN associated with the backup.
+     */
+    BackupArn: BackupArn;
+  }
+  export interface DeleteBackupOutput {
+    /**
+     * Contains the description of the backup created for the table.
+     */
+    BackupDescription?: BackupDescription;
+  }
   export interface DeleteGlobalSecondaryIndexAction {
     /**
      * The name of the global secondary index to be deleted.
@@ -464,9 +678,15 @@ declare namespace DynamoDB {
      */
     ConsumedCapacity?: ConsumedCapacity;
     /**
-     * Information about item collections, if any, that were affected by the DeleteItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRange - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
+     * Information about item collections, if any, that were affected by the DeleteItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRangeGB - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
+  }
+  export interface DeleteReplicaAction {
+    /**
+     * The region of the replica to be removed.
+     */
+    RegionName: RegionName;
   }
   export interface DeleteRequest {
     /**
@@ -485,6 +705,42 @@ declare namespace DynamoDB {
      * Represents the properties of a table.
      */
     TableDescription?: TableDescription;
+  }
+  export interface DescribeBackupInput {
+    /**
+     * The ARN associated with the backup.
+     */
+    BackupArn: BackupArn;
+  }
+  export interface DescribeBackupOutput {
+    /**
+     * Contains the description of the backup created for the table.
+     */
+    BackupDescription?: BackupDescription;
+  }
+  export interface DescribeContinuousBackupsInput {
+    /**
+     * Name of the table for which the customer wants to check the backup and restore settings.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeContinuousBackupsOutput {
+    /**
+     *  ContinuousBackupsDescription can be one of the following : ENABLED, DISABLED. 
+     */
+    ContinuousBackupsDescription?: ContinuousBackupsDescription;
+  }
+  export interface DescribeGlobalTableInput {
+    /**
+     * The name of the global table.
+     */
+    GlobalTableName: TableName;
+  }
+  export interface DescribeGlobalTableOutput {
+    /**
+     * Contains the details of the global table.
+     */
+    GlobalTableDescription?: GlobalTableDescription;
   }
   export interface DescribeLimitsInput {
   }
@@ -649,6 +905,24 @@ declare namespace DynamoDB {
     IndexArn?: String;
   }
   export type GlobalSecondaryIndexDescriptionList = GlobalSecondaryIndexDescription[];
+  export interface GlobalSecondaryIndexInfo {
+    /**
+     * The name of the global secondary index.
+     */
+    IndexName?: IndexName;
+    /**
+     * The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     */
+    KeySchema?: KeySchema;
+    /**
+     * Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. 
+     */
+    Projection?: Projection;
+    /**
+     * Represents the provisioned throughput settings for the specified global secondary index. 
+     */
+    ProvisionedThroughput?: ProvisionedThroughput;
+  }
   export type GlobalSecondaryIndexList = GlobalSecondaryIndex[];
   export interface GlobalSecondaryIndexUpdate {
     /**
@@ -665,6 +939,42 @@ declare namespace DynamoDB {
     Delete?: DeleteGlobalSecondaryIndexAction;
   }
   export type GlobalSecondaryIndexUpdateList = GlobalSecondaryIndexUpdate[];
+  export type GlobalSecondaryIndexes = GlobalSecondaryIndexInfo[];
+  export interface GlobalTable {
+    /**
+     * The global table name.
+     */
+    GlobalTableName?: TableName;
+    /**
+     * The regions where the global table has replicas.
+     */
+    ReplicationGroup?: ReplicaList;
+  }
+  export type GlobalTableArnString = string;
+  export interface GlobalTableDescription {
+    /**
+     * The regions where the global table has replicas.
+     */
+    ReplicationGroup?: ReplicaDescriptionList;
+    /**
+     * The unique identifier of the global table.
+     */
+    GlobalTableArn?: GlobalTableArnString;
+    /**
+     * The creation time of the global table.
+     */
+    CreationDateTime?: _Date;
+    /**
+     * The current state of the global table:    CREATING - The global table is being created.    UPDATING - The global table is being updated.    DELETING - The global table is being deleted.    ACTIVE - The global table is ready for use.  
+     */
+    GlobalTableStatus?: GlobalTableStatus;
+    /**
+     * The global table name.
+     */
+    GlobalTableName?: TableName;
+  }
+  export type GlobalTableList = GlobalTable[];
+  export type GlobalTableStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|string;
   export type IndexName = string;
   export type IndexStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
   export type Integer = number;
@@ -683,6 +993,7 @@ declare namespace DynamoDB {
   export type ItemCollectionMetricsPerTable = {[key: string]: ItemCollectionMetricsMultiple};
   export type ItemCollectionSizeEstimateBound = number;
   export type ItemCollectionSizeEstimateRange = ItemCollectionSizeEstimateBound[];
+  export type ItemCount = number;
   export type ItemList = AttributeMap[];
   export type Key = {[key: string]: AttributeValue};
   export type KeyConditions = {[key: string]: Condition};
@@ -724,6 +1035,62 @@ declare namespace DynamoDB {
     ExpressionAttributeNames?: ExpressionAttributeNameMap;
   }
   export type ListAttributeValue = AttributeValue[];
+  export interface ListBackupsInput {
+    /**
+     * The backups from the table specified by TableName are listed. 
+     */
+    TableName?: TableName;
+    /**
+     * Maximum number of backups to return at once.
+     */
+    Limit?: BackupsInputLimit;
+    /**
+     * Only backups created after this time are listed. TimeRangeLowerBound is inclusive.
+     */
+    TimeRangeLowerBound?: TimeRangeLowerBound;
+    /**
+     * Only backups created before this time are listed. TimeRangeUpperBound is exclusive. 
+     */
+    TimeRangeUpperBound?: TimeRangeUpperBound;
+    /**
+     *  LastEvaluatedBackupARN returned by the previous ListBackups call. 
+     */
+    ExclusiveStartBackupArn?: BackupArn;
+  }
+  export interface ListBackupsOutput {
+    /**
+     * List of BackupSummary objects.
+     */
+    BackupSummaries?: BackupSummaries;
+    /**
+     * Last evaluated BackupARN.
+     */
+    LastEvaluatedBackupArn?: BackupArn;
+  }
+  export interface ListGlobalTablesInput {
+    /**
+     * The first global table name that this operation will evaluate.
+     */
+    ExclusiveStartGlobalTableName?: TableName;
+    /**
+     * The maximum number of table names to return.
+     */
+    Limit?: PositiveIntegerObject;
+    /**
+     * Lists the global tables in a specific region.
+     */
+    RegionName?: RegionName;
+  }
+  export interface ListGlobalTablesOutput {
+    /**
+     * List of global table names.
+     */
+    GlobalTables?: GlobalTableList;
+    /**
+     * Last evaluated global table name.
+     */
+    LastEvaluatedGlobalTableName?: TableName;
+  }
   export interface ListTablesInput {
     /**
      * The first table name that this operation will evaluate. Use the value that was returned for LastEvaluatedTableName in a previous operation, so that you can obtain the next page of results.
@@ -806,7 +1173,22 @@ declare namespace DynamoDB {
     IndexArn?: String;
   }
   export type LocalSecondaryIndexDescriptionList = LocalSecondaryIndexDescription[];
+  export interface LocalSecondaryIndexInfo {
+    /**
+     * Represents the name of the local secondary index.
+     */
+    IndexName?: IndexName;
+    /**
+     * The complete key schema for a local secondary index, which consists of one or more pairs of attribute names and key types:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB' usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
+     */
+    KeySchema?: KeySchema;
+    /**
+     * Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. 
+     */
+    Projection?: Projection;
+  }
   export type LocalSecondaryIndexList = LocalSecondaryIndex[];
+  export type LocalSecondaryIndexes = LocalSecondaryIndexInfo[];
   export type Long = number;
   export type MapAttributeValue = {[key: string]: AttributeValue};
   export type NextTokenString = string;
@@ -911,7 +1293,7 @@ declare namespace DynamoDB {
      */
     ConsumedCapacity?: ConsumedCapacity;
     /**
-     * Information about item collections, if any, that were affected by the PutItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRange - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
+     * Information about item collections, if any, that were affected by the PutItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRangeGB - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
   }
@@ -1010,7 +1392,69 @@ declare namespace DynamoDB {
      */
     ConsumedCapacity?: ConsumedCapacity;
   }
+  export type RegionName = string;
+  export interface Replica {
+    /**
+     * The region where the replica needs to be created.
+     */
+    RegionName?: RegionName;
+  }
+  export interface ReplicaDescription {
+    /**
+     * The name of the region.
+     */
+    RegionName?: RegionName;
+  }
+  export type ReplicaDescriptionList = ReplicaDescription[];
+  export type ReplicaList = Replica[];
+  export interface ReplicaUpdate {
+    /**
+     * The parameters required for creating a replica on an existing global table.
+     */
+    Create?: CreateReplicaAction;
+    /**
+     * The name of the existing replica to be removed.
+     */
+    Delete?: DeleteReplicaAction;
+  }
+  export type ReplicaUpdateList = ReplicaUpdate[];
   export type ResourceArnString = string;
+  export type RestoreDateTime = Date;
+  export type RestoreInProgress = boolean;
+  export interface RestoreSummary {
+    /**
+     * ARN of the backup from which the table was restored.
+     */
+    SourceBackupArn?: BackupArn;
+    /**
+     * ARN of the source table of the backup that is being restored.
+     */
+    SourceTableArn?: TableArn;
+    /**
+     * Point in time or source backup time.
+     */
+    RestoreDateTime: RestoreDateTime;
+    /**
+     * Indicates if a restore is in progress or not.
+     */
+    RestoreInProgress: RestoreInProgress;
+  }
+  export interface RestoreTableFromBackupInput {
+    /**
+     * The name of the new table to which the backup must be restored.
+     */
+    TargetTableName: TableName;
+    /**
+     * The ARN associated with the backup.
+     */
+    BackupArn: BackupArn;
+  }
+  export interface RestoreTableFromBackupOutput {
+    /**
+     * The description of the table created from an existing backup.
+     */
+    TableDescription?: TableDescription;
+  }
   export type ReturnConsumedCapacity = "INDEXES"|"TOTAL"|"NONE"|string;
   export type ReturnItemCollectionMetrics = "SIZE"|"NONE"|string;
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
@@ -1104,6 +1548,58 @@ declare namespace DynamoDB {
   export type ScanTotalSegments = number;
   export type SecondaryIndexesCapacityMap = {[key: string]: Capacity};
   export type Select = "ALL_ATTRIBUTES"|"ALL_PROJECTED_ATTRIBUTES"|"SPECIFIC_ATTRIBUTES"|"COUNT"|string;
+  export interface SourceTableDetails {
+    /**
+     * The name of the table for which the backup was created. 
+     */
+    TableName: TableName;
+    /**
+     * Unique identifier for the table for which the backup was created. 
+     */
+    TableId: TableId;
+    /**
+     * ARN of the table for which backup was created. 
+     */
+    TableArn?: TableArn;
+    /**
+     * Size of the table in bytes. Please note this is an approximate value.
+     */
+    TableSizeBytes?: Long;
+    /**
+     * Schema of the table. 
+     */
+    KeySchema: KeySchema;
+    /**
+     * Time when the source table was created. 
+     */
+    TableCreationDateTime: TableCreationDateTime;
+    /**
+     * Read IOPs and Write IOPS on the table when the backup was created.
+     */
+    ProvisionedThroughput: ProvisionedThroughput;
+    /**
+     * Number of items in the table. Please note this is an approximate value. 
+     */
+    ItemCount?: ItemCount;
+  }
+  export interface SourceTableFeatureDetails {
+    /**
+     * Represents the LSI properties for the table when the backup was created. It includes the IndexName, KeySchema and Projection for the LSIs on the table at the time of backup. 
+     */
+    LocalSecondaryIndexes?: LocalSecondaryIndexes;
+    /**
+     * Represents the GSI properties for the table when the backup was created. It includes the IndexName, KeySchema, Projection and ProvisionedThroughput for the GSIs on the table at the time of backup. 
+     */
+    GlobalSecondaryIndexes?: GlobalSecondaryIndexes;
+    /**
+     * Stream settings on the table when the backup was created.
+     */
+    StreamDescription?: StreamSpecification;
+    /**
+     * Time to Live settings on the table when the backup was created.
+     */
+    TimeToLiveDescription?: TimeToLiveDescription;
+  }
   export type StreamArn = string;
   export type StreamEnabled = boolean;
   export interface StreamSpecification {
@@ -1120,6 +1616,8 @@ declare namespace DynamoDB {
   export type String = string;
   export type StringAttributeValue = string;
   export type StringSetAttributeValue = StringAttributeValue[];
+  export type TableArn = string;
+  export type TableCreationDateTime = Date;
   export interface TableDescription {
     /**
      * An array of AttributeDefinition objects. Each of these objects describes one attribute in the table and index key schema. Each AttributeDefinition object in this array is composed of:    AttributeName - The name of the attribute.    AttributeType - The data type for the attribute.  
@@ -1158,6 +1656,10 @@ declare namespace DynamoDB {
      */
     TableArn?: String;
     /**
+     * Unique identifier for the table for which the backup was created. 
+     */
+    TableId?: TableId;
+    /**
      * Represents one or more local secondary indexes on the table. Each index is scoped to a given partition key value. Tables with one or more local secondary indexes are subject to an item collection size limit, where the amount of data within a given item collection cannot exceed 10 GB. Each element is composed of:    IndexName - The name of the local secondary index.    KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes are in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      IndexSizeBytes - Represents the total size of the index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.    ItemCount - Represents the number of items in the index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.   If the table is in the DELETING state, no information about indexes will be returned.
      */
     LocalSecondaryIndexes?: LocalSecondaryIndexDescriptionList;
@@ -1177,7 +1679,12 @@ declare namespace DynamoDB {
      * The Amazon Resource Name (ARN) that uniquely identifies the latest stream for this table.
      */
     LatestStreamArn?: StreamArn;
+    /**
+     * Contains details for the restore.
+     */
+    RestoreSummary?: RestoreSummary;
   }
+  export type TableId = string;
   export type TableName = string;
   export type TableNameList = TableName[];
   export type TableStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
@@ -1205,6 +1712,8 @@ declare namespace DynamoDB {
     Tags: TagList;
   }
   export type TagValueString = string;
+  export type TimeRangeLowerBound = Date;
+  export type TimeRangeUpperBound = Date;
   export type TimeToLiveAttributeName = string;
   export interface TimeToLiveDescription {
     /**
@@ -1248,6 +1757,22 @@ declare namespace DynamoDB {
      * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput: ProvisionedThroughput;
+  }
+  export interface UpdateGlobalTableInput {
+    /**
+     * The global table name.
+     */
+    GlobalTableName: TableName;
+    /**
+     * A list of regions that should be added or removed from the global table.
+     */
+    ReplicaUpdates: ReplicaUpdateList;
+  }
+  export interface UpdateGlobalTableOutput {
+    /**
+     * Contains the details of the global table.
+     */
+    GlobalTableDescription?: GlobalTableDescription;
   }
   export interface UpdateItemInput {
     /**
@@ -1306,7 +1831,7 @@ declare namespace DynamoDB {
      */
     ConsumedCapacity?: ConsumedCapacity;
     /**
-     * Information about item collections, if any, that were affected by the UpdateItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRange - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
+     * Information about item collections, if any, that were affected by the UpdateItem operation. ItemCollectionMetrics is only returned if the ReturnItemCollectionMetrics parameter was specified. If the table does not have any local secondary indexes, this information is not returned in the response. Each ItemCollectionMetrics element consists of:    ItemCollectionKey - The partition key value of the item collection. This is the same as the partition key value of the item itself.    SizeEstimateRangeGB - An estimate of item collection size, in gigabytes. This value is a two-element array containing a lower bound and an upper bound for the estimate. The estimate includes the size of all the items in the table, plus the size of all attributes projected into all of the local secondary indexes on that table. Use this estimate to measure whether a local secondary index is approaching its size limit. The estimate is subject to change over time; therefore, do not rely on the precision or accuracy of the estimate.  
      */
     ItemCollectionMetrics?: ItemCollectionMetrics;
   }

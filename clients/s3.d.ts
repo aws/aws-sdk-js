@@ -824,6 +824,54 @@ declare namespace S3 {
     MaxAgeSeconds?: MaxAgeSeconds;
   }
   export type CORSRules = CORSRule[];
+  export interface CSVInput {
+    /**
+     * Describes the first line of input. Valid values: None, Ignore, Use.
+     */
+    FileHeaderInfo?: FileHeaderInfo;
+    /**
+     * Single character used to indicate a row should be ignored when present at the start of a row.
+     */
+    Comments?: Comments;
+    /**
+     * Single character used for escaping the quote character inside an already escaped value.
+     */
+    QuoteEscapeCharacter?: QuoteEscapeCharacter;
+    /**
+     * Value used to separate individual records.
+     */
+    RecordDelimiter?: RecordDelimiter;
+    /**
+     * Value used to separate individual fields in a record.
+     */
+    FieldDelimiter?: FieldDelimiter;
+    /**
+     * Value used for escaping where the field delimiter is part of the value.
+     */
+    QuoteCharacter?: QuoteCharacter;
+  }
+  export interface CSVOutput {
+    /**
+     * Indicates whether or not all output fields should be quoted.
+     */
+    QuoteFields?: QuoteFields;
+    /**
+     * Single character used for escaping the quote character inside an already escaped value.
+     */
+    QuoteEscapeCharacter?: QuoteEscapeCharacter;
+    /**
+     * Value used to separate individual records.
+     */
+    RecordDelimiter?: RecordDelimiter;
+    /**
+     * Value used to separate individual fields in a record.
+     */
+    FieldDelimiter?: FieldDelimiter;
+    /**
+     * Value used for escaping where the field delimiter is part of the value.
+     */
+    QuoteCharacter?: QuoteCharacter;
+  }
   export type CacheControl = string;
   export type CloudFunction = string;
   export interface CloudFunctionConfiguration {
@@ -835,6 +883,7 @@ declare namespace S3 {
   }
   export type CloudFunctionInvocationRole = string;
   export type Code = string;
+  export type Comments = string;
   export interface CommonPrefix {
     Prefix?: Prefix;
   }
@@ -1393,6 +1442,7 @@ declare namespace S3 {
   }
   export type DeletedObjects = DeletedObject[];
   export type Delimiter = string;
+  export type Description = string;
   export interface Destination {
     /**
      * Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.
@@ -1419,6 +1469,20 @@ declare namespace S3 {
   export type ETag = string;
   export type EmailAddress = string;
   export type EncodingType = "url"|string;
+  export interface Encryption {
+    /**
+     * The server-side encryption algorithm used when storing job results in Amazon S3 (e.g., AES256, aws:kms).
+     */
+    EncryptionType: ServerSideEncryption;
+    /**
+     * If the encryption type is aws:kms, this optional value specifies the AWS KMS key ID to use for encryption of job results.
+     */
+    KMSKeyId?: SSEKMSKeyId;
+    /**
+     * If the encryption type is aws:kms, this optional value can be used to specify the encryption context for the restore results.
+     */
+    KMSContext?: KMSContext;
+  }
   export interface EncryptionConfiguration {
     /**
      * The id of the KMS key used to encrypt the replica object.
@@ -1446,7 +1510,11 @@ declare namespace S3 {
   export type Expires = Date;
   export type ExposeHeader = string;
   export type ExposeHeaders = ExposeHeader[];
+  export type Expression = string;
+  export type ExpressionType = "SQL"|string;
   export type FetchOwner = boolean;
+  export type FieldDelimiter = string;
+  export type FileHeaderInfo = "USE"|"IGNORE"|"NONE"|string;
   export interface FilterRule {
     /**
      * Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to Configuring Event Notifications in the Amazon Simple Storage Service Developer Guide.
@@ -2034,6 +2102,12 @@ declare namespace S3 {
      */
     DisplayName?: DisplayName;
   }
+  export interface InputSerialization {
+    /**
+     * Describes the serialization of a CSV-encoded object.
+     */
+    CSV?: CSVInput;
+  }
   export interface InventoryConfiguration {
     /**
      * Contains information about where to publish the inventory results.
@@ -2124,6 +2198,7 @@ declare namespace S3 {
   export type IsEnabled = boolean;
   export type IsLatest = boolean;
   export type IsTruncated = boolean;
+  export type KMSContext = string;
   export type KeyCount = number;
   export type KeyMarker = string;
   export type KeyPrefixEquals = string;
@@ -2602,6 +2677,7 @@ declare namespace S3 {
     RequestPayer?: RequestPayer;
   }
   export type Location = string;
+  export type LocationPrefix = string;
   export interface LoggingEnabled {
     /**
      * Specifies the bucket where you want Amazon S3 to store server access logs. You can have your logs delivered to any bucket that you own, including the same bucket that is being logged. You can also configure multiple buckets to deliver their logs to the same target bucket. In this case you should choose a different TargetPrefix for each source bucket so that the delivered log files can be distinguished by key.
@@ -2624,6 +2700,10 @@ declare namespace S3 {
   export type Message = string;
   export type Metadata = {[key: string]: MetadataValue};
   export type MetadataDirective = "COPY"|"REPLACE"|string;
+  export interface MetadataEntry {
+    Name?: MetadataKey;
+    Value?: MetadataValue;
+  }
   export type MetadataKey = string;
   export type MetadataValue = string;
   export interface MetricsAndOperator {
@@ -2782,6 +2862,18 @@ declare namespace S3 {
   export type ObjectVersionId = string;
   export type ObjectVersionList = ObjectVersion[];
   export type ObjectVersionStorageClass = "STANDARD"|string;
+  export interface OutputLocation {
+    /**
+     * Describes an S3 location that will receive the results of the restore request.
+     */
+    S3?: S3Location;
+  }
+  export interface OutputSerialization {
+    /**
+     * Describes the serialization of CSV-encoded Select results.
+     */
+    CSV?: CSVOutput;
+  }
   export interface Owner {
     DisplayName?: DisplayName;
     ID?: ID;
@@ -3175,7 +3267,11 @@ declare namespace S3 {
   }
   export type QueueConfigurationList = QueueConfiguration[];
   export type Quiet = boolean;
+  export type QuoteCharacter = string;
+  export type QuoteEscapeCharacter = string;
+  export type QuoteFields = "ALWAYS"|"ASNEEDED"|string;
   export type Range = string;
+  export type RecordDelimiter = string;
   export interface Redirect {
     /**
      * The host name to use in the redirect request.
@@ -3263,6 +3359,10 @@ declare namespace S3 {
   export type Restore = string;
   export interface RestoreObjectOutput {
     RequestCharged?: RequestCharged;
+    /**
+     * Indicates the path in the provided S3 output location where Select results will be restored to.
+     */
+    RestoreOutputPath?: RestoreOutputPath;
   }
   export interface RestoreObjectRequest {
     Bucket: BucketName;
@@ -3271,16 +3371,38 @@ declare namespace S3 {
     RestoreRequest?: RestoreRequest;
     RequestPayer?: RequestPayer;
   }
+  export type RestoreOutputPath = string;
   export interface RestoreRequest {
     /**
-     * Lifetime of the active copy in days
+     * Lifetime of the active copy in days. Do not use with restores that specify OutputLocation.
      */
-    Days: Days;
+    Days?: Days;
     /**
-     * Glacier related prameters pertaining to this job.
+     * Glacier related parameters pertaining to this job. Do not use with restores that specify OutputLocation.
      */
     GlacierJobParameters?: GlacierJobParameters;
+    /**
+     * Type of restore request.
+     */
+    Type?: RestoreRequestType;
+    /**
+     * Glacier retrieval tier at which the restore will be processed.
+     */
+    Tier?: Tier;
+    /**
+     * The optional description for the job.
+     */
+    Description?: Description;
+    /**
+     * Describes the parameters for Select job types.
+     */
+    SelectParameters?: SelectParameters;
+    /**
+     * Describes the location where the restore job's output is stored.
+     */
+    OutputLocation?: OutputLocation;
   }
+  export type RestoreRequestType = "SELECT"|string;
   export type Role = string;
   export interface RoutingRule {
     /**
@@ -3316,6 +3438,37 @@ declare namespace S3 {
   export interface S3KeyFilter {
     FilterRules?: FilterRuleList;
   }
+  export interface S3Location {
+    /**
+     * The name of the bucket where the restore results will be placed.
+     */
+    BucketName: BucketName;
+    /**
+     * The prefix that is prepended to the restore results for this request.
+     */
+    Prefix: LocationPrefix;
+    Encryption?: Encryption;
+    /**
+     * The canned ACL to apply to the restore results.
+     */
+    CannedACL?: ObjectCannedACL;
+    /**
+     * A list of grants that control access to the staged results.
+     */
+    AccessControlList?: Grants;
+    /**
+     * The tag-set that is applied to the restore results.
+     */
+    Tagging?: Tagging;
+    /**
+     * A list of metadata to store with the restore results in S3.
+     */
+    UserMetadata?: UserMetadata;
+    /**
+     * The class of storage used to store the restore results.
+     */
+    StorageClass?: StorageClass;
+  }
   export type SSECustomerAlgorithm = string;
   export type SSECustomerKey = Buffer|Uint8Array|Blob|string;
   export type SSECustomerKeyMD5 = string;
@@ -3327,6 +3480,24 @@ declare namespace S3 {
   }
   export type SSEKMSKeyId = string;
   export interface SSES3 {
+  }
+  export interface SelectParameters {
+    /**
+     * Describes the serialization format of the object.
+     */
+    InputSerialization: InputSerialization;
+    /**
+     * The type of the provided expression (e.g., SQL).
+     */
+    ExpressionType: ExpressionType;
+    /**
+     * The expression that is used to query the object.
+     */
+    Expression: Expression;
+    /**
+     * Describes how the results of the Select job are serialized.
+     */
+    OutputSerialization: OutputSerialization;
   }
   export type ServerSideEncryption = "AES256"|"aws:kms"|string;
   export interface ServerSideEncryptionByDefault {
@@ -3608,6 +3779,7 @@ declare namespace S3 {
     SSECustomerKeyMD5?: SSECustomerKeyMD5;
     RequestPayer?: RequestPayer;
   }
+  export type UserMetadata = MetadataEntry[];
   export type Value = string;
   export type VersionIdMarker = string;
   export interface VersioningConfiguration {

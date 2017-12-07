@@ -112,5 +112,21 @@ module.exports = {
   MediaLive: require('./medialive'),
   MediaPackage: require('./mediapackage'),
   MediaStore: require('./mediastore'),
-  MediaStoreData: require('./mediastoredata')
+  MediaStoreData: require('./mediastoredata'),
+  AppSync: require('./appsync'),
+  GuardDuty: require('./guardduty'),
+  MQ: require('./mq'),
+  Comprehend: require('./comprehend'),
+  IoTJobsDataPlane: require('./iotjobsdataplane'),
+  KinesisVideoArchivedMedia: require('./kinesisvideoarchivedmedia'),
+  KinesisVideoMedia: require('./kinesisvideomedia'),
+  KinesisVideo: require('./kinesisvideo'),
+  SageMakerRuntime: require('./sagemakerruntime'),
+  SageMaker: require('./sagemaker'),
+  Translate: require('./translate'),
+  ResourceGroups: require('./resourcegroups'),
+  AlexaForBusiness: require('./alexaforbusiness'),
+  Cloud9: require('./cloud9'),
+  ServerlessApplicationRepository: require('./serverlessapplicationrepository'),
+  ServiceDiscovery: require('./servicediscovery')
 };

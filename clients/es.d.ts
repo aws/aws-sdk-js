@@ -192,6 +192,10 @@ declare namespace ES {
      */
     VPCOptions?: VPCOptions;
     /**
+     * Specifies the Encryption At Rest Options.
+     */
+    EncryptionAtRestOptions?: EncryptionAtRestOptions;
+    /**
      *  Option to allow references to indices in an HTTP request body. Must be false when configuring access to individual sub-resources. By default, the value is true. See Configuration Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptions;
@@ -372,6 +376,10 @@ declare namespace ES {
      */
     VPCOptions?: VPCDerivedInfoStatus;
     /**
+     * Specifies the EncryptionAtRestOptions for the Elasticsearch domain.
+     */
+    EncryptionAtRestOptions?: EncryptionAtRestOptionsStatus;
+    /**
      * Specifies the AdvancedOptions for the domain. See Configuring Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptionsStatus;
@@ -435,6 +443,10 @@ declare namespace ES {
      */
     VPCOptions?: VPCDerivedInfo;
     /**
+     *  Specifies the status of the EncryptionAtRestOptions.
+     */
+    EncryptionAtRestOptions?: EncryptionAtRestOptions;
+    /**
      * Specifies the status of the AdvancedOptions
      */
     AdvancedOptions?: AdvancedOptions;
@@ -457,6 +469,26 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type ElasticsearchVersionString = string;
+  export interface EncryptionAtRestOptions {
+    /**
+     * Specifies the option to enable Encryption At Rest.
+     */
+    Enabled?: Boolean;
+    /**
+     *  Specifies the KMS Key ID for Encryption At Rest options.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export interface EncryptionAtRestOptionsStatus {
+    /**
+     *  Specifies the Encryption At Rest options for the specified Elasticsearch domain.
+     */
+    Options: EncryptionAtRestOptions;
+    /**
+     *  Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.
+     */
+    Status: OptionStatus;
+  }
   export type EndpointsMap = {[key: string]: ServiceUrl};
   export type ErrorMessage = string;
   export interface InstanceCountLimits {
@@ -468,6 +500,7 @@ declare namespace ES {
   }
   export type InstanceRole = string;
   export type IntegerClass = number;
+  export type KmsKeyId = string;
   export type LimitName = string;
   export type LimitValue = string;
   export type LimitValueList = LimitValue[];

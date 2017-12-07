@@ -124,6 +124,30 @@ declare class Greengrass extends Service {
    */
   createLoggerDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateLoggerDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateLoggerDefinitionVersionResponse, AWSError>;
   /**
+   * Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ``CreateResourceDefinitionVersion`` later.
+   */
+  createResourceDefinition(params: Greengrass.Types.CreateResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionResponse, AWSError>;
+  /**
+   * Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ``CreateResourceDefinitionVersion`` later.
+   */
+  createResourceDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionResponse, AWSError>;
+  /**
+   * Create a version of a resource definition that has already been defined.
+   */
+  createResourceDefinitionVersion(params: Greengrass.Types.CreateResourceDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionVersionResponse, AWSError>;
+  /**
+   * Create a version of a resource definition that has already been defined.
+   */
+  createResourceDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionVersionResponse, AWSError>;
+  /**
+   * Creates an Iot Job that will trigger your Greengrass Cores to update the software they are running.
+   */
+  createSoftwareUpdateJob(params: Greengrass.Types.CreateSoftwareUpdateJobRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateSoftwareUpdateJobResponse) => void): Request<Greengrass.Types.CreateSoftwareUpdateJobResponse, AWSError>;
+  /**
+   * Creates an Iot Job that will trigger your Greengrass Cores to update the software they are running.
+   */
+  createSoftwareUpdateJob(callback?: (err: AWSError, data: Greengrass.Types.CreateSoftwareUpdateJobResponse) => void): Request<Greengrass.Types.CreateSoftwareUpdateJobResponse, AWSError>;
+  /**
    * Creates a subscription definition. You may optionally provide the initial version of the subscription definition or use ``CreateSubscriptionDefinitionVersion`` at a later time.
    */
   createSubscriptionDefinition(params: Greengrass.Types.CreateSubscriptionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionResponse, AWSError>;
@@ -179,6 +203,14 @@ declare class Greengrass extends Service {
    * Deletes a logger definition. The logger definition must not have been used in a deployment.
    */
   deleteLoggerDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteLoggerDefinitionResponse) => void): Request<Greengrass.Types.DeleteLoggerDefinitionResponse, AWSError>;
+  /**
+   * Deletes a resource definition.
+   */
+  deleteResourceDefinition(params: Greengrass.Types.DeleteResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteResourceDefinitionResponse) => void): Request<Greengrass.Types.DeleteResourceDefinitionResponse, AWSError>;
+  /**
+   * Deletes a resource definition.
+   */
+  deleteResourceDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteResourceDefinitionResponse) => void): Request<Greengrass.Types.DeleteResourceDefinitionResponse, AWSError>;
   /**
    * Deletes a subscription definition. The subscription definition must not have been used in a deployment.
    */
@@ -324,6 +356,22 @@ declare class Greengrass extends Service {
    */
   getLoggerDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetLoggerDefinitionVersionResponse) => void): Request<Greengrass.Types.GetLoggerDefinitionVersionResponse, AWSError>;
   /**
+   * Retrieves information about a resource definition, such as its creation time and latest version.
+   */
+  getResourceDefinition(params: Greengrass.Types.GetResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a resource definition, such as its creation time and latest version.
+   */
+  getResourceDefinition(callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a resource definition version, such as which resources are included in the version.
+   */
+  getResourceDefinitionVersion(params: Greengrass.Types.GetResourceDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionVersionResponse, AWSError>;
+  /**
+   * Retrieves information about a resource definition version, such as which resources are included in the version.
+   */
+  getResourceDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionVersionResponse, AWSError>;
+  /**
    * Retrieves the service role that is attached to the account.
    */
   getServiceRoleForAccount(params: Greengrass.Types.GetServiceRoleForAccountRequest, callback?: (err: AWSError, data: Greengrass.Types.GetServiceRoleForAccountResponse) => void): Request<Greengrass.Types.GetServiceRoleForAccountResponse, AWSError>;
@@ -444,6 +492,22 @@ declare class Greengrass extends Service {
    */
   listLoggerDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListLoggerDefinitionsResponse) => void): Request<Greengrass.Types.ListLoggerDefinitionsResponse, AWSError>;
   /**
+   * Lists the versions of a resource definition.
+   */
+  listResourceDefinitionVersions(params: Greengrass.Types.ListResourceDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionVersionsResponse, AWSError>;
+  /**
+   * Lists the versions of a resource definition.
+   */
+  listResourceDefinitionVersions(callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionVersionsResponse, AWSError>;
+  /**
+   * Retrieves a list of resource definitions.
+   */
+  listResourceDefinitions(params: Greengrass.Types.ListResourceDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionsResponse, AWSError>;
+  /**
+   * Retrieves a list of resource definitions.
+   */
+  listResourceDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionsResponse, AWSError>;
+  /**
    * Lists the versions of a subscription definition.
    */
   listSubscriptionDefinitionVersions(params: Greengrass.Types.ListSubscriptionDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionVersionsResponse, AWSError>;
@@ -523,6 +587,14 @@ declare class Greengrass extends Service {
    * Updates a logger definition.
    */
   updateLoggerDefinition(callback?: (err: AWSError, data: Greengrass.Types.UpdateLoggerDefinitionResponse) => void): Request<Greengrass.Types.UpdateLoggerDefinitionResponse, AWSError>;
+  /**
+   * Updates a resource definition.
+   */
+  updateResourceDefinition(params: Greengrass.Types.UpdateResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateResourceDefinitionResponse) => void): Request<Greengrass.Types.UpdateResourceDefinitionResponse, AWSError>;
+  /**
+   * Updates a resource definition.
+   */
+  updateResourceDefinition(callback?: (err: AWSError, data: Greengrass.Types.UpdateResourceDefinitionResponse) => void): Request<Greengrass.Types.UpdateResourceDefinitionResponse, AWSError>;
   /**
    * Updates a subscription definition.
    */
@@ -945,9 +1017,13 @@ declare namespace Greengrass {
      */
     GroupId: __string;
     /**
-     * Logger definitionv ersion arn for this group.
+     * Logger definition version arn for this group.
      */
     LoggerDefinitionVersionArn?: __string;
+    /**
+     * Resource definition version arn for this group.
+     */
+    ResourceDefinitionVersionArn?: __string;
     /**
      * Subscription definition version arn for this group.
      */
@@ -1046,6 +1122,104 @@ declare namespace Greengrass {
      * Unique Id of a version.
      */
     Version?: __string;
+  }
+  export interface CreateResourceDefinitionRequest {
+    /**
+     * The client token used to request idempotent operations.
+     */
+    AmznClientToken?: __string;
+    /**
+     * Information on the initial version
+     */
+    InitialVersion?: ResourceDefinitionVersion;
+    /**
+     * Name of the resource definition
+     */
+    Name?: __string;
+  }
+  export interface CreateResourceDefinitionResponse {
+    /**
+     * Arn of the definition.
+     */
+    Arn?: __string;
+    /**
+     * Timestamp of when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * Id of the definition.
+     */
+    Id?: __string;
+    /**
+     * Last updated timestamp of the definition.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * Last version of the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * Latest version arn of the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * Name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface CreateResourceDefinitionVersionRequest {
+    /**
+     * The client token used to request idempotent operations.
+     */
+    AmznClientToken?: __string;
+    /**
+     * Resource definition Id.
+     */
+    ResourceDefinitionId: __string;
+    /**
+     * List of resources.
+     */
+    Resources?: ListOfResource;
+  }
+  export interface CreateResourceDefinitionVersionResponse {
+    /**
+     * Arn of the version.
+     */
+    Arn?: __string;
+    /**
+     * Timestamp of when the version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * Id of the resource container.
+     */
+    Id?: __string;
+    /**
+     * Unique Id of a version.
+     */
+    Version?: __string;
+  }
+  export interface CreateSoftwareUpdateJobRequest {
+    /**
+     * The client token used to request idempotent operations.
+     */
+    AmznClientToken?: __string;
+    S3UrlSignerRole?: S3UrlSignerRole;
+    SoftwareToUpdate?: SoftwareToUpdate;
+    UpdateAgentLogLevel?: UpdateAgentLogLevel;
+    UpdateTargets?: UpdateTargets;
+    UpdateTargetsArchitecture?: UpdateTargetsArchitecture;
+    UpdateTargetsOperatingSystem?: UpdateTargetsOperatingSystem;
+  }
+  export interface CreateSoftwareUpdateJobResponse {
+    /**
+     * The Iot Job Arn corresponding to this update.
+     */
+    IotJobArn?: __string;
+    /**
+     * The Iot Job Id corresponding to this update.
+     */
+    IotJobId?: __string;
   }
   export interface CreateSubscriptionDefinitionRequest {
     /**
@@ -1193,6 +1367,14 @@ declare namespace Greengrass {
   }
   export interface DeleteLoggerDefinitionResponse {
   }
+  export interface DeleteResourceDefinitionRequest {
+    /**
+     * Resource definition Id.
+     */
+    ResourceDefinitionId: __string;
+  }
+  export interface DeleteResourceDefinitionResponse {
+  }
   export interface DeleteSubscriptionDefinitionRequest {
     /**
      * subscription definition Id
@@ -1323,6 +1505,14 @@ declare namespace Greengrass {
     Timeout?: __integer;
   }
   export interface FunctionConfigurationEnvironment {
+    /**
+     * Flag to allow lambda access sys filesystem.
+     */
+    AccessSysfs?: __boolean;
+    /**
+     * Policies for the function to access resources.
+     */
+    ResourceAccessPolicies?: ListOfResourceAccessPolicy;
     /**
      * Environment variables for the lambda function.
      */
@@ -1600,7 +1790,7 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * Information on the definition.
+     * Information on the definition
      */
     Definition?: FunctionDefinitionVersion;
     /**
@@ -1792,6 +1982,74 @@ declare namespace Greengrass {
      */
     Version?: __string;
   }
+  export interface GetResourceDefinitionRequest {
+    /**
+     * Resource definition Id.
+     */
+    ResourceDefinitionId: __string;
+  }
+  export interface GetResourceDefinitionResponse {
+    /**
+     * Arn of the definition.
+     */
+    Arn?: __string;
+    /**
+     * Timestamp of when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * Id of the definition.
+     */
+    Id?: __string;
+    /**
+     * Last updated timestamp of the definition.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * Last version of the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * Latest version arn of the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * Name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface GetResourceDefinitionVersionRequest {
+    /**
+     * Resource definition Id.
+     */
+    ResourceDefinitionId: __string;
+    /**
+     * Resource definition version Id.
+     */
+    ResourceDefinitionVersionId: __string;
+  }
+  export interface GetResourceDefinitionVersionResponse {
+    /**
+     * Arn of the resource definition version.
+     */
+    Arn?: __string;
+    /**
+     * Timestamp of when the resource definition version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * Information on definition.
+     */
+    Definition?: ResourceDefinitionVersion;
+    /**
+     * Id of the resource definition the version belongs to.
+     */
+    Id?: __string;
+    /**
+     * Version of the resource definition version.
+     */
+    Version?: __string;
+  }
   export interface GetServiceRoleForAccountRequest {
   }
   export interface GetServiceRoleForAccountResponse {
@@ -1926,6 +2184,16 @@ declare namespace Greengrass {
      */
     Name?: __string;
   }
+  export interface GroupOwnerSetting {
+    /**
+     * Eanble the auto added group owner.
+     */
+    AutoAddGroupOwner?: __boolean;
+    /**
+     * Name of the group owner.
+     */
+    GroupOwner?: __string;
+  }
   export interface GroupVersion {
     /**
      * Core definition version arn for this group.
@@ -1940,9 +2208,13 @@ declare namespace Greengrass {
      */
     FunctionDefinitionVersionArn?: __string;
     /**
-     * Logger definitionv ersion arn for this group.
+     * Logger definition version arn for this group.
      */
     LoggerDefinitionVersionArn?: __string;
+    /**
+     * Resource definition version arn for this group.
+     */
+    ResourceDefinitionVersionArn?: __string;
     /**
      * Subscription definition version arn for this group.
      */
@@ -2222,8 +2494,54 @@ declare namespace Greengrass {
   export type ListOfGroupCertificateAuthorityProperties = GroupCertificateAuthorityProperties[];
   export type ListOfGroupInformation = GroupInformation[];
   export type ListOfLogger = Logger[];
+  export type ListOfResource = Resource[];
+  export type ListOfResourceAccessPolicy = ResourceAccessPolicy[];
   export type ListOfSubscription = Subscription[];
   export type ListOfVersionInformation = VersionInformation[];
+  export interface ListResourceDefinitionVersionsRequest {
+    /**
+     * Specifies the maximum number of list results to be returned in this page
+     */
+    MaxResults?: __string;
+    /**
+     * Specifies the pagination token used when iterating through a paginated request
+     */
+    NextToken?: __string;
+    /**
+     * Resource definition Id.
+     */
+    ResourceDefinitionId: __string;
+  }
+  export interface ListResourceDefinitionVersionsResponse {
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * Versions
+     */
+    Versions?: ListOfVersionInformation;
+  }
+  export interface ListResourceDefinitionsRequest {
+    /**
+     * Specifies the maximum number of list results to be returned in this page
+     */
+    MaxResults?: __string;
+    /**
+     * Specifies the pagination token used when iterating through a paginated request
+     */
+    NextToken?: __string;
+  }
+  export interface ListResourceDefinitionsResponse {
+    /**
+     * Definitions
+     */
+    Definitions?: ListOfDefinitionInformation;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
   export interface ListSubscriptionDefinitionVersionsRequest {
     /**
      * Specifies the maximum number of list results to be returned in this page
@@ -2278,6 +2596,30 @@ declare namespace Greengrass {
      */
     Versions?: ListOfVersionInformation;
   }
+  export interface LocalDeviceResourceData {
+    /**
+     * Group owner related settings for local resources.
+     */
+    GroupOwnerSetting?: GroupOwnerSetting;
+    /**
+     * Local source path of the resource.
+     */
+    SourcePath?: __string;
+  }
+  export interface LocalVolumeResourceData {
+    /**
+     * Local destination path of the resource.
+     */
+    DestinationPath?: __string;
+    /**
+     * Group owner related settings for local resources.
+     */
+    GroupOwnerSetting?: GroupOwnerSetting;
+    /**
+     * Local source path of the resource.
+     */
+    SourcePath?: __string;
+  }
   export interface Logger {
     /**
      * The component that will be subject to logs
@@ -2310,6 +2652,7 @@ declare namespace Greengrass {
   export type LoggerLevel = "DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
   export type LoggerType = "FileSystem"|"AWSCloudWatch"|string;
   export type MapOf__string = {[key: string]: __string};
+  export type Permission = "ro"|"rw"|string;
   export interface ResetDeploymentsRequest {
     /**
      * The client token used to request idempotent operations.
@@ -2334,6 +2677,48 @@ declare namespace Greengrass {
      */
     DeploymentId?: __string;
   }
+  export interface Resource {
+    /**
+     * Resource Id.
+     */
+    Id?: __string;
+    /**
+     * A descriptive resource name.
+     */
+    Name?: __string;
+    /**
+     * A container of data for all resource types.
+     */
+    ResourceDataContainer?: ResourceDataContainer;
+  }
+  export interface ResourceAccessPolicy {
+    /**
+     * The function's access permission to the resource.
+     */
+    Permission?: Permission;
+    /**
+     * Id of the resource. A reference to the resource definiton.
+     */
+    ResourceId?: __string;
+  }
+  export interface ResourceDataContainer {
+    /**
+     * Attributes that define the Local Device Resource.
+     */
+    LocalDeviceResourceData?: LocalDeviceResourceData;
+    /**
+     * Attributes that define the Local Volume Resource.
+     */
+    LocalVolumeResourceData?: LocalVolumeResourceData;
+  }
+  export interface ResourceDefinitionVersion {
+    /**
+     * List of resources.
+     */
+    Resources?: ListOfResource;
+  }
+  export type S3UrlSignerRole = string;
+  export type SoftwareToUpdate = "core"|"ota_agent"|string;
   export interface Subscription {
     /**
      * Element Id for this entry in the list.
@@ -2358,6 +2743,7 @@ declare namespace Greengrass {
      */
     Subscriptions?: ListOfSubscription;
   }
+  export type UpdateAgentLogLevel = "NONE"|"TRACE"|"DEBUG"|"VERBOSE"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
   export interface UpdateConnectivityInfoRequest {
     /**
      * Connectivity info list
@@ -2462,6 +2848,18 @@ declare namespace Greengrass {
   }
   export interface UpdateLoggerDefinitionResponse {
   }
+  export interface UpdateResourceDefinitionRequest {
+    /**
+     * name of the definition
+     */
+    Name?: __string;
+    /**
+     * Resource definition Id.
+     */
+    ResourceDefinitionId: __string;
+  }
+  export interface UpdateResourceDefinitionResponse {
+  }
   export interface UpdateSubscriptionDefinitionRequest {
     /**
      * name of the definition
@@ -2474,6 +2872,9 @@ declare namespace Greengrass {
   }
   export interface UpdateSubscriptionDefinitionResponse {
   }
+  export type UpdateTargets = __string[];
+  export type UpdateTargetsArchitecture = "armv7l"|"x86_64"|"aarch64"|string;
+  export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|string;
   export interface VersionInformation {
     /**
      * Arn of the version.

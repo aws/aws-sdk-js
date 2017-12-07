@@ -5,6 +5,7 @@
     "endpointPrefix":"iot",
     "protocol":"rest-json",
     "serviceFullName":"AWS IoT",
+    "serviceId":"IoT",
     "signatureVersion":"v4",
     "signingName":"execute-api",
     "uid":"iot-2015-05-28"
@@ -28,6 +29,57 @@
       ],
       "documentation":"<p>Accepts a pending certificate transfer. The default state of the certificate is INACTIVE.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p>"
     },
+    "AddThingToThingGroup":{
+      "name":"AddThingToThingGroup",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/thing-groups/addThingToThingGroup"
+      },
+      "input":{"shape":"AddThingToThingGroupRequest"},
+      "output":{"shape":"AddThingToThingGroupResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Adds a thing to a thing group.</p>"
+    },
+    "AssociateTargetsWithJob":{
+      "name":"AssociateTargetsWithJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/jobs/{jobId}/targets"
+      },
+      "input":{"shape":"AssociateTargetsWithJobRequest"},
+      "output":{"shape":"AssociateTargetsWithJobResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Associates a group with a continuous job. The following criteria must be met: </p> <ul> <li> <p>The job must have been created with the <code>targetSelection</code> field set to \"CONTINUOUS\".</p> </li> <li> <p>The job status must currently be \"IN_PROGRESS\".</p> </li> <li> <p>The total number of targets associated with a job must not exceed 100.</p> </li> </ul>"
+    },
+    "AttachPolicy":{
+      "name":"AttachPolicy",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/target-policies/{policyName}"
+      },
+      "input":{"shape":"AttachPolicyRequest"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Attaches a policy to the specified target.</p>"
+    },
     "AttachPrincipalPolicy":{
       "name":"AttachPrincipalPolicy",
       "http":{
@@ -44,7 +96,8 @@
         {"shape":"InternalFailureException"},
         {"shape":"LimitExceededException"}
       ],
-      "documentation":"<p>Attaches the specified policy to the specified principal (certificate or other credential).</p>"
+      "documentation":"<p>Attaches the specified policy to the specified principal (certificate or other credential).</p> <p> <b>Note:</b> This API is deprecated. Please use <a>AttachPolicy</a> instead.</p>",
+      "deprecated":true
     },
     "AttachThingPrincipal":{
       "name":"AttachThingPrincipal",
@@ -82,6 +135,59 @@
       ],
       "documentation":"<p>Cancels a pending transfer for the specified certificate.</p> <p> <b>Note</b> Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use <a>RejectCertificateTransfer</a> instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled.</p> <p>After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.</p>"
     },
+    "CancelJob":{
+      "name":"CancelJob",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/jobs/{jobId}/cancel"
+      },
+      "input":{"shape":"CancelJobRequest"},
+      "output":{"shape":"CancelJobResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Cancels a job.</p>"
+    },
+    "ClearDefaultAuthorizer":{
+      "name":"ClearDefaultAuthorizer",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/default-authorizer"
+      },
+      "input":{"shape":"ClearDefaultAuthorizerRequest"},
+      "output":{"shape":"ClearDefaultAuthorizerResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Clears the default authorizer.</p>"
+    },
+    "CreateAuthorizer":{
+      "name":"CreateAuthorizer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/authorizer/{authorizerName}"
+      },
+      "input":{"shape":"CreateAuthorizerRequest"},
+      "output":{"shape":"CreateAuthorizerResponse"},
+      "errors":[
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Creates an authorizer.</p>"
+    },
     "CreateCertificateFromCsr":{
       "name":"CreateCertificateFromCsr",
       "http":{
@@ -98,6 +204,24 @@
         {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Creates an X.509 certificate using the specified certificate signing request.</p> <p> <b>Note:</b> The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. </p> <p> <b>Note:</b> Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> <p>You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs.</p> <p>Assuming a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is:</p> <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR.</p> <p>The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process:</p> <p>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</p> <p>On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}</p> <p>On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:</p> <p>&gt; forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path\"</p>"
+    },
+    "CreateJob":{
+      "name":"CreateJob",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/jobs/{jobId}"
+      },
+      "input":{"shape":"CreateJobRequest"},
+      "output":{"shape":"CreateJobResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Creates a job.</p>"
     },
     "CreateKeysAndCertificate":{
       "name":"CreateKeysAndCertificate",
@@ -155,6 +279,25 @@
       ],
       "documentation":"<p>Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use <a>DeletePolicyVersion</a> to delete an existing version before you create a new one.</p> <p>Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).</p>"
     },
+    "CreateRoleAlias":{
+      "name":"CreateRoleAlias",
+      "http":{
+        "method":"POST",
+        "requestUri":"/role-aliases/{roleAlias}"
+      },
+      "input":{"shape":"CreateRoleAliasRequest"},
+      "output":{"shape":"CreateRoleAliasResponse"},
+      "errors":[
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Creates a role alias.</p>"
+    },
     "CreateThing":{
       "name":"CreateThing",
       "http":{
@@ -173,6 +316,22 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Creates a thing record in the thing registry.</p>"
+    },
+    "CreateThingGroup":{
+      "name":"CreateThingGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/thing-groups/{thingGroupName}"
+      },
+      "input":{"shape":"CreateThingGroupRequest"},
+      "output":{"shape":"CreateThingGroupResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Create a thing group.</p>"
     },
     "CreateThingType":{
       "name":"CreateThingType",
@@ -207,6 +366,25 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.</p>"
+    },
+    "DeleteAuthorizer":{
+      "name":"DeleteAuthorizer",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/authorizer/{authorizerName}"
+      },
+      "input":{"shape":"DeleteAuthorizerRequest"},
+      "output":{"shape":"DeleteAuthorizerResponse"},
+      "errors":[
+        {"shape":"DeleteConflictException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Deletes an authorizer.</p>"
     },
     "DeleteCACertificate":{
       "name":"DeleteCACertificate",
@@ -299,6 +477,25 @@
       ],
       "documentation":"<p>Deletes a CA certificate registration code.</p>"
     },
+    "DeleteRoleAlias":{
+      "name":"DeleteRoleAlias",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/role-aliases/{roleAlias}"
+      },
+      "input":{"shape":"DeleteRoleAliasRequest"},
+      "output":{"shape":"DeleteRoleAliasResponse"},
+      "errors":[
+        {"shape":"DeleteConflictException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Deletes a role alias</p>"
+    },
     "DeleteThing":{
       "name":"DeleteThing",
       "http":{
@@ -317,6 +514,22 @@
         {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Deletes the specified thing.</p>"
+    },
+    "DeleteThingGroup":{
+      "name":"DeleteThingGroup",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/thing-groups/{thingGroupName}"
+      },
+      "input":{"shape":"DeleteThingGroupRequest"},
+      "output":{"shape":"DeleteThingGroupResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"VersionConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Deletes a thing group.</p>"
     },
     "DeleteThingType":{
       "name":"DeleteThingType",
@@ -349,7 +562,21 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"UnauthorizedException"}
       ],
-      "documentation":"<p>Deletes the specified rule.</p>"
+      "documentation":"<p>Deletes the rule.</p>"
+    },
+    "DeleteV2LoggingLevel":{
+      "name":"DeleteV2LoggingLevel",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/v2LoggingLevel"
+      },
+      "input":{"shape":"DeleteV2LoggingLevelRequest"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Deletes a logging level.</p>"
     },
     "DeprecateThingType":{
       "name":"DeprecateThingType",
@@ -368,6 +595,24 @@
         {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Deprecates a thing type. You can not associate new things with deprecated thing type.</p>"
+    },
+    "DescribeAuthorizer":{
+      "name":"DescribeAuthorizer",
+      "http":{
+        "method":"GET",
+        "requestUri":"/authorizer/{authorizerName}"
+      },
+      "input":{"shape":"DescribeAuthorizerRequest"},
+      "output":{"shape":"DescribeAuthorizerResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Describes an authorizer.</p>"
     },
     "DescribeCACertificate":{
       "name":"DescribeCACertificate",
@@ -405,6 +650,24 @@
       ],
       "documentation":"<p>Gets information about the specified certificate.</p>"
     },
+    "DescribeDefaultAuthorizer":{
+      "name":"DescribeDefaultAuthorizer",
+      "http":{
+        "method":"GET",
+        "requestUri":"/default-authorizer"
+      },
+      "input":{"shape":"DescribeDefaultAuthorizerRequest"},
+      "output":{"shape":"DescribeDefaultAuthorizerResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Describes the default authorizer.</p>"
+    },
     "DescribeEndpoint":{
       "name":"DescribeEndpoint",
       "http":{
@@ -415,10 +678,93 @@
       "output":{"shape":"DescribeEndpointResponse"},
       "errors":[
         {"shape":"InternalFailureException"},
+        {"shape":"InvalidRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"ThrottlingException"}
       ],
       "documentation":"<p>Returns a unique endpoint specific to the AWS account making the call.</p>"
+    },
+    "DescribeEventConfigurations":{
+      "name":"DescribeEventConfigurations",
+      "http":{
+        "method":"GET",
+        "requestUri":"/event-configurations"
+      },
+      "input":{"shape":"DescribeEventConfigurationsRequest"},
+      "output":{"shape":"DescribeEventConfigurationsResponse"},
+      "errors":[
+        {"shape":"InternalFailureException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Describes event configurations.</p>"
+    },
+    "DescribeIndex":{
+      "name":"DescribeIndex",
+      "http":{
+        "method":"GET",
+        "requestUri":"/indices/{indexName}"
+      },
+      "input":{"shape":"DescribeIndexRequest"},
+      "output":{"shape":"DescribeIndexResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Describes a search index.</p>"
+    },
+    "DescribeJob":{
+      "name":"DescribeJob",
+      "http":{
+        "method":"GET",
+        "requestUri":"/jobs/{jobId}"
+      },
+      "input":{"shape":"DescribeJobRequest"},
+      "output":{"shape":"DescribeJobResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Describes a job.</p>"
+    },
+    "DescribeJobExecution":{
+      "name":"DescribeJobExecution",
+      "http":{
+        "method":"GET",
+        "requestUri":"/things/{thingName}/jobs/{jobId}"
+      },
+      "input":{"shape":"DescribeJobExecutionRequest"},
+      "output":{"shape":"DescribeJobExecutionResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Describes a job execution.</p>"
+    },
+    "DescribeRoleAlias":{
+      "name":"DescribeRoleAlias",
+      "http":{
+        "method":"GET",
+        "requestUri":"/role-aliases/{roleAlias}"
+      },
+      "input":{"shape":"DescribeRoleAliasRequest"},
+      "output":{"shape":"DescribeRoleAliasResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Describes a role alias.</p>"
     },
     "DescribeThing":{
       "name":"DescribeThing",
@@ -438,6 +784,39 @@
       ],
       "documentation":"<p>Gets information about the specified thing.</p>"
     },
+    "DescribeThingGroup":{
+      "name":"DescribeThingGroup",
+      "http":{
+        "method":"GET",
+        "requestUri":"/thing-groups/{thingGroupName}"
+      },
+      "input":{"shape":"DescribeThingGroupRequest"},
+      "output":{"shape":"DescribeThingGroupResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Describe a thing group.</p>"
+    },
+    "DescribeThingRegistrationTask":{
+      "name":"DescribeThingRegistrationTask",
+      "http":{
+        "method":"GET",
+        "requestUri":"/thing-registration-tasks/{taskId}"
+      },
+      "input":{"shape":"DescribeThingRegistrationTaskRequest"},
+      "output":{"shape":"DescribeThingRegistrationTaskResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Describes a bulk thing provisioning task.</p>"
+    },
     "DescribeThingType":{
       "name":"DescribeThingType",
       "http":{
@@ -456,6 +835,23 @@
       ],
       "documentation":"<p>Gets information about the specified thing type.</p>"
     },
+    "DetachPolicy":{
+      "name":"DetachPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/target-policies/{policyName}"
+      },
+      "input":{"shape":"DetachPolicyRequest"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Detaches a policy from the specified target.</p>"
+    },
     "DetachPrincipalPolicy":{
       "name":"DetachPrincipalPolicy",
       "http":{
@@ -471,7 +867,8 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Removes the specified policy from the specified certificate.</p>"
+      "documentation":"<p>Removes the specified policy from the specified certificate.</p> <p> <b>Note:</b> This API is deprecated. Please use <a>DetachPolicy</a> instead.</p>",
+      "deprecated":true
     },
     "DetachThingPrincipal":{
       "name":"DetachThingPrincipal",
@@ -504,7 +901,7 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"UnauthorizedException"}
       ],
-      "documentation":"<p>Disables the specified rule.</p>"
+      "documentation":"<p>Disables the rule.</p>"
     },
     "EnableTopicRule":{
       "name":"EnableTopicRule",
@@ -519,7 +916,59 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"UnauthorizedException"}
       ],
-      "documentation":"<p>Enables the specified rule.</p>"
+      "documentation":"<p>Enables the rule.</p>"
+    },
+    "GetEffectivePolicies":{
+      "name":"GetEffectivePolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/effective-policies"
+      },
+      "input":{"shape":"GetEffectivePoliciesRequest"},
+      "output":{"shape":"GetEffectivePoliciesResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Gets effective policies.</p>"
+    },
+    "GetIndexingConfiguration":{
+      "name":"GetIndexingConfiguration",
+      "http":{
+        "method":"GET",
+        "requestUri":"/indexing/config"
+      },
+      "input":{"shape":"GetIndexingConfigurationRequest"},
+      "output":{"shape":"GetIndexingConfigurationResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Gets the search configuration.</p>"
+    },
+    "GetJobDocument":{
+      "name":"GetJobDocument",
+      "http":{
+        "method":"GET",
+        "requestUri":"/jobs/{jobId}/job-document"
+      },
+      "input":{"shape":"GetJobDocumentRequest"},
+      "output":{"shape":"GetJobDocumentResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Gets a job document.</p>"
     },
     "GetLoggingOptions":{
       "name":"GetLoggingOptions",
@@ -603,7 +1052,58 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"UnauthorizedException"}
       ],
-      "documentation":"<p>Gets information about the specified rule.</p>"
+      "documentation":"<p>Gets information about the rule.</p>"
+    },
+    "GetV2LoggingOptions":{
+      "name":"GetV2LoggingOptions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v2LoggingOptions"
+      },
+      "input":{"shape":"GetV2LoggingOptionsRequest"},
+      "output":{"shape":"GetV2LoggingOptionsResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Gets the fine grained logging options.</p>"
+    },
+    "ListAttachedPolicies":{
+      "name":"ListAttachedPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/attached-policies/{target}"
+      },
+      "input":{"shape":"ListAttachedPoliciesRequest"},
+      "output":{"shape":"ListAttachedPoliciesResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Lists the policies attached to the specified thing group.</p>"
+    },
+    "ListAuthorizers":{
+      "name":"ListAuthorizers",
+      "http":{
+        "method":"GET",
+        "requestUri":"/authorizers/"
+      },
+      "input":{"shape":"ListAuthorizersRequest"},
+      "output":{"shape":"ListAuthorizersResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Lists the authorizers registered in your account.</p>"
     },
     "ListCACertificates":{
       "name":"ListCACertificates",
@@ -656,6 +1156,71 @@
       ],
       "documentation":"<p>List the device certificates signed by the specified CA certificate.</p>"
     },
+    "ListIndices":{
+      "name":"ListIndices",
+      "http":{
+        "method":"GET",
+        "requestUri":"/indices"
+      },
+      "input":{"shape":"ListIndicesRequest"},
+      "output":{"shape":"ListIndicesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Lists the search indices.</p>"
+    },
+    "ListJobExecutionsForJob":{
+      "name":"ListJobExecutionsForJob",
+      "http":{
+        "method":"GET",
+        "requestUri":"/jobs/{jobId}/things"
+      },
+      "input":{"shape":"ListJobExecutionsForJobRequest"},
+      "output":{"shape":"ListJobExecutionsForJobResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Lists the job executions for a job.</p>"
+    },
+    "ListJobExecutionsForThing":{
+      "name":"ListJobExecutionsForThing",
+      "http":{
+        "method":"GET",
+        "requestUri":"/things/{thingName}/jobs"
+      },
+      "input":{"shape":"ListJobExecutionsForThingRequest"},
+      "output":{"shape":"ListJobExecutionsForThingResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Lists the job executions for the specified thing.</p>"
+    },
+    "ListJobs":{
+      "name":"ListJobs",
+      "http":{
+        "method":"GET",
+        "requestUri":"/jobs"
+      },
+      "input":{"shape":"ListJobsRequest"},
+      "output":{"shape":"ListJobsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Lists jobs.</p>"
+    },
     "ListOutgoingCertificates":{
       "name":"ListOutgoingCertificates",
       "http":{
@@ -671,7 +1236,7 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Lists certificates that are being transfered but not yet accepted.</p>"
+      "documentation":"<p>Lists certificates that are being transferred but not yet accepted.</p>"
     },
     "ListPolicies":{
       "name":"ListPolicies",
@@ -706,7 +1271,8 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Lists the principals associated with the specified policy.</p>"
+      "documentation":"<p>Lists the principals associated with the specified policy.</p> <p> <b>Note:</b> This API is deprecated. Please use <a>ListTargetsForPolicy</a> instead.</p>",
+      "deprecated":true
     },
     "ListPolicyVersions":{
       "name":"ListPolicyVersions",
@@ -742,7 +1308,8 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"InternalFailureException"}
       ],
-      "documentation":"<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p>"
+      "documentation":"<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p> <p> <b>Note:</b> This API is deprecated. Please use <a>ListAttachedPolicies</a> instead.</p>",
+      "deprecated":true
     },
     "ListPrincipalThings":{
       "name":"ListPrincipalThings",
@@ -762,6 +1329,72 @@
       ],
       "documentation":"<p>Lists the things associated with the specified principal.</p>"
     },
+    "ListRoleAliases":{
+      "name":"ListRoleAliases",
+      "http":{
+        "method":"GET",
+        "requestUri":"/role-aliases"
+      },
+      "input":{"shape":"ListRoleAliasesRequest"},
+      "output":{"shape":"ListRoleAliasesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Lists the role aliases registered in your account.</p>"
+    },
+    "ListTargetsForPolicy":{
+      "name":"ListTargetsForPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/policy-targets/{policyName}"
+      },
+      "input":{"shape":"ListTargetsForPolicyRequest"},
+      "output":{"shape":"ListTargetsForPolicyResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>List targets for the specified policy.</p>"
+    },
+    "ListThingGroups":{
+      "name":"ListThingGroups",
+      "http":{
+        "method":"GET",
+        "requestUri":"/thing-groups"
+      },
+      "input":{"shape":"ListThingGroupsRequest"},
+      "output":{"shape":"ListThingGroupsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>List the thing groups in your account.</p>"
+    },
+    "ListThingGroupsForThing":{
+      "name":"ListThingGroupsForThing",
+      "http":{
+        "method":"GET",
+        "requestUri":"/things/{thingName}/thing-groups"
+      },
+      "input":{"shape":"ListThingGroupsForThingRequest"},
+      "output":{"shape":"ListThingGroupsForThingResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>List the thing groups to which the specified thing belongs.</p>"
+    },
     "ListThingPrincipals":{
       "name":"ListThingPrincipals",
       "http":{
@@ -779,6 +1412,38 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Lists the principals associated with the specified thing.</p>"
+    },
+    "ListThingRegistrationTaskReports":{
+      "name":"ListThingRegistrationTaskReports",
+      "http":{
+        "method":"GET",
+        "requestUri":"/thing-registration-tasks/{taskId}/reports"
+      },
+      "input":{"shape":"ListThingRegistrationTaskReportsRequest"},
+      "output":{"shape":"ListThingRegistrationTaskReportsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Information about the thing registration tasks.</p>"
+    },
+    "ListThingRegistrationTasks":{
+      "name":"ListThingRegistrationTasks",
+      "http":{
+        "method":"GET",
+        "requestUri":"/thing-registration-tasks"
+      },
+      "input":{"shape":"ListThingRegistrationTasksRequest"},
+      "output":{"shape":"ListThingRegistrationTasksResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>List bulk thing provisioning tasks.</p>"
     },
     "ListThingTypes":{
       "name":"ListThingTypes",
@@ -814,6 +1479,21 @@
       ],
       "documentation":"<p>Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. </p>"
     },
+    "ListThingsInThingGroup":{
+      "name":"ListThingsInThingGroup",
+      "http":{
+        "method":"GET",
+        "requestUri":"/thing-groups/{thingGroupName}/things"
+      },
+      "input":{"shape":"ListThingsInThingGroupRequest"},
+      "output":{"shape":"ListThingsInThingGroupResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Lists the things in the specified group.</p>"
+    },
     "ListTopicRules":{
       "name":"ListTopicRules",
       "http":{
@@ -828,6 +1508,22 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Lists the rules for the specific topic.</p>"
+    },
+    "ListV2LoggingLevels":{
+      "name":"ListV2LoggingLevels",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v2LoggingLevel"
+      },
+      "input":{"shape":"ListV2LoggingLevelsRequest"},
+      "output":{"shape":"ListV2LoggingLevelsResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"NotConfiguredException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Lists logging levels.</p>"
     },
     "RegisterCACertificate":{
       "name":"RegisterCACertificate",
@@ -871,6 +1567,25 @@
       ],
       "documentation":"<p>Registers a device certificate with AWS IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.</p>"
     },
+    "RegisterThing":{
+      "name":"RegisterThing",
+      "http":{
+        "method":"POST",
+        "requestUri":"/things"
+      },
+      "input":{"shape":"RegisterThingRequest"},
+      "output":{"shape":"RegisterThingResponse"},
+      "errors":[
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ConflictingResourceUpdateException"},
+        {"shape":"ResourceRegistrationFailureException"}
+      ],
+      "documentation":"<p>Provisions a thing.</p>"
+    },
     "RejectCertificateTransfer":{
       "name":"RejectCertificateTransfer",
       "http":{
@@ -889,6 +1604,22 @@
       ],
       "documentation":"<p>Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from <b>PENDING_TRANSFER</b> to <b>INACTIVE</b>.</p> <p>To check for pending certificate transfers, call <a>ListCertificates</a> to enumerate your certificates.</p> <p>This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.</p>"
     },
+    "RemoveThingFromThingGroup":{
+      "name":"RemoveThingFromThingGroup",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/thing-groups/removeThingFromThingGroup"
+      },
+      "input":{"shape":"RemoveThingFromThingGroupRequest"},
+      "output":{"shape":"RemoveThingFromThingGroupResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Remove the specified thing from the specified group.</p>"
+    },
     "ReplaceTopicRule":{
       "name":"ReplaceTopicRule",
       "http":{
@@ -903,7 +1634,45 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"UnauthorizedException"}
       ],
-      "documentation":"<p>Replaces the specified rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.</p>"
+      "documentation":"<p>Replaces the rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.</p>"
+    },
+    "SearchIndex":{
+      "name":"SearchIndex",
+      "http":{
+        "method":"POST",
+        "requestUri":"/indices/search"
+      },
+      "input":{"shape":"SearchIndexRequest"},
+      "output":{"shape":"SearchIndexResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidQueryException"},
+        {"shape":"IndexNotReadyException"}
+      ],
+      "documentation":"<p>The query search index.</p>"
+    },
+    "SetDefaultAuthorizer":{
+      "name":"SetDefaultAuthorizer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/default-authorizer"
+      },
+      "input":{"shape":"SetDefaultAuthorizerRequest"},
+      "output":{"shape":"SetDefaultAuthorizerResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Sets the default authorizer. This will be used if a websocket connection is made without specifying an authorizer.</p>"
     },
     "SetDefaultPolicyVersion":{
       "name":"SetDefaultPolicyVersion",
@@ -936,6 +1705,106 @@
       ],
       "documentation":"<p>Sets the logging options.</p>"
     },
+    "SetV2LoggingLevel":{
+      "name":"SetV2LoggingLevel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v2LoggingLevel"
+      },
+      "input":{"shape":"SetV2LoggingLevelRequest"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"NotConfiguredException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Sets the logging level.</p>"
+    },
+    "SetV2LoggingOptions":{
+      "name":"SetV2LoggingOptions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v2LoggingOptions"
+      },
+      "input":{"shape":"SetV2LoggingOptionsRequest"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Sets the logging options for the V2 logging service.</p>"
+    },
+    "StartThingRegistrationTask":{
+      "name":"StartThingRegistrationTask",
+      "http":{
+        "method":"POST",
+        "requestUri":"/thing-registration-tasks"
+      },
+      "input":{"shape":"StartThingRegistrationTaskRequest"},
+      "output":{"shape":"StartThingRegistrationTaskResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Creates a bulk thing provisioning task.</p>"
+    },
+    "StopThingRegistrationTask":{
+      "name":"StopThingRegistrationTask",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/thing-registration-tasks/{taskId}/cancel"
+      },
+      "input":{"shape":"StopThingRegistrationTaskRequest"},
+      "output":{"shape":"StopThingRegistrationTaskResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Cancels a bulk thing provisioning task.</p>"
+    },
+    "TestAuthorization":{
+      "name":"TestAuthorization",
+      "http":{
+        "method":"POST",
+        "requestUri":"/test-authorization"
+      },
+      "input":{"shape":"TestAuthorizationRequest"},
+      "output":{"shape":"TestAuthorizationResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Test custom authorization.</p>"
+    },
+    "TestInvokeAuthorizer":{
+      "name":"TestInvokeAuthorizer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/authorizer/{authorizerName}/test"
+      },
+      "input":{"shape":"TestInvokeAuthorizerRequest"},
+      "output":{"shape":"TestInvokeAuthorizerResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidResponseException"}
+      ],
+      "documentation":"<p>Invoke the specified custom authorizer for testing purposes.</p>"
+    },
     "TransferCertificate":{
       "name":"TransferCertificate",
       "http":{
@@ -955,6 +1824,25 @@
         {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Transfers the specified certificate to the specified AWS account.</p> <p>You can cancel the transfer until it is acknowledged by the recipient.</p> <p>No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target.</p> <p>The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it.</p> <p>The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.</p>"
+    },
+    "UpdateAuthorizer":{
+      "name":"UpdateAuthorizer",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/authorizer/{authorizerName}"
+      },
+      "input":{"shape":"UpdateAuthorizerRequest"},
+      "output":{"shape":"UpdateAuthorizerResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Updates an authorizer.</p>"
     },
     "UpdateCACertificate":{
       "name":"UpdateCACertificate",
@@ -991,6 +1879,56 @@
       ],
       "documentation":"<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>"
     },
+    "UpdateEventConfigurations":{
+      "name":"UpdateEventConfigurations",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/event-configurations"
+      },
+      "input":{"shape":"UpdateEventConfigurationsRequest"},
+      "output":{"shape":"UpdateEventConfigurationsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Updates the event configurations.</p>"
+    },
+    "UpdateIndexingConfiguration":{
+      "name":"UpdateIndexingConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/indexing/config"
+      },
+      "input":{"shape":"UpdateIndexingConfigurationRequest"},
+      "output":{"shape":"UpdateIndexingConfigurationResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Updates the search configuration.</p>"
+    },
+    "UpdateRoleAlias":{
+      "name":"UpdateRoleAlias",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/role-aliases/{roleAlias}"
+      },
+      "input":{"shape":"UpdateRoleAliasRequest"},
+      "output":{"shape":"UpdateRoleAliasResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Updates a role alias.</p>"
+    },
     "UpdateThing":{
       "name":"UpdateThing",
       "http":{
@@ -1009,6 +1947,39 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Updates the data for a thing.</p>"
+    },
+    "UpdateThingGroup":{
+      "name":"UpdateThingGroup",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/thing-groups/{thingGroupName}"
+      },
+      "input":{"shape":"UpdateThingGroupRequest"},
+      "output":{"shape":"UpdateThingGroupResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"VersionConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Update a thing group.</p>"
+    },
+    "UpdateThingGroupsForThing":{
+      "name":"UpdateThingGroupsForThing",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/thing-groups/updateThingGroupsForThing"
+      },
+      "input":{"shape":"UpdateThingGroupsForThingRequest"},
+      "output":{"shape":"UpdateThingGroupsForThingResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Updates the groups to which the thing belongs.</p>"
     }
   },
   "shapes":{
@@ -1095,9 +2066,113 @@
       "max":10,
       "min":0
     },
+    "ActionType":{
+      "type":"string",
+      "enum":[
+        "PUBLISH",
+        "SUBSCRIBE",
+        "RECEIVE",
+        "CONNECT"
+      ]
+    },
+    "AddThingToThingGroupRequest":{
+      "type":"structure",
+      "members":{
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The name of the group to which you are adding a thing.</p>"
+        },
+        "thingGroupArn":{
+          "shape":"ThingGroupArn",
+          "documentation":"<p>The ARN of the group to which you are adding a thing.</p>"
+        },
+        "thingName":{
+          "shape":"ThingName",
+          "documentation":"<p>The name of the thing to add to a group.</p>"
+        },
+        "thingArn":{
+          "shape":"ThingArn",
+          "documentation":"<p>The ARN of the thing to add to a group.</p>"
+        }
+      }
+    },
+    "AddThingToThingGroupResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "AlarmName":{"type":"string"},
     "AllowAutoRegistration":{"type":"boolean"},
+    "Allowed":{
+      "type":"structure",
+      "members":{
+        "policies":{
+          "shape":"Policies",
+          "documentation":"<p>A list of policies that allowed the authentication.</p>"
+        }
+      },
+      "documentation":"<p>Contains information that allowed the authorization.</p>"
+    },
     "AscendingOrder":{"type":"boolean"},
+    "AssociateTargetsWithJobRequest":{
+      "type":"structure",
+      "required":[
+        "targets",
+        "jobId"
+      ],
+      "members":{
+        "targets":{
+          "shape":"JobTargets",
+          "documentation":"<p>A list of thing group ARNs that define the targets of the job.</p>"
+        },
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>",
+          "location":"uri",
+          "locationName":"jobId"
+        },
+        "comment":{
+          "shape":"Comment",
+          "documentation":"<p>An optional comment string describing why the job was associated with the targets.</p>"
+        }
+      }
+    },
+    "AssociateTargetsWithJobResponse":{
+      "type":"structure",
+      "members":{
+        "jobArn":{
+          "shape":"JobArn",
+          "documentation":"<p>An ARN identifying the job.</p>"
+        },
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>"
+        },
+        "description":{
+          "shape":"JobDescription",
+          "documentation":"<p>A short text description of the job.</p>"
+        }
+      }
+    },
+    "AttachPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "policyName",
+        "target"
+      ],
+      "members":{
+        "policyName":{
+          "shape":"PolicyName",
+          "documentation":"<p>The name of the policy to attach.</p>",
+          "location":"uri",
+          "locationName":"policyName"
+        },
+        "target":{
+          "shape":"PolicyTarget",
+          "documentation":"<p>The identity to which the policy is attached.</p>"
+        }
+      }
+    },
     "AttachPrincipalPolicyRequest":{
       "type":"structure",
       "required":[
@@ -1169,7 +2244,6 @@
     },
     "AttributeValue":{
       "type":"string",
-      "documentation":"An attribute value for an Thing. An empty or null value in Update means that existing value for that attribute should be deleted. Empty and null values in create are ignored.",
       "max":800,
       "pattern":"[a-zA-Z0-9_.,@/:#-]*"
     },
@@ -1177,6 +2251,135 @@
       "type":"map",
       "key":{"shape":"AttributeName"},
       "value":{"shape":"AttributeValue"}
+    },
+    "AuthDecision":{
+      "type":"string",
+      "enum":[
+        "ALLOWED",
+        "EXPLICIT_DENY",
+        "IMPLICIT_DENY"
+      ]
+    },
+    "AuthInfo":{
+      "type":"structure",
+      "members":{
+        "actionType":{
+          "shape":"ActionType",
+          "documentation":"<p>The type of action for which the principal is being authorized.</p>"
+        },
+        "resources":{
+          "shape":"Resources",
+          "documentation":"<p>The resources for which the principal is being authorized to perform the specified action.</p>"
+        }
+      },
+      "documentation":"<p>A collection of authorization information.</p>"
+    },
+    "AuthInfos":{
+      "type":"list",
+      "member":{"shape":"AuthInfo"},
+      "max":10,
+      "min":1
+    },
+    "AuthResult":{
+      "type":"structure",
+      "members":{
+        "authInfo":{
+          "shape":"AuthInfo",
+          "documentation":"<p>Authorization information.</p>"
+        },
+        "allowed":{
+          "shape":"Allowed",
+          "documentation":"<p>The policies and statements that allowed the specified action.</p>"
+        },
+        "denied":{
+          "shape":"Denied",
+          "documentation":"<p>The policies and statements that denied the specified action.</p>"
+        },
+        "authDecision":{
+          "shape":"AuthDecision",
+          "documentation":"<p>The final authorization decision of this scenario. Multiple statements are taken into account when determining the authorization decision. An explicit deny statement can override multiple allow statements.</p>"
+        },
+        "missingContextValues":{
+          "shape":"MissingContextValues",
+          "documentation":"<p>Contains any missing context values found while evaluating policy.</p>"
+        }
+      },
+      "documentation":"<p>The authorizer result.</p>"
+    },
+    "AuthResults":{
+      "type":"list",
+      "member":{"shape":"AuthResult"}
+    },
+    "AuthorizerArn":{"type":"string"},
+    "AuthorizerDescription":{
+      "type":"structure",
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The authorizer name.</p>"
+        },
+        "authorizerArn":{
+          "shape":"AuthorizerArn",
+          "documentation":"<p>The authorizer ARN.</p>"
+        },
+        "authorizerFunctionArn":{
+          "shape":"AuthorizerFunctionArn",
+          "documentation":"<p>The authorizer's Lambda function ARN.</p>"
+        },
+        "tokenKeyName":{
+          "shape":"TokenKeyName",
+          "documentation":"<p>The key used to extract the token from the HTTP headers.</p>"
+        },
+        "tokenSigningPublicKeys":{
+          "shape":"PublicKeyMap",
+          "documentation":"<p>The public keys used to validate the token signature returned by your custom authentication service.</p>"
+        },
+        "status":{
+          "shape":"AuthorizerStatus",
+          "documentation":"<p>The status of the authorizer.</p>"
+        },
+        "creationDate":{
+          "shape":"DateType",
+          "documentation":"<p>The UNIX timestamp of when the authorizer was created.</p>"
+        },
+        "lastModifiedDate":{
+          "shape":"DateType",
+          "documentation":"<p>The UNIX timestamp of when the authorizer was last updated.</p>"
+        }
+      },
+      "documentation":"<p>The authorizer description.</p>"
+    },
+    "AuthorizerFunctionArn":{"type":"string"},
+    "AuthorizerName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\w=,@-]+"
+    },
+    "AuthorizerStatus":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "AuthorizerSummary":{
+      "type":"structure",
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The authorizer name.</p>"
+        },
+        "authorizerArn":{
+          "shape":"AuthorizerArn",
+          "documentation":"<p>The authorizer ARN.</p>"
+        }
+      },
+      "documentation":"<p>The authorizer summary.</p>"
+    },
+    "Authorizers":{
+      "type":"list",
+      "member":{"shape":"AuthorizerSummary"}
     },
     "AutoRegistrationStatus":{
       "type":"string",
@@ -1273,6 +2476,40 @@
       },
       "documentation":"<p>The input for the CancelCertificateTransfer operation.</p>"
     },
+    "CancelJobRequest":{
+      "type":"structure",
+      "required":["jobId"],
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>",
+          "location":"uri",
+          "locationName":"jobId"
+        },
+        "comment":{
+          "shape":"Comment",
+          "documentation":"<p>An optional comment string describing why the job was canceled.</p>"
+        }
+      }
+    },
+    "CancelJobResponse":{
+      "type":"structure",
+      "members":{
+        "jobArn":{
+          "shape":"JobArn",
+          "documentation":"<p>The job ARN.</p>"
+        },
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>"
+        },
+        "description":{
+          "shape":"JobDescription",
+          "documentation":"<p>A short text description of the job.</p>"
+        }
+      }
+    },
+    "CanceledThings":{"type":"integer"},
     "CannedAccessControlList":{
       "type":"string",
       "enum":[
@@ -1375,6 +2612,7 @@
     },
     "CertificatePem":{
       "type":"string",
+      "documentation":"<p>The PEM of a certificate.</p>",
       "max":65536,
       "min":1
     },
@@ -1420,6 +2658,16 @@
     "Certificates":{
       "type":"list",
       "member":{"shape":"Certificate"}
+    },
+    "ClearDefaultAuthorizerRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "ClearDefaultAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "ClientId":{"type":"string"},
     "CloudwatchAlarmAction":{
@@ -1487,6 +2735,78 @@
       },
       "documentation":"<p>Describes an action that captures a CloudWatch metric.</p>"
     },
+    "CognitoIdentityPoolId":{"type":"string"},
+    "Comment":{
+      "type":"string",
+      "max":2028,
+      "pattern":"[^\\p{C}]+"
+    },
+    "Configuration":{
+      "type":"structure",
+      "members":{
+        "Enabled":{
+          "shape":"Enabled",
+          "documentation":"<p>True to enable the configuration.</p>"
+        }
+      },
+      "documentation":"<p>Configuration.</p>"
+    },
+    "ConflictingResourceUpdateException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>A conflicting resource update exception. This exception is thrown when two pending updates cause a conflict.</p>",
+      "error":{"httpStatusCode":409},
+      "exception":true
+    },
+    "Count":{"type":"integer"},
+    "CreateAuthorizerRequest":{
+      "type":"structure",
+      "required":[
+        "authorizerName",
+        "authorizerFunctionArn",
+        "tokenKeyName",
+        "tokenSigningPublicKeys"
+      ],
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The authorizer name.</p>",
+          "location":"uri",
+          "locationName":"authorizerName"
+        },
+        "authorizerFunctionArn":{
+          "shape":"AuthorizerFunctionArn",
+          "documentation":"<p>The ARN of the authorizer's Lambda function.</p>"
+        },
+        "tokenKeyName":{
+          "shape":"TokenKeyName",
+          "documentation":"<p>The name of the token key used to extract the token from the HTTP headers.</p>"
+        },
+        "tokenSigningPublicKeys":{
+          "shape":"PublicKeyMap",
+          "documentation":"<p>The public keys used to verify the digital signature returned by your custom authentication service.</p>"
+        },
+        "status":{
+          "shape":"AuthorizerStatus",
+          "documentation":"<p>The status of the create authorizer request.</p>"
+        }
+      }
+    },
+    "CreateAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The authorizer's name.</p>"
+        },
+        "authorizerArn":{
+          "shape":"AuthorizerArn",
+          "documentation":"<p>The authorizer ARN.</p>"
+        }
+      }
+    },
     "CreateCertificateFromCsrRequest":{
       "type":"structure",
       "required":["certificateSigningRequest"],
@@ -1521,6 +2841,70 @@
         }
       },
       "documentation":"<p>The output from the CreateCertificateFromCsr operation.</p>"
+    },
+    "CreateJobRequest":{
+      "type":"structure",
+      "required":[
+        "jobId",
+        "targets"
+      ],
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>A job identifier which must be unique for your AWS account. We recommend using a UUID. Alpha-numeric characters, \"-\" and \"_\" are valid for use here.</p>",
+          "location":"uri",
+          "locationName":"jobId"
+        },
+        "targets":{
+          "shape":"JobTargets",
+          "documentation":"<p>A list of things and thing groups to which the job should be sent.</p>"
+        },
+        "documentSource":{
+          "shape":"JobDocumentSource",
+          "documentation":"<p>An S3 link to the job document.</p>"
+        },
+        "document":{
+          "shape":"JobDocument",
+          "documentation":"<p>The job document.</p>"
+        },
+        "description":{
+          "shape":"JobDescription",
+          "documentation":"<p>A short text description of the job.</p>"
+        },
+        "presignedUrlConfig":{
+          "shape":"PresignedUrlConfig",
+          "documentation":"<p>Configuration information for pre-signed S3 URLs.</p>"
+        },
+        "targetSelection":{
+          "shape":"TargetSelection",
+          "documentation":"<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p>"
+        },
+        "jobExecutionsRolloutConfig":{
+          "shape":"JobExecutionsRolloutConfig",
+          "documentation":"<p>Allows you to create a staged rollout of the job.</p>"
+        },
+        "documentParameters":{
+          "shape":"JobDocumentParameters",
+          "documentation":"<p>Parameters for the job document.</p>"
+        }
+      }
+    },
+    "CreateJobResponse":{
+      "type":"structure",
+      "members":{
+        "jobArn":{
+          "shape":"JobArn",
+          "documentation":"<p>The job ARN.</p>"
+        },
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job.</p>"
+        },
+        "description":{
+          "shape":"JobDescription",
+          "documentation":"<p>The job description.</p>"
+        }
+      }
     },
     "CreateKeysAndCertificateRequest":{
       "type":"structure",
@@ -1613,7 +2997,7 @@
         },
         "policyDocument":{
           "shape":"PolicyDocument",
-          "documentation":"<p>The JSON document that describes the policy. Minimum length of 1. Maximum length of 2048, excluding whitespaces</p>"
+          "documentation":"<p>The JSON document that describes the policy. Minimum length of 1. Maximum length of 2048, excluding whitespace.</p>"
         },
         "setAsDefault":{
           "shape":"SetAsDefault",
@@ -1646,6 +3030,79 @@
       },
       "documentation":"<p>The output of the CreatePolicyVersion operation.</p>"
     },
+    "CreateRoleAliasRequest":{
+      "type":"structure",
+      "required":[
+        "roleAlias",
+        "roleArn"
+      ],
+      "members":{
+        "roleAlias":{
+          "shape":"RoleAlias",
+          "documentation":"<p>The role alias that points to a role ARN. This allows you to change the role without having to update the device.</p>",
+          "location":"uri",
+          "locationName":"roleAlias"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The role ARN.</p>"
+        },
+        "credentialDurationSeconds":{
+          "shape":"CredentialDurationSeconds",
+          "documentation":"<p>How long (in seconds) the credentials will be valid.</p>"
+        }
+      }
+    },
+    "CreateRoleAliasResponse":{
+      "type":"structure",
+      "members":{
+        "roleAlias":{
+          "shape":"RoleAlias",
+          "documentation":"<p>The role alias.</p>"
+        },
+        "roleAliasArn":{
+          "shape":"RoleAliasArn",
+          "documentation":"<p>The role alias ARN.</p>"
+        }
+      }
+    },
+    "CreateThingGroupRequest":{
+      "type":"structure",
+      "required":["thingGroupName"],
+      "members":{
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The thing group name to create.</p>",
+          "location":"uri",
+          "locationName":"thingGroupName"
+        },
+        "parentGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The name of the parent thing group.</p>"
+        },
+        "thingGroupProperties":{
+          "shape":"ThingGroupProperties",
+          "documentation":"<p>The thing group properties.</p>"
+        }
+      }
+    },
+    "CreateThingGroupResponse":{
+      "type":"structure",
+      "members":{
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The thing group name.</p>"
+        },
+        "thingGroupArn":{
+          "shape":"ThingGroupArn",
+          "documentation":"<p>The thing group ARN.</p>"
+        },
+        "thingGroupId":{
+          "shape":"ThingGroupId",
+          "documentation":"<p>The thing group ID.</p>"
+        }
+      }
+    },
     "CreateThingRequest":{
       "type":"structure",
       "required":["thingName"],
@@ -1677,6 +3134,10 @@
         "thingArn":{
           "shape":"ThingArn",
           "documentation":"<p>The ARN of the new thing.</p>"
+        },
+        "thingId":{
+          "shape":"ThingId",
+          "documentation":"<p>The thing ID.</p>"
         }
       },
       "documentation":"<p>The output of the CreateThing operation.</p>"
@@ -1708,6 +3169,10 @@
         "thingTypeArn":{
           "shape":"ThingTypeArn",
           "documentation":"<p>The Amazon Resource Name (ARN) of the thing type.</p>"
+        },
+        "thingTypeId":{
+          "shape":"ThingTypeId",
+          "documentation":"<p>The thing type ID.</p>"
         }
       },
       "documentation":"<p>The output of the CreateThingType operation.</p>"
@@ -1735,7 +3200,29 @@
     },
     "CreatedAtDate":{"type":"timestamp"},
     "CreationDate":{"type":"timestamp"},
+    "CredentialDurationSeconds":{
+      "type":"integer",
+      "max":3600,
+      "min":900
+    },
     "DateType":{"type":"timestamp"},
+    "DeleteAuthorizerRequest":{
+      "type":"structure",
+      "required":["authorizerName"],
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The name of the authorizer to delete.</p>",
+          "location":"uri",
+          "locationName":"authorizerName"
+        }
+      }
+    },
+    "DeleteAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteCACertificateRequest":{
       "type":"structure",
       "required":["certificateId"],
@@ -1764,6 +3251,12 @@
           "documentation":"<p>The ID of the certificate.</p>",
           "location":"uri",
           "locationName":"certificateId"
+        },
+        "forceDelete":{
+          "shape":"ForceDelete",
+          "documentation":"<p>Forces a certificate request to be deleted.</p>",
+          "location":"querystring",
+          "locationName":"forceDelete"
         }
       },
       "documentation":"<p>The input for the DeleteCertificate operation.</p>"
@@ -1827,6 +3320,46 @@
       },
       "documentation":"<p>The output for the DeleteRegistrationCode operation.</p>"
     },
+    "DeleteRoleAliasRequest":{
+      "type":"structure",
+      "required":["roleAlias"],
+      "members":{
+        "roleAlias":{
+          "shape":"RoleAlias",
+          "documentation":"<p>The role alias to delete.</p>",
+          "location":"uri",
+          "locationName":"roleAlias"
+        }
+      }
+    },
+    "DeleteRoleAliasResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteThingGroupRequest":{
+      "type":"structure",
+      "required":["thingGroupName"],
+      "members":{
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The name of the thing group to delete.</p>",
+          "location":"uri",
+          "locationName":"thingGroupName"
+        },
+        "expectedVersion":{
+          "shape":"OptionalVersion",
+          "documentation":"<p>The expected version of the thing group to delete.</p>",
+          "location":"querystring",
+          "locationName":"expectedVersion"
+        }
+      }
+    },
+    "DeleteThingGroupResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteThingRequest":{
       "type":"structure",
       "required":["thingName"],
@@ -1884,7 +3417,42 @@
       },
       "documentation":"<p>The input for the DeleteTopicRule operation.</p>"
     },
+    "DeleteV2LoggingLevelRequest":{
+      "type":"structure",
+      "required":[
+        "targetType",
+        "targetName"
+      ],
+      "members":{
+        "targetType":{
+          "shape":"LogTargetType",
+          "documentation":"<p>The type of resource for which you are configuring logging. Must be <code>THING_Group</code>.</p>",
+          "location":"querystring",
+          "locationName":"targetType"
+        },
+        "targetName":{
+          "shape":"LogTargetName",
+          "documentation":"<p>The name of the resource for which you are configuring logging.</p>",
+          "location":"querystring",
+          "locationName":"targetName"
+        }
+      }
+    },
     "DeliveryStreamName":{"type":"string"},
+    "Denied":{
+      "type":"structure",
+      "members":{
+        "implicitDeny":{
+          "shape":"ImplicitDeny",
+          "documentation":"<p>Information that implicitly denies the authorization. When a policy doesn't explicitly deny or allow an action on a resource it is considered an implicit deny.</p>"
+        },
+        "explicitDeny":{
+          "shape":"ExplicitDeny",
+          "documentation":"<p>Information that explicitly denies the authorization. </p>"
+        }
+      },
+      "documentation":"<p>Contains information that denied the authorization.</p>"
+    },
     "DeprecateThingTypeRequest":{
       "type":"structure",
       "required":["thingTypeName"],
@@ -1909,6 +3477,27 @@
       "documentation":"<p>The output for the DeprecateThingType operation.</p>"
     },
     "DeprecationDate":{"type":"timestamp"},
+    "DescribeAuthorizerRequest":{
+      "type":"structure",
+      "required":["authorizerName"],
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The name of the authorizer to describe.</p>",
+          "location":"uri",
+          "locationName":"authorizerName"
+        }
+      }
+    },
+    "DescribeAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+        "authorizerDescription":{
+          "shape":"AuthorizerDescription",
+          "documentation":"<p>The authorizer description.</p>"
+        }
+      }
+    },
     "DescribeCACertificateRequest":{
       "type":"structure",
       "required":["certificateId"],
@@ -1928,6 +3517,10 @@
         "certificateDescription":{
           "shape":"CACertificateDescription",
           "documentation":"<p>The CA certificate description.</p>"
+        },
+        "registrationConfig":{
+          "shape":"RegistrationConfig",
+          "documentation":"<p>Information about the registration configuration.</p>"
         }
       },
       "documentation":"<p>The output from the DescribeCACertificate operation.</p>"
@@ -1955,9 +3548,29 @@
       },
       "documentation":"<p>The output of the DescribeCertificate operation.</p>"
     },
+    "DescribeDefaultAuthorizerRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeDefaultAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+        "authorizerDescription":{
+          "shape":"AuthorizerDescription",
+          "documentation":"<p>The default authorizer's description.</p>"
+        }
+      }
+    },
     "DescribeEndpointRequest":{
       "type":"structure",
       "members":{
+        "endpointType":{
+          "shape":"EndpointType",
+          "documentation":"<p>The endpoint type.</p>",
+          "location":"querystring",
+          "locationName":"endpointType"
+        }
       },
       "documentation":"<p>The input for the DescribeEndpoint operation.</p>"
     },
@@ -1970,6 +3583,245 @@
         }
       },
       "documentation":"<p>The output from the DescribeEndpoint operation.</p>"
+    },
+    "DescribeEventConfigurationsRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeEventConfigurationsResponse":{
+      "type":"structure",
+      "members":{
+        "eventConfigurations":{
+          "shape":"EventConfigurations",
+          "documentation":"<p>The event configurations.</p>"
+        },
+        "creationDate":{
+          "shape":"CreationDate",
+          "documentation":"<p>The creation date of the event configuration.</p>"
+        },
+        "lastModifiedDate":{
+          "shape":"LastModifiedDate",
+          "documentation":"<p>The date the event configurations were last modified.</p>"
+        }
+      }
+    },
+    "DescribeIndexRequest":{
+      "type":"structure",
+      "required":["indexName"],
+      "members":{
+        "indexName":{
+          "shape":"IndexName",
+          "documentation":"<p>The index name.</p>",
+          "location":"uri",
+          "locationName":"indexName"
+        }
+      }
+    },
+    "DescribeIndexResponse":{
+      "type":"structure",
+      "members":{
+        "indexName":{
+          "shape":"IndexName",
+          "documentation":"<p>The index name.</p>"
+        },
+        "indexStatus":{
+          "shape":"IndexStatus",
+          "documentation":"<p>The index status.</p>"
+        },
+        "schema":{
+          "shape":"IndexSchema",
+          "documentation":"<p>Contains a value that specifies the type of indexing performed. Valid values are:</p> <ol> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> </ol>"
+        }
+      }
+    },
+    "DescribeJobExecutionRequest":{
+      "type":"structure",
+      "required":[
+        "jobId",
+        "thingName"
+      ],
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>",
+          "location":"uri",
+          "locationName":"jobId"
+        },
+        "thingName":{
+          "shape":"ThingName",
+          "documentation":"<p>The name of the thing on which the job execution is running.</p>",
+          "location":"uri",
+          "locationName":"thingName"
+        },
+        "executionNumber":{
+          "shape":"ExecutionNumber",
+          "documentation":"<p>A string (consisting of the digits \"0\" through \"9\" which is used to specify a particular job execution on a particular device.</p>",
+          "location":"querystring",
+          "locationName":"executionNumber"
+        }
+      }
+    },
+    "DescribeJobExecutionResponse":{
+      "type":"structure",
+      "members":{
+        "execution":{
+          "shape":"JobExecution",
+          "documentation":"<p>Information about the job execution.</p>"
+        }
+      }
+    },
+    "DescribeJobRequest":{
+      "type":"structure",
+      "required":["jobId"],
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>",
+          "location":"uri",
+          "locationName":"jobId"
+        }
+      }
+    },
+    "DescribeJobResponse":{
+      "type":"structure",
+      "members":{
+        "documentSource":{
+          "shape":"JobDocumentSource",
+          "documentation":"<p>An S3 link to the job document.</p>"
+        },
+        "job":{
+          "shape":"Job",
+          "documentation":"<p>Information about the job.</p>"
+        }
+      }
+    },
+    "DescribeRoleAliasRequest":{
+      "type":"structure",
+      "required":["roleAlias"],
+      "members":{
+        "roleAlias":{
+          "shape":"RoleAlias",
+          "documentation":"<p>The role alias to describe.</p>",
+          "location":"uri",
+          "locationName":"roleAlias"
+        }
+      }
+    },
+    "DescribeRoleAliasResponse":{
+      "type":"structure",
+      "members":{
+        "roleAliasDescription":{
+          "shape":"RoleAliasDescription",
+          "documentation":"<p>The role alias description.</p>"
+        }
+      }
+    },
+    "DescribeThingGroupRequest":{
+      "type":"structure",
+      "required":["thingGroupName"],
+      "members":{
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The name of the thing group.</p>",
+          "location":"uri",
+          "locationName":"thingGroupName"
+        }
+      }
+    },
+    "DescribeThingGroupResponse":{
+      "type":"structure",
+      "members":{
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The name of the thing group.</p>"
+        },
+        "thingGroupId":{
+          "shape":"ThingGroupId",
+          "documentation":"<p>The thing group ID.</p>"
+        },
+        "thingGroupArn":{
+          "shape":"ThingGroupArn",
+          "documentation":"<p>The thing group ARN.</p>"
+        },
+        "version":{
+          "shape":"Version",
+          "documentation":"<p>The version of the thing group.</p>"
+        },
+        "thingGroupProperties":{
+          "shape":"ThingGroupProperties",
+          "documentation":"<p>The thing group properties.</p>"
+        },
+        "thingGroupMetadata":{
+          "shape":"ThingGroupMetadata",
+          "documentation":"<p>Thing group metadata.</p>"
+        }
+      }
+    },
+    "DescribeThingRegistrationTaskRequest":{
+      "type":"structure",
+      "required":["taskId"],
+      "members":{
+        "taskId":{
+          "shape":"TaskId",
+          "documentation":"<p>The task ID.</p>",
+          "location":"uri",
+          "locationName":"taskId"
+        }
+      }
+    },
+    "DescribeThingRegistrationTaskResponse":{
+      "type":"structure",
+      "members":{
+        "taskId":{
+          "shape":"TaskId",
+          "documentation":"<p>The task ID.</p>"
+        },
+        "creationDate":{
+          "shape":"CreationDate",
+          "documentation":"<p>The task creation date.</p>"
+        },
+        "lastModifiedDate":{
+          "shape":"LastModifiedDate",
+          "documentation":"<p>The date when the task was last modified.</p>"
+        },
+        "templateBody":{
+          "shape":"TemplateBody",
+          "documentation":"<p>The task's template.</p>"
+        },
+        "inputFileBucket":{
+          "shape":"RegistryS3BucketName",
+          "documentation":"<p>The S3 bucket that contains the input file.</p>"
+        },
+        "inputFileKey":{
+          "shape":"RegistryS3KeyName",
+          "documentation":"<p>The input file key.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The role ARN that grants access to the input file bucket.</p>"
+        },
+        "status":{
+          "shape":"Status",
+          "documentation":"<p>The status of the bulk thing provisioning task.</p>"
+        },
+        "message":{
+          "shape":"ErrorMessage",
+          "documentation":"<p>The message.</p>"
+        },
+        "successCount":{
+          "shape":"Count",
+          "documentation":"<p>The number of things successfully provisioned.</p>"
+        },
+        "failureCount":{
+          "shape":"Count",
+          "documentation":"<p>The number of things that failed to be provisioned.</p>"
+        },
+        "percentageProgress":{
+          "shape":"Percentage",
+          "documentation":"<p>The progress of the bulk provisioning task expressed as a percentage.</p>"
+        }
+      }
     },
     "DescribeThingRequest":{
       "type":"structure",
@@ -1994,6 +3846,14 @@
         "thingName":{
           "shape":"ThingName",
           "documentation":"<p>The name of the thing.</p>"
+        },
+        "thingId":{
+          "shape":"ThingId",
+          "documentation":"<p>The ID of the thing to describe.</p>"
+        },
+        "thingArn":{
+          "shape":"ThingArn",
+          "documentation":"<p>The ARN of the thing to describe.</p>"
         },
         "thingTypeName":{
           "shape":"ThingTypeName",
@@ -2030,6 +3890,14 @@
           "shape":"ThingTypeName",
           "documentation":"<p>The name of the thing type.</p>"
         },
+        "thingTypeId":{
+          "shape":"ThingTypeId",
+          "documentation":"<p>The thing type ID.</p>"
+        },
+        "thingTypeArn":{
+          "shape":"ThingTypeArn",
+          "documentation":"<p>The thing type ARN.</p>"
+        },
         "thingTypeProperties":{
           "shape":"ThingTypeProperties",
           "documentation":"<p>The ThingTypeProperties contains information about the thing type including description, and a list of searchable thing attribute names.</p>"
@@ -2042,6 +3910,25 @@
       "documentation":"<p>The output for the DescribeThingType operation.</p>"
     },
     "Description":{"type":"string"},
+    "DetachPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "policyName",
+        "target"
+      ],
+      "members":{
+        "policyName":{
+          "shape":"PolicyName",
+          "documentation":"<p>The policy to detach.</p>",
+          "location":"uri",
+          "locationName":"policyName"
+        },
+        "target":{
+          "shape":"PolicyTarget",
+          "documentation":"<p>The target from which the policy will be detached.</p>"
+        }
+      }
+    },
     "DetachPrincipalPolicyRequest":{
       "type":"structure",
       "required":[
@@ -2092,6 +3979,24 @@
       },
       "documentation":"<p>The output from the DetachThingPrincipal operation.</p>"
     },
+    "DetailsKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9:_-]+"
+    },
+    "DetailsMap":{
+      "type":"map",
+      "key":{"shape":"DetailsKey"},
+      "value":{"shape":"DetailsValue"}
+    },
+    "DetailsValue":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[^\\p{C}]*+"
+    },
+    "DisableAllLogs":{"type":"boolean"},
     "DisableTopicRuleRequest":{
       "type":"structure",
       "required":["ruleName"],
@@ -2179,6 +4084,28 @@
       ]
     },
     "DynamoOperation":{"type":"string"},
+    "EffectivePolicies":{
+      "type":"list",
+      "member":{"shape":"EffectivePolicy"}
+    },
+    "EffectivePolicy":{
+      "type":"structure",
+      "members":{
+        "policyName":{
+          "shape":"PolicyName",
+          "documentation":"<p>The policy name.</p>"
+        },
+        "policyArn":{
+          "shape":"PolicyArn",
+          "documentation":"<p>The policy ARN.</p>"
+        },
+        "policyDocument":{
+          "shape":"PolicyDocument",
+          "documentation":"<p>The IAM policy document.</p>"
+        }
+      },
+      "documentation":"<p>The policy that has the effect on the authorization results.</p>"
+    },
     "ElasticsearchAction":{
       "type":"structure",
       "required":[
@@ -2232,7 +4159,48 @@
       },
       "documentation":"<p>The input for the EnableTopicRuleRequest operation.</p>"
     },
+    "Enabled":{"type":"boolean"},
     "EndpointAddress":{"type":"string"},
+    "EndpointType":{"type":"string"},
+    "ErrorMessage":{
+      "type":"string",
+      "max":2048
+    },
+    "EventConfigurations":{
+      "type":"map",
+      "key":{"shape":"EventType"},
+      "value":{"shape":"Configuration"}
+    },
+    "EventType":{
+      "type":"string",
+      "enum":[
+        "THING",
+        "THING_GROUP",
+        "THING_TYPE",
+        "THING_GROUP_MEMBERSHIP",
+        "THING_GROUP_HIERARCHY",
+        "THING_TYPE_ASSOCIATION",
+        "JOB",
+        "JOB_EXECUTION"
+      ]
+    },
+    "ExecutionNumber":{"type":"long"},
+    "ExpiresInSec":{
+      "type":"long",
+      "max":3600,
+      "min":60
+    },
+    "ExplicitDeny":{
+      "type":"structure",
+      "members":{
+        "policies":{
+          "shape":"Policies",
+          "documentation":"<p>The policies that denied the authorization.</p>"
+        }
+      },
+      "documentation":"<p>Information that explicitly denies authorization.</p>"
+    },
+    "FailedThings":{"type":"integer"},
     "FirehoseAction":{
       "type":"structure",
       "required":[
@@ -2242,7 +4210,7 @@
       "members":{
         "roleArn":{
           "shape":"AwsArn",
-          "documentation":"<p>The IAM role that grants access to the Amazon Kinesis Firehost stream.</p>"
+          "documentation":"<p>The IAM role that grants access to the Amazon Kinesis Firehose stream.</p>"
         },
         "deliveryStreamName":{
           "shape":"DeliveryStreamName",
@@ -2260,7 +4228,76 @@
       "pattern":"([\\n\\t])|(\\r\\n)|(,)"
     },
     "Flag":{"type":"boolean"},
+    "ForceDelete":{"type":"boolean"},
     "FunctionArn":{"type":"string"},
+    "GEMaxResults":{
+      "type":"integer",
+      "max":10000,
+      "min":1
+    },
+    "GetEffectivePoliciesRequest":{
+      "type":"structure",
+      "members":{
+        "principal":{
+          "shape":"Principal",
+          "documentation":"<p>The principal.</p>"
+        },
+        "cognitoIdentityPoolId":{
+          "shape":"CognitoIdentityPoolId",
+          "documentation":"<p>The Cognito identity pool ID.</p>"
+        },
+        "thingName":{
+          "shape":"ThingName",
+          "documentation":"<p>The thing name.</p>",
+          "location":"querystring",
+          "locationName":"thingName"
+        }
+      }
+    },
+    "GetEffectivePoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "effectivePolicies":{
+          "shape":"EffectivePolicies",
+          "documentation":"<p>The effective policies.</p>"
+        }
+      }
+    },
+    "GetIndexingConfigurationRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "GetIndexingConfigurationResponse":{
+      "type":"structure",
+      "members":{
+        "thingIndexingConfiguration":{
+          "shape":"ThingIndexingConfiguration",
+          "documentation":"<p>Thing indexing configuration.</p>"
+        }
+      }
+    },
+    "GetJobDocumentRequest":{
+      "type":"structure",
+      "required":["jobId"],
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>",
+          "location":"uri",
+          "locationName":"jobId"
+        }
+      }
+    },
+    "GetJobDocumentResponse":{
+      "type":"structure",
+      "members":{
+        "document":{
+          "shape":"JobDocument",
+          "documentation":"<p>The job document content.</p>"
+        }
+      }
+    },
     "GetLoggingOptionsRequest":{
       "type":"structure",
       "members":{
@@ -2407,8 +4444,83 @@
       },
       "documentation":"<p>The output from the GetTopicRule operation.</p>"
     },
+    "GetV2LoggingOptionsRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "GetV2LoggingOptionsResponse":{
+      "type":"structure",
+      "members":{
+        "roleArn":{
+          "shape":"AwsArn",
+          "documentation":"<p>The IAM role ARN AWS IoT uses to write to your CloudWatch logs.</p>"
+        },
+        "defaultLogLevel":{
+          "shape":"LogLevel",
+          "documentation":"<p>The default log level.</p>"
+        },
+        "disableAllLogs":{
+          "shape":"DisableAllLogs",
+          "documentation":"<p>Disables all logs.</p>"
+        }
+      }
+    },
+    "GroupNameAndArn":{
+      "type":"structure",
+      "members":{
+        "groupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The group name.</p>"
+        },
+        "groupArn":{
+          "shape":"ThingGroupArn",
+          "documentation":"<p>The group ARN.</p>"
+        }
+      },
+      "documentation":"<p>The name and ARN of a group.</p>"
+    },
     "HashKeyField":{"type":"string"},
     "HashKeyValue":{"type":"string"},
+    "ImplicitDeny":{
+      "type":"structure",
+      "members":{
+        "policies":{
+          "shape":"Policies",
+          "documentation":"<p>Policies that don't contain a matching allow or deny statement for the specified action on the specified resource. </p>"
+        }
+      },
+      "documentation":"<p>Information that implicitly denies authorization. When policy doesn't explicitly deny or allow an action on a resource it is considered an implicit deny.</p>"
+    },
+    "InProgressThings":{"type":"integer"},
+    "IndexName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9:_-]+"
+    },
+    "IndexNamesList":{
+      "type":"list",
+      "member":{"shape":"IndexName"}
+    },
+    "IndexNotReadyException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The index is not ready.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "IndexSchema":{"type":"string"},
+    "IndexStatus":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "BUILDING",
+        "REBUILDING"
+      ]
+    },
     "InternalException":{
       "type":"structure",
       "members":{
@@ -2435,6 +4547,15 @@
       "exception":true,
       "fault":true
     },
+    "InvalidQueryException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The query is invalid.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "InvalidRequestException":{
       "type":"structure",
       "members":{
@@ -2447,9 +4568,340 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "InvalidResponseException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The response is invalid.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "IsAuthenticated":{"type":"boolean"},
     "IsDefaultVersion":{"type":"boolean"},
     "IsDisabled":{"type":"boolean"},
+    "Job":{
+      "type":"structure",
+      "members":{
+        "jobArn":{
+          "shape":"JobArn",
+          "documentation":"<p>An ARN identifying the job with format \"arn:aws:iot:region:account:job/jobId\".</p>"
+        },
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>"
+        },
+        "targetSelection":{
+          "shape":"TargetSelection",
+          "documentation":"<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a device when the thing representing the device is added to a target group, even after the job was completed by all things originally in the group. </p>"
+        },
+        "status":{
+          "shape":"JobStatus",
+          "documentation":"<p>The status of the job, one of <code>IN_PROGRESS</code>, <code>CANCELED</code>, or <code>COMPLETED</code>. </p>"
+        },
+        "comment":{
+          "shape":"Comment",
+          "documentation":"<p>If the job was updated, describes the reason for the update.</p>"
+        },
+        "targets":{
+          "shape":"JobTargets",
+          "documentation":"<p>A list of IoT things and thing groups to which the job should be sent.</p>"
+        },
+        "description":{
+          "shape":"JobDescription",
+          "documentation":"<p>A short text description of the job.</p>"
+        },
+        "presignedUrlConfig":{
+          "shape":"PresignedUrlConfig",
+          "documentation":"<p>Configuration for pre-signed S3 URLs.</p>"
+        },
+        "jobExecutionsRolloutConfig":{
+          "shape":"JobExecutionsRolloutConfig",
+          "documentation":"<p>Allows you to create a staged rollout of a job.</p>"
+        },
+        "createdAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job was created.</p>"
+        },
+        "lastUpdatedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job was last updated.</p>"
+        },
+        "completedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job was completed.</p>"
+        },
+        "jobProcessDetails":{
+          "shape":"JobProcessDetails",
+          "documentation":"<p>Details about the job process.</p>"
+        },
+        "documentParameters":{
+          "shape":"JobDocumentParameters",
+          "documentation":"<p>The parameters specified for the job document.</p>"
+        }
+      },
+      "documentation":"<p>The <code>Job</code> object contains details about a job.</p>"
+    },
+    "JobArn":{"type":"string"},
+    "JobDescription":{
+      "type":"string",
+      "max":2028,
+      "pattern":"[^\\p{C}]+"
+    },
+    "JobDocument":{
+      "type":"string",
+      "max":32768
+    },
+    "JobDocumentParameters":{
+      "type":"map",
+      "key":{"shape":"ParameterKey"},
+      "value":{"shape":"ParameterValue"},
+      "max":10
+    },
+    "JobDocumentSource":{
+      "type":"string",
+      "max":1350,
+      "min":1
+    },
+    "JobExecution":{
+      "type":"structure",
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to the job when it was created.</p>"
+        },
+        "status":{
+          "shape":"JobExecutionStatus",
+          "documentation":"<p>The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCESS, CANCELED, or REJECTED).</p>"
+        },
+        "statusDetails":{
+          "shape":"JobExecutionStatusDetails",
+          "documentation":"<p>A collection of name/value pairs that describe the status of the job execution.</p>"
+        },
+        "thingArn":{
+          "shape":"ThingArn",
+          "documentation":"<p>The ARN of the thing on which the job execution is running.</p>"
+        },
+        "queuedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job execution was queued.</p>"
+        },
+        "startedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job execution started.</p>"
+        },
+        "lastUpdatedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job execution was last updated.</p>"
+        },
+        "executionNumber":{
+          "shape":"ExecutionNumber",
+          "documentation":"<p>A string (consisting of the digits \"0\" through \"9\") which identifies this particular job execution on this particular device. It can be used in commands which return or update job execution information. </p>"
+        }
+      },
+      "documentation":"<p>The job execution object represents the execution of a job on a particular device.</p>"
+    },
+    "JobExecutionStatus":{
+      "type":"string",
+      "enum":[
+        "QUEUED",
+        "IN_PROGRESS",
+        "SUCCEEDED",
+        "FAILED",
+        "REJECTED",
+        "REMOVED",
+        "CANCELED"
+      ]
+    },
+    "JobExecutionStatusDetails":{
+      "type":"structure",
+      "members":{
+        "detailsMap":{
+          "shape":"DetailsMap",
+          "documentation":"<p>The job execution status.</p>"
+        }
+      },
+      "documentation":"<p>Details of the job execution status.</p>"
+    },
+    "JobExecutionSummary":{
+      "type":"structure",
+      "members":{
+        "status":{
+          "shape":"JobExecutionStatus",
+          "documentation":"<p>The status of the job execution.</p>"
+        },
+        "queuedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job execution was queued.</p>"
+        },
+        "startedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job execution started.</p>"
+        },
+        "lastUpdatedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job execution was last updated.</p>"
+        },
+        "executionNumber":{
+          "shape":"ExecutionNumber",
+          "documentation":"<p>A string (consisting of the digits \"0\" through \"9\") which identifies this particular job execution on this particular device. It can be used later in commands which return or update job execution information.</p>"
+        }
+      },
+      "documentation":"<p>The job execution summary.</p>"
+    },
+    "JobExecutionSummaryForJob":{
+      "type":"structure",
+      "members":{
+        "thingArn":{
+          "shape":"ThingArn",
+          "documentation":"<p>The ARN of the thing on which the job execution is running.</p>"
+        },
+        "jobExecutionSummary":{
+          "shape":"JobExecutionSummary",
+          "documentation":"<p>Contains a subset of information about a job execution.</p>"
+        }
+      },
+      "documentation":"<p>Contains a summary of information about job executions for a specific job.</p>"
+    },
+    "JobExecutionSummaryForJobList":{
+      "type":"list",
+      "member":{"shape":"JobExecutionSummaryForJob"}
+    },
+    "JobExecutionSummaryForThing":{
+      "type":"structure",
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>"
+        },
+        "jobExecutionSummary":{
+          "shape":"JobExecutionSummary",
+          "documentation":"<p>Contains a subset of information about a job execution.</p>"
+        }
+      },
+      "documentation":"<p>The job execution summary for a thing.</p>"
+    },
+    "JobExecutionSummaryForThingList":{
+      "type":"list",
+      "member":{"shape":"JobExecutionSummaryForThing"}
+    },
+    "JobExecutionsRolloutConfig":{
+      "type":"structure",
+      "members":{
+        "maximumPerMinute":{
+          "shape":"MaxJobExecutionsPerMin",
+          "documentation":"<p>The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.</p>"
+        }
+      },
+      "documentation":"<p>Allows you to create a staged rollout of a job.</p>"
+    },
+    "JobId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
+    "JobProcessDetails":{
+      "type":"structure",
+      "members":{
+        "processingTargets":{
+          "shape":"ProcessingTargetNameList",
+          "documentation":"<p>The devices on which the job is executing.</p>"
+        },
+        "numberOfCanceledThings":{
+          "shape":"CanceledThings",
+          "documentation":"<p>The number of things that cancelled the job.</p>"
+        },
+        "numberOfSucceededThings":{
+          "shape":"SucceededThings",
+          "documentation":"<p>The number of things which successfully completed the job.</p>"
+        },
+        "numberOfFailedThings":{
+          "shape":"FailedThings",
+          "documentation":"<p>The number of things that failed executing the job.</p>"
+        },
+        "numberOfRejectedThings":{
+          "shape":"RejectedThings",
+          "documentation":"<p>The number of things that rejected the job.</p>"
+        },
+        "numberOfQueuedThings":{
+          "shape":"QueuedThings",
+          "documentation":"<p>The number of things that are awaiting execution of the job.</p>"
+        },
+        "numberOfInProgressThings":{
+          "shape":"InProgressThings",
+          "documentation":"<p>The number of things currently executing the job.</p>"
+        },
+        "numberOfRemovedThings":{
+          "shape":"RemovedThings",
+          "documentation":"<p>The number of things that are no longer scheduled to execute the job because they have been deleted or have been removed from the group that was a target of the job.</p>"
+        }
+      },
+      "documentation":"<p>The job process details.</p>"
+    },
+    "JobStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "CANCELED",
+        "COMPLETED"
+      ]
+    },
+    "JobSummary":{
+      "type":"structure",
+      "members":{
+        "jobArn":{
+          "shape":"JobArn",
+          "documentation":"<p>The job ARN.</p>"
+        },
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>"
+        },
+        "thingGroupId":{
+          "shape":"ThingGroupId",
+          "documentation":"<p>The ID of the thing group.</p>"
+        },
+        "targetSelection":{
+          "shape":"TargetSelection",
+          "documentation":"<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group.</p>"
+        },
+        "status":{
+          "shape":"JobStatus",
+          "documentation":"<p>The job summary status.</p>"
+        },
+        "createdAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job was created.</p>"
+        },
+        "lastUpdatedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job was last updated.</p>"
+        },
+        "completedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The time, in milliseconds since the epoch, when the job completed.</p>"
+        }
+      },
+      "documentation":"<p>The job summary.</p>"
+    },
+    "JobSummaryList":{
+      "type":"list",
+      "member":{"shape":"JobSummary"}
+    },
+    "JobTargets":{
+      "type":"list",
+      "member":{"shape":"TargetArn"},
+      "min":1
+    },
+    "JsonDocument":{"type":"string"},
     "Key":{"type":"string"},
+    "KeyName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9:_-]+"
+    },
     "KeyPair":{
       "type":"structure",
       "members":{
@@ -2463,6 +4915,10 @@
         }
       },
       "documentation":"<p>Describes a key pair.</p>"
+    },
+    "KeyValue":{
+      "type":"string",
+      "max":5120
     },
     "KinesisAction":{
       "type":"structure",
@@ -2497,6 +4953,12 @@
       },
       "documentation":"<p>Describes an action to invoke a Lambda function.</p>"
     },
+    "LaserMaxResults":{
+      "type":"integer",
+      "max":250,
+      "min":1
+    },
+    "LastModifiedDate":{"type":"timestamp"},
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -2508,6 +4970,91 @@
       "documentation":"<p>The number of attached entities exceeds the limit.</p>",
       "error":{"httpStatusCode":410},
       "exception":true
+    },
+    "ListAttachedPoliciesRequest":{
+      "type":"structure",
+      "required":["target"],
+      "members":{
+        "target":{
+          "shape":"PolicyTarget",
+          "documentation":"<p>The group for which the policies will be listed.</p>",
+          "location":"uri",
+          "locationName":"target"
+        },
+        "recursive":{
+          "shape":"Recursive",
+          "documentation":"<p>When true, recursively list attached policies.</p>",
+          "location":"querystring",
+          "locationName":"recursive"
+        },
+        "marker":{
+          "shape":"Marker",
+          "documentation":"<p>The token to retrieve the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"marker"
+        },
+        "pageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of results to be returned per request.</p>",
+          "location":"querystring",
+          "locationName":"pageSize"
+        }
+      }
+    },
+    "ListAttachedPoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "policies":{
+          "shape":"Policies",
+          "documentation":"<p>The policies.</p>"
+        },
+        "nextMarker":{
+          "shape":"Marker",
+          "documentation":"<p>The token to retrieve the next set of results, or ``null`` if there are no more results.</p>"
+        }
+      }
+    },
+    "ListAuthorizersRequest":{
+      "type":"structure",
+      "members":{
+        "pageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"pageSize"
+        },
+        "marker":{
+          "shape":"Marker",
+          "documentation":"<p>A marker used to get the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"marker"
+        },
+        "ascendingOrder":{
+          "shape":"AscendingOrder",
+          "documentation":"<p>Return the list of authorizers in ascending alphabetical order.</p>",
+          "location":"querystring",
+          "locationName":"isAscendingOrder"
+        },
+        "status":{
+          "shape":"AuthorizerStatus",
+          "documentation":"<p>The status of the list authorizers request.</p>",
+          "location":"querystring",
+          "locationName":"status"
+        }
+      }
+    },
+    "ListAuthorizersResponse":{
+      "type":"structure",
+      "members":{
+        "authorizers":{
+          "shape":"Authorizers",
+          "documentation":"<p>The authorizers.</p>"
+        },
+        "nextMarker":{
+          "shape":"Marker",
+          "documentation":"<p>A marker used to get the next set of results.</p>"
+        }
+      }
     },
     "ListCACertificatesRequest":{
       "type":"structure",
@@ -2630,6 +5177,176 @@
       },
       "documentation":"<p>The output of the ListCertificates operation.</p>"
     },
+    "ListIndicesRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"QueryMaxResults",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListIndicesResponse":{
+      "type":"structure",
+      "members":{
+        "indexNames":{
+          "shape":"IndexNamesList",
+          "documentation":"<p>The index names.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
+    "ListJobExecutionsForJobRequest":{
+      "type":"structure",
+      "required":["jobId"],
+      "members":{
+        "jobId":{
+          "shape":"JobId",
+          "documentation":"<p>The unique identifier you assigned to this job when it was created.</p>",
+          "location":"uri",
+          "locationName":"jobId"
+        },
+        "status":{
+          "shape":"JobExecutionStatus",
+          "documentation":"<p>The status of the job.</p>",
+          "location":"querystring",
+          "locationName":"status"
+        },
+        "maxResults":{
+          "shape":"LaserMaxResults",
+          "documentation":"<p>The maximum number of results to be returned per request.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to retrieve the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListJobExecutionsForJobResponse":{
+      "type":"structure",
+      "members":{
+        "executionSummaries":{
+          "shape":"JobExecutionSummaryForJobList",
+          "documentation":"<p>A list of job execution summaries.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
+    "ListJobExecutionsForThingRequest":{
+      "type":"structure",
+      "required":["thingName"],
+      "members":{
+        "thingName":{
+          "shape":"ThingName",
+          "documentation":"<p>The thing name.</p>",
+          "location":"uri",
+          "locationName":"thingName"
+        },
+        "status":{
+          "shape":"JobExecutionStatus",
+          "documentation":"<p>An optional filter that lets you search for jobs that have the specified status.</p>",
+          "location":"querystring",
+          "locationName":"status"
+        },
+        "maxResults":{
+          "shape":"LaserMaxResults",
+          "documentation":"<p>The maximum number of results to be returned per request.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to retrieve the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListJobExecutionsForThingResponse":{
+      "type":"structure",
+      "members":{
+        "executionSummaries":{
+          "shape":"JobExecutionSummaryForThingList",
+          "documentation":"<p>A list of job execution summaries.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
+    "ListJobsRequest":{
+      "type":"structure",
+      "members":{
+        "status":{
+          "shape":"JobStatus",
+          "documentation":"<p>An optional filter that lets you search for jobs that have the specified status.</p>",
+          "location":"querystring",
+          "locationName":"status"
+        },
+        "targetSelection":{
+          "shape":"TargetSelection",
+          "documentation":"<p>Specifies whether the job will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the job (SNAPSHOT). If continuous, the job may also be run on a thing when a change is detected in a target. For example, a job will run on a thing when the thing is added to a target group, even after the job was completed by all things originally in the group. </p>",
+          "location":"querystring",
+          "locationName":"targetSelection"
+        },
+        "maxResults":{
+          "shape":"LaserMaxResults",
+          "documentation":"<p>The maximum number of results to return per request.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to retrieve the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>A filter that limits the returned jobs to those for the specified group.</p>",
+          "location":"querystring",
+          "locationName":"thingGroupName"
+        },
+        "thingGroupId":{
+          "shape":"ThingGroupId",
+          "documentation":"<p>A filter that limits the returned jobs to those for the specified group.</p>",
+          "location":"querystring",
+          "locationName":"thingGroupId"
+        }
+      }
+    },
+    "ListJobsResponse":{
+      "type":"structure",
+      "members":{
+        "jobs":{
+          "shape":"JobSummaryList",
+          "documentation":"<p>A list of jobs.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
     "ListOutgoingCertificatesRequest":{
       "type":"structure",
       "members":{
@@ -2659,7 +5376,7 @@
       "members":{
         "outgoingCertificates":{
           "shape":"OutgoingCertificates",
-          "documentation":"<p>The certificates that are being transfered but not yet accepted.</p>"
+          "documentation":"<p>The certificates that are being transferred but not yet accepted.</p>"
         },
         "nextMarker":{
           "shape":"Marker",
@@ -2825,7 +5542,7 @@
       "members":{
         "nextToken":{
           "shape":"NextToken",
-          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
           "location":"querystring",
           "locationName":"nextToken"
         },
@@ -2853,10 +5570,168 @@
         },
         "nextToken":{
           "shape":"NextToken",
-          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
         }
       },
       "documentation":"<p>The output from the ListPrincipalThings operation.</p>"
+    },
+    "ListRoleAliasesRequest":{
+      "type":"structure",
+      "members":{
+        "pageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"pageSize"
+        },
+        "marker":{
+          "shape":"Marker",
+          "documentation":"<p>A marker used to get the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"marker"
+        },
+        "ascendingOrder":{
+          "shape":"AscendingOrder",
+          "documentation":"<p>Return the list of role aliases in ascending alphabetical order.</p>",
+          "location":"querystring",
+          "locationName":"isAscendingOrder"
+        }
+      }
+    },
+    "ListRoleAliasesResponse":{
+      "type":"structure",
+      "members":{
+        "roleAliases":{
+          "shape":"RoleAliases",
+          "documentation":"<p>The role aliases.</p>"
+        },
+        "nextMarker":{
+          "shape":"Marker",
+          "documentation":"<p>A marker used to get the next set of results.</p>"
+        }
+      }
+    },
+    "ListTargetsForPolicyRequest":{
+      "type":"structure",
+      "required":["policyName"],
+      "members":{
+        "policyName":{
+          "shape":"PolicyName",
+          "documentation":"<p>The policy name.</p>",
+          "location":"uri",
+          "locationName":"policyName"
+        },
+        "marker":{
+          "shape":"Marker",
+          "documentation":"<p>A marker used to get the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"marker"
+        },
+        "pageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"pageSize"
+        }
+      }
+    },
+    "ListTargetsForPolicyResponse":{
+      "type":"structure",
+      "members":{
+        "targets":{
+          "shape":"PolicyTargets",
+          "documentation":"<p>The policy targets.</p>"
+        },
+        "nextMarker":{
+          "shape":"Marker",
+          "documentation":"<p>A marker used to get the next set of results.</p>"
+        }
+      }
+    },
+    "ListThingGroupsForThingRequest":{
+      "type":"structure",
+      "required":["thingName"],
+      "members":{
+        "thingName":{
+          "shape":"ThingName",
+          "documentation":"<p>The thing name.</p>",
+          "location":"uri",
+          "locationName":"thingName"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"RegistryMaxResults",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListThingGroupsForThingResponse":{
+      "type":"structure",
+      "members":{
+        "thingGroups":{
+          "shape":"ThingGroupNameAndArnList",
+          "documentation":"<p>The thing groups.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
+    "ListThingGroupsRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"RegistryMaxResults",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "parentGroup":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>A filter that limits the results to those with the specified parent group.</p>",
+          "location":"querystring",
+          "locationName":"parentGroup"
+        },
+        "namePrefixFilter":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>A filter that limits the results to those with the specified name prefix.</p>",
+          "location":"querystring",
+          "locationName":"namePrefixFilter"
+        },
+        "recursive":{
+          "shape":"RecursiveWithoutDefault",
+          "documentation":"<p>If true, return child groups as well.</p>",
+          "location":"querystring",
+          "locationName":"recursive"
+        }
+      }
+    },
+    "ListThingGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "thingGroups":{
+          "shape":"ThingGroupNameAndArnList",
+          "documentation":"<p>The thing groups.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
     },
     "ListThingPrincipalsRequest":{
       "type":"structure",
@@ -2880,6 +5755,92 @@
         }
       },
       "documentation":"<p>The output from the ListThingPrincipals operation.</p>"
+    },
+    "ListThingRegistrationTaskReportsRequest":{
+      "type":"structure",
+      "required":[
+        "taskId",
+        "reportType"
+      ],
+      "members":{
+        "taskId":{
+          "shape":"TaskId",
+          "documentation":"<p>The id of the task.</p>",
+          "location":"uri",
+          "locationName":"taskId"
+        },
+        "reportType":{
+          "shape":"ReportType",
+          "documentation":"<p>The type of task report.</p>",
+          "location":"querystring",
+          "locationName":"reportType"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to retrieve the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"RegistryMaxResults",
+          "documentation":"<p>The maximum number of results to return per request.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListThingRegistrationTaskReportsResponse":{
+      "type":"structure",
+      "members":{
+        "resourceLinks":{
+          "shape":"S3FileUrlList",
+          "documentation":"<p>Links to the task resources.</p>"
+        },
+        "reportType":{
+          "shape":"ReportType",
+          "documentation":"<p>The type of task report.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to retrieve the next set of results.</p>"
+        }
+      }
+    },
+    "ListThingRegistrationTasksRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"RegistryMaxResults",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "status":{
+          "shape":"Status",
+          "documentation":"<p>The status of the bulk thing provisioning task.</p>",
+          "location":"querystring",
+          "locationName":"status"
+        }
+      }
+    },
+    "ListThingRegistrationTasksResponse":{
+      "type":"structure",
+      "members":{
+        "taskIds":{
+          "shape":"TaskIdList",
+          "documentation":"<p>A list of bulk thing provisioning task IDs.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
     },
     "ListThingTypesRequest":{
       "type":"structure",
@@ -2919,12 +5880,55 @@
       },
       "documentation":"<p>The output for the ListThingTypes operation.</p>"
     },
+    "ListThingsInThingGroupRequest":{
+      "type":"structure",
+      "required":["thingGroupName"],
+      "members":{
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The thing group name.</p>",
+          "location":"uri",
+          "locationName":"thingGroupName"
+        },
+        "recursive":{
+          "shape":"Recursive",
+          "documentation":"<p>When true, list things in this thing group and in all child groups as well.</p>",
+          "location":"querystring",
+          "locationName":"recursive"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"RegistryMaxResults",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListThingsInThingGroupResponse":{
+      "type":"structure",
+      "members":{
+        "things":{
+          "shape":"ThingNameList",
+          "documentation":"<p>The things in the specified thing group.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
     "ListThingsRequest":{
       "type":"structure",
       "members":{
         "nextToken":{
           "shape":"NextToken",
-          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
           "location":"querystring",
           "locationName":"nextToken"
         },
@@ -2964,7 +5968,7 @@
         },
         "nextToken":{
           "shape":"NextToken",
-          "documentation":"<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
         }
       },
       "documentation":"<p>The output from the ListThings operation.</p>"
@@ -2979,7 +5983,7 @@
           "locationName":"topic"
         },
         "maxResults":{
-          "shape":"MaxResults",
+          "shape":"GEMaxResults",
           "documentation":"<p>The maximum number of results to return.</p>",
           "location":"querystring",
           "locationName":"maxResults"
@@ -3013,6 +6017,42 @@
       },
       "documentation":"<p>The output from the ListTopicRules operation.</p>"
     },
+    "ListV2LoggingLevelsRequest":{
+      "type":"structure",
+      "members":{
+        "targetType":{
+          "shape":"LogTargetType",
+          "documentation":"<p>The type of resource for which you are configuring logging. Must be <code>THING_Group</code>.</p>",
+          "location":"querystring",
+          "locationName":"targetType"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"SkyfallMaxResults",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListV2LoggingLevelsResponse":{
+      "type":"structure",
+      "members":{
+        "logTargetConfigurations":{
+          "shape":"LogTargetConfigurations",
+          "documentation":"<p>The logging configuration for a target.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
     "LogLevel":{
       "type":"string",
       "enum":[
@@ -3021,6 +6061,47 @@
         "ERROR",
         "WARN",
         "DISABLED"
+      ]
+    },
+    "LogTarget":{
+      "type":"structure",
+      "required":["targetType"],
+      "members":{
+        "targetType":{
+          "shape":"LogTargetType",
+          "documentation":"<p>The target type.</p>"
+        },
+        "targetName":{
+          "shape":"LogTargetName",
+          "documentation":"<p>The target name.</p>"
+        }
+      },
+      "documentation":"<p>A log target.</p>"
+    },
+    "LogTargetConfiguration":{
+      "type":"structure",
+      "members":{
+        "logTarget":{
+          "shape":"LogTarget",
+          "documentation":"<p>A log target</p>"
+        },
+        "logLevel":{
+          "shape":"LogLevel",
+          "documentation":"<p>The logging level.</p>"
+        }
+      },
+      "documentation":"<p>The target configuration.</p>"
+    },
+    "LogTargetConfigurations":{
+      "type":"list",
+      "member":{"shape":"LogTargetConfiguration"}
+    },
+    "LogTargetName":{"type":"string"},
+    "LogTargetType":{
+      "type":"string",
+      "enum":[
+        "DEFAULT",
+        "THING_GROUP"
       ]
     },
     "LoggingOptionsPayload":{
@@ -3033,7 +6114,7 @@
         },
         "logLevel":{
           "shape":"LogLevel",
-          "documentation":"<p>The logging level.</p>"
+          "documentation":"<p>The log level.</p>"
         }
       },
       "documentation":"<p>Describes the logging options payload.</p>"
@@ -3050,10 +6131,13 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
-    "Marker":{"type":"string"},
-    "MaxResults":{
+    "Marker":{
+      "type":"string",
+      "pattern":"[A-Za-z0-9+/]+={0,2}"
+    },
+    "MaxJobExecutionsPerMin":{
       "type":"integer",
-      "max":10000,
+      "max":1000,
       "min":1
     },
     "Message":{
@@ -3072,7 +6156,21 @@
     "MetricTimestamp":{"type":"string"},
     "MetricUnit":{"type":"string"},
     "MetricValue":{"type":"string"},
+    "MissingContextValue":{"type":"string"},
+    "MissingContextValues":{
+      "type":"list",
+      "member":{"shape":"MissingContextValue"}
+    },
     "NextToken":{"type":"string"},
+    "NotConfiguredException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The resource is not configured.</p>",
+      "error":{"httpStatusCode":404},
+      "exception":true
+    },
     "OptionalVersion":{"type":"long"},
     "OutgoingCertificate":{
       "type":"structure",
@@ -3102,7 +6200,7 @@
           "documentation":"<p>The certificate creation date.</p>"
         }
       },
-      "documentation":"<p>A certificate that has been transfered but not yet accepted.</p>"
+      "documentation":"<p>A certificate that has been transferred but not yet accepted.</p>"
     },
     "OutgoingCertificates":{
       "type":"list",
@@ -3113,8 +6211,31 @@
       "max":250,
       "min":1
     },
+    "Parameter":{"type":"string"},
+    "ParameterKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9:_-]+"
+    },
+    "ParameterValue":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[^\\p{C}]+"
+    },
+    "Parameters":{
+      "type":"map",
+      "key":{"shape":"Parameter"},
+      "value":{"shape":"Value"}
+    },
     "PartitionKey":{"type":"string"},
     "PayloadField":{"type":"string"},
+    "Percentage":{
+      "type":"integer",
+      "max":100,
+      "min":0
+    },
     "Policies":{
       "type":"list",
       "member":{"shape":"Policy"}
@@ -3135,11 +6256,24 @@
     },
     "PolicyArn":{"type":"string"},
     "PolicyDocument":{"type":"string"},
+    "PolicyDocuments":{
+      "type":"list",
+      "member":{"shape":"PolicyDocument"}
+    },
     "PolicyName":{
       "type":"string",
       "max":128,
       "min":1,
       "pattern":"[\\w+=,.@-]+"
+    },
+    "PolicyNames":{
+      "type":"list",
+      "member":{"shape":"PolicyName"}
+    },
+    "PolicyTarget":{"type":"string"},
+    "PolicyTargets":{
+      "type":"list",
+      "member":{"shape":"PolicyTarget"}
     },
     "PolicyVersion":{
       "type":"structure",
@@ -3167,8 +6301,28 @@
       "type":"list",
       "member":{"shape":"PolicyVersion"}
     },
+    "PresignedUrlConfig":{
+      "type":"structure",
+      "members":{
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p>"
+        },
+        "expiresInSec":{
+          "shape":"ExpiresInSec",
+          "documentation":"<p>How long (in seconds) pre-signed URLs are valid. Valid values are 60 - 3600, the default value is 3600 seconds. Pre-signed URLs are generated when Jobs receives an MQTT request for the job document.</p>"
+        }
+      },
+      "documentation":"<p>Configuration for pre-signed S3 URLs.</p>"
+    },
     "Principal":{"type":"string"},
     "PrincipalArn":{"type":"string"},
+    "PrincipalId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9]+"
+    },
     "Principals":{
       "type":"list",
       "member":{"shape":"PrincipalArn"}
@@ -3178,9 +6332,19 @@
       "min":1,
       "sensitive":true
     },
+    "ProcessingTargetName":{"type":"string"},
+    "ProcessingTargetNameList":{
+      "type":"list",
+      "member":{"shape":"ProcessingTargetName"}
+    },
     "PublicKey":{
       "type":"string",
       "min":1
+    },
+    "PublicKeyMap":{
+      "type":"map",
+      "key":{"shape":"KeyName"},
+      "value":{"shape":"KeyValue"}
     },
     "PutItemInput":{
       "type":"structure",
@@ -3193,9 +6357,23 @@
       },
       "documentation":"<p>The input for the DynamoActionVS action that specifies the DynamoDB table to which the message data will be written.</p>"
     },
+    "QueryMaxResults":{
+      "type":"integer",
+      "max":500,
+      "min":1
+    },
+    "QueryString":{
+      "type":"string",
+      "max":1000,
+      "min":1
+    },
+    "QueryVersion":{"type":"string"},
     "QueueUrl":{"type":"string"},
+    "QueuedThings":{"type":"integer"},
     "RangeKeyField":{"type":"string"},
     "RangeKeyValue":{"type":"string"},
+    "Recursive":{"type":"boolean"},
+    "RecursiveWithoutDefault":{"type":"boolean"},
     "RegisterCACertificateRequest":{
       "type":"structure",
       "required":[
@@ -3222,6 +6400,10 @@
           "documentation":"<p>Allows this CA certificate to be used for auto registration of device certificates.</p>",
           "location":"querystring",
           "locationName":"allowAutoRegistration"
+        },
+        "registrationConfig":{
+          "shape":"RegistrationConfig",
+          "documentation":"<p>Information about the registration configuration.</p>"
         }
       },
       "documentation":"<p>The input to the RegisterCACertificate operation.</p>"
@@ -3280,6 +6462,30 @@
       },
       "documentation":"<p>The output from the RegisterCertificate operation.</p>"
     },
+    "RegisterThingRequest":{
+      "type":"structure",
+      "required":["templateBody"],
+      "members":{
+        "templateBody":{
+          "shape":"TemplateBody",
+          "documentation":"<p>The provisioning template. </p>"
+        },
+        "parameters":{
+          "shape":"Parameters",
+          "documentation":"<p>The parameters for provisioning a thing.</p>"
+        }
+      }
+    },
+    "RegisterThingResponse":{
+      "type":"structure",
+      "members":{
+        "certificatePem":{"shape":"CertificatePem"},
+        "resourceArns":{
+          "shape":"ResourceArns",
+          "documentation":"<p>ARNs for the generated resources.</p>"
+        }
+      }
+    },
     "RegistrationCode":{
       "type":"string",
       "max":64,
@@ -3298,10 +6504,36 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "RegistrationConfig":{
+      "type":"structure",
+      "members":{
+        "templateBody":{
+          "shape":"TemplateBody",
+          "documentation":"<p>The template body.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The ARN of the role.</p>"
+        }
+      },
+      "documentation":"<p>The registration configuration.</p>"
+    },
     "RegistryMaxResults":{
       "type":"integer",
       "max":250,
       "min":1
+    },
+    "RegistryS3BucketName":{
+      "type":"string",
+      "max":256,
+      "min":3,
+      "pattern":"[a-zA-Z0-9._-]+"
+    },
+    "RegistryS3KeyName":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[a-zA-Z0-9!_.*'()-\\/]+"
     },
     "RejectCertificateTransferRequest":{
       "type":"structure",
@@ -3320,7 +6552,36 @@
       },
       "documentation":"<p>The input for the RejectCertificateTransfer operation.</p>"
     },
+    "RejectedThings":{"type":"integer"},
+    "RemoveAutoRegistration":{"type":"boolean"},
+    "RemoveThingFromThingGroupRequest":{
+      "type":"structure",
+      "members":{
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The group name.</p>"
+        },
+        "thingGroupArn":{
+          "shape":"ThingGroupArn",
+          "documentation":"<p>The group ARN.</p>"
+        },
+        "thingName":{
+          "shape":"ThingName",
+          "documentation":"<p>The name of the thing to remove from the group.</p>"
+        },
+        "thingArn":{
+          "shape":"ThingArn",
+          "documentation":"<p>The ARN of the thing to remove from the group.</p>"
+        }
+      }
+    },
+    "RemoveThingFromThingGroupResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "RemoveThingType":{"type":"boolean"},
+    "RemovedThings":{"type":"integer"},
     "ReplaceTopicRuleRequest":{
       "type":"structure",
       "required":[
@@ -3342,6 +6603,13 @@
       "documentation":"<p>The input for the ReplaceTopicRule operation.</p>",
       "payload":"topicRulePayload"
     },
+    "ReportType":{
+      "type":"string",
+      "enum":[
+        "ERRORS",
+        "RESULTS"
+      ]
+    },
     "RepublishAction":{
       "type":"structure",
       "required":[
@@ -3360,6 +6628,7 @@
       },
       "documentation":"<p>Describes an action to republish to another topic.</p>"
     },
+    "Resource":{"type":"string"},
     "ResourceAlreadyExistsException":{
       "type":"structure",
       "members":{
@@ -3380,6 +6649,13 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "ResourceArn":{"type":"string"},
+    "ResourceArns":{
+      "type":"map",
+      "key":{"shape":"ResourceLogicalId"},
+      "value":{"shape":"ResourceArn"}
+    },
+    "ResourceLogicalId":{"type":"string"},
     "ResourceNotFoundException":{
       "type":"structure",
       "members":{
@@ -3391,6 +6667,65 @@
       "documentation":"<p>The specified resource does not exist.</p>",
       "error":{"httpStatusCode":404},
       "exception":true
+    },
+    "ResourceRegistrationFailureException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The resource registration failed.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "Resources":{
+      "type":"list",
+      "member":{"shape":"Resource"}
+    },
+    "RoleAlias":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\w=,@-]+"
+    },
+    "RoleAliasArn":{"type":"string"},
+    "RoleAliasDescription":{
+      "type":"structure",
+      "members":{
+        "roleAlias":{
+          "shape":"RoleAlias",
+          "documentation":"<p>The role alias.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The role ARN.</p>"
+        },
+        "owner":{
+          "shape":"AwsAccountId",
+          "documentation":"<p>The role alias owner.</p>"
+        },
+        "credentialDurationSeconds":{
+          "shape":"CredentialDurationSeconds",
+          "documentation":"<p>The number of seconds for which the credential is valid.</p>"
+        },
+        "creationDate":{
+          "shape":"DateType",
+          "documentation":"<p>The UNIX timestamp of when the role alias was created.</p>"
+        },
+        "lastModifiedDate":{
+          "shape":"DateType",
+          "documentation":"<p>The UNIX timestamp of when the role alias was last modified.</p>"
+        }
+      },
+      "documentation":"<p>Role alias description.</p>"
+    },
+    "RoleAliases":{
+      "type":"list",
+      "member":{"shape":"RoleAlias"}
+    },
+    "RoleArn":{
+      "type":"string",
+      "max":2048,
+      "min":20
     },
     "RuleArn":{"type":"string"},
     "RuleName":{
@@ -3426,6 +6761,14 @@
       },
       "documentation":"<p>Describes an action to write data to an Amazon S3 bucket.</p>"
     },
+    "S3FileUrl":{
+      "type":"string",
+      "max":65535
+    },
+    "S3FileUrlList":{
+      "type":"list",
+      "member":{"shape":"S3FileUrl"}
+    },
     "SQL":{"type":"string"},
     "SalesforceAction":{
       "type":"structure",
@@ -3454,10 +6797,50 @@
       "type":"string",
       "min":40
     },
+    "SearchIndexRequest":{
+      "type":"structure",
+      "required":["queryString"],
+      "members":{
+        "indexName":{
+          "shape":"IndexName",
+          "documentation":"<p>The search index name.</p>"
+        },
+        "queryString":{
+          "shape":"QueryString",
+          "documentation":"<p>The search query string.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        },
+        "maxResults":{
+          "shape":"QueryMaxResults",
+          "documentation":"<p>The maximum number of results to return at one time.</p>"
+        },
+        "queryVersion":{
+          "shape":"QueryVersion",
+          "documentation":"<p>The query version.</p>"
+        }
+      }
+    },
+    "SearchIndexResponse":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        },
+        "things":{
+          "shape":"ThingDocumentList",
+          "documentation":"<p>The things that match the search query.</p>"
+        }
+      }
+    },
     "SearchableAttributes":{
       "type":"list",
       "member":{"shape":"AttributeName"}
     },
+    "Seconds":{"type":"integer"},
     "ServiceUnavailableException":{
       "type":"structure",
       "members":{
@@ -3474,6 +6857,29 @@
     "SetAsActive":{"type":"boolean"},
     "SetAsActiveFlag":{"type":"boolean"},
     "SetAsDefault":{"type":"boolean"},
+    "SetDefaultAuthorizerRequest":{
+      "type":"structure",
+      "required":["authorizerName"],
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The authorizer name.</p>"
+        }
+      }
+    },
+    "SetDefaultAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The authorizer name.</p>"
+        },
+        "authorizerArn":{
+          "shape":"AuthorizerArn",
+          "documentation":"<p>The authorizer ARN.</p>"
+        }
+      }
+    },
     "SetDefaultPolicyVersionRequest":{
       "type":"structure",
       "required":[
@@ -3507,6 +6913,45 @@
       },
       "documentation":"<p>The input for the SetLoggingOptions operation.</p>",
       "payload":"loggingOptionsPayload"
+    },
+    "SetV2LoggingLevelRequest":{
+      "type":"structure",
+      "required":[
+        "logTarget",
+        "logLevel"
+      ],
+      "members":{
+        "logTarget":{
+          "shape":"LogTarget",
+          "documentation":"<p>The log target.</p>"
+        },
+        "logLevel":{
+          "shape":"LogLevel",
+          "documentation":"<p>The log level.</p>"
+        }
+      }
+    },
+    "SetV2LoggingOptionsRequest":{
+      "type":"structure",
+      "members":{
+        "roleArn":{
+          "shape":"AwsArn",
+          "documentation":"<p>The role ARN that allows IoT to write to Cloudwatch logs.</p>"
+        },
+        "defaultLogLevel":{
+          "shape":"LogLevel",
+          "documentation":"<p>The default logging level.</p>"
+        },
+        "disableAllLogs":{
+          "shape":"DisableAllLogs",
+          "documentation":"<p>Set to true to disable all logs, otherwise set to false.</p>"
+        }
+      }
+    },
+    "SkyfallMaxResults":{
+      "type":"integer",
+      "max":250,
+      "min":1
     },
     "SnsAction":{
       "type":"structure",
@@ -3564,10 +7009,181 @@
       },
       "documentation":"<p>Describes an action to publish data to an Amazon SQS queue.</p>"
     },
+    "StartThingRegistrationTaskRequest":{
+      "type":"structure",
+      "required":[
+        "templateBody",
+        "inputFileBucket",
+        "inputFileKey",
+        "roleArn"
+      ],
+      "members":{
+        "templateBody":{
+          "shape":"TemplateBody",
+          "documentation":"<p>The provisioning template.</p>"
+        },
+        "inputFileBucket":{
+          "shape":"RegistryS3BucketName",
+          "documentation":"<p>The S3 bucket that contains the input file.</p>"
+        },
+        "inputFileKey":{
+          "shape":"RegistryS3KeyName",
+          "documentation":"<p>The name of input file within the S3 bucket. This file contains a newline delimited JSON file. Each line contains the parameter values to provision one device (thing).</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The IAM role ARN that grants permission the input file.</p>"
+        }
+      }
+    },
+    "StartThingRegistrationTaskResponse":{
+      "type":"structure",
+      "members":{
+        "taskId":{
+          "shape":"TaskId",
+          "documentation":"<p>The bulk thing provisioning task ID.</p>"
+        }
+      }
+    },
     "StateReason":{"type":"string"},
     "StateValue":{"type":"string"},
+    "Status":{
+      "type":"string",
+      "enum":[
+        "InProgress",
+        "Completed",
+        "Failed",
+        "Cancelled",
+        "Cancelling"
+      ]
+    },
+    "StopThingRegistrationTaskRequest":{
+      "type":"structure",
+      "required":["taskId"],
+      "members":{
+        "taskId":{
+          "shape":"TaskId",
+          "documentation":"<p>The bulk thing provisioning task ID.</p>",
+          "location":"uri",
+          "locationName":"taskId"
+        }
+      }
+    },
+    "StopThingRegistrationTaskResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "StreamName":{"type":"string"},
+    "SucceededThings":{"type":"integer"},
     "TableName":{"type":"string"},
+    "TargetArn":{"type":"string"},
+    "TargetSelection":{
+      "type":"string",
+      "enum":[
+        "CONTINUOUS",
+        "SNAPSHOT"
+      ]
+    },
+    "TaskId":{
+      "type":"string",
+      "max":40
+    },
+    "TaskIdList":{
+      "type":"list",
+      "member":{"shape":"TaskId"}
+    },
+    "TemplateBody":{"type":"string"},
+    "TestAuthorizationRequest":{
+      "type":"structure",
+      "required":["authInfos"],
+      "members":{
+        "principal":{
+          "shape":"Principal",
+          "documentation":"<p>The principal.</p>"
+        },
+        "cognitoIdentityPoolId":{
+          "shape":"CognitoIdentityPoolId",
+          "documentation":"<p>The Cognito identity pool ID.</p>"
+        },
+        "authInfos":{
+          "shape":"AuthInfos",
+          "documentation":"<p>A list of authorization info objects. Simulating authorization will create a response for each <code>authInfo</code> object in the list.</p>"
+        },
+        "clientId":{
+          "shape":"ClientId",
+          "documentation":"<p>The MQTT client ID.</p>",
+          "location":"querystring",
+          "locationName":"clientId"
+        },
+        "policyNamesToAdd":{
+          "shape":"PolicyNames",
+          "documentation":"<p>When testing custom authorization, the policies specified here are treated as if they are attached to the principal being authorized.</p>"
+        },
+        "policyNamesToSkip":{
+          "shape":"PolicyNames",
+          "documentation":"<p>When testing custom authorization, the policies specified here are treated as if they are not attached to the principal being authorized.</p>"
+        }
+      }
+    },
+    "TestAuthorizationResponse":{
+      "type":"structure",
+      "members":{
+        "authResults":{
+          "shape":"AuthResults",
+          "documentation":"<p>The authentication results.</p>"
+        }
+      }
+    },
+    "TestInvokeAuthorizerRequest":{
+      "type":"structure",
+      "required":[
+        "authorizerName",
+        "token",
+        "tokenSignature"
+      ],
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The custom authorizer name.</p>",
+          "location":"uri",
+          "locationName":"authorizerName"
+        },
+        "token":{
+          "shape":"Token",
+          "documentation":"<p>The token returned by your custom authentication service.</p>"
+        },
+        "tokenSignature":{
+          "shape":"TokenSignature",
+          "documentation":"<p>The signature made with the token and your custom authentication service's private key.</p>"
+        }
+      }
+    },
+    "TestInvokeAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+        "isAuthenticated":{
+          "shape":"IsAuthenticated",
+          "documentation":"<p>True if the token is authenticated, otherwise false.</p>"
+        },
+        "principalId":{
+          "shape":"PrincipalId",
+          "documentation":"<p>The principal ID.</p>"
+        },
+        "policyDocuments":{
+          "shape":"PolicyDocuments",
+          "documentation":"<p>IAM policy documents.</p>"
+        },
+        "refreshAfterInSeconds":{
+          "shape":"Seconds",
+          "documentation":"<p>The number of seconds after which the temporary credentials are refreshed.</p>"
+        },
+        "disconnectAfterInSeconds":{
+          "shape":"Seconds",
+          "documentation":"<p>The number of seconds after which the connection is terminated.</p>"
+        }
+      }
+    },
     "ThingArn":{"type":"string"},
     "ThingAttribute":{
       "type":"structure",
@@ -3579,6 +7195,10 @@
         "thingTypeName":{
           "shape":"ThingTypeName",
           "documentation":"<p>The name of the thing type, if the thing has been associated with a type.</p>"
+        },
+        "thingArn":{
+          "shape":"ThingArn",
+          "documentation":"<p>The thing ARN.</p>"
         },
         "attributes":{
           "shape":"Attributes",
@@ -3594,6 +7214,121 @@
     "ThingAttributeList":{
       "type":"list",
       "member":{"shape":"ThingAttribute"}
+    },
+    "ThingDocument":{
+      "type":"structure",
+      "members":{
+        "thingName":{
+          "shape":"ThingName",
+          "documentation":"<p>The thing name.</p>"
+        },
+        "thingId":{
+          "shape":"ThingId",
+          "documentation":"<p>The thing ID.</p>"
+        },
+        "thingTypeName":{
+          "shape":"ThingTypeName",
+          "documentation":"<p>The thing type name.</p>"
+        },
+        "thingGroupNames":{
+          "shape":"ThingGroupNameList",
+          "documentation":"<p>Thing group names.</p>"
+        },
+        "attributes":{
+          "shape":"Attributes",
+          "documentation":"<p>The attributes.</p>"
+        },
+        "shadow":{
+          "shape":"JsonDocument",
+          "documentation":"<p>The thing shadow.</p>"
+        }
+      },
+      "documentation":"<p>The thing search index document.</p>"
+    },
+    "ThingDocumentList":{
+      "type":"list",
+      "member":{"shape":"ThingDocument"}
+    },
+    "ThingGroupArn":{"type":"string"},
+    "ThingGroupDescription":{
+      "type":"string",
+      "max":2028,
+      "pattern":"[\\p{Graph}\\x20]*"
+    },
+    "ThingGroupId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9\\-]+"
+    },
+    "ThingGroupList":{
+      "type":"list",
+      "member":{"shape":"ThingGroupName"}
+    },
+    "ThingGroupMetadata":{
+      "type":"structure",
+      "members":{
+        "parentGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The parent thing group name.</p>"
+        },
+        "rootToParentThingGroups":{
+          "shape":"ThingGroupNameAndArnList",
+          "documentation":"<p>The root parent thing group.</p>"
+        },
+        "creationDate":{
+          "shape":"CreationDate",
+          "documentation":"<p>The UNIX timestamp of when the thing group was created.</p>"
+        }
+      },
+      "documentation":"<p>Thing group metadata.</p>"
+    },
+    "ThingGroupName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9:_-]+"
+    },
+    "ThingGroupNameAndArnList":{
+      "type":"list",
+      "member":{"shape":"GroupNameAndArn"}
+    },
+    "ThingGroupNameList":{
+      "type":"list",
+      "member":{"shape":"ThingGroupName"}
+    },
+    "ThingGroupProperties":{
+      "type":"structure",
+      "members":{
+        "thingGroupDescription":{
+          "shape":"ThingGroupDescription",
+          "documentation":"<p>The thing group description.</p>"
+        },
+        "attributePayload":{
+          "shape":"AttributePayload",
+          "documentation":"<p>The thing group attributes in JSON format.</p>"
+        }
+      },
+      "documentation":"<p>Thing group properties.</p>"
+    },
+    "ThingId":{"type":"string"},
+    "ThingIndexingConfiguration":{
+      "type":"structure",
+      "members":{
+        "thingIndexingMode":{
+          "shape":"ThingIndexingMode",
+          "documentation":"<p>Thing indexing mode. Valid values are: </p> <ul> <li> <p>REGISTRY – Your thing index will contain only registry data.</p> </li> <li> <p>REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.</p> </li> <li> <p>OFF - Thing indexing is disabled.</p> </li> </ul>"
+        }
+      },
+      "documentation":"<p>Thing indexing configuration.</p>"
+    },
+    "ThingIndexingMode":{
+      "type":"string",
+      "enum":[
+        "OFF",
+        "REGISTRY",
+        "REGISTRY_AND_SHADOW"
+      ]
     },
     "ThingName":{
       "type":"string",
@@ -3613,6 +7348,10 @@
           "shape":"ThingTypeName",
           "documentation":"<p>The name of the thing type.</p>"
         },
+        "thingTypeArn":{
+          "shape":"ThingTypeArn",
+          "documentation":"<p>The thing type ARN.</p>"
+        },
         "thingTypeProperties":{
           "shape":"ThingTypeProperties",
           "documentation":"<p>The ThingTypeProperties for the thing type.</p>"
@@ -3629,6 +7368,7 @@
       "max":2028,
       "pattern":"[\\p{Graph}\\x20]*"
     },
+    "ThingTypeId":{"type":"string"},
     "ThingTypeList":{
       "type":"list",
       "member":{"shape":"ThingTypeDefinition"}
@@ -3683,6 +7423,23 @@
       "error":{"httpStatusCode":429},
       "exception":true
     },
+    "Token":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "TokenKeyName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
+    "TokenSignature":{
+      "type":"string",
+      "max":2560,
+      "min":1,
+      "pattern":"[A-Za-z0-9+/]+={0,2}"
+    },
     "Topic":{"type":"string"},
     "TopicPattern":{"type":"string"},
     "TopicRule":{
@@ -3715,6 +7472,10 @@
         "awsIotSqlVersion":{
           "shape":"AwsIotSqlVersion",
           "documentation":"<p>The version of the SQL rules engine to use when evaluating the rule.</p>"
+        },
+        "errorAction":{
+          "shape":"Action",
+          "documentation":"<p>The action to perform when an error occurs.</p>"
         }
       },
       "documentation":"<p>Describes a rule.</p>"
@@ -3775,6 +7536,10 @@
         "awsIotSqlVersion":{
           "shape":"AwsIotSqlVersion",
           "documentation":"<p>The version of the SQL rules engine to use when evaluating the rule.</p>"
+        },
+        "errorAction":{
+          "shape":"Action",
+          "documentation":"<p>The action to take when an error occurs.</p>"
         }
       },
       "documentation":"<p>Describes a rule.</p>"
@@ -3878,6 +7643,47 @@
       "exception":true
     },
     "UndoDeprecate":{"type":"boolean"},
+    "UpdateAuthorizerRequest":{
+      "type":"structure",
+      "required":["authorizerName"],
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The authorizer name.</p>",
+          "location":"uri",
+          "locationName":"authorizerName"
+        },
+        "authorizerFunctionArn":{
+          "shape":"AuthorizerFunctionArn",
+          "documentation":"<p>The ARN of the authorizer's Lambda function.</p>"
+        },
+        "tokenKeyName":{
+          "shape":"TokenKeyName",
+          "documentation":"<p>The key used to extract the token from the HTTP headers. </p>"
+        },
+        "tokenSigningPublicKeys":{
+          "shape":"PublicKeyMap",
+          "documentation":"<p>The public keys used to verify the token signature.</p>"
+        },
+        "status":{
+          "shape":"AuthorizerStatus",
+          "documentation":"<p>The status of the update authorizer request.</p>"
+        }
+      }
+    },
+    "UpdateAuthorizerResponse":{
+      "type":"structure",
+      "members":{
+        "authorizerName":{
+          "shape":"AuthorizerName",
+          "documentation":"<p>The authorizer name.</p>"
+        },
+        "authorizerArn":{
+          "shape":"AuthorizerArn",
+          "documentation":"<p>The authorizer ARN.</p>"
+        }
+      }
+    },
     "UpdateCACertificateRequest":{
       "type":"structure",
       "required":["certificateId"],
@@ -3899,6 +7705,14 @@
           "documentation":"<p>The new value for the auto registration status. Valid values are: \"ENABLE\" or \"DISABLE\".</p>",
           "location":"querystring",
           "locationName":"newAutoRegistrationStatus"
+        },
+        "registrationConfig":{
+          "shape":"RegistrationConfig",
+          "documentation":"<p>Information about the registration configuration.</p>"
+        },
+        "removeAutoRegistration":{
+          "shape":"RemoveAutoRegistration",
+          "documentation":"<p>If true, remove auto registration.</p>"
         }
       },
       "documentation":"<p>The input to the UpdateCACertificate operation.</p>"
@@ -3925,6 +7739,121 @@
       },
       "documentation":"<p>The input for the UpdateCertificate operation.</p>"
     },
+    "UpdateEventConfigurationsRequest":{
+      "type":"structure",
+      "members":{
+        "eventConfigurations":{
+          "shape":"EventConfigurations",
+          "documentation":"<p>The new event configuration values.</p>"
+        }
+      }
+    },
+    "UpdateEventConfigurationsResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateIndexingConfigurationRequest":{
+      "type":"structure",
+      "members":{
+        "thingIndexingConfiguration":{
+          "shape":"ThingIndexingConfiguration",
+          "documentation":"<p>Thing indexing configuration.</p>"
+        }
+      }
+    },
+    "UpdateIndexingConfigurationResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateRoleAliasRequest":{
+      "type":"structure",
+      "required":["roleAlias"],
+      "members":{
+        "roleAlias":{
+          "shape":"RoleAlias",
+          "documentation":"<p>The role alias to update.</p>",
+          "location":"uri",
+          "locationName":"roleAlias"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The role ARN.</p>"
+        },
+        "credentialDurationSeconds":{
+          "shape":"CredentialDurationSeconds",
+          "documentation":"<p>The number of seconds the credential will be valid.</p>"
+        }
+      }
+    },
+    "UpdateRoleAliasResponse":{
+      "type":"structure",
+      "members":{
+        "roleAlias":{
+          "shape":"RoleAlias",
+          "documentation":"<p>The role alias.</p>"
+        },
+        "roleAliasArn":{
+          "shape":"RoleAliasArn",
+          "documentation":"<p>The role alias ARN.</p>"
+        }
+      }
+    },
+    "UpdateThingGroupRequest":{
+      "type":"structure",
+      "required":[
+        "thingGroupName",
+        "thingGroupProperties"
+      ],
+      "members":{
+        "thingGroupName":{
+          "shape":"ThingGroupName",
+          "documentation":"<p>The thing group to update.</p>",
+          "location":"uri",
+          "locationName":"thingGroupName"
+        },
+        "thingGroupProperties":{
+          "shape":"ThingGroupProperties",
+          "documentation":"<p>The thing group properties.</p>"
+        },
+        "expectedVersion":{
+          "shape":"OptionalVersion",
+          "documentation":"<p>The expected version of the thing group. If this does not match the version of the thing group being updated, the update will fail.</p>"
+        }
+      }
+    },
+    "UpdateThingGroupResponse":{
+      "type":"structure",
+      "members":{
+        "version":{
+          "shape":"Version",
+          "documentation":"<p>The version of the updated thing group.</p>"
+        }
+      }
+    },
+    "UpdateThingGroupsForThingRequest":{
+      "type":"structure",
+      "members":{
+        "thingName":{
+          "shape":"ThingName",
+          "documentation":"<p>The thing whose group memberships will be updated.</p>"
+        },
+        "thingGroupsToAdd":{
+          "shape":"ThingGroupList",
+          "documentation":"<p>The groups to which the thing will be added.</p>"
+        },
+        "thingGroupsToRemove":{
+          "shape":"ThingGroupList",
+          "documentation":"<p>The groups from which the thing will be removed.</p>"
+        }
+      }
+    },
+    "UpdateThingGroupsForThingResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "UpdateThingRequest":{
       "type":"structure",
       "required":["thingName"],
@@ -3949,7 +7878,7 @@
         },
         "removeThingType":{
           "shape":"RemoveThingType",
-          "documentation":"<p>Remove a thing type association. If <b>true</b>, the assocation is removed.</p>"
+          "documentation":"<p>Remove a thing type association. If <b>true</b>, the association is removed.</p>"
         }
       },
       "documentation":"<p>The input for the UpdateThing operation.</p>"
@@ -3961,6 +7890,7 @@
       "documentation":"<p>The output from the UpdateThing operation.</p>"
     },
     "UseBase64":{"type":"boolean"},
+    "Value":{"type":"string"},
     "Version":{"type":"long"},
     "VersionConflictException":{
       "type":"structure",

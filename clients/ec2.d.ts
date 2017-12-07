@@ -20,11 +20,19 @@ declare class EC2 extends Service {
    */
   acceptReservedInstancesExchangeQuote(callback?: (err: AWSError, data: EC2.Types.AcceptReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.AcceptReservedInstancesExchangeQuoteResult, AWSError>;
   /**
-   * Accept a VPC peering connection request. To accept a request, the VPC peering connection must be in the pending-acceptance state, and you must be the owner of the peer VPC. Use DescribeVpcPeeringConnections to view your outstanding VPC peering connection requests.
+   * Accepts one or more interface VPC endpoint connection requests to your VPC endpoint service.
+   */
+  acceptVpcEndpointConnections(params: EC2.Types.AcceptVpcEndpointConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.AcceptVpcEndpointConnectionsResult) => void): Request<EC2.Types.AcceptVpcEndpointConnectionsResult, AWSError>;
+  /**
+   * Accepts one or more interface VPC endpoint connection requests to your VPC endpoint service.
+   */
+  acceptVpcEndpointConnections(callback?: (err: AWSError, data: EC2.Types.AcceptVpcEndpointConnectionsResult) => void): Request<EC2.Types.AcceptVpcEndpointConnectionsResult, AWSError>;
+  /**
+   * Accept a VPC peering connection request. To accept a request, the VPC peering connection must be in the pending-acceptance state, and you must be the owner of the peer VPC. Use DescribeVpcPeeringConnections to view your outstanding VPC peering connection requests. For an inter-region VPC peering connection request, you must accept the VPC peering connection in the region of the accepter VPC.
    */
   acceptVpcPeeringConnection(params: EC2.Types.AcceptVpcPeeringConnectionRequest, callback?: (err: AWSError, data: EC2.Types.AcceptVpcPeeringConnectionResult) => void): Request<EC2.Types.AcceptVpcPeeringConnectionResult, AWSError>;
   /**
-   * Accept a VPC peering connection request. To accept a request, the VPC peering connection must be in the pending-acceptance state, and you must be the owner of the peer VPC. Use DescribeVpcPeeringConnections to view your outstanding VPC peering connection requests.
+   * Accept a VPC peering connection request. To accept a request, the VPC peering connection must be in the pending-acceptance state, and you must be the owner of the peer VPC. Use DescribeVpcPeeringConnections to view your outstanding VPC peering connection requests. For an inter-region VPC peering connection request, you must accept the VPC peering connection in the region of the accepter VPC.
    */
   acceptVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.AcceptVpcPeeringConnectionResult) => void): Request<EC2.Types.AcceptVpcPeeringConnectionResult, AWSError>;
   /**
@@ -212,19 +220,19 @@ declare class EC2 extends Service {
    */
   cancelReservedInstancesListing(callback?: (err: AWSError, data: EC2.Types.CancelReservedInstancesListingResult) => void): Request<EC2.Types.CancelReservedInstancesListingResult, AWSError>;
   /**
-   * Cancels the specified Spot fleet requests. After you cancel a Spot fleet request, the Spot fleet launches no new Spot instances. You must specify whether the Spot fleet should also terminate its Spot instances. If you terminate the instances, the Spot fleet request enters the cancelled_terminating state. Otherwise, the Spot fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
+   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new Spot Instances. You must specify whether the Spot Fleet should also terminate its Spot Instances. If you terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
    */
   cancelSpotFleetRequests(params: EC2.Types.CancelSpotFleetRequestsRequest, callback?: (err: AWSError, data: EC2.Types.CancelSpotFleetRequestsResponse) => void): Request<EC2.Types.CancelSpotFleetRequestsResponse, AWSError>;
   /**
-   * Cancels the specified Spot fleet requests. After you cancel a Spot fleet request, the Spot fleet launches no new Spot instances. You must specify whether the Spot fleet should also terminate its Spot instances. If you terminate the instances, the Spot fleet request enters the cancelled_terminating state. Otherwise, the Spot fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
+   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new Spot Instances. You must specify whether the Spot Fleet should also terminate its Spot Instances. If you terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
    */
   cancelSpotFleetRequests(callback?: (err: AWSError, data: EC2.Types.CancelSpotFleetRequestsResponse) => void): Request<EC2.Types.CancelSpotFleetRequestsResponse, AWSError>;
   /**
-   * Cancels one or more Spot instance requests. Spot instances are instances that Amazon EC2 starts on your behalf when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot instance capacity and current Spot instance requests. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.  Canceling a Spot instance request does not terminate running Spot instances associated with the request. 
+   * Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.  Canceling a Spot Instance request does not terminate running Spot Instances associated with the request. 
    */
   cancelSpotInstanceRequests(params: EC2.Types.CancelSpotInstanceRequestsRequest, callback?: (err: AWSError, data: EC2.Types.CancelSpotInstanceRequestsResult) => void): Request<EC2.Types.CancelSpotInstanceRequestsResult, AWSError>;
   /**
-   * Cancels one or more Spot instance requests. Spot instances are instances that Amazon EC2 starts on your behalf when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot instance capacity and current Spot instance requests. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.  Canceling a Spot instance request does not terminate running Spot instances associated with the request. 
+   * Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.  Canceling a Spot Instance request does not terminate running Spot Instances associated with the request. 
    */
   cancelSpotInstanceRequests(callback?: (err: AWSError, data: EC2.Types.CancelSpotInstanceRequestsResult) => void): Request<EC2.Types.CancelSpotInstanceRequestsResult, AWSError>;
   /**
@@ -340,13 +348,29 @@ declare class EC2 extends Service {
    */
   createInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateInternetGatewayResult) => void): Request<EC2.Types.CreateInternetGatewayResult, AWSError>;
   /**
-   * Creates a 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#8 private key. If a key with the specified name already exists, Amazon EC2 returns an error. You can have up to five thousand key pairs per region. The key pair returned to you is available only in the region in which you create it. To create a key pair that is available in all regions, use ImportKeyPair. For more information about key pairs, see Key Pairs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name already exists, Amazon EC2 returns an error. You can have up to five thousand key pairs per region. The key pair returned to you is available only in the region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any region using ImportKeyPair. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide.
    */
   createKeyPair(params: EC2.Types.CreateKeyPairRequest, callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
   /**
-   * Creates a 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#8 private key. If a key with the specified name already exists, Amazon EC2 returns an error. You can have up to five thousand key pairs per region. The key pair returned to you is available only in the region in which you create it. To create a key pair that is available in all regions, use ImportKeyPair. For more information about key pairs, see Key Pairs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name already exists, Amazon EC2 returns an error. You can have up to five thousand key pairs per region. The key pair returned to you is available only in the region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any region using ImportKeyPair. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide.
    */
   createKeyPair(callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
+  /**
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request.
+   */
+  createLaunchTemplate(params: EC2.Types.CreateLaunchTemplateRequest, callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
+  /**
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request.
+   */
+  createLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
+  /**
+   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.
+   */
+  createLaunchTemplateVersion(params: EC2.Types.CreateLaunchTemplateVersionRequest, callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateVersionResult) => void): Request<EC2.Types.CreateLaunchTemplateVersionResult, AWSError>;
+  /**
+   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.
+   */
+  createLaunchTemplateVersion(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateVersionResult) => void): Request<EC2.Types.CreateLaunchTemplateVersionResult, AWSError>;
   /**
    * Creates a NAT gateway in the specified subnet. A NAT gateway can be used to enable instances in a private subnet to connect to the Internet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. For more information, see NAT Gateways in the Amazon Virtual Private Cloud User Guide.
    */
@@ -388,11 +412,11 @@ declare class EC2 extends Service {
    */
   createNetworkInterfacePermission(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInterfacePermissionResult) => void): Request<EC2.Types.CreateNetworkInterfacePermissionResult, AWSError>;
   /**
-   * Creates a placement group that you launch cluster instances into. Give the group a name that's unique within the scope of your account. For more information about placement groups and cluster instances, see Cluster Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group.  A cluster placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A spread placement group places instances on distinct hardware. For more information, see Placement Groups in the Amazon Elastic Compute Cloud User Guide.
    */
   createPlacementGroup(params: EC2.Types.CreatePlacementGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a placement group that you launch cluster instances into. Give the group a name that's unique within the scope of your account. For more information about placement groups and cluster instances, see Cluster Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group.  A cluster placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A spread placement group places instances on distinct hardware. For more information, see Placement Groups in the Amazon Elastic Compute Cloud User Guide.
    */
   createPlacementGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -436,11 +460,11 @@ declare class EC2 extends Service {
    */
   createSnapshot(callback?: (err: AWSError, data: EC2.Types.Snapshot) => void): Request<EC2.Types.Snapshot, AWSError>;
   /**
-   * Creates a data feed for Spot instances, enabling you to view Spot instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
    */
   createSpotDatafeedSubscription(params: EC2.Types.CreateSpotDatafeedSubscriptionRequest, callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Creates a data feed for Spot instances, enabling you to view Spot instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
    */
   createSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
@@ -476,19 +500,35 @@ declare class EC2 extends Service {
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified AWS service. An endpoint enables you to create a private connection between your VPC and another AWS service in your account. You can create a gateway endpoint or an interface endpoint.  A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify the VPC route tables that use the endpoint, and you can optionally specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. An interface endpoint is a network interface in your subnet with a private IP address that serves as an entry point for traffic destined to the AWS service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the network interface.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. Use DescribeVpcEndpointServices to get a list of supported services.
    */
   createVpcEndpoint(params: EC2.Types.CreateVpcEndpointRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
-   * Creates a VPC endpoint for a specified AWS service. An endpoint enables you to create a private connection between your VPC and another AWS service in your account. You can create a gateway endpoint or an interface endpoint.  A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify the VPC route tables that use the endpoint, and you can optionally specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. An interface endpoint is a network interface in your subnet with a private IP address that serves as an entry point for traffic destined to the AWS service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the network interface.
+   * Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace partner, or another AWS account. For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide. A gateway endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint. An interface endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface. Use DescribeVpcEndpointServices to get a list of supported services.
    */
   createVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointResult) => void): Request<EC2.Types.CreateVpcEndpointResult, AWSError>;
   /**
-   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and a peer VPC with which to create the connection. The peer VPC can belong to another AWS account. The requester VPC and peer VPC cannot have overlapping CIDR blocks. The owner of the peer VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you try to create a VPC peering connection between VPCs that have overlapping CIDR blocks, the VPC peering connection status goes to failed.
+   * Creates a connection notification for a specified VPC endpoint or VPC endpoint service. A connection notification notifies you of specific endpoint events. You must create an SNS topic to receive notifications. For more information, see Create a Topic in the Amazon Simple Notification Service Developer Guide. You can create a connection notification for interface endpoints only.
+   */
+  createVpcEndpointConnectionNotification(params: EC2.Types.CreateVpcEndpointConnectionNotificationRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.CreateVpcEndpointConnectionNotificationResult, AWSError>;
+  /**
+   * Creates a connection notification for a specified VPC endpoint or VPC endpoint service. A connection notification notifies you of specific endpoint events. You must create an SNS topic to receive notifications. For more information, see Create a Topic in the Amazon Simple Notification Service Developer Guide. You can create a connection notification for interface endpoints only.
+   */
+  createVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.CreateVpcEndpointConnectionNotificationResult, AWSError>;
+  /**
+   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service. To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide. 
+   */
+  createVpcEndpointServiceConfiguration(params: EC2.Types.CreateVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
+  /**
+   * Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service. To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see VPC Endpoint Services in the Amazon Virtual Private Cloud User Guide. 
+   */
+  createVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
+  /**
+   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks. The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
    */
   createVpcPeeringConnection(params: EC2.Types.CreateVpcPeeringConnectionRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
-   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and a peer VPC with which to create the connection. The peer VPC can belong to another AWS account. The requester VPC and peer VPC cannot have overlapping CIDR blocks. The owner of the peer VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you try to create a VPC peering connection between VPCs that have overlapping CIDR blocks, the VPC peering connection status goes to failed.
+   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks. The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
    */
   createVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
@@ -572,6 +612,22 @@ declare class EC2 extends Service {
    */
   deleteKeyPair(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a launch template. Deleting a launch template deletes all of its versions.
+   */
+  deleteLaunchTemplate(params: EC2.Types.DeleteLaunchTemplateRequest, callback?: (err: AWSError, data: EC2.Types.DeleteLaunchTemplateResult) => void): Request<EC2.Types.DeleteLaunchTemplateResult, AWSError>;
+  /**
+   * Deletes a launch template. Deleting a launch template deletes all of its versions.
+   */
+  deleteLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.DeleteLaunchTemplateResult) => void): Request<EC2.Types.DeleteLaunchTemplateResult, AWSError>;
+  /**
+   * Deletes one or more versions of a launch template. You cannot delete the default version of a launch template; you must first assign a different version as the default. If the default version is the only version for the launch template, you must delete the entire launch template using DeleteLaunchTemplate.
+   */
+  deleteLaunchTemplateVersions(params: EC2.Types.DeleteLaunchTemplateVersionsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteLaunchTemplateVersionsResult) => void): Request<EC2.Types.DeleteLaunchTemplateVersionsResult, AWSError>;
+  /**
+   * Deletes one or more versions of a launch template. You cannot delete the default version of a launch template; you must first assign a different version as the default. If the default version is the only version for the launch template, you must delete the entire launch template using DeleteLaunchTemplate.
+   */
+  deleteLaunchTemplateVersions(callback?: (err: AWSError, data: EC2.Types.DeleteLaunchTemplateVersionsResult) => void): Request<EC2.Types.DeleteLaunchTemplateVersionsResult, AWSError>;
+  /**
    * Deletes the specified NAT gateway. Deleting a NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.
    */
   deleteNatGateway(params: EC2.Types.DeleteNatGatewayRequest, callback?: (err: AWSError, data: EC2.Types.DeleteNatGatewayResult) => void): Request<EC2.Types.DeleteNatGatewayResult, AWSError>;
@@ -612,11 +668,11 @@ declare class EC2 extends Service {
    */
   deleteNetworkInterfacePermission(callback?: (err: AWSError, data: EC2.Types.DeleteNetworkInterfacePermissionResult) => void): Request<EC2.Types.DeleteNetworkInterfacePermissionResult, AWSError>;
   /**
-   * Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information about placement groups and cluster instances, see Cluster Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information, see Placement Groups in the Amazon Elastic Compute Cloud User Guide.
    */
   deletePlacementGroup(params: EC2.Types.DeletePlacementGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information about placement groups and cluster instances, see Cluster Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified placement group. You must terminate all instances in the placement group before you can delete the placement group. For more information, see Placement Groups in the Amazon Elastic Compute Cloud User Guide.
    */
   deletePlacementGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -652,11 +708,11 @@ declare class EC2 extends Service {
    */
   deleteSnapshot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the data feed for Spot instances.
+   * Deletes the data feed for Spot Instances.
    */
   deleteSpotDatafeedSubscription(params: EC2.Types.DeleteSpotDatafeedSubscriptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the data feed for Spot instances.
+   * Deletes the data feed for Spot Instances.
    */
   deleteSpotDatafeedSubscription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -692,6 +748,22 @@ declare class EC2 extends Service {
    */
   deleteVpc(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes one or more VPC endpoint connection notifications.
+   */
+  deleteVpcEndpointConnectionNotifications(params: EC2.Types.DeleteVpcEndpointConnectionNotificationsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointConnectionNotificationsResult) => void): Request<EC2.Types.DeleteVpcEndpointConnectionNotificationsResult, AWSError>;
+  /**
+   * Deletes one or more VPC endpoint connection notifications.
+   */
+  deleteVpcEndpointConnectionNotifications(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointConnectionNotificationsResult) => void): Request<EC2.Types.DeleteVpcEndpointConnectionNotificationsResult, AWSError>;
+  /**
+   * Deletes one or more VPC endpoint service configurations in your account. Before you delete the endpoint service configuration, you must reject any Available or PendingAcceptance interface endpoint connections that are attached to the service.
+   */
+  deleteVpcEndpointServiceConfigurations(params: EC2.Types.DeleteVpcEndpointServiceConfigurationsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointServiceConfigurationsResult) => void): Request<EC2.Types.DeleteVpcEndpointServiceConfigurationsResult, AWSError>;
+  /**
+   * Deletes one or more VPC endpoint service configurations in your account. Before you delete the endpoint service configuration, you must reject any Available or PendingAcceptance interface endpoint connections that are attached to the service.
+   */
+  deleteVpcEndpointServiceConfigurations(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointServiceConfigurationsResult) => void): Request<EC2.Types.DeleteVpcEndpointServiceConfigurationsResult, AWSError>;
+  /**
    * Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint deletes the endpoint network interfaces.
    */
   deleteVpcEndpoints(params: EC2.Types.DeleteVpcEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
@@ -700,11 +772,11 @@ declare class EC2 extends Service {
    */
   deleteVpcEndpoints(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
-   * Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the peer VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. 
+   * Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. 
    */
   deleteVpcPeeringConnection(params: EC2.Types.DeleteVpcPeeringConnectionRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcPeeringConnectionResult) => void): Request<EC2.Types.DeleteVpcPeeringConnectionResult, AWSError>;
   /**
-   * Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the peer VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. 
+   * Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. 
    */
   deleteVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.DeleteVpcPeeringConnectionResult) => void): Request<EC2.Types.DeleteVpcPeeringConnectionResult, AWSError>;
   /**
@@ -940,6 +1012,14 @@ declare class EC2 extends Service {
    */
   describeInstanceAttribute(callback?: (err: AWSError, data: EC2.Types.InstanceAttribute) => void): Request<EC2.Types.InstanceAttribute, AWSError>;
   /**
+   * Describes the credit option for CPU usage of one or more of your T2 instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns only the T2 instances with the unlimited credit option. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  describeInstanceCreditSpecifications(params: EC2.Types.DescribeInstanceCreditSpecificationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceCreditSpecificationsResult) => void): Request<EC2.Types.DescribeInstanceCreditSpecificationsResult, AWSError>;
+  /**
+   * Describes the credit option for CPU usage of one or more of your T2 instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns only the T2 instances with the unlimited credit option. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  describeInstanceCreditSpecifications(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceCreditSpecificationsResult) => void): Request<EC2.Types.DescribeInstanceCreditSpecificationsResult, AWSError>;
+  /**
    * Describes the status of one or more instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status Checks for Your Instances and Troubleshooting Instances with Failed Status Checks in the Amazon Elastic Compute Cloud User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled Events for Your Instances in the Amazon Elastic Compute Cloud User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide.  
    */
   describeInstanceStatus(params: EC2.Types.DescribeInstanceStatusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
@@ -971,6 +1051,22 @@ declare class EC2 extends Service {
    * Describes one or more of your key pairs. For more information about key pairs, see Key Pairs in the Amazon Elastic Compute Cloud User Guide.
    */
   describeKeyPairs(callback?: (err: AWSError, data: EC2.Types.DescribeKeyPairsResult) => void): Request<EC2.Types.DescribeKeyPairsResult, AWSError>;
+  /**
+   * Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions.
+   */
+  describeLaunchTemplateVersions(params: EC2.Types.DescribeLaunchTemplateVersionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeLaunchTemplateVersionsResult) => void): Request<EC2.Types.DescribeLaunchTemplateVersionsResult, AWSError>;
+  /**
+   * Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions.
+   */
+  describeLaunchTemplateVersions(callback?: (err: AWSError, data: EC2.Types.DescribeLaunchTemplateVersionsResult) => void): Request<EC2.Types.DescribeLaunchTemplateVersionsResult, AWSError>;
+  /**
+   * Describes one or more launch templates.
+   */
+  describeLaunchTemplates(params: EC2.Types.DescribeLaunchTemplatesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeLaunchTemplatesResult) => void): Request<EC2.Types.DescribeLaunchTemplatesResult, AWSError>;
+  /**
+   * Describes one or more launch templates.
+   */
+  describeLaunchTemplates(callback?: (err: AWSError, data: EC2.Types.DescribeLaunchTemplatesResult) => void): Request<EC2.Types.DescribeLaunchTemplatesResult, AWSError>;
   /**
    * Describes your Elastic IP addresses that are being moved to the EC2-VPC platform, or that are being restored to the EC2-Classic platform. This request does not return information about any other Elastic IP addresses in your account.
    */
@@ -1020,19 +1116,19 @@ declare class EC2 extends Service {
    */
   describeNetworkInterfaces(callback?: (err: AWSError, data: EC2.Types.DescribeNetworkInterfacesResult) => void): Request<EC2.Types.DescribeNetworkInterfacesResult, AWSError>;
   /**
-   * Describes one or more of your placement groups. For more information about placement groups and cluster instances, see Cluster Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Describes one or more of your placement groups. For more information, see Placement Groups in the Amazon Elastic Compute Cloud User Guide.
    */
   describePlacementGroups(params: EC2.Types.DescribePlacementGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribePlacementGroupsResult) => void): Request<EC2.Types.DescribePlacementGroupsResult, AWSError>;
   /**
-   * Describes one or more of your placement groups. For more information about placement groups and cluster instances, see Cluster Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Describes one or more of your placement groups. For more information, see Placement Groups in the Amazon Elastic Compute Cloud User Guide.
    */
   describePlacementGroups(callback?: (err: AWSError, data: EC2.Types.DescribePlacementGroupsResult) => void): Request<EC2.Types.DescribePlacementGroupsResult, AWSError>;
   /**
-   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a VPC endpoint.
+   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint.
    */
   describePrefixLists(params: EC2.Types.DescribePrefixListsRequest, callback?: (err: AWSError, data: EC2.Types.DescribePrefixListsResult) => void): Request<EC2.Types.DescribePrefixListsResult, AWSError>;
   /**
-   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a VPC endpoint.
+   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint.
    */
   describePrefixLists(callback?: (err: AWSError, data: EC2.Types.DescribePrefixListsResult) => void): Request<EC2.Types.DescribePrefixListsResult, AWSError>;
   /**
@@ -1132,43 +1228,43 @@ declare class EC2 extends Service {
    */
   describeSnapshots(callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
   /**
-   * Describes the data feed for Spot instances. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the data feed for Spot Instances. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
    */
   describeSpotDatafeedSubscription(params: EC2.Types.DescribeSpotDatafeedSubscriptionRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.DescribeSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Describes the data feed for Spot instances. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the data feed for Spot Instances. For more information, see Spot Instance Data Feed in the Amazon Elastic Compute Cloud User Guide.
    */
   describeSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.DescribeSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.DescribeSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Describes the running instances for the specified Spot fleet.
+   * Describes the running instances for the specified Spot Fleet.
    */
   describeSpotFleetInstances(params: EC2.Types.DescribeSpotFleetInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetInstancesResponse) => void): Request<EC2.Types.DescribeSpotFleetInstancesResponse, AWSError>;
   /**
-   * Describes the running instances for the specified Spot fleet.
+   * Describes the running instances for the specified Spot Fleet.
    */
   describeSpotFleetInstances(callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetInstancesResponse) => void): Request<EC2.Types.DescribeSpotFleetInstancesResponse, AWSError>;
   /**
-   * Describes the events for the specified Spot fleet request during the specified time. Spot fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event.
+   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event.
    */
   describeSpotFleetRequestHistory(params: EC2.Types.DescribeSpotFleetRequestHistoryRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestHistoryResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestHistoryResponse, AWSError>;
   /**
-   * Describes the events for the specified Spot fleet request during the specified time. Spot fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event.
+   * Describes the events for the specified Spot Fleet request during the specified time. Spot Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event.
    */
   describeSpotFleetRequestHistory(callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestHistoryResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestHistoryResponse, AWSError>;
   /**
-   * Describes your Spot fleet requests. Spot fleet requests are deleted 48 hours after they are canceled and their instances are terminated.
+   * Describes your Spot Fleet requests. Spot Fleet requests are deleted 48 hours after they are canceled and their instances are terminated.
    */
   describeSpotFleetRequests(params: EC2.Types.DescribeSpotFleetRequestsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestsResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestsResponse, AWSError>;
   /**
-   * Describes your Spot fleet requests. Spot fleet requests are deleted 48 hours after they are canceled and their instances are terminated.
+   * Describes your Spot Fleet requests. Spot Fleet requests are deleted 48 hours after they are canceled and their instances are terminated.
    */
   describeSpotFleetRequests(callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestsResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestsResponse, AWSError>;
   /**
-   * Describes the Spot instance requests that belong to your account. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot instance capacity and current Spot instance requests. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide. You can use DescribeSpotInstanceRequests to find a running Spot instance by examining the response. If the status of the Spot instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. Spot instance requests are deleted 4 hours after they are canceled and their instances are terminated.
+   * Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the Spot price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. Spot Instance requests are deleted 4 hours after they are canceled and their instances are terminated.
    */
   describeSpotInstanceRequests(params: EC2.Types.DescribeSpotInstanceRequestsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
   /**
-   * Describes the Spot instance requests that belong to your account. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot instance capacity and current Spot instance requests. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide. You can use DescribeSpotInstanceRequests to find a running Spot instance by examining the response. If the status of the Spot instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. Spot instance requests are deleted 4 hours after they are canceled and their instances are terminated.
+   * Describes the Spot Instance requests that belong to your account. Spot Instances are instances that Amazon EC2 launches when the Spot price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. Spot Instance requests are deleted 4 hours after they are canceled and their instances are terminated.
    */
   describeSpotInstanceRequests(callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
   /**
@@ -1260,11 +1356,43 @@ declare class EC2 extends Service {
    */
   describeVpcClassicLinkDnsSupport(callback?: (err: AWSError, data: EC2.Types.DescribeVpcClassicLinkDnsSupportResult) => void): Request<EC2.Types.DescribeVpcClassicLinkDnsSupportResult, AWSError>;
   /**
-   * Describes all supported AWS services that can be specified when creating a VPC endpoint.
+   * Describes the connection notifications for VPC endpoints and VPC endpoint services.
+   */
+  describeVpcEndpointConnectionNotifications(params: EC2.Types.DescribeVpcEndpointConnectionNotificationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointConnectionNotificationsResult) => void): Request<EC2.Types.DescribeVpcEndpointConnectionNotificationsResult, AWSError>;
+  /**
+   * Describes the connection notifications for VPC endpoints and VPC endpoint services.
+   */
+  describeVpcEndpointConnectionNotifications(callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointConnectionNotificationsResult) => void): Request<EC2.Types.DescribeVpcEndpointConnectionNotificationsResult, AWSError>;
+  /**
+   * Describes the VPC endpoint connections to your VPC endpoint services, including any endpoints that are pending your acceptance.
+   */
+  describeVpcEndpointConnections(params: EC2.Types.DescribeVpcEndpointConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointConnectionsResult) => void): Request<EC2.Types.DescribeVpcEndpointConnectionsResult, AWSError>;
+  /**
+   * Describes the VPC endpoint connections to your VPC endpoint services, including any endpoints that are pending your acceptance.
+   */
+  describeVpcEndpointConnections(callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointConnectionsResult) => void): Request<EC2.Types.DescribeVpcEndpointConnectionsResult, AWSError>;
+  /**
+   * Describes the VPC endpoint service configurations in your account (your services).
+   */
+  describeVpcEndpointServiceConfigurations(params: EC2.Types.DescribeVpcEndpointServiceConfigurationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServiceConfigurationsResult) => void): Request<EC2.Types.DescribeVpcEndpointServiceConfigurationsResult, AWSError>;
+  /**
+   * Describes the VPC endpoint service configurations in your account (your services).
+   */
+  describeVpcEndpointServiceConfigurations(callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServiceConfigurationsResult) => void): Request<EC2.Types.DescribeVpcEndpointServiceConfigurationsResult, AWSError>;
+  /**
+   * Describes the principals (service consumers) that are permitted to discover your VPC endpoint service.
+   */
+  describeVpcEndpointServicePermissions(params: EC2.Types.DescribeVpcEndpointServicePermissionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.DescribeVpcEndpointServicePermissionsResult, AWSError>;
+  /**
+   * Describes the principals (service consumers) that are permitted to discover your VPC endpoint service.
+   */
+  describeVpcEndpointServicePermissions(callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.DescribeVpcEndpointServicePermissionsResult, AWSError>;
+  /**
+   * Describes available services to which you can create a VPC endpoint.
    */
   describeVpcEndpointServices(params: EC2.Types.DescribeVpcEndpointServicesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServicesResult) => void): Request<EC2.Types.DescribeVpcEndpointServicesResult, AWSError>;
   /**
-   * Describes all supported AWS services that can be specified when creating a VPC endpoint.
+   * Describes available services to which you can create a VPC endpoint.
    */
   describeVpcEndpointServices(callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServicesResult) => void): Request<EC2.Types.DescribeVpcEndpointServicesResult, AWSError>;
   /**
@@ -1468,6 +1596,14 @@ declare class EC2 extends Service {
    */
   getHostReservationPurchasePreview(callback?: (err: AWSError, data: EC2.Types.GetHostReservationPurchasePreviewResult) => void): Request<EC2.Types.GetHostReservationPurchasePreviewResult, AWSError>;
   /**
+   * Retrieves the configuration data of the specified instance. You can use this data to create a launch template.
+   */
+  getLaunchTemplateData(params: EC2.Types.GetLaunchTemplateDataRequest, callback?: (err: AWSError, data: EC2.Types.GetLaunchTemplateDataResult) => void): Request<EC2.Types.GetLaunchTemplateDataResult, AWSError>;
+  /**
+   * Retrieves the configuration data of the specified instance. You can use this data to create a launch template.
+   */
+  getLaunchTemplateData(callback?: (err: AWSError, data: EC2.Types.GetLaunchTemplateDataResult) => void): Request<EC2.Types.GetLaunchTemplateDataResult, AWSError>;
+  /**
    * Retrieves the encrypted administrator password for a running Windows instance. The Windows password is generated at boot by the EC2Config service or EC2Launch scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see EC2Config and EC2Launch in the Amazon Elastic Compute Cloud User Guide. For the EC2Config service, the password is not generated for rebundled AMIs unless Ec2SetPassword is enabled before bundling. The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file. When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it's available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.
    */
   getPasswordData(params: EC2.Types.GetPasswordDataRequest, callback?: (err: AWSError, data: EC2.Types.GetPasswordDataResult) => void): Request<EC2.Types.GetPasswordDataResult, AWSError>;
@@ -1572,6 +1708,14 @@ declare class EC2 extends Service {
    */
   modifyInstanceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Modifies the credit option for CPU usage on a running or stopped T2 instance. The credit options are standard and unlimited. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifyInstanceCreditSpecification(params: EC2.Types.ModifyInstanceCreditSpecificationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCreditSpecificationResult) => void): Request<EC2.Types.ModifyInstanceCreditSpecificationResult, AWSError>;
+  /**
+   * Modifies the credit option for CPU usage on a running or stopped T2 instance. The credit options are standard and unlimited. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide.
+   */
+  modifyInstanceCreditSpecification(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCreditSpecificationResult) => void): Request<EC2.Types.ModifyInstanceCreditSpecificationResult, AWSError>;
+  /**
    * Set the instance affinity value for a specific stopped instance and modify the instance tenancy setting. Instance affinity is disabled by default. When instance affinity is host and it is not associated with a specific Dedicated Host, the next time it is launched it will automatically be associated with the host it lands on. This relationship will persist if the instance is stopped/started, or rebooted. You can modify the host ID associated with a stopped instance. If a stopped instance has a new host ID association, the instance will target that host when restarted. You can modify the tenancy of a stopped instance with a tenancy of host or dedicated. Affinity, hostID, and tenancy are not required parameters, but at least one of them must be specified in the request. Affinity and tenancy can be modified in the same request, but tenancy can only be modified on instances that are stopped.
    */
   modifyInstancePlacement(params: EC2.Types.ModifyInstancePlacementRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstancePlacementResult) => void): Request<EC2.Types.ModifyInstancePlacementResult, AWSError>;
@@ -1579,6 +1723,14 @@ declare class EC2 extends Service {
    * Set the instance affinity value for a specific stopped instance and modify the instance tenancy setting. Instance affinity is disabled by default. When instance affinity is host and it is not associated with a specific Dedicated Host, the next time it is launched it will automatically be associated with the host it lands on. This relationship will persist if the instance is stopped/started, or rebooted. You can modify the host ID associated with a stopped instance. If a stopped instance has a new host ID association, the instance will target that host when restarted. You can modify the tenancy of a stopped instance with a tenancy of host or dedicated. Affinity, hostID, and tenancy are not required parameters, but at least one of them must be specified in the request. Affinity and tenancy can be modified in the same request, but tenancy can only be modified on instances that are stopped.
    */
   modifyInstancePlacement(callback?: (err: AWSError, data: EC2.Types.ModifyInstancePlacementResult) => void): Request<EC2.Types.ModifyInstancePlacementResult, AWSError>;
+  /**
+   * Modifies a launch template. You can specify which version of the launch template to set as the default version. When launching an instance, the default version applies when a launch template version is not specified.
+   */
+  modifyLaunchTemplate(params: EC2.Types.ModifyLaunchTemplateRequest, callback?: (err: AWSError, data: EC2.Types.ModifyLaunchTemplateResult) => void): Request<EC2.Types.ModifyLaunchTemplateResult, AWSError>;
+  /**
+   * Modifies a launch template. You can specify which version of the launch template to set as the default version. When launching an instance, the default version applies when a launch template version is not specified.
+   */
+  modifyLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.ModifyLaunchTemplateResult) => void): Request<EC2.Types.ModifyLaunchTemplateResult, AWSError>;
   /**
    * Modifies the specified network interface attribute. You can specify only one attribute at a time.
    */
@@ -1604,11 +1756,11 @@ declare class EC2 extends Service {
    */
   modifySnapshotAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified Spot fleet request. While the Spot fleet request is being modified, it is in the modifying state. To scale up your Spot fleet, increase its target capacity. The Spot fleet launches the additional Spot instances according to the allocation strategy for the Spot fleet request. If the allocation strategy is lowestPrice, the Spot fleet launches instances using the Spot pool with the lowest price. If the allocation strategy is diversified, the Spot fleet distributes the instances across the Spot pools. To scale down your Spot fleet, decrease its target capacity. First, the Spot fleet cancels any open bids that exceed the new target capacity. You can request that the Spot fleet terminate Spot instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot fleet terminates the instances with the highest price per unit. If the allocation strategy is diversified, the Spot fleet terminates instances across the Spot pools. Alternatively, you can request that the Spot fleet keep the fleet at its current size, but not replace any Spot instances that are interrupted or that you terminate manually.
+   * Modifies the specified Spot Fleet request. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot pools. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifySpotFleetRequest(params: EC2.Types.ModifySpotFleetRequestRequest, callback?: (err: AWSError, data: EC2.Types.ModifySpotFleetRequestResponse) => void): Request<EC2.Types.ModifySpotFleetRequestResponse, AWSError>;
   /**
-   * Modifies the specified Spot fleet request. While the Spot fleet request is being modified, it is in the modifying state. To scale up your Spot fleet, increase its target capacity. The Spot fleet launches the additional Spot instances according to the allocation strategy for the Spot fleet request. If the allocation strategy is lowestPrice, the Spot fleet launches instances using the Spot pool with the lowest price. If the allocation strategy is diversified, the Spot fleet distributes the instances across the Spot pools. To scale down your Spot fleet, decrease its target capacity. First, the Spot fleet cancels any open bids that exceed the new target capacity. You can request that the Spot fleet terminate Spot instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot fleet terminates the instances with the highest price per unit. If the allocation strategy is diversified, the Spot fleet terminates instances across the Spot pools. Alternatively, you can request that the Spot fleet keep the fleet at its current size, but not replace any Spot instances that are interrupted or that you terminate manually.
+   * Modifies the specified Spot Fleet request. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot pools. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifySpotFleetRequest(callback?: (err: AWSError, data: EC2.Types.ModifySpotFleetRequestResponse) => void): Request<EC2.Types.ModifySpotFleetRequestResponse, AWSError>;
   /**
@@ -1651,6 +1803,30 @@ declare class EC2 extends Service {
    * Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see VPC Endpoints in the Amazon Virtual Private Cloud User Guide.
    */
   modifyVpcEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointResult) => void): Request<EC2.Types.ModifyVpcEndpointResult, AWSError>;
+  /**
+   * Modifies a connection notification for VPC endpoint or VPC endpoint service. You can change the SNS topic for the notification, or the events for which to be notified. 
+   */
+  modifyVpcEndpointConnectionNotification(params: EC2.Types.ModifyVpcEndpointConnectionNotificationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.ModifyVpcEndpointConnectionNotificationResult, AWSError>;
+  /**
+   * Modifies a connection notification for VPC endpoint or VPC endpoint service. You can change the SNS topic for the notification, or the events for which to be notified. 
+   */
+  modifyVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.ModifyVpcEndpointConnectionNotificationResult, AWSError>;
+  /**
+   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.
+   */
+  modifyVpcEndpointServiceConfiguration(params: EC2.Types.ModifyVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
+  /**
+   * Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.
+   */
+  modifyVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
+  /**
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to discover your endpoint service.
+   */
+  modifyVpcEndpointServicePermissions(params: EC2.Types.ModifyVpcEndpointServicePermissionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
+  /**
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to discover your endpoint service.
+   */
+  modifyVpcEndpointServicePermissions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
    * Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:   Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.   Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.   Enable/disable a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.   If the peered VPCs are in different accounts, each owner must initiate a separate request to modify the peering connection options, depending on whether their VPC was the requester or accepter for the VPC peering connection. If the peered VPCs are in the same account, you can modify the requester and accepter options in the same request. To confirm which VPC is the accepter and requester for a VPC peering connection, use the DescribeVpcPeeringConnections command.
    */
@@ -1724,6 +1900,14 @@ declare class EC2 extends Service {
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
+   * Rejects one or more VPC endpoint connection requests to your VPC endpoint service.
+   */
+  rejectVpcEndpointConnections(params: EC2.Types.RejectVpcEndpointConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.RejectVpcEndpointConnectionsResult) => void): Request<EC2.Types.RejectVpcEndpointConnectionsResult, AWSError>;
+  /**
+   * Rejects one or more VPC endpoint connection requests to your VPC endpoint service.
+   */
+  rejectVpcEndpointConnections(callback?: (err: AWSError, data: EC2.Types.RejectVpcEndpointConnectionsResult) => void): Request<EC2.Types.RejectVpcEndpointConnectionsResult, AWSError>;
+  /**
    * Rejects a VPC peering connection request. The VPC peering connection must be in the pending-acceptance state. Use the DescribeVpcPeeringConnections request to view your outstanding VPC peering connection requests. To delete an active VPC peering connection, or to delete a VPC peering connection request that you initiated, use DeleteVpcPeeringConnection.
    */
   rejectVpcPeeringConnection(params: EC2.Types.RejectVpcPeeringConnectionRequest, callback?: (err: AWSError, data: EC2.Types.RejectVpcPeeringConnectionResult) => void): Request<EC2.Types.RejectVpcPeeringConnectionResult, AWSError>;
@@ -1796,19 +1980,19 @@ declare class EC2 extends Service {
    */
   reportInstanceStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a Spot fleet request. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot fleet requests Spot instances in the Spot pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot instances in your Spot fleet are in different Spot pools, you can improve the availability of your fleet. For more information, see Spot Fleet Requests in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a Spot Fleet request. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Instances. You cannot tag other resource types in a Spot Fleet request; only the instance resource type is supported. For more information, see Spot Fleet Requests in the Amazon Elastic Compute Cloud User Guide.
    */
   requestSpotFleet(params: EC2.Types.RequestSpotFleetRequest, callback?: (err: AWSError, data: EC2.Types.RequestSpotFleetResponse) => void): Request<EC2.Types.RequestSpotFleetResponse, AWSError>;
   /**
-   * Creates a Spot fleet request. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot fleet requests Spot instances in the Spot pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot instances in your Spot fleet are in different Spot pools, you can improve the availability of your fleet. For more information, see Spot Fleet Requests in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a Spot Fleet request. You can submit a single request that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. By default, the Spot Fleet requests Spot Instances in the Spot pool where the price per unit is the lowest. Each launch specification can include its own instance weighting that reflects the value of the instance type to your application workload. Alternatively, you can specify that the Spot Fleet distribute the target capacity across the Spot pools included in its launch specifications. By ensuring that the Spot Instances in your Spot Fleet are in different Spot pools, you can improve the availability of your fleet. You can specify tags for the Spot Instances. You cannot tag other resource types in a Spot Fleet request; only the instance resource type is supported. For more information, see Spot Fleet Requests in the Amazon Elastic Compute Cloud User Guide.
    */
   requestSpotFleet(callback?: (err: AWSError, data: EC2.Types.RequestSpotFleetResponse) => void): Request<EC2.Types.RequestSpotFleetResponse, AWSError>;
   /**
-   * Creates a Spot instance request. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot Instance capacity and current Spot instance requests. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.
    */
   requestSpotInstances(params: EC2.Types.RequestSpotInstancesRequest, callback?: (err: AWSError, data: EC2.Types.RequestSpotInstancesResult) => void): Request<EC2.Types.RequestSpotInstancesResult, AWSError>;
   /**
-   * Creates a Spot instance request. Spot instances are instances that Amazon EC2 launches when the bid price that you specify exceeds the current Spot price. Amazon EC2 periodically sets the Spot price based on available Spot Instance capacity and current Spot instance requests. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a Spot Instance request. Spot Instances are instances that Amazon EC2 launches when the maximum price that you specify exceeds the current Spot price. For more information, see Spot Instance Requests in the Amazon Elastic Compute Cloud User Guide.
    */
   requestSpotInstances(callback?: (err: AWSError, data: EC2.Types.RequestSpotInstancesResult) => void): Request<EC2.Types.RequestSpotInstancesResult, AWSError>;
   /**
@@ -1876,11 +2060,11 @@ declare class EC2 extends Service {
    */
   revokeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. You can tag instances and EBS volumes during launch, after launch, or both. For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
+   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   You can create a launch template, which is a resource that contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify the launch template instead of specifying the launch parameters. To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. You can tag instances and EBS volumes during launch, after launch, or both. For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   runInstances(params: EC2.Types.RunInstancesRequest, callback?: (err: AWSError, data: EC2.Types.Reservation) => void): Request<EC2.Types.Reservation, AWSError>;
   /**
-   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. You can tag instances and EBS volumes during launch, after launch, or both. For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
+   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   You can create a launch template, which is a resource that contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify the launch template instead of specifying the launch parameters. To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. You can tag instances and EBS volumes during launch, after launch, or both. For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   runInstances(callback?: (err: AWSError, data: EC2.Types.Reservation) => void): Request<EC2.Types.Reservation, AWSError>;
   /**
@@ -2225,13 +2409,33 @@ declare namespace EC2 {
      */
     ExchangeId?: String;
   }
+  export interface AcceptVpcEndpointConnectionsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the endpoint service.
+     */
+    ServiceId: String;
+    /**
+     * The IDs of one or more interface VPC endpoints.
+     */
+    VpcEndpointIds: ValueStringList;
+  }
+  export interface AcceptVpcEndpointConnectionsResult {
+    /**
+     * Information about the interface endpoints that were not accepted, if applicable.
+     */
+    Unsuccessful?: UnsuccessfulItemSet;
+  }
   export interface AcceptVpcPeeringConnectionRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
     /**
-     * The ID of the VPC peering connection.
+     * The ID of the VPC peering connection. You must specify this parameter in the request.
      */
     VpcPeeringConnectionId?: String;
   }
@@ -2271,7 +2475,7 @@ declare namespace EC2 {
      */
     InstanceType?: String;
     /**
-     * The ID of the Spot instance request.
+     * The ID of the Spot Instance request.
      */
     SpotInstanceRequestId?: String;
     /**
@@ -2376,6 +2580,17 @@ declare namespace EC2 {
   export type AllocationIdList = String[];
   export type AllocationState = "available"|"under-assessment"|"permanent-failure"|"released"|"released-permanent-failure"|string;
   export type AllocationStrategy = "lowestPrice"|"diversified"|string;
+  export interface AllowedPrincipal {
+    /**
+     * The type of principal.
+     */
+    PrincipalType?: PrincipalType;
+    /**
+     * The Amazon Resource Name (ARN) of the principal.
+     */
+    Principal?: String;
+  }
+  export type AllowedPrincipalSet = AllowedPrincipal[];
   export type ArchitectureValues = "i386"|"x86_64"|string;
   export interface AssignIpv6AddressesRequest {
     /**
@@ -2973,7 +3188,7 @@ declare namespace EC2 {
      */
     Error: CancelSpotFleetRequestsError;
     /**
-     * The ID of the Spot fleet request.
+     * The ID of the Spot Fleet request.
      */
     SpotFleetRequestId: String;
   }
@@ -2984,35 +3199,35 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of the Spot fleet requests.
+     * The IDs of the Spot Fleet requests.
      */
     SpotFleetRequestIds: ValueStringList;
     /**
-     * Indicates whether to terminate instances for a Spot fleet request if it is canceled successfully.
+     * Indicates whether to terminate instances for a Spot Fleet request if it is canceled successfully.
      */
     TerminateInstances: Boolean;
   }
   export interface CancelSpotFleetRequestsResponse {
     /**
-     * Information about the Spot fleet requests that are successfully canceled.
+     * Information about the Spot Fleet requests that are successfully canceled.
      */
     SuccessfulFleetRequests?: CancelSpotFleetRequestsSuccessSet;
     /**
-     * Information about the Spot fleet requests that are not successfully canceled.
+     * Information about the Spot Fleet requests that are not successfully canceled.
      */
     UnsuccessfulFleetRequests?: CancelSpotFleetRequestsErrorSet;
   }
   export interface CancelSpotFleetRequestsSuccessItem {
     /**
-     * The current state of the Spot fleet request.
+     * The current state of the Spot Fleet request.
      */
     CurrentSpotFleetRequestState: BatchState;
     /**
-     * The previous state of the Spot fleet request.
+     * The previous state of the Spot Fleet request.
      */
     PreviousSpotFleetRequestState: BatchState;
     /**
-     * The ID of the Spot fleet request.
+     * The ID of the Spot Fleet request.
      */
     SpotFleetRequestId: String;
   }
@@ -3024,23 +3239,23 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more Spot instance request IDs.
+     * One or more Spot Instance request IDs.
      */
     SpotInstanceRequestIds: SpotInstanceRequestIdList;
   }
   export interface CancelSpotInstanceRequestsResult {
     /**
-     * One or more Spot instance requests.
+     * One or more Spot Instance requests.
      */
     CancelledSpotInstanceRequests?: CancelledSpotInstanceRequestList;
   }
   export interface CancelledSpotInstanceRequest {
     /**
-     * The ID of the Spot instance request.
+     * The ID of the Spot Instance request.
      */
     SpotInstanceRequestId?: String;
     /**
-     * The state of the Spot instance request.
+     * The state of the Spot Instance request.
      */
     State?: CancelSpotInstanceRequestState;
   }
@@ -3137,6 +3352,39 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export interface ConnectionNotification {
+    /**
+     * The ID of the notification.
+     */
+    ConnectionNotificationId?: String;
+    /**
+     * The ID of the endpoint service.
+     */
+    ServiceId?: String;
+    /**
+     * The ID of the VPC endpoint.
+     */
+    VpcEndpointId?: String;
+    /**
+     * The type of notification.
+     */
+    ConnectionNotificationType?: ConnectionNotificationType;
+    /**
+     * The ARN of the SNS topic for the notification.
+     */
+    ConnectionNotificationArn?: String;
+    /**
+     * The events for the notification. Valid values are Accept, Connect, Delete, and Reject.
+     */
+    ConnectionEvents?: ValueStringList;
+    /**
+     * The state of the notification.
+     */
+    ConnectionNotificationState?: ConnectionNotificationState;
+  }
+  export type ConnectionNotificationSet = ConnectionNotification[];
+  export type ConnectionNotificationState = "Enabled"|"Disabled"|string;
+  export type ConnectionNotificationType = "Topic"|string;
   export type ContainerFormat = "ova"|string;
   export type ConversionIdStringList = String[];
   export interface ConversionTask {
@@ -3528,6 +3776,70 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export interface CreateLaunchTemplateRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * A name for the launch template.
+     */
+    LaunchTemplateName: LaunchTemplateName;
+    /**
+     * A description for the first version of the launch template.
+     */
+    VersionDescription?: VersionDescription;
+    /**
+     * The information for the launch template.
+     */
+    LaunchTemplateData: RequestLaunchTemplateData;
+  }
+  export interface CreateLaunchTemplateResult {
+    /**
+     * Information about the launch template.
+     */
+    LaunchTemplate?: LaunchTemplate;
+  }
+  export interface CreateLaunchTemplateVersionRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateName?: LaunchTemplateName;
+    /**
+     * The version number of the launch template version on which to base the new version. The new version inherits the same launch parameters as the source version, except for parameters that you specify in LaunchTemplateData.
+     */
+    SourceVersion?: String;
+    /**
+     * A description for the version of the launch template.
+     */
+    VersionDescription?: VersionDescription;
+    /**
+     * The information for the launch template.
+     */
+    LaunchTemplateData: RequestLaunchTemplateData;
+  }
+  export interface CreateLaunchTemplateVersionResult {
+    /**
+     * Information about the launch template version.
+     */
+    LaunchTemplateVersion?: LaunchTemplateVersion;
+  }
   export interface CreateNatGatewayRequest {
     /**
      * The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.
@@ -3688,7 +4000,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * A name for the placement group. Constraints: Up to 255 ASCII characters
+     * A name for the placement group. Must be unique within the scope of your account for the region. Constraints: Up to 255 ASCII characters
      */
     GroupName: String;
     /**
@@ -3824,7 +4136,7 @@ declare namespace EC2 {
   }
   export interface CreateSpotDatafeedSubscriptionRequest {
     /**
-     * The Amazon S3 bucket in which to store the Spot instance data feed.
+     * The Amazon S3 bucket in which to store the Spot Instance data feed.
      */
     Bucket: String;
     /**
@@ -3838,7 +4150,7 @@ declare namespace EC2 {
   }
   export interface CreateSpotDatafeedSubscriptionResult {
     /**
-     * The Spot instance data feed subscription.
+     * The Spot Instance data feed subscription.
      */
     SpotDatafeedSubscription?: SpotDatafeedSubscription;
   }
@@ -3943,13 +4255,49 @@ declare namespace EC2 {
      */
     TagSpecifications?: TagSpecificationList;
   }
+  export interface CreateVpcEndpointConnectionNotificationRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the endpoint service.
+     */
+    ServiceId?: String;
+    /**
+     * The ID of the endpoint. 
+     */
+    VpcEndpointId?: String;
+    /**
+     * The ARN of the SNS topic for the notifications.
+     */
+    ConnectionNotificationArn: String;
+    /**
+     * One or more endpoint events for which to receive notifications. Valid values are Accept, Connect, Delete, and Reject.
+     */
+    ConnectionEvents: ValueStringList;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateVpcEndpointConnectionNotificationResult {
+    /**
+     * Information about the notification.
+     */
+    ConnectionNotification?: ConnectionNotification;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: String;
+  }
   export interface CreateVpcEndpointRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
     /**
-     * The type of endpoint. If not specified, the default is a gateway endpoint.
+     * The type of endpoint. Default: Gateway
      */
     VpcEndpointType?: VpcEndpointType;
     /**
@@ -3957,7 +4305,7 @@ declare namespace EC2 {
      */
     VpcId: String;
     /**
-     * The AWS service name, in the form com.amazonaws.region.service . To get a list of available services, use the DescribeVpcEndpointServices request.
+     * The service name. To get a list of available services, use the DescribeVpcEndpointServices request.
      */
     ServiceName: String;
     /**
@@ -3969,11 +4317,11 @@ declare namespace EC2 {
      */
     RouteTableIds?: ValueStringList;
     /**
-     * (Interface endpoint) The ID of one or more subnets in which to create a network interface for the endpoint.
+     * (Interface endpoint) The ID of one or more subnets in which to create an endpoint network interface.
      */
     SubnetIds?: ValueStringList;
     /**
-     * (Interface endpoint) The ID of one or more security groups to associate with the network interface.
+     * (Interface endpoint) The ID of one or more security groups to associate with the endpoint network interface.
      */
     SecurityGroupIds?: ValueStringList;
     /**
@@ -3995,23 +4343,55 @@ declare namespace EC2 {
      */
     ClientToken?: String;
   }
+  export interface CreateVpcEndpointServiceConfigurationRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Indicate whether requests from service consumers to create an endpoint to your service must be accepted. To accept a request, use AcceptVpcEndpointConnections.
+     */
+    AcceptanceRequired?: Boolean;
+    /**
+     * The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your service.
+     */
+    NetworkLoadBalancerArns: ValueStringList;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateVpcEndpointServiceConfigurationResult {
+    /**
+     * Information about the service configuration.
+     */
+    ServiceConfiguration?: ServiceConfiguration;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: String;
+  }
   export interface CreateVpcPeeringConnectionRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
     /**
-     * The AWS account ID of the owner of the peer VPC. Default: Your AWS account ID
+     * The AWS account ID of the owner of the accepter VPC. Default: Your AWS account ID
      */
     PeerOwnerId?: String;
     /**
-     * The ID of the VPC with which you are creating the VPC peering connection.
+     * The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.
      */
     PeerVpcId?: String;
     /**
-     * The ID of the requester VPC.
+     * The ID of the requester VPC. You must specify this parameter in the request.
      */
     VpcId?: String;
+    /**
+     * The region code for the accepter VPC, if the accepter VPC is located in a region other than the region in which you make the request. Default: The region in which you make the request.
+     */
+    PeerRegion?: String;
   }
   export interface CreateVpcPeeringConnectionResult {
     /**
@@ -4104,6 +4484,18 @@ declare namespace EC2 {
      * Information about the virtual private gateway.
      */
     VpnGateway?: VpnGateway;
+  }
+  export interface CreditSpecification {
+    /**
+     * The credit option for CPU usage of a T2 instance.
+     */
+    CpuCredits?: String;
+  }
+  export interface CreditSpecificationRequest {
+    /**
+     * The credit option for CPU usage of a T2 instance. Valid values are standard and unlimited.
+     */
+    CpuCredits: String;
   }
   export type CurrencyCodeValues = "USD"|string;
   export interface CustomerGateway {
@@ -4219,6 +4611,88 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+  }
+  export interface DeleteLaunchTemplateRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateName?: LaunchTemplateName;
+  }
+  export interface DeleteLaunchTemplateResult {
+    /**
+     * Information about the launch template.
+     */
+    LaunchTemplate?: LaunchTemplate;
+  }
+  export interface DeleteLaunchTemplateVersionsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateName?: LaunchTemplateName;
+    /**
+     * The version numbers of one or more launch template versions to delete.
+     */
+    Versions: VersionStringList;
+  }
+  export interface DeleteLaunchTemplateVersionsResponseErrorItem {
+    /**
+     * The ID of the launch template.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template.
+     */
+    LaunchTemplateName?: String;
+    /**
+     * The version number of the launch template.
+     */
+    VersionNumber?: Long;
+    /**
+     * Information about the error.
+     */
+    ResponseError?: ResponseError;
+  }
+  export type DeleteLaunchTemplateVersionsResponseErrorSet = DeleteLaunchTemplateVersionsResponseErrorItem[];
+  export interface DeleteLaunchTemplateVersionsResponseSuccessItem {
+    /**
+     * The ID of the launch template.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template.
+     */
+    LaunchTemplateName?: String;
+    /**
+     * The version number of the launch template.
+     */
+    VersionNumber?: Long;
+  }
+  export type DeleteLaunchTemplateVersionsResponseSuccessSet = DeleteLaunchTemplateVersionsResponseSuccessItem[];
+  export interface DeleteLaunchTemplateVersionsResult {
+    /**
+     * Information about the launch template versions that were successfully deleted.
+     */
+    SuccessfullyDeletedLaunchTemplateVersions?: DeleteLaunchTemplateVersionsResponseSuccessSet;
+    /**
+     * Information about the launch template versions that could not be deleted.
+     */
+    UnsuccessfullyDeletedLaunchTemplateVersions?: DeleteLaunchTemplateVersionsResponseErrorSet;
   }
   export interface DeleteNatGatewayRequest {
     /**
@@ -4392,19 +4866,51 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export interface DeleteVpcEndpointConnectionNotificationsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more notification IDs.
+     */
+    ConnectionNotificationIds: ValueStringList;
+  }
+  export interface DeleteVpcEndpointConnectionNotificationsResult {
+    /**
+     * Information about the notifications that could not be deleted successfully.
+     */
+    Unsuccessful?: UnsuccessfulItemSet;
+  }
+  export interface DeleteVpcEndpointServiceConfigurationsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The IDs of one or more services.
+     */
+    ServiceIds: ValueStringList;
+  }
+  export interface DeleteVpcEndpointServiceConfigurationsResult {
+    /**
+     * Information about the service configurations that were not deleted, if applicable.
+     */
+    Unsuccessful?: UnsuccessfulItemSet;
+  }
   export interface DeleteVpcEndpointsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
     /**
-     * One or more endpoint IDs.
+     * One or more VPC endpoint IDs.
      */
     VpcEndpointIds: ValueStringList;
   }
   export interface DeleteVpcEndpointsResult {
     /**
-     * Information about the endpoints that were not successfully deleted.
+     * Information about the VPC endpoints that were not successfully deleted.
      */
     Unsuccessful?: UnsuccessfulItemSet;
   }
@@ -5071,6 +5577,38 @@ declare namespace EC2 {
      */
     InstanceId: String;
   }
+  export interface DescribeInstanceCreditSpecificationsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters.    instance-id - The ID of the instance.  
+     */
+    Filters?: FilterList;
+    /**
+     * One or more instance IDs. Default: Describes all your instances. Constraints: Maximum 1000 explicitly specified instance IDs.
+     */
+    InstanceIds?: InstanceIdStringList;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeInstanceCreditSpecificationsResult {
+    /**
+     * Information about the credit option for CPU usage of an instance.
+     */
+    InstanceCreditSpecifications?: InstanceCreditSpecificationList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeInstanceStatusRequest {
     /**
      * One or more filters.    availability-zone - The Availability Zone of the instance.    event.code - The code for the scheduled event (instance-reboot | system-reboot | system-maintenance | instance-retirement | instance-stop).    event.description - A description of the event.    event.not-after - The latest end time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    event.not-before - The earliest start time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    instance-state-code - The code for the instance state, as a 16-bit unsigned integer. The high byte is an opaque internal value and should be ignored. The low byte is set based on the state represented. The valid values are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-status.reachability - Filters on instance status where the name is reachability (passed | failed | initializing | insufficient-data).    instance-status.status - The status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).    system-status.reachability - Filters on system status where the name is reachability (passed | failed | initializing | insufficient-data).    system-status.status - The system status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).  
@@ -5178,6 +5716,90 @@ declare namespace EC2 {
      * Information about one or more key pairs.
      */
     KeyPairs?: KeyPairList;
+  }
+  export interface DescribeLaunchTemplateVersionsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateName?: LaunchTemplateName;
+    /**
+     * One or more versions of the launch template.
+     */
+    Versions?: VersionStringList;
+    /**
+     * The version number after which to describe launch template versions.
+     */
+    MinVersion?: String;
+    /**
+     * The version number up to which to describe launch template versions.
+     */
+    MaxVersion?: String;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000.
+     */
+    MaxResults?: Integer;
+    /**
+     * One or more filters.    create-time - The time the launch template version was created.    ebs-optimized - A boolean that indicates whether the instance is optimized for Amazon EBS I/O.    iam-instance-profile - The ARN of the IAM instance profile.    image-id - The ID of the AMI.    instance-type - The instance type.    is-default-version - A boolean that indicates whether the launch template version is the default version.    kernel-id - The kernel ID.    ram-disk-id - The RAM disk ID.  
+     */
+    Filters?: FilterList;
+  }
+  export interface DescribeLaunchTemplateVersionsResult {
+    /**
+     * Information about the launch template versions.
+     */
+    LaunchTemplateVersions?: LaunchTemplateVersionSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeLaunchTemplatesRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more launch template IDs.
+     */
+    LaunchTemplateIds?: ValueStringList;
+    /**
+     * One or more launch template names.
+     */
+    LaunchTemplateNames?: LaunchTemplateNameStringList;
+    /**
+     * One or more filters.    create-time - The time the launch template was created.    launch-template-name - The name of the launch template.  
+     */
+    Filters?: FilterList;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeLaunchTemplatesResult {
+    /**
+     * Information about the launch templates.
+     */
+    LaunchTemplates?: LaunchTemplateSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeMovingAddressesRequest {
     /**
@@ -5345,7 +5967,7 @@ declare namespace EC2 {
   }
   export interface DescribePlacementGroupsRequest {
     /**
-     * One or more filters.    group-name - The name of the placement group.    state - The state of the placement group (pending | available | deleting | deleted).    strategy - The strategy of the placement group (cluster).  
+     * One or more filters.    group-name - The name of the placement group.    state - The state of the placement group (pending | available | deleting | deleted).    strategy - The strategy of the placement group (cluster | spread).  
      */
     Filters?: FilterList;
     /**
@@ -5787,7 +6409,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotDatafeedSubscriptionResult {
     /**
-     * The Spot instance data feed subscription.
+     * The Spot Instance data feed subscription.
      */
     SpotDatafeedSubscription?: SpotDatafeedSubscription;
   }
@@ -5805,7 +6427,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The ID of the Spot fleet request.
+     * The ID of the Spot Fleet request.
      */
     SpotFleetRequestId: String;
   }
@@ -5819,7 +6441,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The ID of the Spot fleet request.
+     * The ID of the Spot Fleet request.
      */
     SpotFleetRequestId: String;
   }
@@ -5841,7 +6463,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The ID of the Spot fleet request.
+     * The ID of the Spot Fleet request.
      */
     SpotFleetRequestId: String;
     /**
@@ -5851,7 +6473,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotFleetRequestHistoryResponse {
     /**
-     * Information about the events in the history of the Spot fleet request.
+     * Information about the events in the history of the Spot Fleet request.
      */
     HistoryRecords: HistoryRecords;
     /**
@@ -5863,7 +6485,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The ID of the Spot fleet request.
+     * The ID of the Spot Fleet request.
      */
     SpotFleetRequestId: String;
     /**
@@ -5885,7 +6507,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The IDs of the Spot fleet requests.
+     * The IDs of the Spot Fleet requests.
      */
     SpotFleetRequestIds?: ValueStringList;
   }
@@ -5895,13 +6517,13 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * Information about the configuration of your Spot fleet.
+     * Information about the configuration of your Spot Fleet.
      */
     SpotFleetRequestConfigs: SpotFleetRequestConfigSet;
   }
   export interface DescribeSpotInstanceRequestsRequest {
     /**
-     * One or more filters.    availability-zone-group - The Availability Zone group.    create-time - The time stamp when the Spot instance request was created.    fault-code - The fault code related to the request.    fault-message - The fault message related to the request.    instance-id - The ID of the instance that fulfilled the request.    launch-group - The Spot instance launch group.    launch.block-device-mapping.delete-on-termination - Indicates whether the EBS volume is deleted on instance termination.    launch.block-device-mapping.device-name - The device name for the volume in the block device mapping (for example, /dev/sdh or xvdh).    launch.block-device-mapping.snapshot-id - The ID of the snapshot for the EBS volume.    launch.block-device-mapping.volume-size - The size of the EBS volume, in GiB.    launch.block-device-mapping.volume-type - The type of EBS volume: gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1for Cold HDD, or standard for Magnetic.    launch.group-id - The security group for the instance.    launch.image-id - The ID of the AMI.    launch.instance-type - The type of instance (for example, m3.medium).    launch.kernel-id - The kernel ID.    launch.key-name - The name of the key pair the instance launched with.    launch.monitoring-enabled - Whether detailed monitoring is enabled for the Spot instance.    launch.ramdisk-id - The RAM disk ID.    launched-availability-zone - The Availability Zone in which the bid is launched.    network-interface.addresses.primary - Indicates whether the IP address is the primary private IP address.    network-interface.delete-on-termination - Indicates whether the network interface is deleted when the instance is terminated.    network-interface.description - A description of the network interface.    network-interface.device-index - The index of the device for the network interface attachment on the instance.    network-interface.group-id - The ID of the security group associated with the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.private-ip-address - The primary private IP address of the network interface.    network-interface.subnet-id - The ID of the subnet for the instance.    product-description - The product description associated with the instance (Linux/UNIX | Windows).    spot-instance-request-id - The Spot instance request ID.    spot-price - The maximum hourly price for any Spot instance launched to fulfill the request.    state - The state of the Spot instance request (open | active | closed | cancelled | failed). Spot bid status information can help you track your Amazon EC2 Spot instance requests. For more information, see Spot Bid Status in the Amazon Elastic Compute Cloud User Guide.    status-code - The short code describing the most recent evaluation of your Spot instance request.    status-message - The message explaining the status of the Spot instance request.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    type - The type of Spot instance request (one-time | persistent).    valid-from - The start date of the request.    valid-until - The end date of the request.  
+     * One or more filters.    availability-zone-group - The Availability Zone group.    create-time - The time stamp when the Spot Instance request was created.    fault-code - The fault code related to the request.    fault-message - The fault message related to the request.    instance-id - The ID of the instance that fulfilled the request.    launch-group - The Spot Instance launch group.    launch.block-device-mapping.delete-on-termination - Indicates whether the EBS volume is deleted on instance termination.    launch.block-device-mapping.device-name - The device name for the volume in the block device mapping (for example, /dev/sdh or xvdh).    launch.block-device-mapping.snapshot-id - The ID of the snapshot for the EBS volume.    launch.block-device-mapping.volume-size - The size of the EBS volume, in GiB.    launch.block-device-mapping.volume-type - The type of EBS volume: gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1for Cold HDD, or standard for Magnetic.    launch.group-id - The security group for the instance.    launch.image-id - The ID of the AMI.    launch.instance-type - The type of instance (for example, m3.medium).    launch.kernel-id - The kernel ID.    launch.key-name - The name of the key pair the instance launched with.    launch.monitoring-enabled - Whether detailed monitoring is enabled for the Spot Instance.    launch.ramdisk-id - The RAM disk ID.    launched-availability-zone - The Availability Zone in which the request is launched.    network-interface.addresses.primary - Indicates whether the IP address is the primary private IP address.    network-interface.delete-on-termination - Indicates whether the network interface is deleted when the instance is terminated.    network-interface.description - A description of the network interface.    network-interface.device-index - The index of the device for the network interface attachment on the instance.    network-interface.group-id - The ID of the security group associated with the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.private-ip-address - The primary private IP address of the network interface.    network-interface.subnet-id - The ID of the subnet for the instance.    product-description - The product description associated with the instance (Linux/UNIX | Windows).    spot-instance-request-id - The Spot Instance request ID.    spot-price - The maximum hourly price for any Spot Instance launched to fulfill the request.    state - The state of the Spot Instance request (open | active | closed | cancelled | failed). Spot request status information can help you track your Amazon EC2 Spot Instance requests. For more information, see Spot Request Status in the Amazon Elastic Compute Cloud User Guide.    status-code - The short code describing the most recent evaluation of your Spot Instance request.    status-message - The message explaining the status of the Spot Instance request.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    type - The type of Spot Instance request (one-time | persistent).    valid-from - The start date of the request.    valid-until - The end date of the request.  
      */
     Filters?: FilterList;
     /**
@@ -5909,13 +6531,13 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more Spot instance request IDs.
+     * One or more Spot Instance request IDs.
      */
     SpotInstanceRequestIds?: SpotInstanceRequestIdList;
   }
   export interface DescribeSpotInstanceRequestsResult {
     /**
-     * One or more Spot instance requests.
+     * One or more Spot Instance requests.
      */
     SpotInstanceRequests?: SpotInstanceRequestList;
   }
@@ -5937,7 +6559,7 @@ declare namespace EC2 {
      */
     EndTime?: DateTime;
     /**
-     * Filters the results by the specified instance types. Note that T2 and HS1 instance types are not supported.
+     * Filters the results by the specified instance types.
      */
     InstanceTypes?: InstanceTypeList;
     /**
@@ -6239,6 +6861,130 @@ declare namespace EC2 {
      */
     Vpcs?: VpcClassicLinkList;
   }
+  export interface DescribeVpcEndpointConnectionNotificationsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the notification.
+     */
+    ConnectionNotificationId?: String;
+    /**
+     * One or more filters.    connection-notification-arn - The ARN of SNS topic for the notification.    connection-notification-id - The ID of the notification.    connection-notification-state - The state of the notification (Enabled | Disabled).    connection-notification-type - The type of notification (Topic).    service-id - The ID of the endpoint service.    vpc-endpoint-id - The ID of the VPC endpoint.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeVpcEndpointConnectionNotificationsResult {
+    /**
+     * One or more notifications.
+     */
+    ConnectionNotificationSet?: ConnectionNotificationSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeVpcEndpointConnectionsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters.    customer-account-id - The AWS account number of the owner of the endpoint.    endpoint-connection-state - The state of the endpoint (PendingAcceptance | Pending | Available | Deleting | Deleted | Rejected | Failed).    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-service-id - The ID of the service.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeVpcEndpointConnectionsResult {
+    /**
+     * Information about one or more VPC endpoint connections.
+     */
+    VpcEndpointConnections?: VpcEndpointConnectionSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeVpcEndpointServiceConfigurationsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The IDs of one or more services.
+     */
+    ServiceIds?: ValueStringList;
+    /**
+     * One or more filters.    service-name - The ARN of the service.    vpc-endpoint-service-id - The ID of the service.    vpc-endpoint-service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).   
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeVpcEndpointServiceConfigurationsResult {
+    /**
+     * Information about one or more services.
+     */
+    ServiceConfigurations?: ServiceConfigurationSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeVpcEndpointServicePermissionsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the service.
+     */
+    ServiceId: String;
+    /**
+     * One or more filters.    principal - The ARN of the principal.    principal-type - The principal type (All | Service | OrganizationUnit | Account | User | Role).  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000; if MaxResults is given a value larger than 1000, only 1000 results are returned.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeVpcEndpointServicePermissionsResult {
+    /**
+     * Information about one or more allowed principals.
+     */
+    AllowedPrincipals?: AllowedPrincipalSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeVpcEndpointServicesRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -6263,7 +7009,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcEndpointServicesResult {
     /**
-     * A list of supported AWS services.
+     * A list of supported services.
      */
     ServiceNames?: ValueStringList;
     /**
@@ -6285,7 +7031,7 @@ declare namespace EC2 {
      */
     VpcEndpointIds?: ValueStringList;
     /**
-     * One or more filters.    service-name: The name of the AWS service.    vpc-id: The ID of the VPC in which the endpoint resides.    vpc-endpoint-id: The ID of the endpoint.    vpc-endpoint-state: The state of the endpoint. (pending | available | deleting | deleted)  
+     * One or more filters.    service-name: The name of the service.    vpc-id: The ID of the VPC in which the endpoint resides.    vpc-endpoint-id: The ID of the endpoint.    vpc-endpoint-state: The state of the endpoint. (pending | available | deleting | deleted)  
      */
     Filters?: FilterList;
     /**
@@ -6309,7 +7055,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcPeeringConnectionsRequest {
     /**
-     * One or more filters.    accepter-vpc-info.cidr-block - The IPv4 CIDR block of the peer VPC.    accepter-vpc-info.owner-id - The AWS account ID of the owner of the peer VPC.    accepter-vpc-info.vpc-id - The ID of the peer VPC.    expiration-time - The expiration date and time for the VPC peering connection.    requester-vpc-info.cidr-block - The IPv4 CIDR block of the requester's VPC.    requester-vpc-info.owner-id - The AWS account ID of the owner of the requester VPC.    requester-vpc-info.vpc-id - The ID of the requester VPC.    status-code - The status of the VPC peering connection (pending-acceptance | failed | expired | provisioning | active | deleted | rejected).    status-message - A message that provides more information about the status of the VPC peering connection, if applicable.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-peering-connection-id - The ID of the VPC peering connection.  
+     * One or more filters.    accepter-vpc-info.cidr-block - The IPv4 CIDR block of the accepter VPC.    accepter-vpc-info.owner-id - The AWS account ID of the owner of the accepter VPC.    accepter-vpc-info.vpc-id - The ID of the accepter VPC.    expiration-time - The expiration date and time for the VPC peering connection.    requester-vpc-info.cidr-block - The IPv4 CIDR block of the requester's VPC.    requester-vpc-info.owner-id - The AWS account ID of the owner of the requester VPC.    requester-vpc-info.vpc-id - The ID of the requester VPC.    status-code - The status of the VPC peering connection (pending-acceptance | failed | expired | provisioning | active | deleting | deleted | rejected).    status-message - A message that provides more information about the status of the VPC peering connection, if applicable.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the tag:key=value filter.    tag-value - The value of a tag assigned to the resource. This filter is independent of the tag-key filter.    vpc-peering-connection-id - The ID of the VPC peering connection.  
      */
     Filters?: FilterList;
     /**
@@ -6695,6 +7441,10 @@ declare namespace EC2 {
      */
     Iops?: Integer;
     /**
+     * ID for a user-managed CMK under which the EBS volume is encrypted. Note: This parameter is only supported on BlockDeviceMapping objects called by RunInstances, RequestSpotFleet, and RequestSpotInstances.
+     */
+    KmsKeyId?: String;
+    /**
      * The ID of the snapshot.
      */
     SnapshotId?: String;
@@ -6781,6 +7531,14 @@ declare namespace EC2 {
      */
     Type: String;
   }
+  export type ElasticGpuSpecificationList = ElasticGpuSpecification[];
+  export interface ElasticGpuSpecificationResponse {
+    /**
+     * The elastic GPU type.
+     */
+    Type?: String;
+  }
+  export type ElasticGpuSpecificationResponseList = ElasticGpuSpecificationResponse[];
   export type ElasticGpuSpecifications = ElasticGpuSpecification[];
   export type ElasticGpuState = "ATTACHED"|string;
   export type ElasticGpuStatus = "OK"|"IMPAIRED"|string;
@@ -6865,7 +7623,7 @@ declare namespace EC2 {
      */
     EventDescription?: String;
     /**
-     * The event. The following are the error events:    iamFleetRoleInvalid - The Spot fleet did not have the required permissions either to launch or terminate an instance.    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot instances that you can launch.   The following are the fleetRequestChange events:    active - The Spot fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot instances.    cancelled - The Spot fleet is canceled and has no running Spot instances. The Spot fleet will be deleted two days after its instances were terminated.    cancelled_running - The Spot fleet is canceled and will not launch additional Spot instances, but its existing Spot instances continue to run until they are interrupted or terminated.    cancelled_terminating - The Spot fleet is canceled and its Spot instances are terminating.    expired - The Spot fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the Spot fleet request was accepted and is in progress.    modify_successful - The Spot fleet request was modified.    price_update - The bid price for a launch configuration was adjusted because it was too high. This change is permanent.    submitted - The Spot fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot instances.   The following are the instanceChange events:    launched - A bid was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecUnusable - The bid price of a launch specification is not valid because it is below the market price or the market price is above the On-Demand price.    fleetProgressHalted - The bid price of every launch specification is not valid. A launch specification might become valid if the market price changes.  
+     * The event. The following are the error events:    iamFleetRoleInvalid - The Spot Fleet did not have the required permissions either to launch or terminate an instance.    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The Spot Fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The Spot Fleet is canceled and has no running Spot Instances. The Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The Spot Fleet is canceled and will not launch additional Spot Instances, but its existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The Spot Fleet is canceled and its Spot Instances are terminating.    expired - The Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the Spot Fleet request was accepted and is in progress.    modify_successful - The Spot Fleet request was modified.    price_update - The price for a launch configuration was adjusted because it was too high. This change is permanent.    submitted - The Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
      */
     EventSubType?: String;
     /**
@@ -6953,6 +7711,20 @@ declare namespace EC2 {
     Values?: ValueStringList;
   }
   export type FilterList = Filter[];
+  export interface FleetLaunchTemplateSpecification {
+    /**
+     * The ID of the launch template. You must specify either a template ID or a template name.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template. You must specify either a template name or a template ID.
+     */
+    LaunchTemplateName?: LaunchTemplateName;
+    /**
+     * The version number. By default, the default version of the launch template is used.
+     */
+    Version?: String;
+  }
   export type FleetType = "request"|"maintain"|string;
   export type Float = number;
   export interface FlowLog {
@@ -7166,6 +7938,22 @@ declare namespace EC2 {
      */
     TotalUpfrontPrice?: String;
   }
+  export interface GetLaunchTemplateDataRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the instance.
+     */
+    InstanceId: String;
+  }
+  export interface GetLaunchTemplateDataResult {
+    /**
+     * The instance data.
+     */
+    LaunchTemplateData?: ResponseLaunchTemplateData;
+  }
   export interface GetPasswordDataRequest {
     /**
      * The ID of the Windows instance.
@@ -7263,7 +8051,7 @@ declare namespace EC2 {
      */
     EventInformation: EventInformation;
     /**
-     * The event type.    error - An error with the Spot fleet request.    fleetRequestChange - A change in the status or configuration of the Spot fleet request.    instanceChange - An instance was launched or terminated.    Information - An informational event.  
+     * The event type.    error - An error with the Spot Fleet request.    fleetRequestChange - A change in the status or configuration of the Spot Fleet request.    instanceChange - An instance was launched or terminated.    Information - An informational event.  
      */
     EventType: EventType;
     /**
@@ -8326,6 +9114,28 @@ declare namespace EC2 {
     State?: ListingState;
   }
   export type InstanceCountList = InstanceCount[];
+  export interface InstanceCreditSpecification {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+    /**
+     * The credit option for CPU usage of the instance. Valid values are standard and unlimited.
+     */
+    CpuCredits?: String;
+  }
+  export type InstanceCreditSpecificationList = InstanceCreditSpecification[];
+  export type InstanceCreditSpecificationListRequest = InstanceCreditSpecificationRequest[];
+  export interface InstanceCreditSpecificationRequest {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+    /**
+     * The credit option for CPU usage of the instance. Valid values are standard and unlimited.
+     */
+    CpuCredits?: String;
+  }
   export interface InstanceExportDetails {
     /**
      * The ID of the resource being exported.
@@ -8339,7 +9149,7 @@ declare namespace EC2 {
   export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
   export type InstanceIdSet = String[];
   export type InstanceIdStringList = String[];
-  export type InstanceInterruptionBehavior = "stop"|"terminate"|string;
+  export type InstanceInterruptionBehavior = "hibernate"|"stop"|"terminate"|string;
   export interface InstanceIpv6Address {
     /**
      * The IPv6 address.
@@ -8347,8 +9157,25 @@ declare namespace EC2 {
     Ipv6Address?: String;
   }
   export type InstanceIpv6AddressList = InstanceIpv6Address[];
+  export type InstanceIpv6AddressListRequest = InstanceIpv6AddressRequest[];
+  export interface InstanceIpv6AddressRequest {
+    /**
+     * The IPv6 address.
+     */
+    Ipv6Address?: String;
+  }
   export type InstanceLifecycleType = "spot"|"scheduled"|string;
   export type InstanceList = Instance[];
+  export interface InstanceMarketOptionsRequest {
+    /**
+     * The market type.
+     */
+    MarketType?: MarketType;
+    /**
+     * The options for Spot Instances.
+     */
+    SpotOptions?: SpotMarketOptions;
+  }
   export interface InstanceMonitoring {
     /**
      * The ID of the instance.
@@ -8626,7 +9453,7 @@ declare namespace EC2 {
      */
     Status?: SummaryStatus;
   }
-  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.16xlarge"|string;
+  export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.12xlarge"|"m5.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|string;
   export type InstanceTypeList = InstanceType[];
   export type Integer = number;
   export type InterfacePermissionType = "INSTANCE-ATTACH"|"EIP-ASSOCIATE"|string;
@@ -8826,6 +9653,493 @@ declare namespace EC2 {
     Monitoring?: RunInstancesMonitoringEnabled;
   }
   export type LaunchSpecsList = SpotFleetLaunchSpecification[];
+  export interface LaunchTemplate {
+    /**
+     * The ID of the launch template.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template.
+     */
+    LaunchTemplateName?: LaunchTemplateName;
+    /**
+     * The time launch template was created.
+     */
+    CreateTime?: DateTime;
+    /**
+     * The principal that created the launch template. 
+     */
+    CreatedBy?: String;
+    /**
+     * The version number of the default version of the launch template.
+     */
+    DefaultVersionNumber?: Long;
+    /**
+     * The version number of the latest version of the launch template.
+     */
+    LatestVersionNumber?: Long;
+    /**
+     * The tags for the launch template.
+     */
+    Tags?: TagList;
+  }
+  export interface LaunchTemplateBlockDeviceMapping {
+    /**
+     * The device name.
+     */
+    DeviceName?: String;
+    /**
+     * The virtual device name (ephemeralN).
+     */
+    VirtualName?: String;
+    /**
+     * Information about the block device for an EBS volume.
+     */
+    Ebs?: LaunchTemplateEbsBlockDevice;
+    /**
+     * Suppresses the specified device included in the block device mapping of the AMI.
+     */
+    NoDevice?: String;
+  }
+  export type LaunchTemplateBlockDeviceMappingList = LaunchTemplateBlockDeviceMapping[];
+  export interface LaunchTemplateBlockDeviceMappingRequest {
+    /**
+     * The device name (for example, /dev/sdh or xvdh).
+     */
+    DeviceName?: String;
+    /**
+     * The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ephemeral0 and ephemeral1. The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.
+     */
+    VirtualName?: String;
+    /**
+     * Parameters used to automatically set up EBS volumes when the instance is launched.
+     */
+    Ebs?: LaunchTemplateEbsBlockDeviceRequest;
+    /**
+     * Suppresses the specified device included in the block device mapping of the AMI.
+     */
+    NoDevice?: String;
+  }
+  export type LaunchTemplateBlockDeviceMappingRequestList = LaunchTemplateBlockDeviceMappingRequest[];
+  export interface LaunchTemplateConfig {
+    /**
+     * The launch template.
+     */
+    LaunchTemplateSpecification?: FleetLaunchTemplateSpecification;
+    /**
+     * Any parameters that you specify override the same parameters in the launch template.
+     */
+    Overrides?: LaunchTemplateOverridesList;
+  }
+  export type LaunchTemplateConfigList = LaunchTemplateConfig[];
+  export interface LaunchTemplateEbsBlockDevice {
+    /**
+     * Indicates whether the EBS volume is encrypted.
+     */
+    Encrypted?: Boolean;
+    /**
+     * Indicates whether the EBS volume is deleted on instance termination.
+     */
+    DeleteOnTermination?: Boolean;
+    /**
+     * The number of I/O operations per second (IOPS) that the volume supports. 
+     */
+    Iops?: Integer;
+    /**
+     * The ARN of the AWS Key Management Service (AWS KMS) CMK used for encryption.
+     */
+    KmsKeyId?: String;
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The size of the volume, in GiB.
+     */
+    VolumeSize?: Integer;
+    /**
+     * The volume type.
+     */
+    VolumeType?: VolumeType;
+  }
+  export interface LaunchTemplateEbsBlockDeviceRequest {
+    /**
+     * Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value.
+     */
+    Encrypted?: Boolean;
+    /**
+     * Indicates whether the EBS volume is deleted on instance termination.
+     */
+    DeleteOnTermination?: Boolean;
+    /**
+     * The number of I/O operations per second (IOPS) that the volume supports. For io1, this represents the number of IOPS that are provisioned for the volume. For gp2, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     */
+    Iops?: Integer;
+    /**
+     * The ARN of the AWS Key Management Service (AWS KMS) CMK used for encryption.
+     */
+    KmsKeyId?: String;
+    /**
+     * The ID of the snapshot.
+     */
+    SnapshotId?: String;
+    /**
+     * The size of the volume, in GiB. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.
+     */
+    VolumeSize?: Integer;
+    /**
+     * The volume type.
+     */
+    VolumeType?: VolumeType;
+  }
+  export type LaunchTemplateErrorCode = "launchTemplateIdDoesNotExist"|"launchTemplateIdMalformed"|"launchTemplateNameDoesNotExist"|"launchTemplateNameMalformed"|"launchTemplateVersionDoesNotExist"|"unexpectedError"|string;
+  export interface LaunchTemplateIamInstanceProfileSpecification {
+    /**
+     * The Amazon Resource Name (ARN) of the instance profile.
+     */
+    Arn?: String;
+    /**
+     * The name of the instance profile.
+     */
+    Name?: String;
+  }
+  export interface LaunchTemplateIamInstanceProfileSpecificationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the instance profile.
+     */
+    Arn?: String;
+    /**
+     * The name of the instance profile.
+     */
+    Name?: String;
+  }
+  export interface LaunchTemplateInstanceMarketOptions {
+    /**
+     * The market type.
+     */
+    MarketType?: MarketType;
+    /**
+     * The options for Spot Instances.
+     */
+    SpotOptions?: LaunchTemplateSpotMarketOptions;
+  }
+  export interface LaunchTemplateInstanceMarketOptionsRequest {
+    /**
+     * The market type.
+     */
+    MarketType?: MarketType;
+    /**
+     * The options for Spot Instances.
+     */
+    SpotOptions?: LaunchTemplateSpotMarketOptionsRequest;
+  }
+  export interface LaunchTemplateInstanceNetworkInterfaceSpecification {
+    /**
+     * Indicates whether to associate a public IPv4 address with eth0 for a new network interface.
+     */
+    AssociatePublicIpAddress?: Boolean;
+    /**
+     * Indicates whether the network interface is deleted when the instance is terminated.
+     */
+    DeleteOnTermination?: Boolean;
+    /**
+     * A description for the network interface.
+     */
+    Description?: String;
+    /**
+     * The device index for the network interface attachment.
+     */
+    DeviceIndex?: Integer;
+    /**
+     * The IDs of one or more security groups.
+     */
+    Groups?: GroupIdStringList;
+    /**
+     * The number of IPv6 addresses for the network interface.
+     */
+    Ipv6AddressCount?: Integer;
+    /**
+     * The IPv6 addresses for the network interface.
+     */
+    Ipv6Addresses?: InstanceIpv6AddressList;
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The primary private IPv4 address of the network interface.
+     */
+    PrivateIpAddress?: String;
+    /**
+     * One or more private IPv4 addresses.
+     */
+    PrivateIpAddresses?: PrivateIpAddressSpecificationList;
+    /**
+     * The number of secondary private IPv4 addresses for the network interface.
+     */
+    SecondaryPrivateIpAddressCount?: Integer;
+    /**
+     * The ID of the subnet for the network interface.
+     */
+    SubnetId?: String;
+  }
+  export type LaunchTemplateInstanceNetworkInterfaceSpecificationList = LaunchTemplateInstanceNetworkInterfaceSpecification[];
+  export interface LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
+    /**
+     * Associates a public IPv4 address with eth0 for a new network interface.
+     */
+    AssociatePublicIpAddress?: Boolean;
+    /**
+     * Indicates whether the network interface is deleted when the instance is terminated.
+     */
+    DeleteOnTermination?: Boolean;
+    /**
+     * A description for the network interface.
+     */
+    Description?: String;
+    /**
+     * The device index for the network interface attachment.
+     */
+    DeviceIndex?: Integer;
+    /**
+     * The IDs of one or more security groups.
+     */
+    Groups?: SecurityGroupIdStringList;
+    /**
+     * The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.
+     */
+    Ipv6AddressCount?: Integer;
+    /**
+     * One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.
+     */
+    Ipv6Addresses?: InstanceIpv6AddressListRequest;
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The primary private IPv4 address of the network interface.
+     */
+    PrivateIpAddress?: String;
+    /**
+     * One or more private IPv4 addresses.
+     */
+    PrivateIpAddresses?: PrivateIpAddressSpecificationList;
+    /**
+     * The number of secondary private IPv4 addresses to assign to a network interface.
+     */
+    SecondaryPrivateIpAddressCount?: Integer;
+    /**
+     * The ID of the subnet for the network interface.
+     */
+    SubnetId?: String;
+  }
+  export type LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList = LaunchTemplateInstanceNetworkInterfaceSpecificationRequest[];
+  export type LaunchTemplateName = string;
+  export type LaunchTemplateNameStringList = LaunchTemplateName[];
+  export interface LaunchTemplateOverrides {
+    /**
+     * The instance type.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance.
+     */
+    SpotPrice?: String;
+    /**
+     * The ID of the subnet in which to launch the instances.
+     */
+    SubnetId?: String;
+    /**
+     * The Availability Zone in which to launch the instances.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The number of units provided by the specified instance type.
+     */
+    WeightedCapacity?: Double;
+  }
+  export type LaunchTemplateOverridesList = LaunchTemplateOverrides[];
+  export interface LaunchTemplatePlacement {
+    /**
+     * The Availability Zone of the instance.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The affinity setting for the instance on the Dedicated Host.
+     */
+    Affinity?: String;
+    /**
+     * The name of the placement group for the instance.
+     */
+    GroupName?: String;
+    /**
+     * The ID of the Dedicated Host for the instance.
+     */
+    HostId?: String;
+    /**
+     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. 
+     */
+    Tenancy?: Tenancy;
+    /**
+     * Reserved for future use.
+     */
+    SpreadDomain?: String;
+  }
+  export interface LaunchTemplatePlacementRequest {
+    /**
+     * The Availability Zone for the instance.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The affinity setting for an instance on a Dedicated Host.
+     */
+    Affinity?: String;
+    /**
+     * The name of the placement group for the instance.
+     */
+    GroupName?: String;
+    /**
+     * The ID of the Dedicated Host for the instance.
+     */
+    HostId?: String;
+    /**
+     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.
+     */
+    Tenancy?: Tenancy;
+    /**
+     * Reserved for future use.
+     */
+    SpreadDomain?: String;
+  }
+  export type LaunchTemplateSet = LaunchTemplate[];
+  export interface LaunchTemplateSpecification {
+    /**
+     * The ID of the launch template.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template.
+     */
+    LaunchTemplateName?: String;
+    /**
+     * The version number of the launch template. Default: The default version for the launch template.
+     */
+    Version?: String;
+  }
+  export interface LaunchTemplateSpotMarketOptions {
+    /**
+     * The maximum hourly price you're willing to pay for the Spot Instances.
+     */
+    MaxPrice?: String;
+    /**
+     * The Spot Instance request type.
+     */
+    SpotInstanceType?: SpotInstanceType;
+    /**
+     * The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
+     */
+    BlockDurationMinutes?: Integer;
+    /**
+     * The end date of the request. For a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date and time is reached.
+     */
+    ValidUntil?: DateTime;
+    /**
+     * The behavior when a Spot Instance is interrupted.
+     */
+    InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
+  }
+  export interface LaunchTemplateSpotMarketOptionsRequest {
+    /**
+     * The maximum hourly price you're willing to pay for the Spot Instances.
+     */
+    MaxPrice?: String;
+    /**
+     * The Spot Instance request type.
+     */
+    SpotInstanceType?: SpotInstanceType;
+    /**
+     * The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
+     */
+    BlockDurationMinutes?: Integer;
+    /**
+     * The end date of the request. For a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date and time is reached. The default end date is 7 days from the current date.
+     */
+    ValidUntil?: DateTime;
+    /**
+     * The behavior when a Spot Instance is interrupted. The default is terminate.
+     */
+    InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
+  }
+  export interface LaunchTemplateTagSpecification {
+    /**
+     * The type of resource.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * The tags for the resource.
+     */
+    Tags?: TagList;
+  }
+  export type LaunchTemplateTagSpecificationList = LaunchTemplateTagSpecification[];
+  export interface LaunchTemplateTagSpecificationRequest {
+    /**
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are instance and volume.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * The tags to apply to the resource.
+     */
+    Tags?: TagList;
+  }
+  export type LaunchTemplateTagSpecificationRequestList = LaunchTemplateTagSpecificationRequest[];
+  export interface LaunchTemplateVersion {
+    /**
+     * The ID of the launch template.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template.
+     */
+    LaunchTemplateName?: LaunchTemplateName;
+    /**
+     * The version number.
+     */
+    VersionNumber?: Long;
+    /**
+     * The description for the version.
+     */
+    VersionDescription?: VersionDescription;
+    /**
+     * The time the version was created.
+     */
+    CreateTime?: DateTime;
+    /**
+     * The principal that created the version.
+     */
+    CreatedBy?: String;
+    /**
+     * Indicates whether the version is the default version.
+     */
+    DefaultVersion?: Boolean;
+    /**
+     * Information about the launch template.
+     */
+    LaunchTemplateData?: ResponseLaunchTemplateData;
+  }
+  export type LaunchTemplateVersionSet = LaunchTemplateVersion[];
+  export interface LaunchTemplatesMonitoring {
+    /**
+     * Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.
+     */
+    Enabled?: Boolean;
+  }
+  export interface LaunchTemplatesMonitoringRequest {
+    /**
+     * Specify true to enable detailed monitoring. Otherwise, basic monitoring is enabled.
+     */
+    Enabled?: Boolean;
+  }
   export type ListingState = "available"|"sold"|"cancelled"|"pending"|string;
   export type ListingStatus = "active"|"pending"|"cancelled"|"closed"|string;
   export interface LoadBalancersConfig {
@@ -8871,6 +10185,7 @@ declare namespace EC2 {
     UserId?: String;
   }
   export type Long = number;
+  export type MarketType = "spot"|string;
   export type MaxResults = number;
   export interface ModifyFpgaImageAttributeRequest {
     /**
@@ -9072,6 +10387,30 @@ declare namespace EC2 {
      */
     Value?: String;
   }
+  export interface ModifyInstanceCreditSpecificationRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Information about the credit option for CPU usage.
+     */
+    InstanceCreditSpecifications: InstanceCreditSpecificationListRequest;
+  }
+  export interface ModifyInstanceCreditSpecificationResult {
+    /**
+     * Information about the instances whose credit option for CPU usage was successfully modified.
+     */
+    SuccessfulInstanceCreditSpecifications?: SuccessfulInstanceCreditSpecificationSet;
+    /**
+     * Information about the instances whose credit option for CPU usage was not modified.
+     */
+    UnsuccessfulInstanceCreditSpecifications?: UnsuccessfulInstanceCreditSpecificationSet;
+  }
   export interface ModifyInstancePlacementRequest {
     /**
      * The new affinity setting for the instance.
@@ -9095,6 +10434,34 @@ declare namespace EC2 {
      * Is true if the request succeeds, and an error otherwise.
      */
     Return?: Boolean;
+  }
+  export interface ModifyLaunchTemplateRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateId?: String;
+    /**
+     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     */
+    LaunchTemplateName?: LaunchTemplateName;
+    /**
+     * The version number of the launch template to set as the default version.
+     */
+    DefaultVersion?: String;
+  }
+  export interface ModifyLaunchTemplateResult {
+    /**
+     * Information about the launch template.
+     */
+    LaunchTemplate?: LaunchTemplate;
   }
   export interface ModifyNetworkInterfaceAttributeRequest {
     /**
@@ -9174,11 +10541,11 @@ declare namespace EC2 {
   }
   export interface ModifySpotFleetRequestRequest {
     /**
-     * Indicates whether running Spot instances should be terminated if the target capacity of the Spot fleet request is decreased below the current size of the Spot fleet.
+     * Indicates whether running Spot Instances should be terminated if the target capacity of the Spot Fleet request is decreased below the current size of the Spot Fleet.
      */
     ExcessCapacityTerminationPolicy?: ExcessCapacityTerminationPolicy;
     /**
-     * The ID of the Spot fleet request.
+     * The ID of the Spot Fleet request.
      */
     SpotFleetRequestId: String;
     /**
@@ -9259,6 +10626,30 @@ declare namespace EC2 {
      */
     VpcId: String;
   }
+  export interface ModifyVpcEndpointConnectionNotificationRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the notification.
+     */
+    ConnectionNotificationId: String;
+    /**
+     * The ARN for the SNS topic for the notification.
+     */
+    ConnectionNotificationArn?: String;
+    /**
+     * One or more events for the endpoint. Valid values are Accept, Connect, Delete, and Reject.
+     */
+    ConnectionEvents?: ValueStringList;
+  }
+  export interface ModifyVpcEndpointConnectionNotificationResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    ReturnValue?: Boolean;
+  }
   export interface ModifyVpcEndpointRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -9310,6 +10701,58 @@ declare namespace EC2 {
      * Returns true if the request succeeds; otherwise, it returns an error.
      */
     Return?: Boolean;
+  }
+  export interface ModifyVpcEndpointServiceConfigurationRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the service.
+     */
+    ServiceId: String;
+    /**
+     * Indicate whether requests to create an endpoint to your service must be accepted.
+     */
+    AcceptanceRequired?: Boolean;
+    /**
+     * The Amazon Resource Names (ARNs) of Network Load Balancers to add to your service configuration.
+     */
+    AddNetworkLoadBalancerArns?: ValueStringList;
+    /**
+     * The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your service configuration.
+     */
+    RemoveNetworkLoadBalancerArns?: ValueStringList;
+  }
+  export interface ModifyVpcEndpointServiceConfigurationResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
+  }
+  export interface ModifyVpcEndpointServicePermissionsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the service.
+     */
+    ServiceId: String;
+    /**
+     * One or more Amazon Resource Names (ARNs) of principals for which to allow permission. Specify * to allow all principals.
+     */
+    AddAllowedPrincipals?: ValueStringList;
+    /**
+     * One or more Amazon Resource Names (ARNs) of principals for which to remove permission.
+     */
+    RemoveAllowedPrincipals?: ValueStringList;
+  }
+  export interface ModifyVpcEndpointServicePermissionsResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    ReturnValue?: Boolean;
   }
   export interface ModifyVpcPeeringConnectionOptionsRequest {
     /**
@@ -9875,7 +11318,7 @@ declare namespace EC2 {
   export type PlacementGroupList = PlacementGroup[];
   export type PlacementGroupState = "pending"|"available"|"deleting"|"deleted"|string;
   export type PlacementGroupStringList = String[];
-  export type PlacementStrategy = "cluster"|string;
+  export type PlacementStrategy = "cluster"|"spread"|string;
   export type PlatformValues = "Windows"|string;
   export interface PortRange {
     /**
@@ -9959,6 +11402,7 @@ declare namespace EC2 {
     Price?: Double;
   }
   export type PricingDetailsList = PricingDetail[];
+  export type PrincipalType = "All"|"Service"|"OrganizationUnit"|"Account"|"User"|"Role"|string;
   export type PrivateIpAddressConfigSet = ScheduledInstancesPrivateIpAddressConfig[];
   export interface PrivateIpAddressSpecification {
     /**
@@ -10237,7 +11681,7 @@ declare namespace EC2 {
      */
     SriovNetSupport?: String;
     /**
-     * The type of virtualization. Default: paravirtual 
+     * The type of virtualization (hvm | paravirtual). Default: paravirtual 
      */
     VirtualizationType?: String;
   }
@@ -10246,6 +11690,26 @@ declare namespace EC2 {
      * The ID of the newly registered AMI.
      */
     ImageId?: String;
+  }
+  export interface RejectVpcEndpointConnectionsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the service.
+     */
+    ServiceId: String;
+    /**
+     * The IDs of one or more VPC endpoints.
+     */
+    VpcEndpointIds: ValueStringList;
+  }
+  export interface RejectVpcEndpointConnectionsResult {
+    /**
+     * Information about the endpoints that were not rejected, if applicable.
+     */
+    Unsuccessful?: UnsuccessfulItemSet;
   }
   export interface RejectVpcPeeringConnectionRequest {
     /**
@@ -10467,29 +11931,111 @@ declare namespace EC2 {
   export type ReportStatusType = "ok"|"impaired"|string;
   export type RequestHostIdList = String[];
   export type RequestHostIdSet = String[];
+  export interface RequestLaunchTemplateData {
+    /**
+     * The ID of the kernel.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User Provided Kernels in the Amazon Elastic Compute Cloud User Guide. 
+     */
+    KernelId?: String;
+    /**
+     * Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS-optimized instance.
+     */
+    EbsOptimized?: Boolean;
+    /**
+     * The IAM instance profile.
+     */
+    IamInstanceProfile?: LaunchTemplateIamInstanceProfileSpecificationRequest;
+    /**
+     * The block device mapping.  Supplying both a snapshot ID and an encryption value as arguments for block-device mapping results in an error. This is because only blank volumes can be encrypted on start, and these are not created from a snapshot. If a snapshot is the basis for the volume, it contains data by definition and its encryption status cannot be changed using this action. 
+     */
+    BlockDeviceMappings?: LaunchTemplateBlockDeviceMappingRequestList;
+    /**
+     * One or more network interfaces.
+     */
+    NetworkInterfaces?: LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList;
+    /**
+     * The ID of the AMI, which you can get by using DescribeImages.
+     */
+    ImageId?: String;
+    /**
+     * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The name of the key pair. You can create a key pair using CreateKeyPair or ImportKeyPair.  If you do not specify a key pair, you can't connect to the instance unless you choose an AMI that is configured to allow users another way to log in. 
+     */
+    KeyName?: String;
+    /**
+     * The monitoring for the instance.
+     */
+    Monitoring?: LaunchTemplatesMonitoringRequest;
+    /**
+     * The placement for the instance.
+     */
+    Placement?: LaunchTemplatePlacementRequest;
+    /**
+     * The ID of the RAM disk.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User Provided Kernels in the Amazon Elastic Compute Cloud User Guide. 
+     */
+    RamDiskId?: String;
+    /**
+     * If set to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API. To change this attribute to false after launch, use ModifyInstanceAttribute.
+     */
+    DisableApiTermination?: Boolean;
+    /**
+     * Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown). Default: stop 
+     */
+    InstanceInitiatedShutdownBehavior?: ShutdownBehavior;
+    /**
+     * The user data to make available to the instance. For more information, see Running Commands on Your Linux Instance at Launch (Linux) and Adding User Data (Windows). If you are using a command line tool, base64-encoding is performed for you and you can load the text from a file. Otherwise, you must provide base64-encoded text.
+     */
+    UserData?: String;
+    /**
+     * The tags to apply to the resources during launch. You can tag instances and volumes. The specified tags are applied to all instances or volumes that are created during launch.
+     */
+    TagSpecifications?: LaunchTemplateTagSpecificationRequestList;
+    /**
+     * An elastic GPU to associate with the instance.
+     */
+    ElasticGpuSpecifications?: ElasticGpuSpecificationList;
+    /**
+     * One or more security group IDs. You can create a security group using CreateSecurityGroup. You cannot specify both a security group ID and security name in the same request.
+     */
+    SecurityGroupIds?: SecurityGroupIdStringList;
+    /**
+     * [EC2-Classic, default VPC] One or more security group names. For a nondefault VPC, you must use security group IDs instead. You cannot specify both a security group ID and security name in the same request.
+     */
+    SecurityGroups?: SecurityGroupStringList;
+    /**
+     * The market (purchasing) option for the instances.
+     */
+    InstanceMarketOptions?: LaunchTemplateInstanceMarketOptionsRequest;
+    /**
+     * The credit option for CPU usage of the instance. Valid for T2 instances only.
+     */
+    CreditSpecification?: CreditSpecificationRequest;
+  }
   export interface RequestSpotFleetRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
     /**
-     * The configuration for the Spot fleet request.
+     * The configuration for the Spot Fleet request.
      */
     SpotFleetRequestConfig: SpotFleetRequestConfigData;
   }
   export interface RequestSpotFleetResponse {
     /**
-     * The ID of the Spot fleet request.
+     * The ID of the Spot Fleet request.
      */
     SpotFleetRequestId: String;
   }
   export interface RequestSpotInstancesRequest {
     /**
-     * The user-specified name for a logical grouping of bids. When you specify an Availability Zone group in a Spot Instance request, all Spot instances in the request are launched in the same Availability Zone. Instance proximity is maintained with this parameter, but the choice of Availability Zone is not. The group applies only to bids for Spot Instances of the same instance type. Any additional Spot instance requests that are specified with the same Availability Zone group name are launched in that same Availability Zone, as long as at least one instance from the group is still active. If there is no active instance running in the Availability Zone group that you specify for a new Spot instance request (all instances are terminated, the bid is expired, or the bid falls below current market), then Amazon EC2 launches the instance in any Availability Zone where the constraint can be met. Consequently, the subsequent set of Spot instances could be placed in a different zone from the original request, even if you specified the same Availability Zone group. Default: Instances are launched in any available Availability Zone.
+     * The user-specified name for a logical grouping of requests. When you specify an Availability Zone group in a Spot Instance request, all Spot Instances in the request are launched in the same Availability Zone. Instance proximity is maintained with this parameter, but the choice of Availability Zone is not. The group applies only to requests for Spot Instances of the same instance type. Any additional Spot Instance requests that are specified with the same Availability Zone group name are launched in that same Availability Zone, as long as at least one instance from the group is still active. If there is no active instance running in the Availability Zone group that you specify for a new Spot Instance request (all instances are terminated, the request is expired, or the maximum price you specified falls below current Spot price), then Amazon EC2 launches the instance in any Availability Zone where the constraint can be met. Consequently, the subsequent set of Spot Instances could be placed in a different zone from the original request, even if you specified the same Availability Zone group. Default: Instances are launched in any available Availability Zone.
      */
     AvailabilityZoneGroup?: String;
     /**
-     * The required duration for the Spot instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360). The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates. Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
+     * The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360). The duration period starts as soon as your Spot Instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates. Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
      */
     BlockDurationMinutes?: Integer;
     /**
@@ -10501,11 +12047,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of Spot instances to launch. Default: 1
+     * The maximum number of Spot Instances to launch. Default: 1
      */
     InstanceCount?: Integer;
     /**
-     * The instance launch group. Launch groups are Spot instances that launch together and terminate together. Default: Instances are launched and terminated individually
+     * The instance launch group. Launch groups are Spot Instances that launch together and terminate together. Default: Instances are launched and terminated individually
      */
     LaunchGroup?: String;
     /**
@@ -10513,29 +12059,29 @@ declare namespace EC2 {
      */
     LaunchSpecification?: RequestSpotLaunchSpecification;
     /**
-     * The maximum hourly price (bid) for any Spot instance launched to fulfill the request.
+     * The maximum price per hour that you are willing to pay for a Spot Instance. The default is the On-Demand price.
      */
-    SpotPrice: String;
+    SpotPrice?: String;
     /**
-     * The Spot instance request type. Default: one-time 
+     * The Spot Instance request type. Default: one-time 
      */
     Type?: SpotInstanceType;
     /**
-     * The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled. Default: The request is effective indefinitely.
+     * The start date of the request. If this is a one-time request, the request becomes active at this date and time and remains active until all instances launch, the request expires, or the request is canceled. If the request is persistent, the request becomes active at this date and time and remains active until it expires or is canceled.
      */
     ValidFrom?: DateTime;
     /**
-     * The end date of the request. If this is a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date and time is reached. Default: The request is effective indefinitely.
+     * The end date of the request. If this is a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date is reached. The default end date is 7 days from the current date.
      */
     ValidUntil?: DateTime;
     /**
-     * Indicates whether a Spot instance stops or terminates when it is interrupted.
+     * The behavior when a Spot Instance is interrupted. The default is terminate.
      */
     InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
   }
   export interface RequestSpotInstancesResult {
     /**
-     * One or more Spot instance requests.
+     * One or more Spot Instance requests.
      */
     SpotInstanceRequests?: SpotInstanceRequestList;
   }
@@ -11010,8 +12556,100 @@ declare namespace EC2 {
   }
   export type ResourceIdList = String[];
   export type ResourceType = "customer-gateway"|"dhcp-options"|"image"|"instance"|"internet-gateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"snapshot"|"spot-instances-request"|"subnet"|"security-group"|"volume"|"vpc"|"vpn-connection"|"vpn-gateway"|string;
+  export interface ResponseError {
+    /**
+     * The error code.
+     */
+    Code?: LaunchTemplateErrorCode;
+    /**
+     * The error message, if applicable.
+     */
+    Message?: String;
+  }
   export type ResponseHostIdList = String[];
   export type ResponseHostIdSet = String[];
+  export interface ResponseLaunchTemplateData {
+    /**
+     * The ID of the kernel, if applicable.
+     */
+    KernelId?: String;
+    /**
+     * Indicates whether the instance is optimized for Amazon EBS I/O. 
+     */
+    EbsOptimized?: Boolean;
+    /**
+     * The IAM instance profile.
+     */
+    IamInstanceProfile?: LaunchTemplateIamInstanceProfileSpecification;
+    /**
+     * The block device mappings.
+     */
+    BlockDeviceMappings?: LaunchTemplateBlockDeviceMappingList;
+    /**
+     * The network interfaces.
+     */
+    NetworkInterfaces?: LaunchTemplateInstanceNetworkInterfaceSpecificationList;
+    /**
+     * The ID of the AMI that was used to launch the instance.
+     */
+    ImageId?: String;
+    /**
+     * The instance type.
+     */
+    InstanceType?: InstanceType;
+    /**
+     * The name of the key pair.
+     */
+    KeyName?: String;
+    /**
+     * The monitoring for the instance.
+     */
+    Monitoring?: LaunchTemplatesMonitoring;
+    /**
+     * The placement of the instance.
+     */
+    Placement?: LaunchTemplatePlacement;
+    /**
+     * The ID of the RAM disk, if applicable.
+     */
+    RamDiskId?: String;
+    /**
+     * If set to true, indicates that the instance cannot be terminated using the Amazon EC2 console, command line tool, or API.
+     */
+    DisableApiTermination?: Boolean;
+    /**
+     * Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).
+     */
+    InstanceInitiatedShutdownBehavior?: ShutdownBehavior;
+    /**
+     * The user data for the instance. 
+     */
+    UserData?: String;
+    /**
+     * The tags.
+     */
+    TagSpecifications?: LaunchTemplateTagSpecificationList;
+    /**
+     * The elastic GPU specification.
+     */
+    ElasticGpuSpecifications?: ElasticGpuSpecificationResponseList;
+    /**
+     * The security group IDs.
+     */
+    SecurityGroupIds?: ValueStringList;
+    /**
+     * The security group names.
+     */
+    SecurityGroups?: ValueStringList;
+    /**
+     * The market (purchasing) option for the instances.
+     */
+    InstanceMarketOptions?: LaunchTemplateInstanceMarketOptions;
+    /**
+     * The credit option for CPU usage of the instance.
+     */
+    CreditSpecification?: CreditSpecification;
+  }
   export type RestorableByStringList = String[];
   export interface RestoreAddressToClassicRequest {
     /**
@@ -11227,7 +12865,7 @@ declare namespace EC2 {
     /**
      * The ID of the AMI, which you can get by calling DescribeImages.
      */
-    ImageId: String;
+    ImageId?: String;
     /**
      * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide. Default: m1.small 
      */
@@ -11321,13 +12959,25 @@ declare namespace EC2 {
      */
     PrivateIpAddress?: String;
     /**
-     * An Elastic GPU to associate with the instance.
+     * An elastic GPU to associate with the instance.
      */
     ElasticGpuSpecification?: ElasticGpuSpecifications;
     /**
      * The tags to apply to the resources during launch. You can tag instances and volumes. The specified tags are applied to all instances or volumes that are created during launch.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The launch template to use to launch the instances. Any parameters that you specify in RunInstances override the same parameters in the launch template.
+     */
+    LaunchTemplate?: LaunchTemplateSpecification;
+    /**
+     * The market (purchasing) option for the instances.
+     */
+    InstanceMarketOptions?: InstanceMarketOptionsRequest;
+    /**
+     * The credit option for CPU usage of the instance. Valid values are standard and unlimited. To change this attribute after launch, use ModifyInstanceCreditSpecification. For more information, see T2 Instances in the Amazon Elastic Compute Cloud User Guide. Default: standard 
+     */
+    CreditSpecification?: CreditSpecificationRequest;
   }
   export interface RunScheduledInstancesRequest {
     /**
@@ -11802,6 +13452,45 @@ declare namespace EC2 {
   }
   export type SecurityGroupReferences = SecurityGroupReference[];
   export type SecurityGroupStringList = String[];
+  export interface ServiceConfiguration {
+    /**
+     * The type of service.
+     */
+    ServiceType?: ServiceTypeDetailSet;
+    /**
+     * The ID of the service.
+     */
+    ServiceId?: String;
+    /**
+     * The name of the service.
+     */
+    ServiceName?: String;
+    /**
+     * The service state.
+     */
+    ServiceState?: ServiceState;
+    /**
+     * In the Availability Zones in which the service is available.
+     */
+    AvailabilityZones?: ValueStringList;
+    /**
+     * Indicates whether requests from other AWS accounts to create an endpoint to the service must first be accepted.
+     */
+    AcceptanceRequired?: Boolean;
+    /**
+     * The Amazon Resource Names (ARNs) of the Network Load Balancers for the service.
+     */
+    NetworkLoadBalancerArns?: ValueStringList;
+    /**
+     * The DNS names for the service.
+     */
+    BaseEndpointDnsNames?: ValueStringList;
+    /**
+     * The private DNS name for the service.
+     */
+    PrivateDnsName?: String;
+  }
+  export type ServiceConfigurationSet = ServiceConfiguration[];
   export interface ServiceDetail {
     /**
      * The Amazon Resource Name (ARN) of the service.
@@ -11837,6 +13526,7 @@ declare namespace EC2 {
     AcceptanceRequired?: Boolean;
   }
   export type ServiceDetailSet = ServiceDetail[];
+  export type ServiceState = "Pending"|"Available"|"Deleting"|"Deleted"|"Failed"|string;
   export type ServiceType = "Interface"|"Gateway"|string;
   export interface ServiceTypeDetail {
     /**
@@ -12029,11 +13719,11 @@ declare namespace EC2 {
   }
   export interface SpotDatafeedSubscription {
     /**
-     * The Amazon S3 bucket where the Spot instance data feed is located.
+     * The Amazon S3 bucket where the Spot Instance data feed is located.
      */
     Bucket?: String;
     /**
-     * The fault codes for the Spot instance request, if any.
+     * The fault codes for the Spot Instance request, if any.
      */
     Fault?: SpotInstanceStateFault;
     /**
@@ -12045,7 +13735,7 @@ declare namespace EC2 {
      */
     Prefix?: String;
     /**
-     * The state of the Spot instance data feed subscription.
+     * The state of the Spot Instance data feed subscription.
      */
     State?: DatafeedSubscriptionState;
   }
@@ -12075,7 +13765,7 @@ declare namespace EC2 {
      */
     ImageId?: String;
     /**
-     * The instance type. Note that T2 and HS1 instance types are not supported.
+     * The instance type.
      */
     InstanceType?: InstanceType;
     /**
@@ -12103,7 +13793,7 @@ declare namespace EC2 {
      */
     RamdiskId?: String;
     /**
-     * The bid price per unit hour for the specified instance type. If this value is not specified, the default is the Spot bid price specified for the fleet. To determine the bid price per unit hour, divide the Spot bid price by the value of WeightedCapacity.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. If this value is not specified, the default is the Spot price specified for the fleet. To determine the Spot price per unit hour, divide the Spot price by the value of WeightedCapacity.
      */
     SpotPrice?: String;
     /**
@@ -12131,7 +13821,7 @@ declare namespace EC2 {
   }
   export interface SpotFleetRequestConfig {
     /**
-     * The progress of the Spot fleet request. If there is an error, the status is error. After all bids are placed, the status is pending_fulfillment. If the size of the fleet is equal to or greater than its target capacity, the status is fulfilled. If the size of the fleet is decreased, the status is pending_termination while Spot instances are terminating.
+     * The progress of the Spot Fleet request. If there is an error, the status is error. After all requests are placed, the status is pending_fulfillment. If the size of the fleet is equal to or greater than its target capacity, the status is fulfilled. If the size of the fleet is decreased, the status is pending_termination while Spot Instances are terminating.
      */
     ActivityStatus?: ActivityStatus;
     /**
@@ -12139,21 +13829,21 @@ declare namespace EC2 {
      */
     CreateTime: DateTime;
     /**
-     * Information about the configuration of the Spot fleet request.
+     * The configuration of the Spot Fleet request.
      */
     SpotFleetRequestConfig: SpotFleetRequestConfigData;
     /**
-     * The ID of the Spot fleet request.
+     * The ID of the Spot Fleet request.
      */
     SpotFleetRequestId: String;
     /**
-     * The state of the Spot fleet request.
+     * The state of the Spot Fleet request.
      */
     SpotFleetRequestState: BatchState;
   }
   export interface SpotFleetRequestConfigData {
     /**
-     * Indicates how to allocate the target capacity across the Spot pools specified by the Spot fleet request. The default is lowestPrice.
+     * Indicates how to allocate the target capacity across the Spot pools specified by the Spot Fleet request. The default is lowestPrice.
      */
     AllocationStrategy?: AllocationStrategy;
     /**
@@ -12161,7 +13851,7 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * Indicates whether running Spot instances should be terminated if the target capacity of the Spot fleet request is decreased below the current size of the Spot fleet.
+     * Indicates whether running Spot Instances should be terminated if the target capacity of the Spot Fleet request is decreased below the current size of the Spot Fleet.
      */
     ExcessCapacityTerminationPolicy?: ExcessCapacityTerminationPolicy;
     /**
@@ -12169,27 +13859,31 @@ declare namespace EC2 {
      */
     FulfilledCapacity?: Double;
     /**
-     * Grants the Spot fleet permission to terminate Spot instances on your behalf when you cancel its Spot fleet request using CancelSpotFleetRequests or when the Spot fleet request expires, if you set terminateInstancesWithExpiration.
+     * Grants the Spot Fleet permission to terminate Spot Instances on your behalf when you cancel its Spot Fleet request using CancelSpotFleetRequests or when the Spot Fleet request expires, if you set terminateInstancesWithExpiration.
      */
     IamFleetRole: String;
     /**
-     * Information about the launch specifications for the Spot fleet request.
+     * The launch specifications for the Spot Fleet request.
      */
-    LaunchSpecifications: LaunchSpecsList;
+    LaunchSpecifications?: LaunchSpecsList;
     /**
-     * The bid price per unit hour.
+     * The launch template and overrides.
      */
-    SpotPrice: String;
+    LaunchTemplateConfigs?: LaunchTemplateConfigList;
     /**
-     * The number of units to request. You can choose to set the target capacity in terms of instances or a performance characteristic that is important to your application workload, such as vCPUs, memory, or I/O.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. The default is the On-Demand price.
+     */
+    SpotPrice?: String;
+    /**
+     * The number of units to request. You can choose to set the target capacity in terms of instances or a performance characteristic that is important to your application workload, such as vCPUs, memory, or I/O. If the request type is maintain, you can specify a target capacity of 0 and add capacity later.
      */
     TargetCapacity: Integer;
     /**
-     * Indicates whether running Spot instances should be terminated when the Spot fleet request expires.
+     * Indicates whether running Spot Instances should be terminated when the Spot Fleet request expires.
      */
     TerminateInstancesWithExpiration?: Boolean;
     /**
-     * The type of request. Indicates whether the fleet will only request the target capacity or also attempt to maintain it. When you request a certain target capacity, the fleet will only place the required bids. It will not attempt to replenish Spot instances if capacity is diminished, nor will it submit bids in alternative Spot pools if capacity is not available. When you want to maintain a certain target capacity, fleet will place the required bids to meet this target capacity. It will also automatically replenish any interrupted instances. Default: maintain.
+     * The type of request. Indicates whether the fleet will only request the target capacity or also attempt to maintain it. When you request a certain target capacity, the fleet will only place the required requests. It will not attempt to replenish Spot Instances if capacity is diminished, nor will it submit requests in alternative Spot pools if capacity is not available. When you want to maintain a certain target capacity, fleet will place the required requests to meet this target capacity. It will also automatically replenish any interrupted instances. Default: maintain.
      */
     Type?: FleetType;
     /**
@@ -12197,19 +13891,19 @@ declare namespace EC2 {
      */
     ValidFrom?: DateTime;
     /**
-     * The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot instance requests are placed or enabled to fulfill the request.
+     * The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot Instance requests are placed or able to fulfill the request. The default end date is 7 days from the current date.
      */
     ValidUntil?: DateTime;
     /**
-     * Indicates whether Spot fleet should replace unhealthy instances.
+     * Indicates whether Spot Fleet should replace unhealthy instances.
      */
     ReplaceUnhealthyInstances?: Boolean;
     /**
-     * Indicates whether a Spot instance stops or terminates when it is interrupted.
+     * The behavior when a Spot Instance is interrupted. The default is terminate.
      */
     InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
     /**
-     * One or more Classic Load Balancers and target groups to attach to the Spot fleet request. Spot fleet registers the running Spot instances with the specified Classic Load Balancers and target groups. With Network Load Balancers, Spot fleet cannot register instances that have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1.
+     * One or more Classic Load Balancers and target groups to attach to the Spot Fleet request. Spot Fleet registers the running Spot Instances with the specified Classic Load Balancers and target groups. With Network Load Balancers, Spot Fleet cannot register instances that have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1.
      */
     LoadBalancersConfig?: LoadBalancersConfig;
   }
@@ -12227,31 +13921,31 @@ declare namespace EC2 {
   export type SpotFleetTagSpecificationList = SpotFleetTagSpecification[];
   export interface SpotInstanceRequest {
     /**
-     * If you specified a duration and your Spot instance request was fulfilled, this is the fixed hourly price in effect for the Spot instance while it runs.
+     * If you specified a duration and your Spot Instance request was fulfilled, this is the fixed hourly price in effect for the Spot Instance while it runs.
      */
     ActualBlockHourlyPrice?: String;
     /**
-     * The Availability Zone group. If you specify the same Availability Zone group for all Spot instance requests, all Spot instances are launched in the same Availability Zone.
+     * The Availability Zone group. If you specify the same Availability Zone group for all Spot Instance requests, all Spot Instances are launched in the same Availability Zone.
      */
     AvailabilityZoneGroup?: String;
     /**
-     * The duration for the Spot instance, in minutes.
+     * The duration for the Spot Instance, in minutes.
      */
     BlockDurationMinutes?: Integer;
     /**
-     * The date and time when the Spot instance request was created, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+     * The date and time when the Spot Instance request was created, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
      */
     CreateTime?: DateTime;
     /**
-     * The fault codes for the Spot instance request, if any.
+     * The fault codes for the Spot Instance request, if any.
      */
     Fault?: SpotInstanceStateFault;
     /**
-     * The instance ID, if an instance has been launched to fulfill the Spot instance request.
+     * The instance ID, if an instance has been launched to fulfill the Spot Instance request.
      */
     InstanceId?: String;
     /**
-     * The instance launch group. Launch groups are Spot instances that launch together and terminate together.
+     * The instance launch group. Launch groups are Spot Instances that launch together and terminate together.
      */
     LaunchGroup?: String;
     /**
@@ -12259,27 +13953,27 @@ declare namespace EC2 {
      */
     LaunchSpecification?: LaunchSpecification;
     /**
-     * The Availability Zone in which the bid is launched.
+     * The Availability Zone in which the request is launched.
      */
     LaunchedAvailabilityZone?: String;
     /**
-     * The product description associated with the Spot instance.
+     * The product description associated with the Spot Instance.
      */
     ProductDescription?: RIProductDescription;
     /**
-     * The ID of the Spot instance request.
+     * The ID of the Spot Instance request.
      */
     SpotInstanceRequestId?: String;
     /**
-     * The maximum hourly price (bid) for the Spot instance launched to fulfill the request.
+     * The maximum price per hour that you are willing to pay for a Spot Instance.
      */
     SpotPrice?: String;
     /**
-     * The state of the Spot instance request. Spot bid status information can help you track your Spot instance requests. For more information, see Spot Bid Status in the Amazon Elastic Compute Cloud User Guide.
+     * The state of the Spot Instance request. Spot status information can help you track your Spot Instance requests. For more information, see Spot Status in the Amazon Elastic Compute Cloud User Guide.
      */
     State?: SpotInstanceState;
     /**
-     * The status code and status message describing the Spot instance request.
+     * The status code and status message describing the Spot Instance request.
      */
     Status?: SpotInstanceStatus;
     /**
@@ -12287,7 +13981,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
     /**
-     * The Spot instance request type.
+     * The Spot Instance request type.
      */
     Type?: SpotInstanceType;
     /**
@@ -12295,11 +13989,11 @@ declare namespace EC2 {
      */
     ValidFrom?: DateTime;
     /**
-     * The end date of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). If this is a one-time request, it remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date is reached.
+     * The end date of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). If this is a one-time request, it remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date is reached. The default end date is 7 days from the current date.
      */
     ValidUntil?: DateTime;
     /**
-     * Indicates whether a Spot instance stops or terminates when it is interrupted.
+     * The behavior when a Spot Instance is interrupted.
      */
     InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
   }
@@ -12308,17 +14002,17 @@ declare namespace EC2 {
   export type SpotInstanceState = "open"|"active"|"closed"|"cancelled"|"failed"|string;
   export interface SpotInstanceStateFault {
     /**
-     * The reason code for the Spot instance state change.
+     * The reason code for the Spot Instance state change.
      */
     Code?: String;
     /**
-     * The message for the Spot instance state change.
+     * The message for the Spot Instance state change.
      */
     Message?: String;
   }
   export interface SpotInstanceStatus {
     /**
-     * The status code. For a list of status codes, see Spot Bid Status Codes in the Amazon Elastic Compute Cloud User Guide.
+     * The status code. For a list of status codes, see Spot Status Codes in the Amazon Elastic Compute Cloud User Guide.
      */
     Code?: String;
     /**
@@ -12331,17 +14025,39 @@ declare namespace EC2 {
     UpdateTime?: DateTime;
   }
   export type SpotInstanceType = "one-time"|"persistent"|string;
+  export interface SpotMarketOptions {
+    /**
+     * The maximum hourly price you're willing to pay for the Spot Instances. The default is the On-Demand price.
+     */
+    MaxPrice?: String;
+    /**
+     * The Spot Instance request type.
+     */
+    SpotInstanceType?: SpotInstanceType;
+    /**
+     * The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
+     */
+    BlockDurationMinutes?: Integer;
+    /**
+     * The end date of the request. For a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date and time is reached. The default end date is 7 days from the current date.
+     */
+    ValidUntil?: DateTime;
+    /**
+     * The behavior when a Spot Instance is interrupted. The default is terminate.
+     */
+    InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
+  }
   export interface SpotPlacement {
     /**
-     * The Availability Zone. [Spot fleet only] To specify multiple Availability Zones, separate them using commas; for example, "us-west-2a, us-west-2b".
+     * The Availability Zone. [Spot Fleet only] To specify multiple Availability Zones, separate them using commas; for example, "us-west-2a, us-west-2b".
      */
     AvailabilityZone?: String;
     /**
-     * The name of the placement group (for cluster instances).
+     * The name of the placement group.
      */
     GroupName?: String;
     /**
-     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for Spot instances.
+     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for Spot Instances.
      */
     Tenancy?: Tenancy;
   }
@@ -12351,7 +14067,7 @@ declare namespace EC2 {
      */
     AvailabilityZone?: String;
     /**
-     * The instance type. Note that T2 and HS1 instance types are not supported.
+     * The instance type.
      */
     InstanceType?: InstanceType;
     /**
@@ -12359,7 +14075,7 @@ declare namespace EC2 {
      */
     ProductDescription?: RIProductDescription;
     /**
-     * The maximum price (bid) that you are willing to pay for a Spot instance.
+     * The maximum price per hour that you are willing to pay for a Spot Instance.
      */
     SpotPrice?: String;
     /**
@@ -12449,7 +14165,7 @@ declare namespace EC2 {
      */
     Code?: String;
     /**
-     * The message for the state change.    Server.InsufficientInstanceCapacity: There was insufficient instance capacity to satisfy the launch request.    Server.InternalError: An internal error occurred during instance launch, resulting in termination.    Server.ScheduledStop: The instance was stopped due to a scheduled retirement.    Server.SpotInstanceTermination: A Spot Instance was terminated due to an increase in the market price.    Client.InternalError: A client error caused the instance to terminate on launch.    Client.InstanceInitiatedShutdown: The instance was shut down using the shutdown -h command from the instance.    Client.InstanceTerminated: The instance was terminated or rebooted during AMI creation.    Client.UserInitiatedShutdown: The instance was shut down using the Amazon EC2 API.    Client.VolumeLimitExceeded: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits.    Client.InvalidSnapshot.NotFound: The specified snapshot was not found.  
+     * The message for the state change.    Server.InsufficientInstanceCapacity: There was insufficient instance capacity to satisfy the launch request.    Server.InternalError: An internal error occurred during instance launch, resulting in termination.    Server.ScheduledStop: The instance was stopped due to a scheduled retirement.    Server.SpotInstanceTermination: A Spot Instance was terminated due to an increase in the Spot price.    Client.InternalError: A client error caused the instance to terminate on launch.    Client.InstanceInitiatedShutdown: The instance was shut down using the shutdown -h command from the instance.    Client.InstanceTerminated: The instance was terminated or rebooted during AMI creation.    Client.UserInitiatedShutdown: The instance was shut down using the Amazon EC2 API.    Client.VolumeLimitExceeded: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your limits.    Client.InvalidSnapshot.NotFound: The specified snapshot was not found.  
      */
     Message?: String;
   }
@@ -12568,6 +14284,13 @@ declare namespace EC2 {
   export type SubnetIpv6CidrBlockAssociationSet = SubnetIpv6CidrBlockAssociation[];
   export type SubnetList = Subnet[];
   export type SubnetState = "pending"|"available"|string;
+  export interface SuccessfulInstanceCreditSpecificationItem {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+  }
+  export type SuccessfulInstanceCreditSpecificationSet = SuccessfulInstanceCreditSpecificationItem[];
   export type SummaryStatus = "ok"|"impaired"|"insufficient-data"|"not-applicable"|"initializing"|string;
   export interface Tag {
     /**
@@ -12721,6 +14444,28 @@ declare namespace EC2 {
      */
     InstanceMonitorings?: InstanceMonitoringList;
   }
+  export type UnsuccessfulInstanceCreditSpecificationErrorCode = "InvalidInstanceID.Malformed"|"InvalidInstanceID.NotFound"|"IncorrectInstanceState"|"InstanceCreditSpecification.NotSupported"|string;
+  export interface UnsuccessfulInstanceCreditSpecificationItem {
+    /**
+     * The ID of the instance.
+     */
+    InstanceId?: String;
+    /**
+     * The applicable error for the T2 instance whose credit option for CPU usage was not modified.
+     */
+    Error?: UnsuccessfulInstanceCreditSpecificationItemError;
+  }
+  export interface UnsuccessfulInstanceCreditSpecificationItemError {
+    /**
+     * The error code.
+     */
+    Code?: UnsuccessfulInstanceCreditSpecificationErrorCode;
+    /**
+     * The applicable error message.
+     */
+    Message?: String;
+  }
+  export type UnsuccessfulInstanceCreditSpecificationSet = UnsuccessfulInstanceCreditSpecificationItem[];
   export interface UnsuccessfulItem {
     /**
      * Information about the error.
@@ -12852,6 +14597,8 @@ declare namespace EC2 {
   export type UserIdGroupPairSet = UserIdGroupPair[];
   export type UserIdStringList = String[];
   export type ValueStringList = String[];
+  export type VersionDescription = string;
+  export type VersionStringList = String[];
   export interface VgwTelemetry {
     /**
      * The number of accepted routes.
@@ -12953,7 +14700,7 @@ declare namespace EC2 {
     DeleteOnTermination?: Boolean;
   }
   export type VolumeAttachmentList = VolumeAttachment[];
-  export type VolumeAttachmentState = "attaching"|"attached"|"detaching"|"detached"|string;
+  export type VolumeAttachmentState = "attaching"|"attached"|"detaching"|"detached"|"busy"|string;
   export type VolumeAttributeName = "autoEnableIO"|"productCodes"|string;
   export interface VolumeDetail {
     /**
@@ -13211,7 +14958,7 @@ declare namespace EC2 {
      */
     VpcId?: String;
     /**
-     * The name of the AWS service to which the endpoint is associated.
+     * The name of the service to which the endpoint is associated.
      */
     ServiceName?: String;
     /**
@@ -13251,6 +14998,29 @@ declare namespace EC2 {
      */
     CreationTimestamp?: DateTime;
   }
+  export interface VpcEndpointConnection {
+    /**
+     * The ID of the service to which the endpoint is connected.
+     */
+    ServiceId?: String;
+    /**
+     * The ID of the VPC endpoint.
+     */
+    VpcEndpointId?: String;
+    /**
+     * The AWS account ID of the owner of the VPC endpoint.
+     */
+    VpcEndpointOwner?: String;
+    /**
+     * The state of the VPC endpoint.
+     */
+    VpcEndpointState?: State;
+    /**
+     * The date and time the VPC endpoint was created.
+     */
+    CreationTimestamp?: DateTime;
+  }
+  export type VpcEndpointConnectionSet = VpcEndpointConnection[];
   export type VpcEndpointSet = VpcEndpoint[];
   export type VpcEndpointType = "Interface"|"Gateway"|string;
   export type VpcIdStringList = String[];
@@ -13347,6 +15117,10 @@ declare namespace EC2 {
      * The ID of the VPC.
      */
     VpcId?: String;
+    /**
+     * The region in which the VPC is located.
+     */
+    Region?: String;
   }
   export type VpcState = "pending"|"available"|string;
   export type VpcTenancy = "default"|string;

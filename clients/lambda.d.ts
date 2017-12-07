@@ -69,6 +69,14 @@ declare class Lambda extends Service {
    */
   deleteFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Removes concurrent execution limits from this function.
+   */
+  deleteFunctionConcurrency(params: Lambda.Types.DeleteFunctionConcurrencyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes concurrent execution limits from this function.
+   */
+  deleteFunctionConcurrency(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Returns a customer's account settings. You can use this operation to retrieve Lambda limits information, such as code size and concurrency limits. For more information about limits, see AWS Lambda Limits. You can also retrieve resource usage statistics, such as code storage usage and function count.
    */
   getAccountSettings(params: Lambda.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
@@ -181,6 +189,14 @@ declare class Lambda extends Service {
    */
   publishVersion(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
+   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.
+   */
+  putFunctionConcurrency(params: Lambda.Types.PutFunctionConcurrencyRequest, callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
+  /**
+   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.
+   */
+  putFunctionConcurrency(callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
+  /**
    * You can remove individual permissions from an resource policy associated with a Lambda function by providing a statement ID that you provided when you added the permission. If you are using versioning, the permissions you remove are specific to the Lambda function version or alias you specify in the AddPermission request via the Qualifier parameter. For more information about versioning, see AWS Lambda Function Versioning and Aliases.  Note that removal of a permission will cause an active event source to lose permission to the function. You need permission for the lambda:RemovePermission action.
    */
   removePermission(params: Lambda.Types.RemovePermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -252,9 +268,13 @@ declare namespace Lambda {
      */
     CodeSizeZipped?: Long;
     /**
-     * Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see Lambda Function Concurrent Executions. The default limit is 100.
+     * Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see Lambda Function Concurrent Executions. The default limit is 1000.
      */
     ConcurrentExecutions?: Integer;
+    /**
+     * The number of concurrent executions available to functions that do not have concurrency limits set.
+     */
+    UnreservedConcurrentExecutions?: UnreservedConcurrentExecutions;
   }
   export interface AccountUsage {
     /**
@@ -307,6 +327,8 @@ declare namespace Lambda {
      */
     Statement?: String;
   }
+  export type AdditionalVersion = string;
+  export type AdditionalVersionWeights = {[key: string]: Weight};
   export type Alias = string;
   export interface AliasConfiguration {
     /**
@@ -325,13 +347,29 @@ declare namespace Lambda {
      * Alias description.
      */
     Description?: Description;
+    /**
+     * Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see lambda-traffic-shifting-using-aliases.
+     */
+    RoutingConfig?: AliasRoutingConfiguration;
   }
   export type AliasList = AliasConfiguration[];
+  export interface AliasRoutingConfiguration {
+    /**
+     * Set this property value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke function-version.
+     */
+    AdditionalVersionWeights?: AdditionalVersionWeights;
+  }
   export type Arn = string;
   export type BatchSize = number;
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type BlobStream = Buffer|Uint8Array|Blob|string|Readable;
   export type Boolean = boolean;
+  export interface Concurrency {
+    /**
+     * The number of concurrent executions reserved for this function.
+     */
+    ReservedConcurrentExecutions?: ReservedConcurrentExecutions;
+  }
   export interface CreateAliasRequest {
     /**
      * Name of the Lambda function for which you want to create an alias. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -349,6 +387,10 @@ declare namespace Lambda {
      * Description of the alias.
      */
     Description?: Description;
+    /**
+     * Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see lambda-traffic-shifting-using-aliases.
+     */
+    RoutingConfig?: AliasRoutingConfiguration;
   }
   export interface CreateEventSourceMappingRequest {
     /**
@@ -382,7 +424,7 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The runtime environment for the Lambda function you are uploading. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
+     * The runtime environment for the Lambda function you are uploading. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
      */
     Runtime: Runtime;
     /**
@@ -457,6 +499,12 @@ declare namespace Lambda {
      * The event source mapping ID.
      */
     UUID: String;
+  }
+  export interface DeleteFunctionConcurrencyRequest {
+    /**
+     * The name of the function you are removing concurrent execution limits from.
+     */
+    FunctionName: FunctionName;
   }
   export interface DeleteFunctionRequest {
     /**
@@ -677,7 +725,7 @@ declare namespace Lambda {
      */
     FunctionName: NamespacedFunctionName;
     /**
-     * Using this optional parameter to specify a function version or an alias name. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the $LATEST version of the Lambda function.
+     * Use this optional parameter to specify a function version or an alias name. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the $LATEST version of the Lambda function. 
      */
     Qualifier?: Qualifier;
   }
@@ -688,6 +736,10 @@ declare namespace Lambda {
      * Returns the list of tags associated with the function.
      */
     Tags?: Tags;
+    /**
+     * The concurrent execution limit set for this function.
+     */
+    Concurrency?: Concurrency;
   }
   export interface GetPolicyRequest {
     /**
@@ -722,7 +774,7 @@ declare namespace Lambda {
      */
     LogType?: LogType;
     /**
-     * Using the ClientContext you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable. For an example of a ClientContext JSON, see PutEvents in the Amazon Mobile Analytics API Reference and User Guide. The ClientContext JSON must be base64-encoded.
+     * Using the ClientContext you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable. For an example of a ClientContext JSON, see PutEvents in the Amazon Mobile Analytics API Reference and User Guide. The ClientContext JSON must be base64-encoded and has a maximum size of 3583 bytes.
      */
     ClientContext?: String;
     /**
@@ -751,6 +803,10 @@ declare namespace Lambda {
      *  It is the JSON representation of the object returned by the Lambda function. This is present only if the invocation type is RequestResponse.  In the event of a function error this field contains a message describing the error. For the Handled errors the Lambda function will report this message. For Unhandled errors AWS Lambda reports the message. 
      */
     Payload?: _Blob;
+    /**
+     * The function version that has been executed. This value is returned only if the invocation type is RequestResponse.
+     */
+    ExecutedVersion?: Version;
   }
   export type InvocationType = "Event"|"RequestResponse"|"DryRun"|string;
   export interface InvokeAsyncRequest {
@@ -828,11 +884,11 @@ declare namespace Lambda {
   }
   export interface ListFunctionsRequest {
     /**
-     * Optional string. If not specified, will return only regular function versions (i.e., non-replicated versions). Valid values are: The region from which the functions are replicated. For example, if you specify us-east-1, only functions replicated from that region will be returned.  ALL _ Will return all functions from any region. If specified, you also must specify a valid FunctionVersion parameter.
+     * Optional string. If not specified, will return only regular function versions (i.e., non-replicated versions). Valid values are: The region from which the functions are replicated. For example, if you specify us-east-1, only functions replicated from that region will be returned.  ALL: Will return all functions from any region. If specified, you also must specify a valid FunctionVersion parameter.
      */
     MasterRegion?: MasterRegion;
     /**
-     * Optional string. If not specified, only the unqualified functions ARNs (Amazon Resource Names) will be returned. Valid value:  ALL _ Will return all versions, including $LATEST which will have fully qualified ARNs (Amazon Resource Names).
+     * Optional string. If not specified, only the unqualified functions ARNs (Amazon Resource Names) will be returned. Valid value:  ALL: Will return all versions, including $LATEST which will have fully qualified ARNs (Amazon Resource Names).
      */
     FunctionVersion?: FunctionVersion;
     /**
@@ -905,13 +961,23 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter value must match the SHA256 of the $LATEST version for the publication to succeed.
+     * The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter, the value must match the SHA256 of the $LATEST version for the publication to succeed. You can use the DryRun parameter of UpdateFunctionCode to verify the hash value that will be returned before publishing your new version.
      */
     CodeSha256?: String;
     /**
      * The description for the version you are publishing. If not provided, AWS Lambda copies the description from the $LATEST version.
      */
     Description?: Description;
+  }
+  export interface PutFunctionConcurrencyRequest {
+    /**
+     * The name of the function you are setting concurrent execution limits on.
+     */
+    FunctionName: FunctionName;
+    /**
+     * The concurrent execution limit reserved for this function.
+     */
+    ReservedConcurrentExecutions: ReservedConcurrentExecutions;
   }
   export type Qualifier = string;
   export interface RemovePermissionRequest {
@@ -928,6 +994,7 @@ declare namespace Lambda {
      */
     Qualifier?: Qualifier;
   }
+  export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
   export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"java8"|"python2.7"|"python3.6"|"dotnetcore1.0"|"nodejs4.3-edge"|string;
@@ -956,7 +1023,7 @@ declare namespace Lambda {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
-  export type ThrottleReason = "ConcurrentInvocationLimitExceeded"|"FunctionInvocationRateLimitExceeded"|"CallerRateLimitExceeded"|string;
+  export type ThrottleReason = "ConcurrentInvocationLimitExceeded"|"FunctionInvocationRateLimitExceeded"|"ReservedFunctionConcurrentInvocationLimitExceeded"|"ReservedFunctionInvocationRateLimitExceeded"|"CallerRateLimitExceeded"|string;
   export type Timeout = number;
   export type Timestamp = string;
   export interface TracingConfig {
@@ -972,6 +1039,7 @@ declare namespace Lambda {
     Mode?: TracingMode;
   }
   export type TracingMode = "Active"|"PassThrough"|string;
+  export type UnreservedConcurrentExecutions = number;
   export interface UntagResourceRequest {
     /**
      * The ARN (Amazon Resource Name) of the function.
@@ -999,6 +1067,10 @@ declare namespace Lambda {
      * You can change the description of the alias using this parameter.
      */
     Description?: Description;
+    /**
+     * Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see lambda-traffic-shifting-using-aliases.
+     */
+    RoutingConfig?: AliasRoutingConfiguration;
   }
   export interface UpdateEventSourceMappingRequest {
     /**
@@ -1044,7 +1116,7 @@ declare namespace Lambda {
      */
     Publish?: Boolean;
     /**
-     * This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the CodeSha256 hash value the provided code will also be computed and returned in the response.
+     * This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the CodeSha256 hash value of the provided code will also be computed and returned in the response.
      */
     DryRun?: Boolean;
   }
@@ -1079,7 +1151,7 @@ declare namespace Lambda {
      */
     Environment?: Environment;
     /**
-     * The runtime environment for the Lambda function. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
+     * The runtime environment for the Lambda function. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
      */
     Runtime?: Runtime;
     /**
@@ -1121,6 +1193,7 @@ declare namespace Lambda {
     VpcId?: VpcId;
   }
   export type VpcId = string;
+  export type Weight = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

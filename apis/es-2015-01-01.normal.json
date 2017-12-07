@@ -362,6 +362,10 @@
           "shape":"VPCOptions",
           "documentation":"<p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc\" target=\"_blank\">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i></p>"
         },
+        "EncryptionAtRestOptions":{
+          "shape":"EncryptionAtRestOptions",
+          "documentation":"<p>Specifies the Encryption At Rest Options.</p>"
+        },
         "AdvancedOptions":{
           "shape":"AdvancedOptions",
           "documentation":"<p> Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\" target=\"_blank\">Configuration Advanced Options</a> for more information.</p>"
@@ -710,6 +714,10 @@
           "shape":"VPCDerivedInfoStatus",
           "documentation":"<p>The <code>VPCOptions</code> for the specified domain. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html\" target=\"_blank\">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>"
         },
+        "EncryptionAtRestOptions":{
+          "shape":"EncryptionAtRestOptionsStatus",
+          "documentation":"<p>Specifies the <code>EncryptionAtRestOptions</code> for the Elasticsearch domain.</p>"
+        },
         "AdvancedOptions":{
           "shape":"AdvancedOptionsStatus",
           "documentation":"<p>Specifies the <code>AdvancedOptions</code> for the domain. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options\" target=\"_blank\">Configuring Advanced Options</a> for more information.</p>"
@@ -783,6 +791,10 @@
           "shape":"VPCDerivedInfo",
           "documentation":"<p>The <code>VPCOptions</code> for the specified domain. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html\" target=\"_blank\">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>"
         },
+        "EncryptionAtRestOptions":{
+          "shape":"EncryptionAtRestOptions",
+          "documentation":"<p> Specifies the status of the <code>EncryptionAtRestOptions</code>.</p>"
+        },
         "AdvancedOptions":{
           "shape":"AdvancedOptions",
           "documentation":"<p>Specifies the status of the <code>AdvancedOptions</code></p>"
@@ -828,6 +840,38 @@
       "documentation":"<p> Status of the Elasticsearch version options for the specified Elasticsearch domain.</p>"
     },
     "ElasticsearchVersionString":{"type":"string"},
+    "EncryptionAtRestOptions":{
+      "type":"structure",
+      "members":{
+        "Enabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Specifies the option to enable Encryption At Rest.</p>"
+        },
+        "KmsKeyId":{
+          "shape":"KmsKeyId",
+          "documentation":"<p> Specifies the KMS Key ID for Encryption At Rest options.</p>"
+        }
+      },
+      "documentation":"<p>Specifies the Encryption At Rest Options.</p>"
+    },
+    "EncryptionAtRestOptionsStatus":{
+      "type":"structure",
+      "required":[
+        "Options",
+        "Status"
+      ],
+      "members":{
+        "Options":{
+          "shape":"EncryptionAtRestOptions",
+          "documentation":"<p> Specifies the Encryption At Rest options for the specified Elasticsearch domain.</p>"
+        },
+        "Status":{
+          "shape":"OptionStatus",
+          "documentation":"<p> Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.</p>"
+        }
+      },
+      "documentation":"<p> Status of the Encryption At Rest options for the specified Elasticsearch domain.</p>"
+    },
     "EndpointsMap":{
       "type":"map",
       "key":{"shape":"String"},
@@ -866,6 +910,11 @@
       "documentation":"<p>An exception for trying to create or access sub-resource that is either invalid or not supported. Gives http status code of 409.</p>",
       "error":{"httpStatusCode":409},
       "exception":true
+    },
+    "KmsKeyId":{
+      "type":"string",
+      "max":500,
+      "min":1
     },
     "LimitExceededException":{
       "type":"structure",

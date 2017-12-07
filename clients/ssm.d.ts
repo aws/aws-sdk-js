@@ -204,6 +204,14 @@ declare class SSM extends Service {
    */
   describeAutomationExecutions(callback?: (err: AWSError, data: SSM.Types.DescribeAutomationExecutionsResult) => void): Request<SSM.Types.DescribeAutomationExecutionsResult, AWSError>;
   /**
+   * Information about all active and terminated step executions in an Automation workflow.
+   */
+  describeAutomationStepExecutions(params: SSM.Types.DescribeAutomationStepExecutionsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAutomationStepExecutionsResult) => void): Request<SSM.Types.DescribeAutomationStepExecutionsResult, AWSError>;
+  /**
+   * Information about all active and terminated step executions in an Automation workflow.
+   */
+  describeAutomationStepExecutions(callback?: (err: AWSError, data: SSM.Types.DescribeAutomationStepExecutionsResult) => void): Request<SSM.Types.DescribeAutomationStepExecutionsResult, AWSError>;
+  /**
    * Lists all patches that could possibly be included in a patch baseline.
    */
   describeAvailablePatches(params: SSM.Types.DescribeAvailablePatchesRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAvailablePatchesResult) => void): Request<SSM.Types.DescribeAvailablePatchesResult, AWSError>;
@@ -1081,6 +1089,10 @@ declare namespace SSM {
      */
     StepExecutions?: StepExecutionList;
     /**
+     * A boolean value that indicates if the response contains the full list of the Automation step executions. If true, use the DescribeAutomationStepExecutions API action to get the full list of step executions.
+     */
+    StepExecutionsTruncated?: Boolean;
+    /**
      * The key-value map of execution parameters, which were supplied when calling StartAutomationExecution.
      */
     Parameters?: AutomationParameterMap;
@@ -1092,10 +1104,54 @@ declare namespace SSM {
      * A message describing why an execution has failed, if the status is set to Failed.
      */
     FailureMessage?: String;
+    /**
+     * The automation execution mode.
+     */
+    Mode?: ExecutionMode;
+    /**
+     * The AutomationExecutionId of the parent automation.
+     */
+    ParentAutomationExecutionId?: AutomationExecutionId;
+    /**
+     * The Amazon Resource Name (ARN) of the user who executed the automation.
+     */
+    ExecutedBy?: String;
+    /**
+     * The name of the currently executing step.
+     */
+    CurrentStepName?: String;
+    /**
+     * The action of the currently executing step.
+     */
+    CurrentAction?: String;
+    /**
+     * The parameter name.
+     */
+    TargetParameterName?: AutomationParameterKey;
+    /**
+     * The specified targets.
+     */
+    Targets?: Targets;
+    /**
+     * A list of resolved targets in the rate control execution.
+     */
+    ResolvedTargets?: ResolvedTargets;
+    /**
+     * The MaxConcurrency value specified by the user when the execution started.
+     */
+    MaxConcurrency?: MaxConcurrency;
+    /**
+     * The MaxErrors value specified by the user when the execution started.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The target of the execution.
+     */
+    Target?: String;
   }
   export interface AutomationExecutionFilter {
     /**
-     * The aspect of the Automation execution information that should be limited.
+     * One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.
      */
     Key: AutomationExecutionFilterKey;
     /**
@@ -1103,7 +1159,7 @@ declare namespace SSM {
      */
     Values: AutomationExecutionFilterValueList;
   }
-  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|string;
+  export type AutomationExecutionFilterKey = "DocumentNamePrefix"|"ExecutionStatus"|"ExecutionId"|"ParentExecutionId"|"CurrentAction"|"StartTimeBefore"|"StartTimeAfter"|string;
   export type AutomationExecutionFilterList = AutomationExecutionFilter[];
   export type AutomationExecutionFilterValue = string;
   export type AutomationExecutionFilterValueList = AutomationExecutionFilterValue[];
@@ -1145,9 +1201,53 @@ declare namespace SSM {
      * The list of execution outputs as defined in the Automation document.
      */
     Outputs?: AutomationParameterMap;
+    /**
+     * The Automation execution mode.
+     */
+    Mode?: ExecutionMode;
+    /**
+     * The ExecutionId of the parent Automation.
+     */
+    ParentAutomationExecutionId?: AutomationExecutionId;
+    /**
+     * The name of the currently executing step.
+     */
+    CurrentStepName?: String;
+    /**
+     * The action of the currently executing step.
+     */
+    CurrentAction?: String;
+    /**
+     * The list of execution outputs as defined in the Automation document.
+     */
+    FailureMessage?: String;
+    /**
+     * The list of execution outputs as defined in the Automation document.
+     */
+    TargetParameterName?: AutomationParameterKey;
+    /**
+     * The targets defined by the user when starting the Automation.
+     */
+    Targets?: Targets;
+    /**
+     * A list of targets that resolved during the execution.
+     */
+    ResolvedTargets?: ResolvedTargets;
+    /**
+     * The MaxConcurrency value specified by the user when starting the Automation.
+     */
+    MaxConcurrency?: MaxConcurrency;
+    /**
+     * The MaxErrors value specified by the user when starting the Automation.
+     */
+    MaxErrors?: MaxErrors;
+    /**
+     * The list of execution outputs as defined in the Automation document.
+     */
+    Target?: String;
   }
   export type AutomationExecutionMetadataList = AutomationExecutionMetadata[];
-  export type AutomationExecutionStatus = "Pending"|"InProgress"|"Waiting"|"Success"|"TimedOut"|"Cancelled"|"Failed"|string;
+  export type AutomationExecutionStatus = "Pending"|"InProgress"|"Waiting"|"Success"|"TimedOut"|"Cancelling"|"Cancelled"|"Failed"|string;
   export type AutomationParameterKey = string;
   export type AutomationParameterMap = {[key: string]: AutomationParameterValueList};
   export type AutomationParameterValue = string;
@@ -1642,7 +1742,7 @@ declare namespace SSM {
   }
   export interface CreateDocumentRequest {
     /**
-     * A valid JSON string.
+     * A valid JSON or YAML string.
      */
     Content: DocumentContent;
     /**
@@ -1653,6 +1753,14 @@ declare namespace SSM {
      * The type of document to create. Valid document types include: Policy, Automation, and Command.
      */
     DocumentType?: DocumentType;
+    /**
+     * Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.
+     */
+    DocumentFormat?: DocumentFormat;
+    /**
+     * Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of '/' the document can run on all types of resources. If you don't specify a value, the document can't run on any resources. For a list of valid resource types, see AWS Resource Types Reference in the AWS CloudFormation User Guide. 
+     */
+    TargetType?: TargetType;
   }
   export interface CreateDocumentResult {
     /**
@@ -1995,6 +2103,38 @@ declare namespace SSM {
      * The list of details about each automation execution which has occurred which matches the filter specification, if any.
      */
     AutomationExecutionMetadataList?: AutomationExecutionMetadataList;
+    /**
+     * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeAutomationStepExecutionsRequest {
+    /**
+     * The Automation execution ID for which you want step execution descriptions.
+     */
+    AutomationExecutionId: AutomationExecutionId;
+    /**
+     * One or more filters to limit the number of step executions returned by the request.
+     */
+    Filters?: StepExecutionFilterList;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.
+     */
+    ReverseOrder?: Boolean;
+  }
+  export interface DescribeAutomationStepExecutionsResult {
+    /**
+     * A list of details about the current state of all steps that make up an execution.
+     */
+    StepExecutions?: StepExecutionList;
     /**
      * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
      */
@@ -2587,6 +2727,14 @@ declare namespace SSM {
      */
     DefaultVersion?: DocumentVersion;
     /**
+     * The document format, either JSON or YAML.
+     */
+    DocumentFormat?: DocumentFormat;
+    /**
+     * The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference in the AWS CloudFormation User Guide. 
+     */
+    TargetType?: TargetType;
+    /**
      * The tags, or metadata, that have been applied to the document.
      */
     Tags?: TagList;
@@ -2604,6 +2752,7 @@ declare namespace SSM {
   export type DocumentFilterKey = "Name"|"Owner"|"PlatformTypes"|"DocumentType"|string;
   export type DocumentFilterList = DocumentFilter[];
   export type DocumentFilterValue = string;
+  export type DocumentFormat = "YAML"|"JSON"|string;
   export type DocumentHash = string;
   export type DocumentHashType = "Sha256"|"Sha1"|string;
   export interface DocumentIdentifier {
@@ -2631,6 +2780,14 @@ declare namespace SSM {
      * The schema version.
      */
     SchemaVersion?: DocumentSchemaVersion;
+    /**
+     * The document format, either JSON or YAML.
+     */
+    DocumentFormat?: DocumentFormat;
+    /**
+     * The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference in the AWS CloudFormation User Guide. 
+     */
+    TargetType?: TargetType;
     /**
      * The tags, or metadata, that have been applied to the document.
      */
@@ -2699,6 +2856,10 @@ declare namespace SSM {
      * An identifier for the default version of the document.
      */
     IsDefaultVersion?: Boolean;
+    /**
+     * The document format, either JSON or YAML.
+     */
+    DocumentFormat?: DocumentFormat;
   }
   export type DocumentVersionList = DocumentVersionInfo[];
   export type DocumentVersionNumber = string;
@@ -2715,6 +2876,7 @@ declare namespace SSM {
   }
   export type EffectivePatchList = EffectivePatch[];
   export type ErrorCount = number;
+  export type ExecutionMode = "Auto"|"Interactive"|string;
   export type ExpirationDate = Date;
   export interface FailedCreateAssociation {
     /**
@@ -2887,6 +3049,10 @@ declare namespace SSM {
      * The document version for which you want information.
      */
     DocumentVersion?: DocumentVersion;
+    /**
+     * Returns the document in the specified format. The document format can be either JSON or YAML. JSON is the default format.
+     */
+    DocumentFormat?: DocumentFormat;
   }
   export interface GetDocumentResult {
     /**
@@ -2905,6 +3071,10 @@ declare namespace SSM {
      * The document type.
      */
     DocumentType?: DocumentType;
+    /**
+     * The document format, either JSON or YAML.
+     */
+    DocumentFormat?: DocumentFormat;
   }
   export interface GetInventoryRequest {
     /**
@@ -3814,7 +3984,7 @@ declare namespace SSM {
      */
     Id?: InventoryResultEntityId;
     /**
-     * The data section in the inventory result entity json.
+     * The data section in the inventory result entity JSON.
      */
     Data?: InventoryResultItemMap;
   }
@@ -4197,6 +4367,7 @@ declare namespace SSM {
      */
     S3Region: S3Region;
   }
+  export type Long = number;
   export type MaintenanceWindowAllowUnassociatedTargets = boolean;
   export interface MaintenanceWindowAutomationParameters {
     /**
@@ -4611,7 +4782,7 @@ declare namespace SSM {
      */
     NotificationArn?: NotificationArn;
     /**
-     * The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see Setting Up Events and Notifications in the Amazon EC2 Systems Manager User Guide.
+     * The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see Setting Up Events and Notifications in the AWS Systems Manager User Guide.
      */
     NotificationEvents?: NotificationEventList;
     /**
@@ -5203,6 +5374,16 @@ declare namespace SSM {
   }
   export interface RemoveTagsFromResourceResult {
   }
+  export interface ResolvedTargets {
+    /**
+     * A list of parameter values sent to targets that resolved during the Automation execution.
+     */
+    ParameterValues?: TargetParameterList;
+    /**
+     * A boolean value indicating whether the resolved target list is truncated.
+     */
+    Truncated?: Boolean;
+  }
   export interface ResourceComplianceSummaryItem {
     /**
      * The compliance type.
@@ -5440,7 +5621,7 @@ declare namespace SSM {
      */
     UnspecifiedCount?: ComplianceSummaryCount;
   }
-  export type SignalType = "Approve"|"Reject"|string;
+  export type SignalType = "Approve"|"Reject"|"StartStep"|"StopStep"|"Resume"|string;
   export type SnapshotDownloadUrl = string;
   export type SnapshotId = string;
   export type StandardErrorContent = string;
@@ -5462,6 +5643,26 @@ declare namespace SSM {
      * User-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can't be reused.
      */
     ClientToken?: IdempotencyToken;
+    /**
+     * The execution mode of the automation. Valid modes include the following: Auto and Interactive. The default mode is Auto.
+     */
+    Mode?: ExecutionMode;
+    /**
+     * The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify Targets.
+     */
+    TargetParameterName?: AutomationParameterKey;
+    /**
+     * A key-value mapping to target resources. Required if you specify TargetParameterName.
+     */
+    Targets?: Targets;
+    /**
+     * The maximum number of targets allowed to run this task in parallel. You can specify a number, such as 10, or a percentage, such as 10%. The default value is 10.
+     */
+    MaxConcurrency?: MaxConcurrency;
+    /**
+     * The number of errors that are allowed before the system stops running the automation on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops running the automation when the fourth error is received. If you specify 0, then the system stops running the automation on additional targets after the first error result is returned. If you run an automation on 50 resources and set max-errors to 10%, then the system stops running the automation on additional targets when the sixth error is received. Executions that are already running an automation when max-errors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set max-concurrency to 1 so the executions proceed one at a time.
+     */
+    MaxErrors?: MaxErrors;
   }
   export interface StartAutomationExecutionResult {
     /**
@@ -5482,6 +5683,18 @@ declare namespace SSM {
      * The action this step performs. The action determines the behavior of the step.
      */
     Action?: AutomationActionName;
+    /**
+     * The timeout seconds of the step.
+     */
+    TimeoutSeconds?: Long;
+    /**
+     * The action to take if the step fails. The default value is Abort.
+     */
+    OnFailure?: String;
+    /**
+     * The maximum number of tries to run the action of the step. The default value is 1.
+     */
+    MaxAttempts?: Integer;
     /**
      * If a step has begun execution, this contains the time the step started. If the step is in Pending status, this field is not populated.
      */
@@ -5518,16 +5731,43 @@ declare namespace SSM {
      * Information about the Automation failure.
      */
     FailureDetails?: FailureDetails;
+    /**
+     * The unique ID of a step execution.
+     */
+    StepExecutionId?: String;
+    /**
+     * A user-specified list of parameters to override when executing a step.
+     */
+    OverriddenParameters?: AutomationParameterMap;
   }
+  export interface StepExecutionFilter {
+    /**
+     * One or more keys to limit the results. Valid filter keys include the following: StepName, Action, StepExecutionId, StepExecutionStatus, StartTimeBefore, StartTimeAfter.
+     */
+    Key: StepExecutionFilterKey;
+    /**
+     * The values of the filter key.
+     */
+    Values: StepExecutionFilterValueList;
+  }
+  export type StepExecutionFilterKey = "StartTimeBefore"|"StartTimeAfter"|"StepExecutionStatus"|"StepExecutionId"|"StepName"|"Action"|string;
+  export type StepExecutionFilterList = StepExecutionFilter[];
+  export type StepExecutionFilterValue = string;
+  export type StepExecutionFilterValueList = StepExecutionFilterValue[];
   export type StepExecutionList = StepExecution[];
   export interface StopAutomationExecutionRequest {
     /**
      * The execution ID of the Automation to stop.
      */
     AutomationExecutionId: AutomationExecutionId;
+    /**
+     * The stop request type. Valid types include the following: Cancel and Complete. The default type is Cancel.
+     */
+    Type?: StopType;
   }
   export interface StopAutomationExecutionResult {
   }
+  export type StopType = "Complete"|"Cancel"|string;
   export type String = string;
   export type StringDateTime = string;
   export type StringList = String[];
@@ -5556,6 +5796,8 @@ declare namespace SSM {
   }
   export type TargetCount = number;
   export type TargetKey = string;
+  export type TargetParameterList = ParameterValue[];
+  export type TargetType = string;
   export type TargetValue = string;
   export type TargetValues = TargetValue[];
   export type Targets = Target[];
@@ -5653,6 +5895,14 @@ declare namespace SSM {
      * The version of the document that you want to update.
      */
     DocumentVersion?: DocumentVersion;
+    /**
+     * Specify the document format for the new document version. Systems Manager supports JSON and YAML documents. JSON is the default format.
+     */
+    DocumentFormat?: DocumentFormat;
+    /**
+     * Specify a new target type for the document.
+     */
+    TargetType?: TargetType;
   }
   export interface UpdateDocumentResult {
     /**

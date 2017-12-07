@@ -7,6 +7,7 @@
     "protocol":"json",
     "serviceAbbreviation":"WAF",
     "serviceFullName":"AWS WAF",
+    "serviceId":"WAF",
     "signatureVersion":"v4",
     "targetPrefix":"AWSWAF_20150824",
     "uid":"waf-2015-08-24"
@@ -131,6 +132,22 @@
         {"shape":"WAFLimitsExceededException"}
       ],
       "documentation":"<p>Creates a <code>Rule</code>, which contains the <code>IPSet</code> objects, <code>ByteMatchSet</code> objects, and other predicates that identify the requests that you want to block. If you add more than one predicate to a <code>Rule</code>, a request must match all of the specifications to be allowed or blocked. For example, suppose you add the following to a <code>Rule</code>:</p> <ul> <li> <p>An <code>IPSet</code> that matches the IP address <code>192.0.2.44/32</code> </p> </li> <li> <p>A <code>ByteMatchSet</code> that matches <code>BadBot</code> in the <code>User-Agent</code> header</p> </li> </ul> <p>You then add the <code>Rule</code> to a <code>WebACL</code> and specify that you want to blocks requests that satisfy the <code>Rule</code>. For a request to be blocked, it must come from the IP address 192.0.2.44 <i>and</i> the <code>User-Agent</code> header in the request must contain the value <code>BadBot</code>.</p> <p>To create and configure a <code>Rule</code>, perform the following steps:</p> <ol> <li> <p>Create and update the predicates that you want to include in the <code>Rule</code>. For more information, see <a>CreateByteMatchSet</a>, <a>CreateIPSet</a>, and <a>CreateSqlInjectionMatchSet</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of a <code>CreateRule</code> request.</p> </li> <li> <p>Submit a <code>CreateRule</code> request.</p> </li> <li> <p>Use <code>GetChangeToken</code> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <a>UpdateRule</a> request.</p> </li> <li> <p>Submit an <code>UpdateRule</code> request to specify the predicates that you want to include in the <code>Rule</code>.</p> </li> <li> <p>Create and update a <code>WebACL</code> that contains the <code>Rule</code>. For more information, see <a>CreateWebACL</a>.</p> </li> </ol> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
+    },
+    "CreateRuleGroup":{
+      "name":"CreateRuleGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateRuleGroupRequest"},
+      "output":{"shape":"CreateRuleGroupResponse"},
+      "errors":[
+        {"shape":"WAFStaleDataException"},
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFDisallowedNameException"},
+        {"shape":"WAFLimitsExceededException"}
+      ],
+      "documentation":"<p>Creates a <code>RuleGroup</code>. A rule group is a collection of predefined rules that you add to a web ACL. You use <a>UpdateRuleGroup</a> to add rules to the rule group.</p> <p>Rule groups are subject to the following limits:</p> <ul> <li> <p>Three rule groups per account. You can request an increase to this limit by contacting customer support.</p> </li> <li> <p>One rule group per web ACL.</p> </li> <li> <p>Ten rules per rule group.</p> </li> </ul> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
     },
     "CreateSizeConstraintSet":{
       "name":"CreateSizeConstraintSet",
@@ -329,6 +346,23 @@
         {"shape":"WAFNonEmptyEntityException"}
       ],
       "documentation":"<p>Permanently deletes a <a>Rule</a>. You can't delete a <code>Rule</code> if it's still used in any <code>WebACL</code> objects or if it still includes any predicates, such as <code>ByteMatchSet</code> objects.</p> <p>If you just want to remove a <code>Rule</code> from a <code>WebACL</code>, use <a>UpdateWebACL</a>.</p> <p>To permanently delete a <code>Rule</code> from AWS WAF, perform the following steps:</p> <ol> <li> <p>Update the <code>Rule</code> to remove predicates, if any. For more information, see <a>UpdateRule</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of a <code>DeleteRule</code> request.</p> </li> <li> <p>Submit a <code>DeleteRule</code> request.</p> </li> </ol>"
+    },
+    "DeleteRuleGroup":{
+      "name":"DeleteRuleGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteRuleGroupRequest"},
+      "output":{"shape":"DeleteRuleGroupResponse"},
+      "errors":[
+        {"shape":"WAFStaleDataException"},
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFReferencedItemException"},
+        {"shape":"WAFNonEmptyEntityException"}
+      ],
+      "documentation":"<p>Permanently deletes a <a>RuleGroup</a>. You can't delete a <code>RuleGroup</code> if it's still used in any <code>WebACL</code> objects or if it still includes any rules.</p> <p>If you just want to remove a <code>RuleGroup</code> from a <code>WebACL</code>, use <a>UpdateWebACL</a>.</p> <p>To permanently delete a <code>RuleGroup</code> from AWS WAF, perform the following steps:</p> <ol> <li> <p>Update the <code>RuleGroup</code> to remove rules, if any. For more information, see <a>UpdateRuleGroup</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of a <code>DeleteRuleGroup</code> request.</p> </li> <li> <p>Submit a <code>DeleteRuleGroup</code> request.</p> </li> </ol>"
     },
     "DeleteSizeConstraintSet":{
       "name":"DeleteSizeConstraintSet",
@@ -550,6 +584,20 @@
       ],
       "documentation":"<p>Returns the <a>Rule</a> that is specified by the <code>RuleId</code> that you included in the <code>GetRule</code> request.</p>"
     },
+    "GetRuleGroup":{
+      "name":"GetRuleGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetRuleGroupRequest"},
+      "output":{"shape":"GetRuleGroupResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFNonexistentItemException"}
+      ],
+      "documentation":"<p>Returns the <a>RuleGroup</a> that is specified by the <code>RuleGroupId</code> that you included in the <code>GetRuleGroup</code> request.</p> <p>To view the rules in a rule group, use <a>ListActivatedRulesInRuleGroup</a>.</p>"
+    },
     "GetSampledRequests":{
       "name":"GetSampledRequests",
       "http":{
@@ -623,6 +671,21 @@
         {"shape":"WAFNonexistentItemException"}
       ],
       "documentation":"<p>Returns the <a>XssMatchSet</a> that is specified by <code>XssMatchSetId</code>.</p>"
+    },
+    "ListActivatedRulesInRuleGroup":{
+      "name":"ListActivatedRulesInRuleGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListActivatedRulesInRuleGroupRequest"},
+      "output":{"shape":"ListActivatedRulesInRuleGroupResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFInvalidParameterException"}
+      ],
+      "documentation":"<p>Returns an array of <a>ActivatedRule</a> objects.</p>"
     },
     "ListByteMatchSets":{
       "name":"ListByteMatchSets",
@@ -708,6 +771,19 @@
       ],
       "documentation":"<p>Returns an array of <a>RegexPatternSetSummary</a> objects.</p>"
     },
+    "ListRuleGroups":{
+      "name":"ListRuleGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListRuleGroupsRequest"},
+      "output":{"shape":"ListRuleGroupsResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"}
+      ],
+      "documentation":"<p>Returns an array of <a>RuleGroup</a> objects.</p>"
+    },
     "ListRules":{
       "name":"ListRules",
       "http":{
@@ -749,6 +825,20 @@
         {"shape":"WAFInvalidAccountException"}
       ],
       "documentation":"<p>Returns an array of <a>SqlInjectionMatchSet</a> objects.</p>"
+    },
+    "ListSubscribedRuleGroups":{
+      "name":"ListSubscribedRuleGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListSubscribedRuleGroupsRequest"},
+      "output":{"shape":"ListSubscribedRuleGroupsResponse"},
+      "errors":[
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFInternalErrorException"}
+      ],
+      "documentation":"<p>Returns an array of <a>RuleGroup</a> objects that you are subscribed to.</p>"
     },
     "ListWebACLs":{
       "name":"ListWebACLs",
@@ -879,7 +969,7 @@
         {"shape":"WAFInvalidOperationException"},
         {"shape":"WAFInvalidAccountException"}
       ],
-      "documentation":"<p>Inserts or deletes <a>RegexMatchSetUpdate</a> objects (filters) in a <a>RegexMatchSet</a>. For each <code>RegexMatchSetUpdate</code> object, you specify the following values: </p> <ul> <li> <p>Whether to insert or delete the object from the array. If you want to change a <code>RegexMatchSetUpdate</code> object, you delete the existing object and add a new one.</p> </li> <li> <p>The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the <code>User-Agent</code> header. </p> </li> <li> <p>The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see <a>RegexPatternSet</a>. </p> </li> <li> <p>Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.</p> </li> </ul> <p> For example, you can create a <code>RegexPatternSet</code> that matches any requests with <code>User-Agent</code> headers that contain the string <code>B[a@]dB[o0]t</code>. You can then configure AWS WAF to reject those requests.</p> <p>To create and configure a <code>RegexMatchSet</code>, perform the following steps:</p> <ol> <li> <p>Create a <code>RegexMatchSet.</code> For more information, see <a>CreateRegexMatchSet</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <code>UpdateRegexMatchSet</code> request.</p> </li> <li> <p>Submit an <code>UpdateRegexMatchSet</code> request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the identifier of the <code>RegexPatternSet</code> that contain the regular expression patters you want AWS WAF to watch for.</p> </li> </ol> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
+      "documentation":"<p>Inserts or deletes <a>RegexMatchTuple</a> objects (filters) in a <a>RegexMatchSet</a>. For each <code>RegexMatchSetUpdate</code> object, you specify the following values: </p> <ul> <li> <p>Whether to insert or delete the object from the array. If you want to change a <code>RegexMatchSetUpdate</code> object, you delete the existing object and add a new one.</p> </li> <li> <p>The part of a web request that you want AWS WAF to inspectupdate, such as a query string or the value of the <code>User-Agent</code> header. </p> </li> <li> <p>The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see <a>RegexPatternSet</a>. </p> </li> <li> <p>Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.</p> </li> </ul> <p> For example, you can create a <code>RegexPatternSet</code> that matches any requests with <code>User-Agent</code> headers that contain the string <code>B[a@]dB[o0]t</code>. You can then configure AWS WAF to reject those requests.</p> <p>To create and configure a <code>RegexMatchSet</code>, perform the following steps:</p> <ol> <li> <p>Create a <code>RegexMatchSet.</code> For more information, see <a>CreateRegexMatchSet</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <code>UpdateRegexMatchSet</code> request.</p> </li> <li> <p>Submit an <code>UpdateRegexMatchSet</code> request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the identifier of the <code>RegexPatternSet</code> that contain the regular expression patters you want AWS WAF to watch for.</p> </li> </ol> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
     },
     "UpdateRegexPatternSet":{
       "name":"UpdateRegexPatternSet",
@@ -893,12 +983,13 @@
         {"shape":"WAFStaleDataException"},
         {"shape":"WAFInternalErrorException"},
         {"shape":"WAFLimitsExceededException"},
+        {"shape":"WAFNonexistentItemException"},
         {"shape":"WAFNonexistentContainerException"},
         {"shape":"WAFInvalidOperationException"},
         {"shape":"WAFInvalidAccountException"},
         {"shape":"WAFInvalidRegexPatternException"}
       ],
-      "documentation":"<p>Inserts or deletes <a>RegexMatchSetUpdate</a> objects (filters) in a <a>RegexPatternSet</a>. For each <code>RegexPatternSet</code> object, you specify the following values: </p> <ul> <li> <p>Whether to insert or delete the object from the array. If you want to change a <code>RegexPatternSet</code> object, you delete the existing object and add a new one.</p> </li> <li> <p>The regular expression pattern that you want AWS WAF to look for. For more information, see <a>RegexPatternSet</a>. </p> </li> </ul> <p> For example, you can create a <code>RegexPatternString</code> such as <code>B[a@]dB[o0]t</code>. AWS WAF will match this <code>RegexPatternString</code> to:</p> <ul> <li> <p>BadBot</p> </li> <li> <p>BadB0t</p> </li> <li> <p>B@dBot</p> </li> <li> <p>B@dB0t</p> </li> </ul> <p>To create and configure a <code>RegexPatternSet</code>, perform the following steps:</p> <ol> <li> <p>Create a <code>RegexPatternSet.</code> For more information, see <a>CreateRegexPatternSet</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <code>UpdateRegexPatternSet</code> request.</p> </li> <li> <p>Submit an <code>UpdateRegexPatternSet</code> request to specify the regular expression pattern that you want AWS WAF to watch for.</p> </li> </ol> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
+      "documentation":"<p>Inserts or deletes <code>RegexPatternString</code> objects in a <a>RegexPatternSet</a>. For each <code>RegexPatternString</code> object, you specify the following values: </p> <ul> <li> <p>Whether to insert or delete the <code>RegexPatternString</code>.</p> </li> <li> <p>The regular expression pattern that you want to insert or delete. For more information, see <a>RegexPatternSet</a>. </p> </li> </ul> <p> For example, you can create a <code>RegexPatternString</code> such as <code>B[a@]dB[o0]t</code>. AWS WAF will match this <code>RegexPatternString</code> to:</p> <ul> <li> <p>BadBot</p> </li> <li> <p>BadB0t</p> </li> <li> <p>B@dBot</p> </li> <li> <p>B@dB0t</p> </li> </ul> <p>To create and configure a <code>RegexPatternSet</code>, perform the following steps:</p> <ol> <li> <p>Create a <code>RegexPatternSet.</code> For more information, see <a>CreateRegexPatternSet</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <code>UpdateRegexPatternSet</code> request.</p> </li> <li> <p>Submit an <code>UpdateRegexPatternSet</code> request to specify the regular expression pattern that you want AWS WAF to watch for.</p> </li> </ol> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
     },
     "UpdateRule":{
       "name":"UpdateRule",
@@ -920,6 +1011,25 @@
         {"shape":"WAFLimitsExceededException"}
       ],
       "documentation":"<p>Inserts or deletes <a>Predicate</a> objects in a <code>Rule</code>. Each <code>Predicate</code> object identifies a predicate, such as a <a>ByteMatchSet</a> or an <a>IPSet</a>, that specifies the web requests that you want to allow, block, or count. If you add more than one predicate to a <code>Rule</code>, a request must match all of the specifications to be allowed, blocked, or counted. For example, suppose you add the following to a <code>Rule</code>: </p> <ul> <li> <p>A <code>ByteMatchSet</code> that matches the value <code>BadBot</code> in the <code>User-Agent</code> header</p> </li> <li> <p>An <code>IPSet</code> that matches the IP address <code>192.0.2.44</code> </p> </li> </ul> <p>You then add the <code>Rule</code> to a <code>WebACL</code> and specify that you want to block requests that satisfy the <code>Rule</code>. For a request to be blocked, the <code>User-Agent</code> header in the request must contain the value <code>BadBot</code> <i>and</i> the request must originate from the IP address 192.0.2.44.</p> <p>To create and configure a <code>Rule</code>, perform the following steps:</p> <ol> <li> <p>Create and update the predicates that you want to include in the <code>Rule</code>.</p> </li> <li> <p>Create the <code>Rule</code>. See <a>CreateRule</a>.</p> </li> <li> <p>Use <code>GetChangeToken</code> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <a>UpdateRule</a> request.</p> </li> <li> <p>Submit an <code>UpdateRule</code> request to add predicates to the <code>Rule</code>.</p> </li> <li> <p>Create and update a <code>WebACL</code> that contains the <code>Rule</code>. See <a>CreateWebACL</a>.</p> </li> </ol> <p>If you want to replace one <code>ByteMatchSet</code> or <code>IPSet</code> with another, you delete the existing one and add the new one.</p> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
+    },
+    "UpdateRuleGroup":{
+      "name":"UpdateRuleGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateRuleGroupRequest"},
+      "output":{"shape":"UpdateRuleGroupResponse"},
+      "errors":[
+        {"shape":"WAFStaleDataException"},
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFNonexistentContainerException"},
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFInvalidOperationException"},
+        {"shape":"WAFLimitsExceededException"},
+        {"shape":"WAFInvalidParameterException"}
+      ],
+      "documentation":"<p>Inserts or deletes <a>ActivatedRule</a> objects in a <code>RuleGroup</code>.</p> <p>You can only insert <code>REGULAR</code> rules into a rule group.</p> <p>You can have a maximum of ten rules per rule group.</p> <p>To create and configure a <code>RuleGroup</code>, perform the following steps:</p> <ol> <li> <p>Create and update the <code>Rules</code> that you want to include in the <code>RuleGroup</code>. See <a>CreateRule</a>.</p> </li> <li> <p>Use <code>GetChangeToken</code> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <a>UpdateRuleGroup</a> request.</p> </li> <li> <p>Submit an <code>UpdateRuleGroup</code> request to add <code>Rules</code> to the <code>RuleGroup</code>.</p> </li> <li> <p>Create and update a <code>WebACL</code> that contains the <code>RuleGroup</code>. See <a>CreateWebACL</a>.</p> </li> </ol> <p>If you want to replace one <code>Rule</code> with another, you delete the existing one and add the new one.</p> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
     },
     "UpdateSizeConstraintSet":{
       "name":"UpdateSizeConstraintSet",
@@ -979,7 +1089,8 @@
         {"shape":"WAFNonexistentContainerException"},
         {"shape":"WAFNonexistentItemException"},
         {"shape":"WAFReferencedItemException"},
-        {"shape":"WAFLimitsExceededException"}
+        {"shape":"WAFLimitsExceededException"},
+        {"shape":"WAFSubscriptionNotFoundException"}
       ],
       "documentation":"<p>Inserts or deletes <a>ActivatedRule</a> objects in a <code>WebACL</code>. Each <code>Rule</code> identifies web requests that you want to allow, block, or count. When you update a <code>WebACL</code>, you specify the following values:</p> <ul> <li> <p>A default action for the <code>WebACL</code>, either <code>ALLOW</code> or <code>BLOCK</code>. AWS WAF performs the default action if a request doesn't match the criteria in any of the <code>Rules</code> in a <code>WebACL</code>.</p> </li> <li> <p>The <code>Rules</code> that you want to add and/or delete. If you want to replace one <code>Rule</code> with another, you delete the existing <code>Rule</code> and add the new one.</p> </li> <li> <p>For each <code>Rule</code>, whether you want AWS WAF to allow requests, block requests, or count requests that match the conditions in the <code>Rule</code>.</p> </li> <li> <p>The order in which you want AWS WAF to evaluate the <code>Rules</code> in a <code>WebACL</code>. If you add more than one <code>Rule</code> to a <code>WebACL</code>, AWS WAF evaluates each request against the <code>Rules</code> in order based on the value of <code>Priority</code>. (The <code>Rule</code> that has the lowest value for <code>Priority</code> is evaluated first.) When a web request matches all of the predicates (such as <code>ByteMatchSets</code> and <code>IPSets</code>) in a <code>Rule</code>, AWS WAF immediately takes the corresponding action, allow or block, and doesn't evaluate the request against the remaining <code>Rules</code> in the <code>WebACL</code>, if any. </p> </li> </ul> <p>To create and configure a <code>WebACL</code>, perform the following steps:</p> <ol> <li> <p>Create and update the predicates that you want to include in <code>Rules</code>. For more information, see <a>CreateByteMatchSet</a>, <a>UpdateByteMatchSet</a>, <a>CreateIPSet</a>, <a>UpdateIPSet</a>, <a>CreateSqlInjectionMatchSet</a>, and <a>UpdateSqlInjectionMatchSet</a>.</p> </li> <li> <p>Create and update the <code>Rules</code> that you want to include in the <code>WebACL</code>. For more information, see <a>CreateRule</a> and <a>UpdateRule</a>.</p> </li> <li> <p>Create a <code>WebACL</code>. See <a>CreateWebACL</a>.</p> </li> <li> <p>Use <code>GetChangeToken</code> to get the change token that you provide in the <code>ChangeToken</code> parameter of an <a>UpdateWebACL</a> request.</p> </li> <li> <p>Submit an <code>UpdateWebACL</code> request to specify the <code>Rules</code> that you want to include in the <code>WebACL</code>, to specify the default action, and to associate the <code>WebACL</code> with a CloudFront distribution. </p> </li> </ol> <p>Be aware that if you try to add a RATE_BASED rule to a web ACL without setting the rule type when first creating the rule, the <a>UpdateWebACL</a> request will fail because the request tries to add a REGULAR rule (the default rule type) with the specified ID, which does not exist. </p> <p>For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF Developer Guide</a>.</p>"
     },
@@ -1010,8 +1121,7 @@
       "type":"structure",
       "required":[
         "Priority",
-        "RuleId",
-        "Action"
+        "RuleId"
       ],
       "members":{
         "Priority":{
@@ -1024,11 +1134,15 @@
         },
         "Action":{
           "shape":"WafAction",
-          "documentation":"<p>Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the <code>Rule</code>. Valid values for <code>Action</code> include the following:</p> <ul> <li> <p> <code>ALLOW</code>: CloudFront responds with the requested object.</p> </li> <li> <p> <code>BLOCK</code>: CloudFront responds with an HTTP 403 (Forbidden) status code.</p> </li> <li> <p> <code>COUNT</code>: AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL. </p> </li> </ul>"
+          "documentation":"<p>Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the <code>Rule</code>. Valid values for <code>Action</code> include the following:</p> <ul> <li> <p> <code>ALLOW</code>: CloudFront responds with the requested object.</p> </li> <li> <p> <code>BLOCK</code>: CloudFront responds with an HTTP 403 (Forbidden) status code.</p> </li> <li> <p> <code>COUNT</code>: AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL. </p> </li> </ul> <p>The <code>Action</code> data type within <code>ActivatedRule</code> is used only when submitting an <code>UpdateWebACL</code> request. <code>ActivatedRule|Action</code> is not applicable and therefore not available for <code>UpdateRuleGroup</code>.</p>"
+        },
+        "OverrideAction":{
+          "shape":"WafOverrideAction",
+          "documentation":"<p>Use the <code>OverrideAction</code> to test your <code>RuleGroup</code>.</p> <p>Any rule in a <code>RuleGroup</code> can potentially block a request. If you set the <code>OverrideAction</code> to <code>None</code>, the <code>RuleGroup</code> will block a request if any individual rule in the <code>RuleGroup</code> matches the request and is configured to block that request. However if you first want to test the <code>RuleGroup</code>, set the <code>OverrideAction</code> to <code>Count</code>. The <code>RuleGroup</code> will then override any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests will be counted. You can view a record of counted requests using <a>GetSampledRequests</a>. </p> <p>The <code>OverrideAction</code> data type within <code>ActivatedRule</code> is used only when submitting an <code>UpdateRuleGroup</code> request. <code>ActivatedRule|OverrideAction</code> is not applicable and therefore not available for <code>UpdateWebACL</code>.</p>"
         },
         "Type":{
           "shape":"WafRuleType",
-          "documentation":"<p>The rule type, either <code>REGULAR</code>, as defined by <a>Rule</a>, or <code>RATE_BASED</code>, as defined by <a>RateBasedRule</a>. The default is REGULAR. Although this field is optional, be aware that if you try to add a RATE_BASED rule to a web ACL without setting the type, the <a>UpdateWebACL</a> request will fail because the request tries to add a REGULAR rule with the specified ID, which does not exist. </p>"
+          "documentation":"<p>The rule type, either <code>REGULAR</code>, as defined by <a>Rule</a>, <code>RATE_BASED</code>, as defined by <a>RateBasedRule</a>, or <code>GROUP</code>, as defined by <a>RuleGroup</a>. The default is REGULAR. Although this field is optional, be aware that if you try to add a RATE_BASED rule to a web ACL without setting the type, the <a>UpdateWebACL</a> request will fail because the request tries to add a REGULAR rule with the specified ID, which does not exist. </p>"
         }
       },
       "documentation":"<p>The <code>ActivatedRule</code> object in an <a>UpdateWebACL</a> request specifies a <code>Rule</code> that you want to insert or delete, the priority of the <code>Rule</code> in the <code>WebACL</code>, and the action that you want AWS WAF to take when a web request matches the <code>Rule</code> (<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>).</p> <p>To specify whether to insert or delete a <code>Rule</code>, use the <code>Action</code> parameter in the <a>WebACLUpdate</a> data type.</p>"
@@ -1363,6 +1477,41 @@
         }
       }
     },
+    "CreateRuleGroupRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "MetricName",
+        "ChangeToken"
+      ],
+      "members":{
+        "Name":{
+          "shape":"ResourceName",
+          "documentation":"<p>A friendly name or description of the <a>RuleGroup</a>. You can't change <code>Name</code> after you create a <code>RuleGroup</code>.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the <code>RuleGroup</code>.</p>"
+        },
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>"
+        }
+      }
+    },
+    "CreateRuleGroupResponse":{
+      "type":"structure",
+      "members":{
+        "RuleGroup":{
+          "shape":"RuleGroup",
+          "documentation":"<p>An empty <a>RuleGroup</a>.</p>"
+        },
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The <code>ChangeToken</code> that you used to submit the <code>CreateRuleGroup</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>"
+        }
+      }
+    },
     "CreateRuleRequest":{
       "type":"structure",
       "required":[
@@ -1685,6 +1834,32 @@
         "ChangeToken":{
           "shape":"ChangeToken",
           "documentation":"<p>The <code>ChangeToken</code> that you used to submit the <code>DeleteRegexPatternSet</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>"
+        }
+      }
+    },
+    "DeleteRuleGroupRequest":{
+      "type":"structure",
+      "required":[
+        "RuleGroupId",
+        "ChangeToken"
+      ],
+      "members":{
+        "RuleGroupId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The <code>RuleGroupId</code> of the <a>RuleGroup</a> that you want to delete. <code>RuleGroupId</code> is returned by <a>CreateRuleGroup</a> and by <a>ListRuleGroups</a>.</p>"
+        },
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>"
+        }
+      }
+    },
+    "DeleteRuleGroupResponse":{
+      "type":"structure",
+      "members":{
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The <code>ChangeToken</code> that you used to submit the <code>DeleteRuleGroup</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>"
         }
       }
     },
@@ -2358,6 +2533,25 @@
         }
       }
     },
+    "GetRuleGroupRequest":{
+      "type":"structure",
+      "required":["RuleGroupId"],
+      "members":{
+        "RuleGroupId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The <code>RuleGroupId</code> of the <a>RuleGroup</a> that you want to get. <code>RuleGroupId</code> is returned by <a>CreateRuleGroup</a> and by <a>ListRuleGroups</a>.</p>"
+        }
+      }
+    },
+    "GetRuleGroupResponse":{
+      "type":"structure",
+      "members":{
+        "RuleGroup":{
+          "shape":"RuleGroup",
+          "documentation":"<p>Information about the <a>RuleGroup</a> that you specified in the <code>GetRuleGroup</code> request. </p>"
+        }
+      }
+    },
     "GetRuleRequest":{
       "type":"structure",
       "required":["RuleId"],
@@ -2397,7 +2591,7 @@
         },
         "RuleId":{
           "shape":"ResourceId",
-          "documentation":"<p> <code>RuleId</code> is one of two values:</p> <ul> <li> <p>The <code>RuleId</code> of the <code>Rule</code> for which you want <code>GetSampledRequests</code> to return a sample of requests.</p> </li> <li> <p> <code>Default_Action</code>, which causes <code>GetSampledRequests</code> to return a sample of the requests that didn't match any of the rules in the specified <code>WebACL</code>.</p> </li> </ul>"
+          "documentation":"<p> <code>RuleId</code> is one of three values:</p> <ul> <li> <p>The <code>RuleId</code> of the <code>Rule</code> or the <code>RuleGroupId</code> of the <code>RuleGroup</code> for which you want <code>GetSampledRequests</code> to return a sample of requests.</p> </li> <li> <p> <code>Default_Action</code>, which causes <code>GetSampledRequests</code> to return a sample of the requests that didn't match any of the rules in the specified <code>WebACL</code>.</p> </li> </ul>"
         },
         "TimeWindow":{
           "shape":"TimeWindow",
@@ -2656,6 +2850,36 @@
       "min":1
     },
     "IPString":{"type":"string"},
+    "ListActivatedRulesInRuleGroupRequest":{
+      "type":"structure",
+      "members":{
+        "RuleGroupId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The <code>RuleGroupId</code> of the <a>RuleGroup</a> for which you want to get a list of <a>ActivatedRule</a> objects.</p>"
+        },
+        "NextMarker":{
+          "shape":"NextMarker",
+          "documentation":"<p>If you specify a value for <code>Limit</code> and you have more <code>ActivatedRules</code> than the value of <code>Limit</code>, AWS WAF returns a <code>NextMarker</code> value in the response that allows you to list another group of <code>ActivatedRules</code>. For the second and subsequent <code>ListActivatedRulesInRuleGroup</code> requests, specify the value of <code>NextMarker</code> from the previous response to get information about another batch of <code>ActivatedRules</code>.</p>"
+        },
+        "Limit":{
+          "shape":"PaginationLimit",
+          "documentation":"<p>Specifies the number of <code>ActivatedRules</code> that you want AWS WAF to return for this request. If you have more <code>ActivatedRules</code> than the number that you specify for <code>Limit</code>, the response includes a <code>NextMarker</code> value that you can use to get another batch of <code>ActivatedRules</code>.</p>"
+        }
+      }
+    },
+    "ListActivatedRulesInRuleGroupResponse":{
+      "type":"structure",
+      "members":{
+        "NextMarker":{
+          "shape":"NextMarker",
+          "documentation":"<p>If you have more <code>ActivatedRules</code> than the number that you specified for <code>Limit</code> in the request, the response includes a <code>NextMarker</code> value. To list more <code>ActivatedRules</code>, submit another <code>ListActivatedRulesInRuleGroup</code> request, and specify the <code>NextMarker</code> value from the response in the <code>NextMarker</code> value in the next request.</p>"
+        },
+        "ActivatedRules":{
+          "shape":"ActivatedRules",
+          "documentation":"<p>An array of <code>ActivatedRules</code> objects.</p>"
+        }
+      }
+    },
     "ListByteMatchSetsRequest":{
       "type":"structure",
       "members":{
@@ -2812,6 +3036,32 @@
         }
       }
     },
+    "ListRuleGroupsRequest":{
+      "type":"structure",
+      "members":{
+        "NextMarker":{
+          "shape":"NextMarker",
+          "documentation":"<p>If you specify a value for <code>Limit</code> and you have more <code>RuleGroups</code> than the value of <code>Limit</code>, AWS WAF returns a <code>NextMarker</code> value in the response that allows you to list another group of <code>RuleGroups</code>. For the second and subsequent <code>ListRuleGroups</code> requests, specify the value of <code>NextMarker</code> from the previous response to get information about another batch of <code>RuleGroups</code>.</p>"
+        },
+        "Limit":{
+          "shape":"PaginationLimit",
+          "documentation":"<p>Specifies the number of <code>RuleGroups</code> that you want AWS WAF to return for this request. If you have more <code>RuleGroups</code> than the number that you specify for <code>Limit</code>, the response includes a <code>NextMarker</code> value that you can use to get another batch of <code>RuleGroups</code>.</p>"
+        }
+      }
+    },
+    "ListRuleGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "NextMarker":{
+          "shape":"NextMarker",
+          "documentation":"<p>If you have more <code>RuleGroups</code> than the number that you specified for <code>Limit</code> in the request, the response includes a <code>NextMarker</code> value. To list more <code>RuleGroups</code>, submit another <code>ListRuleGroups</code> request, and specify the <code>NextMarker</code> value from the response in the <code>NextMarker</code> value in the next request.</p>"
+        },
+        "RuleGroups":{
+          "shape":"RuleGroupSummaries",
+          "documentation":"<p>An array of <a>RuleGroup</a> objects.</p>"
+        }
+      }
+    },
     "ListRulesRequest":{
       "type":"structure",
       "members":{
@@ -2891,6 +3141,32 @@
         }
       },
       "documentation":"<p>The response to a <a>ListSqlInjectionMatchSets</a> request.</p>"
+    },
+    "ListSubscribedRuleGroupsRequest":{
+      "type":"structure",
+      "members":{
+        "NextMarker":{
+          "shape":"NextMarker",
+          "documentation":"<p>If you specify a value for <code>Limit</code> and you have more <code>ByteMatchSets</code>subscribed rule groups than the value of <code>Limit</code>, AWS WAF returns a <code>NextMarker</code> value in the response that allows you to list another group of subscribed rule groups. For the second and subsequent <code>ListSubscribedRuleGroupsRequest</code> requests, specify the value of <code>NextMarker</code> from the previous response to get information about another batch of subscribed rule groups.</p>"
+        },
+        "Limit":{
+          "shape":"PaginationLimit",
+          "documentation":"<p>Specifies the number of subscribed rule groups that you want AWS WAF to return for this request. If you have more objects than the number you specify for <code>Limit</code>, the response includes a <code>NextMarker</code> value that you can use to get another batch of objects.</p>"
+        }
+      }
+    },
+    "ListSubscribedRuleGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "NextMarker":{
+          "shape":"NextMarker",
+          "documentation":"<p>If you have more objects than the number that you specified for <code>Limit</code> in the request, the response includes a <code>NextMarker</code> value. To list more objects, submit another <code>ListSubscribedRuleGroups</code> request, and specify the <code>NextMarker</code> value from the response in the <code>NextMarker</code> value in the next request.</p>"
+        },
+        "RuleGroups":{
+          "shape":"SubscribedRuleGroupSummaries",
+          "documentation":"<p>An array of <a>RuleGroup</a> objects.</p>"
+        }
+      }
     },
     "ListWebACLsRequest":{
       "type":"structure",
@@ -2978,6 +3254,7 @@
       "enum":[
         "CHANGE_ACTION",
         "WAF_ACTION",
+        "WAF_OVERRIDE_ACTION",
         "PREDICATE_TYPE",
         "IPSET_TYPE",
         "BYTE_MATCH_FIELD_TYPE",
@@ -3299,6 +3576,70 @@
       },
       "documentation":"<p>A combination of <a>ByteMatchSet</a>, <a>IPSet</a>, and/or <a>SqlInjectionMatchSet</a> objects that identify the web requests that you want to allow, block, or count. For example, you might create a <code>Rule</code> that includes the following predicates:</p> <ul> <li> <p>An <code>IPSet</code> that causes AWS WAF to search for web requests that originate from the IP address <code>192.0.2.44</code> </p> </li> <li> <p>A <code>ByteMatchSet</code> that causes AWS WAF to search for web requests for which the value of the <code>User-Agent</code> header is <code>BadBot</code>.</p> </li> </ul> <p>To match the settings in this <code>Rule</code>, a request must originate from <code>192.0.2.44</code> AND include a <code>User-Agent</code> header for which the value is <code>BadBot</code>.</p>"
     },
+    "RuleGroup":{
+      "type":"structure",
+      "required":["RuleGroupId"],
+      "members":{
+        "RuleGroupId":{
+          "shape":"ResourceId",
+          "documentation":"<p>A unique identifier for a <code>RuleGroup</code>. You use <code>RuleGroupId</code> to get more information about a <code>RuleGroup</code> (see <a>GetRuleGroup</a>), update a <code>RuleGroup</code> (see <a>UpdateRuleGroup</a>), insert a <code>RuleGroup</code> into a <code>WebACL</code> or delete a one from a <code>WebACL</code> (see <a>UpdateWebACL</a>), or delete a <code>RuleGroup</code> from AWS WAF (see <a>DeleteRuleGroup</a>).</p> <p> <code>RuleGroupId</code> is returned by <a>CreateRuleGroup</a> and by <a>ListRuleGroups</a>.</p>"
+        },
+        "Name":{
+          "shape":"ResourceName",
+          "documentation":"<p>The friendly name or description for the <code>RuleGroup</code>. You can't change the name of a <code>RuleGroup</code> after you create it.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the <code>RuleGroup</code>.</p>"
+        }
+      },
+      "documentation":"<p>A collection of predefined rules that you can add to a web ACL.</p> <p>Rule groups are subject to the following limits:</p> <ul> <li> <p>Three rule groups per account. You can request an increase to this limit by contacting customer support.</p> </li> <li> <p>One rule group per web ACL.</p> </li> <li> <p>Ten rules per rule group.</p> </li> </ul>"
+    },
+    "RuleGroupSummaries":{
+      "type":"list",
+      "member":{"shape":"RuleGroupSummary"}
+    },
+    "RuleGroupSummary":{
+      "type":"structure",
+      "required":[
+        "RuleGroupId",
+        "Name"
+      ],
+      "members":{
+        "RuleGroupId":{
+          "shape":"ResourceId",
+          "documentation":"<p>A unique identifier for a <code>RuleGroup</code>. You use <code>RuleGroupId</code> to get more information about a <code>RuleGroup</code> (see <a>GetRuleGroup</a>), update a <code>RuleGroup</code> (see <a>UpdateRuleGroup</a>), insert a <code>RuleGroup</code> into a <code>WebACL</code> or delete one from a <code>WebACL</code> (see <a>UpdateWebACL</a>), or delete a <code>RuleGroup</code> from AWS WAF (see <a>DeleteRuleGroup</a>).</p> <p> <code>RuleGroupId</code> is returned by <a>CreateRuleGroup</a> and by <a>ListRuleGroups</a>.</p>"
+        },
+        "Name":{
+          "shape":"ResourceName",
+          "documentation":"<p>A friendly name or description of the <a>RuleGroup</a>. You can't change the name of a <code>RuleGroup</code> after you create it.</p>"
+        }
+      },
+      "documentation":"<p>Contains the identifier and the friendly name or description of the <code>RuleGroup</code>.</p>"
+    },
+    "RuleGroupUpdate":{
+      "type":"structure",
+      "required":[
+        "Action",
+        "ActivatedRule"
+      ],
+      "members":{
+        "Action":{
+          "shape":"ChangeAction",
+          "documentation":"<p>Specify <code>INSERT</code> to add an <code>ActivatedRule</code> to a <code>RuleGroup</code>. Use <code>DELETE</code> to remove an <code>ActivatedRule</code> from a <code>RuleGroup</code>.</p>"
+        },
+        "ActivatedRule":{
+          "shape":"ActivatedRule",
+          "documentation":"<p>The <code>ActivatedRule</code> object specifies a <code>Rule</code> that you want to insert or delete, the priority of the <code>Rule</code> in the <code>WebACL</code>, and the action that you want AWS WAF to take when a web request matches the <code>Rule</code> (<code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>).</p>"
+        }
+      },
+      "documentation":"<p>Specifies an <code>ActivatedRule</code> and indicates whether you want to add it to a <code>RuleGroup</code> or delete it from a <code>RuleGroup</code>.</p>"
+    },
+    "RuleGroupUpdates":{
+      "type":"list",
+      "member":{"shape":"RuleGroupUpdate"},
+      "min":1
+    },
     "RulePriority":{"type":"integer"},
     "RuleSummaries":{
       "type":"list",
@@ -3370,6 +3711,10 @@
         "Action":{
           "shape":"Action",
           "documentation":"<p>The action for the <code>Rule</code> that the request matched: <code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p>"
+        },
+        "RuleWithinRuleGroup":{
+          "shape":"ResourceId",
+          "documentation":"<p>This value is returned if the <code>GetSampledRequests</code> request specifies the ID of a <code>RuleGroup</code> rather than the ID of an individual rule. <code>RuleWithinRuleGroup</code> is the rule within the specified <code>RuleGroup</code> that matched the request listed in the response.</p>"
         }
       },
       "documentation":"<p>The response from a <a>GetSampledRequests</a> request includes a <code>SampledHTTPRequests</code> complex type that appears as <code>SampledRequests</code> in the response syntax. <code>SampledHTTPRequests</code> contains one <code>SampledHTTPRequest</code> object for each web request that is returned by <code>GetSampledRequests</code>.</p>"
@@ -3570,6 +3915,33 @@
     "SqlInjectionMatchTuples":{
       "type":"list",
       "member":{"shape":"SqlInjectionMatchTuple"}
+    },
+    "SubscribedRuleGroupSummaries":{
+      "type":"list",
+      "member":{"shape":"SubscribedRuleGroupSummary"}
+    },
+    "SubscribedRuleGroupSummary":{
+      "type":"structure",
+      "required":[
+        "RuleGroupId",
+        "Name",
+        "MetricName"
+      ],
+      "members":{
+        "RuleGroupId":{
+          "shape":"ResourceId",
+          "documentation":"<p>A unique identifier for a <code>RuleGroup</code>.</p>"
+        },
+        "Name":{
+          "shape":"ResourceName",
+          "documentation":"<p>A friendly name or description of the <code>RuleGroup</code>. You can't change the name of a <code>RuleGroup</code> after you create it.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>A friendly name or description for the metrics for this <code>RuleGroup</code>. The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the <code>RuleGroup</code>.</p>"
+        }
+      },
+      "documentation":"<p>A summary of the rule groups you are subscribed to.</p>"
     },
     "TextTransformation":{
       "type":"string",
@@ -3793,6 +4165,37 @@
         }
       }
     },
+    "UpdateRuleGroupRequest":{
+      "type":"structure",
+      "required":[
+        "RuleGroupId",
+        "Updates",
+        "ChangeToken"
+      ],
+      "members":{
+        "RuleGroupId":{
+          "shape":"ResourceId",
+          "documentation":"<p>The <code>RuleGroupId</code> of the <a>RuleGroup</a> that you want to update. <code>RuleGroupId</code> is returned by <a>CreateRuleGroup</a> and by <a>ListRuleGroups</a>.</p>"
+        },
+        "Updates":{
+          "shape":"RuleGroupUpdates",
+          "documentation":"<p>An array of <code>RuleGroupUpdate</code> objects that you want to insert into or delete from a <a>RuleGroup</a>.</p> <p>You can only insert <code>REGULAR</code> rules into a rule group.</p> <p>The <code>Action</code> data type within <code>ActivatedRule</code> is used only when submitting an <code>UpdateWebACL</code> request. <code>ActivatedRule|Action</code> is not applicable and therefore not available for <code>UpdateRuleGroup</code>.</p>"
+        },
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The value returned by the most recent call to <a>GetChangeToken</a>.</p>"
+        }
+      }
+    },
+    "UpdateRuleGroupResponse":{
+      "type":"structure",
+      "members":{
+        "ChangeToken":{
+          "shape":"ChangeToken",
+          "documentation":"<p>The <code>ChangeToken</code> that you used to submit the <code>UpdateRuleGroup</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>"
+        }
+      }
+    },
     "UpdateRuleRequest":{
       "type":"structure",
       "required":[
@@ -3905,7 +4308,7 @@
         },
         "Updates":{
           "shape":"WebACLUpdates",
-          "documentation":"<p>An array of updates to make to the <a>WebACL</a>.</p> <p>An array of <code>WebACLUpdate</code> objects that you want to insert into or delete from a <a>WebACL</a>. For more information, see the applicable data types:</p> <ul> <li> <p> <a>WebACLUpdate</a>: Contains <code>Action</code> and <code>ActivatedRule</code> </p> </li> <li> <p> <a>ActivatedRule</a>: Contains <code>Action</code>, <code>Priority</code>, <code>RuleId</code>, and <code>Type</code> </p> </li> <li> <p> <a>WafAction</a>: Contains <code>Type</code> </p> </li> </ul>"
+          "documentation":"<p>An array of updates to make to the <a>WebACL</a>.</p> <p>An array of <code>WebACLUpdate</code> objects that you want to insert into or delete from a <a>WebACL</a>. For more information, see the applicable data types:</p> <ul> <li> <p> <a>WebACLUpdate</a>: Contains <code>Action</code> and <code>ActivatedRule</code> </p> </li> <li> <p> <a>ActivatedRule</a>: Contains <code>Action</code>, <code>Priority</code>, <code>RuleId</code>, and <code>Type</code>. The <code>OverrideAction</code> data type within <code>ActivatedRule</code> is used only when submitting an <code>UpdateRuleGroup</code> request. <code>ActivatedRule|OverrideAction</code> is not applicable and therefore not available for <code>UpdateWebACL</code>. </p> </li> <li> <p> <a>WafAction</a>: Contains <code>Type</code> </p> </li> </ul>"
         },
         "DefaultAction":{
           "shape":"WafAction",
@@ -4053,6 +4456,14 @@
       "documentation":"<p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>",
       "exception":true
     },
+    "WAFSubscriptionNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The specified subscription does not exist.</p>",
+      "exception":true
+    },
     "WafAction":{
       "type":"structure",
       "required":["Type"],
@@ -4072,11 +4483,30 @@
         "COUNT"
       ]
     },
+    "WafOverrideAction":{
+      "type":"structure",
+      "required":["Type"],
+      "members":{
+        "Type":{
+          "shape":"WafOverrideActionType",
+          "documentation":"<p> <code>COUNT</code> overrides the action specified by the individual rule within a <code>RuleGroup</code> . If set to <code>NONE</code>, the rule's action will take place.</p>"
+        }
+      },
+      "documentation":"<p>The action to take if any rule within the <code>RuleGroup</code> matches a request. </p>"
+    },
+    "WafOverrideActionType":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "COUNT"
+      ]
+    },
     "WafRuleType":{
       "type":"string",
       "enum":[
         "REGULAR",
-        "RATE_BASED"
+        "RATE_BASED",
+        "GROUP"
       ]
     },
     "WebACL":{

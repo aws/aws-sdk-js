@@ -132,6 +132,22 @@
       ],
       "documentation":"<p>Deletes the specified Lambda function code and configuration.</p> <p>If you are using the versioning feature and you don't specify a function version in your <code>DeleteFunction</code> request, AWS Lambda will delete the function, including all its versions, and any aliases pointing to the function versions. To delete a specific function version, you must provide the function version via the <code>Qualifier</code> parameter. For information about function versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>When you delete a function the associated resource policy is also deleted. You will need to delete the event source mappings explicitly.</p> <p>This operation requires permission for the <code>lambda:DeleteFunction</code> action.</p>"
     },
+    "DeleteFunctionConcurrency":{
+      "name":"DeleteFunctionConcurrency",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/2017-10-31/functions/{FunctionName}/concurrency",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteFunctionConcurrencyRequest"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"InvalidParameterValueException"}
+      ],
+      "documentation":"<p>Removes concurrent execution limits from this function.</p>"
+    },
     "GetAccountSettings":{
       "name":"GetAccountSettings",
       "http":{
@@ -383,6 +399,23 @@
       ],
       "documentation":"<p>Publishes a version of your function from the current snapshot of $LATEST. That is, AWS Lambda takes a snapshot of the function code and configuration information from $LATEST and publishes a new version. The code and configuration cannot be modified after publication. For information about the versioning feature, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p>"
     },
+    "PutFunctionConcurrency":{
+      "name":"PutFunctionConcurrency",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/2017-10-31/functions/{FunctionName}/concurrency",
+        "responseCode":200
+      },
+      "input":{"shape":"PutFunctionConcurrencyRequest"},
+      "output":{"shape":"Concurrency"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"InvalidParameterValueException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyRequestsException"}
+      ],
+      "documentation":"<p>Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.</p>"
+    },
     "RemovePermission":{
       "name":"RemovePermission",
       "http":{
@@ -521,7 +554,11 @@
         },
         "ConcurrentExecutions":{
           "shape":"Integer",
-          "documentation":"<p>Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html\">Lambda Function Concurrent Executions</a>. The default limit is 100.</p>"
+          "documentation":"<p>Number of simultaneous executions of your function per region. For more information or to request a limit increase for concurrent executions, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html\">Lambda Function Concurrent Executions</a>. The default limit is 1000.</p>"
+        },
+        "UnreservedConcurrentExecutions":{
+          "shape":"UnreservedConcurrentExecutions",
+          "documentation":"<p>The number of concurrent executions available to functions that do not have concurrency limits set.</p>"
         }
       },
       "documentation":"<p>Provides limits of code size and concurrency associated with the current account and region.</p>"
@@ -602,6 +639,17 @@
       },
       "documentation":"<p/>"
     },
+    "AdditionalVersion":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[0-9]+"
+    },
+    "AdditionalVersionWeights":{
+      "type":"map",
+      "key":{"shape":"AdditionalVersion"},
+      "value":{"shape":"Weight"}
+    },
     "Alias":{
       "type":"string",
       "max":128,
@@ -626,6 +674,10 @@
         "Description":{
           "shape":"Description",
           "documentation":"<p>Alias description.</p>"
+        },
+        "RoutingConfig":{
+          "shape":"AliasRoutingConfiguration",
+          "documentation":"<p>Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.</p>"
         }
       },
       "documentation":"<p>Provides configuration information about a Lambda function version alias.</p>"
@@ -633,6 +685,16 @@
     "AliasList":{
       "type":"list",
       "member":{"shape":"AliasConfiguration"}
+    },
+    "AliasRoutingConfiguration":{
+      "type":"structure",
+      "members":{
+        "AdditionalVersionWeights":{
+          "shape":"AdditionalVersionWeights",
+          "documentation":"<p>Set this property value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke <code>function-version</code>.</p>"
+        }
+      },
+      "documentation":"<p>The parent object that implements what percentage of traffic will invoke each function version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.</p>"
     },
     "Arn":{
       "type":"string",
@@ -665,6 +727,15 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "Concurrency":{
+      "type":"structure",
+      "members":{
+        "ReservedConcurrentExecutions":{
+          "shape":"ReservedConcurrentExecutions",
+          "documentation":"<p>The number of concurrent executions reserved for this function.</p>"
+        }
+      }
+    },
     "CreateAliasRequest":{
       "type":"structure",
       "required":[
@@ -690,6 +761,10 @@
         "Description":{
           "shape":"Description",
           "documentation":"<p>Description of the alias.</p>"
+        },
+        "RoutingConfig":{
+          "shape":"AliasRoutingConfiguration",
+          "documentation":"<p>Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.</p>"
         }
       }
     },
@@ -744,7 +819,7 @@
         },
         "Runtime":{
           "shape":"Runtime",
-          "documentation":"<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to \"python3.6\". To use the Python runtime v2.7, set the value to \"python2.7\". To use the Node.js runtime v6.10, set the value to \"nodejs6.10\". To use the Node.js runtime v4.3, set the value to \"nodejs4.3\".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>"
+          "documentation":"<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to \"python3.6\". To use the Python runtime v2.7, set the value to \"python2.7\". To use the Node.js runtime v6.10, set the value to \"nodejs6.10\". To use the Node.js runtime v4.3, set the value to \"nodejs4.3\".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>"
         },
         "Role":{
           "shape":"RoleArn",
@@ -842,6 +917,18 @@
         }
       },
       "documentation":"<p/>"
+    },
+    "DeleteFunctionConcurrencyRequest":{
+      "type":"structure",
+      "required":["FunctionName"],
+      "members":{
+        "FunctionName":{
+          "shape":"FunctionName",
+          "documentation":"<p>The name of the function you are removing concurrent execution limits from.</p>",
+          "location":"uri",
+          "locationName":"FunctionName"
+        }
+      }
     },
     "DeleteFunctionRequest":{
       "type":"structure",
@@ -1223,7 +1310,7 @@
         },
         "Qualifier":{
           "shape":"Qualifier",
-          "documentation":"<p>Using this optional parameter to specify a function version or an alias name. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the <code>$LATEST</code> version of the Lambda function.</p>",
+          "documentation":"<p>Use this optional parameter to specify a function version or an alias name. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the <code>$LATEST</code> version of the Lambda function. </p>",
           "location":"querystring",
           "locationName":"Qualifier"
         }
@@ -1238,6 +1325,10 @@
         "Tags":{
           "shape":"Tags",
           "documentation":"<p>Returns the list of tags associated with the function.</p>"
+        },
+        "Concurrency":{
+          "shape":"Concurrency",
+          "documentation":"<p>The concurrent execution limit set for this function.</p>"
         }
       },
       "documentation":"<p>This response contains the object for the Lambda function location (see <a>FunctionCodeLocation</a>.</p>"
@@ -1290,7 +1381,7 @@
           "documentation":"<p/>"
         }
       },
-      "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. You will also get this exception if you have selected a deprecated runtime, such as Node v0.10.42. </p>",
+      "documentation":"<p>One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -1374,7 +1465,7 @@
         },
         "ClientContext":{
           "shape":"String",
-          "documentation":"<p>Using the <code>ClientContext</code> you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable. For an example of a <code>ClientContext</code> JSON, see <a href=\"http://docs.aws.amazon.com/mobileanalytics/latest/ug/PutEvents.html\">PutEvents</a> in the <i>Amazon Mobile Analytics API Reference and User Guide</i>.</p> <p>The ClientContext JSON must be base64-encoded.</p>",
+          "documentation":"<p>Using the <code>ClientContext</code> you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable. For an example of a <code>ClientContext</code> JSON, see <a href=\"http://docs.aws.amazon.com/mobileanalytics/latest/ug/PutEvents.html\">PutEvents</a> in the <i>Amazon Mobile Analytics API Reference and User Guide</i>.</p> <p>The ClientContext JSON must be base64-encoded and has a maximum size of 3583 bytes.</p>",
           "location":"header",
           "locationName":"X-Amz-Client-Context"
         },
@@ -1415,6 +1506,12 @@
         "Payload":{
           "shape":"Blob",
           "documentation":"<p> It is the JSON representation of the object returned by the Lambda function. This is present only if the invocation type is <code>RequestResponse</code>. </p> <p>In the event of a function error this field contains a message describing the error. For the <code>Handled</code> errors the Lambda function will report this message. For <code>Unhandled</code> errors AWS Lambda reports the message. </p>"
+        },
+        "ExecutedVersion":{
+          "shape":"Version",
+          "documentation":"<p>The function version that has been executed. This value is returned only if the invocation type is <code>RequestResponse</code>.</p>",
+          "location":"header",
+          "locationName":"X-Amz-Executed-Version"
         }
       },
       "documentation":"<p>Upon success, returns an empty response. Otherwise, throws an exception.</p>",
@@ -1598,13 +1695,13 @@
       "members":{
         "MasterRegion":{
           "shape":"MasterRegion",
-          "documentation":"<p>Optional string. If not specified, will return only regular function versions (i.e., non-replicated versions).</p> <p>Valid values are:</p> <p>The region from which the functions are replicated. For example, if you specify <code>us-east-1</code>, only functions replicated from that region will be returned.</p> <p> <code>ALL</code> _ Will return all functions from any region. If specified, you also must specify a valid FunctionVersion parameter.</p>",
+          "documentation":"<p>Optional string. If not specified, will return only regular function versions (i.e., non-replicated versions).</p> <p>Valid values are:</p> <p>The region from which the functions are replicated. For example, if you specify <code>us-east-1</code>, only functions replicated from that region will be returned.</p> <p> <code>ALL</code>: Will return all functions from any region. If specified, you also must specify a valid FunctionVersion parameter.</p>",
           "location":"querystring",
           "locationName":"MasterRegion"
         },
         "FunctionVersion":{
           "shape":"FunctionVersion",
-          "documentation":"<p>Optional string. If not specified, only the unqualified functions ARNs (Amazon Resource Names) will be returned.</p> <p>Valid value:</p> <p> <code>ALL</code> _ Will return all versions, including <code>$LATEST</code> which will have fully qualified ARNs (Amazon Resource Names).</p>",
+          "documentation":"<p>Optional string. If not specified, only the unqualified functions ARNs (Amazon Resource Names) will be returned.</p> <p>Valid value:</p> <p> <code>ALL</code>: Will return all versions, including <code>$LATEST</code> which will have fully qualified ARNs (Amazon Resource Names).</p>",
           "location":"querystring",
           "locationName":"FunctionVersion"
         },
@@ -1716,7 +1813,7 @@
     },
     "MemorySize":{
       "type":"integer",
-      "max":1536,
+      "max":3008,
       "min":128
     },
     "NameSpacedFunctionArn":{
@@ -1761,7 +1858,7 @@
         },
         "CodeSha256":{
           "shape":"String",
-          "documentation":"<p>The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter value must match the SHA256 of the $LATEST version for the publication to succeed.</p>"
+          "documentation":"<p>The SHA256 hash of the deployment package you want to publish. This provides validation on the code you are publishing. If you provide this parameter, the value must match the SHA256 of the $LATEST version for the publication to succeed. You can use the <b>DryRun</b> parameter of <a>UpdateFunctionCode</a> to verify the hash value that will be returned before publishing your new version.</p>"
         },
         "Description":{
           "shape":"Description",
@@ -1769,6 +1866,25 @@
         }
       },
       "documentation":"<p/>"
+    },
+    "PutFunctionConcurrencyRequest":{
+      "type":"structure",
+      "required":[
+        "FunctionName",
+        "ReservedConcurrentExecutions"
+      ],
+      "members":{
+        "FunctionName":{
+          "shape":"FunctionName",
+          "documentation":"<p>The name of the function you are setting concurrent execution limits on.</p>",
+          "location":"uri",
+          "locationName":"FunctionName"
+        },
+        "ReservedConcurrentExecutions":{
+          "shape":"ReservedConcurrentExecutions",
+          "documentation":"<p>The concurrent execution limit reserved for this function.</p>"
+        }
+      }
     },
     "Qualifier":{
       "type":"string",
@@ -1813,6 +1929,10 @@
       "documentation":"<p>The request payload exceeded the <code>Invoke</code> request body JSON input limit. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/limits.html\">Limits</a>. </p>",
       "error":{"httpStatusCode":413},
       "exception":true
+    },
+    "ReservedConcurrentExecutions":{
+      "type":"integer",
+      "min":0
     },
     "ResourceArn":{
       "type":"string",
@@ -1959,6 +2079,8 @@
       "enum":[
         "ConcurrentInvocationLimitExceeded",
         "FunctionInvocationRateLimitExceeded",
+        "ReservedFunctionConcurrentInvocationLimitExceeded",
+        "ReservedFunctionInvocationRateLimitExceeded",
         "CallerRateLimitExceeded"
       ]
     },
@@ -1980,7 +2102,7 @@
         "message":{"shape":"String"},
         "Reason":{"shape":"ThrottleReason"}
       },
-      "documentation":"<p/>",
+      "documentation":"<p>You will get this exception for the following reasons. <code>ConcurrentInvocationLimitExceeded</code> is returned if you have no functions with reserved-concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account's unreserved concurrency limit. <code>ReservedFunctionConcurrentInvocationLimitExceeded</code> is returned when a function with reserved concurrency exceeds its configured concurrent limit. <code>CallerRateLimitExceeded</code> is returned when your account limit is exceeded and you have not reserved concurrency on any function. For more information, see <a>concurrent-executions</a> </p>",
       "error":{"httpStatusCode":429},
       "exception":true
     },
@@ -2010,6 +2132,10 @@
         "Active",
         "PassThrough"
       ]
+    },
+    "UnreservedConcurrentExecutions":{
+      "type":"integer",
+      "min":0
     },
     "UnsupportedMediaTypeException":{
       "type":"structure",
@@ -2068,6 +2194,10 @@
         "Description":{
           "shape":"Description",
           "documentation":"<p>You can change the description of the alias using this parameter.</p>"
+        },
+        "RoutingConfig":{
+          "shape":"AliasRoutingConfiguration",
+          "documentation":"<p>Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.</p>"
         }
       }
     },
@@ -2128,7 +2258,7 @@
         },
         "DryRun":{
           "shape":"Boolean",
-          "documentation":"<p>This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the <code>CodeSha256</code> hash value the provided code will also be computed and returned in the response.</p>"
+          "documentation":"<p>This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the <code>CodeSha256</code> hash value of the provided code will also be computed and returned in the response.</p>"
         }
       },
       "documentation":"<p/>"
@@ -2170,7 +2300,7 @@
         },
         "Runtime":{
           "shape":"Runtime",
-          "documentation":"<p>The runtime environment for the Lambda function.</p> <p>To use the Python runtime v3.6, set the value to \"python3.6\". To use the Python runtime v2.7, set the value to \"python2.7\". To use the Node.js runtime v6.10, set the value to \"nodejs6.10\". To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To use the Python runtime v3.6, set the value to \"python3.6\".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>"
+          "documentation":"<p>The runtime environment for the Lambda function.</p> <p>To use the Python runtime v3.6, set the value to \"python3.6\". To use the Python runtime v2.7, set the value to \"python2.7\". To use the Node.js runtime v6.10, set the value to \"nodejs6.10\". To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To use the Python runtime v3.6, set the value to \"python3.6\".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>"
         },
         "DeadLetterConfig":{
           "shape":"DeadLetterConfig",
@@ -2225,7 +2355,12 @@
       },
       "documentation":"<p>VPC configuration associated with your Lambda function.</p>"
     },
-    "VpcId":{"type":"string"}
+    "VpcId":{"type":"string"},
+    "Weight":{
+      "type":"double",
+      "max":1.0,
+      "min":0.0
+    }
   },
   "documentation":"<fullname>AWS Lambda</fullname> <p> <b>Overview</b> </p> <p>This is the <i>AWS Lambda API Reference</i>. The AWS Lambda Developer Guide provides additional information. For the service overview, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/welcome.html\">What is AWS Lambda</a>, and for information about how the service works, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a> in the <i>AWS Lambda Developer Guide</i>.</p>"
 }

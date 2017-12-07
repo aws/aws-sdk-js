@@ -475,5 +475,59 @@
   "mediastoredata": {
     "prefix": "mediastore-data",
     "name": "MediaStoreData"
+  },
+  "appsync": {
+    "name": "AppSync"
+  },
+  "guardduty": {
+    "name": "GuardDuty"
+  },
+  "mq": {
+    "name": "MQ"
+  },
+  "comprehend": {
+    "name": "Comprehend"
+  },
+  "iotjobsdataplane": {
+    "prefix": "iot-jobs-data",
+    "name": "IoTJobsDataPlane"
+  },
+  "kinesisvideoarchivedmedia": {
+    "prefix": "kinesis-video-archived-media",
+    "name": "KinesisVideoArchivedMedia"
+  },
+  "kinesisvideomedia": {
+    "prefix": "kinesis-video-media",
+    "name": "KinesisVideoMedia"
+  },
+  "kinesisvideo": {
+    "name": "KinesisVideo"
+  },
+  "sagemakerruntime": {
+    "prefix": "runtime.sagemaker",
+    "name": "SageMakerRuntime"
+  },
+  "sagemaker": {
+    "name": "SageMaker"
+  },
+  "translate": {
+    "name": "Translate"
+  },
+  "resourcegroups": {
+    "prefix": "resource-groups",
+    "name": "ResourceGroups"
+  },
+  "alexaforbusiness": {
+    "name": "AlexaForBusiness"
+  },
+  "cloud9": {
+    "name": "Cloud9"
+  },
+  "serverlessapplicationrepository": {
+    "prefix": "serverlessrepo",
+    "name": "ServerlessApplicationRepository"
+  },
+  "servicediscovery": {
+    "name": "ServiceDiscovery"
   }
 }

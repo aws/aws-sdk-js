@@ -260,6 +260,14 @@ declare class CodeDeploy extends Service {
    */
   listOnPremisesInstances(callback?: (err: AWSError, data: CodeDeploy.Types.ListOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.ListOnPremisesInstancesOutput, AWSError>;
   /**
+   * Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed.
+   */
+  putLifecycleEventHookExecutionStatus(params: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusInput, callback?: (err: AWSError, data: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput) => void): Request<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput, AWSError>;
+  /**
+   * Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed.
+   */
+  putLifecycleEventHookExecutionStatus(callback?: (err: AWSError, data: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput) => void): Request<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput, AWSError>;
+  /**
    * Registers with AWS CodeDeploy a revision for the specified application.
    */
   registerApplicationRevision(params: CodeDeploy.Types.RegisterApplicationRevisionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -380,6 +388,10 @@ declare namespace CodeDeploy {
      * The name for a connection to a GitHub account.
      */
     gitHubAccountName?: GitHubAccountTokenName;
+    /**
+     * The destination platform type for deployment of the application (Lambda or Server).
+     */
+    computePlatform?: ComputePlatform;
   }
   export type ApplicationName = string;
   export type ApplicationRevisionSortBy = "registerTime"|"firstUsedTime"|"lastUsedTime"|string;
@@ -439,7 +451,7 @@ declare namespace CodeDeploy {
     /**
      * A list of application names separated by spaces.
      */
-    applicationNames?: ApplicationsList;
+    applicationNames: ApplicationsList;
   }
   export interface BatchGetApplicationsOutput {
     /**
@@ -491,7 +503,7 @@ declare namespace CodeDeploy {
     /**
      * A list of deployment IDs, separated by spaces.
      */
-    deploymentIds?: DeploymentsList;
+    deploymentIds: DeploymentsList;
   }
   export interface BatchGetDeploymentsOutput {
     /**
@@ -503,7 +515,7 @@ declare namespace CodeDeploy {
     /**
      * The names of the on-premises instances about which to get information.
      */
-    instanceNames?: InstanceNameList;
+    instanceNames: InstanceNameList;
   }
   export interface BatchGetOnPremisesInstancesOutput {
     /**
@@ -536,8 +548,9 @@ declare namespace CodeDeploy {
     terminationWaitTimeInMinutes?: Duration;
   }
   export type Boolean = boolean;
-  export type BundleType = "tar"|"tgz"|"zip"|string;
+  export type BundleType = "tar"|"tgz"|"zip"|"YAML"|"JSON"|string;
   export type CommitId = string;
+  export type ComputePlatform = "Server"|"Lambda"|string;
   export interface ContinueDeploymentInput {
     /**
      * The deployment ID of the blue/green deployment for which you want to start rerouting traffic to the replacement environment.
@@ -549,6 +562,10 @@ declare namespace CodeDeploy {
      * The name of the application. This name must be unique with the applicable IAM user or AWS account.
      */
     applicationName: ApplicationName;
+    /**
+     * The destination platform type for the deployment Lambda or Server).
+     */
+    computePlatform?: ComputePlatform;
   }
   export interface CreateApplicationOutput {
     /**
@@ -565,6 +582,14 @@ declare namespace CodeDeploy {
      * The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value. The type parameter takes either of the following values:   HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.   FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.   The value parameter takes an integer. For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.
      */
     minimumHealthyHosts: MinimumHealthyHosts;
+    /**
+     * The configuration specifying how the deployment traffic will be routed.
+     */
+    trafficRoutingConfig?: TrafficRoutingConfig;
+    /**
+     * The destination platform type for the deployment (Lambda or Server&gt;).
+     */
+    computePlatform?: ComputePlatform;
   }
   export interface CreateDeploymentConfigOutput {
     /**
@@ -734,6 +759,14 @@ declare namespace CodeDeploy {
      * The time at which the deployment configuration was created.
      */
     createTime?: Timestamp;
+    /**
+     * The destination platform type for the deployment (Lambda or Server).
+     */
+    computePlatform?: ComputePlatform;
+    /**
+     * The configuration specifying how the deployment traffic will be routed. Only deployments with a Lambda compute platform can specify this.
+     */
+    trafficRoutingConfig?: TrafficRoutingConfig;
   }
   export type DeploymentConfigName = string;
   export type DeploymentConfigsList = DeploymentConfigName[];
@@ -816,6 +849,10 @@ declare namespace CodeDeploy {
      * Information about groups of tags applied to an on-premises instance. The deployment group includes only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
      */
     onPremisesTagSet?: OnPremisesTagSet;
+    /**
+     * The destination platform type for the deployment group (Lambda or Server).
+     */
+    computePlatform?: ComputePlatform;
   }
   export type DeploymentGroupInfoList = DeploymentGroupInfo[];
   export type DeploymentGroupName = string;
@@ -922,6 +959,14 @@ declare namespace CodeDeploy {
      * Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren't part of the previous successful deployment.   DISALLOW: The deployment fails. This is also the default behavior if no option is specified.   OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.   RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.  
      */
     fileExistsBehavior?: FileExistsBehavior;
+    /**
+     * Messages that contain information about the status of a deployment.
+     */
+    deploymentStatusMessages?: DeploymentStatusMessageList;
+    /**
+     * The destination platform type for the deployment (Lambda or Server).
+     */
+    computePlatform?: ComputePlatform;
   }
   export type DeploymentOption = "WITH_TRAFFIC_CONTROL"|"WITHOUT_TRAFFIC_CONTROL"|string;
   export interface DeploymentOverview {
@@ -963,6 +1008,7 @@ declare namespace CodeDeploy {
   }
   export type DeploymentStatus = "Created"|"Queued"|"InProgress"|"Succeeded"|"Failed"|"Stopped"|"Ready"|string;
   export type DeploymentStatusList = DeploymentStatus[];
+  export type DeploymentStatusMessageList = ErrorMessage[];
   export interface DeploymentStyle {
     /**
      * Indicates whether to run an in-place deployment or a blue/green deployment.
@@ -1027,14 +1073,14 @@ declare namespace CodeDeploy {
   export type EC2TagSetList = EC2TagFilterList[];
   export interface ELBInfo {
     /**
-     * For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+     * For blue/green deployments, the name of the load balancer that will be used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
      */
     name?: ELBName;
   }
   export type ELBInfoList = ELBInfo[];
   export type ELBName = string;
   export type ETag = string;
-  export type ErrorCode = "DEPLOYMENT_GROUP_MISSING"|"APPLICATION_MISSING"|"REVISION_MISSING"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"NO_EC2_SUBSCRIPTION"|"OVER_MAX_INSTANCES"|"NO_INSTANCES"|"TIMEOUT"|"HEALTH_CONSTRAINTS_INVALID"|"HEALTH_CONSTRAINTS"|"INTERNAL_ERROR"|"THROTTLED"|"ALARM_ACTIVE"|"AGENT_ISSUE"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"AUTO_SCALING_CONFIGURATION"|"MANUAL_STOP"|string;
+  export type ErrorCode = "DEPLOYMENT_GROUP_MISSING"|"APPLICATION_MISSING"|"REVISION_MISSING"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"NO_EC2_SUBSCRIPTION"|"OVER_MAX_INSTANCES"|"NO_INSTANCES"|"TIMEOUT"|"HEALTH_CONSTRAINTS_INVALID"|"HEALTH_CONSTRAINTS"|"INTERNAL_ERROR"|"THROTTLED"|"ALARM_ACTIVE"|"AGENT_ISSUE"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"AUTO_SCALING_CONFIGURATION"|"MANUAL_STOP"|"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"|"MISSING_ELB_INFORMATION"|"MISSING_GITHUB_TOKEN"|"ELASTIC_LOAD_BALANCING_INVALID"|"ELB_INVALID_INSTANCE"|"INVALID_LAMBDA_CONFIGURATION"|"INVALID_LAMBDA_FUNCTION"|"HOOK_EXECUTION_FAILURE"|string;
   export interface ErrorInformation {
     /**
      * For information about additional error codes, see Error Codes for AWS CodeDeploy in the AWS CodeDeploy User Guide. The error code:   APPLICATION_MISSING: The application was missing. This error code will most likely be raised if the application is deleted after the deployment is created but before it is started.   DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code will most likely be raised if the deployment group is deleted after the deployment is created but before it is started.   HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.   HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.   IAM_ROLE_MISSING: The service role cannot be accessed.   IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.   INTERNAL_ERROR: There was an internal error.   NO_EC2_SUBSCRIPTION: The calling account is not subscribed to the Amazon EC2 service.   NO_INSTANCES: No instance were specified, or no instance can be found.   OVER_MAX_INSTANCES: The maximum number of instance was exceeded.   THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.   TIMEOUT: The deployment has timed out.   REVISION_MISSING: The revision ID was missing. This error code will most likely be raised if the revision is deleted after the deployment is created but before it is started.  
@@ -1305,6 +1351,7 @@ declare namespace CodeDeploy {
      */
     status?: LifecycleEventStatus;
   }
+  export type LifecycleEventHookExecutionId = string;
   export type LifecycleEventList = LifecycleEvent[];
   export type LifecycleEventName = string;
   export type LifecycleEventStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown"|string;
@@ -1539,6 +1586,39 @@ declare namespace CodeDeploy {
     onPremisesTagSetList?: OnPremisesTagSetList;
   }
   export type OnPremisesTagSetList = TagFilterList[];
+  export type Percentage = number;
+  export interface PutLifecycleEventHookExecutionStatusInput {
+    /**
+     * The ID of the deployment. Pass this ID to a Lambda function that validates a deployment lifecycle event.
+     */
+    deploymentId?: DeploymentId;
+    /**
+     * The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook is specified in the hooks section of the AppSpec file.
+     */
+    lifecycleEventHookExecutionId?: LifecycleEventHookExecutionId;
+    /**
+     * The result of a Lambda function that validates a deployment lifecycle event (Succeeded or Failed).
+     */
+    status?: LifecycleEventStatus;
+  }
+  export interface PutLifecycleEventHookExecutionStatusOutput {
+    /**
+     * The execution ID of the lifecycle event hook. A hook is specified in the hooks section of the deployment's AppSpec file.
+     */
+    lifecycleEventHookExecutionId?: LifecycleEventHookExecutionId;
+  }
+  export interface RawString {
+    /**
+     * The YAML-formatted or JSON-formatted revision string. It includes information about what Lambda function to update and optional Lambda functions that validate deployment lifecycle events.
+     */
+    content?: RawStringContent;
+    /**
+     * The SHA256 hash value of the revision that is specified as a RawString.
+     */
+    sha256?: RawStringSha256;
+  }
+  export type RawStringContent = string;
+  export type RawStringSha256 = string;
   export interface RegisterApplicationRevisionInput {
     /**
      * The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
@@ -1592,20 +1672,24 @@ declare namespace CodeDeploy {
   export type RevisionInfoList = RevisionInfo[];
   export interface RevisionLocation {
     /**
-     * The type of application revision:   S3: An application revision stored in Amazon S3.   GitHub: An application revision stored in GitHub.  
+     * The type of application revision:   S3: An application revision stored in Amazon S3.   GitHub: An application revision stored in GitHub (EC2/On-premises deployments only)   String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments only)  
      */
     revisionType?: RevisionLocationType;
     /**
-     * Information about the location of application artifacts stored in Amazon S3. 
+     * Information about the location of a revision stored in Amazon S3. 
      */
     s3Location?: S3Location;
     /**
      * Information about the location of application artifacts stored in GitHub.
      */
     gitHubLocation?: GitHubLocation;
+    /**
+     * Information about the location of an AWS Lambda deployment revision stored as a RawString.
+     */
+    string?: RawString;
   }
   export type RevisionLocationList = RevisionLocation[];
-  export type RevisionLocationType = "S3"|"GitHub"|string;
+  export type RevisionLocationType = "S3"|"GitHub"|"String"|string;
   export type Role = string;
   export interface RollbackInfo {
     /**
@@ -1723,6 +1807,26 @@ declare namespace CodeDeploy {
      */
     ec2TagSet?: EC2TagSet;
   }
+  export interface TimeBasedCanary {
+    /**
+     * The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
+     */
+    canaryPercentage?: Percentage;
+    /**
+     * The number of minutes between the first and second traffic shifts of a TimeBasedCanary deployment.
+     */
+    canaryInterval?: WaitTimeInMins;
+  }
+  export interface TimeBasedLinear {
+    /**
+     * The percentage of traffic that is shifted at the start of each increment of a TimeBasedLinear deployment.
+     */
+    linearPercentage?: Percentage;
+    /**
+     * The number of minutes between each incremental traffic shift of a TimeBasedLinear deployment.
+     */
+    linearInterval?: WaitTimeInMins;
+  }
   export interface TimeRange {
     /**
      * The start time of the time range.  Specify null to leave the start time open-ended. 
@@ -1734,6 +1838,21 @@ declare namespace CodeDeploy {
     end?: Timestamp;
   }
   export type Timestamp = Date;
+  export interface TrafficRoutingConfig {
+    /**
+     * The type of traffic shifting a deployment configuration uses (TimeBasedCanary or TimeBasedLinear).
+     */
+    type?: TrafficRoutingType;
+    /**
+     * A configuration that shifts traffic from one version of a Lambda function to another in two increments. The original and target Lambda function versions are specified in the deployment's AppSpec file.
+     */
+    timeBasedCanary?: TimeBasedCanary;
+    /**
+     * A configuration that shifts traffic from one version of a Lambda function to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions are specified in the deployment's AppSpec file.
+     */
+    timeBasedLinear?: TimeBasedLinear;
+  }
+  export type TrafficRoutingType = "TimeBasedCanary"|"TimeBasedLinear"|"AllAtOnce"|string;
   export interface TriggerConfig {
     /**
      * The name of the notification trigger.
@@ -1837,6 +1956,7 @@ declare namespace CodeDeploy {
   }
   export type Value = string;
   export type VersionId = string;
+  export type WaitTimeInMins = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

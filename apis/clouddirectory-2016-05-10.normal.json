@@ -51,7 +51,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidAttachmentException"}
       ],
-      "documentation":"<p>Copies the input published schema into the <a>Directory</a> with the same name and version as that of the published schema .</p>"
+      "documentation":"<p>Copies the input published schema, at the specified version, into the <a>Directory</a> with the same name and version as that of the published schema.</p>"
     },
     "AttachObject":{
       "name":"AttachObject",
@@ -188,7 +188,7 @@
         {"shape":"DirectoryNotEnabledException"},
         {"shape":"BatchWriteException"}
       ],
-      "documentation":"<p>Performs all the write operations in a batch. Either all the operations succeed or none. Batch writes supports only object-related operations.</p>"
+      "documentation":"<p>Performs all the write operations in a batch. Either all the operations succeed or none.</p>"
     },
     "CreateDirectory":{
       "name":"CreateDirectory",
@@ -566,6 +566,26 @@
       ],
       "documentation":"<p>Enables the specified directory. Only disabled directories can be enabled. Once enabled, the directory can then be read and written to.</p>"
     },
+    "GetAppliedSchemaVersion":{
+      "name":"GetAppliedSchemaVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/schema/getappliedschema",
+        "responseCode":200
+      },
+      "input":{"shape":"GetAppliedSchemaVersionRequest"},
+      "output":{"shape":"GetAppliedSchemaVersionResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Returns current applied schema version ARN, including the minor version in use.</p>"
+    },
     "GetDirectory":{
       "name":"GetDirectory",
       "http":{
@@ -689,7 +709,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p>Lists schemas applied to a directory.</p>"
+      "documentation":"<p>Lists schema major versions applied to a directory. If <code>SchemaArn</code> is provided, lists the minor version.</p>"
     },
     "ListAttachedIndices":{
       "name":"ListAttachedIndices",
@@ -710,7 +730,7 @@
         {"shape":"DirectoryNotEnabledException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Lists indices attached to an object.</p>"
+      "documentation":"<p>Lists indices attached to the specified object.</p>"
     },
     "ListDevelopmentSchemaArns":{
       "name":"ListDevelopmentSchemaArns",
@@ -839,7 +859,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotIndexException"}
       ],
-      "documentation":"<p>Lists objects attached to the specified index.</p>"
+      "documentation":"<p>Lists objects and indexed values attached to the index.</p>"
     },
     "ListObjectAttributes":{
       "name":"ListObjectAttributes",
@@ -1023,7 +1043,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p>Retrieves each published schema Amazon Resource Name (ARN).</p>"
+      "documentation":"<p>Lists schema major versions for a published schema. If <code>SchemaArn</code> is provided, lists the minor version.</p>"
     },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
@@ -1131,7 +1151,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"SchemaAlreadyPublishedException"}
       ],
-      "documentation":"<p>Publishes a development schema with a version. If description and attributes are specified, <code>PublishSchema</code> overrides the development schema description and attributes. If not, the development schema description and attributes are used.</p>"
+      "documentation":"<p>Publishes a development schema with a major version and a recommended minor version.</p>"
     },
     "PutSchemaFromJson":{
       "name":"PutSchemaFromJson",
@@ -1306,6 +1326,49 @@
         {"shape":"InvalidRuleException"}
       ],
       "documentation":"<p>Updates a <a>TypedLinkFacet</a>. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+    },
+    "UpgradeAppliedSchema":{
+      "name":"UpgradeAppliedSchema",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/amazonclouddirectory/2017-01-11/schema/upgradeapplied",
+        "responseCode":200
+      },
+      "input":{"shape":"UpgradeAppliedSchemaRequest"},
+      "output":{"shape":"UpgradeAppliedSchemaResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"IncompatibleSchemaException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidAttachmentException"}
+      ],
+      "documentation":"<p>Upgrades a single directory in-place using the <code>PublishedSchemaArn</code> with schema updates found in <code>MinorVersion</code>. Backwards-compatible minor version upgrades are instantaneously available for readers on all objects in the directory. Note: This is a synchronous API call and upgrades only one schema on a given directory per call. To upgrade multiple directories from one schema, you would need to call this API on each directory.</p>"
+    },
+    "UpgradePublishedSchema":{
+      "name":"UpgradePublishedSchema",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/amazonclouddirectory/2017-01-11/schema/upgradepublished",
+        "responseCode":200
+      },
+      "input":{"shape":"UpgradePublishedSchemaRequest"},
+      "output":{"shape":"UpgradePublishedSchemaResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"IncompatibleSchemaException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidAttachmentException"},
+        {"shape":"LimitExceededException"}
+      ],
+      "documentation":"<p>Upgrades a published schema under a new minor version revision using the current contents of <code>DevelopmentSchemaArn</code>.</p>"
     }
   },
   "shapes":{
@@ -1334,7 +1397,7 @@
         },
         "SchemaFacet":{
           "shape":"SchemaFacet",
-          "documentation":"<p>Identifiers for the facet that you are adding to the object.</p>"
+          "documentation":"<p>Identifiers for the facet that you are adding to the object. See <a>SchemaFacet</a> for details.</p>"
         },
         "ObjectAttributeList":{
           "shape":"AttributeKeyAndValueList",
@@ -1940,7 +2003,7 @@
           "documentation":"<p>Reference that identifies the object whose policy object will be detached.</p>"
         }
       },
-      "documentation":"<p>Detaches the specified policy from the specified directory inside a <a>BatchRead</a> operation. For more information, see <a>DetachPolicy</a> and <a>BatchReadRequest$Operations</a>.</p>"
+      "documentation":"<p>Detaches the specified policy from the specified directory inside a <a>BatchWrite</a> operation. For more information, see <a>DetachPolicy</a> and <a>BatchWriteRequest$Operations</a>.</p>"
     },
     "BatchDetachPolicyResponse":{
       "type":"structure",
@@ -2932,7 +2995,7 @@
         },
         "SchemaFacets":{
           "shape":"SchemaFacetList",
-          "documentation":"<p>A list of schema facets to be associated with the object that contains <code>SchemaArn</code> and facet name. For more information, see <a>arns</a>.</p>"
+          "documentation":"<p>A list of schema facets to be associated with the object. Do not provide minor version components. See <a>SchemaFacet</a> for details.</p>"
         },
         "ObjectAttributeList":{
           "shape":"AttributeKeyAndValueList",
@@ -3509,6 +3572,25 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "GetAppliedSchemaVersionRequest":{
+      "type":"structure",
+      "required":["SchemaArn"],
+      "members":{
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the applied schema.</p>"
+        }
+      }
+    },
+    "GetAppliedSchemaVersionResponse":{
+      "type":"structure",
+      "members":{
+        "AppliedSchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>Current applied schema ARN, including the minor version in use if one was provided.</p>"
+        }
+      }
+    },
     "GetDirectoryRequest":{
       "type":"structure",
       "required":["DirectoryArn"],
@@ -3589,7 +3671,7 @@
       "members":{
         "SchemaFacets":{
           "shape":"SchemaFacetList",
-          "documentation":"<p>The facets attached to the specified object.</p>"
+          "documentation":"<p>The facets attached to the specified object. Although the response does not include minor version information, the most recently applied minor version of each Facet is in effect. See <a>GetAppliedSchemaVersion</a> for details.</p>"
         },
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
@@ -3650,6 +3732,15 @@
         }
       }
     },
+    "IncompatibleSchemaException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ExceptionMessage"}
+      },
+      "documentation":"<p>Indicates a failure occurred while performing a check for backward compatibility between the specified schema and the schema that is currently applied to the directory.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "IndexAttachment":{
       "type":"structure",
       "members":{
@@ -3659,7 +3750,7 @@
         },
         "ObjectIdentifier":{
           "shape":"ObjectIdentifier",
-          "documentation":"<p>The <code>ObjectIdentifier</code> of the object attached to the index.</p>"
+          "documentation":"<p>In response to <a>ListIndex</a>, the <code>ObjectIdentifier</code> of the object attached to the index. In response to <a>ListAttachedIndices</a>, the <code>ObjectIdentifier</code> of the index attached to the object. This field will always contain the <code>ObjectIdentifier</code> of the object on the opposite side of the attachment specified in the query.</p>"
         }
       },
       "documentation":"<p>Represents an index and an attached object.</p>"
@@ -3785,6 +3876,10 @@
         "DirectoryArn":{
           "shape":"Arn",
           "documentation":"<p>The ARN of the directory you are listing.</p>"
+        },
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The response for <code>ListAppliedSchemaArns</code> when this parameter is used will list all minor version ARNs for a major version.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -4060,7 +4155,7 @@
         },
         "MaxResults":{
           "shape":"NumberResults",
-          "documentation":"<p>The maximum number of results to retrieve from the index.</p>"
+          "documentation":"<p>The maximum number of objects in a single page to retrieve from the index during a request. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd\">AWS Directory Service Limits</a>.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -4416,6 +4511,10 @@
     "ListPublishedSchemaArnsRequest":{
       "type":"structure",
       "members":{
+        "SchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The response for <code>ListPublishedSchemaArns</code> when this parameter is used will list all minor version ARNs for a major version.</p>"
+        },
         "NextToken":{
           "shape":"NextToken",
           "documentation":"<p>The pagination token.</p>"
@@ -4788,7 +4887,11 @@
         },
         "Version":{
           "shape":"Version",
-          "documentation":"<p>The version under which the schema will be published.</p>"
+          "documentation":"<p>The major version under which the schema will be published. Schemas have both a major and minor version associated with them.</p>"
+        },
+        "MinorVersion":{
+          "shape":"Version",
+          "documentation":"<p>The minor version under which the schema will be published. This parameter is recommended. Schemas have both a major and minor version associated with them.</p>"
         },
         "Name":{
           "shape":"SchemaName",
@@ -4859,7 +4962,7 @@
         },
         "SchemaFacet":{
           "shape":"SchemaFacet",
-          "documentation":"<p>The facet to remove.</p>"
+          "documentation":"<p>The facet to remove. See <a>SchemaFacet</a> for details.</p>"
         },
         "ObjectReference":{
           "shape":"ObjectReference",
@@ -4961,7 +5064,7 @@
       "members":{
         "SchemaArn":{
           "shape":"Arn",
-          "documentation":"<p>The ARN of the schema that contains the facet.</p>"
+          "documentation":"<p>The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html\">In-Place Schema Upgrade</a> for a description of when to provide minor versions.</p>"
         },
         "FacetName":{
           "shape":"FacetName",
@@ -5418,6 +5521,75 @@
     "UpdateTypedLinkFacetResponse":{
       "type":"structure",
       "members":{
+      }
+    },
+    "UpgradeAppliedSchemaRequest":{
+      "type":"structure",
+      "required":[
+        "PublishedSchemaArn",
+        "DirectoryArn"
+      ],
+      "members":{
+        "PublishedSchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The revision of the published schema to upgrade the directory to.</p>"
+        },
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN for the directory to which the upgraded schema will be applied.</p>"
+        },
+        "DryRun":{
+          "shape":"Bool",
+          "documentation":"<p>Used for testing whether the major version schemas are backward compatible or not. If schema compatibility fails, an exception would be thrown else the call would succeed but no changes will be saved. This parameter is optional.</p>"
+        }
+      }
+    },
+    "UpgradeAppliedSchemaResponse":{
+      "type":"structure",
+      "members":{
+        "UpgradedSchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the upgraded schema that is returned as part of the response.</p>"
+        },
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the directory that is returned as part of the response.</p>"
+        }
+      }
+    },
+    "UpgradePublishedSchemaRequest":{
+      "type":"structure",
+      "required":[
+        "DevelopmentSchemaArn",
+        "PublishedSchemaArn",
+        "MinorVersion"
+      ],
+      "members":{
+        "DevelopmentSchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the development schema with the changes used for the upgrade.</p>"
+        },
+        "PublishedSchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the published schema to be upgraded.</p>"
+        },
+        "MinorVersion":{
+          "shape":"Version",
+          "documentation":"<p>Identifies the minor version of the published schema that will be created. This parameter is NOT optional.</p>"
+        },
+        "DryRun":{
+          "shape":"Bool",
+          "documentation":"<p>Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.</p>"
+        }
+      }
+    },
+    "UpgradePublishedSchemaResponse":{
+      "type":"structure",
+      "members":{
+        "UpgradedSchemaArn":{
+          "shape":"Arn",
+          "documentation":"<p>The ARN of the upgraded schema that is returned as part of the response.</p>"
+        }
       }
     },
     "ValidationException":{

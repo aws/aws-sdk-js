@@ -113,6 +113,22 @@ export abstract class ConfigurationServicePlaceholders {
   mediapackage?: AWS.MediaPackage.Types.ClientConfiguration;
   mediastore?: AWS.MediaStore.Types.ClientConfiguration;
   mediastoredata?: AWS.MediaStoreData.Types.ClientConfiguration;
+  appsync?: AWS.AppSync.Types.ClientConfiguration;
+  guardduty?: AWS.GuardDuty.Types.ClientConfiguration;
+  mq?: AWS.MQ.Types.ClientConfiguration;
+  comprehend?: AWS.Comprehend.Types.ClientConfiguration;
+  iotjobsdataplane?: AWS.IoTJobsDataPlane.Types.ClientConfiguration;
+  kinesisvideoarchivedmedia?: AWS.KinesisVideoArchivedMedia.Types.ClientConfiguration;
+  kinesisvideomedia?: AWS.KinesisVideoMedia.Types.ClientConfiguration;
+  kinesisvideo?: AWS.KinesisVideo.Types.ClientConfiguration;
+  sagemakerruntime?: AWS.SageMakerRuntime.Types.ClientConfiguration;
+  sagemaker?: AWS.SageMaker.Types.ClientConfiguration;
+  translate?: AWS.Translate.Types.ClientConfiguration;
+  resourcegroups?: AWS.ResourceGroups.Types.ClientConfiguration;
+  alexaforbusiness?: AWS.AlexaForBusiness.Types.ClientConfiguration;
+  cloud9?: AWS.Cloud9.Types.ClientConfiguration;
+  serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.ClientConfiguration;
+  servicediscovery?: AWS.ServiceDiscovery.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -228,4 +244,20 @@ export interface ConfigurationServiceApiVersions {
   mediapackage?: AWS.MediaPackage.Types.apiVersion;
   mediastore?: AWS.MediaStore.Types.apiVersion;
   mediastoredata?: AWS.MediaStoreData.Types.apiVersion;
+  appsync?: AWS.AppSync.Types.apiVersion;
+  guardduty?: AWS.GuardDuty.Types.apiVersion;
+  mq?: AWS.MQ.Types.apiVersion;
+  comprehend?: AWS.Comprehend.Types.apiVersion;
+  iotjobsdataplane?: AWS.IoTJobsDataPlane.Types.apiVersion;
+  kinesisvideoarchivedmedia?: AWS.KinesisVideoArchivedMedia.Types.apiVersion;
+  kinesisvideomedia?: AWS.KinesisVideoMedia.Types.apiVersion;
+  kinesisvideo?: AWS.KinesisVideo.Types.apiVersion;
+  sagemakerruntime?: AWS.SageMakerRuntime.Types.apiVersion;
+  sagemaker?: AWS.SageMaker.Types.apiVersion;
+  translate?: AWS.Translate.Types.apiVersion;
+  resourcegroups?: AWS.ResourceGroups.Types.apiVersion;
+  alexaforbusiness?: AWS.AlexaForBusiness.Types.apiVersion;
+  cloud9?: AWS.Cloud9.Types.apiVersion;
+  serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.apiVersion;
+  servicediscovery?: AWS.ServiceDiscovery.Types.apiVersion;
 }

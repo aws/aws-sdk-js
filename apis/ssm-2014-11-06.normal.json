@@ -7,6 +7,7 @@
     "protocol":"json",
     "serviceAbbreviation":"Amazon SSM",
     "serviceFullName":"Amazon Simple Systems Manager (SSM)",
+    "serviceId":"SSM",
     "signatureVersion":"v4",
     "targetPrefix":"AmazonSSM",
     "uid":"ssm-2014-11-06"
@@ -382,10 +383,29 @@
       "input":{"shape":"DescribeAutomationExecutionsRequest"},
       "output":{"shape":"DescribeAutomationExecutionsResult"},
       "errors":[
+        {"shape":"InvalidFilterKey"},
+        {"shape":"InvalidFilterValue"},
         {"shape":"InvalidNextToken"},
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Provides details about all active and terminated Automation executions.</p>"
+    },
+    "DescribeAutomationStepExecutions":{
+      "name":"DescribeAutomationStepExecutions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeAutomationStepExecutionsRequest"},
+      "output":{"shape":"DescribeAutomationStepExecutionsResult"},
+      "errors":[
+        {"shape":"AutomationExecutionNotFoundException"},
+        {"shape":"InvalidNextToken"},
+        {"shape":"InvalidFilterKey"},
+        {"shape":"InvalidFilterValue"},
+        {"shape":"InternalServerError"}
+      ],
+      "documentation":"<p>Information about all active and terminated step executions in an Automation workflow.</p>"
     },
     "DescribeAvailablePatches":{
       "name":"DescribeAvailablePatches",
@@ -1303,6 +1323,7 @@
       "output":{"shape":"SendAutomationSignalResult"},
       "errors":[
         {"shape":"AutomationExecutionNotFoundException"},
+        {"shape":"AutomationStepNotFoundException"},
         {"shape":"InvalidAutomationSignalException"},
         {"shape":"InternalServerError"}
       ],
@@ -1344,6 +1365,7 @@
         {"shape":"AutomationExecutionLimitExceededException"},
         {"shape":"AutomationDefinitionVersionNotFoundException"},
         {"shape":"IdempotentParameterMismatch"},
+        {"shape":"InvalidTarget"},
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Initiates execution of an Automation document.</p>"
@@ -1358,6 +1380,7 @@
       "output":{"shape":"StopAutomationExecutionResult"},
       "errors":[
         {"shape":"AutomationExecutionNotFoundException"},
+        {"shape":"InvalidAutomationStatusUpdateException"},
         {"shape":"InternalServerError"}
       ],
       "documentation":"<p>Stop an Automation that is currently executing.</p>"
@@ -2013,6 +2036,10 @@
           "shape":"StepExecutionList",
           "documentation":"<p>A list of details about the current state of all steps that comprise an execution. An Automation document contains a list of steps that are executed in order.</p>"
         },
+        "StepExecutionsTruncated":{
+          "shape":"Boolean",
+          "documentation":"<p>A boolean value that indicates if the response contains the full list of the Automation step executions. If true, use the DescribeAutomationStepExecutions API action to get the full list of step executions.</p>"
+        },
         "Parameters":{
           "shape":"AutomationParameterMap",
           "documentation":"<p>The key-value map of execution parameters, which were supplied when calling StartAutomationExecution.</p>"
@@ -2024,6 +2051,50 @@
         "FailureMessage":{
           "shape":"String",
           "documentation":"<p>A message describing why an execution has failed, if the status is set to Failed.</p>"
+        },
+        "Mode":{
+          "shape":"ExecutionMode",
+          "documentation":"<p>The automation execution mode.</p>"
+        },
+        "ParentAutomationExecutionId":{
+          "shape":"AutomationExecutionId",
+          "documentation":"<p>The AutomationExecutionId of the parent automation.</p>"
+        },
+        "ExecutedBy":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the user who executed the automation.</p>"
+        },
+        "CurrentStepName":{
+          "shape":"String",
+          "documentation":"<p>The name of the currently executing step.</p>"
+        },
+        "CurrentAction":{
+          "shape":"String",
+          "documentation":"<p>The action of the currently executing step.</p>"
+        },
+        "TargetParameterName":{
+          "shape":"AutomationParameterKey",
+          "documentation":"<p>The parameter name.</p>"
+        },
+        "Targets":{
+          "shape":"Targets",
+          "documentation":"<p>The specified targets.</p>"
+        },
+        "ResolvedTargets":{
+          "shape":"ResolvedTargets",
+          "documentation":"<p>A list of resolved targets in the rate control execution.</p>"
+        },
+        "MaxConcurrency":{
+          "shape":"MaxConcurrency",
+          "documentation":"<p>The MaxConcurrency value specified by the user when the execution started.</p>"
+        },
+        "MaxErrors":{
+          "shape":"MaxErrors",
+          "documentation":"<p>The MaxErrors value specified by the user when the execution started.</p>"
+        },
+        "Target":{
+          "shape":"String",
+          "documentation":"<p>The target of the execution.</p>"
         }
       },
       "documentation":"<p>Detailed information about the current state of an individual Automation execution.</p>"
@@ -2037,7 +2108,7 @@
       "members":{
         "Key":{
           "shape":"AutomationExecutionFilterKey",
-          "documentation":"<p>The aspect of the Automation execution information that should be limited.</p>"
+          "documentation":"<p>One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.</p>"
         },
         "Values":{
           "shape":"AutomationExecutionFilterValueList",
@@ -2050,7 +2121,12 @@
       "type":"string",
       "enum":[
         "DocumentNamePrefix",
-        "ExecutionStatus"
+        "ExecutionStatus",
+        "ExecutionId",
+        "ParentExecutionId",
+        "CurrentAction",
+        "StartTimeBefore",
+        "StartTimeAfter"
       ]
     },
     "AutomationExecutionFilterList":{
@@ -2121,15 +2197,57 @@
         "Outputs":{
           "shape":"AutomationParameterMap",
           "documentation":"<p>The list of execution outputs as defined in the Automation document.</p>"
+        },
+        "Mode":{
+          "shape":"ExecutionMode",
+          "documentation":"<p>The Automation execution mode.</p>"
+        },
+        "ParentAutomationExecutionId":{
+          "shape":"AutomationExecutionId",
+          "documentation":"<p>The ExecutionId of the parent Automation.</p>"
+        },
+        "CurrentStepName":{
+          "shape":"String",
+          "documentation":"<p>The name of the currently executing step.</p>"
+        },
+        "CurrentAction":{
+          "shape":"String",
+          "documentation":"<p>The action of the currently executing step.</p>"
+        },
+        "FailureMessage":{
+          "shape":"String",
+          "documentation":"<p>The list of execution outputs as defined in the Automation document.</p>"
+        },
+        "TargetParameterName":{
+          "shape":"AutomationParameterKey",
+          "documentation":"<p>The list of execution outputs as defined in the Automation document.</p>"
+        },
+        "Targets":{
+          "shape":"Targets",
+          "documentation":"<p>The targets defined by the user when starting the Automation.</p>"
+        },
+        "ResolvedTargets":{
+          "shape":"ResolvedTargets",
+          "documentation":"<p>A list of targets that resolved during the execution.</p>"
+        },
+        "MaxConcurrency":{
+          "shape":"MaxConcurrency",
+          "documentation":"<p>The MaxConcurrency value specified by the user when starting the Automation.</p>"
+        },
+        "MaxErrors":{
+          "shape":"MaxErrors",
+          "documentation":"<p>The MaxErrors value specified by the user when starting the Automation.</p>"
+        },
+        "Target":{
+          "shape":"String",
+          "documentation":"<p>The list of execution outputs as defined in the Automation document.</p>"
         }
       },
       "documentation":"<p>Details about a specific Automation execution.</p>"
     },
     "AutomationExecutionMetadataList":{
       "type":"list",
-      "member":{"shape":"AutomationExecutionMetadata"},
-      "max":50,
-      "min":0
+      "member":{"shape":"AutomationExecutionMetadata"}
     },
     "AutomationExecutionNotFoundException":{
       "type":"structure",
@@ -2147,6 +2265,7 @@
         "Waiting",
         "Success",
         "TimedOut",
+        "Cancelling",
         "Cancelled",
         "Failed"
       ]
@@ -2173,6 +2292,14 @@
       "member":{"shape":"AutomationParameterValue"},
       "max":10,
       "min":0
+    },
+    "AutomationStepNotFoundException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The specified step name and execution ID don't exist. Verify the information and try again.</p>",
+      "exception":true
     },
     "BaselineDescription":{
       "type":"string",
@@ -2953,7 +3080,7 @@
       "members":{
         "Content":{
           "shape":"DocumentContent",
-          "documentation":"<p>A valid JSON string.</p>"
+          "documentation":"<p>A valid JSON or YAML string.</p>"
         },
         "Name":{
           "shape":"DocumentName",
@@ -2962,6 +3089,14 @@
         "DocumentType":{
           "shape":"DocumentType",
           "documentation":"<p>The type of document to create. Valid document types include: Policy, Automation, and Command.</p>"
+        },
+        "DocumentFormat":{
+          "shape":"DocumentFormat",
+          "documentation":"<p>Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.</p>"
+        },
+        "TargetType":{
+          "shape":"TargetType",
+          "documentation":"<p>Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of '/' the document can run on all types of resources. If you don't specify a value, the document can't run on any resources. For a list of valid resource types, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
         }
       }
     },
@@ -3479,6 +3614,47 @@
         "AutomationExecutionMetadataList":{
           "shape":"AutomationExecutionMetadataList",
           "documentation":"<p>The list of details about each automation execution which has occurred which matches the filter specification, if any.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
+    "DescribeAutomationStepExecutionsRequest":{
+      "type":"structure",
+      "required":["AutomationExecutionId"],
+      "members":{
+        "AutomationExecutionId":{
+          "shape":"AutomationExecutionId",
+          "documentation":"<p>The Automation execution ID for which you want step execution descriptions.</p>"
+        },
+        "Filters":{
+          "shape":"StepExecutionFilterList",
+          "documentation":"<p>One or more filters to limit the number of step executions returned by the request.</p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box":true
+        },
+        "ReverseOrder":{
+          "shape":"Boolean",
+          "documentation":"<p>A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.</p>",
+          "box":true
+        }
+      }
+    },
+    "DescribeAutomationStepExecutionsResult":{
+      "type":"structure",
+      "members":{
+        "StepExecutions":{
+          "shape":"StepExecutionList",
+          "documentation":"<p>A list of details about the current state of all steps that make up an execution.</p>"
         },
         "NextToken":{
           "shape":"NextToken",
@@ -4249,6 +4425,14 @@
           "shape":"DocumentVersion",
           "documentation":"<p>The default version.</p>"
         },
+        "DocumentFormat":{
+          "shape":"DocumentFormat",
+          "documentation":"<p>The document format, either JSON or YAML.</p>"
+        },
+        "TargetType":{
+          "shape":"TargetType",
+          "documentation":"<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+        },
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>The tags, or metadata, that have been applied to the document.</p>"
@@ -4292,6 +4476,13 @@
       "type":"string",
       "min":1
     },
+    "DocumentFormat":{
+      "type":"string",
+      "enum":[
+        "YAML",
+        "JSON"
+      ]
+    },
     "DocumentHash":{
       "type":"string",
       "max":256
@@ -4330,6 +4521,14 @@
           "shape":"DocumentSchemaVersion",
           "documentation":"<p>The schema version.</p>"
         },
+        "DocumentFormat":{
+          "shape":"DocumentFormat",
+          "documentation":"<p>The document format, either JSON or YAML.</p>"
+        },
+        "TargetType":{
+          "shape":"TargetType",
+          "documentation":"<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+        },
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>The tags, or metadata, that have been applied to the document.</p>"
@@ -4363,7 +4562,7 @@
     "DocumentKeyValuesFilterList":{
       "type":"list",
       "member":{"shape":"DocumentKeyValuesFilter"},
-      "max":5,
+      "max":6,
       "min":0
     },
     "DocumentKeyValuesFilterValue":{
@@ -4480,6 +4679,10 @@
         "IsDefaultVersion":{
           "shape":"Boolean",
           "documentation":"<p>An identifier for the default version of the document.</p>"
+        },
+        "DocumentFormat":{
+          "shape":"DocumentFormat",
+          "documentation":"<p>The document format, either JSON or YAML.</p>"
         }
       },
       "documentation":"<p>Version information about the document.</p>"
@@ -4548,6 +4751,13 @@
       "member":{"shape":"EffectivePatch"}
     },
     "ErrorCount":{"type":"integer"},
+    "ExecutionMode":{
+      "type":"string",
+      "enum":[
+        "Auto",
+        "Interactive"
+      ]
+    },
     "ExpirationDate":{"type":"timestamp"},
     "FailedCreateAssociation":{
       "type":"structure",
@@ -4781,6 +4991,10 @@
         "DocumentVersion":{
           "shape":"DocumentVersion",
           "documentation":"<p>The document version for which you want information.</p>"
+        },
+        "DocumentFormat":{
+          "shape":"DocumentFormat",
+          "documentation":"<p>Returns the document in the specified format. The document format can be either JSON or YAML. JSON is the default format.</p>"
         }
       }
     },
@@ -4802,6 +5016,10 @@
         "DocumentType":{
           "shape":"DocumentType",
           "documentation":"<p>The document type.</p>"
+        },
+        "DocumentFormat":{
+          "shape":"DocumentFormat",
+          "documentation":"<p>The document format, either JSON or YAML.</p>"
         }
       }
     },
@@ -5980,6 +6198,14 @@
       "documentation":"<p>The signal is not valid for the current Automation execution.</p>",
       "exception":true
     },
+    "InvalidAutomationStatusUpdateException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The specified update status operation is not valid.</p>",
+      "exception":true
+    },
     "InvalidCommandId":{
       "type":"structure",
       "members":{
@@ -6187,7 +6413,7 @@
       "members":{
         "Message":{"shape":"String"}
       },
-      "documentation":"<p>The role name can't contain invalid characters. Also verify that you specified an IAM role for notifications that includes the required trust policy. For information about configuring the IAM role for Run Command notifications, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html\">Configuring Amazon SNS Notifications for Run Command</a> in the <i>Amazon EC2 Systems Manager User Guide</i>.</p>",
+      "documentation":"<p>The role name can't contain invalid characters. Also verify that you specified an IAM role for notifications that includes the required trust policy. For information about configuring the IAM role for Run Command notifications, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html\">Configuring Amazon SNS Notifications for Run Command</a> in the <i>AWS Systems Manager User Guide</i>.</p>",
       "exception":true
     },
     "InvalidSchedule":{
@@ -6452,7 +6678,7 @@
         },
         "Data":{
           "shape":"InventoryResultItemMap",
-          "documentation":"<p>The data section in the inventory result entity json.</p>"
+          "documentation":"<p>The data section in the inventory result entity JSON.</p>"
         }
       },
       "documentation":"<p>Inventory query results.</p>"
@@ -6991,6 +7217,7 @@
       },
       "documentation":"<p>Information about an Amazon S3 bucket to write instance-level logs to.</p>"
     },
+    "Long":{"type":"long"},
     "MaintenanceWindowAllowUnassociatedTargets":{"type":"boolean"},
     "MaintenanceWindowAutomationParameters":{
       "type":"structure",
@@ -7684,7 +7911,7 @@
         },
         "NotificationEvents":{
           "shape":"NotificationEventList",
-          "documentation":"<p>The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Setting Up Events and Notifications</a> in the <i>Amazon EC2 Systems Manager User Guide</i>.</p>"
+          "documentation":"<p>The different events for which you can receive notifications. These events include the following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about these events, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Setting Up Events and Notifications</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "NotificationType":{
           "shape":"NotificationType",
@@ -8761,6 +8988,20 @@
       "members":{
       }
     },
+    "ResolvedTargets":{
+      "type":"structure",
+      "members":{
+        "ParameterValues":{
+          "shape":"TargetParameterList",
+          "documentation":"<p>A list of parameter values sent to targets that resolved during the Automation execution.</p>"
+        },
+        "Truncated":{
+          "shape":"Boolean",
+          "documentation":"<p>A boolean value indicating whether the resolved target list is truncated.</p>"
+        }
+      },
+      "documentation":"<p>Information about targets that resolved during the Automation execution.</p>"
+    },
     "ResourceComplianceSummaryItem":{
       "type":"structure",
       "members":{
@@ -9168,7 +9409,10 @@
       "type":"string",
       "enum":[
         "Approve",
-        "Reject"
+        "Reject",
+        "StartStep",
+        "StopStep",
+        "Resume"
       ]
     },
     "SnapshotDownloadUrl":{"type":"string"},
@@ -9206,6 +9450,26 @@
         "ClientToken":{
           "shape":"IdempotencyToken",
           "documentation":"<p>User-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can't be reused.</p>"
+        },
+        "Mode":{
+          "shape":"ExecutionMode",
+          "documentation":"<p>The execution mode of the automation. Valid modes include the following: Auto and Interactive. The default mode is Auto.</p>"
+        },
+        "TargetParameterName":{
+          "shape":"AutomationParameterKey",
+          "documentation":"<p>The name of the parameter used as the target resource for the rate-controlled execution. Required if you specify Targets.</p>"
+        },
+        "Targets":{
+          "shape":"Targets",
+          "documentation":"<p>A key-value mapping to target resources. Required if you specify TargetParameterName.</p>"
+        },
+        "MaxConcurrency":{
+          "shape":"MaxConcurrency",
+          "documentation":"<p>The maximum number of targets allowed to run this task in parallel. You can specify a number, such as 10, or a percentage, such as 10%. The default value is 10.</p>"
+        },
+        "MaxErrors":{
+          "shape":"MaxErrors",
+          "documentation":"<p>The number of errors that are allowed before the system stops running the automation on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops running the automation when the fourth error is received. If you specify 0, then the system stops running the automation on additional targets after the first error result is returned. If you run an automation on 50 resources and set max-errors to 10%, then the system stops running the automation on additional targets when the sixth error is received.</p> <p>Executions that are already running an automation when max-errors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set max-concurrency to 1 so the executions proceed one at a time.</p>"
         }
       }
     },
@@ -9251,6 +9515,20 @@
           "shape":"AutomationActionName",
           "documentation":"<p>The action this step performs. The action determines the behavior of the step.</p>"
         },
+        "TimeoutSeconds":{
+          "shape":"Long",
+          "documentation":"<p>The timeout seconds of the step.</p>",
+          "box":true
+        },
+        "OnFailure":{
+          "shape":"String",
+          "documentation":"<p>The action to take if the step fails. The default value is Abort.</p>"
+        },
+        "MaxAttempts":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of tries to run the action of the step. The default value is 1.</p>",
+          "box":true
+        },
         "ExecutionStartTime":{
           "shape":"DateTime",
           "documentation":"<p>If a step has begun execution, this contains the time the step started. If the step is in Pending status, this field is not populated.</p>"
@@ -9286,15 +9564,67 @@
         "FailureDetails":{
           "shape":"FailureDetails",
           "documentation":"<p>Information about the Automation failure.</p>"
+        },
+        "StepExecutionId":{
+          "shape":"String",
+          "documentation":"<p>The unique ID of a step execution.</p>"
+        },
+        "OverriddenParameters":{
+          "shape":"AutomationParameterMap",
+          "documentation":"<p>A user-specified list of parameters to override when executing a step.</p>"
         }
       },
       "documentation":"<p>Detailed information about an the execution state of an Automation step.</p>"
     },
+    "StepExecutionFilter":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Values"
+      ],
+      "members":{
+        "Key":{
+          "shape":"StepExecutionFilterKey",
+          "documentation":"<p>One or more keys to limit the results. Valid filter keys include the following: StepName, Action, StepExecutionId, StepExecutionStatus, StartTimeBefore, StartTimeAfter.</p>"
+        },
+        "Values":{
+          "shape":"StepExecutionFilterValueList",
+          "documentation":"<p>The values of the filter key.</p>"
+        }
+      },
+      "documentation":"<p>A filter to limit the amount of step execution information returned by the call.</p>"
+    },
+    "StepExecutionFilterKey":{
+      "type":"string",
+      "enum":[
+        "StartTimeBefore",
+        "StartTimeAfter",
+        "StepExecutionStatus",
+        "StepExecutionId",
+        "StepName",
+        "Action"
+      ]
+    },
+    "StepExecutionFilterList":{
+      "type":"list",
+      "member":{"shape":"StepExecutionFilter"},
+      "max":6,
+      "min":1
+    },
+    "StepExecutionFilterValue":{
+      "type":"string",
+      "max":150,
+      "min":1
+    },
+    "StepExecutionFilterValueList":{
+      "type":"list",
+      "member":{"shape":"StepExecutionFilterValue"},
+      "max":10,
+      "min":1
+    },
     "StepExecutionList":{
       "type":"list",
-      "member":{"shape":"StepExecution"},
-      "max":100,
-      "min":0
+      "member":{"shape":"StepExecution"}
     },
     "StopAutomationExecutionRequest":{
       "type":"structure",
@@ -9303,6 +9633,10 @@
         "AutomationExecutionId":{
           "shape":"AutomationExecutionId",
           "documentation":"<p>The execution ID of the Automation to stop.</p>"
+        },
+        "Type":{
+          "shape":"StopType",
+          "documentation":"<p>The stop request type. Valid types include the following: Cancel and Complete. The default type is Cancel.</p>"
         }
       }
     },
@@ -9310,6 +9644,13 @@
       "type":"structure",
       "members":{
       }
+    },
+    "StopType":{
+      "type":"string",
+      "enum":[
+        "Complete",
+        "Cancel"
+      ]
     },
     "String":{"type":"string"},
     "StringDateTime":{
@@ -9390,6 +9731,15 @@
       "max":128,
       "min":1,
       "pattern":"^[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*$"
+    },
+    "TargetParameterList":{
+      "type":"list",
+      "member":{"shape":"ParameterValue"}
+    },
+    "TargetType":{
+      "type":"string",
+      "max":200,
+      "pattern":"^\\/[\\w\\.\\-\\:\\/]*$"
     },
     "TargetValue":{"type":"string"},
     "TargetValues":{
@@ -9599,6 +9949,14 @@
         "DocumentVersion":{
           "shape":"DocumentVersion",
           "documentation":"<p>The version of the document that you want to update.</p>"
+        },
+        "DocumentFormat":{
+          "shape":"DocumentFormat",
+          "documentation":"<p>Specify the document format for the new document version. Systems Manager supports JSON and YAML documents. JSON is the default format.</p>"
+        },
+        "TargetType":{
+          "shape":"TargetType",
+          "documentation":"<p>Specify a new target type for the document.</p>"
         }
       }
     },
@@ -10001,5 +10359,5 @@
       "pattern":"^[0-9]{1,6}(\\.[0-9]{1,6}){2,3}$"
     }
   },
-  "documentation":"<fullname>Amazon EC2 Systems Manager</fullname> <p>Amazon EC2 Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon EC2 Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Systems Manager Prerequisites</a>.</p> <p>For information about other API actions you can perform on Amazon EC2 instances, see the <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API Requests</a>. </p>"
+  "documentation":"<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/\">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Systems Manager Prerequisites</a>.</p> <p>For information about other API actions you can perform on Amazon EC2 instances, see the <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API Requests</a>. </p>"
 }

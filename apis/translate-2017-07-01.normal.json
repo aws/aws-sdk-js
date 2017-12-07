@@ -1,0 +1,145 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2017-07-01",
+    "endpointPrefix":"translate",
+    "jsonVersion":"1.1",
+    "protocol":"json",
+    "serviceFullName":"Amazon Translate",
+    "serviceId":"Translate",
+    "signatureVersion":"v4",
+    "signingName":"translate",
+    "targetPrefix":"AWSShineFrontendService_20170701",
+    "uid":"translate-2017-07-01"
+  },
+  "operations":{
+    "TranslateText":{
+      "name":"TranslateText",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TranslateTextRequest"},
+      "output":{"shape":"TranslateTextResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"TextSizeLimitExceededException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"UnsupportedLanguagePairException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Translates input text from the source language to the target language. You can translate between English (en) and one of the following languages, or between one of the following languages and English.</p> <ul> <li> <p>Arabic (ar)</p> </li> <li> <p>Chinese (Simplified) (zh)</p> </li> <li> <p>French (fr)</p> </li> <li> <p>German (de)</p> </li> <li> <p>Portuguese (pt)</p> </li> <li> <p>Spanish (es)</p> </li> </ul>"
+    }
+  },
+  "shapes":{
+    "BoundedLengthString":{
+      "type":"string",
+      "max":1000,
+      "min":1
+    },
+    "InternalServerException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>An internal server error occurred. Retry your request.</p>",
+      "exception":true,
+      "fault":true
+    },
+    "InvalidRequestException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The request is invalid.</p>",
+      "exception":true
+    },
+    "LanguageCodeString":{
+      "type":"string",
+      "max":5,
+      "min":2
+    },
+    "ServiceUnavailableException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>Amazon Translate is unavailable. Retry your request later.</p>",
+      "exception":true
+    },
+    "String":{
+      "type":"string",
+      "min":1
+    },
+    "TextSizeLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The size of the input text exceeds the length constraint for the <code>Text</code> field. Try again with a shorter text. </p>",
+      "exception":true
+    },
+    "TooManyRequestsException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>The number of requests exceeds the limit. Resubmit your request later.</p>",
+      "exception":true
+    },
+    "TranslateTextRequest":{
+      "type":"structure",
+      "required":[
+        "Text",
+        "SourceLanguageCode",
+        "TargetLanguageCode"
+      ],
+      "members":{
+        "Text":{
+          "shape":"BoundedLengthString",
+          "documentation":"<p>The text to translate.</p>"
+        },
+        "SourceLanguageCode":{
+          "shape":"LanguageCodeString",
+          "documentation":"<p>One of the supported language codes for the source text. If the <code>TargetLanguageCode</code> is not \"en\", the <code>SourceLanguageCode</code> must be \"en\".</p>"
+        },
+        "TargetLanguageCode":{
+          "shape":"LanguageCodeString",
+          "documentation":"<p>One of the supported language codes for the target text. If the <code>SourceLanguageCode</code> is not \"en\", the <code>TargetLanguageCode</code> must be \"en\".</p>"
+        }
+      }
+    },
+    "TranslateTextResponse":{
+      "type":"structure",
+      "required":[
+        "TranslatedText",
+        "SourceLanguageCode",
+        "TargetLanguageCode"
+      ],
+      "members":{
+        "TranslatedText":{
+          "shape":"String",
+          "documentation":"<p>The text translated into the target language.</p>"
+        },
+        "SourceLanguageCode":{
+          "shape":"LanguageCodeString",
+          "documentation":"<p>The language code for the language of the input text. </p>"
+        },
+        "TargetLanguageCode":{
+          "shape":"LanguageCodeString",
+          "documentation":"<p>The language code for the language of the translated text. </p>"
+        }
+      }
+    },
+    "UnsupportedLanguagePairException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "documentation":"<p>Amazon Translate cannot translate input text in the source language into this target language. For more information, see <a>how-to-error-msg</a>. </p>",
+      "exception":true
+    }
+  },
+  "documentation":"<p>Provides translation between English and one of six languages, or between one of the six languages and English.</p>"
+}
