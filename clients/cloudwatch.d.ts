@@ -247,6 +247,7 @@ declare namespace CloudWatch {
   export type DatapointValue = number;
   export type DatapointValueMap = {[key: string]: DatapointValue};
   export type Datapoints = Datapoint[];
+  export type DatapointsToAlarm = number;
   export interface DeleteAlarmsInput {
     /**
      * The alarms to be deleted.
@@ -255,9 +256,9 @@ declare namespace CloudWatch {
   }
   export interface DeleteDashboardsInput {
     /**
-     * The dashboards to be deleted.
+     * The dashboards to be deleted. This parameter is required.
      */
-    DashboardNames?: DashboardNames;
+    DashboardNames: DashboardNames;
   }
   export interface DeleteDashboardsOutput {
   }
@@ -415,7 +416,7 @@ declare namespace CloudWatch {
     /**
      * The name of the dashboard to be described.
      */
-    DashboardName?: DashboardName;
+    DashboardName: DashboardName;
   }
   export interface GetDashboardOutput {
     /**
@@ -629,6 +630,10 @@ declare namespace CloudWatch {
      */
     EvaluationPeriods?: EvaluationPeriods;
     /**
+     * The number of datapoints that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: DatapointsToAlarm;
+    /**
      * The value to compare with the specified statistic.
      */
     Threshold?: Threshold;
@@ -685,13 +690,13 @@ declare namespace CloudWatch {
   export type Period = number;
   export interface PutDashboardInput {
     /**
-     * The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing its current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, "-", and "_".
+     * The name of the dashboard. If a dashboard with this name already exists, this call modifies that dashboard, replacing its current contents. Otherwise, a new dashboard is created. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, "-", and "_". This parameter is required.
      */
-    DashboardName?: DashboardName;
+    DashboardName: DashboardName;
     /**
-     * The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard. For more information about the syntax, see CloudWatch-Dashboard-Body-Structure.
+     * The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard. This parameter is required. For more information about the syntax, see CloudWatch-Dashboard-Body-Structure.
      */
-    DashboardBody?: DashboardBody;
+    DashboardBody: DashboardBody;
   }
   export interface PutDashboardOutput {
     /**
@@ -713,15 +718,15 @@ declare namespace CloudWatch {
      */
     ActionsEnabled?: ActionsEnabled;
     /**
-     * The actions to execute when this alarm transitions to an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover Valid Values (for use with IAM roles): arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+     * The actions to execute when this alarm transitions to an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover | arn:aws:sns:region:account-id:sns-topic-name | arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name  Valid Values (for use with IAM roles): arn:aws:swf:region:{account-id}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:region:{account-id}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:region:{account-id}:action/actions/AWS_EC2.InstanceId.Reboot/1.0
      */
     OKActions?: ResourceList;
     /**
-     * The actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover Valid Values (for use with IAM roles): arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+     * The actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover | arn:aws:sns:region:account-id:sns-topic-name | arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name  Valid Values (for use with IAM roles): arn:aws:swf:region:{account-id}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:region:{account-id}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:region:{account-id}:action/actions/AWS_EC2.InstanceId.Reboot/1.0
      */
     AlarmActions?: ResourceList;
     /**
-     * The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover Valid Values (for use with IAM roles): arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:us-east-1:{customer-account}:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+     * The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover | arn:aws:sns:region:account-id:sns-topic-name | arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name  Valid Values (for use with IAM roles): arn:aws:swf:region:{account-id}:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:region:{account-id}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:region:{account-id}:action/actions/AWS_EC2.InstanceId.Reboot/1.0
      */
     InsufficientDataActions?: ResourceList;
     /**
@@ -733,11 +738,11 @@ declare namespace CloudWatch {
      */
     Namespace: Namespace;
     /**
-     * The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ExtendedStatistic.
+     * The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ExtendedStatistic. When you call PutMetricAlarm, you must specify either Statistic or ExtendedStatistic, but not both.
      */
     Statistic?: Statistic;
     /**
-     * The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
+     * The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100. When you call PutMetricAlarm, you must specify either Statistic or ExtendedStatistic, but not both.
      */
     ExtendedStatistic?: ExtendedStatistic;
     /**
@@ -756,6 +761,10 @@ declare namespace CloudWatch {
      * The number of periods over which data is compared to the specified threshold. An alarm's total current evaluation period can be no longer than one day, so this number multiplied by Period cannot be more than 86,400 seconds.
      */
     EvaluationPeriods: EvaluationPeriods;
+    /**
+     * The number of datapoints that must be breaching to trigger the alarm.
+     */
+    DatapointsToAlarm?: DatapointsToAlarm;
     /**
      * The value against which the specified statistic is compared.
      */
