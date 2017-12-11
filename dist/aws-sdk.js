@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.167.0
+// AWS SDK for JavaScript v2.168.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -19137,35 +19137,35 @@ module.exports={
             "type": "integer"
           },
           "ReadAttributes": {
-            "shape": "S5r"
+            "shape": "S5s"
           },
           "WriteAttributes": {
-            "shape": "S5r"
+            "shape": "S5s"
           },
           "ExplicitAuthFlows": {
-            "shape": "S5t"
+            "shape": "S5u"
           },
           "SupportedIdentityProviders": {
-            "shape": "S5v"
-          },
-          "CallbackURLs": {
             "shape": "S5w"
           },
+          "CallbackURLs": {
+            "shape": "S5x"
+          },
           "LogoutURLs": {
-            "shape": "S5y"
+            "shape": "S5z"
           },
           "DefaultRedirectURI": {},
           "AllowedOAuthFlows": {
-            "shape": "S5z"
+            "shape": "S60"
           },
           "AllowedOAuthScopes": {
-            "shape": "S61"
+            "shape": "S62"
           },
           "AllowedOAuthFlowsUserPoolClient": {
             "type": "boolean"
           },
           "AnalyticsConfiguration": {
-            "shape": "S63"
+            "shape": "S64"
           }
         }
       },
@@ -19173,7 +19173,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPoolClient": {
-            "shape": "S66"
+            "shape": "S67"
           }
         }
       }
@@ -19444,7 +19444,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPoolClient": {
-            "shape": "S66"
+            "shape": "S67"
           }
         }
       }
@@ -20596,35 +20596,35 @@ module.exports={
             "type": "integer"
           },
           "ReadAttributes": {
-            "shape": "S5r"
+            "shape": "S5s"
           },
           "WriteAttributes": {
-            "shape": "S5r"
+            "shape": "S5s"
           },
           "ExplicitAuthFlows": {
-            "shape": "S5t"
+            "shape": "S5u"
           },
           "SupportedIdentityProviders": {
-            "shape": "S5v"
-          },
-          "CallbackURLs": {
             "shape": "S5w"
           },
+          "CallbackURLs": {
+            "shape": "S5x"
+          },
           "LogoutURLs": {
-            "shape": "S5y"
+            "shape": "S5z"
           },
           "DefaultRedirectURI": {},
           "AllowedOAuthFlows": {
-            "shape": "S5z"
+            "shape": "S60"
           },
           "AllowedOAuthScopes": {
-            "shape": "S61"
+            "shape": "S62"
           },
           "AllowedOAuthFlowsUserPoolClient": {
             "type": "boolean"
           },
           "AnalyticsConfiguration": {
-            "shape": "S63"
+            "shape": "S64"
           }
         }
       },
@@ -20632,7 +20632,7 @@ module.exports={
         "type": "structure",
         "members": {
           "UserPoolClient": {
-            "shape": "S66"
+            "shape": "S67"
           }
         }
       }
@@ -21228,6 +21228,7 @@ module.exports={
         },
         "SmsConfigurationFailure": {},
         "EmailConfigurationFailure": {},
+        "Domain": {},
         "AdminCreateUserConfig": {
           "shape": "S5e"
         },
@@ -21236,15 +21237,11 @@ module.exports={
         }
       }
     },
-    "S5r": {
+    "S5s": {
       "type": "list",
       "member": {}
     },
-    "S5t": {
-      "type": "list",
-      "member": {}
-    },
-    "S5v": {
+    "S5u": {
       "type": "list",
       "member": {}
     },
@@ -21252,7 +21249,7 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "S5y": {
+    "S5x": {
       "type": "list",
       "member": {}
     },
@@ -21260,11 +21257,15 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "S61": {
+    "S60": {
       "type": "list",
       "member": {}
     },
-    "S63": {
+    "S62": {
+      "type": "list",
+      "member": {}
+    },
+    "S64": {
       "type": "structure",
       "required": [
         "ApplicationId",
@@ -21280,7 +21281,7 @@ module.exports={
         }
       }
     },
-    "S66": {
+    "S67": {
       "type": "structure",
       "members": {
         "UserPoolId": {},
@@ -21302,35 +21303,35 @@ module.exports={
           "type": "integer"
         },
         "ReadAttributes": {
-          "shape": "S5r"
+          "shape": "S5s"
         },
         "WriteAttributes": {
-          "shape": "S5r"
+          "shape": "S5s"
         },
         "ExplicitAuthFlows": {
-          "shape": "S5t"
+          "shape": "S5u"
         },
         "SupportedIdentityProviders": {
-          "shape": "S5v"
-        },
-        "CallbackURLs": {
           "shape": "S5w"
         },
+        "CallbackURLs": {
+          "shape": "S5x"
+        },
         "LogoutURLs": {
-          "shape": "S5y"
+          "shape": "S5z"
         },
         "DefaultRedirectURI": {},
         "AllowedOAuthFlows": {
-          "shape": "S5z"
+          "shape": "S60"
         },
         "AllowedOAuthScopes": {
-          "shape": "S61"
+          "shape": "S62"
         },
         "AllowedOAuthFlowsUserPoolClient": {
           "type": "boolean"
         },
         "AnalyticsConfiguration": {
-          "shape": "S63"
+          "shape": "S64"
         }
       }
     },
@@ -69911,7 +69912,9 @@ module.exports={
           "type": {},
           "botConfiguration": {
             "shape": "S23"
-          }
+          },
+          "status": {},
+          "failureReason": {}
         }
       }
     },
@@ -69969,7 +69972,9 @@ module.exports={
                 "type": {},
                 "botConfiguration": {
                   "shape": "S23"
-                }
+                },
+                "status": {},
+                "failureReason": {}
               }
             }
           },
@@ -70008,7 +70013,7 @@ module.exports={
         "type": "structure",
         "members": {
           "bots": {
-            "shape": "S2b"
+            "shape": "S2c"
           },
           "nextToken": {}
         }
@@ -70042,7 +70047,7 @@ module.exports={
         "type": "structure",
         "members": {
           "bots": {
-            "shape": "S2b"
+            "shape": "S2c"
           },
           "nextToken": {}
         }
@@ -70071,7 +70076,7 @@ module.exports={
         "members": {
           "signature": {},
           "supportedLocales": {
-            "shape": "S2h"
+            "shape": "S2i"
           },
           "slots": {
             "type": "list",
@@ -70123,7 +70128,7 @@ module.exports={
               "members": {
                 "signature": {},
                 "supportedLocales": {
-                  "shape": "S2h"
+                  "shape": "S2i"
                 }
               }
             }
@@ -70170,7 +70175,7 @@ module.exports={
               "members": {
                 "signature": {},
                 "supportedLocales": {
-                  "shape": "S2h"
+                  "shape": "S2i"
                 }
               }
             }
@@ -70320,7 +70325,7 @@ module.exports={
         "type": "structure",
         "members": {
           "intents": {
-            "shape": "S33"
+            "shape": "S34"
           },
           "nextToken": {}
         }
@@ -70354,7 +70359,7 @@ module.exports={
         "type": "structure",
         "members": {
           "intents": {
-            "shape": "S33"
+            "shape": "S34"
           },
           "nextToken": {}
         }
@@ -70434,7 +70439,7 @@ module.exports={
         "type": "structure",
         "members": {
           "slotTypes": {
-            "shape": "S3b"
+            "shape": "S3c"
           },
           "nextToken": {}
         }
@@ -70468,7 +70473,7 @@ module.exports={
         "type": "structure",
         "members": {
           "slotTypes": {
-            "shape": "S3b"
+            "shape": "S3c"
           },
           "nextToken": {}
         }
@@ -70940,7 +70945,7 @@ module.exports={
       "value": {},
       "sensitive": true
     },
-    "S2b": {
+    "S2c": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -70958,11 +70963,11 @@ module.exports={
         }
       }
     },
-    "S2h": {
+    "S2i": {
       "type": "list",
       "member": {}
     },
-    "S33": {
+    "S34": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -70979,7 +70984,7 @@ module.exports={
         }
       }
     },
-    "S3b": {
+    "S3c": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -119602,7 +119607,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.167.0',
+  VERSION: '2.168.0',
 
 
   Signers: {},

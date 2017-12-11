@@ -1030,7 +1030,13 @@ declare namespace CognitoIdentityServiceProvider {
      * Specifies the options for MFA (e.g., email or phone number).
      */
     MFAOptions?: MFAOptionListType;
+    /**
+     * The user's preferred MFA setting.
+     */
     PreferredMfaSetting?: StringType;
+    /**
+     * The list of the user's MFA settings.
+     */
     UserMFASettingList?: UserMFASettingListType;
   }
   export interface AdminInitiateAuthRequest {
@@ -2454,7 +2460,13 @@ declare namespace CognitoIdentityServiceProvider {
      * Specifies the options for MFA (e.g., email or phone number).
      */
     MFAOptions?: MFAOptionListType;
+    /**
+     * The user's preferred MFA setting.
+     */
     PreferredMfaSetting?: StringType;
+    /**
+     * The list of the user's MFA settings.
+     */
     UserMFASettingList?: UserMFASettingListType;
   }
   export interface GlobalSignOutRequest {
@@ -4053,6 +4065,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The reason why the email configuration cannot send the messages to your users.
      */
     EmailConfigurationFailure?: StringType;
+    /**
+     * Holds the domain prefix if the user pool has a domain associated with it.
+     */
+    Domain?: DomainType;
     /**
      * The configuration for AdminCreateUser requests.
      */

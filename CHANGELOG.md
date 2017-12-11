@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.167.0-->
+<!--LATEST=2.168.0-->
 <!--ENTRYINSERT-->
+
+## 2.168.0
+* feature: CognitoIdentityServiceProvider: Exposing the hosted UI domain name for a user pool that has a domain configured.
+* feature: LexModelBuildingService: The GetBotChannelAssociation API now returns the status and failure reason, if any, for a bot channel.
+* feature: SageMaker: CreateModel API Update:  The request parameter 'ExecutionRoleArn' has changed from optional to required.
 
 ## 2.167.0
 * feature: AppStream: This API update is to support the feature that allows customers to automatically consume the latest Amazon AppStream 2.0 agent as and when published by AWS.
