@@ -128,5 +128,6 @@ module.exports = {
   AlexaForBusiness: require('./alexaforbusiness'),
   Cloud9: require('./cloud9'),
   ServerlessApplicationRepository: require('./serverlessapplicationrepository'),
-  ServiceDiscovery: require('./servicediscovery')
+  ServiceDiscovery: require('./servicediscovery'),
+  WorkMail: require('./workmail')
 };

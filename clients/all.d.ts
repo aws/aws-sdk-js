@@ -127,3 +127,4 @@ export import AlexaForBusiness = require('./alexaforbusiness');
 export import Cloud9 = require('./cloud9');
 export import ServerlessApplicationRepository = require('./serverlessapplicationrepository');
 export import ServiceDiscovery = require('./servicediscovery');
+export import WorkMail = require('./workmail');

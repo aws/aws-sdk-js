@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.168.0-->
+<!--LATEST=2.169.0-->
 <!--ENTRYINSERT-->
+
+## 2.169.0
+* feature: WorkMail: Today, Amazon WorkMail released an administrative SDK and enabled AWS CloudTrail integration. With the administrative SDK, you can natively integrate WorkMail with your existing services. The SDK enables programmatic user, resource, and group management through API calls. This means your existing IT tools and workflows can now automate WorkMail management, and third party applications can streamline WorkMail migrations and account actions. 
 
 ## 2.168.0
 * feature: CognitoIdentityServiceProvider: Exposing the hosted UI domain name for a user pool that has a domain configured.

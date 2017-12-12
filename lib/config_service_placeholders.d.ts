@@ -129,6 +129,7 @@ export abstract class ConfigurationServicePlaceholders {
   cloud9?: AWS.Cloud9.Types.ClientConfiguration;
   serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.ClientConfiguration;
   servicediscovery?: AWS.ServiceDiscovery.Types.ClientConfiguration;
+  workmail?: AWS.WorkMail.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -260,4 +261,5 @@ export interface ConfigurationServiceApiVersions {
   cloud9?: AWS.Cloud9.Types.apiVersion;
   serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.apiVersion;
   servicediscovery?: AWS.ServiceDiscovery.Types.apiVersion;
+  workmail?: AWS.WorkMail.Types.apiVersion;
 }
