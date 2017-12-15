@@ -2308,8 +2308,14 @@
           "shape":"MFAOptionListType",
           "documentation":"<p>Specifies the options for MFA (e.g., email or phone number).</p>"
         },
-        "PreferredMfaSetting":{"shape":"StringType"},
-        "UserMFASettingList":{"shape":"UserMFASettingListType"}
+        "PreferredMfaSetting":{
+          "shape":"StringType",
+          "documentation":"<p>The user's preferred MFA setting.</p>"
+        },
+        "UserMFASettingList":{
+          "shape":"UserMFASettingListType",
+          "documentation":"<p>The list of the user's MFA settings.</p>"
+        }
       },
       "documentation":"<p>Represents the response from the server from the request to get the specified user as an administrator.</p>"
     },
@@ -4722,8 +4728,14 @@
           "shape":"MFAOptionListType",
           "documentation":"<p>Specifies the options for MFA (e.g., email or phone number).</p>"
         },
-        "PreferredMfaSetting":{"shape":"StringType"},
-        "UserMFASettingList":{"shape":"UserMFASettingListType"}
+        "PreferredMfaSetting":{
+          "shape":"StringType",
+          "documentation":"<p>The user's preferred MFA setting.</p>"
+        },
+        "UserMFASettingList":{
+          "shape":"UserMFASettingListType",
+          "documentation":"<p>The list of the user's MFA settings.</p>"
+        }
       },
       "documentation":"<p>Represents the response from the server from the request to get information about the user.</p>"
     },
@@ -7365,6 +7377,10 @@
         "EmailConfigurationFailure":{
           "shape":"StringType",
           "documentation":"<p>The reason why the email configuration cannot send the messages to your users.</p>"
+        },
+        "Domain":{
+          "shape":"DomainType",
+          "documentation":"<p>Holds the domain prefix if the user pool has a domain associated with it.</p>"
         },
         "AdminCreateUserConfig":{
           "shape":"AdminCreateUserConfigType",

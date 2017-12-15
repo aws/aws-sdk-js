@@ -421,7 +421,7 @@ declare namespace SageMaker {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute instances. Deploying on ML compute instances is part of model hosting. For more information, see Amazon SageMaker Roles. 
      */
-    ExecutionRoleArn?: RoleArn;
+    ExecutionRoleArn: RoleArn;
     /**
      * An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide. 
      */

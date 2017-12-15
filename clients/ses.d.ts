@@ -364,11 +364,11 @@ declare class SES extends Service {
    */
   sendBulkTemplatedEmail(callback?: (err: AWSError, data: SES.Types.SendBulkTemplatedEmailResponse) => void): Request<SES.Types.SendBulkTemplatedEmailResponse, AWSError>;
   /**
-   * Sends a custom verification email to a specified recipient. Verification emails sent using this operation are counted against your 24-hour sending quota and per-second sending rate. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide.
+   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendCustomVerificationEmail(params: SES.Types.SendCustomVerificationEmailRequest, callback?: (err: AWSError, data: SES.Types.SendCustomVerificationEmailResponse) => void): Request<SES.Types.SendCustomVerificationEmailResponse, AWSError>;
   /**
-   * Sends a custom verification email to a specified recipient. Verification emails sent using this operation are counted against your 24-hour sending quota and per-second sending rate. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide.
+   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendCustomVerificationEmail(callback?: (err: AWSError, data: SES.Types.SendCustomVerificationEmailResponse) => void): Request<SES.Types.SendCustomVerificationEmailResponse, AWSError>;
   /**
@@ -548,11 +548,11 @@ declare class SES extends Service {
    */
   verifyEmailAddress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. This operation causes a confirmation email message to be sent to the specified address. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a verification email is sent to the specified address. You can execute this operation no more than once per second.
    */
   verifyEmailIdentity(params: SES.Types.VerifyEmailIdentityRequest, callback?: (err: AWSError, data: SES.Types.VerifyEmailIdentityResponse) => void): Request<SES.Types.VerifyEmailIdentityResponse, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. This operation causes a confirmation email message to be sent to the specified address. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a verification email is sent to the specified address. You can execute this operation no more than once per second.
    */
   verifyEmailIdentity(callback?: (err: AWSError, data: SES.Types.VerifyEmailIdentityResponse) => void): Request<SES.Types.VerifyEmailIdentityResponse, AWSError>;
   /**
@@ -667,7 +667,7 @@ declare namespace SES {
   export type Cidr = string;
   export interface CloneReceiptRuleSetRequest {
     /**
-     * The name of the rule set to create. The name must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
+     * The name of the rule set to create. The name must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
      */
     RuleSetName: ReceiptRuleSetName;
     /**
@@ -685,7 +685,7 @@ declare namespace SES {
   }
   export interface CloudWatchDimensionConfiguration {
     /**
-     * The name of an Amazon CloudWatch dimension associated with an email sending metric. The name must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 256 characters.  
+     * The name of an Amazon CloudWatch dimension associated with an email sending metric. The name must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 256 characters.  
      */
     DimensionName: DimensionName;
     /**
@@ -693,7 +693,7 @@ declare namespace SES {
      */
     DimensionValueSource: DimensionValueSource;
     /**
-     * The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email. The default value must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 256 characters.  
+     * The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email. The default value must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 256 characters.  
      */
     DefaultDimensionValue: DefaultDimensionValue;
   }
@@ -800,7 +800,7 @@ declare namespace SES {
   }
   export interface CreateReceiptRuleSetRequest {
     /**
-     * The name of the rule set to create. The name must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
+     * The name of the rule set to create. The name must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
      */
     RuleSetName: ReceiptRuleSetName;
   }
@@ -1033,7 +1033,7 @@ declare namespace SES {
   export type Error = string;
   export interface EventDestination {
     /**
-     * The name of the event destination. The name must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 64 characters.  
+     * The name of the event destination. The name must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 64 characters.  
      */
     Name: EventDestinationName;
     /**
@@ -1331,7 +1331,7 @@ declare namespace SES {
   }
   export interface ListCustomVerificationEmailTemplatesRequest {
     /**
-     * A token returned from a previous call to ListCustomVerificationEmailTemplates to indicate the position in the list of email templates.
+     * An array the contains the name and creation time stamp for each template in your Amazon SES account.
      */
     NextToken?: NextToken;
     /**
@@ -1345,7 +1345,7 @@ declare namespace SES {
      */
     CustomVerificationEmailTemplates?: CustomVerificationEmailTemplates;
     /**
-     * A token indicating that there are additional custom verification email templates available to be listed. Pass this token to a subsequent call to ListCustomVerificationEmailTemplates to retrieve the next 50 custom verification email templates.
+     * A token indicating that there are additional custom verification email templates available to be listed. Pass this token to a subsequent call to ListTemplates to retrieve the next 50 custom verification email templates.
      */
     NextToken?: NextToken;
   }
@@ -1411,7 +1411,7 @@ declare namespace SES {
   }
   export interface ListTemplatesRequest {
     /**
-     * The token to use for pagination.
+     * A token returned from a previous call to ListTemplates to indicate the position in the list of email templates.
      */
     NextToken?: NextToken;
     /**
@@ -1421,11 +1421,11 @@ declare namespace SES {
   }
   export interface ListTemplatesResponse {
     /**
-     * An array the contains the name of creation time stamp for each template in your Amazon SES account.
+     * An array the contains the name and creation time stamp for each template in your Amazon SES account.
      */
     TemplatesMetadata?: TemplateMetadataList;
     /**
-     * The token to use for pagination.
+     * A token indicating that there are additional email templates available to be listed. Pass this token to a subsequent call to ListTemplates to retrieve the next 50 email templates.
      */
     NextToken?: NextToken;
   }
@@ -1469,11 +1469,11 @@ declare namespace SES {
   export type MessageId = string;
   export interface MessageTag {
     /**
-     * The name of the tag. The name must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 256 characters.  
+     * The name of the tag. The name must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 256 characters.  
      */
     Name: MessageTagName;
     /**
-     * The value of the tag. The value must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 256 characters.  
+     * The value of the tag. The value must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Contain less than 256 characters.  
      */
     Value: MessageTagValue;
   }
@@ -1544,7 +1544,7 @@ declare namespace SES {
   export type ReceiptActionsList = ReceiptAction[];
   export interface ReceiptFilter {
     /**
-     * The name of the IP address filter. The name must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
+     * The name of the IP address filter. The name must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
      */
     Name: ReceiptFilterName;
     /**
@@ -1567,7 +1567,7 @@ declare namespace SES {
   }
   export interface ReceiptRule {
     /**
-     * The name of the receipt rule. The name must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
+     * The name of the receipt rule. The name must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
      */
     Name: ReceiptRuleName;
     /**
@@ -1595,7 +1595,7 @@ declare namespace SES {
   export type ReceiptRuleNamesList = ReceiptRuleName[];
   export interface ReceiptRuleSetMetadata {
     /**
-     * The name of the receipt rule set. The name must:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
+     * The name of the receipt rule set. The name must:   This value can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).   Start and end with a letter or number.   Contain less than 64 characters.  
      */
     Name?: ReceiptRuleSetName;
     /**

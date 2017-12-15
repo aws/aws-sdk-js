@@ -1,6 +1,24 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.166.0-->
+<!--LATEST=2.171.0-->
 <!--ENTRYINSERT-->
+
+## 2.171.0
+* feature: AppStream: This API update is to enable customers to add tags to their Amazon AppStream 2.0 resources
+
+## 2.170.0
+* feature: APIGateway: Adds support for Cognito Authorizer scopes at the API method level.
+
+## 2.169.0
+* feature: WorkMail: Today, Amazon WorkMail released an administrative SDK and enabled AWS CloudTrail integration. With the administrative SDK, you can natively integrate WorkMail with your existing services. The SDK enables programmatic user, resource, and group management through API calls. This means your existing IT tools and workflows can now automate WorkMail management, and third party applications can streamline WorkMail migrations and account actions. 
+
+## 2.168.0
+* feature: CognitoIdentityServiceProvider: Exposing the hosted UI domain name for a user pool that has a domain configured.
+* feature: LexModelBuildingService: The GetBotChannelAssociation API now returns the status and failure reason, if any, for a bot channel.
+* feature: SageMaker: CreateModel API Update:  The request parameter 'ExecutionRoleArn' has changed from optional to required.
+
+## 2.167.0
+* feature: AppStream: This API update is to support the feature that allows customers to automatically consume the latest Amazon AppStream 2.0 agent as and when published by AWS.
+* feature: CloudWatch: With this launch, you can now create a CloudWatch alarm that alerts you when M out of N datapoints of a metric are breaching your predefined threshold, such as three out of five times in any given five minutes interval or two out of six times in a thirty minutes interval. When M out of N datapoints are not breaching your threshold in an interval, the alarm will be in OK state. Please note that the M datapoints out of N datapoints in an interval can be of any order and does not need to be consecutive. Consequently, you can now get alerted even when the spikes in your metrics are intermittent over an interval.
 
 ## 2.166.0
 * feature: ES: Added support for encryption of data at rest on Amazon Elasticsearch Service using AWS KMS

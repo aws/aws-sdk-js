@@ -36,19 +36,19 @@ declare class AppStream extends Service {
    */
   createFleet(callback?: (err: AWSError, data: AppStream.Types.CreateFleetResult) => void): Request<AppStream.Types.CreateFleetResult, AWSError>;
   /**
-   * 
+   * Creates an image builder. The initial state of the builder is PENDING. When it is ready, the state is RUNNING.
    */
   createImageBuilder(params: AppStream.Types.CreateImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderResult) => void): Request<AppStream.Types.CreateImageBuilderResult, AWSError>;
   /**
-   * 
+   * Creates an image builder. The initial state of the builder is PENDING. When it is ready, the state is RUNNING.
    */
   createImageBuilder(callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderResult) => void): Request<AppStream.Types.CreateImageBuilderResult, AWSError>;
   /**
-   * 
+   * Creates a URL to start an image builder streaming session.
    */
   createImageBuilderStreamingURL(params: AppStream.Types.CreateImageBuilderStreamingURLRequest, callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateImageBuilderStreamingURLResult, AWSError>;
   /**
-   * 
+   * Creates a URL to start an image builder streaming session.
    */
   createImageBuilderStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateImageBuilderStreamingURLResult, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class AppStream extends Service {
    */
   createStack(callback?: (err: AWSError, data: AppStream.Types.CreateStackResult) => void): Request<AppStream.Types.CreateStackResult, AWSError>;
   /**
-   * Creates a URL to start a streaming session for the specified user. By default, the URL is valid only for one minute from the time that it is generated.
+   * Creates a URL to start a streaming session for the specified user.
    */
   createStreamingURL(params: AppStream.Types.CreateStreamingURLRequest, callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
-   * Creates a URL to start a streaming session for the specified user. By default, the URL is valid only for one minute from the time that it is generated.
+   * Creates a URL to start a streaming session for the specified user.
    */
   createStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
@@ -84,19 +84,19 @@ declare class AppStream extends Service {
    */
   deleteFleet(callback?: (err: AWSError, data: AppStream.Types.DeleteFleetResult) => void): Request<AppStream.Types.DeleteFleetResult, AWSError>;
   /**
-   * 
+   * Deletes the specified image. You cannot delete an image that is currently in use. After you delete an image, you cannot provision new capacity using the image.
    */
   deleteImage(params: AppStream.Types.DeleteImageRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteImageResult) => void): Request<AppStream.Types.DeleteImageResult, AWSError>;
   /**
-   * 
+   * Deletes the specified image. You cannot delete an image that is currently in use. After you delete an image, you cannot provision new capacity using the image.
    */
   deleteImage(callback?: (err: AWSError, data: AppStream.Types.DeleteImageResult) => void): Request<AppStream.Types.DeleteImageResult, AWSError>;
   /**
-   * 
+   * Deletes the specified image builder and releases the capacity.
    */
   deleteImageBuilder(params: AppStream.Types.DeleteImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteImageBuilderResult) => void): Request<AppStream.Types.DeleteImageBuilderResult, AWSError>;
   /**
-   * 
+   * Deletes the specified image builder and releases the capacity.
    */
   deleteImageBuilder(callback?: (err: AWSError, data: AppStream.Types.DeleteImageBuilderResult) => void): Request<AppStream.Types.DeleteImageBuilderResult, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class AppStream extends Service {
    */
   describeFleets(callback?: (err: AWSError, data: AppStream.Types.DescribeFleetsResult) => void): Request<AppStream.Types.DescribeFleetsResult, AWSError>;
   /**
-   * 
+   * Describes the specified image builders or all image builders in the account.
    */
   describeImageBuilders(params: AppStream.Types.DescribeImageBuildersRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImageBuildersResult) => void): Request<AppStream.Types.DescribeImageBuildersResult, AWSError>;
   /**
-   * 
+   * Describes the specified image builders or all image builders in the account.
    */
   describeImageBuilders(callback?: (err: AWSError, data: AppStream.Types.DescribeImageBuildersResult) => void): Request<AppStream.Types.DescribeImageBuildersResult, AWSError>;
   /**
@@ -188,6 +188,14 @@ declare class AppStream extends Service {
    */
   listAssociatedStacks(callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
   /**
+   * Lists the tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  listTagsForResource(params: AppStream.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Starts the specified fleet.
    */
   startFleet(params: AppStream.Types.StartFleetRequest, callback?: (err: AWSError, data: AppStream.Types.StartFleetResult) => void): Request<AppStream.Types.StartFleetResult, AWSError>;
@@ -196,11 +204,11 @@ declare class AppStream extends Service {
    */
   startFleet(callback?: (err: AWSError, data: AppStream.Types.StartFleetResult) => void): Request<AppStream.Types.StartFleetResult, AWSError>;
   /**
-   * 
+   * Starts the specified image builder.
    */
   startImageBuilder(params: AppStream.Types.StartImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StartImageBuilderResult) => void): Request<AppStream.Types.StartImageBuilderResult, AWSError>;
   /**
-   * 
+   * Starts the specified image builder.
    */
   startImageBuilder(callback?: (err: AWSError, data: AppStream.Types.StartImageBuilderResult) => void): Request<AppStream.Types.StartImageBuilderResult, AWSError>;
   /**
@@ -212,13 +220,29 @@ declare class AppStream extends Service {
    */
   stopFleet(callback?: (err: AWSError, data: AppStream.Types.StopFleetResult) => void): Request<AppStream.Types.StopFleetResult, AWSError>;
   /**
-   * 
+   * Stops the specified image builder.
    */
   stopImageBuilder(params: AppStream.Types.StopImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StopImageBuilderResult) => void): Request<AppStream.Types.StopImageBuilderResult, AWSError>;
   /**
-   * 
+   * Stops the specified image builder.
    */
   stopImageBuilder(callback?: (err: AWSError, data: AppStream.Types.StopImageBuilderResult) => void): Request<AppStream.Types.StopImageBuilderResult, AWSError>;
+  /**
+   * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  tagResource(params: AppStream.Types.TagResourceRequest, callback?: (err: AWSError, data: AppStream.Types.TagResourceResponse) => void): Request<AppStream.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  tagResource(callback?: (err: AWSError, data: AppStream.Types.TagResourceResponse) => void): Request<AppStream.Types.TagResourceResponse, AWSError>;
+  /**
+   * Disassociates the specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  untagResource(params: AppStream.Types.UntagResourceRequest, callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Disassociates the specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  untagResource(callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates the specified directory configuration.
    */
@@ -269,7 +293,7 @@ declare namespace AppStream {
      */
     Name?: String;
     /**
-     * The application name displayed to end users.
+     * The application name for display.
      */
     DisplayName?: String;
     /**
@@ -294,6 +318,7 @@ declare namespace AppStream {
     Metadata?: Metadata;
   }
   export type Applications = Application[];
+  export type AppstreamAgentVersion = string;
   export type Arn = string;
   export interface AssociateFleetRequest {
     /**
@@ -360,13 +385,16 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The name of the image used by the fleet.
+     * The name of the image used to create the fleet.
      */
     ImageName: String;
     /**
      * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType: String;
+    /**
+     * The fleet type.  ALWAYS_ON  Provides users with instant-on access to their apps. You are charged for all running instances in your fleet, even if no users are streaming apps.  ON_DEMAND  Provide users with access to applications after they connect, which takes one to two minutes. You are charged for instance streaming when users are connected and a small hourly fee for instances that are not streaming apps.  
+     */
     FleetType?: FleetType;
     /**
      * The desired capacity for the fleet.
@@ -385,11 +413,11 @@ declare namespace AppStream {
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
-     * The description displayed to end users.
+     * The description for display.
      */
     Description?: Description;
     /**
-     * The fleet name displayed to end users.
+     * The fleet name for display.
      */
     DisplayName?: DisplayName;
     /**
@@ -397,7 +425,7 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed for streaming instances to join a domain.
+     * The information needed to join a Microsoft Active Directory domain.
      */
     DomainJoinInfo?: DomainJoinInfo;
   }
@@ -408,24 +436,67 @@ declare namespace AppStream {
     Fleet?: Fleet;
   }
   export interface CreateImageBuilderRequest {
+    /**
+     * A unique name for the image builder.
+     */
     Name: Name;
+    /**
+     * The name of the image used to create the builder.
+     */
     ImageName: String;
+    /**
+     * The instance type to use when launching the image builder.
+     */
     InstanceType: String;
+    /**
+     * The description for display.
+     */
     Description?: Description;
+    /**
+     * The image builder name for display.
+     */
     DisplayName?: DisplayName;
+    /**
+     * The VPC configuration for the image builder. You can specify only one subnet.
+     */
     VpcConfig?: VpcConfig;
+    /**
+     * Enables or disables default internet access for the image builder.
+     */
     EnableDefaultInternetAccess?: BooleanObject;
+    /**
+     * The information needed to join a Microsoft Active Directory domain.
+     */
     DomainJoinInfo?: DomainJoinInfo;
+    /**
+     * The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. 
+     */
+    AppstreamAgentVersion?: AppstreamAgentVersion;
   }
   export interface CreateImageBuilderResult {
+    /**
+     * Information about the image builder.
+     */
     ImageBuilder?: ImageBuilder;
   }
   export interface CreateImageBuilderStreamingURLRequest {
+    /**
+     * The name of the image builder.
+     */
     Name: String;
+    /**
+     * The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds. The default is 3600 seconds.
+     */
     Validity?: Long;
   }
   export interface CreateImageBuilderStreamingURLResult {
+    /**
+     * The URL to start the AppStream 2.0 streaming session.
+     */
     StreamingURL?: String;
+    /**
+     * The elapsed time, in seconds after the Unix epoch, when this URL expires.
+     */
     Expires?: Timestamp;
   }
   export interface CreateStackRequest {
@@ -434,11 +505,11 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The description displayed to end users.
+     * The description for display.
      */
     Description?: Description;
     /**
-     * The stack name displayed to end users.
+     * The stack name for display.
      */
     DisplayName?: DisplayName;
     /**
@@ -466,15 +537,15 @@ declare namespace AppStream {
      */
     UserId: StreamingUrlUserId;
     /**
-     * The ID of the application that must be launched after the session starts.
+     * The name of the application to launch after the session starts. This is the name that you specified as Name in the Image Assistant.
      */
     ApplicationId?: String;
     /**
-     * The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds.
+     * The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds. The default is 60 seconds.
      */
     Validity?: Long;
     /**
-     * The session context of the streaming URL.
+     * The session context. For more information, see Session Context in the Amazon AppStream 2.0 Developer Guide.
      */
     SessionContext?: String;
   }
@@ -505,15 +576,27 @@ declare namespace AppStream {
   export interface DeleteFleetResult {
   }
   export interface DeleteImageBuilderRequest {
+    /**
+     * The name of the image builder.
+     */
     Name: Name;
   }
   export interface DeleteImageBuilderResult {
+    /**
+     * Information about the image builder.
+     */
     ImageBuilder?: ImageBuilder;
   }
   export interface DeleteImageRequest {
+    /**
+     * The name of the image.
+     */
     Name: Name;
   }
   export interface DeleteImageResult {
+    /**
+     * Information about the image.
+     */
     Image?: Image;
   }
   export interface DeleteStackRequest {
@@ -569,12 +652,27 @@ declare namespace AppStream {
     NextToken?: String;
   }
   export interface DescribeImageBuildersRequest {
+    /**
+     * The names of the image builders to describe.
+     */
     Names?: StringList;
+    /**
+     * The maximum size of each page of results.
+     */
     MaxResults?: Integer;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
     NextToken?: String;
   }
   export interface DescribeImageBuildersResult {
+    /**
+     * Information about the image builders.
+     */
     ImageBuilders?: ImageBuilderList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
     NextToken?: String;
   }
   export interface DescribeImagesRequest {
@@ -709,21 +807,24 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The fleet name displayed to end users.
+     * The fleet name for display.
      */
     DisplayName?: String;
     /**
-     * The description displayed to end users.
+     * The description for display.
      */
     Description?: String;
     /**
-     * The image used by the fleet.
+     * The name of the image used to create the fleet.
      */
     ImageName: String;
     /**
      * The instance type to use when launching fleet instances.
      */
     InstanceType: String;
+    /**
+     * The fleet type.  ALWAYS_ON  Provides users with instant-on access to their apps. You are charged for all running instances in your fleet, even if no users are streaming apps.  ON_DEMAND  Provide users with access to applications after they connect, which takes one to two minutes. You are charged for instance streaming when users are connected and a small hourly fee for instances that are not streaming apps.  
+     */
     FleetType?: FleetType;
     /**
      * The capacity status for the fleet.
@@ -758,7 +859,7 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed for streaming instances to join a domain.
+     * The information needed to join a Microsoft Active Directory domain.
      */
     DomainJoinInfo?: DomainJoinInfo;
   }
@@ -793,7 +894,7 @@ declare namespace AppStream {
      */
     BaseImageArn?: Arn;
     /**
-     * The image name displayed to end users.
+     * The image name for display.
      */
     DisplayName?: String;
     /**
@@ -813,7 +914,7 @@ declare namespace AppStream {
      */
     Platform?: PlatformType;
     /**
-     * The description displayed to end users.
+     * The description for display.
      */
     Description?: String;
     /**
@@ -832,27 +933,83 @@ declare namespace AppStream {
      * The release date of the public base image. For private images, this date is the release date of the base image from which the image was created.
      */
     PublicBaseImageReleasedDate?: Timestamp;
+    /**
+     * The version of the AppStream 2.0 agent to use for instances that are launched from this image. 
+     */
+    AppstreamAgentVersion?: AppstreamAgentVersion;
   }
   export interface ImageBuilder {
+    /**
+     * The name of the image builder.
+     */
     Name: String;
+    /**
+     * The ARN for the image builder.
+     */
     Arn?: Arn;
+    /**
+     * The ARN of the image from which this builder was created.
+     */
     ImageArn?: Arn;
+    /**
+     * The description for display.
+     */
     Description?: String;
+    /**
+     * The image builder name for display.
+     */
     DisplayName?: String;
+    /**
+     * The VPC configuration of the image builder.
+     */
     VpcConfig?: VpcConfig;
+    /**
+     * The instance type for the image builder.
+     */
     InstanceType?: String;
+    /**
+     * The operating system platform of the image builder.
+     */
     Platform?: PlatformType;
+    /**
+     * The state of the image builder.
+     */
     State?: ImageBuilderState;
+    /**
+     * The reason why the last state change occurred.
+     */
     StateChangeReason?: ImageBuilderStateChangeReason;
+    /**
+     * The time stamp when the image builder was created.
+     */
     CreatedTime?: Timestamp;
+    /**
+     * Enables or disables default internet access for the image builder.
+     */
     EnableDefaultInternetAccess?: BooleanObject;
+    /**
+     * The information needed to join a Microsoft Active Directory domain.
+     */
     DomainJoinInfo?: DomainJoinInfo;
+    /**
+     * The image builder errors.
+     */
     ImageBuilderErrors?: ResourceErrors;
+    /**
+     * The version of the AppStream 2.0 agent that is currently being used by this image builder. 
+     */
+    AppstreamAgentVersion?: AppstreamAgentVersion;
   }
   export type ImageBuilderList = ImageBuilder[];
-  export type ImageBuilderState = "PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|string;
+  export type ImageBuilderState = "PENDING"|"UPDATING_AGENT"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|string;
   export interface ImageBuilderStateChangeReason {
+    /**
+     * The state change reason code.
+     */
     Code?: ImageBuilderStateChangeReasonCode;
+    /**
+     * The state change reason message.
+     */
     Message?: String;
   }
   export type ImageBuilderStateChangeReasonCode = "INTERNAL_ERROR"|"IMAGE_UNAVAILABLE"|string;
@@ -910,6 +1067,18 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The information about the tags.
+     */
+    Tags?: Tags;
+  }
   export type Long = number;
   export type Metadata = {[key: string]: String};
   export type Name = string;
@@ -917,8 +1086,17 @@ declare namespace AppStream {
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
   export type PlatformType = "WINDOWS"|string;
   export interface ResourceError {
+    /**
+     * The error code.
+     */
     ErrorCode?: FleetErrorCode;
+    /**
+     * The error message.
+     */
     ErrorMessage?: String;
+    /**
+     * The time the error occurred.
+     */
     ErrorTimestamp?: Timestamp;
   }
   export type ResourceErrors = ResourceError[];
@@ -972,11 +1150,11 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The description displayed to end users.
+     * The description for display.
      */
     Description?: String;
     /**
-     * The stack name displayed to end users.
+     * The stack name for display.
      */
     DisplayName?: String;
     /**
@@ -1014,9 +1192,19 @@ declare namespace AppStream {
   export interface StartFleetResult {
   }
   export interface StartImageBuilderRequest {
+    /**
+     * The name of the image builder.
+     */
     Name: String;
+    /**
+     * The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. 
+     */
+    AppstreamAgentVersion?: AppstreamAgentVersion;
   }
   export interface StartImageBuilderResult {
+    /**
+     * Information about the image builder.
+     */
     ImageBuilder?: ImageBuilder;
   }
   export interface StopFleetRequest {
@@ -1028,9 +1216,15 @@ declare namespace AppStream {
   export interface StopFleetResult {
   }
   export interface StopImageBuilderRequest {
+    /**
+     * The name of the image builder.
+     */
     Name: String;
   }
   export interface StopImageBuilderResult {
+    /**
+     * Information about the image builder.
+     */
     ImageBuilder?: ImageBuilder;
   }
   export interface StorageConnector {
@@ -1049,7 +1243,35 @@ declare namespace AppStream {
   export type String = string;
   export type StringList = String[];
   export type SubnetIdList = String[];
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+    /**
+     * The tags to associate. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=.  If you do not specify a value, we set the value to an empty string.
+     */
+    Tags: Tags;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type Tags = {[key: string]: TagValue};
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+    /**
+     * The tag keys for the tags to disassociate.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateDirectoryConfigRequest {
     /**
      * The name of the directory configuration.
@@ -1072,7 +1294,7 @@ declare namespace AppStream {
   }
   export interface UpdateFleetRequest {
     /**
-     * The name of the image used by the fleet.
+     * The name of the image used to create the fleet.
      */
     ImageName?: String;
     /**
@@ -1104,11 +1326,11 @@ declare namespace AppStream {
      */
     DeleteVpcConfig?: Boolean;
     /**
-     * The description displayed to end users.
+     * The description for display.
      */
     Description?: Description;
     /**
-     * The fleet name displayed to end users.
+     * The fleet name for display.
      */
     DisplayName?: DisplayName;
     /**
@@ -1116,7 +1338,7 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed for streaming instances to join a domain.
+     * The information needed to join a Microsoft Active Directory domain.
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
@@ -1132,11 +1354,11 @@ declare namespace AppStream {
   }
   export interface UpdateStackRequest {
     /**
-     * The stack name displayed to end users.
+     * The stack name for display.
      */
     DisplayName?: DisplayName;
     /**
-     * The description displayed to end users.
+     * The description for display.
      */
     Description?: Description;
     /**

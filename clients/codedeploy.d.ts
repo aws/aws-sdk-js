@@ -563,7 +563,7 @@ declare namespace CodeDeploy {
      */
     applicationName: ApplicationName;
     /**
-     * The destination platform type for the deployment Lambda or Server).
+     *  The destination platform type for the deployment (Lambda or Server).
      */
     computePlatform?: ComputePlatform;
   }
@@ -583,7 +583,7 @@ declare namespace CodeDeploy {
      */
     minimumHealthyHosts: MinimumHealthyHosts;
     /**
-     * The configuration specifying how the deployment traffic will be routed.
+     * The configuration that specifies how the deployment traffic will be routed.
      */
     trafficRoutingConfig?: TrafficRoutingConfig;
     /**
@@ -1609,7 +1609,7 @@ declare namespace CodeDeploy {
   }
   export interface RawString {
     /**
-     * The YAML-formatted or JSON-formatted revision string. It includes information about what Lambda function to update and optional Lambda functions that validate deployment lifecycle events.
+     * The YAML-formatted or JSON-formatted revision string. It includes information about which Lambda function to update and optional Lambda functions that validate deployment lifecycle events.
      */
     content?: RawStringContent;
     /**
@@ -1840,7 +1840,7 @@ declare namespace CodeDeploy {
   export type Timestamp = Date;
   export interface TrafficRoutingConfig {
     /**
-     * The type of traffic shifting a deployment configuration uses (TimeBasedCanary or TimeBasedLinear).
+     * The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by a deployment configuration .
      */
     type?: TrafficRoutingType;
     /**

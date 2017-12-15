@@ -529,5 +529,8 @@
   },
   "servicediscovery": {
     "name": "ServiceDiscovery"
+  },
+  "workmail": {
+    "name": "WorkMail"
   }
 }
