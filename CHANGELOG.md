@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.170.0-->
+<!--LATEST=2.171.0-->
 <!--ENTRYINSERT-->
+
+## 2.171.0
+* feature: AppStream: This API update is to enable customers to add tags to their Amazon AppStream 2.0 resources
 
 ## 2.170.0
 * feature: APIGateway: Adds support for Cognito Authorizer scopes at the API method level.

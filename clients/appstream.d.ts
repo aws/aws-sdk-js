@@ -188,6 +188,14 @@ declare class AppStream extends Service {
    */
   listAssociatedStacks(callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
   /**
+   * Lists the tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  listTagsForResource(params: AppStream.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Starts the specified fleet.
    */
   startFleet(params: AppStream.Types.StartFleetRequest, callback?: (err: AWSError, data: AppStream.Types.StartFleetResult) => void): Request<AppStream.Types.StartFleetResult, AWSError>;
@@ -219,6 +227,22 @@ declare class AppStream extends Service {
    * Stops the specified image builder.
    */
   stopImageBuilder(callback?: (err: AWSError, data: AppStream.Types.StopImageBuilderResult) => void): Request<AppStream.Types.StopImageBuilderResult, AWSError>;
+  /**
+   * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  tagResource(params: AppStream.Types.TagResourceRequest, callback?: (err: AWSError, data: AppStream.Types.TagResourceResponse) => void): Request<AppStream.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  tagResource(callback?: (err: AWSError, data: AppStream.Types.TagResourceResponse) => void): Request<AppStream.Types.TagResourceResponse, AWSError>;
+  /**
+   * Disassociates the specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  untagResource(params: AppStream.Types.UntagResourceRequest, callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Disassociates the specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   */
+  untagResource(callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates the specified directory configuration.
    */
@@ -445,7 +469,7 @@ declare namespace AppStream {
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
-     * The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST].
+     * The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. 
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
   }
@@ -910,7 +934,7 @@ declare namespace AppStream {
      */
     PublicBaseImageReleasedDate?: Timestamp;
     /**
-     * The version of the AppStream 2.0 agent to use for instances that are launched from this image.
+     * The version of the AppStream 2.0 agent to use for instances that are launched from this image. 
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
   }
@@ -972,7 +996,7 @@ declare namespace AppStream {
      */
     ImageBuilderErrors?: ResourceErrors;
     /**
-     * The version of the AppStream 2.0 agent that is currently being used by this image builder.
+     * The version of the AppStream 2.0 agent that is currently being used by this image builder. 
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
   }
@@ -1042,6 +1066,18 @@ declare namespace AppStream {
      * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
     NextToken?: String;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The information about the tags.
+     */
+    Tags?: Tags;
   }
   export type Long = number;
   export type Metadata = {[key: string]: String};
@@ -1161,7 +1197,7 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST].
+     * The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. 
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
   }
@@ -1207,7 +1243,35 @@ declare namespace AppStream {
   export type String = string;
   export type StringList = String[];
   export type SubnetIdList = String[];
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+    /**
+     * The tags to associate. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=.  If you do not specify a value, we set the value to an empty string.
+     */
+    Tags: Tags;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type Tags = {[key: string]: TagValue};
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+    /**
+     * The tag keys for the tags to disassociate.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateDirectoryConfigRequest {
     /**
      * The name of the directory configuration.
