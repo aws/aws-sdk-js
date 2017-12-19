@@ -21,11 +21,11 @@ declare class MediaStoreData extends Service {
    */
   deleteObject(callback?: (err: AWSError, data: MediaStoreData.Types.DeleteObjectResponse) => void): Request<MediaStoreData.Types.DeleteObjectResponse, AWSError>;
   /**
-   * Gets the header for an object at the specified path.
+   * Gets the headers for an object at the specified path.
    */
   describeObject(params: MediaStoreData.Types.DescribeObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.DescribeObjectResponse) => void): Request<MediaStoreData.Types.DescribeObjectResponse, AWSError>;
   /**
-   * Gets the header for an object at the specified path.
+   * Gets the headers for an object at the specified path.
    */
   describeObject(callback?: (err: AWSError, data: MediaStoreData.Types.DescribeObjectResponse) => void): Request<MediaStoreData.Types.DescribeObjectResponse, AWSError>;
   /**
@@ -106,7 +106,7 @@ declare namespace MediaStoreData {
   }
   export interface GetObjectResponse {
     /**
-     * The path to the file outside of the container. The file name can include or omit an extension.  Example 1: If the file is stored on a remote server that has been mounted to the workstation on which the REST API command is being run, the path could be the absolute path  \mount\assets\mlaw.avi or the relative path ..\..\mount\assets\movies\premium\mlaw.avi. Example 2: If the file is stored on a remote server that is not mounted, the path could be https:\\192.0.2.15\movies\premium\mlaw.avi.
+     * The bytes of the object. 
      */
     Body?: PayloadBlob;
     /**
@@ -199,7 +199,7 @@ declare namespace MediaStoreData {
   export type PayloadBlob = Buffer|Uint8Array|Blob|string|Readable;
   export interface PutObjectRequest {
     /**
-     * The path to the file outside of the container. The file name can include or omit an extension.  Example 1: If the file is stored on a remote server that has been mounted to the workstation on which the REST API command is being run, the path could be the absolute path  \mount\assets\mlaw.avi or the relative path ..\..\mount\assets\movies\premium\mlaw.avi. Example 2: If the file is stored on a remote server that is not mounted, the path could be https:\\192.0.2.15\movies\premium\mlaw.avi.
+     * The bytes to be stored. 
      */
     Body: PayloadBlob;
     /**
