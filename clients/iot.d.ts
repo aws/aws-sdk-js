@@ -116,6 +116,14 @@ declare class Iot extends Service {
    */
   createKeysAndCertificate(callback?: (err: AWSError, data: Iot.Types.CreateKeysAndCertificateResponse) => void): Request<Iot.Types.CreateKeysAndCertificateResponse, AWSError>;
   /**
+   * Creates an AWS IoT OTAUpdate on a target group of things or groups.
+   */
+  createOTAUpdate(params: Iot.Types.CreateOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.CreateOTAUpdateResponse) => void): Request<Iot.Types.CreateOTAUpdateResponse, AWSError>;
+  /**
+   * Creates an AWS IoT OTAUpdate on a target group of things or groups.
+   */
+  createOTAUpdate(callback?: (err: AWSError, data: Iot.Types.CreateOTAUpdateResponse) => void): Request<Iot.Types.CreateOTAUpdateResponse, AWSError>;
+  /**
    * Creates an AWS IoT policy. The created policy is the default version for the policy. This operation creates a policy version with a version identifier of 1 and sets 1 as the policy's default version.
    */
   createPolicy(params: Iot.Types.CreatePolicyRequest, callback?: (err: AWSError, data: Iot.Types.CreatePolicyResponse) => void): Request<Iot.Types.CreatePolicyResponse, AWSError>;
@@ -139,6 +147,14 @@ declare class Iot extends Service {
    * Creates a role alias.
    */
   createRoleAlias(callback?: (err: AWSError, data: Iot.Types.CreateRoleAliasResponse) => void): Request<Iot.Types.CreateRoleAliasResponse, AWSError>;
+  /**
+   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.
+   */
+  createStream(params: Iot.Types.CreateStreamRequest, callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
+  /**
+   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.
+   */
+  createStream(callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
    * Creates a thing record in the thing registry.
    */
@@ -196,6 +212,14 @@ declare class Iot extends Service {
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Delete an OTA update.
+   */
+  deleteOTAUpdate(params: Iot.Types.DeleteOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.DeleteOTAUpdateResponse) => void): Request<Iot.Types.DeleteOTAUpdateResponse, AWSError>;
+  /**
+   * Delete an OTA update.
+   */
+  deleteOTAUpdate(callback?: (err: AWSError, data: Iot.Types.DeleteOTAUpdateResponse) => void): Request<Iot.Types.DeleteOTAUpdateResponse, AWSError>;
+  /**
    * Deletes the specified policy. A policy cannot be deleted if it has non-default versions or it is attached to any certificate. To delete a policy, use the DeletePolicyVersion API to delete all non-default versions of the policy; use the DetachPrincipalPolicy API to detach the policy from any certificate; and then use the DeletePolicy API to delete the policy. When a policy is deleted using DeletePolicy, its default version is deleted with it.
    */
   deletePolicy(params: Iot.Types.DeletePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -227,6 +251,14 @@ declare class Iot extends Service {
    * Deletes a role alias
    */
   deleteRoleAlias(callback?: (err: AWSError, data: Iot.Types.DeleteRoleAliasResponse) => void): Request<Iot.Types.DeleteRoleAliasResponse, AWSError>;
+  /**
+   * Deletes a stream.
+   */
+  deleteStream(params: Iot.Types.DeleteStreamRequest, callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
+  /**
+   * Deletes a stream.
+   */
+  deleteStream(callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
   /**
    * Deletes the specified thing.
    */
@@ -356,6 +388,14 @@ declare class Iot extends Service {
    */
   describeRoleAlias(callback?: (err: AWSError, data: Iot.Types.DescribeRoleAliasResponse) => void): Request<Iot.Types.DescribeRoleAliasResponse, AWSError>;
   /**
+   * Gets information about a stream.
+   */
+  describeStream(params: Iot.Types.DescribeStreamRequest, callback?: (err: AWSError, data: Iot.Types.DescribeStreamResponse) => void): Request<Iot.Types.DescribeStreamResponse, AWSError>;
+  /**
+   * Gets information about a stream.
+   */
+  describeStream(callback?: (err: AWSError, data: Iot.Types.DescribeStreamResponse) => void): Request<Iot.Types.DescribeStreamResponse, AWSError>;
+  /**
    * Gets information about the specified thing.
    */
   describeThing(params: Iot.Types.DescribeThingRequest, callback?: (err: AWSError, data: Iot.Types.DescribeThingResponse) => void): Request<Iot.Types.DescribeThingResponse, AWSError>;
@@ -459,6 +499,14 @@ declare class Iot extends Service {
    * Gets the logging options.
    */
   getLoggingOptions(callback?: (err: AWSError, data: Iot.Types.GetLoggingOptionsResponse) => void): Request<Iot.Types.GetLoggingOptionsResponse, AWSError>;
+  /**
+   * Gets an OTA update.
+   */
+  getOTAUpdate(params: Iot.Types.GetOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.GetOTAUpdateResponse) => void): Request<Iot.Types.GetOTAUpdateResponse, AWSError>;
+  /**
+   * Gets an OTA update.
+   */
+  getOTAUpdate(callback?: (err: AWSError, data: Iot.Types.GetOTAUpdateResponse) => void): Request<Iot.Types.GetOTAUpdateResponse, AWSError>;
   /**
    * Gets information about the specified policy with the policy document of the default version.
    */
@@ -572,6 +620,14 @@ declare class Iot extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Iot.Types.ListJobsResponse) => void): Request<Iot.Types.ListJobsResponse, AWSError>;
   /**
+   * Lists OTA updates.
+   */
+  listOTAUpdates(params: Iot.Types.ListOTAUpdatesRequest, callback?: (err: AWSError, data: Iot.Types.ListOTAUpdatesResponse) => void): Request<Iot.Types.ListOTAUpdatesResponse, AWSError>;
+  /**
+   * Lists OTA updates.
+   */
+  listOTAUpdates(callback?: (err: AWSError, data: Iot.Types.ListOTAUpdatesResponse) => void): Request<Iot.Types.ListOTAUpdatesResponse, AWSError>;
+  /**
    * Lists certificates that are being transferred but not yet accepted.
    */
   listOutgoingCertificates(params: Iot.Types.ListOutgoingCertificatesRequest, callback?: (err: AWSError, data: Iot.Types.ListOutgoingCertificatesResponse) => void): Request<Iot.Types.ListOutgoingCertificatesResponse, AWSError>;
@@ -627,6 +683,14 @@ declare class Iot extends Service {
    * Lists the role aliases registered in your account.
    */
   listRoleAliases(callback?: (err: AWSError, data: Iot.Types.ListRoleAliasesResponse) => void): Request<Iot.Types.ListRoleAliasesResponse, AWSError>;
+  /**
+   * Lists all of the streams in your AWS account.
+   */
+  listStreams(params: Iot.Types.ListStreamsRequest, callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
+  /**
+   * Lists all of the streams in your AWS account.
+   */
+  listStreams(callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
   /**
    * List targets for the specified policy.
    */
@@ -900,6 +964,14 @@ declare class Iot extends Service {
    */
   updateRoleAlias(callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
   /**
+   * Updates an existing stream. The stream version will be incremented by one.
+   */
+  updateStream(params: Iot.Types.UpdateStreamRequest, callback?: (err: AWSError, data: Iot.Types.UpdateStreamResponse) => void): Request<Iot.Types.UpdateStreamResponse, AWSError>;
+  /**
+   * Updates an existing stream. The stream version will be incremented by one.
+   */
+  updateStream(callback?: (err: AWSError, data: Iot.Types.UpdateStreamResponse) => void): Request<Iot.Types.UpdateStreamResponse, AWSError>;
+  /**
    * Updates the data for a thing.
    */
   updateThing(params: Iot.Types.UpdateThingRequest, callback?: (err: AWSError, data: Iot.Types.UpdateThingResponse) => void): Request<Iot.Types.UpdateThingResponse, AWSError>;
@@ -1011,6 +1083,7 @@ declare namespace Iot {
   }
   export interface AddThingToThingGroupResponse {
   }
+  export type AdditionalParameterMap = {[key: string]: Value};
   export type AlarmName = string;
   export type AllowAutoRegistration = boolean;
   export interface Allowed {
@@ -1093,6 +1166,7 @@ declare namespace Iot {
   }
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
+  export type AttributesMap = {[key: string]: Value};
   export type AuthDecision = "ALLOWED"|"EXPLICIT_DENY"|"IMPLICIT_DENY"|string;
   export interface AuthInfo {
     /**
@@ -1180,6 +1254,8 @@ declare namespace Iot {
   export type AutoRegistrationStatus = "ENABLE"|"DISABLE"|string;
   export type AwsAccountId = string;
   export type AwsArn = string;
+  export type AwsIotJobArn = string;
+  export type AwsIotJobId = string;
   export type AwsIotSqlVersion = string;
   export type Boolean = boolean;
   export type BucketName = string;
@@ -1327,6 +1403,7 @@ declare namespace Iot {
     transferData?: TransferData;
   }
   export type CertificateId = string;
+  export type CertificateName = string;
   export type CertificatePem = string;
   export type CertificateSigningRequest = string;
   export type CertificateStatus = "ACTIVE"|"INACTIVE"|"REVOKED"|"PENDING_TRANSFER"|"REGISTER_INACTIVE"|"PENDING_ACTIVATION"|string;
@@ -1379,6 +1456,41 @@ declare namespace Iot {
      * An optional Unix timestamp.
      */
     metricTimestamp?: MetricTimestamp;
+  }
+  export type Code = string;
+  export interface CodeSigning {
+    /**
+     * The ID of the AWSSignerJob which was created to sign the file.
+     */
+    awsSignerJobId?: SigningJobId;
+    /**
+     * A custom method for code signing a file.
+     */
+    customCodeSigning?: CustomCodeSigning;
+  }
+  export interface CodeSigningCertificateChain {
+    /**
+     * A stream of the certificate chain files.
+     */
+    stream?: Stream;
+    /**
+     * The name of the certificate.
+     */
+    certificateName?: CertificateName;
+    /**
+     * A base64 encoded binary representation of the code signing certificate chain.
+     */
+    inlineDocument?: InlineDocument;
+  }
+  export interface CodeSigningSignature {
+    /**
+     * A stream of the code signing signature.
+     */
+    stream?: Stream;
+    /**
+     * A base64 encoded binary representation of the code signing signature.
+     */
+    inlineDocument?: Signature;
   }
   export type CognitoIdentityPoolId = string;
   export type Comment = string;
@@ -1521,6 +1633,58 @@ declare namespace Iot {
      */
     keyPair?: KeyPair;
   }
+  export interface CreateOTAUpdateRequest {
+    /**
+     * The ID of the OTA update to be created.
+     */
+    otaUpdateId: OTAUpdateId;
+    /**
+     * The description of the OTA update.
+     */
+    description?: OTAUpdateDescription;
+    /**
+     * The targeted devices to receive OTA updates.
+     */
+    targets: Targets;
+    /**
+     * Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.
+     */
+    targetSelection?: TargetSelection;
+    /**
+     * The files to be streamed by the OTA update.
+     */
+    files: OTAUpdateFiles;
+    /**
+     * The IAM role that allows access to the AWS IoT Jobs service.
+     */
+    roleArn: RoleArn;
+    /**
+     * A list of additional OTA update parameters which are name-value pairs.
+     */
+    additionalParameters?: AdditionalParameterMap;
+  }
+  export interface CreateOTAUpdateResponse {
+    /**
+     * The OTA update ID.
+     */
+    otaUpdateId?: OTAUpdateId;
+    /**
+     * The AWS IoT job ID associated with the OTA update.
+     */
+    awsIotJobId?: AwsIotJobId;
+    /**
+     * The OTA update ARN.
+     */
+    otaUpdateArn?: OTAUpdateArn;
+    /**
+     * The AWS IoT job ARN associated with the OTA update.
+     */
+    awsIotJobArn?: AwsIotJobArn;
+    /**
+     * The OTA update status.
+     */
+    otaUpdateStatus?: OTAUpdateStatus;
+  }
   export interface CreatePolicyRequest {
     /**
      * The policy name.
@@ -1604,6 +1768,42 @@ declare namespace Iot {
      * The role alias ARN.
      */
     roleAliasArn?: RoleAliasArn;
+  }
+  export interface CreateStreamRequest {
+    /**
+     * The stream ID.
+     */
+    streamId: StreamId;
+    /**
+     * A description of the stream.
+     */
+    description?: StreamDescription;
+    /**
+     * The files to stream.
+     */
+    files: StreamFiles;
+    /**
+     * An IAM role that allows the IoT service principal assumes to access your S3 files.
+     */
+    roleArn: RoleArn;
+  }
+  export interface CreateStreamResponse {
+    /**
+     * The stream ID.
+     */
+    streamId?: StreamId;
+    /**
+     * The stream ARN.
+     */
+    streamArn?: StreamArn;
+    /**
+     * A description of the stream.
+     */
+    description?: StreamDescription;
+    /**
+     * The version of the stream.
+     */
+    streamVersion?: StreamVersion;
   }
   export interface CreateThingGroupRequest {
     /**
@@ -1698,6 +1898,24 @@ declare namespace Iot {
   export type CreatedAtDate = Date;
   export type CreationDate = Date;
   export type CredentialDurationSeconds = number;
+  export interface CustomCodeSigning {
+    /**
+     * The signature for the file.
+     */
+    signature?: CodeSigningSignature;
+    /**
+     * The certificate chain.
+     */
+    certificateChain?: CodeSigningCertificateChain;
+    /**
+     * The hash algorithm used to code sign the file.
+     */
+    hashAlgorithm?: HashAlgorithm;
+    /**
+     * The signature algorithm used to code sign the file.
+     */
+    signatureAlgorithm?: SignatureAlgorithm;
+  }
   export type DateType = Date;
   export interface DeleteAuthorizerRequest {
     /**
@@ -1724,6 +1942,14 @@ declare namespace Iot {
      * Forces a certificate request to be deleted.
      */
     forceDelete?: ForceDelete;
+  }
+  export interface DeleteOTAUpdateRequest {
+    /**
+     * The OTA update ID to delete.
+     */
+    otaUpdateId: OTAUpdateId;
+  }
+  export interface DeleteOTAUpdateResponse {
   }
   export interface DeletePolicyRequest {
     /**
@@ -1752,6 +1978,14 @@ declare namespace Iot {
     roleAlias: RoleAlias;
   }
   export interface DeleteRoleAliasResponse {
+  }
+  export interface DeleteStreamRequest {
+    /**
+     * The stream ID.
+     */
+    streamId: StreamId;
+  }
+  export interface DeleteStreamResponse {
   }
   export interface DeleteThingGroupRequest {
     /**
@@ -1968,6 +2202,18 @@ declare namespace Iot {
      * The role alias description.
      */
     roleAliasDescription?: RoleAliasDescription;
+  }
+  export interface DescribeStreamRequest {
+    /**
+     * The stream ID.
+     */
+    streamId: StreamId;
+  }
+  export interface DescribeStreamResponse {
+    /**
+     * Information about the stream.
+     */
+    streamInfo?: StreamInfo;
   }
   export interface DescribeThingGroupRequest {
     /**
@@ -2268,6 +2514,16 @@ declare namespace Iot {
   export type Enabled = boolean;
   export type EndpointAddress = string;
   export type EndpointType = string;
+  export interface ErrorInfo {
+    /**
+     * The error code.
+     */
+    code?: Code;
+    /**
+     * The error message.
+     */
+    message?: OTAUpdateErrorMessage;
+  }
   export type ErrorMessage = string;
   export type EventConfigurations = {[key: string]: Configuration};
   export type EventType = "THING"|"THING_GROUP"|"THING_TYPE"|"THING_GROUP_MEMBERSHIP"|"THING_GROUP_HIERARCHY"|"THING_TYPE_ASSOCIATION"|"JOB"|"JOB_EXECUTION"|string;
@@ -2280,6 +2536,8 @@ declare namespace Iot {
     policies?: Policies;
   }
   export type FailedThings = number;
+  export type FileId = number;
+  export type FileName = string;
   export interface FirehoseAction {
     /**
      * The IAM role that grants access to the Amazon Kinesis Firehose stream.
@@ -2350,6 +2608,18 @@ declare namespace Iot {
      * The logging level.
      */
     logLevel?: LogLevel;
+  }
+  export interface GetOTAUpdateRequest {
+    /**
+     * The OTA update ID.
+     */
+    otaUpdateId: OTAUpdateId;
+  }
+  export interface GetOTAUpdateResponse {
+    /**
+     * The OTA update info.
+     */
+    otaUpdateInfo?: OTAUpdateInfo;
   }
   export interface GetPolicyRequest {
     /**
@@ -2457,6 +2727,7 @@ declare namespace Iot {
      */
     groupArn?: ThingGroupArn;
   }
+  export type HashAlgorithm = string;
   export type HashKeyField = string;
   export type HashKeyValue = string;
   export interface ImplicitDeny {
@@ -2470,6 +2741,7 @@ declare namespace Iot {
   export type IndexNamesList = IndexName[];
   export type IndexSchema = string;
   export type IndexStatus = "ACTIVE"|"BUILDING"|"REBUILDING"|string;
+  export type InlineDocument = string;
   export type IsAuthenticated = boolean;
   export type IsDefaultVersion = boolean;
   export type IsDisabled = boolean;
@@ -2979,6 +3251,30 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListOTAUpdatesRequest {
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+    /**
+     * A token used to retreive the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The OTA update job status.
+     */
+    otaUpdateStatus?: OTAUpdateStatus;
+  }
+  export interface ListOTAUpdatesResponse {
+    /**
+     * A list of OTA update jobs.
+     */
+    otaUpdates?: OTAUpdatesSummary;
+    /**
+     * A token to use to get the next set of results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListOutgoingCertificatesRequest {
     /**
      * The result page size.
@@ -3142,6 +3438,30 @@ declare namespace Iot {
      * A marker used to get the next set of results.
      */
     nextMarker?: Marker;
+  }
+  export interface ListStreamsRequest {
+    /**
+     * The maximum number of results to return at a time.
+     */
+    maxResults?: MaxResults;
+    /**
+     * A token used to get the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * Set to true to return the list of streams in ascending order.
+     */
+    ascendingOrder?: AscendingOrder;
+  }
+  export interface ListStreamsResponse {
+    /**
+     * A list of streams.
+     */
+    streams?: StreamsSummary;
+    /**
+     * A token used to get the next set of results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListTargetsForPolicyRequest {
     /**
@@ -3463,6 +3783,7 @@ declare namespace Iot {
   }
   export type Marker = string;
   export type MaxJobExecutionsPerMin = number;
+  export type MaxResults = number;
   export type Message = string;
   export type MessageFormat = "RAW"|"JSON"|string;
   export type MetricName = string;
@@ -3473,6 +3794,104 @@ declare namespace Iot {
   export type MissingContextValue = string;
   export type MissingContextValues = MissingContextValue[];
   export type NextToken = string;
+  export type OTAUpdateArn = string;
+  export type OTAUpdateDescription = string;
+  export type OTAUpdateErrorMessage = string;
+  export interface OTAUpdateFile {
+    /**
+     * The name of the file.
+     */
+    fileName?: FileName;
+    /**
+     * The file version.
+     */
+    fileVersion?: OTAUpdateFileVersion;
+    /**
+     * The source of the file.
+     */
+    fileSource?: Stream;
+    /**
+     * The code signing method of the file.
+     */
+    codeSigning?: CodeSigning;
+    /**
+     * A list of name/attribute pairs.
+     */
+    attributes?: AttributesMap;
+  }
+  export type OTAUpdateFileVersion = string;
+  export type OTAUpdateFiles = OTAUpdateFile[];
+  export type OTAUpdateId = string;
+  export interface OTAUpdateInfo {
+    /**
+     * The OTA update ID.
+     */
+    otaUpdateId?: OTAUpdateId;
+    /**
+     * The OTA update ARN.
+     */
+    otaUpdateArn?: OTAUpdateArn;
+    /**
+     * The date when the OTA update was created.
+     */
+    creationDate?: DateType;
+    /**
+     * The date when the OTA update was last updated.
+     */
+    lastModifiedDate?: DateType;
+    /**
+     * A description of the OTA update.
+     */
+    description?: OTAUpdateDescription;
+    /**
+     * The targets of the OTA update.
+     */
+    targets?: Targets;
+    /**
+     * Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. 
+     */
+    targetSelection?: TargetSelection;
+    /**
+     * A list of files associated with the OTA update.
+     */
+    otaUpdateFiles?: OTAUpdateFiles;
+    /**
+     * The status of the OTA update.
+     */
+    otaUpdateStatus?: OTAUpdateStatus;
+    /**
+     * The AWS IoT job ID associated with the OTA update.
+     */
+    awsIotJobId?: AwsIotJobId;
+    /**
+     * The AWS IoT job ARN associated with the OTA update.
+     */
+    awsIotJobArn?: AwsIotJobArn;
+    /**
+     * Error information associated with the OTA update.
+     */
+    errorInfo?: ErrorInfo;
+    /**
+     * A collection of name/value pairs
+     */
+    additionalParameters?: AdditionalParameterMap;
+  }
+  export type OTAUpdateStatus = "CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|string;
+  export interface OTAUpdateSummary {
+    /**
+     * The OTA update ID.
+     */
+    otaUpdateId?: OTAUpdateId;
+    /**
+     * The OTA update ARN.
+     */
+    otaUpdateArn?: OTAUpdateArn;
+    /**
+     * The date when the OTA update was created.
+     */
+    creationDate?: DateType;
+  }
+  export type OTAUpdatesSummary = OTAUpdateSummary[];
   export type OptionalVersion = number;
   export interface OutgoingCertificate {
     /**
@@ -3778,8 +4197,25 @@ declare namespace Iot {
      */
     cannedAcl?: CannedAccessControlList;
   }
+  export type S3Bucket = string;
   export type S3FileUrl = string;
   export type S3FileUrlList = S3FileUrl[];
+  export type S3Key = string;
+  export interface S3Location {
+    /**
+     * The S3 bucket that contains the file to stream.
+     */
+    bucket: S3Bucket;
+    /**
+     * The name of the file within the S3 bucket to stream.
+     */
+    key: S3Key;
+    /**
+     * The file version.
+     */
+    version?: S3Version;
+  }
+  export type S3Version = string;
   export type SQL = string;
   export interface SalesforceAction {
     /**
@@ -3886,6 +4322,9 @@ declare namespace Iot {
      */
     disableAllLogs?: DisableAllLogs;
   }
+  export type Signature = Buffer|Uint8Array|Blob|string;
+  export type SignatureAlgorithm = string;
+  export type SigningJobId = string;
   export type SkyfallMaxResults = number;
   export interface SnsAction {
     /**
@@ -3950,11 +4389,91 @@ declare namespace Iot {
   }
   export interface StopThingRegistrationTaskResponse {
   }
+  export interface Stream {
+    /**
+     * The stream ID.
+     */
+    streamId?: StreamId;
+    /**
+     * The ID of a file associated with a stream.
+     */
+    fileId?: FileId;
+  }
+  export type StreamArn = string;
+  export type StreamDescription = string;
+  export interface StreamFile {
+    /**
+     * The file ID.
+     */
+    fileId?: FileId;
+    /**
+     * The location of the file in S3.
+     */
+    s3Location?: S3Location;
+  }
+  export type StreamFiles = StreamFile[];
+  export type StreamId = string;
+  export interface StreamInfo {
+    /**
+     * The stream ID.
+     */
+    streamId?: StreamId;
+    /**
+     * The stream ARN.
+     */
+    streamArn?: StreamArn;
+    /**
+     * The stream version.
+     */
+    streamVersion?: StreamVersion;
+    /**
+     * The description of the stream.
+     */
+    description?: StreamDescription;
+    /**
+     * The files to stream.
+     */
+    files?: StreamFiles;
+    /**
+     * The date when the stream was created.
+     */
+    createdAt?: DateType;
+    /**
+     * The date when the stream was last updated.
+     */
+    lastUpdatedAt?: DateType;
+    /**
+     * An IAM role AWS IoT assumes to access your S3 files.
+     */
+    roleArn?: RoleArn;
+  }
   export type StreamName = string;
+  export interface StreamSummary {
+    /**
+     * The stream ID.
+     */
+    streamId?: StreamId;
+    /**
+     * The stream ARN.
+     */
+    streamArn?: StreamArn;
+    /**
+     * The stream version.
+     */
+    streamVersion?: StreamVersion;
+    /**
+     * A description of the stream.
+     */
+    description?: StreamDescription;
+  }
+  export type StreamVersion = number;
+  export type StreamsSummary = StreamSummary[];
   export type SucceededThings = number;
   export type TableName = string;
+  export type Target = string;
   export type TargetArn = string;
   export type TargetSelection = "CONTINUOUS"|"SNAPSHOT"|string;
+  export type Targets = Target[];
   export type TaskId = string;
   export type TaskIdList = TaskId[];
   export type TemplateBody = string;
@@ -4399,6 +4918,42 @@ declare namespace Iot {
      * The role alias ARN.
      */
     roleAliasArn?: RoleAliasArn;
+  }
+  export interface UpdateStreamRequest {
+    /**
+     * The stream ID.
+     */
+    streamId: StreamId;
+    /**
+     * The description of the stream.
+     */
+    description?: StreamDescription;
+    /**
+     * The files associated with the stream.
+     */
+    files?: StreamFiles;
+    /**
+     * An IAM role that allows the IoT service principal assumes to access your S3 files.
+     */
+    roleArn?: RoleArn;
+  }
+  export interface UpdateStreamResponse {
+    /**
+     * The stream ID.
+     */
+    streamId?: StreamId;
+    /**
+     * The stream ARN.
+     */
+    streamArn?: StreamArn;
+    /**
+     * A description of the stream.
+     */
+    description?: StreamDescription;
+    /**
+     * The stream version.
+     */
+    streamVersion?: StreamVersion;
   }
   export interface UpdateThingGroupRequest {
     /**

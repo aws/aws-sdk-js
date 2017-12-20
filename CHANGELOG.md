@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.172.0-->
+<!--LATEST=2.173.0-->
 <!--ENTRYINSERT-->
+
+## 2.173.0
+* feature: ConfigService: Update ResourceType enum with values for WAF, WAFRegional, and CloudFront resources
+* feature: Iot: This release adds support for code signed Over-the-air update functionality for Amazon FreeRTOS. Users can now create and schedule Over-the-air updates to their Amazon FreeRTOS devices using these new APIs. 
 
 ## 2.172.0
 * feature: APIGateway: API Gateway now adds support for calling API with compressed payloads using one of the supported content codings, tagging an API stage for cost allocation, and returning API keys from a custom authorizer for use with a usage plan.
