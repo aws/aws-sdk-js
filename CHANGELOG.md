@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.173.0-->
+<!--LATEST=2.174.0-->
 <!--ENTRYINSERT-->
+
+## 2.174.0
+* feature: CodeBuild: Adding support allowing AWS CodeBuild customers to select specific curated image versions.
+* feature: EC2: Elastic IP tagging enables you to add key and value metadata to your Elastic IPs so that you can search, filter, and organize them according to your organization's needs.
+* feature: KinesisAnalytics: Kinesis Analytics now supports AWS Lambda functions as output.
 
 ## 2.173.0
 * feature: ConfigService: Update ResourceType enum with values for WAF, WAFRegional, and CloudFront resources
