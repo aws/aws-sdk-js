@@ -88,7 +88,7 @@ Before you can begin using these TypeScript definitions with your project, you n
     ```
 
  * Your `tsconfig.json` or `jsconfig.json` includes `'dom'` and `'es2015.promise'` under `compilerOptions.lib`.
- See [tsconfig.json](./ts/tsconfig.json) for an example.
+ See [tsconfig.json](https://github.com/aws/aws-sdk-js/blob/master/ts/tsconfig.json) for an example.
 
 ### In the Browser
 To use the TypeScript definition files with the global `AWS` object in a front-end project, add the following line to the top of your JavaScript file:
