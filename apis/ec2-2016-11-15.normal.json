@@ -2847,7 +2847,7 @@
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>Any tags assigned to the Elastic IP address.</p>",
-          "locationName":"tags"
+          "locationName":"tagSet"
         }
       },
       "documentation":"<p>Describes an Elastic IP address.</p>"

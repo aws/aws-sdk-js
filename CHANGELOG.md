@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.174.0-->
+<!--LATEST=2.175.0-->
 <!--ENTRYINSERT-->
+
+## 2.175.0
+* feature: EC2: This release fixes an issue with tags not showing in DescribeAddresses responses.
+* feature: ECS: Amazon ECS users can now set a health check initialization wait period of their ECS services, the services that are associated with an Elastic Load Balancer (ELB) will wait for a period of time before the ELB become healthy. You can now configure this in Create and Update Service.
+* feature: Inspector: PreviewAgents API now returns additional fields within the AgentPreview data type. The API now shows the agent health and availability status for all instances included in the assessment target. This allows users to check the health status of Inspector Agents before running an assessment. In addition, it shows the instance ID, hostname, and IP address of the targeted instances.
+* feature: SageMaker: SageMaker Models no longer support SupplementalContainers.  API's that have been affected are CreateModel and DescribeModel.
 
 ## 2.174.0
 * feature: CodeBuild: Adding support allowing AWS CodeBuild customers to select specific curated image versions.
