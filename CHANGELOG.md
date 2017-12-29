@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.175.0-->
+<!--LATEST=2.176.0-->
 <!--ENTRYINSERT-->
+
+## 2.176.0
+* feature: WorkSpaces: Modify WorkSpaces have been updated with flexible storage and switching of hardware bundles feature. The following configurations have been added to ModifyWorkSpacesProperties: storage and compute. This update provides the capability to configure the storage of a WorkSpace. It also adds the capability of switching hardware bundle of a WorkSpace by specifying an eligible compute (Value, Standard, Performance, Power).
 
 ## 2.175.0
 * feature: EC2: This release fixes an issue with tags not showing in DescribeAddresses responses.

@@ -12,115 +12,115 @@ declare class WorkSpaces extends Service {
   constructor(options?: WorkSpaces.Types.ClientConfiguration)
   config: Config & WorkSpaces.Types.ClientConfiguration;
   /**
-   * Creates tags for a WorkSpace.
+   * Creates tags for the specified WorkSpace.
    */
   createTags(params: WorkSpaces.Types.CreateTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
-   * Creates tags for a WorkSpace.
+   * Creates tags for the specified WorkSpace.
    */
   createTags(callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
-   * Creates one or more WorkSpaces.  This operation is asynchronous and returns before the WorkSpaces are created. 
+   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(params: WorkSpaces.Types.CreateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
-   * Creates one or more WorkSpaces.  This operation is asynchronous and returns before the WorkSpaces are created. 
+   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
-   * Deletes tags from a WorkSpace.
+   * Deletes the specified tags from a WorkSpace.
    */
   deleteTags(params: WorkSpaces.Types.DeleteTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
-   * Deletes tags from a WorkSpace.
+   * Deletes the specified tags from a WorkSpace.
    */
   deleteTags(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
-   * Describes tags for a WorkSpace.
+   * Describes the tags for the specified WorkSpace.
    */
   describeTags(params: WorkSpaces.Types.DescribeTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
   /**
-   * Describes tags for a WorkSpace.
+   * Describes the tags for the specified WorkSpace.
    */
   describeTags(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
   /**
-   * Obtains information about the WorkSpace bundles that are available to your account in the specified region. You can filter the results with either the BundleIds parameter, or the Owner parameter, but not both. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the NextToken response member contains a token that you pass in the next call to this operation to retrieve the next set of items.
+   * Describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
    */
   describeWorkspaceBundles(params: WorkSpaces.Types.DescribeWorkspaceBundlesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceBundlesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceBundlesResult, AWSError>;
   /**
-   * Obtains information about the WorkSpace bundles that are available to your account in the specified region. You can filter the results with either the BundleIds parameter, or the Owner parameter, but not both. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the NextToken response member contains a token that you pass in the next call to this operation to retrieve the next set of items.
+   * Describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
    */
   describeWorkspaceBundles(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceBundlesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceBundlesResult, AWSError>;
   /**
-   * Retrieves information about the AWS Directory Service directories in the region that are registered with Amazon WorkSpaces and are available to your account. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the NextToken response member contains a token that you pass in the next call to this operation to retrieve the next set of items.
+   * Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.
    */
   describeWorkspaceDirectories(params: WorkSpaces.Types.DescribeWorkspaceDirectoriesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceDirectoriesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceDirectoriesResult, AWSError>;
   /**
-   * Retrieves information about the AWS Directory Service directories in the region that are registered with Amazon WorkSpaces and are available to your account. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the NextToken response member contains a token that you pass in the next call to this operation to retrieve the next set of items.
+   * Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.
    */
   describeWorkspaceDirectories(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceDirectoriesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceDirectoriesResult, AWSError>;
   /**
-   * Obtains information about the specified WorkSpaces. Only one of the filter parameters, such as BundleId, DirectoryId, or WorkspaceIds, can be specified at a time. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the NextToken response member contains a token that you pass in the next call to this operation to retrieve the next set of items.
+   * Describes the specified WorkSpaces. You can filter the results using bundle ID, directory ID, or owner, but you can specify only one filter at a time.
    */
   describeWorkspaces(params: WorkSpaces.Types.DescribeWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesResult, AWSError>;
   /**
-   * Obtains information about the specified WorkSpaces. Only one of the filter parameters, such as BundleId, DirectoryId, or WorkspaceIds, can be specified at a time. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the NextToken response member contains a token that you pass in the next call to this operation to retrieve the next set of items.
+   * Describes the specified WorkSpaces. You can filter the results using bundle ID, directory ID, or owner, but you can specify only one filter at a time.
    */
   describeWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesResult, AWSError>;
   /**
-   * Describes the connection status of a specified WorkSpace.
+   * Describes the connection status of the specified WorkSpaces.
    */
   describeWorkspacesConnectionStatus(params: WorkSpaces.Types.DescribeWorkspacesConnectionStatusRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
   /**
-   * Describes the connection status of a specified WorkSpace.
+   * Describes the connection status of the specified WorkSpaces.
    */
   describeWorkspacesConnectionStatus(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
   /**
-   * Modifies the WorkSpace properties, including the running mode and AutoStop time.
+   * Modifies the specified WorkSpace properties.
    */
   modifyWorkspaceProperties(params: WorkSpaces.Types.ModifyWorkspacePropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
   /**
-   * Modifies the WorkSpace properties, including the running mode and AutoStop time.
+   * Modifies the specified WorkSpace properties.
    */
   modifyWorkspaceProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
   /**
-   * Reboots the specified WorkSpaces. To be able to reboot a WorkSpace, the WorkSpace must have a State of AVAILABLE, IMPAIRED, or INOPERABLE.  This operation is asynchronous and returns before the WorkSpaces have rebooted. 
+   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE, IMPAIRED, or INOPERABLE. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
   rebootWorkspaces(params: WorkSpaces.Types.RebootWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
-   * Reboots the specified WorkSpaces. To be able to reboot a WorkSpace, the WorkSpace must have a State of AVAILABLE, IMPAIRED, or INOPERABLE.  This operation is asynchronous and returns before the WorkSpaces have rebooted. 
+   * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE, IMPAIRED, or INOPERABLE. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
   rebootWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
-   * Rebuilds the specified WorkSpaces. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. Rebuilding a WorkSpace causes the following to occur:   The system is restored to the image of the bundle that the WorkSpace is created from. Any applications that have been installed, or system settings that have been made since the WorkSpace was created will be lost.   The data drive (D drive) is re-created from the last automatic snapshot taken of the data drive. The current contents of the data drive are overwritten. Automatic snapshots of the data drive are taken every 12 hours, so the snapshot can be as much as 12 hours old.   To be able to rebuild a WorkSpace, the WorkSpace must have a State of AVAILABLE or ERROR.  This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt. 
+   * Rebuilds the specified WorkSpaces. You cannot rebuild a WorkSpace unless its state is AVAILABLE or ERROR. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
   rebuildWorkspaces(params: WorkSpaces.Types.RebuildWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
   /**
-   * Rebuilds the specified WorkSpaces. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. Rebuilding a WorkSpace causes the following to occur:   The system is restored to the image of the bundle that the WorkSpace is created from. Any applications that have been installed, or system settings that have been made since the WorkSpace was created will be lost.   The data drive (D drive) is re-created from the last automatic snapshot taken of the data drive. The current contents of the data drive are overwritten. Automatic snapshots of the data drive are taken every 12 hours, so the snapshot can be as much as 12 hours old.   To be able to rebuild a WorkSpace, the WorkSpace must have a State of AVAILABLE or ERROR.  This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt. 
+   * Rebuilds the specified WorkSpaces. You cannot rebuild a WorkSpace unless its state is AVAILABLE or ERROR. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
   rebuildWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
   /**
-   * Starts the specified WorkSpaces. The WorkSpaces must have a running mode of AutoStop and a state of STOPPED.
+   * Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a running mode of AutoStop and a state of STOPPED.
    */
   startWorkspaces(params: WorkSpaces.Types.StartWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesResult) => void): Request<WorkSpaces.Types.StartWorkspacesResult, AWSError>;
   /**
-   * Starts the specified WorkSpaces. The WorkSpaces must have a running mode of AutoStop and a state of STOPPED.
+   * Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a running mode of AutoStop and a state of STOPPED.
    */
   startWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesResult) => void): Request<WorkSpaces.Types.StartWorkspacesResult, AWSError>;
   /**
-   *  Stops the specified WorkSpaces. The WorkSpaces must have a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   *  Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
    */
   stopWorkspaces(params: WorkSpaces.Types.StopWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
   /**
-   *  Stops the specified WorkSpaces. The WorkSpaces must have a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+   *  Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
    */
   stopWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
   /**
-   * Terminates the specified WorkSpaces. Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is not maintained and will be destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace. You can terminate a WorkSpace that is in any state except SUSPENDED.  This operation is asynchronous and returns before the WorkSpaces have been completely terminated. 
+   * Terminates the specified WorkSpaces. Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace. You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated.
    */
   terminateWorkspaces(params: WorkSpaces.Types.TerminateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
   /**
-   * Terminates the specified WorkSpaces. Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is not maintained and will be destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace. You can terminate a WorkSpace that is in any state except SUSPENDED.  This operation is asynchronous and returns before the WorkSpaces have been completely terminated. 
+   * Terminates the specified WorkSpaces. Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace. You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated.
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
 }
@@ -132,10 +132,10 @@ declare namespace WorkSpaces {
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
-  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|string;
+  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|string;
   export interface ComputeType {
     /**
-     * The name of the compute type for the bundle.
+     * The compute type.
      */
     Name?: Compute;
   }
@@ -143,11 +143,11 @@ declare namespace WorkSpaces {
   export type ConnectionState = "CONNECTED"|"DISCONNECTED"|"UNKNOWN"|string;
   export interface CreateTagsRequest {
     /**
-     * The resource ID of the request.
+     * The ID of the resource.
      */
     ResourceId: NonEmptyString;
     /**
-     * The tags of the request.
+     * The tags. Each resource can have a maximum of 50 tags.
      */
     Tags: TagList;
   }
@@ -155,50 +155,50 @@ declare namespace WorkSpaces {
   }
   export interface CreateWorkspacesRequest {
     /**
-     * An array of structures that specify the WorkSpaces to create.
+     * Information about the WorkSpaces to create.
      */
     Workspaces: WorkspaceRequestList;
   }
   export interface CreateWorkspacesResult {
     /**
-     * An array of structures that represent the WorkSpaces that could not be created.
+     * Information about the WorkSpaces that could not be created.
      */
     FailedRequests?: FailedCreateWorkspaceRequests;
     /**
-     * An array of structures that represent the WorkSpaces that were created. Because this operation is asynchronous, the identifier in WorkspaceId is not immediately available. If you immediately call DescribeWorkspaces with this identifier, no information will be returned.
+     * Information about the WorkSpaces that were created. Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call DescribeWorkspaces before the WorkSpace is created, the information returned can be incomplete.
      */
     PendingRequests?: WorkspaceList;
   }
   export type DefaultOu = string;
   export interface DefaultWorkspaceCreationProperties {
     /**
-     * Specifies if the directory is enabled for Amazon WorkDocs.
+     * Indicates whether the directory is enabled for Amazon WorkDocs.
      */
     EnableWorkDocs?: BooleanObject;
     /**
-     * A public IP address will be attached to all WorkSpaces that are created or rebuilt.
+     * The public IP address to attach to all WorkSpaces that are created or rebuilt.
      */
     EnableInternetAccess?: BooleanObject;
     /**
-     * The organizational unit (OU) in the directory that the WorkSpace machine accounts are placed in.
+     * The organizational unit (OU) in the directory for the WorkSpace machine accounts.
      */
     DefaultOu?: DefaultOu;
     /**
-     * The identifier of any custom security groups that are applied to the WorkSpaces when they are created.
+     * The identifier of any security groups to apply to WorkSpaces when they are created.
      */
     CustomSecurityGroupId?: SecurityGroupId;
     /**
-     * The WorkSpace user is an administrator on the WorkSpace.
+     * Indicates whether the WorkSpace user is an administrator on the WorkSpace.
      */
     UserEnabledAsLocalAdministrator?: BooleanObject;
   }
   export interface DeleteTagsRequest {
     /**
-     * The resource ID of the request.
+     * The ID of the resource.
      */
     ResourceId: NonEmptyString;
     /**
-     * The tag keys of the request.
+     * The tag keys.
      */
     TagKeys: TagKeyList;
   }
@@ -206,95 +206,95 @@ declare namespace WorkSpaces {
   }
   export interface DescribeTagsRequest {
     /**
-     * The resource ID of the request.
+     * The ID of the resource.
      */
     ResourceId: NonEmptyString;
   }
   export interface DescribeTagsResult {
     /**
-     * The list of tags.
+     * The tags.
      */
     TagList?: TagList;
   }
   export interface DescribeWorkspaceBundlesRequest {
     /**
-     * An array of strings that contains the identifiers of the bundles to retrieve. This parameter cannot be combined with any other filter parameter.
+     * The IDs of the bundles. This parameter cannot be combined with any other filter.
      */
     BundleIds?: BundleIdList;
     /**
-     * The owner of the bundles to retrieve. This parameter cannot be combined with any other filter parameter. This contains one of the following values:   null- Retrieves the bundles that belong to the account making the call.    AMAZON- Retrieves the bundles that are provided by AWS.  
+     * The owner of the bundles. This parameter cannot be combined with any other filter. Specify AMAZON to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
      */
     Owner?: BundleOwner;
     /**
-     * The NextToken value from a previous call to this operation. Pass null if this is the first call.
+     * The token for the next set of results. (You received this token from a previous call.)
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeWorkspaceBundlesResult {
     /**
-     * An array of structures that contain information about the bundles.
+     * Information about the bundles.
      */
     Bundles?: BundleList;
     /**
-     * If not null, more results are available. Pass this value for the NextToken parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that time frame.
+     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeWorkspaceDirectoriesRequest {
     /**
-     * An array of strings that contains the directory identifiers to retrieve information for. If this member is null, all directories are retrieved.
+     * The identifiers of the directories. If the value is null, all directories are retrieved.
      */
     DirectoryIds?: DirectoryIdList;
     /**
-     * The NextToken value from a previous call to this operation. Pass null if this is the first call.
+     * The token for the next set of results. (You received this token from a previous call.)
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeWorkspaceDirectoriesResult {
     /**
-     * An array of structures that contain information about the directories.
+     * Information about the directories.
      */
     Directories?: DirectoryList;
     /**
-     * If not null, more results are available. Pass this value for the NextToken parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that time frame.
+     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeWorkspacesConnectionStatusRequest {
     /**
-     * An array of strings that contain the identifiers of the WorkSpaces.
+     * The identifiers of the WorkSpaces.
      */
     WorkspaceIds?: WorkspaceIdList;
     /**
-     * The next token of the request.
+     * The token for the next set of results. (You received this token from a previous call.)
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeWorkspacesConnectionStatusResult {
     /**
-     * The connection status of the WorkSpace.
+     * Information about the connection status of the WorkSpace.
      */
     WorkspacesConnectionStatus?: WorkspaceConnectionStatusList;
     /**
-     * The next token of the result.
+     * The token to use to retrieve the next set of results, or null if there are no more results available.
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeWorkspacesRequest {
     /**
-     * An array of strings that contain the identifiers of the WorkSpaces for which to retrieve information. This parameter cannot be combined with any other filter parameter. Because the CreateWorkspaces operation is asynchronous, the identifier it returns is not immediately available. If you immediately call DescribeWorkspaces with this identifier, no information is returned.
+     * The IDs of the WorkSpaces. This parameter cannot be combined with any other filter. Because the CreateWorkspaces operation is asynchronous, the identifier it returns is not immediately available. If you immediately call DescribeWorkspaces with this identifier, no information is returned.
      */
     WorkspaceIds?: WorkspaceIdList;
     /**
-     * Specifies the directory identifier to which to limit the WorkSpaces. Optionally, you can specify a specific directory user with the UserName parameter. This parameter cannot be combined with any other filter parameter.
+     * The ID of the directory. In addition, you can optionally specify a specific directory user (see UserName). This parameter cannot be combined with any other filter.
      */
     DirectoryId?: DirectoryId;
     /**
-     * Used with the DirectoryId parameter to specify the directory user for whom to obtain the WorkSpace.
+     * The name of the directory user. You must specify this parameter with DirectoryId.
      */
     UserName?: UserName;
     /**
-     * The identifier of a bundle to obtain the WorkSpaces for. All WorkSpaces that are created from this bundle will be retrieved. This parameter cannot be combined with any other filter parameter.
+     * The ID of the bundle. All WorkSpaces that are created from this bundle are retrieved. This parameter cannot be combined with any other filter.
      */
     BundleId?: BundleId;
     /**
@@ -302,17 +302,17 @@ declare namespace WorkSpaces {
      */
     Limit?: Limit;
     /**
-     * The NextToken value from a previous call to this operation. Pass null if this is the first call.
+     * The token for the next set of results. (You received this token from a previous call.)
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeWorkspacesResult {
     /**
-     * An array of structures that contain the information about the WorkSpaces. Because the CreateWorkspaces operation is asynchronous, some of this information may be incomplete for a newly-created WorkSpace.
+     * Information about the WorkSpaces. Because CreateWorkspaces is an asynchronous operation, some of the returned information could be incomplete.
      */
     Workspaces?: WorkspaceList;
     /**
-     * If not null, more results are available. Pass this value for the NextToken parameter in a subsequent call to this operation to retrieve the next set of items. This token is valid for one day and must be used within that time frame.
+     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
      */
     NextToken?: PaginationToken;
   }
@@ -326,7 +326,7 @@ declare namespace WorkSpaces {
   export type ExceptionMessage = string;
   export interface FailedCreateWorkspaceRequest {
     /**
-     * A FailedCreateWorkspaceRequest$WorkspaceRequest object that contains the information about the WorkSpace that could not be created.
+     * Information about the WorkSpace.
      */
     WorkspaceRequest?: WorkspaceRequest;
     /**
@@ -360,13 +360,26 @@ declare namespace WorkSpaces {
   }
   export type IpAddress = string;
   export type Limit = number;
+  export type ModificationResourceEnum = "ROOT_VOLUME"|"USER_VOLUME"|"COMPUTE_TYPE"|string;
+  export interface ModificationState {
+    /**
+     * The resource.
+     */
+    Resource?: ModificationResourceEnum;
+    /**
+     * The modification state.
+     */
+    State?: ModificationStateEnum;
+  }
+  export type ModificationStateEnum = "UPDATE_INITIATED"|"UPDATE_IN_PROGRESS"|string;
+  export type ModificationStateList = ModificationState[];
   export interface ModifyWorkspacePropertiesRequest {
     /**
      * The ID of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
     /**
-     * The WorkSpace properties of the request.
+     * The properties of the WorkSpace.
      */
     WorkspaceProperties: WorkspaceProperties;
   }
@@ -376,43 +389,50 @@ declare namespace WorkSpaces {
   export type PaginationToken = string;
   export interface RebootRequest {
     /**
-     * The identifier of the WorkSpace to reboot.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
   }
   export type RebootWorkspaceRequests = RebootRequest[];
   export interface RebootWorkspacesRequest {
     /**
-     * An array of structures that specify the WorkSpaces to reboot.
+     * The WorkSpaces to reboot.
      */
     RebootWorkspaceRequests: RebootWorkspaceRequests;
   }
   export interface RebootWorkspacesResult {
     /**
-     * An array of structures representing any WorkSpaces that could not be rebooted.
+     * Information about the WorkSpaces that could not be rebooted.
      */
     FailedRequests?: FailedRebootWorkspaceRequests;
   }
   export interface RebuildRequest {
     /**
-     * The identifier of the WorkSpace to rebuild.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
   }
   export type RebuildWorkspaceRequests = RebuildRequest[];
   export interface RebuildWorkspacesRequest {
     /**
-     * An array of structures that specify the WorkSpaces to rebuild.
+     * The WorkSpaces to rebuild.
      */
     RebuildWorkspaceRequests: RebuildWorkspaceRequests;
   }
   export interface RebuildWorkspacesResult {
     /**
-     * An array of structures representing any WorkSpaces that could not be rebuilt.
+     * Information about the WorkSpaces that could not be rebuilt.
      */
     FailedRequests?: FailedRebuildWorkspaceRequests;
   }
   export type RegistrationCode = string;
+  export interface RootStorage {
+    /**
+     * The size of the root volume.
+     */
+    Capacity?: NonEmptyString;
+  }
+  export type RootVolumeSizeGib = number;
   export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|string;
   export type RunningModeAutoStopTimeoutInMinutes = number;
   export type SecurityGroupId = string;
@@ -425,13 +445,13 @@ declare namespace WorkSpaces {
   export type StartWorkspaceRequests = StartRequest[];
   export interface StartWorkspacesRequest {
     /**
-     * The requests.
+     * The WorkSpaces to start.
      */
     StartWorkspaceRequests: StartWorkspaceRequests;
   }
   export interface StartWorkspacesResult {
     /**
-     * The failed requests.
+     * Information about the WorkSpaces that could not be started.
      */
     FailedRequests?: FailedStartWorkspaceRequests;
   }
@@ -444,13 +464,13 @@ declare namespace WorkSpaces {
   export type StopWorkspaceRequests = StopRequest[];
   export interface StopWorkspacesRequest {
     /**
-     * The requests.
+     * The WorkSpaces to stop.
      */
     StopWorkspaceRequests: StopWorkspaceRequests;
   }
   export interface StopWorkspacesResult {
     /**
-     * The failed requests.
+     * Information about the WorkSpaces that could not be stopped.
      */
     FailedRequests?: FailedStopWorkspaceRequests;
   }
@@ -472,20 +492,20 @@ declare namespace WorkSpaces {
   export type TagValue = string;
   export interface TerminateRequest {
     /**
-     * The identifier of the WorkSpace to terminate.
+     * The identifier of the WorkSpace.
      */
     WorkspaceId: WorkspaceId;
   }
   export type TerminateWorkspaceRequests = TerminateRequest[];
   export interface TerminateWorkspacesRequest {
     /**
-     * An array of structures that specify the WorkSpaces to terminate.
+     * The WorkSpaces to terminate.
      */
     TerminateWorkspaceRequests: TerminateWorkspaceRequests;
   }
   export interface TerminateWorkspacesResult {
     /**
-     * An array of structures representing any WorkSpaces that could not be terminated.
+     * Information about the WorkSpaces that could not be terminated.
      */
     FailedRequests?: FailedTerminateWorkspaceRequests;
   }
@@ -493,10 +513,11 @@ declare namespace WorkSpaces {
   export type UserName = string;
   export interface UserStorage {
     /**
-     * The amount of user storage for the bundle.
+     * The size of the user storage.
      */
     Capacity?: NonEmptyString;
   }
+  export type UserVolumeSizeGib = number;
   export type VolumeEncryptionKey = string;
   export interface Workspace {
     /**
@@ -504,11 +525,11 @@ declare namespace WorkSpaces {
      */
     WorkspaceId?: WorkspaceId;
     /**
-     * The identifier of the AWS Directory Service directory that the WorkSpace belongs to.
+     * The identifier of the AWS Directory Service directory for the WorkSpace.
      */
     DirectoryId?: DirectoryId;
     /**
-     * The user that the WorkSpace is assigned to.
+     * The user for the WorkSpace.
      */
     UserName?: UserName;
     /**
@@ -520,23 +541,23 @@ declare namespace WorkSpaces {
      */
     State?: WorkspaceState;
     /**
-     * The identifier of the bundle that the WorkSpace was created from.
+     * The identifier of the bundle used to create the WorkSpace.
      */
     BundleId?: BundleId;
     /**
-     * The identifier of the subnet that the WorkSpace is in.
+     * The identifier of the subnet for the WorkSpace.
      */
     SubnetId?: SubnetId;
     /**
-     * If the WorkSpace could not be created, this contains a textual error message that describes the failure.
+     * If the WorkSpace could not be created, contains a textual error message that describes the failure.
      */
     ErrorMessage?: Description;
     /**
-     * If the WorkSpace could not be created, this contains the error code.
+     * If the WorkSpace could not be created, contains the error code.
      */
     ErrorCode?: WorkspaceErrorCode;
     /**
-     * The name of the WorkSpace as seen by the operating system.
+     * The name of the WorkSpace, as seen by the operating system.
      */
     ComputerName?: ComputerName;
     /**
@@ -544,14 +565,21 @@ declare namespace WorkSpaces {
      */
     VolumeEncryptionKey?: VolumeEncryptionKey;
     /**
-     * Specifies whether the data stored on the user volume, or D: drive, is encrypted.
+     * Indicates whether the data stored on the user volume is encrypted.
      */
     UserVolumeEncryptionEnabled?: BooleanObject;
     /**
-     * Specifies whether the data stored on the root volume, or C: drive, is encrypted.
+     * Indicates whether the data stored on the root volume is encrypted.
      */
     RootVolumeEncryptionEnabled?: BooleanObject;
+    /**
+     * The properties of the WorkSpace.
+     */
     WorkspaceProperties?: WorkspaceProperties;
+    /**
+     * The modification states of the WorkSpace.
+     */
+    ModificationStates?: ModificationStateList;
   }
   export interface WorkspaceBundle {
     /**
@@ -563,19 +591,23 @@ declare namespace WorkSpaces {
      */
     Name?: NonEmptyString;
     /**
-     * The owner of the bundle. This contains the owner's account identifier, or AMAZON if the bundle is provided by AWS.
+     * The owner of the bundle. This is the account identifier of the owner, or AMAZON if the bundle is provided by AWS.
      */
     Owner?: BundleOwner;
     /**
-     * The bundle description.
+     * A description.
      */
     Description?: Description;
     /**
-     * A UserStorage object that specifies the amount of user storage that the bundle contains.
+     * The size of the root volume.
+     */
+    RootStorage?: RootStorage;
+    /**
+     * The size of the user storage.
      */
     UserStorage?: UserStorage;
     /**
-     * A ComputeType object that specifies the compute type for the bundle.
+     * The compute type. For more information, see Amazon WorkSpaces Bundles.
      */
     ComputeType?: ComputeType;
   }
@@ -585,7 +617,7 @@ declare namespace WorkSpaces {
      */
     WorkspaceId?: WorkspaceId;
     /**
-     * The connection state of the WorkSpace. Returns UNKOWN if the WorkSpace is in a Stopped state.
+     * The connection state of the WorkSpace. The connection state is unknown if the WorkSpace is stopped.
      */
     ConnectionState?: ConnectionState;
     /**
@@ -616,11 +648,11 @@ declare namespace WorkSpaces {
      */
     RegistrationCode?: RegistrationCode;
     /**
-     * An array of strings that contains the identifiers of the subnets used with the directory.
+     * The identifiers of the subnets used with the directory.
      */
     SubnetIds?: SubnetIds;
     /**
-     * An array of strings that contains the IP addresses of the DNS servers for the directory.
+     * The IP addresses of the DNS servers for the directory.
      */
     DnsIpAddresses?: DnsIpAddresses;
     /**
@@ -644,7 +676,7 @@ declare namespace WorkSpaces {
      */
     State?: WorkspaceDirectoryState;
     /**
-     * A structure that specifies the default creation properties for all WorkSpaces in the directory.
+     * The default creation properties for all WorkSpaces in the directory.
      */
     WorkspaceCreationProperties?: DefaultWorkspaceCreationProperties;
   }
@@ -656,25 +688,37 @@ declare namespace WorkSpaces {
   export type WorkspaceList = Workspace[];
   export interface WorkspaceProperties {
     /**
-     * The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed monthly. AutoStop WorkSpaces are billed by the hour and stopped when no longer being used in order to save on costs.
+     * The running mode. For more information, see Manage the WorkSpace Running Mode.
      */
     RunningMode?: RunningMode;
     /**
      * The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60 minute intervals.
      */
     RunningModeAutoStopTimeoutInMinutes?: RunningModeAutoStopTimeoutInMinutes;
+    /**
+     * The size of the root volume.
+     */
+    RootVolumeSizeGib?: RootVolumeSizeGib;
+    /**
+     * The size of the user storage.
+     */
+    UserVolumeSizeGib?: UserVolumeSizeGib;
+    /**
+     * The compute type. For more information, see Amazon WorkSpaces Bundles.
+     */
+    ComputeTypeName?: Compute;
   }
   export interface WorkspaceRequest {
     /**
-     * The identifier of the AWS Directory Service directory to create the WorkSpace in. You can use the DescribeWorkspaceDirectories operation to obtain a list of the directories that are available.
+     * The identifier of the AWS Directory Service directory for the WorkSpace. You can use DescribeWorkspaceDirectories to list the available directories.
      */
     DirectoryId: DirectoryId;
     /**
-     * The username that the WorkSpace is assigned to. This username must exist in the AWS Directory Service directory specified by the DirectoryId member.
+     * The username of the user for the WorkSpace. This username must exist in the AWS Directory Service directory for the WorkSpace.
      */
     UserName: UserName;
     /**
-     * The identifier of the bundle to create the WorkSpace from. You can use the DescribeWorkspaceBundles operation to obtain a list of the bundles that are available.
+     * The identifier of the bundle for the WorkSpace. You can use DescribeWorkspaceBundles to list the available bundles.
      */
     BundleId: BundleId;
     /**
@@ -682,21 +726,24 @@ declare namespace WorkSpaces {
      */
     VolumeEncryptionKey?: VolumeEncryptionKey;
     /**
-     * Specifies whether the data stored on the user volume, or D: drive, is encrypted.
+     * Indicates whether the data stored on the user volume is encrypted.
      */
     UserVolumeEncryptionEnabled?: BooleanObject;
     /**
-     * Specifies whether the data stored on the root volume, or C: drive, is encrypted.
+     * Indicates whether the data stored on the root volume is encrypted.
      */
     RootVolumeEncryptionEnabled?: BooleanObject;
+    /**
+     * The WorkSpace properties.
+     */
     WorkspaceProperties?: WorkspaceProperties;
     /**
-     * The tags of the WorkSpace request.
+     * The tags for the WorkSpace.
      */
     Tags?: TagList;
   }
   export type WorkspaceRequestList = WorkspaceRequest[];
-  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"STOPPING"|"STOPPED"|"ERROR"|string;
+  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
