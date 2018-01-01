@@ -13,7 +13,7 @@ For release notes, see the [CHANGELOG](CHANGELOG.md). Prior to v2.4.8, release n
 
 <p class="note">
 If you are upgrading from 1.x to 2.0 of the SDK, please see
-the {file:UPGRADING.md} notes for information on how to migrate existing code
+the [UPGRADING](UPGRADING.md) notes for information on how to migrate existing code
 to work with the new major version.
 </p>
 
