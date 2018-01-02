@@ -9,12 +9,13 @@
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
 or Node.js backends
 
-For release notes, see the [CHANGELOG](CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
+For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
 <p class="note">
-If you are upgrading from 1.x to 2.0 of the SDK, please see
-the {file:UPGRADING.md} notes for information on how to migrate existing code
-to work with the new major version.
+If you are upgrading from 1.x to 2.0 of the SDK, please see the
+[upgrading](https://github.com/aws/aws-sdk-js/blob/master/UPGRADING.md) notes
+for information on how to migrate existing code to work with the new major
+version.
 </p>
 
 ## Installing
@@ -88,7 +89,7 @@ Before you can begin using these TypeScript definitions with your project, you n
     ```
 
  * Your `tsconfig.json` or `jsconfig.json` includes `'dom'` and `'es2015.promise'` under `compilerOptions.lib`.
- See [tsconfig.json](./ts/tsconfig.json) for an example.
+ See [tsconfig.json](https://github.com/aws/aws-sdk-js/blob/master/ts/tsconfig.json) for an example.
 
 ### In the Browser
 To use the TypeScript definition files with the global `AWS` object in a front-end project, add the following line to the top of your JavaScript file:
@@ -162,7 +163,7 @@ keeping the list of open issues lean we can respond in a timely manner.
 
 ## Supported Services
 
-Please see [SERVICES.md](./SERVICES.md) for a list of supported services.
+Please see [SERVICES.md](https://github.com/aws/aws-sdk-js/blob/master/SERVICES.md) for a list of supported services.
 
 ## License
 
