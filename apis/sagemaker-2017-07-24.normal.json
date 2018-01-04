@@ -60,7 +60,7 @@
       "errors":[
         {"shape":"ResourceLimitExceeded"}
       ],
-      "documentation":"<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe one or more containers. For each container, you specify the docker image containing inference code, artifacts (from prior training), and custom environment map that the inference code uses when you deploy the model into production. </p> <p>Use this API to create a model only if you want to use Amazon SageMaker hosting services. To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. </p> <p>Amazon SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>In the <code>CreateModel</code> request, you must define at least one container with the <code>PrimaryContainer</code> parameter. You can optionally specify additional containers with the <code>SupplementalContainers</code> parameter. </p> <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other AWS resources, you grant necessary permissions via this role.</p>"
+      "documentation":"<p>Creates a model in Amazon SageMaker. In the request, you name the model and describe one or more containers. For each container, you specify the docker image containing inference code, artifacts (from prior training), and custom environment map that the inference code uses when you deploy the model into production. </p> <p>Use this API to create a model only if you want to use Amazon SageMaker hosting services. To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. </p> <p>Amazon SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>In the <code>CreateModel</code> request, you must define a container with the <code>PrimaryContainer</code> parameter. </p> <p>In the request, you also provide an IAM role that Amazon SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other AWS resources, you grant necessary permissions via this role.</p>"
     },
     "CreateNotebookInstance":{
       "name":"CreateNotebookInstance",
@@ -268,7 +268,7 @@
       "errors":[
         {"shape":"ResourceLimitExceeded"}
       ],
-      "documentation":"<p>Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to <code>InService</code>. A notebook instance's status must be <code>InService</code> (is this same as \"Running\" in the console?) before you can connect to your Jupyter notebook. </p>"
+      "documentation":"<p>Launches an ML compute instance with the latest version of the libraries and attaches your ML storage volume. After configuring the notebook instance, Amazon SageMaker sets the notebook instance status to <code>InService</code>. A notebook instance's status must be <code>InService</code> before you can connect to your Jupyter notebook. </p>"
     },
     "StopNotebookInstance":{
       "name":"StopNotebookInstance",
@@ -446,11 +446,6 @@
       },
       "documentation":"<p>Describes the container, as part of model definition.</p>"
     },
-    "ContainerDefinitionList":{
-      "type":"list",
-      "member":{"shape":"ContainerDefinition"},
-      "max":5
-    },
     "ContainerHostname":{
       "type":"string",
       "max":63,
@@ -537,10 +532,6 @@
         "PrimaryContainer":{
           "shape":"ContainerDefinition",
           "documentation":"<p>The location of the primary docker image containing inference code, associated artifacts, and custom environment map that the inference code uses when the model is deployed into production. </p>"
-        },
-        "SupplementalContainers":{
-          "shape":"ContainerDefinitionList",
-          "documentation":"<p>The additional optional containers to deploy.</p>"
         },
         "ExecutionRoleArn":{
           "shape":"RoleArn",
@@ -873,7 +864,6 @@
       "required":[
         "ModelName",
         "PrimaryContainer",
-        "SupplementalContainers",
         "ExecutionRoleArn",
         "CreationTime",
         "ModelArn"
@@ -886,10 +876,6 @@
         "PrimaryContainer":{
           "shape":"ContainerDefinition",
           "documentation":"<p>The location of the primary inference code, associated artifacts, and custom environment map that the inference code uses when it is deployed in production. </p>"
-        },
-        "SupplementalContainers":{
-          "shape":"ContainerDefinitionList",
-          "documentation":"<p>The description of additional optional containers that you defined when creating the model.</p>"
         },
         "ExecutionRoleArn":{
           "shape":"RoleArn",

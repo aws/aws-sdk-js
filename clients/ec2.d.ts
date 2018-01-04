@@ -1940,11 +1940,11 @@ declare class EC2 extends Service {
    */
   replaceIamInstanceProfileAssociation(callback?: (err: AWSError, data: EC2.Types.ReplaceIamInstanceProfileAssociationResult) => void): Request<EC2.Types.ReplaceIamInstanceProfileAssociationResult, AWSError>;
   /**
-   * Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
+   * Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide. This is an idempotent operation.
    */
   replaceNetworkAclAssociation(params: EC2.Types.ReplaceNetworkAclAssociationRequest, callback?: (err: AWSError, data: EC2.Types.ReplaceNetworkAclAssociationResult) => void): Request<EC2.Types.ReplaceNetworkAclAssociationResult, AWSError>;
   /**
-   * Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide.
+   * Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, see Network ACLs in the Amazon Virtual Private Cloud User Guide. This is an idempotent operation.
    */
   replaceNetworkAclAssociation(callback?: (err: AWSError, data: EC2.Types.ReplaceNetworkAclAssociationResult) => void): Request<EC2.Types.ReplaceNetworkAclAssociationResult, AWSError>;
   /**
@@ -2518,6 +2518,10 @@ declare namespace EC2 {
      * The private IP address associated with the Elastic IP address.
      */
     PrivateIpAddress?: String;
+    /**
+     * Any tags assigned to the Elastic IP address.
+     */
+    Tags?: TagList;
   }
   export type AddressList = Address[];
   export type Affinity = "default"|"host"|string;
@@ -6899,7 +6903,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    customer-account-id - The AWS account number of the owner of the endpoint.    endpoint-connection-state - The state of the endpoint (PendingAcceptance | Pending | Available | Deleting | Deleted | Rejected | Failed).    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-service-id - The ID of the service.  
+     * One or more filters.    service-id - The ID of the service.    vpc-endpoint-owner - The AWS account number of the owner of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
      */
     Filters?: FilterList;
     /**
@@ -6931,7 +6935,7 @@ declare namespace EC2 {
      */
     ServiceIds?: ValueStringList;
     /**
-     * One or more filters.    service-name - The ARN of the service.    vpc-endpoint-service-id - The ID of the service.    vpc-endpoint-service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).   
+     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).   
      */
     Filters?: FilterList;
     /**
@@ -9501,7 +9505,7 @@ declare namespace EC2 {
      */
     Ipv6Ranges?: Ipv6RangeList;
     /**
-     * (Valid for AuthorizeSecurityGroupEgress, RevokeSecurityGroupEgress and DescribeSecurityGroups only) One or more prefix list IDs for an AWS service. In an AuthorizeSecurityGroupEgress request, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.
+     * (EC2-VPC only; valid for AuthorizeSecurityGroupEgress, RevokeSecurityGroupEgress and DescribeSecurityGroups only) One or more prefix list IDs for an AWS service. In an AuthorizeSecurityGroupEgress request, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.
      */
     PrefixListIds?: PrefixListIdList;
     /**

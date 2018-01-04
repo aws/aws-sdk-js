@@ -240,6 +240,25 @@
       ],
       "documentation":"<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p> <b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>"
     },
+    "CreateOTAUpdate":{
+      "name":"CreateOTAUpdate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/otaUpdates/{otaUpdateId}"
+      },
+      "input":{"shape":"CreateOTAUpdateRequest"},
+      "output":{"shape":"CreateOTAUpdateResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Creates an AWS IoT OTAUpdate on a target group of things or groups.</p>"
+    },
     "CreatePolicy":{
       "name":"CreatePolicy",
       "http":{
@@ -297,6 +316,25 @@
         {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Creates a role alias.</p>"
+    },
+    "CreateStream":{
+      "name":"CreateStream",
+      "http":{
+        "method":"POST",
+        "requestUri":"/streams/{streamId}"
+      },
+      "input":{"shape":"CreateStreamRequest"},
+      "output":{"shape":"CreateStreamResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.</p>"
     },
     "CreateThing":{
       "name":"CreateThing",
@@ -424,6 +462,24 @@
       ],
       "documentation":"<p>Deletes the specified certificate.</p> <p>A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the <a>DetachPrincipalPolicy</a> API to detach all policies. Next, use the <a>UpdateCertificate</a> API to set the certificate to the INACTIVE status.</p>"
     },
+    "DeleteOTAUpdate":{
+      "name":"DeleteOTAUpdate",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/otaUpdates/{otaUpdateId}"
+      },
+      "input":{"shape":"DeleteOTAUpdateRequest"},
+      "output":{"shape":"DeleteOTAUpdateResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Delete an OTA update.</p>"
+    },
     "DeletePolicy":{
       "name":"DeletePolicy",
       "http":{
@@ -495,6 +551,25 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Deletes a role alias</p>"
+    },
+    "DeleteStream":{
+      "name":"DeleteStream",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/streams/{streamId}"
+      },
+      "input":{"shape":"DeleteStreamRequest"},
+      "output":{"shape":"DeleteStreamResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"DeleteConflictException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Deletes a stream.</p>"
     },
     "DeleteThing":{
       "name":"DeleteThing",
@@ -766,6 +841,24 @@
       ],
       "documentation":"<p>Describes a role alias.</p>"
     },
+    "DescribeStream":{
+      "name":"DescribeStream",
+      "http":{
+        "method":"GET",
+        "requestUri":"/streams/{streamId}"
+      },
+      "input":{"shape":"DescribeStreamRequest"},
+      "output":{"shape":"DescribeStreamResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Gets information about a stream.</p>"
+    },
     "DescribeThing":{
       "name":"DescribeThing",
       "http":{
@@ -984,6 +1077,24 @@
         {"shape":"ServiceUnavailableException"}
       ],
       "documentation":"<p>Gets the logging options.</p>"
+    },
+    "GetOTAUpdate":{
+      "name":"GetOTAUpdate",
+      "http":{
+        "method":"GET",
+        "requestUri":"/otaUpdates/{otaUpdateId}"
+      },
+      "input":{"shape":"GetOTAUpdateRequest"},
+      "output":{"shape":"GetOTAUpdateResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Gets an OTA update.</p>"
     },
     "GetPolicy":{
       "name":"GetPolicy",
@@ -1221,6 +1332,23 @@
       ],
       "documentation":"<p>Lists jobs.</p>"
     },
+    "ListOTAUpdates":{
+      "name":"ListOTAUpdates",
+      "http":{
+        "method":"GET",
+        "requestUri":"/otaUpdates"
+      },
+      "input":{"shape":"ListOTAUpdatesRequest"},
+      "output":{"shape":"ListOTAUpdatesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Lists OTA updates.</p>"
+    },
     "ListOutgoingCertificates":{
       "name":"ListOutgoingCertificates",
       "http":{
@@ -1345,6 +1473,23 @@
         {"shape":"InternalFailureException"}
       ],
       "documentation":"<p>Lists the role aliases registered in your account.</p>"
+    },
+    "ListStreams":{
+      "name":"ListStreams",
+      "http":{
+        "method":"GET",
+        "requestUri":"/streams"
+      },
+      "input":{"shape":"ListStreamsRequest"},
+      "output":{"shape":"ListStreamsResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Lists all of the streams in your AWS account.</p>"
     },
     "ListTargetsForPolicy":{
       "name":"ListTargetsForPolicy",
@@ -1929,6 +2074,24 @@
       ],
       "documentation":"<p>Updates a role alias.</p>"
     },
+    "UpdateStream":{
+      "name":"UpdateStream",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/streams/{streamId}"
+      },
+      "input":{"shape":"UpdateStreamRequest"},
+      "output":{"shape":"UpdateStreamResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "documentation":"<p>Updates an existing stream. The stream version will be incremented by one.</p>"
+    },
     "UpdateThing":{
       "name":"UpdateThing",
       "http":{
@@ -2101,6 +2264,11 @@
       "members":{
       }
     },
+    "AdditionalParameterMap":{
+      "type":"map",
+      "key":{"shape":"Key"},
+      "value":{"shape":"Value"}
+    },
     "AlarmName":{"type":"string"},
     "AllowAutoRegistration":{"type":"boolean"},
     "Allowed":{
@@ -2252,6 +2420,11 @@
       "key":{"shape":"AttributeName"},
       "value":{"shape":"AttributeValue"}
     },
+    "AttributesMap":{
+      "type":"map",
+      "key":{"shape":"Key"},
+      "value":{"shape":"Value"}
+    },
     "AuthDecision":{
       "type":"string",
       "enum":[
@@ -2393,6 +2566,8 @@
       "pattern":"[0-9]{12}"
     },
     "AwsArn":{"type":"string"},
+    "AwsIotJobArn":{"type":"string"},
+    "AwsIotJobId":{"type":"string"},
     "AwsIotSqlVersion":{"type":"string"},
     "Boolean":{"type":"boolean"},
     "BucketName":{"type":"string"},
@@ -2610,6 +2785,7 @@
       "min":64,
       "pattern":"(0x)?[a-fA-F0-9]+"
     },
+    "CertificateName":{"type":"string"},
     "CertificatePem":{
       "type":"string",
       "documentation":"<p>The PEM of a certificate.</p>",
@@ -2734,6 +2910,53 @@
         }
       },
       "documentation":"<p>Describes an action that captures a CloudWatch metric.</p>"
+    },
+    "Code":{"type":"string"},
+    "CodeSigning":{
+      "type":"structure",
+      "members":{
+        "awsSignerJobId":{
+          "shape":"SigningJobId",
+          "documentation":"<p>The ID of the AWSSignerJob which was created to sign the file.</p>"
+        },
+        "customCodeSigning":{
+          "shape":"CustomCodeSigning",
+          "documentation":"<p>A custom method for code signing a file.</p>"
+        }
+      },
+      "documentation":"<p>Describes the method to use when code signing a file.</p>"
+    },
+    "CodeSigningCertificateChain":{
+      "type":"structure",
+      "members":{
+        "stream":{
+          "shape":"Stream",
+          "documentation":"<p>A stream of the certificate chain files.</p>"
+        },
+        "certificateName":{
+          "shape":"CertificateName",
+          "documentation":"<p>The name of the certificate.</p>"
+        },
+        "inlineDocument":{
+          "shape":"InlineDocument",
+          "documentation":"<p>A base64 encoded binary representation of the code signing certificate chain.</p>"
+        }
+      },
+      "documentation":"<p>Describes the certificate chain being used when code signing a file.</p>"
+    },
+    "CodeSigningSignature":{
+      "type":"structure",
+      "members":{
+        "stream":{
+          "shape":"Stream",
+          "documentation":"<p>A stream of the code signing signature.</p>"
+        },
+        "inlineDocument":{
+          "shape":"Signature",
+          "documentation":"<p>A base64 encoded binary representation of the code signing signature.</p>"
+        }
+      },
+      "documentation":"<p>Describes the signature for a file.</p>"
     },
     "CognitoIdentityPoolId":{"type":"string"},
     "Comment":{
@@ -2940,6 +3163,72 @@
       },
       "documentation":"<p>The output of the CreateKeysAndCertificate operation.</p>"
     },
+    "CreateOTAUpdateRequest":{
+      "type":"structure",
+      "required":[
+        "otaUpdateId",
+        "targets",
+        "files",
+        "roleArn"
+      ],
+      "members":{
+        "otaUpdateId":{
+          "shape":"OTAUpdateId",
+          "documentation":"<p>The ID of the OTA update to be created.</p>",
+          "location":"uri",
+          "locationName":"otaUpdateId"
+        },
+        "description":{
+          "shape":"OTAUpdateDescription",
+          "documentation":"<p>The description of the OTA update.</p>"
+        },
+        "targets":{
+          "shape":"Targets",
+          "documentation":"<p>The targeted devices to receive OTA updates.</p>"
+        },
+        "targetSelection":{
+          "shape":"TargetSelection",
+          "documentation":"<p>Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.</p>"
+        },
+        "files":{
+          "shape":"OTAUpdateFiles",
+          "documentation":"<p>The files to be streamed by the OTA update.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>The IAM role that allows access to the AWS IoT Jobs service.</p>"
+        },
+        "additionalParameters":{
+          "shape":"AdditionalParameterMap",
+          "documentation":"<p>A list of additional OTA update parameters which are name-value pairs.</p>"
+        }
+      }
+    },
+    "CreateOTAUpdateResponse":{
+      "type":"structure",
+      "members":{
+        "otaUpdateId":{
+          "shape":"OTAUpdateId",
+          "documentation":"<p>The OTA update ID.</p>"
+        },
+        "awsIotJobId":{
+          "shape":"AwsIotJobId",
+          "documentation":"<p>The AWS IoT job ID associated with the OTA update.</p>"
+        },
+        "otaUpdateArn":{
+          "shape":"OTAUpdateArn",
+          "documentation":"<p>The OTA update ARN.</p>"
+        },
+        "awsIotJobArn":{
+          "shape":"AwsIotJobArn",
+          "documentation":"<p>The AWS IoT job ARN associated with the OTA update.</p>"
+        },
+        "otaUpdateStatus":{
+          "shape":"OTAUpdateStatus",
+          "documentation":"<p>The OTA update status.</p>"
+        }
+      }
+    },
     "CreatePolicyRequest":{
       "type":"structure",
       "required":[
@@ -3063,6 +3352,55 @@
         "roleAliasArn":{
           "shape":"RoleAliasArn",
           "documentation":"<p>The role alias ARN.</p>"
+        }
+      }
+    },
+    "CreateStreamRequest":{
+      "type":"structure",
+      "required":[
+        "streamId",
+        "files",
+        "roleArn"
+      ],
+      "members":{
+        "streamId":{
+          "shape":"StreamId",
+          "documentation":"<p>The stream ID.</p>",
+          "location":"uri",
+          "locationName":"streamId"
+        },
+        "description":{
+          "shape":"StreamDescription",
+          "documentation":"<p>A description of the stream.</p>"
+        },
+        "files":{
+          "shape":"StreamFiles",
+          "documentation":"<p>The files to stream.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>An IAM role that allows the IoT service principal assumes to access your S3 files.</p>"
+        }
+      }
+    },
+    "CreateStreamResponse":{
+      "type":"structure",
+      "members":{
+        "streamId":{
+          "shape":"StreamId",
+          "documentation":"<p>The stream ID.</p>"
+        },
+        "streamArn":{
+          "shape":"StreamArn",
+          "documentation":"<p>The stream ARN.</p>"
+        },
+        "description":{
+          "shape":"StreamDescription",
+          "documentation":"<p>A description of the stream.</p>"
+        },
+        "streamVersion":{
+          "shape":"StreamVersion",
+          "documentation":"<p>The version of the stream.</p>"
         }
       }
     },
@@ -3205,6 +3543,28 @@
       "max":3600,
       "min":900
     },
+    "CustomCodeSigning":{
+      "type":"structure",
+      "members":{
+        "signature":{
+          "shape":"CodeSigningSignature",
+          "documentation":"<p>The signature for the file.</p>"
+        },
+        "certificateChain":{
+          "shape":"CodeSigningCertificateChain",
+          "documentation":"<p>The certificate chain.</p>"
+        },
+        "hashAlgorithm":{
+          "shape":"HashAlgorithm",
+          "documentation":"<p>The hash algorithm used to code sign the file.</p>"
+        },
+        "signatureAlgorithm":{
+          "shape":"SignatureAlgorithm",
+          "documentation":"<p>The signature algorithm used to code sign the file.</p>"
+        }
+      },
+      "documentation":"<p>Describes a custom method used to code sign a file.</p>"
+    },
     "DateType":{"type":"timestamp"},
     "DeleteAuthorizerRequest":{
       "type":"structure",
@@ -3273,6 +3633,23 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
+    "DeleteOTAUpdateRequest":{
+      "type":"structure",
+      "required":["otaUpdateId"],
+      "members":{
+        "otaUpdateId":{
+          "shape":"OTAUpdateId",
+          "documentation":"<p>The OTA update ID to delete.</p>",
+          "location":"uri",
+          "locationName":"otaUpdateId"
+        }
+      }
+    },
+    "DeleteOTAUpdateResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeletePolicyRequest":{
       "type":"structure",
       "required":["policyName"],
@@ -3333,6 +3710,23 @@
       }
     },
     "DeleteRoleAliasResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteStreamRequest":{
+      "type":"structure",
+      "required":["streamId"],
+      "members":{
+        "streamId":{
+          "shape":"StreamId",
+          "documentation":"<p>The stream ID.</p>",
+          "location":"uri",
+          "locationName":"streamId"
+        }
+      }
+    },
+    "DeleteStreamResponse":{
       "type":"structure",
       "members":{
       }
@@ -3714,6 +4108,27 @@
         "roleAliasDescription":{
           "shape":"RoleAliasDescription",
           "documentation":"<p>The role alias description.</p>"
+        }
+      }
+    },
+    "DescribeStreamRequest":{
+      "type":"structure",
+      "required":["streamId"],
+      "members":{
+        "streamId":{
+          "shape":"StreamId",
+          "documentation":"<p>The stream ID.</p>",
+          "location":"uri",
+          "locationName":"streamId"
+        }
+      }
+    },
+    "DescribeStreamResponse":{
+      "type":"structure",
+      "members":{
+        "streamInfo":{
+          "shape":"StreamInfo",
+          "documentation":"<p>Information about the stream.</p>"
         }
       }
     },
@@ -4162,6 +4577,20 @@
     "Enabled":{"type":"boolean"},
     "EndpointAddress":{"type":"string"},
     "EndpointType":{"type":"string"},
+    "ErrorInfo":{
+      "type":"structure",
+      "members":{
+        "code":{
+          "shape":"Code",
+          "documentation":"<p>The error code.</p>"
+        },
+        "message":{
+          "shape":"OTAUpdateErrorMessage",
+          "documentation":"<p>The error message.</p>"
+        }
+      },
+      "documentation":"<p>Error information.</p>"
+    },
     "ErrorMessage":{
       "type":"string",
       "max":2048
@@ -4201,6 +4630,12 @@
       "documentation":"<p>Information that explicitly denies authorization.</p>"
     },
     "FailedThings":{"type":"integer"},
+    "FileId":{
+      "type":"integer",
+      "max":255,
+      "min":0
+    },
+    "FileName":{"type":"string"},
     "FirehoseAction":{
       "type":"structure",
       "required":[
@@ -4317,6 +4752,27 @@
         }
       },
       "documentation":"<p>The output from the GetLoggingOptions operation.</p>"
+    },
+    "GetOTAUpdateRequest":{
+      "type":"structure",
+      "required":["otaUpdateId"],
+      "members":{
+        "otaUpdateId":{
+          "shape":"OTAUpdateId",
+          "documentation":"<p>The OTA update ID.</p>",
+          "location":"uri",
+          "locationName":"otaUpdateId"
+        }
+      }
+    },
+    "GetOTAUpdateResponse":{
+      "type":"structure",
+      "members":{
+        "otaUpdateInfo":{
+          "shape":"OTAUpdateInfo",
+          "documentation":"<p>The OTA update info.</p>"
+        }
+      }
     },
     "GetPolicyRequest":{
       "type":"structure",
@@ -4480,6 +4936,7 @@
       },
       "documentation":"<p>The name and ARN of a group.</p>"
     },
+    "HashAlgorithm":{"type":"string"},
     "HashKeyField":{"type":"string"},
     "HashKeyValue":{"type":"string"},
     "ImplicitDeny":{
@@ -4521,6 +4978,7 @@
         "REBUILDING"
       ]
     },
+    "InlineDocument":{"type":"string"},
     "InternalException":{
       "type":"structure",
       "members":{
@@ -5347,6 +5805,42 @@
         }
       }
     },
+    "ListOTAUpdatesRequest":{
+      "type":"structure",
+      "members":{
+        "maxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to return at one time.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token used to retreive the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "otaUpdateStatus":{
+          "shape":"OTAUpdateStatus",
+          "documentation":"<p>The OTA update job status.</p>",
+          "location":"querystring",
+          "locationName":"otaUpdateStatus"
+        }
+      }
+    },
+    "ListOTAUpdatesResponse":{
+      "type":"structure",
+      "members":{
+        "otaUpdates":{
+          "shape":"OTAUpdatesSummary",
+          "documentation":"<p>A list of OTA update jobs.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token to use to get the next set of results.</p>"
+        }
+      }
+    },
     "ListOutgoingCertificatesRequest":{
       "type":"structure",
       "members":{
@@ -5608,6 +6102,42 @@
         "nextMarker":{
           "shape":"Marker",
           "documentation":"<p>A marker used to get the next set of results.</p>"
+        }
+      }
+    },
+    "ListStreamsRequest":{
+      "type":"structure",
+      "members":{
+        "maxResults":{
+          "shape":"MaxResults",
+          "documentation":"<p>The maximum number of results to return at a time.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token used to get the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "ascendingOrder":{
+          "shape":"AscendingOrder",
+          "documentation":"<p>Set to true to return the list of streams in ascending order.</p>",
+          "location":"querystring",
+          "locationName":"isAscendingOrder"
+        }
+      }
+    },
+    "ListStreamsResponse":{
+      "type":"structure",
+      "members":{
+        "streams":{
+          "shape":"StreamsSummary",
+          "documentation":"<p>A list of streams.</p>"
+        },
+        "nextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>A token used to get the next set of results.</p>"
         }
       }
     },
@@ -6140,6 +6670,11 @@
       "max":1000,
       "min":1
     },
+    "MaxResults":{
+      "type":"integer",
+      "max":250,
+      "min":1
+    },
     "Message":{
       "type":"string",
       "max":128
@@ -6170,6 +6705,141 @@
       "documentation":"<p>The resource is not configured.</p>",
       "error":{"httpStatusCode":404},
       "exception":true
+    },
+    "OTAUpdateArn":{"type":"string"},
+    "OTAUpdateDescription":{
+      "type":"string",
+      "max":2028,
+      "pattern":"[^\\p{C}]+"
+    },
+    "OTAUpdateErrorMessage":{"type":"string"},
+    "OTAUpdateFile":{
+      "type":"structure",
+      "members":{
+        "fileName":{
+          "shape":"FileName",
+          "documentation":"<p>The name of the file.</p>"
+        },
+        "fileVersion":{
+          "shape":"OTAUpdateFileVersion",
+          "documentation":"<p>The file version.</p>"
+        },
+        "fileSource":{
+          "shape":"Stream",
+          "documentation":"<p>The source of the file.</p>"
+        },
+        "codeSigning":{
+          "shape":"CodeSigning",
+          "documentation":"<p>The code signing method of the file.</p>"
+        },
+        "attributes":{
+          "shape":"AttributesMap",
+          "documentation":"<p>A list of name/attribute pairs.</p>"
+        }
+      },
+      "documentation":"<p>Describes a file to be associated with an OTA update.</p>"
+    },
+    "OTAUpdateFileVersion":{"type":"string"},
+    "OTAUpdateFiles":{
+      "type":"list",
+      "member":{"shape":"OTAUpdateFile"},
+      "max":10,
+      "min":1
+    },
+    "OTAUpdateId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
+    "OTAUpdateInfo":{
+      "type":"structure",
+      "members":{
+        "otaUpdateId":{
+          "shape":"OTAUpdateId",
+          "documentation":"<p>The OTA update ID.</p>"
+        },
+        "otaUpdateArn":{
+          "shape":"OTAUpdateArn",
+          "documentation":"<p>The OTA update ARN.</p>"
+        },
+        "creationDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date when the OTA update was created.</p>"
+        },
+        "lastModifiedDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date when the OTA update was last updated.</p>"
+        },
+        "description":{
+          "shape":"OTAUpdateDescription",
+          "documentation":"<p>A description of the OTA update.</p>"
+        },
+        "targets":{
+          "shape":"Targets",
+          "documentation":"<p>The targets of the OTA update.</p>"
+        },
+        "targetSelection":{
+          "shape":"TargetSelection",
+          "documentation":"<p>Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. </p>"
+        },
+        "otaUpdateFiles":{
+          "shape":"OTAUpdateFiles",
+          "documentation":"<p>A list of files associated with the OTA update.</p>"
+        },
+        "otaUpdateStatus":{
+          "shape":"OTAUpdateStatus",
+          "documentation":"<p>The status of the OTA update.</p>"
+        },
+        "awsIotJobId":{
+          "shape":"AwsIotJobId",
+          "documentation":"<p>The AWS IoT job ID associated with the OTA update.</p>"
+        },
+        "awsIotJobArn":{
+          "shape":"AwsIotJobArn",
+          "documentation":"<p>The AWS IoT job ARN associated with the OTA update.</p>"
+        },
+        "errorInfo":{
+          "shape":"ErrorInfo",
+          "documentation":"<p>Error information associated with the OTA update.</p>"
+        },
+        "additionalParameters":{
+          "shape":"AdditionalParameterMap",
+          "documentation":"<p>A collection of name/value pairs</p>"
+        }
+      },
+      "documentation":"<p>Information about an OTA update.</p>"
+    },
+    "OTAUpdateStatus":{
+      "type":"string",
+      "enum":[
+        "CREATE_PENDING",
+        "CREATE_IN_PROGRESS",
+        "CREATE_COMPLETE",
+        "CREATE_FAILED"
+      ]
+    },
+    "OTAUpdateSummary":{
+      "type":"structure",
+      "members":{
+        "otaUpdateId":{
+          "shape":"OTAUpdateId",
+          "documentation":"<p>The OTA update ID.</p>"
+        },
+        "otaUpdateArn":{
+          "shape":"OTAUpdateArn",
+          "documentation":"<p>The OTA update ARN.</p>"
+        },
+        "creationDate":{
+          "shape":"DateType",
+          "documentation":"<p>The date when the OTA update was created.</p>"
+        }
+      },
+      "documentation":"<p>An OTA update summary.</p>"
+    },
+    "OTAUpdatesSummary":{
+      "type":"list",
+      "member":{"shape":"OTAUpdateSummary"}
     },
     "OptionalVersion":{"type":"long"},
     "OutgoingCertificate":{
@@ -6761,6 +7431,10 @@
       },
       "documentation":"<p>Describes an action to write data to an Amazon S3 bucket.</p>"
     },
+    "S3Bucket":{
+      "type":"string",
+      "min":1
+    },
     "S3FileUrl":{
       "type":"string",
       "max":65535
@@ -6769,6 +7443,33 @@
       "type":"list",
       "member":{"shape":"S3FileUrl"}
     },
+    "S3Key":{
+      "type":"string",
+      "min":1
+    },
+    "S3Location":{
+      "type":"structure",
+      "required":[
+        "bucket",
+        "key"
+      ],
+      "members":{
+        "bucket":{
+          "shape":"S3Bucket",
+          "documentation":"<p>The S3 bucket that contains the file to stream.</p>"
+        },
+        "key":{
+          "shape":"S3Key",
+          "documentation":"<p>The name of the file within the S3 bucket to stream.</p>"
+        },
+        "version":{
+          "shape":"S3Version",
+          "documentation":"<p>The file version.</p>"
+        }
+      },
+      "documentation":"<p>The location in S3 the contains the files to stream.</p>"
+    },
+    "S3Version":{"type":"string"},
     "SQL":{"type":"string"},
     "SalesforceAction":{
       "type":"structure",
@@ -6948,6 +7649,9 @@
         }
       }
     },
+    "Signature":{"type":"blob"},
+    "SignatureAlgorithm":{"type":"string"},
+    "SigningJobId":{"type":"string"},
     "SkyfallMaxResults":{
       "type":"integer",
       "max":250,
@@ -7074,9 +7778,125 @@
       "members":{
       }
     },
+    "Stream":{
+      "type":"structure",
+      "members":{
+        "streamId":{
+          "shape":"StreamId",
+          "documentation":"<p>The stream ID.</p>"
+        },
+        "fileId":{
+          "shape":"FileId",
+          "documentation":"<p>The ID of a file associated with a stream.</p>"
+        }
+      },
+      "documentation":"<p>Describes a group of files that can be streamed.</p>"
+    },
+    "StreamArn":{"type":"string"},
+    "StreamDescription":{
+      "type":"string",
+      "max":2028,
+      "pattern":"[^\\p{C}]+"
+    },
+    "StreamFile":{
+      "type":"structure",
+      "members":{
+        "fileId":{
+          "shape":"FileId",
+          "documentation":"<p>The file ID.</p>"
+        },
+        "s3Location":{
+          "shape":"S3Location",
+          "documentation":"<p>The location of the file in S3.</p>"
+        }
+      },
+      "documentation":"<p>Represents a file to stream.</p>"
+    },
+    "StreamFiles":{
+      "type":"list",
+      "member":{"shape":"StreamFile"},
+      "max":10,
+      "min":1
+    },
+    "StreamId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
+    "StreamInfo":{
+      "type":"structure",
+      "members":{
+        "streamId":{
+          "shape":"StreamId",
+          "documentation":"<p>The stream ID.</p>"
+        },
+        "streamArn":{
+          "shape":"StreamArn",
+          "documentation":"<p>The stream ARN.</p>"
+        },
+        "streamVersion":{
+          "shape":"StreamVersion",
+          "documentation":"<p>The stream version.</p>"
+        },
+        "description":{
+          "shape":"StreamDescription",
+          "documentation":"<p>The description of the stream.</p>"
+        },
+        "files":{
+          "shape":"StreamFiles",
+          "documentation":"<p>The files to stream.</p>"
+        },
+        "createdAt":{
+          "shape":"DateType",
+          "documentation":"<p>The date when the stream was created.</p>"
+        },
+        "lastUpdatedAt":{
+          "shape":"DateType",
+          "documentation":"<p>The date when the stream was last updated.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>An IAM role AWS IoT assumes to access your S3 files.</p>"
+        }
+      },
+      "documentation":"<p>Information about a stream.</p>"
+    },
     "StreamName":{"type":"string"},
+    "StreamSummary":{
+      "type":"structure",
+      "members":{
+        "streamId":{
+          "shape":"StreamId",
+          "documentation":"<p>The stream ID.</p>"
+        },
+        "streamArn":{
+          "shape":"StreamArn",
+          "documentation":"<p>The stream ARN.</p>"
+        },
+        "streamVersion":{
+          "shape":"StreamVersion",
+          "documentation":"<p>The stream version.</p>"
+        },
+        "description":{
+          "shape":"StreamDescription",
+          "documentation":"<p>A description of the stream.</p>"
+        }
+      },
+      "documentation":"<p>A summary of a stream.</p>"
+    },
+    "StreamVersion":{
+      "type":"integer",
+      "max":65535,
+      "min":0
+    },
+    "StreamsSummary":{
+      "type":"list",
+      "member":{"shape":"StreamSummary"}
+    },
     "SucceededThings":{"type":"integer"},
     "TableName":{"type":"string"},
+    "Target":{"type":"string"},
     "TargetArn":{"type":"string"},
     "TargetSelection":{
       "type":"string",
@@ -7084,6 +7904,11 @@
         "CONTINUOUS",
         "SNAPSHOT"
       ]
+    },
+    "Targets":{
+      "type":"list",
+      "member":{"shape":"Target"},
+      "min":1
     },
     "TaskId":{
       "type":"string",
@@ -7797,6 +8622,51 @@
         "roleAliasArn":{
           "shape":"RoleAliasArn",
           "documentation":"<p>The role alias ARN.</p>"
+        }
+      }
+    },
+    "UpdateStreamRequest":{
+      "type":"structure",
+      "required":["streamId"],
+      "members":{
+        "streamId":{
+          "shape":"StreamId",
+          "documentation":"<p>The stream ID.</p>",
+          "location":"uri",
+          "locationName":"streamId"
+        },
+        "description":{
+          "shape":"StreamDescription",
+          "documentation":"<p>The description of the stream.</p>"
+        },
+        "files":{
+          "shape":"StreamFiles",
+          "documentation":"<p>The files associated with the stream.</p>"
+        },
+        "roleArn":{
+          "shape":"RoleArn",
+          "documentation":"<p>An IAM role that allows the IoT service principal assumes to access your S3 files.</p>"
+        }
+      }
+    },
+    "UpdateStreamResponse":{
+      "type":"structure",
+      "members":{
+        "streamId":{
+          "shape":"StreamId",
+          "documentation":"<p>The stream ID.</p>"
+        },
+        "streamArn":{
+          "shape":"StreamArn",
+          "documentation":"<p>The stream ARN.</p>"
+        },
+        "description":{
+          "shape":"StreamDescription",
+          "documentation":"<p>A description of the stream.</p>"
+        },
+        "streamVersion":{
+          "shape":"StreamVersion",
+          "documentation":"<p>The stream version.</p>"
         }
       }
     },

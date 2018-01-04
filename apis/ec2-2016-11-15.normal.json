@@ -2379,7 +2379,7 @@
       },
       "input":{"shape":"ReplaceNetworkAclAssociationRequest"},
       "output":{"shape":"ReplaceNetworkAclAssociationResult"},
-      "documentation":"<p>Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation":"<p>Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information about network ACLs, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>This is an idempotent operation.</p>"
     },
     "ReplaceNetworkAclEntry":{
       "name":"ReplaceNetworkAclEntry",
@@ -2843,6 +2843,11 @@
           "shape":"String",
           "documentation":"<p>The private IP address associated with the Elastic IP address.</p>",
           "locationName":"privateIpAddress"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>Any tags assigned to the Elastic IP address.</p>",
+          "locationName":"tagSet"
         }
       },
       "documentation":"<p>Describes an Elastic IP address.</p>"
@@ -9660,7 +9665,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>customer-account-id</code> - The AWS account number of the owner of the endpoint.</p> </li> <li> <p> <code>endpoint-connection-state</code> - The state of the endpoint (<code>PendingAcceptance</code> | <code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Rejected</code> | <code>Failed</code>).</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-service-id</code> - The ID of the service.</p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>vpc-endpoint-owner</code> - The AWS account number of the owner of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> </ul>",
           "locationName":"Filter"
         },
         "MaxResults":{
@@ -9702,7 +9707,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The ARN of the service.</p> </li> <li> <p> <code>vpc-endpoint-service-id</code> - The ID of the service.</p> </li> <li> <p> <code>vpc-endpoint-service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> </ul>",
+          "documentation":"<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> </ul>",
           "locationName":"Filter"
         },
         "MaxResults":{
@@ -14040,7 +14045,7 @@
         },
         "PrefixListIds":{
           "shape":"PrefixListIdList",
-          "documentation":"<p>(Valid for <a>AuthorizeSecurityGroupEgress</a>, <a>RevokeSecurityGroupEgress</a> and <a>DescribeSecurityGroups</a> only) One or more prefix list IDs for an AWS service. In an <a>AuthorizeSecurityGroupEgress</a> request, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.</p>",
+          "documentation":"<p>(EC2-VPC only; valid for <a>AuthorizeSecurityGroupEgress</a>, <a>RevokeSecurityGroupEgress</a> and <a>DescribeSecurityGroups</a> only) One or more prefix list IDs for an AWS service. In an <a>AuthorizeSecurityGroupEgress</a> request, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.</p>",
           "locationName":"prefixListIds"
         },
         "ToPort":{
@@ -16989,7 +16994,7 @@
           "locationName":"prefixListId"
         }
       },
-      "documentation":"<p>The ID of the prefix.</p>"
+      "documentation":"<p>[EC2-VPC only] The ID of the prefix.</p>"
     },
     "PrefixListIdList":{
       "type":"list",

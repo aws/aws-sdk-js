@@ -1,6 +1,28 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.171.0-->
+<!--LATEST=2.176.0-->
 <!--ENTRYINSERT-->
+
+## 2.176.0
+* feature: WorkSpaces: Modify WorkSpaces have been updated with flexible storage and switching of hardware bundles feature. The following configurations have been added to ModifyWorkSpacesProperties: storage and compute. This update provides the capability to configure the storage of a WorkSpace. It also adds the capability of switching hardware bundle of a WorkSpace by specifying an eligible compute (Value, Standard, Performance, Power).
+
+## 2.175.0
+* feature: EC2: This release fixes an issue with tags not showing in DescribeAddresses responses.
+* feature: ECS: Amazon ECS users can now set a health check initialization wait period of their ECS services, the services that are associated with an Elastic Load Balancer (ELB) will wait for a period of time before the ELB become healthy. You can now configure this in Create and Update Service.
+* feature: Inspector: PreviewAgents API now returns additional fields within the AgentPreview data type. The API now shows the agent health and availability status for all instances included in the assessment target. This allows users to check the health status of Inspector Agents before running an assessment. In addition, it shows the instance ID, hostname, and IP address of the targeted instances.
+* feature: SageMaker: SageMaker Models no longer support SupplementalContainers.  API's that have been affected are CreateModel and DescribeModel.
+
+## 2.174.0
+* feature: CodeBuild: Adding support allowing AWS CodeBuild customers to select specific curated image versions.
+* feature: EC2: Elastic IP tagging enables you to add key and value metadata to your Elastic IPs so that you can search, filter, and organize them according to your organization's needs.
+* feature: KinesisAnalytics: Kinesis Analytics now supports AWS Lambda functions as output.
+
+## 2.173.0
+* feature: ConfigService: Update ResourceType enum with values for WAF, WAFRegional, and CloudFront resources
+* feature: Iot: This release adds support for code signed Over-the-air update functionality for Amazon FreeRTOS. Users can now create and schedule Over-the-air updates to their Amazon FreeRTOS devices using these new APIs. 
+
+## 2.172.0
+* feature: APIGateway: API Gateway now adds support for calling API with compressed payloads using one of the supported content codings, tagging an API stage for cost allocation, and returning API keys from a custom authorizer for use with a usage plan.
+* feature: Route53: Route 53 added support for a new China (Ningxia) region, cn-northwest-1. You can now specify cn-northwest-1 as the region for latency-based or geoproximity routing. Route 53 also added support for a new EU (Paris) region, eu-west-3. You can now associate VPCs in eu-west-3 with private hosted zones and create alias records that route traffic to resources in eu-west-3.
 
 ## 2.171.0
 * feature: AppStream: This API update is to enable customers to add tags to their Amazon AppStream 2.0 resources

@@ -60,11 +60,11 @@ declare class Route53 extends Service {
    */
   createQueryLoggingConfig(callback?: (err: AWSError, data: Route53.Types.CreateQueryLoggingConfigResponse) => void): Request<Route53.Types.CreateQueryLoggingConfigResponse, AWSError>;
   /**
-   * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet marks the delegation set associated with that zone as reusable  A reusable delegation set can't be associated with a private hosted zone.  For information on how to use a reusable delegation set to configure white label name servers, see Configuring White Label Name Servers.
+   * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet marks the delegation set associated with that zone as reusable.  You can't associate a reusable delegation set with a private hosted zone.  For information about using a reusable delegation set to configure white label name servers, see Configuring White Label Name Servers. The process for migrating existing hosted zones to use a reusable delegation set is comparable to the process for configuring white label name servers. You need to perform the following steps:   Create a reusable delegation set.   Recreate hosted zones, and reduce the TTL to 60 seconds or less.   Recreate resource record sets in the new hosted zones.   Change the registrar's name servers to use the name servers for the new hosted zones.   Monitor traffic for the website or application.   Change TTLs back to their original values.   If you want to migrate existing hosted zones to use a reusable delegation set, the existing hosted zones can't use any of the name servers that are assigned to the reusable delegation set. If one or more hosted zones do use one or more name servers that are assigned to the reusable delegation set, you can do one of the following:   For small numbers of hosted zones—up to a few hundred—it's relatively easy to create reusable delegation sets until you get one that has four name servers that don't overlap with any of the name servers in your hosted zones.   For larger numbers of hosted zones, the easiest solution is to use more than one reusable delegation set.   For larger numbers of hosted zones, you can also migrate hosted zones that have overlapping name servers to hosted zones that don't have overlapping name servers, then migrate the hosted zones again to use the reusable delegation set.  
    */
   createReusableDelegationSet(params: Route53.Types.CreateReusableDelegationSetRequest, callback?: (err: AWSError, data: Route53.Types.CreateReusableDelegationSetResponse) => void): Request<Route53.Types.CreateReusableDelegationSetResponse, AWSError>;
   /**
-   * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet marks the delegation set associated with that zone as reusable  A reusable delegation set can't be associated with a private hosted zone.  For information on how to use a reusable delegation set to configure white label name servers, see Configuring White Label Name Servers.
+   * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet marks the delegation set associated with that zone as reusable.  You can't associate a reusable delegation set with a private hosted zone.  For information about using a reusable delegation set to configure white label name servers, see Configuring White Label Name Servers. The process for migrating existing hosted zones to use a reusable delegation set is comparable to the process for configuring white label name servers. You need to perform the following steps:   Create a reusable delegation set.   Recreate hosted zones, and reduce the TTL to 60 seconds or less.   Recreate resource record sets in the new hosted zones.   Change the registrar's name servers to use the name servers for the new hosted zones.   Monitor traffic for the website or application.   Change TTLs back to their original values.   If you want to migrate existing hosted zones to use a reusable delegation set, the existing hosted zones can't use any of the name servers that are assigned to the reusable delegation set. If one or more hosted zones do use one or more name servers that are assigned to the reusable delegation set, you can do one of the following:   For small numbers of hosted zones—up to a few hundred—it's relatively easy to create reusable delegation sets until you get one that has four name servers that don't overlap with any of the name servers in your hosted zones.   For larger numbers of hosted zones, the easiest solution is to use more than one reusable delegation set.   For larger numbers of hosted zones, you can also migrate hosted zones that have overlapping name servers to hosted zones that don't have overlapping name servers, then migrate the hosted zones again to use the reusable delegation set.  
    */
   createReusableDelegationSet(callback?: (err: AWSError, data: Route53.Types.CreateReusableDelegationSetResponse) => void): Request<Route53.Types.CreateReusableDelegationSetResponse, AWSError>;
   /**
@@ -641,7 +641,7 @@ declare namespace Route53 {
     Dimensions?: DimensionList;
   }
   export type CloudWatchLogsLogGroupArn = string;
-  export type CloudWatchRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|string;
+  export type CloudWatchRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|string;
   export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
   export interface CreateHealthCheckRequest {
     /**
@@ -1082,7 +1082,7 @@ declare namespace Route53 {
   }
   export interface GetHealthCheckLastFailureReasonRequest {
     /**
-     * The ID for the health check for which you want the last failure reason. When you created the health check, CreateHealthCheck returned the ID in the response, in the HealthCheckId element.
+     * The ID for the health check for which you want the last failure reason. When you created the health check, CreateHealthCheck returned the ID in the response, in the HealthCheckId element.  If you want to get the last failure reason for a calculated health check, you must use the Amazon Route 53 console or the CloudWatch console. You can't use GetHealthCheckLastFailureReason for a calculated health check. 
      */
     HealthCheckId: HealthCheckId;
   }
@@ -1126,7 +1126,7 @@ declare namespace Route53 {
   }
   export interface GetHostedZoneLimitRequest {
     /**
-     * The limit that you want to get. Valid values include the following:    MAX_RRSETS_BY_ZONE: The maximum number of records that you can create in the specified hosted zone.    MAX_VPCS_ASSOCIATED_BY_TYPE: The maximum number of Amazon VPCs that you can associate with the specified private hosted zone.  
+     * The limit that you want to get. Valid values include the following:    MAX_RRSETS_BY_ZONE: The maximum number of records that you can create in the specified hosted zone.    MAX_VPCS_ASSOCIATED_BY_ZONE: The maximum number of Amazon VPCs that you can associate with the specified private hosted zone.  
      */
     Type: HostedZoneLimitType;
     /**
@@ -1399,7 +1399,7 @@ declare namespace Route53 {
   export type HostedZoneCount = number;
   export interface HostedZoneLimit {
     /**
-     * The limit that you requested. Valid values include the following:    MAX_RRSETS_BY_ZONE: The maximum number of records that you can create in the specified hosted zone.    MAX_VPCS_ASSOCIATED_BY_TYPE: The maximum number of Amazon VPCs that you can associate with the specified private hosted zone.  
+     * The limit that you requested. Valid values include the following:    MAX_RRSETS_BY_ZONE: The maximum number of records that you can create in the specified hosted zone.    MAX_VPCS_ASSOCIATED_BY_ZONE: The maximum number of Amazon VPCs that you can associate with the specified private hosted zone.  
      */
     Type: HostedZoneLimitType;
     /**
@@ -2044,7 +2044,7 @@ declare namespace Route53 {
   export type ResourceRecordSetFailover = "PRIMARY"|"SECONDARY"|string;
   export type ResourceRecordSetIdentifier = string;
   export type ResourceRecordSetMultiValueAnswer = boolean;
-  export type ResourceRecordSetRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-west-1"|"eu-west-2"|"eu-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|"cn-north-1"|"ap-south-1"|string;
+  export type ResourceRecordSetRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|"cn-north-1"|"cn-northwest-1"|"ap-south-1"|string;
   export type ResourceRecordSetWeight = number;
   export type ResourceRecordSets = ResourceRecordSet[];
   export type ResourceRecords = ResourceRecord[];
@@ -2393,7 +2393,7 @@ declare namespace Route53 {
     VPCId?: VPCId;
   }
   export type VPCId = string;
-  export type VPCRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-south-1"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|"ca-central-1"|"cn-north-1"|string;
+  export type VPCRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-south-1"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|"ca-central-1"|"cn-north-1"|string;
   export type VPCs = VPC[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

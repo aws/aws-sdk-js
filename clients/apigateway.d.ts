@@ -628,6 +628,14 @@ declare class APIGateway extends Service {
    */
   getStages(callback?: (err: AWSError, data: APIGateway.Types.Stages) => void): Request<APIGateway.Types.Stages, AWSError>;
   /**
+   * Gets the Tags collection for a given resource.
+   */
+  getTags(params: APIGateway.Types.GetTagsRequest, callback?: (err: AWSError, data: APIGateway.Types.Tags) => void): Request<APIGateway.Types.Tags, AWSError>;
+  /**
+   * Gets the Tags collection for a given resource.
+   */
+  getTags(callback?: (err: AWSError, data: APIGateway.Types.Tags) => void): Request<APIGateway.Types.Tags, AWSError>;
+  /**
    * Gets the usage data of a usage plan in a specified time interval.
    */
   getUsage(params: APIGateway.Types.GetUsageRequest, callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
@@ -756,6 +764,14 @@ declare class APIGateway extends Service {
    */
   putRestApi(callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
+   * Adds or updates Tags on a gievn resource.
+   */
+  tagResource(params: APIGateway.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or updates Tags on a gievn resource.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Enable custom authorizers 
    */
   testInvokeAuthorizer(params: APIGateway.Types.TestInvokeAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeAuthorizerResponse) => void): Request<APIGateway.Types.TestInvokeAuthorizerResponse, AWSError>;
@@ -771,6 +787,14 @@ declare class APIGateway extends Service {
    * Simulate the execution of a Method in your RestApi with headers, parameters, and an incoming request body.
    */
   testInvokeMethod(callback?: (err: AWSError, data: APIGateway.Types.TestInvokeMethodResponse) => void): Request<APIGateway.Types.TestInvokeMethodResponse, AWSError>;
+  /**
+   * Removes Tags from a given resource.
+   */
+  untagResource(params: APIGateway.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes Tags from a given resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Changes information about the current Account resource.
    */
@@ -1025,6 +1049,7 @@ declare namespace APIGateway {
      */
     warnings?: ListOfString;
   }
+  export type ApiKeySourceType = "HEADER"|"AUTHORIZER"|string;
   export interface ApiKeys {
     /**
      * A list of warning messages logged during the import of API keys when the failOnWarnings option is set to true.
@@ -1441,6 +1466,14 @@ declare namespace APIGateway {
      */
     binaryMediaTypes?: ListOfString;
     /**
+     * A nullable integer used to enable (non-negative between 0 and 10485760 (10M) bytes, inclusive) or disable (null) compression on an API. When compression is enabled, compression or decompression are not applied on the payload if the payload size is smaller than this value. Setting it to zero allows compression for any payload size.
+     */
+    minimumCompressionSize?: NullableInteger;
+    /**
+     * The source of the API key for metring requests according to a usage plan. Valid values are HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer. 
+     */
+    apiKeySource?: ApiKeySourceType;
+    /**
      * The endpoint configuration of this RestApi showing the endpoint types of the API. 
      */
     endpointConfiguration?: EndpointConfiguration;
@@ -1482,6 +1515,10 @@ declare namespace APIGateway {
      * The canary deployment settings of this stage.
      */
     canarySettings?: CanarySettings;
+    /**
+     * Key/Value map of strings. Valid character set is [a-zA-Z+-=._:/]. Tag key can be up to 128 characters and must not start with "aws:". Tag value can be up to 256 characters.
+     */
+    tags?: MapOfStringToString;
   }
   export interface CreateUsagePlanKeyRequest {
     /**
@@ -2469,6 +2506,20 @@ declare namespace APIGateway {
      */
     deploymentId?: String;
   }
+  export interface GetTagsRequest {
+    /**
+     * [Required] The ARN of a resource that can be tagged. At present, Stage is the only taggable resource.
+     */
+    resourceArn: String;
+    /**
+     * (Not currently supported) The current pagination position in the paged result set.
+     */
+    position?: String;
+    /**
+     * (Not currently supported) The maximum number of returned results per page.
+     */
+    limit?: NullableInteger;
+  }
   export interface GetUsagePlanKeyRequest {
     /**
      * The Id of the UsagePlan resource representing the usage plan containing the to-be-retrieved UsagePlanKey resource representing a plan customer.
@@ -2768,7 +2819,7 @@ declare namespace APIGateway {
      */
     methodIntegration?: Integration;
     /**
-     * A list authorization scopes configured on the method used with a COGNITO_USER_POOL authorizer to authorize the method invocation by matching them against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorizatinon purposes.
+     * A list of authorization scopes configured on the method. The scopes are used with a COGNITO_USER_POOL authorizer to authorize the method invocation. The authorization works by matching the method scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorization purposes.
      */
     authorizationScopes?: ListOfString;
   }
@@ -3054,7 +3105,7 @@ declare namespace APIGateway {
      */
     requestValidatorId?: String;
     /**
-     * A list authorization scopes configured on the method used with a COGNITO_USER_POOL authorizer to authorize the method invocation by matching them against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorizatinon purposes.
+     * A list of authorization scopes configured on the method. The scopes are used with a COGNITO_USER_POOL authorizer to authorize the method invocation. The authorization works by matching the method scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorization purposes.
      */
     authorizationScopes?: ListOfString;
   }
@@ -3206,6 +3257,14 @@ declare namespace APIGateway {
      */
     binaryMediaTypes?: ListOfString;
     /**
+     * A nullable integer used to enable (non-negative between 0 and 10485760 (10M) bytes, inclusive) or disable (null) compression on an API. When compression is enabled, compression or decompression are not applied on the payload if the payload size is smaller than this value. Setting it to zero allows compression for any payload size.
+     */
+    minimumCompressionSize?: NullableInteger;
+    /**
+     * The source of the API key for metring requests according to a usage plan. Valid values are HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer. 
+     */
+    apiKeySource?: ApiKeySourceType;
+    /**
      * The endpoint configuration of this RestApi showing the endpoint types of the API. 
      */
     endpointConfiguration?: EndpointConfiguration;
@@ -3328,6 +3387,10 @@ declare namespace APIGateway {
      */
     canarySettings?: CanarySettings;
     /**
+     * A collection of Tags associated with a given resource.
+     */
+    tags?: MapOfStringToString;
+    /**
      * The timestamp when the stage was created.
      */
     createdDate?: Timestamp;
@@ -3354,6 +3417,22 @@ declare namespace APIGateway {
   }
   export type StatusCode = string;
   export type String = string;
+  export interface TagResourceRequest {
+    /**
+     * [Required] The ARN of a resource that can be tagged. At present, Stage is the only taggable resource.
+     */
+    resourceArn: String;
+    /**
+     * [Required] Key/Value map of strings. Valid character set is [a-zA-Z+-=._:/]. Tag key can be up to 128 characters and must not start with "aws:". Tag value can be up to 256 characters.
+     */
+    tags: MapOfStringToString;
+  }
+  export interface Tags {
+    /**
+     * A collection of Tags associated with a given resource.
+     */
+    tags?: MapOfStringToString;
+  }
   export interface Template {
     /**
      * The Apache Velocity Template Language (VTL) template content used for the template resource.
@@ -3485,6 +3564,16 @@ declare namespace APIGateway {
   }
   export type Timestamp = Date;
   export type UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"|"SUCCEED_WITH_RESPONSE_HEADER"|"SUCCEED_WITHOUT_RESPONSE_HEADER"|string;
+  export interface UntagResourceRequest {
+    /**
+     * [Required] The ARN of a resource that can be tagged. At present, Stage is the only taggable resource.
+     */
+    resourceArn: String;
+    /**
+     * The Tag keys to delete.
+     */
+    tagKeys: ListOfString;
+  }
   export interface UpdateAccountRequest {
     /**
      * A list of update operations to be applied to the specified resource and in the order specified in this list.

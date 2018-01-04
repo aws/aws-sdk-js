@@ -413,6 +413,10 @@ declare namespace CodeBuild {
      * The description of the Docker image.
      */
     description?: String;
+    /**
+     * A list of environment image versions.
+     */
+    versions?: ImageVersions;
   }
   export type EnvironmentImages = EnvironmentImage[];
   export interface EnvironmentLanguage {
@@ -454,6 +458,7 @@ declare namespace CodeBuild {
   }
   export type EnvironmentVariableType = "PLAINTEXT"|"PARAMETER_STORE"|string;
   export type EnvironmentVariables = EnvironmentVariable[];
+  export type ImageVersions = String[];
   export interface InvalidateProjectCacheInput {
     /**
      * The name of the build project that the cache will be reset for.
@@ -635,7 +640,7 @@ declare namespace CodeBuild {
      */
     webhook?: Webhook;
     /**
-     * If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.
+     * Information about the VPC configuration that AWS CodeBuild will access.
      */
     vpcConfig?: VpcConfig;
     /**

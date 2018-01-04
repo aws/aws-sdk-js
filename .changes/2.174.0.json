@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Adding support allowing AWS CodeBuild customers to select specific curated image versions."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Elastic IP tagging enables you to add key and value metadata to your Elastic IPs so that you can search, filter, and organize them according to your organization's needs."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisAnalytics",
+        "description": "Kinesis Analytics now supports AWS Lambda functions as output."
+    }
+]

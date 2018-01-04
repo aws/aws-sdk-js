@@ -7,6 +7,7 @@
     "protocol":"rest-xml",
     "serviceAbbreviation":"Route 53",
     "serviceFullName":"Amazon Route 53",
+    "serviceId":"Route 53",
     "signatureVersion":"v4",
     "uid":"route53-2013-04-01"
   },
@@ -167,7 +168,7 @@
         {"shape":"DelegationSetNotAvailable"},
         {"shape":"DelegationSetAlreadyReusable"}
       ],
-      "documentation":"<p>Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, <code>CreateReusableDelegationSet</code> marks the delegation set associated with that zone as reusable</p> <note> <p>A reusable delegation set can't be associated with a private hosted zone.</p> </note> <p>For information on how to use a reusable delegation set to configure white label name servers, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/white-label-name-servers.html\">Configuring White Label Name Servers</a>.</p>"
+      "documentation":"<p>Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, <code>CreateReusableDelegationSet</code> marks the delegation set associated with that zone as reusable.</p> <note> <p>You can't associate a reusable delegation set with a private hosted zone.</p> </note> <p>For information about using a reusable delegation set to configure white label name servers, see <a href=\"http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/white-label-name-servers.html\">Configuring White Label Name Servers</a>.</p> <p>The process for migrating existing hosted zones to use a reusable delegation set is comparable to the process for configuring white label name servers. You need to perform the following steps:</p> <ol> <li> <p>Create a reusable delegation set.</p> </li> <li> <p>Recreate hosted zones, and reduce the TTL to 60 seconds or less.</p> </li> <li> <p>Recreate resource record sets in the new hosted zones.</p> </li> <li> <p>Change the registrar's name servers to use the name servers for the new hosted zones.</p> </li> <li> <p>Monitor traffic for the website or application.</p> </li> <li> <p>Change TTLs back to their original values.</p> </li> </ol> <p>If you want to migrate existing hosted zones to use a reusable delegation set, the existing hosted zones can't use any of the name servers that are assigned to the reusable delegation set. If one or more hosted zones do use one or more name servers that are assigned to the reusable delegation set, you can do one of the following:</p> <ul> <li> <p>For small numbers of hosted zones—up to a few hundred—it's relatively easy to create reusable delegation sets until you get one that has four name servers that don't overlap with any of the name servers in your hosted zones.</p> </li> <li> <p>For larger numbers of hosted zones, the easiest solution is to use more than one reusable delegation set.</p> </li> <li> <p>For larger numbers of hosted zones, you can also migrate hosted zones that have overlapping name servers to hosted zones that don't have overlapping name servers, then migrate the hosted zones again to use the reusable delegation set.</p> </li> </ul>"
     },
     "CreateTrafficPolicy":{
       "name":"CreateTrafficPolicy",
@@ -1264,6 +1265,7 @@
         "eu-central-1",
         "eu-west-1",
         "eu-west-2",
+        "eu-west-3",
         "ap-south-1",
         "ap-southeast-1",
         "ap-southeast-2",
@@ -1300,7 +1302,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
-      "documentation":"<p>The cause of this error depends on whether you're trying to create a public or a private hosted zone:</p> <ul> <li> <p> <b>Public hosted zone:</b> Two hosted zones that have the same name or that have a parent/child relationship (example.com and test.example.com) can't have any common name servers. You tried to create a hosted zone that has the same name as an existing hosted zone or that's the parent or child of an existing hosted zone, and you specified a delegation set that shares one or more name servers with the existing hosted zone. </p> </li> <li> <p> <b>Private hosted zone:</b> You specified an Amazon VPC that you're already using for another hosted zone, and the domain that you specified for one of the hosted zones is a subdomain of the domain that you specified for the other hosted zone. For example, you can't use the same Amazon VPC for the hosted zones for example.com and test.example.com.</p> </li> </ul>",
+      "documentation":"<p>The cause of this error depends on whether you're trying to create a public or a private hosted zone:</p> <ul> <li> <p> <b>Public hosted zone:</b> Two hosted zones that have the same name or that have a parent/child relationship (example.com and test.example.com) can't have any common name servers. You tried to create a hosted zone that has the same name as an existing hosted zone or that's the parent or child of an existing hosted zone, and you specified a delegation set that shares one or more name servers with the existing hosted zone. For more information, see <a>CreateReusableDelegationSet</a>.</p> </li> <li> <p> <b>Private hosted zone:</b> You specified an Amazon VPC that you're already using for another hosted zone, and the domain that you specified for one of the hosted zones is a subdomain of the domain that you specified for the other hosted zone. For example, you can't use the same Amazon VPC for the hosted zones for example.com and test.example.com.</p> </li> </ul>",
       "exception":true
     },
     "ConflictingTypes":{
@@ -2208,7 +2210,7 @@
       "members":{
         "HealthCheckId":{
           "shape":"HealthCheckId",
-          "documentation":"<p>The ID for the health check for which you want the last failure reason. When you created the health check, <code>CreateHealthCheck</code> returned the ID in the response, in the <code>HealthCheckId</code> element.</p>",
+          "documentation":"<p>The ID for the health check for which you want the last failure reason. When you created the health check, <code>CreateHealthCheck</code> returned the ID in the response, in the <code>HealthCheckId</code> element.</p> <note> <p>If you want to get the last failure reason for a calculated health check, you must use the Amazon Route 53 console or the CloudWatch console. You can't use <code>GetHealthCheckLastFailureReason</code> for a calculated health check.</p> </note>",
           "location":"uri",
           "locationName":"HealthCheckId"
         }
@@ -2300,7 +2302,7 @@
       "members":{
         "Type":{
           "shape":"HostedZoneLimitType",
-          "documentation":"<p>The limit that you want to get. Valid values include the following:</p> <ul> <li> <p> <b>MAX_RRSETS_BY_ZONE</b>: The maximum number of records that you can create in the specified hosted zone.</p> </li> <li> <p> <b>MAX_VPCS_ASSOCIATED_BY_TYPE</b>: The maximum number of Amazon VPCs that you can associate with the specified private hosted zone.</p> </li> </ul>",
+          "documentation":"<p>The limit that you want to get. Valid values include the following:</p> <ul> <li> <p> <b>MAX_RRSETS_BY_ZONE</b>: The maximum number of records that you can create in the specified hosted zone.</p> </li> <li> <p> <b>MAX_VPCS_ASSOCIATED_BY_ZONE</b>: The maximum number of Amazon VPCs that you can associate with the specified private hosted zone.</p> </li> </ul>",
           "location":"uri",
           "locationName":"Type"
         },
@@ -2822,7 +2824,7 @@
       "members":{
         "Type":{
           "shape":"HostedZoneLimitType",
-          "documentation":"<p>The limit that you requested. Valid values include the following:</p> <ul> <li> <p> <b>MAX_RRSETS_BY_ZONE</b>: The maximum number of records that you can create in the specified hosted zone.</p> </li> <li> <p> <b>MAX_VPCS_ASSOCIATED_BY_TYPE</b>: The maximum number of Amazon VPCs that you can associate with the specified private hosted zone.</p> </li> </ul>"
+          "documentation":"<p>The limit that you requested. Valid values include the following:</p> <ul> <li> <p> <b>MAX_RRSETS_BY_ZONE</b>: The maximum number of records that you can create in the specified hosted zone.</p> </li> <li> <p> <b>MAX_VPCS_ASSOCIATED_BY_ZONE</b>: The maximum number of Amazon VPCs that you can associate with the specified private hosted zone.</p> </li> </ul>"
         },
         "Value":{
           "shape":"LimitValue",
@@ -4231,6 +4233,7 @@
         "ca-central-1",
         "eu-west-1",
         "eu-west-2",
+        "eu-west-3",
         "eu-central-1",
         "ap-southeast-1",
         "ap-southeast-2",
@@ -4238,6 +4241,7 @@
         "ap-northeast-2",
         "sa-east-1",
         "cn-north-1",
+        "cn-northwest-1",
         "ap-south-1"
       ],
       "max":64,
@@ -5017,6 +5021,7 @@
         "us-west-2",
         "eu-west-1",
         "eu-west-2",
+        "eu-west-3",
         "eu-central-1",
         "ap-southeast-1",
         "ap-southeast-2",
