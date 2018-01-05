@@ -507,7 +507,7 @@
         },
         "AddressId":{
           "shape":"AddressId",
-          "documentation":"<p>The ID for the address that you want the cluster shipped to.&gt;</p>"
+          "documentation":"<p>The ID for the address that you want the cluster shipped to.</p>"
         },
         "KmsKeyARN":{
           "shape":"KmsKeyARN",
@@ -1211,11 +1211,11 @@
         },
         "InboundShipment":{
           "shape":"Shipment",
-          "documentation":"<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being delivered to the address that you specified for a particular job.</p>"
+          "documentation":"<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being returned to AWS for a particular job.</p>"
         },
         "OutboundShipment":{
           "shape":"Shipment",
-          "documentation":"<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being returned to AWS for a particular job.</p>"
+          "documentation":"<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being delivered to the address that you specified for a particular job.</p>"
         }
       },
       "documentation":"<p>A job's shipping information, including inbound and outbound tracking numbers and shipping speed options.</p>"

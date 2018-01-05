@@ -327,7 +327,7 @@ declare namespace Snowball {
      */
     Description?: String;
     /**
-     * The ID for the address that you want the cluster shipped to.&gt;
+     * The ID for the address that you want the cluster shipped to.
      */
     AddressId: AddressId;
     /**
@@ -800,11 +800,11 @@ declare namespace Snowball {
      */
     ShippingOption?: ShippingOption;
     /**
-     * The Status and TrackingNumber values for a Snowball being delivered to the address that you specified for a particular job.
+     * The Status and TrackingNumber values for a Snowball being returned to AWS for a particular job.
      */
     InboundShipment?: Shipment;
     /**
-     * The Status and TrackingNumber values for a Snowball being returned to AWS for a particular job.
+     * The Status and TrackingNumber values for a Snowball being delivered to the address that you specified for a particular job.
      */
     OutboundShipment?: Shipment;
   }
