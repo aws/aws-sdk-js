@@ -356,6 +356,7 @@ declare namespace Inspector {
   export type AgentVersion = string;
   export type AmiId = string;
   export type Arn = string;
+  export type ArnCount = number;
   export type AssessmentRulesPackageArnList = Arn[];
   export interface AssessmentRun {
     /**
@@ -581,6 +582,14 @@ declare namespace Inspector {
      * The user-defined attributes that are assigned to every generated finding from the assessment run that uses this assessment template.
      */
     userAttributesForFindings: UserAttributeList;
+    /**
+     * The Amazon Resource Name (ARN) of the most recent assessment run associated with this assessment template. This value exists only when the value of assessmentRunCount is greater than zero.
+     */
+    lastAssessmentRunArn?: Arn;
+    /**
+     * The number of existing assessment runs associated with this assessment template. This value can be zero or a positive integer.
+     */
+    assessmentRunCount: ArnCount;
     /**
      * The time at which the assessment template is created.
      */

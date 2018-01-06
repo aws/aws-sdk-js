@@ -769,6 +769,7 @@
       "max":300,
       "min":1
     },
+    "ArnCount":{"type":"integer"},
     "AssessmentRulesPackageArnList":{
       "type":"list",
       "member":{"shape":"Arn"},
@@ -1154,6 +1155,7 @@
         "durationInSeconds",
         "rulesPackageArns",
         "userAttributesForFindings",
+        "assessmentRunCount",
         "createdAt"
       ],
       "members":{
@@ -1180,6 +1182,14 @@
         "userAttributesForFindings":{
           "shape":"UserAttributeList",
           "documentation":"<p>The user-defined attributes that are assigned to every generated finding from the assessment run that uses this assessment template.</p>"
+        },
+        "lastAssessmentRunArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the most recent assessment run associated with this assessment template. This value exists only when the value of assessmentRunCount is greater than zero.</p>"
+        },
+        "assessmentRunCount":{
+          "shape":"ArnCount",
+          "documentation":"<p>The number of existing assessment runs associated with this assessment template. This value can be zero or a positive integer.</p>"
         },
         "createdAt":{
           "shape":"Timestamp",

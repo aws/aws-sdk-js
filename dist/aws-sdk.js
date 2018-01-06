@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.176.0
+// AWS SDK for JavaScript v2.177.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -61114,6 +61114,7 @@ module.exports={
                 "durationInSeconds",
                 "rulesPackageArns",
                 "userAttributesForFindings",
+                "assessmentRunCount",
                 "createdAt"
               ],
               "members": {
@@ -61128,6 +61129,10 @@ module.exports={
                 },
                 "userAttributesForFindings": {
                   "shape": "S4"
+                },
+                "lastAssessmentRunArn": {},
+                "assessmentRunCount": {
+                  "type": "integer"
                 },
                 "createdAt": {
                   "type": "timestamp"
@@ -61245,7 +61250,7 @@ module.exports={
                   "type": "boolean"
                 },
                 "attributes": {
-                  "shape": "S26"
+                  "shape": "S27"
                 },
                 "userAttributes": {
                   "shape": "S4"
@@ -61397,7 +61402,7 @@ module.exports={
         ],
         "members": {
           "telemetryMetadata": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       }
@@ -61458,7 +61463,7 @@ module.exports={
                 "agentHealthDetails": {},
                 "autoScalingGroup": {},
                 "telemetryMetadata": {
-                  "shape": "S2q"
+                  "shape": "S2r"
                 }
               }
             }
@@ -61472,7 +61477,7 @@ module.exports={
         "type": "structure",
         "members": {
           "assessmentTemplateArns": {
-            "shape": "S36"
+            "shape": "S37"
           },
           "filter": {
             "type": "structure",
@@ -61483,19 +61488,19 @@ module.exports={
                 "member": {}
               },
               "durationRange": {
-                "shape": "S3a"
-              },
-              "rulesPackageArns": {
                 "shape": "S3b"
               },
-              "startTimeRange": {
+              "rulesPackageArns": {
                 "shape": "S3c"
+              },
+              "startTimeRange": {
+                "shape": "S3d"
               },
               "completionTimeRange": {
-                "shape": "S3c"
+                "shape": "S3d"
               },
               "stateChangeTimeRange": {
-                "shape": "S3c"
+                "shape": "S3d"
               }
             }
           },
@@ -61512,7 +61517,7 @@ module.exports={
         ],
         "members": {
           "assessmentRunArns": {
-            "shape": "S3e"
+            "shape": "S3f"
           },
           "nextToken": {}
         }
@@ -61541,7 +61546,7 @@ module.exports={
         ],
         "members": {
           "assessmentTargetArns": {
-            "shape": "S3e"
+            "shape": "S3f"
           },
           "nextToken": {}
         }
@@ -61552,17 +61557,17 @@ module.exports={
         "type": "structure",
         "members": {
           "assessmentTargetArns": {
-            "shape": "S36"
+            "shape": "S37"
           },
           "filter": {
             "type": "structure",
             "members": {
               "namePattern": {},
               "durationRange": {
-                "shape": "S3a"
+                "shape": "S3b"
               },
               "rulesPackageArns": {
-                "shape": "S3b"
+                "shape": "S3c"
               }
             }
           },
@@ -61579,7 +61584,7 @@ module.exports={
         ],
         "members": {
           "assessmentTemplateArns": {
-            "shape": "S3e"
+            "shape": "S3f"
           },
           "nextToken": {}
         }
@@ -61642,7 +61647,7 @@ module.exports={
         "type": "structure",
         "members": {
           "assessmentRunArns": {
-            "shape": "S36"
+            "shape": "S37"
           },
           "filter": {
             "type": "structure",
@@ -61664,16 +61669,16 @@ module.exports={
                 "member": {}
               },
               "rulesPackageArns": {
-                "shape": "S3b"
+                "shape": "S3c"
               },
               "attributes": {
-                "shape": "S26"
+                "shape": "S27"
               },
               "userAttributes": {
-                "shape": "S26"
+                "shape": "S27"
               },
               "creationTimeRange": {
-                "shape": "S3c"
+                "shape": "S3d"
               }
             }
           },
@@ -61690,7 +61695,7 @@ module.exports={
         ],
         "members": {
           "findingArns": {
-            "shape": "S3e"
+            "shape": "S3f"
           },
           "nextToken": {}
         }
@@ -61713,7 +61718,7 @@ module.exports={
         ],
         "members": {
           "rulesPackageArns": {
-            "shape": "S3e"
+            "shape": "S3f"
           },
           "nextToken": {}
         }
@@ -61736,7 +61741,7 @@ module.exports={
         ],
         "members": {
           "tags": {
-            "shape": "S44"
+            "shape": "S45"
           }
         }
       }
@@ -61833,7 +61838,7 @@ module.exports={
         "members": {
           "resourceArn": {},
           "tags": {
-            "shape": "S44"
+            "shape": "S45"
           }
         }
       }
@@ -61976,13 +61981,13 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "S26": {
+    "S27": {
       "type": "list",
       "member": {
         "shape": "S5"
       }
     },
-    "S2q": {
+    "S2r": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -62001,11 +62006,11 @@ module.exports={
         }
       }
     },
-    "S36": {
+    "S37": {
       "type": "list",
       "member": {}
     },
-    "S3a": {
+    "S3b": {
       "type": "structure",
       "members": {
         "minSeconds": {
@@ -62016,11 +62021,11 @@ module.exports={
         }
       }
     },
-    "S3b": {
+    "S3c": {
       "type": "list",
       "member": {}
     },
-    "S3c": {
+    "S3d": {
       "type": "structure",
       "members": {
         "beginDate": {
@@ -62031,11 +62036,11 @@ module.exports={
         }
       }
     },
-    "S3e": {
+    "S3f": {
       "type": "list",
       "member": {}
     },
-    "S44": {
+    "S45": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -120170,7 +120175,7 @@ module.exports = AWS;
 AWS.util.update(AWS, {
 
 
-  VERSION: '2.176.0',
+  VERSION: '2.177.0',
 
 
   Signers: {},
