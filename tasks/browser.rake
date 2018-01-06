@@ -2,14 +2,14 @@ require 'json'
 
 def write_configuration
   config_cmd = <<-eof
-    node -e 'c=require("./").config.credentials;c.refresh(function() {
-      console.log(c.accessKeyId, c.secretAccessKey, c.sessionToken)
-    });'
+    c=require('./').config.credentials;c.refresh(function() {
+      console.log(c.accessKeyId, c.secretAccessKey, c.sessionToken);
+    });
   eof
   config = {}
   if File.exist?('configuration')
     config = JSON.parse(File.read('configuration'))
-    out = `#{config_cmd}`.split(/\s+/)
+    out = `node -e "#{config_cmd}"`.split(/\s+/)
     config['accessKeyId'] ||= out[0]
     config['secretAccessKey'] ||= out[1]
     config['sessionToken'] ||= out[2] if out[2] && out[2] != "undefined"
