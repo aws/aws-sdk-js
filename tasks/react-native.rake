@@ -1,29 +1,5 @@
 require 'json'
 
-def write_configuration
-  config_cmd = <<-eof
-    node -e 'c=require("./").config.credentials;c.refresh(function() {
-      console.log(c.accessKeyId, c.secretAccessKey, c.sessionToken)
-    });'
-  eof
-  config = {}
-  if File.exist?('configuration')
-    config = JSON.parse(File.read('configuration'))
-    out = `#{config_cmd}`.split(/\s+/)
-    config['accessKeyId'] ||= out[0]
-    config['secretAccessKey'] ||= out[1]
-    config['sessionToken'] ||= out[2] if out[2] && out[2] != "undefined"
-  end
-  File.open('test/configuration.js', 'w') do |f|
-    config_json = JSON.generate(config).inspect
-    f.puts "module.exports = JSON.parse(#{config_json});"
-  end
-end
-
-def sdk_version
-  JSON.parse(File.read('package.json'))['version']
-end
-
 namespace :reactnative do
   $BROWSERIFY = "browserify"
   $BROWSERIFY_DIST = "dist/aws-sdk-react-native.js"
