@@ -26,6 +26,8 @@ matrix:
     env: TEST_SCRIPT=react-native-test
   - node_js: "node"
     env: TEST_SCRIPT=tstest
+  - node_js: "node"
+    env: TEST_SCRIPT=region-check
 
 script:
   - npm run $TEST_SCRIPT
