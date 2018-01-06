@@ -137,6 +137,7 @@
     "build-react-native-core": "webpack --config dist-tools/webpack.config.rn-core.js",
     "build-react-native-dist": "webpack --config dist-tools/webpack.config.rn.js",
     "build-react-native": "npm -s run-script build-react-native-deps && npm -s run-script build-react-native-core && npm -s run-script build-react-native-dist",
-    "react-native-test": "npm -s run-script build-react-native && rake reactnative:test && karma start"
+    "react-native-test": "npm -s run-script build-react-native && rake reactnative:test && karma start",
+    "region-check": "node ./scripts/region-checker/index.js"
   }
 }
