@@ -1,13 +1,9 @@
 language: node_js
 node_js:
-#  - "0.8"
   - "0.10"
   - "0.12"
-  - "4.2"
-  - "4.4"
-  - "5"
+  - "4"
   - "6"
-  - "7"
   - "8"
 env:
   - TEST_SCRIPT=coverage
