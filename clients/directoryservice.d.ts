@@ -576,6 +576,10 @@ declare namespace DirectoryService {
      * Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
      */
     VpcSettings: DirectoryVpcSettings;
+    /**
+     * AWS Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.
+     */
+    Edition?: DirectoryEdition;
   }
   export interface CreateMicrosoftADResult {
     /**
@@ -902,6 +906,10 @@ declare namespace DirectoryService {
      */
     Size?: DirectorySize;
     /**
+     * The edition associated with this directory.
+     */
+    Edition?: DirectoryEdition;
+    /**
      * The alias for the directory. If no alias has been created for the directory, the alias is the directory identifier, such as d-XXXXXXXXXX.
      */
     Alias?: AliasName;
@@ -963,6 +971,7 @@ declare namespace DirectoryService {
     DesiredNumberOfDomainControllers?: DesiredNumberOfDomainControllers;
   }
   export type DirectoryDescriptions = DirectoryDescription[];
+  export type DirectoryEdition = "Enterprise"|"Standard"|string;
   export type DirectoryId = string;
   export type DirectoryIds = DirectoryId[];
   export interface DirectoryLimits {
@@ -1028,7 +1037,7 @@ declare namespace DirectoryService {
      */
     SubnetIds?: SubnetIds;
     /**
-     * The security group identifier for the directory. If the directory was created before 8/1/2014, this is the identifier of the directory members security group that was created when the directory was created. If the directory was created after this date, this value is null.
+     * The domain controller security group identifier for the directory.
      */
     SecurityGroupId?: SecurityGroupId;
     /**

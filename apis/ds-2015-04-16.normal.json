@@ -1112,6 +1112,10 @@
         "VpcSettings":{
           "shape":"DirectoryVpcSettings",
           "documentation":"<p>Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.</p>"
+        },
+        "Edition":{
+          "shape":"DirectoryEdition",
+          "documentation":"<p>AWS Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.</p>"
         }
       },
       "documentation":"<p>Creates a Microsoft AD in the AWS cloud.</p>"
@@ -1590,6 +1594,10 @@
           "shape":"DirectorySize",
           "documentation":"<p>The directory size.</p>"
         },
+        "Edition":{
+          "shape":"DirectoryEdition",
+          "documentation":"<p>The edition associated with this directory.</p>"
+        },
         "Alias":{
           "shape":"AliasName",
           "documentation":"<p>The alias for the directory. If no alias has been created for the directory, the alias is the directory identifier, such as <code>d-XXXXXXXXXX</code>.</p>"
@@ -1657,6 +1665,13 @@
       "type":"list",
       "member":{"shape":"DirectoryDescription"},
       "documentation":"<p>A list of directory descriptions.</p>"
+    },
+    "DirectoryEdition":{
+      "type":"string",
+      "enum":[
+        "Enterprise",
+        "Standard"
+      ]
     },
     "DirectoryId":{
       "type":"string",
@@ -1797,7 +1812,7 @@
         },
         "SecurityGroupId":{
           "shape":"SecurityGroupId",
-          "documentation":"<p>The security group identifier for the directory. If the directory was created before 8/1/2014, this is the identifier of the directory members security group that was created when the directory was created. If the directory was created after this date, this value is null.</p>"
+          "documentation":"<p>The domain controller security group identifier for the directory.</p>"
         },
         "AvailabilityZones":{
           "shape":"AvailabilityZones",
