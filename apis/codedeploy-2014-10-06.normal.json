@@ -23,6 +23,7 @@
       "input":{"shape":"AddTagsToOnPremisesInstancesInput"},
       "errors":[
         {"shape":"InstanceNameRequiredException"},
+        {"shape":"InvalidInstanceNameException"},
         {"shape":"TagRequiredException"},
         {"shape":"InvalidTagException"},
         {"shape":"TagLimitExceededException"},
@@ -301,6 +302,23 @@
         {"shape":"InvalidRoleException"}
       ],
       "documentation":"<p>Deletes a deployment group.</p>"
+    },
+    "DeleteGitHubAccountToken":{
+      "name":"DeleteGitHubAccountToken",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteGitHubAccountTokenInput"},
+      "output":{"shape":"DeleteGitHubAccountTokenOutput"},
+      "errors":[
+        {"shape":"GitHubAccountTokenNameRequiredException"},
+        {"shape":"GitHubAccountTokenDoesNotExistException"},
+        {"shape":"InvalidGitHubAccountTokenNameException"},
+        {"shape":"ResourceValidationException"},
+        {"shape":"OperationNotSupportedException"}
+      ],
+      "documentation":"<p>Deletes a GitHub account connection.</p>"
     },
     "DeregisterOnPremisesInstance":{
       "name":"DeregisterOnPremisesInstance",
@@ -630,6 +648,7 @@
       "input":{"shape":"RemoveTagsFromOnPremisesInstancesInput"},
       "errors":[
         {"shape":"InstanceNameRequiredException"},
+        {"shape":"InvalidInstanceNameException"},
         {"shape":"TagRequiredException"},
         {"shape":"InvalidTagException"},
         {"shape":"TagLimitExceededException"},
@@ -1182,10 +1201,7 @@
     },
     "CreateDeploymentConfigInput":{
       "type":"structure",
-      "required":[
-        "deploymentConfigName",
-        "minimumHealthyHosts"
-      ],
+      "required":["deploymentConfigName"],
       "members":{
         "deploymentConfigName":{
           "shape":"DeploymentConfigName",
@@ -1403,6 +1419,26 @@
         }
       },
       "documentation":"<p>Represents the output of a DeleteDeploymentGroup operation.</p>"
+    },
+    "DeleteGitHubAccountTokenInput":{
+      "type":"structure",
+      "members":{
+        "tokenName":{
+          "shape":"GitHubAccountTokenName",
+          "documentation":"<p>The name of the GitHub account connection to delete.</p>"
+        }
+      },
+      "documentation":"<p>Represents the input of a DeleteGitHubAccount operation.</p>"
+    },
+    "DeleteGitHubAccountTokenOutput":{
+      "type":"structure",
+      "members":{
+        "tokenName":{
+          "shape":"GitHubAccountTokenName",
+          "documentation":"<p>The name of the GitHub account connection that was deleted.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a DeleteGitHubAccountToken operation.</p>"
     },
     "DeploymentAlreadyCompletedException":{
       "type":"structure",
@@ -2248,6 +2284,13 @@
     "GitHubAccountTokenNameList":{
       "type":"list",
       "member":{"shape":"GitHubAccountTokenName"}
+    },
+    "GitHubAccountTokenNameRequiredException":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>The call is missing a required GitHub account connection name.</p>",
+      "exception":true
     },
     "GitHubLocation":{
       "type":"structure",

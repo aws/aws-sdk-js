@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.177.0-->
+<!--LATEST=2.178.0-->
 <!--ENTRYINSERT-->
+
+## 2.178.0
+* feature: CodeDeploy: The AWS CodeDeploy API was updated to support DeleteGitHubAccountToken, a new method that deletes a GitHub account connection.
+* feature: Route53: This release adds an exception to the CreateTrafficPolicyVersion API operation.
 
 ## 2.177.0
 * feature: Inspector: Added 2 new attributes to the DescribeAssessmentTemplate response, indicating the total number of assessment runs and last assessment run ARN (if present.)

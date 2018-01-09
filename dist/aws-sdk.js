@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.177.0
+// AWS SDK for JavaScript v2.178.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -15257,8 +15257,7 @@ module.exports={
       "input": {
         "type": "structure",
         "required": [
-          "deploymentConfigName",
-          "minimumHealthyHosts"
+          "deploymentConfigName"
         ],
         "members": {
           "deploymentConfigName": {},
@@ -15373,6 +15372,20 @@ module.exports={
           "hooksNotCleanedUp": {
             "shape": "S1j"
           }
+        }
+      }
+    },
+    "DeleteGitHubAccountToken": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "tokenName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "tokenName": {}
         }
       }
     },
@@ -119777,7 +119790,10 @@ function apiLoader(svc, version) {
   return apiLoader.services[svc][version];
 }
 
-
+/**
+ * This member of AWS.apiLoader is private, but changing it will necessitate a
+ * change to ../scripts/services-table-generator.ts
+ */
 apiLoader.services = {};
 module.exports = apiLoader;
 
@@ -119785,7 +119801,14 @@ module.exports = apiLoader;
 (function (process){
 var util = require('./util');
 
-util.crypto.lib = require('crypto-browserify');
+// browser specific modules
+util.crypto.lib = {
+  createHash: require('create-hash'),
+  createHmac: require('create-hmac'),
+  createSign: function() {
+    throw new Error('createSign is not implemented in the browser');
+  }
+}
 util.Buffer = require('buffer/').Buffer;
 util.url = require('url/');
 util.querystring = require('querystring/');
@@ -119801,8 +119824,10 @@ require('./credentials/web_identity_credentials');
 require('./credentials/cognito_identity_credentials');
 require('./credentials/saml_credentials');
 
+// Load the DOMParser XML parser
 AWS.XML.Parser = require('./xml/browser_parser');
 
+// Load the XHR HttpClient
 require('./http/xhr');
 
 if (typeof process === 'undefined') {
@@ -119810,8 +119835,9 @@ if (typeof process === 'undefined') {
     browser: true
   };
 }
+
 }).call(this,require('_process'))
-},{"./core":233,"./credentials":234,"./credentials/cognito_identity_credentials":235,"./credentials/credential_provider_chain":236,"./credentials/saml_credentials":237,"./credentials/temporary_credentials":238,"./credentials/web_identity_credentials":239,"./http/xhr":248,"./util":297,"./xml/browser_parser":298,"_process":453,"buffer/":302,"crypto-browserify":304,"querystring/":460,"url/":461}],231:[function(require,module,exports){
+},{"./core":233,"./credentials":234,"./credentials/cognito_identity_credentials":235,"./credentials/credential_provider_chain":236,"./credentials/saml_credentials":237,"./credentials/temporary_credentials":238,"./credentials/web_identity_credentials":239,"./http/xhr":248,"./util":297,"./xml/browser_parser":298,"_process":458,"buffer/":302,"create-hash":305,"create-hmac":308,"querystring/":465,"url/":492}],231:[function(require,module,exports){
 var AWS = require('../core'),
     url = AWS.util.url,
     crypto = AWS.util.crypto.lib,
@@ -119906,7 +119932,16 @@ var handleSuccess = function (result, callback) {
 };
 
 AWS.CloudFront.Signer = inherit({
-
+    /**
+     * A signer object can be used to generate signed URLs and cookies for granting
+     * access to content on restricted CloudFront distributions.
+     *
+     * @see http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+     *
+     * @param keyPairId [String]    (Required) The ID of the CloudFront key pair
+     *                              being used.
+     * @param privateKey [String]   (Required) A private key in RSA format.
+     */
     constructor: function Signer(keyPairId, privateKey) {
         if (keyPairId === void 0 || privateKey === void 0) {
             throw new Error('A key pair ID and private key are required');
@@ -119916,7 +119951,27 @@ AWS.CloudFront.Signer = inherit({
         this.privateKey = privateKey;
     },
 
-
+    /**
+     * Create a signed Amazon CloudFront Cookie.
+     *
+     * @param options [Object]            The options to create a signed cookie.
+     * @option options url [String]     The URL to which the signature will grant
+     *                                  access. Required unless you pass in a full
+     *                                  policy.
+     * @option options expires [Number] A Unix UTC timestamp indicating when the
+     *                                  signature should expire. Required unless you
+     *                                  pass in a full policy.
+     * @option options policy [String]  A CloudFront JSON policy. Required unless
+     *                                  you pass in a url and an expiry time.
+     *
+     * @param cb [Function] if a callback is provided, this function will
+     *   pass the hash as the second parameter (after the error parameter) to
+     *   the callback function.
+     *
+     * @return [Object] if called synchronously (with no callback), returns the
+     *   signed cookie parameters.
+     * @return [null] nothing is returned if a callback is provided.
+     */
     getSignedCookie: function (options, cb) {
         var signatureHash = 'policy' in options
             ? signWithCustomPolicy(options.policy, this.keyPairId, this.privateKey)
@@ -119932,7 +119987,31 @@ AWS.CloudFront.Signer = inherit({
         return handleSuccess(cookieHash, cb);
     },
 
-
+    /**
+     * Create a signed Amazon CloudFront URL.
+     *
+     * Keep in mind that URLs meant for use in media/flash players may have
+     * different requirements for URL formats (e.g. some require that the
+     * extension be removed, some require the file name to be prefixed
+     * - mp4:<path>, some require you to add "/cfx/st" into your URL).
+     *
+     * @param options [Object]          The options to create a signed URL.
+     * @option options url [String]     The URL to which the signature will grant
+     *                                  access. Required.
+     * @option options expires [Number] A Unix UTC timestamp indicating when the
+     *                                  signature should expire. Required unless you
+     *                                  pass in a full policy.
+     * @option options policy [String]  A CloudFront JSON policy. Required unless
+     *                                  you pass in a url and an expiry time.
+     *
+     * @param cb [Function] if a callback is provided, this function will
+     *   pass the URL as the second parameter (after the error parameter) to
+     *   the callback function.
+     *
+     * @return [String] if called synchronously (with no callback), returns the
+     *   signed URL.
+     * @return [null] nothing is returned if a callback is provided.
+     */
     getSignedUrl: function (options, cb) {
         try {
             var resource = getResource(options.url);
@@ -119972,11 +120051,278 @@ require('./credentials');
 require('./credentials/credential_provider_chain');
 var PromisesDependency;
 
-
+/**
+ * The main configuration class used by all service objects to set
+ * the region, credentials, and other options for requests.
+ *
+ * By default, credentials and region settings are left unconfigured.
+ * This should be configured by the application before using any
+ * AWS service APIs.
+ *
+ * In order to set global configuration options, properties should
+ * be assigned to the global {AWS.config} object.
+ *
+ * @see AWS.config
+ *
+ * @!group General Configuration Options
+ *
+ * @!attribute credentials
+ *   @return [AWS.Credentials] the AWS credentials to sign requests with.
+ *
+ * @!attribute region
+ *   @example Set the global region setting to us-west-2
+ *     AWS.config.update({region: 'us-west-2'});
+ *   @return [AWS.Credentials] The region to send service requests to.
+ *   @see http://docs.amazonwebservices.com/general/latest/gr/rande.html
+ *     A list of available endpoints for each AWS service
+ *
+ * @!attribute maxRetries
+ *   @return [Integer] the maximum amount of retries to perform for a
+ *     service request. By default this value is calculated by the specific
+ *     service object that the request is being made to.
+ *
+ * @!attribute maxRedirects
+ *   @return [Integer] the maximum amount of redirects to follow for a
+ *     service request. Defaults to 10.
+ *
+ * @!attribute paramValidation
+ *   @return [Boolean|map] whether input parameters should be validated against
+ *     the operation description before sending the request. Defaults to true.
+ *     Pass a map to enable any of the following specific validation features:
+ *
+ *     * **min** [Boolean] &mdash; Validates that a value meets the min
+ *       constraint. This is enabled by default when paramValidation is set
+ *       to `true`.
+ *     * **max** [Boolean] &mdash; Validates that a value meets the max
+ *       constraint.
+ *     * **pattern** [Boolean] &mdash; Validates that a string value matches a
+ *       regular expression.
+ *     * **enum** [Boolean] &mdash; Validates that a string value matches one
+ *       of the allowable enum values.
+ *
+ * @!attribute computeChecksums
+ *   @return [Boolean] whether to compute checksums for payload bodies when
+ *     the service accepts it (currently supported in S3 only).
+ *
+ * @!attribute convertResponseTypes
+ *   @return [Boolean] whether types are converted when parsing response data.
+ *     Currently only supported for JSON based services. Turning this off may
+ *     improve performance on large response payloads. Defaults to `true`.
+ *
+ * @!attribute correctClockSkew
+ *   @return [Boolean] whether to apply a clock skew correction and retry
+ *     requests that fail because of an skewed client clock. Defaults to
+ *     `false`.
+ *
+ * @!attribute sslEnabled
+ *   @return [Boolean] whether SSL is enabled for requests
+ *
+ * @!attribute s3ForcePathStyle
+ *   @return [Boolean] whether to force path style URLs for S3 objects
+ *
+ * @!attribute s3BucketEndpoint
+ *   @note Setting this configuration option requires an `endpoint` to be
+ *     provided explicitly to the service constructor.
+ *   @return [Boolean] whether the provided endpoint addresses an individual
+ *     bucket (false if it addresses the root API endpoint).
+ *
+ * @!attribute s3DisableBodySigning
+ *   @return [Boolean] whether to disable S3 body signing when using signature version `v4`.
+ *     Body signing can only be disabled when using https. Defaults to `true`.
+ *
+ * @!attribute useAccelerateEndpoint
+ *   @note This configuration option is only compatible with S3 while accessing
+ *     dns-compatible buckets.
+ *   @return [Boolean] Whether to use the Accelerate endpoint with the S3 service.
+ *     Defaults to `false`.
+ *
+ * @!attribute retryDelayOptions
+ *   @example Set the base retry delay for all services to 300 ms
+ *     AWS.config.update({retryDelayOptions: {base: 300}});
+ *     // Delays with maxRetries = 3: 300, 600, 1200
+ *   @example Set a custom backoff function to provide delay values on retries
+ *     AWS.config.update({retryDelayOptions: {customBackoff: function(retryCount) {
+ *       // returns delay in ms
+ *     }}});
+ *   @return [map] A set of options to configure the retry delay on retryable errors.
+ *     Currently supported options are:
+ *
+ *     * **base** [Integer] &mdash; The base number of milliseconds to use in the
+ *       exponential backoff for operation retries. Defaults to 100 ms for all services except
+ *       DynamoDB, where it defaults to 50ms.
+ *     * **customBackoff ** [function] &mdash; A custom function that accepts a retry count
+ *       and returns the amount of time to delay in milliseconds. The `base` option will be
+ *       ignored if this option is supplied.
+ *
+ * @!attribute httpOptions
+ *   @return [map] A set of options to pass to the low-level HTTP request.
+ *     Currently supported options are:
+ *
+ *     * **proxy** [String] &mdash; the URL to proxy requests through
+ *     * **agent** [http.Agent, https.Agent] &mdash; the Agent object to perform
+ *       HTTP requests with. Used for connection pooling. Defaults to the global
+ *       agent (`http.globalAgent`) for non-SSL connections. Note that for
+ *       SSL connections, a special Agent object is used in order to enable
+ *       peer certificate verification. This feature is only supported in the
+ *       Node.js environment.
+ *     * **connectTimeout** [Integer] &mdash; Sets the socket to timeout after
+ *       failing to establish a connection with the server after
+ *       `connectTimeout` milliseconds. This timeout has no effect once a socket
+ *       connection has been established.
+ *     * **timeout** [Integer] &mdash; Sets the socket to timeout after timeout
+ *       milliseconds of inactivity on the socket. Defaults to two minutes
+ *       (120000)
+ *     * **xhrAsync** [Boolean] &mdash; Whether the SDK will send asynchronous
+ *       HTTP requests. Used in the browser environment only. Set to false to
+ *       send requests synchronously. Defaults to true (async on).
+ *     * **xhrWithCredentials** [Boolean] &mdash; Sets the "withCredentials"
+ *       property of an XMLHttpRequest object. Used in the browser environment
+ *       only. Defaults to false.
+ * @!attribute logger
+ *   @return [#write,#log] an object that responds to .write() (like a stream)
+ *     or .log() (like the console object) in order to log information about
+ *     requests
+ *
+ * @!attribute systemClockOffset
+ *   @return [Number] an offset value in milliseconds to apply to all signing
+ *     times. Use this to compensate for clock skew when your system may be
+ *     out of sync with the service time. Note that this configuration option
+ *     can only be applied to the global `AWS.config` object and cannot be
+ *     overridden in service-specific configuration. Defaults to 0 milliseconds.
+ *
+ * @!attribute signatureVersion
+ *   @return [String] the signature version to sign requests with (overriding
+ *     the API configuration). Possible values are: 'v2', 'v3', 'v4'.
+ *
+ * @!attribute signatureCache
+ *   @return [Boolean] whether the signature to sign requests with (overriding
+ *     the API configuration) is cached. Only applies to the signature version 'v4'.
+ *     Defaults to `true`.
+ */
 AWS.Config = AWS.util.inherit({
+  /**
+   * @!endgroup
+   */
 
-
-
+  /**
+   * Creates a new configuration object. This is the object that passes
+   * option data along to service requests, including credentials, security,
+   * region information, and some service specific settings.
+   *
+   * @example Creating a new configuration object with credentials and region
+   *   var config = new AWS.Config({
+   *     accessKeyId: 'AKID', secretAccessKey: 'SECRET', region: 'us-west-2'
+   *   });
+   * @option options accessKeyId [String] your AWS access key ID.
+   * @option options secretAccessKey [String] your AWS secret access key.
+   * @option options sessionToken [AWS.Credentials] the optional AWS
+   *   session token to sign requests with.
+   * @option options credentials [AWS.Credentials] the AWS credentials
+   *   to sign requests with. You can either specify this object, or
+   *   specify the accessKeyId and secretAccessKey options directly.
+   * @option options credentialProvider [AWS.CredentialProviderChain] the
+   *   provider chain used to resolve credentials if no static `credentials`
+   *   property is set.
+   * @option options region [String] the region to send service requests to.
+   *   See {region} for more information.
+   * @option options maxRetries [Integer] the maximum amount of retries to
+   *   attempt with a request. See {maxRetries} for more information.
+   * @option options maxRedirects [Integer] the maximum amount of redirects to
+   *   follow with a request. See {maxRedirects} for more information.
+   * @option options sslEnabled [Boolean] whether to enable SSL for
+   *   requests.
+   * @option options paramValidation [Boolean|map] whether input parameters
+   *   should be validated against the operation description before sending
+   *   the request. Defaults to true. Pass a map to enable any of the
+   *   following specific validation features:
+   *
+   *   * **min** [Boolean] &mdash; Validates that a value meets the min
+   *     constraint. This is enabled by default when paramValidation is set
+   *     to `true`.
+   *   * **max** [Boolean] &mdash; Validates that a value meets the max
+   *     constraint.
+   *   * **pattern** [Boolean] &mdash; Validates that a string value matches a
+   *     regular expression.
+   *   * **enum** [Boolean] &mdash; Validates that a string value matches one
+   *     of the allowable enum values.
+   * @option options computeChecksums [Boolean] whether to compute checksums
+   *   for payload bodies when the service accepts it (currently supported
+   *   in S3 only)
+   * @option options convertResponseTypes [Boolean] whether types are converted
+   *     when parsing response data. Currently only supported for JSON based
+   *     services. Turning this off may improve performance on large response
+   *     payloads. Defaults to `true`.
+   * @option options correctClockSkew [Boolean] whether to apply a clock skew
+   *     correction and retry requests that fail because of an skewed client
+   *     clock. Defaults to `false`.
+   * @option options s3ForcePathStyle [Boolean] whether to force path
+   *   style URLs for S3 objects.
+   * @option options s3BucketEndpoint [Boolean] whether the provided endpoint
+   *   addresses an individual bucket (false if it addresses the root API
+   *   endpoint). Note that setting this configuration option requires an
+   *   `endpoint` to be provided explicitly to the service constructor.
+   * @option options s3DisableBodySigning [Boolean] whether S3 body signing
+   *   should be disabled when using signature version `v4`. Body signing
+   *   can only be disabled when using https. Defaults to `true`.
+   *
+   * @option options retryDelayOptions [map] A set of options to configure
+   *   the retry delay on retryable errors. Currently supported options are:
+   *
+   *   * **base** [Integer] &mdash; The base number of milliseconds to use in the
+   *     exponential backoff for operation retries. Defaults to 100 ms for all
+   *     services except DynamoDB, where it defaults to 50ms.
+   *   * **customBackoff ** [function] &mdash; A custom function that accepts a retry count
+   *     and returns the amount of time to delay in milliseconds. The `base` option will be
+   *     ignored if this option is supplied.
+   * @option options httpOptions [map] A set of options to pass to the low-level
+   *   HTTP request. Currently supported options are:
+   *
+   *   * **proxy** [String] &mdash; the URL to proxy requests through
+   *   * **agent** [http.Agent, https.Agent] &mdash; the Agent object to perform
+   *     HTTP requests with. Used for connection pooling. Defaults to the global
+   *     agent (`http.globalAgent`) for non-SSL connections. Note that for
+   *     SSL connections, a special Agent object is used in order to enable
+   *     peer certificate verification. This feature is only available in the
+   *     Node.js environment.
+   *   * **connectTimeout** [Integer] &mdash; Sets the socket to timeout after
+   *     failing to establish a connection with the server after
+   *     `connectTimeout` milliseconds. This timeout has no effect once a socket
+   *     connection has been established.
+   *   * **timeout** [Integer] &mdash; Sets the socket to timeout after timeout
+   *     milliseconds of inactivity on the socket. Defaults to two minutes
+   *     (120000).
+   *   * **xhrAsync** [Boolean] &mdash; Whether the SDK will send asynchronous
+   *     HTTP requests. Used in the browser environment only. Set to false to
+   *     send requests synchronously. Defaults to true (async on).
+   *   * **xhrWithCredentials** [Boolean] &mdash; Sets the "withCredentials"
+   *     property of an XMLHttpRequest object. Used in the browser environment
+   *     only. Defaults to false.
+   * @option options apiVersion [String, Date] a String in YYYY-MM-DD format
+   *   (or a date) that represents the latest possible API version that can be
+   *   used in all services (unless overridden by `apiVersions`). Specify
+   *   'latest' to use the latest possible version.
+   * @option options apiVersions [map<String, String|Date>] a map of service
+   *   identifiers (the lowercase service class name) with the API version to
+   *   use when instantiating a service. Specify 'latest' for each individual
+   *   that can use the latest available version.
+   * @option options logger [#write,#log] an object that responds to .write()
+   *   (like a stream) or .log() (like the console object) in order to log
+   *   information about requests
+   * @option options systemClockOffset [Number] an offset value in milliseconds
+   *   to apply to all signing times. Use this to compensate for clock skew
+   *   when your system may be out of sync with the service time. Note that
+   *   this configuration option can only be applied to the global `AWS.config`
+   *   object and cannot be overridden in service-specific configuration.
+   *   Defaults to 0 milliseconds.
+   * @option options signatureVersion [String] the signature version to sign
+   *   requests with (overriding the API configuration). Possible values are:
+   *   'v2', 'v3', 'v4'.
+   * @option options signatureCache [Boolean] whether the signature to sign
+   *   requests with (overriding the API configuration) is cached. Only applies
+   *   to the signature version 'v4'. Defaults to `true`.
+   * @option options dynamoDbCrc32 [Boolean] whether to validate the CRC32
+   *   checksum of HTTP response bodies returned by DynamoDB. Default: `true`.
+   */
   constructor: function Config(options) {
     if (options === undefined) options = {};
     options = this.extractCredentials(options);
@@ -119986,9 +120332,35 @@ AWS.Config = AWS.util.inherit({
     });
   },
 
+  /**
+   * @!group Managing Credentials
+   */
 
-
-
+  /**
+   * Loads credentials from the configuration object. This is used internally
+   * by the SDK to ensure that refreshable {Credentials} objects are properly
+   * refreshed and loaded when sending a request. If you want to ensure that
+   * your credentials are loaded prior to a request, you can use this method
+   * directly to provide accurate credential data stored in the object.
+   *
+   * @note If you configure the SDK with static or environment credentials,
+   *   the credential data should already be present in {credentials} attribute.
+   *   This method is primarily necessary to load credentials from asynchronous
+   *   sources, or sources that can refresh credentials periodically.
+   * @example Getting your access key
+   *   AWS.config.getCredentials(function(err) {
+   *     if (err) console.log(err.stack); // credentials not loaded
+   *     else console.log("Access Key:", AWS.config.credentials.accessKeyId);
+   *   })
+   * @callback callback function(err)
+   *   Called when the {credentials} have been properly set on the configuration
+   *   object.
+   *
+   *   @param err [Error] if this is set, credentials were not successfully
+   *     loaded and this error provides information why.
+   * @see credentials
+   * @see Credentials
+   */
   getCredentials: function getCredentials(callback) {
     var self = this;
 
@@ -120042,9 +120414,21 @@ AWS.Config = AWS.util.inherit({
     }
   },
 
+  /**
+   * @!group Loading and Setting Configuration Options
+   */
 
-
-
+  /**
+   * @overload update(options, allowUnknownKeys = false)
+   *   Updates the current configuration object with new options.
+   *
+   *   @example Update maxRetries property of a configuration object
+   *     config.update({maxRetries: 10});
+   *   @param [Object] options a map of option keys and values.
+   *   @param [Boolean] allowUnknownKeys whether unknown keys can be set on
+   *     the configuration object. Defaults to `false`.
+   *   @see constructor
+   */
   update: function update(options, allowUnknownKeys) {
     allowUnknownKeys = allowUnknownKeys || false;
     options = this.extractCredentials(options);
@@ -120056,7 +120440,15 @@ AWS.Config = AWS.util.inherit({
     });
   },
 
-
+  /**
+   * Loads configuration data from a JSON file into this config object.
+   * @note Loading configuration will reset all existing configuration
+   *   on the object.
+   * @!macro nobrowser
+   * @param path [String] the path relative to your process's current
+   *    working directory to load configuration from.
+   * @return [AWS.Config] the same configuration object
+   */
   loadFromPath: function loadFromPath(path) {
     this.clear();
 
@@ -120074,18 +120466,27 @@ AWS.Config = AWS.util.inherit({
     return this;
   },
 
-
+  /**
+   * Clears configuration data on this object
+   *
+   * @api private
+   */
   clear: function clear() {
-
+    /*jshint forin:false */
     AWS.util.each.call(this, this.keys, function (key) {
       delete this[key];
     });
 
+    // reset credential provider
     this.set('credentials', undefined);
     this.set('credentialProvider', undefined);
   },
 
-
+  /**
+   * Sets a property on the configuration object, allowing for a
+   * default value
+   * @api private
+   */
   set: function set(property, value, defaultValue) {
     if (value === undefined) {
       if (defaultValue === undefined) {
@@ -120097,13 +120498,19 @@ AWS.Config = AWS.util.inherit({
         this[property] = defaultValue;
       }
     } else if (property === 'httpOptions' && this[property]) {
+      // deep merge httpOptions
       this[property] = AWS.util.merge(this[property], value);
     } else {
       this[property] = value;
     }
   },
 
-
+  /**
+   * All of the keys with their default values.
+   *
+   * @constant
+   * @api private
+   */
   keys: {
     credentials: null,
     credentialProvider: null,
@@ -120134,7 +120541,12 @@ AWS.Config = AWS.util.inherit({
     useAccelerateEndpoint: false
   },
 
-
+  /**
+   * Extracts accessKeyId, secretAccessKey and sessionToken
+   * from a configuration hash.
+   *
+   * @api private
+   */
   extractCredentials: function extractCredentials(options) {
     if (options.accessKeyId && options.secretAccessKey) {
       options = AWS.util.copy(options);
@@ -120143,9 +120555,15 @@ AWS.Config = AWS.util.inherit({
     return options;
   },
 
-
+  /**
+   * Sets the promise dependency the SDK will use wherever Promises are returned.
+   * Passing `null` will force the SDK to use native Promises if they are available.
+   * If native Promises are not available, passing `null` will have no effect.
+   * @param [Constructor] dep A reference to a Promise constructor
+   */
   setPromisesDependency: function setPromisesDependency(dep) {
     PromisesDependency = dep;
+    // if null was passed in, we should try to use native promises
     if (dep === null && typeof Promise === 'function') {
       PromisesDependency = Promise;
     }
@@ -120154,33 +120572,51 @@ AWS.Config = AWS.util.inherit({
     AWS.util.addPromises(constructors, PromisesDependency);
   },
 
-
+  /**
+   * Gets the promise dependency set by `AWS.config.setPromisesDependency`.
+   */
   getPromisesDependency: function getPromisesDependency() {
     return PromisesDependency;
   }
 });
 
-
+/**
+ * @return [AWS.Config] The global configuration object singleton instance
+ * @readonly
+ * @see AWS.Config
+ */
 AWS.config = new AWS.Config();
 
 },{"./core":233,"./credentials":234,"./credentials/credential_provider_chain":236}],233:[function(require,module,exports){
-
+/**
+ * The main AWS namespace
+ */
 var AWS = { util: require('./util') };
 
-
+/**
+ * @api private
+ * @!macro [new] nobrowser
+ *   @note This feature is not supported in the browser environment of the SDK.
+ */
 var _hidden = {}; _hidden.toString(); // hack to parse macro
 
 module.exports = AWS;
 
 AWS.util.update(AWS, {
 
+  /**
+   * @constant
+   */
+  VERSION: '2.178.0',
 
-  VERSION: '2.177.0',
-
-
+  /**
+   * @api private
+   */
   Signers: {},
 
-
+  /**
+   * @api private
+   */
   Protocol: {
     Json: require('./protocol/json'),
     Query: require('./protocol/query'),
@@ -120189,19 +120625,25 @@ AWS.util.update(AWS, {
     RestXml: require('./protocol/rest_xml')
   },
 
-
+  /**
+   * @api private
+   */
   XML: {
     Builder: require('./xml/builder'),
     Parser: null // conditionally set based on environment
   },
 
-
+  /**
+   * @api private
+   */
   JSON: {
     Builder: require('./json/builder'),
     Parser: require('./json/parser')
   },
 
-
+  /**
+   * @api private
+   */
   Model: {
     Api: require('./model/api'),
     Operation: require('./model/operation'),
@@ -120210,7 +120652,9 @@ AWS.util.update(AWS, {
     ResourceWaiter: require('./model/resource_waiter')
   },
 
-
+  /**
+   * @api private
+   */
   apiLoader: require('./api_loader')
 });
 
@@ -120226,16 +120670,90 @@ require('./resource_waiter');
 require('./signers/request_signer');
 require('./param_validator');
 
-
+/**
+ * @readonly
+ * @return [AWS.SequentialExecutor] a collection of global event listeners that
+ *   are attached to every sent request.
+ * @see AWS.Request AWS.Request for a list of events to listen for
+ * @example Logging the time taken to send a request
+ *   AWS.events.on('send', function startSend(resp) {
+ *     resp.startTime = new Date().getTime();
+ *   }).on('complete', function calculateTime(resp) {
+ *     var time = (new Date().getTime() - resp.startTime) / 1000;
+ *     console.log('Request took ' + time + ' seconds');
+ *   });
+ *
+ *   new AWS.S3().listBuckets(); // prints 'Request took 0.285 seconds'
+ */
 AWS.events = new AWS.SequentialExecutor();
 
 },{"./api_loader":229,"./config":232,"./event_listeners":246,"./http":247,"./json/builder":249,"./json/parser":250,"./model/api":251,"./model/operation":253,"./model/paginator":254,"./model/resource_waiter":255,"./model/shape":256,"./param_validator":257,"./protocol/json":259,"./protocol/query":260,"./protocol/rest":261,"./protocol/rest_json":262,"./protocol/rest_xml":263,"./request":268,"./resource_waiter":269,"./response":270,"./sequential_executor":272,"./service":273,"./signers/request_signer":289,"./util":297,"./xml/builder":299}],234:[function(require,module,exports){
 var AWS = require('./core');
 
-
+/**
+ * Represents your AWS security credentials, specifically the
+ * {accessKeyId}, {secretAccessKey}, and optional {sessionToken}.
+ * Creating a `Credentials` object allows you to pass around your
+ * security information to configuration and service objects.
+ *
+ * Note that this class typically does not need to be constructed manually,
+ * as the {AWS.Config} and {AWS.Service} classes both accept simple
+ * options hashes with the three keys. These structures will be converted
+ * into Credentials objects automatically.
+ *
+ * ## Expiring and Refreshing Credentials
+ *
+ * Occasionally credentials can expire in the middle of a long-running
+ * application. In this case, the SDK will automatically attempt to
+ * refresh the credentials from the storage location if the Credentials
+ * class implements the {refresh} method.
+ *
+ * If you are implementing a credential storage location, you
+ * will want to create a subclass of the `Credentials` class and
+ * override the {refresh} method. This method allows credentials to be
+ * retrieved from the backing store, be it a file system, database, or
+ * some network storage. The method should reset the credential attributes
+ * on the object.
+ *
+ * @!attribute expired
+ *   @return [Boolean] whether the credentials have been expired and
+ *     require a refresh. Used in conjunction with {expireTime}.
+ * @!attribute expireTime
+ *   @return [Date] a time when credentials should be considered expired. Used
+ *     in conjunction with {expired}.
+ * @!attribute accessKeyId
+ *   @return [String] the AWS access key ID
+ * @!attribute secretAccessKey
+ *   @return [String] the AWS secret access key
+ * @!attribute sessionToken
+ *   @return [String] an optional AWS session token
+ */
 AWS.Credentials = AWS.util.inherit({
-
+  /**
+   * A credentials object can be created using positional arguments or an options
+   * hash.
+   *
+   * @overload AWS.Credentials(accessKeyId, secretAccessKey, sessionToken=null)
+   *   Creates a Credentials object with a given set of credential information
+   *   as positional arguments.
+   *   @param accessKeyId [String] the AWS access key ID
+   *   @param secretAccessKey [String] the AWS secret access key
+   *   @param sessionToken [String] the optional AWS session token
+   *   @example Create a credentials object with AWS credentials
+   *     var creds = new AWS.Credentials('akid', 'secret', 'session');
+   * @overload AWS.Credentials(options)
+   *   Creates a Credentials object with a given set of credential information
+   *   as an options hash.
+   *   @option options accessKeyId [String] the AWS access key ID
+   *   @option options secretAccessKey [String] the AWS secret access key
+   *   @option options sessionToken [String] the optional AWS session token
+   *   @example Create a credentials object with AWS credentials
+   *     var creds = new AWS.Credentials({
+   *       accessKeyId: 'akid', secretAccessKey: 'secret', sessionToken: 'session'
+   *     });
+   */
   constructor: function Credentials() {
+    // hide secretAccessKey from being displayed with util.inspect
     AWS.util.hideProperties(this, ['secretAccessKey']);
 
     this.expired = false;
@@ -120252,10 +120770,17 @@ AWS.Credentials = AWS.util.inherit({
     }
   },
 
-
+  /**
+   * @return [Integer] the number of seconds before {expireTime} during which
+   *   the credentials will be considered expired.
+   */
   expiryWindow: 15,
 
-
+  /**
+   * @return [Boolean] whether the credentials object should call {refresh}
+   * @note Subclasses should override this method to provide custom refresh
+   *   logic.
+   */
   needsRefresh: function needsRefresh() {
     var currentTime = AWS.util.date.getDate().getTime();
     var adjustedTime = new Date(currentTime + this.expiryWindow * 1000);
@@ -120267,7 +120792,19 @@ AWS.Credentials = AWS.util.inherit({
     }
   },
 
-
+  /**
+   * Gets the existing credentials, refreshing them if they are not yet loaded
+   * or have expired. Users should call this method before using {refresh},
+   * as this will not attempt to reload credentials when they are already
+   * loaded into the object.
+   *
+   * @callback callback function(err)
+   *   When this callback is called with no error, it means either credentials
+   *   do not need to be refreshed or refreshed credentials information has
+   *   been loaded into the object (as the `accessKeyId`, `secretAccessKey`,
+   *   and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   */
   get: function get(callback) {
     var self = this;
     if (this.needsRefresh()) {
@@ -120280,24 +120817,85 @@ AWS.Credentials = AWS.util.inherit({
     }
   },
 
+  /**
+   * @!method  getPromise()
+   *   Returns a 'thenable' promise.
+   *   Gets the existing credentials, refreshing them if they are not yet loaded
+   *   or have expired. Users should call this method before using {refresh},
+   *   as this will not attempt to reload credentials when they are already
+   *   loaded into the object.
+   *
+   *   Two callbacks can be provided to the `then` method on the returned promise.
+   *   The first callback will be called if the promise is fulfilled, and the second
+   *   callback will be called if the promise is rejected.
+   *   @callback fulfilledCallback function()
+   *     Called if the promise is fulfilled. When this callback is called, it
+   *     means either credentials do not need to be refreshed or refreshed
+   *     credentials information has been loaded into the object (as the
+   *     `accessKeyId`, `secretAccessKey`, and `sessionToken` properties).
+   *   @callback rejectedCallback function(err)
+   *     Called if the promise is rejected.
+   *     @param err [Error] if an error occurred, this value will be filled
+   *   @return [Promise] A promise that represents the state of the `get` call.
+   *   @example Calling the `getPromise` method.
+   *     var promise = credProvider.getPromise();
+   *     promise.then(function() { ... }, function(err) { ... });
+   */
 
+  /**
+   * @!method  refreshPromise()
+   *   Returns a 'thenable' promise.
+   *   Refreshes the credentials. Users should call {get} before attempting
+   *   to forcibly refresh credentials.
+   *
+   *   Two callbacks can be provided to the `then` method on the returned promise.
+   *   The first callback will be called if the promise is fulfilled, and the second
+   *   callback will be called if the promise is rejected.
+   *   @callback fulfilledCallback function()
+   *     Called if the promise is fulfilled. When this callback is called, it
+   *     means refreshed credentials information has been loaded into the object
+   *     (as the `accessKeyId`, `secretAccessKey`, and `sessionToken` properties).
+   *   @callback rejectedCallback function(err)
+   *     Called if the promise is rejected.
+   *     @param err [Error] if an error occurred, this value will be filled
+   *   @return [Promise] A promise that represents the state of the `refresh` call.
+   *   @example Calling the `refreshPromise` method.
+   *     var promise = credProvider.refreshPromise();
+   *     promise.then(function() { ... }, function(err) { ... });
+   */
 
-
-
-
+  /**
+   * Refreshes the credentials. Users should call {get} before attempting
+   * to forcibly refresh credentials.
+   *
+   * @callback callback function(err)
+   *   When this callback is called with no error, it means refreshed
+   *   credentials information has been loaded into the object (as the
+   *   `accessKeyId`, `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @note Subclasses should override this class to reset the
+   *   {accessKeyId}, {secretAccessKey} and optional {sessionToken}
+   *   on the credentials object and then call the callback with
+   *   any error information.
+   * @see get
+   */
   refresh: function refresh(callback) {
     this.expired = false;
     callback();
   }
 });
 
-
+/**
+ * @api private
+ */
 AWS.Credentials.addPromisesToClass = function addPromisesToClass(PromiseDependency) {
   this.prototype.getPromise = AWS.util.promisifyMethod('get', PromiseDependency);
   this.prototype.refreshPromise = AWS.util.promisifyMethod('refresh', PromiseDependency);
 };
 
-
+/**
+ * @api private
+ */
 AWS.Credentials.deletePromisesFromClass = function deletePromisesFromClass() {
   delete this.prototype.getPromise;
   delete this.prototype.refreshPromise;
@@ -120310,15 +120908,128 @@ var AWS = require('../core');
 var CognitoIdentity = require('../../clients/cognitoidentity');
 var STS = require('../../clients/sts');
 
-
+/**
+ * Represents credentials retrieved from STS Web Identity Federation using
+ * the Amazon Cognito Identity service.
+ *
+ * By default this provider gets credentials using the
+ * {AWS.CognitoIdentity.getCredentialsForIdentity} service operation, which
+ * requires either an `IdentityId` or an `IdentityPoolId` (Amazon Cognito
+ * Identity Pool ID), which is used to call {AWS.CognitoIdentity.getId} to
+ * obtain an `IdentityId`. If the identity or identity pool is not configured in
+ * the Amazon Cognito Console to use IAM roles with the appropriate permissions,
+ * then additionally a `RoleArn` is required containing the ARN of the IAM trust
+ * policy for the Amazon Cognito role that the user will log into. If a `RoleArn`
+ * is provided, then this provider gets credentials using the
+ * {AWS.STS.assumeRoleWithWebIdentity} service operation, after first getting an
+ * Open ID token from {AWS.CognitoIdentity.getOpenIdToken}.
+ *
+ * In addition, if this credential provider is used to provide authenticated
+ * login, the `Logins` map may be set to the tokens provided by the respective
+ * identity providers. See {constructor} for an example on creating a credentials
+ * object with proper property values.
+ *
+ * ## Refreshing Credentials from Identity Service
+ *
+ * In addition to AWS credentials expiring after a given amount of time, the
+ * login token from the identity provider will also expire. Once this token
+ * expires, it will not be usable to refresh AWS credentials, and another
+ * token will be needed. The SDK does not manage refreshing of the token value,
+ * but this can be done through a "refresh token" supported by most identity
+ * providers. Consult the documentation for the identity provider for refreshing
+ * tokens. Once the refreshed token is acquired, you should make sure to update
+ * this new token in the credentials object's {params} property. The following
+ * code will update the WebIdentityToken, assuming you have retrieved an updated
+ * token from the identity provider:
+ *
+ * ```javascript
+ * AWS.config.credentials.params.Logins['graph.facebook.com'] = updatedToken;
+ * ```
+ *
+ * Future calls to `credentials.refresh()` will now use the new token.
+ *
+ * @!attribute params
+ *   @return [map] the map of params passed to
+ *     {AWS.CognitoIdentity.getId},
+ *     {AWS.CognitoIdentity.getOpenIdToken}, and
+ *     {AWS.STS.assumeRoleWithWebIdentity}. To update the token, set the
+ *     `params.WebIdentityToken` property.
+ * @!attribute data
+ *   @return [map] the raw data response from the call to
+ *     {AWS.CognitoIdentity.getCredentialsForIdentity}, or
+ *     {AWS.STS.assumeRoleWithWebIdentity}. Use this if you want to get
+ *     access to other properties from the response.
+ * @!attribute identityId
+ *   @return [String] the Cognito ID returned by the last call to
+ *     {AWS.CognitoIdentity.getOpenIdToken}. This ID represents the actual
+ *     final resolved identity ID from Amazon Cognito.
+ */
 AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
-
+  /**
+   * @api private
+   */
   localStorageKey: {
     id: 'aws.cognito.identity-id.',
     providers: 'aws.cognito.identity-providers.'
   },
 
-
+  /**
+   * Creates a new credentials object.
+   * @example Creating a new credentials object
+   *   AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+   *
+   *     // either IdentityPoolId or IdentityId is required
+   *     // See the IdentityPoolId param for AWS.CognitoIdentity.getID (linked below)
+   *     // See the IdentityId param for AWS.CognitoIdentity.getCredentialsForIdentity
+   *     // or AWS.CognitoIdentity.getOpenIdToken (linked below)
+   *     IdentityPoolId: 'us-east-1:1699ebc0-7900-4099-b910-2df94f52a030',
+   *     IdentityId: 'us-east-1:128d0a74-c82f-4553-916d-90053e4a8b0f'
+   *
+   *     // optional, only necessary when the identity pool is not configured
+   *     // to use IAM roles in the Amazon Cognito Console
+   *     // See the RoleArn param for AWS.STS.assumeRoleWithWebIdentity (linked below)
+   *     RoleArn: 'arn:aws:iam::1234567890:role/MYAPP-CognitoIdentity',
+   *
+   *     // optional tokens, used for authenticated login
+   *     // See the Logins param for AWS.CognitoIdentity.getID (linked below)
+   *     Logins: {
+   *       'graph.facebook.com': 'FBTOKEN',
+   *       'www.amazon.com': 'AMAZONTOKEN',
+   *       'accounts.google.com': 'GOOGLETOKEN',
+   *       'api.twitter.com': 'TWITTERTOKEN',
+   *       'www.digits.com': 'DIGITSTOKEN'
+   *     },
+   *
+   *     // optional name, defaults to web-identity
+   *     // See the RoleSessionName param for AWS.STS.assumeRoleWithWebIdentity (linked below)
+   *     RoleSessionName: 'web',
+   *
+   *     // optional, only necessary when application runs in a browser
+   *     // and multiple users are signed in at once, used for caching
+   *     LoginId: 'example@gmail.com'
+   *
+   *   }, {
+   *      // optionally provide configuration to apply to the underlying service clients
+   *      // if configuration is not provided, then configuration will be pulled from AWS.config
+   *
+   *      // region should match the region your identity pool is located in
+   *      region: 'us-east-1',
+   *
+   *      // specify timeout options
+   *      httpOptions: {
+   *        timeout: 100
+   *      }
+   *   });
+   * @see AWS.CognitoIdentity.getId
+   * @see AWS.CognitoIdentity.getCredentialsForIdentity
+   * @see AWS.STS.assumeRoleWithWebIdentity
+   * @see AWS.CognitoIdentity.getOpenIdToken
+   * @see AWS.Config
+   * @note If a region is not provided in the global AWS.config, or
+   *   specified in the `clientConfig` to the CognitoIdentityCredentials
+   *   constructor, you may encounter a 'Missing credentials in config' error
+   *   when calling making a service call.
+   */
   constructor: function CognitoIdentityCredentials(params, clientConfig) {
     AWS.Credentials.call(this);
     this.expired = true;
@@ -120339,7 +121050,18 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     });
   },
 
-
+  /**
+   * Refreshes credentials using {AWS.CognitoIdentity.getCredentialsForIdentity},
+   * or {AWS.STS.assumeRoleWithWebIdentity}.
+   *
+   * @callback callback function(err)
+   *   Called when the STS service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see AWS.Credentials.get
+   */
   refresh: function refresh(callback) {
     var self = this;
     self.createClients();
@@ -120359,7 +121081,11 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     });
   },
 
-
+  /**
+   * Clears the cached Cognito ID associated with the currently configured
+   * identity pool ID. Use this to manually invalidate your cache if
+   * the identity pool ID was deleted.
+   */
   clearCachedId: function clearCache() {
     this._identityId = null;
     delete this.params.IdentityId;
@@ -120370,7 +121096,9 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     delete this.storage[this.localStorageKey.providers + poolId + loginId];
   },
 
-
+  /**
+   * @api private
+   */
   clearIdOnNotAuthorized: function clearIdOnNotAuthorized(err) {
     var self = this;
     if (err.code == 'NotAuthorizedException') {
@@ -120378,7 +121106,19 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     }
   },
 
-
+  /**
+   * Retrieves a Cognito ID, loading from cache if it was already retrieved
+   * on this device.
+   *
+   * @callback callback function(err, identityId)
+   *   @param err [Error, null] an error object if the call failed or null if
+   *     it succeeded.
+   *   @param identityId [String, null] if successful, the callback will return
+   *     the Cognito ID.
+   * @note If not loaded explicitly, the Cognito ID is loaded and stored in
+   *   localStorage in the browser environment of a device.
+   * @api private
+   */
   getId: function getId(callback) {
     var self = this;
     if (typeof self.params.IdentityId === 'string') {
@@ -120396,7 +121136,9 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
   },
 
 
-
+  /**
+   * @api private
+   */
   loadCredentials: function loadCredentials(data, credentials) {
     if (!data || !credentials) return;
     credentials.expired = false;
@@ -120406,7 +121148,9 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     credentials.expireTime = data.Credentials.Expiration;
   },
 
-
+  /**
+   * @api private
+   */
   getCredentialsForIdentity: function getCredentialsForIdentity(callback) {
     var self = this;
     self.cognito.getCredentialsForIdentity(function(err, data) {
@@ -120421,7 +121165,9 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     });
   },
 
-
+  /**
+   * @api private
+   */
   getCredentialsFromSTS: function getCredentialsFromSTS(callback) {
     var self = this;
     self.cognito.getOpenIdToken(function(err, data) {
@@ -120442,10 +121188,13 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     });
   },
 
-
+  /**
+   * @api private
+   */
   loadCachedId: function loadCachedId() {
     var self = this;
 
+    // in the browser we source default IdentityId from localStorage
     if (AWS.util.isBrowser() && !self.params.IdentityId) {
       var id = self.getStorage('id');
       if (id && self.params.Logins) {
@@ -120453,6 +121202,7 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
         var cachedProviders =
           (self.getStorage('providers') || '').split(',');
 
+        // only load ID if at least one provider used this ID before
         var intersect = cachedProviders.filter(function(n) {
           return actualProviders.indexOf(n) !== -1;
         });
@@ -120465,7 +121215,9 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   createClients: function() {
     var clientConfig = this._clientConfig;
     this.webIdentityCredentials = this.webIdentityCredentials ||
@@ -120478,11 +121230,14 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     this.sts = this.sts || new STS(clientConfig);
   },
 
-
+  /**
+   * @api private
+   */
   cacheId: function cacheId(data) {
     this._identityId = data.IdentityId;
     this.params.IdentityId = this._identityId;
 
+    // cache this IdentityId in browser localStorage if possible
     if (AWS.util.isBrowser()) {
       this.setStorage('id', data.IdentityId);
 
@@ -120492,24 +121247,31 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   getStorage: function getStorage(key) {
     return this.storage[this.localStorageKey[key] + this.params.IdentityPoolId + (this.params.LoginId || '')];
   },
 
-
+  /**
+   * @api private
+   */
   setStorage: function setStorage(key, val) {
     try {
       this.storage[this.localStorageKey[key] + this.params.IdentityPoolId + (this.params.LoginId || '')] = val;
     } catch (_) {}
   },
 
-
+  /**
+   * @api private
+   */
   storage: (function() {
     try {
       var storage = AWS.util.isBrowser() && window.localStorage !== null && typeof window.localStorage === 'object' ?
           window.localStorage : {};
 
+      // Test set/remove which would throw an error in Safari's private browsing
       storage['aws.test-storage'] = 'foobar';
       delete storage['aws.test-storage'];
 
@@ -120523,10 +121285,54 @@ AWS.CognitoIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 },{"../../clients/cognitoidentity":179,"../../clients/sts":226,"../core":233}],236:[function(require,module,exports){
 var AWS = require('../core');
 
-
+/**
+ * Creates a credential provider chain that searches for AWS credentials
+ * in a list of credential providers specified by the {providers} property.
+ *
+ * By default, the chain will use the {defaultProviders} to resolve credentials.
+ * These providers will look in the environment using the
+ * {AWS.EnvironmentCredentials} class with the 'AWS' and 'AMAZON' prefixes.
+ *
+ * ## Setting Providers
+ *
+ * Each provider in the {providers} list should be a function that returns
+ * a {AWS.Credentials} object, or a hardcoded credentials object. The function
+ * form allows for delayed execution of the credential construction.
+ *
+ * ## Resolving Credentials from a Chain
+ *
+ * Call {resolve} to return the first valid credential object that can be
+ * loaded by the provider chain.
+ *
+ * For example, to resolve a chain with a custom provider that checks a file
+ * on disk after the set of {defaultProviders}:
+ *
+ * ```javascript
+ * var diskProvider = new AWS.FileSystemCredentials('./creds.json');
+ * var chain = new AWS.CredentialProviderChain();
+ * chain.providers.push(diskProvider);
+ * chain.resolve();
+ * ```
+ *
+ * The above code will return the `diskProvider` object if the
+ * file contains credentials and the `defaultProviders` do not contain
+ * any credential settings.
+ *
+ * @!attribute providers
+ *   @return [Array<AWS.Credentials, Function>]
+ *     a list of credentials objects or functions that return credentials
+ *     objects. If the provider is a function, the function will be
+ *     executed lazily when the provider needs to be checked for valid
+ *     credentials. By default, this object will be set to the
+ *     {defaultProviders}.
+ *   @see defaultProviders
+ */
 AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
 
-
+  /**
+   * Creates a new CredentialProviderChain with a default set of providers
+   * specified by {defaultProviders}.
+   */
   constructor: function CredentialProviderChain(providers) {
     if (providers) {
       this.providers = providers;
@@ -120535,9 +121341,43 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
     }
   },
 
+  /**
+   * @!method  resolvePromise()
+   *   Returns a 'thenable' promise.
+   *   Resolves the provider chain by searching for the first set of
+   *   credentials in {providers}.
+   *
+   *   Two callbacks can be provided to the `then` method on the returned promise.
+   *   The first callback will be called if the promise is fulfilled, and the second
+   *   callback will be called if the promise is rejected.
+   *   @callback fulfilledCallback function(credentials)
+   *     Called if the promise is fulfilled and the provider resolves the chain
+   *     to a credentials object
+   *     @param credentials [AWS.Credentials] the credentials object resolved
+   *       by the provider chain.
+   *   @callback rejectedCallback function(error)
+   *     Called if the promise is rejected.
+   *     @param err [Error] the error object returned if no credentials are found.
+   *   @return [Promise] A promise that represents the state of the `resolve` method call.
+   *   @example Calling the `resolvePromise` method.
+   *     var promise = chain.resolvePromise();
+   *     promise.then(function(credentials) { ... }, function(err) { ... });
+   */
 
-
-
+  /**
+   * Resolves the provider chain by searching for the first set of
+   * credentials in {providers}.
+   *
+   * @callback callback function(err, credentials)
+   *   Called when the provider resolves the chain to a credentials object
+   *   or null if no credentials can be found.
+   *
+   *   @param err [Error] the error object returned if no credentials are
+   *     found.
+   *   @param credentials [AWS.Credentials] the credentials object resolved
+   *     by the provider chain.
+   * @return [AWS.CredentialProviderChain] the provider, for chaining.
+   */
   resolve: function resolve(callback) {
     if (this.providers.length === 0) {
       callback(new Error('No providers'));
@@ -120574,15 +121414,43 @@ AWS.CredentialProviderChain = AWS.util.inherit(AWS.Credentials, {
   }
 });
 
-
+/**
+ * The default set of providers used by a vanilla CredentialProviderChain.
+ *
+ * In the browser:
+ *
+ * ```javascript
+ * AWS.CredentialProviderChain.defaultProviders = []
+ * ```
+ *
+ * In Node.js:
+ *
+ * ```javascript
+ * AWS.CredentialProviderChain.defaultProviders = [
+ *   function () { return new AWS.EnvironmentCredentials('AWS'); },
+ *   function () { return new AWS.EnvironmentCredentials('AMAZON'); },
+ *   function () { return new AWS.SharedIniFileCredentials(); },
+ *   function () {
+ *     // if AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set
+ *       return new AWS.ECSCredentials();
+ *     // else
+ *       return new AWS.EC2MetadataCredentials();
+ *   }
+ * ]
+ * ```
+ */
 AWS.CredentialProviderChain.defaultProviders = [];
 
-
+/**
+ * @api private
+ */
 AWS.CredentialProviderChain.addPromisesToClass = function addPromisesToClass(PromiseDependency) {
   this.prototype.resolvePromise = AWS.util.promisifyMethod('resolve', PromiseDependency);
 };
 
-
+/**
+ * @api private
+ */
 AWS.CredentialProviderChain.deletePromisesFromClass = function deletePromisesFromClass() {
   delete this.prototype.resolvePromise;
 };
@@ -120593,16 +121461,71 @@ AWS.util.addPromises(AWS.CredentialProviderChain);
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
-
+/**
+ * Represents credentials retrieved from STS SAML support.
+ *
+ * By default this provider gets credentials using the
+ * {AWS.STS.assumeRoleWithSAML} service operation. This operation
+ * requires a `RoleArn` containing the ARN of the IAM trust policy for the
+ * application for which credentials will be given, as well as a `PrincipalArn`
+ * representing the ARN for the SAML identity provider. In addition, the
+ * `SAMLAssertion` must be set to the token provided by the identity
+ * provider. See {constructor} for an example on creating a credentials
+ * object with proper `RoleArn`, `PrincipalArn`, and `SAMLAssertion` values.
+ *
+ * ## Refreshing Credentials from Identity Service
+ *
+ * In addition to AWS credentials expiring after a given amount of time, the
+ * login token from the identity provider will also expire. Once this token
+ * expires, it will not be usable to refresh AWS credentials, and another
+ * token will be needed. The SDK does not manage refreshing of the token value,
+ * but this can be done through a "refresh token" supported by most identity
+ * providers. Consult the documentation for the identity provider for refreshing
+ * tokens. Once the refreshed token is acquired, you should make sure to update
+ * this new token in the credentials object's {params} property. The following
+ * code will update the SAMLAssertion, assuming you have retrieved an updated
+ * token from the identity provider:
+ *
+ * ```javascript
+ * AWS.config.credentials.params.SAMLAssertion = updatedToken;
+ * ```
+ *
+ * Future calls to `credentials.refresh()` will now use the new token.
+ *
+ * @!attribute params
+ *   @return [map] the map of params passed to
+ *     {AWS.STS.assumeRoleWithSAML}. To update the token, set the
+ *     `params.SAMLAssertion` property.
+ */
 AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
-
+  /**
+   * Creates a new credentials object.
+   * @param (see AWS.STS.assumeRoleWithSAML)
+   * @example Creating a new credentials object
+   *   AWS.config.credentials = new AWS.SAMLCredentials({
+   *     RoleArn: 'arn:aws:iam::1234567890:role/SAMLRole',
+   *     PrincipalArn: 'arn:aws:iam::1234567890:role/SAMLPrincipal',
+   *     SAMLAssertion: 'base64-token', // base64-encoded token from IdP
+   *   });
+   * @see AWS.STS.assumeRoleWithSAML
+   */
   constructor: function SAMLCredentials(params) {
     AWS.Credentials.call(this);
     this.expired = true;
     this.params = params;
   },
 
-
+  /**
+   * Refreshes credentials using {AWS.STS.assumeRoleWithSAML}
+   *
+   * @callback callback function(err)
+   *   Called when the STS service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see get
+   */
   refresh: function refresh(callback) {
     var self = this;
     self.createClients();
@@ -120616,7 +121539,9 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
     });
   },
 
-
+  /**
+   * @api private
+   */
   createClients: function() {
     this.service = this.service || new STS({params: this.params});
   }
@@ -120627,9 +121552,58 @@ AWS.SAMLCredentials = AWS.util.inherit(AWS.Credentials, {
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
-
+/**
+ * Represents temporary credentials retrieved from {AWS.STS}. Without any
+ * extra parameters, credentials will be fetched from the
+ * {AWS.STS.getSessionToken} operation. If an IAM role is provided, the
+ * {AWS.STS.assumeRole} operation will be used to fetch credentials for the
+ * role instead.
+ *
+ * To setup temporary credentials, configure a set of master credentials
+ * using the standard credentials providers (environment, EC2 instance metadata,
+ * or from the filesystem), then set the global credentials to a new
+ * temporary credentials object:
+ *
+ * ```javascript
+ * // Note that environment credentials are loaded by default,
+ * // the following line is shown for clarity:
+ * AWS.config.credentials = new AWS.EnvironmentCredentials('AWS');
+ *
+ * // Now set temporary credentials seeded from the master credentials
+ * AWS.config.credentials = new AWS.TemporaryCredentials();
+ *
+ * // subsequent requests will now use temporary credentials from AWS STS.
+ * new AWS.S3().listBucket(function(err, data) { ... });
+ * ```
+ *
+ * @!attribute masterCredentials
+ *   @return [AWS.Credentials] the master (non-temporary) credentials used to
+ *     get and refresh temporary credentials from AWS STS.
+ * @note (see constructor)
+ */
 AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
-
+  /**
+   * Creates a new temporary credentials object.
+   *
+   * @note In order to create temporary credentials, you first need to have
+   *   "master" credentials configured in {AWS.Config.credentials}. These
+   *   master credentials are necessary to retrieve the temporary credentials,
+   *   as well as refresh the credentials when they expire.
+   * @param params [map] a map of options that are passed to the
+   *   {AWS.STS.assumeRole} or {AWS.STS.getSessionToken} operations.
+   *   If a `RoleArn` parameter is passed in, credentials will be based on the
+   *   IAM role.
+   * @param masterCredentials [AWS.Credentials] the master (non-temporary) credentials
+   *  used to get and refresh temporary credentials from AWS STS.
+   * @example Creating a new credentials object for generic temporary credentials
+   *   AWS.config.credentials = new AWS.TemporaryCredentials();
+   * @example Creating a new credentials object for an IAM role
+   *   AWS.config.credentials = new AWS.TemporaryCredentials({
+   *     RoleArn: 'arn:aws:iam::1234567890:role/TemporaryCredentials',
+   *   });
+   * @see AWS.STS.assumeRole
+   * @see AWS.STS.getSessionToken
+   */
   constructor: function TemporaryCredentials(params, masterCredentials) {
     AWS.Credentials.call(this);
     this.loadMasterCredentials(masterCredentials);
@@ -120642,7 +121616,19 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
     }
   },
 
-
+  /**
+   * Refreshes credentials using {AWS.STS.assumeRole} or
+   * {AWS.STS.getSessionToken}, depending on whether an IAM role ARN was passed
+   * to the credentials {constructor}.
+   *
+   * @callback callback function(err)
+   *   Called when the STS service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see get
+   */
   refresh: function refresh(callback) {
     var self = this;
     self.createClients();
@@ -120661,7 +121647,9 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
     });
   },
 
-
+  /**
+   * @api private
+   */
   loadMasterCredentials: function loadMasterCredentials(masterCredentials) {
     this.masterCredentials = masterCredentials || AWS.config.credentials;
     while (this.masterCredentials.masterCredentials) {
@@ -120673,7 +121661,9 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   createClients: function() {
     this.service = this.service || new STS({params: this.params});
   }
@@ -120684,9 +121674,66 @@ AWS.TemporaryCredentials = AWS.util.inherit(AWS.Credentials, {
 var AWS = require('../core');
 var STS = require('../../clients/sts');
 
-
+/**
+ * Represents credentials retrieved from STS Web Identity Federation support.
+ *
+ * By default this provider gets credentials using the
+ * {AWS.STS.assumeRoleWithWebIdentity} service operation. This operation
+ * requires a `RoleArn` containing the ARN of the IAM trust policy for the
+ * application for which credentials will be given. In addition, the
+ * `WebIdentityToken` must be set to the token provided by the identity
+ * provider. See {constructor} for an example on creating a credentials
+ * object with proper `RoleArn` and `WebIdentityToken` values.
+ *
+ * ## Refreshing Credentials from Identity Service
+ *
+ * In addition to AWS credentials expiring after a given amount of time, the
+ * login token from the identity provider will also expire. Once this token
+ * expires, it will not be usable to refresh AWS credentials, and another
+ * token will be needed. The SDK does not manage refreshing of the token value,
+ * but this can be done through a "refresh token" supported by most identity
+ * providers. Consult the documentation for the identity provider for refreshing
+ * tokens. Once the refreshed token is acquired, you should make sure to update
+ * this new token in the credentials object's {params} property. The following
+ * code will update the WebIdentityToken, assuming you have retrieved an updated
+ * token from the identity provider:
+ *
+ * ```javascript
+ * AWS.config.credentials.params.WebIdentityToken = updatedToken;
+ * ```
+ *
+ * Future calls to `credentials.refresh()` will now use the new token.
+ *
+ * @!attribute params
+ *   @return [map] the map of params passed to
+ *     {AWS.STS.assumeRoleWithWebIdentity}. To update the token, set the
+ *     `params.WebIdentityToken` property.
+ * @!attribute data
+ *   @return [map] the raw data response from the call to
+ *     {AWS.STS.assumeRoleWithWebIdentity}. Use this if you want to get
+ *     access to other properties from the response.
+ */
 AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
-
+  /**
+   * Creates a new credentials object.
+   * @param (see AWS.STS.assumeRoleWithWebIdentity)
+   * @example Creating a new credentials object
+   *   AWS.config.credentials = new AWS.WebIdentityCredentials({
+   *     RoleArn: 'arn:aws:iam::1234567890:role/WebIdentity',
+   *     WebIdentityToken: 'ABCDEFGHIJKLMNOP', // token from identity service
+   *     RoleSessionName: 'web' // optional name, defaults to web-identity
+   *   }, {
+   *     // optionally provide configuration to apply to the underlying AWS.STS service client
+   *     // if configuration is not provided, then configuration will be pulled from AWS.config
+   *
+   *     // specify timeout options
+   *     httpOptions: {
+   *       timeout: 100
+   *     }
+   *   });
+   * @see AWS.STS.assumeRoleWithWebIdentity
+   * @see AWS.Config
+   */
   constructor: function WebIdentityCredentials(params, clientConfig) {
     AWS.Credentials.call(this);
     this.expired = true;
@@ -120696,7 +121743,17 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     this._clientConfig = AWS.util.copy(clientConfig || {});
   },
 
-
+  /**
+   * Refreshes credentials using {AWS.STS.assumeRoleWithWebIdentity}
+   *
+   * @callback callback function(err)
+   *   Called when the STS service responds (or fails). When
+   *   this callback is called with no error, it means that the credentials
+   *   information has been loaded into the object (as the `accessKeyId`,
+   *   `secretAccessKey`, and `sessionToken` properties).
+   *   @param err [Error] if an error occurred, this value will be filled
+   * @see get
+   */
   refresh: function refresh(callback) {
     var self = this;
     self.createClients();
@@ -120712,7 +121769,9 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
     });
   },
 
-
+  /**
+   * @api private
+   */
   createClients: function() {
     if (!this.service) {
       var stsConfig = AWS.util.merge({}, this._clientConfig);
@@ -120731,7 +121790,25 @@ var DynamoDBSet = require('./set');
 var NumberValue = require('./numberValue');
 
 AWS.DynamoDB.Converter = {
-
+  /**
+   * Convert a JavaScript value to its equivalent DynamoDB AttributeValue type
+   *
+   * @param data [any] The data to convert to a DynamoDB AttributeValue
+   * @param options [map]
+   * @option options convertEmptyValues [Boolean] Whether to automatically
+   *                                              convert empty strings, blobs,
+   *                                              and sets to `null`
+   * @option options wrapNumbers [Boolean]  Whether to return numbers as a
+   *                                        NumberValue object instead of
+   *                                        converting them to native JavaScript
+   *                                        numbers. This allows for the safe
+   *                                        round-trip transport of numbers of
+   *                                        arbitrary size.
+   * @return [map] An object in the Amazon DynamoDB AttributeValue format
+   *
+   * @see AWS.DynamoDB.Converter.marshall AWS.DynamoDB.Converter.marshall to
+   *    convert entire records (rather than individual attributes)
+   */
   input: function convertInput(data, options) {
     options = options || {};
     var type = typeOf(data);
@@ -120758,16 +121835,67 @@ AWS.DynamoDB.Converter = {
     } else if (type === 'null') {
       return { NULL: true };
     } else if (type !== 'undefined' && type !== 'Function') {
+      // this value has a custom constructor
       return formatMap(data, options);
     }
   },
 
-
+  /**
+   * Convert a JavaScript object into a DynamoDB record.
+   *
+   * @param data [any] The data to convert to a DynamoDB record
+   * @param options [map]
+   * @option options convertEmptyValues [Boolean] Whether to automatically
+   *                                              convert empty strings, blobs,
+   *                                              and sets to `null`
+   * @option options wrapNumbers [Boolean]  Whether to return numbers as a
+   *                                        NumberValue object instead of
+   *                                        converting them to native JavaScript
+   *                                        numbers. This allows for the safe
+   *                                        round-trip transport of numbers of
+   *                                        arbitrary size.
+   *
+   * @return [map] An object in the DynamoDB record format.
+   *
+   * @example Convert a JavaScript object into a DynamoDB record
+   *  var marshalled = AWS.DynamoDB.Converter.marshall({
+   *    string: 'foo',
+   *    list: ['fizz', 'buzz', 'pop'],
+   *    map: {
+   *      nestedMap: {
+   *        key: 'value',
+   *      }
+   *    },
+   *    number: 123,
+   *    nullValue: null,
+   *    boolValue: true,
+   *    stringSet: new DynamoDBSet(['foo', 'bar', 'baz'])
+   *  });
+   */
   marshall: function marshallItem(data, options) {
     return AWS.DynamoDB.Converter.input(data, options).M;
   },
 
-
+  /**
+   * Convert a DynamoDB AttributeValue object to its equivalent JavaScript type.
+   *
+   * @param data [map] An object in the Amazon DynamoDB AttributeValue format
+   * @param options [map]
+   * @option options convertEmptyValues [Boolean] Whether to automatically
+   *                                              convert empty strings, blobs,
+   *                                              and sets to `null`
+   * @option options wrapNumbers [Boolean]  Whether to return numbers as a
+   *                                        NumberValue object instead of
+   *                                        converting them to native JavaScript
+   *                                        numbers. This allows for the safe
+   *                                        round-trip transport of numbers of
+   *                                        arbitrary size.
+   *
+   * @return [Object|Array|String|Number|Boolean|null]
+   *
+   * @see AWS.DynamoDB.Converter.unmarshall AWS.DynamoDB.Converter.unmarshall to
+   *    convert entire records (rather than individual attributes)
+   */
   output: function convertOutput(data, options) {
     options = options || {};
     var list, map, i;
@@ -120817,13 +121945,53 @@ AWS.DynamoDB.Converter = {
     }
   },
 
-
+  /**
+   * Convert a DynamoDB record into a JavaScript object.
+   *
+   * @param data [any] The DynamoDB record
+   * @param options [map]
+   * @option options convertEmptyValues [Boolean] Whether to automatically
+   *                                              convert empty strings, blobs,
+   *                                              and sets to `null`
+   * @option options wrapNumbers [Boolean]  Whether to return numbers as a
+   *                                        NumberValue object instead of
+   *                                        converting them to native JavaScript
+   *                                        numbers. This allows for the safe
+   *                                        round-trip transport of numbers of
+   *                                        arbitrary size.
+   *
+   * @return [map] An object whose properties have been converted from
+   *    DynamoDB's AttributeValue format into their corresponding native
+   *    JavaScript types.
+   *
+   * @example Convert a record received from a DynamoDB stream
+   *  var unmarshalled = AWS.DynamoDB.Converter.unmarshall({
+   *    string: {S: 'foo'},
+   *    list: {L: [{S: 'fizz'}, {S: 'buzz'}, {S: 'pop'}]},
+   *    map: {
+   *      M: {
+   *        nestedMap: {
+   *          M: {
+   *            key: {S: 'value'}
+   *          }
+   *        }
+   *      }
+   *    },
+   *    number: {N: '123'},
+   *    nullValue: {NULL: true},
+   *    boolValue: {BOOL: true}
+   *  });
+   */
   unmarshall: function unmarshall(data, options) {
     return AWS.DynamoDB.Converter.output({M: data}, options);
   }
 };
 
-
+/**
+ * @api private
+ * @param data [Array]
+ * @param options [map]
+ */
 function formatList(data, options) {
   var list = {L: []};
   for (var i = 0; i < data.length; i++) {
@@ -120832,12 +122000,20 @@ function formatList(data, options) {
   return list;
 }
 
-
+/**
+ * @api private
+ * @param value [String]
+ * @param wrapNumbers [Boolean]
+ */
 function convertNumber(value, wrapNumbers) {
   return wrapNumbers ? new NumberValue(value) : Number(value);
 }
 
-
+/**
+ * @api private
+ * @param data [map]
+ * @param options [map]
+ */
 function formatMap(data, options) {
   var map = {M: {}};
   for (var key in data) {
@@ -120849,7 +122025,9 @@ function formatMap(data, options) {
   return map;
 }
 
-
+/**
+ * @api private
+ */
 function formatSet(data, options) {
   options = options || {};
   var values = data.values;
@@ -120871,7 +122049,9 @@ function formatSet(data, options) {
   return map;
 }
 
-
+/**
+ * @api private
+ */
 function filterEmptySetValues(set) {
     var nonEmptyValues = [];
     var potentiallyEmptyTypes = {
@@ -120900,10 +122080,47 @@ var AWS = require('../core');
 var Translator = require('./translator');
 var DynamoDBSet = require('./set');
 
-
+/**
+ * The document client simplifies working with items in Amazon DynamoDB
+ * by abstracting away the notion of attribute values. This abstraction
+ * annotates native JavaScript types supplied as input parameters, as well
+ * as converts annotated response data to native JavaScript types.
+ *
+ * ## Marshalling Input and Unmarshalling Response Data
+ *
+ * The document client affords developers the use of native JavaScript types
+ * instead of `AttributeValue`s to simplify the JavaScript development
+ * experience with Amazon DynamoDB. JavaScript objects passed in as parameters
+ * are marshalled into `AttributeValue` shapes required by Amazon DynamoDB.
+ * Responses from DynamoDB are unmarshalled into plain JavaScript objects
+ * by the `DocumentClient`. The `DocumentClient`, does not accept
+ * `AttributeValue`s in favor of native JavaScript types.
+ *
+ * |                             JavaScript Type                            | DynamoDB AttributeValue |
+ * |:----------------------------------------------------------------------:|-------------------------|
+ * | String                                                                 | S                       |
+ * | Number                                                                 | N                       |
+ * | Boolean                                                                | BOOL                    |
+ * | null                                                                   | NULL                    |
+ * | Array                                                                  | L                       |
+ * | Object                                                                 | M                       |
+ * | Buffer, File, Blob, ArrayBuffer, DataView, and JavaScript typed arrays | B                       |
+ *
+ * ## Support for Sets
+ *
+ * The `DocumentClient` offers a convenient way to create sets from
+ * JavaScript Arrays. The type of set is inferred from the first element
+ * in the array. DynamoDB supports string, number, and binary sets. To
+ * learn more about supported types see the
+ * [Amazon DynamoDB Data Model Documentation](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html)
+ * For more information see {AWS.DynamoDB.DocumentClient.createSet}
+ *
+ */
 AWS.DynamoDB.DocumentClient = AWS.util.inherit({
 
-
+  /**
+   * @api private
+   */
   operations: {
     batchGetItem: 'batchGet',
     batchWriteItem: 'batchWrite',
@@ -120915,14 +122132,30 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     query: 'query'
   },
 
-
+  /**
+   * Creates a DynamoDB document client with a set of configuration options.
+   *
+   * @option options params [map] An optional map of parameters to bind to every
+   *   request sent by this service object.
+   * @option options service [AWS.DynamoDB] An optional pre-configured instance
+   *  of the AWS.DynamoDB service object to use for requests. The object may
+   *  bound parameters used by the document client.
+   * @option options convertEmptyValues [Boolean] set to true if you would like
+   *  the document client to convert empty values (0-length strings, binary
+   *  buffers, and sets) to be converted to NULL types when persisting to
+   *  DynamoDB.
+   * @see AWS.DynamoDB.constructor
+   *
+   */
   constructor: function DocumentClient(options) {
     var self = this;
     self.options = options || {};
     self.configure(self.options);
   },
 
-
+  /**
+   * @api private
+   */
   configure: function configure(options) {
     var self = this;
     self.service = options.service;
@@ -120931,7 +122164,9 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
       self.service.api.operations.putItem.input.members.Item.value.shape;
   },
 
-
+  /**
+   * @api private
+   */
   bindServiceObject: function bindServiceObject(options) {
     var self = this;
     options = options || {};
@@ -120946,7 +122181,41 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     }
   },
 
-
+  /**
+   * Returns the attributes of one or more items from one or more tables
+   * by delegating to `AWS.DynamoDB.batchGetItem()`.
+   *
+   * Supply the same parameters as {AWS.DynamoDB.batchGetItem} with
+   * `AttributeValue`s substituted by native JavaScript types.
+   *
+   * @see AWS.DynamoDB.batchGetItem
+   * @example Get items from multiple tables
+   *  var params = {
+   *    RequestItems: {
+   *      'Table-1': {
+   *        Keys: [
+   *          {
+   *             HashKey: 'haskey',
+   *             NumberRangeKey: 1
+   *          }
+   *        ]
+   *      },
+   *      'Table-2': {
+   *        Keys: [
+   *          { foo: 'bar' },
+   *        ]
+   *      }
+   *    }
+   *  };
+   *
+   *  var documentClient = new AWS.DynamoDB.DocumentClient();
+   *
+   *  documentClient.batchGet(params, function(err, data) {
+   *    if (err) console.log(err);
+   *    else console.log(data);
+   *  });
+   *
+   */
   batchGet: function(params, callback) {
     var self = this;
     var request = self.service.batchGetItem(params);
@@ -120958,7 +122227,46 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     return request;
   },
 
-
+  /**
+   * Puts or deletes multiple items in one or more tables by delegating
+   * to `AWS.DynamoDB.batchWriteItem()`.
+   *
+   * Supply the same parameters as {AWS.DynamoDB.batchWriteItem} with
+   * `AttributeValue`s substituted by native JavaScript types.
+   *
+   * @see AWS.DynamoDB.batchWriteItem
+   * @example Write to and delete from a table
+   *  var params = {
+   *    RequestItems: {
+   *      'Table-1': [
+   *        {
+   *          DeleteRequest: {
+   *            Key: { HashKey: 'someKey' }
+   *          }
+   *        },
+   *        {
+   *          PutRequest: {
+   *            Item: {
+   *              HashKey: 'anotherKey',
+   *              NumAttribute: 1,
+   *              BoolAttribute: true,
+   *              ListAttribute: [1, 'two', false],
+   *              MapAttribute: { foo: 'bar' }
+   *            }
+   *          }
+   *        }
+   *      ]
+   *    }
+   *  };
+   *
+   *  var documentClient = new AWS.DynamoDB.DocumentClient();
+   *
+   *  documentClient.batchWrite(params, function(err, data) {
+   *    if (err) console.log(err);
+   *    else console.log(data);
+   *  });
+   *
+   */
   batchWrite: function(params, callback) {
     var self = this;
     var request = self.service.batchWriteItem(params);
@@ -120970,7 +122278,31 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     return request;
   },
 
-
+  /**
+   * Deletes a single item in a table by primary key by delegating to
+   * `AWS.DynamoDB.deleteItem()`
+   *
+   * Supply the same parameters as {AWS.DynamoDB.deleteItem} with
+   * `AttributeValue`s substituted by native JavaScript types.
+   *
+   * @see AWS.DynamoDB.deleteItem
+   * @example Delete an item from a table
+   *  var params = {
+   *    TableName : 'Table',
+   *    Key: {
+   *      HashKey: 'hashkey',
+   *      NumberRangeKey: 1
+   *    }
+   *  };
+   *
+   *  var documentClient = new AWS.DynamoDB.DocumentClient();
+   *
+   *  documentClient.delete(params, function(err, data) {
+   *    if (err) console.log(err);
+   *    else console.log(data);
+   *  });
+   *
+   */
   delete: function(params, callback) {
     var self = this;
     var request = self.service.deleteItem(params);
@@ -120982,7 +122314,30 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     return request;
   },
 
-
+  /**
+   * Returns a set of attributes for the item with the given primary key
+   * by delegating to `AWS.DynamoDB.getItem()`.
+   *
+   * Supply the same parameters as {AWS.DynamoDB.getItem} with
+   * `AttributeValue`s substituted by native JavaScript types.
+   *
+   * @see AWS.DynamoDB.getItem
+   * @example Get an item from a table
+   *  var params = {
+   *    TableName : 'Table',
+   *    Key: {
+   *      HashKey: 'hashkey'
+   *    }
+   *  };
+   *
+   *  var documentClient = new AWS.DynamoDB.DocumentClient();
+   *
+   *  documentClient.get(params, function(err, data) {
+   *    if (err) console.log(err);
+   *    else console.log(data);
+   *  });
+   *
+   */
   get: function(params, callback) {
     var self = this;
     var request = self.service.getItem(params);
@@ -120994,7 +122349,35 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     return request;
   },
 
-
+  /**
+   * Creates a new item, or replaces an old item with a new item by
+   * delegating to `AWS.DynamoDB.putItem()`.
+   *
+   * Supply the same parameters as {AWS.DynamoDB.putItem} with
+   * `AttributeValue`s substituted by native JavaScript types.
+   *
+   * @see AWS.DynamoDB.putItem
+   * @example Create a new item in a table
+   *  var params = {
+   *    TableName : 'Table',
+   *    Item: {
+   *       HashKey: 'haskey',
+   *       NumAttribute: 1,
+   *       BoolAttribute: true,
+   *       ListAttribute: [1, 'two', false],
+   *       MapAttribute: { foo: 'bar'},
+   *       NullAttribute: null
+   *    }
+   *  };
+   *
+   *  var documentClient = new AWS.DynamoDB.DocumentClient();
+   *
+   *  documentClient.put(params, function(err, data) {
+   *    if (err) console.log(err);
+   *    else console.log(data);
+   *  });
+   *
+   */
   put: function put(params, callback) {
     var self = this;
     var request = self.service.putItem(params);
@@ -121006,7 +122389,36 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     return request;
   },
 
-
+  /**
+   * Edits an existing item's attributes, or adds a new item to the table if
+   * it does not already exist by delegating to `AWS.DynamoDB.updateItem()`.
+   *
+   * Supply the same parameters as {AWS.DynamoDB.updateItem} with
+   * `AttributeValue`s substituted by native JavaScript types.
+   *
+   * @see AWS.DynamoDB.updateItem
+   * @example Update an item with expressions
+   *  var params = {
+   *    TableName: 'Table',
+   *    Key: { HashKey : 'hashkey' },
+   *    UpdateExpression: 'set #a = :x + :y',
+   *    ConditionExpression: '#a < :MAX',
+   *    ExpressionAttributeNames: {'#a' : 'Sum'},
+   *    ExpressionAttributeValues: {
+   *      ':x' : 20,
+   *      ':y' : 45,
+   *      ':MAX' : 100,
+   *    }
+   *  };
+   *
+   *  var documentClient = new AWS.DynamoDB.DocumentClient();
+   *
+   *  documentClient.update(params, function(err, data) {
+   *     if (err) console.log(err);
+   *     else console.log(data);
+   *  });
+   *
+   */
   update: function(params, callback) {
     var self = this;
     var request = self.service.updateItem(params);
@@ -121018,7 +122430,29 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     return request;
   },
 
-
+  /**
+   * Returns one or more items and item attributes by accessing every item
+   * in a table or a secondary index.
+   *
+   * Supply the same parameters as {AWS.DynamoDB.scan} with
+   * `AttributeValue`s substituted by native JavaScript types.
+   *
+   * @see AWS.DynamoDB.scan
+   * @example Scan the table with a filter expression
+   *  var params = {
+   *    TableName : 'Table',
+   *    FilterExpression : 'Year = :this_year',
+   *    ExpressionAttributeValues : {':this_year' : 2015}
+   *  };
+   *
+   *  var documentClient = new AWS.DynamoDB.DocumentClient();
+   *
+   *  documentClient.scan(params, function(err, data) {
+   *     if (err) console.log(err);
+   *     else console.log(data);
+   *  });
+   *
+   */
   scan: function(params, callback) {
     var self = this;
     var request = self.service.scan(params);
@@ -121030,7 +122464,32 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     return request;
   },
 
-
+   /**
+    * Directly access items from a table by primary key or a secondary index.
+    *
+    * Supply the same parameters as {AWS.DynamoDB.query} with
+    * `AttributeValue`s substituted by native JavaScript types.
+    *
+    * @see AWS.DynamoDB.query
+    * @example Query an index
+    *  var params = {
+    *    TableName: 'Table',
+    *    IndexName: 'Index',
+    *    KeyConditionExpression: 'HashKey = :hkey and RangeKey > :rkey',
+    *    ExpressionAttributeValues: {
+    *      ':hkey': 'key',
+    *      ':rkey': 2015
+    *    }
+    *  };
+    *
+    *  var documentClient = new AWS.DynamoDB.DocumentClient();
+    *
+    *  documentClient.query(params, function(err, data) {
+    *     if (err) console.log(err);
+    *     else console.log(data);
+    *  });
+    *
+    */
   query: function(params, callback) {
     var self = this;
     var request = self.service.query(params);
@@ -121042,18 +122501,48 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     return request;
   },
 
-
+  /**
+   * Creates a set of elements inferring the type of set from
+   * the type of the first element. Amazon DynamoDB currently supports
+   * the number sets, string sets, and binary sets. For more information
+   * about DynamoDB data types see the documentation on the
+   * [Amazon DynamoDB Data Model](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModel.DataTypes).
+   *
+   * @param list [Array] Collection to represent your DynamoDB Set
+   * @param options [map]
+   *  * **validate** [Boolean] set to true if you want to validate the type
+   *    of each element in the set. Defaults to `false`.
+   * @example Creating a number set
+   *  var documentClient = new AWS.DynamoDB.DocumentClient();
+   *
+   *  var params = {
+   *    Item: {
+   *      hashkey: 'hashkey'
+   *      numbers: documentClient.createSet([1, 2, 3]);
+   *    }
+   *  };
+   *
+   *  documentClient.put(params, function(err, data) {
+   *    if (err) console.log(err);
+   *    else console.log(data);
+   *  });
+   *
+   */
   createSet: function(list, options) {
     options = options || {};
     return new DynamoDBSet(list, options);
   },
 
-
+  /**
+   * @api private
+   */
   getTranslator: function() {
     return new Translator(this.options);
   },
 
-
+  /**
+   * @api private
+   */
   setupRequest: function setupRequest(request) {
     var self = this;
     var translator = self.getTranslator();
@@ -121065,7 +122554,9 @@ AWS.DynamoDB.DocumentClient = AWS.util.inherit({
     });
   },
 
-
+  /**
+   * @api private
+   */
   setupResponse: function setupResponse(request) {
     var self = this;
     var translator = self.getTranslator();
@@ -121112,23 +122603,37 @@ module.exports = AWS.DynamoDB.DocumentClient;
 },{"../core":233,"./set":243,"./translator":244}],242:[function(require,module,exports){
 var util = require('../core').util;
 
-
+/**
+ * An object recognizable as a numeric value that stores the underlying number
+ * as a string.
+ *
+ * Intended to be a deserialization target for the DynamoDB Document Client when
+ * the `wrapNumbers` flag is set. This allows for numeric values that lose
+ * precision when converted to JavaScript's `number` type.
+ */
 var DynamoDBNumberValue = util.inherit({
   constructor: function NumberValue(value) {
     this.value = value.toString();
   },
 
-
+  /**
+   * Render the underlying value as a number when converting to JSON.
+   */
   toJSON: function () {
     return this.toNumber();
   },
 
-
+  /**
+   * Convert the underlying value to a JavaScript number.
+   */
   toNumber: function () {
     return Number(this.value);
   },
 
-
+  /**
+   * Return a string representing the unaltered value provided to the
+   * constructor.
+   */
   toString: function () {
     return this.value;
   }
@@ -121146,7 +122651,9 @@ var memberTypeToSetType = {
   'Binary': 'Binary'
 };
 
-
+/**
+ * @api private
+ */
 var DynamoDBSet = util.inherit({
 
   constructor: function Set(list, options) {
@@ -121288,6 +122795,8 @@ function typeOf(data) {
   } else if (data !== undefined && data.constructor) {
     return util.typeName(data.constructor);
   } else if (data !== undefined && typeof data === 'object') {
+    // this object is the result of Object.create(null), hence the absence of a
+    // defined constructor
     return 'Object';
   } else {
     return 'undefined';
@@ -121326,13 +122835,70 @@ module.exports = {
 },{"../core":233}],246:[function(require,module,exports){
 var AWS = require('./core');
 var SequentialExecutor = require('./sequential_executor');
-
+/**
+ * The namespace used to register global event listeners for request building
+ * and sending.
+ */
 AWS.EventListeners = {
-
+  /**
+   * @!attribute VALIDATE_CREDENTIALS
+   *   A request listener that validates whether the request is being
+   *   sent with credentials.
+   *   Handles the {AWS.Request~validate 'validate' Request event}
+   *   @example Sending a request without validating credentials
+   *     var listener = AWS.EventListeners.Core.VALIDATE_CREDENTIALS;
+   *     request.removeListener('validate', listener);
+   *   @readonly
+   *   @return [Function]
+   * @!attribute VALIDATE_REGION
+   *   A request listener that validates whether the region is set
+   *   for a request.
+   *   Handles the {AWS.Request~validate 'validate' Request event}
+   *   @example Sending a request without validating region configuration
+   *     var listener = AWS.EventListeners.Core.VALIDATE_REGION;
+   *     request.removeListener('validate', listener);
+   *   @readonly
+   *   @return [Function]
+   * @!attribute VALIDATE_PARAMETERS
+   *   A request listener that validates input parameters in a request.
+   *   Handles the {AWS.Request~validate 'validate' Request event}
+   *   @example Sending a request without validating parameters
+   *     var listener = AWS.EventListeners.Core.VALIDATE_PARAMETERS;
+   *     request.removeListener('validate', listener);
+   *   @example Disable parameter validation globally
+   *     AWS.EventListeners.Core.removeListener('validate',
+   *       AWS.EventListeners.Core.VALIDATE_REGION);
+   *   @readonly
+   *   @return [Function]
+   * @!attribute SEND
+   *   A request listener that initiates the HTTP connection for a
+   *   request being sent. Handles the {AWS.Request~send 'send' Request event}
+   *   @example Replacing the HTTP handler
+   *     var listener = AWS.EventListeners.Core.SEND;
+   *     request.removeListener('send', listener);
+   *     request.on('send', function(response) {
+   *       customHandler.send(response);
+   *     });
+   *   @return [Function]
+   *   @readonly
+   * @!attribute HTTP_DATA
+   *   A request listener that reads data from the HTTP connection in order
+   *   to build the response data.
+   *   Handles the {AWS.Request~httpData 'httpData' Request event}.
+   *   Remove this handler if you are overriding the 'httpData' event and
+   *   do not want extra data processing and buffering overhead.
+   *   @example Disabling default data processing
+   *     var listener = AWS.EventListeners.Core.HTTP_DATA;
+   *     request.removeListener('httpData', listener);
+   *   @return [Function]
+   *   @readonly
+   */
   Core: {} /* doc hack */
 };
 
-
+/**
+ * @api private
+ */
 function getOperationAuthtype(req) {
   if (!req.service.api.operations) {
     return '';
@@ -121374,9 +122940,11 @@ AWS.EventListeners = {
       if (!idempotentMembers.length) {
         return;
       }
+      // creates a copy of params so user's param object isn't mutated
       var params = AWS.util.copy(req.params);
       for (var i = 0, iLen = idempotentMembers.length; i < iLen; i++) {
         if (!params[idempotentMembers[i]]) {
+          // add the member
           params[idempotentMembers[i]] = AWS.util.uuid.v4();
         }
       }
@@ -121473,10 +123041,12 @@ AWS.EventListeners = {
             });
           signer.setServiceClientId(service._clientId);
 
+          // clear old authorization headers
           delete req.httpRequest.headers['Authorization'];
           delete req.httpRequest.headers['Date'];
           delete req.httpRequest.headers['X-Amz-Date'];
 
+          // add new authorization
           signer.addAuthorization(credentials, date);
           req.signedAt = date;
         } catch (e) {
@@ -121618,6 +123188,7 @@ AWS.EventListeners = {
     });
 
     add('HTTP_DONE', 'httpDone', function HTTP_DONE(resp) {
+      // convert buffers array into single buffer
       if (resp.httpResponse.buffers && resp.httpResponse.buffers.length > 0) {
         var body = AWS.util.buffer.concat(resp.httpResponse.buffers);
         resp.httpResponse.body = body;
@@ -121840,14 +123411,49 @@ AWS.EventListeners = {
   })
 };
 
-},{"./core":233,"./protocol/json":259,"./protocol/query":260,"./protocol/rest":261,"./protocol/rest_json":262,"./protocol/rest_xml":263,"./sequential_executor":272,"util":464}],247:[function(require,module,exports){
+},{"./core":233,"./protocol/json":259,"./protocol/query":260,"./protocol/rest":261,"./protocol/rest_json":262,"./protocol/rest_xml":263,"./sequential_executor":272,"util":496}],247:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 
-
+/**
+ * The endpoint that a service will talk to, for example,
+ * `'https://ec2.ap-southeast-1.amazonaws.com'`. If
+ * you need to override an endpoint for a service, you can
+ * set the endpoint on a service by passing the endpoint
+ * object with the `endpoint` option key:
+ *
+ * ```javascript
+ * var ep = new AWS.Endpoint('awsproxy.example.com');
+ * var s3 = new AWS.S3({endpoint: ep});
+ * s3.service.endpoint.hostname == 'awsproxy.example.com'
+ * ```
+ *
+ * Note that if you do not specify a protocol, the protocol will
+ * be selected based on your current {AWS.config} configuration.
+ *
+ * @!attribute protocol
+ *   @return [String] the protocol (http or https) of the endpoint
+ *     URL
+ * @!attribute hostname
+ *   @return [String] the host portion of the endpoint, e.g.,
+ *     example.com
+ * @!attribute host
+ *   @return [String] the host portion of the endpoint including
+ *     the port, e.g., example.com:80
+ * @!attribute port
+ *   @return [Integer] the port of the endpoint
+ * @!attribute href
+ *   @return [String] the full URL of the endpoint
+ */
 AWS.Endpoint = inherit({
 
-
+  /**
+   * @overload Endpoint(endpoint)
+   *   Constructs a new endpoint given an endpoint URL. If the
+   *   URL omits a protocol (http or https), the default protocol
+   *   set in the global {AWS.config} will be used.
+   *   @param endpoint [String] the URL to construct an endpoint from
+   */
   constructor: function Endpoint(endpoint, config) {
     AWS.util.hideProperties(this, ['slashes', 'auth', 'hash', 'search', 'query']);
 
@@ -121865,6 +123471,7 @@ AWS.Endpoint = inherit({
 
     AWS.util.update(this, AWS.util.urlParse(endpoint));
 
+    // Ensure the port property is set as an integer
     if (this.port) {
       this.port = parseInt(this.port, 10);
     } else {
@@ -121874,10 +123481,31 @@ AWS.Endpoint = inherit({
 
 });
 
-
+/**
+ * The low level HTTP request object, encapsulating all HTTP header
+ * and body data sent by a service request.
+ *
+ * @!attribute method
+ *   @return [String] the HTTP method of the request
+ * @!attribute path
+ *   @return [String] the path portion of the URI, e.g.,
+ *     "/list/?start=5&num=10"
+ * @!attribute headers
+ *   @return [map<String,String>]
+ *     a map of header keys and their respective values
+ * @!attribute body
+ *   @return [String] the request body payload
+ * @!attribute endpoint
+ *   @return [AWS.Endpoint] the endpoint for the request
+ * @!attribute region
+ *   @api private
+ *   @return [String] the region, for signing purposes only.
+ */
 AWS.HttpRequest = inherit({
 
-
+  /**
+   * @api private
+   */
   constructor: function HttpRequest(endpoint, region) {
     endpoint = new AWS.Endpoint(endpoint);
     this.method = 'POST';
@@ -121890,7 +123518,9 @@ AWS.HttpRequest = inherit({
     this.setUserAgent();
   },
 
-
+  /**
+   * @api private
+   */
   setUserAgent: function setUserAgent() {
     this._userAgent = this.headers[this.getUserAgentHeaderName()] = AWS.util.userAgent();
   },
@@ -121900,7 +123530,9 @@ AWS.HttpRequest = inherit({
     return prefix + 'User-Agent';
   },
 
-
+  /**
+   * @api private
+   */
   appendToUserAgent: function appendToUserAgent(agentPartial) {
     if (typeof agentPartial === 'string' && agentPartial) {
       this._userAgent += ' ' + agentPartial;
@@ -121908,17 +123540,24 @@ AWS.HttpRequest = inherit({
     this.headers[this.getUserAgentHeaderName()] = this._userAgent;
   },
 
-
+  /**
+   * @api private
+   */
   getUserAgent: function getUserAgent() {
     return this._userAgent;
   },
 
-
+  /**
+   * @return [String] the part of the {path} excluding the
+   *   query string
+   */
   pathname: function pathname() {
     return this.path.split('?', 1)[0];
   },
 
-
+  /**
+   * @return [String] the query string portion of the {path}
+   */
   search: function search() {
     var query = this.path.split('?', 2)[1];
     if (query) {
@@ -121930,10 +123569,28 @@ AWS.HttpRequest = inherit({
 
 });
 
-
+/**
+ * The low level HTTP response object, encapsulating all HTTP header
+ * and body data returned from the request.
+ *
+ * @!attribute statusCode
+ *   @return [Integer] the HTTP status code of the response (e.g., 200, 404)
+ * @!attribute headers
+ *   @return [map<String,String>]
+ *      a map of response header keys and their respective values
+ * @!attribute body
+ *   @return [String] the response body payload
+ * @!attribute [r] streaming
+ *   @return [Boolean] whether this response is being streamed at a low-level.
+ *     Defaults to `false` (buffered reads). Do not modify this manually, use
+ *     {createUnbufferedStream} to convert the stream to unbuffered mode
+ *     instead.
+ */
 AWS.HttpResponse = inherit({
 
-
+  /**
+   * @api private
+   */
   constructor: function HttpResponse() {
     this.statusCode = undefined;
     this.headers = {};
@@ -121942,7 +123599,27 @@ AWS.HttpResponse = inherit({
     this.stream = null;
   },
 
-
+  /**
+   * Disables buffering on the HTTP response and returns the stream for reading.
+   * @return [Stream, XMLHttpRequest, null] the underlying stream object.
+   *   Use this object to directly read data off of the stream.
+   * @note This object is only available after the {AWS.Request~httpHeaders}
+   *   event has fired. This method must be called prior to
+   *   {AWS.Request~httpData}.
+   * @example Taking control of a stream
+   *   request.on('httpHeaders', function(statusCode, headers) {
+   *     if (statusCode < 300) {
+   *       if (headers.etag === 'xyz') {
+   *         // pipe the stream, disabling buffering
+   *         var stream = this.response.httpResponse.createUnbufferedStream();
+   *         stream.pipe(process.stdout);
+   *       } else { // abort this request and set a better error message
+   *         this.abort();
+   *         this.response.error = new Error('Invalid ETag');
+   *       }
+   *     }
+   *   }).send(console.log);
+   */
   createUnbufferedStream: function createUnbufferedStream() {
     this.streaming = true;
     return this.stream;
@@ -121952,7 +123629,9 @@ AWS.HttpResponse = inherit({
 
 AWS.HttpClient = inherit({});
 
-
+/**
+ * @api private
+ */
 AWS.HttpClient.getInstance = function getInstance() {
   if (this.singleton === undefined) {
     this.singleton = new this();
@@ -121965,7 +123644,9 @@ var AWS = require('../core');
 var EventEmitter = require('events').EventEmitter;
 require('../http');
 
-
+/**
+ * @api private
+ */
 AWS.XHRClient = AWS.util.inherit({
   handleRequest: function handleRequest(httpRequest, httpOptions, callback, errCallback) {
     var self = this;
@@ -122086,13 +123767,17 @@ AWS.XHRClient = AWS.util.inherit({
   }
 });
 
-
+/**
+ * @api private
+ */
 AWS.HttpClient.prototype = AWS.XHRClient.prototype;
 
-
+/**
+ * @api private
+ */
 AWS.HttpClient.streamsApiVersion = 1;
 
-},{"../core":233,"../http":247,"events":309}],249:[function(require,module,exports){
+},{"../core":233,"../http":247,"events":310}],249:[function(require,module,exports){
 var util = require('../util');
 
 function JsonBuilder() { }
@@ -122356,6 +124041,7 @@ function Operation(name, operation, options) {
     property(this, 'documentationUrl', operation.documentationUrl);
   }
 
+  // idempotentMembers only tracks top-level input shapes
   memoizedProperty(this, 'idempotentMembers', function() {
     var idempotentMembers = [];
     var input = self.input;
@@ -122471,6 +124157,7 @@ function Shape(shape, options, memberName) {
     property(this, 'isXmlAttribute', shape.xmlAttribute || false);
   }
 
+  // type conversion and parsing
   property(this, 'defaultValue', null);
   this.toWireFormat = function(value) {
     if (value === null || value === undefined) return '';
@@ -122479,7 +124166,9 @@ function Shape(shape, options, memberName) {
   this.toType = function(value) { return value; };
 }
 
-
+/**
+ * @api private
+ */
 Shape.normalizedTypes = {
   character: 'string',
   double: 'float',
@@ -122490,7 +124179,9 @@ Shape.normalizedTypes = {
   blob: 'binary'
 };
 
-
+/**
+ * @api private
+ */
 Shape.types = {
   'structure': StructureShape,
   'list': ListShape,
@@ -122529,12 +124220,14 @@ Shape.create = function create(shape, options, memberName) {
       });
     }
 
+    // create an inline shape with extra members
     var InlineShape = function() {
       refShape.constructor.call(this, shape, options, memberName);
     };
     InlineShape.prototype = refShape;
     return new InlineShape();
   } else {
+    // set type if not set
     if (!shape.type) {
       if (shape.members) shape.type = 'structure';
       else if (shape.member) shape.type = 'list';
@@ -122542,6 +124235,7 @@ Shape.create = function create(shape, options, memberName) {
       else shape.type = 'string';
     }
 
+    // normalize types
     var origType = shape.type;
     if (Shape.normalizedTypes[shape.type]) {
       shape.type = Shape.normalizedTypes[shape.type];
@@ -122756,7 +124450,9 @@ function BooleanShape() {
   };
 }
 
-
+/**
+ * @api private
+ */
 Shape.shapes = {
   StructureShape: StructureShape,
   ListShape: ListShape,
@@ -122771,9 +124467,28 @@ module.exports = Shape;
 },{"../util":297,"./collection":252}],257:[function(require,module,exports){
 var AWS = require('./core');
 
-
+/**
+ * @api private
+ */
 AWS.ParamValidator = AWS.util.inherit({
-
+  /**
+   * Create a new validator object.
+   *
+   * @param validation [Boolean|map] whether input parameters should be
+   *     validated against the operation description before sending the
+   *     request. Pass a map to enable any of the following specific
+   *     validation features:
+   *
+   *     * **min** [Boolean] &mdash; Validates that a value meets the min
+   *       constraint. This is enabled by default when paramValidation is set
+   *       to `true`.
+   *     * **max** [Boolean] &mdash; Validates that a value meets the max
+   *       constraint.
+   *     * **pattern** [Boolean] &mdash; Validates that a string value matches a
+   *       regular expression.
+   *     * **enum** [Boolean] &mdash; Validates that a string value matches one
+   *       of the allowable enum values.
+   */
   constructor: function ParamValidator(validation) {
     if (validation === true || validation === undefined) {
       validation = {'min': true};
@@ -122815,6 +124530,7 @@ AWS.ParamValidator = AWS.util.inherit({
       }
     }
 
+    // validate hash members
     for (paramName in params) {
       if (!Object.prototype.hasOwnProperty.call(params, paramName)) continue;
 
@@ -122849,6 +124565,7 @@ AWS.ParamValidator = AWS.util.inherit({
   validateList: function validateList(shape, params, context) {
     if (this.validateType(params, context, [Array])) {
       this.validateRange(shape, params.length, context, 'list member count');
+      // validate array members
       for (var i = 0; i < params.length; i++) {
         this.validateMember(shape.member, params[i], context + '[' + i + ']');
       }
@@ -122857,9 +124574,11 @@ AWS.ParamValidator = AWS.util.inherit({
 
   validateMap: function validateMap(shape, params, context) {
     if (this.validateType(params, context, ['object'], 'map')) {
+      // Build up a count of map members to validate range traits.
       var mapCount = 0;
       for (var param in params) {
         if (!Object.prototype.hasOwnProperty.call(params, param)) continue;
+        // Validate any map key trait constraints
         this.validateMember(shape.key, param,
                             context + '[key=\'' + param + '\']')
         this.validateMember(shape.value, params[param],
@@ -122933,6 +124652,7 @@ AWS.ParamValidator = AWS.util.inherit({
 
   validateEnum: function validateRange(shape, value, context) {
     if (this.validation['enum'] && shape['enum'] !== undefined) {
+      // Fail if the string value is not present in the enum list
       if (shape['enum'].indexOf(value) === -1) {
         this.fail('EnumError', 'Found string value of ' + value + ', but '
           + 'expected ' + shape['enum'].join('|') + ' for ' + context);
@@ -122941,6 +124661,8 @@ AWS.ParamValidator = AWS.util.inherit({
   },
 
   validateType: function validateType(value, context, acceptedTypes, type) {
+    // We will not log an error for null or undefined, but we will return
+    // false so that callers know that the expected type was not strictly met.
     if (value === null || value === undefined) return false;
 
     var foundInvalidType = false;
@@ -123006,9 +124728,20 @@ AWS.ParamValidator = AWS.util.inherit({
 var AWS = require('../core');
 var rest = AWS.Protocol.Rest;
 
-
+/**
+ * A presigner object can be used to generate presigned urls for the Polly service.
+ */
 AWS.Polly.Presigner = AWS.util.inherit({
-
+    /**
+     * Creates a presigner object with a set of configuration options.
+     *
+     * @option options params [map] An optional map of parameters to bind to every
+     *   request sent by this service object.
+     * @option options service [AWS.Polly] An optional pre-configured instance
+     *  of the AWS.Polly service object to use for requests. The object may
+     *  bound parameters used by the presigner.
+     * @see AWS.Polly.constructor
+     */
     constructor: function Signer(options) {
         options = options || {};
         this.options = options;
@@ -123017,7 +124750,9 @@ AWS.Polly.Presigner = AWS.util.inherit({
         this._operations = {};
     },
 
-
+    /**
+     * @api private
+     */
     bindServiceObject: function bindServiceObject(options) {
         options = options || {};
         if (!this.service) {
@@ -123029,12 +124764,17 @@ AWS.Polly.Presigner = AWS.util.inherit({
         }
     },
 
-
+    /**
+     * @api private
+     */
     modifyInputMembers: function modifyInputMembers(input) {
+        // make copies of the input so we don't overwrite the api
+        // need to be careful to copy anything we access/modify
         var modifiedInput = AWS.util.copy(input);
         modifiedInput.members = AWS.util.copy(input.members);
         AWS.util.each(input.members, function(name, member) {
             modifiedInput.members[name] = AWS.util.copy(member);
+            // update location and locationName
             if (!member.location || member.location === 'body') {
                 modifiedInput.members[name].location = 'querystring';
                 modifiedInput.members[name].locationName = name;
@@ -123043,13 +124783,18 @@ AWS.Polly.Presigner = AWS.util.inherit({
         return modifiedInput;
     },
 
-
+    /**
+     * @api private
+     */
     convertPostToGet: function convertPostToGet(req) {
+        // convert method
         req.httpRequest.method = 'GET';
 
         var operation = req.service.api.operations[req.operation];
+        // get cached operation input first
         var input = this._operations[req.operation];
         if (!input) {
+            // modify the original input
             this._operations[req.operation] = input = this.modifyInputMembers(operation.input);
         }
 
@@ -123058,14 +124803,36 @@ AWS.Polly.Presigner = AWS.util.inherit({
         req.httpRequest.path = uri;
         req.httpRequest.body = '';
 
+        // don't need these headers on a GET request
         delete req.httpRequest.headers['Content-Length'];
         delete req.httpRequest.headers['Content-Type'];
     },
 
-
+    /**
+     * @overload getSynthesizeSpeechUrl(params = {}, [expires = 3600], [callback])
+     *   Generate a presigned url for {AWS.Polly.synthesizeSpeech}.
+     *   @note You must ensure that you have static or previously resolved
+     *     credentials if you call this method synchronously (with no callback),
+     *     otherwise it may not properly sign the request. If you cannot guarantee
+     *     this (you are using an asynchronous credential provider, i.e., EC2
+     *     IAM roles), you should always call this method with an asynchronous
+     *     callback.
+     *   @param params [map] parameters to pass to the operation. See the {AWS.Polly.synthesizeSpeech}
+     *     operation for the expected operation parameters.
+     *   @param expires [Integer] (3600) the number of seconds to expire the pre-signed URL operation in.
+     *     Defaults to 1 hour.
+     *   @return [string] if called synchronously (with no callback), returns the signed URL.
+     *   @return [null] nothing is returned if a callback is provided.
+     *   @callback callback function (err, url)
+     *     If a callback is supplied, it is called when a signed URL has been generated.
+     *     @param err [Error] the error object returned from the presigner.
+     *     @param url [String] the signed URL.
+     *   @see AWS.Polly.synthesizeSpeech
+     */
     getSynthesizeSpeechUrl: function getSynthesizeSpeechUrl(params, expires, callback) {
         var self = this;
         var request = this.service.makeRequest('synthesizeSpeech', params);
+        // remove existing build listeners
         request.removeAllListeners('build');
         request.on('build', function(req) {
             self.convertPostToGet(req);
@@ -123159,6 +124926,8 @@ function buildRequest(req) {
     Action: operation.name
   };
 
+  // convert the request parameters into a list of query params,
+  // e.g. Deeply.NestedParam.0.Name=value
   var builder = new QueryParamSerializer();
   builder.serialize(req.params, operation.input, function(name, value) {
     httpRequest.params[name] = value;
@@ -123216,6 +124985,7 @@ function extractData(resp) {
 
   var parser = new AWS.XML.Parser();
 
+  // TODO: Refactor XML Parser to parse RequestId from response.
   if (shape && shape.members && !shape.members._XAMZRequestId) {
     var requestIdShape = Shape.create(
       { type: 'string' },
@@ -123351,6 +125121,7 @@ function extractData(resp) {
   var operation = req.service.api.operations[req.operation];
   var output = operation.output;
 
+  // normalize headers names to lower-cased keys for matching
   var headers = {};
   util.each(r.headers, function (k, v) {
     headers[k.toLowerCase()] = v;
@@ -123435,6 +125206,7 @@ function applyContentTypeHeader(req, isBinary) {
 function buildRequest(req) {
   Rest.buildRequest(req);
 
+  // never send body payload on GET/HEAD/DELETE
   if (['GET', 'HEAD', 'DELETE'].indexOf(req.httpRequest.method) < 0) {
     populateBody(req);
   }
@@ -123504,6 +125276,7 @@ function populateBody(req) {
 function buildRequest(req) {
   Rest.buildRequest(req);
 
+  // never send body payload on GET/HEAD
   if (['GET', 'HEAD'].indexOf(req.httpRequest.method) < 0) {
     populateBody(req);
   }
@@ -123622,6 +125395,7 @@ function serializeList(name, list, rules, fn) {
   util.arrayEach(list, function (v, n) {
     var suffix = '.' + (n + 1);
     if (rules.api.protocol === 'ec2') {
+      // Do nothing for EC2
       suffix = suffix + ''; // make linter happy
     } else if (rules.flattened) {
       if (memberRules.name) {
@@ -123655,16 +125429,22 @@ module.exports = QueryParamSerializer;
 },{"../util":297}],265:[function(require,module,exports){
 var AWS = require('../core');
 
-
+/**
+ * @api private
+ */
 var service = null;
 
-
+/**
+ * @api private
+ */
 var api = {
     signatureVersion: 'v4',
     signingName: 'rds-db'
 };
 
-
+/**
+ * @api private
+ */
 var requiredAuthTokenOptions = {
     region: 'string',
     hostname: 'string',
@@ -123672,22 +125452,108 @@ var requiredAuthTokenOptions = {
     username: 'string'
 };
 
-
+/**
+ * A signer object can be used to generate an auth token to a database.
+ */
 AWS.RDS.Signer = AWS.util.inherit({
-
+    /**
+     * Creates a signer object can be used to generate an auth token.
+     *
+     * @option options credentials [AWS.Credentials] the AWS credentials
+     *   to sign requests with. Uses the default credential provider chain
+     *   if not specified.
+     * @option options hostname [String] the hostname of the database to connect to.
+     * @option options port [Number] the port number the database is listening on.
+     * @option options region [String] the region the database is located in.
+     * @option options username [String] the username to login as.
+     * @example Passing in options to constructor
+     *   var signer = new AWS.RDS.Signer({
+     *     credentials: new AWS.SharedIniFileCredentials({profile: 'default'}),
+     *     region: 'us-east-1',
+     *     hostname: 'db.us-east-1.rds.amazonaws.com',
+     *     port: 8000,
+     *     username: 'name'
+     *   });
+     */
     constructor: function Signer(options) {
         this.options = options || {};
     },
 
-
+    /**
+     * @api private
+     * Strips the protocol from a url.
+     */
     convertUrlToAuthToken: function convertUrlToAuthToken(url) {
+        // we are always using https as the protocol
         var protocol = 'https://';
         if (url.indexOf(protocol) === 0) {
             return url.substring(protocol.length);
         }
     },
 
-
+    /**
+     * @overload getAuthToken(options = {}, [callback])
+     *   Generate an auth token to a database.
+     *   @note You must ensure that you have static or previously resolved
+     *     credentials if you call this method synchronously (with no callback),
+     *     otherwise it may not properly sign the request. If you cannot guarantee
+     *     this (you are using an asynchronous credential provider, i.e., EC2
+     *     IAM roles), you should always call this method with an asynchronous
+     *     callback.
+     *
+     *   @param options [map] The fields to use when generating an auth token.
+     *     Any options specified here will be merged on top of any options passed
+     *     to AWS.RDS.Signer:
+     *
+     *     * **credentials** (AWS.Credentials) &mdash; the AWS credentials
+     *         to sign requests with. Uses the default credential provider chain
+     *         if not specified.
+     *     * **hostname** (String) &mdash; the hostname of the database to connect to.
+     *     * **port** (Number) &mdash; the port number the database is listening on.
+     *     * **region** (String) &mdash; the region the database is located in.
+     *     * **username** (String) &mdash; the username to login as.
+     *   @return [String] if called synchronously (with no callback), returns the
+     *     auth token.
+     *   @return [null] nothing is returned if a callback is provided.
+     *   @callback callback function (err, token)
+     *     If a callback is supplied, it is called when an auth token has been generated.
+     *     @param err [Error] the error object returned from the signer.
+     *     @param token [String] the auth token.
+     *
+     *   @example Generating an auth token synchronously
+     *     var signer = new AWS.RDS.Signer({
+     *       // configure options
+     *       region: 'us-east-1',
+     *       username: 'default',
+     *       hostname: 'db.us-east-1.amazonaws.com',
+     *       port: 8000
+     *     });
+     *     var token = signer.getAuthToken({
+     *       // these options are merged with those defined when creating the signer, overriding in the case of a duplicate option
+     *       // credentials are not specified here or when creating the signer, so default credential provider will be used
+     *       username: 'test' // overriding username
+     *     });
+     *   @example Generating an auth token asynchronously
+     *     var signer = new AWS.RDS.Signer({
+     *       // configure options
+     *       region: 'us-east-1',
+     *       username: 'default',
+     *       hostname: 'db.us-east-1.amazonaws.com',
+     *       port: 8000
+     *     });
+     *     signer.getAuthToken({
+     *       // these options are merged with those defined when creating the signer, overriding in the case of a duplicate option
+     *       // credentials are not specified here or when creating the signer, so default credential provider will be used
+     *       username: 'test' // overriding username
+     *     }, function(err, token) {
+     *       if (err) {
+     *         // handle error
+     *       } else {
+     *         // use token
+     *       }
+     *     });
+     *
+     */
     getAuthToken: function getAuthToken(options, callback) {
         if (typeof options === 'function' && callback === undefined) {
             callback = options;
@@ -123695,7 +125561,9 @@ AWS.RDS.Signer = AWS.util.inherit({
         }
         var self = this;
         var hasCallback = typeof callback === 'function';
+        // merge options with existing options
         options = AWS.util.merge(this.options, options);
+        // validate options
         var optionsValidation = this.validateAuthTokenOptions(options);
         if (optionsValidation !== true) {
             if (hasCallback) {
@@ -123704,7 +125572,9 @@ AWS.RDS.Signer = AWS.util.inherit({
             throw optionsValidation;
         }
 
+        // 15 minutes
         var expires = 900;
+        // create service to generate a request from
         var serviceOptions = {
             region: options.region,
             endpoint: new AWS.Endpoint(options.hostname + ':' + options.port),
@@ -123715,9 +125585,11 @@ AWS.RDS.Signer = AWS.util.inherit({
             serviceOptions.credentials = options.credentials;
         }
         service = new AWS.Service(serviceOptions);
+        // ensure the SDK is using sigv4 signing (config is not enough)
         service.api = api;
 
         var request = service.makeRequest();
+        // add listeners to request to properly build auth token
         this.modifyRequestForAuthToken(request, options);
 
         if (hasCallback) {
@@ -123733,7 +125605,10 @@ AWS.RDS.Signer = AWS.util.inherit({
         }
     },
 
-
+    /**
+     * @api private
+     * Modifies a request to allow the presigner to generate an auth token.
+     */
     modifyRequestForAuthToken: function modifyRequestForAuthToken(request, options) {
         request.on('build', request.buildAsGet);
         var httpRequest = request.httpRequest;
@@ -123743,8 +125618,13 @@ AWS.RDS.Signer = AWS.util.inherit({
         });
     },
 
-
+    /**
+     * @api private
+     * Validates that the options passed in contain all the keys with values of the correct type that
+     *   are needed to generate an auth token.
+     */
     validateAuthTokenOptions: function validateAuthTokenOptions(options) {
+        // iterate over all keys in options
         var message = '';
         options = options || {};
         for (var key in requiredAuthTokenOptions) {
@@ -123814,15 +125694,19 @@ function configureEndpoint(service) {
         config = regionConfig.patterns[config];
       }
 
+      // set dualstack endpoint
       if (service.config.useDualstack && util.isDualstackAvailable(service)) {
         config = util.copy(config);
         config.endpoint = '{service}.dualstack.{region}.amazonaws.com';
       }
 
+      // set global endpoint
       service.isGlobalEndpoint = !!config.globalEndpoint;
 
+      // signature version
       if (!config.signatureVersion) config.signatureVersion = 'v4';
 
+      // merge config
       applyConfig(service, config);
       return;
     }
@@ -123904,7 +125788,9 @@ var inherit = AWS.util.inherit;
 var domain = AWS.util.domain;
 var jmespath = require('jmespath');
 
-
+/**
+ * @api private
+ */
 var hardErrorStates = {success: 1, error: 1, complete: 1};
 
 function isTerminalState(machine) {
@@ -123956,15 +125842,262 @@ fsm.setupStates = function() {
 };
 fsm.setupStates();
 
-
+/**
+ * ## Asynchronous Requests
+ *
+ * All requests made through the SDK are asynchronous and use a
+ * callback interface. Each service method that kicks off a request
+ * returns an `AWS.Request` object that you can use to register
+ * callbacks.
+ *
+ * For example, the following service method returns the request
+ * object as "request", which can be used to register callbacks:
+ *
+ * ```javascript
+ * // request is an AWS.Request object
+ * var request = ec2.describeInstances();
+ *
+ * // register callbacks on request to retrieve response data
+ * request.on('success', function(response) {
+ *   console.log(response.data);
+ * });
+ * ```
+ *
+ * When a request is ready to be sent, the {send} method should
+ * be called:
+ *
+ * ```javascript
+ * request.send();
+ * ```
+ *
+ * Since registered callbacks may or may not be idempotent, requests should only
+ * be sent once. To perform the same operation multiple times, you will need to
+ * create multiple request objects, each with its own registered callbacks.
+ *
+ * ## Removing Default Listeners for Events
+ *
+ * Request objects are built with default listeners for the various events,
+ * depending on the service type. In some cases, you may want to remove
+ * some built-in listeners to customize behaviour. Doing this requires
+ * access to the built-in listener functions, which are exposed through
+ * the {AWS.EventListeners.Core} namespace. For instance, you may
+ * want to customize the HTTP handler used when sending a request. In this
+ * case, you can remove the built-in listener associated with the 'send'
+ * event, the {AWS.EventListeners.Core.SEND} listener and add your own.
+ *
+ * ## Multiple Callbacks and Chaining
+ *
+ * You can register multiple callbacks on any request object. The
+ * callbacks can be registered for different events, or all for the
+ * same event. In addition, you can chain callback registration, for
+ * example:
+ *
+ * ```javascript
+ * request.
+ *   on('success', function(response) {
+ *     console.log("Success!");
+ *   }).
+ *   on('error', function(response) {
+ *     console.log("Error!");
+ *   }).
+ *   on('complete', function(response) {
+ *     console.log("Always!");
+ *   }).
+ *   send();
+ * ```
+ *
+ * The above example will print either "Success! Always!", or "Error! Always!",
+ * depending on whether the request succeeded or not.
+ *
+ * @!attribute httpRequest
+ *   @readonly
+ *   @!group HTTP Properties
+ *   @return [AWS.HttpRequest] the raw HTTP request object
+ *     containing request headers and body information
+ *     sent by the service.
+ *
+ * @!attribute startTime
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [Date] the time that the request started
+ *
+ * @!group Request Building Events
+ *
+ * @!event validate(request)
+ *   Triggered when a request is being validated. Listeners
+ *   should throw an error if the request should not be sent.
+ *   @param request [Request] the request object being sent
+ *   @see AWS.EventListeners.Core.VALIDATE_CREDENTIALS
+ *   @see AWS.EventListeners.Core.VALIDATE_REGION
+ *   @example Ensuring that a certain parameter is set before sending a request
+ *     var req = s3.putObject(params);
+ *     req.on('validate', function() {
+ *       if (!req.params.Body.match(/^Hello\s/)) {
+ *         throw new Error('Body must start with "Hello "');
+ *       }
+ *     });
+ *     req.send(function(err, data) { ... });
+ *
+ * @!event build(request)
+ *   Triggered when the request payload is being built. Listeners
+ *   should fill the necessary information to send the request
+ *   over HTTP.
+ *   @param (see AWS.Request~validate)
+ *   @example Add a custom HTTP header to a request
+ *     var req = s3.putObject(params);
+ *     req.on('build', function() {
+ *       req.httpRequest.headers['Custom-Header'] = 'value';
+ *     });
+ *     req.send(function(err, data) { ... });
+ *
+ * @!event sign(request)
+ *   Triggered when the request is being signed. Listeners should
+ *   add the correct authentication headers and/or adjust the body,
+ *   depending on the authentication mechanism being used.
+ *   @param (see AWS.Request~validate)
+ *
+ * @!group Request Sending Events
+ *
+ * @!event send(response)
+ *   Triggered when the request is ready to be sent. Listeners
+ *   should call the underlying transport layer to initiate
+ *   the sending of the request.
+ *   @param response [Response] the response object
+ *   @context [Request] the request object that was sent
+ *   @see AWS.EventListeners.Core.SEND
+ *
+ * @!event retry(response)
+ *   Triggered when a request failed and might need to be retried or redirected.
+ *   If the response is retryable, the listener should set the
+ *   `response.error.retryable` property to `true`, and optionally set
+ *   `response.error.retryDelay` to the millisecond delay for the next attempt.
+ *   In the case of a redirect, `response.error.redirect` should be set to
+ *   `true` with `retryDelay` set to an optional delay on the next request.
+ *
+ *   If a listener decides that a request should not be retried,
+ *   it should set both `retryable` and `redirect` to false.
+ *
+ *   Note that a retryable error will be retried at most
+ *   {AWS.Config.maxRetries} times (based on the service object's config).
+ *   Similarly, a request that is redirected will only redirect at most
+ *   {AWS.Config.maxRedirects} times.
+ *
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *   @example Adding a custom retry for a 404 response
+ *     request.on('retry', function(response) {
+ *       // this resource is not yet available, wait 10 seconds to get it again
+ *       if (response.httpResponse.statusCode === 404 && response.error) {
+ *         response.error.retryable = true;   // retry this error
+ *         response.error.retryDelay = 10000; // wait 10 seconds
+ *       }
+ *     });
+ *
+ * @!group Data Parsing Events
+ *
+ * @!event extractError(response)
+ *   Triggered on all non-2xx requests so that listeners can extract
+ *   error details from the response body. Listeners to this event
+ *   should set the `response.error` property.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!event extractData(response)
+ *   Triggered in successful requests to allow listeners to
+ *   de-serialize the response body into `response.data`.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!group Completion Events
+ *
+ * @!event success(response)
+ *   Triggered when the request completed successfully.
+ *   `response.data` will contain the response data and
+ *   `response.error` will be null.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!event error(error, response)
+ *   Triggered when an error occurs at any point during the
+ *   request. `response.error` will contain details about the error
+ *   that occurred. `response.data` will be null.
+ *   @param error [Error] the error object containing details about
+ *     the error that occurred.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!event complete(response)
+ *   Triggered whenever a request cycle completes. `response.error`
+ *   should be checked, since the request may have failed.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!group HTTP Events
+ *
+ * @!event httpHeaders(statusCode, headers, response, statusMessage)
+ *   Triggered when headers are sent by the remote server
+ *   @param statusCode [Integer] the HTTP response code
+ *   @param headers [map<String,String>] the response headers
+ *   @param (see AWS.Request~send)
+ *   @param statusMessage [String] A status message corresponding to the HTTP
+ *                                 response code
+ *   @context (see AWS.Request~send)
+ *
+ * @!event httpData(chunk, response)
+ *   Triggered when data is sent by the remote server
+ *   @param chunk [Buffer] the buffer data containing the next data chunk
+ *     from the server
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *   @see AWS.EventListeners.Core.HTTP_DATA
+ *
+ * @!event httpUploadProgress(progress, response)
+ *   Triggered when the HTTP request has uploaded more data
+ *   @param progress [map] An object containing the `loaded` and `total` bytes
+ *     of the request.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *   @note This event will not be emitted in Node.js 0.8.x.
+ *
+ * @!event httpDownloadProgress(progress, response)
+ *   Triggered when the HTTP request has downloaded more data
+ *   @param progress [map] An object containing the `loaded` and `total` bytes
+ *     of the request.
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *   @note This event will not be emitted in Node.js 0.8.x.
+ *
+ * @!event httpError(error, response)
+ *   Triggered when the HTTP request failed
+ *   @param error [Error] the error object that was thrown
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @!event httpDone(response)
+ *   Triggered when the server is finished sending data
+ *   @param (see AWS.Request~send)
+ *   @context (see AWS.Request~send)
+ *
+ * @see AWS.Response
+ */
 AWS.Request = inherit({
 
-
+  /**
+   * Creates a request for an operation on a given service with
+   * a set of input parameters.
+   *
+   * @param service [AWS.Service] the service to perform the operation on
+   * @param operation [String] the operation to perform on the service
+   * @param params [Object] parameters to send to the operation.
+   *   See the operation's documentation for the format of the
+   *   parameters.
+   */
   constructor: function Request(service, operation, params) {
     var endpoint = service.endpoint;
     var region = service.config.region;
     var customUserAgent = service.config.customUserAgent;
 
+    // global endpoints sign as us-east-1
     if (service.isGlobalEndpoint) region = 'us-east-1';
 
     this.domain = domain && domain.active;
@@ -123983,11 +126116,33 @@ AWS.Request = inherit({
     this.emit = this.emitEvent;
   },
 
+  /**
+   * @!group Sending a Request
+   */
 
-
-
+  /**
+   * @overload send(callback = null)
+   *   Sends the request object.
+   *
+   *   @callback callback function(err, data)
+   *     If a callback is supplied, it is called when a response is returned
+   *     from the service.
+   *     @context [AWS.Request] the request object being sent.
+   *     @param err [Error] the error object returned from the request.
+   *       Set to `null` if the request is successful.
+   *     @param data [Object] the de-serialized data returned from
+   *       the request. Set to `null` if a request error occurs.
+   *   @example Sending a request with a callback
+   *     request = s3.putObject({Bucket: 'bucket', Key: 'key'});
+   *     request.send(function(err, data) { console.log(err, data); });
+   *   @example Sending a request with no callback (using event handlers)
+   *     request = s3.putObject({Bucket: 'bucket', Key: 'key'});
+   *     request.on('complete', function(response) { ... }); // register a callback
+   *     request.send();
+   */
   send: function send(callback) {
     if (callback) {
+      // append to user agent
       this.httpRequest.appendToUserAgent('callback');
       this.on('complete', function (resp) {
         callback.call(resp, resp.error, resp.data);
@@ -123998,20 +126153,63 @@ AWS.Request = inherit({
     return this.response;
   },
 
+  /**
+   * @!method  promise()
+   *   Sends the request and returns a 'thenable' promise.
+   *
+   *   Two callbacks can be provided to the `then` method on the returned promise.
+   *   The first callback will be called if the promise is fulfilled, and the second
+   *   callback will be called if the promise is rejected.
+   *   @callback fulfilledCallback function(data)
+   *     Called if the promise is fulfilled.
+   *     @param data [Object] the de-serialized data returned from the request.
+   *   @callback rejectedCallback function(error)
+   *     Called if the promise is rejected.
+   *     @param error [Error] the error object returned from the request.
+   *   @return [Promise] A promise that represents the state of the request.
+   *   @example Sending a request using promises.
+   *     var request = s3.putObject({Bucket: 'bucket', Key: 'key'});
+   *     var result = request.promise();
+   *     result.then(function(data) { ... }, function(error) { ... });
+   */
 
-
-
+  /**
+   * @api private
+   */
   build: function build(callback) {
     return this.runTo('send', callback);
   },
 
-
+  /**
+   * @api private
+   */
   runTo: function runTo(state, done) {
     this._asm.runTo(state, done, this);
     return this;
   },
 
-
+  /**
+   * Aborts a request, emitting the error and complete events.
+   *
+   * @!macro nobrowser
+   * @example Aborting a request after sending
+   *   var params = {
+   *     Bucket: 'bucket', Key: 'key',
+   *     Body: new Buffer(1024 * 1024 * 5) // 5MB payload
+   *   };
+   *   var request = s3.putObject(params);
+   *   request.send(function (err, data) {
+   *     if (err) console.log("Error:", err.code, err.message);
+   *     else console.log(data);
+   *   });
+   *
+   *   // abort request in 1 second
+   *   setTimeout(request.abort.bind(request), 1000);
+   *
+   *   // prints "Error: RequestAbortedError Request aborted by user"
+   * @return [AWS.Request] the same request object, for chaining.
+   * @since v1.4.0
+   */
   abort: function abort() {
     this.removeAllListeners('validateResponse');
     this.removeAllListeners('extractError');
@@ -124033,8 +126231,47 @@ AWS.Request = inherit({
     return this;
   },
 
-
+  /**
+   * Iterates over each page of results given a pageable request, calling
+   * the provided callback with each page of data. After all pages have been
+   * retrieved, the callback is called with `null` data.
+   *
+   * @note This operation can generate multiple requests to a service.
+   * @example Iterating over multiple pages of objects in an S3 bucket
+   *   var pages = 1;
+   *   s3.listObjects().eachPage(function(err, data) {
+   *     if (err) return;
+   *     console.log("Page", pages++);
+   *     console.log(data);
+   *   });
+   * @example Iterating over multiple pages with an asynchronous callback
+   *   s3.listObjects(params).eachPage(function(err, data, done) {
+   *     doSomethingAsyncAndOrExpensive(function() {
+   *       // The next page of results isn't fetched until done is called
+   *       done();
+   *     });
+   *   });
+   * @callback callback function(err, data, [doneCallback])
+   *   Called with each page of resulting data from the request. If the
+   *   optional `doneCallback` is provided in the function, it must be called
+   *   when the callback is complete.
+   *
+   *   @param err [Error] an error object, if an error occurred.
+   *   @param data [Object] a single page of response data. If there is no
+   *     more data, this object will be `null`.
+   *   @param doneCallback [Function] an optional done callback. If this
+   *     argument is defined in the function declaration, it should be called
+   *     when the next page is ready to be retrieved. This is useful for
+   *     controlling serial pagination across asynchronous operations.
+   *   @return [Boolean] if the callback returns `false`, pagination will
+   *     stop.
+   *
+   * @see AWS.Request.eachItem
+   * @see AWS.Response.nextPage
+   * @since v1.4.0
+   */
   eachPage: function eachPage(callback) {
+    // Make all callbacks async-ish
     callback = AWS.util.fn.makeAsync(callback, 3);
 
     function wrappedCallback(response) {
@@ -124052,7 +126289,13 @@ AWS.Request = inherit({
     this.on('complete', wrappedCallback).send();
   },
 
-
+  /**
+   * Enumerates over individual items of a request, paging the responses if
+   * necessary.
+   *
+   * @api experimental
+   * @since v1.4.0
+   */
   eachItem: function eachItem(callback) {
     var self = this;
     function wrappedCallback(err, data) {
@@ -124076,12 +126319,33 @@ AWS.Request = inherit({
     this.eachPage(wrappedCallback);
   },
 
-
+  /**
+   * @return [Boolean] whether the operation can return multiple pages of
+   *   response data.
+   * @see AWS.Response.eachPage
+   * @since v1.4.0
+   */
   isPageable: function isPageable() {
     return this.service.paginationConfig(this.operation) ? true : false;
   },
 
-
+  /**
+   * Sends the request and converts the request object into a readable stream
+   * that can be read from or piped into a writable stream.
+   *
+   * @note The data read from a readable stream contains only
+   *   the raw HTTP body contents.
+   * @example Manually reading from a stream
+   *   request.createReadStream().on('data', function(data) {
+   *     console.log("Got data:", data.toString());
+   *   });
+   * @example Piping a request body into a file
+   *   var out = fs.createWriteStream('/path/to/outfile.jpg');
+   *   s3.service.getObject(params).createReadStream().pipe(out);
+   * @return [Stream] the readable stream object that can be piped
+   *   or read from (by registering 'data' event listeners).
+   * @!macro nobrowser
+   */
   createReadStream: function createReadStream() {
     var streams = AWS.util.stream;
     var req = this;
@@ -124189,7 +126453,11 @@ AWS.Request = inherit({
     return stream;
   },
 
-
+  /**
+   * @param [Array,Response] args This should be the response object,
+   *   or an array of args to send to the event.
+   * @api private
+   */
   emitEvent: function emit(eventName, args, done) {
     if (typeof args === 'function') { done = args; args = null; }
     if (!done) done = function() { };
@@ -124202,7 +126470,9 @@ AWS.Request = inherit({
     });
   },
 
-
+  /**
+   * @api private
+   */
   eventParameters: function eventParameters(eventName) {
     switch (eventName) {
       case 'restart':
@@ -124219,7 +126489,9 @@ AWS.Request = inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   presign: function presign(expires, callback) {
     if (!callback && typeof expires === 'function') {
       callback = expires;
@@ -124228,19 +126500,25 @@ AWS.Request = inherit({
     return new AWS.Signers.Presign().sign(this.toGet(), expires, callback);
   },
 
-
+  /**
+   * @api private
+   */
   isPresigned: function isPresigned() {
     return Object.prototype.hasOwnProperty.call(this.httpRequest.headers, 'presigned-expires');
   },
 
-
+  /**
+   * @api private
+   */
   toUnauthenticated: function toUnauthenticated() {
     this.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
     this.removeListener('sign', AWS.EventListeners.Core.SIGN);
     return this;
   },
 
-
+  /**
+   * @api private
+   */
   toGet: function toGet() {
     if (this.service.api.protocol === 'query' ||
         this.service.api.protocol === 'ec2') {
@@ -124250,33 +126528,43 @@ AWS.Request = inherit({
     return this;
   },
 
-
+  /**
+   * @api private
+   */
   buildAsGet: function buildAsGet(request) {
     request.httpRequest.method = 'GET';
     request.httpRequest.path = request.service.endpoint.path +
                                '?' + request.httpRequest.body;
     request.httpRequest.body = '';
 
+    // don't need these headers on a GET request
     delete request.httpRequest.headers['Content-Length'];
     delete request.httpRequest.headers['Content-Type'];
   },
 
-
+  /**
+   * @api private
+   */
   haltHandlersOnError: function haltHandlersOnError() {
     this._haltHandlersOnError = true;
   }
 });
 
-
+/**
+ * @api private
+ */
 AWS.Request.addPromisesToClass = function addPromisesToClass(PromiseDependency) {
   this.prototype.promise = function promise() {
     var self = this;
+    // append to user agent
     this.httpRequest.appendToUserAgent('promise');
     return new PromiseDependency(function(resolve, reject) {
       self.on('complete', function(resp) {
         if (resp.error) {
           reject(resp.error);
         } else {
+          // define $response property so that it is not enumberable
+          // this prevents circular reference errors when stringifying the JSON object
           resolve(Object.defineProperty(
             resp.data || {},
             '$response',
@@ -124289,7 +126577,9 @@ AWS.Request.addPromisesToClass = function addPromisesToClass(PromiseDependency) 
   };
 };
 
-
+/**
+ * @api private
+ */
 AWS.Request.deletePromisesFromClass = function deletePromisesFromClass() {
   delete this.prototype.promise;
 };
@@ -124299,14 +126589,29 @@ AWS.util.addPromises(AWS.Request);
 AWS.util.mixin(AWS.Request, AWS.SequentialExecutor);
 
 }).call(this,require('_process'))
-},{"./core":233,"./state_machine":296,"_process":453,"jmespath":312}],269:[function(require,module,exports){
-
+},{"./core":233,"./state_machine":296,"_process":458,"jmespath":316}],269:[function(require,module,exports){
+/**
+ * Copyright 2012-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You
+ * may not use this file except in compliance with the License. A copy of
+ * the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ * ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ */
 
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 var jmespath = require('jmespath');
 
-
+/**
+ * @api private
+ */
 function CHECK_ACCEPTORS(resp) {
   var waiter = resp.request._waiter;
   var acceptors = waiter.config.acceptors;
@@ -124332,9 +126637,19 @@ function CHECK_ACCEPTORS(resp) {
   }
 }
 
-
+/**
+ * @api private
+ */
 AWS.ResourceWaiter = inherit({
-
+  /**
+   * Waits for a given state on a service object
+   * @param service [Service] the service object to wait on
+   * @param state [String] the state (defined in waiter configuration) to wait
+   *   for.
+   * @example Create a waiter for running EC2 instances
+   *   var ec2 = new AWS.EC2;
+   *   var waiter = new AWS.ResourceWaiter(ec2, 'instanceRunning');
+   */
   constructor: function constructor(service, state) {
     this.service = service;
     this.state = state;
@@ -124402,6 +126717,7 @@ AWS.ResourceWaiter = inherit({
       if (typeof expected === 'string' && resp.error) {
         return expected === resp.error.code;
       }
+      // if expected is not string, can be boolean indicating presence of error
       return expected === !!resp.error;
     }
   },
@@ -124419,7 +126735,9 @@ AWS.ResourceWaiter = inherit({
     add('CHECK_ERROR', 'extractError', CHECK_ACCEPTORS);
   }),
 
-
+  /**
+   * @return [AWS.Request]
+   */
   wait: function wait(params, callback) {
     if (typeof params === 'function') {
       callback = params; params = undefined;
@@ -124460,7 +126778,11 @@ AWS.ResourceWaiter = inherit({
     });
   },
 
-
+  /**
+   * Loads waiter configuration from API configuration
+   *
+   * @api private
+   */
   loadWaiterConfig: function loadWaiterConfig(state) {
     if (!this.service.api.waiters[state]) {
       throw new AWS.util.error(new Error(), {
@@ -124473,15 +126795,110 @@ AWS.ResourceWaiter = inherit({
   }
 });
 
-},{"./core":233,"jmespath":312}],270:[function(require,module,exports){
+},{"./core":233,"jmespath":316}],270:[function(require,module,exports){
 var AWS = require('./core');
 var inherit = AWS.util.inherit;
 var jmespath = require('jmespath');
 
-
+/**
+ * This class encapsulates the response information
+ * from a service request operation sent through {AWS.Request}.
+ * The response object has two main properties for getting information
+ * back from a request:
+ *
+ * ## The `data` property
+ *
+ * The `response.data` property contains the serialized object data
+ * retrieved from the service request. For instance, for an
+ * Amazon DynamoDB `listTables` method call, the response data might
+ * look like:
+ *
+ * ```
+ * > resp.data
+ * { TableNames:
+ *    [ 'table1', 'table2', ... ] }
+ * ```
+ *
+ * The `data` property can be null if an error occurs (see below).
+ *
+ * ## The `error` property
+ *
+ * In the event of a service error (or transfer error), the
+ * `response.error` property will be filled with the given
+ * error data in the form:
+ *
+ * ```
+ * { code: 'SHORT_UNIQUE_ERROR_CODE',
+ *   message: 'Some human readable error message' }
+ * ```
+ *
+ * In the case of an error, the `data` property will be `null`.
+ * Note that if you handle events that can be in a failure state,
+ * you should always check whether `response.error` is set
+ * before attempting to access the `response.data` property.
+ *
+ * @!attribute data
+ *   @readonly
+ *   @!group Data Properties
+ *   @note Inside of a {AWS.Request~httpData} event, this
+ *     property contains a single raw packet instead of the
+ *     full de-serialized service response.
+ *   @return [Object] the de-serialized response data
+ *     from the service.
+ *
+ * @!attribute error
+ *   An structure containing information about a service
+ *   or networking error.
+ *   @readonly
+ *   @!group Data Properties
+ *   @note This attribute is only filled if a service or
+ *     networking error occurs.
+ *   @return [Error]
+ *     * code [String] a unique short code representing the
+ *       error that was emitted.
+ *     * message [String] a longer human readable error message
+ *     * retryable [Boolean] whether the error message is
+ *       retryable.
+ *     * statusCode [Numeric] in the case of a request that reached the service,
+ *       this value contains the response status code.
+ *     * time [Date] the date time object when the error occurred.
+ *     * hostname [String] set when a networking error occurs to easily
+ *       identify the endpoint of the request.
+ *     * region [String] set when a networking error occurs to easily
+ *       identify the region of the request.
+ *
+ * @!attribute requestId
+ *   @readonly
+ *   @!group Data Properties
+ *   @return [String] the unique request ID associated with the response.
+ *     Log this value when debugging requests for AWS support.
+ *
+ * @!attribute retryCount
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [Integer] the number of retries that were
+ *     attempted before the request was completed.
+ *
+ * @!attribute redirectCount
+ *   @readonly
+ *   @!group Operation Properties
+ *   @return [Integer] the number of redirects that were
+ *     followed before the request was completed.
+ *
+ * @!attribute httpResponse
+ *   @readonly
+ *   @!group HTTP Properties
+ *   @return [AWS.HttpResponse] the raw HTTP response object
+ *     containing the response headers and body information
+ *     from the server.
+ *
+ * @see AWS.Request
+ */
 AWS.Response = inherit({
 
-
+  /**
+   * @api private
+   */
   constructor: function Response(request) {
     this.request = request;
     this.data = null;
@@ -124495,7 +126912,21 @@ AWS.Response = inherit({
     }
   },
 
-
+  /**
+   * Creates a new request for the next page of response data, calling the
+   * callback with the page data if a callback is provided.
+   *
+   * @callback callback function(err, data)
+   *   Called when a page of data is returned from the next request.
+   *
+   *   @param err [Error] an error object, if an error occurred in the request
+   *   @param data [Object] the next page of data, or null, if there are no
+   *     more pages left.
+   * @return [AWS.Request] the request object for the next page of data
+   * @return [null] if no callback is provided and there are no pages left
+   *   to retrieve.
+   * @since v1.4.0
+   */
   nextPage: function nextPage(callback) {
     var config;
     var service = this.request.service;
@@ -124523,7 +126954,11 @@ AWS.Response = inherit({
     }
   },
 
-
+  /**
+   * @return [Boolean] whether more pages of data can be returned by further
+   *   requests
+   * @since v1.4.0
+   */
   hasNextPage: function hasNextPage() {
     this.cacheNextPageTokens();
     if (this.nextPageTokens) return true;
@@ -124531,7 +126966,9 @@ AWS.Response = inherit({
     else return false;
   },
 
-
+  /**
+   * @api private
+   */
   cacheNextPageTokens: function cacheNextPageTokens() {
     if (Object.prototype.hasOwnProperty.call(this, 'nextPageTokens')) return this.nextPageTokens;
     this.nextPageTokens = undefined;
@@ -124561,14 +126998,87 @@ AWS.Response = inherit({
 
 });
 
-},{"./core":233,"jmespath":312}],271:[function(require,module,exports){
+},{"./core":233,"jmespath":316}],271:[function(require,module,exports){
 var AWS = require('../core');
 var byteLength = AWS.util.string.byteLength;
 var Buffer = AWS.util.Buffer;
 
-
+/**
+ * The managed uploader allows for easy and efficient uploading of buffers,
+ * blobs, or streams, using a configurable amount of concurrency to perform
+ * multipart uploads where possible. This abstraction also enables uploading
+ * streams of unknown size due to the use of multipart uploads.
+ *
+ * To construct a managed upload object, see the {constructor} function.
+ *
+ * ## Tracking upload progress
+ *
+ * The managed upload object can also track progress by attaching an
+ * 'httpUploadProgress' listener to the upload manager. This event is similar
+ * to {AWS.Request~httpUploadProgress} but groups all concurrent upload progress
+ * into a single event. See {AWS.S3.ManagedUpload~httpUploadProgress} for more
+ * information.
+ *
+ * ## Handling Multipart Cleanup
+ *
+ * By default, this class will automatically clean up any multipart uploads
+ * when an individual part upload fails. This behavior can be disabled in order
+ * to manually handle failures by setting the `leavePartsOnError` configuration
+ * option to `true` when initializing the upload object.
+ *
+ * @!event httpUploadProgress(progress)
+ *   Triggered when the uploader has uploaded more data.
+ *   @note The `total` property may not be set if the stream being uploaded has
+ *     not yet finished chunking. In this case the `total` will be undefined
+ *     until the total stream size is known.
+ *   @note This event will not be emitted in Node.js 0.8.x.
+ *   @param progress [map] An object containing the `loaded` and `total` bytes
+ *     of the request and the `key` of the S3 object. Note that `total` may be undefined until the payload
+ *     size is known.
+ *   @context (see AWS.Request~send)
+ */
 AWS.S3.ManagedUpload = AWS.util.inherit({
-
+  /**
+   * Creates a managed upload object with a set of configuration options.
+   *
+   * @note A "Body" parameter is required to be set prior to calling {send}.
+   * @option options params [map] a map of parameters to pass to the upload
+   *   requests. The "Body" parameter is required to be specified either on
+   *   the service or in the params option.
+   * @note ContentMD5 should not be provided when using the managed upload object.
+   *   Instead, setting "computeChecksums" to true will enable automatic ContentMD5 generation
+   *   by the managed upload object.
+   * @option options queueSize [Number] (4) the size of the concurrent queue
+   *   manager to upload parts in parallel. Set to 1 for synchronous uploading
+   *   of parts. Note that the uploader will buffer at most queueSize * partSize
+   *   bytes into memory at any given time.
+   * @option options partSize [Number] (5mb) the size in bytes for each
+   *   individual part to be uploaded. Adjust the part size to ensure the number
+   *   of parts does not exceed {maxTotalParts}. See {minPartSize} for the
+   *   minimum allowed part size.
+   * @option options leavePartsOnError [Boolean] (false) whether to abort the
+   *   multipart upload if an error occurs. Set to true if you want to handle
+   *   failures manually.
+   * @option options service [AWS.S3] an optional S3 service object to use for
+   *   requests. This object might have bound parameters used by the uploader.
+   * @option options tags [Array<map>] The tags to apply to the uploaded object.
+   *   Each tag should have a `Key` and `Value` keys.
+   * @example Creating a default uploader for a stream object
+   *   var upload = new AWS.S3.ManagedUpload({
+   *     params: {Bucket: 'bucket', Key: 'key', Body: stream}
+   *   });
+   * @example Creating an uploader with concurrency of 1 and partSize of 10mb
+   *   var upload = new AWS.S3.ManagedUpload({
+   *     partSize: 10 * 1024 * 1024, queueSize: 1,
+   *     params: {Bucket: 'bucket', Key: 'key', Body: stream}
+   *   });
+   * @example Creating an uploader with tags
+   *   var upload = new AWS.S3.ManagedUpload({
+   *     params: {Bucket: 'bucket', Key: 'key', Body: stream},
+   *     tags: [{Key: 'tag1', Value: 'value1'}, {Key: 'tag2', Value: 'value2'}]
+   *   });
+   * @see send
+   */
   constructor: function ManagedUpload(options) {
     var self = this;
     AWS.SequentialExecutor.call(self);
@@ -124584,7 +127094,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     self.configure(options);
   },
 
-
+  /**
+   * @api private
+   */
   configure: function configure(options) {
     options = options || {};
     this.partSize = this.minPartSize;
@@ -124611,22 +127123,51 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     this.adjustTotalBytes();
   },
 
-
+  /**
+   * @api private
+   */
   leavePartsOnError: false,
 
-
+  /**
+   * @api private
+   */
   queueSize: 4,
 
-
+  /**
+   * @api private
+   */
   partSize: null,
 
-
+  /**
+   * @readonly
+   * @return [Number] the minimum number of bytes for an individual part
+   *   upload.
+   */
   minPartSize: 1024 * 1024 * 5,
 
-
+  /**
+   * @readonly
+   * @return [Number] the maximum allowed number of parts in a multipart upload.
+   */
   maxTotalParts: 10000,
 
-
+  /**
+   * Initiates the managed upload for the payload.
+   *
+   * @callback callback function(err, data)
+   *   @param err [Error] an error or null if no error occurred.
+   *   @param data [map] The response data from the successful upload:
+   *     * `Location` (String) the URL of the uploaded object
+   *     * `ETag` (String) the ETag of the uploaded object
+   *     * `Bucket` (String) the bucket to which the object was uploaded
+   *     * `Key` (String) the key to which the object was uploaded
+   * @example Sending a managed upload object
+   *   var params = {Bucket: 'bucket', Key: 'key', Body: stream};
+   *   var upload = new AWS.S3.ManagedUpload({params: params});
+   *   upload.send(function(err, data) {
+   *     console.log(err, data);
+   *   });
+   */
   send: function(callback) {
     var self = this;
     self.failed = false;
@@ -124659,16 +127200,61 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     if (runFill) self.fillQueue.call(self);
   },
 
+  /**
+   * @!method  promise()
+   *   Returns a 'thenable' promise.
+   *
+   *   Two callbacks can be provided to the `then` method on the returned promise.
+   *   The first callback will be called if the promise is fulfilled, and the second
+   *   callback will be called if the promise is rejected.
+   *   @callback fulfilledCallback function(data)
+   *     Called if the promise is fulfilled.
+   *     @param data [map] The response data from the successful upload:
+   *       `Location` (String) the URL of the uploaded object
+   *       `ETag` (String) the ETag of the uploaded object
+   *       `Bucket` (String) the bucket to which the object was uploaded
+   *       `Key` (String) the key to which the object was uploaded
+   *   @callback rejectedCallback function(err)
+   *     Called if the promise is rejected.
+   *     @param err [Error] an error or null if no error occurred.
+   *   @return [Promise] A promise that represents the state of the upload request.
+   *   @example Sending an upload request using promises.
+   *     var upload = s3.upload({Bucket: 'bucket', Key: 'key', Body: stream});
+   *     var promise = upload.promise();
+   *     promise.then(function(data) { ... }, function(err) { ... });
+   */
 
-
-
+  /**
+   * Aborts a managed upload, including all concurrent upload requests.
+   * @note By default, calling this function will cleanup a multipart upload
+   *   if one was created. To leave the multipart upload around after aborting
+   *   a request, configure `leavePartsOnError` to `true` in the {constructor}.
+   * @note Calling {abort} in the browser environment will not abort any requests
+   *   that are already in flight. If a multipart upload was created, any parts
+   *   not yet uploaded will not be sent, and the multipart upload will be cleaned up.
+   * @example Aborting an upload
+   *   var params = {
+   *     Bucket: 'bucket', Key: 'key',
+   *     Body: new Buffer(1024 * 1024 * 25) // 25MB payload
+   *   };
+   *   var upload = s3.upload(params);
+   *   upload.send(function (err, data) {
+   *     if (err) console.log("Error:", err.code, err.message);
+   *     else console.log(data);
+   *   });
+   *
+   *   // abort request in 1 second
+   *   setTimeout(upload.abort.bind(upload), 1000);
+   */
   abort: function() {
     this.cleanup(AWS.util.error(new Error('Request aborted by user'), {
       code: 'RequestAbortedError', retryable: false
     }));
   },
 
-
+  /**
+   * @api private
+   */
   validateBody: function validateBody() {
     var self = this;
     self.body = self.service.config.params.Body;
@@ -124680,10 +127266,13 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     self.sliceFn = AWS.util.arraySliceFn(self.body);
   },
 
-
+  /**
+   * @api private
+   */
   bindServiceObject: function bindServiceObject(params) {
     params = params || {};
     var self = this;
+    // bind parameters to new service object
     if (!self.service) {
       self.service = new AWS.S3({params: params});
     } else {
@@ -124696,13 +127285,16 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   adjustTotalBytes: function adjustTotalBytes() {
     var self = this;
     try { // try to get totalBytes
       self.totalBytes = byteLength(self.body);
     } catch (e) { }
 
+    // try to adjust partSize if we know payload length
     if (self.totalBytes) {
       var newPartSize = Math.ceil(self.totalBytes / self.maxTotalParts);
       if (newPartSize > self.partSize) self.partSize = newPartSize;
@@ -124711,52 +127303,84 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   isDoneChunking: false,
 
-
+  /**
+   * @api private
+   */
   partPos: 0,
 
-
+  /**
+   * @api private
+   */
   totalChunkedBytes: 0,
 
-
+  /**
+   * @api private
+   */
   totalUploadedBytes: 0,
 
-
+  /**
+   * @api private
+   */
   totalBytes: undefined,
 
-
+  /**
+   * @api private
+   */
   numParts: 0,
 
-
+  /**
+   * @api private
+   */
   totalPartNumbers: 0,
 
-
+  /**
+   * @api private
+   */
   activeParts: 0,
 
-
+  /**
+   * @api private
+   */
   doneParts: 0,
 
-
+  /**
+   * @api private
+   */
   parts: null,
 
-
+  /**
+   * @api private
+   */
   completeInfo: null,
 
-
+  /**
+   * @api private
+   */
   failed: false,
 
-
+  /**
+   * @api private
+   */
   multipartReq: null,
 
-
+  /**
+   * @api private
+   */
   partBuffers: null,
 
-
+  /**
+   * @api private
+   */
   partBufferLength: 0,
 
-
+  /**
+   * @api private
+   */
   fillBuffer: function fillBuffer() {
     var self = this;
     var bodyLen = byteLength(self.body);
@@ -124781,7 +127405,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   fillStream: function fillStream() {
     var self = this;
     if (self.activeParts >= self.queueSize) return;
@@ -124795,11 +127421,13 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     }
 
     if (self.partBufferLength >= self.partSize) {
+      // if we have single buffer we avoid copyfull concat
       var pbuf = self.partBuffers.length === 1 ?
         self.partBuffers[0] : Buffer.concat(self.partBuffers);
       self.partBuffers = [];
       self.partBufferLength = 0;
 
+      // if we have more than partSize, push the rest back on the queue
       if (pbuf.length > self.partSize) {
         var rest = pbuf.slice(self.partSize);
         self.partBuffers.push(rest);
@@ -124811,6 +127439,7 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     }
 
     if (self.isDoneChunking && !self.isDoneSending) {
+      // if we have single buffer we avoid copyfull concat
       pbuf = self.partBuffers.length === 1 ?
           self.partBuffers[0] : Buffer.concat(self.partBuffers);
       self.partBuffers = [];
@@ -124827,7 +127456,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     self.body.read(0);
   },
 
-
+  /**
+   * @api private
+   */
   nextChunk: function nextChunk(chunk) {
     var self = this;
     if (self.failed) return null;
@@ -124877,7 +127508,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   getTaggingHeader: function getTaggingHeader() {
     var kvPairStrings = [];
     for (var i = 0; i < this.tags.length; i++) {
@@ -124888,7 +127521,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     return kvPairStrings.join('&');
   },
 
-
+  /**
+   * @api private
+   */
   uploadPart: function uploadPart(chunk, partNumber) {
     var self = this;
 
@@ -124932,7 +127567,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     });
   },
 
-
+  /**
+   * @api private
+   */
   queueChunks: function queueChunks(chunk, partNumber) {
     var self = this;
     self.multipartReq.on('success', function() {
@@ -124940,11 +127577,14 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     });
   },
 
-
+  /**
+   * @api private
+   */
   cleanup: function cleanup(err) {
     var self = this;
     if (self.failed) return;
 
+    // clean up stream
     if (typeof self.body.removeAllListeners === 'function' &&
         typeof self.body.resume === 'function') {
       self.body.removeAllListeners('readable');
@@ -124952,6 +127592,7 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
       self.body.resume();
     }
 
+    // cleanup multipartReq listeners
     if (self.multipartReq) {
       self.multipartReq.removeAllListeners('success');
       self.multipartReq.removeAllListeners('error');
@@ -124979,7 +127620,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     self.callback(err);
   },
 
-
+  /**
+   * @api private
+   */
   finishMultiPart: function finishMultiPart() {
     var self = this;
     var completeParams = { MultipartUpload: { Parts: self.completeInfo.slice(1) } };
@@ -125009,7 +127652,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     });
   },
 
-
+  /**
+   * @api private
+   */
   finishSinglePart: function finishSinglePart(err, data) {
     var upload = this.request._managedUpload;
     var httpReq = this.request.httpRequest;
@@ -125023,7 +127668,9 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
     upload.callback(err, data);
   },
 
-
+  /**
+   * @api private
+   */
   progress: function progress(info) {
     var upload = this._managedUpload;
     if (this.operation === 'putObject') {
@@ -125045,12 +127692,16 @@ AWS.S3.ManagedUpload = AWS.util.inherit({
 
 AWS.util.mixin(AWS.S3.ManagedUpload, AWS.SequentialExecutor);
 
-
+/**
+ * @api private
+ */
 AWS.S3.ManagedUpload.addPromisesToClass = function addPromisesToClass(PromiseDependency) {
   this.prototype.promise = AWS.util.promisifyMethod('send', PromiseDependency);
 };
 
-
+/**
+ * @api private
+ */
 AWS.S3.ManagedUpload.deletePromisesFromClass = function deletePromisesFromClass() {
   delete this.prototype.promise;
 };
@@ -125062,14 +127713,26 @@ module.exports = AWS.S3.ManagedUpload;
 },{"../core":233}],272:[function(require,module,exports){
 var AWS = require('./core');
 
-
+/**
+ * @api private
+ * @!method on(eventName, callback)
+ *   Registers an event listener callback for the event given by `eventName`.
+ *   Parameters passed to the callback function depend on the individual event
+ *   being triggered. See the event documentation for those parameters.
+ *
+ *   @param eventName [String] the event name to register the listener for
+ *   @param callback [Function] the listener callback function
+ *   @return [AWS.SequentialExecutor] the same object for chaining
+ */
 AWS.SequentialExecutor = AWS.util.inherit({
 
   constructor: function SequentialExecutor() {
     this._events = {};
   },
 
-
+  /**
+   * @api private
+   */
   listeners: function listeners(eventName) {
     return this._events[eventName] ? this._events[eventName].slice(0) : [];
   },
@@ -125083,7 +127746,9 @@ AWS.SequentialExecutor = AWS.util.inherit({
     return this;
   },
 
-
+  /**
+   * @api private
+   */
   onAsync: function onAsync(eventName, listener) {
     listener._isAsync = true;
     return this.on(eventName, listener);
@@ -125115,7 +127780,9 @@ AWS.SequentialExecutor = AWS.util.inherit({
     return this;
   },
 
-
+  /**
+   * @api private
+   */
   emit: function emit(eventName, eventArgs, doneCallback) {
     if (!doneCallback) doneCallback = function() { };
     var listeners = this.listeners(eventName);
@@ -125124,7 +127791,9 @@ AWS.SequentialExecutor = AWS.util.inherit({
     return count > 0;
   },
 
-
+  /**
+   * @api private
+   */
   callListeners: function callListeners(listeners, args, doneCallback, prevError) {
     var self = this;
     var error = prevError || null;
@@ -125159,10 +127828,34 @@ AWS.SequentialExecutor = AWS.util.inherit({
     doneCallback.call(self, error);
   },
 
-
+  /**
+   * Adds or copies a set of listeners from another list of
+   * listeners or SequentialExecutor object.
+   *
+   * @param listeners [map<String,Array<Function>>, AWS.SequentialExecutor]
+   *   a list of events and callbacks, or an event emitter object
+   *   containing listeners to add to this emitter object.
+   * @return [AWS.SequentialExecutor] the emitter object, for chaining.
+   * @example Adding listeners from a map of listeners
+   *   emitter.addListeners({
+   *     event1: [function() { ... }, function() { ... }],
+   *     event2: [function() { ... }]
+   *   });
+   *   emitter.emit('event1'); // emitter has event1
+   *   emitter.emit('event2'); // emitter has event2
+   * @example Adding listeners from another emitter object
+   *   var emitter1 = new AWS.SequentialExecutor();
+   *   emitter1.on('event1', function() { ... });
+   *   emitter1.on('event2', function() { ... });
+   *   var emitter2 = new AWS.SequentialExecutor();
+   *   emitter2.addListeners(emitter1);
+   *   emitter2.emit('event1'); // emitter2 has event1
+   *   emitter2.emit('event2'); // emitter2 has event2
+   */
   addListeners: function addListeners(listeners) {
     var self = this;
 
+    // extract listeners if parameter is an SequentialExecutor object
     if (listeners._events) listeners = listeners._events;
 
     AWS.util.each(listeners, function(event, callbacks) {
@@ -125175,20 +127868,59 @@ AWS.SequentialExecutor = AWS.util.inherit({
     return self;
   },
 
-
+  /**
+   * Registers an event with {on} and saves the callback handle function
+   * as a property on the emitter object using a given `name`.
+   *
+   * @param name [String] the property name to set on this object containing
+   *   the callback function handle so that the listener can be removed in
+   *   the future.
+   * @param (see on)
+   * @return (see on)
+   * @example Adding a named listener DATA_CALLBACK
+   *   var listener = function() { doSomething(); };
+   *   emitter.addNamedListener('DATA_CALLBACK', 'data', listener);
+   *
+   *   // the following prints: true
+   *   console.log(emitter.DATA_CALLBACK == listener);
+   */
   addNamedListener: function addNamedListener(name, eventName, callback) {
     this[name] = callback;
     this.addListener(eventName, callback);
     return this;
   },
 
-
+  /**
+   * @api private
+   */
   addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
     callback._isAsync = true;
     return this.addNamedListener(name, eventName, callback);
   },
 
-
+  /**
+   * Helper method to add a set of named listeners using
+   * {addNamedListener}. The callback contains a parameter
+   * with a handle to the `addNamedListener` method.
+   *
+   * @callback callback function(add)
+   *   The callback function is called immediately in order to provide
+   *   the `add` function to the block. This simplifies the addition of
+   *   a large group of named listeners.
+   *   @param add [Function] the {addNamedListener} function to call
+   *     when registering listeners.
+   * @example Adding a set of named listeners
+   *   emitter.addNamedListeners(function(add) {
+   *     add('DATA_CALLBACK', 'data', function() { ... });
+   *     add('OTHER', 'otherEvent', function() { ... });
+   *     add('LAST', 'lastEvent', function() { ... });
+   *   });
+   *
+   *   // these properties are now set:
+   *   emitter.DATA_CALLBACK;
+   *   emitter.OTHER;
+   *   emitter.LAST;
+   */
   addNamedListeners: function addNamedListeners(callback) {
     var self = this;
     callback(
@@ -125203,7 +127935,10 @@ AWS.SequentialExecutor = AWS.util.inherit({
   }
 });
 
-
+/**
+ * {on} is the prefered method.
+ * @api private
+ */
 AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
 
 module.exports = AWS.SequentialExecutor;
@@ -125215,9 +127950,21 @@ var regionConfig = require('./region_config');
 var inherit = AWS.util.inherit;
 var clientCount = 0;
 
-
+/**
+ * The service class representing an AWS service.
+ *
+ * @abstract
+ *
+ * @!attribute apiVersions
+ *   @return [Array<String>] the list of API versions supported by this service.
+ *   @readonly
+ */
 AWS.Service = inherit({
-
+  /**
+   * Create a new service object with a configuration object
+   *
+   * @param config [map] a map of configuration options
+   */
   constructor: function Service(config) {
     if (!this.loadServiceClass) {
       throw AWS.util.error(new Error(),
@@ -125238,7 +127985,9 @@ AWS.Service = inherit({
     this.initialize(config);
   },
 
-
+  /**
+   * @api private
+   */
   initialize: function initialize(config) {
     var svcConfig = AWS.config[this.serviceIdentifier];
 
@@ -125253,11 +128002,15 @@ AWS.Service = inherit({
     this.setEndpoint(this.config.endpoint);
   },
 
-
+  /**
+   * @api private
+   */
   validateService: function validateService() {
   },
 
-
+  /**
+   * @api private
+   */
   loadServiceClass: function loadServiceClass(serviceConfig) {
     var config = serviceConfig;
     if (!AWS.util.isEmpty(this.api)) {
@@ -125275,7 +128028,9 @@ AWS.Service = inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   getLatestServiceClass: function getLatestServiceClass(version) {
     version = this.getLatestServiceVersion(version);
     if (this.constructor.services[version] === null) {
@@ -125285,7 +128040,9 @@ AWS.Service = inherit({
     return this.constructor.services[version];
   },
 
-
+  /**
+   * @api private
+   */
   getLatestServiceVersion: function getLatestServiceVersion(version) {
     if (!this.constructor.services || this.constructor.services.length === 0) {
       throw new Error('No services defined on ' +
@@ -125305,6 +128062,8 @@ AWS.Service = inherit({
     var keys = Object.keys(this.constructor.services).sort();
     var selectedVersion = null;
     for (var i = keys.length - 1; i >= 0; i--) {
+      // versions that end in "*" are not available on disk and can be
+      // skipped, so do not choose these as selectedVersions
       if (keys[i][keys[i].length - 1] !== '*') {
         selectedVersion = keys[i];
       }
@@ -125317,13 +128076,19 @@ AWS.Service = inherit({
                     ' API to satisfy version constraint `' + version + '\'');
   },
 
-
+  /**
+   * @api private
+   */
   api: {},
 
-
+  /**
+   * @api private
+   */
   defaultRetryCount: 3,
 
-
+  /**
+   * @api private
+   */
   customizeRequests: function customizeRequests(callback) {
     if (!callback) {
       this.customRequestHandler = null;
@@ -125334,7 +128099,19 @@ AWS.Service = inherit({
     }
   },
 
-
+  /**
+   * Calls an operation on a service with the given input parameters.
+   *
+   * @param operation [String] the name of the operation to call on the service.
+   * @param params [map] a map of input options for the operation
+   * @callback callback function(err, data)
+   *   If a callback is supplied, it is called when a response is returned
+   *   from the service.
+   *   @param err [Error] the error object returned from the request.
+   *     Set to `null` if the request is successful.
+   *   @param data [Object] the de-serialized data returned from
+   *     the request. Set to `null` if a request error occurs.
+   */
   makeRequest: function makeRequest(operation, params, callback) {
     if (typeof params === 'function') {
       callback = params;
@@ -125363,7 +128140,20 @@ AWS.Service = inherit({
     return request;
   },
 
-
+  /**
+   * Calls an operation on a service with the given input parameters, without
+   * any authentication data. This method is useful for "public" API operations.
+   *
+   * @param operation [String] the name of the operation to call on the service.
+   * @param params [map] a map of input options for the operation
+   * @callback callback function(err, data)
+   *   If a callback is supplied, it is called when a response is returned
+   *   from the service.
+   *   @param err [Error] the error object returned from the request.
+   *     Set to `null` if the request is successful.
+   *   @param data [Object] the de-serialized data returned from
+   *     the request. Set to `null` if a request error occurs.
+   */
   makeUnauthenticatedRequest: function makeUnauthenticatedRequest(operation, params, callback) {
     if (typeof params === 'function') {
       callback = params;
@@ -125374,13 +128164,32 @@ AWS.Service = inherit({
     return callback ? request.send(callback) : request;
   },
 
-
+  /**
+   * Waits for a given state
+   *
+   * @param state [String] the state on the service to wait for
+   * @param params [map] a map of parameters to pass with each request
+   * @option params $waiter [map] a map of configuration options for the waiter
+   * @option params $waiter.delay [Number] The number of seconds to wait between
+   *                                       requests
+   * @option params $waiter.maxAttempts [Number] The maximum number of requests
+   *                                             to send while waiting
+   * @callback callback function(err, data)
+   *   If a callback is supplied, it is called when a response is returned
+   *   from the service.
+   *   @param err [Error] the error object returned from the request.
+   *     Set to `null` if the request is successful.
+   *   @param data [Object] the de-serialized data returned from
+   *     the request. Set to `null` if a request error occurs.
+   */
   waitFor: function waitFor(state, params, callback) {
     var waiter = new AWS.ResourceWaiter(this, state);
     return waiter.wait(params, callback);
   },
 
-
+  /**
+   * @api private
+   */
   addAllRequestListeners: function addAllRequestListeners(request) {
     var list = [AWS.events, AWS.EventListeners.Core, this.serviceInterface(),
                 AWS.EventListeners.CorePost];
@@ -125388,6 +128197,7 @@ AWS.Service = inherit({
       if (list[i]) request.addListeners(list[i]);
     }
 
+    // disable parameter validation
     if (!this.config.paramValidation) {
       request.removeListener('validate',
         AWS.EventListeners.Core.VALIDATE_PARAMETERS);
@@ -125398,21 +128208,32 @@ AWS.Service = inherit({
     }
 
     this.setupRequestListeners(request);
+    // call prototype's customRequestHandler
     if (typeof this.constructor.prototype.customRequestHandler === 'function') {
       this.constructor.prototype.customRequestHandler(request);
     }
+    // call instance's customRequestHandler
     if (Object.prototype.hasOwnProperty.call(this, 'customRequestHandler') && typeof this.customRequestHandler === 'function') {
       this.customRequestHandler(request);
     }
   },
 
-
+  /**
+   * Override this method to setup any custom request listeners for each
+   * new request to the service.
+   *
+   * @abstract
+   */
   setupRequestListeners: function setupRequestListeners() {
   },
 
-
+  /**
+   * Gets the signer class for a given request
+   * @api private
+   */
   getSignerClass: function getSignerClass(request) {
     var version;
+    // get operation authtype if present
     var operation = null;
     var authtype = '';
     if (request) {
@@ -125430,7 +128251,9 @@ AWS.Service = inherit({
     return AWS.Signers.RequestSigner.getVersion(version);
   },
 
-
+  /**
+   * @api private
+   */
   serviceInterface: function serviceInterface() {
     switch (this.api.protocol) {
       case 'ec2': return AWS.EventListeners.Query;
@@ -125445,12 +128268,19 @@ AWS.Service = inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   successfulResponse: function successfulResponse(resp) {
     return resp.httpResponse.statusCode < 300;
   },
 
-
+  /**
+   * How many times a failed request should be retried before giving up.
+   * the defaultRetryCount can be overriden by service classes.
+   *
+   * @api private
+   */
   numRetries: function numRetries() {
     if (this.config.maxRetries !== undefined) {
       return this.config.maxRetries;
@@ -125459,12 +128289,16 @@ AWS.Service = inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   retryDelays: function retryDelays(retryCount) {
     return AWS.util.calculateRetryDelay(retryCount, this.config.retryDelayOptions);
   },
 
-
+  /**
+   * @api private
+   */
   retryableError: function retryableError(error) {
     if (this.timeoutError(error)) return true;
     if (this.networkingError(error)) return true;
@@ -125474,22 +128308,31 @@ AWS.Service = inherit({
     return false;
   },
 
-
+  /**
+   * @api private
+   */
   networkingError: function networkingError(error) {
     return error.code === 'NetworkingError';
   },
 
-
+  /**
+   * @api private
+   */
   timeoutError: function timeoutError(error) {
     return error.code === 'TimeoutError';
   },
 
-
+  /**
+   * @api private
+   */
   expiredCredentialsError: function expiredCredentialsError(error) {
+    // TODO : this only handles *one* of the expired credential codes
     return (error.code === 'ExpiredTokenException');
   },
 
-
+  /**
+   * @api private
+   */
   clockSkewError: function clockSkewError(error) {
     switch (error.code) {
       case 'RequestTimeTooSkewed':
@@ -125503,27 +128346,36 @@ AWS.Service = inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   getSkewCorrectedDate: function getSkewCorrectedDate() {
     return new Date(Date.now() + this.config.systemClockOffset);
   },
 
-
+  /**
+   * @api private
+   */
   applyClockOffset: function applyClockOffset(newServerTime) {
     if (newServerTime) {
       this.config.systemClockOffset = newServerTime - Date.now();
     }
   },
 
-
+  /**
+   * @api private
+   */
   isClockSkewed: function isClockSkewed(newServerTime) {
     if (newServerTime) {
       return Math.abs(this.getSkewCorrectedDate().getTime() - newServerTime) >= 30000;
     }
   },
 
-
+  /**
+   * @api private
+   */
   throttledError: function throttledError(error) {
+    // this logic varies between services
     switch (error.code) {
       case 'ProvisionedThroughputExceededException':
       case 'Throttling':
@@ -125536,7 +128388,9 @@ AWS.Service = inherit({
     }
   },
 
-
+  /**
+   * @api private
+   */
   endpointFromTemplate: function endpointFromTemplate(endpoint) {
     if (typeof endpoint !== 'string') return endpoint;
 
@@ -125547,12 +128401,16 @@ AWS.Service = inherit({
     return e;
   },
 
-
+  /**
+   * @api private
+   */
   setEndpoint: function setEndpoint(endpoint) {
     this.endpoint = new AWS.Endpoint(endpoint, this.config);
   },
 
-
+  /**
+   * @api private
+   */
   paginationConfig: function paginationConfig(operation, throwException) {
     var paginator = this.api.operations[operation].paginator;
     if (!paginator) {
@@ -125569,7 +128427,11 @@ AWS.Service = inherit({
 
 AWS.util.update(AWS.Service, {
 
-
+  /**
+   * Adds one method for each operation described in the api configuration
+   *
+   * @api private
+   */
   defineMethods: function defineMethods(svc) {
     AWS.util.each(svc.prototype.api.operations, function iterator(method) {
       if (svc.prototype[method]) return;
@@ -125586,7 +128448,17 @@ AWS.util.update(AWS.Service, {
     });
   },
 
-
+  /**
+   * Defines a new Service class using a service identifier and list of versions
+   * including an optional set of features (functions) to apply to the class
+   * prototype.
+   *
+   * @param serviceIdentifier [String] the identifier for the service
+   * @param versions [Array<String>] a list of versions that work with this
+   *   service
+   * @param features [Object] an object to attach to the prototype
+   * @return [Class<Service>] the service class defined by this function.
+   */
   defineService: function defineService(serviceIdentifier, versions, features) {
     AWS.Service._serviceMap[serviceIdentifier] = true;
     if (!Array.isArray(versions)) {
@@ -125609,7 +128481,9 @@ AWS.util.update(AWS.Service, {
     return svc;
   },
 
-
+  /**
+   * @api private
+   */
   addVersions: function addVersions(svc, versions) {
     if (!Array.isArray(versions)) versions = [versions];
 
@@ -125623,7 +128497,9 @@ AWS.util.update(AWS.Service, {
     svc.apiVersions = Object.keys(svc.services).sort();
   },
 
-
+  /**
+   * @api private
+   */
   defineServiceApi: function defineServiceApi(superclass, version, apiConfig) {
     var svc = inherit(superclass, {
       serviceIdentifier: superclass.serviceIdentifier
@@ -125662,12 +128538,16 @@ AWS.util.update(AWS.Service, {
     return svc;
   },
 
-
+  /**
+   * @api private
+   */
   hasService: function(identifier) {
     return Object.prototype.hasOwnProperty.call(AWS.Service._serviceMap, identifier);
   },
 
-
+  /**
+   * @api private
+   */
   _serviceMap: {}
 });
 
@@ -125677,7 +128557,11 @@ module.exports = AWS.Service;
 var AWS = require('../core');
 
 AWS.util.update(AWS.APIGateway.prototype, {
-
+/**
+ * Sets the Accept header to application/json.
+ *
+ * @api private
+ */
   setAcceptHeader: function setAcceptHeader(req) {
     var httpRequest = req.httpRequest;
     if (!httpRequest.headers.Accept) {
@@ -125685,7 +128569,9 @@ AWS.util.update(AWS.APIGateway.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   setupRequestListeners: function setupRequestListeners(request) {
     request.addListener('build', this.setAcceptHeader);
     if (request.operation === 'getExport') {
@@ -125701,6 +128587,7 @@ AWS.util.update(AWS.APIGateway.prototype, {
 },{"../core":233}],275:[function(require,module,exports){
 var AWS = require('../core');
 
+// pull in CloudFront signer
 require('../cloudfront/signer');
 
 AWS.util.update(AWS.CloudFront.prototype, {
@@ -125733,7 +128620,9 @@ var AWS = require('../core');
 require('../dynamodb/document_client');
 
 AWS.util.update(AWS.DynamoDB.prototype, {
-
+  /**
+   * @api private
+   */
   setupRequestListeners: function setupRequestListeners(request) {
     if (request.service.config.dynamoDbCrc32) {
       request.removeListener('extractData', AWS.EventListeners.Json.EXTRACT_DATA);
@@ -125742,7 +128631,9 @@ AWS.util.update(AWS.DynamoDB.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   checkCrc32: function checkCrc32(resp) {
     if (!resp.httpResponse.streaming && !resp.request.service.crc32IsValid(resp)) {
       resp.data = null;
@@ -125756,17 +128647,23 @@ AWS.util.update(AWS.DynamoDB.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   crc32IsValid: function crc32IsValid(resp) {
     var crc = resp.httpResponse.headers['x-amz-crc32'];
     if (!crc) return true; // no (valid) CRC32 header
     return parseInt(crc, 10) === AWS.util.crypto.crc32(resp.httpResponse.body);
   },
 
-
+  /**
+   * @api private
+   */
   defaultRetryCount: 10,
 
-
+  /**
+   * @api private
+   */
   retryDelays: function retryDelays(retryCount) {
     var retryDelayOptions = AWS.util.copy(this.config.retryDelayOptions);
 
@@ -125782,7 +128679,9 @@ AWS.util.update(AWS.DynamoDB.prototype, {
 var AWS = require('../core');
 
 AWS.util.update(AWS.EC2.prototype, {
-
+  /**
+   * @api private
+   */
   setupRequestListeners: function setupRequestListeners(request) {
     request.removeListener('extractError', AWS.EventListeners.Query.EXTRACT_ERROR);
     request.addListener('extractError', this.extractError);
@@ -125792,7 +128691,9 @@ AWS.util.update(AWS.EC2.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   buildCopySnapshotPresignedUrl: function buildCopySnapshotPresignedUrl(req, done) {
     if (req.params.PresignedUrl || req._subRequest) {
       return done();
@@ -125816,8 +128717,11 @@ AWS.util.update(AWS.EC2.prototype, {
     });
   },
 
-
+  /**
+   * @api private
+   */
   extractError: function extractError(resp) {
+    // EC2 nests the error code and message deeper than other AWS Query services.
     var httpResponse = resp.httpResponse;
     var data = new AWS.XML.Parser().parse(httpResponse.body.toString() || '');
     if (data.Errors) {
@@ -125838,16 +128742,73 @@ AWS.util.update(AWS.EC2.prototype, {
 },{"../core":233}],279:[function(require,module,exports){
 var AWS = require('../core');
 
-
+/**
+ * @api private
+ */
 var blobPayloadOutputOps = [
   'deleteThingShadow',
   'getThingShadow',
   'updateThingShadow'
 ];
 
-
+/**
+ * Constructs a service interface object. Each API operation is exposed as a
+ * function on service.
+ *
+ * ### Sending a Request Using IotData
+ *
+ * ```javascript
+ * var iotdata = new AWS.IotData({endpoint: 'my.host.tld'});
+ * iotdata.getThingShadow(params, function (err, data) {
+ *   if (err) console.log(err, err.stack); // an error occurred
+ *   else     console.log(data);           // successful response
+ * });
+ * ```
+ *
+ * ### Locking the API Version
+ *
+ * In order to ensure that the IotData object uses this specific API,
+ * you can construct the object by passing the `apiVersion` option to the
+ * constructor:
+ *
+ * ```javascript
+ * var iotdata = new AWS.IotData({
+ *   endpoint: 'my.host.tld',
+ *   apiVersion: '2015-05-28'
+ * });
+ * ```
+ *
+ * You can also set the API version globally in `AWS.config.apiVersions` using
+ * the **iotdata** service identifier:
+ *
+ * ```javascript
+ * AWS.config.apiVersions = {
+ *   iotdata: '2015-05-28',
+ *   // other service API versions
+ * };
+ *
+ * var iotdata = new AWS.IotData({endpoint: 'my.host.tld'});
+ * ```
+ *
+ * @note You *must* provide an `endpoint` configuration parameter when
+ *   constructing this service. See {constructor} for more information.
+ *
+ * @!method constructor(options = {})
+ *   Constructs a service object. This object has one method for each
+ *   API operation.
+ *
+ *   @example Constructing a IotData object
+ *     var iotdata = new AWS.IotData({endpoint: 'my.host.tld'});
+ *   @note You *must* provide an `endpoint` when constructing this service.
+ *   @option (see AWS.Config.constructor)
+ *
+ * @service iotdata
+ * @version 2015-05-28
+ */
 AWS.util.update(AWS.IotData.prototype, {
-
+    /**
+     * @api private
+     */
     validateService: function validateService() {
         if (!this.config.endpoint || this.config.endpoint.indexOf('{') >= 0) {
             var msg = 'AWS.IotData requires an explicit ' +
@@ -125857,7 +128818,9 @@ AWS.util.update(AWS.IotData.prototype, {
         }
     },
 
-
+    /**
+     * @api private
+     */
     setupRequestListeners: function setupRequestListeners(request) {
         request.addListener('validateResponse', this.validateResponseBody);
         if (blobPayloadOutputOps.indexOf(request.operation) > -1) {
@@ -125865,7 +128828,9 @@ AWS.util.update(AWS.IotData.prototype, {
         }
     },
 
-
+    /**
+     * @api private
+     */
     validateResponseBody: function validateResponseBody(resp) {
         var body = resp.httpResponse.body.toString() || '{}';
         var bodyCheck = body.trim();
@@ -125880,7 +128845,9 @@ AWS.util.update(AWS.IotData.prototype, {
 var AWS = require('../core');
 
 AWS.util.update(AWS.Lambda.prototype, {
-
+  /**
+   * @api private
+   */
   setupRequestListeners: function setupRequestListeners(request) {
     if (request.operation === 'invoke') {
       request.addListener('extractData', AWS.util.convertPayloadToString);
@@ -125893,14 +128860,19 @@ AWS.util.update(AWS.Lambda.prototype, {
 var AWS = require('../core');
 
 AWS.util.update(AWS.MachineLearning.prototype, {
-
+  /**
+   * @api private
+   */
   setupRequestListeners: function setupRequestListeners(request) {
     if (request.operation === 'predict') {
       request.addListener('build', this.buildEndpoint);
     }
   },
 
-
+  /**
+   * Updates request endpoint from PredictEndpoint
+   * @api private
+   */
   buildEndpoint: function buildEndpoint(request) {
     var url = request.params.PredictEndpoint;
     if (url) {
@@ -125915,11 +128887,15 @@ require('../polly/presigner');
 },{"../polly/presigner":258}],283:[function(require,module,exports){
 var AWS = require('../core');
 require('../rds/signer');
-
+ /**
+  * @api private
+  */
  var crossRegionOperations = ['copyDBSnapshot', 'createDBInstanceReadReplica', 'createDBCluster', 'copyDBClusterSnapshot'];
 
  AWS.util.update(AWS.RDS.prototype, {
-
+   /**
+    * @api private
+    */
    setupRequestListeners: function setupRequestListeners(request) {
      if (crossRegionOperations.indexOf(request.operation) !== -1 &&
          request.params.SourceRegion) {
@@ -125929,6 +128905,7 @@ require('../rds/signer');
          delete request.params.SourceRegion;
        } else {
          var doesParamValidation = !!this.config.paramValidation;
+         // remove the validate parameters listener so we can re-add it after we build the URL
          if (doesParamValidation) {
            request.removeListener('validate', AWS.EventListeners.Core.VALIDATE_PARAMETERS);
          }
@@ -125940,12 +128917,15 @@ require('../rds/signer');
      }
    },
 
-
+   /**
+    * @api private
+    */
    buildCrossRegionPresignedUrl: function buildCrossRegionPresignedUrl(req, done) {
      var config = AWS.util.copy(req.service.config);
      config.region = req.params.SourceRegion;
      delete req.params.SourceRegion;
      delete config.endpoint;
+     // relevant params for the operation will already be in req.params
      delete config.params;
      config.signatureVersion = 'v4';
      var destinationRegion = req.service.config.region;
@@ -125970,18 +128950,25 @@ require('../rds/signer');
 var AWS = require('../core');
 
 AWS.util.update(AWS.Route53.prototype, {
-
+  /**
+   * @api private
+   */
   setupRequestListeners: function setupRequestListeners(request) {
     request.on('build', this.sanitizeUrl);
   },
 
-
+  /**
+   * @api private
+   */
   sanitizeUrl: function sanitizeUrl(request) {
     var path = request.httpRequest.path;
     request.httpRequest.path = path.replace(/\/%2F\w+%2F/, '/');
   },
 
-
+  /**
+   * @return [Boolean] whether the error can be retried
+   * @api private
+   */
   retryableError: function retryableError(error) {
     if (error.code === 'PriorRequestNotComplete' &&
         error.statusCode === 400) {
@@ -125997,16 +128984,21 @@ AWS.util.update(AWS.Route53.prototype, {
 var AWS = require('../core');
 var v4Credentials = require('../signers/v4_credentials');
 
+// Pull in managed upload extension
 require('../s3/managed_upload');
 
-
+/**
+ * @api private
+ */
 var operationsWith200StatusCodeError = {
   'completeMultipartUpload': true,
   'copyObject': true,
   'uploadPartCopy': true
 };
 
-
+/**
+ * @api private
+ */
  var regionRedirectErrorCodes = [
   'AuthorizationHeaderMalformed', // non-head operations on virtual-hosted global bucket endpoints
   'BadRequest', // head operations on virtual-hosted global bucket endpoints
@@ -126015,13 +129007,21 @@ var operationsWith200StatusCodeError = {
  ];
 
 AWS.util.update(AWS.S3.prototype, {
-
+  /**
+   * @api private
+   */
   getSignatureVersion: function getSignatureVersion(request) {
     var defaultApiVersion = this.api.signatureVersion;
     var userDefinedVersion = this._originalConfig ? this._originalConfig.signatureVersion : null;
     var regionDefinedVersion = this.config.signatureVersion;
     var isPresigned = request ? request.isPresigned() : false;
-
+    /*
+      1) User defined version specified:
+        a) always return user defined version
+      2) No user defined version specified:
+        a) default to lowest version the region supports
+        b) If using presigned urls, default to lowest version the region supports
+    */
     if (userDefinedVersion) {
       userDefinedVersion = userDefinedVersion === 'v2' ? 's3' : userDefinedVersion;
       return userDefinedVersion;
@@ -126034,17 +129034,22 @@ AWS.util.update(AWS.S3.prototype, {
     return defaultApiVersion;
   },
 
-
+  /**
+   * @api private
+   */
   getSignerClass: function getSignerClass(request) {
     var signatureVersion = this.getSignatureVersion(request);
     return AWS.Signers.RequestSigner.getVersion(signatureVersion);
   },
 
-
+  /**
+   * @api private
+   */
   validateService: function validateService() {
     var msg;
     var messages = [];
 
+    // default to us-east-1 when no region is provided
     if (!this.config.region) this.config.region = 'us-east-1';
 
     if (!this.config.endpoint && this.config.s3BucketEndpoint) {
@@ -126062,7 +129067,9 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   shouldDisableBodySigning: function shouldDisableBodySigning(request) {
     var signerClass = this.getSignerClass();
     if (this.config.s3DisableBodySigning === true && signerClass === AWS.Signers.V4
@@ -126072,7 +129079,9 @@ AWS.util.update(AWS.S3.prototype, {
     return false;
   },
 
-
+  /**
+   * @api private
+   */
   setupRequestListeners: function setupRequestListeners(request) {
     request.addListener('validate', this.validateScheme);
     request.addListener('validate', this.validateBucketEndpoint);
@@ -126099,7 +129108,9 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   validateScheme: function(req) {
     var params = req.params,
         scheme = req.httpRequest.endpoint.protocol,
@@ -126112,7 +129123,9 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   validateBucketEndpoint: function(req) {
     if (!req.params.Bucket && req.service.config.s3BucketEndpoint) {
       var msg = 'Cannot send requests to root API with `s3BucketEndpoint` set.';
@@ -126121,10 +129134,13 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   validateBucketName: function validateBucketName(req) {
     var service = req.service;
     var signatureVersion = service.getSignatureVersion(req);
+    // Only validate buckets when using sigv4
     if (signatureVersion !== 'v4') {
       return;
     }
@@ -126134,6 +129150,7 @@ AWS.util.update(AWS.S3.prototype, {
     if (bucket && slashIndex >= 0) {
       if (typeof key === 'string') {
         req.params = AWS.util.copy(req.params);
+        // Need to include trailing slash to match sigv2 behavior
         var prefix = bucket.substr(slashIndex + 1) || '';
         req.params.Key = prefix + '/' + key;
         req.params.Bucket = bucket.substr(0, slashIndex);
@@ -126145,7 +129162,9 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   isValidAccelerateOperation: function isValidAccelerateOperation(operation) {
     var invalidOperations = [
       'createBucket',
@@ -126156,7 +129175,14 @@ AWS.util.update(AWS.S3.prototype, {
   },
 
 
-
+  /**
+   * S3 prefers dns-compatible bucket names to be moved from the uri path
+   * to the hostname as a sub-domain.  This is not possible, even for dns-compat
+   * buckets when using SSL and the bucket name contains a dot ('.').  The
+   * ssl wildcard certificate is only 1-level deep.
+   *
+   * @api private
+   */
   populateURI: function populateURI(req) {
     var httpRequest = req.httpRequest;
     var b = req.params.Bucket;
@@ -126189,7 +129215,11 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * Takes the bucket name out of the path if bucket is virtual-hosted
+   *
+   * @api private
+   */
   removeVirtualHostedBucketFromPath: function removeVirtualHostedBucketFromPath(req) {
     var httpRequest = req.httpRequest;
     var bucket = httpRequest.virtualHostedBucket;
@@ -126201,7 +129231,10 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * Adds Expect: 100-continue header if payload is greater-or-equal 1MB
+   * @api private
+   */
   addExpect100Continue: function addExpect100Continue(req) {
     var len = req.httpRequest.headers['Content-Length'];
     if (AWS.util.isNode() && len >= 1024 * 1024) {
@@ -126209,10 +129242,15 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * Adds a default content type if none is supplied.
+   *
+   * @api private
+   */
   addContentType: function addContentType(req) {
     var httpRequest = req.httpRequest;
     if (httpRequest.method === 'GET' || httpRequest.method === 'HEAD') {
+      // Content-Type is not set in GET/HEAD requests
       delete httpRequest.headers['Content-Type'];
       return;
     }
@@ -126237,7 +129275,9 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   computableChecksumOperations: {
     putBucketCors: true,
     putBucketLifecycle: true,
@@ -126247,11 +129287,21 @@ AWS.util.update(AWS.S3.prototype, {
     putBucketReplication: true
   },
 
-
+  /**
+   * Checks whether checksums should be computed for the request.
+   * If the request requires checksums to be computed, this will always
+   * return true, otherwise it depends on whether {AWS.Config.computeChecksums}
+   * is set.
+   *
+   * @param req [AWS.Request] the request to check against
+   * @return [Boolean] whether to compute checksums for a request.
+   * @api private
+   */
   willComputeChecksums: function willComputeChecksums(req) {
     if (this.computableChecksumOperations[req.operation]) return true;
     if (!this.config.computeChecksums) return false;
 
+    // TODO: compute checksums for Stream objects
     if (!AWS.util.Buffer.isBuffer(req.httpRequest.body) &&
         typeof req.httpRequest.body !== 'string') {
       return false;
@@ -126259,12 +129309,14 @@ AWS.util.update(AWS.S3.prototype, {
 
     var rules = req.service.api.operations[req.operation].input.members;
 
+    // Sha256 signing disabled, and not a presigned url
     if (req.service.shouldDisableBodySigning(req) && !Object.prototype.hasOwnProperty.call(req.httpRequest.headers, 'presigned-expires')) {
       if (rules.ContentMD5 && !req.params.ContentMD5) {
         return true;
       }
     }
 
+    // V4 signer uses SHA256 signatures so only compute MD5 if it is required
     if (req.service.getSignerClass(req) === AWS.Signers.V4) {
       if (rules.ContentMD5 && !rules.ContentMD5.required) return false;
     }
@@ -126272,7 +129324,11 @@ AWS.util.update(AWS.S3.prototype, {
     if (rules.ContentMD5 && !req.params.ContentMD5) return true;
   },
 
-
+  /**
+   * A listener that computes the Content-MD5 and sets it in the header.
+   * @see AWS.S3.willComputeChecksums
+   * @api private
+   */
   computeContentMd5: function computeContentMd5(req) {
     if (req.service.willComputeChecksums(req)) {
       var md5 = AWS.util.crypto.md5(req.httpRequest.body, 'base64');
@@ -126280,7 +129336,9 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   computeSseCustomerKeyMd5: function computeSseCustomerKeyMd5(req) {
     var keys = {
       SSECustomerKey: 'x-amz-server-side-encryption-customer-key-MD5',
@@ -126294,8 +129352,15 @@ AWS.util.update(AWS.S3.prototype, {
     });
   },
 
-
+  /**
+   * Returns true if the bucket name should be left in the URI path for
+   * a request to S3.  This function takes into account the current
+   * endpoint protocol (e.g. http or https).
+   *
+   * @api private
+   */
   pathStyleBucketName: function pathStyleBucketName(bucketName) {
+    // user can force path style requests via the configuration
     if (this.config.s3ForcePathStyle) return true;
     if (this.config.s3BucketEndpoint) return false;
 
@@ -126306,7 +129371,12 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * Returns true if the bucket name is DNS compatible.  Buckets created
+   * outside of the classic region MUST be DNS compatible.
+   *
+   * @api private
+   */
   dnsCompatibleBucketName: function dnsCompatibleBucketName(bucketName) {
     var b = bucketName;
     var domain = new RegExp(/^[a-z0-9][a-z0-9\.\-]{1,61}[a-z0-9]$/);
@@ -126315,7 +129385,10 @@ AWS.util.update(AWS.S3.prototype, {
     return (b.match(domain) && !b.match(ipAddress) && !b.match(dots)) ? true : false;
   },
 
-
+  /**
+   * @return [Boolean] whether response contains an error
+   * @api private
+   */
   successfulResponse: function successfulResponse(resp) {
     var req = resp.request;
     var httpResponse = resp.httpResponse;
@@ -126327,7 +129400,10 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * @return [Boolean] whether the error can be retried
+   * @api private
+   */
   retryableError: function retryableError(error, request) {
     if (operationsWith200StatusCodeError[request.operation] &&
         error.statusCode === 200) {
@@ -126351,7 +129427,12 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * Updates httpRequest with region. If region is not provided, then
+   * the httpRequest will be updated based on httpRequest.region
+   *
+   * @api private
+   */
   updateReqBucketRegion: function updateReqBucketRegion(request, region) {
     var httpRequest = request.httpRequest;
     if (typeof region === 'string' && region.length) {
@@ -126381,7 +129462,12 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * Provides a specialized parser for getBucketLocation -- all other
+   * operations are parsed by the super class.
+   *
+   * @api private
+   */
   extractData: function extractData(resp) {
     var req = resp.request;
     if (req.operation === 'getBucketLocation') {
@@ -126418,7 +129504,11 @@ AWS.util.update(AWS.S3.prototype, {
     req.service.extractRequestIds(resp);
   },
 
-
+  /**
+   * Extracts an error object from the http response.
+   *
+   * @api private
+   */
   extractError: function extractError(resp) {
     var codes = {
       304: 'NotModified',
@@ -126476,7 +129566,12 @@ AWS.util.update(AWS.S3.prototype, {
     req.service.extractRequestIds(resp);
   },
 
-
+  /**
+   * If region was not obtained synchronously, then send async request
+   * to get bucket region for errors resulting from wrong region.
+   *
+   * @api private
+   */
   requestBucketRegion: function requestBucketRegion(resp, done) {
     var error = resp.error;
     var req = resp.request;
@@ -126500,7 +129595,12 @@ AWS.util.update(AWS.S3.prototype, {
     });
   },
 
-
+   /**
+   * For browser only. If NetworkingError received, will attempt to obtain
+   * the bucket region.
+   *
+   * @api private
+   */
    reqRegionForNetworkingError: function reqRegionForNetworkingError(resp, done) {
     if (!AWS.util.isBrowser()) {
       return done();
@@ -126538,14 +129638,25 @@ AWS.util.update(AWS.S3.prototype, {
         done();
       });
     } else {
+      // DNS-compatible path-style
+      // (s3ForcePathStyle or bucket name with dot over https)
+      // Cannot obtain region information for this case
       done();
     }
    },
 
-
+  /**
+   * Cache for bucket region.
+   *
+   * @api private
+   */
    bucketRegionCache: {},
 
-
+  /**
+   * Clears bucket region cache.
+   *
+   * @api private
+   */
    clearBucketRegionCache: function(buckets) {
     var bucketRegionCache = this.bucketRegionCache;
     if (!buckets) {
@@ -126559,7 +129670,11 @@ AWS.util.update(AWS.S3.prototype, {
     return bucketRegionCache;
    },
 
-
+   /**
+    * Corrects request region if bucket's cached region is different
+    *
+    * @api private
+    */
   correctBucketRegionFromCache: function correctBucketRegionFromCache(req) {
     var bucket = req.params.Bucket || null;
     if (bucket) {
@@ -126572,7 +129687,11 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * Extracts S3 specific request ids from the http response.
+   *
+   * @api private
+   */
   extractRequestIds: function extractRequestIds(resp) {
     var extendedRequestId = resp.httpResponse.headers ? resp.httpResponse.headers['x-amz-id-2'] : null;
     var cfId = resp.httpResponse.headers ? resp.httpResponse.headers['x-amz-cf-id'] : null;
@@ -126586,7 +129705,51 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * Get a pre-signed URL for a given operation name.
+   *
+   * @note You must ensure that you have static or previously resolved
+   *   credentials if you call this method synchronously (with no callback),
+   *   otherwise it may not properly sign the request. If you cannot guarantee
+   *   this (you are using an asynchronous credential provider, i.e., EC2
+   *   IAM roles), you should always call this method with an asynchronous
+   *   callback.
+   * @note Not all operation parameters are supported when using pre-signed
+   *   URLs. Certain parameters, such as `SSECustomerKey`, `ACL`, `Expires`,
+   *   `ContentLength`, or `Tagging` must be provided as headers when sending a
+   *   request. If you are using pre-signed URLs to upload from a browser and
+   *   need to use these fields, see {createPresignedPost}.
+   * @param operation [String] the name of the operation to call
+   * @param params [map] parameters to pass to the operation. See the given
+   *   operation for the expected operation parameters. In addition, you can
+   *   also pass the "Expires" parameter to inform S3 how long the URL should
+   *   work for.
+   * @option params Expires [Integer] (900) the number of seconds to expire
+   *   the pre-signed URL operation in. Defaults to 15 minutes.
+   * @param callback [Function] if a callback is provided, this function will
+   *   pass the URL as the second parameter (after the error parameter) to
+   *   the callback function.
+   * @return [String] if called synchronously (with no callback), returns the
+   *   signed URL.
+   * @return [null] nothing is returned if a callback is provided.
+   * @example Pre-signing a getObject operation (synchronously)
+   *   var params = {Bucket: 'bucket', Key: 'key'};
+   *   var url = s3.getSignedUrl('getObject', params);
+   *   console.log('The URL is', url);
+   * @example Pre-signing a putObject (asynchronously)
+   *   var params = {Bucket: 'bucket', Key: 'key'};
+   *   s3.getSignedUrl('putObject', params, function (err, url) {
+   *     console.log('The URL is', url);
+   *   });
+   * @example Pre-signing a putObject operation with a specific payload
+   *   var params = {Bucket: 'bucket', Key: 'key', Body: 'body'};
+   *   var url = s3.getSignedUrl('putObject', params);
+   *   console.log('The URL is', url);
+   * @example Passing in a 1-minute expiry time for a pre-signed URL
+   *   var params = {Bucket: 'bucket', Key: 'key', Expires: 60};
+   *   var url = s3.getSignedUrl('getObject', params);
+   *   console.log('The URL is', url); // expires in 60 seconds
+   */
   getSignedUrl: function getSignedUrl(operation, params, callback) {
     params = AWS.util.copy(params || {});
     var expires = params.Expires || 900;
@@ -126603,7 +129766,86 @@ AWS.util.update(AWS.S3.prototype, {
   },
 
 
-
+  /**
+   * Get a pre-signed POST policy to support uploading to S3 directly from an
+   * HTML form.
+   *
+   * @param params [map]
+   * @option params Bucket [String]     The bucket to which the post should be
+   *                                    uploaded
+   * @option params Expires [Integer]   (3600) The number of seconds for which
+   *                                    the presigned policy should be valid.
+   * @option params Conditions [Array]  An array of conditions that must be met
+   *                                    for the presigned policy to allow the
+   *                                    upload. This can include required tags,
+   *                                    the accepted range for content lengths,
+   *                                    etc.
+   * @see http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTConstructPolicy.html
+   * @option params Fields [map]        Fields to include in the form. All
+   *                                    values passed in as fields will be
+   *                                    signed as exact match conditions.
+   * @param callback [Function]
+   *
+   * @note All fields passed in when creating presigned post data will be signed
+   *   as exact match conditions. Any fields that will be interpolated by S3
+   *   must be added to the fields hash after signing, and an appropriate
+   *   condition for such fields must be explicitly added to the Conditions
+   *   array passed to this function before signing.
+   *
+   * @example Presiging post data with a known key
+   *   var params = {
+   *     Bucket: 'bucket',
+   *     Fields: {
+   *       key: 'key'
+   *     }
+   *   };
+   *   s3.createPresignedPost(params, function(err, data) {
+   *     if (err) {
+   *       console.error('Presigning post data encountered an error', err);
+   *     } else {
+   *       console.log('The post data is', data);
+   *     }
+   *   });
+   *
+   * @example Presigning post data with an interpolated key
+   *   var params = {
+   *     Bucket: 'bucket',
+   *     Conditions: [
+   *       ['starts-with', '$key', 'path/to/uploads/']
+   *     ]
+   *   };
+   *   s3.createPresignedPost(params, function(err, data) {
+   *     if (err) {
+   *       console.error('Presigning post data encountered an error', err);
+   *     } else {
+   *       data.Fields.key = 'path/to/uploads/${filename}';
+   *       console.log('The post data is', data);
+   *     }
+   *   });
+   *
+   * @note You must ensure that you have static or previously resolved
+   *   credentials if you call this method synchronously (with no callback),
+   *   otherwise it may not properly sign the request. If you cannot guarantee
+   *   this (you are using an asynchronous credential provider, i.e., EC2
+   *   IAM roles), you should always call this method with an asynchronous
+   *   callback.
+   *
+   * @return [map]  If called synchronously (with no callback), returns a hash
+   *                with the url to set as the form action and a hash of fields
+   *                to include in the form.
+   * @return [null] Nothing is returned if a callback is provided.
+   *
+   * @callback callback function (err, data)
+   *  @param err [Error] the error object returned from the policy signer
+   *  @param data [map] The data necessary to construct an HTML form
+   *  @param data.url [String] The URL to use as the action of the form
+   *  @param data.fields [map] A hash of fields that must be included in the
+   *                           form for the upload to succeed. This hash will
+   *                           include the signed POST policy, your access key
+   *                           ID and security token (if present), etc. These
+   *                           may be safely included as input elements of type
+   *                           'hidden.'
+   */
   createPresignedPost: function createPresignedPost(params, callback) {
     if (typeof params === 'function' && callback === undefined) {
       callback = params;
@@ -126647,7 +129889,9 @@ AWS.util.update(AWS.S3.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   preparePostFields: function preparePostFields(
     credentials,
     region,
@@ -126698,7 +129942,9 @@ AWS.util.update(AWS.S3.prototype, {
     return fields;
   },
 
-
+  /**
+   * @api private
+   */
   preparePostPolicy: function preparePostPolicy(expiration, conditions) {
     return AWS.util.base64.encode(JSON.stringify({
       expiration: AWS.util.date.iso8601(expiration),
@@ -126706,26 +129952,35 @@ AWS.util.update(AWS.S3.prototype, {
     }));
   },
 
-
+  /**
+   * @api private
+   */
   prepareSignedUrl: function prepareSignedUrl(request) {
     request.addListener('validate', request.service.noPresignedContentLength);
     request.removeListener('build', request.service.addContentType);
     if (!request.params.Body) {
+      // no Content-MD5/SHA-256 if body is not provided
       request.removeListener('build', request.service.computeContentMd5);
     } else {
       request.addListener('afterBuild', AWS.EventListeners.Core.COMPUTE_SHA256);
     }
   },
 
-
+  /**
+   * @api private
+   * @param request
+   */
   disableBodySigning: function disableBodySigning(request) {
     var headers = request.httpRequest.headers;
+    // Add the header to anything that isn't a presigned url, unless that presigned url had a body defined
     if (!Object.prototype.hasOwnProperty.call(headers, 'presigned-expires')) {
       headers['X-Amz-Content-Sha256'] = 'UNSIGNED-PAYLOAD';
     }
   },
 
-
+  /**
+   * @api private
+   */
   noPresignedContentLength: function noPresignedContentLength(request) {
     if (request.params.ContentLength !== undefined) {
       throw AWS.util.error(new Error(), {code: 'UnexpectedParameter',
@@ -126734,6 +129989,11 @@ AWS.util.update(AWS.S3.prototype, {
   },
 
   createBucket: function createBucket(params, callback) {
+    // When creating a bucket *outside* the classic region, the location
+    // constraint must be set for the bucket and it must match the endpoint.
+    // This chunk of code will set the location constraint param based
+    // on the region (when possible), but it will not override a passed-in
+    // location constraint.
     if (typeof params === 'function' || !params) {
       callback = callback || params;
       params = {};
@@ -126745,7 +130005,38 @@ AWS.util.update(AWS.S3.prototype, {
     return this.makeRequest('createBucket', params, callback);
   },
 
-
+  /**
+   * @see AWS.S3.ManagedUpload
+   * @overload upload(params = {}, [options], [callback])
+   *   Uploads an arbitrarily sized buffer, blob, or stream, using intelligent
+   *   concurrent handling of parts if the payload is large enough. You can
+   *   configure the concurrent queue size by setting `options`. Note that this
+   *   is the only operation for which the SDK can retry requests with stream
+   *   bodies.
+   *
+   *   @param (see AWS.S3.putObject)
+   *   @option (see AWS.S3.ManagedUpload.constructor)
+   *   @return [AWS.S3.ManagedUpload] the managed upload object that can call
+   *     `send()` or track progress.
+   *   @example Uploading a stream object
+   *     var params = {Bucket: 'bucket', Key: 'key', Body: stream};
+   *     s3.upload(params, function(err, data) {
+   *       console.log(err, data);
+   *     });
+   *   @example Uploading a stream with concurrency of 1 and partSize of 10mb
+   *     var params = {Bucket: 'bucket', Key: 'key', Body: stream};
+   *     var options = {partSize: 10 * 1024 * 1024, queueSize: 1};
+   *     s3.upload(params, options, function(err, data) {
+   *       console.log(err, data);
+   *     });
+   * @callback callback function(err, data)
+   *   @param err [Error] an error or null if no error occurred.
+   *   @param data [map] The response data from the successful upload:
+   *   @param data.Location [String] the URL of the uploaded object
+   *   @param data.ETag [String] the ETag of the uploaded object
+   *   @param data.Bucket [String]  the bucket to which the object was uploaded
+   *   @param data.Key [String] the key to which the object was uploaded
+   */
   upload: function upload(params, options, callback) {
     if (typeof options === 'function' && callback === undefined) {
       callback = options;
@@ -126765,7 +130056,9 @@ AWS.util.update(AWS.S3.prototype, {
 var AWS = require('../core');
 
 AWS.util.update(AWS.SQS.prototype, {
-
+  /**
+   * @api private
+   */
   setupRequestListeners: function setupRequestListeners(request) {
     request.addListener('build', this.buildEndpoint);
 
@@ -126780,7 +130073,9 @@ AWS.util.update(AWS.SQS.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   verifySendMessageChecksum: function verifySendMessageChecksum(response) {
     if (!response.data) return;
 
@@ -126795,7 +130090,9 @@ AWS.util.update(AWS.SQS.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   verifySendMessageBatchChecksum: function verifySendMessageBatchChecksum(response) {
     if (!response.data) return;
 
@@ -126823,7 +130120,9 @@ AWS.util.update(AWS.SQS.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   verifyReceiveMessageChecksum: function verifyReceiveMessageChecksum(response) {
     if (!response.data) return;
 
@@ -126843,7 +130142,9 @@ AWS.util.update(AWS.SQS.prototype, {
     }
   },
 
-
+  /**
+   * @api private
+   */
   throwInvalidChecksumError: function throwInvalidChecksumError(response, ids, message) {
     response.error = AWS.util.error(new Error(), {
       retryable: true,
@@ -126854,22 +130155,30 @@ AWS.util.update(AWS.SQS.prototype, {
     });
   },
 
-
+  /**
+   * @api private
+   */
   isChecksumValid: function isChecksumValid(checksum, data) {
     return this.calculateChecksum(data) === checksum;
   },
 
-
+  /**
+   * @api private
+   */
   calculateChecksum: function calculateChecksum(data) {
     return AWS.util.crypto.md5(data, 'hex');
   },
 
-
+  /**
+   * @api private
+   */
   buildEndpoint: function buildEndpoint(request) {
     var url = request.httpRequest.params.QueueUrl;
     if (url) {
       request.httpRequest.endpoint = new AWS.Endpoint(url);
 
+      // signature version 4 requires the region name to be set,
+      // sqs queue urls contain the region name
       var matches = request.httpRequest.endpoint.host.match(/^sqs\.(.+?)\./);
       if (matches) request.httpRequest.region = matches[1];
     }
@@ -126880,7 +130189,31 @@ AWS.util.update(AWS.SQS.prototype, {
 var AWS = require('../core');
 
 AWS.util.update(AWS.STS.prototype, {
-
+  /**
+   * @overload credentialsFrom(data, credentials = null)
+   *   Creates a credentials object from STS response data containing
+   *   credentials information. Useful for quickly setting AWS credentials.
+   *
+   *   @note This is a low-level utility function. If you want to load temporary
+   *     credentials into your process for subsequent requests to AWS resources,
+   *     you should use {AWS.TemporaryCredentials} instead.
+   *   @param data [map] data retrieved from a call to {getFederatedToken},
+   *     {getSessionToken}, {assumeRole}, or {assumeRoleWithWebIdentity}.
+   *   @param credentials [AWS.Credentials] an optional credentials object to
+   *     fill instead of creating a new object. Useful when modifying an
+   *     existing credentials object from a refresh call.
+   *   @return [AWS.TemporaryCredentials] the set of temporary credentials
+   *     loaded from a raw STS operation response.
+   *   @example Using credentialsFrom to load global AWS credentials
+   *     var sts = new AWS.STS();
+   *     sts.getSessionToken(function (err, data) {
+   *       if (err) console.log("Error getting credentials");
+   *       else {
+   *         AWS.config.credentials = sts.credentialsFrom(data);
+   *       }
+   *     });
+   *   @see AWS.TemporaryCredentials
+   */
   credentialsFrom: function credentialsFrom(data, credentials) {
     if (!data) return null;
     if (!credentials) credentials = new AWS.TemporaryCredentials();
@@ -126905,10 +130238,14 @@ AWS.util.update(AWS.STS.prototype, {
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
-
+/**
+ * @api private
+ */
 var expiresHeader = 'presigned-expires';
 
-
+/**
+ * @api private
+ */
 function signedUrlBuilder(request) {
   var expires = request.httpRequest.headers[expiresHeader];
   var signerClass = request.service.getSignerClass(request);
@@ -126937,7 +130274,9 @@ function signedUrlBuilder(request) {
   }
 }
 
-
+/**
+ * @api private
+ */
 function signedUrlSigner(request) {
   var endpoint = request.httpRequest.endpoint;
   var parsedUrl = AWS.util.urlParse(request.httpRequest.path);
@@ -126956,6 +130295,7 @@ function signedUrlSigner(request) {
     AWS.util.each(request.httpRequest.headers, function (key, value) {
       if (key === expiresHeader) key = 'Expires';
       if (key.indexOf('x-amz-meta-') === 0) {
+        // Delete existing, potentially not normalized key
         delete queryParams[key];
         key = key.toLowerCase();
       }
@@ -126972,13 +130312,18 @@ function signedUrlSigner(request) {
     delete queryParams['Expires'];
   }
 
+  // build URL
   endpoint.pathname = parsedUrl.pathname;
   endpoint.search = AWS.util.queryParamsToString(queryParams);
 }
 
-
+/**
+ * @api private
+ */
 AWS.Signers.Presign = inherit({
-
+  /**
+   * @api private
+   */
   sign: function sign(request, expireTime, callback) {
     request.httpRequest.headers[expiresHeader] = expireTime || 3600;
     request.on('build', signedUrlBuilder);
@@ -127012,7 +130357,9 @@ var AWS = require('../core');
 
 var inherit = AWS.util.inherit;
 
-
+/**
+ * @api private
+ */
 AWS.Signers.RequestSigner = inherit({
   constructor: function RequestSigner(request) {
     this.request = request;
@@ -127049,9 +130396,14 @@ require('./presign');
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
-
+/**
+ * @api private
+ */
 AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
-
+  /**
+   * When building the stringToSign, these sub resource params should be
+   * part of the canonical resource string with their NON-decoded values
+   */
   subResources: {
     'acl': 1,
     'accelerate': 1,
@@ -127079,6 +130431,8 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
     'website': 1
   },
 
+  // when building the stringToSign, these querystring params should be
+  // part of the canonical resource string with their NON-encoded values
   responseHeaders: {
     'response-content-type': 1,
     'response-content-language': 1,
@@ -127094,6 +130448,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
     }
 
     if (credentials.sessionToken) {
+      // presigned URLs require this header to be lowercased
       this.request.headers['x-amz-security-token'] = credentials.sessionToken;
     }
 
@@ -127111,6 +130466,9 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
     parts.push(r.headers['Content-MD5'] || '');
     parts.push(r.headers['Content-Type'] || '');
 
+    // This is the "Date" header, but we use X-Amz-Date.
+    // The S3 signing mechanism requires us to pass an empty
+    // string for this Date header regardless.
     parts.push(r.headers['presigned-expires'] || '');
 
     var headers = this.canonicalizedAmzHeaders();
@@ -127160,6 +130518,7 @@ AWS.Signers.S3 = inherit(AWS.Signers.RequestSigner, {
 
     if (querystring) {
 
+      // collect a list of sub resources and query params that need to be signed
       var resources = [];
 
       AWS.util.arrayEach.call(this, querystring.split('&'), function (param) {
@@ -127211,7 +130570,9 @@ module.exports = AWS.Signers.S3;
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
-
+/**
+ * @api private
+ */
 AWS.Signers.V2 = inherit(AWS.Signers.RequestSigner, {
   addAuthorization: function addAuthorization(credentials, date) {
 
@@ -127256,7 +130617,9 @@ module.exports = AWS.Signers.V2;
 var AWS = require('../core');
 var inherit = AWS.util.inherit;
 
-
+/**
+ * @api private
+ */
 AWS.Signers.V3 = inherit(AWS.Signers.RequestSigner, {
   addAuthorization: function addAuthorization(credentials, date) {
 
@@ -127332,7 +130695,9 @@ var inherit = AWS.util.inherit;
 
 require('./v3');
 
-
+/**
+ * @api private
+ */
 AWS.Signers.V3Https = inherit(AWS.Signers.V3, {
   authorization: function authorization(credentials) {
     return 'AWS3-HTTPS ' +
@@ -127353,10 +130718,14 @@ var AWS = require('../core');
 var v4Credentials = require('./v4_credentials');
 var inherit = AWS.util.inherit;
 
-
+/**
+ * @api private
+ */
 var expiresHeader = 'presigned-expires';
 
-
+/**
+ * @api private
+ */
 AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
   constructor: function V4(request, serviceName, options) {
     AWS.Signers.RequestSigner.call(this, request);
@@ -127412,10 +130781,12 @@ AWS.Signers.V4 = inherit(AWS.Signers.RequestSigner, {
       qs['Cache-Control'] = this.request.headers['Cache-Control'];
     }
 
+    // need to pull in any other X-Amz-* headers
     AWS.util.each.call(this, this.request.headers, function(key, value) {
       if (key === expiresHeader) return;
       if (this.isSignableHeader(key)) {
         var lowerKey = key.toLowerCase();
+        // Metadata should be normalized
         if (lowerKey.indexOf('x-amz-meta-') === 0) {
           qs[lowerKey] = value;
         } else if (lowerKey.indexOf('x-amz-') === 0) {
@@ -127558,20 +130929,35 @@ module.exports = AWS.Signers.V4;
 },{"../core":233,"./v4_credentials":295}],295:[function(require,module,exports){
 var AWS = require('../core');
 
-
+/**
+ * @api private
+ */
 var cachedSecret = {};
 
-
+/**
+ * @api private
+ */
 var cacheQueue = [];
 
-
+/**
+ * @api private
+ */
 var maxCacheEntries = 50;
 
-
+/**
+ * @api private
+ */
 var v4Identifier = 'aws4_request';
 
 module.exports = {
-
+  /**
+   * @api private
+   *
+   * @param date [String]
+   * @param region [String]
+   * @param serviceName [String]
+   * @return [String]
+   */
   createScope: function createScope(date, region, serviceName) {
     return [
       date.substr(0, 8),
@@ -127581,7 +130967,16 @@ module.exports = {
     ].join('/');
   },
 
-
+  /**
+   * @api private
+   *
+   * @param credentials [Credentials]
+   * @param date [String]
+   * @param region [String]
+   * @param service [String]
+   * @param shouldCache [Boolean]
+   * @return [String]
+   */
   getSigningKey: function getSigningKey(
     credentials,
     date,
@@ -127610,6 +131005,7 @@ module.exports = {
       cachedSecret[cacheKey] = signingKey;
       cacheQueue.push(cacheKey);
       if (cacheQueue.length > maxCacheEntries) {
+        // remove the oldest entry (not the least recently used)
         delete cachedSecret[cacheQueue.shift()];
       }
     }
@@ -127617,7 +131013,12 @@ module.exports = {
     return signingKey;
   },
 
-
+  /**
+   * @api private
+   *
+   * Empties the derived signing key cache. Made available for testing purposes
+   * only.
+   */
   emptyCache: function emptyCache() {
     cachedSecret = {};
     cacheQueue = [];
@@ -127670,10 +131071,23 @@ module.exports = AcceptorStateMachine;
 
 },{}],297:[function(require,module,exports){
 (function (process){
-
+/* eslint guard-for-in:0 */
 var AWS;
 
-
+/**
+ * A set of utility methods for use with the AWS SDK.
+ *
+ * @!attribute abort
+ *   Return this value from an iterator function {each} or {arrayEach}
+ *   to break out of the iteration.
+ *   @example Breaking out of an iterator function
+ *     AWS.util.each({a: 1, b: 2, c: 3}, function(key, value) {
+ *       if (key == 'b') return AWS.util.abort;
+ *     });
+ *   @see each
+ *   @see arrayEach
+ * @api private
+ */
 var util = {
   environment: 'nodejs',
   engine: function engine() {
@@ -127701,6 +131115,7 @@ var util = {
     var output = encodeURIComponent(string);
     output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, escape);
 
+    // AWS percent-encodes some extra non-standard characters in a URI
     output = output.replace(/[*]/g, function(ch) {
       return '%' + ch.charCodeAt(0).toString(16).toUpperCase();
     });
@@ -127797,7 +131212,9 @@ var util = {
       return readable;
     },
 
-
+    /**
+     * Concatenates a list of Buffer objects.
+     */
     concat: function(buffers) {
       var length = 0,
           offset = 0,
@@ -127870,7 +131287,12 @@ var util = {
   fn: {
     noop: function() {},
 
-
+    /**
+     * Turn a synchronous function into as "async" function by making it call
+     * a callback. The underlying function is called with all but the last argument,
+     * which is treated as the callback. The callback is passed passed a first argument
+     * of null on success to mimick standard node callbacks.
+     */
     makeAsync: function makeAsync(fn, expectedArgs) {
       if (expectedArgs && expectedArgs <= fn.length) {
         return fn;
@@ -127885,10 +131307,17 @@ var util = {
     }
   },
 
-
+  /**
+   * Date and time utility functions.
+   */
   date: {
 
-
+    /**
+     * @return [Date] the current JavaScript date object. Since all
+     *   AWS services rely on this date object, you can override
+     *   this function to provide a special time value to AWS service
+     *   requests.
+     */
     getDate: function getDate() {
       if (!AWS) AWS = require('./core');
       if (AWS.config.systemClockOffset) { // use offset when non-zero
@@ -127898,25 +131327,34 @@ var util = {
       }
     },
 
-
+    /**
+     * @return [String] the date in ISO-8601 format
+     */
     iso8601: function iso8601(date) {
       if (date === undefined) { date = util.date.getDate(); }
       return date.toISOString().replace(/\.\d{3}Z$/, 'Z');
     },
 
-
+    /**
+     * @return [String] the date in RFC 822 format
+     */
     rfc822: function rfc822(date) {
       if (date === undefined) { date = util.date.getDate(); }
       return date.toUTCString();
     },
 
-
+    /**
+     * @return [Integer] the UNIX timestamp value for the current time
+     */
     unixTimestamp: function unixTimestamp(date) {
       if (date === undefined) { date = util.date.getDate(); }
       return date.getTime() / 1000;
     },
 
-
+    /**
+     * @param [String,number,Date] date
+     * @return [Date]
+     */
     from: function format(date) {
       if (typeof date === 'number') {
         return new Date(date * 1000); // unix timestamp
@@ -127925,7 +131363,16 @@ var util = {
       }
     },
 
-
+    /**
+     * Given a Date or date-like value, this function formats the
+     * date into a string of the requested value.
+     * @param [String,number,Date] date
+     * @param [String] formatter Valid formats are:
+     #   * 'iso8601'
+     #   * 'rfc822'
+     #   * 'unixTimestamp'
+     * @return [String]
+     */
     format: function format(date, formatter) {
       if (!formatter) formatter = 'iso8601';
       return util.date[formatter](util.date.from(date));
@@ -128042,6 +131489,7 @@ var util = {
       if (typeof data === 'string') data = new util.Buffer(data);
       var sliceFn = util.arraySliceFn(data);
       var isBuffer = util.Buffer.isBuffer(data);
+      //Identifying objects with an ArrayBuffer as buffers
       if (util.isBrowser() && typeof ArrayBuffer !== 'undefined' && data && data.buffer instanceof ArrayBuffer) isBuffer = true;
 
       if (callback && typeof data === 'object' &&
@@ -128051,6 +131499,7 @@ var util = {
         data.on('end', function() { callback(null, hash.digest(digest)); });
       } else if (callback && sliceFn && !isBuffer &&
                  typeof FileReader !== 'undefined') {
+        // this might be a File/Blob
         var index = 0, size = 1024 * 512;
         var reader = new FileReader();
         reader.onerror = function() {
@@ -128098,9 +131547,9 @@ var util = {
 
   },
 
+  /** @!ignore */
 
-
-
+  /* Abort constant */
   abort: {},
 
   each: function each(object, iterFunction) {
@@ -128135,6 +131584,7 @@ var util = {
   copy: function copy(object) {
     if (object === null || object === undefined) return object;
     var dupe = {};
+    // jshint forin:false
     for (var key in object) {
       dupe[key] = object[key];
     }
@@ -128156,6 +131606,7 @@ var util = {
   },
 
   isType: function isType(obj, type) {
+    // handle cross-"frame" objects
     if (typeof type === 'function') type = util.typeName(type);
     return Object.prototype.toString.call(obj) === '[object ' + type + ']';
   },
@@ -128202,7 +131653,9 @@ var util = {
     return err;
   },
 
-
+  /**
+   * @api private
+   */
   inherit: function inherit(klass, features) {
     var newObject = null;
     if (features === undefined) {
@@ -128215,6 +131668,7 @@ var util = {
       newObject = new ctor();
     }
 
+    // constructor not supplied, create pass-through ctor
     if (features.constructor === Object) {
       features.constructor = function() {
         if (klass !== Object) {
@@ -128229,10 +131683,13 @@ var util = {
     return features.constructor;
   },
 
-
+  /**
+   * @api private
+   */
   mixin: function mixin() {
     var klass = arguments[0];
     for (var i = 1; i < arguments.length; i++) {
+      // jshint forin:false
       for (var prop in arguments[i].prototype) {
         var fn = arguments[i].prototype[prop];
         if (prop !== 'constructor') {
@@ -128243,7 +131700,9 @@ var util = {
     return klass;
   },
 
-
+  /**
+   * @api private
+   */
   hideProperties: function hideProperties(obj, props) {
     if (typeof Object.defineProperty !== 'function') return;
 
@@ -128253,7 +131712,9 @@ var util = {
     });
   },
 
-
+  /**
+   * @api private
+   */
   property: function property(obj, name, value, enumerable, isValue) {
     var opts = {
       configurable: true,
@@ -128269,10 +131730,13 @@ var util = {
     Object.defineProperty(obj, name, opts);
   },
 
-
+  /**
+   * @api private
+   */
   memoizedProperty: function memoizedProperty(obj, name, get, enumerable) {
     var cachedValue = null;
 
+    // build enumerable attribute for each value with lazy accessor.
     util.property(obj, name, function() {
       if (cachedValue === null) {
         cachedValue = get();
@@ -128281,7 +131745,13 @@ var util = {
     }, enumerable);
   },
 
-
+  /**
+   * TODO Remove in major version revision
+   * This backfill populates response data without the
+   * top-level payload name.
+   *
+   * @api private
+   */
   hoistPayloadMember: function hoistPayloadMember(resp) {
     var req = resp.request;
     var operation = req.operation;
@@ -128297,7 +131767,11 @@ var util = {
     }
   },
 
-
+  /**
+   * Compute SHA-256 checksums of streams
+   *
+   * @api private
+   */
   computeSha256: function computeSha256(body, done) {
     if (util.isNode()) {
       var Stream = util.stream.Stream;
@@ -128325,7 +131799,9 @@ var util = {
     });
   },
 
-
+  /**
+   * @api private
+   */
   isClockSkewed: function isClockSkewed(serverTime) {
     if (serverTime) {
       util.property(AWS.config, 'isClockSkewed',
@@ -128339,7 +131815,9 @@ var util = {
       AWS.config.systemClockOffset = serverTime - new Date().getTime();
   },
 
-
+  /**
+   * @api private
+   */
   extractRequestId: function extractRequestId(resp) {
     var requestId = resp.httpResponse.headers['x-amz-request-id'] ||
                      resp.httpResponse.headers['x-amzn-requestid'];
@@ -128357,7 +131835,9 @@ var util = {
     }
   },
 
-
+  /**
+   * @api private
+   */
   addPromises: function addPromises(constructors, PromiseDependency) {
     if (PromiseDependency === undefined && AWS && AWS.config) {
       PromiseDependency = AWS.config.getPromisesDependency();
@@ -128380,7 +131860,9 @@ var util = {
     }
   },
 
-
+  /**
+   * @api private
+   */
   promisifyMethod: function promisifyMethod(methodName, PromiseDependency) {
     return function promise() {
       var self = this;
@@ -128396,7 +131878,9 @@ var util = {
     };
   },
 
-
+  /**
+   * @api private
+   */
   isDualstackAvailable: function isDualstackAvailable(service) {
     if (!service) return false;
     var metadata = require('../apis/metadata.json');
@@ -128405,7 +131889,9 @@ var util = {
     return !!metadata[service].dualstackAvailable;
   },
 
-
+  /**
+   * @api private
+   */
   calculateRetryDelay: function calculateRetryDelay(retryCount, retryDelayOptions) {
     if (!retryDelayOptions) retryDelayOptions = {};
     var customBackoff = retryDelayOptions.customBackoff || null;
@@ -128417,7 +131903,9 @@ var util = {
     return delay;
   },
 
-
+  /**
+   * @api private
+   */
   handleRequestWithRetries: function handleRequestWithRetries(httpRequest, options, cb) {
     if (!options) options = {};
     var http = AWS.HttpClient.getInstance();
@@ -128459,14 +131947,18 @@ var util = {
     AWS.util.defer(sendRequest);
   },
 
-
+  /**
+   * @api private
+   */
   uuid: {
     v4: function uuidV4() {
       return require('uuid').v4();
     }
   },
 
-
+  /**
+   * @api private
+   */
   convertPayloadToString: function convertPayloadToString(resp) {
     var req = resp.request;
     var operation = req.operation;
@@ -128476,7 +131968,9 @@ var util = {
     }
   },
 
-
+  /**
+   * @api private
+   */
   defer: function defer(callback) {
     if (typeof process === 'object' && typeof process.nextTick === 'function') {
       process.nextTick(callback);
@@ -128487,23 +131981,31 @@ var util = {
     }
   },
 
-
+  /**
+   * @api private
+   */
   defaultProfile: 'default',
 
-
+  /**
+   * @api private
+   */
   configOptInEnv: 'AWS_SDK_LOAD_CONFIG',
 
-
+  /**
+   * @api private
+   */
   sharedCredentialsFileEnv: 'AWS_SHARED_CREDENTIALS_FILE',
 
-
+  /**
+   * @api private
+   */
   sharedConfigFileEnv: 'AWS_CONFIG_FILE'
 };
 
 module.exports = util;
 
 }).call(this,require('_process'))
-},{"../apis/metadata.json":107,"./core":233,"_process":453,"fs":301,"uuid":465}],298:[function(require,module,exports){
+},{"../apis/metadata.json":107,"./core":233,"_process":458,"fs":301,"uuid":497}],298:[function(require,module,exports){
 var util = require('../util');
 var Shape = require('../model/shape');
 
@@ -128666,17 +132168,20 @@ function parseScalar(xml, shape) {
 function parseUnknown(xml) {
   if (xml === undefined || xml === null) return '';
 
+  // empty object
   if (!xml.firstElementChild) {
     if (xml.parentNode.parentNode === null) return {};
     if (xml.childNodes.length === 0) return '';
     else return xml.textContent;
   }
 
+  // object, parse as structure
   var shape = {type: 'structure', members: {}};
   var child = xml.firstElementChild;
   while (child) {
     var tag = child.nodeName;
     if (Object.prototype.hasOwnProperty.call(shape.members, tag)) {
+      // multiple tags of the same name makes it a list
       shape.members[tag].type = 'list';
     } else {
       shape.members[tag] = {name: tag};
@@ -128776,7 +132281,7 @@ function applyNamespaces(xml, shape) {
 
 module.exports = XmlBuilder;
 
-},{"../util":297,"xmlbuilder":486}],300:[function(require,module,exports){
+},{"../util":297,"xmlbuilder":518}],300:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -128802,10 +132307,16 @@ function placeHoldersCount (b64) {
     throw new Error('Invalid string. Length must be a multiple of 4')
   }
 
+  // the number of equal signs (place holders)
+  // if there are two placeholders, than the two characters before it
+  // represent one byte
+  // if there is only one, then the three characters before it represent 2 bytes
+  // this is just a cheap hack to not do indexOf twice
   return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
 }
 
 function byteLength (b64) {
+  // base64 is 4/3 + up to two characters of the original data
   return (b64.length * 3 / 4) - placeHoldersCount(b64)
 }
 
@@ -128816,6 +132327,7 @@ function toByteArray (b64) {
 
   arr = new Arr((len * 3 / 4) - placeHolders)
 
+  // if there are placeholders, only get up to the last complete 4 chars
   l = placeHolders > 0 ? len - 4 : len
 
   var L = 0
@@ -128861,10 +132373,12 @@ function fromByteArray (uint8) {
   var parts = []
   var maxChunkLength = 16383 // must be multiple of 3
 
+  // go through the array every three bytes, we'll deal with trailing stuff later
   for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
     parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
   }
 
+  // pad the end with zeros, but make sure to not forget the extra bytes
   if (extraBytes === 1) {
     tmp = uint8[len - 1]
     output += lookup[tmp >> 2]
@@ -128887,8 +132401,13 @@ function fromByteArray (uint8) {
 
 },{}],302:[function(require,module,exports){
 (function (global){
-
-
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+/* eslint-disable no-proto */
 
 'use strict'
 
@@ -128900,12 +132419,37 @@ exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
 exports.INSPECT_MAX_BYTES = 50
 
+/**
+ * If `Buffer.TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * Due to various browser bugs, sometimes the Object implementation will be used even
+ * when the browser supports typed arrays.
+ *
+ * Note:
+ *
+ *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+ *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+ *
+ *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+ *
+ *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+ *     incorrect length in some situations.
 
+ * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+ * get the Object implementation, which is slower but behaves correctly.
+ */
 Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined
   ? global.TYPED_ARRAY_SUPPORT
   : typedArraySupport()
 
-
+/*
+ * Export kMaxLength after typed array support is determined.
+ */
 exports.kMaxLength = kMaxLength()
 
 function typedArraySupport () {
@@ -128931,9 +132475,11 @@ function createBuffer (that, length) {
     throw new RangeError('Invalid typed array length')
   }
   if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
     that = new Uint8Array(length)
     that.__proto__ = Buffer.prototype
   } else {
+    // Fallback: Return an object instance of the Buffer class
     if (that === null) {
       that = new Buffer(length)
     }
@@ -128943,13 +132489,22 @@ function createBuffer (that, length) {
   return that
 }
 
-
+/**
+ * The Buffer constructor returns instances of `Uint8Array` that have their
+ * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+ * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+ * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+ * returns a single octet.
+ *
+ * The `Uint8Array` prototype remains unmodified.
+ */
 
 function Buffer (arg, encodingOrOffset, length) {
   if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
     return new Buffer(arg, encodingOrOffset, length)
   }
 
+  // Common case.
   if (typeof arg === 'number') {
     if (typeof encodingOrOffset === 'string') {
       throw new Error(
@@ -128963,6 +132518,7 @@ function Buffer (arg, encodingOrOffset, length) {
 
 Buffer.poolSize = 8192 // not used by this implementation
 
+// TODO: Legacy, not needed anymore. Remove in next major version.
 Buffer._augment = function (arr) {
   arr.__proto__ = Buffer.prototype
   return arr
@@ -128984,7 +132540,14 @@ function from (that, value, encodingOrOffset, length) {
   return fromObject(that, value)
 }
 
-
+/**
+ * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+ * if value is a number.
+ * Buffer.from(str[, encoding])
+ * Buffer.from(array)
+ * Buffer.from(buffer)
+ * Buffer.from(arrayBuffer[, byteOffset[, length]])
+ **/
 Buffer.from = function (value, encodingOrOffset, length) {
   return from(null, value, encodingOrOffset, length)
 }
@@ -128994,6 +132557,7 @@ if (Buffer.TYPED_ARRAY_SUPPORT) {
   Buffer.__proto__ = Uint8Array
   if (typeof Symbol !== 'undefined' && Symbol.species &&
       Buffer[Symbol.species] === Buffer) {
+    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
     Object.defineProperty(Buffer, Symbol.species, {
       value: null,
       configurable: true
@@ -129015,6 +132579,9 @@ function alloc (that, size, fill, encoding) {
     return createBuffer(that, size)
   }
   if (fill !== undefined) {
+    // Only pay attention to encoding if it's a string. This
+    // prevents accidentally sending in a number that would
+    // be interpretted as a start offset.
     return typeof encoding === 'string'
       ? createBuffer(that, size).fill(fill, encoding)
       : createBuffer(that, size).fill(fill)
@@ -129022,7 +132589,10 @@ function alloc (that, size, fill, encoding) {
   return createBuffer(that, size)
 }
 
-
+/**
+ * Creates a new filled Buffer instance.
+ * alloc(size[, fill[, encoding]])
+ **/
 Buffer.alloc = function (size, fill, encoding) {
   return alloc(null, size, fill, encoding)
 }
@@ -129038,11 +132608,15 @@ function allocUnsafe (that, size) {
   return that
 }
 
-
+/**
+ * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+ * */
 Buffer.allocUnsafe = function (size) {
   return allocUnsafe(null, size)
 }
-
+/**
+ * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+ */
 Buffer.allocUnsafeSlow = function (size) {
   return allocUnsafe(null, size)
 }
@@ -129062,6 +132636,9 @@ function fromString (that, string, encoding) {
   var actual = that.write(string, encoding)
 
   if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
     that = that.slice(0, actual)
   }
 
@@ -129097,9 +132674,11 @@ function fromArrayBuffer (that, array, byteOffset, length) {
   }
 
   if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
     that = array
     that.__proto__ = Buffer.prototype
   } else {
+    // Fallback: Return an object instance of the Buffer class
     that = fromArrayLike(that, array)
   }
   return that
@@ -129136,6 +132715,8 @@ function fromObject (that, obj) {
 }
 
 function checked (length) {
+  // Note: cannot use `length < kMaxLength()` here because that fails when
+  // length is NaN (which is otherwise coerced to zero.)
   if (length >= kMaxLength()) {
     throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
                          'size: 0x' + kMaxLength().toString(16) + ' bytes')
@@ -129241,6 +132822,7 @@ function byteLength (string, encoding) {
   var len = string.length
   if (len === 0) return 0
 
+  // Use a for loop to avoid recursion
   var loweredCase = false
   for (;;) {
     switch (encoding) {
@@ -129273,10 +132855,18 @@ Buffer.byteLength = byteLength
 function slowToString (encoding, start, end) {
   var loweredCase = false
 
+  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+  // property of a typed array.
 
+  // This behaves neither like String nor Uint8Array in that we set start/end
+  // to their upper/lower bounds if the value passed is out of range.
+  // undefined is handled specially as per ECMA-262 6th Edition,
+  // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
   if (start === undefined || start < 0) {
     start = 0
   }
+  // Return early if start > this.length. Done here to prevent potential uint32
+  // coercion fail below.
   if (start > this.length) {
     return ''
   }
@@ -129289,6 +132879,7 @@ function slowToString (encoding, start, end) {
     return ''
   }
 
+  // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
   end >>>= 0
   start >>>= 0
 
@@ -129331,6 +132922,8 @@ function slowToString (encoding, start, end) {
   }
 }
 
+// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+// Buffer instances.
 Buffer.prototype._isBuffer = true
 
 function swap (b, n, m) {
@@ -129458,9 +133051,20 @@ Buffer.prototype.compare = function compare (target, start, end, thisStart, this
   return 0
 }
 
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+//
+// Arguments:
+// - buffer - a Buffer to search
+// - val - a string, Buffer, or number
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+// - encoding - an optional encoding, relevant is val is a string
+// - dir - true for indexOf, false for lastIndexOf
 function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
   if (buffer.length === 0) return -1
 
+  // Normalize byteOffset
   if (typeof byteOffset === 'string') {
     encoding = byteOffset
     byteOffset = 0
@@ -129471,9 +133075,11 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
   }
   byteOffset = +byteOffset  // Coerce to Number.
   if (isNaN(byteOffset)) {
+    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
     byteOffset = dir ? 0 : (buffer.length - 1)
   }
 
+  // Normalize byteOffset: negative offsets start from the end of the buffer
   if (byteOffset < 0) byteOffset = buffer.length + byteOffset
   if (byteOffset >= buffer.length) {
     if (dir) return -1
@@ -129483,11 +133089,14 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
     else return -1
   }
 
+  // Normalize val
   if (typeof val === 'string') {
     val = Buffer.from(val, encoding)
   }
 
+  // Finally, search either indexOf (if dir is true) or lastIndexOf
   if (Buffer.isBuffer(val)) {
+    // Special case: looking for empty string/buffer always fails
     if (val.length === 0) {
       return -1
     }
@@ -129588,6 +133197,7 @@ function hexWrite (buf, string, offset, length) {
     }
   }
 
+  // must be an even number of digits
   var strLen = string.length
   if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
 
@@ -129623,14 +133233,17 @@ function ucs2Write (buf, string, offset, length) {
 }
 
 Buffer.prototype.write = function write (string, offset, length, encoding) {
+  // Buffer#write(string)
   if (offset === undefined) {
     encoding = 'utf8'
     length = this.length
     offset = 0
+  // Buffer#write(string, encoding)
   } else if (length === undefined && typeof offset === 'string') {
     encoding = offset
     length = this.length
     offset = 0
+  // Buffer#write(string, offset[, length][, encoding])
   } else if (isFinite(offset)) {
     offset = offset | 0
     if (isFinite(length)) {
@@ -129640,6 +133253,7 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
       encoding = length
       length = undefined
     }
+  // legacy write(string, encoding, offset, length) - remove in v0.13
   } else {
     throw new Error(
       'Buffer.write(string, encoding, offset[, length]) is no longer supported'
@@ -129673,6 +133287,7 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
         return latin1Write(this, string, offset, length)
 
       case 'base64':
+        // Warning: maxLength not taken into account in base64Write
         return base64Write(this, string, offset, length)
 
       case 'ucs2':
@@ -129759,9 +133374,12 @@ function utf8Slice (buf, start, end) {
     }
 
     if (codePoint === null) {
+      // we did not generate a valid codePoint so insert a
+      // replacement char (U+FFFD) and advance only 1 byte
       codePoint = 0xFFFD
       bytesPerSequence = 1
     } else if (codePoint > 0xFFFF) {
+      // encode to utf16 (surrogate pair dance)
       codePoint -= 0x10000
       res.push(codePoint >>> 10 & 0x3FF | 0xD800)
       codePoint = 0xDC00 | codePoint & 0x3FF
@@ -129774,6 +133392,9 @@ function utf8Slice (buf, start, end) {
   return decodeCodePointsArray(res)
 }
 
+// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+// the lowest limit is Chrome, with 0x10000 args.
+// We go 1 magnitude less, for safety
 var MAX_ARGUMENTS_LENGTH = 0x1000
 
 function decodeCodePointsArray (codePoints) {
@@ -129782,6 +133403,7 @@ function decodeCodePointsArray (codePoints) {
     return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
   }
 
+  // Decode in chunks to avoid "call stack size exceeded".
   var res = ''
   var i = 0
   while (i < len) {
@@ -129871,7 +133493,9 @@ Buffer.prototype.slice = function slice (start, end) {
   return newBuf
 }
 
-
+/*
+ * Need to make sure that buffer isn't trying to write out of bounds.
+ */
 function checkOffset (offset, ext, length) {
   if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
   if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
@@ -130307,6 +133931,7 @@ Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert
   return writeDouble(this, value, offset, false, noAssert)
 }
 
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
 Buffer.prototype.copy = function copy (target, targetStart, start, end) {
   if (!start) start = 0
   if (!end && end !== 0) end = this.length
@@ -130314,15 +133939,18 @@ Buffer.prototype.copy = function copy (target, targetStart, start, end) {
   if (!targetStart) targetStart = 0
   if (end > 0 && end < start) end = start
 
+  // Copy 0 bytes; we're done
   if (end === start) return 0
   if (target.length === 0 || this.length === 0) return 0
 
+  // Fatal error conditions
   if (targetStart < 0) {
     throw new RangeError('targetStart out of bounds')
   }
   if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
   if (end < 0) throw new RangeError('sourceEnd out of bounds')
 
+  // Are we oob?
   if (end > this.length) end = this.length
   if (target.length - targetStart < end - start) {
     end = target.length - targetStart + start
@@ -130332,10 +133960,12 @@ Buffer.prototype.copy = function copy (target, targetStart, start, end) {
   var i
 
   if (this === target && start < targetStart && targetStart < end) {
+    // descending copy from end
     for (i = len - 1; i >= 0; --i) {
       target[i + targetStart] = this[i + start]
     }
   } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+    // ascending copy from start
     for (i = 0; i < len; ++i) {
       target[i + targetStart] = this[i + start]
     }
@@ -130350,7 +133980,12 @@ Buffer.prototype.copy = function copy (target, targetStart, start, end) {
   return len
 }
 
+// Usage:
+//    buffer.fill(number[, offset[, end]])
+//    buffer.fill(buffer[, offset[, end]])
+//    buffer.fill(string[, offset[, end]][, encoding])
 Buffer.prototype.fill = function fill (val, start, end, encoding) {
+  // Handle string cases:
   if (typeof val === 'string') {
     if (typeof start === 'string') {
       encoding = start
@@ -130376,6 +134011,7 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
     val = val & 255
   }
 
+  // Invalid ranges are not set to a default, so can range check early.
   if (start < 0 || this.length < start || this.length < end) {
     throw new RangeError('Out of range index')
   }
@@ -130407,12 +134043,17 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
   return this
 }
 
+// HELPER FUNCTIONS
+// ================
 
 var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
 
 function base64clean (str) {
+  // Node strips out invalid characters like \n and \t from the string, base64-js does not
   str = stringtrim(str).replace(INVALID_BASE64_RE, '')
+  // Node converts strings with length < 2 to ''
   if (str.length < 2) return ''
+  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
   while (str.length % 4 !== 0) {
     str = str + '='
   }
@@ -130439,34 +134080,44 @@ function utf8ToBytes (string, units) {
   for (var i = 0; i < length; ++i) {
     codePoint = string.charCodeAt(i)
 
+    // is surrogate component
     if (codePoint > 0xD7FF && codePoint < 0xE000) {
+      // last char was a lead
       if (!leadSurrogate) {
+        // no lead yet
         if (codePoint > 0xDBFF) {
+          // unexpected trail
           if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
           continue
         } else if (i + 1 === length) {
+          // unpaired lead
           if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
           continue
         }
 
+        // valid lead
         leadSurrogate = codePoint
 
         continue
       }
 
+      // 2 leads in a row
       if (codePoint < 0xDC00) {
         if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
         leadSurrogate = codePoint
         continue
       }
 
+      // valid surrogate pair
       codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
     } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
       if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
     }
 
     leadSurrogate = null
 
+    // encode utf8
     if (codePoint < 0x80) {
       if ((units -= 1) < 0) break
       bytes.push(codePoint)
@@ -130502,6 +134153,7 @@ function utf8ToBytes (string, units) {
 function asciiToBytes (str) {
   var byteArray = []
   for (var i = 0; i < str.length; ++i) {
+    // Node's code seems to be doing this and not & 0x7F..
     byteArray.push(str.charCodeAt(i) & 0xFF)
   }
   return byteArray
@@ -130540,478 +134192,594 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":300,"ieee754":310,"isarray":311}],303:[function(require,module,exports){
-var Buffer = require('buffer').Buffer;
-var intSize = 4;
-var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
-var chrsz = 8;
+},{"base64-js":300,"ieee754":312,"isarray":315}],303:[function(require,module,exports){
+var Buffer = require('safe-buffer').Buffer
+var Transform = require('stream').Transform
+var StringDecoder = require('string_decoder').StringDecoder
+var inherits = require('inherits')
 
-function toArray(buf, bigEndian) {
-  if ((buf.length % intSize) !== 0) {
-    var len = buf.length + (intSize - (buf.length % intSize));
-    buf = Buffer.concat([buf, zeroBuffer], len);
+function CipherBase (hashMode) {
+  Transform.call(this)
+  this.hashMode = typeof hashMode === 'string'
+  if (this.hashMode) {
+    this[hashMode] = this._finalOrDigest
+  } else {
+    this.final = this._finalOrDigest
+  }
+  if (this._final) {
+    this.__final = this._final
+    this._final = null
+  }
+  this._decoder = null
+  this._encoding = null
+}
+inherits(CipherBase, Transform)
+
+CipherBase.prototype.update = function (data, inputEnc, outputEnc) {
+  if (typeof data === 'string') {
+    data = Buffer.from(data, inputEnc)
   }
 
-  var arr = [];
-  var fn = bigEndian ? buf.readInt32BE : buf.readInt32LE;
-  for (var i = 0; i < buf.length; i += intSize) {
-    arr.push(fn.call(buf, i));
+  var outData = this._update(data)
+  if (this.hashMode) return this
+
+  if (outputEnc) {
+    outData = this._toString(outData, outputEnc)
   }
-  return arr;
+
+  return outData
 }
 
-function toBuffer(arr, size, bigEndian) {
-  var buf = new Buffer(size);
-  var fn = bigEndian ? buf.writeInt32BE : buf.writeInt32LE;
-  for (var i = 0; i < arr.length; i++) {
-    fn.call(buf, arr[i], i * 4, true);
+CipherBase.prototype.setAutoPadding = function () {}
+CipherBase.prototype.getAuthTag = function () {
+  throw new Error('trying to get auth tag in unsupported state')
+}
+
+CipherBase.prototype.setAuthTag = function () {
+  throw new Error('trying to set auth tag in unsupported state')
+}
+
+CipherBase.prototype.setAAD = function () {
+  throw new Error('trying to set aad in unsupported state')
+}
+
+CipherBase.prototype._transform = function (data, _, next) {
+  var err
+  try {
+    if (this.hashMode) {
+      this._update(data)
+    } else {
+      this.push(this._update(data))
+    }
+  } catch (e) {
+    err = e
+  } finally {
+    next(err)
   }
-  return buf;
+}
+CipherBase.prototype._flush = function (done) {
+  var err
+  try {
+    this.push(this.__final())
+  } catch (e) {
+    err = e
+  }
+
+  done(err)
+}
+CipherBase.prototype._finalOrDigest = function (outputEnc) {
+  var outData = this.__final() || Buffer.alloc(0)
+  if (outputEnc) {
+    outData = this._toString(outData, outputEnc, true)
+  }
+  return outData
 }
 
-function hash(buf, fn, hashSize, bigEndian) {
-  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
-  var arr = fn(toArray(buf, bigEndian), buf.length * chrsz);
-  return toBuffer(arr, hashSize, bigEndian);
+CipherBase.prototype._toString = function (value, enc, fin) {
+  if (!this._decoder) {
+    this._decoder = new StringDecoder(enc)
+    this._encoding = enc
+  }
+
+  if (this._encoding !== enc) throw new Error('can\'t switch encodings')
+
+  var out = this._decoder.write(value)
+  if (fin) {
+    out += this._decoder.end()
+  }
+
+  return out
 }
 
-module.exports = { hash: hash };
+module.exports = CipherBase
 
-},{"buffer":302}],304:[function(require,module,exports){
-var Buffer = require('buffer').Buffer
-var sha = require('./sha')
-var sha256 = require('./sha256')
-var rng = require('./rng')
+},{"inherits":313,"safe-buffer":481,"stream":490,"string_decoder":491}],304:[function(require,module,exports){
+(function (Buffer){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// NOTE: These type checking functions intentionally don't use `instanceof`
+// because it is fragile and can be easily faked with `Object.create()`.
+
+function isArray(arg) {
+  if (Array.isArray) {
+    return Array.isArray(arg);
+  }
+  return objectToString(arg) === '[object Array]';
+}
+exports.isArray = isArray;
+
+function isBoolean(arg) {
+  return typeof arg === 'boolean';
+}
+exports.isBoolean = isBoolean;
+
+function isNull(arg) {
+  return arg === null;
+}
+exports.isNull = isNull;
+
+function isNullOrUndefined(arg) {
+  return arg == null;
+}
+exports.isNullOrUndefined = isNullOrUndefined;
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+exports.isNumber = isNumber;
+
+function isString(arg) {
+  return typeof arg === 'string';
+}
+exports.isString = isString;
+
+function isSymbol(arg) {
+  return typeof arg === 'symbol';
+}
+exports.isSymbol = isSymbol;
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+exports.isUndefined = isUndefined;
+
+function isRegExp(re) {
+  return objectToString(re) === '[object RegExp]';
+}
+exports.isRegExp = isRegExp;
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+exports.isObject = isObject;
+
+function isDate(d) {
+  return objectToString(d) === '[object Date]';
+}
+exports.isDate = isDate;
+
+function isError(e) {
+  return (objectToString(e) === '[object Error]' || e instanceof Error);
+}
+exports.isError = isError;
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+exports.isFunction = isFunction;
+
+function isPrimitive(arg) {
+  return arg === null ||
+         typeof arg === 'boolean' ||
+         typeof arg === 'number' ||
+         typeof arg === 'string' ||
+         typeof arg === 'symbol' ||  // ES6 symbol
+         typeof arg === 'undefined';
+}
+exports.isPrimitive = isPrimitive;
+
+exports.isBuffer = Buffer.isBuffer;
+
+function objectToString(o) {
+  return Object.prototype.toString.call(o);
+}
+
+}).call(this,{"isBuffer":require("../../is-buffer/index.js")})
+},{"../../is-buffer/index.js":314}],305:[function(require,module,exports){
+(function (Buffer){
+'use strict'
+var inherits = require('inherits')
 var md5 = require('./md5')
+var RIPEMD160 = require('ripemd160')
+var sha = require('sha.js')
 
-var algorithms = {
-  sha1: sha,
-  sha256: sha256,
-  md5: md5
+var Base = require('cipher-base')
+
+function HashNoConstructor (hash) {
+  Base.call(this, 'digest')
+
+  this._hash = hash
+  this.buffers = []
 }
 
-var blocksize = 64
-var zeroBuffer = new Buffer(blocksize); zeroBuffer.fill(0)
-function hmac(fn, key, data) {
-  if(!Buffer.isBuffer(key)) key = new Buffer(key)
-  if(!Buffer.isBuffer(data)) data = new Buffer(data)
+inherits(HashNoConstructor, Base)
 
-  if(key.length > blocksize) {
-    key = fn(key)
-  } else if(key.length < blocksize) {
-    key = Buffer.concat([key, zeroBuffer], blocksize)
+HashNoConstructor.prototype._update = function (data) {
+  this.buffers.push(data)
+}
+
+HashNoConstructor.prototype._final = function () {
+  var buf = Buffer.concat(this.buffers)
+  var r = this._hash(buf)
+  this.buffers = null
+
+  return r
+}
+
+function Hash (hash) {
+  Base.call(this, 'digest')
+
+  this._hash = hash
+}
+
+inherits(Hash, Base)
+
+Hash.prototype._update = function (data) {
+  this._hash.update(data)
+}
+
+Hash.prototype._final = function () {
+  return this._hash.digest()
+}
+
+module.exports = function createHash (alg) {
+  alg = alg.toLowerCase()
+  if (alg === 'md5') return new HashNoConstructor(md5)
+  if (alg === 'rmd160' || alg === 'ripemd160') return new Hash(new RIPEMD160())
+
+  return new Hash(sha(alg))
+}
+
+}).call(this,require("buffer").Buffer)
+},{"./md5":307,"buffer":302,"cipher-base":303,"inherits":313,"ripemd160":480,"sha.js":483}],306:[function(require,module,exports){
+(function (Buffer){
+'use strict'
+var intSize = 4
+var zeroBuffer = new Buffer(intSize)
+zeroBuffer.fill(0)
+
+var charSize = 8
+var hashSize = 16
+
+function toArray (buf) {
+  if ((buf.length % intSize) !== 0) {
+    var len = buf.length + (intSize - (buf.length % intSize))
+    buf = Buffer.concat([buf, zeroBuffer], len)
   }
 
-  var ipad = new Buffer(blocksize), opad = new Buffer(blocksize)
-  for(var i = 0; i < blocksize; i++) {
+  var arr = new Array(buf.length >>> 2)
+  for (var i = 0, j = 0; i < buf.length; i += intSize, j++) {
+    arr[j] = buf.readInt32LE(i)
+  }
+
+  return arr
+}
+
+module.exports = function hash (buf, fn) {
+  var arr = fn(toArray(buf), buf.length * charSize)
+  buf = new Buffer(hashSize)
+  for (var i = 0; i < arr.length; i++) {
+    buf.writeInt32LE(arr[i], i << 2, true)
+  }
+  return buf
+}
+
+}).call(this,require("buffer").Buffer)
+},{"buffer":302}],307:[function(require,module,exports){
+'use strict'
+/*
+ * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
+ * Digest Algorithm, as defined in RFC 1321.
+ * Version 2.1 Copyright (C) Paul Johnston 1999 - 2002.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for more info.
+ */
+
+var makeHash = require('./make-hash')
+
+/*
+ * Calculate the MD5 of an array of little-endian words, and a bit length
+ */
+function core_md5 (x, len) {
+  /* append padding */
+  x[len >> 5] |= 0x80 << ((len) % 32)
+  x[(((len + 64) >>> 9) << 4) + 14] = len
+
+  var a = 1732584193
+  var b = -271733879
+  var c = -1732584194
+  var d = 271733878
+
+  for (var i = 0; i < x.length; i += 16) {
+    var olda = a
+    var oldb = b
+    var oldc = c
+    var oldd = d
+
+    a = md5_ff(a, b, c, d, x[i + 0], 7, -680876936)
+    d = md5_ff(d, a, b, c, x[i + 1], 12, -389564586)
+    c = md5_ff(c, d, a, b, x[i + 2], 17, 606105819)
+    b = md5_ff(b, c, d, a, x[i + 3], 22, -1044525330)
+    a = md5_ff(a, b, c, d, x[i + 4], 7, -176418897)
+    d = md5_ff(d, a, b, c, x[i + 5], 12, 1200080426)
+    c = md5_ff(c, d, a, b, x[i + 6], 17, -1473231341)
+    b = md5_ff(b, c, d, a, x[i + 7], 22, -45705983)
+    a = md5_ff(a, b, c, d, x[i + 8], 7, 1770035416)
+    d = md5_ff(d, a, b, c, x[i + 9], 12, -1958414417)
+    c = md5_ff(c, d, a, b, x[i + 10], 17, -42063)
+    b = md5_ff(b, c, d, a, x[i + 11], 22, -1990404162)
+    a = md5_ff(a, b, c, d, x[i + 12], 7, 1804603682)
+    d = md5_ff(d, a, b, c, x[i + 13], 12, -40341101)
+    c = md5_ff(c, d, a, b, x[i + 14], 17, -1502002290)
+    b = md5_ff(b, c, d, a, x[i + 15], 22, 1236535329)
+
+    a = md5_gg(a, b, c, d, x[i + 1], 5, -165796510)
+    d = md5_gg(d, a, b, c, x[i + 6], 9, -1069501632)
+    c = md5_gg(c, d, a, b, x[i + 11], 14, 643717713)
+    b = md5_gg(b, c, d, a, x[i + 0], 20, -373897302)
+    a = md5_gg(a, b, c, d, x[i + 5], 5, -701558691)
+    d = md5_gg(d, a, b, c, x[i + 10], 9, 38016083)
+    c = md5_gg(c, d, a, b, x[i + 15], 14, -660478335)
+    b = md5_gg(b, c, d, a, x[i + 4], 20, -405537848)
+    a = md5_gg(a, b, c, d, x[i + 9], 5, 568446438)
+    d = md5_gg(d, a, b, c, x[i + 14], 9, -1019803690)
+    c = md5_gg(c, d, a, b, x[i + 3], 14, -187363961)
+    b = md5_gg(b, c, d, a, x[i + 8], 20, 1163531501)
+    a = md5_gg(a, b, c, d, x[i + 13], 5, -1444681467)
+    d = md5_gg(d, a, b, c, x[i + 2], 9, -51403784)
+    c = md5_gg(c, d, a, b, x[i + 7], 14, 1735328473)
+    b = md5_gg(b, c, d, a, x[i + 12], 20, -1926607734)
+
+    a = md5_hh(a, b, c, d, x[i + 5], 4, -378558)
+    d = md5_hh(d, a, b, c, x[i + 8], 11, -2022574463)
+    c = md5_hh(c, d, a, b, x[i + 11], 16, 1839030562)
+    b = md5_hh(b, c, d, a, x[i + 14], 23, -35309556)
+    a = md5_hh(a, b, c, d, x[i + 1], 4, -1530992060)
+    d = md5_hh(d, a, b, c, x[i + 4], 11, 1272893353)
+    c = md5_hh(c, d, a, b, x[i + 7], 16, -155497632)
+    b = md5_hh(b, c, d, a, x[i + 10], 23, -1094730640)
+    a = md5_hh(a, b, c, d, x[i + 13], 4, 681279174)
+    d = md5_hh(d, a, b, c, x[i + 0], 11, -358537222)
+    c = md5_hh(c, d, a, b, x[i + 3], 16, -722521979)
+    b = md5_hh(b, c, d, a, x[i + 6], 23, 76029189)
+    a = md5_hh(a, b, c, d, x[i + 9], 4, -640364487)
+    d = md5_hh(d, a, b, c, x[i + 12], 11, -421815835)
+    c = md5_hh(c, d, a, b, x[i + 15], 16, 530742520)
+    b = md5_hh(b, c, d, a, x[i + 2], 23, -995338651)
+
+    a = md5_ii(a, b, c, d, x[i + 0], 6, -198630844)
+    d = md5_ii(d, a, b, c, x[i + 7], 10, 1126891415)
+    c = md5_ii(c, d, a, b, x[i + 14], 15, -1416354905)
+    b = md5_ii(b, c, d, a, x[i + 5], 21, -57434055)
+    a = md5_ii(a, b, c, d, x[i + 12], 6, 1700485571)
+    d = md5_ii(d, a, b, c, x[i + 3], 10, -1894986606)
+    c = md5_ii(c, d, a, b, x[i + 10], 15, -1051523)
+    b = md5_ii(b, c, d, a, x[i + 1], 21, -2054922799)
+    a = md5_ii(a, b, c, d, x[i + 8], 6, 1873313359)
+    d = md5_ii(d, a, b, c, x[i + 15], 10, -30611744)
+    c = md5_ii(c, d, a, b, x[i + 6], 15, -1560198380)
+    b = md5_ii(b, c, d, a, x[i + 13], 21, 1309151649)
+    a = md5_ii(a, b, c, d, x[i + 4], 6, -145523070)
+    d = md5_ii(d, a, b, c, x[i + 11], 10, -1120210379)
+    c = md5_ii(c, d, a, b, x[i + 2], 15, 718787259)
+    b = md5_ii(b, c, d, a, x[i + 9], 21, -343485551)
+
+    a = safe_add(a, olda)
+    b = safe_add(b, oldb)
+    c = safe_add(c, oldc)
+    d = safe_add(d, oldd)
+  }
+
+  return [a, b, c, d]
+}
+
+/*
+ * These functions implement the four basic operations the algorithm uses.
+ */
+function md5_cmn (q, a, b, x, s, t) {
+  return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s), b)
+}
+
+function md5_ff (a, b, c, d, x, s, t) {
+  return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t)
+}
+
+function md5_gg (a, b, c, d, x, s, t) {
+  return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t)
+}
+
+function md5_hh (a, b, c, d, x, s, t) {
+  return md5_cmn(b ^ c ^ d, a, b, x, s, t)
+}
+
+function md5_ii (a, b, c, d, x, s, t) {
+  return md5_cmn(c ^ (b | (~d)), a, b, x, s, t)
+}
+
+/*
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */
+function safe_add (x, y) {
+  var lsw = (x & 0xFFFF) + (y & 0xFFFF)
+  var msw = (x >> 16) + (y >> 16) + (lsw >> 16)
+  return (msw << 16) | (lsw & 0xFFFF)
+}
+
+/*
+ * Bitwise rotate a 32-bit number to the left.
+ */
+function bit_rol (num, cnt) {
+  return (num << cnt) | (num >>> (32 - cnt))
+}
+
+module.exports = function md5 (buf) {
+  return makeHash(buf, core_md5)
+}
+
+},{"./make-hash":306}],308:[function(require,module,exports){
+'use strict'
+var inherits = require('inherits')
+var Legacy = require('./legacy')
+var Base = require('cipher-base')
+var Buffer = require('safe-buffer').Buffer
+var md5 = require('create-hash/md5')
+var RIPEMD160 = require('ripemd160')
+
+var sha = require('sha.js')
+
+var ZEROS = Buffer.alloc(128)
+
+function Hmac (alg, key) {
+  Base.call(this, 'digest')
+  if (typeof key === 'string') {
+    key = Buffer.from(key)
+  }
+
+  var blocksize = (alg === 'sha512' || alg === 'sha384') ? 128 : 64
+
+  this._alg = alg
+  this._key = key
+  if (key.length > blocksize) {
+    var hash = alg === 'rmd160' ? new RIPEMD160() : sha(alg)
+    key = hash.update(key).digest()
+  } else if (key.length < blocksize) {
+    key = Buffer.concat([key, ZEROS], blocksize)
+  }
+
+  var ipad = this._ipad = Buffer.allocUnsafe(blocksize)
+  var opad = this._opad = Buffer.allocUnsafe(blocksize)
+
+  for (var i = 0; i < blocksize; i++) {
+    ipad[i] = key[i] ^ 0x36
+    opad[i] = key[i] ^ 0x5C
+  }
+  this._hash = alg === 'rmd160' ? new RIPEMD160() : sha(alg)
+  this._hash.update(ipad)
+}
+
+inherits(Hmac, Base)
+
+Hmac.prototype._update = function (data) {
+  this._hash.update(data)
+}
+
+Hmac.prototype._final = function () {
+  var h = this._hash.digest()
+  var hash = this._alg === 'rmd160' ? new RIPEMD160() : sha(this._alg)
+  return hash.update(this._opad).update(h).digest()
+}
+
+module.exports = function createHmac (alg, key) {
+  alg = alg.toLowerCase()
+  if (alg === 'rmd160' || alg === 'ripemd160') {
+    return new Hmac('rmd160', key)
+  }
+  if (alg === 'md5') {
+    return new Legacy(md5, key)
+  }
+  return new Hmac(alg, key)
+}
+
+},{"./legacy":309,"cipher-base":303,"create-hash/md5":307,"inherits":313,"ripemd160":480,"safe-buffer":481,"sha.js":483}],309:[function(require,module,exports){
+'use strict'
+var inherits = require('inherits')
+var Buffer = require('safe-buffer').Buffer
+
+var Base = require('cipher-base')
+
+var ZEROS = Buffer.alloc(128)
+var blocksize = 64
+
+function Hmac (alg, key) {
+  Base.call(this, 'digest')
+  if (typeof key === 'string') {
+    key = Buffer.from(key)
+  }
+
+  this._alg = alg
+  this._key = key
+
+  if (key.length > blocksize) {
+    key = alg(key)
+  } else if (key.length < blocksize) {
+    key = Buffer.concat([key, ZEROS], blocksize)
+  }
+
+  var ipad = this._ipad = Buffer.allocUnsafe(blocksize)
+  var opad = this._opad = Buffer.allocUnsafe(blocksize)
+
+  for (var i = 0; i < blocksize; i++) {
     ipad[i] = key[i] ^ 0x36
     opad[i] = key[i] ^ 0x5C
   }
 
-  var hash = fn(Buffer.concat([ipad, data]))
-  return fn(Buffer.concat([opad, hash]))
+  this._hash = [ipad]
 }
 
-function hash(alg, key) {
-  alg = alg || 'sha1'
-  var fn = algorithms[alg]
-  var bufs = []
-  var length = 0
-  if(!fn) error('algorithm:', alg, 'is not yet supported')
-  return {
-    update: function (data) {
-      if(!Buffer.isBuffer(data)) data = new Buffer(data)
-        
-      bufs.push(data)
-      length += data.length
-      return this
-    },
-    digest: function (enc) {
-      var buf = Buffer.concat(bufs)
-      var r = key ? hmac(fn, key, buf) : fn(buf)
-      bufs = null
-      return enc ? r.toString(enc) : r
-    }
-  }
+inherits(Hmac, Base)
+
+Hmac.prototype._update = function (data) {
+  this._hash.push(data)
 }
 
-function error () {
-  var m = [].slice.call(arguments).join(' ')
-  throw new Error([
-    m,
-    'we accept pull requests',
-    'http://github.com/dominictarr/crypto-browserify'
-    ].join('\n'))
+Hmac.prototype._final = function () {
+  var h = this._alg(Buffer.concat(this._hash))
+  return this._alg(Buffer.concat([this._opad, h]))
 }
-
-exports.createHash = function (alg) { return hash(alg) }
-exports.createHmac = function (alg, key) { return hash(alg, key) }
-exports.randomBytes = function(size, callback) {
-  if (callback && callback.call) {
-    try {
-      callback.call(this, undefined, new Buffer(rng(size)))
-    } catch (err) { callback(err) }
-  } else {
-    return new Buffer(rng(size))
-  }
-}
-
-function each(a, f) {
-  for(var i in a)
-    f(a[i], i)
-}
-
-each(['createCredentials'
-, 'createCipher'
-, 'createCipheriv'
-, 'createDecipher'
-, 'createDecipheriv'
-, 'createSign'
-, 'createVerify'
-, 'createDiffieHellman'
-, 'pbkdf2'], function (name) {
-  exports[name] = function () {
-    error('sorry,', name, 'is not implemented yet')
-  }
-})
-
-},{"./md5":305,"./rng":306,"./sha":307,"./sha256":308,"buffer":302}],305:[function(require,module,exports){
-
-
-var helpers = require('./helpers');
-
-
-function md5_vm_test()
-{
-  return hex_md5("abc") == "900150983cd24fb0d6963f7d28e17f72";
-}
-
-
-function core_md5(x, len)
-{
-
-  x[len >> 5] |= 0x80 << ((len) % 32);
-  x[(((len + 64) >>> 9) << 4) + 14] = len;
-
-  var a =  1732584193;
-  var b = -271733879;
-  var c = -1732584194;
-  var d =  271733878;
-
-  for(var i = 0; i < x.length; i += 16)
-  {
-    var olda = a;
-    var oldb = b;
-    var oldc = c;
-    var oldd = d;
-
-    a = md5_ff(a, b, c, d, x[i+ 0], 7 , -680876936);
-    d = md5_ff(d, a, b, c, x[i+ 1], 12, -389564586);
-    c = md5_ff(c, d, a, b, x[i+ 2], 17,  606105819);
-    b = md5_ff(b, c, d, a, x[i+ 3], 22, -1044525330);
-    a = md5_ff(a, b, c, d, x[i+ 4], 7 , -176418897);
-    d = md5_ff(d, a, b, c, x[i+ 5], 12,  1200080426);
-    c = md5_ff(c, d, a, b, x[i+ 6], 17, -1473231341);
-    b = md5_ff(b, c, d, a, x[i+ 7], 22, -45705983);
-    a = md5_ff(a, b, c, d, x[i+ 8], 7 ,  1770035416);
-    d = md5_ff(d, a, b, c, x[i+ 9], 12, -1958414417);
-    c = md5_ff(c, d, a, b, x[i+10], 17, -42063);
-    b = md5_ff(b, c, d, a, x[i+11], 22, -1990404162);
-    a = md5_ff(a, b, c, d, x[i+12], 7 ,  1804603682);
-    d = md5_ff(d, a, b, c, x[i+13], 12, -40341101);
-    c = md5_ff(c, d, a, b, x[i+14], 17, -1502002290);
-    b = md5_ff(b, c, d, a, x[i+15], 22,  1236535329);
-
-    a = md5_gg(a, b, c, d, x[i+ 1], 5 , -165796510);
-    d = md5_gg(d, a, b, c, x[i+ 6], 9 , -1069501632);
-    c = md5_gg(c, d, a, b, x[i+11], 14,  643717713);
-    b = md5_gg(b, c, d, a, x[i+ 0], 20, -373897302);
-    a = md5_gg(a, b, c, d, x[i+ 5], 5 , -701558691);
-    d = md5_gg(d, a, b, c, x[i+10], 9 ,  38016083);
-    c = md5_gg(c, d, a, b, x[i+15], 14, -660478335);
-    b = md5_gg(b, c, d, a, x[i+ 4], 20, -405537848);
-    a = md5_gg(a, b, c, d, x[i+ 9], 5 ,  568446438);
-    d = md5_gg(d, a, b, c, x[i+14], 9 , -1019803690);
-    c = md5_gg(c, d, a, b, x[i+ 3], 14, -187363961);
-    b = md5_gg(b, c, d, a, x[i+ 8], 20,  1163531501);
-    a = md5_gg(a, b, c, d, x[i+13], 5 , -1444681467);
-    d = md5_gg(d, a, b, c, x[i+ 2], 9 , -51403784);
-    c = md5_gg(c, d, a, b, x[i+ 7], 14,  1735328473);
-    b = md5_gg(b, c, d, a, x[i+12], 20, -1926607734);
-
-    a = md5_hh(a, b, c, d, x[i+ 5], 4 , -378558);
-    d = md5_hh(d, a, b, c, x[i+ 8], 11, -2022574463);
-    c = md5_hh(c, d, a, b, x[i+11], 16,  1839030562);
-    b = md5_hh(b, c, d, a, x[i+14], 23, -35309556);
-    a = md5_hh(a, b, c, d, x[i+ 1], 4 , -1530992060);
-    d = md5_hh(d, a, b, c, x[i+ 4], 11,  1272893353);
-    c = md5_hh(c, d, a, b, x[i+ 7], 16, -155497632);
-    b = md5_hh(b, c, d, a, x[i+10], 23, -1094730640);
-    a = md5_hh(a, b, c, d, x[i+13], 4 ,  681279174);
-    d = md5_hh(d, a, b, c, x[i+ 0], 11, -358537222);
-    c = md5_hh(c, d, a, b, x[i+ 3], 16, -722521979);
-    b = md5_hh(b, c, d, a, x[i+ 6], 23,  76029189);
-    a = md5_hh(a, b, c, d, x[i+ 9], 4 , -640364487);
-    d = md5_hh(d, a, b, c, x[i+12], 11, -421815835);
-    c = md5_hh(c, d, a, b, x[i+15], 16,  530742520);
-    b = md5_hh(b, c, d, a, x[i+ 2], 23, -995338651);
-
-    a = md5_ii(a, b, c, d, x[i+ 0], 6 , -198630844);
-    d = md5_ii(d, a, b, c, x[i+ 7], 10,  1126891415);
-    c = md5_ii(c, d, a, b, x[i+14], 15, -1416354905);
-    b = md5_ii(b, c, d, a, x[i+ 5], 21, -57434055);
-    a = md5_ii(a, b, c, d, x[i+12], 6 ,  1700485571);
-    d = md5_ii(d, a, b, c, x[i+ 3], 10, -1894986606);
-    c = md5_ii(c, d, a, b, x[i+10], 15, -1051523);
-    b = md5_ii(b, c, d, a, x[i+ 1], 21, -2054922799);
-    a = md5_ii(a, b, c, d, x[i+ 8], 6 ,  1873313359);
-    d = md5_ii(d, a, b, c, x[i+15], 10, -30611744);
-    c = md5_ii(c, d, a, b, x[i+ 6], 15, -1560198380);
-    b = md5_ii(b, c, d, a, x[i+13], 21,  1309151649);
-    a = md5_ii(a, b, c, d, x[i+ 4], 6 , -145523070);
-    d = md5_ii(d, a, b, c, x[i+11], 10, -1120210379);
-    c = md5_ii(c, d, a, b, x[i+ 2], 15,  718787259);
-    b = md5_ii(b, c, d, a, x[i+ 9], 21, -343485551);
-
-    a = safe_add(a, olda);
-    b = safe_add(b, oldb);
-    c = safe_add(c, oldc);
-    d = safe_add(d, oldd);
-  }
-  return Array(a, b, c, d);
-
-}
-
-
-function md5_cmn(q, a, b, x, s, t)
-{
-  return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s),b);
-}
-function md5_ff(a, b, c, d, x, s, t)
-{
-  return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
-}
-function md5_gg(a, b, c, d, x, s, t)
-{
-  return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
-}
-function md5_hh(a, b, c, d, x, s, t)
-{
-  return md5_cmn(b ^ c ^ d, a, b, x, s, t);
-}
-function md5_ii(a, b, c, d, x, s, t)
-{
-  return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
-}
-
-
-function safe_add(x, y)
-{
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-}
-
-
-function bit_rol(num, cnt)
-{
-  return (num << cnt) | (num >>> (32 - cnt));
-}
-
-module.exports = function md5(buf) {
-  return helpers.hash(buf, core_md5, 16);
-};
-
-},{"./helpers":303}],306:[function(require,module,exports){
-(function() {
-  var _global = this;
-
-  var mathRNG, whatwgRNG;
-
-  mathRNG = function(size) {
-    var bytes = new Array(size);
-    var r;
-
-    for (var i = 0, r; i < size; i++) {
-      if ((i & 0x03) == 0) r = Math.random() * 0x100000000;
-      bytes[i] = r >>> ((i & 0x03) << 3) & 0xff;
-    }
-
-    return bytes;
-  }
-
-  if (_global.crypto && crypto.getRandomValues) {
-    whatwgRNG = function(size) {
-      var bytes = new Uint8Array(size);
-      crypto.getRandomValues(bytes);
-      return bytes;
-    }
-  }
-
-  module.exports = whatwgRNG || mathRNG;
-
-}())
-
-},{}],307:[function(require,module,exports){
-
-
-var helpers = require('./helpers');
-
-
-function core_sha1(x, len)
-{
-
-  x[len >> 5] |= 0x80 << (24 - len % 32);
-  x[((len + 64 >> 9) << 4) + 15] = len;
-
-  var w = Array(80);
-  var a =  1732584193;
-  var b = -271733879;
-  var c = -1732584194;
-  var d =  271733878;
-  var e = -1009589776;
-
-  for(var i = 0; i < x.length; i += 16)
-  {
-    var olda = a;
-    var oldb = b;
-    var oldc = c;
-    var oldd = d;
-    var olde = e;
-
-    for(var j = 0; j < 80; j++)
-    {
-      if(j < 16) w[j] = x[i + j];
-      else w[j] = rol(w[j-3] ^ w[j-8] ^ w[j-14] ^ w[j-16], 1);
-      var t = safe_add(safe_add(rol(a, 5), sha1_ft(j, b, c, d)),
-                       safe_add(safe_add(e, w[j]), sha1_kt(j)));
-      e = d;
-      d = c;
-      c = rol(b, 30);
-      b = a;
-      a = t;
-    }
-
-    a = safe_add(a, olda);
-    b = safe_add(b, oldb);
-    c = safe_add(c, oldc);
-    d = safe_add(d, oldd);
-    e = safe_add(e, olde);
-  }
-  return Array(a, b, c, d, e);
-
-}
-
-
-function sha1_ft(t, b, c, d)
-{
-  if(t < 20) return (b & c) | ((~b) & d);
-  if(t < 40) return b ^ c ^ d;
-  if(t < 60) return (b & c) | (b & d) | (c & d);
-  return b ^ c ^ d;
-}
-
-
-function sha1_kt(t)
-{
-  return (t < 20) ?  1518500249 : (t < 40) ?  1859775393 :
-         (t < 60) ? -1894007588 : -899497514;
-}
-
-
-function safe_add(x, y)
-{
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-}
-
-
-function rol(num, cnt)
-{
-  return (num << cnt) | (num >>> (32 - cnt));
-}
-
-module.exports = function sha1(buf) {
-  return helpers.hash(buf, core_sha1, 20, true);
-};
-
-},{"./helpers":303}],308:[function(require,module,exports){
-
-
-
-var helpers = require('./helpers');
-
-var safe_add = function(x, y) {
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF);
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return (msw << 16) | (lsw & 0xFFFF);
-};
-
-var S = function(X, n) {
-  return (X >>> n) | (X << (32 - n));
-};
-
-var R = function(X, n) {
-  return (X >>> n);
-};
-
-var Ch = function(x, y, z) {
-  return ((x & y) ^ ((~x) & z));
-};
-
-var Maj = function(x, y, z) {
-  return ((x & y) ^ (x & z) ^ (y & z));
-};
-
-var Sigma0256 = function(x) {
-  return (S(x, 2) ^ S(x, 13) ^ S(x, 22));
-};
-
-var Sigma1256 = function(x) {
-  return (S(x, 6) ^ S(x, 11) ^ S(x, 25));
-};
-
-var Gamma0256 = function(x) {
-  return (S(x, 7) ^ S(x, 18) ^ R(x, 3));
-};
-
-var Gamma1256 = function(x) {
-  return (S(x, 17) ^ S(x, 19) ^ R(x, 10));
-};
-
-var core_sha256 = function(m, l) {
-  var K = new Array(0x428A2F98,0x71374491,0xB5C0FBCF,0xE9B5DBA5,0x3956C25B,0x59F111F1,0x923F82A4,0xAB1C5ED5,0xD807AA98,0x12835B01,0x243185BE,0x550C7DC3,0x72BE5D74,0x80DEB1FE,0x9BDC06A7,0xC19BF174,0xE49B69C1,0xEFBE4786,0xFC19DC6,0x240CA1CC,0x2DE92C6F,0x4A7484AA,0x5CB0A9DC,0x76F988DA,0x983E5152,0xA831C66D,0xB00327C8,0xBF597FC7,0xC6E00BF3,0xD5A79147,0x6CA6351,0x14292967,0x27B70A85,0x2E1B2138,0x4D2C6DFC,0x53380D13,0x650A7354,0x766A0ABB,0x81C2C92E,0x92722C85,0xA2BFE8A1,0xA81A664B,0xC24B8B70,0xC76C51A3,0xD192E819,0xD6990624,0xF40E3585,0x106AA070,0x19A4C116,0x1E376C08,0x2748774C,0x34B0BCB5,0x391C0CB3,0x4ED8AA4A,0x5B9CCA4F,0x682E6FF3,0x748F82EE,0x78A5636F,0x84C87814,0x8CC70208,0x90BEFFFA,0xA4506CEB,0xBEF9A3F7,0xC67178F2);
-  var HASH = new Array(0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19);
-    var W = new Array(64);
-    var a, b, c, d, e, f, g, h, i, j;
-    var T1, T2;
-
-  m[l >> 5] |= 0x80 << (24 - l % 32);
-  m[((l + 64 >> 9) << 4) + 15] = l;
-  for (var i = 0; i < m.length; i += 16) {
-    a = HASH[0]; b = HASH[1]; c = HASH[2]; d = HASH[3]; e = HASH[4]; f = HASH[5]; g = HASH[6]; h = HASH[7];
-    for (var j = 0; j < 64; j++) {
-      if (j < 16) {
-        W[j] = m[j + i];
-      } else {
-        W[j] = safe_add(safe_add(safe_add(Gamma1256(W[j - 2]), W[j - 7]), Gamma0256(W[j - 15])), W[j - 16]);
-      }
-      T1 = safe_add(safe_add(safe_add(safe_add(h, Sigma1256(e)), Ch(e, f, g)), K[j]), W[j]);
-      T2 = safe_add(Sigma0256(a), Maj(a, b, c));
-      h = g; g = f; f = e; e = safe_add(d, T1); d = c; c = b; b = a; a = safe_add(T1, T2);
-    }
-    HASH[0] = safe_add(a, HASH[0]); HASH[1] = safe_add(b, HASH[1]); HASH[2] = safe_add(c, HASH[2]); HASH[3] = safe_add(d, HASH[3]);
-    HASH[4] = safe_add(e, HASH[4]); HASH[5] = safe_add(f, HASH[5]); HASH[6] = safe_add(g, HASH[6]); HASH[7] = safe_add(h, HASH[7]);
-  }
-  return HASH;
-};
-
-module.exports = function sha256(buf) {
-  return helpers.hash(buf, core_sha256, 32, true);
-};
-
-},{"./helpers":303}],309:[function(require,module,exports){
+module.exports = Hmac
+
+},{"cipher-base":303,"inherits":313,"safe-buffer":481}],310:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 function EventEmitter() {
   this._events = this._events || {};
@@ -131019,13 +134787,18 @@ function EventEmitter() {
 }
 module.exports = EventEmitter;
 
+// Backwards-compat with node 0.10.x
 EventEmitter.EventEmitter = EventEmitter;
 
 EventEmitter.prototype._events = undefined;
 EventEmitter.prototype._maxListeners = undefined;
 
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
 EventEmitter.defaultMaxListeners = 10;
 
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
 EventEmitter.prototype.setMaxListeners = function(n) {
   if (!isNumber(n) || n < 0 || isNaN(n))
     throw TypeError('n must be a positive number');
@@ -131039,6 +134812,7 @@ EventEmitter.prototype.emit = function(type) {
   if (!this._events)
     this._events = {};
 
+  // If there is no 'error' event listener then throw.
   if (type === 'error') {
     if (!this._events.error ||
         (isObject(this._events.error) && !this._events.error.length)) {
@@ -131046,6 +134820,7 @@ EventEmitter.prototype.emit = function(type) {
       if (er instanceof Error) {
         throw er; // Unhandled 'error' event
       } else {
+        // At least give some kind of context to the user
         var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
         err.context = er;
         throw err;
@@ -131060,6 +134835,7 @@ EventEmitter.prototype.emit = function(type) {
 
   if (isFunction(handler)) {
     switch (arguments.length) {
+      // fast cases
       case 1:
         handler.call(this);
         break;
@@ -131069,6 +134845,7 @@ EventEmitter.prototype.emit = function(type) {
       case 3:
         handler.call(this, arguments[1], arguments[2]);
         break;
+      // slower
       default:
         args = Array.prototype.slice.call(arguments, 1);
         handler.apply(this, args);
@@ -131093,18 +134870,24 @@ EventEmitter.prototype.addListener = function(type, listener) {
   if (!this._events)
     this._events = {};
 
+  // To avoid recursion in the case that type === "newListener"! Before
+  // adding it to the listeners, first emit "newListener".
   if (this._events.newListener)
     this.emit('newListener', type,
               isFunction(listener.listener) ?
               listener.listener : listener);
 
   if (!this._events[type])
+    // Optimize the case of one listener. Don't need the extra array object.
     this._events[type] = listener;
   else if (isObject(this._events[type]))
+    // If we've already got an array, just append.
     this._events[type].push(listener);
   else
+    // Adding the second element, need to change to array.
     this._events[type] = [this._events[type], listener];
 
+  // Check for listener leak
   if (isObject(this._events[type]) && !this._events[type].warned) {
     if (!isUndefined(this._maxListeners)) {
       m = this._maxListeners;
@@ -131119,6 +134902,7 @@ EventEmitter.prototype.addListener = function(type, listener) {
                     'Use emitter.setMaxListeners() to increase limit.',
                     this._events[type].length);
       if (typeof console.trace === 'function') {
+        // not supported in IE 10
         console.trace();
       }
     }
@@ -131150,6 +134934,7 @@ EventEmitter.prototype.once = function(type, listener) {
   return this;
 };
 
+// emits a 'removeListener' event iff the listener was removed
 EventEmitter.prototype.removeListener = function(type, listener) {
   var list, position, length, i;
 
@@ -131201,6 +134986,7 @@ EventEmitter.prototype.removeAllListeners = function(type) {
   if (!this._events)
     return this;
 
+  // not listening for removeListener, no need to emit
   if (!this._events.removeListener) {
     if (arguments.length === 0)
       this._events = {};
@@ -131209,6 +134995,7 @@ EventEmitter.prototype.removeAllListeners = function(type) {
     return this;
   }
 
+  // emit removeListener for all listeners on all events
   if (arguments.length === 0) {
     for (key in this._events) {
       if (key === 'removeListener') continue;
@@ -131224,6 +135011,7 @@ EventEmitter.prototype.removeAllListeners = function(type) {
   if (isFunction(listeners)) {
     this.removeListener(type, listeners);
   } else if (listeners) {
+    // LIFO order
     while (listeners.length)
       this.removeListener(type, listeners[listeners.length - 1]);
   }
@@ -131275,7 +135063,94 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],310:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
+(function (Buffer){
+'use strict'
+var Transform = require('stream').Transform
+var inherits = require('inherits')
+
+function HashBase (blockSize) {
+  Transform.call(this)
+
+  this._block = new Buffer(blockSize)
+  this._blockSize = blockSize
+  this._blockOffset = 0
+  this._length = [0, 0, 0, 0]
+
+  this._finalized = false
+}
+
+inherits(HashBase, Transform)
+
+HashBase.prototype._transform = function (chunk, encoding, callback) {
+  var error = null
+  try {
+    if (encoding !== 'buffer') chunk = new Buffer(chunk, encoding)
+    this.update(chunk)
+  } catch (err) {
+    error = err
+  }
+
+  callback(error)
+}
+
+HashBase.prototype._flush = function (callback) {
+  var error = null
+  try {
+    this.push(this._digest())
+  } catch (err) {
+    error = err
+  }
+
+  callback(error)
+}
+
+HashBase.prototype.update = function (data, encoding) {
+  if (!Buffer.isBuffer(data) && typeof data !== 'string') throw new TypeError('Data must be a string or a buffer')
+  if (this._finalized) throw new Error('Digest already called')
+  if (!Buffer.isBuffer(data)) data = new Buffer(data, encoding || 'binary')
+
+  // consume data
+  var block = this._block
+  var offset = 0
+  while (this._blockOffset + data.length - offset >= this._blockSize) {
+    for (var i = this._blockOffset; i < this._blockSize;) block[i++] = data[offset++]
+    this._update()
+    this._blockOffset = 0
+  }
+  while (offset < data.length) block[this._blockOffset++] = data[offset++]
+
+  // update length
+  for (var j = 0, carry = data.length * 8; carry > 0; ++j) {
+    this._length[j] += carry
+    carry = (this._length[j] / 0x0100000000) | 0
+    if (carry > 0) this._length[j] -= 0x0100000000 * carry
+  }
+
+  return this
+}
+
+HashBase.prototype._update = function (data) {
+  throw new Error('_update is not implemented')
+}
+
+HashBase.prototype.digest = function (encoding) {
+  if (this._finalized) throw new Error('Digest already called')
+  this._finalized = true
+
+  var digest = this._digest()
+  if (encoding !== undefined) digest = digest.toString(encoding)
+  return digest
+}
+
+HashBase.prototype._digest = function () {
+  throw new Error('_digest is not implemented')
+}
+
+module.exports = HashBase
+
+}).call(this,require("buffer").Buffer)
+},{"buffer":302,"inherits":313,"stream":490}],312:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -131361,14 +135236,62 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],311:[function(require,module,exports){
+},{}],313:[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+},{}],314:[function(require,module,exports){
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+// The _isBuffer check is for Safari 5-7 support, because it's missing
+// Object.prototype.constructor. Remove this eventually
+module.exports = function (obj) {
+  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
+}
+
+function isBuffer (obj) {
+  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
+
+// For Node v0.10 support. Remove this eventually.
+function isSlowBuffer (obj) {
+  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
+}
+
+},{}],315:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],312:[function(require,module,exports){
+},{}],316:[function(require,module,exports){
 (function(exports) {
   "use strict";
 
@@ -131389,15 +135312,20 @@ module.exports = Array.isArray || function (arr) {
   }
 
   function strictDeepEqual(first, second) {
+    // Check the scalar case first.
     if (first === second) {
       return true;
     }
 
+    // Check if they are the same type.
     var firstType = Object.prototype.toString.call(first);
     if (firstType !== Object.prototype.toString.call(second)) {
       return false;
     }
+    // We know that first and second have the same type so we can just check the
+    // first type from now on.
     if (isArray(first) === true) {
+      // Short circuit if they're not the same length;
       if (first.length !== second.length) {
         return false;
       }
@@ -131409,6 +135337,7 @@ module.exports = Array.isArray || function (arr) {
       return true;
     }
     if (isObject(first) === true) {
+      // An object is equal if it has the same key/value pairs.
       var keysSeen = {};
       for (var key in first) {
         if (hasOwnProperty.call(first, key)) {
@@ -131418,6 +135347,8 @@ module.exports = Array.isArray || function (arr) {
           keysSeen[key] = true;
         }
       }
+      // Now check that there aren't any keys in second that weren't
+      // in first.
       for (var key2 in second) {
         if (hasOwnProperty.call(second, key2)) {
           if (keysSeen[key2] !== true) {
@@ -131431,13 +135362,26 @@ module.exports = Array.isArray || function (arr) {
   }
 
   function isFalse(obj) {
+    // From the spec:
+    // A false value corresponds to the following values:
+    // Empty list
+    // Empty object
+    // Empty string
+    // False boolean
+    // null value
 
+    // First check the scalar values.
     if (obj === "" || obj === false || obj === null) {
         return true;
     } else if (isArray(obj) && obj.length === 0) {
+        // Check for an empty array.
         return true;
     } else if (isObject(obj)) {
+        // Check for an empty object.
         for (var key in obj) {
+            // If there are any keys, then
+            // the object is not empty so the object
+            // is not false.
             if (obj.hasOwnProperty(key)) {
               return false;
             }
@@ -131479,6 +135423,7 @@ module.exports = Array.isArray || function (arr) {
     };
   }
 
+  // Type constants used to define functions.
   var TYPE_NUMBER = 0;
   var TYPE_ANY = 1;
   var TYPE_STRING = 2;
@@ -131520,6 +135465,11 @@ module.exports = Array.isArray || function (arr) {
   var TOK_LPAREN= "Lparen";
   var TOK_LITERAL= "Literal";
 
+  // The "&", "[", "<", ">" tokens
+  // are not in basicToken because
+  // there are two token variants
+  // ("&&", "[?", "<=", ">=").  This is specially handled
+  // below.
 
   var basicTokens = {
     ".": TOK_DOT,
@@ -131590,6 +135540,8 @@ module.exports = Array.isArray || function (arr) {
                   token = this._consumeNumber(stream);
                   tokens.push(token);
               } else if (stream[this._current] === "[") {
+                  // No need to increment this._current.  This happens
+                  // in _consumeLBracket
                   token = this._consumeLBracket(stream);
                   tokens.push(token);
               } else if (stream[this._current] === "\"") {
@@ -131613,6 +135565,7 @@ module.exports = Array.isArray || function (arr) {
               } else if (operatorStartToken[stream[this._current]] !== undefined) {
                   tokens.push(this._consumeOperator(stream));
               } else if (skipChars[stream[this._current]] !== undefined) {
+                  // Ignore whitespace.
                   this._current++;
               } else if (stream[this._current] === "&") {
                   start = this._current;
@@ -131655,6 +135608,7 @@ module.exports = Array.isArray || function (arr) {
           this._current++;
           var maxLength = stream.length;
           while (stream[this._current] !== "\"" && this._current < maxLength) {
+              // You can escape a double quote and you can escape an escape.
               var current = this._current;
               if (stream[current] === "\\" && (stream[current + 1] === "\\" ||
                                                stream[current + 1] === "\"")) {
@@ -131673,6 +135627,7 @@ module.exports = Array.isArray || function (arr) {
           this._current++;
           var maxLength = stream.length;
           while (stream[this._current] !== "'" && this._current < maxLength) {
+              // You can escape a single quote and you can escape an escape.
               var current = this._current;
               if (stream[current] === "\\" && (stream[current + 1] === "\\" ||
                                                stream[current + 1] === "'")) {
@@ -131751,6 +135706,7 @@ module.exports = Array.isArray || function (arr) {
           var maxLength = stream.length;
           var literal;
           while(stream[this._current] !== "`" && this._current < maxLength) {
+              // You can escape a literal char or you can escape the escape.
               var current = this._current;
               if (stream[current] === "\\" && (stream[current + 1] === "\\" ||
                                                stream[current + 1] === "`")) {
@@ -131765,8 +135721,10 @@ module.exports = Array.isArray || function (arr) {
           if (this._looksLikeJSON(literalString)) {
               literal = JSON.parse(literalString);
           } else {
+              // Try to JSON parse it as "<literal>"
               literal = JSON.parse("\"" + literalString + "\"");
           }
+          // +1 gets us to the ending "`", +1 to move on to the next char.
           this._current++;
           return literal;
       },
@@ -131898,6 +135856,8 @@ module.exports = Array.isArray || function (arr) {
             left = {type: "Identity"};
             right = null;
             if (this._lookahead(0) === TOK_RBRACKET) {
+                // This can happen in a multiselect,
+                // [a, b, *]
                 right = {type: "Identity"};
             } else {
                 right = this._parseProjectionRHS(bindingPower.Star);
@@ -131958,6 +135918,7 @@ module.exports = Array.isArray || function (arr) {
                 right = this._parseDotRHS(rbp);
                 return {type: "Subexpression", children: [left, right]};
             } else {
+                // Creating a projection.
                 this._advance();
                 right = this._parseProjectionRHS(rbp);
                 return {type: "ValueProjection", children: [left, right]};
@@ -132074,6 +136035,8 @@ module.exports = Array.isArray || function (arr) {
       },
 
       _parseSliceExpression: function() {
+          // [start:end:step] where each part is optional, as well as the last
+          // colon.
           var parts = [null, null, null];
           var index = 0;
           var currentToken = this._lookahead(0);
@@ -132257,6 +136220,7 @@ module.exports = Array.isArray || function (arr) {
               }
               return result;
             case "Projection":
+              // Evaluate left child.
               var base = this.visit(node.children[0], value);
               if (!isArray(base)) {
                 return null;
@@ -132270,6 +136234,7 @@ module.exports = Array.isArray || function (arr) {
               }
               return collected;
             case "ValueProjection":
+              // Evaluate left child.
               base = this.visit(node.children[0], value);
               if (!isObject(base)) {
                 return null;
@@ -132397,6 +136362,8 @@ module.exports = Array.isArray || function (arr) {
               return this.runtime.callFunction(node.name, resolvedArgs);
             case "ExpressionReference":
               var refNode = node.children[0];
+              // Tag the node with a specific attribute so the type
+              // checker verify the type.
               refNode.jmespathType = TOK_EXPREF;
               return refNode;
             default:
@@ -132452,6 +136419,19 @@ module.exports = Array.isArray || function (arr) {
   function Runtime(interpreter) {
     this._interpreter = interpreter;
     this.functionTable = {
+        // name: [function, <signature>]
+        // The <signature> can be:
+        //
+        // {
+        //   args: [[type1, type2], [type1, type2]],
+        //   variadic: true|false
+        // }
+        //
+        // Each arg in the arg list is a list of valid types
+        // (if the function is overloaded and supports multiple
+        // types.  If the type is "any" then no type checking
+        // occurs on the argument.  Variadic is optional
+        // and if not provided is assumed to be false.
         abs: {_func: this._functionAbs, _signature: [{types: [TYPE_NUMBER]}]},
         avg: {_func: this._functionAvg, _signature: [{types: [TYPE_ARRAY_NUMBER]}]},
         ceil: {_func: this._functionCeil, _signature: [{types: [TYPE_NUMBER]}]},
@@ -132530,6 +136510,11 @@ module.exports = Array.isArray || function (arr) {
     },
 
     _validateArgs: function(name, args, signature) {
+        // Validating the args requires validating
+        // the correct arity and the correct type of each arg.
+        // If the last argument is declared as variadic, then we need
+        // a minimum number of args to be required.  Otherwise it has to
+        // be an exact amount.
         var pluralized;
         if (signature[signature.length - 1].variadic) {
             if (args.length < signature.length) {
@@ -132574,9 +136559,15 @@ module.exports = Array.isArray || function (arr) {
         if (expected === TYPE_ARRAY_STRING ||
             expected === TYPE_ARRAY_NUMBER ||
             expected === TYPE_ARRAY) {
+            // The expected type can either just be array,
+            // or it can require a specific subtype (array of numbers).
+            //
+            // The simplest case is if "array" with no subtype is specified.
             if (expected === TYPE_ARRAY) {
                 return actual === TYPE_ARRAY;
             } else if (actual === TYPE_ARRAY) {
+                // Otherwise we need to check subtypes.
+                // I think this has potential to be improved.
                 var subtype;
                 if (expected === TYPE_ARRAY_NUMBER) {
                   subtype = TYPE_NUMBER;
@@ -132609,6 +136600,8 @@ module.exports = Array.isArray || function (arr) {
             case "[object Null]":
               return TYPE_NULL;
             case "[object Object]":
+              // Check if it's an expref.  If it has, it's been
+              // tagged with a jmespathType attr of 'Expref';
               if (obj.jmespathType === TOK_EXPREF) {
                 return TYPE_EXPREF;
               } else {
@@ -132672,6 +136665,8 @@ module.exports = Array.isArray || function (arr) {
        if (!isObject(resolvedArgs[0])) {
          return resolvedArgs[0].length;
        } else {
+         // As far as I can tell, there's no way to get the length
+         // of an object without O(n) iteration through the object.
          return Object.keys(resolvedArgs[0]).length;
        }
     },
@@ -132844,6 +136839,13 @@ module.exports = Array.isArray || function (arr) {
             throw new Error("TypeError");
         }
         var that = this;
+        // In order to get a stable sort out of an unstable
+        // sort algorithm, we decorate/sort/undecorate (DSU)
+        // by creating a new list of [index, element] pairs.
+        // In the cmp function, if the evaluated elements are
+        // equal, then the index will be used as the tiebreaker.
+        // After the decorated list has been sorted, it will be
+        // undecorated to extract the original elements.
         var decorated = [];
         for (var i = 0; i < sortedArray.length; i++) {
           decorated.push([i, sortedArray[i]]);
@@ -132865,9 +136867,13 @@ module.exports = Array.isArray || function (arr) {
           } else if (exprA < exprB) {
             return -1;
           } else {
+            // If they're equal compare the items by their
+            // order to maintain relative order of equal keys
+            // (i.e. to get a stable sort).
             return a[0] - b[0];
           }
         });
+        // Undecorate: extract out the original list elements.
         for (var j = 0; j < decorated.length; j++) {
           sortedArray[j] = decorated[j][1];
         }
@@ -132938,6 +136944,9 @@ module.exports = Array.isArray || function (arr) {
 
   function search(data, expression) {
       var parser = new Parser();
+      // This needs to be improved.  Both the interpreter and runtime depend on
+      // each other.  The runtime needs the interpreter to support exprefs.
+      // There's likely a clean way to avoid the cyclic dependency.
       var runtime = new Runtime();
       var interpreter = new TreeInterpreter(runtime);
       runtime._interpreter = interpreter;
@@ -132951,23 +136960,29 @@ module.exports = Array.isArray || function (arr) {
   exports.strictDeepEqual = strictDeepEqual;
 })(typeof exports === "undefined" ? this.jmespath = {} : exports);
 
-},{}],313:[function(require,module,exports){
+},{}],317:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
-
+/* Built-in method references that are verified to be native. */
 var DataView = getNative(root, 'DataView');
 
 module.exports = DataView;
 
-},{"./_getNative":377,"./_root":414}],314:[function(require,module,exports){
+},{"./_getNative":381,"./_root":418}],318:[function(require,module,exports){
 var hashClear = require('./_hashClear'),
     hashDelete = require('./_hashDelete'),
     hashGet = require('./_hashGet'),
     hashHas = require('./_hashHas'),
     hashSet = require('./_hashSet');
 
-
+/**
+ * Creates a hash object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
 function Hash(entries) {
   var index = -1,
       length = entries == null ? 0 : entries.length;
@@ -132979,6 +136994,7 @@ function Hash(entries) {
   }
 }
 
+// Add methods to `Hash`.
 Hash.prototype.clear = hashClear;
 Hash.prototype['delete'] = hashDelete;
 Hash.prototype.get = hashGet;
@@ -132987,14 +137003,20 @@ Hash.prototype.set = hashSet;
 
 module.exports = Hash;
 
-},{"./_hashClear":383,"./_hashDelete":384,"./_hashGet":385,"./_hashHas":386,"./_hashSet":387}],315:[function(require,module,exports){
+},{"./_hashClear":387,"./_hashDelete":388,"./_hashGet":389,"./_hashHas":390,"./_hashSet":391}],319:[function(require,module,exports){
 var listCacheClear = require('./_listCacheClear'),
     listCacheDelete = require('./_listCacheDelete'),
     listCacheGet = require('./_listCacheGet'),
     listCacheHas = require('./_listCacheHas'),
     listCacheSet = require('./_listCacheSet');
 
-
+/**
+ * Creates an list cache object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
 function ListCache(entries) {
   var index = -1,
       length = entries == null ? 0 : entries.length;
@@ -133006,6 +137028,7 @@ function ListCache(entries) {
   }
 }
 
+// Add methods to `ListCache`.
 ListCache.prototype.clear = listCacheClear;
 ListCache.prototype['delete'] = listCacheDelete;
 ListCache.prototype.get = listCacheGet;
@@ -133014,23 +137037,29 @@ ListCache.prototype.set = listCacheSet;
 
 module.exports = ListCache;
 
-},{"./_listCacheClear":395,"./_listCacheDelete":396,"./_listCacheGet":397,"./_listCacheHas":398,"./_listCacheSet":399}],316:[function(require,module,exports){
+},{"./_listCacheClear":399,"./_listCacheDelete":400,"./_listCacheGet":401,"./_listCacheHas":402,"./_listCacheSet":403}],320:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
-
+/* Built-in method references that are verified to be native. */
 var Map = getNative(root, 'Map');
 
 module.exports = Map;
 
-},{"./_getNative":377,"./_root":414}],317:[function(require,module,exports){
+},{"./_getNative":381,"./_root":418}],321:[function(require,module,exports){
 var mapCacheClear = require('./_mapCacheClear'),
     mapCacheDelete = require('./_mapCacheDelete'),
     mapCacheGet = require('./_mapCacheGet'),
     mapCacheHas = require('./_mapCacheHas'),
     mapCacheSet = require('./_mapCacheSet');
 
-
+/**
+ * Creates a map cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
 function MapCache(entries) {
   var index = -1,
       length = entries == null ? 0 : entries.length;
@@ -133042,6 +137071,7 @@ function MapCache(entries) {
   }
 }
 
+// Add methods to `MapCache`.
 MapCache.prototype.clear = mapCacheClear;
 MapCache.prototype['delete'] = mapCacheDelete;
 MapCache.prototype.get = mapCacheGet;
@@ -133050,30 +137080,37 @@ MapCache.prototype.set = mapCacheSet;
 
 module.exports = MapCache;
 
-},{"./_mapCacheClear":400,"./_mapCacheDelete":401,"./_mapCacheGet":402,"./_mapCacheHas":403,"./_mapCacheSet":404}],318:[function(require,module,exports){
+},{"./_mapCacheClear":404,"./_mapCacheDelete":405,"./_mapCacheGet":406,"./_mapCacheHas":407,"./_mapCacheSet":408}],322:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
-
+/* Built-in method references that are verified to be native. */
 var Promise = getNative(root, 'Promise');
 
 module.exports = Promise;
 
-},{"./_getNative":377,"./_root":414}],319:[function(require,module,exports){
+},{"./_getNative":381,"./_root":418}],323:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
-
+/* Built-in method references that are verified to be native. */
 var Set = getNative(root, 'Set');
 
 module.exports = Set;
 
-},{"./_getNative":377,"./_root":414}],320:[function(require,module,exports){
+},{"./_getNative":381,"./_root":418}],324:[function(require,module,exports){
 var MapCache = require('./_MapCache'),
     setCacheAdd = require('./_setCacheAdd'),
     setCacheHas = require('./_setCacheHas');
 
-
+/**
+ *
+ * Creates an array cache object to store unique values.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [values] The values to cache.
+ */
 function SetCache(values) {
   var index = -1,
       length = values == null ? 0 : values.length;
@@ -133084,12 +137121,13 @@ function SetCache(values) {
   }
 }
 
+// Add methods to `SetCache`.
 SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
 SetCache.prototype.has = setCacheHas;
 
 module.exports = SetCache;
 
-},{"./_MapCache":317,"./_setCacheAdd":415,"./_setCacheHas":416}],321:[function(require,module,exports){
+},{"./_MapCache":321,"./_setCacheAdd":419,"./_setCacheHas":420}],325:[function(require,module,exports){
 var ListCache = require('./_ListCache'),
     stackClear = require('./_stackClear'),
     stackDelete = require('./_stackDelete'),
@@ -133097,12 +137135,19 @@ var ListCache = require('./_ListCache'),
     stackHas = require('./_stackHas'),
     stackSet = require('./_stackSet');
 
-
+/**
+ * Creates a stack cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
 function Stack(entries) {
   var data = this.__data__ = new ListCache(entries);
   this.size = data.size;
 }
 
+// Add methods to `Stack`.
 Stack.prototype.clear = stackClear;
 Stack.prototype['delete'] = stackDelete;
 Stack.prototype.get = stackGet;
@@ -133111,33 +137156,42 @@ Stack.prototype.set = stackSet;
 
 module.exports = Stack;
 
-},{"./_ListCache":315,"./_stackClear":420,"./_stackDelete":421,"./_stackGet":422,"./_stackHas":423,"./_stackSet":424}],322:[function(require,module,exports){
+},{"./_ListCache":319,"./_stackClear":424,"./_stackDelete":425,"./_stackGet":426,"./_stackHas":427,"./_stackSet":428}],326:[function(require,module,exports){
 var root = require('./_root');
 
-
+/** Built-in value references. */
 var Symbol = root.Symbol;
 
 module.exports = Symbol;
 
-},{"./_root":414}],323:[function(require,module,exports){
+},{"./_root":418}],327:[function(require,module,exports){
 var root = require('./_root');
 
-
+/** Built-in value references. */
 var Uint8Array = root.Uint8Array;
 
 module.exports = Uint8Array;
 
-},{"./_root":414}],324:[function(require,module,exports){
+},{"./_root":418}],328:[function(require,module,exports){
 var getNative = require('./_getNative'),
     root = require('./_root');
 
-
+/* Built-in method references that are verified to be native. */
 var WeakMap = getNative(root, 'WeakMap');
 
 module.exports = WeakMap;
 
-},{"./_getNative":377,"./_root":414}],325:[function(require,module,exports){
-
+},{"./_getNative":381,"./_root":418}],329:[function(require,module,exports){
+/**
+ * A faster alternative to `Function#apply`, this function invokes `func`
+ * with the `this` binding of `thisArg` and the arguments of `args`.
+ *
+ * @private
+ * @param {Function} func The function to invoke.
+ * @param {*} thisArg The `this` binding of `func`.
+ * @param {Array} args The arguments to invoke `func` with.
+ * @returns {*} Returns the result of `func`.
+ */
 function apply(func, thisArg, args) {
   switch (args.length) {
     case 0: return func.call(thisArg);
@@ -133150,8 +137204,17 @@ function apply(func, thisArg, args) {
 
 module.exports = apply;
 
-},{}],326:[function(require,module,exports){
-
+},{}],330:[function(require,module,exports){
+/**
+ * A specialized version of `_.every` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {boolean} Returns `true` if all elements pass the predicate check,
+ *  else `false`.
+ */
 function arrayEvery(array, predicate) {
   var index = -1,
       length = array == null ? 0 : array.length;
@@ -133166,8 +137229,16 @@ function arrayEvery(array, predicate) {
 
 module.exports = arrayEvery;
 
-},{}],327:[function(require,module,exports){
-
+},{}],331:[function(require,module,exports){
+/**
+ * A specialized version of `_.filter` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {Array} Returns the new filtered array.
+ */
 function arrayFilter(array, predicate) {
   var index = -1,
       length = array == null ? 0 : array.length,
@@ -133185,7 +137256,7 @@ function arrayFilter(array, predicate) {
 
 module.exports = arrayFilter;
 
-},{}],328:[function(require,module,exports){
+},{}],332:[function(require,module,exports){
 var baseTimes = require('./_baseTimes'),
     isArguments = require('./isArguments'),
     isArray = require('./isArray'),
@@ -133193,13 +137264,20 @@ var baseTimes = require('./_baseTimes'),
     isIndex = require('./_isIndex'),
     isTypedArray = require('./isTypedArray');
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * Creates an array of the enumerable property names of the array-like `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @param {boolean} inherited Specify returning inherited property names.
+ * @returns {Array} Returns the array of property names.
+ */
 function arrayLikeKeys(value, inherited) {
   var isArr = isArray(value),
       isArg = !isArr && isArguments(value),
@@ -133212,9 +137290,13 @@ function arrayLikeKeys(value, inherited) {
   for (var key in value) {
     if ((inherited || hasOwnProperty.call(value, key)) &&
         !(skipIndexes && (
+           // Safari 9 has enumerable `arguments.length` in strict mode.
            key == 'length' ||
+           // Node.js 0.10 has enumerable non-index properties on buffers.
            (isBuff && (key == 'offset' || key == 'parent')) ||
+           // PhantomJS 2 has enumerable non-index properties on typed arrays.
            (isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset')) ||
+           // Skip index properties.
            isIndex(key, length)
         ))) {
       result.push(key);
@@ -133225,8 +137307,16 @@ function arrayLikeKeys(value, inherited) {
 
 module.exports = arrayLikeKeys;
 
-},{"./_baseTimes":359,"./_isIndex":388,"./isArguments":436,"./isArray":437,"./isBuffer":439,"./isTypedArray":446}],329:[function(require,module,exports){
-
+},{"./_baseTimes":363,"./_isIndex":392,"./isArguments":440,"./isArray":441,"./isBuffer":443,"./isTypedArray":450}],333:[function(require,module,exports){
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
 function arrayMap(array, iteratee) {
   var index = -1,
       length = array == null ? 0 : array.length,
@@ -133240,8 +137330,15 @@ function arrayMap(array, iteratee) {
 
 module.exports = arrayMap;
 
-},{}],330:[function(require,module,exports){
-
+},{}],334:[function(require,module,exports){
+/**
+ * Appends the elements of `values` to `array`.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {Array} values The values to append.
+ * @returns {Array} Returns `array`.
+ */
 function arrayPush(array, values) {
   var index = -1,
       length = values.length,
@@ -133255,8 +137352,17 @@ function arrayPush(array, values) {
 
 module.exports = arrayPush;
 
-},{}],331:[function(require,module,exports){
-
+},{}],335:[function(require,module,exports){
+/**
+ * A specialized version of `_.some` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {boolean} Returns `true` if any element passes the predicate check,
+ *  else `false`.
+ */
 function arraySome(array, predicate) {
   var index = -1,
       length = array == null ? 0 : array.length;
@@ -133271,17 +137377,26 @@ function arraySome(array, predicate) {
 
 module.exports = arraySome;
 
-},{}],332:[function(require,module,exports){
+},{}],336:[function(require,module,exports){
 var baseAssignValue = require('./_baseAssignValue'),
     eq = require('./eq');
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * Assigns `value` to `key` of `object` if the existing value is not equivalent
+ * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * for equality comparisons.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {string} key The key of the property to assign.
+ * @param {*} value The value to assign.
+ */
 function assignValue(object, key, value) {
   var objValue = object[key];
   if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
@@ -133292,10 +137407,17 @@ function assignValue(object, key, value) {
 
 module.exports = assignValue;
 
-},{"./_baseAssignValue":335,"./eq":431}],333:[function(require,module,exports){
+},{"./_baseAssignValue":339,"./eq":435}],337:[function(require,module,exports){
 var eq = require('./eq');
 
-
+/**
+ * Gets the index at which the `key` is found in `array` of key-value pairs.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} key The key to search for.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
 function assocIndexOf(array, key) {
   var length = array.length;
   while (length--) {
@@ -133308,21 +137430,37 @@ function assocIndexOf(array, key) {
 
 module.exports = assocIndexOf;
 
-},{"./eq":431}],334:[function(require,module,exports){
+},{"./eq":435}],338:[function(require,module,exports){
 var copyObject = require('./_copyObject'),
     keys = require('./keys');
 
-
+/**
+ * The base implementation of `_.assign` without support for multiple sources
+ * or `customizer` functions.
+ *
+ * @private
+ * @param {Object} object The destination object.
+ * @param {Object} source The source object.
+ * @returns {Object} Returns `object`.
+ */
 function baseAssign(object, source) {
   return object && copyObject(source, keys(source), object);
 }
 
 module.exports = baseAssign;
 
-},{"./_copyObject":364,"./keys":447}],335:[function(require,module,exports){
+},{"./_copyObject":368,"./keys":451}],339:[function(require,module,exports){
 var defineProperty = require('./_defineProperty');
 
-
+/**
+ * The base implementation of `assignValue` and `assignMergeValue` without
+ * value checks.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {string} key The key of the property to assign.
+ * @param {*} value The value to assign.
+ */
 function baseAssignValue(object, key, value) {
   if (key == '__proto__' && defineProperty) {
     defineProperty(object, key, {
@@ -133338,13 +137476,20 @@ function baseAssignValue(object, key, value) {
 
 module.exports = baseAssignValue;
 
-},{"./_defineProperty":369}],336:[function(require,module,exports){
+},{"./_defineProperty":373}],340:[function(require,module,exports){
 var isObject = require('./isObject');
 
-
+/** Built-in value references. */
 var objectCreate = Object.create;
 
-
+/**
+ * The base implementation of `_.create` without support for assigning
+ * properties to the created object.
+ *
+ * @private
+ * @param {Object} proto The object to inherit from.
+ * @returns {Object} Returns the new object.
+ */
 var baseCreate = (function() {
   function object() {}
   return function(proto) {
@@ -133363,19 +137508,34 @@ var baseCreate = (function() {
 
 module.exports = baseCreate;
 
-},{"./isObject":443}],337:[function(require,module,exports){
+},{"./isObject":447}],341:[function(require,module,exports){
 var baseForOwn = require('./_baseForOwn'),
     createBaseEach = require('./_createBaseEach');
 
-
+/**
+ * The base implementation of `_.forEach` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array|Object} Returns `collection`.
+ */
 var baseEach = createBaseEach(baseForOwn);
 
 module.exports = baseEach;
 
-},{"./_baseForOwn":340,"./_createBaseEach":367}],338:[function(require,module,exports){
+},{"./_baseForOwn":344,"./_createBaseEach":371}],342:[function(require,module,exports){
 var baseEach = require('./_baseEach');
 
-
+/**
+ * The base implementation of `_.every` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} predicate The function invoked per iteration.
+ * @returns {boolean} Returns `true` if all elements pass the predicate check,
+ *  else `false`
+ */
 function baseEvery(collection, predicate) {
   var result = true;
   baseEach(collection, function(value, index, collection) {
@@ -133387,30 +137547,54 @@ function baseEvery(collection, predicate) {
 
 module.exports = baseEvery;
 
-},{"./_baseEach":337}],339:[function(require,module,exports){
+},{"./_baseEach":341}],343:[function(require,module,exports){
 var createBaseFor = require('./_createBaseFor');
 
-
+/**
+ * The base implementation of `baseForOwn` which iterates over `object`
+ * properties returned by `keysFunc` and invokes `iteratee` for each property.
+ * Iteratee functions may exit iteration early by explicitly returning `false`.
+ *
+ * @private
+ * @param {Object} object The object to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @param {Function} keysFunc The function to get the keys of `object`.
+ * @returns {Object} Returns `object`.
+ */
 var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"./_createBaseFor":368}],340:[function(require,module,exports){
+},{"./_createBaseFor":372}],344:[function(require,module,exports){
 var baseFor = require('./_baseFor'),
     keys = require('./keys');
 
-
+/**
+ * The base implementation of `_.forOwn` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The object to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Object} Returns `object`.
+ */
 function baseForOwn(object, iteratee) {
   return object && baseFor(object, iteratee, keys);
 }
 
 module.exports = baseForOwn;
 
-},{"./_baseFor":339,"./keys":447}],341:[function(require,module,exports){
+},{"./_baseFor":343,"./keys":451}],345:[function(require,module,exports){
 var castPath = require('./_castPath'),
     toKey = require('./_toKey');
 
-
+/**
+ * The base implementation of `_.get` without support for default values.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path of the property to get.
+ * @returns {*} Returns the resolved value.
+ */
 function baseGet(object, path) {
   path = castPath(path, object);
 
@@ -133425,11 +137609,21 @@ function baseGet(object, path) {
 
 module.exports = baseGet;
 
-},{"./_castPath":363,"./_toKey":426}],342:[function(require,module,exports){
+},{"./_castPath":367,"./_toKey":430}],346:[function(require,module,exports){
 var arrayPush = require('./_arrayPush'),
     isArray = require('./isArray');
 
-
+/**
+ * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
+ * `keysFunc` and `symbolsFunc` to get the enumerable property names and
+ * symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Function} keysFunc The function to get the keys of `object`.
+ * @param {Function} symbolsFunc The function to get the symbols of `object`.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
 function baseGetAllKeys(object, keysFunc, symbolsFunc) {
   var result = keysFunc(object);
   return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
@@ -133437,19 +137631,25 @@ function baseGetAllKeys(object, keysFunc, symbolsFunc) {
 
 module.exports = baseGetAllKeys;
 
-},{"./_arrayPush":330,"./isArray":437}],343:[function(require,module,exports){
+},{"./_arrayPush":334,"./isArray":441}],347:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     getRawTag = require('./_getRawTag'),
     objectToString = require('./_objectToString');
 
-
+/** `Object#toString` result references. */
 var nullTag = '[object Null]',
     undefinedTag = '[object Undefined]';
 
-
+/** Built-in value references. */
 var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
 
-
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
 function baseGetTag(value) {
   if (value == null) {
     return value === undefined ? undefinedTag : nullTag;
@@ -133461,33 +137661,59 @@ function baseGetTag(value) {
 
 module.exports = baseGetTag;
 
-},{"./_Symbol":322,"./_getRawTag":378,"./_objectToString":411}],344:[function(require,module,exports){
-
+},{"./_Symbol":326,"./_getRawTag":382,"./_objectToString":415}],348:[function(require,module,exports){
+/**
+ * The base implementation of `_.hasIn` without support for deep paths.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {Array|string} key The key to check.
+ * @returns {boolean} Returns `true` if `key` exists, else `false`.
+ */
 function baseHasIn(object, key) {
   return object != null && key in Object(object);
 }
 
 module.exports = baseHasIn;
 
-},{}],345:[function(require,module,exports){
+},{}],349:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObjectLike = require('./isObjectLike');
 
-
+/** `Object#toString` result references. */
 var argsTag = '[object Arguments]';
 
-
+/**
+ * The base implementation of `_.isArguments`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ */
 function baseIsArguments(value) {
   return isObjectLike(value) && baseGetTag(value) == argsTag;
 }
 
 module.exports = baseIsArguments;
 
-},{"./_baseGetTag":343,"./isObjectLike":444}],346:[function(require,module,exports){
+},{"./_baseGetTag":347,"./isObjectLike":448}],350:[function(require,module,exports){
 var baseIsEqualDeep = require('./_baseIsEqualDeep'),
     isObjectLike = require('./isObjectLike');
 
-
+/**
+ * The base implementation of `_.isEqual` which supports partial comparisons
+ * and tracks traversed objects.
+ *
+ * @private
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @param {boolean} bitmask The bitmask flags.
+ *  1 - Unordered comparison
+ *  2 - Partial comparison
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @param {Object} [stack] Tracks traversed `value` and `other` objects.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ */
 function baseIsEqual(value, other, bitmask, customizer, stack) {
   if (value === other) {
     return true;
@@ -133500,7 +137726,7 @@ function baseIsEqual(value, other, bitmask, customizer, stack) {
 
 module.exports = baseIsEqual;
 
-},{"./_baseIsEqualDeep":347,"./isObjectLike":444}],347:[function(require,module,exports){
+},{"./_baseIsEqualDeep":351,"./isObjectLike":448}],351:[function(require,module,exports){
 var Stack = require('./_Stack'),
     equalArrays = require('./_equalArrays'),
     equalByTag = require('./_equalByTag'),
@@ -133510,21 +137736,34 @@ var Stack = require('./_Stack'),
     isBuffer = require('./isBuffer'),
     isTypedArray = require('./isTypedArray');
 
-
+/** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
 
-
+/** `Object#toString` result references. */
 var argsTag = '[object Arguments]',
     arrayTag = '[object Array]',
     objectTag = '[object Object]';
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * A specialized version of `baseIsEqual` for arrays and objects which performs
+ * deep comparisons and tracks traversed objects enabling objects with circular
+ * references to be compared.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} [stack] Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
 function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
   var objIsArr = isArray(object),
       othIsArr = isArray(other),
@@ -133572,15 +137811,24 @@ function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
 
 module.exports = baseIsEqualDeep;
 
-},{"./_Stack":321,"./_equalArrays":370,"./_equalByTag":371,"./_equalObjects":372,"./_getTag":380,"./isArray":437,"./isBuffer":439,"./isTypedArray":446}],348:[function(require,module,exports){
+},{"./_Stack":325,"./_equalArrays":374,"./_equalByTag":375,"./_equalObjects":376,"./_getTag":384,"./isArray":441,"./isBuffer":443,"./isTypedArray":450}],352:[function(require,module,exports){
 var Stack = require('./_Stack'),
     baseIsEqual = require('./_baseIsEqual');
 
-
+/** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
     COMPARE_UNORDERED_FLAG = 2;
 
-
+/**
+ * The base implementation of `_.isMatch` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The object to inspect.
+ * @param {Object} source The object of property values to match.
+ * @param {Array} matchData The property names, values, and compare flags to match.
+ * @param {Function} [customizer] The function to customize comparisons.
+ * @returns {boolean} Returns `true` if `object` is a match, else `false`.
+ */
 function baseIsMatch(object, source, matchData, customizer) {
   var index = matchData.length,
       length = index,
@@ -133627,35 +137875,45 @@ function baseIsMatch(object, source, matchData, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"./_Stack":321,"./_baseIsEqual":346}],349:[function(require,module,exports){
+},{"./_Stack":325,"./_baseIsEqual":350}],353:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isMasked = require('./_isMasked'),
     isObject = require('./isObject'),
     toSource = require('./_toSource');
 
-
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
 var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 
-
+/** Used to detect host constructors (Safari). */
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
 
-
+/** Used for built-in method references. */
 var funcProto = Function.prototype,
     objectProto = Object.prototype;
 
-
+/** Used to resolve the decompiled source of functions. */
 var funcToString = funcProto.toString;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/** Used to detect if a method is native. */
 var reIsNative = RegExp('^' +
   funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
   .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
 );
 
-
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
 function baseIsNative(value) {
   if (!isObject(value) || isMasked(value)) {
     return false;
@@ -133666,12 +137924,12 @@ function baseIsNative(value) {
 
 module.exports = baseIsNative;
 
-},{"./_isMasked":392,"./_toSource":427,"./isFunction":441,"./isObject":443}],350:[function(require,module,exports){
+},{"./_isMasked":396,"./_toSource":431,"./isFunction":445,"./isObject":447}],354:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isLength = require('./isLength'),
     isObjectLike = require('./isObjectLike');
 
-
+/** `Object#toString` result references. */
 var argsTag = '[object Arguments]',
     arrayTag = '[object Array]',
     boolTag = '[object Boolean]',
@@ -133698,7 +137956,7 @@ var arrayBufferTag = '[object ArrayBuffer]',
     uint16Tag = '[object Uint16Array]',
     uint32Tag = '[object Uint32Array]';
 
-
+/** Used to identify `toStringTag` values of typed arrays. */
 var typedArrayTags = {};
 typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
 typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
@@ -133714,7 +137972,13 @@ typedArrayTags[objectTag] = typedArrayTags[regexpTag] =
 typedArrayTags[setTag] = typedArrayTags[stringTag] =
 typedArrayTags[weakMapTag] = false;
 
-
+/**
+ * The base implementation of `_.isTypedArray` without Node.js optimizations.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ */
 function baseIsTypedArray(value) {
   return isObjectLike(value) &&
     isLength(value.length) && !!typedArrayTags[baseGetTag(value)];
@@ -133722,15 +137986,23 @@ function baseIsTypedArray(value) {
 
 module.exports = baseIsTypedArray;
 
-},{"./_baseGetTag":343,"./isLength":442,"./isObjectLike":444}],351:[function(require,module,exports){
+},{"./_baseGetTag":347,"./isLength":446,"./isObjectLike":448}],355:[function(require,module,exports){
 var baseMatches = require('./_baseMatches'),
     baseMatchesProperty = require('./_baseMatchesProperty'),
     identity = require('./identity'),
     isArray = require('./isArray'),
     property = require('./property');
 
-
+/**
+ * The base implementation of `_.iteratee`.
+ *
+ * @private
+ * @param {*} [value=_.identity] The value to convert to an iteratee.
+ * @returns {Function} Returns the iteratee.
+ */
 function baseIteratee(value) {
+  // Don't store the `typeof` result in a variable to avoid a JIT bug in Safari 9.
+  // See https://bugs.webkit.org/show_bug.cgi?id=156034 for more details.
   if (typeof value == 'function') {
     return value;
   }
@@ -133747,17 +138019,23 @@ function baseIteratee(value) {
 
 module.exports = baseIteratee;
 
-},{"./_baseMatches":353,"./_baseMatchesProperty":354,"./identity":435,"./isArray":437,"./property":449}],352:[function(require,module,exports){
+},{"./_baseMatches":357,"./_baseMatchesProperty":358,"./identity":439,"./isArray":441,"./property":453}],356:[function(require,module,exports){
 var isPrototype = require('./_isPrototype'),
     nativeKeys = require('./_nativeKeys');
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
 function baseKeys(object) {
   if (!isPrototype(object)) {
     return nativeKeys(object);
@@ -133773,12 +138051,18 @@ function baseKeys(object) {
 
 module.exports = baseKeys;
 
-},{"./_isPrototype":393,"./_nativeKeys":409}],353:[function(require,module,exports){
+},{"./_isPrototype":397,"./_nativeKeys":413}],357:[function(require,module,exports){
 var baseIsMatch = require('./_baseIsMatch'),
     getMatchData = require('./_getMatchData'),
     matchesStrictComparable = require('./_matchesStrictComparable');
 
-
+/**
+ * The base implementation of `_.matches` which doesn't clone `source`.
+ *
+ * @private
+ * @param {Object} source The object of property values to match.
+ * @returns {Function} Returns the new spec function.
+ */
 function baseMatches(source) {
   var matchData = getMatchData(source);
   if (matchData.length == 1 && matchData[0][2]) {
@@ -133791,7 +138075,7 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"./_baseIsMatch":348,"./_getMatchData":376,"./_matchesStrictComparable":406}],354:[function(require,module,exports){
+},{"./_baseIsMatch":352,"./_getMatchData":380,"./_matchesStrictComparable":410}],358:[function(require,module,exports){
 var baseIsEqual = require('./_baseIsEqual'),
     get = require('./get'),
     hasIn = require('./hasIn'),
@@ -133800,11 +138084,18 @@ var baseIsEqual = require('./_baseIsEqual'),
     matchesStrictComparable = require('./_matchesStrictComparable'),
     toKey = require('./_toKey');
 
-
+/** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
     COMPARE_UNORDERED_FLAG = 2;
 
-
+/**
+ * The base implementation of `_.matchesProperty` which doesn't clone `srcValue`.
+ *
+ * @private
+ * @param {string} path The path of the property to get.
+ * @param {*} srcValue The value to match.
+ * @returns {Function} Returns the new spec function.
+ */
 function baseMatchesProperty(path, srcValue) {
   if (isKey(path) && isStrictComparable(srcValue)) {
     return matchesStrictComparable(toKey(path), srcValue);
@@ -133819,8 +138110,14 @@ function baseMatchesProperty(path, srcValue) {
 
 module.exports = baseMatchesProperty;
 
-},{"./_baseIsEqual":346,"./_isKey":390,"./_isStrictComparable":394,"./_matchesStrictComparable":406,"./_toKey":426,"./get":433,"./hasIn":434}],355:[function(require,module,exports){
-
+},{"./_baseIsEqual":350,"./_isKey":394,"./_isStrictComparable":398,"./_matchesStrictComparable":410,"./_toKey":430,"./get":437,"./hasIn":438}],359:[function(require,module,exports){
+/**
+ * The base implementation of `_.property` without support for deep paths.
+ *
+ * @private
+ * @param {string} key The key of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ */
 function baseProperty(key) {
   return function(object) {
     return object == null ? undefined : object[key];
@@ -133829,10 +138126,16 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],356:[function(require,module,exports){
+},{}],360:[function(require,module,exports){
 var baseGet = require('./_baseGet');
 
-
+/**
+ * A specialized version of `baseProperty` which supports deep paths.
+ *
+ * @private
+ * @param {Array|string} path The path of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ */
 function basePropertyDeep(path) {
   return function(object) {
     return baseGet(object, path);
@@ -133841,24 +138144,38 @@ function basePropertyDeep(path) {
 
 module.exports = basePropertyDeep;
 
-},{"./_baseGet":341}],357:[function(require,module,exports){
+},{"./_baseGet":345}],361:[function(require,module,exports){
 var identity = require('./identity'),
     overRest = require('./_overRest'),
     setToString = require('./_setToString');
 
-
+/**
+ * The base implementation of `_.rest` which doesn't validate or coerce arguments.
+ *
+ * @private
+ * @param {Function} func The function to apply a rest parameter to.
+ * @param {number} [start=func.length-1] The start position of the rest parameter.
+ * @returns {Function} Returns the new function.
+ */
 function baseRest(func, start) {
   return setToString(overRest(func, start, identity), func + '');
 }
 
 module.exports = baseRest;
 
-},{"./_overRest":413,"./_setToString":418,"./identity":435}],358:[function(require,module,exports){
+},{"./_overRest":417,"./_setToString":422,"./identity":439}],362:[function(require,module,exports){
 var constant = require('./constant'),
     defineProperty = require('./_defineProperty'),
     identity = require('./identity');
 
-
+/**
+ * The base implementation of `setToString` without support for hot loop shorting.
+ *
+ * @private
+ * @param {Function} func The function to modify.
+ * @param {Function} string The `toString` result.
+ * @returns {Function} Returns `func`.
+ */
 var baseSetToString = !defineProperty ? identity : function(func, string) {
   return defineProperty(func, 'toString', {
     'configurable': true,
@@ -133870,8 +138187,16 @@ var baseSetToString = !defineProperty ? identity : function(func, string) {
 
 module.exports = baseSetToString;
 
-},{"./_defineProperty":369,"./constant":429,"./identity":435}],359:[function(require,module,exports){
-
+},{"./_defineProperty":373,"./constant":433,"./identity":439}],363:[function(require,module,exports){
+/**
+ * The base implementation of `_.times` without support for iteratee shorthands
+ * or max array length checks.
+ *
+ * @private
+ * @param {number} n The number of times to invoke `iteratee`.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the array of results.
+ */
 function baseTimes(n, iteratee) {
   var index = -1,
       result = Array(n);
@@ -133884,25 +138209,34 @@ function baseTimes(n, iteratee) {
 
 module.exports = baseTimes;
 
-},{}],360:[function(require,module,exports){
+},{}],364:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     arrayMap = require('./_arrayMap'),
     isArray = require('./isArray'),
     isSymbol = require('./isSymbol');
 
-
+/** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0;
 
-
+/** Used to convert symbols to primitives and strings. */
 var symbolProto = Symbol ? Symbol.prototype : undefined,
     symbolToString = symbolProto ? symbolProto.toString : undefined;
 
-
+/**
+ * The base implementation of `_.toString` which doesn't convert nullish
+ * values to empty strings.
+ *
+ * @private
+ * @param {*} value The value to process.
+ * @returns {string} Returns the string.
+ */
 function baseToString(value) {
+  // Exit early for strings to avoid a performance hit in some environments.
   if (typeof value == 'string') {
     return value;
   }
   if (isArray(value)) {
+    // Recursively convert values (susceptible to call stack limits).
     return arrayMap(value, baseToString) + '';
   }
   if (isSymbol(value)) {
@@ -133914,8 +138248,14 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{"./_Symbol":322,"./_arrayMap":329,"./isArray":437,"./isSymbol":445}],361:[function(require,module,exports){
-
+},{"./_Symbol":326,"./_arrayMap":333,"./isArray":441,"./isSymbol":449}],365:[function(require,module,exports){
+/**
+ * The base implementation of `_.unary` without support for storing metadata.
+ *
+ * @private
+ * @param {Function} func The function to cap arguments for.
+ * @returns {Function} Returns the new capped function.
+ */
 function baseUnary(func) {
   return function(value) {
     return func(value);
@@ -133924,21 +138264,35 @@ function baseUnary(func) {
 
 module.exports = baseUnary;
 
-},{}],362:[function(require,module,exports){
-
+},{}],366:[function(require,module,exports){
+/**
+ * Checks if a `cache` value for `key` exists.
+ *
+ * @private
+ * @param {Object} cache The cache to query.
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
 function cacheHas(cache, key) {
   return cache.has(key);
 }
 
 module.exports = cacheHas;
 
-},{}],363:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 var isArray = require('./isArray'),
     isKey = require('./_isKey'),
     stringToPath = require('./_stringToPath'),
     toString = require('./toString');
 
-
+/**
+ * Casts `value` to a path array if it's not one.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @param {Object} [object] The object to query keys on.
+ * @returns {Array} Returns the cast property path array.
+ */
 function castPath(value, object) {
   if (isArray(value)) {
     return value;
@@ -133948,11 +138302,20 @@ function castPath(value, object) {
 
 module.exports = castPath;
 
-},{"./_isKey":390,"./_stringToPath":425,"./isArray":437,"./toString":452}],364:[function(require,module,exports){
+},{"./_isKey":394,"./_stringToPath":429,"./isArray":441,"./toString":456}],368:[function(require,module,exports){
 var assignValue = require('./_assignValue'),
     baseAssignValue = require('./_baseAssignValue');
 
-
+/**
+ * Copies properties of `source` to `object`.
+ *
+ * @private
+ * @param {Object} source The object to copy properties from.
+ * @param {Array} props The property identifiers to copy.
+ * @param {Object} [object={}] The object to copy properties to.
+ * @param {Function} [customizer] The function to customize copied values.
+ * @returns {Object} Returns `object`.
+ */
 function copyObject(source, props, object, customizer) {
   var isNew = !object;
   object || (object = {});
@@ -133981,19 +138344,25 @@ function copyObject(source, props, object, customizer) {
 
 module.exports = copyObject;
 
-},{"./_assignValue":332,"./_baseAssignValue":335}],365:[function(require,module,exports){
+},{"./_assignValue":336,"./_baseAssignValue":339}],369:[function(require,module,exports){
 var root = require('./_root');
 
-
+/** Used to detect overreaching core-js shims. */
 var coreJsData = root['__core-js_shared__'];
 
 module.exports = coreJsData;
 
-},{"./_root":414}],366:[function(require,module,exports){
+},{"./_root":418}],370:[function(require,module,exports){
 var baseRest = require('./_baseRest'),
     isIterateeCall = require('./_isIterateeCall');
 
-
+/**
+ * Creates a function like `_.assign`.
+ *
+ * @private
+ * @param {Function} assigner The function to assign values.
+ * @returns {Function} Returns the new assigner function.
+ */
 function createAssigner(assigner) {
   return baseRest(function(object, sources) {
     var index = -1,
@@ -134022,10 +138391,17 @@ function createAssigner(assigner) {
 
 module.exports = createAssigner;
 
-},{"./_baseRest":357,"./_isIterateeCall":389}],367:[function(require,module,exports){
+},{"./_baseRest":361,"./_isIterateeCall":393}],371:[function(require,module,exports){
 var isArrayLike = require('./isArrayLike');
 
-
+/**
+ * Creates a `baseEach` or `baseEachRight` function.
+ *
+ * @private
+ * @param {Function} eachFunc The function to iterate over a collection.
+ * @param {boolean} [fromRight] Specify iterating from right to left.
+ * @returns {Function} Returns the new base function.
+ */
 function createBaseEach(eachFunc, fromRight) {
   return function(collection, iteratee) {
     if (collection == null) {
@@ -134049,8 +138425,14 @@ function createBaseEach(eachFunc, fromRight) {
 
 module.exports = createBaseEach;
 
-},{"./isArrayLike":438}],368:[function(require,module,exports){
-
+},{"./isArrayLike":442}],372:[function(require,module,exports){
+/**
+ * Creates a base function for methods like `_.forIn` and `_.forOwn`.
+ *
+ * @private
+ * @param {boolean} [fromRight] Specify iterating from right to left.
+ * @returns {Function} Returns the new base function.
+ */
 function createBaseFor(fromRight) {
   return function(object, iteratee, keysFunc) {
     var index = -1,
@@ -134070,7 +138452,7 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-},{}],369:[function(require,module,exports){
+},{}],373:[function(require,module,exports){
 var getNative = require('./_getNative');
 
 var defineProperty = (function() {
@@ -134083,16 +138465,28 @@ var defineProperty = (function() {
 
 module.exports = defineProperty;
 
-},{"./_getNative":377}],370:[function(require,module,exports){
+},{"./_getNative":381}],374:[function(require,module,exports){
 var SetCache = require('./_SetCache'),
     arraySome = require('./_arraySome'),
     cacheHas = require('./_cacheHas');
 
-
+/** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
     COMPARE_UNORDERED_FLAG = 2;
 
-
+/**
+ * A specialized version of `baseIsEqualDeep` for arrays with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Array} array The array to compare.
+ * @param {Array} other The other array to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `array` and `other` objects.
+ * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
+ */
 function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
   var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
       arrLength = array.length,
@@ -134101,6 +138495,7 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
   if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
     return false;
   }
+  // Assume cyclic values are equal.
   var stacked = stack.get(array);
   if (stacked && stack.get(other)) {
     return stacked == other;
@@ -134112,6 +138507,7 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
   stack.set(array, other);
   stack.set(other, array);
 
+  // Ignore non-index properties.
   while (++index < arrLength) {
     var arrValue = array[index],
         othValue = other[index];
@@ -134128,6 +138524,7 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
       result = false;
       break;
     }
+    // Recursively compare arrays (susceptible to call stack limits).
     if (seen) {
       if (!arraySome(other, function(othValue, othIndex) {
             if (!cacheHas(seen, othIndex) &&
@@ -134153,7 +138550,7 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
 
 module.exports = equalArrays;
 
-},{"./_SetCache":320,"./_arraySome":331,"./_cacheHas":362}],371:[function(require,module,exports){
+},{"./_SetCache":324,"./_arraySome":335,"./_cacheHas":366}],375:[function(require,module,exports){
 var Symbol = require('./_Symbol'),
     Uint8Array = require('./_Uint8Array'),
     eq = require('./eq'),
@@ -134161,11 +138558,11 @@ var Symbol = require('./_Symbol'),
     mapToArray = require('./_mapToArray'),
     setToArray = require('./_setToArray');
 
-
+/** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
     COMPARE_UNORDERED_FLAG = 2;
 
-
+/** `Object#toString` result references. */
 var boolTag = '[object Boolean]',
     dateTag = '[object Date]',
     errorTag = '[object Error]',
@@ -134179,11 +138576,27 @@ var boolTag = '[object Boolean]',
 var arrayBufferTag = '[object ArrayBuffer]',
     dataViewTag = '[object DataView]';
 
-
+/** Used to convert symbols to primitives and strings. */
 var symbolProto = Symbol ? Symbol.prototype : undefined,
     symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
 
-
+/**
+ * A specialized version of `baseIsEqualDeep` for comparing objects of
+ * the same `toStringTag`.
+ *
+ * **Note:** This function only supports comparing values with tags of
+ * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {string} tag The `toStringTag` of the objects to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
 function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
   switch (tag) {
     case dataViewTag:
@@ -134204,6 +138617,8 @@ function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
     case boolTag:
     case dateTag:
     case numberTag:
+      // Coerce booleans to `1` or `0` and dates to milliseconds.
+      // Invalid dates are coerced to `NaN`.
       return eq(+object, +other);
 
     case errorTag:
@@ -134211,6 +138626,9 @@ function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
 
     case regexpTag:
     case stringTag:
+      // Coerce regexes to strings and treat strings, primitives and objects,
+      // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
+      // for more details.
       return object == (other + '');
 
     case mapTag:
@@ -134223,12 +138641,14 @@ function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
       if (object.size != other.size && !isPartial) {
         return false;
       }
+      // Assume cyclic values are equal.
       var stacked = stack.get(object);
       if (stacked) {
         return stacked == other;
       }
       bitmask |= COMPARE_UNORDERED_FLAG;
 
+      // Recursively compare objects (susceptible to call stack limits).
       stack.set(object, other);
       var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
       stack['delete'](object);
@@ -134244,19 +138664,31 @@ function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
 
 module.exports = equalByTag;
 
-},{"./_Symbol":322,"./_Uint8Array":323,"./_equalArrays":370,"./_mapToArray":405,"./_setToArray":417,"./eq":431}],372:[function(require,module,exports){
+},{"./_Symbol":326,"./_Uint8Array":327,"./_equalArrays":374,"./_mapToArray":409,"./_setToArray":421,"./eq":435}],376:[function(require,module,exports){
 var getAllKeys = require('./_getAllKeys');
 
-
+/** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * A specialized version of `baseIsEqualDeep` for objects with support for
+ * partial deep comparisons.
+ *
+ * @private
+ * @param {Object} object The object to compare.
+ * @param {Object} other The other object to compare.
+ * @param {number} bitmask The bitmask flags. See `baseIsEqual` for more details.
+ * @param {Function} customizer The function to customize comparisons.
+ * @param {Function} equalFunc The function to determine equivalents of values.
+ * @param {Object} stack Tracks traversed `object` and `other` objects.
+ * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
+ */
 function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
   var isPartial = bitmask & COMPARE_PARTIAL_FLAG,
       objProps = getAllKeys(object),
@@ -134274,6 +138706,7 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
       return false;
     }
   }
+  // Assume cyclic values are equal.
   var stacked = stack.get(object);
   if (stacked && stack.get(other)) {
     return stacked == other;
@@ -134293,6 +138726,7 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
         ? customizer(othValue, objValue, key, other, object, stack)
         : customizer(objValue, othValue, key, object, other, stack);
     }
+    // Recursively compare objects (susceptible to call stack limits).
     if (!(compared === undefined
           ? (objValue === othValue || equalFunc(objValue, othValue, bitmask, customizer, stack))
           : compared
@@ -134306,6 +138740,7 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
     var objCtor = object.constructor,
         othCtor = other.constructor;
 
+    // Non `Object` object instances with different constructors are not equal.
     if (objCtor != othCtor &&
         ('constructor' in object && 'constructor' in other) &&
         !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
@@ -134320,30 +138755,43 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
 
 module.exports = equalObjects;
 
-},{"./_getAllKeys":374}],373:[function(require,module,exports){
+},{"./_getAllKeys":378}],377:[function(require,module,exports){
 (function (global){
-
+/** Detect free variable `global` from Node.js. */
 var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
 
 module.exports = freeGlobal;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],374:[function(require,module,exports){
+},{}],378:[function(require,module,exports){
 var baseGetAllKeys = require('./_baseGetAllKeys'),
     getSymbols = require('./_getSymbols'),
     keys = require('./keys');
 
-
+/**
+ * Creates an array of own enumerable property names and symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
 function getAllKeys(object) {
   return baseGetAllKeys(object, keys, getSymbols);
 }
 
 module.exports = getAllKeys;
 
-},{"./_baseGetAllKeys":342,"./_getSymbols":379,"./keys":447}],375:[function(require,module,exports){
+},{"./_baseGetAllKeys":346,"./_getSymbols":383,"./keys":451}],379:[function(require,module,exports){
 var isKeyable = require('./_isKeyable');
 
-
+/**
+ * Gets the data for `map`.
+ *
+ * @private
+ * @param {Object} map The map to query.
+ * @param {string} key The reference key.
+ * @returns {*} Returns the map data.
+ */
 function getMapData(map, key) {
   var data = map.__data__;
   return isKeyable(key)
@@ -134353,11 +138801,17 @@ function getMapData(map, key) {
 
 module.exports = getMapData;
 
-},{"./_isKeyable":391}],376:[function(require,module,exports){
+},{"./_isKeyable":395}],380:[function(require,module,exports){
 var isStrictComparable = require('./_isStrictComparable'),
     keys = require('./keys');
 
-
+/**
+ * Gets the property names, values, and compare flags of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the match data of `object`.
+ */
 function getMatchData(object) {
   var result = keys(object),
       length = result.length;
@@ -134373,11 +138827,18 @@ function getMatchData(object) {
 
 module.exports = getMatchData;
 
-},{"./_isStrictComparable":394,"./keys":447}],377:[function(require,module,exports){
+},{"./_isStrictComparable":398,"./keys":451}],381:[function(require,module,exports){
 var baseIsNative = require('./_baseIsNative'),
     getValue = require('./_getValue');
 
-
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
 function getNative(object, key) {
   var value = getValue(object, key);
   return baseIsNative(value) ? value : undefined;
@@ -134385,22 +138846,32 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"./_baseIsNative":349,"./_getValue":381}],378:[function(require,module,exports){
+},{"./_baseIsNative":353,"./_getValue":385}],382:[function(require,module,exports){
 var Symbol = require('./_Symbol');
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
 var nativeObjectToString = objectProto.toString;
 
-
+/** Built-in value references. */
 var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
 
-
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
 function getRawTag(value) {
   var isOwn = hasOwnProperty.call(value, symToStringTag),
       tag = value[symToStringTag];
@@ -134423,20 +138894,26 @@ function getRawTag(value) {
 
 module.exports = getRawTag;
 
-},{"./_Symbol":322}],379:[function(require,module,exports){
+},{"./_Symbol":326}],383:[function(require,module,exports){
 var arrayFilter = require('./_arrayFilter'),
     stubArray = require('./stubArray');
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Built-in value references. */
 var propertyIsEnumerable = objectProto.propertyIsEnumerable;
 
-
+/* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeGetSymbols = Object.getOwnPropertySymbols;
 
-
+/**
+ * Creates an array of the own enumerable symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of symbols.
+ */
 var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
   if (object == null) {
     return [];
@@ -134449,7 +138926,7 @@ var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
 
 module.exports = getSymbols;
 
-},{"./_arrayFilter":327,"./stubArray":450}],380:[function(require,module,exports){
+},{"./_arrayFilter":331,"./stubArray":454}],384:[function(require,module,exports){
 var DataView = require('./_DataView'),
     Map = require('./_Map'),
     Promise = require('./_Promise'),
@@ -134458,7 +138935,7 @@ var DataView = require('./_DataView'),
     baseGetTag = require('./_baseGetTag'),
     toSource = require('./_toSource');
 
-
+/** `Object#toString` result references. */
 var mapTag = '[object Map]',
     objectTag = '[object Object]',
     promiseTag = '[object Promise]',
@@ -134467,16 +138944,23 @@ var mapTag = '[object Map]',
 
 var dataViewTag = '[object DataView]';
 
-
+/** Used to detect maps, sets, and weakmaps. */
 var dataViewCtorString = toSource(DataView),
     mapCtorString = toSource(Map),
     promiseCtorString = toSource(Promise),
     setCtorString = toSource(Set),
     weakMapCtorString = toSource(WeakMap);
 
-
+/**
+ * Gets the `toStringTag` of `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
 var getTag = baseGetTag;
 
+// Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
 if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
     (Map && getTag(new Map) != mapTag) ||
     (Promise && getTag(Promise.resolve()) != promiseTag) ||
@@ -134502,15 +138986,22 @@ if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
 
 module.exports = getTag;
 
-},{"./_DataView":313,"./_Map":316,"./_Promise":318,"./_Set":319,"./_WeakMap":324,"./_baseGetTag":343,"./_toSource":427}],381:[function(require,module,exports){
-
+},{"./_DataView":317,"./_Map":320,"./_Promise":322,"./_Set":323,"./_WeakMap":328,"./_baseGetTag":347,"./_toSource":431}],385:[function(require,module,exports){
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
 function getValue(object, key) {
   return object == null ? undefined : object[key];
 }
 
 module.exports = getValue;
 
-},{}],382:[function(require,module,exports){
+},{}],386:[function(require,module,exports){
 var castPath = require('./_castPath'),
     isArguments = require('./isArguments'),
     isArray = require('./isArray'),
@@ -134518,7 +139009,15 @@ var castPath = require('./_castPath'),
     isLength = require('./isLength'),
     toKey = require('./_toKey');
 
-
+/**
+ * Checks if `path` exists on `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path to check.
+ * @param {Function} hasFunc The function to check properties.
+ * @returns {boolean} Returns `true` if `path` exists, else `false`.
+ */
 function hasPath(object, path, hasFunc) {
   path = castPath(path, object);
 
@@ -134543,10 +139042,16 @@ function hasPath(object, path, hasFunc) {
 
 module.exports = hasPath;
 
-},{"./_castPath":363,"./_isIndex":388,"./_toKey":426,"./isArguments":436,"./isArray":437,"./isLength":442}],383:[function(require,module,exports){
+},{"./_castPath":367,"./_isIndex":392,"./_toKey":430,"./isArguments":440,"./isArray":441,"./isLength":446}],387:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
-
+/**
+ * Removes all key-value entries from the hash.
+ *
+ * @private
+ * @name clear
+ * @memberOf Hash
+ */
 function hashClear() {
   this.__data__ = nativeCreate ? nativeCreate(null) : {};
   this.size = 0;
@@ -134554,8 +139059,17 @@ function hashClear() {
 
 module.exports = hashClear;
 
-},{"./_nativeCreate":408}],384:[function(require,module,exports){
-
+},{"./_nativeCreate":412}],388:[function(require,module,exports){
+/**
+ * Removes `key` and its value from the hash.
+ *
+ * @private
+ * @name delete
+ * @memberOf Hash
+ * @param {Object} hash The hash to modify.
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
 function hashDelete(key) {
   var result = this.has(key) && delete this.__data__[key];
   this.size -= result ? 1 : 0;
@@ -134564,19 +139078,27 @@ function hashDelete(key) {
 
 module.exports = hashDelete;
 
-},{}],385:[function(require,module,exports){
+},{}],389:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
-
+/** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * Gets the hash value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Hash
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
 function hashGet(key) {
   var data = this.__data__;
   if (nativeCreate) {
@@ -134588,16 +139110,24 @@ function hashGet(key) {
 
 module.exports = hashGet;
 
-},{"./_nativeCreate":408}],386:[function(require,module,exports){
+},{"./_nativeCreate":412}],390:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * Checks if a hash value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Hash
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
 function hashHas(key) {
   var data = this.__data__;
   return nativeCreate ? (data[key] !== undefined) : hasOwnProperty.call(data, key);
@@ -134605,13 +139135,22 @@ function hashHas(key) {
 
 module.exports = hashHas;
 
-},{"./_nativeCreate":408}],387:[function(require,module,exports){
+},{"./_nativeCreate":412}],391:[function(require,module,exports){
 var nativeCreate = require('./_nativeCreate');
 
-
+/** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
-
+/**
+ * Sets the hash `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Hash
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the hash instance.
+ */
 function hashSet(key, value) {
   var data = this.__data__;
   this.size += this.has(key) ? 0 : 1;
@@ -134621,14 +139160,21 @@ function hashSet(key, value) {
 
 module.exports = hashSet;
 
-},{"./_nativeCreate":408}],388:[function(require,module,exports){
-
+},{"./_nativeCreate":412}],392:[function(require,module,exports){
+/** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER = 9007199254740991;
 
-
+/** Used to detect unsigned integer values. */
 var reIsUint = /^(?:0|[1-9]\d*)$/;
 
-
+/**
+ * Checks if `value` is a valid array-like index.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+ * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ */
 function isIndex(value, length) {
   length = length == null ? MAX_SAFE_INTEGER : length;
   return !!length &&
@@ -134638,13 +139184,22 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],389:[function(require,module,exports){
+},{}],393:[function(require,module,exports){
 var eq = require('./eq'),
     isArrayLike = require('./isArrayLike'),
     isIndex = require('./_isIndex'),
     isObject = require('./isObject');
 
-
+/**
+ * Checks if the given arguments are from an iteratee call.
+ *
+ * @private
+ * @param {*} value The potential iteratee value argument.
+ * @param {*} index The potential iteratee index or key argument.
+ * @param {*} object The potential iteratee object argument.
+ * @returns {boolean} Returns `true` if the arguments are from an iteratee call,
+ *  else `false`.
+ */
 function isIterateeCall(value, index, object) {
   if (!isObject(object)) {
     return false;
@@ -134661,15 +139216,22 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
-},{"./_isIndex":388,"./eq":431,"./isArrayLike":438,"./isObject":443}],390:[function(require,module,exports){
+},{"./_isIndex":392,"./eq":435,"./isArrayLike":442,"./isObject":447}],394:[function(require,module,exports){
 var isArray = require('./isArray'),
     isSymbol = require('./isSymbol');
 
-
+/** Used to match property names within property paths. */
 var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
     reIsPlainProp = /^\w*$/;
 
-
+/**
+ * Checks if `value` is a property name and not a property path.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {Object} [object] The object to query keys on.
+ * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
+ */
 function isKey(value, object) {
   if (isArray(value)) {
     return false;
@@ -134685,8 +139247,14 @@ function isKey(value, object) {
 
 module.exports = isKey;
 
-},{"./isArray":437,"./isSymbol":445}],391:[function(require,module,exports){
-
+},{"./isArray":441,"./isSymbol":449}],395:[function(require,module,exports){
+/**
+ * Checks if `value` is suitable for use as unique object key.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+ */
 function isKeyable(value) {
   var type = typeof value;
   return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
@@ -134696,27 +139264,39 @@ function isKeyable(value) {
 
 module.exports = isKeyable;
 
-},{}],392:[function(require,module,exports){
+},{}],396:[function(require,module,exports){
 var coreJsData = require('./_coreJsData');
 
-
+/** Used to detect methods masquerading as native. */
 var maskSrcKey = (function() {
   var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
   return uid ? ('Symbol(src)_1.' + uid) : '';
 }());
 
-
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
 function isMasked(func) {
   return !!maskSrcKey && (maskSrcKey in func);
 }
 
 module.exports = isMasked;
 
-},{"./_coreJsData":365}],393:[function(require,module,exports){
-
+},{"./_coreJsData":369}],397:[function(require,module,exports){
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
 function isPrototype(value) {
   var Ctor = value && value.constructor,
       proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
@@ -134726,18 +139306,31 @@ function isPrototype(value) {
 
 module.exports = isPrototype;
 
-},{}],394:[function(require,module,exports){
+},{}],398:[function(require,module,exports){
 var isObject = require('./isObject');
 
-
+/**
+ * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` if suitable for strict
+ *  equality comparisons, else `false`.
+ */
 function isStrictComparable(value) {
   return value === value && !isObject(value);
 }
 
 module.exports = isStrictComparable;
 
-},{"./isObject":443}],395:[function(require,module,exports){
-
+},{"./isObject":447}],399:[function(require,module,exports){
+/**
+ * Removes all key-value entries from the list cache.
+ *
+ * @private
+ * @name clear
+ * @memberOf ListCache
+ */
 function listCacheClear() {
   this.__data__ = [];
   this.size = 0;
@@ -134745,16 +139338,24 @@ function listCacheClear() {
 
 module.exports = listCacheClear;
 
-},{}],396:[function(require,module,exports){
+},{}],400:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
-
+/** Used for built-in method references. */
 var arrayProto = Array.prototype;
 
-
+/** Built-in value references. */
 var splice = arrayProto.splice;
 
-
+/**
+ * Removes `key` and its value from the list cache.
+ *
+ * @private
+ * @name delete
+ * @memberOf ListCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
 function listCacheDelete(key) {
   var data = this.__data__,
       index = assocIndexOf(data, key);
@@ -134774,10 +139375,18 @@ function listCacheDelete(key) {
 
 module.exports = listCacheDelete;
 
-},{"./_assocIndexOf":333}],397:[function(require,module,exports){
+},{"./_assocIndexOf":337}],401:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
-
+/**
+ * Gets the list cache value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf ListCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
 function listCacheGet(key) {
   var data = this.__data__,
       index = assocIndexOf(data, key);
@@ -134787,20 +139396,37 @@ function listCacheGet(key) {
 
 module.exports = listCacheGet;
 
-},{"./_assocIndexOf":333}],398:[function(require,module,exports){
+},{"./_assocIndexOf":337}],402:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
-
+/**
+ * Checks if a list cache value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf ListCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
 function listCacheHas(key) {
   return assocIndexOf(this.__data__, key) > -1;
 }
 
 module.exports = listCacheHas;
 
-},{"./_assocIndexOf":333}],399:[function(require,module,exports){
+},{"./_assocIndexOf":337}],403:[function(require,module,exports){
 var assocIndexOf = require('./_assocIndexOf');
 
-
+/**
+ * Sets the list cache `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf ListCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the list cache instance.
+ */
 function listCacheSet(key, value) {
   var data = this.__data__,
       index = assocIndexOf(data, key);
@@ -134816,12 +139442,18 @@ function listCacheSet(key, value) {
 
 module.exports = listCacheSet;
 
-},{"./_assocIndexOf":333}],400:[function(require,module,exports){
+},{"./_assocIndexOf":337}],404:[function(require,module,exports){
 var Hash = require('./_Hash'),
     ListCache = require('./_ListCache'),
     Map = require('./_Map');
 
-
+/**
+ * Removes all key-value entries from the map.
+ *
+ * @private
+ * @name clear
+ * @memberOf MapCache
+ */
 function mapCacheClear() {
   this.size = 0;
   this.__data__ = {
@@ -134833,10 +139465,18 @@ function mapCacheClear() {
 
 module.exports = mapCacheClear;
 
-},{"./_Hash":314,"./_ListCache":315,"./_Map":316}],401:[function(require,module,exports){
+},{"./_Hash":318,"./_ListCache":319,"./_Map":320}],405:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
-
+/**
+ * Removes `key` and its value from the map.
+ *
+ * @private
+ * @name delete
+ * @memberOf MapCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
 function mapCacheDelete(key) {
   var result = getMapData(this, key)['delete'](key);
   this.size -= result ? 1 : 0;
@@ -134845,30 +139485,55 @@ function mapCacheDelete(key) {
 
 module.exports = mapCacheDelete;
 
-},{"./_getMapData":375}],402:[function(require,module,exports){
+},{"./_getMapData":379}],406:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
-
+/**
+ * Gets the map value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf MapCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
 function mapCacheGet(key) {
   return getMapData(this, key).get(key);
 }
 
 module.exports = mapCacheGet;
 
-},{"./_getMapData":375}],403:[function(require,module,exports){
+},{"./_getMapData":379}],407:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
-
+/**
+ * Checks if a map value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf MapCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
 function mapCacheHas(key) {
   return getMapData(this, key).has(key);
 }
 
 module.exports = mapCacheHas;
 
-},{"./_getMapData":375}],404:[function(require,module,exports){
+},{"./_getMapData":379}],408:[function(require,module,exports){
 var getMapData = require('./_getMapData');
 
-
+/**
+ * Sets the map `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf MapCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the map cache instance.
+ */
 function mapCacheSet(key, value) {
   var data = getMapData(this, key),
       size = data.size;
@@ -134880,8 +139545,14 @@ function mapCacheSet(key, value) {
 
 module.exports = mapCacheSet;
 
-},{"./_getMapData":375}],405:[function(require,module,exports){
-
+},{"./_getMapData":379}],409:[function(require,module,exports){
+/**
+ * Converts `map` to its key-value pairs.
+ *
+ * @private
+ * @param {Object} map The map to convert.
+ * @returns {Array} Returns the key-value pairs.
+ */
 function mapToArray(map) {
   var index = -1,
       result = Array(map.size);
@@ -134894,8 +139565,16 @@ function mapToArray(map) {
 
 module.exports = mapToArray;
 
-},{}],406:[function(require,module,exports){
-
+},{}],410:[function(require,module,exports){
+/**
+ * A specialized version of `matchesProperty` for source values suitable
+ * for strict equality comparisons, i.e. `===`.
+ *
+ * @private
+ * @param {string} key The key of the property to get.
+ * @param {*} srcValue The value to match.
+ * @returns {Function} Returns the new spec function.
+ */
 function matchesStrictComparable(key, srcValue) {
   return function(object) {
     if (object == null) {
@@ -134908,13 +139587,20 @@ function matchesStrictComparable(key, srcValue) {
 
 module.exports = matchesStrictComparable;
 
-},{}],407:[function(require,module,exports){
+},{}],411:[function(require,module,exports){
 var memoize = require('./memoize');
 
-
+/** Used as the maximum memoize cache size. */
 var MAX_MEMOIZE_SIZE = 500;
 
-
+/**
+ * A specialized version of `_.memoize` which clears the memoized function's
+ * cache when it exceeds `MAX_MEMOIZE_SIZE`.
+ *
+ * @private
+ * @param {Function} func The function to have its output memoized.
+ * @returns {Function} Returns the new memoized function.
+ */
 function memoizeCapped(func) {
   var result = memoize(func, function(key) {
     if (cache.size === MAX_MEMOIZE_SIZE) {
@@ -134929,38 +139615,38 @@ function memoizeCapped(func) {
 
 module.exports = memoizeCapped;
 
-},{"./memoize":448}],408:[function(require,module,exports){
+},{"./memoize":452}],412:[function(require,module,exports){
 var getNative = require('./_getNative');
 
-
+/* Built-in method references that are verified to be native. */
 var nativeCreate = getNative(Object, 'create');
 
 module.exports = nativeCreate;
 
-},{"./_getNative":377}],409:[function(require,module,exports){
+},{"./_getNative":381}],413:[function(require,module,exports){
 var overArg = require('./_overArg');
 
-
+/* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeKeys = overArg(Object.keys, Object);
 
 module.exports = nativeKeys;
 
-},{"./_overArg":412}],410:[function(require,module,exports){
+},{"./_overArg":416}],414:[function(require,module,exports){
 var freeGlobal = require('./_freeGlobal');
 
-
+/** Detect free variable `exports`. */
 var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
 
-
+/** Detect free variable `module`. */
 var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
 
-
+/** Detect the popular CommonJS extension `module.exports`. */
 var moduleExports = freeModule && freeModule.exports === freeExports;
 
-
+/** Detect free variable `process` from Node.js. */
 var freeProcess = moduleExports && freeGlobal.process;
 
-
+/** Used to access faster Node.js helpers. */
 var nodeUtil = (function() {
   try {
     return freeProcess && freeProcess.binding && freeProcess.binding('util');
@@ -134969,22 +139655,39 @@ var nodeUtil = (function() {
 
 module.exports = nodeUtil;
 
-},{"./_freeGlobal":373}],411:[function(require,module,exports){
-
+},{"./_freeGlobal":377}],415:[function(require,module,exports){
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
 var nativeObjectToString = objectProto.toString;
 
-
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
 function objectToString(value) {
   return nativeObjectToString.call(value);
 }
 
 module.exports = objectToString;
 
-},{}],412:[function(require,module,exports){
-
+},{}],416:[function(require,module,exports){
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
 function overArg(func, transform) {
   return function(arg) {
     return func(transform(arg));
@@ -134993,13 +139696,21 @@ function overArg(func, transform) {
 
 module.exports = overArg;
 
-},{}],413:[function(require,module,exports){
+},{}],417:[function(require,module,exports){
 var apply = require('./_apply');
 
-
+/* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
 
-
+/**
+ * A specialized version of `baseRest` which transforms the rest array.
+ *
+ * @private
+ * @param {Function} func The function to apply a rest parameter to.
+ * @param {number} [start=func.length-1] The start position of the rest parameter.
+ * @param {Function} transform The rest array transform.
+ * @returns {Function} Returns the new function.
+ */
 function overRest(func, start, transform) {
   start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
   return function() {
@@ -135023,22 +139734,31 @@ function overRest(func, start, transform) {
 
 module.exports = overRest;
 
-},{"./_apply":325}],414:[function(require,module,exports){
+},{"./_apply":329}],418:[function(require,module,exports){
 var freeGlobal = require('./_freeGlobal');
 
-
+/** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
 
-
+/** Used as a reference to the global object. */
 var root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root;
 
-},{"./_freeGlobal":373}],415:[function(require,module,exports){
-
+},{"./_freeGlobal":377}],419:[function(require,module,exports){
+/** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
-
+/**
+ * Adds `value` to the array cache.
+ *
+ * @private
+ * @name add
+ * @memberOf SetCache
+ * @alias push
+ * @param {*} value The value to cache.
+ * @returns {Object} Returns the cache instance.
+ */
 function setCacheAdd(value) {
   this.__data__.set(value, HASH_UNDEFINED);
   return this;
@@ -135046,16 +139766,30 @@ function setCacheAdd(value) {
 
 module.exports = setCacheAdd;
 
-},{}],416:[function(require,module,exports){
-
+},{}],420:[function(require,module,exports){
+/**
+ * Checks if `value` is in the array cache.
+ *
+ * @private
+ * @name has
+ * @memberOf SetCache
+ * @param {*} value The value to search for.
+ * @returns {number} Returns `true` if `value` is found, else `false`.
+ */
 function setCacheHas(value) {
   return this.__data__.has(value);
 }
 
 module.exports = setCacheHas;
 
-},{}],417:[function(require,module,exports){
-
+},{}],421:[function(require,module,exports){
+/**
+ * Converts `set` to an array of its values.
+ *
+ * @private
+ * @param {Object} set The set to convert.
+ * @returns {Array} Returns the values.
+ */
 function setToArray(set) {
   var index = -1,
       result = Array(set.size);
@@ -135068,24 +139802,39 @@ function setToArray(set) {
 
 module.exports = setToArray;
 
-},{}],418:[function(require,module,exports){
+},{}],422:[function(require,module,exports){
 var baseSetToString = require('./_baseSetToString'),
     shortOut = require('./_shortOut');
 
-
+/**
+ * Sets the `toString` method of `func` to return `string`.
+ *
+ * @private
+ * @param {Function} func The function to modify.
+ * @param {Function} string The `toString` result.
+ * @returns {Function} Returns `func`.
+ */
 var setToString = shortOut(baseSetToString);
 
 module.exports = setToString;
 
-},{"./_baseSetToString":358,"./_shortOut":419}],419:[function(require,module,exports){
-
+},{"./_baseSetToString":362,"./_shortOut":423}],423:[function(require,module,exports){
+/** Used to detect hot functions by number of calls within a span of milliseconds. */
 var HOT_COUNT = 800,
     HOT_SPAN = 16;
 
-
+/* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeNow = Date.now;
 
-
+/**
+ * Creates a function that'll short out and invoke `identity` instead
+ * of `func` when it's called `HOT_COUNT` or more times in `HOT_SPAN`
+ * milliseconds.
+ *
+ * @private
+ * @param {Function} func The function to restrict.
+ * @returns {Function} Returns the new shortable function.
+ */
 function shortOut(func) {
   var count = 0,
       lastCalled = 0;
@@ -135108,10 +139857,16 @@ function shortOut(func) {
 
 module.exports = shortOut;
 
-},{}],420:[function(require,module,exports){
+},{}],424:[function(require,module,exports){
 var ListCache = require('./_ListCache');
 
-
+/**
+ * Removes all key-value entries from the stack.
+ *
+ * @private
+ * @name clear
+ * @memberOf Stack
+ */
 function stackClear() {
   this.__data__ = new ListCache;
   this.size = 0;
@@ -135119,8 +139874,16 @@ function stackClear() {
 
 module.exports = stackClear;
 
-},{"./_ListCache":315}],421:[function(require,module,exports){
-
+},{"./_ListCache":319}],425:[function(require,module,exports){
+/**
+ * Removes `key` and its value from the stack.
+ *
+ * @private
+ * @name delete
+ * @memberOf Stack
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
 function stackDelete(key) {
   var data = this.__data__,
       result = data['delete'](key);
@@ -135131,31 +139894,56 @@ function stackDelete(key) {
 
 module.exports = stackDelete;
 
-},{}],422:[function(require,module,exports){
-
+},{}],426:[function(require,module,exports){
+/**
+ * Gets the stack value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Stack
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
 function stackGet(key) {
   return this.__data__.get(key);
 }
 
 module.exports = stackGet;
 
-},{}],423:[function(require,module,exports){
-
+},{}],427:[function(require,module,exports){
+/**
+ * Checks if a stack value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Stack
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
 function stackHas(key) {
   return this.__data__.has(key);
 }
 
 module.exports = stackHas;
 
-},{}],424:[function(require,module,exports){
+},{}],428:[function(require,module,exports){
 var ListCache = require('./_ListCache'),
     Map = require('./_Map'),
     MapCache = require('./_MapCache');
 
-
+/** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
 
-
+/**
+ * Sets the stack `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Stack
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the stack cache instance.
+ */
 function stackSet(key, value) {
   var data = this.__data__;
   if (data instanceof ListCache) {
@@ -135174,17 +139962,23 @@ function stackSet(key, value) {
 
 module.exports = stackSet;
 
-},{"./_ListCache":315,"./_Map":316,"./_MapCache":317}],425:[function(require,module,exports){
+},{"./_ListCache":319,"./_Map":320,"./_MapCache":321}],429:[function(require,module,exports){
 var memoizeCapped = require('./_memoizeCapped');
 
-
+/** Used to match property names within property paths. */
 var reLeadingDot = /^\./,
     rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
 
-
+/** Used to match backslashes in property paths. */
 var reEscapeChar = /\\(\\)?/g;
 
-
+/**
+ * Converts `string` to a property path array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the property path array.
+ */
 var stringToPath = memoizeCapped(function(string) {
   var result = [];
   if (reLeadingDot.test(string)) {
@@ -135198,13 +139992,19 @@ var stringToPath = memoizeCapped(function(string) {
 
 module.exports = stringToPath;
 
-},{"./_memoizeCapped":407}],426:[function(require,module,exports){
+},{"./_memoizeCapped":411}],430:[function(require,module,exports){
 var isSymbol = require('./isSymbol');
 
-
+/** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0;
 
-
+/**
+ * Converts `value` to a string key if it's not a string or symbol.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @returns {string|symbol} Returns the key.
+ */
 function toKey(value) {
   if (typeof value == 'string' || isSymbol(value)) {
     return value;
@@ -135215,14 +140015,20 @@ function toKey(value) {
 
 module.exports = toKey;
 
-},{"./isSymbol":445}],427:[function(require,module,exports){
-
+},{"./isSymbol":449}],431:[function(require,module,exports){
+/** Used for built-in method references. */
 var funcProto = Function.prototype;
 
-
+/** Used to resolve the decompiled source of functions. */
 var funcToString = funcProto.toString;
 
-
+/**
+ * Converts `func` to its source code.
+ *
+ * @private
+ * @param {Function} func The function to convert.
+ * @returns {string} Returns the source code.
+ */
 function toSource(func) {
   if (func != null) {
     try {
@@ -135237,7 +140043,7 @@ function toSource(func) {
 
 module.exports = toSource;
 
-},{}],428:[function(require,module,exports){
+},{}],432:[function(require,module,exports){
 var assignValue = require('./_assignValue'),
     copyObject = require('./_copyObject'),
     createAssigner = require('./_createAssigner'),
@@ -135245,13 +140051,44 @@ var assignValue = require('./_assignValue'),
     isPrototype = require('./_isPrototype'),
     keys = require('./keys');
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * Assigns own enumerable string keyed properties of source objects to the
+ * destination object. Source objects are applied from left to right.
+ * Subsequent sources overwrite property assignments of previous sources.
+ *
+ * **Note:** This method mutates `object` and is loosely based on
+ * [`Object.assign`](https://mdn.io/Object/assign).
+ *
+ * @static
+ * @memberOf _
+ * @since 0.10.0
+ * @category Object
+ * @param {Object} object The destination object.
+ * @param {...Object} [sources] The source objects.
+ * @returns {Object} Returns `object`.
+ * @see _.assignIn
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ * }
+ *
+ * function Bar() {
+ *   this.c = 3;
+ * }
+ *
+ * Foo.prototype.b = 2;
+ * Bar.prototype.d = 4;
+ *
+ * _.assign({ 'a': 0 }, new Foo, new Bar);
+ * // => { 'a': 1, 'c': 3 }
+ */
 var assign = createAssigner(function(object, source) {
   if (isPrototype(source) || isArrayLike(source)) {
     copyObject(source, keys(source), object);
@@ -135266,8 +140103,26 @@ var assign = createAssigner(function(object, source) {
 
 module.exports = assign;
 
-},{"./_assignValue":332,"./_copyObject":364,"./_createAssigner":366,"./_isPrototype":393,"./isArrayLike":438,"./keys":447}],429:[function(require,module,exports){
-
+},{"./_assignValue":336,"./_copyObject":368,"./_createAssigner":370,"./_isPrototype":397,"./isArrayLike":442,"./keys":451}],433:[function(require,module,exports){
+/**
+ * Creates a function that returns `value`.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Util
+ * @param {*} value The value to return from the new function.
+ * @returns {Function} Returns the new constant function.
+ * @example
+ *
+ * var objects = _.times(2, _.constant({ 'a': 1 }));
+ *
+ * console.log(objects);
+ * // => [{ 'a': 1 }, { 'a': 1 }]
+ *
+ * console.log(objects[0] === objects[1]);
+ * // => true
+ */
 function constant(value) {
   return function() {
     return value;
@@ -135276,11 +140131,44 @@ function constant(value) {
 
 module.exports = constant;
 
-},{}],430:[function(require,module,exports){
+},{}],434:[function(require,module,exports){
 var baseAssign = require('./_baseAssign'),
     baseCreate = require('./_baseCreate');
 
-
+/**
+ * Creates an object that inherits from the `prototype` object. If a
+ * `properties` object is given, its own enumerable string keyed properties
+ * are assigned to the created object.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.3.0
+ * @category Object
+ * @param {Object} prototype The object to inherit from.
+ * @param {Object} [properties] The properties to assign to the object.
+ * @returns {Object} Returns the new object.
+ * @example
+ *
+ * function Shape() {
+ *   this.x = 0;
+ *   this.y = 0;
+ * }
+ *
+ * function Circle() {
+ *   Shape.call(this);
+ * }
+ *
+ * Circle.prototype = _.create(Shape.prototype, {
+ *   'constructor': Circle
+ * });
+ *
+ * var circle = new Circle;
+ * circle instanceof Circle;
+ * // => true
+ *
+ * circle instanceof Shape;
+ * // => true
+ */
 function create(prototype, properties) {
   var result = baseCreate(prototype);
   return properties == null ? result : baseAssign(result, properties);
@@ -135288,22 +140176,93 @@ function create(prototype, properties) {
 
 module.exports = create;
 
-},{"./_baseAssign":334,"./_baseCreate":336}],431:[function(require,module,exports){
-
+},{"./_baseAssign":338,"./_baseCreate":340}],435:[function(require,module,exports){
+/**
+ * Performs a
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * comparison between two values to determine if they are equivalent.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.eq(object, object);
+ * // => true
+ *
+ * _.eq(object, other);
+ * // => false
+ *
+ * _.eq('a', 'a');
+ * // => true
+ *
+ * _.eq('a', Object('a'));
+ * // => false
+ *
+ * _.eq(NaN, NaN);
+ * // => true
+ */
 function eq(value, other) {
   return value === other || (value !== value && other !== other);
 }
 
 module.exports = eq;
 
-},{}],432:[function(require,module,exports){
+},{}],436:[function(require,module,exports){
 var arrayEvery = require('./_arrayEvery'),
     baseEvery = require('./_baseEvery'),
     baseIteratee = require('./_baseIteratee'),
     isArray = require('./isArray'),
     isIterateeCall = require('./_isIterateeCall');
 
-
+/**
+ * Checks if `predicate` returns truthy for **all** elements of `collection`.
+ * Iteration is stopped once `predicate` returns falsey. The predicate is
+ * invoked with three arguments: (value, index|key, collection).
+ *
+ * **Note:** This method returns `true` for
+ * [empty collections](https://en.wikipedia.org/wiki/Empty_set) because
+ * [everything is true](https://en.wikipedia.org/wiki/Vacuous_truth) of
+ * elements of empty collections.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Collection
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} [predicate=_.identity] The function invoked per iteration.
+ * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+ * @returns {boolean} Returns `true` if all elements pass the predicate check,
+ *  else `false`.
+ * @example
+ *
+ * _.every([true, 1, null, 'yes'], Boolean);
+ * // => false
+ *
+ * var users = [
+ *   { 'user': 'barney', 'age': 36, 'active': false },
+ *   { 'user': 'fred',   'age': 40, 'active': false }
+ * ];
+ *
+ * // The `_.matches` iteratee shorthand.
+ * _.every(users, { 'user': 'barney', 'active': false });
+ * // => false
+ *
+ * // The `_.matchesProperty` iteratee shorthand.
+ * _.every(users, ['active', false]);
+ * // => true
+ *
+ * // The `_.property` iteratee shorthand.
+ * _.every(users, 'active');
+ * // => false
+ */
 function every(collection, predicate, guard) {
   var func = isArray(collection) ? arrayEvery : baseEvery;
   if (guard && isIterateeCall(collection, predicate, guard)) {
@@ -135314,10 +140273,34 @@ function every(collection, predicate, guard) {
 
 module.exports = every;
 
-},{"./_arrayEvery":326,"./_baseEvery":338,"./_baseIteratee":351,"./_isIterateeCall":389,"./isArray":437}],433:[function(require,module,exports){
+},{"./_arrayEvery":330,"./_baseEvery":342,"./_baseIteratee":355,"./_isIterateeCall":393,"./isArray":441}],437:[function(require,module,exports){
 var baseGet = require('./_baseGet');
 
-
+/**
+ * Gets the value at `path` of `object`. If the resolved value is
+ * `undefined`, the `defaultValue` is returned in its place.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.7.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path of the property to get.
+ * @param {*} [defaultValue] The value returned for `undefined` resolved values.
+ * @returns {*} Returns the resolved value.
+ * @example
+ *
+ * var object = { 'a': [{ 'b': { 'c': 3 } }] };
+ *
+ * _.get(object, 'a[0].b.c');
+ * // => 3
+ *
+ * _.get(object, ['a', '0', 'b', 'c']);
+ * // => 3
+ *
+ * _.get(object, 'a.b.c', 'default');
+ * // => 'default'
+ */
 function get(object, path, defaultValue) {
   var result = object == null ? undefined : baseGet(object, path);
   return result === undefined ? defaultValue : result;
@@ -135325,39 +140308,96 @@ function get(object, path, defaultValue) {
 
 module.exports = get;
 
-},{"./_baseGet":341}],434:[function(require,module,exports){
+},{"./_baseGet":345}],438:[function(require,module,exports){
 var baseHasIn = require('./_baseHasIn'),
     hasPath = require('./_hasPath');
 
-
+/**
+ * Checks if `path` is a direct or inherited property of `object`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Object
+ * @param {Object} object The object to query.
+ * @param {Array|string} path The path to check.
+ * @returns {boolean} Returns `true` if `path` exists, else `false`.
+ * @example
+ *
+ * var object = _.create({ 'a': _.create({ 'b': 2 }) });
+ *
+ * _.hasIn(object, 'a');
+ * // => true
+ *
+ * _.hasIn(object, 'a.b');
+ * // => true
+ *
+ * _.hasIn(object, ['a', 'b']);
+ * // => true
+ *
+ * _.hasIn(object, 'b');
+ * // => false
+ */
 function hasIn(object, path) {
   return object != null && hasPath(object, path, baseHasIn);
 }
 
 module.exports = hasIn;
 
-},{"./_baseHasIn":344,"./_hasPath":382}],435:[function(require,module,exports){
-
+},{"./_baseHasIn":348,"./_hasPath":386}],439:[function(require,module,exports){
+/**
+ * This method returns the first argument it receives.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Util
+ * @param {*} value Any value.
+ * @returns {*} Returns `value`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ *
+ * console.log(_.identity(object) === object);
+ * // => true
+ */
 function identity(value) {
   return value;
 }
 
 module.exports = identity;
 
-},{}],436:[function(require,module,exports){
+},{}],440:[function(require,module,exports){
 var baseIsArguments = require('./_baseIsArguments'),
     isObjectLike = require('./isObjectLike');
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/** Built-in value references. */
 var propertyIsEnumerable = objectProto.propertyIsEnumerable;
 
-
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
 var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
   return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
     !propertyIsEnumerable.call(value, 'callee');
@@ -135365,48 +140405,110 @@ var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsAr
 
 module.exports = isArguments;
 
-},{"./_baseIsArguments":345,"./isObjectLike":444}],437:[function(require,module,exports){
-
+},{"./_baseIsArguments":349,"./isObjectLike":448}],441:[function(require,module,exports){
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
 var isArray = Array.isArray;
 
 module.exports = isArray;
 
-},{}],438:[function(require,module,exports){
+},{}],442:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isLength = require('./isLength');
 
-
+/**
+ * Checks if `value` is array-like. A value is considered array-like if it's
+ * not a function and has a `value.length` that's an integer greater than or
+ * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+ * @example
+ *
+ * _.isArrayLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLike(document.body.children);
+ * // => true
+ *
+ * _.isArrayLike('abc');
+ * // => true
+ *
+ * _.isArrayLike(_.noop);
+ * // => false
+ */
 function isArrayLike(value) {
   return value != null && isLength(value.length) && !isFunction(value);
 }
 
 module.exports = isArrayLike;
 
-},{"./isFunction":441,"./isLength":442}],439:[function(require,module,exports){
+},{"./isFunction":445,"./isLength":446}],443:[function(require,module,exports){
 var root = require('./_root'),
     stubFalse = require('./stubFalse');
 
-
+/** Detect free variable `exports`. */
 var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
 
-
+/** Detect free variable `module`. */
 var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
 
-
+/** Detect the popular CommonJS extension `module.exports`. */
 var moduleExports = freeModule && freeModule.exports === freeExports;
 
-
+/** Built-in value references. */
 var Buffer = moduleExports ? root.Buffer : undefined;
 
-
+/* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
 
-
+/**
+ * Checks if `value` is a buffer.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
+ * @example
+ *
+ * _.isBuffer(new Buffer(2));
+ * // => true
+ *
+ * _.isBuffer(new Uint8Array(2));
+ * // => false
+ */
 var isBuffer = nativeIsBuffer || stubFalse;
 
 module.exports = isBuffer;
 
-},{"./_root":414,"./stubFalse":451}],440:[function(require,module,exports){
+},{"./_root":418,"./stubFalse":455}],444:[function(require,module,exports){
 var baseKeys = require('./_baseKeys'),
     getTag = require('./_getTag'),
     isArguments = require('./isArguments'),
@@ -135416,17 +140518,49 @@ var baseKeys = require('./_baseKeys'),
     isPrototype = require('./_isPrototype'),
     isTypedArray = require('./isTypedArray');
 
-
+/** `Object#toString` result references. */
 var mapTag = '[object Map]',
     setTag = '[object Set]';
 
-
+/** Used for built-in method references. */
 var objectProto = Object.prototype;
 
-
+/** Used to check objects for own properties. */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-
+/**
+ * Checks if `value` is an empty object, collection, map, or set.
+ *
+ * Objects are considered empty if they have no own enumerable string keyed
+ * properties.
+ *
+ * Array-like values such as `arguments` objects, arrays, buffers, strings, or
+ * jQuery-like collections are considered empty if they have a `length` of `0`.
+ * Similarly, maps and sets are considered empty if they have a `size` of `0`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is empty, else `false`.
+ * @example
+ *
+ * _.isEmpty(null);
+ * // => true
+ *
+ * _.isEmpty(true);
+ * // => true
+ *
+ * _.isEmpty(1);
+ * // => true
+ *
+ * _.isEmpty([1, 2, 3]);
+ * // => false
+ *
+ * _.isEmpty({ 'a': 1 });
+ * // => false
+ */
 function isEmpty(value) {
   if (value == null) {
     return true;
@@ -135453,32 +140587,75 @@ function isEmpty(value) {
 
 module.exports = isEmpty;
 
-},{"./_baseKeys":352,"./_getTag":380,"./_isPrototype":393,"./isArguments":436,"./isArray":437,"./isArrayLike":438,"./isBuffer":439,"./isTypedArray":446}],441:[function(require,module,exports){
+},{"./_baseKeys":356,"./_getTag":384,"./_isPrototype":397,"./isArguments":440,"./isArray":441,"./isArrayLike":442,"./isBuffer":443,"./isTypedArray":450}],445:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObject = require('./isObject');
 
-
+/** `Object#toString` result references. */
 var asyncTag = '[object AsyncFunction]',
     funcTag = '[object Function]',
     genTag = '[object GeneratorFunction]',
     proxyTag = '[object Proxy]';
 
-
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
 function isFunction(value) {
   if (!isObject(value)) {
     return false;
   }
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 9 which returns 'object' for typed arrays and other constructors.
   var tag = baseGetTag(value);
   return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
 }
 
 module.exports = isFunction;
 
-},{"./_baseGetTag":343,"./isObject":443}],442:[function(require,module,exports){
-
+},{"./_baseGetTag":347,"./isObject":447}],446:[function(require,module,exports){
+/** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER = 9007199254740991;
 
-
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ * @example
+ *
+ * _.isLength(3);
+ * // => true
+ *
+ * _.isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * _.isLength(Infinity);
+ * // => false
+ *
+ * _.isLength('3');
+ * // => false
+ */
 function isLength(value) {
   return typeof value == 'number' &&
     value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
@@ -135486,8 +140663,32 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],443:[function(require,module,exports){
-
+},{}],447:[function(require,module,exports){
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
 function isObject(value) {
   var type = typeof value;
   return value != null && (type == 'object' || type == 'function');
@@ -135495,22 +140696,61 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],444:[function(require,module,exports){
-
+},{}],448:[function(require,module,exports){
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
 function isObjectLike(value) {
   return value != null && typeof value == 'object';
 }
 
 module.exports = isObjectLike;
 
-},{}],445:[function(require,module,exports){
+},{}],449:[function(require,module,exports){
 var baseGetTag = require('./_baseGetTag'),
     isObjectLike = require('./isObjectLike');
 
-
+/** `Object#toString` result references. */
 var symbolTag = '[object Symbol]';
 
-
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
 function isSymbol(value) {
   return typeof value == 'symbol' ||
     (isObjectLike(value) && baseGetTag(value) == symbolTag);
@@ -135518,38 +140758,124 @@ function isSymbol(value) {
 
 module.exports = isSymbol;
 
-},{"./_baseGetTag":343,"./isObjectLike":444}],446:[function(require,module,exports){
+},{"./_baseGetTag":347,"./isObjectLike":448}],450:[function(require,module,exports){
 var baseIsTypedArray = require('./_baseIsTypedArray'),
     baseUnary = require('./_baseUnary'),
     nodeUtil = require('./_nodeUtil');
 
-
+/* Node.js helper references. */
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 
-
+/**
+ * Checks if `value` is classified as a typed array.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ * @example
+ *
+ * _.isTypedArray(new Uint8Array);
+ * // => true
+ *
+ * _.isTypedArray([]);
+ * // => false
+ */
 var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 
 module.exports = isTypedArray;
 
-},{"./_baseIsTypedArray":350,"./_baseUnary":361,"./_nodeUtil":410}],447:[function(require,module,exports){
+},{"./_baseIsTypedArray":354,"./_baseUnary":365,"./_nodeUtil":414}],451:[function(require,module,exports){
 var arrayLikeKeys = require('./_arrayLikeKeys'),
     baseKeys = require('./_baseKeys'),
     isArrayLike = require('./isArrayLike');
 
-
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
 function keys(object) {
   return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
 }
 
 module.exports = keys;
 
-},{"./_arrayLikeKeys":328,"./_baseKeys":352,"./isArrayLike":438}],448:[function(require,module,exports){
+},{"./_arrayLikeKeys":332,"./_baseKeys":356,"./isArrayLike":442}],452:[function(require,module,exports){
 var MapCache = require('./_MapCache');
 
-
+/** Error message constants. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
-
+/**
+ * Creates a function that memoizes the result of `func`. If `resolver` is
+ * provided, it determines the cache key for storing the result based on the
+ * arguments provided to the memoized function. By default, the first argument
+ * provided to the memoized function is used as the map cache key. The `func`
+ * is invoked with the `this` binding of the memoized function.
+ *
+ * **Note:** The cache is exposed as the `cache` property on the memoized
+ * function. Its creation may be customized by replacing the `_.memoize.Cache`
+ * constructor with one whose instances implement the
+ * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+ * method interface of `clear`, `delete`, `get`, `has`, and `set`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to have its output memoized.
+ * @param {Function} [resolver] The function to resolve the cache key.
+ * @returns {Function} Returns the new memoized function.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': 2 };
+ * var other = { 'c': 3, 'd': 4 };
+ *
+ * var values = _.memoize(_.values);
+ * values(object);
+ * // => [1, 2]
+ *
+ * values(other);
+ * // => [3, 4]
+ *
+ * object.a = 2;
+ * values(object);
+ * // => [1, 2]
+ *
+ * // Modify the result cache.
+ * values.cache.set(object, ['a', 'b']);
+ * values(object);
+ * // => ['a', 'b']
+ *
+ * // Replace `_.memoize.Cache`.
+ * _.memoize.Cache = WeakMap;
+ */
 function memoize(func, resolver) {
   if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
     throw new TypeError(FUNC_ERROR_TEXT);
@@ -135570,52 +140896,175 @@ function memoize(func, resolver) {
   return memoized;
 }
 
+// Expose `MapCache`.
 memoize.Cache = MapCache;
 
 module.exports = memoize;
 
-},{"./_MapCache":317}],449:[function(require,module,exports){
+},{"./_MapCache":321}],453:[function(require,module,exports){
 var baseProperty = require('./_baseProperty'),
     basePropertyDeep = require('./_basePropertyDeep'),
     isKey = require('./_isKey'),
     toKey = require('./_toKey');
 
-
+/**
+ * Creates a function that returns the value at `path` of a given object.
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Util
+ * @param {Array|string} path The path of the property to get.
+ * @returns {Function} Returns the new accessor function.
+ * @example
+ *
+ * var objects = [
+ *   { 'a': { 'b': 2 } },
+ *   { 'a': { 'b': 1 } }
+ * ];
+ *
+ * _.map(objects, _.property('a.b'));
+ * // => [2, 1]
+ *
+ * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
+ * // => [1, 2]
+ */
 function property(path) {
   return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
 }
 
 module.exports = property;
 
-},{"./_baseProperty":355,"./_basePropertyDeep":356,"./_isKey":390,"./_toKey":426}],450:[function(require,module,exports){
-
+},{"./_baseProperty":359,"./_basePropertyDeep":360,"./_isKey":394,"./_toKey":430}],454:[function(require,module,exports){
+/**
+ * This method returns a new empty array.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {Array} Returns the new empty array.
+ * @example
+ *
+ * var arrays = _.times(2, _.stubArray);
+ *
+ * console.log(arrays);
+ * // => [[], []]
+ *
+ * console.log(arrays[0] === arrays[1]);
+ * // => false
+ */
 function stubArray() {
   return [];
 }
 
 module.exports = stubArray;
 
-},{}],451:[function(require,module,exports){
-
+},{}],455:[function(require,module,exports){
+/**
+ * This method returns `false`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {boolean} Returns `false`.
+ * @example
+ *
+ * _.times(2, _.stubFalse);
+ * // => [false, false]
+ */
 function stubFalse() {
   return false;
 }
 
 module.exports = stubFalse;
 
-},{}],452:[function(require,module,exports){
+},{}],456:[function(require,module,exports){
 var baseToString = require('./_baseToString');
 
-
+/**
+ * Converts `value` to a string. An empty string is returned for `null`
+ * and `undefined` values. The sign of `-0` is preserved.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ * @example
+ *
+ * _.toString(null);
+ * // => ''
+ *
+ * _.toString(-0);
+ * // => '-0'
+ *
+ * _.toString([1, 2, 3]);
+ * // => '1,2,3'
+ */
 function toString(value) {
   return value == null ? '' : baseToString(value);
 }
 
 module.exports = toString;
 
-},{"./_baseToString":360}],453:[function(require,module,exports){
+},{"./_baseToString":364}],457:[function(require,module,exports){
+(function (process){
+'use strict';
+
+if (!process.version ||
+    process.version.indexOf('v0.') === 0 ||
+    process.version.indexOf('v1.') === 0 && process.version.indexOf('v1.8.') !== 0) {
+  module.exports = nextTick;
+} else {
+  module.exports = process.nextTick;
+}
+
+function nextTick(fn, arg1, arg2, arg3) {
+  if (typeof fn !== 'function') {
+    throw new TypeError('"callback" argument must be a function');
+  }
+  var len = arguments.length;
+  var args, i;
+  switch (len) {
+  case 0:
+  case 1:
+    return process.nextTick(fn);
+  case 2:
+    return process.nextTick(function afterTickOne() {
+      fn.call(null, arg1);
+    });
+  case 3:
+    return process.nextTick(function afterTickTwo() {
+      fn.call(null, arg1, arg2);
+    });
+  case 4:
+    return process.nextTick(function afterTickThree() {
+      fn.call(null, arg1, arg2, arg3);
+    });
+  default:
+    args = new Array(len - 1);
+    i = 0;
+    while (i < args.length) {
+      args[i++] = arguments[i];
+    }
+    return process.nextTick(function afterTick() {
+      fn.apply(null, args);
+    });
+  }
+}
+
+}).call(this,require('_process'))
+},{"_process":458}],458:[function(require,module,exports){
+// shim for using process in browser
 var process = module.exports = {};
 
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
 
 var cachedSetTimeout;
 var cachedClearTimeout;
@@ -135648,18 +141097,23 @@ function defaultClearTimeout () {
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
         return setTimeout(fun, 0);
     }
+    // if setTimeout wasn't available but was latter defined
     if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
         cachedSetTimeout = setTimeout;
         return setTimeout(fun, 0);
     }
     try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
         return cachedSetTimeout(fun, 0);
     } catch(e){
         try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
             return cachedSetTimeout.call(null, fun, 0);
         } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
             return cachedSetTimeout.call(this, fun, 0);
         }
     }
@@ -135668,18 +141122,24 @@ function runTimeout(fun) {
 }
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
         return clearTimeout(marker);
     }
+    // if clearTimeout wasn't available but was latter defined
     if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
         cachedClearTimeout = clearTimeout;
         return clearTimeout(marker);
     }
     try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
         return cachedClearTimeout(marker);
     } catch (e){
         try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
             return cachedClearTimeout.call(null, marker);
         } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
             return cachedClearTimeout.call(this, marker);
         }
     }
@@ -135744,6 +141204,7 @@ process.nextTick = function (fun) {
     }
 };
 
+// v8 likes predictible objects
 function Item(fun, array) {
     this.fun = fun;
     this.array = array;
@@ -135782,12 +141243,12 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],454:[function(require,module,exports){
+},{}],459:[function(require,module,exports){
 (function (global){
-
+/*! https://mths.be/punycode v1.3.2 by @mathias */
 ;(function(root) {
 
-
+	/** Detect free variables */
 	var freeExports = typeof exports == 'object' && exports &&
 		!exports.nodeType && exports;
 	var freeModule = typeof module == 'object' && module &&
@@ -135801,13 +141262,17 @@ process.umask = function() { return 0; };
 		root = freeGlobal;
 	}
 
-
+	/**
+	 * The `punycode` object.
+	 * @name punycode
+	 * @type Object
+	 */
 	var punycode,
 
-
+	/** Highest positive signed 32-bit float value */
 	maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
 
-
+	/** Bootstring parameters */
 	base = 36,
 	tMin = 1,
 	tMax = 26,
@@ -135817,34 +141282,46 @@ process.umask = function() { return 0; };
 	initialN = 128, // 0x80
 	delimiter = '-', // '\x2D'
 
-
+	/** Regular expressions */
 	regexPunycode = /^xn--/,
 	regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
 	regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
 
-
+	/** Error messages */
 	errors = {
 		'overflow': 'Overflow: input needs wider integers to process',
 		'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
 		'invalid-input': 'Invalid input'
 	},
 
-
+	/** Convenience shortcuts */
 	baseMinusTMin = base - tMin,
 	floor = Math.floor,
 	stringFromCharCode = String.fromCharCode,
 
-
+	/** Temporary variable */
 	key;
 
+	/*--------------------------------------------------------------------------*/
 
-
-
+	/**
+	 * A generic error utility function.
+	 * @private
+	 * @param {String} type The error type.
+	 * @returns {Error} Throws a `RangeError` with the applicable error message.
+	 */
 	function error(type) {
 		throw RangeError(errors[type]);
 	}
 
-
+	/**
+	 * A generic `Array#map` utility function.
+	 * @private
+	 * @param {Array} array The array to iterate over.
+	 * @param {Function} callback The function that gets called for every array
+	 * item.
+	 * @returns {Array} A new array of values returned by the callback function.
+	 */
 	function map(array, fn) {
 		var length = array.length;
 		var result = [];
@@ -135854,21 +141331,45 @@ process.umask = function() { return 0; };
 		return result;
 	}
 
-
+	/**
+	 * A simple `Array#map`-like wrapper to work with domain name strings or email
+	 * addresses.
+	 * @private
+	 * @param {String} domain The domain name or email address.
+	 * @param {Function} callback The function that gets called for every
+	 * character.
+	 * @returns {Array} A new string of characters returned by the callback
+	 * function.
+	 */
 	function mapDomain(string, fn) {
 		var parts = string.split('@');
 		var result = '';
 		if (parts.length > 1) {
+			// In email addresses, only the domain name should be punycoded. Leave
+			// the local part (i.e. everything up to `@`) intact.
 			result = parts[0] + '@';
 			string = parts[1];
 		}
+		// Avoid `split(regex)` for IE8 compatibility. See #17.
 		string = string.replace(regexSeparators, '\x2E');
 		var labels = string.split('.');
 		var encoded = map(labels, fn).join('.');
 		return result + encoded;
 	}
 
-
+	/**
+	 * Creates an array containing the numeric code points of each Unicode
+	 * character in the string. While JavaScript uses UCS-2 internally,
+	 * this function will convert a pair of surrogate halves (each of which
+	 * UCS-2 exposes as separate characters) into a single code point,
+	 * matching UTF-16.
+	 * @see `punycode.ucs2.encode`
+	 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+	 * @memberOf punycode.ucs2
+	 * @name decode
+	 * @param {String} string The Unicode input string (UCS-2).
+	 * @returns {Array} The new array of code points.
+	 */
 	function ucs2decode(string) {
 		var output = [],
 		    counter = 0,
@@ -135878,10 +141379,13 @@ process.umask = function() { return 0; };
 		while (counter < length) {
 			value = string.charCodeAt(counter++);
 			if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
+				// high surrogate, and there is a next character
 				extra = string.charCodeAt(counter++);
 				if ((extra & 0xFC00) == 0xDC00) { // low surrogate
 					output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
 				} else {
+					// unmatched surrogate; only append this code unit, in case the next
+					// code unit is the high surrogate of a surrogate pair
 					output.push(value);
 					counter--;
 				}
@@ -135892,7 +141396,14 @@ process.umask = function() { return 0; };
 		return output;
 	}
 
-
+	/**
+	 * Creates a string based on an array of numeric code points.
+	 * @see `punycode.ucs2.decode`
+	 * @memberOf punycode.ucs2
+	 * @name encode
+	 * @param {Array} codePoints The array of numeric code points.
+	 * @returns {String} The new Unicode string (UCS-2).
+	 */
 	function ucs2encode(array) {
 		return map(array, function(value) {
 			var output = '';
@@ -135906,7 +141417,15 @@ process.umask = function() { return 0; };
 		}).join('');
 	}
 
-
+	/**
+	 * Converts a basic code point into a digit/integer.
+	 * @see `digitToBasic()`
+	 * @private
+	 * @param {Number} codePoint The basic numeric code point value.
+	 * @returns {Number} The numeric value of a basic code point (for use in
+	 * representing integers) in the range `0` to `base - 1`, or `base` if
+	 * the code point does not represent a value.
+	 */
 	function basicToDigit(codePoint) {
 		if (codePoint - 48 < 10) {
 			return codePoint - 22;
@@ -135920,12 +141439,28 @@ process.umask = function() { return 0; };
 		return base;
 	}
 
-
+	/**
+	 * Converts a digit/integer into a basic code point.
+	 * @see `basicToDigit()`
+	 * @private
+	 * @param {Number} digit The numeric value of a basic code point.
+	 * @returns {Number} The basic code point whose value (when used for
+	 * representing integers) is `digit`, which needs to be in the range
+	 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
+	 * used; else, the lowercase form is used. The behavior is undefined
+	 * if `flag` is non-zero and `digit` has no uppercase form.
+	 */
 	function digitToBasic(digit, flag) {
+		//  0..25 map to ASCII a..z or A..Z
+		// 26..35 map to ASCII 0..9
 		return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
 	}
 
-
+	/**
+	 * Bias adaptation function as per section 3.4 of RFC 3492.
+	 * http://tools.ietf.org/html/rfc3492#section-3.4
+	 * @private
+	 */
 	function adapt(delta, numPoints, firstTime) {
 		var k = 0;
 		delta = firstTime ? floor(delta / damp) : delta >> 1;
@@ -135936,8 +141471,15 @@ process.umask = function() { return 0; };
 		return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
 	}
 
-
+	/**
+	 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
+	 * symbols.
+	 * @memberOf punycode
+	 * @param {String} input The Punycode string of ASCII-only symbols.
+	 * @returns {String} The resulting string of Unicode symbols.
+	 */
 	function decode(input) {
+		// Don't use UCS-2
 		var output = [],
 		    inputLength = input.length,
 		    out,
@@ -135952,9 +141494,12 @@ process.umask = function() { return 0; };
 		    k,
 		    digit,
 		    t,
-
+		    /** Cached calculation results */
 		    baseMinusT;
 
+		// Handle the basic code points: let `basic` be the number of input code
+		// points before the last delimiter, or `0` if there is none, then copy
+		// the first basic code points to the output.
 
 		basic = input.lastIndexOf(delimiter);
 		if (basic < 0) {
@@ -135962,15 +141507,23 @@ process.umask = function() { return 0; };
 		}
 
 		for (j = 0; j < basic; ++j) {
+			// if it's not a basic code point
 			if (input.charCodeAt(j) >= 0x80) {
 				error('not-basic');
 			}
 			output.push(input.charCodeAt(j));
 		}
 
+		// Main decoding loop: start just after the last delimiter if any basic code
+		// points were copied; start at the beginning otherwise.
 
 		for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
 
+			// `index` is the index of the next character to be consumed.
+			// Decode a generalized variable-length integer into `delta`,
+			// which gets added to `i`. The overflow checking is easier
+			// if we increase `i` as we go, then subtract off its starting
+			// value at the end to obtain `delta`.
 			for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
 
 				if (index >= inputLength) {
@@ -136002,6 +141555,8 @@ process.umask = function() { return 0; };
 			out = output.length + 1;
 			bias = adapt(i - oldi, out, oldi == 0);
 
+			// `i` was supposed to wrap around from `out` to `0`,
+			// incrementing `n` each time, so we'll fix that now:
 			if (floor(i / out) > maxInt - n) {
 				error('overflow');
 			}
@@ -136009,6 +141564,7 @@ process.umask = function() { return 0; };
 			n += floor(i / out);
 			i %= out;
 
+			// Insert `n` at position `i` of the output
 			output.splice(i++, 0, n);
 
 		}
@@ -136016,7 +141572,13 @@ process.umask = function() { return 0; };
 		return ucs2encode(output);
 	}
 
-
+	/**
+	 * Converts a string of Unicode symbols (e.g. a domain name label) to a
+	 * Punycode string of ASCII-only symbols.
+	 * @memberOf punycode
+	 * @param {String} input The string of Unicode symbols.
+	 * @returns {String} The resulting Punycode string of ASCII-only symbols.
+	 */
 	function encode(input) {
 		var n,
 		    delta,
@@ -136030,21 +141592,25 @@ process.umask = function() { return 0; };
 		    t,
 		    currentValue,
 		    output = [],
-
+		    /** `inputLength` will hold the number of code points in `input`. */
 		    inputLength,
-
+		    /** Cached calculation results */
 		    handledCPCountPlusOne,
 		    baseMinusT,
 		    qMinusT;
 
+		// Convert the input in UCS-2 to Unicode
 		input = ucs2decode(input);
 
+		// Cache the length
 		inputLength = input.length;
 
+		// Initialize the state
 		n = initialN;
 		delta = 0;
 		bias = initialBias;
 
+		// Handle the basic code points
 		for (j = 0; j < inputLength; ++j) {
 			currentValue = input[j];
 			if (currentValue < 0x80) {
@@ -136054,13 +141620,19 @@ process.umask = function() { return 0; };
 
 		handledCPCount = basicLength = output.length;
 
+		// `handledCPCount` is the number of code points that have been handled;
+		// `basicLength` is the number of basic code points.
 
+		// Finish the basic string - if it is not empty - with a delimiter
 		if (basicLength) {
 			output.push(delimiter);
 		}
 
+		// Main encoding loop:
 		while (handledCPCount < inputLength) {
 
+			// All non-basic code points < n have been handled already. Find the next
+			// larger one:
 			for (m = maxInt, j = 0; j < inputLength; ++j) {
 				currentValue = input[j];
 				if (currentValue >= n && currentValue < m) {
@@ -136068,6 +141640,8 @@ process.umask = function() { return 0; };
 				}
 			}
 
+			// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
+			// but guard against overflow
 			handledCPCountPlusOne = handledCPCount + 1;
 			if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
 				error('overflow');
@@ -136084,6 +141658,7 @@ process.umask = function() { return 0; };
 				}
 
 				if (currentValue == n) {
+					// Represent delta as a generalized variable-length integer
 					for (q = delta, k = base; /* no condition */; k += base) {
 						t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
 						if (q < t) {
@@ -136111,7 +141686,17 @@ process.umask = function() { return 0; };
 		return output.join('');
 	}
 
-
+	/**
+	 * Converts a Punycode string representing a domain name or an email address
+	 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
+	 * it doesn't matter if you call it on a string that has already been
+	 * converted to Unicode.
+	 * @memberOf punycode
+	 * @param {String} input The Punycoded domain name or email address to
+	 * convert to Unicode.
+	 * @returns {String} The Unicode representation of the given Punycode
+	 * string.
+	 */
 	function toUnicode(input) {
 		return mapDomain(input, function(string) {
 			return regexPunycode.test(string)
@@ -136120,7 +141705,17 @@ process.umask = function() { return 0; };
 		});
 	}
 
-
+	/**
+	 * Converts a Unicode string representing a domain name or an email address to
+	 * Punycode. Only the non-ASCII parts of the domain name will be converted,
+	 * i.e. it doesn't matter if you call it with a domain that's already in
+	 * ASCII.
+	 * @memberOf punycode
+	 * @param {String} input The domain name or email address to convert, as a
+	 * Unicode string.
+	 * @returns {String} The Punycode representation of the given domain name or
+	 * email address.
+	 */
 	function toASCII(input) {
 		return mapDomain(input, function(string) {
 			return regexNonASCII.test(string)
@@ -136129,13 +141724,23 @@ process.umask = function() { return 0; };
 		});
 	}
 
+	/*--------------------------------------------------------------------------*/
 
-
-
+	/** Define the public API */
 	punycode = {
-
+		/**
+		 * A string representing the current Punycode.js version number.
+		 * @memberOf punycode
+		 * @type String
+		 */
 		'version': '1.3.2',
-
+		/**
+		 * An object of methods to convert from JavaScript's internal character
+		 * representation (UCS-2) to Unicode code points, and back.
+		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+		 * @memberOf punycode
+		 * @type Object
+		 */
 		'ucs2': {
 			'decode': ucs2decode,
 			'encode': ucs2encode
@@ -136146,7 +141751,9 @@ process.umask = function() { return 0; };
 		'toUnicode': toUnicode
 	};
 
-
+	/** Expose `punycode` */
+	// Some AMD build optimizers, like r.js, check for specific condition patterns
+	// like the following:
 	if (
 		typeof define == 'function' &&
 		typeof define.amd == 'object' &&
@@ -136170,10 +141777,33 @@ process.umask = function() { return 0; };
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],455:[function(require,module,exports){
+},{}],460:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 'use strict';
 
+// If obj.hasOwnProperty has been overridden, then calling
+// obj.hasOwnProperty(prop) will break.
+// See: https://github.com/joyent/node/issues/1707
 function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
@@ -136196,6 +141826,7 @@ module.exports = function(qs, sep, eq, options) {
   }
 
   var len = qs.length;
+  // maxKeys <= 0 means that we should not limit keys count
   if (maxKeys > 0 && len > maxKeys) {
     len = maxKeys;
   }
@@ -136232,7 +141863,27 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],456:[function(require,module,exports){
+},{}],461:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 'use strict';
 
@@ -136299,16 +141950,39 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],457:[function(require,module,exports){
+},{}],462:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":455,"./encode":456}],458:[function(require,module,exports){
+},{"./decode":460,"./encode":461}],463:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 'use strict';
 
+// If obj.hasOwnProperty has been overridden, then calling
+// obj.hasOwnProperty(prop) will break.
+// See: https://github.com/joyent/node/issues/1707
 function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
@@ -136331,6 +142005,7 @@ module.exports = function(qs, sep, eq, options) {
   }
 
   var len = qs.length;
+  // maxKeys <= 0 means that we should not limit keys count
   if (maxKeys > 0 && len > maxKeys) {
     len = maxKeys;
   }
@@ -136363,7 +142038,27 @@ module.exports = function(qs, sep, eq, options) {
   return obj;
 };
 
-},{}],459:[function(require,module,exports){
+},{}],464:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 'use strict';
 
@@ -136409,9 +142104,4060 @@ module.exports = function(obj, sep, eq, name) {
          encodeURIComponent(stringifyPrimitive(obj));
 };
 
-},{}],460:[function(require,module,exports){
-arguments[4][457][0].apply(exports,arguments)
-},{"./decode":458,"./encode":459,"dup":457}],461:[function(require,module,exports){
+},{}],465:[function(require,module,exports){
+arguments[4][462][0].apply(exports,arguments)
+},{"./decode":463,"./encode":464,"dup":462}],466:[function(require,module,exports){
+module.exports = require('./lib/_stream_duplex.js');
+
+},{"./lib/_stream_duplex.js":467}],467:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// a duplex stream is just a stream that is both readable and writable.
+// Since JS doesn't have multiple prototypal inheritance, this class
+// prototypally inherits from Readable, and then parasitically from
+// Writable.
+
+'use strict';
+
+/*<replacement>*/
+
+var processNextTick = require('process-nextick-args');
+/*</replacement>*/
+
+/*<replacement>*/
+var objectKeys = Object.keys || function (obj) {
+  var keys = [];
+  for (var key in obj) {
+    keys.push(key);
+  }return keys;
+};
+/*</replacement>*/
+
+module.exports = Duplex;
+
+/*<replacement>*/
+var util = require('core-util-is');
+util.inherits = require('inherits');
+/*</replacement>*/
+
+var Readable = require('./_stream_readable');
+var Writable = require('./_stream_writable');
+
+util.inherits(Duplex, Readable);
+
+var keys = objectKeys(Writable.prototype);
+for (var v = 0; v < keys.length; v++) {
+  var method = keys[v];
+  if (!Duplex.prototype[method]) Duplex.prototype[method] = Writable.prototype[method];
+}
+
+function Duplex(options) {
+  if (!(this instanceof Duplex)) return new Duplex(options);
+
+  Readable.call(this, options);
+  Writable.call(this, options);
+
+  if (options && options.readable === false) this.readable = false;
+
+  if (options && options.writable === false) this.writable = false;
+
+  this.allowHalfOpen = true;
+  if (options && options.allowHalfOpen === false) this.allowHalfOpen = false;
+
+  this.once('end', onend);
+}
+
+// the no-half-open enforcer
+function onend() {
+  // if we allow half-open state, or if the writable side ended,
+  // then we're ok.
+  if (this.allowHalfOpen || this._writableState.ended) return;
+
+  // no more data can be written.
+  // But allow more writes to happen in this tick.
+  processNextTick(onEndNT, this);
+}
+
+function onEndNT(self) {
+  self.end();
+}
+
+Object.defineProperty(Duplex.prototype, 'destroyed', {
+  get: function () {
+    if (this._readableState === undefined || this._writableState === undefined) {
+      return false;
+    }
+    return this._readableState.destroyed && this._writableState.destroyed;
+  },
+  set: function (value) {
+    // we ignore the value if the stream
+    // has not been initialized yet
+    if (this._readableState === undefined || this._writableState === undefined) {
+      return;
+    }
+
+    // backward compatibility, the user is explicitly
+    // managing destroyed
+    this._readableState.destroyed = value;
+    this._writableState.destroyed = value;
+  }
+});
+
+Duplex.prototype._destroy = function (err, cb) {
+  this.push(null);
+  this.end();
+
+  processNextTick(cb, err);
+};
+
+function forEach(xs, f) {
+  for (var i = 0, l = xs.length; i < l; i++) {
+    f(xs[i], i);
+  }
+}
+},{"./_stream_readable":469,"./_stream_writable":471,"core-util-is":304,"inherits":313,"process-nextick-args":457}],468:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// a passthrough stream.
+// basically just the most minimal sort of Transform stream.
+// Every written chunk gets output as-is.
+
+'use strict';
+
+module.exports = PassThrough;
+
+var Transform = require('./_stream_transform');
+
+/*<replacement>*/
+var util = require('core-util-is');
+util.inherits = require('inherits');
+/*</replacement>*/
+
+util.inherits(PassThrough, Transform);
+
+function PassThrough(options) {
+  if (!(this instanceof PassThrough)) return new PassThrough(options);
+
+  Transform.call(this, options);
+}
+
+PassThrough.prototype._transform = function (chunk, encoding, cb) {
+  cb(null, chunk);
+};
+},{"./_stream_transform":470,"core-util-is":304,"inherits":313}],469:[function(require,module,exports){
+(function (process,global){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+'use strict';
+
+/*<replacement>*/
+
+var processNextTick = require('process-nextick-args');
+/*</replacement>*/
+
+module.exports = Readable;
+
+/*<replacement>*/
+var isArray = require('isarray');
+/*</replacement>*/
+
+/*<replacement>*/
+var Duplex;
+/*</replacement>*/
+
+Readable.ReadableState = ReadableState;
+
+/*<replacement>*/
+var EE = require('events').EventEmitter;
+
+var EElistenerCount = function (emitter, type) {
+  return emitter.listeners(type).length;
+};
+/*</replacement>*/
+
+/*<replacement>*/
+var Stream = require('./internal/streams/stream');
+/*</replacement>*/
+
+// TODO(bmeurer): Change this back to const once hole checks are
+// properly optimized away early in Ignition+TurboFan.
+/*<replacement>*/
+var Buffer = require('safe-buffer').Buffer;
+var OurUint8Array = global.Uint8Array || function () {};
+function _uint8ArrayToBuffer(chunk) {
+  return Buffer.from(chunk);
+}
+function _isUint8Array(obj) {
+  return Buffer.isBuffer(obj) || obj instanceof OurUint8Array;
+}
+/*</replacement>*/
+
+/*<replacement>*/
+var util = require('core-util-is');
+util.inherits = require('inherits');
+/*</replacement>*/
+
+/*<replacement>*/
+var debugUtil = require('util');
+var debug = void 0;
+if (debugUtil && debugUtil.debuglog) {
+  debug = debugUtil.debuglog('stream');
+} else {
+  debug = function () {};
+}
+/*</replacement>*/
+
+var BufferList = require('./internal/streams/BufferList');
+var destroyImpl = require('./internal/streams/destroy');
+var StringDecoder;
+
+util.inherits(Readable, Stream);
+
+var kProxyEvents = ['error', 'close', 'destroy', 'pause', 'resume'];
+
+function prependListener(emitter, event, fn) {
+  // Sadly this is not cacheable as some libraries bundle their own
+  // event emitter implementation with them.
+  if (typeof emitter.prependListener === 'function') {
+    return emitter.prependListener(event, fn);
+  } else {
+    // This is a hack to make sure that our error handler is attached before any
+    // userland ones.  NEVER DO THIS. This is here only because this code needs
+    // to continue to work with older versions of Node.js that do not include
+    // the prependListener() method. The goal is to eventually remove this hack.
+    if (!emitter._events || !emitter._events[event]) emitter.on(event, fn);else if (isArray(emitter._events[event])) emitter._events[event].unshift(fn);else emitter._events[event] = [fn, emitter._events[event]];
+  }
+}
+
+function ReadableState(options, stream) {
+  Duplex = Duplex || require('./_stream_duplex');
+
+  options = options || {};
+
+  // object stream flag. Used to make read(n) ignore n and to
+  // make all the buffer merging and length checks go away
+  this.objectMode = !!options.objectMode;
+
+  if (stream instanceof Duplex) this.objectMode = this.objectMode || !!options.readableObjectMode;
+
+  // the point at which it stops calling _read() to fill the buffer
+  // Note: 0 is a valid value, means "don't call _read preemptively ever"
+  var hwm = options.highWaterMark;
+  var defaultHwm = this.objectMode ? 16 : 16 * 1024;
+  this.highWaterMark = hwm || hwm === 0 ? hwm : defaultHwm;
+
+  // cast to ints.
+  this.highWaterMark = Math.floor(this.highWaterMark);
+
+  // A linked list is used to store data chunks instead of an array because the
+  // linked list can remove elements from the beginning faster than
+  // array.shift()
+  this.buffer = new BufferList();
+  this.length = 0;
+  this.pipes = null;
+  this.pipesCount = 0;
+  this.flowing = null;
+  this.ended = false;
+  this.endEmitted = false;
+  this.reading = false;
+
+  // a flag to be able to tell if the event 'readable'/'data' is emitted
+  // immediately, or on a later tick.  We set this to true at first, because
+  // any actions that shouldn't happen until "later" should generally also
+  // not happen before the first read call.
+  this.sync = true;
+
+  // whenever we return null, then we set a flag to say
+  // that we're awaiting a 'readable' event emission.
+  this.needReadable = false;
+  this.emittedReadable = false;
+  this.readableListening = false;
+  this.resumeScheduled = false;
+
+  // has it been destroyed
+  this.destroyed = false;
+
+  // Crypto is kind of old and crusty.  Historically, its default string
+  // encoding is 'binary' so we have to make this configurable.
+  // Everything else in the universe uses 'utf8', though.
+  this.defaultEncoding = options.defaultEncoding || 'utf8';
+
+  // the number of writers that are awaiting a drain event in .pipe()s
+  this.awaitDrain = 0;
+
+  // if true, a maybeReadMore has been scheduled
+  this.readingMore = false;
+
+  this.decoder = null;
+  this.encoding = null;
+  if (options.encoding) {
+    if (!StringDecoder) StringDecoder = require('string_decoder/').StringDecoder;
+    this.decoder = new StringDecoder(options.encoding);
+    this.encoding = options.encoding;
+  }
+}
+
+function Readable(options) {
+  Duplex = Duplex || require('./_stream_duplex');
+
+  if (!(this instanceof Readable)) return new Readable(options);
+
+  this._readableState = new ReadableState(options, this);
+
+  // legacy
+  this.readable = true;
+
+  if (options) {
+    if (typeof options.read === 'function') this._read = options.read;
+
+    if (typeof options.destroy === 'function') this._destroy = options.destroy;
+  }
+
+  Stream.call(this);
+}
+
+Object.defineProperty(Readable.prototype, 'destroyed', {
+  get: function () {
+    if (this._readableState === undefined) {
+      return false;
+    }
+    return this._readableState.destroyed;
+  },
+  set: function (value) {
+    // we ignore the value if the stream
+    // has not been initialized yet
+    if (!this._readableState) {
+      return;
+    }
+
+    // backward compatibility, the user is explicitly
+    // managing destroyed
+    this._readableState.destroyed = value;
+  }
+});
+
+Readable.prototype.destroy = destroyImpl.destroy;
+Readable.prototype._undestroy = destroyImpl.undestroy;
+Readable.prototype._destroy = function (err, cb) {
+  this.push(null);
+  cb(err);
+};
+
+// Manually shove something into the read() buffer.
+// This returns true if the highWaterMark has not been hit yet,
+// similar to how Writable.write() returns true if you should
+// write() some more.
+Readable.prototype.push = function (chunk, encoding) {
+  var state = this._readableState;
+  var skipChunkCheck;
+
+  if (!state.objectMode) {
+    if (typeof chunk === 'string') {
+      encoding = encoding || state.defaultEncoding;
+      if (encoding !== state.encoding) {
+        chunk = Buffer.from(chunk, encoding);
+        encoding = '';
+      }
+      skipChunkCheck = true;
+    }
+  } else {
+    skipChunkCheck = true;
+  }
+
+  return readableAddChunk(this, chunk, encoding, false, skipChunkCheck);
+};
+
+// Unshift should *always* be something directly out of read()
+Readable.prototype.unshift = function (chunk) {
+  return readableAddChunk(this, chunk, null, true, false);
+};
+
+function readableAddChunk(stream, chunk, encoding, addToFront, skipChunkCheck) {
+  var state = stream._readableState;
+  if (chunk === null) {
+    state.reading = false;
+    onEofChunk(stream, state);
+  } else {
+    var er;
+    if (!skipChunkCheck) er = chunkInvalid(state, chunk);
+    if (er) {
+      stream.emit('error', er);
+    } else if (state.objectMode || chunk && chunk.length > 0) {
+      if (typeof chunk !== 'string' && !state.objectMode && Object.getPrototypeOf(chunk) !== Buffer.prototype) {
+        chunk = _uint8ArrayToBuffer(chunk);
+      }
+
+      if (addToFront) {
+        if (state.endEmitted) stream.emit('error', new Error('stream.unshift() after end event'));else addChunk(stream, state, chunk, true);
+      } else if (state.ended) {
+        stream.emit('error', new Error('stream.push() after EOF'));
+      } else {
+        state.reading = false;
+        if (state.decoder && !encoding) {
+          chunk = state.decoder.write(chunk);
+          if (state.objectMode || chunk.length !== 0) addChunk(stream, state, chunk, false);else maybeReadMore(stream, state);
+        } else {
+          addChunk(stream, state, chunk, false);
+        }
+      }
+    } else if (!addToFront) {
+      state.reading = false;
+    }
+  }
+
+  return needMoreData(state);
+}
+
+function addChunk(stream, state, chunk, addToFront) {
+  if (state.flowing && state.length === 0 && !state.sync) {
+    stream.emit('data', chunk);
+    stream.read(0);
+  } else {
+    // update the buffer info.
+    state.length += state.objectMode ? 1 : chunk.length;
+    if (addToFront) state.buffer.unshift(chunk);else state.buffer.push(chunk);
+
+    if (state.needReadable) emitReadable(stream);
+  }
+  maybeReadMore(stream, state);
+}
+
+function chunkInvalid(state, chunk) {
+  var er;
+  if (!_isUint8Array(chunk) && typeof chunk !== 'string' && chunk !== undefined && !state.objectMode) {
+    er = new TypeError('Invalid non-string/buffer chunk');
+  }
+  return er;
+}
+
+// if it's past the high water mark, we can push in some more.
+// Also, if we have no data yet, we can stand some
+// more bytes.  This is to work around cases where hwm=0,
+// such as the repl.  Also, if the push() triggered a
+// readable event, and the user called read(largeNumber) such that
+// needReadable was set, then we ought to push more, so that another
+// 'readable' event will be triggered.
+function needMoreData(state) {
+  return !state.ended && (state.needReadable || state.length < state.highWaterMark || state.length === 0);
+}
+
+Readable.prototype.isPaused = function () {
+  return this._readableState.flowing === false;
+};
+
+// backwards compatibility.
+Readable.prototype.setEncoding = function (enc) {
+  if (!StringDecoder) StringDecoder = require('string_decoder/').StringDecoder;
+  this._readableState.decoder = new StringDecoder(enc);
+  this._readableState.encoding = enc;
+  return this;
+};
+
+// Don't raise the hwm > 8MB
+var MAX_HWM = 0x800000;
+function computeNewHighWaterMark(n) {
+  if (n >= MAX_HWM) {
+    n = MAX_HWM;
+  } else {
+    // Get the next highest power of 2 to prevent increasing hwm excessively in
+    // tiny amounts
+    n--;
+    n |= n >>> 1;
+    n |= n >>> 2;
+    n |= n >>> 4;
+    n |= n >>> 8;
+    n |= n >>> 16;
+    n++;
+  }
+  return n;
+}
+
+// This function is designed to be inlinable, so please take care when making
+// changes to the function body.
+function howMuchToRead(n, state) {
+  if (n <= 0 || state.length === 0 && state.ended) return 0;
+  if (state.objectMode) return 1;
+  if (n !== n) {
+    // Only flow one buffer at a time
+    if (state.flowing && state.length) return state.buffer.head.data.length;else return state.length;
+  }
+  // If we're asking for more than the current hwm, then raise the hwm.
+  if (n > state.highWaterMark) state.highWaterMark = computeNewHighWaterMark(n);
+  if (n <= state.length) return n;
+  // Don't have enough
+  if (!state.ended) {
+    state.needReadable = true;
+    return 0;
+  }
+  return state.length;
+}
+
+// you can override either this method, or the async _read(n) below.
+Readable.prototype.read = function (n) {
+  debug('read', n);
+  n = parseInt(n, 10);
+  var state = this._readableState;
+  var nOrig = n;
+
+  if (n !== 0) state.emittedReadable = false;
+
+  // if we're doing read(0) to trigger a readable event, but we
+  // already have a bunch of data in the buffer, then just trigger
+  // the 'readable' event and move on.
+  if (n === 0 && state.needReadable && (state.length >= state.highWaterMark || state.ended)) {
+    debug('read: emitReadable', state.length, state.ended);
+    if (state.length === 0 && state.ended) endReadable(this);else emitReadable(this);
+    return null;
+  }
+
+  n = howMuchToRead(n, state);
+
+  // if we've ended, and we're now clear, then finish it up.
+  if (n === 0 && state.ended) {
+    if (state.length === 0) endReadable(this);
+    return null;
+  }
+
+  // All the actual chunk generation logic needs to be
+  // *below* the call to _read.  The reason is that in certain
+  // synthetic stream cases, such as passthrough streams, _read
+  // may be a completely synchronous operation which may change
+  // the state of the read buffer, providing enough data when
+  // before there was *not* enough.
+  //
+  // So, the steps are:
+  // 1. Figure out what the state of things will be after we do
+  // a read from the buffer.
+  //
+  // 2. If that resulting state will trigger a _read, then call _read.
+  // Note that this may be asynchronous, or synchronous.  Yes, it is
+  // deeply ugly to write APIs this way, but that still doesn't mean
+  // that the Readable class should behave improperly, as streams are
+  // designed to be sync/async agnostic.
+  // Take note if the _read call is sync or async (ie, if the read call
+  // has returned yet), so that we know whether or not it's safe to emit
+  // 'readable' etc.
+  //
+  // 3. Actually pull the requested chunks out of the buffer and return.
+
+  // if we need a readable event, then we need to do some reading.
+  var doRead = state.needReadable;
+  debug('need readable', doRead);
+
+  // if we currently have less than the highWaterMark, then also read some
+  if (state.length === 0 || state.length - n < state.highWaterMark) {
+    doRead = true;
+    debug('length less than watermark', doRead);
+  }
+
+  // however, if we've ended, then there's no point, and if we're already
+  // reading, then it's unnecessary.
+  if (state.ended || state.reading) {
+    doRead = false;
+    debug('reading or ended', doRead);
+  } else if (doRead) {
+    debug('do read');
+    state.reading = true;
+    state.sync = true;
+    // if the length is currently zero, then we *need* a readable event.
+    if (state.length === 0) state.needReadable = true;
+    // call internal read method
+    this._read(state.highWaterMark);
+    state.sync = false;
+    // If _read pushed data synchronously, then `reading` will be false,
+    // and we need to re-evaluate how much data we can return to the user.
+    if (!state.reading) n = howMuchToRead(nOrig, state);
+  }
+
+  var ret;
+  if (n > 0) ret = fromList(n, state);else ret = null;
+
+  if (ret === null) {
+    state.needReadable = true;
+    n = 0;
+  } else {
+    state.length -= n;
+  }
+
+  if (state.length === 0) {
+    // If we have nothing in the buffer, then we want to know
+    // as soon as we *do* get something into the buffer.
+    if (!state.ended) state.needReadable = true;
+
+    // If we tried to read() past the EOF, then emit end on the next tick.
+    if (nOrig !== n && state.ended) endReadable(this);
+  }
+
+  if (ret !== null) this.emit('data', ret);
+
+  return ret;
+};
+
+function onEofChunk(stream, state) {
+  if (state.ended) return;
+  if (state.decoder) {
+    var chunk = state.decoder.end();
+    if (chunk && chunk.length) {
+      state.buffer.push(chunk);
+      state.length += state.objectMode ? 1 : chunk.length;
+    }
+  }
+  state.ended = true;
+
+  // emit 'readable' now to make sure it gets picked up.
+  emitReadable(stream);
+}
+
+// Don't emit readable right away in sync mode, because this can trigger
+// another read() call => stack overflow.  This way, it might trigger
+// a nextTick recursion warning, but that's not so bad.
+function emitReadable(stream) {
+  var state = stream._readableState;
+  state.needReadable = false;
+  if (!state.emittedReadable) {
+    debug('emitReadable', state.flowing);
+    state.emittedReadable = true;
+    if (state.sync) processNextTick(emitReadable_, stream);else emitReadable_(stream);
+  }
+}
+
+function emitReadable_(stream) {
+  debug('emit readable');
+  stream.emit('readable');
+  flow(stream);
+}
+
+// at this point, the user has presumably seen the 'readable' event,
+// and called read() to consume some data.  that may have triggered
+// in turn another _read(n) call, in which case reading = true if
+// it's in progress.
+// However, if we're not ended, or reading, and the length < hwm,
+// then go ahead and try to read some more preemptively.
+function maybeReadMore(stream, state) {
+  if (!state.readingMore) {
+    state.readingMore = true;
+    processNextTick(maybeReadMore_, stream, state);
+  }
+}
+
+function maybeReadMore_(stream, state) {
+  var len = state.length;
+  while (!state.reading && !state.flowing && !state.ended && state.length < state.highWaterMark) {
+    debug('maybeReadMore read 0');
+    stream.read(0);
+    if (len === state.length)
+      // didn't get any data, stop spinning.
+      break;else len = state.length;
+  }
+  state.readingMore = false;
+}
+
+// abstract method.  to be overridden in specific implementation classes.
+// call cb(er, data) where data is <= n in length.
+// for virtual (non-string, non-buffer) streams, "length" is somewhat
+// arbitrary, and perhaps not very meaningful.
+Readable.prototype._read = function (n) {
+  this.emit('error', new Error('_read() is not implemented'));
+};
+
+Readable.prototype.pipe = function (dest, pipeOpts) {
+  var src = this;
+  var state = this._readableState;
+
+  switch (state.pipesCount) {
+    case 0:
+      state.pipes = dest;
+      break;
+    case 1:
+      state.pipes = [state.pipes, dest];
+      break;
+    default:
+      state.pipes.push(dest);
+      break;
+  }
+  state.pipesCount += 1;
+  debug('pipe count=%d opts=%j', state.pipesCount, pipeOpts);
+
+  var doEnd = (!pipeOpts || pipeOpts.end !== false) && dest !== process.stdout && dest !== process.stderr;
+
+  var endFn = doEnd ? onend : unpipe;
+  if (state.endEmitted) processNextTick(endFn);else src.once('end', endFn);
+
+  dest.on('unpipe', onunpipe);
+  function onunpipe(readable, unpipeInfo) {
+    debug('onunpipe');
+    if (readable === src) {
+      if (unpipeInfo && unpipeInfo.hasUnpiped === false) {
+        unpipeInfo.hasUnpiped = true;
+        cleanup();
+      }
+    }
+  }
+
+  function onend() {
+    debug('onend');
+    dest.end();
+  }
+
+  // when the dest drains, it reduces the awaitDrain counter
+  // on the source.  This would be more elegant with a .once()
+  // handler in flow(), but adding and removing repeatedly is
+  // too slow.
+  var ondrain = pipeOnDrain(src);
+  dest.on('drain', ondrain);
+
+  var cleanedUp = false;
+  function cleanup() {
+    debug('cleanup');
+    // cleanup event handlers once the pipe is broken
+    dest.removeListener('close', onclose);
+    dest.removeListener('finish', onfinish);
+    dest.removeListener('drain', ondrain);
+    dest.removeListener('error', onerror);
+    dest.removeListener('unpipe', onunpipe);
+    src.removeListener('end', onend);
+    src.removeListener('end', unpipe);
+    src.removeListener('data', ondata);
+
+    cleanedUp = true;
+
+    // if the reader is waiting for a drain event from this
+    // specific writer, then it would cause it to never start
+    // flowing again.
+    // So, if this is awaiting a drain, then we just call it now.
+    // If we don't know, then assume that we are waiting for one.
+    if (state.awaitDrain && (!dest._writableState || dest._writableState.needDrain)) ondrain();
+  }
+
+  // If the user pushes more data while we're writing to dest then we'll end up
+  // in ondata again. However, we only want to increase awaitDrain once because
+  // dest will only emit one 'drain' event for the multiple writes.
+  // => Introduce a guard on increasing awaitDrain.
+  var increasedAwaitDrain = false;
+  src.on('data', ondata);
+  function ondata(chunk) {
+    debug('ondata');
+    increasedAwaitDrain = false;
+    var ret = dest.write(chunk);
+    if (false === ret && !increasedAwaitDrain) {
+      // If the user unpiped during `dest.write()`, it is possible
+      // to get stuck in a permanently paused state if that write
+      // also returned false.
+      // => Check whether `dest` is still a piping destination.
+      if ((state.pipesCount === 1 && state.pipes === dest || state.pipesCount > 1 && indexOf(state.pipes, dest) !== -1) && !cleanedUp) {
+        debug('false write response, pause', src._readableState.awaitDrain);
+        src._readableState.awaitDrain++;
+        increasedAwaitDrain = true;
+      }
+      src.pause();
+    }
+  }
+
+  // if the dest has an error, then stop piping into it.
+  // however, don't suppress the throwing behavior for this.
+  function onerror(er) {
+    debug('onerror', er);
+    unpipe();
+    dest.removeListener('error', onerror);
+    if (EElistenerCount(dest, 'error') === 0) dest.emit('error', er);
+  }
+
+  // Make sure our error handler is attached before userland ones.
+  prependListener(dest, 'error', onerror);
+
+  // Both close and finish should trigger unpipe, but only once.
+  function onclose() {
+    dest.removeListener('finish', onfinish);
+    unpipe();
+  }
+  dest.once('close', onclose);
+  function onfinish() {
+    debug('onfinish');
+    dest.removeListener('close', onclose);
+    unpipe();
+  }
+  dest.once('finish', onfinish);
+
+  function unpipe() {
+    debug('unpipe');
+    src.unpipe(dest);
+  }
+
+  // tell the dest that it's being piped to
+  dest.emit('pipe', src);
+
+  // start the flow if it hasn't been started already.
+  if (!state.flowing) {
+    debug('pipe resume');
+    src.resume();
+  }
+
+  return dest;
+};
+
+function pipeOnDrain(src) {
+  return function () {
+    var state = src._readableState;
+    debug('pipeOnDrain', state.awaitDrain);
+    if (state.awaitDrain) state.awaitDrain--;
+    if (state.awaitDrain === 0 && EElistenerCount(src, 'data')) {
+      state.flowing = true;
+      flow(src);
+    }
+  };
+}
+
+Readable.prototype.unpipe = function (dest) {
+  var state = this._readableState;
+  var unpipeInfo = { hasUnpiped: false };
+
+  // if we're not piping anywhere, then do nothing.
+  if (state.pipesCount === 0) return this;
+
+  // just one destination.  most common case.
+  if (state.pipesCount === 1) {
+    // passed in one, but it's not the right one.
+    if (dest && dest !== state.pipes) return this;
+
+    if (!dest) dest = state.pipes;
+
+    // got a match.
+    state.pipes = null;
+    state.pipesCount = 0;
+    state.flowing = false;
+    if (dest) dest.emit('unpipe', this, unpipeInfo);
+    return this;
+  }
+
+  // slow case. multiple pipe destinations.
+
+  if (!dest) {
+    // remove all.
+    var dests = state.pipes;
+    var len = state.pipesCount;
+    state.pipes = null;
+    state.pipesCount = 0;
+    state.flowing = false;
+
+    for (var i = 0; i < len; i++) {
+      dests[i].emit('unpipe', this, unpipeInfo);
+    }return this;
+  }
+
+  // try to find the right one.
+  var index = indexOf(state.pipes, dest);
+  if (index === -1) return this;
+
+  state.pipes.splice(index, 1);
+  state.pipesCount -= 1;
+  if (state.pipesCount === 1) state.pipes = state.pipes[0];
+
+  dest.emit('unpipe', this, unpipeInfo);
+
+  return this;
+};
+
+// set up data events if they are asked for
+// Ensure readable listeners eventually get something
+Readable.prototype.on = function (ev, fn) {
+  var res = Stream.prototype.on.call(this, ev, fn);
+
+  if (ev === 'data') {
+    // Start flowing on next tick if stream isn't explicitly paused
+    if (this._readableState.flowing !== false) this.resume();
+  } else if (ev === 'readable') {
+    var state = this._readableState;
+    if (!state.endEmitted && !state.readableListening) {
+      state.readableListening = state.needReadable = true;
+      state.emittedReadable = false;
+      if (!state.reading) {
+        processNextTick(nReadingNextTick, this);
+      } else if (state.length) {
+        emitReadable(this);
+      }
+    }
+  }
+
+  return res;
+};
+Readable.prototype.addListener = Readable.prototype.on;
+
+function nReadingNextTick(self) {
+  debug('readable nexttick read 0');
+  self.read(0);
+}
+
+// pause() and resume() are remnants of the legacy readable stream API
+// If the user uses them, then switch into old mode.
+Readable.prototype.resume = function () {
+  var state = this._readableState;
+  if (!state.flowing) {
+    debug('resume');
+    state.flowing = true;
+    resume(this, state);
+  }
+  return this;
+};
+
+function resume(stream, state) {
+  if (!state.resumeScheduled) {
+    state.resumeScheduled = true;
+    processNextTick(resume_, stream, state);
+  }
+}
+
+function resume_(stream, state) {
+  if (!state.reading) {
+    debug('resume read 0');
+    stream.read(0);
+  }
+
+  state.resumeScheduled = false;
+  state.awaitDrain = 0;
+  stream.emit('resume');
+  flow(stream);
+  if (state.flowing && !state.reading) stream.read(0);
+}
+
+Readable.prototype.pause = function () {
+  debug('call pause flowing=%j', this._readableState.flowing);
+  if (false !== this._readableState.flowing) {
+    debug('pause');
+    this._readableState.flowing = false;
+    this.emit('pause');
+  }
+  return this;
+};
+
+function flow(stream) {
+  var state = stream._readableState;
+  debug('flow', state.flowing);
+  while (state.flowing && stream.read() !== null) {}
+}
+
+// wrap an old-style stream as the async data source.
+// This is *not* part of the readable stream interface.
+// It is an ugly unfortunate mess of history.
+Readable.prototype.wrap = function (stream) {
+  var state = this._readableState;
+  var paused = false;
+
+  var self = this;
+  stream.on('end', function () {
+    debug('wrapped end');
+    if (state.decoder && !state.ended) {
+      var chunk = state.decoder.end();
+      if (chunk && chunk.length) self.push(chunk);
+    }
+
+    self.push(null);
+  });
+
+  stream.on('data', function (chunk) {
+    debug('wrapped data');
+    if (state.decoder) chunk = state.decoder.write(chunk);
+
+    // don't skip over falsy values in objectMode
+    if (state.objectMode && (chunk === null || chunk === undefined)) return;else if (!state.objectMode && (!chunk || !chunk.length)) return;
+
+    var ret = self.push(chunk);
+    if (!ret) {
+      paused = true;
+      stream.pause();
+    }
+  });
+
+  // proxy all the other methods.
+  // important when wrapping filters and duplexes.
+  for (var i in stream) {
+    if (this[i] === undefined && typeof stream[i] === 'function') {
+      this[i] = function (method) {
+        return function () {
+          return stream[method].apply(stream, arguments);
+        };
+      }(i);
+    }
+  }
+
+  // proxy certain important events.
+  for (var n = 0; n < kProxyEvents.length; n++) {
+    stream.on(kProxyEvents[n], self.emit.bind(self, kProxyEvents[n]));
+  }
+
+  // when we try to consume some more bytes, simply unpause the
+  // underlying stream.
+  self._read = function (n) {
+    debug('wrapped _read', n);
+    if (paused) {
+      paused = false;
+      stream.resume();
+    }
+  };
+
+  return self;
+};
+
+// exposed for testing purposes only.
+Readable._fromList = fromList;
+
+// Pluck off n bytes from an array of buffers.
+// Length is the combined lengths of all the buffers in the list.
+// This function is designed to be inlinable, so please take care when making
+// changes to the function body.
+function fromList(n, state) {
+  // nothing buffered
+  if (state.length === 0) return null;
+
+  var ret;
+  if (state.objectMode) ret = state.buffer.shift();else if (!n || n >= state.length) {
+    // read it all, truncate the list
+    if (state.decoder) ret = state.buffer.join('');else if (state.buffer.length === 1) ret = state.buffer.head.data;else ret = state.buffer.concat(state.length);
+    state.buffer.clear();
+  } else {
+    // read part of list
+    ret = fromListPartial(n, state.buffer, state.decoder);
+  }
+
+  return ret;
+}
+
+// Extracts only enough buffered data to satisfy the amount requested.
+// This function is designed to be inlinable, so please take care when making
+// changes to the function body.
+function fromListPartial(n, list, hasStrings) {
+  var ret;
+  if (n < list.head.data.length) {
+    // slice is the same for buffers and strings
+    ret = list.head.data.slice(0, n);
+    list.head.data = list.head.data.slice(n);
+  } else if (n === list.head.data.length) {
+    // first chunk is a perfect match
+    ret = list.shift();
+  } else {
+    // result spans more than one buffer
+    ret = hasStrings ? copyFromBufferString(n, list) : copyFromBuffer(n, list);
+  }
+  return ret;
+}
+
+// Copies a specified amount of characters from the list of buffered data
+// chunks.
+// This function is designed to be inlinable, so please take care when making
+// changes to the function body.
+function copyFromBufferString(n, list) {
+  var p = list.head;
+  var c = 1;
+  var ret = p.data;
+  n -= ret.length;
+  while (p = p.next) {
+    var str = p.data;
+    var nb = n > str.length ? str.length : n;
+    if (nb === str.length) ret += str;else ret += str.slice(0, n);
+    n -= nb;
+    if (n === 0) {
+      if (nb === str.length) {
+        ++c;
+        if (p.next) list.head = p.next;else list.head = list.tail = null;
+      } else {
+        list.head = p;
+        p.data = str.slice(nb);
+      }
+      break;
+    }
+    ++c;
+  }
+  list.length -= c;
+  return ret;
+}
+
+// Copies a specified amount of bytes from the list of buffered data chunks.
+// This function is designed to be inlinable, so please take care when making
+// changes to the function body.
+function copyFromBuffer(n, list) {
+  var ret = Buffer.allocUnsafe(n);
+  var p = list.head;
+  var c = 1;
+  p.data.copy(ret);
+  n -= p.data.length;
+  while (p = p.next) {
+    var buf = p.data;
+    var nb = n > buf.length ? buf.length : n;
+    buf.copy(ret, ret.length - n, 0, nb);
+    n -= nb;
+    if (n === 0) {
+      if (nb === buf.length) {
+        ++c;
+        if (p.next) list.head = p.next;else list.head = list.tail = null;
+      } else {
+        list.head = p;
+        p.data = buf.slice(nb);
+      }
+      break;
+    }
+    ++c;
+  }
+  list.length -= c;
+  return ret;
+}
+
+function endReadable(stream) {
+  var state = stream._readableState;
+
+  // If we get here before consuming all the bytes, then that is a
+  // bug in node.  Should never happen.
+  if (state.length > 0) throw new Error('"endReadable()" called on non-empty stream');
+
+  if (!state.endEmitted) {
+    state.ended = true;
+    processNextTick(endReadableNT, state, stream);
+  }
+}
+
+function endReadableNT(state, stream) {
+  // Check that we didn't get one last unshift.
+  if (!state.endEmitted && state.length === 0) {
+    state.endEmitted = true;
+    stream.readable = false;
+    stream.emit('end');
+  }
+}
+
+function forEach(xs, f) {
+  for (var i = 0, l = xs.length; i < l; i++) {
+    f(xs[i], i);
+  }
+}
+
+function indexOf(xs, x) {
+  for (var i = 0, l = xs.length; i < l; i++) {
+    if (xs[i] === x) return i;
+  }
+  return -1;
+}
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./_stream_duplex":467,"./internal/streams/BufferList":472,"./internal/streams/destroy":473,"./internal/streams/stream":474,"_process":458,"core-util-is":304,"events":310,"inherits":313,"isarray":315,"process-nextick-args":457,"safe-buffer":481,"string_decoder/":475,"util":301}],470:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// a transform stream is a readable/writable stream where you do
+// something with the data.  Sometimes it's called a "filter",
+// but that's not a great name for it, since that implies a thing where
+// some bits pass through, and others are simply ignored.  (That would
+// be a valid example of a transform, of course.)
+//
+// While the output is causally related to the input, it's not a
+// necessarily symmetric or synchronous transformation.  For example,
+// a zlib stream might take multiple plain-text writes(), and then
+// emit a single compressed chunk some time in the future.
+//
+// Here's how this works:
+//
+// The Transform stream has all the aspects of the readable and writable
+// stream classes.  When you write(chunk), that calls _write(chunk,cb)
+// internally, and returns false if there's a lot of pending writes
+// buffered up.  When you call read(), that calls _read(n) until
+// there's enough pending readable data buffered up.
+//
+// In a transform stream, the written data is placed in a buffer.  When
+// _read(n) is called, it transforms the queued up data, calling the
+// buffered _write cb's as it consumes chunks.  If consuming a single
+// written chunk would result in multiple output chunks, then the first
+// outputted bit calls the readcb, and subsequent chunks just go into
+// the read buffer, and will cause it to emit 'readable' if necessary.
+//
+// This way, back-pressure is actually determined by the reading side,
+// since _read has to be called to start processing a new chunk.  However,
+// a pathological inflate type of transform can cause excessive buffering
+// here.  For example, imagine a stream where every byte of input is
+// interpreted as an integer from 0-255, and then results in that many
+// bytes of output.  Writing the 4 bytes {ff,ff,ff,ff} would result in
+// 1kb of data being output.  In this case, you could write a very small
+// amount of input, and end up with a very large amount of output.  In
+// such a pathological inflating mechanism, there'd be no way to tell
+// the system to stop doing the transform.  A single 4MB write could
+// cause the system to run out of memory.
+//
+// However, even in such a pathological case, only a single written chunk
+// would be consumed, and then the rest would wait (un-transformed) until
+// the results of the previous transformed chunk were consumed.
+
+'use strict';
+
+module.exports = Transform;
+
+var Duplex = require('./_stream_duplex');
+
+/*<replacement>*/
+var util = require('core-util-is');
+util.inherits = require('inherits');
+/*</replacement>*/
+
+util.inherits(Transform, Duplex);
+
+function TransformState(stream) {
+  this.afterTransform = function (er, data) {
+    return afterTransform(stream, er, data);
+  };
+
+  this.needTransform = false;
+  this.transforming = false;
+  this.writecb = null;
+  this.writechunk = null;
+  this.writeencoding = null;
+}
+
+function afterTransform(stream, er, data) {
+  var ts = stream._transformState;
+  ts.transforming = false;
+
+  var cb = ts.writecb;
+
+  if (!cb) {
+    return stream.emit('error', new Error('write callback called multiple times'));
+  }
+
+  ts.writechunk = null;
+  ts.writecb = null;
+
+  if (data !== null && data !== undefined) stream.push(data);
+
+  cb(er);
+
+  var rs = stream._readableState;
+  rs.reading = false;
+  if (rs.needReadable || rs.length < rs.highWaterMark) {
+    stream._read(rs.highWaterMark);
+  }
+}
+
+function Transform(options) {
+  if (!(this instanceof Transform)) return new Transform(options);
+
+  Duplex.call(this, options);
+
+  this._transformState = new TransformState(this);
+
+  var stream = this;
+
+  // start out asking for a readable event once data is transformed.
+  this._readableState.needReadable = true;
+
+  // we have implemented the _read method, and done the other things
+  // that Readable wants before the first _read call, so unset the
+  // sync guard flag.
+  this._readableState.sync = false;
+
+  if (options) {
+    if (typeof options.transform === 'function') this._transform = options.transform;
+
+    if (typeof options.flush === 'function') this._flush = options.flush;
+  }
+
+  // When the writable side finishes, then flush out anything remaining.
+  this.once('prefinish', function () {
+    if (typeof this._flush === 'function') this._flush(function (er, data) {
+      done(stream, er, data);
+    });else done(stream);
+  });
+}
+
+Transform.prototype.push = function (chunk, encoding) {
+  this._transformState.needTransform = false;
+  return Duplex.prototype.push.call(this, chunk, encoding);
+};
+
+// This is the part where you do stuff!
+// override this function in implementation classes.
+// 'chunk' is an input chunk.
+//
+// Call `push(newChunk)` to pass along transformed output
+// to the readable side.  You may call 'push' zero or more times.
+//
+// Call `cb(err)` when you are done with this chunk.  If you pass
+// an error, then that'll put the hurt on the whole operation.  If you
+// never call cb(), then you'll never get another chunk.
+Transform.prototype._transform = function (chunk, encoding, cb) {
+  throw new Error('_transform() is not implemented');
+};
+
+Transform.prototype._write = function (chunk, encoding, cb) {
+  var ts = this._transformState;
+  ts.writecb = cb;
+  ts.writechunk = chunk;
+  ts.writeencoding = encoding;
+  if (!ts.transforming) {
+    var rs = this._readableState;
+    if (ts.needTransform || rs.needReadable || rs.length < rs.highWaterMark) this._read(rs.highWaterMark);
+  }
+};
+
+// Doesn't matter what the args are here.
+// _transform does all the work.
+// That we got here means that the readable side wants more data.
+Transform.prototype._read = function (n) {
+  var ts = this._transformState;
+
+  if (ts.writechunk !== null && ts.writecb && !ts.transforming) {
+    ts.transforming = true;
+    this._transform(ts.writechunk, ts.writeencoding, ts.afterTransform);
+  } else {
+    // mark that we need a transform, so that any data that comes in
+    // will get processed, now that we've asked for it.
+    ts.needTransform = true;
+  }
+};
+
+Transform.prototype._destroy = function (err, cb) {
+  var _this = this;
+
+  Duplex.prototype._destroy.call(this, err, function (err2) {
+    cb(err2);
+    _this.emit('close');
+  });
+};
+
+function done(stream, er, data) {
+  if (er) return stream.emit('error', er);
+
+  if (data !== null && data !== undefined) stream.push(data);
+
+  // if there's nothing in the write buffer, then that means
+  // that nothing more will ever be provided
+  var ws = stream._writableState;
+  var ts = stream._transformState;
+
+  if (ws.length) throw new Error('Calling transform done when ws.length != 0');
+
+  if (ts.transforming) throw new Error('Calling transform done when still transforming');
+
+  return stream.push(null);
+}
+},{"./_stream_duplex":467,"core-util-is":304,"inherits":313}],471:[function(require,module,exports){
+(function (process,global){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// A bit simpler than readable streams.
+// Implement an async ._write(chunk, encoding, cb), and it'll handle all
+// the drain event emission and buffering.
+
+'use strict';
+
+/*<replacement>*/
+
+var processNextTick = require('process-nextick-args');
+/*</replacement>*/
+
+module.exports = Writable;
+
+/* <replacement> */
+function WriteReq(chunk, encoding, cb) {
+  this.chunk = chunk;
+  this.encoding = encoding;
+  this.callback = cb;
+  this.next = null;
+}
+
+// It seems a linked list but it is not
+// there will be only 2 of these for each stream
+function CorkedRequest(state) {
+  var _this = this;
+
+  this.next = null;
+  this.entry = null;
+  this.finish = function () {
+    onCorkedFinish(_this, state);
+  };
+}
+/* </replacement> */
+
+/*<replacement>*/
+var asyncWrite = !process.browser && ['v0.10', 'v0.9.'].indexOf(process.version.slice(0, 5)) > -1 ? setImmediate : processNextTick;
+/*</replacement>*/
+
+/*<replacement>*/
+var Duplex;
+/*</replacement>*/
+
+Writable.WritableState = WritableState;
+
+/*<replacement>*/
+var util = require('core-util-is');
+util.inherits = require('inherits');
+/*</replacement>*/
+
+/*<replacement>*/
+var internalUtil = {
+  deprecate: require('util-deprecate')
+};
+/*</replacement>*/
+
+/*<replacement>*/
+var Stream = require('./internal/streams/stream');
+/*</replacement>*/
+
+/*<replacement>*/
+var Buffer = require('safe-buffer').Buffer;
+var OurUint8Array = global.Uint8Array || function () {};
+function _uint8ArrayToBuffer(chunk) {
+  return Buffer.from(chunk);
+}
+function _isUint8Array(obj) {
+  return Buffer.isBuffer(obj) || obj instanceof OurUint8Array;
+}
+/*</replacement>*/
+
+var destroyImpl = require('./internal/streams/destroy');
+
+util.inherits(Writable, Stream);
+
+function nop() {}
+
+function WritableState(options, stream) {
+  Duplex = Duplex || require('./_stream_duplex');
+
+  options = options || {};
+
+  // object stream flag to indicate whether or not this stream
+  // contains buffers or objects.
+  this.objectMode = !!options.objectMode;
+
+  if (stream instanceof Duplex) this.objectMode = this.objectMode || !!options.writableObjectMode;
+
+  // the point at which write() starts returning false
+  // Note: 0 is a valid value, means that we always return false if
+  // the entire buffer is not flushed immediately on write()
+  var hwm = options.highWaterMark;
+  var defaultHwm = this.objectMode ? 16 : 16 * 1024;
+  this.highWaterMark = hwm || hwm === 0 ? hwm : defaultHwm;
+
+  // cast to ints.
+  this.highWaterMark = Math.floor(this.highWaterMark);
+
+  // if _final has been called
+  this.finalCalled = false;
+
+  // drain event flag.
+  this.needDrain = false;
+  // at the start of calling end()
+  this.ending = false;
+  // when end() has been called, and returned
+  this.ended = false;
+  // when 'finish' is emitted
+  this.finished = false;
+
+  // has it been destroyed
+  this.destroyed = false;
+
+  // should we decode strings into buffers before passing to _write?
+  // this is here so that some node-core streams can optimize string
+  // handling at a lower level.
+  var noDecode = options.decodeStrings === false;
+  this.decodeStrings = !noDecode;
+
+  // Crypto is kind of old and crusty.  Historically, its default string
+  // encoding is 'binary' so we have to make this configurable.
+  // Everything else in the universe uses 'utf8', though.
+  this.defaultEncoding = options.defaultEncoding || 'utf8';
+
+  // not an actual buffer we keep track of, but a measurement
+  // of how much we're waiting to get pushed to some underlying
+  // socket or file.
+  this.length = 0;
+
+  // a flag to see when we're in the middle of a write.
+  this.writing = false;
+
+  // when true all writes will be buffered until .uncork() call
+  this.corked = 0;
+
+  // a flag to be able to tell if the onwrite cb is called immediately,
+  // or on a later tick.  We set this to true at first, because any
+  // actions that shouldn't happen until "later" should generally also
+  // not happen before the first write call.
+  this.sync = true;
+
+  // a flag to know if we're processing previously buffered items, which
+  // may call the _write() callback in the same tick, so that we don't
+  // end up in an overlapped onwrite situation.
+  this.bufferProcessing = false;
+
+  // the callback that's passed to _write(chunk,cb)
+  this.onwrite = function (er) {
+    onwrite(stream, er);
+  };
+
+  // the callback that the user supplies to write(chunk,encoding,cb)
+  this.writecb = null;
+
+  // the amount that is being written when _write is called.
+  this.writelen = 0;
+
+  this.bufferedRequest = null;
+  this.lastBufferedRequest = null;
+
+  // number of pending user-supplied write callbacks
+  // this must be 0 before 'finish' can be emitted
+  this.pendingcb = 0;
+
+  // emit prefinish if the only thing we're waiting for is _write cbs
+  // This is relevant for synchronous Transform streams
+  this.prefinished = false;
+
+  // True if the error was already emitted and should not be thrown again
+  this.errorEmitted = false;
+
+  // count buffered requests
+  this.bufferedRequestCount = 0;
+
+  // allocate the first CorkedRequest, there is always
+  // one allocated and free to use, and we maintain at most two
+  this.corkedRequestsFree = new CorkedRequest(this);
+}
+
+WritableState.prototype.getBuffer = function getBuffer() {
+  var current = this.bufferedRequest;
+  var out = [];
+  while (current) {
+    out.push(current);
+    current = current.next;
+  }
+  return out;
+};
+
+(function () {
+  try {
+    Object.defineProperty(WritableState.prototype, 'buffer', {
+      get: internalUtil.deprecate(function () {
+        return this.getBuffer();
+      }, '_writableState.buffer is deprecated. Use _writableState.getBuffer ' + 'instead.', 'DEP0003')
+    });
+  } catch (_) {}
+})();
+
+// Test _writableState for inheritance to account for Duplex streams,
+// whose prototype chain only points to Readable.
+var realHasInstance;
+if (typeof Symbol === 'function' && Symbol.hasInstance && typeof Function.prototype[Symbol.hasInstance] === 'function') {
+  realHasInstance = Function.prototype[Symbol.hasInstance];
+  Object.defineProperty(Writable, Symbol.hasInstance, {
+    value: function (object) {
+      if (realHasInstance.call(this, object)) return true;
+
+      return object && object._writableState instanceof WritableState;
+    }
+  });
+} else {
+  realHasInstance = function (object) {
+    return object instanceof this;
+  };
+}
+
+function Writable(options) {
+  Duplex = Duplex || require('./_stream_duplex');
+
+  // Writable ctor is applied to Duplexes, too.
+  // `realHasInstance` is necessary because using plain `instanceof`
+  // would return false, as no `_writableState` property is attached.
+
+  // Trying to use the custom `instanceof` for Writable here will also break the
+  // Node.js LazyTransform implementation, which has a non-trivial getter for
+  // `_writableState` that would lead to infinite recursion.
+  if (!realHasInstance.call(Writable, this) && !(this instanceof Duplex)) {
+    return new Writable(options);
+  }
+
+  this._writableState = new WritableState(options, this);
+
+  // legacy.
+  this.writable = true;
+
+  if (options) {
+    if (typeof options.write === 'function') this._write = options.write;
+
+    if (typeof options.writev === 'function') this._writev = options.writev;
+
+    if (typeof options.destroy === 'function') this._destroy = options.destroy;
+
+    if (typeof options.final === 'function') this._final = options.final;
+  }
+
+  Stream.call(this);
+}
+
+// Otherwise people can pipe Writable streams, which is just wrong.
+Writable.prototype.pipe = function () {
+  this.emit('error', new Error('Cannot pipe, not readable'));
+};
+
+function writeAfterEnd(stream, cb) {
+  var er = new Error('write after end');
+  // TODO: defer error events consistently everywhere, not just the cb
+  stream.emit('error', er);
+  processNextTick(cb, er);
+}
+
+// Checks that a user-supplied chunk is valid, especially for the particular
+// mode the stream is in. Currently this means that `null` is never accepted
+// and undefined/non-string values are only allowed in object mode.
+function validChunk(stream, state, chunk, cb) {
+  var valid = true;
+  var er = false;
+
+  if (chunk === null) {
+    er = new TypeError('May not write null values to stream');
+  } else if (typeof chunk !== 'string' && chunk !== undefined && !state.objectMode) {
+    er = new TypeError('Invalid non-string/buffer chunk');
+  }
+  if (er) {
+    stream.emit('error', er);
+    processNextTick(cb, er);
+    valid = false;
+  }
+  return valid;
+}
+
+Writable.prototype.write = function (chunk, encoding, cb) {
+  var state = this._writableState;
+  var ret = false;
+  var isBuf = _isUint8Array(chunk) && !state.objectMode;
+
+  if (isBuf && !Buffer.isBuffer(chunk)) {
+    chunk = _uint8ArrayToBuffer(chunk);
+  }
+
+  if (typeof encoding === 'function') {
+    cb = encoding;
+    encoding = null;
+  }
+
+  if (isBuf) encoding = 'buffer';else if (!encoding) encoding = state.defaultEncoding;
+
+  if (typeof cb !== 'function') cb = nop;
+
+  if (state.ended) writeAfterEnd(this, cb);else if (isBuf || validChunk(this, state, chunk, cb)) {
+    state.pendingcb++;
+    ret = writeOrBuffer(this, state, isBuf, chunk, encoding, cb);
+  }
+
+  return ret;
+};
+
+Writable.prototype.cork = function () {
+  var state = this._writableState;
+
+  state.corked++;
+};
+
+Writable.prototype.uncork = function () {
+  var state = this._writableState;
+
+  if (state.corked) {
+    state.corked--;
+
+    if (!state.writing && !state.corked && !state.finished && !state.bufferProcessing && state.bufferedRequest) clearBuffer(this, state);
+  }
+};
+
+Writable.prototype.setDefaultEncoding = function setDefaultEncoding(encoding) {
+  // node::ParseEncoding() requires lower case.
+  if (typeof encoding === 'string') encoding = encoding.toLowerCase();
+  if (!(['hex', 'utf8', 'utf-8', 'ascii', 'binary', 'base64', 'ucs2', 'ucs-2', 'utf16le', 'utf-16le', 'raw'].indexOf((encoding + '').toLowerCase()) > -1)) throw new TypeError('Unknown encoding: ' + encoding);
+  this._writableState.defaultEncoding = encoding;
+  return this;
+};
+
+function decodeChunk(state, chunk, encoding) {
+  if (!state.objectMode && state.decodeStrings !== false && typeof chunk === 'string') {
+    chunk = Buffer.from(chunk, encoding);
+  }
+  return chunk;
+}
+
+// if we're already writing something, then just put this
+// in the queue, and wait our turn.  Otherwise, call _write
+// If we return false, then we need a drain event, so set that flag.
+function writeOrBuffer(stream, state, isBuf, chunk, encoding, cb) {
+  if (!isBuf) {
+    var newChunk = decodeChunk(state, chunk, encoding);
+    if (chunk !== newChunk) {
+      isBuf = true;
+      encoding = 'buffer';
+      chunk = newChunk;
+    }
+  }
+  var len = state.objectMode ? 1 : chunk.length;
+
+  state.length += len;
+
+  var ret = state.length < state.highWaterMark;
+  // we must ensure that previous needDrain will not be reset to false.
+  if (!ret) state.needDrain = true;
+
+  if (state.writing || state.corked) {
+    var last = state.lastBufferedRequest;
+    state.lastBufferedRequest = {
+      chunk: chunk,
+      encoding: encoding,
+      isBuf: isBuf,
+      callback: cb,
+      next: null
+    };
+    if (last) {
+      last.next = state.lastBufferedRequest;
+    } else {
+      state.bufferedRequest = state.lastBufferedRequest;
+    }
+    state.bufferedRequestCount += 1;
+  } else {
+    doWrite(stream, state, false, len, chunk, encoding, cb);
+  }
+
+  return ret;
+}
+
+function doWrite(stream, state, writev, len, chunk, encoding, cb) {
+  state.writelen = len;
+  state.writecb = cb;
+  state.writing = true;
+  state.sync = true;
+  if (writev) stream._writev(chunk, state.onwrite);else stream._write(chunk, encoding, state.onwrite);
+  state.sync = false;
+}
+
+function onwriteError(stream, state, sync, er, cb) {
+  --state.pendingcb;
+
+  if (sync) {
+    // defer the callback if we are being called synchronously
+    // to avoid piling up things on the stack
+    processNextTick(cb, er);
+    // this can emit finish, and it will always happen
+    // after error
+    processNextTick(finishMaybe, stream, state);
+    stream._writableState.errorEmitted = true;
+    stream.emit('error', er);
+  } else {
+    // the caller expect this to happen before if
+    // it is async
+    cb(er);
+    stream._writableState.errorEmitted = true;
+    stream.emit('error', er);
+    // this can emit finish, but finish must
+    // always follow error
+    finishMaybe(stream, state);
+  }
+}
+
+function onwriteStateUpdate(state) {
+  state.writing = false;
+  state.writecb = null;
+  state.length -= state.writelen;
+  state.writelen = 0;
+}
+
+function onwrite(stream, er) {
+  var state = stream._writableState;
+  var sync = state.sync;
+  var cb = state.writecb;
+
+  onwriteStateUpdate(state);
+
+  if (er) onwriteError(stream, state, sync, er, cb);else {
+    // Check if we're actually ready to finish, but don't emit yet
+    var finished = needFinish(state);
+
+    if (!finished && !state.corked && !state.bufferProcessing && state.bufferedRequest) {
+      clearBuffer(stream, state);
+    }
+
+    if (sync) {
+      /*<replacement>*/
+      asyncWrite(afterWrite, stream, state, finished, cb);
+      /*</replacement>*/
+    } else {
+      afterWrite(stream, state, finished, cb);
+    }
+  }
+}
+
+function afterWrite(stream, state, finished, cb) {
+  if (!finished) onwriteDrain(stream, state);
+  state.pendingcb--;
+  cb();
+  finishMaybe(stream, state);
+}
+
+// Must force callback to be called on nextTick, so that we don't
+// emit 'drain' before the write() consumer gets the 'false' return
+// value, and has a chance to attach a 'drain' listener.
+function onwriteDrain(stream, state) {
+  if (state.length === 0 && state.needDrain) {
+    state.needDrain = false;
+    stream.emit('drain');
+  }
+}
+
+// if there's something in the buffer waiting, then process it
+function clearBuffer(stream, state) {
+  state.bufferProcessing = true;
+  var entry = state.bufferedRequest;
+
+  if (stream._writev && entry && entry.next) {
+    // Fast case, write everything using _writev()
+    var l = state.bufferedRequestCount;
+    var buffer = new Array(l);
+    var holder = state.corkedRequestsFree;
+    holder.entry = entry;
+
+    var count = 0;
+    var allBuffers = true;
+    while (entry) {
+      buffer[count] = entry;
+      if (!entry.isBuf) allBuffers = false;
+      entry = entry.next;
+      count += 1;
+    }
+    buffer.allBuffers = allBuffers;
+
+    doWrite(stream, state, true, state.length, buffer, '', holder.finish);
+
+    // doWrite is almost always async, defer these to save a bit of time
+    // as the hot path ends with doWrite
+    state.pendingcb++;
+    state.lastBufferedRequest = null;
+    if (holder.next) {
+      state.corkedRequestsFree = holder.next;
+      holder.next = null;
+    } else {
+      state.corkedRequestsFree = new CorkedRequest(state);
+    }
+  } else {
+    // Slow case, write chunks one-by-one
+    while (entry) {
+      var chunk = entry.chunk;
+      var encoding = entry.encoding;
+      var cb = entry.callback;
+      var len = state.objectMode ? 1 : chunk.length;
+
+      doWrite(stream, state, false, len, chunk, encoding, cb);
+      entry = entry.next;
+      // if we didn't call the onwrite immediately, then
+      // it means that we need to wait until it does.
+      // also, that means that the chunk and cb are currently
+      // being processed, so move the buffer counter past them.
+      if (state.writing) {
+        break;
+      }
+    }
+
+    if (entry === null) state.lastBufferedRequest = null;
+  }
+
+  state.bufferedRequestCount = 0;
+  state.bufferedRequest = entry;
+  state.bufferProcessing = false;
+}
+
+Writable.prototype._write = function (chunk, encoding, cb) {
+  cb(new Error('_write() is not implemented'));
+};
+
+Writable.prototype._writev = null;
+
+Writable.prototype.end = function (chunk, encoding, cb) {
+  var state = this._writableState;
+
+  if (typeof chunk === 'function') {
+    cb = chunk;
+    chunk = null;
+    encoding = null;
+  } else if (typeof encoding === 'function') {
+    cb = encoding;
+    encoding = null;
+  }
+
+  if (chunk !== null && chunk !== undefined) this.write(chunk, encoding);
+
+  // .end() fully uncorks
+  if (state.corked) {
+    state.corked = 1;
+    this.uncork();
+  }
+
+  // ignore unnecessary end() calls.
+  if (!state.ending && !state.finished) endWritable(this, state, cb);
+};
+
+function needFinish(state) {
+  return state.ending && state.length === 0 && state.bufferedRequest === null && !state.finished && !state.writing;
+}
+function callFinal(stream, state) {
+  stream._final(function (err) {
+    state.pendingcb--;
+    if (err) {
+      stream.emit('error', err);
+    }
+    state.prefinished = true;
+    stream.emit('prefinish');
+    finishMaybe(stream, state);
+  });
+}
+function prefinish(stream, state) {
+  if (!state.prefinished && !state.finalCalled) {
+    if (typeof stream._final === 'function') {
+      state.pendingcb++;
+      state.finalCalled = true;
+      processNextTick(callFinal, stream, state);
+    } else {
+      state.prefinished = true;
+      stream.emit('prefinish');
+    }
+  }
+}
+
+function finishMaybe(stream, state) {
+  var need = needFinish(state);
+  if (need) {
+    prefinish(stream, state);
+    if (state.pendingcb === 0) {
+      state.finished = true;
+      stream.emit('finish');
+    }
+  }
+  return need;
+}
+
+function endWritable(stream, state, cb) {
+  state.ending = true;
+  finishMaybe(stream, state);
+  if (cb) {
+    if (state.finished) processNextTick(cb);else stream.once('finish', cb);
+  }
+  state.ended = true;
+  stream.writable = false;
+}
+
+function onCorkedFinish(corkReq, state, err) {
+  var entry = corkReq.entry;
+  corkReq.entry = null;
+  while (entry) {
+    var cb = entry.callback;
+    state.pendingcb--;
+    cb(err);
+    entry = entry.next;
+  }
+  if (state.corkedRequestsFree) {
+    state.corkedRequestsFree.next = corkReq;
+  } else {
+    state.corkedRequestsFree = corkReq;
+  }
+}
+
+Object.defineProperty(Writable.prototype, 'destroyed', {
+  get: function () {
+    if (this._writableState === undefined) {
+      return false;
+    }
+    return this._writableState.destroyed;
+  },
+  set: function (value) {
+    // we ignore the value if the stream
+    // has not been initialized yet
+    if (!this._writableState) {
+      return;
+    }
+
+    // backward compatibility, the user is explicitly
+    // managing destroyed
+    this._writableState.destroyed = value;
+  }
+});
+
+Writable.prototype.destroy = destroyImpl.destroy;
+Writable.prototype._undestroy = destroyImpl.undestroy;
+Writable.prototype._destroy = function (err, cb) {
+  this.end();
+  cb(err);
+};
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./_stream_duplex":467,"./internal/streams/destroy":473,"./internal/streams/stream":474,"_process":458,"core-util-is":304,"inherits":313,"process-nextick-args":457,"safe-buffer":481,"util-deprecate":493}],472:[function(require,module,exports){
+'use strict';
+
+/*<replacement>*/
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Buffer = require('safe-buffer').Buffer;
+/*</replacement>*/
+
+function copyBuffer(src, target, offset) {
+  src.copy(target, offset);
+}
+
+module.exports = function () {
+  function BufferList() {
+    _classCallCheck(this, BufferList);
+
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+  BufferList.prototype.push = function push(v) {
+    var entry = { data: v, next: null };
+    if (this.length > 0) this.tail.next = entry;else this.head = entry;
+    this.tail = entry;
+    ++this.length;
+  };
+
+  BufferList.prototype.unshift = function unshift(v) {
+    var entry = { data: v, next: this.head };
+    if (this.length === 0) this.tail = entry;
+    this.head = entry;
+    ++this.length;
+  };
+
+  BufferList.prototype.shift = function shift() {
+    if (this.length === 0) return;
+    var ret = this.head.data;
+    if (this.length === 1) this.head = this.tail = null;else this.head = this.head.next;
+    --this.length;
+    return ret;
+  };
+
+  BufferList.prototype.clear = function clear() {
+    this.head = this.tail = null;
+    this.length = 0;
+  };
+
+  BufferList.prototype.join = function join(s) {
+    if (this.length === 0) return '';
+    var p = this.head;
+    var ret = '' + p.data;
+    while (p = p.next) {
+      ret += s + p.data;
+    }return ret;
+  };
+
+  BufferList.prototype.concat = function concat(n) {
+    if (this.length === 0) return Buffer.alloc(0);
+    if (this.length === 1) return this.head.data;
+    var ret = Buffer.allocUnsafe(n >>> 0);
+    var p = this.head;
+    var i = 0;
+    while (p) {
+      copyBuffer(p.data, ret, i);
+      i += p.data.length;
+      p = p.next;
+    }
+    return ret;
+  };
+
+  return BufferList;
+}();
+},{"safe-buffer":481}],473:[function(require,module,exports){
+'use strict';
+
+/*<replacement>*/
+
+var processNextTick = require('process-nextick-args');
+/*</replacement>*/
+
+// undocumented cb() API, needed for core, not for public API
+function destroy(err, cb) {
+  var _this = this;
+
+  var readableDestroyed = this._readableState && this._readableState.destroyed;
+  var writableDestroyed = this._writableState && this._writableState.destroyed;
+
+  if (readableDestroyed || writableDestroyed) {
+    if (cb) {
+      cb(err);
+    } else if (err && (!this._writableState || !this._writableState.errorEmitted)) {
+      processNextTick(emitErrorNT, this, err);
+    }
+    return;
+  }
+
+  // we set destroyed to true before firing error callbacks in order
+  // to make it re-entrance safe in case destroy() is called within callbacks
+
+  if (this._readableState) {
+    this._readableState.destroyed = true;
+  }
+
+  // if this is a duplex stream mark the writable part as destroyed as well
+  if (this._writableState) {
+    this._writableState.destroyed = true;
+  }
+
+  this._destroy(err || null, function (err) {
+    if (!cb && err) {
+      processNextTick(emitErrorNT, _this, err);
+      if (_this._writableState) {
+        _this._writableState.errorEmitted = true;
+      }
+    } else if (cb) {
+      cb(err);
+    }
+  });
+}
+
+function undestroy() {
+  if (this._readableState) {
+    this._readableState.destroyed = false;
+    this._readableState.reading = false;
+    this._readableState.ended = false;
+    this._readableState.endEmitted = false;
+  }
+
+  if (this._writableState) {
+    this._writableState.destroyed = false;
+    this._writableState.ended = false;
+    this._writableState.ending = false;
+    this._writableState.finished = false;
+    this._writableState.errorEmitted = false;
+  }
+}
+
+function emitErrorNT(self, err) {
+  self.emit('error', err);
+}
+
+module.exports = {
+  destroy: destroy,
+  undestroy: undestroy
+};
+},{"process-nextick-args":457}],474:[function(require,module,exports){
+module.exports = require('events').EventEmitter;
+
+},{"events":310}],475:[function(require,module,exports){
+'use strict';
+
+var Buffer = require('safe-buffer').Buffer;
+
+var isEncoding = Buffer.isEncoding || function (encoding) {
+  encoding = '' + encoding;
+  switch (encoding && encoding.toLowerCase()) {
+    case 'hex':case 'utf8':case 'utf-8':case 'ascii':case 'binary':case 'base64':case 'ucs2':case 'ucs-2':case 'utf16le':case 'utf-16le':case 'raw':
+      return true;
+    default:
+      return false;
+  }
+};
+
+function _normalizeEncoding(enc) {
+  if (!enc) return 'utf8';
+  var retried;
+  while (true) {
+    switch (enc) {
+      case 'utf8':
+      case 'utf-8':
+        return 'utf8';
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return 'utf16le';
+      case 'latin1':
+      case 'binary':
+        return 'latin1';
+      case 'base64':
+      case 'ascii':
+      case 'hex':
+        return enc;
+      default:
+        if (retried) return; // undefined
+        enc = ('' + enc).toLowerCase();
+        retried = true;
+    }
+  }
+};
+
+// Do not cache `Buffer.isEncoding` when checking encoding names as some
+// modules monkey-patch it to support additional encodings
+function normalizeEncoding(enc) {
+  var nenc = _normalizeEncoding(enc);
+  if (typeof nenc !== 'string' && (Buffer.isEncoding === isEncoding || !isEncoding(enc))) throw new Error('Unknown encoding: ' + enc);
+  return nenc || enc;
+}
+
+// StringDecoder provides an interface for efficiently splitting a series of
+// buffers into a series of JS strings without breaking apart multi-byte
+// characters.
+exports.StringDecoder = StringDecoder;
+function StringDecoder(encoding) {
+  this.encoding = normalizeEncoding(encoding);
+  var nb;
+  switch (this.encoding) {
+    case 'utf16le':
+      this.text = utf16Text;
+      this.end = utf16End;
+      nb = 4;
+      break;
+    case 'utf8':
+      this.fillLast = utf8FillLast;
+      nb = 4;
+      break;
+    case 'base64':
+      this.text = base64Text;
+      this.end = base64End;
+      nb = 3;
+      break;
+    default:
+      this.write = simpleWrite;
+      this.end = simpleEnd;
+      return;
+  }
+  this.lastNeed = 0;
+  this.lastTotal = 0;
+  this.lastChar = Buffer.allocUnsafe(nb);
+}
+
+StringDecoder.prototype.write = function (buf) {
+  if (buf.length === 0) return '';
+  var r;
+  var i;
+  if (this.lastNeed) {
+    r = this.fillLast(buf);
+    if (r === undefined) return '';
+    i = this.lastNeed;
+    this.lastNeed = 0;
+  } else {
+    i = 0;
+  }
+  if (i < buf.length) return r ? r + this.text(buf, i) : this.text(buf, i);
+  return r || '';
+};
+
+StringDecoder.prototype.end = utf8End;
+
+// Returns only complete characters in a Buffer
+StringDecoder.prototype.text = utf8Text;
+
+// Attempts to complete a partial non-UTF-8 character using bytes from a Buffer
+StringDecoder.prototype.fillLast = function (buf) {
+  if (this.lastNeed <= buf.length) {
+    buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, this.lastNeed);
+    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+  }
+  buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, buf.length);
+  this.lastNeed -= buf.length;
+};
+
+// Checks the type of a UTF-8 byte, whether it's ASCII, a leading byte, or a
+// continuation byte.
+function utf8CheckByte(byte) {
+  if (byte <= 0x7F) return 0;else if (byte >> 5 === 0x06) return 2;else if (byte >> 4 === 0x0E) return 3;else if (byte >> 3 === 0x1E) return 4;
+  return -1;
+}
+
+// Checks at most 3 bytes at the end of a Buffer in order to detect an
+// incomplete multi-byte UTF-8 character. The total number of bytes (2, 3, or 4)
+// needed to complete the UTF-8 character (if applicable) are returned.
+function utf8CheckIncomplete(self, buf, i) {
+  var j = buf.length - 1;
+  if (j < i) return 0;
+  var nb = utf8CheckByte(buf[j]);
+  if (nb >= 0) {
+    if (nb > 0) self.lastNeed = nb - 1;
+    return nb;
+  }
+  if (--j < i) return 0;
+  nb = utf8CheckByte(buf[j]);
+  if (nb >= 0) {
+    if (nb > 0) self.lastNeed = nb - 2;
+    return nb;
+  }
+  if (--j < i) return 0;
+  nb = utf8CheckByte(buf[j]);
+  if (nb >= 0) {
+    if (nb > 0) {
+      if (nb === 2) nb = 0;else self.lastNeed = nb - 3;
+    }
+    return nb;
+  }
+  return 0;
+}
+
+// Validates as many continuation bytes for a multi-byte UTF-8 character as
+// needed or are available. If we see a non-continuation byte where we expect
+// one, we "replace" the validated continuation bytes we've seen so far with
+// UTF-8 replacement characters ('\ufffd'), to match v8's UTF-8 decoding
+// behavior. The continuation byte check is included three times in the case
+// where all of the continuation bytes for a character exist in the same buffer.
+// It is also done this way as a slight performance increase instead of using a
+// loop.
+function utf8CheckExtraBytes(self, buf, p) {
+  if ((buf[0] & 0xC0) !== 0x80) {
+    self.lastNeed = 0;
+    return '\ufffd'.repeat(p);
+  }
+  if (self.lastNeed > 1 && buf.length > 1) {
+    if ((buf[1] & 0xC0) !== 0x80) {
+      self.lastNeed = 1;
+      return '\ufffd'.repeat(p + 1);
+    }
+    if (self.lastNeed > 2 && buf.length > 2) {
+      if ((buf[2] & 0xC0) !== 0x80) {
+        self.lastNeed = 2;
+        return '\ufffd'.repeat(p + 2);
+      }
+    }
+  }
+}
+
+// Attempts to complete a multi-byte UTF-8 character using bytes from a Buffer.
+function utf8FillLast(buf) {
+  var p = this.lastTotal - this.lastNeed;
+  var r = utf8CheckExtraBytes(this, buf, p);
+  if (r !== undefined) return r;
+  if (this.lastNeed <= buf.length) {
+    buf.copy(this.lastChar, p, 0, this.lastNeed);
+    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+  }
+  buf.copy(this.lastChar, p, 0, buf.length);
+  this.lastNeed -= buf.length;
+}
+
+// Returns all complete UTF-8 characters in a Buffer. If the Buffer ended on a
+// partial character, the character's bytes are buffered until the required
+// number of bytes are available.
+function utf8Text(buf, i) {
+  var total = utf8CheckIncomplete(this, buf, i);
+  if (!this.lastNeed) return buf.toString('utf8', i);
+  this.lastTotal = total;
+  var end = buf.length - (total - this.lastNeed);
+  buf.copy(this.lastChar, 0, end);
+  return buf.toString('utf8', i, end);
+}
+
+// For UTF-8, a replacement character for each buffered byte of a (partial)
+// character needs to be added to the output.
+function utf8End(buf) {
+  var r = buf && buf.length ? this.write(buf) : '';
+  if (this.lastNeed) return r + '\ufffd'.repeat(this.lastTotal - this.lastNeed);
+  return r;
+}
+
+// UTF-16LE typically needs two bytes per character, but even if we have an even
+// number of bytes available, we need to check if we end on a leading/high
+// surrogate. In that case, we need to wait for the next two bytes in order to
+// decode the last character properly.
+function utf16Text(buf, i) {
+  if ((buf.length - i) % 2 === 0) {
+    var r = buf.toString('utf16le', i);
+    if (r) {
+      var c = r.charCodeAt(r.length - 1);
+      if (c >= 0xD800 && c <= 0xDBFF) {
+        this.lastNeed = 2;
+        this.lastTotal = 4;
+        this.lastChar[0] = buf[buf.length - 2];
+        this.lastChar[1] = buf[buf.length - 1];
+        return r.slice(0, -1);
+      }
+    }
+    return r;
+  }
+  this.lastNeed = 1;
+  this.lastTotal = 2;
+  this.lastChar[0] = buf[buf.length - 1];
+  return buf.toString('utf16le', i, buf.length - 1);
+}
+
+// For UTF-16LE we do not explicitly append special replacement characters if we
+// end on a partial character, we simply let v8 handle that.
+function utf16End(buf) {
+  var r = buf && buf.length ? this.write(buf) : '';
+  if (this.lastNeed) {
+    var end = this.lastTotal - this.lastNeed;
+    return r + this.lastChar.toString('utf16le', 0, end);
+  }
+  return r;
+}
+
+function base64Text(buf, i) {
+  var n = (buf.length - i) % 3;
+  if (n === 0) return buf.toString('base64', i);
+  this.lastNeed = 3 - n;
+  this.lastTotal = 3;
+  if (n === 1) {
+    this.lastChar[0] = buf[buf.length - 1];
+  } else {
+    this.lastChar[0] = buf[buf.length - 2];
+    this.lastChar[1] = buf[buf.length - 1];
+  }
+  return buf.toString('base64', i, buf.length - n);
+}
+
+function base64End(buf) {
+  var r = buf && buf.length ? this.write(buf) : '';
+  if (this.lastNeed) return r + this.lastChar.toString('base64', 0, 3 - this.lastNeed);
+  return r;
+}
+
+// Pass bytes on through for single-byte encodings (e.g. ascii, latin1, hex)
+function simpleWrite(buf) {
+  return buf.toString(this.encoding);
+}
+
+function simpleEnd(buf) {
+  return buf && buf.length ? this.write(buf) : '';
+}
+},{"safe-buffer":481}],476:[function(require,module,exports){
+module.exports = require('./readable').PassThrough
+
+},{"./readable":477}],477:[function(require,module,exports){
+exports = module.exports = require('./lib/_stream_readable.js');
+exports.Stream = exports;
+exports.Readable = exports;
+exports.Writable = require('./lib/_stream_writable.js');
+exports.Duplex = require('./lib/_stream_duplex.js');
+exports.Transform = require('./lib/_stream_transform.js');
+exports.PassThrough = require('./lib/_stream_passthrough.js');
+
+},{"./lib/_stream_duplex.js":467,"./lib/_stream_passthrough.js":468,"./lib/_stream_readable.js":469,"./lib/_stream_transform.js":470,"./lib/_stream_writable.js":471}],478:[function(require,module,exports){
+module.exports = require('./readable').Transform
+
+},{"./readable":477}],479:[function(require,module,exports){
+module.exports = require('./lib/_stream_writable.js');
+
+},{"./lib/_stream_writable.js":471}],480:[function(require,module,exports){
+(function (Buffer){
+'use strict'
+var inherits = require('inherits')
+var HashBase = require('hash-base')
+
+function RIPEMD160 () {
+  HashBase.call(this, 64)
+
+  // state
+  this._a = 0x67452301
+  this._b = 0xefcdab89
+  this._c = 0x98badcfe
+  this._d = 0x10325476
+  this._e = 0xc3d2e1f0
+}
+
+inherits(RIPEMD160, HashBase)
+
+RIPEMD160.prototype._update = function () {
+  var m = new Array(16)
+  for (var i = 0; i < 16; ++i) m[i] = this._block.readInt32LE(i * 4)
+
+  var al = this._a
+  var bl = this._b
+  var cl = this._c
+  var dl = this._d
+  var el = this._e
+
+  // Mj = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+  // K = 0x00000000
+  // Sj = 11, 14, 15, 12, 5, 8, 7, 9, 11, 13, 14, 15, 6, 7, 9, 8
+  al = fn1(al, bl, cl, dl, el, m[0], 0x00000000, 11); cl = rotl(cl, 10)
+  el = fn1(el, al, bl, cl, dl, m[1], 0x00000000, 14); bl = rotl(bl, 10)
+  dl = fn1(dl, el, al, bl, cl, m[2], 0x00000000, 15); al = rotl(al, 10)
+  cl = fn1(cl, dl, el, al, bl, m[3], 0x00000000, 12); el = rotl(el, 10)
+  bl = fn1(bl, cl, dl, el, al, m[4], 0x00000000, 5); dl = rotl(dl, 10)
+  al = fn1(al, bl, cl, dl, el, m[5], 0x00000000, 8); cl = rotl(cl, 10)
+  el = fn1(el, al, bl, cl, dl, m[6], 0x00000000, 7); bl = rotl(bl, 10)
+  dl = fn1(dl, el, al, bl, cl, m[7], 0x00000000, 9); al = rotl(al, 10)
+  cl = fn1(cl, dl, el, al, bl, m[8], 0x00000000, 11); el = rotl(el, 10)
+  bl = fn1(bl, cl, dl, el, al, m[9], 0x00000000, 13); dl = rotl(dl, 10)
+  al = fn1(al, bl, cl, dl, el, m[10], 0x00000000, 14); cl = rotl(cl, 10)
+  el = fn1(el, al, bl, cl, dl, m[11], 0x00000000, 15); bl = rotl(bl, 10)
+  dl = fn1(dl, el, al, bl, cl, m[12], 0x00000000, 6); al = rotl(al, 10)
+  cl = fn1(cl, dl, el, al, bl, m[13], 0x00000000, 7); el = rotl(el, 10)
+  bl = fn1(bl, cl, dl, el, al, m[14], 0x00000000, 9); dl = rotl(dl, 10)
+  al = fn1(al, bl, cl, dl, el, m[15], 0x00000000, 8); cl = rotl(cl, 10)
+
+  // Mj = 7, 4, 13, 1, 10, 6, 15, 3, 12, 0, 9, 5, 2, 14, 11, 8
+  // K = 0x5a827999
+  // Sj = 7, 6, 8, 13, 11, 9, 7, 15, 7, 12, 15, 9, 11, 7, 13, 12
+  el = fn2(el, al, bl, cl, dl, m[7], 0x5a827999, 7); bl = rotl(bl, 10)
+  dl = fn2(dl, el, al, bl, cl, m[4], 0x5a827999, 6); al = rotl(al, 10)
+  cl = fn2(cl, dl, el, al, bl, m[13], 0x5a827999, 8); el = rotl(el, 10)
+  bl = fn2(bl, cl, dl, el, al, m[1], 0x5a827999, 13); dl = rotl(dl, 10)
+  al = fn2(al, bl, cl, dl, el, m[10], 0x5a827999, 11); cl = rotl(cl, 10)
+  el = fn2(el, al, bl, cl, dl, m[6], 0x5a827999, 9); bl = rotl(bl, 10)
+  dl = fn2(dl, el, al, bl, cl, m[15], 0x5a827999, 7); al = rotl(al, 10)
+  cl = fn2(cl, dl, el, al, bl, m[3], 0x5a827999, 15); el = rotl(el, 10)
+  bl = fn2(bl, cl, dl, el, al, m[12], 0x5a827999, 7); dl = rotl(dl, 10)
+  al = fn2(al, bl, cl, dl, el, m[0], 0x5a827999, 12); cl = rotl(cl, 10)
+  el = fn2(el, al, bl, cl, dl, m[9], 0x5a827999, 15); bl = rotl(bl, 10)
+  dl = fn2(dl, el, al, bl, cl, m[5], 0x5a827999, 9); al = rotl(al, 10)
+  cl = fn2(cl, dl, el, al, bl, m[2], 0x5a827999, 11); el = rotl(el, 10)
+  bl = fn2(bl, cl, dl, el, al, m[14], 0x5a827999, 7); dl = rotl(dl, 10)
+  al = fn2(al, bl, cl, dl, el, m[11], 0x5a827999, 13); cl = rotl(cl, 10)
+  el = fn2(el, al, bl, cl, dl, m[8], 0x5a827999, 12); bl = rotl(bl, 10)
+
+  // Mj = 3, 10, 14, 4, 9, 15, 8, 1, 2, 7, 0, 6, 13, 11, 5, 12
+  // K = 0x6ed9eba1
+  // Sj = 11, 13, 6, 7, 14, 9, 13, 15, 14, 8, 13, 6, 5, 12, 7, 5
+  dl = fn3(dl, el, al, bl, cl, m[3], 0x6ed9eba1, 11); al = rotl(al, 10)
+  cl = fn3(cl, dl, el, al, bl, m[10], 0x6ed9eba1, 13); el = rotl(el, 10)
+  bl = fn3(bl, cl, dl, el, al, m[14], 0x6ed9eba1, 6); dl = rotl(dl, 10)
+  al = fn3(al, bl, cl, dl, el, m[4], 0x6ed9eba1, 7); cl = rotl(cl, 10)
+  el = fn3(el, al, bl, cl, dl, m[9], 0x6ed9eba1, 14); bl = rotl(bl, 10)
+  dl = fn3(dl, el, al, bl, cl, m[15], 0x6ed9eba1, 9); al = rotl(al, 10)
+  cl = fn3(cl, dl, el, al, bl, m[8], 0x6ed9eba1, 13); el = rotl(el, 10)
+  bl = fn3(bl, cl, dl, el, al, m[1], 0x6ed9eba1, 15); dl = rotl(dl, 10)
+  al = fn3(al, bl, cl, dl, el, m[2], 0x6ed9eba1, 14); cl = rotl(cl, 10)
+  el = fn3(el, al, bl, cl, dl, m[7], 0x6ed9eba1, 8); bl = rotl(bl, 10)
+  dl = fn3(dl, el, al, bl, cl, m[0], 0x6ed9eba1, 13); al = rotl(al, 10)
+  cl = fn3(cl, dl, el, al, bl, m[6], 0x6ed9eba1, 6); el = rotl(el, 10)
+  bl = fn3(bl, cl, dl, el, al, m[13], 0x6ed9eba1, 5); dl = rotl(dl, 10)
+  al = fn3(al, bl, cl, dl, el, m[11], 0x6ed9eba1, 12); cl = rotl(cl, 10)
+  el = fn3(el, al, bl, cl, dl, m[5], 0x6ed9eba1, 7); bl = rotl(bl, 10)
+  dl = fn3(dl, el, al, bl, cl, m[12], 0x6ed9eba1, 5); al = rotl(al, 10)
+
+  // Mj = 1, 9, 11, 10, 0, 8, 12, 4, 13, 3, 7, 15, 14, 5, 6, 2
+  // K = 0x8f1bbcdc
+  // Sj = 11, 12, 14, 15, 14, 15, 9, 8, 9, 14, 5, 6, 8, 6, 5, 12
+  cl = fn4(cl, dl, el, al, bl, m[1], 0x8f1bbcdc, 11); el = rotl(el, 10)
+  bl = fn4(bl, cl, dl, el, al, m[9], 0x8f1bbcdc, 12); dl = rotl(dl, 10)
+  al = fn4(al, bl, cl, dl, el, m[11], 0x8f1bbcdc, 14); cl = rotl(cl, 10)
+  el = fn4(el, al, bl, cl, dl, m[10], 0x8f1bbcdc, 15); bl = rotl(bl, 10)
+  dl = fn4(dl, el, al, bl, cl, m[0], 0x8f1bbcdc, 14); al = rotl(al, 10)
+  cl = fn4(cl, dl, el, al, bl, m[8], 0x8f1bbcdc, 15); el = rotl(el, 10)
+  bl = fn4(bl, cl, dl, el, al, m[12], 0x8f1bbcdc, 9); dl = rotl(dl, 10)
+  al = fn4(al, bl, cl, dl, el, m[4], 0x8f1bbcdc, 8); cl = rotl(cl, 10)
+  el = fn4(el, al, bl, cl, dl, m[13], 0x8f1bbcdc, 9); bl = rotl(bl, 10)
+  dl = fn4(dl, el, al, bl, cl, m[3], 0x8f1bbcdc, 14); al = rotl(al, 10)
+  cl = fn4(cl, dl, el, al, bl, m[7], 0x8f1bbcdc, 5); el = rotl(el, 10)
+  bl = fn4(bl, cl, dl, el, al, m[15], 0x8f1bbcdc, 6); dl = rotl(dl, 10)
+  al = fn4(al, bl, cl, dl, el, m[14], 0x8f1bbcdc, 8); cl = rotl(cl, 10)
+  el = fn4(el, al, bl, cl, dl, m[5], 0x8f1bbcdc, 6); bl = rotl(bl, 10)
+  dl = fn4(dl, el, al, bl, cl, m[6], 0x8f1bbcdc, 5); al = rotl(al, 10)
+  cl = fn4(cl, dl, el, al, bl, m[2], 0x8f1bbcdc, 12); el = rotl(el, 10)
+
+  // Mj = 4, 0, 5, 9, 7, 12, 2, 10, 14, 1, 3, 8, 11, 6, 15, 13
+  // K = 0xa953fd4e
+  // Sj = 9, 15, 5, 11, 6, 8, 13, 12, 5, 12, 13, 14, 11, 8, 5, 6
+  bl = fn5(bl, cl, dl, el, al, m[4], 0xa953fd4e, 9); dl = rotl(dl, 10)
+  al = fn5(al, bl, cl, dl, el, m[0], 0xa953fd4e, 15); cl = rotl(cl, 10)
+  el = fn5(el, al, bl, cl, dl, m[5], 0xa953fd4e, 5); bl = rotl(bl, 10)
+  dl = fn5(dl, el, al, bl, cl, m[9], 0xa953fd4e, 11); al = rotl(al, 10)
+  cl = fn5(cl, dl, el, al, bl, m[7], 0xa953fd4e, 6); el = rotl(el, 10)
+  bl = fn5(bl, cl, dl, el, al, m[12], 0xa953fd4e, 8); dl = rotl(dl, 10)
+  al = fn5(al, bl, cl, dl, el, m[2], 0xa953fd4e, 13); cl = rotl(cl, 10)
+  el = fn5(el, al, bl, cl, dl, m[10], 0xa953fd4e, 12); bl = rotl(bl, 10)
+  dl = fn5(dl, el, al, bl, cl, m[14], 0xa953fd4e, 5); al = rotl(al, 10)
+  cl = fn5(cl, dl, el, al, bl, m[1], 0xa953fd4e, 12); el = rotl(el, 10)
+  bl = fn5(bl, cl, dl, el, al, m[3], 0xa953fd4e, 13); dl = rotl(dl, 10)
+  al = fn5(al, bl, cl, dl, el, m[8], 0xa953fd4e, 14); cl = rotl(cl, 10)
+  el = fn5(el, al, bl, cl, dl, m[11], 0xa953fd4e, 11); bl = rotl(bl, 10)
+  dl = fn5(dl, el, al, bl, cl, m[6], 0xa953fd4e, 8); al = rotl(al, 10)
+  cl = fn5(cl, dl, el, al, bl, m[15], 0xa953fd4e, 5); el = rotl(el, 10)
+  bl = fn5(bl, cl, dl, el, al, m[13], 0xa953fd4e, 6); dl = rotl(dl, 10)
+
+  var ar = this._a
+  var br = this._b
+  var cr = this._c
+  var dr = this._d
+  var er = this._e
+
+  // M'j = 5, 14, 7, 0, 9, 2, 11, 4, 13, 6, 15, 8, 1, 10, 3, 12
+  // K' = 0x50a28be6
+  // S'j = 8, 9, 9, 11, 13, 15, 15, 5, 7, 7, 8, 11, 14, 14, 12, 6
+  ar = fn5(ar, br, cr, dr, er, m[5], 0x50a28be6, 8); cr = rotl(cr, 10)
+  er = fn5(er, ar, br, cr, dr, m[14], 0x50a28be6, 9); br = rotl(br, 10)
+  dr = fn5(dr, er, ar, br, cr, m[7], 0x50a28be6, 9); ar = rotl(ar, 10)
+  cr = fn5(cr, dr, er, ar, br, m[0], 0x50a28be6, 11); er = rotl(er, 10)
+  br = fn5(br, cr, dr, er, ar, m[9], 0x50a28be6, 13); dr = rotl(dr, 10)
+  ar = fn5(ar, br, cr, dr, er, m[2], 0x50a28be6, 15); cr = rotl(cr, 10)
+  er = fn5(er, ar, br, cr, dr, m[11], 0x50a28be6, 15); br = rotl(br, 10)
+  dr = fn5(dr, er, ar, br, cr, m[4], 0x50a28be6, 5); ar = rotl(ar, 10)
+  cr = fn5(cr, dr, er, ar, br, m[13], 0x50a28be6, 7); er = rotl(er, 10)
+  br = fn5(br, cr, dr, er, ar, m[6], 0x50a28be6, 7); dr = rotl(dr, 10)
+  ar = fn5(ar, br, cr, dr, er, m[15], 0x50a28be6, 8); cr = rotl(cr, 10)
+  er = fn5(er, ar, br, cr, dr, m[8], 0x50a28be6, 11); br = rotl(br, 10)
+  dr = fn5(dr, er, ar, br, cr, m[1], 0x50a28be6, 14); ar = rotl(ar, 10)
+  cr = fn5(cr, dr, er, ar, br, m[10], 0x50a28be6, 14); er = rotl(er, 10)
+  br = fn5(br, cr, dr, er, ar, m[3], 0x50a28be6, 12); dr = rotl(dr, 10)
+  ar = fn5(ar, br, cr, dr, er, m[12], 0x50a28be6, 6); cr = rotl(cr, 10)
+
+  // M'j = 6, 11, 3, 7, 0, 13, 5, 10, 14, 15, 8, 12, 4, 9, 1, 2
+  // K' = 0x5c4dd124
+  // S'j = 9, 13, 15, 7, 12, 8, 9, 11, 7, 7, 12, 7, 6, 15, 13, 11
+  er = fn4(er, ar, br, cr, dr, m[6], 0x5c4dd124, 9); br = rotl(br, 10)
+  dr = fn4(dr, er, ar, br, cr, m[11], 0x5c4dd124, 13); ar = rotl(ar, 10)
+  cr = fn4(cr, dr, er, ar, br, m[3], 0x5c4dd124, 15); er = rotl(er, 10)
+  br = fn4(br, cr, dr, er, ar, m[7], 0x5c4dd124, 7); dr = rotl(dr, 10)
+  ar = fn4(ar, br, cr, dr, er, m[0], 0x5c4dd124, 12); cr = rotl(cr, 10)
+  er = fn4(er, ar, br, cr, dr, m[13], 0x5c4dd124, 8); br = rotl(br, 10)
+  dr = fn4(dr, er, ar, br, cr, m[5], 0x5c4dd124, 9); ar = rotl(ar, 10)
+  cr = fn4(cr, dr, er, ar, br, m[10], 0x5c4dd124, 11); er = rotl(er, 10)
+  br = fn4(br, cr, dr, er, ar, m[14], 0x5c4dd124, 7); dr = rotl(dr, 10)
+  ar = fn4(ar, br, cr, dr, er, m[15], 0x5c4dd124, 7); cr = rotl(cr, 10)
+  er = fn4(er, ar, br, cr, dr, m[8], 0x5c4dd124, 12); br = rotl(br, 10)
+  dr = fn4(dr, er, ar, br, cr, m[12], 0x5c4dd124, 7); ar = rotl(ar, 10)
+  cr = fn4(cr, dr, er, ar, br, m[4], 0x5c4dd124, 6); er = rotl(er, 10)
+  br = fn4(br, cr, dr, er, ar, m[9], 0x5c4dd124, 15); dr = rotl(dr, 10)
+  ar = fn4(ar, br, cr, dr, er, m[1], 0x5c4dd124, 13); cr = rotl(cr, 10)
+  er = fn4(er, ar, br, cr, dr, m[2], 0x5c4dd124, 11); br = rotl(br, 10)
+
+  // M'j = 15, 5, 1, 3, 7, 14, 6, 9, 11, 8, 12, 2, 10, 0, 4, 13
+  // K' = 0x6d703ef3
+  // S'j = 9, 7, 15, 11, 8, 6, 6, 14, 12, 13, 5, 14, 13, 13, 7, 5
+  dr = fn3(dr, er, ar, br, cr, m[15], 0x6d703ef3, 9); ar = rotl(ar, 10)
+  cr = fn3(cr, dr, er, ar, br, m[5], 0x6d703ef3, 7); er = rotl(er, 10)
+  br = fn3(br, cr, dr, er, ar, m[1], 0x6d703ef3, 15); dr = rotl(dr, 10)
+  ar = fn3(ar, br, cr, dr, er, m[3], 0x6d703ef3, 11); cr = rotl(cr, 10)
+  er = fn3(er, ar, br, cr, dr, m[7], 0x6d703ef3, 8); br = rotl(br, 10)
+  dr = fn3(dr, er, ar, br, cr, m[14], 0x6d703ef3, 6); ar = rotl(ar, 10)
+  cr = fn3(cr, dr, er, ar, br, m[6], 0x6d703ef3, 6); er = rotl(er, 10)
+  br = fn3(br, cr, dr, er, ar, m[9], 0x6d703ef3, 14); dr = rotl(dr, 10)
+  ar = fn3(ar, br, cr, dr, er, m[11], 0x6d703ef3, 12); cr = rotl(cr, 10)
+  er = fn3(er, ar, br, cr, dr, m[8], 0x6d703ef3, 13); br = rotl(br, 10)
+  dr = fn3(dr, er, ar, br, cr, m[12], 0x6d703ef3, 5); ar = rotl(ar, 10)
+  cr = fn3(cr, dr, er, ar, br, m[2], 0x6d703ef3, 14); er = rotl(er, 10)
+  br = fn3(br, cr, dr, er, ar, m[10], 0x6d703ef3, 13); dr = rotl(dr, 10)
+  ar = fn3(ar, br, cr, dr, er, m[0], 0x6d703ef3, 13); cr = rotl(cr, 10)
+  er = fn3(er, ar, br, cr, dr, m[4], 0x6d703ef3, 7); br = rotl(br, 10)
+  dr = fn3(dr, er, ar, br, cr, m[13], 0x6d703ef3, 5); ar = rotl(ar, 10)
+
+  // M'j = 8, 6, 4, 1, 3, 11, 15, 0, 5, 12, 2, 13, 9, 7, 10, 14
+  // K' = 0x7a6d76e9
+  // S'j = 15, 5, 8, 11, 14, 14, 6, 14, 6, 9, 12, 9, 12, 5, 15, 8
+  cr = fn2(cr, dr, er, ar, br, m[8], 0x7a6d76e9, 15); er = rotl(er, 10)
+  br = fn2(br, cr, dr, er, ar, m[6], 0x7a6d76e9, 5); dr = rotl(dr, 10)
+  ar = fn2(ar, br, cr, dr, er, m[4], 0x7a6d76e9, 8); cr = rotl(cr, 10)
+  er = fn2(er, ar, br, cr, dr, m[1], 0x7a6d76e9, 11); br = rotl(br, 10)
+  dr = fn2(dr, er, ar, br, cr, m[3], 0x7a6d76e9, 14); ar = rotl(ar, 10)
+  cr = fn2(cr, dr, er, ar, br, m[11], 0x7a6d76e9, 14); er = rotl(er, 10)
+  br = fn2(br, cr, dr, er, ar, m[15], 0x7a6d76e9, 6); dr = rotl(dr, 10)
+  ar = fn2(ar, br, cr, dr, er, m[0], 0x7a6d76e9, 14); cr = rotl(cr, 10)
+  er = fn2(er, ar, br, cr, dr, m[5], 0x7a6d76e9, 6); br = rotl(br, 10)
+  dr = fn2(dr, er, ar, br, cr, m[12], 0x7a6d76e9, 9); ar = rotl(ar, 10)
+  cr = fn2(cr, dr, er, ar, br, m[2], 0x7a6d76e9, 12); er = rotl(er, 10)
+  br = fn2(br, cr, dr, er, ar, m[13], 0x7a6d76e9, 9); dr = rotl(dr, 10)
+  ar = fn2(ar, br, cr, dr, er, m[9], 0x7a6d76e9, 12); cr = rotl(cr, 10)
+  er = fn2(er, ar, br, cr, dr, m[7], 0x7a6d76e9, 5); br = rotl(br, 10)
+  dr = fn2(dr, er, ar, br, cr, m[10], 0x7a6d76e9, 15); ar = rotl(ar, 10)
+  cr = fn2(cr, dr, er, ar, br, m[14], 0x7a6d76e9, 8); er = rotl(er, 10)
+
+  // M'j = 12, 15, 10, 4, 1, 5, 8, 7, 6, 2, 13, 14, 0, 3, 9, 11
+  // K' = 0x00000000
+  // S'j = 8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
+  br = fn1(br, cr, dr, er, ar, m[12], 0x00000000, 8); dr = rotl(dr, 10)
+  ar = fn1(ar, br, cr, dr, er, m[15], 0x00000000, 5); cr = rotl(cr, 10)
+  er = fn1(er, ar, br, cr, dr, m[10], 0x00000000, 12); br = rotl(br, 10)
+  dr = fn1(dr, er, ar, br, cr, m[4], 0x00000000, 9); ar = rotl(ar, 10)
+  cr = fn1(cr, dr, er, ar, br, m[1], 0x00000000, 12); er = rotl(er, 10)
+  br = fn1(br, cr, dr, er, ar, m[5], 0x00000000, 5); dr = rotl(dr, 10)
+  ar = fn1(ar, br, cr, dr, er, m[8], 0x00000000, 14); cr = rotl(cr, 10)
+  er = fn1(er, ar, br, cr, dr, m[7], 0x00000000, 6); br = rotl(br, 10)
+  dr = fn1(dr, er, ar, br, cr, m[6], 0x00000000, 8); ar = rotl(ar, 10)
+  cr = fn1(cr, dr, er, ar, br, m[2], 0x00000000, 13); er = rotl(er, 10)
+  br = fn1(br, cr, dr, er, ar, m[13], 0x00000000, 6); dr = rotl(dr, 10)
+  ar = fn1(ar, br, cr, dr, er, m[14], 0x00000000, 5); cr = rotl(cr, 10)
+  er = fn1(er, ar, br, cr, dr, m[0], 0x00000000, 15); br = rotl(br, 10)
+  dr = fn1(dr, er, ar, br, cr, m[3], 0x00000000, 13); ar = rotl(ar, 10)
+  cr = fn1(cr, dr, er, ar, br, m[9], 0x00000000, 11); er = rotl(er, 10)
+  br = fn1(br, cr, dr, er, ar, m[11], 0x00000000, 11); dr = rotl(dr, 10)
+
+  // change state
+  var t = (this._b + cl + dr) | 0
+  this._b = (this._c + dl + er) | 0
+  this._c = (this._d + el + ar) | 0
+  this._d = (this._e + al + br) | 0
+  this._e = (this._a + bl + cr) | 0
+  this._a = t
+}
+
+RIPEMD160.prototype._digest = function () {
+  // create padding and handle blocks
+  this._block[this._blockOffset++] = 0x80
+  if (this._blockOffset > 56) {
+    this._block.fill(0, this._blockOffset, 64)
+    this._update()
+    this._blockOffset = 0
+  }
+
+  this._block.fill(0, this._blockOffset, 56)
+  this._block.writeUInt32LE(this._length[0], 56)
+  this._block.writeUInt32LE(this._length[1], 60)
+  this._update()
+
+  // produce result
+  var buffer = new Buffer(20)
+  buffer.writeInt32LE(this._a, 0)
+  buffer.writeInt32LE(this._b, 4)
+  buffer.writeInt32LE(this._c, 8)
+  buffer.writeInt32LE(this._d, 12)
+  buffer.writeInt32LE(this._e, 16)
+  return buffer
+}
+
+function rotl (x, n) {
+  return (x << n) | (x >>> (32 - n))
+}
+
+function fn1 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + (b ^ c ^ d) + m + k) | 0, s) + e) | 0
+}
+
+function fn2 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + ((b & c) | ((~b) & d)) + m + k) | 0, s) + e) | 0
+}
+
+function fn3 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + ((b | (~c)) ^ d) + m + k) | 0, s) + e) | 0
+}
+
+function fn4 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + ((b & d) | (c & (~d))) + m + k) | 0, s) + e) | 0
+}
+
+function fn5 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + (b ^ (c | (~d))) + m + k) | 0, s) + e) | 0
+}
+
+module.exports = RIPEMD160
+
+}).call(this,require("buffer").Buffer)
+},{"buffer":302,"hash-base":311,"inherits":313}],481:[function(require,module,exports){
+/* eslint-disable node/no-deprecated-api */
+var buffer = require('buffer')
+var Buffer = buffer.Buffer
+
+// alternative to using Object.keys for old browsers
+function copyProps (src, dst) {
+  for (var key in src) {
+    dst[key] = src[key]
+  }
+}
+if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow) {
+  module.exports = buffer
+} else {
+  // Copy properties from require('buffer')
+  copyProps(buffer, exports)
+  exports.Buffer = SafeBuffer
+}
+
+function SafeBuffer (arg, encodingOrOffset, length) {
+  return Buffer(arg, encodingOrOffset, length)
+}
+
+// Copy static methods from Buffer
+copyProps(Buffer, SafeBuffer)
+
+SafeBuffer.from = function (arg, encodingOrOffset, length) {
+  if (typeof arg === 'number') {
+    throw new TypeError('Argument must not be a number')
+  }
+  return Buffer(arg, encodingOrOffset, length)
+}
+
+SafeBuffer.alloc = function (size, fill, encoding) {
+  if (typeof size !== 'number') {
+    throw new TypeError('Argument must be a number')
+  }
+  var buf = Buffer(size)
+  if (fill !== undefined) {
+    if (typeof encoding === 'string') {
+      buf.fill(fill, encoding)
+    } else {
+      buf.fill(fill)
+    }
+  } else {
+    buf.fill(0)
+  }
+  return buf
+}
+
+SafeBuffer.allocUnsafe = function (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('Argument must be a number')
+  }
+  return Buffer(size)
+}
+
+SafeBuffer.allocUnsafeSlow = function (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('Argument must be a number')
+  }
+  return buffer.SlowBuffer(size)
+}
+
+},{"buffer":302}],482:[function(require,module,exports){
+var Buffer = require('safe-buffer').Buffer
+
+// prototype class for hash functions
+function Hash (blockSize, finalSize) {
+  this._block = Buffer.alloc(blockSize)
+  this._finalSize = finalSize
+  this._blockSize = blockSize
+  this._len = 0
+}
+
+Hash.prototype.update = function (data, enc) {
+  if (typeof data === 'string') {
+    enc = enc || 'utf8'
+    data = Buffer.from(data, enc)
+  }
+
+  var block = this._block
+  var blockSize = this._blockSize
+  var length = data.length
+  var accum = this._len
+
+  for (var offset = 0; offset < length;) {
+    var assigned = accum % blockSize
+    var remainder = Math.min(length - offset, blockSize - assigned)
+
+    for (var i = 0; i < remainder; i++) {
+      block[assigned + i] = data[offset + i]
+    }
+
+    accum += remainder
+    offset += remainder
+
+    if ((accum % blockSize) === 0) {
+      this._update(block)
+    }
+  }
+
+  this._len += length
+  return this
+}
+
+Hash.prototype.digest = function (enc) {
+  var rem = this._len % this._blockSize
+
+  this._block[rem] = 0x80
+
+  // zero (rem + 1) trailing bits, where (rem + 1) is the smallest
+  // non-negative solution to the equation (length + 1 + (rem + 1)) === finalSize mod blockSize
+  this._block.fill(0, rem + 1)
+
+  if (rem >= this._finalSize) {
+    this._update(this._block)
+    this._block.fill(0)
+  }
+
+  var bits = this._len * 8
+
+  // uint32
+  if (bits <= 0xffffffff) {
+    this._block.writeUInt32BE(bits, this._blockSize - 4)
+
+  // uint64
+  } else {
+    var lowBits = bits & 0xffffffff
+    var highBits = (bits - lowBits) / 0x100000000
+
+    this._block.writeUInt32BE(highBits, this._blockSize - 8)
+    this._block.writeUInt32BE(lowBits, this._blockSize - 4)
+  }
+
+  this._update(this._block)
+  var hash = this._hash()
+
+  return enc ? hash.toString(enc) : hash
+}
+
+Hash.prototype._update = function () {
+  throw new Error('_update must be implemented by subclass')
+}
+
+module.exports = Hash
+
+},{"safe-buffer":481}],483:[function(require,module,exports){
+var exports = module.exports = function SHA (algorithm) {
+  algorithm = algorithm.toLowerCase()
+
+  var Algorithm = exports[algorithm]
+  if (!Algorithm) throw new Error(algorithm + ' is not supported (we accept pull requests)')
+
+  return new Algorithm()
+}
+
+exports.sha = require('./sha')
+exports.sha1 = require('./sha1')
+exports.sha224 = require('./sha224')
+exports.sha256 = require('./sha256')
+exports.sha384 = require('./sha384')
+exports.sha512 = require('./sha512')
+
+},{"./sha":484,"./sha1":485,"./sha224":486,"./sha256":487,"./sha384":488,"./sha512":489}],484:[function(require,module,exports){
+/*
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
+ * in FIPS PUB 180-1
+ * This source code is derived from sha1.js of the same repository.
+ * The difference between SHA-0 and SHA-1 is just a bitwise rotate left
+ * operation was added.
+ */
+
+var inherits = require('inherits')
+var Hash = require('./hash')
+var Buffer = require('safe-buffer').Buffer
+
+var K = [
+  0x5a827999, 0x6ed9eba1, 0x8f1bbcdc | 0, 0xca62c1d6 | 0
+]
+
+var W = new Array(80)
+
+function Sha () {
+  this.init()
+  this._w = W
+
+  Hash.call(this, 64, 56)
+}
+
+inherits(Sha, Hash)
+
+Sha.prototype.init = function () {
+  this._a = 0x67452301
+  this._b = 0xefcdab89
+  this._c = 0x98badcfe
+  this._d = 0x10325476
+  this._e = 0xc3d2e1f0
+
+  return this
+}
+
+function rotl5 (num) {
+  return (num << 5) | (num >>> 27)
+}
+
+function rotl30 (num) {
+  return (num << 30) | (num >>> 2)
+}
+
+function ft (s, b, c, d) {
+  if (s === 0) return (b & c) | ((~b) & d)
+  if (s === 2) return (b & c) | (b & d) | (c & d)
+  return b ^ c ^ d
+}
+
+Sha.prototype._update = function (M) {
+  var W = this._w
+
+  var a = this._a | 0
+  var b = this._b | 0
+  var c = this._c | 0
+  var d = this._d | 0
+  var e = this._e | 0
+
+  for (var i = 0; i < 16; ++i) W[i] = M.readInt32BE(i * 4)
+  for (; i < 80; ++i) W[i] = W[i - 3] ^ W[i - 8] ^ W[i - 14] ^ W[i - 16]
+
+  for (var j = 0; j < 80; ++j) {
+    var s = ~~(j / 20)
+    var t = (rotl5(a) + ft(s, b, c, d) + e + W[j] + K[s]) | 0
+
+    e = d
+    d = c
+    c = rotl30(b)
+    b = a
+    a = t
+  }
+
+  this._a = (a + this._a) | 0
+  this._b = (b + this._b) | 0
+  this._c = (c + this._c) | 0
+  this._d = (d + this._d) | 0
+  this._e = (e + this._e) | 0
+}
+
+Sha.prototype._hash = function () {
+  var H = Buffer.allocUnsafe(20)
+
+  H.writeInt32BE(this._a | 0, 0)
+  H.writeInt32BE(this._b | 0, 4)
+  H.writeInt32BE(this._c | 0, 8)
+  H.writeInt32BE(this._d | 0, 12)
+  H.writeInt32BE(this._e | 0, 16)
+
+  return H
+}
+
+module.exports = Sha
+
+},{"./hash":482,"inherits":313,"safe-buffer":481}],485:[function(require,module,exports){
+/*
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
+ * in FIPS PUB 180-1
+ * Version 2.1a Copyright Paul Johnston 2000 - 2002.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for details.
+ */
+
+var inherits = require('inherits')
+var Hash = require('./hash')
+var Buffer = require('safe-buffer').Buffer
+
+var K = [
+  0x5a827999, 0x6ed9eba1, 0x8f1bbcdc | 0, 0xca62c1d6 | 0
+]
+
+var W = new Array(80)
+
+function Sha1 () {
+  this.init()
+  this._w = W
+
+  Hash.call(this, 64, 56)
+}
+
+inherits(Sha1, Hash)
+
+Sha1.prototype.init = function () {
+  this._a = 0x67452301
+  this._b = 0xefcdab89
+  this._c = 0x98badcfe
+  this._d = 0x10325476
+  this._e = 0xc3d2e1f0
+
+  return this
+}
+
+function rotl1 (num) {
+  return (num << 1) | (num >>> 31)
+}
+
+function rotl5 (num) {
+  return (num << 5) | (num >>> 27)
+}
+
+function rotl30 (num) {
+  return (num << 30) | (num >>> 2)
+}
+
+function ft (s, b, c, d) {
+  if (s === 0) return (b & c) | ((~b) & d)
+  if (s === 2) return (b & c) | (b & d) | (c & d)
+  return b ^ c ^ d
+}
+
+Sha1.prototype._update = function (M) {
+  var W = this._w
+
+  var a = this._a | 0
+  var b = this._b | 0
+  var c = this._c | 0
+  var d = this._d | 0
+  var e = this._e | 0
+
+  for (var i = 0; i < 16; ++i) W[i] = M.readInt32BE(i * 4)
+  for (; i < 80; ++i) W[i] = rotl1(W[i - 3] ^ W[i - 8] ^ W[i - 14] ^ W[i - 16])
+
+  for (var j = 0; j < 80; ++j) {
+    var s = ~~(j / 20)
+    var t = (rotl5(a) + ft(s, b, c, d) + e + W[j] + K[s]) | 0
+
+    e = d
+    d = c
+    c = rotl30(b)
+    b = a
+    a = t
+  }
+
+  this._a = (a + this._a) | 0
+  this._b = (b + this._b) | 0
+  this._c = (c + this._c) | 0
+  this._d = (d + this._d) | 0
+  this._e = (e + this._e) | 0
+}
+
+Sha1.prototype._hash = function () {
+  var H = Buffer.allocUnsafe(20)
+
+  H.writeInt32BE(this._a | 0, 0)
+  H.writeInt32BE(this._b | 0, 4)
+  H.writeInt32BE(this._c | 0, 8)
+  H.writeInt32BE(this._d | 0, 12)
+  H.writeInt32BE(this._e | 0, 16)
+
+  return H
+}
+
+module.exports = Sha1
+
+},{"./hash":482,"inherits":313,"safe-buffer":481}],486:[function(require,module,exports){
+/**
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
+ * in FIPS 180-2
+ * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ *
+ */
+
+var inherits = require('inherits')
+var Sha256 = require('./sha256')
+var Hash = require('./hash')
+var Buffer = require('safe-buffer').Buffer
+
+var W = new Array(64)
+
+function Sha224 () {
+  this.init()
+
+  this._w = W // new Array(64)
+
+  Hash.call(this, 64, 56)
+}
+
+inherits(Sha224, Sha256)
+
+Sha224.prototype.init = function () {
+  this._a = 0xc1059ed8
+  this._b = 0x367cd507
+  this._c = 0x3070dd17
+  this._d = 0xf70e5939
+  this._e = 0xffc00b31
+  this._f = 0x68581511
+  this._g = 0x64f98fa7
+  this._h = 0xbefa4fa4
+
+  return this
+}
+
+Sha224.prototype._hash = function () {
+  var H = Buffer.allocUnsafe(28)
+
+  H.writeInt32BE(this._a, 0)
+  H.writeInt32BE(this._b, 4)
+  H.writeInt32BE(this._c, 8)
+  H.writeInt32BE(this._d, 12)
+  H.writeInt32BE(this._e, 16)
+  H.writeInt32BE(this._f, 20)
+  H.writeInt32BE(this._g, 24)
+
+  return H
+}
+
+module.exports = Sha224
+
+},{"./hash":482,"./sha256":487,"inherits":313,"safe-buffer":481}],487:[function(require,module,exports){
+/**
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
+ * in FIPS 180-2
+ * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ *
+ */
+
+var inherits = require('inherits')
+var Hash = require('./hash')
+var Buffer = require('safe-buffer').Buffer
+
+var K = [
+  0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5,
+  0x3956C25B, 0x59F111F1, 0x923F82A4, 0xAB1C5ED5,
+  0xD807AA98, 0x12835B01, 0x243185BE, 0x550C7DC3,
+  0x72BE5D74, 0x80DEB1FE, 0x9BDC06A7, 0xC19BF174,
+  0xE49B69C1, 0xEFBE4786, 0x0FC19DC6, 0x240CA1CC,
+  0x2DE92C6F, 0x4A7484AA, 0x5CB0A9DC, 0x76F988DA,
+  0x983E5152, 0xA831C66D, 0xB00327C8, 0xBF597FC7,
+  0xC6E00BF3, 0xD5A79147, 0x06CA6351, 0x14292967,
+  0x27B70A85, 0x2E1B2138, 0x4D2C6DFC, 0x53380D13,
+  0x650A7354, 0x766A0ABB, 0x81C2C92E, 0x92722C85,
+  0xA2BFE8A1, 0xA81A664B, 0xC24B8B70, 0xC76C51A3,
+  0xD192E819, 0xD6990624, 0xF40E3585, 0x106AA070,
+  0x19A4C116, 0x1E376C08, 0x2748774C, 0x34B0BCB5,
+  0x391C0CB3, 0x4ED8AA4A, 0x5B9CCA4F, 0x682E6FF3,
+  0x748F82EE, 0x78A5636F, 0x84C87814, 0x8CC70208,
+  0x90BEFFFA, 0xA4506CEB, 0xBEF9A3F7, 0xC67178F2
+]
+
+var W = new Array(64)
+
+function Sha256 () {
+  this.init()
+
+  this._w = W // new Array(64)
+
+  Hash.call(this, 64, 56)
+}
+
+inherits(Sha256, Hash)
+
+Sha256.prototype.init = function () {
+  this._a = 0x6a09e667
+  this._b = 0xbb67ae85
+  this._c = 0x3c6ef372
+  this._d = 0xa54ff53a
+  this._e = 0x510e527f
+  this._f = 0x9b05688c
+  this._g = 0x1f83d9ab
+  this._h = 0x5be0cd19
+
+  return this
+}
+
+function ch (x, y, z) {
+  return z ^ (x & (y ^ z))
+}
+
+function maj (x, y, z) {
+  return (x & y) | (z & (x | y))
+}
+
+function sigma0 (x) {
+  return (x >>> 2 | x << 30) ^ (x >>> 13 | x << 19) ^ (x >>> 22 | x << 10)
+}
+
+function sigma1 (x) {
+  return (x >>> 6 | x << 26) ^ (x >>> 11 | x << 21) ^ (x >>> 25 | x << 7)
+}
+
+function gamma0 (x) {
+  return (x >>> 7 | x << 25) ^ (x >>> 18 | x << 14) ^ (x >>> 3)
+}
+
+function gamma1 (x) {
+  return (x >>> 17 | x << 15) ^ (x >>> 19 | x << 13) ^ (x >>> 10)
+}
+
+Sha256.prototype._update = function (M) {
+  var W = this._w
+
+  var a = this._a | 0
+  var b = this._b | 0
+  var c = this._c | 0
+  var d = this._d | 0
+  var e = this._e | 0
+  var f = this._f | 0
+  var g = this._g | 0
+  var h = this._h | 0
+
+  for (var i = 0; i < 16; ++i) W[i] = M.readInt32BE(i * 4)
+  for (; i < 64; ++i) W[i] = (gamma1(W[i - 2]) + W[i - 7] + gamma0(W[i - 15]) + W[i - 16]) | 0
+
+  for (var j = 0; j < 64; ++j) {
+    var T1 = (h + sigma1(e) + ch(e, f, g) + K[j] + W[j]) | 0
+    var T2 = (sigma0(a) + maj(a, b, c)) | 0
+
+    h = g
+    g = f
+    f = e
+    e = (d + T1) | 0
+    d = c
+    c = b
+    b = a
+    a = (T1 + T2) | 0
+  }
+
+  this._a = (a + this._a) | 0
+  this._b = (b + this._b) | 0
+  this._c = (c + this._c) | 0
+  this._d = (d + this._d) | 0
+  this._e = (e + this._e) | 0
+  this._f = (f + this._f) | 0
+  this._g = (g + this._g) | 0
+  this._h = (h + this._h) | 0
+}
+
+Sha256.prototype._hash = function () {
+  var H = Buffer.allocUnsafe(32)
+
+  H.writeInt32BE(this._a, 0)
+  H.writeInt32BE(this._b, 4)
+  H.writeInt32BE(this._c, 8)
+  H.writeInt32BE(this._d, 12)
+  H.writeInt32BE(this._e, 16)
+  H.writeInt32BE(this._f, 20)
+  H.writeInt32BE(this._g, 24)
+  H.writeInt32BE(this._h, 28)
+
+  return H
+}
+
+module.exports = Sha256
+
+},{"./hash":482,"inherits":313,"safe-buffer":481}],488:[function(require,module,exports){
+var inherits = require('inherits')
+var SHA512 = require('./sha512')
+var Hash = require('./hash')
+var Buffer = require('safe-buffer').Buffer
+
+var W = new Array(160)
+
+function Sha384 () {
+  this.init()
+  this._w = W
+
+  Hash.call(this, 128, 112)
+}
+
+inherits(Sha384, SHA512)
+
+Sha384.prototype.init = function () {
+  this._ah = 0xcbbb9d5d
+  this._bh = 0x629a292a
+  this._ch = 0x9159015a
+  this._dh = 0x152fecd8
+  this._eh = 0x67332667
+  this._fh = 0x8eb44a87
+  this._gh = 0xdb0c2e0d
+  this._hh = 0x47b5481d
+
+  this._al = 0xc1059ed8
+  this._bl = 0x367cd507
+  this._cl = 0x3070dd17
+  this._dl = 0xf70e5939
+  this._el = 0xffc00b31
+  this._fl = 0x68581511
+  this._gl = 0x64f98fa7
+  this._hl = 0xbefa4fa4
+
+  return this
+}
+
+Sha384.prototype._hash = function () {
+  var H = Buffer.allocUnsafe(48)
+
+  function writeInt64BE (h, l, offset) {
+    H.writeInt32BE(h, offset)
+    H.writeInt32BE(l, offset + 4)
+  }
+
+  writeInt64BE(this._ah, this._al, 0)
+  writeInt64BE(this._bh, this._bl, 8)
+  writeInt64BE(this._ch, this._cl, 16)
+  writeInt64BE(this._dh, this._dl, 24)
+  writeInt64BE(this._eh, this._el, 32)
+  writeInt64BE(this._fh, this._fl, 40)
+
+  return H
+}
+
+module.exports = Sha384
+
+},{"./hash":482,"./sha512":489,"inherits":313,"safe-buffer":481}],489:[function(require,module,exports){
+var inherits = require('inherits')
+var Hash = require('./hash')
+var Buffer = require('safe-buffer').Buffer
+
+var K = [
+  0x428a2f98, 0xd728ae22, 0x71374491, 0x23ef65cd,
+  0xb5c0fbcf, 0xec4d3b2f, 0xe9b5dba5, 0x8189dbbc,
+  0x3956c25b, 0xf348b538, 0x59f111f1, 0xb605d019,
+  0x923f82a4, 0xaf194f9b, 0xab1c5ed5, 0xda6d8118,
+  0xd807aa98, 0xa3030242, 0x12835b01, 0x45706fbe,
+  0x243185be, 0x4ee4b28c, 0x550c7dc3, 0xd5ffb4e2,
+  0x72be5d74, 0xf27b896f, 0x80deb1fe, 0x3b1696b1,
+  0x9bdc06a7, 0x25c71235, 0xc19bf174, 0xcf692694,
+  0xe49b69c1, 0x9ef14ad2, 0xefbe4786, 0x384f25e3,
+  0x0fc19dc6, 0x8b8cd5b5, 0x240ca1cc, 0x77ac9c65,
+  0x2de92c6f, 0x592b0275, 0x4a7484aa, 0x6ea6e483,
+  0x5cb0a9dc, 0xbd41fbd4, 0x76f988da, 0x831153b5,
+  0x983e5152, 0xee66dfab, 0xa831c66d, 0x2db43210,
+  0xb00327c8, 0x98fb213f, 0xbf597fc7, 0xbeef0ee4,
+  0xc6e00bf3, 0x3da88fc2, 0xd5a79147, 0x930aa725,
+  0x06ca6351, 0xe003826f, 0x14292967, 0x0a0e6e70,
+  0x27b70a85, 0x46d22ffc, 0x2e1b2138, 0x5c26c926,
+  0x4d2c6dfc, 0x5ac42aed, 0x53380d13, 0x9d95b3df,
+  0x650a7354, 0x8baf63de, 0x766a0abb, 0x3c77b2a8,
+  0x81c2c92e, 0x47edaee6, 0x92722c85, 0x1482353b,
+  0xa2bfe8a1, 0x4cf10364, 0xa81a664b, 0xbc423001,
+  0xc24b8b70, 0xd0f89791, 0xc76c51a3, 0x0654be30,
+  0xd192e819, 0xd6ef5218, 0xd6990624, 0x5565a910,
+  0xf40e3585, 0x5771202a, 0x106aa070, 0x32bbd1b8,
+  0x19a4c116, 0xb8d2d0c8, 0x1e376c08, 0x5141ab53,
+  0x2748774c, 0xdf8eeb99, 0x34b0bcb5, 0xe19b48a8,
+  0x391c0cb3, 0xc5c95a63, 0x4ed8aa4a, 0xe3418acb,
+  0x5b9cca4f, 0x7763e373, 0x682e6ff3, 0xd6b2b8a3,
+  0x748f82ee, 0x5defb2fc, 0x78a5636f, 0x43172f60,
+  0x84c87814, 0xa1f0ab72, 0x8cc70208, 0x1a6439ec,
+  0x90befffa, 0x23631e28, 0xa4506ceb, 0xde82bde9,
+  0xbef9a3f7, 0xb2c67915, 0xc67178f2, 0xe372532b,
+  0xca273ece, 0xea26619c, 0xd186b8c7, 0x21c0c207,
+  0xeada7dd6, 0xcde0eb1e, 0xf57d4f7f, 0xee6ed178,
+  0x06f067aa, 0x72176fba, 0x0a637dc5, 0xa2c898a6,
+  0x113f9804, 0xbef90dae, 0x1b710b35, 0x131c471b,
+  0x28db77f5, 0x23047d84, 0x32caab7b, 0x40c72493,
+  0x3c9ebe0a, 0x15c9bebc, 0x431d67c4, 0x9c100d4c,
+  0x4cc5d4be, 0xcb3e42b6, 0x597f299c, 0xfc657e2a,
+  0x5fcb6fab, 0x3ad6faec, 0x6c44198c, 0x4a475817
+]
+
+var W = new Array(160)
+
+function Sha512 () {
+  this.init()
+  this._w = W
+
+  Hash.call(this, 128, 112)
+}
+
+inherits(Sha512, Hash)
+
+Sha512.prototype.init = function () {
+  this._ah = 0x6a09e667
+  this._bh = 0xbb67ae85
+  this._ch = 0x3c6ef372
+  this._dh = 0xa54ff53a
+  this._eh = 0x510e527f
+  this._fh = 0x9b05688c
+  this._gh = 0x1f83d9ab
+  this._hh = 0x5be0cd19
+
+  this._al = 0xf3bcc908
+  this._bl = 0x84caa73b
+  this._cl = 0xfe94f82b
+  this._dl = 0x5f1d36f1
+  this._el = 0xade682d1
+  this._fl = 0x2b3e6c1f
+  this._gl = 0xfb41bd6b
+  this._hl = 0x137e2179
+
+  return this
+}
+
+function Ch (x, y, z) {
+  return z ^ (x & (y ^ z))
+}
+
+function maj (x, y, z) {
+  return (x & y) | (z & (x | y))
+}
+
+function sigma0 (x, xl) {
+  return (x >>> 28 | xl << 4) ^ (xl >>> 2 | x << 30) ^ (xl >>> 7 | x << 25)
+}
+
+function sigma1 (x, xl) {
+  return (x >>> 14 | xl << 18) ^ (x >>> 18 | xl << 14) ^ (xl >>> 9 | x << 23)
+}
+
+function Gamma0 (x, xl) {
+  return (x >>> 1 | xl << 31) ^ (x >>> 8 | xl << 24) ^ (x >>> 7)
+}
+
+function Gamma0l (x, xl) {
+  return (x >>> 1 | xl << 31) ^ (x >>> 8 | xl << 24) ^ (x >>> 7 | xl << 25)
+}
+
+function Gamma1 (x, xl) {
+  return (x >>> 19 | xl << 13) ^ (xl >>> 29 | x << 3) ^ (x >>> 6)
+}
+
+function Gamma1l (x, xl) {
+  return (x >>> 19 | xl << 13) ^ (xl >>> 29 | x << 3) ^ (x >>> 6 | xl << 26)
+}
+
+function getCarry (a, b) {
+  return (a >>> 0) < (b >>> 0) ? 1 : 0
+}
+
+Sha512.prototype._update = function (M) {
+  var W = this._w
+
+  var ah = this._ah | 0
+  var bh = this._bh | 0
+  var ch = this._ch | 0
+  var dh = this._dh | 0
+  var eh = this._eh | 0
+  var fh = this._fh | 0
+  var gh = this._gh | 0
+  var hh = this._hh | 0
+
+  var al = this._al | 0
+  var bl = this._bl | 0
+  var cl = this._cl | 0
+  var dl = this._dl | 0
+  var el = this._el | 0
+  var fl = this._fl | 0
+  var gl = this._gl | 0
+  var hl = this._hl | 0
+
+  for (var i = 0; i < 32; i += 2) {
+    W[i] = M.readInt32BE(i * 4)
+    W[i + 1] = M.readInt32BE(i * 4 + 4)
+  }
+  for (; i < 160; i += 2) {
+    var xh = W[i - 15 * 2]
+    var xl = W[i - 15 * 2 + 1]
+    var gamma0 = Gamma0(xh, xl)
+    var gamma0l = Gamma0l(xl, xh)
+
+    xh = W[i - 2 * 2]
+    xl = W[i - 2 * 2 + 1]
+    var gamma1 = Gamma1(xh, xl)
+    var gamma1l = Gamma1l(xl, xh)
+
+    // W[i] = gamma0 + W[i - 7] + gamma1 + W[i - 16]
+    var Wi7h = W[i - 7 * 2]
+    var Wi7l = W[i - 7 * 2 + 1]
+
+    var Wi16h = W[i - 16 * 2]
+    var Wi16l = W[i - 16 * 2 + 1]
+
+    var Wil = (gamma0l + Wi7l) | 0
+    var Wih = (gamma0 + Wi7h + getCarry(Wil, gamma0l)) | 0
+    Wil = (Wil + gamma1l) | 0
+    Wih = (Wih + gamma1 + getCarry(Wil, gamma1l)) | 0
+    Wil = (Wil + Wi16l) | 0
+    Wih = (Wih + Wi16h + getCarry(Wil, Wi16l)) | 0
+
+    W[i] = Wih
+    W[i + 1] = Wil
+  }
+
+  for (var j = 0; j < 160; j += 2) {
+    Wih = W[j]
+    Wil = W[j + 1]
+
+    var majh = maj(ah, bh, ch)
+    var majl = maj(al, bl, cl)
+
+    var sigma0h = sigma0(ah, al)
+    var sigma0l = sigma0(al, ah)
+    var sigma1h = sigma1(eh, el)
+    var sigma1l = sigma1(el, eh)
+
+    // t1 = h + sigma1 + ch + K[j] + W[j]
+    var Kih = K[j]
+    var Kil = K[j + 1]
+
+    var chh = Ch(eh, fh, gh)
+    var chl = Ch(el, fl, gl)
+
+    var t1l = (hl + sigma1l) | 0
+    var t1h = (hh + sigma1h + getCarry(t1l, hl)) | 0
+    t1l = (t1l + chl) | 0
+    t1h = (t1h + chh + getCarry(t1l, chl)) | 0
+    t1l = (t1l + Kil) | 0
+    t1h = (t1h + Kih + getCarry(t1l, Kil)) | 0
+    t1l = (t1l + Wil) | 0
+    t1h = (t1h + Wih + getCarry(t1l, Wil)) | 0
+
+    // t2 = sigma0 + maj
+    var t2l = (sigma0l + majl) | 0
+    var t2h = (sigma0h + majh + getCarry(t2l, sigma0l)) | 0
+
+    hh = gh
+    hl = gl
+    gh = fh
+    gl = fl
+    fh = eh
+    fl = el
+    el = (dl + t1l) | 0
+    eh = (dh + t1h + getCarry(el, dl)) | 0
+    dh = ch
+    dl = cl
+    ch = bh
+    cl = bl
+    bh = ah
+    bl = al
+    al = (t1l + t2l) | 0
+    ah = (t1h + t2h + getCarry(al, t1l)) | 0
+  }
+
+  this._al = (this._al + al) | 0
+  this._bl = (this._bl + bl) | 0
+  this._cl = (this._cl + cl) | 0
+  this._dl = (this._dl + dl) | 0
+  this._el = (this._el + el) | 0
+  this._fl = (this._fl + fl) | 0
+  this._gl = (this._gl + gl) | 0
+  this._hl = (this._hl + hl) | 0
+
+  this._ah = (this._ah + ah + getCarry(this._al, al)) | 0
+  this._bh = (this._bh + bh + getCarry(this._bl, bl)) | 0
+  this._ch = (this._ch + ch + getCarry(this._cl, cl)) | 0
+  this._dh = (this._dh + dh + getCarry(this._dl, dl)) | 0
+  this._eh = (this._eh + eh + getCarry(this._el, el)) | 0
+  this._fh = (this._fh + fh + getCarry(this._fl, fl)) | 0
+  this._gh = (this._gh + gh + getCarry(this._gl, gl)) | 0
+  this._hh = (this._hh + hh + getCarry(this._hl, hl)) | 0
+}
+
+Sha512.prototype._hash = function () {
+  var H = Buffer.allocUnsafe(64)
+
+  function writeInt64BE (h, l, offset) {
+    H.writeInt32BE(h, offset)
+    H.writeInt32BE(l, offset + 4)
+  }
+
+  writeInt64BE(this._ah, this._al, 0)
+  writeInt64BE(this._bh, this._bl, 8)
+  writeInt64BE(this._ch, this._cl, 16)
+  writeInt64BE(this._dh, this._dl, 24)
+  writeInt64BE(this._eh, this._el, 32)
+  writeInt64BE(this._fh, this._fl, 40)
+  writeInt64BE(this._gh, this._gl, 48)
+  writeInt64BE(this._hh, this._hl, 56)
+
+  return H
+}
+
+module.exports = Sha512
+
+},{"./hash":482,"inherits":313,"safe-buffer":481}],490:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+module.exports = Stream;
+
+var EE = require('events').EventEmitter;
+var inherits = require('inherits');
+
+inherits(Stream, EE);
+Stream.Readable = require('readable-stream/readable.js');
+Stream.Writable = require('readable-stream/writable.js');
+Stream.Duplex = require('readable-stream/duplex.js');
+Stream.Transform = require('readable-stream/transform.js');
+Stream.PassThrough = require('readable-stream/passthrough.js');
+
+// Backwards-compat with node 0.4.x
+Stream.Stream = Stream;
+
+
+
+// old-style streams.  Note that the pipe method (the only relevant
+// part of this class) is overridden in the Readable class.
+
+function Stream() {
+  EE.call(this);
+}
+
+Stream.prototype.pipe = function(dest, options) {
+  var source = this;
+
+  function ondata(chunk) {
+    if (dest.writable) {
+      if (false === dest.write(chunk) && source.pause) {
+        source.pause();
+      }
+    }
+  }
+
+  source.on('data', ondata);
+
+  function ondrain() {
+    if (source.readable && source.resume) {
+      source.resume();
+    }
+  }
+
+  dest.on('drain', ondrain);
+
+  // If the 'end' option is not supplied, dest.end() will be called when
+  // source gets the 'end' or 'close' events.  Only dest.end() once.
+  if (!dest._isStdio && (!options || options.end !== false)) {
+    source.on('end', onend);
+    source.on('close', onclose);
+  }
+
+  var didOnEnd = false;
+  function onend() {
+    if (didOnEnd) return;
+    didOnEnd = true;
+
+    dest.end();
+  }
+
+
+  function onclose() {
+    if (didOnEnd) return;
+    didOnEnd = true;
+
+    if (typeof dest.destroy === 'function') dest.destroy();
+  }
+
+  // don't leave dangling pipes when there are errors.
+  function onerror(er) {
+    cleanup();
+    if (EE.listenerCount(this, 'error') === 0) {
+      throw er; // Unhandled stream error in pipe.
+    }
+  }
+
+  source.on('error', onerror);
+  dest.on('error', onerror);
+
+  // remove all the event listeners that were added.
+  function cleanup() {
+    source.removeListener('data', ondata);
+    dest.removeListener('drain', ondrain);
+
+    source.removeListener('end', onend);
+    source.removeListener('close', onclose);
+
+    source.removeListener('error', onerror);
+    dest.removeListener('error', onerror);
+
+    source.removeListener('end', cleanup);
+    source.removeListener('close', cleanup);
+
+    dest.removeListener('close', cleanup);
+  }
+
+  source.on('end', cleanup);
+  source.on('close', cleanup);
+
+  dest.on('close', cleanup);
+
+  dest.emit('pipe', source);
+
+  // Allow for unix-like usage: A.pipe(B).pipe(C)
+  return dest;
+};
+
+},{"events":310,"inherits":313,"readable-stream/duplex.js":466,"readable-stream/passthrough.js":476,"readable-stream/readable.js":477,"readable-stream/transform.js":478,"readable-stream/writable.js":479}],491:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+var Buffer = require('buffer').Buffer;
+
+var isBufferEncoding = Buffer.isEncoding
+  || function(encoding) {
+       switch (encoding && encoding.toLowerCase()) {
+         case 'hex': case 'utf8': case 'utf-8': case 'ascii': case 'binary': case 'base64': case 'ucs2': case 'ucs-2': case 'utf16le': case 'utf-16le': case 'raw': return true;
+         default: return false;
+       }
+     }
+
+
+function assertEncoding(encoding) {
+  if (encoding && !isBufferEncoding(encoding)) {
+    throw new Error('Unknown encoding: ' + encoding);
+  }
+}
+
+// StringDecoder provides an interface for efficiently splitting a series of
+// buffers into a series of JS strings without breaking apart multi-byte
+// characters. CESU-8 is handled as part of the UTF-8 encoding.
+//
+// @TODO Handling all encodings inside a single object makes it very difficult
+// to reason about this code, so it should be split up in the future.
+// @TODO There should be a utf8-strict encoding that rejects invalid UTF-8 code
+// points as used by CESU-8.
+var StringDecoder = exports.StringDecoder = function(encoding) {
+  this.encoding = (encoding || 'utf8').toLowerCase().replace(/[-_]/, '');
+  assertEncoding(encoding);
+  switch (this.encoding) {
+    case 'utf8':
+      // CESU-8 represents each of Surrogate Pair by 3-bytes
+      this.surrogateSize = 3;
+      break;
+    case 'ucs2':
+    case 'utf16le':
+      // UTF-16 represents each of Surrogate Pair by 2-bytes
+      this.surrogateSize = 2;
+      this.detectIncompleteChar = utf16DetectIncompleteChar;
+      break;
+    case 'base64':
+      // Base-64 stores 3 bytes in 4 chars, and pads the remainder.
+      this.surrogateSize = 3;
+      this.detectIncompleteChar = base64DetectIncompleteChar;
+      break;
+    default:
+      this.write = passThroughWrite;
+      return;
+  }
+
+  // Enough space to store all bytes of a single character. UTF-8 needs 4
+  // bytes, but CESU-8 may require up to 6 (3 bytes per surrogate).
+  this.charBuffer = new Buffer(6);
+  // Number of bytes received for the current incomplete multi-byte character.
+  this.charReceived = 0;
+  // Number of bytes expected for the current incomplete multi-byte character.
+  this.charLength = 0;
+};
+
+
+// write decodes the given buffer and returns it as JS string that is
+// guaranteed to not contain any partial multi-byte characters. Any partial
+// character found at the end of the buffer is buffered up, and will be
+// returned when calling write again with the remaining bytes.
+//
+// Note: Converting a Buffer containing an orphan surrogate to a String
+// currently works, but converting a String to a Buffer (via `new Buffer`, or
+// Buffer#write) will replace incomplete surrogates with the unicode
+// replacement character. See https://codereview.chromium.org/121173009/ .
+StringDecoder.prototype.write = function(buffer) {
+  var charStr = '';
+  // if our last write ended with an incomplete multibyte character
+  while (this.charLength) {
+    // determine how many remaining bytes this buffer has to offer for this char
+    var available = (buffer.length >= this.charLength - this.charReceived) ?
+        this.charLength - this.charReceived :
+        buffer.length;
+
+    // add the new bytes to the char buffer
+    buffer.copy(this.charBuffer, this.charReceived, 0, available);
+    this.charReceived += available;
+
+    if (this.charReceived < this.charLength) {
+      // still not enough chars in this buffer? wait for more ...
+      return '';
+    }
+
+    // remove bytes belonging to the current character from the buffer
+    buffer = buffer.slice(available, buffer.length);
+
+    // get the character that was split
+    charStr = this.charBuffer.slice(0, this.charLength).toString(this.encoding);
+
+    // CESU-8: lead surrogate (D800-DBFF) is also the incomplete character
+    var charCode = charStr.charCodeAt(charStr.length - 1);
+    if (charCode >= 0xD800 && charCode <= 0xDBFF) {
+      this.charLength += this.surrogateSize;
+      charStr = '';
+      continue;
+    }
+    this.charReceived = this.charLength = 0;
+
+    // if there are no more bytes in this buffer, just emit our char
+    if (buffer.length === 0) {
+      return charStr;
+    }
+    break;
+  }
+
+  // determine and set charLength / charReceived
+  this.detectIncompleteChar(buffer);
+
+  var end = buffer.length;
+  if (this.charLength) {
+    // buffer the incomplete character bytes we got
+    buffer.copy(this.charBuffer, 0, buffer.length - this.charReceived, end);
+    end -= this.charReceived;
+  }
+
+  charStr += buffer.toString(this.encoding, 0, end);
+
+  var end = charStr.length - 1;
+  var charCode = charStr.charCodeAt(end);
+  // CESU-8: lead surrogate (D800-DBFF) is also the incomplete character
+  if (charCode >= 0xD800 && charCode <= 0xDBFF) {
+    var size = this.surrogateSize;
+    this.charLength += size;
+    this.charReceived += size;
+    this.charBuffer.copy(this.charBuffer, size, 0, size);
+    buffer.copy(this.charBuffer, 0, 0, size);
+    return charStr.substring(0, end);
+  }
+
+  // or just emit the charStr
+  return charStr;
+};
+
+// detectIncompleteChar determines if there is an incomplete UTF-8 character at
+// the end of the given buffer. If so, it sets this.charLength to the byte
+// length that character, and sets this.charReceived to the number of bytes
+// that are available for this character.
+StringDecoder.prototype.detectIncompleteChar = function(buffer) {
+  // determine how many bytes we have to check at the end of this buffer
+  var i = (buffer.length >= 3) ? 3 : buffer.length;
+
+  // Figure out if one of the last i bytes of our buffer announces an
+  // incomplete char.
+  for (; i > 0; i--) {
+    var c = buffer[buffer.length - i];
+
+    // See http://en.wikipedia.org/wiki/UTF-8#Description
+
+    // 110XXXXX
+    if (i == 1 && c >> 5 == 0x06) {
+      this.charLength = 2;
+      break;
+    }
+
+    // 1110XXXX
+    if (i <= 2 && c >> 4 == 0x0E) {
+      this.charLength = 3;
+      break;
+    }
+
+    // 11110XXX
+    if (i <= 3 && c >> 3 == 0x1E) {
+      this.charLength = 4;
+      break;
+    }
+  }
+  this.charReceived = i;
+};
+
+StringDecoder.prototype.end = function(buffer) {
+  var res = '';
+  if (buffer && buffer.length)
+    res = this.write(buffer);
+
+  if (this.charReceived) {
+    var cr = this.charReceived;
+    var buf = this.charBuffer;
+    var enc = this.encoding;
+    res += buf.slice(0, cr).toString(enc);
+  }
+
+  return res;
+};
+
+function passThroughWrite(buffer) {
+  return buffer.toString(this.encoding);
+}
+
+function utf16DetectIncompleteChar(buffer) {
+  this.charReceived = buffer.length % 2;
+  this.charLength = this.charReceived ? 2 : 0;
+}
+
+function base64DetectIncompleteChar(buffer) {
+  this.charReceived = buffer.length % 3;
+  this.charLength = this.charReceived ? 3 : 0;
+}
+
+},{"buffer":302}],492:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 var punycode = require('punycode');
 
@@ -136437,28 +146183,42 @@ function Url() {
   this.href = null;
 }
 
+// Reference: RFC 3986, RFC 1808, RFC 2396
 
+// define these here so at least they only have to be
+// compiled once on the first module load.
 var protocolPattern = /^([a-z0-9.+-]+:)/i,
     portPattern = /:[0-9]*$/,
 
+    // RFC 2396: characters reserved for delimiting URLs.
+    // We actually just auto-escape these.
     delims = ['<', '>', '"', '`', ' ', '\r', '\n', '\t'],
 
+    // RFC 2396: characters not allowed for various reasons.
     unwise = ['{', '}', '|', '\\', '^', '`'].concat(delims),
 
+    // Allowed by RFCs, but cause of XSS attacks.  Always escape these.
     autoEscape = ['\''].concat(unwise),
+    // Characters that are never ever allowed in a hostname.
+    // Note that any invalid chars are also handled, but these
+    // are the ones that are *expected* to be seen, so we fast-path
+    // them.
     nonHostChars = ['%', '/', '?', ';', '#'].concat(autoEscape),
     hostEndingChars = ['/', '?', '#'],
     hostnameMaxLen = 255,
     hostnamePartPattern = /^[a-z0-9A-Z_-]{0,63}$/,
     hostnamePartStart = /^([a-z0-9A-Z_-]{0,63})(.*)$/,
+    // protocols that can allow "unsafe" and "unwise" chars.
     unsafeProtocol = {
       'javascript': true,
       'javascript:': true
     },
+    // protocols that never have a hostname.
     hostlessProtocol = {
       'javascript': true,
       'javascript:': true
     },
+    // protocols that always contain a // bit.
     slashedProtocol = {
       'http': true,
       'https': true,
@@ -136488,6 +146248,8 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
 
   var rest = url;
 
+  // trim before proceeding.
+  // This is to support parse stuff like "  http://foo.com  \n"
   rest = rest.trim();
 
   var proto = protocolPattern.exec(rest);
@@ -136498,6 +146260,10 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     rest = rest.substr(proto.length);
   }
 
+  // figure out if it's got a host
+  // user@server is *always* interpreted as a hostname, and url
+  // resolution will treat //foo/bar as host=foo,path=bar because that's
+  // how the browser resolves relative URLs.
   if (slashesDenoteHost || proto || rest.match(/^\/\/[^@\/]+@[^@\/]+/)) {
     var slashes = rest.substr(0, 2) === '//';
     if (slashes && !(proto && hostlessProtocol[proto])) {
@@ -136509,8 +146275,22 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
   if (!hostlessProtocol[proto] &&
       (slashes || (proto && !slashedProtocol[proto]))) {
 
+    // there's a hostname.
+    // the first instance of /, ?, ;, or # ends the host.
+    //
+    // If there is an @ in the hostname, then non-host chars *are* allowed
+    // to the left of the last @ sign, unless some host-ending character
+    // comes *before* the @-sign.
+    // URLs are obnoxious.
+    //
+    // ex:
+    // http://a@b@c/ => user:a@b host:c
+    // http://a@b?@c => user:a host:c path:/?@c
 
+    // v0.12 TODO(isaacs): This is not quite how Chrome does things.
+    // Review our test case against browsers more comprehensively.
 
+    // find the first instance of any hostEndingChars
     var hostEnd = -1;
     for (var i = 0; i < hostEndingChars.length; i++) {
       var hec = rest.indexOf(hostEndingChars[i]);
@@ -136518,38 +146298,53 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
         hostEnd = hec;
     }
 
+    // at this point, either we have an explicit point where the
+    // auth portion cannot go past, or the last @ char is the decider.
     var auth, atSign;
     if (hostEnd === -1) {
+      // atSign can be anywhere.
       atSign = rest.lastIndexOf('@');
     } else {
+      // atSign must be in auth portion.
+      // http://a@b/c@d => host:b auth:a path:/c@d
       atSign = rest.lastIndexOf('@', hostEnd);
     }
 
+    // Now we have a portion which is definitely the auth.
+    // Pull that off.
     if (atSign !== -1) {
       auth = rest.slice(0, atSign);
       rest = rest.slice(atSign + 1);
       this.auth = decodeURIComponent(auth);
     }
 
+    // the host is the remaining to the left of the first non-host char
     hostEnd = -1;
     for (var i = 0; i < nonHostChars.length; i++) {
       var hec = rest.indexOf(nonHostChars[i]);
       if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
         hostEnd = hec;
     }
+    // if we still have not hit it, then the entire thing is a host.
     if (hostEnd === -1)
       hostEnd = rest.length;
 
     this.host = rest.slice(0, hostEnd);
     rest = rest.slice(hostEnd);
 
+    // pull out port.
     this.parseHost();
 
+    // we've indicated that there is a hostname,
+    // so even if it's empty, it has to be present.
     this.hostname = this.hostname || '';
 
+    // if hostname begins with [ and ends with ]
+    // assume that it's an IPv6 address.
     var ipv6Hostname = this.hostname[0] === '[' &&
         this.hostname[this.hostname.length - 1] === ']';
 
+    // validate a little.
     if (!ipv6Hostname) {
       var hostparts = this.hostname.split(/\./);
       for (var i = 0, l = hostparts.length; i < l; i++) {
@@ -136559,11 +146354,15 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
           var newpart = '';
           for (var j = 0, k = part.length; j < k; j++) {
             if (part.charCodeAt(j) > 127) {
+              // we replace non-ASCII char with a temporary placeholder
+              // we need this to make sure size of hostname is not
+              // broken by replacing non-ASCII by nothing
               newpart += 'x';
             } else {
               newpart += part[j];
             }
           }
+          // we test again with ASCII char only
           if (!newpart.match(hostnamePartPattern)) {
             var validParts = hostparts.slice(0, i);
             var notHost = hostparts.slice(i + 1);
@@ -136585,10 +146384,15 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     if (this.hostname.length > hostnameMaxLen) {
       this.hostname = '';
     } else {
+      // hostnames are always lower case.
       this.hostname = this.hostname.toLowerCase();
     }
 
     if (!ipv6Hostname) {
+      // IDNA Support: Returns a puny coded representation of "domain".
+      // It only converts the part of the domain name that
+      // has non ASCII characters. I.e. it dosent matter if
+      // you call it with a domain that already is in ASCII.
       var domainArray = this.hostname.split('.');
       var newOut = [];
       for (var i = 0; i < domainArray.length; ++i) {
@@ -136604,6 +146408,8 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     this.host = h + p;
     this.href += this.host;
 
+    // strip [ and ] from the hostname
+    // the host field still retains them, though
     if (ipv6Hostname) {
       this.hostname = this.hostname.substr(1, this.hostname.length - 2);
       if (rest[0] !== '/') {
@@ -136612,8 +146418,13 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     }
   }
 
+  // now rest is set to the post-host stuff.
+  // chop off any delim chars.
   if (!unsafeProtocol[lowerProto]) {
 
+    // First, make 100% sure that any "autoEscape" chars get
+    // escaped, even if encodeURIComponent doesn't think they
+    // need to be.
     for (var i = 0, l = autoEscape.length; i < l; i++) {
       var ae = autoEscape[i];
       var esc = encodeURIComponent(ae);
@@ -136625,8 +146436,10 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
   }
 
 
+  // chop off from the tail first.
   var hash = rest.indexOf('#');
   if (hash !== -1) {
+    // got a fragment string.
     this.hash = rest.substr(hash);
     rest = rest.slice(0, hash);
   }
@@ -136639,6 +146452,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     }
     rest = rest.slice(0, qm);
   } else if (parseQueryString) {
+    // no query string, but parseQueryString still requested
     this.search = '';
     this.query = {};
   }
@@ -136648,17 +146462,24 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     this.pathname = '/';
   }
 
+  //to support http.request
   if (this.pathname || this.search) {
     var p = this.pathname || '';
     var s = this.search || '';
     this.path = p + s;
   }
 
+  // finally, reconstruct the href based on what has been validated.
   this.href = this.format();
   return this;
 };
 
+// format a parsed object into a url string
 function urlFormat(obj) {
+  // ensure it's an object, and not a string url.
+  // If it's an obj, this is a no-op.
+  // this way, you can call url_format() on strings
+  // to clean up potentially wonky urls.
   if (isString(obj)) obj = urlParse(obj);
   if (!(obj instanceof Url)) return Url.prototype.format.call(obj);
   return obj.format();
@@ -136699,6 +146520,8 @@ Url.prototype.format = function() {
 
   if (protocol && protocol.substr(-1) !== ':') protocol += ':';
 
+  // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
+  // unless they had them to begin with.
   if (this.slashes ||
       (!protocol || slashedProtocol[protocol]) && host !== false) {
     host = '//' + (host || '');
@@ -136743,19 +146566,25 @@ Url.prototype.resolveObject = function(relative) {
     result[k] = this[k];
   }, this);
 
+  // hash is always overridden, no matter what.
+  // even href="" will remove it.
   result.hash = relative.hash;
 
+  // if the relative url is empty, then there's nothing left to do here.
   if (relative.href === '') {
     result.href = result.format();
     return result;
   }
 
+  // hrefs like //foo/bar always cut to the protocol.
   if (relative.slashes && !relative.protocol) {
+    // take everything except the protocol from relative
     Object.keys(relative).forEach(function(k) {
       if (k !== 'protocol')
         result[k] = relative[k];
     });
 
+    //urlParse appends trailing / to urls like http://www.example.com
     if (slashedProtocol[result.protocol] &&
         result.hostname && !result.pathname) {
       result.path = result.pathname = '/';
@@ -136766,6 +146595,14 @@ Url.prototype.resolveObject = function(relative) {
   }
 
   if (relative.protocol && relative.protocol !== result.protocol) {
+    // if it's a known url protocol, then changing
+    // the protocol does weird things
+    // first, if it's not file:, then we MUST have a host,
+    // and if there was a path
+    // to begin with, then we MUST have a path.
+    // if it is file:, then the host is dropped,
+    // because that's known to be hostless.
+    // anything else is assumed to be absolute.
     if (!slashedProtocol[relative.protocol]) {
       Object.keys(relative).forEach(function(k) {
         result[k] = relative[k];
@@ -136792,6 +146629,7 @@ Url.prototype.resolveObject = function(relative) {
     result.auth = relative.auth;
     result.hostname = relative.hostname || relative.host;
     result.port = relative.port;
+    // to support http.request
     if (result.pathname || result.search) {
       var p = result.pathname || '';
       var s = result.search || '';
@@ -136814,6 +146652,11 @@ Url.prototype.resolveObject = function(relative) {
       relPath = relative.pathname && relative.pathname.split('/') || [],
       psychotic = result.protocol && !slashedProtocol[result.protocol];
 
+  // if the url is a non-slashed url, then relative
+  // links like ../.. should be able
+  // to crawl up to the hostname, as well.  This is strange.
+  // result.protocol has already been set by now.
+  // Later on, put the first path part into the host field.
   if (psychotic) {
     result.hostname = '';
     result.port = null;
@@ -136835,6 +146678,7 @@ Url.prototype.resolveObject = function(relative) {
   }
 
   if (isRelAbs) {
+    // it's absolute.
     result.host = (relative.host || relative.host === '') ?
                   relative.host : result.host;
     result.hostname = (relative.hostname || relative.hostname === '') ?
@@ -136842,15 +146686,24 @@ Url.prototype.resolveObject = function(relative) {
     result.search = relative.search;
     result.query = relative.query;
     srcPath = relPath;
+    // fall through to the dot-handling below.
   } else if (relPath.length) {
+    // it's relative
+    // throw away the existing file, and take the new path instead.
     if (!srcPath) srcPath = [];
     srcPath.pop();
     srcPath = srcPath.concat(relPath);
     result.search = relative.search;
     result.query = relative.query;
   } else if (!isNullOrUndefined(relative.search)) {
+    // just pull out the search.
+    // like href='?foo'.
+    // Put this after the other two cases because it simplifies the booleans
     if (psychotic) {
       result.hostname = result.host = srcPath.shift();
+      //occationaly the auth can get stuck only in host
+      //this especialy happens in cases like
+      //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
       var authInHost = result.host && result.host.indexOf('@') > 0 ?
                        result.host.split('@') : false;
       if (authInHost) {
@@ -136860,6 +146713,7 @@ Url.prototype.resolveObject = function(relative) {
     }
     result.search = relative.search;
     result.query = relative.query;
+    //to support http.request
     if (!isNull(result.pathname) || !isNull(result.search)) {
       result.path = (result.pathname ? result.pathname : '') +
                     (result.search ? result.search : '');
@@ -136869,7 +146723,10 @@ Url.prototype.resolveObject = function(relative) {
   }
 
   if (!srcPath.length) {
+    // no path at all.  easy.
+    // we've already handled the other stuff above.
     result.pathname = null;
+    //to support http.request
     if (result.search) {
       result.path = '/' + result.search;
     } else {
@@ -136879,11 +146736,16 @@ Url.prototype.resolveObject = function(relative) {
     return result;
   }
 
+  // if a url ENDs in . or .., then it must get a trailing slash.
+  // however, if it ends in anything else non-slashy,
+  // then it must NOT get a trailing slash.
   var last = srcPath.slice(-1)[0];
   var hasTrailingSlash = (
       (result.host || relative.host) && (last === '.' || last === '..') ||
       last === '');
 
+  // strip single dots, resolve double dots to parent dir
+  // if the path tries to go above the root, `up` ends up > 0
   var up = 0;
   for (var i = srcPath.length; i >= 0; i--) {
     last = srcPath[i];
@@ -136898,6 +146760,7 @@ Url.prototype.resolveObject = function(relative) {
     }
   }
 
+  // if the path is allowed to go above the root, restore leading ..s
   if (!mustEndAbs && !removeAllDots) {
     for (; up--; up) {
       srcPath.unshift('..');
@@ -136916,9 +146779,13 @@ Url.prototype.resolveObject = function(relative) {
   var isAbsolute = srcPath[0] === '' ||
       (srcPath[0] && srcPath[0].charAt(0) === '/');
 
+  // put the host back
   if (psychotic) {
     result.hostname = result.host = isAbsolute ? '' :
                                     srcPath.length ? srcPath.shift() : '';
+    //occationaly the auth can get stuck only in host
+    //this especialy happens in cases like
+    //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
     var authInHost = result.host && result.host.indexOf('@') > 0 ?
                      result.host.split('@') : false;
     if (authInHost) {
@@ -136940,6 +146807,7 @@ Url.prototype.resolveObject = function(relative) {
     result.pathname = srcPath.join('/');
   }
 
+  //to support request.http
   if (!isNull(result.pathname) || !isNull(result.search)) {
     result.path = (result.pathname ? result.pathname : '') +
                   (result.search ? result.search : '');
@@ -136978,38 +146846,108 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":454,"querystring":457}],462:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
+},{"punycode":459,"querystring":462}],493:[function(require,module,exports){
+(function (global){
+
+/**
+ * Module exports.
+ */
+
+module.exports = deprecate;
+
+/**
+ * Mark that a method should not be used.
+ * Returns a modified function which warns once by default.
+ *
+ * If `localStorage.noDeprecation = true` is set, then it is a no-op.
+ *
+ * If `localStorage.throwDeprecation = true` is set, then deprecated functions
+ * will throw an Error when invoked.
+ *
+ * If `localStorage.traceDeprecation = true` is set, then deprecated functions
+ * will invoke `console.trace()` instead of `console.error()`.
+ *
+ * @param {Function} fn - the function to deprecate
+ * @param {String} msg - the string to print to the console when `fn` is invoked
+ * @returns {Function} a new "deprecated" version of `fn`
+ * @api public
+ */
+
+function deprecate (fn, msg) {
+  if (config('noDeprecation')) {
+    return fn;
   }
+
+  var warned = false;
+  function deprecated() {
+    if (!warned) {
+      if (config('throwDeprecation')) {
+        throw new Error(msg);
+      } else if (config('traceDeprecation')) {
+        console.trace(msg);
+      } else {
+        console.warn(msg);
+      }
+      warned = true;
+    }
+    return fn.apply(this, arguments);
+  }
+
+  return deprecated;
 }
 
-},{}],463:[function(require,module,exports){
+/**
+ * Checks `localStorage` for boolean values for the given `name`.
+ *
+ * @param {String} name
+ * @returns {Boolean}
+ * @api private
+ */
+
+function config (name) {
+  // accessing global.localStorage can trigger a DOMException in sandboxed iframes
+  try {
+    if (!global.localStorage) return false;
+  } catch (_) {
+    return false;
+  }
+  var val = global.localStorage[name];
+  if (null == val) return false;
+  return String(val).toLowerCase() === 'true';
+}
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],494:[function(require,module,exports){
+arguments[4][313][0].apply(exports,arguments)
+},{"dup":313}],495:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],464:[function(require,module,exports){
+},{}],496:[function(require,module,exports){
 (function (process,global){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 var formatRegExp = /%[sdj%]/g;
 exports.format = function(f) {
@@ -137051,7 +146989,11 @@ exports.format = function(f) {
 };
 
 
+// Mark that a method should not be used.
+// Returns a modified function which warns once by default.
+// If --no-deprecation is set, then it is a no-op.
 exports.deprecate = function(fn, msg) {
+  // Allow for deprecating things in the process of starting up.
   if (isUndefined(global.process)) {
     return function() {
       return exports.deprecate(fn, msg).apply(this, arguments);
@@ -137102,20 +147044,31 @@ exports.debuglog = function(set) {
 };
 
 
-
-
+/**
+ * Echos the value of a value. Trys to print the value out
+ * in the best way possible given the different types.
+ *
+ * @param {Object} obj The object to print out.
+ * @param {Object} opts Optional options object that alters the output.
+ */
+/* legacy: obj, showHidden, depth, colors*/
 function inspect(obj, opts) {
+  // default options
   var ctx = {
     seen: [],
     stylize: stylizeNoColor
   };
+  // legacy...
   if (arguments.length >= 3) ctx.depth = arguments[2];
   if (arguments.length >= 4) ctx.colors = arguments[3];
   if (isBoolean(opts)) {
+    // legacy...
     ctx.showHidden = opts;
   } else if (opts) {
+    // got an "options" object
     exports._extend(ctx, opts);
   }
+  // set default options
   if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
   if (isUndefined(ctx.depth)) ctx.depth = 2;
   if (isUndefined(ctx.colors)) ctx.colors = false;
@@ -137126,6 +147079,7 @@ function inspect(obj, opts) {
 exports.inspect = inspect;
 
 
+// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
 inspect.colors = {
   'bold' : [1, 22],
   'italic' : [3, 23],
@@ -137142,6 +147096,7 @@ inspect.colors = {
   'yellow' : [33, 39]
 };
 
+// Don't use 'blue' not visible on cmd.exe
 inspect.styles = {
   'special': 'cyan',
   'number': 'yellow',
@@ -137150,6 +147105,7 @@ inspect.styles = {
   'null': 'bold',
   'string': 'green',
   'date': 'magenta',
+  // "name": intentionally not styling
   'regexp': 'red'
 };
 
@@ -137183,10 +147139,14 @@ function arrayToHash(array) {
 
 
 function formatValue(ctx, value, recurseTimes) {
+  // Provide a hook for user-specified inspect functions.
+  // Check that value is an object with an inspect function on it
   if (ctx.customInspect &&
       value &&
       isFunction(value.inspect) &&
+      // Filter out the util module, it's inspect function is special
       value.inspect !== exports.inspect &&
+      // Also filter out any prototype objects using the circular check.
       !(value.constructor && value.constructor.prototype === value)) {
     var ret = value.inspect(recurseTimes, ctx);
     if (!isString(ret)) {
@@ -137195,11 +147155,13 @@ function formatValue(ctx, value, recurseTimes) {
     return ret;
   }
 
+  // Primitive types cannot have properties
   var primitive = formatPrimitive(ctx, value);
   if (primitive) {
     return primitive;
   }
 
+  // Look up the keys of the object.
   var keys = Object.keys(value);
   var visibleKeys = arrayToHash(keys);
 
@@ -137207,11 +147169,14 @@ function formatValue(ctx, value, recurseTimes) {
     keys = Object.getOwnPropertyNames(value);
   }
 
+  // IE doesn't make error fields non-enumerable
+  // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
   if (isError(value)
       && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
     return formatError(value);
   }
 
+  // Some type of object without properties can be shortcutted.
   if (keys.length === 0) {
     if (isFunction(value)) {
       var name = value.name ? ': ' + value.name : '';
@@ -137230,24 +147195,29 @@ function formatValue(ctx, value, recurseTimes) {
 
   var base = '', array = false, braces = ['{', '}'];
 
+  // Make Array say that they are Array
   if (isArray(value)) {
     array = true;
     braces = ['[', ']'];
   }
 
+  // Make functions say that they are functions
   if (isFunction(value)) {
     var n = value.name ? ': ' + value.name : '';
     base = ' [Function' + n + ']';
   }
 
+  // Make RegExps say that they are RegExps
   if (isRegExp(value)) {
     base = ' ' + RegExp.prototype.toString.call(value);
   }
 
+  // Make dates with properties first say the date
   if (isDate(value)) {
     base = ' ' + Date.prototype.toUTCString.call(value);
   }
 
+  // Make error with message first say the error
   if (isError(value)) {
     base = ' ' + formatError(value);
   }
@@ -137294,6 +147264,7 @@ function formatPrimitive(ctx, value) {
     return ctx.stylize('' + value, 'number');
   if (isBoolean(value))
     return ctx.stylize('' + value, 'boolean');
+  // For some reason typeof null is "object", so special case here.
   if (isNull(value))
     return ctx.stylize('null', 'null');
 }
@@ -137404,6 +147375,8 @@ function reduceToSingleString(output, base, braces) {
 }
 
 
+// NOTE: These type checking functions intentionally don't use `instanceof`
+// because it is fragile and can be easily faked with `Object.create()`.
 function isArray(ar) {
   return Array.isArray(ar);
 }
@@ -137495,6 +147468,7 @@ function pad(n) {
 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
               'Oct', 'Nov', 'Dec'];
 
+// 26 Feb 16:19:34
 function timestamp() {
   var d = new Date();
   var time = [pad(d.getHours()),
@@ -137504,15 +147478,29 @@ function timestamp() {
 }
 
 
+// log is just a thin wrapper to console.log that prepends a timestamp
 exports.log = function() {
   console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
 };
 
 
-
+/**
+ * Inherit the prototype methods from one constructor into another.
+ *
+ * The Function.prototype.inherits from lang.js rewritten as a standalone
+ * function (not on Function.prototype). NOTE: If this file is to be loaded
+ * during bootstrapping this function needs to be rewritten using some native
+ * functions as prototype setup using normal JavaScript does not work as
+ * expected during bootstrapping (see mirror.js in r114903).
+ *
+ * @param {function} ctor Constructor function which needs to inherit the
+ *     prototype.
+ * @param {function} superCtor Constructor function to inherit prototype from.
+ */
 exports.inherits = require('inherits');
 
 exports._extend = function(origin, add) {
+  // Don't do anything if add isn't an object
   if (!add || !isObject(add)) return origin;
 
   var keys = Object.keys(add);
@@ -137528,7 +147516,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":463,"_process":453,"inherits":462}],465:[function(require,module,exports){
+},{"./support/isBuffer":495,"_process":458,"inherits":494}],497:[function(require,module,exports){
 var v1 = require('./v1');
 var v4 = require('./v4');
 
@@ -137538,8 +147526,11 @@ uuid.v4 = v4;
 
 module.exports = uuid;
 
-},{"./v1":468,"./v4":469}],466:[function(require,module,exports){
-
+},{"./v1":500,"./v4":501}],498:[function(require,module,exports){
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
 var byteToHex = [];
 for (var i = 0; i < 256; ++i) {
   byteToHex[i] = (i + 0x100).toString(16).substr(1);
@@ -137560,12 +147551,17 @@ function bytesToUuid(buf, offset) {
 
 module.exports = bytesToUuid;
 
-},{}],467:[function(require,module,exports){
+},{}],499:[function(require,module,exports){
 (function (global){
+// Unique ID creation requires a high quality random # generator.  In the
+// browser this is a little complicated due to unknown quality of Math.random()
+// and inconsistent support for the `crypto` API.  We do the best we can via
+// feature-detection
 var rng;
 
 var crypto = global.crypto || global.msCrypto; // for IE 11
 if (crypto && crypto.getRandomValues) {
+  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
   var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
   rng = function whatwgRNG() {
     crypto.getRandomValues(rnds8);
@@ -137574,6 +147570,10 @@ if (crypto && crypto.getRandomValues) {
 }
 
 if (!rng) {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
   var rnds = new Array(16);
   rng = function() {
     for (var i = 0, r; i < 16; i++) {
@@ -137588,22 +147588,31 @@ if (!rng) {
 module.exports = rng;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],468:[function(require,module,exports){
+},{}],500:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
 
+// random #'s we need to init node and clockseq
 var _seedBytes = rng();
 
+// Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
 var _nodeId = [
   _seedBytes[0] | 0x01,
   _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
 ];
 
+// Per 4.2.2, randomize (14 bit) clockseq
 var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
 
+// Previous uuid creation time
 var _lastMSecs = 0, _lastNSecs = 0;
 
+// See https://github.com/broofa/node-uuid for API details
 function v1(options, buf, offset) {
   var i = buf && offset || 0;
   var b = buf || [];
@@ -137612,20 +147621,31 @@ function v1(options, buf, offset) {
 
   var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
 
+  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
   var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
 
+  // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
   var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
 
+  // Time since last uuid creation (in msecs)
   var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
 
+  // Per 4.2.1.2, Bump clockseq on clock regression
   if (dt < 0 && options.clockseq === undefined) {
     clockseq = clockseq + 1 & 0x3fff;
   }
 
+  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
   if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
     nsecs = 0;
   }
 
+  // Per 4.2.1.2 Throw error if too many uuids are requested
   if (nsecs >= 10000) {
     throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
   }
@@ -137634,25 +147654,32 @@ function v1(options, buf, offset) {
   _lastNSecs = nsecs;
   _clockseq = clockseq;
 
+  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
   msecs += 12219292800000;
 
+  // `time_low`
   var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
   b[i++] = tl >>> 24 & 0xff;
   b[i++] = tl >>> 16 & 0xff;
   b[i++] = tl >>> 8 & 0xff;
   b[i++] = tl & 0xff;
 
+  // `time_mid`
   var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
   b[i++] = tmh >>> 8 & 0xff;
   b[i++] = tmh & 0xff;
 
+  // `time_high_and_version`
   b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
   b[i++] = tmh >>> 16 & 0xff;
 
+  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
   b[i++] = clockseq >>> 8 | 0x80;
 
+  // `clock_seq_low`
   b[i++] = clockseq & 0xff;
 
+  // `node`
   var node = options.node || _nodeId;
   for (var n = 0; n < 6; ++n) {
     b[i + n] = node[n];
@@ -137663,7 +147690,7 @@ function v1(options, buf, offset) {
 
 module.exports = v1;
 
-},{"./lib/bytesToUuid":466,"./lib/rng":467}],469:[function(require,module,exports){
+},{"./lib/bytesToUuid":498,"./lib/rng":499}],501:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -137678,9 +147705,11 @@ function v4(options, buf, offset) {
 
   var rnds = options.random || (options.rng || rng)();
 
+  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
   rnds[6] = (rnds[6] & 0x0f) | 0x40;
   rnds[8] = (rnds[8] & 0x3f) | 0x80;
 
+  // Copy bytes to buffer, if provided
   if (buf) {
     for (var ii = 0; ii < 16; ++ii) {
       buf[i + ii] = rnds[ii];
@@ -137692,7 +147721,8 @@ function v4(options, buf, offset) {
 
 module.exports = v4;
 
-},{"./lib/bytesToUuid":466,"./lib/rng":467}],470:[function(require,module,exports){
+},{"./lib/bytesToUuid":498,"./lib/rng":499}],502:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLAttribute, create;
 
@@ -137725,7 +147755,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":430}],471:[function(require,module,exports){
+},{"lodash/create":434}],503:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLBuilder, XMLDeclaration, XMLDocType, XMLElement, XMLStringifier;
 
@@ -137795,7 +147826,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLDeclaration":478,"./XMLDocType":479,"./XMLElement":480,"./XMLStringifier":484}],472:[function(require,module,exports){
+},{"./XMLDeclaration":510,"./XMLDocType":511,"./XMLElement":512,"./XMLStringifier":516}],504:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLCData, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -137845,7 +147877,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":481,"lodash/create":430}],473:[function(require,module,exports){
+},{"./XMLNode":513,"lodash/create":434}],505:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLComment, XMLNode, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -137895,7 +147928,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":481,"lodash/create":430}],474:[function(require,module,exports){
+},{"./XMLNode":513,"lodash/create":434}],506:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLDTDAttList, create;
 
@@ -137964,7 +147998,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":430}],475:[function(require,module,exports){
+},{"lodash/create":434}],507:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLDTDElement, create;
 
@@ -138011,7 +148046,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":430}],476:[function(require,module,exports){
+},{"lodash/create":434}],508:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLDTDEntity, create, isObject;
 
@@ -138096,7 +148132,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":430,"lodash/isObject":443}],477:[function(require,module,exports){
+},{"lodash/create":434,"lodash/isObject":447}],509:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLDTDNotation, create;
 
@@ -138153,7 +148190,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":430}],478:[function(require,module,exports){
+},{"lodash/create":434}],510:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLDeclaration, XMLNode, create, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -138219,7 +148257,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":481,"lodash/create":430,"lodash/isObject":443}],479:[function(require,module,exports){
+},{"./XMLNode":513,"lodash/create":434,"lodash/isObject":447}],511:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLCData, XMLComment, XMLDTDAttList, XMLDTDElement, XMLDTDEntity, XMLDTDNotation, XMLDocType, XMLProcessingInstruction, create, isObject;
 
@@ -138408,7 +148447,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLCData":472,"./XMLComment":473,"./XMLDTDAttList":474,"./XMLDTDElement":475,"./XMLDTDEntity":476,"./XMLDTDNotation":477,"./XMLProcessingInstruction":482,"lodash/create":430,"lodash/isObject":443}],480:[function(require,module,exports){
+},{"./XMLCData":504,"./XMLComment":505,"./XMLDTDAttList":506,"./XMLDTDElement":507,"./XMLDTDEntity":508,"./XMLDTDNotation":509,"./XMLProcessingInstruction":514,"lodash/create":434,"lodash/isObject":447}],512:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLAttribute, XMLElement, XMLNode, XMLProcessingInstruction, create, every, isFunction, isObject,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -138621,7 +148661,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLAttribute":470,"./XMLNode":481,"./XMLProcessingInstruction":482,"lodash/create":430,"lodash/every":432,"lodash/isFunction":441,"lodash/isObject":443}],481:[function(require,module,exports){
+},{"./XMLAttribute":502,"./XMLNode":513,"./XMLProcessingInstruction":514,"lodash/create":434,"lodash/every":436,"lodash/isFunction":445,"lodash/isObject":447}],513:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLCData, XMLComment, XMLDeclaration, XMLDocType, XMLElement, XMLNode, XMLRaw, XMLText, isEmpty, isFunction, isObject,
     hasProp = {}.hasOwnProperty;
@@ -138953,7 +148994,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLCData":472,"./XMLComment":473,"./XMLDeclaration":478,"./XMLDocType":479,"./XMLElement":480,"./XMLRaw":483,"./XMLText":485,"lodash/isEmpty":440,"lodash/isFunction":441,"lodash/isObject":443}],482:[function(require,module,exports){
+},{"./XMLCData":504,"./XMLComment":505,"./XMLDeclaration":510,"./XMLDocType":511,"./XMLElement":512,"./XMLRaw":515,"./XMLText":517,"lodash/isEmpty":444,"lodash/isFunction":445,"lodash/isObject":447}],514:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLProcessingInstruction, create;
 
@@ -139005,7 +149047,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"lodash/create":430}],483:[function(require,module,exports){
+},{"lodash/create":434}],515:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLNode, XMLRaw, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -139055,7 +149098,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":481,"lodash/create":430}],484:[function(require,module,exports){
+},{"./XMLNode":513,"lodash/create":434}],516:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLStringifier,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
@@ -139226,7 +149270,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{}],485:[function(require,module,exports){
+},{}],517:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLNode, XMLText, create,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -139276,7 +149321,8 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLNode":481,"lodash/create":430}],486:[function(require,module,exports){
+},{"./XMLNode":513,"lodash/create":434}],518:[function(require,module,exports){
+// Generated by CoffeeScript 1.9.1
 (function() {
   var XMLBuilder, assign;
 
@@ -139291,7 +149337,10 @@ module.exports = v4;
 
 }).call(this);
 
-},{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
+},{"./XMLBuilder":503,"lodash/assign":432}],519:[function(require,module,exports){
+// AWS SDK for JavaScript v2.178.0
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
 
 var AWS = require('./core');
@@ -139300,7 +149349,11 @@ if (typeof window !== 'undefined') window.AWS = AWS;
 if (typeof module !== 'undefined') module.exports = AWS;
 if (typeof self !== 'undefined') self.AWS = AWS;
 
-
+/**
+ * @private
+ * DO NOT REMOVE
+ * browser builder will strip out this line if services are supplied on the command line.
+ */
 require('../clients/browser_default');
-},{"../clients/browser_default":168,"./browser_loader":230,"./core":233}]},{},[487]);
+},{"../clients/browser_default":168,"./browser_loader":230,"./core":233}]},{},[519]);
 
