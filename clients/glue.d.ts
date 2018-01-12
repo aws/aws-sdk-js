@@ -52,11 +52,11 @@ declare class Glue extends Service {
    */
   batchGetPartition(callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
   /**
-   * Stops a batch of job runs for a given job.
+   * Stops one or more job runs for a specified Job.
    */
   batchStopJobRun(params: Glue.Types.BatchStopJobRunRequest, callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Stops a batch of job runs for a given job.
+   * Stops one or more job runs for a specified Job.
    */
   batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class Glue extends Service {
    */
   createPartition(callback?: (err: AWSError, data: Glue.Types.CreatePartitionResponse) => void): Request<Glue.Types.CreatePartitionResponse, AWSError>;
   /**
-   * Transforms a directed acyclic graph (DAG) into a Python script.
+   * Transforms a directed acyclic graph (DAG) into code.
    */
   createScript(params: Glue.Types.CreateScriptRequest, callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
   /**
-   * Transforms a directed acyclic graph (DAG) into a Python script.
+   * Transforms a directed acyclic graph (DAG) into code.
    */
   createScript(callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Glue extends Service {
    */
   deleteDevEndpoint(callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
   /**
-   * Deletes a specified job.
+   * Deletes a specified job. If the job is not found, no exception is thrown.
    */
   deleteJob(params: Glue.Types.DeleteJobRequest, callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
-   * Deletes a specified job.
+   * Deletes a specified job. If the job is not found, no exception is thrown.
    */
   deleteJob(callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
@@ -212,11 +212,11 @@ declare class Glue extends Service {
    */
   deleteTable(callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
-   * Deletes a specified trigger.
+   * Deletes a specified trigger. If the trigger is not found, no exception is thrown.
    */
   deleteTrigger(params: Glue.Types.DeleteTriggerRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTriggerResponse) => void): Request<Glue.Types.DeleteTriggerResponse, AWSError>;
   /**
-   * Deletes a specified trigger.
+   * Deletes a specified trigger. If the trigger is not found, no exception is thrown.
    */
   deleteTrigger(callback?: (err: AWSError, data: Glue.Types.DeleteTriggerResponse) => void): Request<Glue.Types.DeleteTriggerResponse, AWSError>;
   /**
@@ -388,11 +388,11 @@ declare class Glue extends Service {
    */
   getPartitions(callback?: (err: AWSError, data: Glue.Types.GetPartitionsResponse) => void): Request<Glue.Types.GetPartitionsResponse, AWSError>;
   /**
-   * Gets a Python script to perform a specified mapping.
+   * Gets code to perform a specified mapping.
    */
   getPlan(params: Glue.Types.GetPlanRequest, callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
-   * Gets a Python script to perform a specified mapping.
+   * Gets code to perform a specified mapping.
    */
   getPlan(callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
@@ -492,11 +492,11 @@ declare class Glue extends Service {
    */
   startJobRun(callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
   /**
-   * Starts an existing trigger.
+   * Starts an existing trigger. See Triggering Jobs for information about how different types of trigger are started.
    */
   startTrigger(params: Glue.Types.StartTriggerRequest, callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
   /**
-   * Starts an existing trigger.
+   * Starts an existing trigger. See Triggering Jobs for information about how different types of trigger are started.
    */
   startTrigger(callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
   /**
@@ -619,7 +619,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * Arguments to be passed to the job.
+     * Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
   }
@@ -746,15 +746,15 @@ declare namespace Glue {
   export type BatchGetPartitionValueList = PartitionValueList[];
   export interface BatchStopJobRunError {
     /**
-     * The name of the job.
+     * The name of the Job in question.
      */
     JobName?: NameString;
     /**
-     * The job run Id.
+     * The JobRunId of the JobRun in question.
      */
     JobRunId?: IdString;
     /**
-     * The details of the error that occurred.
+     * Specifies details about the error that was encountered.
      */
     ErrorDetail?: ErrorDetail;
   }
@@ -762,31 +762,31 @@ declare namespace Glue {
   export type BatchStopJobRunJobRunIdList = IdString[];
   export interface BatchStopJobRunRequest {
     /**
-     * The name of the job whose job runs are to be stopped.
+     * The name of the Job in question.
      */
     JobName: NameString;
     /**
-     * A list of job run Ids of the given job to be stopped.
+     * A list of the JobRunIds that should be stopped for that Job.
      */
     JobRunIds: BatchStopJobRunJobRunIdList;
   }
   export interface BatchStopJobRunResponse {
     /**
-     * A list of job runs which are successfully submitted for stopping.
+     * A list of the JobRuns that were successfully submitted for stopping.
      */
     SuccessfulSubmissions?: BatchStopJobRunSuccessfulSubmissionList;
     /**
-     * A list containing the job run Ids and details of the error that occurred for each job run while submitting to stop.
+     * A list of the errors that were encountered in tryng to stop JobRuns, including the JobRunId for which each error was encountered and details about the error.
      */
     Errors?: BatchStopJobRunErrorList;
   }
   export interface BatchStopJobRunSuccessfulSubmission {
     /**
-     * The name of the job.
+     * The Name of the Job in question.
      */
     JobName?: NameString;
     /**
-     * The job run Id.
+     * The JobRunId of the JobRun in question.
      */
     JobRunId?: IdString;
   }
@@ -909,11 +909,11 @@ declare namespace Glue {
      */
     LogicalOperator?: LogicalOperator;
     /**
-     * The name of the job in question.
+     * The name of the Job to whose JobRuns this condition applies and on which this trigger waits.
      */
     JobName?: NameString;
     /**
-     * The condition state.
+     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED and FAILED.
      */
     State?: JobRunState;
   }
@@ -1055,7 +1055,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
   }
@@ -1170,7 +1170,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
   }
@@ -1300,7 +1300,7 @@ declare namespace Glue {
   }
   export interface CreateJobRequest {
     /**
-     * The name you assign to this job.
+     * The name you assign to this job. It must be unique in your account.
      */
     Name: NameString;
     /**
@@ -1312,7 +1312,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The role associated with this job.
+     * The name of the IAM role associated with this job.
      */
     Role: RoleString;
     /**
@@ -1324,7 +1324,7 @@ declare namespace Glue {
      */
     Command: JobCommand;
     /**
-     * The default parameters for this job.
+     * The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
     /**
@@ -1336,13 +1336,13 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of capacity units allocated to this job.
+     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
   export interface CreateJobResponse {
     /**
-     * The unique name of the new job that has been created.
+     * The unique name that was provided.
      */
     Name?: NameString;
   }
@@ -1375,12 +1375,20 @@ declare namespace Glue {
      * A list of the edges in the DAG.
      */
     DagEdges?: DagEdges;
+    /**
+     * The programming language of the resulting code from the DAG.
+     */
+    Language?: Language;
   }
   export interface CreateScriptResponse {
     /**
      * The Python script generated from the DAG.
      */
     PythonScript?: PythonScript;
+    /**
+     * The Scala code generated from the DAG.
+     */
+    ScalaCode?: ScalaCode;
   }
   export interface CreateTableRequest {
     /**
@@ -1400,7 +1408,7 @@ declare namespace Glue {
   }
   export interface CreateTriggerRequest {
     /**
-     * The name to assign to the new trigger.
+     * The name of the trigger.
      */
     Name: NameString;
     /**
@@ -1408,11 +1416,11 @@ declare namespace Glue {
      */
     Type: TriggerType;
     /**
-     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *). This field is required when the trigger type is SCHEDULED.
      */
     Schedule?: GenericString;
     /**
-     * A predicate to specify when the new trigger should fire.
+     * A predicate to specify when the new trigger should fire. This field is required when the trigger type is CONDITIONAL.
      */
     Predicate?: Predicate;
     /**
@@ -1426,7 +1434,7 @@ declare namespace Glue {
   }
   export interface CreateTriggerResponse {
     /**
-     * The name assigned to the new trigger.
+     * The name of the trigger.
      */
     Name?: NameString;
   }
@@ -1456,7 +1464,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
@@ -1733,7 +1741,7 @@ declare namespace Glue {
   export type ErrorString = string;
   export interface ExecutionProperty {
     /**
-     * The maximum number of concurrent runs allowed for a job.
+     * The maximum number of concurrent runs allowed for a job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
      */
     MaxConcurrentRuns?: MaxConcurrentRuns;
   }
@@ -2006,7 +2014,7 @@ declare namespace Glue {
      */
     RunId: IdString;
     /**
-     * A list of the predecessor runs to return as well.
+     * True if a list of predecessor runs should be returned.
      */
     PredecessorsIncluded?: BooleanValue;
   }
@@ -2161,12 +2169,20 @@ declare namespace Glue {
      * Parameters for the mapping.
      */
     Location?: Location;
+    /**
+     * The programming language of the code to perform the mapping.
+     */
+    Language?: Language;
   }
   export interface GetPlanResponse {
     /**
      * A Python script to perform the mapping.
      */
     PythonScript?: PythonScript;
+    /**
+     * Scala code to perform the mapping.
+     */
+    ScalaCode?: ScalaCode;
   }
   export interface GetTableRequest {
     /**
@@ -2271,7 +2287,7 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
     /**
-     * The name of the job for which to retrieve triggers.
+     * The name of the job for which to retrieve triggers. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned.
      */
     DependentJobName?: NameString;
     /**
@@ -2413,7 +2429,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The role associated with this job.
+     * The name of the IAM role associated with this job.
      */
     Role?: RoleString;
     /**
@@ -2433,7 +2449,7 @@ declare namespace Glue {
      */
     Command?: JobCommand;
     /**
-     * The default parameters for this job.
+     * The default arguments for this job, specified as name-value pairs. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
     /**
@@ -2445,7 +2461,7 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of capacity units allocated to this job.
+     * The number of AWS Glue data processing units (DPUs) allocated to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
@@ -2473,11 +2489,11 @@ declare namespace Glue {
   }
   export interface JobCommand {
     /**
-     * The name of this job command.
+     * The name of the job command: this must be glueetl.
      */
     Name?: GenericString;
     /**
-     * Specifies the location of a script that executes a job.
+     * Specifies the S3 path to a script that executes a job (required).
      */
     ScriptLocation?: ScriptLocationString;
   }
@@ -2489,15 +2505,15 @@ declare namespace Glue {
      */
     Id?: IdString;
     /**
-     * The number or the attempt to run this job.
+     * The number of the attempt to run this job.
      */
     Attempt?: AttemptCount;
     /**
-     * The ID of the previous run of this job.
+     * The ID of the previous run of this job. For example, the JobRunId specified in the StartJobRun action.
      */
     PreviousRunId?: IdString;
     /**
-     * The name of the trigger for this job run.
+     * The name of the trigger that started this job run.
      */
     TriggerName?: NameString;
     /**
@@ -2521,7 +2537,7 @@ declare namespace Glue {
      */
     JobRunState?: JobRunState;
     /**
-     * The job arguments associated with this run.
+     * The job arguments associated with this run. These override equivalent default arguments set for the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
@@ -2533,7 +2549,7 @@ declare namespace Glue {
      */
     PredecessorRuns?: PredecessorList;
     /**
-     * The amount of infrastructure capacity allocated to this job run.
+     * The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
@@ -2549,7 +2565,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The role associated with this job.
+     * The name of the IAM role associated with this job (required).
      */
     Role?: RoleString;
     /**
@@ -2557,11 +2573,11 @@ declare namespace Glue {
      */
     ExecutionProperty?: ExecutionProperty;
     /**
-     * The JobCommand that executes this job.
+     * The JobCommand that executes this job (required).
      */
     Command?: JobCommand;
     /**
-     * The default parameters for this job.
+     * The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
     /**
@@ -2573,12 +2589,13 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of capacity units allocated to this job.
+     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
   export type JsonValue = string;
   export type KeyString = string;
+  export type Language = "PYTHON"|"SCALA"|string;
   export interface LastCrawlInfo {
     /**
      * Status of the last crawl.
@@ -2620,7 +2637,7 @@ declare namespace Glue {
   export type LocationString = string;
   export type LogGroup = string;
   export type LogStream = string;
-  export type Logical = "AND"|string;
+  export type Logical = "AND"|"ANY"|string;
   export type LogicalOperator = "EQUALS"|string;
   export interface MappingEntry {
     /**
@@ -2770,7 +2787,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * The job-run ID of the precessor job run.
+     * The job-run ID of the predecessor job run.
      */
     RunId?: IdString;
   }
@@ -2827,6 +2844,7 @@ declare namespace Glue {
     Exclusions?: PathList;
   }
   export type S3TargetList = S3Target[];
+  export type ScalaCode = string;
   export interface Schedule {
     /**
      * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
@@ -2911,15 +2929,15 @@ declare namespace Glue {
      */
     JobName: NameString;
     /**
-     * The ID of the job run to start.
+     * The ID of a previous JobRun to retry.
      */
     JobRunId?: IdString;
     /**
-     * Specific arguments for this job run.
+     * The job arguments specifically for this run. They override the equivalent default arguments set for the job itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
-     * The infrastructure capacity to allocate to this job.
+     * The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
@@ -3171,7 +3189,7 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
-     * The trigger ID.
+     * Reserved for future use.
      */
     Id?: IdString;
     /**
@@ -3195,7 +3213,7 @@ declare namespace Glue {
      */
     Actions?: ActionList;
     /**
-     * The predicate of this trigger.
+     * The predicate of this trigger, which defines when it will fire.
      */
     Predicate?: Predicate;
   }
@@ -3204,7 +3222,7 @@ declare namespace Glue {
   export type TriggerType = "SCHEDULED"|"CONDITIONAL"|"ON_DEMAND"|string;
   export interface TriggerUpdate {
     /**
-     * The name of the trigger.
+     * Reserved for future use.
      */
     Name?: NameString;
     /**
@@ -3212,7 +3230,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * An updated cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: GenericString;
     /**
@@ -3292,7 +3310,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example:  '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
   }
@@ -3466,7 +3484,7 @@ declare namespace Glue {
      */
     Classification?: Classification;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
@@ -3547,7 +3565,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
