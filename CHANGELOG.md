@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.181.0-->
+<!--LATEST=2.182.0-->
 <!--ENTRYINSERT-->
+
+## 2.182.0
+* feature: Lambda: Support for creating Lambda Functions using 'dotnetcore2.0' and 'go1.x'. 
 
 ## 2.181.0
 * feature: Glue: Support is added to generate ETL scripts in Scala which can now be run by  AWS Glue ETL jobs. In addition, the trigger API now supports firing when any conditions are met (in addition to all conditions). Also, jobs can be triggered based on a "failed" or "stopped" job run (in addition to a "succeeded" job run). 

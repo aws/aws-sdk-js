@@ -69,11 +69,11 @@ declare class Lambda extends Service {
    */
   deleteFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes concurrent execution limits from this function.
+   * Removes concurrent execution limits from this function. For more information, see concurrent-executions.
    */
   deleteFunctionConcurrency(params: Lambda.Types.DeleteFunctionConcurrencyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes concurrent execution limits from this function.
+   * Removes concurrent execution limits from this function. For more information, see concurrent-executions.
    */
   deleteFunctionConcurrency(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class Lambda extends Service {
    */
   getPolicy(callback?: (err: AWSError, data: Lambda.Types.GetPolicyResponse) => void): Request<Lambda.Types.GetPolicyResponse, AWSError>;
   /**
-   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.
+   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.  The TooManyRequestsException noted below will return the following: ConcurrentInvocationLimitExceeded will be returned if you have no functions with reserved concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account's unreserved concurrency limit. ReservedFunctionConcurrentInvocationLimitExceeded will be returned when a function with reserved concurrency exceeds its configured concurrency limit.  
    */
   invoke(params: Lambda.Types.InvocationRequest, callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
-   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.
+   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.  The TooManyRequestsException noted below will return the following: ConcurrentInvocationLimitExceeded will be returned if you have no functions with reserved concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account's unreserved concurrency limit. ReservedFunctionConcurrentInvocationLimitExceeded will be returned when a function with reserved concurrency exceeds its configured concurrency limit.  
    */
   invoke(callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
@@ -189,11 +189,11 @@ declare class Lambda extends Service {
    */
   publishVersion(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.
+   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions. For more information, see concurrent-executions.
    */
   putFunctionConcurrency(params: Lambda.Types.PutFunctionConcurrencyRequest, callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
   /**
-   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.
+   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions. For more information, see concurrent-executions.
    */
   putFunctionConcurrency(callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
   /**
@@ -272,7 +272,7 @@ declare namespace Lambda {
      */
     ConcurrentExecutions?: Integer;
     /**
-     * The number of concurrent executions available to functions that do not have concurrency limits set.
+     * The number of concurrent executions available to functions that do not have concurrency limits set. For more information, see concurrent-executions.
      */
     UnreservedConcurrentExecutions?: UnreservedConcurrentExecutions;
   }
@@ -355,7 +355,7 @@ declare namespace Lambda {
   export type AliasList = AliasConfiguration[];
   export interface AliasRoutingConfiguration {
     /**
-     * Set this property value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke function-version.
+     * Set this value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke function-version. For more information, see lambda-traffic-shifting-using-aliases.
      */
     AdditionalVersionWeights?: AdditionalVersionWeights;
   }
@@ -366,7 +366,7 @@ declare namespace Lambda {
   export type Boolean = boolean;
   export interface Concurrency {
     /**
-     * The number of concurrent executions reserved for this function.
+     * The number of concurrent executions reserved for this function. For more information, see concurrent-executions.
      */
     ReservedConcurrentExecutions?: ReservedConcurrentExecutions;
   }
@@ -502,7 +502,7 @@ declare namespace Lambda {
   }
   export interface DeleteFunctionConcurrencyRequest {
     /**
-     * The name of the function you are removing concurrent execution limits from.
+     * The name of the function you are removing concurrent execution limits from. For more information, see concurrent-executions.
      */
     FunctionName: FunctionName;
   }
@@ -737,7 +737,7 @@ declare namespace Lambda {
      */
     Tags?: Tags;
     /**
-     * The concurrent execution limit set for this function.
+     * The concurrent execution limit set for this function. For more information, see concurrent-executions.
      */
     Concurrency?: Concurrency;
   }
@@ -804,7 +804,7 @@ declare namespace Lambda {
      */
     Payload?: _Blob;
     /**
-     * The function version that has been executed. This value is returned only if the invocation type is RequestResponse.
+     * The function version that has been executed. This value is returned only if the invocation type is RequestResponse. For more information, see lambda-traffic-shifting-using-aliases.
      */
     ExecutedVersion?: Version;
   }
@@ -971,11 +971,11 @@ declare namespace Lambda {
   }
   export interface PutFunctionConcurrencyRequest {
     /**
-     * The name of the function you are setting concurrent execution limits on.
+     * The name of the function you are setting concurrent execution limits on. For more information, see concurrent-executions.
      */
     FunctionName: FunctionName;
     /**
-     * The concurrent execution limit reserved for this function.
+     * The concurrent execution limit reserved for this function. For more information, see concurrent-executions.
      */
     ReservedConcurrentExecutions: ReservedConcurrentExecutions;
   }
@@ -997,7 +997,7 @@ declare namespace Lambda {
   export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"java8"|"python2.7"|"python3.6"|"dotnetcore1.0"|"nodejs4.3-edge"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"java8"|"python2.7"|"python3.6"|"dotnetcore1.0"|"dotnetcore2.0"|"nodejs4.3-edge"|"go1.x"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;

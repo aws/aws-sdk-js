@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.181.0
+// AWS SDK for JavaScript v2.182.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -68728,6 +68728,7 @@ module.exports={
     "endpointPrefix": "lambda",
     "protocol": "rest-json",
     "serviceFullName": "AWS Lambda",
+    "serviceId": "Lambda",
     "signatureVersion": "v4",
     "uid": "lambda-2015-03-31"
   },
@@ -120610,7 +120611,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.181.0',
+  VERSION: '2.182.0',
 
   /**
    * @api private
@@ -149341,7 +149342,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":503,"lodash/assign":432}],519:[function(require,module,exports){
-// AWS SDK for JavaScript v2.181.0
+// AWS SDK for JavaScript v2.182.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
