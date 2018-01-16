@@ -2910,6 +2910,20 @@
       },
       "documentation": "<p> This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. </p>"
     },
+    "CloudwatchLogsExportConfiguration": {
+      "type": "structure",
+      "members": {
+        "EnableLogTypes": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of log types to enable.</p>"
+        },
+        "DisableLogTypes": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of log types to disable.</p>"
+        }
+      },
+      "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p>"
+    },
     "CopyDBClusterParameterGroupMessage": {
       "type": "structure",
       "required": [
@@ -3448,6 +3462,10 @@
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p/>"
@@ -3481,7 +3499,7 @@
         },
         "MultiAZ": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Specifies whether the read replica is in a Multi-AZ deployment. </p>"
+          "documentation": "<p>Specifies whether the read replica is in a Multi-AZ deployment. </p> <p>You can create a Read Replica as a Multi-AZ DB instance. RDS creates a standby of your replica in another Availability Zone for failover support for the replica. Creating your Read Replica as a Multi-AZ DB instance is independent of whether the source database is a Multi-AZ DB instance. </p> <note> <p>Currently PostgreSQL Read Replicas can only be created as single-AZ DB instances.</p> </note>"
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
@@ -3541,6 +3559,10 @@
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of logs that the new DB instance is to export to CloudWatch Logs.</p>"
         },
         "SourceRegion": {
           "shape": "String",
@@ -4363,6 +4385,14 @@
         "SupportedTimezones": {
           "shape": "SupportedTimezonesList",
           "documentation": "<p>A list of the time zones supported by this engine for the <code>Timezone</code> parameter of the <code>CreateDBInstance</code> action. </p>"
+        },
+        "ExportableLogTypes": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The types of logs that the database engine has available for export to CloudWatch Logs.</p>"
+        },
+        "SupportsLogExportsToCloudwatchLogs": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether the engine version supports exporting the log types specified by ExportableLogTypes to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p> This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. </p>"
@@ -4594,6 +4624,10 @@
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
+        },
+        "EnabledCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>A list of log types that this DB instance is configured to export to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <a>DescribeDBInstances</a> action. </p>",
@@ -6957,6 +6991,12 @@
       },
       "documentation": "<p/>"
     },
+    "LogTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "Long": {
       "type": "long"
     },
@@ -7222,6 +7262,10 @@
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>"
+        },
+        "CloudwatchLogsExportConfiguration": {
+          "shape": "CloudwatchLogsExportConfiguration",
+          "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p>"
         }
       },
       "documentation": "<p/>"
@@ -8003,6 +8047,20 @@
         "locationName": "Parameter"
       }
     },
+    "PendingCloudwatchLogsExports": {
+      "type": "structure",
+      "members": {
+        "LogTypesToEnable": {
+          "shape": "LogTypeList",
+          "documentation": "<p>Log types that are in the process of being deactivated. After they are deactivated, these log types aren't exported to CloudWatch Logs.</p>"
+        },
+        "LogTypesToDisable": {
+          "shape": "LogTypeList",
+          "documentation": "<p>Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.</p>"
+        }
+      },
+      "documentation": "<p>A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.</p>"
+    },
     "PendingMaintenanceAction": {
       "type": "structure",
       "members": {
@@ -8115,6 +8173,9 @@
         "DBSubnetGroupName": {
           "shape": "String",
           "documentation": "<p>The new DB subnet group for the DB instance. </p>"
+        },
+        "PendingCloudwatchLogsExports": {
+          "shape": "PendingCloudwatchLogsExports"
         }
       },
       "documentation": "<p> This data type is used as a response element in the <a>ModifyDBInstance</a> action. </p>"
@@ -8996,6 +9057,10 @@
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>You can enable IAM database authentication for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher.</p> </li> </ul> <p>Default: <code>false</code> </p>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of logs that the restored DB instance is to export to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p/>"
@@ -9171,6 +9236,10 @@
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
           "documentation": "<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. </p>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of logs that the restored DB instance is to export to CloudWatch Logs.</p>"
         }
       }
     },
@@ -9191,7 +9260,7 @@
       "members": {
         "SourceDBInstanceIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the source DB instance from which to restore.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing DBInstance.</p> </li> </ul>"
+          "documentation": "<p>The identifier of the source DB instance from which to restore.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing DB instance.</p> </li> </ul>"
         },
         "TargetDBInstanceIdentifier": {
           "shape": "String",
@@ -9283,6 +9352,10 @@
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>You can enable IAM database authentication for the following database engines</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher.</p> </li> </ul> <p>Default: <code>false</code> </p>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of logs that the restored DB instance is to export to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p/>"

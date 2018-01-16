@@ -932,6 +932,16 @@ declare namespace RDS {
      */
     CharacterSetDescription?: String;
   }
+  export interface CloudwatchLogsExportConfiguration {
+    /**
+     * The list of log types to enable.
+     */
+    EnableLogTypes?: LogTypeList;
+    /**
+     * The list of log types to disable.
+     */
+    DisableLogTypes?: LogTypeList;
+  }
   export interface CopyDBClusterParameterGroupMessage {
     /**
      * The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group. For information about creating an ARN, see  Constructing an RDS Amazon Resource Name (ARN).  Constraints:   Must specify a valid DB cluster parameter group.   If the source DB cluster parameter group is in the same AWS Region as the copy, specify a valid DB parameter group identifier, for example my-db-cluster-param-group, or a valid ARN.   If the source DB parameter group is in a different AWS Region than the copy, specify a valid DB cluster parameter group ARN, for example arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.  
@@ -1341,6 +1351,10 @@ declare namespace RDS {
      * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
      */
     PerformanceInsightsKMSKeyId?: String;
+    /**
+     * The list of log types that need to be enabled for exporting to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -1364,7 +1378,7 @@ declare namespace RDS {
      */
     Port?: IntegerOptional;
     /**
-     * Specifies whether the read replica is in a Multi-AZ deployment. 
+     * Specifies whether the read replica is in a Multi-AZ deployment.  You can create a Read Replica as a Multi-AZ DB instance. RDS creates a standby of your replica in another Availability Zone for failover support for the replica. Creating your Read Replica as a Multi-AZ DB instance is independent of whether the source database is a Multi-AZ DB instance.   Currently PostgreSQL Read Replicas can only be created as single-AZ DB instances. 
      */
     MultiAZ?: BooleanOptional;
     /**
@@ -1424,6 +1438,10 @@ declare namespace RDS {
      * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
      */
     PerformanceInsightsKMSKeyId?: String;
+    /**
+     * The list of logs that the new DB instance is to export to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -1941,6 +1959,14 @@ declare namespace RDS {
      * A list of the time zones supported by this engine for the Timezone parameter of the CreateDBInstance action. 
      */
     SupportedTimezones?: SupportedTimezonesList;
+    /**
+     * The types of logs that the database engine has available for export to CloudWatch Logs.
+     */
+    ExportableLogTypes?: LogTypeList;
+    /**
+     * A value that indicates whether the engine version supports exporting the log types specified by ExportableLogTypes to CloudWatch Logs.
+     */
+    SupportsLogExportsToCloudwatchLogs?: Boolean;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -2158,6 +2184,10 @@ declare namespace RDS {
      * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
      */
     PerformanceInsightsKMSKeyId?: String;
+    /**
+     * A list of log types that this DB instance is configured to export to CloudWatch Logs.
+     */
+    EnabledCloudwatchLogsExports?: LogTypeList;
   }
   export type DBInstanceList = DBInstance[];
   export interface DBInstanceMessage {
@@ -3498,6 +3528,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
   }
+  export type LogTypeList = String[];
   export type Long = number;
   export interface ModifyDBClusterMessage {
     /**
@@ -3724,6 +3755,10 @@ declare namespace RDS {
      * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
      */
     PerformanceInsightsKMSKeyId?: String;
+    /**
+     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
+     */
+    CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -4252,6 +4287,16 @@ declare namespace RDS {
     ApplyMethod?: ApplyMethod;
   }
   export type ParametersList = Parameter[];
+  export interface PendingCloudwatchLogsExports {
+    /**
+     * Log types that are in the process of being deactivated. After they are deactivated, these log types aren't exported to CloudWatch Logs.
+     */
+    LogTypesToEnable?: LogTypeList;
+    /**
+     * Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.
+     */
+    LogTypesToDisable?: LogTypeList;
+  }
   export interface PendingMaintenanceAction {
     /**
      * The type of pending maintenance action that is available for the resource.
@@ -4343,6 +4388,7 @@ declare namespace RDS {
      * The new DB subnet group for the DB instance. 
      */
     DBSubnetGroupName?: String;
+    PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
   }
   export interface PromoteReadReplicaDBClusterMessage {
     /**
@@ -4922,6 +4968,10 @@ declare namespace RDS {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. You can enable IAM database authentication for the following database engines   For MySQL 5.6, minor version 5.6.34 or higher   For MySQL 5.7, minor version 5.7.16 or higher   Aurora 5.6 or higher.   Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The list of logs that the restored DB instance is to export to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
   }
   export interface RestoreDBInstanceFromDBSnapshotResult {
     DBInstance?: DBInstance;
@@ -5079,13 +5129,17 @@ declare namespace RDS {
      * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. 
      */
     PerformanceInsightsKMSKeyId?: String;
+    /**
+     * The list of logs that the restored DB instance is to export to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
   }
   export interface RestoreDBInstanceFromS3Result {
     DBInstance?: DBInstance;
   }
   export interface RestoreDBInstanceToPointInTimeMessage {
     /**
-     * The identifier of the source DB instance from which to restore. Constraints:   Must match the identifier of an existing DBInstance.  
+     * The identifier of the source DB instance from which to restore. Constraints:   Must match the identifier of an existing DB instance.  
      */
     SourceDBInstanceIdentifier: String;
     /**
@@ -5177,6 +5231,10 @@ declare namespace RDS {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. You can enable IAM database authentication for the following database engines   For MySQL 5.6, minor version 5.6.34 or higher   For MySQL 5.7, minor version 5.7.16 or higher   Aurora 5.6 or higher.   Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The list of logs that the restored DB instance is to export to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
   }
   export interface RestoreDBInstanceToPointInTimeResult {
     DBInstance?: DBInstance;

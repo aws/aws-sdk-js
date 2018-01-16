@@ -532,5 +532,9 @@
   },
   "workmail": {
     "name": "WorkMail"
+  },
+  "autoscalingplans": {
+    "prefix": "autoscaling-plans",
+    "name": "AutoScalingPlans"
   }
 }
