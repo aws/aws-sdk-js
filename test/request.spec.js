@@ -605,7 +605,7 @@ describe('AWS.Request', function() {
     if (typeof Promise !== 'undefined') {
       it('binds response object to value with which the promise is resolved', function() {
         AWS.config.setPromisesDependency();
-        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']);
+        helpers.mockHttpResponse(200, {}, '');
         return service.makeRequest('mockMethod').promise().then(function(data) {
           expect(data.$response.httpResponse.statusCode).to.equal(200);
           expect(JSON.stringify(data)).to.be.ok;
