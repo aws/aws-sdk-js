@@ -524,11 +524,11 @@ declare class EC2 extends Service {
    */
   createVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks. The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
+   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.  Limitations and rules apply to a VPC peering connection. For more information, see the limitations section in the VPC Peering Guide.  The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
    */
   createVpcPeeringConnection(params: EC2.Types.CreateVpcPeeringConnectionRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
-   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks. The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
+   * Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.  Limitations and rules apply to a VPC peering connection. For more information, see the limitations section in the VPC Peering Guide.  The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected. If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of failed.
    */
   createVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
@@ -1820,11 +1820,11 @@ declare class EC2 extends Service {
    */
   modifyVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.ModifyVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to discover your endpoint service.
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service.
    */
   modifyVpcEndpointServicePermissions(params: EC2.Types.ModifyVpcEndpointServicePermissionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
-   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to discover your endpoint service.
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service.
    */
   modifyVpcEndpointServicePermissions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
@@ -4309,7 +4309,7 @@ declare namespace EC2 {
      */
     VpcId: String;
     /**
-     * The service name. To get a list of available services, use the DescribeVpcEndpointServices request.
+     * The service name. To get a list of available services, use the DescribeVpcEndpointServices request, or get the name from the service provider.
      */
     ServiceName: String;
     /**
@@ -5002,7 +5002,7 @@ declare namespace EC2 {
   }
   export interface DescribeAddressesRequest {
     /**
-     * One or more filters. Filter names and values are case-sensitive.    allocation-id - [EC2-VPC] The allocation ID for the address.    association-id - [EC2-VPC] The association ID for the address.    domain - Indicates whether the address is for use in EC2-Classic (standard) or in a VPC (vpc).    instance-id - The ID of the instance the address is associated with, if any.    network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The AWS account ID of the owner.    private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address.  
+     * One or more filters. Filter names and values are case-sensitive.    allocation-id - [EC2-VPC] The allocation ID for the address.    association-id - [EC2-VPC] The association ID for the address.    domain - Indicates whether the address is for use in EC2-Classic (standard) or in a VPC (vpc).    instance-id - The ID of the instance the address is associated with, if any.    network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The AWS account ID of the owner.    private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of the tag's key). If you want to list only resources where Purpose is X, see the tag:key=value filter.  
      */
     Filters?: FilterList;
     /**
@@ -5783,7 +5783,7 @@ declare namespace EC2 {
      */
     LaunchTemplateNames?: LaunchTemplateNameStringList;
     /**
-     * One or more filters.    create-time - The time the launch template was created.    launch-template-name - The name of the launch template.  
+     * One or more filters.    create-time - The time the launch template was created.    launch-template-name - The name of the launch template.    tag:key=value - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify tag:Purpose for the filter name and X for the filter value.    tag-key - The key of a tag assigned to the resource. This filter is independent of the tag-value filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of the tag's key). If you want to list only resources where Purpose is X, see the tag:key=value filter.  
      */
     Filters?: FilterList;
     /**
@@ -6647,7 +6647,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    key - The tag key.    resource-id - The resource ID.    resource-type - The resource type (customer-gateway | dhcp-options | image | instance | internet-gateway | network-acl | network-interface | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpn-connection | vpn-gateway).    value - The tag value.  
+     * One or more filters.    key - The tag key.    resource-id - The resource ID.    resource-type - The resource type (customer-gateway | dhcp-options | elastic-ip | fpga-image | image | instance | internet-gateway | launch-template | natgateway | network-acl | network-interface | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-peering-connection | vpn-connection | vpn-gateway).    value - The tag value.  
      */
     Filters?: FilterList;
     /**
@@ -9477,7 +9477,7 @@ declare namespace EC2 {
   }
   export interface InternetGatewayAttachment {
     /**
-     * The current state of the attachment.
+     * The current state of the attachment. For an Internet gateway, the state is available when attached to a VPC; otherwise, this value is not returned.
      */
     State?: AttachmentStatus;
     /**
@@ -12867,7 +12867,7 @@ declare namespace EC2 {
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
-     * The ID of the AMI, which you can get by calling DescribeImages.
+     * The ID of the AMI, which you can get by calling DescribeImages. An AMI is required to launch an instance and must be specified here or in a launch template.
      */
     ImageId?: String;
     /**
@@ -14577,7 +14577,7 @@ declare namespace EC2 {
      */
     GroupId?: String;
     /**
-     * The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use the security group ID.
+     * The name of the security group. In a request, use this parameter for a security group in EC2-Classic or a default VPC only. For a security group in a nondefault VPC, use the security group ID.  For a referenced security group in another VPC, this value is not returned if the referenced security group is deleted.
      */
     GroupName?: String;
     /**
@@ -14585,7 +14585,7 @@ declare namespace EC2 {
      */
     PeeringStatus?: String;
     /**
-     * The ID of an AWS account. For a referenced security group in another VPC, the account ID of the referenced security group is returned. [EC2-Classic] Required when adding or removing rules that reference a security group in another AWS account.
+     * The ID of an AWS account. For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned. [EC2-Classic] Required when adding or removing rules that reference a security group in another AWS account.
      */
     UserId?: String;
     /**
