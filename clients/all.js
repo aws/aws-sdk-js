@@ -130,5 +130,6 @@ module.exports = {
   ServerlessApplicationRepository: require('./serverlessapplicationrepository'),
   ServiceDiscovery: require('./servicediscovery'),
   WorkMail: require('./workmail'),
-  AutoScalingPlans: require('./autoscalingplans')
+  AutoScalingPlans: require('./autoscalingplans'),
+  TranscribeService: require('./transcribeservice')
 };

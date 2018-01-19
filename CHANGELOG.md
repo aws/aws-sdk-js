@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.184.0-->
+<!--LATEST=2.185.0-->
 <!--ENTRYINSERT-->
+
+## 2.185.0
+* feature: Glue: New AWS Glue DataCatalog APIs to manage table versions and a new feature to skip archiving of the old table version when updating table.
+* feature: TranscribeService: Amazon Transcribe Public Preview Release
 
 ## 2.184.0
 * feature: SageMaker: CreateTrainingJob and CreateEndpointConfig now supports KMS Key for volume encryption. 

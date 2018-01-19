@@ -75,6 +75,22 @@
       ],
       "documentation":"<p>Deletes multiple tables at once.</p>"
     },
+    "BatchDeleteTableVersion":{
+      "name":"BatchDeleteTableVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchDeleteTableVersionRequest"},
+      "output":{"shape":"BatchDeleteTableVersionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes a specified batch of versions of a table.</p>"
+    },
     "BatchGetPartition":{
       "name":"BatchGetPartition",
       "http":{
@@ -132,7 +148,8 @@
       "errors":[
         {"shape":"AlreadyExistsException"},
         {"shape":"InvalidInputException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ResourceNumberLimitExceededException"}
       ],
       "documentation":"<p>Creates a connection definition in the Data Catalog.</p>"
     },
@@ -291,7 +308,8 @@
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
         {"shape":"EntityNotFoundException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ResourceNumberLimitExceededException"}
       ],
       "documentation":"<p>Creates a new function definition in the Data Catalog.</p>"
     },
@@ -417,6 +435,22 @@
         {"shape":"OperationTimeoutException"}
       ],
       "documentation":"<p>Removes a table definition from the Data Catalog.</p>"
+    },
+    "DeleteTableVersion":{
+      "name":"DeleteTableVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTableVersionRequest"},
+      "output":{"shape":"DeleteTableVersionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Deletes a specified version of a table.</p>"
     },
     "DeleteTrigger":{
       "name":"DeleteTrigger",
@@ -779,6 +813,22 @@
         {"shape":"OperationTimeoutException"}
       ],
       "documentation":"<p>Retrieves the <code>Table</code> definition in a Data Catalog for a specified table.</p>"
+    },
+    "GetTableVersion":{
+      "name":"GetTableVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTableVersionRequest"},
+      "output":{"shape":"GetTableVersionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ],
+      "documentation":"<p>Retrieves a specified version of a table.</p>"
     },
     "GetTableVersions":{
       "name":"GetTableVersions",
@@ -1167,7 +1217,8 @@
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
         {"shape":"OperationTimeoutException"},
-        {"shape":"ConcurrentModificationException"}
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ResourceNumberLimitExceededException"}
       ],
       "documentation":"<p>Updates a metadata table in the Data Catalog.</p>"
     },
@@ -1369,7 +1420,7 @@
         },
         "DatabaseName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the catalog database where the tables to delete reside.</p>"
+          "documentation":"<p>The name of the catalog database where the tables to delete reside. For Hive compatibility, this name is entirely lowercase.</p>"
         },
         "TablesToDelete":{
           "shape":"BatchDeleteTableNameList",
@@ -1383,6 +1434,47 @@
         "Errors":{
           "shape":"TableErrors",
           "documentation":"<p>A list of errors encountered in attempting to delete the specified tables.</p>"
+        }
+      }
+    },
+    "BatchDeleteTableVersionList":{
+      "type":"list",
+      "member":{"shape":"VersionString"},
+      "max":100,
+      "min":0
+    },
+    "BatchDeleteTableVersionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "VersionIds"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table. For Hive compatibility, this name is entirely lowercase.</p>"
+        },
+        "VersionIds":{
+          "shape":"BatchDeleteTableVersionList",
+          "documentation":"<p>A list of the IDs of versions to be deleted.</p>"
+        }
+      }
+    },
+    "BatchDeleteTableVersionResponse":{
+      "type":"structure",
+      "members":{
+        "Errors":{
+          "shape":"TableVersionErrors",
+          "documentation":"<p>A list of errors encountered while trying to delete the specified table versions.</p>"
         }
       }
     },
@@ -1508,6 +1600,7 @@
       "member":{"shape":"BatchStopJobRunSuccessfulSubmission"}
     },
     "Boolean":{"type":"boolean"},
+    "BooleanNullable":{"type":"boolean"},
     "BooleanValue":{"type":"boolean"},
     "BoundedPartitionValueList":{
       "type":"list",
@@ -1798,6 +1891,11 @@
     },
     "ConnectionInput":{
       "type":"structure",
+      "required":[
+        "Name",
+        "ConnectionType",
+        "ConnectionProperties"
+      ],
       "members":{
         "Name":{
           "shape":"NameString",
@@ -2424,7 +2522,7 @@
         },
         "DatabaseName":{
           "shape":"NameString",
-          "documentation":"<p>The catalog database in which to create the new table.</p>"
+          "documentation":"<p>The catalog database in which to create the new table. For Hive compatibility, this name is entirely lowercase.</p>"
         },
         "TableInput":{
           "shape":"TableInput",
@@ -2549,7 +2647,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the database.</p>"
+          "documentation":"<p>Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.</p>"
         },
         "Description":{
           "shape":"DescriptionString",
@@ -2576,7 +2674,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the database.</p>"
+          "documentation":"<p>Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.</p>"
         },
         "Description":{
           "shape":"DescriptionString",
@@ -2591,7 +2689,7 @@
           "documentation":"<p>A list of key-value pairs that define parameters and properties of the database.</p>"
         }
       },
-      "documentation":"<p>The structure used to create or updata a database.</p>"
+      "documentation":"<p>The structure used to create or update a database.</p>"
     },
     "DatabaseList":{
       "type":"list",
@@ -2671,7 +2769,7 @@
         },
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The name of the Database to delete.</p>"
+          "documentation":"<p>The name of the Database to delete. For Hive compatibility, this must be all lowercase.</p>"
         }
       }
     },
@@ -2758,15 +2856,46 @@
         },
         "DatabaseName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the catalog database in which the table resides.</p>"
+          "documentation":"<p>The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>"
         },
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The name of the table to be deleted.</p>"
+          "documentation":"<p>The name of the table to be deleted. For Hive compatibility, this name is entirely lowercase.</p>"
         }
       }
     },
     "DeleteTableResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteTableVersionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "VersionId"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table. For Hive compatibility, this name is entirely lowercase.</p>"
+        },
+        "VersionId":{
+          "shape":"VersionString",
+          "documentation":"<p>The ID of the table version to be deleted.</p>"
+        }
+      }
+    },
+    "DeleteTableVersionResponse":{
       "type":"structure",
       "members":{
       }
@@ -3202,7 +3331,7 @@
         },
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The name of the database to retrieve.</p>"
+          "documentation":"<p>The name of the database to retrieve. For Hive compatibility, this should be all lowercase.</p>"
         }
       }
     },
@@ -3587,11 +3716,11 @@
         },
         "DatabaseName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the database in the catalog in which the table resides.</p>"
+          "documentation":"<p>The name of the database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>"
         },
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The name of the table for which to retrieve the definition.</p>"
+          "documentation":"<p>The name of the table for which to retrieve the definition. For Hive compatibility, this name is entirely lowercase.</p>"
         }
       }
     },
@@ -3601,6 +3730,40 @@
         "Table":{
           "shape":"Table",
           "documentation":"<p>The <code>Table</code> object that defines the specified table.</p>"
+        }
+      }
+    },
+    "GetTableVersionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName"
+      ],
+      "members":{
+        "CatalogId":{
+          "shape":"CatalogIdString",
+          "documentation":"<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName":{
+          "shape":"NameString",
+          "documentation":"<p>The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>"
+        },
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table. For Hive compatibility, this name is entirely lowercase.</p>"
+        },
+        "VersionId":{
+          "shape":"VersionString",
+          "documentation":"<p>The ID value of the table version to be retrieved.</p>"
+        }
+      }
+    },
+    "GetTableVersionResponse":{
+      "type":"structure",
+      "members":{
+        "TableVersion":{
+          "shape":"TableVersion",
+          "documentation":"<p>The requested table version.</p>"
         }
       }
     },
@@ -3621,11 +3784,11 @@
         },
         "DatabaseName":{
           "shape":"NameString",
-          "documentation":"<p>The database in the catalog in which the table resides.</p>"
+          "documentation":"<p>The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>"
         },
         "TableName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the table.</p>"
+          "documentation":"<p>The name of the table. For Hive compatibility, this name is entirely lowercase.</p>"
         },
         "NextToken":{
           "shape":"Token",
@@ -3660,7 +3823,7 @@
         },
         "DatabaseName":{
           "shape":"NameString",
-          "documentation":"<p>The database in the catalog whose tables to list.</p>"
+          "documentation":"<p>The database in the catalog whose tables to list. For Hive compatibility, this name is entirely lowercase.</p>"
         },
         "Expression":{
           "shape":"FilterString",
@@ -4376,7 +4539,7 @@
     },
     "ParametersMapValue":{
       "type":"string",
-      "max":51200
+      "max":512000
     },
     "Partition":{
       "type":"structure",
@@ -4499,7 +4662,7 @@
         },
         "AvailabilityZone":{
           "shape":"NameString",
-          "documentation":"<p>The connection's availability zone.</p>"
+          "documentation":"<p>The connection's availability zone. This field is deprecated and has no effect.</p>"
         }
       },
       "documentation":"<p>Specifies the physical requirements for a connection.</p>"
@@ -4959,11 +5122,11 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the table.</p>"
+          "documentation":"<p>Name of the table. For Hive compatibility, this must be entirely lowercase.</p>"
         },
         "DatabaseName":{
           "shape":"NameString",
-          "documentation":"<p>Name of the metadata database where the table metadata resides.</p>"
+          "documentation":"<p>Name of the metadata database where the table metadata resides. For Hive compatibility, this must be all lowercase.</p>"
         },
         "Description":{
           "shape":"DescriptionString",
@@ -5029,7 +5192,7 @@
       "members":{
         "TableName":{
           "shape":"NameString",
-          "documentation":"<p>Name of the table.</p>"
+          "documentation":"<p>Name of the table. For Hive compatibility, this must be entirely lowercase.</p>"
         },
         "ErrorDetail":{
           "shape":"ErrorDetail",
@@ -5048,7 +5211,7 @@
       "members":{
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>Name of the table.</p>"
+          "documentation":"<p>Name of the table. For Hive compatibility, this is folded to lowercase when it is stored.</p>"
         },
         "Description":{
           "shape":"DescriptionString",
@@ -5124,6 +5287,28 @@
         }
       },
       "documentation":"<p>Specifies a version of a table.</p>"
+    },
+    "TableVersionError":{
+      "type":"structure",
+      "members":{
+        "TableName":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the table in question.</p>"
+        },
+        "VersionId":{
+          "shape":"VersionString",
+          "documentation":"<p>The ID value of the version in question.</p>"
+        },
+        "ErrorDetail":{
+          "shape":"ErrorDetail",
+          "documentation":"<p>Detail about the error.</p>"
+        }
+      },
+      "documentation":"<p>An error record for table-version operations.</p>"
+    },
+    "TableVersionErrors":{
+      "type":"list",
+      "member":{"shape":"TableVersionError"}
     },
     "Timestamp":{"type":"timestamp"},
     "TimestampValue":{"type":"timestamp"},
@@ -5362,7 +5547,7 @@
         },
         "Name":{
           "shape":"NameString",
-          "documentation":"<p>The name of the metadata database to update in the catalog.</p>"
+          "documentation":"<p>The name of the database to update in the catalog. For Hive compatibility, this is folded to lowercase.</p>"
         },
         "DatabaseInput":{
           "shape":"DatabaseInput",
@@ -5500,11 +5685,15 @@
         },
         "DatabaseName":{
           "shape":"NameString",
-          "documentation":"<p>The name of the catalog database in which the table resides.</p>"
+          "documentation":"<p>The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>"
         },
         "TableInput":{
           "shape":"TableInput",
           "documentation":"<p>An updated <code>TableInput</code> object to define the metadata table in the catalog.</p>"
+        },
+        "SkipArchive":{
+          "shape":"BooleanNullable",
+          "documentation":"<p>By default, <code>UpdateTable</code> always creates an archived version of the table before updating it. If <code>skipArchive</code> is set to true, however, <code>UpdateTable</code> does not create the archived version.</p>"
         }
       }
     },
@@ -5689,7 +5878,7 @@
     },
     "ViewTextString":{
       "type":"string",
-      "max":2048
+      "max":409600
     },
     "XMLClassifier":{
       "type":"structure",

@@ -129,3 +129,4 @@ export import ServerlessApplicationRepository = require('./serverlessapplication
 export import ServiceDiscovery = require('./servicediscovery');
 export import WorkMail = require('./workmail');
 export import AutoScalingPlans = require('./autoscalingplans');
+export import TranscribeService = require('./transcribeservice');
