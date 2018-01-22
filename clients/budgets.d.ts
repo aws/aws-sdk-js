@@ -174,6 +174,14 @@ declare namespace Budgets {
      * A boolean value whether to include support costs in the cost budget.
      */
     IncludeSupport?: NullableBoolean;
+    /**
+     * A boolean value whether to include discounts in the cost budget.
+     */
+    IncludeDiscount?: NullableBoolean;
+    /**
+     * A boolean value whether to include amortized costs in the cost budget.
+     */
+    UseAmortized?: NullableBoolean;
   }
   export interface CreateBudgetRequest {
     AccountId: AccountId;

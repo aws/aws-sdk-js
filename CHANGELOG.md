@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.185.0-->
+<!--LATEST=2.186.0-->
 <!--ENTRYINSERT-->
+
+## 2.186.0
+* feature: Budgets: Add additional costTypes: IncludeDiscount, UseAmortized,  to support finer control for different charges included in a cost budget.
 
 ## 2.185.0
 * feature: Glue: New AWS Glue DataCatalog APIs to manage table versions and a new feature to skip archiving of the old table version when updating table.

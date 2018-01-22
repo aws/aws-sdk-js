@@ -331,6 +331,14 @@
         "IncludeSupport":{
           "shape":"NullableBoolean",
           "documentation":"A boolean value whether to include support costs in the cost budget."
+        },
+        "IncludeDiscount":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include discounts in the cost budget."
+        },
+        "UseAmortized":{
+          "shape":"NullableBoolean",
+          "documentation":"A boolean value whether to include amortized costs in the cost budget."
         }
       },
       "documentation":"This includes the options for getting the cost of a budget."
