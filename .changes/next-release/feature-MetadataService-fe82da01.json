@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "MetadataService",
+  "description": "Allow environmental disabling of the AWS.MetadataService client by setting the AWS_EC2_METADATA_DISABLED environment variable to a truthy value."
+}
