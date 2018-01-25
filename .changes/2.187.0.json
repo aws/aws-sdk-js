@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "Supports new field for DeviceStatusInfo which provides details about the DeviceStatus following a DeviceSync operation."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Adding support for Shallow Clone and GitHub Enterprise in AWS CodeBuild."
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Added the missing AccessKeyDetails object to the resource shape."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "AWS Lambda now supports Revision ID on your function versions and aliases, to track and apply conditional updates when you are updating your function version or alias resources."
+    },
+    {
+        "type": "feature",
+        "category": "MetadataService",
+        "description": "Allow environmental disabling of the AWS.MetadataService client by setting the AWS_EC2_METADATA_DISABLED environment variable to a truthy value."
+    }
+]

@@ -7087,7 +7087,7 @@ module.exports =
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var apply = Function.prototype.apply;
+	/* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
 
 	// DOM APIs, for completeness
 
@@ -7138,9 +7138,17 @@ module.exports =
 
 	// setimmediate attaches itself to the global object
 	__webpack_require__(23);
-	exports.setImmediate = setImmediate;
-	exports.clearImmediate = clearImmediate;
+	// On some exotic environments, it's not clear which object `setimmeidate` was
+	// able to install onto.  Search each possibility in the same order as the
+	// `setimmediate` library.
+	exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+	                       (typeof global !== "undefined" && global.setImmediate) ||
+	                       (this && this.setImmediate);
+	exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+	                         (typeof global !== "undefined" && global.clearImmediate) ||
+	                         (this && this.clearImmediate);
 
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
 /* 23 */

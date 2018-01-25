@@ -805,7 +805,11 @@
         },
         "DeviceStatus":{
           "shape":"DeviceStatus",
-          "documentation":"<p>The status of a device.</p>"
+          "documentation":"<p>The status of a device. If the status is not READY, check the DeviceStatusInfo for details.</p>"
+        },
+        "DeviceStatusInfo":{
+          "shape":"DeviceStatusInfo",
+          "documentation":"<p>Detailed information about a device's status.</p>"
         }
       },
       "documentation":"<p>A device with attributes.</p>"
@@ -848,6 +852,10 @@
         "RoomName":{
           "shape":"RoomName",
           "documentation":"<p>The name of the room associated with a device.</p>"
+        },
+        "DeviceStatusInfo":{
+          "shape":"DeviceStatusInfo",
+          "documentation":"<p>Detailed information about a device's status.</p>"
         }
       },
       "documentation":"<p>Device attributes.</p>"
@@ -873,6 +881,37 @@
         "PENDING",
         "WAS_OFFLINE"
       ]
+    },
+    "DeviceStatusDetail":{
+      "type":"structure",
+      "members":{
+        "Code":{
+          "shape":"DeviceStatusDetailCode",
+          "documentation":"<p>The device status detail code.</p>"
+        }
+      },
+      "documentation":"<p>Details of a device’s status.</p>"
+    },
+    "DeviceStatusDetailCode":{
+      "type":"string",
+      "enum":[
+        "DEVICE_SOFTWARE_UPDATE_NEEDED",
+        "DEVICE_WAS_OFFLINE"
+      ]
+    },
+    "DeviceStatusDetails":{
+      "type":"list",
+      "member":{"shape":"DeviceStatusDetail"}
+    },
+    "DeviceStatusInfo":{
+      "type":"structure",
+      "members":{
+        "DeviceStatusDetails":{
+          "shape":"DeviceStatusDetails",
+          "documentation":"<p>One or more device status detail descriptions.</p>"
+        }
+      },
+      "documentation":"<p>Detailed information about a device's status.</p>"
     },
     "DeviceType":{
       "type":"string",
@@ -1497,7 +1536,7 @@
         },
         "Filters":{
           "shape":"FilterList",
-          "documentation":"<p>The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.</p>"
+          "documentation":"<p>The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.</p>"
         },
         "SortCriteria":{
           "shape":"SortList",

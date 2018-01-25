@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.186.0
+// AWS SDK for JavaScript v2.187.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -68760,7 +68760,8 @@ module.exports={
           "Qualifier": {
             "location": "querystring",
             "locationName": "Qualifier"
-          }
+          },
+          "RevisionId": {}
         }
       },
       "output": {
@@ -69171,7 +69172,8 @@ module.exports={
       "output": {
         "type": "structure",
         "members": {
-          "Policy": {}
+          "Policy": {},
+          "RevisionId": {}
         }
       }
     },
@@ -69475,7 +69477,8 @@ module.exports={
             "locationName": "FunctionName"
           },
           "CodeSha256": {},
-          "Description": {}
+          "Description": {},
+          "RevisionId": {}
         }
       },
       "output": {
@@ -69532,6 +69535,10 @@ module.exports={
           "Qualifier": {
             "location": "querystring",
             "locationName": "Qualifier"
+          },
+          "RevisionId": {
+            "location": "querystring",
+            "locationName": "RevisionId"
           }
         }
       }
@@ -69609,7 +69616,8 @@ module.exports={
           "Description": {},
           "RoutingConfig": {
             "shape": "Sg"
-          }
+          },
+          "RevisionId": {}
         }
       },
       "output": {
@@ -69672,7 +69680,8 @@ module.exports={
           },
           "DryRun": {
             "type": "boolean"
-          }
+          },
+          "RevisionId": {}
         }
       },
       "output": {
@@ -69717,7 +69726,8 @@ module.exports={
           "KMSKeyArn": {},
           "TracingConfig": {
             "shape": "S1g"
-          }
+          },
+          "RevisionId": {}
         }
       },
       "output": {
@@ -69747,7 +69757,8 @@ module.exports={
         "Description": {},
         "RoutingConfig": {
           "shape": "Sg"
-        }
+        },
+        "RevisionId": {}
       }
     },
     "Sr": {
@@ -69888,7 +69899,8 @@ module.exports={
             "Mode": {}
           }
         },
-        "MasterArn": {}
+        "MasterArn": {},
+        "RevisionId": {}
       }
     },
     "S2b": {
@@ -121413,7 +121425,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.186.0',
+  VERSION: '2.187.0',
 
   /**
    * @api private
@@ -132808,7 +132820,12 @@ var util = {
   /**
    * @api private
    */
-  sharedConfigFileEnv: 'AWS_CONFIG_FILE'
+  sharedConfigFileEnv: 'AWS_CONFIG_FILE',
+
+  /**
+   * @api private
+   */
+  imdsDisabledEnv: 'AWS_EC2_METADATA_DISABLED'
 };
 
 module.exports = util;
@@ -145319,7 +145336,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.186.0
+// AWS SDK for JavaScript v2.187.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

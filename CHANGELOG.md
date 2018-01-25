@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.186.0-->
+<!--LATEST=2.187.0-->
 <!--ENTRYINSERT-->
+
+## 2.187.0
+* feature: AlexaForBusiness: Supports new field for DeviceStatusInfo which provides details about the DeviceStatus following a DeviceSync operation.
+* feature: CodeBuild: Adding support for Shallow Clone and GitHub Enterprise in AWS CodeBuild.
+* feature: GuardDuty: Added the missing AccessKeyDetails object to the resource shape.
+* feature: Lambda: AWS Lambda now supports Revision ID on your function versions and aliases, to track and apply conditional updates when you are updating your function version or alias resources.
+* feature: MetadataService: Allow environmental disabling of the AWS.MetadataService client by setting the AWS_EC2_METADATA_DISABLED environment variable to a truthy value.
 
 ## 2.186.0
 * feature: Budgets: Add additional costTypes: IncludeDiscount, UseAmortized,  to support finer control for different charges included in a cost budget.

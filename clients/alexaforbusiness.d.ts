@@ -543,9 +543,13 @@ declare namespace AlexaForBusiness {
      */
     RoomArn?: Arn;
     /**
-     * The status of a device.
+     * The status of a device. If the status is not READY, check the DeviceStatusInfo for details.
      */
     DeviceStatus?: DeviceStatus;
+    /**
+     * Detailed information about a device's status.
+     */
+    DeviceStatusInfo?: DeviceStatusInfo;
   }
   export interface DeviceData {
     /**
@@ -584,11 +588,29 @@ declare namespace AlexaForBusiness {
      * The name of the room associated with a device.
      */
     RoomName?: RoomName;
+    /**
+     * Detailed information about a device's status.
+     */
+    DeviceStatusInfo?: DeviceStatusInfo;
   }
   export type DeviceDataList = DeviceData[];
   export type DeviceName = string;
   export type DeviceSerialNumber = string;
   export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|string;
+  export interface DeviceStatusDetail {
+    /**
+     * The device status detail code.
+     */
+    Code?: DeviceStatusDetailCode;
+  }
+  export type DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"|"DEVICE_WAS_OFFLINE"|string;
+  export type DeviceStatusDetails = DeviceStatusDetail[];
+  export interface DeviceStatusInfo {
+    /**
+     * One or more device status detail descriptions.
+     */
+    DeviceStatusDetails?: DeviceStatusDetails;
+  }
   export type DeviceType = string;
   export interface DisassociateDeviceFromRoomRequest {
     /**
@@ -952,7 +974,7 @@ declare namespace AlexaForBusiness {
      */
     MaxResults?: MaxResults;
     /**
-     * The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.
+     * The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.
      */
     Filters?: FilterList;
     /**

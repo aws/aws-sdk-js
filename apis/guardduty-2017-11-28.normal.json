@@ -891,6 +891,32 @@
       "type" : "structure",
       "members" : { }
     },
+    "AccessKeyDetails" : {
+      "type" : "structure",
+      "members" : {
+        "AccessKeyId" : {
+          "shape" : "__string",
+          "locationName" : "accessKeyId",
+          "documentation" : "Access key ID of the user."
+        },
+        "PrincipalId" : {
+          "shape" : "__string",
+          "locationName" : "principalId",
+          "documentation" : "The principal ID of the user."
+        },
+        "UserName" : {
+          "shape" : "__string",
+          "locationName" : "userName",
+          "documentation" : "The name of the user."
+        },
+        "UserType" : {
+          "shape" : "__string",
+          "locationName" : "userType",
+          "documentation" : "The type of the user."
+        }
+      },
+      "documentation" : "The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding."
+    },
     "AccountDetail" : {
       "type" : "structure",
       "members" : {
@@ -2704,6 +2730,10 @@
     "Resource" : {
       "type" : "structure",
       "members" : {
+        "AccessKeyDetails" : {
+          "shape" : "AccessKeyDetails",
+          "locationName" : "accessKeyDetails"
+        },
         "InstanceDetails" : {
           "shape" : "InstanceDetails",
           "locationName" : "instanceDetails"
