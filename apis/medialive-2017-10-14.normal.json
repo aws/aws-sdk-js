@@ -278,6 +278,10 @@
           "documentation": "Bad Gateway Error"
         },
         {
+          "shape": "NotFoundException",
+          "documentation": "Input Security Group not found"
+        },
+        {
           "shape": "GatewayTimeoutException",
           "documentation": "Gateway Timeout Error"
         },
@@ -1649,6 +1653,10 @@
           "locationName": "inputAttachments",
           "documentation": "List of input attachments for channel."
         },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification"
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -1740,6 +1748,10 @@
           "locationName": "inputAttachments",
           "documentation": "List of input attachments for channel."
         },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification"
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -1792,6 +1804,11 @@
           "locationName": "inputAttachments",
           "documentation": "List of input attachments for channel."
         },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification",
+          "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -1831,6 +1848,11 @@
           "shape": "ListOfInputAttachment",
           "locationName": "inputAttachments",
           "documentation": "List of input attachments for channel."
+        },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification",
+          "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
         },
         "Name": {
           "shape": "__string",
@@ -1882,7 +1904,7 @@
         "Destinations": {
           "shape": "ListOfInputDestinationRequest",
           "locationName": "destinations",
-          "documentation": "settings required for PUSH-type inputs; one per redundancy group.\nOnly one of sources and destinations can be specified.\nNote: there are currently no settings required for PUSH-type inputs\n"
+          "documentation": "Destination settings for PUSH type inputs."
         },
         "InputSecurityGroups": {
           "shape": "ListOf__string",
@@ -1897,13 +1919,13 @@
         "RequestId": {
           "shape": "__string",
           "locationName": "requestId",
-          "documentation": "Unique identifier of the request to ensure the request is handled\nexactly once in case of retries\n",
+          "documentation": "Unique identifier of the request to ensure the request is handled\nexactly once in case of retries.\n",
           "idempotencyToken": true
         },
         "Sources": {
           "shape": "ListOfInputSourceRequest",
           "locationName": "sources",
-          "documentation": "settings required for PULL-type inputs; one per redundancy group\nOnly one of sources and destinations can be specified\n"
+          "documentation": "The source URLs for a PULL-type input. Every PULL type input needs\nexactly two source URLs for redundancy.\nOnly specify sources for PULL type Inputs. Leave Destinations empty.\n"
         },
         "Type": {
           "shape": "InputType",
@@ -1918,7 +1940,7 @@
         "Destinations": {
           "shape": "ListOfInputDestinationRequest",
           "locationName": "destinations",
-          "documentation": "settings required for PUSH-type inputs; one per redundancy group.\nOnly one of sources and destinations can be specified.\nNote: there are currently no settings required for PUSH-type inputs\n"
+          "documentation": "Destination settings for PUSH type inputs."
         },
         "InputSecurityGroups": {
           "shape": "ListOf__string",
@@ -1933,13 +1955,13 @@
         "RequestId": {
           "shape": "__string",
           "locationName": "requestId",
-          "documentation": "Unique identifier of the request to ensure the request is handled\nexactly once in case of retries\n",
+          "documentation": "Unique identifier of the request to ensure the request is handled\nexactly once in case of retries.\n",
           "idempotencyToken": true
         },
         "Sources": {
           "shape": "ListOfInputSourceRequest",
           "locationName": "sources",
-          "documentation": "settings required for PULL-type inputs; one per redundancy group\nOnly one of sources and destinations can be specified\n"
+          "documentation": "The source URLs for a PULL-type input. Every PULL type input needs\nexactly two source URLs for redundancy.\nOnly specify sources for PULL type Inputs. Leave Destinations empty.\n"
         },
         "Type": {
           "shape": "InputType",
@@ -2045,6 +2067,10 @@
           "shape": "ListOfInputAttachment",
           "locationName": "inputAttachments",
           "documentation": "List of input attachments for channel."
+        },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification"
         },
         "Name": {
           "shape": "__string",
@@ -2157,6 +2183,10 @@
           "locationName": "inputAttachments",
           "documentation": "List of input attachments for channel."
         },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification"
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -2200,37 +2230,37 @@
         "Arn": {
           "shape": "__string",
           "locationName": "arn",
-          "documentation": "Unique ARN of input (generated, immutable)"
+          "documentation": "The Unique ARN of the input (generated, immutable)."
         },
         "AttachedChannels": {
           "shape": "ListOf__string",
           "locationName": "attachedChannels",
-          "documentation": "List of channel IDs that that input is attached to (currently an input can only be attached to one channel)"
+          "documentation": "A list of channel IDs that that input is attached to (currently an input can only be attached to one channel)."
         },
         "Destinations": {
           "shape": "ListOfInputDestination",
           "locationName": "destinations",
-          "documentation": "List of destinations of input (PULL-type)"
+          "documentation": "A list of the destinations of the input (PUSH-type)."
         },
         "Id": {
           "shape": "__string",
           "locationName": "id",
-          "documentation": "generated ID of input (unique for user account, immutable)"
+          "documentation": "The generated ID of the input (unique for user account, immutable)."
         },
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "user-assigned name (mutable)"
+          "documentation": "The user-assigned name (This is a mutable value)."
         },
         "SecurityGroups": {
           "shape": "ListOf__string",
           "locationName": "securityGroups",
-          "documentation": "List of IDs for all the security groups attached to the input."
+          "documentation": "A list of IDs for all the security groups attached to the input."
         },
         "Sources": {
           "shape": "ListOfInputSource",
           "locationName": "sources",
-          "documentation": "List of sources of input (PULL-type)"
+          "documentation": "A list of the sources of the input (PULL-type)."
         },
         "State": {
           "shape": "InputState",
@@ -3541,7 +3571,7 @@
         "IndexNSegments": {
           "shape": "__integer",
           "locationName": "indexNSegments",
-          "documentation": "Number of segments to keep in the playlist (.m3u8) file. mode must be \"vod\" for this setting to have an effect, and this number should be less than or equal to keepSegments."
+          "documentation": "If mode is \"live\", the number of segments to retain in the manifest (.m3u8) file. This number must be less than or equal to keepSegments. If mode is \"vod\", this parameter has no effect."
         },
         "InputLossAction": {
           "shape": "InputLossActionForHlsOut",
@@ -3561,7 +3591,7 @@
         "KeepSegments": {
           "shape": "__integer",
           "locationName": "keepSegments",
-          "documentation": "Number of segments to retain in the destination directory. mode must be \"live\" for this setting to have an effect."
+          "documentation": "If mode is \"live\", the number of TS segments to retain in the destination directory. If mode is \"vod\", this parameter has no effect."
         },
         "KeyFormat": {
           "shape": "__string",
@@ -3596,7 +3626,7 @@
         "Mode": {
           "shape": "HlsMode",
           "locationName": "mode",
-          "documentation": "If set to \"vod\", keeps and indexes all segments starting with the first segment.  If set to \"live\" segments will age out and only the last keepSegments number of segments will be retained."
+          "documentation": "If \"vod\", all segments are indexed and kept permanently in the destination and manifest. If \"live\", only the number segments specified in keepSegments and indexNSegments are kept; newer segments replace older segments, which may prevent players from rewinding all the way to the beginning of the event.\n\nVOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, converting it to a \"VOD\" type manifest on completion of the stream."
         },
         "OutputSelection": {
           "shape": "HlsOutputSelection",
@@ -3889,37 +3919,37 @@
         "Arn": {
           "shape": "__string",
           "locationName": "arn",
-          "documentation": "Unique ARN of input (generated, immutable)"
+          "documentation": "The Unique ARN of the input (generated, immutable)."
         },
         "AttachedChannels": {
           "shape": "ListOf__string",
           "locationName": "attachedChannels",
-          "documentation": "List of channel IDs that that input is attached to (currently an input can only be attached to one channel)"
+          "documentation": "A list of channel IDs that that input is attached to (currently an input can only be attached to one channel)."
         },
         "Destinations": {
           "shape": "ListOfInputDestination",
           "locationName": "destinations",
-          "documentation": "List of destinations of input (PULL-type)"
+          "documentation": "A list of the destinations of the input (PUSH-type)."
         },
         "Id": {
           "shape": "__string",
           "locationName": "id",
-          "documentation": "generated ID of input (unique for user account, immutable)"
+          "documentation": "The generated ID of the input (unique for user account, immutable)."
         },
         "Name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "user-assigned name (mutable)"
+          "documentation": "The user-assigned name (This is a mutable value)."
         },
         "SecurityGroups": {
           "shape": "ListOf__string",
           "locationName": "securityGroups",
-          "documentation": "List of IDs for all the security groups attached to the input."
+          "documentation": "A list of IDs for all the security groups attached to the input."
         },
         "Sources": {
           "shape": "ListOfInputSource",
           "locationName": "sources",
-          "documentation": "List of sources of input (PULL-type)"
+          "documentation": "A list of the sources of the input (PULL-type)."
         },
         "State": {
           "shape": "InputState",
@@ -3964,6 +3994,15 @@
       },
       "documentation": "Placeholder documentation for InputChannelLevel"
     },
+    "InputCodec": {
+      "type": "string",
+      "documentation": "codec in increasing order of complexity",
+      "enum": [
+        "MPEG2",
+        "AVC",
+        "HEVC"
+      ]
+    },
     "InputDeblockFilter": {
       "type": "string",
       "enum": [
@@ -3986,12 +4025,12 @@
         "Ip": {
           "shape": "__string",
           "locationName": "ip",
-          "documentation": "system-generated static IP address of endpoint.\nRemains fixed for the lifetime of the input\n"
+          "documentation": "The system-generated static IP address of endpoint.\nIt remains fixed for the lifetime of the input.\n"
         },
         "Port": {
           "shape": "__string",
           "locationName": "port",
-          "documentation": "port for input"
+          "documentation": "The port number for the input."
         },
         "Url": {
           "shape": "__string",
@@ -3999,7 +4038,7 @@
           "documentation": "This represents the endpoint that the customer stream will be\npushed to.\n"
         }
       },
-      "documentation": "Settings for a PUSH type input"
+      "documentation": "The settings for a PUSH type input."
     },
     "InputDestinationRequest": {
       "type": "structure",
@@ -4010,7 +4049,7 @@
           "documentation": "A unique name for the location the RTMP stream is being pushed\nto.\n"
         }
       },
-      "documentation": "Endpoint settings for a PUSH type input"
+      "documentation": "Endpoint settings for a PUSH type input."
     },
     "InputFilter": {
       "type": "string",
@@ -4106,6 +4145,24 @@
       ],
       "documentation": "Placeholder documentation for InputLossImageType"
     },
+    "InputMaximumBitrate": {
+      "type": "string",
+      "documentation": "Maximum input bitrate in megabits per second. Bitrates up to 50 Mbps are supported currently.",
+      "enum": [
+        "MAX_10_MBPS",
+        "MAX_20_MBPS",
+        "MAX_50_MBPS"
+      ]
+    },
+    "InputResolution": {
+      "type": "string",
+      "documentation": "Input resolution based on lines of vertical resolution in the input; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines\n",
+      "enum": [
+        "SD",
+        "HD",
+        "UHD"
+      ]
+    },
     "InputSecurityGroup": {
       "type": "structure",
       "members": {
@@ -4195,7 +4252,7 @@
         "PasswordParam": {
           "shape": "__string",
           "locationName": "passwordParam",
-          "documentation": "key used to extract the password from EC2 Parameter store"
+          "documentation": "The key used to extract the password from EC2 Parameter store."
         },
         "Url": {
           "shape": "__string",
@@ -4205,10 +4262,10 @@
         "Username": {
           "shape": "__string",
           "locationName": "username",
-          "documentation": "username for input source"
+          "documentation": "The username for the input source."
         }
       },
-      "documentation": "Settings for a PULL type input"
+      "documentation": "The settings for a PULL type input."
     },
     "InputSourceEndBehavior": {
       "type": "string",
@@ -4224,7 +4281,7 @@
         "PasswordParam": {
           "shape": "__string",
           "locationName": "passwordParam",
-          "documentation": "key used to extract the password from EC2 Parameter store"
+          "documentation": "The key used to extract the password from EC2 Parameter store."
         },
         "Url": {
           "shape": "__string",
@@ -4234,10 +4291,31 @@
         "Username": {
           "shape": "__string",
           "locationName": "username",
-          "documentation": "username for input source"
+          "documentation": "The username for the input source."
         }
       },
-      "documentation": "Settings for for a PULL type input"
+      "documentation": "Settings for for a PULL type input."
+    },
+    "InputSpecification": {
+      "type": "structure",
+      "members": {
+        "Codec": {
+          "shape": "InputCodec",
+          "locationName": "codec",
+          "documentation": "Input codec"
+        },
+        "MaximumBitrate": {
+          "shape": "InputMaximumBitrate",
+          "locationName": "maximumBitrate",
+          "documentation": "Maximum input bitrate, categorized coarsely"
+        },
+        "Resolution": {
+          "shape": "InputResolution",
+          "locationName": "resolution",
+          "documentation": "Input resolution, categorized coarsely"
+        }
+      },
+      "documentation": "Placeholder documentation for InputSpecification"
     },
     "InputState": {
       "type": "string",
@@ -4899,7 +4977,7 @@
         "EcmPid": {
           "shape": "__string",
           "locationName": "ecmPid",
-          "documentation": "Packet Identifier (PID) for ECM in the transport stream. Only enabled when Simulcrypt is enabled. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6)."
+          "documentation": "This field is unused and deprecated."
         },
         "EsRateInPes": {
           "shape": "M2tsEsRateInPes",
@@ -5069,7 +5147,7 @@
         "EcmPid": {
           "shape": "__string",
           "locationName": "ecmPid",
-          "documentation": "ThePlatform-protected transport streams using 'microsoft' as Target Client include an ECM stream. This ECM stream contains the size, IV, and PTS of every sample in the transport stream.  This stream PID is specified here. This PID has no effect on non ThePlatform-protected streams."
+          "documentation": "This parameter is unused and deprecated."
         },
         "PatInterval": {
           "shape": "__integer",
@@ -5770,6 +5848,10 @@
           "locationName": "inputAttachments",
           "documentation": "List of input attachments for channel."
         },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification"
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -5854,6 +5936,10 @@
           "shape": "ListOfInputAttachment",
           "locationName": "inputAttachments",
           "documentation": "List of input attachments for channel."
+        },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification"
         },
         "Name": {
           "shape": "__string",

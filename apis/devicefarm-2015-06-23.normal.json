@@ -474,7 +474,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"ServiceAccountException"}
       ],
-      "documentation":"<p>Gets information about jobs.</p>"
+      "documentation":"<p>Gets information about jobs for a given test run.</p>"
     },
     "ListNetworkProfiles":{
       "name":"ListNetworkProfiles",
@@ -621,7 +621,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"ServiceAccountException"}
       ],
-      "documentation":"<p>Gets information about suites.</p>"
+      "documentation":"<p>Gets information about test suites for a given job.</p>"
     },
     "ListTests":{
       "name":"ListTests",
@@ -637,7 +637,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"ServiceAccountException"}
       ],
-      "documentation":"<p>Gets information about tests.</p>"
+      "documentation":"<p>Gets information about tests in a given test suite.</p>"
     },
     "ListUniqueProblems":{
       "name":"ListUniqueProblems",
@@ -1169,17 +1169,29 @@
           "shape":"Boolean",
           "documentation":"<p>Set to <code>true</code> if you want to access devices remotely for debugging in your remote access session.</p>"
         },
+        "remoteRecordEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>Set to <code>true</code> to enable remote recording for the remote access session.</p>"
+        },
+        "remoteRecordAppArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the app to be recorded in the remote access session.</p>"
+        },
         "name":{
           "shape":"Name",
           "documentation":"<p>The name of the remote access session that you wish to create.</p>"
         },
         "clientId":{
           "shape":"ClientId",
-          "documentation":"<p>Unique identifier for the client. If you want access to multiple devices on the same client, you should pass the same <code>clientId</code> value in each call to <code>CreateRemoteAccessSession</code>. This is required only if <code>remoteDebugEnabled</code> is set to true <code>true</code>.</p>"
+          "documentation":"<p>Unique identifier for the client. If you want access to multiple devices on the same client, you should pass the same <code>clientId</code> value in each call to <code>CreateRemoteAccessSession</code>. This is required only if <code>remoteDebugEnabled</code> is set to <code>true</code>.</p>"
         },
         "configuration":{
           "shape":"CreateRemoteAccessSessionConfiguration",
           "documentation":"<p>The configuration information for the remote access session request.</p>"
+        },
+        "interactionMode":{
+          "shape":"InteractionMode",
+          "documentation":"<p>The interaction mode of the remote access session. Valid values are:</p> <ul> <li> <p>INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You <b>cannot</b> run XCUITest framework-based tests in this mode.</p> </li> <li> <p>NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You <b>can</b> run XCUITest framework-based tests in this mode.</p> </li> <li> <p>VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You <b>can</b> run XCUITest framework-based tests and watch the screen in this mode.</p> </li> </ul>"
         }
       },
       "documentation":"<p>Creates and submits a request to start a remote access session.</p>"
@@ -1372,6 +1384,10 @@
         "model":{
           "shape":"String",
           "documentation":"<p>The device's model name.</p>"
+        },
+        "modelId":{
+          "shape":"String",
+          "documentation":"<p>The device's model ID.</p>"
         },
         "formFactor":{
           "shape":"DeviceFormFactor",
@@ -1948,6 +1964,16 @@
       "documentation":"<p>Represents the response from the server after AWS Device Farm makes a request to install to a remote access session.</p>"
     },
     "Integer":{"type":"integer"},
+    "InteractionMode":{
+      "type":"string",
+      "enum":[
+        "INTERACTIVE",
+        "NO_VIDEO",
+        "VIDEO_ONLY"
+      ],
+      "max":64,
+      "min":0
+    },
     "IosPaths":{
       "type":"list",
       "member":{"shape":"String"}
@@ -2125,7 +2151,7 @@
       "members":{
         "arn":{
           "shape":"AmazonResourceName",
-          "documentation":"<p>The jobs' ARNs.</p>"
+          "documentation":"<p>The run's Amazon Resource Name (ARN).</p>"
         },
         "nextToken":{
           "shape":"PaginationToken",
@@ -2370,7 +2396,7 @@
       "members":{
         "arn":{
           "shape":"AmazonResourceName",
-          "documentation":"<p>The suites' ARNs.</p>"
+          "documentation":"<p>The job's Amazon Resource Name (ARN).</p>"
         },
         "nextToken":{
           "shape":"PaginationToken",
@@ -2399,7 +2425,7 @@
       "members":{
         "arn":{
           "shape":"AmazonResourceName",
-          "documentation":"<p>The tests' ARNs.</p>"
+          "documentation":"<p>The test suite's Amazon Resource Name (ARN).</p>"
         },
         "nextToken":{
           "shape":"PaginationToken",
@@ -2953,6 +2979,14 @@
           "shape":"Boolean",
           "documentation":"<p>This flag is set to <code>true</code> if remote debugging is enabled for the remote access session.</p>"
         },
+        "remoteRecordEnabled":{
+          "shape":"Boolean",
+          "documentation":"<p>This flag is set to <code>true</code> if remote recording is enabled for the remote access session.</p>"
+        },
+        "remoteRecordAppArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The Amazon Resource Name (ARN) for the app to be recorded in the remote access session.</p>"
+        },
         "hostAddress":{
           "shape":"HostAddress",
           "documentation":"<p>IP address of the EC2 host where you need to connect to remotely debug devices. Only returned if remote debugging is enabled for the remote access session.</p>"
@@ -2976,6 +3010,10 @@
         "deviceUdid":{
           "shape":"String",
           "documentation":"<p>Unique device identifier for the remote device. Only returned if remote debugging is enabled for the remote access session.</p>"
+        },
+        "interactionMode":{
+          "shape":"InteractionMode",
+          "documentation":"<p>The interaction mode of the remote access session. Valid values are:</p> <ul> <li> <p>INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You <b>cannot</b> run XCUITest framework-based tests in this mode.</p> </li> <li> <p>NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You <b>can</b> run XCUITest framework-based tests in this mode.</p> </li> <li> <p>VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You <b>can</b> run XCUITest framework-based tests and watch the screen in this mode.</p> </li> </ul>"
         }
       },
       "documentation":"<p>Represents information about the remote access session.</p>"
@@ -3130,9 +3168,45 @@
           "shape":"ExecutionResultCode",
           "documentation":"<p>Supporting field for the result field. Set only if <code>result</code> is <code>SKIPPED</code>. <code>PARSING_FAILED</code> if the result is skipped because of test package parsing failure.</p>"
         },
+        "seed":{
+          "shape":"Integer",
+          "documentation":"<p>For fuzz tests, this is a seed to use for randomizing the UI fuzz test. Using the same seed value between tests ensures identical event sequences.</p>"
+        },
+        "appUpload":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>An app to upload or that has been uploaded.</p>"
+        },
+        "eventCount":{
+          "shape":"Integer",
+          "documentation":"<p>For fuzz tests, this is the number of events, between 1 and 10000, that the UI fuzz test should perform.</p>"
+        },
+        "jobTimeoutMinutes":{
+          "shape":"JobTimeoutMinutes",
+          "documentation":"<p>The number of minutes the job will execute before it times out.</p>"
+        },
+        "devicePoolArn":{
+          "shape":"AmazonResourceName",
+          "documentation":"<p>The ARN of the device pool for the run.</p>"
+        },
+        "locale":{
+          "shape":"String",
+          "documentation":"<p>Information about the locale that is used for the run.</p>"
+        },
+        "radios":{
+          "shape":"Radios",
+          "documentation":"<p>Information about the radio states for the run.</p>"
+        },
+        "location":{
+          "shape":"Location",
+          "documentation":"<p>Information about the location that is used for the run.</p>"
+        },
         "customerArtifactPaths":{
           "shape":"CustomerArtifactPaths",
           "documentation":"<p>Output <code>CustomerArtifactPaths</code> object for the test run.</p>"
+        },
+        "webUrl":{
+          "shape":"String",
+          "documentation":"<p>A pre-signed Amazon S3 URL that can be used with a corresponding GET request to download the symbol file for the run.</p>"
         }
       },
       "documentation":"<p>Represents a test run on a set of devices with a given app package, test parameters, etc.</p>"
@@ -3468,6 +3542,7 @@
       "enum":[
         "BUILTIN_FUZZ",
         "BUILTIN_EXPLORER",
+        "WEB_PERFORMANCE_PROFILE",
         "APPIUM_JAVA_JUNIT",
         "APPIUM_JAVA_TESTNG",
         "APPIUM_PYTHON",
@@ -3479,7 +3554,9 @@
         "UIAUTOMATION",
         "UIAUTOMATOR",
         "XCTEST",
-        "XCTEST_UI"
+        "XCTEST_UI",
+        "REMOTE_ACCESS_RECORD",
+        "REMOTE_ACCESS_REPLAY"
       ]
     },
     "Tests":{
@@ -3571,7 +3648,7 @@
       "members":{
         "arn":{
           "shape":"AmazonResourceName",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the project that you wish to update network profile settings.</p>"
+          "documentation":"<p>The Amazon Resource Name (ARN) of the project for which you want to update network profile settings.</p>"
         },
         "name":{
           "shape":"Name",

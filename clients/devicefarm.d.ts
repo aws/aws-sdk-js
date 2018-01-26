@@ -236,11 +236,11 @@ declare class DeviceFarm extends Service {
    */
   listDevices(callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicesResult) => void): Request<DeviceFarm.Types.ListDevicesResult, AWSError>;
   /**
-   * Gets information about jobs.
+   * Gets information about jobs for a given test run.
    */
   listJobs(params: DeviceFarm.Types.ListJobsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListJobsResult) => void): Request<DeviceFarm.Types.ListJobsResult, AWSError>;
   /**
-   * Gets information about jobs.
+   * Gets information about jobs for a given test run.
    */
   listJobs(callback?: (err: AWSError, data: DeviceFarm.Types.ListJobsResult) => void): Request<DeviceFarm.Types.ListJobsResult, AWSError>;
   /**
@@ -308,19 +308,19 @@ declare class DeviceFarm extends Service {
    */
   listSamples(callback?: (err: AWSError, data: DeviceFarm.Types.ListSamplesResult) => void): Request<DeviceFarm.Types.ListSamplesResult, AWSError>;
   /**
-   * Gets information about suites.
+   * Gets information about test suites for a given job.
    */
   listSuites(params: DeviceFarm.Types.ListSuitesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListSuitesResult) => void): Request<DeviceFarm.Types.ListSuitesResult, AWSError>;
   /**
-   * Gets information about suites.
+   * Gets information about test suites for a given job.
    */
   listSuites(callback?: (err: AWSError, data: DeviceFarm.Types.ListSuitesResult) => void): Request<DeviceFarm.Types.ListSuitesResult, AWSError>;
   /**
-   * Gets information about tests.
+   * Gets information about tests in a given test suite.
    */
   listTests(params: DeviceFarm.Types.ListTestsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListTestsResult) => void): Request<DeviceFarm.Types.ListTestsResult, AWSError>;
   /**
-   * Gets information about tests.
+   * Gets information about tests in a given test suite.
    */
   listTests(callback?: (err: AWSError, data: DeviceFarm.Types.ListTestsResult) => void): Request<DeviceFarm.Types.ListTestsResult, AWSError>;
   /**
@@ -634,17 +634,29 @@ declare namespace DeviceFarm {
      */
     remoteDebugEnabled?: Boolean;
     /**
+     * Set to true to enable remote recording for the remote access session.
+     */
+    remoteRecordEnabled?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) for the app to be recorded in the remote access session.
+     */
+    remoteRecordAppArn?: AmazonResourceName;
+    /**
      * The name of the remote access session that you wish to create.
      */
     name?: Name;
     /**
-     * Unique identifier for the client. If you want access to multiple devices on the same client, you should pass the same clientId value in each call to CreateRemoteAccessSession. This is required only if remoteDebugEnabled is set to true true.
+     * Unique identifier for the client. If you want access to multiple devices on the same client, you should pass the same clientId value in each call to CreateRemoteAccessSession. This is required only if remoteDebugEnabled is set to true.
      */
     clientId?: ClientId;
     /**
      * The configuration information for the remote access session request.
      */
     configuration?: CreateRemoteAccessSessionConfiguration;
+    /**
+     * The interaction mode of the remote access session. Valid values are:   INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You cannot run XCUITest framework-based tests in this mode.   NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You can run XCUITest framework-based tests in this mode.   VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You can run XCUITest framework-based tests and watch the screen in this mode.  
+     */
+    interactionMode?: InteractionMode;
   }
   export interface CreateRemoteAccessSessionResult {
     /**
@@ -757,6 +769,10 @@ declare namespace DeviceFarm {
      * The device's model name.
      */
     model?: String;
+    /**
+     * The device's model ID.
+     */
+    modelId?: String;
     /**
      * The device's form factor. Allowed values include:   PHONE: The phone form factor.   TABLET: The tablet form factor.  
      */
@@ -1096,6 +1112,7 @@ declare namespace DeviceFarm {
     appUpload?: Upload;
   }
   export type Integer = number;
+  export type InteractionMode = "INTERACTIVE"|"NO_VIDEO"|"VIDEO_ONLY"|string;
   export type IosPaths = String[];
   export interface Job {
     /**
@@ -1219,7 +1236,7 @@ declare namespace DeviceFarm {
   }
   export interface ListJobsRequest {
     /**
-     * The jobs' ARNs.
+     * The run's Amazon Resource Name (ARN).
      */
     arn: AmazonResourceName;
     /**
@@ -1391,7 +1408,7 @@ declare namespace DeviceFarm {
   }
   export interface ListSuitesRequest {
     /**
-     * The suites' ARNs.
+     * The job's Amazon Resource Name (ARN).
      */
     arn: AmazonResourceName;
     /**
@@ -1411,7 +1428,7 @@ declare namespace DeviceFarm {
   }
   export interface ListTestsRequest {
     /**
-     * The tests' ARNs.
+     * The test suite's Amazon Resource Name (ARN).
      */
     arn: AmazonResourceName;
     /**
@@ -1781,6 +1798,14 @@ declare namespace DeviceFarm {
      */
     remoteDebugEnabled?: Boolean;
     /**
+     * This flag is set to true if remote recording is enabled for the remote access session.
+     */
+    remoteRecordEnabled?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) for the app to be recorded in the remote access session.
+     */
+    remoteRecordAppArn?: AmazonResourceName;
+    /**
      * IP address of the EC2 host where you need to connect to remotely debug devices. Only returned if remote debugging is enabled for the remote access session.
      */
     hostAddress?: HostAddress;
@@ -1804,6 +1829,10 @@ declare namespace DeviceFarm {
      * Unique device identifier for the remote device. Only returned if remote debugging is enabled for the remote access session.
      */
     deviceUdid?: String;
+    /**
+     * The interaction mode of the remote access session. Valid values are:   INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You cannot run XCUITest framework-based tests in this mode.   NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You can run XCUITest framework-based tests in this mode.   VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You can run XCUITest framework-based tests and watch the screen in this mode.  
+     */
+    interactionMode?: InteractionMode;
   }
   export type RemoteAccessSessions = RemoteAccessSession[];
   export interface RenewOfferingRequest {
@@ -1922,9 +1951,45 @@ declare namespace DeviceFarm {
      */
     resultCode?: ExecutionResultCode;
     /**
+     * For fuzz tests, this is a seed to use for randomizing the UI fuzz test. Using the same seed value between tests ensures identical event sequences.
+     */
+    seed?: Integer;
+    /**
+     * An app to upload or that has been uploaded.
+     */
+    appUpload?: AmazonResourceName;
+    /**
+     * For fuzz tests, this is the number of events, between 1 and 10000, that the UI fuzz test should perform.
+     */
+    eventCount?: Integer;
+    /**
+     * The number of minutes the job will execute before it times out.
+     */
+    jobTimeoutMinutes?: JobTimeoutMinutes;
+    /**
+     * The ARN of the device pool for the run.
+     */
+    devicePoolArn?: AmazonResourceName;
+    /**
+     * Information about the locale that is used for the run.
+     */
+    locale?: String;
+    /**
+     * Information about the radio states for the run.
+     */
+    radios?: Radios;
+    /**
+     * Information about the location that is used for the run.
+     */
+    location?: Location;
+    /**
      * Output CustomerArtifactPaths object for the test run.
      */
     customerArtifactPaths?: CustomerArtifactPaths;
+    /**
+     * A pre-signed Amazon S3 URL that can be used with a corresponding GET request to download the symbol file for the run.
+     */
+    webUrl?: String;
   }
   export type Runs = Run[];
   export interface Sample {
@@ -2151,7 +2216,7 @@ declare namespace DeviceFarm {
     deviceMinutes?: DeviceMinutes;
   }
   export type TestParameters = {[key: string]: String};
-  export type TestType = "BUILTIN_FUZZ"|"BUILTIN_EXPLORER"|"APPIUM_JAVA_JUNIT"|"APPIUM_JAVA_TESTNG"|"APPIUM_PYTHON"|"APPIUM_WEB_JAVA_JUNIT"|"APPIUM_WEB_JAVA_TESTNG"|"APPIUM_WEB_PYTHON"|"CALABASH"|"INSTRUMENTATION"|"UIAUTOMATION"|"UIAUTOMATOR"|"XCTEST"|"XCTEST_UI"|string;
+  export type TestType = "BUILTIN_FUZZ"|"BUILTIN_EXPLORER"|"WEB_PERFORMANCE_PROFILE"|"APPIUM_JAVA_JUNIT"|"APPIUM_JAVA_TESTNG"|"APPIUM_PYTHON"|"APPIUM_WEB_JAVA_JUNIT"|"APPIUM_WEB_JAVA_TESTNG"|"APPIUM_WEB_PYTHON"|"CALABASH"|"INSTRUMENTATION"|"UIAUTOMATION"|"UIAUTOMATOR"|"XCTEST"|"XCTEST_UI"|"REMOTE_ACCESS_RECORD"|"REMOTE_ACCESS_REPLAY"|string;
   export type Tests = Test[];
   export type TransactionIdentifier = string;
   export interface TrialMinutes {
@@ -2203,7 +2268,7 @@ declare namespace DeviceFarm {
   }
   export interface UpdateNetworkProfileRequest {
     /**
-     * The Amazon Resource Name (ARN) of the project that you wish to update network profile settings.
+     * The Amazon Resource Name (ARN) of the project for which you want to update network profile settings.
      */
     arn: AmazonResourceName;
     /**
