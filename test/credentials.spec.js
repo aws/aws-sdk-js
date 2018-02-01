@@ -476,7 +476,7 @@
         mock = '[default]\nrole_arn = arn\nsource_profile = foo_first\n[foo_first]\nrole_arn = arn_foo_first\nsource_profile = foo_base\n[foo_base]\naws_access_key_id = baseKey\naws_secret_access_key = baseSecret\n';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
         helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
-        const STSPrototype = (new STS()).constructor.prototype;
+        var STSPrototype = (new STS()).constructor.prototype;
         creds = new AWS.SharedIniFileCredentials();
         assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallThrough();
         expect(creds.roleArn).to.equal('arn');
