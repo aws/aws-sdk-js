@@ -264,6 +264,10 @@ declare class OpsWorks extends Service {
    */
   describeMyUserProfile(callback?: (err: AWSError, data: OpsWorks.Types.DescribeMyUserProfileResult) => void): Request<OpsWorks.Types.DescribeMyUserProfileResult, AWSError>;
   /**
+   * Describes the operating systems that are supported by AWS OpsWorks Stacks.
+   */
+  describeOperatingSystems(callback?: (err: AWSError, data: OpsWorks.Types.DescribeOperatingSystemsResponse) => void): Request<OpsWorks.Types.DescribeOperatingSystemsResponse, AWSError>;
+  /**
    * Describes the permissions for a specified stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
   describePermissions(params: OpsWorks.Types.DescribePermissionsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribePermissionsResult) => void): Request<OpsWorks.Types.DescribePermissionsResult, AWSError>;
@@ -600,11 +604,11 @@ declare class OpsWorks extends Service {
    */
   waitFor(state: "appExists", callback?: (err: AWSError, data: OpsWorks.Types.DescribeAppsResult) => void): Request<OpsWorks.Types.DescribeAppsResult, AWSError>;
   /**
-   * Waits for the deploymentSuccessful state by periodically calling the underlying OpsWorks.describeDeploymentsoperation every 15 seconds (at most 40 times). Wait until a deployment has completed successfully
+   * Waits for the deploymentSuccessful state by periodically calling the underlying OpsWorks.describeDeploymentsoperation every 15 seconds (at most 40 times). Wait until a deployment has completed successfully.
    */
   waitFor(state: "deploymentSuccessful", params: OpsWorks.Types.DescribeDeploymentsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeDeploymentsResult) => void): Request<OpsWorks.Types.DescribeDeploymentsResult, AWSError>;
   /**
-   * Waits for the deploymentSuccessful state by periodically calling the underlying OpsWorks.describeDeploymentsoperation every 15 seconds (at most 40 times). Wait until a deployment has completed successfully
+   * Waits for the deploymentSuccessful state by periodically calling the underlying OpsWorks.describeDeploymentsoperation every 15 seconds (at most 40 times). Wait until a deployment has completed successfully.
    */
   waitFor(state: "deploymentSuccessful", callback?: (err: AWSError, data: OpsWorks.Types.DescribeDeploymentsResult) => void): Request<OpsWorks.Types.DescribeDeploymentsResult, AWSError>;
   /**
@@ -846,7 +850,7 @@ declare namespace OpsWorks {
      */
     DefaultInstanceProfileArn?: String;
     /**
-     * The stack's operating system, which must be set to one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7     Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.   The default option is the parent stack's operating system. For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems.  You can specify a different Linux operating system for the cloned stack, but you cannot change from Linux to Windows or Windows to Linux. 
+     * The stack's operating system, which must be set to one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7     Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.   The default option is the parent stack's operating system. For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems.  You can specify a different Linux operating system for the cloned stack, but you cannot change from Linux to Windows or Windows to Linux. 
      */
     DefaultOs?: String;
     /**
@@ -1126,7 +1130,7 @@ declare namespace OpsWorks {
      */
     Hostname?: String;
     /**
-     * The instance's operating system, which must be set to one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom.   For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems. The default option is the current Amazon Linux version. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. Block device mappings are not supported if the value is Custom. For more information on the supported operating systems, see Operating SystemsFor more information on how to use custom AMIs with AWS OpsWorks Stacks, see Using Custom AMIs.
+     * The instance's operating system, which must be set to one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom.   For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems. The default option is the current Amazon Linux version. If you set this parameter to Custom, you must use the CreateInstance action's AmiId parameter to specify the custom AMI that you want to use. Block device mappings are not supported if the value is Custom. For more information on the supported operating systems, see Operating SystemsFor more information on how to use custom AMIs with AWS OpsWorks Stacks, see Using Custom AMIs.
      */
     Os?: String;
     /**
@@ -1290,7 +1294,7 @@ declare namespace OpsWorks {
      */
     DefaultInstanceProfileArn: String;
     /**
-     * The stack's default operating system, which is installed on every instance unless you specify a different operating system when you create the instance. You can specify one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information, see  Using Custom AMIs.   The default option is the current Amazon Linux version. For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems.
+     * The stack's default operating system, which is installed on every instance unless you specify a different operating system when you create the instance. You can specify one of the following.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information, see  Using Custom AMIs.   The default option is the current Amazon Linux version. For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems.
      */
     DefaultOs?: String;
     /**
@@ -1372,7 +1376,7 @@ declare namespace OpsWorks {
   export type DailyAutoScalingSchedule = {[key: string]: Switch};
   export interface DataSource {
     /**
-     * The data source's type, AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance, or RdsDbInstance.
+     * The data source's type, AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance, RdsDbInstance, or None.
      */
     Type?: String;
     /**
@@ -1568,15 +1572,15 @@ declare namespace OpsWorks {
   }
   export interface DescribeDeploymentsRequest {
     /**
-     * The stack ID. If you include this parameter, DescribeDeployments returns a description of the commands associated with the specified stack.
+     * The stack ID. If you include this parameter, the command returns a description of the commands associated with the specified stack.
      */
     StackId?: String;
     /**
-     * The app ID. If you include this parameter, DescribeDeployments returns a description of the commands associated with the specified app.
+     * The app ID. If you include this parameter, the command returns a description of the commands associated with the specified app.
      */
     AppId?: String;
     /**
-     * An array of deployment IDs to be described. If you include this parameter, DescribeDeployments returns a description of the specified deployments. Otherwise, it returns a description of every deployment.
+     * An array of deployment IDs to be described. If you include this parameter, the command returns a description of the specified deployments. Otherwise, it returns a description of every deployment.
      */
     DeploymentIds?: Strings;
   }
@@ -1703,6 +1707,9 @@ declare namespace OpsWorks {
      * A UserProfile object that describes the user's SSH information.
      */
     UserProfile?: SelfUserProfile;
+  }
+  export interface DescribeOperatingSystemsResponse {
+    OperatingSystems?: OperatingSystems;
   }
   export interface DescribePermissionsRequest {
     /**
@@ -1895,7 +1902,7 @@ declare namespace OpsWorks {
      */
     VolumeSize?: Integer;
     /**
-     * The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned IOPS (SSD) volumes, and standard for Magnetic volumes.
+     * The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned IOPS (SSD) volumes, st1 for Throughput Optimized hard disk drives (HDD), sc1 for Cold HDD,and standard for Magnetic volumes. If you specify the io1 volume type, you must also specify a value for the Iops attribute. The maximum ratio of provisioned IOPS to requested volume size (in GiB) is 50:1. AWS uses the default volume size (in GiB) specified in the AMI attributes to set IOPS to 50 x (volume size).
      */
     VolumeType?: VolumeType;
     /**
@@ -2263,6 +2270,7 @@ declare namespace OpsWorks {
      * The number of instances with start_failed status.
      */
     StartFailed?: Integer;
+    StopFailed?: Integer;
     /**
      * The number of instances with stopped status.
      */
@@ -2429,6 +2437,48 @@ declare namespace OpsWorks {
   export type MaxResults = number;
   export type Minute = number;
   export type NextToken = string;
+  export interface OperatingSystem {
+    /**
+     * The name of the operating system, such as Amazon Linux 2017.09.
+     */
+    Name?: String;
+    /**
+     * The ID of a supported operating system, such as Amazon Linux 2017.09.
+     */
+    Id?: String;
+    /**
+     * The type of a supported operating system, either Linux or Windows.
+     */
+    Type?: String;
+    /**
+     * Supported configuration manager name and versions for an AWS OpsWorks Stacks operating system.
+     */
+    ConfigurationManagers?: OperatingSystemConfigurationManagers;
+    /**
+     * A short name for the operating system manufacturer.
+     */
+    ReportedName?: String;
+    /**
+     * The version of the operating system, including the release and edition, if applicable.
+     */
+    ReportedVersion?: String;
+    /**
+     * Indicates that an operating system is not supported for new instances.
+     */
+    Supported?: Boolean;
+  }
+  export interface OperatingSystemConfigurationManager {
+    /**
+     * The name of the configuration manager, which is Chef.
+     */
+    Name?: String;
+    /**
+     * The versions of the configuration manager that are supported by an operating system.
+     */
+    Version?: String;
+  }
+  export type OperatingSystemConfigurationManagers = OperatingSystemConfigurationManager[];
+  export type OperatingSystems = OperatingSystem[];
   export type Parameters = {[key: string]: String};
   export interface Permission {
     /**
@@ -2982,6 +3032,7 @@ declare namespace OpsWorks {
      * The instance ID.
      */
     InstanceId: String;
+    Force?: Boolean;
   }
   export interface StopStackRequest {
     /**
@@ -3135,7 +3186,7 @@ declare namespace OpsWorks {
      */
     Hostname?: String;
     /**
-     * The instance's operating system, which must be set to one of the following. You cannot update an instance that is using a custom AMI.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems. The default option is the current Amazon Linux version. If you set this parameter to Custom, you must use the AmiId parameter to specify the custom AMI that you want to use. For more information on the supported operating systems, see Operating Systems. For more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.  You can specify a different Linux operating system for the updated stack, but you cannot change from Linux to Windows or Windows to Linux. 
+     * The instance's operating system, which must be set to one of the following. You cannot update an instance that is using a custom AMI.   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems. The default option is the current Amazon Linux version. If you set this parameter to Custom, you must use the AmiId parameter to specify the custom AMI that you want to use. For more information on the supported operating systems, see Operating Systems. For more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.  You can specify a different Linux operating system for the updated stack, but you cannot change from Linux to Windows or Windows to Linux. 
      */
     Os?: String;
     /**
@@ -3275,7 +3326,7 @@ declare namespace OpsWorks {
      */
     DefaultInstanceProfileArn?: String;
     /**
-     * The stack's operating system, which must be set to one of the following:   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.   The default option is the stack's current operating system. For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems.
+     * The stack's operating system, which must be set to one of the following:   A supported Linux operating system: An Amazon Linux version, such as Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.   A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.    CentOS Linux 7     Red Hat Enterprise Linux 7    A supported Windows operating system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.   A custom AMI: Custom. You specify the custom AMI you want to use when you create instances. For more information on how to use custom AMIs with OpsWorks, see Using Custom AMIs.   The default option is the stack's current operating system. For more information on the supported operating systems, see AWS OpsWorks Stacks Operating Systems.
      */
     DefaultOs?: String;
     /**
@@ -3434,6 +3485,7 @@ declare namespace OpsWorks {
      * For PIOPS volumes, the IOPS per disk.
      */
     Iops?: Integer;
+    Encrypted?: Boolean;
   }
   export interface VolumeConfiguration {
     /**
@@ -3453,13 +3505,17 @@ declare namespace OpsWorks {
      */
     Size: Integer;
     /**
-     * The volume type:    standard - Magnetic    io1 - Provisioned IOPS (SSD)    gp2 - General Purpose (SSD)  
+     * The volume type. For more information, see  Amazon EBS Volume Types.    standard - Magnetic    io1 - Provisioned IOPS (SSD)    gp2 - General Purpose (SSD)    st1 - Throughput Optimized hard disk drive (HDD)    sc1 - Cold HDD  
      */
     VolumeType?: String;
     /**
      * For PIOPS volumes, the IOPS per disk.
      */
     Iops?: Integer;
+    /**
+     * Specifies whether an Amazon EBS volume is encrypted. For more information, see Amazon EBS Encryption.
+     */
+    Encrypted?: Boolean;
   }
   export type VolumeConfigurations = VolumeConfiguration[];
   export type VolumeType = "gp2"|"io1"|"standard"|string;

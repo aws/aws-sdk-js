@@ -12,11 +12,11 @@ declare class Cloud9 extends Service {
   constructor(options?: Cloud9.Types.ClientConfiguration)
   config: Config & Cloud9.Types.ClientConfiguration;
   /**
-   * Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then hosts the environment on the instance.
+   * Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
    */
   createEnvironmentEC2(params: Cloud9.Types.CreateEnvironmentEC2Request, callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentEC2Result) => void): Request<Cloud9.Types.CreateEnvironmentEC2Result, AWSError>;
   /**
-   * Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then hosts the environment on the instance.
+   * Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
    */
   createEnvironmentEC2(callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentEC2Result) => void): Request<Cloud9.Types.CreateEnvironmentEC2Result, AWSError>;
   /**
@@ -28,11 +28,11 @@ declare class Cloud9 extends Service {
    */
   createEnvironmentMembership(callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentMembershipResult) => void): Request<Cloud9.Types.CreateEnvironmentMembershipResult, AWSError>;
   /**
-   * Deletes an AWS Cloud9 development environment. If the environment is hosted on an Amazon Elastic Compute Cloud (Amazon EC2) instance, also terminates the instance.
+   * Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.
    */
   deleteEnvironment(params: Cloud9.Types.DeleteEnvironmentRequest, callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentResult) => void): Request<Cloud9.Types.DeleteEnvironmentResult, AWSError>;
   /**
-   * Deletes an AWS Cloud9 development environment. If the environment is hosted on an Amazon Elastic Compute Cloud (Amazon EC2) instance, also terminates the instance.
+   * Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.
    */
   deleteEnvironment(callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentResult) => void): Request<Cloud9.Types.DeleteEnvironmentResult, AWSError>;
   /**
@@ -110,7 +110,7 @@ declare namespace Cloud9 {
      */
     clientRequestToken?: ClientRequestToken;
     /**
-     * The type of instance to host the environment on (for example, t2.micro).
+     * The type of instance to connect to the environment (for example, t2.micro).
      */
     instanceType: InstanceType;
     /**
@@ -222,7 +222,7 @@ declare namespace Cloud9 {
   }
   export interface DescribeEnvironmentsRequest {
     /**
-     * The IDs of invidividual environments to get information about.
+     * The IDs of individual environments to get information about.
      */
     environmentIds: BoundedEnvironmentIdList;
   }
@@ -246,7 +246,7 @@ declare namespace Cloud9 {
      */
     description?: EnvironmentDescription;
     /**
-     * The type of environment. Valid values include the following:    ec2: An environment hosted on an Amazon Elastic Compute Cloud (Amazon EC2) instance.    ssh: An environment hosted on your own server.  
+     * The type of environment. Valid values include the following:    ec2: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.    ssh: Your own server connects to the environment.  
      */
     type?: EnvironmentType;
     /**
@@ -342,7 +342,7 @@ declare namespace Cloud9 {
      */
     environmentId: EnvironmentId;
     /**
-     * Any replacement name for the environment.
+     * A replacement name for the environment.
      */
     name?: EnvironmentName;
     /**

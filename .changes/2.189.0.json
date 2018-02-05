@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Kinesis",
+        "description": "Using ListShards a Kinesis Data Streams customer or client can get information about shards in a data stream (including meta-data for each shard) without obtaining data stream level information."
+    },
+    {
+        "type": "feature",
+        "category": "OpsWorks",
+        "description": "AWS OpsWorks Stacks supports EBS encryption and HDD volume types. Also, a new DescribeOperatingSystems API is available, which lists all operating systems supported by OpsWorks Stacks."
+    }
+]

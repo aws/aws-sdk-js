@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.188.0
+// AWS SDK for JavaScript v2.189.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -66875,41 +66875,7 @@ module.exports={
               "StreamARN": {},
               "StreamStatus": {},
               "Shards": {
-                "type": "list",
-                "member": {
-                  "type": "structure",
-                  "required": [
-                    "ShardId",
-                    "HashKeyRange",
-                    "SequenceNumberRange"
-                  ],
-                  "members": {
-                    "ShardId": {},
-                    "ParentShardId": {},
-                    "AdjacentParentShardId": {},
-                    "HashKeyRange": {
-                      "type": "structure",
-                      "required": [
-                        "StartingHashKey",
-                        "EndingHashKey"
-                      ],
-                      "members": {
-                        "StartingHashKey": {},
-                        "EndingHashKey": {}
-                      }
-                    },
-                    "SequenceNumberRange": {
-                      "type": "structure",
-                      "required": [
-                        "StartingSequenceNumber"
-                      ],
-                      "members": {
-                        "StartingSequenceNumber": {},
-                        "EndingSequenceNumber": {}
-                      }
-                    }
-                  }
-                }
+                "shape": "Sl"
               },
               "HasMoreShards": {
                 "type": "boolean"
@@ -66921,7 +66887,7 @@ module.exports={
                 "type": "timestamp"
               },
               "EnhancedMonitoring": {
-                "shape": "Ss"
+                "shape": "St"
               },
               "EncryptionType": {},
               "KeyId": {}
@@ -66968,7 +66934,7 @@ module.exports={
                 "type": "timestamp"
               },
               "EnhancedMonitoring": {
-                "shape": "Ss"
+                "shape": "St"
               },
               "EncryptionType": {},
               "KeyId": {},
@@ -66990,12 +66956,12 @@ module.exports={
         "members": {
           "StreamName": {},
           "ShardLevelMetrics": {
-            "shape": "Su"
+            "shape": "Sv"
           }
         }
       },
       "output": {
-        "shape": "S12"
+        "shape": "S13"
       }
     },
     "EnableEnhancedMonitoring": {
@@ -67008,12 +66974,12 @@ module.exports={
         "members": {
           "StreamName": {},
           "ShardLevelMetrics": {
-            "shape": "Su"
+            "shape": "Sv"
           }
         }
       },
       "output": {
-        "shape": "S12"
+        "shape": "S13"
       }
     },
     "GetRecords": {
@@ -67101,6 +67067,31 @@ module.exports={
           "RetentionPeriodHours": {
             "type": "integer"
           }
+        }
+      }
+    },
+    "ListShards": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "StreamName": {},
+          "NextToken": {},
+          "ExclusiveStartShardId": {},
+          "MaxResults": {
+            "type": "integer"
+          },
+          "StreamCreationTimestamp": {
+            "type": "timestamp"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Shards": {
+            "shape": "Sl"
+          },
+          "NextToken": {}
         }
       }
     },
@@ -67362,30 +67353,67 @@ module.exports={
     }
   },
   "shapes": {
-    "Ss": {
+    "Sl": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "ShardId",
+          "HashKeyRange",
+          "SequenceNumberRange"
+        ],
+        "members": {
+          "ShardId": {},
+          "ParentShardId": {},
+          "AdjacentParentShardId": {},
+          "HashKeyRange": {
+            "type": "structure",
+            "required": [
+              "StartingHashKey",
+              "EndingHashKey"
+            ],
+            "members": {
+              "StartingHashKey": {},
+              "EndingHashKey": {}
+            }
+          },
+          "SequenceNumberRange": {
+            "type": "structure",
+            "required": [
+              "StartingSequenceNumber"
+            ],
+            "members": {
+              "StartingSequenceNumber": {},
+              "EndingSequenceNumber": {}
+            }
+          }
+        }
+      }
+    },
+    "St": {
       "type": "list",
       "member": {
         "type": "structure",
         "members": {
           "ShardLevelMetrics": {
-            "shape": "Su"
+            "shape": "Sv"
           }
         }
       }
     },
-    "Su": {
+    "Sv": {
       "type": "list",
       "member": {}
     },
-    "S12": {
+    "S13": {
       "type": "structure",
       "members": {
         "StreamName": {},
         "CurrentShardLevelMetrics": {
-          "shape": "Su"
+          "shape": "Sv"
         },
         "DesiredShardLevelMetrics": {
-          "shape": "Su"
+          "shape": "Sv"
         }
       }
     }
@@ -76571,6 +76599,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "AWS OpsWorks",
+    "serviceId": "OpsWorks",
     "signatureVersion": "v4",
     "targetPrefix": "OpsWorks_20130218",
     "uid": "opsworks-2013-02-18"
@@ -77522,6 +77551,39 @@ module.exports={
         }
       }
     },
+    "DescribeOperatingSystems": {
+      "output": {
+        "type": "structure",
+        "members": {
+          "OperatingSystems": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Name": {},
+                "Id": {},
+                "Type": {},
+                "ConfigurationManagers": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "members": {
+                      "Name": {},
+                      "Version": {}
+                    }
+                  }
+                },
+                "ReportedName": {},
+                "ReportedVersion": {},
+                "Supported": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "DescribePermissions": {
       "input": {
         "type": "structure",
@@ -77760,6 +77822,9 @@ module.exports={
                   "StartFailed": {
                     "type": "integer"
                   },
+                  "StopFailed": {
+                    "type": "integer"
+                  },
                   "Stopped": {
                     "type": "integer"
                   },
@@ -77861,7 +77926,7 @@ module.exports={
               "members": {
                 "InstanceId": {},
                 "AutoScalingSchedule": {
-                  "shape": "S46"
+                  "shape": "S4b"
                 }
               }
             }
@@ -77935,6 +78000,9 @@ module.exports={
                 "VolumeType": {},
                 "Iops": {
                   "type": "integer"
+                },
+                "Encrypted": {
+                  "type": "boolean"
                 }
               }
             }
@@ -78032,7 +78100,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Tags": {
-            "shape": "S4v"
+            "shape": "S50"
           },
           "NextToken": {}
         }
@@ -78200,7 +78268,7 @@ module.exports={
         "members": {
           "InstanceId": {},
           "AutoScalingSchedule": {
-            "shape": "S46"
+            "shape": "S4b"
           }
         }
       }
@@ -78234,7 +78302,10 @@ module.exports={
           "InstanceId"
         ],
         "members": {
-          "InstanceId": {}
+          "InstanceId": {},
+          "Force": {
+            "type": "boolean"
+          }
         }
       }
     },
@@ -78259,7 +78330,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "Tags": {
-            "shape": "S4v"
+            "shape": "S50"
           }
         }
       }
@@ -78705,6 +78776,9 @@ module.exports={
           "VolumeType": {},
           "Iops": {
             "type": "integer"
+          },
+          "Encrypted": {
+            "type": "boolean"
           }
         }
       }
@@ -78771,38 +78845,38 @@ module.exports={
         }
       }
     },
-    "S46": {
+    "S4b": {
       "type": "structure",
       "members": {
         "Monday": {
-          "shape": "S47"
+          "shape": "S4c"
         },
         "Tuesday": {
-          "shape": "S47"
+          "shape": "S4c"
         },
         "Wednesday": {
-          "shape": "S47"
+          "shape": "S4c"
         },
         "Thursday": {
-          "shape": "S47"
+          "shape": "S4c"
         },
         "Friday": {
-          "shape": "S47"
+          "shape": "S4c"
         },
         "Saturday": {
-          "shape": "S47"
+          "shape": "S4c"
         },
         "Sunday": {
-          "shape": "S47"
+          "shape": "S4c"
         }
       }
     },
-    "S47": {
+    "S4c": {
       "type": "map",
       "key": {},
       "value": {}
     },
-    "S4v": {
+    "S50": {
       "type": "map",
       "key": {},
       "value": {}
@@ -78890,7 +78964,7 @@ module.exports={
       "delay": 15,
       "operation": "DescribeDeployments",
       "maxAttempts": 40,
-      "description": "Wait until a deployment has completed successfully",
+      "description": "Wait until a deployment has completed successfully.",
       "acceptors": [
         {
           "expected": "successful",
@@ -79038,12 +79112,6 @@ module.exports={
         },
         {
           "expected": "booting",
-          "matcher": "pathAny",
-          "state": "failure",
-          "argument": "Instances[].Status"
-        },
-        {
-          "expected": "online",
           "matcher": "pathAny",
           "state": "failure",
           "argument": "Instances[].Status"
@@ -121461,7 +121529,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.188.0',
+  VERSION: '2.189.0',
 
   /**
    * @api private
@@ -139336,10 +139404,13 @@ var reIsUint = /^(?:0|[1-9]\d*)$/;
  * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
  */
 function isIndex(value, length) {
+  var type = typeof value;
   length = length == null ? MAX_SAFE_INTEGER : length;
+
   return !!length &&
-    (typeof value == 'number' || reIsUint.test(value)) &&
-    (value > -1 && value % 1 == 0 && value < length);
+    (type == 'number' ||
+      (type != 'symbol' && reIsUint.test(value))) &&
+        (value > -1 && value % 1 == 0 && value < length);
 }
 
 module.exports = isIndex;
@@ -140126,8 +140197,7 @@ module.exports = stackSet;
 var memoizeCapped = require('./_memoizeCapped');
 
 /** Used to match property names within property paths. */
-var reLeadingDot = /^\./,
-    rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
+var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
 
 /** Used to match backslashes in property paths. */
 var reEscapeChar = /\\(\\)?/g;
@@ -140141,11 +140211,11 @@ var reEscapeChar = /\\(\\)?/g;
  */
 var stringToPath = memoizeCapped(function(string) {
   var result = [];
-  if (reLeadingDot.test(string)) {
+  if (string.charCodeAt(0) === 46 /* . */) {
     result.push('');
   }
-  string.replace(rePropName, function(match, number, quote, string) {
-    result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
+  string.replace(rePropName, function(match, number, quote, subString) {
+    result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
   });
   return result;
 });
@@ -145372,7 +145442,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.188.0
+// AWS SDK for JavaScript v2.189.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

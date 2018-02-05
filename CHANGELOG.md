@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.188.0-->
+<!--LATEST=2.189.0-->
 <!--ENTRYINSERT-->
+
+## 2.189.0
+* feature: Kinesis: Using ListShards a Kinesis Data Streams customer or client can get information about shards in a data stream (including meta-data for each shard) without obtaining data stream level information.
+* feature: OpsWorks: AWS OpsWorks Stacks supports EBS encryption and HDD volume types. Also, a new DescribeOperatingSystems API is available, which lists all operating systems supported by OpsWorks Stacks.
 
 ## 2.188.0
 * feature: DeviceFarm: Add InteractionMode in CreateRemoteAccessSession for DirectDeviceAccess feature.
