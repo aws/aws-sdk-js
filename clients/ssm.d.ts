@@ -1746,7 +1746,7 @@ declare namespace SSM {
      */
     Content: DocumentContent;
     /**
-     * A name for the Systems Manager document.
+     * A name for the Systems Manager document.  Do not use the following to begin the names of documents you create. They are reserved by AWS for use as document prefixes:    aws     amazon     amzn    
      */
     Name: DocumentName;
     /**
@@ -1830,6 +1830,10 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+     */
+    ApprovedPatchesEnableNonSecurity?: Boolean;
+    /**
      * A list of explicitly rejected patches for the baseline.
      */
     RejectedPatches?: PatchIdList;
@@ -1837,6 +1841,10 @@ declare namespace SSM {
      * A description of the patch baseline.
      */
     Description?: BaselineDescription;
+    /**
+     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     */
+    Sources?: PatchSourceList;
     /**
      * User-provided idempotency token.
      */
@@ -3578,6 +3586,10 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+     */
+    ApprovedPatchesEnableNonSecurity?: Boolean;
+    /**
      * A list of explicitly rejected patches for the baseline.
      */
     RejectedPatches?: PatchIdList;
@@ -3597,6 +3609,10 @@ declare namespace SSM {
      * A description of the patch baseline.
      */
     Description?: BaselineDescription;
+    /**
+     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     */
+    Sources?: PatchSourceList;
   }
   export type IPAddress = string;
   export type IamRole = string;
@@ -4793,7 +4809,7 @@ declare namespace SSM {
   export type NotificationEvent = "All"|"InProgress"|"Success"|"TimedOut"|"Cancelled"|"Failed"|string;
   export type NotificationEventList = NotificationEvent[];
   export type NotificationType = "Command"|"Invocation"|string;
-  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|string;
+  export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|string;
   export type OwnerInformation = string;
   export type PSParameterName = string;
   export type PSParameterValue = string;
@@ -5119,6 +5135,10 @@ declare namespace SSM {
      * The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline.
      */
     ApproveAfterDays: ApproveAfterDays;
+    /**
+     * For instances identified by the approval rule filters, enables a patch baseline to apply non-security updates available in the specified repository. The default value is 'false'. Applies to Linux instances only.
+     */
+    EnableNonSecurity?: Boolean;
   }
   export interface PatchRuleGroup {
     /**
@@ -5128,6 +5148,25 @@ declare namespace SSM {
   }
   export type PatchRuleList = PatchRule[];
   export type PatchSeverity = string;
+  export interface PatchSource {
+    /**
+     * The name specified to identify the patch source.
+     */
+    Name: PatchSourceName;
+    /**
+     * The specific operating system versions a patch repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7". For lists of supported product values, see PatchFilter.
+     */
+    Products: PatchSourceProductList;
+    /**
+     * The value of the yum repo configuration. For example:  cachedir=/var/cache/yum/$basesearch   $releasever   keepcache=0   debualevel=2 
+     */
+    Configuration: PatchSourceConfiguration;
+  }
+  export type PatchSourceConfiguration = string;
+  export type PatchSourceList = PatchSource[];
+  export type PatchSourceName = string;
+  export type PatchSourceProduct = string;
+  export type PatchSourceProductList = PatchSourceProduct[];
   export interface PatchStatus {
     /**
      * The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED, EXPLICIT_REJECTED).
@@ -5190,7 +5229,7 @@ declare namespace SSM {
   }
   export interface PutParameterRequest {
     /**
-     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: /Dev/DBServer/MySQL/db-string13   The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters.  
+     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For example: /Dev/DBServer/MySQL/db-string13  For information about parameter name requirements and restrictions, see About Creating Systems Manager Parameters in the AWS Systems Manager User Guide.  The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for the fully qualified parameter name is 1011 characters.  
      */
     Name: PSParameterName;
     /**
@@ -6188,6 +6227,10 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+     */
+    ApprovedPatchesEnableNonSecurity?: Boolean;
+    /**
      * A list of explicitly rejected patches for the baseline.
      */
     RejectedPatches?: PatchIdList;
@@ -6195,6 +6238,14 @@ declare namespace SSM {
      * A description of the patch baseline.
      */
     Description?: BaselineDescription;
+    /**
+     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     */
+    Sources?: PatchSourceList;
+    /**
+     * If True, then all fields that are required by the CreatePatchBaseline action are also required for this API request. Optional fields that are not specified are set to null.
+     */
+    Replace?: Boolean;
   }
   export interface UpdatePatchBaselineResult {
     /**
@@ -6226,6 +6277,10 @@ declare namespace SSM {
      */
     ApprovedPatchesComplianceLevel?: PatchComplianceLevel;
     /**
+     * Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+     */
+    ApprovedPatchesEnableNonSecurity?: Boolean;
+    /**
      * A list of explicitly rejected patches for the baseline.
      */
     RejectedPatches?: PatchIdList;
@@ -6241,6 +6296,10 @@ declare namespace SSM {
      * A description of the Patch Baseline.
      */
     Description?: BaselineDescription;
+    /**
+     * Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.
+     */
+    Sources?: PatchSourceList;
   }
   export type Url = string;
   export type Version = string;

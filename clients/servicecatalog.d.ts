@@ -84,6 +84,14 @@ declare class ServiceCatalog extends Service {
    */
   createProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
   /**
+   * Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, it's status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
+   */
+  createProvisionedProductPlan(params: ServiceCatalog.Types.CreateProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.CreateProvisionedProductPlanOutput, AWSError>;
+  /**
+   * Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, it's status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
+   */
+  createProvisionedProductPlan(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.CreateProvisionedProductPlanOutput, AWSError>;
+  /**
    * Creates a provisioning artifact (also known as a version) for the specified product. You cannot create a provisioning artifact for a product that was shared with you.
    */
   createProvisioningArtifact(params: ServiceCatalog.Types.CreateProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
@@ -131,6 +139,14 @@ declare class ServiceCatalog extends Service {
    * Deletes the specified product. You cannot delete a product if it was shared with you or is associated with a portfolio.
    */
   deleteProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProductOutput) => void): Request<ServiceCatalog.Types.DeleteProductOutput, AWSError>;
+  /**
+   * Deletes the specified plan.
+   */
+  deleteProvisionedProductPlan(params: ServiceCatalog.Types.DeleteProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.DeleteProvisionedProductPlanOutput, AWSError>;
+  /**
+   * Deletes the specified plan.
+   */
+  deleteProvisionedProductPlan(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.DeleteProvisionedProductPlanOutput, AWSError>;
   /**
    * Deletes the specified provisioning artifact (also known as a version) for the specified product. You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.
    */
@@ -196,6 +212,14 @@ declare class ServiceCatalog extends Service {
    */
   describeProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisionedProductOutput) => void): Request<ServiceCatalog.Types.DescribeProvisionedProductOutput, AWSError>;
   /**
+   * Gets information about the resource changes for the specified plan.
+   */
+  describeProvisionedProductPlan(params: ServiceCatalog.Types.DescribeProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.DescribeProvisionedProductPlanOutput, AWSError>;
+  /**
+   * Gets information about the resource changes for the specified plan.
+   */
+  describeProvisionedProductPlan(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.DescribeProvisionedProductPlanOutput, AWSError>;
+  /**
    * Gets information about the specified provisioning artifact (also known as a version) for the specified product.
    */
   describeProvisioningArtifact(params: ServiceCatalog.Types.DescribeProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningArtifactOutput, AWSError>;
@@ -204,11 +228,11 @@ declare class ServiceCatalog extends Service {
    */
   describeProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningArtifactOutput, AWSError>;
   /**
-   * Gets information about the configuration required to provision the specified product using the specified provisioning artifact. If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to ProvisionProduct, do not include conflicted TagOption keys as tags, or this will cause the error "Parameter validation failed: Missing required parameter in Tags[N]:Value" and tag the provisioned product with the value sc-tagoption-conflict-portfolioId-productId.
+   * Gets information about the configuration required to provision the specified product using the specified provisioning artifact. If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to ProvisionProduct, do not include conflicted TagOption keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[N]:Value". Tag the provisioned product with the value sc-tagoption-conflict-portfolioId-productId.
    */
   describeProvisioningParameters(params: ServiceCatalog.Types.DescribeProvisioningParametersInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningParametersOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningParametersOutput, AWSError>;
   /**
-   * Gets information about the configuration required to provision the specified product using the specified provisioning artifact. If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to ProvisionProduct, do not include conflicted TagOption keys as tags, or this will cause the error "Parameter validation failed: Missing required parameter in Tags[N]:Value" and tag the provisioned product with the value sc-tagoption-conflict-portfolioId-productId.
+   * Gets information about the configuration required to provision the specified product using the specified provisioning artifact. If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to ProvisionProduct, do not include conflicted TagOption keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[N]:Value". Tag the provisioned product with the value sc-tagoption-conflict-portfolioId-productId.
    */
   describeProvisioningParameters(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningParametersOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningParametersOutput, AWSError>;
   /**
@@ -251,6 +275,14 @@ declare class ServiceCatalog extends Service {
    * Disassociates the specified TagOption from the specified resource.
    */
   disassociateTagOptionFromResource(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
+  /**
+   * Provisions or modifies a product based on the resource changes for the specified plan.
+   */
+  executeProvisionedProductPlan(params: ServiceCatalog.Types.ExecuteProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput, AWSError>;
+  /**
+   * Provisions or modifies a product based on the resource changes for the specified plan.
+   */
+  executeProvisionedProductPlan(callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput, AWSError>;
   /**
    * Lists all portfolios for which sharing was accepted by this account.
    */
@@ -308,6 +340,14 @@ declare class ServiceCatalog extends Service {
    */
   listPrincipalsForPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.ListPrincipalsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListPrincipalsForPortfolioOutput, AWSError>;
   /**
+   * Lists the plans for the specified provisioned product or all plans the user has access to.
+   */
+  listProvisionedProductPlans(params: ServiceCatalog.Types.ListProvisionedProductPlansInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisionedProductPlansOutput) => void): Request<ServiceCatalog.Types.ListProvisionedProductPlansOutput, AWSError>;
+  /**
+   * Lists the plans for the specified provisioned product or all plans the user has access to.
+   */
+  listProvisionedProductPlans(callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisionedProductPlansOutput) => void): Request<ServiceCatalog.Types.ListProvisionedProductPlansOutput, AWSError>;
+  /**
    * Lists all provisioning artifacts (also known as versions) for the specified product.
    */
   listProvisioningArtifacts(params: ServiceCatalog.Types.ListProvisioningArtifactsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsOutput, AWSError>;
@@ -340,11 +380,11 @@ declare class ServiceCatalog extends Service {
    */
   listTagOptions(callback?: (err: AWSError, data: ServiceCatalog.Types.ListTagOptionsOutput) => void): Request<ServiceCatalog.Types.ListTagOptionsOutput, AWSError>;
   /**
-   * Provisions the specified product. A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using DescribeRecord. If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this will cause the error "Parameter validation failed: Missing required parameter in Tags[N]:Value".
+   * Provisions the specified product. A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using DescribeRecord. If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[N]:Value".
    */
   provisionProduct(params: ServiceCatalog.Types.ProvisionProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
   /**
-   * Provisions the specified product. A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using DescribeRecord. If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this will cause the error "Parameter validation failed: Missing required parameter in Tags[N]:Value".
+   * Provisions the specified product. A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using DescribeRecord. If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[N]:Value".
    */
   provisionProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
   /**
@@ -356,11 +396,11 @@ declare class ServiceCatalog extends Service {
    */
   rejectPortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.RejectPortfolioShareOutput) => void): Request<ServiceCatalog.Types.RejectPortfolioShareOutput, AWSError>;
   /**
-   * Lists the provisioned products that are available (not terminated).
+   * Lists the provisioned products that are available (not terminated). To use additional filtering, see SearchProvisionedProducts.
    */
   scanProvisionedProducts(params: ServiceCatalog.Types.ScanProvisionedProductsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ScanProvisionedProductsOutput) => void): Request<ServiceCatalog.Types.ScanProvisionedProductsOutput, AWSError>;
   /**
-   * Lists the provisioned products that are available (not terminated).
+   * Lists the provisioned products that are available (not terminated). To use additional filtering, see SearchProvisionedProducts.
    */
   scanProvisionedProducts(callback?: (err: AWSError, data: ServiceCatalog.Types.ScanProvisionedProductsOutput) => void): Request<ServiceCatalog.Types.ScanProvisionedProductsOutput, AWSError>;
   /**
@@ -379,6 +419,14 @@ declare class ServiceCatalog extends Service {
    * Gets information about the products for the specified portfolio or all products.
    */
   searchProductsAsAdmin(callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProductsAsAdminOutput) => void): Request<ServiceCatalog.Types.SearchProductsAsAdminOutput, AWSError>;
+  /**
+   * Gets information about the provisioned products that meet the specified criteria.
+   */
+  searchProvisionedProducts(params: ServiceCatalog.Types.SearchProvisionedProductsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProvisionedProductsOutput) => void): Request<ServiceCatalog.Types.SearchProvisionedProductsOutput, AWSError>;
+  /**
+   * Gets information about the provisioned products that meet the specified criteria.
+   */
+  searchProvisionedProducts(callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProvisionedProductsOutput) => void): Request<ServiceCatalog.Types.SearchProvisionedProductsOutput, AWSError>;
   /**
    * Terminates the specified provisioned product. This operation does not delete any records associated with the provisioned product. You can check the status of this request using DescribeRecord.
    */
@@ -521,6 +569,16 @@ declare namespace ServiceCatalog {
   export interface AssociateTagOptionWithResourceOutput {
   }
   export type AttributeValue = string;
+  export type CausingEntity = string;
+  export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string;
+  export interface CloudWatchDashboard {
+    /**
+     * The name of the CloudWatch dashboard.
+     */
+    Name?: CloudWatchDashboardName;
+  }
+  export type CloudWatchDashboardName = string;
+  export type CloudWatchDashboards = CloudWatchDashboard[];
   export type ConstraintDescription = string;
   export interface ConstraintDetail {
     /**
@@ -655,7 +713,7 @@ declare namespace ServiceCatalog {
      */
     ProviderName: ProviderName;
     /**
-     * The tags to associate with the portfolio.
+     * One or more tags.
      */
     Tags?: AddTags;
     /**
@@ -727,7 +785,7 @@ declare namespace ServiceCatalog {
      */
     ProductType: ProductType;
     /**
-     * The tags to associate with the product.
+     * One or more tags.
      */
     Tags?: AddTags;
     /**
@@ -752,6 +810,74 @@ declare namespace ServiceCatalog {
      * Information about the tags associated with the product.
      */
     Tags?: Tags;
+  }
+  export interface CreateProvisionedProductPlanInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The name of the plan.
+     */
+    PlanName: ProvisionedProductPlanName;
+    /**
+     * The plan type.
+     */
+    PlanType: ProvisionedProductPlanType;
+    /**
+     * Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.
+     */
+    NotificationArns?: NotificationArns;
+    /**
+     * The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use ListLaunchPaths.
+     */
+    PathId?: Id;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * A user-friendly name for the provisioned product. This value must be unique for the AWS account and cannot be updated after the product is provisioned.
+     */
+    ProvisionedProductName: ProvisionedProductName;
+    /**
+     * The identifier of the provisioning artifact.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * Parameters specified by the administrator that are required for provisioning the product.
+     */
+    ProvisioningParameters?: UpdateProvisioningParameters;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
+     */
+    IdempotencyToken: IdempotencyToken;
+    /**
+     * One or more tags.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateProvisionedProductPlanOutput {
+    /**
+     * The name of the plan.
+     */
+    PlanName?: ProvisionedProductPlanName;
+    /**
+     * The plan identifier.
+     */
+    PlanId?: Id;
+    /**
+     * The product identifier.
+     */
+    ProvisionProductId?: Id;
+    /**
+     * The user-friendly name of the provisioned product.
+     */
+    ProvisionedProductName?: ProvisionedProductName;
+    /**
+     * The identifier of the provisioning artifact.
+     */
+    ProvisioningArtifactId?: Id;
   }
   export interface CreateProvisioningArtifactInput {
     /**
@@ -855,6 +981,22 @@ declare namespace ServiceCatalog {
     Id: Id;
   }
   export interface DeleteProductOutput {
+  }
+  export interface DeleteProvisionedProductPlanInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The plan identifier.
+     */
+    PlanId: Id;
+    /**
+     * If set to true, AWS Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.
+     */
+    IgnoreErrors?: IgnoreErrors;
+  }
+  export interface DeleteProvisionedProductPlanOutput {
   }
   export interface DeleteProvisioningArtifactInput {
     /**
@@ -1027,6 +1169,42 @@ declare namespace ServiceCatalog {
      * Information about the provisioned product.
      */
     ProvisionedProductDetail?: ProvisionedProductDetail;
+    /**
+     * Any CloudWatch dashboards that were created when provisioning the product.
+     */
+    CloudWatchDashboards?: CloudWatchDashboards;
+  }
+  export interface DescribeProvisionedProductPlanInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The plan identifier.
+     */
+    PlanId: Id;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+  }
+  export interface DescribeProvisionedProductPlanOutput {
+    /**
+     * Information about the plan.
+     */
+    ProvisionedProductPlanDetails?: ProvisionedProductPlanDetails;
+    /**
+     * Information about the resources changes that will occur when the plan is executed.
+     */
+    ResourceChanges?: ResourceChanges;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
   }
   export interface DescribeProvisioningArtifactInput {
     /**
@@ -1187,6 +1365,27 @@ declare namespace ServiceCatalog {
   }
   export type ErrorCode = string;
   export type ErrorDescription = string;
+  export type EvaluationType = "STATIC"|"DYNAMIC"|string;
+  export interface ExecuteProvisionedProductPlanInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The plan identifier.
+     */
+    PlanId: Id;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface ExecuteProvisionedProductPlanOutput {
+    /**
+     * Information about the result of provisioning the product.
+     */
+    RecordDetail?: RecordDetail;
+  }
   export type HasDefaultPath = boolean;
   export type Id = string;
   export type IdempotencyToken = string;
@@ -1397,6 +1596,38 @@ declare namespace ServiceCatalog {
      */
     NextPageToken?: PageToken;
   }
+  export interface ListProvisionedProductPlansInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProvisionProductId?: Id;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+    /**
+     * The access level to use to obtain results. The default is User.
+     */
+    AccessLevelFilter?: AccessLevelFilter;
+  }
+  export interface ListProvisionedProductPlansOutput {
+    /**
+     * Information about the plans.
+     */
+    ProvisionedProductPlans?: ProvisionedProductPlans;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
   export interface ListProvisioningArtifactsInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -1525,6 +1756,7 @@ declare namespace ServiceCatalog {
      */
     PageToken?: PageToken;
   }
+  export type LogicalResourceId = string;
   export type NoEcho = boolean;
   export type NotificationArn = string;
   export type NotificationArns = NotificationArn[];
@@ -1541,6 +1773,9 @@ declare namespace ServiceCatalog {
   export type ParameterKey = string;
   export type ParameterType = string;
   export type ParameterValue = string;
+  export type PhysicalId = string;
+  export type PhysicalResourceId = string;
+  export type PlanResourceType = string;
   export type PortfolioDescription = string;
   export interface PortfolioDetail {
     /**
@@ -1560,7 +1795,7 @@ declare namespace ServiceCatalog {
      */
     Description?: PortfolioDescription;
     /**
-     * The UTC timestamp of the creation time.
+     * The UTC time stamp of the creation time.
      */
     CreatedTime?: CreationTime;
     /**
@@ -1614,7 +1849,7 @@ declare namespace ServiceCatalog {
      */
     ProductARN?: ResourceARN;
     /**
-     * The UTC timestamp of the creation time.
+     * The UTC time stamp of the creation time.
      */
     CreatedTime?: CreatedTime;
   }
@@ -1675,6 +1910,7 @@ declare namespace ServiceCatalog {
      */
     SupportUrl?: SupportUrl;
   }
+  export type PropertyName = string;
   export type ProviderName = string;
   export interface ProvisionProductInput {
     /**
@@ -1702,7 +1938,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningParameters?: ProvisioningParameters;
     /**
-     * The tags to use as provisioning options.
+     * One or more tags.
      */
     Tags?: Tags;
     /**
@@ -1716,10 +1952,73 @@ declare namespace ServiceCatalog {
   }
   export interface ProvisionProductOutput {
     /**
-     * Information about the result of ProvisionProduct.
+     * Information about the result of provisioning the product.
      */
     RecordDetail?: RecordDetail;
   }
+  export interface ProvisionedProductAttribute {
+    /**
+     * The user-friendly name of the provisioned product.
+     */
+    Name?: ProvisionedProductNameOrArn;
+    /**
+     * The ARN of the provisioned product.
+     */
+    Arn?: ProvisionedProductNameOrArn;
+    /**
+     * The type of provisioned product. The supported value is CFN_STACK.
+     */
+    Type?: ProvisionedProductType;
+    /**
+     * The identifier of the provisioned product.
+     */
+    Id?: Id;
+    /**
+     * The current status of the provisioned product.    AVAILABLE - Stable state, ready to perform any operation. The most recent operation succeeded and completed.    UNDER_CHANGE - Transitive state, operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.    TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.    ERROR - An unexpected error occurred, the provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.  
+     */
+    Status?: ProvisionedProductStatus;
+    /**
+     * The current status message of the provisioned product.
+     */
+    StatusMessage?: ProvisionedProductStatusMessage;
+    /**
+     * The UTC time stamp of the creation time.
+     */
+    CreatedTime?: CreatedTime;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
+     */
+    IdempotencyToken?: IdempotencyToken;
+    /**
+     * The record identifier of the last request performed on this provisioned product.
+     */
+    LastRecordId?: Id;
+    /**
+     * One or more tags.
+     */
+    Tags?: Tags;
+    /**
+     * The assigned identifier for the resource, such as an EC2 instance ID or an S3 bucket name.
+     */
+    PhysicalId?: PhysicalId;
+    /**
+     * The product identifier.
+     */
+    ProductId?: Id;
+    /**
+     * The identifier of the provisioning artifact.
+     */
+    ProvisioningArtifactId?: Id;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM user.
+     */
+    UserArn?: UserArn;
+    /**
+     * The ARN of the IAM user in the session. This ARN might contain a session ID.
+     */
+    UserArnSession?: UserArnSession;
+  }
+  export type ProvisionedProductAttributes = ProvisionedProductAttribute[];
   export interface ProvisionedProductDetail {
     /**
      * The user-friendly name of the provisioned product.
@@ -1746,7 +2045,7 @@ declare namespace ServiceCatalog {
      */
     StatusMessage?: ProvisionedProductStatusMessage;
     /**
-     * The UTC timestamp of the creation time.
+     * The UTC time stamp of the creation time.
      */
     CreatedTime?: CreatedTime;
     /**
@@ -1759,12 +2058,108 @@ declare namespace ServiceCatalog {
     LastRecordId?: LastRequestId;
   }
   export type ProvisionedProductDetails = ProvisionedProductDetail[];
+  export type ProvisionedProductFilters = {[key: string]: ProvisionedProductViewFilterValues};
   export type ProvisionedProductId = string;
   export type ProvisionedProductName = string;
   export type ProvisionedProductNameOrArn = string;
-  export type ProvisionedProductStatus = "AVAILABLE"|"UNDER_CHANGE"|"TAINTED"|"ERROR"|string;
+  export interface ProvisionedProductPlanDetails {
+    /**
+     * The UTC time stamp of the creation time.
+     */
+    CreatedTime?: CreatedTime;
+    /**
+     * The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use ListLaunchPaths.
+     */
+    PathId?: Id;
+    /**
+     * The product identifier.
+     */
+    ProductId?: Id;
+    /**
+     * The name of the plan.
+     */
+    PlanName?: ProvisionedProductPlanName;
+    /**
+     * The plan identifier.
+     */
+    PlanId?: Id;
+    /**
+     * The product identifier.
+     */
+    ProvisionProductId?: Id;
+    /**
+     * The user-friendly name of the provisioned product.
+     */
+    ProvisionProductName?: ProvisionedProductName;
+    /**
+     * The plan type.
+     */
+    PlanType?: ProvisionedProductPlanType;
+    /**
+     * The identifier of the provisioning artifact.
+     */
+    ProvisioningArtifactId?: Id;
+    /**
+     * The status.
+     */
+    Status?: ProvisionedProductPlanStatus;
+    /**
+     * The time when the plan was last updated.
+     */
+    UpdatedTime?: UpdatedTime;
+    /**
+     * Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.
+     */
+    NotificationArns?: NotificationArns;
+    /**
+     * Parameters specified by the administrator that are required for provisioning the product.
+     */
+    ProvisioningParameters?: UpdateProvisioningParameters;
+    /**
+     * One or more tags.
+     */
+    Tags?: Tags;
+    /**
+     * The status message.
+     */
+    StatusMessage?: StatusMessage;
+  }
+  export type ProvisionedProductPlanName = string;
+  export type ProvisionedProductPlanStatus = "CREATE_IN_PROGRESS"|"CREATE_SUCCESS"|"CREATE_FAILED"|"EXECUTE_IN_PROGRESS"|"EXECUTE_SUCCESS"|"EXECUTE_FAILED"|string;
+  export interface ProvisionedProductPlanSummary {
+    /**
+     * The name of the plan.
+     */
+    PlanName?: ProvisionedProductPlanName;
+    /**
+     * The plan identifier.
+     */
+    PlanId?: Id;
+    /**
+     * The product identifier.
+     */
+    ProvisionProductId?: Id;
+    /**
+     * The user-friendly name of the provisioned product.
+     */
+    ProvisionProductName?: ProvisionedProductName;
+    /**
+     * The plan type.
+     */
+    PlanType?: ProvisionedProductPlanType;
+    /**
+     * The identifier of the provisioning artifact.
+     */
+    ProvisioningArtifactId?: Id;
+  }
+  export type ProvisionedProductPlanType = "CLOUDFORMATION"|string;
+  export type ProvisionedProductPlans = ProvisionedProductPlanSummary[];
+  export type ProvisionedProductStatus = "AVAILABLE"|"UNDER_CHANGE"|"TAINTED"|"ERROR"|"PLAN_IN_PROGRESS"|string;
   export type ProvisionedProductStatusMessage = string;
   export type ProvisionedProductType = string;
+  export type ProvisionedProductViewFilterBy = "SearchQuery"|string;
+  export type ProvisionedProductViewFilterValue = string;
+  export type ProvisionedProductViewFilterValues = ProvisionedProductViewFilterValue[];
   export interface ProvisioningArtifact {
     /**
      * The identifier of the provisioning artifact.
@@ -1779,7 +2174,7 @@ declare namespace ServiceCatalog {
      */
     Description?: ProvisioningArtifactDescription;
     /**
-     * The UTC timestamp of the creation time.
+     * The UTC time stamp of the creation time.
      */
     CreatedTime?: ProvisioningArtifactCreatedTime;
   }
@@ -1804,7 +2199,7 @@ declare namespace ServiceCatalog {
      */
     Type?: ProvisioningArtifactType;
     /**
-     * The UTC timestamp of the creation time.
+     * The UTC time stamp of the creation time.
      */
     CreatedTime?: CreationTime;
     /**
@@ -1879,7 +2274,7 @@ declare namespace ServiceCatalog {
      */
     Description?: ProvisioningArtifactDescription;
     /**
-     * The UTC timestamp of the creation time.
+     * The UTC time stamp of the creation time.
      */
     CreatedTime?: ProvisioningArtifactCreatedTime;
     /**
@@ -1914,7 +2309,7 @@ declare namespace ServiceCatalog {
      */
     Status?: RecordStatus;
     /**
-     * The UTC timestamp of the creation time.
+     * The UTC time stamp of the creation time.
      */
     CreatedTime?: CreatedTime;
     /**
@@ -1926,7 +2321,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductType?: ProvisionedProductType;
     /**
-     * The record type for this record.    PROVISION_PRODUCT     UPDATE_PROVISIONED_PRODUCT     TERMINATE_PROVISIONED_PRODUCT   
+     * The record type.    PROVISION_PRODUCT     UPDATE_PROVISIONED_PRODUCT     TERMINATE_PROVISIONED_PRODUCT   
      */
     RecordType?: RecordType;
     /**
@@ -1946,11 +2341,11 @@ declare namespace ServiceCatalog {
      */
     PathId?: Id;
     /**
-     * The errors that occurred while processing the request.
+     * The errors that occurred.
      */
     RecordErrors?: RecordErrors;
     /**
-     * The tags associated with this record.
+     * One or more tags.
      */
     RecordTags?: RecordTags;
   }
@@ -2008,7 +2403,56 @@ declare namespace ServiceCatalog {
   }
   export interface RejectPortfolioShareOutput {
   }
+  export type Replacement = "TRUE"|"FALSE"|"CONDITIONAL"|string;
+  export type RequiresRecreation = "NEVER"|"CONDITIONALLY"|"ALWAYS"|string;
   export type ResourceARN = string;
+  export type ResourceAttribute = "PROPERTIES"|"METADATA"|"CREATIONPOLICY"|"UPDATEPOLICY"|"DELETIONPOLICY"|"TAGS"|string;
+  export interface ResourceChange {
+    /**
+     * The change action.
+     */
+    Action?: ChangeAction;
+    /**
+     * The ID of the resource, as defined in the CloudFormation template.
+     */
+    LogicalResourceId?: LogicalResourceId;
+    /**
+     * The ID of the resource, if it was already created.
+     */
+    PhysicalResourceId?: PhysicalResourceId;
+    /**
+     * The type of resource.
+     */
+    ResourceType?: PlanResourceType;
+    /**
+     * If the change type is Modify, indicates whether the existing resource is deleted and replaced with a new one.
+     */
+    Replacement?: Replacement;
+    /**
+     * The change scope.
+     */
+    Scope?: Scope;
+    /**
+     * Information about the resource changes.
+     */
+    Details?: ResourceChangeDetails;
+  }
+  export interface ResourceChangeDetail {
+    /**
+     * Information about the resource attribute that will be modified.
+     */
+    Target?: ResourceTargetDefinition;
+    /**
+     * For static evaluations, the value the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.
+     */
+    Evaluation?: EvaluationType;
+    /**
+     * The ID of the entity that caused the change.
+     */
+    CausingEntity?: CausingEntity;
+  }
+  export type ResourceChangeDetails = ResourceChangeDetail[];
+  export type ResourceChanges = ResourceChange[];
   export interface ResourceDetail {
     /**
      * The identifier of the resource.
@@ -2038,6 +2482,20 @@ declare namespace ServiceCatalog {
   export type ResourceDetailName = string;
   export type ResourceDetails = ResourceDetail[];
   export type ResourceId = string;
+  export interface ResourceTargetDefinition {
+    /**
+     * The attribute that will change.
+     */
+    Attribute?: ResourceAttribute;
+    /**
+     * If the attribute is Properties, the value is the name of the property. Otherwise, the value is null.
+     */
+    Name?: PropertyName;
+    /**
+     * If the attribute is Properties, indicates whether a change to this property causes the resource to be recreated.
+     */
+    RequiresRecreation?: RequiresRecreation;
+  }
   export type ResourceType = string;
   export interface ScanProvisionedProductsInput {
     /**
@@ -2067,6 +2525,7 @@ declare namespace ServiceCatalog {
      */
     NextPageToken?: PageToken;
   }
+  export type Scope = ResourceAttribute[];
   export type SearchFilterKey = string;
   export type SearchFilterValue = string;
   export interface SearchProductsAsAdminInput {
@@ -2153,11 +2612,58 @@ declare namespace ServiceCatalog {
      */
     NextPageToken?: PageToken;
   }
+  export interface SearchProvisionedProductsInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The access level to use to obtain results. The default is User.
+     */
+    AccessLevelFilter?: AccessLevelFilter;
+    /**
+     * The search filters. When the key is SearchQuery, the searchable fields are arn, createdTime, id, lastRecordId, idempotencyToken, name, physicalId, productId, provisioningArtifact, type, status, tags, userArn, and userArnSession. Example: "SearchQuery":["status:AVAILABLE"] 
+     */
+    Filters?: ProvisionedProductFilters;
+    /**
+     * The sort field. If no value is specified, the results are not sorted. The valid values are arn, id, name, and lastRecordId.
+     */
+    SortBy?: SortField;
+    /**
+     * The sort order. If no value is specified, the results are not sorted.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: SearchProvisionedProductsPageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+  }
+  export interface SearchProvisionedProductsOutput {
+    /**
+     * Information about the provisioned products.
+     */
+    ProvisionedProducts?: ProvisionedProductAttributes;
+    /**
+     * The number of provisioned products found.
+     */
+    TotalResultsCount?: TotalResultsCount;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export type SearchProvisionedProductsPageSize = number;
+  export type SortField = string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type SourceProvisioningArtifactProperties = SourceProvisioningArtifactPropertiesMap[];
   export type SourceProvisioningArtifactPropertiesMap = {[key: string]: ProvisioningArtifactPropertyValue};
   export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string;
   export type StatusDetail = string;
+  export type StatusMessage = string;
   export type SupportDescription = string;
   export type SupportEmail = string;
   export type SupportUrl = string;
@@ -2238,6 +2744,7 @@ declare namespace ServiceCatalog {
      */
     RecordDetail?: RecordDetail;
   }
+  export type TotalResultsCount = number;
   export interface UpdateConstraintInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -2392,7 +2899,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningParameters?: UpdateProvisioningParameters;
     /**
-     * The idempotency token that uniquely identifies the provisioning update rquest.
+     * The idempotency token that uniquely identifies the provisioning update request.
      */
     UpdateToken: IdempotencyToken;
   }
@@ -2490,6 +2997,8 @@ declare namespace ServiceCatalog {
   }
   export type UsageInstructions = UsageInstruction[];
   export type UsePreviousValue = boolean;
+  export type UserArn = string;
+  export type UserArnSession = string;
   export type Verbose = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

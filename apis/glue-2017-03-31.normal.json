@@ -135,7 +135,7 @@
         {"shape":"InvalidInputException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Creates a classifier in the user's account. This may be either a <code>GrokClassifier</code> or an <code>XMLClassifier</code>. </p>"
+      "documentation":"<p>Creates a classifier in the user's account. This may be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, or abbrev <code>JsonClassifier</code>, depending on which field of the request is present.</p>"
     },
     "CreateConnection":{
       "name":"CreateConnection",
@@ -1087,7 +1087,7 @@
         {"shape":"EntityNotFoundException"},
         {"shape":"OperationTimeoutException"}
       ],
-      "documentation":"<p>Modifies an existing classifier (either a <code>GrokClassifier</code> or an <code>XMLClassifier</code>).</p>"
+      "documentation":"<p>Modifies an existing classifier (a <code>GrokClassifier</code>, <code>XMLClassifier</code>, or <code>JsonClassifier</code>, depending on which field is present).</p>"
     },
     "UpdateConnection":{
       "name":"UpdateConnection",
@@ -1665,9 +1665,13 @@
         "XMLClassifier":{
           "shape":"XMLClassifier",
           "documentation":"<p>An <code>XMLClassifier</code> object.</p>"
+        },
+        "JsonClassifier":{
+          "shape":"JsonClassifier",
+          "documentation":"<p>A <code>JsonClassifier</code> object.</p>"
         }
       },
-      "documentation":"<p>Classifiers are written in Python and triggered during a crawl task. You can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>A classifier can be either a <code>grok</code> classifier or an XML classifier, specified in one or the other field of the <code>Classifier</code> object.</p>"
+      "documentation":"<p>Classifiers are written in Python and triggered during a crawl task. You can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>A classifier can be a <code>grok</code> classifier, an XML classifier, or a JSON classifier, asspecified in one of the fields in the <code>Classifier</code> object.</p>"
     },
     "ClassifierList":{
       "type":"list",
@@ -2157,6 +2161,10 @@
         "XMLClassifier":{
           "shape":"CreateXMLClassifierRequest",
           "documentation":"<p>An <code>XMLClassifier</code> object specifying the classifier to create.</p>"
+        },
+        "JsonClassifier":{
+          "shape":"CreateJsonClassifierRequest",
+          "documentation":"<p>A <code>JsonClassifier</code> object specifying the classifier to create.</p>"
         }
       }
     },
@@ -2447,6 +2455,24 @@
           "documentation":"<p>The unique name that was provided.</p>"
         }
       }
+    },
+    "CreateJsonClassifierRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "JsonPath"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the classifier.</p>"
+        },
+        "JsonPath":{
+          "shape":"JsonPath",
+          "documentation":"<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a JSON classifier for <code>CreateClassifier</code> to create.</p>"
     },
     "CreatePartitionRequest":{
       "type":"structure",
@@ -4315,6 +4341,37 @@
       },
       "documentation":"<p>Specifies information used to update an existing job. Note that the previous job definition will be completely overwritten by this information.</p>"
     },
+    "JsonClassifier":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "JsonPath"
+      ],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the classifier.</p>"
+        },
+        "CreationTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time this classifier was registered.</p>"
+        },
+        "LastUpdated":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time this classifier was last updated.</p>"
+        },
+        "Version":{
+          "shape":"VersionId",
+          "documentation":"<p>The version of this classifier.</p>"
+        },
+        "JsonPath":{
+          "shape":"JsonPath",
+          "documentation":"<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
+        }
+      },
+      "documentation":"<p>A classifier for <code>JSON</code> content.</p>"
+    },
+    "JsonPath":{"type":"string"},
     "JsonValue":{"type":"string"},
     "KeyString":{
       "type":"string",
@@ -5430,6 +5487,10 @@
         "XMLClassifier":{
           "shape":"UpdateXMLClassifierRequest",
           "documentation":"<p>An <code>XMLClassifier</code> object with updated fields.</p>"
+        },
+        "JsonClassifier":{
+          "shape":"UpdateJsonClassifierRequest",
+          "documentation":"<p>A <code>JsonClassifier</code> object with updated fields.</p>"
         }
       }
     },
@@ -5506,7 +5567,7 @@
         },
         "Configuration":{
           "shape":"CrawlerConfiguration",
-          "documentation":"<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example:  <code>'{ \"Version\": 1.0, \"CrawlerOutput\": { \"Partitions\": { \"AddOrUpdateBehavior\": \"InheritFromTable\" } } }'</code> </p>"
+          "documentation":"<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>'{ \"Version\": 1.0, \"CrawlerOutput\": { \"Partitions\": { \"AddOrUpdateBehavior\": \"InheritFromTable\" } } }'</code> </p>"
         }
       }
     },
@@ -5635,6 +5696,21 @@
           "documentation":"<p>Returns the name of the updated job.</p>"
         }
       }
+    },
+    "UpdateJsonClassifierRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"NameString",
+          "documentation":"<p>The name of the classifier.</p>"
+        },
+        "JsonPath":{
+          "shape":"JsonPath",
+          "documentation":"<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
+        }
+      },
+      "documentation":"<p>Specifies a JSON classifier to be updated.</p>"
     },
     "UpdatePartitionRequest":{
       "type":"structure",

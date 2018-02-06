@@ -68,11 +68,11 @@ declare class Glue extends Service {
    */
   batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be either a GrokClassifier or an XMLClassifier. 
+   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
    */
   createClassifier(params: Glue.Types.CreateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be either a GrokClassifier or an XMLClassifier. 
+   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
    */
   createClassifier(callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
@@ -548,11 +548,11 @@ declare class Glue extends Service {
    */
   stopTrigger(callback?: (err: AWSError, data: Glue.Types.StopTriggerResponse) => void): Request<Glue.Types.StopTriggerResponse, AWSError>;
   /**
-   * Modifies an existing classifier (either a GrokClassifier or an XMLClassifier).
+   * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
    */
   updateClassifier(params: Glue.Types.UpdateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
-   * Modifies an existing classifier (either a GrokClassifier or an XMLClassifier).
+   * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
    */
   updateClassifier(callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
@@ -880,6 +880,10 @@ declare namespace Glue {
      * An XMLClassifier object.
      */
     XMLClassifier?: XMLClassifier;
+    /**
+     * A JsonClassifier object.
+     */
+    JsonClassifier?: JsonClassifier;
   }
   export type ClassifierList = Classifier[];
   export type ClassifierNameList = NameString[];
@@ -1167,6 +1171,10 @@ declare namespace Glue {
      * An XMLClassifier object specifying the classifier to create.
      */
     XMLClassifier?: CreateXMLClassifierRequest;
+    /**
+     * A JsonClassifier object specifying the classifier to create.
+     */
+    JsonClassifier?: CreateJsonClassifierRequest;
   }
   export interface CreateClassifierResponse {
   }
@@ -1395,6 +1403,16 @@ declare namespace Glue {
      * The unique name that was provided.
      */
     Name?: NameString;
+  }
+  export interface CreateJsonClassifierRequest {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+     */
+    JsonPath: JsonPath;
   }
   export interface CreatePartitionRequest {
     /**
@@ -2687,6 +2705,29 @@ declare namespace Glue {
      */
     AllocatedCapacity?: IntegerValue;
   }
+  export interface JsonClassifier {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * The time this classifier was registered.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time this classifier was last updated.
+     */
+    LastUpdated?: Timestamp;
+    /**
+     * The version of this classifier.
+     */
+    Version?: VersionId;
+    /**
+     * A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+     */
+    JsonPath: JsonPath;
+  }
+  export type JsonPath = string;
   export type JsonValue = string;
   export type KeyString = string;
   export type Language = "PYTHON"|"SCALA"|string;
@@ -3362,6 +3403,10 @@ declare namespace Glue {
      * An XMLClassifier object with updated fields.
      */
     XMLClassifier?: UpdateXMLClassifierRequest;
+    /**
+     * A JsonClassifier object with updated fields.
+     */
+    JsonClassifier?: UpdateJsonClassifierRequest;
   }
   export interface UpdateClassifierResponse {
   }
@@ -3419,7 +3464,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example:  '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
   }
@@ -3506,6 +3551,16 @@ declare namespace Glue {
      * Returns the name of the updated job.
      */
     JobName?: NameString;
+  }
+  export interface UpdateJsonClassifierRequest {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+     */
+    JsonPath?: JsonPath;
   }
   export interface UpdatePartitionRequest {
     /**

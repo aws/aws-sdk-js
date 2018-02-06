@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.189.0-->
+<!--LATEST=2.190.0-->
 <!--ENTRYINSERT-->
+
+## 2.190.0
+* feature: Glue: This new feature will now allow customers to add a customized json classifier. They can specify a json path to indicate the object, array or field of the json documents they'd like crawlers to inspect when they crawl json files. 
+* feature: SSM: This Patch Manager release supports configuring Linux repos as part of patch baselines, controlling updates of non-OS security packages and also creating patch baselines for SUSE12
+* feature: ServiceCatalog: This release of Service Catalog adds SearchProvisionedProducts API and ProvisionedProductPlan APIs.
+* feature: ServiceDiscovery: This release adds support for registering CNAME record types and creating Route 53 alias records that route traffic to Amazon Elastic Load Balancers using Amazon Route 53 Auto Naming APIs.
 
 ## 2.189.0
 * feature: Kinesis: Using ListShards a Kinesis Data Streams customer or client can get information about shards in a data stream (including meta-data for each shard) without obtaining data stream level information.

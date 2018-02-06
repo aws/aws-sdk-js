@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"AWS Service Catalog",
+    "serviceId":"Service Catalog",
     "signatureVersion":"v4",
     "targetPrefix":"AWS242ServiceCatalogService",
     "uid":"servicecatalog-2015-12-10"
@@ -149,6 +150,21 @@
       ],
       "documentation":"<p>Creates a product.</p>"
     },
+    "CreateProvisionedProductPlan":{
+      "name":"CreateProvisionedProductPlan",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateProvisionedProductPlanInput"},
+      "output":{"shape":"CreateProvisionedProductPlanOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidStateException"}
+      ],
+      "documentation":"<p>Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, it's status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>"
+    },
     "CreateProvisioningArtifact":{
       "name":"CreateProvisioningArtifact",
       "http":{
@@ -237,6 +253,20 @@
         {"shape":"TagOptionNotMigratedException"}
       ],
       "documentation":"<p>Deletes the specified product.</p> <p>You cannot delete a product if it was shared with you or is associated with a portfolio.</p>"
+    },
+    "DeleteProvisionedProductPlan":{
+      "name":"DeleteProvisionedProductPlan",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteProvisionedProductPlanInput"},
+      "output":{"shape":"DeleteProvisionedProductPlanOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Deletes the specified plan.</p>"
     },
     "DeleteProvisioningArtifact":{
       "name":"DeleteProvisioningArtifact",
@@ -346,6 +376,20 @@
       ],
       "documentation":"<p>Gets information about the specified provisioned product.</p>"
     },
+    "DescribeProvisionedProductPlan":{
+      "name":"DescribeProvisionedProductPlan",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeProvisionedProductPlanInput"},
+      "output":{"shape":"DescribeProvisionedProductPlanOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Gets information about the resource changes for the specified plan.</p>"
+    },
     "DescribeProvisioningArtifact":{
       "name":"DescribeProvisioningArtifact",
       "http":{
@@ -371,7 +415,7 @@
         {"shape":"InvalidParametersException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Gets information about the configuration required to provision the specified product using the specified provisioning artifact.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to <a>ProvisionProduct</a>, do not include conflicted TagOption keys as tags, or this will cause the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\" and tag the provisioned product with the value <code>sc-tagoption-conflict-portfolioId-productId</code>.</p>"
+      "documentation":"<p>Gets information about the configuration required to provision the specified product using the specified provisioning artifact.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to <a>ProvisionProduct</a>, do not include conflicted TagOption keys as tags, or this causes the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\". Tag the provisioned product with the value <code>sc-tagoption-conflict-portfolioId-productId</code>.</p>"
     },
     "DescribeRecord":{
       "name":"DescribeRecord",
@@ -442,6 +486,21 @@
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Disassociates the specified TagOption from the specified resource.</p>"
+    },
+    "ExecuteProvisionedProductPlan":{
+      "name":"ExecuteProvisionedProductPlan",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ExecuteProvisionedProductPlanInput"},
+      "output":{"shape":"ExecuteProvisionedProductPlanOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidStateException"}
+      ],
+      "documentation":"<p>Provisions or modifies a product based on the resource changes for the specified plan.</p>"
     },
     "ListAcceptedPortfolioShares":{
       "name":"ListAcceptedPortfolioShares",
@@ -538,6 +597,20 @@
       ],
       "documentation":"<p>Lists all principal ARNs associated with the specified portfolio.</p>"
     },
+    "ListProvisionedProductPlans":{
+      "name":"ListProvisionedProductPlans",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListProvisionedProductPlansInput"},
+      "output":{"shape":"ListProvisionedProductPlansOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Lists the plans for the specified provisioned product or all plans the user has access to.</p>"
+    },
     "ListProvisioningArtifacts":{
       "name":"ListProvisioningArtifacts",
       "http":{
@@ -607,7 +680,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"DuplicateResourceException"}
       ],
-      "documentation":"<p>Provisions the specified product.</p> <p>A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using <a>DescribeRecord</a>.</p> <p>If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this will cause the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\".</p>"
+      "documentation":"<p>Provisions the specified product.</p> <p>A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using <a>DescribeRecord</a>.</p> <p>If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this causes the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\".</p>"
     },
     "RejectPortfolioShare":{
       "name":"RejectPortfolioShare",
@@ -633,7 +706,7 @@
       "errors":[
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Lists the provisioned products that are available (not terminated).</p>"
+      "documentation":"<p>Lists the provisioned products that are available (not terminated).</p> <p>To use additional filtering, see <a>SearchProvisionedProducts</a>.</p>"
     },
     "SearchProducts":{
       "name":"SearchProducts",
@@ -661,6 +734,19 @@
         {"shape":"InvalidParametersException"}
       ],
       "documentation":"<p>Gets information about the products for the specified portfolio or all products.</p>"
+    },
+    "SearchProvisionedProducts":{
+      "name":"SearchProvisionedProducts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SearchProvisionedProductsInput"},
+      "output":{"shape":"SearchProvisionedProductsOutput"},
+      "errors":[
+        {"shape":"InvalidParametersException"}
+      ],
+      "documentation":"<p>Gets information about the provisioned products that meet the specified criteria.</p>"
     },
     "TerminateProvisionedProduct":{
       "name":"TerminateProvisionedProduct",
@@ -912,6 +998,30 @@
       }
     },
     "AttributeValue":{"type":"string"},
+    "CausingEntity":{"type":"string"},
+    "ChangeAction":{
+      "type":"string",
+      "enum":[
+        "ADD",
+        "MODIFY",
+        "REMOVE"
+      ]
+    },
+    "CloudWatchDashboard":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"CloudWatchDashboardName",
+          "documentation":"<p>The name of the CloudWatch dashboard.</p>"
+        }
+      },
+      "documentation":"<p>Information about a CloudWatch dashboard.</p>"
+    },
+    "CloudWatchDashboardName":{"type":"string"},
+    "CloudWatchDashboards":{
+      "type":"list",
+      "member":{"shape":"CloudWatchDashboard"}
+    },
     "ConstraintDescription":{
       "type":"string",
       "max":2000
@@ -1113,7 +1223,7 @@
         },
         "Tags":{
           "shape":"AddTags",
-          "documentation":"<p>The tags to associate with the portfolio.</p>"
+          "documentation":"<p>One or more tags.</p>"
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
@@ -1209,7 +1319,7 @@
         },
         "Tags":{
           "shape":"AddTags",
-          "documentation":"<p>The tags to associate with the product.</p>"
+          "documentation":"<p>One or more tags.</p>"
         },
         "ProvisioningArtifactParameters":{
           "shape":"ProvisioningArtifactProperties",
@@ -1236,6 +1346,89 @@
         "Tags":{
           "shape":"Tags",
           "documentation":"<p>Information about the tags associated with the product.</p>"
+        }
+      }
+    },
+    "CreateProvisionedProductPlanInput":{
+      "type":"structure",
+      "required":[
+        "PlanName",
+        "PlanType",
+        "ProductId",
+        "ProvisionedProductName",
+        "ProvisioningArtifactId",
+        "IdempotencyToken"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "PlanName":{
+          "shape":"ProvisionedProductPlanName",
+          "documentation":"<p>The name of the plan.</p>"
+        },
+        "PlanType":{
+          "shape":"ProvisionedProductPlanType",
+          "documentation":"<p>The plan type.</p>"
+        },
+        "NotificationArns":{
+          "shape":"NotificationArns",
+          "documentation":"<p>Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.</p>"
+        },
+        "PathId":{
+          "shape":"Id",
+          "documentation":"<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "ProvisionedProductName":{
+          "shape":"ProvisionedProductName",
+          "documentation":"<p>A user-friendly name for the provisioned product. This value must be unique for the AWS account and cannot be updated after the product is provisioned.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
+        },
+        "ProvisioningParameters":{
+          "shape":"UpdateProvisioningParameters",
+          "documentation":"<p>Parameters specified by the administrator that are required for provisioning the product.</p>"
+        },
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
+          "idempotencyToken":true
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>One or more tags.</p>"
+        }
+      }
+    },
+    "CreateProvisionedProductPlanOutput":{
+      "type":"structure",
+      "members":{
+        "PlanName":{
+          "shape":"ProvisionedProductPlanName",
+          "documentation":"<p>The name of the plan.</p>"
+        },
+        "PlanId":{
+          "shape":"Id",
+          "documentation":"<p>The plan identifier.</p>"
+        },
+        "ProvisionProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "ProvisionedProductName":{
+          "shape":"ProvisionedProductName",
+          "documentation":"<p>The user-friendly name of the provisioned product.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
         }
       }
     },
@@ -1391,6 +1584,29 @@
       }
     },
     "DeleteProductOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteProvisionedProductPlanInput":{
+      "type":"structure",
+      "required":["PlanId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "PlanId":{
+          "shape":"Id",
+          "documentation":"<p>The plan identifier.</p>"
+        },
+        "IgnoreErrors":{
+          "shape":"IgnoreErrors",
+          "documentation":"<p>If set to true, AWS Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.</p>"
+        }
+      }
+    },
+    "DeleteProvisionedProductPlanOutput":{
       "type":"structure",
       "members":{
       }
@@ -1623,6 +1839,49 @@
         "ProvisionedProductDetail":{
           "shape":"ProvisionedProductDetail",
           "documentation":"<p>Information about the provisioned product.</p>"
+        },
+        "CloudWatchDashboards":{
+          "shape":"CloudWatchDashboards",
+          "documentation":"<p>Any CloudWatch dashboards that were created when provisioning the product.</p>"
+        }
+      }
+    },
+    "DescribeProvisionedProductPlanInput":{
+      "type":"structure",
+      "required":["PlanId"],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "PlanId":{
+          "shape":"Id",
+          "documentation":"<p>The plan identifier.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
+        }
+      }
+    },
+    "DescribeProvisionedProductPlanOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisionedProductPlanDetails":{
+          "shape":"ProvisionedProductPlanDetails",
+          "documentation":"<p>Information about the plan.</p>"
+        },
+        "ResourceChanges":{
+          "shape":"ResourceChanges",
+          "documentation":"<p>Information about the resources changes that will occur when the plan is executed.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
     },
@@ -1856,6 +2115,44 @@
     },
     "ErrorCode":{"type":"string"},
     "ErrorDescription":{"type":"string"},
+    "EvaluationType":{
+      "type":"string",
+      "enum":[
+        "STATIC",
+        "DYNAMIC"
+      ]
+    },
+    "ExecuteProvisionedProductPlanInput":{
+      "type":"structure",
+      "required":[
+        "PlanId",
+        "IdempotencyToken"
+      ],
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "PlanId":{
+          "shape":"Id",
+          "documentation":"<p>The plan identifier.</p>"
+        },
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "ExecuteProvisionedProductPlanOutput":{
+      "type":"structure",
+      "members":{
+        "RecordDetail":{
+          "shape":"RecordDetail",
+          "documentation":"<p>Information about the result of provisioning the product.</p>"
+        }
+      }
+    },
     "HasDefaultPath":{"type":"boolean"},
     "Id":{
       "type":"string",
@@ -2150,6 +2447,44 @@
         }
       }
     },
+    "ListProvisionedProductPlansInput":{
+      "type":"structure",
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "ProvisionProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "PageSize":{
+          "shape":"PageSize",
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
+        },
+        "AccessLevelFilter":{
+          "shape":"AccessLevelFilter",
+          "documentation":"<p>The access level to use to obtain results. The default is <code>User</code>.</p>"
+        }
+      }
+    },
+    "ListProvisionedProductPlansOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisionedProductPlans":{
+          "shape":"ProvisionedProductPlans",
+          "documentation":"<p>Information about the plans.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
+        }
+      }
+    },
     "ListProvisioningArtifactsInput":{
       "type":"structure",
       "required":["ProductId"],
@@ -2312,6 +2647,7 @@
         }
       }
     },
+    "LogicalResourceId":{"type":"string"},
     "NoEcho":{"type":"boolean"},
     "NotificationArn":{
       "type":"string",
@@ -2355,6 +2691,13 @@
       "type":"string",
       "max":4096
     },
+    "PhysicalId":{"type":"string"},
+    "PhysicalResourceId":{"type":"string"},
+    "PlanResourceType":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "PortfolioDescription":{
       "type":"string",
       "max":2000
@@ -2380,7 +2723,7 @@
         },
         "CreatedTime":{
           "shape":"CreationTime",
-          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+          "documentation":"<p>The UTC time stamp of the creation time.</p>"
         },
         "ProviderName":{
           "shape":"ProviderName",
@@ -2484,7 +2827,7 @@
         },
         "CreatedTime":{
           "shape":"CreatedTime",
-          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+          "documentation":"<p>The UTC time stamp of the creation time.</p>"
         }
       },
       "documentation":"<p>Information about a product view.</p>"
@@ -2578,9 +2921,10 @@
       },
       "documentation":"<p>Summary information about a product view.</p>"
     },
+    "PropertyName":{"type":"string"},
     "ProviderName":{
       "type":"string",
-      "max":20,
+      "max":50,
       "min":1
     },
     "ProvisionProductInput":{
@@ -2618,7 +2962,7 @@
         },
         "Tags":{
           "shape":"Tags",
-          "documentation":"<p>The tags to use as provisioning options.</p>"
+          "documentation":"<p>One or more tags.</p>"
         },
         "NotificationArns":{
           "shape":"NotificationArns",
@@ -2636,9 +2980,79 @@
       "members":{
         "RecordDetail":{
           "shape":"RecordDetail",
-          "documentation":"<p>Information about the result of <a>ProvisionProduct</a>.</p>"
+          "documentation":"<p>Information about the result of provisioning the product.</p>"
         }
       }
+    },
+    "ProvisionedProductAttribute":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"ProvisionedProductNameOrArn",
+          "documentation":"<p>The user-friendly name of the provisioned product.</p>"
+        },
+        "Arn":{
+          "shape":"ProvisionedProductNameOrArn",
+          "documentation":"<p>The ARN of the provisioned product.</p>"
+        },
+        "Type":{
+          "shape":"ProvisionedProductType",
+          "documentation":"<p>The type of provisioned product. The supported value is <code>CFN_STACK</code>.</p>"
+        },
+        "Id":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioned product.</p>"
+        },
+        "Status":{
+          "shape":"ProvisionedProductStatus",
+          "documentation":"<p>The current status of the provisioned product.</p> <ul> <li> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent operation succeeded and completed.</p> </li> <li> <p> <code>UNDER_CHANGE</code> - Transitive state, operations performed might not have valid results. Wait for an <code>AVAILABLE</code> status before performing operations.</p> </li> <li> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.</p> </li> <li> <p> <code>ERROR</code> - An unexpected error occurred, the provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.</p> </li> </ul>"
+        },
+        "StatusMessage":{
+          "shape":"ProvisionedProductStatusMessage",
+          "documentation":"<p>The current status message of the provisioned product.</p>"
+        },
+        "CreatedTime":{
+          "shape":"CreatedTime",
+          "documentation":"<p>The UTC time stamp of the creation time.</p>"
+        },
+        "IdempotencyToken":{
+          "shape":"IdempotencyToken",
+          "documentation":"<p>A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.</p>"
+        },
+        "LastRecordId":{
+          "shape":"Id",
+          "documentation":"<p>The record identifier of the last request performed on this provisioned product.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>One or more tags.</p>"
+        },
+        "PhysicalId":{
+          "shape":"PhysicalId",
+          "documentation":"<p>The assigned identifier for the resource, such as an EC2 instance ID or an S3 bucket name.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
+        },
+        "UserArn":{
+          "shape":"UserArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM user.</p>"
+        },
+        "UserArnSession":{
+          "shape":"UserArnSession",
+          "documentation":"<p>The ARN of the IAM user in the session. This ARN might contain a session ID.</p>"
+        }
+      },
+      "documentation":"<p>Information about a provisioned product.</p>"
+    },
+    "ProvisionedProductAttributes":{
+      "type":"list",
+      "member":{"shape":"ProvisionedProductAttribute"}
     },
     "ProvisionedProductDetail":{
       "type":"structure",
@@ -2669,7 +3083,7 @@
         },
         "CreatedTime":{
           "shape":"CreatedTime",
-          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+          "documentation":"<p>The UTC time stamp of the creation time.</p>"
         },
         "IdempotencyToken":{
           "shape":"IdempotencyToken",
@@ -2686,6 +3100,11 @@
       "type":"list",
       "member":{"shape":"ProvisionedProductDetail"}
     },
+    "ProvisionedProductFilters":{
+      "type":"map",
+      "key":{"shape":"ProvisionedProductViewFilterBy"},
+      "value":{"shape":"ProvisionedProductViewFilterValues"}
+    },
     "ProvisionedProductId":{"type":"string"},
     "ProvisionedProductName":{
       "type":"string",
@@ -2699,17 +3118,143 @@
       "min":1,
       "pattern":"[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
     },
+    "ProvisionedProductPlanDetails":{
+      "type":"structure",
+      "members":{
+        "CreatedTime":{
+          "shape":"CreatedTime",
+          "documentation":"<p>The UTC time stamp of the creation time.</p>"
+        },
+        "PathId":{
+          "shape":"Id",
+          "documentation":"<p>The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use <a>ListLaunchPaths</a>.</p>"
+        },
+        "ProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "PlanName":{
+          "shape":"ProvisionedProductPlanName",
+          "documentation":"<p>The name of the plan.</p>"
+        },
+        "PlanId":{
+          "shape":"Id",
+          "documentation":"<p>The plan identifier.</p>"
+        },
+        "ProvisionProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "ProvisionProductName":{
+          "shape":"ProvisionedProductName",
+          "documentation":"<p>The user-friendly name of the provisioned product.</p>"
+        },
+        "PlanType":{
+          "shape":"ProvisionedProductPlanType",
+          "documentation":"<p>The plan type.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
+        },
+        "Status":{
+          "shape":"ProvisionedProductPlanStatus",
+          "documentation":"<p>The status.</p>"
+        },
+        "UpdatedTime":{
+          "shape":"UpdatedTime",
+          "documentation":"<p>The time when the plan was last updated.</p>"
+        },
+        "NotificationArns":{
+          "shape":"NotificationArns",
+          "documentation":"<p>Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related events.</p>"
+        },
+        "ProvisioningParameters":{
+          "shape":"UpdateProvisioningParameters",
+          "documentation":"<p>Parameters specified by the administrator that are required for provisioning the product.</p>"
+        },
+        "Tags":{
+          "shape":"Tags",
+          "documentation":"<p>One or more tags.</p>"
+        },
+        "StatusMessage":{
+          "shape":"StatusMessage",
+          "documentation":"<p>The status message.</p>"
+        }
+      },
+      "documentation":"<p>Information about a plan.</p>"
+    },
+    "ProvisionedProductPlanName":{"type":"string"},
+    "ProvisionedProductPlanStatus":{
+      "type":"string",
+      "enum":[
+        "CREATE_IN_PROGRESS",
+        "CREATE_SUCCESS",
+        "CREATE_FAILED",
+        "EXECUTE_IN_PROGRESS",
+        "EXECUTE_SUCCESS",
+        "EXECUTE_FAILED"
+      ]
+    },
+    "ProvisionedProductPlanSummary":{
+      "type":"structure",
+      "members":{
+        "PlanName":{
+          "shape":"ProvisionedProductPlanName",
+          "documentation":"<p>The name of the plan.</p>"
+        },
+        "PlanId":{
+          "shape":"Id",
+          "documentation":"<p>The plan identifier.</p>"
+        },
+        "ProvisionProductId":{
+          "shape":"Id",
+          "documentation":"<p>The product identifier.</p>"
+        },
+        "ProvisionProductName":{
+          "shape":"ProvisionedProductName",
+          "documentation":"<p>The user-friendly name of the provisioned product.</p>"
+        },
+        "PlanType":{
+          "shape":"ProvisionedProductPlanType",
+          "documentation":"<p>The plan type.</p>"
+        },
+        "ProvisioningArtifactId":{
+          "shape":"Id",
+          "documentation":"<p>The identifier of the provisioning artifact.</p>"
+        }
+      },
+      "documentation":"<p>Summary information about a plan.</p>"
+    },
+    "ProvisionedProductPlanType":{
+      "type":"string",
+      "enum":["CLOUDFORMATION"]
+    },
+    "ProvisionedProductPlans":{
+      "type":"list",
+      "member":{"shape":"ProvisionedProductPlanSummary"}
+    },
     "ProvisionedProductStatus":{
       "type":"string",
       "enum":[
         "AVAILABLE",
         "UNDER_CHANGE",
         "TAINTED",
-        "ERROR"
+        "ERROR",
+        "PLAN_IN_PROGRESS"
       ]
     },
     "ProvisionedProductStatusMessage":{"type":"string"},
     "ProvisionedProductType":{"type":"string"},
+    "ProvisionedProductViewFilterBy":{
+      "type":"string",
+      "enum":["SearchQuery"]
+    },
+    "ProvisionedProductViewFilterValue":{"type":"string"},
+    "ProvisionedProductViewFilterValues":{
+      "type":"list",
+      "member":{"shape":"ProvisionedProductViewFilterValue"}
+    },
     "ProvisioningArtifact":{
       "type":"structure",
       "members":{
@@ -2727,7 +3272,7 @@
         },
         "CreatedTime":{
           "shape":"ProvisioningArtifactCreatedTime",
-          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+          "documentation":"<p>The UTC time stamp of the creation time.</p>"
         }
       },
       "documentation":"<p>Information about a provisioning artifact. A provisioning artifact is also known as a product version.</p>"
@@ -2756,7 +3301,7 @@
         },
         "CreatedTime":{
           "shape":"CreationTime",
-          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+          "documentation":"<p>The UTC time stamp of the creation time.</p>"
         },
         "Active":{
           "shape":"ProvisioningArtifactActive",
@@ -2862,7 +3407,7 @@
         },
         "CreatedTime":{
           "shape":"ProvisioningArtifactCreatedTime",
-          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+          "documentation":"<p>The UTC time stamp of the creation time.</p>"
         },
         "ProvisioningArtifactMetadata":{
           "shape":"ProvisioningArtifactInfo",
@@ -2918,7 +3463,7 @@
         },
         "CreatedTime":{
           "shape":"CreatedTime",
-          "documentation":"<p>The UTC timestamp of the creation time.</p>"
+          "documentation":"<p>The UTC time stamp of the creation time.</p>"
         },
         "UpdatedTime":{
           "shape":"UpdatedTime",
@@ -2930,7 +3475,7 @@
         },
         "RecordType":{
           "shape":"RecordType",
-          "documentation":"<p>The record type for this record.</p> <ul> <li> <p> <code>PROVISION_PRODUCT</code> </p> </li> <li> <p> <code>UPDATE_PROVISIONED_PRODUCT</code> </p> </li> <li> <p> <code>TERMINATE_PROVISIONED_PRODUCT</code> </p> </li> </ul>"
+          "documentation":"<p>The record type.</p> <ul> <li> <p> <code>PROVISION_PRODUCT</code> </p> </li> <li> <p> <code>UPDATE_PROVISIONED_PRODUCT</code> </p> </li> <li> <p> <code>TERMINATE_PROVISIONED_PRODUCT</code> </p> </li> </ul>"
         },
         "ProvisionedProductId":{
           "shape":"Id",
@@ -2950,11 +3495,11 @@
         },
         "RecordErrors":{
           "shape":"RecordErrors",
-          "documentation":"<p>The errors that occurred while processing the request.</p>"
+          "documentation":"<p>The errors that occurred.</p>"
         },
         "RecordTags":{
           "shape":"RecordTags",
-          "documentation":"<p>The tags associated with this record.</p>"
+          "documentation":"<p>One or more tags.</p>"
         }
       },
       "documentation":"<p>Information about a request operation.</p>"
@@ -3025,7 +3570,7 @@
           "documentation":"<p>The value for this tag.</p>"
         }
       },
-      "documentation":"<p>A tag associated with the record, stored as a key-value pair.</p>"
+      "documentation":"<p>Information about a tag, which is a key-value pair.</p>"
     },
     "RecordTagKey":{
       "type":"string",
@@ -3064,10 +3609,97 @@
       "members":{
       }
     },
+    "Replacement":{
+      "type":"string",
+      "enum":[
+        "TRUE",
+        "FALSE",
+        "CONDITIONAL"
+      ]
+    },
+    "RequiresRecreation":{
+      "type":"string",
+      "enum":[
+        "NEVER",
+        "CONDITIONALLY",
+        "ALWAYS"
+      ]
+    },
     "ResourceARN":{
       "type":"string",
       "max":150,
       "min":1
+    },
+    "ResourceAttribute":{
+      "type":"string",
+      "enum":[
+        "PROPERTIES",
+        "METADATA",
+        "CREATIONPOLICY",
+        "UPDATEPOLICY",
+        "DELETIONPOLICY",
+        "TAGS"
+      ]
+    },
+    "ResourceChange":{
+      "type":"structure",
+      "members":{
+        "Action":{
+          "shape":"ChangeAction",
+          "documentation":"<p>The change action.</p>"
+        },
+        "LogicalResourceId":{
+          "shape":"LogicalResourceId",
+          "documentation":"<p>The ID of the resource, as defined in the CloudFormation template.</p>"
+        },
+        "PhysicalResourceId":{
+          "shape":"PhysicalResourceId",
+          "documentation":"<p>The ID of the resource, if it was already created.</p>"
+        },
+        "ResourceType":{
+          "shape":"PlanResourceType",
+          "documentation":"<p>The type of resource.</p>"
+        },
+        "Replacement":{
+          "shape":"Replacement",
+          "documentation":"<p>If the change type is <code>Modify</code>, indicates whether the existing resource is deleted and replaced with a new one.</p>"
+        },
+        "Scope":{
+          "shape":"Scope",
+          "documentation":"<p>The change scope.</p>"
+        },
+        "Details":{
+          "shape":"ResourceChangeDetails",
+          "documentation":"<p>Information about the resource changes.</p>"
+        }
+      },
+      "documentation":"<p>Information about a resource change that will occur when a plan is executed.</p>"
+    },
+    "ResourceChangeDetail":{
+      "type":"structure",
+      "members":{
+        "Target":{
+          "shape":"ResourceTargetDefinition",
+          "documentation":"<p>Information about the resource attribute that will be modified.</p>"
+        },
+        "Evaluation":{
+          "shape":"EvaluationType",
+          "documentation":"<p>For static evaluations, the value the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.</p>"
+        },
+        "CausingEntity":{
+          "shape":"CausingEntity",
+          "documentation":"<p>The ID of the entity that caused the change.</p>"
+        }
+      },
+      "documentation":"<p>Information about a change to a resource attribute.</p>"
+    },
+    "ResourceChangeDetails":{
+      "type":"list",
+      "member":{"shape":"ResourceChangeDetail"}
+    },
+    "ResourceChanges":{
+      "type":"list",
+      "member":{"shape":"ResourceChange"}
     },
     "ResourceDetail":{
       "type":"structure",
@@ -3109,7 +3741,7 @@
       "type":"structure",
       "members":{
       },
-      "documentation":"<p>A resource that is currently in use. Ensure the resource is not in use and retry the operation.</p>",
+      "documentation":"<p>A resource that is currently in use. Ensure that the resource is not in use and retry the operation.</p>",
       "exception":true
     },
     "ResourceNotFoundException":{
@@ -3118,6 +3750,24 @@
       },
       "documentation":"<p>The specified resource was not found.</p>",
       "exception":true
+    },
+    "ResourceTargetDefinition":{
+      "type":"structure",
+      "members":{
+        "Attribute":{
+          "shape":"ResourceAttribute",
+          "documentation":"<p>The attribute that will change.</p>"
+        },
+        "Name":{
+          "shape":"PropertyName",
+          "documentation":"<p>If the attribute is <code>Properties</code>, the value is the name of the property. Otherwise, the value is null.</p>"
+        },
+        "RequiresRecreation":{
+          "shape":"RequiresRecreation",
+          "documentation":"<p>If the attribute is <code>Properties</code>, indicates whether a change to this property causes the resource to be recreated.</p>"
+        }
+      },
+      "documentation":"<p>Information about a change to a resource attribute.</p>"
     },
     "ResourceType":{"type":"string"},
     "ScanProvisionedProductsInput":{
@@ -3153,6 +3803,10 @@
           "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
         }
       }
+    },
+    "Scope":{
+      "type":"list",
+      "member":{"shape":"ResourceAttribute"}
     },
     "SearchFilterKey":{"type":"string"},
     "SearchFilterValue":{"type":"string"},
@@ -3252,6 +3906,62 @@
         }
       }
     },
+    "SearchProvisionedProductsInput":{
+      "type":"structure",
+      "members":{
+        "AcceptLanguage":{
+          "shape":"AcceptLanguage",
+          "documentation":"<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "AccessLevelFilter":{
+          "shape":"AccessLevelFilter",
+          "documentation":"<p>The access level to use to obtain results. The default is <code>User</code>.</p>"
+        },
+        "Filters":{
+          "shape":"ProvisionedProductFilters",
+          "documentation":"<p>The search filters.</p> <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>, <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, <code>provisioningArtifact</code>, <code>type</code>, <code>status</code>, <code>tags</code>, <code>userArn</code>, and <code>userArnSession</code>.</p> <p>Example: <code>\"SearchQuery\":[\"status:AVAILABLE\"]</code> </p>"
+        },
+        "SortBy":{
+          "shape":"SortField",
+          "documentation":"<p>The sort field. If no value is specified, the results are not sorted. The valid values are <code>arn</code>, <code>id</code>, <code>name</code>, and <code>lastRecordId</code>.</p>"
+        },
+        "SortOrder":{
+          "shape":"SortOrder",
+          "documentation":"<p>The sort order. If no value is specified, the results are not sorted.</p>"
+        },
+        "PageSize":{
+          "shape":"SearchProvisionedProductsPageSize",
+          "documentation":"<p>The maximum number of items to return with this call.</p>"
+        },
+        "PageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
+        }
+      }
+    },
+    "SearchProvisionedProductsOutput":{
+      "type":"structure",
+      "members":{
+        "ProvisionedProducts":{
+          "shape":"ProvisionedProductAttributes",
+          "documentation":"<p>Information about the provisioned products.</p>"
+        },
+        "TotalResultsCount":{
+          "shape":"TotalResultsCount",
+          "documentation":"<p>The number of provisioned products found.</p>"
+        },
+        "NextPageToken":{
+          "shape":"PageToken",
+          "documentation":"<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
+        }
+      }
+    },
+    "SearchProvisionedProductsPageSize":{
+      "type":"integer",
+      "max":100,
+      "min":0
+    },
+    "SortField":{"type":"string"},
     "SortOrder":{
       "type":"string",
       "enum":[
@@ -3277,6 +3987,10 @@
       ]
     },
     "StatusDetail":{"type":"string"},
+    "StatusMessage":{
+      "type":"string",
+      "pattern":"[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*"
+    },
     "SupportDescription":{"type":"string"},
     "SupportEmail":{"type":"string"},
     "SupportUrl":{"type":"string"},
@@ -3296,7 +4010,7 @@
           "documentation":"<p>The value for this key.</p>"
         }
       },
-      "documentation":"<p>Information about a tag. A tag is a key-value pair. Tags are entirely discretionary and are propagated to the resources created when provisioning a product.</p>"
+      "documentation":"<p>Information about a tag. A tag is a key-value pair. Tags are propagated to the resources created when provisioning a product.</p>"
     },
     "TagKey":{
       "type":"string",
@@ -3428,6 +4142,7 @@
         }
       }
     },
+    "TotalResultsCount":{"type":"integer"},
     "UpdateConstraintInput":{
       "type":"structure",
       "required":["Id"],
@@ -3607,7 +4322,7 @@
         },
         "UpdateToken":{
           "shape":"IdempotencyToken",
-          "documentation":"<p>The idempotency token that uniquely identifies the provisioning update rquest.</p>",
+          "documentation":"<p>The idempotency token that uniquely identifies the provisioning update request.</p>",
           "idempotencyToken":true
         }
       }
@@ -3740,6 +4455,8 @@
       "member":{"shape":"UsageInstruction"}
     },
     "UsePreviousValue":{"type":"boolean"},
+    "UserArn":{"type":"string"},
+    "UserArnSession":{"type":"string"},
     "Verbose":{"type":"boolean"}
   },
   "documentation":"<fullname>AWS Service Catalog</fullname> <p> <a href=\"https://aws.amazon.com/servicecatalog/\">AWS Service Catalog</a> enables organizations to create and manage catalogs of IT services that are approved for use on AWS. To get the most out of this documentation, you should be familiar with the terminology discussed in <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html\">AWS Service Catalog Concepts</a>.</p>"
