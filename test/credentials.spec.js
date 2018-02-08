@@ -375,7 +375,7 @@
           creds.get();
           return validateCredentials(creds);
         });
-        return it('accepts a loads config profiles from name parameter', function() {
+        it('accepts a loads config profiles from name parameter', function() {
           var creds, mock;
           process.env.AWS_SDK_LOAD_CONFIG = '1';
           mock = '[profile foo]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session';
@@ -386,6 +386,19 @@
           creds.get();
           return validateCredentials(creds);
         });
+        return it('loads via credential_process', function() {
+            var mockProcess, mockConfig, creds
+            mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}'
+            mockConfig = '[foo]\ncredential_process=federated_cli_mock';
+            var child_process = require('child_process')
+            helpers.spyOn(child_process, 'execSync').andReturn(mockProcess)
+            helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
+            creds = new AWS.SharedIniFileCredentials({
+                profile: 'foo'
+            });
+            creds.get();
+            return validateCredentials(creds)
+        })
       });
       return describe('refresh', function() {
         beforeEach(function() {
