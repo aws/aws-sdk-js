@@ -30,11 +30,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   batchWriteItem(callback?: (err: AWSError, data: DynamoDB.Types.BatchWriteItemOutput) => void): Request<DynamoDB.Types.BatchWriteItemOutput, AWSError>;
   /**
-   * Creates a backup for an existing table.  Each time you create an On-Demand Backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken.  You can call CreateBackup at a maximum rate of 50 times per second. All backups in DynamoDB work without consuming any provisioned throughput on the table. This results in a fast, low-cost, and scalable backup process. In general, the larger the table, the more time it takes to back up. The backup is stored in an S3 data store that is maintained and managed by DynamoDB. Backups incorporate all writes (delete, put, update) that were completed within the last minute before the backup request was initiated. Backups might include some writes (delete, put, update) that were completed before the backup request was finished.  For example, if you submit the backup request on 2018-12-14 at 14:25:00, the backup is guaranteed to contain all data committed to the table up to 14:24:00, and data committed after 14:26:00 will not be. The backup may or may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand Backup does not support causal consistency.   Along with data, the following are also included on the backups:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Streams   Provisioned read and write capacity  
+   * Creates a backup for an existing table.  Each time you create an On-Demand Backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken.   When you create an On-Demand Backup, a time marker of the request is cataloged, and the backup is created asynchronously, by applying all changes until the time of the request to the last full table snapshot. Backup requests are processed instantaneously and become available for restore within minutes.  You can call CreateBackup at a maximum rate of 50 times per second. All backups in DynamoDB work without consuming any provisioned throughput on the table.  If you submit a backup request on 2018-12-14 at 14:25:00, the backup is guaranteed to contain all data committed to the table up to 14:24:00, and data committed after 14:26:00 will not be. The backup may or may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand Backup does not support causal consistency.   Along with data, the following are also included on the backups:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Streams   Provisioned read and write capacity  
    */
   createBackup(params: DynamoDB.Types.CreateBackupInput, callback?: (err: AWSError, data: DynamoDB.Types.CreateBackupOutput) => void): Request<DynamoDB.Types.CreateBackupOutput, AWSError>;
   /**
-   * Creates a backup for an existing table.  Each time you create an On-Demand Backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken.  You can call CreateBackup at a maximum rate of 50 times per second. All backups in DynamoDB work without consuming any provisioned throughput on the table. This results in a fast, low-cost, and scalable backup process. In general, the larger the table, the more time it takes to back up. The backup is stored in an S3 data store that is maintained and managed by DynamoDB. Backups incorporate all writes (delete, put, update) that were completed within the last minute before the backup request was initiated. Backups might include some writes (delete, put, update) that were completed before the backup request was finished.  For example, if you submit the backup request on 2018-12-14 at 14:25:00, the backup is guaranteed to contain all data committed to the table up to 14:24:00, and data committed after 14:26:00 will not be. The backup may or may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand Backup does not support causal consistency.   Along with data, the following are also included on the backups:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Streams   Provisioned read and write capacity  
+   * Creates a backup for an existing table.  Each time you create an On-Demand Backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken.   When you create an On-Demand Backup, a time marker of the request is cataloged, and the backup is created asynchronously, by applying all changes until the time of the request to the last full table snapshot. Backup requests are processed instantaneously and become available for restore within minutes.  You can call CreateBackup at a maximum rate of 50 times per second. All backups in DynamoDB work without consuming any provisioned throughput on the table.  If you submit a backup request on 2018-12-14 at 14:25:00, the backup is guaranteed to contain all data committed to the table up to 14:24:00, and data committed after 14:26:00 will not be. The backup may or may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand Backup does not support causal consistency.   Along with data, the following are also included on the backups:    Global secondary indexes (GSIs)   Local secondary indexes (LSIs)   Streams   Provisioned read and write capacity  
    */
   createBackup(callback?: (err: AWSError, data: DynamoDB.Types.CreateBackupOutput) => void): Request<DynamoDB.Types.CreateBackupOutput, AWSError>;
   /**
@@ -94,11 +94,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeContinuousBackups(callback?: (err: AWSError, data: DynamoDB.Types.DescribeContinuousBackupsOutput) => void): Request<DynamoDB.Types.DescribeContinuousBackupsOutput, AWSError>;
   /**
-   * Returns information about the global table.
+   * Returns information about the specified global table.
    */
   describeGlobalTable(params: DynamoDB.Types.DescribeGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
   /**
-   * Returns information about the global table.
+   * Returns information about the specified global table.
    */
   describeGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
   /**
@@ -142,11 +142,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   listBackups(callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
   /**
-   * Lists all the global tables. Only those global tables that have replicas in the region specified as input are returned.
+   * Lists all global tables that have a replica in the specified region.
    */
   listGlobalTables(params: DynamoDB.Types.ListGlobalTablesInput, callback?: (err: AWSError, data: DynamoDB.Types.ListGlobalTablesOutput) => void): Request<DynamoDB.Types.ListGlobalTablesOutput, AWSError>;
   /**
-   * Lists all the global tables. Only those global tables that have replicas in the region specified as input are returned.
+   * Lists all global tables that have a replica in the specified region.
    */
   listGlobalTables(callback?: (err: AWSError, data: DynamoDB.Types.ListGlobalTablesOutput) => void): Request<DynamoDB.Types.ListGlobalTablesOutput, AWSError>;
   /**
@@ -182,11 +182,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   query(callback?: (err: AWSError, data: DynamoDB.Types.QueryOutput) => void): Request<DynamoDB.Types.QueryOutput, AWSError>;
   /**
-   * Creates a new table from an existing backup. Any number of users can execute up to 10 concurrent restores in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Time to Live (TTL) settings  
+   * Creates a new table from an existing backup. Any number of users can execute up to 10 concurrent restores in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings  
    */
   restoreTableFromBackup(params: DynamoDB.Types.RestoreTableFromBackupInput, callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableFromBackupOutput) => void): Request<DynamoDB.Types.RestoreTableFromBackupOutput, AWSError>;
   /**
-   * Creates a new table from an existing backup. Any number of users can execute up to 10 concurrent restores in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Time to Live (TTL) settings  
+   * Creates a new table from an existing backup. Any number of users can execute up to 10 concurrent restores in a given account.  You can call RestoreTableFromBackup at a maximum rate of 10 times per second. You must manually set up the following on the restored table:   Auto scaling policies   IAM policies   Cloudwatch metrics and alarms   Tags   Stream settings   Time to Live (TTL) settings  
    */
   restoreTableFromBackup(callback?: (err: AWSError, data: DynamoDB.Types.RestoreTableFromBackupOutput) => void): Request<DynamoDB.Types.RestoreTableFromBackupOutput, AWSError>;
   /**
@@ -214,11 +214,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds or removes replicas to the specified global table. The global table should already exist to be able to use this operation. Currently, the replica to be added should be empty. 
+   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, must have DynamoDB Streams enabled, and cannot have any local secondary indexes (LSIs).  Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas. 
    */
   updateGlobalTable(params: DynamoDB.Types.UpdateGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableOutput, AWSError>;
   /**
-   * Adds or removes replicas to the specified global table. The global table should already exist to be able to use this operation. Currently, the replica to be added should be empty. 
+   * Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, must have the same name as the global table, must have the same key schema, must have DynamoDB Streams enabled, and cannot have any local secondary indexes (LSIs).  Although you can use UpdateGlobalTable to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas. 
    */
   updateGlobalTable(callback?: (err: AWSError, data: DynamoDB.Types.UpdateGlobalTableOutput) => void): Request<DynamoDB.Types.UpdateGlobalTableOutput, AWSError>;
   /**
@@ -328,7 +328,7 @@ declare namespace DynamoDB {
   export type AttributeValueList = AttributeValue[];
   export interface AttributeValueUpdate {
     /**
-     * Represents the data for an attribute. Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself. For more information, see Data TYpes in the Amazon DynamoDB Developer Guide. 
+     * Represents the data for an attribute. Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself. For more information, see Data Types in the Amazon DynamoDB Developer Guide. 
      */
     Value?: AttributeValue;
     /**
@@ -603,6 +603,10 @@ declare namespace DynamoDB {
      * The settings for DynamoDB Streams on the table. These settings consist of:    StreamEnabled - Indicates whether Streams is to be enabled (true) or disabled (false).    StreamViewType - When an item in the table is modified, StreamViewType determines what information is written to the table's stream. Valid values for StreamViewType are:    KEYS_ONLY - Only the key attributes of the modified item are written to the stream.    NEW_IMAGE - The entire item, as it appears after it was modified, is written to the stream.    OLD_IMAGE - The entire item, as it appeared before it was modified, is written to the stream.    NEW_AND_OLD_IMAGES - Both the new and the old item images of the item are written to the stream.    
      */
     StreamSpecification?: StreamSpecification;
+    /**
+     * Represents the settings used to enable server-side encryption.
+     */
+    SSESpecification?: SSESpecification;
   }
   export interface CreateTableOutput {
     /**
@@ -1358,7 +1362,7 @@ declare namespace DynamoDB {
      */
     FilterExpression?: ConditionExpression;
     /**
-     * The condition that specifies the key value(s) for items to be retrieved by the Query action. The condition must perform an equality test on a single partition key value. The condition can also perform one of several comparison tests on a single sort key value. Query can use KeyConditionExpression to retrieve one item with a given partition key value and sort key value, or several items that have the same partition key value but different sort key values. The partition key equality test is required, and must be specified in the following format:  partitionKeyName = :partitionkeyval  If you also want to provide a condition for the sort key, it must be combined using AND with the condition for the sort key. Following is an example, using the = comparison operator for the sort key:  partitionKeyName = :partitionkeyval AND sortKeyName = :sortkeyval  Valid comparisons for the sort key condition are as follows:    sortKeyName = :sortkeyval - true if the sort key value is equal to :sortkeyval.    sortKeyName &lt; :sortkeyval - true if the sort key value is less than :sortkeyval.    sortKeyName &lt;= :sortkeyval - true if the sort key value is less than or equal to :sortkeyval.    sortKeyName &gt; :sortkeyval - true if the sort key value is greater than :sortkeyval.    sortKeyName &gt;=  :sortkeyval - true if the sort key value is greater than or equal to :sortkeyval.    sortKeyName BETWEEN :sortkeyval1 AND :sortkeyval2 - true if the sort key value is greater than or equal to :sortkeyval1, and less than or equal to :sortkeyval2.    begins_with ( sortKeyName, :sortkeyval ) - true if the sort key value begins with a particular operand. (You cannot use this function with a sort key that is of type Number.) Note that the function name begins_with is case-sensitive.   Use the ExpressionAttributeValues parameter to replace tokens such as :partitionval and :sortval with actual values at runtime. You can optionally use the ExpressionAttributeNames parameter to replace the names of the partition key and sort key with placeholder tokens. This option might be necessary if an attribute name conflicts with a DynamoDB reserved word. For example, the following KeyConditionExpression parameter causes an error because Size is a reserved word:    Size = :myval    To work around this, define a placeholder (such a #S) to represent the attribute name Size. KeyConditionExpression then is as follows:    #S = :myval    For a list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide. For more information on ExpressionAttributeNames and ExpressionAttributeValues, see Using Placeholders for Attribute Names and Values in the Amazon DynamoDB Developer Guide.
+     * The condition that specifies the key value(s) for items to be retrieved by the Query action. The condition must perform an equality test on a single partition key value. The condition can optionally perform one of several comparison tests on a single sort key value. This allows Query to retrieve one item with a given partition key value and sort key value, or several items that have the same partition key value but different sort key values. The partition key equality test is required, and must be specified in the following format:  partitionKeyName = :partitionkeyval  If you also want to provide a condition for the sort key, it must be combined using AND with the condition for the sort key. Following is an example, using the = comparison operator for the sort key:  partitionKeyName = :partitionkeyval AND sortKeyName = :sortkeyval  Valid comparisons for the sort key condition are as follows:    sortKeyName = :sortkeyval - true if the sort key value is equal to :sortkeyval.    sortKeyName &lt; :sortkeyval - true if the sort key value is less than :sortkeyval.    sortKeyName &lt;= :sortkeyval - true if the sort key value is less than or equal to :sortkeyval.    sortKeyName &gt; :sortkeyval - true if the sort key value is greater than :sortkeyval.    sortKeyName &gt;=  :sortkeyval - true if the sort key value is greater than or equal to :sortkeyval.    sortKeyName BETWEEN :sortkeyval1 AND :sortkeyval2 - true if the sort key value is greater than or equal to :sortkeyval1, and less than or equal to :sortkeyval2.    begins_with ( sortKeyName, :sortkeyval ) - true if the sort key value begins with a particular operand. (You cannot use this function with a sort key that is of type Number.) Note that the function name begins_with is case-sensitive.   Use the ExpressionAttributeValues parameter to replace tokens such as :partitionval and :sortval with actual values at runtime. You can optionally use the ExpressionAttributeNames parameter to replace the names of the partition key and sort key with placeholder tokens. This option might be necessary if an attribute name conflicts with a DynamoDB reserved word. For example, the following KeyConditionExpression parameter causes an error because Size is a reserved word:    Size = :myval    To work around this, define a placeholder (such a #S) to represent the attribute name Size. KeyConditionExpression then is as follows:    #S = :myval    For a list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide. For more information on ExpressionAttributeNames and ExpressionAttributeValues, see Using Placeholders for Attribute Names and Values in the Amazon DynamoDB Developer Guide.
      */
     KeyConditionExpression?: KeyExpression;
     /**
@@ -1458,6 +1462,20 @@ declare namespace DynamoDB {
   export type ReturnConsumedCapacity = "INDEXES"|"TOTAL"|"NONE"|string;
   export type ReturnItemCollectionMetrics = "SIZE"|"NONE"|string;
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
+  export interface SSEDescription {
+    /**
+     * The current state of server-side encryption:    ENABLING - Server-side encryption is being enabled.    ENABLED - Server-side encryption is enabled.    DISABLING - Server-side encryption is being disabled.    DISABLED - Server-side encryption is disabled.  
+     */
+    Status?: SSEStatus;
+  }
+  export type SSEEnabled = boolean;
+  export interface SSESpecification {
+    /**
+     * Indicates whether server-side encryption is enabled (true) or disabled (false) on the table.
+     */
+    Enabled: SSEEnabled;
+  }
+  export type SSEStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
   export type ScalarAttributeType = "S"|"N"|"B"|string;
   export interface ScanInput {
     /**
@@ -1599,6 +1617,10 @@ declare namespace DynamoDB {
      * Time to Live settings on the table when the backup was created.
      */
     TimeToLiveDescription?: TimeToLiveDescription;
+    /**
+     * The description of the server-side encryption status on the table when the backup was created.
+     */
+    SSEDescription?: SSEDescription;
   }
   export type StreamArn = string;
   export type StreamEnabled = boolean;
@@ -1683,6 +1705,10 @@ declare namespace DynamoDB {
      * Contains details for the restore.
      */
     RestoreSummary?: RestoreSummary;
+    /**
+     * The description of the server-side encryption status on the specified table.
+     */
+    SSEDescription?: SSEDescription;
   }
   export type TableId = string;
   export type TableName = string;

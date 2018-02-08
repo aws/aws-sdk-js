@@ -655,6 +655,52 @@
         }
       ],
       "documentation": "Stops a running channel"
+    },
+    "UpdateChannel": {
+      "name": "UpdateChannel",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/prod/channels/{channelId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateChannelRequest"
+      },
+      "output": {
+        "shape": "UpdateChannelResponse",
+        "documentation": "Channel is successfully updated."
+      },
+      "errors": [
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "The channel configuration failed validation and could not be updated."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to update the channel."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad Gateway Error"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The channel is unable to update due to an issue with channel resources."
+        }
+      ],
+      "documentation": "Updates a channel."
     }
   },
   "shapes": {
@@ -1555,7 +1601,7 @@
         "CaptionChannel": {
           "shape": "__integer",
           "locationName": "captionChannel",
-          "documentation": "Channel to insert closed captions.  Each channel mapping must have a unique channel number (maximum of 4)"
+          "documentation": "The closed caption channel being described by this CaptionLanguageMapping.  Each channel mapping must have a unique channel number (maximum of 4)"
         },
         "LanguageCode": {
           "shape": "__string",
@@ -1823,7 +1869,8 @@
         "Reserved": {
           "shape": "__string",
           "locationName": "reserved",
-          "documentation": "Reserved for future use."
+          "documentation": "Deprecated field that's only usable by whitelisted customers.",
+          "deprecated": true
         },
         "RoleArn": {
           "shape": "__string",
@@ -1868,7 +1915,8 @@
         "Reserved": {
           "shape": "__string",
           "locationName": "reserved",
-          "documentation": "Reserved for future use."
+          "documentation": "Deprecated field that's only usable by whitelisted customers.",
+          "deprecated": true
         },
         "RoleArn": {
           "shape": "__string",
@@ -6121,6 +6169,97 @@
         "httpStatusCode": 422
       },
       "documentation": "Placeholder documentation for UnprocessableEntityException"
+    },
+    "UpdateChannel": {
+      "type": "structure",
+      "members": {
+        "Destinations": {
+          "shape": "ListOfOutputDestination",
+          "locationName": "destinations",
+          "documentation": "A list of output destinations for this channel."
+        },
+        "EncoderSettings": {
+          "shape": "EncoderSettings",
+          "locationName": "encoderSettings",
+          "documentation": "The encoder settings for this channel."
+        },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification",
+          "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the channel."
+        },
+        "RoleArn": {
+          "shape": "__string",
+          "locationName": "roleArn",
+          "documentation": "An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed."
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateChannel"
+    },
+    "UpdateChannelRequest": {
+      "type": "structure",
+      "members": {
+        "ChannelId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "channelId",
+          "documentation": "channel ID"
+        },
+        "Destinations": {
+          "shape": "ListOfOutputDestination",
+          "locationName": "destinations",
+          "documentation": "A list of output destinations for this channel."
+        },
+        "EncoderSettings": {
+          "shape": "EncoderSettings",
+          "locationName": "encoderSettings",
+          "documentation": "The encoder settings for this channel."
+        },
+        "InputSpecification": {
+          "shape": "InputSpecification",
+          "locationName": "inputSpecification",
+          "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the channel."
+        },
+        "RoleArn": {
+          "shape": "__string",
+          "locationName": "roleArn",
+          "documentation": "An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed."
+        }
+      },
+      "documentation": "A request to update a channel.",
+      "required": [
+        "ChannelId"
+      ]
+    },
+    "UpdateChannelResponse": {
+      "type": "structure",
+      "members": {
+        "Channel": {
+          "shape": "Channel",
+          "locationName": "channel"
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateChannelResponse"
+    },
+    "UpdateChannelResultModel": {
+      "type": "structure",
+      "members": {
+        "Channel": {
+          "shape": "Channel",
+          "locationName": "channel"
+        }
+      },
+      "documentation": "The updated channel's description."
     },
     "ValidationError": {
       "type": "structure",

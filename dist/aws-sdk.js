@@ -1,7 +1,7 @@
-// AWS SDK for JavaScript v2.190.0
+// AWS SDK for JavaScript v2.191.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 module.exports={
   "version": "2.0",
   "metadata": {
@@ -27315,6 +27315,17 @@ module.exports={
           },
           "StreamSpecification": {
             "shape": "S2f"
+          },
+          "SSESpecification": {
+            "type": "structure",
+            "required": [
+              "Enabled"
+            ],
+            "members": {
+              "Enabled": {
+                "type": "boolean"
+              }
+            }
           }
         }
       },
@@ -27322,7 +27333,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableDescription": {
-            "shape": "S2j"
+            "shape": "S2l"
           }
         }
       }
@@ -27341,7 +27352,7 @@ module.exports={
         "type": "structure",
         "members": {
           "BackupDescription": {
-            "shape": "S32"
+            "shape": "S36"
           }
         }
       }
@@ -27359,7 +27370,7 @@ module.exports={
             "shape": "S6"
           },
           "Expected": {
-            "shape": "S3f"
+            "shape": "S3j"
           },
           "ConditionalOperator": {},
           "ReturnValues": {},
@@ -27370,7 +27381,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3n"
+            "shape": "S3r"
           }
         }
       },
@@ -27403,7 +27414,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableDescription": {
-            "shape": "S2j"
+            "shape": "S2l"
           }
         }
       }
@@ -27422,7 +27433,7 @@ module.exports={
         "type": "structure",
         "members": {
           "BackupDescription": {
-            "shape": "S32"
+            "shape": "S36"
           }
         }
       }
@@ -27508,7 +27519,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Table": {
-            "shape": "S2j"
+            "shape": "S2l"
           }
         }
       }
@@ -27527,7 +27538,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TimeToLiveDescription": {
-            "shape": "S3b"
+            "shape": "S3f"
           }
         }
       }
@@ -27679,7 +27690,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Tags": {
-            "shape": "S4s"
+            "shape": "S4w"
           },
           "NextToken": {}
         }
@@ -27698,7 +27709,7 @@ module.exports={
             "shape": "S14"
           },
           "Expected": {
-            "shape": "S3f"
+            "shape": "S3j"
           },
           "ReturnValues": {},
           "ReturnConsumedCapacity": {},
@@ -27709,7 +27720,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3n"
+            "shape": "S3r"
           }
         }
       },
@@ -27751,11 +27762,11 @@ module.exports={
             "type": "map",
             "key": {},
             "value": {
-              "shape": "S51"
+              "shape": "S55"
             }
           },
           "QueryFilter": {
-            "shape": "S52"
+            "shape": "S56"
           },
           "ConditionalOperator": {},
           "ScanIndexForward": {
@@ -27772,7 +27783,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3n"
+            "shape": "S3r"
           }
         }
       },
@@ -27813,7 +27824,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableDescription": {
-            "shape": "S2j"
+            "shape": "S2l"
           }
         }
       }
@@ -27835,7 +27846,7 @@ module.exports={
           },
           "Select": {},
           "ScanFilter": {
-            "shape": "S52"
+            "shape": "S56"
           },
           "ConditionalOperator": {},
           "ExclusiveStartKey": {
@@ -27854,7 +27865,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3n"
+            "shape": "S3r"
           },
           "ConsistentRead": {
             "type": "boolean"
@@ -27892,7 +27903,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "Tags": {
-            "shape": "S4s"
+            "shape": "S4w"
           }
         }
       }
@@ -27985,7 +27996,7 @@ module.exports={
             }
           },
           "Expected": {
-            "shape": "S3f"
+            "shape": "S3j"
           },
           "ConditionalOperator": {},
           "ReturnValues": {},
@@ -27997,7 +28008,7 @@ module.exports={
             "shape": "Sm"
           },
           "ExpressionAttributeValues": {
-            "shape": "S3n"
+            "shape": "S3r"
           }
         }
       },
@@ -28090,7 +28101,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TableDescription": {
-            "shape": "S2j"
+            "shape": "S2l"
           }
         }
       }
@@ -28105,7 +28116,7 @@ module.exports={
         "members": {
           "TableName": {},
           "TimeToLiveSpecification": {
-            "shape": "S5z"
+            "shape": "S63"
           }
         }
       },
@@ -28113,7 +28124,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TimeToLiveSpecification": {
-            "shape": "S5z"
+            "shape": "S63"
           }
         }
       }
@@ -28429,7 +28440,7 @@ module.exports={
         "StreamViewType": {}
       }
     },
-    "S2j": {
+    "S2l": {
       "type": "structure",
       "members": {
         "AttributeDefinitions": {
@@ -28444,7 +28455,7 @@ module.exports={
           "type": "timestamp"
         },
         "ProvisionedThroughput": {
-          "shape": "S2l"
+          "shape": "S2n"
         },
         "TableSizeBytes": {
           "type": "long"
@@ -28493,7 +28504,7 @@ module.exports={
                 "type": "boolean"
               },
               "ProvisionedThroughput": {
-                "shape": "S2l"
+                "shape": "S2n"
               },
               "IndexSizeBytes": {
                 "type": "long"
@@ -28526,10 +28537,13 @@ module.exports={
               "type": "boolean"
             }
           }
+        },
+        "SSEDescription": {
+          "shape": "S32"
         }
       }
     },
-    "S2l": {
+    "S2n": {
       "type": "structure",
       "members": {
         "LastIncreaseDateTime": {
@@ -28550,6 +28564,12 @@ module.exports={
       }
     },
     "S32": {
+      "type": "structure",
+      "members": {
+        "Status": {}
+      }
+    },
+    "S36": {
       "type": "structure",
       "members": {
         "BackupDetails": {
@@ -28625,20 +28645,23 @@ module.exports={
               "shape": "S2f"
             },
             "TimeToLiveDescription": {
-              "shape": "S3b"
+              "shape": "S3f"
+            },
+            "SSEDescription": {
+              "shape": "S32"
             }
           }
         }
       }
     },
-    "S3b": {
+    "S3f": {
       "type": "structure",
       "members": {
         "TimeToLiveStatus": {},
         "AttributeName": {}
       }
     },
-    "S3f": {
+    "S3j": {
       "type": "map",
       "key": {},
       "value": {
@@ -28652,25 +28675,25 @@ module.exports={
           },
           "ComparisonOperator": {},
           "AttributeValueList": {
-            "shape": "S3j"
+            "shape": "S3n"
           }
         }
       }
     },
-    "S3j": {
+    "S3n": {
       "type": "list",
       "member": {
         "shape": "S8"
       }
     },
-    "S3n": {
+    "S3r": {
       "type": "map",
       "key": {},
       "value": {
         "shape": "S8"
       }
     },
-    "S4s": {
+    "S4w": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -28684,26 +28707,26 @@ module.exports={
         }
       }
     },
-    "S51": {
+    "S55": {
       "type": "structure",
       "required": [
         "ComparisonOperator"
       ],
       "members": {
         "AttributeValueList": {
-          "shape": "S3j"
+          "shape": "S3n"
         },
         "ComparisonOperator": {}
       }
     },
-    "S52": {
+    "S56": {
       "type": "map",
       "key": {},
       "value": {
-        "shape": "S51"
+        "shape": "S55"
       }
     },
-    "S5z": {
+    "S63": {
       "type": "structure",
       "required": [
         "Enabled",
@@ -58692,8 +58715,7 @@ module.exports={
         "members": {
           "TicketId": {},
           "PlayerIds": {
-            "type": "list",
-            "member": {}
+            "shape": "S3"
           },
           "AcceptanceType": {}
         }
@@ -58714,7 +58736,7 @@ module.exports={
           "Name": {},
           "Description": {},
           "RoutingStrategy": {
-            "shape": "Sa"
+            "shape": "S9"
           }
         }
       },
@@ -58722,7 +58744,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Alias": {
-            "shape": "Sf"
+            "shape": "Se"
           }
         }
       }
@@ -58734,7 +58756,7 @@ module.exports={
           "Name": {},
           "Version": {},
           "StorageLocation": {
-            "shape": "Sk"
+            "shape": "Sj"
           },
           "OperatingSystem": {}
         }
@@ -58743,13 +58765,13 @@ module.exports={
         "type": "structure",
         "members": {
           "Build": {
-            "shape": "So"
+            "shape": "Sn"
           },
           "UploadCredentials": {
-            "shape": "Ss"
+            "shape": "Sr"
           },
           "StorageLocation": {
-            "shape": "Sk"
+            "shape": "Sj"
           }
         }
       }
@@ -58769,21 +58791,21 @@ module.exports={
           "ServerLaunchPath": {},
           "ServerLaunchParameters": {},
           "LogPaths": {
-            "shape": "Su"
+            "shape": "S3"
           },
           "EC2InstanceType": {},
           "EC2InboundPermissions": {
-            "shape": "Sw"
+            "shape": "Su"
           },
           "NewGameSessionProtectionPolicy": {},
           "RuntimeConfiguration": {
-            "shape": "S12"
+            "shape": "S10"
           },
           "ResourceCreationLimitPolicy": {
-            "shape": "S18"
+            "shape": "S16"
           },
           "MetricGroups": {
-            "shape": "S1a"
+            "shape": "S18"
           },
           "PeerVpcAwsAccountId": {},
           "PeerVpcId": {}
@@ -58793,7 +58815,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetAttributes": {
-            "shape": "S1d"
+            "shape": "S1b"
           }
         }
       }
@@ -58812,7 +58834,7 @@ module.exports={
           },
           "Name": {},
           "GameProperties": {
-            "shape": "S1g"
+            "shape": "S1e"
           },
           "CreatorId": {},
           "GameSessionId": {},
@@ -58824,7 +58846,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSession": {
-            "shape": "S1n"
+            "shape": "S1l"
           }
         }
       }
@@ -58841,10 +58863,10 @@ module.exports={
             "type": "integer"
           },
           "PlayerLatencyPolicies": {
-            "shape": "S1t"
+            "shape": "S1s"
           },
           "Destinations": {
-            "shape": "S1v"
+            "shape": "S1u"
           }
         }
       },
@@ -58852,7 +58874,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSessionQueue": {
-            "shape": "S1y"
+            "shape": "S1x"
           }
         }
       }
@@ -58871,7 +58893,7 @@ module.exports={
           "Name": {},
           "Description": {},
           "GameSessionQueueArns": {
-            "shape": "S20"
+            "shape": "S1z"
           },
           "RequestTimeoutSeconds": {
             "type": "integer"
@@ -58889,7 +58911,7 @@ module.exports={
           },
           "CustomEventData": {},
           "GameProperties": {
-            "shape": "S1g"
+            "shape": "S1e"
           },
           "GameSessionData": {}
         }
@@ -58898,7 +58920,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Configuration": {
-            "shape": "S27"
+            "shape": "S26"
           }
         }
       }
@@ -58922,7 +58944,7 @@ module.exports={
         ],
         "members": {
           "RuleSet": {
-            "shape": "S2b"
+            "shape": "S2a"
           }
         }
       }
@@ -58944,7 +58966,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlayerSession": {
-            "shape": "S2f"
+            "shape": "S2e"
           }
         }
       }
@@ -58973,7 +58995,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlayerSessions": {
-            "shape": "S2m"
+            "shape": "S2l"
           }
         }
       }
@@ -58994,7 +59016,7 @@ module.exports={
         "type": "structure",
         "members": {
           "VpcPeeringAuthorization": {
-            "shape": "S2p"
+            "shape": "S2o"
           }
         }
       }
@@ -59142,7 +59164,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Alias": {
-            "shape": "Sf"
+            "shape": "Se"
           }
         }
       }
@@ -59161,7 +59183,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Build": {
-            "shape": "So"
+            "shape": "Sn"
           }
         }
       }
@@ -59199,7 +59221,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetIds": {
-            "shape": "S3d"
+            "shape": "S3c"
           },
           "Limit": {
             "type": "integer"
@@ -59213,7 +59235,7 @@ module.exports={
           "FleetAttributes": {
             "type": "list",
             "member": {
-              "shape": "S1d"
+              "shape": "S1b"
             }
           },
           "NextToken": {}
@@ -59225,7 +59247,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetIds": {
-            "shape": "S3d"
+            "shape": "S3c"
           },
           "Limit": {
             "type": "integer"
@@ -59333,7 +59355,7 @@ module.exports={
         "type": "structure",
         "members": {
           "InboundPermissions": {
-            "shape": "Sw"
+            "shape": "Su"
           }
         }
       }
@@ -59343,7 +59365,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetIds": {
-            "shape": "S3d"
+            "shape": "S3c"
           },
           "Limit": {
             "type": "integer"
@@ -59402,7 +59424,7 @@ module.exports={
               "type": "structure",
               "members": {
                 "GameSession": {
-                  "shape": "S1n"
+                  "shape": "S1l"
                 },
                 "ProtectionPolicy": {}
               }
@@ -59426,7 +59448,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSessionPlacement": {
-            "shape": "S42"
+            "shape": "S41"
           }
         }
       }
@@ -59451,7 +59473,7 @@ module.exports={
           "GameSessionQueues": {
             "type": "list",
             "member": {
-              "shape": "S1y"
+              "shape": "S1x"
             }
           },
           "NextToken": {}
@@ -59476,7 +59498,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSessions": {
-            "shape": "S4f"
+            "shape": "S4e"
           },
           "NextToken": {}
         }
@@ -59529,7 +59551,7 @@ module.exports={
         ],
         "members": {
           "TicketIds": {
-            "shape": "S4n"
+            "shape": "S4m"
           }
         }
       },
@@ -59539,7 +59561,7 @@ module.exports={
           "TicketList": {
             "type": "list",
             "member": {
-              "shape": "S4q"
+              "shape": "S4p"
             }
           }
         }
@@ -59550,7 +59572,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Names": {
-            "shape": "S4n"
+            "shape": "S4m"
           },
           "RuleSetName": {},
           "Limit": {
@@ -59565,7 +59587,7 @@ module.exports={
           "Configurations": {
             "type": "list",
             "member": {
-              "shape": "S27"
+              "shape": "S26"
             }
           },
           "NextToken": {}
@@ -59595,7 +59617,7 @@ module.exports={
           "RuleSets": {
             "type": "list",
             "member": {
-              "shape": "S2b"
+              "shape": "S2a"
             }
           },
           "NextToken": {}
@@ -59620,7 +59642,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PlayerSessions": {
-            "shape": "S2m"
+            "shape": "S2l"
           },
           "NextToken": {}
         }
@@ -59640,7 +59662,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RuntimeConfiguration": {
-            "shape": "S12"
+            "shape": "S10"
           }
         }
       }
@@ -59701,7 +59723,7 @@ module.exports={
           "VpcPeeringAuthorizations": {
             "type": "list",
             "member": {
-              "shape": "S2p"
+              "shape": "S2o"
             }
           }
         }
@@ -59810,7 +59832,7 @@ module.exports={
           "Aliases": {
             "type": "list",
             "member": {
-              "shape": "Sf"
+              "shape": "Se"
             }
           },
           "NextToken": {}
@@ -59834,7 +59856,7 @@ module.exports={
           "Builds": {
             "type": "list",
             "member": {
-              "shape": "So"
+              "shape": "Sn"
             }
           },
           "NextToken": {}
@@ -59856,7 +59878,7 @@ module.exports={
         "type": "structure",
         "members": {
           "FleetIds": {
-            "shape": "S3d"
+            "shape": "S3c"
           },
           "NextToken": {}
         }
@@ -59913,10 +59935,10 @@ module.exports={
         "type": "structure",
         "members": {
           "UploadCredentials": {
-            "shape": "Ss"
+            "shape": "Sr"
           },
           "StorageLocation": {
-            "shape": "Sk"
+            "shape": "Sj"
           }
         }
       }
@@ -59956,7 +59978,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSessions": {
-            "shape": "S4f"
+            "shape": "S4e"
           },
           "NextToken": {}
         }
@@ -59974,14 +59996,14 @@ module.exports={
           "PlacementId": {},
           "GameSessionQueueName": {},
           "GameProperties": {
-            "shape": "S1g"
+            "shape": "S1e"
           },
           "MaximumPlayerSessionCount": {
             "type": "integer"
           },
           "GameSessionName": {},
           "PlayerLatencies": {
-            "shape": "S44"
+            "shape": "S43"
           },
           "DesiredPlayerSessions": {
             "type": "list",
@@ -60000,7 +60022,33 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSessionPlacement": {
-            "shape": "S42"
+            "shape": "S41"
+          }
+        }
+      }
+    },
+    "StartMatchBackfill": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConfigurationName",
+          "GameSessionArn",
+          "Players"
+        ],
+        "members": {
+          "TicketId": {},
+          "ConfigurationName": {},
+          "GameSessionArn": {},
+          "Players": {
+            "shape": "S4s"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "MatchmakingTicket": {
+            "shape": "S4p"
           }
         }
       }
@@ -60016,7 +60064,7 @@ module.exports={
           "TicketId": {},
           "ConfigurationName": {},
           "Players": {
-            "shape": "S4t"
+            "shape": "S4s"
           }
         }
       },
@@ -60024,7 +60072,7 @@ module.exports={
         "type": "structure",
         "members": {
           "MatchmakingTicket": {
-            "shape": "S4q"
+            "shape": "S4p"
           }
         }
       }
@@ -60043,7 +60091,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSessionPlacement": {
-            "shape": "S42"
+            "shape": "S41"
           }
         }
       }
@@ -60074,7 +60122,7 @@ module.exports={
           "Name": {},
           "Description": {},
           "RoutingStrategy": {
-            "shape": "Sa"
+            "shape": "S9"
           }
         }
       },
@@ -60082,7 +60130,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Alias": {
-            "shape": "Sf"
+            "shape": "Se"
           }
         }
       }
@@ -60103,7 +60151,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Build": {
-            "shape": "So"
+            "shape": "Sn"
           }
         }
       }
@@ -60120,10 +60168,10 @@ module.exports={
           "Description": {},
           "NewGameSessionProtectionPolicy": {},
           "ResourceCreationLimitPolicy": {
-            "shape": "S18"
+            "shape": "S16"
           },
           "MetricGroups": {
-            "shape": "S1a"
+            "shape": "S18"
           }
         }
       },
@@ -60169,10 +60217,10 @@ module.exports={
         "members": {
           "FleetId": {},
           "InboundPermissionAuthorizations": {
-            "shape": "Sw"
+            "shape": "Su"
           },
           "InboundPermissionRevocations": {
-            "shape": "Sw"
+            "shape": "Su"
           }
         }
       },
@@ -60203,7 +60251,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSession": {
-            "shape": "S1n"
+            "shape": "S1l"
           }
         }
       }
@@ -60220,10 +60268,10 @@ module.exports={
             "type": "integer"
           },
           "PlayerLatencyPolicies": {
-            "shape": "S1t"
+            "shape": "S1s"
           },
           "Destinations": {
-            "shape": "S1v"
+            "shape": "S1u"
           }
         }
       },
@@ -60231,7 +60279,7 @@ module.exports={
         "type": "structure",
         "members": {
           "GameSessionQueue": {
-            "shape": "S1y"
+            "shape": "S1x"
           }
         }
       }
@@ -60246,7 +60294,7 @@ module.exports={
           "Name": {},
           "Description": {},
           "GameSessionQueueArns": {
-            "shape": "S20"
+            "shape": "S1z"
           },
           "RequestTimeoutSeconds": {
             "type": "integer"
@@ -60264,7 +60312,7 @@ module.exports={
           },
           "CustomEventData": {},
           "GameProperties": {
-            "shape": "S1g"
+            "shape": "S1e"
           },
           "GameSessionData": {}
         }
@@ -60273,7 +60321,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Configuration": {
-            "shape": "S27"
+            "shape": "S26"
           }
         }
       }
@@ -60288,7 +60336,7 @@ module.exports={
         "members": {
           "FleetId": {},
           "RuntimeConfiguration": {
-            "shape": "S12"
+            "shape": "S10"
           }
         }
       },
@@ -60296,7 +60344,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RuntimeConfiguration": {
-            "shape": "S12"
+            "shape": "S10"
           }
         }
       }
@@ -60322,7 +60370,11 @@ module.exports={
     }
   },
   "shapes": {
-    "Sa": {
+    "S3": {
+      "type": "list",
+      "member": {}
+    },
+    "S9": {
       "type": "structure",
       "members": {
         "Type": {},
@@ -60330,7 +60382,7 @@ module.exports={
         "Message": {}
       }
     },
-    "Sf": {
+    "Se": {
       "type": "structure",
       "members": {
         "AliasId": {},
@@ -60338,7 +60390,7 @@ module.exports={
         "AliasArn": {},
         "Description": {},
         "RoutingStrategy": {
-          "shape": "Sa"
+          "shape": "S9"
         },
         "CreationTime": {
           "type": "timestamp"
@@ -60348,7 +60400,7 @@ module.exports={
         }
       }
     },
-    "Sk": {
+    "Sj": {
       "type": "structure",
       "members": {
         "Bucket": {},
@@ -60356,7 +60408,7 @@ module.exports={
         "RoleArn": {}
       }
     },
-    "So": {
+    "Sn": {
       "type": "structure",
       "members": {
         "BuildId": {},
@@ -60372,7 +60424,7 @@ module.exports={
         }
       }
     },
-    "Ss": {
+    "Sr": {
       "type": "structure",
       "members": {
         "AccessKeyId": {},
@@ -60382,10 +60434,6 @@ module.exports={
       "sensitive": true
     },
     "Su": {
-      "type": "list",
-      "member": {}
-    },
-    "Sw": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -60407,7 +60455,7 @@ module.exports={
         }
       }
     },
-    "S12": {
+    "S10": {
       "type": "structure",
       "members": {
         "ServerProcesses": {
@@ -60435,7 +60483,7 @@ module.exports={
         }
       }
     },
-    "S18": {
+    "S16": {
       "type": "structure",
       "members": {
         "NewGameSessionsPerCreator": {
@@ -60446,11 +60494,11 @@ module.exports={
         }
       }
     },
-    "S1a": {
+    "S18": {
       "type": "list",
       "member": {}
     },
-    "S1d": {
+    "S1b": {
       "type": "structure",
       "members": {
         "FleetId": {},
@@ -60468,19 +60516,19 @@ module.exports={
         "ServerLaunchPath": {},
         "ServerLaunchParameters": {},
         "LogPaths": {
-          "shape": "Su"
+          "shape": "S3"
         },
         "NewGameSessionProtectionPolicy": {},
         "OperatingSystem": {},
         "ResourceCreationLimitPolicy": {
-          "shape": "S18"
+          "shape": "S16"
         },
         "MetricGroups": {
-          "shape": "S1a"
+          "shape": "S18"
         }
       }
     },
-    "S1g": {
+    "S1e": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -60494,7 +60542,7 @@ module.exports={
         }
       }
     },
-    "S1n": {
+    "S1l": {
       "type": "structure",
       "members": {
         "GameSessionId": {},
@@ -60514,7 +60562,7 @@ module.exports={
         },
         "Status": {},
         "GameProperties": {
-          "shape": "S1g"
+          "shape": "S1e"
         },
         "IpAddress": {},
         "Port": {
@@ -60522,10 +60570,11 @@ module.exports={
         },
         "PlayerSessionCreationPolicy": {},
         "CreatorId": {},
-        "GameSessionData": {}
+        "GameSessionData": {},
+        "MatchmakerData": {}
       }
     },
-    "S1t": {
+    "S1s": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -60539,7 +60588,7 @@ module.exports={
         }
       }
     },
-    "S1v": {
+    "S1u": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -60548,7 +60597,7 @@ module.exports={
         }
       }
     },
-    "S1y": {
+    "S1x": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -60557,24 +60606,24 @@ module.exports={
           "type": "integer"
         },
         "PlayerLatencyPolicies": {
-          "shape": "S1t"
+          "shape": "S1s"
         },
         "Destinations": {
-          "shape": "S1v"
+          "shape": "S1u"
         }
       }
     },
-    "S20": {
+    "S1z": {
       "type": "list",
       "member": {}
     },
-    "S27": {
+    "S26": {
       "type": "structure",
       "members": {
         "Name": {},
         "Description": {},
         "GameSessionQueueArns": {
-          "shape": "S20"
+          "shape": "S1z"
         },
         "RequestTimeoutSeconds": {
           "type": "integer"
@@ -60595,12 +60644,12 @@ module.exports={
           "type": "timestamp"
         },
         "GameProperties": {
-          "shape": "S1g"
+          "shape": "S1e"
         },
         "GameSessionData": {}
       }
     },
-    "S2b": {
+    "S2a": {
       "type": "structure",
       "required": [
         "RuleSetBody"
@@ -60613,7 +60662,7 @@ module.exports={
         }
       }
     },
-    "S2f": {
+    "S2e": {
       "type": "structure",
       "members": {
         "PlayerSessionId": {},
@@ -60634,13 +60683,13 @@ module.exports={
         "PlayerData": {}
       }
     },
-    "S2m": {
+    "S2l": {
       "type": "list",
       "member": {
-        "shape": "S2f"
+        "shape": "S2e"
       }
     },
-    "S2p": {
+    "S2o": {
       "type": "structure",
       "members": {
         "GameLiftAwsAccountId": {},
@@ -60654,18 +60703,18 @@ module.exports={
         }
       }
     },
-    "S3d": {
+    "S3c": {
       "type": "list",
       "member": {}
     },
-    "S42": {
+    "S41": {
       "type": "structure",
       "members": {
         "PlacementId": {},
         "GameSessionQueueName": {},
         "Status": {},
         "GameProperties": {
-          "shape": "S1g"
+          "shape": "S1e"
         },
         "MaximumPlayerSessionCount": {
           "type": "integer"
@@ -60675,7 +60724,7 @@ module.exports={
         "GameSessionArn": {},
         "GameSessionRegion": {},
         "PlayerLatencies": {
-          "shape": "S44"
+          "shape": "S43"
         },
         "StartTime": {
           "type": "timestamp"
@@ -60697,10 +60746,11 @@ module.exports={
             }
           }
         },
-        "GameSessionData": {}
+        "GameSessionData": {},
+        "MatchmakerData": {}
       }
     },
-    "S44": {
+    "S43": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -60713,17 +60763,17 @@ module.exports={
         }
       }
     },
-    "S4f": {
+    "S4e": {
       "type": "list",
       "member": {
-        "shape": "S1n"
+        "shape": "S1l"
       }
     },
-    "S4n": {
+    "S4m": {
       "type": "list",
       "member": {}
     },
-    "S4q": {
+    "S4p": {
       "type": "structure",
       "members": {
         "TicketId": {},
@@ -60738,7 +60788,7 @@ module.exports={
           "type": "timestamp"
         },
         "Players": {
-          "shape": "S4t"
+          "shape": "S4s"
         },
         "GameSessionConnectionInfo": {
           "type": "structure",
@@ -60765,7 +60815,7 @@ module.exports={
         }
       }
     },
-    "S4t": {
+    "S4s": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -60782,7 +60832,7 @@ module.exports={
                   "type": "double"
                 },
                 "SL": {
-                  "shape": "Su"
+                  "shape": "S3"
                 },
                 "SDM": {
                   "type": "map",
@@ -121873,7 +121923,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.190.0',
+  VERSION: '2.191.0',
 
   /**
    * @api private
@@ -145786,7 +145836,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.190.0
+// AWS SDK for JavaScript v2.191.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

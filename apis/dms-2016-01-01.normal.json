@@ -318,6 +318,20 @@
       ],
       "documentation":"<p>Returns the status of the RefreshSchemas operation.</p>"
     },
+    "DescribeReplicationInstanceTaskLogs":{
+      "name":"DescribeReplicationInstanceTaskLogs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeReplicationInstanceTaskLogsMessage"},
+      "output":{"shape":"DescribeReplicationInstanceTaskLogsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundFault"},
+        {"shape":"InvalidResourceStateFault"}
+      ],
+      "documentation":"<p>Returns information about the task logs for the specified task.</p>"
+    },
     "DescribeReplicationInstances":{
       "name":"DescribeReplicationInstances",
       "http":{
@@ -408,7 +422,8 @@
       "output":{"shape":"ImportCertificateResponse"},
       "errors":[
         {"shape":"ResourceAlreadyExistsFault"},
-        {"shape":"InvalidCertificateFault"}
+        {"shape":"InvalidCertificateFault"},
+        {"shape":"ResourceQuotaExceededFault"}
       ],
       "documentation":"<p>Uploads the specified certificate.</p>"
     },
@@ -509,6 +524,20 @@
         {"shape":"KMSKeyNotAccessibleFault"}
       ],
       "documentation":"<p>Modifies the specified replication task.</p> <p>You can't modify the task endpoints. The task must be stopped before you can modify it. </p> <p>For more information about AWS DMS tasks, see the AWS DMS user guide at <a href=\"http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html\"> Working with Migration Tasks </a> </p>"
+    },
+    "RebootReplicationInstance":{
+      "name":"RebootReplicationInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RebootReplicationInstanceMessage"},
+      "output":{"shape":"RebootReplicationInstanceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundFault"},
+        {"shape":"InvalidResourceStateFault"}
+      ],
+      "documentation":"<p>Reboots a replication instance. Rebooting results in a momentary outage, until the replication instance becomes available again.</p>"
     },
     "RefreshSchemas":{
       "name":"RefreshSchemas",
@@ -807,7 +836,7 @@
         },
         "EngineName":{
           "shape":"String",
-          "documentation":"<p>The type of engine for the endpoint. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.</p>"
+          "documentation":"<p>The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.</p>"
         },
         "Username":{
           "shape":"String",
@@ -1518,6 +1547,41 @@
       },
       "documentation":"<p/>"
     },
+    "DescribeReplicationInstanceTaskLogsMessage":{
+      "type":"structure",
+      "required":["ReplicationInstanceArn"],
+      "members":{
+        "ReplicationInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the replication instance.</p>"
+        },
+        "MaxRecords":{
+          "shape":"IntegerOptional",
+          "documentation":"<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      }
+    },
+    "DescribeReplicationInstanceTaskLogsResponse":{
+      "type":"structure",
+      "members":{
+        "ReplicationInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the replication instance.</p>"
+        },
+        "ReplicationInstanceTaskLogs":{
+          "shape":"ReplicationInstanceTaskLogsList",
+          "documentation":"<p>An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes).</p>"
+        },
+        "Marker":{
+          "shape":"String",
+          "documentation":"<p> An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      }
+    },
     "DescribeReplicationInstancesMessage":{
       "type":"structure",
       "members":{
@@ -1757,7 +1821,7 @@
         },
         "EngineName":{
           "shape":"String",
-          "documentation":"<p>The database engine name. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.</p>"
+          "documentation":"<p>The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.</p>"
         },
         "Username":{
           "shape":"String",
@@ -2084,7 +2148,7 @@
         },
         "EngineName":{
           "shape":"String",
-          "documentation":"<p>The type of engine for the endpoint. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, DYNAMODB, MONGODB, SYBASE, and SQLSERVER.</p>"
+          "documentation":"<p>The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.</p>"
         },
         "Username":{
           "shape":"String",
@@ -2409,6 +2473,29 @@
       "type":"list",
       "member":{"shape":"OrderableReplicationInstance"}
     },
+    "RebootReplicationInstanceMessage":{
+      "type":"structure",
+      "required":["ReplicationInstanceArn"],
+      "members":{
+        "ReplicationInstanceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the replication instance.</p>"
+        },
+        "ForceFailover":{
+          "shape":"BooleanOptional",
+          "documentation":"<p>If this parameter is <code>true</code>, the reboot is conducted through a Multi-AZ failover. (If the instance isn't configured for Multi-AZ, then you can't specify <code>true</code>.)</p>"
+        }
+      }
+    },
+    "RebootReplicationInstanceResponse":{
+      "type":"structure",
+      "members":{
+        "ReplicationInstance":{
+          "shape":"ReplicationInstance",
+          "documentation":"<p>The replication instance that is being rebooted. </p>"
+        }
+      }
+    },
     "RefreshSchemasMessage":{
       "type":"structure",
       "required":[
@@ -2631,6 +2718,28 @@
     "ReplicationInstancePublicIpAddressList":{
       "type":"list",
       "member":{"shape":"String"}
+    },
+    "ReplicationInstanceTaskLog":{
+      "type":"structure",
+      "members":{
+        "ReplicationTaskName":{
+          "shape":"String",
+          "documentation":"<p>The name of the replication task.</p>"
+        },
+        "ReplicationTaskArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the replication task.</p>"
+        },
+        "ReplicationInstanceTaskLogSize":{
+          "shape":"Long",
+          "documentation":"<p>The size, in bytes, of the replication task log.</p>"
+        }
+      },
+      "documentation":"<p>Contains metadata for a replication instance task log.</p>"
+    },
+    "ReplicationInstanceTaskLogsList":{
+      "type":"list",
+      "member":{"shape":"ReplicationInstanceTaskLog"}
     },
     "ReplicationPendingModifiedValues":{
       "type":"structure",
@@ -3070,7 +3179,7 @@
       "members":{
         "EngineName":{
           "shape":"String",
-          "documentation":"<p>The database engine name. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.</p>"
+          "documentation":"<p>The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.</p>"
         },
         "SupportsCDC":{
           "shape":"Boolean",

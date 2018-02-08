@@ -28,11 +28,11 @@ declare class GameLift extends Service {
    */
   createAlias(callback?: (err: AWSError, data: GameLift.Types.CreateAliasOutput) => void): Request<GameLift.Types.CreateAliasOutput, AWSError>;
   /**
-   * Creates a new Amazon GameLift build from a set of game server binary files stored in an Amazon Simple Storage Service (Amazon S3) location. To use this API call, create a .zip file containing all of the files for the build and store it in an Amazon S3 bucket under your AWS account. For help on packaging your build files and creating a build, see Uploading Your Game to Amazon GameLift.  Use this API action ONLY if you are storing your game build files in an Amazon S3 bucket. To create a build using files stored locally, use the CLI command  upload-build , which uploads the build files from a file location you specify.  To create a new build using CreateBuild, identify the storage location and operating system of your game build. You also have the option of specifying a build name and version. If successful, this action creates a new build record with an unique build ID and in INITIALIZED status. Use the API call DescribeBuild to check the status of your build. A build must be in READY status before it can be used to create fleets to host your game. Build-related operations include:    CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
+   * Creates a new Amazon GameLift build record for your game server binary files and points to the location of your game server build files in an Amazon Simple Storage Service (Amazon S3) location.  Game server binaries must be combined into a .zip file for use with Amazon GameLift. See Uploading Your Game for more information.   To create new builds quickly and easily, use the AWS CLI command  upload-build . This helper command uploads your build and creates a new build record in one step, and automatically handles the necessary permissions. See  Upload Build Files to Amazon GameLift for more help.  The CreateBuild operation should be used only when you need to manually upload your build files, as in the following scenarios:   Store a build file in an Amazon S3 bucket under your own AWS account. To use this option, you must first give Amazon GameLift access to that Amazon S3 bucket. See  Create a Build with Files in Amazon S3 for detailed help. To create a new build record using files in your Amazon S3 bucket, call CreateBuild and specify a build name, operating system, and the storage location of your game build.   Upload a build file directly to Amazon GameLift's Amazon S3 account. To use this option, you first call CreateBuild with a build name and operating system. This action creates a new build record and returns an Amazon S3 storage location (bucket and key only) and temporary access credentials. Use the credentials to manually upload your build file to the storage location (see the Amazon S3 topic Uploading Objects). You can upload files to a location only once.    If successful, this operation creates a new build record with a unique build ID and places it in INITIALIZED status. You can use DescribeBuild to check the status of your build. A build must be in READY status before it can be used to create fleets. Build-related operations include:    CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
    */
   createBuild(params: GameLift.Types.CreateBuildInput, callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
-   * Creates a new Amazon GameLift build from a set of game server binary files stored in an Amazon Simple Storage Service (Amazon S3) location. To use this API call, create a .zip file containing all of the files for the build and store it in an Amazon S3 bucket under your AWS account. For help on packaging your build files and creating a build, see Uploading Your Game to Amazon GameLift.  Use this API action ONLY if you are storing your game build files in an Amazon S3 bucket. To create a build using files stored locally, use the CLI command  upload-build , which uploads the build files from a file location you specify.  To create a new build using CreateBuild, identify the storage location and operating system of your game build. You also have the option of specifying a build name and version. If successful, this action creates a new build record with an unique build ID and in INITIALIZED status. Use the API call DescribeBuild to check the status of your build. A build must be in READY status before it can be used to create fleets to host your game. Build-related operations include:    CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
+   * Creates a new Amazon GameLift build record for your game server binary files and points to the location of your game server build files in an Amazon Simple Storage Service (Amazon S3) location.  Game server binaries must be combined into a .zip file for use with Amazon GameLift. See Uploading Your Game for more information.   To create new builds quickly and easily, use the AWS CLI command  upload-build . This helper command uploads your build and creates a new build record in one step, and automatically handles the necessary permissions. See  Upload Build Files to Amazon GameLift for more help.  The CreateBuild operation should be used only when you need to manually upload your build files, as in the following scenarios:   Store a build file in an Amazon S3 bucket under your own AWS account. To use this option, you must first give Amazon GameLift access to that Amazon S3 bucket. See  Create a Build with Files in Amazon S3 for detailed help. To create a new build record using files in your Amazon S3 bucket, call CreateBuild and specify a build name, operating system, and the storage location of your game build.   Upload a build file directly to Amazon GameLift's Amazon S3 account. To use this option, you first call CreateBuild with a build name and operating system. This action creates a new build record and returns an Amazon S3 storage location (bucket and key only) and temporary access credentials. Use the credentials to manually upload your build file to the storage location (see the Amazon S3 topic Uploading Objects). You can upload files to a location only once.    If successful, this operation creates a new build record with a unique build ID and places it in INITIALIZED status. You can use DescribeBuild to check the status of your build. A build must be in READY status before it can be used to create fleets. Build-related operations include:    CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
    */
   createBuild(callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class GameLift extends Service {
    */
   describeAlias(callback?: (err: AWSError, data: GameLift.Types.DescribeAliasOutput) => void): Request<GameLift.Types.DescribeAliasOutput, AWSError>;
   /**
-   * Retrieves properties for a build. To get a build record, specify a build ID. If successful, an object containing the build properties is returned. Build-related operations include:    CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
+   * Retrieves properties for a build. To request a build record, specify a build ID. If successful, an object containing the build properties is returned. Build-related operations include:    CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
    */
   describeBuild(params: GameLift.Types.DescribeBuildInput, callback?: (err: AWSError, data: GameLift.Types.DescribeBuildOutput) => void): Request<GameLift.Types.DescribeBuildOutput, AWSError>;
   /**
-   * Retrieves properties for a build. To get a build record, specify a build ID. If successful, an object containing the build properties is returned. Build-related operations include:    CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
+   * Retrieves properties for a build. To request a build record, specify a build ID. If successful, an object containing the build properties is returned. Build-related operations include:    CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
    */
   describeBuild(callback?: (err: AWSError, data: GameLift.Types.DescribeBuildOutput) => void): Request<GameLift.Types.DescribeBuildOutput, AWSError>;
   /**
@@ -276,11 +276,11 @@ declare class GameLift extends Service {
    */
   describeInstances(callback?: (err: AWSError, data: GameLift.Types.DescribeInstancesOutput) => void): Request<GameLift.Types.DescribeInstancesOutput, AWSError>;
   /**
-   * Retrieves a set of one or more matchmaking tickets. Use this operation to retrieve ticket information, including status and--once a successful match is made--acquire connection information for the resulting new game session.  You can use this operation to track the progress of matchmaking requests (through polling) as an alternative to using event notifications. See more details on tracking matchmaking requests through polling or notifications in StartMatchmaking.  You can request data for a one or a list of ticket IDs. If the request is successful, a ticket object is returned for each requested ID. When specifying a list of ticket IDs, objects are returned only for tickets that currently exist.  Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   * Retrieves one or more matchmaking tickets. Use this operation to retrieve ticket information, including status and--once a successful match is made--acquire connection information for the resulting new game session.  You can use this operation to track the progress of matchmaking requests (through polling) as an alternative to using event notifications. See more details on tracking matchmaking requests through polling or notifications in StartMatchmaking.  To request matchmaking tickets, provide a list of up to 10 ticket IDs. If the request is successful, a ticket object is returned for each requested ID that currently exists. Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
    */
   describeMatchmaking(params: GameLift.Types.DescribeMatchmakingInput, callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingOutput) => void): Request<GameLift.Types.DescribeMatchmakingOutput, AWSError>;
   /**
-   * Retrieves a set of one or more matchmaking tickets. Use this operation to retrieve ticket information, including status and--once a successful match is made--acquire connection information for the resulting new game session.  You can use this operation to track the progress of matchmaking requests (through polling) as an alternative to using event notifications. See more details on tracking matchmaking requests through polling or notifications in StartMatchmaking.  You can request data for a one or a list of ticket IDs. If the request is successful, a ticket object is returned for each requested ID. When specifying a list of ticket IDs, objects are returned only for tickets that currently exist.  Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   * Retrieves one or more matchmaking tickets. Use this operation to retrieve ticket information, including status and--once a successful match is made--acquire connection information for the resulting new game session.  You can use this operation to track the progress of matchmaking requests (through polling) as an alternative to using event notifications. See more details on tracking matchmaking requests through polling or notifications in StartMatchmaking.  To request matchmaking tickets, provide a list of up to 10 ticket IDs. If the request is successful, a ticket object is returned for each requested ID that currently exists. Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
    */
   describeMatchmaking(callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingOutput) => void): Request<GameLift.Types.DescribeMatchmakingOutput, AWSError>;
   /**
@@ -388,11 +388,11 @@ declare class GameLift extends Service {
    */
   putScalingPolicy(callback?: (err: AWSError, data: GameLift.Types.PutScalingPolicyOutput) => void): Request<GameLift.Types.PutScalingPolicyOutput, AWSError>;
   /**
-   *  This API call is not currently in use.  Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.
+   * Retrieves a fresh set of credentials for use when uploading a new set of game build files to Amazon GameLift's Amazon S3. This is done as part of the build creation process; see CreateBuild. To request new credentials, specify the build ID as returned with an initial CreateBuild request. If successful, a new set of credentials are returned, along with the S3 storage location associated with the build ID.
    */
   requestUploadCredentials(params: GameLift.Types.RequestUploadCredentialsInput, callback?: (err: AWSError, data: GameLift.Types.RequestUploadCredentialsOutput) => void): Request<GameLift.Types.RequestUploadCredentialsOutput, AWSError>;
   /**
-   *  This API call is not currently in use.  Retrieves a fresh set of upload credentials and the assigned Amazon S3 storage location for a specific build. Valid credentials are required to upload your game build files to Amazon S3.
+   * Retrieves a fresh set of credentials for use when uploading a new set of game build files to Amazon GameLift's Amazon S3. This is done as part of the build creation process; see CreateBuild. To request new credentials, specify the build ID as returned with an initial CreateBuild request. If successful, a new set of credentials are returned, along with the S3 storage location associated with the build ID.
    */
   requestUploadCredentials(callback?: (err: AWSError, data: GameLift.Types.RequestUploadCredentialsOutput) => void): Request<GameLift.Types.RequestUploadCredentialsOutput, AWSError>;
   /**
@@ -404,11 +404,11 @@ declare class GameLift extends Service {
    */
   resolveAlias(callback?: (err: AWSError, data: GameLift.Types.ResolveAliasOutput) => void): Request<GameLift.Types.ResolveAliasOutput, AWSError>;
   /**
-   * Retrieves a set of game sessions that match a set of search criteria and sorts them in a specified order. A game session search is limited to a single fleet. Search results include only game sessions that are in ACTIVE status. If you need to retrieve game sessions with a status other than active, use DescribeGameSessions. If you need to retrieve the protection policy for each game session, use DescribeGameSessionDetails. You can search or sort by the following game session attributes:    gameSessionId -- Unique identifier for the game session. You can use either a GameSessionId or GameSessionArn value.     gameSessionName -- Name assigned to a game session. This value is set when requesting a new game session with CreateGameSession or updating with UpdateGameSession. Game session names do not need to be unique to a game session.    creationTimeMillis -- Value indicating when a game session was created. It is expressed in Unix time as milliseconds.    playerSessionCount -- Number of players currently connected to a game session. This value changes rapidly as players join the session or drop out.    maximumSessions -- Maximum number of player sessions allowed for a game session. This value is set when requesting a new game session with CreateGameSession or updating with UpdateGameSession.    hasAvailablePlayerSessions -- Boolean value indicating whether a game session has reached its maximum number of players. When searching with this attribute, the search value must be true or false. It is highly recommended that all search requests include this filter attribute to optimize search performance and return only sessions that players can join.    To search or sort, specify either a fleet ID or an alias ID, and provide a search filter expression, a sort expression, or both. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a collection of GameSession objects matching the request is returned.  Returned values for playerSessionCount and hasAvailablePlayerSessions change quickly as players join sessions and others drop out. Results should be considered a snapshot in time. Be sure to refresh search results often, and handle sessions that fill up before a player can join.   Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Retrieves all active game sessions that match a set of search criteria and sorts them in a specified order. You can search or sort by the following game session attributes:    gameSessionId -- Unique identifier for the game session. You can use either a GameSessionId or GameSessionArn value.     gameSessionName -- Name assigned to a game session. This value is set when requesting a new game session with CreateGameSession or updating with UpdateGameSession. Game session names do not need to be unique to a game session.    gameSessionProperties -- Custom data defined in a game session's GameProperty parameter. GameProperty values are stored as key:value pairs; the filter expression must indicate the key and a string to search the data values for. For example, to search for game sessions with custom data containing the key:value pair "gameMode:brawl", specify the following: gameSessionProperties.gameMode = "brawl". All custom data values are searched as strings.    maximumSessions -- Maximum number of player sessions allowed for a game session. This value is set when requesting a new game session with CreateGameSession or updating with UpdateGameSession.    creationTimeMillis -- Value indicating when a game session was created. It is expressed in Unix time as milliseconds.    playerSessionCount -- Number of players currently connected to a game session. This value changes rapidly as players join the session or drop out.    hasAvailablePlayerSessions -- Boolean value indicating whether a game session has reached its maximum number of players. It is highly recommended that all search requests include this filter attribute to optimize search performance and return only sessions that players can join.     Returned values for playerSessionCount and hasAvailablePlayerSessions change quickly as players join sessions and others drop out. Results should be considered a snapshot in time. Be sure to refresh search results often, and handle sessions that fill up before a player can join.   To search or sort, specify either a fleet ID or an alias ID, and provide a search filter expression, a sort expression, or both. If successful, a collection of GameSession objects matching the request is returned. Use the pagination parameters to retrieve results as a set of sequential pages.  You can search for game sessions one fleet at a time only. To find game sessions across multiple fleets, you must search each fleet separately and combine the results. This search feature finds only game sessions that are in ACTIVE status. To locate games in statuses other than active, use DescribeGameSessionDetails. Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   searchGameSessions(params: GameLift.Types.SearchGameSessionsInput, callback?: (err: AWSError, data: GameLift.Types.SearchGameSessionsOutput) => void): Request<GameLift.Types.SearchGameSessionsOutput, AWSError>;
   /**
-   * Retrieves a set of game sessions that match a set of search criteria and sorts them in a specified order. A game session search is limited to a single fleet. Search results include only game sessions that are in ACTIVE status. If you need to retrieve game sessions with a status other than active, use DescribeGameSessions. If you need to retrieve the protection policy for each game session, use DescribeGameSessionDetails. You can search or sort by the following game session attributes:    gameSessionId -- Unique identifier for the game session. You can use either a GameSessionId or GameSessionArn value.     gameSessionName -- Name assigned to a game session. This value is set when requesting a new game session with CreateGameSession or updating with UpdateGameSession. Game session names do not need to be unique to a game session.    creationTimeMillis -- Value indicating when a game session was created. It is expressed in Unix time as milliseconds.    playerSessionCount -- Number of players currently connected to a game session. This value changes rapidly as players join the session or drop out.    maximumSessions -- Maximum number of player sessions allowed for a game session. This value is set when requesting a new game session with CreateGameSession or updating with UpdateGameSession.    hasAvailablePlayerSessions -- Boolean value indicating whether a game session has reached its maximum number of players. When searching with this attribute, the search value must be true or false. It is highly recommended that all search requests include this filter attribute to optimize search performance and return only sessions that players can join.    To search or sort, specify either a fleet ID or an alias ID, and provide a search filter expression, a sort expression, or both. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a collection of GameSession objects matching the request is returned.  Returned values for playerSessionCount and hasAvailablePlayerSessions change quickly as players join sessions and others drop out. Results should be considered a snapshot in time. Be sure to refresh search results often, and handle sessions that fill up before a player can join.   Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Retrieves all active game sessions that match a set of search criteria and sorts them in a specified order. You can search or sort by the following game session attributes:    gameSessionId -- Unique identifier for the game session. You can use either a GameSessionId or GameSessionArn value.     gameSessionName -- Name assigned to a game session. This value is set when requesting a new game session with CreateGameSession or updating with UpdateGameSession. Game session names do not need to be unique to a game session.    gameSessionProperties -- Custom data defined in a game session's GameProperty parameter. GameProperty values are stored as key:value pairs; the filter expression must indicate the key and a string to search the data values for. For example, to search for game sessions with custom data containing the key:value pair "gameMode:brawl", specify the following: gameSessionProperties.gameMode = "brawl". All custom data values are searched as strings.    maximumSessions -- Maximum number of player sessions allowed for a game session. This value is set when requesting a new game session with CreateGameSession or updating with UpdateGameSession.    creationTimeMillis -- Value indicating when a game session was created. It is expressed in Unix time as milliseconds.    playerSessionCount -- Number of players currently connected to a game session. This value changes rapidly as players join the session or drop out.    hasAvailablePlayerSessions -- Boolean value indicating whether a game session has reached its maximum number of players. It is highly recommended that all search requests include this filter attribute to optimize search performance and return only sessions that players can join.     Returned values for playerSessionCount and hasAvailablePlayerSessions change quickly as players join sessions and others drop out. Results should be considered a snapshot in time. Be sure to refresh search results often, and handle sessions that fill up before a player can join.   To search or sort, specify either a fleet ID or an alias ID, and provide a search filter expression, a sort expression, or both. If successful, a collection of GameSession objects matching the request is returned. Use the pagination parameters to retrieve results as a set of sequential pages.  You can search for game sessions one fleet at a time only. To find game sessions across multiple fleets, you must search each fleet separately and combine the results. This search feature finds only game sessions that are in ACTIVE status. To locate games in statuses other than active, use DescribeGameSessionDetails. Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   searchGameSessions(callback?: (err: AWSError, data: GameLift.Types.SearchGameSessionsOutput) => void): Request<GameLift.Types.SearchGameSessionsOutput, AWSError>;
   /**
@@ -419,6 +419,14 @@ declare class GameLift extends Service {
    * Places a request for a new game session in a queue (see CreateGameSessionQueue). When processing a placement request, Amazon GameLift searches for available resources on the queue's destinations, scanning each until it finds resources or the placement request times out. A game session placement request can also request player sessions. When a new game session is successfully created, Amazon GameLift creates a player session for each player included in the request. When placing a game session, by default Amazon GameLift tries each fleet in the order they are listed in the queue configuration. Ideally, a queue's destinations are listed in preference order. Alternatively, when requesting a game session with players, you can also provide latency data for each player in relevant regions. Latency data indicates the performance lag a player experiences when connected to a fleet in the region. Amazon GameLift uses latency data to reorder the list of destinations to place the game session in a region with minimal lag. If latency data is provided for multiple players, Amazon GameLift calculates each region's average lag for all players and reorders to get the best game play across all players.  To place a new game session request, specify the following:   The queue name and a set of game session properties and settings   A unique ID (such as a UUID) for the placement. You use this ID to track the status of the placement request   (Optional) A set of IDs and player data for each player you want to join to the new game session   Latency data for all players (if you want to optimize game play for the players)   If successful, a new game session placement is created. To track the status of a placement request, call DescribeGameSessionPlacement and check the request's status. If the status is FULFILLED, a new game session has been created and a game session ARN and region are referenced. If the placement request times out, you can resubmit the request or retry it with a different queue.  Game-session-related operations include:    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   startGameSessionPlacement(callback?: (err: AWSError, data: GameLift.Types.StartGameSessionPlacementOutput) => void): Request<GameLift.Types.StartGameSessionPlacementOutput, AWSError>;
+  /**
+   * Finds new players to fill open slots in an existing game session. This operation can be used to add players to matched games that start with fewer than the maximum number of players or to replace players when they drop out. By backfilling with the same matchmaker used to create the original match, you ensure that new players meet the match criteria and maintain a consistent experience throughout the game session. You can backfill a match anytime after a game session has been created.  To request a match backfill, specify a unique ticket ID, the existing game session's ARN, a matchmaking configuration, and a set of data that describes all current players in the game session. If successful, a match backfill ticket is created and returned with status set to QUEUED. The ticket is placed in the matchmaker's ticket pool and processed. Track the status of the ticket to respond as needed. For more detail how to set up backfilling, see  Set up Match Backfilling.  The process of finding backfill matches is essentially identical to the initial matchmaking process. The matchmaker searches the pool and groups tickets together to form potential matches, allowing only one backfill ticket per potential match. Once the a match is formed, the matchmaker creates player sessions for the new players. All tickets in the match are updated with the game session's connection information, and the GameSession object is updated to include matchmaker data on the new players. For more detail on how match backfill requests are processed, see  How Amazon GameLift FlexMatch Works.  Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  startMatchBackfill(params: GameLift.Types.StartMatchBackfillInput, callback?: (err: AWSError, data: GameLift.Types.StartMatchBackfillOutput) => void): Request<GameLift.Types.StartMatchBackfillOutput, AWSError>;
+  /**
+   * Finds new players to fill open slots in an existing game session. This operation can be used to add players to matched games that start with fewer than the maximum number of players or to replace players when they drop out. By backfilling with the same matchmaker used to create the original match, you ensure that new players meet the match criteria and maintain a consistent experience throughout the game session. You can backfill a match anytime after a game session has been created.  To request a match backfill, specify a unique ticket ID, the existing game session's ARN, a matchmaking configuration, and a set of data that describes all current players in the game session. If successful, a match backfill ticket is created and returned with status set to QUEUED. The ticket is placed in the matchmaker's ticket pool and processed. Track the status of the ticket to respond as needed. For more detail how to set up backfilling, see  Set up Match Backfilling.  The process of finding backfill matches is essentially identical to the initial matchmaking process. The matchmaker searches the pool and groups tickets together to form potential matches, allowing only one backfill ticket per potential match. Once the a match is formed, the matchmaker creates player sessions for the new players. All tickets in the match are updated with the game session's connection information, and the GameSession object is updated to include matchmaker data on the new players. For more detail on how match backfill requests are processed, see  How Amazon GameLift FlexMatch Works.  Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
+   */
+  startMatchBackfill(callback?: (err: AWSError, data: GameLift.Types.StartMatchBackfillOutput) => void): Request<GameLift.Types.StartMatchBackfillOutput, AWSError>;
   /**
    * Uses FlexMatch to create a game match for a group of players based on custom matchmaking rules, and starts a new game for the matched players. Each matchmaking request specifies the type of match to build (team configuration, rules for an acceptable match, etc.). The request also specifies the players to find a match for and where to host the new game session for optimal performance. A matchmaking request might start with a single player or a group of players who want to play together. FlexMatch finds additional players as needed to fill the match. Match type, rules, and the queue used to place a new game session are defined in a MatchmakingConfiguration. For complete information on setting up and using FlexMatch, see the topic  Adding FlexMatch to Your Game. To start matchmaking, provide a unique ticket ID, specify a matchmaking configuration, and include the players to be matched. You must also include a set of player attributes relevant for the matchmaking configuration. If successful, a matchmaking ticket is returned with status set to QUEUED. Track the status of the ticket to respond as needed and acquire game session connection information for successfully completed matches.  Tracking ticket status -- A couple of options are available for tracking the status of matchmaking requests:    Polling -- Call DescribeMatchmaking. This operation returns the full ticket object, including current status and (for completed tickets) game session connection info. We recommend polling no more than once every 10 seconds.   Notifications -- Get event notifications for changes in ticket status using Amazon Simple Notification Service (SNS). Notifications are easy to set up (see CreateMatchmakingConfiguration) and typically deliver match status changes faster and more efficiently than polling. We recommend that you use polling to back up to notifications (since delivery is not guaranteed) and call DescribeMatchmaking only when notifications are not received within 30 seconds.    Processing a matchmaking request -- FlexMatch handles a matchmaking request as follows:    Your client code submits a StartMatchmaking request for one or more players and tracks the status of the request ticket.    FlexMatch uses this ticket and others in process to build an acceptable match. When a potential match is identified, all tickets in the proposed match are advanced to the next status.    If the match requires player acceptance (set in the matchmaking configuration), the tickets move into status REQUIRES_ACCEPTANCE. This status triggers your client code to solicit acceptance from all players in every ticket involved in the match, and then call AcceptMatch for each player. If any player rejects or fails to accept the match before a specified timeout, the proposed match is dropped (see AcceptMatch for more details).   Once a match is proposed and accepted, the matchmaking tickets move into status PLACING. FlexMatch locates resources for a new game session using the game session queue (set in the matchmaking configuration) and creates the game session based on the match data.    When the match is successfully placed, the matchmaking tickets move into COMPLETED status. Connection information (including game session endpoint and player session) is added to the matchmaking tickets. Matched players can use the connection information to join the game.    Matchmaking-related operations include:    StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch   
    */
@@ -533,7 +541,7 @@ declare namespace GameLift {
     /**
      * Unique identifier for a player delivering the response. This parameter can include one or multiple player IDs.
      */
-    PlayerIds: MatchmakingPlayerIdList;
+    PlayerIds: StringList;
     /**
      * Player response to the proposed match.
      */
@@ -589,7 +597,7 @@ declare namespace GameLift {
      */
     SL?: StringList;
     /**
-     * For a map of up to 10 type:value pairs. Maximum length for each string value is 100 characters. 
+     * For a map of up to 10 data type:value pairs. Maximum length for each string value is 100 characters. 
      */
     SDM?: StringDoubleMap;
   }
@@ -607,7 +615,7 @@ declare namespace GameLift {
      */
     SessionToken?: NonEmptyString;
   }
-  export type Boolean = boolean;
+  export type BooleanModel = boolean;
   export interface Build {
     /**
      * Unique identifier for a build.
@@ -672,11 +680,11 @@ declare namespace GameLift {
      */
     Version?: NonZeroAndMaxString;
     /**
-     * Amazon S3 location of the game build files to be uploaded. The S3 bucket must be owned by the same AWS account that you're using to manage Amazon GameLift. It also must in the same region that you want to create a new build in. Before calling CreateBuild with this location, you must allow Amazon GameLift to access your Amazon S3 bucket (see Create a Build with Files in Amazon S3).
+     * Information indicating where your game build files are stored. Use this parameter only when creating a build with files stored in an Amazon S3 bucket that you own. The storage location must specify an Amazon S3 bucket name and key, as well as a role ARN that you set up to allow Amazon GameLift to access your Amazon S3 bucket. The S3 bucket must be in the same region that you want to create a new build in.
      */
     StorageLocation?: S3Location;
     /**
-     * Operating system that the game server binaries are built to run on. This value determines the type of fleet resources that you can use for this build. If your game build contains multiple executables, they all must run on the same operating system.
+     * Operating system that the game server binaries are built to run on. This value determines the type of fleet resources that you can use for this build. If your game build contains multiple executables, they all must run on the same operating system. If an operating system is not specified when creating a build, Amazon GameLift uses the default value (WINDOWS_2012). This value cannot be changed later.
      */
     OperatingSystem?: OperatingSystem;
   }
@@ -686,11 +694,11 @@ declare namespace GameLift {
      */
     Build?: Build;
     /**
-     * This element is not currently in use.
+     * This element is returned only when the operation is called without a storage location. It contains credentials to use when you are uploading a build file to an Amazon S3 bucket that is owned by Amazon GameLift. Credentials have a limited life span. To refresh these credentials, call RequestUploadCredentials. 
      */
     UploadCredentials?: AwsCredentials;
     /**
-     * Amazon S3 location specified in the request.
+     * Amazon S3 location for your game build file, including bucket name and key.
      */
     StorageLocation?: S3Location;
   }
@@ -740,7 +748,7 @@ declare namespace GameLift {
      */
     ResourceCreationLimitPolicy?: ResourceCreationLimitPolicy;
     /**
-     * Names of metric groups to add this fleet to. Use an existing metric group name to add this fleet to the group. Or use a new name to create a new metric group. A fleet can only be included in one metric group at a time.
+     * Name of a metric group to add this fleet to. A metric group tracks metrics across all fleets in the group. Use an existing metric group name to add this fleet to the group, or use a new name to create a new metric group. A fleet can only be included in one metric group at a time.
      */
     MetricGroups?: MetricGroupList;
     /**
@@ -776,7 +784,7 @@ declare namespace GameLift {
      */
     Name?: NonZeroAndMaxString;
     /**
-     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     * Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session).
      */
     GameProperties?: GamePropertyList;
     /**
@@ -792,7 +800,7 @@ declare namespace GameLift {
      */
     IdempotencyToken?: IdStringModel;
     /**
-     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     * Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session).
      */
     GameSessionData?: GameSessionData;
   }
@@ -850,7 +858,7 @@ declare namespace GameLift {
     /**
      * Flag that determines whether or not a match that was created with this configuration must be accepted by the matched players. To require acceptance, set to TRUE.
      */
-    AcceptanceRequired: Boolean;
+    AcceptanceRequired: BooleanModel;
     /**
      * Unique identifier for a matchmaking rule set to use with this configuration. A matchmaking configuration can only use rule sets that are defined in the same region.
      */
@@ -868,11 +876,11 @@ declare namespace GameLift {
      */
     CustomEventData?: CustomEventData;
     /**
-     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     * Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
      */
     GameProperties?: GamePropertyList;
     /**
-     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match.
+     * Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match.
      */
     GameSessionData?: GameSessionData;
   }
@@ -1357,7 +1365,7 @@ declare namespace GameLift {
   }
   export interface DescribeMatchmakingInput {
     /**
-     * Unique identifier for a matchmaking ticket. To request all existing tickets, leave this parameter empty.
+     * Unique identifier for a matchmaking ticket. You can include up to 10 ID values. 
      */
     TicketIds: MatchmakingIdList;
   }
@@ -1727,7 +1735,7 @@ declare namespace GameLift {
      */
     Status?: GameSessionStatus;
     /**
-     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     * Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session). You can search for active game sessions based on this custom data with SearchGameSessions.
      */
     GameProperties?: GamePropertyList;
     /**
@@ -1747,9 +1755,13 @@ declare namespace GameLift {
      */
     CreatorId?: NonZeroAndMaxString;
     /**
-     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     * Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session).
      */
     GameSessionData?: GameSessionData;
+    /**
+     * Information about the matchmaking process that was used to create the game session. It is in JSON syntax, formated as a string. In addition the matchmaking configuration used, it contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see Match Data. Matchmaker data is useful when requesting match backfills, and is updated whenever new players are added during a successful backfill (see StartMatchBackfill). 
+     */
+    MatchmakerData?: MatchmakerData;
   }
   export type GameSessionActivationTimeoutSeconds = number;
   export interface GameSessionConnectionInfo {
@@ -1797,7 +1809,7 @@ declare namespace GameLift {
      */
     Status?: GameSessionPlacementState;
     /**
-     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     * Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session).
      */
     GameProperties?: GamePropertyList;
     /**
@@ -1845,9 +1857,13 @@ declare namespace GameLift {
      */
     PlacedPlayerSessions?: PlacedPlayerSessionList;
     /**
-     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     * Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session).
      */
     GameSessionData?: GameSessionData;
+    /**
+     * Information on the matchmaking process for this game. Data is in JSON syntax, formated as a string. It identifies the matchmaking configuration used to create the match, and contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data. 
+     */
+    MatchmakerData?: MatchmakerData;
   }
   export type GameSessionPlacementState = "PENDING"|"FULFILLED"|"CANCELLED"|"TIMED_OUT"|string;
   export interface GameSessionQueue {
@@ -2087,6 +2103,7 @@ declare namespace GameLift {
     PlayerSessionId?: PlayerSessionId;
   }
   export type MatchedPlayerSessionList = MatchedPlayerSession[];
+  export type MatchmakerData = string;
   export type MatchmakingAcceptanceTimeoutInteger = number;
   export interface MatchmakingConfiguration {
     /**
@@ -2112,7 +2129,7 @@ declare namespace GameLift {
     /**
      * Flag that determines whether or not a match that was created with this configuration must be accepted by the matched players. To require acceptance, set to TRUE.
      */
-    AcceptanceRequired?: Boolean;
+    AcceptanceRequired?: BooleanModel;
     /**
      * Unique identifier for a matchmaking rule set to use with this configuration. A matchmaking configuration can only use rule sets that are defined in the same region.
      */
@@ -2134,11 +2151,11 @@ declare namespace GameLift {
      */
     CreationTime?: Timestamp;
     /**
-     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     * Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
      */
     GameProperties?: GamePropertyList;
     /**
-     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     * Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
      */
     GameSessionData?: GameSessionData;
   }
@@ -2146,7 +2163,6 @@ declare namespace GameLift {
   export type MatchmakingConfigurationStatus = "CANCELLED"|"COMPLETED"|"FAILED"|"PLACING"|"QUEUED"|"REQUIRES_ACCEPTANCE"|"SEARCHING"|"TIMED_OUT"|string;
   export type MatchmakingIdList = MatchmakingIdStringModel[];
   export type MatchmakingIdStringModel = string;
-  export type MatchmakingPlayerIdList = PlayerIdStringModel[];
   export type MatchmakingRequestTimeoutInteger = number;
   export interface MatchmakingRuleSet {
     /**
@@ -2174,7 +2190,7 @@ declare namespace GameLift {
      */
     ConfigurationName?: MatchmakingIdStringModel;
     /**
-     * Current status of the matchmaking request.    QUEUED -- The matchmaking request has been received and is currently waiting to be processed.    SEARCHING -- The matchmaking request is currently being processed.     REQUIRES_ACCEPTANCE -- A match has been proposed and the players must accept the match (see AcceptMatch). This status is used only with requests that use a matchmaking configuration with a player acceptance requirement.    PLACING -- The FlexMatch engine has matched players and is in the process of placing a new game session for the match.    COMPLETED -- Players have been matched and a game session is ready to host the players. A ticket in this state contains the necessary connection information for players.    FAILED -- The matchmaking request was not completed. Tickets with players who fail to accept a proposed match are placed in FAILED status; new matchmaking requests can be submitted for these players.    CANCELLED -- The matchmaking request was canceled with a call to StopMatchmaking.    TIMED_OUT -- The matchmaking request was not completed within the duration specified in the matchmaking configuration. Matchmaking requests that time out can be resubmitted.  
+     * Current status of the matchmaking request.    QUEUED -- The matchmaking request has been received and is currently waiting to be processed.    SEARCHING -- The matchmaking request is currently being processed.     REQUIRES_ACCEPTANCE -- A match has been proposed and the players must accept the match (see AcceptMatch). This status is used only with requests that use a matchmaking configuration with a player acceptance requirement.    PLACING -- The FlexMatch engine has matched players and is in the process of placing a new game session for the match.    COMPLETED -- Players have been matched and a game session is ready to host the players. A ticket in this state contains the necessary connection information for players.    FAILED -- The matchmaking request was not completed. Tickets with players who fail to accept a proposed match are placed in FAILED status.    CANCELLED -- The matchmaking request was canceled with a call to StopMatchmaking.    TIMED_OUT -- The matchmaking request was not successful within the duration specified in the matchmaking configuration.     Matchmaking requests that fail to successfully complete (statuses FAILED, CANCELLED, TIMED_OUT) can be resubmitted as new requests with new ticket IDs. 
      */
     Status?: MatchmakingConfigurationStatus;
     /**
@@ -2231,9 +2247,9 @@ declare namespace GameLift {
     /**
      * Unique identifier for a player
      */
-    PlayerId?: PlayerIdStringModel;
+    PlayerId?: NonZeroAndMaxString;
     /**
-     * Collection of name:value pairs containing player information for use in matchmaking. Player attribute names need to match playerAttributes names in the rule set being used. Example: "PlayerAttributes": {"skill": {"N": "23"}, "gameMode": {"S": "deathmatch"}}.
+     * Collection of key:value pairs containing player information for use in matchmaking. Player attribute keys must match the playerAttributes used in a matchmaking rule set. Example: "PlayerAttributes": {"skill": {"N": "23"}, "gameMode": {"S": "deathmatch"}}.
      */
     PlayerAttributes?: PlayerAttributeMap;
     /**
@@ -2249,7 +2265,6 @@ declare namespace GameLift {
   export type PlayerData = string;
   export type PlayerDataMap = {[key: string]: PlayerData};
   export type PlayerIdList = NonZeroAndMaxString[];
-  export type PlayerIdStringModel = string;
   export interface PlayerLatency {
     /**
      * Unique identifier for a player associated with the latency data.
@@ -2502,11 +2517,11 @@ declare namespace GameLift {
      */
     AliasId?: AliasId;
     /**
-     * String containing the search criteria for the session search. If no filter expression is included, the request returns results for all game sessions in the fleet that are in ACTIVE status. A filter expression can contain one or multiple conditions. Each condition consists of the following:    Operand -- Name of a game session attribute. Valid values are gameSessionName, gameSessionId, creationTimeMillis, playerSessionCount, maximumSessions, hasAvailablePlayerSessions.    Comparator -- Valid comparators are: =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=.     Value -- Value to be searched for. Values can be numbers, boolean values (true/false) or strings. String values are case sensitive, enclosed in single quotes. Special characters must be escaped. Boolean and string values can only be used with the comparators = and &lt;&gt;. For example, the following filter expression searches on gameSessionName: "FilterExpression": "gameSessionName = 'Matt\\'s Awesome Game 1'".    To chain multiple conditions in a single expression, use the logical keywords AND, OR, and NOT and parentheses as needed. For example: x AND y AND NOT z, NOT (x OR y). Session search evaluates conditions from left to right using the following precedence rules:    =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=    Parentheses   NOT   AND   OR   For example, this filter expression retrieves game sessions hosting at least ten players that have an open player slot: "maximumSessions&gt;=10 AND hasAvailablePlayerSessions=true". 
+     * String containing the search criteria for the session search. If no filter expression is included, the request returns results for all game sessions in the fleet that are in ACTIVE status. A filter expression can contain one or multiple conditions. Each condition consists of the following:    Operand -- Name of a game session attribute. Valid values are gameSessionName, gameSessionId, gameSessionProperties, maximumSessions, creationTimeMillis, playerSessionCount, hasAvailablePlayerSessions.    Comparator -- Valid comparators are: =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=.     Value -- Value to be searched for. Values may be numbers, boolean values (true/false) or strings depending on the operand. String values are case sensitive and must be enclosed in single quotes. Special characters must be escaped. Boolean and string values can only be used with the comparators = and &lt;&gt;. For example, the following filter expression searches on gameSessionName: "FilterExpression": "gameSessionName = 'Matt\\'s Awesome Game 1'".    To chain multiple conditions in a single expression, use the logical keywords AND, OR, and NOT and parentheses as needed. For example: x AND y AND NOT z, NOT (x OR y). Session search evaluates conditions from left to right using the following precedence rules:    =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=    Parentheses   NOT   AND   OR   For example, this filter expression retrieves game sessions hosting at least ten players that have an open player slot: "maximumSessions&gt;=10 AND hasAvailablePlayerSessions=true". 
      */
     FilterExpression?: NonZeroAndMaxString;
     /**
-     * Instructions on how to sort the search results. If no sort expression is included, the request returns results in random order. A sort expression consists of the following elements:    Operand -- Name of a game session attribute. Valid values are gameSessionName, gameSessionId, creationTimeMillis, playerSessionCount, maximumSessions, hasAvailablePlayerSessions.    Order -- Valid sort orders are ASC (ascending) and DESC (descending).   For example, this sort expression returns the oldest active sessions first: "SortExpression": "creationTimeMillis ASC". Results with a null value for the sort operand are returned at the end of the list.
+     * Instructions on how to sort the search results. If no sort expression is included, the request returns results in random order. A sort expression consists of the following elements:    Operand -- Name of a game session attribute. Valid values are gameSessionName, gameSessionId, gameSessionProperties, maximumSessions, creationTimeMillis, playerSessionCount, hasAvailablePlayerSessions.    Order -- Valid sort orders are ASC (ascending) and DESC (descending).   For example, this sort expression returns the oldest active sessions first: "SortExpression": "creationTimeMillis ASC". Results with a null value for the sort operand are returned at the end of the list.
      */
     SortExpression?: NonZeroAndMaxString;
     /**
@@ -2554,7 +2569,7 @@ declare namespace GameLift {
      */
     GameSessionQueueName: GameSessionQueueName;
     /**
-     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     * Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session).
      */
     GameProperties?: GamePropertyList;
     /**
@@ -2574,7 +2589,7 @@ declare namespace GameLift {
      */
     DesiredPlayerSessions?: DesiredPlayerSessionList;
     /**
-     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session).
+     * Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session).
      */
     GameSessionData?: GameSessionData;
   }
@@ -2584,9 +2599,33 @@ declare namespace GameLift {
      */
     GameSessionPlacement?: GameSessionPlacement;
   }
+  export interface StartMatchBackfillInput {
+    /**
+     * Unique identifier for a matchmaking ticket. If no ticket ID is specified here, Amazon GameLift will generate one in the form of a UUID. Use this identifier to track the match backfill ticket status and retrieve match results.
+     */
+    TicketId?: MatchmakingIdStringModel;
+    /**
+     * Name of the matchmaker to use for this request. The name of the matchmaker that was used with the original game session is listed in the GameSession object, MatchmakerData property. This property contains a matchmaking configuration ARN value, which includes the matchmaker name. (In the ARN value "arn:aws:gamelift:us-west-2:111122223333:matchmakingconfiguration/MM-4v4", the matchmaking configuration name is "MM-4v4".) Use only the name for this parameter.
+     */
+    ConfigurationName: MatchmakingIdStringModel;
+    /**
+     * Amazon Resource Name (ARN) that is assigned to a game session and uniquely identifies it. 
+     */
+    GameSessionArn: ArnStringModel;
+    /**
+     * Match information on all players that are currently assigned to the game session. This information is used by the matchmaker to find new players and add them to the existing game.   PlayerID, PlayerAttributes, Team -- This information is maintained in the GameSession object, MatchmakerData property, for all players who are currently assigned to the game session. The matchmaker data is in JSON syntax, formatted as a string. For more details, see  Match Data.    LatencyInMs -- If the matchmaker uses player latency, include a latency value, in milliseconds, for the region that the game session is currently in. Do not include latency values for any other region.  
+     */
+    Players: PlayerList;
+  }
+  export interface StartMatchBackfillOutput {
+    /**
+     * Ticket representing the backfill matchmaking request. This object includes the information in the request, ticket status, and match results as generated during the matchmaking process.
+     */
+    MatchmakingTicket?: MatchmakingTicket;
+  }
   export interface StartMatchmakingInput {
     /**
-     * Unique identifier for a matchmaking ticket. Use this identifier to track the matchmaking ticket status and retrieve match results.
+     * Unique identifier for a matchmaking ticket. If no ticket ID is specified here, Amazon GameLift will generate one in the form of a UUID. Use this identifier to track the matchmaking ticket status and retrieve match results.
      */
     TicketId?: MatchmakingIdStringModel;
     /**
@@ -2824,7 +2863,7 @@ declare namespace GameLift {
     /**
      * Flag that determines whether or not a match that was created with this configuration must be accepted by the matched players. To require acceptance, set to TRUE.
      */
-    AcceptanceRequired?: Boolean;
+    AcceptanceRequired?: BooleanModel;
     /**
      * Unique identifier for a matchmaking rule set to use with this configuration. A matchmaking configuration can only use rule sets that are defined in the same region.
      */
@@ -2842,11 +2881,11 @@ declare namespace GameLift {
      */
     CustomEventData?: CustomEventData;
     /**
-     * Set of developer-defined properties for a game session, formatted as a set of type:value pairs. These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     * Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
      */
     GameProperties?: GamePropertyList;
     /**
-     * Set of developer-defined game session properties, formatted as a single string value. This data is included in the GameSession object, which is passed to the game server with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
+     * Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the GameSession object with a request to start a new game session (see Start a Game Session). This information is added to the new GameSession object that is created for a successful match. 
      */
     GameSessionData?: GameSessionData;
   }
@@ -2882,7 +2921,7 @@ declare namespace GameLift {
     /**
      * Response indicating whether or not the rule set is valid.
      */
-    Valid?: Boolean;
+    Valid?: BooleanModel;
   }
   export interface VpcPeeringAuthorization {
     /**

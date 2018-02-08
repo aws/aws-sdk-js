@@ -123,6 +123,14 @@ declare class MediaLive extends Service {
    * Stops a running channel
    */
   stopChannel(callback?: (err: AWSError, data: MediaLive.Types.StopChannelResponse) => void): Request<MediaLive.Types.StopChannelResponse, AWSError>;
+  /**
+   * Updates a channel.
+   */
+  updateChannel(params: MediaLive.Types.UpdateChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelResponse) => void): Request<MediaLive.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates a channel.
+   */
+  updateChannel(callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelResponse) => void): Request<MediaLive.Types.UpdateChannelResponse, AWSError>;
 }
 declare namespace MediaLive {
   export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string;
@@ -539,7 +547,7 @@ Alternate rendition that the client will not try to play back by default. Repres
   }
   export interface CaptionLanguageMapping {
     /**
-     * Channel to insert closed captions.  Each channel mapping must have a unique channel number (maximum of 4)
+     * The closed caption channel being described by this CaptionLanguageMapping.  Each channel mapping must have a unique channel number (maximum of 4)
      */
     CaptionChannel?: __integer;
     /**
@@ -688,7 +696,7 @@ creating multiple resources.
      */
     RequestId?: __string;
     /**
-     * Reserved for future use.
+     * Deprecated field that's only usable by whitelisted customers.
      */
     Reserved?: __string;
     /**
@@ -718,7 +726,7 @@ creating multiple resources.
      */
     RequestId?: __string;
     /**
-     * Reserved for future use.
+     * Deprecated field that's only usable by whitelisted customers.
      */
     Reserved?: __string;
     /**
@@ -2801,6 +2809,60 @@ one destination per packager.
     FecOutputSettings?: FecOutputSettings;
   }
   export type UdpTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export interface UpdateChannel {
+    /**
+     * A list of output destinations for this channel.
+     */
+    Destinations?: ListOfOutputDestination;
+    /**
+     * The encoder settings for this channel.
+     */
+    EncoderSettings?: EncoderSettings;
+    /**
+     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+     */
+    InputSpecification?: InputSpecification;
+    /**
+     * The name of the channel.
+     */
+    Name?: __string;
+    /**
+     * An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.
+     */
+    RoleArn?: __string;
+  }
+  export interface UpdateChannelRequest {
+    /**
+     * channel ID
+     */
+    ChannelId: __string;
+    /**
+     * A list of output destinations for this channel.
+     */
+    Destinations?: ListOfOutputDestination;
+    /**
+     * The encoder settings for this channel.
+     */
+    EncoderSettings?: EncoderSettings;
+    /**
+     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+     */
+    InputSpecification?: InputSpecification;
+    /**
+     * The name of the channel.
+     */
+    Name?: __string;
+    /**
+     * An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.
+     */
+    RoleArn?: __string;
+  }
+  export interface UpdateChannelResponse {
+    Channel?: Channel;
+  }
+  export interface UpdateChannelResultModel {
+    Channel?: Channel;
+  }
   export interface ValidationError {
     ElementPath?: __string;
     ErrorMessage?: __string;
