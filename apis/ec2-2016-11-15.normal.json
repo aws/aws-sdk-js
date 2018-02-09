@@ -1000,6 +1000,16 @@
       "output":{"shape":"DescribeAddressesResult"},
       "documentation":"<p>Describes one or more of your Elastic IP addresses.</p> <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
+    "DescribeAggregateIdFormat":{
+      "name":"DescribeAggregateIdFormat",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeAggregateIdFormatRequest"},
+      "output":{"shape":"DescribeAggregateIdFormatResult"},
+      "documentation":"<p>Describes the longer ID format settings for all resource types in a specific region. This request is useful for performing a quick audit to determine whether a specific region is fully opted in for longer IDs (17-character IDs).</p> <p>This request only returns information about resource types that support longer IDs.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code>.</p>"
+    },
     "DescribeAvailabilityZones":{
       "name":"DescribeAvailabilityZones",
       "http":{
@@ -1168,7 +1178,7 @@
       },
       "input":{"shape":"DescribeIdFormatRequest"},
       "output":{"shape":"DescribeIdFormatResult"},
-      "documentation":"<p>Describes the ID format settings for your resources on a per-region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types.</p> <p>The following resource types support longer IDs: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code>. </p> <p>These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the <a>ModifyIdFormat</a> command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
+      "documentation":"<p>Describes the ID format settings for your resources on a per-region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code>. </p> <p>These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the <a>ModifyIdFormat</a> command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
     },
     "DescribeIdentityIdFormat":{
       "name":"DescribeIdentityIdFormat",
@@ -1178,7 +1188,7 @@
       },
       "input":{"shape":"DescribeIdentityIdFormatRequest"},
       "output":{"shape":"DescribeIdentityIdFormatResult"},
-      "documentation":"<p>Describes the ID format settings for resources for the specified IAM user, IAM role, or root user. For example, you can view the resource types that are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>The following resource types support longer IDs: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code>. </p> <p>These settings apply to the principal specified in the request. They do not apply to the principal that makes the request.</p>"
+      "documentation":"<p>Describes the ID format settings for resources for the specified IAM user, IAM role, or root user. For example, you can view the resource types that are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code>. </p> <p>These settings apply to the principal specified in the request. They do not apply to the principal that makes the request.</p>"
     },
     "DescribeImageAttribute":{
       "name":"DescribeImageAttribute",
@@ -1379,6 +1389,16 @@
       "input":{"shape":"DescribePrefixListsRequest"},
       "output":{"shape":"DescribePrefixListsResult"},
       "documentation":"<p>Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint.</p>"
+    },
+    "DescribePrincipalIdFormat":{
+      "name":"DescribePrincipalIdFormat",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribePrincipalIdFormatRequest"},
+      "output":{"shape":"DescribePrincipalIdFormatResult"},
+      "documentation":"<p>Describes the ID format settings for the root user and all IAM roles and IAM users that have explicitly specified a longer ID (17-character ID) preference. </p> <p>By default, all IAM roles and IAM users default to the same ID settings as the root user, unless they explicitly override the settings. This request is useful for identifying those IAM users and IAM roles that have overridden the default ID settings.</p> <p>The following resource types support longer IDs: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code>. </p>"
     },
     "DescribeRegions":{
       "name":"DescribeRegions",
@@ -2059,7 +2079,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"ModifyIdFormatRequest"},
-      "documentation":"<p>Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created. The following resource types support longer IDs: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
+      "documentation":"<p>Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created.</p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code>.</p> <p>This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
     },
     "ModifyIdentityIdFormat":{
       "name":"ModifyIdentityIdFormat",
@@ -2068,7 +2088,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"ModifyIdentityIdFormatRequest"},
-      "documentation":"<p>Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created. </p> <p>The following resource types support longer IDs: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code>. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>This setting applies to the principal specified in the request; it does not apply to the principal that makes the request. </p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
+      "documentation":"<p>Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created. </p> <p>This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code>.. </p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. </p> <p>This setting applies to the principal specified in the request; it does not apply to the principal that makes the request. </p> <p>Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant <code>Describe</code> command for the resource type.</p>"
     },
     "ModifyImageAttribute":{
       "name":"ModifyImageAttribute",
@@ -5504,7 +5524,7 @@
         },
         "GroupName":{
           "shape":"String",
-          "documentation":"<p>The name of the security group.</p> <p>Constraints: Up to 255 characters in length</p> <p>Constraints for EC2-Classic: ASCII characters</p> <p>Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>"
+          "documentation":"<p>The name of the security group.</p> <p>Constraints: Up to 255 characters in length. Cannot start with <code>sg-</code>.</p> <p>Constraints for EC2-Classic: ASCII characters</p> <p>Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>"
         },
         "VpcId":{
           "shape":"String",
@@ -6937,6 +6957,30 @@
       },
       "documentation":"<p>Contains the output of DescribeAddresses.</p>"
     },
+    "DescribeAggregateIdFormatRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DescribeAggregateIdFormatResult":{
+      "type":"structure",
+      "members":{
+        "UseLongIdsAggregated":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether all resrouces types in the region are configured to use longer IDs. This value will only be <code>true</code> if all users are configured to use longer IDs for all resources types in the region.</p>",
+          "locationName":"useLongIdsAggregated"
+        },
+        "Statuses":{
+          "shape":"IdFormatList",
+          "documentation":"<p>Information about each resource's ID format.</p>",
+          "locationName":"statusSet"
+        }
+      }
+    },
     "DescribeAvailabilityZonesRequest":{
       "type":"structure",
       "members":{
@@ -7534,7 +7578,7 @@
       "members":{
         "Resource":{
           "shape":"String",
-          "documentation":"<p>The type of resource: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code> </p>"
+          "documentation":"<p>The type of resource: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code> </p>"
         }
       },
       "documentation":"<p>Contains the parameters for DescribeIdFormat.</p>"
@@ -7561,7 +7605,7 @@
         },
         "Resource":{
           "shape":"String",
-          "documentation":"<p>The type of resource: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code> </p>",
+          "documentation":"<p>The type of resource: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code> </p>",
           "locationName":"resource"
         }
       },
@@ -8381,6 +8425,43 @@
       },
       "documentation":"<p>Contains the output of DescribePrefixLists.</p>"
     },
+    "DescribePrincipalIdFormatRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Resources":{
+          "shape":"ResourceList",
+          "documentation":"<p>The type of resource: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>snapshot</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code> </p>",
+          "locationName":"Resource"
+        },
+        "MaxResults":{
+          "shape":"Integer",
+          "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. </p>"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to request the next page of results.</p>"
+        }
+      }
+    },
+    "DescribePrincipalIdFormatResult":{
+      "type":"structure",
+      "members":{
+        "Principals":{
+          "shape":"PrincipalIdFormatList",
+          "documentation":"<p>Information about the ID format settings for the ARN.</p>",
+          "locationName":"principalSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "documentation":"<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>",
+          "locationName":"nextToken"
+        }
+      }
+    },
     "DescribeRegionsRequest":{
       "type":"structure",
       "members":{
@@ -8804,7 +8885,7 @@
         },
         "MaxResults":{
           "shape":"Integer",
-          "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000.</p>"
+          "documentation":"<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.</p>"
         }
       },
       "documentation":"<p>Contains the parameters for DescribeSecurityGroups.</p>"
@@ -9206,7 +9287,7 @@
       "members":{
         "NextToken":{
           "shape":"String",
-          "documentation":"<p>The token required to retrieve the next set of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "documentation":"<p>The token required to retrieve the next set of results. This value is an empty string when there are no more results to return.</p>",
           "locationName":"nextToken"
         },
         "SpotPriceHistory":{
@@ -12217,7 +12298,7 @@
         },
         "Format":{
           "shape":"String",
-          "documentation":"<p>The format of the disk image being imported.</p> <p>Valid values: <code>RAW</code> | <code>VHD</code> | <code>VMDK</code> | <code>OVA</code> </p>"
+          "documentation":"<p>The format of the disk image being imported.</p> <p>Valid values: <code>VHD</code> | <code>VMDK</code> | <code>OVA</code> </p>"
         },
         "SnapshotId":{
           "shape":"String",
@@ -12506,7 +12587,7 @@
         },
         "UserData":{
           "shape":"UserData",
-          "documentation":"<p>The user data to make available to the instance. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.</p>",
+          "documentation":"<p>The Base64-encoded user data to make available to the instance.</p>",
           "locationName":"userData"
         }
       },
@@ -14240,7 +14321,7 @@
       "members":{
         "UserData":{
           "shape":"String",
-          "documentation":"<p>The user data to make available to the instances. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.</p>",
+          "documentation":"<p>The Base64-encoded user data for the instance.</p>",
           "locationName":"userData"
         },
         "SecurityGroups":{
@@ -15253,7 +15334,7 @@
       "members":{
         "Resource":{
           "shape":"String",
-          "documentation":"<p>The type of resource: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code> </p>"
+          "documentation":"<p>The type of resource: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code>.</p> <p>Alternatively, use the <code>all-current</code> option to include all resource types that are currently within their opt-in period for longer IDs.</p>"
         },
         "UseLongIds":{
           "shape":"Boolean",
@@ -15277,7 +15358,7 @@
         },
         "Resource":{
           "shape":"String",
-          "documentation":"<p>The type of resource: <code>instance</code> | <code>reservation</code> | <code>snapshot</code> | <code>volume</code> </p>",
+          "documentation":"<p>The type of resource: <code>bundle</code> | <code>conversion-task</code> | <code>dhcp-options</code> | <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> | <code>export-task</code> | <code>flow-log</code> | <code>image</code> | <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code> | <code>network-acl-association</code> | <code>network-interface</code> | <code>network-interface-attachment</code> | <code>prefix-list</code> | <code>route-table</code> | <code>route-table-association</code> | <code>security-group</code> | <code>subnet</code> | <code>subnet-cidr-block-association</code> | <code>vpc</code> | <code>vpc-cidr-block-association</code> | <code>vpc-peering-connection</code>.</p> <p>Alternatively, use the <code>all-current</code> option to include all resource types that are currently within their opt-in period for longer IDs.</p>",
           "locationName":"resource"
         },
         "UseLongIds":{
@@ -15888,12 +15969,12 @@
         "AddNetworkLoadBalancerArns":{
           "shape":"ValueStringList",
           "documentation":"<p>The Amazon Resource Names (ARNs) of Network Load Balancers to add to your service configuration.</p>",
-          "locationName":"addNetworkLoadBalancerArn"
+          "locationName":"AddNetworkLoadBalancerArn"
         },
         "RemoveNetworkLoadBalancerArns":{
           "shape":"ValueStringList",
           "documentation":"<p>The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your service configuration.</p>",
-          "locationName":"removeNetworkLoadBalancerArn"
+          "locationName":"RemoveNetworkLoadBalancerArn"
         }
       }
     },
@@ -17101,6 +17182,29 @@
         "locationName":"item"
       }
     },
+    "PrincipalIdFormat":{
+      "type":"structure",
+      "members":{
+        "Arn":{
+          "shape":"String",
+          "documentation":"<p>PrincipalIdFormatARN description</p>",
+          "locationName":"arn"
+        },
+        "Statuses":{
+          "shape":"IdFormatList",
+          "documentation":"<p>PrincipalIdFormatStatuses description</p>",
+          "locationName":"statusSet"
+        }
+      },
+      "documentation":"<p>PrincipalIdFormat description</p>"
+    },
+    "PrincipalIdFormatList":{
+      "type":"list",
+      "member":{
+        "shape":"PrincipalIdFormat",
+        "locationName":"item"
+      }
+    },
     "PrincipalType":{
       "type":"string",
       "enum":[
@@ -18101,7 +18205,7 @@
         },
         "UserData":{
           "shape":"String",
-          "documentation":"<p>The user data to make available to the instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Running Commands on Your Linux Instance at Launch</a> (Linux) and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data\">Adding User Data</a> (Windows). If you are using a command line tool, base64-encoding is performed for you and you can load the text from a file. Otherwise, you must provide base64-encoded text.</p>"
+          "documentation":"<p>The Base64-encoded user data to make available to the instance. For more information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Running Commands on Your Linux Instance at Launch</a> (Linux) and <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data\">Adding User Data</a> (Windows).</p>"
         },
         "TagSpecifications":{
           "shape":"LaunchTemplateTagSpecificationRequestList",
@@ -18318,7 +18422,7 @@
         },
         "UserData":{
           "shape":"String",
-          "documentation":"<p>The user data to make available to the instances. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.</p>",
+          "documentation":"<p>The Base64-encoded user data for the instance.</p>",
           "locationName":"userData"
         }
       },
@@ -18988,6 +19092,13 @@
     "ResourceIdList":{
       "type":"list",
       "member":{"shape":"String"}
+    },
+    "ResourceList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
     },
     "ResourceType":{
       "type":"string",
@@ -20633,7 +20744,7 @@
         },
         "Format":{
           "shape":"String",
-          "documentation":"<p>The format of the disk image being imported.</p> <p>Valid values: <code>RAW</code> | <code>VHD</code> | <code>VMDK</code> | <code>OVA</code> </p>"
+          "documentation":"<p>The format of the disk image being imported.</p> <p>Valid values: <code>VHD</code> | <code>VMDK</code> | <code>OVA</code> </p>"
         },
         "Url":{
           "shape":"String",
@@ -20830,7 +20941,7 @@
         },
         "UserData":{
           "shape":"String",
-          "documentation":"<p>The user data to make available to the instances. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.</p>",
+          "documentation":"<p>The Base64-encoded user data to make available to the instances.</p>",
           "locationName":"userData"
         },
         "WeightedCapacity":{
@@ -23305,7 +23416,7 @@
       "members":{
         "StaticRoutesOnly":{
           "shape":"Boolean",
-          "documentation":"<p>Indicate whether the VPN connection uses static routes only. If you are creating a VPN connection for a device that does not support BGP, you must specify <code>true</code>.</p> <p>Default: <code>false</code> </p>",
+          "documentation":"<p>Indicate whether the VPN connection uses static routes only. If you are creating a VPN connection for a device that does not support BGP, you must specify <code>true</code>. Use <a>CreateVpnConnectionRoute</a> to create a static route.</p> <p>Default: <code>false</code> </p>",
           "locationName":"staticRoutesOnly"
         },
         "TunnelOptions":{

@@ -100,11 +100,11 @@ declare class LexModelBuildingService extends Service {
    */
   deleteSlotTypeVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot unless the childDirected field in the bot is set to true. Utterances are stored for 15 days for use with the GetUtterancesView operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the GetUtterancesView operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
    */
   deleteUtterances(params: LexModelBuildingService.Types.DeleteUtterancesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot unless the childDirected field in the bot is set to true. Utterances are stored for 15 days for use with the GetUtterancesView operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the GetUtterancesView operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
    */
   deleteUtterances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -244,19 +244,19 @@ declare class LexModelBuildingService extends Service {
    */
   getSlotTypes(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypesResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypesResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version. If the bot's childDirected field is set to true, utterances for the bot are not stored and cannot be retrieved with the GetUtterancesView operation. For more information, see PutBot. This operation requires permissions for the lex:GetUtterancesView action.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.   Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.  This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(params: LexModelBuildingService.Types.GetUtterancesViewRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version. If the bot's childDirected field is set to true, utterances for the bot are not stored and cannot be retrieved with the GetUtterancesView operation. For more information, see PutBot. This operation requires permissions for the lex:GetUtterancesView action.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.   Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.  This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
-   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
+   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name, a locale, and whether the bot is directed toward children under age 13. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with the minimum information, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
    */
   putBot(params: LexModelBuildingService.Types.PutBotRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.PutBotResponse) => void): Request<LexModelBuildingService.Types.PutBotResponse, AWSError>;
   /**
-   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
+   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name, a locale, and whether the bot is directed toward children under age 13. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with the minimum information, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
    */
   putBot(callback?: (err: AWSError, data: LexModelBuildingService.Types.PutBotResponse) => void): Request<LexModelBuildingService.Types.PutBotResponse, AWSError>;
   /**
@@ -421,7 +421,7 @@ declare namespace LexModelBuildingService {
   export type BuiltinSlotTypeSignature = string;
   export type ChannelConfigurationMap = {[key: string]: String};
   export type ChannelStatus = "IN_PROGRESS"|"CREATED"|"FAILED"|string;
-  export type ChannelType = "Facebook"|"Slack"|"Twilio-Sms"|string;
+  export type ChannelType = "Facebook"|"Slack"|"Twilio-Sms"|"Kik"|string;
   export interface CodeHook {
     /**
      * The Amazon Resource Name (ARN) of the Lambda function.
@@ -433,7 +433,7 @@ declare namespace LexModelBuildingService {
     messageVersion: MessageVersion;
   }
   export type ContentString = string;
-  export type ContentType = "PlainText"|"SSML"|string;
+  export type ContentType = "PlainText"|"SSML"|"CustomPayload"|string;
   export type Count = number;
   export interface CreateBotVersionRequest {
     /**
@@ -1373,6 +1373,7 @@ declare namespace LexModelBuildingService {
      */
     utterances?: ListsOfUtterances;
   }
+  export type GroupNumber = number;
   export interface Intent {
     /**
      * The name of the intent.
@@ -1424,6 +1425,10 @@ declare namespace LexModelBuildingService {
      * The text of the message.
      */
     content: ContentString;
+    /**
+     * Identifies the message group that the message belongs to. When a group is assigned to a message, Amazon Lex returns one message from each group in the response.
+     */
+    groupNumber?: GroupNumber;
   }
   export type MessageList = Message[];
   export type MessageVersion = string;

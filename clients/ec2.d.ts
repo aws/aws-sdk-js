@@ -828,6 +828,14 @@ declare class EC2 extends Service {
    */
   describeAddresses(callback?: (err: AWSError, data: EC2.Types.DescribeAddressesResult) => void): Request<EC2.Types.DescribeAddressesResult, AWSError>;
   /**
+   * Describes the longer ID format settings for all resource types in a specific region. This request is useful for performing a quick audit to determine whether a specific region is fully opted in for longer IDs (17-character IDs). This request only returns information about resource types that support longer IDs. The following resource types support longer IDs: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection.
+   */
+  describeAggregateIdFormat(params: EC2.Types.DescribeAggregateIdFormatRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAggregateIdFormatResult) => void): Request<EC2.Types.DescribeAggregateIdFormatResult, AWSError>;
+  /**
+   * Describes the longer ID format settings for all resource types in a specific region. This request is useful for performing a quick audit to determine whether a specific region is fully opted in for longer IDs (17-character IDs). This request only returns information about resource types that support longer IDs. The following resource types support longer IDs: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection.
+   */
+  describeAggregateIdFormat(callback?: (err: AWSError, data: EC2.Types.DescribeAggregateIdFormatResult) => void): Request<EC2.Types.DescribeAggregateIdFormatResult, AWSError>;
+  /**
    * Describes one or more of the Availability Zones that are available to you. The results include zones only for the region you're currently using. If there is an event impacting an Availability Zone, you can use this request to view the state and any provided message for that Availability Zone. For more information, see Regions and Availability Zones in the Amazon Elastic Compute Cloud User Guide.
    */
   describeAvailabilityZones(params: EC2.Types.DescribeAvailabilityZonesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAvailabilityZonesResult) => void): Request<EC2.Types.DescribeAvailabilityZonesResult, AWSError>;
@@ -956,19 +964,19 @@ declare class EC2 extends Service {
    */
   describeIamInstanceProfileAssociations(callback?: (err: AWSError, data: EC2.Types.DescribeIamInstanceProfileAssociationsResult) => void): Request<EC2.Types.DescribeIamInstanceProfileAssociationsResult, AWSError>;
   /**
-   * Describes the ID format settings for your resources on a per-region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. The following resource types support longer IDs: instance | reservation | snapshot | volume.  These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the ModifyIdFormat command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Describes the ID format settings for your resources on a per-region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. The following resource types support longer IDs: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection.  These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the ModifyIdFormat command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   describeIdFormat(params: EC2.Types.DescribeIdFormatRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIdFormatResult) => void): Request<EC2.Types.DescribeIdFormatResult, AWSError>;
   /**
-   * Describes the ID format settings for your resources on a per-region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. The following resource types support longer IDs: instance | reservation | snapshot | volume.  These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the ModifyIdFormat command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Describes the ID format settings for your resources on a per-region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. The following resource types support longer IDs: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection.  These settings apply to the IAM user who makes the request; they do not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user, unless they explicitly override the settings by running the ModifyIdFormat command. Resources created with longer IDs are visible to all IAM users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   describeIdFormat(callback?: (err: AWSError, data: EC2.Types.DescribeIdFormatResult) => void): Request<EC2.Types.DescribeIdFormatResult, AWSError>;
   /**
-   * Describes the ID format settings for resources for the specified IAM user, IAM role, or root user. For example, you can view the resource types that are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  The following resource types support longer IDs: instance | reservation | snapshot | volume.  These settings apply to the principal specified in the request. They do not apply to the principal that makes the request.
+   * Describes the ID format settings for resources for the specified IAM user, IAM role, or root user. For example, you can view the resource types that are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  The following resource types support longer IDs: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection.  These settings apply to the principal specified in the request. They do not apply to the principal that makes the request.
    */
   describeIdentityIdFormat(params: EC2.Types.DescribeIdentityIdFormatRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIdentityIdFormatResult) => void): Request<EC2.Types.DescribeIdentityIdFormatResult, AWSError>;
   /**
-   * Describes the ID format settings for resources for the specified IAM user, IAM role, or root user. For example, you can view the resource types that are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  The following resource types support longer IDs: instance | reservation | snapshot | volume.  These settings apply to the principal specified in the request. They do not apply to the principal that makes the request.
+   * Describes the ID format settings for resources for the specified IAM user, IAM role, or root user. For example, you can view the resource types that are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  The following resource types support longer IDs: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection.  These settings apply to the principal specified in the request. They do not apply to the principal that makes the request.
    */
   describeIdentityIdFormat(callback?: (err: AWSError, data: EC2.Types.DescribeIdentityIdFormatResult) => void): Request<EC2.Types.DescribeIdentityIdFormatResult, AWSError>;
   /**
@@ -1131,6 +1139,14 @@ declare class EC2 extends Service {
    * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint.
    */
   describePrefixLists(callback?: (err: AWSError, data: EC2.Types.DescribePrefixListsResult) => void): Request<EC2.Types.DescribePrefixListsResult, AWSError>;
+  /**
+   * Describes the ID format settings for the root user and all IAM roles and IAM users that have explicitly specified a longer ID (17-character ID) preference.  By default, all IAM roles and IAM users default to the same ID settings as the root user, unless they explicitly override the settings. This request is useful for identifying those IAM users and IAM roles that have overridden the default ID settings. The following resource types support longer IDs: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection. 
+   */
+  describePrincipalIdFormat(params: EC2.Types.DescribePrincipalIdFormatRequest, callback?: (err: AWSError, data: EC2.Types.DescribePrincipalIdFormatResult) => void): Request<EC2.Types.DescribePrincipalIdFormatResult, AWSError>;
+  /**
+   * Describes the ID format settings for the root user and all IAM roles and IAM users that have explicitly specified a longer ID (17-character ID) preference.  By default, all IAM roles and IAM users default to the same ID settings as the root user, unless they explicitly override the settings. This request is useful for identifying those IAM users and IAM roles that have overridden the default ID settings. The following resource types support longer IDs: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection. 
+   */
+  describePrincipalIdFormat(callback?: (err: AWSError, data: EC2.Types.DescribePrincipalIdFormatResult) => void): Request<EC2.Types.DescribePrincipalIdFormatResult, AWSError>;
   /**
    * Describes one or more regions that are currently available to you. For a list of the regions supported by Amazon EC2, see Regions and Endpoints.
    */
@@ -1676,19 +1692,19 @@ declare class EC2 extends Service {
    */
   modifyHosts(callback?: (err: AWSError, data: EC2.Types.ModifyHostsResult) => void): Request<EC2.Types.ModifyHostsResult, AWSError>;
   /**
-   * Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created. The following resource types support longer IDs: instance | reservation | snapshot | volume. This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created. This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-peering-connection. This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   modifyIdFormat(params: EC2.Types.ModifyIdFormatRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created. The following resource types support longer IDs: instance | reservation | snapshot | volume. This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Modifies the ID format for the specified resource on a per-region basis. You can specify that resources should receive longer IDs (17-character IDs) when they are created. This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-peering-connection. This setting applies to the IAM user who makes the request; it does not apply to the entire AWS account. By default, an IAM user defaults to the same settings as the root user. If you're using this action as the root user, then these settings apply to the entire account, unless an IAM user explicitly overrides these settings for themselves. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   modifyIdFormat(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created.  The following resource types support longer IDs: instance | reservation | snapshot | volume. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  This setting applies to the principal specified in the request; it does not apply to the principal that makes the request.  Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created.  This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-peering-connection..  For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  This setting applies to the principal specified in the request; it does not apply to the principal that makes the request.  Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   modifyIdentityIdFormat(params: EC2.Types.ModifyIdentityIdFormatRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created.  The following resource types support longer IDs: instance | reservation | snapshot | volume. For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  This setting applies to the principal specified in the request; it does not apply to the principal that makes the request.  Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
+   * Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created.  This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-peering-connection..  For more information, see Resource IDs in the Amazon Elastic Compute Cloud User Guide.  This setting applies to the principal specified in the request; it does not apply to the principal that makes the request.  Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant Describe command for the resource type.
    */
   modifyIdentityIdFormat(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -4106,7 +4122,7 @@ declare namespace EC2 {
      */
     Description: String;
     /**
-     * The name of the security group. Constraints: Up to 255 characters in length Constraints for EC2-Classic: ASCII characters Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*
+     * The name of the security group. Constraints: Up to 255 characters in length. Cannot start with sg-. Constraints for EC2-Classic: ASCII characters Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*
      */
     GroupName: String;
     /**
@@ -5024,6 +5040,22 @@ declare namespace EC2 {
      */
     Addresses?: AddressList;
   }
+  export interface DescribeAggregateIdFormatRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeAggregateIdFormatResult {
+    /**
+     * Indicates whether all resrouces types in the region are configured to use longer IDs. This value will only be true if all users are configured to use longer IDs for all resources types in the region.
+     */
+    UseLongIdsAggregated?: Boolean;
+    /**
+     * Information about each resource's ID format.
+     */
+    Statuses?: IdFormatList;
+  }
   export interface DescribeAvailabilityZonesRequest {
     /**
      * One or more filters.    message - Information about the Availability Zone.    region-name - The name of the region for the Availability Zone (for example, us-east-1).    state - The state of the Availability Zone (available | information | impaired | unavailable).    zone-name - The name of the Availability Zone (for example, us-east-1a).  
@@ -5435,7 +5467,7 @@ declare namespace EC2 {
   }
   export interface DescribeIdFormatRequest {
     /**
-     * The type of resource: instance | reservation | snapshot | volume 
+     * The type of resource: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection 
      */
     Resource?: String;
   }
@@ -5451,7 +5483,7 @@ declare namespace EC2 {
      */
     PrincipalArn: String;
     /**
-     * The type of resource: instance | reservation | snapshot | volume 
+     * The type of resource: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection 
      */
     Resource?: String;
   }
@@ -6021,6 +6053,34 @@ declare namespace EC2 {
      */
     PrefixLists?: PrefixListSet;
   }
+  export interface DescribePrincipalIdFormatRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The type of resource: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-peering-connection 
+     */
+    Resources?: ResourceList;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. 
+     */
+    MaxResults?: Integer;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribePrincipalIdFormatResult {
+    /**
+     * Information about the ID format settings for the ARN.
+     */
+    Principals?: PrincipalIdFormatList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeRegionsRequest {
     /**
      * One or more filters.    endpoint - The endpoint of the region (for example, ec2.us-east-1.amazonaws.com).    region-name - The name of the region (for example, us-east-1).  
@@ -6323,7 +6383,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. This value can be between 5 and 1000.
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.
      */
     MaxResults?: Integer;
   }
@@ -6585,7 +6645,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotPriceHistoryResult {
     /**
-     * The token required to retrieve the next set of results. This value is null when there are no more results to return.
+     * The token required to retrieve the next set of results. This value is an empty string when there are no more results to return.
      */
     NextToken?: String;
     /**
@@ -8433,7 +8493,7 @@ declare namespace EC2 {
      */
     DeviceName?: String;
     /**
-     * The format of the disk image being imported. Valid values: RAW | VHD | VMDK | OVA 
+     * The format of the disk image being imported. Valid values: VHD | VMDK | OVA 
      */
     Format?: String;
     /**
@@ -8631,7 +8691,7 @@ declare namespace EC2 {
      */
     SubnetId?: String;
     /**
-     * The user data to make available to the instance. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.
+     * The Base64-encoded user data to make available to the instance.
      */
     UserData?: UserData;
   }
@@ -9599,7 +9659,7 @@ declare namespace EC2 {
   }
   export interface LaunchSpecification {
     /**
-     * The user data to make available to the instances. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.
+     * The Base64-encoded user data for the instance.
      */
     UserData?: String;
     /**
@@ -10261,7 +10321,7 @@ declare namespace EC2 {
   }
   export interface ModifyIdFormatRequest {
     /**
-     * The type of resource: instance | reservation | snapshot | volume 
+     * The type of resource: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-peering-connection. Alternatively, use the all-current option to include all resource types that are currently within their opt-in period for longer IDs.
      */
     Resource: String;
     /**
@@ -10275,7 +10335,7 @@ declare namespace EC2 {
      */
     PrincipalArn: String;
     /**
-     * The type of resource: instance | reservation | snapshot | volume 
+     * The type of resource: bundle | conversion-task | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | route-table | route-table-association | security-group | subnet | subnet-cidr-block-association | vpc | vpc-cidr-block-association | vpc-peering-connection. Alternatively, use the all-current option to include all resource types that are currently within their opt-in period for longer IDs.
      */
     Resource: String;
     /**
@@ -11406,6 +11466,17 @@ declare namespace EC2 {
     Price?: Double;
   }
   export type PricingDetailsList = PricingDetail[];
+  export interface PrincipalIdFormat {
+    /**
+     * PrincipalIdFormatARN description
+     */
+    Arn?: String;
+    /**
+     * PrincipalIdFormatStatuses description
+     */
+    Statuses?: IdFormatList;
+  }
+  export type PrincipalIdFormatList = PrincipalIdFormat[];
   export type PrincipalType = "All"|"Service"|"OrganizationUnit"|"Account"|"User"|"Role"|string;
   export type PrivateIpAddressConfigSet = ScheduledInstancesPrivateIpAddressConfig[];
   export interface PrivateIpAddressSpecification {
@@ -11989,7 +12060,7 @@ declare namespace EC2 {
      */
     InstanceInitiatedShutdownBehavior?: ShutdownBehavior;
     /**
-     * The user data to make available to the instance. For more information, see Running Commands on Your Linux Instance at Launch (Linux) and Adding User Data (Windows). If you are using a command line tool, base64-encoding is performed for you and you can load the text from a file. Otherwise, you must provide base64-encoded text.
+     * The Base64-encoded user data to make available to the instance. For more information, see Running Commands on Your Linux Instance at Launch (Linux) and Adding User Data (Windows).
      */
     UserData?: String;
     /**
@@ -12151,7 +12222,7 @@ declare namespace EC2 {
      */
     SubnetId?: String;
     /**
-     * The user data to make available to the instances. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.
+     * The Base64-encoded user data for the instance.
      */
     UserData?: String;
   }
@@ -12559,6 +12630,7 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export type ResourceIdList = String[];
+  export type ResourceList = String[];
   export type ResourceType = "customer-gateway"|"dhcp-options"|"image"|"instance"|"internet-gateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"snapshot"|"spot-instances-request"|"subnet"|"security-group"|"volume"|"vpc"|"vpn-connection"|"vpn-gateway"|string;
   export interface ResponseError {
     /**
@@ -13668,7 +13740,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * The format of the disk image being imported. Valid values: RAW | VHD | VMDK | OVA 
+     * The format of the disk image being imported. Valid values: VHD | VMDK | OVA 
      */
     Format?: String;
     /**
@@ -13805,7 +13877,7 @@ declare namespace EC2 {
      */
     SubnetId?: String;
     /**
-     * The user data to make available to the instances. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.
+     * The Base64-encoded user data to make available to the instances.
      */
     UserData?: String;
     /**
@@ -15184,7 +15256,7 @@ declare namespace EC2 {
   }
   export interface VpnConnectionOptionsSpecification {
     /**
-     * Indicate whether the VPN connection uses static routes only. If you are creating a VPN connection for a device that does not support BGP, you must specify true. Default: false 
+     * Indicate whether the VPN connection uses static routes only. If you are creating a VPN connection for a device that does not support BGP, you must specify true. Use CreateVpnConnectionRoute to create a static route. Default: false 
      */
     StaticRoutesOnly?: Boolean;
     /**
