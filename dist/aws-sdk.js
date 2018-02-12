@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.192.0
+// AWS SDK for JavaScript v2.193.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
@@ -19733,6 +19733,23 @@ module.exports={
         }
       }
     },
+    "GetSigningCertificate": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "UserPoolId"
+        ],
+        "members": {
+          "UserPoolId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Certificate": {}
+        }
+      }
+    },
     "GetUICustomization": {
       "input": {
         "type": "structure",
@@ -19753,7 +19770,7 @@ module.exports={
         ],
         "members": {
           "UICustomization": {
-            "shape": "S81"
+            "shape": "S83"
           }
         }
       }
@@ -19832,10 +19849,10 @@ module.exports={
         "type": "structure",
         "members": {
           "SmsMfaConfiguration": {
-            "shape": "S8b"
+            "shape": "S8d"
           },
           "SoftwareTokenMfaConfiguration": {
-            "shape": "S8c"
+            "shape": "S8e"
           },
           "MfaConfiguration": {}
         }
@@ -20143,7 +20160,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Users": {
-            "shape": "S9c"
+            "shape": "S9e"
           },
           "PaginationToken": {}
         }
@@ -20169,7 +20186,7 @@ module.exports={
         "type": "structure",
         "members": {
           "Users": {
-            "shape": "S9c"
+            "shape": "S9e"
           },
           "NextToken": {}
         }
@@ -20306,7 +20323,7 @@ module.exports={
         ],
         "members": {
           "UICustomization": {
-            "shape": "S81"
+            "shape": "S83"
           }
         }
       }
@@ -20343,10 +20360,10 @@ module.exports={
         "members": {
           "UserPoolId": {},
           "SmsMfaConfiguration": {
-            "shape": "S8b"
+            "shape": "S8d"
           },
           "SoftwareTokenMfaConfiguration": {
-            "shape": "S8c"
+            "shape": "S8e"
           },
           "MfaConfiguration": {}
         }
@@ -20355,10 +20372,10 @@ module.exports={
         "type": "structure",
         "members": {
           "SmsMfaConfiguration": {
-            "shape": "S8b"
+            "shape": "S8d"
           },
           "SoftwareTokenMfaConfiguration": {
-            "shape": "S8c"
+            "shape": "S8e"
           },
           "MfaConfiguration": {}
         }
@@ -21196,7 +21213,8 @@ module.exports={
         "DefineAuthChallenge": {},
         "CreateAuthChallenge": {},
         "VerifyAuthChallengeResponse": {},
-        "PreTokenGeneration": {}
+        "PreTokenGeneration": {},
+        "UserMigration": {}
       }
     },
     "S4v": {
@@ -21580,7 +21598,7 @@ module.exports={
         "AttributeName": {}
       }
     },
-    "S81": {
+    "S83": {
       "type": "structure",
       "members": {
         "UserPoolId": {},
@@ -21598,7 +21616,7 @@ module.exports={
         }
       }
     },
-    "S8b": {
+    "S8d": {
       "type": "structure",
       "members": {
         "SmsAuthenticationMessage": {},
@@ -21607,7 +21625,7 @@ module.exports={
         }
       }
     },
-    "S8c": {
+    "S8e": {
       "type": "structure",
       "members": {
         "Enabled": {
@@ -21615,7 +21633,7 @@ module.exports={
         }
       }
     },
-    "S9c": {
+    "S9e": {
       "type": "list",
       "member": {
         "shape": "Ss"
@@ -122002,7 +122020,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.192.0',
+  VERSION: '2.193.0',
 
   /**
    * @api private
@@ -145915,7 +145933,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.192.0
+// AWS SDK for JavaScript v2.193.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

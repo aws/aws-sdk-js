@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.192.0-->
+<!--LATEST=2.193.0-->
 <!--ENTRYINSERT-->
+
+## 2.193.0
+* feature: CognitoIdentityServiceProvider: Support for user migration using AWS Lambda trigger. Support to obtain signing certificate for user pools.
+* feature: EC2: Network interfaces now supply the following additional status of "associated" to better distinguish the current status.
+* feature: GuardDuty: Added PortProbeAction information to the Action section of the port probe-type finding.
+* feature: KMS: This release of AWS Key Management Service includes support for InvalidArnException in the RetireGrant API.
 
 ## 2.192.0
 * feature: EC2: Users can now better understand the longer ID opt-in status of their account using the two new APIs DescribeAggregateIdFormat and DescribePrincipalIdFormat

@@ -973,6 +973,11 @@
           "shape" : "NetworkConnectionAction",
           "locationName" : "networkConnectionAction",
           "documentation" : "Information about the NETWORK_CONNECTION action described in this finding."
+        },
+        "PortProbeAction" : {
+          "shape" : "PortProbeAction",
+          "locationName" : "portProbeAction",
+          "documentation" : "Information about the PORT_PROBE action described in this finding."
         }
       },
       "documentation" : "Information about the activity described in a finding."
@@ -2329,6 +2334,12 @@
         }
       }
     },
+    "ListOfPortProbeDetail" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "PortProbeDetail"
+      }
+    },
     "ListThreatIntelSetsRequest" : {
       "type" : "structure",
       "members" : {
@@ -2625,6 +2636,38 @@
         }
       },
       "documentation" : "ISP Organization information of the remote IP address."
+    },
+    "PortProbeAction" : {
+      "type" : "structure",
+      "members" : {
+        "Blocked" : {
+          "shape" : "__boolean",
+          "locationName" : "blocked",
+          "documentation" : "Port probe blocked information."
+        },
+        "PortProbeDetails" : {
+          "shape" : "ListOfPortProbeDetail",
+          "locationName" : "portProbeDetails",
+          "documentation" : "A list of port probe details objects."
+        }
+      },
+      "documentation" : "Information about the PORT_PROBE action described in this finding."
+    },
+    "PortProbeDetail" : {
+      "type" : "structure",
+      "members" : {
+        "LocalPortDetails" : {
+          "shape" : "LocalPortDetails",
+          "locationName" : "localPortDetails",
+          "documentation" : "Local port information of the connection."
+        },
+        "RemoteIpDetails" : {
+          "shape" : "RemoteIpDetails",
+          "locationName" : "remoteIpDetails",
+          "documentation" : "Remote IP information of the connection."
+        }
+      },
+      "documentation" : "Details about the port probe finding."
     },
     "PrivateDnsName" : {
       "type" : "string",
