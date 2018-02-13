@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.193.0-->
+<!--LATEST=2.194.0-->
 <!--ENTRYINSERT-->
+
+## 2.194.0
+* feature: Route53: Added support for creating Private Hosted Zones and metric-based healthchecks in the ap-northeast-3 region for whitelisted customers.
 
 ## 2.193.0
 * feature: CognitoIdentityServiceProvider: Support for user migration using AWS Lambda trigger. Support to obtain signing certificate for user pools.
