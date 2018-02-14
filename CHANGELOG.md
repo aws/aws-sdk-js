@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.194.0-->
+<!--LATEST=2.195.0-->
 <!--ENTRYINSERT-->
+
+## 2.195.0
+* feature: AppSync: AWS AppSync now supports for None Data Source, CreateApiKey now supports setting expiration on API keys, new API UpdateApiKey supports updating expiration on API keys. 
+* feature: LexModelBuildingService: Amazon Lex now provides the ability to export and import your Amazon Lex chatbot definition as a JSON file.
 
 ## 2.194.0
 * feature: Route53: Added support for creating Private Hosted Zones and metric-based healthchecks in the ap-northeast-3 region for whitelisted customers.

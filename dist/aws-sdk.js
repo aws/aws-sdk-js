@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.194.0
+// AWS SDK for JavaScript v2.195.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
@@ -71022,6 +71022,42 @@ module.exports={
         }
       }
     },
+    "GetImport": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/imports/{importId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "importId"
+        ],
+        "members": {
+          "importId": {
+            "location": "uri",
+            "locationName": "importId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "resourceType": {},
+          "mergeStrategy": {},
+          "importId": {},
+          "importStatus": {},
+          "failureReason": {
+            "type": "list",
+            "member": {}
+          },
+          "createdDate": {
+            "type": "timestamp"
+          }
+        }
+      }
+    },
     "GetIntent": {
       "http": {
         "method": "GET",
@@ -71117,7 +71153,7 @@ module.exports={
         "type": "structure",
         "members": {
           "intents": {
-            "shape": "S35"
+            "shape": "S3a"
           },
           "nextToken": {}
         }
@@ -71151,7 +71187,7 @@ module.exports={
         "type": "structure",
         "members": {
           "intents": {
-            "shape": "S35"
+            "shape": "S3a"
           },
           "nextToken": {}
         }
@@ -71231,7 +71267,7 @@ module.exports={
         "type": "structure",
         "members": {
           "slotTypes": {
-            "shape": "S3d"
+            "shape": "S3i"
           },
           "nextToken": {}
         }
@@ -71265,7 +71301,7 @@ module.exports={
         "type": "structure",
         "members": {
           "slotTypes": {
-            "shape": "S3d"
+            "shape": "S3i"
           },
           "nextToken": {}
         }
@@ -71375,6 +71411,9 @@ module.exports={
           "locale": {},
           "childDirected": {
             "type": "boolean"
+          },
+          "createVersion": {
+            "type": "boolean"
           }
         }
       },
@@ -71408,6 +71447,9 @@ module.exports={
           "version": {},
           "locale": {},
           "childDirected": {
+            "type": "boolean"
+          },
+          "createVersion": {
             "type": "boolean"
           }
         }
@@ -71499,7 +71541,10 @@ module.exports={
             "shape": "S13"
           },
           "parentIntentSignature": {},
-          "checksum": {}
+          "checksum": {},
+          "createVersion": {
+            "type": "boolean"
+          }
         }
       },
       "output": {
@@ -71539,7 +71584,10 @@ module.exports={
             "type": "timestamp"
           },
           "version": {},
-          "checksum": {}
+          "checksum": {},
+          "createVersion": {
+            "type": "boolean"
+          }
         }
       }
     },
@@ -71564,7 +71612,10 @@ module.exports={
             "shape": "S19"
           },
           "checksum": {},
-          "valueSelectionStrategy": {}
+          "valueSelectionStrategy": {},
+          "createVersion": {
+            "type": "boolean"
+          }
         }
       },
       "output": {
@@ -71583,7 +71634,44 @@ module.exports={
           },
           "version": {},
           "checksum": {},
-          "valueSelectionStrategy": {}
+          "valueSelectionStrategy": {},
+          "createVersion": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "StartImport": {
+      "http": {
+        "requestUri": "/imports/",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "payload",
+          "resourceType",
+          "mergeStrategy"
+        ],
+        "members": {
+          "payload": {
+            "type": "blob"
+          },
+          "resourceType": {},
+          "mergeStrategy": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "name": {},
+          "resourceType": {},
+          "mergeStrategy": {},
+          "importId": {},
+          "importStatus": {},
+          "createdDate": {
+            "type": "timestamp"
+          }
         }
       }
     }
@@ -71762,7 +71850,7 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "S35": {
+    "S3a": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -71779,7 +71867,7 @@ module.exports={
         }
       }
     },
-    "S3d": {
+    "S3i": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -122020,7 +122108,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.194.0',
+  VERSION: '2.195.0',
 
   /**
    * @api private
@@ -145933,7 +146021,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.194.0
+// AWS SDK for JavaScript v2.195.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

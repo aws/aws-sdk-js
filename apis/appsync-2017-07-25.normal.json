@@ -27,7 +27,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"LimitExceededException"},
         {"shape":"InternalFailureException"},
-        {"shape":"ApiKeyLimitExceededException"}
+        {"shape":"ApiKeyLimitExceededException"},
+        {"shape":"ApiKeyValidityOutOfBoundsException"}
       ],
       "documentation":"<p>Creates a unique key that you can distribute to clients who are executing your API.</p>"
     },
@@ -377,6 +378,24 @@
       ],
       "documentation":"<p>Adds a new schema to your GraphQL API.</p> <p>This operation is asynchronous. Use to determine when it has completed.</p>"
     },
+    "UpdateApiKey":{
+      "name":"UpdateApiKey",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/apis/{apiId}/apikeys/{id}"
+      },
+      "input":{"shape":"UpdateApiKeyRequest"},
+      "output":{"shape":"UpdateApiKeyResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ApiKeyValidityOutOfBoundsException"}
+      ],
+      "documentation":"<p>Updates an API key.</p>"
+    },
     "UpdateDataSource":{
       "name":"UpdateDataSource",
       "http":{
@@ -459,7 +478,7 @@
         },
         "expires":{
           "shape":"Long",
-          "documentation":"<p>The time when the API key expires.</p>"
+          "documentation":"<p>The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.</p>"
         }
       },
       "documentation":"<p>Describes an API key.</p>"
@@ -470,6 +489,15 @@
         "message":{"shape":"String"}
       },
       "documentation":"<p>The API key exceeded a limit. Try your request again.</p>",
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
+    "ApiKeyValidityOutOfBoundsException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "documentation":"<p>The API key expiration must be set to a value between 1 and 365 days.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -527,6 +555,10 @@
         "description":{
           "shape":"String",
           "documentation":"<p>A description of the purpose of the API key.</p>"
+        },
+        "expires":{
+          "shape":"Long",
+          "documentation":"<p>The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time.</p>"
         }
       }
     },
@@ -600,7 +632,7 @@
       ],
       "members":{
         "name":{
-          "shape":"ResourceName",
+          "shape":"String",
           "documentation":"<p>A user-supplied name for the <code>GraphqlApi</code>.</p>"
         },
         "authenticationType":{
@@ -654,7 +686,7 @@
         },
         "requestMappingTemplate":{
           "shape":"MappingTemplate",
-          "documentation":"<p>The mapping template to be used for requests.</p> <p>A resolver use a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>"
+          "documentation":"<p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p>"
         },
         "responseMappingTemplate":{
           "shape":"MappingTemplate",
@@ -721,7 +753,7 @@
         },
         "type":{
           "shape":"DataSourceType",
-          "documentation":"<p>The type of the data source.</p>"
+          "documentation":"<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when the required information can be computed on the fly without connecting to a back-end data source.</p> </li> </ul>"
         },
         "serviceRoleArn":{
           "shape":"String",
@@ -747,7 +779,8 @@
       "enum":[
         "AWS_LAMBDA",
         "AMAZON_DYNAMODB",
-        "AMAZON_ELASTICSEARCH"
+        "AMAZON_ELASTICSEARCH",
+        "NONE"
       ]
     },
     "DataSources":{
@@ -1537,6 +1570,44 @@
       "error":{"httpStatusCode":401},
       "exception":true
     },
+    "UpdateApiKeyRequest":{
+      "type":"structure",
+      "required":[
+        "apiId",
+        "id"
+      ],
+      "members":{
+        "apiId":{
+          "shape":"String",
+          "documentation":"<p>The ID for the GraphQL API</p>",
+          "location":"uri",
+          "locationName":"apiId"
+        },
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The API key ID.</p>",
+          "location":"uri",
+          "locationName":"id"
+        },
+        "description":{
+          "shape":"String",
+          "documentation":"<p>A description of the purpose of the API key.</p>"
+        },
+        "expires":{
+          "shape":"Long",
+          "documentation":"<p>The time after which the API key expires. The date is represented as seconds since the epoch.</p>"
+        }
+      }
+    },
+    "UpdateApiKeyResponse":{
+      "type":"structure",
+      "members":{
+        "apiKey":{
+          "shape":"ApiKey",
+          "documentation":"<p>The API key.</p>"
+        }
+      }
+    },
     "UpdateDataSourceRequest":{
       "type":"structure",
       "required":[
@@ -1606,7 +1677,7 @@
           "locationName":"apiId"
         },
         "name":{
-          "shape":"ResourceName",
+          "shape":"String",
           "documentation":"<p>The new name for the <code>GraphqlApi</code> object.</p>"
         },
         "authenticationType":{
@@ -1624,7 +1695,7 @@
       "members":{
         "graphqlApi":{
           "shape":"GraphqlApi",
-          "documentation":"<p>The udpated <code>GraphqlApi</code> object.</p>"
+          "documentation":"<p>The updated <code>GraphqlApi</code> object.</p>"
         }
       }
     },

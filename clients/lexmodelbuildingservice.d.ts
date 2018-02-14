@@ -196,6 +196,14 @@ declare class LexModelBuildingService extends Service {
    */
   getExport(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetExportResponse) => void): Request<LexModelBuildingService.Types.GetExportResponse, AWSError>;
   /**
+   * Gets information about an import job started with the StartImport operation.
+   */
+  getImport(params: LexModelBuildingService.Types.GetImportRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetImportResponse) => void): Request<LexModelBuildingService.Types.GetImportResponse, AWSError>;
+  /**
+   * Gets information about an import job started with the StartImport operation.
+   */
+  getImport(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetImportResponse) => void): Request<LexModelBuildingService.Types.GetImportResponse, AWSError>;
+  /**
    *  Returns information about an intent. In addition to the intent name, you must specify the intent version.   This operation requires permissions to perform the lex:GetIntent action. 
    */
   getIntent(params: LexModelBuildingService.Types.GetIntentRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetIntentResponse) => void): Request<LexModelBuildingService.Types.GetIntentResponse, AWSError>;
@@ -283,10 +291,19 @@ declare class LexModelBuildingService extends Service {
    * Creates a custom slot type or replaces an existing custom slot type. To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see how-it-works. If you specify the name of an existing slot type, the fields in the request replace the existing values in the $LATEST version of the slot type. Amazon Lex removes the fields that you don't provide in the request. If you don't specify required fields, Amazon Lex throws an exception. When you update the $LATEST version of a slot type, if a bot uses the $LATEST version of an intent that contains the slot type, the bot's status field is set to NOT_BUILT. This operation requires permissions for the lex:PutSlotType action.
    */
   putSlotType(callback?: (err: AWSError, data: LexModelBuildingService.Types.PutSlotTypeResponse) => void): Request<LexModelBuildingService.Types.PutSlotTypeResponse, AWSError>;
+  /**
+   * Starts a job to import a resource to Amazon Lex.
+   */
+  startImport(params: LexModelBuildingService.Types.StartImportRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.StartImportResponse) => void): Request<LexModelBuildingService.Types.StartImportResponse, AWSError>;
+  /**
+   * Starts a job to import a resource to Amazon Lex.
+   */
+  startImport(callback?: (err: AWSError, data: LexModelBuildingService.Types.StartImportResponse) => void): Request<LexModelBuildingService.Types.StartImportResponse, AWSError>;
 }
 declare namespace LexModelBuildingService {
   export type AliasName = string;
   export type AliasNameOrListAll = string;
+  export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
   export interface BotAliasMetadata {
     /**
@@ -719,7 +736,7 @@ declare namespace LexModelBuildingService {
   }
   export type EnumerationValues = EnumerationValue[];
   export type ExportStatus = "IN_PROGRESS"|"READY"|"FAILED"|string;
-  export type ExportType = "ALEXA_SKILLS_KIT"|string;
+  export type ExportType = "ALEXA_SKILLS_KIT"|"LEX"|string;
   export interface FollowUpPrompt {
     /**
      * Prompts for information from the user. 
@@ -1137,6 +1154,42 @@ declare namespace LexModelBuildingService {
      */
     url?: String;
   }
+  export interface GetImportRequest {
+    /**
+     * The identifier of the import job information to return.
+     */
+    importId: String;
+  }
+  export interface GetImportResponse {
+    /**
+     * The name given to the import job.
+     */
+    name?: Name;
+    /**
+     * The type of resource imported.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The action taken when there was a conflict between an existing resource and a resource in the import file.
+     */
+    mergeStrategy?: MergeStrategy;
+    /**
+     * The identifier for the specific import job.
+     */
+    importId?: String;
+    /**
+     * The status of the import job. If the status is FAILED, you can get the reason for the failure from the failureReason field.
+     */
+    importStatus?: ImportStatus;
+    /**
+     * A string that describes why an import job failed to complete.
+     */
+    failureReason?: StringList;
+    /**
+     * A timestamp for the date and time that the import job was created.
+     */
+    createdDate?: Timestamp;
+  }
   export interface GetIntentRequest {
     /**
      * The name of the intent. The name is case sensitive. 
@@ -1374,6 +1427,7 @@ declare namespace LexModelBuildingService {
     utterances?: ListsOfUtterances;
   }
   export type GroupNumber = number;
+  export type ImportStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
   export interface Intent {
     /**
      * The name of the intent.
@@ -1413,9 +1467,10 @@ declare namespace LexModelBuildingService {
   export type LambdaARN = string;
   export type ListOfUtterance = UtteranceData[];
   export type ListsOfUtterances = UtteranceList[];
-  export type Locale = "en-US"|string;
+  export type Locale = "en-US"|"en-GB"|"de-DE"|string;
   export type LocaleList = Locale[];
   export type MaxResults = number;
+  export type MergeStrategy = "OVERWRITE_LATEST"|"FAIL_ON_CONFLICT"|string;
   export interface Message {
     /**
      * The content type of the message string.
@@ -1538,7 +1593,7 @@ declare namespace LexModelBuildingService {
      */
     checksum?: String;
     /**
-     * If you set the processBehavior element to Build, Amazon Lex builds the bot so that it can be run. If you set the element to SaveAmazon Lex saves the bot, but doesn't build it.  If you don't specify this value, the default value is Save.
+     * If you set the processBehavior element to BUILD, Amazon Lex builds the bot so that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but doesn't build it.  If you don't specify this value, the default value is BUILD.
      */
     processBehavior?: ProcessBehavior;
     /**
@@ -1549,6 +1604,7 @@ declare namespace LexModelBuildingService {
      * For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying true or false in the childDirected field. By specifying true in the childDirected field, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying false in the childDirected field, you confirm that your use of Amazon Lex is not related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the childDirected field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. 
      */
     childDirected: Boolean;
+    createVersion?: Boolean;
   }
   export interface PutBotResponse {
     /**
@@ -1611,6 +1667,7 @@ declare namespace LexModelBuildingService {
      * For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying true or false in the childDirected field. By specifying true in the childDirected field, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying false in the childDirected field, you confirm that your use of Amazon Lex is not related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the childDirected field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. 
      */
     childDirected?: Boolean;
+    createVersion?: Boolean;
   }
   export interface PutIntentRequest {
     /**
@@ -1661,6 +1718,7 @@ declare namespace LexModelBuildingService {
      * Identifies a specific revision of the $LATEST version. When you create a new intent, leave the checksum field blank. If you specify a checksum you get a BadRequestException exception. When you want to update a intent, set the checksum field to the checksum of the most recent revision of the $LATEST version. If you don't specify the  checksum field, or if the checksum does not match the $LATEST version, you get a PreconditionFailedException exception.
      */
     checksum?: String;
+    createVersion?: Boolean;
   }
   export interface PutIntentResponse {
     /**
@@ -1723,6 +1781,7 @@ declare namespace LexModelBuildingService {
      * Checksum of the $LATESTversion of the intent created or updated.
      */
     checksum?: String;
+    createVersion?: Boolean;
   }
   export interface PutSlotTypeRequest {
     /**
@@ -1745,6 +1804,7 @@ declare namespace LexModelBuildingService {
      * Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:    ORIGINAL_VALUE - Returns the value entered by the user, if the user value is similar to the slot value.    TOP_RESOLUTION - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy, the default is ORIGINAL_VALUE.
      */
     valueSelectionStrategy?: SlotValueSelectionStrategy;
+    createVersion?: Boolean;
   }
   export interface PutSlotTypeResponse {
     /**
@@ -1779,6 +1839,7 @@ declare namespace LexModelBuildingService {
      * The slot resolution strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
      */
     valueSelectionStrategy?: SlotValueSelectionStrategy;
+    createVersion?: Boolean;
   }
   export type ReferenceType = "Intent"|"Bot"|"BotAlias"|"BotChannel"|string;
   export interface ResourceReference {
@@ -1791,7 +1852,7 @@ declare namespace LexModelBuildingService {
      */
     version?: Version;
   }
-  export type ResourceType = "BOT"|string;
+  export type ResourceType = "BOT"|"INTENT"|"SLOT_TYPE"|string;
   export type ResponseCard = string;
   export type SessionTTL = number;
   export interface Slot {
@@ -1861,6 +1922,46 @@ declare namespace LexModelBuildingService {
   export type SlotTypeName = string;
   export type SlotUtteranceList = Utterance[];
   export type SlotValueSelectionStrategy = "ORIGINAL_VALUE"|"TOP_RESOLUTION"|string;
+  export interface StartImportRequest {
+    /**
+     * A zip archive in binary format. The archive should contain one file, a JSON file containing the resource to import. The resource should match the type specified in the resourceType field.
+     */
+    payload: _Blob;
+    /**
+     * Specifies the type of resource to export. Each resource also exports any resources that it depends on.    A bot exports dependent intents.   An intent exports dependent slot types.  
+     */
+    resourceType: ResourceType;
+    /**
+     * Specifies the action that the StartImport operation should take when there is an existing resource with the same name.   FAIL_ON_CONFLICT - The import operation is stopped on the first conflict between a resource in the import file and an existing resource. The name of the resource causing the conflict is in the failureReason field of the response to the GetImport operation. OVERWRITE_LATEST - The import operation proceeds even if there is a conflict with an existing resource. The $LASTEST version of the existing resource is overwritten with the data from the import file.  
+     */
+    mergeStrategy: MergeStrategy;
+  }
+  export interface StartImportResponse {
+    /**
+     * The name given to the import job.
+     */
+    name?: Name;
+    /**
+     * The type of resource to import.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The action to take when there is a merge conflict.
+     */
+    mergeStrategy?: MergeStrategy;
+    /**
+     * The identifier for the specific import job.
+     */
+    importId?: String;
+    /**
+     * The status of the import job. If the status is FAILED, you can get the reason for the failure using the GetImport operation.
+     */
+    importStatus?: ImportStatus;
+    /**
+     * A timestamp for the date and time that the import job was requested.
+     */
+    createdDate?: Timestamp;
+  }
   export interface Statement {
     /**
      * A collection of message objects.
@@ -1874,6 +1975,7 @@ declare namespace LexModelBuildingService {
   export type Status = "BUILDING"|"READY"|"FAILED"|"NOT_BUILT"|string;
   export type StatusType = "Detected"|"Missed"|string;
   export type String = string;
+  export type StringList = String[];
   export type SynonymList = Value[];
   export type Timestamp = Date;
   export type UserId = string;
