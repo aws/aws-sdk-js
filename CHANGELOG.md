@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.195.0-->
+<!--LATEST=2.196.0-->
 <!--ENTRYINSERT-->
+
+## 2.196.0
+* feature: GameLift: Updates to allow Fleets to run on On-Demand or Spot instances.
+* feature: MediaConvert: Nielsen ID3 tags can now be inserted into transport stream (TS) and HLS outputs. For more information on Nielsen configuration you can go to https://docs.aws.amazon.com/mediaconvert/latest/apireference/jobs.html#jobs-nielsenconfiguration
 
 ## 2.195.0
 * feature: AppSync: AWS AppSync now supports for None Data Source, CreateApiKey now supports setting expiration on API keys, new API UpdateApiKey supports updating expiration on API keys. 

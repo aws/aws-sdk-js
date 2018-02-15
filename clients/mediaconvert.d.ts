@@ -255,9 +255,6 @@ declare namespace MediaConvert {
   }
   export type AudioDefaultSelection = "DEFAULT"|"NOT_DEFAULT"|string;
   export interface AudioDescription {
-    /**
-     * Settings for Audio Normalization
-     */
     AudioNormalizationSettings?: AudioNormalizationSettings;
     /**
      * Specifies which audio data to use from each input. In the simplest case, specify an "Audio Selector":#inputs-audio_selector by name based on its order within each input. For example if you specify "Audio Selector 3", then the third audio selector will be used from each input. If an input does not have an "Audio Selector 3", then the audio selector marked as "default" in that input will be used. If there is no audio selector marked as "default", silence will be inserted for the duration of that input. Alternatively, an "Audio Selector Group":#inputs-audio_selector_group name may be specified, with similar default/silence behavior. If no audio_source_name is specified, then "Audio Selector 1" will be chosen automatically.
@@ -305,7 +302,7 @@ declare namespace MediaConvert {
   export interface AudioSelector {
     DefaultSelection?: AudioDefaultSelection;
     /**
-     * Specifies audio data from an external file source. Auto populated when Infer External Filename is checked
+     * Specifies audio data from an external file source.
      */
     ExternalAudioFileInput?: __string;
     /**
@@ -440,16 +437,10 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface CaptionDestinationSettings {
     BurninDestinationSettings?: BurninDestinationSettings;
-    /**
-     * Type of Caption output, including Burn-In, Embedded, SCC, SRT, TTML, WebVTT, DVB-Sub, Teletext.
-     */
     DestinationType?: CaptionDestinationType;
     DvbSubDestinationSettings?: DvbSubDestinationSettings;
     SccDestinationSettings?: SccDestinationSettings;
     TeletextDestinationSettings?: TeletextDestinationSettings;
-    /**
-     * Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough).
-     */
     TtmlDestinationSettings?: TtmlDestinationSettings;
   }
   export type CaptionDestinationType = "BURN_IN"|"DVB_SUB"|"EMBEDDED"|"SCC"|"SRT"|"TELETEXT"|"TTML"|"WEBVTT"|string;
@@ -867,7 +858,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export interface FileSourceSettings {
     Convert608To708?: FileSourceConvert608To708;
     /**
-     * External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'. Auto-populated when Infer External Filename is checked.
+     * External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'.
      */
     SourceFile?: __string;
     /**
@@ -1545,7 +1536,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Queue?: __string;
     Settings?: JobTemplateSettings;
     /**
-     * A job template can be of two types: system or custom. System or built-in job templates can’t be modified or deleted by the user.
+     * A job template can be of two types: system or custom. System or built-in job templates can't be modified or deleted by the user.
      */
     Type?: Type;
   }
@@ -1702,6 +1693,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type M2tsEbpAudioInterval = "VIDEO_AND_FIXED_INTERVALS"|"VIDEO_INTERVAL"|string;
   export type M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"|"VIDEO_PID"|string;
   export type M2tsEsRateInPes = "INCLUDE"|"EXCLUDE"|string;
+  export type M2tsNielsenId3 = "INSERT"|"NONE"|string;
   export type M2tsPcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD"|string;
   export type M2tsRateMode = "VBR"|"CBR"|string;
   export type M2tsScte35Source = "PASSTHROUGH"|"NONE"|string;
@@ -1714,7 +1706,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     AudioFramesPerPes?: __integer;
     /**
-     * Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.
+     * Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.
      */
     AudioPids?: ListOf__integer;
     /**
@@ -1725,12 +1717,12 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     DvbNitSettings?: DvbNitSettings;
     DvbSdtSettings?: DvbSdtSettings;
     /**
-     * Packet Identifier (PID) for input source DVB Subtitle data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.
+     * Packet Identifier (PID) for input source DVB Subtitle data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation.
      */
     DvbSubPids?: ListOf__integer;
     DvbTdtSettings?: DvbTdtSettings;
     /**
-     * Packet Identifier (PID) for input source DVB Teletext data to this output. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) for input source DVB Teletext data to this output.
      */
     DvbTeletextPid?: __integer;
     EbpAudioInterval?: M2tsEbpAudioInterval;
@@ -1748,6 +1740,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * When set, enforces that Encoder Boundary Points do not come within the specified time interval of each other by looking ahead at input video. If another EBP is going to come in within the specified time interval, the current EBP is not emitted, and the segment is "stretched" to the next marker. The lookahead value does not add latency to the system. The Live Event must be configured elsewhere to create sufficient latency to make the lookahead accurate.
      */
     MinEbpInterval?: __integer;
+    NielsenId3?: M2tsNielsenId3;
     /**
      * Value in bits per second of extra null packets to insert into the transport stream. This can be used if a downstream encryption system requires periodic null packets.
      */
@@ -1758,7 +1751,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     PatInterval?: __integer;
     PcrControl?: M2tsPcrControl;
     /**
-     * Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID.
      */
     PcrPid?: __integer;
     /**
@@ -1766,11 +1759,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     PmtInterval?: __integer;
     /**
-     * Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream.
      */
     PmtPid?: __integer;
     /**
-     * Packet Identifier (PID) of the private metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) of the private metadata stream in the transport stream.
      */
     PrivateMetadataPid?: __integer;
     /**
@@ -1779,7 +1772,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     ProgramNumber?: __integer;
     RateMode?: M2tsRateMode;
     /**
-     * Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
      */
     Scte35Pid?: __integer;
     Scte35Source?: M2tsScte35Source;
@@ -1790,14 +1783,19 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     SegmentationTime?: __double;
     /**
+     * Packet Identifier (PID) of the timed metadata stream in the transport stream.
+     */
+    TimedMetadataPid?: __integer;
+    /**
      * The value of the transport stream ID field in the Program Map Table.
      */
     TransportStreamId?: __integer;
     /**
-     * Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) of the elementary video stream in the transport stream.
      */
     VideoPid?: __integer;
   }
+  export type M3u8NielsenId3 = "INSERT"|"NONE"|string;
   export type M3u8PcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD"|string;
   export type M3u8Scte35Source = "PASSTHROUGH"|"NONE"|string;
   export interface M3u8Settings {
@@ -1806,16 +1804,17 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     AudioFramesPerPes?: __integer;
     /**
-     * Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.
+     * Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.
      */
     AudioPids?: ListOf__integer;
+    NielsenId3?: M3u8NielsenId3;
     /**
      * The number of milliseconds between instances of this table in the output transport stream.
      */
     PatInterval?: __integer;
     PcrControl?: M3u8PcrControl;
     /**
-     * Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID.
      */
     PcrPid?: __integer;
     /**
@@ -1823,11 +1822,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     PmtInterval?: __integer;
     /**
-     * Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream.
      */
     PmtPid?: __integer;
     /**
-     * Packet Identifier (PID) of the private metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) of the private metadata stream in the transport stream.
      */
     PrivateMetadataPid?: __integer;
     /**
@@ -1835,13 +1834,13 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     ProgramNumber?: __integer;
     /**
-     * Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
      */
     Scte35Pid?: __integer;
     Scte35Source?: M3u8Scte35Source;
     TimedMetadata?: TimedMetadata;
     /**
-     * Packet Identifier (PID) of the timed metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) of the timed metadata stream in the transport stream.
      */
     TimedMetadataPid?: __integer;
     /**
@@ -1849,7 +1848,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     TransportStreamId?: __integer;
     /**
-     * Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.
+     * Packet Identifier (PID) of the elementary video stream in the transport stream.
      */
     VideoPid?: __integer;
   }
@@ -1995,7 +1994,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Destination?: __string;
     Encryption?: MsSmoothEncryptionSettings;
     /**
-     * Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds.  Fragment length must be compatible with GOP size and framerate.
+     * Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and framerate.
      */
     FragmentLength?: __integer;
     ManifestEncoding?: MsSmoothManifestEncoding;
@@ -2053,7 +2052,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Extension?: __string;
     /**
-     * Use Name modifier (NameModifier) to have the service add a string to the end of each output filename. You specify the base filename as part of your destination URI. When you create multiple outputs in the same output group, Name modifier is required. Name modifier also accepts format identifiers. For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one output, you must use them in the same way in all outputs of the output group.
+     * Use Name modifier (NameModifier) to have the service add a string to the end of each output filename. You specify the base filename as part of your destination URI. When you create multiple outputs in the same output group, Name modifier (NameModifier) is required. Name modifier also accepts format identifiers. For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one output, you must use them in the same way in all outputs of the output group.
      */
     NameModifier?: __string;
     OutputSettings?: OutputSettings;
@@ -2105,9 +2104,6 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     FileGroupSettings?: FileGroupSettings;
     HlsGroupSettings?: HlsGroupSettings;
     MsSmoothGroupSettings?: MsSmoothGroupSettings;
-    /**
-     * Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth Streaming)
-     */
     Type?: OutputGroupType;
   }
   export type OutputGroupType = "HLS_GROUP_SETTINGS"|"DASH_ISO_GROUP_SETTINGS"|"FILE_GROUP_SETTINGS"|"MS_SMOOTH_GROUP_SETTINGS"|string;
@@ -2142,7 +2138,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Name?: __string;
     Settings?: PresetSettings;
     /**
-     * A preset can be of two types: system or custom. System or built-in preset can’t be modified or deleted by the user.
+     * A preset can be of two types: system or custom. System or built-in preset can't be modified or deleted by the user.
      */
     Type?: Type;
   }
@@ -2217,7 +2213,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Name?: __string;
     Status?: QueueStatus;
     /**
-     * A queue can be of two types: system or custom. System or built-in queues can’t be modified or deleted by the user.
+     * A queue can be of two types: system or custom. System or built-in queues can't be modified or deleted by the user.
      */
     Type?: Type;
   }
@@ -2292,7 +2288,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface TeletextDestinationSettings {
     /**
-     * Set pageNumber to the Teletext page number for the destination captions for this output.  This value must be a three-digit hexadecimal string; strings ending in -FF are invalid. If you are passing through the entire set of Teletext data, do not use this field.
+     * Set pageNumber to the Teletext page number for the destination captions for this output. This value must be a three-digit hexadecimal string; strings ending in -FF are invalid. If you are passing through the entire set of Teletext data, do not use this field.
      */
     PageNumber?: __string;
   }
@@ -2325,7 +2321,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Start?: __string;
     /**
-     * Only applies to outputs that support program-date-time stamp. Use Time  stamp offset (TimestampOffset) to overwrite the timecode date without affecting the time and frame number. Provide the new date as a string in the format "yyyy-mm-dd".  To use Time stamp offset, you must also enable Insert program-date-time (InsertProgramDateTime) in the output settings.
+     * Only applies to outputs that support program-date-time stamp. Use Time stamp offset (TimestampOffset) to overwrite the timecode date without affecting the time and frame number. Provide the new date as a string in the format "yyyy-mm-dd".  To use Time stamp offset, you must also enable Insert program-date-time (InsertProgramDateTime) in the output settings.
      */
     TimestampOffset?: __string;
   }
