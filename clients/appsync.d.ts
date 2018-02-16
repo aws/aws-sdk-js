@@ -188,6 +188,14 @@ declare class AppSync extends Service {
    */
   startSchemaCreation(callback?: (err: AWSError, data: AppSync.Types.StartSchemaCreationResponse) => void): Request<AppSync.Types.StartSchemaCreationResponse, AWSError>;
   /**
+   * Updates an API key.
+   */
+  updateApiKey(params: AppSync.Types.UpdateApiKeyRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateApiKeyResponse) => void): Request<AppSync.Types.UpdateApiKeyResponse, AWSError>;
+  /**
+   * Updates an API key.
+   */
+  updateApiKey(callback?: (err: AWSError, data: AppSync.Types.UpdateApiKeyResponse) => void): Request<AppSync.Types.UpdateApiKeyResponse, AWSError>;
+  /**
    * Updates a DataSource object.
    */
   updateDataSource(params: AppSync.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateDataSourceResponse) => void): Request<AppSync.Types.UpdateDataSourceResponse, AWSError>;
@@ -231,7 +239,7 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The time when the API key expires.
+     * The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.
      */
     expires?: Long;
   }
@@ -248,6 +256,10 @@ declare namespace AppSync {
      * A description of the purpose of the API key.
      */
     description?: String;
+    /**
+     * The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time.
+     */
+    expires?: Long;
   }
   export interface CreateApiKeyResponse {
     /**
@@ -299,7 +311,7 @@ declare namespace AppSync {
     /**
      * A user-supplied name for the GraphqlApi.
      */
-    name: ResourceName;
+    name: String;
     /**
      * The authentication type: API key, IAM, or Amazon Cognito User Pools.
      */
@@ -333,7 +345,7 @@ declare namespace AppSync {
      */
     dataSourceName: ResourceName;
     /**
-     * The mapping template to be used for requests. A resolver use a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).
+     * The mapping template to be used for requests. A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).
      */
     requestMappingTemplate: MappingTemplate;
     /**
@@ -381,7 +393,7 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The type of the data source.
+     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an AWS Lambda function.    NONE: There is no data source. This type is used when the required information can be computed on the fly without connecting to a back-end data source.  
      */
     type?: DataSourceType;
     /**
@@ -401,7 +413,7 @@ declare namespace AppSync {
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
   }
-  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|string;
+  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|string;
   export type DataSources = DataSource[];
   export type DefaultAction = "ALLOW"|"DENY"|string;
   export interface DeleteApiKeyRequest {
@@ -822,6 +834,30 @@ declare namespace AppSync {
   }
   export type TypeDefinitionFormat = "SDL"|"JSON"|string;
   export type TypeList = Type[];
+  export interface UpdateApiKeyRequest {
+    /**
+     * The ID for the GraphQL API
+     */
+    apiId: String;
+    /**
+     * The API key ID.
+     */
+    id: String;
+    /**
+     * A description of the purpose of the API key.
+     */
+    description?: String;
+    /**
+     * The time after which the API key expires. The date is represented as seconds since the epoch.
+     */
+    expires?: Long;
+  }
+  export interface UpdateApiKeyResponse {
+    /**
+     * The API key.
+     */
+    apiKey?: ApiKey;
+  }
   export interface UpdateDataSourceRequest {
     /**
      * The API ID.
@@ -870,7 +906,7 @@ declare namespace AppSync {
     /**
      * The new name for the GraphqlApi object.
      */
-    name: ResourceName;
+    name: String;
     /**
      * The new authentication type for the GraphqlApi object.
      */
@@ -882,7 +918,7 @@ declare namespace AppSync {
   }
   export interface UpdateGraphqlApiResponse {
     /**
-     * The udpated GraphqlApi object.
+     * The updated GraphqlApi object.
      */
     graphqlApi?: GraphqlApi;
   }
