@@ -117,7 +117,7 @@
             return expect(creds.sessionToken).to.equal('session');
           });
          });
-         it('credential_process used when static not present', function() {
+         return it('credential_process used when static not present', function() {
            chain = new AWS.CredentialProviderChain();
            var mockProcess, mockConfig, creds;
            mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';

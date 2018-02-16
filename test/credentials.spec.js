@@ -395,7 +395,6 @@
             helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
             creds = new AWS.SharedIniFileCredentials({
                 profile: 'foo',
-                useCredentialProcess: true
             });
             creds.get();
             return validateCredentials(creds);
@@ -407,7 +406,7 @@
             var child_process = require('child_process');
             helpers.spyOn(child_process, 'execSync').andReturn(mockProcess);
             helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
-            var creds = new AWS.SharedIniFileCredentials({ profile: 'foo', useCredentialProcess: true })
+            var creds = new AWS.SharedIniFileCredentials({ profile: 'foo' })
             expect(function() {
               creds.refresh(function(e) {
                 if (e) throw e
