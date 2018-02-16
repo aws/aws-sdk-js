@@ -3499,7 +3499,7 @@
         },
         "MultiAZ": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Specifies whether the Read Replica is in a Multi-AZ deployment. </p> <p>You can create a Read Replica as a Multi-AZ DB instance. RDS creates a standby of your replica in another Availability Zone for failover support for the replica. Creating your Read Replica as a Multi-AZ DB instance is independent of whether the source database is a Multi-AZ DB instance. </p> <note> <p>Currently, you can't create PostgreSQL Read Replicas as Multi-AZ DB instances.</p> </note>"
+          "documentation": "<p>Specifies whether the Read Replica is in a Multi-AZ deployment. </p> <p>You can create a Read Replica as a Multi-AZ DB instance. RDS creates a standby of your replica in another Availability Zone for failover support for the replica. Creating your Read Replica as a Multi-AZ DB instance is independent of whether the source database is a Multi-AZ DB instance. </p>"
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
@@ -4393,6 +4393,10 @@
         "SupportsLogExportsToCloudwatchLogs": {
           "shape": "Boolean",
           "documentation": "<p>A value that indicates whether the engine version supports exporting the log types specified by ExportableLogTypes to CloudWatch Logs.</p>"
+        },
+        "SupportsReadReplica": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the database engine version supports read replicas.</p>"
         }
       },
       "documentation": "<p> This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. </p>"

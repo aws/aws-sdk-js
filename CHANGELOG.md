@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.196.0-->
+<!--LATEST=2.197.0-->
 <!--ENTRYINSERT-->
+
+## 2.197.0
+* feature: RDS: Updates RDS API to indicate whether a DBEngine supports read replicas.
 
 ## 2.196.0
 * feature: GameLift: Updates to allow Fleets to run on On-Demand or Spot instances.
