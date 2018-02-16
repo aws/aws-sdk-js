@@ -104,11 +104,7 @@
           });
         });
         it('prefers static INI credentials over credentials process', function() {
-          chain = new AWS.CredentialProviderChain([
-            function () { return new AWS.SharedIniFileCredentials(); },
-            function () { return new AWS.SharedIniFileCredentials({ useCredentialProcess: true }); },
-          ]);
-
+          chain = new AWS.CredentialProviderChain();
           var mockProcess, mockConfig, creds;
           mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
           mockConfig = '[default]\ncredential_process=federated_cli_mock\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session';
@@ -121,12 +117,8 @@
             return expect(creds.sessionToken).to.equal('session');
           });
          });
-         return it('credential_process used when static not present', function() {
-           chain = new AWS.CredentialProviderChain([
-             function () { return new AWS.SharedIniFileCredentials(); },
-             function () { return new AWS.SharedIniFileCredentials({ useCredentialProcess: true }); },
-           ]);
-
+         it('credential_process used when static not present', function() {
+           chain = new AWS.CredentialProviderChain();
            var mockProcess, mockConfig, creds;
            mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
            mockConfig = '[default]\ncredential_process=federated_cli_mock';
