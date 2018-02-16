@@ -386,18 +386,33 @@
           creds.get();
           return validateCredentials(creds);
         });
-        return it('loads via credential_process', function() {
-            var mockProcess, mockConfig, creds
-            mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}'
+        it('loads via credential_process', function() {
+            var mockProcess, mockConfig, creds;
+            mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}';
             mockConfig = '[foo]\ncredential_process=federated_cli_mock';
-            var child_process = require('child_process')
-            helpers.spyOn(child_process, 'execSync').andReturn(mockProcess)
+            var child_process = require('child_process');
+            helpers.spyOn(child_process, 'execSync').andReturn(mockProcess);
             helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
             creds = new AWS.SharedIniFileCredentials({
-                profile: 'foo'
+                profile: 'foo',
+                useCredentialProcess: true
             });
             creds.get();
-            return validateCredentials(creds)
+            return validateCredentials(creds);
+        })
+        return it('throws error if credential process is not Version 1', function() {
+            var mockProcess, mockConfig, creds;
+            mockProcess = '{"Version": 2,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
+            mockConfig = '[foo]\ncredential_process=federated_cli_mock';
+            var child_process = require('child_process');
+            helpers.spyOn(child_process, 'execSync').andReturn(mockProcess);
+            helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
+            var creds = new AWS.SharedIniFileCredentials({ profile: 'foo', useCredentialProcess: true })
+            expect(function() {
+              creds.refresh(function(e) {
+                if (e) throw e
+              })
+            }).to.throw('credential_process does not return Version == 1 for profile foo');
         })
       });
       return describe('refresh', function() {

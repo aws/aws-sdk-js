@@ -88,7 +88,7 @@
             return expect(creds.sessionToken).to.equal(void 0);
           });
         });
-        return it('accepts providers as functions, elavuating them during resolution', function() {
+        it('accepts providers as functions, evaluating them during resolution', function() {
           var provider;
           provider = function() {
             return {
@@ -103,6 +103,42 @@
             return expect(creds.sessionToken).to.equal(void 0);
           });
         });
+        it('prefers static INI credentials over credentials process', function() {
+          chain = new AWS.CredentialProviderChain([
+            function () { return new AWS.SharedIniFileCredentials(); },
+            function () { return new AWS.SharedIniFileCredentials({ useCredentialProcess: true }); },
+          ]);
+
+          var mockProcess, mockConfig, creds;
+          mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
+          mockConfig = '[default]\ncredential_process=federated_cli_mock\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session';
+          var child_process = require('child_process');
+          helpers.spyOn(child_process, 'execSync').andReturn(mockProcess);
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
+          return chain.resolve(function(err, creds) {
+            expect(creds.accessKeyId).to.equal('akid');
+            expect(creds.secretAccessKey).to.equal('secret');
+            return expect(creds.sessionToken).to.equal('session');
+          });
+         });
+         return it('credential_process used when static not present', function() {
+           chain = new AWS.CredentialProviderChain([
+             function () { return new AWS.SharedIniFileCredentials(); },
+             function () { return new AWS.SharedIniFileCredentials({ useCredentialProcess: true }); },
+           ]);
+
+           var mockProcess, mockConfig, creds;
+           mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
+           mockConfig = '[default]\ncredential_process=federated_cli_mock';
+           var child_process = require('child_process');
+           helpers.spyOn(child_process, 'execSync').andReturn(mockProcess);
+           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
+           return chain.resolve(function(err, creds) {
+             expect(creds.accessKeyId).to.equal('xxx');
+             expect(creds.secretAccessKey).to.equal('yyy');
+             return expect(creds.sessionToken).to.equal('zzz');
+           });
+          });
       });
       if (typeof Promise === 'function') {
         return describe('resolvePromise', function() {
