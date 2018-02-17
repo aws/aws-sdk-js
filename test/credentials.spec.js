@@ -471,6 +471,28 @@
           return done();
         });
       });
+      it('will assume a role from chained source_profile profiles', function(done) {
+        var creds, mock;
+        mock = '[default]\nrole_arn = arn\nsource_profile = foo_first\n[foo_first]\nrole_arn = arn_foo_first\nsource_profile = foo_base\n[foo_base]\naws_access_key_id = baseKey\naws_secret_access_key = baseSecret\n';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        var STSPrototype = (new STS()).constructor.prototype;
+        creds = new AWS.SharedIniFileCredentials();
+        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallThrough();
+        expect(creds.roleArn).to.equal('arn');
+        return creds.refresh(function(err) {
+          expect(assumeRoleSpy.calls.length).to.equal(2);
+          firstAssumeRoleArg = assumeRoleSpy.calls[0]["arguments"][0];
+          expect(firstAssumeRoleArg.RoleArn).to.equal('arn_foo_first')
+          secondAssumeRoleArg = assumeRoleSpy.calls[1]["arguments"][0];
+          expect(secondAssumeRoleArg.RoleArn).to.equal('arn')
+          expect(creds.accessKeyId).to.equal('KEY');
+          expect(creds.secretAccessKey).to.equal('SECRET');
+          expect(creds.sessionToken).to.equal('TOKEN');
+          expect(creds.expireTime).to.eql(new Date(0));
+          return done();
+        });
+      });
       it('will assume a role from the credentials file whose source profile is defined in the config file', function(done) {
         var creds, credsCtorSpy;
         process.env.AWS_SDK_LOAD_CONFIG = '1';
@@ -483,14 +505,13 @@
         });
         helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
         creds = new AWS.SharedIniFileCredentials();
-        credsCtorSpy = helpers.spyOn(AWS, 'Credentials').andCallThrough();
+        credsCtorSpy = helpers.spyOn(AWS, 'SharedIniFileCredentials').andCallThrough();
         expect(creds.roleArn).to.equal('arn');
         return creds.refresh(function(err) {
           var sourceCreds;
           expect(credsCtorSpy.calls.length).to.equal(1);
-          sourceCreds = credsCtorSpy.calls[0]["arguments"][0];
-          expect(sourceCreds.accessKeyId).to.equal('akid');
-          expect(sourceCreds.secretAccessKey).to.equal('secret');
+          parentCredsArg = credsCtorSpy.calls[0]["arguments"][0];
+          expect(parentCredsArg.profile).to.equal('foo');
           expect(creds.accessKeyId).to.equal('KEY');
           expect(creds.secretAccessKey).to.equal('SECRET');
           expect(creds.sessionToken).to.equal('TOKEN');
@@ -498,7 +519,7 @@
           return done();
         });
       });
-      return it('will assume a role from the config file whose source profile is defined in the credentials file', function(done) {
+      it('will assume a role from the config file whose source profile is defined in the credentials file', function(done) {
         var creds, credsCtorSpy;
         process.env.AWS_SDK_LOAD_CONFIG = '1';
         helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
@@ -510,18 +531,51 @@
         });
         helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
         creds = new AWS.SharedIniFileCredentials();
-        credsCtorSpy = helpers.spyOn(AWS, 'Credentials').andCallThrough();
+        credsCtorSpy = helpers.spyOn(AWS, 'SharedIniFileCredentials').andCallThrough();
         expect(creds.roleArn).to.equal('arn');
         return creds.refresh(function(err) {
           var sourceCreds;
           expect(credsCtorSpy.calls.length).to.equal(1);
-          sourceCreds = credsCtorSpy.calls[0]["arguments"][0];
-          expect(sourceCreds.accessKeyId).to.equal('akid');
-          expect(sourceCreds.secretAccessKey).to.equal('secret');
+          parentCredsArg = credsCtorSpy.calls[0]["arguments"][0];
+          expect(parentCredsArg.profile).to.equal('foo');
           expect(creds.accessKeyId).to.equal('KEY');
           expect(creds.secretAccessKey).to.equal('SECRET');
           expect(creds.sessionToken).to.equal('TOKEN');
           expect(creds.expireTime).to.eql(new Date(0));
+          return done();
+        });
+      });
+      it('should prefer static credentials to role_arn in source profiles', function(done) {
+        var creds, mock;
+        mock = '[default]\nrole_arn = arn\nsource_profile = foo_first\n[foo_first]\naws_access_key_id=first_key\naws_secret_access_key=first_secret\nrole_arn = arn_foo_first\nsource_profile = foo_base\n[foo_base]\naws_access_key_id = baseKey\naws_secret_access_key = baseSecret\n';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        var STSPrototype = (new STS()).constructor.prototype;
+        creds = new AWS.SharedIniFileCredentials();
+        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallThrough();
+        expect(creds.roleArn).to.equal('arn');
+        return creds.refresh(function(err) {
+          expect(assumeRoleSpy.calls.length).to.equal(1);
+          firstAssumeRoleArg = assumeRoleSpy.calls[0]["arguments"][0];
+          expect(firstAssumeRoleArg.RoleArn).to.equal('arn')
+          return done();
+        });
+      });
+      it('should prefer role_arn to static credentials in the base profile', function(done) {
+        var creds, mock;
+        mock = '[default]\nrole_arn = arn\naws_access_key_id=base_key\naws_secret_access_key=base_secret\nsource_profile = foo_first\n[foo_first]\nrole_arn = arn_foo_first\nsource_profile = foo_base\n[foo_base]\naws_access_key_id = baseKey\naws_secret_access_key = baseSecret\n';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        var STSPrototype = (new STS()).constructor.prototype;
+        creds = new AWS.SharedIniFileCredentials();
+        assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallThrough();
+        expect(creds.roleArn).to.equal('arn');
+        return creds.refresh(function(err) {
+          expect(assumeRoleSpy.calls.length).to.equal(2);
+          firstAssumeRoleArg = assumeRoleSpy.calls[0]["arguments"][0];
+          expect(firstAssumeRoleArg.RoleArn).to.equal('arn_foo_first')
+          secondAssumeRoleArg = assumeRoleSpy.calls[1]["arguments"][0];
+          expect(secondAssumeRoleArg.RoleArn).to.equal('arn')
           return done();
         });
       });
