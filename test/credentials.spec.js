@@ -422,7 +422,6 @@
             helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
             creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
             creds.get();
-            console.log(creds);
             return validateCredentials(creds);
          });
          return it('credential_process used when static not present', function() {
@@ -434,7 +433,6 @@
             helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
             creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
             creds.get();
-            console.log(creds);
             return validateCredentials(creds);
           });
       });
