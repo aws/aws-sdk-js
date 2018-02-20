@@ -44,19 +44,19 @@ declare class AutoScaling extends Service {
    */
   completeLifecycleAction(callback?: (err: AWSError, data: AutoScaling.Types.CompleteLifecycleActionAnswer) => void): Request<AutoScaling.Types.CompleteLifecycleActionAnswer, AWSError>;
   /**
-   * Creates an Auto Scaling group with the specified name and attributes. If you exceed your maximum limit of Auto Scaling groups, which by default is 20 per region, the call fails. For information about viewing and updating this limit, see DescribeAccountLimits. For more information, see Auto Scaling Groups in the Auto Scaling User Guide.
+   * Creates an Auto Scaling group with the specified name and attributes. If you exceed your maximum limit of Auto Scaling groups, the call fails. For information about viewing this limit, see DescribeAccountLimits. For information about updating this limit, see Auto Scaling Limits in the Auto Scaling User Guide. For more information, see Auto Scaling Groups in the Auto Scaling User Guide.
    */
   createAutoScalingGroup(params: AutoScaling.Types.CreateAutoScalingGroupType, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an Auto Scaling group with the specified name and attributes. If you exceed your maximum limit of Auto Scaling groups, which by default is 20 per region, the call fails. For information about viewing and updating this limit, see DescribeAccountLimits. For more information, see Auto Scaling Groups in the Auto Scaling User Guide.
+   * Creates an Auto Scaling group with the specified name and attributes. If you exceed your maximum limit of Auto Scaling groups, the call fails. For information about viewing this limit, see DescribeAccountLimits. For information about updating this limit, see Auto Scaling Limits in the Auto Scaling User Guide. For more information, see Auto Scaling Groups in the Auto Scaling User Guide.
    */
   createAutoScalingGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a launch configuration. If you exceed your maximum limit of launch configurations, which by default is 100 per region, the call fails. For information about viewing and updating this limit, see DescribeAccountLimits. For more information, see Launch Configurations in the Auto Scaling User Guide.
+   * Creates a launch configuration. If you exceed your maximum limit of launch configurations, the call fails. For information about viewing this limit, see DescribeAccountLimits. For information about updating this limit, see Auto Scaling Limits in the Auto Scaling User Guide. For more information, see Launch Configurations in the Auto Scaling User Guide.
    */
   createLaunchConfiguration(params: AutoScaling.Types.CreateLaunchConfigurationType, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a launch configuration. If you exceed your maximum limit of launch configurations, which by default is 100 per region, the call fails. For information about viewing and updating this limit, see DescribeAccountLimits. For more information, see Launch Configurations in the Auto Scaling User Guide.
+   * Creates a launch configuration. If you exceed your maximum limit of launch configurations, the call fails. For information about viewing this limit, see DescribeAccountLimits. For information about updating this limit, see Auto Scaling Limits in the Auto Scaling User Guide. For more information, see Launch Configurations in the Auto Scaling User Guide.
    */
   createLaunchConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -124,7 +124,7 @@ declare class AutoScaling extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describes the current Auto Scaling resource limits for your AWS account. For information about requesting an increase in these limits, see AWS Service Limits in the Amazon Web Services General Reference.
+   * Describes the current Auto Scaling resource limits for your AWS account. For information about requesting an increase in these limits, see Auto Scaling Limits in the Auto Scaling User Guide.
    */
   describeAccountLimits(callback?: (err: AWSError, data: AutoScaling.Types.DescribeAccountLimitsAnswer) => void): Request<AutoScaling.Types.DescribeAccountLimitsAnswer, AWSError>;
   /**
@@ -483,7 +483,7 @@ declare namespace AutoScaling {
   export type AssociatePublicIpAddress = boolean;
   export interface AttachInstancesQuery {
     /**
-     * One or more instance IDs.
+     * The IDs of the instances. You can specify up to 20 instances.
      */
     InstanceIds?: InstanceIds;
     /**
@@ -499,7 +499,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: ResourceName;
     /**
-     * The Amazon Resource Names (ARN) of the target groups.
+     * The Amazon Resource Names (ARN) of the target groups. You can specify up to 10 target groups.
      */
     TargetGroupARNs: TargetGroupARNs;
   }
@@ -511,7 +511,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: ResourceName;
     /**
-     * One or more load balancer names.
+     * The names of the load balancers. You can specify up to 10 load balancers.
      */
     LoadBalancerNames: LoadBalancerNames;
   }
@@ -608,6 +608,10 @@ declare namespace AutoScaling {
      * Indicates whether newly launched instances are protected from termination by Auto Scaling when scaling in.
      */
     NewInstancesProtectedFromScaleIn?: InstanceProtected;
+    /**
+     * The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf.
+     */
+    ServiceLinkedRoleARN?: ResourceName;
   }
   export type AutoScalingGroupDesiredCapacity = number;
   export type AutoScalingGroupMaxSize = number;
@@ -812,6 +816,10 @@ declare namespace AutoScaling {
      * One or more tags. For more information, see Tagging Auto Scaling Groups and Instances in the Auto Scaling User Guide.
      */
     Tags?: Tags;
+    /**
+     * The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf. By default, Auto Scaling uses a service-linked role named AWSServiceRoleForAutoScaling, which it creates if it does not exist.
+     */
+    ServiceLinkedRoleARN?: ResourceName;
   }
   export interface CreateLaunchConfigurationType {
     /**
@@ -879,7 +887,7 @@ declare namespace AutoScaling {
      */
     EbsOptimized?: EbsOptimized;
     /**
-     * Used for groups that launch instances into a virtual private cloud (VPC). Specifies whether to assign a public IP address to each instance. For more information, see Launching Auto Scaling Instances in a VPC in the Auto Scaling User Guide. If you specify this parameter, be sure to specify at least one subnet when you create your group. Default: If the instance is launched into a default subnet, the default is true. If the instance is launched into a nondefault subnet, the default is false. For more information, see Supported Platforms in the Amazon Elastic Compute Cloud User Guide.
+     * Used for groups that launch instances into a virtual private cloud (VPC). Specifies whether to assign a public IP address to each instance. For more information, see Launching Auto Scaling Instances in a VPC in the Auto Scaling User Guide. If you specify this parameter, be sure to specify at least one subnet when you create your group. Default: If the instance is launched into a default subnet, the default is to assign a public IP address. If the instance is launched into a nondefault subnet, the default is not to assign a public IP address.
      */
     AssociatePublicIpAddress?: AssociatePublicIpAddress;
     /**
@@ -1003,7 +1011,7 @@ declare namespace AutoScaling {
      */
     InstanceIds?: InstanceIds;
     /**
-     * The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
+     * The maximum number of items to return with this call. The default value is 50 and the maximum value is 50.
      */
     MaxRecords?: MaxRecords;
     /**
@@ -1049,7 +1057,7 @@ declare namespace AutoScaling {
      */
     NextToken?: XmlString;
     /**
-     * The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
+     * The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
      */
     MaxRecords?: MaxRecords;
   }
@@ -1073,7 +1081,7 @@ declare namespace AutoScaling {
      */
     NextToken?: XmlString;
     /**
-     * The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
+     * The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
      */
     MaxRecords?: MaxRecords;
   }
@@ -1153,7 +1161,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName?: ResourceName;
     /**
-     * The maximum number of items to return with this call. The default value is 100.
+     * The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
      */
     MaxRecords?: MaxRecords;
     /**
@@ -1215,7 +1223,7 @@ declare namespace AutoScaling {
   }
   export interface DetachInstancesQuery {
     /**
-     * One or more instance IDs.
+     * The IDs of the instances. You can specify up to 20 instances.
      */
     InstanceIds?: InstanceIds;
     /**
@@ -1223,7 +1231,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: ResourceName;
     /**
-     * If True, the Auto Scaling group decrements the desired capacity value by the number of instances detached.
+     * Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
      */
     ShouldDecrementDesiredCapacity: ShouldDecrementDesiredCapacity;
   }
@@ -1235,7 +1243,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: ResourceName;
     /**
-     * The Amazon Resource Names (ARN) of the target groups.
+     * The Amazon Resource Names (ARN) of the target groups. You can specify up to 10 target groups.
      */
     TargetGroupARNs: TargetGroupARNs;
   }
@@ -1247,7 +1255,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: ResourceName;
     /**
-     * One or more load balancer names.
+     * The names of the load balancers. You can specify up to 10 load balancers.
      */
     LoadBalancerNames: LoadBalancerNames;
   }
@@ -1276,7 +1284,7 @@ declare namespace AutoScaling {
      */
     VolumeType?: BlockDeviceEbsVolumeType;
     /**
-     * Indicates whether the volume is deleted on instance termination. Default: true 
+     * Indicates whether the volume is deleted on instance termination. The default is true.
      */
     DeleteOnTermination?: BlockDeviceEbsDeleteOnTermination;
     /**
@@ -1322,7 +1330,7 @@ declare namespace AutoScaling {
   }
   export interface EnterStandbyQuery {
     /**
-     * One or more instances to move into Standby mode. You must specify at least one instance ID.
+     * The IDs of the instances. You can specify up to 20 instances.
      */
     InstanceIds?: InstanceIds;
     /**
@@ -1330,7 +1338,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: ResourceName;
     /**
-     * Specifies whether the instances moved to Standby mode count as part of the Auto Scaling group's desired capacity. If set, the desired capacity for the Auto Scaling group decrements by the number of instances moved to Standby mode.
+     * Indicates whether to decrement the desired capacity of the Auto Scaling group by the number of instances moved to Standby mode.
      */
     ShouldDecrementDesiredCapacity: ShouldDecrementDesiredCapacity;
   }
@@ -1345,7 +1353,7 @@ declare namespace AutoScaling {
      */
     PolicyName: ResourceName;
     /**
-     * If this parameter is true, Auto Scaling waits for the cooldown period to complete before executing the policy. Otherwise, Auto Scaling executes the policy without waiting for the cooldown period to complete. This parameter is not supported if the policy type is StepScaling. For more information, see Auto Scaling Cooldowns in the Auto Scaling User Guide.
+     * Indicates whether Auto Scaling waits for the cooldown period to complete before executing the policy. This parameter is not supported if the policy type is StepScaling. For more information, see Auto Scaling Cooldowns in the Auto Scaling User Guide.
      */
     HonorCooldown?: HonorCooldown;
     /**
@@ -1365,7 +1373,7 @@ declare namespace AutoScaling {
   }
   export interface ExitStandbyQuery {
     /**
-     * One or more instance IDs. You must specify at least one instance ID.
+     * The IDs of the instances. You can specify up to 20 instances.
      */
     InstanceIds?: InstanceIds;
     /**
@@ -1549,7 +1557,7 @@ declare namespace AutoScaling {
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
-     * The version number. By default, the default version of the launch template is used.
+     * The version number, $Latest, or $Default. If the value is $Latest, Auto Scaling selects the latest version of the launch template when launching instances. If the value is $Default, Auto Scaling selects the default version of the launch template when launching instances. The default value is $Default.
      */
     Version?: XmlStringMaxLen255;
   }
@@ -2054,7 +2062,7 @@ declare namespace AutoScaling {
      */
     DesiredCapacity: AutoScalingGroupDesiredCapacity;
     /**
-     * By default, SetDesiredCapacity overrides any cooldown period associated with the Auto Scaling group. Specify True to make Auto Scaling to wait for the cool-down period associated with the Auto Scaling group to complete before initiating a scaling activity to set your Auto Scaling group to its new capacity.
+     * Indicates whether Auto Scaling waits for the cooldown period to complete before initiating a scaling activity to set your Auto Scaling group to its new capacity. By default, Auto Scaling does not honor the cooldown period during manual scaling activities.
      */
     HonorCooldown?: HonorCooldown;
   }
@@ -2190,7 +2198,7 @@ declare namespace AutoScaling {
      */
     TargetValue: MetricScale;
     /**
-     * Indicates whether scale in by the target tracking policy is disabled. If the value is true, scale in is disabled and the target tracking policy won't remove instances from the Auto Scaling group. Otherwise, scale in is enabled and the target tracking policy can remove instances from the Auto Scaling group. The default value is false.
+     * Indicates whether scale in by the target tracking policy is disabled. If scale in is disabled, the target tracking policy won't remove instances from the Auto Scaling group. Otherwise, the target tracking policy can remove instances from the Auto Scaling group. The default is disabled.
      */
     DisableScaleIn?: DisableScaleIn;
   }
@@ -2200,7 +2208,7 @@ declare namespace AutoScaling {
      */
     InstanceId: XmlStringMaxLen19;
     /**
-     * If true, terminating the instance also decrements the size of the Auto Scaling group.
+     * Indicates whether terminating the instance also decrements the size of the Auto Scaling group.
      */
     ShouldDecrementDesiredCapacity: ShouldDecrementDesiredCapacity;
   }
@@ -2212,11 +2220,11 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: ResourceName;
     /**
-     * The name of the launch configuration. You must specify either a launch configuration or a launch template.
+     * The name of the launch configuration. If you specify a launch configuration, you can't specify a launch template.
      */
     LaunchConfigurationName?: ResourceName;
     /**
-     * The launch template to use to specify the updates. You must specify a launch configuration or a launch template.
+     * The launch template to use to specify the updates. If you specify a launch template, you can't specify a launch configuration.
      */
     LaunchTemplate?: LaunchTemplateSpecification;
     /**
@@ -2263,6 +2271,10 @@ declare namespace AutoScaling {
      * Indicates whether newly launched instances are protected from termination by Auto Scaling when scaling in.
      */
     NewInstancesProtectedFromScaleIn?: InstanceProtected;
+    /**
+     * The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS services on your behalf.
+     */
+    ServiceLinkedRoleARN?: ResourceName;
   }
   export type Values = XmlString[];
   export type XmlString = string;

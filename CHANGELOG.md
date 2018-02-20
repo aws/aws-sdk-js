@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.198.0-->
+<!--LATEST=2.199.0-->
 <!--ENTRYINSERT-->
+
+## 2.199.0
+* feature: AutoScaling: Amazon EC2 Auto Scaling support for service-linked roles
+* feature: WAF: The new PermissionPolicy APIs in AWS WAF Regional allow customers to attach resource-based policies to their entities.
+* feature: WAFRegional: The new PermissionPolicy APIs in AWS WAF Regional allow customers to attach resource-based policies to their entities.
 
 ## 2.198.0
 * feature: ConfigService: With this release, AWS Config updated the ConfigurationItemStatus enum values. The values prior to this update did not represent appropriate values returned by GetResourceConfigHistory. You must update your code to enumerate the new enum values so this is a breaking change.  To map old properties to new properties, use the following descriptions: New discovered resource - Old property: Discovered, New property: ResourceDiscovered. Updated resource - Old property: Ok, New property: OK. Deleted resource - Old property: Deleted, New property: ResourceDeleted or ResourceDeletedNotRecorded. Not-recorded resource - Old property: N/A, New property: ResourceNotRecorded or ResourceDeletedNotRecorded.

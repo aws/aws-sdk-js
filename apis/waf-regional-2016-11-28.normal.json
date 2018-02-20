@@ -292,6 +292,21 @@
       ],
       "documentation":"<p>Permanently deletes an <a>IPSet</a>. You can't delete an <code>IPSet</code> if it's still used in any <code>Rules</code> or if it still includes any IP addresses.</p> <p>If you just want to remove an <code>IPSet</code> from a <code>Rule</code>, use <a>UpdateRule</a>.</p> <p>To permanently delete an <code>IPSet</code> from AWS WAF, perform the following steps:</p> <ol> <li> <p>Update the <code>IPSet</code> to remove IP address ranges, if any. For more information, see <a>UpdateIPSet</a>.</p> </li> <li> <p>Use <a>GetChangeToken</a> to get the change token that you provide in the <code>ChangeToken</code> parameter of a <code>DeleteIPSet</code> request.</p> </li> <li> <p>Submit a <code>DeleteIPSet</code> request.</p> </li> </ol>"
     },
+    "DeletePermissionPolicy":{
+      "name":"DeletePermissionPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeletePermissionPolicyRequest"},
+      "output":{"shape":"DeletePermissionPolicyResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFStaleDataException"},
+        {"shape":"WAFNonexistentItemException"}
+      ],
+      "documentation":"<p>Permanently deletes an IAM policy from the specified RuleGroup.</p> <p>The user making the request must be the owner of the RuleGroup.</p>"
+    },
     "DeleteRateBasedRule":{
       "name":"DeleteRateBasedRule",
       "http":{
@@ -540,6 +555,20 @@
         {"shape":"WAFNonexistentItemException"}
       ],
       "documentation":"<p>Returns the <a>IPSet</a> that is specified by <code>IPSetId</code>.</p>"
+    },
+    "GetPermissionPolicy":{
+      "name":"GetPermissionPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetPermissionPolicyRequest"},
+      "output":{"shape":"GetPermissionPolicyResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFNonexistentItemException"}
+      ],
+      "documentation":"<p>Returns the IAM policy attached to the RuleGroup.</p>"
     },
     "GetRateBasedRule":{
       "name":"GetRateBasedRule",
@@ -933,6 +962,22 @@
       ],
       "documentation":"<p>Returns an array of <a>XssMatchSet</a> objects.</p>"
     },
+    "PutPermissionPolicy":{
+      "name":"PutPermissionPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutPermissionPolicyRequest"},
+      "output":{"shape":"PutPermissionPolicyResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFStaleDataException"},
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFInvalidPermissionPolicyException"}
+      ],
+      "documentation":"<p>Attaches a IAM policy to the specified resource. The only supported use for this action is to share a RuleGroup across accounts.</p> <p>The <code>PutPermissionPolicy</code> is subject to the following restrictions:</p> <ul> <li> <p>You can attach only one policy with each <code>PutPermissionPolicy</code> request.</p> </li> <li> <p>The policy must include an <code>Effect</code>, <code>Action</code> and <code>Principal</code>. </p> </li> <li> <p> <code>Effect</code> must specify <code>Allow</code>.</p> </li> <li> <p>The <code>Action</code> in the policy must be <code>waf:UpdateWebACL</code> and <code>waf-regional:UpdateWebACL</code>. Any extra or wildcard actions in the policy will be rejected.</p> </li> <li> <p>The policy cannot include a <code>Resource</code> parameter.</p> </li> <li> <p>The ARN in the request must be a valid WAF RuleGroup ARN and the RuleGroup must exist in the same region.</p> </li> <li> <p>The user making the request must be the owner of the RuleGroup.</p> </li> <li> <p>Your policy must be composed using IAM Policy version 2012-10-17.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">IAM Policies</a>. </p> <p>An example of a valid policy parameter is shown in the Examples section below.</p>"
+    },
     "UpdateByteMatchSet":{
       "name":"UpdateByteMatchSet",
       "http":{
@@ -1199,11 +1244,11 @@
         },
         "Action":{
           "shape":"WafAction",
-          "documentation":"<p>Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the <code>Rule</code>. Valid values for <code>Action</code> include the following:</p> <ul> <li> <p> <code>ALLOW</code>: CloudFront responds with the requested object.</p> </li> <li> <p> <code>BLOCK</code>: CloudFront responds with an HTTP 403 (Forbidden) status code.</p> </li> <li> <p> <code>COUNT</code>: AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL. </p> </li> </ul> <p>The <code>Action</code> data type within <code>ActivatedRule</code> is used only when submitting an <code>UpdateWebACL</code> request. <code>ActivatedRule|Action</code> is not applicable and therefore not available for <code>UpdateRuleGroup</code>.</p>"
+          "documentation":"<p>Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the <code>Rule</code>. Valid values for <code>Action</code> include the following:</p> <ul> <li> <p> <code>ALLOW</code>: CloudFront responds with the requested object.</p> </li> <li> <p> <code>BLOCK</code>: CloudFront responds with an HTTP 403 (Forbidden) status code.</p> </li> <li> <p> <code>COUNT</code>: AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL. </p> </li> </ul> <p> <code>ActivatedRule|OverrideAction</code> applies only when updating or adding a <code>RuleGroup</code> to a <code>WebACL</code>. In this case you do not use <code>ActivatedRule|Action</code>. For all other update requests, <code>ActivatedRule|Action</code> is used instead of <code>ActivatedRule|OverrideAction</code>.</p>"
         },
         "OverrideAction":{
           "shape":"WafOverrideAction",
-          "documentation":"<p>Use the <code>OverrideAction</code> to test your <code>RuleGroup</code>.</p> <p>Any rule in a <code>RuleGroup</code> can potentially block a request. If you set the <code>OverrideAction</code> to <code>None</code>, the <code>RuleGroup</code> will block a request if any individual rule in the <code>RuleGroup</code> matches the request and is configured to block that request. However if you first want to test the <code>RuleGroup</code>, set the <code>OverrideAction</code> to <code>Count</code>. The <code>RuleGroup</code> will then override any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests will be counted. You can view a record of counted requests using <a>GetSampledRequests</a>. </p> <p>The <code>OverrideAction</code> data type within <code>ActivatedRule</code> is used only when submitting an <code>UpdateRuleGroup</code> request. <code>ActivatedRule|OverrideAction</code> is not applicable and therefore not available for <code>UpdateWebACL</code>.</p>"
+          "documentation":"<p>Use the <code>OverrideAction</code> to test your <code>RuleGroup</code>.</p> <p>Any rule in a <code>RuleGroup</code> can potentially block a request. If you set the <code>OverrideAction</code> to <code>None</code>, the <code>RuleGroup</code> will block a request if any individual rule in the <code>RuleGroup</code> matches the request and is configured to block that request. However if you first want to test the <code>RuleGroup</code>, set the <code>OverrideAction</code> to <code>Count</code>. The <code>RuleGroup</code> will then override any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests will be counted. You can view a record of counted requests using <a>GetSampledRequests</a>. </p> <p> <code>ActivatedRule|OverrideAction</code> applies only when updating or adding a <code>RuleGroup</code> to a <code>WebACL</code>. In this case you do not use <code>ActivatedRule|Action</code>. For all other update requests, <code>ActivatedRule|Action</code> is used instead of <code>ActivatedRule|OverrideAction</code>.</p>"
         },
         "Type":{
           "shape":"WafRuleType",
@@ -1844,6 +1889,21 @@
           "shape":"ChangeToken",
           "documentation":"<p>The <code>ChangeToken</code> that you used to submit the <code>DeleteIPSet</code> request. You can also use this value to query the status of the request. For more information, see <a>GetChangeTokenStatus</a>.</p>"
         }
+      }
+    },
+    "DeletePermissionPolicyRequest":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the RuleGroup from which you want to delete the policy.</p> <p>The user making the request must be the owner of the RuleGroup.</p>"
+        }
+      }
+    },
+    "DeletePermissionPolicyResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "DeleteRateBasedRuleRequest":{
@@ -2548,6 +2608,25 @@
         "IPSet":{
           "shape":"IPSet",
           "documentation":"<p>Information about the <a>IPSet</a> that you specified in the <code>GetIPSet</code> request. For more information, see the following topics:</p> <ul> <li> <p> <a>IPSet</a>: Contains <code>IPSetDescriptors</code>, <code>IPSetId</code>, and <code>Name</code> </p> </li> <li> <p> <code>IPSetDescriptors</code>: Contains an array of <a>IPSetDescriptor</a> objects. Each <code>IPSetDescriptor</code> object contains <code>Type</code> and <code>Value</code> </p> </li> </ul>"
+        }
+      }
+    },
+    "GetPermissionPolicyRequest":{
+      "type":"structure",
+      "required":["ResourceArn"],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the RuleGroup for which you want to get the policy.</p>"
+        }
+      }
+    },
+    "GetPermissionPolicyResponse":{
+      "type":"structure",
+      "members":{
+        "Policy":{
+          "shape":"PolicyString",
+          "documentation":"<p>The IAM policy attached to the specified RuleGroup.</p>"
         }
       }
     },
@@ -3420,6 +3499,10 @@
         "ILLEGAL_COMBINATION"
       ]
     },
+    "PolicyString":{
+      "type":"string",
+      "min":1
+    },
     "PopulationSize":{"type":"long"},
     "PositionalConstraint":{
       "type":"string",
@@ -3469,6 +3552,28 @@
     "Predicates":{
       "type":"list",
       "member":{"shape":"Predicate"}
+    },
+    "PutPermissionPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceArn",
+        "Policy"
+      ],
+      "members":{
+        "ResourceArn":{
+          "shape":"ResourceArn",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the RuleGroup to which you want to attach the policy.</p>"
+        },
+        "Policy":{
+          "shape":"PolicyString",
+          "documentation":"<p>The policy to attach to the specified RuleGroup.</p>"
+        }
+      }
+    },
+    "PutPermissionPolicyResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "RateBasedRule":{
       "type":"structure",
@@ -4328,7 +4433,7 @@
         },
         "Updates":{
           "shape":"RuleGroupUpdates",
-          "documentation":"<p>An array of <code>RuleGroupUpdate</code> objects that you want to insert into or delete from a <a>RuleGroup</a>.</p> <p>You can only insert <code>REGULAR</code> rules into a rule group.</p> <p>The <code>Action</code> data type within <code>ActivatedRule</code> is used only when submitting an <code>UpdateWebACL</code> request. <code>ActivatedRule|Action</code> is not applicable and therefore not available for <code>UpdateRuleGroup</code>.</p>"
+          "documentation":"<p>An array of <code>RuleGroupUpdate</code> objects that you want to insert into or delete from a <a>RuleGroup</a>.</p> <p>You can only insert <code>REGULAR</code> rules into a rule group.</p> <p> <code>ActivatedRule|OverrideAction</code> applies only when updating or adding a <code>RuleGroup</code> to a <code>WebACL</code>. In this case you do not use <code>ActivatedRule|Action</code>. For all other update requests, <code>ActivatedRule|Action</code> is used instead of <code>ActivatedRule|OverrideAction</code>.</p>"
         },
         "ChangeToken":{
           "shape":"ChangeToken",
@@ -4457,7 +4562,7 @@
         },
         "Updates":{
           "shape":"WebACLUpdates",
-          "documentation":"<p>An array of updates to make to the <a>WebACL</a>.</p> <p>An array of <code>WebACLUpdate</code> objects that you want to insert into or delete from a <a>WebACL</a>. For more information, see the applicable data types:</p> <ul> <li> <p> <a>WebACLUpdate</a>: Contains <code>Action</code> and <code>ActivatedRule</code> </p> </li> <li> <p> <a>ActivatedRule</a>: Contains <code>Action</code>, <code>Priority</code>, <code>RuleId</code>, and <code>Type</code>. The <code>OverrideAction</code> data type within <code>ActivatedRule</code> is used only when submitting an <code>UpdateRuleGroup</code> request. <code>ActivatedRule|OverrideAction</code> is not applicable and therefore not available for <code>UpdateWebACL</code>. </p> </li> <li> <p> <a>WafAction</a>: Contains <code>Type</code> </p> </li> </ul>"
+          "documentation":"<p>An array of updates to make to the <a>WebACL</a>.</p> <p>An array of <code>WebACLUpdate</code> objects that you want to insert into or delete from a <a>WebACL</a>. For more information, see the applicable data types:</p> <ul> <li> <p> <a>WebACLUpdate</a>: Contains <code>Action</code> and <code>ActivatedRule</code> </p> </li> <li> <p> <a>ActivatedRule</a>: Contains <code>Action</code>, <code>OverrideAction</code>, <code>Priority</code>, <code>RuleId</code>, and <code>Type</code>. <code>ActivatedRule|OverrideAction</code> applies only when updating or adding a <code>RuleGroup</code> to a <code>WebACL</code>. In this case you do not use <code>ActivatedRule|Action</code>. For all other update requests, <code>ActivatedRule|Action</code> is used instead of <code>ActivatedRule|OverrideAction</code>. </p> </li> <li> <p> <a>WafAction</a>: Contains <code>Type</code> </p> </li> </ul>"
         },
         "DefaultAction":{
           "shape":"WafAction",
@@ -4547,6 +4652,14 @@
         "reason":{"shape":"ParameterExceptionReason"}
       },
       "documentation":"<p>The operation failed because AWS WAF didn't recognize a parameter in the request. For example:</p> <ul> <li> <p>You specified an invalid parameter name.</p> </li> <li> <p>You specified an invalid value.</p> </li> <li> <p>You tried to update an object (<code>ByteMatchSet</code>, <code>IPSet</code>, <code>Rule</code>, or <code>WebACL</code>) using an action other than <code>INSERT</code> or <code>DELETE</code>.</p> </li> <li> <p>You tried to create a <code>WebACL</code> with a <code>DefaultAction</code> <code>Type</code> other than <code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p> </li> <li> <p>You tried to create a <code>RateBasedRule</code> with a <code>RateKey</code> value other than <code>IP</code>.</p> </li> <li> <p>You tried to update a <code>WebACL</code> with a <code>WafAction</code> <code>Type</code> other than <code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p> </li> <li> <p>You tried to update a <code>ByteMatchSet</code> with a <code>FieldToMatch</code> <code>Type</code> other than HEADER, METHOD, QUERY_STRING, URI, or BODY.</p> </li> <li> <p>You tried to update a <code>ByteMatchSet</code> with a <code>Field</code> of <code>HEADER</code> but no value for <code>Data</code>.</p> </li> <li> <p>Your request references an ARN that is malformed, or corresponds to a resource with which a web ACL cannot be associated.</p> </li> </ul>",
+      "exception":true
+    },
+    "WAFInvalidPermissionPolicyException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"errorMessage"}
+      },
+      "documentation":"<p>The operation failed because the specified policy is not in the proper format. </p> <p>The policy is subject to the following restrictions:</p> <ul> <li> <p>You can attach only one policy with each <code>PutPermissionPolicy</code> request.</p> </li> <li> <p>The policy must include an <code>Effect</code>, <code>Action</code> and <code>Principal</code>. </p> </li> <li> <p> <code>Effect</code> must specify <code>Allow</code>.</p> </li> <li> <p>The <code>Action</code> in the policy must be <code>waf:UpdateWebACL</code> or <code>waf-regional:UpdateWebACL</code>. Any extra or wildcard actions in the policy will be rejected.</p> </li> <li> <p>The policy cannot include a <code>Resource</code> parameter.</p> </li> <li> <p>The ARN in the request must be a valid WAF RuleGroup ARN and the RuleGroup must exist in the same region.</p> </li> <li> <p>The user making the request must be the owner of the RuleGroup.</p> </li> <li> <p>Your policy must be composed using IAM Policy version 2012-10-17.</p> </li> </ul>",
       "exception":true
     },
     "WAFInvalidRegexPatternException":{
