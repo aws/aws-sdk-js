@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.199.0-->
+<!--LATEST=2.200.0-->
 <!--ENTRYINSERT-->
+
+## 2.200.0
+* feature: CodeCommit: This release adds an API for adding a file directly to an AWS CodeCommit repository without requiring a Git client.
+* feature: EC2: Adds support for tagging an EBS snapshot as part of the API call that creates the EBS snapshot
+* feature: ServerlessApplicationRepository: Added support for delete-application API and the ability for developers to set a homepage for their application. The homepage is a URL with more information about the application, for example the location of your GitHub repository for the application. 
 
 ## 2.199.0
 * feature: AutoScaling: Amazon EC2 Auto Scaling support for service-linked roles

@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.199.0
+// AWS SDK for JavaScript v2.200.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
@@ -13863,6 +13863,7 @@ module.exports={
     "protocol": "json",
     "serviceAbbreviation": "CodeCommit",
     "serviceFullName": "AWS CodeCommit",
+    "serviceId": "CodeCommit",
     "signatureVersion": "v4",
     "targetPrefix": "CodeCommit_20150413",
     "uid": "codecommit-2015-04-13"
@@ -14621,6 +14622,43 @@ module.exports={
         }
       },
       "idempotent": true
+    },
+    "PutFile": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "repositoryName",
+          "branchName",
+          "fileContent",
+          "filePath"
+        ],
+        "members": {
+          "repositoryName": {},
+          "branchName": {},
+          "fileContent": {
+            "type": "blob"
+          },
+          "filePath": {},
+          "fileMode": {},
+          "parentCommitId": {},
+          "commitMessage": {},
+          "name": {},
+          "email": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "commitId",
+          "blobId",
+          "treeId"
+        ],
+        "members": {
+          "commitId": {},
+          "blobId": {},
+          "treeId": {}
+        }
+      }
     },
     "PutRepositoryTriggers": {
       "input": {
@@ -30515,6 +30553,10 @@ module.exports={
         "members": {
           "Description": {},
           "VolumeId": {},
+          "TagSpecifications": {
+            "shape": "S8m",
+            "locationName": "TagSpecification"
+          },
           "DryRun": {
             "locationName": "dryRun",
             "type": "boolean"
@@ -30522,7 +30564,7 @@ module.exports={
         }
       },
       "output": {
-        "shape": "S8m"
+        "shape": "S8o"
       }
     },
     "CreateSpotDatafeedSubscription": {
@@ -30548,7 +30590,7 @@ module.exports={
         "type": "structure",
         "members": {
           "SpotDatafeedSubscription": {
-            "shape": "S8q",
+            "shape": "S8s",
             "locationName": "spotDatafeedSubscription"
           }
         }
@@ -30595,7 +30637,7 @@ module.exports={
             "type": "boolean"
           },
           "Resources": {
-            "shape": "S8w",
+            "shape": "S8y",
             "locationName": "ResourceId"
           },
           "Tags": {
@@ -30631,7 +30673,7 @@ module.exports={
             "type": "boolean"
           },
           "TagSpecifications": {
-            "shape": "S8y",
+            "shape": "S8m",
             "locationName": "TagSpecification"
           }
         }
@@ -31360,7 +31402,7 @@ module.exports={
             "type": "boolean"
           },
           "Resources": {
-            "shape": "S8w",
+            "shape": "S8y",
             "locationName": "resourceId"
           },
           "Tags": {
@@ -34535,7 +34577,7 @@ module.exports={
             "locationName": "snapshotSet",
             "type": "list",
             "member": {
-              "shape": "S8m",
+              "shape": "S8o",
               "locationName": "item"
             }
           },
@@ -34559,7 +34601,7 @@ module.exports={
         "type": "structure",
         "members": {
           "SpotDatafeedSubscription": {
-            "shape": "S8q",
+            "shape": "S8s",
             "locationName": "spotDatafeedSubscription"
           }
         }
@@ -38488,7 +38530,7 @@ module.exports={
             }
           },
           "TagSpecifications": {
-            "shape": "S8y",
+            "shape": "S8m",
             "locationName": "TagSpecification"
           },
           "LaunchTemplate": {
@@ -40853,6 +40895,22 @@ module.exports={
       }
     },
     "S8m": {
+      "type": "list",
+      "member": {
+        "locationName": "item",
+        "type": "structure",
+        "members": {
+          "ResourceType": {
+            "locationName": "resourceType"
+          },
+          "Tags": {
+            "shape": "Sr",
+            "locationName": "Tag"
+          }
+        }
+      }
+    },
+    "S8o": {
       "type": "structure",
       "members": {
         "DataEncryptionKeyId": {
@@ -40903,14 +40961,14 @@ module.exports={
         }
       }
     },
-    "S8q": {
+    "S8s": {
       "type": "structure",
       "members": {
         "Bucket": {
           "locationName": "bucket"
         },
         "Fault": {
-          "shape": "S8r",
+          "shape": "S8t",
           "locationName": "fault"
         },
         "OwnerId": {
@@ -40924,7 +40982,7 @@ module.exports={
         }
       }
     },
-    "S8r": {
+    "S8t": {
       "type": "structure",
       "members": {
         "Code": {
@@ -40935,25 +40993,9 @@ module.exports={
         }
       }
     },
-    "S8w": {
-      "type": "list",
-      "member": {}
-    },
     "S8y": {
       "type": "list",
-      "member": {
-        "locationName": "item",
-        "type": "structure",
-        "members": {
-          "ResourceType": {
-            "locationName": "resourceType"
-          },
-          "Tags": {
-            "shape": "Sr",
-            "locationName": "Tag"
-          }
-        }
-      }
+      "member": {}
     },
     "S90": {
       "type": "structure",
@@ -42561,7 +42603,7 @@ module.exports={
             "type": "timestamp"
           },
           "Fault": {
-            "shape": "S8r",
+            "shape": "S8t",
             "locationName": "fault"
           },
           "InstanceId": {
@@ -122167,7 +122209,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.199.0',
+  VERSION: '2.200.0',
 
   /**
    * @api private
@@ -146082,7 +146124,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.199.0
+// AWS SDK for JavaScript v2.200.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

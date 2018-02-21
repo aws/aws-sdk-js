@@ -23,25 +23,25 @@
       },
       "output" : {
         "shape" : "CreateApplicationResponse",
-        "documentation" : "201 response"
+        "documentation" : "<p>Success</p>"
       },
       "errors" : [ {
         "shape" : "TooManyRequestsException",
-        "documentation" : "429 response"
+        "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
       }, {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
       }, {
         "shape" : "ConflictException",
-        "documentation" : "409 response"
+        "documentation" : "<p>The resource already exists.</p>"
       }, {
         "shape" : "ForbiddenException",
-        "documentation" : "403 response"
+        "documentation" : "<p>The client is not authenticated.</p>"
       } ],
-      "documentation" : "Creates an application, optionally including an AWS SAM file to create the first application version in the same call."
+      "documentation" : "<p>Creates an application, optionally including an AWS SAM file to create the first application version in the same call.</p>"
     },
     "CreateApplicationVersion" : {
       "name" : "CreateApplicationVersion",
@@ -55,25 +55,25 @@
       },
       "output" : {
         "shape" : "CreateApplicationVersionResponse",
-        "documentation" : "201 response"
+        "documentation" : "<p>Success</p>"
       },
       "errors" : [ {
         "shape" : "TooManyRequestsException",
-        "documentation" : "429 response"
+        "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
       }, {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
       }, {
         "shape" : "ConflictException",
-        "documentation" : "409 response"
+        "documentation" : "<p>The resource already exists.</p>"
       }, {
         "shape" : "ForbiddenException",
-        "documentation" : "403 response"
+        "documentation" : "<p>The client is not authenticated.</p>"
       } ],
-      "documentation" : "Creates an application version."
+      "documentation" : "<p>Creates an application version.</p>"
     },
     "CreateCloudFormationChangeSet" : {
       "name" : "CreateCloudFormationChangeSet",
@@ -87,22 +87,53 @@
       },
       "output" : {
         "shape" : "CreateCloudFormationChangeSetResponse",
-        "documentation" : "201 response"
+        "documentation" : "<p>Success</p>"
       },
       "errors" : [ {
         "shape" : "TooManyRequestsException",
-        "documentation" : "429 response"
+        "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
       }, {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
       }, {
         "shape" : "ForbiddenException",
-        "documentation" : "403 response"
+        "documentation" : "<p>The client is not authenticated.</p>"
       } ],
-      "documentation" : "Creates an AWS CloudFormation ChangeSet for the given application."
+      "documentation" : "<p>Creates an AWS CloudFormation ChangeSet for the given application.</p>"
+    },
+    "DeleteApplication" : {
+      "name" : "DeleteApplication",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/applications/{applicationId}",
+        "responseCode" : 204
+      },
+      "input" : {
+        "shape" : "DeleteApplicationRequest"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
+      }, {
+        "shape" : "ForbiddenException",
+        "documentation" : "<p>The client is not authenticated.</p>"
+      }, {
+        "shape" : "NotFoundException",
+        "documentation" : "<p>The resource (for example, an access policy statement) specified in the request does not exist.</p>"
+      }, {
+        "shape" : "TooManyRequestsException",
+        "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
+      }, {
+        "shape" : "ConflictException",
+        "documentation" : "<p>The resource already exists.</p>"
+      } ],
+      "documentation" : "<p>Deletes the specified application.</p>"
     },
     "GetApplication" : {
       "name" : "GetApplication",
@@ -116,25 +147,25 @@
       },
       "output" : {
         "shape" : "GetApplicationResponse",
-        "documentation" : "Success"
+        "documentation" : "<p>Success</p>"
       },
       "errors" : [ {
         "shape" : "NotFoundException",
-        "documentation" : "404 response"
+        "documentation" : "<p>The resource (for example, an access policy statement) specified in the request does not exist.</p>"
       }, {
         "shape" : "TooManyRequestsException",
-        "documentation" : "429 response"
+        "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
       }, {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
       }, {
         "shape" : "ForbiddenException",
-        "documentation" : "403 response"
+        "documentation" : "<p>The client is not authenticated.</p>"
       } ],
-      "documentation" : "Gets the specified application."
+      "documentation" : "<p>Gets the specified application.</p>"
     },
     "GetApplicationPolicy" : {
       "name" : "GetApplicationPolicy",
@@ -148,25 +179,25 @@
       },
       "output" : {
         "shape" : "GetApplicationPolicyResponse",
-        "documentation" : "Success"
+        "documentation" : "<p>Success</p>"
       },
       "errors" : [ {
         "shape" : "NotFoundException",
-        "documentation" : "404 response"
+        "documentation" : "<p>The resource (for example, an access policy statement) specified in the request does not exist.</p>"
       }, {
         "shape" : "TooManyRequestsException",
-        "documentation" : "429 response"
+        "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
       }, {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
       }, {
         "shape" : "ForbiddenException",
-        "documentation" : "403 response"
+        "documentation" : "<p>The client is not authenticated.</p>"
       } ],
-      "documentation" : "Gets the policy for the specified application."
+      "documentation" : "<p>Gets the policy for the specified application.</p>"
     },
     "ListApplicationVersions" : {
       "name" : "ListApplicationVersions",
@@ -180,25 +211,25 @@
       },
       "output" : {
         "shape" : "ListApplicationVersionsResponse",
-        "documentation" : "Success"
+        "documentation" : "<p>Success</p>"
       },
       "errors" : [ {
         "shape" : "NotFoundException",
-        "documentation" : "404 response"
+        "documentation" : "<p>The resource (for example, an access policy statement) specified in the request does not exist.</p>"
       }, {
         "shape" : "TooManyRequestsException",
-        "documentation" : "429 response"
+        "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
       }, {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
       }, {
         "shape" : "ForbiddenException",
-        "documentation" : "403 response"
+        "documentation" : "<p>The client is not authenticated.</p>"
       } ],
-      "documentation" : "Lists versions for the specified application."
+      "documentation" : "<p>Lists versions for the specified application.</p>"
     },
     "ListApplications" : {
       "name" : "ListApplications",
@@ -212,22 +243,22 @@
       },
       "output" : {
         "shape" : "ListApplicationsResponse",
-        "documentation" : "Success"
+        "documentation" : "<p>Success</p>"
       },
       "errors" : [ {
         "shape" : "NotFoundException",
-        "documentation" : "404 response"
+        "documentation" : "<p>The resource (for example, an access policy statement) specified in the request does not exist.</p>"
       }, {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
       }, {
         "shape" : "ForbiddenException",
-        "documentation" : "403 response"
+        "documentation" : "<p>The client is not authenticated.</p>"
       } ],
-      "documentation" : "Lists applications owned by the requester."
+      "documentation" : "<p>Lists applications owned by the requester.</p>"
     },
     "PutApplicationPolicy" : {
       "name" : "PutApplicationPolicy",
@@ -241,25 +272,25 @@
       },
       "output" : {
         "shape" : "PutApplicationPolicyResponse",
-        "documentation" : "Success"
+        "documentation" : "<p>Success</p>"
       },
       "errors" : [ {
         "shape" : "NotFoundException",
-        "documentation" : "404 response"
+        "documentation" : "<p>The resource (for example, an access policy statement) specified in the request does not exist.</p>"
       }, {
         "shape" : "TooManyRequestsException",
-        "documentation" : "429 response"
+        "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
       }, {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
       }, {
         "shape" : "ForbiddenException",
-        "documentation" : "403 response"
+        "documentation" : "<p>The client is not authenticated.</p>"
       } ],
-      "documentation" : "Puts the policy for the specified application."
+      "documentation" : "<p>Puts the policy for the specified application.</p>"
     },
     "UpdateApplication" : {
       "name" : "UpdateApplication",
@@ -273,28 +304,28 @@
       },
       "output" : {
         "shape" : "UpdateApplicationResponse",
-        "documentation" : "Success"
+        "documentation" : "<p>Success</p>"
       },
       "errors" : [ {
         "shape" : "BadRequestException",
-        "documentation" : "400 response"
+        "documentation" : "<p>One of the parameters in the request is invalid.</p>"
       }, {
         "shape" : "InternalServerErrorException",
-        "documentation" : "500 response"
+        "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
       }, {
         "shape" : "ForbiddenException",
-        "documentation" : "403 response"
+        "documentation" : "<p>The client is not authenticated.</p>"
       }, {
         "shape" : "NotFoundException",
-        "documentation" : "404 response"
+        "documentation" : "<p>The resource (for example, an access policy statement) specified in the request does not exist.</p>"
       }, {
         "shape" : "TooManyRequestsException",
-        "documentation" : "429 response"
+        "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
       }, {
         "shape" : "ConflictException",
-        "documentation" : "409 response"
+        "documentation" : "<p>The resource already exists.</p>"
       } ],
-      "documentation" : "Updates the specified application."
+      "documentation" : "<p>Updates the specified application.</p>"
     }
   },
   "shapes" : {
@@ -304,103 +335,112 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application Amazon Resource Name (ARN)."
+          "documentation" : "<p>The application Amazon Resource Name (ARN).</p>"
         },
         "Author" : {
           "shape" : "__string",
           "locationName" : "author",
-          "documentation" : "The name of the author publishing the app.\\nMin Length=1. Max Length=127.\\nPattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";"
+          "documentation" : "<p>The name of the author publishing the app.</p><p>Min Length=1. Max Length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>"
         },
         "CreationTime" : {
           "shape" : "__string",
           "locationName" : "creationTime",
-          "documentation" : "The date/time this resource was created."
+          "documentation" : "<p>The date/time this resource was created.</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "The description of the application.\\nMin Length=1. Max Length=256"
+          "documentation" : "<p>The description of the application.</p><p>Min Length=1. Max Length=256</p>"
+        },
+        "HomePageUrl" : {
+          "shape" : "__string",
+          "locationName" : "homePageUrl",
+          "documentation" : "<p>A URL with more information about the application, for example\n the location of your GitHub repository for the application.</p>"
         },
         "Labels" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "labels",
-          "documentation" : "Labels to improve discovery of apps in search results.\\nMin Length=1. Max Length=127. Maximum number of labels: 10\\nPattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";"
+          "documentation" : "<p>Labels to improve discovery of apps in search results.</p><p>Min Length=1. Max Length=127. Maximum number of labels: 10</p><p>Pattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";</p>"
         },
         "LicenseUrl" : {
           "shape" : "__string",
           "locationName" : "licenseUrl",
-          "documentation" : "A link to a license file of the app that matches the spdxLicenseID of your application.\\nMax size 5 MB"
+          "documentation" : "<p>A link to a license file of the app that matches the spdxLicenseID of your application.</p><p>Max size 5 MB</p>"
         },
         "Name" : {
           "shape" : "__string",
           "locationName" : "name",
-          "documentation" : "The name of the application.\\nMin Length=1. Max Length=140\\nPattern: \"[a-zA-Z0-9\\\\-]+\";"
+          "documentation" : "<p>The name of the application.</p><p>Min Length=1. Max Length=140</p><p>Pattern: \"[a-zA-Z0-9\\\\-]+\";</p>"
         },
         "ReadmeUrl" : {
           "shape" : "__string",
           "locationName" : "readmeUrl",
-          "documentation" : "A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A link to the readme file that contains a more detailed description of the application and how it works in Markdown language.</p><p>Max size 5 MB</p>"
         },
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "A valid identifier from https://spdx.org/licenses/."
+          "documentation" : "<p>A valid identifier from https://spdx.org/licenses/.</p>"
         },
         "Version" : {
           "shape" : "Version",
           "locationName" : "version",
-          "documentation" : "Version information about the application."
+          "documentation" : "<p>Version information about the application.</p>"
         }
       },
-      "documentation" : "Details about the application."
+      "documentation" : "<p>Details about the application.</p>",
+      "required" : [ "Description", "Author", "ApplicationId", "Name" ]
     },
     "ApplicationPage" : {
       "type" : "structure",
       "members" : {
         "Applications" : {
-          "shape" : "ListOfApplicationSummary",
+          "shape" : "__listOfApplicationSummary",
           "locationName" : "applications",
-          "documentation" : "Array of application summaries."
+          "documentation" : "<p>Array of application summaries.</p>"
         },
         "NextToken" : {
           "shape" : "__string",
           "locationName" : "nextToken",
-          "documentation" : "The token to request the next page of results."
+          "documentation" : "<p>The token to request the next page of results.</p>"
         }
       },
-      "documentation" : "List of application details."
+      "documentation" : "<p>List of application details.</p>",
+      "required" : [ "Applications" ]
     },
     "ApplicationPolicy" : {
       "type" : "structure",
       "members" : {
         "Statements" : {
-          "shape" : "ListOfApplicationPolicyStatement",
+          "shape" : "__listOfApplicationPolicyStatement",
           "locationName" : "statements",
-          "documentation" : "Array of policy statements applied to the application."
+          "documentation" : "<p>Array of policy statements applied to the application.</p>"
         }
       },
-      "documentation" : "Policy statements applied to the application."
+      "documentation" : "<p>Policy statements applied to the application.</p>",
+      "required" : [ "Statements" ]
     },
     "ApplicationPolicyStatement" : {
       "type" : "structure",
       "members" : {
         "Actions" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "actions",
-          "documentation" : "A list of supported actions:\\n\\n GetApplication \\n \\n\\n CreateCloudFormationChangeSet \\n \\n\\n ListApplicationVersions \\n \\n\\n SearchApplications \\n \\n\\n Deploy (Note: This action enables all other actions above.)"
+          "documentation" : "<p>A list of supported actions:</p><p>\n GetApplication\n </p><p>\n CreateCloudFormationChangeSet\n </p><p>\n ListApplicationVersions\n </p><p>\n SearchApplications\n </p><p>\n Deploy (Note: This action enables all other actions above.)</p>"
         },
         "Principals" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "principals",
-          "documentation" : "An AWS account ID, or * to make the application public."
+          "documentation" : "<p>An AWS account ID, or * to make the application public.</p>"
         },
         "StatementId" : {
           "shape" : "__string",
           "locationName" : "statementId",
-          "documentation" : "A unique ID for the statement."
+          "documentation" : "<p>A unique ID for the statement.</p>"
         }
       },
-      "documentation" : "Policy statement applied to the application."
+      "documentation" : "<p>Policy statement applied to the application.</p>",
+      "required" : [ "Principals", "Actions" ]
     },
     "ApplicationSummary" : {
       "type" : "structure",
@@ -408,40 +448,46 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application ARN."
+          "documentation" : "<p>The application ARN.</p>"
         },
         "Author" : {
           "shape" : "__string",
           "locationName" : "author",
-          "documentation" : "The name of the author publishing the app\\nMin Length=1. Max Length=127.\\nPattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";"
+          "documentation" : "<p>The name of the author publishing the app.</p><p>Min Length=1. Max Length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>"
         },
         "CreationTime" : {
           "shape" : "__string",
           "locationName" : "creationTime",
-          "documentation" : "The date/time this resource was created."
+          "documentation" : "<p>The date/time this resource was created.</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "The description of the application.\\nMin Length=1. Max Length=256"
+          "documentation" : "<p>The description of the application.</p><p>Min Length=1. Max Length=256</p>"
+        },
+        "HomePageUrl" : {
+          "shape" : "__string",
+          "locationName" : "homePageUrl",
+          "documentation" : "<p>A URL with more information about the application, for example\n the location of your GitHub repository for the application.</p>"
         },
         "Labels" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "labels",
-          "documentation" : "Labels to improve discovery of apps in search results.\\nMin Length=1. Max Length=127. Maximum number of labels: 10\\nPattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";"
+          "documentation" : "<p>Labels to improve discovery of apps in search results.</p><p>Min Length=1. Max Length=127. Maximum number of labels: 10</p><p>Pattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";</p>"
         },
         "Name" : {
           "shape" : "__string",
           "locationName" : "name",
-          "documentation" : "The name of the application.\\nMin Length=1. Max Length=140\\nPattern: \"[a-zA-Z0-9\\\\-]+\";"
+          "documentation" : "<p>The name of the application.</p><p>Min Length=1. Max Length=140</p><p>Pattern: \"[a-zA-Z0-9\\\\-]+\";</p>"
         },
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "A valid identifier from https://spdx.org/licenses/ ."
+          "documentation" : "<p>A valid identifier from <a href=\"\"https://spdx.org/licenses/\"\">https://spdx.org/licenses/</a>.</p>"
         }
       },
-      "documentation" : "Summary of details about the application."
+      "documentation" : "<p>Summary of details about the application.</p>",
+      "required" : [ "Description", "Author", "ApplicationId", "Name" ]
     },
     "ApplicationVersionPage" : {
       "type" : "structure",
@@ -449,15 +495,16 @@
         "NextToken" : {
           "shape" : "__string",
           "locationName" : "nextToken",
-          "documentation" : "The token to request the next page of results."
+          "documentation" : "<p>The token to request the next page of results.</p>"
         },
         "Versions" : {
-          "shape" : "ListOfVersionSummary",
+          "shape" : "__listOfVersionSummary",
           "locationName" : "versions",
-          "documentation" : "Array of version summaries for the application."
+          "documentation" : "<p>Array of version summaries for the application.</p>"
         }
       },
-      "documentation" : "List of version summaries for the application."
+      "documentation" : "<p>List of version summaries for the application.</p>",
+      "required" : [ "Versions" ]
     },
     "BadRequestException" : {
       "type" : "structure",
@@ -465,15 +512,15 @@
         "ErrorCode" : {
           "shape" : "__string",
           "locationName" : "errorCode",
-          "documentation" : "400"
+          "documentation" : "<p>400</p>"
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "One of the parameters in the request is invalid."
+          "documentation" : "<p>One of the parameters in the request is invalid.</p>"
         }
       },
-      "documentation" : "One of the parameters in the request is invalid.",
+      "documentation" : "<p>One of the parameters in the request is invalid.</p>",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 400
@@ -485,25 +532,26 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application Amazon Resource Name (ARN)."
+          "documentation" : "<p>The application Amazon Resource Name (ARN).</p>"
         },
         "ChangeSetId" : {
           "shape" : "__string",
           "locationName" : "changeSetId",
-          "documentation" : "The ARN of the change set.\\nLength Constraints: Minimum length of 1.\\nPattern: arn:[-a-zA-Z0-9:/]*"
+          "documentation" : "<p>The ARN of the change set.</p><p>Length Constraints: Minimum length of 1.</p><p>Pattern: Amazon Resource Name (ARN):[-a-zA-Z0-9:/]*</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application:\\n\\n https://semver.org/"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
         },
         "StackId" : {
           "shape" : "__string",
           "locationName" : "stackId",
-          "documentation" : "The unique ID of the stack."
+          "documentation" : "<p>The unique ID of the stack.</p>"
         }
       },
-      "documentation" : "Details of the change set."
+      "documentation" : "<p>Details of the change set.</p>",
+      "required" : [ "ChangeSetId", "ApplicationId", "StackId", "SemanticVersion" ]
     },
     "ConflictException" : {
       "type" : "structure",
@@ -511,15 +559,15 @@
         "ErrorCode" : {
           "shape" : "__string",
           "locationName" : "errorCode",
-          "documentation" : "409"
+          "documentation" : "<p>409</p>"
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The resource already exists."
+          "documentation" : "<p>The resource already exists.</p>"
         }
       },
-      "documentation" : "The resource already exists.",
+      "documentation" : "<p>The resource already exists.</p>",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 409
@@ -531,70 +579,76 @@
         "Author" : {
           "shape" : "__string",
           "locationName" : "author",
-          "documentation" : "The name of the author publishing the app.\\nMin Length=1. Max Length=127.\\nPattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";"
+          "documentation" : "<p>The name of the author publishing the app.</p><p>Min Length=1. Max Length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "The description of the application.\\nMin Length=1. Max Length=256"
+          "documentation" : "<p>The description of the application.</p><p>Min Length=1. Max Length=256</p>"
+        },
+        "HomePageUrl" : {
+          "shape" : "__string",
+          "locationName" : "homePageUrl",
+          "documentation" : "<p>A URL with more information about the application, for example\n the location of your GitHub repository for the application.</p>"
         },
         "Labels" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "labels",
-          "documentation" : "Labels to improve discovery of apps in search results.\\nMin Length=1. Max Length=127. Maximum number of labels: 10\\nPattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";"
+          "documentation" : "<p>Labels to improve discovery of apps in search results.</p><p>Min Length=1. Max Length=127. Maximum number of labels: 10</p><p>Pattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";</p>"
         },
         "LicenseBody" : {
           "shape" : "__string",
           "locationName" : "licenseBody",
-          "documentation" : "A raw text file that contains the license of the app that matches the spdxLicenseID of your application.\\nMax size 5 MB"
+          "documentation" : "<p>A raw text file that contains the license of the app that matches the spdxLicenseID of your application.</p><p>Max size 5 MB</p>"
         },
         "LicenseUrl" : {
           "shape" : "__string",
           "locationName" : "licenseUrl",
-          "documentation" : "A link to a license file of the app that matches the spdxLicenseID of your application.\\nMax size 5 MB"
+          "documentation" : "<p>A link to a license file of the app that matches the spdxLicenseID of your application.</p><p>Max size 5 MB</p>"
         },
         "Name" : {
           "shape" : "__string",
           "locationName" : "name",
-          "documentation" : "The name of the application you want to publish.\\nMin Length=1. Max Length=140\\nPattern: \"[a-zA-Z0-9\\\\-]+\";"
+          "documentation" : "<p>The name of the application you want to publish.</p><p>Min Length=1. Max Length=140</p><p>Pattern: \"[a-zA-Z0-9\\\\-]+\";</p>"
         },
         "ReadmeBody" : {
           "shape" : "__string",
           "locationName" : "readmeBody",
-          "documentation" : "A raw text Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A raw text Readme file that contains a more detailed description of the application and how it works in markdown language.</p><p>Max size 5 MB</p>"
         },
         "ReadmeUrl" : {
           "shape" : "__string",
           "locationName" : "readmeUrl",
-          "documentation" : "A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.</p><p>Max size 5 MB</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application:\\n\\n https://semver.org/"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
           "locationName" : "sourceCodeUrl",
-          "documentation" : "A link to a public repository for the source code of your application."
+          "documentation" : "<p>A link to a public repository for the source code of your application.</p>"
         },
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "A valid identifier from https://spdx.org/licenses/ ."
+          "documentation" : "<p>A valid identifier from <a href=\"\"https://spdx.org/licenses/\"\">https://spdx.org/licenses/</a>.</p>"
         },
         "TemplateBody" : {
           "shape" : "__string",
           "locationName" : "templateBody",
-          "documentation" : "The raw packaged SAM template of your application."
+          "documentation" : "<p>The raw packaged AWS SAM template of your application.</p>"
         },
         "TemplateUrl" : {
           "shape" : "__string",
           "locationName" : "templateUrl",
-          "documentation" : "A link to the packaged SAM template of your application."
+          "documentation" : "<p>A link to the packaged AWS SAM template of your application.</p>"
         }
       },
-      "documentation" : "Create application request."
+      "documentation" : "<p>Create application request.</p>",
+      "required" : [ "Description", "Name", "Author" ]
     },
     "CreateApplicationRequest" : {
       "type" : "structure",
@@ -602,67 +656,72 @@
         "Author" : {
           "shape" : "__string",
           "locationName" : "author",
-          "documentation" : "The name of the author publishing the app.\\nMin Length=1. Max Length=127.\\nPattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";"
+          "documentation" : "<p>The name of the author publishing the app.</p><p>Min Length=1. Max Length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "The description of the application.\\nMin Length=1. Max Length=256"
+          "documentation" : "<p>The description of the application.</p><p>Min Length=1. Max Length=256</p>"
+        },
+        "HomePageUrl" : {
+          "shape" : "__string",
+          "locationName" : "homePageUrl",
+          "documentation" : "<p>A URL with more information about the application, for example\n the location of your GitHub repository for the application.</p>"
         },
         "Labels" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "labels",
-          "documentation" : "Labels to improve discovery of apps in search results.\\nMin Length=1. Max Length=127. Maximum number of labels: 10\\nPattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";"
+          "documentation" : "<p>Labels to improve discovery of apps in search results.</p><p>Min Length=1. Max Length=127. Maximum number of labels: 10</p><p>Pattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";</p>"
         },
         "LicenseBody" : {
           "shape" : "__string",
           "locationName" : "licenseBody",
-          "documentation" : "A raw text file that contains the license of the app that matches the spdxLicenseID of your application.\\nMax size 5 MB"
+          "documentation" : "<p>A raw text file that contains the license of the app that matches the spdxLicenseID of your application.</p><p>Max size 5 MB</p>"
         },
         "LicenseUrl" : {
           "shape" : "__string",
           "locationName" : "licenseUrl",
-          "documentation" : "A link to a license file of the app that matches the spdxLicenseID of your application.\\nMax size 5 MB"
+          "documentation" : "<p>A link to a license file of the app that matches the spdxLicenseID of your application.</p><p>Max size 5 MB</p>"
         },
         "Name" : {
           "shape" : "__string",
           "locationName" : "name",
-          "documentation" : "The name of the application you want to publish.\\nMin Length=1. Max Length=140\\nPattern: \"[a-zA-Z0-9\\\\-]+\";"
+          "documentation" : "<p>The name of the application you want to publish.</p><p>Min Length=1. Max Length=140</p><p>Pattern: \"[a-zA-Z0-9\\\\-]+\";</p>"
         },
         "ReadmeBody" : {
           "shape" : "__string",
           "locationName" : "readmeBody",
-          "documentation" : "A raw text Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A raw text Readme file that contains a more detailed description of the application and how it works in markdown language.</p><p>Max size 5 MB</p>"
         },
         "ReadmeUrl" : {
           "shape" : "__string",
           "locationName" : "readmeUrl",
-          "documentation" : "A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.</p><p>Max size 5 MB</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application:\\n\\n https://semver.org/"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
           "locationName" : "sourceCodeUrl",
-          "documentation" : "A link to a public repository for the source code of your application."
+          "documentation" : "<p>A link to a public repository for the source code of your application.</p>"
         },
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "A valid identifier from https://spdx.org/licenses/ ."
+          "documentation" : "<p>A valid identifier from <a href=\"\"https://spdx.org/licenses/\"\">https://spdx.org/licenses/</a>.</p>"
         },
         "TemplateBody" : {
           "shape" : "__string",
           "locationName" : "templateBody",
-          "documentation" : "The raw packaged SAM template of your application."
+          "documentation" : "<p>The raw packaged AWS SAM template of your application.</p>"
         },
         "TemplateUrl" : {
           "shape" : "__string",
           "locationName" : "templateUrl",
-          "documentation" : "A link to the packaged SAM template of your application."
+          "documentation" : "<p>A link to the packaged AWS SAM template of your application.</p>"
         }
       }
     },
@@ -672,52 +731,57 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application Amazon Resource Name (ARN)."
+          "documentation" : "<p>The application Amazon Resource Name (ARN).</p>"
         },
         "Author" : {
           "shape" : "__string",
           "locationName" : "author",
-          "documentation" : "The name of the author publishing the app.\\nMin Length=1. Max Length=127.\\nPattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";"
+          "documentation" : "<p>The name of the author publishing the app.</p><p>Min Length=1. Max Length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>"
         },
         "CreationTime" : {
           "shape" : "__string",
           "locationName" : "creationTime",
-          "documentation" : "The date/time this resource was created."
+          "documentation" : "<p>The date/time this resource was created.</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "The description of the application.\\nMin Length=1. Max Length=256"
+          "documentation" : "<p>The description of the application.</p><p>Min Length=1. Max Length=256</p>"
+        },
+        "HomePageUrl" : {
+          "shape" : "__string",
+          "locationName" : "homePageUrl",
+          "documentation" : "<p>A URL with more information about the application, for example\n the location of your GitHub repository for the application.</p>"
         },
         "Labels" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "labels",
-          "documentation" : "Labels to improve discovery of apps in search results.\\nMin Length=1. Max Length=127. Maximum number of labels: 10\\nPattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";"
+          "documentation" : "<p>Labels to improve discovery of apps in search results.</p><p>Min Length=1. Max Length=127. Maximum number of labels: 10</p><p>Pattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";</p>"
         },
         "LicenseUrl" : {
           "shape" : "__string",
           "locationName" : "licenseUrl",
-          "documentation" : "A link to a license file of the app that matches the spdxLicenseID of your application.\\nMax size 5 MB"
+          "documentation" : "<p>A link to a license file of the app that matches the spdxLicenseID of your application.</p><p>Max size 5 MB</p>"
         },
         "Name" : {
           "shape" : "__string",
           "locationName" : "name",
-          "documentation" : "The name of the application.\\nMin Length=1. Max Length=140\\nPattern: \"[a-zA-Z0-9\\\\-]+\";"
+          "documentation" : "<p>The name of the application.</p><p>Min Length=1. Max Length=140</p><p>Pattern: \"[a-zA-Z0-9\\\\-]+\";</p>"
         },
         "ReadmeUrl" : {
           "shape" : "__string",
           "locationName" : "readmeUrl",
-          "documentation" : "A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A link to the readme file that contains a more detailed description of the application and how it works in Markdown language.</p><p>Max size 5 MB</p>"
         },
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "A valid identifier from https://spdx.org/licenses/."
+          "documentation" : "<p>A valid identifier from https://spdx.org/licenses/.</p>"
         },
         "Version" : {
           "shape" : "Version",
           "locationName" : "version",
-          "documentation" : "Version information about the application."
+          "documentation" : "<p>Version information about the application.</p>"
         }
       }
     },
@@ -727,20 +791,20 @@
         "SourceCodeUrl" : {
           "shape" : "__string",
           "locationName" : "sourceCodeUrl",
-          "documentation" : "A link to a public repository for the source code of your application."
+          "documentation" : "<p>A link to a public repository for the source code of your application.</p>"
         },
         "TemplateBody" : {
           "shape" : "__string",
           "locationName" : "templateBody",
-          "documentation" : "The raw packaged SAM template of your application."
+          "documentation" : "<p>The raw packaged AWS SAM template of your application.</p>"
         },
         "TemplateUrl" : {
           "shape" : "__string",
           "locationName" : "templateUrl",
-          "documentation" : "A link to the packaged SAM template of your application."
+          "documentation" : "<p>A link to the packaged AWS SAM template of your application.</p>"
         }
       },
-      "documentation" : "Create version request."
+      "documentation" : "<p>Create version request.</p>"
     },
     "CreateApplicationVersionRequest" : {
       "type" : "structure",
@@ -749,28 +813,28 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "applicationId",
-          "documentation" : "The id of the application to create a new version for"
+          "documentation" : "<p>The ID of the application to get.</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the new version"
+          "documentation" : "<p>The semantic version of the new version.</p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
           "locationName" : "sourceCodeUrl",
-          "documentation" : "A link to a public repository for the source code of your application."
+          "documentation" : "<p>A link to a public repository for the source code of your application.</p>"
         },
         "TemplateBody" : {
           "shape" : "__string",
           "locationName" : "templateBody",
-          "documentation" : "The raw packaged SAM template of your application."
+          "documentation" : "<p>The raw packaged AWS SAM template of your application.</p>"
         },
         "TemplateUrl" : {
           "shape" : "__string",
           "locationName" : "templateUrl",
-          "documentation" : "A link to the packaged SAM template of your application."
+          "documentation" : "<p>A link to the packaged AWS SAM template of your application.</p>"
         }
       },
       "required" : [ "ApplicationId", "SemanticVersion" ]
@@ -781,32 +845,32 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application Amazon Resource Name (ARN)."
+          "documentation" : "<p>The application Amazon Resource Name (ARN).</p>"
         },
         "CreationTime" : {
           "shape" : "__string",
           "locationName" : "creationTime",
-          "documentation" : "The date/time this resource was created."
+          "documentation" : "<p>The date/time this resource was created.</p>"
         },
         "ParameterDefinitions" : {
-          "shape" : "ListOfParameterDefinition",
+          "shape" : "__listOfParameterDefinition",
           "locationName" : "parameterDefinitions",
-          "documentation" : "Array of parameter types supported by the application."
+          "documentation" : "<p>Array of parameter types supported by the application.</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application:\\n\\n https://semver.org/"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
           "locationName" : "sourceCodeUrl",
-          "documentation" : "A link to a public repository for the source code of your application."
+          "documentation" : "<p>A link to a public repository for the source code of your application.</p>"
         },
         "TemplateUrl" : {
           "shape" : "__string",
           "locationName" : "templateUrl",
-          "documentation" : "A link to the packaged SAM template of your application."
+          "documentation" : "<p>A link to the packaged AWS SAM template of your application.</p>"
         }
       }
     },
@@ -814,22 +878,23 @@
       "type" : "structure",
       "members" : {
         "ParameterOverrides" : {
-          "shape" : "ListOfParameterValue",
+          "shape" : "__listOfParameterValue",
           "locationName" : "parameterOverrides",
-          "documentation" : "A list of parameter values for the parameters of the application."
+          "documentation" : "<p>A list of parameter values for the parameters of the application.</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application:\\n\\n https://semver.org/"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
         },
         "StackName" : {
           "shape" : "__string",
           "locationName" : "stackName",
-          "documentation" : "The name or the unique ID of the stack for which you are creating a change set. AWS CloudFormation generates\\n the change set by comparing this stack's information with the information that you submit, such as a modified\\n template or different parameter input values. \\nConstraints: Minimum length of 1.\\nPattern: ([a-zA-Z][-a-zA-Z0-9]*)|(arn:\\b(aws|aws-us-gov|aws-cn)\\b:[-a-zA-Z0-9:/._+]*)"
+          "documentation" : "<p>The name or the unique ID of the stack for which you are creating a change set. AWS CloudFormation generates\n the change set by comparing this stack's information with the information that you submit, such as a modified\n template or different parameter input values. </p><p>Constraints: Minimum length of 1.</p><p>Pattern: ([a-zA-Z][-a-zA-Z0-9]*)|(arn:\\b(aws|aws-us-gov|aws-cn)\\b:[-a-zA-Z0-9:/._+]*)</p>"
         }
       },
-      "documentation" : "Create application ChangeSet request."
+      "documentation" : "<p>Create application ChangeSet request.</p>",
+      "required" : [ "StackName" ]
     },
     "CreateCloudFormationChangeSetRequest" : {
       "type" : "structure",
@@ -838,25 +903,24 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "applicationId",
-          "documentation" : "The id of the application to create the ChangeSet for"
+          "documentation" : "<p>The ID of the application to get.</p>"
         },
         "ParameterOverrides" : {
-          "shape" : "ListOfParameterValue",
+          "shape" : "__listOfParameterValue",
           "locationName" : "parameterOverrides",
-          "documentation" : "A list of parameter values for the parameters of the application."
+          "documentation" : "<p>A list of parameter values for the parameters of the application.</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application:\\n\\n https://semver.org/"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
         },
         "StackName" : {
           "shape" : "__string",
           "locationName" : "stackName",
-          "documentation" : "The name or the unique ID of the stack for which you are creating a change set. AWS CloudFormation generates\\n the change set by comparing this stack's information with the information that you submit, such as a modified\\n template or different parameter input values. \\nConstraints: Minimum length of 1.\\nPattern: ([a-zA-Z][-a-zA-Z0-9]*)|(arn:\\b(aws|aws-us-gov|aws-cn)\\b:[-a-zA-Z0-9:/._+]*)"
+          "documentation" : "<p>The name or the unique ID of the stack for which you are creating a change set. AWS CloudFormation generates\n the change set by comparing this stack's information with the information that you submit, such as a modified\n template or different parameter input values. </p><p>Constraints: Minimum length of 1.</p><p>Pattern: ([a-zA-Z][-a-zA-Z0-9]*)|(arn:\\b(aws|aws-us-gov|aws-cn)\\b:[-a-zA-Z0-9:/._+]*)</p>"
         }
       },
-      "documentation" : "Create application ChangeSet request",
       "required" : [ "ApplicationId" ]
     },
     "CreateCloudFormationChangeSetResponse" : {
@@ -865,24 +929,36 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application Amazon Resource Name (ARN)."
+          "documentation" : "<p>The application Amazon Resource Name (ARN).</p>"
         },
         "ChangeSetId" : {
           "shape" : "__string",
           "locationName" : "changeSetId",
-          "documentation" : "The ARN of the change set.\\nLength Constraints: Minimum length of 1.\\nPattern: arn:[-a-zA-Z0-9:/]*"
+          "documentation" : "<p>The ARN of the change set.</p><p>Length Constraints: Minimum length of 1.</p><p>Pattern: Amazon Resource Name (ARN):[-a-zA-Z0-9:/]*</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application:\\n\\n https://semver.org/"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
         },
         "StackId" : {
           "shape" : "__string",
           "locationName" : "stackId",
-          "documentation" : "The unique ID of the stack."
+          "documentation" : "<p>The unique ID of the stack.</p>"
         }
       }
+    },
+    "DeleteApplicationRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "applicationId",
+          "documentation" : "<p>The ID of the application to get.</p>"
+        }
+      },
+      "required" : [ "ApplicationId" ]
     },
     "ForbiddenException" : {
       "type" : "structure",
@@ -890,15 +966,15 @@
         "ErrorCode" : {
           "shape" : "__string",
           "locationName" : "errorCode",
-          "documentation" : "403"
+          "documentation" : "<p>403</p>"
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The client is not authenticated."
+          "documentation" : "<p>The client is not authenticated.</p>"
         }
       },
-      "documentation" : "The client is not authenticated.",
+      "documentation" : "<p>The client is not authenticated.</p>",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 403
@@ -911,7 +987,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "applicationId",
-          "documentation" : "The id of the application to get policy for"
+          "documentation" : "<p>The ID of the application to get.</p>"
         }
       },
       "required" : [ "ApplicationId" ]
@@ -920,9 +996,9 @@
       "type" : "structure",
       "members" : {
         "Statements" : {
-          "shape" : "ListOfApplicationPolicyStatement",
+          "shape" : "__listOfApplicationPolicyStatement",
           "locationName" : "statements",
-          "documentation" : "Array of policy statements applied to the application."
+          "documentation" : "<p>Array of policy statements applied to the application.</p>"
         }
       }
     },
@@ -933,13 +1009,13 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "applicationId",
-          "documentation" : "The id of the application to get"
+          "documentation" : "<p>The ID of the application to get.</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application to get"
+          "documentation" : "<p>The semantic version of the application to get.</p>"
         }
       },
       "required" : [ "ApplicationId" ]
@@ -950,52 +1026,57 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application Amazon Resource Name (ARN)."
+          "documentation" : "<p>The application Amazon Resource Name (ARN).</p>"
         },
         "Author" : {
           "shape" : "__string",
           "locationName" : "author",
-          "documentation" : "The name of the author publishing the app.\\nMin Length=1. Max Length=127.\\nPattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";"
+          "documentation" : "<p>The name of the author publishing the app.</p><p>Min Length=1. Max Length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>"
         },
         "CreationTime" : {
           "shape" : "__string",
           "locationName" : "creationTime",
-          "documentation" : "The date/time this resource was created."
+          "documentation" : "<p>The date/time this resource was created.</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "The description of the application.\\nMin Length=1. Max Length=256"
+          "documentation" : "<p>The description of the application.</p><p>Min Length=1. Max Length=256</p>"
+        },
+        "HomePageUrl" : {
+          "shape" : "__string",
+          "locationName" : "homePageUrl",
+          "documentation" : "<p>A URL with more information about the application, for example\n the location of your GitHub repository for the application.</p>"
         },
         "Labels" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "labels",
-          "documentation" : "Labels to improve discovery of apps in search results.\\nMin Length=1. Max Length=127. Maximum number of labels: 10\\nPattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";"
+          "documentation" : "<p>Labels to improve discovery of apps in search results.</p><p>Min Length=1. Max Length=127. Maximum number of labels: 10</p><p>Pattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";</p>"
         },
         "LicenseUrl" : {
           "shape" : "__string",
           "locationName" : "licenseUrl",
-          "documentation" : "A link to a license file of the app that matches the spdxLicenseID of your application.\\nMax size 5 MB"
+          "documentation" : "<p>A link to a license file of the app that matches the spdxLicenseID of your application.</p><p>Max size 5 MB</p>"
         },
         "Name" : {
           "shape" : "__string",
           "locationName" : "name",
-          "documentation" : "The name of the application.\\nMin Length=1. Max Length=140\\nPattern: \"[a-zA-Z0-9\\\\-]+\";"
+          "documentation" : "<p>The name of the application.</p><p>Min Length=1. Max Length=140</p><p>Pattern: \"[a-zA-Z0-9\\\\-]+\";</p>"
         },
         "ReadmeUrl" : {
           "shape" : "__string",
           "locationName" : "readmeUrl",
-          "documentation" : "A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A link to the readme file that contains a more detailed description of the application and how it works in Markdown language.</p><p>Max size 5 MB</p>"
         },
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "A valid identifier from https://spdx.org/licenses/."
+          "documentation" : "<p>A valid identifier from https://spdx.org/licenses/.</p>"
         },
         "Version" : {
           "shape" : "Version",
           "locationName" : "version",
-          "documentation" : "Version information about the application."
+          "documentation" : "<p>Version information about the application.</p>"
         }
       }
     },
@@ -1005,15 +1086,15 @@
         "ErrorCode" : {
           "shape" : "__string",
           "locationName" : "errorCode",
-          "documentation" : "500"
+          "documentation" : "<p>500</p>"
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The AWS Serverless Application Repository service encountered an internal error."
+          "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>"
         }
       },
-      "documentation" : "The AWS Serverless Application Repository service encountered an internal error.",
+      "documentation" : "<p>The AWS Serverless Application Repository service encountered an internal error.</p>",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 500
@@ -1026,19 +1107,19 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "applicationId",
-          "documentation" : "The id of the application to list"
+          "documentation" : "<p>The ID of the application to get.</p>"
         },
         "MaxItems" : {
           "shape" : "MaxItems",
           "location" : "querystring",
           "locationName" : "maxItems",
-          "documentation" : "The total number of items to return"
+          "documentation" : "<p>The total number of items to return.</p>"
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "nextToken",
-          "documentation" : "A token to specify where to start paginating"
+          "documentation" : "<p>A token to specify where to start paginating.</p>"
         }
       },
       "required" : [ "ApplicationId" ]
@@ -1049,12 +1130,12 @@
         "NextToken" : {
           "shape" : "__string",
           "locationName" : "nextToken",
-          "documentation" : "The token to request the next page of results."
+          "documentation" : "<p>The token to request the next page of results.</p>"
         },
         "Versions" : {
-          "shape" : "ListOfVersionSummary",
+          "shape" : "__listOfVersionSummary",
           "locationName" : "versions",
-          "documentation" : "Array of version summaries for the application."
+          "documentation" : "<p>Array of version summaries for the application.</p>"
         }
       }
     },
@@ -1065,13 +1146,13 @@
           "shape" : "MaxItems",
           "location" : "querystring",
           "locationName" : "maxItems",
-          "documentation" : "The total number of items to return"
+          "documentation" : "<p>The total number of items to return.</p>"
         },
         "NextToken" : {
           "shape" : "__string",
           "location" : "querystring",
           "locationName" : "nextToken",
-          "documentation" : "A token to specify where to start paginating"
+          "documentation" : "<p>A token to specify where to start paginating.</p>"
         }
       }
     },
@@ -1079,51 +1160,15 @@
       "type" : "structure",
       "members" : {
         "Applications" : {
-          "shape" : "ListOfApplicationSummary",
+          "shape" : "__listOfApplicationSummary",
           "locationName" : "applications",
-          "documentation" : "Array of application summaries."
+          "documentation" : "<p>Array of application summaries.</p>"
         },
         "NextToken" : {
           "shape" : "__string",
           "locationName" : "nextToken",
-          "documentation" : "The token to request the next page of results."
+          "documentation" : "<p>The token to request the next page of results.</p>"
         }
-      }
-    },
-    "ListOfApplicationPolicyStatement" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ApplicationPolicyStatement"
-      }
-    },
-    "ListOfApplicationSummary" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ApplicationSummary"
-      }
-    },
-    "ListOfParameterDefinition" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ParameterDefinition"
-      }
-    },
-    "ListOfParameterValue" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ParameterValue"
-      }
-    },
-    "ListOfVersionSummary" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "VersionSummary"
-      }
-    },
-    "ListOf__string" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "__string"
       }
     },
     "MaxItems" : {
@@ -1137,15 +1182,15 @@
         "ErrorCode" : {
           "shape" : "__string",
           "locationName" : "errorCode",
-          "documentation" : "404"
+          "documentation" : "<p>404</p>"
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The resource (for example, an access policy statement) specified in the request does not exist."
+          "documentation" : "<p>The resource (for example, an access policy statement) specified in the request does not exist.</p>"
         }
       },
-      "documentation" : "The resource (for example, an access policy statement) specified in the request does not exist.",
+      "documentation" : "<p>The resource (for example, an access policy statement) specified in the request does not exist.</p>",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 404
@@ -1157,70 +1202,71 @@
         "AllowedPattern" : {
           "shape" : "__string",
           "locationName" : "allowedPattern",
-          "documentation" : "A regular expression that represents the patterns to allow for String types."
+          "documentation" : "<p>A regular expression that represents the patterns to allow for String types.</p>"
         },
         "AllowedValues" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "allowedValues",
-          "documentation" : "Array containing the list of values allowed for the parameter."
+          "documentation" : "<p>Array containing the list of values allowed for the parameter.</p>"
         },
         "ConstraintDescription" : {
           "shape" : "__string",
           "locationName" : "constraintDescription",
-          "documentation" : "A string that explains a constraint when the constraint is violated. For example, without a constraint description,\\n a parameter that has an allowed pattern of [A-Za-z0-9]+ displays the following error message when the user\\n specifies an invalid value:\\n\\n Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+ \\n \\nBy adding a constraint description, such as \"must contain only uppercase and lowercase letters, and numbers,\" you can display\\n the following customized error message:\\n\\n Malformed input-Parameter MyParameter must contain only uppercase and lowercase letters and numbers."
+          "documentation" : "<p>A string that explains a constraint when the constraint is violated. For example, without a constraint description,\n a parameter that has an allowed pattern of [A-Za-z0-9]+ displays the following error message when the user\n specifies an invalid value:</p><p>\n Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+\n </p><p>By adding a constraint description, such as \"must contain only uppercase and lowercase letters, and numbers,\" you can display\n the following customized error message:</p><p>\n Malformed input-Parameter MyParameter must contain only uppercase and lowercase letters and numbers.\n </p>"
         },
         "DefaultValue" : {
           "shape" : "__string",
           "locationName" : "defaultValue",
-          "documentation" : "A value of the appropriate type for the template to use if no value is specified when a stack is created.\\n If you define constraints for the parameter, you must specify a value that adheres to those constraints."
+          "documentation" : "<p>A value of the appropriate type for the template to use if no value is specified when a stack is created.\n If you define constraints for the parameter, you must specify a value that adheres to those constraints.</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "A string of up to 4,000 characters that describes the parameter."
+          "documentation" : "<p>A string of up to 4,000 characters that describes the parameter.</p>"
         },
         "MaxLength" : {
           "shape" : "__integer",
           "locationName" : "maxLength",
-          "documentation" : "An integer value that determines the largest number of characters you want to allow for String types."
+          "documentation" : "<p>An integer value that determines the largest number of characters you want to allow for String types.</p>"
         },
         "MaxValue" : {
           "shape" : "__integer",
           "locationName" : "maxValue",
-          "documentation" : "A numeric value that determines the largest numeric value you want to allow for Number types."
+          "documentation" : "<p>A numeric value that determines the largest numeric value you want to allow for Number types.</p>"
         },
         "MinLength" : {
           "shape" : "__integer",
           "locationName" : "minLength",
-          "documentation" : "An integer value that determines the smallest number of characters you want to allow for String types."
+          "documentation" : "<p>An integer value that determines the smallest number of characters you want to allow for String types.</p>"
         },
         "MinValue" : {
           "shape" : "__integer",
           "locationName" : "minValue",
-          "documentation" : "A numeric value that determines the smallest numeric value you want to allow for Number types."
+          "documentation" : "<p>A numeric value that determines the smallest numeric value you want to allow for Number types.</p>"
         },
         "Name" : {
           "shape" : "__string",
           "locationName" : "name",
-          "documentation" : "The name of the parameter."
+          "documentation" : "<p>The name of the parameter.</p>"
         },
         "NoEcho" : {
           "shape" : "__boolean",
           "locationName" : "noEcho",
-          "documentation" : "Whether to mask the parameter value whenever anyone makes a call that describes the stack. If you set the\\n value to true, the parameter value is masked with asterisks (*****)."
+          "documentation" : "<p>Whether to mask the parameter value whenever anyone makes a call that describes the stack. If you set the\n value to true, the parameter value is masked with asterisks (*****).</p>"
         },
         "ReferencedByResources" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "referencedByResources",
-          "documentation" : "A list of SAM resources that use this parameter."
+          "documentation" : "<p>A list of AWS SAM resources that use this parameter.</p>"
         },
         "Type" : {
           "shape" : "__string",
           "locationName" : "type",
-          "documentation" : "The type of the parameter.\\nValid values: String | Number | List<Number> | CommaDelimitedList \\n \\n\\n String : A literal string.\\nFor example, users could specify \"MyUserName\" .\\n\\n Number : An integer or float. AWS CloudFormation validates the parameter value as a number; however, when you use the\\n parameter elsewhere in your template (for example, by using the Ref intrinsic function), the parameter value becomes a string.\\nFor example, users could specify \"8888\" .\\n\\n List<Number> : An array of integers or floats that are separated by commas. AWS CloudFormation validates the parameter value as numbers; however, when\\n you use the parameter elsewhere in your template (for example, by using the Ref intrinsic function), the parameter value becomes a list of strings.\\nFor example, users could specify \"80,20\", and a Ref results in [\"80\",\"20\"] .\\n\\n CommaDelimitedList : An array of literal strings that are separated by commas. The total number of strings should be one more than the total number of commas.\\n Also, each member string is space-trimmed.\\nFor example, users could specify \"test,dev,prod\", and a Ref results in [\"test\",\"dev\",\"prod\"] ."
+          "documentation" : "<p>The type of the parameter.</p><p>Valid values: String | Number | List&lt;Number> | CommaDelimitedList\n </p><p>\n String: A literal string.</p><p>For example, users could specify \"MyUserName\".</p><p>\n Number: An integer or float. AWS CloudFormation validates the parameter value as a number; however, when you use the\n parameter elsewhere in your template (for example, by using the Ref intrinsic function), the parameter value becomes a string.</p><p>For example, users could specify \"8888\".</p><p>\n List&lt;Number>: An array of integers or floats that are separated by commas. AWS CloudFormation validates the parameter value as numbers; however, when\n you use the parameter elsewhere in your template (for example, by using the Ref intrinsic function), the parameter value becomes a list of strings.</p><p>For example, users could specify \"80,20\", and a Ref results in [\"80\",\"20\"].</p><p>\n CommaDelimitedList: An array of literal strings that are separated by commas. The total number of strings should be one more than the total number of commas.\n Also, each member string is space-trimmed.</p><p>For example, users could specify \"test,dev,prod\", and a Ref results in [\"test\",\"dev\",\"prod\"].</p>"
         }
       },
-      "documentation" : "Parameters supported by the application."
+      "documentation" : "<p>Parameters supported by the application.</p>",
+      "required" : [ "ReferencedByResources", "Name" ]
     },
     "ParameterValue" : {
       "type" : "structure",
@@ -1228,15 +1274,16 @@
         "Name" : {
           "shape" : "__string",
           "locationName" : "name",
-          "documentation" : "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation\\n uses the default value that is specified in your template."
+          "documentation" : "<p>The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation\n uses the default value that is specified in your template.</p>"
         },
         "Value" : {
           "shape" : "__string",
           "locationName" : "value",
-          "documentation" : "The input value associated with the parameter."
+          "documentation" : "<p>The input value associated with the parameter.</p>"
         }
       },
-      "documentation" : "Parameter value of the application."
+      "documentation" : "<p>Parameter value of the application.</p>",
+      "required" : [ "Value", "Name" ]
     },
     "PutApplicationPolicyRequest" : {
       "type" : "structure",
@@ -1245,24 +1292,23 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "applicationId",
-          "documentation" : "The id of the application to put policy for"
+          "documentation" : "<p>The ID of the application to get.</p>"
         },
         "Statements" : {
-          "shape" : "ListOfApplicationPolicyStatement",
+          "shape" : "__listOfApplicationPolicyStatement",
           "locationName" : "statements",
-          "documentation" : "Array of policy statements applied to the application."
+          "documentation" : "<p>Array of policy statements applied to the application.</p>"
         }
       },
-      "documentation" : "Put policy request",
       "required" : [ "ApplicationId" ]
     },
     "PutApplicationPolicyResponse" : {
       "type" : "structure",
       "members" : {
         "Statements" : {
-          "shape" : "ListOfApplicationPolicyStatement",
+          "shape" : "__listOfApplicationPolicyStatement",
           "locationName" : "statements",
-          "documentation" : "Array of policy statements applied to the application."
+          "documentation" : "<p>Array of policy statements applied to the application.</p>"
         }
       }
     },
@@ -1272,15 +1318,15 @@
         "ErrorCode" : {
           "shape" : "__string",
           "locationName" : "errorCode",
-          "documentation" : "429"
+          "documentation" : "<p>429</p>"
         },
         "Message" : {
           "shape" : "__string",
           "locationName" : "message",
-          "documentation" : "The client is sending more than the allowed number of requests per unit time."
+          "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>"
         }
       },
-      "documentation" : "The client is sending more than the allowed number of requests per unit time.",
+      "documentation" : "<p>The client is sending more than the allowed number of requests per unit time.</p>",
       "exception" : true,
       "error" : {
         "httpStatusCode" : 429
@@ -1292,30 +1338,35 @@
         "Author" : {
           "shape" : "__string",
           "locationName" : "author",
-          "documentation" : "The name of the author publishing the app.\\nMin Length=1. Max Length=127.\\nPattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";"
+          "documentation" : "<p>The name of the author publishing the app.</p><p>Min Length=1. Max Length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "The description of the application.\\nMin Length=1. Max Length=256"
+          "documentation" : "<p>The description of the application.</p><p>Min Length=1. Max Length=256</p>"
+        },
+        "HomePageUrl" : {
+          "shape" : "__string",
+          "locationName" : "homePageUrl",
+          "documentation" : "<p>A URL with more information about the application, for example\n the location of your GitHub repository for the application.</p>"
         },
         "Labels" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "labels",
-          "documentation" : "Labels to improve discovery of apps in search results.\\nMin Length=1. Max Length=127. Maximum number of labels: 10\\nPattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";"
+          "documentation" : "<p>Labels to improve discovery of apps in search results.</p><p>Min Length=1. Max Length=127. Maximum number of labels: 10</p><p>Pattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";</p>"
         },
         "ReadmeBody" : {
           "shape" : "__string",
           "locationName" : "readmeBody",
-          "documentation" : "A raw text Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A raw text Readme file that contains a more detailed description of the application and how it works in markdown language.</p><p>Max size 5 MB</p>"
         },
         "ReadmeUrl" : {
           "shape" : "__string",
           "locationName" : "readmeUrl",
-          "documentation" : "A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.</p><p>Max size 5 MB</p>"
         }
       },
-      "documentation" : "Update application request."
+      "documentation" : "<p>Update application request.</p>"
     },
     "UpdateApplicationRequest" : {
       "type" : "structure",
@@ -1324,32 +1375,37 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "applicationId",
-          "documentation" : "The id of the application to update"
+          "documentation" : "<p>The ID of the application to get.</p>"
         },
         "Author" : {
           "shape" : "__string",
           "locationName" : "author",
-          "documentation" : "The name of the author publishing the app.\\nMin Length=1. Max Length=127.\\nPattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";"
+          "documentation" : "<p>The name of the author publishing the app.</p><p>Min Length=1. Max Length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "The description of the application.\\nMin Length=1. Max Length=256"
+          "documentation" : "<p>The description of the application.</p><p>Min Length=1. Max Length=256</p>"
+        },
+        "HomePageUrl" : {
+          "shape" : "__string",
+          "locationName" : "homePageUrl",
+          "documentation" : "<p>A URL with more information about the application, for example\n the location of your GitHub repository for the application.</p>"
         },
         "Labels" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "labels",
-          "documentation" : "Labels to improve discovery of apps in search results.\\nMin Length=1. Max Length=127. Maximum number of labels: 10\\nPattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";"
+          "documentation" : "<p>Labels to improve discovery of apps in search results.</p><p>Min Length=1. Max Length=127. Maximum number of labels: 10</p><p>Pattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";</p>"
         },
         "ReadmeBody" : {
           "shape" : "__string",
           "locationName" : "readmeBody",
-          "documentation" : "A raw text Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A raw text Readme file that contains a more detailed description of the application and how it works in markdown language.</p><p>Max size 5 MB</p>"
         },
         "ReadmeUrl" : {
           "shape" : "__string",
           "locationName" : "readmeUrl",
-          "documentation" : "A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.</p><p>Max size 5 MB</p>"
         }
       },
       "required" : [ "ApplicationId" ]
@@ -1360,52 +1416,57 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application Amazon Resource Name (ARN)."
+          "documentation" : "<p>The application Amazon Resource Name (ARN).</p>"
         },
         "Author" : {
           "shape" : "__string",
           "locationName" : "author",
-          "documentation" : "The name of the author publishing the app.\\nMin Length=1. Max Length=127.\\nPattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";"
+          "documentation" : "<p>The name of the author publishing the app.</p><p>Min Length=1. Max Length=127.</p><p>Pattern \"^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$\";</p>"
         },
         "CreationTime" : {
           "shape" : "__string",
           "locationName" : "creationTime",
-          "documentation" : "The date/time this resource was created."
+          "documentation" : "<p>The date/time this resource was created.</p>"
         },
         "Description" : {
           "shape" : "__string",
           "locationName" : "description",
-          "documentation" : "The description of the application.\\nMin Length=1. Max Length=256"
+          "documentation" : "<p>The description of the application.</p><p>Min Length=1. Max Length=256</p>"
+        },
+        "HomePageUrl" : {
+          "shape" : "__string",
+          "locationName" : "homePageUrl",
+          "documentation" : "<p>A URL with more information about the application, for example\n the location of your GitHub repository for the application.</p>"
         },
         "Labels" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "labels",
-          "documentation" : "Labels to improve discovery of apps in search results.\\nMin Length=1. Max Length=127. Maximum number of labels: 10\\nPattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";"
+          "documentation" : "<p>Labels to improve discovery of apps in search results.</p><p>Min Length=1. Max Length=127. Maximum number of labels: 10</p><p>Pattern: \"^[a-zA-Z0-9+\\\\-_:\\\\/@]+$\";</p>"
         },
         "LicenseUrl" : {
           "shape" : "__string",
           "locationName" : "licenseUrl",
-          "documentation" : "A link to a license file of the app that matches the spdxLicenseID of your application.\\nMax size 5 MB"
+          "documentation" : "<p>A link to a license file of the app that matches the spdxLicenseID of your application.</p><p>Max size 5 MB</p>"
         },
         "Name" : {
           "shape" : "__string",
           "locationName" : "name",
-          "documentation" : "The name of the application.\\nMin Length=1. Max Length=140\\nPattern: \"[a-zA-Z0-9\\\\-]+\";"
+          "documentation" : "<p>The name of the application.</p><p>Min Length=1. Max Length=140</p><p>Pattern: \"[a-zA-Z0-9\\\\-]+\";</p>"
         },
         "ReadmeUrl" : {
           "shape" : "__string",
           "locationName" : "readmeUrl",
-          "documentation" : "A link to the Readme file that contains a more detailed description of the application and how it works in markdown language.\\nMax size 5 MB"
+          "documentation" : "<p>A link to the readme file that contains a more detailed description of the application and how it works in Markdown language.</p><p>Max size 5 MB</p>"
         },
         "SpdxLicenseId" : {
           "shape" : "__string",
           "locationName" : "spdxLicenseId",
-          "documentation" : "A valid identifier from https://spdx.org/licenses/."
+          "documentation" : "<p>A valid identifier from https://spdx.org/licenses/.</p>"
         },
         "Version" : {
           "shape" : "Version",
           "locationName" : "version",
-          "documentation" : "Version information about the application."
+          "documentation" : "<p>Version information about the application.</p>"
         }
       }
     },
@@ -1415,35 +1476,36 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application Amazon Resource Name (ARN)."
+          "documentation" : "<p>The application Amazon Resource Name (ARN).</p>"
         },
         "CreationTime" : {
           "shape" : "__string",
           "locationName" : "creationTime",
-          "documentation" : "The date/time this resource was created."
+          "documentation" : "<p>The date/time this resource was created.</p>"
         },
         "ParameterDefinitions" : {
-          "shape" : "ListOfParameterDefinition",
+          "shape" : "__listOfParameterDefinition",
           "locationName" : "parameterDefinitions",
-          "documentation" : "Array of parameter types supported by the application."
+          "documentation" : "<p>Array of parameter types supported by the application.</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application:\\n\\n https://semver.org/"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
           "locationName" : "sourceCodeUrl",
-          "documentation" : "A link to a public repository for the source code of your application."
+          "documentation" : "<p>A link to a public repository for the source code of your application.</p>"
         },
         "TemplateUrl" : {
           "shape" : "__string",
           "locationName" : "templateUrl",
-          "documentation" : "A link to the packaged SAM template of your application."
+          "documentation" : "<p>A link to the packaged AWS SAM template of your application.</p>"
         }
       },
-      "documentation" : "Application version details."
+      "documentation" : "<p>Application version details.</p>",
+      "required" : [ "TemplateUrl", "ParameterDefinitions", "CreationTime", "ApplicationId", "SemanticVersion" ]
     },
     "VersionSummary" : {
       "type" : "structure",
@@ -1451,25 +1513,26 @@
         "ApplicationId" : {
           "shape" : "__string",
           "locationName" : "applicationId",
-          "documentation" : "The application Amazon Resource Name (ARN)."
+          "documentation" : "<p>The application Amazon Resource Name (ARN).</p>"
         },
         "CreationTime" : {
           "shape" : "__string",
           "locationName" : "creationTime",
-          "documentation" : "The date/time this resource was created."
+          "documentation" : "<p>The date/time this resource was created.</p>"
         },
         "SemanticVersion" : {
           "shape" : "__string",
           "locationName" : "semanticVersion",
-          "documentation" : "The semantic version of the application:\\n\\n https://semver.org/"
+          "documentation" : "<p>The semantic version of the application:</p><p>\n <a href=\"\"https://semver.org/\"\">https://semver.org/</a>\n </p>"
         },
         "SourceCodeUrl" : {
           "shape" : "__string",
           "locationName" : "sourceCodeUrl",
-          "documentation" : "A link to a public repository for the source code of your application."
+          "documentation" : "<p>A link to a public repository for the source code of your application.</p>"
         }
       },
-      "documentation" : "Application version summary."
+      "documentation" : "<p>Application version summary.</p>",
+      "required" : [ "CreationTime", "ApplicationId", "SemanticVersion" ]
     },
     "__boolean" : {
       "type" : "boolean"
@@ -1480,22 +1543,48 @@
     "__integer" : {
       "type" : "integer"
     },
+    "__listOfApplicationPolicyStatement" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ApplicationPolicyStatement"
+      }
+    },
+    "__listOfApplicationSummary" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ApplicationSummary"
+      }
+    },
+    "__listOfParameterDefinition" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ParameterDefinition"
+      }
+    },
+    "__listOfParameterValue" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ParameterValue"
+      }
+    },
+    "__listOfVersionSummary" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "VersionSummary"
+      }
+    },
+    "__listOf__string" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__string"
+      }
+    },
+    "__long" : {
+      "type" : "long"
+    },
     "__string" : {
       "type" : "string"
-    },
-    "__timestamp" : {
-      "type" : "timestamp"
     }
   },
-  "authorizers" : {
-    "authorization_strategy" : {
-      "name" : "authorization_strategy",
-      "type" : "provided",
-      "placement" : {
-        "location" : "header",
-        "name" : "Authorization"
-      }
-    }
-  },
-  "documentation" : "AWS Serverless Repository"
+  "documentation" : "<p>The AWS Serverless Application Repository makes it easy for developers and enterprises to quickly find\n and deploy serverless applications in the AWS Cloud. For more information about serverless applications,\n see Serverless Computing and Applications on the AWS website.</p><p>The AWS Serverless Application Repository is deeply integrated with the AWS Lambda console, so that developers of \n all levels can get started with serverless computing without needing to learn anything new. You can use category \n keywords to browse for applications such as web and mobile backends, data processing applications, or chatbots. \n You can also search for applications by name, publisher, or event source. To use an application, you simply choose it, \n configure any required fields, and deploy it with a few clicks. </p><p>You can also easily publish applications, sharing them publicly with the community at large, or privately\n within your team or across your organization. To publish a serverless application (or app), you can use the\n AWS Management Console, AWS Command Line Interface (AWS CLI), or AWS SDKs to upload the code. Along with the\n code, you upload a simple manifest file, also known as the AWS Serverless Application Model (AWS SAM) template.\n For more information about AWS SAM, see AWS Serverless Application Model (AWS SAM) on the AWS Labs\n GitHub repository.</p><p>The AWS Serverless Application Repository Developer Guide contains more information about the two developer\n experiences available:</p><ul>\n <li>\n <p>Consuming Applications – Browse for applications and view information about them, including\n source code and readme files. Also install, configure, and deploy applications of your choosing. </p>\n <p>Publishing Applications – Configure and upload applications to make them available to other\n developers, and publish new versions of applications. </p>\n </li>\n </ul>"
 }
