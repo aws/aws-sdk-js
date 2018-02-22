@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.200.0-->
+<!--LATEST=2.201.0-->
 <!--ENTRYINSERT-->
+
+## 2.201.0
+* feature: CostExplorer: Added GetReservationCoverage API for retrieving reservation coverage information.
 
 ## 2.200.0
 * feature: CodeCommit: This release adds an API for adding a file directly to an AWS CodeCommit repository without requiring a Git client.
