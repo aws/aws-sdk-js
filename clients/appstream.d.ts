@@ -20,6 +20,14 @@ declare class AppStream extends Service {
    */
   associateFleet(callback?: (err: AWSError, data: AppStream.Types.AssociateFleetResult) => void): Request<AppStream.Types.AssociateFleetResult, AWSError>;
   /**
+   * Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.
+   */
+  copyImage(params: AppStream.Types.CopyImageRequest, callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
+  /**
+   * Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.
+   */
+  copyImage(callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
+  /**
    * Creates a directory configuration.
    */
   createDirectoryConfig(params: AppStream.Types.CreateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
@@ -359,6 +367,30 @@ declare namespace AppStream {
      */
     Available?: Integer;
   }
+  export interface CopyImageRequest {
+    /**
+     * The name of the image to copy.
+     */
+    SourceImageName: Name;
+    /**
+     * The name that the image will have when it is copied to the destination.
+     */
+    DestinationImageName: Name;
+    /**
+     * The destination region to which the image will be copied. This parameter is required, even if you are copying an image within the same region.
+     */
+    DestinationRegion: RegionName;
+    /**
+     * The description that the image will have when it is copied to the destination.
+     */
+    DestinationImageDescription?: Description;
+  }
+  export interface CopyImageResponse {
+    /**
+     * The name of the destination image.
+     */
+    DestinationImageName?: Name;
+  }
   export interface CreateDirectoryConfigRequest {
     /**
      * The fully qualified name of the directory (for example, corp.example.com).
@@ -693,11 +725,11 @@ declare namespace AppStream {
   }
   export interface DescribeSessionsRequest {
     /**
-     * The name of the stack.
+     * The name of the stack. This value is case-sensitive.
      */
     StackName: String;
     /**
-     * The name of the fleet.
+     * The name of the fleet. This value is case-sensitive.
      */
     FleetName: String;
     /**
@@ -1018,7 +1050,7 @@ declare namespace AppStream {
   }
   export type ImageBuilderStateChangeReasonCode = "INTERNAL_ERROR"|"IMAGE_UNAVAILABLE"|string;
   export type ImageList = Image[];
-  export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"DELETING"|string;
+  export type ImageState = "PENDING"|"AVAILABLE"|"FAILED"|"COPYING"|"DELETING"|string;
   export interface ImageStateChangeReason {
     /**
      * The state change reason code.
@@ -1029,7 +1061,7 @@ declare namespace AppStream {
      */
     Message?: String;
   }
-  export type ImageStateChangeReasonCode = "INTERNAL_ERROR"|"IMAGE_BUILDER_NOT_AVAILABLE"|string;
+  export type ImageStateChangeReasonCode = "INTERNAL_ERROR"|"IMAGE_BUILDER_NOT_AVAILABLE"|"IMAGE_COPY_FAILURE"|string;
   export type Integer = number;
   export interface ListAssociatedFleetsRequest {
     /**
@@ -1090,6 +1122,7 @@ declare namespace AppStream {
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
   export type PlatformType = "WINDOWS"|string;
   export type RedirectURL = string;
+  export type RegionName = string;
   export interface ResourceError {
     /**
      * The error code.

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.201.0-->
+<!--LATEST=2.202.0-->
 <!--ENTRYINSERT-->
+
+## 2.202.0
+* feature: AppStream: This API update is to enable customers to copy their Amazon AppStream 2.0 images within and between AWS Regions
 
 ## 2.201.0
 * feature: CostExplorer: Added GetReservationCoverage API for retrieving reservation coverage information.

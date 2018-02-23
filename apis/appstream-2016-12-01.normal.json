@@ -30,6 +30,23 @@
       ],
       "documentation":"<p>Associates the specified fleet with the specified stack.</p>"
     },
+    "CopyImage":{
+      "name":"CopyImage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CopyImageRequest"},
+      "output":{"shape":"CopyImageResponse"},
+      "errors":[
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceNotAvailableException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"IncompatibleImageException"}
+      ],
+      "documentation":"<p>Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.</p>"
+    },
     "CreateDirectoryConfig":{
       "name":"CreateDirectoryConfig",
       "http":{
@@ -619,6 +636,41 @@
       "documentation":"<p>An API error occurred. Wait a few minutes and try again.</p>",
       "exception":true
     },
+    "CopyImageRequest":{
+      "type":"structure",
+      "required":[
+        "SourceImageName",
+        "DestinationImageName",
+        "DestinationRegion"
+      ],
+      "members":{
+        "SourceImageName":{
+          "shape":"Name",
+          "documentation":"<p>The name of the image to copy.</p>"
+        },
+        "DestinationImageName":{
+          "shape":"Name",
+          "documentation":"<p>The name that the image will have when it is copied to the destination.</p>"
+        },
+        "DestinationRegion":{
+          "shape":"RegionName",
+          "documentation":"<p>The destination region to which the image will be copied. This parameter is required, even if you are copying an image within the same region.</p>"
+        },
+        "DestinationImageDescription":{
+          "shape":"Description",
+          "documentation":"<p>The description that the image will have when it is copied to the destination.</p>"
+        }
+      }
+    },
+    "CopyImageResponse":{
+      "type":"structure",
+      "members":{
+        "DestinationImageName":{
+          "shape":"Name",
+          "documentation":"<p>The name of the destination image.</p>"
+        }
+      }
+    },
     "CreateDirectoryConfigRequest":{
       "type":"structure",
       "required":[
@@ -1078,11 +1130,11 @@
       "members":{
         "StackName":{
           "shape":"String",
-          "documentation":"<p>The name of the stack.</p>"
+          "documentation":"<p>The name of the stack. This value is case-sensitive.</p>"
         },
         "FleetName":{
           "shape":"String",
-          "documentation":"<p>The name of the fleet.</p>"
+          "documentation":"<p>The name of the fleet. This value is case-sensitive.</p>"
         },
         "UserId":{
           "shape":"UserId",
@@ -1577,6 +1629,7 @@
         "PENDING",
         "AVAILABLE",
         "FAILED",
+        "COPYING",
         "DELETING"
       ]
     },
@@ -1598,7 +1651,8 @@
       "type":"string",
       "enum":[
         "INTERNAL_ERROR",
-        "IMAGE_BUILDER_NOT_AVAILABLE"
+        "IMAGE_BUILDER_NOT_AVAILABLE",
+        "IMAGE_COPY_FAILURE"
       ]
     },
     "IncompatibleImageException":{
@@ -1740,6 +1794,11 @@
     "RedirectURL":{
       "type":"string",
       "max":1000
+    },
+    "RegionName":{
+      "type":"string",
+      "max":32,
+      "min":1
     },
     "ResourceAlreadyExistsException":{
       "type":"structure",
