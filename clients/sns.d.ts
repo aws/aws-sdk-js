@@ -762,7 +762,7 @@ declare namespace SNS {
   export type delegate = string;
   export type endpoint = string;
   export type label = string;
-  export type message = string;
+  export type message = string | { [s: string]: string | { [s: string]: string; }; };
   export type messageId = string;
   export type messageStructure = string;
   export type nextToken = string;
