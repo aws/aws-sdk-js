@@ -2044,7 +2044,7 @@ declare namespace Route53 {
   export type ResourceRecordSetFailover = "PRIMARY"|"SECONDARY"|string;
   export type ResourceRecordSetIdentifier = string;
   export type ResourceRecordSetMultiValueAnswer = boolean;
-  export type ResourceRecordSetRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"sa-east-1"|"cn-north-1"|"cn-northwest-1"|"ap-south-1"|string;
+  export type ResourceRecordSetRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"sa-east-1"|"cn-north-1"|"cn-northwest-1"|"ap-south-1"|string;
   export type ResourceRecordSetWeight = number;
   export type ResourceRecordSets = ResourceRecordSet[];
   export type ResourceRecords = ResourceRecord[];

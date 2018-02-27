@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.202.0-->
+<!--LATEST=2.203.0-->
 <!--ENTRYINSERT-->
+
+## 2.203.0
+* feature: Route53: Added support for creating LBR rules using ap-northeast-3 region.
 
 ## 2.202.0
 * feature: AppStream: This API update is to enable customers to copy their Amazon AppStream 2.0 images within and between AWS Regions
