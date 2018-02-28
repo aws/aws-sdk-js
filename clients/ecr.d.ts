@@ -156,11 +156,11 @@ declare class ECR extends Service {
    */
   putImage(callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
-   * Creates or updates a lifecycle policy.
+   * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
    */
   putLifecyclePolicy(params: ECR.Types.PutLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
   /**
-   * Creates or updates a lifecycle policy.
+   * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
    */
   putLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
   /**
@@ -339,7 +339,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * The name of the repository that is associated with the repository policy to&#8232; delete.
+     * The name of the repository.
      */
     repositoryName: RepositoryName;
   }
@@ -353,7 +353,7 @@ declare namespace ECR {
      */
     repositoryName?: RepositoryName;
     /**
-     * The JSON repository policy text.
+     * The JSON lifecycle policy text.
      */
     lifecyclePolicyText?: LifecyclePolicyText;
     /**
@@ -425,11 +425,11 @@ declare namespace ECR {
      */
     imageIds?: ImageIdentifierList;
     /**
-     * The nextToken value returned from a previous paginated DescribeImages request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.
+     * The nextToken value returned from a previous paginated DescribeImages request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return. This option cannot be used when you specify images with imageIds.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of repository results returned by DescribeImages in paginated output. When this parameter is used, DescribeImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeImages request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeImages returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of repository results returned by DescribeImages in paginated output. When this parameter is used, DescribeImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeImages request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeImages returns up to 100 results and a nextToken value, if applicable. This option cannot be used when you specify images with imageIds.
      */
     maxResults?: MaxResults;
     /**
@@ -457,11 +457,11 @@ declare namespace ECR {
      */
     repositoryNames?: RepositoryNameList;
     /**
-     * The nextToken value returned from a previous paginated DescribeRepositories request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value returned from a previous paginated DescribeRepositories request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return. This option cannot be used when you specify repositories with repositoryNames.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of repository results returned by DescribeRepositories in paginated output. When this parameter is used, DescribeRepositories only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeRepositories request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeRepositories returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of repository results returned by DescribeRepositories in paginated output. When this parameter is used, DescribeRepositories only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeRepositories request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeRepositories returns up to 100 results and a nextToken value, if applicable. This option cannot be used when you specify repositories with repositoryNames.
      */
     maxResults?: MaxResults;
   }
@@ -522,7 +522,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * The name of the repository with the policy to retrieve.
+     * The name of the repository.
      */
     repositoryName: RepositoryName;
     /**
@@ -530,11 +530,11 @@ declare namespace ECR {
      */
     imageIds?: ImageIdentifierList;
     /**
-     * The nextToken value returned from a previous paginated&#8232; GetLifecyclePolicyPreviewRequest request where maxResults was used and the&#8232; results exceeded the value of that parameter. Pagination continues from the end of the&#8232; previous results that returned the nextToken value. This value is&#8232; null when there are no more results to return.
+     * The nextToken value returned from a previous paginated&#x2028; GetLifecyclePolicyPreviewRequest request where maxResults was used and the&#x2028; results exceeded the value of that parameter. Pagination continues from the end of the&#x2028; previous results that returned the nextToken value. This value is&#x2028; null when there are no more results to return. This option cannot be used when you specify images with imageIds.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of repository results returned by GetLifecyclePolicyPreviewRequest in&#8232; paginated output. When this parameter is used, GetLifecyclePolicyPreviewRequest only returns&#8232; maxResults results in a single page along with a nextToken&#8232; response element. The remaining results of the initial request can be seen by sending&#8232; another GetLifecyclePolicyPreviewRequest request with the returned nextToken&#8232; value. This value can be between 1 and 100. If this&#8232; parameter is not used, then GetLifecyclePolicyPreviewRequest returns up to&#8232; 100 results and a nextToken value, if&#8232; applicable.
+     * The maximum number of repository results returned by GetLifecyclePolicyPreviewRequest in&#x2028; paginated output. When this parameter is used, GetLifecyclePolicyPreviewRequest only returns&#x2028; maxResults results in a single page along with a nextToken&#x2028; response element. The remaining results of the initial request can be seen by sending&#x2028; another GetLifecyclePolicyPreviewRequest request with the returned nextToken&#x2028; value. This value can be between 1 and 100. If this&#x2028; parameter is not used, then GetLifecyclePolicyPreviewRequest returns up to&#x2028; 100 results and a nextToken value, if&#x2028; applicable. This option cannot be used when you specify images with imageIds.
      */
     maxResults?: MaxResults;
     /**
@@ -552,7 +552,7 @@ declare namespace ECR {
      */
     repositoryName?: RepositoryName;
     /**
-     * The JSON repository policy text.
+     * The JSON lifecycle policy text.
      */
     lifecyclePolicyText?: LifecyclePolicyText;
     /**
@@ -578,7 +578,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * The name of the repository with the policy to retrieve.
+     * The name of the repository.
      */
     repositoryName: RepositoryName;
   }
@@ -592,7 +592,7 @@ declare namespace ECR {
      */
     repositoryName?: RepositoryName;
     /**
-     * The JSON repository policy text.
+     * The JSON lifecycle policy text.
      */
     lifecyclePolicyText?: LifecyclePolicyText;
     /**
@@ -881,7 +881,7 @@ declare namespace ECR {
   }
   export interface PutLifecyclePolicyRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository. If you do&#8232; not specify a registry, the default registry is assumed.
+     * The AWS account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.203.0-->
+<!--LATEST=2.204.0-->
 <!--ENTRYINSERT-->
+
+## 2.204.0
+* feature: ApplicationAutoScaling: Application Auto Scaling now supports automatic scaling of SageMaker Production Variants on an Endpoint.
 
 ## 2.203.0
 * feature: Route53: Added support for creating LBR rules using ap-northeast-3 region.
