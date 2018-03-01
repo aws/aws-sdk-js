@@ -84,11 +84,11 @@ declare class ServiceCatalog extends Service {
    */
   createProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
   /**
-   * Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, it's status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
+   * Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
    */
   createProvisionedProductPlan(params: ServiceCatalog.Types.CreateProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.CreateProvisionedProductPlanOutput, AWSError>;
   /**
-   * Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, it's status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
+   * Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
    */
   createProvisionedProductPlan(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.CreateProvisionedProductPlanOutput, AWSError>;
   /**
@@ -155,6 +155,14 @@ declare class ServiceCatalog extends Service {
    * Deletes the specified provisioning artifact (also known as a version) for the specified product. You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.
    */
   deleteProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DeleteProvisioningArtifactOutput, AWSError>;
+  /**
+   * Deletes the specified TagOption. You cannot delete a TagOption if it is associated with a product or portfolio.
+   */
+  deleteTagOption(params: ServiceCatalog.Types.DeleteTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteTagOptionOutput) => void): Request<ServiceCatalog.Types.DeleteTagOptionOutput, AWSError>;
+  /**
+   * Deletes the specified TagOption. You cannot delete a TagOption if it is associated with a product or portfolio.
+   */
+  deleteTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteTagOptionOutput) => void): Request<ServiceCatalog.Types.DeleteTagOptionOutput, AWSError>;
   /**
    * Gets information about the specified constraint.
    */
@@ -340,11 +348,11 @@ declare class ServiceCatalog extends Service {
    */
   listPrincipalsForPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.ListPrincipalsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListPrincipalsForPortfolioOutput, AWSError>;
   /**
-   * Lists the plans for the specified provisioned product or all plans the user has access to.
+   * Lists the plans for the specified provisioned product or all plans to which the user has access.
    */
   listProvisionedProductPlans(params: ServiceCatalog.Types.ListProvisionedProductPlansInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisionedProductPlansOutput) => void): Request<ServiceCatalog.Types.ListProvisionedProductPlansOutput, AWSError>;
   /**
-   * Lists the plans for the specified provisioned product or all plans the user has access to.
+   * Lists the plans for the specified provisioned product or all plans to which the user has access.
    */
   listProvisionedProductPlans(callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisionedProductPlansOutput) => void): Request<ServiceCatalog.Types.ListProvisionedProductPlansOutput, AWSError>;
   /**
@@ -1014,6 +1022,14 @@ declare namespace ServiceCatalog {
   }
   export interface DeleteProvisioningArtifactOutput {
   }
+  export interface DeleteTagOptionInput {
+    /**
+     * The TagOption identifier.
+     */
+    Id: TagOptionId;
+  }
+  export interface DeleteTagOptionOutput {
+  }
   export interface DescribeConstraintInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -1198,7 +1214,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductPlanDetails?: ProvisionedProductPlanDetails;
     /**
-     * Information about the resources changes that will occur when the plan is executed.
+     * Information about the resource changes that will occur when the plan is executed.
      */
     ResourceChanges?: ResourceChanges;
     /**
@@ -2439,11 +2455,11 @@ declare namespace ServiceCatalog {
   }
   export interface ResourceChangeDetail {
     /**
-     * Information about the resource attribute that will be modified.
+     * Information about the resource attribute to be modified.
      */
     Target?: ResourceTargetDefinition;
     /**
-     * For static evaluations, the value the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.
+     * For static evaluations, the value of the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.
      */
     Evaluation?: EvaluationType;
     /**
@@ -2484,7 +2500,7 @@ declare namespace ServiceCatalog {
   export type ResourceId = string;
   export interface ResourceTargetDefinition {
     /**
-     * The attribute that will change.
+     * The attribute to be changed.
      */
     Attribute?: ResourceAttribute;
     /**
@@ -2492,7 +2508,7 @@ declare namespace ServiceCatalog {
      */
     Name?: PropertyName;
     /**
-     * If the attribute is Properties, indicates whether a change to this property causes the resource to be recreated.
+     * If the attribute is Properties, indicates whether a change to this property causes the resource to be re-created.
      */
     RequiresRecreation?: RequiresRecreation;
   }

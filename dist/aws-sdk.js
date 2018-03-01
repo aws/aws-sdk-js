@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.204.0
+// AWS SDK for JavaScript v2.205.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
@@ -37065,6 +37065,7 @@ module.exports={
           "Affinity": {
             "locationName": "affinity"
           },
+          "GroupName": {},
           "HostId": {
             "locationName": "hostId"
           },
@@ -57574,6 +57575,7 @@ module.exports={
     "jsonVersion": "1.1",
     "protocol": "json",
     "serviceFullName": "Amazon CloudWatch Events",
+    "serviceId": "CloudWatch Events",
     "signatureVersion": "v4",
     "targetPrefix": "AWSEvents",
     "uid": "events-2015-10-07"
@@ -57989,6 +57991,33 @@ module.exports={
               "TaskDefinitionArn": {},
               "TaskCount": {
                 "type": "integer"
+              }
+            }
+          },
+          "BatchParameters": {
+            "type": "structure",
+            "required": [
+              "JobDefinition",
+              "JobName"
+            ],
+            "members": {
+              "JobDefinition": {},
+              "JobName": {},
+              "ArrayProperties": {
+                "type": "structure",
+                "members": {
+                  "Size": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "RetryStrategy": {
+                "type": "structure",
+                "members": {
+                  "Attempts": {
+                    "type": "integer"
+                  }
+                }
               }
             }
           }
@@ -105609,6 +105638,21 @@ module.exports={
         "members": {}
       }
     },
+    "DeleteTagOption": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Id"
+        ],
+        "members": {
+          "Id": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
     "DescribeConstraint": {
       "input": {
         "type": "structure",
@@ -105672,7 +105716,7 @@ module.exports={
             "shape": "S1a"
           },
           "TagOptions": {
-            "shape": "S34"
+            "shape": "S36"
           }
         }
       }
@@ -105695,7 +105739,7 @@ module.exports={
             "shape": "S1t"
           },
           "ProvisioningArtifacts": {
-            "shape": "S37"
+            "shape": "S39"
           }
         }
       }
@@ -105738,7 +105782,7 @@ module.exports={
             "shape": "S1a"
           },
           "TagOptions": {
-            "shape": "S34"
+            "shape": "S36"
           }
         }
       }
@@ -105761,7 +105805,7 @@ module.exports={
             "shape": "S1t"
           },
           "ProvisioningArtifacts": {
-            "shape": "S37"
+            "shape": "S39"
           }
         }
       }
@@ -105781,7 +105825,7 @@ module.exports={
         "type": "structure",
         "members": {
           "ProvisionedProductDetail": {
-            "shape": "S3i"
+            "shape": "S3k"
           },
           "CloudWatchDashboards": {
             "type": "list",
@@ -105953,7 +105997,7 @@ module.exports={
             }
           },
           "ConstraintSummaries": {
-            "shape": "S4u"
+            "shape": "S4w"
           },
           "UsageInstructions": {
             "type": "list",
@@ -106000,7 +106044,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S55"
+            "shape": "S57"
           },
           "RecordOutputs": {
             "type": "list",
@@ -106108,7 +106152,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S55"
+            "shape": "S57"
           }
         }
       }
@@ -106128,7 +106172,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PortfolioDetails": {
-            "shape": "S5w"
+            "shape": "S5y"
           },
           "NextPageToken": {}
         }
@@ -106188,7 +106232,7 @@ module.exports={
               "members": {
                 "Id": {},
                 "ConstraintSummaries": {
-                  "shape": "S4u"
+                  "shape": "S4w"
                 },
                 "Tags": {
                   "shape": "S1a"
@@ -106238,7 +106282,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PortfolioDetails": {
-            "shape": "S5w"
+            "shape": "S5y"
           },
           "NextPageToken": {}
         }
@@ -106263,7 +106307,7 @@ module.exports={
         "type": "structure",
         "members": {
           "PortfolioDetails": {
-            "shape": "S5w"
+            "shape": "S5y"
           },
           "NextPageToken": {}
         }
@@ -106312,7 +106356,7 @@ module.exports={
           },
           "PageToken": {},
           "AccessLevelFilter": {
-            "shape": "S6h"
+            "shape": "S6j"
           }
         }
       },
@@ -106367,7 +106411,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "AccessLevelFilter": {
-            "shape": "S6h"
+            "shape": "S6j"
           },
           "SearchFilter": {
             "type": "structure",
@@ -106388,7 +106432,7 @@ module.exports={
           "RecordDetails": {
             "type": "list",
             "member": {
-              "shape": "S55"
+              "shape": "S57"
             }
           },
           "NextPageToken": {}
@@ -106456,7 +106500,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TagOptionDetails": {
-            "shape": "S34"
+            "shape": "S36"
           },
           "PageToken": {}
         }
@@ -106502,7 +106546,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S55"
+            "shape": "S57"
           }
         }
       }
@@ -106529,7 +106573,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "AccessLevelFilter": {
-            "shape": "S6h"
+            "shape": "S6j"
           },
           "PageSize": {
             "type": "integer"
@@ -106543,7 +106587,7 @@ module.exports={
           "ProvisionedProducts": {
             "type": "list",
             "member": {
-              "shape": "S3i"
+              "shape": "S3k"
             }
           },
           "NextPageToken": {}
@@ -106556,7 +106600,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "Filters": {
-            "shape": "S7j"
+            "shape": "S7l"
           },
           "PageSize": {
             "type": "integer"
@@ -106602,7 +106646,7 @@ module.exports={
           "AcceptLanguage": {},
           "PortfolioId": {},
           "Filters": {
-            "shape": "S7j"
+            "shape": "S7l"
           },
           "SortBy": {},
           "SortOrder": {},
@@ -106632,7 +106676,7 @@ module.exports={
         "members": {
           "AcceptLanguage": {},
           "AccessLevelFilter": {
-            "shape": "S6h"
+            "shape": "S6j"
           },
           "Filters": {
             "type": "map",
@@ -106709,7 +106753,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S55"
+            "shape": "S57"
           }
         }
       }
@@ -106753,7 +106797,7 @@ module.exports={
             "shape": "S12"
           },
           "RemoveTags": {
-            "shape": "S8k"
+            "shape": "S8m"
           }
         }
       },
@@ -106789,7 +106833,7 @@ module.exports={
             "shape": "S12"
           },
           "RemoveTags": {
-            "shape": "S8k"
+            "shape": "S8m"
           }
         }
       },
@@ -106830,7 +106874,7 @@ module.exports={
         "type": "structure",
         "members": {
           "RecordDetail": {
-            "shape": "S55"
+            "shape": "S57"
           }
         }
       }
@@ -107029,13 +107073,13 @@ module.exports={
         "Id": {}
       }
     },
-    "S34": {
+    "S36": {
       "type": "list",
       "member": {
         "shape": "S2h"
       }
     },
-    "S37": {
+    "S39": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -107049,7 +107093,7 @@ module.exports={
         }
       }
     },
-    "S3i": {
+    "S3k": {
       "type": "structure",
       "members": {
         "Name": {},
@@ -107065,7 +107109,7 @@ module.exports={
         "LastRecordId": {}
       }
     },
-    "S4u": {
+    "S4w": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -107075,7 +107119,7 @@ module.exports={
         }
       }
     },
-    "S55": {
+    "S57": {
       "type": "structure",
       "members": {
         "RecordId": {},
@@ -107115,20 +107159,20 @@ module.exports={
         }
       }
     },
-    "S5w": {
+    "S5y": {
       "type": "list",
       "member": {
         "shape": "S17"
       }
     },
-    "S6h": {
+    "S6j": {
       "type": "structure",
       "members": {
         "Key": {},
         "Value": {}
       }
     },
-    "S7j": {
+    "S7l": {
       "type": "map",
       "key": {},
       "value": {
@@ -107136,7 +107180,7 @@ module.exports={
         "member": {}
       }
     },
-    "S8k": {
+    "S8m": {
       "type": "list",
       "member": {}
     }
@@ -111218,7 +111262,8 @@ module.exports={
                 "LastStatus": {},
                 "SyncCreatedTime": {
                   "type": "timestamp"
-                }
+                },
+                "LastSyncStatusMessage": {}
               }
             }
           },
@@ -113047,14 +113092,18 @@ module.exports={
           "Role": {},
           "LocationARN": {},
           "DefaultStorageClass": {},
+          "ObjectACL": {},
           "ClientList": {
-            "shape": "S1d"
+            "shape": "S1e"
           },
           "Squash": {},
           "ReadOnly": {
             "type": "boolean"
           },
           "GuessMIMETypeEnabled": {
+            "type": "boolean"
+          },
+          "RequesterPays": {
             "type": "boolean"
           }
         }
@@ -113188,7 +113237,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S1z"
+            "shape": "S20"
           }
         }
       }
@@ -113405,7 +113454,7 @@ module.exports={
         ],
         "members": {
           "VolumeARNs": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       },
@@ -113429,7 +113478,7 @@ module.exports={
                 },
                 "SourceSnapshotId": {},
                 "VolumeiSCSIAttributes": {
-                  "shape": "S2y"
+                  "shape": "S2z"
                 },
                 "CreatedDate": {
                   "type": "timestamp"
@@ -113569,14 +113618,18 @@ module.exports={
                 "Role": {},
                 "LocationARN": {},
                 "DefaultStorageClass": {},
+                "ObjectACL": {},
                 "ClientList": {
-                  "shape": "S1d"
+                  "shape": "S1e"
                 },
                 "Squash": {},
                 "ReadOnly": {
                   "type": "boolean"
                 },
                 "GuessMIMETypeEnabled": {
+                  "type": "boolean"
+                },
+                "RequesterPays": {
                   "type": "boolean"
                 }
               }
@@ -113618,7 +113671,7 @@ module.exports={
         ],
         "members": {
           "VolumeARNs": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       },
@@ -113646,7 +113699,7 @@ module.exports={
                   "type": "boolean"
                 },
                 "VolumeiSCSIAttributes": {
-                  "shape": "S2y"
+                  "shape": "S2z"
                 },
                 "CreatedDate": {
                   "type": "timestamp"
@@ -113665,7 +113718,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S1z"
+            "shape": "S20"
           },
           "Marker": {},
           "Limit": {
@@ -113751,7 +113804,7 @@ module.exports={
         "members": {
           "GatewayARN": {},
           "TapeARNs": {
-            "shape": "S1z"
+            "shape": "S20"
           },
           "Marker": {},
           "Limit": {
@@ -114035,7 +114088,7 @@ module.exports={
         "type": "structure",
         "members": {
           "TapeARNs": {
-            "shape": "S1z"
+            "shape": "S20"
           },
           "Marker": {},
           "Limit": {
@@ -114449,14 +114502,18 @@ module.exports={
             "shape": "S15"
           },
           "DefaultStorageClass": {},
+          "ObjectACL": {},
           "ClientList": {
-            "shape": "S1d"
+            "shape": "S1e"
           },
           "Squash": {},
           "ReadOnly": {
             "type": "boolean"
           },
           "GuessMIMETypeEnabled": {
+            "type": "boolean"
+          },
+          "RequesterPays": {
             "type": "boolean"
           }
         }
@@ -114546,19 +114603,19 @@ module.exports={
         }
       }
     },
-    "S1d": {
+    "S1e": {
       "type": "list",
       "member": {}
     },
-    "S1z": {
+    "S20": {
       "type": "list",
       "member": {}
     },
-    "S2q": {
+    "S2r": {
       "type": "list",
       "member": {}
     },
-    "S2y": {
+    "S2z": {
       "type": "structure",
       "members": {
         "TargetARN": {},
@@ -122210,7 +122267,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.204.0',
+  VERSION: '2.205.0',
 
   /**
    * @api private
@@ -146125,7 +146182,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.204.0
+// AWS SDK for JavaScript v2.205.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

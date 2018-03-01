@@ -163,7 +163,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidStateException"}
       ],
-      "documentation":"<p>Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, it's status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>"
+      "documentation":"<p>Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>"
     },
     "CreateProvisioningArtifact":{
       "name":"CreateProvisioningArtifact",
@@ -282,6 +282,21 @@
         {"shape":"InvalidParametersException"}
       ],
       "documentation":"<p>Deletes the specified provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.</p>"
+    },
+    "DeleteTagOption":{
+      "name":"DeleteTagOption",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTagOptionInput"},
+      "output":{"shape":"DeleteTagOptionOutput"},
+      "errors":[
+        {"shape":"TagOptionNotMigratedException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Deletes the specified TagOption.</p> <p>You cannot delete a TagOption if it is associated with a product or portfolio.</p>"
     },
     "DescribeConstraint":{
       "name":"DescribeConstraint",
@@ -609,7 +624,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParametersException"}
       ],
-      "documentation":"<p>Lists the plans for the specified provisioned product or all plans the user has access to.</p>"
+      "documentation":"<p>Lists the plans for the specified provisioned product or all plans to which the user has access.</p>"
     },
     "ListProvisioningArtifacts":{
       "name":"ListProvisioningArtifacts",
@@ -1637,6 +1652,21 @@
       "members":{
       }
     },
+    "DeleteTagOptionInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "Id":{
+          "shape":"TagOptionId",
+          "documentation":"<p>The TagOption identifier.</p>"
+        }
+      }
+    },
+    "DeleteTagOptionOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DescribeConstraintInput":{
       "type":"structure",
       "required":["Id"],
@@ -1877,7 +1907,7 @@
         },
         "ResourceChanges":{
           "shape":"ResourceChanges",
-          "documentation":"<p>Information about the resources changes that will occur when the plan is executed.</p>"
+          "documentation":"<p>Information about the resource changes that will occur when the plan is executed.</p>"
         },
         "NextPageToken":{
           "shape":"PageToken",
@@ -3680,11 +3710,11 @@
       "members":{
         "Target":{
           "shape":"ResourceTargetDefinition",
-          "documentation":"<p>Information about the resource attribute that will be modified.</p>"
+          "documentation":"<p>Information about the resource attribute to be modified.</p>"
         },
         "Evaluation":{
           "shape":"EvaluationType",
-          "documentation":"<p>For static evaluations, the value the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.</p>"
+          "documentation":"<p>For static evaluations, the value of the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.</p>"
         },
         "CausingEntity":{
           "shape":"CausingEntity",
@@ -3756,7 +3786,7 @@
       "members":{
         "Attribute":{
           "shape":"ResourceAttribute",
-          "documentation":"<p>The attribute that will change.</p>"
+          "documentation":"<p>The attribute to be changed.</p>"
         },
         "Name":{
           "shape":"PropertyName",
@@ -3764,7 +3794,7 @@
         },
         "RequiresRecreation":{
           "shape":"RequiresRecreation",
-          "documentation":"<p>If the attribute is <code>Properties</code>, indicates whether a change to this property causes the resource to be recreated.</p>"
+          "documentation":"<p>If the attribute is <code>Properties</code>, indicates whether a change to this property causes the resource to be re-created.</p>"
         }
       },
       "documentation":"<p>Information about a change to a resource attribute.</p>"

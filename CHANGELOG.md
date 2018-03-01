@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.204.0-->
+<!--LATEST=2.205.0-->
 <!--ENTRYINSERT-->
+
+## 2.205.0
+* feature: CloudWatchEvents: Added BatchParameters to the PutTargets API
+* feature: EC2: Added support for modifying Placement Group association of instances via ModifyInstancePlacement API.
+* feature: SSM: This Inventory release supports the status message details reported by the last sync for the resource data sync API.
+* feature: ServiceCatalog: This release of ServiceCatalog adds the DeleteTagOption API.
+* feature: StorageGateway: AWS Storage Gateway (File) support for two new file share attributes are added.           1. Users can specify the S3 Canned ACL to use for new objects created in the file share.         2. Users can create file shares for requester-pays buckets.
 
 ## 2.204.0
 * feature: ApplicationAutoScaling: Application Auto Scaling now supports automatic scaling of SageMaker Production Variants on an Endpoint.

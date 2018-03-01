@@ -1328,7 +1328,7 @@ declare namespace SSM {
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed before the system stops sending the command to additional targets. You can specify a number of errors, such as 10, or a percentage or errors, such as 10%. The default value is 50. For more information about how to use MaxErrors, see Executing a Command Using Systems Manager Run Command.
+     * The maximum number of errors allowed before the system stops sending the command to additional targets. You can specify a number of errors, such as 10, or a percentage or errors, such as 10%. The default value is 0. For more information about how to use MaxErrors, see Executing a Command Using Systems Manager Run Command.
      */
     MaxErrors?: MaxErrors;
     /**
@@ -3732,7 +3732,7 @@ declare namespace SSM {
      */
     AgentVersion?: Version;
     /**
-     * Indicates whether latest version of the SSM Agent is running on your instance. 
+     * Indicates whether latest version of the SSM Agent is running on your instance. Some older versions of Windows Server use the EC2Config service to process SSM requests. For this reason, this field does not indicate whether or not the latest version is installed on Windows managed instances.
      */
     IsLatestVersion?: Boolean;
     /**
@@ -4034,6 +4034,7 @@ declare namespace SSM {
   export type InvocationTraceOutput = string;
   export type IsSubTypeSchema = boolean;
   export type KeyList = TagKey[];
+  export type LastResourceDataSyncMessage = string;
   export type LastResourceDataSyncStatus = "Successful"|"Failed"|"InProgress"|string;
   export type LastResourceDataSyncTime = Date;
   export type LastSuccessfulResourceDataSyncTime = Date;
@@ -5485,6 +5486,10 @@ declare namespace SSM {
      * The date and time the configuration was created (UTC).
      */
     SyncCreatedTime?: ResourceDataSyncCreatedTime;
+    /**
+     * The status message details reported by the last sync.
+     */
+    LastSyncStatusMessage?: LastResourceDataSyncMessage;
   }
   export type ResourceDataSyncItemList = ResourceDataSyncItem[];
   export type ResourceDataSyncName = string;
@@ -5615,7 +5620,7 @@ declare namespace SSM {
      */
     MaxConcurrency?: MaxConcurrency;
     /**
-     * The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see Using Error Controls.
+     * The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 0. For more information about how to use MaxErrors, see Using Error Controls.
      */
     MaxErrors?: MaxErrors;
     /**
