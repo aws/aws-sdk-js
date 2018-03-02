@@ -891,6 +891,32 @@
       "type" : "structure",
       "members" : { }
     },
+    "AccessKeyDetails" : {
+      "type" : "structure",
+      "members" : {
+        "AccessKeyId" : {
+          "shape" : "__string",
+          "locationName" : "accessKeyId",
+          "documentation" : "Access key ID of the user."
+        },
+        "PrincipalId" : {
+          "shape" : "__string",
+          "locationName" : "principalId",
+          "documentation" : "The principal ID of the user."
+        },
+        "UserName" : {
+          "shape" : "__string",
+          "locationName" : "userName",
+          "documentation" : "The name of the user."
+        },
+        "UserType" : {
+          "shape" : "__string",
+          "locationName" : "userType",
+          "documentation" : "The type of the user."
+        }
+      },
+      "documentation" : "The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding."
+    },
     "AccountDetail" : {
       "type" : "structure",
       "members" : {
@@ -947,6 +973,11 @@
           "shape" : "NetworkConnectionAction",
           "locationName" : "networkConnectionAction",
           "documentation" : "Information about the NETWORK_CONNECTION action described in this finding."
+        },
+        "PortProbeAction" : {
+          "shape" : "PortProbeAction",
+          "locationName" : "portProbeAction",
+          "documentation" : "Information about the PORT_PROBE action described in this finding."
         }
       },
       "documentation" : "Information about the activity described in a finding."
@@ -2303,6 +2334,12 @@
         }
       }
     },
+    "ListOfPortProbeDetail" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "PortProbeDetail"
+      }
+    },
     "ListThreatIntelSetsRequest" : {
       "type" : "structure",
       "members" : {
@@ -2600,6 +2637,38 @@
       },
       "documentation" : "ISP Organization information of the remote IP address."
     },
+    "PortProbeAction" : {
+      "type" : "structure",
+      "members" : {
+        "Blocked" : {
+          "shape" : "__boolean",
+          "locationName" : "blocked",
+          "documentation" : "Port probe blocked information."
+        },
+        "PortProbeDetails" : {
+          "shape" : "ListOfPortProbeDetail",
+          "locationName" : "portProbeDetails",
+          "documentation" : "A list of port probe details objects."
+        }
+      },
+      "documentation" : "Information about the PORT_PROBE action described in this finding."
+    },
+    "PortProbeDetail" : {
+      "type" : "structure",
+      "members" : {
+        "LocalPortDetails" : {
+          "shape" : "LocalPortDetails",
+          "locationName" : "localPortDetails",
+          "documentation" : "Local port information of the connection."
+        },
+        "RemoteIpDetails" : {
+          "shape" : "RemoteIpDetails",
+          "locationName" : "remoteIpDetails",
+          "documentation" : "Remote IP information of the connection."
+        }
+      },
+      "documentation" : "Details about the port probe finding."
+    },
     "PrivateDnsName" : {
       "type" : "string",
       "documentation" : "Private DNS name of the EC2 instance."
@@ -2704,6 +2773,10 @@
     "Resource" : {
       "type" : "structure",
       "members" : {
+        "AccessKeyDetails" : {
+          "shape" : "AccessKeyDetails",
+          "locationName" : "accessKeyDetails"
+        },
         "InstanceDetails" : {
           "shape" : "InstanceDetails",
           "locationName" : "instanceDetails"

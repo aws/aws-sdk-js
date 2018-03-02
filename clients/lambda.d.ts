@@ -69,11 +69,11 @@ declare class Lambda extends Service {
    */
   deleteFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes concurrent execution limits from this function.
+   * Removes concurrent execution limits from this function. For more information, see concurrent-executions.
    */
   deleteFunctionConcurrency(params: Lambda.Types.DeleteFunctionConcurrencyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes concurrent execution limits from this function.
+   * Removes concurrent execution limits from this function. For more information, see concurrent-executions.
    */
   deleteFunctionConcurrency(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class Lambda extends Service {
    */
   getPolicy(callback?: (err: AWSError, data: Lambda.Types.GetPolicyResponse) => void): Request<Lambda.Types.GetPolicyResponse, AWSError>;
   /**
-   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.
+   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.  The TooManyRequestsException noted below will return the following: ConcurrentInvocationLimitExceeded will be returned if you have no functions with reserved concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account's unreserved concurrency limit. ReservedFunctionConcurrentInvocationLimitExceeded will be returned when a function with reserved concurrency exceeds its configured concurrency limit.  
    */
   invoke(params: Lambda.Types.InvocationRequest, callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
-   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.
+   * Invokes a specific Lambda function. For an example, see Create the Lambda Function and Test It Manually.  If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the Qualifier parameter in the request. If you don't provide the Qualifier parameter, the $LATEST version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases.  This operation requires permission for the lambda:InvokeFunction action.  The TooManyRequestsException noted below will return the following: ConcurrentInvocationLimitExceeded will be returned if you have no functions with reserved concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account's unreserved concurrency limit. ReservedFunctionConcurrentInvocationLimitExceeded will be returned when a function with reserved concurrency exceeds its configured concurrency limit.  
    */
   invoke(callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
@@ -189,11 +189,11 @@ declare class Lambda extends Service {
    */
   publishVersion(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.
+   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions. For more information, see concurrent-executions.
    */
   putFunctionConcurrency(params: Lambda.Types.PutFunctionConcurrencyRequest, callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
   /**
-   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.
+   * Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions. For more information, see concurrent-executions.
    */
   putFunctionConcurrency(callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
   /**
@@ -272,7 +272,7 @@ declare namespace Lambda {
      */
     ConcurrentExecutions?: Integer;
     /**
-     * The number of concurrent executions available to functions that do not have concurrency limits set.
+     * The number of concurrent executions available to functions that do not have concurrency limits set. For more information, see concurrent-executions.
      */
     UnreservedConcurrentExecutions?: UnreservedConcurrentExecutions;
   }
@@ -320,6 +320,10 @@ declare namespace Lambda {
      * You can use this optional query parameter to describe a qualified ARN using a function version or an alias name. The permission will then apply to the specific qualified ARN. For example, if you specify function version 2 as the qualifier, then permission applies only when request is made using qualified function ARN:  arn:aws:lambda:aws-region:acct-id:function:function-name:2  If you specify an alias name, for example PROD, then the permission is valid only for requests made using the alias ARN:  arn:aws:lambda:aws-region:acct-id:function:function-name:PROD  If the qualifier is not specified, the permission is valid only when requests is made using unqualified function ARN.  arn:aws:lambda:aws-region:acct-id:function:function-name 
      */
     Qualifier?: Qualifier;
+    /**
+     * An optional value you can use to ensure you are updating the latest update of the function version or alias. If the RevisionID you pass doesn't match the latest RevisionId of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias RevisionID using either or .
+     */
+    RevisionId?: String;
   }
   export interface AddPermissionResponse {
     /**
@@ -351,11 +355,15 @@ declare namespace Lambda {
      * Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see lambda-traffic-shifting-using-aliases.
      */
     RoutingConfig?: AliasRoutingConfiguration;
+    /**
+     * Represents the latest updated revision of the function or alias.
+     */
+    RevisionId?: String;
   }
   export type AliasList = AliasConfiguration[];
   export interface AliasRoutingConfiguration {
     /**
-     * Set this property value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke function-version.
+     * Set this value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke function-version. For more information, see lambda-traffic-shifting-using-aliases.
      */
     AdditionalVersionWeights?: AdditionalVersionWeights;
   }
@@ -366,7 +374,7 @@ declare namespace Lambda {
   export type Boolean = boolean;
   export interface Concurrency {
     /**
-     * The number of concurrent executions reserved for this function.
+     * The number of concurrent executions reserved for this function. For more information, see concurrent-executions.
      */
     ReservedConcurrentExecutions?: ReservedConcurrentExecutions;
   }
@@ -424,7 +432,7 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The runtime environment for the Lambda function you are uploading. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
+     * The runtime environment for the Lambda function you are uploading. To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".  Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime. 
      */
     Runtime: Runtime;
     /**
@@ -502,7 +510,7 @@ declare namespace Lambda {
   }
   export interface DeleteFunctionConcurrencyRequest {
     /**
-     * The name of the function you are removing concurrent execution limits from.
+     * The name of the function you are removing concurrent execution limits from. For more information, see concurrent-executions.
      */
     FunctionName: FunctionName;
   }
@@ -683,6 +691,10 @@ declare namespace Lambda {
      * Returns the ARN (Amazon Resource Name) of the master function.
      */
     MasterArn?: FunctionArn;
+    /**
+     * Represents the latest updated revision of the function or alias.
+     */
+    RevisionId?: String;
   }
   export type FunctionList = FunctionConfiguration[];
   export type FunctionName = string;
@@ -737,7 +749,7 @@ declare namespace Lambda {
      */
     Tags?: Tags;
     /**
-     * The concurrent execution limit set for this function.
+     * The concurrent execution limit set for this function. For more information, see concurrent-executions.
      */
     Concurrency?: Concurrency;
   }
@@ -756,6 +768,10 @@ declare namespace Lambda {
      * The resource policy associated with the specified function. The response returns the same as a string using a backslash ("\") as an escape character in the JSON.
      */
     Policy?: String;
+    /**
+     * Represents the latest updated revision of the function or alias.
+     */
+    RevisionId?: String;
   }
   export type Handler = string;
   export type HttpStatus = number;
@@ -804,7 +820,7 @@ declare namespace Lambda {
      */
     Payload?: _Blob;
     /**
-     * The function version that has been executed. This value is returned only if the invocation type is RequestResponse.
+     * The function version that has been executed. This value is returned only if the invocation type is RequestResponse. For more information, see lambda-traffic-shifting-using-aliases.
      */
     ExecutedVersion?: Version;
   }
@@ -968,14 +984,18 @@ declare namespace Lambda {
      * The description for the version you are publishing. If not provided, AWS Lambda copies the description from the $LATEST version.
      */
     Description?: Description;
+    /**
+     * An optional value you can use to ensure you are updating the latest update of the function version or alias. If the RevisionID you pass doesn't match the latest RevisionId of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias RevisionID using either or .
+     */
+    RevisionId?: String;
   }
   export interface PutFunctionConcurrencyRequest {
     /**
-     * The name of the function you are setting concurrent execution limits on.
+     * The name of the function you are setting concurrent execution limits on. For more information, see concurrent-executions.
      */
     FunctionName: FunctionName;
     /**
-     * The concurrent execution limit reserved for this function.
+     * The concurrent execution limit reserved for this function. For more information, see concurrent-executions.
      */
     ReservedConcurrentExecutions: ReservedConcurrentExecutions;
   }
@@ -993,11 +1013,15 @@ declare namespace Lambda {
      * You can specify this optional parameter to remove permission associated with a specific function version or function alias. If you don't specify this parameter, the API removes permission associated with the unqualified function ARN.
      */
     Qualifier?: Qualifier;
+    /**
+     * An optional value you can use to ensure you are updating the latest update of the function version or alias. If the RevisionID you pass doesn't match the latest RevisionId of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias RevisionID using either or .
+     */
+    RevisionId?: String;
   }
   export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"java8"|"python2.7"|"python3.6"|"dotnetcore1.0"|"nodejs4.3-edge"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"java8"|"python2.7"|"python3.6"|"dotnetcore1.0"|"dotnetcore2.0"|"nodejs4.3-edge"|"go1.x"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
@@ -1071,6 +1095,10 @@ declare namespace Lambda {
      * Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see lambda-traffic-shifting-using-aliases.
      */
     RoutingConfig?: AliasRoutingConfiguration;
+    /**
+     * An optional value you can use to ensure you are updating the latest update of the function version or alias. If the RevisionID you pass doesn't match the latest RevisionId of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias RevisionID using either or .
+     */
+    RevisionId?: String;
   }
   export interface UpdateEventSourceMappingRequest {
     /**
@@ -1119,6 +1147,10 @@ declare namespace Lambda {
      * This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the CodeSha256 hash value of the provided code will also be computed and returned in the response.
      */
     DryRun?: Boolean;
+    /**
+     * An optional value you can use to ensure you are updating the latest update of the function version or alias. If the RevisionID you pass doesn't match the latest RevisionId of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias RevisionID using either or .
+     */
+    RevisionId?: String;
   }
   export interface UpdateFunctionConfigurationRequest {
     /**
@@ -1166,6 +1198,10 @@ declare namespace Lambda {
      * The parent object that contains your function's tracing settings.
      */
     TracingConfig?: TracingConfig;
+    /**
+     * An optional value you can use to ensure you are updating the latest update of the function version or alias. If the RevisionID you pass doesn't match the latest RevisionId of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias RevisionID using either or .
+     */
+    RevisionId?: String;
   }
   export type Version = string;
   export interface VpcConfig {

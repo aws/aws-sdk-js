@@ -1138,8 +1138,7 @@
       "members": {
         "AudioNormalizationSettings": {
           "shape": "AudioNormalizationSettings",
-          "locationName": "audioNormalizationSettings",
-          "documentation": "Settings for Audio Normalization"
+          "locationName": "audioNormalizationSettings"
         },
         "AudioSourceName": {
           "shape": "__string",
@@ -1263,7 +1262,7 @@
         "ExternalAudioFileInput": {
           "shape": "__string",
           "locationName": "externalAudioFileInput",
-          "documentation": "Specifies audio data from an external file source. Auto populated when Infer External Filename is checked"
+          "documentation": "Specifies audio data from an external file source."
         },
         "LanguageCode": {
           "shape": "LanguageCode",
@@ -1566,8 +1565,7 @@
         },
         "DestinationType": {
           "shape": "CaptionDestinationType",
-          "locationName": "destinationType",
-          "documentation": "Type of Caption output, including Burn-In, Embedded, SCC, SRT, TTML, WebVTT, DVB-Sub, Teletext."
+          "locationName": "destinationType"
         },
         "DvbSubDestinationSettings": {
           "shape": "DvbSubDestinationSettings",
@@ -1583,14 +1581,14 @@
         },
         "TtmlDestinationSettings": {
           "shape": "TtmlDestinationSettings",
-          "locationName": "ttmlDestinationSettings",
-          "documentation": "Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough)."
+          "locationName": "ttmlDestinationSettings"
         }
       },
       "documentation": "Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext."
     },
     "CaptionDestinationType": {
       "type": "string",
+      "documentation": "Type of Caption output, including Burn-In, Embedded, SCC, SRT, TTML, WebVTT, DVB-Sub, Teletext.",
       "enum": [
         "BURN_IN",
         "DVB_SUB",
@@ -2680,7 +2678,7 @@
         "SourceFile": {
           "shape": "__string",
           "locationName": "sourceFile",
-          "documentation": "External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'. Auto-populated when Infer External Filename is checked."
+          "documentation": "External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'."
         },
         "TimeDelta": {
           "shape": "__integer",
@@ -4401,7 +4399,7 @@
         "Type": {
           "shape": "Type",
           "locationName": "type",
-          "documentation": "A job template can be of two types: system or custom. System or built-in job templates can’t be modified or deleted by the user."
+          "documentation": "A job template can be of two types: system or custom. System or built-in job templates can't be modified or deleted by the user."
         }
       },
       "documentation": "A job template is a pre-made set of encoding instructions that you can use to quickly create a job."
@@ -5009,6 +5007,14 @@
         "EXCLUDE"
       ]
     },
+    "M2tsNielsenId3": {
+      "type": "string",
+      "documentation": "If INSERT, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.",
+      "enum": [
+        "INSERT",
+        "NONE"
+      ]
+    },
     "M2tsPcrControl": {
       "type": "string",
       "documentation": "When set to PCR_EVERY_PES_PACKET, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This is effective only when the PCR PID is the same as the video or audio elementary stream.",
@@ -5027,7 +5033,7 @@
     },
     "M2tsScte35Source": {
       "type": "string",
-      "documentation": "Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output. This is only available for certain containers.",
+      "documentation": "Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output.",
       "enum": [
         "PASSTHROUGH",
         "NONE"
@@ -5068,7 +5074,7 @@
         "AudioPids": {
           "shape": "ListOf__integer",
           "locationName": "audioPids",
-          "documentation": "Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values."
+          "documentation": "Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation."
         },
         "Bitrate": {
           "shape": "__integer",
@@ -5090,7 +5096,7 @@
         "DvbSubPids": {
           "shape": "ListOf__integer",
           "locationName": "dvbSubPids",
-          "documentation": "Packet Identifier (PID) for input source DVB Subtitle data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values."
+          "documentation": "Packet Identifier (PID) for input source DVB Subtitle data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation."
         },
         "DvbTdtSettings": {
           "shape": "DvbTdtSettings",
@@ -5099,7 +5105,7 @@
         "DvbTeletextPid": {
           "shape": "__integer",
           "locationName": "dvbTeletextPid",
-          "documentation": "Packet Identifier (PID) for input source DVB Teletext data to this output. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) for input source DVB Teletext data to this output."
         },
         "EbpAudioInterval": {
           "shape": "M2tsEbpAudioInterval",
@@ -5128,6 +5134,10 @@
           "locationName": "minEbpInterval",
           "documentation": "When set, enforces that Encoder Boundary Points do not come within the specified time interval of each other by looking ahead at input video. If another EBP is going to come in within the specified time interval, the current EBP is not emitted, and the segment is \"stretched\" to the next marker. The lookahead value does not add latency to the system. The Live Event must be configured elsewhere to create sufficient latency to make the lookahead accurate."
         },
+        "NielsenId3": {
+          "shape": "M2tsNielsenId3",
+          "locationName": "nielsenId3"
+        },
         "NullPacketBitrate": {
           "shape": "__double",
           "locationName": "nullPacketBitrate",
@@ -5145,7 +5155,7 @@
         "PcrPid": {
           "shape": "__integer",
           "locationName": "pcrPid",
-          "documentation": "Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID."
         },
         "PmtInterval": {
           "shape": "__integer",
@@ -5155,12 +5165,12 @@
         "PmtPid": {
           "shape": "__integer",
           "locationName": "pmtPid",
-          "documentation": "Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream."
         },
         "PrivateMetadataPid": {
           "shape": "__integer",
           "locationName": "privateMetadataPid",
-          "documentation": "Packet Identifier (PID) of the private metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) of the private metadata stream in the transport stream."
         },
         "ProgramNumber": {
           "shape": "__integer",
@@ -5174,7 +5184,7 @@
         "Scte35Pid": {
           "shape": "__integer",
           "locationName": "scte35Pid",
-          "documentation": "Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) of the SCTE-35 stream in the transport stream."
         },
         "Scte35Source": {
           "shape": "M2tsScte35Source",
@@ -5193,6 +5203,11 @@
           "locationName": "segmentationTime",
           "documentation": "The length in seconds of each segment. Required unless markers is set to _none_."
         },
+        "TimedMetadataPid": {
+          "shape": "__integer",
+          "locationName": "timedMetadataPid",
+          "documentation": "Packet Identifier (PID) of the timed metadata stream in the transport stream."
+        },
         "TransportStreamId": {
           "shape": "__integer",
           "locationName": "transportStreamId",
@@ -5201,10 +5216,18 @@
         "VideoPid": {
           "shape": "__integer",
           "locationName": "videoPid",
-          "documentation": "Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) of the elementary video stream in the transport stream."
         }
       },
       "documentation": "Settings for M2TS Container."
+    },
+    "M3u8NielsenId3": {
+      "type": "string",
+      "documentation": "If INSERT, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.",
+      "enum": [
+        "INSERT",
+        "NONE"
+      ]
     },
     "M3u8PcrControl": {
       "type": "string",
@@ -5216,7 +5239,7 @@
     },
     "M3u8Scte35Source": {
       "type": "string",
-      "documentation": "Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output. This is only available for certain containers.",
+      "documentation": "Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output.",
       "enum": [
         "PASSTHROUGH",
         "NONE"
@@ -5233,7 +5256,11 @@
         "AudioPids": {
           "shape": "ListOf__integer",
           "locationName": "audioPids",
-          "documentation": "Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values."
+          "documentation": "Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation."
+        },
+        "NielsenId3": {
+          "shape": "M3u8NielsenId3",
+          "locationName": "nielsenId3"
         },
         "PatInterval": {
           "shape": "__integer",
@@ -5247,7 +5274,7 @@
         "PcrPid": {
           "shape": "__integer",
           "locationName": "pcrPid",
-          "documentation": "Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID."
         },
         "PmtInterval": {
           "shape": "__integer",
@@ -5257,12 +5284,12 @@
         "PmtPid": {
           "shape": "__integer",
           "locationName": "pmtPid",
-          "documentation": "Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream."
         },
         "PrivateMetadataPid": {
           "shape": "__integer",
           "locationName": "privateMetadataPid",
-          "documentation": "Packet Identifier (PID) of the private metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) of the private metadata stream in the transport stream."
         },
         "ProgramNumber": {
           "shape": "__integer",
@@ -5272,7 +5299,7 @@
         "Scte35Pid": {
           "shape": "__integer",
           "locationName": "scte35Pid",
-          "documentation": "Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) of the SCTE-35 stream in the transport stream."
         },
         "Scte35Source": {
           "shape": "M3u8Scte35Source",
@@ -5285,7 +5312,7 @@
         "TimedMetadataPid": {
           "shape": "__integer",
           "locationName": "timedMetadataPid",
-          "documentation": "Packet Identifier (PID) of the timed metadata stream in the transport stream. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) of the timed metadata stream in the transport stream."
         },
         "TransportStreamId": {
           "shape": "__integer",
@@ -5295,7 +5322,7 @@
         "VideoPid": {
           "shape": "__integer",
           "locationName": "videoPid",
-          "documentation": "Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value."
+          "documentation": "Packet Identifier (PID) of the elementary video stream in the transport stream."
         }
       },
       "documentation": "Settings for TS segments in HLS"
@@ -5794,7 +5821,7 @@
         "FragmentLength": {
           "shape": "__integer",
           "locationName": "fragmentLength",
-          "documentation": "Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds.  Fragment length must be compatible with GOP size and framerate."
+          "documentation": "Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and framerate."
         },
         "ManifestEncoding": {
           "shape": "MsSmoothManifestEncoding",
@@ -5937,7 +5964,7 @@
         "NameModifier": {
           "shape": "__string",
           "locationName": "nameModifier",
-          "documentation": "Use Name modifier (NameModifier) to have the service add a string to the end of each output filename. You specify the base filename as part of your destination URI. When you create multiple outputs in the same output group, Name modifier is required. Name modifier also accepts format identifiers. For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one output, you must use them in the same way in all outputs of the output group."
+          "documentation": "Use Name modifier (NameModifier) to have the service add a string to the end of each output filename. You specify the base filename as part of your destination URI. When you create multiple outputs in the same output group, Name modifier (NameModifier) is required. Name modifier also accepts format identifiers. For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one output, you must use them in the same way in all outputs of the output group."
         },
         "OutputSettings": {
           "shape": "OutputSettings",
@@ -6039,14 +6066,14 @@
         },
         "Type": {
           "shape": "OutputGroupType",
-          "locationName": "type",
-          "documentation": "Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth Streaming)"
+          "locationName": "type"
         }
       },
       "documentation": "Output Group settings, including type"
     },
     "OutputGroupType": {
       "type": "string",
+      "documentation": "Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth Streaming)",
       "enum": [
         "HLS_GROUP_SETTINGS",
         "DASH_ISO_GROUP_SETTINGS",
@@ -6056,7 +6083,7 @@
     },
     "OutputSdt": {
       "type": "string",
-      "documentation": "Selects method of inserting SDT information into output stream.  \"Follow input SDT\" copies SDT information from input stream to  output stream. \"Follow input SDT if present\" copies SDT information from  input stream to output stream if SDT information is present in the input,  otherwise it will fall back on the user-defined values. Enter \"SDT  Manually\" means user will enter the SDT information. \"No SDT\" means output  stream will not contain SDT information.",
+      "documentation": "Selects method of inserting SDT information into output stream.  \"Follow input SDT\" copies SDT information from input stream to  output stream. \"Follow input SDT if present\" copies SDT information from  input stream to output stream if SDT information is present in the input, otherwise it will fall back on the user-defined values. Enter \"SDT  Manually\" means user will enter the SDT information. \"No SDT\" means output  stream will not contain SDT information.",
       "enum": [
         "SDT_FOLLOW",
         "SDT_FOLLOW_IF_PRESENT",
@@ -6114,7 +6141,7 @@
         "Type": {
           "shape": "Type",
           "locationName": "type",
-          "documentation": "A preset can be of two types: system or custom. System or built-in preset can’t be modified or deleted by the user."
+          "documentation": "A preset can be of two types: system or custom. System or built-in preset can't be modified or deleted by the user."
         }
       },
       "documentation": "A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process."
@@ -6303,7 +6330,7 @@
         "Type": {
           "shape": "Type",
           "locationName": "type",
-          "documentation": "A queue can be of two types: system or custom. System or built-in queues can’t be modified or deleted by the user."
+          "documentation": "A queue can be of two types: system or custom. System or built-in queues can't be modified or deleted by the user."
         }
       },
       "documentation": "MediaConvert jobs are submitted to a queue. Unless specified otherwise jobs are submitted to a built-in default queue. User can create additional queues to separate the jobs of different categories or priority."
@@ -6460,7 +6487,7 @@
         "PageNumber": {
           "shape": "__string",
           "locationName": "pageNumber",
-          "documentation": "Set pageNumber to the Teletext page number for the destination captions for this output.  This value must be a three-digit hexadecimal string; strings ending in -FF are invalid. If you are passing through the entire set of Teletext data, do not use this field."
+          "documentation": "Set pageNumber to the Teletext page number for the destination captions for this output. This value must be a three-digit hexadecimal string; strings ending in -FF are invalid. If you are passing through the entire set of Teletext data, do not use this field."
         }
       },
       "documentation": "Settings for Teletext caption output"
@@ -6531,7 +6558,7 @@
         "TimestampOffset": {
           "shape": "__string",
           "locationName": "timestampOffset",
-          "documentation": "Only applies to outputs that support program-date-time stamp. Use Time  stamp offset (TimestampOffset) to overwrite the timecode date without affecting the time and frame number. Provide the new date as a string in the format \"yyyy-mm-dd\".  To use Time stamp offset, you must also enable Insert program-date-time (InsertProgramDateTime) in the output settings."
+          "documentation": "Only applies to outputs that support program-date-time stamp. Use Time stamp offset (TimestampOffset) to overwrite the timecode date without affecting the time and frame number. Provide the new date as a string in the format \"yyyy-mm-dd\".  To use Time stamp offset, you must also enable Insert program-date-time (InsertProgramDateTime) in the output settings."
         }
       },
       "documentation": "Contains settings used to acquire and adjust timecode information from inputs."
@@ -6547,7 +6574,7 @@
     },
     "TimedMetadata": {
       "type": "string",
-      "documentation": "If PASSTHROUGH, inserts ID3 timed metadata from the timed_metadata REST command into this output. Only available for certain containers.",
+      "documentation": "If PASSTHROUGH, inserts ID3 timed metadata from the timed_metadata REST command into this output.",
       "enum": [
         "PASSTHROUGH",
         "NONE"
@@ -6607,7 +6634,7 @@
           "locationName": "stylePassthrough"
         }
       },
-      "documentation": "Settings for TTML caption output"
+      "documentation": "Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough)."
     },
     "TtmlStylePassthrough": {
       "type": "string",

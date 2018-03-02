@@ -130,6 +130,8 @@ export abstract class ConfigurationServicePlaceholders {
   serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.ClientConfiguration;
   servicediscovery?: AWS.ServiceDiscovery.Types.ClientConfiguration;
   workmail?: AWS.WorkMail.Types.ClientConfiguration;
+  autoscalingplans?: AWS.AutoScalingPlans.Types.ClientConfiguration;
+  transcribeservice?: AWS.TranscribeService.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -262,4 +264,6 @@ export interface ConfigurationServiceApiVersions {
   serverlessapplicationrepository?: AWS.ServerlessApplicationRepository.Types.apiVersion;
   servicediscovery?: AWS.ServiceDiscovery.Types.apiVersion;
   workmail?: AWS.WorkMail.Types.apiVersion;
+  autoscalingplans?: AWS.AutoScalingPlans.Types.apiVersion;
+  transcribeservice?: AWS.TranscribeService.Types.apiVersion;
 }

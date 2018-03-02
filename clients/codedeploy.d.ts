@@ -132,6 +132,14 @@ declare class CodeDeploy extends Service {
    */
   deleteDeploymentGroup(callback?: (err: AWSError, data: CodeDeploy.Types.DeleteDeploymentGroupOutput) => void): Request<CodeDeploy.Types.DeleteDeploymentGroupOutput, AWSError>;
   /**
+   * Deletes a GitHub account connection.
+   */
+  deleteGitHubAccountToken(params: CodeDeploy.Types.DeleteGitHubAccountTokenInput, callback?: (err: AWSError, data: CodeDeploy.Types.DeleteGitHubAccountTokenOutput) => void): Request<CodeDeploy.Types.DeleteGitHubAccountTokenOutput, AWSError>;
+  /**
+   * Deletes a GitHub account connection.
+   */
+  deleteGitHubAccountToken(callback?: (err: AWSError, data: CodeDeploy.Types.DeleteGitHubAccountTokenOutput) => void): Request<CodeDeploy.Types.DeleteGitHubAccountTokenOutput, AWSError>;
+  /**
    * Deregisters an on-premises instance.
    */
   deregisterOnPremisesInstance(params: CodeDeploy.Types.DeregisterOnPremisesInstanceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -581,7 +589,7 @@ declare namespace CodeDeploy {
     /**
      * The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value. The type parameter takes either of the following values:   HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.   FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.   The value parameter takes an integer. For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.
      */
-    minimumHealthyHosts: MinimumHealthyHosts;
+    minimumHealthyHosts?: MinimumHealthyHosts;
     /**
      * The configuration that specifies how the deployment traffic will be routed.
      */
@@ -740,6 +748,18 @@ declare namespace CodeDeploy {
      * If the output contains no data, and the corresponding deployment group contained at least one Auto Scaling group, AWS CodeDeploy successfully removed all corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group. If the output contains data, AWS CodeDeploy could not remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances in the Auto Scaling group.
      */
     hooksNotCleanedUp?: AutoScalingGroupList;
+  }
+  export interface DeleteGitHubAccountTokenInput {
+    /**
+     * The name of the GitHub account connection to delete.
+     */
+    tokenName?: GitHubAccountTokenName;
+  }
+  export interface DeleteGitHubAccountTokenOutput {
+    /**
+     * The name of the GitHub account connection that was deleted.
+     */
+    tokenName?: GitHubAccountTokenName;
   }
   export type DeploymentConfigId = string;
   export interface DeploymentConfigInfo {

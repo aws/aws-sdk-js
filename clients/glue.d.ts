@@ -44,6 +44,14 @@ declare class Glue extends Service {
    */
   batchDeleteTable(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
+   * Deletes a specified batch of versions of a table.
+   */
+  batchDeleteTableVersion(params: Glue.Types.BatchDeleteTableVersionRequest, callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableVersionResponse) => void): Request<Glue.Types.BatchDeleteTableVersionResponse, AWSError>;
+  /**
+   * Deletes a specified batch of versions of a table.
+   */
+  batchDeleteTableVersion(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableVersionResponse) => void): Request<Glue.Types.BatchDeleteTableVersionResponse, AWSError>;
+  /**
    * Retrieves partitions in a batch request.
    */
   batchGetPartition(params: Glue.Types.BatchGetPartitionRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
@@ -52,19 +60,19 @@ declare class Glue extends Service {
    */
   batchGetPartition(callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
   /**
-   * Stops a batch of job runs for a given job.
+   * Stops one or more job runs for a specified Job.
    */
   batchStopJobRun(params: Glue.Types.BatchStopJobRunRequest, callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Stops a batch of job runs for a given job.
+   * Stops one or more job runs for a specified Job.
    */
   batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be either a GrokClassifier or an XMLClassifier. 
+   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
    */
   createClassifier(params: Glue.Types.CreateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be either a GrokClassifier or an XMLClassifier. 
+   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
    */
   createClassifier(callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
@@ -116,11 +124,11 @@ declare class Glue extends Service {
    */
   createPartition(callback?: (err: AWSError, data: Glue.Types.CreatePartitionResponse) => void): Request<Glue.Types.CreatePartitionResponse, AWSError>;
   /**
-   * Transforms a directed acyclic graph (DAG) into a Python script.
+   * Transforms a directed acyclic graph (DAG) into code.
    */
   createScript(params: Glue.Types.CreateScriptRequest, callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
   /**
-   * Transforms a directed acyclic graph (DAG) into a Python script.
+   * Transforms a directed acyclic graph (DAG) into code.
    */
   createScript(callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
   /**
@@ -188,11 +196,11 @@ declare class Glue extends Service {
    */
   deleteDevEndpoint(callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
   /**
-   * Deletes a specified job.
+   * Deletes a specified job. If the job is not found, no exception is thrown.
    */
   deleteJob(params: Glue.Types.DeleteJobRequest, callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
-   * Deletes a specified job.
+   * Deletes a specified job. If the job is not found, no exception is thrown.
    */
   deleteJob(callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
@@ -212,11 +220,19 @@ declare class Glue extends Service {
    */
   deleteTable(callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
-   * Deletes a specified trigger.
+   * Deletes a specified version of a table.
+   */
+  deleteTableVersion(params: Glue.Types.DeleteTableVersionRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTableVersionResponse) => void): Request<Glue.Types.DeleteTableVersionResponse, AWSError>;
+  /**
+   * Deletes a specified version of a table.
+   */
+  deleteTableVersion(callback?: (err: AWSError, data: Glue.Types.DeleteTableVersionResponse) => void): Request<Glue.Types.DeleteTableVersionResponse, AWSError>;
+  /**
+   * Deletes a specified trigger. If the trigger is not found, no exception is thrown.
    */
   deleteTrigger(params: Glue.Types.DeleteTriggerRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTriggerResponse) => void): Request<Glue.Types.DeleteTriggerResponse, AWSError>;
   /**
-   * Deletes a specified trigger.
+   * Deletes a specified trigger. If the trigger is not found, no exception is thrown.
    */
   deleteTrigger(callback?: (err: AWSError, data: Glue.Types.DeleteTriggerResponse) => void): Request<Glue.Types.DeleteTriggerResponse, AWSError>;
   /**
@@ -388,11 +404,11 @@ declare class Glue extends Service {
    */
   getPartitions(callback?: (err: AWSError, data: Glue.Types.GetPartitionsResponse) => void): Request<Glue.Types.GetPartitionsResponse, AWSError>;
   /**
-   * Gets a Python script to perform a specified mapping.
+   * Gets code to perform a specified mapping.
    */
   getPlan(params: Glue.Types.GetPlanRequest, callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
-   * Gets a Python script to perform a specified mapping.
+   * Gets code to perform a specified mapping.
    */
   getPlan(callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
@@ -403,6 +419,14 @@ declare class Glue extends Service {
    * Retrieves the Table definition in a Data Catalog for a specified table.
    */
   getTable(callback?: (err: AWSError, data: Glue.Types.GetTableResponse) => void): Request<Glue.Types.GetTableResponse, AWSError>;
+  /**
+   * Retrieves a specified version of a table.
+   */
+  getTableVersion(params: Glue.Types.GetTableVersionRequest, callback?: (err: AWSError, data: Glue.Types.GetTableVersionResponse) => void): Request<Glue.Types.GetTableVersionResponse, AWSError>;
+  /**
+   * Retrieves a specified version of a table.
+   */
+  getTableVersion(callback?: (err: AWSError, data: Glue.Types.GetTableVersionResponse) => void): Request<Glue.Types.GetTableVersionResponse, AWSError>;
   /**
    * Retrieves a list of strings that identify available versions of a specified table.
    */
@@ -492,11 +516,11 @@ declare class Glue extends Service {
    */
   startJobRun(callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
   /**
-   * Starts an existing trigger.
+   * Starts an existing trigger. See Triggering Jobs for information about how different types of trigger are started.
    */
   startTrigger(params: Glue.Types.StartTriggerRequest, callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
   /**
-   * Starts an existing trigger.
+   * Starts an existing trigger. See Triggering Jobs for information about how different types of trigger are started.
    */
   startTrigger(callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
   /**
@@ -524,11 +548,11 @@ declare class Glue extends Service {
    */
   stopTrigger(callback?: (err: AWSError, data: Glue.Types.StopTriggerResponse) => void): Request<Glue.Types.StopTriggerResponse, AWSError>;
   /**
-   * Modifies an existing classifier (either a GrokClassifier or an XMLClassifier).
+   * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
    */
   updateClassifier(params: Glue.Types.UpdateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
-   * Modifies an existing classifier (either a GrokClassifier or an XMLClassifier).
+   * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
    */
   updateClassifier(callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
@@ -619,7 +643,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * Arguments to be passed to the job.
+     * Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
   }
@@ -701,7 +725,7 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the catalog database where the tables to delete reside.
+     * The name of the catalog database where the tables to delete reside. For Hive compatibility, this name is entirely lowercase.
      */
     DatabaseName: NameString;
     /**
@@ -714,6 +738,31 @@ declare namespace Glue {
      * A list of errors encountered in attempting to delete the specified tables.
      */
     Errors?: TableErrors;
+  }
+  export type BatchDeleteTableVersionList = VersionString[];
+  export interface BatchDeleteTableVersionRequest {
+    /**
+     * The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table. For Hive compatibility, this name is entirely lowercase.
+     */
+    TableName: NameString;
+    /**
+     * A list of the IDs of versions to be deleted.
+     */
+    VersionIds: BatchDeleteTableVersionList;
+  }
+  export interface BatchDeleteTableVersionResponse {
+    /**
+     * A list of errors encountered while trying to delete the specified table versions.
+     */
+    Errors?: TableVersionErrors;
   }
   export interface BatchGetPartitionRequest {
     /**
@@ -746,15 +795,15 @@ declare namespace Glue {
   export type BatchGetPartitionValueList = PartitionValueList[];
   export interface BatchStopJobRunError {
     /**
-     * The name of the job.
+     * The name of the Job in question.
      */
     JobName?: NameString;
     /**
-     * The job run Id.
+     * The JobRunId of the JobRun in question.
      */
     JobRunId?: IdString;
     /**
-     * The details of the error that occurred.
+     * Specifies details about the error that was encountered.
      */
     ErrorDetail?: ErrorDetail;
   }
@@ -762,36 +811,37 @@ declare namespace Glue {
   export type BatchStopJobRunJobRunIdList = IdString[];
   export interface BatchStopJobRunRequest {
     /**
-     * The name of the job whose job runs are to be stopped.
+     * The name of the Job in question.
      */
     JobName: NameString;
     /**
-     * A list of job run Ids of the given job to be stopped.
+     * A list of the JobRunIds that should be stopped for that Job.
      */
     JobRunIds: BatchStopJobRunJobRunIdList;
   }
   export interface BatchStopJobRunResponse {
     /**
-     * A list of job runs which are successfully submitted for stopping.
+     * A list of the JobRuns that were successfully submitted for stopping.
      */
     SuccessfulSubmissions?: BatchStopJobRunSuccessfulSubmissionList;
     /**
-     * A list containing the job run Ids and details of the error that occurred for each job run while submitting to stop.
+     * A list of the errors that were encountered in tryng to stop JobRuns, including the JobRunId for which each error was encountered and details about the error.
      */
     Errors?: BatchStopJobRunErrorList;
   }
   export interface BatchStopJobRunSuccessfulSubmission {
     /**
-     * The name of the job.
+     * The Name of the Job in question.
      */
     JobName?: NameString;
     /**
-     * The job run Id.
+     * The JobRunId of the JobRun in question.
      */
     JobRunId?: IdString;
   }
   export type BatchStopJobRunSuccessfulSubmissionList = BatchStopJobRunSuccessfulSubmission[];
   export type Boolean = boolean;
+  export type BooleanNullable = boolean;
   export type BooleanValue = boolean;
   export type BoundedPartitionValueList = ValueString[];
   export type CatalogEntries = CatalogEntry[];
@@ -830,6 +880,10 @@ declare namespace Glue {
      * An XMLClassifier object.
      */
     XMLClassifier?: XMLClassifier;
+    /**
+     * A JsonClassifier object.
+     */
+    JsonClassifier?: JsonClassifier;
   }
   export type ClassifierList = Classifier[];
   export type ClassifierNameList = NameString[];
@@ -909,11 +963,11 @@ declare namespace Glue {
      */
     LogicalOperator?: LogicalOperator;
     /**
-     * The name of the job in question.
+     * The name of the Job to whose JobRuns this condition applies and on which this trigger waits.
      */
     JobName?: NameString;
     /**
-     * The condition state.
+     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED and FAILED.
      */
     State?: JobRunState;
   }
@@ -960,7 +1014,7 @@ declare namespace Glue {
     /**
      * The name of the connection.
      */
-    Name?: NameString;
+    Name: NameString;
     /**
      * Description of the connection.
      */
@@ -968,7 +1022,7 @@ declare namespace Glue {
     /**
      * The type of the connection. Currently, only JDBC is supported; SFTP is not supported.
      */
-    ConnectionType?: ConnectionType;
+    ConnectionType: ConnectionType;
     /**
      * A list of criteria that can be used in selecting this connection.
      */
@@ -976,7 +1030,7 @@ declare namespace Glue {
     /**
      * A list of key-value pairs used as parameters for this connection.
      */
-    ConnectionProperties?: ConnectionProperties;
+    ConnectionProperties: ConnectionProperties;
     /**
      * A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.
      */
@@ -1055,7 +1109,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
   }
@@ -1117,6 +1171,10 @@ declare namespace Glue {
      * An XMLClassifier object specifying the classifier to create.
      */
     XMLClassifier?: CreateXMLClassifierRequest;
+    /**
+     * A JsonClassifier object specifying the classifier to create.
+     */
+    JsonClassifier?: CreateJsonClassifierRequest;
   }
   export interface CreateClassifierResponse {
   }
@@ -1170,7 +1228,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
   }
@@ -1300,7 +1358,7 @@ declare namespace Glue {
   }
   export interface CreateJobRequest {
     /**
-     * The name you assign to this job.
+     * The name you assign to this job. It must be unique in your account.
      */
     Name: NameString;
     /**
@@ -1312,7 +1370,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The role associated with this job.
+     * The name of the IAM role associated with this job.
      */
     Role: RoleString;
     /**
@@ -1324,7 +1382,7 @@ declare namespace Glue {
      */
     Command: JobCommand;
     /**
-     * The default parameters for this job.
+     * The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
     /**
@@ -1336,15 +1394,25 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of capacity units allocated to this job.
+     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
   export interface CreateJobResponse {
     /**
-     * The unique name of the new job that has been created.
+     * The unique name that was provided.
      */
     Name?: NameString;
+  }
+  export interface CreateJsonClassifierRequest {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+     */
+    JsonPath: JsonPath;
   }
   export interface CreatePartitionRequest {
     /**
@@ -1375,12 +1443,20 @@ declare namespace Glue {
      * A list of the edges in the DAG.
      */
     DagEdges?: DagEdges;
+    /**
+     * The programming language of the resulting code from the DAG.
+     */
+    Language?: Language;
   }
   export interface CreateScriptResponse {
     /**
      * The Python script generated from the DAG.
      */
     PythonScript?: PythonScript;
+    /**
+     * The Scala code generated from the DAG.
+     */
+    ScalaCode?: ScalaCode;
   }
   export interface CreateTableRequest {
     /**
@@ -1388,7 +1464,7 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The catalog database in which to create the new table.
+     * The catalog database in which to create the new table. For Hive compatibility, this name is entirely lowercase.
      */
     DatabaseName: NameString;
     /**
@@ -1400,7 +1476,7 @@ declare namespace Glue {
   }
   export interface CreateTriggerRequest {
     /**
-     * The name to assign to the new trigger.
+     * The name of the trigger.
      */
     Name: NameString;
     /**
@@ -1408,11 +1484,11 @@ declare namespace Glue {
      */
     Type: TriggerType;
     /**
-     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *). This field is required when the trigger type is SCHEDULED.
      */
     Schedule?: GenericString;
     /**
-     * A predicate to specify when the new trigger should fire.
+     * A predicate to specify when the new trigger should fire. This field is required when the trigger type is CONDITIONAL.
      */
     Predicate?: Predicate;
     /**
@@ -1426,7 +1502,7 @@ declare namespace Glue {
   }
   export interface CreateTriggerResponse {
     /**
-     * The name assigned to the new trigger.
+     * The name of the trigger.
      */
     Name?: NameString;
   }
@@ -1456,7 +1532,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
@@ -1466,7 +1542,7 @@ declare namespace Glue {
   export type DagNodes = CodeGenNode[];
   export interface Database {
     /**
-     * Name of the database.
+     * Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
      */
     Name: NameString;
     /**
@@ -1488,7 +1564,7 @@ declare namespace Glue {
   }
   export interface DatabaseInput {
     /**
-     * Name of the database.
+     * Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
      */
     Name: NameString;
     /**
@@ -1542,7 +1618,7 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the Database to delete.
+     * The name of the Database to delete. For Hive compatibility, this must be all lowercase.
      */
     Name: NameString;
   }
@@ -1594,15 +1670,35 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the catalog database in which the table resides.
+     * The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.
      */
     DatabaseName: NameString;
     /**
-     * The name of the table to be deleted.
+     * The name of the table to be deleted. For Hive compatibility, this name is entirely lowercase.
      */
     Name: NameString;
   }
   export interface DeleteTableResponse {
+  }
+  export interface DeleteTableVersionRequest {
+    /**
+     * The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table. For Hive compatibility, this name is entirely lowercase.
+     */
+    TableName: NameString;
+    /**
+     * The ID of the table version to be deleted.
+     */
+    VersionId: VersionString;
+  }
+  export interface DeleteTableVersionResponse {
   }
   export interface DeleteTriggerRequest {
     /**
@@ -1733,7 +1829,7 @@ declare namespace Glue {
   export type ErrorString = string;
   export interface ExecutionProperty {
     /**
-     * The maximum number of concurrent runs allowed for a job.
+     * The maximum number of concurrent runs allowed for a job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
      */
     MaxConcurrentRuns?: MaxConcurrentRuns;
   }
@@ -1902,7 +1998,7 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the database to retrieve.
+     * The name of the database to retrieve. For Hive compatibility, this should be all lowercase.
      */
     Name: NameString;
   }
@@ -2006,7 +2102,7 @@ declare namespace Glue {
      */
     RunId: IdString;
     /**
-     * A list of the predecessor runs to return as well.
+     * True if a list of predecessor runs should be returned.
      */
     PredecessorsIncluded?: BooleanValue;
   }
@@ -2161,12 +2257,20 @@ declare namespace Glue {
      * Parameters for the mapping.
      */
     Location?: Location;
+    /**
+     * The programming language of the code to perform the mapping.
+     */
+    Language?: Language;
   }
   export interface GetPlanResponse {
     /**
      * A Python script to perform the mapping.
      */
     PythonScript?: PythonScript;
+    /**
+     * Scala code to perform the mapping.
+     */
+    ScalaCode?: ScalaCode;
   }
   export interface GetTableRequest {
     /**
@@ -2174,11 +2278,11 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the database in the catalog in which the table resides.
+     * The name of the database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
      */
     DatabaseName: NameString;
     /**
-     * The name of the table for which to retrieve the definition.
+     * The name of the table for which to retrieve the definition. For Hive compatibility, this name is entirely lowercase.
      */
     Name: NameString;
   }
@@ -2188,6 +2292,30 @@ declare namespace Glue {
      */
     Table?: Table;
   }
+  export interface GetTableVersionRequest {
+    /**
+     * The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table. For Hive compatibility, this name is entirely lowercase.
+     */
+    TableName: NameString;
+    /**
+     * The ID value of the table version to be retrieved.
+     */
+    VersionId?: VersionString;
+  }
+  export interface GetTableVersionResponse {
+    /**
+     * The requested table version.
+     */
+    TableVersion?: TableVersion;
+  }
   export type GetTableVersionsList = TableVersion[];
   export interface GetTableVersionsRequest {
     /**
@@ -2195,11 +2323,11 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The database in the catalog in which the table resides.
+     * The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
      */
     DatabaseName: NameString;
     /**
-     * The name of the table.
+     * The name of the table. For Hive compatibility, this name is entirely lowercase.
      */
     TableName: NameString;
     /**
@@ -2227,7 +2355,7 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The database in the catalog whose tables to list.
+     * The database in the catalog whose tables to list. For Hive compatibility, this name is entirely lowercase.
      */
     DatabaseName: NameString;
     /**
@@ -2271,7 +2399,7 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
     /**
-     * The name of the job for which to retrieve triggers.
+     * The name of the job for which to retrieve triggers. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned.
      */
     DependentJobName?: NameString;
     /**
@@ -2413,7 +2541,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The role associated with this job.
+     * The name of the IAM role associated with this job.
      */
     Role?: RoleString;
     /**
@@ -2433,7 +2561,7 @@ declare namespace Glue {
      */
     Command?: JobCommand;
     /**
-     * The default parameters for this job.
+     * The default arguments for this job, specified as name-value pairs. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
     /**
@@ -2445,7 +2573,7 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of capacity units allocated to this job.
+     * The number of AWS Glue data processing units (DPUs) allocated to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
@@ -2473,11 +2601,11 @@ declare namespace Glue {
   }
   export interface JobCommand {
     /**
-     * The name of this job command.
+     * The name of the job command: this must be glueetl.
      */
     Name?: GenericString;
     /**
-     * Specifies the location of a script that executes a job.
+     * Specifies the S3 path to a script that executes a job (required).
      */
     ScriptLocation?: ScriptLocationString;
   }
@@ -2489,15 +2617,15 @@ declare namespace Glue {
      */
     Id?: IdString;
     /**
-     * The number or the attempt to run this job.
+     * The number of the attempt to run this job.
      */
     Attempt?: AttemptCount;
     /**
-     * The ID of the previous run of this job.
+     * The ID of the previous run of this job. For example, the JobRunId specified in the StartJobRun action.
      */
     PreviousRunId?: IdString;
     /**
-     * The name of the trigger for this job run.
+     * The name of the trigger that started this job run.
      */
     TriggerName?: NameString;
     /**
@@ -2521,7 +2649,7 @@ declare namespace Glue {
      */
     JobRunState?: JobRunState;
     /**
-     * The job arguments associated with this run.
+     * The job arguments associated with this run. These override equivalent default arguments set for the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
@@ -2533,7 +2661,7 @@ declare namespace Glue {
      */
     PredecessorRuns?: PredecessorList;
     /**
-     * The amount of infrastructure capacity allocated to this job run.
+     * The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
@@ -2549,7 +2677,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The role associated with this job.
+     * The name of the IAM role associated with this job (required).
      */
     Role?: RoleString;
     /**
@@ -2557,11 +2685,11 @@ declare namespace Glue {
      */
     ExecutionProperty?: ExecutionProperty;
     /**
-     * The JobCommand that executes this job.
+     * The JobCommand that executes this job (required).
      */
     Command?: JobCommand;
     /**
-     * The default parameters for this job.
+     * The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
     /**
@@ -2573,12 +2701,36 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of capacity units allocated to this job.
+     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
+  export interface JsonClassifier {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * The time this classifier was registered.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time this classifier was last updated.
+     */
+    LastUpdated?: Timestamp;
+    /**
+     * The version of this classifier.
+     */
+    Version?: VersionId;
+    /**
+     * A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+     */
+    JsonPath: JsonPath;
+  }
+  export type JsonPath = string;
   export type JsonValue = string;
   export type KeyString = string;
+  export type Language = "PYTHON"|"SCALA"|string;
   export interface LastCrawlInfo {
     /**
      * Status of the last crawl.
@@ -2620,7 +2772,7 @@ declare namespace Glue {
   export type LocationString = string;
   export type LogGroup = string;
   export type LogStream = string;
-  export type Logical = "AND"|string;
+  export type Logical = "AND"|"ANY"|string;
   export type LogicalOperator = "EQUALS"|string;
   export interface MappingEntry {
     /**
@@ -2760,7 +2912,7 @@ declare namespace Glue {
      */
     SecurityGroupIdList?: SecurityGroupIdList;
     /**
-     * The connection's availability zone.
+     * The connection's availability zone. This field is deprecated and has no effect.
      */
     AvailabilityZone?: NameString;
   }
@@ -2770,7 +2922,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * The job-run ID of the precessor job run.
+     * The job-run ID of the predecessor job run.
      */
     RunId?: IdString;
   }
@@ -2827,6 +2979,7 @@ declare namespace Glue {
     Exclusions?: PathList;
   }
   export type S3TargetList = S3Target[];
+  export type ScalaCode = string;
   export interface Schedule {
     /**
      * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
@@ -2911,15 +3064,15 @@ declare namespace Glue {
      */
     JobName: NameString;
     /**
-     * The ID of the job run to start.
+     * The ID of a previous JobRun to retry.
      */
     JobRunId?: IdString;
     /**
-     * Specific arguments for this job run.
+     * The job arguments specifically for this run. They override the equivalent default arguments set for the job itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
-     * The infrastructure capacity to allocate to this job.
+     * The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
   }
@@ -3022,11 +3175,11 @@ declare namespace Glue {
   export type StringList = GenericString[];
   export interface Table {
     /**
-     * Name of the table.
+     * Name of the table. For Hive compatibility, this must be entirely lowercase.
      */
     Name: NameString;
     /**
-     * Name of the metadata database where the table metadata resides.
+     * Name of the metadata database where the table metadata resides. For Hive compatibility, this must be all lowercase.
      */
     DatabaseName?: NameString;
     /**
@@ -3088,7 +3241,7 @@ declare namespace Glue {
   }
   export interface TableError {
     /**
-     * Name of the table.
+     * Name of the table. For Hive compatibility, this must be entirely lowercase.
      */
     TableName?: NameString;
     /**
@@ -3099,7 +3252,7 @@ declare namespace Glue {
   export type TableErrors = TableError[];
   export interface TableInput {
     /**
-     * Name of the table.
+     * Name of the table. For Hive compatibility, this is folded to lowercase when it is stored.
      */
     Name: NameString;
     /**
@@ -3161,6 +3314,21 @@ declare namespace Glue {
      */
     VersionId?: VersionString;
   }
+  export interface TableVersionError {
+    /**
+     * The name of the table in question.
+     */
+    TableName?: NameString;
+    /**
+     * The ID value of the version in question.
+     */
+    VersionId?: VersionString;
+    /**
+     * Detail about the error.
+     */
+    ErrorDetail?: ErrorDetail;
+  }
+  export type TableVersionErrors = TableVersionError[];
   export type Timestamp = Date;
   export type TimestampValue = Date;
   export type Token = string;
@@ -3171,7 +3339,7 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
-     * The trigger ID.
+     * Reserved for future use.
      */
     Id?: IdString;
     /**
@@ -3195,7 +3363,7 @@ declare namespace Glue {
      */
     Actions?: ActionList;
     /**
-     * The predicate of this trigger.
+     * The predicate of this trigger, which defines when it will fire.
      */
     Predicate?: Predicate;
   }
@@ -3204,7 +3372,7 @@ declare namespace Glue {
   export type TriggerType = "SCHEDULED"|"CONDITIONAL"|"ON_DEMAND"|string;
   export interface TriggerUpdate {
     /**
-     * The name of the trigger.
+     * Reserved for future use.
      */
     Name?: NameString;
     /**
@@ -3212,7 +3380,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * An updated cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: GenericString;
     /**
@@ -3235,6 +3403,10 @@ declare namespace Glue {
      * An XMLClassifier object with updated fields.
      */
     XMLClassifier?: UpdateXMLClassifierRequest;
+    /**
+     * A JsonClassifier object with updated fields.
+     */
+    JsonClassifier?: UpdateJsonClassifierRequest;
   }
   export interface UpdateClassifierResponse {
   }
@@ -3292,7 +3464,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
      */
     Configuration?: CrawlerConfiguration;
   }
@@ -3316,7 +3488,7 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the metadata database to update in the catalog.
+     * The name of the database to update in the catalog. For Hive compatibility, this is folded to lowercase.
      */
     Name: NameString;
     /**
@@ -3380,6 +3552,16 @@ declare namespace Glue {
      */
     JobName?: NameString;
   }
+  export interface UpdateJsonClassifierRequest {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+     */
+    JsonPath?: JsonPath;
+  }
   export interface UpdatePartitionRequest {
     /**
      * The ID of the Data Catalog where the partition to be updated resides. If none is supplied, the AWS account ID is used by default.
@@ -3410,13 +3592,17 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the catalog database in which the table resides.
+     * The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.
      */
     DatabaseName: NameString;
     /**
      * An updated TableInput object to define the metadata table in the catalog.
      */
     TableInput: TableInput;
+    /**
+     * By default, UpdateTable always creates an archived version of the table before updating it. If skipArchive is set to true, however, UpdateTable does not create the archived version.
+     */
+    SkipArchive?: BooleanNullable;
   }
   export interface UpdateTableResponse {
   }
@@ -3466,7 +3652,7 @@ declare namespace Glue {
      */
     Classification?: Classification;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
@@ -3547,7 +3733,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot be an empty element. It must contain child elements representing fields in the record.
+     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }

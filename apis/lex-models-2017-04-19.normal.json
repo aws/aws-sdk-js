@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"rest-json",
     "serviceFullName":"Amazon Lex Model Building Service",
+    "serviceId":"Lex Model Building Service",
     "signatureVersion":"v4",
     "signingName":"lex",
     "uid":"lex-models-2017-04-19"
@@ -225,7 +226,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot unless the <code>childDirected</code> field in the bot is set to <code>true</code>. Utterances are stored for 15 days for use with the <a>GetUtterancesView</a> operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>"
+      "documentation":"<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the <a>GetUtterancesView</a> operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>"
     },
     "GetBot":{
       "name":"GetBot",
@@ -410,6 +411,23 @@
       ],
       "documentation":"<p>Exports the contents of a Amazon Lex resource in a specified format. </p>"
     },
+    "GetImport":{
+      "name":"GetImport",
+      "http":{
+        "method":"GET",
+        "requestUri":"/imports/{importId}",
+        "responseCode":200
+      },
+      "input":{"shape":"GetImportRequest"},
+      "output":{"shape":"GetImportResponse"},
+      "errors":[
+        {"shape":"NotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"BadRequestException"}
+      ],
+      "documentation":"<p>Gets information about an import job started with the <code>StartImport</code> operation.</p>"
+    },
     "GetIntent":{
       "name":"GetIntent",
       "http":{
@@ -526,7 +544,7 @@
         {"shape":"InternalFailureException"},
         {"shape":"BadRequestException"}
       ],
-      "documentation":"<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance \"I want flowers\" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <p>Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.</p> <p>If the bot's <code>childDirected</code> field is set to <code>true</code>, utterances for the bot are not stored and cannot be retrieved with the <code>GetUtterancesView</code> operation. For more information, see <a>PutBot</a>.</p> <p>This operation requires permissions for the <code>lex:GetUtterancesView</code> action.</p>"
+      "documentation":"<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance \"I want flowers\" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <note> <p>Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.</p> </note> <p>This operation requires permissions for the <code>lex:GetUtterancesView</code> action.</p>"
     },
     "PutBot":{
       "name":"PutBot",
@@ -544,7 +562,7 @@
         {"shape":"BadRequestException"},
         {"shape":"PreconditionFailedException"}
       ],
-      "documentation":"<p>Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the <code/> response <code>FAILED</code>. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p> <p>If you specify the name of an existing bot, the fields in the request replace the existing values in the <code>$LATEST</code> version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the <code>idleTTLInSeconds</code> and <code>privacySettings</code> fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see <a>auth-and-access-control</a>.</p>"
+      "documentation":"<p>Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name, a locale, and whether the bot is directed toward children under age 13. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with the minimum information, the bot is created or updated but Amazon Lex returns the <code/> response <code>FAILED</code>. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p> <p>If you specify the name of an existing bot, the fields in the request replace the existing values in the <code>$LATEST</code> version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the <code>idleTTLInSeconds</code> and <code>privacySettings</code> fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see <a>auth-and-access-control</a>.</p>"
     },
     "PutBotAlias":{
       "name":"PutBotAlias",
@@ -599,6 +617,22 @@
         {"shape":"PreconditionFailedException"}
       ],
       "documentation":"<p>Creates a custom slot type or replaces an existing custom slot type.</p> <p>To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see <a>how-it-works</a>.</p> <p>If you specify the name of an existing slot type, the fields in the request replace the existing values in the <code>$LATEST</code> version of the slot type. Amazon Lex removes the fields that you don't provide in the request. If you don't specify required fields, Amazon Lex throws an exception. When you update the <code>$LATEST</code> version of a slot type, if a bot uses the <code>$LATEST</code> version of an intent that contains the slot type, the bot's <code>status</code> field is set to <code>NOT_BUILT</code>.</p> <p>This operation requires permissions for the <code>lex:PutSlotType</code> action.</p>"
+    },
+    "StartImport":{
+      "name":"StartImport",
+      "http":{
+        "method":"POST",
+        "requestUri":"/imports/",
+        "responseCode":201
+      },
+      "input":{"shape":"StartImportRequest"},
+      "output":{"shape":"StartImportResponse"},
+      "errors":[
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"BadRequestException"}
+      ],
+      "documentation":"<p>Starts a job to import a resource to Amazon Lex.</p>"
     }
   },
   "shapes":{
@@ -623,6 +657,7 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "Blob":{"type":"blob"},
     "Boolean":{"type":"boolean"},
     "BotAliasMetadata":{
       "type":"structure",
@@ -833,7 +868,8 @@
       "enum":[
         "Facebook",
         "Slack",
-        "Twilio-Sms"
+        "Twilio-Sms",
+        "Kik"
       ]
     },
     "CodeHook":{
@@ -872,7 +908,8 @@
       "type":"string",
       "enum":[
         "PlainText",
-        "SSML"
+        "SSML",
+        "CustomPayload"
       ]
     },
     "Count":{"type":"integer"},
@@ -1302,7 +1339,10 @@
     },
     "ExportType":{
       "type":"string",
-      "enum":["ALEXA_SKILLS_KIT"]
+      "enum":[
+        "ALEXA_SKILLS_KIT",
+        "LEX"
+      ]
     },
     "FollowUpPrompt":{
       "type":"structure",
@@ -1902,6 +1942,51 @@
         }
       }
     },
+    "GetImportRequest":{
+      "type":"structure",
+      "required":["importId"],
+      "members":{
+        "importId":{
+          "shape":"String",
+          "documentation":"<p>The identifier of the import job information to return.</p>",
+          "location":"uri",
+          "locationName":"importId"
+        }
+      }
+    },
+    "GetImportResponse":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name given to the import job.</p>"
+        },
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The type of resource imported.</p>"
+        },
+        "mergeStrategy":{
+          "shape":"MergeStrategy",
+          "documentation":"<p>The action taken when there was a conflict between an existing resource and a resource in the import file.</p>"
+        },
+        "importId":{
+          "shape":"String",
+          "documentation":"<p>The identifier for the specific import job.</p>"
+        },
+        "importStatus":{
+          "shape":"ImportStatus",
+          "documentation":"<p>The status of the import job. If the status is <code>FAILED</code>, you can get the reason for the failure from the <code>failureReason</code> field.</p>"
+        },
+        "failureReason":{
+          "shape":"StringList",
+          "documentation":"<p>A string that describes why an import job failed to complete.</p>"
+        },
+        "createdDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp for the date and time that the import job was created.</p>"
+        }
+      }
+    },
     "GetIntentRequest":{
       "type":"structure",
       "required":[
@@ -2233,6 +2318,20 @@
         }
       }
     },
+    "GroupNumber":{
+      "type":"integer",
+      "box":true,
+      "max":5,
+      "min":1
+    },
+    "ImportStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "COMPLETE",
+        "FAILED"
+      ]
+    },
     "Intent":{
       "type":"structure",
       "required":[
@@ -2337,7 +2436,11 @@
     },
     "Locale":{
       "type":"string",
-      "enum":["en-US"]
+      "enum":[
+        "en-US",
+        "en-GB",
+        "de-DE"
+      ]
     },
     "LocaleList":{
       "type":"list",
@@ -2348,6 +2451,13 @@
       "box":true,
       "max":50,
       "min":1
+    },
+    "MergeStrategy":{
+      "type":"string",
+      "enum":[
+        "OVERWRITE_LATEST",
+        "FAIL_ON_CONFLICT"
+      ]
     },
     "Message":{
       "type":"structure",
@@ -2363,6 +2473,10 @@
         "content":{
           "shape":"ContentString",
           "documentation":"<p>The text of the message.</p>"
+        },
+        "groupNumber":{
+          "shape":"GroupNumber",
+          "documentation":"<p>Identifies the message group that the message belongs to. When a group is assigned to a message, Amazon Lex returns one message from each group in the response.</p>"
         }
       },
       "documentation":"<p>The message object that provides the message text and its type.</p>"
@@ -2370,7 +2484,7 @@
     "MessageList":{
       "type":"list",
       "member":{"shape":"Message"},
-      "max":5,
+      "max":15,
       "min":1
     },
     "MessageVersion":{
@@ -2380,7 +2494,7 @@
     },
     "Name":{
       "type":"string",
-      "max":64,
+      "max":100,
       "min":1,
       "pattern":"[a-zA-Z_]+"
     },
@@ -2559,7 +2673,7 @@
         },
         "processBehavior":{
           "shape":"ProcessBehavior",
-          "documentation":"<p>If you set the <code>processBehavior</code> element to <code>Build</code>, Amazon Lex builds the bot so that it can be run. If you set the element to <code>Save</code>Amazon Lex saves the bot, but doesn't build it. </p> <p>If you don't specify this value, the default value is <code>Save</code>.</p>"
+          "documentation":"<p>If you set the <code>processBehavior</code> element to <code>BUILD</code>, Amazon Lex builds the bot so that it can be run. If you set the element to <code>SAVE</code> Amazon Lex saves the bot, but doesn't build it. </p> <p>If you don't specify this value, the default value is <code>BUILD</code>.</p>"
         },
         "locale":{
           "shape":"Locale",
@@ -2568,7 +2682,8 @@
         "childDirected":{
           "shape":"Boolean",
           "documentation":"<p>For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA.</p> <p>If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href=\"https://aws.amazon.com/lex/faqs#data-security\">Amazon Lex FAQ.</a> </p>"
-        }
+        },
+        "createVersion":{"shape":"Boolean"}
       }
     },
     "PutBotResponse":{
@@ -2633,7 +2748,8 @@
         "childDirected":{
           "shape":"Boolean",
           "documentation":"<p>For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA.</p> <p>If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href=\"https://aws.amazon.com/lex/faqs#data-security\">Amazon Lex FAQ.</a> </p>"
-        }
+        },
+        "createVersion":{"shape":"Boolean"}
       }
     },
     "PutIntentRequest":{
@@ -2689,7 +2805,8 @@
         "checksum":{
           "shape":"String",
           "documentation":"<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new intent, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a intent, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don't specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>"
-        }
+        },
+        "createVersion":{"shape":"Boolean"}
       }
     },
     "PutIntentResponse":{
@@ -2754,7 +2871,8 @@
         "checksum":{
           "shape":"String",
           "documentation":"<p>Checksum of the <code>$LATEST</code>version of the intent created or updated.</p>"
-        }
+        },
+        "createVersion":{"shape":"Boolean"}
       }
     },
     "PutSlotTypeRequest":{
@@ -2782,7 +2900,8 @@
         "valueSelectionStrategy":{
           "shape":"SlotValueSelectionStrategy",
           "documentation":"<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don't specify the <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>"
-        }
+        },
+        "createVersion":{"shape":"Boolean"}
       }
     },
     "PutSlotTypeResponse":{
@@ -2819,7 +2938,8 @@
         "valueSelectionStrategy":{
           "shape":"SlotValueSelectionStrategy",
           "documentation":"<p>The slot resolution strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.</p>"
-        }
+        },
+        "createVersion":{"shape":"Boolean"}
       }
     },
     "ReferenceType":{
@@ -2857,7 +2977,11 @@
     },
     "ResourceType":{
       "type":"string",
-      "enum":["BOT"]
+      "enum":[
+        "BOT",
+        "INTENT",
+        "SLOT_TYPE"
+      ]
     },
     "ResponseCard":{
       "type":"string",
@@ -2983,6 +3107,57 @@
         "TOP_RESOLUTION"
       ]
     },
+    "StartImportRequest":{
+      "type":"structure",
+      "required":[
+        "payload",
+        "resourceType",
+        "mergeStrategy"
+      ],
+      "members":{
+        "payload":{
+          "shape":"Blob",
+          "documentation":"<p>A zip archive in binary format. The archive should contain one file, a JSON file containing the resource to import. The resource should match the type specified in the <code>resourceType</code> field.</p>"
+        },
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>Specifies the type of resource to export. Each resource also exports any resources that it depends on. </p> <ul> <li> <p>A bot exports dependent intents.</p> </li> <li> <p>An intent exports dependent slot types.</p> </li> </ul>"
+        },
+        "mergeStrategy":{
+          "shape":"MergeStrategy",
+          "documentation":"<p>Specifies the action that the <code>StartImport</code> operation should take when there is an existing resource with the same name.</p> <ul> <li> <p>FAIL_ON_CONFLICT - The import operation is stopped on the first conflict between a resource in the import file and an existing resource. The name of the resource causing the conflict is in the <code>failureReason</code> field of the response to the <code>GetImport</code> operation.</p> <p>OVERWRITE_LATEST - The import operation proceeds even if there is a conflict with an existing resource. The $LASTEST version of the existing resource is overwritten with the data from the import file.</p> </li> </ul>"
+        }
+      }
+    },
+    "StartImportResponse":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"Name",
+          "documentation":"<p>The name given to the import job.</p>"
+        },
+        "resourceType":{
+          "shape":"ResourceType",
+          "documentation":"<p>The type of resource to import.</p>"
+        },
+        "mergeStrategy":{
+          "shape":"MergeStrategy",
+          "documentation":"<p>The action to take when there is a merge conflict.</p>"
+        },
+        "importId":{
+          "shape":"String",
+          "documentation":"<p>The identifier for the specific import job.</p>"
+        },
+        "importStatus":{
+          "shape":"ImportStatus",
+          "documentation":"<p>The status of the import job. If the status is <code>FAILED</code>, you can get the reason for the failure using the <code>GetImport</code> operation.</p>"
+        },
+        "createdDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>A timestamp for the date and time that the import job was requested.</p>"
+        }
+      }
+    },
     "Statement":{
       "type":"structure",
       "required":["messages"],
@@ -3015,6 +3190,10 @@
       ]
     },
     "String":{"type":"string"},
+    "StringList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "SynonymList":{
       "type":"list",
       "member":{"shape":"Value"}

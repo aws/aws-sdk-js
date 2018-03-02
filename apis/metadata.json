@@ -532,5 +532,13 @@
   },
   "workmail": {
     "name": "WorkMail"
+  },
+  "autoscalingplans": {
+    "prefix": "autoscaling-plans",
+    "name": "AutoScalingPlans"
+  },
+  "transcribeservice": {
+    "prefix": "transcribe",
+    "name": "TranscribeService"
   }
 }

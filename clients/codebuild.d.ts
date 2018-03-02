@@ -44,11 +44,11 @@ declare class CodeBuild extends Service {
    */
   createProject(callback?: (err: AWSError, data: CodeBuild.Types.CreateProjectOutput) => void): Request<CodeBuild.Types.CreateProjectOutput, AWSError>;
   /**
-   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in Change a Build Project’s Settings. 
+   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in Change a Build Project's Settings. 
    */
   createWebhook(params: CodeBuild.Types.CreateWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
   /**
-   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in Change a Build Project’s Settings. 
+   * For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds will be created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you will be billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 9 in Change a Build Project's Settings. 
    */
   createWebhook(callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
   /**
@@ -458,6 +458,7 @@ declare namespace CodeBuild {
   }
   export type EnvironmentVariableType = "PLAINTEXT"|"PARAMETER_STORE"|string;
   export type EnvironmentVariables = EnvironmentVariable[];
+  export type GitCloneDepth = number;
   export type ImageVersions = String[];
   export interface InvalidateProjectCacheInput {
     /**
@@ -716,6 +717,10 @@ declare namespace CodeBuild {
      * If set to true, enables running the Docker daemon inside a Docker container; otherwise, false or not specified (the default). This value must be set to true only if this build project will be used to build Docker images, and the specified build environment image is not one provided by AWS CodeBuild with Docker support. Otherwise, all associated builds that attempt to interact with the Docker daemon will fail. Note that you must also start the Docker daemon so that your builds can interact with it as needed. One way to do this is to initialize the Docker daemon in the install phase of your build spec by running the following build commands. (Do not run the following build commands if the specified build environment image is provided by AWS CodeBuild with Docker support.)  - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&amp; - timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done" 
      */
     privilegedMode?: WrapperBoolean;
+    /**
+     * The certificate to use with this build project.
+     */
+    certificate?: String;
   }
   export type ProjectName = string;
   export type ProjectNames = NonEmptyString[];
@@ -730,6 +735,10 @@ declare namespace CodeBuild {
      */
     location?: String;
     /**
+     * Information about the git clone depth for the build project.
+     */
+    gitCloneDepth?: GitCloneDepth;
+    /**
      * The build spec declaration to use for the builds in this build project. If this value is not specified, a build spec must be included along with the source code to be built.
      */
     buildspec?: String;
@@ -737,6 +746,10 @@ declare namespace CodeBuild {
      * Information about the authorization settings for AWS CodeBuild to access the source code to be built. This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly (unless the build project's source type value is BITBUCKET or GITHUB).
      */
     auth?: SourceAuth;
+    /**
+     * Enable this flag to ignore SSL warnings while connecting to the project source code.
+     */
+    insecureSsl?: WrapperBoolean;
   }
   export type Projects = Project[];
   export type SecurityGroupIds = NonEmptyString[];
@@ -752,7 +765,7 @@ declare namespace CodeBuild {
     resource?: String;
   }
   export type SourceAuthType = "OAUTH"|string;
-  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|string;
+  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|string;
   export interface StartBuildInput {
     /**
      * The name of the build project to start running a build.
@@ -770,6 +783,10 @@ declare namespace CodeBuild {
      * A set of environment variables that overrides, for this build only, the latest ones already defined in the build project.
      */
     environmentVariablesOverride?: EnvironmentVariables;
+    /**
+     * The user-defined depth of history, with a minimum value of 0, that overrides, for this build only, any previous depth of history defined in the build project.
+     */
+    gitCloneDepthOverride?: GitCloneDepth;
     /**
      * A build spec declaration that overrides, for this build only, the latest one already defined in the build project.
      */
@@ -889,6 +906,14 @@ declare namespace CodeBuild {
      * The URL to the webhook.
      */
     url?: NonEmptyString;
+    /**
+     * This is the server endpoint that will receive the webhook payload.
+     */
+    payloadUrl?: NonEmptyString;
+    /**
+     * Use this secret while creating a webhook in GitHub for Enterprise. The secret allows webhook requests sent by GitHub for Enterprise to be authenticated by AWS CodeBuild.
+     */
+    secret?: NonEmptyString;
   }
   export type WrapperBoolean = boolean;
   export type WrapperInt = number;

@@ -129,5 +129,7 @@ module.exports = {
   Cloud9: require('./cloud9'),
   ServerlessApplicationRepository: require('./serverlessapplicationrepository'),
   ServiceDiscovery: require('./servicediscovery'),
-  WorkMail: require('./workmail')
+  WorkMail: require('./workmail'),
+  AutoScalingPlans: require('./autoscalingplans'),
+  TranscribeService: require('./transcribeservice')
 };

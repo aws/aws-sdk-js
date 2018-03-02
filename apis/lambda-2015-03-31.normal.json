@@ -5,6 +5,7 @@
     "endpointPrefix":"lambda",
     "protocol":"rest-json",
     "serviceFullName":"AWS Lambda",
+    "serviceId":"Lambda",
     "signatureVersion":"v4",
     "uid":"lambda-2015-03-31"
   },
@@ -24,7 +25,8 @@
         {"shape":"ResourceConflictException"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"PolicyLengthExceededException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"PreconditionFailedException"}
       ],
       "documentation":"<p>Adds a permission to the resource policy associated with the specified AWS Lambda function. You use resource policies to grant permissions to event sources that use <i>push</i> model. In a <i>push</i> model, event sources (such as Amazon S3 and custom applications) invoke your Lambda function. Each permission you add to the resource policy allows an event source, permission to invoke the Lambda function. </p> <p>For information about the push model, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a>. </p> <p>If you are using versioning, the permissions you add are specific to the Lambda function version or alias you specify in the <code>AddPermission</code> request via the <code>Qualifier</code> parameter. For more information about versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:AddPermission</code> action.</p>"
     },
@@ -146,7 +148,7 @@
         {"shape":"TooManyRequestsException"},
         {"shape":"InvalidParameterValueException"}
       ],
-      "documentation":"<p>Removes concurrent execution limits from this function.</p>"
+      "documentation":"<p>Removes concurrent execution limits from this function. For more information, see <a>concurrent-executions</a>.</p>"
     },
     "GetAccountSettings":{
       "name":"GetAccountSettings",
@@ -278,7 +280,7 @@
         {"shape":"KMSNotFoundException"},
         {"shape":"InvalidRuntimeException"}
       ],
-      "documentation":"<p>Invokes a specific Lambda function. For an example, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually\">Create the Lambda Function and Test It Manually</a>. </p> <p>If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the <code>Qualifier</code> parameter in the request. If you don't provide the <code>Qualifier</code> parameter, the <code>$LATEST</code> version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>"
+      "documentation":"<p>Invokes a specific Lambda function. For an example, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually\">Create the Lambda Function and Test It Manually</a>. </p> <p>If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the <code>Qualifier</code> parameter in the request. If you don't provide the <code>Qualifier</code> parameter, the <code>$LATEST</code> version of the Lambda function is invoked. Invocations occur at least once in response to an event and functions must be idempotent to handle this. For information about the versioning feature, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p> <note> <p>The <code>TooManyRequestsException</code> noted below will return the following: <code>ConcurrentInvocationLimitExceeded</code> will be returned if you have no functions with reserved concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account's unreserved concurrency limit. <code>ReservedFunctionConcurrentInvocationLimitExceeded</code> will be returned when a function with reserved concurrency exceeds its configured concurrency limit. </p> </note>"
     },
     "InvokeAsync":{
       "name":"InvokeAsync",
@@ -395,7 +397,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"CodeStorageExceededException"}
+        {"shape":"CodeStorageExceededException"},
+        {"shape":"PreconditionFailedException"}
       ],
       "documentation":"<p>Publishes a version of your function from the current snapshot of $LATEST. That is, AWS Lambda takes a snapshot of the function code and configuration information from $LATEST and publishes a new version. The code and configuration cannot be modified after publication. For information about the versioning feature, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p>"
     },
@@ -414,7 +417,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"TooManyRequestsException"}
       ],
-      "documentation":"<p>Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions.</p>"
+      "documentation":"<p>Sets a limit on the number of concurrent executions available to this function. It is a subset of your account's total concurrent execution limit per region. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions. For more information, see <a>concurrent-executions</a>.</p>"
     },
     "RemovePermission":{
       "name":"RemovePermission",
@@ -428,7 +431,8 @@
         {"shape":"ServiceException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"PreconditionFailedException"}
       ],
       "documentation":"<p>You can remove individual permissions from an resource policy associated with a Lambda function by providing a statement ID that you provided when you added the permission.</p> <p>If you are using versioning, the permissions you remove are specific to the Lambda function version or alias you specify in the <code>AddPermission</code> request via the <code>Qualifier</code> parameter. For more information about versioning, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>Note that removal of a permission will cause an active event source to lose permission to the function.</p> <p>You need permission for the <code>lambda:RemovePermission</code> action.</p>"
     },
@@ -477,7 +481,8 @@
         {"shape":"ServiceException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"PreconditionFailedException"}
       ],
       "documentation":"<p>Using this API you can update the function version to which the alias points and the alias description. For more information, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html\">Introduction to AWS Lambda Aliases</a>.</p> <p>This requires permission for the lambda:UpdateAlias action.</p>"
     },
@@ -513,7 +518,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"CodeStorageExceededException"}
+        {"shape":"CodeStorageExceededException"},
+        {"shape":"PreconditionFailedException"}
       ],
       "documentation":"<p>Updates the code for the specified Lambda function. This operation must only be used on an existing Lambda function and cannot be used to update the function configuration.</p> <p>If you are using the versioning feature, note this API will always update the $LATEST version of your Lambda function. For information about the versioning feature, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:UpdateFunctionCode</code> action.</p>"
     },
@@ -531,7 +537,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidParameterValueException"},
         {"shape":"TooManyRequestsException"},
-        {"shape":"ResourceConflictException"}
+        {"shape":"ResourceConflictException"},
+        {"shape":"PreconditionFailedException"}
       ],
       "documentation":"<p>Updates the configuration parameters for the specified Lambda function by using the values provided in the request. You provide only the parameters you want to change. This operation must only be used on an existing Lambda function and cannot be used to update the function's code.</p> <p>If you are using the versioning feature, note this API will always update the $LATEST version of your Lambda function. For information about the versioning feature, see <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">AWS Lambda Function Versioning and Aliases</a>. </p> <p>This operation requires permission for the <code>lambda:UpdateFunctionConfiguration</code> action.</p>"
     }
@@ -558,7 +565,7 @@
         },
         "UnreservedConcurrentExecutions":{
           "shape":"UnreservedConcurrentExecutions",
-          "documentation":"<p>The number of concurrent executions available to functions that do not have concurrency limits set.</p>"
+          "documentation":"<p>The number of concurrent executions available to functions that do not have concurrency limits set. For more information, see <a>concurrent-executions</a>.</p>"
         }
       },
       "documentation":"<p>Provides limits of code size and concurrency associated with the current account and region.</p>"
@@ -625,6 +632,10 @@
           "documentation":"<p>You can use this optional query parameter to describe a qualified ARN using a function version or an alias name. The permission will then apply to the specific qualified ARN. For example, if you specify function version 2 as the qualifier, then permission applies only when request is made using qualified function ARN:</p> <p> <code>arn:aws:lambda:aws-region:acct-id:function:function-name:2</code> </p> <p>If you specify an alias name, for example <code>PROD</code>, then the permission is valid only for requests made using the alias ARN:</p> <p> <code>arn:aws:lambda:aws-region:acct-id:function:function-name:PROD</code> </p> <p>If the qualifier is not specified, the permission is valid only when requests is made using unqualified function ARN.</p> <p> <code>arn:aws:lambda:aws-region:acct-id:function:function-name</code> </p>",
           "location":"querystring",
           "locationName":"Qualifier"
+        },
+        "RevisionId":{
+          "shape":"String",
+          "documentation":"<p>An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn't match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either or .</p>"
         }
       },
       "documentation":"<p/>"
@@ -678,6 +689,10 @@
         "RoutingConfig":{
           "shape":"AliasRoutingConfiguration",
           "documentation":"<p>Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.</p>"
+        },
+        "RevisionId":{
+          "shape":"String",
+          "documentation":"<p>Represents the latest updated revision of the function or alias.</p>"
         }
       },
       "documentation":"<p>Provides configuration information about a Lambda function version alias.</p>"
@@ -691,7 +706,7 @@
       "members":{
         "AdditionalVersionWeights":{
           "shape":"AdditionalVersionWeights",
-          "documentation":"<p>Set this property value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke <code>function-version</code>.</p>"
+          "documentation":"<p>Set this value to dictate what percentage of traffic will invoke the updated function version. If set to an empty string, 100 percent of traffic will invoke <code>function-version</code>. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.</p>"
         }
       },
       "documentation":"<p>The parent object that implements what percentage of traffic will invoke each function version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.</p>"
@@ -732,7 +747,7 @@
       "members":{
         "ReservedConcurrentExecutions":{
           "shape":"ReservedConcurrentExecutions",
-          "documentation":"<p>The number of concurrent executions reserved for this function.</p>"
+          "documentation":"<p>The number of concurrent executions reserved for this function. For more information, see <a>concurrent-executions</a>.</p>"
         }
       }
     },
@@ -819,7 +834,7 @@
         },
         "Runtime":{
           "shape":"Runtime",
-          "documentation":"<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to \"python3.6\". To use the Python runtime v2.7, set the value to \"python2.7\". To use the Node.js runtime v6.10, set the value to \"nodejs6.10\". To use the Node.js runtime v4.3, set the value to \"nodejs4.3\".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>"
+          "documentation":"<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to \"python3.6\". To use the Python runtime v2.7, set the value to \"python2.7\". To use the Node.js runtime v6.10, set the value to \"nodejs6.10\". To use the Node.js runtime v4.3, set the value to \"nodejs4.3\".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to do so will result in an invalid parameter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>"
         },
         "Role":{
           "shape":"RoleArn",
@@ -924,7 +939,7 @@
       "members":{
         "FunctionName":{
           "shape":"FunctionName",
-          "documentation":"<p>The name of the function you are removing concurrent execution limits from.</p>",
+          "documentation":"<p>The name of the function you are removing concurrent execution limits from. For more information, see <a>concurrent-executions</a>.</p>",
           "location":"uri",
           "locationName":"FunctionName"
         }
@@ -1215,6 +1230,10 @@
         "MasterArn":{
           "shape":"FunctionArn",
           "documentation":"<p>Returns the ARN (Amazon Resource Name) of the master function.</p>"
+        },
+        "RevisionId":{
+          "shape":"String",
+          "documentation":"<p>Represents the latest updated revision of the function or alias.</p>"
         }
       },
       "documentation":"<p>A complex type that describes function metadata.</p>"
@@ -1328,7 +1347,7 @@
         },
         "Concurrency":{
           "shape":"Concurrency",
-          "documentation":"<p>The concurrent execution limit set for this function.</p>"
+          "documentation":"<p>The concurrent execution limit set for this function. For more information, see <a>concurrent-executions</a>.</p>"
         }
       },
       "documentation":"<p>This response contains the object for the Lambda function location (see <a>FunctionCodeLocation</a>.</p>"
@@ -1358,6 +1377,10 @@
         "Policy":{
           "shape":"String",
           "documentation":"<p>The resource policy associated with the specified function. The response returns the same as a string using a backslash (\"\\\") as an escape character in the JSON.</p>"
+        },
+        "RevisionId":{
+          "shape":"String",
+          "documentation":"<p>Represents the latest updated revision of the function or alias.</p>"
         }
       },
       "documentation":"<p/>"
@@ -1509,7 +1532,7 @@
         },
         "ExecutedVersion":{
           "shape":"Version",
-          "documentation":"<p>The function version that has been executed. This value is returned only if the invocation type is <code>RequestResponse</code>.</p>",
+          "documentation":"<p>The function version that has been executed. This value is returned only if the invocation type is <code>RequestResponse</code>. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.</p>",
           "location":"header",
           "locationName":"X-Amz-Executed-Version"
         }
@@ -1842,6 +1865,22 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "PreconditionFailedException":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"String",
+          "documentation":"<p/>"
+        },
+        "message":{
+          "shape":"String",
+          "documentation":"<p/>"
+        }
+      },
+      "documentation":"<p>The RevisionId provided does not match the latest RevisionId for the Lambda function or alias. Call the <code>GetFunction</code> or the <code>GetAlias</code> API to retrieve the latest RevisionId for your resource.</p>",
+      "error":{"httpStatusCode":412},
+      "exception":true
+    },
     "Principal":{
       "type":"string",
       "pattern":".*"
@@ -1863,6 +1902,10 @@
         "Description":{
           "shape":"Description",
           "documentation":"<p>The description for the version you are publishing. If not provided, AWS Lambda copies the description from the $LATEST version.</p>"
+        },
+        "RevisionId":{
+          "shape":"String",
+          "documentation":"<p>An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn't match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either or .</p>"
         }
       },
       "documentation":"<p/>"
@@ -1876,13 +1919,13 @@
       "members":{
         "FunctionName":{
           "shape":"FunctionName",
-          "documentation":"<p>The name of the function you are setting concurrent execution limits on.</p>",
+          "documentation":"<p>The name of the function you are setting concurrent execution limits on. For more information, see <a>concurrent-executions</a>.</p>",
           "location":"uri",
           "locationName":"FunctionName"
         },
         "ReservedConcurrentExecutions":{
           "shape":"ReservedConcurrentExecutions",
-          "documentation":"<p>The concurrent execution limit reserved for this function.</p>"
+          "documentation":"<p>The concurrent execution limit reserved for this function. For more information, see <a>concurrent-executions</a>.</p>"
         }
       }
     },
@@ -1916,6 +1959,12 @@
           "documentation":"<p>You can specify this optional parameter to remove permission associated with a specific function version or function alias. If you don't specify this parameter, the API removes permission associated with the unqualified function ARN.</p>",
           "location":"querystring",
           "locationName":"Qualifier"
+        },
+        "RevisionId":{
+          "shape":"String",
+          "documentation":"<p>An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn't match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either or .</p>",
+          "location":"querystring",
+          "locationName":"RevisionId"
         }
       },
       "documentation":"<p/>"
@@ -1978,7 +2027,9 @@
         "python2.7",
         "python3.6",
         "dotnetcore1.0",
-        "nodejs4.3-edge"
+        "dotnetcore2.0",
+        "nodejs4.3-edge",
+        "go1.x"
       ]
     },
     "S3Bucket":{
@@ -2102,7 +2153,7 @@
         "message":{"shape":"String"},
         "Reason":{"shape":"ThrottleReason"}
       },
-      "documentation":"<p>You will get this exception for the following reasons. <code>ConcurrentInvocationLimitExceeded</code> is returned if you have no functions with reserved-concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account's unreserved concurrency limit. <code>ReservedFunctionConcurrentInvocationLimitExceeded</code> is returned when a function with reserved concurrency exceeds its configured concurrent limit. <code>CallerRateLimitExceeded</code> is returned when your account limit is exceeded and you have not reserved concurrency on any function. For more information, see <a>concurrent-executions</a> </p>",
+      "documentation":"<p> </p>",
       "error":{"httpStatusCode":429},
       "exception":true
     },
@@ -2198,6 +2249,10 @@
         "RoutingConfig":{
           "shape":"AliasRoutingConfiguration",
           "documentation":"<p>Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version. For more information, see <a>lambda-traffic-shifting-using-aliases</a>.</p>"
+        },
+        "RevisionId":{
+          "shape":"String",
+          "documentation":"<p>An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn't match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either or .</p>"
         }
       }
     },
@@ -2259,6 +2314,10 @@
         "DryRun":{
           "shape":"Boolean",
           "documentation":"<p>This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation. It will do all necessary computation and validation of your code but will not upload it or a publish a version. Each time this operation is invoked, the <code>CodeSha256</code> hash value of the provided code will also be computed and returned in the response.</p>"
+        },
+        "RevisionId":{
+          "shape":"String",
+          "documentation":"<p>An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn't match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either or .</p>"
         }
       },
       "documentation":"<p/>"
@@ -2313,6 +2372,10 @@
         "TracingConfig":{
           "shape":"TracingConfig",
           "documentation":"<p>The parent object that contains your function's tracing settings.</p>"
+        },
+        "RevisionId":{
+          "shape":"String",
+          "documentation":"<p>An optional value you can use to ensure you are updating the latest update of the function version or alias. If the <code>RevisionID</code> you pass doesn't match the latest <code>RevisionId</code> of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias <code>RevisionID</code> using either or .</p>"
         }
       },
       "documentation":"<p/>"

@@ -220,6 +220,14 @@ declare class CodeCommit extends Service {
    */
   postCommentReply(callback?: (err: AWSError, data: CodeCommit.Types.PostCommentReplyOutput) => void): Request<CodeCommit.Types.PostCommentReplyOutput, AWSError>;
   /**
+   * Adds or updates a file in an AWS CodeCommit repository.
+   */
+  putFile(params: CodeCommit.Types.PutFileInput, callback?: (err: AWSError, data: CodeCommit.Types.PutFileOutput) => void): Request<CodeCommit.Types.PutFileOutput, AWSError>;
+  /**
+   * Adds or updates a file in an AWS CodeCommit repository.
+   */
+  putFile(callback?: (err: AWSError, data: CodeCommit.Types.PutFileOutput) => void): Request<CodeCommit.Types.PutFileOutput, AWSError>;
+  /**
    * Replaces all triggers for a repository. This can be used to create or delete triggers.
    */
   putRepositoryTriggers(params: CodeCommit.Types.PutRepositoryTriggersInput, callback?: (err: AWSError, data: CodeCommit.Types.PutRepositoryTriggersOutput) => void): Request<CodeCommit.Types.PutRepositoryTriggersOutput, AWSError>;
@@ -454,7 +462,7 @@ declare namespace CodeCommit {
      */
     treeId?: ObjectId;
     /**
-     * The parent list for the specified commit.
+     * A list of parent commits for the specified commit. Each parent commit ID is the full commit ID.
      */
     parents?: ParentList;
     /**
@@ -623,6 +631,8 @@ declare namespace CodeCommit {
   export type DifferenceList = Difference[];
   export type Email = string;
   export type EventDate = Date;
+  export type FileContent = Buffer|Uint8Array|Blob|string;
+  export type FileModeTypeEnum = "EXECUTABLE"|"NORMAL"|"SYMLINK"|string;
   export interface GetBlobInput {
     /**
      * The name of the repository that contains the blob.
@@ -1273,6 +1283,58 @@ declare namespace CodeCommit {
     mergeMetadata?: MergeMetadata;
   }
   export type PullRequestTargetList = PullRequestTarget[];
+  export interface PutFileInput {
+    /**
+     * The name of the repository where you want to add or update the file.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The name of the branch where you want to add or update the file.
+     */
+    branchName: BranchName;
+    /**
+     * The content of the file, in binary object format. 
+     */
+    fileContent: FileContent;
+    /**
+     * The name of the file you want to add or update, including the relative path to the file in the repository.  If the path does not currently exist in the repository, the path will be created as part of adding the file. 
+     */
+    filePath: Path;
+    /**
+     * The file mode permissions of the blob. Valid file mode permissions are listed below.
+     */
+    fileMode?: FileModeTypeEnum;
+    /**
+     * The full commit ID of the head commit in the branch where you want to add or update the file. If the commit ID does not match the ID of the head commit at the time of the operation, an error will occur, and the file will not be added or updated.
+     */
+    parentCommitId?: CommitId;
+    /**
+     * A message about why this file was added or updated. While optional, adding a message is strongly encouraged in order to provide a more useful commit history for your repository.
+     */
+    commitMessage?: Message;
+    /**
+     * The name of the person adding or updating the file. While optional, adding a name is strongly encouraged in order to provide a more useful commit history for your repository.
+     */
+    name?: Name;
+    /**
+     * An email address for the person adding or updating the file.
+     */
+    email?: Email;
+  }
+  export interface PutFileOutput {
+    /**
+     * The full SHA of the commit that contains this file change.
+     */
+    commitId: ObjectId;
+    /**
+     * The ID of the blob, which is its SHA-1 pointer.
+     */
+    blobId: ObjectId;
+    /**
+     * Tree information for the commit that contains this file change.
+     */
+    treeId: ObjectId;
+  }
   export interface PutRepositoryTriggersInput {
     /**
      * The name of the repository where you want to create or update the trigger.
@@ -1532,7 +1594,7 @@ declare namespace CodeCommit {
      */
     email?: Email;
     /**
-     * The date when the specified commit was pushed to the repository.
+     * The date when the specified commit was commited, in timestamp format with GMT offset.
      */
     date?: _Date;
   }

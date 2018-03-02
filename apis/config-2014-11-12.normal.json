@@ -809,10 +809,11 @@
     "ConfigurationItemStatus":{
       "type":"string",
       "enum":[
-        "Ok",
-        "Failed",
-        "Discovered",
-        "Deleted"
+        "OK",
+        "ResourceDiscovered",
+        "ResourceNotRecorded",
+        "ResourceDeleted",
+        "ResourceDeletedNotRecorded"
       ]
     },
     "ConfigurationRecorder":{

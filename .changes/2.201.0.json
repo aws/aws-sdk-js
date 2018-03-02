@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Added GetReservationCoverage API for retrieving reservation coverage information."
+    }
+]

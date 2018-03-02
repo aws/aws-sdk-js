@@ -312,7 +312,7 @@
         {"shape":"InvalidParameterException"},
         {"shape":"RepositoryNotFoundException"}
       ],
-      "documentation":"<p>Creates or updates a lifecycle policy.</p>"
+      "documentation":"<p>Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see <a href=\"http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html\">Lifecycle Policy Template</a>.</p>"
     },
     "SetRepositoryPolicy":{
       "name":"SetRepositoryPolicy",
@@ -588,7 +588,7 @@
         },
         "repositoryName":{
           "shape":"RepositoryName",
-          "documentation":"<p>The name of the repository that is associated with the repository policy to&#8232; delete.</p>"
+          "documentation":"<p>The name of the repository.</p>"
         }
       }
     },
@@ -605,7 +605,7 @@
         },
         "lifecyclePolicyText":{
           "shape":"LifecyclePolicyText",
-          "documentation":"<p>The JSON repository policy text.</p>"
+          "documentation":"<p>The JSON lifecycle policy text.</p>"
         },
         "lastEvaluatedAt":{
           "shape":"EvaluationTimestamp",
@@ -699,11 +699,11 @@
         },
         "nextToken":{
           "shape":"NextToken",
-          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p>"
+          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeImages</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.</p>"
         },
         "maxResults":{
           "shape":"MaxResults",
-          "documentation":"<p>The maximum number of repository results returned by <code>DescribeImages</code> in paginated output. When this parameter is used, <code>DescribeImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.</p>"
+          "documentation":"<p>The maximum number of repository results returned by <code>DescribeImages</code> in paginated output. When this parameter is used, <code>DescribeImages</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImages</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeImages</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify images with <code>imageIds</code>.</p>"
         },
         "filter":{
           "shape":"DescribeImagesFilter",
@@ -737,11 +737,11 @@
         },
         "nextToken":{
           "shape":"NextToken",
-          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeRepositories</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
+          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeRepositories</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return. This option cannot be used when you specify repositories with <code>repositoryNames</code>.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
         },
         "maxResults":{
           "shape":"MaxResults",
-          "documentation":"<p>The maximum number of repository results returned by <code>DescribeRepositories</code> in paginated output. When this parameter is used, <code>DescribeRepositories</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRepositories</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeRepositories</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.</p>"
+          "documentation":"<p>The maximum number of repository results returned by <code>DescribeRepositories</code> in paginated output. When this parameter is used, <code>DescribeRepositories</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeRepositories</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeRepositories</code> returns up to 100 results and a <code>nextToken</code> value, if applicable. This option cannot be used when you specify repositories with <code>repositoryNames</code>.</p>"
         }
       }
     },
@@ -841,7 +841,7 @@
         },
         "repositoryName":{
           "shape":"RepositoryName",
-          "documentation":"<p>The name of the repository with the policy to retrieve.</p>"
+          "documentation":"<p>The name of the repository.</p>"
         },
         "imageIds":{
           "shape":"ImageIdentifierList",
@@ -849,11 +849,11 @@
         },
         "nextToken":{
           "shape":"NextToken",
-          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated&#8232; <code>GetLifecyclePolicyPreviewRequest</code> request where <code>maxResults</code> was used and the&#8232; results exceeded the value of that parameter. Pagination continues from the end of the&#8232; previous results that returned the <code>nextToken</code> value. This value is&#8232; <code>null</code> when there are no more results to return.</p>"
+          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated&#x2028; <code>GetLifecyclePolicyPreviewRequest</code> request where <code>maxResults</code> was used and the&#x2028; results exceeded the value of that parameter. Pagination continues from the end of the&#x2028; previous results that returned the <code>nextToken</code> value. This value is&#x2028; <code>null</code> when there are no more results to return. This option cannot be used when you specify images with <code>imageIds</code>.</p>"
         },
         "maxResults":{
           "shape":"MaxResults",
-          "documentation":"<p>The maximum number of repository results returned by <code>GetLifecyclePolicyPreviewRequest</code> in&#8232; paginated output. When this parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns&#8232; <code>maxResults</code> results in a single page along with a <code>nextToken</code>&#8232; response element. The remaining results of the initial request can be seen by sending&#8232; another <code>GetLifecyclePolicyPreviewRequest</code> request with the returned <code>nextToken</code>&#8232; value. This value can be between 1 and 100. If this&#8232; parameter is not used, then <code>GetLifecyclePolicyPreviewRequest</code> returns up to&#8232; 100 results and a <code>nextToken</code> value, if&#8232; applicable.</p>"
+          "documentation":"<p>The maximum number of repository results returned by <code>GetLifecyclePolicyPreviewRequest</code> in&#x2028; paginated output. When this parameter is used, <code>GetLifecyclePolicyPreviewRequest</code> only returns&#x2028; <code>maxResults</code> results in a single page along with a <code>nextToken</code>&#x2028; response element. The remaining results of the initial request can be seen by sending&#x2028; another <code>GetLifecyclePolicyPreviewRequest</code> request with the returned <code>nextToken</code>&#x2028; value. This value can be between 1 and 100. If this&#x2028; parameter is not used, then <code>GetLifecyclePolicyPreviewRequest</code> returns up to&#x2028; 100 results and a <code>nextToken</code> value, if&#x2028; applicable. This option cannot be used when you specify images with <code>imageIds</code>.</p>"
         },
         "filter":{
           "shape":"LifecyclePolicyPreviewFilter",
@@ -874,7 +874,7 @@
         },
         "lifecyclePolicyText":{
           "shape":"LifecyclePolicyText",
-          "documentation":"<p>The JSON repository policy text.</p>"
+          "documentation":"<p>The JSON lifecycle policy text.</p>"
         },
         "status":{
           "shape":"LifecyclePolicyPreviewStatus",
@@ -904,7 +904,7 @@
         },
         "repositoryName":{
           "shape":"RepositoryName",
-          "documentation":"<p>The name of the repository with the policy to retrieve.</p>"
+          "documentation":"<p>The name of the repository.</p>"
         }
       }
     },
@@ -921,7 +921,7 @@
         },
         "lifecyclePolicyText":{
           "shape":"LifecyclePolicyText",
-          "documentation":"<p>The JSON repository policy text.</p>"
+          "documentation":"<p>The JSON lifecycle policy text.</p>"
         },
         "lastEvaluatedAt":{
           "shape":"EvaluationTimestamp",
@@ -1413,7 +1413,7 @@
           "documentation":"<p>The error message associated with the exception.</p>"
         }
       },
-      "documentation":"<p>The operation did not succeed because it would have exceeded a service limit for your account. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html\">Amazon ECR Default Service Limits</a> in the Amazon EC2 Container Registry User Guide.</p>",
+      "documentation":"<p>The operation did not succeed because it would have exceeded a service limit for your account. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html\">Amazon ECR Default Service Limits</a> in the Amazon Elastic Container Registry User Guide.</p>",
       "exception":true
     },
     "ListImagesFilter":{
@@ -1527,7 +1527,7 @@
       "members":{
         "registryId":{
           "shape":"RegistryId",
-          "documentation":"<p>The AWS account ID associated with the registry that contains the repository. If you do&#8232; not specify a registry, the default registry is assumed.</p>"
+          "documentation":"<p>The AWS account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName":{
           "shape":"RepositoryName",
@@ -1825,5 +1825,5 @@
     },
     "Url":{"type":"string"}
   },
-  "documentation":"<p>Amazon EC2 Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.</p>"
+  "documentation":"<p>Amazon Elastic Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.</p>"
 }

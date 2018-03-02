@@ -325,6 +325,24 @@ declare namespace GuardDuty {
   }
   export interface AcceptInvitationResponse {
   }
+  export interface AccessKeyDetails {
+    /**
+     * Access key ID of the user.
+     */
+    AccessKeyId?: __string;
+    /**
+     * The principal ID of the user.
+     */
+    PrincipalId?: __string;
+    /**
+     * The name of the user.
+     */
+    UserName?: __string;
+    /**
+     * The type of the user.
+     */
+    UserType?: __string;
+  }
   export interface AccountDetail {
     /**
      * Member account ID.
@@ -355,6 +373,10 @@ declare namespace GuardDuty {
      * Information about the NETWORK_CONNECTION action described in this finding.
      */
     NetworkConnectionAction?: NetworkConnectionAction;
+    /**
+     * Information about the PORT_PROBE action described in this finding.
+     */
+    PortProbeAction?: PortProbeAction;
   }
   export type Activate = boolean;
   export interface ArchiveFindingsRequest {
@@ -1072,6 +1094,7 @@ declare namespace GuardDuty {
     Members?: Members;
     NextToken?: NextToken;
   }
+  export type ListOfPortProbeDetail = PortProbeDetail[];
   export interface ListThreatIntelSetsRequest {
     /**
      * The detectorID that specifies the GuardDuty service whose ThreatIntelSets you want to list.
@@ -1230,6 +1253,26 @@ declare namespace GuardDuty {
      */
     Org?: __string;
   }
+  export interface PortProbeAction {
+    /**
+     * Port probe blocked information.
+     */
+    Blocked?: __boolean;
+    /**
+     * A list of port probe details objects.
+     */
+    PortProbeDetails?: ListOfPortProbeDetail;
+  }
+  export interface PortProbeDetail {
+    /**
+     * Local port information of the connection.
+     */
+    LocalPortDetails?: LocalPortDetails;
+    /**
+     * Remote IP information of the connection.
+     */
+    RemoteIpDetails?: RemoteIpDetails;
+  }
   export type PrivateDnsName = string;
   export type PrivateIpAddress = string;
   export interface PrivateIpAddressDetails {
@@ -1287,6 +1330,7 @@ declare namespace GuardDuty {
     PortName?: __string;
   }
   export interface Resource {
+    AccessKeyDetails?: AccessKeyDetails;
     InstanceDetails?: InstanceDetails;
     /**
      * The type of the AWS resource.

@@ -123,6 +123,14 @@ declare class MediaLive extends Service {
    * Stops a running channel
    */
   stopChannel(callback?: (err: AWSError, data: MediaLive.Types.StopChannelResponse) => void): Request<MediaLive.Types.StopChannelResponse, AWSError>;
+  /**
+   * Updates a channel.
+   */
+  updateChannel(params: MediaLive.Types.UpdateChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelResponse) => void): Request<MediaLive.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates a channel.
+   */
+  updateChannel(callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelResponse) => void): Request<MediaLive.Types.UpdateChannelResponse, AWSError>;
 }
 declare namespace MediaLive {
   export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string;
@@ -539,7 +547,7 @@ Alternate rendition that the client will not try to play back by default. Repres
   }
   export interface CaptionLanguageMapping {
     /**
-     * Channel to insert closed captions.  Each channel mapping must have a unique channel number (maximum of 4)
+     * The closed caption channel being described by this CaptionLanguageMapping.  Each channel mapping must have a unique channel number (maximum of 4)
      */
     CaptionChannel?: __integer;
     /**
@@ -598,6 +606,7 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: ListOfInputAttachment;
+    InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -650,6 +659,7 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: ListOfInputAttachment;
+    InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -672,6 +682,10 @@ one destination per packager.
      */
     InputAttachments?: ListOfInputAttachment;
     /**
+     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+     */
+    InputSpecification?: InputSpecification;
+    /**
      * Name of channel.
      */
     Name?: __string;
@@ -682,7 +696,7 @@ creating multiple resources.
      */
     RequestId?: __string;
     /**
-     * Reserved for future use.
+     * Deprecated field that's only usable by whitelisted customers.
      */
     Reserved?: __string;
     /**
@@ -698,6 +712,10 @@ creating multiple resources.
      */
     InputAttachments?: ListOfInputAttachment;
     /**
+     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+     */
+    InputSpecification?: InputSpecification;
+    /**
      * Name of channel.
      */
     Name?: __string;
@@ -708,7 +726,7 @@ creating multiple resources.
      */
     RequestId?: __string;
     /**
-     * Reserved for future use.
+     * Deprecated field that's only usable by whitelisted customers.
      */
     Reserved?: __string;
     /**
@@ -724,10 +742,7 @@ creating multiple resources.
   }
   export interface CreateInput {
     /**
-     * settings required for PUSH-type inputs; one per redundancy group.
-Only one of sources and destinations can be specified.
-Note: there are currently no settings required for PUSH-type inputs
-
+     * Destination settings for PUSH type inputs.
      */
     Destinations?: ListOfInputDestinationRequest;
     /**
@@ -740,13 +755,14 @@ Note: there are currently no settings required for PUSH-type inputs
     Name?: __string;
     /**
      * Unique identifier of the request to ensure the request is handled
-exactly once in case of retries
+exactly once in case of retries.
 
      */
     RequestId?: __string;
     /**
-     * settings required for PULL-type inputs; one per redundancy group
-Only one of sources and destinations can be specified
+     * The source URLs for a PULL-type input. Every PULL type input needs
+exactly two source URLs for redundancy.
+Only specify sources for PULL type Inputs. Leave Destinations empty.
 
      */
     Sources?: ListOfInputSourceRequest;
@@ -754,10 +770,7 @@ Only one of sources and destinations can be specified
   }
   export interface CreateInputRequest {
     /**
-     * settings required for PUSH-type inputs; one per redundancy group.
-Only one of sources and destinations can be specified.
-Note: there are currently no settings required for PUSH-type inputs
-
+     * Destination settings for PUSH type inputs.
      */
     Destinations?: ListOfInputDestinationRequest;
     /**
@@ -770,13 +783,14 @@ Note: there are currently no settings required for PUSH-type inputs
     Name?: __string;
     /**
      * Unique identifier of the request to ensure the request is handled
-exactly once in case of retries
+exactly once in case of retries.
 
      */
     RequestId?: __string;
     /**
-     * settings required for PULL-type inputs; one per redundancy group
-Only one of sources and destinations can be specified
+     * The source URLs for a PULL-type input. Every PULL type input needs
+exactly two source URLs for redundancy.
+Only specify sources for PULL type Inputs. Leave Destinations empty.
 
      */
     Sources?: ListOfInputSourceRequest;
@@ -831,6 +845,7 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: ListOfInputAttachment;
+    InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -892,6 +907,7 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: ListOfInputAttachment;
+    InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -914,31 +930,31 @@ one destination per packager.
   }
   export interface DescribeInputResponse {
     /**
-     * Unique ARN of input (generated, immutable)
+     * The Unique ARN of the input (generated, immutable).
      */
     Arn?: __string;
     /**
-     * List of channel IDs that that input is attached to (currently an input can only be attached to one channel)
+     * A list of channel IDs that that input is attached to (currently an input can only be attached to one channel).
      */
     AttachedChannels?: ListOf__string;
     /**
-     * List of destinations of input (PULL-type)
+     * A list of the destinations of the input (PUSH-type).
      */
     Destinations?: ListOfInputDestination;
     /**
-     * generated ID of input (unique for user account, immutable)
+     * The generated ID of the input (unique for user account, immutable).
      */
     Id?: __string;
     /**
-     * user-assigned name (mutable)
+     * The user-assigned name (This is a mutable value).
      */
     Name?: __string;
     /**
-     * List of IDs for all the security groups attached to the input.
+     * A list of IDs for all the security groups attached to the input.
      */
     SecurityGroups?: ListOf__string;
     /**
-     * List of sources of input (PULL-type)
+     * A list of the sources of the input (PULL-type).
      */
     Sources?: ListOfInputSource;
     State?: InputState;
@@ -1554,7 +1570,7 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
      */
     HlsCdnSettings?: HlsCdnSettings;
     /**
-     * Number of segments to keep in the playlist (.m3u8) file. mode must be "vod" for this setting to have an effect, and this number should be less than or equal to keepSegments.
+     * If mode is "live", the number of segments to retain in the manifest (.m3u8) file. This number must be less than or equal to keepSegments. If mode is "vod", this parameter has no effect.
      */
     IndexNSegments?: __integer;
     /**
@@ -1570,7 +1586,7 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
      */
     IvSource?: HlsIvSource;
     /**
-     * Number of segments to retain in the destination directory. mode must be "live" for this setting to have an effect.
+     * If mode is "live", the number of TS segments to retain in the destination directory. If mode is "vod", this parameter has no effect.
      */
     KeepSegments?: __integer;
     /**
@@ -1598,7 +1614,9 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
      */
     MinSegmentLength?: __integer;
     /**
-     * If set to "vod", keeps and indexes all segments starting with the first segment.  If set to "live" segments will age out and only the last keepSegments number of segments will be retained.
+     * If "vod", all segments are indexed and kept permanently in the destination and manifest. If "live", only the number segments specified in keepSegments and indexNSegments are kept; newer segments replace older segments, which may prevent players from rewinding all the way to the beginning of the event.
+
+VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, converting it to a "VOD" type manifest on completion of the stream.
      */
     Mode?: HlsMode;
     /**
@@ -1741,31 +1759,31 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
   }
   export interface Input {
     /**
-     * Unique ARN of input (generated, immutable)
+     * The Unique ARN of the input (generated, immutable).
      */
     Arn?: __string;
     /**
-     * List of channel IDs that that input is attached to (currently an input can only be attached to one channel)
+     * A list of channel IDs that that input is attached to (currently an input can only be attached to one channel).
      */
     AttachedChannels?: ListOf__string;
     /**
-     * List of destinations of input (PULL-type)
+     * A list of the destinations of the input (PUSH-type).
      */
     Destinations?: ListOfInputDestination;
     /**
-     * generated ID of input (unique for user account, immutable)
+     * The generated ID of the input (unique for user account, immutable).
      */
     Id?: __string;
     /**
-     * user-assigned name (mutable)
+     * The user-assigned name (This is a mutable value).
      */
     Name?: __string;
     /**
-     * List of IDs for all the security groups attached to the input.
+     * A list of IDs for all the security groups attached to the input.
      */
     SecurityGroups?: ListOf__string;
     /**
-     * List of sources of input (PULL-type)
+     * A list of the sources of the input (PULL-type).
      */
     Sources?: ListOfInputSource;
     State?: InputState;
@@ -1791,17 +1809,18 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
      */
     InputChannel?: __integer;
   }
+  export type InputCodec = "MPEG2"|"AVC"|"HEVC"|string;
   export type InputDeblockFilter = "DISABLED"|"ENABLED"|string;
   export type InputDenoiseFilter = "DISABLED"|"ENABLED"|string;
   export interface InputDestination {
     /**
-     * system-generated static IP address of endpoint.
-Remains fixed for the lifetime of the input
+     * The system-generated static IP address of endpoint.
+It remains fixed for the lifetime of the input.
 
      */
     Ip?: __string;
     /**
-     * port for input
+     * The port number for the input.
      */
     Port?: __string;
     /**
@@ -1860,6 +1879,8 @@ to.
     RepeatFrameMsec?: __integer;
   }
   export type InputLossImageType = "COLOR"|"SLATE"|string;
+  export type InputMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
+  export type InputResolution = "SD"|"HD"|"UHD"|string;
   export interface InputSecurityGroup {
     /**
      * Unique ARN of Input Security Group
@@ -1923,7 +1944,7 @@ to.
   }
   export interface InputSource {
     /**
-     * key used to extract the password from EC2 Parameter store
+     * The key used to extract the password from EC2 Parameter store.
      */
     PasswordParam?: __string;
     /**
@@ -1933,14 +1954,14 @@ pulled from.
      */
     Url?: __string;
     /**
-     * username for input source
+     * The username for the input source.
      */
     Username?: __string;
   }
   export type InputSourceEndBehavior = "CONTINUE"|"LOOP"|string;
   export interface InputSourceRequest {
     /**
-     * key used to extract the password from EC2 Parameter store
+     * The key used to extract the password from EC2 Parameter store.
      */
     PasswordParam?: __string;
     /**
@@ -1950,9 +1971,23 @@ pulled from.
      */
     Url?: __string;
     /**
-     * username for input source
+     * The username for the input source.
      */
     Username?: __string;
+  }
+  export interface InputSpecification {
+    /**
+     * Input codec
+     */
+    Codec?: InputCodec;
+    /**
+     * Maximum input bitrate, categorized coarsely
+     */
+    MaximumBitrate?: InputMaximumBitrate;
+    /**
+     * Input resolution, categorized coarsely
+     */
+    Resolution?: InputResolution;
   }
   export type InputState = "CREATING"|"DETACHED"|"ATTACHED"|"DELETING"|"DELETED"|string;
   export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|string;
@@ -2147,7 +2182,7 @@ pulled from.
      */
     EbpPlacement?: M2tsEbpPlacement;
     /**
-     * Packet Identifier (PID) for ECM in the transport stream. Only enabled when Simulcrypt is enabled. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+     * This field is unused and deprecated.
      */
     EcmPid?: __string;
     /**
@@ -2268,7 +2303,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     AudioPids?: __string;
     /**
-     * ThePlatform-protected transport streams using 'microsoft' as Target Client include an ECM stream. This ECM stream contains the size, IV, and PTS of every sample in the transport stream.  This stream PID is specified here. This PID has no effect on non ThePlatform-protected streams.
+     * This parameter is unused and deprecated.
      */
     EcmPid?: __string;
     /**
@@ -2641,6 +2676,7 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: ListOfInputAttachment;
+    InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -2696,6 +2732,7 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: ListOfInputAttachment;
+    InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
      */
@@ -2772,6 +2809,60 @@ one destination per packager.
     FecOutputSettings?: FecOutputSettings;
   }
   export type UdpTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export interface UpdateChannel {
+    /**
+     * A list of output destinations for this channel.
+     */
+    Destinations?: ListOfOutputDestination;
+    /**
+     * The encoder settings for this channel.
+     */
+    EncoderSettings?: EncoderSettings;
+    /**
+     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+     */
+    InputSpecification?: InputSpecification;
+    /**
+     * The name of the channel.
+     */
+    Name?: __string;
+    /**
+     * An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.
+     */
+    RoleArn?: __string;
+  }
+  export interface UpdateChannelRequest {
+    /**
+     * channel ID
+     */
+    ChannelId: __string;
+    /**
+     * A list of output destinations for this channel.
+     */
+    Destinations?: ListOfOutputDestination;
+    /**
+     * The encoder settings for this channel.
+     */
+    EncoderSettings?: EncoderSettings;
+    /**
+     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+     */
+    InputSpecification?: InputSpecification;
+    /**
+     * The name of the channel.
+     */
+    Name?: __string;
+    /**
+     * An optional Amazon Resource Name (ARN) of the role to assume when running the Channel. If you do not specify this on an update call but the role was previously set that role will be removed.
+     */
+    RoleArn?: __string;
+  }
+  export interface UpdateChannelResponse {
+    Channel?: Channel;
+  }
+  export interface UpdateChannelResultModel {
+    Channel?: Channel;
+  }
   export interface ValidationError {
     ElementPath?: __string;
     ErrorMessage?: __string;

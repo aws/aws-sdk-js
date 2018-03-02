@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "DeviceFarm",
+        "description": "Add InteractionMode in CreateRemoteAccessSession for DirectDeviceAccess feature."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "Add InputSpecification to CreateChannel (specification of input attributes is used for channel sizing and affects pricing);  add NotFoundException to DeleteInputSecurityGroups."
+    }
+]

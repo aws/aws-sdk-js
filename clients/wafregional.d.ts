@@ -140,6 +140,14 @@ declare class WAFRegional extends Service {
    */
   deleteIPSet(callback?: (err: AWSError, data: WAFRegional.Types.DeleteIPSetResponse) => void): Request<WAFRegional.Types.DeleteIPSetResponse, AWSError>;
   /**
+   * Permanently deletes an IAM policy from the specified RuleGroup. The user making the request must be the owner of the RuleGroup.
+   */
+  deletePermissionPolicy(params: WAFRegional.Types.DeletePermissionPolicyRequest, callback?: (err: AWSError, data: WAFRegional.Types.DeletePermissionPolicyResponse) => void): Request<WAFRegional.Types.DeletePermissionPolicyResponse, AWSError>;
+  /**
+   * Permanently deletes an IAM policy from the specified RuleGroup. The user making the request must be the owner of the RuleGroup.
+   */
+  deletePermissionPolicy(callback?: (err: AWSError, data: WAFRegional.Types.DeletePermissionPolicyResponse) => void): Request<WAFRegional.Types.DeletePermissionPolicyResponse, AWSError>;
+  /**
    * Permanently deletes a RateBasedRule. You can't delete a rule if it's still used in any WebACL objects or if it still includes any predicates, such as ByteMatchSet objects. If you just want to remove a rule from a WebACL, use UpdateWebACL. To permanently delete a RateBasedRule from AWS WAF, perform the following steps:   Update the RateBasedRule to remove predicates, if any. For more information, see UpdateRateBasedRule.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of a DeleteRateBasedRule request.   Submit a DeleteRateBasedRule request.  
    */
   deleteRateBasedRule(params: WAFRegional.Types.DeleteRateBasedRuleRequest, callback?: (err: AWSError, data: WAFRegional.Types.DeleteRateBasedRuleResponse) => void): Request<WAFRegional.Types.DeleteRateBasedRuleResponse, AWSError>;
@@ -259,6 +267,14 @@ declare class WAFRegional extends Service {
    * Returns the IPSet that is specified by IPSetId.
    */
   getIPSet(callback?: (err: AWSError, data: WAFRegional.Types.GetIPSetResponse) => void): Request<WAFRegional.Types.GetIPSetResponse, AWSError>;
+  /**
+   * Returns the IAM policy attached to the RuleGroup.
+   */
+  getPermissionPolicy(params: WAFRegional.Types.GetPermissionPolicyRequest, callback?: (err: AWSError, data: WAFRegional.Types.GetPermissionPolicyResponse) => void): Request<WAFRegional.Types.GetPermissionPolicyResponse, AWSError>;
+  /**
+   * Returns the IAM policy attached to the RuleGroup.
+   */
+  getPermissionPolicy(callback?: (err: AWSError, data: WAFRegional.Types.GetPermissionPolicyResponse) => void): Request<WAFRegional.Types.GetPermissionPolicyResponse, AWSError>;
   /**
    * Returns the RateBasedRule that is specified by the RuleId that you included in the GetRateBasedRule request.
    */
@@ -476,6 +492,14 @@ declare class WAFRegional extends Service {
    */
   listXssMatchSets(callback?: (err: AWSError, data: WAFRegional.Types.ListXssMatchSetsResponse) => void): Request<WAFRegional.Types.ListXssMatchSetsResponse, AWSError>;
   /**
+   * Attaches a IAM policy to the specified resource. The only supported use for this action is to share a RuleGroup across accounts. The PutPermissionPolicy is subject to the following restrictions:   You can attach only one policy with each PutPermissionPolicy request.   The policy must include an Effect, Action and Principal.     Effect must specify Allow.   The Action in the policy must be waf:UpdateWebACL and waf-regional:UpdateWebACL. Any extra or wildcard actions in the policy will be rejected.   The policy cannot include a Resource parameter.   The ARN in the request must be a valid WAF RuleGroup ARN and the RuleGroup must exist in the same region.   The user making the request must be the owner of the RuleGroup.   Your policy must be composed using IAM Policy version 2012-10-17.   For more information, see IAM Policies.  An example of a valid policy parameter is shown in the Examples section below.
+   */
+  putPermissionPolicy(params: WAFRegional.Types.PutPermissionPolicyRequest, callback?: (err: AWSError, data: WAFRegional.Types.PutPermissionPolicyResponse) => void): Request<WAFRegional.Types.PutPermissionPolicyResponse, AWSError>;
+  /**
+   * Attaches a IAM policy to the specified resource. The only supported use for this action is to share a RuleGroup across accounts. The PutPermissionPolicy is subject to the following restrictions:   You can attach only one policy with each PutPermissionPolicy request.   The policy must include an Effect, Action and Principal.     Effect must specify Allow.   The Action in the policy must be waf:UpdateWebACL and waf-regional:UpdateWebACL. Any extra or wildcard actions in the policy will be rejected.   The policy cannot include a Resource parameter.   The ARN in the request must be a valid WAF RuleGroup ARN and the RuleGroup must exist in the same region.   The user making the request must be the owner of the RuleGroup.   Your policy must be composed using IAM Policy version 2012-10-17.   For more information, see IAM Policies.  An example of a valid policy parameter is shown in the Examples section below.
+   */
+  putPermissionPolicy(callback?: (err: AWSError, data: WAFRegional.Types.PutPermissionPolicyResponse) => void): Request<WAFRegional.Types.PutPermissionPolicyResponse, AWSError>;
+  /**
    * Inserts or deletes ByteMatchTuple objects (filters) in a ByteMatchSet. For each ByteMatchTuple object, you specify the following values:    Whether to insert or delete the object from the array. If you want to change a ByteMatchSetUpdate object, you delete the existing object and add a new one.   The part of a web request that you want AWS WAF to inspect, such as a query string or the value of the User-Agent header.    The bytes (typically a string that corresponds with ASCII characters) that you want AWS WAF to look for. For more information, including how you specify the values for the AWS WAF API and the AWS CLI or SDKs, see TargetString in the ByteMatchTuple data type.    Where to look, such as at the beginning or the end of a query string.   Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.   For example, you can add a ByteMatchSetUpdate object that matches web requests in which User-Agent headers contain the string BadBot. You can then configure AWS WAF to block those requests. To create and configure a ByteMatchSet, perform the following steps:   Create a ByteMatchSet. For more information, see CreateByteMatchSet.   Use GetChangeToken to get the change token that you provide in the ChangeToken parameter of an UpdateByteMatchSet request.   Submit an UpdateByteMatchSet request to specify the part of the request that you want AWS WAF to inspect (for example, the header or the URI) and the value that you want AWS WAF to watch for.   For more information about how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide.
    */
   updateByteMatchSet(params: WAFRegional.Types.UpdateByteMatchSetRequest, callback?: (err: AWSError, data: WAFRegional.Types.UpdateByteMatchSetResponse) => void): Request<WAFRegional.Types.UpdateByteMatchSetResponse, AWSError>;
@@ -584,11 +608,11 @@ declare namespace WAFRegional {
      */
     RuleId: ResourceId;
     /**
-     * Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. Valid values for Action include the following:    ALLOW: CloudFront responds with the requested object.    BLOCK: CloudFront responds with an HTTP 403 (Forbidden) status code.    COUNT: AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL.    The Action data type within ActivatedRule is used only when submitting an UpdateWebACL request. ActivatedRule|Action is not applicable and therefore not available for UpdateRuleGroup.
+     * Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. Valid values for Action include the following:    ALLOW: CloudFront responds with the requested object.    BLOCK: CloudFront responds with an HTTP 403 (Forbidden) status code.    COUNT: AWS WAF increments a counter of requests that match the conditions in the rule and then continues to inspect the web request based on the remaining rules in the web ACL.     ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to a WebACL. In this case you do not use ActivatedRule|Action. For all other update requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
      */
     Action?: WafAction;
     /**
-     * Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can potentially block a request. If you set the OverrideAction to None, the RuleGroup will block a request if any individual rule in the RuleGroup matches the request and is configured to block that request. However if you first want to test the RuleGroup, set the OverrideAction to Count. The RuleGroup will then override any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests will be counted. You can view a record of counted requests using GetSampledRequests.  The OverrideAction data type within ActivatedRule is used only when submitting an UpdateRuleGroup request. ActivatedRule|OverrideAction is not applicable and therefore not available for UpdateWebACL.
+     * Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can potentially block a request. If you set the OverrideAction to None, the RuleGroup will block a request if any individual rule in the RuleGroup matches the request and is configured to block that request. However if you first want to test the RuleGroup, set the OverrideAction to Count. The RuleGroup will then override any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests will be counted. You can view a record of counted requests using GetSampledRequests.   ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to a WebACL. In this case you do not use ActivatedRule|Action. For all other update requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
      */
     OverrideAction?: WafOverrideAction;
     /**
@@ -986,6 +1010,14 @@ declare namespace WAFRegional {
      */
     ChangeToken?: ChangeToken;
   }
+  export interface DeletePermissionPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the RuleGroup from which you want to delete the policy. The user making the request must be the owner of the RuleGroup.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface DeletePermissionPolicyResponse {
+  }
   export interface DeleteRateBasedRuleRequest {
     /**
      * The RuleId of the RateBasedRule that you want to delete. RuleId is returned by CreateRateBasedRule and by ListRateBasedRules.
@@ -1252,6 +1284,18 @@ declare namespace WAFRegional {
      * Information about the IPSet that you specified in the GetIPSet request. For more information, see the following topics:    IPSet: Contains IPSetDescriptors, IPSetId, and Name     IPSetDescriptors: Contains an array of IPSetDescriptor objects. Each IPSetDescriptor object contains Type and Value   
      */
     IPSet?: IPSet;
+  }
+  export interface GetPermissionPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the RuleGroup for which you want to get the policy.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface GetPermissionPolicyResponse {
+    /**
+     * The IAM policy attached to the specified RuleGroup.
+     */
+    Policy?: PolicyString;
   }
   export interface GetRateBasedRuleManagedKeysRequest {
     /**
@@ -1824,6 +1868,7 @@ declare namespace WAFRegional {
   export type ParameterExceptionField = "CHANGE_ACTION"|"WAF_ACTION"|"WAF_OVERRIDE_ACTION"|"PREDICATE_TYPE"|"IPSET_TYPE"|"BYTE_MATCH_FIELD_TYPE"|"SQL_INJECTION_MATCH_FIELD_TYPE"|"BYTE_MATCH_TEXT_TRANSFORMATION"|"BYTE_MATCH_POSITIONAL_CONSTRAINT"|"SIZE_CONSTRAINT_COMPARISON_OPERATOR"|"GEO_MATCH_LOCATION_TYPE"|"GEO_MATCH_LOCATION_VALUE"|"RATE_KEY"|"RULE_TYPE"|"NEXT_MARKER"|string;
   export type ParameterExceptionParameter = string;
   export type ParameterExceptionReason = "INVALID_OPTION"|"ILLEGAL_COMBINATION"|string;
+  export type PolicyString = string;
   export type PopulationSize = number;
   export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD"|string;
   export interface Predicate {
@@ -1842,6 +1887,18 @@ declare namespace WAFRegional {
   }
   export type PredicateType = "IPMatch"|"ByteMatch"|"SqlInjectionMatch"|"GeoMatch"|"SizeConstraint"|"XssMatch"|"RegexMatch"|string;
   export type Predicates = Predicate[];
+  export interface PutPermissionPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the RuleGroup to which you want to attach the policy.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * The policy to attach to the specified RuleGroup.
+     */
+    Policy: PolicyString;
+  }
+  export interface PutPermissionPolicyResponse {
+  }
   export interface RateBasedRule {
     /**
      * A unique identifier for a RateBasedRule. You use RuleId to get more information about a RateBasedRule (see GetRateBasedRule), update a RateBasedRule (see UpdateRateBasedRule), insert a RateBasedRule into a WebACL or delete one from a WebACL (see UpdateWebACL), or delete a RateBasedRule from AWS WAF (see DeleteRateBasedRule).
@@ -2325,7 +2382,7 @@ declare namespace WAFRegional {
      */
     RuleGroupId: ResourceId;
     /**
-     * An array of RuleGroupUpdate objects that you want to insert into or delete from a RuleGroup. You can only insert REGULAR rules into a rule group. The Action data type within ActivatedRule is used only when submitting an UpdateWebACL request. ActivatedRule|Action is not applicable and therefore not available for UpdateRuleGroup.
+     * An array of RuleGroupUpdate objects that you want to insert into or delete from a RuleGroup. You can only insert REGULAR rules into a rule group.  ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to a WebACL. In this case you do not use ActivatedRule|Action. For all other update requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
      */
     Updates: RuleGroupUpdates;
     /**
@@ -2409,7 +2466,7 @@ declare namespace WAFRegional {
      */
     ChangeToken: ChangeToken;
     /**
-     * An array of updates to make to the WebACL. An array of WebACLUpdate objects that you want to insert into or delete from a WebACL. For more information, see the applicable data types:    WebACLUpdate: Contains Action and ActivatedRule     ActivatedRule: Contains Action, Priority, RuleId, and Type. The OverrideAction data type within ActivatedRule is used only when submitting an UpdateRuleGroup request. ActivatedRule|OverrideAction is not applicable and therefore not available for UpdateWebACL.     WafAction: Contains Type   
+     * An array of updates to make to the WebACL. An array of WebACLUpdate objects that you want to insert into or delete from a WebACL. For more information, see the applicable data types:    WebACLUpdate: Contains Action and ActivatedRule     ActivatedRule: Contains Action, OverrideAction, Priority, RuleId, and Type. ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to a WebACL. In this case you do not use ActivatedRule|Action. For all other update requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.     WafAction: Contains Type   
      */
     Updates?: WebACLUpdates;
     /**

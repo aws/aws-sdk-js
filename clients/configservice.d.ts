@@ -524,7 +524,7 @@ declare namespace ConfigService {
   export type ConfigurationItemCaptureTime = Date;
   export type ConfigurationItemList = ConfigurationItem[];
   export type ConfigurationItemMD5Hash = string;
-  export type ConfigurationItemStatus = "Ok"|"Failed"|"Discovered"|"Deleted"|string;
+  export type ConfigurationItemStatus = "OK"|"ResourceDiscovered"|"ResourceNotRecorded"|"ResourceDeleted"|"ResourceDeletedNotRecorded"|string;
   export interface ConfigurationRecorder {
     /**
      * The name of the recorder. By default, AWS Config automatically assigns the name "default" when creating the configuration recorder. You cannot change the assigned name.

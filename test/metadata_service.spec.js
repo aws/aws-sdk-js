@@ -82,7 +82,6 @@ if (AWS.util.isNode()) {
             }
           }));
         }
-        return results;
       });
 
       it('should fail if server is not up', function(done) {
@@ -159,8 +158,41 @@ if (AWS.util.isNode()) {
             }
           }));
         }
-        return results;
       });
+    });
+
+    describe('request', function() {
+      var disabledEnvAtStart = process.env[AWS.util.imdsDisabledEnv];
+
+      beforeEach(function() {
+        delete process.env[AWS.util.imdsDisabledEnv];
+      });
+
+      afterEach(function() {
+        if (typeof disabledEnvAtStart === 'string') {
+          process.env[AWS.util.imdsDisabledEnv] = disabledEnvAtStart;
+        } else {
+          delete process.env[AWS.util.imdsDisabledEnv];
+        }
+      });
+
+      it(
+        'should not make any requests if the AWS_EC2_METADATA_DISABLED environment variable is set to a truthy value',
+        function(done) {
+          process.env.AWS_EC2_METADATA_DISABLED = '1';
+          var spy = helpers.spyOn(AWS.HttpClient.getInstance(), 'handleRequest')
+            .andCallThrough();
+          var service = new AWS.MetadataService();
+
+          service.request('/foo/bar', function(err, data) {
+            expect(spy.calls.length).to.equal(0);
+            expect(data).not.to.exist;
+            expect(err).to.exist;
+            expect(err.message).to.equal('EC2 Instance Metadata Service access disabled');
+            done();
+          });
+        }
+      );
     });
   });
 }

@@ -188,6 +188,14 @@ declare class DMS extends Service {
    */
   describeRefreshSchemasStatus(callback?: (err: AWSError, data: DMS.Types.DescribeRefreshSchemasStatusResponse) => void): Request<DMS.Types.DescribeRefreshSchemasStatusResponse, AWSError>;
   /**
+   * Returns information about the task logs for the specified task.
+   */
+  describeReplicationInstanceTaskLogs(params: DMS.Types.DescribeReplicationInstanceTaskLogsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstanceTaskLogsResponse) => void): Request<DMS.Types.DescribeReplicationInstanceTaskLogsResponse, AWSError>;
+  /**
+   * Returns information about the task logs for the specified task.
+   */
+  describeReplicationInstanceTaskLogs(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstanceTaskLogsResponse) => void): Request<DMS.Types.DescribeReplicationInstanceTaskLogsResponse, AWSError>;
+  /**
    * Returns information about replication instances for your account in the current region.
    */
   describeReplicationInstances(params: DMS.Types.DescribeReplicationInstancesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstancesResponse) => void): Request<DMS.Types.DescribeReplicationInstancesResponse, AWSError>;
@@ -291,6 +299,14 @@ declare class DMS extends Service {
    * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it.  For more information about AWS DMS tasks, see the AWS DMS user guide at  Working with Migration Tasks  
    */
   modifyReplicationTask(callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
+  /**
+   * Reboots a replication instance. Rebooting results in a momentary outage, until the replication instance becomes available again.
+   */
+  rebootReplicationInstance(params: DMS.Types.RebootReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.RebootReplicationInstanceResponse) => void): Request<DMS.Types.RebootReplicationInstanceResponse, AWSError>;
+  /**
+   * Reboots a replication instance. Rebooting results in a momentary outage, until the replication instance becomes available again.
+   */
+  rebootReplicationInstance(callback?: (err: AWSError, data: DMS.Types.RebootReplicationInstanceResponse) => void): Request<DMS.Types.RebootReplicationInstanceResponse, AWSError>;
   /**
    * Populates the schema for the specified endpoint. This is an asynchronous operation and can take several minutes. You can check the status of this operation by calling the DescribeRefreshSchemasStatus operation.
    */
@@ -468,7 +484,7 @@ declare namespace DMS {
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
+     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName: String;
     /**
@@ -990,6 +1006,34 @@ declare namespace DMS {
      */
     RefreshSchemasStatus?: RefreshSchemasStatus;
   }
+  export interface DescribeReplicationInstanceTaskLogsMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the replication instance.
+     */
+    ReplicationInstanceArn: String;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
+  export interface DescribeReplicationInstanceTaskLogsResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the replication instance.
+     */
+    ReplicationInstanceArn?: String;
+    /**
+     * An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes).
+     */
+    ReplicationInstanceTaskLogs?: ReplicationInstanceTaskLogsList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
   export interface DescribeReplicationInstancesMessage {
     /**
      * Filters applied to the describe action. Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version
@@ -1163,7 +1207,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The database engine name. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
+     * The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName?: String;
     /**
@@ -1366,7 +1410,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, DYNAMODB, MONGODB, SYBASE, and SQLSERVER.
+     * The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName?: String;
     /**
@@ -1630,6 +1674,22 @@ declare namespace DMS {
     IncludedAllocatedStorage?: Integer;
   }
   export type OrderableReplicationInstanceList = OrderableReplicationInstance[];
+  export interface RebootReplicationInstanceMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the replication instance.
+     */
+    ReplicationInstanceArn: String;
+    /**
+     * If this parameter is true, the reboot is conducted through a Multi-AZ failover. (If the instance isn't configured for Multi-AZ, then you can't specify true.)
+     */
+    ForceFailover?: BooleanOptional;
+  }
+  export interface RebootReplicationInstanceResponse {
+    /**
+     * The replication instance that is being rebooted. 
+     */
+    ReplicationInstance?: ReplicationInstance;
+  }
   export interface RefreshSchemasMessage {
     /**
      * The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -1787,6 +1847,21 @@ declare namespace DMS {
   export type ReplicationInstanceList = ReplicationInstance[];
   export type ReplicationInstancePrivateIpAddressList = String[];
   export type ReplicationInstancePublicIpAddressList = String[];
+  export interface ReplicationInstanceTaskLog {
+    /**
+     * The name of the replication task.
+     */
+    ReplicationTaskName?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the replication task.
+     */
+    ReplicationTaskArn?: String;
+    /**
+     * The size, in bytes, of the replication task log.
+     */
+    ReplicationInstanceTaskLogSize?: Long;
+  }
+  export type ReplicationInstanceTaskLogsList = ReplicationInstanceTaskLog[];
   export interface ReplicationPendingModifiedValues {
     /**
      * The compute and memory capacity of the replication instance.  Valid Values: dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge  
@@ -2042,7 +2117,7 @@ declare namespace DMS {
   export type SubnetList = Subnet[];
   export interface SupportedEndpointType {
     /**
-     * The database engine name. Valid values, depending on the EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
+     * The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
      */
     EngineName?: String;
     /**
