@@ -2295,6 +2295,100 @@ describe('AWS.S3', function() {
     }
   });
 
+  describe('addTrailingChecksumHeader', function() {
+    if (AWS.util.isNode()) {
+      it('should add trailing checksum header to getObject request on Node', function () {
+        s3 = new AWS.S3();
+        var req = s3.getObject({
+          Bucket: 'bucket',
+          Key: 'key',
+        }).build();
+        var headers = req.httpRequest.headers;
+        expect(headers['x-amz-te']).to.equal('append-md5');
+        req = s3.putObject({
+          Bucket: 'bucket',
+          Key: 'key',
+          Body: 'body',
+        }).build();
+        headers = req.httpRequest.headers;
+        expect(headers['x-amz-te']).to.equal(undefined);
+      });
+    } else {
+      it('should default not to add s3 trailing checksum header on Browser', function() {
+        s3 = new AWS.S3();
+        var req = s3.getObject({
+          Bucket: 'bucket',
+          Key: 'key',
+        }).build();
+        var headers = req.httpRequest.headers;
+        expect(headers['x-amz-te']).to.equal(undefined);
+        s3 = new AWS.S3({s3DisableTrailingChecksum: false});
+        var req = s3.getObject({
+          Bucket: 'bucket',
+          Key: 'key',
+        }).build();
+        var headers = req.httpRequest.headers;
+        expect(headers['x-amz-te']).to.equal('append-md5');
+      });
+    }
+  })
+
+  describe('validateTrailingChecksum', function() {
+    var responseData = null;
+    var s3 = null;
+    var request = null;
+
+    beforeEach(function() {
+      responseData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
+      s3 = new AWS.S3({s3DisableTrailingChecksum: false});
+      request = s3.getObject({
+        Bucket: 'bucket',
+        Key: 'key',
+      })
+    })
+
+    it('should validate md5 checksum the strip checksum out of body', function() {
+      helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'Content-Length': 27}, responseData);
+      request.send(function(err, data) {
+        expect(err).not.to.exist;
+        expect(data.Body.toString('utf8')).to.equal('test string');
+        expect(data.ContentLength).to.equal(11);
+      })
+    })
+
+    it('should throw networking error and retry the request when checksum is invalid', function() {
+      s3.config.update({ maxRetries: 3 });
+      responseData[26] = 100;
+      helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'Content-Length': 27}, responseData);
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.code).to.equal('NetworkingError');
+        expect(this.retryCount).to.equal(s3.config.maxRetries);
+      })
+    })
+
+    it('should throw networking error and retry request when body is too short', function() {
+      s3.config.update({ maxRetries: 3 });
+      responseData = Array.prototype.slice.call(responseData, 0, 15)
+      helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'Content-Length': 15}, responseData);
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.code).to.equal('NetworkingError');
+        expect(this.retryCount).to.equal(s3.config.maxRetries);
+      })
+    })
+
+    it('should throw networking error when reponse uses unsupported hash algorithm', function() {
+      s3.config.update({ maxRetries: 3 });
+      helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-crc32c', 'Content-Length': 27}, responseData);
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.code).to.equal('NetworkingError');
+        expect(this.retryCount).to.equal(s3.config.maxRetries);
+      })
+    })
+  })
+
   describe('getSignedUrl', function() {
     var date = null;
 
@@ -2457,6 +2551,15 @@ describe('AWS.S3', function() {
       });
       expect(url).to.equal('https://bucket.s3.amazonaws.com/?AWSAccessKeyId=akid&Expires=900&Signature=8W3pwZPfgucCyPNg1MsoYq8h5zw%3D&prefix=prefix&x-amz-security-token=session');
     });
+
+    it('should strip the trailing checksum header out', function() {
+      s3 = new AWS.S3({s3DisableTrailingChecksum: false});
+      var url = s3.getSignedUrl('getObject', {
+        Bucket: 'bucket',
+        Key: 'object'
+      });
+      expect(url.indexOf('x-amz-te')).to.equal(-1);
+    })
 
     it('gets a signed URL for getObject using SigV4', function() {
       s3 = new AWS.S3({
