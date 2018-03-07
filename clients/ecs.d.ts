@@ -442,7 +442,7 @@ declare namespace ECS {
      */
     name?: String;
     /**
-     * The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with either  repository-url/image:tag  or  repository-url/image@digest . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.   Images in Amazon ECR repositories can be specified by either using the full registry/repository:tag or registry/repository@digest. For example, 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;:latest or 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE.    Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
+     * The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with either  repository-url/image:tag  or  repository-url/image@digest . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.   When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image are not propagated to already running tasks.   Images in Amazon ECR repositories can be specified by either using the full registry/repository:tag or registry/repository@digest. For example, 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;:latest or 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE.    Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
      */
     image?: String;
     /**
@@ -490,7 +490,7 @@ declare namespace ECS {
      */
     volumesFrom?: VolumeFromList;
     /**
-     * Linux-specific modifications that are applied to the container, such as Linux KernelCapabilities.  This parameter is not supported for Windows containers or tasks using the Fargate launch type. 
+     * Linux-specific modifications that are applied to the container, such as Linux KernelCapabilities.  This parameter is not supported for Windows containers. 
      */
     linuxParameters?: LinuxParameters;
     /**
@@ -1031,7 +1031,7 @@ declare namespace ECS {
   export type Integer = number;
   export interface KernelCapabilities {
     /**
-     * The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to CapAdd in the Create a container section of the Docker Remote API and the --cap-add option to docker run. Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM" 
+     * The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to CapAdd in the Create a container section of the Docker Remote API and the --cap-add option to docker run.  If you are using tasks that use the Fargate launch type, the add parameter is not supported.  Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM" 
      */
     add?: StringList;
     /**
@@ -1052,11 +1052,11 @@ declare namespace ECS {
   export type LaunchType = "EC2"|"FARGATE"|string;
   export interface LinuxParameters {
     /**
-     * The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.
+     * The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.  If you are using tasks that use the Fargate launch type, capabilities is supported but the add parameter is not supported. 
      */
     capabilities?: KernelCapabilities;
     /**
-     * Any host devices to expose to the container. This parameter maps to Devices in the Create a container section of the Docker Remote API and the --device option to docker run.
+     * Any host devices to expose to the container. This parameter maps to Devices in the Create a container section of the Docker Remote API and the --device option to docker run.  If you are using tasks that use the Fargate launch type, the devices parameter is not supported. 
      */
     devices?: DevicesList;
     /**
@@ -1501,11 +1501,11 @@ declare namespace ECS {
      */
     requiresCompatibilities?: CompatibilityList;
     /**
-     * The number of cpu units used by the task. If using the EC2 launch type, this field is optional and any value can be used.  Task-level CPU and memory parameters are ignored for Windows containers. We recommend specifying container-level resources for Windows containers.  If you are using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the memory parameter:   256 (.25 vCPU) - Available memory values: 0.5GB, 1GB, 2GB   512 (.5 vCPU) - Available memory values: 1GB, 2GB, 3GB, 4GB   1024 (1 vCPU) - Available memory values: 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB   2048 (2 vCPU) - Available memory values: Between 4GB and 16GB in 1GB increments   4096 (4 vCPU) - Available memory values: Between 8GB and 30GB in 1GB increments  
+     * The number of CPU units used by the task. It can be expressed as an integer using CPU units, for example 1024, or as a string using vCPUs, for example 1 vCPU or 1 vcpu, in a task definition but will be converted to an integer indicating the CPU units when the task definition is registered.  Task-level CPU and memory parameters are ignored for Windows containers. We recommend specifying container-level resources for Windows containers.  If using the EC2 launch type, this field is optional. Supported values are between 128 CPU units (0.125 vCPUs) and 10240 CPU units (10 vCPUs). If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of supported values for the memory parameter:   256 (.25 vCPU) - Available memory values: 512 (0.5GB), 1024 (1GB), 2048 (2GB)   512 (.5 vCPU) - Available memory values: 1024 (1GB), 2048 (2GB), 3072 (3GB), 4096 (4GB)   1024 (1 vCPU) - Available memory values: 2048 (2GB), 3072 (3GB), 4096 (4GB), 5120 (5GB), 6144 (6GB), 7168 (7GB), 8192 (8GB)   2048 (2 vCPU) - Available memory values: Between 4096 (4GB) and 16384 (16GB) in increments of 1024 (1GB)   4096 (4 vCPU) - Available memory values: Between 8192 (8GB) and 30720 (30GB) in increments of 1024 (1GB)  
      */
     cpu?: String;
     /**
-     * The amount (in MiB) of memory used by the task. If using the EC2 launch type, this field is optional and any value can be used.  Task-level CPU and memory parameters are ignored for Windows containers. We recommend specifying container-level resources for Windows containers.  If you are using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the cpu parameter:   0.5GB, 1GB, 2GB - Available cpu values: 256 (.25 vCPU)   1GB, 2GB, 3GB, 4GB - Available cpu values: 512 (.5 vCPU)   2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available cpu values: 1024 (1 vCPU)   Between 4GB and 16GB in 1GB increments - Available cpu values: 2048 (2 vCPU)   Between 8GB and 30GB in 1GB increments - Available cpu values: 4096 (4 vCPU)  
+     * The amount of memory (in MiB) used by the task. It can be expressed as an integer using MiB, for example 1024, or as a string using GB, for example 1GB or 1 GB, in a task definition but will be converted to an integer indicating the MiB when the task definition is registered.  Task-level CPU and memory parameters are ignored for Windows containers. We recommend specifying container-level resources for Windows containers.  If using the EC2 launch type, this field is optional. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of supported values for the cpu parameter:   512 (0.5GB), 1024 (1GB), 2048 (2GB) - Available cpu values: 256 (.25 vCPU)   1024 (1GB), 2048 (2GB), 3072 (3GB), 4096 (4GB) - Available cpu values: 512 (.5 vCPU)   2048 (2GB), 3072 (3GB), 4096 (4GB), 5120 (5GB), 6144 (6GB), 7168 (7GB), 8192 (8GB) - Available cpu values: 1024 (1 vCPU)   Between 4096 (4GB) and 16384 (16GB) in increments of 1024 (1GB) - Available cpu values: 2048 (2 vCPU)   Between 8192 (8GB) and 30720 (30GB) in increments of 1024 (1GB) - Available cpu values: 4096 (4 vCPU)  
      */
     memory?: String;
   }
@@ -1872,11 +1872,11 @@ declare namespace ECS {
      */
     desiredStatus?: String;
     /**
-     * The number of cpu units used by the task. If using the EC2 launch type, this field is optional and any value can be used. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the memory parameter:   256 (.25 vCPU) - Available memory values: 0.5GB, 1GB, 2GB   512 (.5 vCPU) - Available memory values: 1GB, 2GB, 3GB, 4GB   1024 (1 vCPU) - Available memory values: 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB   2048 (2 vCPU) - Available memory values: Between 4GB and 16GB in 1GB increments   4096 (4 vCPU) - Available memory values: Between 8GB and 30GB in 1GB increments  
+     * The number of CPU units used by the task. It can be expressed as an integer using CPU units, for example 1024, or as a string using vCPUs, for example 1 vCPU or 1 vcpu, in a task definition but will be converted to an integer indicating the CPU units when the task definition is registered. If using the EC2 launch type, this field is optional. Supported values are between 128 CPU units (0.125 vCPUs) and 10240 CPU units (10 vCPUs). If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of supported values for the memory parameter:   256 (.25 vCPU) - Available memory values: 512 (0.5GB), 1024 (1GB), 2048 (2GB)   512 (.5 vCPU) - Available memory values: 1024 (1GB), 2048 (2GB), 3072 (3GB), 4096 (4GB)   1024 (1 vCPU) - Available memory values: 2048 (2GB), 3072 (3GB), 4096 (4GB), 5120 (5GB), 6144 (6GB), 7168 (7GB), 8192 (8GB)   2048 (2 vCPU) - Available memory values: Between 4096 (4GB) and 16384 (16GB) in increments of 1024 (1GB)   4096 (4 vCPU) - Available memory values: Between 8192 (8GB) and 30720 (30GB) in increments of 1024 (1GB)  
      */
     cpu?: String;
     /**
-     * The amount (in MiB) of memory used by the task. If using the EC2 launch type, this field is optional and any value can be used. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the cpu parameter:   0.5GB, 1GB, 2GB - Available cpu values: 256 (.25 vCPU)   1GB, 2GB, 3GB, 4GB - Available cpu values: 512 (.5 vCPU)   2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available cpu values: 1024 (1 vCPU)   Between 4GB and 16GB in 1GB increments - Available cpu values: 2048 (2 vCPU)   Between 8GB and 30GB in 1GB increments - Available cpu values: 4096 (4 vCPU)  
+     * The amount of memory (in MiB) used by the task. It can be expressed as an integer using MiB, for example 1024, or as a string using GB, for example 1GB or 1 GB, in a task definition but will be converted to an integer indicating the MiB when the task definition is registered. If using the EC2 launch type, this field is optional. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of supported values for the cpu parameter:   512 (0.5GB), 1024 (1GB), 2048 (2GB) - Available cpu values: 256 (.25 vCPU)   1024 (1GB), 2048 (2GB), 3072 (3GB), 4096 (4GB) - Available cpu values: 512 (.5 vCPU)   2048 (2GB), 3072 (3GB), 4096 (4GB), 5120 (5GB), 6144 (6GB), 7168 (7GB), 8192 (8GB) - Available cpu values: 1024 (1 vCPU)   Between 4096 (4GB) and 16384 (16GB) in increments of 1024 (1GB) - Available cpu values: 2048 (2 vCPU)   Between 8192 (8GB) and 30720 (30GB) in increments of 1024 (1GB) - Available cpu values: 4096 (4 vCPU)  
      */
     memory?: String;
     /**
@@ -2002,11 +2002,11 @@ declare namespace ECS {
      */
     requiresCompatibilities?: CompatibilityList;
     /**
-     * The number of cpu units used by the task. If using the EC2 launch type, this field is optional and any value can be used. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the memory parameter:   256 (.25 vCPU) - Available memory values: 0.5GB, 1GB, 2GB   512 (.5 vCPU) - Available memory values: 1GB, 2GB, 3GB, 4GB   1024 (1 vCPU) - Available memory values: 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB   2048 (2 vCPU) - Available memory values: Between 4GB and 16GB in 1GB increments   4096 (4 vCPU) - Available memory values: Between 8GB and 30GB in 1GB increments  
+     * The number of cpu units used by the task. If using the EC2 launch type, this field is optional and any value can be used. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the memory parameter:   256 (.25 vCPU) - Available memory values: 512 (0.5GB), 1024 (1GB), 2048 (2GB)   512 (.5 vCPU) - Available memory values: 1024 (1GB), 2048 (2GB), 3072 (3GB), 4096 (4GB)   1024 (1 vCPU) - Available memory values: 2048 (2GB), 3072 (3GB), 4096 (4GB), 5120 (5GB), 6144 (6GB), 7168 (7GB), 8192 (8GB)   2048 (2 vCPU) - Available memory values: Between 4096 (4GB) and 16384 (16GB) in increments of 1024 (1GB)   4096 (4 vCPU) - Available memory values: Between 8192 (8GB) and 30720 (30GB) in increments of 1024 (1GB)  
      */
     cpu?: String;
     /**
-     * The amount (in MiB) of memory used by the task. If using the EC2 launch type, this field is optional and any value can be used. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the cpu parameter:   0.5GB, 1GB, 2GB - Available cpu values: 256 (.25 vCPU)   1GB, 2GB, 3GB, 4GB - Available cpu values: 512 (.5 vCPU)   2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available cpu values: 1024 (1 vCPU)   Between 4GB and 16GB in 1GB increments - Available cpu values: 2048 (2 vCPU)   Between 8GB and 30GB in 1GB increments - Available cpu values: 4096 (4 vCPU)  
+     * The amount (in MiB) of memory used by the task. If using the EC2 launch type, this field is optional and any value can be used. If using the Fargate launch type, this field is required and you must use one of the following values, which determines your range of valid values for the cpu parameter:   512 (0.5GB), 1024 (1GB), 2048 (2GB) - Available cpu values: 256 (.25 vCPU)   1024 (1GB), 2048 (2GB), 3072 (3GB), 4096 (4GB) - Available cpu values: 512 (.5 vCPU)   2048 (2GB), 3072 (3GB), 4096 (4GB), 5120 (5GB), 6144 (6GB), 7168 (7GB), 8192 (8GB) - Available cpu values: 1024 (1 vCPU)   Between 4096 (4GB) and 16384 (16GB) in increments of 1024 (1GB) - Available cpu values: 2048 (2 vCPU)   Between 8192 (8GB) and 30720 (30GB) in increments of 1024 (1GB) - Available cpu values: 4096 (4 vCPU)  
      */
     memory?: String;
   }
@@ -2127,7 +2127,7 @@ declare namespace ECS {
      */
     platformVersion?: String;
     /**
-     * Whether or not to force a new deployment of the service.
+     * Whether or not to force a new deployment of the service. By default, --no-force-new-deployment is assumed unless specified otherwise.
      */
     forceNewDeployment?: Boolean;
     /**

@@ -201,7 +201,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
     /**
      * Sets the dialnorm for the output. If excluded and input audio is Dolby Digital, dialnorm will be passed through.
      */
-    Dialnorm?: __integer;
+    Dialnorm?: __integerMin1Max31;
     /**
      * If set to filmStandard, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification.
      */
@@ -226,17 +226,17 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
     /**
      * A directory and base filename where archive files should be written.  If the base filename portion of the URI is left blank, the base filename of the first input will be automatically inserted.
      */
-    Destination?: OutputLocationRef;
+    Destination: OutputLocationRef;
     /**
      * Number of seconds to write to archive file before closing and starting a new one.
      */
-    RolloverInterval?: __integer;
+    RolloverInterval?: __integerMin1;
   }
   export interface ArchiveOutputSettings {
     /**
      * Settings specific to the container type of the file.
      */
-    ContainerSettings?: ArchiveContainerSettings;
+    ContainerSettings: ArchiveContainerSettings;
     /**
      * Output file extension. If excluded, this will be auto-selected from the container type.
      */
@@ -254,11 +254,11 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
     /**
      * Indices and gain values for each input channel that should be remixed into this output channel.
      */
-    InputChannelLevels?: ListOfInputChannelLevel;
+    InputChannelLevels: __listOfInputChannelLevel;
     /**
      * The index of the output channel being produced.
      */
-    OutputChannel?: __integer;
+    OutputChannel: __integerMin0Max7;
   }
   export interface AudioCodecSettings {
     AacSettings?: AacSettings;
@@ -275,7 +275,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
     /**
      * The name of the AudioSelector used as the source for this AudioDescription.
      */
-    AudioSelectorName?: __string;
+    AudioSelectorName: __string;
     /**
      * Applies only if audioTypeControl is useConfigured. The values for audioType are defined in ISO-IEC 13818-1.
      */
@@ -294,7 +294,7 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
     /**
      * Indicates the language of the audio output track. Only used if languageControlMode is useConfigured, or there is no ISO 639 language code specified in the input.
      */
-    LanguageCode?: __string;
+    LanguageCode?: __stringMin3Max3;
     /**
      * Choosing followInput will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The languageCode will be used when useConfigured is set, or when followInput is selected but there is no ISO 639 language code specified by the input.
      */
@@ -302,7 +302,7 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
     /**
      * The name of this AudioDescription. Outputs will use this name to uniquely identify this AudioDescription.  Description names should be unique within this Live Event.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * Settings that control how input audio channels are remixed into the output audio channels.
      */
@@ -318,7 +318,7 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
     /**
      * Selects a specific three-letter language code from within an audio source.
      */
-    LanguageCode?: __string;
+    LanguageCode: __string;
     /**
      * When set to "strict", the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If "loose", then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can't find one with the same language.
      */
@@ -339,7 +339,7 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
     /**
      * Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm.  The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS.
      */
-    TargetLkfs?: __double;
+    TargetLkfs?: __doubleMinNegative59Max0;
   }
   export interface AudioOnlyHlsSettings {
     /**
@@ -372,13 +372,13 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Selects a specific PID from within a source.
      */
-    Pid?: __integer;
+    Pid: __integerMin0Max8191;
   }
   export interface AudioSelector {
     /**
      * The name of this AudioSelector. AudioDescriptions will use this name to uniquely identify this Selector.  Selector names should be unique per input.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * The audio selector settings.
      */
@@ -426,7 +426,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Provides Network ID that matches EIDR ID format (e.g., "10.XXXX/XXXX-XXXX-XXXX-XXXX-XXXX-C").
      */
-    NetworkId?: __string;
+    NetworkId?: __stringMin34Max34;
     /**
      * When set to enabled, causes video, audio and captions to be blanked when indicated by program metadata.
      */
@@ -448,7 +448,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter out is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.
      */
-    BackgroundOpacity?: __integer;
+    BackgroundOpacity?: __integerMin0Max255;
     /**
      * External font file used for caption burn-in. File extension must be 'ttf' or 'tte'.  Although the user can select output fonts for many different types of input captions,  embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts.  All burn-in and DVB-Sub font settings must match.
      */
@@ -460,11 +460,11 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.  All burn-in and DVB-Sub font settings must match.
      */
-    FontOpacity?: __integer;
+    FontOpacity?: __integerMin0Max255;
     /**
      * Font resolution in DPI (dots per inch); default is 96 dpi.  All burn-in and DVB-Sub font settings must match.
      */
-    FontResolution?: __integer;
+    FontResolution?: __integerMin96Max600;
     /**
      * When set to 'auto' fontSize will scale depending on the size of the output.  Giving a positive integer will specify the exact font size in points.  All burn-in and DVB-Sub font settings must match.
      */
@@ -476,7 +476,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
-    OutlineSize?: __integer;
+    OutlineSize?: __integerMin0Max10;
     /**
      * Specifies the color of the shadow cast by the captions.  All burn-in and DVB-Sub font settings must match.
      */
@@ -484,7 +484,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter out is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.
      */
-    ShadowOpacity?: __integer;
+    ShadowOpacity?: __integerMin0Max255;
     /**
      * Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left.  All burn-in and DVB-Sub font settings must match.
      */
@@ -500,11 +500,11 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit xPosition is provided, the horizontal caption position will be determined by the alignment parameter.  All burn-in and DVB-Sub font settings must match.
      */
-    XPosition?: __integer;
+    XPosition?: __integerMin0;
     /**
      * Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  All burn-in and DVB-Sub font settings must match.
      */
-    YPosition?: __integer;
+    YPosition?: __integerMin0;
   }
   export type BurnInFontColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string;
   export type BurnInOutlineColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string;
@@ -514,7 +514,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
      */
-    CaptionSelectorName?: __string;
+    CaptionSelectorName: __string;
     /**
      * Additional settings for captions destination that depend on the destination type.
      */
@@ -530,7 +530,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Name of the caption description.  Used to associate a caption description with an output.  Names must be unique within an event.
      */
-    Name?: __string;
+    Name: __string;
   }
   export interface CaptionDestinationSettings {
     AribDestinationSettings?: AribDestinationSettings;
@@ -549,15 +549,15 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * The closed caption channel being described by this CaptionLanguageMapping.  Each channel mapping must have a unique channel number (maximum of 4)
      */
-    CaptionChannel?: __integer;
+    CaptionChannel: __integerMin1Max4;
     /**
      * Three character ISO 639-2 language code (see http://www.loc.gov/standards/iso639-2)
      */
-    LanguageCode?: __string;
+    LanguageCode: __stringMin3Max3;
     /**
      * Textual description of language
      */
-    LanguageDescription?: __string;
+    LanguageDescription: __stringMin1;
   }
   export interface CaptionSelector {
     /**
@@ -567,7 +567,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     /**
      * Name identifier for a caption selector.  This name is used to associate this caption selector with one or more caption descriptions.  Names must be unique within an event.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * Caption selector settings.
      */
@@ -592,11 +592,11 @@ destination per output. For other types (HLS, for example), there is
 one destination per packager.
 
      */
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     /**
      * The endpoints where outgoing connections initiate from
      */
-    EgressEndpoints?: ListOfChannelEgressEndpoint;
+    EgressEndpoints?: __listOfChannelEgressEndpoint;
     EncoderSettings?: EncoderSettings;
     /**
      * The unique id of the channel.
@@ -605,7 +605,7 @@ one destination per packager.
     /**
      * List of input attachments for channel.
      */
-    InputAttachments?: ListOfInputAttachment;
+    InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
@@ -626,7 +626,7 @@ one destination per packager.
     /**
      * A collection of validation error responses from attempting to create a channel with a bouquet of settings.
      */
-    ValidationErrors?: ListOfValidationError;
+    ValidationErrors?: __listOfValidationError;
   }
   export interface ChannelEgressEndpoint {
     /**
@@ -646,11 +646,11 @@ destination per output. For other types (HLS, for example), there is
 one destination per packager.
 
      */
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     /**
      * The endpoints where outgoing connections initiate from
      */
-    EgressEndpoints?: ListOfChannelEgressEndpoint;
+    EgressEndpoints?: __listOfChannelEgressEndpoint;
     /**
      * The unique id of the channel.
      */
@@ -658,7 +658,7 @@ one destination per packager.
     /**
      * List of input attachments for channel.
      */
-    InputAttachments?: ListOfInputAttachment;
+    InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
@@ -675,12 +675,12 @@ one destination per packager.
     State?: ChannelState;
   }
   export interface CreateChannel {
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     EncoderSettings?: EncoderSettings;
     /**
      * List of input attachments for channel.
      */
-    InputAttachments?: ListOfInputAttachment;
+    InputAttachments?: __listOfInputAttachment;
     /**
      * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
      */
@@ -705,12 +705,12 @@ creating multiple resources.
     RoleArn?: __string;
   }
   export interface CreateChannelRequest {
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     EncoderSettings?: EncoderSettings;
     /**
      * List of input attachments for channel.
      */
-    InputAttachments?: ListOfInputAttachment;
+    InputAttachments?: __listOfInputAttachment;
     /**
      * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
      */
@@ -744,11 +744,11 @@ creating multiple resources.
     /**
      * Destination settings for PUSH type inputs.
      */
-    Destinations?: ListOfInputDestinationRequest;
+    Destinations?: __listOfInputDestinationRequest;
     /**
      * A list of security groups referenced by IDs to attach to the input.
      */
-    InputSecurityGroups?: ListOf__string;
+    InputSecurityGroups?: __listOf__string;
     /**
      * Name of the input.
      */
@@ -765,18 +765,18 @@ exactly two source URLs for redundancy.
 Only specify sources for PULL type Inputs. Leave Destinations empty.
 
      */
-    Sources?: ListOfInputSourceRequest;
+    Sources?: __listOfInputSourceRequest;
     Type?: InputType;
   }
   export interface CreateInputRequest {
     /**
      * Destination settings for PUSH type inputs.
      */
-    Destinations?: ListOfInputDestinationRequest;
+    Destinations?: __listOfInputDestinationRequest;
     /**
      * A list of security groups referenced by IDs to attach to the input.
      */
-    InputSecurityGroups?: ListOf__string;
+    InputSecurityGroups?: __listOf__string;
     /**
      * Name of the input.
      */
@@ -793,7 +793,7 @@ exactly two source URLs for redundancy.
 Only specify sources for PULL type Inputs. Leave Destinations empty.
 
      */
-    Sources?: ListOfInputSourceRequest;
+    Sources?: __listOfInputSourceRequest;
     Type?: InputType;
   }
   export interface CreateInputResponse {
@@ -806,7 +806,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
     /**
      * List of IPv4 CIDR addresses to whitelist
      */
-    WhitelistRules?: ListOfInputWhitelistRuleCidr;
+    WhitelistRules?: __listOfInputWhitelistRuleCidr;
   }
   export interface CreateInputSecurityGroupResponse {
     SecurityGroup?: InputSecurityGroup;
@@ -831,11 +831,11 @@ destination per output. For other types (HLS, for example), there is
 one destination per packager.
 
      */
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     /**
      * The endpoints where outgoing connections initiate from
      */
-    EgressEndpoints?: ListOfChannelEgressEndpoint;
+    EgressEndpoints?: __listOfChannelEgressEndpoint;
     EncoderSettings?: EncoderSettings;
     /**
      * The unique id of the channel.
@@ -844,7 +844,7 @@ one destination per packager.
     /**
      * List of input attachments for channel.
      */
-    InputAttachments?: ListOfInputAttachment;
+    InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
@@ -893,11 +893,11 @@ destination per output. For other types (HLS, for example), there is
 one destination per packager.
 
      */
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     /**
      * The endpoints where outgoing connections initiate from
      */
-    EgressEndpoints?: ListOfChannelEgressEndpoint;
+    EgressEndpoints?: __listOfChannelEgressEndpoint;
     EncoderSettings?: EncoderSettings;
     /**
      * The unique id of the channel.
@@ -906,7 +906,7 @@ one destination per packager.
     /**
      * List of input attachments for channel.
      */
-    InputAttachments?: ListOfInputAttachment;
+    InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
@@ -936,11 +936,11 @@ one destination per packager.
     /**
      * A list of channel IDs that that input is attached to (currently an input can only be attached to one channel).
      */
-    AttachedChannels?: ListOf__string;
+    AttachedChannels?: __listOf__string;
     /**
      * A list of the destinations of the input (PUSH-type).
      */
-    Destinations?: ListOfInputDestination;
+    Destinations?: __listOfInputDestination;
     /**
      * The generated ID of the input (unique for user account, immutable).
      */
@@ -952,11 +952,11 @@ one destination per packager.
     /**
      * A list of IDs for all the security groups attached to the input.
      */
-    SecurityGroups?: ListOf__string;
+    SecurityGroups?: __listOf__string;
     /**
      * A list of the sources of the input (PULL-type).
      */
-    Sources?: ListOfInputSource;
+    Sources?: __listOfInputSource;
     State?: InputState;
     Type?: InputType;
   }
@@ -978,21 +978,21 @@ one destination per packager.
     /**
      * Whitelist rules and their sync status
      */
-    WhitelistRules?: ListOfInputWhitelistRule;
+    WhitelistRules?: __listOfInputWhitelistRule;
   }
   export interface DvbNitSettings {
     /**
      * The numeric value placed in the Network Information Table (NIT).
      */
-    NetworkId?: __integer;
+    NetworkId: __integerMin0Max65536;
     /**
      * The network name text placed in the networkNameDescriptor inside the Network Information Table. Maximum length is 256 characters.
      */
-    NetworkName?: __string;
+    NetworkName: __stringMin1Max256;
     /**
      * The number of milliseconds between instances of this table in the output transport stream.
      */
-    RepInterval?: __integer;
+    RepInterval?: __integerMin25Max10000;
   }
   export type DvbSdtOutputSdt = "SDT_FOLLOW"|"SDT_FOLLOW_IF_PRESENT"|"SDT_MANUAL"|"SDT_NONE"|string;
   export interface DvbSdtSettings {
@@ -1003,15 +1003,15 @@ one destination per packager.
     /**
      * The number of milliseconds between instances of this table in the output transport stream.
      */
-    RepInterval?: __integer;
+    RepInterval?: __integerMin25Max2000;
     /**
      * The service name placed in the serviceDescriptor in the Service Description Table. Maximum length is 256 characters.
      */
-    ServiceName?: __string;
+    ServiceName?: __stringMin1Max256;
     /**
      * The service provider name placed in the serviceDescriptor in the Service Description Table. Maximum length is 256 characters.
      */
-    ServiceProviderName?: __string;
+    ServiceProviderName?: __stringMin1Max256;
   }
   export type DvbSubDestinationAlignment = "CENTERED"|"LEFT"|"SMART"|string;
   export type DvbSubDestinationBackgroundColor = "BLACK"|"NONE"|"WHITE"|string;
@@ -1029,7 +1029,7 @@ one destination per packager.
     /**
      * Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.
      */
-    BackgroundOpacity?: __integer;
+    BackgroundOpacity?: __integerMin0Max255;
     /**
      * External font file used for caption burn-in. File extension must be 'ttf' or 'tte'.  Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts.  All burn-in and DVB-Sub font settings must match.
      */
@@ -1041,11 +1041,11 @@ one destination per packager.
     /**
      * Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.  All burn-in and DVB-Sub font settings must match.
      */
-    FontOpacity?: __integer;
+    FontOpacity?: __integerMin0Max255;
     /**
      * Font resolution in DPI (dots per inch); default is 96 dpi.  All burn-in and DVB-Sub font settings must match.
      */
-    FontResolution?: __integer;
+    FontResolution?: __integerMin96Max600;
     /**
      * When set to auto fontSize will scale depending on the size of the output.  Giving a positive integer will specify the exact font size in points.  All burn-in and DVB-Sub font settings must match.
      */
@@ -1057,7 +1057,7 @@ one destination per packager.
     /**
      * Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
-    OutlineSize?: __integer;
+    OutlineSize?: __integerMin0Max10;
     /**
      * Specifies the color of the shadow cast by the captions.  All burn-in and DVB-Sub font settings must match.
      */
@@ -1065,7 +1065,7 @@ one destination per packager.
     /**
      * Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.
      */
-    ShadowOpacity?: __integer;
+    ShadowOpacity?: __integerMin0Max255;
     /**
      * Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left.  All burn-in and DVB-Sub font settings must match.
      */
@@ -1081,11 +1081,11 @@ one destination per packager.
     /**
      * Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit xPosition is provided, the horizontal caption position will be determined by the alignment parameter.  This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.
      */
-    XPosition?: __integer;
+    XPosition?: __integerMin0;
     /**
      * Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.
      */
-    YPosition?: __integer;
+    YPosition?: __integerMin0;
   }
   export type DvbSubDestinationShadowColor = "BLACK"|"NONE"|"WHITE"|string;
   export type DvbSubDestinationTeletextGridControl = "FIXED"|"SCALED"|string;
@@ -1093,13 +1093,13 @@ one destination per packager.
     /**
      * When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.
      */
-    Pid?: __integer;
+    Pid?: __integerMin1;
   }
   export interface DvbTdtSettings {
     /**
      * The number of milliseconds between instances of this table in the output transport stream.
      */
-    RepInterval?: __integer;
+    RepInterval?: __integerMin1000Max30000;
   }
   export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
   export type Eac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED"|string;
@@ -1136,7 +1136,7 @@ one destination per packager.
     /**
      * Sets the dialnorm for the output. If blank and input audio is Dolby Digital Plus, dialnorm will be passed through.
      */
-    Dialnorm?: __integer;
+    Dialnorm?: __integerMin1Max31;
     /**
      * Sets the Dolby dynamic range compression profile.
      */
@@ -1215,16 +1215,16 @@ one destination per packager.
     /**
      * Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
      */
-    Source608ChannelNumber?: __integer;
+    Source608ChannelNumber?: __integerMin1Max4;
     /**
      * This field is unused and deprecated.
      */
-    Source608TrackNumber?: __integer;
+    Source608TrackNumber?: __integerMin1Max5;
   }
   export interface Empty {
   }
   export interface EncoderSettings {
-    AudioDescriptions?: ListOfAudioDescription;
+    AudioDescriptions: __listOfAudioDescription;
     /**
      * Settings for ad avail blanking.
      */
@@ -1240,24 +1240,24 @@ one destination per packager.
     /**
      * Settings for caption decriptions
      */
-    CaptionDescriptions?: ListOfCaptionDescription;
+    CaptionDescriptions?: __listOfCaptionDescription;
     /**
      * Configuration settings that apply to the event as a whole.
      */
     GlobalConfiguration?: GlobalConfiguration;
-    OutputGroups?: ListOfOutputGroup;
+    OutputGroups: __listOfOutputGroup;
     /**
      * Contains settings used to acquire and adjust timecode information from inputs.
      */
-    TimecodeConfig?: TimecodeConfig;
-    VideoDescriptions?: ListOfVideoDescription;
+    TimecodeConfig: TimecodeConfig;
+    VideoDescriptions: __listOfVideoDescription;
   }
   export type FecOutputIncludeFec = "COLUMN"|"COLUMN_AND_ROW"|string;
   export interface FecOutputSettings {
     /**
      * Parameter D from SMPTE 2022-1. The height of the FEC protection matrix.  The number of transport stream packets per column error correction packet. Must be between 4 and 20, inclusive.
      */
-    ColumnDepth?: __integer;
+    ColumnDepth?: __integerMin4Max20;
     /**
      * Enables column only or column and row based FEC
      */
@@ -1265,14 +1265,14 @@ one destination per packager.
     /**
      * Parameter L from SMPTE 2022-1. The width of the FEC protection matrix.  Must be between 1 and 20, inclusive. If only Column FEC is used, then larger values increase robustness.  If Row FEC is used, then this is the number of transport stream packets per row error correction packet, and the value must be between 4 and 20, inclusive, if includeFec is columnAndRow. If includeFec is column, this value must be 1 to 20, inclusive.
      */
-    RowLength?: __integer;
+    RowLength?: __integerMin1Max20;
   }
   export type FixedAfd = "AFD_0000"|"AFD_0010"|"AFD_0011"|"AFD_0100"|"AFD_1000"|"AFD_1001"|"AFD_1010"|"AFD_1011"|"AFD_1101"|"AFD_1110"|"AFD_1111"|string;
   export interface GlobalConfiguration {
     /**
      * Value to set the initial audio gain for the Live Event.
      */
-    InitialAudioGain?: __integer;
+    InitialAudioGain?: __integerMinNegative60Max60;
     /**
      * Indicates the action to take when an input completes (e.g. end-of-file.) Options include immediately switching to the next sequential input (via "switchInput"), switching to the next input and looping back to the first input when last input ends (via "switchAndLoopInputs") or not switching inputs and instead transcoding black / color / slate images per the "Input Loss Behavior" configuration until an activateInput REST command is received (via "none").
      */
@@ -1319,15 +1319,15 @@ one destination per packager.
     /**
      * Average bitrate in bits/second. Required for VBR, CBR, and ABR. For MS Smooth outputs, bitrates must be unique when rounded down to the nearest multiple of 1000.
      */
-    Bitrate?: __integer;
+    Bitrate?: __integerMin1000;
     /**
      * Percentage of the buffer that should initially be filled (HRD buffer model).
      */
-    BufFillPct?: __integer;
+    BufFillPct?: __integerMin0Max100;
     /**
      * Size of buffer (HRD buffer model) in bits/second.
      */
-    BufSize?: __integer;
+    BufSize?: __integerMin0;
     /**
      * Includes colorspace metadata in the output.
      */
@@ -1363,15 +1363,15 @@ one destination per packager.
     /**
      * Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.
      */
-    GopClosedCadence?: __integer;
+    GopClosedCadence?: __integerMin0;
     /**
      * Number of B-frames between reference frames.
      */
-    GopNumBFrames?: __integer;
+    GopNumBFrames?: __integerMin0Max7;
     /**
      * GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits. Must be greater than zero.
      */
-    GopSize?: __double;
+    GopSize?: __doubleMin1;
     /**
      * Indicates if the gopSize is specified in frames or seconds. If seconds the system will convert the gopSize into a frame count at run time.
      */
@@ -1387,15 +1387,15 @@ one destination per packager.
     /**
      * Maximum bitrate in bits/second (for VBR mode only).
      */
-    MaxBitrate?: __integer;
+    MaxBitrate?: __integerMin1000;
     /**
      * Only meaningful if sceneChangeDetect is set to enabled.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
      */
-    MinIInterval?: __integer;
+    MinIInterval?: __integerMin0Max30;
     /**
      * Number of reference frames to use. The encoder may use more than requested if using B-frames and/or interlaced encoding.
      */
-    NumRefFrames?: __integer;
+    NumRefFrames?: __integerMin1Max6;
     /**
      * This field indicates how the output pixel aspect ratio is specified.  If "specified" is selected then the output video pixel aspect ratio is determined by parNumerator and parDenominator, else if "initializeFromSource" is selected then the output pixsel aspect ratio will be set equal to the input video pixel aspect ratio of the first input.
      */
@@ -1403,7 +1403,7 @@ one destination per packager.
     /**
      * Pixel Aspect Ratio denominator.
      */
-    ParDenominator?: __integer;
+    ParDenominator?: __integerMin1;
     /**
      * Pixel Aspect Ratio numerator.
      */
@@ -1428,11 +1428,11 @@ one destination per packager.
      * Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.
 This field is optional; when no value is specified the encoder will choose the number of slices based on encode resolution.
      */
-    Slices?: __integer;
+    Slices?: __integerMin1Max32;
     /**
      * Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.
      */
-    Softness?: __integer;
+    Softness?: __integerMin0Max128;
     /**
      * If set to enabled, adjust quantization within each frame based on spatial variation of content complexity.
      */
@@ -1462,11 +1462,11 @@ This field is optional; when no value is specified the encoder will choose the n
     /**
      * Number of seconds to wait before retrying connection to the CDN if the connection is lost.
      */
-    ConnectionRetryInterval?: __integer;
+    ConnectionRetryInterval?: __integerMin0;
     /**
      * Size in seconds of file cache for streaming outputs.
      */
-    FilecacheDuration?: __integer;
+    FilecacheDuration?: __integerMin0Max600;
     /**
      * Specify whether or not to use chunked transfer encoding to Akamai. User should contact Akamai to enable this feature.
      */
@@ -1474,11 +1474,11 @@ This field is optional; when no value is specified the encoder will choose the n
     /**
      * Number of retry attempts that will be made before the Live Event is put into an error state.
      */
-    NumRetries?: __integer;
+    NumRetries?: __integerMin0;
     /**
      * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
      */
-    RestartDelay?: __integer;
+    RestartDelay?: __integerMin0Max15;
     /**
      * Salt for authenticated Akamai.
      */
@@ -1492,19 +1492,19 @@ This field is optional; when no value is specified the encoder will choose the n
     /**
      * Number of seconds to wait before retrying connection to the CDN if the connection is lost.
      */
-    ConnectionRetryInterval?: __integer;
+    ConnectionRetryInterval?: __integerMin0;
     /**
      * Size in seconds of file cache for streaming outputs.
      */
-    FilecacheDuration?: __integer;
+    FilecacheDuration?: __integerMin0Max600;
     /**
      * Number of retry attempts that will be made before the Live Event is put into an error state.
      */
-    NumRetries?: __integer;
+    NumRetries?: __integerMin0;
     /**
      * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
      */
-    RestartDelay?: __integer;
+    RestartDelay?: __integerMin0Max15;
   }
   export type HlsCaptionLanguageSetting = "INSERT"|"NONE"|"OMIT"|string;
   export interface HlsCdnSettings {
@@ -1521,7 +1521,7 @@ This field is optional; when no value is specified the encoder will choose the n
     /**
      * Choose one or more ad marker types to pass SCTE35 signals through to this group of Apple HLS outputs.
      */
-    AdMarkers?: ListOfHlsAdMarkers;
+    AdMarkers?: __listOfHlsAdMarkers;
     /**
      * A partial URI prefix that will be prepended to each output in the media .m3u8 file. Can be used if base manifest is delivered from a different URL than the main .m3u8 file.
      */
@@ -1533,7 +1533,7 @@ This field is optional; when no value is specified the encoder will choose the n
     /**
      * Mapping of up to 4 caption channels to caption languages.  Is only meaningful if captionLanguageSetting is set to "insert".
      */
-    CaptionLanguageMappings?: ListOfCaptionLanguageMapping;
+    CaptionLanguageMappings?: __listOfCaptionLanguageMapping;
     /**
      * Applies only to 608 Embedded output captions.
 insert: Include CLOSED-CAPTIONS lines in the manifest. Specify at least one language in the CC1 Language Code field. One CLOSED-CAPTION line is added for each Language Code you specify. Make sure to specify the languages in the order in which they appear in the original source (if the source is embedded format) or the order of the caption selectors (if the source is other than embedded). Otherwise, languages in the manifest will not match up properly with the output captions.
@@ -1552,11 +1552,11 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
     /**
      * For use with encryptionType. This is a 128-bit, 16-byte hex value represented by a 32-character text string. If ivSource is set to "explicit" then this parameter is required and is used as the IV for encryption.
      */
-    ConstantIv?: __string;
+    ConstantIv?: __stringMin32Max32;
     /**
      * A directory or HTTP destination for the HLS segments, manifest files, and encryption keys (if enabled).
      */
-    Destination?: OutputLocationRef;
+    Destination: OutputLocationRef;
     /**
      * Place segments in subdirectories.
      */
@@ -1572,7 +1572,7 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
     /**
      * If mode is "live", the number of segments to retain in the manifest (.m3u8) file. This number must be less than or equal to keepSegments. If mode is "vod", this parameter has no effect.
      */
-    IndexNSegments?: __integer;
+    IndexNSegments?: __integerMin3;
     /**
      * Parameter that control output group behavior on input loss.
      */
@@ -1588,7 +1588,7 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
     /**
      * If mode is "live", the number of TS segments to retain in the destination directory. If mode is "vod", this parameter has no effect.
      */
-    KeepSegments?: __integer;
+    KeepSegments?: __integerMin1;
     /**
      * The value specifies how the key is represented in the resource identified by the URI.  If parameter is absent, an implicit value of "identity" is used.  A reverse DNS string can also be given.
      */
@@ -1612,7 +1612,7 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
     /**
      * When set, minimumSegmentLength is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.
      */
-    MinSegmentLength?: __integer;
+    MinSegmentLength?: __integerMin0;
     /**
      * If "vod", all segments are indexed and kept permanently in the destination and manifest. If "live", only the number segments specified in keepSegments and indexNSegments are kept; newer segments replace older segments, which may prevent players from rewinding all the way to the beginning of the event.
 
@@ -1630,11 +1630,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
      */
-    ProgramDateTimePeriod?: __integer;
+    ProgramDateTimePeriod?: __integerMin0Max3600;
     /**
      * Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.
      */
-    SegmentLength?: __integer;
+    SegmentLength?: __integerMin1;
     /**
      * When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams.
      */
@@ -1642,7 +1642,7 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * Number of segments to write to a subdirectory before starting a new one. directoryStructure must be subdirectoryPerStream for this setting to have an effect.
      */
-    SegmentsPerSubdirectory?: __integer;
+    SegmentsPerSubdirectory?: __integerMin1;
     /**
      * Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant manifest.
      */
@@ -1654,11 +1654,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * Timed Metadata interval in seconds.
      */
-    TimedMetadataId3Period?: __integer;
+    TimedMetadataId3Period?: __integerMin0;
     /**
      * Provides an extra millisecond delta offset to fine tune the timestamps.
      */
-    TimestampDeltaMilliseconds?: __integer;
+    TimestampDeltaMilliseconds?: __integerMin0;
     /**
      * When set to "singleFile", emits the program as a single media resource (.ts) file, and uses #EXT-X-BYTERANGE tags to index segment for playback. Playback of VOD mode content during event is not guaranteed due to HTTP server caching.
      */
@@ -1668,19 +1668,19 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * When specified the HLS stream with the m3u8 BANDWIDTH that most closely matches this value will be chosen, otherwise the highest bandwidth stream in the m3u8 will be chosen.  The bitrate is specified in bits per second, as in an HLS manifest.
      */
-    Bandwidth?: __integer;
+    Bandwidth?: __integerMin0;
     /**
      * When specified, reading of the HLS input will begin this many buffer segments from the end (most recently written segment).  When not specified, the HLS input will begin with the first segment specified in the m3u8.
      */
-    BufferSegments?: __integer;
+    BufferSegments?: __integerMin0;
     /**
      * The number of consecutive times that attempts to read a manifest or segment must fail before the input is considered unavailable.
      */
-    Retries?: __integer;
+    Retries?: __integerMin0;
     /**
      * The number of seconds between retries when an attempt to read a manifest or segment fails.
      */
-    RetryInterval?: __integer;
+    RetryInterval?: __integerMin0;
   }
   export type HlsIvInManifest = "EXCLUDE"|"INCLUDE"|string;
   export type HlsIvSource = "EXPLICIT"|"FOLLOWS_SEGMENT_NUMBER"|string;
@@ -1690,11 +1690,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * Number of seconds to wait before retrying connection to the CDN if the connection is lost.
      */
-    ConnectionRetryInterval?: __integer;
+    ConnectionRetryInterval?: __integerMin0;
     /**
      * Size in seconds of file cache for streaming outputs.
      */
-    FilecacheDuration?: __integer;
+    FilecacheDuration?: __integerMin0Max600;
     /**
      * When set to temporal, output files are stored in non-persistent memory for faster reading and writing.
      */
@@ -1702,11 +1702,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * Number of retry attempts that will be made before the Live Event is put into an error state.
      */
-    NumRetries?: __integer;
+    NumRetries?: __integerMin0;
     /**
      * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
      */
-    RestartDelay?: __integer;
+    RestartDelay?: __integerMin0Max15;
   }
   export type HlsMediaStoreStorageClass = "TEMPORAL"|string;
   export type HlsMode = "LIVE"|"VOD"|string;
@@ -1715,11 +1715,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * Settings regarding the underlying stream. These settings are different for audio-only outputs.
      */
-    HlsSettings?: HlsSettings;
+    HlsSettings: HlsSettings;
     /**
      * String concatenated to the end of the destination filename. Accepts \"Format Identifiers\":#formatIdentifierParameters.
      */
-    NameModifier?: __string;
+    NameModifier?: __stringMin1;
     /**
      * String concatenated to end of segment filenames.
      */
@@ -1739,11 +1739,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * Number of seconds to wait before retrying connection to the CDN if the connection is lost.
      */
-    ConnectionRetryInterval?: __integer;
+    ConnectionRetryInterval?: __integerMin0;
     /**
      * Size in seconds of file cache for streaming outputs.
      */
-    FilecacheDuration?: __integer;
+    FilecacheDuration?: __integerMin0Max600;
     /**
      * Specify whether or not to use chunked transfer encoding to WebDAV.
      */
@@ -1751,11 +1751,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * Number of retry attempts that will be made before the Live Event is put into an error state.
      */
-    NumRetries?: __integer;
+    NumRetries?: __integerMin0;
     /**
      * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
      */
-    RestartDelay?: __integer;
+    RestartDelay?: __integerMin0Max15;
   }
   export interface Input {
     /**
@@ -1765,11 +1765,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * A list of channel IDs that that input is attached to (currently an input can only be attached to one channel).
      */
-    AttachedChannels?: ListOf__string;
+    AttachedChannels?: __listOf__string;
     /**
      * A list of the destinations of the input (PUSH-type).
      */
-    Destinations?: ListOfInputDestination;
+    Destinations?: __listOfInputDestination;
     /**
      * The generated ID of the input (unique for user account, immutable).
      */
@@ -1781,11 +1781,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * A list of IDs for all the security groups attached to the input.
      */
-    SecurityGroups?: ListOf__string;
+    SecurityGroups?: __listOf__string;
     /**
      * A list of the sources of the input (PULL-type).
      */
-    Sources?: ListOfInputSource;
+    Sources?: __listOfInputSource;
     State?: InputState;
     Type?: InputType;
   }
@@ -1803,11 +1803,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     /**
      * Remixing value. Units are in dB and acceptable values are within the range from -60 (mute) and 6 dB.
      */
-    Gain?: __integer;
+    Gain: __integerMinNegative60Max6;
     /**
      * The index of the input channel used as a source.
      */
-    InputChannel?: __integer;
+    InputChannel: __integerMin0Max15;
   }
   export type InputCodec = "MPEG2"|"AVC"|"HEVC"|string;
   export type InputDeblockFilter = "DISABLED"|"ENABLED"|string;
@@ -1847,7 +1847,7 @@ to.
     /**
      * Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a rtmpEndpoint should have a uri simliar to: "rtmp://fmsserver/live".
      */
-    Uri?: __string;
+    Uri: __string;
     /**
      * Documentation update needed
      */
@@ -1860,11 +1860,11 @@ to.
     /**
      * Documentation update needed
      */
-    BlackFrameMsec?: __integer;
+    BlackFrameMsec?: __integerMin0Max1000000;
     /**
      * When input loss image type is "color" this field specifies the color to use. Value: 6 hex characters representing the values of RGB.
      */
-    InputLossImageColor?: __string;
+    InputLossImageColor?: __stringMin6Max6;
     /**
      * When input loss image type is "slate" these fields specify the parameters for accessing the slate.
      */
@@ -1876,7 +1876,7 @@ to.
     /**
      * Documentation update needed
      */
-    RepeatFrameMsec?: __integer;
+    RepeatFrameMsec?: __integerMin0Max1000000;
   }
   export type InputLossImageType = "COLOR"|"SLATE"|string;
   export type InputMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
@@ -1893,23 +1893,23 @@ to.
     /**
      * Whitelist rules and their sync status
      */
-    WhitelistRules?: ListOfInputWhitelistRule;
+    WhitelistRules?: __listOfInputWhitelistRule;
   }
   export interface InputSecurityGroupWhitelistRequest {
     /**
      * List of IPv4 CIDR addresses to whitelist
      */
-    WhitelistRules?: ListOfInputWhitelistRuleCidr;
+    WhitelistRules?: __listOfInputWhitelistRuleCidr;
   }
   export interface InputSettings {
     /**
      * Used to select the audio stream to decode for inputs that have multiple available.
      */
-    AudioSelectors?: ListOfAudioSelector;
+    AudioSelectors?: __listOfAudioSelector;
     /**
      * Used to select the caption input to use for inputs that have multiple available.
      */
-    CaptionSelectors?: ListOfCaptionSelector;
+    CaptionSelectors?: __listOfCaptionSelector;
     /**
      * Enable or disable the deblock filter when filtering.
      */
@@ -1921,7 +1921,7 @@ to.
     /**
      * Adjusts the magnitude of filtering from 1 (minimal) to 5 (strongest).
      */
-    FilterStrength?: __integer;
+    FilterStrength?: __integerMin1Max5;
     /**
      * Turns on the filter for this input. MPEG-2 inputs have the deblocking filter enabled by default.
 1) auto - filtering will be applied depending on input type/quality
@@ -2020,11 +2020,11 @@ pulled from.
     NextToken?: __string;
   }
   export interface ListChannelsResponse {
-    Channels?: ListOfChannelSummary;
+    Channels?: __listOfChannelSummary;
     NextToken?: __string;
   }
   export interface ListChannelsResultModel {
-    Channels?: ListOfChannelSummary;
+    Channels?: __listOfChannelSummary;
     NextToken?: __string;
   }
   export interface ListInputSecurityGroupsRequest {
@@ -2035,14 +2035,14 @@ pulled from.
     /**
      * List of input security groups
      */
-    InputSecurityGroups?: ListOfInputSecurityGroup;
+    InputSecurityGroups?: __listOfInputSecurityGroup;
     NextToken?: __string;
   }
   export interface ListInputSecurityGroupsResultModel {
     /**
      * List of input security groups
      */
-    InputSecurityGroups?: ListOfInputSecurityGroup;
+    InputSecurityGroups?: __listOfInputSecurityGroup;
     NextToken?: __string;
   }
   export interface ListInputsRequest {
@@ -2050,39 +2050,13 @@ pulled from.
     NextToken?: __string;
   }
   export interface ListInputsResponse {
-    Inputs?: ListOfInput;
+    Inputs?: __listOfInput;
     NextToken?: __string;
   }
   export interface ListInputsResultModel {
-    Inputs?: ListOfInput;
+    Inputs?: __listOfInput;
     NextToken?: __string;
   }
-  export type ListOfAudioChannelMapping = AudioChannelMapping[];
-  export type ListOfAudioDescription = AudioDescription[];
-  export type ListOfAudioSelector = AudioSelector[];
-  export type ListOfCaptionDescription = CaptionDescription[];
-  export type ListOfCaptionLanguageMapping = CaptionLanguageMapping[];
-  export type ListOfCaptionSelector = CaptionSelector[];
-  export type ListOfChannelEgressEndpoint = ChannelEgressEndpoint[];
-  export type ListOfChannelSummary = ChannelSummary[];
-  export type ListOfHlsAdMarkers = HlsAdMarkers[];
-  export type ListOfInput = Input[];
-  export type ListOfInputAttachment = InputAttachment[];
-  export type ListOfInputChannelLevel = InputChannelLevel[];
-  export type ListOfInputDestination = InputDestination[];
-  export type ListOfInputDestinationRequest = InputDestinationRequest[];
-  export type ListOfInputSecurityGroup = InputSecurityGroup[];
-  export type ListOfInputSource = InputSource[];
-  export type ListOfInputSourceRequest = InputSourceRequest[];
-  export type ListOfInputWhitelistRule = InputWhitelistRule[];
-  export type ListOfInputWhitelistRuleCidr = InputWhitelistRuleCidr[];
-  export type ListOfOutput = Output[];
-  export type ListOfOutputDestination = OutputDestination[];
-  export type ListOfOutputDestinationSettings = OutputDestinationSettings[];
-  export type ListOfOutputGroup = OutputGroup[];
-  export type ListOfValidationError = ValidationError[];
-  export type ListOfVideoDescription = VideoDescription[];
-  export type ListOf__string = __string[];
   export type M2tsAbsentInputAudioBehavior = "DROP"|"ENCODE_SILENCE"|string;
   export type M2tsArib = "DISABLED"|"ENABLED"|string;
   export type M2tsAribCaptionsPidControl = "AUTO"|"USE_CONFIGURED"|string;
@@ -2124,7 +2098,7 @@ pulled from.
     /**
      * The number of audio frames to insert for each PES packet.
      */
-    AudioFramesPerPes?: __integer;
+    AudioFramesPerPes?: __integerMin0;
     /**
      * Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values. Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
      */
@@ -2136,7 +2110,7 @@ pulled from.
     /**
      * The output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate.
      */
-    Bitrate?: __integer;
+    Bitrate?: __integerMin0;
     /**
      * If set to multiplex, use multiplex buffer model for accurate interleaving.  Setting to bufferModel to none can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions.
      */
@@ -2176,7 +2150,7 @@ pulled from.
     /**
      * When set, enforces that Encoder Boundary Points do not come within the specified time interval of each other by looking ahead at input video. If another EBP is going to come in within the specified time interval, the current EBP is not emitted, and the segment is "stretched" to the next marker.  The lookahead value does not add latency to the system. The Live Event must be configured elsewhere to create sufficient latency to make the lookahead accurate.
      */
-    EbpLookaheadMs?: __integer;
+    EbpLookaheadMs?: __integerMin0Max10000;
     /**
      * Controls placement of EBP on Audio PIDs. If set to videoAndAudioPids, EBP markers will be placed on the video PID and all audio PIDs.  If set to videoPid, EBP markers will be placed on only the video PID.
      */
@@ -2200,7 +2174,7 @@ pulled from.
     /**
      * The length in seconds of each fragment. Only used with EBP markers.
      */
-    FragmentTime?: __double;
+    FragmentTime?: __doubleMin0;
     /**
      * If set to passthrough, passes any KLV data from the input source to this output.
      */
@@ -2212,11 +2186,11 @@ pulled from.
     /**
      * Value in bits per second of extra null packets to insert into the transport stream. This can be used if a downstream encryption system requires periodic null packets.
      */
-    NullPacketBitrate?: __double;
+    NullPacketBitrate?: __doubleMin0;
     /**
      * The number of milliseconds between instances of this table in the output transport stream.  Valid values are 0, 10..1000.
      */
-    PatInterval?: __integer;
+    PatInterval?: __integerMin0Max1000;
     /**
      * When set to pcrEveryPesPacket, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This parameter is effective only when the PCR PID is the same as the video or audio elementary stream.
      */
@@ -2224,7 +2198,7 @@ pulled from.
     /**
      * Maximum time in milliseconds between Program Clock Reference (PCRs) inserted into the transport stream.
      */
-    PcrPeriod?: __integer;
+    PcrPeriod?: __integerMin0Max500;
     /**
      * Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
      */
@@ -2232,7 +2206,7 @@ pulled from.
     /**
      * The number of milliseconds between instances of this table in the output transport stream. Valid values are 0, 10..1000.
      */
-    PmtInterval?: __integer;
+    PmtInterval?: __integerMin0Max1000;
     /**
      * Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream. Can be entered as a decimal or hexadecimal value. Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
      */
@@ -2240,7 +2214,7 @@ pulled from.
     /**
      * The value of the program number field in the Program Map Table.
      */
-    ProgramNum?: __integer;
+    ProgramNum?: __integerMin0Max65535;
     /**
      * When vbr, does not insert null packets into transport stream to fill specified bitrate. The bitrate setting acts as the maximum bitrate when vbr is set.
      */
@@ -2272,7 +2246,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     /**
      * The length in seconds of each segment. Required unless markers is set to None_.
      */
-    SegmentationTime?: __double;
+    SegmentationTime?: __doubleMin1;
     /**
      * When set to passthrough, timed metadata will be passed through from input to output.
      */
@@ -2284,7 +2258,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     /**
      * The value of the transport stream ID field in the Program Map Table.
      */
-    TransportStreamId?: __integer;
+    TransportStreamId?: __integerMin0Max65535;
     /**
      * Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
      */
@@ -2297,7 +2271,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     /**
      * The number of audio frames to insert for each PES packet.
      */
-    AudioFramesPerPes?: __integer;
+    AudioFramesPerPes?: __integerMin0;
     /**
      * Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.
      */
@@ -2309,7 +2283,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     /**
      * The number of milliseconds between instances of this table in the output transport stream. A value of \"0\" writes out the PMT once per segment file.
      */
-    PatInterval?: __integer;
+    PatInterval?: __integerMin0Max1000;
     /**
      * When set to pcrEveryPesPacket, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This parameter is effective only when the PCR PID is the same as the video or audio elementary stream.
      */
@@ -2317,7 +2291,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     /**
      * Maximum time in milliseconds between Program Clock References (PCRs) inserted into the transport stream.
      */
-    PcrPeriod?: __integer;
+    PcrPeriod?: __integerMin0Max500;
     /**
      * Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID. Can be entered as a decimal or hexadecimal value.
      */
@@ -2325,7 +2299,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     /**
      * The number of milliseconds between instances of this table in the output transport stream. A value of \"0\" writes out the PMT once per segment file.
      */
-    PmtInterval?: __integer;
+    PmtInterval?: __integerMin0Max1000;
     /**
      * Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream. Can be entered as a decimal or hexadecimal value.
      */
@@ -2333,7 +2307,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     /**
      * The value of the program number field in the Program Map Table.
      */
-    ProgramNum?: __integer;
+    ProgramNum?: __integerMin0Max65535;
     /**
      * If set to passthrough, passes any SCTE-35 signals from the input source to this output.
      */
@@ -2349,7 +2323,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     /**
      * The value of the transport stream ID field in the Program Map Table.
      */
-    TransportStreamId?: __integer;
+    TransportStreamId?: __integerMin0Max65535;
     /**
      * Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.
      */
@@ -2388,11 +2362,11 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     /**
      * Number of seconds to wait before retrying connection to the IIS server if the connection is lost. Content will be cached during this time and the cache will be be delivered to the IIS server once the connection is re-established.
      */
-    ConnectionRetryInterval?: __integer;
+    ConnectionRetryInterval?: __integerMin0;
     /**
      * Smooth Streaming publish point on an IIS server. Elemental Live acts as a "Push" encoder to IIS.
      */
-    Destination?: OutputLocationRef;
+    Destination: OutputLocationRef;
     /**
      * MS Smooth event ID to be sent to the IIS server.
 
@@ -2415,11 +2389,11 @@ Options:
     /**
      * Size in seconds of file cache for streaming outputs.
      */
-    FilecacheDuration?: __integer;
+    FilecacheDuration?: __integerMin0;
     /**
      * Length of mp4 fragments to generate (in seconds). Fragment length must be compatible with GOP size and framerate.
      */
-    FragmentLength?: __integer;
+    FragmentLength?: __integerMin1;
     /**
      * Parameter that control output group behavior on input loss.
      */
@@ -2427,11 +2401,11 @@ Options:
     /**
      * Number of retry attempts.
      */
-    NumRetries?: __integer;
+    NumRetries?: __integerMin0;
     /**
      * Number of seconds before initiating a restart due to output failure, due to exhausting the numRetries on one segment, or exceeding filecacheDuration.
      */
-    RestartDelay?: __integer;
+    RestartDelay?: __integerMin0;
     /**
      * When set to useInputSegmentation, the output segment or fragment points are set by the RAI markers from the input streams.
      */
@@ -2439,7 +2413,7 @@ Options:
     /**
      * Outputs that are "output locked" can use this delay. Assign a delay to the output that is "secondary".  Do not assign a delay to the "primary" output. The delay means that the primary output will always reach the downstream system before the secondary, which helps ensure that the downstream system always uses the primary output. (If there were no delay, the downstream system might flip-flop between whichever output happens to arrive first.) If the primary fails, the downstream system will switch to the secondary output. When the primary is restarted, the downstream system will switch back to the primary (because once again it is always arriving first)
      */
-    SendDelayMs?: __integer;
+    SendDelayMs?: __integerMin0Max10000;
     /**
      * If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs.
      */
@@ -2480,19 +2454,19 @@ Options:
     /**
      * The names of the AudioDescriptions used as audio sources for this output.
      */
-    AudioDescriptionNames?: ListOf__string;
+    AudioDescriptionNames?: __listOf__string;
     /**
      * The names of the CaptionDescriptions used as caption sources for this output.
      */
-    CaptionDescriptionNames?: ListOf__string;
+    CaptionDescriptionNames?: __listOf__string;
     /**
      * The name used to identify an output.
      */
-    OutputName?: __string;
+    OutputName?: __stringMin1Max255;
     /**
      * Output type-specific settings.
      */
-    OutputSettings?: OutputSettings;
+    OutputSettings: OutputSettings;
     /**
      * The name of the VideoDescription used as the source for this output.
      */
@@ -2506,7 +2480,7 @@ Options:
     /**
      * Destination settings for output; one for each redundant encoder.
      */
-    Settings?: ListOfOutputDestinationSettings;
+    Settings?: __listOfOutputDestinationSettings;
   }
   export interface OutputDestinationSettings {
     /**
@@ -2526,12 +2500,12 @@ Options:
     /**
      * Custom output group name optionally defined by the user.  Only letters, numbers, and the underscore character allowed; only 32 characters allowed.
      */
-    Name?: __string;
+    Name?: __stringMax32;
     /**
      * Settings associated with the output group.
      */
-    OutputGroupSettings?: OutputGroupSettings;
-    Outputs?: ListOfOutput;
+    OutputGroupSettings: OutputGroupSettings;
+    Outputs: __listOfOutput;
   }
   export interface OutputGroupSettings {
     ArchiveGroupSettings?: ArchiveGroupSettings;
@@ -2554,16 +2528,16 @@ Options:
     /**
      * Mapping of input channels to output channels, with appropriate gain adjustments.
      */
-    ChannelMappings?: ListOfAudioChannelMapping;
+    ChannelMappings: __listOfAudioChannelMapping;
     /**
      * Number of input channels to be used.
      */
-    ChannelsIn?: __integer;
+    ChannelsIn?: __integerMin1Max16;
     /**
      * Number of output channels to be produced.
 Valid values: 1, 2, 4, 6, 8
      */
-    ChannelsOut?: __integer;
+    ChannelsOut?: __integerMin1Max8;
   }
   export interface ResourceConflict {
     Message?: __string;
@@ -2582,7 +2556,7 @@ Valid values: 1, 2, 4, 6, 8
     /**
      * Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
      */
-    Source608ChannelNumber?: __integer;
+    Source608ChannelNumber?: __integerMin1Max4;
   }
   export interface Scte27DestinationSettings {
   }
@@ -2594,7 +2568,7 @@ Valid values: 1, 2, 4, 6, 8
   - Omit PID and specify Language: Extracts the specified language, whichever PID that happens to be.
   - Omit PID and omit Language: Valid only if source is DVB-Sub that is being passed through; all languages will be passed through.
      */
-    Pid?: __integer;
+    Pid?: __integerMin1;
   }
   export type Scte35AposNoRegionalBlackoutBehavior = "FOLLOW"|"IGNORE"|string;
   export type Scte35AposWebDeliveryAllowedBehavior = "FOLLOW"|"IGNORE"|string;
@@ -2602,7 +2576,7 @@ Valid values: 1, 2, 4, 6, 8
     /**
      * When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.
      */
-    AdAvailOffset?: __integer;
+    AdAvailOffset?: __integerMinNegative1000Max1000;
     /**
      * When set to ignore, Segment Descriptors with noRegionalBlackoutFlag set to 0 will no longer trigger blackouts or Ad Avail slates
      */
@@ -2618,7 +2592,7 @@ Valid values: 1, 2, 4, 6, 8
     /**
      * When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.
      */
-    AdAvailOffset?: __integer;
+    AdAvailOffset?: __integerMinNegative1000Max1000;
     /**
      * When set to ignore, Segment Descriptors with noRegionalBlackoutFlag set to 0 will no longer trigger blackouts or Ad Avail slates
      */
@@ -2643,7 +2617,7 @@ Valid values: 1, 2, 4, 6, 8
      * List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by ','.
      */
     AudioRenditionSets?: __string;
-    M3u8Settings?: M3u8Settings;
+    M3u8Settings: M3u8Settings;
   }
   export interface StartChannelRequest {
     /**
@@ -2662,11 +2636,11 @@ destination per output. For other types (HLS, for example), there is
 one destination per packager.
 
      */
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     /**
      * The endpoints where outgoing connections initiate from
      */
-    EgressEndpoints?: ListOfChannelEgressEndpoint;
+    EgressEndpoints?: __listOfChannelEgressEndpoint;
     EncoderSettings?: EncoderSettings;
     /**
      * The unique id of the channel.
@@ -2675,7 +2649,7 @@ one destination per packager.
     /**
      * List of input attachments for channel.
      */
-    InputAttachments?: ListOfInputAttachment;
+    InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
@@ -2699,7 +2673,7 @@ one destination per packager.
     /**
      * Static key value as a 32 character hexadecimal string.
      */
-    StaticKeyValue?: __string;
+    StaticKeyValue: __stringMin32Max32;
   }
   export interface StopChannelRequest {
     /**
@@ -2718,11 +2692,11 @@ destination per output. For other types (HLS, for example), there is
 one destination per packager.
 
      */
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     /**
      * The endpoints where outgoing connections initiate from
      */
-    EgressEndpoints?: ListOfChannelEgressEndpoint;
+    EgressEndpoints?: __listOfChannelEgressEndpoint;
     EncoderSettings?: EncoderSettings;
     /**
      * The unique id of the channel.
@@ -2731,7 +2705,7 @@ one destination per packager.
     /**
      * List of input attachments for channel.
      */
-    InputAttachments?: ListOfInputAttachment;
+    InputAttachments?: __listOfInputAttachment;
     InputSpecification?: InputSpecification;
     /**
      * The name of the channel. (user-mutable)
@@ -2762,11 +2736,11 @@ one destination per packager.
 -System Clock (systemclock): Use the UTC time.
 -Start at 0 (zerobased): The time of the first frame of the event will be 00:00:00:00.
      */
-    Source?: TimecodeConfigSource;
+    Source: TimecodeConfigSource;
     /**
      * Threshold in frames beyond which output timecode is resynchronized to the input timecode. Discrepancies below this threshold are permitted to avoid unnecessary discontinuities in the output timecode. No timecode sync when this is not specified.
      */
-    SyncThreshold?: __integer;
+    SyncThreshold?: __integerMin1Max1000000;
   }
   export type TimecodeConfigSource = "EMBEDDED"|"SYSTEMCLOCK"|"ZEROBASED"|string;
   export interface TtmlDestinationSettings {
@@ -2791,18 +2765,18 @@ one destination per packager.
     /**
      * Timed Metadata interval in seconds.
      */
-    TimedMetadataId3Period?: __integer;
+    TimedMetadataId3Period?: __integerMin0;
   }
   export interface UdpOutputSettings {
     /**
      * UDP output buffering in milliseconds. Larger values increase latency through the transcoder but simultaneously assist the transcoder in maintaining a constant, low-jitter UDP/RTP output while accommodating clock recovery, input switching, input disruptions, picture reordering, etc.
      */
-    BufferMsec?: __integer;
-    ContainerSettings?: UdpContainerSettings;
+    BufferMsec?: __integerMin0Max10000;
+    ContainerSettings: UdpContainerSettings;
     /**
      * Destination address and port number for RTP or UDP packets. Can be unicast or multicast RTP or UDP (eg. rtp://239.10.10.10:5001 or udp://10.100.100.100:5002).
      */
-    Destination?: OutputLocationRef;
+    Destination: OutputLocationRef;
     /**
      * Settings for enabling and adjusting Forward Error Correction on UDP outputs.
      */
@@ -2813,7 +2787,7 @@ one destination per packager.
     /**
      * A list of output destinations for this channel.
      */
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     /**
      * The encoder settings for this channel.
      */
@@ -2839,7 +2813,7 @@ one destination per packager.
     /**
      * A list of output destinations for this channel.
      */
-    Destinations?: ListOfOutputDestination;
+    Destinations?: __listOfOutputDestination;
     /**
      * The encoder settings for this channel.
      */
@@ -2882,7 +2856,7 @@ one destination per packager.
     /**
      * The name of this VideoDescription. Outputs will use this name to uniquely identify this Description.  Description names should be unique within this Live Event.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * Indicates how to respond to the AFD values in the input stream. Setting to "respond" causes input video to be clipped, depending on AFD value, input display aspect ratio and output display aspect ratio.
      */
@@ -2894,7 +2868,7 @@ one destination per packager.
     /**
      * Changes the width of the anti-alias filter kernel used for scaling. Only applies if scaling is being performed and antiAlias is set to true. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.
      */
-    Sharpness?: __integer;
+    Sharpness?: __integerMin0Max100;
     /**
      * Output video width (in pixels). Leave out to use source video width.  If left out, height must also be left out. Display aspect ratio is always preserved by letterboxing or pillarboxing when necessary.
      */
@@ -2922,13 +2896,13 @@ one destination per packager.
     /**
      * Selects a specific PID from within a video source.
      */
-    Pid?: __integer;
+    Pid?: __integerMin0Max8191;
   }
   export interface VideoSelectorProgramId {
     /**
      * Selects a specific program from within a multi-program transport stream. If the program doesn't exist, the first program within the transport stream will be selected by default.
      */
-    ProgramId?: __integer;
+    ProgramId?: __integerMin0Max65536;
   }
   export interface VideoSelectorSettings {
     VideoSelectorPid?: VideoSelectorPid;
@@ -2938,9 +2912,83 @@ one destination per packager.
   }
   export type __boolean = boolean;
   export type __double = number;
+  export type __doubleMin0 = number;
+  export type __doubleMin1 = number;
+  export type __doubleMinNegative59Max0 = number;
   export type __integer = number;
+  export type __integerMin0 = number;
+  export type __integerMin0Max10 = number;
+  export type __integerMin0Max100 = number;
+  export type __integerMin0Max1000 = number;
+  export type __integerMin0Max10000 = number;
+  export type __integerMin0Max1000000 = number;
+  export type __integerMin0Max128 = number;
+  export type __integerMin0Max15 = number;
+  export type __integerMin0Max255 = number;
+  export type __integerMin0Max30 = number;
+  export type __integerMin0Max3600 = number;
+  export type __integerMin0Max500 = number;
+  export type __integerMin0Max600 = number;
+  export type __integerMin0Max65535 = number;
+  export type __integerMin0Max65536 = number;
+  export type __integerMin0Max7 = number;
+  export type __integerMin0Max8191 = number;
+  export type __integerMin1 = number;
+  export type __integerMin1000 = number;
+  export type __integerMin1000Max30000 = number;
+  export type __integerMin1Max1000000 = number;
+  export type __integerMin1Max16 = number;
+  export type __integerMin1Max20 = number;
+  export type __integerMin1Max31 = number;
+  export type __integerMin1Max32 = number;
+  export type __integerMin1Max4 = number;
+  export type __integerMin1Max5 = number;
+  export type __integerMin1Max6 = number;
+  export type __integerMin1Max8 = number;
+  export type __integerMin25Max10000 = number;
+  export type __integerMin25Max2000 = number;
+  export type __integerMin3 = number;
+  export type __integerMin4Max20 = number;
+  export type __integerMin96Max600 = number;
+  export type __integerMinNegative1000Max1000 = number;
+  export type __integerMinNegative60Max6 = number;
+  export type __integerMinNegative60Max60 = number;
+  export type __listOfAudioChannelMapping = AudioChannelMapping[];
+  export type __listOfAudioDescription = AudioDescription[];
+  export type __listOfAudioSelector = AudioSelector[];
+  export type __listOfCaptionDescription = CaptionDescription[];
+  export type __listOfCaptionLanguageMapping = CaptionLanguageMapping[];
+  export type __listOfCaptionSelector = CaptionSelector[];
+  export type __listOfChannelEgressEndpoint = ChannelEgressEndpoint[];
+  export type __listOfChannelSummary = ChannelSummary[];
+  export type __listOfHlsAdMarkers = HlsAdMarkers[];
+  export type __listOfInput = Input[];
+  export type __listOfInputAttachment = InputAttachment[];
+  export type __listOfInputChannelLevel = InputChannelLevel[];
+  export type __listOfInputDestination = InputDestination[];
+  export type __listOfInputDestinationRequest = InputDestinationRequest[];
+  export type __listOfInputSecurityGroup = InputSecurityGroup[];
+  export type __listOfInputSource = InputSource[];
+  export type __listOfInputSourceRequest = InputSourceRequest[];
+  export type __listOfInputWhitelistRule = InputWhitelistRule[];
+  export type __listOfInputWhitelistRuleCidr = InputWhitelistRuleCidr[];
+  export type __listOfOutput = Output[];
+  export type __listOfOutputDestination = OutputDestination[];
+  export type __listOfOutputDestinationSettings = OutputDestinationSettings[];
+  export type __listOfOutputGroup = OutputGroup[];
+  export type __listOfValidationError = ValidationError[];
+  export type __listOfVideoDescription = VideoDescription[];
+  export type __listOf__string = __string[];
+  export type __long = number;
   export type __string = string;
-  export type __timestamp = Date;
+  export type __stringMax32 = string;
+  export type __stringMin1 = string;
+  export type __stringMin1Max255 = string;
+  export type __stringMin1Max256 = string;
+  export type __stringMin32Max32 = string;
+  export type __stringMin34Max34 = string;
+  export type __stringMin3Max3 = string;
+  export type __stringMin6Max6 = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.205.0-->
+<!--LATEST=2.206.0-->
 <!--ENTRYINSERT-->
+
+## 2.206.0
+* feature: MediaLive: Updates API to model required traits and minimum/maximum constraints.
 
 ## 2.205.0
 * feature: CloudWatchEvents: Added BatchParameters to the PutTargets API
