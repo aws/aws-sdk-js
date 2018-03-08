@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.206.0
+// AWS SDK for JavaScript v2.207.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
@@ -44768,7 +44768,7 @@ module.exports={
             }
           },
           "failures": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       }
@@ -44790,10 +44790,10 @@ module.exports={
         "type": "structure",
         "members": {
           "containerInstances": {
-            "shape": "S2u"
+            "shape": "S2v"
           },
           "failures": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       }
@@ -44821,7 +44821,7 @@ module.exports={
             }
           },
           "failures": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       }
@@ -44862,10 +44862,10 @@ module.exports={
         "type": "structure",
         "members": {
           "tasks": {
-            "shape": "S32"
+            "shape": "S33"
           },
           "failures": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       }
@@ -45116,13 +45116,13 @@ module.exports={
             "shape": "S1l"
           },
           "volumes": {
-            "shape": "S2b"
+            "shape": "S2c"
           },
           "placementConstraints": {
-            "shape": "S2g"
+            "shape": "S2h"
           },
           "requiresCompatibilities": {
-            "shape": "S2j"
+            "shape": "S2k"
           },
           "cpu": {},
           "memory": {}
@@ -45147,7 +45147,7 @@ module.exports={
           "cluster": {},
           "taskDefinition": {},
           "overrides": {
-            "shape": "S34"
+            "shape": "S35"
           },
           "count": {
             "type": "integer"
@@ -45171,10 +45171,10 @@ module.exports={
         "type": "structure",
         "members": {
           "tasks": {
-            "shape": "S32"
+            "shape": "S33"
           },
           "failures": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       }
@@ -45190,7 +45190,7 @@ module.exports={
           "cluster": {},
           "taskDefinition": {},
           "overrides": {
-            "shape": "S34"
+            "shape": "S35"
           },
           "containerInstances": {
             "shape": "Sm"
@@ -45206,10 +45206,10 @@ module.exports={
         "type": "structure",
         "members": {
           "tasks": {
-            "shape": "S32"
+            "shape": "S33"
           },
           "failures": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       }
@@ -45230,7 +45230,7 @@ module.exports={
         "type": "structure",
         "members": {
           "task": {
-            "shape": "S33"
+            "shape": "S34"
           }
         }
       }
@@ -45248,7 +45248,7 @@ module.exports={
           },
           "reason": {},
           "networkBindings": {
-            "shape": "S39"
+            "shape": "S3a"
           }
         }
       },
@@ -45277,7 +45277,7 @@ module.exports={
                   "type": "integer"
                 },
                 "networkBindings": {
-                  "shape": "S39"
+                  "shape": "S3a"
                 },
                 "reason": {},
                 "status": {}
@@ -45355,10 +45355,10 @@ module.exports={
         "type": "structure",
         "members": {
           "containerInstances": {
-            "shape": "S2u"
+            "shape": "S2v"
           },
           "failures": {
-            "shape": "S2q"
+            "shape": "S2r"
           }
         }
       }
@@ -45710,7 +45710,7 @@ module.exports={
           "type": "integer"
         },
         "volumes": {
-          "shape": "S2b"
+          "shape": "S2c"
         },
         "status": {},
         "requiresAttributes": {
@@ -45720,13 +45720,13 @@ module.exports={
           }
         },
         "placementConstraints": {
-          "shape": "S2g"
+          "shape": "S2h"
         },
         "compatibilities": {
-          "shape": "S2j"
+          "shape": "S2k"
         },
         "requiresCompatibilities": {
-          "shape": "S2j"
+          "shape": "S2k"
         },
         "cpu": {},
         "memory": {}
@@ -45912,6 +45912,29 @@ module.exports={
                 "value": {}
               }
             }
+          },
+          "healthCheck": {
+            "type": "structure",
+            "required": [
+              "command"
+            ],
+            "members": {
+              "command": {
+                "shape": "Sm"
+              },
+              "interval": {
+                "type": "integer"
+              },
+              "timeout": {
+                "type": "integer"
+              },
+              "retries": {
+                "type": "integer"
+              },
+              "startPeriod": {
+                "type": "integer"
+              }
+            }
           }
         }
       }
@@ -45922,7 +45945,7 @@ module.exports={
         "shape": "S7"
       }
     },
-    "S2b": {
+    "S2c": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -45937,7 +45960,7 @@ module.exports={
         }
       }
     },
-    "S2g": {
+    "S2h": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -45947,11 +45970,11 @@ module.exports={
         }
       }
     },
-    "S2j": {
+    "S2k": {
       "type": "list",
       "member": {}
     },
-    "S2q": {
+    "S2r": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -45961,19 +45984,19 @@ module.exports={
         }
       }
     },
-    "S2u": {
+    "S2v": {
       "type": "list",
       "member": {
         "shape": "S17"
       }
     },
-    "S32": {
+    "S33": {
       "type": "list",
       "member": {
-        "shape": "S33"
+        "shape": "S34"
       }
     },
-    "S33": {
+    "S34": {
       "type": "structure",
       "members": {
         "taskArn": {},
@@ -45981,7 +46004,7 @@ module.exports={
         "taskDefinitionArn": {},
         "containerInstanceArn": {},
         "overrides": {
-          "shape": "S34"
+          "shape": "S35"
         },
         "lastStatus": {},
         "desiredStatus": {},
@@ -46001,7 +46024,7 @@ module.exports={
               },
               "reason": {},
               "networkBindings": {
-                "shape": "S39"
+                "shape": "S3a"
               },
               "networkInterfaces": {
                 "type": "list",
@@ -46013,7 +46036,8 @@ module.exports={
                     "ipv6Address": {}
                   }
                 }
-              }
+              },
+              "healthStatus": {}
             }
           }
         },
@@ -46052,10 +46076,11 @@ module.exports={
         "platformVersion": {},
         "attachments": {
           "shape": "S1f"
-        }
+        },
+        "healthStatus": {}
       }
     },
-    "S34": {
+    "S35": {
       "type": "structure",
       "members": {
         "containerOverrides": {
@@ -46086,7 +46111,7 @@ module.exports={
         "executionRoleArn": {}
       }
     },
-    "S39": {
+    "S3a": {
       "type": "list",
       "member": {
         "type": "structure",
@@ -122267,7 +122292,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.206.0',
+  VERSION: '2.207.0',
 
   /**
    * @api private
@@ -146182,7 +146207,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.206.0
+// AWS SDK for JavaScript v2.207.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');

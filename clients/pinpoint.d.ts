@@ -28,6 +28,14 @@ declare class Pinpoint extends Service {
    */
   createCampaign(callback?: (err: AWSError, data: Pinpoint.Types.CreateCampaignResponse) => void): Request<Pinpoint.Types.CreateCampaignResponse, AWSError>;
   /**
+   * Creates an export job.
+   */
+  createExportJob(params: Pinpoint.Types.CreateExportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateExportJobResponse) => void): Request<Pinpoint.Types.CreateExportJobResponse, AWSError>;
+  /**
+   * Creates an export job.
+   */
+  createExportJob(callback?: (err: AWSError, data: Pinpoint.Types.CreateExportJobResponse) => void): Request<Pinpoint.Types.CreateExportJobResponse, AWSError>;
+  /**
    * Creates or updates an import job.
    */
   createImportJob(params: Pinpoint.Types.CreateImportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateImportJobResponse) => void): Request<Pinpoint.Types.CreateImportJobResponse, AWSError>;
@@ -180,11 +188,11 @@ declare class Pinpoint extends Service {
    */
   getApnsVoipChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipChannelResponse, AWSError>;
   /**
-   * Get an APNS VoipSandbox channel
+   * Get an APNS VoIPSandbox channel
    */
   getApnsVoipSandboxChannel(params: Pinpoint.Types.GetApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipSandboxChannelResponse, AWSError>;
   /**
-   * Get an APNS VoipSandbox channel
+   * Get an APNS VoIPSandbox channel
    */
   getApnsVoipSandboxChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipSandboxChannelResponse, AWSError>;
   /**
@@ -284,6 +292,22 @@ declare class Pinpoint extends Service {
    */
   getEventStream(callback?: (err: AWSError, data: Pinpoint.Types.GetEventStreamResponse) => void): Request<Pinpoint.Types.GetEventStreamResponse, AWSError>;
   /**
+   * Returns information about an export job.
+   */
+  getExportJob(params: Pinpoint.Types.GetExportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobResponse) => void): Request<Pinpoint.Types.GetExportJobResponse, AWSError>;
+  /**
+   * Returns information about an export job.
+   */
+  getExportJob(callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobResponse) => void): Request<Pinpoint.Types.GetExportJobResponse, AWSError>;
+  /**
+   * Returns information about your export jobs.
+   */
+  getExportJobs(params: Pinpoint.Types.GetExportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobsResponse) => void): Request<Pinpoint.Types.GetExportJobsResponse, AWSError>;
+  /**
+   * Returns information about your export jobs.
+   */
+  getExportJobs(callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobsResponse) => void): Request<Pinpoint.Types.GetExportJobsResponse, AWSError>;
+  /**
    * Returns information about the GCM channel for an app.
    */
   getGcmChannel(params: Pinpoint.Types.GetGcmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetGcmChannelResponse) => void): Request<Pinpoint.Types.GetGcmChannelResponse, AWSError>;
@@ -315,6 +339,14 @@ declare class Pinpoint extends Service {
    * Returns information about a segment.
    */
   getSegment(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentResponse) => void): Request<Pinpoint.Types.GetSegmentResponse, AWSError>;
+  /**
+   * Returns a list of export jobs for a specific segment.
+   */
+  getSegmentExportJobs(params: Pinpoint.Types.GetSegmentExportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentExportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentExportJobsResponse, AWSError>;
+  /**
+   * Returns a list of export jobs for a specific segment.
+   */
+  getSegmentExportJobs(callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentExportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentExportJobsResponse, AWSError>;
   /**
    * Returns a list of import jobs for a specific segment.
    */
@@ -509,7 +541,7 @@ declare namespace Pinpoint {
   }
   export interface ADMChannelResponse {
     /**
-     * Application id
+     * The ID of the application to which the channel applies.
      */
     ApplicationId?: __string;
     /**
@@ -521,7 +553,7 @@ declare namespace Pinpoint {
      */
     Enabled?: __boolean;
     /**
-     * If the channel is registered with a credential for authentication.
+     * Indicates whether the channel is configured with ADM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with ADM. Provide your credentials by setting the ClientId and ClientSecret attributes.
      */
     HasCredential?: __boolean;
     /**
@@ -667,11 +699,11 @@ declare namespace Pinpoint {
      */
     Enabled?: __boolean;
     /**
-     * If the channel is registered with a credential for authentication.
+     * Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes.
      */
     HasCredential?: __boolean;
     /**
-     * If the channel is registered with a token key for authentication.
+     * Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute.
      */
     HasTokenKey?: __boolean;
     /**
@@ -717,7 +749,7 @@ declare namespace Pinpoint {
      */
     Category?: __string;
     /**
-     * Multiple notifications with the same collapse identifier are displayed to the user as a single notification. The value of this key must not exceed 64 bytes.
+     * An ID that, if assigned to multiple messages, causes APNs to coalesce the messages into a single push notification instead of delivering each message individually. The value must not exceed 64 bytes. Amazon Pinpoint uses this value to set the apns-collapse-id request header when it sends the message to APNs.
      */
     CollapseId?: __string;
     /**
@@ -733,7 +765,17 @@ declare namespace Pinpoint {
      */
     PreferredAuthenticationMethod?: __string;
     /**
-     * Is this a transaction priority message or lower priority.
+     * The message priority. Amazon Pinpoint uses this value to set the apns-priority request header when it sends the message to APNs. Accepts the following values:
+
+"5" - Low priority. Messages might be delayed, delivered in groups, and throttled.
+
+"10" - High priority. Messages are sent immediately. High priority messages must cause an alert, sound, or badge on the receiving device.
+
+The default value is "10".
+
+The equivalent values for FCM or GCM messages are "normal" and "high". Amazon Pinpoint accepts these values for APNs messages and converts them.
+
+For more information about the apns-priority parameter, see Communicating with APNs in the APNs Local and Remote Notification Programming Guide.
      */
     Priority?: __string;
     /**
@@ -757,7 +799,7 @@ declare namespace Pinpoint {
      */
     ThreadId?: __string;
     /**
-     * This parameter specifies how long (in seconds) the message should be kept if APNS is unable to deliver the notification the first time. If the value is 0, APNS treats the notification as if it expires immediately and does not store the notification or attempt to redeliver it. This value is converted to the expiration field when sent to APNS
+     * The length of time (in seconds) that APNs stores and attempts to deliver the message. If the value is 0, APNs does not store the message or attempt to deliver it more than once. Amazon Pinpoint uses this value to set the apns-expiration request header when it sends the message to APNs.
      */
     TimeToLive?: __integer;
     /**
@@ -805,7 +847,7 @@ declare namespace Pinpoint {
   }
   export interface APNSSandboxChannelResponse {
     /**
-     * Application id
+     * The ID of the application to which the channel applies.
      */
     ApplicationId?: __string;
     /**
@@ -821,11 +863,11 @@ declare namespace Pinpoint {
      */
     Enabled?: __boolean;
     /**
-     * If the channel is registered with a credential for authentication.
+     * Indicates whether the channel is configured with APNs credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with APNs. To use APNs token authentication, set the BundleId, TeamId, TokenKey, and TokenKeyId attributes. To use certificate authentication, set the Certificate and PrivateKey attributes.
      */
     HasCredential?: __boolean;
     /**
-     * If the channel is registered with a token key for authentication.
+     * Indicates whether the channel is configured with a key for APNs token authentication. Provide a token key by setting the TokenKey attribute.
      */
     HasTokenKey?: __boolean;
     /**
@@ -1094,7 +1136,7 @@ Valid values: PENDING, INITIALIZING, RUNNING, PAUSED, CANCELLED, COMPLETED
     /**
      * The channel type.
 
-Valid values: GCM | APNS | SMS | EMAIL
+Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
      */
     ChannelType?: ChannelType;
     /**
@@ -1129,6 +1171,10 @@ Valid values: GCM | APNS | SMS | EMAIL
      * The unique ID for the application.
      */
     ApplicationId?: __string;
+    /**
+     * Default campaign hook.
+     */
+    CampaignHook?: CampaignHook;
     /**
      * The date that the settings were last updated in ISO 8601 format.
      */
@@ -1197,7 +1243,7 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     Enabled?: __boolean;
     /**
-     * If the channel is registered with a credential for authentication.
+     * Indicates whether the channel is configured with Baidu Cloud Push credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with Baidu Cloud Push. Provide your credentials by setting the ApiKey and SecretKey attributes.
      */
     HasCredential?: __boolean;
     /**
@@ -1297,17 +1343,31 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      */
     Title?: __string;
   }
+  export interface CampaignHook {
+    /**
+     * Lambda function name or arn to be called for delivery
+     */
+    LambdaFunctionName?: __string;
+    /**
+     * What mode Lambda should be invoked in.
+     */
+    Mode?: Mode;
+    /**
+     * Web URL to call for hook. If the URL has authentication specified it will be added as authentication to the request
+     */
+    WebUrl?: __string;
+  }
   export interface CampaignLimits {
     /**
      * The maximum number of messages that the campaign can send daily.
      */
     Daily?: __integer;
     /**
-     * The maximum duration of a campaign from the scheduled start. Must be a minimum of 60 seconds.
+     * The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
      */
     MaximumDuration?: __integer;
     /**
-     * The maximum number of messages per second that the campaign will send. This is a best effort maximum cap and can go as high as 20000 and as low as 50
+     * The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.
      */
     MessagesPerSecond?: __integer;
     /**
@@ -1340,6 +1400,10 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      * The allocated percentage of end users who will not receive messages from this campaign.
      */
     HoldoutPercent?: __integer;
+    /**
+     * Campaign hook information.
+     */
+    Hook?: CampaignHook;
     /**
      * The unique campaign ID.
      */
@@ -1428,7 +1492,7 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     NextToken?: __string;
   }
-  export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"EMAIL"|"BAIDU"|string;
+  export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
   export interface CreateAppRequest {
     CreateApplicationRequest: CreateApplicationRequest;
   }
@@ -1447,6 +1511,13 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
   }
   export interface CreateCampaignResponse {
     CampaignResponse: CampaignResponse;
+  }
+  export interface CreateExportJobRequest {
+    ApplicationId: __string;
+    ExportJobRequest: ExportJobRequest;
+  }
+  export interface CreateExportJobResponse {
+    ExportJobResponse: ExportJobResponse;
   }
   export interface CreateImportJobRequest {
     ApplicationId: __string;
@@ -1696,13 +1767,15 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     Address?: __string;
     /**
-     * Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+     * Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+
+The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
      */
     Attributes?: MapOfListOf__string;
     /**
      * The channel type.
 
-Valid values: GCM | APNS | SMS | EMAIL
+Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
      */
     ChannelType?: ChannelType;
     /**
@@ -1841,13 +1914,15 @@ NONE - Users has not opted out and receives all messages.
      */
     Address?: __string;
     /**
-     * Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+     * Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+
+The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
      */
     Attributes?: MapOfListOf__string;
     /**
      * The channel type.
 
-Valid values: GCM | APNS | SMS | EMAIL
+Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
      */
     ChannelType?: ChannelType;
     /**
@@ -1897,13 +1972,15 @@ NONE - Users has not opted out and receives all messages.
      */
     ApplicationId?: __string;
     /**
-     * Custom attributes that your app reports to Amazon Pinpoint. You can use these attributes as selection criteria when you create a segment.
+     * Custom attributes that describe the endpoint by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+
+The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
      */
     Attributes?: MapOfListOf__string;
     /**
      * The channel type.
 
-Valid values: GCM | APNS | SMS | EMAIL
+Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | SMS | EMAIL | BAIDU
      */
     ChannelType?: ChannelType;
     /**
@@ -1979,7 +2056,9 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface EndpointUser {
     /**
-     * Custom attributes specific to the user.
+     * Custom attributes that describe an end user by associating a name with an array of values. For example, an attribute named "interests" might have the values ["science", "politics", "travel"]. You can use these attributes as selection criteria when you create a segment of users to engage with a messaging campaign.
+
+The following characters are not recommended in attribute names: # : ? \ /. The Amazon Pinpoint console does not display attributes that include these characters in the name. This limitation does not apply to attribute values.
      */
     UserAttributes?: MapOfListOf__string;
     /**
@@ -1999,7 +2078,7 @@ NONE - Users has not opted out and receives all messages.
      */
     DestinationStreamArn?: __string;
     /**
-     * The external ID assigned the IAM role that authorizes Amazon Pinpoint to publish to the stream.
+     * DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
@@ -2014,6 +2093,107 @@ NONE - Users has not opted out and receives all messages.
      * The IAM role that authorizes Amazon Pinpoint to publish events to the stream in your account.
      */
     RoleArn?: __string;
+  }
+  export interface ExportJobRequest {
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to.
+     */
+    RoleArn?: __string;
+    /**
+     * A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+The URL should follow this format: s3://bucket-name/folder-name/
+
+Amazon Pinpoint will export endpoints to this location.
+     */
+    S3UrlPrefix?: __string;
+    /**
+     * The ID of the segment to export endpoints from. If not present all endpoints will be exported.
+     */
+    SegmentId?: __string;
+  }
+  export interface ExportJobResource {
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint access to the Amazon S3 location that endpoints will be exported to.
+     */
+    RoleArn?: __string;
+    /**
+     * A URL that points to the location within an Amazon S3 bucket that will receive the export. The location is typically a folder with multiple files.
+The URL should follow this format: s3://bucket-name/folder-name/
+
+Amazon Pinpoint will export endpoints to this location.
+     */
+    S3UrlPrefix?: __string;
+    /**
+     * The ID of the segment to export endpoints from. If not present, all endpoints are exported.
+     */
+    SegmentId?: __string;
+  }
+  export interface ExportJobResponse {
+    /**
+     * The unique ID of the application to which the job applies.
+     */
+    ApplicationId?: __string;
+    /**
+     * The number of pieces that have successfully completed as of the time of the request.
+     */
+    CompletedPieces?: __integer;
+    /**
+     * The date the job completed in ISO 8601 format.
+     */
+    CompletionDate?: __string;
+    /**
+     * The date the job was created in ISO 8601 format.
+     */
+    CreationDate?: __string;
+    /**
+     * The export job settings.
+     */
+    Definition?: ExportJobResource;
+    /**
+     * The number of pieces that failed to be processed as of the time of the request.
+     */
+    FailedPieces?: __integer;
+    /**
+     * Provides up to 100 of the first failed entries for the job, if any exist.
+     */
+    Failures?: ListOf__string;
+    /**
+     * The unique ID of the job.
+     */
+    Id?: __string;
+    /**
+     * The status of the job.
+Valid values: CREATED, INITIALIZING, PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED
+
+The job status is FAILED if one or more pieces failed.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * The number of endpoints that were not processed; for example, because of syntax errors.
+     */
+    TotalFailures?: __integer;
+    /**
+     * The total number of pieces that must be processed to finish the job. Each piece is an approximately equal portion of the endpoints.
+     */
+    TotalPieces?: __integer;
+    /**
+     * The number of endpoints that were processed by the job.
+     */
+    TotalProcessed?: __integer;
+    /**
+     * The job type. Will be 'EXPORT'.
+     */
+    Type?: __string;
+  }
+  export interface ExportJobsResponse {
+    /**
+     * A list of export jobs for the application.
+     */
+    Item?: ListOfExportJobResponse;
+    /**
+     * The string that you use in a subsequent request to get the next page of results in a paginated response.
+     */
+    NextToken?: __string;
   }
   export type Format = "CSV"|"JSON"|string;
   export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string;
@@ -2045,7 +2225,7 @@ NONE - Users has not opted out and receives all messages.
      */
     Enabled?: __boolean;
     /**
-     * If the channel is registered with a credential for authentication.
+     * Indicates whether the channel is configured with FCM or GCM credentials. Amazon Pinpoint uses your credentials to authenticate push notifications with FCM or GCM. Provide your credentials by setting the ApiKey attribute.
      */
     HasCredential?: __boolean;
     /**
@@ -2103,7 +2283,15 @@ NONE - Users has not opted out and receives all messages.
      */
     ImageUrl?: __string;
     /**
-     * Is this a transaction priority message or lower priority.
+     * The message priority. Amazon Pinpoint uses this value to set the FCM or GCM priority parameter when it sends the message. Accepts the following values:
+
+"Normal" - Messages might be delayed. Delivery is optimized for battery usage on the receiving device. Use normal priority unless immediate delivery is required.
+
+"High" - Messages are sent immediately and might wake a sleeping device.
+
+The equivalent values for APNs messages are "5" and "10". Amazon Pinpoint accepts these values here and converts them.
+
+For more information, see About FCM Messages in the Firebase documentation.
      */
     Priority?: __string;
     /**
@@ -2131,7 +2319,7 @@ NONE - Users has not opted out and receives all messages.
      */
     Substitutions?: MapOfListOf__string;
     /**
-     * This parameter specifies how long (in seconds) the message should be kept in GCM storage if the device is offline. The maximum time to live supported is 4 weeks, and the default value is 4 weeks.
+     * The length of time (in seconds) that FCM or GCM stores and attempts to deliver the message. If unspecified, the value defaults to the maximum, which is 2,419,200 seconds (28 days). Amazon Pinpoint uses this value to set the FCM or GCM time_to_live parameter.
      */
     TimeToLive?: __integer;
     /**
@@ -2279,6 +2467,27 @@ NONE - Users has not opted out and receives all messages.
   export interface GetEventStreamResponse {
     EventStream: EventStream;
   }
+  export interface GetExportJobRequest {
+    ApplicationId: __string;
+    JobId: __string;
+  }
+  export interface GetExportJobResponse {
+    ExportJobResponse: ExportJobResponse;
+  }
+  export interface GetExportJobsRequest {
+    ApplicationId: __string;
+    /**
+     * The number of entries you want on each page in the response.
+     */
+    PageSize?: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    Token?: __string;
+  }
+  export interface GetExportJobsResponse {
+    ExportJobsResponse: ExportJobsResponse;
+  }
   export interface GetGcmChannelRequest {
     ApplicationId: __string;
   }
@@ -2305,6 +2514,21 @@ NONE - Users has not opted out and receives all messages.
   }
   export interface GetImportJobsResponse {
     ImportJobsResponse: ImportJobsResponse;
+  }
+  export interface GetSegmentExportJobsRequest {
+    ApplicationId: __string;
+    /**
+     * The number of entries you want on each page in the response.
+     */
+    PageSize?: __string;
+    SegmentId: __string;
+    /**
+     * The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    Token?: __string;
+  }
+  export interface GetSegmentExportJobsResponse {
+    ExportJobsResponse: ExportJobsResponse;
   }
   export interface GetSegmentImportJobsRequest {
     ApplicationId: __string;
@@ -2377,7 +2601,7 @@ NONE - Users has not opted out and receives all messages.
      */
     DefineSegment?: __boolean;
     /**
-     * A unique, custom ID assigned to the IAM role that restricts who can assume the role.	
+     * DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
@@ -2415,7 +2639,7 @@ Amazon Pinpoint will import endpoints from this location and any subfolders it c
      */
     DefineSegment?: __boolean;
     /**
-     * A unique, custom ID assigned to the IAM role that restricts who can assume the role.	
+     * DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
@@ -2519,6 +2743,7 @@ The job status is FAILED if one or more pieces failed to import.
   export type ListOfApplicationResponse = ApplicationResponse[];
   export type ListOfCampaignResponse = CampaignResponse[];
   export type ListOfEndpointBatchItem = EndpointBatchItem[];
+  export type ListOfExportJobResponse = ExportJobResponse[];
   export type ListOfImportJobResponse = ImportJobResponse[];
   export type ListOfSegmentResponse = SegmentResponse[];
   export type ListOfTreatmentResource = TreatmentResource[];
@@ -2682,6 +2907,7 @@ Silent pushes can be used for Remote Configuration and Phone Home use cases.
     UpdatedToken?: __string;
   }
   export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL"|string;
+  export type Mode = "DELIVERY"|"FILTER"|string;
   export interface PutEventStreamRequest {
     /**
      * ApplicationId
@@ -2922,7 +3148,7 @@ UTC-11
      */
     ChannelCounts?: MapOf__integer;
     /**
-     * A unique, custom ID assigned to the IAM role that restricts who can assume the role.
+     * DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This requirement is removed, and external IDs are not recommended for IAM roles assumed by Amazon Pinpoint.
      */
     ExternalId?: __string;
     /**
@@ -3187,6 +3413,10 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
   }
   export interface WriteApplicationSettingsRequest {
     /**
+     * Default campaign hook information.
+     */
+    CampaignHook?: CampaignHook;
+    /**
      * The default campaign limits for the app. These limits apply to each campaign for the app, unless the campaign overrides the default with limits of its own.
      */
     Limits?: CampaignLimits;
@@ -3208,6 +3438,10 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
      * The allocated percentage of end users who will not receive messages from this campaign.
      */
     HoldoutPercent?: __integer;
+    /**
+     * Campaign hook information.
+     */
+    Hook?: CampaignHook;
     /**
      * Indicates whether the campaign is paused. A paused campaign does not send messages unless you resume it by setting IsPaused to false.
      */

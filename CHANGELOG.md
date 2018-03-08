@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.206.0-->
+<!--LATEST=2.207.0-->
 <!--ENTRYINSERT-->
+
+## 2.207.0
+* feature: ECS: Amazon Elastic Container Service (ECS) now supports container health checks. Customers can now specify a docker container health check command and parameters in their task definition. ECS will monitor, report and take scheduling action based on the health status.
+* feature: MigrationHub: Unused key LABEL removed from ResourceAttrbute
+* feature: Pinpoint: With this release, you can export endpoints from your Amazon Pinpoint projects. You can export a) all of the endpoints assigned to a project or b) the subset of endpoints assigned to a segment.
 
 ## 2.206.0
 * feature: MediaLive: Updates API to model required traits and minimum/maximum constraints.

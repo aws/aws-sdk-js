@@ -85,7 +85,7 @@
         {"shape":"InvalidInputException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Deletes a progress update stream, including all of its tasks, which was previously created as an AWS resource used for access control. This API has the following traits:</p> <ul> <li> <p>The only parameter needed for <code>DeleteProgressUpdateStream</code> is the stream name (same as a <code>CreateProgressUpdateStream</code> call).</p> </li> <li> <p>The call will return, and a background process will asynchronously be doing the actual delete of the stream and all of its resources (tasks, associated resources, resource attributes, created artifacts).</p> </li> <li> <p>If the stream takes time to be deleted, it might still show up on a <code>ListProgressUpdateStreams</code> call.</p> </li> <li> <p> <code>CreateProgressUpdateStream</code>, <code>ImportMigrationTask</code>, <code>NotifyMigrationTaskState</code>, and all Associate[*] APIs realted to the tasks belonging to the stream will throw \"InvalidInputException\" if the stream of the same name is in the process of being deleted.</p> </li> <li> <p>Once the stream and all of its resources are deleted, <code>CreateProgressUpdateStream</code> for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).</p> </li> </ul>"
+      "documentation":"<p>Deletes a progress update stream, including all of its tasks, which was previously created as an AWS resource used for access control. This API has the following traits:</p> <ul> <li> <p>The only parameter needed for <code>DeleteProgressUpdateStream</code> is the stream name (same as a <code>CreateProgressUpdateStream</code> call).</p> </li> <li> <p>The call will return, and a background process will asynchronously delete the stream and all of its resources (tasks, associated resources, resource attributes, created artifacts).</p> </li> <li> <p>If the stream takes time to be deleted, it might still show up on a <code>ListProgressUpdateStreams</code> call.</p> </li> <li> <p> <code>CreateProgressUpdateStream</code>, <code>ImportMigrationTask</code>, <code>NotifyMigrationTaskState</code>, and all Associate[*] APIs realted to the tasks belonging to the stream will throw \"InvalidInputException\" if the stream of the same name is in the process of being deleted.</p> </li> <li> <p>Once the stream and all of its resources are deleted, <code>CreateProgressUpdateStream</code> for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).</p> </li> </ul>"
     },
     "DescribeApplicationState":{
       "name":"DescribeApplicationState",
@@ -303,7 +303,7 @@
         {"shape":"InvalidInputException"},
         {"shape":"ResourceNotFoundException"}
       ],
-      "documentation":"<p>Provides identifying details of the resource being migrated so that it can be associated in the Application Discovery Service (ADS)'s repository. This association occurs asynchronously after <code>PutResourceAttributes</code> returns.</p> <important> <p>Keep in mind that subsequent calls to PutResourceAttributes will override previously stored attributes. For example, if it is first called with a MAC address, but later, it is desired to <i>add</i> an IP address, it will then be required to call it with <i>both</i> the IP and MAC addresses to prevent overiding the MAC address.</p> </important> <note> <p>Because this is an asynchronous call, it will always return 200, whether an association occurs or not. To confirm if an association was found based on the provided details, call <code>ListAssociatedResource</code>.</p> </note>"
+      "documentation":"<p>Provides identifying details of the resource being migrated so that it can be associated in the Application Discovery Service (ADS)'s repository. This association occurs asynchronously after <code>PutResourceAttributes</code> returns.</p> <important> <ul> <li> <p>Keep in mind that subsequent calls to PutResourceAttributes will override previously stored attributes. For example, if it is first called with a MAC address, but later, it is desired to <i>add</i> an IP address, it will then be required to call it with <i>both</i> the IP and MAC addresses to prevent overiding the MAC address.</p> </li> <li> <p>Note the instructions regarding the special use case of the <code>ResourceAttributeList</code> parameter when specifying any \"VM\" related value.</p> </li> </ul> </important> <note> <p>Because this is an asynchronous call, it will always return 200, whether an association occurs or not. To confirm if an association was found based on the provided details, call <code>ListDiscoveredResources</code>.</p> </note>"
     }
   },
   "shapes":{
@@ -312,7 +312,7 @@
       "members":{
         "Message":{"shape":"ErrorMessage"}
       },
-      "documentation":"<p>Exception raised when the account making the call is not whitelisted or there are other authentication errors.</p>",
+      "documentation":"<p>You do not have sufficient access to perform this action.</p>",
       "exception":true
     },
     "ApplicationId":{
@@ -948,7 +948,7 @@
       "members":{
         "Message":{"shape":"ErrorMessage"}
       },
-      "documentation":"<p>Exception raised when there are problems accessing ADS (Application Discovery Service); most likely due to a misconfigured policy or the <code>ADSCaller</code> role is missing or not configured correctly.</p>",
+      "documentation":"<p>Exception raised when there are problems accessing ADS (Application Discovery Service); most likely due to a misconfigured policy or the <code>migrationhub-discovery</code> role is missing or not configured correctly.</p>",
       "exception":true
     },
     "ProgressPercent":{
@@ -995,7 +995,7 @@
         },
         "ResourceAttributeList":{
           "shape":"ResourceAttributeList",
-          "documentation":"<p>Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service (ADS)'s repository.</p>"
+          "documentation":"<p>Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service (ADS)'s repository.</p> <note> <p>In the <code>ResourceAttribute</code> object array, the <code>Type</code> field is reserved for the following values: <code>IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER</code>, and the identifying value can be a string up to 256 characters.</p> </note> <important> <p>If any \"VM\" related value is used for a <code>ResourceAttribute</code> object, it is required that <code>VM_MANAGER_ID</code>, as a minimum, is always used. If it is not used, the server will not be associated in the Application Discovery Service (ADS)'s repository using any of the other \"VM\" related values, and you will experience data loss. See the Example section below for a use case of specifying \"VM\" related values.</p> </important>"
         },
         "DryRun":{
           "shape":"DryRun",
@@ -1024,7 +1024,7 @@
           "documentation":"<p>Value of the resource type.</p>"
         }
       },
-      "documentation":"<p>Attribute associated with a resource.</p>"
+      "documentation":"<p>Attribute associated with a resource.</p> <p>Note the corresponding format required per type listed below:</p> <dl> <dt>IPV4</dt> <dd> <p> <code>x.x.x.x</code> </p> <p> <i>where x is an integer in the range [0,255]</i> </p> </dd> <dt>IPV6</dt> <dd> <p> <code>y : y : y : y : y : y : y : y</code> </p> <p> <i>where y is a hexadecimal between 0 and FFFF. [0, FFFF]</i> </p> </dd> <dt>MAC_ADDRESS</dt> <dd> <p> <code>^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$</code> </p> </dd> <dt>FQDN</dt> <dd> <p> <code>^[^&lt;&gt;{}\\\\\\\\/?,=\\\\p{Cntrl}]{1,256}$</code> </p> </dd> </dl>"
     },
     "ResourceAttributeList":{
       "type":"list",
@@ -1044,8 +1044,7 @@
         "VM_NAME",
         "VM_PATH",
         "BIOS_ID",
-        "MOTHERBOARD_SERIAL_NUMBER",
-        "LABEL"
+        "MOTHERBOARD_SERIAL_NUMBER"
       ]
     },
     "ResourceAttributeValue":{
@@ -1071,7 +1070,7 @@
       "members":{
         "Message":{"shape":"ErrorMessage"}
       },
-      "documentation":"<p>Exception raised when the service encounters throttled communication with upstream dependencies or is overloaded with requests.</p>",
+      "documentation":"<p>Exception raised when there is an internal, configuration, or dependency error encountered.</p>",
       "exception":true,
       "fault":true
     },
@@ -1119,5 +1118,5 @@
     },
     "UpdateDateTime":{"type":"timestamp"}
   },
-  "documentation":"<p/>"
+  "documentation":"<p>The AWS Migration Hub API methods help to obtain server and application migration status and integrate your resource-specific migration tool by providing a programmatic interface to Migration Hub. </p>"
 }
