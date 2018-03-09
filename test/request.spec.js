@@ -891,12 +891,9 @@ describe('AWS.Request', function() {
         s.on('error', function(e) {
           error = e;
           expect(error).to.not.be["null"];
-        });
-        s.on('end', function() {
-          expect(error).to.not.be["null"];
           done();
         });
-        return s.on('readable', function() {
+        s.on('readable', function() {
           var chunk, e;
           try {
             chunk = s.read();

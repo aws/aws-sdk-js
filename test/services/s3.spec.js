@@ -2333,61 +2333,283 @@ describe('AWS.S3', function() {
     }
   })
 
-  // describe('validateTrailingChecksum', function() {
-  //   var responseData = null;
-  //   var s3 = null;
-  //   var request = null;
+  if (AWS.util.isBrowser()) {
+    describe('validateTrailingChecksum (browser)', function() {
+      var responseData = null;
+      var s3 = null;
+      var request = null;
+  
+      beforeEach(function() {
+        responseData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
+        s3 = new AWS.S3({s3DisableTrailingChecksum: false});
+        request = s3.getObject({
+          Bucket: 'bucket',
+          Key: 'key',
+        });
+      })
+  
+      it('should validate md5 checksum the strip checksum out of body', function() {
+        helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'content-length': 27}, responseData);
+        request.send(function(err, data) {
+          expect(err).not.to.exist;
+          expect(data.Body.toString('utf8')).to.equal('test string');
+          expect(data.ContentLength).to.equal(11);
+        })
+      })
+  
+      it('should throw networking error and retry the request when checksum is invalid', function() {
+        s3.config.update({ maxRetries: 3 });
+        responseData[26] = 100;
+        helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'content-length': 27}, responseData);
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.code).to.equal('NetworkingError');
+          expect(this.retryCount).to.equal(s3.config.maxRetries);
+        })
+      })
+  
+      it('should throw networking error and retry request when body is too short', function() {
+        s3.config.update({ maxRetries: 3 });
+        responseData = Array.prototype.slice.call(responseData, 0, 15)
+        helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'content-length': 15}, responseData);
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.code).to.equal('NetworkingError');
+          expect(this.retryCount).to.equal(s3.config.maxRetries);
+        })
+      })
+  
+      it('should throw networking error when reponse uses unsupported hash algorithm', function() {
+        s3.config.update({ maxRetries: 3 });
+        helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-crc32c', 'content-length': 27}, responseData);
+        request.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.code).to.equal('NetworkingError');
+          expect(this.retryCount).to.equal(s3.config.maxRetries);
+        })
+      })
+    })
+  }
 
-  //   beforeEach(function() {
-  //     responseData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
-  //     s3 = new AWS.S3({s3DisableTrailingChecksum: false});
-  //     request = s3.getObject({
-  //       Bucket: 'bucket',
-  //       Key: 'key',
-  //     })
-  //   })
+  if (AWS.util.isNode()) {
+    describe('validateTrailingChacksum (Node createReadStream)', function() {
+      streamsApiVersion = AWS.HttpClient.streamsApiVersion;
+      var app = null;
+      var data = null;
+      var error = null;
+      var rawData;
+      var responseData;
+      var streamsApiVersion = AWS.HttpClient.streamsApiVersion;
+      var port;
+      var getport = function(cb, startport) {
+        var srv;
+        port = startport || 45678;
+        srv = require('net').createServer();
+        srv.on('error', function() {
+          return getport(cb, port + 1);
+        });
+        return srv.listen(port, function() {
+          srv.once('close', function() {
+            return cb(port);
+          });
+          return srv.close();
+        });
+      }
+      var server = require('http').createServer(function(req, resp) {
+        return app(req, resp);
+      });
 
-  //   it('should validate md5 checksum the strip checksum out of body', function() {
-  //     helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'content-length': 27}, responseData);
-  //     request.send(function(err, data) {
-  //       expect(err).not.to.exist;
-  //       expect(data.Body.toString('utf8')).to.equal('test string');
-  //       expect(data.ContentLength).to.equal(11);
-  //     })
-  //   })
+      beforeEach(function(done) {
+        data = '';
+        error = null;
+        rawData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
+        responseData = new require('buffer').Buffer(rawData);
+        server.setTimeout(1);
+        app = function(req, resp) {
+          resp.writeHead(200, {
+            'x-amz-transfer-encoding': 'append-md5',
+            'content-length': 27,
+          });
+          resp.write(responseData);
+          return resp.end();
+        };
+        return getport(function(port) {
+          server.listen(port);
+          service = new helpers.MockService({
+            endpoint: 'http://localhost:' + port
+          });
+          done();
+        });
+      });
 
-  //   it('should throw networking error and retry the request when checksum is invalid', function() {
-  //     s3.config.update({ maxRetries: 3 });
-  //     responseData[26] = 100;
-  //     helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'content-length': 27}, responseData);
-  //     request.send(function(err, data) {
-  //       expect(err).to.exist;
-  //       expect(err.code).to.equal('NetworkingError');
-  //       expect(this.retryCount).to.equal(s3.config.maxRetries);
-  //     })
-  //   })
+      afterEach(function() {
+        AWS.HttpClient.streamsApiVersion = streamsApiVersion;
+        return server.close();
+      });
 
-  //   it('should throw networking error and retry request when body is too short', function() {
-  //     s3.config.update({ maxRetries: 3 });
-  //     responseData = Array.prototype.slice.call(responseData, 0, 15)
-  //     helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-md5', 'content-length': 15}, responseData);
-  //     request.send(function(err, data) {
-  //       expect(err).to.exist;
-  //       expect(err.code).to.equal('NetworkingError');
-  //       expect(this.retryCount).to.equal(s3.config.maxRetries);
-  //     })
-  //   })
+      it('should validate md5 trailing checksum and chop off trailing checksum', function(done) {
+        if (AWS.HttpClient.streamsApiVersion === 1) {
+          done();
+        }
+        var s3 = new AWS.S3({
+          s3DisableTrailingChecksum: false, 
+          endpoint: 'http://localhost:' + port,
+          s3BucketEndpoint: true,
+        });
+        var request = s3.getObject({
+          Bucket: 'bucket',
+          Key: 'key',
+        });
+        var s = request.createReadStream();
+        s.on('error', function(e) {
+          error = e;
+          expect(error).to.be['null'];
+        });
+        s.on('readable', function() {
+          var chunk, e;
+          try {
+            chunk = s.read();
+            if (chunk) {
+              return data += chunk;
+            }
+          } catch (error1) {
+            e = error1;
+            return console.log(e.stack);
+          }
+        });
+        return s.on('end', function() {
+          expect(error).to.be['null'];
+          expect(data).to.equal('test string');
+          expect(request.response.httpResponse.headers['content-length']).to.equal(11);
+          done();
+        });
+      });
 
-  //   it('should throw networking error when reponse uses unsupported hash algorithm', function() {
-  //     s3.config.update({ maxRetries: 3 });
-  //     helpers.mockHttpResponse(200, {'x-amz-transfer-encoding': 'append-crc32c', 'content-length': 27}, responseData);
-  //     request.send(function(err, data) {
-  //       expect(err).to.exist;
-  //       expect(err.code).to.equal('NetworkingError');
-  //       expect(this.retryCount).to.equal(s3.config.maxRetries);
-  //     })
-  //   })
-  // })
+      it('should validate md5 trailing checksum (stream1)', function(done) {
+        AWS.HttpClient.streamsApiVersion === 1
+        var s3 = new AWS.S3({
+          s3DisableTrailingChecksum: false, 
+          endpoint: 'http://localhost:' + port,
+          s3BucketEndpoint: true,
+        });
+        var request = s3.getObject({
+          Bucket: 'bucket',
+          Key: 'key',
+        });
+        var s = request.createReadStream();
+        s.on('error', function(e) {
+          error = e;
+          expect(error).to.be['null'];
+        });
+        s.on('data', function(dat) {
+          if(dat.length > 0) {
+            data += dat.toString();
+          }
+        });
+        s.on('end', function() {
+          expect(error).to.be['null'];
+          expect(data).to.equal('test string');
+          expect(request.response.httpResponse.headers['content-length']).to.equal(11);
+          done();
+        });
+      });
+
+      it('should raise error when hashing algorithm is not supported', function(done) {
+        if (AWS.HttpClient.streamsApiVersion === 1) {
+          done();
+        }
+        app = function(req, resp) {
+          resp.writeHead(200, {
+            'x-amz-transfer-encoding': 'append-crc32c',
+            'content-length': 27,
+          });
+          resp.write(responseData);
+          return resp.end();
+        };
+        var s3 = new AWS.S3({
+          s3DisableTrailingChecksum: false, 
+          endpoint: 'http://localhost:' + port,
+          s3BucketEndpoint: true,
+        });
+        var request = s3.getObject({
+          Bucket: 'bucket',
+          Key: 'key',
+        });
+        var s = request.createReadStream();
+        s.on('error', function(e) {
+          error = e;
+          expect(error).to.not.be['null'];
+          expect(error.code).to.equal('ValidationError');
+          expect(error.message).to.equal('Cannot validate response header: append-crc32c')
+          done();
+        });
+        s.on('readable', function() {
+          var chunk, e;
+          try {
+            chunk = s.read();
+            if (chunk) {
+              return data += chunk;
+            }
+          } catch (error1) {
+            e = error1;
+            return console.log(e.stack);
+          }
+        });
+        s.on('end', function() {
+          expect(error).to.not.be['null'];
+        });
+      });
+
+      it('should raise error when checksum is invalid', function(done) {
+        if (AWS.HttpClient.streamsApiVersion === 1) {
+          done();
+        }
+        rawData = rawData.slice(1);
+        responseData = new require('buffer').Buffer(rawData);
+        app = function(req, resp) {
+          resp.writeHead(200, {
+            'x-amz-transfer-encoding': 'append-md5',
+            'content-length': 26,
+          });
+          resp.write(responseData);
+          return resp.end();
+        };
+        var s3 = new AWS.S3({
+          s3DisableTrailingChecksum: false, 
+          endpoint: 'http://localhost:' + port,
+          s3BucketEndpoint: true,
+        });
+        var request = s3.getObject({
+          Bucket: 'bucket',
+          Key: 'key',
+        });
+        var s = request.createReadStream();
+        s.on('error', function(e) {
+          error = e;
+          expect(error).to.not.be['null'];
+          expect(error.code).to.equal('ValidationError');
+          expect(error.message).to.equal('Response fails integrity check.')
+          done();
+        });
+        s.on('readable', function() {
+          var chunk, e;
+          try {
+            chunk = s.read();
+            if (chunk) {
+              return data += chunk;
+            }
+          } catch (error1) {
+            e = error1;
+            return console.log(e.stack);
+          }
+        });
+        s.on('end', function() {
+          expect(error).to.not.be['null'];
+        });
+      });
+    })
+  }
+  
 
   describe('getSignedUrl', function() {
     var date = null;
