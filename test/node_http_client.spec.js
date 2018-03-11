@@ -126,7 +126,7 @@
           });
         });
 
-        return describe('connectTimeout', function() {
+        describe('connectTimeout', function() {
           var clearTimeoutSpy, mockClientRequest, oldClearTimeout, oldRequest, oldSetTimeout, requestSpy, setTimeoutSpy, timeoutId;
           timeoutId = 'TIMEOUT_ID';
           oldSetTimeout = global.setTimeout;
