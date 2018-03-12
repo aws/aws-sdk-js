@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudHSMV2",
+        "description": "CreateCluster can now take both 8 and 17 character Subnet IDs. DeleteHsm can now take both 8 and 17 character ENI IDs."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "We added new fields to the response of the following APIs. (1) describe-certificate: added new generationId, customerVersion fields (2) describe-ca-certificate: added new generationId, customerVersion and lastModifiedDate fields (3) get-policy: added generationId, creationDate and lastModifiedDate fields"
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "DescribeClusterSnapshotsMessage with ClusterExists flag returns snapshots of existing clusters. Else both existing and deleted cluster snapshots are returned"
+    }
+]

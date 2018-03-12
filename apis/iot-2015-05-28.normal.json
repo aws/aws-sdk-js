@@ -1815,7 +1815,8 @@
         {"shape":"ThrottlingException"},
         {"shape":"UnauthorizedException"},
         {"shape":"ServiceUnavailableException"},
-        {"shape":"InternalFailureException"}
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceAlreadyExistsException"}
       ],
       "documentation":"<p>Sets the default authorizer. This will be used if a websocket connection is made without specifying an authorizer.</p>"
     },
@@ -2623,7 +2624,10 @@
         "autoRegistrationStatus":{
           "shape":"AutoRegistrationStatus",
           "documentation":"<p>Whether the CA certificate configured for auto registration of device certificates. Valid values are \"ENABLE\" and \"DISABLE\"</p>"
-        }
+        },
+        "lastModifiedDate":{"shape":"DateType"},
+        "customerVersion":{"shape":"CustomerVersion"},
+        "generationId":{"shape":"GenerationId"}
       },
       "documentation":"<p>Describes a CA certificate.</p>"
     },
@@ -2772,10 +2776,12 @@
           "shape":"DateType",
           "documentation":"<p>The date and time the certificate was last modified.</p>"
         },
+        "customerVersion":{"shape":"CustomerVersion"},
         "transferData":{
           "shape":"TransferData",
           "documentation":"<p>The transfer data.</p>"
-        }
+        },
+        "generationId":{"shape":"GenerationId"}
       },
       "documentation":"<p>Describes a certificate.</p>"
     },
@@ -3564,6 +3570,10 @@
         }
       },
       "documentation":"<p>Describes a custom method used to code sign a file.</p>"
+    },
+    "CustomerVersion":{
+      "type":"integer",
+      "min":1
     },
     "DateType":{"type":"timestamp"},
     "DeleteAuthorizerRequest":{
@@ -4670,6 +4680,7 @@
       "max":10000,
       "min":1
     },
+    "GenerationId":{"type":"string"},
     "GetEffectivePoliciesRequest":{
       "type":"structure",
       "members":{
@@ -4805,7 +4816,10 @@
         "defaultVersionId":{
           "shape":"PolicyVersionId",
           "documentation":"<p>The default policy version ID.</p>"
-        }
+        },
+        "creationDate":{"shape":"DateType"},
+        "lastModifiedDate":{"shape":"DateType"},
+        "generationId":{"shape":"GenerationId"}
       },
       "documentation":"<p>The output from the GetPolicy operation.</p>"
     },
@@ -4853,7 +4867,10 @@
         "isDefaultVersion":{
           "shape":"IsDefaultVersion",
           "documentation":"<p>Specifies whether the policy version is the default.</p>"
-        }
+        },
+        "creationDate":{"shape":"DateType"},
+        "lastModifiedDate":{"shape":"DateType"},
+        "generationId":{"shape":"GenerationId"}
       },
       "documentation":"<p>The output from the GetPolicyVersion operation.</p>"
     },
@@ -7365,6 +7382,7 @@
           "shape":"RoleAlias",
           "documentation":"<p>The role alias.</p>"
         },
+        "roleAliasArn":{"shape":"RoleAliasArn"},
         "roleArn":{
           "shape":"RoleArn",
           "documentation":"<p>The role ARN.</p>"
