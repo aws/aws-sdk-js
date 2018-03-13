@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.208.0-->
+<!--LATEST=2.209.0-->
 <!--ENTRYINSERT-->
+
+## 2.209.0
+* feature: ServiceDiscovery: This release adds support for custom health checks, which let you check the health of resources that aren't accessible over the internet. For example, you can use a custom health check when the instance is in an Amazon VPC.
 
 ## 2.208.0
 * feature: CloudHSMV2: CreateCluster can now take both 8 and 17 character Subnet IDs. DeleteHsm can now take both 8 and 17 character ENI IDs.
