@@ -402,6 +402,41 @@
       } ],
       "documentation" : "Delete an email channel"
     },
+    "DeleteEndpoint" : {
+      "name" : "DeleteEndpoint",
+      "http" : {
+        "method" : "DELETE",
+        "requestUri" : "/v1/apps/{application-id}/endpoints/{endpoint-id}",
+        "responseCode" : 202
+      },
+      "input" : {
+        "shape" : "DeleteEndpointRequest"
+      },
+      "output" : {
+        "shape" : "DeleteEndpointResponse",
+        "documentation" : "202 response"
+      },
+      "errors" : [ {
+        "shape" : "BadRequestException",
+        "documentation" : "400 response"
+      }, {
+        "shape" : "InternalServerErrorException",
+        "documentation" : "500 response"
+      }, {
+        "shape" : "ForbiddenException",
+        "documentation" : "403 response"
+      }, {
+        "shape" : "NotFoundException",
+        "documentation" : "404 response"
+      }, {
+        "shape" : "MethodNotAllowedException",
+        "documentation" : "405 response"
+      }, {
+        "shape" : "TooManyRequestsException",
+        "documentation" : "429 response"
+      } ],
+      "documentation" : "Deletes an endpoint."
+    },
     "DeleteEventStream" : {
       "name" : "DeleteEventStream",
       "http" : {
@@ -3280,6 +3315,32 @@
       "required" : [ "ApplicationId" ],
       "documentation" : "DeleteEventStream Request"
     },
+    "DeleteEndpointRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ApplicationId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "application-id"
+        },
+        "EndpointId" : {
+          "shape" : "__string",
+          "location" : "uri",
+          "locationName" : "endpoint-id"
+        }
+      },
+      "required" : [ "ApplicationId", "EndpointId" ]
+    },
+    "DeleteEndpointResponse" : {
+      "type" : "structure",
+      "members" : {
+        "EndpointResponse" : {
+          "shape" : "EndpointResponse"
+        }
+      },
+      "required" : [ "EndpointResponse" ],
+      "payload" : "EndpointResponse"
+    },
     "DeleteEventStreamResponse" : {
       "type" : "structure",
       "members" : {
@@ -5556,9 +5617,13 @@
           "shape" : "MessageType",
           "documentation" : "Is this a transaction priority message or lower priority."
         },
+        "OriginationNumber" : {
+          "shape" : "__string",
+          "documentation" : "The phone number that the SMS message originates from. Specify one of the dedicated long codes or short codes that you requested from AWS Support and that is assigned to your account. If this attribute is not specified, Amazon Pinpoint randomly assigns a long code."
+        },
         "SenderId" : {
           "shape" : "__string",
-          "documentation" : "Sender ID of sent message."
+          "documentation" : "The sender ID that is shown as the message sender on the recipient's device. Support for sender IDs varies by country or region."
         },
         "Substitutions" : {
           "shape" : "MapOfListOf__string",

@@ -124,6 +124,14 @@ declare class Pinpoint extends Service {
    */
   deleteEmailChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
   /**
+   * Deletes an endpoint.
+   */
+  deleteEndpoint(params: Pinpoint.Types.DeleteEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEndpointResponse) => void): Request<Pinpoint.Types.DeleteEndpointResponse, AWSError>;
+  /**
+   * Deletes an endpoint.
+   */
+  deleteEndpoint(callback?: (err: AWSError, data: Pinpoint.Types.DeleteEndpointResponse) => void): Request<Pinpoint.Types.DeleteEndpointResponse, AWSError>;
+  /**
    * Deletes the event stream for an app.
    */
   deleteEventStream(params: Pinpoint.Types.DeleteEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEventStreamResponse) => void): Request<Pinpoint.Types.DeleteEventStreamResponse, AWSError>;
@@ -1634,6 +1642,13 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      */
     ApplicationId: __string;
   }
+  export interface DeleteEndpointRequest {
+    ApplicationId: __string;
+    EndpointId: __string;
+  }
+  export interface DeleteEndpointResponse {
+    EndpointResponse: EndpointResponse;
+  }
   export interface DeleteEventStreamResponse {
     EventStream: EventStream;
   }
@@ -3019,7 +3034,11 @@ INACTIVE - Users who have not used your app within the specified duration are in
      */
     MessageType?: MessageType;
     /**
-     * Sender ID of sent message.
+     * The phone number that the SMS message originates from. Specify one of the dedicated long codes or short codes that you requested from AWS Support and that is assigned to your account. If this attribute is not specified, Amazon Pinpoint randomly assigns a long code.
+     */
+    OriginationNumber?: __string;
+    /**
+     * The sender ID that is shown as the message sender on the recipient's device. Support for sender IDs varies by country or region.
      */
     SenderId?: __string;
     /**

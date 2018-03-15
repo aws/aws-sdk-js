@@ -44,13 +44,21 @@ declare class SageMaker extends Service {
    */
   createModel(callback?: (err: AWSError, data: SageMaker.Types.CreateModelOutput) => void): Request<SageMaker.Types.CreateModelOutput, AWSError>;
   /**
-   * Creates an Amazon SageMaker notebook instance. A notebook instance is an ML compute instance running on a Jupyter notebook.  In a CreateNotebookInstance request, you specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance.  Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific an algorithm or with a machine learning framework.  After receiving the request, Amazon SageMaker does the following:   Creates a network interface in the Amazon SageMaker VPC.   (Option) If you specified SubnetId, creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.   Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified SubnetId of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.   After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN). After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models.  For more information, see How It Works. 
+   * Creates an Amazon SageMaker notebook instance. A notebook instance is a machine learning (ML) compute instance running on a Jupyter notebook.  In a CreateNotebookInstance request, specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance.  Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific algorithm or with a machine learning framework.  After receiving the request, Amazon SageMaker does the following:   Creates a network interface in the Amazon SageMaker VPC.   (Option) If you specified SubnetId, Amazon SageMaker creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.   Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified SubnetId of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.   After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN). After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models.  For more information, see How It Works. 
    */
   createNotebookInstance(params: SageMaker.Types.CreateNotebookInstanceInput, callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceOutput, AWSError>;
   /**
-   * Creates an Amazon SageMaker notebook instance. A notebook instance is an ML compute instance running on a Jupyter notebook.  In a CreateNotebookInstance request, you specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance.  Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific an algorithm or with a machine learning framework.  After receiving the request, Amazon SageMaker does the following:   Creates a network interface in the Amazon SageMaker VPC.   (Option) If you specified SubnetId, creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.   Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified SubnetId of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.   After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN). After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models.  For more information, see How It Works. 
+   * Creates an Amazon SageMaker notebook instance. A notebook instance is a machine learning (ML) compute instance running on a Jupyter notebook.  In a CreateNotebookInstance request, specify the type of ML compute instance that you want to run. Amazon SageMaker launches the instance, installs common libraries that you can use to explore datasets for model training, and attaches an ML storage volume to the notebook instance.  Amazon SageMaker also provides a set of example notebooks. Each notebook demonstrates how to use Amazon SageMaker with a specific algorithm or with a machine learning framework.  After receiving the request, Amazon SageMaker does the following:   Creates a network interface in the Amazon SageMaker VPC.   (Option) If you specified SubnetId, Amazon SageMaker creates a network interface in your own VPC, which is inferred from the subnet ID that you provide in the input. When creating this network interface, Amazon SageMaker attaches the security group that you specified in the request to the network interface that it creates in your VPC.   Launches an EC2 instance of the type specified in the request in the Amazon SageMaker VPC. If you specified SubnetId of your VPC, Amazon SageMaker specifies both network interfaces when launching this instance. This enables inbound traffic from your own VPC to the notebook instance, assuming that the security groups allow it.   After creating the notebook instance, Amazon SageMaker returns its Amazon Resource Name (ARN). After Amazon SageMaker creates the notebook instance, you can connect to the Jupyter server and work in Jupyter notebooks. For example, you can write code to explore a dataset that you can use for model training, train a model, host models by creating Amazon SageMaker endpoints, and validate hosted models.  For more information, see How It Works. 
    */
   createNotebookInstance(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceOutput, AWSError>;
+  /**
+   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+   */
+  createNotebookInstanceLifecycleConfig(params: SageMaker.Types.CreateNotebookInstanceLifecycleConfigInput, callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
+  /**
+   * Creates a lifecycle configuration that you can associate with a notebook instance. A lifecycle configuration is a collection of shell scripts that run when you create or start a notebook instance. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+   */
+  createNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
    * Returns a URL that you can use to connect to the Juypter server from a notebook instance. In the Amazon SageMaker console, when you choose Open next to a notebook instance, Amazon SageMaker opens a new tab showing the Jupyter server home page from the notebook instance. The console uses this API to get the URL and show the page. 
    */
@@ -100,6 +108,14 @@ declare class SageMaker extends Service {
    */
   deleteNotebookInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a notebook instance lifecycle configuration.
+   */
+  deleteNotebookInstanceLifecycleConfig(params: SageMaker.Types.DeleteNotebookInstanceLifecycleConfigInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a notebook instance lifecycle configuration.
+   */
+  deleteNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the specified tags from an Amazon SageMaker resource. To list a resource's tags, use the ListTags API. 
    */
   deleteTags(params: SageMaker.Types.DeleteTagsInput, callback?: (err: AWSError, data: SageMaker.Types.DeleteTagsOutput) => void): Request<SageMaker.Types.DeleteTagsOutput, AWSError>;
@@ -140,6 +156,14 @@ declare class SageMaker extends Service {
    */
   describeNotebookInstance(callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceOutput, AWSError>;
   /**
+   * Returns a description of a notebook instance lifecycle configuration. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+   */
+  describeNotebookInstanceLifecycleConfig(params: SageMaker.Types.DescribeNotebookInstanceLifecycleConfigInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput, AWSError>;
+  /**
+   * Returns a description of a notebook instance lifecycle configuration. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+   */
+  describeNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceLifecycleConfigOutput, AWSError>;
+  /**
    * Returns information about a training job.
    */
   describeTrainingJob(params: SageMaker.Types.DescribeTrainingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeTrainingJobResponse) => void): Request<SageMaker.Types.DescribeTrainingJobResponse, AWSError>;
@@ -171,6 +195,14 @@ declare class SageMaker extends Service {
    * Lists models created with the CreateModel API.
    */
   listModels(callback?: (err: AWSError, data: SageMaker.Types.ListModelsOutput) => void): Request<SageMaker.Types.ListModelsOutput, AWSError>;
+  /**
+   * Lists notebook instance lifestyle configurations created with the API.
+   */
+  listNotebookInstanceLifecycleConfigs(params: SageMaker.Types.ListNotebookInstanceLifecycleConfigsInput, callback?: (err: AWSError, data: SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput) => void): Request<SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput, AWSError>;
+  /**
+   * Lists notebook instance lifestyle configurations created with the API.
+   */
+  listNotebookInstanceLifecycleConfigs(callback?: (err: AWSError, data: SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput) => void): Request<SageMaker.Types.ListNotebookInstanceLifecycleConfigsOutput, AWSError>;
   /**
    * Returns a list of the Amazon SageMaker notebook instances in the requester's account in an AWS Region. 
    */
@@ -244,6 +276,14 @@ declare class SageMaker extends Service {
    */
   updateNotebookInstance(callback?: (err: AWSError, data: SageMaker.Types.UpdateNotebookInstanceOutput) => void): Request<SageMaker.Types.UpdateNotebookInstanceOutput, AWSError>;
   /**
+   * Updates a notebook instance lifecycle configuration created with the API.
+   */
+  updateNotebookInstanceLifecycleConfig(params: SageMaker.Types.UpdateNotebookInstanceLifecycleConfigInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput, AWSError>;
+  /**
+   * Updates a notebook instance lifecycle configuration created with the API.
+   */
+  updateNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.UpdateNotebookInstanceLifecycleConfigOutput, AWSError>;
+  /**
    * Waits for the notebookInstanceInService state by periodically calling the underlying SageMaker.describeNotebookInstanceoperation every 30 seconds (at most 60 times).
    */
   waitFor(state: "notebookInstanceInService", params: SageMaker.Types.DescribeNotebookInstanceInput, callback?: (err: AWSError, data: SageMaker.Types.DescribeNotebookInstanceOutput) => void): Request<SageMaker.Types.DescribeNotebookInstanceOutput, AWSError>;
@@ -295,7 +335,7 @@ declare class SageMaker extends Service {
 declare namespace SageMaker {
   export interface AddTagsInput {
     /**
-     * The Amazon Resource Name (ARN) of the resource that you want to tag. 
+     * The Amazon Resource Name (ARN) of the resource that you want to tag.
      */
     ResourceArn: ResourceArn;
     /**
@@ -316,7 +356,7 @@ declare namespace SageMaker {
      */
     TrainingImage: AlgorithmImage;
     /**
-     * The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see Algorithms. If an algorithm supports the File input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the Pipe input mode, Amazon SageMaker streams data directly from S3 to the container.   In File mode, make sure you provision ML storage volume with sufficient capacity to accomodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any.   For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. 
+     * The input mode that the algorithm supports. For the input modes that Amazon SageMaker algorithms support, see Algorithms. If an algorithm supports the File input mode, Amazon SageMaker downloads the training data from S3 to the provisioned ML storage Volume, and mounts the directory to docker volume for training container. If an algorithm supports the Pipe input mode, Amazon SageMaker streams data directly from S3 to the container.   In File mode, make sure you provision ML storage volume with sufficient capacity to accommodate the data download from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container use ML storage volume to also store intermediate information, if any.   For distributed algorithms using File mode, training data is distributed uniformly, and your training duration is predictable if the input data objects size is approximately same. Amazon SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed where one host in a training cluster is overloaded, thus becoming bottleneck in training. 
      */
     TrainingInputMode: TrainingInputMode;
   }
@@ -461,6 +501,34 @@ declare namespace SageMaker {
      * A list of tags to associate with the notebook instance. You can add tags later by using the CreateTags API.
      */
     Tags?: TagList;
+    /**
+     * The name of a lifecycle configuration to associate with the notebook instance. For information about lifestyle configurations, see notebook-lifecycle-config.
+     */
+    LifecycleConfigName?: NotebookInstanceLifecycleConfigName;
+    /**
+     * Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to Disabled this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC. For more information, see appendix-notebook-and-internet-access. You can set the value of this parameter to Disabled only if you set a value for the SubnetId parameter.
+     */
+    DirectInternetAccess?: DirectInternetAccess;
+  }
+  export interface CreateNotebookInstanceLifecycleConfigInput {
+    /**
+     * The name of the lifecycle configuration.
+     */
+    NotebookInstanceLifecycleConfigName: NotebookInstanceLifecycleConfigName;
+    /**
+     * A shell script that runs only once, when you create a notebook instance.
+     */
+    OnCreate?: NotebookInstanceLifecycleConfigList;
+    /**
+     * A shell script that runs every time you start a notebook instance, including when you create the notebook instance.
+     */
+    OnStart?: NotebookInstanceLifecycleConfigList;
+  }
+  export interface CreateNotebookInstanceLifecycleConfigOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle configuration.
+     */
+    NotebookInstanceLifecycleConfigArn?: NotebookInstanceLifecycleConfigArn;
   }
   export interface CreateNotebookInstanceOutput {
     /**
@@ -558,6 +626,12 @@ declare namespace SageMaker {
      * The name of the Amazon SageMaker notebook instance to delete.
      */
     NotebookInstanceName: NotebookInstanceName;
+  }
+  export interface DeleteNotebookInstanceLifecycleConfigInput {
+    /**
+     * The name of the lifecycle configuration to delete.
+     */
+    NotebookInstanceLifecycleConfigName: NotebookInstanceLifecycleConfigName;
   }
   export interface DeleteTagsInput {
     /**
@@ -673,6 +747,38 @@ declare namespace SageMaker {
      */
     NotebookInstanceName: NotebookInstanceName;
   }
+  export interface DescribeNotebookInstanceLifecycleConfigInput {
+    /**
+     * The name of the lifecycle configuration to describe.
+     */
+    NotebookInstanceLifecycleConfigName: NotebookInstanceLifecycleConfigName;
+  }
+  export interface DescribeNotebookInstanceLifecycleConfigOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle configuration.
+     */
+    NotebookInstanceLifecycleConfigArn?: NotebookInstanceLifecycleConfigArn;
+    /**
+     * The name of the lifecycle configuration.
+     */
+    NotebookInstanceLifecycleConfigName?: NotebookInstanceLifecycleConfigName;
+    /**
+     * The shell script that runs only once, when you create a notebook instance.
+     */
+    OnCreate?: NotebookInstanceLifecycleConfigList;
+    /**
+     * The shell script that runs every time you start a notebook instance, including when you create the notebook instance.
+     */
+    OnStart?: NotebookInstanceLifecycleConfigList;
+    /**
+     * A timestamp that tells when the lifecycle configuration was last modified.
+     */
+    LastModifiedTime?: LastModifiedTime;
+    /**
+     * A timestamp that tells when the lifecycle configuration was created.
+     */
+    CreationTime?: CreationTime;
+  }
   export interface DescribeNotebookInstanceOutput {
     /**
      * The Amazon Resource Name (ARN) of the notebook instance.
@@ -687,7 +793,7 @@ declare namespace SageMaker {
      */
     NotebookInstanceStatus?: NotebookInstanceStatus;
     /**
-     * If staus is failed, the reason it failed.
+     * If status is failed, the reason it failed.
      */
     FailureReason?: FailureReason;
     /**
@@ -726,6 +832,14 @@ declare namespace SageMaker {
      * A timestamp. Use this parameter to return the time when the notebook instance was created
      */
     CreationTime?: CreationTime;
+    /**
+     * Returns the name of a notebook instance lifecycle configuration. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+     */
+    NotebookInstanceLifecycleConfigName?: NotebookInstanceLifecycleConfigName;
+    /**
+     * Describes whether the notebook instance has internet access. For more information, see appendix-notebook-and-internet-access.
+     */
+    DirectInternetAccess?: DirectInternetAccess;
   }
   export interface DescribeTrainingJobRequest {
     /**
@@ -818,6 +932,7 @@ declare namespace SageMaker {
     DesiredInstanceCount?: TaskCount;
   }
   export type DesiredWeightAndCapacityList = DesiredWeightAndCapacity[];
+  export type DirectInternetAccess = "Enabled"|"Disabled"|string;
   export type EndpointArn = string;
   export type EndpointConfigArn = string;
   export type EndpointConfigName = string;
@@ -872,7 +987,7 @@ declare namespace SageMaker {
   export type HyperParameters = {[key: string]: ParameterValue};
   export type Image = string;
   export type InputDataConfig = Channel[];
-  export type InstanceType = "ml.t2.medium"|"ml.m4.xlarge"|"ml.p2.xlarge"|string;
+  export type InstanceType = "ml.t2.medium"|"ml.m4.xlarge"|"ml.p2.xlarge"|"ml.p3.2xlarge"|string;
   export type KmsKeyId = string;
   export type LastModifiedTime = Date;
   export interface ListEndpointConfigsInput {
@@ -1007,6 +1122,54 @@ declare namespace SageMaker {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListNotebookInstanceLifecycleConfigsInput {
+    /**
+     * If the result of a ListNotebookInstanceLifecycleConfigs request was truncated, the response includes a NextToken. To get the next set of lifecycle configurations, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of lifecycle configurations to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Sorts the list of results. The default is CreationTime.
+     */
+    SortBy?: NotebookInstanceLifecycleConfigSortKey;
+    /**
+     * The sort order for results.
+     */
+    SortOrder?: NotebookInstanceLifecycleConfigSortOrder;
+    /**
+     * A string in the lifecycle configuration name. This filter returns only lifecycle configurations whose name contains the specified string.
+     */
+    NameContains?: NotebookInstanceLifecycleConfigNameContains;
+    /**
+     * A filter that returns only lifecycle configurations that were created before the specified time (timestamp).
+     */
+    CreationTimeBefore?: CreationTime;
+    /**
+     * A filter that returns only lifecycle configurations that were created after the specified time (timestamp).
+     */
+    CreationTimeAfter?: CreationTime;
+    /**
+     * A filter that returns only lifecycle configurations that were modified before the specified time (timestamp).
+     */
+    LastModifiedTimeBefore?: LastModifiedTime;
+    /**
+     * A filter that returns only lifecycle configurations that were modified after the specified time (timestamp).
+     */
+    LastModifiedTimeAfter?: LastModifiedTime;
+  }
+  export interface ListNotebookInstanceLifecycleConfigsOutput {
+    /**
+     * If the response is truncated, Amazon SageMaker returns this token. To get the next set of lifecycle configurations, use it in the next request. 
+     */
+    NextToken?: NextToken;
+    /**
+     * An array of NotebookInstanceLifecycleConfiguration objects, each listing a lifecycle configuration.
+     */
+    NotebookInstanceLifecycleConfigs?: NotebookInstanceLifecycleConfigSummaryList;
+  }
   export interface ListNotebookInstancesInput {
     /**
      *  If the previous call to the ListNotebookInstances is truncated, the response includes a NextToken. You can use this token in your subsequent ListNotebookInstances request to fetch the next set of notebook instances.    You might specify a filter or a sort order in your request. When response is truncated, you must use the same values for the filer and sort order in the next request.  
@@ -1025,7 +1188,7 @@ declare namespace SageMaker {
      */
     SortOrder?: NotebookInstanceSortOrder;
     /**
-     * A string in the notebook instances' name. This filter returns only notebook instances whose name contains the specified string. 
+     * A string in the notebook instances' name. This filter returns only notebook instances whose name contains the specified string.
      */
     NameContains?: NotebookInstanceNameContains;
     /**
@@ -1048,6 +1211,10 @@ declare namespace SageMaker {
      * A filter that returns only notebook instances with the specified status.
      */
     StatusEquals?: NotebookInstanceStatus;
+    /**
+     * A string in the name of a notebook instances lifecycle configuration associated with this notebook instance. This filter returns only notebook instances associated with a lifecycle configuration with a name that contains the specified string.
+     */
+    NotebookInstanceLifecycleConfigNameContains?: NotebookInstanceLifecycleConfigName;
   }
   export interface ListNotebookInstancesOutput {
     /**
@@ -1167,6 +1334,38 @@ declare namespace SageMaker {
   export type NetworkInterfaceId = string;
   export type NextToken = string;
   export type NotebookInstanceArn = string;
+  export type NotebookInstanceLifecycleConfigArn = string;
+  export type NotebookInstanceLifecycleConfigContent = string;
+  export type NotebookInstanceLifecycleConfigList = NotebookInstanceLifecycleHook[];
+  export type NotebookInstanceLifecycleConfigName = string;
+  export type NotebookInstanceLifecycleConfigNameContains = string;
+  export type NotebookInstanceLifecycleConfigSortKey = "Name"|"CreationTime"|"LastModifiedTime"|string;
+  export type NotebookInstanceLifecycleConfigSortOrder = "Ascending"|"Descending"|string;
+  export interface NotebookInstanceLifecycleConfigSummary {
+    /**
+     * The name of the lifecycle configuration.
+     */
+    NotebookInstanceLifecycleConfigName: NotebookInstanceLifecycleConfigName;
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle configuration.
+     */
+    NotebookInstanceLifecycleConfigArn: NotebookInstanceLifecycleConfigArn;
+    /**
+     * A timestamp that tells when the lifecycle configuration was created.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * A timestamp that tells when the lifecycle configuration was last modified.
+     */
+    LastModifiedTime?: LastModifiedTime;
+  }
+  export type NotebookInstanceLifecycleConfigSummaryList = NotebookInstanceLifecycleConfigSummary[];
+  export interface NotebookInstanceLifecycleHook {
+    /**
+     * A base64-encoded string that contains a shell script for a notebook instance lifecycle configuration.
+     */
+    Content?: NotebookInstanceLifecycleConfigContent;
+  }
   export type NotebookInstanceName = string;
   export type NotebookInstanceNameContains = string;
   export type NotebookInstanceSortKey = "Name"|"CreationTime"|"Status"|string;
@@ -1201,6 +1400,10 @@ declare namespace SageMaker {
      * A timestamp that shows when the notebook instance was last modified.
      */
     LastModifiedTime?: LastModifiedTime;
+    /**
+     * The name of a notebook instance lifecycle configuration associated with this notebook instance. For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+     */
+    NotebookInstanceLifecycleConfigName?: NotebookInstanceLifecycleConfigName;
   }
   export type NotebookInstanceSummaryList = NotebookInstanceSummary[];
   export type NotebookInstanceUrl = string;
@@ -1252,7 +1455,7 @@ declare namespace SageMaker {
      */
     CurrentWeight?: VariantWeight;
     /**
-     * The requested weight, as specified in the UpdateWeightAndCapacities request. 
+     * The requested weight, as specified in the UpdateEndpointWeightsAndCapacities request. 
      */
     DesiredWeight?: VariantWeight;
     /**
@@ -1260,7 +1463,7 @@ declare namespace SageMaker {
      */
     CurrentInstanceCount?: TaskCount;
     /**
-     * The number of instances requested in the UpdateWeightAndCapacities request. 
+     * The number of instances requested in the UpdateEndpointWeightsAndCapacities request. 
      */
     DesiredInstanceCount?: TaskCount;
   }
@@ -1428,6 +1631,22 @@ declare namespace SageMaker {
      * Amazon Resource Name (ARN) of the IAM role to associate with the instance.
      */
     RoleArn?: RoleArn;
+  }
+  export interface UpdateNotebookInstanceLifecycleConfigInput {
+    /**
+     * The name of the lifecycle configuration.
+     */
+    NotebookInstanceLifecycleConfigName: NotebookInstanceLifecycleConfigName;
+    /**
+     * The shell script that runs only once, when you create a notebook instance
+     */
+    OnCreate?: NotebookInstanceLifecycleConfigList;
+    /**
+     * The shell script that runs every time you start a notebook instance, including when you create the notebook instance.
+     */
+    OnStart?: NotebookInstanceLifecycleConfigList;
+  }
+  export interface UpdateNotebookInstanceLifecycleConfigOutput {
   }
   export interface UpdateNotebookInstanceOutput {
   }
