@@ -286,18 +286,6 @@ describe('AWS.Config', function() {
     });
   });
 
-  describe('s3DisableTrailingChecksum', function() {
-    if (AWS.util.isNode()) {
-      it('defaults to false in Node', function() {
-        expect(configure().s3DisableTrailingChecksum).to.equal(false);
-      })
-    } else {
-      it('defaults to true in browser', function() {
-        expect(configure().s3DisableTrailingChecksum).to.equal(true);
-      })
-    }
-  })
-
   describe('set', function() {
     it('should set a default value for a key', function() {
       var config = new AWS.Config();

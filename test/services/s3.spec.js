@@ -2296,13 +2296,42 @@ describe('AWS.S3', function() {
   });
 
   describe('addTrailingChecksumHeader', function() {
+    var params = {
+      Bucket: 'bucket',
+      Key: 'key',
+    };
+
+    it('should not append checksum header when disable it', function() {
+      s3 = new AWS.S3({ responseChecksumAlgorithm: null });
+      var req = s3.getObject(params).build();
+      var headers = req.httpRequest.headers;
+      expect(headers['x-amz-te']).to.equal(undefined);
+    });
+
+    it('should not accept other falsy value from config', function() {
+      for (var value in ['', false, 0]) {
+        s3 = new AWS.S3({ responseChecksumAlgorithm: value });
+        try {
+          var req = s3.getObject(params).build();
+        } catch(error1) {
+          expect(error1.code).to.equal('ConfigError');
+        }
+      }
+    });
+
+    it('should not accept algorithms other than md5', function() {
+      s3 = new AWS.S3({ responseChecksumAlgorithm: 'crc32' });
+      try {
+        var req = s3.getObject(params).build();
+      } catch(error1) {
+        expect(error1.code).to.equal('ConfigError');
+      }
+    });
+
     if (AWS.util.isNode()) {
       it('should add trailing checksum header to getObject request on Node', function () {
         s3 = new AWS.S3();
-        var req = s3.getObject({
-          Bucket: 'bucket',
-          Key: 'key',
-        }).build();
+        var req = s3.getObject(params).build();
         var headers = req.httpRequest.headers;
         expect(headers['x-amz-te']).to.equal('append-md5');
         req = s3.putObject({
@@ -2312,24 +2341,43 @@ describe('AWS.S3', function() {
         }).build();
         headers = req.httpRequest.headers;
         expect(headers['x-amz-te']).to.equal(undefined);
+        s3 = new AWS.S3({ responseChecksumAlgorithm: 'md5' });
+        req = s3.getObject(params).build();
+        headers = req.httpRequest.headers;
+        expect(headers['x-amz-te']).to.equal('append-md5');
+      });
+
+      it('should append md5 checksum header when set to undefined', function() {
+        s3 = new AWS.S3({ responseChecksumAlgorithm: undefined });
+        var req = s3.getObject(params).build();
+        var headers = req.httpRequest.headers;
+        expect(headers['x-amz-te']).to.equal('append-md5');
       });
     } else {
       it('should default not to add s3 trailing checksum header on Browser', function() {
         s3 = new AWS.S3();
-        var req = s3.getObject({
-          Bucket: 'bucket',
-          Key: 'key',
-        }).build();
+        var req = s3.getObject(params).build();
         var headers = req.httpRequest.headers;
         expect(headers['x-amz-te']).to.equal(undefined);
-        s3 = new AWS.S3({s3DisableTrailingChecksum: false});
-        var req = s3.getObject({
+        req = s3.putObject({
           Bucket: 'bucket',
           Key: 'key',
+          Body: 'body',
         }).build();
-        var headers = req.httpRequest.headers;
-        expect(headers['x-amz-te']).to.equal('append-md5');
+        headers = req.httpRequest.headers;
+        expect(headers['x-amz-te']).to.equal(undefined);
+        s3 = new AWS.S3({responseChecksumAlgorithm: 'md5'});
+        req = s3.getObject(params).build();
+        headers = req.httpRequest.headers;
+        expect(headers).to.equal('append-md5');
       });
+
+      it('should not append md5 checksum header when set to undefined', function() {
+        s3 = new AWS.S3({ responseChecksumAlgorithm: undefined });
+        var req = s3.getObject(params).build();
+        var headers = req.httpRequest.headers;
+        expect(headers['x-amz-te']).to.equal(undefined);
+      })
     }
   })
 
@@ -2341,7 +2389,7 @@ describe('AWS.S3', function() {
   
       beforeEach(function() {
         responseData = new Uint8Array([116, 101, 115, 116, 32, 115, 116, 114, 105, 110, 103, 111, 141, 181, 153, 222, 152, 111, 171, 122, 33, 98, 91, 121, 22, 88, 156]);
-        s3 = new AWS.S3({s3DisableTrailingChecksum: false});
+        s3 = new AWS.S3({disableTrailingChecksum: false});
         request = s3.getObject({
           Bucket: 'bucket',
           Key: 'key',
@@ -2452,7 +2500,7 @@ describe('AWS.S3', function() {
           done();
         }
         var s3 = new AWS.S3({
-          s3DisableTrailingChecksum: false, 
+          disableTrailingChecksum: false, 
           endpoint: 'http://localhost:' + port,
           s3BucketEndpoint: true,
         });
@@ -2488,7 +2536,7 @@ describe('AWS.S3', function() {
       it('should validate md5 trailing checksum (stream1)', function(done) {
         AWS.HttpClient.streamsApiVersion === 1
         var s3 = new AWS.S3({
-          s3DisableTrailingChecksum: false, 
+          disableTrailingChecksum: false, 
           endpoint: 'http://localhost:' + port,
           s3BucketEndpoint: true,
         });
@@ -2527,7 +2575,7 @@ describe('AWS.S3', function() {
           return resp.end();
         };
         var s3 = new AWS.S3({
-          s3DisableTrailingChecksum: false, 
+          disableTrailingChecksum: false, 
           endpoint: 'http://localhost:' + port,
           s3BucketEndpoint: true,
         });
@@ -2575,7 +2623,7 @@ describe('AWS.S3', function() {
           return resp.end();
         };
         var s3 = new AWS.S3({
-          s3DisableTrailingChecksum: false, 
+          disableTrailingChecksum: false, 
           endpoint: 'http://localhost:' + port,
           s3BucketEndpoint: true,
         });
@@ -2775,7 +2823,7 @@ describe('AWS.S3', function() {
     });
 
     it('should strip the trailing checksum header out', function() {
-      s3 = new AWS.S3({s3DisableTrailingChecksum: false});
+      s3 = new AWS.S3({disableTrailingChecksum: false});
       var url = s3.getSignedUrl('getObject', {
         Bucket: 'bucket',
         Key: 'object'
