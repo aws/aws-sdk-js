@@ -122,10 +122,7 @@ class ApiDocumentor
 #{custom_config.include?('dualstackAvailable') ? "@example Use IPv6/IPv4 dualstack endpoint for all newly created #{service.name} objects
   AWS.config.#{identifier} = { useDualstack: true };" : ""}
 #{custom_config.include?('trailingChecksumAvailable') ? "@example Enable and specify a hashing algorithm to generate checksum appended to response for all newly created #{service.name} objects
-  AWS.config.#{identifier} = { responseChecksumAlgorithm: 'md5' }
-@note Setting this configuration to `'md5'` on browsers you need to add
-  <ExposeHeader>x-amz-transfer-encoding</ExposeHeader> to bucket CORS config
-@note To turn off this configuration you need to explicitly set to `null`" : ""}
+  AWS.config.#{identifier} = { responseChecksumAlgorithm: 'md5' };" : ""}
 @return [AWS.Config, map] Service-specific configuration options for {#{service.path}}.
     eof
   end
@@ -162,9 +159,9 @@ API operation.
   using the IPv6 address. Note, however, that currently on Windows, the IPv4 address will be
   preferred." : ""}
 #{custom_config.include?('trailingChecksumAvailable') ? "@option options [String] responseChecksumAlgorithm Enable and specify a hashing algorithm
-  to generate checksum appended to response.
-    Defaults to `'md5'` when running on [NodeJS](https://nodejs.org/en/) environment, setting it to `null` to disable appending the checksum;
-    Defaults to `null` when running on browsers, which disables appending the checksum;" : ""}
+  to generate checksum appended to response. Defaults to `'md5'` when running on [NodeJS](https://nodejs.org/en/) environment, setting it to `null` 
+  to disable appending the checksum; Defaults to `null` when running on browsers, which disables appending the checksum. If you set `responseChecksumAlgorithm`
+   to `'md5'` on browsers you need to add `<ExposeHeader>x-amz-transfer-encoding</ExposeHeader>` to bucket CORS config." : ""}
 eof
 
     # endpoint attribute
