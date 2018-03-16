@@ -1,4 +1,4 @@
-// AWS SDK for JavaScript v2.210.0
+// AWS SDK for JavaScript v2.211.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
@@ -48180,6 +48180,7 @@ module.exports={
     "protocol": "query",
     "serviceAbbreviation": "Elastic Beanstalk",
     "serviceFullName": "AWS Elastic Beanstalk",
+    "serviceId": "Elastic Beanstalk",
     "signatureVersion": "v4",
     "uid": "elasticbeanstalk-2010-12-01",
     "xmlNamespace": "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"
@@ -48507,6 +48508,34 @@ module.exports={
         }
       }
     },
+    "DescribeAccountAttributes": {
+      "output": {
+        "resultWrapper": "DescribeAccountAttributesResult",
+        "type": "structure",
+        "members": {
+          "ResourceQuotas": {
+            "type": "structure",
+            "members": {
+              "ApplicationQuota": {
+                "shape": "S35"
+              },
+              "ApplicationVersionQuota": {
+                "shape": "S35"
+              },
+              "EnvironmentQuota": {
+                "shape": "S35"
+              },
+              "ConfigurationTemplateQuota": {
+                "shape": "S35"
+              },
+              "CustomPlatformQuota": {
+                "shape": "S35"
+              }
+            }
+          }
+        }
+      }
+    },
     "DescribeApplicationVersions": {
       "input": {
         "type": "structure",
@@ -48663,10 +48692,10 @@ module.exports={
           "Status": {},
           "Color": {},
           "Causes": {
-            "shape": "S3y"
+            "shape": "S41"
           },
           "ApplicationMetrics": {
-            "shape": "S40"
+            "shape": "S43"
           },
           "InstancesHealth": {
             "type": "structure",
@@ -48958,13 +48987,13 @@ module.exports={
                 "HealthStatus": {},
                 "Color": {},
                 "Causes": {
-                  "shape": "S3y"
+                  "shape": "S41"
                 },
                 "LaunchedAt": {
                   "type": "timestamp"
                 },
                 "ApplicationMetrics": {
-                  "shape": "S40"
+                  "shape": "S43"
                 },
                 "System": {
                   "type": "structure",
@@ -49179,7 +49208,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "ResourceTags": {
-            "shape": "S6q"
+            "shape": "S6t"
           }
         }
       }
@@ -49399,7 +49428,7 @@ module.exports={
         "members": {
           "ResourceArn": {},
           "TagsToAdd": {
-            "shape": "S6q"
+            "shape": "S6t"
           },
           "TagsToRemove": {
             "type": "list",
@@ -49736,11 +49765,19 @@ module.exports={
       "type": "list",
       "member": {}
     },
-    "S3y": {
+    "S35": {
+      "type": "structure",
+      "members": {
+        "Maximum": {
+          "type": "integer"
+        }
+      }
+    },
+    "S41": {
       "type": "list",
       "member": {}
     },
-    "S40": {
+    "S43": {
       "type": "structure",
       "members": {
         "Duration": {
@@ -49797,7 +49834,7 @@ module.exports={
         }
       }
     },
-    "S6q": {
+    "S6t": {
       "type": "list",
       "member": {
         "shape": "S29"
@@ -122335,7 +122372,7 @@ AWS.util.update(AWS, {
   /**
    * @constant
    */
-  VERSION: '2.210.0',
+  VERSION: '2.211.0',
 
   /**
    * @api private
@@ -146250,7 +146287,7 @@ module.exports = v4;
 }).call(this);
 
 },{"./XMLBuilder":471,"lodash/assign":428}],487:[function(require,module,exports){
-// AWS SDK for JavaScript v2.210.0
+// AWS SDK for JavaScript v2.211.0
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt
 require('./browser_loader');
