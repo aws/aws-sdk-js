@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.211.0-->
+<!--LATEST=2.211.1-->
 <!--ENTRYINSERT-->
+
+## 2.211.1
+* bugfix: dependency: Pins ieee754 to 1.1.8 to avoid timestamp issue reported in issue #1977
 
 ## 2.211.0
 * feature: ElasticBeanstalk: AWS Elastic Beanstalk is launching a new public API named DescribeAccountAttributes which allows customers to access account level attributes. In this release, the API will support quotas for resources such as applications, application versions, and environments.

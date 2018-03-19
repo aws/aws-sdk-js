@@ -1,0 +1,7 @@
+[
+    {
+        "type": "bugfix",
+        "category": "dependency",
+        "description": "Pins ieee754 to 1.1.8 to avoid timestamp issue reported in issue #1977"
+    }
+]
