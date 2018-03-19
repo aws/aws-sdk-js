@@ -959,16 +959,6 @@
       });
     });
 
-    describe('AWS.Pinpoint', function() {
-      it('makes a request', function(done) {
-        pinpoint.getApps({PageSize: '10'}, function(err, data) {
-          noError(err);
-          expect(Array.isArray(data.ApplicationsResponse.Item)).to.equal(true);
-          done();
-        });
-      });
-    });
-
     describe('AWS.RDS', function() {
       it('makes a request', function(done) {
         return rds.describeCertificates(function(err, data) {
